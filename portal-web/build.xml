@@ -5,7 +5,7 @@
 
 	<property name="war.file" value="${ant.project.name}" />
 
-	<property name="alloy.file" value="alloy-1.0pr.zip" />
+	<property name="alloy.file" value="alloy-1.0.0.zip" />
 
 	<!--
 	When upgrading CKEditor, make sure to delete
@@ -422,16 +422,12 @@
 
 				<!-- CSS -->
 
-				<property name="alloy.core.css" value="reset.css,base.css,layout.css,form.css,icons.css,tool-item.css,widget.css,overlay.css,extras.css" />
+				<property name="alloy.core.css" value="aui-skin-base.css" />
 
 				<concat destfile="docroot/html/ALLOY_ZIP/build/aui-skins/tmp/alloy.css">
 					<filelist
-						dir="docroot/html/ALLOY_ZIP/build/aui-skins/core/css"
+						dir="docroot/html/ALLOY_ZIP/build/aui-skin-base/css"
 						files="${alloy.core.css}"
-					/>
-					<filelist
-						dir="docroot/html/ALLOY_ZIP/build/aui-skins/core/css"
-						files="custom.css"
 					/>
 				</concat>
 
@@ -479,7 +475,7 @@
 				</replace>
 
 				<replace file="docroot/html/ALLOY_ZIP/build/aui-skins/tmp/alloy.css">
-					<replacefilter token="../../../../../build/aui-skins/core/images/" value="" />
+					<replacefilter token="../../../../../build/aui-skin-base/images/" value="" />
 				</replace>
 
 				<copy
@@ -491,7 +487,7 @@
 				<!-- Images -->
 
 				<copy todir="docroot/html/themes/_unstyled/images/aui/">
-					<fileset dir="docroot/html/ALLOY_ZIP/build/aui-skins/core/images/" />
+					<fileset dir="docroot/html/ALLOY_ZIP/build/aui-skin-base/images/" />
 				</copy>
 
 				<!-- Clean up -->
