@@ -15,6 +15,7 @@
 package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.documentlibrary.DuplicateFileException;
+import com.liferay.portal.DuplicateLockException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -68,10 +69,19 @@ public class EditFolderAction extends PortletAction {
 			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchFolderException ||
+			if (e instanceof DuplicateLockException ||
+				e instanceof NoSuchFolderException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(actionRequest, e.getClass().getName());
+				if (e instanceof DuplicateLockException) {
+					DuplicateLockException dle = (DuplicateLockException)e;
+
+					SessionErrors.add(actionRequest, dle.getClass().getName() +
+						DLFolder.class.getName(), dle.getLock());
+				}
+				else {
+					SessionErrors.add(actionRequest, e.getClass().getName());
+				}
 
 				setForward(actionRequest, "portlet.document_library.error");
 			}

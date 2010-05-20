@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
+import com.liferay.portal.DuplicateLockException;
 import com.liferay.portal.ExpiredLockException;
 import com.liferay.portal.InvalidLockException;
 import com.liferay.portal.NoSuchLockException;
@@ -220,6 +221,15 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
 
+		List<DLFolder> folders = dlFolderPersistence.findByG_P(
+			folder.getGroupId(), folderId);
+
+		for (DLFolder curFolder : folders) {
+			lockFolder(
+				curFolder.getFolderId(), null, false,
+				DLFolderImpl.LOCK_EXPIRATION_TIME);
+		}
+
 		long groupId = folder.getGroupId();
 
 		try {
@@ -242,7 +252,10 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 			unlockFolder(groupId, folderId, lock.getUuid());
 
-			if (e instanceof PortalException) {
+			if (e instanceof DuplicateLockException) {
+				throw (DuplicateLockException)e;
+			}
+			else if (e instanceof PortalException) {
 				throw (PortalException)e;
 			}
 			else if (e instanceof RemoteException) {
