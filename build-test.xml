@@ -26,12 +26,6 @@
 		</delete>
 	</target>
 
-	<target name="prepare-db2">
-		<echo file="test.${user.name}.properties">db.type=db2</echo>
-
-		<antcall target="prepare-common" />
-	</target>
-
 	<target name="prepare-common">
 		<antcall target="prepare-portal-properties" inheritAll="false" />
 
@@ -59,6 +53,12 @@
 				<antcall target="start" />
 			</then>
 		</if>
+	</target>
+
+	<target name="prepare-db2">
+		<echo file="test.${user.name}.properties">db.type=db2</echo>
+
+		<antcall target="prepare-common" />
 	</target>
 
 	<target name="prepare-mysql">
@@ -94,23 +94,23 @@ axis.servlet.hosts.allowed=
 tunnel.servlet.hosts.allowed=</echo>
 
 		<if>
-			<equals arg1="${db.type}" arg2="oracle" />
+			<equals arg1="${db.type}" arg2="db2" />
 			<then>
 				<echo file="portal-impl/src/portal-ext.properties" append="true">
+
+hibernate.dialect=com.liferay.portal.dao.orm.hibernate.DB2Dialect
+custom.sql.function.isnull=CAST(? AS VARCHAR(32672)) IS NULL
+custom.sql.function.isnotnull=CAST(? AS VARCHAR(32672)) IS NOT NULL</echo>
+			</then>
+			<elseif>
+				<equals arg1="${db.type}" arg2="oracle" />
+				<then>
+					<echo file="portal-impl/src/portal-ext.properties" append="true">
 
 jdbc.default.acquireIncrement=1
 jdbc.default.maxPoolSize=5
 jdbc.default.minPoolSize=1
 jdbc.default.numHelperThreads=1</echo>
-			</then>
-			<elseif>
-				<equals arg1="${db.type}" arg2="db2" />
-				<then>
-					<echo file="portal-impl/src/portal-ext.properties" append="true">
-
-hibernate.dialect=com.liferay.portal.dao.orm.hibernate.DB2Dialect
-custom.sql.function.isnull=CAST(? AS VARCHAR(32672)) IS NULL
-custom.sql.function.isnotnull=CAST(? AS VARCHAR(32672)) IS NOT NULL</echo>
 				</then>
 			</elseif>
 		</if>
