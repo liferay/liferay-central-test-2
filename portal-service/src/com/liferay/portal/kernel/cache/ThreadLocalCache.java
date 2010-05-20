@@ -52,6 +52,7 @@ public class ThreadLocalCache<T> {
 		if (_cache == null) {
 			_cache = new HashMap<String, T>();
 		}
+
 		_cache.put(key, obj);
 	}
 
@@ -70,12 +71,12 @@ public class ThreadLocalCache<T> {
 	public String toString() {
 		StringBundler sb = new StringBundler(7);
 
-		sb.append("{name=");
-		sb.append(_name);
+		sb.append("{cache=");
+		sb.append(_cache.toString());
 		sb.append(", lifecycle=");
 		sb.append(_lifecycle);
-		sb.append(", content=");
-		sb.append(_cache.toString());
+		sb.append(", name=");
+		sb.append(_name);
 		sb.append("}");
 
 		return sb.toString();

@@ -40,6 +40,7 @@ public class PortalSessionListener implements HttpSessionListener {
 			new PortalSessionDestroyer(event);
 
 		PortalInitableUtil.init(portalSessionDestroyer);
+
 		ThreadLocalCacheManager.clearAll(Lifecycle.SESSION);
 	}
 

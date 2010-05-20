@@ -20,6 +20,7 @@ package com.liferay.portal.kernel.cache;
  * @author Shuyang Zhou
  */
 public enum Lifecycle {
-	REQUEST, SESSION, ETERNAL
+
+	ETERNAL, REQUEST, SESSION
 
 }

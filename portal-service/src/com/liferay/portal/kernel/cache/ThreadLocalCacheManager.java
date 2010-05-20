@@ -28,44 +28,51 @@ import java.util.Map;
 public class ThreadLocalCacheManager {
 
 	public static void clearAll(Lifecycle lifecycle) {
-		Map<String, ThreadLocalCache<?>> cacheGroup =
-			_cacheContainerThreadLocal.get().get(lifecycle);
-		if (cacheGroup != null) {
-			cacheGroup.clear();
+		Map<Lifecycle, Map<String, ThreadLocalCache<?>>> threadLocalCacheMaps =
+			_threadLocalCacheMaps.get();
+
+		Map<String, ThreadLocalCache<?>> threadLocalCacheMap =
+			threadLocalCacheMaps.get(lifecycle);
+
+		if (threadLocalCacheMap != null) {
+			threadLocalCacheMap.clear();
 		}
 	}
 
 	public static void destroy() {
-		_cacheContainerThreadLocal.remove();
+		_threadLocalCacheMaps.remove();
 	}
 
-	public static <T> ThreadLocalCache<T> getCache(
-		String name, Lifecycle lifecycle) {
+	public static <T> ThreadLocalCache<T> getThreadLocalCache(
+		Lifecycle lifecycle, String name) {
 
-		Map<Lifecycle, Map<String, ThreadLocalCache<?>>>
-			cacheContainer = _cacheContainerThreadLocal.get();
+		Map<Lifecycle, Map<String, ThreadLocalCache<?>>> threadLocalCacheMaps =
+			_threadLocalCacheMaps.get();
 
-		Map<String, ThreadLocalCache<?>> cacheGroup =
-			cacheContainer.get(lifecycle);
-		if (cacheGroup == null) {
-			cacheGroup = new HashMap<String, ThreadLocalCache<?>>();
-			cacheContainer.put(lifecycle, cacheGroup);
+		Map<String, ThreadLocalCache<?>> threadLocalCacheMap =
+			threadLocalCacheMaps.get(lifecycle);
+
+		if (threadLocalCacheMap == null) {
+			threadLocalCacheMap = new HashMap<String, ThreadLocalCache<?>>();
+
+			threadLocalCacheMaps.put(lifecycle, threadLocalCacheMap);
 		}
 
-		ThreadLocalCache<?> cache = cacheGroup.get(name);
-		if (cache == null) {
-			cache = new ThreadLocalCache(name, lifecycle);
-			cacheGroup.put(name, cache);
+		ThreadLocalCache<?> threadLocalCache = threadLocalCacheMap.get(name);
+
+		if (threadLocalCache == null) {
+			threadLocalCache = new ThreadLocalCache<T>(name, lifecycle);
+
+			threadLocalCacheMap.put(name, threadLocalCache);
 		}
 
-		return (ThreadLocalCache<T>) cache;
+		return (ThreadLocalCache<T>)threadLocalCache;
 	}
 
 	private static ThreadLocal<Map<Lifecycle, Map<String, ThreadLocalCache<?>>>>
-		_cacheContainerThreadLocal =
-			new InitialThreadLocal<
-				Map<Lifecycle, Map<String, ThreadLocalCache<?>>>>(
-					new EnumMap<Lifecycle, Map<String, ThreadLocalCache<?>>>(
-						Lifecycle.class));
+		_threadLocalCacheMaps = new InitialThreadLocal
+			<Map<Lifecycle, Map<String, ThreadLocalCache<?>>>>(
+				new EnumMap<Lifecycle, Map<String, ThreadLocalCache<?>>>(
+					Lifecycle.class));
 
 }

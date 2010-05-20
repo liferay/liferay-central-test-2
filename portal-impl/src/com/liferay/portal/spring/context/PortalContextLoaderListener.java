@@ -62,6 +62,7 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 
 	public void contextDestroyed(ServletContextEvent event) {
 		super.contextDestroyed(event);
+
 		ThreadLocalCacheManager.destroy();
 	}
 
