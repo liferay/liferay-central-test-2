@@ -24,7 +24,6 @@ import junit.framework.TestSuite;
  * </a>
  *
  * @author Brian Wing Shun Chan
- *
  */
 public class WebContentImageAssociationTests extends BaseTests {
 

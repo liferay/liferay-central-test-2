@@ -1,4 +1,3 @@
-
 /**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
@@ -24,6 +23,11 @@ import junit.framework.TestSuite;
 /**
  * <a href="PortletTests.java.html"><b><i>View Source</i>
  * </b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
+/**
+ * <a href="PortletTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */

@@ -20,8 +20,8 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="CheckoutOrderCreditCardNumberInvalidDiscoverTests.java.html"><b><i>
- * View Source</i></b></a>
+ * <a href="CheckoutOrderCreditCardNumberInvalidDiscoverTests.java.html"><b>
+ * <i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
