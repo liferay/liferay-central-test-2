@@ -36,11 +36,11 @@ boolean showExpanded = GetterUtil.getBoolean((String)request.getAttribute("lifer
 			<li class="lfr-trigger">
 				<strong>
 					<a class="nobr" href="javascript:;">
-						<liferay-ui:message key="<%= message %>" />
-
 						<c:if test="<%= Validator.isNotNull(icon) %>">
 							<img alt="" src="<%= icon %>" />
 						</c:if>
+
+						<liferay-ui:message key="<%= message %>" />
 					</a>
 				</strong>
 	</c:otherwise>
