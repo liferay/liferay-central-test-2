@@ -27,10 +27,17 @@ import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.ImageConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ImageLocalServiceUtil;
+import com.liferay.portal.service.ImageServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -72,28 +79,46 @@ public class ImageServlet extends HttpServlet {
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		if (_lastModified) {
-			long lastModified = getLastModified(request);
+		try {
+			long companyId = PortalUtil.getCompanyId(request);
 
-			if (lastModified > 0) {
-				long ifModifiedSince = request.getDateHeader(
-					HttpHeaders.IF_MODIFIED_SINCE);
+			User user = PortalUtil.getUser(request);
 
-				if ((ifModifiedSince > 0) &&
-					(ifModifiedSince == lastModified)) {
+			if (user == null) {
+				Company company = CompanyLocalServiceUtil.getCompany(companyId);
 
-					response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+				user = company.getDefaultUser();
+			}
 
-					return;
+			PrincipalThreadLocal.setName(user.getUserId());
+
+			PermissionChecker permissionChecker =
+				PermissionCheckerFactoryUtil.create(user, true);
+
+			PermissionThreadLocal.setPermissionChecker(permissionChecker);
+
+			if (_lastModified) {
+				long lastModified = getLastModified(request);
+
+				if (lastModified > 0) {
+					long ifModifiedSince = request.getDateHeader(
+						HttpHeaders.IF_MODIFIED_SINCE);
+
+					if ((ifModifiedSince > 0) &&
+						(ifModifiedSince == lastModified)) {
+
+						response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+
+						return;
+					}
+				}
+
+				if (lastModified > 0) {
+					response.setDateHeader(
+						HttpHeaders.LAST_MODIFIED, lastModified);
 				}
 			}
 
-			if (lastModified > 0) {
-				response.setDateHeader(HttpHeaders.LAST_MODIFIED, lastModified);
-			}
-		}
-
-		try {
 			writeImage(request, response);
 		}
 		catch (Exception e) {
@@ -178,7 +203,7 @@ public class ImageServlet extends HttpServlet {
 		Image image = null;
 
 		if (imageId > 0) {
-			image = ImageLocalServiceUtil.getImage(imageId);
+			image = ImageServiceUtil.getImage(imageId);
 
 			String path = GetterUtil.getString(request.getPathInfo());
 

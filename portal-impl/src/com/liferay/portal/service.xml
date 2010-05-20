@@ -401,7 +401,7 @@
 		<reference package-path="com.liferay.portlet.tasks" entity="TasksProposal" />
 		<reference package-path="com.liferay.portlet.wiki" entity="WikiNode" />
 	</entity>
-	<entity name="Image" local-service="true" remote-service="false">
+	<entity name="Image" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -430,6 +430,10 @@
 		<finder name="Size" return-type="Collection">
 			<finder-column name="size" comparator="&lt;" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.portlet.imagegallery" entity="IGImage" />
 	</entity>
 	<entity name="Layout" local-service="true" remote-service="true">
 

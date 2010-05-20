@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portlet.imagegallery.NoSuchImageException;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
@@ -34,12 +35,16 @@ import java.util.List;
  * <a href="IGImageFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Julio Camarero
  */
 public class IGImageFinderImpl
 	extends BasePersistenceImpl<IGImage> implements IGImageFinder {
 
 	public static String COUNT_BY_G_F =
 		IGImageFinder.class.getName() + ".countByG_F";
+
+	public static String FETCH_BY_ANY_IMAGE_ID =
+			IGImageFinder.class.getName() + ".fetchByAnyImageId";
 
 	public static String FIND_BY_NO_ASSETS =
 		IGImageFinder.class.getName() + ".findByNoAssets";
@@ -82,6 +87,45 @@ public class IGImageFinderImpl
 			}
 
 			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public IGImage fetchByAnyImageId(long imageId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FETCH_BY_ANY_IMAGE_ID);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("IGImage", IGImageImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(imageId);
+			qPos.add(imageId);
+			qPos.add(imageId);
+			qPos.add(imageId);
+
+			List<IGImage> list = q.list();
+
+			if (list.size() == 0) {
+				String message = "No IGImage exists with the imageId " +
+					imageId;
+
+				throw new NoSuchImageException(message);
+			}
+			else {
+				return list.get(0);
+			}
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

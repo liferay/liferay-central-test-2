@@ -12,6 +12,19 @@
 				[$FOLDER_ID$]
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.imagegallery.service.persistence.IGImageFinder.fetchByAnyImageId">
+		<![CDATA[
+			SELECT
+				{IGImage.*}
+			FROM
+				IGImage
+			WHERE
+				(igimage.smallImageId = ?) OR
+				(igimage.largeImageId = ?) OR
+				(igimage.custom1ImageId = ?) OR
+				(igimage.custom2ImageId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.imagegallery.service.persistence.IGImageFinder.findByNoAssets">
 		<![CDATA[
 			SELECT
