@@ -131,7 +131,7 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 
 				<%
 				for (Portlet portlet : portlets) {
-					if (Validator.isNull(portlet.getPortletId()) || (hiddenPortletIds.contains(portlet.getPortletId())) || portlet.isSystem()) {
+					if (Validator.isNull(portlet.getPortletId()) || hiddenPortletIds.contains(portlet.getPortletId()) || portlet.isSystem()) {
 						continue;
 					}
 
