@@ -75,6 +75,10 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 		top: 0.4em;
 	}
 
+	.add-asset-selector {
+		overflow: auto;
+	}
+
 	.asset-search {
 		margin-bottom: 1em;
 	}
