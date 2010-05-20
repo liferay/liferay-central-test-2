@@ -52,6 +52,7 @@ import javax.portlet.PortletPreferences;
  * @author Jorge Ferrer
  * @author Bruno Farache
  * @author Raymond Augé
+ * @author Juan Fernández
  */
 public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 
@@ -116,11 +117,15 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	public PortletDataHandlerControl[] getExportControls() {
-		return new PortletDataHandlerControl[] {_foldersAndEntries, _tags};
+		return new PortletDataHandlerControl[] {
+			_foldersAndEntries, _categories, _ratings, _tags
+		};
 	}
 
 	public PortletDataHandlerControl[] getImportControls() {
-		return new PortletDataHandlerControl[] {_foldersAndEntries, _tags};
+		return new PortletDataHandlerControl[] {
+			_foldersAndEntries, _categories, _ratings, _tags
+		};
 	}
 
 	public PortletPreferences importData(
@@ -233,6 +238,16 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			context.addPermissions(BookmarksEntry.class, entry.getEntryId());
 
+			if (context.getBooleanParameter(_NAMESPACE, "categories")) {
+				context.addAssetCategories(
+					BookmarksEntry.class, entry.getEntryId());
+			}
+
+			if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
+				context.addRatingsEntries(
+					BookmarksEntry.class, entry.getEntryId());
+			}
+
 			if (context.getBooleanParameter(_NAMESPACE, "tags")) {
 				context.addAssetTags(BookmarksEntry.class, entry.getEntryId());
 			}
@@ -319,7 +334,13 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		long folderId = MapUtil.getLong(
 			folderPKs, entry.getFolderId(), entry.getFolderId());
 
+		long[] assetCategoryIds = null;
 		String[] assetTagNames = null;
+
+		if (context.getBooleanParameter(_NAMESPACE, "categories")) {
+			assetCategoryIds = context.getAssetCategoryIds(
+				BookmarksEntry.class, entry.getEntryId());
+		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
 			assetTagNames = context.getAssetTagNames(
@@ -330,6 +351,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setAssetCategoryIds(assetCategoryIds);
 		serviceContext.setAssetTagNames(assetTagNames);
 		serviceContext.setCreateDate(entry.getCreateDate());
 		serviceContext.setModifiedDate(entry.getModifiedDate());
@@ -379,6 +401,12 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 			context.importPermissions(
 				BookmarksEntry.class, entry.getEntryId(),
 				importedEntry.getEntryId());
+
+			if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
+				context.importRatingsEntries(
+					BookmarksEntry.class, entry.getEntryId(),
+					importedEntry.getEntryId());
+			}
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(
@@ -474,6 +502,12 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 	private static final PortletDataHandlerBoolean _foldersAndEntries =
 		new PortletDataHandlerBoolean(
 			_NAMESPACE, "folders-and-entries", true, true);
+
+	private static final PortletDataHandlerBoolean _categories =
+		new PortletDataHandlerBoolean(_NAMESPACE, "categories");
+
+	private static final PortletDataHandlerBoolean _ratings =
+		new PortletDataHandlerBoolean(_NAMESPACE, "ratings");
 
 	private static final PortletDataHandlerBoolean _tags =
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");

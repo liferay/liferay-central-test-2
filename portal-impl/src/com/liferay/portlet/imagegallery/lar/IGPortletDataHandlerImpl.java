@@ -57,6 +57,7 @@ import javax.portlet.PortletPreferences;
  *
  * @author Bruno Farache
  * @author Raymond Augé
+ * @author Juan Fernández
  */
 public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
@@ -80,6 +81,14 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			imageEl.addAttribute("path", path);
 			imageEl.addAttribute("bin-path", getImageBinPath(context, image));
+
+			if (context.getBooleanParameter(_NAMESPACE, "categories")) {
+				context.addAssetCategories(IGImage.class, image.getImageId());
+			}
+
+			if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
+				context.addRatingsEntries(IGImage.class, image.getImageId());
+			}
 
 			if (context.getBooleanParameter(_NAMESPACE, "tags")) {
 				context.addAssetTags(IGImage.class, image.getImageId());
@@ -212,7 +221,13 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			FileUtil.write(imageFile, bytes);
 		}
 
+		long[] assetCategoryIds = null;
 		String[] assetTagNames = null;
+
+		if (context.getBooleanParameter(_NAMESPACE, "categories")) {
+			assetCategoryIds = context.getAssetCategoryIds(
+				IGImage.class, image.getImageId());
+		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
 			assetTagNames = context.getAssetTagNames(
@@ -223,6 +238,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setAssetCategoryIds(assetCategoryIds);
 		serviceContext.setAssetTagNames(assetTagNames);
 		serviceContext.setCreateDate(image.getCreateDate());
 		serviceContext.setModifiedDate(image.getModifiedDate());
@@ -271,6 +287,12 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			context.importPermissions(
 				IGImage.class, image.getImageId(), importedImage.getImageId());
+
+			if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
+				context.importRatingsEntries(
+					IGImage.class, image.getImageId(),
+					importedImage.getImageId());
+			}
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(
@@ -339,11 +361,15 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	public PortletDataHandlerControl[] getExportControls() {
-		return new PortletDataHandlerControl[] {_foldersAndImages, _tags};
+		return new PortletDataHandlerControl[] {
+			_foldersAndImages, _categories, _ratings, _tags
+		};
 	}
 
 	public PortletDataHandlerControl[] getImportControls() {
-		return new PortletDataHandlerControl[] {_foldersAndImages, _tags};
+		return new PortletDataHandlerControl[] {
+			_foldersAndImages, _categories, _ratings, _tags
+		};
 	}
 
 	public PortletPreferences importData(
@@ -548,6 +574,12 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 	private static final PortletDataHandlerBoolean _foldersAndImages =
 		new PortletDataHandlerBoolean(
 			_NAMESPACE, "folders-and-images", true, true);
+
+	private static final PortletDataHandlerBoolean _categories =
+		new PortletDataHandlerBoolean(_NAMESPACE, "categories");
+
+	private static final PortletDataHandlerBoolean _ratings =
+		new PortletDataHandlerBoolean(_NAMESPACE, "ratings");
 
 	private static final PortletDataHandlerBoolean _tags =
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");

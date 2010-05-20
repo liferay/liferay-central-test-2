@@ -45,6 +45,7 @@ import javax.portlet.PortletPreferences;
  *
  * @author Bruno Farache
  * @author Raymond Augé
+ * @author Juan Fernández
  */
 public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 
@@ -98,13 +99,13 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
-			_entries, _comments, _ratings, _tags
+			_entries, _categories, _comments, _ratings, _tags
 		};
 	}
 
 	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {
-			_entries, _comments, _ratings, _tags, _wordpress
+			_entries, _categories, _comments, _ratings, _tags, _wordpress
 		};
 	}
 
@@ -172,6 +173,11 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		context.addPermissions(BlogsEntry.class, entry.getEntryId());
 
+		if (context.getBooleanParameter(_NAMESPACE, "categories")) {
+				context.addAssetCategories(
+					BlogsEntry.class, entry.getEntryId());
+		}
+
 		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
 			context.addComments(BlogsEntry.class, entry.getEntryId());
 		}
@@ -226,7 +232,13 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		String[] trackbacks = StringUtil.split(entry.getTrackbacks());
 		int status = entry.getStatus();
 
+		long[] assetCategoryIds = null;
 		String[] assetTagNames = null;
+
+		if (context.getBooleanParameter(_NAMESPACE, "categories")) {
+			assetCategoryIds = context.getAssetCategoryIds(
+				BlogsEntry.class, entry.getEntryId());
+		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
 			assetTagNames = context.getAssetTagNames(
@@ -237,6 +249,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setAssetCategoryIds(assetCategoryIds);
 		serviceContext.setAssetTagNames(assetTagNames);
 		serviceContext.setCreateDate(entry.getCreateDate());
 		serviceContext.setModifiedDate(entry.getModifiedDate());
@@ -300,6 +313,9 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static final PortletDataHandlerBoolean _entries =
 		new PortletDataHandlerBoolean(_NAMESPACE, "entries", true, true);
+
+	private static final PortletDataHandlerBoolean _categories =
+		new PortletDataHandlerBoolean(_NAMESPACE, "categories");
 
 	private static final PortletDataHandlerBoolean _comments =
 		new PortletDataHandlerBoolean(_NAMESPACE, "comments");

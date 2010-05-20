@@ -61,6 +61,7 @@ import javax.portlet.PortletPreferences;
  * @author Bruno Farache
  * @author Jorge Ferrer
  * @author Marcellus Tavares
+ * @author Juan Fernández
  */
 public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 
@@ -343,13 +344,15 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
-			_nodesAndPages, _attachments, _categories, _comments, _tags
+			_nodesAndPages, _attachments, _categories,
+			_comments, _ratings, _tags
 		};
 	}
 
 	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {
-			_nodesAndPages, _attachments, _categories, _comments, _tags
+			_nodesAndPages, _attachments, _categories,
+			_comments, _ratings, _tags
 		};
 	}
 
@@ -461,6 +464,11 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 				context.addComments(WikiPage.class, page.getResourcePrimKey());
 			}
 
+			if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
+				context.addRatingsEntries(
+					WikiPage.class, page.getResourcePrimKey());
+			}
+
 			if (context.getBooleanParameter(_NAMESPACE, "tags")) {
 				context.addAssetTags(WikiPage.class, page.getResourcePrimKey());
 			}
@@ -550,6 +558,9 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static final PortletDataHandlerBoolean _comments =
 		new PortletDataHandlerBoolean(_NAMESPACE, "comments");
+
+	private static final PortletDataHandlerBoolean _ratings =
+		new PortletDataHandlerBoolean(_NAMESPACE, "ratings");
 
 	private static final PortletDataHandlerBoolean _tags =
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
