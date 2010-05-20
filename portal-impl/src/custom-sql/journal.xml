@@ -69,7 +69,9 @@
 	<sql id="com.liferay.portlet.journal.service.persistence.JournalArticleFinder.findByC_G_A_V_T_D_C_T_S_T_D_S_R">
 		<![CDATA[
 			SELECT
-				id_ AS id
+				id_ AS id,
+				articleId,
+				version
 			FROM
 				JournalArticle
 			WHERE
