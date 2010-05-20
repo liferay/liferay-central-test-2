@@ -20,9 +20,6 @@ import com.liferay.portal.RequiredRoleException;
 import com.liferay.portal.RoleNameException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
-import com.liferay.portal.kernel.cache.Lifecycle;
-import com.liferay.portal.kernel.cache.ThreadLocalCache;
-import com.liferay.portal.kernel.cache.ThreadLocalCacheManager;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Indexer;
@@ -376,17 +373,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		}
 
 		if (inherited) {
-			String key = Long.toString(role.getRoleId()).
-				concat(StringPool.POUND).concat(Long.toString(userId));
-			ThreadLocalCache<Integer> userRoleCache =
-				ThreadLocalCacheManager.getCache(
-					_USER_ROLE_CACHE, Lifecycle.REQUEST);
-			Integer count = userRoleCache.get(key);
-			if (count == null) {
-				count = roleFinder.countByR_U(role.getRoleId(), userId);
-				userRoleCache.put(key, count);
-			}
-			if (count > 0) {
+			if (roleFinder.countByR_U(role.getRoleId(), userId) > 0) {
 				return true;
 			}
 			else {
@@ -553,8 +540,6 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		catch (NoSuchRoleException nsge) {
 		}
 	}
-
-	private static final String _USER_ROLE_CACHE = "USER_ROLE_CACHE";
 
 	private Map<String, Role> _systemRolesMap = new HashMap<String, Role>();
 
