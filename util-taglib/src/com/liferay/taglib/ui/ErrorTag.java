@@ -94,9 +94,12 @@ public class ErrorTag extends TagSupport {
 				"liferay-ui:error:translateMessage",
 				String.valueOf(_translateMessage));
 
-			if ((_exception != null) && (Validator.isNull(_message)) &&
-				(SessionErrors.contains(
-					portletRequest, _exception.getName()))) {
+			if ((Validator.isNotNull(_message))) {
+				return SKIP_BODY;
+			}
+
+			if (_exception != null && SessionErrors.contains(
+				portletRequest, _exception.getName())) {
 
 				PortalIncludeUtil.include(pageContext, getStartPage());
 
@@ -106,8 +109,19 @@ public class ErrorTag extends TagSupport {
 
 				return EVAL_BODY_INCLUDE;
 			}
+			else if (Validator.isNotNull(_key) && SessionErrors.contains(
+				portletRequest, _key)) {
+
+				PortalIncludeUtil.include(pageContext, getStartPage());
+
+				pageContext.setAttribute(
+					"errorException",
+					SessionErrors.get(portletRequest, _key));
+
+				return EVAL_BODY_INCLUDE;
+			}
 			else {
-				return SKIP_BODY;
+				 return SKIP_BODY;
 			}
 		}
 		catch (Exception e) {
