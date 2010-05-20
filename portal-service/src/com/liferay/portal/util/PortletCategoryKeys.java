@@ -29,8 +29,6 @@ public class PortletCategoryKeys {
 
 	public static final String SERVER = "server";
 
-	public static final String WORKFLOW = "workflow";
-
-	public static final String[] ALL = {MY, WORKFLOW, CONTENT, PORTAL, SERVER};
+	public static final String[] ALL = {MY, CONTENT, PORTAL, SERVER};
 
 }
