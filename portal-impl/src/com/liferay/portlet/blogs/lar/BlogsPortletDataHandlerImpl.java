@@ -174,8 +174,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		context.addPermissions(BlogsEntry.class, entry.getEntryId());
 
 		if (context.getBooleanParameter(_NAMESPACE, "categories")) {
-				context.addAssetCategories(
-					BlogsEntry.class, entry.getEntryId());
+			context.addAssetCategories(BlogsEntry.class, entry.getEntryId());
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
@@ -311,22 +310,22 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static final String _NAMESPACE = "blogs";
 
-	private static final PortletDataHandlerBoolean _entries =
-		new PortletDataHandlerBoolean(_NAMESPACE, "entries", true, true);
-
-	private static final PortletDataHandlerBoolean _categories =
+	private static PortletDataHandlerBoolean _categories =
 		new PortletDataHandlerBoolean(_NAMESPACE, "categories");
 
-	private static final PortletDataHandlerBoolean _comments =
+	private static PortletDataHandlerBoolean _comments =
 		new PortletDataHandlerBoolean(_NAMESPACE, "comments");
 
-	private static final PortletDataHandlerBoolean _ratings =
+	private static PortletDataHandlerBoolean _entries =
+		new PortletDataHandlerBoolean(_NAMESPACE, "entries", true, true);
+
+	private static PortletDataHandlerBoolean _ratings =
 		new PortletDataHandlerBoolean(_NAMESPACE, "ratings");
 
-	private static final PortletDataHandlerBoolean _tags =
+	private static PortletDataHandlerBoolean _tags =
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
 
-	private static final PortletDataHandlerBoolean _wordpress =
+	private static PortletDataHandlerBoolean _wordpress =
 		new PortletDataHandlerBoolean(_NAMESPACE, "wordpress");
 
 }

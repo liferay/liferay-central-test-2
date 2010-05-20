@@ -499,20 +499,20 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static final String _NAMESPACE = "bookmarks";
 
-	private static final PortletDataHandlerBoolean _foldersAndEntries =
+	private static Log _log = LogFactoryUtil.getLog(
+		BookmarksPortletDataHandlerImpl.class);
+
+	private static PortletDataHandlerBoolean _categories =
+		new PortletDataHandlerBoolean(_NAMESPACE, "categories");
+
+	private static PortletDataHandlerBoolean _foldersAndEntries =
 		new PortletDataHandlerBoolean(
 			_NAMESPACE, "folders-and-entries", true, true);
 
-	private static final PortletDataHandlerBoolean _categories =
-		new PortletDataHandlerBoolean(_NAMESPACE, "categories");
-
-	private static final PortletDataHandlerBoolean _ratings =
+	private static PortletDataHandlerBoolean _ratings =
 		new PortletDataHandlerBoolean(_NAMESPACE, "ratings");
 
-	private static final PortletDataHandlerBoolean _tags =
+	private static PortletDataHandlerBoolean _tags =
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
-
-	private static Log _log = LogFactoryUtil.getLog(
-		BookmarksPortletDataHandlerImpl.class);
 
 }
