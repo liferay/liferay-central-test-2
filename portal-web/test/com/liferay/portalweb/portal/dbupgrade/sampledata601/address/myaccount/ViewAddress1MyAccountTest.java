@@ -12,18 +12,18 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.address.myaccount;
+package com.liferay.portalweb.portal.dbupgrade.sampledata601.address.myaccount;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="ViewAddress3MyAccountTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="ViewAddress1MyAccountTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ViewAddress3MyAccountTest extends BaseTestCase {
-	public void testViewAddress3MyAccount() throws Exception {
+public class ViewAddress1MyAccountTest extends BaseTestCase {
+	public void testViewAddress1MyAccount() throws Exception {
 		selenium.open("/web/guest/home");
 
 		for (int second = 0;; second++) {
@@ -55,7 +55,7 @@ public class ViewAddress3MyAccountTest extends BaseTestCase {
 
 			try {
 				if ("United States".equals(selenium.getSelectedLabel(
-								"_2_addressCountryId2"))) {
+								"_2_addressCountryId0"))) {
 					break;
 				}
 			}
@@ -72,7 +72,7 @@ public class ViewAddress3MyAccountTest extends BaseTestCase {
 
 			try {
 				if ("California".equals(selenium.getSelectedLabel(
-								"_2_addressRegionId2"))) {
+								"_2_addressRegionId0"))) {
 					break;
 				}
 			}
@@ -83,15 +83,17 @@ public class ViewAddress3MyAccountTest extends BaseTestCase {
 		}
 
 		assertEquals("1220 Brea Canyon Rd",
-			selenium.getValue("_2_addressStreet1_2"));
-		assertEquals("Business", selenium.getSelectedLabel("_2_addressTypeId2"));
-		assertEquals("Ste 12", selenium.getValue("_2_addressStreet2_2"));
-		assertEquals("91789", selenium.getValue("_2_addressZip2"));
-		assertEquals("Walnut", selenium.getValue("_2_addressStreet3_2"));
-		assertEquals("Los Angeles", selenium.getValue("_2_addressCity2"));
+			selenium.getValue("_2_addressStreet1_0"));
+		assertEquals("Ste 12", selenium.getValue("_2_addressStreet2_0"));
+		assertEquals("Business", selenium.getSelectedLabel("_2_addressTypeId0"));
+		assertEquals("91789", selenium.getValue("_2_addressZip0"));
+		assertEquals("Walnut", selenium.getValue("_2_addressStreet3_0"));
+		assertEquals("Los Angeles", selenium.getValue("_2_addressCity0"));
 		assertEquals("United States",
-			selenium.getSelectedLabel("_2_addressCountryId2"));
+			selenium.getSelectedLabel("_2_addressCountryId0"));
+		assertTrue(selenium.isChecked("_2_addressPrimary0"));
+		assertTrue(selenium.isChecked("_2_addressMailing0Checkbox"));
 		assertEquals("California",
-			selenium.getSelectedLabel("_2_addressRegionId2"));
+			selenium.getSelectedLabel("_2_addressRegionId0"));
 	}
 }

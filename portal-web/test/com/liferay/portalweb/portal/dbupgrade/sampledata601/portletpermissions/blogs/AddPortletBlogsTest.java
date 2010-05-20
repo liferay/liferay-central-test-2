@@ -12,18 +12,18 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.address.myaccount;
+package com.liferay.portalweb.portal.dbupgrade.sampledata601.portletpermissions.blogs;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="ViewAddress2MyAccountTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddPortletBlogsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ViewAddress2MyAccountTest extends BaseTestCase {
-	public void testViewAddress2MyAccount() throws Exception {
+public class AddPortletBlogsTest extends BaseTestCase {
+	public void testAddPortletBlogs() throws Exception {
 		selenium.open("/web/guest/home");
 
 		for (int second = 0;; second++) {
@@ -32,7 +32,8 @@ public class ViewAddress2MyAccountTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Control Panel")) {
+				if (selenium.isElementPresent(
+							"link=Blogs Portlet Permissions Page")) {
 					break;
 				}
 			}
@@ -42,11 +43,11 @@ public class ViewAddress2MyAccountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Blogs Portlet Permissions Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=My Account", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
+		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -54,8 +55,8 @@ public class ViewAddress2MyAccountTest extends BaseTestCase {
 			}
 
 			try {
-				if ("Canada".equals(selenium.getSelectedLabel(
-								"_2_addressCountryId1"))) {
+				if (selenium.isVisible(
+							"//input[@id='layout_configuration_content']")) {
 					break;
 				}
 			}
@@ -64,6 +65,9 @@ public class ViewAddress2MyAccountTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.typeKeys("//input[@id='layout_configuration_content']",
+			RuntimeVariables.replace("b"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -71,8 +75,7 @@ public class ViewAddress2MyAccountTest extends BaseTestCase {
 			}
 
 			try {
-				if ("Ontario".equals(selenium.getSelectedLabel(
-								"_2_addressRegionId1"))) {
+				if (selenium.isVisible("//div[@title='Blogs']/p/a")) {
 					break;
 				}
 			}
@@ -82,13 +85,25 @@ public class ViewAddress2MyAccountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertEquals("123 Lets", selenium.getValue("_2_addressStreet1_1"));
-		assertEquals("Other", selenium.getSelectedLabel("_2_addressTypeId1"));
-		assertEquals("897 Hope", selenium.getValue("_2_addressStreet2_1"));
-		assertEquals("00000", selenium.getValue("_2_addressZip1"));
-		assertEquals("7896 This", selenium.getValue("_2_addressStreet3_1"));
-		assertEquals("Works", selenium.getValue("_2_addressCity1"));
-		assertEquals("Canada", selenium.getSelectedLabel("_2_addressCountryId1"));
-		assertEquals("Ontario", selenium.getSelectedLabel("_2_addressRegionId1"));
+		selenium.clickAt("//div[@title='Blogs']/p/a",
+			RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//section")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertTrue(selenium.isVisible("//section"));
 	}
 }

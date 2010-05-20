@@ -12,18 +12,18 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.address.myaccount;
+package com.liferay.portalweb.portal.dbupgrade.sampledata601.address.myaccount;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="ViewAddress3MyAccountTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="ViewAddress2MyAccountTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ViewAddress3MyAccountTest extends BaseTestCase {
-	public void testViewAddress3MyAccount() throws Exception {
+public class ViewAddress2MyAccountTest extends BaseTestCase {
+	public void testViewAddress2MyAccount() throws Exception {
 		selenium.open("/web/guest/home");
 
 		for (int second = 0;; second++) {
@@ -54,8 +54,8 @@ public class ViewAddress3MyAccountTest extends BaseTestCase {
 			}
 
 			try {
-				if ("United States".equals(selenium.getSelectedLabel(
-								"_2_addressCountryId2"))) {
+				if ("Canada".equals(selenium.getSelectedLabel(
+								"_2_addressCountryId1"))) {
 					break;
 				}
 			}
@@ -71,8 +71,8 @@ public class ViewAddress3MyAccountTest extends BaseTestCase {
 			}
 
 			try {
-				if ("California".equals(selenium.getSelectedLabel(
-								"_2_addressRegionId2"))) {
+				if ("Ontario".equals(selenium.getSelectedLabel(
+								"_2_addressRegionId1"))) {
 					break;
 				}
 			}
@@ -82,16 +82,13 @@ public class ViewAddress3MyAccountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertEquals("1220 Brea Canyon Rd",
-			selenium.getValue("_2_addressStreet1_2"));
-		assertEquals("Business", selenium.getSelectedLabel("_2_addressTypeId2"));
-		assertEquals("Ste 12", selenium.getValue("_2_addressStreet2_2"));
-		assertEquals("91789", selenium.getValue("_2_addressZip2"));
-		assertEquals("Walnut", selenium.getValue("_2_addressStreet3_2"));
-		assertEquals("Los Angeles", selenium.getValue("_2_addressCity2"));
-		assertEquals("United States",
-			selenium.getSelectedLabel("_2_addressCountryId2"));
-		assertEquals("California",
-			selenium.getSelectedLabel("_2_addressRegionId2"));
+		assertEquals("123 Lets", selenium.getValue("_2_addressStreet1_1"));
+		assertEquals("Other", selenium.getSelectedLabel("_2_addressTypeId1"));
+		assertEquals("897 Hope", selenium.getValue("_2_addressStreet2_1"));
+		assertEquals("00000", selenium.getValue("_2_addressZip1"));
+		assertEquals("7896 This", selenium.getValue("_2_addressStreet3_1"));
+		assertEquals("Works", selenium.getValue("_2_addressCity1"));
+		assertEquals("Canada", selenium.getSelectedLabel("_2_addressCountryId1"));
+		assertEquals("Ontario", selenium.getSelectedLabel("_2_addressRegionId1"));
 	}
 }

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.address.myaccount;
+package com.liferay.portalweb.portal.dbupgrade.sampledata601.address.myaccount;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;

@@ -12,18 +12,18 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.expando.webcontent;
+package com.liferay.portalweb.portal.dbupgrade.sampledata601.tags.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="ViewWebContentExpandoTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddMBMessageCTagTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ViewWebContentExpandoTest extends BaseTestCase {
-	public void testViewWebContentExpando() throws Exception {
+public class AddMBMessageCTagTest extends BaseTestCase {
+	public void testAddMBMessageCTag() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -47,39 +47,37 @@ public class ViewWebContentExpandoTest extends BaseTestCase {
 		selenium.clickAt("link=Communities", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_134_name",
-			RuntimeVariables.replace("Expando Web Content Community"));
+			RuntimeVariables.replace("Tags Message Board Community"));
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Open"),
 			selenium.getText("//td[2]/a"));
-		selenium.clickAt("//td[2]/a", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("//td[2]/a"));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Web Content Display Page",
+		selenium.clickAt("link=Message Boards Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("First Expando Bank"),
-			selenium.getText("//div[1]/h1"));
-		assertTrue(selenium.isElementPresent("//input[@value='Create Account']"));
-		assertEquals(RuntimeVariables.replace("Michael"),
-			selenium.getText("//td[2]"));
-		assertEquals(RuntimeVariables.replace("Hashimoto"),
-			selenium.getText("//td[3]"));
-		assertEquals(RuntimeVariables.replace("$100.00"),
-			selenium.getText("//td[4]"));
-		assertEquals(RuntimeVariables.replace("JR"),
-			selenium.getText("//tr[3]/td[2]"));
-		assertEquals(RuntimeVariables.replace("Houn"),
-			selenium.getText("//tr[3]/td[3]"));
-		assertEquals(RuntimeVariables.replace("$1,000,000.00"),
-			selenium.getText("//tr[3]/td[4]"));
-		assertEquals(RuntimeVariables.replace("Michael"),
-			selenium.getText("//tr[4]/td[2]"));
-		assertEquals(RuntimeVariables.replace("Saechang"),
-			selenium.getText("//tr[4]/td[3]"));
-		assertEquals(RuntimeVariables.replace("$1,000,000.00"),
-			selenium.getText("//tr[4]/td[4]"));
-		assertTrue(selenium.isPartialText("//section/div/div/div/div[1]",
-				"# of Accounts: 3"));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//input[@value='Post New Thread']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_19_subject",
+			RuntimeVariables.replace("MessageC TagC TestC"));
+		selenium.type("_19_textArea",
+			RuntimeVariables.replace("This is a messageC tagC testC."));
+		selenium.type("//li/span/span/input",
+			RuntimeVariables.replace("selenium"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("MessageC TagC TestC"),
+			selenium.getText("//form/div[2]"));
+		assertEquals(RuntimeVariables.replace("MessageC TagC TestC"),
+			selenium.getText("//a/strong"));
+		assertEquals(RuntimeVariables.replace("selenium"),
+			selenium.getText("//td[2]/div[1]/div/div[1]/span/span"));
+		assertEquals(RuntimeVariables.replace("This is a messageC tagC testC."),
+			selenium.getText("//td[2]/div[2]"));
 	}
 }

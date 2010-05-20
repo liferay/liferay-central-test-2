@@ -12,18 +12,18 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.address.myaccount;
+package com.liferay.portalweb.portal.dbupgrade.sampledata601.address.myaccount;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="ViewAddress1MyAccountTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddAddress1MyAccountTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ViewAddress1MyAccountTest extends BaseTestCase {
-	public void testViewAddress1MyAccount() throws Exception {
+public class AddAddress1MyAccountTest extends BaseTestCase {
+	public void testAddAddress1MyAccount() throws Exception {
 		selenium.open("/web/guest/home");
 
 		for (int second = 0;; second++) {
@@ -47,6 +47,61 @@ public class ViewAddress1MyAccountTest extends BaseTestCase {
 		selenium.clickAt("link=My Account", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_2_addressStreet1_0")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_2_addressStreet1_0",
+			RuntimeVariables.replace("1220 Brea Canyon Rd"));
+		selenium.type("_2_addressStreet2_0", RuntimeVariables.replace("Ste 12"));
+		selenium.select("_2_addressTypeId0",
+			RuntimeVariables.replace("label=Business"));
+		selenium.type("_2_addressZip0", RuntimeVariables.replace("91789"));
+		selenium.type("_2_addressStreet3_0", RuntimeVariables.replace("Walnut"));
+		selenium.type("_2_addressCity0", RuntimeVariables.replace("Los Angeles"));
+		selenium.select("_2_addressCountryId0",
+			RuntimeVariables.replace("label=United States"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace(
+							"AlabamaAlaskaArizonaArkansasCaliforniaColoradoConnecticutDelawareDistrict of ColumbiaFloridaGeorgiaHawaiiIdahoIllinoisIndianaIowaKansasKentucky Louisiana MaineMarylandMassachusettsMichiganMinnesotaMississippiMissouriMontanaNebraskaNevadaNew HampshireNew JerseyNew MexicoNew YorkNorth CarolinaNorth DakotaOhioOklahoma OregonPennsylvaniaPuerto RicoRhode IslandSouth CarolinaSouth DakotaTennesseeTexasUtahVermontVirginiaWashingtonWest VirginiaWisconsinWyoming")
+										.equals(selenium.getText(
+								"_2_addressRegionId0"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("_2_addressPrimary0", RuntimeVariables.replace(""));
+		selenium.clickAt("_2_addressMailing0Checkbox",
+			RuntimeVariables.replace(""));
+		selenium.select("_2_addressRegionId0",
+			RuntimeVariables.replace("label=California"));
+		Thread.sleep(5000);
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -82,6 +137,9 @@ public class ViewAddress1MyAccountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div"));
 		assertEquals("1220 Brea Canyon Rd",
 			selenium.getValue("_2_addressStreet1_0"));
 		assertEquals("Ste 12", selenium.getValue("_2_addressStreet2_0"));
