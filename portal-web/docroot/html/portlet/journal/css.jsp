@@ -215,7 +215,7 @@
 	display: none;
 }
 
-.portlet-journal .journal-edit-mode .structure-tree li.structure-field.yui-dd-draggable .journal-article-move-handler {
+.portlet-journal .journal-edit-mode .structure-tree li.structure-field.yui3-dd-draggable .journal-article-move-handler {
 	background: transparent url(<%= themeImagesPath %>/application/handle_sort_vertical.png) no-repeat scroll right 50%;
 	cursor: move;
 	display: block;
