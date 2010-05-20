@@ -28,6 +28,7 @@ import com.liferay.util.xml.DocUtil;
 
 import com.thoughtworks.qdox.JavaDocBuilder;
 import com.thoughtworks.qdox.model.AbstractJavaEntity;
+import com.thoughtworks.qdox.model.Annotation;
 import com.thoughtworks.qdox.model.DocletTag;
 import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaField;
@@ -153,7 +154,9 @@ public class JavadocFormatter {
 		for (DocletTag docletTag : docletTags) {
 			String value = docletTag.getValue();
 
-			value = StringUtil.replace(value, "\n", " ");
+			value = _trimMultilineText(value);
+
+			value = StringUtil.replace(value, " </", "</");
 
 			if (name.equals("author") || name.equals("see") ||
 				name.equals("since") || name.equals("version")) {
@@ -468,6 +471,8 @@ public class JavadocFormatter {
 		if (cdata == null) {
 			return StringPool.BLANK;
 		}
+
+		cdata = _trimMultilineText(cdata);
 
 		cdata = StringUtil.replace(
 			cdata,
@@ -826,7 +831,7 @@ public class JavadocFormatter {
 
 		Set<Integer> lineNumbers = new HashSet<Integer>();
 
-		lineNumbers.add(javaClass.getLineNumber());
+		lineNumbers.add(_getJavaClassLineNumber(javaClass));
 
 		JavaMethod[] javaMethods = javaClass.getMethods();
 
@@ -902,6 +907,40 @@ public class JavadocFormatter {
 			fileName, originalContent, javadocLessContent, document);
 	}
 
+	private int _getJavaClassLineNumber(JavaClass javaClass) {
+		int lineNumber = javaClass.getLineNumber();
+
+		Annotation[] annotations = javaClass.getAnnotations();
+
+		if (annotations.length == 0) {
+			return lineNumber;
+		}
+
+		for (Annotation annotation : annotations) {
+			int annotationLineNumber = annotation.getLineNumber();
+
+			if (annotation.getPropertyMap().isEmpty()) {
+				annotationLineNumber--;
+			}
+
+			if (annotationLineNumber < lineNumber) {
+				lineNumber = annotationLineNumber;
+			}
+		}
+
+		return lineNumber;
+	}
+
+	private String _trimMultilineText(String text) {
+		String[] textArray = StringUtil.split(text, "\n");
+
+		for (int i = 0; i < textArray.length; i++) {
+			textArray[i] = textArray[i].trim();
+		}
+
+		return StringUtil.merge(textArray, " ");
+	}
+
 	private void _updateJavaFromDocument(
 			String fileName, String originalContent, String javadocLessContent,
 			Document document)
@@ -917,7 +956,7 @@ public class JavadocFormatter {
 		Map<Integer, String> commentsMap = new TreeMap<Integer, String>();
 
 		commentsMap.put(
-			javaClass.getLineNumber(),
+			_getJavaClassLineNumber(javaClass),
 			_getJavaClassComment(rootElement, javaClass));
 
 		Map<String, Element> methodElementsMap = new HashMap<String, Element>();
