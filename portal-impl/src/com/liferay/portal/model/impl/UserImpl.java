@@ -14,6 +14,9 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.cache.Lifecycle;
+import com.liferay.portal.kernel.cache.ThreadLocalCache;
+import com.liferay.portal.kernel.cache.ThreadLocalCacheManager;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -442,17 +445,34 @@ public class UserImpl extends UserModelImpl implements User {
 		groupParams.put("usersGroups", new Long(getUserId()));
 		//groupParams.put("pageCount", StringPool.BLANK);
 
-		int count = GroupLocalServiceUtil.searchCount(
-			getCompanyId(), null, null, groupParams);
-
-		if (count > 0) {
+		ThreadLocalCache<Integer> groupCountCache =
+			ThreadLocalCacheManager.getCache(
+				_GROUP_COUNT_CACHE, Lifecycle.REQUEST);
+		String groupCountKey = Long.toString(getCompanyId()).
+			concat(StringPool.POUND).concat(Long.toString(getUserId()));
+		Integer groupCount = groupCountCache.get(groupCountKey);
+		if (groupCount == null) {
+			groupCount = GroupLocalServiceUtil.searchCount(
+				getCompanyId(), null, null, groupParams);
+			groupCountCache.put(groupCountKey, groupCount);
+		}
+		if (groupCount > 0) {
 			return true;
 		}
 
-		count = OrganizationLocalServiceUtil.getUserOrganizationsCount(
-			getUserId());
-
-		if (count > 0) {
+		ThreadLocalCache<Integer> organizationCountCache =
+			ThreadLocalCacheManager.getCache(
+			_ORGANIZATION_COUNT_CACHE, Lifecycle.REQUEST);
+		String organiztionCountKey = Long.toString(getUserId());
+		Integer organizationCount = organizationCountCache.get(
+			organiztionCountKey);
+		if (organizationCount == null) {
+			organizationCount =
+				OrganizationLocalServiceUtil.getUserOrganizationsCount(
+					getUserId());
+			organizationCountCache.put(organiztionCountKey, organizationCount);
+		}
+		if (organizationCount > 0) {
 			return true;
 		}
 
@@ -538,6 +558,11 @@ public class UserImpl extends UserModelImpl implements User {
 
 		super.setTimeZoneId(timeZoneId);
 	}
+
+	private static final String _GROUP_COUNT_CACHE = "GROUP_COUNT_CACHE";
+
+	private static final String _ORGANIZATION_COUNT_CACHE =
+		"ORGANIZATION_COUNT_CACHE";
 
 	private Locale _locale;
 	private boolean _passwordModified;

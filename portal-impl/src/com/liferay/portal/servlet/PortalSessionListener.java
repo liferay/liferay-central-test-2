@@ -14,6 +14,8 @@
 
 package com.liferay.portal.servlet;
 
+import com.liferay.portal.kernel.cache.Lifecycle;
+import com.liferay.portal.kernel.cache.ThreadLocalCacheManager;
 import com.liferay.portal.kernel.util.PortalInitableUtil;
 
 import javax.servlet.http.HttpSessionEvent;
@@ -38,6 +40,7 @@ public class PortalSessionListener implements HttpSessionListener {
 			new PortalSessionDestroyer(event);
 
 		PortalInitableUtil.init(portalSessionDestroyer);
+		ThreadLocalCacheManager.clearAll(Lifecycle.SESSION);
 	}
 
 }

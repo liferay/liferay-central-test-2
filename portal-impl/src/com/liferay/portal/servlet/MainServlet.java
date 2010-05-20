@@ -18,6 +18,8 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.deploy.hot.PluginPackageHotDeployListener;
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.events.StartupAction;
+import com.liferay.portal.kernel.cache.Lifecycle;
+import com.liferay.portal.kernel.cache.ThreadLocalCacheManager;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -1418,6 +1420,8 @@ public class MainServlet extends ActionServlet {
 
 		response.addHeader(
 			_LIFERAY_PORTAL_REQUEST_HEADER, ReleaseInfo.getReleaseInfo());
+
+		ThreadLocalCacheManager.clearAll(Lifecycle.REQUEST);
 	}
 
 	protected boolean processServicePre(
