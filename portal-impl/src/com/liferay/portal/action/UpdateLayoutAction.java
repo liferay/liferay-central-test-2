@@ -171,6 +171,7 @@ public class UpdateLayoutAction extends Action {
 
 			// LEP-3648
 
+			layoutTypePortlet.resetModes();
 			layoutTypePortlet.resetStates();
 
 			LayoutServiceUtil.updateLayout(
