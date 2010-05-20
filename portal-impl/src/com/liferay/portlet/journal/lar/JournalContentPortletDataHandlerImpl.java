@@ -414,26 +414,26 @@ public class JournalContentPortletDataHandlerImpl
 
 	private static final String _NAMESPACE = "journal";
 
-	private static final PortletDataHandlerBoolean _selectedArticles =
+	private static Log _log = LogFactoryUtil.getLog(
+		JournalContentPortletDataHandlerImpl.class);
+
+	private static PortletDataHandlerBoolean _comments =
+		new PortletDataHandlerBoolean(_NAMESPACE, "comments");
+
+	private static PortletDataHandlerBoolean _embeddedAssets =
+		new PortletDataHandlerBoolean(_NAMESPACE, "embedded-assets");
+
+	private static PortletDataHandlerBoolean _images =
+		new PortletDataHandlerBoolean(_NAMESPACE, "images");
+
+	private static PortletDataHandlerBoolean _ratings =
+		new PortletDataHandlerBoolean(_NAMESPACE, "ratings");
+
+	private static PortletDataHandlerBoolean _selectedArticles =
 		new PortletDataHandlerBoolean(
 			_NAMESPACE, "selected-web-content", true, true);
 
-	private static final PortletDataHandlerBoolean _embeddedAssets =
-		new PortletDataHandlerBoolean(_NAMESPACE, "embedded-assets");
-
-	private static final PortletDataHandlerBoolean _images =
-		new PortletDataHandlerBoolean(_NAMESPACE, "images");
-
-	private static final PortletDataHandlerBoolean _comments =
-		new PortletDataHandlerBoolean(_NAMESPACE, "comments");
-
-	private static final PortletDataHandlerBoolean _ratings =
-		new PortletDataHandlerBoolean(_NAMESPACE, "ratings");
-
-	private static final PortletDataHandlerBoolean _tags =
+	private static PortletDataHandlerBoolean _tags =
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
-
-	private static Log _log = LogFactoryUtil.getLog(
-		JournalContentPortletDataHandlerImpl.class);
 
 }

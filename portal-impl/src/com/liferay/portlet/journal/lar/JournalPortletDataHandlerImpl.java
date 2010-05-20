@@ -1871,33 +1871,33 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static final String _NAMESPACE = "journal";
 
-	private static final PortletDataHandlerBoolean _embeddedAssets =
-		new PortletDataHandlerBoolean(_NAMESPACE, "embedded-assets");
+	private static Log _log = LogFactoryUtil.getLog(
+		JournalPortletDataHandlerImpl.class);
 
-	private static final PortletDataHandlerBoolean _images =
-		new PortletDataHandlerBoolean(_NAMESPACE, "images");
-
-	private static final PortletDataHandlerBoolean _categories =
+	private static PortletDataHandlerBoolean _categories =
 		new PortletDataHandlerBoolean(_NAMESPACE, "categories");
 
-	private static final PortletDataHandlerBoolean _comments =
+	private static PortletDataHandlerBoolean _comments =
 		new PortletDataHandlerBoolean(_NAMESPACE, "comments");
 
-	private static final PortletDataHandlerBoolean _ratings =
+	private static PortletDataHandlerBoolean _embeddedAssets =
+		new PortletDataHandlerBoolean(_NAMESPACE, "embedded-assets");
+
+	private static PortletDataHandlerBoolean _images =
+		new PortletDataHandlerBoolean(_NAMESPACE, "images");
+
+	private static PortletDataHandlerBoolean _ratings =
 		new PortletDataHandlerBoolean(_NAMESPACE, "ratings");
 
-	private static final PortletDataHandlerBoolean _tags =
-		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
-
-	private static final PortletDataHandlerBoolean _articles =
-		new PortletDataHandlerBoolean(_NAMESPACE, "articles", true, false,
-		new PortletDataHandlerControl[] {_images, _comments, _ratings, _tags});
-
-	private static final PortletDataHandlerBoolean
+	private static PortletDataHandlerBoolean
 		_structuresTemplatesAndFeeds = new PortletDataHandlerBoolean(
 			_NAMESPACE, "structures-templates-and-feeds", true, true);
 
-	private static Log _log = LogFactoryUtil.getLog(
-		JournalPortletDataHandlerImpl.class);
+	private static PortletDataHandlerBoolean _tags =
+		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
+
+	private static PortletDataHandlerBoolean _articles =
+		new PortletDataHandlerBoolean(_NAMESPACE, "articles", true, false,
+		new PortletDataHandlerControl[] {_images, _comments, _ratings, _tags});
 
 }

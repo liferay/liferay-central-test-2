@@ -492,13 +492,13 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static final String _NAMESPACE = "polls";
 
-	private static final PortletDataHandlerBoolean _questions =
-		new PortletDataHandlerBoolean(_NAMESPACE, "questions", true, true);
-
-	private static final PortletDataHandlerBoolean _votes =
-		new PortletDataHandlerBoolean(_NAMESPACE, "votes");
-
 	private static Log _log = LogFactoryUtil.getLog(
 		PollsPortletDataHandlerImpl.class);
+
+	private static PortletDataHandlerBoolean _questions =
+		new PortletDataHandlerBoolean(_NAMESPACE, "questions", true, true);
+
+	private static PortletDataHandlerBoolean _votes =
+		new PortletDataHandlerBoolean(_NAMESPACE, "votes");
 
 }

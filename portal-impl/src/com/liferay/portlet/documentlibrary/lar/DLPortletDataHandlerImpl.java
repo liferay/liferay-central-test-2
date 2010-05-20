@@ -953,29 +953,29 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static final String _NAMESPACE = "document_library";
 
-	private static final PortletDataHandlerBoolean _foldersAndDocuments =
+	private static Log _log = LogFactoryUtil.getLog(
+		DLPortletDataHandlerImpl.class);
+
+	private static PortletDataHandlerBoolean _categories =
+		new PortletDataHandlerBoolean(_NAMESPACE, "categories");
+
+	private static PortletDataHandlerBoolean _comments =
+		new PortletDataHandlerBoolean(_NAMESPACE, "comments");
+
+	private static PortletDataHandlerBoolean _foldersAndDocuments =
 		new PortletDataHandlerBoolean(
 			_NAMESPACE, "folders-and-documents", true, true);
 
-	private static final PortletDataHandlerBoolean _ranks =
+	private static PortletDataHandlerBoolean _ranks =
 		new PortletDataHandlerBoolean(_NAMESPACE, "ranks");
 
-	private static final PortletDataHandlerBoolean _shortcuts=
-		new PortletDataHandlerBoolean(_NAMESPACE, "shortcuts");
-
-	private static final PortletDataHandlerBoolean _categories =
-		new PortletDataHandlerBoolean(_NAMESPACE, "categories");
-
-	private static final PortletDataHandlerBoolean _comments =
-		new PortletDataHandlerBoolean(_NAMESPACE, "comments");
-
-	private static final PortletDataHandlerBoolean _ratings =
+	private static PortletDataHandlerBoolean _ratings =
 		new PortletDataHandlerBoolean(_NAMESPACE, "ratings");
 
-	private static final PortletDataHandlerBoolean _tags =
-		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
+	private static PortletDataHandlerBoolean _shortcuts=
+		new PortletDataHandlerBoolean(_NAMESPACE, "shortcuts");
 
-	private static Log _log = LogFactoryUtil.getLog(
-		DLPortletDataHandlerImpl.class);
+	private static PortletDataHandlerBoolean _tags =
+		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
 
 }

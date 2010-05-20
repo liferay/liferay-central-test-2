@@ -91,7 +91,7 @@ public class PageCommentsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static final String _NAMESPACE = "page_comments";
 
-	private static final PortletDataHandlerBoolean _comments =
+	private static PortletDataHandlerBoolean _comments =
 		new PortletDataHandlerBoolean(_NAMESPACE, "comments", true, true);
 
 }

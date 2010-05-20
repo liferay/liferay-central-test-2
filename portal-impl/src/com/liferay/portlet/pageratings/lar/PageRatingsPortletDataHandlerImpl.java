@@ -92,7 +92,7 @@ public class PageRatingsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static final String _NAMESPACE = "page_ratings";
 
-	private static final PortletDataHandlerBoolean _ratings =
+	private static PortletDataHandlerBoolean _ratings =
 		new PortletDataHandlerBoolean(_NAMESPACE, "ratings", true, true);
 
 }
