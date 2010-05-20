@@ -658,7 +658,7 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 
 	Liferay.Util.toggleSelectBox('<portlet:namespace />anyAssetType','false','<portlet:namespace />classNamesBoxes');
 	Liferay.Util.toggleBoxes('<portlet:namespace />enableRSSCheckbox','<portlet:namespace />rssOptions');
-	
+
 	Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />selectionStyle);
 </aui:script>
 
