@@ -76,7 +76,7 @@
 
 .lfr-actions .lfr-trigger strong a {
 	text-decoration: none;
-	padding: 2px 5px 2px 20px;
+	padding: 2px 5px 2px 15px;
 	vertical-align: middle;
 }
 
