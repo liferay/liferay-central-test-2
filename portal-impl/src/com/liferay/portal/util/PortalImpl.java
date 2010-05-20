@@ -1279,45 +1279,14 @@ public class PortalImpl implements Portal {
 	public HttpServletRequest getHttpServletRequest(
 		PortletRequest portletRequest) {
 
-		if (portletRequest instanceof PortletRequestImpl) {
-			PortletRequestImpl portletRequestImpl =
-				(PortletRequestImpl)portletRequest;
+		PortletRequestImpl portletRequestImpl =
+			PortletRequestImpl.getPortletRequestImpl(portletRequest);
 
-			return portletRequestImpl.getHttpServletRequest();
-		}
-		else if (portletRequest instanceof PortletRequestWrapper) {
-			PortletRequestWrapper portletRequestWrapper =
-				(PortletRequestWrapper)portletRequest;
-
-			return getHttpServletRequest(portletRequestWrapper.getRequest());
-		}
-
-		throw new RuntimeException(
-			"Unable to get the HTTP servlet request from " +
-				portletRequest.getClass().getName());
+		return portletRequestImpl.getHttpServletRequest();
 	}
 
 	public HttpServletResponse getHttpServletResponse(
 		PortletResponse portletResponse) {
-
-		if (portletResponse instanceof ActionResponseImpl) {
-			ActionResponseImpl actionResponseImpl =
-				(ActionResponseImpl)portletResponse;
-
-			return actionResponseImpl.getHttpServletResponse();
-		}
-		else if (portletResponse instanceof RenderResponseImpl) {
-			RenderResponseImpl renderResponseImpl =
-				(RenderResponseImpl)portletResponse;
-
-			return renderResponseImpl.getHttpServletResponse();
-		}
-		else if (portletResponse instanceof PortletResponseWrapper) {
-			PortletResponseWrapper portletResponseWrapper =
-				(PortletResponseWrapper)portletResponse;
-
-			return getHttpServletResponse(portletResponseWrapper.getResponse());
-		}
 
 		PortletResponseImpl portletResponseImpl =
 			PortletResponseImpl.getPortletResponseImpl(portletResponse);
