@@ -848,6 +848,10 @@ public class JavadocFormatter {
 		String[] lines = StringUtil.split(content, "\n");
 
 		for (int lineNumber : lineNumbers) {
+			if (lineNumber == 0) {
+				continue;
+			}
+
 			int pos = lineNumber - 2;
 
 			String line = lines[pos].trim();
