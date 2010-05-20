@@ -134,7 +134,7 @@ if (Validator.isNull(selectionStyle)) {
 
 boolean defaultScope = GetterUtil.getBoolean(preferences.getValue("default-scope", null), true);
 
-long[] groupIds = AssetPublisherUtil.getGroupIdsFromPreferences(preferences, scopeGroupId, layout);
+long[] groupIds = AssetPublisherUtil.getGroupIds(preferences, scopeGroupId, layout);
 
 long[] availableClassNameIds = AssetRendererFactoryRegistryUtil.getClassNameIds();
 
@@ -147,7 +147,7 @@ AssetEntryQuery	assetEntryQuery = new AssetEntryQuery();
 String[] allAssetTagNames = new String[0];
 
 if (selectionStyle.equals("dynamic")) {
-	assetEntryQuery =  AssetPublisherUtil.getAssetEntryQuery(preferences, scopeGroupId);
+	assetEntryQuery = AssetPublisherUtil.getAssetEntryQuery(preferences, scopeGroupId);
 
 	allAssetTagNames = AssetPublisherUtil.getAssetTagNames(preferences, scopeGroupId);
 }

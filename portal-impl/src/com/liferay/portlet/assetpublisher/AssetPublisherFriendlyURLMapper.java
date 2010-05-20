@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.PortletConstants;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 
 import java.util.Map;
@@ -44,7 +45,30 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 		WindowState windowState = portletURL.getWindowState();
 
-		if (strutsAction.equals("/asset_publisher/view_content")) {
+		if (strutsAction.equals("/asset_publisher/rss")) {
+			String portletId = portletURL.getPortletId();
+
+			if (Validator.isNotNull(portletId)) {
+				if (portletId.equals(_PORTLET_DEFAULT_INSTANCE)) {
+					portletId = _PORTLET_ID;
+				}
+
+				int pos = portletId.indexOf(
+					PortletConstants.INSTANCE_SEPARATOR);
+
+				String instanceId = null;
+
+				if (pos > 0) {
+					instanceId = portletId.substring(pos + 10);
+				}
+				else {
+					instanceId = portletId;
+				}
+
+				friendlyURLPath = "/asset_publisher/" + instanceId + "/rss";
+			}
+		}
+		else if (strutsAction.equals("/asset_publisher/view_content")) {
 			String portletId = portletURL.getPortletId();
 			String assetEntryId = portletURL.getParameter("assetEntryId");
 			String type = GetterUtil.getString(
@@ -95,30 +119,6 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 				portletURL.addParameterIncludedInPath("assetEntryId");
 			}
 		}
-		else if (strutsAction.equals("/asset_publisher/rss")) {
-			String portletId = portletURL.getPortletId();
-
-			if (Validator.isNotNull(portletId)) {
-				if (portletId.equals(_PORTLET_DEFAULT_INSTANCE)) {
-					portletId = _PORTLET_ID;
-				}
-
-				int pos = portletId.indexOf(
-					PortletConstants.INSTANCE_SEPARATOR);
-
-				String instanceId = null;
-
-				if (pos > 0) {
-					instanceId = portletId.substring(pos + 10);
-				}
-				else {
-					instanceId = portletId;
-				}
-
-				friendlyURLPath =
-					"/asset_publisher/" + instanceId + "/rss";
-			}
-		}
 
 		if (Validator.isNotNull(friendlyURLPath)) {
 			if (windowState.equals(WindowState.MAXIMIZED)) {
@@ -159,6 +159,8 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 			String portletId =
 				_PORTLET_ID + PortletConstants.INSTANCE_SEPARATOR + instanceId;
 
+			String namespace = PortalUtil.getPortletNamespace(portletId);
+
 			params.put("p_p_id", new String[] {portletId});
 
 			if (friendlyURLPath.indexOf("maximized", x) != -1) {
@@ -166,9 +168,6 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 			}
 
 			params.put("p_p_mode", new String[] {PortletMode.VIEW.toString()});
-
-			String namespace =
-				StringPool.UNDERLINE + portletId + StringPool.UNDERLINE;
 
 			if (type.equals("rss")) {
 				params.put(
@@ -195,7 +194,6 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 				params.put(
 					namespace + "struts_action",
 					new String[] {"/asset_publisher/view_content"});
-
 				params.put(namespace + "type", new String[] {type});
 
 				if (Validator.isNotNull(assetEntryId)) {

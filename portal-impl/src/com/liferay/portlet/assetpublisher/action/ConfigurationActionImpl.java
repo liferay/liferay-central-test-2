@@ -406,7 +406,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			actionRequest, "enableRSS");
 		int rssDelta = ParamUtil.getInteger(actionRequest, "rssDelta");
 		String rssDisplayStyle = ParamUtil.getString(
-				actionRequest, "rssDisplayStyle");
+			actionRequest, "rssDisplayStyle");
 		String rssFormat = ParamUtil.getString(actionRequest, "rssFormat");
 		String rssName = ParamUtil.getString(actionRequest, "rssName");
 

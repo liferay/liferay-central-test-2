@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -83,6 +84,12 @@ public class AssetPublisherUtil {
 		preferences.store();
 	}
 
+	public static void addRecentFolderId(
+		PortletRequest portletRequest, String className, long classPK) {
+
+		_getRecentFolderIds(portletRequest).put(className, classPK);
+	}
+
 	public static void addSelection(
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
@@ -115,70 +122,6 @@ public class AssetPublisherUtil {
 		}
 
 		preferences.setValues("asset-entry-xml", assetEntryXmls);
-	}
-
-	public static void addRecentFolderId(
-		PortletRequest portletRequest, String className, long classPK) {
-
-		_getRecentFolderIds(portletRequest).put(className, classPK);
-	}
-
-	public static long getRecentFolderId(
-		PortletRequest portletRequest, String className) {
-
-		Long classPK = _getRecentFolderIds(portletRequest).get(className);
-
-		if (classPK == null) {
-			return 0;
-		}
-		else {
-			return classPK.longValue();
-		}
-	}
-
-	public static void removeAndStoreSelection(
-			List<Long> assetEntryIds, PortletPreferences preferences)
-		throws Exception {
-
-		if (assetEntryIds.size() == 0) {
-			return;
-		}
-
-		String[] assetEntryXmls = preferences.getValues(
-			"asset-entry-xml", new String[0]);
-
-		List<String> assetEntryXmlsList = ListUtil.fromArray(assetEntryXmls);
-
-		Iterator<String> itr = assetEntryXmlsList.iterator();
-
-		while (itr.hasNext()) {
-			String assetEntryXml = itr.next();
-
-			Document doc = SAXReaderUtil.read(assetEntryXml);
-
-			Element root = doc.getRootElement();
-
-			long assetEntryId = GetterUtil.getLong(
-				root.element("asset-entry-id").getText());
-
-			if (assetEntryIds.contains(assetEntryId)) {
-				itr.remove();
-			}
-		}
-
-		preferences.setValues(
-			"asset-entry-xml",
-			assetEntryXmlsList.toArray(new String[assetEntryXmlsList.size()]));
-
-		preferences.store();
-	}
-
-	public static void removeRecentFolderId(
-		PortletRequest portletRequest, String className, long classPK) {
-
-		if (getRecentFolderId(portletRequest, className) == classPK) {
-			_getRecentFolderIds(portletRequest).remove(className);
-		}
 	}
 
 	public static AssetEntryQuery getAssetEntryQuery(
@@ -317,7 +260,7 @@ public class AssetPublisherUtil {
 		return classNameIds;
 	}
 
-	public static long[] getGroupIdsFromPreferences(
+	public static long[] getGroupIds(
 		PortletPreferences preferences, long scopeGroupId, Layout layout) {
 
 		long[] groupIds = new long[] {scopeGroupId};
@@ -327,8 +270,8 @@ public class AssetPublisherUtil {
 
 		if (!defaultScope) {
 			String[] scopeIds = preferences.getValues(
-				"scope-ids", new String[]
-					{"group" + StringPool.UNDERLINE + scopeGroupId});
+				"scope-ids",
+				new String[] {"group" + StringPool.UNDERLINE + scopeGroupId});
 
 			groupIds = new long[scopeIds.length];
 
@@ -338,16 +281,17 @@ public class AssetPublisherUtil {
 						scopeIds[i], StringPool.UNDERLINE);
 
 					if (scopeIdFragments[0].equals("Layout")) {
-						long scopeIdLayoutId =
-							GetterUtil.getLong(scopeIdFragments[1]);
+						long scopeIdLayoutId = GetterUtil.getLong(
+							scopeIdFragments[1]);
 
 						Layout scopeIdLayout =
 							LayoutLocalServiceUtil.getLayout(
 								scopeGroupId, layout.isPrivateLayout(),
 								scopeIdLayoutId);
 
-						groupIds[i] =
-							scopeIdLayout.getScopeGroup().getGroupId();
+						Group scopeIdGroup = scopeIdLayout.getScopeGroup();
+
+						groupIds[i] = scopeIdGroup.getGroupId();
 					}
 					else {
 						long scopeIdGroupId = GetterUtil.getLong(
@@ -356,13 +300,71 @@ public class AssetPublisherUtil {
 						groupIds[i] = scopeIdGroupId;
 					}
 				}
-				catch(Exception e) {
+				catch (Exception e) {
 					continue;
 				}
 			}
 		}
 
 		return groupIds;
+	}
+
+	public static long getRecentFolderId(
+		PortletRequest portletRequest, String className) {
+
+		Long classPK = _getRecentFolderIds(portletRequest).get(className);
+
+		if (classPK == null) {
+			return 0;
+		}
+		else {
+			return classPK.longValue();
+		}
+	}
+
+	public static void removeAndStoreSelection(
+			List<Long> assetEntryIds, PortletPreferences preferences)
+		throws Exception {
+
+		if (assetEntryIds.size() == 0) {
+			return;
+		}
+
+		String[] assetEntryXmls = preferences.getValues(
+			"asset-entry-xml", new String[0]);
+
+		List<String> assetEntryXmlsList = ListUtil.fromArray(assetEntryXmls);
+
+		Iterator<String> itr = assetEntryXmlsList.iterator();
+
+		while (itr.hasNext()) {
+			String assetEntryXml = itr.next();
+
+			Document doc = SAXReaderUtil.read(assetEntryXml);
+
+			Element root = doc.getRootElement();
+
+			long assetEntryId = GetterUtil.getLong(
+				root.element("asset-entry-id").getText());
+
+			if (assetEntryIds.contains(assetEntryId)) {
+				itr.remove();
+			}
+		}
+
+		preferences.setValues(
+			"asset-entry-xml",
+			assetEntryXmlsList.toArray(new String[assetEntryXmlsList.size()]));
+
+		preferences.store();
+	}
+
+	public static void removeRecentFolderId(
+		PortletRequest portletRequest, String className, long classPK) {
+
+		if (getRecentFolderId(portletRequest, className) == classPK) {
+			_getRecentFolderIds(portletRequest).remove(className);
+		}
 	}
 
 	private static String _getAssetEntryXml(

@@ -20,11 +20,11 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.service.AssetEntryServiceUtil;
 import com.liferay.portlet.asset.service.persistence.AssetEntryQuery;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
@@ -66,16 +66,54 @@ public class RSSAction extends PortletAction {
 		}
 	}
 
-	protected byte[] getRSS(PortletRequest request) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+	protected String getEntryURL(PortletRequest portletRequest)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long scopeGroupId = themeDisplay.getScopeGroupId();
+		Layout layout = themeDisplay.getLayout();
 
-		PortletPreferences preferences = request.getPreferences();
+		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append(PortalUtil.getLayoutURL(layout, themeDisplay));
+		sb.append(Portal.FRIENDLY_URL_SEPARATOR);
+		sb.append("asset_publisher/");
+		sb.append(portletDisplay.getInstanceId());
+		sb.append(StringPool.SLASH);
+
+		return sb.toString();
+	}
+
+	protected String getFeedURL(PortletRequest portletRequest)
+		throws Exception {
+
+		String feedURL = getFeedURL(portletRequest);
+
+		return feedURL.concat("rss");
+	}
+
+	protected byte[] getRSS(PortletRequest portletRequest) throws Exception {
+		PortletPreferences preferences = portletRequest.getPreferences();
 
 		String selectionStyle = preferences.getValue(
 			"selection-style", "dynamic");
+
+		if (!selectionStyle.equals("dynamic")) {
+			return new byte[0];
+		}
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long[] groupIds = AssetPublisherUtil.getGroupIds(
+			preferences, themeDisplay.getScopeGroupId(),
+			themeDisplay.getLayout());
+
+		boolean excludeZeroViewCount = GetterUtil.getBoolean(
+			preferences.getValue("exclude-zero-view-count", "0"));
 
 		int rssDelta = GetterUtil.getInteger(
 			preferences.getValue("rss-delta", "20"));
@@ -87,58 +125,19 @@ public class RSSAction extends PortletAction {
 		String rssFormatType = RSSUtil.getFormatType(rssFormat);
 		double rssFormatVersion = RSSUtil.getFormatVersion(rssFormat);
 
-		Layout layout = themeDisplay.getLayout();
+		AssetEntryQuery assetEntryQuery =
+			AssetPublisherUtil.getAssetEntryQuery(
+				preferences, themeDisplay.getScopeGroupId());
 
-		String instanceId = themeDisplay.getPortletDisplay().getInstanceId();
+		assetEntryQuery.setEnd(rssDelta);
+		assetEntryQuery.setExcludeZeroViewCount(excludeZeroViewCount);
+		assetEntryQuery.setGroupIds(groupIds);
+		assetEntryQuery.setStart(0);
 
-		StringBundler sb = new StringBundler(5);
-
-		sb.append(PortalUtil.getLayoutURL(layout, themeDisplay));
-		sb.append(Portal.FRIENDLY_URL_SEPARATOR);
-		sb.append("asset_publisher/");
-		sb.append(instanceId);
-		sb.append("/rss");
-
-		String feedURL =sb.toString();
-
-		sb = new StringBundler(5);
-
-		sb.append(PortalUtil.getLayoutURL(layout, themeDisplay));
-		sb.append(Portal.FRIENDLY_URL_SEPARATOR);
-		sb.append("asset_publisher/");
-		sb.append(instanceId);
-		sb.append(StringPool.SLASH);
-
-		String entryURL = sb.toString();
-
-		String rss = StringPool.BLANK;
-
-		long[] groupIds = AssetPublisherUtil.getGroupIdsFromPreferences(
-			preferences, scopeGroupId, layout);
-
-		long[] availableClassNameIds =
-			AssetRendererFactoryRegistryUtil.getClassNameIds();
-		long[] classNameIds = AssetPublisherUtil.getClassNameIds(
-			preferences, availableClassNameIds);
-
-		if (selectionStyle.equals("dynamic")) {
-			boolean excludeZeroViewCount = GetterUtil.getBoolean(
-				preferences.getValue("exclude-zero-view-count", "0"));
-
-			AssetEntryQuery assetEntryQuery =
-				AssetPublisherUtil.getAssetEntryQuery(
-					preferences, scopeGroupId);
-
-			assetEntryQuery.setGroupIds(groupIds);
-			assetEntryQuery.setEnd(rssDelta);
-			assetEntryQuery.setExcludeZeroViewCount(excludeZeroViewCount);
-			assetEntryQuery.setStart(0);
-
-			rss = AssetEntryServiceUtil.getEntriesRSS(
-				rssName, assetEntryQuery, rssFormatType, rssFormatVersion,
-				rssDisplayStyle, feedURL, entryURL);
-
-		}
+		String rss = AssetEntryServiceUtil.getEntriesRSS(
+			assetEntryQuery, rssName, rssFormatType, rssFormatVersion,
+			rssDisplayStyle, getFeedURL(portletRequest),
+			getEntryURL(portletRequest));
 
 		return rss.getBytes(StringPool.UTF8);
 	}

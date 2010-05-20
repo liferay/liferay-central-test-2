@@ -360,24 +360,24 @@ public class AssetEntryServiceHttp {
 	}
 
 	public static java.lang.String getEntriesRSS(HttpPrincipal httpPrincipal,
-		java.lang.String name,
 		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
-		java.lang.String type, double version, java.lang.String displayStyle,
-		java.lang.String feedURL, java.lang.String tagURL)
+		java.lang.String name, java.lang.String type, double version,
+		java.lang.String displayStyle, java.lang.String feedURL,
+		java.lang.String tagURL)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = name;
-
-			if (name == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = entryQuery;
+			Object paramObj0 = entryQuery;
 
 			if (entryQuery == null) {
-				paramObj1 = new NullWrapper(
+				paramObj0 = new NullWrapper(
 						"com.liferay.portlet.asset.service.persistence.AssetEntryQuery");
+			}
+
+			Object paramObj1 = name;
+
+			if (name == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
 			Object paramObj2 = type;

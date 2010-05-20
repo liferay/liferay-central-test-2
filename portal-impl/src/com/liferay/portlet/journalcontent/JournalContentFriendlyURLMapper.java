@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 
 import java.util.Map;
@@ -107,8 +108,7 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 
 		String portletId = friendlyURLPath.substring(w + 1, x);
 
-		String namespace =
-			StringPool.UNDERLINE + portletId + StringPool.UNDERLINE;
+		String namespace = PortalUtil.getPortletNamespace(portletId);
 
 		if (portletId.equals(_PORTLET_ID)) {
 			portletId = _PORTLET_DEFAULT_INSTANCE;

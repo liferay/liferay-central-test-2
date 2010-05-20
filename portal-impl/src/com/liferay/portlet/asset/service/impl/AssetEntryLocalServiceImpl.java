@@ -87,7 +87,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 		assetLinkLocalService.deleteLinks(entry.getEntryId());
 
-		// Social equity
+		// Social
 
 		socialEquityLogLocalService.deactivateEquityLogs(entry.getEntryId());
 	}
