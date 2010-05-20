@@ -89,7 +89,9 @@ mail.session.jndi.name=
 
 axis.servlet.hosts.allowed=
 
-tunnel.servlet.hosts.allowed=</echo>
+tunnel.servlet.hosts.allowed=
+
+index.on.startup=true</echo>
 
 		<if>
 			<equals arg1="${db.type}" arg2="oracle" />
