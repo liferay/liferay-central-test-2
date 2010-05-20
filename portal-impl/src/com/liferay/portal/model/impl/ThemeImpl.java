@@ -461,7 +461,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	private String _templatesPath = "${root-path}/templates";
 	private String _cssPath = "${root-path}/css";
 	private String _imagesPath = "${root-path}/images";
-	private String _javaScriptPath = "${root-path}/javascript";
+	private String _javaScriptPath = "${root-path}/js";
 	private String _virtualPath = StringPool.BLANK;
 	private String _templateExtension = "vm";
 	private Properties _settings = new Properties();
