@@ -20,6 +20,7 @@ import com.liferay.portal.CompanyVirtualHostException;
 import com.liferay.portal.CompanyWebIdException;
 import com.liferay.portal.NoSuchCompanyException;
 import com.liferay.portal.NoSuchLayoutSetException;
+import com.liferay.portal.NoSuchShardException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -196,6 +197,16 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				catch (PortletException pe) {
 					throw new SystemException(pe);
 				}
+			}
+		}
+		else {
+			try {
+				shardLocalService.getShard(
+					Company.class.getName(), company.getCompanyId());
+			}
+			catch (NoSuchShardException nsse) {
+				shardLocalService.addShard(
+					Company.class.getName(), company.getCompanyId(), shardName);
 			}
 		}
 
