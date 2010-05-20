@@ -96,11 +96,15 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	public PortletDataHandlerControl[] getExportControls() {
-		return new PortletDataHandlerControl[] {_events};
+		return new PortletDataHandlerControl[] {
+			_events, _categories, _comments, _tags
+		};
 	}
 
 	public PortletDataHandlerControl[] getImportControls() {
-		return new PortletDataHandlerControl[] {_events};
+		return new PortletDataHandlerControl[] {
+			_events, _categories, _comments, _tags
+		};
 	}
 
 	public PortletPreferences importData(
@@ -156,9 +160,21 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		eventEl.addAttribute("path", path);
 
-		event.setUserUuid(event.getUserUuid());
-
 		context.addPermissions(CalEvent.class, event.getEventId());
+
+		if (context.getBooleanParameter(_NAMESPACE, "categories")) {
+			context.addAssetCategories(CalEvent.class, event.getEventId());
+		}
+
+		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
+			context.addComments(CalEvent.class, event.getEventId());
+		}
+
+		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
+			context.addAssetTags(CalEvent.class, event.getEventId());
+		}
+
+		event.setUserUuid(event.getUserUuid());
 
 		context.addZipEntry(path, event);
 	}
@@ -219,10 +235,25 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 			endDateYear = endCal.get(Calendar.YEAR);
 		}
 
+		long[] assetCategoryIds = null;
+		String[] assetTagNames = null;
+
+		if (context.getBooleanParameter(_NAMESPACE, "categories")) {
+			assetCategoryIds = context.getAssetCategoryIds(
+				CalEvent.class, event.getEventId());
+		}
+
+		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
+			assetTagNames = context.getAssetTagNames(
+				CalEvent.class, event.getEventId());
+		}
+
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setAssetCategoryIds(assetCategoryIds);
+		serviceContext.setAssetTagNames(assetTagNames);
 		serviceContext.setCreateDate(event.getCreateDate());
 		serviceContext.setModifiedDate(event.getModifiedDate());
 		serviceContext.setScopeGroupId(context.getGroupId());
@@ -272,13 +303,28 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 				event.getSecondReminder(), serviceContext);
 		}
 
+		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
+			context.importComments(
+				CalEvent.class, event.getEventId(),
+				importedEvent.getEventId(), context.getGroupId());
+		}
+
 		context.importPermissions(
 			CalEvent.class, event.getEventId(), importedEvent.getEventId());
 	}
 
 	private static final String _NAMESPACE = "calendar";
 
+	private static final PortletDataHandlerBoolean _categories =
+		new PortletDataHandlerBoolean(_NAMESPACE, "categories");
+
+	private static final PortletDataHandlerBoolean _comments =
+		new PortletDataHandlerBoolean(_NAMESPACE, "comments");
+
 	private static final PortletDataHandlerBoolean _events =
 		new PortletDataHandlerBoolean(_NAMESPACE, "events", true, true);
+
+	private static final PortletDataHandlerBoolean _tags =
+		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
 
 }
