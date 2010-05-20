@@ -198,7 +198,7 @@ else if (permissionChecker.isCompanyAdmin()) {
 	filterManageableUserGroups = false;
 }
 
-boolean includeSystemPortlets = false;
+boolean includeSystemPortlets = true;
 
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>

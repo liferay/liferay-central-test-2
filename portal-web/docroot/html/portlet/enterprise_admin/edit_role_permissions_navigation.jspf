@@ -131,7 +131,26 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 
 				<%
 				for (Portlet portlet : portlets) {
-					if (Validator.isNull(portlet.getPortletId()) || (hiddenPortletIds.contains(portlet.getPortletId()) && Validator.isNull(portlet.getControlPanelEntryCategory()))) {
+					if (Validator.isNull(portlet.getPortletId()) || (hiddenPortletIds.contains(portlet.getPortletId())) || portlet.isSystem()) {
+						continue;
+					}
+
+					editPermissionsURL.setParameter("portletResource", portlet.getPortletId());
+					editPermissionsURL.setParameter("showModelResources", "0");
+				%>
+
+					<aui:option label="<%= PortalUtil.getPortletTitle(portlet, application, locale) %>" selected="<%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources) %>" value="<%= editPermissionsURL.toString() %>" />
+
+				<%
+				}
+				%>
+
+			</optgroup>
+			<optgroup label="<liferay-ui:message key="control-panel" />">
+
+				<%
+				for (Portlet portlet : portlets) {
+					if (Validator.isNull(portlet.getPortletId()) || Validator.isNull(portlet.getControlPanelEntryCategory())) {
 						continue;
 					}
 
