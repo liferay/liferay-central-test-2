@@ -90,7 +90,7 @@ public class RSSAction extends PortletAction {
 	protected String getFeedURL(PortletRequest portletRequest)
 		throws Exception {
 
-		String feedURL = getFeedURL(portletRequest);
+		String feedURL = getEntryURL(portletRequest);
 
 		return feedURL.concat("rss");
 	}
