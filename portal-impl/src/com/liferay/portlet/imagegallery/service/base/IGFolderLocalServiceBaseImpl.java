@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupService;
 import com.liferay.portal.service.ImageLocalService;
+import com.liferay.portal.service.ImageService;
 import com.liferay.portal.service.LayoutLocalService;
 import com.liferay.portal.service.LayoutService;
 import com.liferay.portal.service.ResourceLocalService;
@@ -246,6 +247,14 @@ public abstract class IGFolderLocalServiceBaseImpl
 		this.imageLocalService = imageLocalService;
 	}
 
+	public ImageService getImageService() {
+		return imageService;
+	}
+
+	public void setImageService(ImageService imageService) {
+		this.imageService = imageService;
+	}
+
 	public ImagePersistence getImagePersistence() {
 		return imagePersistence;
 	}
@@ -417,6 +426,8 @@ public abstract class IGFolderLocalServiceBaseImpl
 	protected GroupFinder groupFinder;
 	@BeanReference(type = ImageLocalService.class)
 	protected ImageLocalService imageLocalService;
+	@BeanReference(type = ImageService.class)
+	protected ImageService imageService;
 	@BeanReference(type = ImagePersistence.class)
 	protected ImagePersistence imagePersistence;
 	@BeanReference(type = LayoutLocalService.class)

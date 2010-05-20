@@ -28,6 +28,12 @@ public class IGImageFinderUtil {
 		return getFinder().countByG_F(groupId, folderIds);
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGImage fetchByAnyImageId(
+		long imageId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().fetchByAnyImageId(imageId);
+	}
+
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByNoAssets()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByNoAssets();

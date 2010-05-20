@@ -84,6 +84,13 @@ Liferay.Service.registerClass(
 );
 
 Liferay.Service.registerClass(
+	Liferay.Service.Portal, "Image",
+	{
+		getImage: true
+	}
+);
+
+Liferay.Service.registerClass(
 	Liferay.Service.Portal, "Layout",
 	{
 		addLayout: true,

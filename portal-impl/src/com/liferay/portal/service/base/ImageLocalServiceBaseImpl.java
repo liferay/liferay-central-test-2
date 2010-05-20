@@ -41,6 +41,7 @@ import com.liferay.portal.service.EmailAddressService;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupService;
 import com.liferay.portal.service.ImageLocalService;
+import com.liferay.portal.service.ImageService;
 import com.liferay.portal.service.LayoutLocalService;
 import com.liferay.portal.service.LayoutPrototypeLocalService;
 import com.liferay.portal.service.LayoutPrototypeService;
@@ -177,6 +178,11 @@ import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence;
 import com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence;
+
+import com.liferay.portlet.imagegallery.service.IGImageLocalService;
+import com.liferay.portlet.imagegallery.service.IGImageService;
+import com.liferay.portlet.imagegallery.service.persistence.IGImageFinder;
+import com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence;
 
 import java.util.List;
 
@@ -476,6 +482,14 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService {
 
 	public void setImageLocalService(ImageLocalService imageLocalService) {
 		this.imageLocalService = imageLocalService;
+	}
+
+	public ImageService getImageService() {
+		return imageService;
+	}
+
+	public void setImageService(ImageService imageService) {
+		this.imageService = imageService;
 	}
 
 	public ImagePersistence getImagePersistence() {
@@ -1564,6 +1578,38 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService {
 		this.counterLocalService = counterLocalService;
 	}
 
+	public IGImageLocalService getIGImageLocalService() {
+		return igImageLocalService;
+	}
+
+	public void setIGImageLocalService(IGImageLocalService igImageLocalService) {
+		this.igImageLocalService = igImageLocalService;
+	}
+
+	public IGImageService getIGImageService() {
+		return igImageService;
+	}
+
+	public void setIGImageService(IGImageService igImageService) {
+		this.igImageService = igImageService;
+	}
+
+	public IGImagePersistence getIGImagePersistence() {
+		return igImagePersistence;
+	}
+
+	public void setIGImagePersistence(IGImagePersistence igImagePersistence) {
+		this.igImagePersistence = igImagePersistence;
+	}
+
+	public IGImageFinder getIGImageFinder() {
+		return igImageFinder;
+	}
+
+	public void setIGImageFinder(IGImageFinder igImageFinder) {
+		this.igImageFinder = igImageFinder;
+	}
+
 	protected void runSQL(String sql) throws SystemException {
 		try {
 			DataSource dataSource = imagePersistence.getDataSource();
@@ -1632,6 +1678,8 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService {
 	protected GroupFinder groupFinder;
 	@BeanReference(type = ImageLocalService.class)
 	protected ImageLocalService imageLocalService;
+	@BeanReference(type = ImageService.class)
+	protected ImageService imageService;
 	@BeanReference(type = ImagePersistence.class)
 	protected ImagePersistence imagePersistence;
 	@BeanReference(type = LayoutLocalService.class)
@@ -1886,4 +1934,12 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService {
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	@BeanReference(type = IGImageLocalService.class)
+	protected IGImageLocalService igImageLocalService;
+	@BeanReference(type = IGImageService.class)
+	protected IGImageService igImageService;
+	@BeanReference(type = IGImagePersistence.class)
+	protected IGImagePersistence igImagePersistence;
+	@BeanReference(type = IGImageFinder.class)
+	protected IGImageFinder igImageFinder;
 }

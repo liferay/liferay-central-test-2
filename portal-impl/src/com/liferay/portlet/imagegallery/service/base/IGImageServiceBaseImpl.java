@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.ImageLocalService;
+import com.liferay.portal.service.ImageService;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
@@ -138,6 +139,14 @@ public abstract class IGImageServiceBaseImpl extends PrincipalBean
 
 	public void setImageLocalService(ImageLocalService imageLocalService) {
 		this.imageLocalService = imageLocalService;
+	}
+
+	public ImageService getImageService() {
+		return imageService;
+	}
+
+	public void setImageService(ImageService imageService) {
+		this.imageService = imageService;
 	}
 
 	public ImagePersistence getImagePersistence() {
@@ -400,6 +409,8 @@ public abstract class IGImageServiceBaseImpl extends PrincipalBean
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = ImageLocalService.class)
 	protected ImageLocalService imageLocalService;
+	@BeanReference(type = ImageService.class)
+	protected ImageService imageService;
 	@BeanReference(type = ImagePersistence.class)
 	protected ImagePersistence imagePersistence;
 	@BeanReference(type = ResourceLocalService.class)

@@ -175,16 +175,20 @@ import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence;
 import com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence;
 
+import com.liferay.portlet.imagegallery.service.IGImageLocalService;
+import com.liferay.portlet.imagegallery.service.IGImageService;
+import com.liferay.portlet.imagegallery.service.persistence.IGImageFinder;
+import com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence;
+
 import javax.sql.DataSource;
 
 /**
- * <a href="PluginSettingServiceBaseImpl.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="ImageServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public abstract class PluginSettingServiceBaseImpl extends PrincipalBean
-	implements PluginSettingService {
+public abstract class ImageServiceBaseImpl extends PrincipalBean
+	implements ImageService {
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}
@@ -1501,9 +1505,41 @@ public abstract class PluginSettingServiceBaseImpl extends PrincipalBean
 		this.counterLocalService = counterLocalService;
 	}
 
+	public IGImageLocalService getIGImageLocalService() {
+		return igImageLocalService;
+	}
+
+	public void setIGImageLocalService(IGImageLocalService igImageLocalService) {
+		this.igImageLocalService = igImageLocalService;
+	}
+
+	public IGImageService getIGImageService() {
+		return igImageService;
+	}
+
+	public void setIGImageService(IGImageService igImageService) {
+		this.igImageService = igImageService;
+	}
+
+	public IGImagePersistence getIGImagePersistence() {
+		return igImagePersistence;
+	}
+
+	public void setIGImagePersistence(IGImagePersistence igImagePersistence) {
+		this.igImagePersistence = igImagePersistence;
+	}
+
+	public IGImageFinder getIGImageFinder() {
+		return igImageFinder;
+	}
+
+	public void setIGImageFinder(IGImageFinder igImageFinder) {
+		this.igImageFinder = igImageFinder;
+	}
+
 	protected void runSQL(String sql) throws SystemException {
 		try {
-			DataSource dataSource = pluginSettingPersistence.getDataSource();
+			DataSource dataSource = imagePersistence.getDataSource();
 
 			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
 					sql, new int[0]);
@@ -1825,4 +1861,12 @@ public abstract class PluginSettingServiceBaseImpl extends PrincipalBean
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	@BeanReference(type = IGImageLocalService.class)
+	protected IGImageLocalService igImageLocalService;
+	@BeanReference(type = IGImageService.class)
+	protected IGImageService igImageService;
+	@BeanReference(type = IGImagePersistence.class)
+	protected IGImagePersistence igImagePersistence;
+	@BeanReference(type = IGImageFinder.class)
+	protected IGImageFinder igImageFinder;
 }
