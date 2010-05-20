@@ -26,11 +26,6 @@ import junit.framework.TestSuite;
  *
  * @author Brian Wing Shun Chan
  */
-/**
- * <a href="PortletTests.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- */
 public class PortletTests extends BaseTests {
 
 	public static Test suite() {

@@ -22,8 +22,6 @@ import junit.framework.TestSuite;
 /**
  * <a href="ViewMBMessageTableTests.java.html"><b><i>View Source</i></b></a>
  *
- * href="ViewMBMessageTableTests.java.html"><b><i>View Source</i></b>
- *
  * @author Brian Wing Shun Chan
  */
 public class ViewMBMessageTableTests extends BaseTests {
