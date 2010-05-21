@@ -1280,7 +1280,7 @@ AUI().add(
 							{
 								categoryId: categoryId,
 								parentCategoryId: parentCategoryId,
-								title: A.JSON.stringify(
+								titleMap: A.JSON.stringify(
 									{
 										'en_US': name  //this is temporary
 									}
