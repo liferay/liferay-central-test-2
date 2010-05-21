@@ -42,7 +42,8 @@ public class CleanUpMessageListener implements MessageListener {
 		// LEP-2180
 
 		DeleteTask.deleteFiles(
-			SystemProperties.TMP_DIR, "LUCENE_liferay_com*.ljt", null);
+			SystemProperties.get(SystemProperties.TMP_DIR),
+			"LUCENE_liferay_com*.ljt", null);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
