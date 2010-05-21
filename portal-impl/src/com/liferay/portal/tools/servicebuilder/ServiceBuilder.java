@@ -248,6 +248,27 @@ public class ServiceBuilder {
 		}
 	}
 
+	public static final String wrapViewSourceHREF(String viewSourceHREF) {
+		if (viewSourceHREF.length() > 80) {
+			int x = viewSourceHREF.lastIndexOf("<", 80);
+			int y = viewSourceHREF.lastIndexOf(" ", 80);
+
+			int start = x;
+			int end = x;
+
+			if (x < y) {
+				start = y;
+				end = y + 1;
+			}
+
+			viewSourceHREF =
+				viewSourceHREF.substring(0, start) + "\n" +
+					wrapViewSourceHREF(" * " + viewSourceHREF.substring(end));
+		}
+
+		return viewSourceHREF;
+	}
+
 	public static void writeFile(File file, String content)
 		throws IOException {
 
@@ -324,24 +345,7 @@ public class ServiceBuilder {
 			" * <a href=\"" + file.getName() +
 				".html\"><b><i>View Source</i></b></a>";
 
-		if (viewSourceHREF.length() > 80) {
-			int x = viewSourceHREF.lastIndexOf("<", 80);
-			int y = viewSourceHREF.lastIndexOf(" ", 80);
-
-			int start = x;
-			int end = x;
-
-			if (x < y) {
-				start = y;
-				end = y + 1;
-			}
-
-			viewSourceHREF =
-				viewSourceHREF.substring(0, start) + "\n * " +
-					viewSourceHREF.substring(end);
-		}
-
-		classMask += viewSourceHREF + "\n";
+		classMask += wrapViewSourceHREF(viewSourceHREF) + "\n";
 
 		classMask +=
 			" *\n" +

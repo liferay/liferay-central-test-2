@@ -570,24 +570,7 @@ public class JavadocFormatter {
 			" * <a href=\"" + javaClass.getName() +
 				".java.html\"><b><i>View Source</i></b></a>";
 
-		if (viewSourceHREF.length() > 80) {
-			int x = viewSourceHREF.lastIndexOf("<", 80);
-			int y = viewSourceHREF.lastIndexOf(" ", 80);
-
-			int start = x;
-			int end = x;
-
-			if (x < y) {
-				start = y;
-				end = y + 1;
-			}
-
-			viewSourceHREF =
-				viewSourceHREF.substring(0, start) + "\n * " +
-					viewSourceHREF.substring(end);
-		}
-
-		sb.append(viewSourceHREF);
+		sb.append(ServiceBuilder.wrapViewSourceHREF(viewSourceHREF));
 		sb.append("\n");
 
 		String comment = rootElement.elementText("comment");
