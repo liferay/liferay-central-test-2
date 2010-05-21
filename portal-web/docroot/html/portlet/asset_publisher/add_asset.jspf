@@ -30,7 +30,7 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, render
 				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(className);
 			%>
 
-				<liferay-ui:icon message='<%= "model.resource." + className %>' src="<%= assetRendererFactory.getIconPath(renderRequest) %>" url='<%= HttpUtil.addParameter(addPortletURL.toString(), "maintainDialog", Boolean.TRUE.toString()) %>' />
+				<liferay-ui:icon message='<%= "model.resource." + className %>' src="<%= assetRendererFactory.getIconPath(renderRequest) %>" url='<%= addPortletURL.toString() %>' />
 
 			<%
 			}
