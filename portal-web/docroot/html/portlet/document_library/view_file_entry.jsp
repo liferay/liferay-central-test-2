@@ -332,6 +332,8 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			List results = DLFileVersionLocalServiceUtil.getFileVersions(scopeGroupId, folderId, name, status);
 			List resultRows = searchContainer.getResultRows();
 
+			request.setAttribute("numVersions", String.valueOf(results.size()));
+
 			for (int i = 0; i < results.size(); i++) {
 				DLFileVersion fileVersion = (DLFileVersion)results.get(i);
 

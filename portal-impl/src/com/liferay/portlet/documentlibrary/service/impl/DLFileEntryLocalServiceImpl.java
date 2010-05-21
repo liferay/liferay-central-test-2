@@ -432,8 +432,17 @@ public class DLFileEntryLocalServiceImpl
 				}
 			}
 
+			long numVersions = dlFileVersionPersistence.countByG_F_N(
+				groupId, folderId, name);
+
 			dlFileVersionPersistence.removeByG_F_N_V(
 				groupId, folderId, name, version);
+
+			if (numVersions == 1) {
+				dlFileEntryPersistence.remove(fileEntry);
+
+				return;
+			}
 
 			if (version.equals(fileEntry.getVersion())) {
 				try {
