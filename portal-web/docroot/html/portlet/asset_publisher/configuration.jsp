@@ -332,8 +332,6 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 
 				<aui:button-row>
 					<aui:button onClick='<%= renderResponse.getNamespace() + "saveSelectBoxes();" %>' type="submit" />
-
-					<aui:button onClick="<%= redirect %>" type="cancel" />
 				</aui:button-row>
 			</c:when>
 			<c:when test='<%= selectionStyle.equals("dynamic") %>'>
@@ -592,8 +590,6 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 
 				<aui:button-row>
 					<aui:button onClick='<%= renderResponse.getNamespace() + "saveSelectBoxes();" %>' type="submit" />
-
-					<aui:button onClick="<%= redirect %>" type="cancel" />
 				</aui:button-row>
 			</c:when>
 		</c:choose>

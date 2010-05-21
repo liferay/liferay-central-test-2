@@ -61,8 +61,6 @@ isbnsString = StringUtil.merge(isbns, StringPool.SPACE);
 
 	<aui:button-row>
 		<aui:button type="submit" />
-
-		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
 

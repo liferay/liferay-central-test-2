@@ -95,8 +95,6 @@ if (organizationId > 0) {
 
 	<aui:button-row>
 		<aui:button type="submit" />
-
-		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
 

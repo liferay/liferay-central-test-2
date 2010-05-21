@@ -765,8 +765,6 @@ else if (tabs2.equals("message-updated-email")) {
 
 	<aui:button-row>
 		<aui:button type="submit" />
-
-		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
 

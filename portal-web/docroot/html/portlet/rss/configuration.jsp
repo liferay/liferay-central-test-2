@@ -178,8 +178,6 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 
 			<aui:button-row>
 				<aui:button type="submit" />
-
-				<aui:button onClick="<%= redirect %>" type="cancel" />
 			</aui:button-row>
 
 			<aui:script use="aui-base">

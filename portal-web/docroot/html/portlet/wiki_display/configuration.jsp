@@ -93,7 +93,5 @@ boolean nodeInGroup = false;
 
 	<aui:button-row>
 		<aui:button disabled="<%= nodes.isEmpty() %>" type="submit" />
-
-		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>

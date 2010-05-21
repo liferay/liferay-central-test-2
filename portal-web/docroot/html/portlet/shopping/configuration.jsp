@@ -361,8 +361,6 @@ else if (tabs3.equals("shipping-email")) {
 
 	<aui:button-row>
 		<aui:button type="submit" />
-
-		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
 
