@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.wiki.wikipage.changeparentwikipagename255charactertowikipage;
+package com.liferay.portalweb.portlet.wiki.wikipage.changeparentfrontpagechildpage255tonone;
 
 import com.liferay.portalweb.portal.BaseTests;
 
@@ -20,23 +20,22 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="ChangeParentWikiPageName255CharacterToWikiPageTests.java.html"><b>
- * <i>View Source</i></b></a>
+ * <a href="ChangeParentFrontPageChildPage255ToNoneTests.java.html"><b><i>View
+ * Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ChangeParentWikiPageName255CharacterToWikiPageTests
-	extends BaseTests {
+public class ChangeParentFrontPageChildPage255ToNoneTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(AddPageWikiTest.class);
 		testSuite.addTestSuite(AddPortletWikiTest.class);
-		testSuite.addTestSuite(AddWikiPageTest.class);
-		testSuite.addTestSuite(AddWikiPageName255CharacterTest.class);
+		testSuite.addTestSuite(AddFrontPageTest.class);
+		testSuite.addTestSuite(AddFrontPageChildPageName255CharacterTest.class);
 		testSuite.addTestSuite(
-			ChangeParentWikiPageName255CharacterToWikiPageTest.class);
+			ChangeParentFrontPageChildPage255ToNoneTest.class);
 		testSuite.addTestSuite(TearDownWikiNodeTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 

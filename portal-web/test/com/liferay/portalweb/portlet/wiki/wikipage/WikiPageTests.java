@@ -37,11 +37,11 @@ import com.liferay.portalweb.portlet.wiki.wikipage.addwikipagenamenull.AddWikiPa
 import com.liferay.portalweb.portlet.wiki.wikipage.addwikipagenamesymbol.AddWikiPageNameSymbolTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.canceladdfrontpage.CancelAddFrontPageTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.canceladdfrontpagechildpage.CancelAddFrontPageChildPageTests;
-import com.liferay.portalweb.portlet.wiki.wikipage.changeparentfrontpagechildpagename255charactertonone.ChangeParentFrontPageChildPageName255CharacterToNoneTests;
-import com.liferay.portalweb.portlet.wiki.wikipage.changeparentfrontpagechildpagename255charactertowikipage.ChangeParentFrontPageChildPageName255CharacterToWikiPageTests;
+import com.liferay.portalweb.portlet.wiki.wikipage.changeparentfrontpagechildpage255tonone.ChangeParentFrontPageChildPage255ToNoneTests;
+import com.liferay.portalweb.portlet.wiki.wikipage.changeparentfrontpagechildpage255towikipage.ChangeParentFrontPageChildPage255ToWikiPageTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.changeparentfrontpagechildpagetonone.ChangeParentFrontPageChildPageToNoneTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.changeparentfrontpagechildpagetowikipage.ChangeParentFrontPageChildPageToWikiPageTests;
-import com.liferay.portalweb.portlet.wiki.wikipage.changeparentwikipagename255charactertowikipage.ChangeParentWikiPageName255CharacterToWikiPageTests;
+import com.liferay.portalweb.portlet.wiki.wikipage.changeparentwikipage255towikipage.ChangeParentWikiPage255ToWikiPageTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.changeparentwikipagetowikipage.ChangeParentWikiPageToWikiPageTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.compareversioneditfrontpage.CompareVersionEditFrontPageTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.compareversioneditfrontpageminorchange.CompareVersionEditFrontPageMinorChangeTests;
@@ -112,16 +112,13 @@ public class WikiPageTests extends BaseTests {
 		testSuite.addTest(AddWikiPageNameSymbolTests.suite());
 		testSuite.addTest(CancelAddFrontPageTests.suite());
 		testSuite.addTest(CancelAddFrontPageChildPageTests.suite());
+		testSuite.addTest(ChangeParentFrontPageChildPage255ToNoneTests.suite());
 		testSuite.addTest(
-			ChangeParentFrontPageChildPageName255CharacterToNoneTests.suite());
-		testSuite.addTest(
-			ChangeParentFrontPageChildPageName255CharacterToWikiPageTests.
-			suite());
+			ChangeParentFrontPageChildPage255ToWikiPageTests.suite());
 		testSuite.addTest(ChangeParentFrontPageChildPageToNoneTests.suite());
 		testSuite.addTest(
 			ChangeParentFrontPageChildPageToWikiPageTests.suite());
-		testSuite.addTest(
-			ChangeParentWikiPageName255CharacterToWikiPageTests.suite());
+		testSuite.addTest(ChangeParentWikiPage255ToWikiPageTests.suite());
 		testSuite.addTest(ChangeParentWikiPageToWikiPageTests.suite());
 		testSuite.addTest(CompareVersionEditFrontPageTests.suite());
 		testSuite.addTest(CompareVersionEditFrontPageMinorChangeTests.suite());

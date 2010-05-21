@@ -12,20 +12,20 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.wiki.wikipage.changeparentwikipagename255charactertowikipage;
+package com.liferay.portalweb.portlet.wiki.wikipage.changeparentfrontpagechildpage255towikipage;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="ChangeParentWikiPageName255CharacterToWikiPageTest.java.html"><b>
+ * <a href="ChangeParentFrontPageChildPage255ToWikiPageTest.java.html"><b>
  * <i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ChangeParentWikiPageName255CharacterToWikiPageTest
+public class ChangeParentFrontPageChildPage255ToWikiPageTest
 	extends BaseTestCase {
-	public void testChangeParentWikiPageName255CharacterToWikiPage()
+	public void testChangeParentFrontPageChildPage255ToWikiPage()
 		throws Exception {
 		selenium.open("/web/guest/home/");
 
@@ -47,15 +47,18 @@ public class ChangeParentWikiPageName255CharacterToWikiPageTest
 
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=All Pages"));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent(
+				"link=Test||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"));
 		selenium.clickAt("link=Test||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("FrontPage"),
+			selenium.getText(
+				"//ul[@class='breadcrumbs lfr-component']/li[3]/span/a"));
 		assertEquals(RuntimeVariables.replace(
 				"Test||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"),
 			selenium.getText(
-				"//ul[@class='breadcrumbs lfr-component']/li[3]/span/a"));
+				"//ul[@class='breadcrumbs lfr-component']/li[4]/span/a"));
 		selenium.clickAt("link=Details", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Move", RuntimeVariables.replace(""));
@@ -85,6 +88,28 @@ public class ChangeParentWikiPageName255CharacterToWikiPageTest
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Wiki Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isElementPresent(
+				"link=Test||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {

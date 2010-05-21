@@ -12,20 +12,19 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.wiki.wikipage.changeparentfrontpagechildpagename255charactertonone;
+package com.liferay.portalweb.portlet.wiki.wikipage.changeparentfrontpagechildpage255tonone;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="ChangeParentFrontPageChildPageName255CharacterToNoneTest.java.html">
- * <b><i>View Source</i></b></a>
+ * <a href="ChangeParentFrontPageChildPage255ToNoneTest.java.html"><b><i>View
+ * Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ChangeParentFrontPageChildPageName255CharacterToNoneTest
-	extends BaseTestCase {
-	public void testChangeParentFrontPageChildPageName255CharacterToNone()
+public class ChangeParentFrontPageChildPage255ToNoneTest extends BaseTestCase {
+	public void testChangeParentFrontPageChildPage255ToNone()
 		throws Exception {
 		selenium.open("/web/guest/home/");
 

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.wiki.wikipage.changeparentfrontpagechildpagename255charactertonone;
+package com.liferay.portalweb.portlet.wiki.wikipage.changeparentfrontpagechildpage255tonone;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;

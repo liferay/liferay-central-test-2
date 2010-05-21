@@ -12,19 +12,20 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.wiki.wikipage.changeparentwikipagename255charactertowikipage;
+package com.liferay.portalweb.portlet.wiki.wikipage.changeparentfrontpagechildpage255tonone;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddWikiPageName255CharacterTest.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="AddFrontPageChildPageName255CharacterTest.java.html"><b><i>View
+ * Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class AddWikiPageName255CharacterTest extends BaseTestCase {
-	public void testAddWikiPageName255Character() throws Exception {
+public class AddFrontPageChildPageName255CharacterTest extends BaseTestCase {
+	public void testAddFrontPageChildPageName255Character()
+		throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -45,16 +46,13 @@ public class AddWikiPageName255CharacterTest extends BaseTestCase {
 
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=All Pages", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Add Page']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Add Child Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_36_title",
 			RuntimeVariables.replace(
 				"Test||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"));
 		selenium.type("_36_content",
-			RuntimeVariables.replace("This is a wiki page test."));
+			RuntimeVariables.replace("This is a front page child page test."));
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -62,12 +60,14 @@ public class AddWikiPageName255CharacterTest extends BaseTestCase {
 				"Your request processed successfully."));
 		assertEquals(RuntimeVariables.replace(
 				"Test||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"),
-			selenium.getText("//td[1]/a"));
-		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
+			selenium.getText("//div[@class='child-pages']/ul/li/a"));
+		selenium.clickAt("link=Test||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isPartialText("//h1[@class='page-title']",
 				"Test||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"));
-		assertEquals(RuntimeVariables.replace("This is a wiki page test."),
+		assertEquals(RuntimeVariables.replace(
+				"This is a front page child page test."),
 			selenium.getText("//div[@class='wiki-body']"));
 	}
 }

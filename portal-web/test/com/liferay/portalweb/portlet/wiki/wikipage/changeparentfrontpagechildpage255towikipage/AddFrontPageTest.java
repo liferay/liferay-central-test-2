@@ -12,18 +12,18 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.wiki.wikipage.changeparentfrontpagechildpagename255charactertowikipage;
+package com.liferay.portalweb.portlet.wiki.wikipage.changeparentfrontpagechildpage255towikipage;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddWikiPageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddFrontPageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class AddWikiPageTest extends BaseTestCase {
-	public void testAddWikiPage() throws Exception {
+public class AddFrontPageTest extends BaseTestCase {
+	public void testAddFrontPage() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -44,25 +44,25 @@ public class AddWikiPageTest extends BaseTestCase {
 
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=All Pages", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Add Page']",
+		selenium.clickAt("link=This page is empty. Edit it to add some text.",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_36_title", RuntimeVariables.replace("Wiki Page Test"));
 		selenium.type("_36_content",
-			RuntimeVariables.replace("This is a wiki page test."));
+			RuntimeVariables.replace(
+				"==Test Wiki Article==\n\n//this is italics//\n\n**bold**\n\n[[http://www.liferay.com|Link to website]]\n\n*this is a list item\n**this is a sub list item"));
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent("link=Wiki Page Test"));
-		selenium.clickAt("link=Wiki Page Test", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//h1[@class='page-title']",
-				"Wiki Page Test"));
-		assertEquals(RuntimeVariables.replace("This is a wiki page test."),
-			selenium.getText("//div[@class='wiki-body']"));
+		assertEquals(RuntimeVariables.replace("Test Wiki Article"),
+			selenium.getText("//div[@class='wiki-body']/h2"));
+		assertEquals(RuntimeVariables.replace("this is italics"),
+			selenium.getText("//i"));
+		assertEquals(RuntimeVariables.replace("bold"), selenium.getText("//b"));
+		assertTrue(selenium.isElementPresent("link=Link to website"));
+		assertEquals(RuntimeVariables.replace(
+				"this is a list item this is a sub list item"),
+			selenium.getText("//div[@class='wiki-body']/ul/li"));
 	}
 }
