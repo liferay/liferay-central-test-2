@@ -124,7 +124,7 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 
 		if (!strict && (workflowDefinitionLink == null)) {
 			workflowDefinitionLink =
-				workflowDefinitionLinkPersistence.findByG_C_C(
+				workflowDefinitionLinkPersistence.fetchByG_C_C(
 					WorkflowConstants.DEFAULT_GROUP_ID, companyId, classNameId);
 		}
 
