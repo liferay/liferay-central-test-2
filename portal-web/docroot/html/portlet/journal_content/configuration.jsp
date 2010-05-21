@@ -101,12 +101,12 @@ type = ParamUtil.getString(request, "type", type);
 						}
 						%>
 
-						<portlet:renderURL var="editTemplateURL">
+						<liferay-portlet:renderURL portletName="<%= PortletKeys.JOURNAL %>" var="editTemplateURL">
 							<portlet:param name="struts_action" value="/journal/edit_template" />
 							<portlet:param name="redirect" value="<%= currentURL %>" />
 							<portlet:param name="groupId" value="<%= String.valueOf(tableIteratorObj.getGroupId()) %>" />
 							<portlet:param name="templateId" value="<%= tableIteratorObj.getTemplateId() %>" />
-						</portlet:renderURL>
+						</liferay-portlet:renderURL>
 
 						<liferay-util:buffer var="linkContent">
 							<aui:a href="<%= editTemplateURL %>" id="tableIteratorObjName"><%= tableIteratorObj.getName() %></aui:a>
