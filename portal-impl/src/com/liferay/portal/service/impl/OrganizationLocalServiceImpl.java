@@ -18,7 +18,6 @@ import com.liferay.portal.DuplicateOrganizationException;
 import com.liferay.portal.OrganizationNameException;
 import com.liferay.portal.OrganizationParentException;
 import com.liferay.portal.RequiredOrganizationException;
-import com.liferay.portal.kernel.annotation.ThreadLocalCachable;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -429,7 +428,6 @@ public class OrganizationLocalServiceImpl
 		}
 	}
 
-	@ThreadLocalCachable
 	public int getUserOrganizationsCount(long userId) throws SystemException {
 		return userPersistence.getOrganizationsSize(userId);
 	}
