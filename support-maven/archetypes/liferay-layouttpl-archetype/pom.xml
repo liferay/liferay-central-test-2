@@ -13,6 +13,10 @@
 	<packaging>maven-archetype</packaging>
 	<name>Liferay Maven 2 Layout Template Archetype</name>
 	<version>6.0.2-SNAPSHOT</version>
+	<scm>
+		<connection>svn://svn.liferay.com/repos/public/portal/trunk/support-maven/archetypes/liferay-layouttpl-archetype</connection>
+		<url>http://svn.liferay.com/browse/portal/trunk/support-maven/archetypes/liferay-layouttpl-archetype</url>
+	</scm>
 	<build>
 		<extensions>
 			<extension>
