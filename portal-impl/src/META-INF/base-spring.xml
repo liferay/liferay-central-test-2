@@ -13,14 +13,10 @@
 		<property name="dataSource" ref="liferayDataSource" />
 		<property name="sessionFactory" ref="liferaySessionFactory" />
 	</bean>
-	<bean id="transactionAdvice" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+	<bean id="transactionAdvice" class="com.liferay.portal.spring.transaction.TransactionInterceptor">
 		<property name="transactionManager" ref="liferayTransactionManager" />
 		<property name="transactionAttributeSource">
-			<bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource">
-		        <constructor-arg>
-		            <bean class="com.liferay.portal.spring.annotation.PortalTransactionAnnotationParser" />
-		        </constructor-arg>
-			</bean>
+			<bean class="com.liferay.portal.spring.transaction.AnnotationTransactionAttributeSource" />
 		</property>
 	</bean>
 	<aop:config proxy-target-class="false">
