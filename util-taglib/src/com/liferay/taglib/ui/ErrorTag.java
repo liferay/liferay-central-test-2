@@ -94,35 +94,32 @@ public class ErrorTag extends TagSupport {
 				"liferay-ui:error:translateMessage",
 				String.valueOf(_translateMessage));
 
-			if ((Validator.isNotNull(_message))) {
+			if (Validator.isNotNull(_message)) {
 				return SKIP_BODY;
 			}
 
-			if (_exception != null && SessionErrors.contains(
-				portletRequest, _exception.getName())) {
+			if (SessionErrors.contains(portletRequest, _key)) {
+				Object value = SessionErrors.get(
+					portletRequest, _exception.getName());
+
+				if (_exception != null) {
+					value = SessionErrors.get(
+						portletRequest, _exception.getName());
+				}
+				else {
+					value = SessionErrors.get(portletRequest, _key);
+				}
 
 				PortalIncludeUtil.include(pageContext, getStartPage());
 
-				pageContext.setAttribute(
-					"errorException",
-					SessionErrors.get(portletRequest, _exception.getName()));
+				if (value != null) {
+					pageContext.setAttribute("errorException", value);
+				}
 
 				return EVAL_BODY_INCLUDE;
 			}
-			else if (Validator.isNotNull(_key) && SessionErrors.contains(
-				portletRequest, _key)) {
 
-				PortalIncludeUtil.include(pageContext, getStartPage());
-
-				pageContext.setAttribute(
-					"errorException",
-					SessionErrors.get(portletRequest, _key));
-
-				return EVAL_BODY_INCLUDE;
-			}
-			else {
-				 return SKIP_BODY;
-			}
+			return SKIP_BODY;
 		}
 		catch (Exception e) {
 			throw new JspException(e);
