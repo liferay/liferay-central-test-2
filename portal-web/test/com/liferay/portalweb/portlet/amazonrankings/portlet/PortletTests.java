@@ -17,6 +17,8 @@ package com.liferay.portalweb.portlet.amazonrankings.portlet;
 import com.liferay.portalweb.portal.BaseTests;
 import com.liferay.portalweb.portlet.amazonrankings.portlet.addportlet.AddPortletTests;
 import com.liferay.portalweb.portlet.amazonrankings.portlet.addportletduplicate.AddPortletDuplicateTests;
+import com.liferay.portalweb.portlet.amazonrankings.portlet.removeportlet.RemovePortletTests;
+import com.liferay.portalweb.portlet.amazonrankings.portlet.viewportletlookandfeel.ViewPortletLookAndFeelTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -33,6 +35,8 @@ public class PortletTests extends BaseTests {
 
 		testSuite.addTest(AddPortletTests.suite());
 		testSuite.addTest(AddPortletDuplicateTests.suite());
+		testSuite.addTest(RemovePortletTests.suite());
+		testSuite.addTest(ViewPortletLookAndFeelTests.suite());
 
 		return testSuite;
 	}
