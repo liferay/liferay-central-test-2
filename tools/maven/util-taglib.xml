@@ -30,7 +30,7 @@
 	</licenses>
 	<scm>
 		<connection>svn://svn.liferay.com/repos/public/portal/trunk/util-taglib</connection>
-		<url>http://svn.liferay.com/browse/portal/trunk/util-taglib</url>
+		<url>http://svn.liferay.com/repos/public/portal/trunk/util-taglib</url>
 	</scm>
 	<dependencies>
 		<dependency>
