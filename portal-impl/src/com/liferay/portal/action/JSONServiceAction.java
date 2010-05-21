@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.BaseModel;
@@ -49,6 +50,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -62,6 +65,7 @@ import org.apache.struts.action.ActionMapping;
  * @author Brian Wing Shun Chan
  * @author Karthik Sudarshan
  * @author Julio Camarero
+ * @author Eduardo Lundgren
  */
 public class JSONServiceAction extends JSONAction {
 
@@ -658,35 +662,58 @@ public class JSONServiceAction extends JSONAction {
 	}
 
 	protected String getTypeName(Type type) {
-		String name = type.toString();
+		String typeName = type.toString();
 
-		int pos = name.indexOf("class ");
-
-		if (pos != -1) {
-			name = name.substring("class ".length());
-		}
-		else {
-			if (name.equals("boolean[]")) {
-				name = "[Z";
-			}
-			else if (name.equals("double[]")) {
-				name = "[D";
-			}
-			else if (name.equals("float[]")) {
-				name = "[F";
-			}
-			else if (name.equals("int[]")) {
-				name = "[I";
-			}
-			else if (name.equals("long[]")) {
-				name = "[J";
-			}
-			else if (name.equals("short[]")) {
-				name = "[S";
-			}
+		if (typeName.contains("class ")) {
+			return typeName.substring(6);
 		}
 
-		return name;
+		Matcher matcher = _typeNamePattern.matcher(typeName);
+
+		while (matcher.find()) {
+			String dimensions = matcher.group(2);
+			String name = matcher.group(1);
+
+			if (Validator.isNull(dimensions)) {
+				return name;
+			}
+
+			dimensions = dimensions.replace(
+				StringPool.CLOSE_BRACKET, StringPool.BLANK);
+
+			if (name.equals("boolean")) {
+				name = "Z";
+			}
+			else if (name.equals("byte")) {
+				name = "B";
+			}
+			else if (name.equals("char")) {
+				name = "C";
+			}
+			else if (name.equals("double")) {
+				name = "D";
+			}
+			else if (name.equals("float")) {
+				name = "F";
+			}
+			else if (name.equals("int")) {
+				name = "I";
+			}
+			else if (name.equals("long")) {
+				name = "J";
+			}
+			else if (name.equals("short")) {
+				name = "S";
+			}
+			else {
+				name = "L".concat(name).concat(
+					StringPool.SEMICOLON);
+			}
+
+			return dimensions.concat(name);
+		}
+
+		return typeName;
 	}
 
 	protected boolean isValidRequest(HttpServletRequest request) {
@@ -751,6 +778,9 @@ public class JSONServiceAction extends JSONAction {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(JSONServiceAction.class);
+
+	private static Pattern _typeNamePattern = Pattern.compile(
+		"^(.*?)((\\[\\])*)$", Pattern.DOTALL);
 
 	private Set<String> _invalidClassNames = new HashSet<String>();
 	private Map<String, Object[]> _methodCache =
