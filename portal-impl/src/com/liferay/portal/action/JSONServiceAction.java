@@ -160,75 +160,78 @@ public class JSONServiceAction extends JSONAction {
 			String parameter, Type parameterType)
 		throws Exception {
 
-		String parameterTypeName = getTypeName(parameterType);
+		String typeNameOrClassDescriptor = getTypeNameOrClassDescriptor(
+			parameterType);
 
 		String value = ParamUtil.getString(request, parameter);
 
 		if (Validator.isNull(value) &&
-			!parameterTypeName.equals("[Ljava.lang.String;")) {
+			!typeNameOrClassDescriptor.equals("[Ljava.lang.String;")) {
 
 			return null;
 		}
-		else if (parameterTypeName.equals("boolean") ||
-				 parameterTypeName.equals(Boolean.class.getName())) {
+		else if (typeNameOrClassDescriptor.equals("boolean") ||
+				 typeNameOrClassDescriptor.equals(Boolean.class.getName())) {
 
 			return Boolean.valueOf(ParamUtil.getBoolean(request, parameter));
 		}
-		else if (parameterTypeName.equals("double") ||
-				 parameterTypeName.equals(Double.class.getName())) {
+		else if (typeNameOrClassDescriptor.equals("double") ||
+				 typeNameOrClassDescriptor.equals(Double.class.getName())) {
 
 			return new Double(ParamUtil.getDouble(request, parameter));
 		}
-		else if (parameterTypeName.equals("int") ||
-				 parameterTypeName.equals(Integer.class.getName())) {
+		else if (typeNameOrClassDescriptor.equals("int") ||
+				 typeNameOrClassDescriptor.equals(Integer.class.getName())) {
 
 			return new Integer(ParamUtil.getInteger(request, parameter));
 		}
-		else if (parameterTypeName.equals("long") ||
-				 parameterTypeName.equals(Long.class.getName())) {
+		else if (typeNameOrClassDescriptor.equals("long") ||
+				 typeNameOrClassDescriptor.equals(Long.class.getName())) {
 
 			return new Long(ParamUtil.getLong(request, parameter));
 		}
-		else if (parameterTypeName.equals("short") ||
-				 parameterTypeName.equals(Short.class.getName())) {
+		else if (typeNameOrClassDescriptor.equals("short") ||
+				 typeNameOrClassDescriptor.equals(Short.class.getName())) {
 
 			return new Short(ParamUtil.getShort(request, parameter));
 		}
-		else if (parameterTypeName.equals(Date.class.getName())) {
+		else if (typeNameOrClassDescriptor.equals(Date.class.getName())) {
 			return new Date(ParamUtil.getLong(request, parameter));
 		}
-		else if (parameterTypeName.equals(ServiceContext.class.getName())) {
+		else if (typeNameOrClassDescriptor.equals(
+					ServiceContext.class.getName())) {
+
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(value);
 
 			jsonObject.put("javaClass", ServiceContext.class.getName());
 
 			return ServiceContextUtil.deserialize(jsonObject);
 		}
-		else if (parameterTypeName.equals(String.class.getName())) {
+		else if (typeNameOrClassDescriptor.equals(String.class.getName())) {
 			return value;
 		}
-		else if (parameterTypeName.equals("[Z")) {
+		else if (typeNameOrClassDescriptor.equals("[Z")) {
 			return ParamUtil.getBooleanValues(request, parameter);
 		}
-		else if (parameterTypeName.equals("[D")) {
+		else if (typeNameOrClassDescriptor.equals("[D")) {
 			return ParamUtil.getDoubleValues(request, parameter);
 		}
-		else if (parameterTypeName.equals("[F")) {
+		else if (typeNameOrClassDescriptor.equals("[F")) {
 			return ParamUtil.getFloatValues(request, parameter);
 		}
-		else if (parameterTypeName.equals("[I")) {
+		else if (typeNameOrClassDescriptor.equals("[I")) {
 			return ParamUtil.getIntegerValues(request, parameter);
 		}
-		else if (parameterTypeName.equals("[J")) {
+		else if (typeNameOrClassDescriptor.equals("[J")) {
 			return ParamUtil.getLongValues(request, parameter);
 		}
-		else if (parameterTypeName.equals("[S")) {
+		else if (typeNameOrClassDescriptor.equals("[S")) {
 			return ParamUtil.getShortValues(request, parameter);
 		}
-		else if (parameterTypeName.equals("[Ljava.lang.String;")) {
+		else if (typeNameOrClassDescriptor.equals("[Ljava.lang.String;")) {
 			return StringUtil.split(value);
 		}
-		else if (parameterTypeName.equals("[[Z")) {
+		else if (typeNameOrClassDescriptor.equals("[[Z")) {
 			String[] values = request.getParameterValues(parameter);
 
 			if ((values != null) && (values.length > 0)) {
@@ -251,7 +254,7 @@ public class JSONServiceAction extends JSONAction {
 				return new boolean[0][0];
 			}
 		}
-		else if (parameterTypeName.equals("[[D")) {
+		else if (typeNameOrClassDescriptor.equals("[[D")) {
 			String[] values = request.getParameterValues(parameter);
 
 			if ((values != null) && (values.length > 0)) {
@@ -274,7 +277,7 @@ public class JSONServiceAction extends JSONAction {
 				return new double[0][0];
 			}
 		}
-		else if (parameterTypeName.equals("[[F")) {
+		else if (typeNameOrClassDescriptor.equals("[[F")) {
 			String[] values = request.getParameterValues(parameter);
 
 			if ((values != null) && (values.length > 0)) {
@@ -297,7 +300,7 @@ public class JSONServiceAction extends JSONAction {
 				return new float[0][0];
 			}
 		}
-		else if (parameterTypeName.equals("[[I")) {
+		else if (typeNameOrClassDescriptor.equals("[[I")) {
 			String[] values = request.getParameterValues(parameter);
 
 			if ((values != null) && (values.length > 0)) {
@@ -320,7 +323,7 @@ public class JSONServiceAction extends JSONAction {
 				return new int[0][0];
 			}
 		}
-		else if (parameterTypeName.equals("[[J")) {
+		else if (typeNameOrClassDescriptor.equals("[[J")) {
 			String[] values = request.getParameterValues(parameter);
 
 			if ((values != null) && (values.length > 0)) {
@@ -343,7 +346,7 @@ public class JSONServiceAction extends JSONAction {
 				return new long[0][0];
 			}
 		}
-		else if (parameterTypeName.equals("[[S")) {
+		else if (typeNameOrClassDescriptor.equals("[[S")) {
 			String[] values = request.getParameterValues(parameter);
 
 			if ((values != null) && (values.length > 0)) {
@@ -366,7 +369,7 @@ public class JSONServiceAction extends JSONAction {
 				return new short[0][0];
 			}
 		}
-		else if (parameterTypeName.equals("[[Ljava.lang.String")) {
+		else if (typeNameOrClassDescriptor.equals("[[Ljava.lang.String")) {
 			String[] values = request.getParameterValues(parameter);
 
 			if ((values != null) && (values.length > 0)) {
@@ -385,7 +388,7 @@ public class JSONServiceAction extends JSONAction {
 				return new String[0][0];
 			}
 		}
-		else if (parameterTypeName.equals(
+		else if (typeNameOrClassDescriptor.equals(
 			"java.util.Map<java.util.Locale, java.lang.String>")) {
 
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(value);
@@ -396,7 +399,7 @@ public class JSONServiceAction extends JSONAction {
 			_log.error(
 				"Unsupported parameter type for class " + classObj +
 					", method " + methodName + ", parameter " + parameter +
-						", and type " + parameterTypeName);
+						", and type " + typeNameOrClassDescriptor);
 
 			return null;
 		}
@@ -438,7 +441,8 @@ public class JSONServiceAction extends JSONAction {
 
 						for (int j = 0; j < parameterTypes.length; j++) {
 							String t1 = parameterTypes[j];
-							String t2 = getTypeName(curParameterTypes[j]);
+							String t2 = getTypeNameOrClassDescriptor(
+								curParameterTypes[j]);
 
 							if (!t1.equals(t2)) {
 								match = false;
@@ -661,59 +665,59 @@ public class JSONServiceAction extends JSONAction {
 		return ArrayUtil.toStringArray(jsonArray);
 	}
 
-	protected String getTypeName(Type type) {
+	protected String getTypeNameOrClassDescriptor(Type type) {
 		String typeName = type.toString();
 
 		if (typeName.contains("class ")) {
 			return typeName.substring(6);
 		}
 
-		Matcher matcher = _typeNamePattern.matcher(typeName);
+		Matcher matcher = _fieldDescriptorPattern.matcher(typeName);
 
 		while (matcher.find()) {
 			String dimensions = matcher.group(2);
-			String name = matcher.group(1);
+			String fieldDescriptor = matcher.group(1);
 
 			if (Validator.isNull(dimensions)) {
-				return name;
+				return fieldDescriptor;
 			}
 
 			dimensions = dimensions.replace(
 				StringPool.CLOSE_BRACKET, StringPool.BLANK);
 
-			if (name.equals("boolean")) {
-				name = "Z";
+			if (fieldDescriptor.equals("boolean")) {
+				fieldDescriptor = "Z";
 			}
-			else if (name.equals("byte")) {
-				name = "B";
+			else if (fieldDescriptor.equals("byte")) {
+				fieldDescriptor = "B";
 			}
-			else if (name.equals("char")) {
-				name = "C";
+			else if (fieldDescriptor.equals("char")) {
+				fieldDescriptor = "C";
 			}
-			else if (name.equals("double")) {
-				name = "D";
+			else if (fieldDescriptor.equals("double")) {
+				fieldDescriptor = "D";
 			}
-			else if (name.equals("float")) {
-				name = "F";
+			else if (fieldDescriptor.equals("float")) {
+				fieldDescriptor = "F";
 			}
-			else if (name.equals("int")) {
-				name = "I";
+			else if (fieldDescriptor.equals("int")) {
+				fieldDescriptor = "I";
 			}
-			else if (name.equals("long")) {
-				name = "J";
+			else if (fieldDescriptor.equals("long")) {
+				fieldDescriptor = "J";
 			}
-			else if (name.equals("short")) {
-				name = "S";
+			else if (fieldDescriptor.equals("short")) {
+				fieldDescriptor = "S";
 			}
 			else {
-				name = "L".concat(name).concat(
+				fieldDescriptor = "L".concat(fieldDescriptor).concat(
 					StringPool.SEMICOLON);
 			}
 
-			return dimensions.concat(name);
+			return dimensions.concat(fieldDescriptor);
 		}
 
-		return typeName;
+		throw new IllegalArgumentException(type.toString() + " is invalid");
 	}
 
 	protected boolean isValidRequest(HttpServletRequest request) {
@@ -779,7 +783,7 @@ public class JSONServiceAction extends JSONAction {
 
 	private static Log _log = LogFactoryUtil.getLog(JSONServiceAction.class);
 
-	private static Pattern _typeNamePattern = Pattern.compile(
+	private static Pattern _fieldDescriptorPattern = Pattern.compile(
 		"^(.*?)((\\[\\])*)$", Pattern.DOTALL);
 
 	private Set<String> _invalidClassNames = new HashSet<String>();
