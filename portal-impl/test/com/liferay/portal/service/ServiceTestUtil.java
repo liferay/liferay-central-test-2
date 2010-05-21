@@ -50,6 +50,7 @@ import com.liferay.portlet.enterpriseadmin.util.UserIndexer;
 import com.liferay.portlet.imagegallery.util.IGIndexer;
 import com.liferay.portlet.journal.workflow.JournalArticleWorkflowHandler;
 import com.liferay.portlet.messageboards.util.MBIndexer;
+import com.liferay.portlet.messageboards.workflow.MBMessageWorkflowHandler;
 
 import java.util.HashMap;
 import java.util.List;
@@ -178,6 +179,7 @@ public class ServiceTestUtil {
 		WorkflowHandlerRegistryUtil.register(new DLFileEntryWorkflowHandler());
 		WorkflowHandlerRegistryUtil.register(
 			new JournalArticleWorkflowHandler());
+		WorkflowHandlerRegistryUtil.register(new MBMessageWorkflowHandler());
 
 		// Company
 
