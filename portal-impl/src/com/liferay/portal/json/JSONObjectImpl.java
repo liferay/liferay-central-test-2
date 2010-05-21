@@ -136,6 +136,10 @@ public class JSONObjectImpl implements JSONObject {
 		return _jsonObj.length();
 	}
 
+	public JSONArray names() {
+		return new JSONArrayImpl(_jsonObj.names());
+	}
+
 	public JSONObject put(String key, boolean value) {
 		try {
 			_jsonObj.put(key, value);

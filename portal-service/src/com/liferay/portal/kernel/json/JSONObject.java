@@ -48,6 +48,8 @@ public interface JSONObject {
 
 	public int length();
 
+	public JSONArray names();
+
 	public JSONObject put(String key, boolean value);
 
 	public JSONObject put(String key, double value);
