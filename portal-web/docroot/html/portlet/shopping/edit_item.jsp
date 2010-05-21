@@ -467,7 +467,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 
 				<aui:input label="" name="smallFile" type="file" />
 
-				<aui:input label="use-small-image" name="smallImage" />
+				<aui:input label="use-small-image" name="smallImage" type="checkbox" />
 
 				<aui:input label="medium-image-url" name="mediumImageURL" />
 
@@ -475,7 +475,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 
 				<aui:input label="" name="mediumFile" type="file" />
 
-				<aui:input label="use-medium-image" name="mediumImage" />
+				<aui:input label="use-medium-image" name="mediumImage" type="checkbox" />
 
 				<aui:input label="large-image-url" name="largeImageURL" />
 
@@ -483,7 +483,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 
 				<aui:input label="" name="largeFile" type="file" />
 
-				<aui:input label="use-large-image" name="largeImage" />
+				<aui:input label="use-large-image" name="largeImage" type="checkbox" />
 			</aui:fieldset>
 		</liferay-ui:panel>
 	</liferay-ui:panel-container>
