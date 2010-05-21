@@ -332,12 +332,10 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			List results = DLFileVersionLocalServiceUtil.getFileVersions(scopeGroupId, folderId, name, status);
 			List resultRows = searchContainer.getResultRows();
 
-			request.setAttribute("numVersions", String.valueOf(results.size()));
-
 			for (int i = 0; i < results.size(); i++) {
 				DLFileVersion fileVersion = (DLFileVersion)results.get(i);
 
-				ResultRow row = new ResultRow(new Object[] {fileEntry, fileVersion, conversions, isLocked, hasLock}, String.valueOf(fileVersion.getVersion()), i);
+				ResultRow row = new ResultRow(new Object[] {fileEntry, fileVersion, results.size(), conversions, isLocked, hasLock}, String.valueOf(fileVersion.getVersion()), i);
 
 				StringBundler sb = new StringBundler(10);
 

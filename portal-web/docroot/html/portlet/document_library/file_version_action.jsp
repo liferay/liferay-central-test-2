@@ -19,20 +19,19 @@
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-int numVersions = GetterUtil.getInteger((String)request.getAttribute("numVersions"));
-
 Object[] objArray = (Object[])row.getObject();
 
 DLFileEntry fileEntry = (DLFileEntry)objArray[0];
 DLFileVersion fileVersion = (DLFileVersion)objArray[1];
-String[] conversions = (String[])objArray[2];
-Boolean isLocked = (Boolean)objArray[3];
-Boolean hasLock = (Boolean)objArray[4];
+int fileVersionsCount = (Integer)objArray[2];
+String[] conversions = (String[])objArray[3];
+Boolean isLocked = (Boolean)objArray[4];
+Boolean hasLock = (Boolean)objArray[5];
 %>
 
 <liferay-ui:icon-menu>
 	<c:if test="<%= showDeleteFileEntryButton && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) && (!isLocked.booleanValue() || hasLock.booleanValue()) %>">
-		<portlet:renderURL var="parentFolderURL">
+		<portlet:renderURL var="redirectURL">
 			<portlet:param name="struts_action" value="/document_library/view" />
 			<portlet:param name="folderId" value="<%= String.valueOf(fileVersion.getFolderId()) %>" />
 		</portlet:renderURL>
@@ -40,7 +39,7 @@ Boolean hasLock = (Boolean)objArray[4];
 		<portlet:actionURL var="portletURL">
 			<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-			<portlet:param name="redirect" value="<%= (numVersions == 1) ? parentFolderURL : currentURL %>" />
+			<portlet:param name="redirect" value="<%= (fileVersionsCount == 1) ? redirectURL : currentURL %>" />
 			<portlet:param name="folderId" value="<%= String.valueOf(fileVersion.getFolderId()) %>" />
 			<portlet:param name="name" value="<%= fileVersion.getName() %>" />
 			<portlet:param name="version" value="<%= String.valueOf(fileVersion.getVersion()) %>" />

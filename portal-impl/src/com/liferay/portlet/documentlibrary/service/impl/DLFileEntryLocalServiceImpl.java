@@ -432,31 +432,30 @@ public class DLFileEntryLocalServiceImpl
 				}
 			}
 
-			long numVersions = dlFileVersionPersistence.countByG_F_N(
+			long fileVersionsCount = dlFileVersionPersistence.countByG_F_N(
 				groupId, folderId, name);
 
 			dlFileVersionPersistence.removeByG_F_N_V(
 				groupId, folderId, name, version);
 
-			if (numVersions == 1) {
+			if (fileVersionsCount == 1) {
 				dlFileEntryPersistence.remove(fileEntry);
-
-				return;
 			}
+			else {
+				if (version.equals(fileEntry.getVersion())) {
+					try {
+						DLFileVersion fileVersion =
+							dlFileVersionLocalService.getLatestFileVersion(
+								groupId, folderId, name);
 
-			if (version.equals(fileEntry.getVersion())) {
-				try {
-					DLFileVersion fileVersion =
-						dlFileVersionLocalService.getLatestFileVersion(
-							groupId, folderId, name);
+						fileEntry.setVersion(fileVersion.getVersion());
+					}
+					catch (NoSuchFileVersionException nsfve) {
+					}
+				}
 
-					fileEntry.setVersion(fileVersion.getVersion());
-				}
-				catch (NoSuchFileVersionException nsfve) {
-				}
+				dlFileEntryPersistence.update(fileEntry, false);
 			}
-
-			dlFileEntryPersistence.update(fileEntry, false);
 		}
 		else {
 			deleteFileEntry(fileEntry);
