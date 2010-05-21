@@ -4,19 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.liferay.portal</groupId>
 	<artifactId>portal-impl</artifactId>
-	<version>@version@</version>
 	<name>Liferay Portal Impl</name>
-	<licenses>
-		<license>
-			<distribution>repo</distribution>
-			<name>GNU Lesser General Public License</name>
-			<url>http://www.gnu.org/licenses/lgpl-2.1.html</url>
-		</license>
-	</licenses>
-	<scm>
-		<connection>svn://svn.liferay.com/repos/public/portal/trunk/portal-impl</connection>
-		<url>http://svn.liferay.com/browse/portal/trunk/portal-impl</url>
-	</scm>
+	<version>@version@</version>
 	<url>http://www.liferay.com</url>
 	<developers>
 		<developer>
@@ -32,6 +21,17 @@
 			<name>Thiago Moreira</name>
 		</developer>
 	</developers>
+	<licenses>
+		<license>
+			<name>GNU Lesser General Public License</name>
+			<url>http://www.gnu.org/licenses/lgpl-2.1.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<connection>svn://svn.liferay.com/repos/public/portal/trunk/portal-impl</connection>
+		<url>http://svn.liferay.com/browse/portal/trunk/portal-impl</url>
+	</scm>
 	<dependencies>
 		<dependency>
 			<groupId>com.liferay.portal</groupId>
