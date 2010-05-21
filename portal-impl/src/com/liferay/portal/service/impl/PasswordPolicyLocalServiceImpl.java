@@ -196,10 +196,11 @@ public class PasswordPolicyLocalServiceImpl
 			return null;
 		}
 
-		PasswordPolicyRel passwordPolicyRel = null;
+		if ((organizationIds == null) || (organizationIds.length == 0)) {
+			return getDefaultPasswordPolicy(companyId);
+		}
 
-		// Check for password policy specifically assigned to any of the
-		// organizations
+		PasswordPolicyRel passwordPolicyRel = null;
 
 		for (int i = 0; i < organizationIds.length; i++) {
 			long organizationId = organizationIds[i];
@@ -215,8 +216,6 @@ public class PasswordPolicyLocalServiceImpl
 			catch (NoSuchPasswordPolicyRelException nsppre) {
 			}
 		}
-
-		// Get default password policy
 
 		return getDefaultPasswordPolicy(companyId);
 	}
