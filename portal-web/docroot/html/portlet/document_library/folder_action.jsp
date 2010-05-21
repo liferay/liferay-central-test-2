@@ -89,7 +89,7 @@ if (row == null) {
 	</c:if>
 
 	<c:if test="<%= (folder != null) && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.DELETE) %>">
-		<portlet:renderURL var="parentFolderURL">
+		<portlet:renderURL var="redirectURL">
 			<portlet:param name="struts_action" value="/document_library/view" />
 			<portlet:param name="folderId" value="<%= String.valueOf(folder.getParentFolderId()) %>" />
 		</portlet:renderURL>
@@ -97,7 +97,7 @@ if (row == null) {
 		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/document_library/edit_folder" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-			<portlet:param name="redirect" value="<%= view ? parentFolderURL : redirect %>" />
+			<portlet:param name="redirect" value="<%= view ? redirectURL : redirect %>" />
 			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 		</portlet:actionURL>
 

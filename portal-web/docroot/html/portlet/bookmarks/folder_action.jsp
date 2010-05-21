@@ -85,7 +85,7 @@ if (row == null) {
 	</c:if>
 
 	<c:if test="<%= (folder != null) && BookmarksFolderPermission.contains(permissionChecker, folder, ActionKeys.DELETE) %>">
-		<portlet:renderURL var="parentFolderURL">
+		<portlet:renderURL var="redirectURL">
 			<portlet:param name="struts_action" value="/bookmarks/view" />
 			<portlet:param name="folderId" value="<%= String.valueOf(folder.getParentFolderId()) %>" />
 		</portlet:renderURL>
@@ -93,7 +93,7 @@ if (row == null) {
 		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/bookmarks/edit_folder" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-			<portlet:param name="redirect" value="<%= view ? parentFolderURL : currentURL %>" />
+			<portlet:param name="redirect" value="<%= view ? redirectURL : currentURL %>" />
 			<portlet:param name="folderId" value="<%= String.valueOf(folder.getFolderId()) %>" />
 		</portlet:actionURL>
 
