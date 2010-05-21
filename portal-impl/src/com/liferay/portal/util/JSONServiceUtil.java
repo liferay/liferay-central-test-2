@@ -45,7 +45,7 @@ public class JSONServiceUtil {
 				String name = matcher.group(1);
 				String brackets = matcher.group(2);
 
-				StringBundler sb = new StringBundler(3);
+				StringBundler sb = new StringBundler(2);
 
 				if (Validator.isNotNull(brackets)) {
 					brackets = brackets.replace(
