@@ -87,8 +87,7 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 			if (_searchContainer == null) {
 				_searchContainer = new SearchContainer(
 					portletRequest, _displayTerms, _searchTerms, getCurParam(),
-					getDeltaParam(), getDelta(), _iteratorURL, null,
-					_emptyResultsMessage);
+					getDelta(), _iteratorURL,  null, _emptyResultsMessage);
 			}
 
 			_searchContainer.setDeltaConfigurable(_deltaConfigurable);
