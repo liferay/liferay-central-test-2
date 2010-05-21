@@ -21,6 +21,7 @@ import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.ThreadLocalCachable;
 import com.liferay.portal.kernel.annotation.Transactional;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -748,6 +749,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			companyId, name, description, params, start, end, obc);
 	}
 
+	@ThreadLocalCachable
 	public int searchCount(
 			long companyId, String name, String description,
 			LinkedHashMap<String, Object> params)
