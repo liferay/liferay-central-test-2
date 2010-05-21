@@ -184,7 +184,7 @@ public class ListUtil {
 
 	public static List<Boolean> toList(boolean[] array) {
 		if ((array == null) || (array.length == 0)) {
-			return Collections.emptyList();
+			return new ArrayList<Boolean>();
 		}
 
 		List<Boolean> list = new ArrayList<Boolean>(array.length);
@@ -198,7 +198,7 @@ public class ListUtil {
 
 	public static List<Double> toList(double[] array) {
 		if ((array == null) || (array.length == 0)) {
-			return Collections.emptyList();
+			return new ArrayList<Double>();
 		}
 
 		List<Double> list = new ArrayList<Double>(array.length);
@@ -212,7 +212,7 @@ public class ListUtil {
 
 	public static <E> List<E> toList(E[] array) {
 		if ((array == null) || (array.length == 0)) {
-			return Collections.emptyList();
+			return new ArrayList<E>();
 		}
 
 		return new ArrayList<E>(Arrays.asList(array));
@@ -220,7 +220,7 @@ public class ListUtil {
 
 	public static List<Float> toList(float[] array) {
 		if ((array == null) || (array.length == 0)) {
-			return Collections.emptyList();
+			return new ArrayList<Float>();
 		}
 
 		List<Float> list = new ArrayList<Float>(array.length);
@@ -234,7 +234,7 @@ public class ListUtil {
 
 	public static List<Integer> toList(int[] array) {
 		if ((array == null) || (array.length == 0)) {
-			return Collections.emptyList();
+			return new ArrayList<Integer>();
 		}
 
 		List<Integer> list = new ArrayList<Integer>(array.length);
@@ -248,7 +248,7 @@ public class ListUtil {
 
 	public static List<Long> toList(long[] array) {
 		if ((array == null) || (array.length == 0)) {
-			return Collections.emptyList();
+			return new ArrayList<Long>();
 		}
 
 		List<Long> list = new ArrayList<Long>(array.length);
@@ -262,7 +262,7 @@ public class ListUtil {
 
 	public static List<Short> toList(short[] array) {
 		if ((array == null) || (array.length == 0)) {
-			return Collections.emptyList();
+			return new ArrayList<Short>();
 		}
 
 		List<Short> list = new ArrayList<Short>(array.length);
