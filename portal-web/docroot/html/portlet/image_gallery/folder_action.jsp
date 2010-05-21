@@ -88,11 +88,16 @@ if (row == null) {
 		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 	</c:if>
 
-	<c:if test="<%= !view && (folder != null) && IGFolderPermission.contains(permissionChecker, folder, ActionKeys.DELETE) %>">
+	<c:if test="<%= (folder != null) && IGFolderPermission.contains(permissionChecker, folder, ActionKeys.DELETE) %>">
+		<portlet:renderURL var="parentFolderURL">
+			<portlet:param name="struts_action" value="/image_gallery/view" />
+			<portlet:param name="folderId" value="<%= String.valueOf(folder.getParentFolderId()) %>" />
+		</portlet:renderURL>
+
 		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/image_gallery/edit_folder" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="redirect" value="<%= view ? parentFolderURL : currentURL %>" />
 			<portlet:param name="folderId" value="<%= String.valueOf(folder.getFolderId()) %>" />
 		</portlet:actionURL>
 

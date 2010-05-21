@@ -64,11 +64,16 @@ else {
 		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 	</c:if>
 
-	<c:if test="<%= !view && BookmarksEntryPermission.contains(permissionChecker, entry, ActionKeys.DELETE) %>">
+	<c:if test="<%= BookmarksEntryPermission.contains(permissionChecker, entry, ActionKeys.DELETE) %>">
+		<portlet:renderURL var="parentFolderURL">
+			<portlet:param name="struts_action" value="/bookmarks/view" />
+			<portlet:param name="folderId" value="<%= String.valueOf(entry.getFolderId()) %>" />
+		</portlet:renderURL>
+
 		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/bookmarks/edit_entry" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="redirect" value="<%= view ? parentFolderURL : currentURL %>" />
 			<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
 		</portlet:actionURL>
 

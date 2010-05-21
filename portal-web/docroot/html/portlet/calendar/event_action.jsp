@@ -65,11 +65,15 @@ else {
 		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 	</c:if>
 
-	<c:if test="<%= !view && CalEventPermission.contains(permissionChecker, event, ActionKeys.DELETE) %>">
+	<c:if test="<%= CalEventPermission.contains(permissionChecker, event, ActionKeys.DELETE) %>">
+		<portlet:renderURL var="parentFolderURL">
+			<portlet:param name="struts_action" value="/calendar/view" />
+		</portlet:renderURL>
+
 		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/calendar/edit_event" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="redirect" value="<%= view ? parentFolderURL : currentURL %>" />
 			<portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" />
 		</portlet:actionURL>
 
