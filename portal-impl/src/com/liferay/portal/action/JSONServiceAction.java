@@ -35,7 +35,6 @@ import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portal.struts.JSONAction;
-import com.liferay.portal.util.JSONServiceUtil;
 import com.liferay.portlet.asset.model.AssetEntryDisplay;
 import com.liferay.portlet.asset.model.AssetEntryType;
 
@@ -63,7 +62,6 @@ import org.apache.struts.action.ActionMapping;
  * @author Brian Wing Shun Chan
  * @author Karthik Sudarshan
  * @author Julio Camarero
- * @author Eduardo Lundgren
  */
 public class JSONServiceAction extends JSONAction {
 
@@ -158,76 +156,75 @@ public class JSONServiceAction extends JSONAction {
 			String parameter, Type parameterType)
 		throws Exception {
 
-		String classDescriptor = JSONServiceUtil.getClassDescriptor(
-			parameterType);
+		String parameterTypeName = getTypeName(parameterType);
 
 		String value = ParamUtil.getString(request, parameter);
 
 		if (Validator.isNull(value) &&
-			!classDescriptor.equals("[Ljava.lang.String;")) {
+			!parameterTypeName.equals("[Ljava.lang.String;")) {
 
 			return null;
 		}
-		else if (classDescriptor.equals("boolean") ||
-				 classDescriptor.equals(Boolean.class.getName())) {
+		else if (parameterTypeName.equals("boolean") ||
+				 parameterTypeName.equals(Boolean.class.getName())) {
 
 			return Boolean.valueOf(ParamUtil.getBoolean(request, parameter));
 		}
-		else if (classDescriptor.equals("double") ||
-				 classDescriptor.equals(Double.class.getName())) {
+		else if (parameterTypeName.equals("double") ||
+				 parameterTypeName.equals(Double.class.getName())) {
 
 			return new Double(ParamUtil.getDouble(request, parameter));
 		}
-		else if (classDescriptor.equals("int") ||
-				 classDescriptor.equals(Integer.class.getName())) {
+		else if (parameterTypeName.equals("int") ||
+				 parameterTypeName.equals(Integer.class.getName())) {
 
 			return new Integer(ParamUtil.getInteger(request, parameter));
 		}
-		else if (classDescriptor.equals("long") ||
-				 classDescriptor.equals(Long.class.getName())) {
+		else if (parameterTypeName.equals("long") ||
+				 parameterTypeName.equals(Long.class.getName())) {
 
 			return new Long(ParamUtil.getLong(request, parameter));
 		}
-		else if (classDescriptor.equals("short") ||
-				 classDescriptor.equals(Short.class.getName())) {
+		else if (parameterTypeName.equals("short") ||
+				 parameterTypeName.equals(Short.class.getName())) {
 
 			return new Short(ParamUtil.getShort(request, parameter));
 		}
-		else if (classDescriptor.equals(Date.class.getName())) {
+		else if (parameterTypeName.equals(Date.class.getName())) {
 			return new Date(ParamUtil.getLong(request, parameter));
 		}
-		else if (classDescriptor.equals(ServiceContext.class.getName())) {
+		else if (parameterTypeName.equals(ServiceContext.class.getName())) {
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(value);
 
 			jsonObject.put("javaClass", ServiceContext.class.getName());
 
 			return ServiceContextUtil.deserialize(jsonObject);
 		}
-		else if (classDescriptor.equals(String.class.getName())) {
+		else if (parameterTypeName.equals(String.class.getName())) {
 			return value;
 		}
-		else if (classDescriptor.equals("[Z")) {
+		else if (parameterTypeName.equals("[Z")) {
 			return ParamUtil.getBooleanValues(request, parameter);
 		}
-		else if (classDescriptor.equals("[D")) {
+		else if (parameterTypeName.equals("[D")) {
 			return ParamUtil.getDoubleValues(request, parameter);
 		}
-		else if (classDescriptor.equals("[F")) {
+		else if (parameterTypeName.equals("[F")) {
 			return ParamUtil.getFloatValues(request, parameter);
 		}
-		else if (classDescriptor.equals("[I")) {
+		else if (parameterTypeName.equals("[I")) {
 			return ParamUtil.getIntegerValues(request, parameter);
 		}
-		else if (classDescriptor.equals("[J")) {
+		else if (parameterTypeName.equals("[J")) {
 			return ParamUtil.getLongValues(request, parameter);
 		}
-		else if (classDescriptor.equals("[S")) {
+		else if (parameterTypeName.equals("[S")) {
 			return ParamUtil.getShortValues(request, parameter);
 		}
-		else if (classDescriptor.equals("[Ljava.lang.String;")) {
+		else if (parameterTypeName.equals("[Ljava.lang.String;")) {
 			return StringUtil.split(value);
 		}
-		else if (classDescriptor.equals("[[Z")) {
+		else if (parameterTypeName.equals("[[Z")) {
 			String[] values = request.getParameterValues(parameter);
 
 			if ((values != null) && (values.length > 0)) {
@@ -250,7 +247,7 @@ public class JSONServiceAction extends JSONAction {
 				return new boolean[0][0];
 			}
 		}
-		else if (classDescriptor.equals("[[D")) {
+		else if (parameterTypeName.equals("[[D")) {
 			String[] values = request.getParameterValues(parameter);
 
 			if ((values != null) && (values.length > 0)) {
@@ -273,7 +270,7 @@ public class JSONServiceAction extends JSONAction {
 				return new double[0][0];
 			}
 		}
-		else if (classDescriptor.equals("[[F")) {
+		else if (parameterTypeName.equals("[[F")) {
 			String[] values = request.getParameterValues(parameter);
 
 			if ((values != null) && (values.length > 0)) {
@@ -296,7 +293,7 @@ public class JSONServiceAction extends JSONAction {
 				return new float[0][0];
 			}
 		}
-		else if (classDescriptor.equals("[[I")) {
+		else if (parameterTypeName.equals("[[I")) {
 			String[] values = request.getParameterValues(parameter);
 
 			if ((values != null) && (values.length > 0)) {
@@ -319,7 +316,7 @@ public class JSONServiceAction extends JSONAction {
 				return new int[0][0];
 			}
 		}
-		else if (classDescriptor.equals("[[J")) {
+		else if (parameterTypeName.equals("[[J")) {
 			String[] values = request.getParameterValues(parameter);
 
 			if ((values != null) && (values.length > 0)) {
@@ -342,7 +339,7 @@ public class JSONServiceAction extends JSONAction {
 				return new long[0][0];
 			}
 		}
-		else if (classDescriptor.equals("[[S")) {
+		else if (parameterTypeName.equals("[[S")) {
 			String[] values = request.getParameterValues(parameter);
 
 			if ((values != null) && (values.length > 0)) {
@@ -365,7 +362,7 @@ public class JSONServiceAction extends JSONAction {
 				return new short[0][0];
 			}
 		}
-		else if (classDescriptor.equals("[[Ljava.lang.String")) {
+		else if (parameterTypeName.equals("[[Ljava.lang.String")) {
 			String[] values = request.getParameterValues(parameter);
 
 			if ((values != null) && (values.length > 0)) {
@@ -384,7 +381,7 @@ public class JSONServiceAction extends JSONAction {
 				return new String[0][0];
 			}
 		}
-		else if (classDescriptor.equals(
+		else if (parameterTypeName.equals(
 			"java.util.Map<java.util.Locale, java.lang.String>")) {
 
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(value);
@@ -395,7 +392,7 @@ public class JSONServiceAction extends JSONAction {
 			_log.error(
 				"Unsupported parameter type for class " + classObj +
 					", method " + methodName + ", parameter " + parameter +
-						", and type " + classDescriptor);
+						", and type " + parameterTypeName);
 
 			return null;
 		}
@@ -437,8 +434,7 @@ public class JSONServiceAction extends JSONAction {
 
 						for (int j = 0; j < parameterTypes.length; j++) {
 							String t1 = parameterTypes[j];
-							String t2 = JSONServiceUtil.getClassDescriptor(
-								curParameterTypes[j]);
+							String t2 = getTypeName(curParameterTypes[j]);
 
 							if (!t1.equals(t2)) {
 								match = false;
@@ -659,6 +655,38 @@ public class JSONServiceAction extends JSONAction {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray(json);
 
 		return ArrayUtil.toStringArray(jsonArray);
+	}
+
+	protected String getTypeName(Type type) {
+		String name = type.toString();
+
+		int pos = name.indexOf("class ");
+
+		if (pos != -1) {
+			name = name.substring("class ".length());
+		}
+		else {
+			if (name.equals("boolean[]")) {
+				name = "[Z";
+			}
+			else if (name.equals("double[]")) {
+				name = "[D";
+			}
+			else if (name.equals("float[]")) {
+				name = "[F";
+			}
+			else if (name.equals("int[]")) {
+				name = "[I";
+			}
+			else if (name.equals("long[]")) {
+				name = "[J";
+			}
+			else if (name.equals("short[]")) {
+				name = "[S";
+			}
+		}
+
+		return name;
 	}
 
 	protected boolean isValidRequest(HttpServletRequest request) {
