@@ -58,8 +58,8 @@ public class SourceFormatter {
 				public void run() {
 					try {
 						_checkPersistenceTestSuite();
-						_checkWebXML();
 						_formatJSP();
+						_formatWebXML();
 					}
 					catch (Exception e) {
 						e.printStackTrace();
@@ -195,83 +195,6 @@ public class SourceFormatter {
 		for (String persistenceTest : persistenceTests) {
 			if (persistenceTestSuite.indexOf(persistenceTest) == -1) {
 				System.out.println("PersistenceTestSuite: " + persistenceTest);
-			}
-		}
-	}
-
-	private static void _checkWebXML() throws IOException {
-		String basedir = "./";
-
-		if (_fileUtil.exists(basedir + "portal-impl")) {
-			String[] locales = PropsValues.LOCALES.clone();
-
-			Arrays.sort(locales);
-
-			Set<String> urlPatterns = new TreeSet<String>();
-
-			for (String locale : locales) {
-				int pos = locale.indexOf(StringPool.UNDERLINE);
-
-				String languageCode = locale.substring(0, pos);
-
-				urlPatterns.add(languageCode);
-				urlPatterns.add(locale);
-			}
-
-			StringBuilder sb = new StringBuilder();
-
-			for (String urlPattern : urlPatterns) {
-				sb.append("\t<servlet-mapping>\n");
-				sb.append("\t\t<servlet-name>I18n Servlet</servlet-name>\n");
-				sb.append(
-					"\t\t<url-pattern>/" + urlPattern +"/*</url-pattern>\n");
-				sb.append("\t</servlet-mapping>\n");
-			}
-
-			File file = new File(
-				basedir + "portal-web/docroot/WEB-INF/web.xml");
-
-			String content = _fileUtil.read(file);
-
-			int x = content.indexOf("<servlet-mapping>");
-
-			x = content.indexOf("<servlet-name>I18n Servlet</servlet-name>", x);
-
-			x = content.lastIndexOf("<servlet-mapping>", x) - 1;
-
-			int y = content.lastIndexOf(
-				"<servlet-name>I18n Servlet</servlet-name>");
-
-			y = content.indexOf("</servlet-mapping>", y) + 19;
-
-			String newContent =
-				content.substring(0, x) + sb.toString() + content.substring(y);
-
-			if ((newContent != null) && !content.equals(newContent)) {
-				_fileUtil.write(file, newContent);
-
-				System.out.println(file);
-			}
-		}
-		else {
-			String webXML = ContentUtil.get(
-				"com/liferay/portal/deploy/dependencies/web.xml");
-
-			DirectoryScanner ds = new DirectoryScanner();
-
-			ds.setBasedir(basedir);
-			ds.setIncludes(new String[] {"**\\web.xml"});
-
-			ds.scan();
-
-			String[] files = ds.getIncludedFiles();
-
-			for (String file : files) {
-				String content = _fileUtil.read(basedir + file);
-
-				if (content.equals(webXML)) {
-					System.out.println(file);
-				}
 			}
 		}
 	}
@@ -931,6 +854,83 @@ public class SourceFormatter {
 		}
 
 		return content;
+	}
+
+	private static void _formatWebXML() throws IOException {
+		String basedir = "./";
+
+		if (_fileUtil.exists(basedir + "portal-impl")) {
+			String[] locales = PropsValues.LOCALES.clone();
+
+			Arrays.sort(locales);
+
+			Set<String> urlPatterns = new TreeSet<String>();
+
+			for (String locale : locales) {
+				int pos = locale.indexOf(StringPool.UNDERLINE);
+
+				String languageCode = locale.substring(0, pos);
+
+				urlPatterns.add(languageCode);
+				urlPatterns.add(locale);
+			}
+
+			StringBuilder sb = new StringBuilder();
+
+			for (String urlPattern : urlPatterns) {
+				sb.append("\t<servlet-mapping>\n");
+				sb.append("\t\t<servlet-name>I18n Servlet</servlet-name>\n");
+				sb.append(
+					"\t\t<url-pattern>/" + urlPattern +"/*</url-pattern>\n");
+				sb.append("\t</servlet-mapping>\n");
+			}
+
+			File file = new File(
+				basedir + "portal-web/docroot/WEB-INF/web.xml");
+
+			String content = _fileUtil.read(file);
+
+			int x = content.indexOf("<servlet-mapping>");
+
+			x = content.indexOf("<servlet-name>I18n Servlet</servlet-name>", x);
+
+			x = content.lastIndexOf("<servlet-mapping>", x) - 1;
+
+			int y = content.lastIndexOf(
+				"<servlet-name>I18n Servlet</servlet-name>");
+
+			y = content.indexOf("</servlet-mapping>", y) + 19;
+
+			String newContent =
+				content.substring(0, x) + sb.toString() + content.substring(y);
+
+			if ((newContent != null) && !content.equals(newContent)) {
+				_fileUtil.write(file, newContent);
+
+				System.out.println(file);
+			}
+		}
+		else {
+			String webXML = ContentUtil.get(
+				"com/liferay/portal/deploy/dependencies/web.xml");
+
+			DirectoryScanner ds = new DirectoryScanner();
+
+			ds.setBasedir(basedir);
+			ds.setIncludes(new String[] {"**\\web.xml"});
+
+			ds.scan();
+
+			String[] files = ds.getIncludedFiles();
+
+			for (String file : files) {
+				String content = _fileUtil.read(basedir + file);
+
+				if (content.equals(webXML)) {
+					System.out.println(file);
+				}
+			}
+		}
 	}
 
 	private static String _getCopyright() throws IOException {
