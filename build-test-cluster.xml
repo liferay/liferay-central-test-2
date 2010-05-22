@@ -115,6 +115,11 @@ JkShmFile logs/jk-runtime-status</echo>
 		</exec>
 	</target>
 
+	<target name="prepare-cluster-tomcat">
+		<antcall target="prepare-cluster-tomcat-node-1" />
+		<antcall target="prepare-cluster-tomcat-node-2" />
+	</target>
+
 	<target name="prepare-cluster-tomcat-node-1">
 		<ant antfile="build-test-tomcat.xml" target="prepare-cluster-tomcat-node">
 			<property name="cluster-node.host" value="${vm.host.cluster-node-1}" />
@@ -127,11 +132,6 @@ JkShmFile logs/jk-runtime-status</echo>
 			<property name="cluster-node.host" value="${vm.host.cluster-node-2}" />
 			<property name="cluster-node.value" value="node-2" />
 		</ant>
-	</target>
-
-	<target name="prepare-cluster-tomcat">
-		<antcall target="prepare-cluster-tomcat-node-1" />
-		<antcall target="prepare-cluster-tomcat-node-2" />
 	</target>
 
 	<target name="prepare-cluster-vm-node">

@@ -63,10 +63,28 @@
 		</if>
 	</target>
 
+	<target name="deploy" depends="jar">
+		<copy file="${jar.file}.jar" todir="${deploy.dir}" />
+	</target>
+
 	<target name="jar" depends="compile">
 		<jar
 			basedir="classes"
 			jarfile="${jar.file}.jar"
+		/>
+	</target>
+
+	<target name="jar-javadoc">
+		<jar
+			basedir="${javadoc.dir}"
+			jarfile="${jar.file}-javadoc.jar"
+		/>
+	</target>
+
+	<target name="jar-sources">
+		<jar
+			basedir="src"
+			jarfile="${jar.file}-sources.jar"
 		/>
 	</target>
 
@@ -114,23 +132,5 @@
 		>
 			<arg line="-quiet -tag generated" />
 		</javadoc>
-	</target>
-
-	<target name="deploy" depends="jar">
-		<copy file="${jar.file}.jar" todir="${deploy.dir}" />
-	</target>
-
-	<target name="jar-javadoc">
-		<jar
-			basedir="${javadoc.dir}"
-			jarfile="${jar.file}-javadoc.jar"
-		/>
-	</target>
-
-	<target name="jar-sources">
-		<jar
-			basedir="src"
-			jarfile="${jar.file}-sources.jar"
-		/>
 	</target>
 </project>

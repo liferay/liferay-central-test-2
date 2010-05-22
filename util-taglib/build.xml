@@ -5,6 +5,19 @@
 
 	<property name="jar.file" value="${ant.project.name}" />
 
+	<target name="deploy" depends="jar">
+		<if>
+			<equals arg1="${app.server.type}" arg2="tomcat" />
+			<then>
+				<copy file="${jar.file}.jar" todir="${app.server.portal.dir}/WEB-INF/lib" />
+
+				<copy todir="${app.server.portal.dir}/WEB-INF/tld">
+					<fileset dir="classes/META-INF" includes="*.tld" />
+				</copy>
+			</then>
+		</if>
+	</target>
+
 	<target name="jar">
 		<antcall target="build-common-java.jar" />
 
@@ -19,18 +32,5 @@
 		<copy todir="${project.dir}/portal-web/docroot/WEB-INF/tld">
 			<fileset dir="classes/META-INF" includes="*.tld" />
 		</copy>
-	</target>
-
-	<target name="deploy" depends="jar">
-		<if>
-			<equals arg1="${app.server.type}" arg2="tomcat" />
-			<then>
-				<copy file="${jar.file}.jar" todir="${app.server.portal.dir}/WEB-INF/lib" />
-
-				<copy todir="${app.server.portal.dir}/WEB-INF/tld">
-					<fileset dir="classes/META-INF" includes="*.tld" />
-				</copy>
-			</then>
-		</if>
 	</target>
 </project>

@@ -11,22 +11,6 @@
 		<antcall target="deploy" />
 	</target>
 
-	<target name="start">
-		<antcall target="compile" />
-
-		<ant dir="util-taglib" target="jar" inheritAll="false" />
-
-		<ant dir="sql" target="build-db" inheritAll="false" />
-		<ant dir="sql" target="rebuild-hypersonic" inheritAll="false" />
-
-		<ant dir="portal-impl" target="build-reverendfun" inheritAll="false" />
-  		<ant dir="portal-impl" target="build-themes" inheritAll="false" />
-
-		<antcall target="jar" />
-
-		<antcall target="print-current-time" />
-	</target>
-
 	<target name="clean">
 		<ant dir="classes" target="clean" inheritAll="false" />
 
@@ -145,62 +129,6 @@
 		<ant dir="util-bridges" target="compile" inheritAll="false" />
 
 		<ant dir="portal-impl" target="compile" inheritAll="false" />
-	</target>
-
-	<target name="jar">
-		<ant dir="portal-service" target="jar" inheritAll="false" />
-
-		<ant dir="util-bridges" target="jar" inheritAll="false" />
-		<ant dir="util-java" target="jar" inheritAll="false" />
-		<ant dir="util-taglib" target="jar" inheritAll="false" />
-
-		<ant dir="portal-impl" target="jar" inheritAll="false" />
-
-		<ant dir="portal-web" target="war" inheritAll="false" />
-		<ant dir="tunnel-web" target="war" inheritAll="false" />
-
-		<ant dir="support-tomcat" target="jar" inheritAll="false" />
-	</target>
-
-	<target name="dtddoc">
-		<taskdef classname="DTDDoc.DTDDocTask" classpathref="lib.classpath" name="DTDDoc" />
-
-		<!--<antelope:stringutil string="${lp.version}" property="lp.version.dtd">
-			<replace regex="\." replacement="_" />
-		</antelope:stringutil>-->
-
-		<DTDDoc
-			destDir="api/definitions"
-			showFixmeTags="false"
-			showHiddenTags="false"
-			sourceDir="definitions"
-		>
-			<include name="liferay-*${lp.version.dtd}.dtd" />
-		</DTDDoc>
-	</target>
-
-	<target name="java2html">
-		<delete dir="api" />
-
-		<ant dir="portal-service" target="java2html" inheritAll="false" />
-
-		<ant dir="util-bridges" target="java2html" inheritAll="false" />
-		<ant dir="util-java" target="java2html" inheritAll="false" />
-		<ant dir="util-taglib" target="java2html" inheritAll="false" />
-
-		<ant dir="portal-impl" target="java2html" inheritAll="false" />
-
-		<ant dir="portal-client" target="java2html" inheritAll="false" />
-	</target>
-
-	<target name="javadoc">
-		<ant dir="portal-service" target="javadoc" inheritAll="false" />
-
-		<ant dir="util-bridges" target="javadoc" inheritAll="false" />
-		<ant dir="util-java" target="javadoc" inheritAll="false" />
-		<ant dir="util-taglib" target="javadoc" inheritAll="false" />
-
-		<ant dir="portal-impl" target="javadoc" inheritAll="false" />
 	</target>
 
 	<target name="deploy">
@@ -753,8 +681,80 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djonas.felix.configuration.file="%JONAS_ROOT
 		<ant antfile="build-dist.xml" target="dist" inheritAll="false" />
 	</target>
 
+	<target name="dtddoc">
+		<taskdef classname="DTDDoc.DTDDocTask" classpathref="lib.classpath" name="DTDDoc" />
+
+		<!--<antelope:stringutil string="${lp.version}" property="lp.version.dtd">
+			<replace regex="\." replacement="_" />
+		</antelope:stringutil>-->
+
+		<DTDDoc
+			destDir="api/definitions"
+			showFixmeTags="false"
+			showHiddenTags="false"
+			sourceDir="definitions"
+		>
+			<include name="liferay-*${lp.version.dtd}.dtd" />
+		</DTDDoc>
+	</target>
+
+	<target name="jar">
+		<ant dir="portal-service" target="jar" inheritAll="false" />
+
+		<ant dir="util-bridges" target="jar" inheritAll="false" />
+		<ant dir="util-java" target="jar" inheritAll="false" />
+		<ant dir="util-taglib" target="jar" inheritAll="false" />
+
+		<ant dir="portal-impl" target="jar" inheritAll="false" />
+
+		<ant dir="portal-web" target="war" inheritAll="false" />
+		<ant dir="tunnel-web" target="war" inheritAll="false" />
+
+		<ant dir="support-tomcat" target="jar" inheritAll="false" />
+	</target>
+
+	<target name="java2html">
+		<delete dir="api" />
+
+		<ant dir="portal-service" target="java2html" inheritAll="false" />
+
+		<ant dir="util-bridges" target="java2html" inheritAll="false" />
+		<ant dir="util-java" target="java2html" inheritAll="false" />
+		<ant dir="util-taglib" target="java2html" inheritAll="false" />
+
+		<ant dir="portal-impl" target="java2html" inheritAll="false" />
+
+		<ant dir="portal-client" target="java2html" inheritAll="false" />
+	</target>
+
+	<target name="javadoc">
+		<ant dir="portal-service" target="javadoc" inheritAll="false" />
+
+		<ant dir="util-bridges" target="javadoc" inheritAll="false" />
+		<ant dir="util-java" target="javadoc" inheritAll="false" />
+		<ant dir="util-taglib" target="javadoc" inheritAll="false" />
+
+		<ant dir="portal-impl" target="javadoc" inheritAll="false" />
+	</target>
+
 	<target name="prepare-generated-files">
 		<ant antfile="build-dist.xml" target="prepare-generated-files" inheritAll="false" />
+	</target>
+
+	<target name="start">
+		<antcall target="compile" />
+
+		<ant dir="util-taglib" target="jar" inheritAll="false" />
+
+		<ant dir="sql" target="build-db" inheritAll="false" />
+		<ant dir="sql" target="rebuild-hypersonic" inheritAll="false" />
+
+		<ant dir="portal-impl" target="build-reverendfun" inheritAll="false" />
+  		<ant dir="portal-impl" target="build-themes" inheritAll="false" />
+
+		<antcall target="jar" />
+
+		<antcall target="print-current-time" />
 	</target>
 
 	<target name="test">
