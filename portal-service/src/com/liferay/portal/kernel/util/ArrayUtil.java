@@ -1034,6 +1034,17 @@ public class ArrayUtil {
 		return list.toArray(new String[list.size()]);
 	}
 
+	public static void reverse(String[] array) {
+		for (int left = 0, right = array.length - 1; left < right;
+				left++, right--) {
+
+			String value = array[left];
+
+		    array[left] = array[right];
+		    array[right] = value;
+		}
+	}
+
 	public static Boolean[] toArray(boolean[] array) {
 		Boolean[] newArray = new Boolean[array.length];
 

@@ -370,6 +370,10 @@ public class ArrayUtil_IW {
 		return ArrayUtil.removeByPrefix(array, prefix);
 	}
 
+	public void reverse(java.lang.String[] array) {
+		ArrayUtil.reverse(array);
+	}
+
 	public java.lang.Boolean[] toArray(boolean[] array) {
 		return ArrayUtil.toArray(array);
 	}
