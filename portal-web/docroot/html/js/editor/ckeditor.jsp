@@ -47,12 +47,22 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 			CKEDITOR.config.customConfig = '<%= request.getContextPath() %>/html/js/editor/ckeditor/ckconfig.jsp?p_l_id=<%= plid %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>';
 		}
 
+		function getCkData() {
+			var data = CKEDITOR.instances.CKEditor1.getData();
+
+			if (CKEDITOR.env.gecko && (CKEDITOR.tools.trim(data) == '<br />')) {
+				data = '';
+			}
+
+			return data;
+		}
+
 		function getHTML() {
-			return CKEDITOR.instances.CKEditor1.getData();
+			return getCkData();
 		}
 
 		function getText() {
-			return CKEDITOR.instances.CKEditor1.getData();
+			return getCkData();
 		}
 	</script>
 </head>
