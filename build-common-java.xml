@@ -116,6 +116,13 @@
 		</javadoc>
 	</target>
 
+	<target name="javadoc-jar">
+		<jar
+			basedir="${javadoc.dir}"
+			jarfile="${jar.file}-javadoc.jar"
+		/>
+	</target>
+
 	<target name="deploy" depends="jar">
 		<copy file="${jar.file}.jar" todir="${deploy.dir}" />
 	</target>
