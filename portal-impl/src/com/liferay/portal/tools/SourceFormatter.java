@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
@@ -28,7 +29,6 @@ import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.FileImpl;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.xml.SAXReaderImpl;
 
 import java.io.File;
@@ -907,7 +907,15 @@ public class SourceFormatter {
 		String basedir = "./";
 
 		if (_fileUtil.exists(basedir + "portal-impl")) {
-			String[] locales = PropsValues.LOCALES.clone();
+			Properties properties = new Properties();
+
+			String propertiesContent = _fileUtil.read(
+				basedir + "portal-impl/src/portal.properties");
+
+			PropertiesUtil.load(properties, propertiesContent);
+
+			String[] locales = StringUtil.split(
+				properties.getProperty(PropsKeys.LOCALES));
 
 			Arrays.sort(locales);
 
