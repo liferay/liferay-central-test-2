@@ -1040,8 +1040,8 @@ public class ArrayUtil {
 
 			String value = array[left];
 
-		    array[left] = array[right];
-		    array[right] = value;
+			array[left] = array[right];
+			array[right] = value;
 		}
 	}
 
