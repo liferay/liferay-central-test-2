@@ -65,4 +65,12 @@
 
 		<antcall target="jar" />
 	</target>
+
+	<target name="sources-jar">
+		<jar
+			basedir="src"
+			excludes="**/*.class"
+			jarfile="${jar.file}-sources.jar"
+		/>
+	</target>
 </project>

@@ -126,4 +126,11 @@
 	<target name="deploy" depends="jar">
 		<copy file="${jar.file}.jar" todir="${deploy.dir}" />
 	</target>
+
+	<target name="sources-jar">
+		<jar
+			basedir="src"
+			jarfile="${jar.file}-sources.jar"
+		/>
+	</target>
 </project>
