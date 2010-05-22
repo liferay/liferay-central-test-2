@@ -525,6 +525,11 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<name>allowFullScreen</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>allowScriptAccess</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>

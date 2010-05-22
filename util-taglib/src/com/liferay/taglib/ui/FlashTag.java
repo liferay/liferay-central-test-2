@@ -33,6 +33,12 @@ public class FlashTag extends IncludeTag {
 		}
 	}
 
+	public void setAllowFullScreen(String allowFullScreen) {
+		if (Validator.isNotNull(allowFullScreen)) {
+			_allowFullScreen = allowFullScreen;
+		}
+	}
+
 	public void setAllowScriptAccess(String allowScriptAccess) {
 		if (Validator.isNotNull(allowScriptAccess)) {
 			_allowScriptAccess = allowScriptAccess;
@@ -141,6 +147,7 @@ public class FlashTag extends IncludeTag {
 
 	protected void cleanUp() {
 		_align = "left";
+		_allowFullScreen = Boolean.FALSE.toString();
 		_allowScriptAccess = "sameDomain";
 		_base = StringPool.PERIOD;
 		_bgcolor = "#FFFFFF";
@@ -168,6 +175,8 @@ public class FlashTag extends IncludeTag {
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:flash:align", _align);
 		request.setAttribute(
+			"liferay-ui:flash:allowFullScreen", _allowFullScreen);
+		request.setAttribute(
 			"liferay-ui:flash:allowScriptAccess", _allowScriptAccess);
 		request.setAttribute("liferay-ui:flash:base", _base);
 		request.setAttribute("liferay-ui:flash:bgcolor", _bgcolor);
@@ -191,6 +200,7 @@ public class FlashTag extends IncludeTag {
 	private static final String _PAGE = "/html/taglib/ui/flash/page.jsp";
 
 	private String _align = "left";
+	private String _allowFullScreen = Boolean.FALSE.toString();
 	private String _allowScriptAccess = "sameDomain";
 	private String _base = StringPool.PERIOD;
 	private String _bgcolor = "#FFFFFF";
