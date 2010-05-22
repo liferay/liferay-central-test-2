@@ -111,13 +111,6 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 		</antcall>
 	</target>
 
-	<target name="build-dist-sql-oracle-9">
-		<ant dir="sql" target="rebuild-oracle" inheritAll="false" />
-		<ant dir="sql" target="export-oracle" inheritAll="false" />
-
-		<move file="sql/lportal.dmp" tofile="dist/liferay-portal-sql-oracle-9-${lp.version}.dmp" />
-	</target>
-
 	<target name="build-dist-sql-oracle">
 		<ant dir="sql" target="rebuild-oracle" inheritAll="false" />
 		<ant dir="sql" target="export-oracle" inheritAll="false" />
