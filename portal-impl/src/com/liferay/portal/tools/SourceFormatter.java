@@ -23,9 +23,13 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.DocumentException;
+import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.FileImpl;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.xml.SAXReaderImpl;
 
 import java.io.File;
 import java.io.InputStream;
@@ -59,6 +63,7 @@ public class SourceFormatter {
 					try {
 						_checkPersistenceTestSuite();
 						_formatJSP();
+						_formatAntXML();
 						_formatWebXML();
 					}
 					catch (Exception e) {
@@ -254,6 +259,48 @@ public class SourceFormatter {
 			if (xssVulnerable) {
 				System.out.println(
 					"(xss): " + fileName + " (" + jspVariable + ")");
+			}
+		}
+	}
+
+	private static void _formatAntXML() throws DocumentException, IOException {
+		String basedir = "./";
+
+		DirectoryScanner ds = new DirectoryScanner();
+
+		ds.setBasedir(basedir);
+		ds.setIncludes(new String[] {"**\\b*.xml"});
+
+		ds.scan();
+
+		String[] files = ds.getIncludedFiles();
+
+		for (String file : files) {
+			String content = _fileUtil.read(basedir + file);
+
+			Document document = _saxReaderUtil.read(content);
+
+			Element rootElement = document.getRootElement();
+
+			String previousName = StringPool.BLANK;
+
+			List<Element> targetElements = rootElement.elements("target");
+
+			for (Element targetElement : targetElements) {
+				String name = targetElement.attributeValue("name");
+
+				if (name.equals("Test")) {
+					name = name.toLowerCase();
+				}
+
+				if (name.compareTo(previousName) < -1) {
+					System.out.println(
+						file + " has an unordered target " + name);
+
+					break;
+				}
+
+				previousName = name;
 			}
 		}
 	}
@@ -1146,6 +1193,7 @@ public class SourceFormatter {
 
 	private static FileImpl _fileUtil = FileImpl.getInstance();
 	private static Properties _exclusions;
+	private static SAXReaderImpl _saxReaderUtil = SAXReaderImpl.getInstance();
 	private static Pattern _xssPattern = Pattern.compile(
 		"String\\s+([^\\s]+)\\s*=\\s*(Bean)?ParamUtil\\.getString\\(");
 
