@@ -51,6 +51,7 @@
 					<arg value="-Durl=${maven.url}" />
 					<arg value="-Dversion=${maven.version}" />
 				</exec>
+
 				<exec dir="." executable="${maven.executable}" failonerror="true">
 					<arg value="deploy:deploy-file" />
 					<arg value="-DartifactId=${artifact.id}" />
@@ -132,8 +133,8 @@
 	</target>-->
 
 	<target name="deploy-release-artifacts">
-		<antcall target="javadoc-jar" />
-		<antcall target="sources-jar" />
+		<antcall target="jar-javadoc" />
+		<antcall target="jar-sources" />
 		<antcall target="deploy-artifacts">
 			<param name="maven.repository.id" value="sonatype-staging" />
 			<param name="maven.url" value="http://oss.sonatype.org/service/local/staging/deploy/maven2" />
@@ -242,27 +243,27 @@
 		</antcall>
 	</target>
 
-	<target name="javadoc-jar">
+	<target name="jar-javadoc">
 		<ant dir="portal-client" target="javadoc" inheritAll="false" />
-		<ant dir="portal-client" target="javadoc-jar" inheritAll="false" />
+		<ant dir="portal-client" target="jar-javadoc" inheritAll="false" />
 		<ant dir="portal-impl" target="javadoc" inheritAll="false" />
-		<ant dir="portal-impl" target="javadoc-jar" inheritAll="false" />
+		<ant dir="portal-impl" target="jar-javadoc" inheritAll="false" />
 		<ant dir="portal-service" target="javadoc" inheritAll="false" />
-		<ant dir="portal-service" target="javadoc-jar" inheritAll="false" />
+		<ant dir="portal-service" target="jar-javadoc" inheritAll="false" />
 		<ant dir="util-bridges" target="javadoc" inheritAll="false" />
-		<ant dir="util-bridges" target="javadoc-jar" inheritAll="false" />
+		<ant dir="util-bridges" target="jar-javadoc" inheritAll="false" />
 		<ant dir="util-java" target="javadoc" inheritAll="false" />
-		<ant dir="util-java" target="javadoc-jar" inheritAll="false" />
+		<ant dir="util-java" target="jar-javadoc" inheritAll="false" />
 		<ant dir="util-taglib" target="javadoc" inheritAll="false" />
-		<ant dir="util-taglib" target="javadoc-jar" inheritAll="false" />
+		<ant dir="util-taglib" target="jar-javadoc" inheritAll="false" />
 	</target>
 
-	<target name="sources-jar">
-		<ant dir="portal-client" target="sources-jar" inheritAll="false" />
-		<ant dir="portal-impl" target="sources-jar" inheritAll="false" />
-		<ant dir="portal-service" target="sources-jar" inheritAll="false" />
-		<ant dir="util-bridges" target="sources-jar" inheritAll="false" />
-		<ant dir="util-java" target="sources-jar" inheritAll="false" />
-		<ant dir="util-taglib" target="sources-jar" inheritAll="false" />
+	<target name="jar-sources">
+		<ant dir="portal-client" target="jar-sources" inheritAll="false" />
+		<ant dir="portal-impl" target="jar-sources" inheritAll="false" />
+		<ant dir="portal-service" target="jar-sources" inheritAll="false" />
+		<ant dir="util-bridges" target="jar-sources" inheritAll="false" />
+		<ant dir="util-java" target="jar-sources" inheritAll="false" />
+		<ant dir="util-taglib" target="jar-sources" inheritAll="false" />
 	</target>
 </project>

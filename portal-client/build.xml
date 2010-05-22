@@ -66,11 +66,22 @@
 		<antcall target="jar" />
 	</target>
 
-	<target name="sources-jar">
+	<target name="jar-sources">
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+		</tstamp>
+
+		<unzip
+			dest="${tstamp.value}"
+			src="${jar.file}.jar"
+		/>
+
 		<jar
-			basedir="src"
+			basedir="${tstamp.value}"
 			excludes="**/*.class"
 			jarfile="${jar.file}-sources.jar"
 		/>
+
+		<delete dir="${tstamp.value}" />
 	</target>
 </project>
