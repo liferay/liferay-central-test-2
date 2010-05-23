@@ -37,6 +37,12 @@
 		<antcall target="jar" />
 	</target>
 
+	<target name="clean">
+		<delete file="${jar.file}-javadoc.jar" failonerror="false" />
+		<delete file="${jar.file}-sources.jar" failonerror="false" />
+		<delete dir="${javadoc.dir}" />
+	</target>
+
 	<target name="jar" depends="compile">
 		<jar
 			jarfile="${jar.file}.jar"

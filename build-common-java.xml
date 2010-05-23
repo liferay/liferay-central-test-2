@@ -21,6 +21,8 @@
 		<delete dir="test-classes" />
 		<delete dir="test-results" />
 		<delete file="${jar.file}.jar" failonerror="false" />
+		<delete file="${jar.file}-javadoc.jar" failonerror="false" />
+		<delete file="${jar.file}-sources.jar" failonerror="false" />
 		<delete dir="${java2html.dir}" />
 		<delete dir="${javadoc.dir}" />
 	</target>
