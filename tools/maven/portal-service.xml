@@ -29,7 +29,7 @@
 		</license>
 	</licenses>
 	<scm>
-		<connection>svn://svn.liferay.com/repos/public/portal/trunk/portal-service</connection>
+		<connection>scm:svn:svn://svn.liferay.com/repos/public/portal/trunk/portal-service</connection>
 		<url>http://svn.liferay.com/browse/portal/trunk/portal-service</url>
 	</scm>
 </project>

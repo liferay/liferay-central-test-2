@@ -30,7 +30,7 @@
 		</license>
 	</licenses>
 	<scm>
-		<connection>svn://svn.liferay.com/repos/public/portal/trunk/support-maven</connection>
+		<connection>scm:svn:svn://svn.liferay.com/repos/public/portal/trunk/support-maven</connection>
 		<url>http://svn.liferay.com/browse/portal/trunk/support-maven</url>
 	</scm>
 	<build>

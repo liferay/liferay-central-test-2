@@ -14,7 +14,7 @@
 	<name>Liferay Maven 2 Plugin</name>
 	<version>6.0.2-SNAPSHOT</version>
 	<scm>
-		<connection>svn://svn.liferay.com/repos/public/portal/trunk/support-maven/plugins/liferay-maven-plugin</connection>
+		<connection>scm:svn:svn://svn.liferay.com/repos/public/portal/trunk/support-maven/plugins/liferay-maven-plugin</connection>
 		<url>http://svn.liferay.com/browse/portal/trunk/support-maven/plugins/liferay-maven-plugin</url>
 	</scm>
 	<build>

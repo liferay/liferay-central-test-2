@@ -29,7 +29,7 @@
 		</license>
 	</licenses>
 	<scm>
-		<connection>svn://svn.liferay.com/repos/public/portal/trunk/util-java</connection>
+		<connection>scm:svn:svn://svn.liferay.com/repos/public/portal/trunk/util-java</connection>
 		<url>http://svn.liferay.com/browse/portal/trunk/util-java</url>
 	</scm>
 	<dependencies>

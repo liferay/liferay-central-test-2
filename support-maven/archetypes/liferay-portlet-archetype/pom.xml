@@ -14,7 +14,7 @@
 	<name>Liferay Maven 2 Portlet Archetype</name>
 	<version>6.0.2-SNAPSHOT</version>
 	<scm>
-		<connection>svn://svn.liferay.com/repos/public/portal/trunk/support-maven/archetypes/liferay-portlet-archetype</connection>
+		<connection>scm:svn:svn://svn.liferay.com/repos/public/portal/trunk/support-maven/archetypes/liferay-portlet-archetype</connection>
 		<url>http://svn.liferay.com/browse/portal/trunk/support-maven/archetypes/liferay-portlet-archetype</url>
 	</scm>
 	<build>
