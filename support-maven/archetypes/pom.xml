@@ -15,7 +15,7 @@
 	<version>6.0.2-SNAPSHOT</version>
 	<scm>
 		<connection>svn://svn.liferay.com/repos/public/portal/trunk/support-maven/archetypes</connection>
-		<url>http://svn.liferay.com/repos/public/portal/trunk/support-maven/archetypes</url>
+		<url>http://svn.liferay.com/browse/portal/trunk/support-maven/archetypes</url>
 	</scm>
 	<modules>
 		<module>liferay-layouttpl-archetype</module>
