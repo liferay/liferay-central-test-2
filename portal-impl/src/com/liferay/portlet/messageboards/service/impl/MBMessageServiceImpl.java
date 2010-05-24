@@ -69,9 +69,10 @@ import java.util.List;
 public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	public MBMessage addDiscussionMessage(
-			String className, long classPK, String permissionClassName,
-			long permissionClassPK, long threadId, long parentMessageId,
-			String subject, String body, ServiceContext serviceContext)
+			long groupId, String className, long classPK,
+			String permissionClassName, long permissionClassPK, long threadId,
+			long parentMessageId, String subject, String body,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		User user = getGuestOrUser();
@@ -82,7 +83,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			permissionClassPK, user.getUserId(), ActionKeys.ADD_DISCUSSION);
 
 		return mbMessageLocalService.addDiscussionMessage(
-			user.getUserId(), null, className, classPK, threadId,
+			user.getUserId(), null, groupId, className, classPK, threadId,
 			parentMessageId, subject, body, serviceContext);
 	}
 

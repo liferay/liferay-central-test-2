@@ -217,7 +217,7 @@ public class DLFileEntryLocalServiceImpl
 
 		if (PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED) {
 			mbMessageLocalService.addDiscussionMessage(
-				userId, fileEntry.getUserName(), fileEntry.getGroupId(),
+				userId, fileEntry.getUserName(), groupId,
 				DLFileEntry.class.getName(), fileEntryId,
 				WorkflowConstants.ACTION_PUBLISH);
 		}

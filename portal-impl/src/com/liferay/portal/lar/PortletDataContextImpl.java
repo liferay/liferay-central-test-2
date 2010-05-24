@@ -648,16 +648,12 @@ public class PortletDataContextImpl implements PortletDataContext {
 				threadPKs.put(message.getThreadId(), thread.getThreadId());
 			}
 			else {
-				ServiceContext serviceContext = new ServiceContext();
-
-				serviceContext.setScopeGroupId(groupId);
-
 				MBMessage newMessage =
 					MBMessageLocalServiceUtil.addDiscussionMessage(
-						userId, message.getUserName(), classObj.getName(),
-						newClassPK, threadId, parentMessageId,
-						message.getSubject(), message.getBody(),
-						serviceContext);
+						userId, message.getUserName(), groupId,
+						classObj.getName(), newClassPK, threadId,
+						parentMessageId, message.getSubject(),
+						message.getBody(), new ServiceContext());
 
 				messagePKs.put(
 					message.getMessageId(), newMessage.getMessageId());

@@ -138,15 +138,15 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
-		long userId, java.lang.String userName, java.lang.String className,
-		long classPK, long threadId, long parentMessageId,
-		java.lang.String subject, java.lang.String body,
+		long userId, java.lang.String userName, long groupId,
+		java.lang.String className, long classPK, long threadId,
+		long parentMessageId, java.lang.String subject, java.lang.String body,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessageLocalService.addDiscussionMessage(userId, userName,
-			className, classPK, threadId, parentMessageId, subject, body,
-			serviceContext);
+			groupId, className, classPK, threadId, parentMessageId, subject,
+			body, serviceContext);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
@@ -294,20 +294,21 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessageDisplay getDiscussionMessageDisplay(
-		long userId, java.lang.String className, long classPK, int status)
+		long userId, long groupId, java.lang.String className, long classPK,
+		int status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessageLocalService.getDiscussionMessageDisplay(userId,
-			className, classPK, status);
+			groupId, className, classPK, status);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessageDisplay getDiscussionMessageDisplay(
-		long userId, java.lang.String className, long classPK, int status,
-		java.lang.String threadView)
+		long userId, long groupId, java.lang.String className, long classPK,
+		int status, java.lang.String threadView)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessageLocalService.getDiscussionMessageDisplay(userId,
-			className, classPK, status, threadView);
+			groupId, className, classPK, status, threadView);
 	}
 
 	public int getDiscussionMessagesCount(long classNameId, long classPK,

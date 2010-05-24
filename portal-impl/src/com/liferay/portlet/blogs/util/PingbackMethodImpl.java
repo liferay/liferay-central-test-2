@@ -104,12 +104,13 @@ public class PingbackMethodImpl implements Method {
 			}
 
 			long userId = UserLocalServiceUtil.getDefaultUserId(companyId);
+			long groupId = entry.getGroupId();
 			String className = BlogsEntry.class.getName();
 			long classPK = entry.getEntryId();
 
 			MBMessageDisplay messageDisplay =
 				MBMessageLocalServiceUtil.getDiscussionMessageDisplay(
-					userId, className, classPK,
+					userId, groupId, className, classPK,
 					WorkflowConstants.STATUS_APPROVED);
 
 			MBThread thread = messageDisplay.getThread();
@@ -135,10 +136,8 @@ public class PingbackMethodImpl implements Method {
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			serviceContext.setScopeGroupId(thread.getGroupId());
-
 			MBMessageLocalServiceUtil.addDiscussionMessage(
-				userId, StringPool.BLANK, className, classPK, threadId,
+				userId, StringPool.BLANK, groupId, className, classPK, threadId,
 				parentMessageId, StringPool.BLANK, body, serviceContext);
 
 			return XmlRpcUtil.createSuccess("Pingback accepted");

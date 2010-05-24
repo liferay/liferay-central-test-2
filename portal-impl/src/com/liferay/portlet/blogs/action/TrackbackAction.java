@@ -151,15 +151,14 @@ public class TrackbackAction extends PortletAction {
 
 		long userId = UserLocalServiceUtil.getDefaultUserId(
 			themeDisplay.getCompanyId());
+		long groupId = entry.getGroupId();
 		String className = BlogsEntry.class.getName();
 		long classPK = entry.getEntryId();
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			MBMessage.class.getName(), actionRequest);
-
 		MBMessageDisplay messageDisplay =
 			MBMessageLocalServiceUtil.getDiscussionMessageDisplay(
-				userId, className, classPK, WorkflowConstants.STATUS_APPROVED);
+				userId, groupId, className, classPK,
+				WorkflowConstants.STATUS_APPROVED);
 
 		MBThread thread = messageDisplay.getThread();
 
@@ -169,11 +168,12 @@ public class TrackbackAction extends PortletAction {
 			"[...] " + excerpt + " [...] [url=" + url + "]" +
 				themeDisplay.translate("read-more") + "[/url]";
 
-		serviceContext.setScopeGroupId(thread.getGroupId());
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			MBMessage.class.getName(), actionRequest);
 
 		MBMessage message = MBMessageLocalServiceUtil.addDiscussionMessage(
-			userId, blogName, className, classPK, threadId, parentMessageId,
-			title, body, serviceContext);
+			userId, blogName, groupId, className, classPK, threadId,
+			parentMessageId, title, body, serviceContext);
 
 		String entryURL =
 			PortalUtil.getLayoutFullURL(themeDisplay) +

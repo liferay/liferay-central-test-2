@@ -29,6 +29,7 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.messageboards.SplitThreadException;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
 import com.liferay.portlet.messageboards.model.MBMessageFlagConstants;
@@ -311,7 +312,9 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		List<MBThread> threads = new ArrayList<MBThread>();
 
-		while (categoryId > 0) {
+		while ((categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+			   (categoryId != MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+
 			threads.addAll(
 				0, mbThreadPersistence.findByC_P(categoryId, priority));
 

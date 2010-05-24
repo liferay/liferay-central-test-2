@@ -38,7 +38,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class MBMessageServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
-		java.lang.String className, long classPK,
+		long groupId, java.lang.String className, long classPK,
 		java.lang.String permissionClassName, long permissionClassPK,
 		long threadId, long parentMessageId, java.lang.String subject,
 		java.lang.String body,
@@ -46,7 +46,7 @@ public class MBMessageServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addDiscussionMessage(className, classPK,
+				   .addDiscussionMessage(groupId, className, classPK,
 			permissionClassName, permissionClassPK, threadId, parentMessageId,
 			subject, body, serviceContext);
 	}

@@ -395,7 +395,9 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletDataContext context, Element categoriesEl, long categoryId)
 		throws PortalException, SystemException {
 
-		if ((!context.hasDateRange()) || (categoryId <= 0)) {
+		if ((!context.hasDateRange()) ||
+			(categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) ||
+			(categoryId == MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
 
 			return;
 		}
@@ -506,7 +508,9 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setModifiedDate(category.getModifiedDate());
 		serviceContext.setScopeGroupId(context.getGroupId());
 
-		if ((parentCategoryId > 0) &&
+		if ((parentCategoryId !=
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+			(parentCategoryId != MBCategoryConstants.DISCUSSION_CATEGORY_ID) &&
 			(parentCategoryId == category.getParentCategoryId())) {
 
 			String path = getImportCategoryPath(context, parentCategoryId);
@@ -524,7 +528,11 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		MBCategory importedCategory = null;
 
 		try {
-			if (parentCategoryId > 0) {
+			if ((parentCategoryId !=
+					MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+				(parentCategoryId !=
+					MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+
 				MBCategoryUtil.findByPrimaryKey(parentCategoryId);
 			}
 
@@ -666,7 +674,9 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				WorkflowConstants.ACTION_SAVE_DRAFT);
 		}
 
-		if ((categoryId > 0) && (categoryId == message.getCategoryId())) {
+		if ((categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+			(categoryId != MBCategoryConstants.DISCUSSION_CATEGORY_ID) &&
+			(categoryId == message.getCategoryId())) {
 
 			String path = getImportCategoryPath(context, categoryId);
 

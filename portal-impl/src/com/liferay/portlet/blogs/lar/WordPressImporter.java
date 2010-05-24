@@ -193,12 +193,12 @@ public class WordPressImporter {
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setScopeGroupId(context.getGroupId());
 
 		MBMessage message = MBMessageLocalServiceUtil.addDiscussionMessage(
-			defaultUser.getUserId(), commentAuthor, BlogsEntry.class.getName(),
-			entry.getEntryId(), messageDisplay.getThread().getThreadId(),
-			commentParentId, null, commentContent, serviceContext);
+			defaultUser.getUserId(), commentAuthor, context.getGroupId(),
+			BlogsEntry.class.getName(), entry.getEntryId(),
+			messageDisplay.getThread().getThreadId(), commentParentId, null,
+			commentContent, serviceContext);
 
 		messageIdMap.put(commentId, message.getMessageId());
 	}
@@ -304,8 +304,8 @@ public class WordPressImporter {
 
 		MBMessageDisplay messageDisplay =
 			MBMessageLocalServiceUtil.getDiscussionMessageDisplay(
-				userId, BlogsEntry.class.getName(), entry.getEntryId(),
-				WorkflowConstants.STATUS_APPROVED);
+				userId, context.getGroupId(), BlogsEntry.class.getName(),
+				entry.getEntryId(), WorkflowConstants.STATUS_APPROVED);
 
 		Map<Long, Long> messageIdMap = new HashMap<Long, Long>();
 

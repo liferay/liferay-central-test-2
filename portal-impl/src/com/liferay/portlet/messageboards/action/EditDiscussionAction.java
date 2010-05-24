@@ -145,8 +145,9 @@ public class EditDiscussionAction extends PortletAction {
 			// Add message
 
 			message = MBMessageServiceUtil.addDiscussionMessage(
-				className, classPK, permissionClassName, permissionClassPK,
-				threadId, parentMessageId, subject, body, serviceContext);
+				serviceContext.getScopeGroupId(), className, classPK,
+				permissionClassName, permissionClassPK, threadId,
+				parentMessageId, subject, body, serviceContext);
 		}
 		else {
 

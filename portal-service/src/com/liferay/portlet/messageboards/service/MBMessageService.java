@@ -48,7 +48,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 	PortalException.class, SystemException.class})
 public interface MBMessageService {
 	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
-		java.lang.String className, long classPK,
+		long groupId, java.lang.String className, long classPK,
 		java.lang.String permissionClassName, long permissionClassPK,
 		long threadId, long parentMessageId, java.lang.String subject,
 		java.lang.String body,

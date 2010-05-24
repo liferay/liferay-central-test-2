@@ -37,16 +37,16 @@ public class MBMessageServiceWrapper implements MBMessageService {
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
-		java.lang.String className, long classPK,
+		long groupId, java.lang.String className, long classPK,
 		java.lang.String permissionClassName, long permissionClassPK,
 		long threadId, long parentMessageId, java.lang.String subject,
 		java.lang.String body,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _mbMessageService.addDiscussionMessage(className, classPK,
-			permissionClassName, permissionClassPK, threadId, parentMessageId,
-			subject, body, serviceContext);
+		return _mbMessageService.addDiscussionMessage(groupId, className,
+			classPK, permissionClassName, permissionClassPK, threadId,
+			parentMessageId, subject, body, serviceContext);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(

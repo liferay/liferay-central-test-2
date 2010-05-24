@@ -123,22 +123,22 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setScopeGroupId(groupId);
 		serviceContext.setWorkflowAction(workflowAction);
 
 		return addDiscussionMessage(
-			userId, userName, className, classPK, threadId, parentMessageId,
-			subject, body, serviceContext);
+			userId, userName, groupId, className, classPK, threadId,
+			parentMessageId, subject, body, serviceContext);
 	}
 
 	public MBMessage addDiscussionMessage(
-			long userId, String userName, String className, long classPK,
-			long threadId, long parentMessageId, String subject,
+			long userId, String userName, long groupId, String className,
+			long classPK, long threadId, long parentMessageId, String subject,
 			String body, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Message
 
+		long categoryId = MBCategoryConstants.DISCUSSION_CATEGORY_ID;
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		if (Validator.isNull(subject)) {
@@ -153,9 +153,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
-
-		long groupId = serviceContext.getScopeGroupId();
-		long categoryId = MBCategoryConstants.DISCUSSIONS_CATEGORY_ID;
 
 		MBMessage message = addMessage(
 			userId, userName, groupId, categoryId, threadId, parentMessageId,
@@ -808,17 +805,18 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public MBMessageDisplay getDiscussionMessageDisplay(
-			long userId, String className, long classPK, int status)
+			long userId, long groupId, String className, long classPK,
+			int status)
 		throws PortalException, SystemException {
 
 		return getDiscussionMessageDisplay(
-			userId, className, classPK, status,
+			userId, groupId, className, classPK, status,
 			MBThreadConstants.THREAD_VIEW_COMBINATION);
 	}
 
 	public MBMessageDisplay getDiscussionMessageDisplay(
-			long userId, String className, long classPK, int status,
-			String threadView)
+			long userId, long groupId, String className, long classPK,
+			int status, String threadView)
 		throws PortalException, SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
@@ -841,7 +839,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			try {
 				message = addDiscussionMessage(
-					userId, null, className, classPK, 0,
+					userId, null, groupId, className, classPK, 0,
 					MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID, subject,
 					subject, new ServiceContext());
 			}
@@ -1375,7 +1373,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MBCategory category = null;
 
-		if (thread.getCategoryId() > 0) {
+		if ((thread.getCategoryId() !=
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+			(thread.getCategoryId() !=
+				MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
 
 			category = mbCategoryPersistence.findByPrimaryKey(
 				thread.getCategoryId());
@@ -1618,8 +1619,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		Company company = companyPersistence.findByPrimaryKey(
 			message.getCompanyId());
 
-		Group group = groupPersistence.findByPrimaryKey(
-			serviceContext.getScopeGroupId());
+		Group group = groupPersistence.findByPrimaryKey(message.getGroupId());
 
 		String emailAddress = StringPool.BLANK;
 		String fullName = message.getUserName();

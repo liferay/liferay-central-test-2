@@ -66,50 +66,52 @@ import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
  */
 public class MBMessageServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
-		HttpPrincipal httpPrincipal, java.lang.String className, long classPK,
-		java.lang.String permissionClassName, long permissionClassPK,
-		long threadId, long parentMessageId, java.lang.String subject,
-		java.lang.String body,
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String className,
+		long classPK, java.lang.String permissionClassName,
+		long permissionClassPK, long threadId, long parentMessageId,
+		java.lang.String subject, java.lang.String body,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = className;
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = className;
 
 			if (className == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = new LongWrapper(classPK);
+			Object paramObj2 = new LongWrapper(classPK);
 
-			Object paramObj2 = permissionClassName;
+			Object paramObj3 = permissionClassName;
 
 			if (permissionClassName == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = new LongWrapper(permissionClassPK);
+			Object paramObj4 = new LongWrapper(permissionClassPK);
 
-			Object paramObj4 = new LongWrapper(threadId);
+			Object paramObj5 = new LongWrapper(threadId);
 
-			Object paramObj5 = new LongWrapper(parentMessageId);
+			Object paramObj6 = new LongWrapper(parentMessageId);
 
-			Object paramObj6 = subject;
+			Object paramObj7 = subject;
 
 			if (subject == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = body;
-
-			if (body == null) {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = serviceContext;
+			Object paramObj8 = body;
+
+			if (body == null) {
+				paramObj8 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj9 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj8 = new NullWrapper(
+				paramObj9 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -117,7 +119,7 @@ public class MBMessageServiceHttp {
 					"addDiscussionMessage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
 					});
 
 			Object returnObj = null;
