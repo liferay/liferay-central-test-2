@@ -152,8 +152,9 @@ public class ShoppingOrderLocalServiceImpl
 
 		if (PropsValues.SHOPPING_ORDER_COMMENTS_ENABLED) {
 			mbMessageLocalService.addDiscussionMessage(
-				userId, order.getUserName(), ShoppingOrder.class.getName(),
-				orderId, WorkflowConstants.ACTION_PUBLISH);
+				userId, order.getUserName(), order.getGroupId(),
+				ShoppingOrder.class.getName(), orderId,
+				WorkflowConstants.ACTION_PUBLISH);
 		}
 
 		return order;

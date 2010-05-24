@@ -23,4 +23,6 @@ public class MBCategoryConstants {
 
 	public static long DEFAULT_PARENT_CATEGORY_ID = 0;
 
+	public static long DISCUSSIONS_CATEGORY_ID = -1;
+
 }

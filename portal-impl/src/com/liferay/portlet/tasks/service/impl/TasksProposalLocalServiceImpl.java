@@ -107,8 +107,9 @@ public class TasksProposalLocalServiceImpl
 		// Message boards
 
 		mbMessageLocalService.addDiscussionMessage(
-			userId, proposal.getUserName(), TasksProposal.class.getName(),
-			proposalId, WorkflowConstants.ACTION_PUBLISH);
+			userId, proposal.getUserName(), proposal.getGroupId(),
+			TasksProposal.class.getName(), proposalId,
+			WorkflowConstants.ACTION_PUBLISH);
 
 		// Social
 

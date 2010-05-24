@@ -320,7 +320,7 @@ public class JournalArticleLocalServiceImpl
 
 		if (PropsValues.JOURNAL_ARTICLE_COMMENTS_ENABLED) {
 			mbMessageLocalService.addDiscussionMessage(
-				userId, article.getUserName(),
+				userId, article.getUserName(), article.getGroupId(),
 				JournalArticle.class.getName(), resourcePrimKey,
 				WorkflowConstants.ACTION_PUBLISH);
 		}

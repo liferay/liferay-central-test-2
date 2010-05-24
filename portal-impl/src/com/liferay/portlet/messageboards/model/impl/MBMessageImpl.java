@@ -22,10 +22,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
-import com.liferay.portlet.messageboards.model.MBCategory;
-import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.portlet.messageboards.model.MBMessageConstants;
-import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portlet.messageboards.model.*;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.util.BBCodeUtil;
@@ -116,7 +113,7 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 	}
 
 	public boolean isDiscussion() {
-		if ((getGroupId() == 0) && (getCategoryId() == 0)) {
+		if (getCategoryId() == MBCategoryConstants.DISCUSSIONS_CATEGORY_ID) {
 			return true;
 		}
 		else {

@@ -112,8 +112,8 @@ import net.htmlparser.jericho.StartTag;
 public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 	public MBMessage addDiscussionMessage(
-			long userId, String userName, String className, long classPK,
-			int workflowAction)
+			long userId, String userName, long groupId, String className,
+			long classPK, int workflowAction)
 		throws PortalException, SystemException {
 
 		long threadId = 0;
@@ -123,6 +123,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		ServiceContext serviceContext = new ServiceContext();
 
+		serviceContext.setScopeGroupId(groupId);
 		serviceContext.setWorkflowAction(workflowAction);
 
 		return addDiscussionMessage(
@@ -132,8 +133,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 	public MBMessage addDiscussionMessage(
 			long userId, String userName, String className, long classPK,
-			long threadId, long parentMessageId, String subject, String body,
-			ServiceContext serviceContext)
+			long threadId, long parentMessageId, String subject,
+			String body, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Message
@@ -153,10 +154,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
-		MBCategory category = mbCategoryLocalService.getSystemCategory();
-
-		long groupId = category.getGroupId();
-		long categoryId = category.getCategoryId();
+		long groupId = serviceContext.getScopeGroupId();
+		long categoryId = MBCategoryConstants.DISCUSSIONS_CATEGORY_ID;
 
 		MBMessage message = addMessage(
 			userId, userName, groupId, categoryId, threadId, parentMessageId,

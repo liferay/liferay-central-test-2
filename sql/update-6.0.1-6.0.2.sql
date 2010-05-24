@@ -6,6 +6,8 @@ COMMIT_TRANSACTION;
 
 alter table LayoutSet add settings_ TEXT null;
 
+update MBThread set categoryId = -1 where groupId = 0;
+
 alter table PasswordPolicy add minAlphanumeric INTEGER;
 alter table PasswordPolicy add minLowerCase INTEGER;
 alter table PasswordPolicy add minNumbers INTEGER;

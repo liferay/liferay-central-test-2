@@ -169,6 +169,8 @@ public class TrackbackAction extends PortletAction {
 			"[...] " + excerpt + " [...] [url=" + url + "]" +
 				themeDisplay.translate("read-more") + "[/url]";
 
+		serviceContext.setScopeGroupId(thread.getGroupId());
+
 		MBMessage message = MBMessageLocalServiceUtil.addDiscussionMessage(
 			userId, blogName, className, classPK, threadId, parentMessageId,
 			title, body, serviceContext);

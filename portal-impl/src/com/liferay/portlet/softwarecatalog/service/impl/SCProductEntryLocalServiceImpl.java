@@ -137,7 +137,7 @@ public class SCProductEntryLocalServiceImpl
 
 		if (PropsValues.SC_PRODUCT_COMMENTS_ENABLED) {
 			mbMessageLocalService.addDiscussionMessage(
-				userId, productEntry.getUserName(),
+				userId, productEntry.getUserName(), productEntry.getGroupId(),
 				SCProductEntry.class.getName(), productEntryId,
 				WorkflowConstants.ACTION_PUBLISH);
 		}

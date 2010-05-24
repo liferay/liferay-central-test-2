@@ -206,8 +206,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		if (PropsValues.WIKI_PAGE_COMMENTS_ENABLED) {
 			mbMessageLocalService.addDiscussionMessage(
-				userId, page.getUserName(), WikiPage.class.getName(),
-				resourcePrimKey, WorkflowConstants.ACTION_PUBLISH);
+				userId, page.getUserName(), page.getGroupId(),
+				WikiPage.class.getName(), resourcePrimKey,
+				WorkflowConstants.ACTION_PUBLISH);
 		}
 
 		// Workflow
