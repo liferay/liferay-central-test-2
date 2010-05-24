@@ -66,17 +66,21 @@ AUI().add(
 							}
 						).render();
 
-						toolbar.all('.add-vocabulary-button').on(
-							'click',
-							function (event) {
-								instance._showToolBarVocabularySection();
+						instance._vocabularyCategoryPanel.after(
+							'visibleChange',
+							function(event) {
+								if (event.newVal) {
+									instance._showToolBarVocabularySection();
+								}
 							}
 						);
 
-						toolbar.all('.add-category-button').on(
-							'click',
-							function (event) {
-								instance._showToolBarCategorySection();
+						instance._toolbarCategoryPanel.after(
+							'visibleChange',
+							function(event) {
+								if (event.newVal) {
+									instance._showToolBarCategorySection();
+								}
 							}
 						);
 
@@ -1255,6 +1259,10 @@ AUI().add(
 						categoryPanel.refreshAlign();
 
 						instance._vocabularyCategoryPanel.hide();
+
+						var inputCategoryNameNode = categoryPanel.get('contentBox').one('.vocabulary-category-name');
+
+						Liferay.Util.focusFormField(inputCategoryNameNode);
 					},
 
 					_showToolBarVocabularySection: function() {
@@ -1265,6 +1273,10 @@ AUI().add(
 						vocabularyCategoryPanel.refreshAlign();
 
 						instance._toolbarCategoryPanel.hide();
+
+						var inputVocabularyNameNode = vocabularyCategoryPanel.get('contentBox').one('.vocabulary-name');
+
+						Liferay.Util.focusFormField(inputVocabularyNameNode);
 					},
 
 					_unselectAllVocabularies: function() {

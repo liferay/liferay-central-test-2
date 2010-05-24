@@ -45,7 +45,6 @@ AUI().add(
 						tagsContainer.placeBefore(instance._tagMessageContainer);
 
 						var toolbar = A.all('.tags-admin-toolbar');
-						var addTagButton = A.all('.add-tag-button');
 
 						var addTagLayer = A.one('.add-tag-layer');
 
@@ -58,6 +57,17 @@ AUI().add(
 								trigger: '.add-tag-button'
 							}
 						).render();
+
+						instance._addTagOverlay.after(
+							'visibleChange',
+							function(event) {
+								if (event.newVal) {
+									var inputTagNameNode = addTagLayer.one('.new-tag-name');
+
+									Liferay.Util.focusFormField(inputTagNameNode);
+								}
+							}
+						);
 
 						A.one('.tag-permissions-button').on(
 							'click',
