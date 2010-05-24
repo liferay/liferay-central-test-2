@@ -34,7 +34,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 }
 %>
 
-<div class="dockbar" id="dockbar" data-namespace="<portlet:namespace />">
+<div class="dockbar" data-namespace="<portlet:namespace />" id="dockbar">
 	<ul class="aui-toolbar">
 		<li class="pin-dockbar">
 			<a href="javascript:;"><img alt='<liferay-ui:message key="pin-the-dockbar" />' src="<%= HtmlUtil.escape(themeDisplay.getPathThemeImages()) %>/spacer.png" /></a>
@@ -73,7 +73,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 												%>
 
 													<li class="<%= (i == 0) ? "first" : "" %>">
-														<a class="app-shortcut" href="javascript:;" data-portlet-id="<%= portlet.getPortletId() %>">
+														<a class="app-shortcut" data-portlet-id="<%= portlet.getPortletId() %>" href="javascript:;">
 															<liferay-portlet:icon-portlet portlet="<%= portlet %>" />
 
 															<%= PortalUtil.getPortletTitle(portlet.getPortletId(), locale) %>
