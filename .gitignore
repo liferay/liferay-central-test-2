@@ -36,13 +36,14 @@
 /portal-client/*.ipr
 /portal-client/*.iws
 /portal-client/classes
+/portal-client/portal-client*.jar
 /portal-client/src
 
 /portal-impl/*.iml
 /portal-impl/*.ipr
 /portal-impl/*.iws
 /portal-impl/classes
-/portal-impl/portal-impl.jar
+/portal-impl/portal-impl*.jar
 /portal-impl/service.xml
 /portal-impl/ServiceBuilder.temp
 /portal-impl/test-classes
@@ -60,7 +61,7 @@
 /portal-service/*.ipr
 /portal-service/*.iws
 /portal-service/classes
-/portal-service/portal-service.jar
+/portal-service/portal-service*.jar
 
 /portal-web/*.iml
 /portal-web/*.ipr
@@ -165,7 +166,7 @@
 /util-bridges/*.ipr
 /util-bridges/*.iws
 /util-bridges/classes
-/util-bridges/util-bridges.jar
+/util-bridges/util-bridges*.jar
 
 /util-java/*.iml
 /util-java/*.ipr
@@ -173,10 +174,10 @@
 /util-java/classes
 /util-java/test-classes
 /util-java/test-results
-/util-java/util-java.jar
+/util-java/util-java*.jar
 
 /util-taglib/*.iml
 /util-taglib/*.ipr
 /util-taglib/*.iws
 /util-taglib/classes
-/util-taglib/util-taglib.jar
+/util-taglib/util-taglib*.jar
