@@ -448,6 +448,7 @@ public class DLFileEntryLocalServiceImpl
 							dlFileVersionLocalService.getLatestFileVersion(
 								groupId, folderId, name);
 
+						fileEntry.setSize(fileVersion.getSize());
 						fileEntry.setVersion(fileVersion.getVersion());
 					}
 					catch (NoSuchFileVersionException nsfve) {
