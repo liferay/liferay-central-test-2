@@ -129,12 +129,12 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
-		long userId, java.lang.String userName, java.lang.String className,
-		long classPK, int workflowAction)
+		long userId, java.lang.String userName, long groupId,
+		java.lang.String className, long classPK, int workflowAction)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessageLocalService.addDiscussionMessage(userId, userName,
-			className, classPK, workflowAction);
+			groupId, className, classPK, workflowAction);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
