@@ -103,6 +103,7 @@
 			<basic name="homeURL" />
 			<basic name="logoId" />
 			<basic name="system" />
+			<basic name="maxUsers" />
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

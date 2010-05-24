@@ -120,6 +120,14 @@ public class CompanyWrapper implements Company {
 		_company.setSystem(system);
 	}
 
+	public int getMaxUsers() {
+		return _company.getMaxUsers();
+	}
+
+	public void setMaxUsers(int maxUsers) {
+		_company.setMaxUsers(maxUsers);
+	}
+
 	public com.liferay.portal.model.Company toEscapedModel() {
 		return _company.toEscapedModel();
 	}

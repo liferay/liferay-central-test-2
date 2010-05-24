@@ -88,6 +88,10 @@ public interface CompanyModel extends BaseModel<Company> {
 
 	public void setSystem(boolean system);
 
+	public int getMaxUsers();
+
+	public void setMaxUsers(int maxUsers);
+
 	public Company toEscapedModel();
 
 	public boolean isNew();

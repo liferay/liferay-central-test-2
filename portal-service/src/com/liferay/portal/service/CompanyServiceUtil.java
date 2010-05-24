@@ -39,10 +39,13 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 public class CompanyServiceUtil {
 	public static com.liferay.portal.model.Company addCompany(
 		java.lang.String webId, java.lang.String virtualHost,
-		java.lang.String mx, java.lang.String shardName, boolean system)
+		java.lang.String mx, java.lang.String shardName, boolean system,
+		int maxUsers)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().addCompany(webId, virtualHost, mx, shardName, system);
+		return getService()
+				   .addCompany(webId, virtualHost, mx, shardName, system,
+			maxUsers);
 	}
 
 	public static void deleteLogo(long companyId)
@@ -93,10 +96,11 @@ public class CompanyServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Company updateCompany(
-		long companyId, java.lang.String virtualHost, java.lang.String mx)
+		long companyId, java.lang.String virtualHost, java.lang.String mx,
+		int maxUsers)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateCompany(companyId, virtualHost, mx);
+		return getService().updateCompany(companyId, virtualHost, mx, maxUsers);
 	}
 
 	public static com.liferay.portal.model.Company updateCompany(

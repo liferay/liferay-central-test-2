@@ -310,7 +310,8 @@ create table Company (
 	mx VARCHAR(75) null,
 	homeURL STRING null,
 	logoId LONG,
-	system BOOLEAN
+	system BOOLEAN,
+	maxUsers INTEGER
 );
 
 create table Contact_ (

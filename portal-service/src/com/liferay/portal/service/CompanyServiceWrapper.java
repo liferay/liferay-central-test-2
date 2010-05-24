@@ -38,11 +38,11 @@ public class CompanyServiceWrapper implements CompanyService {
 
 	public com.liferay.portal.model.Company addCompany(java.lang.String webId,
 		java.lang.String virtualHost, java.lang.String mx,
-		java.lang.String shardName, boolean system)
+		java.lang.String shardName, boolean system, int maxUsers)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _companyService.addCompany(webId, virtualHost, mx, shardName,
-			system);
+			system, maxUsers);
 	}
 
 	public void deleteLogo(long companyId)
@@ -90,10 +90,11 @@ public class CompanyServiceWrapper implements CompanyService {
 	}
 
 	public com.liferay.portal.model.Company updateCompany(long companyId,
-		java.lang.String virtualHost, java.lang.String mx)
+		java.lang.String virtualHost, java.lang.String mx, int maxUsers)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _companyService.updateCompany(companyId, virtualHost, mx);
+		return _companyService.updateCompany(companyId, virtualHost, mx,
+			maxUsers);
 	}
 
 	public com.liferay.portal.model.Company updateCompany(long companyId,

@@ -373,6 +373,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		companyImpl.setHomeURL(company.getHomeURL());
 		companyImpl.setLogoId(company.getLogoId());
 		companyImpl.setSystem(company.isSystem());
+		companyImpl.setMaxUsers(company.getMaxUsers());
 
 		return companyImpl;
 	}
