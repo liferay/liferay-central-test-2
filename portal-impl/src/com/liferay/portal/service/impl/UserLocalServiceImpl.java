@@ -1341,7 +1341,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				new HashMap<String, Serializable>();
 
 			attributes.put("active", active);
-			attributes.put("andSearch", andSearch);
 			attributes.put("emailAddress", emailAddress);
 			attributes.put("firstName", firstName);
 			attributes.put("lastName", lastName);
@@ -1351,6 +1350,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 			SearchContext searchContext = new SearchContext();
 
+			searchContext.setAndSearch(andSearch);
 			searchContext.setAttributes(attributes);
 			searchContext.setCompanyId(companyId);
 			searchContext.setEnd(end);

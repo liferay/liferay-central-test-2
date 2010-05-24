@@ -76,11 +76,7 @@ public class AssetIndexer extends BaseIndexer {
 			return;
 		}
 
-		Boolean andSearch = (Boolean)searchContext.getAttribute("andSearch");
-
-		if (andSearch == null) {
-			andSearch = Boolean.TRUE;
-		}
+		boolean andSearch = searchContext.getAndSearch();
 
 		String description = (String)searchContext.getAttribute(
 			Field.DESCRIPTION);

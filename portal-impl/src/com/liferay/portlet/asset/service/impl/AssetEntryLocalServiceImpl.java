@@ -362,13 +362,13 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			Map<String, Serializable> attributes =
 				new HashMap<String, Serializable>();
 
-			attributes.put("andSearch", andSearch);
 			attributes.put(Field.DESCRIPTION, description);
 			attributes.put(Field.TITLE, title);
 			attributes.put(Field.USER_NAME, userName);
 
 			SearchContext searchContext = new SearchContext();
 
+			searchContext.setAndSearch(andSearch);
 			searchContext.setAttributes(attributes);
 			searchContext.setCompanyId(companyId);
 			searchContext.setEnd(end);

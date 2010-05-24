@@ -377,11 +377,7 @@ public class UserIndexer extends BaseIndexer {
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
 
-		Boolean andSearch = (Boolean)searchContext.getAttribute("andSearch");
-
-		if (andSearch == null) {
-			andSearch = Boolean.TRUE;
-		}
+		boolean andSearch = searchContext.getAndSearch();
 
 		String emailAddress = (String)searchContext.getAttribute(
 			"emailAddress");

@@ -28,6 +28,10 @@ import java.util.Map;
  */
 public class SearchContext implements Serializable {
 
+	public boolean getAndSearch(){
+		return _andSearch;
+	}
+
 	public long[] getAssetCategoryIds() {
 		return _assetCategoryIds;
 	}
@@ -98,6 +102,10 @@ public class SearchContext implements Serializable {
 
 	public boolean isScopeStrict() {
 		return _scopeStrict;
+	}
+
+	public void setAndSearch(boolean andSearch) {
+		_andSearch = andSearch;
 	}
 
 	public void setAssetCategoryIds(long[] assetCategoryIds) {
@@ -172,6 +180,7 @@ public class SearchContext implements Serializable {
 		_userId = userId;
 	}
 
+	private boolean _andSearch;
 	private long[] _assetCategoryIds;
 	private String[] _assetTagNames;
 	private Map<String, Serializable> _attributes;
