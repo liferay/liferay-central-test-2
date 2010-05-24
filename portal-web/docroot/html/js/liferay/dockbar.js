@@ -39,7 +39,7 @@ AUI().add(
 
 					instance.dockBar = dockBar;
 
-					instance._namespace = dockBar.attr('rel');
+					instance._namespace = dockBar.attr('data-namespace');
 
 					instance.MenuManager = new A.OverlayManager(
 						{
@@ -229,7 +229,7 @@ AUI().add(
 							function(event) {
 								var item = event.currentTarget;
 
-								var portletId = item.attr('rel');
+								var portletId = item.attr('data-portlet-id');
 
 								if ((/^\d+$/).test(portletId)) {
 									Liferay.Portlet.add(

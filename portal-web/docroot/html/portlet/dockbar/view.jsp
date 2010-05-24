@@ -34,10 +34,10 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 }
 %>
 
-<div class="dockbar" id="dockbar" rel="<portlet:namespace />">
+<div class="dockbar" id="dockbar" data-namespace="<portlet:namespace />">
 	<ul class="aui-toolbar">
 		<li class="pin-dockbar">
-			<a href="javascript:;"><img alt='<liferay-ui:message key="pin-the-dockbar" />' src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" /></a>
+			<a href="javascript:;"><img alt='<liferay-ui:message key="pin-the-dockbar" />' src="<%= HtmlUtil.escape(themeDisplay.getPathThemeImages()) %>/spacer.png" /></a>
 		</li>
 
 		<c:if test="<%= (group != null) && (!group.hasStagingGroup() || group.isStagingGroup()) && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
@@ -73,7 +73,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 												%>
 
 													<li class="<%= (i == 0) ? "first" : "" %>">
-														<a class="app-shortcut" href="javascript:;" rel="<%= portlet.getPortletId() %>">
+														<a class="app-shortcut" href="javascript:;" data-portlet-id="<%= portlet.getPortletId() %>">
 															<liferay-portlet:icon-portlet portlet="<%= portlet %>" />
 
 															<%= PortalUtil.getPortletTitle(portlet.getPortletId(), locale) %>
@@ -113,9 +113,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 						<ul>
 							<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
 								<li class="first manage-page">
-									<a href="<%= HtmlUtil.escape(themeDisplay.getURLPageSettings().toString()) %>">
-										<liferay-ui:message key="page" />
-									</a>
+									<aui:a href="<%= themeDisplay.getURLPageSettings().toString() %>" label="page" />
 								</li>
 							</c:if>
 
@@ -129,25 +127,19 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 
 							<c:if test="<%= themeDisplay.isShowPageSettingsIcon() && !group.isLayoutPrototype() %>">
 								<li class="sitemap">
-									<a href="<%= HtmlUtil.escape(HttpUtil.setParameter(themeDisplay.getURLPageSettings().toString(), "selPlid", "-1")) %>">
-										<liferay-ui:message key="sitemap" />
-									</a>
+									<aui:a href='<%= HttpUtil.setParameter(themeDisplay.getURLPageSettings().toString(), "selPlid", "-1") %>' label="sitemap" />
 								</li>
 							</c:if>
 
 							<c:if test="<%= themeDisplay.isShowPageSettingsIcon() && !group.isLayoutPrototype() %>">
 								<li class="settings">
-									<a href="<%= HtmlUtil.escape(HttpUtil.setParameter(themeDisplay.getURLPageSettings().toString(), "tabs1", "settings")) %>">
-										<liferay-ui:message key="settings" />
-									</a>
+									<aui:a href='<%= HttpUtil.setParameter(themeDisplay.getURLPageSettings().toString(), "tabs1", "settings") %>' label="settings" />
 								</li>
 							</c:if>
 
 							<c:if test="<%= themeDisplay.isShowControlPanelIcon() %>">
 								<li class="control-panel last" id="<portlet:namespace />controlPanel">
-									<a href="<%= themeDisplay.getURLControlPanel() %>">
-										<liferay-ui:message key="control-panel" />
-									</a>
+									<aui:a href="<%= themeDisplay.getURLControlPanel() %>" label="control-panel" />
 								</li>
 							</c:if>
 						</ul>
@@ -208,10 +200,14 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 
 		<li class="user-avatar <%= themeDisplay.isImpersonated() ? "impersonating-user has-submenu" : "" %>" id="<portlet:namespace />userAvatar">
 			<span class="user-links <%= themeDisplay.isImpersonated() ? "menu-button": "" %>">
-				<a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><img alt="<%= HtmlUtil.escape(user.getFullName()) %>" src="<%= themeDisplay.getPathImage() %>/user_<%= user.isFemale() ? "female" : "male" %>_portrait?img_id=<%= user.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(user.getPortraitId()) %>" /></a> <a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><%= HtmlUtil.escape(user.getFullName()) %></a>
+				<aui:a href="<%= themeDisplay.getURLMyAccount().toString() %>">
+					<img alt="<%= HtmlUtil.escape(user.getFullName()) %>" src="<%= HtmlUtil.escape(themeDisplay.getPathImage() + "/user_" + (user.isFemale() ? "female" : "male") + "_portrait?img_id=" + user.getPortraitId() + "&t=" + ImageServletTokenUtil.getToken(user.getPortraitId())) %>" />
+				</aui:a>
+
+				<aui:a href="<%= themeDisplay.getURLMyAccount().toString() %>"><%= HtmlUtil.escape(user.getFullName()) %></aui:a>
 
 				<c:if test="<%= themeDisplay.isShowSignOutIcon() %>">
-					<span class="sign-out">(<a href="<%= themeDisplay.getURLSignOut() %>"><liferay-ui:message key="sign-out" /></a>)</span>
+					<span class="sign-out">(<aui:a href="<%= themeDisplay.getURLSignOut() %>" label="sign-out" />)</span>
 				</c:if>
 			</span>
 
@@ -231,7 +227,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 
 						<ul>
 							<li>
-								<a href="<%= PortalUtil.getLayoutURL(layout, themeDisplay, false) %>"><liferay-ui:message key="be-yourself-again" /> (<%= HtmlUtil.escape(realUser.getFullName()) %>)</a>
+								<aui:a href="<%= PortalUtil.getLayoutURL(layout, themeDisplay, false) %>"><liferay-ui:message key="be-yourself-again" /> (<%= HtmlUtil.escape(realUser.getFullName()) %>)</aui:a>
 							</li>
 
 							<%
@@ -256,7 +252,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 								%>
 
 								<li class="current-user-language">
-									<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsUserLanguageId", doAsUserLanguageId) %>"><%= changeLanguageMessage %></a>
+									<aui:a href='<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsUserLanguageId", doAsUserLanguageId) %>'><%= changeLanguageMessage %></aui:a>
 								</li>
 							</c:if>
 						</ul>
