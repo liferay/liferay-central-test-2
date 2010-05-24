@@ -23,9 +23,9 @@ Object[] objArray = (Object[])row.getObject();
 
 DLFileEntry fileEntry = (DLFileEntry)objArray[0];
 DLFileVersion fileVersion = (DLFileVersion)objArray[1];
-String[] conversions = (String[])objArray[2];
-Boolean isLocked = (Boolean)objArray[3];
-Boolean hasLock = (Boolean)objArray[4];
+String[] conversions = (String[])objArray[3];
+Boolean isLocked = (Boolean)objArray[4];
+Boolean hasLock = (Boolean)objArray[5];
 %>
 
 <table class="lfr-table">
