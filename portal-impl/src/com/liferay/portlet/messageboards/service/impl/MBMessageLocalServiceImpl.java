@@ -153,6 +153,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setAttribute("className", className);
+		serviceContext.setAttribute("classPK", String.valueOf(classPK));
 
 		MBMessage message = addMessage(
 			userId, userName, groupId, categoryId, threadId, parentMessageId,
@@ -163,9 +165,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setClassPK(classPK);
 
 		mbMessagePersistence.update(message, false);
-
-		serviceContext.setAttribute("className", className);
-		serviceContext.setAttribute("classPK", String.valueOf(classPK));
 
 		// Discussion
 
@@ -408,9 +407,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			}
 
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
-				user.getCompanyId(), groupId, userId,
-				className, message.getMessageId(), message,
-				serviceContext);
+				user.getCompanyId(), groupId, userId, className,
+				message.getMessageId(), message, serviceContext);
 		}
 
 		// Testing roll back
@@ -1023,7 +1021,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBCategory category = null;
 
 		if (!message.isDiscussion()) {
-			mbCategoryPersistence.findByPrimaryKey(message.getCategoryId());
+			category = mbCategoryPersistence.findByPrimaryKey(
+				message.getCategoryId());
 		}
 
 		MBMessage parentMessage = null;
@@ -1470,7 +1469,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			pingPingback(message, serviceContext);
 
-			// Discussion
+			// Workflow
 
 			if (message.isDiscussion()) {
 				updateDiscussionMessageStatus(
@@ -2042,7 +2041,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		String className = (String)serviceContext.getAttribute("className");
-		Long classPK = GetterUtil.getLong(
+		long classPK = GetterUtil.getLong(
 			(String)serviceContext.getAttribute("classPK"));
 
 		MBMessage message = getMessage(messageId);
@@ -2067,8 +2066,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 				// Social
 
-				BlogsEntry entry =
-					blogsEntryPersistence.findByPrimaryKey(classPK);
+				BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(
+					classPK);
 
 				JSONObject extraData = JSONFactoryUtil.createJSONObject();
 
