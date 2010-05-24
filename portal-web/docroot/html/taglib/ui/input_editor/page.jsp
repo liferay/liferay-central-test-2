@@ -40,9 +40,9 @@ StringBundler sb = new StringBundler();
 sb.append(themeDisplay.getPathContext());
 sb.append("/html/js/editor/editor.jsp?p_l_id=");
 sb.append(plid);
-sb.append("&p_main_path=");
+sb.append("&amp;p_main_path=");
 sb.append(HttpUtil.encodeURL(themeDisplay.getPathMain()));
-sb.append("&doAsUserId=");
+sb.append("&amp;doAsUserId=");
 
 String doAsUserId = themeDisplay.getDoAsUserId();
 
@@ -52,25 +52,25 @@ if (Validator.isNull(doAsUserId)) {
 
 sb.append(HttpUtil.encodeURL(doAsUserId));
 
-sb.append("&editorImpl=");
+sb.append("&amp;editorImpl=");
 sb.append(editorImpl);
 
 if (Validator.isNotNull(toolbarSet)) {
-	sb.append("&toolbarSet=");
+	sb.append("&amp;toolbarSet=");
 	sb.append(toolbarSet);
 }
 
 if (Validator.isNotNull(initMethod)) {
-	sb.append("&initMethod=");
+	sb.append("&amp;initMethod=");
 	sb.append(initMethod);
 }
 
 if (Validator.isNotNull(onChangeMethod)) {
-	sb.append("&onChangeMethod=");
+	sb.append("&amp;onChangeMethod=");
 	sb.append(onChangeMethod);
 }
 
-sb.append("&cssPath=");
+sb.append("&amp;cssPath=");
 sb.append(HttpUtil.encodeURL(themeDisplay.getPathThemeCss()));
 
 String cssClasses = "portlet ";
@@ -81,10 +81,10 @@ if (portlet != null) {
 	cssClasses += portlet.getCssClassWrapper();
 }
 
-sb.append("&cssClasses=");
+sb.append("&amp;cssClasses=");
 sb.append(HttpUtil.encodeURL(cssClasses));
 
 String editorURL = sb.toString();
 %>
 
-<iframe <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> frameborder="0" height="<%= height %>" id="<%= name %>" name="<%= name %>" scrolling="no" src="<%= editorURL %>" width="<%= width %>"></iframe>
+<iframe <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> height="<%= height %>" id="<%= name %>" name="<%= name %>" src="<%= editorURL %>" style=" border:none; overflow:hidden;"  width="<%= width %>"></iframe>
