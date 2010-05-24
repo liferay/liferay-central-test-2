@@ -58,8 +58,6 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	public void deleteThread(MBThread thread)
 		throws PortalException, SystemException {
 
-		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
-			thread.getCategoryId());
 		MBMessage rootMessage = mbMessagePersistence.findByPrimaryKey(
 			thread.getRootMessageId());
 
@@ -132,6 +130,9 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		// Category
 
 		if (!rootMessage.isDiscussion()) {
+			MBCategory category = mbCategoryPersistence.findByPrimaryKey(
+				thread.getCategoryId());
+
 			category.setThreadCount(category.getThreadCount() - 1);
 			category.setMessageCount(
 				category.getMessageCount() - messages.size());

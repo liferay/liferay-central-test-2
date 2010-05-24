@@ -128,8 +128,8 @@ public class MBIndexer extends BaseIndexer {
 		else if (obj instanceof MBThread) {
 			MBThread thread = (MBThread)obj;
 
-			MBCategory category = MBCategoryLocalServiceUtil.getCategory(
-				thread.getCategoryId());
+			MBMessage message = MBMessageLocalServiceUtil.getMessage(
+				thread.getRootMessageId());
 
 			BooleanQuery booleanQuery = BooleanQueryFactoryUtil.create();
 
@@ -138,14 +138,14 @@ public class MBIndexer extends BaseIndexer {
 			booleanQuery.addRequiredTerm("threadId", thread.getThreadId());
 
 			Hits hits = SearchEngineUtil.search(
-				category.getCompanyId(), booleanQuery, QueryUtil.ALL_POS,
+				message.getCompanyId(), booleanQuery, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS);
 
 			for (int i = 0; i < hits.getLength(); i++) {
 				Document document = hits.doc(i);
 
 				SearchEngineUtil.deleteDocument(
-					category.getCompanyId(), document.get(Field.UID));
+					message.getCompanyId(), document.get(Field.UID));
 			}
 		}
 	}
