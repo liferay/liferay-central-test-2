@@ -1880,7 +1880,7 @@ public class PortalImpl implements Portal {
 		PortletResponseImpl portletResponseImpl =
 			PortletResponseImpl.getPortletResponseImpl(portletResponse);
 
-		return (LiferayPortletResponse)portletResponseImpl;
+		return portletResponseImpl;
 	}
 
 	public Locale getLocale(HttpServletRequest request) {
