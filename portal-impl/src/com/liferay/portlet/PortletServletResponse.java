@@ -14,6 +14,7 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
 import com.liferay.util.servlet.NullServletOutputStream;
 
 import java.io.IOException;
@@ -166,7 +167,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 			return _response.getWriter();
 		}
 		else {
-			return new PrintWriter(new NullServletOutputStream());
+			return new UnsyncPrintWriter(new NullServletOutputStream());
 		}
 	}
 

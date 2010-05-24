@@ -14,6 +14,7 @@
 
 package com.liferay.portal.servlet.filters.gzip;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.IOException;
@@ -80,7 +81,7 @@ public class GZipResponse extends HttpServletResponseWrapper {
 
 		_stream = _createOutputStream();
 
-		_writer = new PrintWriter(new OutputStreamWriter(
+		_writer = new UnsyncPrintWriter(new OutputStreamWriter(
 			//_stream, _res.getCharacterEncoding()));
 			_stream, StringPool.UTF8));
 

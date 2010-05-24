@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -115,7 +116,7 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 
 		if (_printWriter == null) {
 			_unsyncStringWriter = new UnsyncStringWriter();
-			_printWriter = new PrintWriter(_unsyncStringWriter);
+			_printWriter = new UnsyncPrintWriter(_unsyncStringWriter);
 		}
 
 		return _printWriter;

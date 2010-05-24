@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.servlet;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
+
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.Writer;
@@ -57,7 +59,7 @@ public class PipingServletResponse extends HttpServletResponseWrapper {
 	public PipingServletResponse(HttpServletResponse response, Writer writer) {
 		super(response);
 
-		_printWriter = new PrintWriter(writer, true);
+		_printWriter = new UnsyncPrintWriter(writer, true);
 	}
 
 	public PipingServletResponse(PageContext pageContext) {

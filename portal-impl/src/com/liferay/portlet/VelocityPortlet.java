@@ -14,6 +14,7 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.velocity.VelocityContext;
@@ -236,7 +237,7 @@ public class VelocityPortlet extends GenericPortlet {
 				output = mimeResponse.getWriter();
 			}
 			else {
-				output = new PrintWriter(System.out);
+				output = new UnsyncPrintWriter(System.out);
 			}
 
 			if (velocityWriter == null) {

@@ -15,6 +15,7 @@
 package com.liferay.util.servlet;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
 
 import java.io.PrintWriter;
 
@@ -64,7 +65,7 @@ public class GenericServletResponse extends HttpServletResponseWrapper {
 	}
 
 	public PrintWriter getWriter() {
-		return new PrintWriter(getOutputStream(), true);
+		return new UnsyncPrintWriter(getOutputStream(), true);
 	}
 
 	private int _contentLength;

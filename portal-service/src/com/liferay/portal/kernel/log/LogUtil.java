@@ -14,10 +14,9 @@
 
 package com.liferay.portal.kernel.log;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.util.StackTraceUtil;
-
-import java.io.PrintWriter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +41,7 @@ public class LogUtil {
 			UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(
 				props.size() + 1);
 
-			props.list(new PrintWriter(unsyncStringWriter));
+			props.list(new UnsyncPrintWriter(unsyncStringWriter));
 
 			log.debug(unsyncStringWriter.toString());
 		}

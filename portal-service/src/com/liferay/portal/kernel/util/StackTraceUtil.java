@@ -14,7 +14,7 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.io.unsync.UnsyncBufferedWriter;
+import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 
 import java.io.PrintWriter;
@@ -34,8 +34,7 @@ public class StackTraceUtil {
 		try {
 			UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
-			printWriter = new PrintWriter(
-				new UnsyncBufferedWriter(unsyncStringWriter));
+			printWriter = new UnsyncPrintWriter(unsyncStringWriter);
 
 			t.printStackTrace(printWriter);
 

@@ -15,6 +15,7 @@
 package com.liferay.portlet.shopping.action;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
+import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -85,7 +86,7 @@ public class PayPalNotificationAction extends Action {
 			urlc.setRequestProperty(
 				"Content-Type","application/x-www-form-urlencoded");
 
-			PrintWriter pw = new PrintWriter(urlc.getOutputStream());
+			PrintWriter pw = new UnsyncPrintWriter(urlc.getOutputStream());
 
 			pw.println(query);
 
