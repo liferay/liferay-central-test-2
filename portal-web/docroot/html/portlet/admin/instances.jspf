@@ -31,7 +31,6 @@ if (showShardSelector) {
 }
 
 headerNames.add("num-of-users");
-
 headerNames.add("max-num-of-users");
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
