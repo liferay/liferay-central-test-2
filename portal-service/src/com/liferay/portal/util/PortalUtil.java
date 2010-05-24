@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.KeyValuePair;
@@ -503,6 +504,11 @@ public class PortalUtil {
 
 	public static String getLayoutViewPage(String type) {
 		return getPortal().getLayoutViewPage(type);
+	}
+
+	public static LiferayPortletResponse getLiferayPortletResponse(
+			PortletResponse portletResponse) {
+		return getPortal().getLiferayPortletResponse(portletResponse);
 	}
 
 	public static Locale getLocale(HttpServletRequest request) {

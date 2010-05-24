@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapperThreadLocal;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
+import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
@@ -1819,6 +1821,15 @@ public class PortalImpl implements Portal {
 		LayoutSettings layoutSettings = LayoutSettings.getInstance(type);
 
 		return layoutSettings.getViewPage();
+	}
+
+	public LiferayPortletResponse getLiferayPortletResponse(
+			PortletResponse portletResponse) {
+
+		PortletResponseImpl portletResponseImpl =
+			PortletResponseImpl.getPortletResponseImpl(portletResponse);
+
+		return (LiferayPortletResponse)portletResponseImpl;
 	}
 
 	public Locale getLocale(HttpServletRequest request) {

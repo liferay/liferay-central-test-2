@@ -26,12 +26,14 @@ import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutConstants;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
@@ -263,11 +265,13 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 			return null;
 		}
 
-		LiferayPortletResponse portletResponse =
-			(LiferayPortletResponse)request.getAttribute(
-				JavaConstants.JAVAX_PORTLET_RESPONSE);
+		PortletResponse portletResponse = (PortletResponse)request.getAttribute(
+			JavaConstants.JAVAX_PORTLET_RESPONSE);
 
-		return portletResponse.createLiferayPortletURL(
+		LiferayPortletResponse liferayPortletResponse =
+			PortalUtil.getLiferayPortletResponse(portletResponse);
+		
+		return liferayPortletResponse.createLiferayPortletURL(
 			plid, portletName, lifecycle);
 	}
 
