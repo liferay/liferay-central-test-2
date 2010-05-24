@@ -457,6 +457,12 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 				throw new PrincipalException();
 			}
 			else if (portlet.isActive()) {
+				if (PortalUtil.isAllowAddPortletDefaultResource(
+						request, portlet)) {
+
+					PortalUtil.addPortletDefaultResource(request, portlet);
+				}
+
 				ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 					WebKeys.THEME_DISPLAY);
 

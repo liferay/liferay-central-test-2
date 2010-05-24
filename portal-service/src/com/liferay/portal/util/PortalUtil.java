@@ -116,6 +116,13 @@ public class PortalUtil {
 		getPortal().addPortletBreadcrumbEntry(request, title, url);
 	}
 
+	public static void addPortletDefaultResource(
+			HttpServletRequest request, Portlet portlet)
+		throws PortalException, SystemException {
+
+		getPortal().addPortletDefaultResource(request, portlet);
+	}
+
 	public static void clearRequestParameters(RenderRequest renderRequest) {
 		getPortal().clearRequestParameters(renderRequest);
 	}
@@ -993,6 +1000,13 @@ public class PortalUtil {
 		throws PortalException, SystemException {
 
 		return getPortal().getWidgetURL(portlet, themeDisplay);
+	}
+
+	public static boolean isAllowAddPortletDefaultResource(
+			HttpServletRequest request, Portlet portlet)
+		throws PortalException, SystemException {
+
+		return getPortal().isAllowAddPortletDefaultResource(request, portlet);
 	}
 
 	public static boolean isCommunityAdmin(User user, long groupId)

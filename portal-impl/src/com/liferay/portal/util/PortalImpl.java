@@ -16,6 +16,7 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.NoSuchCompanyException;
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.kernel.dao.db.DB;
@@ -84,6 +85,7 @@ import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceCode;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
@@ -91,6 +93,7 @@ import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.plugin.PluginPackageUtil;
+import com.liferay.portal.security.auth.AuthTokenUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -102,8 +105,15 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
+import com.liferay.portal.service.permission.GroupPermissionUtil;
+import com.liferay.portal.service.permission.LayoutPermissionUtil;
+import com.liferay.portal.service.permission.LayoutPrototypePermissionUtil;
+import com.liferay.portal.service.permission.LayoutSetPrototypePermissionUtil;
+import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.servlet.filters.i18n.I18nFilter;
@@ -415,6 +425,8 @@ public class PortalImpl implements Portal {
 
 		_portletAddDefaultResourceCheckWhitelist = SetUtil.fromArray(
 			PropsValues.PORTLET_ADD_DEFAULT_RESOURCE_CHECK_WHITELIST);
+		_portletAddDefaultResourceCheckWhitelistActions = SetUtil.fromArray(
+			PropsValues.PORTLET_ADD_DEFAULT_RESOURCE_CHECK_WHITELIST_ACTIONS);
 
 		// Reserved parameter names
 
@@ -524,6 +536,46 @@ public class PortalImpl implements Portal {
 		}
 
 		portletBreadcrumbList.add(new KeyValuePair(title, url));
+	}
+
+	public void addPortletDefaultResource(
+			HttpServletRequest request, Portlet portlet)
+		throws PortalException, SystemException {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Layout layout = themeDisplay.getLayout();
+
+		String rootPortletId = portlet.getRootPortletId();
+
+		String portletPrimaryKey = PortletPermissionUtil.getPrimaryKey(
+			layout.getPlid(), portlet.getPortletId());
+
+		try {
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+				int resourcePermissionsCount =
+					ResourcePermissionLocalServiceUtil
+						.getResourcePermissionsCount(
+							themeDisplay.getCompanyId(), rootPortletId,
+							ResourceConstants.SCOPE_INDIVIDUAL,
+							portletPrimaryKey);
+
+				if (resourcePermissionsCount == 0) {
+					throw new NoSuchResourceException();
+				}
+			}
+			else if (!portlet.isUndeployedPortlet()) {
+				ResourceLocalServiceUtil.getResource(
+					themeDisplay.getCompanyId(), rootPortletId,
+					ResourceConstants.SCOPE_INDIVIDUAL, portletPrimaryKey);
+			}
+		}
+		catch (NoSuchResourceException nsre) {
+			ResourceLocalServiceUtil.addResources(
+				themeDisplay.getCompanyId(), layout.getGroupId(), 0,
+				rootPortletId, portletPrimaryKey, true, true, true);
+		}
 	}
 
 	public void clearRequestParameters(RenderRequest renderRequest) {
@@ -2175,6 +2227,10 @@ public class PortalImpl implements Portal {
 		return _portletAddDefaultResourceCheckWhitelist;
 	}
 
+	public Set<String> getPortletAddDefaultResourceCheckWhitelistActions() {
+		return _portletAddDefaultResourceCheckWhitelistActions;
+	}
+
 	public List<KeyValuePair> getPortletBreadcrumbList(
 		HttpServletRequest request) {
 
@@ -3197,6 +3253,144 @@ public class PortalImpl implements Portal {
 
 		return _getServletURL(
 			portlet, PropsValues.WIDGET_SERVLET_MAPPING, themeDisplay);
+	}
+
+	public boolean isAllowAddPortletDefaultResource(
+			HttpServletRequest request, Portlet portlet)
+		throws PortalException, SystemException {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Layout layout = themeDisplay.getLayout();
+		LayoutTypePortlet layoutTypePortlet =
+			themeDisplay.getLayoutTypePortlet();
+
+		String portletId = portlet.getPortletId();
+
+		Boolean renderPortletResource = (Boolean)request.getAttribute(
+			WebKeys.RENDER_PORTLET_RESOURCE);
+
+		if (renderPortletResource != null) {
+			boolean runtimePortlet = renderPortletResource.booleanValue();
+
+			if (runtimePortlet) {
+				return true;
+			}
+		}
+
+		if (layout.isTypePanel()) {
+			return true;
+		}
+
+		if (layout.isTypeControlPanel()) {
+			return true;
+		}
+
+		if (layoutTypePortlet.hasPortletId(portletId)) {
+			return true;
+		}
+
+		if (themeDisplay.isSignedIn() &&
+			(portletId.equals(PortletKeys.LAYOUT_CONFIGURATION) ||
+			 portletId.equals(PortletKeys.LAYOUT_MANAGEMENT))) {
+
+			PermissionChecker permissionChecker =
+				themeDisplay.getPermissionChecker();
+
+			Group group = layout.getGroup();
+
+			if (group.isCommunity() || group.isUserGroup()) {
+				long scopeGroupId = themeDisplay.getScopeGroupId();
+
+				if (GroupPermissionUtil.contains(
+						permissionChecker, scopeGroupId,
+						ActionKeys.MANAGE_LAYOUTS) ||
+					GroupPermissionUtil.contains(
+						permissionChecker, scopeGroupId,
+						ActionKeys.PUBLISH_STAGING) ||
+					LayoutPermissionUtil.contains(
+						permissionChecker, layout, ActionKeys.UPDATE)) {
+
+					return true;
+				}
+			}
+			else if (group.isCompany()) {
+				if (permissionChecker.isCompanyAdmin()) {
+					return true;
+				}
+			}
+			else if (group.isLayoutPrototype()) {
+				long layoutPrototypeId = group.getClassPK();
+
+				if (LayoutPrototypePermissionUtil.contains(
+						permissionChecker, layoutPrototypeId,
+						ActionKeys.UPDATE)) {
+
+					return true;
+				}
+			}
+			else if (group.isLayoutSetPrototype()) {
+				long layoutSetPrototypeId = group.getClassPK();
+
+				if (LayoutSetPrototypePermissionUtil.contains(
+						permissionChecker, layoutSetPrototypeId,
+						ActionKeys.UPDATE)) {
+
+					return true;
+				}
+			}
+			else if (group.isOrganization()) {
+				long organizationId = group.getClassPK();
+
+				if (OrganizationPermissionUtil.contains(
+						permissionChecker, organizationId,
+						ActionKeys.MANAGE_LAYOUTS)) {
+
+					return true;
+				}
+			}
+			else if (group.isUser()) {
+				return true;
+			}
+		}
+
+		if (portlet.isAddDefaultResource()) {
+			if (!PropsValues.PORTLET_ADD_DEFAULT_RESOURCE_CHECK_ENABLED) {
+				return true;
+			}
+
+			if (getPortletAddDefaultResourceCheckWhitelist().contains(
+					portletId)) {
+
+				return true;
+			}
+
+			String strutsAction = ParamUtil.getString(request, "struts_action");
+
+			if (getPortletAddDefaultResourceCheckWhitelistActions().contains(
+					strutsAction)) {
+
+				return true;
+			}
+
+			String requestPortletAuthenticationToken = ParamUtil.getString(
+				request, "p_p_auth");
+
+			if (Validator.isNotNull(requestPortletAuthenticationToken)) {
+				String actualPortletAuthenticationToken =
+					AuthTokenUtil.getToken(
+						request, layout.getPlid(), portletId);
+
+				if (requestPortletAuthenticationToken.equals(
+						actualPortletAuthenticationToken)) {
+
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 	public boolean isCommunityAdmin(User user, long groupId) throws Exception {
@@ -4260,6 +4454,7 @@ public class PortalImpl implements Portal {
 	private Lock _portalPortLock = new ReentrantLock();
 	private String _portalWebDir;
 	private Set<String> _portletAddDefaultResourceCheckWhitelist;
+	private Set<String> _portletAddDefaultResourceCheckWhitelistActions;
 	private Set<String> _reservedParams;
 	private String[] _sortedSystemCommunityRoles;
 	private String[] _sortedSystemGroups;

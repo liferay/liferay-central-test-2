@@ -33,115 +33,13 @@ Boolean renderPortletResource = (Boolean)request.getAttribute(WebKeys.RENDER_POR
 
 boolean runtimePortlet = (renderPortletResource != null) && renderPortletResource.booleanValue();
 
-boolean allowAddDefaultResource = false;
+boolean access = false;
 
-if (PropsValues.PORTLET_ADD_DEFAULT_RESOURCE_CHECK_ENABLED) {
-	if (PortalUtil.getPortletAddDefaultResourceCheckWhitelist().contains(portletId)) {
-		allowAddDefaultResource = true;
-	}
-	else {
-		String requestPortletAuthenticationToken = ParamUtil.getString(request, "p_p_auth");
+if (PortalUtil.isAllowAddPortletDefaultResource(request, portlet)) {
+	PortalUtil.addPortletDefaultResource(request, portlet);
 
-		if (Validator.isNotNull(requestPortletAuthenticationToken)) {
-			String actualPortletAuthenticationToken = AuthTokenUtil.getToken(request, plid, portletId);
-
-			if (requestPortletAuthenticationToken.equals(actualPortletAuthenticationToken)) {
-				allowAddDefaultResource = true;
-			}
-		}
-	}
+	access = PortletPermissionUtil.contains(permissionChecker, plid, portlet, ActionKeys.VIEW);
 }
-else {
-	allowAddDefaultResource = true;
-}
-
-boolean denyAccess = false;
-
-try {
-	if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-		if (ResourcePermissionLocalServiceUtil.getResourcePermissionsCount(company.getCompanyId(), rootPortletId, ResourceConstants.SCOPE_INDIVIDUAL, portletPrimaryKey) == 0) {
-			throw new NoSuchResourceException();
-		}
-	}
-	else if (!portlet.isUndeployedPortlet()) {
-		ResourceLocalServiceUtil.getResource(company.getCompanyId(), rootPortletId, ResourceConstants.SCOPE_INDIVIDUAL, portletPrimaryKey);
-	}
-
-	if (!runtimePortlet && layout.isTypePortlet() && !layoutTypePortlet.hasPortletId(portletId) && (!portlet.isAddDefaultResource() || (portlet.isAddDefaultResource() && !allowAddDefaultResource))) {
-		denyAccess = true;
-	}
-}
-catch (NoSuchResourceException nsre) {
-	boolean addDefaultResource = false;
-
-	if (runtimePortlet) {
-		addDefaultResource = true;
-	}
-	else if (layout.isTypePanel()) {
-		addDefaultResource = true;
-	}
-	else if (layout.isTypeControlPanel()) {
-		addDefaultResource = true;
-	}
-	else if (layout.isTypePortlet() && layoutTypePortlet.hasPortletId(portletId)) {
-		addDefaultResource = true;
-	}
-	else if (portlet.isAddDefaultResource() && allowAddDefaultResource) {
-		addDefaultResource = true;
-	}
-	else if (themeDisplay.isSignedIn()) {
-		if (portletId.equals(PortletKeys.LAYOUT_CONFIGURATION) || portletId.equals(PortletKeys.LAYOUT_MANAGEMENT)) {
-			Group group = layout.getGroup();
-
-			if (group.isCommunity() || group.isUserGroup()) {
-				if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS) ||
-					GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PUBLISH_STAGING) ||
-					LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE)) {
-
-					addDefaultResource = true;
-				}
-			}
-			else if (group.isCompany()) {
-				if (permissionChecker.isCompanyAdmin()) {
-					addDefaultResource = true;
-				}
-			}
-			else if (group.isLayoutPrototype()) {
-				long layoutPrototypeId = group.getClassPK();
-
-				if (LayoutPrototypePermissionUtil.contains(permissionChecker, layoutPrototypeId, ActionKeys.UPDATE)) {
-					addDefaultResource = true;
-				}
-			}
-			else if (group.isLayoutSetPrototype()) {
-				long layoutSetPrototypeId = group.getClassPK();
-
-				if (LayoutSetPrototypePermissionUtil.contains(permissionChecker, layoutSetPrototypeId, ActionKeys.UPDATE)) {
-					addDefaultResource = true;
-				}
-			}
-			else if (group.isOrganization()) {
-				long organizationId = group.getClassPK();
-
-				if (OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_LAYOUTS)) {
-					addDefaultResource = true;
-				}
-			}
-			else if (group.isUser()) {
-				addDefaultResource = true;
-			}
-		}
-	}
-
-	if (addDefaultResource) {
-		ResourceLocalServiceUtil.addResources(company.getCompanyId(), layout.getGroupId(), 0, rootPortletId, portletPrimaryKey, true, true, true);
-	}
-	else {
-		denyAccess = true;
-	}
-}
-
-boolean access = PortletPermissionUtil.contains(permissionChecker, plid, portlet, ActionKeys.VIEW);
 
 if (portlet.isUndeployedPortlet()) {
 	access = true;
@@ -381,14 +279,12 @@ if (portlet.isStatic()) {
 // Deny access to edit mode if you do not have permission
 
 if (!PropsValues.TCK_URL && portletMode.equals(PortletMode.EDIT) && !PortletPermissionUtil.contains(permissionChecker, plid, portletId, ActionKeys.PREFERENCES)) {
-	denyAccess = true;
+	access = true;
 }
 
 // Deny access
 
-if (denyAccess) {
-	access = false;
-
+if (!access) {
 	showCloseIcon = false;
 	showConfigurationIcon = false;
 	showEditIcon = false;

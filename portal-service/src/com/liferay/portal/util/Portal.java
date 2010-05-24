@@ -109,6 +109,10 @@ public interface Portal {
 	public void addPortletBreadcrumbEntry(
 		HttpServletRequest request, String title, String url);
 
+	public void addPortletDefaultResource(
+			HttpServletRequest request, Portlet portlet)
+		throws PortalException, SystemException;
+
 	public void clearRequestParameters(RenderRequest renderRequest);
 
 	public void copyRequestParameters(
@@ -525,6 +529,10 @@ public interface Portal {
 		throws PortalException, SystemException;
 
 	public String getWidgetURL(Portlet portlet, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException;
+
+	public boolean isAllowAddPortletDefaultResource(
+			HttpServletRequest request, Portlet portlet)
 		throws PortalException, SystemException;
 
 	public boolean isCommunityAdmin(User user, long groupId) throws Exception;
