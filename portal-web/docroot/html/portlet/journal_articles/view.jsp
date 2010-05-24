@@ -74,6 +74,7 @@ double version = ParamUtil.getDouble(request, "version", -1);
 		searchTerms.setDisplayDateLT(new Date());
 		searchTerms.setStatus(status);
 		searchTerms.setVersion(version);
+		searchTerms.setAdvancedSearch(true);
 		%>
 
 		<%@ include file="/html/portlet/journal/article_search_results.jspf" %>
