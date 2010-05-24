@@ -15,7 +15,6 @@
 		<ant dir="classes" target="clean" inheritAll="false" />
 
 		<ant dir="portal-client" target="clean" inheritAll="false" />
-
 		<ant dir="portal-service" target="clean" inheritAll="false" />
 
 		<ant dir="util-bridges" target="clean" inheritAll="false" />
