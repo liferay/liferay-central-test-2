@@ -332,19 +332,15 @@ file.
 
 		<copy file="${sql.dir}${sql.file}" tofile="${sql.file}" />
 
-		<echo message="${sql.file}" />
-
 		<replace file="${sql.file}">
 			<replacefilter token="drop database lportal;" value="drop database ${db.db2.schema};"/>
 			<replacefilter token="create database lportal;" value="create database ${db.db2.schema};"/>
-			<replacefilter token="connect to lportal;" value="connect to ${db.db2.schema};"/>
+			<replacefilter token="connect to lportal;" value="connect to ${db.db2.schema} USER ${db.db2.username} USING ${db.db2.password};"/>
 		</replace>
 
 		<exec executable="${plink.executable}">
 			<arg line="-pw ${vm.password} ${vm.username}@${db.db2.host} cmd.exe /c mkdir C:\${temp.dir}" />
 		</exec>
-
-		<echo message="${temp.dir}" />
 
 		<exec executable="${pscp.executable}">
 			<arg line="-pw ${vm.password} ${sql.file} ${vm.username}@${db.db2.host}:\${temp.dir}" />
