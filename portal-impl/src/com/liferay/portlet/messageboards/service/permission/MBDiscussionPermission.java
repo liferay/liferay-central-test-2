@@ -99,7 +99,7 @@ public class MBDiscussionPermission {
 		throws SystemException {
 
 		List<String> resourceActions = ResourceActionsUtil.getResourceActions(
-			actionId);
+			className);
 
 		if (!resourceActions.contains(actionId)) {
 			return true;
