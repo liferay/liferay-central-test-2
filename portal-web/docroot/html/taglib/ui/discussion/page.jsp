@@ -45,7 +45,7 @@ long userId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:discus
 
 String threadView = PropsValues.DISCUSSION_THREAD_VIEW;
 
-MBMessageDisplay messageDisplay = MBMessageLocalServiceUtil.getDiscussionMessageDisplay(userId, className, classPK, WorkflowConstants.STATUS_APPROVED, threadView);
+MBMessageDisplay messageDisplay = MBMessageLocalServiceUtil.getDiscussionMessageDisplay(userId, className, classPK, WorkflowConstants.STATUS_ANY, threadView);
 
 MBCategory category = messageDisplay.getCategory();
 MBThread thread = messageDisplay.getThread();
@@ -61,7 +61,7 @@ if (treeWalker != null) {
 }
 else {
 	rootMessage = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
-	messagesCount = MBMessageLocalServiceUtil.getThreadMessagesCount(rootMessage.getThreadId(), WorkflowConstants.STATUS_APPROVED);
+	messagesCount = MBMessageLocalServiceUtil.getThreadMessagesCount(rootMessage.getThreadId(), WorkflowConstants.STATUS_ANY);
 }
 
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
@@ -202,13 +202,17 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 				searchContainer.setTotal(messagesCount - 1);
 
-				messages = MBMessageLocalServiceUtil.getThreadRepliesMessages(message.getThreadId(), WorkflowConstants.STATUS_APPROVED, searchContainer.getStart(), searchContainer.getEnd());
+				messages = MBMessageLocalServiceUtil.getThreadRepliesMessages(message.getThreadId(), WorkflowConstants.STATUS_ANY, searchContainer.getStart(), searchContainer.getEnd());
 
 				searchContainer.setResults(messages);
 			}
 
 			for (i = 1; i <= messages.size(); i++) {
-				message = (MBMessage)messages.get(i - 1);
+				message = messages.get(i - 1);
+
+				if ((!message.isApproved() && (message.getUserId() != user.getUserId()) && !permissionChecker.isCommunityAdmin(scopeGroupId)) || !permissionChecker.hasPermission(scopeGroupId, MBMessage.class.getName(), message.getMessageId(), ActionKeys.VIEW)) {
+					continue;
+				}
 			%>
 
 				<tr>
@@ -228,6 +232,14 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 						/>
 					</td>
 					<td class="lfr-top stretch">
+						<c:if test="<%= (message != null) && !message.isApproved() %>">
+							<aui:model-context bean="<%= message %>" model="<%= MBMessage.class %>" />
+
+							<div>
+								<aui:workflow-status status="<%= message.getStatus() %>" />
+							</div>
+						</c:if>
+
 						<div>
 
 							<%

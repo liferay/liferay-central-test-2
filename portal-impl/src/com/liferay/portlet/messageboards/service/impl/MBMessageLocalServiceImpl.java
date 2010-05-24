@@ -167,38 +167,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		mbMessagePersistence.update(message, false);
 
-		// Social
-
-		if (!message.isRoot()) {
-			socialEquityLogLocalService.addEquityLogs(
-				userId, className, classPK, ActionKeys.ADD_DISCUSSION);
-		}
-
-		if (className.equals(BlogsEntry.class.getName()) &&
-			parentMessageId != MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) {
-
-			// Social
-
-			BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(classPK);
-
-			JSONObject extraData = JSONFactoryUtil.createJSONObject();
-
-			extraData.put("messageId", message.getMessageId());
-
-			socialActivityLocalService.addActivity(
-				userId, entry.getGroupId(), BlogsEntry.class.getName(),
-				classPK, BlogsActivityKeys.ADD_COMMENT, extraData.toString(),
-				entry.getUserId());
-
-			// Email
-
-			try {
-				sendBlogsCommentsEmail(userId, entry, message, serviceContext);
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
-		}
+		serviceContext.setAttribute("className", className);
+		serviceContext.setAttribute("classPK", String.valueOf(classPK));
 
 		// Discussion
 
@@ -434,9 +404,15 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		if (serviceContext.getWorkflowAction() ==
 				WorkflowConstants.ACTION_PUBLISH) {
 
+			String className = MBMessage.class.getName();
+
+			if (message.isDiscussion()) {
+				className = MBDiscussion.class.getName();
+			}
+
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), groupId, userId,
-				MBMessage.class.getName(), message.getMessageId(), message,
+				className, message.getMessageId(), message,
 				serviceContext);
 		}
 
@@ -1046,8 +1022,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			MBMessage message, int status, String threadView)
 		throws PortalException, SystemException {
 
-		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
-			message.getCategoryId());
+		MBCategory category = null;
+
+		if (!message.isDiscussion()) {
+			mbCategoryPersistence.findByPrimaryKey(message.getCategoryId());
+		}
 
 		MBMessage parentMessage = null;
 
@@ -1489,6 +1468,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			// Ping
 
 			pingPingback(message, serviceContext);
+
+			// Discussion
+
+			if (message.isDiscussion()) {
+				updateDiscussionMessageStatus(
+					userId, messageId, status, serviceContext);
+			}
 		}
 		else if ((oldStatus == WorkflowConstants.STATUS_APPROVED) &&
 				 (status != WorkflowConstants.STATUS_APPROVED)) {
@@ -2047,6 +2033,62 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				from, to, curSubject, curBody, true);
 
 			mailService.sendEmail(mailMessage);
+		}
+	}
+
+	protected void updateDiscussionMessageStatus(
+			long userId, long messageId, int status,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		String className = (String)serviceContext.getAttribute("className");
+		Long classPK = GetterUtil.getLong(
+			(String)serviceContext.getAttribute("classPK"));
+
+		MBMessage message = getMessage(messageId);
+
+		int oldStatus = message.getStatus();
+
+		if ((oldStatus != WorkflowConstants.STATUS_APPROVED) &&
+			(status == WorkflowConstants.STATUS_APPROVED)) {
+
+			// Social
+
+			if (!message.isRoot()) {
+				socialEquityLogLocalService.addEquityLogs(
+					userId, className, classPK, ActionKeys.ADD_DISCUSSION);
+			}
+
+			long parentMessageId = message.getParentMessageId();
+
+			if (className.equals(BlogsEntry.class.getName()) &&
+				parentMessageId !=
+					MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) {
+
+				// Social
+
+				BlogsEntry entry =
+					blogsEntryPersistence.findByPrimaryKey(classPK);
+
+				JSONObject extraData = JSONFactoryUtil.createJSONObject();
+
+				extraData.put("messageId", message.getMessageId());
+
+				socialActivityLocalService.addActivity(
+					userId, entry.getGroupId(), BlogsEntry.class.getName(),
+					classPK, BlogsActivityKeys.ADD_COMMENT,
+					extraData.toString(), entry.getUserId());
+
+				// Email
+
+				try {
+					sendBlogsCommentsEmail(
+						userId, entry, message, serviceContext);
+				}
+				catch (Exception e) {
+					_log.error(e, e);
+				}
+			}
 		}
 	}
 
