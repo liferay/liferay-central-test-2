@@ -78,14 +78,16 @@ public class MBMessagePermission {
 			return false;
 		}
 
-		MBCategory category = MBCategoryLocalServiceUtil.getCategory(
-			message.getCategoryId());
+		if (message.getCategoryId() > 0) {
+			MBCategory category = MBCategoryLocalServiceUtil.getCategory(
+				message.getCategoryId());
 
-		if (PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
-			if (!MBCategoryPermission.contains(
+			if (PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
+				if (!MBCategoryPermission.contains(
 					permissionChecker, category, ActionKeys.VIEW)) {
 
-				return false;
+					return false;
+				}
 			}
 		}
 

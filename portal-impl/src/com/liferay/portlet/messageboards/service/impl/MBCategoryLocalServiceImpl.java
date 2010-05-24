@@ -388,10 +388,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		parentCategoryId = getParentCategoryId(category, parentCategoryId);
 
-		if (mergeWithParentCategory &&
-			(categoryId != parentCategoryId) &&
-			(parentCategoryId !=
-				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID)) {
+		if (mergeWithParentCategory && (categoryId != parentCategoryId) &&
+			(parentCategoryId > 0)) {
 
 			mergeCategories(category, parentCategoryId);
 
@@ -444,9 +442,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	protected long getParentCategoryId(long groupId, long parentCategoryId)
 		throws SystemException {
 
-		if (parentCategoryId !=
-				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
-
+		if (parentCategoryId > 0) {
 			MBCategory parentCategory = mbCategoryPersistence.fetchByPrimaryKey(
 				parentCategoryId);
 
@@ -465,9 +461,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			MBCategory category, long parentCategoryId)
 		throws SystemException {
 
-		if (parentCategoryId ==
-				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
-
+		if (parentCategoryId <= 0) {
 			return parentCategoryId;
 		}
 

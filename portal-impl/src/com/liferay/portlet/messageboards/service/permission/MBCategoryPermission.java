@@ -57,7 +57,7 @@ public class MBCategoryPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+		if (categoryId <= 0) {
 			return MBPermission.contains(permissionChecker, groupId, actionId);
 		}
 		else {
