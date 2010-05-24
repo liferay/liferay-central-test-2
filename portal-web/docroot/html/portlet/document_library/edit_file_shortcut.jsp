@@ -144,7 +144,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 			</portlet:renderURL>
 
 			<%
-			String taglibOpenFileEntryWindow = "var toFileEntryWindow = window.open(" + renderResponse.getNamespace() + "createSelectFileEntryURL('" + selectFileEntryURL.toString() + "'),'toGroup', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); toGroupWindow.focus();";
+			String taglibOpenFileEntryWindow = "var toFileEntryWindow = window.open(" + renderResponse.getNamespace() + "createSelectFileEntryURL('" + selectFileEntryURL.toString() + "'),'toGroup', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); toFileEntryWindow.focus();";
 			%>
 
 			<aui:button disabled="<%= (toGroup == null) %>" name="selectToFileEntryButton" onClick='<%= taglibOpenFileEntryWindow %>' value="select" />
@@ -215,7 +215,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 
 			if (button) {
 				button.set('disabled', false);
-				button.get('parentNode').removeClass('aui-input-disabled');
+				button.ancestor('.aui-button').removeClass('aui-button-disabled');
 			}
 		},
 		['aui-base']
