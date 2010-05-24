@@ -554,14 +554,14 @@ public class PortalImpl implements Portal {
 
 		try {
 			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-				int resourcePermissionsCount =
-					ResourcePermissionLocalServiceUtil
-						.getResourcePermissionsCount(
+				int count =
+					ResourcePermissionLocalServiceUtil.
+						getResourcePermissionsCount(
 							themeDisplay.getCompanyId(), rootPortletId,
 							ResourceConstants.SCOPE_INDIVIDUAL,
 							portletPrimaryKey);
 
-				if (resourcePermissionsCount == 0) {
+				if (count == 0) {
 					throw new NoSuchResourceException();
 				}
 			}
@@ -2223,14 +2223,6 @@ public class PortalImpl implements Portal {
 		return _portalWebDir;
 	}
 
-	public Set<String> getPortletAddDefaultResourceCheckWhitelist() {
-		return _portletAddDefaultResourceCheckWhitelist;
-	}
-
-	public Set<String> getPortletAddDefaultResourceCheckWhitelistActions() {
-		return _portletAddDefaultResourceCheckWhitelistActions;
-	}
-
 	public List<KeyValuePair> getPortletBreadcrumbList(
 		HttpServletRequest request) {
 
@@ -3360,15 +3352,13 @@ public class PortalImpl implements Portal {
 				return true;
 			}
 
-			if (getPortletAddDefaultResourceCheckWhitelist().contains(
-					portletId)) {
-
+			if (_portletAddDefaultResourceCheckWhitelist.contains(portletId)) {
 				return true;
 			}
 
 			String strutsAction = ParamUtil.getString(request, "struts_action");
 
-			if (getPortletAddDefaultResourceCheckWhitelistActions().contains(
+			if (_portletAddDefaultResourceCheckWhitelistActions.contains(
 					strutsAction)) {
 
 				return true;
