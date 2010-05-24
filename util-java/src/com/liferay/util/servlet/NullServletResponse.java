@@ -31,14 +31,17 @@ public class NullServletResponse extends HttpServletResponseWrapper {
 
 	public NullServletResponse(HttpServletResponse response) {
 		super(response);
+
+		_servletOutputStream = new NullServletOutputStream();
+		_printWriter = new UnsyncPrintWriter(_servletOutputStream, true);
 	}
 
 	public ServletOutputStream getOutputStream() {
-		return _sos;
+		return _servletOutputStream;
 	}
 
 	public PrintWriter getWriter() {
-		return _pw;
+		return _printWriter;
 	}
 
 	/*public void sendError(int status) throws IOException {
@@ -50,7 +53,7 @@ public class NullServletResponse extends HttpServletResponseWrapper {
 	public void sendRedirect(String location) throws IOException {
 	}*/
 
-	private ServletOutputStream _sos = new NullServletOutputStream();
-	private PrintWriter _pw = new UnsyncPrintWriter(_sos, true);
+	private PrintWriter _printWriter;
+	private ServletOutputStream _servletOutputStream;
 
 }
