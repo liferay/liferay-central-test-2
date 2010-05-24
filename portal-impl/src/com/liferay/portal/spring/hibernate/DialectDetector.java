@@ -15,7 +15,6 @@
 package com.liferay.portal.spring.hibernate;
 
 import com.liferay.portal.dao.orm.hibernate.DB2Dialect;
-import com.liferay.portal.dao.orm.hibernate.SQLServer2008Dialect;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
@@ -92,9 +91,6 @@ public class DialectDetector {
 			}
 			else if (dbName.startsWith("DB2") && (dbMajorVersion == 9)) {
 				dialect = new DB2Dialect();
-			}
-			else if (dbName.startsWith("Microsoft") && (dbMajorVersion >= 9)) {
-				dialect = new SQLServer2008Dialect();
 			}
 			else {
 				dialect = DialectFactory.buildDialect(
