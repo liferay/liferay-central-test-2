@@ -163,6 +163,8 @@ if (Validator.isNotNull(historyKey)) {
 }
 %>
 
+<liferay-ui:error exception="<%= CompanyMaxUsersException.class %>" message="unable-to-create-user-account-because-the-maximum-number-of-users-have-been-reached" />
+
 <c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 	<liferay-util:include page="/html/portlet/enterprise_admin/user/toolbar.jsp">
 		<liferay-util:param name="toolbarItem" value='<%= (selUser == null) ? "add" : "view-all" %>' />

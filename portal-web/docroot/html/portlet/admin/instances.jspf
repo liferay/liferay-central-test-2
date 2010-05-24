@@ -32,6 +32,8 @@ if (showShardSelector) {
 
 headerNames.add("num-of-users");
 
+headerNames.add("max-num-of-users");
+
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
 List<Company> companies = CompanyLocalServiceUtil.getCompanies(false);
@@ -84,6 +86,17 @@ for (int i = 0; i < results.size(); i++) {
 	int usersCount = UserLocalServiceUtil.searchCount(company2.getCompanyId(), null, null, null);
 
 	row.addText(String.valueOf(usersCount), rowURL);
+
+	// Max # of Users
+
+	int maxUsers = company2.getMaxUsers();
+
+	if (maxUsers > 0) {
+		row.addText(String.valueOf(maxUsers), rowURL);
+	}
+	else {
+		row.addText(LanguageUtil.get(pageContext, "unlimited"), rowURL);
+	}
 
 	// Add result row
 

@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.portal.CompanyMaxUsersException;
 import com.liferay.portal.ContactBirthdayException;
 import com.liferay.portal.ContactFirstNameException;
 import com.liferay.portal.ContactFullNameException;
@@ -3078,6 +3079,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		if (company.isSystem()) {
 			return;
+		}
+
+		if ((company.getMaxUsers() > 0) &&
+			(company.getMaxUsers() <=
+				searchCount(companyId, null, true, null))) {
+
+			throw new CompanyMaxUsersException();
 		}
 
 		if (!autoScreenName) {

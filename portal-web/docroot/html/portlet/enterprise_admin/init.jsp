@@ -20,6 +20,7 @@
 <%@ page import="com.liferay.portal.AddressCityException" %>
 <%@ page import="com.liferay.portal.AddressStreetException" %>
 <%@ page import="com.liferay.portal.AddressZipException" %>
+<%@ page import="com.liferay.portal.CompanyMaxUsersException" %>
 <%@ page import="com.liferay.portal.CompanyMxException" %>
 <%@ page import="com.liferay.portal.CompanyVirtualHostException" %>
 <%@ page import="com.liferay.portal.ContactFirstNameException" %>

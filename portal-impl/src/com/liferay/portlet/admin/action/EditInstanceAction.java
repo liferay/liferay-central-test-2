@@ -113,13 +113,14 @@ public class EditInstanceAction extends PortletAction {
 		String shardName = ParamUtil.getString(
 			actionRequest, "shardName", PropsValues.SHARD_DEFAULT_NAME);
 		boolean system = false;
+		int maxUsers = ParamUtil.getInteger(actionRequest, "maxUsers", 0);
 
 		if (companyId <= 0) {
 
 			// Add instance
 
 			Company company = CompanyServiceUtil.addCompany(
-				webId, virtualHost, mx, shardName, system);
+				webId, virtualHost, mx, shardName, system, maxUsers);
 
 			ServletContext servletContext =
 				(ServletContext)actionRequest.getAttribute(WebKeys.CTX);
@@ -130,7 +131,8 @@ public class EditInstanceAction extends PortletAction {
 
 			// Update instance
 
-			CompanyServiceUtil.updateCompany(companyId, virtualHost, mx);
+			CompanyServiceUtil.updateCompany(
+				companyId, virtualHost, mx, maxUsers);
 		}
 	}
 

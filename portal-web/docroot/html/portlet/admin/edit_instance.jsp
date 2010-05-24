@@ -85,6 +85,8 @@ long companyId = BeanParamUtil.getLong(company2, request, "companyId");
 				</c:otherwise>
 			</c:choose>
 		</c:if>
+
+		<aui:input name="maxUsers" />
 	</aui:fieldset>
 
 	<aui:button-row>

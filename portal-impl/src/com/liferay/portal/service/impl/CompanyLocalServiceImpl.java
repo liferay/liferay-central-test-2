@@ -76,7 +76,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 	public Company addCompany(
 			String webId, String virtualHost, String mx, String shardName,
-			boolean system)
+			boolean system, int maxUsers)
 		throws PortalException, SystemException {
 
 		// Company
@@ -97,6 +97,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		company.setVirtualHost(virtualHost);
 		company.setMx(mx);
 		company.setSystem(system);
+		company.setMaxUsers(maxUsers);
 
 		companyPersistence.update(company, false);
 
@@ -515,7 +516,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		}
 	}
 
-	public Company updateCompany(long companyId, String virtualHost, String mx)
+	public Company updateCompany(
+			long companyId, String virtualHost, String mx, int maxUsers)
 		throws PortalException, SystemException {
 
 		virtualHost = virtualHost.trim().toLowerCase();
@@ -529,6 +531,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		if (PropsValues.MAIL_MX_UPDATE) {
 			company.setMx(mx);
 		}
+
+		company.setMaxUsers(maxUsers);
 
 		companyPersistence.update(company, false);
 

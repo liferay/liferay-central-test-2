@@ -4,6 +4,12 @@ update ExpandoTable set name = 'CUSTOM_FIELDS' where name = 'DEFAULT_TABLE'
 
 COMMIT_TRANSACTION;
 
+alter table Company add maxUsers INTEGER;
+
+COMMIT_TRANSACTION;
+
+update Company set maxUsers = 0;
+
 alter table LayoutSet add settings_ TEXT null;
 
 update MBThread set categoryId = -1 where groupId = 0;
