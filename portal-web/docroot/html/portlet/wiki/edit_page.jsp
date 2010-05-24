@@ -331,7 +331,19 @@ if (Validator.isNull(redirect)) {
 				<aui:button-row>
 					<aui:button type="submit" />
 
-					<aui:button name="publishButton" onClick='<%= renderResponse.getNamespace() + "publishPage();" %>' type="button" value="publish" />
+					<%
+					boolean pending = false;
+
+					if (wikiPage != null) {
+						pending = wikiPage.isPending();
+					}
+					%>
+
+					<aui:button disabled="<%= pending %>" name="publishButton" onClick='<%= renderResponse.getNamespace() + "publishPage();" %>' type="button" value="publish" />
+
+					<c:if test="<%= pending %>">
+						<liferay-ui:icon-help message="there-is-a-publication-workflow-in-process" />
+					</c:if>
 
 					<aui:button name="previewButton" onClick='<%= renderResponse.getNamespace() + "previewPage();" %>' type="button" value="preview" />
 
