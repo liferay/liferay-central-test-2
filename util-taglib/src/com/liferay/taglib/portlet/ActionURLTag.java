@@ -270,7 +270,7 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 
 		LiferayPortletResponse liferayPortletResponse =
 			PortalUtil.getLiferayPortletResponse(portletResponse);
-		
+
 		return liferayPortletResponse.createLiferayPortletURL(
 			plid, portletName, lifecycle);
 	}

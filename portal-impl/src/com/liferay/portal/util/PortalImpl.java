@@ -1823,7 +1823,7 @@ public class PortalImpl implements Portal {
 	}
 
 	public LiferayPortletResponse getLiferayPortletResponse(
-			PortletResponse portletResponse) {
+		PortletResponse portletResponse) {
 
 		PortletResponseImpl portletResponseImpl =
 			PortletResponseImpl.getPortletResponseImpl(portletResponse);

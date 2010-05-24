@@ -507,7 +507,8 @@ public class PortalUtil {
 	}
 
 	public static LiferayPortletResponse getLiferayPortletResponse(
-			PortletResponse portletResponse) {
+		PortletResponse portletResponse) {
+
 		return getPortal().getLiferayPortletResponse(portletResponse);
 	}
 
