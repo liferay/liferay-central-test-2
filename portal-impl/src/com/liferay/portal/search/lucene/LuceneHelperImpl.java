@@ -113,6 +113,9 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 
 		if (like) {
+			value = StringUtil.replace(
+				value, StringPool.PERCENT, StringPool.BLANK);
+
 			value = value.toLowerCase();
 
 			Term term = new Term(
