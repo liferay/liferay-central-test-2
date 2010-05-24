@@ -140,13 +140,6 @@ AUI().add(
 											after: {
 												render: function(event) {
 													setAddApplicationUI(true);
-												},
-												visibleChange: function(event) {
-													if (event.newVal) {
-														Liferay.Util.focusFormField('#layout_configuration_content');
-													}
-
-													setAddApplicationUI(event.newVal);
 												}
 											},
 											className: 'add-application',
@@ -164,6 +157,17 @@ AUI().add(
 											},
 											name: 'addApplication',
 											width: '255px'
+										}
+									);
+
+									Liferay.Dockbar.addApplication.after(
+										'visibleChange',
+										function(event) {
+											if (event.newVal) {
+												Liferay.Util.focusFormField('#layout_configuration_content');
+											}
+
+											setAddApplicationUI(event.newVal);
 										}
 									);
 								}
