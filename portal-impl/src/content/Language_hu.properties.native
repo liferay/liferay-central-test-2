@@ -1,20 +1,15 @@
-
 ##
 ## Language settings
 ##
 
-
-##
-## Portlet descriptions and titles
-##
 lang.dir=ltr
 lang.line.begin=left
 lang.line.end=right
 
+##
+## Portlet descriptions and titles
+##
 
-##
-## Category titles
-##
 javax.portlet.description.122=Categories describe a set of vocabulary terms to tag content items. Administrators can create vocabularies and populate them with categories that users can choose from when authoring content. (Automatic Copy)
 javax.portlet.description.126=Organizations represent a hierarchy of users, such as a department or subsidiary. Administrators can manage user membership, define roles, and set up the attributes of an organization. (Automatic Copy)
 javax.portlet.description.127=User groups are a shortcut to a loose group of users, regardless of community or organization membership. Administrators can define a user group and assign the user group as members of a community if desired. (Automatic Copy)
@@ -141,10 +136,10 @@ javax.portlet.title.98=Szoftverkatalógus
 javax.portlet.title.99=Címkék és kategóriák
 javax.portlet.title.9=Adminisztráció
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=Adminisztráció
 category.alfresco=Alfresco
 category.christianity=Kereszténység
@@ -179,10 +174,10 @@ category.wol=A Portál
 category.workflow=Munkafolyamat
 category.wsrp=WSRP
 
+##
+## Model resources
+##
 
-##
-## Action names
-##
 model.resource.com.liferay.knowledgebase.model.KBArticle=Tudásbázis cikk
 model.resource.com.liferay.portal.model.Group=Közösség
 model.resource.com.liferay.portal.model.Layout=Oldal
@@ -245,10 +240,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Folyamat me
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Folyamat példány
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Folyamat feladat
 
+##
+## Action names
+##
 
-##
-## Messages
-##
 action.ACCESS=Hozzáférés
 action.ACCESS_IN_CONTROL_PANEL=Hozzáférés vezérlőpulton
 action.ADD_ARTICLE=Új tartalom
@@ -345,10 +340,10 @@ action.VIEW=Megtekintés
 action.VIEW_ALL_TASKS=Feladatok megtekintése
 action.VIEW_USER=Felhasználó megtekintése
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 1-day=1 nap
 1-minute=1 perc
 1-month=1 hónap
@@ -2325,7 +2320,9 @@ mass=Tömeg
 match-whole-words=Teljes szavak egyezése
 match-x-of-the-following-fields=Egyezzen {0} a következő mezők közül:
 max-attendees=Résztvevők max. száma
+max-num-of-users=Max # of Users (Automatic Copy)
 max-qty=Max. menny.
+max-users=Max Users (Automatic Copy)
 maximize-links=Hivatkozások maximalizálása
 maximize=Maximalizál
 maximized=Maximalizálva
@@ -4316,6 +4313,7 @@ type-name=Típusnév:
 type=Típus
 types=Típusok
 ukrainian=Ukrán
+unable-to-create-user-account-because-the-maximum-number-of-users-has-been-reached=Unable to create user account because the maximum number of users has been reached. (Automatic Copy)
 unassigned=Hozzárendeletlen
 unassociate=Leválaszt
 unban-date=Letiltás megszűnik
@@ -4849,6 +4847,10 @@ zh_en=Kínairól angolra
 zip-postal=Irányítószám
 zip=Irányítószám
 zt_en=Tajvani kínairól angolra
+
+##
+## Currency
+##
 
 currency.AED=UAE dirham
 currency.ALL=Albán lek

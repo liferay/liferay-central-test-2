@@ -1,20 +1,15 @@
-
 ##
 ## Language settings
 ##
 
-
-##
-## Portlet descriptions and titles
-##
 lang.dir=ltr
 lang.line.begin=left
 lang.line.end=right
 
+##
+## Portlet descriptions and titles
+##
 
-##
-## Category titles
-##
 javax.portlet.description.122=As categorias descrevem um jogo de termos do vocabulário para etiquetar artigos satisfeitos. Os administradores podem criar vocabulários e povoá-los com categorias de que os usuários podem escolher ao ser o autor do índice. (Automatic Translation)
 javax.portlet.description.126=As organizações representam uma hierarquia dos usuários, tais como um departamento ou uma subsidiária. Os administradores podem controlar a sociedade do usuário, definem papéis, e setup os atributos de uma organização. (Automatic Translation)
 javax.portlet.description.127=Os grupos de usuário são um atalho a um grupo frouxo de usuários, não obstante a sociedade da comunidade ou da organização. Os administradores podem definir um grupo de usuário e atribuir o grupo de usuário como membros de uma comunidade se desejados. (Automatic Translation)
@@ -141,10 +136,10 @@ javax.portlet.title.98=Catálogo Do Software
 javax.portlet.title.99=Tag
 javax.portlet.title.9=Admin
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=Admin
 category.alfresco=Alfresco
 category.christianity=Christianity
@@ -179,10 +174,10 @@ category.wol=Mundo de Liferay
 category.workflow=Workflow
 category.wsrp=WSRP
 
+##
+## Model resources
+##
 
-##
-## Action names
-##
 model.resource.com.liferay.knowledgebase.model.KBArticle=Artigo da base de conhecimento
 model.resource.com.liferay.portal.model.Group=Comunidade
 model.resource.com.liferay.portal.model.Layout=Página
@@ -245,10 +240,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Definição
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Exemplo Do Workflow
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Tarefa Do Workflow
 
+##
+## Action names
+##
 
-##
-## Messages
-##
 action.ACCESS=Acesso (Automatic Translation)
 action.ACCESS_IN_CONTROL_PANEL=Alcance no painel de controle
 action.ADD_ARTICLE=Adicione o índice
@@ -345,10 +340,10 @@ action.VIEW=Vista
 action.VIEW_ALL_TASKS=Veja todas as tarefas (Automatic Translation)
 action.VIEW_USER=Usuário Da Vista
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 1-day=1 dia
 1-minute=1 minuto
 1-month=1 mês
@@ -2325,7 +2320,9 @@ mass=Massa
 match-whole-words=Palavras Inteiras Do Fósforo
 match-x-of-the-following-fields=Match {0} of the following fields:
 max-attendees=Participantes máximos
+max-num-of-users=Máximo # dos usuários (Automatic Translation)
 max-qty=Qty Do Máximo
+max-users=Usuários máximos (Automatic Translation)
 maximize-links=Maximize As Ligações
 maximize=Maximize
 maximized=Maximized
@@ -4316,6 +4313,7 @@ type-name=Tipo nome:
 type=Tipo
 types=Tipos
 ukrainian=Ukrainian
+unable-to-create-user-account-because-the-maximum-number-of-users-has-been-reached=Incapaz de criar o cliente de usuário porque o número máximo de usuários foi alcangado. (Automatic Translation)
 unassigned=Unassigned
 unassociate=Unassociate
 unban-date=Data De Unban
@@ -4849,6 +4847,10 @@ zh_en=Chinês (China) ao inglês
 zip-postal=Zip/Postal
 zip=Fecho de correr
 zt_en=Chinês (Formosa) ao inglês
+
+##
+## Currency
+##
 
 currency.AED=Dirham dos Uae
 currency.ALL=Lek Albanian

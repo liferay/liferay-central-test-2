@@ -1,20 +1,15 @@
-
 ##
 ## Language settings
 ##
 
-
-##
-## Portlet descriptions and titles
-##
 lang.dir=ltr
 lang.line.begin=left
 lang.line.end=right
 
+##
+## Portlet descriptions and titles
+##
 
-##
-## Category titles
-##
 javax.portlet.description.122=Kategoriek edukiak etiketatzeko balio duten hiztegietan multzokatutako hitzen multzoa deskribatzen dute. Administratzaileek hiztegiak sortu eta kategoriekin populatu ditzakete, hauek erabiltzaileek edukiak etiketatzerakoan aukeratu ahal izango dituztelarik.
 javax.portlet.description.126=Erakundeek erabiltzaileen hierarkia errepresentatzen dute, departamentu edo menpekoak esaterako. Administratzaileek erabiltzaileen bazkidetzak kudeatu, rolak definitu eta erakundearen atributuak ezarri ditzakete.
 javax.portlet.description.127=Erabiltzaile taldeak erabiltzaile talde solteen lasterbideak dira, komunitate edo erakunde bazkidetza kontutan eduki gabe. Administratzaileek erabiltzaile taldea definitu eta komunitateko partaide moduan esleitu ditzakete.
@@ -141,10 +136,10 @@ javax.portlet.title.98=Software katalogoa
 javax.portlet.title.99=Etiketak
 javax.portlet.title.9=Administrazioa
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=Administrazioa
 category.alfresco=Alfresco
 category.christianity=Kristautasuna
@@ -179,10 +174,10 @@ category.wol=Liferay mundua
 category.workflow=Workflow
 category.wsrp=WSRP
 
+##
+## Model resources
+##
 
-##
-## Action names
-##
 model.resource.com.liferay.knowledgebase.model.KBArticle=Jakintza-base artikulua
 model.resource.com.liferay.portal.model.Group=Komunitatea
 model.resource.com.liferay.portal.model.Layout=Orria
@@ -245,10 +240,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Workflow de
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Workflow kasua
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Workflow ataza
 
+##
+## Action names
+##
 
-##
-## Messages
-##
 action.ACCESS=Sarrera
 action.ACCESS_IN_CONTROL_PANEL=Sarbidea Kontrol Panelean
 action.ADD_ARTICLE=Gehitu edukia
@@ -345,10 +340,10 @@ action.VIEW=Ikusi
 action.VIEW_ALL_TASKS=Ikusi ataza guztiak
 action.VIEW_USER=Ikusi erabiltzailea
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 1-day=Egun 1
 1-minute=Minutu 1
 1-month=Hilabete 1
@@ -2325,7 +2320,9 @@ mass=Masa
 match-whole-words=Parekatu hitz osoak
 match-x-of-the-following-fields=Parekatu {0} ondorengo eremuekin:
 max-attendees=Partaideen gehienezko kopurua
+max-num-of-users=Max # of Users (Automatic Copy)
 max-qty=Gehienezko kantitatea
+max-users=Max Users (Automatic Copy)
 maximize-links=Maximizatu estekak
 maximize=Maximizatu
 maximized=Maximizatua
@@ -4316,6 +4313,7 @@ type-name=Idatzi izena:
 type=Mota
 types=Motak
 ukrainian=Ukraniera
+unable-to-create-user-account-because-the-maximum-number-of-users-has-been-reached=Unable to create user account because the maximum number of users has been reached. (Automatic Copy)
 unassigned=Esleitu gabea
 unassociate=Ez elkartu
 unban-date=Bazterketaren amaiera data
@@ -4849,6 +4847,10 @@ zh_en=Txineratik ingelesera
 zip-postal=Posta Kodea
 zip=Posta Kodea
 zt_en=Txineratik (Taiwan) ingelesera
+
+##
+## Currency
+##
 
 currency.AED=Arabiar Emirerri Batuetako dirhama
 currency.ALL=Albaniako leka

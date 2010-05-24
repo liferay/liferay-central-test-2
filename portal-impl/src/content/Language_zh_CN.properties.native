@@ -1,20 +1,15 @@
-
 ##
 ## Language settings
 ##
 
-
-##
-## Portlet descriptions and titles
-##
 lang.dir=ltr
 lang.line.begin=left
 lang.line.end=right
 
+##
+## Portlet descriptions and titles
+##
 
-##
-## Category titles
-##
 javax.portlet.description.122=类别是一种规范化的内容分类检索机制，支持用一组词汇对各种内容条目进行标注。管理员需要定义这些词汇，并将这些词汇组织成树状结构的类别定义。用户在创作内容时可以用类别为内容做分类标注。
 javax.portlet.description.126=机构组织描述的是一种层次化的用户组织结构，例如部门或分支机构。管理员能管理用户的成员资格，定义角色，设定机构组织的属性。
 javax.portlet.description.127=用户组可以看作是一种快捷方式，用于对松散结构的一组用户做某种一致的定义。所谓松散结构是指组成用户组的用户不必拥有某个社区或机构组织的成员资格。如果需要，管理员可以定义一个用户组。给这个用户组设定了某个社区的成员资格就让这个用户组中的每个成员都获得了该社区的成员资格。
@@ -141,10 +136,10 @@ javax.portlet.title.98=软件目录
 javax.portlet.title.99=标签
 javax.portlet.title.9=管理
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=管理
 category.alfresco=Alfresco
 category.christianity=基督教
@@ -179,10 +174,10 @@ category.wol=Liferay 世界
 category.workflow=工作流
 category.wsrp=WSRP
 
+##
+## Model resources
+##
 
-##
-## Action names
-##
 model.resource.com.liferay.knowledgebase.model.KBArticle=知识库文章
 model.resource.com.liferay.portal.model.Group=组织
 model.resource.com.liferay.portal.model.Layout=网页
@@ -245,10 +240,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=工作流�
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=工作流实例
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=工作流任务
 
+##
+## Action names
+##
 
-##
-## Messages
-##
 action.ACCESS=访问
 action.ACCESS_IN_CONTROL_PANEL=从控制面板访问
 action.ADD_ARTICLE=添加网页内容
@@ -345,10 +340,10 @@ action.VIEW=查看
 action.VIEW_ALL_TASKS=查看所有任务
 action.VIEW_USER=查看用户
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 1-day=1 天
 1-minute=1 分钟
 1-month=1 个月
@@ -2325,7 +2320,9 @@ mass=大量
 match-whole-words=匹配完整的单词
 match-x-of-the-following-fields=匹配以下字段的 {0}：
 max-attendees=出席者的最大人数
+max-num-of-users=最大#用户 (Automatic Translation)
 max-qty=最大数量
+max-users=最大用户 (Automatic Translation)
 maximize-links=最大化链接
 maximize=最大化
 maximized=最大化的
@@ -4316,6 +4313,7 @@ type-name=输入名字：
 type=类型
 types=类型
 ukrainian=乌克兰
+unable-to-create-user-account-because-the-maximum-number-of-users-has-been-reached=无法创造用户帐号，因为用户的最大数字被到达了。 (Automatic Translation)
 unassigned=未分配
 unassociate=取消关联
 unban-date=解禁日期
@@ -4849,6 +4847,10 @@ zh_en=中文（简体）英语
 zip-postal=邮政编码
 zip=邮政编码
 zt_en=中文（繁体）对英语
+
+##
+## Currency
+##
 
 currency.AED=阿拉伯联合酋长国迪拉姆
 currency.ALL=阿尔巴尼亚列克

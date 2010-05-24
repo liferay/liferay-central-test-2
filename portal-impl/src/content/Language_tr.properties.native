@@ -1,20 +1,15 @@
-
 ##
 ## Language settings
 ##
 
-
-##
-## Portlet descriptions and titles
-##
 lang.dir=ltr
 lang.line.begin=left
 lang.line.end=right
 
+##
+## Portlet descriptions and titles
+##
 
-##
-## Category titles
-##
 javax.portlet.description.122=Categories describe a set of vocabulary terms to tag content items. Administrators can create vocabularies and populate them with categories that users can choose from when authoring content. (Automatic Copy)
 javax.portlet.description.126=Organizations represent a hierarchy of users, such as a department or subsidiary. Administrators can manage user membership, define roles, and set up the attributes of an organization. (Automatic Copy)
 javax.portlet.description.127=User groups are a shortcut to a loose group of users, regardless of community or organization membership. Administrators can define a user group and assign the user group as members of a community if desired. (Automatic Copy)
@@ -141,10 +136,10 @@ javax.portlet.title.98=Yazılım Kataloğu
 javax.portlet.title.99=Tags (Automatic Copy)
 javax.portlet.title.9=Yönetici
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=Yönetici
 category.alfresco=Alfresco
 category.christianity=Hristiyanlık
@@ -179,10 +174,10 @@ category.wol=Liferay Dünyası
 category.workflow=İş Akışı
 category.wsrp=WSRP
 
+##
+## Model resources
+##
 
-##
-## Action names
-##
 model.resource.com.liferay.knowledgebase.model.KBArticle=Bilgi Tabanlı Makale
 model.resource.com.liferay.portal.model.Group=Topluluk
 model.resource.com.liferay.portal.model.Layout=Sayfa
@@ -245,10 +240,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=İş Akış
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=İş Akışı Örneği
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=İş Akışı Görevi
 
+##
+## Action names
+##
 
-##
-## Messages
-##
 action.ACCESS=Access (Automatic Copy)
 action.ACCESS_IN_CONTROL_PANEL=Access in Control Panel (Automatic Copy)
 action.ADD_ARTICLE=Makale Ekle
@@ -345,10 +340,10 @@ action.VIEW=Görüntüle
 action.VIEW_ALL_TASKS=View All Tasks (Automatic Copy)
 action.VIEW_USER=Kullanıcı Görüntüle
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 1-day=1 Gün
 1-minute=1 Dakika
 1-month=1 Ay
@@ -2325,7 +2320,9 @@ mass=Yığın
 match-whole-words=Tüm Kelimeleri Eşleştir
 match-x-of-the-following-fields={0} 'ı aşağıdaki alanlarla eşleştir
 max-attendees=Azami Katılımcılar
+max-num-of-users=Max # of Users (Automatic Copy)
 max-qty=Maksimum/Azami Miktar
+max-users=Max Users (Automatic Copy)
 maximize-links=Bağlantıları Maksimize Et
 maximize=Ekranı Kapla
 maximized=Ekran Kaplandı(Maximized)
@@ -4316,6 +4313,7 @@ type-name=İsim yazın:
 type=Yazın
 types=Tipler
 ukrainian=Ukraynalı
+unable-to-create-user-account-because-the-maximum-number-of-users-has-been-reached=Unable to create user account because the maximum number of users has been reached. (Automatic Copy)
 unassigned=Atanmamış
 unassociate=İlintilendirme
 unban-date=Yasak kaldırma tarihi
@@ -4849,6 +4847,10 @@ zh_en=Çinceden (Çin) to İngilizceye
 zip-postal=Posta Kodu
 zip=Posta Kodu
 zt_en=Çinceden (Tayvan) İngilizceye
+
+##
+## Currency
+##
 
 currency.AED=UAE Dirham
 currency.ALL=Albanian Lek

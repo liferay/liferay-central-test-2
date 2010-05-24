@@ -1,20 +1,15 @@
-
 ##
 ## Language settings
 ##
 
-
-##
-## Portlet descriptions and titles
-##
 lang.dir=ltr
 lang.line.begin=left
 lang.line.end=right
 
+##
+## Portlet descriptions and titles
+##
 
-##
-## Category titles
-##
 javax.portlet.description.122=カテゴリでは、コンテンツにタグ付けするための用語を記述します。管理者は用語を作成し、カテゴリをそこに追加していきます。ユーザはコンテント作成時にカテゴリを選ぶことができます。
 javax.portlet.description.126=組織は部門あるいは子会社のようなユーザ階層を表します。管理者はユーザのメンバシップを管理し、ロールを定義し、組織の属性を構成することができます。
 javax.portlet.description.127=ユーザグループは、コミュニティまたは組織と関係のない、自由なユーザ集団のショートカットです。管理者はユーザグループを定義し、コミュニティのメンバとして割り当てることができます。
@@ -141,10 +136,10 @@ javax.portlet.title.98=プラグインカタログ
 javax.portlet.title.99=タグ
 javax.portlet.title.9=システム管理
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=システム管理
 category.alfresco=Alfresco
 category.christianity=キリスト教
@@ -179,10 +174,10 @@ category.wol=Liferayの世界
 category.workflow=ワークフロー
 category.wsrp=WSRP
 
+##
+## Model resources
+##
 
-##
-## Action names
-##
 model.resource.com.liferay.knowledgebase.model.KBArticle=知識ベースの記事
 model.resource.com.liferay.portal.model.Group=コミュニティ
 model.resource.com.liferay.portal.model.Layout=ページ
@@ -245,10 +240,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=ワーク�
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=ワークフローのインタンス
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=ワークフローのタスク
 
+##
+## Action names
+##
 
-##
-## Messages
-##
 action.ACCESS=アクセス
 action.ACCESS_IN_CONTROL_PANEL=コントロールパネルのアクセス
 action.ADD_ARTICLE=コンテンツの追加
@@ -345,10 +340,10 @@ action.VIEW=参照
 action.VIEW_ALL_TASKS=すべてのタスクの表示
 action.VIEW_USER=ユーザの参照
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 1-day=1日
 1-minute=1分
 1-month=1ヵ月
@@ -2325,7 +2320,9 @@ mass=質量
 match-whole-words=すべての語句に一致する
 match-x-of-the-following-fields={0} の語句を含む:
 max-attendees=最大出席者
+max-num-of-users=#ユーザーの最高 (Automatic Translation)
 max-qty=最大量
+max-users=最高のユーザー (Automatic Translation)
 maximize-links=リンクの最大化
 maximize=最大化
 maximized=最大化
@@ -4316,6 +4313,7 @@ type-name=入力した名前:
 type=種類
 types=種類
 ukrainian=ウクライナ語
+unable-to-create-user-account-because-the-maximum-number-of-users-has-been-reached=ユーザーの最大数が達されたのでユーザ・アカウントを作成することない。 (Automatic Translation)
 unassigned=未アサイン
 unassociate=関連付けをしない
 unban-date=禁止解除日時
@@ -4849,6 +4847,10 @@ zh_en=中国語(簡体)から英語
 zip-postal=USの郵便番号
 zip=郵便番号
 zt_en=中国語(繁体)から英語
+
+##
+## Currency
+##
 
 currency.AED=UAE ディルハム
 currency.ALL=アルバニア レク

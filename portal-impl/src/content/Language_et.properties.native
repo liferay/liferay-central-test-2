@@ -1,20 +1,15 @@
-
 ##
 ## Language settings
 ##
 
-
-##
-## Portlet descriptions and titles
-##
 lang.dir=ltr
 lang.line.begin=left
 lang.line.end=right
 
+##
+## Portlet descriptions and titles
+##
 
-##
-## Category titles
-##
 javax.portlet.description.122=Categories describe a set of vocabulary terms to tag content items. Administrators can create vocabularies and populate them with categories that users can choose from when authoring content. (Automatic Copy)
 javax.portlet.description.126=Organizations represent a hierarchy of users, such as a department or subsidiary. Administrators can manage user membership, define roles, and set up the attributes of an organization. (Automatic Copy)
 javax.portlet.description.127=User groups are a shortcut to a loose group of users, regardless of community or organization membership. Administrators can define a user group and assign the user group as members of a community if desired. (Automatic Copy)
@@ -141,10 +136,10 @@ javax.portlet.title.98=Tarkvarakataloog
 javax.portlet.title.99=Sildid
 javax.portlet.title.9=Admin
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=Administreerimine
 category.alfresco=Alfresco
 category.christianity=Ristiusk
@@ -179,10 +174,10 @@ category.wol=Liferay maailm
 category.workflow=Töövoog
 category.wsrp=WSRP
 
+##
+## Model resources
+##
 
-##
-## Action names
-##
 model.resource.com.liferay.knowledgebase.model.KBArticle=Teadmiste baasi artikkel
 model.resource.com.liferay.portal.model.Group=Kommuun
 model.resource.com.liferay.portal.model.Layout=Leht
@@ -245,10 +240,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Töövoo de
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Töövoo instants
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Töövoo ülesanne
 
+##
+## Action names
+##
 
-##
-## Messages
-##
 action.ACCESS=Access (Automatic Copy)
 action.ACCESS_IN_CONTROL_PANEL=Access in Control Panel (Automatic Copy)
 action.ADD_ARTICLE=Lisa sisu
@@ -345,10 +340,10 @@ action.VIEW=Vaata
 action.VIEW_ALL_TASKS=View All Tasks (Automatic Copy)
 action.VIEW_USER=Vaata kasutajat
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 1-day=1 päev
 1-minute=1 Minut
 1-month=1 kuu
@@ -2325,7 +2320,9 @@ mass=Mass
 match-whole-words=Sobita terveid sõnu
 match-x-of-the-following-fields=Sobita {0} järgnevatest väljadest:
 max-attendees=Maks. osalejad
+max-num-of-users=Max # of Users (Automatic Copy)
 max-qty=Maksimaalne kogus
+max-users=Max Users (Automatic Copy)
 maximize-links=Maksimeeri lingid
 maximize=Maksimeeri
 maximized=Maksimeeritud
@@ -4316,6 +4313,7 @@ type-name=Kirjuta nimi:
 type=Tüüp
 types=Tüübid
 ukrainian=Ukraina
+unable-to-create-user-account-because-the-maximum-number-of-users-has-been-reached=Unable to create user account because the maximum number of users has been reached. (Automatic Copy)
 unassigned=Määramata
 unassociate=Seostamata
 unban-date=Blokeerimise lõpp
@@ -4849,6 +4847,10 @@ zh_en=Hiina keelest (Hiina) inglise keelde
 zip-postal=Postiindeks
 zip=Zip
 zt_en=Hiina keelest (Taivan) inglise keeelde
+
+##
+## Currency
+##
 
 currency.AED=Araabia ühendemiraatide dirhem
 currency.ALL=Albaania lek

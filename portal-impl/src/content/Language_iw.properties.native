@@ -1,20 +1,15 @@
-
 ##
 ## Language settings
 ##
 
-
-##
-## Portlet descriptions and titles
-##
 lang.dir=rtl
 lang.line.begin=right
 lang.line.end=left
 
+##
+## Portlet descriptions and titles
+##
 
-##
-## Category titles
-##
 javax.portlet.description.122=Categories describe a set of vocabulary terms to tag content items. Administrators can create vocabularies and populate them with categories that users can choose from when authoring content. (Automatic Copy)
 javax.portlet.description.126=Organizations represent a hierarchy of users, such as a department or subsidiary. Administrators can manage user membership, define roles, and set up the attributes of an organization. (Automatic Copy)
 javax.portlet.description.127=User groups are a shortcut to a loose group of users, regardless of community or organization membership. Administrators can define a user group and assign the user group as members of a community if desired. (Automatic Copy)
@@ -141,10 +136,10 @@ javax.portlet.title.98=קטלוג תוכנה
 javax.portlet.title.99=מנהל התגים
 javax.portlet.title.9=מנהל
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=מנהל
 category.alfresco=בחוץ
 category.christianity=נצרות
@@ -179,10 +174,10 @@ category.wol=עולם של Liferay
 category.workflow=מהלך עבודה
 category.wsrp=WSRP
 
+##
+## Model resources
+##
 
-##
-## Action names
-##
 model.resource.com.liferay.knowledgebase.model.KBArticle=Knowledge Base Article (Automatic Copy)
 model.resource.com.liferay.portal.model.Group=קהילה
 model.resource.com.liferay.portal.model.Layout=דף
@@ -245,10 +240,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=הגדרת 
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=הדגמת תזרים עבודה
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=מטלת תזרים עבודה
 
+##
+## Action names
+##
 
-##
-## Messages
-##
 action.ACCESS=Access (Automatic Copy)
 action.ACCESS_IN_CONTROL_PANEL=Access in Control Panel (Automatic Copy)
 action.ADD_ARTICLE=הוספת מאמר
@@ -345,10 +340,10 @@ action.VIEW=הראה
 action.VIEW_ALL_TASKS=View All Tasks (Automatic Copy)
 action.VIEW_USER=הראה משתמש
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 1-day=יום 1
 1-minute=1 Minute (Automatic Copy)
 1-month=חודש 1
@@ -2325,7 +2320,9 @@ mass=מסה
 match-whole-words=להתאים כל המילים
 match-x-of-the-following-fields=להתאים {0} שדות הבאים:
 max-attendees=מקסימום נוכחים
+max-num-of-users=Max # of Users (Automatic Copy)
 max-qty=כמות מקסימלית
+max-users=Max Users (Automatic Copy)
 maximize-links=להביא את הקישורים למצב מקסימלי
 maximize=להביא למצב מקסימלי
 maximized=הובא למצב מקסימלי
@@ -4316,6 +4313,7 @@ type-name=הקלד שם
 type=סוג
 types=סוגים
 ukrainian=אוקראיני
+unable-to-create-user-account-because-the-maximum-number-of-users-has-been-reached=Unable to create user account because the maximum number of users has been reached. (Automatic Copy)
 unassigned=לא מוקצה
 unassociate=לא מסופח
 unban-date=בטל חסימת תאריך
@@ -4849,6 +4847,10 @@ zh_en=סינית (סין) לאנגלית
 zip-postal=Zip/Postal (Automatic Copy)
 zip=מיקוד
 zt_en=סינית (טאיוון) לאנגלית.
+
+##
+## Currency
+##
 
 currency.AED=דירהם של איגוד הנסיכויות הערביות
 currency.ALL=לק אלבני

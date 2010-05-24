@@ -1,20 +1,15 @@
-
 ##
 ## Language settings
 ##
 
-
-##
-## Portlet descriptions and titles
-##
 lang.dir=ltr
 lang.line.begin=left
 lang.line.end=right
 
+##
+## Portlet descriptions and titles
+##
 
-##
-## Category titles
-##
 javax.portlet.description.122=Categories describe a set of vocabulary terms to tag content items. Administrators can create vocabularies and populate them with categories that users can choose from when authoring content. (Automatic Copy)
 javax.portlet.description.126=Organizations represent a hierarchy of users, such as a department or subsidiary. Administrators can manage user membership, define roles, and set up the attributes of an organization. (Automatic Copy)
 javax.portlet.description.127=User groups are a shortcut to a loose group of users, regardless of community or organization membership. Administrators can define a user group and assign the user group as members of a community if desired. (Automatic Copy)
@@ -141,10 +136,10 @@ javax.portlet.title.98=Софтуерен каталог
 javax.portlet.title.99=Тагове и категории
 javax.portlet.title.9=Администратор
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=Администратор
 category.alfresco=Alfresco
 category.christianity=Християнство
@@ -179,10 +174,10 @@ category.wol=Светът на Liferay
 category.workflow=Работен процес
 category.wsrp=WSRP
 
+##
+## Model resources
+##
 
-##
-## Action names
-##
 model.resource.com.liferay.knowledgebase.model.KBArticle=Статия от базата знания
 model.resource.com.liferay.portal.model.Group=Общност
 model.resource.com.liferay.portal.model.Layout=Страница
@@ -245,10 +240,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Дефин�
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Работен процес
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Задача на работния процес
 
+##
+## Action names
+##
 
-##
-## Messages
-##
 action.ACCESS=Access (Automatic Copy)
 action.ACCESS_IN_CONTROL_PANEL=Access in Control Panel (Automatic Copy)
 action.ADD_ARTICLE=Добавяне на съдържание
@@ -345,10 +340,10 @@ action.VIEW=Показване
 action.VIEW_ALL_TASKS=View All Tasks (Automatic Copy)
 action.VIEW_USER=Показване на потребител
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 1-day=1 ден
 1-minute=1 минута
 1-month=1 месец
@@ -2325,7 +2320,9 @@ mass=Маса
 match-whole-words=Съвпадение на цели думи
 match-x-of-the-following-fields=Съвпадение на {0} от следните полета:
 max-attendees=Максимум присъстващи
+max-num-of-users=Max # of Users (Automatic Copy)
 max-qty=Максимално количество
+max-users=Max Users (Automatic Copy)
 maximize-links=Максимизиране на връзките
 maximize=Максимизирай
 maximized=Максимизиран
@@ -4316,6 +4313,7 @@ type-name=Въведете име:
 type=Тип
 types=Типове
 ukrainian=Украински
+unable-to-create-user-account-because-the-maximum-number-of-users-has-been-reached=Unable to create user account because the maximum number of users has been reached. (Automatic Copy)
 unassigned=Неприсвоен
 unassociate=Неасоцииран
 unban-date=Отключване на дата
@@ -4849,6 +4847,10 @@ zh_en=Китайски (Китай) към Английски
 zip-postal=Пощенски код (ZIP)
 zip=Zip
 zt_en=Китайски (Тайван) към Английски
+
+##
+## Currency
+##
 
 currency.AED=UAE Dirham
 currency.ALL=Албански лек

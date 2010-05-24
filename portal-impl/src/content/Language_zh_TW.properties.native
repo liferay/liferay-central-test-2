@@ -1,20 +1,15 @@
-
 ##
 ## Language settings
 ##
 
-
-##
-## Portlet descriptions and titles
-##
 lang.dir=ltr
 lang.line.begin=left
 lang.line.end=right
 
+##
+## Portlet descriptions and titles
+##
 
-##
-## Category titles
-##
 javax.portlet.description.122=類別描述一套詞彙量期限標記美滿的項目。 管理員能創造詞彙量和居住於他們與用戶能選擇從，當創作內容时的類別。 (Automatic Translation)
 javax.portlet.description.126=组织代表用戶階層，例如部門或輔助者。 管理員能處理用戶會員資格，定义了角色，並且設定組織的屬性。 (Automatic Translation)
 javax.portlet.description.127=不管社區或組織會員資格，用户群是捷徑對一個寬鬆小組用戶。 如果需要管理員能定義用户群和分配用户群作為社區的成員。 (Automatic Translation)
@@ -141,10 +136,10 @@ javax.portlet.title.98=軟體編目
 javax.portlet.title.99=標記
 javax.portlet.title.9=管理者
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=Admin
 category.alfresco=在戶外
 category.christianity=基督教
@@ -179,10 +174,10 @@ category.wol=Liferay 世界
 category.workflow=工作流
 category.wsrp=WSRP
 
+##
+## Model resources
+##
 
-##
-## Action names
-##
 model.resource.com.liferay.knowledgebase.model.KBArticle=知识库文章
 model.resource.com.liferay.portal.model.Group=群組
 model.resource.com.liferay.portal.model.Layout=設計
@@ -245,10 +240,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=工作流�
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=工作流事例
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=工作流任務
 
+##
+## Action names
+##
 
-##
-## Messages
-##
 action.ACCESS=通入 (Automatic Translation)
 action.ACCESS_IN_CONTROL_PANEL=訪問在控制板
 action.ADD_ARTICLE=增加內容
@@ -345,10 +340,10 @@ action.VIEW=看法
 action.VIEW_ALL_TASKS=觀看所有任務 (Automatic Translation)
 action.VIEW_USER=看法用戶
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 1-day=1 天
 1-minute=1分鐘
 1-month=1 個月
@@ -2325,7 +2320,9 @@ mass=大量
 match-whole-words=符合整句
 match-x-of-the-following-fields=Match {0} of the following fields:
 max-attendees=最大到會者
+max-num-of-users=最大#用戶 (Automatic Translation)
 max-qty=最大Qty
+max-users=最大用戶 (Automatic Translation)
 maximize-links=最大化鏈接
 maximize=最大化
 maximized=_ 最大化
@@ -4316,6 +4313,7 @@ type-name=輸入名字:
 type=類型
 types=型
 ukrainian=烏克蘭
+unable-to-create-user-account-because-the-maximum-number-of-users-has-been-reached=無法創造用户帐号，因為用戶的最大数字被到達了。 (Automatic Translation)
 unassigned=未派職務
 unassociate=Unassociate
 unban-date=Unban 日期
@@ -4849,6 +4847,10 @@ zh_en=中文(中國) 對英語
 zip-postal=Zip/Postal
 zip=郵遞區號
 zt_en=中文(臺灣) 對英語
+
+##
+## Currency
+##
 
 currency.AED=阿拉伯聯合酋長國迪拉姆
 currency.ALL=阿爾巴尼亞列克

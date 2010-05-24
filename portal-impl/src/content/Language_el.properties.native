@@ -1,20 +1,15 @@
-
 ##
 ## Language settings
 ##
 
-
-##
-## Portlet descriptions and titles
-##
 lang.dir=ltr
 lang.line.begin=left
 lang.line.end=right
 
+##
+## Portlet descriptions and titles
+##
 
-##
-## Category titles
-##
 javax.portlet.description.122=Οι κατηγορίες περιγράφουν ένα σύνολο όρων λεξιλογίου για να κολλήσουν τα ικανοποιημένα στοιχεία. Οι διοικητές μπορούν να δημιουργήσουν τα λεξιλόγια και να τα εποικήσουν με τις κατηγορίες που οι χρήστες μπορούν να επιλέξουν από όταν περιεχόμενο δημιουργίας. (Automatic Translation)
 javax.portlet.description.126=Οι οργανώσεις αντιπροσωπεύουν μια ιεραρχία των χρηστών, όπως ένα τμήμα ή ένα υποκατάστημα. Οι διοικητές μπορούν να διαχειριστούν την ιδιότητα μέλους χρηστών, να καθορίσει τους ρόλους, και την οργάνωση οι ιδιότητες μιας οργάνωσης. (Automatic Translation)
 javax.portlet.description.127=Οι ομάδες χρηστών είναι ένας συντομότερος δρόμος σε μια χαλαρή ομάδα χρηστών, ανεξάρτητα από την ιδιότητα μέλους κοινοτήτων ή οργάνωσης. Οι διοικητές μπορούν να καθορίσουν μια ομάδα χρηστών και να διορίσουν την ομάδα χρηστών ως μέλη μιας κοινότητας εάν επιθυμεί. (Automatic Translation)
@@ -141,10 +136,10 @@ javax.portlet.title.98=Κατάλογος λογισμικού
 javax.portlet.title.99=Ετικέττες
 javax.portlet.title.9=Διαχείρηση
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=Admin
 category.alfresco=Υπαίθριος
 category.christianity=Χριστιανισμός
@@ -179,10 +174,10 @@ category.wol=Κόσμος Liferay
 category.workflow=Ροή της δουλειάς
 category.wsrp=WSRP
 
+##
+## Model resources
+##
 
-##
-## Action names
-##
 model.resource.com.liferay.knowledgebase.model.KBArticle=Άρθρο βάσεων γνώσεων
 model.resource.com.liferay.portal.model.Group=Κοινότητα
 model.resource.com.liferay.portal.model.Layout=Σελίδα
@@ -245,10 +240,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Καθορ�
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Περίπτωση ροής της δουλειάς
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Στόχος ροής της δουλειάς
 
+##
+## Action names
+##
 
-##
-## Messages
-##
 action.ACCESS=Πρόσβαση (Automatic Translation)
 action.ACCESS_IN_CONTROL_PANEL=Πρόσβαση στην επιτροπή ελέγχου
 action.ADD_ARTICLE=Προσθέστε το περιεχόμενο
@@ -345,10 +340,10 @@ action.VIEW=Αποψη
 action.VIEW_ALL_TASKS=Δείτε όλους τους στόχους (Automatic Translation)
 action.VIEW_USER=Χρήστης άποψης
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 1-day=1 Ημέρα
 1-minute=1 λεπτό
 1-month=1 Μήνας
@@ -2325,7 +2320,9 @@ mass=Θεία Λειτουργία
 match-whole-words=Ταίριασμα Ολόκληρων Λέξεων
 match-x-of-the-following-fields=Match {0} of the following fields:
 max-attendees=Ανώτατοι συμμετέχοντες
+max-num-of-users=Ανώτατος # των χρηστών (Automatic Translation)
 max-qty=Ανώτατο Qty
+max-users=Ανώτατοι χρήστες (Automatic Translation)
 maximize-links=Μεγιστοποιήστε τις συνδέσεις
 maximize=Μεγιστοποίηση
 maximized=Μεγιστοποιημένος
@@ -4316,6 +4313,7 @@ type-name=Πληκτρολογείστε το όνομα:
 type=Τύπος
 types=Τύποι
 ukrainian=Ουκρανικά
+unable-to-create-user-account-because-the-maximum-number-of-users-has-been-reached=Ανίκανος να δημιουργήσει τον απολογισμό χρηστών επειδή ο μέγιστος αριθμός χρηστών έχει επιτευχθεί. (Automatic Translation)
 unassigned=Unassigned
 unassociate=Unassociate
 unban-date=Ημερομηνία Unban
@@ -4849,6 +4847,10 @@ zh_en=Κινέζικα σε Αγγλικά
 zip-postal=Φερμουάρ/ταχυδρομικός
 zip=Τ.Κ.
 zt_en=Κινέζικα (Ταϊβάν) στα αγγλικά
+
+##
+## Currency
+##
 
 currency.AED=UAE Dirham
 currency.ALL=Lek Αλβανίας

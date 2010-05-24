@@ -1,20 +1,15 @@
-
 ##
 ## Language settings
 ##
 
-
-##
-## Portlet descriptions and titles
-##
 lang.dir=ltr
 lang.line.begin=vänster
 lang.line.end=höger
 
+##
+## Portlet descriptions and titles
+##
 
-##
-## Category titles
-##
 javax.portlet.description.122=Kategorier är termer som det går att klassificera innehåll med. Administratörer kan skapa kategorier samt taxonomier för att organisera kategorierna i. Användare kan använda det innehåll de skapar med de tillgängliga kategorierna.
 javax.portlet.description.126=Organisationer beskriver grupper av användare ordnade i hierarkier, såsom avdelningar och dotterbolag. Administratörer hantera medlemmar, definiera roller och hantera information om organisationen.
 javax.portlet.description.127=Användargrupper är lösa samlingar av användare oberoende av medlemskap i community eller organisation. Administratörer kan definiera användargrupper och göra dem till medlemmar i communities och organisationer.
@@ -141,10 +136,10 @@ javax.portlet.title.98=Programvarukatalog
 javax.portlet.title.99=Taggar
 javax.portlet.title.9=Administration
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=Administration
 category.alfresco=Alfresco
 category.christianity=Kristendom
@@ -179,10 +174,10 @@ category.wol=Liferay-världen
 category.workflow=Arbetsflöde
 category.wsrp=WSRP
 
+##
+## Model resources
+##
 
-##
-## Action names
-##
 model.resource.com.liferay.knowledgebase.model.KBArticle=Kunskapsbanksartikel
 model.resource.com.liferay.portal.model.Group=Grupp
 model.resource.com.liferay.portal.model.Layout=Sida
@@ -245,10 +240,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Arbetsflöd
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Arbetsflöde
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Arbetsflöde, uppgift
 
+##
+## Action names
+##
 
-##
-## Messages
-##
 action.ACCESS=Åtkomst
 action.ACCESS_IN_CONTROL_PANEL=Åtkomst från kontrollpanelen
 action.ADD_ARTICLE=Skapa artikel
@@ -345,10 +340,10 @@ action.VIEW=Se
 action.VIEW_ALL_TASKS=Visa alla uppgifter
 action.VIEW_USER=Se användare
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 1-day=1 dag
 1-minute=1 minut
 1-month=1 månad
@@ -2325,7 +2320,9 @@ mass=Mässa
 match-whole-words=Matcha hela ord
 match-x-of-the-following-fields=Matcha {0} av följande fält:
 max-attendees=Max antal närvarande
+max-num-of-users=Max # of Users (Automatic Copy)
 max-qty=Maximal kvantitet
+max-users=Max Users (Automatic Copy)
 maximize-links=Maximera länkar
 maximize=Maximera
 maximized=Maximerad
@@ -4316,6 +4313,7 @@ type-name=Skriv namn:
 type=Typ
 types=Typer
 ukrainian=Ukrainska
+unable-to-create-user-account-because-the-maximum-number-of-users-has-been-reached=Unable to create user account because the maximum number of users has been reached. (Automatic Copy)
 unassigned=Ledig
 unassociate=Orelaterade
 unban-date=Uteslutning avslutas datum
@@ -4849,6 +4847,10 @@ zh_en=Kinesiska (Kina) till Engelska
 zip-postal=Postnummer
 zip=Postnummer
 zt_en=Kinesiska (Taiwan) till Engelska
+
+##
+## Currency
+##
 
 currency.AED=arabiska dirham
 currency.ALL=Albanian Lek

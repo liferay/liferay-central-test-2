@@ -1,20 +1,15 @@
-
 ##
 ## Language settings
 ##
 
-
-##
-## Portlet descriptions and titles
-##
 lang.dir=ltr
 lang.line.begin=left
 lang.line.end=right
 
+##
+## Portlet descriptions and titles
+##
 
-##
-## Category titles
-##
 javax.portlet.description.122=As categorias descrevem um conjunto de termos agrupado em vocabulários para categorizar conteúdos. Deste portlet se podem criar categorias e populá-las com os termos do vocabulário que os usuários poderão escolher quando forem etiquetar o conteúdo.
 javax.portlet.description.126=As organizações representam uma hierarquia dos usuários, tais como um departamento ou uma filial. Deste portlet se podem administrar os usuários, definir papéis e configurar os atributos de uma organização.
 javax.portlet.description.127=Os grupos de usuário são um conjunto de usuários relacionados. A existência de um grupo independe que eles pertençam de uma comunidade ou organização. Uma vez definido o grupo de usuários, é possível associá-lo como membro de uma comunidade.
@@ -141,10 +136,10 @@ javax.portlet.title.98=Catálogo de software
 javax.portlet.title.99=Tag
 javax.portlet.title.9=Administração
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=Administração
 category.alfresco=Alfresco
 category.christianity=Cristianismo
@@ -179,10 +174,10 @@ category.wol=Mundo do Liferay
 category.workflow=Workflow
 category.wsrp=WSRP
 
+##
+## Model resources
+##
 
-##
-## Action names
-##
 model.resource.com.liferay.knowledgebase.model.KBArticle=Artigo da base de conhecimento
 model.resource.com.liferay.portal.model.Group=Comunidade
 model.resource.com.liferay.portal.model.Layout=Página
@@ -245,10 +240,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Definição
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Instancia de Workflow
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Tarefa de Workflow
 
+##
+## Action names
+##
 
-##
-## Messages
-##
 action.ACCESS=Acessar
 action.ACCESS_IN_CONTROL_PANEL=Acessar no painel de controle
 action.ADD_ARTICLE=Adicionar artigo
@@ -345,10 +340,10 @@ action.VIEW=Visualizar
 action.VIEW_ALL_TASKS=Visualizar todas as tarefas
 action.VIEW_USER=Visualizar usuário
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 1-day=1 dia
 1-minute=1 minuto
 1-month=1 mês
@@ -2325,7 +2320,9 @@ mass=Massa
 match-whole-words=Comparar todas as palavras
 match-x-of-the-following-fields=Comparar {0} dos seguintes campos: 
 max-attendees=Número máximo de participantes
+max-num-of-users=Máximo # dos usuários (Automatic Translation)
 max-qty=Quantidade máxima
+max-users=Usuários máximos (Automatic Translation)
 maximize-links=Maximizar links
 maximize=Maximizar
 maximized=Maximizado
@@ -4316,6 +4313,7 @@ type-name=Digite um nome:
 type=Tipo
 types=Tipos
 ukrainian=Ucraniano
+unable-to-create-user-account-because-the-maximum-number-of-users-has-been-reached=Incapaz de criar o cliente de usuário porque o número máximo de usuários foi alcangado. (Automatic Translation)
 unassigned=Não associado
 unassociate=Remover associação
 unban-date=Data de desbloqueio
@@ -4849,6 +4847,10 @@ zh_en=Chinês (China) ao inglês
 zip-postal=Zip/Postal
 zip=Zip
 zt_en=Chinês (Formosa) ao inglês
+
+##
+## Currency
+##
 
 currency.AED=Dirham dos Uae
 currency.ALL=Lek Albanian

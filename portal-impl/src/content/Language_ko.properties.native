@@ -1,20 +1,15 @@
-
 ##
 ## Language settings
 ##
 
-
-##
-## Portlet descriptions and titles
-##
 lang.dir=ltr
 lang.line.begin=left
 lang.line.end=right
 
+##
+## Portlet descriptions and titles
+##
 
-##
-## Category titles
-##
 javax.portlet.description.122=종류는 어휘 기간의 만족한 품목을 표를 붙이기 위하여 세트를 기술한다. 행정관은 어휘를 창조하고 사용자가 선택할 수 있는 종류로 사람을 거주케 할 수 있다 내용을 저작할 때. (Automatic Translation)
 javax.portlet.description.126=조직은 부 자회사와 같은 사용자의 계층구조를 대표한다. 행정관은 사용자 회원을 처리할 수 있고, 역할을 정의하고, 조직의 속성을 설치한다. (Automatic Translation)
 javax.portlet.description.127=사용자 그룹은 지역 사회 또는 조직 회원에 관계 없이 사용자의 느슨한 그룹에게 편법, 이다. 행정관은 지역 사회의 일원으로 사용자 그룹을 정의하고 필요하다면 사용자 그룹을 지정할 수 있다. (Automatic Translation)
@@ -141,10 +136,10 @@ javax.portlet.title.98=소프트웨어 카탈로그
 javax.portlet.title.99=꼬리표
 javax.portlet.title.9=Admin
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=Admin
 category.alfresco=Alfresco
 category.christianity=기독교
@@ -179,10 +174,10 @@ category.wol=Liferay의 세계
 category.workflow=작업 흐름
 category.wsrp=WSRP
 
+##
+## Model resources
+##
 
-##
-## Action names
-##
 model.resource.com.liferay.knowledgebase.model.KBArticle=지식 기준 기사
 model.resource.com.liferay.portal.model.Group=지역 사회
 model.resource.com.liferay.portal.model.Layout=페이지
@@ -245,10 +240,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=작업 흐�
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=작업 흐름 경우
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=작업 흐름 업무
 
+##
+## Action names
+##
 
-##
-## Messages
-##
 action.ACCESS=접근 (Automatic Translation)
 action.ACCESS_IN_CONTROL_PANEL=제어반에 있는 접근
 action.ADD_ARTICLE=내용을 추가하십시오
@@ -345,10 +340,10 @@ action.VIEW=전망
 action.VIEW_ALL_TASKS=모든 업무를 전망하십시오 (Automatic Translation)
 action.VIEW_USER=전망 사용자
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 1-day=1 일
 1-minute=1 분
 1-month=1 달
@@ -2325,7 +2320,9 @@ mass=질량
 match-whole-words=성냥 전체 낱말
 match-x-of-the-following-fields=Match {0} of the following fields:
 max-attendees=최대 출석자
+max-num-of-users=# 사용자의 최대 (Automatic Translation)
 max-qty=최대 Qty
+max-users=최대 사용자 (Automatic Translation)
 maximize-links=연결을 확대하십시요
 maximize=확대하십시요
 maximized=확대하는
@@ -4316,6 +4313,7 @@ type-name=유형 이름:
 type=유형
 types=유형
 ukrainian=Ukrainian
+unable-to-create-user-account-because-the-maximum-number-of-users-has-been-reached=사용자의 최대 숫자가 도달되었기 때문에 사용자 계정을 창조할 수 없습니다. (Automatic Translation)
 unassigned=Unassigned
 unassociate=Unassociate
 unban-date=Unban날짜
@@ -4849,6 +4847,10 @@ zh_en=영어에 중국인
 zip-postal=Zip/Postal
 zip=지퍼
 zt_en=영어에 중국어 (대만)
+
+##
+## Currency
+##
 
 currency.AED=아랍 에미리트 연방 Dirham
 currency.ALL=알바니아 Lek

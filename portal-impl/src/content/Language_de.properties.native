@@ -1,20 +1,15 @@
-
 ##
 ## Language settings
 ##
 
-
-##
-## Portlet descriptions and titles
-##
 lang.dir=ltr
 lang.line.begin=left
 lang.line.end=right
 
+##
+## Portlet descriptions and titles
+##
 
-##
-## Category titles
-##
 javax.portlet.description.122=Kategorien beschreiben ein Vokabular, um Inhalte zu kennzeichnen. Administatoren können Vokabular erstellen und dieses mit Kategorien befüllen, aus dem Benutzer beim Erstellen von Inhalten auswählen können.
 javax.portlet.description.126=Organisationen stellen eine Hierarchie von Benutzern dar, wie z.B. eine Abteilung oder eine Tochtergesellschaft dar. Administatoren können Benutzermitgliedschaften verwalten, Rollen definieren und Attribute einer Organisation festlegen.
 javax.portlet.description.127=Benutzergruppen sind lose Gruppen, unabhängig von Gemeinschafts- oder Organisationsmitgliedschaft. Administatoren können eine Benutzergruppe definieren und die Benutzergruppe als Mitglieder einer Community zuweisen, wenn es erwünscht wird.
@@ -141,10 +136,10 @@ javax.portlet.title.98=Software-Katalog
 javax.portlet.title.99=Tags
 javax.portlet.title.9=Admin
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=Admin
 category.alfresco=Alfresco
 category.christianity=Christenheit
@@ -179,10 +174,10 @@ category.wol=World of Liferay
 category.workflow=Workflow
 category.wsrp=WSRP
 
+##
+## Model resources
+##
 
-##
-## Action names
-##
 model.resource.com.liferay.knowledgebase.model.KBArticle=Wissensbasis Artikel
 model.resource.com.liferay.portal.model.Group=Community
 model.resource.com.liferay.portal.model.Layout=Seite
@@ -245,10 +240,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Workflow-De
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Workflow-Instanz
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Workflow-Aufgabe
 
+##
+## Action names
+##
 
-##
-## Messages
-##
 action.ACCESS=Zugang
 action.ACCESS_IN_CONTROL_PANEL=Zugriff auf Control Panel
 action.ADD_ARTICLE=Artikel hinzufügen
@@ -345,10 +340,10 @@ action.VIEW=Anzeigen
 action.VIEW_ALL_TASKS=Alle Aufgaben anzeigen
 action.VIEW_USER=Benutzer anzeigen
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 1-day=1 Tag
 1-minute=1 Minute
 1-month=1 Monat
@@ -2325,7 +2320,9 @@ mass=Masse
 match-whole-words=Ganze Wörter abgleichen
 match-x-of-the-following-fields={0} aus den folgenden Feldern abgleichen:
 max-attendees=Maximale Teilnehmer
+max-num-of-users=Maximal # von den Benutzern (Automatic Translation)
 max-qty=Maximale Anzahl
+max-users=Maximale Benutzer (Automatic Translation)
 maximize-links=Links maximieren
 maximize=Maximieren
 maximized=Maximiert
@@ -4316,6 +4313,7 @@ type-name=Name eingeben:
 type=Typ
 types=Typen
 ukrainian=Ukrainisch
+unable-to-create-user-account-because-the-maximum-number-of-users-has-been-reached=Nicht imstande, Benutzerkonto zu verursachen, weil die Höchstzahl der Benutzer erreicht worden ist. (Automatic Translation)
 unassigned=Frei
 unassociate=Verbindung lösen
 unban-date=Datum der Verbannungs-Aufhebung
@@ -4849,6 +4847,10 @@ zh_en=Chinesisch (China) nach Englisch
 zip-postal=PLZ/Postadresse
 zip=PLZ
 zt_en=Chinesisch (Taiwan) nach Englisch
+
+##
+## Currency
+##
 
 currency.AED=Arabische Dirham
 currency.ALL=Albanischer Lek

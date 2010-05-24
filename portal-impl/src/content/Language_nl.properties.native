@@ -1,20 +1,15 @@
-
 ##
 ## Language settings
 ##
 
-
-##
-## Portlet descriptions and titles
-##
 lang.dir=ltr
 lang.line.begin=links
 lang.line.end=rechts
 
+##
+## Portlet descriptions and titles
+##
 
-##
-## Category titles
-##
 javax.portlet.description.122=De categorieën beschrijven een groep uit de labelwoordenlijst termen om webcontent te labelen. Beheerders kunnen categorieën aanmaken en vullen met woordenlijsttermen waaruit de gebruikers kunnen kiezen wanneer ze webcontent gaan labelen.
 javax.portlet.description.126=Organisaties vertegenwoordigen een hiërarchie van gebruikers, zoals een afdeling of een dochteronderneming. Beheerders kunnen gebruikerslidmaatschap beheren, rollen definiëren en attributen van een organisatie bepalen.
 javax.portlet.description.127=Gebruikersgroepen zijn een verzameling van een losse groep gebruikers, ongeacht hun community- of organisatielidmaatschap. De beheerders kunnen een gebruikersgroep bepalen en de gebruikersgroep, indien gewenst, toewijzen als leden van een community.
@@ -141,10 +136,10 @@ javax.portlet.title.98=Softwarecatalogus
 javax.portlet.title.99=Labels
 javax.portlet.title.9=Beheerder
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=Beheerder
 category.alfresco=Alfresco
 category.christianity=Christendom
@@ -179,10 +174,10 @@ category.wol=Wereld van Liferay
 category.workflow=Werkstroom
 category.wsrp=WSRP
 
+##
+## Model resources
+##
 
-##
-## Action names
-##
 model.resource.com.liferay.knowledgebase.model.KBArticle=Kennisbankartikel
 model.resource.com.liferay.portal.model.Group=Groep
 model.resource.com.liferay.portal.model.Layout=Pagina
@@ -245,10 +240,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Werkschemad
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Werkschema
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Werkschemataak
 
+##
+## Action names
+##
 
-##
-## Messages
-##
 action.ACCESS=Toegang
 action.ACCESS_IN_CONTROL_PANEL=Toegang tot controlepaneel
 action.ADD_ARTICLE=Artikel toevoegen
@@ -345,10 +340,10 @@ action.VIEW=Toon
 action.VIEW_ALL_TASKS=Alle taken tonen
 action.VIEW_USER=Gebruiker tonen
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 1-day=1 Dag
 1-minute=1 minuut
 1-month=1 Maand
@@ -2325,7 +2320,9 @@ mass=Mis
 match-whole-words=Op hele woorden vergelijken
 match-x-of-the-following-fields=Vergelijk {0} van de volgende velden:
 max-attendees=Maximum aanwezigen
+max-num-of-users=Maximum # van Gebruikers (Automatic Translation)
 max-qty=Maximale hoeveelheid
+max-users=Maximum Gebruikers (Automatic Translation)
 maximize-links=Vergroot link's
 maximize=Vergroot
 maximized=Vergroot
@@ -4316,6 +4313,7 @@ type-name=Vul naam in:
 type=Type
 types=Types
 ukrainian=Oekraïens
+unable-to-create-user-account-because-the-maximum-number-of-users-has-been-reached=Onbekwaam om gebruikersrekening tot stand te brengen omdat het maximumaantal gebruikers is bereikt. (Automatic Translation)
 unassigned=Niet toegewezen
 unassociate=Niet geassocieerd
 unban-date=Ontgrendeldatum
@@ -4849,6 +4847,10 @@ zh_en=Chinees naar Engels
 zip-postal=Postcode
 zip=Postcode
 zt_en=Chinees (Taiwan) naar Engels
+
+##
+## Currency
+##
 
 currency.AED=Dirham van de V.A.E
 currency.ALL=Albanese Lek

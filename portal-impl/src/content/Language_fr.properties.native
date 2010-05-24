@@ -1,20 +1,15 @@
-
 ##
 ## Language settings
 ##
 
-
-##
-## Portlet descriptions and titles
-##
 lang.dir=ltr
 lang.line.begin=left
 lang.line.end=right
 
+##
+## Portlet descriptions and titles
+##
 
-##
-## Category titles
-##
 javax.portlet.description.122=Les catégories décrivent un ensemble de limites de vocabulaire pour étiqueter les articles contents. Les administrateurs peuvent créer des vocabulaires et les peupler avec les catégories des lesquelles les utilisateurs peuvent choisir en écrivant le contenu. (Automatic Translation)
 javax.portlet.description.126=Les organismes représentent une hiérarchie des utilisateurs, tels qu'un département ou une filiale. Les administrateurs peuvent contrôler l'adhésion d'utilisateur, définissent des rôles, et installent les attributs d'une organisation. (Automatic Translation)
 javax.portlet.description.127=Les Groupes d'utilisateurs sont un raccourci à un groupe lâche d'utilisateurs, indépendamment d'adhésion de la communauté ou d'organisation. Les administrateurs peuvent définir un Groupe d'utilisateurs et affecter le Groupe d'utilisateurs comme membres d'une communauté si désirés. (Automatic Translation)
@@ -141,10 +136,10 @@ javax.portlet.title.98=Catalogue de logiciels
 javax.portlet.title.99=Étiquettes
 javax.portlet.title.9=Administration du portail
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=Administration
 category.alfresco=Alfresco
 category.christianity=Christianisme
@@ -179,10 +174,10 @@ category.wol=Monde de Liferay
 category.workflow=Workflow
 category.wsrp=WSRP
 
+##
+## Model resources
+##
 
-##
-## Action names
-##
 model.resource.com.liferay.knowledgebase.model.KBArticle=Article de base de connaissance
 model.resource.com.liferay.portal.model.Group=Communauté
 model.resource.com.liferay.portal.model.Layout=Page
@@ -245,10 +240,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Définition
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Instances
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Tâches
 
+##
+## Action names
+##
 
-##
-## Messages
-##
 action.ACCESS=Accès (Automatic Translation)
 action.ACCESS_IN_CONTROL_PANEL=Accédez dans le panneau de commande
 action.ADD_ARTICLE=Ajouter un contenu
@@ -345,10 +340,10 @@ action.VIEW=Vue
 action.VIEW_ALL_TASKS=Regardez toutes les tâches (Automatic Translation)
 action.VIEW_USER=Vue de l'utilisateur
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 1-day=1 jour
 1-minute=1 minute
 1-month=1 mois
@@ -2325,7 +2320,9 @@ mass=La masse
 match-whole-words=Recherche le(s) mot(s) à l'identique
 match-x-of-the-following-fields=Faire correspondre {0} champs parmis les suivants:
 max-attendees=Participants maximum
+max-num-of-users=Maximum # des utilisateurs (Automatic Translation)
 max-qty=Quantité maximum
+max-users=Utilisateurs maximum (Automatic Translation)
 maximize-links=Maximiser les liens
 maximize=Maximiser
 maximized=Maximisé
@@ -4316,6 +4313,7 @@ type-name=Nom du type :
 type=Type
 types=Types
 ukrainian=Ukrainien
+unable-to-create-user-account-because-the-maximum-number-of-users-has-been-reached=Incapable de créer le compte d'utilisateur parce que le nombre maximum des utilisateurs a été atteint. (Automatic Translation)
 unassigned=Non affecté
 unassociate=Unassociate
 unban-date=Date de réintegration
@@ -4849,6 +4847,10 @@ zh_en=Chinois en Anglais
 zip-postal=Zip/Postal
 zip=Code postal
 zt_en=Chinois (Taiwan) à l'anglais
+
+##
+## Currency
+##
 
 currency.AED=Dirham des EAU
 currency.ALL=Lek Albanais

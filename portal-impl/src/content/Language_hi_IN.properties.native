@@ -1,20 +1,15 @@
-
 ##
 ## Language settings
 ##
 
-
-##
-## Portlet descriptions and titles
-##
 lang.dir=ltr
 lang.line.begin=left
 lang.line.end=right
 
+##
+## Portlet descriptions and titles
+##
 
-##
-## Category titles
-##
 javax.portlet.description.122=Categories describe a set of vocabulary terms to tag content items. Administrators can create vocabularies and populate them with categories that users can choose from when authoring content.
 javax.portlet.description.126=Organizations represent a hierarchy of users, such as a department or subsidiary. Administrators can manage user membership, define roles, and set up the attributes of an organization.
 javax.portlet.description.127=User groups are a shortcut to a loose group of users, regardless of community or organization membership. Administrators can define a user group and assign the user group as members of a community if desired.
@@ -141,10 +136,10 @@ javax.portlet.title.98=सॉफ्टवेयर केटलोग
 javax.portlet.title.99=टैग
 javax.portlet.title.9=एडमिन
 
+##
+## Category titles
+##
 
-##
-## Model resources
-##
 category.admin=एडमिन
 category.alfresco=आलफरिस्को
 category.christianity=क्रिस्चिनिटी
@@ -179,10 +174,10 @@ category.wol=वर्ल्ड ऑफ Liferay
 category.workflow=वर्कफ्लो
 category.wsrp=WSRP
 
+##
+## Model resources
+##
 
-##
-## Action names
-##
 model.resource.com.liferay.knowledgebase.model.KBArticle=ज्ञान आधारी लेख
 model.resource.com.liferay.portal.model.Group=कम्यूनिटी
 model.resource.com.liferay.portal.model.Layout=पन्ना 
@@ -245,10 +240,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=वर्�
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=वर्कफ्लो का इनस्टन्स
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=वर्कफ्लो का टास्क
 
+##
+## Action names
+##
 
-##
-## Messages
-##
 action.ACCESS=पहुँच
 action.ACCESS_IN_CONTROL_PANEL=कॉट्रोल पेनल की इजाज़त
 action.ADD_ARTICLE=नया लेख बनाएँ
@@ -345,10 +340,10 @@ action.VIEW=निरीक्षण करना
 action.VIEW_ALL_TASKS=टास्क का निरीक्षण करना
 action.VIEW_USER=यूज़र का निरीक्षण करना
 
+##
+## Messages
+##
 
-##
-## Currency
-##
 1-day=1 दिन
 1-minute=1 मिनट
 1-month=1 महीना
@@ -2325,7 +2320,9 @@ mass=बड़ी संख्या
 match-whole-words=मैच पूरा शब्द
 match-x-of-the-following-fields=Match {0} of the following fields:
 max-attendees=Max Attendees
+max-num-of-users=Max # of Users (Automatic Copy)
 max-qty=Max Qty
+max-users=Max Users (Automatic Copy)
 maximize-links=अधिकतम Links
 maximize=न्यूनतम 
 maximized=अधिकतम 
@@ -4316,6 +4313,7 @@ type-name=Type name:
 type=Type
 types=Types
 ukrainian=Ukrainian
+unable-to-create-user-account-because-the-maximum-number-of-users-has-been-reached=Unable to create user account because the maximum number of users has been reached. (Automatic Copy)
 unassigned=Unassigned
 unassociate=Unassociate
 unban-date=Unban डेट
@@ -4849,6 +4847,10 @@ zh_en=चीनी (चीन) से अंग्रेजी
 zip-postal=ज़िप / पोस्टल 
 zip=ज़िप
 zt_en=चीनी (ताइवान) से अंग्रेजी
+
+##
+## Currency
+##
 
 currency.AED=संयुक्त अरब अमीरात दिर्हाम
 currency.ALL=अल्बानियाई लेक
