@@ -5,6 +5,7 @@ import ${packagePath}.service.${entity.name}ServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 
 import java.rmi.RemoteException;
 
@@ -140,7 +141,7 @@ public class ${entity.name}ServiceSoap {
 						<#assign parameterListActualType = serviceBuilder.getListActualTypeArguments(parameter.type)>
 
 						<#if parameterTypeName == "java.util.Locale">
-							new java.util.Locale(
+							LocaleUtil.fromLanguageId(
 						<#elseif parameterTypeName == "java.util.List<java.lang.Long>">
 							ListUtil.toList(
 						<#elseif (parameter.type.value == "java.util.List") && serviceBuilder.hasEntityByGenericsName(parameterListActualType)>

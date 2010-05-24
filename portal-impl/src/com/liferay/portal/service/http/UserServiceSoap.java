@@ -16,6 +16,7 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.service.UserServiceUtil;
 
 import java.rmi.RemoteException;
@@ -159,7 +160,7 @@ public class UserServiceSoap {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.addUser(companyId,
 					autoPassword, password1, password2, autoScreenName,
 					screenName, emailAddress, openId,
-					new java.util.Locale(locale), firstName, middleName,
+					LocaleUtil.fromLanguageId(locale), firstName, middleName,
 					lastName, prefixId, suffixId, male, birthdayMonth,
 					birthdayDay, birthdayYear, jobTitle, groupIds,
 					organizationIds, roleIds, userGroupIds, sendEmail,
@@ -194,7 +195,7 @@ public class UserServiceSoap {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.addUser(companyId,
 					autoPassword, password1, password2, autoScreenName,
 					screenName, emailAddress, openId,
-					new java.util.Locale(locale), firstName, middleName,
+					LocaleUtil.fromLanguageId(locale), firstName, middleName,
 					lastName, prefixId, suffixId, male, birthdayMonth,
 					birthdayDay, birthdayYear, jobTitle, groupIds,
 					organizationIds, roleIds, userGroupIds, sendEmail,
