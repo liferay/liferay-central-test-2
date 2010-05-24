@@ -279,7 +279,7 @@
 </c:if>
 
 <c:if test="<%= themeDisplay.isIncludeServiceJs() %>">
-	<script src="<%= PortalUtil.getStaticResourceURL(request, themeDisplay.getPathJavaScript() + "/liferay/service.js", javaScriptLastModified) %>" type="text/javascript"></script>
+	<script src="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getPathJavaScript() + "/liferay/service.js", javaScriptLastModified)) %>" type="text/javascript"></script>
 </c:if>
 
 <script type="text/javascript">
