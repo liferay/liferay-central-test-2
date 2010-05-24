@@ -128,9 +128,9 @@ public class UserIndexer extends BaseIndexer {
 	}
 
 	protected void addSearchQueryParams(
-			BooleanQuery searchQuery, ExpandoBridge expandoBridge,
-			Set<String> attributeNames, String key, Object value,
-			boolean andSearch)
+			BooleanQuery searchQuery, SearchContext searchContext,
+			ExpandoBridge expandoBridge, Set<String> attributeNames, String key,
+			Object value)
 		throws Exception {
 
 		if (attributeNames.contains(key)) {
@@ -144,7 +144,7 @@ public class UserIndexer extends BaseIndexer {
 					key);
 
 				if (Validator.isNotNull((String)value)) {
-					if (andSearch) {
+					if (searchContext.isAndSearch()) {
 						searchQuery.addRequiredTerm(
 							fieldName, (String)value, true);
 					}
@@ -155,7 +155,7 @@ public class UserIndexer extends BaseIndexer {
 			}
 		}
 		else if (Validator.isNotNull(key) && Validator.isNotNull(value)) {
-			if (andSearch) {
+			if (searchContext.isAndSearch()) {
 				searchQuery.addRequiredTerm(key, String.valueOf(value));
 			}
 			else {
@@ -377,13 +377,11 @@ public class UserIndexer extends BaseIndexer {
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
 
-		boolean andSearch = searchContext.getAndSearch();
-
 		String emailAddress = (String)searchContext.getAttribute(
 			"emailAddress");
 
 		if (Validator.isNotNull(emailAddress)) {
-			if (andSearch) {
+			if (searchContext.isAndSearch()) {
 				searchQuery.addRequiredTerm(
 					"emailAddress", emailAddress, true);
 			}
@@ -395,7 +393,7 @@ public class UserIndexer extends BaseIndexer {
 		String firstName = (String)searchContext.getAttribute("firstName");
 
 		if (Validator.isNotNull(firstName)) {
-			if (andSearch) {
+			if (searchContext.isAndSearch()) {
 				searchQuery.addRequiredTerm("firstName", firstName, true);
 			}
 			else {
@@ -406,7 +404,7 @@ public class UserIndexer extends BaseIndexer {
 		String lastName = (String)searchContext.getAttribute("lastName");
 
 		if (Validator.isNotNull(lastName)) {
-			if (andSearch) {
+			if (searchContext.isAndSearch()) {
 				searchQuery.addRequiredTerm("lastName", lastName, true);
 			}
 			else {
@@ -417,7 +415,7 @@ public class UserIndexer extends BaseIndexer {
 		String middleName = (String)searchContext.getAttribute("middleName");
 
 		if (Validator.isNotNull(middleName)) {
-			if (andSearch) {
+			if (searchContext.isAndSearch()) {
 				searchQuery.addRequiredTerm("middleName", middleName, true);
 			}
 			else {
@@ -428,7 +426,7 @@ public class UserIndexer extends BaseIndexer {
 		String screenName = (String)searchContext.getAttribute("screenName");
 
 		if (Validator.isNotNull(screenName)) {
-			if (andSearch) {
+			if (searchContext.isAndSearch()) {
 				searchQuery.addRequiredTerm("screenName", screenName, true);
 			}
 			else {
@@ -459,8 +457,8 @@ public class UserIndexer extends BaseIndexer {
 				}
 
 				addSearchQueryParams(
-					searchQuery, expandoBridge, attributeNames, key, value,
-					andSearch);
+					searchQuery, searchContext, expandoBridge, attributeNames,
+					key, value);
 			}
 		}
 	}

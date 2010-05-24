@@ -28,10 +28,6 @@ import java.util.Map;
  */
 public class SearchContext implements Serializable {
 
-	public boolean getAndSearch(){
-		return _andSearch;
-	}
-
 	public long[] getAssetCategoryIds() {
 		return _assetCategoryIds;
 	}
@@ -98,6 +94,10 @@ public class SearchContext implements Serializable {
 
 	public long getUserId() {
 		return _userId;
+	}
+
+	public boolean isAndSearch(){
+		return _andSearch;
 	}
 
 	public boolean isScopeStrict() {

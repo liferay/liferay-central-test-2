@@ -76,13 +76,11 @@ public class AssetIndexer extends BaseIndexer {
 			return;
 		}
 
-		boolean andSearch = searchContext.getAndSearch();
-
 		String description = (String)searchContext.getAttribute(
 			Field.DESCRIPTION);
 
 		if (Validator.isNotNull(description)) {
-			if (andSearch) {
+			if (searchContext.isAndSearch()) {
 				searchQuery.addRequiredTerm(
 					Field.DESCRIPTION, description, true);
 			}
@@ -94,7 +92,7 @@ public class AssetIndexer extends BaseIndexer {
 		String title = (String)searchContext.getAttribute(Field.TITLE);
 
 		if (Validator.isNotNull(title)) {
-			if (andSearch) {
+			if (searchContext.isAndSearch()) {
 				searchQuery.addRequiredTerm(Field.TITLE, title, true);
 			}
 			else {
@@ -105,7 +103,7 @@ public class AssetIndexer extends BaseIndexer {
 		String userName = (String)searchContext.getAttribute(Field.USER_NAME);
 
 		if (Validator.isNotNull(userName)) {
-			if (andSearch) {
+			if (searchContext.isAndSearch()) {
 				searchQuery.addRequiredTerm(Field.USER_NAME, userName, true);
 			}
 			else {
