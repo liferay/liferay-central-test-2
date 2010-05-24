@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.test.TestCase;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -33,153 +32,217 @@ import java.lang.reflect.Field;
  */
 public class UnsyncPrintWriterTest extends TestCase {
 
-	protected void tearDown() throws Exception {
-		super.tearDown();
-		new File(_testFileName).delete();
+	public void tearDown() throws Exception {
+		File testFile = new File(_TEST_FILE_NAME);
+
+		testFile.delete();
 	}
 
-	public void testConstructor() throws IOException {
+	public void testConstructor() throws Exception {
 
-		// public UnsyncPrintWriter(Writer out)
-		StringWriter sw = new StringWriter();
-		UnsyncPrintWriter writer = new UnsyncPrintWriter(sw);
-		assertEquals(sw, _getOut(writer));
-		assertFalse(_isAutoFlush(writer));
+		// UnsyncPrintWriter(File file)
 
-		// public UnsyncPrintWriter(Writer out, boolean autoFlush)
-		writer = new UnsyncPrintWriter(sw, false);
-		assertEquals(sw, _getOut(writer));
-		assertFalse(_isAutoFlush(writer));
-		writer = new UnsyncPrintWriter(sw, true);
-		assertEquals(sw, _getOut(writer));
-		assertTrue(_isAutoFlush(writer));
+		UnsyncPrintWriter unsyncPrintWriter = new UnsyncPrintWriter(
+			new File(_TEST_FILE_NAME));
 
-		// public UnsyncPrintWriter(OutputStream out)
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		writer = new UnsyncPrintWriter(baos);
-		assertTrue(_getOut(writer) instanceof OutputStreamWriter);
-		assertFalse(_isAutoFlush(writer));
+		assertTrue(_getOut(unsyncPrintWriter) instanceof FileWriter);
+		assertFalse(_isAutoFlush(unsyncPrintWriter));
 
-		// public UnsyncPrintWriter(OutputStream out, boolean autoFlush)
-		writer = new UnsyncPrintWriter(baos, false);
-		assertTrue(_getOut(writer) instanceof OutputStreamWriter);
-		assertFalse(_isAutoFlush(writer));
-		writer = new UnsyncPrintWriter(baos, true);
-		assertTrue(_getOut(writer) instanceof OutputStreamWriter);
-		assertTrue(_isAutoFlush(writer));
+		// UnsyncPrintWriter(File file, String charSequence)
 
-		// public UnsyncPrintWriter(String fileName)
-		writer = new UnsyncPrintWriter(_testFileName);
-		assertTrue(_getOut(writer) instanceof FileWriter);
-		assertFalse(_isAutoFlush(writer));
+		unsyncPrintWriter = new UnsyncPrintWriter(
+			new File(_TEST_FILE_NAME), "UTF8");
 
-		// public UnsyncPrintWriter(String fileName, String csn)
-		writer = new UnsyncPrintWriter(_testFileName, "UTF8");
-		assertTrue(_getOut(writer) instanceof OutputStreamWriter);
-		assertFalse(_isAutoFlush(writer));
+		assertTrue(_getOut(unsyncPrintWriter) instanceof OutputStreamWriter);
+		assertFalse(_isAutoFlush(unsyncPrintWriter));
 
-		OutputStreamWriter osw = (OutputStreamWriter) _getOut(writer);
-		assertEquals("UTF8", osw.getEncoding());
+		OutputStreamWriter outputStreamWriter = (OutputStreamWriter)_getOut(
+			unsyncPrintWriter);
 
-		// public UnsyncPrintWriter(File file)
-		writer = new UnsyncPrintWriter(new File(_testFileName));
-		assertTrue(_getOut(writer) instanceof FileWriter);
-		assertFalse(_isAutoFlush(writer));
+		assertEquals("UTF8", outputStreamWriter.getEncoding());
 
-		// public UnsyncPrintWriter(File file, String csn)
-		writer = new UnsyncPrintWriter(new File(_testFileName), "UTF8");
-		assertTrue(_getOut(writer) instanceof OutputStreamWriter);
-		assertFalse(_isAutoFlush(writer));
+		// UnsyncPrintWriter(OutputStream outputStream)
 
-		osw = (OutputStreamWriter) _getOut(writer);
-		assertEquals("UTF8", osw.getEncoding());
+		ByteArrayOutputStream byteArrayOutputStream =
+			new ByteArrayOutputStream();
+
+		unsyncPrintWriter = new UnsyncPrintWriter(byteArrayOutputStream);
+
+		assertTrue(_getOut(unsyncPrintWriter) instanceof OutputStreamWriter);
+		assertFalse(_isAutoFlush(unsyncPrintWriter));
+
+		// UnsyncPrintWriter(OutputStream outputStream, boolean autoFlush)
+
+		unsyncPrintWriter = new UnsyncPrintWriter(byteArrayOutputStream, false);
+
+		assertTrue(_getOut(unsyncPrintWriter) instanceof OutputStreamWriter);
+		assertFalse(_isAutoFlush(unsyncPrintWriter));
+
+		unsyncPrintWriter = new UnsyncPrintWriter(byteArrayOutputStream, true);
+
+		assertTrue(_getOut(unsyncPrintWriter) instanceof OutputStreamWriter);
+		assertTrue(_isAutoFlush(unsyncPrintWriter));
+
+		// UnsyncPrintWriter(String fileName)
+
+		unsyncPrintWriter = new UnsyncPrintWriter(_TEST_FILE_NAME);
+
+		assertTrue(_getOut(unsyncPrintWriter) instanceof FileWriter);
+		assertFalse(_isAutoFlush(unsyncPrintWriter));
+
+		// UnsyncPrintWriter(String fileName, String csn)
+
+		unsyncPrintWriter = new UnsyncPrintWriter(_TEST_FILE_NAME, "UTF8");
+
+		assertTrue(_getOut(unsyncPrintWriter) instanceof OutputStreamWriter);
+		assertFalse(_isAutoFlush(unsyncPrintWriter));
+
+		outputStreamWriter = (OutputStreamWriter)_getOut(unsyncPrintWriter);
+
+		assertEquals("UTF8", outputStreamWriter.getEncoding());
+
+		// UnsyncPrintWriter(Writer writer)
+
+		StringWriter stringWriter = new StringWriter();
+
+		unsyncPrintWriter = new UnsyncPrintWriter(stringWriter);
+
+		assertEquals(stringWriter, _getOut(unsyncPrintWriter));
+		assertFalse(_isAutoFlush(unsyncPrintWriter));
+
+		// UnsyncPrintWriter(Writer writer, boolean autoFlush)
+
+		unsyncPrintWriter = new UnsyncPrintWriter(stringWriter, false);
+
+		assertEquals(stringWriter, _getOut(unsyncPrintWriter));
+		assertFalse(_isAutoFlush(unsyncPrintWriter));
+
+		unsyncPrintWriter = new UnsyncPrintWriter(stringWriter, true);
+
+		assertEquals(stringWriter, _getOut(unsyncPrintWriter));
+		assertTrue(_isAutoFlush(unsyncPrintWriter));
 	}
 
 	public void testFormat() {
-		StringWriter sw = new StringWriter();
-		UnsyncPrintWriter writer = new UnsyncPrintWriter(sw);
-		writer.format("%2$2d %1$2s", "a", 1);
-		assertEquals(" 1  a", sw.toString());
+		StringWriter stringWriter = new StringWriter();
+
+		UnsyncPrintWriter unsyncPrintWriter = new UnsyncPrintWriter(
+			stringWriter);
+
+		unsyncPrintWriter.format("%2$2d %1$2s", "a", 1);
+
+		assertEquals(" 1  a", stringWriter.toString());
 	}
-
 	public void testPrintln() {
-		StringWriter sw = new StringWriter();
-		UnsyncPrintWriter writer = new UnsyncPrintWriter(sw);
+		StringWriter stringWriter = new StringWriter();
 
-		writer.println();
+		UnsyncPrintWriter unsyncPrintWriter = new UnsyncPrintWriter(
+			stringWriter);
+
+		unsyncPrintWriter.println();
 
 		String lineSeparator = System.getProperty("line.separator");
 
-		assertEquals(lineSeparator, sw.toString());
+		assertEquals(lineSeparator, stringWriter.toString());
 	}
 
 	public void testWrite() {
-		StringWriter sw = new StringWriter();
-		UnsyncPrintWriter writer = new UnsyncPrintWriter(sw);
+		StringWriter stringWriter = new StringWriter();
 
-		// public void write(int c)
-		writer.write('a');
-		assertEquals("a", sw.toString());
-		writer.write('b');
-		assertEquals("ab", sw.toString());
+		UnsyncPrintWriter unsyncPrintWriter = new UnsyncPrintWriter(
+			stringWriter);
 
-		// public void write(char[] buf)
-		writer.write(new char[]{'c', 'd'});
-		assertEquals("abcd", sw.toString());
-		writer.write(new char[]{'e', 'f'});
-		assertEquals("abcdef", sw.toString());
+		// write(int c)
 
-		// public void write(char[] buf, int off, int len)
-		writer.write(new char[]{'e', 'f', 'g', 'h', 'i', 'j'}, 2, 2);
-		assertEquals("abcdefgh", sw.toString());
-		writer.write(new char[]{'g', 'h', 'i', 'j', 'k', 'l'}, 2, 2);
-		assertEquals("abcdefghij", sw.toString());
+		unsyncPrintWriter.write('a');
 
-		// public void write(String s)
-		writer.write("kl");
-		assertEquals("abcdefghijkl", sw.toString());
-		writer.write("mn");
-		assertEquals("abcdefghijklmn", sw.toString());
+		assertEquals("a", stringWriter.toString());
 
-		// public void write(String s, int off, int len)
-		writer.write("mnopqr", 2, 2);
-		assertEquals("abcdefghijklmnop", sw.toString());
-		writer.write("opqrst", 2, 2);
-		assertEquals("abcdefghijklmnopqr", sw.toString());
+		unsyncPrintWriter.write('b');
+
+		assertEquals("ab", stringWriter.toString());
+
+		// write(char[] charArray)
+
+		unsyncPrintWriter.write(new char[] {'c', 'd'});
+
+		assertEquals("abcd", stringWriter.toString());
+
+		unsyncPrintWriter.write(new char[] {'e', 'f'});
+
+		assertEquals("abcdef", stringWriter.toString());
+
+		// write(char[] charArray, int offset, int length)
+
+		unsyncPrintWriter.write(
+			new char[] {'e', 'f', 'g', 'h', 'i', 'j'}, 2, 2);
+
+		assertEquals("abcdefgh", stringWriter.toString());
+
+		unsyncPrintWriter.write(
+			new char[] {'g', 'h', 'i', 'j', 'k', 'l'}, 2, 2);
+
+		assertEquals("abcdefghij", stringWriter.toString());
+
+		// write(String string)
+
+		unsyncPrintWriter.write("kl");
+
+		assertEquals("abcdefghijkl", stringWriter.toString());
+
+		unsyncPrintWriter.write("mn");
+
+		assertEquals("abcdefghijklmn", stringWriter.toString());
+
+		// write(String string, int offset, int length)
+
+		unsyncPrintWriter.write("mnopqr", 2, 2);
+
+		assertEquals("abcdefghijklmnop", stringWriter.toString());
+
+		unsyncPrintWriter.write("opqrst", 2, 2);
+
+		assertEquals("abcdefghijklmnopqr", stringWriter.toString());
 	}
 
-	private static Writer _getOut(UnsyncPrintWriter writer) {
+	private static Writer _getOut(UnsyncPrintWriter unsyncPrintWriter) {
 		try {
-			return (Writer) _OUT.get(writer);
-		} catch (Throwable t) {
+			return (Writer) _writerField.get(unsyncPrintWriter);
+		}
+		catch (Throwable t) {
 			throw new RuntimeException(t);
 		}
 	}
 
-	private static boolean _isAutoFlush(UnsyncPrintWriter writer) {
+	private static boolean _isAutoFlush(UnsyncPrintWriter unsyncPrintWriter) {
 		try {
-			return _AUTO_FLUSH.getBoolean(writer);
-		} catch (Throwable t) {
+			return _autoFlushField.getBoolean(unsyncPrintWriter);
+		}
+		catch (Throwable t) {
 			throw new RuntimeException(t);
 		}
 	}
 
-	private static Field _AUTO_FLUSH;
+	private static final String _TEST_FILE_NAME =
+		"UnsyncPrintWriterTest.testFilename";
 
-	private static Field _OUT;
+	private static Field _autoFlushField;
+	private static Field _writerField;
 
 	static {
 		try {
-			_AUTO_FLUSH = UnsyncPrintWriter.class.getDeclaredField(
+			_autoFlushField = UnsyncPrintWriter.class.getDeclaredField(
 				"_autoFlush");
-			_AUTO_FLUSH.setAccessible(true);
-			_OUT = UnsyncPrintWriter.class.getDeclaredField("_out");
-			_OUT.setAccessible(true);
-		} catch (Throwable t) {
+
+			_autoFlushField.setAccessible(true);
+
+			_writerField = UnsyncPrintWriter.class.getDeclaredField("_writer");
+
+			_writerField.setAccessible(true);
+		}
+		catch (Throwable t) {
 			throw new ExceptionInInitializerError(t);
 		}
 	}
-
-	private String _testFileName = "testFileName";
 
 }
