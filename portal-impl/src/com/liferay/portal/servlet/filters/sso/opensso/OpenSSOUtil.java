@@ -300,7 +300,9 @@ public class OpenSSOUtil {
 
 			sb.append(cookieName);
 			sb.append(StringPool.EQUAL);
+			sb.append(StringPool.QUOTE);
 			sb.append(cookieValue);
+			sb.append(StringPool.QUOTE);
 			sb.append(StringPool.SEMICOLON);
 		}
 
