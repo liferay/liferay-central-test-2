@@ -67,6 +67,8 @@ public interface WebKeys {
 
 	public static final String PORTLET_ID = "PORTLET_ID";
 
+	public static final String REDIRECT = "REDIRECT";
+
 	public static final String RENDER_PORTLET = "RENDER_PORTLET";
 
 	public static final String RENDER_PORTLET_COLUMN_COUNT = "RENDER_PORTLET_COLUMN_COUNT";

@@ -266,7 +266,11 @@ public class LiferayPortlet extends GenericPortlet {
 	protected String getRedirect(
 		ActionRequest actionRequest, ActionResponse actionResponse) {
 
-		String redirect = ParamUtil.getString(actionRequest, "redirect");
+		String redirect = (String)actionRequest.getAttribute(WebKeys.REDIRECT);
+
+		if (Validator.isNull(redirect)) {
+			redirect = ParamUtil.getString(actionRequest, "redirect");
+		}
 
 		return redirect;
 	}
