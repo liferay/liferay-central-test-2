@@ -99,8 +99,7 @@ public class ErrorTag extends TagSupport {
 			}
 
 			if (SessionErrors.contains(portletRequest, _key)) {
-				Object value = SessionErrors.get(
-					portletRequest, _exception.getName());
+				Object value = null;
 
 				if (_exception != null) {
 					value = SessionErrors.get(
