@@ -89,6 +89,14 @@ public class RatingsStatsLocalServiceImpl
 		return ratingsStatsPersistence.findByPrimaryKey(statsId);
 	}
 
+	public List<RatingsStats> getStats(String className, List<Long> classPKs)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return ratingsStatsFinder.findByC_C(classNameId, classPKs);
+	}
+
 	public RatingsStats getStats(String className, long classPK)
 		throws SystemException {
 
@@ -102,14 +110,6 @@ public class RatingsStatsLocalServiceImpl
 		}
 
 		return stats;
-	}
-
-	public List<RatingsStats> getStats(String className, List<Long> classPKs)
-		throws SystemException {
-
-		long classNameId = PortalUtil.getClassNameId(className);
-
-		return ratingsStatsFinder.findByC_C(classNameId, classPKs);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

@@ -138,16 +138,16 @@ public class RatingsStatsLocalServiceWrapper implements RatingsStatsLocalService
 		return _ratingsStatsLocalService.getStats(statsId);
 	}
 
-	public com.liferay.portlet.ratings.model.RatingsStats getStats(
-		java.lang.String className, long classPK)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _ratingsStatsLocalService.getStats(className, classPK);
-	}
-
 	public java.util.List<com.liferay.portlet.ratings.model.RatingsStats> getStats(
 		java.lang.String className, java.util.List<java.lang.Long> classPKs)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ratingsStatsLocalService.getStats(className, classPKs);
+	}
+
+	public com.liferay.portlet.ratings.model.RatingsStats getStats(
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ratingsStatsLocalService.getStats(className, classPK);
 	}
 
 	public RatingsStatsLocalService getWrappedRatingsStatsLocalService() {

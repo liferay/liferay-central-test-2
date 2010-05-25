@@ -139,16 +139,16 @@ public class RatingsStatsLocalServiceUtil {
 		return getService().getStats(statsId);
 	}
 
-	public static com.liferay.portlet.ratings.model.RatingsStats getStats(
-		java.lang.String className, long classPK)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getStats(className, classPK);
-	}
-
 	public static java.util.List<com.liferay.portlet.ratings.model.RatingsStats> getStats(
 		java.lang.String className, java.util.List<java.lang.Long> classPKs)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getStats(className, classPKs);
+	}
+
+	public static com.liferay.portlet.ratings.model.RatingsStats getStats(
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getStats(className, classPK);
 	}
 
 	public static RatingsStatsLocalService getService() {
