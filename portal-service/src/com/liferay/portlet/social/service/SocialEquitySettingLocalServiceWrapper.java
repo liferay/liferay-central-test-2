@@ -126,10 +126,10 @@ public class SocialEquitySettingLocalServiceWrapper
 	}
 
 	public java.util.List<com.liferay.portlet.social.model.SocialEquitySetting> getEquitySettings(
-		long classNameId, java.lang.String actionId)
+		long groupId, long classNameId, java.lang.String actionId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _socialEquitySettingLocalService.getEquitySettings(classNameId,
-			actionId);
+		return _socialEquitySettingLocalService.getEquitySettings(groupId,
+			classNameId, actionId);
 	}
 
 	public SocialEquitySettingLocalService getWrappedSocialEquitySettingLocalService() {

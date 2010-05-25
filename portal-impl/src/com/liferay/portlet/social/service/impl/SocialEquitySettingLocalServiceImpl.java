@@ -45,7 +45,7 @@ public class SocialEquitySettingLocalServiceImpl
 		SocialEquitySettingLocalServiceImpl.class.getName();
 
 	public List<SocialEquitySetting> getEquitySettings(
-			long classNameId, String actionId)
+			long groupId, long classNameId, String actionId)
 		throws SystemException {
 
 		String key = encodeKey(classNameId, actionId);
@@ -72,7 +72,8 @@ public class SocialEquitySettingLocalServiceImpl
 		}
 
 		List<SocialEquitySetting> equitySettings =
-			socialEquitySettingPersistence.findByC_A(classNameId, actionId);
+			socialEquitySettingPersistence.findByG_C_A(
+				groupId, classNameId, actionId);
 
 		equitySettings = ListUtil.copy(equitySettings);
 

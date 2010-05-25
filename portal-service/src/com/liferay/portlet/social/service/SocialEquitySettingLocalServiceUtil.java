@@ -122,9 +122,9 @@ public class SocialEquitySettingLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialEquitySetting> getEquitySettings(
-		long classNameId, java.lang.String actionId)
+		long groupId, long classNameId, java.lang.String actionId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getEquitySettings(classNameId, actionId);
+		return getService().getEquitySettings(groupId, classNameId, actionId);
 	}
 
 	public static SocialEquitySettingLocalService getService() {

@@ -109,6 +109,6 @@ public interface SocialEquitySettingLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.social.model.SocialEquitySetting> getEquitySettings(
-		long classNameId, java.lang.String actionId)
+		long groupId, long classNameId, java.lang.String actionId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

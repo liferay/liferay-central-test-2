@@ -72,7 +72,7 @@ public class SocialEquityLogLocalServiceImpl
 
 		List<SocialEquitySetting> equitySettings =
 			socialEquitySettingLocalService.getEquitySettings(
-				assetEntry.getClassNameId(), actionId);
+				assetEntry.getGroupId(), assetEntry.getClassNameId(), actionId);
 
 		for (SocialEquitySetting equitySetting : equitySettings) {
 			addEquityLog(user, assetEntry, assetEntryUser, equitySetting);

@@ -194,9 +194,16 @@
 
 		<!-- Finder methods -->
 
-		<finder name="C_A" return-type="Collection">
+		<finder name="G_C_A" return-type="Collection">
+			<finder-column name="groupId" />
 			<finder-column name="classNameId" />
 			<finder-column name="actionId" />
+		</finder>
+		<finder name="G_C_A_T" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="classNameId" />
+			<finder-column name="actionId" />
+			<finder-column name="type" />
 		</finder>
 	</entity>
 	<entity name="SocialEquityUser" local-service="false" remote-service="false">
