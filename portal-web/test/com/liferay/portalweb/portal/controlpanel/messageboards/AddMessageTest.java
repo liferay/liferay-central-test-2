@@ -76,9 +76,22 @@ public class AddMessageTest extends BaseTestCase {
 			RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9"));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("This is a t\u00e9st m\u00e9ssag\u00e9!"));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"This is a t\u00e9st m\u00e9ssag\u00e9!"));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
+		assertEquals(RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9"),
+			selenium.getText("//td[1]/a"));
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9"),
+			selenium.getText("//form/div[2]"));
+		assertEquals(RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9"),
+			selenium.getText("//a/strong"));
+		assertEquals(RuntimeVariables.replace(
+				"This is a t\u00e9st m\u00e9ssag\u00e9!"),
+			selenium.getText("//td[2]/div[2]"));
 	}
 }

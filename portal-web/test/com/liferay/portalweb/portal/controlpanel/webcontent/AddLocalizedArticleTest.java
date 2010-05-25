@@ -232,31 +232,13 @@ public class AddLocalizedArticleTest extends BaseTestCase {
 				}
 
 				Thread.sleep(5000);
+				selenium.type("_15_title",
+					RuntimeVariables.replace("Hello World Localized Article"));
 				selenium.type("page-name",
 					RuntimeVariables.replace("Hello World Page Name"));
 				selenium.type("page-description",
 					RuntimeVariables.replace("Hello World Page Description"));
-				selenium.type("_15_title",
-					RuntimeVariables.replace("Hello World Localized Article"));
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("_15_saveArticleBtn")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.clickAt("_15_saveArticleBtn",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("_15_publishBtn", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
@@ -278,7 +260,11 @@ public class AddLocalizedArticleTest extends BaseTestCase {
 
 				assertTrue(selenium.isTextPresent(
 						"Your request processed successfully."));
-				Thread.sleep(5000);
+				assertEquals(RuntimeVariables.replace(
+						"Hello World Localized Article"),
+					selenium.getText("//tr[5]/td[3]/a"));
+				selenium.clickAt("//tr[5]/td[3]/a", RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
 				selenium.select("_15_languageId",
 					RuntimeVariables.replace("label=Chinese (China)"));
 				assertTrue(selenium.getConfirmation()
@@ -293,8 +279,10 @@ public class AddLocalizedArticleTest extends BaseTestCase {
 				selenium.type("page-description",
 					RuntimeVariables.replace(
 						"\u4e16\u754c\u60a8\u597d Page Description"));
+				Thread.sleep(5000);
 				selenium.clickAt("//input[@value='Publish']",
 					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {

@@ -75,7 +75,8 @@ public class AddQuestionThreadTest extends BaseTestCase {
 			RuntimeVariables.replace("Favorite Color Test Question"));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("What is your favorite color?"));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=T\u00e9st Cat\u00e9gory Edit\u00e9d",
 			RuntimeVariables.replace(""));

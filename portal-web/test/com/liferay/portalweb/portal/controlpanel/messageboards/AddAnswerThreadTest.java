@@ -104,13 +104,11 @@ public class AddAnswerThreadTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_19_textArea",
-			RuntimeVariables.replace(
-				"I like green because it is so natural.&nbsp;&nbsp;Obviousl."));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace(
-				"I like green because it is so natural.&nbsp;&nbsp;Obviously."));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+				"I like green because it is so natural. Obviously."));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

@@ -70,13 +70,38 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//input[@value='Save']</td>
+	<td>//input[@value='Publish']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>This méssagé will bé délétéd!</td>
+	<td>assertText</td>
+	<td>//section/div/div/div/div[1]</td>
+	<td>Your request processed successfully.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[1]/a</td>
+	<td>Tést Méssagé to bé Délétéd</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//td[1]/a</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form/div[2]</td>
+	<td>Tést Méssagé to bé Délétéd</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//a/strong</td>
+	<td>Tést Méssagé to bé Délétéd</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[2]/div[2]</td>
+	<td>This méssagé will bé délétéd!</td>
 </tr>
 
 </tbody></table>

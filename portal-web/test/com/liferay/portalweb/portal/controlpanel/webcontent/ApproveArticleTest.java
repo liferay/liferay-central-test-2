@@ -69,7 +69,7 @@ public class ApproveArticleTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=Not Approved"));
+		assertFalse(selenium.isElementPresent("link=Draft"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 	}

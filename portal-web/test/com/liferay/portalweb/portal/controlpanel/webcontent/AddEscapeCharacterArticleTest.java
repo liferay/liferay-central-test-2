@@ -110,6 +110,8 @@ public class AddEscapeCharacterArticleTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"This is an escape character test article."));
 		selenium.selectFrame("relative=top");
+		selenium.select("_15_type",
+			RuntimeVariables.replace("label=Announcements"));
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

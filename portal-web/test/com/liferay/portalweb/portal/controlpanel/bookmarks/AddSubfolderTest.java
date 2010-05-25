@@ -49,8 +49,8 @@ public class AddSubfolderTest extends BaseTestCase {
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Add Subfolder"),
-			selenium.getText("//div[2]/div/div[2]/ul/li[3]/a"));
-		selenium.clickAt("//div[2]/div/div[2]/ul/li[3]/a",
+			selenium.getText("//div[2]/div/div[2]/ul/li[4]/a"));
+		selenium.clickAt("//div[2]/div/div[2]/ul/li[4]/a",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_28_name", RuntimeVariables.replace("Test Subfolder"));

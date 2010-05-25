@@ -61,7 +61,8 @@ public class EditMessageTest extends BaseTestCase {
 			RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9 Edited"));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("This is edited test M\u00e9ssag\u00e9!"));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("T\u00e9st M\u00e9ssag\u00e9 Edited"));
 		assertTrue(selenium.isTextPresent(

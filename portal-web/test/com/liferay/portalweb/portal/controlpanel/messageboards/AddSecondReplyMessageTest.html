@@ -70,13 +70,28 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//input[@value='Save']</td>
+	<td>//input[@value='Publish']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//section/div/div/div/div[1]</td>
+	<td>Your request processed successfully.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//a/strong</td>
+	<td>RE: Tést Méssagé</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[6]/table/tbody/tr[1]/td[2]/div[1]/div/a/strong</td>
+	<td>RE: Tést Méssagé</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[6]/table/tbody/tr[1]/td[2]/div[2]</td>
 	<td>This is a second reply message.</td>
-	<td></td>
 </tr>
 
 </tbody></table>

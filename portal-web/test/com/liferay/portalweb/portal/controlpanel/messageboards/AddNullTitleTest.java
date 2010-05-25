@@ -73,7 +73,8 @@ public class AddNullTitleTest extends BaseTestCase {
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("This is a Null Test Entry!"));
 		selenium.type("_19_subject", RuntimeVariables.replace(""));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
