@@ -49,6 +49,7 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipReaderFactoryUtil;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -312,6 +313,8 @@ public class LayoutImporter {
 		Map<Long, Long> newLayoutIdPlidMap =
 			(Map<Long, Long>)context.getNewPrimaryKeysMap(Layout.class);
 
+		Map<Long, Long> newPlidLayoutIdMap = new HashMap<Long, Long>();
+
 		List<Element> layoutEls = root.element("layouts").elements("layout");
 
 		if (_log.isDebugEnabled()) {
@@ -357,8 +360,17 @@ public class LayoutImporter {
 				throw new SystemException(de);
 			}
 
-			long parentLayoutId = GetterUtil.getInteger(
-				layoutEl.elementText("parent-layout-id"));
+			long oldParentPlid = GetterUtil.getLong(
+				layoutEl.elementText("old-parent-plid"));
+
+			long parentLayoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
+
+			try {
+				parentLayoutId = newPlidLayoutIdMap.get(oldParentPlid);
+			}
+			catch (NullPointerException e) {
+				parentLayoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
+			}
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
@@ -521,6 +533,8 @@ public class LayoutImporter {
 			context.setOldPlid(oldPlid);
 
 			newLayoutIdPlidMap.put(oldLayoutId, layout.getPlid());
+
+			newPlidLayoutIdMap.put(oldPlid, layout.getLayoutId());
 
 			newLayoutIds.add(layoutId);
 

@@ -270,9 +270,25 @@ public class LayoutExporter {
 
 			Element layoutEl = layoutDoc.addElement("layout");
 
+			long parentLayoutPlid = 0;
+
+			try {
+				Layout parentLayout =
+					LayoutLocalServiceUtil.getLayout(
+						layout.getGroupId(), layout.isPrivateLayout(),
+						layout.getParentLayoutId());
+
+				parentLayoutPlid = parentLayout.getPlid();
+			}
+			catch (Exception e) {
+				parentLayoutPlid = 0;
+			}
+
 			layoutEl.addAttribute("old-plid", String.valueOf(layout.getPlid()));
 			layoutEl.addAttribute(
 				"layout-id", String.valueOf(layout.getLayoutId()));
+			layoutEl.addElement("old-parent-plid").addText(
+				String.valueOf(parentLayoutPlid));
 			layoutEl.addElement("parent-layout-id").addText(
 				String.valueOf(layout.getParentLayoutId()));
 			layoutEl.addElement("name").addCDATA(layout.getName());
