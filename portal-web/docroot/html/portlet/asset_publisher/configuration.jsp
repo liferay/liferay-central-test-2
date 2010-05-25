@@ -26,68 +26,6 @@ String typeSelection = ParamUtil.getString(request, "typeSelection", StringPool.
 AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(typeSelection);
 %>
 
-<style type="text/css">
-	.aui-form .queryRules fieldset {
-		padding: 0;
-	}
-
-	.aui-form .queryRules fieldset legend {
-		font-size: 1em;
-		font-weight: normal;
-		padding: 0;
-	}
-
-	.aui-form .lfr-form-row {
-		background-color: #F3F3F3;
-	}
-
-	.aui-form .lfr-form-row:hover {
-		background-color: #DFFCCB;
-	}
-
-	.aui-form .lfr-form-row .aui-field {
-		line-height: 2;
-	}
-
-	.aui-form .lfr-form-row .aui-field.tags-selector, .aui-form .lfr-form-row .aui-field.categories-selector{
-		clear: both;
-		line-height: 1.5;
-		margin-top: 5px;
-		width: 100%;
-	}
-
-	.lfr-panel .lfr-panel-titlebar {
-		margin-bottom: 0;
-	}
-
-	.lfr-panel-content {
-		background-color: #F8F8F8;
-		padding: 10px;
-	}
-
-	.aui-form .general-display-settings {
-		margin-bottom: 1em;
-	}
-
-	.dl-file-icon {
-		margin-right: 0.3em;
-		position: relative;
-		top: 0.4em;
-	}
-
-	.add-asset-selector {
-		overflow: auto;
-	}
-
-	.asset-search {
-		margin-bottom: 1em;
-	}
-
-	.lfr-actions.select-existing-selector {
-		margin: 0 0  1em 1em;
-	}
-</style>
-
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationActionURL" />
 <liferay-portlet:renderURL portletConfiguration="true" varImpl="configurationRenderURL" />
 

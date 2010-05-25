@@ -33,12 +33,6 @@ String htmlAttributes =
 	"width=" + width + "\n";
 %>
 
-<style type="text/css">
-	.portlet-configuration fieldset {
-		margin-bottom: 5px;
-	}
-</style>
-
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
 <aui:form action="<%= configurationURL %>" method="post" name="fm">

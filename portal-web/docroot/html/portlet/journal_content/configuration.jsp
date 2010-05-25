@@ -40,12 +40,6 @@ groupId = ParamUtil.getLong(request, "groupId", groupId);
 type = ParamUtil.getString(request, "type", type);
 %>
 
-<style type="text/css">
-	.displaying-article-id.modified {
-		color: #4DCF0C;
-	}
-</style>
-
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 <liferay-portlet:renderURL portletConfiguration="true" varImpl="portletURL" />
 

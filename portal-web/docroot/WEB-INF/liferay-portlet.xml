@@ -464,6 +464,7 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-iframe</css-class-wrapper>
+		<header-portlet-css>/html/portlet/iframe/css.jsp</header-portlet-css>
 	</portlet>
 	<portlet>
 		<portlet-name>49</portlet-name>

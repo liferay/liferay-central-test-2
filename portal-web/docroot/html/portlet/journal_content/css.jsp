@@ -78,3 +78,9 @@
 	margin-right: 1em;
 	padding: 0.8em 0.5em;
 }
+
+<%--Portlet Configuration --%>
+
+.portlet-configuration .displaying-article-id.modified {
+	color: #4DCF0C;
+}

@@ -232,3 +232,65 @@
 .portlet-asset-publisher ul.title-list {
 	margin-left: 0;
 }
+
+<%--Portlet Configuration --%>
+
+.portlet-configuration .aui-form .queryRules fieldset {
+	padding: 0;
+}
+
+.portlet-configuration .aui-form .queryRules fieldset legend {
+	font-size: 1em;
+	font-weight: normal;
+	padding: 0;
+}
+
+.portlet-configuration .aui-form .lfr-form-row {
+	background-color: #F3F3F3;
+}
+
+.portlet-configuration .aui-form .lfr-form-row:hover {
+	background-color: #DFFCCB;
+}
+
+.portlet-configuration .aui-form .lfr-form-row .aui-field {
+	line-height: 2;
+}
+
+.portlet-configuration .aui-form .lfr-form-row .aui-field.tags-selector, .aui-form .lfr-form-row .aui-field.categories-selector{
+	clear: both;
+	line-height: 1.5;
+	margin-top: 5px;
+	width: 100%;
+}
+
+.portlet-configuration .lfr-panel .lfr-panel-titlebar {
+	margin-bottom: 0;
+}
+
+.portlet-configuration .lfr-panel-content {
+	background-color: #F8F8F8;
+	padding: 10px;
+}
+
+.portlet-configuration .aui-form .general-display-settings {
+	margin-bottom: 1em;
+}
+
+.portlet-configuration .dl-file-icon {
+	margin-right: 0.3em;
+	position: relative;
+	top: 0.4em;
+}
+
+.portlet-configuration .add-asset-selector {
+	overflow: auto;
+}
+
+.portlet-configuration .asset-search {
+	margin-bottom: 1em;
+}
+
+.portlet-configuration .lfr-actions.select-existing-selector {
+	margin: 0 0  1em 1em;
+}
