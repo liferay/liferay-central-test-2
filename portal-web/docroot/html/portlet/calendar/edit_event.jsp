@@ -201,7 +201,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 			<liferay-ui:input-repeat event="<%= event %>" />
 
 			<aui:fieldset>
-				<aui:field-wrapper cssClass="end-date-field" label="end-date" name="endDateType">
+				<aui:field-wrapper cssClass="end-date-field" label="repeat-until" name="endDateType">
 					<aui:input checked="<%= endDateType == 0 %>" cssClass="input-container" label="no-end-date" name="endDateType" type="radio" value="0" />
 
 					<%--<aui:input checked="<%= endDateType == 1 %>" cssClass="input-container" inlineField="<%= true %>" label="end-after" name="endDateType" type="radio" value="1" />--%>
