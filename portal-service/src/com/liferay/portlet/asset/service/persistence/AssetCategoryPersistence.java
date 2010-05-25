@@ -102,6 +102,50 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 		java.lang.String uuid, long groupId, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.asset.model.AssetCategory findByGroupId_First(
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException;
+
+	public com.liferay.portlet.asset.model.AssetCategory findByGroupId_Last(
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException;
+
+	public com.liferay.portlet.asset.model.AssetCategory[] findByGroupId_PrevAndNext(
+		long categoryId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException;
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByParentCategoryId(
 		long parentCategoryId)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -257,6 +301,20 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryException;
 
+	public com.liferay.portlet.asset.model.AssetCategory findByV_P_N(
+		long vocabularyId, long parentCategoryId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException;
+
+	public com.liferay.portlet.asset.model.AssetCategory fetchByV_P_N(
+		long vocabularyId, long parentCategoryId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.asset.model.AssetCategory fetchByV_P_N(
+		long vocabularyId, long parentCategoryId, java.lang.String name,
+		boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -276,6 +334,9 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryException;
 
+	public void removeByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void removeByParentCategoryId(long parentCategoryId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -291,6 +352,11 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	public void removeByN_V(java.lang.String name, long vocabularyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public void removeByV_P_N(long vocabularyId, long parentCategoryId,
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException;
+
 	public void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -298,6 +364,12 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByParentCategoryId(long parentCategoryId)
@@ -313,6 +385,10 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByN_V(java.lang.String name, long vocabularyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByV_P_N(long vocabularyId, long parentCategoryId,
+		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()

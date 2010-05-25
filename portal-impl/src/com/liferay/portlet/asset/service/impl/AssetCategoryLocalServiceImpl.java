@@ -421,7 +421,7 @@ public class AssetCategoryLocalServiceImpl
 
 			StringBundler sb = new StringBundler(4);
 
-			sb.append("There is another category category named ");
+			sb.append("There is another category named ");
 			sb.append(name);
 			sb.append(" as a child of category ");
 			sb.append(parentCategoryId);

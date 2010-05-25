@@ -293,6 +293,14 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 
 	public void setName(String name) {
 		_name = name;
+
+		if (_originalName == null) {
+			_originalName = name;
+		}
+	}
+
+	public String getOriginalName() {
+		return GetterUtil.getString(_originalName);
 	}
 
 	public String getTitle() {
@@ -380,6 +388,16 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 
 	public void setVocabularyId(long vocabularyId) {
 		_vocabularyId = vocabularyId;
+
+		if (!_setOriginalVocabularyId) {
+			_setOriginalVocabularyId = true;
+
+			_originalVocabularyId = vocabularyId;
+		}
+	}
+
+	public long getOriginalVocabularyId() {
+		return _originalVocabularyId;
 	}
 
 	public AssetCategory toEscapedModel() {
@@ -590,7 +608,10 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 	private long _leftCategoryId;
 	private long _rightCategoryId;
 	private String _name;
+	private String _originalName;
 	private String _title;
 	private long _vocabularyId;
+	private long _originalVocabularyId;
+	private boolean _setOriginalVocabularyId;
 	private transient ExpandoBridge _expandoBridge;
 }
