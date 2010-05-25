@@ -19,8 +19,6 @@
 <%
 String portletResource = ParamUtil.getString(request, "portletResource");
 
-Portlet selPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
-
 String path = (String)request.getAttribute(WebKeys.CONFIGURATION_ACTION_PATH);
 %>
 
@@ -32,32 +30,8 @@ String path = (String)request.getAttribute(WebKeys.CONFIGURATION_ACTION_PATH);
 	<liferay-util:include page="/html/portlet/portlet_configuration/tabs2.jsp" />
 </c:if>
 
-<c:if test="<%= (selPortlet != null) && Validator.isNotNull(path) %>">
-
-	<%
-	PortletApp selPortletApp = selPortlet.getPortletApp();
-	%>
-
-	<c:choose>
-		<c:when test="<%= selPortletApp.isWARFile() %>">
-
-			<%
-			PortletConfig selPortletConfig = PortletConfigFactory.create(selPortlet, application);
-			PortletContextImpl selPortletCtx = (PortletContextImpl)selPortletConfig.getPortletContext();
-
-			RequestDispatcher selRd = selPortletCtx.getServletContext().getRequestDispatcher(path);
-
-			StringServletResponse stringResponse = new StringServletResponse(response);
-
-			selRd.include(request, stringResponse);
-			%>
-
-			<%= stringResponse.getString() %>
-		</c:when>
-		<c:otherwise>
-			<liferay-util:include page="<%= path %>" />
-		</c:otherwise>
-	</c:choose>
+<c:if test="<%= Validator.isNotNull(portletResource) && Validator.isNotNull(path) %>">
+	<liferay-util:include page="<%= path %>" portletId="<%= portletResource %>" />
 </c:if>
 
 <c:if test='<%= themeDisplay.isStatePopUp() && SessionMessages.contains(renderRequest, portletName + ".doConfigure") %>'>
