@@ -344,6 +344,12 @@ action.VIEW_USER=Se användare
 ## Messages
 ##
 
+repeat-until=Repeat until (Automatic Copy)
+
+
+##
+## Currency
+##
 1-day=1 dag
 1-minute=1 minut
 1-month=1 månad
@@ -525,6 +531,7 @@ add-firm=Lägg till firma
 add-folder=Lägg till mapp
 add-framework-version=Lägg till ramverksversion
 add-gadget-by-url=Lägg till en Gadget med URL
+add-gadget=Add Gadget (Automatic Copy)
 add-hangman-words-separated-by-commas=Skriv in hängagubbeord, separera med kommatecken.
 add-image=Lägg till bild
 add-instance=Lägg till exempel
@@ -2487,7 +2494,6 @@ never-auto-expire=Går aldrig ut automatiskt
 never-expire=Går aldrig ut
 never-review=Granskas aldrig
 never=Aldrig
-new-article=New Article (Automatic Copy)
 new-email-address=Ny epostadress
 new-event=Ny händelse
 new-friendly-url=Ny URL
@@ -2502,6 +2508,7 @@ new-page=Ny sida
 new-parent=Ny överliggande
 new-password=Nytt lösenord
 new-title=Ny rubrik
+new-web-content=New Web Content (Automatic Copy)
 new-window=Nytt fönster
 new=Ny
 newer=Nyare
@@ -4847,10 +4854,6 @@ zh_en=Kinesiska (Kina) till Engelska
 zip-postal=Postnummer
 zip=Postnummer
 zt_en=Kinesiska (Taiwan) till Engelska
-
-##
-## Currency
-##
 
 currency.AED=arabiska dirham
 currency.ALL=Albanian Lek

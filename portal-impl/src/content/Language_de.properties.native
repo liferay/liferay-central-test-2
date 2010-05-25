@@ -344,6 +344,12 @@ action.VIEW_USER=Benutzer anzeigen
 ## Messages
 ##
 
+repeat-until=Wiederholung bis (Automatic Translation)
+
+
+##
+## Currency
+##
 1-day=1 Tag
 1-minute=1 Minute
 1-month=1 Monat
@@ -525,6 +531,7 @@ add-firm=Firma hinzufügen
 add-folder=Ordner hinzufügen
 add-framework-version=Frameworkversion hinzufügen
 add-gadget-by-url=Gadget mittels URL hinzufügen
+add-gadget=Addieren Sie Gerät (Automatic Translation)
 add-hangman-words-separated-by-commas=Hangman Wörter mit Kommas getrennt eingeben.
 add-image=Bild hinzufügen
 add-instance=Instanz hinzufügen
@@ -2487,7 +2494,6 @@ never-auto-expire=Niemals automatisch verfallen lassen
 never-expire=Niemals verfallen lassen
 never-review=Niemals überprüfen
 never=Niemals
-new-article=Neuer Artikel (Automatic Translation)
 new-email-address=Neue E-Mail-Adresse
 new-event=Neues Ereignis
 new-friendly-url=Neue Friendly URL
@@ -2502,6 +2508,7 @@ new-page=Neue Seite
 new-parent=Neues übergeordnetes Element
 new-password=Neues Kennwort
 new-title=Neuer Titel
+new-web-content=Neuer Netz-Inhalt (Automatic Translation)
 new-window=Neues Fenster
 new=Neu
 newer=Neuer
@@ -4847,10 +4854,6 @@ zh_en=Chinesisch (China) nach Englisch
 zip-postal=PLZ/Postadresse
 zip=PLZ
 zt_en=Chinesisch (Taiwan) nach Englisch
-
-##
-## Currency
-##
 
 currency.AED=Arabische Dirham
 currency.ALL=Albanischer Lek

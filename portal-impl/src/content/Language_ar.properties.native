@@ -344,6 +344,12 @@ action.VIEW_USER=إعرض مستخدم
 ## Messages
 ##
 
+repeat-until=Repeat until (Automatic Copy)
+
+
+##
+## Currency
+##
 1-day=يوم واحد
 1-minute=1 Minute (Automatic Copy)
 1-month=شهر واحد
@@ -525,6 +531,7 @@ add-firm=أضف شركة
 add-folder=أضف مجلّد
 add-framework-version=أضف نسخة إطار العمل
 add-gadget-by-url=Add Gadget by URL (Automatic Copy)
+add-gadget=Add Gadget (Automatic Copy)
 add-hangman-words-separated-by-commas=أضف كلمات الرجل المشنوق مفصولة بفاصلة
 add-image=أضف صورة
 add-instance=أضف حالة
@@ -2487,7 +2494,6 @@ never-auto-expire=لا ينتهي بشكل تلقائي أبداً
 never-expire=لا ينتهي أبداً
 never-review=لا يراجع أبداً
 never=أبداً
-new-article=New Article (Automatic Copy)
 new-email-address=New Email Address (Automatic Copy)
 new-event=مناسبة جديدة
 new-friendly-url=رابط تشعبي ودّي جديد
@@ -2502,6 +2508,7 @@ new-page=صفحة جديدة
 new-parent=New Parent (Automatic Copy)
 new-password=New Password (Automatic Copy)
 new-title=New Title (Automatic Copy)
+new-web-content=New Web Content (Automatic Copy)
 new-window=New Window (Automatic Copy)
 new=جديد
 newer=Newer (Automatic Copy)
@@ -4847,10 +4854,6 @@ zh_en=صيني إلى الإنجليزي
 zip-postal=الرمز البريدي
 zip=الرمز البريدي
 zt_en=تايواني إلى إنجليزي
-
-##
-## Currency
-##
 
 currency.AED=درهم اماراتي
 currency.ALL=ليك ألباني

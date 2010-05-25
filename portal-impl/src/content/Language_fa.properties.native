@@ -344,6 +344,12 @@ action.VIEW_USER=مشاهده کاربر
 ## Messages
 ##
 
+repeat-until=Repeat until (Automatic Copy)
+
+
+##
+## Currency
+##
 1-day=1 Day (Automatic Copy)
 1-minute=1 Minute (Automatic Copy)
 1-month=1 Month (Automatic Copy)
@@ -525,6 +531,7 @@ add-firm=اضافه کردن شرکت
 add-folder=اضافه کردن پوشه
 add-framework-version=Add Framework Version (Automatic Copy)
 add-gadget-by-url=Add Gadget by URL (Automatic Copy)
+add-gadget=Add Gadget (Automatic Copy)
 add-hangman-words-separated-by-commas=Add hangman words separated by commas.
 add-image=اضافه کردن تصاویر
 add-instance=Add Instance (Automatic Copy)
@@ -2487,7 +2494,6 @@ never-auto-expire=هيچگاه بصورت خودکار منقضی نشود
 never-expire=هيچگاه منقضی نشود
 never-review=هيچگاه مرور نشود
 never=هيچگاه
-new-article=New Article (Automatic Copy)
 new-email-address=New Email Address (Automatic Copy)
 new-event=New Event (Automatic Copy)
 new-friendly-url=آدرس اينترنتی ساده
@@ -2502,6 +2508,7 @@ new-page=صفحه جديد
 new-parent=New Parent (Automatic Copy)
 new-password=New Password (Automatic Copy)
 new-title=New Title (Automatic Copy)
+new-web-content=New Web Content (Automatic Copy)
 new-window=New Window (Automatic Copy)
 new=جديد
 newer=Newer (Automatic Copy)
@@ -4847,10 +4854,6 @@ zh_en=چينی )چين( به انگليسی
 zip-postal=کدپستی
 zip=کدپستی
 zt_en=چينی )تايوان( به انگليسی
-
-##
-## Currency
-##
 
 currency.AED=UAE Dirham
 currency.ALL=Albanian Lek

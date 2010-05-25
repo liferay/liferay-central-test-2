@@ -344,6 +344,12 @@ action.VIEW_USER=ユーザの参照
 ## Messages
 ##
 
+repeat-until=繰り返しまでの (Automatic Translation)
+
+
+##
+## Currency
+##
 1-day=1日
 1-minute=1分
 1-month=1ヵ月
@@ -525,6 +531,7 @@ add-firm=会社の追加
 add-folder=フォルダの追加
 add-framework-version=フレームワークのバージョンの追加
 add-gadget-by-url=URLによるガジェットの追加
+add-gadget=小道具を加えなさい (Automatic Translation)
 add-hangman-words-separated-by-commas=カンマ区切りでハングマンの単語を追加してください。
 add-image=画像の追加
 add-instance=インスタンスの追加
@@ -2487,7 +2494,6 @@ never-auto-expire=公開終了日時を設定しない
 never-expire=期限を設定しない
 never-review=レビュー日時を設定しない
 never=なし
-new-article=新しい記事
 new-email-address=新規電子メールアドレス
 new-event=新規イベント
 new-friendly-url=新規フレンドリURL
@@ -2502,6 +2508,7 @@ new-page=新規ページ
 new-parent=新しい親
 new-password=新規パスワード
 new-title=新規タイトル
+new-web-content=新しいWebコンテンツ (Automatic Translation)
 new-window=新規ウィンドウ
 new=新規作成
 newer=より新しい
@@ -4847,10 +4854,6 @@ zh_en=中国語(簡体)から英語
 zip-postal=USの郵便番号
 zip=郵便番号
 zt_en=中国語(繁体)から英語
-
-##
-## Currency
-##
 
 currency.AED=UAE ディルハム
 currency.ALL=アルバニア レク

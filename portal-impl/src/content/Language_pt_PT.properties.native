@@ -344,6 +344,12 @@ action.VIEW_USER=Usuário Da Vista
 ## Messages
 ##
 
+repeat-until=Repetição até (Automatic Translation)
+
+
+##
+## Currency
+##
 1-day=1 dia
 1-minute=1 minuto
 1-month=1 mês
@@ -525,6 +531,7 @@ add-firm=Adicione A Firma
 add-folder=Adicione O Dobrador
 add-framework-version=Adicione A Versão Da Estrutura
 add-gadget-by-url=Adicione o dispositivo por URL
+add-gadget=Adicione o dispositivo (Automatic Translation)
 add-hangman-words-separated-by-commas=Adicione as palavras do hangman separadas por vírgulas.
 add-image=Adicione A Imagem
 add-instance=Adicione O Exemplo
@@ -2487,7 +2494,6 @@ never-auto-expire=Nunca Auto Expire
 never-expire=Nunca Expire
 never-review=Nunca Revisão
 never=Nunca
-new-article=Artigo novo (Automatic Translation)
 new-email-address=Email address novo
 new-event=Evento Novo
 new-friendly-url=URL Amigável Novo
@@ -2502,6 +2508,7 @@ new-page=Página Nova
 new-parent=Pai novo
 new-password=Senha nova
 new-title=Título Novo
+new-web-content=Índice de correia fotorreceptora novo (Automatic Translation)
 new-window=Janela nova
 new=Novo
 newer=Mais novo
@@ -4847,10 +4854,6 @@ zh_en=Chinês (China) ao inglês
 zip-postal=Zip/Postal
 zip=Fecho de correr
 zt_en=Chinês (Formosa) ao inglês
-
-##
-## Currency
-##
 
 currency.AED=Dirham dos Uae
 currency.ALL=Lek Albanian

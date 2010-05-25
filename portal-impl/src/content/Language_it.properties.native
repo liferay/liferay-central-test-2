@@ -344,6 +344,12 @@ action.VIEW_USER=Visualizza Utente
 ## Messages
 ##
 
+repeat-until=Ripetizione fino a (Automatic Translation)
+
+
+##
+## Currency
+##
 1-day=1 giorno
 1-minute=1 minuto
 1-month=1 mese
@@ -525,6 +531,7 @@ add-firm=Aggiungi Ditta
 add-folder=Aggiungi Cartella
 add-framework-version=Aggiungi Versione del Framework
 add-gadget-by-url=Aggiungi gadget tramite URL
+add-gadget=Aggiunga il dispositivo (Automatic Translation)
 add-hangman-words-separated-by-commas=Aggiungi le parole dell'impiccato separate da virgole.
 add-image=Aggiungi Immagine
 add-instance=Aggiungi Istanza
@@ -2486,7 +2493,6 @@ never-auto-expire=Senza Scadenza Automatica
 never-expire=Senza Scadenza
 never-review=Senza Revisione
 never=Mai
-new-article=Nuovo articolo (Automatic Translation)
 new-email-address=Nuovo email address
 new-event=Nuovo Evento
 new-friendly-url=Nuova Friendly URL
@@ -2501,6 +2507,7 @@ new-page=Nuova Pagina
 new-parent=Nuovo genitore
 new-password=Nuova parola d'accesso
 new-title=Nuovo Titolo
+new-web-content=Nuovo soddisfare di fotoricettore (Automatic Translation)
 new-window=Nuova finestra
 new=Nuovo
 newer=Più nuovo
@@ -4846,10 +4853,6 @@ zh_en=Dal Cinese all'inglese
 zip-postal=Codice di Avviamento Postale
 zip=CAP
 zt_en=Dal Cinese (Taiwan) all'inglese
-
-##
-## Currency
-##
 
 currency.AED=Dirham dei Uae
 currency.ALL=Lek Albanese

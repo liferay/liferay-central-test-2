@@ -344,6 +344,12 @@ action.VIEW_USER=Zobrazenie používateľa
 ## Messages
 ##
 
+repeat-until=Repeat until (Automatic Copy)
+
+
+##
+## Currency
+##
 1-day=1 Deň
 1-minute=1 Minute (Automatic Copy)
 1-month=1 Mesiac
@@ -525,6 +531,7 @@ add-firm=Pridať firmu
 add-folder=Pridať zložku
 add-framework-version=Pridať verziu architektúry
 add-gadget-by-url=Pridať gadget pomocou URL
+add-gadget=Add Gadget (Automatic Copy)
 add-hangman-words-separated-by-commas=Pridajte hangman words oddelené čiarkami.
 add-image=Pridať obrázok
 add-instance=Pridať inštanciu
@@ -2487,7 +2494,6 @@ never-auto-expire=Nikdy neexpirovať automaticky
 never-expire=Nikdy neexpirovať
 never-review=Nikdy nerecenzovať
 never=Nikdy
-new-article=New Article (Automatic Copy)
 new-email-address=New Email Address (Automatic Copy)
 new-event=Nová udalosť
 new-friendly-url=Nová "friendly URL"
@@ -2502,6 +2508,7 @@ new-page=Nová stránka
 new-parent=Nový rodič
 new-password=New Password (Automatic Copy)
 new-title=Nový titul
+new-web-content=New Web Content (Automatic Copy)
 new-window=New Window (Automatic Copy)
 new=Nový
 newer=Nikdy
@@ -4847,10 +4854,6 @@ zh_en=Z čínštiny (Čína) do angličtiny
 zip-postal=Zip/PSČ
 zip=PSČ
 zt_en=Z čínštiny (Taiwan) do angličtiny
-
-##
-## Currency
-##
 
 currency.AED=UAE dirham
 currency.ALL=Albánsky lek

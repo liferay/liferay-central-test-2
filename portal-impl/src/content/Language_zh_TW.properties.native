@@ -344,6 +344,12 @@ action.VIEW_USER=看法用戶
 ## Messages
 ##
 
+repeat-until=重複直到 (Automatic Translation)
+
+
+##
+## Currency
+##
 1-day=1 天
 1-minute=1分鐘
 1-month=1 個月
@@ -525,6 +531,7 @@ add-firm=增加企業
 add-folder=增加文件夾
 add-framework-version=增加框架版本
 add-gadget-by-url=增加小配件由URL
+add-gadget=增加小配件 (Automatic Translation)
 add-hangman-words-separated-by-commas=增加執行絞刑的人詞由逗號分離。
 add-image=增加圖像
 add-instance=增加事例
@@ -2487,7 +2494,6 @@ never-auto-expire=從未自動到期
 never-expire=從未到期
 never-review=從未回顧
 never=從未
-new-article=新的文章 (Automatic Translation)
 new-email-address=新的電子郵件
 new-event=新事件
 new-friendly-url=新易記網址
@@ -2502,6 +2508,7 @@ new-page=新頁
 new-parent=新的父母
 new-password=新的密碼
 new-title=新標題
+new-web-content=新的网络内容 (Automatic Translation)
 new-window=新窗口
 new=新
 newer=更新
@@ -4847,10 +4854,6 @@ zh_en=中文(中國) 對英語
 zip-postal=Zip/Postal
 zip=郵遞區號
 zt_en=中文(臺灣) 對英語
-
-##
-## Currency
-##
 
 currency.AED=阿拉伯聯合酋長國迪拉姆
 currency.ALL=阿爾巴尼亞列克

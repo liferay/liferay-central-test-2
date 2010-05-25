@@ -344,6 +344,12 @@ action.VIEW_USER=Gebruiker tonen
 ## Messages
 ##
 
+repeat-until=Herhaal tot (Automatic Translation)
+
+
+##
+## Currency
+##
 1-day=1 Dag
 1-minute=1 minuut
 1-month=1 Maand
@@ -525,6 +531,7 @@ add-firm=Bedrijf toevoegen
 add-folder=Map toevoegen
 add-framework-version=Framework versie toevoegen
 add-gadget-by-url=Gadget-URL toevoegen
+add-gadget=Voeg Gadget toe (Automatic Translation)
 add-hangman-words-separated-by-commas=Galgje woorden toevoegen, gescheiden door komma's.
 add-image=Afbeelding toevoegen
 add-instance=Instantie toevoegen
@@ -2487,7 +2494,6 @@ never-auto-expire=Nooit automatisch laten vervallen
 never-expire=Nooit laten vervallen
 never-review=Nooit beoordelen
 never=Nooit
-new-article=Nieuw Artikel (Automatic Translation)
 new-email-address=Nieuw e-mailadres
 new-event=Nieuwe gebeurtenis
 new-friendly-url=Nieuwe gebruiksvriendelijke URL
@@ -2502,6 +2508,7 @@ new-page=Nieuwe pagina
 new-parent=Nieuwe ouder
 new-password=Nieuw wachtwoord
 new-title=Nieuwe titel
+new-web-content=De nieuwe Inhoud van het Web (Automatic Translation)
 new-window=Nieuw venster
 new=Nieuw
 newer=Nieuwer
@@ -4847,10 +4854,6 @@ zh_en=Chinees naar Engels
 zip-postal=Postcode
 zip=Postcode
 zt_en=Chinees (Taiwan) naar Engels
-
-##
-## Currency
-##
 
 currency.AED=Dirham van de V.A.E
 currency.ALL=Albanese Lek

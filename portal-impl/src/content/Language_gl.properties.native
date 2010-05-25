@@ -344,6 +344,12 @@ action.VIEW_USER=Ver usuario
 ## Messages
 ##
 
+repeat-until=Repeat until (Automatic Copy)
+
+
+##
+## Currency
+##
 1-day=1 día
 1-minute=1 minuto
 1-month=1 mes
@@ -525,6 +531,7 @@ add-firm=Engadir compañía
 add-folder=Engadir carpeta
 add-framework-version=Engadir versión do framework
 add-gadget-by-url=Engadir gadget por URL
+add-gadget=Add Gadget (Automatic Copy)
 add-hangman-words-separated-by-commas=Engadir palabras para o xogo do ahorcado separadas por comas.
 add-image=Engadir imaxe
 add-instance=Engadir instancia
@@ -2487,7 +2494,6 @@ never-auto-expire=Non caduca automáticamente
 never-expire=Non caduca
 never-review=Non revisado
 never=Nunca
-new-article=New Article (Automatic Copy)
 new-email-address=Novo correo electrónico
 new-event=Novo evento
 new-friendly-url=Nova URL amigable
@@ -2502,6 +2508,7 @@ new-page=Páxina nova
 new-parent=Nova páxina pai
 new-password=Nova contraseña
 new-title=Novo título
+new-web-content=New Web Content (Automatic Copy)
 new-window=Nova fiestra
 new=Novo
 newer=Máis novo
@@ -4847,10 +4854,6 @@ zh_en=De chinés a inglés
 zip-postal=Zip/Postal
 zip=Código postal
 zt_en=De chinés (Taiwán) a inglés
-
-##
-## Currency
-##
 
 currency.AED=Dirham dos EAU
 currency.ALL=Lek Albanés

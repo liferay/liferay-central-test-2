@@ -344,6 +344,12 @@ action.VIEW_USER=Zobrazit uživatele
 ## Messages
 ##
 
+repeat-until=Repeat until (Automatic Copy)
+
+
+##
+## Currency
+##
 1-day=1 den
 1-minute=1 minuta
 1-month=1 měsíc
@@ -525,6 +531,7 @@ add-firm=Přidat firmu
 add-folder=Přidat složku
 add-framework-version=Přidat verzi Frameworku
 add-gadget-by-url=Přidat Gadget zadáním URL
+add-gadget=Add Gadget (Automatic Copy)
 add-hangman-words-separated-by-commas=Přidejte slova (oddělená čárkami) pro šibenici.
 add-image=Přidat obrázek
 add-instance=Přidat instanci
@@ -2487,7 +2494,6 @@ never-auto-expire=Nikdy neztratí platnost
 never-expire=Nikdy neztratí platnost
 never-review=Nikdy neprověřovat znovu
 never=Nikdy
-new-article=New Article (Automatic Copy)
 new-email-address=Nová e-mailová adresa
 new-event=Nová událost
 new-friendly-url=Nové přívětivé URL
@@ -2502,6 +2508,7 @@ new-page=Nová stránka
 new-parent=Nový rodič
 new-password=Nové heslo
 new-title=Nový titulek
+new-web-content=New Web Content (Automatic Copy)
 new-window=Nové okno
 new=Nový
 newer=Novější
@@ -4847,10 +4854,6 @@ zh_en=Čínsky -> Anglicky
 zip-postal=Poštovní směrovací číslo
 zip=PSČ
 zt_en=Čínsky (Taiwan) -> Anglicky
-
-##
-## Currency
-##
 
 currency.AED=UAE Dirham
 currency.ALL=Albánský Lek

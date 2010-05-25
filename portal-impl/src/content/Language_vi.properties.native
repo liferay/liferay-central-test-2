@@ -344,6 +344,12 @@ action.VIEW_USER=View User (Automatic Copy)
 ## Messages
 ##
 
+repeat-until=Repeat until (Automatic Copy)
+
+
+##
+## Currency
+##
 1-day=1 Day (Automatic Copy)
 1-minute=1 Minute (Automatic Copy)
 1-month=1 Month (Automatic Copy)
@@ -525,6 +531,7 @@ add-firm=Thêm Firm
 add-folder=Thêm thư mục
 add-framework-version=Add Framework Version (Automatic Copy)
 add-gadget-by-url=Add Gadget by URL (Automatic Copy)
+add-gadget=Add Gadget (Automatic Copy)
 add-hangman-words-separated-by-commas=Add hangman words separated by commas. (Automatic Copy)
 add-image=Thêm ảnh
 add-instance=Add Instance (Automatic Copy)
@@ -2487,7 +2494,6 @@ never-auto-expire=Never Auto Expire (Automatic Copy)
 never-expire=Never Expire (Automatic Copy)
 never-review=Never Review (Automatic Copy)
 never=Không bao giờ
-new-article=New Article (Automatic Copy)
 new-email-address=New Email Address (Automatic Copy)
 new-event=New Event (Automatic Copy)
 new-friendly-url=New Friendly URL (Automatic Copy)
@@ -2502,6 +2508,7 @@ new-page=New Page (Automatic Copy)
 new-parent=New Parent (Automatic Copy)
 new-password=New Password (Automatic Copy)
 new-title=New Title (Automatic Copy)
+new-web-content=New Web Content (Automatic Copy)
 new-window=New Window (Automatic Copy)
 new=Mới
 newer=Newer (Automatic Copy)
@@ -4847,10 +4854,6 @@ zh_en=Chinese (China) to English
 zip-postal=Zip/Postal (Automatic Copy)
 zip=Zip
 zt_en=Chinese (Taiwan) to English
-
-##
-## Currency
-##
 
 currency.AED=UAE Dirham
 currency.ALL=Albanian Lek

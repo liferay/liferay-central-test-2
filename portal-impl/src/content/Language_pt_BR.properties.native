@@ -344,6 +344,12 @@ action.VIEW_USER=Visualizar usuário
 ## Messages
 ##
 
+repeat-until=Repetição até (Automatic Translation)
+
+
+##
+## Currency
+##
 1-day=1 dia
 1-minute=1 minuto
 1-month=1 mês
@@ -525,6 +531,7 @@ add-firm=Adicionar empresa
 add-folder=Adicionar pasta
 add-framework-version=Adicionar versão do framework.
 add-gadget-by-url=Adicionar gadget pela URL.
+add-gadget=Adicione o dispositivo (Automatic Translation)
 add-hangman-words-separated-by-commas=Adicionar palavras do jogo da Forca separado por vírgulas.
 add-image=Adicionar imagem
 add-instance=Adicionar instância
@@ -2487,7 +2494,6 @@ never-auto-expire=Nunca expirar automaticamente
 never-expire=Nunca expirar
 never-review=Nunca revisar
 never=Nunca
-new-article=Artigo novo (Automatic Translation)
 new-email-address=Novo endereço de e-mail
 new-event=Novo evento
 new-friendly-url=Nova URL amigável
@@ -2502,6 +2508,7 @@ new-page=Nova página
 new-parent=Novo pai
 new-password=Nova senha
 new-title=Novo título
+new-web-content=Índice de correia fotorreceptora novo (Automatic Translation)
 new-window=Nova janela
 new=Novo
 newer=Mais novo
@@ -4847,10 +4854,6 @@ zh_en=Chinês (China) ao inglês
 zip-postal=Zip/Postal
 zip=Zip
 zt_en=Chinês (Formosa) ao inglês
-
-##
-## Currency
-##
 
 currency.AED=Dirham dos Uae
 currency.ALL=Lek Albanian

@@ -344,6 +344,12 @@ action.VIEW_USER=यूज़र का निरीक्षण करना
 ## Messages
 ##
 
+repeat-until=Repeat until (Automatic Copy)
+
+
+##
+## Currency
+##
 1-day=1 दिन
 1-minute=1 मिनट
 1-month=1 महीना
@@ -525,6 +531,7 @@ add-firm=Firm जोड़े
 add-folder=फ़ोल्डर जोड़े
 add-framework-version=फ्रेमवर्क संस्करण जोड़े
 add-gadget-by-url=URL द्वारा गैजेट जोड़े
+add-gadget=Add Gadget (Automatic Copy)
 add-hangman-words-separated-by-commas=hangman शब्दों को अल्पविराम के द्वारा अलग कर जोड़ें.
 add-image=इमेज जोड़े
 add-instance=इन्स्टेन्स जोड़े
@@ -2487,7 +2494,6 @@ never-auto-expire=कभी अपने आप से समाप्त नह
 never-expire=कभी समाप्त नहीं 
 never-review=कभी समीक्षा नहीं
 never=कभी नहीं
-new-article=नया लेख
 new-email-address=नया ईमेल पता
 new-event=नई घटना
 new-friendly-url=नया Friendly URL
@@ -2502,6 +2508,7 @@ new-page=नया पेज
 new-parent=New Parent
 new-password=नया पासवर्ड
 new-title=नया Title
+new-web-content=New Web Content (Automatic Copy)
 new-window=नई Window
 new=New
 newer=Newer
@@ -4847,10 +4854,6 @@ zh_en=चीनी (चीन) से अंग्रेजी
 zip-postal=ज़िप / पोस्टल 
 zip=ज़िप
 zt_en=चीनी (ताइवान) से अंग्रेजी
-
-##
-## Currency
-##
 
 currency.AED=संयुक्त अरब अमीरात दिर्हाम
 currency.ALL=अल्बानियाई लेक

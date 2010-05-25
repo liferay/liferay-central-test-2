@@ -344,6 +344,12 @@ action.VIEW_USER=Показване на потребител
 ## Messages
 ##
 
+repeat-until=Repeat until (Automatic Copy)
+
+
+##
+## Currency
+##
 1-day=1 ден
 1-minute=1 минута
 1-month=1 месец
@@ -525,6 +531,7 @@ add-firm=Добавяне на фирма
 add-folder=Добавяне на папка
 add-framework-version=Добавяне на версия на фреймуърк
 add-gadget-by-url=Add Gadget by URL (Automatic Copy)
+add-gadget=Add Gadget (Automatic Copy)
 add-hangman-words-separated-by-commas=Add hangman words separated by commas. (Automatic Copy)
 add-image=Добавяне на изображение
 add-instance=Add Instance (Automatic Copy)
@@ -2487,7 +2494,6 @@ never-auto-expire=Никога да не изтича автоматично
 never-expire=Никога да не изтича
 never-review=Никога да не се рецензира
 never=Никога
-new-article=New Article (Automatic Copy)
 new-email-address=Нов адрес на електронна поща
 new-event=Ново събитие
 new-friendly-url=Нов приятелски URL адрес
@@ -2502,6 +2508,7 @@ new-page=Нова страница
 new-parent=Нов родител
 new-password=Нова парола
 new-title=Ново заглавие
+new-web-content=New Web Content (Automatic Copy)
 new-window=New Window (Automatic Copy)
 new=Ново
 newer=По-нов
@@ -4847,10 +4854,6 @@ zh_en=Китайски (Китай) към Английски
 zip-postal=Пощенски код (ZIP)
 zip=Zip
 zt_en=Китайски (Тайван) към Английски
-
-##
-## Currency
-##
 
 currency.AED=UAE Dirham
 currency.ALL=Албански лек

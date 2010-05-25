@@ -344,6 +344,12 @@ action.VIEW_USER=Felhasználó megtekintése
 ## Messages
 ##
 
+repeat-until=Repeat until (Automatic Copy)
+
+
+##
+## Currency
+##
 1-day=1 nap
 1-minute=1 perc
 1-month=1 hónap
@@ -525,6 +531,7 @@ add-firm=Új cég
 add-folder=Új mappa
 add-framework-version=Új keretrendszer-verzió
 add-gadget-by-url=Új gadgetet URL-lel.
+add-gadget=Add Gadget (Automatic Copy)
 add-hangman-words-separated-by-commas=Új szavak az akasztófához (vesszővel elválasztva).
 add-image=Új kép
 add-instance=Új példány
@@ -2487,7 +2494,6 @@ never-auto-expire=Soha nem jár le automatikusan
 never-expire=Soha nem jár le
 never-review=Soha nem kell felülvizsgálni
 never=Soha
-new-article=New Article (Automatic Copy)
 new-email-address=Új e-mail cím
 new-event=Új esemény
 new-friendly-url=Új egyszerű URL
@@ -2502,6 +2508,7 @@ new-page=Új oldal
 new-parent=Új szülő
 new-password=Új jelszó
 new-title=Új cím
+new-web-content=New Web Content (Automatic Copy)
 new-window=Új ablak
 new=Új
 newer=Újabb
@@ -4847,10 +4854,6 @@ zh_en=Kínairól angolra
 zip-postal=Irányítószám
 zip=Irányítószám
 zt_en=Tajvani kínairól angolra
-
-##
-## Currency
-##
 
 currency.AED=UAE dirham
 currency.ALL=Albán lek

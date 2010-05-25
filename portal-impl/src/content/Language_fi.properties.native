@@ -344,6 +344,12 @@ action.VIEW_USER=Näytä käyttäjä
 ## Messages
 ##
 
+repeat-until=Repeat until (Automatic Copy)
+
+
+##
+## Currency
+##
 1-day=Päivän sisällä
 1-minute=1 minuutti
 1-month=1 kuukausi
@@ -525,6 +531,7 @@ add-firm=Lisää yritys
 add-folder=Lisää kansio
 add-framework-version=Lisää kehysversio
 add-gadget-by-url=Lisää Gadget osoitteen mukaan
+add-gadget=Add Gadget (Automatic Copy)
 add-hangman-words-separated-by-commas=Lisää hirsipuu sanoja pilkulla erotettuna.
 add-image=Lisää kuva
 add-instance=Lisää instanssi
@@ -2487,7 +2494,6 @@ never-auto-expire=Ei vanhene itsestään
 never-expire=Älä koskaan vanhene
 never-review=Ei katselmointia koskaan
 never=Ei koskaan
-new-article=New Article (Automatic Copy)
 new-email-address=Uusi sähköpostiosoite
 new-event=Uusi tapahtuma
 new-friendly-url=Uusi käyttäjäystävällinen URL
@@ -2502,6 +2508,7 @@ new-page=Uusi sivu
 new-parent=Uusi isäntä
 new-password=Uusi salasana
 new-title=Uusi otsikko
+new-web-content=New Web Content (Automatic Copy)
 new-window=New Window (Automatic Copy)
 new=Uusi
 newer=Uudemmat
@@ -4847,10 +4854,6 @@ zh_en=Kiinasta (Kiina) englanniksi
 zip-postal=Postinumero
 zip=Postinumero
 zt_en=Kiinasta (Taiwan) englanniksi
-
-##
-## Currency
-##
 
 currency.AED=UAE:n dirham
 currency.ALL=Albanian lek

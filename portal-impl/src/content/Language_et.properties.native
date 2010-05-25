@@ -344,6 +344,12 @@ action.VIEW_USER=Vaata kasutajat
 ## Messages
 ##
 
+repeat-until=Repeat until (Automatic Copy)
+
+
+##
+## Currency
+##
 1-day=1 päev
 1-minute=1 Minut
 1-month=1 kuu
@@ -525,6 +531,7 @@ add-firm=Lisa firma
 add-folder=Lisa kaust
 add-framework-version=Lisa raamistiku versioon 
 add-gadget-by-url=Lisa vidina URL
+add-gadget=Add Gadget (Automatic Copy)
 add-hangman-words-separated-by-commas=Lisa poomismängu sõnad, eraldades need komdeaga.
 add-image=Lisa pilt
 add-instance=Lisa instants
@@ -2487,7 +2494,6 @@ never-auto-expire=Keela automaatne aegumine
 never-expire=Ei aegu
 never-review=Keela ülevaatus
 never=Mitte kunagi
-new-article=New Article (Automatic Copy)
 new-email-address=Uus e-postiaadress
 new-event=Uus sündmus
 new-friendly-url=Uus kasutajasõbralik aadress
@@ -2502,6 +2508,7 @@ new-page=Uus leht
 new-parent=Uus vanem
 new-password=Uus salasõna
 new-title=Uus pealkiri
+new-web-content=New Web Content (Automatic Copy)
 new-window=New Window (Automatic Copy)
 new=Uus
 newer=Uuem
@@ -4847,10 +4854,6 @@ zh_en=Hiina keelest (Hiina) inglise keelde
 zip-postal=Postiindeks
 zip=Zip
 zt_en=Hiina keelest (Taivan) inglise keeelde
-
-##
-## Currency
-##
 
 currency.AED=Araabia ühendemiraatide dirhem
 currency.ALL=Albaania lek

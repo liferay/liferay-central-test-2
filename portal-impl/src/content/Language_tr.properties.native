@@ -344,6 +344,12 @@ action.VIEW_USER=Kullanıcı Görüntüle
 ## Messages
 ##
 
+repeat-until=Repeat until (Automatic Copy)
+
+
+##
+## Currency
+##
 1-day=1 Gün
 1-minute=1 Dakika
 1-month=1 Ay
@@ -525,6 +531,7 @@ add-firm=Kuruluş Ekle
 add-folder=Klasör Ekle
 add-framework-version=Framework Sürümü Ekle
 add-gadget-by-url=Gadget URL'si Ekle
+add-gadget=Add Gadget (Automatic Copy)
 add-hangman-words-separated-by-commas=Adam asmaca kelimelerini vigülle ayırarak ekle.
 add-image=Resim Ekle
 add-instance=Örnek Ekle
@@ -2487,7 +2494,6 @@ never-auto-expire=Süre Hiçbir Zaman Otomatik Dolmaz.
 never-expire=Süre Hiçbir Zaman Dolmaz.
 never-review=Hiçbir Zaman Gözden Geçirme.
 never=Hiçbir Zaman
-new-article=New Article (Automatic Copy)
 new-email-address=New Email Address (Automatic Copy)
 new-event=Yeni OLay
 new-friendly-url=Yeni kullanıcı dostu URL
@@ -2502,6 +2508,7 @@ new-page=Yeni Sayfa
 new-parent=Yeni Ebeveyn
 new-password=New Password (Automatic Copy)
 new-title=Yeni Başlık
+new-web-content=New Web Content (Automatic Copy)
 new-window=New Window (Automatic Copy)
 new=Yeni
 newer=Daha Yeni
@@ -4847,10 +4854,6 @@ zh_en=Çinceden (Çin) to İngilizceye
 zip-postal=Posta Kodu
 zip=Posta Kodu
 zt_en=Çinceden (Tayvan) İngilizceye
-
-##
-## Currency
-##
 
 currency.AED=UAE Dirham
 currency.ALL=Albanian Lek

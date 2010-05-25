@@ -344,6 +344,12 @@ action.VIEW_USER=Просмотреть пользователя
 ## Messages
 ##
 
+repeat-until=Repeat until (Automatic Copy)
+
+
+##
+## Currency
+##
 1-day=1 день
 1-minute=1 минута
 1-month=1 месяц
@@ -525,6 +531,7 @@ add-firm=Добавить фирму
 add-folder=Добавить папку
 add-framework-version=Добавить версию среды
 add-gadget-by-url=Добавить гаджет по URL
+add-gadget=Add Gadget (Automatic Copy)
 add-hangman-words-separated-by-commas=Добавте плохие слова разделенные запятыми.
 add-image=Добавить изображение
 add-instance=Добавить экземпляр
@@ -2487,7 +2494,6 @@ never-auto-expire=Автоматически не переводить в уст
 never-expire=Никогда не устаревает
 never-review=Никогда не пересматривать
 never=Никогда
-new-article=New Article (Automatic Copy)
 new-email-address=Новый почтовый адрес
 new-event=Новое событие
 new-friendly-url=Новый удобный URL
@@ -2502,6 +2508,7 @@ new-page=Новая страница
 new-parent=Новый родитель
 new-password=Новый пароль
 new-title=Новый заголовок
+new-web-content=New Web Content (Automatic Copy)
 new-window=New Window (Automatic Copy)
 new=Новый
 newer=Новее
@@ -4847,10 +4854,6 @@ zh_en=С Китайского (Китай) на Английский
 zip-postal=Zip/Postal
 zip=Почтовый индекс
 zt_en=С Китайского (Тайвань) на Английский
-
-##
-## Currency
-##
 
 currency.AED=UAE Dirham
 currency.ALL=Albanian Lek

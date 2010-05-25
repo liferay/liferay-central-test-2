@@ -344,6 +344,12 @@ action.VIEW_USER=Χρήστης άποψης
 ## Messages
 ##
 
+repeat-until=Επαναλάβετε μέχρι (Automatic Translation)
+
+
+##
+## Currency
+##
 1-day=1 Ημέρα
 1-minute=1 λεπτό
 1-month=1 Μήνας
@@ -525,6 +531,7 @@ add-firm=Προσθέστε Εταιρία
 add-folder=Προσθήκη Φακέλου
 add-framework-version=Προσθέστε την έκδοση πλαισίου
 add-gadget-by-url=Προσθέστε τη συσκευή από URL
+add-gadget=Προσθέστε τη συσκευή (Automatic Translation)
 add-hangman-words-separated-by-commas=Προσθέστε τις λέξεις δημίων που χωρίζονται από τα κόμματα.
 add-image=Προσθήκη Εικόνας
 add-instance=Προσθέστε την περίπτωση
@@ -2487,7 +2494,6 @@ never-auto-expire=Δεν λήγει ποτέ το αυτοκίνητο
 never-expire=Μην λήξτε ποτέ
 never-review=Ποτέ αναθεώρηση
 never=Ποτέ
-new-article=Νέο άρθρο (Automatic Translation)
 new-email-address=Νέα διεύθυνση ηλεκτρονικού ταχυδρομείου
 new-event=Νέο γεγονός
 new-friendly-url=Νέο φιλικό URL
@@ -2502,6 +2508,7 @@ new-page=Νέα σελίδα
 new-parent=Νέος γονέας
 new-password=Νέος κωδικός πρόσβασης
 new-title=Νέος τίτλος
+new-web-content=Νέο περιεχόμενο Ιστού (Automatic Translation)
 new-window=Νέο παράθυρο
 new=Νέο
 newer=Νεώτερος
@@ -4847,10 +4854,6 @@ zh_en=Κινέζικα σε Αγγλικά
 zip-postal=Φερμουάρ/ταχυδρομικός
 zip=Τ.Κ.
 zt_en=Κινέζικα (Ταϊβάν) στα αγγλικά
-
-##
-## Currency
-##
 
 currency.AED=UAE Dirham
 currency.ALL=Lek Αλβανίας

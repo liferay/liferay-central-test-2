@@ -344,6 +344,12 @@ action.VIEW_USER=查看用户
 ## Messages
 ##
 
+repeat-until=重复直到 (Automatic Translation)
+
+
+##
+## Currency
+##
 1-day=1 天
 1-minute=1 分钟
 1-month=1 个月
@@ -525,6 +531,7 @@ add-firm=添加公司
 add-folder=添加文件夹
 add-framework-version=添加框架版本
 add-gadget-by-url=通过 URL 添加 Gadget
+add-gadget=增加小配件 (Automatic Translation)
 add-hangman-words-separated-by-commas=添加由逗号分隔的 hangman words。
 add-image=添加图像
 add-instance=添加实例
@@ -2487,7 +2494,6 @@ never-auto-expire=从不自动过期
 never-expire=从不过期
 never-review=从不审核
 never=从不
-new-article=创建新文章
 new-email-address=新电子邮件地址
 new-event=新事件
 new-friendly-url=新的易用 URL
@@ -2502,6 +2508,7 @@ new-page=新页面
 new-parent=新的父项
 new-password=新密码
 new-title=新标题
+new-web-content=新的网络内容 (Automatic Translation)
 new-window=新窗口
 new=新的
 newer=更新
@@ -4847,10 +4854,6 @@ zh_en=中文（简体）到英语
 zip-postal=邮政编码
 zip=邮政编码
 zt_en=中文（繁体）到英语
-
-##
-## Currency
-##
 
 currency.AED=阿拉伯联合酋长国迪拉姆
 currency.ALL=阿尔巴尼亚列克

@@ -344,6 +344,12 @@ action.VIEW_USER=הראה משתמש
 ## Messages
 ##
 
+repeat-until=Repeat until (Automatic Copy)
+
+
+##
+## Currency
+##
 1-day=יום 1
 1-minute=1 Minute (Automatic Copy)
 1-month=חודש 1
@@ -525,6 +531,7 @@ add-firm=הוסף עסק
 add-folder=הוסף תיקייה
 add-framework-version=הוסף גרסת מסגרת
 add-gadget-by-url=הוסף אביזר לפי URL
+add-gadget=Add Gadget (Automatic Copy)
 add-hangman-words-separated-by-commas=הוסף מילים של ""תליין"" המופרדות בפסיק"
 add-image=הוסף תמונה
 add-instance=הוסף דוגמא
@@ -2487,7 +2494,6 @@ never-auto-expire=אף פעם לא לסיים אוטומטית
 never-expire=אף פעם לא לסיים
 never-review=אף פעם לא לסקור
 never=אף פעם
-new-article=New Article (Automatic Copy)
 new-email-address=New Email Address (Automatic Copy)
 new-event=אירוע חדש
 new-friendly-url=URL חברותי חדש
@@ -2502,6 +2508,7 @@ new-page=דף חדש
 new-parent=הורה חדש
 new-password=New Password (Automatic Copy)
 new-title=כותרת חדשה
+new-web-content=New Web Content (Automatic Copy)
 new-window=New Window (Automatic Copy)
 new=חדש
 newer=יותר חדש
@@ -4847,10 +4854,6 @@ zh_en=סינית (סין) לאנגלית
 zip-postal=Zip/Postal (Automatic Copy)
 zip=מיקוד
 zt_en=סינית (טאיוון) לאנגלית.
-
-##
-## Currency
-##
 
 currency.AED=דירהם של איגוד הנסיכויות הערביות
 currency.ALL=לק אלבני
