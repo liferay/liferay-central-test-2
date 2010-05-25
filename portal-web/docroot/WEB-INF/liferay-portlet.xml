@@ -463,8 +463,8 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<css-class-wrapper>portlet-iframe</css-class-wrapper>
 		<header-portlet-css>/html/portlet/iframe/css.jsp</header-portlet-css>
+		<css-class-wrapper>portlet-iframe</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>49</portlet-name>
@@ -533,8 +533,8 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/login/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-login</css-class-wrapper>
+		<header-portlet-css>/html/portlet/login/css.jsp</header-portlet-css>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
