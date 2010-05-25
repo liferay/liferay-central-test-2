@@ -76,13 +76,13 @@ public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 				}
 			}
 
+			configuration.setProperties(PropsUtil.getProperties());
+
 			if (Validator.isNull(PropsValues.HIBERNATE_DIALECT)) {
 				String dialect = determineDialect();
 
 				configuration.setProperty("hibernate.dialect", dialect);
 			}
-
-			configuration.setProperties(PropsUtil.getProperties());
 
 			DB db = DBFactoryUtil.getDB();
 
