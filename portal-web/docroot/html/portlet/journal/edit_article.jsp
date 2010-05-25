@@ -212,7 +212,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	</c:when>
 	<c:otherwise>
 		<h1 class="article-title">
-			<liferay-ui:message key="new-article" />
+			<liferay-ui:message key="new-web-content" />
 		</h1>
 	</c:otherwise>
 </c:choose>
