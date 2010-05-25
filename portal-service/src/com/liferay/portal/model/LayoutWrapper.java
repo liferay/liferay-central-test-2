@@ -389,6 +389,12 @@ public class LayoutWrapper implements Layout {
 		return _layout.getName(localeLanguageId, useDefault);
 	}
 
+	public long getParentPlid()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layout.getParentPlid();
+	}
+
 	public java.lang.String getRegularURL(
 		javax.servlet.http.HttpServletRequest request)
 		throws com.liferay.portal.kernel.exception.PortalException,

@@ -189,6 +189,7 @@ import com.liferay.portlet.messageboards.service.MBMessageService;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
+import com.liferay.portlet.ratings.service.persistence.RatingsStatsFinder;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
 import com.liferay.portlet.tasks.service.TasksProposalLocalService;
 import com.liferay.portlet.tasks.service.TasksProposalService;
@@ -1649,6 +1650,14 @@ public abstract class LayoutServiceBaseImpl extends PrincipalBean
 		this.ratingsStatsPersistence = ratingsStatsPersistence;
 	}
 
+	public RatingsStatsFinder getRatingsStatsFinder() {
+		return ratingsStatsFinder;
+	}
+
+	public void setRatingsStatsFinder(RatingsStatsFinder ratingsStatsFinder) {
+		this.ratingsStatsFinder = ratingsStatsFinder;
+	}
+
 	public TasksProposalLocalService getTasksProposalLocalService() {
 		return tasksProposalLocalService;
 	}
@@ -2038,6 +2047,8 @@ public abstract class LayoutServiceBaseImpl extends PrincipalBean
 	protected RatingsStatsLocalService ratingsStatsLocalService;
 	@BeanReference(type = RatingsStatsPersistence.class)
 	protected RatingsStatsPersistence ratingsStatsPersistence;
+	@BeanReference(type = RatingsStatsFinder.class)
+	protected RatingsStatsFinder ratingsStatsFinder;
 	@BeanReference(type = TasksProposalLocalService.class)
 	protected TasksProposalLocalService tasksProposalLocalService;
 	@BeanReference(type = TasksProposalService.class)

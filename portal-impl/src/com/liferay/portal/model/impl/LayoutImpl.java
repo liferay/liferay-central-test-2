@@ -310,6 +310,17 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			getName(), localeLanguageId, useDefault);
 	}
 
+	public long getParentPlid() throws PortalException, SystemException {
+		if (getParentLayoutId() == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
+			return 0;
+		}
+
+		Layout layout = LayoutLocalServiceUtil.getLayout(
+			getGroupId(), isPrivateLayout(), getParentLayoutId());
+
+		return layout.getPlid();
+	}
+
 	public String getRegularURL(HttpServletRequest request)
 		throws PortalException, SystemException {
 
