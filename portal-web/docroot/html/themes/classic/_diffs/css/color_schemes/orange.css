@@ -1,297 +1,283 @@
-/* This CSS sets the default styles for the base components. */
+body.orange, .orange .portlet {
+	background-color: #F3F1EF;
+}
 
-/* ---------- Wrapper ---------- */
+.orange .logo .current-community {
+	background-color: #BFB8A7;
+}
 
-.orange #wrapper {
-	background-image: url(../../images/color_schemes/orange/common/body_bg.png);
+.orange .aui-state-hover {
+	background-color: #DAC8BA;
+	background-image: url(../../images/color_schemes/orange/application/state_hover_bg.png);
+	border-color: #837062;
+}
+
+.orange .aui-icon {
+	background-image: url(../../images/color_schemes/orange/aui/icon_sprite.png);
 }
 
 /* ---------- Links ---------- */
 
 .orange a {
-	color: #995f30;
+	color: #7D745B;
 }
 
 .orange a:hover {
-	color: #cc5c00;
-}
-
-/* ---------- Banner ---------- */
-
-.orange #banner {
-	background-image: url(../../images/color_schemes/orange/common/banner_bg.jpg);
-}
-
-/* ---------- Portal tool tips ---------- */
-
-.orange .portal-tool-tip {
-	color: #29211e;
+	color: #CD7700;
 }
 
 /* ---------- Application styling ---------- */
 
-.orange .ui-wrapper {
-	border-color: #958782;
-}
-
 .orange .results-header {
-	background-color: #817671;
+	background-color: #DDD9D2;
 }
 
-.orange .ui-autocomplete-even, .orange .results-row td {
-	background-color: #f3edea;
+.orange .results-row.alt td {
+	background-color: #E7E4DE;
 }
 
-.orange .ui-autocomplete-odd, .orange .results-row.alt td {
-	background-color: #ddd6d3;
-}
-
-.orange .ui-autocomplete-over, .orange .results-row.hover td {
-	background-color: #edbca8;
-}
-
-.orange #main-content .dragging .portlet-column {
-	border-color: #958782;
-}
-
-.orange .drag-proxy-indicator {
-	border-color: 2px dashed #253710;
+.orange .results-row.hover td {
+	background-color: #CDC7BD;
 }
 
 .orange .drop-area {
-	background-color: #ddd6d3;
+	background-color: #DED8D4;
 }
 
-.orange .ui-drag-helper {
-	border-color: #958782;
-	background-color: #ddd6d3;
+.orange .aui-resizable-proxy {
+	border-color: #968A83;
 }
 
-.orange .ui-slider-range {
-	background: #29211e;
+.orange .aui-sortable-proxy {
+	background-color: #827972;
 }
 
-.orange .ui-tabs li {
-	background-color: #938a87;
-	border-right-color: #493830;
+.orange .aui-menugroup-content h4 {
+	background-color: #DFDCD3;
+	color: #7D745B;
 }
 
-.orange .ui-tabs li.current {
-	background-color: #fff;
-	border-color: #dedede;
+.orange .aui-menu-content li a, .orange .lfr-menu-list ul li a {
+	color: #34322C;
 }
 
-.orange .ui-tabs li:hover, .orange .ui-tabs li a:hover {
-	background-color: #29211e;
-	color: #c3a99e;
+.orange .my-places-menu .current-site {
+	border-color: #81641D;
 }
 
-.orange .ui-tabs li.current a, .orange .ui-tabs li.current span {
-	color: #995f30;
+.orange .my-places-menu .current-site a {
+	background-color: #BB8F30;
+	color: #FFF;
 }
 
-.orange .ui-tabs li.current:hover, .orange .ui-tabs li.current a:hover {
-	background-color: #fff;
+.orange .aui-menu-content li a.aui-focus, .orange .lfr-menu-list ul a.aui-focus, .orange .lfr-menu-expanded li a:focus  {
+	background-color: #7D745B;
+	color: #FFF;
+	text-shadow: -1px -1px #34322C;
 }
 
-.orange .ui-dialog {
-	border-color: #958782;
+.orange .aui-tab {
+	background: none;
 }
 
-.orange .ui-dialog .ui-dialog-titlebar {
-	background: #29211e;
+.orange .aui-tab-active {
+	background-color: #333;
 }
 
-.orange #ui-datepicker-div, .orange .ui-datepicker-inline {
-	border-color: #958782;
+.orange .aui-tab-active, .orange .aui-tab-active a {
+	color: #FFF;
 }
 
-.orange .ui-datepicker-control {
-	background-color: #ddd6d3;
-	border-bottom-color: #bcb1ae;
+.orange .portlet-communities .lfr-current-theme, .orange .portlet-enterprise-admin .lfr-current-theme {
+	background-color: #F8F4F1;
+	border-color: #968A83;
 }
 
-.orange .ui-datepicker-links {
-	background-color: #817671;
+.orange .portlet-communities .theme-entry, .orange .portlet-communities .lfr-current-theme .theme-screenshot, .orange .portlet-enterprise-admin .theme-entry, .orange .portlet-enterprise-admin .lfr-current-theme .theme-screenshot {
+	border-color: #BDB4AF;
 }
 
-.orange .ui-datepicker-header select {
-	background-color: #817671;
+.orange .portlet-communities .theme-entry .theme-title, .orange .portlet-enterprise-admin .theme-entry .theme-title  {
+	background-color: #948D88;
+	border-color: #968A83;
 }
 
-.orange .ui-datepicker .ui-datepicker-title-row a {
-	color: #29211e;
+.orange .portlet-communities .lfr-theme-list h3, .orange .portlet-enterprise-admin .lfr-theme-list h3 {
+	background-color: #DED8D4;
 }
 
-.orange .ui-datepicker .ui-datepicker-days-row {
-	color: #817671;
+.orange .portlet-communities .selected-color-scheme .theme-entry, .orange .portlet-enterprise-admin .selected-color-scheme .theme-entry {
+	border-color: #9A6F33;
 }
 
-.orange .ui-datepicker-week-col {
-	color: #c4b9b5;
+.orange .portlet-communities .lfr-theme-list .theme-entry:hover, .orange .portlet-enterprise-admin .lfr-theme-list .theme-entry:hover {
+	background-color: #FFEEE0;
+	border-color: #E0BDA8;
+	color: #C9B09F;
 }
 
-.orange .ui-datepicker-days-cell a {
-	background-color: #f3edea;
+.orange .portlet-communities .theme-entry:hover .theme-thumbnail, .orange .portlet-enterprise-admin .theme-entry:hover .theme-thumbnail {
+	border-color: #E0BDA8;
 }
 
-.orange .ui-datepicker-days-cell a:hover {
-	background-color: #817671;
+.orange .portlet-document-library .detail-column-last {
+	background-color: #FFE9D8;
 }
 
-.orange .ui-datepicker-current-day a {
-	border-color: #817671;
-	color: #995f30;
+.orange .portlet-document-library .detail-column-last .detail-column-content {
+	border-color: #DAA489;
 }
 
-.orange .ui-datepicker-current-day a:hover {
-	background-color: #ffe8df;
-	border-color: #bcb1ae;
-	color: #cc5c00;
+.orange .dockbar {
+	background-color: #AFA798;
+	background-image: url(../../images/color_schemes/orange/dockbar/dockbar_bg.png);
 }
 
-.orange .ui-datepicker .ui-datepicker-unselectable {
-	color: #c4b9b5;
+.orange .dockbar .menu-button-active {
+	background-color: #DBAC5C;
+	background-image: url(../../images/color_schemes/orange/dockbar/button_active_bg.png);
 }
 
-.orange .ui-colorpicker-current {
-	border-color: #817671;
+.orange .dockbar .menu-button-active a {
+	color: #FFF;
 }
 
-.orange .ui-autocomplete-results li strong {
-	color: #cc5c00;
+.orange .aui-portal-layout-drag-indicator {
+	background-color: #B6A63C;
 }
 
-.orange .ui-tags .ui-tag {
-	background-color: #ffe8df;
-	border-color: #ddb2a3;
+.orange .aui-autocomplete-results-content {
+	border-color: #F5D599;
 }
 
-.orange .ui-tags .ui-tag:hover {
-	border-color: #bcb1ae;
+.orange .aui-autocomplete-selected {
+	background-color: #F7F0E0;
+	border-color: #EAD8A4;
 }
 
-.orange .navigation-sort-helper {
-	background-color: #817671;
+.orange .aui-textboxlistentry {
+	background-color: #F4EACB;
+	border-color: #EAD8A4;
 }
 
-/* ---------- Main navigation ---------- */
-
-.orange #navigation {
-	background-color: #090602;
-	border-top-color: #493830;
+.orange .aui-textboxlistentry-focused {
+	background-color: #B6A63C;
+	border-color: #4F4534;
 }
 
-.orange #navigation li {
-	border-color: #493830;
+.orange .aui-textboxlistentry-close-hover {
+	background-color: #EAD8A4;
 }
-
-.orange #navigation a {
-	color: #c3a99e;
-}
-
-.orange #navigation li.selected a, .orange #navigation li a:hover {
-	background-color: #29211e;
-}
-
-.orange #navigation li.selected a span {
-	background-image: url(../../images/color_schemes/orange/navigation/bullet_selected.png) ;
-}
-
-/* This CSS sets the default styles for portlets. */
 
 /* ---------- Portlet wrapper and icons ---------- */
 
 .orange .portlet {
-	border-color: #958782;
+	border-color: #968A83;
 }
 
 .orange .portlet-topper {
-	background-color: #ddd6d3;
-	border-bottom-color: #bcb1ae;
+	background-color: #D9DDD3;
+	border-bottom-color: #B7BCAE;
 }
 
 .orange .panel-page .portlet-topper {
-	border-bottom-color: #958782;
+	border-bottom-color: #968A83;
 }
 
 .orange .portlet-section-selected, .orange .portlet-section-selected a {
-	background-color: #817671;
+	background-color: #968A83;
 }
 
 .orange .portlet-section-selected a:hover, .orange .portlet-section-selected a:focus {
-	background-color: #817671;
+	background-color: #968A83;
 }
+
 /* ---------- Calendar portlet ---------- */
 
 .orange .portlet-calendar .calendar-day .day-text {
-	background-color: #817671;
+	background-color: #968A83;
 }
 
 .orange .taglib-calendar tr td a {
-	background-color: #f3edea;
+	background-color: #EFF3EA;
 }
 
 .orange .taglib-calendar tr td a:hover {
-	background-color: #817671;
+	background-color: #968A83;
 }
 
 .orange .taglib-calendar .calendar-current-day a {
-	border-color: #817671;
-	color: #995f30;
+	border-color: #968A83;
+	color: #5F9930;
 }
 
 .orange .portlet-calendar .taglib-calendar tr td.calendar-current-day a:hover, .orange .portlet-calendar .taglib-calendar tr td.calendar-current-day a:focus {
-	background-color: #ffe8df;
-	border-color: #bcb1ae;
-	color: #cc5c00;
+	background-color: #F2FFDF;
+	border-color: #B7BCAE;
+	color: #5BCC00;
 }
 
 .orange .taglib-calendar .calendar-current-day, .orange .taglib-calendar .calendar-current-day a {
-	background-color: #fff;
+	background-color: #FFF;
 }
 
 .orange .taglib-calendar tr td.calendar-inactive {
-	color: #c4b9b5;
+	color: #BEC4B5;
 }
 
 /* ---------- Miscellaneous portlet styles ---------- */
 
 .orange .journal-template-error .scroll-pane pre span {
-	background-color: #c4b9b5;
+	background-color: #BEC4B5;
 }
 
 .orange .restricted * {
-	color: #817671;
+	color: #968A83;
 }
 
 .orange .lfr-actions .lfr-trigger li a:hover {
-	background-color: #958782;
+	background-color: #968A83;
 }
 
+.orange .lfr-tag-selector-popup .aui-textfield-content {
+	background-color: #DED8D4;
+	border-color: #BDB4AF;
+}
 
 /* This CSS sets the default styles for forms. */
 
-.orange input[type="text"], .orange input[type="password"], .orange input[type="file"], .orange textarea, .orange .textarea {
-	background-image: url(../../images/color_schemes/orange/forms/input_shadow.png);
+.orange input[type="submit"], .orange input[type="button"], .orange input[type="reset"], .orange button, .orange .lfr-actions, .orange .lfr-actions ul {
+	color: #4F4534;
 }
 
-.orange input[type="submit"], .orange input[type="button"], .orange input[type="reset"] {
-	color: #4d4033;
+.orange input[type="submit"]:hover, .orange input[type="button"]:hover, .orange input[type="reset"]:hover, .orange button:hover, .orange .lfr-actions:hover, .orange .lfr-actions:hover ul {
+	background-color: #DAC8BA;
+	background-image: url(../../images/color_schemes/orange/application/state_hover_bg.png);
+	border-color: #837062;
+	color: #9A6F33;
 }
 
-.orange input[type="submit"]:hover, .orange input[type="button"]:hover, .orange input[type="reset"]:hover {
-	background-color: #ffe8df;
-	border-color: #ddb2a3;
-	color: #cc5c00;
+.orange input[type="submit"]:focus, .orange input[type="button"]:focus, .orange input[type="reset"]:focus, .orange button:focus, .orange .lfr-actions:focus, .orange .lfr-actions:focus ul {
+	background-color: #ECECEC;
+	background-image: url(../../images/application/state_active_bg.png);
 }
 
 /* ---------- IE6 chokes on attribute selectors in a chain, so we separate them into their own rule ---------- */
 
-.ie6 .orange input.text, .ie6 .orange input.password, .ie6 .orange input.file {
-	background-image: url(../../images/color_schemes/orange/forms/input_shadow.png);
+.ie6 .orange input.submit, .ie6 .orange input.button, .ie6 .orange button, .ie6 .orange .aui-button-disabled input.submit, .ie6 .orange .aui-button-disabled input.button, .ie6 .orange .aui-button-disabled button {
+	color: #4F4534;
 }
 
-.ie6 .orange input.submit, .ie6 .orange input.button {
-	color: #4d4033;
+/* ---------- Site breadcrumbs ---------- */
+
+.orange .site-breadcrumbs li.first a {
+	color: #9A6F33;
+}
+
+.orange .site-breadcrumbs li.last a {
+	color: #67604B;
+}
+
+.orange .lfr-hudcrumbs .breadcrumbs li a, .orange .lfr-hudcrumbs .breadcrumbs li span {
+	color: #FFF;
 }

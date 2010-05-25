@@ -1,297 +1,283 @@
-/* This CSS sets the default styles for the base components. */
+body.green, .green .portlet {
+	background-color: #F1F3EF;
+}
 
-/* ---------- Wrapper ---------- */
+.green .logo .current-community {
+	background-color: #AFBFA7;
+}
 
-.green #wrapper {
-	background-image: url(../../images/color_schemes/green/common/body_bg.png);
+.green .aui-state-hover {
+	background-color: #CFDABA;
+	background-image: url(../../images/color_schemes/green/application/state_hover_bg.png);
+	border-color: #778362;
+}
+
+.green .aui-icon {
+	background-image: url(../../images/color_schemes/green/aui/icon_sprite.png);
 }
 
 /* ---------- Links ---------- */
 
 .green a {
-	color: #5f9930;
+	color: #677D5B;
 }
 
 .green a:hover {
-	color: #5bcc00;
-}
-
-/* ---------- Banner ---------- */
-
-.green #banner {
-	background-image: url(../../images/color_schemes/green/common/banner_bg.jpg);
-}
-
-/* ---------- Portal tool tips ---------- */
-
-.green .portal-tool-tip {
-	color: #24291e;
+	color: #66CD00;
 }
 
 /* ---------- Application styling ---------- */
 
-.green .ui-wrapper {
-	border-color: #8e9582;
-}
-
 .green .results-header {
-	background-color: #7a8171;
+	background-color: #D7DDD2;
 }
 
-.green .ui-autocomplete-even, .green .results-row td {
-	background-color: #eff3ea;
+.green .results-row.alt td {
+	background-color: #E2E7DE;
 }
 
-.green .ui-autocomplete-odd, .green .results-row.alt td {
-	background-color: #d9ddd3;
-}
-
-.green .ui-autocomplete-over, .green .results-row.hover td {
-	background-color: #d2eda8;
-}
-
-.green #main-content .dragging .portlet-column {
-	border-color: #8e9582;
-}
-
-.green .drag-proxy-indicator {
-	border-color: 2px dashed #253710;
+.green .results-row.hover td {
+	background-color: #C4CDBD;
 }
 
 .green .drop-area {
-	background-color: #d9ddd3;
+	background-color: #DBDED4;
 }
 
-.green .ui-drag-helper {
-	border-color: #8e9582;
-	background-color: #d9ddd3;
+.green .aui-resizable-proxy {
+	border-color: #909683;
 }
 
-.green .ui-slider-range {
-	background: #24291e;
+.green .aui-sortable-proxy {
+	background-color: #7C8272;
 }
 
-.green .ui-tabs li {
-	background-color: #8e9387;
-	border-right-color: #3e4930;
+.green .aui-menugroup-content h4 {
+	background-color: #D7DFD3;
+	color: #677D5B;
 }
 
-.green .ui-tabs li.current {
-	background-color: #fff;
-	border-color: #dedede;
+.green .aui-menu-content li a, .green .lfr-menu-list ul li a {
+	color: #2F342C;
 }
 
-.green .ui-tabs li:hover, .green .ui-tabs li a:hover {
-	background-color: #24291e;
-	color: #b4c39e;
+.green .my-places-menu .current-site {
+	border-color: #42811D;
 }
 
-.green .ui-tabs li.current a, .green .ui-tabs li.current span {
-	color: #5f9930;
+.green .my-places-menu .current-site a {
+	background-color: #68BB30;
+	color: #FFF;
 }
 
-.green .ui-tabs li.current:hover, .green .ui-tabs li.current a:hover {
-	background-color: #fff;
+.green .aui-menu-content li a.aui-focus, .green .lfr-menu-list ul a.aui-focus, .green .lfr-menu-expanded li a:focus  {
+	background-color: #677D5B;
+	color: #FFF;
+	text-shadow: -1px -1px #2F342C;
 }
 
-.green .ui-dialog {
-	border-color: #8e9582;
+.green .aui-tab {
+	background: none;
 }
 
-.green .ui-dialog .ui-dialog-titlebar {
-	background: #24291e;
+.green .aui-tab-active {
+	background-color: #333;
 }
 
-.green #ui-datepicker-div, .green .ui-datepicker-inline {
-	border-color: #8e9582;
+.green .aui-tab-active, .green .aui-tab-active a {
+	color: #FFF;
 }
 
-.green .ui-datepicker-control {
-	background-color: #d9ddd3;
-	border-bottom-color: #b7bcae;
+.green .portlet-communities .lfr-current-theme, .green .portlet-enterprise-admin .lfr-current-theme {
+	background-color: #F6F8F1;
+	border-color: #909683;
 }
 
-.green .ui-datepicker-links {
-	background-color: #7a8171;
+.green .portlet-communities .theme-entry, .green .portlet-communities .lfr-current-theme .theme-screenshot, .green .portlet-enterprise-admin .theme-entry, .green .portlet-enterprise-admin .lfr-current-theme .theme-screenshot {
+	border-color: #B9BDAF;
 }
 
-.green .ui-datepicker-header select {
-	background-color: #7a8171;
+.green .portlet-communities .theme-entry .theme-title, .green .portlet-enterprise-admin .theme-entry .theme-title  {
+	background-color: #909488;
+	border-color: #909683;
 }
 
-.green .ui-datepicker .ui-datepicker-title-row a {
-	color: #24291e;
+.green .portlet-communities .lfr-theme-list h3, .green .portlet-enterprise-admin .lfr-theme-list h3 {
+	background-color: #DBDED4;
 }
 
-.green .ui-datepicker .ui-datepicker-days-row {
-	color: #7a8171;
+.green .portlet-communities .selected-color-scheme .theme-entry, .green .portlet-enterprise-admin .selected-color-scheme .theme-entry {
+	border-color: #669A33;
 }
 
-.green .ui-datepicker-week-col {
-	color: #bec4b5;
+.green .portlet-communities .lfr-theme-list .theme-entry:hover, .green .portlet-enterprise-admin .lfr-theme-list .theme-entry:hover {
+	background-color: #F5FFE0;
+	border-color: #CFE0A8;
+	color: #BBC99F;
 }
 
-.green .ui-datepicker-days-cell a {
-	background-color: #eff3ea;
+.green .portlet-communities .theme-entry:hover .theme-thumbnail, .green .portlet-enterprise-admin .theme-entry:hover .theme-thumbnail {
+	border-color: #CFE0A8;
 }
 
-.green .ui-datepicker-days-cell a:hover {
-	background-color: #7a8171;
+.green .portlet-document-library .detail-column-last {
+	background-color: #F2FFD8;
 }
 
-.green .ui-datepicker-current-day a {
-	border-color: #7a8171;
-	color: #5f9930;
+.green .portlet-document-library .detail-column-last .detail-column-content {
+	border-color: #C6DA89;
 }
 
-.green .ui-datepicker-current-day a:hover {
-	background-color: #f2ffdf;
-	border-color: #b7bcae;
-	color: #5bcc00;
+.green .dockbar {
+	background-color: #A2AF98;
+	background-image: url(../../images/color_schemes/green/dockbar/dockbar_bg.png);
 }
 
-.green .ui-datepicker .ui-datepicker-unselectable {
-	color: #bec4b5;
+.green .dockbar .menu-button-active {
+	background-color: #95DB5C;
+	background-image: url(../../images/color_schemes/green/dockbar/button_active_bg.png);
 }
 
-.green .ui-colorpicker-current {
-	border-color: #7a8171;
+.green .dockbar .menu-button-active a {
+	color: #FFF;
 }
 
-.green .ui-autocomplete-results li strong {
-	color: #5bcc00;
+.green .aui-portal-layout-drag-indicator {
+	background-color: #57B63C;
 }
 
-.green .ui-tags .ui-tag {
-	background-color: #f2ffdf;
-	border-color: #c8dda3;
+.green .aui-autocomplete-results-content {
+	border-color: #C1F599;
 }
 
-.green .ui-tags .ui-tag:hover {
-	border-color: #b7bcae;
+.green .aui-autocomplete-selected {
+	background-color: #E9F7E0;
+	border-color: #BBEAA4;
 }
 
-.green .navigation-sort-helper {
-	background-color: #7a8171;
+.green .aui-textboxlistentry {
+	background-color: #D9F4CB;
+	border-color: #BBEAA4;
 }
 
-/* ---------- Main navigation ---------- */
-
-.green #navigation {
-	background-color: #040902;
-	border-top-color: #3e4930;
+.green .aui-textboxlistentry-focused {
+	background-color: #57B63C;
+	border-color: #404F34;
 }
 
-.green #navigation li {
-	border-color: #3e4930;
+.green .aui-textboxlistentry-close-hover {
+	background-color: #BBEAA4;
 }
-
-.green #navigation a {
-	color: #b4c39e;
-}
-
-.green #navigation li.selected a, .green #navigation li a:hover {
-	background-color: #24291e;
-}
-
-.green #navigation li.selected a span {
-	background-image: url(../../images/color_schemes/green/navigation/bullet_selected.png) ;
-}
-
-/* This CSS sets the default styles for portlets. */
 
 /* ---------- Portlet wrapper and icons ---------- */
 
 .green .portlet {
-	border-color: #8e9582;
+	border-color: #909683;
 }
 
 .green .portlet-topper {
-	background-color: #d9ddd3;
-	border-bottom-color: #b7bcae;
+	background-color: #D9DDD3;
+	border-bottom-color: #B7BCAE;
 }
 
 .green .panel-page .portlet-topper {
-	border-bottom-color: #8e9582;
+	border-bottom-color: #909683;
 }
 
 .green .portlet-section-selected, .green .portlet-section-selected a {
-	background-color: #7a8171;
+	background-color: #909683;
 }
 
 .green .portlet-section-selected a:hover, .green .portlet-section-selected a:focus {
-	background-color: #7a8171;
+	background-color: #909683;
 }
+
 /* ---------- Calendar portlet ---------- */
 
 .green .portlet-calendar .calendar-day .day-text {
-	background-color: #7a8171;
+	background-color: #909683;
 }
 
 .green .taglib-calendar tr td a {
-	background-color: #eff3ea;
+	background-color: #EFF3EA;
 }
 
 .green .taglib-calendar tr td a:hover {
-	background-color: #7a8171;
+	background-color: #909683;
 }
 
 .green .taglib-calendar .calendar-current-day a {
-	border-color: #7a8171;
-	color: #5f9930;
+	border-color: #909683;
+	color: #5F9930;
 }
 
 .green .portlet-calendar .taglib-calendar tr td.calendar-current-day a:hover, .green .portlet-calendar .taglib-calendar tr td.calendar-current-day a:focus {
-	background-color: #f2ffdf;
-	border-color: #b7bcae;
-	color: #5bcc00;
+	background-color: #F2FFDF;
+	border-color: #B7BCAE;
+	color: #5BCC00;
 }
 
 .green .taglib-calendar .calendar-current-day, .green .taglib-calendar .calendar-current-day a {
-	background-color: #fff;
+	background-color: #FFF;
 }
 
 .green .taglib-calendar tr td.calendar-inactive {
-	color: #bec4b5;
+	color: #BEC4B5;
 }
 
 /* ---------- Miscellaneous portlet styles ---------- */
 
 .green .journal-template-error .scroll-pane pre span {
-	background-color: #bec4b5;
+	background-color: #BEC4B5;
 }
 
 .green .restricted * {
-	color: #7a8171;
+	color: #909683;
 }
 
 .green .lfr-actions .lfr-trigger li a:hover {
-	background-color: #8e9582;
+	background-color: #909683;
 }
 
+.green .lfr-tag-selector-popup .aui-textfield-content {
+	background-color: #DBDED4;
+	border-color: #B9BDAF;
+}
 
 /* This CSS sets the default styles for forms. */
 
-.green input[type="text"], .green input[type="password"], .green input[type="file"], .green textarea, .green .textarea {
-	background-image: url(../../images/color_schemes/green/forms/input_shadow.png);
+.green input[type="submit"], .green input[type="button"], .green input[type="reset"], .green button, .green .lfr-actions, .green .lfr-actions ul {
+	color: #404F34;
 }
 
-.green input[type="submit"], .green input[type="button"], .green input[type="reset"] {
-	color: #3d4d33;
+.green input[type="submit"]:hover, .green input[type="button"]:hover, .green input[type="reset"]:hover, .green button:hover, .green .lfr-actions:hover, .green .lfr-actions:hover ul {
+	background-color: #CFDABA;
+	background-image: url(../../images/color_schemes/green/application/state_hover_bg.png);
+	border-color: #778362;
+	color: #669A33;
 }
 
-.green input[type="submit"]:hover, .green input[type="button"]:hover, .green input[type="reset"]:hover {
-	background-color: #f2ffdf;
-	border-color: #c8dda3;
-	color: #5bcc00;
+.green input[type="submit"]:focus, .green input[type="button"]:focus, .green input[type="reset"]:focus, .green button:focus, .green .lfr-actions:focus, .green .lfr-actions:focus ul {
+	background-color: #ECECEC;
+	background-image: url(../../images/application/state_active_bg.png);
 }
 
 /* ---------- IE6 chokes on attribute selectors in a chain, so we separate them into their own rule ---------- */
 
-.ie6 .green input.text, .ie6 .green input.password, .ie6 .green input.file {
-	background-image: url(../../images/color_schemes/green/forms/input_shadow.png);
+.ie6 .green input.submit, .ie6 .green input.button, .ie6 .green button, .ie6 .green .aui-button-disabled input.submit, .ie6 .green .aui-button-disabled input.button, .ie6 .green .aui-button-disabled button {
+	color: #404F34;
 }
 
-.ie6 .green input.submit, .ie6 .green input.button {
-	color: #3d4d33;
+/* ---------- Site breadcrumbs ---------- */
+
+.green .site-breadcrumbs li.first a {
+	color: #669A33;
+}
+
+.green .site-breadcrumbs li.last a {
+	color: #55674B;
+}
+
+.green .lfr-hudcrumbs .breadcrumbs li a, .green .lfr-hudcrumbs .breadcrumbs li span {
+	color: #FFF;
 }
