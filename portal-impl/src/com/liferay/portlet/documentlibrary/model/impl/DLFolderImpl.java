@@ -116,7 +116,6 @@ public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 		try {
 			return LockLocalServiceUtil.isLocked(
 				DLFolder.class.getName(), getFolderId());
-
 		}
 		catch (Exception e) {
 		}
