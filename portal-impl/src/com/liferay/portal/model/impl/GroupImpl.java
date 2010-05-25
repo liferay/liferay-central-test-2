@@ -119,7 +119,7 @@ public class GroupImpl extends GroupModelImpl implements Group {
 			Company company = CompanyLocalServiceUtil.getCompany(
 				getCompanyId());
 
-			company.getAccount().getName();
+			name = company.getAccount().getName();
 		}
 
 		return name;
