@@ -21,6 +21,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
+import com.liferay.portlet.ratings.NoSuchEntryException;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.service.base.RatingsEntryLocalServiceBaseImpl;
@@ -81,6 +82,12 @@ public class RatingsEntryLocalServiceImpl
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		return ratingsEntryPersistence.findByC_C(classNameId, classPK);
+	}
+
+	public List<RatingsEntry> getEntries(
+			long userId, String className, List<Long> classPKs)
+			throws NoSuchEntryException, SystemException {
+		return ratingsEntryFinder.findByU_C_CS(userId, className, classPKs);
 	}
 
 	public RatingsEntry getEntry(long userId, String className, long classPK)

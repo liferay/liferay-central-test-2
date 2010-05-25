@@ -23,6 +23,8 @@ import com.liferay.portlet.ratings.NoSuchStatsException;
 import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.service.base.RatingsStatsLocalServiceBaseImpl;
 
+import java.util.List;
+
 /**
  * <a href="RatingsStatsLocalServiceImpl.java.html"><b><i>View Source</i></b>
  * </a>
@@ -100,6 +102,11 @@ public class RatingsStatsLocalServiceImpl
 		}
 
 		return stats;
+	}
+
+	public List<RatingsStats> getStatses(String className, List<Long> classPKs)
+		throws SystemException {
+		return ratingsStatsFinder.findByC_CS(className, classPKs);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

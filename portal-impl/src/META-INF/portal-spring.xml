@@ -303,8 +303,10 @@
 	<bean id="com.liferay.portlet.ratings.service.RatingsEntryLocalService" class="com.liferay.portlet.ratings.service.impl.RatingsEntryLocalServiceImpl" />
 	<bean id="com.liferay.portlet.ratings.service.RatingsEntryService" class="com.liferay.portlet.ratings.service.impl.RatingsEntryServiceImpl" />
 	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence" class="com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsEntryFinder" class="com.liferay.portlet.ratings.service.persistence.RatingsEntryFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.ratings.service.RatingsStatsLocalService" class="com.liferay.portlet.ratings.service.impl.RatingsStatsLocalServiceImpl" />
 	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence" class="com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsStatsFinder" class="com.liferay.portlet.ratings.service.persistence.RatingsStatsFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCartLocalService" class="com.liferay.portlet.shopping.service.impl.ShoppingCartLocalServiceImpl" />
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCategoryLocalService" class="com.liferay.portlet.shopping.service.impl.ShoppingCategoryLocalServiceImpl" />

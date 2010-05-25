@@ -27,6 +27,10 @@
 <%@ page import="com.liferay.portlet.messageboards.service.permission.MBDiscussionPermission" %>
 <%@ page import="com.liferay.portlet.messageboards.util.BBCodeUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.util.comparator.MessageCreateDateComparator" %>
+<%@ page import="com.liferay.portlet.ratings.model.RatingsEntry" %>
+<%@ page import="com.liferay.portlet.ratings.model.RatingsStats" %>
+<%@ page import="com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil" %>
 
 <portlet:defineObjects />
 
@@ -207,6 +211,14 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 				searchContainer.setResults(messages);
 			}
 
+			List<Long> classPKs = new ArrayList<Long>();
+			for(MBMessage m : messages) {
+				classPKs.add(m.getMessageId());
+			}
+
+			List<RatingsEntry> ratingsEntries = RatingsEntryLocalServiceUtil.getEntries(themeDisplay.getUserId(), MBMessage.class.getName(), classPKs);
+			List<RatingsStats> ratingsStatses = RatingsStatsLocalServiceUtil.getStatses(MBMessage.class.getName(), classPKs);
+
 			for (i = 1; i <= messages.size(); i++) {
 				message = messages.get(i - 1);
 
@@ -287,12 +299,16 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 								<%
 								Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletDisplay.getId());
+								RatingsEntry ratingsEntry = findRatingsEntry(ratingsEntries, message.getMessageId());
+								RatingsStats ratingStats = findRatingsStats(ratingsStatses, message.getMessageId());
 								%>
 
 								<td>
 									<liferay-ui:ratings
 										className="<%= MBMessage.class.getName() %>"
 										classPK="<%= message.getMessageId() %>"
+										ratingsEntry="<%= ratingsEntry %>"
+										ratingsStats="<%= ratingStats %>"
 										type="thumbs"
 									/>
 								</td>
@@ -470,3 +486,27 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 		}
 	</aui:script>
 </c:if>
+
+<%!
+	private RatingsEntry findRatingsEntry(List<RatingsEntry> ratingEntries, long classPK) {
+		RatingsEntry ratingsEntry = null;
+		for(RatingsEntry entry : ratingEntries) {
+			if(entry.getClassPK() == classPK) {
+				ratingsEntry = entry;
+				break;
+			}
+		}
+		return ratingsEntry;
+	}
+
+	private RatingsStats findRatingsStats(List<RatingsStats> ratingStatses, long classPK) {
+		RatingsStats ratingsStats = null;
+		for(RatingsStats stats : ratingStatses) {
+			if(stats.getClassPK() == classPK) {
+				ratingsStats = stats;
+				break;
+			}
+		}
+		return ratingsStats;
+	}
+%>

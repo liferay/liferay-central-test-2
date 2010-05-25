@@ -14,6 +14,8 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portlet.ratings.model.RatingsEntry;
+import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  * <a href="RatingsTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class RatingsTag extends IncludeTag {
 
@@ -37,6 +40,16 @@ public class RatingsTag extends IncludeTag {
 		_numberOfStars = numberOfStars;
 	}
 
+	public void setRatingsEntry(RatingsEntry ratingsEntry) {
+		_ratingsEntry = ratingsEntry;
+		_preSetRatingsEntry = true;
+	}
+
+	public void setRatingsStats(RatingsStats ratingsStats) {
+		_ratingsStats = ratingsStats;
+		_preSetRatingsStats = true;
+	}
+
 	public void setType(String type) {
 		_type = type;
 	}
@@ -50,6 +63,10 @@ public class RatingsTag extends IncludeTag {
 		_classPK = 0;
 		_numberOfStars = 5;
 		_type = "stars";
+		_preSetRatingsEntry = false;
+		_preSetRatingsStats = false;
+		_ratingsEntry = null;
+		_ratingsStats = null;
 		_url = null;
 	}
 
@@ -63,6 +80,18 @@ public class RatingsTag extends IncludeTag {
 			"liferay-ui:ratings:classPK", String.valueOf(_classPK));
 		request.setAttribute(
 			"liferay-ui:ratings:numberOfStars", String.valueOf(_numberOfStars));
+		request.setAttribute(
+			"liferay-ui:ratings:preSetRatingsEntry", _preSetRatingsEntry);
+		if (_preSetRatingsEntry) {
+			request.setAttribute(
+				"liferay-ui:ratings:ratingsEntry", _ratingsEntry);
+		}
+		request.setAttribute(
+			"liferay-ui:ratings:preSetRatingsStats", _preSetRatingsStats);
+		if (_preSetRatingsStats) {
+			request.setAttribute(
+				"liferay-ui:ratings:ratingsStats", _ratingsStats);
+		}
 		request.setAttribute("liferay-ui:ratings:type", _type);
 		request.setAttribute("liferay-ui:ratings:url", _url);
 	}
@@ -72,6 +101,10 @@ public class RatingsTag extends IncludeTag {
 	private String _className;
 	private long _classPK;
 	private int _numberOfStars = 5;
+	private boolean _preSetRatingsEntry;
+	private boolean _preSetRatingsStats;
+	private RatingsEntry _ratingsEntry;
+	private RatingsStats _ratingsStats;
 	private String _type = "stars";
 	private String _url;
 

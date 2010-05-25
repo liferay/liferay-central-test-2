@@ -144,6 +144,12 @@ public class RatingsStatsLocalServiceWrapper implements RatingsStatsLocalService
 		return _ratingsStatsLocalService.getStats(className, classPK);
 	}
 
+	public java.util.List<com.liferay.portlet.ratings.model.RatingsStats> getStatses(
+		java.lang.String className, java.util.List<java.lang.Long> classPKs)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ratingsStatsLocalService.getStatses(className, classPKs);
+	}
+
 	public RatingsStatsLocalService getWrappedRatingsStatsLocalService() {
 		return _ratingsStatsLocalService;
 	}

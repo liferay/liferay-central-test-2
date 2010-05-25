@@ -145,6 +145,12 @@ public class RatingsStatsLocalServiceUtil {
 		return getService().getStats(className, classPK);
 	}
 
+	public static java.util.List<com.liferay.portlet.ratings.model.RatingsStats> getStatses(
+		java.lang.String className, java.util.List<java.lang.Long> classPKs)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getStatses(className, classPKs);
+	}
+
 	public static RatingsStatsLocalService getService() {
 		if (_service == null) {
 			_service = (RatingsStatsLocalService)PortalBeanLocatorUtil.locate(RatingsStatsLocalService.class.getName());

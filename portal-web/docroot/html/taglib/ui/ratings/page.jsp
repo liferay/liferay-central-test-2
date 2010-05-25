@@ -28,6 +28,8 @@ String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_ui_rating
 String className = (String)request.getAttribute("liferay-ui:ratings:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:ratings:classPK"));
 int numberOfStars = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:ratings:numberOfStars"));
+Boolean preSetRatingsEntry = (Boolean)request.getAttribute("liferay-ui:ratings:preSetRatingsEntry");
+Boolean preSetRatingsStats = (Boolean)request.getAttribute("liferay-ui:ratings:preSetRatingsStats");
 String type = GetterUtil.getString((String)request.getAttribute("liferay-ui:ratings:type"));
 String url = (String)request.getAttribute("liferay-ui:ratings:url");
 
@@ -38,18 +40,29 @@ if (numberOfStars < 1) {
 if (Validator.isNull(url)) {
 	url = themeDisplay.getPathMain() + "/ratings/rate_entry";
 }
-
+RatingsEntry ratingsEntry = null;
+RatingsStats ratingsStats = null;
 double yourScore = 0.0;
 
 try {
-	RatingsEntry entry = RatingsEntryLocalServiceUtil.getEntry(themeDisplay.getUserId(), className, classPK);
-
-	yourScore = entry.getScore();
+	if(preSetRatingsEntry) {
+		ratingsEntry = (RatingsEntry)request.getAttribute("liferay-ui:ratings:ratingsEntry");
+	}
+	else {
+		ratingsEntry = RatingsEntryLocalServiceUtil.getEntry(themeDisplay.getUserId(), className, classPK);
+	}
+	if(ratingsEntry != null) {
+		yourScore = ratingsEntry.getScore();
+	}
 }
 catch (NoSuchEntryException nsee) {
 }
-
-RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
+if(preSetRatingsStats) {
+	ratingsStats = (RatingsStats)request.getAttribute("liferay-ui:ratings:ratingsStats");
+}
+if(ratingsStats == null) {
+	ratingsStats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
+}
 %>
 
 <c:if test="<%= !themeDisplay.isFacebook() %>">
@@ -208,9 +221,9 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 						render: null,
 						boundingBox: '#<%= randomNamespace %>ratingScore',
 						canReset: false,
-						defaultSelected: <%= stats.getAverageScore() %>,
+						defaultSelected: <%= ratingsStats.getAverageScore() %>,
 						disabled: true,
-						label: getLabel('<liferay-ui:message key="average" />', <%= stats.getTotalEntries() %>, <%= stats.getAverageScore() %>),
+						label: getLabel('<liferay-ui:message key="average" />', <%= ratingsStats.getTotalEntries() %>, <%= ratingsStats.getAverageScore() %>),
 						size: <%= numberOfStars %>
 					}
 				);
@@ -222,7 +235,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 			</c:when>
 			<c:when test='<%= type.equals("thumbs") && themeDisplay.isSignedIn() %>'>
 
-				var label = getLabel(fixScore(<%= stats.getTotalScore() %>), <%= stats.getTotalEntries() %>, <%= stats.getAverageScore() %>);
+				var label = getLabel(fixScore(<%= ratingsStats.getTotalScore() %>), <%= ratingsStats.getTotalEntries() %>, <%= ratingsStats.getAverageScore() %>);
 				var yourScoreindex = convertToIndex(<%= yourScore %>);
 
 				var ratingThumb = new A.ThumbRating(

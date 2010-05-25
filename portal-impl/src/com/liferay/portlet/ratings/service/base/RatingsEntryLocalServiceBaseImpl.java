@@ -43,7 +43,9 @@ import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalService;
 import com.liferay.portlet.ratings.service.RatingsEntryService;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
+import com.liferay.portlet.ratings.service.persistence.RatingsEntryFinder;
 import com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence;
+import com.liferay.portlet.ratings.service.persistence.RatingsStatsFinder;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
 
 import java.util.List;
@@ -158,6 +160,14 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 		this.ratingsEntryPersistence = ratingsEntryPersistence;
 	}
 
+	public RatingsEntryFinder getRatingsEntryFinder() {
+		return ratingsEntryFinder;
+	}
+
+	public void setRatingsEntryFinder(RatingsEntryFinder ratingsEntryFinder) {
+		this.ratingsEntryFinder = ratingsEntryFinder;
+	}
+
 	public RatingsStatsLocalService getRatingsStatsLocalService() {
 		return ratingsStatsLocalService;
 	}
@@ -174,6 +184,14 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 	public void setRatingsStatsPersistence(
 		RatingsStatsPersistence ratingsStatsPersistence) {
 		this.ratingsStatsPersistence = ratingsStatsPersistence;
+	}
+
+	public RatingsStatsFinder getRatingsStatsFinder() {
+		return ratingsStatsFinder;
+	}
+
+	public void setRatingsStatsFinder(RatingsStatsFinder ratingsStatsFinder) {
+		this.ratingsStatsFinder = ratingsStatsFinder;
 	}
 
 	public CounterLocalService getCounterLocalService() {
@@ -330,10 +348,14 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 	protected RatingsEntryService ratingsEntryService;
 	@BeanReference(type = RatingsEntryPersistence.class)
 	protected RatingsEntryPersistence ratingsEntryPersistence;
+	@BeanReference(type = RatingsEntryFinder.class)
+	protected RatingsEntryFinder ratingsEntryFinder;
 	@BeanReference(type = RatingsStatsLocalService.class)
 	protected RatingsStatsLocalService ratingsStatsLocalService;
 	@BeanReference(type = RatingsStatsPersistence.class)
 	protected RatingsStatsPersistence ratingsStatsPersistence;
+	@BeanReference(type = RatingsStatsFinder.class)
+	protected RatingsStatsFinder ratingsStatsFinder;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = ResourceLocalService.class)
