@@ -150,6 +150,19 @@ public class MBMessageLocalServiceUtil {
 			classPK, threadId, parentMessageId, subject, body, serviceContext);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
+		java.lang.String uuid, long userId, java.lang.String userName,
+		long groupId, java.lang.String className, long classPK, long threadId,
+		long parentMessageId, java.lang.String subject, java.lang.String body,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addDiscussionMessage(uuid, userId, userName, groupId,
+			className, classPK, threadId, parentMessageId, subject, body,
+			serviceContext);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		long userId, java.lang.String userName, long groupId, long categoryId,
 		java.lang.String subject, java.lang.String body,

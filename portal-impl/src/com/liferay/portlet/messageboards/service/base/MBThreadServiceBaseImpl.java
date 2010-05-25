@@ -64,6 +64,7 @@ import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersiste
 import com.liferay.portlet.messageboards.service.persistence.MBThreadFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
+import com.liferay.portlet.ratings.service.persistence.RatingsStatsFinder;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
 import com.liferay.portlet.social.service.SocialActivityLocalService;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
@@ -441,6 +442,14 @@ public abstract class MBThreadServiceBaseImpl extends PrincipalBean
 		this.ratingsStatsPersistence = ratingsStatsPersistence;
 	}
 
+	public RatingsStatsFinder getRatingsStatsFinder() {
+		return ratingsStatsFinder;
+	}
+
+	public void setRatingsStatsFinder(RatingsStatsFinder ratingsStatsFinder) {
+		this.ratingsStatsFinder = ratingsStatsFinder;
+	}
+
 	public SocialActivityLocalService getSocialActivityLocalService() {
 		return socialActivityLocalService;
 	}
@@ -568,6 +577,8 @@ public abstract class MBThreadServiceBaseImpl extends PrincipalBean
 	protected RatingsStatsLocalService ratingsStatsLocalService;
 	@BeanReference(type = RatingsStatsPersistence.class)
 	protected RatingsStatsPersistence ratingsStatsPersistence;
+	@BeanReference(type = RatingsStatsFinder.class)
+	protected RatingsStatsFinder ratingsStatsFinder;
 	@BeanReference(type = SocialActivityLocalService.class)
 	protected SocialActivityLocalService socialActivityLocalService;
 	@BeanReference(type = SocialActivityPersistence.class)

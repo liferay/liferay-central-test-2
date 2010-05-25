@@ -136,6 +136,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String body, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		return addDiscussionMessage(
+			null, userId, userName, groupId, className, classPK, threadId,
+			parentMessageId, subject, body, serviceContext);
+	}
+
+	public MBMessage addDiscussionMessage(
+			String uuid, long userId, String userName, long groupId,
+			String className, long classPK, long threadId, long parentMessageId,
+			String subject, String body, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
 		// Message
 
 		long categoryId = MBCategoryConstants.DISCUSSION_CATEGORY_ID;
@@ -157,9 +168,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		serviceContext.setAttribute("classPK", String.valueOf(classPK));
 
 		MBMessage message = addMessage(
-			userId, userName, groupId, categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, allowPingbacks,
-			serviceContext);
+			uuid, userId, userName, groupId, categoryId, threadId,
+			parentMessageId, subject, body, files, anonymous, priority,
+			allowPingbacks, serviceContext);
 
 		message.setClassNameId(classNameId);
 		message.setClassPK(classPK);
@@ -2061,8 +2072,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long parentMessageId = message.getParentMessageId();
 
 			if (className.equals(BlogsEntry.class.getName()) &&
-				parentMessageId !=
-					MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) {
+				(parentMessageId !=
+					MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID)) {
 
 				// Social
 
