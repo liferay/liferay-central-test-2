@@ -16,8 +16,6 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-<%--Portlet Configuration --%>
-
 .portlet-configuration fieldset {
 	margin-bottom: 5px;
 }

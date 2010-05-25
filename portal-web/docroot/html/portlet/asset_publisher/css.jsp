@@ -233,8 +233,6 @@
 	margin-left: 0;
 }
 
-<%--Portlet Configuration --%>
-
 .portlet-configuration .aui-form .queryRules fieldset {
 	padding: 0;
 }
