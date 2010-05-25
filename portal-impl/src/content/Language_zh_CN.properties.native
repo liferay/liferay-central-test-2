@@ -344,12 +344,6 @@ action.VIEW_USER=查看用户
 ## Messages
 ##
 
-repeat-until=重复直到 (Automatic Translation)
-
-
-##
-## Currency
-##
 1-day=1 天
 1-minute=1 分钟
 1-month=1 个月
@@ -3295,6 +3289,7 @@ repeat-daily=每日重复
 repeat-left-to-right=从左到右重复
 repeat-monthly=每月重复
 repeat-top-to-bottom=从上到下重复
+repeat-until=重复直到 (Automatic Translation)
 repeat-weekly=每周重复
 repeat-yearly=每年重复
 repeat=重复
@@ -4854,6 +4849,10 @@ zh_en=中文（简体）到英语
 zip-postal=邮政编码
 zip=邮政编码
 zt_en=中文（繁体）到英语
+
+##
+## Currency
+##
 
 currency.AED=阿拉伯联合酋长国迪拉姆
 currency.ALL=阿尔巴尼亚列克

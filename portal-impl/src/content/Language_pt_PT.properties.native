@@ -344,12 +344,6 @@ action.VIEW_USER=Usuário Da Vista
 ## Messages
 ##
 
-repeat-until=Repetição até (Automatic Translation)
-
-
-##
-## Currency
-##
 1-day=1 dia
 1-minute=1 minuto
 1-month=1 mês
@@ -3295,6 +3289,7 @@ repeat-daily=Repeat Diário
 repeat-left-to-right=Repita à esquerda à direita
 repeat-monthly=Repita A Revista mensal
 repeat-top-to-bottom=Repita o alto para assentar-se
+repeat-until=Repetição até (Automatic Translation)
 repeat-weekly=Repita O Semanário
 repeat-yearly=Repita Anualmente
 repeat=Repeat
@@ -4854,6 +4849,10 @@ zh_en=Chinês (China) ao inglês
 zip-postal=Zip/Postal
 zip=Fecho de correr
 zt_en=Chinês (Formosa) ao inglês
+
+##
+## Currency
+##
 
 currency.AED=Dirham dos Uae
 currency.ALL=Lek Albanian

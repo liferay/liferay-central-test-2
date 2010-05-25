@@ -344,12 +344,6 @@ action.VIEW_USER=看法用戶
 ## Messages
 ##
 
-repeat-until=重複直到 (Automatic Translation)
-
-
-##
-## Currency
-##
 1-day=1 天
 1-minute=1分鐘
 1-month=1 個月
@@ -3295,6 +3289,7 @@ repeat-daily=重覆每日
 repeat-left-to-right=重覆左在右邊
 repeat-monthly=重覆月度
 repeat-top-to-bottom=重覆上面基於
+repeat-until=重複直到 (Automatic Translation)
 repeat-weekly=重覆週刊
 repeat-yearly=逐年重覆
 repeat=重覆
@@ -4854,6 +4849,10 @@ zh_en=中文(中國) 對英語
 zip-postal=Zip/Postal
 zip=郵遞區號
 zt_en=中文(臺灣) 對英語
+
+##
+## Currency
+##
 
 currency.AED=阿拉伯聯合酋長國迪拉姆
 currency.ALL=阿爾巴尼亞列克

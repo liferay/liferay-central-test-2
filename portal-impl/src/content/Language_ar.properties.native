@@ -344,12 +344,6 @@ action.VIEW_USER=إعرض مستخدم
 ## Messages
 ##
 
-repeat-until=Repeat until (Automatic Copy)
-
-
-##
-## Currency
-##
 1-day=يوم واحد
 1-minute=1 Minute (Automatic Copy)
 1-month=شهر واحد
@@ -3295,6 +3289,7 @@ repeat-daily=تكرار يومي
 repeat-left-to-right=Repeat Left to Right (Automatic Copy)
 repeat-monthly=تكرار شهري
 repeat-top-to-bottom=Repeat Top to Bottom (Automatic Copy)
+repeat-until=Repeat until (Automatic Copy)
 repeat-weekly=تكرار أسبوعي
 repeat-yearly=تكرار سنوي
 repeat=التكرار
@@ -4854,6 +4849,10 @@ zh_en=صيني إلى الإنجليزي
 zip-postal=الرمز البريدي
 zip=الرمز البريدي
 zt_en=تايواني إلى إنجليزي
+
+##
+## Currency
+##
 
 currency.AED=درهم اماراتي
 currency.ALL=ليك ألباني

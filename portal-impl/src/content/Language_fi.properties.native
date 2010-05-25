@@ -344,12 +344,6 @@ action.VIEW_USER=Näytä käyttäjä
 ## Messages
 ##
 
-repeat-until=Repeat until (Automatic Copy)
-
-
-##
-## Currency
-##
 1-day=Päivän sisällä
 1-minute=1 minuutti
 1-month=1 kuukausi
@@ -3295,6 +3289,7 @@ repeat-daily=Toista päivittäin
 repeat-left-to-right=Toista vasemmalta oikealle
 repeat-monthly=Toista kuukausittain
 repeat-top-to-bottom=Toista ylhäältä alas
+repeat-until=Repeat until (Automatic Copy)
 repeat-weekly=Toista viikoittain
 repeat-yearly=Toista vuosittain
 repeat=Toista
@@ -4854,6 +4849,10 @@ zh_en=Kiinasta (Kiina) englanniksi
 zip-postal=Postinumero
 zip=Postinumero
 zt_en=Kiinasta (Taiwan) englanniksi
+
+##
+## Currency
+##
 
 currency.AED=UAE:n dirham
 currency.ALL=Albanian lek

@@ -344,12 +344,6 @@ action.VIEW_USER=Показване на потребител
 ## Messages
 ##
 
-repeat-until=Repeat until (Automatic Copy)
-
-
-##
-## Currency
-##
 1-day=1 ден
 1-minute=1 минута
 1-month=1 месец
@@ -3295,6 +3289,7 @@ repeat-daily=Повтаряне всеки ден
 repeat-left-to-right=Повтаряне от ляво надясно
 repeat-monthly=Повтаряне всеки месец
 repeat-top-to-bottom=Повтаряне от горе надолу
+repeat-until=Repeat until (Automatic Copy)
 repeat-weekly=Повтаряне всяка седмица
 repeat-yearly=Повтаряне всяка година
 repeat=Повтаряне
@@ -4854,6 +4849,10 @@ zh_en=Китайски (Китай) към Английски
 zip-postal=Пощенски код (ZIP)
 zip=Zip
 zt_en=Китайски (Тайван) към Английски
+
+##
+## Currency
+##
 
 currency.AED=UAE Dirham
 currency.ALL=Албански лек

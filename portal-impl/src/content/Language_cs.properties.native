@@ -344,12 +344,6 @@ action.VIEW_USER=Zobrazit uživatele
 ## Messages
 ##
 
-repeat-until=Repeat until (Automatic Copy)
-
-
-##
-## Currency
-##
 1-day=1 den
 1-minute=1 minuta
 1-month=1 měsíc
@@ -3295,6 +3289,7 @@ repeat-daily=Opakovat každý den
 repeat-left-to-right=Opakovat zleva doprava
 repeat-monthly=Opakovat každý měsíc
 repeat-top-to-bottom=Opakovat odshora dolů
+repeat-until=Repeat until (Automatic Copy)
 repeat-weekly=Opakovat každý týden
 repeat-yearly=Opakovat každý rok
 repeat=Opakovat
@@ -4854,6 +4849,10 @@ zh_en=Čínsky -> Anglicky
 zip-postal=Poštovní směrovací číslo
 zip=PSČ
 zt_en=Čínsky (Taiwan) -> Anglicky
+
+##
+## Currency
+##
 
 currency.AED=UAE Dirham
 currency.ALL=Albánský Lek

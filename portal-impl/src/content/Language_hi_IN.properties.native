@@ -344,12 +344,6 @@ action.VIEW_USER=यूज़र का निरीक्षण करना
 ## Messages
 ##
 
-repeat-until=Repeat until (Automatic Copy)
-
-
-##
-## Currency
-##
 1-day=1 दिन
 1-minute=1 मिनट
 1-month=1 महीना
@@ -3295,6 +3289,7 @@ repeat-daily=रोज दोहराएँ
 repeat-left-to-right=लेफ्ट से राइट दोहराएँ 
 repeat-monthly=प्रतिमास दोहराएँ 
 repeat-top-to-bottom=ऊपर से नीचे दोहराएँ 
+repeat-until=Repeat until (Automatic Copy)
 repeat-weekly=साप्ताहिक दोहराएँ 
 repeat-yearly=वार्षिक दोहराएँ 
 repeat=दोहराएँ 
@@ -4854,6 +4849,10 @@ zh_en=चीनी (चीन) से अंग्रेजी
 zip-postal=ज़िप / पोस्टल 
 zip=ज़िप
 zt_en=चीनी (ताइवान) से अंग्रेजी
+
+##
+## Currency
+##
 
 currency.AED=संयुक्त अरब अमीरात दिर्हाम
 currency.ALL=अल्बानियाई लेक

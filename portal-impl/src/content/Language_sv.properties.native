@@ -344,12 +344,6 @@ action.VIEW_USER=Se användare
 ## Messages
 ##
 
-repeat-until=Repeat until (Automatic Copy)
-
-
-##
-## Currency
-##
 1-day=1 dag
 1-minute=1 minut
 1-month=1 månad
@@ -3295,6 +3289,7 @@ repeat-daily=Upprepa dagligen
 repeat-left-to-right=Upprepa vänster till höger
 repeat-monthly=Upprepa månadsvis
 repeat-top-to-bottom=Upprepa topp till botten
+repeat-until=Repeat until (Automatic Copy)
 repeat-weekly=Upprepa veckovis
 repeat-yearly=Upprepa årligen
 repeat=Upprepa
@@ -4854,6 +4849,10 @@ zh_en=Kinesiska (Kina) till Engelska
 zip-postal=Postnummer
 zip=Postnummer
 zt_en=Kinesiska (Taiwan) till Engelska
+
+##
+## Currency
+##
 
 currency.AED=arabiska dirham
 currency.ALL=Albanian Lek

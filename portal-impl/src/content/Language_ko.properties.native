@@ -344,12 +344,6 @@ action.VIEW_USER=전망 사용자
 ## Messages
 ##
 
-repeat-until=반복까지 (Automatic Translation)
-
-
-##
-## Currency
-##
 1-day=1 일
 1-minute=1 분
 1-month=1 달
@@ -3295,6 +3289,7 @@ repeat-daily=매일 반복
 repeat-left-to-right=반복은 오른쪽으로 떠났다
 repeat-monthly=매달 반복
 repeat-top-to-bottom=바닥에 반복 정상
+repeat-until=반복까지 (Automatic Translation)
 repeat-weekly=주간 반복
 repeat-yearly=매년의 반복
 repeat=반복
@@ -4854,6 +4849,10 @@ zh_en=영어에 중국인
 zip-postal=Zip/Postal
 zip=지퍼
 zt_en=영어에 중국어 (대만)
+
+##
+## Currency
+##
 
 currency.AED=아랍 에미리트 연방 Dirham
 currency.ALL=알바니아 Lek

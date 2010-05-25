@@ -344,12 +344,6 @@ action.VIEW_USER=Ikusi erabiltzailea
 ## Messages
 ##
 
-repeat-until=Repeat until (Automatic Copy)
-
-
-##
-## Currency
-##
 1-day=Egun 1
 1-minute=Minutu 1
 1-month=Hilabete 1
@@ -3295,6 +3289,7 @@ repeat-daily=Errepikatu egunero
 repeat-left-to-right=Errepikatu ezkerretik eskuinera
 repeat-monthly=Errepikatu hilero
 repeat-top-to-bottom=Errepikatu goitik behera
+repeat-until=Repeat until (Automatic Copy)
 repeat-weekly=Errepikatu astero
 repeat-yearly=Errepikatu urtero
 repeat=Errepikatu
@@ -4854,6 +4849,10 @@ zh_en=Txineratik ingelesera
 zip-postal=Posta Kodea
 zip=Posta Kodea
 zt_en=Txineratik (Taiwan) ingelesera
+
+##
+## Currency
+##
 
 currency.AED=Arabiar Emirerri Batuetako dirhama
 currency.ALL=Albaniako leka

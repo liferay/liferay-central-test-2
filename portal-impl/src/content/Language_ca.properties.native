@@ -344,12 +344,6 @@ action.VIEW_USER=Usuari de la vista
 ## Messages
 ##
 
-repeat-until=Repeat until (Automatic Copy)
-
-
-##
-## Currency
-##
 1-day=1 Dia
 1-minute=1 minut
 1-month=1 Mes
@@ -3295,6 +3289,7 @@ repeat-daily=Repeteix diàriament
 repeat-left-to-right=Repeteix d'esquerre a dreta
 repeat-monthly=Repeteix mensualment
 repeat-top-to-bottom=Repeteix de dalt a baix
+repeat-until=Repeat until (Automatic Copy)
 repeat-weekly=Repeteix setmanalment
 repeat-yearly=Repeteix anualment
 repeat=Repeteix
@@ -4854,6 +4849,10 @@ zh_en=Xinès (Xina) a anglès
 zip-postal=Codi postal
 zip=Codi
 zt_en=Xinès (Taiwan) a anglès
+
+##
+## Currency
+##
 
 currency.AED=Dirham UAE
 currency.ALL=Lek albanès

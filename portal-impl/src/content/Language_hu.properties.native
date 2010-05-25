@@ -344,12 +344,6 @@ action.VIEW_USER=Felhasználó megtekintése
 ## Messages
 ##
 
-repeat-until=Repeat until (Automatic Copy)
-
-
-##
-## Currency
-##
 1-day=1 nap
 1-minute=1 perc
 1-month=1 hónap
@@ -3295,6 +3289,7 @@ repeat-daily=Ismétlés naponta
 repeat-left-to-right=Ismétlés balról jobbra
 repeat-monthly=Ismétlés havonta
 repeat-top-to-bottom=Ismétlés fentről lefelé
+repeat-until=Repeat until (Automatic Copy)
 repeat-weekly=Ismétlés hetente
 repeat-yearly=Ismétlés évente
 repeat=Ismétlés
@@ -4854,6 +4849,10 @@ zh_en=Kínairól angolra
 zip-postal=Irányítószám
 zip=Irányítószám
 zt_en=Tajvani kínairól angolra
+
+##
+## Currency
+##
 
 currency.AED=UAE dirham
 currency.ALL=Albán lek

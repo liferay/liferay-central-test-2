@@ -344,12 +344,6 @@ action.VIEW_USER=مشاهده کاربر
 ## Messages
 ##
 
-repeat-until=Repeat until (Automatic Copy)
-
-
-##
-## Currency
-##
 1-day=1 Day (Automatic Copy)
 1-minute=1 Minute (Automatic Copy)
 1-month=1 Month (Automatic Copy)
@@ -3295,6 +3289,7 @@ repeat-daily=تکرار روزانه
 repeat-left-to-right=Repeat Left to Right (Automatic Copy)
 repeat-monthly=تکرار ماهانه
 repeat-top-to-bottom=Repeat Top to Bottom (Automatic Copy)
+repeat-until=Repeat until (Automatic Copy)
 repeat-weekly=تکرار هفتگی
 repeat-yearly=تکرار سالانه
 repeat=تکرار
@@ -4854,6 +4849,10 @@ zh_en=چينی )چين( به انگليسی
 zip-postal=کدپستی
 zip=کدپستی
 zt_en=چينی )تايوان( به انگليسی
+
+##
+## Currency
+##
 
 currency.AED=UAE Dirham
 currency.ALL=Albanian Lek

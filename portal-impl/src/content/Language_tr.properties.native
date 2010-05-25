@@ -344,12 +344,6 @@ action.VIEW_USER=Kullanıcı Görüntüle
 ## Messages
 ##
 
-repeat-until=Repeat until (Automatic Copy)
-
-
-##
-## Currency
-##
 1-day=1 Gün
 1-minute=1 Dakika
 1-month=1 Ay
@@ -3295,6 +3289,7 @@ repeat-daily=Günlük Tekrarla
 repeat-left-to-right=Soldan Sağa Tekrarla
 repeat-monthly=Aylık Tekrarla
 repeat-top-to-bottom=Yukarıdan Aşağıya Doğru Tekrarla
+repeat-until=Repeat until (Automatic Copy)
 repeat-weekly=Haftalık Tekrarla
 repeat-yearly=Yıllık Tekrarla
 repeat=Tekrarla
@@ -4854,6 +4849,10 @@ zh_en=Çinceden (Çin) to İngilizceye
 zip-postal=Posta Kodu
 zip=Posta Kodu
 zt_en=Çinceden (Tayvan) İngilizceye
+
+##
+## Currency
+##
 
 currency.AED=UAE Dirham
 currency.ALL=Albanian Lek

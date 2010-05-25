@@ -344,12 +344,6 @@ action.VIEW_USER=Vue de l'utilisateur
 ## Messages
 ##
 
-repeat-until=Répétition jusqu'à (Automatic Translation)
-
-
-##
-## Currency
-##
 1-day=1 jour
 1-minute=1 minute
 1-month=1 mois
@@ -3295,6 +3289,7 @@ repeat-daily=Répétition Quotidienne
 repeat-left-to-right=Répéter de gauche à droite
 repeat-monthly=Répéter mensuellement
 repeat-top-to-bottom=Répéter de haut en bas
+repeat-until=Répétition jusqu'à (Automatic Translation)
 repeat-weekly=Répétition hebdomadaire
 repeat-yearly=Répéter annuellement
 repeat=Répétition
@@ -4854,6 +4849,10 @@ zh_en=Chinois en Anglais
 zip-postal=Zip/Postal
 zip=Code postal
 zt_en=Chinois (Taiwan) à l'anglais
+
+##
+## Currency
+##
 
 currency.AED=Dirham des EAU
 currency.ALL=Lek Albanais

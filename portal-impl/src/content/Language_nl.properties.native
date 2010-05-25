@@ -344,12 +344,6 @@ action.VIEW_USER=Gebruiker tonen
 ## Messages
 ##
 
-repeat-until=Herhaal tot (Automatic Translation)
-
-
-##
-## Currency
-##
 1-day=1 Dag
 1-minute=1 minuut
 1-month=1 Maand
@@ -3295,6 +3289,7 @@ repeat-daily=Herhaal dagelijks
 repeat-left-to-right=Herhaal van links naar rechts
 repeat-monthly=Herhaal maandelijks
 repeat-top-to-bottom=Herhaal van boven naar beneden
+repeat-until=Herhaal tot (Automatic Translation)
 repeat-weekly=Herhaal Weekelijks
 repeat-yearly=Herhaal jaarlijks
 repeat=Herhaal
@@ -4854,6 +4849,10 @@ zh_en=Chinees naar Engels
 zip-postal=Postcode
 zip=Postcode
 zt_en=Chinees (Taiwan) naar Engels
+
+##
+## Currency
+##
 
 currency.AED=Dirham van de V.A.E
 currency.ALL=Albanese Lek

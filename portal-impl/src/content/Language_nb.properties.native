@@ -344,12 +344,6 @@ action.VIEW_USER=Granske brukere
 ## Messages
 ##
 
-repeat-until=Repeat until (Automatic Copy)
-
-
-##
-## Currency
-##
 1-day=1 dag
 1-minute=1 Minute (Automatic Copy)
 1-month=1 måned
@@ -3295,6 +3289,7 @@ repeat-daily=Repterer daglig
 repeat-left-to-right=Repeter venstre til høyre
 repeat-monthly=Repeter månedlig
 repeat-top-to-bottom=Repeter topp til bunn
+repeat-until=Repeat until (Automatic Copy)
 repeat-weekly=Repeter ukentlig
 repeat-yearly=Repeter årlig
 repeat=Repeter
@@ -4854,6 +4849,10 @@ zh_en=Kinesisk (Kina) til Engelsk
 zip-postal=Postnummer
 zip=Postnummer
 zt_en=Kinesisk (Taiwan) til Engelsk
+
+##
+## Currency
+##
 
 currency.AED=Arabiske Dirham
 currency.ALL=Albanian Lek

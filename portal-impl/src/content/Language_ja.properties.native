@@ -344,12 +344,6 @@ action.VIEW_USER=ユーザの参照
 ## Messages
 ##
 
-repeat-until=繰り返しまでの (Automatic Translation)
-
-
-##
-## Currency
-##
 1-day=1日
 1-minute=1分
 1-month=1ヵ月
@@ -3295,6 +3289,7 @@ repeat-daily=毎日繰り返す
 repeat-left-to-right=左から右へ繰り返す
 repeat-monthly=毎月繰り返す
 repeat-top-to-bottom=上から下へ繰り返す
+repeat-until=繰り返しまでの (Automatic Translation)
 repeat-weekly=毎週繰り返す
 repeat-yearly=毎年繰り返す
 repeat=繰り返し
@@ -4854,6 +4849,10 @@ zh_en=中国語(簡体)から英語
 zip-postal=USの郵便番号
 zip=郵便番号
 zt_en=中国語(繁体)から英語
+
+##
+## Currency
+##
 
 currency.AED=UAE ディルハム
 currency.ALL=アルバニア レク

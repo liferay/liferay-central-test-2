@@ -344,12 +344,6 @@ action.VIEW_USER=Χρήστης άποψης
 ## Messages
 ##
 
-repeat-until=Επαναλάβετε μέχρι (Automatic Translation)
-
-
-##
-## Currency
-##
 1-day=1 Ημέρα
 1-minute=1 λεπτό
 1-month=1 Μήνας
@@ -3295,6 +3289,7 @@ repeat-daily=Επαναλάβετε καθημερινά
 repeat-left-to-right=Επαναλάβετε αριστερά στο δικαίωμα
 repeat-monthly=Επαναλάβετε μηνιαία
 repeat-top-to-bottom=Επαναλάβετε από πάνω έως κάτω
+repeat-until=Επαναλάβετε μέχρι (Automatic Translation)
 repeat-weekly=Επαναλάβετε την εβδομαδιαία έκδοση
 repeat-yearly=Επαναλάβετε ετήσια
 repeat=Επανάληψη
@@ -4854,6 +4849,10 @@ zh_en=Κινέζικα σε Αγγλικά
 zip-postal=Φερμουάρ/ταχυδρομικός
 zip=Τ.Κ.
 zt_en=Κινέζικα (Ταϊβάν) στα αγγλικά
+
+##
+## Currency
+##
 
 currency.AED=UAE Dirham
 currency.ALL=Lek Αλβανίας

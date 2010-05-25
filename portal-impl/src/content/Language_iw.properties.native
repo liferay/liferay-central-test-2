@@ -344,12 +344,6 @@ action.VIEW_USER=הראה משתמש
 ## Messages
 ##
 
-repeat-until=Repeat until (Automatic Copy)
-
-
-##
-## Currency
-##
 1-day=יום 1
 1-minute=1 Minute (Automatic Copy)
 1-month=חודש 1
@@ -3295,6 +3289,7 @@ repeat-daily=חזור מדי יום
 repeat-left-to-right=חזור משמאל לימין
 repeat-monthly=חזור מדי חודש
 repeat-top-to-bottom=חזור ממעלה מטה
+repeat-until=Repeat until (Automatic Copy)
 repeat-weekly=חזור מדי שבוע
 repeat-yearly=חזור מדי שנה
 repeat=חזור
@@ -4854,6 +4849,10 @@ zh_en=סינית (סין) לאנגלית
 zip-postal=Zip/Postal (Automatic Copy)
 zip=מיקוד
 zt_en=סינית (טאיוון) לאנגלית.
+
+##
+## Currency
+##
 
 currency.AED=דירהם של איגוד הנסיכויות הערביות
 currency.ALL=לק אלבני
