@@ -8,7 +8,7 @@
 			FROM
 				AssetCategory
 			INNER JOIN
-				AssetEntries_AssetTags ON
+				AssetEntries_AssetCategories ON
 					(AssetEntries_AssetCategories.categoryId = AssetCategory.categoryId)
 			WHERE
 				(AssetEntries_AssetCategories.entryId IN (
@@ -67,16 +67,12 @@
 			INNER JOIN
 				AssetEntries_AssetCategories ON
 					(AssetEntries_AssetCategories.categoryId = AssetCategory.categoryId)
+			INNER JOIN
+				AssetEntry ON
+					(AssetEntries_AssetCategories.entryId = AssetEntry.entryId)
 			WHERE
-				(AssetEntries_AssetCategories.entryId IN (
-					SELECT
-						entryId
-					FROM
-						AssetEntry
-					WHERE
-						(AssetEntry.classNameId = ?) AND
-						(AssetEntry.classPK = ?)
-				))
+				(AssetEntry.classNameId = ?) AND
+				(AssetEntry.classPK = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.asset.service.persistence.AssetCategoryFinder.findByG_N_P">
@@ -222,16 +218,12 @@
 			INNER JOIN
 				AssetEntries_AssetTags ON
 					(AssetEntries_AssetTags.tagId = AssetTag.tagId)
+			INNER JOIN
+				AssetEntry ON
+					(AssetEntries_AssetTags.entryId = AssetEntry.entryId)
 			WHERE
-				(AssetEntries_AssetTags.entryId IN (
-					SELECT
-						entryId
-					FROM
-						AssetEntry
-					WHERE
-						(AssetEntry.classNameId = ?) AND
-						(AssetEntry.classPK = ?)
-				))
+				(AssetEntry.classNameId = ?) AND
+				(AssetEntry.classPK = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.asset.service.persistence.AssetTagFinder.findByG_C_N">
