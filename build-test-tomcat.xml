@@ -37,14 +37,14 @@
 		<antcall target="replace-remote-file">
 			<param name="remote.host" value="${cluster-node.host}" />
 			<param name="remote.file" value="/liferay-portal-${lp.version}/tomcat-6.0.26/bin/startup.bat" />
-			<param name="remote.replace.token" value='set "CATALINA_HOME=%cd%"' />
+			<param name="remote.replace.token" value="set &quot;CATALINA_HOME=%cd%&quot;" />
 			<param name="remote.replace.value" value="set CATALINA_HOME=C:\liferay-portal-${lp.version}\tomcat-6.0.26" />
 		</antcall>
 
 		<antcall target="replace-remote-file">
 			<param name="remote.host" value="${cluster-node.host}" />
 			<param name="remote.file" value="/liferay-portal-${lp.version}/tomcat-6.0.26/bin/shutdown.bat" />
-			<param name="remote.replace.token" value='set "CATALINA_HOME=%cd%"' />
+			<param name="remote.replace.token" value="set &quot;CATALINA_HOME=%cd%&quot;" />
 			<param name="remote.replace.value" value="set CATALINA_HOME=C:\liferay-portal-${lp.version}\tomcat-6.0.26" />
 		</antcall>
 
