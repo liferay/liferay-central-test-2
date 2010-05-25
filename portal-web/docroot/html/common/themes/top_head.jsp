@@ -32,13 +32,24 @@
 <%
 List<Portlet> portlets = null;
 
+String ppid = ParamUtil.getString(request, "p_p_id");
+
 if (layout != null) {
-	if (layout.isTypePortlet()) {
+	if (ppid.equals(PortletKeys.PORTLET_CONFIGURATION)) {
+		portlets = new ArrayList<Portlet>();
+
+		portlets.add(PortletLocalServiceUtil.getPortletById(company.getCompanyId(), PortletKeys.PORTLET_CONFIGURATION));
+
+		ppid = ParamUtil.getString(request, PortalUtil.getPortletNamespace(ppid) + "portletResource");
+
+		if (Validator.isNotNull(ppid)) {
+			portlets.add(PortletLocalServiceUtil.getPortletById(company.getCompanyId(), ppid));
+		}
+	}
+	else if (layout.isTypePortlet()) {
 		portlets = layoutTypePortlet.getAllPortlets();
 
 		if (themeDisplay.isStateMaximized()) {
-			String ppid = ParamUtil.getString(request, "p_p_id");
-
 			if (Validator.isNotNull(ppid)) {
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), ppid);
 
@@ -46,19 +57,6 @@ if (layout != null) {
 					portlets.add(portlet);
 				}
 			}
-		}
-	}
-	else if (layout.isTypeControlPanel() || layout.isTypePanel()) {
-		portlets = new ArrayList<Portlet>();
-
-		String ppid = ParamUtil.getString(request, "p_p_id");
-
-		if (ppid.equals(PortletKeys.PORTLET_CONFIGURATION)) {
-			ppid = ParamUtil.getString(request, PortalUtil.getPortletNamespace(ppid) + "portletResource");
-		}
-
-		if (Validator.isNotNull(ppid)) {
-			portlets.add(PortletLocalServiceUtil.getPortletById(company.getCompanyId(), ppid));
 		}
 	}
 
