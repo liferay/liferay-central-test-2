@@ -32,9 +32,9 @@
 <%
 List<Portlet> portlets = null;
 
-String ppid = ParamUtil.getString(request, "p_p_id");
-
 if (layout != null) {
+	String ppid = ParamUtil.getString(request, "p_p_id");
+
 	if (ppid.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 		portlets = new ArrayList<Portlet>();
 
@@ -59,7 +59,7 @@ if (layout != null) {
 			}
 		}
 	}
-	else if ((layout.isTypeControlPanel() || layout.isTypePanel()) && (Validator.isNotNull(ppid))) {
+	else if ((layout.isTypeControlPanel() || layout.isTypePanel()) && Validator.isNotNull(ppid)) {
 		portlets = new ArrayList<Portlet>();
 
 		portlets.add(PortletLocalServiceUtil.getPortletById(company.getCompanyId(), ppid));
