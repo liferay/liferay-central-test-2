@@ -175,6 +175,78 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 				</a>
 			</li>
 		</c:if>
+
+		<c:if test="<%= group.isControlPanel() %>">
+
+			<%
+			String refererGroupDescriptiveName = null;
+			String backURL = null;
+
+			if (themeDisplay.getRefererPlid() > 0) {
+				Layout refererLayout = LayoutLocalServiceUtil.getLayout(themeDisplay.getRefererPlid());
+
+				Group refererGroup = refererLayout.getGroup();
+
+				refererGroupDescriptiveName = refererGroup.getDescriptiveName();
+
+				if (refererGroup.isUser() && (refererGroup.getClassPK() == user.getUserId())) {
+					if (refererLayout.isPublicLayout()) {
+						refererGroupDescriptiveName = LanguageUtil.get(pageContext, "my-public-pages");
+					}
+					else {
+						refererGroupDescriptiveName = LanguageUtil.get(pageContext, "my-private-pages");
+					}
+				}
+
+				backURL = PortalUtil.getLayoutURL(refererLayout, themeDisplay);
+			}
+			else {
+				List<Group> myPlaces = user.getMyPlaces(1);
+
+				if (myPlaces.isEmpty()) {
+					refererGroupDescriptiveName = themeDisplay.getAccount().getName();
+					backURL = themeDisplay.getURLHome();
+				}
+				else {
+					Group myPlace = myPlaces.get(0);
+
+					refererGroupDescriptiveName = myPlace.getDescriptiveName();
+
+					PortletURL portletURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid, PortletRequest.ACTION_PHASE);
+
+					portletURL.setWindowState(WindowState.NORMAL);
+					portletURL.setPortletMode(PortletMode.VIEW);
+
+					portletURL.setParameter("struts_action", "/my_places/view");
+
+					portletURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
+
+					if (myPlace.getPublicLayoutsPageCount() > 0) {
+						portletURL.setParameter("privateLayout", "0");
+					}
+					else {
+						portletURL.setParameter("privateLayout", "1");
+					}
+
+					backURL = portletURL.toString();
+				}
+
+				if (Validator.isNotNull(themeDisplay.getDoAsUserId())) {
+					backURL = HttpUtil.addParameter(backURL, "doAsUserId", themeDisplay.getDoAsUserId());
+				}
+
+				if (Validator.isNotNull(themeDisplay.getDoAsUserLanguageId())) {
+					backURL = HttpUtil.addParameter(backURL, "doAsUserLanguageId", themeDisplay.getDoAsUserLanguageId());
+				}
+			}
+			%>
+
+			<li class="back-link" id="<portlet:namespace />backLink">
+				<a class="portlet-icon-back nobr" href="<%= PortalUtil.escapeRedirect(backURL) %>">
+					<%= LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(refererGroupDescriptiveName)) %>
+				</a>
+			</li>
+		</c:if>
 	</ul>
 
 	<ul class="aui-toolbar user-toolbar">
