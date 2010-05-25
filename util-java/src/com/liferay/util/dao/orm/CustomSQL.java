@@ -370,6 +370,46 @@ public class CustomSQL {
 	}
 
 	public String replaceKeywords(
+		String sql, String field, int[] values, boolean last) {
+
+		StringBundler oldSql = new StringBundler(6);
+
+		oldSql.append("(");
+		oldSql.append(field);
+		oldSql.append(" = ?)");
+
+		if (!last) {
+			oldSql.append(" [$AND_OR_CONNECTOR$]");
+		}
+
+		if ((values == null) || (values.length == 0)) {
+			return StringUtil.replace(sql, oldSql.toString(), StringPool.BLANK);
+		}
+
+		StringBundler newSql = new StringBundler(values.length * 6 + 3);
+
+		newSql.append("(");
+
+		for (int i = 0; i < values.length; i++) {
+			if (i > 0) {
+				newSql.append(" OR ");
+			}
+
+			newSql.append("(");
+			newSql.append(field);
+			newSql.append(" = ?)");
+		}
+
+		newSql.append(")");
+
+		if (!last) {
+			newSql.append(" [$AND_OR_CONNECTOR$]");
+		}
+
+		return StringUtil.replace(sql, oldSql.toString(), newSql.toString());
+	}
+
+	public String replaceKeywords(
 		String sql, String field, String operator, boolean last,
 		String[] values) {
 

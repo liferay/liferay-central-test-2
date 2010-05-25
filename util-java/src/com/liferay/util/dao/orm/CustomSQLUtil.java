@@ -81,6 +81,12 @@ public class CustomSQLUtil {
 	}
 
 	public static String replaceKeywords(
+		String sql, String field, int[] values, boolean last) {
+
+		return _instance._customSQL.replaceKeywords(sql, field, values, last);
+	}
+
+	public static String replaceKeywords(
 		String sql, String field, String operator, boolean last,
 		String[] values) {
 
