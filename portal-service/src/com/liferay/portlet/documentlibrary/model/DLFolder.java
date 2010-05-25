@@ -56,5 +56,9 @@ public interface DLFolder extends DLFolderModel {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public boolean hasLock(long userId);
+
+	public boolean isLocked();
+
 	public boolean isRoot();
 }

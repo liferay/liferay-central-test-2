@@ -235,6 +235,14 @@ public class DLFolderWrapper implements DLFolder {
 		return _dlFolder.getPathArray();
 	}
 
+	public boolean hasLock(long userId) {
+		return _dlFolder.hasLock(userId);
+	}
+
+	public boolean isLocked() {
+		return _dlFolder.isLocked();
+	}
+
 	public boolean isRoot() {
 		return _dlFolder.isRoot();
 	}
