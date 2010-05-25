@@ -144,14 +144,14 @@ AUI().add(
 											},
 											className: 'add-application',
 											io: {
+												after: {
+													success: Liferay.Dockbar._loadAddApplications
+												},
 												data: {
 													doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 													p_l_id: themeDisplay.getPlid(),
 													p_p_id: 87,
 													p_p_state: 'exclusive'
-												},
-												on: {
-													success: Liferay.Dockbar._loadAddApplications
 												},
 												uri: themeDisplay.getPathMain() + '/portal/render_portlet'
 											},
