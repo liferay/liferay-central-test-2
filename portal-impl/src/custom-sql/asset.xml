@@ -69,7 +69,7 @@
 					(AssetEntries_AssetCategories.categoryId = AssetCategory.categoryId)
 			INNER JOIN
 				AssetEntry ON
-					(AssetEntries_AssetCategories.entryId = AssetEntry.entryId)
+					(AssetEntry.entryId = AssetEntries_AssetCategories.entryId)
 			WHERE
 				(AssetEntry.classNameId = ?) AND
 				(AssetEntry.classPK = ?)
@@ -220,7 +220,7 @@
 					(AssetEntries_AssetTags.tagId = AssetTag.tagId)
 			INNER JOIN
 				AssetEntry ON
-					(AssetEntries_AssetTags.entryId = AssetEntry.entryId)
+					(AssetEntry.entryId = AssetEntries_AssetTags.entryId)
 			WHERE
 				(AssetEntry.classNameId = ?) AND
 				(AssetEntry.classPK = ?)
