@@ -12,7 +12,7 @@
 
 <body class="$css_class">
 
-$theme.include($top_messages_include)
+#dockbar()
 
 <div id="wrapper">
 	<a href="#main-content" id="skip-to-content">#language("skip-to-content")</a>

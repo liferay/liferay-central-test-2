@@ -40,7 +40,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 			<a href="javascript:;"><img alt='<liferay-ui:message key="pin-the-dockbar" />' src="<%= HtmlUtil.escape(themeDisplay.getPathThemeImages()) %>/spacer.png" /></a>
 		</li>
 
-		<c:if test="<%= (group != null) && (!group.hasStagingGroup() || group.isStagingGroup()) && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
+		<c:if test="<%= (group != null) && (!group.isControlPanel()) && (!group.hasStagingGroup() || group.isStagingGroup()) && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
 			<li class="add-content has-submenu" id="<portlet:namespace />addContent">
 				<a class="menu-button" href="javascript:;">
 					<span>
@@ -100,7 +100,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 			</li>
 		</c:if>
 
-		<c:if test="<%= themeDisplay.isShowControlPanelIcon() || themeDisplay.isShowPageSettingsIcon() || themeDisplay.isShowLayoutTemplatesIcon() %>">
+		<c:if test="<%= !group.isControlPanel() && themeDisplay.isShowControlPanelIcon() || themeDisplay.isShowPageSettingsIcon() || themeDisplay.isShowLayoutTemplatesIcon() %>">
 			<li class="manage-content has-submenu" id="<portlet:namespace />manageContent">
 				<a class="menu-button" href="javascript:;">
 					<span>
@@ -168,7 +168,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 			<span></span>
 		</li>
 
-		<c:if test="<%= themeDisplay.isSignedIn() %>">
+		<c:if test="<%= !group.isControlPanel() && themeDisplay.isSignedIn() %>">
 			<li class="toggle-controls" id="<portlet:namespace />toggleControls">
 				<a href="javascript:;">
 					<liferay-ui:message key="toggle-edit-controls" />
