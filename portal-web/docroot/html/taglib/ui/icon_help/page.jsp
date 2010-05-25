@@ -19,8 +19,9 @@
 <%
 String message = (String)request.getAttribute("liferay-ui:icon:message");
 %>
+
 <span class="taglib-icon-help">
-	<img alt="" onmouseover="Liferay.Portal.ToolTip.show(this, '<%= UnicodeLanguageUtil.get(pageContext, message) %>')" src="<%= themeDisplay.getPathThemeImages() %>/portlet/help.png" />
+	<img alt="" onMouseOver="Liferay.Portal.ToolTip.show(this, '<%= UnicodeLanguageUtil.get(pageContext, message) %>');" src="<%= themeDisplay.getPathThemeImages() %>/portlet/help.png" />
 
 	<span class="aui-helper-hidden-accessible"><liferay-ui:message key="<%= message %>" /></span>
 </span>
