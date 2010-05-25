@@ -20,8 +20,7 @@ package com.liferay.portlet.ratings.service.persistence;
  * @author Brian Wing Shun Chan
  */
 public interface RatingsEntryFinder {
-	public java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findByU_C_CS(
-		long userId, java.lang.String className,
-		java.util.List<java.lang.Long> classPKs)
+	public java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findByU_C_C(
+		long userId, long classNameId, java.util.List<java.lang.Long> classPKs)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

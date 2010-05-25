@@ -22,11 +22,10 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  * @author Brian Wing Shun Chan
  */
 public class RatingsEntryFinderUtil {
-	public static java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findByU_C_CS(
-		long userId, java.lang.String className,
-		java.util.List<java.lang.Long> classPKs)
+	public static java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findByU_C_C(
+		long userId, long classNameId, java.util.List<java.lang.Long> classPKs)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().findByU_C_CS(userId, className, classPKs);
+		return getFinder().findByU_C_C(userId, classNameId, classPKs);
 	}
 
 	public static RatingsEntryFinder getFinder() {

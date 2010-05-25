@@ -18,9 +18,8 @@ import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.model.impl.RatingsStatsImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
@@ -35,20 +34,22 @@ import java.util.List;
 public class RatingsStatsFinderImpl extends BasePersistenceImpl<RatingsStats>
 	implements RatingsStatsFinder{
 
-	public static String FIND_BY_C_CS =
-			RatingsStatsFinder.class.getName() + ".findByC_CS";
+	public static String FIND_BY_C_C =
+		RatingsStatsFinder.class.getName() + ".findByC_C";
 
-	public List<RatingsStats> findByC_CS(String className, List<Long> classPKs)
+	public List<RatingsStats> findByC_C(long classNameId, List<Long> classPKs)
 		throws SystemException {
-		long classNameId = PortalUtil.getClassNameId(className);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_CS);
-			sql = getClassPKs(sql, classPKs);
+			String sql = CustomSQLUtil.get(FIND_BY_C_C);
+
+			sql = StringUtil.replace(
+				sql, "[$CLASS_PKS$]", StringUtil.merge(classPKs));
+
 			SQLQuery q = session.createSQLQuery(sql);
 
 			q.addEntity("RatingsStats", RatingsStatsImpl.class);
@@ -58,28 +59,13 @@ public class RatingsStatsFinderImpl extends BasePersistenceImpl<RatingsStats>
 			qPos.add(classNameId);
 
 			return q.list();
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			throw new SystemException(e);
-		} finally {
+		}
+		finally {
 			closeSession(session);
 		}
 	}
-
-	protected String getClassPKs(String sql, List<Long> classPKs) {
-		int index=sql.indexOf(_CLASSPKS);
-		int size = classPKs.size();
-
-		StringBundler sb=new StringBundler(size * 2 + 1);
-		sb.append(sql.substring(0, index));
-		for(int i = 0; i < size - 1; i++) {
-			sb.append(classPKs.get(i));
-			sb.append(", ");
-		}
-		sb.append(classPKs.get(size - 1));
-		sb.append(sql.substring(index+_CLASSPKS.length()));
-		return sb.toString();
-	}
-
-	private static String _CLASSPKS = "[$CLASSPKS$]";
 
 }

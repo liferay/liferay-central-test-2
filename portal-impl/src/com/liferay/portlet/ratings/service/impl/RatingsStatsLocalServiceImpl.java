@@ -104,9 +104,12 @@ public class RatingsStatsLocalServiceImpl
 		return stats;
 	}
 
-	public List<RatingsStats> getStatses(String className, List<Long> classPKs)
+	public List<RatingsStats> getStats(String className, List<Long> classPKs)
 		throws SystemException {
-		return ratingsStatsFinder.findByC_CS(className, classPKs);
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return ratingsStatsFinder.findByC_C(classNameId, classPKs);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

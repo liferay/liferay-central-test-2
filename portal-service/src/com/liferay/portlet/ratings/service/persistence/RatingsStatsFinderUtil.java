@@ -22,10 +22,10 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  * @author Brian Wing Shun Chan
  */
 public class RatingsStatsFinderUtil {
-	public static java.util.List<com.liferay.portlet.ratings.model.RatingsStats> findByC_CS(
-		java.lang.String className, java.util.List<java.lang.Long> classPKs)
+	public static java.util.List<com.liferay.portlet.ratings.model.RatingsStats> findByC_C(
+		long classNameId, java.util.List<java.lang.Long> classPKs)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().findByC_CS(className, classPKs);
+		return getFinder().findByC_C(classNameId, classPKs);
 	}
 
 	public static RatingsStatsFinder getFinder() {

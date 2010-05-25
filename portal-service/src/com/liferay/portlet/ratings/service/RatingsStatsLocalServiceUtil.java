@@ -145,10 +145,10 @@ public class RatingsStatsLocalServiceUtil {
 		return getService().getStats(className, classPK);
 	}
 
-	public static java.util.List<com.liferay.portlet.ratings.model.RatingsStats> getStatses(
+	public static java.util.List<com.liferay.portlet.ratings.model.RatingsStats> getStats(
 		java.lang.String className, java.util.List<java.lang.Long> classPKs)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getStatses(className, classPKs);
+		return getService().getStats(className, classPKs);
 	}
 
 	public static RatingsStatsLocalService getService() {

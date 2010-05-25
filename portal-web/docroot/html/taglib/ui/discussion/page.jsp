@@ -212,12 +212,13 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			}
 
 			List<Long> classPKs = new ArrayList<Long>();
-			for(MBMessage m : messages) {
-				classPKs.add(m.getMessageId());
+
+			for (MBMessage curMessage : messages) {
+				classPKs.add(curMessage.getMessageId());
 			}
 
 			List<RatingsEntry> ratingsEntries = RatingsEntryLocalServiceUtil.getEntries(themeDisplay.getUserId(), MBMessage.class.getName(), classPKs);
-			List<RatingsStats> ratingsStatses = RatingsStatsLocalServiceUtil.getStatses(MBMessage.class.getName(), classPKs);
+			List<RatingsStats> ratingsStatsList = RatingsStatsLocalServiceUtil.getStats(MBMessage.class.getName(), classPKs);
 
 			for (i = 1; i <= messages.size(); i++) {
 				message = messages.get(i - 1);
@@ -298,9 +299,8 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 							<c:if test="<%= ratingsEnabled %>">
 
 								<%
-								Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletDisplay.getId());
-								RatingsEntry ratingsEntry = findRatingsEntry(ratingsEntries, message.getMessageId());
-								RatingsStats ratingStats = findRatingsStats(ratingsStatses, message.getMessageId());
+								RatingsEntry ratingsEntry = getRatingsEntry(ratingsEntries, message.getMessageId());
+								RatingsStats ratingStats = getRatingsStats(ratingsStatsList, message.getMessageId());
 								%>
 
 								<td>
@@ -488,25 +488,23 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 </c:if>
 
 <%!
-	private RatingsEntry findRatingsEntry(List<RatingsEntry> ratingEntries, long classPK) {
-		RatingsEntry ratingsEntry = null;
-		for(RatingsEntry entry : ratingEntries) {
-			if(entry.getClassPK() == classPK) {
-				ratingsEntry = entry;
-				break;
-			}
+private RatingsEntry getRatingsEntry(List<RatingsEntry> ratingEntries, long classPK) {
+	for (RatingsEntry ratingsEntry : ratingEntries) {
+		if (ratingsEntry.getClassPK() == classPK) {
+			return ratingsEntry;
 		}
-		return ratingsEntry;
 	}
 
-	private RatingsStats findRatingsStats(List<RatingsStats> ratingStatses, long classPK) {
-		RatingsStats ratingsStats = null;
-		for(RatingsStats stats : ratingStatses) {
-			if(stats.getClassPK() == classPK) {
-				ratingsStats = stats;
-				break;
-			}
+	return null;
+}
+
+private RatingsStats getRatingsStats(List<RatingsStats> ratingsStatsList, long classPK) {
+	for (RatingsStats ratingsStats : ratingsStatsList) {
+		if (ratingsStats.getClassPK() == classPK) {
+			return ratingsStats;
 		}
-		return ratingsStats;
 	}
+
+	return null;
+}
 %>
