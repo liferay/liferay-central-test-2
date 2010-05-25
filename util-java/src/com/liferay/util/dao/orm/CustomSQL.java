@@ -51,26 +51,26 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class CustomSQL {
 
-	public static final String DB2_FUNCTION_IS_NULL =
-		"CAST(? AS VARCHAR(32672)) IS NULL";
-
 	public static final String DB2_FUNCTION_IS_NOT_NULL =
 		"CAST(? AS VARCHAR(32672)) IS NOT NULL";
 
-	public static final String INFORMIX_FUNCTION_IS_NULL = "lportal.isnull(?)";
+	public static final String DB2_FUNCTION_IS_NULL =
+		"CAST(? AS VARCHAR(32672)) IS NULL";
 
 	public static final String INFORMIX_FUNCTION_IS_NOT_NULL =
-		"NOT " + INFORMIX_FUNCTION_IS_NULL;
+		"NOT lportal.isnull(?)";
 
-	public static final String MYSQL_FUNCTION_IS_NULL = "IFNULL(?, '1') = '1'";
+	public static final String INFORMIX_FUNCTION_IS_NULL = "lportal.isnull(?)";
 
 	public static final String MYSQL_FUNCTION_IS_NOT_NULL =
 		"IFNULL(?, '1') = '0'";
 
-	public static final String SYBASE_FUNCTION_IS_NULL = "ISNULL(?, '1') = '1'";
+	public static final String MYSQL_FUNCTION_IS_NULL = "IFNULL(?, '1') = '1'";
 
 	public static final String SYBASE_FUNCTION_IS_NOT_NULL =
 		"ISNULL(?, '1') = '0'";
+
+	public static final String SYBASE_FUNCTION_IS_NULL = "ISNULL(?, '1') = '1'";
 
 	public CustomSQL() throws SQLException {
 		Connection con = DataAccess.getConnection();
@@ -291,6 +291,28 @@ public class CustomSQL {
 		return keywordsArray;
 	}
 
+	public String removeOrderBy(String sql) {
+
+		// See LPS-8719
+
+		AtomicReference<String> sqlAtomicReference =
+			new AtomicReference<String>(sql);
+
+		int pos = sqlAtomicReference.get().indexOf(_ORDER_BY_CLAUSE);
+
+		if (pos != -1) {
+			sql = sqlAtomicReference.get().substring(0, pos);
+		}
+
+		/*int pos = sql.indexOf(_ORDER_BY_CLAUSE);
+
+		if (pos != -1) {
+			sql = sql.substring(0, pos);
+		}*/
+
+		return sql;
+	}
+
 	public String replaceAndOperator(String sql, boolean andOperator) {
 		String andOrConnector = "OR";
 		String andOrNullCheck = "AND ? IS NOT NULL";
@@ -392,28 +414,6 @@ public class CustomSQL {
 		return StringUtil.replace(sql, oldSql.toString(), newSql.toString());
 	}
 
-	public String removeOrderBy(String sql) {
-
-		// See LPS-8719
-
-		AtomicReference<String> sqlAtomicReference =
-			new AtomicReference<String>(sql);
-
-		int pos = sqlAtomicReference.get().indexOf(_ORDER_BY_CLAUSE);
-
-		if (pos != -1) {
-			sql = sqlAtomicReference.get().substring(0, pos);
-		}
-
-		/*int pos = sql.indexOf(_ORDER_BY_CLAUSE);
-
-		if (pos != -1) {
-			sql = sql.substring(0, pos);
-		}*/
-
-		return sql;
-	}
-
 	public String replaceOrderBy(String sql, OrderByComparator obc) {
 		if (obc == null) {
 			return sql;
@@ -500,14 +500,14 @@ public class CustomSQL {
 
 	private static Log _log = LogFactoryUtil.getLog(CustomSQL.class);
 
+	private String _functionIsNotNull;
+	private String _functionIsNull;
+	private Map<String, String> _sqlPool;
 	private boolean _vendorDB2;
 	private boolean _vendorInformix;
 	private boolean _vendorMySQL;
 	private boolean _vendorOracle;
 	private boolean _vendorPostgreSQL;
 	private boolean _vendorSybase;
-	private String _functionIsNull;
-	private String _functionIsNotNull;
-	private Map<String, String> _sqlPool;
 
 }

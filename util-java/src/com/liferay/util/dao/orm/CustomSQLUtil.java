@@ -67,6 +67,10 @@ public class CustomSQLUtil {
 			keywordsArray, lowerCase);
 	}
 
+	public static String removeOrderBy(String sql) {
+		return _instance._customSQL.removeOrderBy(sql);
+	}
+
 	public static String replaceAndOperator(String sql, boolean andOperator) {
 		return _instance._customSQL.replaceAndOperator(
 			sql, andOperator);
@@ -82,10 +86,6 @@ public class CustomSQLUtil {
 
 		return _instance._customSQL.replaceKeywords(
 			sql, field, operator, last, values);
-	}
-
-	public static String removeOrderBy(String sql) {
-		return _instance._customSQL.removeOrderBy(sql);
 	}
 
 	public static String replaceOrderBy(String sql, OrderByComparator obc) {
