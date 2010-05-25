@@ -39,7 +39,6 @@ import com.liferay.portalweb.portlet.blogs.entry.editentrytitleentrydetails.Edit
 import com.liferay.portalweb.portlet.blogs.entry.publishentrydraft.PublishEntryDraftTests;
 import com.liferay.portalweb.portlet.blogs.entry.rateentry.RateEntryTests;
 import com.liferay.portalweb.portlet.blogs.entry.rateentryentrydetails.RateEntryEntryDetailsTests;
-import com.liferay.portalweb.portlet.blogs.entry.viewcountentry.ViewCountEntryTests;
 import com.liferay.portalweb.portlet.blogs.entry.viewcountentryentrydetails.ViewCountEntryEntryDetailsTests;
 import com.liferay.portalweb.portlet.blogs.entry.viewentry.ViewEntryTests;
 import com.liferay.portalweb.portlet.blogs.entry.viewentryentrydetails.ViewEntryEntryDetailsTests;
@@ -81,7 +80,6 @@ public class EntryTests extends BaseTests {
 		testSuite.addTest(PublishEntryDraftTests.suite());
 		testSuite.addTest(RateEntryTests.suite());
 		testSuite.addTest(RateEntryEntryDetailsTests.suite());
-		testSuite.addTest(ViewCountEntryTests.suite());
 		testSuite.addTest(ViewCountEntryEntryDetailsTests.suite());
 		testSuite.addTest(ViewEntryTests.suite());
 		testSuite.addTest(ViewEntryEntryDetailsTests.suite());

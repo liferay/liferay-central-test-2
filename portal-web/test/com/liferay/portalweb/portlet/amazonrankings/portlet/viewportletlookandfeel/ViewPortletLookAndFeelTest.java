@@ -45,6 +45,23 @@ public class ViewPortletLookAndFeelTest extends BaseTestCase {
 		selenium.clickAt("link=Amazon Rankings Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//strong/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {

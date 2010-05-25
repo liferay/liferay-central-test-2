@@ -48,7 +48,8 @@ public class AddFolderDocument2Test extends BaseTestCase {
 		selenium.clickAt("//tr[4]/td[1]/a[2]/strong",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[2]/ul/li[4]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li[5]/a",
+			RuntimeVariables.replace("Add Document"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

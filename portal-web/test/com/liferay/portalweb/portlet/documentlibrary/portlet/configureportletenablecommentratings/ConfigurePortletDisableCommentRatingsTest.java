@@ -53,9 +53,27 @@ public class ConfigurePortletDisableCommentRatingsTest extends BaseTestCase {
 				selenium.clickAt("link=Document Library Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("link=Configuration",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.click(
+					"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -119,8 +137,6 @@ public class ConfigurePortletDisableCommentRatingsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				assertFalse(selenium.isElementPresent(
-						"//div[@class='taglib-ratings thumbs']/div/div/div"));
 				assertFalse(selenium.isTextPresent("0 (0 Votes)"));
 
 			case 100:

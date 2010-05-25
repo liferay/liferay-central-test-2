@@ -53,9 +53,27 @@ public class ConfigurePortletEnableCommentRatingsTest extends BaseTestCase {
 				selenium.clickAt("link=Document Library Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("link=Configuration",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.click(
+					"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -126,9 +144,8 @@ public class ConfigurePortletEnableCommentRatingsTest extends BaseTestCase {
 					}
 
 					try {
-						if (RuntimeVariables.replace("0 (0 Votes)")
-												.equals(selenium.getText(
-										"//div[@class='taglib-ratings thumbs']/div/div/div"))) {
+						if (selenium.isPartialText("//td[1]/div/div/div/div",
+									"0 Votes")) {
 							break;
 						}
 					}
@@ -138,9 +155,8 @@ public class ConfigurePortletEnableCommentRatingsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				assertEquals(RuntimeVariables.replace("0 (0 Votes)"),
-					selenium.getText(
-						"//div[@class='taglib-ratings thumbs']/div/div/div"));
+				assertTrue(selenium.isPartialText("//td[1]/div/div/div/div",
+						"0 Votes"));
 
 			case 100:
 				label = -1;

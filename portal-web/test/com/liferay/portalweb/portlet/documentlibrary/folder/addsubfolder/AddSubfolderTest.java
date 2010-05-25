@@ -47,7 +47,8 @@ public class AddSubfolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[2]/ul/li[3]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li[4]/a",
+			RuntimeVariables.replace("Add Subfolder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_20_name", RuntimeVariables.replace("Test1 Subfolder1"));
 		selenium.type("_20_description",
@@ -61,8 +62,10 @@ public class AddSubfolderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
+				if (RuntimeVariables.replace(
+							"Your request processed successfully.")
+										.equals(selenium.getText(
+								"//section/div/div/div/div[1]"))) {
 					break;
 				}
 			}
@@ -72,8 +75,9 @@ public class AddSubfolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

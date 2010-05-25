@@ -81,8 +81,10 @@ public class AddFolderDocumentCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
+				if (RuntimeVariables.replace(
+							"Your request processed successfully.")
+										.equals(selenium.getText(
+								"//section/div/div/div/div[1]"))) {
 					break;
 				}
 			}
@@ -92,8 +94,9 @@ public class AddFolderDocumentCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("This is a test1 comment1."),
 			selenium.getText("//td[2]/div[1]"));
 	}

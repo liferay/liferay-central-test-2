@@ -45,7 +45,8 @@ public class AddFolderNameSpaceTest extends BaseTestCase {
 		selenium.clickAt("link=Document Library Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[2]/ul/li[2]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li[2]/a",
+			RuntimeVariables.replace("Add Folder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_20_name", RuntimeVariables.replace(""));
 		selenium.type("_20_description",

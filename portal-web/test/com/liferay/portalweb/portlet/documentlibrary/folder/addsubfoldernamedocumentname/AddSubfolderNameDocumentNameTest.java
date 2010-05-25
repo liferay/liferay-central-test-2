@@ -48,7 +48,8 @@ public class AddSubfolderNameDocumentNameTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[2]/ul/li[3]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li[4]/a",
+			RuntimeVariables.replace("Add Subfolder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_20_name", RuntimeVariables.replace("Test1 Document1"));
 		selenium.type("_20_description",

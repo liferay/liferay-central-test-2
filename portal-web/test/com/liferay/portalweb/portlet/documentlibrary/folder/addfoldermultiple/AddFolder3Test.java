@@ -45,7 +45,8 @@ public class AddFolder3Test extends BaseTestCase {
 		selenium.clickAt("link=Document Library Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[2]/ul/li[2]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li[2]/a",
+			RuntimeVariables.replace("Add Folder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_20_name", RuntimeVariables.replace("Test3 Folder3"));
 		selenium.type("_20_description",
@@ -59,8 +60,10 @@ public class AddFolder3Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
+				if (RuntimeVariables.replace(
+							"Your request processed successfully.")
+										.equals(selenium.getText(
+								"//section/div/div/div/div[1]"))) {
 					break;
 				}
 			}
@@ -70,8 +73,9 @@ public class AddFolder3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
 		assertTrue(selenium.isTextPresent(
 				"Test3 Folder3\nThis is test3 folder3."));
 	}

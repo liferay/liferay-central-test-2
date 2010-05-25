@@ -16,7 +16,6 @@ package com.liferay.portalweb.portlet.documentlibrary.document;
 
 import com.liferay.portalweb.portal.BaseTests;
 import com.liferay.portalweb.portlet.documentlibrary.document.addfolderdocument.AddFolderDocumentTests;
-import com.liferay.portalweb.portlet.documentlibrary.document.addfolderdocumentdocumentinvalid.AddFolderDocumentDocumentInvalidTests;
 import com.liferay.portalweb.portlet.documentlibrary.document.addfolderdocumentdocumentnull.AddFolderDocumentDocumentNullTests;
 import com.liferay.portalweb.portlet.documentlibrary.document.addfolderdocumentmultiple.AddFolderDocumentMultipleTests;
 import com.liferay.portalweb.portlet.documentlibrary.document.addfolderdocumenttitleduplicate.AddFolderDocumentTitleDuplicateTests;
@@ -46,7 +45,6 @@ public class DocumentTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTest(AddFolderDocumentTests.suite());
-		testSuite.addTest(AddFolderDocumentDocumentInvalidTests.suite());
 		testSuite.addTest(AddFolderDocumentDocumentNullTests.suite());
 		testSuite.addTest(AddFolderDocumentMultipleTests.suite());
 		testSuite.addTest(AddFolderDocumentTitleDuplicateTests.suite());

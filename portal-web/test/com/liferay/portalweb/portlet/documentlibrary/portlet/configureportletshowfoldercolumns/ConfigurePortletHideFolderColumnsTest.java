@@ -47,8 +47,26 @@ public class ConfigurePortletHideFolderColumnsTest extends BaseTestCase {
 		selenium.clickAt("link=Document Library Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -68,7 +86,7 @@ public class ConfigurePortletHideFolderColumnsTest extends BaseTestCase {
 
 		selenium.addSelection("_86_currentFolderColumns",
 			RuntimeVariables.replace("label=# of Folders"));
-		selenium.clickAt("//div/table/tbody/tr/td[2]/a[1]/img",
+		selenium.clickAt("//div[2]/div/span/span/button[1]",
 			RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
