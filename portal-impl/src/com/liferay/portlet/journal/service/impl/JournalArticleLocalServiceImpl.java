@@ -2775,14 +2775,13 @@ public class JournalArticleLocalServiceImpl
 	protected void updatePreviousApprovedArticle(JournalArticle article)
 		throws PortalException, SystemException {
 
-		List<JournalArticle> approvedArticleVersions =
+		List<JournalArticle> approvedArticles =
 			journalArticlePersistence.findByG_A_S(
 				article.getGroupId(), article.getArticleId(),
 				WorkflowConstants.STATUS_APPROVED, 0, 2);
 
-		if (approvedArticleVersions.size() > 1) {
-			JournalArticle previousApprovedArticle =
-				approvedArticleVersions.get(1);
+		if (approvedArticles.size() > 1) {
+			JournalArticle previousApprovedArticle = approvedArticles.get(1);
 
 			if (article.isIndexable()) {
 				Indexer indexer = IndexerRegistryUtil.getIndexer(
@@ -2800,8 +2799,8 @@ public class JournalArticleLocalServiceImpl
 			}
 
 			assetEntryLocalService.updateVisible(
-				JournalArticle.class.getName(),
-				article.getResourcePrimKey(), false);
+				JournalArticle.class.getName(), article.getResourcePrimKey(),
+				false);
 		}
 	}
 
