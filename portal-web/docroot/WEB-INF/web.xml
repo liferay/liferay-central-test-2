@@ -88,6 +88,10 @@
 			<param-name>Expires</param-name>
 			<param-value>315360000</param-value>
 		</init-param>
+		<init-param>
+			<param-name>Vary</param-name>
+			<param-value>Accept-Encoding</param-value>
+		</init-param>
 	</filter>
 	<filter>
 		<filter-name>Header Filter - JSP</filter-name>
@@ -103,6 +107,10 @@
 		<init-param>
 			<param-name>Expires</param-name>
 			<param-value>315360000</param-value>
+		</init-param>
+		<init-param>
+			<param-name>Vary</param-name>
+			<param-value>Accept-Encoding</param-value>
 		</init-param>
 	</filter>
 	<filter>
