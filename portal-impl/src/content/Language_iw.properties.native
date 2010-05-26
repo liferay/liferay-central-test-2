@@ -1705,6 +1705,7 @@ export-import-categories-help=When selected, all categories will be exported or 
 export-import-permissions-assigned-to-users-help=בגלל הגרגריות של מערכת האישורים, ייצוא או ייבוא של אישורי המשתמש יכול לעלות משמעותית את זמן העיבוד. אל תייצא אותם אלא אם זה הכרחי בהחלט.
 export-import-permissions-help=האישורים שהוקצו לדפים המיוצאים ולחלונות הפורטלט הפרטיים יהיו כלולים אם האופציה הזאת מסומנת.
 export-import-portlet-permissions-help=האישורים שהוקצו לחלון הפורטלט המיוצא יהיו כלולים אם האופציה הזאת מסומנת.
+export-import-referenced-categories-help=When selected, all categories referenced by portlet data will be exported or imported, keeping their hierarchy. During import, duplicate categories will not be created if a category with same name already exists. (Automatic Copy)
 export-import-theme-help=אם מסומן ייצוא, אז קבצים סופיים מסוג LAR יכללו את נושא מדרגה הראשונה ואת כל הקבצים שלו. כאשר מסומן ייבוא הנושא יהיה מותקן וכל הדפים יהיו מוגדרות להשתמש בו.
 export-import=ייצוא/ייבוא
 export-settings=כוונוני ייצוא

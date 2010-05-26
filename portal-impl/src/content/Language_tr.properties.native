@@ -1705,6 +1705,7 @@ export-import-categories-help=Bu şeçili ise, tüm kategoriler hiyerarşileri k
 export-import-permissions-assigned-to-users-help=İzin sisteminin pürüzlülüğü nedeniyle kullanıcı izinlerini göndermek veya almak önemli ölçüde iş zamanını arttırabilir. Gerekli olmadıkça bunları göndermeyiniz.
 export-import-permissions-help=Gönderilen sayfalar ve tek başına portlet pencereleri için atanan izinler, eğer bu özellik seçilirse eklenecektir.
 export-import-portlet-permissions-help=Gönderilmiş portlet penceresi için atanmış izinler, eğer bu özellik seçilirse eklenecektir.
+export-import-referenced-categories-help=When selected, all categories referenced by portlet data will be exported or imported, keeping their hierarchy. During import, duplicate categories will not be created if a category with same name already exists. (Automatic Copy)
 export-import-theme-help=Gönderim seçildiğinde, en üst düzey tema ve bunun tüm dosyaları sonuç LAR dosyasına eklenecektir. Alım seçildiğinde, tema yüklenecek ve tüm sayfalar bunu kullanmak için ayarlanacaktır.
 export-import=Gönderim / Alım
 export-settings=Gönderim Ayarları

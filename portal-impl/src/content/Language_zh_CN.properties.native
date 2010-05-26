@@ -1705,6 +1705,7 @@ export-import-categories-help=当被选中，所有类别将被导出或导入�
 export-import-permissions-assigned-to-users-help=由于权限系统的粒度问题，导出或导入用户权限可能极大添加处理时间。如非绝对必要不要导出。
 export-import-permissions-help=如果选中此项，分配给导出页面和各自 portlet 窗口的权限将被包含进来。
 export-import-portlet-permissions-help=如果选中此项，则会包括为导出的 portlet 窗口指定的权限。
+export-import-referenced-categories-help=当选择， portlet数据参考的所有类别将被出口或被进口，保留他们的阶层。 在进口期间，如果与同样名字的一个类别已经存在，复制类别不会被创造。 (Automatic Translation)
 export-import-theme-help=当导出时选择时，最高层的主题模式及其所有文件将包括在结果 LAR 文件中，当导入时选择时，将安装主题模式并且配置为所有页面使用主题模式。
 export-import=导出/导入
 export-settings=导出设置

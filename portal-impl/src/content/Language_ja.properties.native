@@ -1705,6 +1705,7 @@ export-import-categories-help=選択すると、全てのカテゴリが階層�
 export-import-permissions-assigned-to-users-help=権限の粒度により、ユーザ権限のエクスポートやインポートは処理時間を極端に増加させます。本当に必要でなければ、エクスポートしないで下さい。
 export-import-permissions-help=このオプションが選択されると、エクスポートされたページに付けられた権限情報と個々のポートレットウインドウが含まれます。
 export-import-portlet-permissions-help=このオプション選択すると、エクスポートされたポートレットウインドウに割り当てられた権限情報が含まれます。
+export-import-referenced-categories-help=選ばれたとき、portletデータによって参照された階層を保つすべての部門は輸出されるか、または輸入される。 輸入の間に、重複した部門は同じ名前の部門が既にあれば作成されない。 (Automatic Translation)
 export-import-theme-help=エクスポート時に選択されると、LARファイルにトップレベルのテーマと全てのファイルが含まれます。インポート時に選択されると、テーマと全てのページが設定されます。
 export-import=エクスポート / インポート
 export-settings=エクスポートの設定

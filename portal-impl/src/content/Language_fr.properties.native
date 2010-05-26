@@ -1705,6 +1705,7 @@ export-import-categories-help=Quand choisies, toutes les catégories seront expo
 export-import-permissions-assigned-to-users-help=En raison de la granularité du système de permission, l'exportation ou l'importation des permissions d'utilisateurs peut augmenter la durée de la modification de manière significative. Ne l'exportez pas à moins que cela soit absolument nécessaire.
 export-import-permissions-help=Les permissions assignées sur les pages exportées et les différentes fenêtres de l'application seront incluses si cette option est activée.
 export-import-portlet-permissions-help=Les permissions assignées pour la fenêtre exportée de portlet seront incluses si cette option est vérifiée.
+export-import-referenced-categories-help=Quand choisies, toutes les catégories référencées par des données de portlet seront exportées ou importées, gardant leur hiérarchie. Pendant l'importation, des catégories doubles ne seront pas créées si une catégorie avec le même nom existe déjà. (Automatic Translation)
 export-import-theme-help=Lorsque l'exportation est sélectionnée, le thème de niveau supérieur et tous ses dossiers sont inclus dans les dossiers du fichier LAR résultant. Lorsque l'importation est sélectionnée, le thème est installé et toutes les pages sont configurées pour l'utiliser.
 export-import=Exportation/Importation
 export-settings=Paramètres d'exportation

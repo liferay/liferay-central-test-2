@@ -1705,6 +1705,7 @@ export-import-categories-help=Kui see on valitud, säilitatakse eksportimisel v�
 export-import-permissions-assigned-to-users-help=Õigustesüsteemi detailsuse tõttu võib kasutajaõiguste eksportimine või importimine töötlusaega märkimisväärselt pikendada. Ära ekspordi neid, kui see pole hädavajalik.
 export-import-permissions-help=Selle valiku märkimisel kaasatakse eksporditud lehtedele määratud õigused ja individuaalsed portletiaknad.
 export-import-portlet-permissions-help=Selle valiku märkimisel kaasatakse eksporditud portletiaknale määratud õigused. 
+export-import-referenced-categories-help=When selected, all categories referenced by portlet data will be exported or imported, keeping their hierarchy. During import, duplicate categories will not be created if a category with same name already exists. (Automatic Copy)
 export-import-theme-help=Eksportimisel valides lisatakse tipptaseme teema ja kõik selle failid tekitatavatesse LAR failidesse. Importimisel valides teema installeeritakse ja lehed seadistatakse seda kasutama.
 export-import=Eksport / import
 export-settings=Expordi seaded

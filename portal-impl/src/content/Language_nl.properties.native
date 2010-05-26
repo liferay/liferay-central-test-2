@@ -1705,6 +1705,7 @@ export-import-categories-help=Indien geselecteerd, zullen alle categorieën, hun
 export-import-permissions-assigned-to-users-help=Door de complexiteit van het rechten systeem kan het exporteren of importeren van gebruikersrechten veel tijd kosten. Exporteer alleen als het echt nodig is.
 export-import-permissions-help=De rechten die toegekend zijn aan de geëxporteerde pagina's en individuele portlets zullen worden meegenomen als deze optie aan staat.
 export-import-portlet-permissions-help=De rechten die voor het uitgevoerde portletvenster zullen worden toegewezen worden omvat als deze optie wordt gecontroleerd.
+export-import-referenced-categories-help=Wanneer geselecteerd, zullen van verwijzingen worden voorzien alle categorieën die door portletgegevens worden uitgevoerd of worden ingevoerd, houdend hun hiërarchie. Tijdens de invoer, zullen de dubbele categorieën niet gecreërd worden als een categorie met zelfde naam reeds bestaat. (Automatic Translation)
 export-import-theme-help=Als bij het exporteren het thema geselecteerd is dan wordt deze meegenomen in de export. Als het geselecteerd wordt bij het importeren dan wordt het thema geïnstalleerd en alle pagina's ingesteld om dit thema te gebruiken.
 export-import=Exporteren/Importeren
 export-settings=Exportinstellingen

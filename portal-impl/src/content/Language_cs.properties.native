@@ -1705,6 +1705,7 @@ export-import-categories-help=Pokud je zaškrtnuto, budou exportovány / importo
 export-import-permissions-assigned-to-users-help=Kvůli členitosti systému práv, export / import uživatelských práv může znatelně navýšit čas zpracování.  Proto není doporučeno tyto exportovat, není-li to nezbytně nutné.
 export-import-permissions-help=Pokud je zaškrtnuto, budou exportována i práva přiřazená k jednotlivým stránkám a portletům.
 export-import-portlet-permissions-help=Pokud je zaškrtnuto, budou exportována i práva přiřazená k jednotlivým portletům.
+export-import-referenced-categories-help=When selected, all categories referenced by portlet data will be exported or imported, keeping their hierarchy. During import, duplicate categories will not be created if a category with same name already exists. (Automatic Copy)
 export-import-theme-help=Pokud je zaškrtnuto při exportu, hlavní téma a veškeré jeho soubory budou zahrnuty do výsledného LAR souboru. Pokud je zaškrtnuto při importu, téma bude nainstalováno a zároveň přednastaveno na všech stránkách.
 export-import=Export / Import
 export-settings=Nastavení exportu

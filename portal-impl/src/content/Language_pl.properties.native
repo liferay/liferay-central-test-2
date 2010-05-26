@@ -1705,6 +1705,7 @@ export-import-categories-help=Jeśli zaznaczono, wszystkie kategorie zostaną wy
 export-import-permissions-assigned-to-users-help=Ze względu na ziarnistość systemu uprawnień eksportowanie lub importowanie uprawnień użytkownika może znacznie zwiększyć czas przetwarzania. Nie eksportuj ich jeśli nie jest to absolutnie konieczne.
 export-import-permissions-help=Uprawnienia przypisane do eksportowanych stron i indywidualnych okien portletów zostaną zawarte, jeśli zaznaczono tą opcję.
 export-import-portlet-permissions-help=Uprawnienia przypisane do eksportowanego okna portletu zostaną zawarte jeśli ta opcja jest zaznaczona.
+export-import-referenced-categories-help=When selected, all categories referenced by portlet data will be exported or imported, keeping their hierarchy. During import, duplicate categories will not be created if a category with same name already exists. (Automatic Copy)
 export-import-theme-help=Jeśli zaznaczono podczas eksportu nadrzędny motyw i wszystkie jego pliki zostaną zawarte w wynikowych plikach LAR. Jeśli zaznaczono podczas importu, motyw zostanie zainstalowany i wszystkie strony zostaną skonfigurowane aby z niego korzystać.
 export-import=Eksport / Import
 export-settings=Ustawienia eksportu

@@ -1705,6 +1705,7 @@ export-import-categories-help=当選擇，所有類別將被出口或被進口�
 export-import-permissions-assigned-to-users-help=由於允許系統的粒度, 出口或進口用戶允許可能極大增加處理時間。不要出口他們除非它是absolutely 必要的。
 export-import-permissions-help=允許被分配為被出口的頁和各自的portlet 窗口將是包括的如果這個選擇被檢查。
 export-import-portlet-permissions-help=如果這個選擇被檢查，為被出口的portlet窗口分配的允許將是包括的。
+export-import-referenced-categories-help=當選擇， portlet數據參考的所有類別將被出口或被進口，保留他們的階層。 在進口期間，如果與同樣名字的一個類別已經存在，複製類別不會被創造。 (Automatic Translation)
 export-import-theme-help=何時選擇在出口, 最高級題材和所有它的文件將包括在收效的LAR 文件。何時選擇在進口, 題材將被安裝並且所有頁將被配置使用它。
 export-import=出口/進口
 export-settings=出口設置

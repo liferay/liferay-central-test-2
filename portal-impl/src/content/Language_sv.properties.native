@@ -1705,6 +1705,7 @@ export-import-categories-help=Om vald så kommer samtliga kategorier importeras 
 export-import-permissions-assigned-to-users-help=På grund av kornigheten av rättighetssystemet kan export och import av användarrättigheter öka bearbetningstiden påtagligt. Exportera dem inte om det inte är helt nödvändigt.
 export-import-permissions-help=Rättigheterna tilldelade för de exporterade sidorna och individuella portletfönstrena kommer inkluderas om detta val är ibockat.
 export-import-portlet-permissions-help=Rättigheterna tilldelade för det exporterade portletfönstret kommer inkluderas om detta val är ibockat.
+export-import-referenced-categories-help=When selected, all categories referenced by portlet data will be exported or imported, keeping their hierarchy. During import, duplicate categories will not be created if a category with same name already exists. (Automatic Copy)
 export-import-theme-help=När markerad för export kommer toppnivåtemat och alla dess filer inkluderas i de resulterade LAR-filerna. När vald för import kommer temat installeras och alla sidor konfigureras att använda det.
 export-import=Export / Import
 export-settings=Exportinställningar

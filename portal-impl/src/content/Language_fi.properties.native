@@ -1705,6 +1705,7 @@ export-import-categories-help=Kun tämä on valittu kaikki kategoriat tuodaan ta
 export-import-permissions-assigned-to-users-help=Käyttöoikeusjärjestelmä hienojakoisuuden vuoksi käyttöoikeuksien tuonti ja vienti voi lisätä prosessointiaikaa huomattavasti. Älä vie niitä ulos mikäli se ei ole välttämätöntä.
 export-import-permissions-help=Käyttöoikeudet liitetty vietäviin sivuihin ja yksittäisiin portletteihin sisällytetään mikäli tämä on valittuna.
 export-import-portlet-permissions-help=Oikeudet liitetty ulosvietävään portlet ikkunaa sisällytetään mikäli tämä on valittu.
+export-import-referenced-categories-help=When selected, all categories referenced by portlet data will be exported or imported, keeping their hierarchy. During import, duplicate categories will not be created if a category with same name already exists. (Automatic Copy)
 export-import-theme-help=Ulos viennissä valittuna päätason teema ja kaikki sen tiedostot sisällytetään LAR tiedostoon. Sisään tuonnissa teema asennetaan ja kaikki sivut konfiguroidaan käyttämään sitä.
 export-import=Tuo / Vie
 export-settings=Vientiasetukset
