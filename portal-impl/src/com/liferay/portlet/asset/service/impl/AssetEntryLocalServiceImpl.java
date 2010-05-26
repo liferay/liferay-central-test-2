@@ -304,6 +304,10 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 		// Entry
 
+		if (!PropsValues.ASSET_ENTRY_INCREMENT_VIEW_COUNTER_ENABLED) {
+			return null;
+		}
+
 		if (classPK <= 0) {
 			return null;
 		}
