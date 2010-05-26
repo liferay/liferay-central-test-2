@@ -43,7 +43,7 @@ public class RatingsTag extends IncludeTag {
 
 	public void setRatingsEntry(RatingsEntry ratingsEntry) {
 		if (ratingsEntry == null) {
-			_ratingsEntry = _EMPTY_RATINGS_ENTRY;
+			_ratingsEntry = _nullRatingsEntry;
 		}
 		else {
 			_ratingsEntry = ratingsEntry;
@@ -94,10 +94,9 @@ public class RatingsTag extends IncludeTag {
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
 
-	private static final RatingsEntry _EMPTY_RATINGS_ENTRY =
-		new RatingsEntryImpl();
-
 	private static final String _PAGE = "/html/taglib/ui/ratings/page.jsp";
+
+	private static RatingsEntry _nullRatingsEntry = new RatingsEntryImpl();
 
 	private String _className;
 	private long _classPK;
