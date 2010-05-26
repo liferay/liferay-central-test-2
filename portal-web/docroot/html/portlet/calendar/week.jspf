@@ -26,7 +26,6 @@ if (cal.getFirstDayOfWeek() == Calendar.MONDAY) {
 cal.add(Calendar.DATE, 1 - dayOfWeek);
 
 Format dateFormatDayOfWeek = FastDateFormatFactoryUtil.getSimpleDateFormat("EEE", locale);
-Format dateFormatMonthAndDay = FastDateFormatFactoryUtil.getSimpleDateFormat("M/d", locale);
 %>
 
 <div>
@@ -170,7 +169,7 @@ Format dateFormatMonthAndDay = FastDateFormatFactoryUtil.getSimpleDateFormat("M/
 				<tr>
 					<td>
 						<a href="<portlet:renderURL><portlet:param name="struts_action" value="/calendar/view" /><portlet:param name="tabs1" value="day" /><portlet:param name="month" value="<%= String.valueOf(cal.get(Calendar.MONTH)) %>" /><portlet:param name="day" value="<%= String.valueOf(cal.get(Calendar.DATE)) %>" /><portlet:param name="year" value="<%= String.valueOf(cal.get(Calendar.YEAR)) %>" /></portlet:renderURL>">
-						<%= dateFormatMonthAndDay.format(Time.getDate(cal)) %>
+						<%= dateFormatDate.format(Time.getDate(cal)) %>
 						</a>
 					</td>
 					<td align="right">
