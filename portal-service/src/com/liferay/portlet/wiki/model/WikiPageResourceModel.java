@@ -46,6 +46,11 @@ public interface WikiPageResourceModel extends BaseModel<WikiPageResource> {
 
 	public void setPrimaryKey(long pk);
 
+	@AutoEscape
+	public String getUuid();
+
+	public void setUuid(String uuid);
+
 	public long getResourcePrimKey();
 
 	public void setResourcePrimKey(long resourcePrimKey);

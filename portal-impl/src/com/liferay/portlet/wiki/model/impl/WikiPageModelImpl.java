@@ -192,6 +192,16 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 
 	public void setResourcePrimKey(long resourcePrimKey) {
 		_resourcePrimKey = resourcePrimKey;
+
+		if (!_setOriginalResourcePrimKey) {
+			_setOriginalResourcePrimKey = true;
+
+			_originalResourcePrimKey = resourcePrimKey;
+		}
+	}
+
+	public long getOriginalResourcePrimKey() {
+		return _originalResourcePrimKey;
 	}
 
 	public long getGroupId() {
@@ -778,6 +788,8 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	private String _originalUuid;
 	private long _pageId;
 	private long _resourcePrimKey;
+	private long _originalResourcePrimKey;
+	private boolean _setOriginalResourcePrimKey;
 	private long _groupId;
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;

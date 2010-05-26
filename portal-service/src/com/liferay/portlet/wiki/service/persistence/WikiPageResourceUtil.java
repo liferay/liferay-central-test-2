@@ -133,6 +133,51 @@ public class WikiPageResourceUtil {
 		return getPersistence().fetchByPrimaryKey(resourcePrimKey);
 	}
 
+	public static java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> findByUuid(
+		java.lang.String uuid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByUuid(uuid);
+	}
+
+	public static java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> findByUuid(
+		java.lang.String uuid, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByUuid(uuid, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> findByUuid(
+		java.lang.String uuid, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByUuid(uuid, start, end, orderByComparator);
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPageResource findByUuid_First(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.wiki.NoSuchPageResourceException {
+		return getPersistence().findByUuid_First(uuid, orderByComparator);
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPageResource findByUuid_Last(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.wiki.NoSuchPageResourceException {
+		return getPersistence().findByUuid_Last(uuid, orderByComparator);
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPageResource[] findByUuid_PrevAndNext(
+		long resourcePrimKey, java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.wiki.NoSuchPageResourceException {
+		return getPersistence()
+				   .findByUuid_PrevAndNext(resourcePrimKey, uuid,
+			orderByComparator);
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPageResource findByN_T(
 		long nodeId, java.lang.String title)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -150,6 +195,25 @@ public class WikiPageResourceUtil {
 		long nodeId, java.lang.String title, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByN_T(nodeId, title, retrieveFromCache);
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPageResource findByUUID_N(
+		java.lang.String uuid, long nodeId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.wiki.NoSuchPageResourceException {
+		return getPersistence().findByUUID_N(uuid, nodeId);
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPageResource fetchByUUID_N(
+		java.lang.String uuid, long nodeId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByUUID_N(uuid, nodeId);
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPageResource fetchByUUID_N(
+		java.lang.String uuid, long nodeId, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByUUID_N(uuid, nodeId, retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> findAll()
@@ -170,10 +234,21 @@ public class WikiPageResourceUtil {
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
+	public static void removeByUuid(java.lang.String uuid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByUuid(uuid);
+	}
+
 	public static void removeByN_T(long nodeId, java.lang.String title)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageResourceException {
 		getPersistence().removeByN_T(nodeId, title);
+	}
+
+	public static void removeByUUID_N(java.lang.String uuid, long nodeId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.wiki.NoSuchPageResourceException {
+		getPersistence().removeByUUID_N(uuid, nodeId);
 	}
 
 	public static void removeAll()
@@ -181,9 +256,19 @@ public class WikiPageResourceUtil {
 		getPersistence().removeAll();
 	}
 
+	public static int countByUuid(java.lang.String uuid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByUuid(uuid);
+	}
+
 	public static int countByN_T(long nodeId, java.lang.String title)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByN_T(nodeId, title);
+	}
+
+	public static int countByUUID_N(java.lang.String uuid, long nodeId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByUUID_N(uuid, nodeId);
 	}
 
 	public static int countAll()

@@ -44,6 +44,14 @@ public class WikiPageResourceWrapper implements WikiPageResource {
 		_wikiPageResource.setPrimaryKey(pk);
 	}
 
+	public java.lang.String getUuid() {
+		return _wikiPageResource.getUuid();
+	}
+
+	public void setUuid(java.lang.String uuid) {
+		_wikiPageResource.setUuid(uuid);
+	}
+
 	public long getResourcePrimKey() {
 		return _wikiPageResource.getResourcePrimKey();
 	}

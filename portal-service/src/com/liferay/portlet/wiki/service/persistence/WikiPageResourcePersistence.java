@@ -60,6 +60,37 @@ public interface WikiPageResourcePersistence extends BasePersistence<WikiPageRes
 		long resourcePrimKey)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> findByUuid(
+		java.lang.String uuid)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> findByUuid(
+		java.lang.String uuid, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> findByUuid(
+		java.lang.String uuid, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.wiki.model.WikiPageResource findByUuid_First(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.wiki.NoSuchPageResourceException;
+
+	public com.liferay.portlet.wiki.model.WikiPageResource findByUuid_Last(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.wiki.NoSuchPageResourceException;
+
+	public com.liferay.portlet.wiki.model.WikiPageResource[] findByUuid_PrevAndNext(
+		long resourcePrimKey, java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.wiki.NoSuchPageResourceException;
+
 	public com.liferay.portlet.wiki.model.WikiPageResource findByN_T(
 		long nodeId, java.lang.String title)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -71,6 +102,19 @@ public interface WikiPageResourcePersistence extends BasePersistence<WikiPageRes
 
 	public com.liferay.portlet.wiki.model.WikiPageResource fetchByN_T(
 		long nodeId, java.lang.String title, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.wiki.model.WikiPageResource findByUUID_N(
+		java.lang.String uuid, long nodeId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.wiki.NoSuchPageResourceException;
+
+	public com.liferay.portlet.wiki.model.WikiPageResource fetchByUUID_N(
+		java.lang.String uuid, long nodeId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.wiki.model.WikiPageResource fetchByUUID_N(
+		java.lang.String uuid, long nodeId, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> findAll()
@@ -85,14 +129,27 @@ public interface WikiPageResourcePersistence extends BasePersistence<WikiPageRes
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public void removeByUuid(java.lang.String uuid)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void removeByN_T(long nodeId, java.lang.String title)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.wiki.NoSuchPageResourceException;
+
+	public void removeByUUID_N(java.lang.String uuid, long nodeId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageResourceException;
 
 	public void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int countByUuid(java.lang.String uuid)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByN_T(long nodeId, java.lang.String title)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByUUID_N(java.lang.String uuid, long nodeId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()

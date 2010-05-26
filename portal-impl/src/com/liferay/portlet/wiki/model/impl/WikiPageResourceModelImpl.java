@@ -57,11 +57,12 @@ import java.util.List;
 public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource> {
 	public static final String TABLE_NAME = "WikiPageResource";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "uuid_", new Integer(Types.VARCHAR) },
 			{ "resourcePrimKey", new Integer(Types.BIGINT) },
 			{ "nodeId", new Integer(Types.BIGINT) },
 			{ "title", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table WikiPageResource (resourcePrimKey LONG not null primary key,nodeId LONG,title VARCHAR(255) null)";
+	public static final String TABLE_SQL_CREATE = "create table WikiPageResource (uuid_ VARCHAR(75) null,resourcePrimKey LONG not null primary key,nodeId LONG,title VARCHAR(255) null)";
 	public static final String TABLE_SQL_DROP = "drop table WikiPageResource";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -76,6 +77,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource> {
 	public static WikiPageResource toModel(WikiPageResourceSoap soapModel) {
 		WikiPageResource model = new WikiPageResourceImpl();
 
+		model.setUuid(soapModel.getUuid());
 		model.setResourcePrimKey(soapModel.getResourcePrimKey());
 		model.setNodeId(soapModel.getNodeId());
 		model.setTitle(soapModel.getTitle());
@@ -110,6 +112,27 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource> {
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_resourcePrimKey);
+	}
+
+	public String getUuid() {
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
+
+		if (_originalUuid == null) {
+			_originalUuid = uuid;
+		}
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	public long getResourcePrimKey() {
@@ -186,6 +209,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource> {
 	public Object clone() {
 		WikiPageResourceImpl clone = new WikiPageResourceImpl();
 
+		clone.setUuid(getUuid());
 		clone.setResourcePrimKey(getResourcePrimKey());
 		clone.setNodeId(getNodeId());
 		clone.setTitle(getTitle());
@@ -236,9 +260,11 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource> {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(9);
 
-		sb.append("{resourcePrimKey=");
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", resourcePrimKey=");
 		sb.append(getResourcePrimKey());
 		sb.append(", nodeId=");
 		sb.append(getNodeId());
@@ -250,12 +276,16 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource> {
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(16);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.wiki.model.WikiPageResource");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append(getUuid());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>resourcePrimKey</column-name><column-value><![CDATA[");
 		sb.append(getResourcePrimKey());
@@ -274,6 +304,8 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource> {
 		return sb.toString();
 	}
 
+	private String _uuid;
+	private String _originalUuid;
 	private long _resourcePrimKey;
 	private long _nodeId;
 	private long _originalNodeId;

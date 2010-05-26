@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
@@ -68,6 +69,19 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 	public static final String FINDER_CLASS_NAME_ENTITY = WikiPageResourceImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
+			WikiPageResourceModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUuid",
+			new String[] {
+				String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
+			WikiPageResourceModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByUuid",
+			new String[] { String.class.getName() });
 	public static final FinderPath FINDER_PATH_FETCH_BY_N_T = new FinderPath(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
 			WikiPageResourceModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_ENTITY, "fetchByN_T",
@@ -76,6 +90,14 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 			WikiPageResourceModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByN_T",
 			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_UUID_N = new FinderPath(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
+			WikiPageResourceModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByUUID_N",
+			new String[] { String.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID_N = new FinderPath(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
+			WikiPageResourceModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByUUID_N",
+			new String[] { String.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
 			WikiPageResourceModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
@@ -93,6 +115,12 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 				new Long(wikiPageResource.getNodeId()),
 				
 			wikiPageResource.getTitle()
+			}, wikiPageResource);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_N,
+			new Object[] {
+				wikiPageResource.getUuid(),
+				new Long(wikiPageResource.getNodeId())
 			}, wikiPageResource);
 	}
 
@@ -124,6 +152,12 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 				
 			wikiPageResource.getTitle()
 			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_N,
+			new Object[] {
+				wikiPageResource.getUuid(),
+				new Long(wikiPageResource.getNodeId())
+			});
 	}
 
 	public WikiPageResource create(long resourcePrimKey) {
@@ -131,6 +165,10 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 
 		wikiPageResource.setNew(true);
 		wikiPageResource.setPrimaryKey(resourcePrimKey);
+
+		String uuid = PortalUUIDUtil.generate();
+
+		wikiPageResource.setUuid(uuid);
 
 		return wikiPageResource;
 	}
@@ -229,6 +267,12 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 			wikiPageResourceModelImpl.getOriginalTitle()
 			});
 
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_N,
+			new Object[] {
+				wikiPageResourceModelImpl.getOriginalUuid(),
+				new Long(wikiPageResourceModelImpl.getOriginalNodeId())
+			});
+
 		EntityCacheUtil.removeResult(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
 			WikiPageResourceImpl.class, wikiPageResource.getPrimaryKey());
 
@@ -243,6 +287,12 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 		boolean isNew = wikiPageResource.isNew();
 
 		WikiPageResourceModelImpl wikiPageResourceModelImpl = (WikiPageResourceModelImpl)wikiPageResource;
+
+		if (Validator.isNull(wikiPageResource.getUuid())) {
+			String uuid = PortalUUIDUtil.generate();
+
+			wikiPageResource.setUuid(uuid);
+		}
 
 		Session session = null;
 
@@ -290,6 +340,28 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 				}, wikiPageResource);
 		}
 
+		if (!isNew &&
+				(!Validator.equals(wikiPageResource.getUuid(),
+					wikiPageResourceModelImpl.getOriginalUuid()) ||
+				(wikiPageResource.getNodeId() != wikiPageResourceModelImpl.getOriginalNodeId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_N,
+				new Object[] {
+					wikiPageResourceModelImpl.getOriginalUuid(),
+					new Long(wikiPageResourceModelImpl.getOriginalNodeId())
+				});
+		}
+
+		if (isNew ||
+				(!Validator.equals(wikiPageResource.getUuid(),
+					wikiPageResourceModelImpl.getOriginalUuid()) ||
+				(wikiPageResource.getNodeId() != wikiPageResourceModelImpl.getOriginalNodeId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_N,
+				new Object[] {
+					wikiPageResource.getUuid(),
+					new Long(wikiPageResource.getNodeId())
+				}, wikiPageResource);
+		}
+
 		return wikiPageResource;
 	}
 
@@ -304,6 +376,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 		wikiPageResourceImpl.setNew(wikiPageResource.isNew());
 		wikiPageResourceImpl.setPrimaryKey(wikiPageResource.getPrimaryKey());
 
+		wikiPageResourceImpl.setUuid(wikiPageResource.getUuid());
 		wikiPageResourceImpl.setResourcePrimKey(wikiPageResource.getResourcePrimKey());
 		wikiPageResourceImpl.setNodeId(wikiPageResource.getNodeId());
 		wikiPageResourceImpl.setTitle(wikiPageResource.getTitle());
@@ -364,6 +437,285 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 		}
 
 		return wikiPageResource;
+	}
+
+	public List<WikiPageResource> findByUuid(String uuid)
+		throws SystemException {
+		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	public List<WikiPageResource> findByUuid(String uuid, int start, int end)
+		throws SystemException {
+		return findByUuid(uuid, start, end, null);
+	}
+
+	public List<WikiPageResource> findByUuid(String uuid, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				uuid,
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<WikiPageResource> list = (List<WikiPageResource>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = null;
+
+				if (orderByComparator != null) {
+					query = new StringBundler(3 +
+							(orderByComparator.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(2);
+				}
+
+				query.append(_SQL_SELECT_WIKIPAGERESOURCE_WHERE);
+
+				if (uuid == null) {
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
+				}
+				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
+					}
+				}
+
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (uuid != null) {
+					qPos.add(uuid);
+				}
+
+				list = (List<WikiPageResource>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<WikiPageResource>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
+					list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public WikiPageResource findByUuid_First(String uuid,
+		OrderByComparator orderByComparator)
+		throws NoSuchPageResourceException, SystemException {
+		List<WikiPageResource> list = findByUuid(uuid, 0, 1, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("uuid=");
+			msg.append(uuid);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchPageResourceException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public WikiPageResource findByUuid_Last(String uuid,
+		OrderByComparator orderByComparator)
+		throws NoSuchPageResourceException, SystemException {
+		int count = countByUuid(uuid);
+
+		List<WikiPageResource> list = findByUuid(uuid, count - 1, count,
+				orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("uuid=");
+			msg.append(uuid);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchPageResourceException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public WikiPageResource[] findByUuid_PrevAndNext(long resourcePrimKey,
+		String uuid, OrderByComparator orderByComparator)
+		throws NoSuchPageResourceException, SystemException {
+		WikiPageResource wikiPageResource = findByPrimaryKey(resourcePrimKey);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			WikiPageResource[] array = new WikiPageResourceImpl[3];
+
+			array[0] = getByUuid_PrevAndNext(session, wikiPageResource, uuid,
+					orderByComparator, true);
+
+			array[1] = wikiPageResource;
+
+			array[2] = getByUuid_PrevAndNext(session, wikiPageResource, uuid,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected WikiPageResource getByUuid_PrevAndNext(Session session,
+		WikiPageResource wikiPageResource, String uuid,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_WIKIPAGERESOURCE_WHERE);
+
+		if (uuid == null) {
+			query.append(_FINDER_COLUMN_UUID_UUID_1);
+		}
+		else {
+			if (uuid.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_UUID_UUID_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_UUID_UUID_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (uuid != null) {
+			qPos.add(uuid);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(wikiPageResource);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<WikiPageResource> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
 	}
 
 	public WikiPageResource findByN_T(long nodeId, String title)
@@ -492,6 +844,132 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 		}
 	}
 
+	public WikiPageResource findByUUID_N(String uuid, long nodeId)
+		throws NoSuchPageResourceException, SystemException {
+		WikiPageResource wikiPageResource = fetchByUUID_N(uuid, nodeId);
+
+		if (wikiPageResource == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("uuid=");
+			msg.append(uuid);
+
+			msg.append(", nodeId=");
+			msg.append(nodeId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchPageResourceException(msg.toString());
+		}
+
+		return wikiPageResource;
+	}
+
+	public WikiPageResource fetchByUUID_N(String uuid, long nodeId)
+		throws SystemException {
+		return fetchByUUID_N(uuid, nodeId, true);
+	}
+
+	public WikiPageResource fetchByUUID_N(String uuid, long nodeId,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { uuid, new Long(nodeId) };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_N,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(3);
+
+				query.append(_SQL_SELECT_WIKIPAGERESOURCE_WHERE);
+
+				if (uuid == null) {
+					query.append(_FINDER_COLUMN_UUID_N_UUID_1);
+				}
+				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_UUID_N_UUID_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_UUID_N_UUID_2);
+					}
+				}
+
+				query.append(_FINDER_COLUMN_UUID_N_NODEID_2);
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (uuid != null) {
+					qPos.add(uuid);
+				}
+
+				qPos.add(nodeId);
+
+				List<WikiPageResource> list = q.list();
+
+				result = list;
+
+				WikiPageResource wikiPageResource = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_N,
+						finderArgs, list);
+				}
+				else {
+					wikiPageResource = list.get(0);
+
+					cacheResult(wikiPageResource);
+
+					if ((wikiPageResource.getUuid() == null) ||
+							!wikiPageResource.getUuid().equals(uuid) ||
+							(wikiPageResource.getNodeId() != nodeId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_N,
+							finderArgs, wikiPageResource);
+					}
+				}
+
+				return wikiPageResource;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_N,
+						finderArgs, new ArrayList<WikiPageResource>());
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (WikiPageResource)result;
+			}
+		}
+	}
+
 	public List<WikiPageResource> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -566,9 +1044,22 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 		return list;
 	}
 
+	public void removeByUuid(String uuid) throws SystemException {
+		for (WikiPageResource wikiPageResource : findByUuid(uuid)) {
+			remove(wikiPageResource);
+		}
+	}
+
 	public void removeByN_T(long nodeId, String title)
 		throws NoSuchPageResourceException, SystemException {
 		WikiPageResource wikiPageResource = findByN_T(nodeId, title);
+
+		remove(wikiPageResource);
+	}
+
+	public void removeByUUID_N(String uuid, long nodeId)
+		throws NoSuchPageResourceException, SystemException {
+		WikiPageResource wikiPageResource = findByUUID_N(uuid, nodeId);
 
 		remove(wikiPageResource);
 	}
@@ -577,6 +1068,64 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 		for (WikiPageResource wikiPageResource : findAll()) {
 			remove(wikiPageResource);
 		}
+	}
+
+	public int countByUuid(String uuid) throws SystemException {
+		Object[] finderArgs = new Object[] { uuid };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(2);
+
+				query.append(_SQL_COUNT_WIKIPAGERESOURCE_WHERE);
+
+				if (uuid == null) {
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
+				}
+				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
+					}
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (uuid != null) {
+					qPos.add(uuid);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
 	}
 
 	public int countByN_T(long nodeId, String title) throws SystemException {
@@ -633,6 +1182,69 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_N_T, finderArgs,
 					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByUUID_N(String uuid, long nodeId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { uuid, new Long(nodeId) };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID_N,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(3);
+
+				query.append(_SQL_COUNT_WIKIPAGERESOURCE_WHERE);
+
+				if (uuid == null) {
+					query.append(_FINDER_COLUMN_UUID_N_UUID_1);
+				}
+				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_UUID_N_UUID_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_UUID_N_UUID_2);
+					}
+				}
+
+				query.append(_FINDER_COLUMN_UUID_N_NODEID_2);
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (uuid != null) {
+					qPos.add(uuid);
+				}
+
+				qPos.add(nodeId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_N,
+					finderArgs, count);
 
 				closeSession(session);
 			}
@@ -711,10 +1323,17 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 	private static final String _SQL_SELECT_WIKIPAGERESOURCE_WHERE = "SELECT wikiPageResource FROM WikiPageResource wikiPageResource WHERE ";
 	private static final String _SQL_COUNT_WIKIPAGERESOURCE = "SELECT COUNT(wikiPageResource) FROM WikiPageResource wikiPageResource";
 	private static final String _SQL_COUNT_WIKIPAGERESOURCE_WHERE = "SELECT COUNT(wikiPageResource) FROM WikiPageResource wikiPageResource WHERE ";
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "wikiPageResource.uuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "wikiPageResource.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(wikiPageResource.uuid IS NULL OR wikiPageResource.uuid = ?)";
 	private static final String _FINDER_COLUMN_N_T_NODEID_2 = "wikiPageResource.nodeId = ? AND ";
 	private static final String _FINDER_COLUMN_N_T_TITLE_1 = "wikiPageResource.title IS NULL";
 	private static final String _FINDER_COLUMN_N_T_TITLE_2 = "wikiPageResource.title = ?";
 	private static final String _FINDER_COLUMN_N_T_TITLE_3 = "(wikiPageResource.title IS NULL OR wikiPageResource.title = ?)";
+	private static final String _FINDER_COLUMN_UUID_N_UUID_1 = "wikiPageResource.uuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_N_UUID_2 = "wikiPageResource.uuid = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_N_UUID_3 = "(wikiPageResource.uuid IS NULL OR wikiPageResource.uuid = ?) AND ";
+	private static final String _FINDER_COLUMN_UUID_N_NODEID_2 = "wikiPageResource.nodeId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "wikiPageResource.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No WikiPageResource exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No WikiPageResource exists with the key {";

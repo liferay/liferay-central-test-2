@@ -67,6 +67,7 @@ public class WikiPageResourcePersistenceTest extends BasePersistenceTestCase {
 
 		WikiPageResource newWikiPageResource = _persistence.create(pk);
 
+		newWikiPageResource.setUuid(randomString());
 		newWikiPageResource.setNodeId(nextLong());
 		newWikiPageResource.setTitle(randomString());
 
@@ -74,6 +75,8 @@ public class WikiPageResourcePersistenceTest extends BasePersistenceTestCase {
 
 		WikiPageResource existingWikiPageResource = _persistence.findByPrimaryKey(newWikiPageResource.getPrimaryKey());
 
+		assertEquals(existingWikiPageResource.getUuid(),
+			newWikiPageResource.getUuid());
 		assertEquals(existingWikiPageResource.getResourcePrimKey(),
 			newWikiPageResource.getResourcePrimKey());
 		assertEquals(existingWikiPageResource.getNodeId(),
@@ -154,6 +157,7 @@ public class WikiPageResourcePersistenceTest extends BasePersistenceTestCase {
 
 		WikiPageResource wikiPageResource = _persistence.create(pk);
 
+		wikiPageResource.setUuid(randomString());
 		wikiPageResource.setNodeId(nextLong());
 		wikiPageResource.setTitle(randomString());
 

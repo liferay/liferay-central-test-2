@@ -16,6 +16,7 @@ package com.liferay.portlet.wiki.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 
@@ -264,7 +265,7 @@ public class WikiPageServiceSoap {
 		try {
 			java.lang.String returnValue = WikiPageServiceUtil.getPagesRSS(companyId,
 					nodeId, title, max, type, version, displayStyle, feedURL,
-					entryURL, new java.util.Locale(locale));
+					entryURL, LocaleUtil.fromLanguageId(locale));
 
 			return returnValue;
 		}
