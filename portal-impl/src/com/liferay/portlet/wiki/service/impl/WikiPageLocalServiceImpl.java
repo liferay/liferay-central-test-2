@@ -759,10 +759,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	public List<WikiPage> getPages(
-			long nodeId, long resourcePrimKey, int status)
+			long resourcePrimKey, long nodeId, int status)
 		throws SystemException {
 
-		return wikiPagePersistence.findByN_K_S(nodeId, resourcePrimKey, status);
+		return wikiPagePersistence.findByR_N_S(resourcePrimKey, nodeId, status);
 	}
 
 	public List<WikiPage> getPages(
