@@ -331,12 +331,12 @@ public class PortletExporter {
 				asset.addAttribute(
 					"category-uuids", StringUtil.merge(entry.getValue()));
 
-				List<AssetCategory> categories =
+				List<AssetCategory> assetCategories =
 					AssetCategoryServiceUtil.getCategories(className, classPK);
 
-				for (AssetCategory category : categories) {
+				for (AssetCategory assestCategory : assetCategories) {
 					exportCategory(
-						context, vocabulariesEl, categoriesEl, category);
+						context, vocabulariesEl, categoriesEl, assestCategory);
 				}
 			}
 		}
@@ -347,33 +347,34 @@ public class PortletExporter {
 
 	protected void exportCategory(
 			PortletDataContext context, Element vocabulariesEl,
-			Element categoryEls, long categoryId)
+			Element categoryEls, long assetCategoryId)
 		throws Exception {
 
-		AssetCategory category = AssetCategoryUtil.fetchByPrimaryKey(
-			categoryId);
+		AssetCategory assetCategory = AssetCategoryUtil.fetchByPrimaryKey(
+			assetCategoryId);
 
-		if (category != null) {
-			exportCategory(context, vocabulariesEl, categoryEls, category);
+		if (assetCategory != null) {
+			exportCategory(context, vocabulariesEl, categoryEls, assetCategory);
 		}
 	}
 
 	protected void exportCategory(
 			PortletDataContext context, Element vocabulariesEl,
-			Element categoriesEl, AssetCategory category)
+			Element categoriesEl, AssetCategory assetCategory)
 		throws Exception {
 
-		exportVocabulary(context, vocabulariesEl, category.getVocabularyId());
+		exportVocabulary(
+			context, vocabulariesEl, assetCategory.getVocabularyId());
 
-		if (category.getParentCategoryId() !=
+		if (assetCategory.getParentCategoryId() !=
 				AssetCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
 
 			exportCategory(
 				context, vocabulariesEl, categoriesEl,
-				category.getParentCategoryId());
+				assetCategory.getParentCategoryId());
 		}
 
-		String path = getCategoryPath(context, category.getCategoryId());
+		String path = getCategoryPath(context, assetCategory.getCategoryId());
 
 		if (!context.isPathNotProcessed(path)) {
 			return;
@@ -383,23 +384,27 @@ public class PortletExporter {
 
 		categoryEl.addAttribute("path", path);
 
-		category.setUserUuid(category.getUserUuid());
+		assetCategory.setUserUuid(assetCategory.getUserUuid());
 
-		context.addZipEntry(path, category);
+		context.addZipEntry(path, assetCategory);
 
-		List<AssetCategoryProperty> properties =
+		List<AssetCategoryProperty> assetCategoryProperties =
 			AssetCategoryPropertyLocalServiceUtil.getCategoryProperties(
-				category.getCategoryId());
+				assetCategory.getCategoryId());
 
-		for (AssetCategoryProperty property : properties) {
+		for (AssetCategoryProperty assetCategoryProperty :
+				assetCategoryProperties) {
+
 			Element propertyEl = categoryEl.addElement("property");
 
-			propertyEl.addAttribute("key", property.getKey());
-			propertyEl.addAttribute("value", property.getValue());
-			propertyEl.addAttribute("userUuid", property.getUserUuid());
+			propertyEl.addAttribute(
+				"userUuid", assetCategoryProperty.getUserUuid());
+			propertyEl.addAttribute("key", assetCategoryProperty.getKey());
+			propertyEl.addAttribute("value", assetCategoryProperty.getValue());
 		}
 
-		context.addPermissions(AssetCategory.class, category.getCategoryId());
+		context.addPermissions(
+			AssetCategory.class, assetCategory.getCategoryId());
 	}
 
 	protected void exportComments(PortletDataContext context, Element parentEl)
@@ -876,22 +881,22 @@ public class PortletExporter {
 
 	protected void exportVocabulary(
 			PortletDataContext context, Element vocabulariesEl,
-			long vocabularyId)
+			long assetVocabularyId)
 		throws Exception {
 
-		AssetVocabulary vocabulary = AssetVocabularyUtil.findByPrimaryKey(
-			vocabularyId);
+		AssetVocabulary assetVocabulary = AssetVocabularyUtil.findByPrimaryKey(
+			assetVocabularyId);
 
-		exportVocabulary(context, vocabulariesEl, vocabulary);
+		exportVocabulary(context, vocabulariesEl, assetVocabulary);
 	}
 
 	protected void exportVocabulary(
 			PortletDataContext context, Element vocabulariesEl,
-			AssetVocabulary vocabulary)
+			AssetVocabulary assetVocabulary)
 		throws Exception {
 
 		String path = getVocabulariesPath(
-			context, vocabulary.getVocabularyId());
+			context, assetVocabulary.getVocabularyId());
 
 		if (!context.isPathNotProcessed(path)) {
 			return;
@@ -901,22 +906,22 @@ public class PortletExporter {
 
 		vocabularyEl.addAttribute("path", path);
 
-		vocabulary.setUserUuid(vocabulary.getUserUuid());
+		assetVocabulary.setUserUuid(assetVocabulary.getUserUuid());
 
-		context.addZipEntry(path, vocabulary);
+		context.addZipEntry(path, assetVocabulary);
 
 		context.addPermissions(
-			AssetVocabulary.class, vocabulary.getVocabularyId());
+			AssetVocabulary.class, assetVocabulary.getVocabularyId());
 	}
 
 	protected String getCategoryPath(
-		PortletDataContext context, long categoryId) {
+		PortletDataContext context, long assetCategoryId) {
 
 		StringBundler sb = new StringBundler(6);
 
 		sb.append(context.getRootPath());
 		sb.append("/categories/");
-		sb.append(categoryId);
+		sb.append(assetCategoryId);
 		sb.append(".xml");
 
 		return sb.toString();
@@ -1029,7 +1034,7 @@ public class PortletExporter {
 
 	protected String getRatingsPath(
 		PortletDataContext context, String className, String classPK,
-		RatingsEntry rating) {
+		RatingsEntry ratingsEntry) {
 
 		StringBundler sb = new StringBundler(8);
 
@@ -1039,20 +1044,20 @@ public class PortletExporter {
 		sb.append(CharPool.FORWARD_SLASH);
 		sb.append(classPK);
 		sb.append(CharPool.FORWARD_SLASH);
-		sb.append(rating.getEntryId());
+		sb.append(ratingsEntry.getEntryId());
 		sb.append(".xml");
 
 		return sb.toString();
 	}
 
 	protected String getVocabulariesPath(
-		PortletDataContext context, long vocabularyId) {
+		PortletDataContext context, long assetVocabularyId) {
 
 		StringBundler sb = new StringBundler(8);
 
 		sb.append(context.getRootPath());
 		sb.append("/vocabularies/");
-		sb.append(vocabularyId);
+		sb.append(assetVocabularyId);
 		sb.append(".xml");
 
 		return sb.toString();

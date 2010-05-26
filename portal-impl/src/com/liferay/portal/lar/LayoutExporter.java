@@ -513,23 +513,23 @@ public class LayoutExporter {
 
 			Element vocabulariesEl = root.addElement("vocabularies");
 
-			List<AssetVocabulary> vocabularies =
+			List<AssetVocabulary> assetVocabularies =
 				AssetVocabularyLocalServiceUtil.getGroupVocabularies(
 					context.getGroupId());
 
-			for (AssetVocabulary vocabulary : vocabularies) {
+			for (AssetVocabulary assetVocabulary : assetVocabularies) {
 				_portletExporter.exportVocabulary(
-					context, vocabulariesEl, vocabulary);
+					context, vocabulariesEl, assetVocabulary);
 			}
 
 			Element categoriesEl = root.addElement("categories");
 
-			List<AssetCategory> categories = AssetCategoryUtil.findByGroupId(
-				context.getGroupId());
+			List<AssetCategory> assetCategories =
+				AssetCategoryUtil.findByGroupId(context.getGroupId());
 
-			for (AssetCategory category : categories) {
+			for (AssetCategory assetCategory : assetCategories) {
 				_portletExporter.exportCategory(
-					context, vocabulariesEl, categoriesEl, category);
+					context, vocabulariesEl, categoriesEl, assetCategory);
 			}
 
 			_portletExporter.exportCategories(context, root);
