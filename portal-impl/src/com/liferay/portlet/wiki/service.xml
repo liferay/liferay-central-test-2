@@ -106,6 +106,10 @@
 		<finder name="Format" return-type="Collection">
 			<finder-column name="format" />
 		</finder>
+		<finder name="N_K" return-type="Collection">
+			<finder-column name="nodeId" />
+			<finder-column name="resourcePrimKey" />
+		</finder>
 		<finder name="N_T" return-type="Collection">
 			<finder-column name="nodeId" />
 			<finder-column name="title" />
@@ -129,6 +133,11 @@
 		<finder name="U_N_S" return-type="Collection">
 			<finder-column name="userId" />
 			<finder-column name="nodeId" />
+			<finder-column name="status" />
+		</finder>
+		<finder name="N_K_S" return-type="Collection">
+			<finder-column name="nodeId" />
+			<finder-column name="resourcePrimKey" />
 			<finder-column name="status" />
 		</finder>
 		<finder name="N_T_V" return-type="WikiPage" unique="true">
@@ -155,6 +164,11 @@
 			<finder-column name="nodeId" />
 			<finder-column name="head" />
 			<finder-column name="status" />
+		</finder>
+		<finder name="N_V_V" return-type="WikiPage" unique="true">
+			<finder-column name="nodeId" />
+			<finder-column name="resourcePrimKey" />
+			<finder-column name="version" />
 		</finder>
 		<finder name="N_H_P_S" return-type="Collection">
 			<finder-column name="nodeId" />
@@ -183,7 +197,7 @@
 
 		<tx-required>getPage</tx-required>
 	</entity>
-	<entity name="WikiPageResource" local-service="true" remote-service="false">
+	<entity name="WikiPageResource" uuid="true" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
 
@@ -199,6 +213,10 @@
 		<finder name="N_T" return-type="WikiPageResource" unique="true">
 			<finder-column name="nodeId" />
 			<finder-column name="title" />
+		</finder>
+		<finder name="UUID_N" return-type="WikiPageResource" unique="true">
+			<finder-column name="uuid" />
+			<finder-column name="nodeId" />
 		</finder>
 	</entity>
 	<exceptions>
