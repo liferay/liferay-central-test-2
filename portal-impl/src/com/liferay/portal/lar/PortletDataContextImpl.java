@@ -656,20 +656,20 @@ public class PortletDataContextImpl implements PortletDataContext {
 				threadPKs.put(message.getThreadId(), thread.getThreadId());
 			}
 			else {
-				MBMessage newMessage = null;
-
 				ServiceContext serviceContext = new ServiceContext();
 
 				serviceContext.setScopeGroupId(groupId);
 
-				if (getDataStrategy().equals(
+				MBMessage importedMessage = null;
+
+				if (_dataStrategy.equals(
 						PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
 					MBMessage existingMessage = MBMessageUtil.fetchByUUID_G(
 						message.getUuid(), groupId);
 
 					if (existingMessage == null) {
-						newMessage =
+						importedMessage =
 							MBMessageLocalServiceUtil.addDiscussionMessage(
 								message.getUuid(), userId,
 								message.getUserName(), groupId,
@@ -678,7 +678,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 								message.getBody(), serviceContext);
 					}
 					else {
-						newMessage =
+						importedMessage =
 							MBMessageLocalServiceUtil.updateDiscussionMessage(
 								userId, existingMessage.getMessageId(),
 								message.getSubject(), message.getBody(),
@@ -686,16 +686,18 @@ public class PortletDataContextImpl implements PortletDataContext {
 					}
 				}
 				else {
-					newMessage = MBMessageLocalServiceUtil.addDiscussionMessage(
-						null, userId, message.getUserName(), groupId,
-						classObj.getName(), newClassPK, threadId,
-						parentMessageId, message.getSubject(),
-						message.getBody(), serviceContext);
+					importedMessage =
+						MBMessageLocalServiceUtil.addDiscussionMessage(
+							null, userId, message.getUserName(), groupId,
+							classObj.getName(), newClassPK, threadId,
+							parentMessageId, message.getSubject(),
+							message.getBody(), serviceContext);
 				}
 
 				messagePKs.put(
-					message.getMessageId(), newMessage.getMessageId());
-				threadPKs.put(message.getThreadId(), newMessage.getThreadId());
+					message.getMessageId(), importedMessage.getMessageId());
+				threadPKs.put(
+					message.getThreadId(), importedMessage.getThreadId());
 			}
 
 			importRatingsEntries(
