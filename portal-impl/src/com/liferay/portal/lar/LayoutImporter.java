@@ -68,14 +68,9 @@ import com.liferay.portal.theme.ThemeLoaderFactory;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.asset.DuplicateCategoryException;
 import com.liferay.portlet.asset.DuplicateVocabularyException;
-import com.liferay.portlet.asset.NoSuchCategoryException;
-import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetVocabulary;
-import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
-import com.liferay.portlet.asset.service.persistence.AssetCategoryUtil;
 import com.liferay.portlet.asset.service.persistence.AssetVocabularyUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 
@@ -285,18 +280,16 @@ public class LayoutImporter {
 		// Read categories, comments, locks, permissions, ratings, and tags to
 		// make them available to the data handlers through the context
 
-		if (importCategories) {
-			importCategories(context);
-		}
-
-		_portletImporter.readCategories(context, root);
-		_portletImporter.readComments(context, root);
-		_portletImporter.readLocks(context, root);
-
 		if (importPermissions) {
 			_permissionImporter.readPortletDataPermissions(context);
 		}
 
+		if (importCategories) {
+			_portletImporter.readCategories(context);
+		}
+
+		_portletImporter.readComments(context, root);
+		_portletImporter.readLocks(context, root);
 		_portletImporter.readRatings(context, root);
 		_portletImporter.readTags(context, root);
 
@@ -619,7 +612,7 @@ public class LayoutImporter {
 
 			Element portletDataEl = portletEl.element("portlet-data");
 
-			if (importPortletData && portletDataEl != null) {
+			if (importPortletData && (portletDataEl != null)) {
 				_portletImporter.importPortletData(
 					context, portletId, plid, portletDataEl);
 			}
@@ -832,120 +825,6 @@ public class LayoutImporter {
 		}
 
 		return assetVocabulary;
-	}
-
-	protected void importCategories(PortletDataContext context)
-		throws SystemException {
-
-		try {
-			String xml = context.getZipEntryAsString(
-				context.getSourceRootPath() + "/categories-hierarchy.xml");
-
-			if (Validator.isNull(xml)) {
-				return;
-			}
-
-			Document doc = SAXReaderUtil.read(xml);
-
-			Element root = doc.getRootElement();
-
-			List<Element> vocabularies = root.elements("vocabulary");
-
-			for (Element vocabularyEl : vocabularies) {
-				String vocabularyUuid = GetterUtil.getString(
-					vocabularyEl.attributeValue("uuid"));
-				String vocabularyName = GetterUtil.getString(
-					vocabularyEl.attributeValue("name"));
-				String userUuid = GetterUtil.getString(
-					vocabularyEl.attributeValue("userUuid"));
-
-				ServiceContext serviceContext = new ServiceContext();
-
-				serviceContext.setAddCommunityPermissions(true);
-				serviceContext.setAddGuestPermissions(true);
-				serviceContext.setScopeGroupId(context.getGroupId());
-
-				AssetVocabulary assetVocabulary = getAssetVocabulary(
-					context, vocabularyUuid, vocabularyName, userUuid,
-					serviceContext);
-
-				List<Element> categories = vocabularyEl.elements("category");
-
-				for (Element category : categories) {
-					String categoryUuid = GetterUtil.getString(
-						category.attributeValue("uuid"));
-					String parentCategoryUuid = GetterUtil.getString(
-						category.attributeValue("parentCategoryUuid"));
-					String categoryName = GetterUtil.getString(
-						category.attributeValue("name"));
-					String[] properties = null;
-
-					try {
-						importCategory(
-							context, categoryUuid, userUuid, parentCategoryUuid,
-							categoryName, assetVocabulary.getVocabularyId(),
-							properties, serviceContext);
-					}
-					catch (DuplicateCategoryException dce) {
-					}
-					catch (NoSuchCategoryException nsce) {
-					}
-				}
-			}
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
-
-	protected void importCategory(
-			PortletDataContext context, String categoryUuid, String userUuid,
-			String parentCategoryUuid, String categoryName, long vocabularyId,
-			String[] properties, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		long parentCategoryId = 0;
-
-		if (Validator.isNotNull(parentCategoryUuid)) {
-			AssetCategory parentCategory = AssetCategoryUtil.findByUUID_G(
-				parentCategoryUuid,context.getScopeGroupId());
-
-			parentCategoryId = parentCategory.getCategoryId();
-		}
-
-		if (context.getDataStrategy().equals(
-				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
-
-			AssetCategory existingAssetCategory =
-				AssetCategoryUtil.fetchByUUID_G(
-					categoryUuid, context.getGroupId());
-
-			if (existingAssetCategory == null) {
-				Map<Locale, String> titleMap =	new HashMap<Locale, String>();
-
-				titleMap.put(LocaleUtil.getDefault(), categoryName);
-
-				AssetCategoryLocalServiceUtil.addCategory(
-					categoryUuid, context.getUserId(userUuid), parentCategoryId,
-					titleMap, vocabularyId, properties, serviceContext);
-			}
-			else {
-				AssetCategoryLocalServiceUtil.updateCategory(
-					context.getUserId(userUuid),
-					existingAssetCategory.getCategoryId(), parentCategoryId,
-					existingAssetCategory.getTitleMap(), vocabularyId,
-					properties, serviceContext);
-			}
-		}
-		else {
-			Map<Locale, String> titleMap =	new HashMap<Locale, String>();
-
-			titleMap.put(LocaleUtil.getDefault(), categoryName);
-
-			AssetCategoryLocalServiceUtil.addCategory(
-				null, context.getUserId(userUuid), parentCategoryId, titleMap,
-				vocabularyId, properties, serviceContext);
-		}
 	}
 
 	protected String importTheme(LayoutSet layoutSet, InputStream themeZip)

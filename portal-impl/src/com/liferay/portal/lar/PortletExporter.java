@@ -55,6 +55,14 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.asset.model.AssetCategory;
+import com.liferay.portlet.asset.model.AssetCategoryConstants;
+import com.liferay.portlet.asset.model.AssetCategoryProperty;
+import com.liferay.portlet.asset.model.AssetVocabulary;
+import com.liferay.portlet.asset.service.AssetCategoryPropertyLocalServiceUtil;
+import com.liferay.portlet.asset.service.AssetCategoryServiceUtil;
+import com.liferay.portlet.asset.service.persistence.AssetCategoryUtil;
+import com.liferay.portlet.asset.service.persistence.AssetVocabularyUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 
@@ -106,6 +114,8 @@ public class PortletExporter {
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
+		boolean exportCategories = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.CATEGORIES);
 		boolean exportPermissions = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
 		boolean exportPortletArchivedSetups = MapUtil.getBoolean(
@@ -123,6 +133,7 @@ public class PortletExporter {
 			parameterMap, PortletDataHandlerKeys.USER_PERMISSIONS);
 
 		if (_log.isDebugEnabled()) {
+			_log.debug("Export categories " + exportCategories);
 			_log.debug("Export permissions " + exportPermissions);
 			_log.debug(
 				"Export portlet archived setups " +
@@ -225,7 +236,9 @@ public class PortletExporter {
 
 		// Categories
 
-		exportCategories(context, root);
+		if (exportCategories) {
+			exportCategories(context);
+		}
 
 		// Comments
 
@@ -267,38 +280,126 @@ public class PortletExporter {
 		return zipWriter.getFile();
 	}
 
-	protected void exportCategories(
-			PortletDataContext context, Element parentEl)
+	protected void exportCategories(PortletDataContext context)
 		throws SystemException {
 
 		try {
 			Document doc = SAXReaderUtil.createDocument();
 
-			Element root = doc.addElement("categories");
+			Element root = doc.addElement("categories-hierarchy");
 
-			Map<String, String[]> assetCategoryIdsMap =
-				context.getAssetCategoryUuidsMap();
-
-			for (Map.Entry<String, String[]> entry :
-					assetCategoryIdsMap.entrySet()) {
-
-				String[] categoryEntry = entry.getKey().split(StringPool.POUND);
-
-				Element asset = root.addElement("asset");
-
-				asset.addAttribute("class-name", categoryEntry[0]);
-				asset.addAttribute("class-pk", categoryEntry[1]);
-				asset.addAttribute(
-					"category-uuids", StringUtil.merge(entry.getValue()));
-			}
+			exportCategories(context, root);
 
 			context.addZipEntry(
-				context.getRootPath() + "/categories.xml",
+				context.getRootPath() + "/categories-hierarchy.xml",
 				doc.formattedString());
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
+	}
+
+	protected void exportCategories(PortletDataContext context, Element root)
+		throws SystemException {
+
+		try {
+			Element vocabulariesEl = root.element("vocabularies");
+
+			if (vocabulariesEl == null) {
+				vocabulariesEl = root.addElement("vocabularies");
+			}
+
+			Element assetsEl = root.addElement("assets");
+
+			Element categoriesEl = root.addElement("categories");
+
+			Map<String, String[]> assetCategoryUuidsMap =
+				context.getAssetCategoryUuidsMap();
+
+			for (Map.Entry<String, String[]> entry :
+					assetCategoryUuidsMap.entrySet()) {
+
+				String[] categoryEntry = entry.getKey().split(StringPool.POUND);
+
+				String className = categoryEntry[0];
+				long classPK = GetterUtil.getLong(categoryEntry[1]);
+
+				Element asset = assetsEl.addElement("asset");
+
+				asset.addAttribute("class-name", className);
+				asset.addAttribute("class-pk", String.valueOf(classPK));
+				asset.addAttribute(
+					"category-uuids", StringUtil.merge(entry.getValue()));
+
+				List<AssetCategory> categories =
+					AssetCategoryServiceUtil.getCategories(className, classPK);
+
+				for (AssetCategory category : categories) {
+					exportCategory(
+						context, vocabulariesEl, categoriesEl, category);
+				}
+			}
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+	}
+
+	protected void exportCategory(
+			PortletDataContext context, Element vocabulariesEl,
+			Element categoryEls, long categoryId)
+		throws Exception {
+
+		AssetCategory category = AssetCategoryUtil.fetchByPrimaryKey(
+			categoryId);
+
+		if (category != null) {
+			exportCategory(context, vocabulariesEl, categoryEls, category);
+		}
+	}
+
+	protected void exportCategory(
+			PortletDataContext context, Element vocabulariesEl,
+			Element categoriesEl, AssetCategory category)
+		throws Exception {
+
+		exportVocabulary(context, vocabulariesEl, category.getVocabularyId());
+
+		if (category.getParentCategoryId() !=
+				AssetCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+
+			exportCategory(
+				context, vocabulariesEl, categoriesEl,
+				category.getParentCategoryId());
+		}
+
+		String path = getCategoryPath(context, category.getCategoryId());
+
+		if (!context.isPathNotProcessed(path)) {
+			return;
+		}
+
+		Element categoryEl = categoriesEl.addElement("category");
+
+		categoryEl.addAttribute("path", path);
+
+		category.setUserUuid(category.getUserUuid());
+
+		context.addZipEntry(path, category);
+
+		List<AssetCategoryProperty> properties =
+			AssetCategoryPropertyLocalServiceUtil.getCategoryProperties(
+				category.getCategoryId());
+
+		for (AssetCategoryProperty property : properties) {
+			Element propertyEl = categoryEl.addElement("property");
+
+			propertyEl.addAttribute("key", property.getKey());
+			propertyEl.addAttribute("value", property.getValue());
+			propertyEl.addAttribute("userUuid", property.getUserUuid());
+		}
+
+		context.addPermissions(AssetCategory.class, category.getCategoryId());
 	}
 
 	protected void exportComments(PortletDataContext context, Element parentEl)
@@ -773,6 +874,54 @@ public class PortletExporter {
 		}
 	}
 
+	protected void exportVocabulary(
+			PortletDataContext context, Element vocabulariesEl,
+			long vocabularyId)
+		throws Exception {
+
+		AssetVocabulary vocabulary = AssetVocabularyUtil.findByPrimaryKey(
+			vocabularyId);
+
+		exportVocabulary(context, vocabulariesEl, vocabulary);
+	}
+
+	protected void exportVocabulary(
+			PortletDataContext context, Element vocabulariesEl,
+			AssetVocabulary vocabulary)
+		throws Exception {
+
+		String path = getVocabulariesPath(
+			context, vocabulary.getVocabularyId());
+
+		if (!context.isPathNotProcessed(path)) {
+			return;
+		}
+
+		Element vocabularyEl = vocabulariesEl.addElement("vocabulary");
+
+		vocabularyEl.addAttribute("path", path);
+
+		vocabulary.setUserUuid(vocabulary.getUserUuid());
+
+		context.addZipEntry(path, vocabulary);
+
+		context.addPermissions(
+			AssetVocabulary.class, vocabulary.getVocabularyId());
+	}
+
+	protected String getCategoryPath(
+		PortletDataContext context, long categoryId) {
+
+		StringBundler sb = new StringBundler(6);
+
+		sb.append(context.getRootPath());
+		sb.append("/categories/");
+		sb.append(categoryId);
+		sb.append(".xml");
+
+		return sb.toString();
+	}
+
 	protected String getCommentsPath(
 		PortletDataContext context, String className, String classPK) {
 
@@ -891,6 +1040,19 @@ public class PortletExporter {
 		sb.append(classPK);
 		sb.append(CharPool.FORWARD_SLASH);
 		sb.append(rating.getEntryId());
+		sb.append(".xml");
+
+		return sb.toString();
+	}
+
+	protected String getVocabulariesPath(
+		PortletDataContext context, long vocabularyId) {
+
+		StringBundler sb = new StringBundler(8);
+
+		sb.append(context.getRootPath());
+		sb.append("/vocabularies/");
+		sb.append(vocabularyId);
 		sb.append(".xml");
 
 		return sb.toString();

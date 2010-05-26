@@ -30,11 +30,14 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.WorkflowThreadLocal;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipReaderFactoryUtil;
@@ -51,6 +54,7 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletItemLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.PortletPreferencesUtil;
 import com.liferay.portal.service.persistence.UserUtil;
@@ -60,7 +64,12 @@ import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.asset.NoSuchCategoryException;
 import com.liferay.portlet.asset.model.AssetCategory;
+import com.liferay.portlet.asset.model.AssetCategoryConstants;
+import com.liferay.portlet.asset.model.AssetVocabulary;
+import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
+import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryUtil;
+import com.liferay.portlet.asset.service.persistence.AssetVocabularyUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.social.util.SocialActivityThreadLocal;
@@ -195,15 +204,15 @@ public class PortletImporter {
 		// Read categories, comments, locks, ratings, and tags to make them
 		// available to the data handlers through the context
 
-		readCategories(context, root);
+		if (importPermissions) {
+			_permissionImporter.readPortletDataPermissions(context);
+		}
+
+		readCategories(context);
 		readComments(context, root);
 		readLocks(context, root);
 		readRatings(context, root);
 		readTags(context, root);
-
-		if (importPermissions) {
-			_permissionImporter.readPortletDataPermissions(context);
-		}
 
 		// Delete portlet data
 
@@ -349,6 +358,19 @@ public class PortletImporter {
 		return PortletPreferencesSerializer.toXML(preferencesImpl);
 	}
 
+	protected String getCategoryPath(
+		PortletDataContext context, long categoryId) {
+
+		StringBundler sb = new StringBundler(6);
+
+		sb.append(context.getSourceRootPath());
+		sb.append("/categories/");
+		sb.append(categoryId);
+		sb.append(".xml");
+
+		return sb.toString();
+	}
+
 	protected UserIdStrategy getUserIdStrategy(
 		User user, String userIdStrategy) {
 
@@ -357,6 +379,145 @@ public class PortletImporter {
 		}
 
 		return new CurrentUserIdStrategy(user);
+	}
+
+	protected void importCategory(
+			PortletDataContext context, Map<Long, Long> vocabularyPKs,
+			Map<Long, Long> categoryPKs, Element categoryEl,
+			AssetCategory category)
+		throws Exception {
+
+		long userId = context.getUserId(category.getUserUuid());
+		long vocabularyId = MapUtil.getLong(
+			vocabularyPKs, category.getVocabularyId(),
+			category.getVocabularyId());
+		long parentCategoryId = MapUtil.getLong(
+			categoryPKs, category.getParentCategoryId(),
+			category.getParentCategoryId());
+
+		if ((parentCategoryId !=
+				AssetCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+			(parentCategoryId == category.getParentCategoryId())) {
+
+			String path = getCategoryPath(context, parentCategoryId);
+
+			AssetCategory parentCategory =
+				(AssetCategory)context.getZipEntryAsObject(path);
+
+			Node parentCategoryNode = categoryEl.getParent().selectSingleNode(
+				"./category[@path='" + path + "']");
+
+			if (parentCategoryNode != null) {
+				importCategory(
+					context, vocabularyPKs, categoryPKs,
+					(Element)parentCategoryNode, parentCategory);
+
+				parentCategoryId = MapUtil.getLong(
+					categoryPKs, category.getParentCategoryId(),
+					category.getParentCategoryId());
+			}
+		}
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setCreateDate(category.getCreateDate());
+		serviceContext.setModifiedDate(category.getModifiedDate());
+		serviceContext.setScopeGroupId(context.getScopeGroupId());
+
+		AssetCategory importedCategory = null;
+
+		try {
+			if (parentCategoryId !=
+					AssetCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+
+				AssetCategoryUtil.findByPrimaryKey(parentCategoryId);
+			}
+
+			List<Element> propertyEls = categoryEl.elements("property");
+
+			String[] properties = new String[propertyEls.size()];
+
+			for (int i = 0; i < properties.length; i++) {
+				Element propertyEl = propertyEls.get(i);
+				String key = propertyEl.attributeValue("key");
+				String value = propertyEl.attributeValue("value");
+
+				properties[i] = key.concat(StringPool.COLON).concat(value);
+			}
+
+			AssetCategory existingCategory = AssetCategoryUtil.fetchByV_P_N(
+				vocabularyId, parentCategoryId, category.getName());
+
+			if (existingCategory == null) {
+				importedCategory = AssetCategoryLocalServiceUtil.addCategory(
+					category.getUuid(), userId, parentCategoryId,
+					category.getTitleMap(), vocabularyId, properties,
+					serviceContext);
+			}
+			else {
+				importedCategory = AssetCategoryLocalServiceUtil.updateCategory(
+					userId, existingCategory.getCategoryId(), parentCategoryId,
+					category.getTitleMap(), vocabularyId, properties,
+					serviceContext);
+			}
+
+			categoryPKs.put(
+				category.getCategoryId(), importedCategory.getCategoryId());
+
+			context.importPermissions(
+				AssetCategory.class, category.getCategoryId(),
+				importedCategory.getCategoryId());
+		}
+		catch (NoSuchCategoryException nsce) {
+			_log.error(
+				"Could not find the parent category for category " +
+					category.getCategoryId());
+		}
+	}
+
+	protected void importVocabulary(
+			PortletDataContext context, Map<Long, Long> vocabularyPKs,
+			Element vocabularyEl, AssetVocabulary vocabulary)
+		throws Exception {
+
+		long userId = context.getUserId(vocabulary.getUserUuid());
+		long groupId = context.getScopeGroupId();
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setCreateDate(vocabulary.getCreateDate());
+		serviceContext.setModifiedDate(vocabulary.getModifiedDate());
+		serviceContext.setScopeGroupId(context.getScopeGroupId());
+
+		AssetVocabulary importedVocabulary = null;
+
+		AssetVocabulary existingVocabulary = AssetVocabularyUtil.findByG_N(
+			groupId, vocabulary.getName());
+
+		if (existingVocabulary == null) {
+			importedVocabulary = AssetVocabularyLocalServiceUtil.addVocabulary(
+				vocabulary.getUuid(), userId, vocabulary.getTitleMap(),
+				vocabulary.getDescriptionMap(), vocabulary.getSettings(),
+				serviceContext);
+		}
+		else {
+			importedVocabulary =
+				AssetVocabularyLocalServiceUtil.updateVocabulary(
+					existingVocabulary.getVocabularyId(),
+					vocabulary.getTitleMap(), vocabulary.getDescriptionMap(),
+					vocabulary.getSettings(),serviceContext);
+		}
+
+		vocabularyPKs.put(
+			vocabulary.getVocabularyId(), importedVocabulary.getVocabularyId());
+
+		context.importPermissions(
+			AssetVocabulary.class, vocabulary.getVocabularyId(),
+			importedVocabulary.getVocabularyId());
 	}
 
 	protected void importPortletData(
@@ -549,7 +710,7 @@ public class PortletImporter {
 				}
 
 				if (((ownerType == PortletKeys.PREFS_OWNER_TYPE_GROUP) ||
-					 (ownerType == PortletKeys.PREFS_OWNER_TYPE_LAYOUT)) &&
+					(ownerType == PortletKeys.PREFS_OWNER_TYPE_LAYOUT)) &&
 					!importPortletSetup) {
 
 					continue;
@@ -753,12 +914,12 @@ public class PortletImporter {
 		}
 	}
 
-	protected void readCategories(PortletDataContext context, Element parentEl)
+	protected void readCategories(PortletDataContext context)
 		throws SystemException {
 
 		try {
 			String xml = context.getZipEntryAsString(
-				context.getSourceRootPath() + "/categories.xml");
+				context.getSourceRootPath() + "/categories-hierarchy.xml");
 
 			if (xml == null) {
 				return;
@@ -768,7 +929,49 @@ public class PortletImporter {
 
 			Element root = doc.getRootElement();
 
-			List<Element> assets = root.elements("asset");
+			List<Element> vocabularyEls = root.element("vocabularies").elements(
+				"vocabulary");
+
+			Map<Long, Long> vocabularyPKs =
+				(Map<Long, Long>)context.getNewPrimaryKeysMap(
+					AssetVocabulary.class);
+
+			for (Element vocabularyEl : vocabularyEls) {
+				String path = vocabularyEl.attributeValue("path");
+
+				if (!context.isPathNotProcessed(path)) {
+					continue;
+				}
+
+				AssetVocabulary vocabulary =
+					(AssetVocabulary)context.getZipEntryAsObject(path);
+
+				importVocabulary(
+					context, vocabularyPKs, vocabularyEl, vocabulary);
+			}
+
+			List<Element> categoryEls = root.element("categories").elements(
+				"category");
+
+			Map<Long, Long> categoryPKs =
+				(Map<Long, Long>)context.getNewPrimaryKeysMap(
+					AssetCategory.class);
+
+			for (Element categoryEl : categoryEls) {
+				String path = categoryEl.attributeValue("path");
+
+				if (!context.isPathNotProcessed(path)) {
+					continue;
+				}
+
+				AssetCategory category =
+					(AssetCategory)context.getZipEntryAsObject(path);
+
+				importCategory(
+					context, vocabularyPKs, categoryPKs, categoryEl, category);
+			}
+
+			List<Element> assets = root.element("assets").elements("asset");
 
 			for (Element asset : assets) {
 				String className = GetterUtil.getString(
@@ -782,15 +985,13 @@ public class PortletImporter {
 				long[] assetCategoryIds = new long[0];
 
 				for (String assetCategoryUuid : assetCategoryUuids) {
-					try {
-						AssetCategory assetCategory =
-							AssetCategoryUtil.findByUUID_G(
-								assetCategoryUuid, context.getScopeGroupId());
+					AssetCategory assetCategory =
+						AssetCategoryUtil.fetchByUUID_G(
+							assetCategoryUuid, context.getScopeGroupId());
 
+					if (assetCategory != null) {
 						assetCategoryIds = ArrayUtil.append(
 							assetCategoryIds, assetCategory.getCategoryId());
-					}
-					catch (NoSuchCategoryException nsce) {
 					}
 				}
 

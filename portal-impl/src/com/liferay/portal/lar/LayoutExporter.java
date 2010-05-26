@@ -14,7 +14,6 @@
 
 package com.liferay.portal.lar;
 
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
@@ -25,7 +24,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -60,15 +58,13 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.asset.model.AssetCategory;
-import com.liferay.portlet.asset.model.AssetCategoryConstants;
 import com.liferay.portlet.asset.model.AssetVocabulary;
-import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
+import com.liferay.portlet.asset.service.persistence.AssetCategoryUtil;
 
 import java.io.File;
 import java.io.IOException;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -460,8 +456,6 @@ public class LayoutExporter {
 			exportCategories(context);
 		}
 
-		_portletExporter.exportCategories(context, root);
-
 		// Comments
 
 		_portletExporter.exportComments(context, root);
@@ -472,7 +466,9 @@ public class LayoutExporter {
 
 		// Portlet data permissions
 
-		_permissionExporter.exportPortletDataPermissions(context);
+		if (exportPermissions) {
+			_permissionExporter.exportPortletDataPermissions(context);
+		}
 
 		// Ratings
 
@@ -515,32 +511,28 @@ public class LayoutExporter {
 
 			Element root = doc.addElement("categories-hierarchy");
 
-			List<AssetVocabulary> assetVocabularies =
+			Element vocabulariesEl = root.addElement("vocabularies");
+
+			List<AssetVocabulary> vocabularies =
 				AssetVocabularyLocalServiceUtil.getGroupVocabularies(
 					context.getGroupId());
 
-			for (AssetVocabulary assetVocabulary : assetVocabularies) {
-				Element vocabularyEl = root.addElement("vocabulary");
-
-				long vocabularyId = assetVocabulary.getVocabularyId();
-
-				vocabularyEl.addAttribute("uuid", assetVocabulary.getUuid());
-				vocabularyEl.addAttribute("id", String.valueOf(vocabularyId));
-				vocabularyEl.addAttribute("name", assetVocabulary.getName());
-				vocabularyEl.addAttribute(
-					"userUuid", assetVocabulary.getUserUuid());
-
-				List<AssetCategory> assetCategories =
-					AssetCategoryLocalServiceUtil.getVocabularyCategories(
-						assetVocabulary.getVocabularyId(), QueryUtil.ALL_POS,
-						QueryUtil.ALL_POS, null);
-
-				assetCategories = ListUtil.copy(assetCategories);
-
-				orderCategories(
-					assetCategories, vocabularyEl,
-					AssetCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
+			for (AssetVocabulary vocabulary : vocabularies) {
+				_portletExporter.exportVocabulary(
+					context, vocabulariesEl, vocabulary);
 			}
+
+			Element categoriesEl = root.addElement("categories");
+
+			List<AssetCategory> categories = AssetCategoryUtil.findByGroupId(
+				context.getGroupId());
+
+			for (AssetCategory category : categories) {
+				_portletExporter.exportCategory(
+					context, vocabulariesEl, categoriesEl, category);
+			}
+
+			_portletExporter.exportCategories(context, root);
 
 			context.addZipEntry(
 				context.getRootPath() + "/categories-hierarchy.xml",
@@ -785,47 +777,6 @@ public class LayoutExporter {
 		sb.append(image.getType());
 
 		return sb.toString();
-	}
-
-	protected void orderCategories(
-			List<AssetCategory> assetCategories, Element parentEl,
-			long parentCategoryId)
-		throws PortalException, SystemException {
-
-		List<AssetCategory> parentCategories = new ArrayList<AssetCategory>();
-
-		Iterator<AssetCategory> itr = assetCategories.iterator();
-
-		while (itr.hasNext()) {
-			AssetCategory assetCategory = itr.next();
-
-			if (assetCategory.getParentCategoryId() == parentCategoryId) {
-				Element categoryEl = parentEl.addElement("category");
-
-				categoryEl.addAttribute("uuid", assetCategory.getUuid());
-				categoryEl.addAttribute("name", assetCategory.getName());
-				categoryEl.addAttribute(
-					"userUuid", assetCategory.getUserUuid());
-
-				if (parentCategoryId > 0) {
-					AssetCategory parentCategory =
-						AssetCategoryLocalServiceUtil.getCategory(
-							parentCategoryId);
-
-					categoryEl.addAttribute(
-						"parentCategoryUuid", parentCategory.getUuid());
-				}
-
-				parentCategories.add(assetCategory);
-
-				itr.remove();
-			}
-		}
-
-		for (AssetCategory parentCategory : parentCategories) {
-			orderCategories(
-				assetCategories, parentEl, parentCategory.getCategoryId());
-		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutExporter.class);
