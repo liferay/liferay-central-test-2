@@ -139,7 +139,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Message
 
 		long categoryId = MBCategoryConstants.DISCUSSION_CATEGORY_ID;
-		long classNameId = PortalUtil.getClassNameId(className);
 
 		if (Validator.isNull(subject)) {
 			subject = "N/A";
@@ -161,14 +160,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			parentMessageId, subject, body, files, anonymous, priority,
 			allowPingbacks, serviceContext);
 
-		message.setClassNameId(classNameId);
-		message.setClassPK(classPK);
-
-		mbMessagePersistence.update(message, false);
-
 		// Discussion
 
 		if (parentMessageId == MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) {
+			long classNameId = PortalUtil.getClassNameId(className);
 			MBDiscussion discussion = mbDiscussionPersistence.fetchByC_C(
 				classNameId, classPK);
 
@@ -316,6 +311,18 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		if (priority != MBThreadConstants.PRIORITY_NOT_GIVEN) {
 			message.setPriority(priority);
+		}
+
+		if (message.isDiscussion()) {
+			String className =
+				(String) serviceContext.getAttribute("className");
+			long classNameId = PortalUtil.getClassNameId(className);
+			String classPKString =
+				(String) serviceContext.getAttribute("classPK");
+			long classPK = Long.valueOf(classPKString);
+
+			message.setClassNameId(classNameId);
+			message.setClassPK(classPK);
 		}
 
 		// Attachments
