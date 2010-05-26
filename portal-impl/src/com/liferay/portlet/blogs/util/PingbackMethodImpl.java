@@ -137,8 +137,9 @@ public class PingbackMethodImpl implements Method {
 			ServiceContext serviceContext = new ServiceContext();
 
 			MBMessageLocalServiceUtil.addDiscussionMessage(
-				userId, StringPool.BLANK, groupId, className, classPK, threadId,
-				parentMessageId, StringPool.BLANK, body, serviceContext);
+				null, userId, StringPool.BLANK, groupId, className, classPK,
+				threadId, parentMessageId, StringPool.BLANK, body,
+				serviceContext);
 
 			return XmlRpcUtil.createSuccess("Pingback accepted");
 		}

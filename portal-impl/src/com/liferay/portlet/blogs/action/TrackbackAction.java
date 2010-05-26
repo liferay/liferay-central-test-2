@@ -172,7 +172,7 @@ public class TrackbackAction extends PortletAction {
 			MBMessage.class.getName(), actionRequest);
 
 		MBMessage message = MBMessageLocalServiceUtil.addDiscussionMessage(
-			userId, blogName, groupId, className, classPK, threadId,
+			null, userId, blogName, groupId, className, classPK, threadId,
 			parentMessageId, title, body, serviceContext);
 
 		String entryURL =

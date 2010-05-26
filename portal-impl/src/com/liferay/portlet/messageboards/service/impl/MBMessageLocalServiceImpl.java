@@ -126,17 +126,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		serviceContext.setWorkflowAction(workflowAction);
 
 		return addDiscussionMessage(
-			userId, userName, groupId, className, classPK, threadId,
-			parentMessageId, subject, body, serviceContext);
-	}
-
-	public MBMessage addDiscussionMessage(
-			long userId, String userName, long groupId, String className,
-			long classPK, long threadId, long parentMessageId, String subject,
-			String body, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addDiscussionMessage(
 			null, userId, userName, groupId, className, classPK, threadId,
 			parentMessageId, subject, body, serviceContext);
 	}
@@ -848,7 +837,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			try {
 				message = addDiscussionMessage(
-					userId, null, groupId, className, classPK, 0,
+					null, userId, null, groupId, className, classPK, 0,
 					MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID, subject,
 					subject, new ServiceContext());
 			}

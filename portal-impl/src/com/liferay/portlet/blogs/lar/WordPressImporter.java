@@ -195,7 +195,7 @@ public class WordPressImporter {
 		serviceContext.setAddGuestPermissions(true);
 
 		MBMessage message = MBMessageLocalServiceUtil.addDiscussionMessage(
-			defaultUser.getUserId(), commentAuthor, context.getGroupId(),
+			null, defaultUser.getUserId(), commentAuthor, context.getGroupId(),
 			BlogsEntry.class.getName(), entry.getEntryId(),
 			messageDisplay.getThread().getThreadId(), commentParentId, null,
 			commentContent, serviceContext);
