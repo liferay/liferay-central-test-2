@@ -247,7 +247,6 @@ public class LangBuilder {
 					else {
 						translatedText = _translate(
 							translationId, key, value, 0);
-						System.out.println("translatedText yahoo: " + translatedText);
 
 						if (Validator.isNull(translatedText)) {
 							translatedText = value + _AUTOMATIC_COPY;
