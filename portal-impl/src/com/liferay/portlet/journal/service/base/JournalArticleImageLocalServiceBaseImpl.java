@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ImageLocalService;
+import com.liferay.portal.service.ImageService;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
@@ -357,6 +358,14 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 		this.imageLocalService = imageLocalService;
 	}
 
+	public ImageService getImageService() {
+		return imageService;
+	}
+
+	public void setImageService(ImageService imageService) {
+		this.imageService = imageService;
+	}
+
 	public ImagePersistence getImagePersistence() {
 		return imagePersistence;
 	}
@@ -492,6 +501,8 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = ImageLocalService.class)
 	protected ImageLocalService imageLocalService;
+	@BeanReference(type = ImageService.class)
+	protected ImageService imageService;
 	@BeanReference(type = ImagePersistence.class)
 	protected ImagePersistence imagePersistence;
 	@BeanReference(type = ResourceLocalService.class)
