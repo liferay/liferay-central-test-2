@@ -164,6 +164,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		if (parentMessageId == MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) {
 			long classNameId = PortalUtil.getClassNameId(className);
+
 			MBDiscussion discussion = mbDiscussionPersistence.fetchByC_C(
 				classNameId, classPK);
 
@@ -264,6 +265,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		if (parentMessageId != MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) {
 			MBMessage parentMessage = mbMessagePersistence.fetchByPrimaryKey(
 				parentMessageId);
+
 			if (parentMessage == null) {
 				parentMessageId = MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID;
 			}
@@ -314,12 +316,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 
 		if (message.isDiscussion()) {
-			String className =
-				(String) serviceContext.getAttribute("className");
-			long classNameId = PortalUtil.getClassNameId(className);
-			String classPKString =
-				(String) serviceContext.getAttribute("classPK");
-			long classPK = Long.valueOf(classPKString);
+			long classNameId = PortalUtil.getClassNameId(
+				(String)serviceContext.getAttribute("className"));
+			long classPK = GetterUtil.getLong(
+				(String)serviceContext.getAttribute("classPK"));
 
 			message.setClassNameId(classNameId);
 			message.setClassPK(classPK);
