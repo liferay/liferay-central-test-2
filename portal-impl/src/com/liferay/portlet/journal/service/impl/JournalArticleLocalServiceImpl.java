@@ -720,6 +720,17 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public void deleteArticle(
+			long groupId, String articleId, double version, String articleURL,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		JournalArticle article = journalArticlePersistence.findByG_A_V(
+			groupId, articleId, version);
+
+		deleteArticle(article, articleURL, serviceContext);
+	}
+
+	public void deleteArticle(
 			long groupId, String articleId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -730,17 +741,6 @@ public class JournalArticleLocalServiceImpl
 		for (JournalArticle article : articles) {
 			deleteArticle(article, null, serviceContext);
 		}
-	}
-
-	public void deleteArticle(
-			long groupId, String articleId, double version, String articleURL,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		JournalArticle article = journalArticlePersistence.findByG_A_V(
-			groupId, articleId, version);
-
-		deleteArticle(article, articleURL, serviceContext);
 	}
 
 	public void deleteArticles(long groupId)
@@ -2920,10 +2920,10 @@ public class JournalArticleLocalServiceImpl
 	private static final String _TOKEN_PAGE_BREAK = PropsUtil.get(
 		PropsKeys.JOURNAL_ARTICLE_TOKEN_PAGE_BREAK);
 
-	private static Log _log = LogFactoryUtil.getLog(
-		JournalArticleLocalServiceImpl.class);
-
 	private long _journalArticleCheckInterval =
 		PropsValues.JOURNAL_ARTICLE_CHECK_INTERVAL * Time.MINUTE;
+
+	private static Log _log = LogFactoryUtil.getLog(
+		JournalArticleLocalServiceImpl.class);
 
 }
