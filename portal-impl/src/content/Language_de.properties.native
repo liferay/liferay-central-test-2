@@ -4695,6 +4695,7 @@ x-search-provider={0} Suchanbieter
 x-search={0} Suche
 x-updated-the-due-date={0} hat das Fälligkeitsdatum aktualisiert.
 x-users-were-successfully-notified={0} Nutzer wurden erfolgreich benachrichtet.
+x-x-of-every-x-years={0} {1} of every {2} year(s) (Automatic Copy)
 xml-feeds=XML Feeds
 xml-url=XML URL
 xml=XML

@@ -343,7 +343,7 @@ action.VIEW_USER=Ver usuario
 ##
 ## Messages
 ##
-every-x-x-of-every-x-years=Todos los {1} de {0} de cada {2} año(s)
+
 1-day=1 día
 1-minute=1 minuto
 1-month=1 mes
@@ -4694,6 +4694,7 @@ x-search-provider=Proveedor de búsqueda de {0}
 x-search=Buscar en {0}
 x-updated-the-due-date={0} actualizó la fecha límite.
 x-users-were-successfully-notified={0} usuarios han sido notificados.
+x-x-of-every-x-years={0} {1} of every {2} year(s) (Automatic Copy)
 xml-feeds=Feeds XML
 xml-url=URL del XML
 xml=XML

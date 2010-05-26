@@ -4695,6 +4695,7 @@ x-search-provider={0} zoekmachine
 x-search={0} zoek
 x-updated-the-due-date={0} wijzigde de vervaldatum
 x-users-were-successfully-notified={0} gebruikers zijn ingelicht.
+x-x-of-every-x-years={0} {1} of every {2} year(s) (Automatic Copy)
 xml-feeds=XML Feeds
 xml-url=XML URL
 xml=XML

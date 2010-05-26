@@ -4695,6 +4695,7 @@ x-search-provider={0} proveedor de busquedas
 x-search={0} buscar
 x-updated-the-due-date={0} actualizou a data de caducidade.
 x-users-were-successfully-notified={0} usuarios foron notificados.
+x-x-of-every-x-years={0} {1} of every {2} year(s) (Automatic Copy)
 xml-feeds=Feeds XML
 xml-url=URL do XML
 xml=XML

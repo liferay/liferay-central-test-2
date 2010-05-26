@@ -4695,6 +4695,7 @@ x-search-provider={0} Search Provider (Automatic Copy)
 x-search={0} Search (Automatic Copy)
 x-updated-the-due-date={0} updated the due date. (Automatic Copy)
 x-users-were-successfully-notified={0} użytkowników zostało powiadomionych.
+x-x-of-every-x-years={0} {1} of every {2} year(s) (Automatic Copy)
 xml-feeds=Kanał XML
 xml-url=URL XML
 xml=XML

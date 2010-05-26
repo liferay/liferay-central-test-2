@@ -4695,6 +4695,7 @@ x-search-provider={0} 検索プロバイダー
 x-search={0} 検索
 x-updated-the-due-date={0} は期限を更新しました。
 x-users-were-successfully-notified={0}ユーザへの通知に成功しました。
+x-x-of-every-x-years={0} {1} of every {2} year(s) (Automatic Copy)
 xml-feeds=XMLフィード
 xml-url=XML URL
 xml=XML

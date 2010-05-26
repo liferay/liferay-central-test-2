@@ -4695,6 +4695,7 @@ x-search-provider={0} poskytovatel vyhledávání
 x-search={0} vyhledávání
 x-updated-the-due-date={0} upravil datum vypršení platnosti.
 x-users-were-successfully-notified={0} uživatelů bylo úspěšně notifikováno.
+x-x-of-every-x-years={0} {1} of every {2} year(s) (Automatic Copy)
 xml-feeds=XML feed
 xml-url=XML URL
 xml=XML

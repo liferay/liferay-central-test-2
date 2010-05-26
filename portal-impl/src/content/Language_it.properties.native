@@ -4694,6 +4694,7 @@ x-search-provider={0} Provider di ricerca
 x-search={0} Ricerca
 x-updated-the-due-date={0} aggiornato alla data di scadenza.
 x-users-were-successfully-notified={0} utenti sono stati avvertiti con successo.
+x-x-of-every-x-years={0} {1} of every {2} year(s) (Automatic Copy)
 xml-feeds=Feed XML
 xml-url=URL dell'XML
 xml=XML

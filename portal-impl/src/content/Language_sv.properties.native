@@ -4695,6 +4695,7 @@ x-search-provider={0} Söktjänst
 x-search={0} Sök
 x-updated-the-due-date={0} uppdaterade slutdatumet.
 x-users-were-successfully-notified={0} användare har meddelats.
+x-x-of-every-x-years={0} {1} of every {2} year(s) (Automatic Copy)
 xml-feeds=XML-prenumerationer
 xml-url=XML-URL
 xml=XML
