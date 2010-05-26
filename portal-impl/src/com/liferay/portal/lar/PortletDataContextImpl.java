@@ -78,6 +78,7 @@ import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.service.MBDiscussionLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.polls.model.impl.PollsChoiceImpl;
 import com.liferay.portlet.polls.model.impl.PollsQuestionImpl;
 import com.liferay.portlet.polls.model.impl.PollsVoteImpl;
@@ -648,12 +649,42 @@ public class PortletDataContextImpl implements PortletDataContext {
 				threadPKs.put(message.getThreadId(), thread.getThreadId());
 			}
 			else {
-				MBMessage newMessage =
-					MBMessageLocalServiceUtil.addDiscussionMessage(
+				MBMessage newMessage = null;
+
+				ServiceContext serviceContext = new ServiceContext();
+
+				serviceContext.setScopeGroupId(groupId);
+
+				if (getDataStrategy().equals(
+						PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
+
+					MBMessage existingMessage = MBMessageUtil.fetchByUUID_G(
+						message.getUuid(), groupId);
+
+					if (existingMessage == null) {
+						newMessage =
+							MBMessageLocalServiceUtil.addDiscussionMessage(
+								message.getUuid(), userId,
+								message.getUserName(), groupId,
+								classObj.getName(), newClassPK, threadId,
+								parentMessageId, message.getSubject(),
+								message.getBody(), serviceContext);
+					}
+					else {
+						newMessage =
+							MBMessageLocalServiceUtil.updateDiscussionMessage(
+								userId, existingMessage.getMessageId(),
+								message.getSubject(), message.getBody(),
+								WorkflowConstants.ACTION_PUBLISH);
+					}
+				}
+				else {
+					newMessage = MBMessageLocalServiceUtil.addDiscussionMessage(
 						userId, message.getUserName(), groupId,
 						classObj.getName(), newClassPK, threadId,
 						parentMessageId, message.getSubject(),
-						message.getBody(), new ServiceContext());
+						message.getBody(), serviceContext);
+				}
 
 				messagePKs.put(
 					message.getMessageId(), newMessage.getMessageId());
