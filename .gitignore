@@ -1,5 +1,6 @@
 *~
 *.bak
+*.swp
 
 /*.iml
 /*.ipr
@@ -104,6 +105,7 @@
 /portal-web/docroot/html/themes/classic/css
 /portal-web/docroot/html/themes/classic/images
 /portal-web/docroot/html/themes/classic/javascript
+/portal-web/docroot/html/themes/classic/js
 /portal-web/docroot/html/themes/classic/templates
 
 /portal-web/docroot/html/themes/classic/_diffs/css/alloy.css
@@ -111,6 +113,7 @@
 /portal-web/docroot/html/themes/control_panel/css
 /portal-web/docroot/html/themes/control_panel/images
 /portal-web/docroot/html/themes/control_panel/javascript
+/portal-web/docroot/html/themes/control_panel/js
 /portal-web/docroot/html/themes/control_panel/templates
 
 /portal-web/docroot/html/themes/genesis
