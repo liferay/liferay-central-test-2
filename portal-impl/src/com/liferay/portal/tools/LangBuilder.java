@@ -200,6 +200,13 @@ public class LangBuilder {
 					if (line.indexOf("{") != -1 || line.indexOf("<") != -1) {
 						translatedText = value + _AUTOMATIC_COPY;
 					}
+					else if (line.indexOf("[") != -1) {
+						pos = line.indexOf("[");
+
+						String baseKey = line.substring(0, pos);
+
+						translatedText = nativeProps.getProperty(baseKey);
+					}
 					else if (key.equals("lang.dir")) {
 						translatedText = "ltr";
 					}
@@ -240,6 +247,7 @@ public class LangBuilder {
 					else {
 						translatedText = _translate(
 							translationId, key, value, 0);
+						System.out.println("translatedText yahoo: " + translatedText);
 
 						if (Validator.isNull(translatedText)) {
 							translatedText = value + _AUTOMATIC_COPY;
