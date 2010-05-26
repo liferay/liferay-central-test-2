@@ -54,10 +54,10 @@ public class TearDownWebContentTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
-				boolean webContentPresent = selenium.isElementPresent(
+				boolean webContent1Present = selenium.isElementPresent(
 						"_15_rowIds");
 
-				if (!webContentPresent) {
+				if (!webContent1Present) {
 					label = 2;
 
 					continue;
@@ -71,6 +71,78 @@ public class TearDownWebContentTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
 
 			case 2:
+
+				boolean webContent2Present = selenium.isElementPresent(
+						"_15_rowIds");
+
+				if (!webContent2Present) {
+					label = 3;
+
+					continue;
+				}
+
+				selenium.clickAt("_15_allRowIds", RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Delete']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
+
+			case 3:
+
+				boolean webContent3Present = selenium.isElementPresent(
+						"_15_rowIds");
+
+				if (!webContent3Present) {
+					label = 4;
+
+					continue;
+				}
+
+				selenium.clickAt("_15_allRowIds", RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Delete']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
+
+			case 4:
+
+				boolean webContent4Present = selenium.isElementPresent(
+						"_15_rowIds");
+
+				if (!webContent4Present) {
+					label = 5;
+
+					continue;
+				}
+
+				selenium.clickAt("_15_allRowIds", RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Delete']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
+
+			case 5:
+
+				boolean webContent5Present = selenium.isElementPresent(
+						"_15_rowIds");
+
+				if (!webContent5Present) {
+					label = 6;
+
+					continue;
+				}
+
+				selenium.clickAt("_15_allRowIds", RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Delete']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
+
+			case 6:
 				selenium.clickAt("link=Templates", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
@@ -78,7 +150,7 @@ public class TearDownWebContentTest extends BaseTestCase {
 						"_15_rowIds");
 
 				if (!templatePresent) {
-					label = 3;
+					label = 7;
 
 					continue;
 				}
@@ -90,7 +162,7 @@ public class TearDownWebContentTest extends BaseTestCase {
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected templates[\\s\\S]$"));
 
-			case 3:
+			case 7:
 				selenium.clickAt("link=Structures", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
@@ -98,7 +170,7 @@ public class TearDownWebContentTest extends BaseTestCase {
 						"_15_rowIds");
 
 				if (!structurePresent) {
-					label = 4;
+					label = 8;
 
 					continue;
 				}
@@ -110,7 +182,7 @@ public class TearDownWebContentTest extends BaseTestCase {
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected structures[\\s\\S]$"));
 
-			case 4:
+			case 8:
 			case 100:
 				label = -1;
 			}

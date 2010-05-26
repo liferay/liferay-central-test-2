@@ -73,7 +73,8 @@ public class RestoreFriendlyURLTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//li[3]/span/span/a"));
+		selenium.clickAt("//ul[1]/li[3]/span/span/a",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Virtual Host", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

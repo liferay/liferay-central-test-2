@@ -141,9 +141,14 @@ public class AddAssociatedTemplateTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
-				assertTrue(selenium.isTextPresent("Test Web Content TemplateB"));
+				assertEquals(RuntimeVariables.replace(
+						"Your request processed successfully."),
+					selenium.getText("//section/div/div/div/div"));
+				assertEquals(RuntimeVariables.replace("TESTB"),
+					selenium.getText("//tr[4]/td[2]/a"));
+				assertEquals(RuntimeVariables.replace(
+						"Test Web Content TemplateB\n This is a test web content templateB!"),
+					selenium.getText("//tr[4]/td[3]/a"));
 
 			case 100:
 				label = -1;

@@ -126,6 +126,24 @@ public class AddCommunitiesPrivatePageTest extends BaseTestCase {
 					}
 
 					try {
+						if (RuntimeVariables.replace("Test Community")
+												.equals(selenium.getText(
+										"//div/div[3]/a"))) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
 						if (selenium.isVisible("_134_name_en_US")) {
 							break;
 						}

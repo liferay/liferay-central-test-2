@@ -51,15 +51,21 @@ public class AddVoteTest extends BaseTestCase {
 		selenium.clickAt("_25_choiceId", RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Vote']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div"));
 		assertEquals(RuntimeVariables.replace("Test Poll Question"),
-			selenium.getText("//td[1]/a"));
-		assertEquals(RuntimeVariables.replace("1"),
-			selenium.getText("//td[2]/a"));
-		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+			selenium.getText("//span[1]/strong"));
+		assertEquals(RuntimeVariables.replace(
+				"This is a test poll description."),
+			selenium.getText("//div/span[2]"));
 		assertEquals(RuntimeVariables.replace("100%"),
 			selenium.getText("//tr[2]/td[1]"));
+		assertEquals(RuntimeVariables.replace("1"),
+			selenium.getText("//tr[2]/td[2]"));
+		assertEquals(RuntimeVariables.replace("a."),
+			selenium.getText("//td[6]/strong"));
+		assertEquals(RuntimeVariables.replace("Test Choice A"),
+			selenium.getText("//td[7]"));
 	}
 }

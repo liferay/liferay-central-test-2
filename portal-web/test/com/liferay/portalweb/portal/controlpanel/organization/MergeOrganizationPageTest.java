@@ -104,7 +104,8 @@ public class MergeOrganizationPageTest extends BaseTestCase {
 
 		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//li[3]/span/span/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//ul[1]/li[3]/span/span/a",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Merge Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

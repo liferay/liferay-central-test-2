@@ -79,8 +79,9 @@ public class DeleteEscapeCharacterArticleTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
+				assertEquals(RuntimeVariables.replace(
+						"Your request processed successfully."),
+					selenium.getText("//section/div/div/div/div"));
 				assertFalse(selenium.isElementPresent(
 						"link=<!--Html Escape Character Test-->"));
 

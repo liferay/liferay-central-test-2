@@ -115,9 +115,11 @@ public class AddEscapeCharacterArticleTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent(
-				"link=<!--Html Escape Character Test-->"));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div"));
+		assertEquals(RuntimeVariables.replace(
+				"<!--Html Escape Character Test-->"),
+			selenium.getText("//tr[5]/td[3]/a"));
 	}
 }

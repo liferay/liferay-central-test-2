@@ -89,9 +89,13 @@ public class AddLocalizedTemplateTest extends BaseTestCase {
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\controlpanel\\webcontent\\dependencies\\LocalizedTemplate.htm"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent("link=LOCALIZED"));
-		assertTrue(selenium.isTextPresent("Test Localized Template"));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div"));
+		assertEquals(RuntimeVariables.replace("LOCALIZED"),
+			selenium.getText("//td[2]/a"));
+		assertEquals(RuntimeVariables.replace(
+				"Test Localized Template\n This is a test localized template."),
+			selenium.getText("//td[3]/a"));
 	}
 }

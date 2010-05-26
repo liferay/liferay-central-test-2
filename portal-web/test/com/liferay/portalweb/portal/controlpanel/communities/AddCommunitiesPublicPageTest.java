@@ -128,7 +128,7 @@ public class AddCommunitiesPublicPageTest extends BaseTestCase {
 					try {
 						if (RuntimeVariables.replace("Test Community")
 												.equals(selenium.getText(
-										"//div[3]/a"))) {
+										"//div/div[3]/a"))) {
 							break;
 						}
 					}

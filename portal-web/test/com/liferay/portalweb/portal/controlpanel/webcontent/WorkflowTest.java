@@ -50,13 +50,36 @@ public class WorkflowTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-		selenium.clickAt("_15_saveArticleBtn", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("_15_saveArticleBtn"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Control Panel")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("1.1"),
-			selenium.getText("//span[2]/strong"));
+			selenium.getText("//tr[4]/td[4]/a"));
 		assertEquals(RuntimeVariables.replace("Draft"),
-			selenium.getText("//span[3]/strong"));
+			selenium.getText("//tr[4]/td[5]/a"));
 	}
 }

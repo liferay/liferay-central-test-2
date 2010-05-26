@@ -76,8 +76,13 @@ public class AddStructuresTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Text"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Test Web Content Structure"));
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div"));
+		assertEquals(RuntimeVariables.replace("TEST"),
+			selenium.getText("//td[2]/a"));
+		assertEquals(RuntimeVariables.replace(
+				"Test Web Content Structure\nThis is a test web content structure!"),
+			selenium.getText("//td[3]/a"));
 	}
 }

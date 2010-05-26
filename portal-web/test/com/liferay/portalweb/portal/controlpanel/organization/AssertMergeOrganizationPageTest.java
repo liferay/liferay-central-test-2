@@ -26,8 +26,6 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AssertMergeOrganizationPageTest extends BaseTestCase {
 	public void testAssertMergeOrganizationPage() throws Exception {
 		selenium.open("/web/guest/home/");
-		assertTrue(selenium.isElementPresent("link=Welcome"));
-		assertTrue(selenium.isElementPresent("link=Selenium Test Home Page"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -48,6 +46,9 @@ public class AssertMergeOrganizationPageTest extends BaseTestCase {
 		selenium.clickAt("//div[4]/div/ul/li[3]/a/span",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Welcome"));
+		assertTrue(selenium.isElementPresent("link=Selenium Test Home Page"));
+		selenium.open("/web/guest/home/");
 		assertTrue(selenium.isElementPresent("link=Welcome"));
 		assertTrue(selenium.isElementPresent("link=Selenium Test Home Page"));
 	}

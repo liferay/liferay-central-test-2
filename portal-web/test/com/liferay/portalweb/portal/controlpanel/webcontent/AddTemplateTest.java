@@ -63,8 +63,13 @@ public class AddTemplateTest extends BaseTestCase {
 		selenium.clickAt("//form[2]/div/span[1]/span/input",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertTrue(selenium.isTextPresent("Test Web Content Template"));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div"));
+		assertEquals(RuntimeVariables.replace("TEST"),
+			selenium.getText("//td[2]/a"));
+		assertEquals(RuntimeVariables.replace(
+				"Test Web Content Template\n This is a test web content template!"),
+			selenium.getText("//td[3]/a"));
 	}
 }
