@@ -362,16 +362,7 @@ request.setAttribute("view_event.jsp-event", event);
 				<dd>
 					<abbr class="rrule" title="FREQ=YEARLY">
 						<c:if test="<%= (yearlyType == 0) %>">
-
-							<%
-								Object[] arguments = new Object[3];
-								arguments[0] = months[yearlyMonth0];
-								arguments[1] = String.valueOf(yearlyDay0);
-								arguments[2] = String.valueOf(yearlyInterval0);
-							%>
-
-							<%= LanguageUtil.format(pageContext, "every-x-x-of-every-x-years", arguments) %>
-
+							<liferay-ui:message arguments="<%= new Object[] {months[yearlyMonth0], String.valueOf(yearlyDay0), String.valueOf(yearlyInterval0)} %>" key="x-x-of-every-x-years" />
 						</c:if>
 
 						<c:if test="<%= (yearlyType == 1) %>">
