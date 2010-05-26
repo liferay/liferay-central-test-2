@@ -276,6 +276,10 @@ public class VerifyProperties extends VerifyProcess {
 		new String[] {
 			"referer.url.security.mode",
 			"redirect.url.security.mode"
+		},
+		new String[] {
+			"tags.asset.increment.view.counter.enabled",
+			"asset.entry.increment.view.counter.enabled"
 		}
 	};
 
