@@ -1023,6 +1023,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public MBMessageDisplay getMessageDisplay(
+			long messageId, int status, String threadView,
+			boolean includePreAndNext)
+		throws PortalException, SystemException {
+
+		MBMessage message = getMessage(messageId);
+
+		return getMessageDisplay(message, status, threadView,
+			includePreAndNext);
+	}
+
+	public MBMessageDisplay getMessageDisplay(
 			MBMessage message, int status, String threadView)
 		throws PortalException, SystemException {
 

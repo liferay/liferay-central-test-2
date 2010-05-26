@@ -432,6 +432,18 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			messageId, status, threadView);
 	}
 
+	public MBMessageDisplay getMessageDisplay(
+			long messageId, int status, String threadView,
+			boolean includePrevAndNext)
+		throws PortalException, SystemException {
+
+		MBMessagePermission.check(
+			getPermissionChecker(), messageId, ActionKeys.VIEW);
+
+		return mbMessageLocalService.getMessageDisplay(
+			messageId, status, threadView, includePrevAndNext);
+	}
+
 	public List<MBMessage> getThreadMessages(
 			long groupId, long categoryId, long threadId, int status, int start,
 			int end)

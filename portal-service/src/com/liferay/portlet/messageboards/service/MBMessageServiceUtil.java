@@ -170,6 +170,16 @@ public class MBMessageServiceUtil {
 		return getService().getMessageDisplay(messageId, status, threadView);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
+		long messageId, int status, java.lang.String threadView,
+		boolean includePrevAndNext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getMessageDisplay(messageId, status, threadView,
+			includePrevAndNext);
+	}
+
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getThreadMessages(
 		long groupId, long categoryId, long threadId, int status, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {

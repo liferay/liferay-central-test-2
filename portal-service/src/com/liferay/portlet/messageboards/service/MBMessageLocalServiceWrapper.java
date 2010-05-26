@@ -393,6 +393,15 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
+		long messageId, int status, java.lang.String threadView,
+		boolean includePreAndNext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _mbMessageLocalService.getMessageDisplay(messageId, status,
+			threadView, includePreAndNext);
+	}
+
+	public com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
 		com.liferay.portlet.messageboards.model.MBMessage message, int status,
 		java.lang.String threadView)
 		throws com.liferay.portal.kernel.exception.PortalException,

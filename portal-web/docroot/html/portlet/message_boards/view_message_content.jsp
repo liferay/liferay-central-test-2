@@ -90,44 +90,45 @@ String threadView = messageDisplay.getThreadView();
 </table>
 
 <div class="thread-controls">
-	<div class="thread-navigation">
-		<liferay-ui:message key="threads" />
+	<c:if test="<%= PropsValues.MESSAGE_BOARDS_THREAD_NAVIGATION_ENABLED %>">
+		<div class="thread-navigation">
+			<liferay-ui:message key="threads" />
 
-		[
+			[
 
-		<c:choose>
-			<c:when test="<%= previousThread != null %>">
-				<portlet:renderURL var="previousThreadURL">
-					<portlet:param name="struts_action" value="/message_boards/view_message" />
-					<portlet:param name="messageId" value="<%= String.valueOf(previousThread.getRootMessageId()) %>" />
-				</portlet:renderURL>
+			<c:choose>
+				<c:when test="<%= previousThread != null %>">
+					<portlet:renderURL var="previousThreadURL">
+						<portlet:param name="struts_action" value="/message_boards/view_message" />
+						<portlet:param name="messageId" value="<%= String.valueOf(previousThread.getRootMessageId()) %>" />
+					</portlet:renderURL>
 
-				<aui:a href="<%= previousThreadURL %>" label="previous" />
-			</c:when>
-			<c:otherwise>
-				<liferay-ui:message key="previous" />
-			</c:otherwise>
-		</c:choose>
+					<aui:a href="<%= previousThreadURL %>" label="previous" />
+				</c:when>
+				<c:otherwise>
+					<liferay-ui:message key="previous" />
+				</c:otherwise>
+			</c:choose>
 
-		|
+			|
 
-		<c:choose>
-			<c:when test="<%= nextThread != null %>">
-				<portlet:renderURL var="nextThreadURL">
-					<portlet:param name="struts_action" value="/message_boards/view_message" />
-					<portlet:param name="messageId" value="<%= String.valueOf(nextThread.getRootMessageId()) %>" />
-				</portlet:renderURL>
+			<c:choose>
+				<c:when test="<%= nextThread != null %>">
+					<portlet:renderURL var="nextThreadURL">
+						<portlet:param name="struts_action" value="/message_boards/view_message" />
+						<portlet:param name="messageId" value="<%= String.valueOf(nextThread.getRootMessageId()) %>" />
+					</portlet:renderURL>
 
-				<aui:a href="<%= nextThreadURL %>" label="next" />
-			</c:when>
-			<c:otherwise>
-				<liferay-ui:message key="next" />
-			</c:otherwise>
-		</c:choose>
+					<aui:a href="<%= nextThreadURL %>" label="next" />
+				</c:when>
+				<c:otherwise>
+					<liferay-ui:message key="next" />
+				</c:otherwise>
+			</c:choose>
 
-		]
-	</div>
-
+			]
+		</div>
+	</c:if>
 	<div class="thread-actions">
 		<table class="lfr-table">
 		<tr>

@@ -397,6 +397,16 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
+		long messageId, int status, java.lang.String threadView,
+		boolean includePreAndNext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getMessageDisplay(messageId, status, threadView,
+			includePreAndNext);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
 		com.liferay.portlet.messageboards.model.MBMessage message, int status,
 		java.lang.String threadView)
 		throws com.liferay.portal.kernel.exception.PortalException,

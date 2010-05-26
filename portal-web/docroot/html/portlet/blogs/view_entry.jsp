@@ -29,11 +29,6 @@ BlogsEntry entry = (BlogsEntry)request.getAttribute(WebKeys.BLOGS_ENTRY);
 
 long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 
-BlogsEntry[] prevAndNext = BlogsEntryLocalServiceUtil.getEntriesPrevAndNext(entryId);
-
-BlogsEntry previousEntry = prevAndNext[0];
-BlogsEntry nextEntry = prevAndNext[2];
-
 pageDisplayStyle = RSSUtil.DISPLAY_STYLE_FULL_CONTENT;
 
 AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(BlogsEntry.class.getName(), entry.getEntryId());
@@ -60,6 +55,13 @@ request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
 	<liferay-util:include page="/html/portlet/blogs/view_entry_content.jsp" />
 </aui:form>
 
+<%
+if(PropsValues.BLOGS_ENTRY_NAVIGATION_ENABLED) {
+	BlogsEntry[] prevAndNext = BlogsEntryLocalServiceUtil.getEntriesPrevAndNext(entryId);
+
+	BlogsEntry previousEntry = prevAndNext[0];
+	BlogsEntry nextEntry = prevAndNext[2];
+%>
 <div class="entry-navigation">
 	<c:choose>
 		<c:when test="<%= previousEntry != null %>">
@@ -89,6 +91,9 @@ request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
 		</c:otherwise>
 	</c:choose>
 </div>
+<%
+}
+%>
 
 <c:if test="<%= enableComments %>">
 	<br />
