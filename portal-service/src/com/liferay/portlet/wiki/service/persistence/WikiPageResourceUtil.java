@@ -197,25 +197,6 @@ public class WikiPageResourceUtil {
 		return getPersistence().fetchByN_T(nodeId, title, retrieveFromCache);
 	}
 
-	public static com.liferay.portlet.wiki.model.WikiPageResource findByUUID_N(
-		java.lang.String uuid, long nodeId)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.wiki.NoSuchPageResourceException {
-		return getPersistence().findByUUID_N(uuid, nodeId);
-	}
-
-	public static com.liferay.portlet.wiki.model.WikiPageResource fetchByUUID_N(
-		java.lang.String uuid, long nodeId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByUUID_N(uuid, nodeId);
-	}
-
-	public static com.liferay.portlet.wiki.model.WikiPageResource fetchByUUID_N(
-		java.lang.String uuid, long nodeId, boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByUUID_N(uuid, nodeId, retrieveFromCache);
-	}
-
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
@@ -245,12 +226,6 @@ public class WikiPageResourceUtil {
 		getPersistence().removeByN_T(nodeId, title);
 	}
 
-	public static void removeByUUID_N(java.lang.String uuid, long nodeId)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.wiki.NoSuchPageResourceException {
-		getPersistence().removeByUUID_N(uuid, nodeId);
-	}
-
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
@@ -264,11 +239,6 @@ public class WikiPageResourceUtil {
 	public static int countByN_T(long nodeId, java.lang.String title)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByN_T(nodeId, title);
-	}
-
-	public static int countByUUID_N(java.lang.String uuid, long nodeId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByUUID_N(uuid, nodeId);
 	}
 
 	public static int countAll()

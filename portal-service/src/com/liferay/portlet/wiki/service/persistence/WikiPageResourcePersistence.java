@@ -104,19 +104,6 @@ public interface WikiPageResourcePersistence extends BasePersistence<WikiPageRes
 		long nodeId, java.lang.String title, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.wiki.model.WikiPageResource findByUUID_N(
-		java.lang.String uuid, long nodeId)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.wiki.NoSuchPageResourceException;
-
-	public com.liferay.portlet.wiki.model.WikiPageResource fetchByUUID_N(
-		java.lang.String uuid, long nodeId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public com.liferay.portlet.wiki.model.WikiPageResource fetchByUUID_N(
-		java.lang.String uuid, long nodeId, boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -136,10 +123,6 @@ public interface WikiPageResourcePersistence extends BasePersistence<WikiPageRes
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageResourceException;
 
-	public void removeByUUID_N(java.lang.String uuid, long nodeId)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.wiki.NoSuchPageResourceException;
-
 	public void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -147,9 +130,6 @@ public interface WikiPageResourcePersistence extends BasePersistence<WikiPageRes
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByN_T(long nodeId, java.lang.String title)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public int countByUUID_N(java.lang.String uuid, long nodeId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()
