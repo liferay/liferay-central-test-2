@@ -1014,35 +1014,19 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public MBMessageDisplay getMessageDisplay(
-			long messageId, int status, String threadView)
-		throws PortalException, SystemException {
-
-		MBMessage message = getMessage(messageId);
-
-		return getMessageDisplay(message, status, threadView);
-	}
-
-	public MBMessageDisplay getMessageDisplay(
 			long messageId, int status, String threadView,
-			boolean includePreAndNext)
+			boolean includePrevAndNext)
 		throws PortalException, SystemException {
 
 		MBMessage message = getMessage(messageId);
 
-		return getMessageDisplay(message, status, threadView,
-			includePreAndNext);
-	}
-
-	public MBMessageDisplay getMessageDisplay(
-			MBMessage message, int status, String threadView)
-		throws PortalException, SystemException {
-
-		return getMessageDisplay(message, status, threadView, true);
+		return getMessageDisplay(
+			message, status, threadView, includePrevAndNext);
 	}
 
 	public MBMessageDisplay getMessageDisplay(
 			MBMessage message, int status, String threadView,
-			boolean includePreAndNext)
+			boolean includePrevAndNext)
 		throws PortalException, SystemException {
 
 		MBCategory category = null;
@@ -1072,8 +1056,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBThread previousThread = null;
 		MBThread nextThread = null;
 
-		if (message.getStatus() == WorkflowConstants.STATUS_APPROVED &&
-			includePreAndNext) {
+		if ((message.getStatus() == WorkflowConstants.STATUS_APPROVED) &&
+			includePrevAndNext) {
+
 			ThreadLastPostDateComparator comparator =
 				new ThreadLastPostDateComparator(false);
 

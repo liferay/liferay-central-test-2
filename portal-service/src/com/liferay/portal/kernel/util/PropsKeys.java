@@ -189,8 +189,8 @@ public interface PropsKeys {
 
 	public static final String BLOGS_ENTRY_COMMENTS_ENABLED = "blogs.entry.comments.enabled";
 
-	public static final String BLOGS_ENTRY_NAVIGATION_ENABLED = "blogs.entry.navigation.enabled";
-	
+	public static final String BLOGS_ENTRY_PREVIOUS_AND_NEXT_NAVIGATION_ENABLED = "blogs.entry.previous.and.next.navigation.enabled";
+
 	public static final String BLOGS_LINKBACK_EXCERPT_LENGTH = "blogs.linkback.excerpt.length";
 
 	public static final String BLOGS_LINKBACK_JOB_INTERVAL = "blogs.linkback.job.interval";
@@ -1061,7 +1061,7 @@ public interface PropsKeys {
 
 	public static final String MESSAGE_BOARDS_RSS_ABSTRACT_LENGTH = "message.boards.rss.abstract.length";
 
-	public static final String MESSAGE_BOARDS_THREAD_NAVIGATION_ENABLED = "message.boards.thread.navigation.enabled";
+	public static final String MESSAGE_BOARDS_THREAD_PREVIOUS_AND_NEXT_NAVIGATION_ENABLED = "message.boards.thread.previous.and.next.navigation.enabled";
 
 	public static final String MESSAGE_BOARDS_THREAD_VIEWS = "message.boards.thread.views";
 

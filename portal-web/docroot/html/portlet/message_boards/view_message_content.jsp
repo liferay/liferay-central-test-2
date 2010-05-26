@@ -90,7 +90,7 @@ String threadView = messageDisplay.getThreadView();
 </table>
 
 <div class="thread-controls">
-	<c:if test="<%= PropsValues.MESSAGE_BOARDS_THREAD_NAVIGATION_ENABLED %>">
+	<c:if test="<%= PropsValues.MESSAGE_BOARDS_THREAD_PREVIOUS_AND_NEXT_NAVIGATION_ENABLED %>">
 		<div class="thread-navigation">
 			<liferay-ui:message key="threads" />
 
@@ -129,6 +129,7 @@ String threadView = messageDisplay.getThreadView();
 			]
 		</div>
 	</c:if>
+
 	<div class="thread-actions">
 		<table class="lfr-table">
 		<tr>

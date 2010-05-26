@@ -79,10 +79,14 @@ public class ViewMessageAction extends PortletAction {
 					PortletKeys.MESSAGE_BOARDS, "thread-view", threadView);
 			}
 
+			boolean includePrevAndNext =
+				PropsValues.
+					MESSAGE_BOARDS_THREAD_PREVIOUS_AND_NEXT_NAVIGATION_ENABLED;
+
 			MBMessageDisplay messageDisplay =
 				MBMessageServiceUtil.getMessageDisplay(
 					messageId, WorkflowConstants.STATUS_ANY, threadView,
-					PropsValues.MESSAGE_BOARDS_THREAD_NAVIGATION_ENABLED);
+					includePrevAndNext);
 
 			renderRequest.setAttribute(
 				WebKeys.MESSAGE_BOARDS_MESSAGE, messageDisplay);

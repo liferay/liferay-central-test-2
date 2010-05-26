@@ -55,45 +55,45 @@ request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
 	<liferay-util:include page="/html/portlet/blogs/view_entry_content.jsp" />
 </aui:form>
 
-<%
-if(PropsValues.BLOGS_ENTRY_NAVIGATION_ENABLED) {
+<c:if test="<%= PropsValues.BLOGS_ENTRY_PREVIOUS_AND_NEXT_NAVIGATION_ENABLED %>">
+
+	<%
 	BlogsEntry[] prevAndNext = BlogsEntryLocalServiceUtil.getEntriesPrevAndNext(entryId);
 
 	BlogsEntry previousEntry = prevAndNext[0];
 	BlogsEntry nextEntry = prevAndNext[2];
-%>
-<div class="entry-navigation">
-	<c:choose>
-		<c:when test="<%= previousEntry != null %>">
-			<portlet:renderURL var="previousEntryURL">
-				<portlet:param name="struts_action" value="/blogs/view_entry" />
-				<portlet:param name="entryId" value="<%= String.valueOf(previousEntry.getEntryId()) %>" />
-			</portlet:renderURL>
+	%>
 
-			<aui:a cssClass="previous" href="<%= previousEntryURL %>" label="previous" />
-		</c:when>
-		<c:otherwise>
-			<span class="previous"><liferay-ui:message key="previous" /></span>
-		</c:otherwise>
-	</c:choose>
+	<div class="entry-navigation">
+		<c:choose>
+			<c:when test="<%= previousEntry != null %>">
+				<portlet:renderURL var="previousEntryURL">
+					<portlet:param name="struts_action" value="/blogs/view_entry" />
+					<portlet:param name="entryId" value="<%= String.valueOf(previousEntry.getEntryId()) %>" />
+				</portlet:renderURL>
 
-	<c:choose>
-		<c:when test="<%= nextEntry != null %>">
-			<portlet:renderURL var="nextEntryURL">
-				<portlet:param name="struts_action" value="/blogs/view_entry" />
-				<portlet:param name="entryId" value="<%= String.valueOf(nextEntry.getEntryId()) %>" />
-			</portlet:renderURL>
+				<aui:a cssClass="previous" href="<%= previousEntryURL %>" label="previous" />
+			</c:when>
+			<c:otherwise>
+				<span class="previous"><liferay-ui:message key="previous" /></span>
+			</c:otherwise>
+		</c:choose>
 
-			<aui:a cssClass="next" href="<%= nextEntryURL %>" label="next" />
-		</c:when>
-		<c:otherwise>
-			<span class="next"><liferay-ui:message key="next" /></span>
-		</c:otherwise>
-	</c:choose>
-</div>
-<%
-}
-%>
+		<c:choose>
+			<c:when test="<%= nextEntry != null %>">
+				<portlet:renderURL var="nextEntryURL">
+					<portlet:param name="struts_action" value="/blogs/view_entry" />
+					<portlet:param name="entryId" value="<%= String.valueOf(nextEntry.getEntryId()) %>" />
+				</portlet:renderURL>
+
+				<aui:a cssClass="next" href="<%= nextEntryURL %>" label="next" />
+			</c:when>
+			<c:otherwise>
+				<span class="next"><liferay-ui:message key="next" /></span>
+			</c:otherwise>
+		</c:choose>
+	</div>
+</c:if>
 
 <c:if test="<%= enableComments %>">
 	<br />
