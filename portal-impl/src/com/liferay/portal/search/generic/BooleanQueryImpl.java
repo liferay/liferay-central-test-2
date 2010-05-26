@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.search.BooleanClause;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.Query;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -79,6 +80,51 @@ public class BooleanQueryImpl implements BooleanQuery {
 			new QueryTermImpl(field, String.valueOf(value)));
 
 		add(termQuery, BooleanClauseOccur.SHOULD);
+	}
+
+	public void addKeywords(String[] fields, String keywords) {
+		if (Validator.isNotNull(keywords)) {
+			String value = "";
+
+			String[] replacePatterns = {"$1$2$3", "$1"};
+
+			List<String> values = new ArrayList<String>();
+
+			for (String field : fields) {
+				String[] patterns = {
+					"(?i)^.*" + field + ":([\"\'])(.+?)(\\1).*$",
+					"(?i)^.*" + field + ":([^\\s\"']*).*$"
+				};
+
+				String duplicate = "";
+
+				for (int i = 0; i < patterns.length; i++) {
+					while (keywords.matches(patterns[i])) {
+						value = keywords.replaceAll(
+							patterns[i], replacePatterns[i]);
+
+						values.add(value);
+
+						duplicate = "(?i)\\s*" + field + ":" + value +
+							"\\s*";
+
+						keywords = keywords.replaceAll(duplicate, " ");
+
+						keywords = keywords.trim();
+					}
+				}
+
+				while (!values.isEmpty()) {
+					addTerm(field, values.remove(0));
+				}
+			}
+
+			if (keywords.trim().length() > 0) {
+				for (String field : fields) {
+					addTerm(field, keywords);
+				}
+			}
+		}
 	}
 
 	public void addRequiredTerm(String field, boolean value) {

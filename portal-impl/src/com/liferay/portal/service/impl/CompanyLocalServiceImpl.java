@@ -491,13 +491,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
 
-			if (Validator.isNotNull(keywords)) {
-				searchQuery.addTerm(Field.TITLE, keywords);
-				searchQuery.addTerm(Field.CONTENT, keywords);
-				searchQuery.addTerm(Field.DESCRIPTION, keywords);
-				searchQuery.addTerm(Field.PROPERTIES, keywords);
-				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords, true);
-			}
+			searchQuery.addKeywords(_fields, keywords);
 
 			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
 
@@ -777,6 +771,11 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			throw new CompanyMxException();
 		}
 	}
+
+	private static final String[] _fields = new String[] {
+		Field.ASSET_TAG_NAMES, Field.CONTENT, Field.DESCRIPTION,
+		Field.PROPERTIES, Field.TITLE
+	};
 
 	private static final String _DEFAULT_VIRTUAL_HOST = "localhost";
 
