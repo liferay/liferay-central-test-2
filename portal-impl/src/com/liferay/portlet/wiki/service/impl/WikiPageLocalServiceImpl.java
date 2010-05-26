@@ -1163,9 +1163,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			if (!pages.isEmpty()) {
 				WikiPage lastApprovedPage = pages.get(0);
 
-				lastApprovedPage.setHead(false);
+				if (!page.equals(lastApprovedPage)) {
+					lastApprovedPage.setHead(false);
 
-				wikiPagePersistence.update(lastApprovedPage, false);
+					wikiPagePersistence.update(lastApprovedPage, false);
+				}
 			}
 
 			// Asset
