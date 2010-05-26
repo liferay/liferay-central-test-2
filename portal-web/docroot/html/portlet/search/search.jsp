@@ -182,16 +182,16 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 				String entryHref = el.element("link").attributeValue("href");
 				String summary = el.elementText("summary");
 
+				// Group id
 
-				// groupId
-
-				long entryGroupId = Long.parseLong(el.elementText(OpenSearchUtil.getQName("groupId", OpenSearchUtil.LIFERAY_NAMESPACE)));
+				long entryGroupId = GetterUtil.getLong(el.elementText(OpenSearchUtil.getQName("groupId", OpenSearchUtil.LIFERAY_NAMESPACE)));
 
 				if (Validator.isNotNull(entryGroupId) && (inactiveGroupsCount > 0)) {
 					Group entryGroup = GroupServiceUtil.getGroup(entryGroupId);
 
 					if (!entryGroup.isActive()) {
 						total--;
+
 						continue;
 					}
 				}
