@@ -101,36 +101,46 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 		throws SearchException;
 
 	protected void addSearchResult(
-		Element root, String title, String link, Date updated,
+		Element root, long groupId, String title, String link, Date updated,
 		String summary, double score, String format) {
 
 		addSearchResult(
-			root, title, link, updated, summary, new String[0], 0, score,
-			format);
+			root, groupId, title, link, updated, summary, new String[0], 0,
+			score, format);
 	}
 
 	protected void addSearchResult(
-		Element root, String title, String link, Date updated, String summary,
-		String[] tags, double ratings, double score, String format) {
+		Element root, long groupId, String title, String link, Date updated,
+		String summary, String[] tags, double ratings, double score,
+		String format) {
+
+		String groupIdValue = String.valueOf(groupId);
 
 		if (format.equals("rss")) {
 			addSearchResultRSS(
-				root, title, link, updated, summary, tags, ratings, score);
+				root, groupIdValue, title, link, updated, summary, tags,
+				ratings, score);
 		}
 		else {
 			addSearchResultAtom(
-				root, title, link, updated, summary, tags, ratings, score);
+				root, groupIdValue, title, link, updated, summary, tags,
+				ratings, score);
 		}
 	}
 
 	protected void addSearchResultAtom(
-		Element root, String title, String link, Date updated, String summary,
-		String[] tags, double ratings, double score) {
+		Element root, String groupId, String title, String link, Date updated,
+		String summary, String[] tags, double ratings, double score) {
 
 		// entry
 
 		Element entry = OpenSearchUtil.addElement(
 			root, "entry", OpenSearchUtil.DEFAULT_NAMESPACE);
+
+		// groupId
+
+		OpenSearchUtil.addElement(
+			entry, "groupId", OpenSearchUtil.LIFERAY_NAMESPACE, groupId);
 
 		// title
 
@@ -178,12 +188,17 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 	}
 
 	protected void addSearchResultRSS(
-		Element root, String title, String link, Date updated, String summary,
-		String[] tags, double ratings, double score) {
+		Element root, String groupId, String title, String link, Date updated,
+		String summary, String[] tags, double ratings, double score) {
 
 		// item
 
 		Element item = root.addElement("item");
+
+		// groupId
+
+		OpenSearchUtil.addElement(
+			item, "groupId", OpenSearchUtil.LIFERAY_NAMESPACE, groupId);
 
 		// title
 

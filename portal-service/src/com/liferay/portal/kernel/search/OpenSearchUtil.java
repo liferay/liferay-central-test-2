@@ -41,6 +41,8 @@ public class OpenSearchUtil {
 
 	public static final int NO_NAMESPACE = 3;
 
+	public static final int LIFERAY_NAMESPACE = 4;
+
 	public static Element addElement(
 		Element el, String name, int namespaceType) {
 
@@ -95,6 +97,10 @@ public class OpenSearchUtil {
 		if (namespaceType == DEFAULT_NAMESPACE) {
 			namespace = SAXReaderUtil.createNamespace(
 				"", "http://www.w3.org/2005/Atom");
+		}
+		else if (namespaceType == LIFERAY_NAMESPACE) {
+			namespace = SAXReaderUtil.createNamespace(
+				"liferay", "http://liferay.com/spec/liferay-search/1.0/");
 		}
 		else if (namespaceType == OS_NAMESPACE) {
 			namespace = SAXReaderUtil.createNamespace(

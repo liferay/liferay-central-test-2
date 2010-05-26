@@ -136,8 +136,8 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 				double score = results.score(i);
 
 				addSearchResult(
-					root, portletTitle + " &raquo; " + title, url, modifedDate,
-					content, score, format);
+					root, groupId, portletTitle + " &raquo; " + title, url,
+					modifedDate, content, score, format);
 			}
 
 			if (_log.isDebugEnabled()) {
