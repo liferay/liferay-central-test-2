@@ -16,6 +16,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.RatingsStats;
+import com.liferay.portlet.ratings.model.impl.RatingsEntryImpl;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +42,12 @@ public class RatingsTag extends IncludeTag {
 	}
 
 	public void setRatingsEntry(RatingsEntry ratingsEntry) {
-		_ratingsEntry = ratingsEntry;
+		if (ratingsEntry == null) {
+			_ratingsEntry = _EMPTY_RATINGS_ENTRY;
+		}
+		else {
+			_ratingsEntry = ratingsEntry;
+		}
 	}
 
 	public void setRatingsStats(RatingsStats ratingsStats) {
@@ -87,6 +93,9 @@ public class RatingsTag extends IncludeTag {
 	}
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
+
+	private static final RatingsEntry _EMPTY_RATINGS_ENTRY =
+		new RatingsEntryImpl();
 
 	private static final String _PAGE = "/html/taglib/ui/ratings/page.jsp";
 
