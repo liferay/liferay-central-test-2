@@ -166,7 +166,7 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 	}
 
 	protected String getIconPath(ThemeDisplay themeDisplay) {
-		return themeDisplay.getPathThemeImages() + "/document_library/page.png";
+		return themeDisplay.getPathThemeImages() + "/common/clip.png";
 	}
 
 	private DLFileEntry _entry;
