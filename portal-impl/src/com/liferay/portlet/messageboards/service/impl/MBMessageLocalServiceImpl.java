@@ -141,7 +141,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		long categoryId = MBCategoryConstants.DISCUSSION_CATEGORY_ID;
 
 		if (Validator.isNull(subject)) {
-			subject = "N/A";
+			subject = body.substring(0, Math.min(body.length(), 50)) + "...";
 		}
 
 		List<ObjectValuePair<String, byte[]>> files =
