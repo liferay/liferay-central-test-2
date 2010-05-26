@@ -499,6 +499,21 @@ public class Validator {
 		return false;
 	}
 
+	public static boolean isVariableName(String variableName) {
+		if (isNull(variableName)) {
+			return false;
+		}
+
+		Matcher matcher = _variableNamePattern.matcher(variableName);
+
+		if (matcher.matches()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public static boolean isVariableTerm(String s) {
 		if (s.startsWith(_VARIABLE_TERM_BEGIN) &&
 			s.endsWith(_VARIABLE_TERM_END)) {
@@ -560,5 +575,8 @@ public class Validator {
 		"((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\." +
 		"((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])" +
 		"\\b");
+
+	private static Pattern _variableNamePattern = Pattern.compile(
+		"[_a-zA-Z]+[_a-zA-Z0-9]*");
 
 }
