@@ -52,7 +52,7 @@ public class ConfigurePortletDynamicShowMetadataViewCountTest
 		selenium.waitForPageToLoad("30000");
 		selenium.addSelection("_86_availableMetadataFields",
 			RuntimeVariables.replace("label=View Count"));
-		selenium.clickAt("//fieldset[2]/div/div/table/tbody/tr/td[2]/a[2]/img",
+		selenium.clickAt("//fieldset[2]/div/div/div/div/div/div[2]/div/span/span/button[2]",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {

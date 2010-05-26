@@ -50,8 +50,31 @@ public class AddDLDocumentTest extends BaseTestCase {
 				selenium.clickAt("link=Asset Publisher Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.select("//select",
-					RuntimeVariables.replace("label=Document Library Document"));
+				selenium.clickAt("//strong/a/img", RuntimeVariables.replace(""));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				assertEquals(RuntimeVariables.replace(
+						"Document Library Document"),
+					selenium.getText(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a"));
+				selenium.click(RuntimeVariables.replace(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("//input[@value='Select']",
 					RuntimeVariables.replace(""));
@@ -133,6 +156,25 @@ public class AddDLDocumentTest extends BaseTestCase {
 
 				assertEquals(RuntimeVariables.replace("AP DL Document Title"),
 					selenium.getText("//div[1]/h3/a"));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (RuntimeVariables.replace("AP DL Document Title")
+												.equals(selenium.getText(
+										"//div[2]/div[1]/div/a"))) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				assertEquals(RuntimeVariables.replace("AP DL Document Title"),
 					selenium.getText("//div[2]/div[1]/div/a"));
 

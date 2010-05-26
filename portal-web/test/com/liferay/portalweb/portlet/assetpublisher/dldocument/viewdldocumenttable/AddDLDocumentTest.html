@@ -1,4 +1,4 @@
-e<html>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>AddDLDocumentTest</title>
@@ -24,9 +24,24 @@ e<html>
 	<td></td>
 </tr>
 <tr>
-	<td>selectAndWait</td>
-	<td>//select</td>
-	<td>label=Document Library Document</td>
+	<td>clickAt</td>
+	<td>//strong/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a</td>
+	<td>Document Library Document</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAt</td>
@@ -131,6 +146,11 @@ e<html>
 <tr>
 	<td>assertText</td>
 	<td>//div[1]/h3/a</td>
+	<td>AP DL Document Title</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[2]/div[1]/div/a</td>
 	<td>AP DL Document Title</td>
 </tr>
 <tr>

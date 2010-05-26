@@ -73,7 +73,7 @@ public class ConfigurePortletDynamicCurrentBookmarksEntryTest
 			selenium.getText("_86_availableClassNameIds"));
 		selenium.addSelection("_86_availableClassNameIds",
 			RuntimeVariables.replace("label=Bookmarks Entry"));
-		selenium.clickAt("//fieldset[2]/div/div/div/table/tbody/tr/td[2]/a[2]/img",
+		selenium.clickAt("//fieldset[2]/div/div/div/div/div/div/div[2]/div/span/span/button[2]",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {

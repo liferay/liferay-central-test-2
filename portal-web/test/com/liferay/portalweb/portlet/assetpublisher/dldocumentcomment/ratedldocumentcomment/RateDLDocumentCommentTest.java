@@ -63,8 +63,8 @@ public class RateDLDocumentCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertEquals(RuntimeVariables.replace("0 (0 Votes)"),
-			selenium.getText("//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div"));
+		assertTrue(selenium.isPartialText(
+				"//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div", "0 Votes"));
 		selenium.clickAt("//table[1]/tbody/tr/td[1]/div/div/div/a[1]",
 			RuntimeVariables.replace(""));
 

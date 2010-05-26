@@ -60,9 +60,9 @@ public class RemoveIGImageTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[3]/div/div/div/div/div"));
-		assertFalse(selenium.isElementPresent("link=Image Gallery Image"));
+		assertFalse(selenium.isElementPresent("link=AP IG Image Name"));
 		assertEquals(RuntimeVariables.replace("No assets selected."),
-			selenium.getText("//fieldset/div/div[2]"));
+			selenium.getText("//fieldset/div/div[3]"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {

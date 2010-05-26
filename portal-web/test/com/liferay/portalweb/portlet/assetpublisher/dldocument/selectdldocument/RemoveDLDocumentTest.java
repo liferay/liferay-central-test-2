@@ -12,18 +12,18 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.assetpublisher.igimage.removeigimage;
+package com.liferay.portalweb.portlet.assetpublisher.dldocument.selectdldocument;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SelectIGImageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="RemoveDLDocumentTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class SelectIGImageTest extends BaseTestCase {
-	public void testSelectIGImage() throws Exception {
+public class RemoveDLDocumentTest extends BaseTestCase {
+	public void testRemoveDLDocument() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -32,7 +32,7 @@ public class SelectIGImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Asset Publisher Test Page")) {
+				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -47,19 +47,18 @@ public class SelectIGImageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_86_assetEntryType",
-			RuntimeVariables.replace("label=Image Gallery Image"));
+		assertTrue(selenium.isElementPresent("link=Document Library Document"));
+		assertTrue(selenium.isElementPresent("link=AP DL Document Title"));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Delete']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//td[1]/a/img", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[3]/div/div/div/div/div"));
-		assertEquals(RuntimeVariables.replace("Image Gallery Image"),
-			selenium.getText("//td[1]/a"));
-		assertTrue(selenium.isElementPresent("//td[2]/a/img"));
+		assertFalse(selenium.isTextPresent("AP DL Document Title"));
+		assertEquals(RuntimeVariables.replace("No assets selected."),
+			selenium.getText("//fieldset/div/div[3]"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -81,8 +80,6 @@ public class SelectIGImageTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("AP IG Image Name"),
-			selenium.getText("//h3/a"));
-		assertTrue(selenium.isElementPresent("//div[1]/a/img"));
+		assertFalse(selenium.isTextPresent("AP DL Document Title"));
 	}
 }

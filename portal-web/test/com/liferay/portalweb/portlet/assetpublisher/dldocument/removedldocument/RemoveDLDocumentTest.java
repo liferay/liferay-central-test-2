@@ -58,7 +58,7 @@ public class RemoveDLDocumentTest extends BaseTestCase {
 			selenium.getText("//div[3]/div/div/div/div/div"));
 		assertFalse(selenium.isTextPresent("AP DL Document Title"));
 		assertEquals(RuntimeVariables.replace("No assets selected."),
-			selenium.getText("//fieldset/div/div[2]"));
+			selenium.getText("//fieldset/div/div[3]"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {

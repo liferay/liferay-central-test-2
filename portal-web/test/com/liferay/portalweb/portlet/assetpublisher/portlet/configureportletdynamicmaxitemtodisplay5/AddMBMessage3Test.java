@@ -54,7 +54,15 @@ public class AddMBMessage3Test extends BaseTestCase {
 			RuntimeVariables.replace("AP3 MB3 Message3 Subject3"));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("AP3 MB3 Message3 Body3."));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
+		assertEquals(RuntimeVariables.replace("AP3 MB3 Message3 Subject3"),
+			selenium.getText("//td[1]/a"));
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP3 MB3 Message3 Subject3"),
 			selenium.getText("//form/div[2]"));

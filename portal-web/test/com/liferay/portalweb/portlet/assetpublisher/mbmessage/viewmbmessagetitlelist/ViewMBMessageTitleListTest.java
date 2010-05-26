@@ -46,9 +46,8 @@ public class ViewMBMessageTitleListTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP MB Message Subject"),
-			selenium.getText("//div[2]/div/div/ul/li/a"));
-		selenium.clickAt("//div[2]/div/div/ul/li/a",
-			RuntimeVariables.replace(""));
+			selenium.getText("//span/a/span"));
+		selenium.clickAt("//span/a/span", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP MB Message Subject"),
 			selenium.getText("//div[1]/h3"));

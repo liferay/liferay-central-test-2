@@ -46,8 +46,8 @@ public class ViewBlogsEntryTitleListTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP Blogs Entry Title"),
-			selenium.getText("//div[2]/div/div/ul/li"));
-		selenium.clickAt("//div[2]/div/div/ul/li", RuntimeVariables.replace(""));
+			selenium.getText("//span/a/span"));
+		selenium.clickAt("//span/a/span", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP Blogs Entry Title"),
 			selenium.getText("//div/h3"));

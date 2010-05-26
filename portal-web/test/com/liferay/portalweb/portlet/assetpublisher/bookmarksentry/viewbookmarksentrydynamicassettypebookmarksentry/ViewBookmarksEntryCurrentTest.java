@@ -47,6 +47,6 @@ public class ViewBookmarksEntryCurrentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP Bookmarks Entry Name"),
-			selenium.getText("//div[1]/h3/a"));
+			selenium.getText("//h3/a"));
 	}
 }

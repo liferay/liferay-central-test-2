@@ -49,7 +49,8 @@ public class AddWikiPageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_36_content",
 			RuntimeVariables.replace("AP Wiki Page Body"));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),

@@ -50,26 +50,9 @@ public class ConfigurePortletDynamicShowMetadataViewCountTest
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("_86_availableMetadataFields")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.addSelection("_86_availableMetadataFields",
 			RuntimeVariables.replace("label=View Count"));
-		selenium.clickAt("//fieldset[2]/div/div/table/tbody/tr/td[2]/a[2]/img",
+		selenium.clickAt("//fieldset[2]/div/div/div/div/div/div[2]/div/span/span/button[2]",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -80,7 +63,7 @@ public class ConfigurePortletDynamicShowMetadataViewCountTest
 			try {
 				if (RuntimeVariables.replace("View Count")
 										.equals(selenium.getText(
-								"//fieldset[2]/div/div/table/tbody/tr/td[1]/table/tbody/tr/td[1]/select/option"))) {
+								"_86_currentMetadataFields"))) {
 					break;
 				}
 			}
@@ -91,15 +74,13 @@ public class ConfigurePortletDynamicShowMetadataViewCountTest
 		}
 
 		assertEquals(RuntimeVariables.replace("View Count"),
-			selenium.getText(
-				"//fieldset[2]/div/div/table/tbody/tr/td[1]/table/tbody/tr/td[1]/select/option"));
+			selenium.getText("_86_currentMetadataFields"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[3]/div/div/div/div/div"));
 		assertEquals(RuntimeVariables.replace("View Count"),
-			selenium.getText(
-				"//fieldset[2]/div/div/table/tbody/tr/td[1]/table/tbody/tr/td[1]/select/option"));
+			selenium.getText("_86_currentMetadataFields"));
 	}
 }

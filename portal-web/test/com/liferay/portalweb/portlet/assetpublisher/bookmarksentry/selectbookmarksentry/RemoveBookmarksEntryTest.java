@@ -12,18 +12,18 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.assetpublisher.dldocument.removedldocument;
+package com.liferay.portalweb.portlet.assetpublisher.bookmarksentry.selectbookmarksentry;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SelectDLDocumentTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="RemoveBookmarksEntryTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class SelectDLDocumentTest extends BaseTestCase {
-	public void testSelectDLDocument() throws Exception {
+public class RemoveBookmarksEntryTest extends BaseTestCase {
+	public void testRemoveBookmarksEntry() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -47,20 +47,17 @@ public class SelectDLDocumentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_86_assetEntryType",
-			RuntimeVariables.replace("label=Document Library Document"));
+		assertEquals(RuntimeVariables.replace("Bookmarks Entry"),
+			selenium.getText("//td[1]/a"));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Delete']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[3]/div/div/div/div/div"));
-		assertEquals(RuntimeVariables.replace("Document Library Document"),
-			selenium.getText("//td[1]/a"));
-		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
-			selenium.getText("//td[2]/a"));
+		assertEquals(RuntimeVariables.replace("No assets selected."),
+			selenium.getText("//fieldset/div/div[3]"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -82,9 +79,6 @@ public class SelectDLDocumentTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
-			selenium.getText("//div[1]/h3/a"));
-		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
-			selenium.getText("//div[2]/div[1]/div/a"));
+		assertFalse(selenium.isTextPresent("AP Bookmarks Entry Name"));
 	}
 }

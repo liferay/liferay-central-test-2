@@ -54,7 +54,15 @@ public class AddMBMessage6Test extends BaseTestCase {
 			RuntimeVariables.replace("AP6 MB6 Message6 Subject6"));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("AP6 MB6 Message6 Body6."));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
+		assertEquals(RuntimeVariables.replace("AP6 MB6 Message6 Subject6"),
+			selenium.getText("//td[1]/a"));
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP6 MB6 Message6 Subject6"),
 			selenium.getText("//form/div[2]"));

@@ -12,18 +12,18 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.assetpublisher.bookmarksentry.removebookmarksentry;
+package com.liferay.portalweb.portlet.assetpublisher.igimage.selectigimage;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SelectBookmarksEntryTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="RemoveIGImageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class SelectBookmarksEntryTest extends BaseTestCase {
-	public void testSelectBookmarksEntry() throws Exception {
+public class RemoveIGImageTest extends BaseTestCase {
+	public void testRemoveIGImage() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -45,20 +45,24 @@ public class SelectBookmarksEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("AP IG Image Name"),
+			selenium.getText("//h3/a"));
+		assertTrue(selenium.isElementPresent("//div[1]/a/img"));
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_86_assetEntryType",
-			RuntimeVariables.replace("label=Bookmarks Entry"));
+		assertEquals(RuntimeVariables.replace("Image Gallery Image"),
+			selenium.getText("//td[1]/a"));
+		assertTrue(selenium.isElementPresent("//td[2]/a/img"));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Delete']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[3]/div/div/div/div/div"));
-		assertEquals(RuntimeVariables.replace("Bookmarks Entry"),
-			selenium.getText("//td[1]/a"));
+		assertFalse(selenium.isElementPresent("link=AP IG Image Name"));
+		assertEquals(RuntimeVariables.replace("No assets selected."),
+			selenium.getText("//fieldset/div/div[3]"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -80,7 +84,7 @@ public class SelectBookmarksEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("AP Bookmarks Entry Name"),
-			selenium.getText("//div[1]/h3/a"));
+		assertFalse(selenium.isTextPresent("AP IG Image Name"));
+		assertFalse(selenium.isElementPresent("//div[1]/a/img"));
 	}
 }

@@ -70,7 +70,7 @@ public class ConfigurePortletDynamicAssetTypeMBMessageTest extends BaseTestCase 
 
 		selenium.addSelection("_86_currentClassNameIds",
 			RuntimeVariables.replace("label=Message Boards Message"));
-		selenium.clickAt("//fieldset[2]/div/div/div/table/tbody/tr/td[2]/a[1]/img",
+		selenium.clickAt("//fieldset[2]/div/div/div/div/div/div/div[2]/div/span/span/button[1]",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {

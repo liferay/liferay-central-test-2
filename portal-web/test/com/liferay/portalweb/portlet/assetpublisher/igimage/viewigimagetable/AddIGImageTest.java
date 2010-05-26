@@ -50,8 +50,30 @@ public class AddIGImageTest extends BaseTestCase {
 				selenium.clickAt("link=Asset Publisher Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.select("//select",
-					RuntimeVariables.replace("label=Image Gallery Image"));
+				selenium.clickAt("//strong/a/img", RuntimeVariables.replace(""));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				assertEquals(RuntimeVariables.replace("Image Gallery Image"),
+					selenium.getText(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
+				selenium.click(RuntimeVariables.replace(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("//input[@value='Select']",
 					RuntimeVariables.replace(""));
@@ -134,6 +156,23 @@ public class AddIGImageTest extends BaseTestCase {
 
 				assertEquals(RuntimeVariables.replace("AP IG Image Name"),
 					selenium.getText("//h3/a"));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("//div[1]/a/img")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				assertTrue(selenium.isElementPresent("//div[1]/a/img"));
 
 			case 100:

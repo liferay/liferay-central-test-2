@@ -45,8 +45,8 @@ public class RateWikiPageCommentTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("0 (0 Votes)"),
-			selenium.getText("//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div"));
+		assertTrue(selenium.isPartialText(
+				"//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div", "0 Votes"));
 		selenium.clickAt("//table[1]/tbody/tr/td[1]/div/div/div/a[1]",
 			RuntimeVariables.replace(""));
 

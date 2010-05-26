@@ -46,12 +46,12 @@ public class ViewDLDocumentTitleListTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
-			selenium.getText("//div[2]/div/div/ul/li/a"));
-		selenium.clickAt("//div[2]/div/div/ul/li/a",
-			RuntimeVariables.replace(""));
+			selenium.getText("//span/a/span"));
+		selenium.clickAt("//span/a/span", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
 			selenium.getText("//div/h3"));
+		selenium.selectWindow("null");
 		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
 			selenium.getText("//div[2]/div[1]/a"));
 		assertEquals(RuntimeVariables.replace("View in Context \u00bb"),

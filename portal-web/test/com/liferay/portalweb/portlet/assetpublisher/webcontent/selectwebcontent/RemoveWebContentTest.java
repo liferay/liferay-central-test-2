@@ -12,18 +12,18 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.assetpublisher.blogsentry.removeblogsentry;
+package com.liferay.portalweb.portlet.assetpublisher.webcontent.selectwebcontent;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SelectBlogsEntryTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="RemoveWebContentTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class SelectBlogsEntryTest extends BaseTestCase {
-	public void testSelectBlogsEntry() throws Exception {
+public class RemoveWebContentTest extends BaseTestCase {
+	public void testRemoveWebContent() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -47,19 +47,19 @@ public class SelectBlogsEntryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_86_assetEntryType",
-			RuntimeVariables.replace("label=Blogs Entry"));
+		assertEquals(RuntimeVariables.replace("Web Content"),
+			selenium.getText("//td[1]/a"));
+		assertEquals(RuntimeVariables.replace("AP Web Content Name"),
+			selenium.getText("//td[2]/a"));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Delete']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=AP Blogs Entry Title",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[3]/div/div/div/div/div"));
-		assertEquals(RuntimeVariables.replace("Blogs Entry"),
-			selenium.getText("//td[1]/a"));
-		assertEquals(RuntimeVariables.replace("AP Blogs Entry Title"),
-			selenium.getText("//td[2]/a"));
+		assertEquals(RuntimeVariables.replace("No assets selected."),
+			selenium.getText("//fieldset/div/div[3]"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -81,9 +81,6 @@ public class SelectBlogsEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("AP Blogs Entry Title"),
-			selenium.getText("//div[1]/h3/a"));
-		assertEquals(RuntimeVariables.replace("AP Blogs Entry Content."),
-			selenium.getText("//div/div/div[1]/div[2]/div[1]"));
+		assertFalse(selenium.isTextPresent("AP Web Content Name"));
 	}
 }

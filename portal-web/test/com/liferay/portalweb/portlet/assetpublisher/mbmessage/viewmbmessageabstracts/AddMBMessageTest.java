@@ -54,7 +54,15 @@ public class AddMBMessageTest extends BaseTestCase {
 			RuntimeVariables.replace("AP MB Message Subject"));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("AP MB Message Body."));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
+		assertEquals(RuntimeVariables.replace("AP MB Message Subject"),
+			selenium.getText("//td[1]/a"));
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP MB Message Subject"),
 			selenium.getText("//form/div[2]"));

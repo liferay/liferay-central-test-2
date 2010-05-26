@@ -54,7 +54,15 @@ public class AddMBMessage2Test extends BaseTestCase {
 			RuntimeVariables.replace("AP2 MB2 Message2 Subject2"));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("AP2 MB2 Message2 Body2."));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
+		assertEquals(RuntimeVariables.replace("AP2 MB2 Message2 Subject2"),
+			selenium.getText("//td[1]/a"));
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP2 MB2 Message2 Subject2"),
 			selenium.getText("//form/div[2]"));

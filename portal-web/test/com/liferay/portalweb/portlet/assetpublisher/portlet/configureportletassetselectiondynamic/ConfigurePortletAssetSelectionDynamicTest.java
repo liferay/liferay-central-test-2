@@ -60,7 +60,7 @@ public class ConfigurePortletAssetSelectionDynamicTest extends BaseTestCase {
 			try {
 				if (RuntimeVariables.replace("Source")
 										.equals(selenium.getText(
-								"//div[1]/div[1]/div[1]/div/span"))) {
+								"//form[@id='_86_fm']/div[1]/div[1]/div[1]/div/span"))) {
 					break;
 				}
 			}
@@ -77,12 +77,16 @@ public class ConfigurePortletAssetSelectionDynamicTest extends BaseTestCase {
 			selenium.getText("//div[3]/div/div/div/div/div"));
 		assertEquals("Dynamic", selenium.getSelectedLabel("_86_selectionStyle"));
 		assertEquals(RuntimeVariables.replace("Source"),
-			selenium.getText("//div[1]/div[1]/div[1]/div/span"));
+			selenium.getText(
+				"//form[@id='_86_fm']/div[1]/div[1]/div[1]/div/span"));
 		assertEquals(RuntimeVariables.replace("Filter"),
-			selenium.getText("//div[1]/div[2]/div[1]/div/span"));
+			selenium.getText(
+				"//form[@id='_86_fm']/div[1]/div[2]/div[1]/div/span"));
 		assertEquals(RuntimeVariables.replace("Ordering and Grouping"),
-			selenium.getText("//div[1]/div[3]/div[1]/div/span"));
+			selenium.getText(
+				"//form[@id='_86_fm']/div[1]/div[3]/div[1]/div/span"));
 		assertEquals(RuntimeVariables.replace("Display Settings"),
-			selenium.getText("//div[1]/div[4]/div[1]/div/span"));
+			selenium.getText(
+				"//form[@id='_86_fm']/div[1]/div[4]/div[1]/div/span"));
 	}
 }

@@ -24,9 +24,24 @@
 	<td></td>
 </tr>
 <tr>
-	<td>selectAndWait</td>
-	<td>//select</td>
-	<td>label=Image Gallery Image</td>
+	<td>clickAt</td>
+	<td>//strong/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a</td>
+	<td>Image Gallery Image</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAt</td>
@@ -132,6 +147,11 @@
 	<td>assertText</td>
 	<td>//h3/a</td>
 	<td>AP IG Image Name</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[1]/a/img</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>

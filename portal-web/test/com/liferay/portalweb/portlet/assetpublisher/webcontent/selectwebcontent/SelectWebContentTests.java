@@ -33,6 +33,7 @@ public class SelectWebContentTests extends BaseTests {
 		testSuite.addTestSuite(AddPortletAPTest.class);
 		testSuite.addTestSuite(AddWebContentTest.class);
 		testSuite.addTestSuite(ConfigurePortletAssetSelectionManualTest.class);
+		testSuite.addTestSuite(RemoveWebContentTest.class);
 		testSuite.addTestSuite(SelectWebContentTest.class);
 		testSuite.addTestSuite(TearDownWebContentTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);

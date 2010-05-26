@@ -47,9 +47,8 @@ public class ViewBookmarksEntryTitleListTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP Bookmarks Entry Name"),
-			selenium.getText("//div[2]/div/div/ul/li/a"));
-		selenium.clickAt("//div[2]/div/div/ul/li/a",
-			RuntimeVariables.replace(""));
+			selenium.getText("//span/a/span"));
+		selenium.clickAt("//span/a/span", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP Bookmarks Entry Name"),
 			selenium.getText("//div/h3"));

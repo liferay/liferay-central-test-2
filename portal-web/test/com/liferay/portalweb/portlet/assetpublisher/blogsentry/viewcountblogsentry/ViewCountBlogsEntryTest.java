@@ -94,6 +94,10 @@ public class ViewCountBlogsEntryTest extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("AP Blogs Entry Title"),
+			selenium.getText("//div[2]/div[1]/div[1]/a"));
+		selenium.click(RuntimeVariables.replace("//div[2]/div[1]/div[1]/a"));
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isPartialText("//div[2]/span[1]",
 				RuntimeVariables.getValue("viewCount2")));
 	}

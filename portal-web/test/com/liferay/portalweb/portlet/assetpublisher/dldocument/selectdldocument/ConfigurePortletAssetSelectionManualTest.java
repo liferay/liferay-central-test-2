@@ -60,7 +60,7 @@ public class ConfigurePortletAssetSelectionManualTest extends BaseTestCase {
 			try {
 				if (RuntimeVariables.replace("Selection")
 										.equals(selenium.getText(
-								"//div[1]/div[1]/div[1]/div/span"))) {
+								"//form[@id='_86_fm']/div[1]/div[1]/div[1]/div/span"))) {
 					break;
 				}
 			}
@@ -70,15 +70,17 @@ public class ConfigurePortletAssetSelectionManualTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//input[@value='Save'] ", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals("Manual", selenium.getSelectedLabel("_86_selectionStyle"));
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[3]/div/div/div/div/div"));
 		assertEquals(RuntimeVariables.replace("Selection"),
-			selenium.getText("//div[1]/div[1]/div[1]/div/span"));
+			selenium.getText(
+				"//form[@id='_86_fm']/div[1]/div[1]/div[1]/div/span"));
 		assertEquals(RuntimeVariables.replace("Display Settings"),
-			selenium.getText("//div[1]/div[2]/div[1]/div/span"));
+			selenium.getText(
+				"//form[@id='_86_fm']/div[1]/div[2]/div[1]/div/span"));
 	}
 }
