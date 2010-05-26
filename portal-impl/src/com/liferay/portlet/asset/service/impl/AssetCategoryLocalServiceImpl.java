@@ -120,15 +120,11 @@ public class AssetCategoryLocalServiceImpl
 				categoryProperties[i], StringPool.COLON);
 
 			String key = StringPool.BLANK;
-
-			if (categoryProperty.length > 1) {
-				key = GetterUtil.getString(categoryProperty[1]);
-			}
-
 			String value = StringPool.BLANK;
 
-			if (categoryProperty.length > 2) {
-				value = GetterUtil.getString(categoryProperty[2]);
+			if (categoryProperty.length > 1) {
+				key = GetterUtil.getString(categoryProperty[0]);
+				value = GetterUtil.getString(categoryProperty[1]);
 			}
 
 			if (Validator.isNotNull(key)) {
