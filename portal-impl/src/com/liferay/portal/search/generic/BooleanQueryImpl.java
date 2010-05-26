@@ -18,6 +18,8 @@ import com.liferay.portal.kernel.search.BooleanClause;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.Query;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -81,7 +83,7 @@ public class BooleanQueryImpl implements BooleanQuery {
 		add(termQuery, BooleanClauseOccur.SHOULD);
 	}
 
-	public void addRequiredTerm(String field, boolean value) {
+public void addRequiredTerm(String field, boolean value) {
 		addRequiredTerm(field, String.valueOf(value), false);
 	}
 
@@ -161,6 +163,44 @@ public class BooleanQueryImpl implements BooleanQuery {
 		}
 
 		add(query , BooleanClauseOccur.SHOULD);
+	}
+
+	public void addTerms(String[] fields, String values) {
+		if (Validator.isNull(values)) {
+			return;
+		}
+
+		for (String field : fields) {
+			String[] patterns = new String[] {
+				"(?i)^.*" + field + ":([\"\'])(.+?)(\\1).*$",
+				"(?i)^.*" + field + ":([^\\s\"']*).*$"
+			};
+
+			String[] replacePatterns = new String[] {"$1$2$3", "$1"};
+
+			for (int i = 0; i < patterns.length; i++) {
+				while (values.matches(patterns[i])) {
+					String value = values.replaceAll(
+						patterns[i], replacePatterns[i]);
+
+					String duplicate = "";
+
+					addTerm(field, value);
+
+					duplicate = "(?i)\\s*" + field + ":" + value + "\\s*";
+
+					values = values.replaceAll(duplicate, StringPool.SPACE);
+
+					values = values.trim();
+				}
+			}
+		}
+
+		if (values.trim().length() > 0) {
+			for (String field : fields) {
+				addTerm(field, values);
+			}
+		}
 	}
 
 	public List<BooleanClause> clauses() {
