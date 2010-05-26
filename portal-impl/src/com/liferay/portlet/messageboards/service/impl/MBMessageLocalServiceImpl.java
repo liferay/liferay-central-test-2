@@ -867,7 +867,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			}
 		}
 
-		return getMessageDisplay(message, status, threadView);
+		return getMessageDisplay(message, status, threadView, false);
 	}
 
 	public int getDiscussionMessagesCount(
@@ -1026,6 +1026,14 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			MBMessage message, int status, String threadView)
 		throws PortalException, SystemException {
 
+		return getMessageDisplay(message, status, threadView, true);
+	}
+
+	public MBMessageDisplay getMessageDisplay(
+			MBMessage message, int status, String threadView,
+			boolean includePreAndNext)
+		throws PortalException, SystemException {
+
 		MBCategory category = null;
 
 		if (!message.isDiscussion()) {
@@ -1053,7 +1061,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBThread previousThread = null;
 		MBThread nextThread = null;
 
-		if (message.getStatus() == WorkflowConstants.STATUS_APPROVED) {
+		if (message.getStatus() == WorkflowConstants.STATUS_APPROVED &&
+			includePreAndNext) {
 			ThreadLastPostDateComparator comparator =
 				new ThreadLastPostDateComparator(false);
 

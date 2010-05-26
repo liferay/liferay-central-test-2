@@ -404,6 +404,16 @@ public class MBMessageLocalServiceUtil {
 		return getService().getMessageDisplay(message, status, threadView);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
+		com.liferay.portlet.messageboards.model.MBMessage message, int status,
+		java.lang.String threadView, boolean includePreAndNext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getMessageDisplay(message, status, threadView,
+			includePreAndNext);
+	}
+
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getNoAssetMessages()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getNoAssetMessages();
