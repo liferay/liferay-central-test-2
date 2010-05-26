@@ -35,13 +35,17 @@ public class OpenSearchUtil {
 
 	public static final int DEFAULT_NAMESPACE = 0;
 
+	public static final int LIFERAY_NAMESPACE = 4;
+
+	public static final int NO_NAMESPACE = 3;
+
 	public static final int OS_NAMESPACE = 1;
 
 	public static final int RELEVANCE_NAMESPACE = 2;
 
-	public static final int NO_NAMESPACE = 3;
-
-	public static final int LIFERAY_NAMESPACE = 4;
+	private static Format _dateFormat =
+		FastDateFormatFactoryUtil.getSimpleDateFormat(
+			"yyyy-MM-dd'T'HH:mm:sszzz");
 
 	public static Element addElement(
 		Element el, String name, int namespaceType) {
@@ -123,9 +127,5 @@ public class OpenSearchUtil {
 			return SAXReaderUtil.createQName(name, getNamespace(namespaceType));
 		}
 	}
-
-	private static Format _dateFormat =
-		FastDateFormatFactoryUtil.getSimpleDateFormat(
-			"yyyy-MM-dd'T'HH:mm:sszzz");
 
 }

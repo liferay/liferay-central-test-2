@@ -53,6 +53,20 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 		return _enabled;
 	}
 
+	public abstract String search(
+			HttpServletRequest request, long groupId, long userId,
+			String keywords, int startPage, int itemsPerPage, String format)
+		throws SearchException;
+
+	public String search(
+			HttpServletRequest request, long userId, String keywords,
+			int startPage, int itemsPerPage, String format)
+		throws SearchException {
+
+		return search(
+			request, 0, userId, keywords, startPage, itemsPerPage, format);
+	}
+
 	public String search(HttpServletRequest request, String url)
 		throws SearchException {
 
@@ -86,20 +100,6 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 		}
 	}
 
-	public String search(
-			HttpServletRequest request, long userId, String keywords,
-			int startPage, int itemsPerPage, String format)
-		throws SearchException {
-
-		return search(
-			request, 0, userId, keywords, startPage, itemsPerPage, format);
-	}
-
-	public abstract String search(
-			HttpServletRequest request, long groupId, long userId,
-			String keywords, int startPage, int itemsPerPage, String format)
-		throws SearchException;
-
 	protected void addSearchResult(
 		Element root, long groupId, String title, String link, Date updated,
 		String summary, double score, String format) {
@@ -114,22 +114,20 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 		String summary, String[] tags, double ratings, double score,
 		String format) {
 
-		String groupIdValue = String.valueOf(groupId);
-
 		if (format.equals("rss")) {
 			addSearchResultRSS(
-				root, groupIdValue, title, link, updated, summary, tags,
-				ratings, score);
+				root, groupId, title, link, updated, summary, tags, ratings,
+				score);
 		}
 		else {
 			addSearchResultAtom(
-				root, groupIdValue, title, link, updated, summary, tags,
-				ratings, score);
+				root, groupId, title, link, updated, summary, tags, ratings,
+				score);
 		}
 	}
 
 	protected void addSearchResultAtom(
-		Element root, String groupId, String title, String link, Date updated,
+		Element root, long groupId, String title, String link, Date updated,
 		String summary, String[] tags, double ratings, double score) {
 
 		// entry
@@ -188,7 +186,7 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 	}
 
 	protected void addSearchResultRSS(
-		Element root, String groupId, String title, String link, Date updated,
+		Element root, long groupId, String title, String link, Date updated,
 		String summary, String[] tags, double ratings, double score) {
 
 		// item
