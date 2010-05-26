@@ -48,6 +48,7 @@ import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
@@ -78,6 +79,7 @@ import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.service.MBDiscussionLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.persistence.MBDiscussionUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.polls.model.impl.PollsChoiceImpl;
 import com.liferay.portlet.polls.model.impl.PollsQuestionImpl;
@@ -211,8 +213,13 @@ public class PortletDataContextImpl implements PortletDataContext {
 	public void addComments(Class<?> classObj, long classPK)
 		throws SystemException {
 
-		List<MBMessage> messages = MBMessageLocalServiceUtil.getMessages(
-			classObj.getName(), classPK, WorkflowConstants.STATUS_ANY);
+		long classNameId = PortalUtil.getClassNameId(classObj);
+
+		MBDiscussion discussion = MBDiscussionUtil.fetchByC_C(
+			classNameId, classPK);
+
+		List<MBMessage> messages = MBMessageLocalServiceUtil.getThreadMessages(
+			discussion.getThreadId(), WorkflowConstants.STATUS_APPROVED);
 
 		if (messages.size() == 0) {
 			return;
