@@ -124,6 +124,13 @@ public class WikiPageResourceLocalServiceWrapper
 			merge);
 	}
 
+	public com.liferay.portlet.wiki.model.WikiPageResource addPageResource(
+		long nodeId, java.lang.String title)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _wikiPageResourceLocalService.addPageResource(nodeId, title);
+	}
+
 	public void deletePageResource(long nodeId, java.lang.String title)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -135,6 +142,13 @@ public class WikiPageResourceLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _wikiPageResourceLocalService.getPageResource(pageResourcePrimKey);
+	}
+
+	public com.liferay.portlet.wiki.model.WikiPageResource getPageResource(
+		long nodeId, java.lang.String title)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _wikiPageResourceLocalService.getPageResource(nodeId, title);
 	}
 
 	public long getPageResourcePrimKey(long nodeId, java.lang.String title)

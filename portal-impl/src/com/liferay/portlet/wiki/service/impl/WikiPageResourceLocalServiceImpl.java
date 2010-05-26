@@ -24,9 +24,26 @@ import com.liferay.portlet.wiki.service.base.WikiPageResourceLocalServiceBaseImp
  * </b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Auge
  */
 public class WikiPageResourceLocalServiceImpl
 	extends WikiPageResourceLocalServiceBaseImpl {
+
+	public WikiPageResource addPageResource(long nodeId, String title)
+		throws PortalException, SystemException {
+
+		long pageResourcePrimKey = counterLocalService.increment();
+
+		WikiPageResource pageResource = wikiPageResourcePersistence.create(
+			pageResourcePrimKey);
+
+		pageResource.setNodeId(nodeId);
+		pageResource.setTitle(title);
+
+		wikiPageResourcePersistence.update(pageResource, false);
+
+		return pageResource;
+	}
 
 	public void deletePageResource(long nodeId, String title)
 		throws PortalException, SystemException {
@@ -39,6 +56,12 @@ public class WikiPageResourceLocalServiceImpl
 
 		return wikiPageResourcePersistence.findByPrimaryKey(
 			pageResourcePrimKey);
+	}
+
+	public WikiPageResource getPageResource(long nodeId, String title)
+		throws PortalException, SystemException {
+
+		return wikiPageResourcePersistence.fetchByN_T(nodeId, title);
 	}
 
 	public long getPageResourcePrimKey(long nodeId, String title)
