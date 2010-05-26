@@ -218,6 +218,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		MBDiscussion discussion = MBDiscussionUtil.fetchByC_C(
 			classNameId, classPK);
 
+		if (discussion == null) {
+			return;
+		}
+
 		List<MBMessage> messages = MBMessageLocalServiceUtil.getThreadMessages(
 			discussion.getThreadId(), WorkflowConstants.STATUS_APPROVED);
 
