@@ -88,13 +88,13 @@ public interface JournalArticleService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteArticle(long groupId, java.lang.String articleId,
-		java.lang.String articleURL,
+		double version, java.lang.String articleURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteArticle(long groupId, java.lang.String articleId,
-		double version, java.lang.String articleURL,
+		java.lang.String articleURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

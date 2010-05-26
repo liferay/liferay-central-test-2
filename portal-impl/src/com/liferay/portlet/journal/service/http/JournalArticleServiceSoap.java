@@ -125,12 +125,12 @@ public class JournalArticleServiceSoap {
 	}
 
 	public static void deleteArticle(long groupId, java.lang.String articleId,
-		java.lang.String articleURL,
+		double version, java.lang.String articleURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			JournalArticleServiceUtil.deleteArticle(groupId, articleId,
-				articleURL, serviceContext);
+				version, articleURL, serviceContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -140,12 +140,12 @@ public class JournalArticleServiceSoap {
 	}
 
 	public static void deleteArticle(long groupId, java.lang.String articleId,
-		double version, java.lang.String articleURL,
+		java.lang.String articleURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			JournalArticleServiceUtil.deleteArticle(groupId, articleId,
-				version, articleURL, serviceContext);
+				articleURL, serviceContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

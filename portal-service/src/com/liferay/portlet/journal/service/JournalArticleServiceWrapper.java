@@ -100,21 +100,21 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 	}
 
 	public void deleteArticle(long groupId, java.lang.String articleId,
-		java.lang.String articleURL,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_journalArticleService.deleteArticle(groupId, articleId, articleURL,
-			serviceContext);
-	}
-
-	public void deleteArticle(long groupId, java.lang.String articleId,
 		double version, java.lang.String articleURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_journalArticleService.deleteArticle(groupId, articleId, version,
 			articleURL, serviceContext);
+	}
+
+	public void deleteArticle(long groupId, java.lang.String articleId,
+		java.lang.String articleURL,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_journalArticleService.deleteArticle(groupId, articleId, articleURL,
+			serviceContext);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle expireArticle(
