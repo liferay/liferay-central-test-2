@@ -231,16 +231,24 @@ public class EditArticleAction extends PortletAction {
 		for (int i = 0; i < deleteArticleIds.length; i++) {
 			int pos = deleteArticleIds[i].lastIndexOf(VERSION_SEPARATOR);
 
-			String articleId = deleteArticleIds[i].substring(0, pos);
-			double version = GetterUtil.getDouble(
-				deleteArticleIds[i].substring(
-					pos + VERSION_SEPARATOR.length()));
+			String articleId = deleteArticleIds[i];
 
 			String articleURL = ParamUtil.getString(
 				actionRequest, "articleURL");
 
-			JournalArticleServiceUtil.deleteArticle(
-				groupId, articleId, version, articleURL, serviceContext);
+			if (pos == -1) {
+				JournalArticleServiceUtil.deleteArticle(
+					groupId, articleId, articleURL, serviceContext);
+			}
+			else {
+				articleId = articleId.substring(0, pos);
+				double version = GetterUtil.getDouble(
+					deleteArticleIds[i].substring(
+						pos + VERSION_SEPARATOR.length()));
+
+				JournalArticleServiceUtil.deleteArticle(
+					groupId, articleId, version, articleURL, serviceContext);
+			}
 
 			JournalUtil.removeRecentArticle(actionRequest, deleteArticleIds[i]);
 		}

@@ -106,6 +106,18 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 	}
 
 	public void deleteArticle(
+			long groupId, String articleId, String articleURL,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		JournalArticlePermission.check(
+			getPermissionChecker(), groupId, articleId, ActionKeys.DELETE);
+
+		journalArticleLocalService.deleteArticle(
+			groupId, articleId, serviceContext);
+	}
+
+	public void deleteArticle(
 			long groupId, String articleId, double version, String articleURL,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {

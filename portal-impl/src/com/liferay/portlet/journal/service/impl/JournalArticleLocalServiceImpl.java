@@ -16,6 +16,7 @@ package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -716,6 +717,19 @@ public class JournalArticleLocalServiceImpl
 		// Article
 
 		journalArticlePersistence.remove(article);
+	}
+
+	public void deleteArticle(
+			long groupId, String articleId, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		List<JournalArticle> articles = journalArticlePersistence.findByG_A(
+			groupId, articleId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			new ArticleVersionComparator(true));
+
+		for (JournalArticle article : articles) {
+			deleteArticle(article, null, serviceContext);
+		}
 	}
 
 	public void deleteArticle(
