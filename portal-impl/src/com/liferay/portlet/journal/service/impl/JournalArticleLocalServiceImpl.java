@@ -625,13 +625,12 @@ public class JournalArticleLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		// Indexer
+		if (article.isApproved() &&
+			isLatestVersion(
+				article.getGroupId(), article.getArticleId(),
+				article.getVersion(), WorkflowConstants.STATUS_APPROVED)) {
 
-		if (article.isApproved() && article.isIndexable()) {
-			Indexer indexer = IndexerRegistryUtil.getIndexer(
-				JournalArticle.class);
-
-			indexer.delete(article);
+			updatePreviousApprovedArticle(article);
 		}
 
 		// Email
@@ -1899,20 +1898,8 @@ public class JournalArticleLocalServiceImpl
 				indexer.reindex(article);
 			}
 			else {
-
-				// Asset
-
-				assetEntryLocalService.updateVisible(
-					JournalArticle.class.getName(),
-					article.getResourcePrimKey(), false);
-
-				// Indexer
-
-				if (article.isIndexable()) {
-					Indexer indexer = IndexerRegistryUtil.getIndexer(
-						JournalArticle.class);
-
-					indexer.delete(article);
+				if (article.isApproved()) {
+					updatePreviousApprovedArticle(article);
 				}
 			}
 		}
@@ -2769,6 +2756,39 @@ public class JournalArticleLocalServiceImpl
 		MailMessage message = new MailMessage(from, to, subject, body, true);
 
 		mailService.sendEmail(message);
+	}
+
+	protected void updatePreviousApprovedArticle(JournalArticle article)
+		throws PortalException, SystemException {
+
+		List<JournalArticle> approvedArticleVersions =
+			journalArticlePersistence.findByG_A_S(
+				article.getGroupId(), article.getArticleId(),
+				WorkflowConstants.STATUS_APPROVED, 0, 2);
+
+		if (approvedArticleVersions.size() > 1) {
+			JournalArticle previousApprovedArticle =
+				approvedArticleVersions.get(1);
+
+			if (article.isIndexable()) {
+				Indexer indexer = IndexerRegistryUtil.getIndexer(
+					JournalArticle.class);
+
+				indexer.reindex(previousApprovedArticle);
+			}
+		}
+		else {
+			if (article.isIndexable()) {
+				Indexer indexer = IndexerRegistryUtil.getIndexer(
+					JournalArticle.class);
+
+				indexer.delete(article);
+			}
+
+			assetEntryLocalService.updateVisible(
+				JournalArticle.class.getName(),
+				article.getResourcePrimKey(), false);
+		}
 	}
 
 	protected void updateUrlTitles(
