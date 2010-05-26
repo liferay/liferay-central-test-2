@@ -301,17 +301,17 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryException;
 
-	public com.liferay.portlet.asset.model.AssetCategory findByV_P_N(
-		long vocabularyId, long parentCategoryId, java.lang.String name)
+	public com.liferay.portlet.asset.model.AssetCategory findByP_N_V(
+		long parentCategoryId, java.lang.String name, long vocabularyId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryException;
 
-	public com.liferay.portlet.asset.model.AssetCategory fetchByV_P_N(
-		long vocabularyId, long parentCategoryId, java.lang.String name)
+	public com.liferay.portlet.asset.model.AssetCategory fetchByP_N_V(
+		long parentCategoryId, java.lang.String name, long vocabularyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.asset.model.AssetCategory fetchByV_P_N(
-		long vocabularyId, long parentCategoryId, java.lang.String name,
+	public com.liferay.portlet.asset.model.AssetCategory fetchByP_N_V(
+		long parentCategoryId, java.lang.String name, long vocabularyId,
 		boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -352,8 +352,8 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	public void removeByN_V(java.lang.String name, long vocabularyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void removeByV_P_N(long vocabularyId, long parentCategoryId,
-		java.lang.String name)
+	public void removeByP_N_V(long parentCategoryId, java.lang.String name,
+		long vocabularyId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryException;
 
@@ -387,8 +387,8 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	public int countByN_V(java.lang.String name, long vocabularyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByV_P_N(long vocabularyId, long parentCategoryId,
-		java.lang.String name)
+	public int countByP_N_V(long parentCategoryId, java.lang.String name,
+		long vocabularyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()

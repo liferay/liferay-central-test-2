@@ -512,26 +512,26 @@ public class AssetCategoryUtil {
 			orderByComparator);
 	}
 
-	public static com.liferay.portlet.asset.model.AssetCategory findByV_P_N(
-		long vocabularyId, long parentCategoryId, java.lang.String name)
+	public static com.liferay.portlet.asset.model.AssetCategory findByP_N_V(
+		long parentCategoryId, java.lang.String name, long vocabularyId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryException {
-		return getPersistence().findByV_P_N(vocabularyId, parentCategoryId, name);
+		return getPersistence().findByP_N_V(parentCategoryId, name, vocabularyId);
 	}
 
-	public static com.liferay.portlet.asset.model.AssetCategory fetchByV_P_N(
-		long vocabularyId, long parentCategoryId, java.lang.String name)
+	public static com.liferay.portlet.asset.model.AssetCategory fetchByP_N_V(
+		long parentCategoryId, java.lang.String name, long vocabularyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .fetchByV_P_N(vocabularyId, parentCategoryId, name);
+				   .fetchByP_N_V(parentCategoryId, name, vocabularyId);
 	}
 
-	public static com.liferay.portlet.asset.model.AssetCategory fetchByV_P_N(
-		long vocabularyId, long parentCategoryId, java.lang.String name,
+	public static com.liferay.portlet.asset.model.AssetCategory fetchByP_N_V(
+		long parentCategoryId, java.lang.String name, long vocabularyId,
 		boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .fetchByV_P_N(vocabularyId, parentCategoryId, name,
+				   .fetchByP_N_V(parentCategoryId, name, vocabularyId,
 			retrieveFromCache);
 	}
 
@@ -594,11 +594,11 @@ public class AssetCategoryUtil {
 		getPersistence().removeByN_V(name, vocabularyId);
 	}
 
-	public static void removeByV_P_N(long vocabularyId, long parentCategoryId,
-		java.lang.String name)
+	public static void removeByP_N_V(long parentCategoryId,
+		java.lang.String name, long vocabularyId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryException {
-		getPersistence().removeByV_P_N(vocabularyId, parentCategoryId, name);
+		getPersistence().removeByP_N_V(parentCategoryId, name, vocabularyId);
 	}
 
 	public static void removeAll()
@@ -651,11 +651,11 @@ public class AssetCategoryUtil {
 		return getPersistence().countByN_V(name, vocabularyId);
 	}
 
-	public static int countByV_P_N(long vocabularyId, long parentCategoryId,
-		java.lang.String name)
+	public static int countByP_N_V(long parentCategoryId,
+		java.lang.String name, long vocabularyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .countByV_P_N(vocabularyId, parentCategoryId, name);
+				   .countByP_N_V(parentCategoryId, name, vocabularyId);
 	}
 
 	public static int countAll()
