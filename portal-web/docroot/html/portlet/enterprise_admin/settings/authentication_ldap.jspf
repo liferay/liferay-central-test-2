@@ -27,7 +27,7 @@ long[] ldapServerIds = StringUtil.split(ParamUtil.getString(request, "settings--
 
 if (ldapAuthEnabled && (ldapServerIds.length <= 0)) {
 	String ldapServerName = themeDisplay.translate("default");
-	String ldapBaseProviderUrl = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_BASE_PROVIDER_URL + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_BASE_PROVIDER_URL));
+	String ldapBaseProviderUrl = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_BASE_PROVIDER_URL + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_BASE_PROVIDER_URL, StringPool.BLANK));
 	String ldapBaseDN = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_BASE_DN + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_BASE_DN));
 	String ldapSecurityPrincipal = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_SECURITY_PRINCIPAL + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_SECURITY_PRINCIPAL));
 	String ldapSecurityCredentials = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_SECURITY_CREDENTIALS + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_SECURITY_CREDENTIALS));
@@ -40,35 +40,53 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0)) {
 	String ldapUserMappings = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_USER_MAPPINGS + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_USER_MAPPINGS));
 	String ldapGroupMappings = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_GROUP_MAPPINGS + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_GROUP_MAPPINGS));
 
-	PortletPreferences preferences = PrefsPropsUtil.getPreferences(company.getCompanyId());
+	if (Validator.isNotNull(ldapBaseProviderUrl)) {
+		long ldapServerId = CounterLocalServiceUtil.increment();
 
-	long ldapServerId = CounterLocalServiceUtil.increment();
+		String postfix = StringPool.PERIOD + ldapServerId;
 
-	String postfix = StringPool.PERIOD + ldapServerId;
+		ldapServerIds = new long[] {ldapServerId};
 
-	ldapServerIds = new long[] {ldapServerId};
+		UnicodeProperties properties = new UnicodeProperties();
 
-	UnicodeProperties properties = new UnicodeProperties();
+		properties.put("ldap.server.name" + postfix, ldapServerName);
+		properties.put(PropsKeys.LDAP_BASE_PROVIDER_URL + postfix, ldapBaseProviderUrl);
+		properties.put(PropsKeys.LDAP_BASE_DN + postfix, ldapBaseDN);
+		properties.put(PropsKeys.LDAP_SECURITY_PRINCIPAL + postfix, ldapSecurityPrincipal);
+		properties.put(PropsKeys.LDAP_SECURITY_CREDENTIALS + postfix, ldapSecurityCredentials);
+		properties.put(PropsKeys.LDAP_AUTH_SEARCH_FILTER + postfix, ldapAuthSearchFilter);
+		properties.put(PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER + postfix, ldapImportUserSearchFilter);
+		properties.put(PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER + postfix, ldapImportGroupSearchFilter);
+		properties.put(PropsKeys.LDAP_USERS_DN + postfix, ldapUsersDN);
+		properties.put(PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES + postfix, ldapUserDefaultObjectClasses);
+		properties.put(PropsKeys.LDAP_GROUPS_DN + postfix, ldapGroupsDN);
+		properties.put(PropsKeys.LDAP_USER_MAPPINGS + postfix, ldapUserMappings);
+		properties.put(PropsKeys.LDAP_GROUP_MAPPINGS + postfix, ldapGroupMappings);
+		properties.put("ldap.server.ids", StringUtil.merge(ldapServerIds));
 
-	properties.put("ldap.server.name" + postfix, ldapServerName);
-	properties.put(PropsKeys.LDAP_BASE_PROVIDER_URL + postfix, ldapBaseProviderUrl);
-	properties.put(PropsKeys.LDAP_BASE_DN + postfix, ldapBaseDN);
-	properties.put(PropsKeys.LDAP_SECURITY_PRINCIPAL + postfix, ldapSecurityPrincipal);
-	properties.put(PropsKeys.LDAP_SECURITY_CREDENTIALS + postfix, ldapSecurityCredentials);
-	properties.put(PropsKeys.LDAP_AUTH_SEARCH_FILTER + postfix, ldapAuthSearchFilter);
-	properties.put(PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER + postfix, ldapImportUserSearchFilter);
-	properties.put(PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER + postfix, ldapImportGroupSearchFilter);
-	properties.put(PropsKeys.LDAP_USERS_DN + postfix, ldapUsersDN);
-	properties.put(PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES + postfix, ldapUserDefaultObjectClasses);
-	properties.put(PropsKeys.LDAP_GROUPS_DN + postfix, ldapGroupsDN);
-	properties.put(PropsKeys.LDAP_USER_MAPPINGS + postfix, ldapUserMappings);
-	properties.put(PropsKeys.LDAP_GROUP_MAPPINGS + postfix, ldapGroupMappings);
-	properties.put("ldap.server.ids", StringUtil.merge(ldapServerIds));
+		List<String> keys = new ArrayList<String>();
 
-	try {
-		CompanyServiceUtil.updatePreferences(company.getCompanyId(), properties);
-	}
-	catch (Exception e) {
+		keys.add("ldap.server.name");
+		keys.add(PropsKeys.LDAP_BASE_PROVIDER_URL);
+		keys.add(PropsKeys.LDAP_BASE_DN);
+		keys.add(PropsKeys.LDAP_SECURITY_PRINCIPAL);
+		keys.add(PropsKeys.LDAP_SECURITY_CREDENTIALS);
+		keys.add(PropsKeys.LDAP_AUTH_SEARCH_FILTER);
+		keys.add(PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER);
+		keys.add(PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER);
+		keys.add(PropsKeys.LDAP_USERS_DN);
+		keys.add(PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES);
+		keys.add(PropsKeys.LDAP_GROUPS_DN);
+		keys.add(PropsKeys.LDAP_USER_MAPPINGS);
+		keys.add(PropsKeys.LDAP_GROUP_MAPPINGS);
+
+		try {
+			CompanyServiceUtil.updatePreferences(company.getCompanyId(), properties);
+
+			CompanyServiceUtil.removePreferences(company.getCompanyId(), keys.toArray(new String[keys.size()]));
+		}
+		catch (Exception e) {
+		}
 	}
 }
 %>
