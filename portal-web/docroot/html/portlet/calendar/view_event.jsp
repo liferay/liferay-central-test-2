@@ -100,9 +100,9 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	monthlyInterval1 = recurrence.getInterval();
 }
 
-int yearlyType = ParamUtil.getInteger(request, "yearlyType");
+int yearlyType = 0;
 if ((event.getRepeating()) && (recurrence != null)) {
-	if (recurrence.getByMonth() != null) {
+	if (recurrence.getByMonthDay() == null) {
 		yearlyType = 1;
 	}
 }
@@ -112,12 +112,18 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	if (recurrence.getByMonth() == null) {
 		yearlyMonth0 = recurrence.getDtStart().get(Calendar.MONTH);
 	}
+	else {
+		yearlyMonth0 = recurrence.getByMonth()[0];
+	}
 }
 
 int yearlyDay0 = ParamUtil.getInteger(request, "yearlyDay0", 15);
 if ((event.getRepeating()) && (recurrence != null)) {
-	if (recurrence.getByMonth() == null) {
+	if (recurrence.getByMonthDay() == null) {
 		yearlyDay0 = recurrence.getDtStart().get(Calendar.DATE);
+	}
+	else {
+		yearlyDay0 = recurrence.getByMonthDay()[0];
 	}
 }
 
@@ -128,20 +134,14 @@ if ((event.getRepeating()) && (recurrence != null)) {
 
 int yearlyPos = ParamUtil.getInteger(request, "yearlyPos", 1);
 if ((event.getRepeating()) && (recurrence != null)) {
-	if (recurrence.getByMonth() != null) {
-		yearlyPos = recurrence.getByMonth()[0];
-	}
-	else if (recurrence.getByDay() != null) {
+	if (recurrence.getByDay() != null) {
 		yearlyPos = recurrence.getByDay()[0].getDayPosition();
 	}
 }
 
 int yearlyDay1 = ParamUtil.getInteger(request, "yearlyDay1", Calendar.SUNDAY);
 if ((event.getRepeating()) && (recurrence != null)) {
-	if (recurrence.getByMonth() != null) {
-		yearlyDay1 = -1;
-	}
-	else if (recurrence.getByDay() != null) {
+	if (recurrence.getByDay() != null) {
 		yearlyDay1 = recurrence.getByDay()[0].getDayOfWeek();
 	}
 }
@@ -362,7 +362,16 @@ request.setAttribute("view_event.jsp-event", event);
 				<dd>
 					<abbr class="rrule" title="FREQ=YEARLY">
 						<c:if test="<%= (yearlyType == 0) %>">
-							<liferay-ui:message key="every" /> <%= months[yearlyMonth0] %> <liferay-ui:message key="of-every" /> <%= yearlyInterval0 %> <liferay-ui:message key="year-s" />
+
+							<%
+								Object[] arguments = new Object[3];
+								arguments[0] = months[yearlyMonth0];
+								arguments[1] = String.valueOf(yearlyDay0);
+								arguments[2] = String.valueOf(yearlyInterval0);
+							%>
+
+							<%= LanguageUtil.format(pageContext, "every-x-x-of-every-x-years", arguments) %>
+
 						</c:if>
 
 						<c:if test="<%= (yearlyType == 1) %>">
