@@ -76,6 +76,12 @@ if (Validator.isNotNull(primarySearch)) {
 		}
 	}
 }
+
+LinkedHashMap groupParams = new LinkedHashMap();
+
+groupParams.put("active", Boolean.FALSE);
+
+int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getCompanyId(), null, null, groupParams);
 %>
 
 <portlet:renderURL var="searchURL">
@@ -176,12 +182,25 @@ if (Validator.isNotNull(primarySearch)) {
 				String entryHref = el.element("link").attributeValue("href");
 				String summary = el.elementText("summary");
 
+
+				// groupId
+
+				long entryGroupId = Long.parseLong(el.elementText(OpenSearchUtil.getQName("groupId", OpenSearchUtil.LIFERAY_NAMESPACE)));
+
+				if (Validator.isNotNull(entryGroupId) && (inactiveGroupsCount > 0)) {
+					Group entryGroup = GroupServiceUtil.getGroup(entryGroupId);
+
+					if (!entryGroup.isActive()) {
+						total--;
+						continue;
+					}
+				}
+
 				if (portlet.getPortletId().equals(PortletKeys.DOCUMENT_LIBRARY)) {
-					long dlGroupId = GetterUtil.getLong(HttpUtil.getParameter(entryHref, "_20_groupId", false));
 					long folderId = GetterUtil.getLong(HttpUtil.getParameter(entryHref, "_20_folderId", false));
 					String name = GetterUtil.getString(HttpUtil.getParameter(entryHref, "_20_name", false));
 
-					DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(dlGroupId, folderId, name);
+					DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(entryGroupId, folderId, name);
 
 					entryTitle = fileEntry.getTitle();
 
@@ -202,10 +221,9 @@ if (Validator.isNotNull(primarySearch)) {
 				StringBundler rowSB = new StringBundler();
 
 				if (portlet.getPortletId().equals(PortletKeys.JOURNAL)) {
-					long articleGroupId = GetterUtil.getLong(HttpUtil.getParameter(entryHref, "groupId", false));
 					String articleId = GetterUtil.getString(HttpUtil.getParameter(entryHref, "articleId", false));
 
-					JournalArticle article = JournalArticleLocalServiceUtil.getArticle(articleGroupId, articleId);
+					JournalArticle article = JournalArticleLocalServiceUtil.getArticle(entryGroupId, articleId);
 
 					if (DateUtil.compareTo(article.getDisplayDate(), new Date()) > 0) {
 						total--;
