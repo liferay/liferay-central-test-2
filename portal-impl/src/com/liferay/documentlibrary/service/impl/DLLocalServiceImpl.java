@@ -165,7 +165,11 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
 
-			searchQuery.addKeywords(_fields, keywords);
+			if (Validator.isNotNull(keywords)) {
+				searchQuery.addTerm(Field.CONTENT, keywords);
+				searchQuery.addTerm(Field.PROPERTIES, keywords);
+				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords, true);
+			}
 
 			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
 
@@ -333,9 +337,5 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 	@BeanReference(type = Hook.class)
 	protected Hook hook;
-
-	private static String[] _fields = new String[] {
-		Field.ASSET_TAG_NAMES, Field.CONTENT, Field.PROPERTIES
-	};
 
 }
