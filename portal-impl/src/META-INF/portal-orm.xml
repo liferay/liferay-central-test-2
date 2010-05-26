@@ -2636,6 +2636,9 @@
 	<mapped-superclass class="com.liferay.portlet.wiki.model.impl.WikiPageResourceModelImpl">
 		<attributes>
 			<id name="resourcePrimKey" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
 			<basic name="nodeId" />
 			<basic name="title" />
 			<transient name="primaryKey" />
