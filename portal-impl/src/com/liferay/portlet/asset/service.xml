@@ -63,10 +63,10 @@
 			<finder-column name="name" />
 			<finder-column name="vocabularyId" />
 		</finder>
-		<finder name="V_P_N" return-type="AssetCategory" unique="true">
-			<finder-column name="vocabularyId" />
+		<finder name="P_N_V" return-type="AssetCategory" unique="true">
 			<finder-column name="parentCategoryId" />
 			<finder-column name="name" />
+			<finder-column name="vocabularyId" />
 		</finder>
 	</entity>
 	<entity name="AssetCategoryProperty" local-service="true" remote-service="true">
