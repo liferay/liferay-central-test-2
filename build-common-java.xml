@@ -140,21 +140,21 @@
 		<mkdir dir="${javadoc.dir}/../taglibs" />
 
 		<java
-			fork="true"
 			classname="com.sun.tlddoc.TLDDoc"
 			classpathref="project.classpath"
 			failonerror="true"
+			fork="true"
 			maxmemory="512m"
 		>
-			<arg line="-d ${javadoc.dir}/../taglibs"/>
-			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-aui.tld"/>
-			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-faces.tld"/>
-			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-portlet-ext.tld"/>
-			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-portlet.tld"/>
-			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-security.tld"/>
-			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-theme.tld"/>
-			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-ui.tld"/>
-			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-util.tld"/>
+			<arg line="-d ${javadoc.dir}/../taglibs" />
+			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-aui.tld" />
+			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-faces.tld" />
+			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-portlet-ext.tld" />
+			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-portlet.tld" />
+			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-security.tld" />
+			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-theme.tld" />
+			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-ui.tld" />
+			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-util.tld" />
 		</java>
 	</target>
 </project>
