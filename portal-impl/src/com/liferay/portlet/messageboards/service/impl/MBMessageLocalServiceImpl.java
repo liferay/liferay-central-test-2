@@ -266,11 +266,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Thread
 
-		MBMessage parentMessage = mbMessagePersistence.fetchByPrimaryKey(
-			parentMessageId);
-
-		if (parentMessage == null) {
-			parentMessageId = MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID;
+		if (parentMessageId != MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) {
+			MBMessage parentMessage = mbMessagePersistence.fetchByPrimaryKey(
+				parentMessageId);
+			if (parentMessage == null) {
+				parentMessageId = MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID;
+			}
 		}
 
 		MBThread thread = null;
