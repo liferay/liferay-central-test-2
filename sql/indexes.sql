@@ -656,6 +656,9 @@ create index IX_9F7655DA on WikiPage (nodeId, head, parentTitle, status);
 create index IX_432F0AB0 on WikiPage (nodeId, head, status);
 create index IX_46EEF3C8 on WikiPage (nodeId, parentTitle);
 create index IX_1ECC7656 on WikiPage (nodeId, redirectTitle);
+create index IX_1C2DFAA5 on WikiPage (nodeId, resourcePrimKey);
+create index IX_8BEDC48B on WikiPage (nodeId, resourcePrimKey, status);
+create unique index IX_1951A503 on WikiPage (nodeId, resourcePrimKey, version);
 create index IX_546F2D5C on WikiPage (nodeId, status);
 create index IX_997EEDD2 on WikiPage (nodeId, title);
 create index IX_E745EA26 on WikiPage (nodeId, title, head);
@@ -667,6 +670,8 @@ create index IX_9C0E478F on WikiPage (uuid_);
 create unique index IX_899D3DFB on WikiPage (uuid_, groupId);
 
 create unique index IX_21277664 on WikiPageResource (nodeId, title);
+create index IX_BE898221 on WikiPageResource (uuid_);
+create unique index IX_7F49F812 on WikiPageResource (uuid_, nodeId);
 
 create index IX_A8B0D276 on WorkflowDefinitionLink (companyId);
 create index IX_A4DB1F0F on WorkflowDefinitionLink (companyId, workflowDefinitionName, workflowDefinitionVersion);
