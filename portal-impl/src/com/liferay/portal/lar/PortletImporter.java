@@ -447,8 +447,8 @@ public class PortletImporter {
 				properties[i] = key.concat(StringPool.COLON).concat(value);
 			}
 
-			AssetCategory existingCategory = AssetCategoryUtil.fetchByV_P_N(
-				vocabularyId, parentCategoryId, category.getName());
+			AssetCategory existingCategory = AssetCategoryUtil.fetchByP_N_V(
+				parentCategoryId, category.getName(), vocabularyId);
 
 			if (existingCategory == null) {
 				importedCategory = AssetCategoryLocalServiceUtil.addCategory(
