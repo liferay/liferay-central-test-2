@@ -29,6 +29,8 @@ List <UserGroupRole> userGroupRoles = new ArrayList<UserGroupRole>();
 
 userGroupRoles.addAll(communityRoles);
 userGroupRoles.addAll(organizationRoles);
+
+List<Group> allGroups = (List<Group>)request.getAttribute("user.allGroups");
 %>
 
 <liferay-util:buffer var="removeRoleIcon">
@@ -81,6 +83,52 @@ userGroupRoles.addAll(organizationRoles);
 		url='<%= "javascript:" + renderResponse.getNamespace() + "openRegularRoleSelector();" %>'
 	/>
 </c:if>
+
+<br /><br />
+
+<h3><liferay-ui:message key="inherited-roles" /></h3>
+
+<liferay-ui:search-container
+	id='<%= renderResponse.getNamespace() + "inheritedRolesSearchContainer" %>'
+	headerNames="title"
+>
+	<liferay-ui:search-container-results
+		results="<%= allGroups %>"
+		total="<%= allGroups.size() %>"
+	/>
+
+	<liferay-ui:search-container-row
+		className="com.liferay.portal.model.Group"
+		keyProperty="groupId"
+		modelVar="group"
+	>
+
+		<%
+		List<Role> groupRoles = RoleLocalServiceUtil.getGroupRoles(group.getGroupId());
+
+		if (!groupRoles.isEmpty()) {
+		%>
+
+			<liferay-util:param name="className" value="<%= EnterpriseAdminUtil.getCssClassName(groupRoles.get(0)) %>"  />
+			<liferay-util:param name="classHoverName" value="<%= EnterpriseAdminUtil.getCssClassName(groupRoles.get(0)) %>" />
+	
+			<liferay-ui:search-container-column-text
+				name="group"
+				value="<%= HtmlUtil.escape(group.getDescriptiveName()) %>"
+			/>
+			<liferay-ui:search-container-column-text
+				name="title"
+				value="<%= HtmlUtil.escape(ListUtil.toString(groupRoles, "name")) %>"
+			/>
+
+		<%
+		}
+		%>
+
+	</liferay-ui:search-container-row>
+
+	<liferay-ui:search-iterator />
+</liferay-ui:search-container>
 
 <br /><br />
 

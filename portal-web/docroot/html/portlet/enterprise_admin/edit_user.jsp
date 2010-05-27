@@ -133,6 +133,14 @@ else if (selUser != null) {
 	}
 }
 
+List<Group> allGroups = new ArrayList<Group>();
+
+allGroups.addAll(groups);
+allGroups.addAll(GroupLocalServiceUtil.getOrganizationsGroups(organizations));
+allGroups.addAll(GroupLocalServiceUtil.getOrganizationsRelatedGroups(organizations));
+allGroups.addAll(GroupLocalServiceUtil.getUserGroupsGroups(userGroups));
+allGroups.addAll(GroupLocalServiceUtil.getUserGroupsRelatedGroups(userGroups));
+
 String[] mainSections = PropsValues.USERS_FORM_ADD_MAIN;
 String[] identificationSections = PropsValues.USERS_FORM_ADD_IDENTIFICATION;
 String[] miscellaneousSections = PropsValues.USERS_FORM_ADD_MISCELLANEOUS;
@@ -197,6 +205,7 @@ String taglibOnSubmit = renderResponse.getNamespace() + "saveUser('" + ((selUser
 				request.setAttribute("user.communityRoles", communityRoles);
 				request.setAttribute("user.organizationRoles", organizationRoles);
 				request.setAttribute("user.userGroups", userGroups);
+				request.setAttribute("user.allGroups", allGroups);
 
 				request.setAttribute("addresses.className", Contact.class.getName());
 				request.setAttribute("emailAddresses.className", Contact.class.getName());
