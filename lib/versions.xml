@@ -1474,7 +1474,7 @@
 	</library>
 	<library>
 		<file-name>portal/freemarker.jar</file-name>
-		<version>2.3.15</version>
+		<version>2.3.16</version>
 		<project-name>FreeMarker</project-name>
 		<project-url>http://www.freemarker.org</project-url>
 		<licenses>
