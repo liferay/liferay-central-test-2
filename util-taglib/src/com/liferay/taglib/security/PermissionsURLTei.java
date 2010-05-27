@@ -27,8 +27,8 @@ import javax.servlet.jsp.tagext.VariableInfo;
  */
 public class PermissionsURLTei extends TagExtraInfo {
 
-	public VariableInfo[] getVariableInfo(TagData data) {
-		String var = data.getAttributeString("var");
+	public VariableInfo[] getVariableInfo(TagData tagData) {
+		String var = tagData.getAttributeString("var");
 
 		if (Validator.isNotNull(var)) {
 			return new VariableInfo[] {

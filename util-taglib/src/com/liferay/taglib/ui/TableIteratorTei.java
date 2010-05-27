@@ -25,8 +25,8 @@ import javax.servlet.jsp.tagext.VariableInfo;
  */
 public class TableIteratorTei extends TagExtraInfo {
 
-	public VariableInfo[] getVariableInfo(TagData data) {
-		String listType = data.getAttributeString("listType");
+	public VariableInfo[] getVariableInfo(TagData tagData) {
+		String listType = tagData.getAttributeString("listType");
 
 		return new VariableInfo[] {
 			new VariableInfo(

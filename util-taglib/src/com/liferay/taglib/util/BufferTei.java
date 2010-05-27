@@ -25,8 +25,8 @@ import javax.servlet.jsp.tagext.VariableInfo;
  */
 public class BufferTei extends TagExtraInfo {
 
-	public VariableInfo[] getVariableInfo(TagData data) {
-		String var = data.getAttributeString("var");
+	public VariableInfo[] getVariableInfo(TagData tagData) {
+		String var = tagData.getAttributeString("var");
 
 		return new VariableInfo[] {
 			new VariableInfo(

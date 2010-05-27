@@ -25,24 +25,23 @@ import javax.servlet.jsp.tagext.VariableInfo;
  */
 public class SectionTei extends TagExtraInfo {
 
-	public VariableInfo[] getVariableInfo(TagData data) {
-		return new VariableInfo[] {
-			new VariableInfo(
-				"sectionParam", String.class.getName(), true,
-				VariableInfo.NESTED),
-			new VariableInfo(
-				"sectionName", String.class.getName(), true,
-				VariableInfo.NESTED),
-			new VariableInfo(
-				"sectionSelected", Boolean.class.getName(), true,
-				VariableInfo.NESTED),
-			new VariableInfo(
-				"sectionScroll", String.class.getName(), true,
-				VariableInfo.NESTED),
-			new VariableInfo(
-				"sectionRedirectParams", String.class.getName(), true,
-				VariableInfo.NESTED)
-		};
+	public VariableInfo[] getVariableInfo(TagData tagData) {
+		return _variableInfo;
 	}
+
+	private static VariableInfo[] _variableInfo = new VariableInfo[] {
+		new VariableInfo(
+			"sectionParam", String.class.getName(), true, VariableInfo.NESTED),
+		new VariableInfo(
+			"sectionName", String.class.getName(), true, VariableInfo.NESTED),
+		new VariableInfo(
+			"sectionSelected", Boolean.class.getName(), true,
+			VariableInfo.NESTED),
+		new VariableInfo(
+			"sectionScroll", String.class.getName(), true, VariableInfo.NESTED),
+		new VariableInfo(
+			"sectionRedirectParams", String.class.getName(), true,
+			VariableInfo.NESTED)
+	};
 
 }

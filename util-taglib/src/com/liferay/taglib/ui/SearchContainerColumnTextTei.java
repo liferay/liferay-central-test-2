@@ -28,8 +28,8 @@ import javax.servlet.jsp.tagext.VariableInfo;
  */
 public class SearchContainerColumnTextTei extends TagExtraInfo {
 
-	public VariableInfo[] getVariableInfo(TagData data) {
-		String buffer = data.getAttributeString("buffer");
+	public VariableInfo[] getVariableInfo(TagData tagData) {
+		String buffer = tagData.getAttributeString("buffer");
 
 		if (Validator.isNotNull(buffer)) {
 			return new VariableInfo[] {

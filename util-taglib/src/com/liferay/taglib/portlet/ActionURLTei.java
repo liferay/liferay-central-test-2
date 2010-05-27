@@ -29,9 +29,9 @@ import javax.servlet.jsp.tagext.VariableInfo;
  */
 public class ActionURLTei extends TagExtraInfo {
 
-	public VariableInfo[] getVariableInfo(TagData data) {
-		String var = data.getAttributeString("var");
-		String varImpl = data.getAttributeString("varImpl");
+	public VariableInfo[] getVariableInfo(TagData tagData) {
+		String var = tagData.getAttributeString("var");
+		String varImpl = tagData.getAttributeString("varImpl");
 
 		if (Validator.isNotNull(var)) {
 			return new VariableInfo[] {

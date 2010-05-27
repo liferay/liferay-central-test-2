@@ -28,22 +28,22 @@ import javax.servlet.jsp.tagext.VariableInfo;
  */
 public class SearchContainerRowTei extends TagExtraInfo {
 
-	public VariableInfo[] getVariableInfo(TagData data) {
-		String className = data.getAttributeString("className");
+	public VariableInfo[] getVariableInfo(TagData tagData) {
+		String className = tagData.getAttributeString("className");
 
-		String indexVar = data.getAttributeString("indexVar");
+		String indexVar = tagData.getAttributeString("indexVar");
 
 		if (Validator.isNull(indexVar)) {
 			indexVar = SearchContainerRowTag.DEFAULT_INDEX_VAR;
 		}
 
-		String modelVar = data.getAttributeString("modelVar");
+		String modelVar = tagData.getAttributeString("modelVar");
 
 		if (Validator.isNull(modelVar)) {
 			modelVar = SearchContainerRowTag.DEFAULT_MODEL_VAR;
 		}
 
-		String rowVar = data.getAttributeString("rowVar");
+		String rowVar = tagData.getAttributeString("rowVar");
 
 		if (Validator.isNull(rowVar)) {
 			rowVar = SearchContainerRowTag.DEFAULT_ROW_VAR;

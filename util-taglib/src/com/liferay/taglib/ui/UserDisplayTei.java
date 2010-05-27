@@ -27,12 +27,13 @@ import javax.servlet.jsp.tagext.VariableInfo;
  */
 public class UserDisplayTei extends TagExtraInfo {
 
-	public VariableInfo[] getVariableInfo(TagData data) {
-		return new VariableInfo[] {
-			new VariableInfo(
-				"userDisplay", User.class.getName(), true,
-				VariableInfo.AT_BEGIN)
-		};
+	public VariableInfo[] getVariableInfo(TagData tagData) {
+		return _variableInfo;
 	}
+
+	private static VariableInfo[] _variableInfo = new VariableInfo[] {
+		new VariableInfo(
+			"userDisplay", User.class.getName(), true, VariableInfo.AT_BEGIN)
+	};
 
 }

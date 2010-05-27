@@ -25,12 +25,13 @@ import javax.servlet.jsp.tagext.VariableInfo;
  */
 public class ErrorTei extends TagExtraInfo {
 
-	public VariableInfo[] getVariableInfo(TagData data) {
-		return new VariableInfo[] {
-			new VariableInfo(
-				"errorException", Object.class.getName(), true,
-				VariableInfo.NESTED)
-		};
+	public VariableInfo[] getVariableInfo(TagData tagData) {
+		return _variableInfo;
 	}
+
+	private static VariableInfo[] _variableInfo = new VariableInfo[] {
+		new VariableInfo(
+			"errorException", Object.class.getName(), true, VariableInfo.NESTED)
+	};
 
 }
