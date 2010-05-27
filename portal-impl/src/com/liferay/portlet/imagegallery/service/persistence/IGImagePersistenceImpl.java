@@ -1245,6 +1245,10 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 	public List<IGImage> filterFindByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByGroupId(groupId, start, end, orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -2013,6 +2017,10 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 	public List<IGImage> filterFindByG_U(long groupId, long userId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByG_U(groupId, userId, start, end, orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -2359,6 +2367,10 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	public List<IGImage> filterFindByG_F(long groupId, long folderId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByG_F(groupId, folderId, start, end, orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -2746,6 +2758,11 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	public List<IGImage> filterFindByG_F_N(long groupId, long folderId,
 		String name, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByG_F_N(groupId, folderId, name, start, end,
+				orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -3133,6 +3150,10 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	public int filterCountByGroupId(long groupId) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByGroupId(groupId);
+		}
+
 		Session session = null;
 
 		try {
@@ -3406,6 +3427,10 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 	public int filterCountByG_U(long groupId, long userId)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByG_U(groupId, userId);
+		}
+
 		Session session = null;
 
 		try {
@@ -3498,6 +3523,10 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 	public int filterCountByG_F(long groupId, long folderId)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByG_F(groupId, folderId);
+		}
+
 		Session session = null;
 
 		try {
@@ -3610,6 +3639,10 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 	public int filterCountByG_F_N(long groupId, long folderId, String name)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByG_F_N(groupId, folderId, name);
+		}
+
 		Session session = null;
 
 		try {

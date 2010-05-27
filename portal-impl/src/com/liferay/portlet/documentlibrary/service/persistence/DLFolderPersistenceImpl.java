@@ -1190,6 +1190,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 	public List<DLFolder> filterFindByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByGroupId(groupId, start, end, orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -1798,6 +1802,11 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	public List<DLFolder> filterFindByG_P(long groupId, long parentFolderId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByG_P(groupId, parentFolderId, start, end,
+				orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -2593,6 +2602,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	public int filterCountByGroupId(long groupId) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByGroupId(groupId);
+		}
+
 		Session session = null;
 
 		try {
@@ -2729,6 +2742,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 	public int filterCountByG_P(long groupId, long parentFolderId)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByG_P(groupId, parentFolderId);
+		}
+
 		Session session = null;
 
 		try {
@@ -2904,6 +2921,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 	public int filterCountByG_P_N(long groupId, long parentFolderId, String name)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByG_P_N(groupId, parentFolderId, name);
+		}
+
 		Session session = null;
 
 		try {

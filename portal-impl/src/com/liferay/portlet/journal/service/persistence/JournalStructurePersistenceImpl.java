@@ -1183,6 +1183,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 	public List<JournalStructure> filterFindByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByGroupId(groupId, start, end, orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -1974,6 +1978,11 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	public List<JournalStructure> filterFindByG_P(long groupId,
 		String parentStructureId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByG_P(groupId, parentStructureId, start, end,
+				orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -2332,6 +2341,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	public int filterCountByGroupId(long groupId) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByGroupId(groupId);
+		}
+
 		Session session = null;
 
 		try {
@@ -2490,6 +2503,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 	public int filterCountByG_S(long groupId, String structureId)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByG_S(groupId, structureId);
+		}
+
 		Session session = null;
 
 		try {
@@ -2606,6 +2623,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 	public int filterCountByG_P(long groupId, String parentStructureId)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByG_P(groupId, parentStructureId);
+		}
+
 		Session session = null;
 
 		try {

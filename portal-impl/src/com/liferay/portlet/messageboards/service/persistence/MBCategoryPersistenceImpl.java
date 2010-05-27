@@ -1117,6 +1117,10 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 	public List<MBCategory> filterFindByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByGroupId(groupId, start, end, orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -1726,6 +1730,11 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	public List<MBCategory> filterFindByG_P(long groupId,
 		long parentCategoryId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByG_P(groupId, parentCategoryId, start, end,
+				orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -2062,6 +2071,10 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	}
 
 	public int filterCountByGroupId(long groupId) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByGroupId(groupId);
+		}
+
 		Session session = null;
 
 		try {
@@ -2198,6 +2211,10 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 	public int filterCountByG_P(long groupId, long parentCategoryId)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByG_P(groupId, parentCategoryId);
+		}
+
 		Session session = null;
 
 		try {

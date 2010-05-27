@@ -655,6 +655,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	public List<SCFrameworkVersion> filterFindByGroupId(long groupId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByGroupId(groupId, start, end, orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -1267,6 +1271,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	public List<SCFrameworkVersion> filterFindByG_A(long groupId,
 		boolean active, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByG_A(groupId, active, start, end, orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -1471,6 +1479,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	public int filterCountByGroupId(long groupId) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByGroupId(groupId);
+		}
+
 		Session session = null;
 
 		try {
@@ -1608,6 +1620,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 
 	public int filterCountByG_A(long groupId, boolean active)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByG_A(groupId, active);
+		}
+
 		Session session = null;
 
 		try {

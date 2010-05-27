@@ -343,9 +343,9 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 	}
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
-		long nodeId, long resourcePrimKey, int status)
+		long resourcePrimKey, long nodeId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _wikiPageLocalService.getPages(nodeId, resourcePrimKey, status);
+		return _wikiPageLocalService.getPages(resourcePrimKey, nodeId, status);
 	}
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(

@@ -1371,6 +1371,10 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 	public List<BlogsEntry> filterFindByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByGroupId(groupId, start, end, orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -2978,6 +2982,10 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	public List<BlogsEntry> filterFindByG_D(long groupId, Date displayDate,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByG_D(groupId, displayDate, start, end, orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -3332,6 +3340,10 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	public List<BlogsEntry> filterFindByG_S(long groupId, int status,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByG_S(groupId, status, start, end, orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -4314,6 +4326,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	public List<BlogsEntry> filterFindByG_U_D(long groupId, long userId,
 		Date displayDate, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByG_U_D(groupId, userId, displayDate, start, end,
+				orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -4687,6 +4704,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	public List<BlogsEntry> filterFindByG_U_S(long groupId, long userId,
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByG_U_S(groupId, userId, status, start, end,
+				orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -5069,6 +5091,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	public List<BlogsEntry> filterFindByG_D_S(long groupId, Date displayDate,
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByG_D_S(groupId, displayDate, status, start, end,
+				orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -5477,6 +5504,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	public List<BlogsEntry> filterFindByG_U_D_S(long groupId, long userId,
 		Date displayDate, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByG_U_D_S(groupId, userId, displayDate, status, start,
+				end, orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -5905,6 +5937,10 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	}
 
 	public int filterCountByGroupId(long groupId) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByGroupId(groupId);
+		}
+
 		Session session = null;
 
 		try {
@@ -6212,6 +6248,10 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 	public int filterCountByG_UT(long groupId, String urlTitle)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByG_UT(groupId, urlTitle);
+		}
+
 		Session session = null;
 
 		try {
@@ -6323,6 +6363,10 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 	public int filterCountByG_D(long groupId, Date displayDate)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByG_D(groupId, displayDate);
+		}
+
 		Session session = null;
 
 		try {
@@ -6423,6 +6467,10 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 	public int filterCountByG_S(long groupId, int status)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByG_S(groupId, status);
+		}
+
 		Session session = null;
 
 		try {
@@ -6653,6 +6701,10 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 	public int filterCountByG_U_D(long groupId, long userId, Date displayDate)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByG_U_D(groupId, userId, displayDate);
+		}
+
 		Session session = null;
 
 		try {
@@ -6762,6 +6814,10 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 	public int filterCountByG_U_S(long groupId, long userId, int status)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByG_U_S(groupId, userId, status);
+		}
+
 		Session session = null;
 
 		try {
@@ -6873,6 +6929,10 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 	public int filterCountByG_D_S(long groupId, Date displayDate, int status)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByG_D_S(groupId, displayDate, status);
+		}
+
 		Session session = null;
 
 		try {
@@ -6995,6 +7055,10 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 	public int filterCountByG_U_D_S(long groupId, long userId,
 		Date displayDate, int status) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByG_U_D_S(groupId, userId, displayDate, status);
+		}
+
 		Session session = null;
 
 		try {

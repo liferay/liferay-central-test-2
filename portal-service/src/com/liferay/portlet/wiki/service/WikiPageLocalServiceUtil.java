@@ -354,9 +354,9 @@ public class WikiPageLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
-		long nodeId, long resourcePrimKey, int status)
+		long resourcePrimKey, long nodeId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getPages(nodeId, resourcePrimKey, status);
+		return getService().getPages(resourcePrimKey, nodeId, status);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(

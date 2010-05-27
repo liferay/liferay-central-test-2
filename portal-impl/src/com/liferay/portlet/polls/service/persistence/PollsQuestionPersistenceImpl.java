@@ -1097,6 +1097,10 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 	public List<PollsQuestion> filterFindByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByGroupId(groupId, start, end, orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -1417,6 +1421,10 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 	}
 
 	public int filterCountByGroupId(long groupId) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByGroupId(groupId);
+		}
+
 		Session session = null;
 
 		try {

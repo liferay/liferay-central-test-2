@@ -126,8 +126,7 @@ public class WikiPageResourceLocalServiceWrapper
 
 	public com.liferay.portlet.wiki.model.WikiPageResource addPageResource(
 		long nodeId, java.lang.String title)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _wikiPageResourceLocalService.addPageResource(nodeId, title);
 	}
 

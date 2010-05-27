@@ -1153,6 +1153,10 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 
 	public List<JournalFeed> filterFindByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByGroupId(groupId, start, end, orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -1607,6 +1611,10 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 	}
 
 	public int filterCountByGroupId(long groupId) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByGroupId(groupId);
+		}
+
 		Session session = null;
 
 		try {
@@ -1707,6 +1715,10 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 
 	public int filterCountByG_F(long groupId, String feedId)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByG_F(groupId, feedId);
+		}
+
 		Session session = null;
 
 		try {

@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupService;
 import com.liferay.portal.service.ImageLocalService;
+import com.liferay.portal.service.ImageService;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
@@ -43,6 +44,7 @@ import com.liferay.portlet.messageboards.service.MBMessageService;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
+import com.liferay.portlet.ratings.service.persistence.RatingsStatsFinder;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService;
@@ -319,6 +321,14 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 		this.imageLocalService = imageLocalService;
 	}
 
+	public ImageService getImageService() {
+		return imageService;
+	}
+
+	public void setImageService(ImageService imageService) {
+		this.imageService = imageService;
+	}
+
 	public ImagePersistence getImagePersistence() {
 		return imagePersistence;
 	}
@@ -444,6 +454,14 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 		this.ratingsStatsPersistence = ratingsStatsPersistence;
 	}
 
+	public RatingsStatsFinder getRatingsStatsFinder() {
+		return ratingsStatsFinder;
+	}
+
+	public void setRatingsStatsFinder(RatingsStatsFinder ratingsStatsFinder) {
+		this.ratingsStatsFinder = ratingsStatsFinder;
+	}
+
 	protected void runSQL(String sql) throws SystemException {
 		try {
 			DataSource dataSource = scProductEntryPersistence.getDataSource();
@@ -498,6 +516,8 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	protected GroupFinder groupFinder;
 	@BeanReference(type = ImageLocalService.class)
 	protected ImageLocalService imageLocalService;
+	@BeanReference(type = ImageService.class)
+	protected ImageService imageService;
 	@BeanReference(type = ImagePersistence.class)
 	protected ImagePersistence imagePersistence;
 	@BeanReference(type = ResourceLocalService.class)
@@ -528,4 +548,6 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	protected RatingsStatsLocalService ratingsStatsLocalService;
 	@BeanReference(type = RatingsStatsPersistence.class)
 	protected RatingsStatsPersistence ratingsStatsPersistence;
+	@BeanReference(type = RatingsStatsFinder.class)
+	protected RatingsStatsFinder ratingsStatsFinder;
 }

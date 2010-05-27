@@ -1153,6 +1153,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	public List<DLFileShortcut> filterFindByG_F(long groupId, long folderId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByG_F(groupId, folderId, start, end, orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -1506,6 +1510,11 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	public List<DLFileShortcut> filterFindByG_F_S(long groupId, long folderId,
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByG_F_S(groupId, folderId, status, start, end,
+				orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -1890,6 +1899,11 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	public List<DLFileShortcut> filterFindByG_TF_TN(long groupId,
 		long toFolderId, String toName, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByG_TF_TN(groupId, toFolderId, toName, start, end,
+				orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -2305,6 +2319,11 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	public List<DLFileShortcut> filterFindByG_TF_TN_S(long groupId,
 		long toFolderId, String toName, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByG_TF_TN_S(groupId, toFolderId, toName, status, start,
+				end, orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -2675,6 +2694,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 	public int filterCountByG_F(long groupId, long folderId)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByG_F(groupId, folderId);
+		}
+
 		Session session = null;
 
 		try {
@@ -2774,6 +2797,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 	public int filterCountByG_F_S(long groupId, long folderId, int status)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByG_F_S(groupId, folderId, status);
+		}
+
 		Session session = null;
 
 		try {
@@ -2891,6 +2918,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 	public int filterCountByG_TF_TN(long groupId, long toFolderId, String toName)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByG_TF_TN(groupId, toFolderId, toName);
+		}
+
 		Session session = null;
 
 		try {
@@ -3024,6 +3055,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 	public int filterCountByG_TF_TN_S(long groupId, long toFolderId,
 		String toName, int status) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByG_TF_TN_S(groupId, toFolderId, toName, status);
+		}
+
 		Session session = null;
 
 		try {

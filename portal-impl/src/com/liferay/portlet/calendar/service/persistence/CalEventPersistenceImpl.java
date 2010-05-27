@@ -1412,6 +1412,10 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 	public List<CalEvent> filterFindByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByGroupId(groupId, start, end, orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -2043,6 +2047,10 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 	public List<CalEvent> filterFindByG_T(long groupId, String type, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByG_T(groupId, type, start, end, orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -2402,6 +2410,10 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	public List<CalEvent> filterFindByG_R(long groupId, boolean repeating,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByG_R(groupId, repeating, start, end, orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -2796,6 +2808,10 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	public int filterCountByGroupId(long groupId) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByGroupId(groupId);
+		}
+
 		Session session = null;
 
 		try {
@@ -2941,6 +2957,10 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 	public int filterCountByG_T(long groupId, String type)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByG_T(groupId, type);
+		}
+
 		Session session = null;
 
 		try {
@@ -3047,6 +3067,10 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 	public int filterCountByG_R(long groupId, boolean repeating)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByG_R(groupId, repeating);
+		}
+
 		Session session = null;
 
 		try {

@@ -721,6 +721,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 	public List<SCProductEntry> filterFindByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByGroupId(groupId, start, end, orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -1331,6 +1335,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 	public List<SCProductEntry> filterFindByG_U(long groupId, long userId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByG_U(groupId, userId, start, end, orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -1685,6 +1693,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 	}
 
 	public int filterCountByGroupId(long groupId) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByGroupId(groupId);
+		}
+
 		Session session = null;
 
 		try {
@@ -1819,6 +1831,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 	public int filterCountByG_U(long groupId, long userId)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByG_U(groupId, userId);
+		}
+
 		Session session = null;
 
 		try {

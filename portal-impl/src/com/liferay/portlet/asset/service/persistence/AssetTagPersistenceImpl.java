@@ -612,6 +612,10 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 
 	public List<AssetTag> filterFindByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByGroupId(groupId, start, end, orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -796,6 +800,10 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	}
 
 	public int filterCountByGroupId(long groupId) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByGroupId(groupId);
+		}
+
 		Session session = null;
 
 		try {

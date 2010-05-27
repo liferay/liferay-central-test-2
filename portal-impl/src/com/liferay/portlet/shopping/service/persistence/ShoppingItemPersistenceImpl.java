@@ -1131,6 +1131,10 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 	public List<ShoppingItem> filterFindByG_C(long groupId, long categoryId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByG_C(groupId, categoryId, start, end, orderByComparator);
+		}
+
 		Session session = null;
 
 		try {
@@ -1625,6 +1629,10 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 	public int filterCountByG_C(long groupId, long categoryId)
 		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByG_C(groupId, categoryId);
+		}
+
 		Session session = null;
 
 		try {
