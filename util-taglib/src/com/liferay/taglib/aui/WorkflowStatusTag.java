@@ -31,6 +31,10 @@ public class WorkflowStatusTag extends IncludeTag {
 		_bean = bean;
 	}
 
+	public void setId(long id) {
+		setId(String.valueOf(id));
+	}
+
 	public void setId(String id) {
 		_id = id;
 	}

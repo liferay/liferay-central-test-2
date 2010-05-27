@@ -34,16 +34,7 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 
 			<c:if test="<%= !entry.isApproved() %>">
 				<h3>
-
-					<%
-					String msg = "draft";
-
-					if (entry.isPending()) {
-						msg = "pending-approval";
-					}
-					%>
-
-					<liferay-ui:message key="<%= msg %>" />
+					<liferay-ui:message key='<%= entry.isPending() ? "pending-approval" : "draft" %>' />
 				</h3>
 			</c:if>
 
