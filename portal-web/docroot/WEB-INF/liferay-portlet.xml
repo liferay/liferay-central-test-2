@@ -15,7 +15,7 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/enterprise_admin/css/main.jsp</header-portlet-css>
-		<footer-portlet-javascript>/html/portlet/enterprise_admin/javascript.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/html/portlet/enterprise_admin/js/main.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 		<system>true</system>
@@ -159,7 +159,7 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/journal/css/main.jsp</header-portlet-css>
-		<header-portlet-javascript>/html/portlet/journal/javascript.js</header-portlet-javascript>
+		<header-portlet-javascript>/html/portlet/journal/js/main.js</header-portlet-javascript>
 		<css-class-wrapper>portlet-journal</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -208,7 +208,7 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/message_boards/css/main.jsp</header-portlet-css>
-		<footer-portlet-javascript>/html/portlet/message_boards/javascript.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/html/portlet/message_boards/js/main.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-message-boards</css-class-wrapper>
 		<facebook-integration>fbml</facebook-integration>
 		<add-default-resource>true</add-default-resource>
@@ -666,7 +666,7 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/enterprise_admin/css/main.jsp</header-portlet-css>
-		<footer-portlet-javascript>/html/portlet/enterprise_admin/javascript.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/html/portlet/enterprise_admin/js/main.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -822,7 +822,7 @@
 		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/asset_tags_admin/css/main.jsp</header-portlet-css>
 		<footer-portal-javascript>/html/js/liferay/service.js</footer-portal-javascript>
-		<footer-portlet-javascript>/html/portlet/asset_tags_admin/javascript.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/html/portlet/asset_tags_admin/js/main.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-asset-tags-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1070,7 +1070,7 @@
 		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/communities/css/main.jsp</header-portlet-css>
 		<header-portlet-css>/html/portlet/enterprise_admin/css/main.jsp</header-portlet-css>
-		<footer-portlet-javascript>/html/portlet/enterprise_admin/javascript.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/html/portlet/enterprise_admin/js/main.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1087,7 +1087,7 @@
 		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/communities/css/main.jsp</header-portlet-css>
 		<header-portlet-css>/html/portlet/enterprise_admin/css/main.jsp</header-portlet-css>
-		<footer-portlet-javascript>/html/portlet/enterprise_admin/javascript.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/html/portlet/enterprise_admin/js/main.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1103,7 +1103,7 @@
 		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/communities/css/main.jsp</header-portlet-css>
 		<header-portlet-css>/html/portlet/enterprise_admin/css/main.jsp</header-portlet-css>
-		<footer-portlet-javascript>/html/portlet/enterprise_admin/javascript.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/html/portlet/enterprise_admin/js/main.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1118,7 +1118,7 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/enterprise_admin/css/main.jsp</header-portlet-css>
-		<footer-portlet-javascript>/html/portlet/enterprise_admin/javascript.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/html/portlet/enterprise_admin/js/main.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1147,7 +1147,7 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/enterprise_admin/css/main.jsp</header-portlet-css>
-		<footer-portlet-javascript>/html/portlet/enterprise_admin/javascript.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/html/portlet/enterprise_admin/js/main.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1369,7 +1369,7 @@
 		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/asset_category_admin/css/main.jsp</header-portlet-css>
 		<footer-portal-javascript>/html/js/liferay/service.js</footer-portal-javascript>
-		<footer-portlet-javascript>/html/portlet/asset_category_admin/javascript.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/html/portlet/asset_category_admin/js/main.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-asset-category-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
