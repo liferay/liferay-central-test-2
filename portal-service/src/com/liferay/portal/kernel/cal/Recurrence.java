@@ -960,22 +960,38 @@ public class Recurrence implements Serializable {
 			return true;
 		}
 
-		int field = Calendar.DAY_OF_MONTH;
+		int field;
+
+		switch (frequency) {
+
+			case MONTHLY :
+				field = Calendar.DAY_OF_MONTH;
+				break;
+
+			case YEARLY :
+				field = Calendar.DAY_OF_YEAR;
+				break;
+
+			default :
+				throw new IllegalStateException(
+					"byday has a day position "
+					+ "in non-MONTHLY or YEARLY recurrence");
+		}
 
 		if (position > 0) {
-			int candidatePosition = ((candidate.get(field) - 1) / 7) + 1;
+			int day_of_week_in_field = ((candidate.get(field) - 1) / 7) + 1;
 
-			return (position == candidatePosition);
+			return (position == day_of_week_in_field);
 		}
 		else {
 
 			/* position < 0 */
 
-			int negativeCandidatePosition =
+			int negative_day_of_week_in_field =
 				((candidate.getActualMaximum(field) - candidate.get(field)) / 7)
 				+ 1;
 
-			return (-position == negativeCandidatePosition);
+			return (-position == negative_day_of_week_in_field);
 		}
 	}
 

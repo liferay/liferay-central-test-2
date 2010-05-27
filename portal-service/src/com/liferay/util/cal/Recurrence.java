@@ -978,7 +978,6 @@ public class Recurrence implements Serializable {
 				+ 1;
 
 			return (-position == negativeCandidatePosition);
-		}
 	}
 
 	/**
