@@ -183,7 +183,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		validate(
 			title, startDateMonth, startDateDay, startDateYear, endDateMonth,
 			endDateDay, endDateYear, durationHour, durationMinute, allDay,
-			repeating);
+			repeating, recurrence);
 
 		long eventId = counterLocalService.increment();
 
@@ -742,7 +742,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		validate(
 			title, startDateMonth, startDateDay, startDateYear, endDateMonth,
 			endDateDay, endDateYear, durationHour, durationMinute, allDay,
-			repeating);
+			repeating, recurrence);
 
 		CalEvent event = calEventPersistence.findByPrimaryKey(eventId);
 
@@ -1604,7 +1604,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			String title, int startDateMonth, int startDateDay,
 			int startDateYear, int endDateMonth, int endDateDay,
 			int endDateYear, int durationHour, int durationMinute,
-			boolean allDay, boolean repeating)
+			boolean allDay, boolean repeating, TZSRecurrence recurrence)
 		throws PortalException {
 
 		if (Validator.isNull(title)) {
@@ -1626,11 +1626,12 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		Calendar startDate = CalendarFactoryUtil.getCalendar(
 			startDateYear, startDateMonth, startDateDay);
 
-		Calendar endDate = CalendarFactoryUtil.getCalendar(
-			endDateYear, endDateMonth, endDateDay);
+		if (repeating) {
+			Calendar until = recurrence.getUntil();
 
-		if (repeating && startDate.after(endDate)) {
-			throw new EventEndDateException();
+			if (startDate.after(until)) {
+				throw new EventEndDateException();
+			}
 		}
 	}
 
