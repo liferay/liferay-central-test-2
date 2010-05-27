@@ -70,7 +70,6 @@ public class BookmarksUtil {
 		throws Exception {
 
 		if (folderId == BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-
 			return;
 		}
 
