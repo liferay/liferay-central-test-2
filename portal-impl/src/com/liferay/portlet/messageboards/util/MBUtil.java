@@ -87,7 +87,9 @@ public class MBUtil {
 			RenderResponse renderResponse)
 		throws Exception {
 
-		if (categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+		if ((categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+			(categoryId != MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+
 			MBCategory category = MBCategoryLocalServiceUtil.getCategory(
 				categoryId);
 
