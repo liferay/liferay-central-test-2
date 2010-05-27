@@ -43,6 +43,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
+import com.liferay.portal.kernel.workflow.WorkflowThreadLocal;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Group;
@@ -125,9 +126,16 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		serviceContext.setWorkflowAction(workflowAction);
 
-		return addDiscussionMessage(
+		boolean enabled = WorkflowThreadLocal.isEnabled();
+		WorkflowThreadLocal.setEnabled(false);
+
+		MBMessage message = addDiscussionMessage(
 			null, userId, userName, groupId, className, classPK, threadId,
 			parentMessageId, subject, body, serviceContext);
+
+		WorkflowThreadLocal.setEnabled(enabled);
+
+		return message;
 	}
 
 	public MBMessage addDiscussionMessage(
