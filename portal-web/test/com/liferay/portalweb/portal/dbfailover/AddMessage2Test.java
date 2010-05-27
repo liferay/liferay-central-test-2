@@ -54,7 +54,9 @@ public class AddMessage2Test extends BaseTestCase {
 		selenium.type("_19_subject", RuntimeVariables.replace("Test Message 2"));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("This is Test Message 2."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Publish']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//td[1]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("This is Test Message 2."));
 		assertTrue(selenium.isElementPresent("link=Test Message 2"));
