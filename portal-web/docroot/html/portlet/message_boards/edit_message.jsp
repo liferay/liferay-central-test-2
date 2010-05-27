@@ -325,7 +325,7 @@ if (Validator.isNull(redirect)) {
 			<%
 			String buttonLabel = "save-draft";
 
-			if (message.isPending()) {
+			if ((message != null) && message.isPending()) {
 				buttonLabel = "save";
 			}
 			%>

@@ -132,7 +132,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 				<%
 				String buttonLabel = "save-draft";
 
-				if (entry.isPending()) {
+				if ((entry != null) && entry.isPending()) {
 					buttonLabel = "save";
 				}
 				%>
@@ -196,7 +196,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 			var cancelButton = A.one('#<portlet:namespace />cancelButton');
 
 			var saveStatus = A.one('#<portlet:namespace />saveStatus');
-			var saveText = '<%= UnicodeLanguageUtil.format(pageContext, entry.isPending() ? "entry-saved-at-x" : "draft-saved-at-x", "[TIME]", false) %>';
+			var saveText = '<%= UnicodeLanguageUtil.format(pageContext, ((entry != null) && entry.isPending()) ? "entry-saved-at-x" : "draft-saved-at-x", "[TIME]", false) %>';
 
 			if (draft) {
 				if ((title == '') || (content == '')) {
