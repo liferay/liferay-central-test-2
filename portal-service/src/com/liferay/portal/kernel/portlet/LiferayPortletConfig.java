@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.portlet;
 
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletContext;
 
 /**
  * <a href="LiferayPortletConfig.java.html"><b><i>View Source</i></b></a>
@@ -28,6 +29,8 @@ public interface LiferayPortletConfig extends PortletConfig {
 
 	public static final String RUNTIME_OPTION_PORTAL_CONTEXT =
 		"com.liferay.portal.portalContext";
+
+	public PortletContext getPortletContext();
 
 	public String getPortletId();
 
