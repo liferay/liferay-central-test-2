@@ -158,7 +158,9 @@ request.setAttribute("view_event.jsp-event", event);
 			request.setAttribute("view.jsp-event", event);
 		%>
 
-		<liferay-ui:icon image="../common/undo" /> <liferay-util:include page="/html/portlet/calendar/view_event_recurrence.jsp" />
+		<c:if test="<% recurrence.getOccurrence() != null %>">
+			<liferay-ui:icon image="../common/undo" /> <liferay-util:include page="/html/portlet/calendar/view_event_recurrence.jsp" />
+		</c:if>
 
 		<liferay-ui:custom-attributes-available className="<%= CalEvent.class.getName() %>">
 			<liferay-ui:custom-attribute-list
