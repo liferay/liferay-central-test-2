@@ -60,15 +60,15 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 
 	<aui:model-context bean="<%= entry %>" model="<%= BlogsEntry.class %>" />
 
+	<c:if test="<%= (entry == null) || !entry.isApproved() %>">
+		<div class="save-status" id="<portlet:namespace />saveStatus"></div>
+	</c:if>
+
 	<c:if test="<%= entry != null %>">
 		<aui:workflow-status id="<%= String.valueOf(entry.getEntryId()) %>" status="<%= entry.getStatus() %>" />
 	</c:if>
 
 	<aui:fieldset>
-		<c:if test="<%= (entry == null) || (entry.getStatus() == WorkflowConstants.STATUS_DRAFT) %>">
-			<div class="save-status" id="<portlet:namespace />saveStatus"></div>
-		</c:if>
-
 		<aui:input name="title" />
 
 		<aui:input name="displayDate" value="<%= displayDate %>" />
@@ -128,7 +128,16 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 
 		<aui:button-row>
 			<c:if test="<%= (entry == null) || !entry.isApproved() %>">
-				<aui:button name="saveDraftButton" onClick='<%= renderResponse.getNamespace() + "saveEntry(true);" %>' type="button" value="save-draft" />
+
+				<%
+				String buttonLabel = "save-draft";
+
+				if (entry.isPending()) {
+					buttonLabel = "save";
+				}
+				%>
+
+				<aui:button name="saveDraftButton" onClick='<%= renderResponse.getNamespace() + "saveEntry(true);" %>' type="button" value="<%= buttonLabel %>" />
 			</c:if>
 
 			<%
@@ -187,7 +196,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 			var cancelButton = A.one('#<portlet:namespace />cancelButton');
 
 			var saveStatus = A.one('#<portlet:namespace />saveStatus');
-			var saveText = '<%= UnicodeLanguageUtil.format(pageContext, "draft-saved-at-x", "[TIME]", false) %>';
+			var saveText = '<%= UnicodeLanguageUtil.format(pageContext, entry.isPending() ? "entry-saved-at-x" : "draft-saved-at-x", "[TIME]", false) %>';
 
 			if (draft) {
 				if ((title == '') || (content == '')) {
