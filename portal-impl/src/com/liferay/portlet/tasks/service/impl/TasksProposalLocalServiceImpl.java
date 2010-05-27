@@ -107,15 +107,19 @@ public class TasksProposalLocalServiceImpl
 
 		// Message boards
 
-		boolean enabled = WorkflowThreadLocal.isEnabled();
+		boolean workflowEnabled = WorkflowThreadLocal.isEnabled();
+
 		WorkflowThreadLocal.setEnabled(false);
 
-		mbMessageLocalService.addDiscussionMessage(
-			userId, proposal.getUserName(), groupId,
-			TasksProposal.class.getName(), proposalId,
-			WorkflowConstants.ACTION_PUBLISH);
-
-		WorkflowThreadLocal.setEnabled(enabled);
+		try {
+			mbMessageLocalService.addDiscussionMessage(
+				userId, proposal.getUserName(), groupId,
+				TasksProposal.class.getName(), proposalId,
+				WorkflowConstants.ACTION_PUBLISH);
+		}
+		finally {
+			WorkflowThreadLocal.setEnabled(workflowEnabled);
+		}
 
 		// Social
 

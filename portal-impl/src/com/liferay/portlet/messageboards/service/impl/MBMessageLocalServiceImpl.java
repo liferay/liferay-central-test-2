@@ -126,16 +126,18 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		serviceContext.setWorkflowAction(workflowAction);
 
-		boolean enabled = WorkflowThreadLocal.isEnabled();
-		WorkflowThreadLocal.setEnabled(false);
+		boolean workflowEnabled = WorkflowThreadLocal.isEnabled();
 
-		MBMessage message = addDiscussionMessage(
-			null, userId, userName, groupId, className, classPK, threadId,
-			parentMessageId, subject, body, serviceContext);
+		WorkflowThreadLocal.setEnabled(workflowEnabled);
 
-		WorkflowThreadLocal.setEnabled(enabled);
-
-		return message;
+		try {
+			return addDiscussionMessage(
+				null, userId, userName, groupId, className, classPK, threadId,
+				parentMessageId, subject, body, serviceContext);
+		}
+		finally {
+			WorkflowThreadLocal.setEnabled(workflowEnabled);
+		}
 	}
 
 	public MBMessage addDiscussionMessage(
@@ -848,19 +850,18 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			message = messages.get(0);
 		}
 		else {
-			String subject = String.valueOf(classPK);
-			//String body = subject;
+			boolean workflowEnabled = WorkflowThreadLocal.isEnabled();
+
+			WorkflowThreadLocal.setEnabled(false);
 
 			try {
-				boolean enabled = WorkflowThreadLocal.isEnabled();
-				WorkflowThreadLocal.setEnabled(false);
+				String subject = String.valueOf(classPK);
+				//String body = subject;
 
 				message = addDiscussionMessage(
 					null, userId, null, groupId, className, classPK, 0,
 					MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID, subject,
 					subject, new ServiceContext());
-
-				WorkflowThreadLocal.setEnabled(enabled);
 			}
 			catch (SystemException se) {
 				if (_log.isWarnEnabled()) {
@@ -877,6 +878,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				}
 
 				message = messages.get(0);
+			}
+			finally {
+				WorkflowThreadLocal.setEnabled(workflowEnabled);
 			}
 		}
 

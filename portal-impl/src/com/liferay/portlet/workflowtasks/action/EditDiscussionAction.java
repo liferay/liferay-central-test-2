@@ -36,13 +36,17 @@ public class EditDiscussionAction extends
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		boolean enabled = WorkflowThreadLocal.isEnabled();
+		boolean workflowEnabled = WorkflowThreadLocal.isEnabled();
+
 		WorkflowThreadLocal.setEnabled(false);
 
-		super.processAction(
-			mapping, form, portletConfig, actionRequest, actionResponse);
-
-		WorkflowThreadLocal.setEnabled(enabled);
+		try {
+			super.processAction(
+				mapping, form, portletConfig, actionRequest, actionResponse);
+		}
+		finally {
+			WorkflowThreadLocal.setEnabled(workflowEnabled);
+		}
 	}
 
 }
