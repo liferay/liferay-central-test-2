@@ -125,6 +125,14 @@ public class WorkflowTaskManagerUtil {
 			companyId, workflowInstanceId, completed);
 	}
 
+	public static int getWorkflowTaskCountStartedByUser(
+			long companyId, long userId, Boolean completed)
+		throws WorkflowException {
+
+		return _workflowTaskManager.getWorkflowTaskCountStartedByUser(
+			companyId, userId, completed);
+	}
+
 	public static WorkflowTaskManager getWorkflowTaskManager() {
 		return _workflowTaskManager;
 	}
@@ -173,6 +181,15 @@ public class WorkflowTaskManagerUtil {
 		return _workflowTaskManager.getWorkflowTasksByWorkflowInstance(
 			companyId, workflowInstanceId, completed, start, end,
 			orderByComparator);
+	}
+
+	public static List<WorkflowTask> getWorkflowTasksStartedByUser(
+			long companyId, long userId, Boolean completed, int start, int end,
+			OrderByComparator orderByComparator)
+		throws WorkflowException {
+
+		return _workflowTaskManager.getWorkflowTasksStartedByUser(
+			companyId, userId, completed, start, end, orderByComparator);
 	}
 
 	public static List<WorkflowTask> search(

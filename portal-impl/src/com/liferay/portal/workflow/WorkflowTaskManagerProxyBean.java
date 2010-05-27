@@ -102,6 +102,12 @@ public class WorkflowTaskManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
+	public int getWorkflowTaskCountStartedByUser(
+		long companyId, long userId, Boolean completed) {
+
+		throw new UnsupportedOperationException();
+	}
+
 	public List<WorkflowTask> getWorkflowTasks(
 		long companyId, Boolean completed, int start, int end,
 		OrderByComparator orderByComparator) {
@@ -133,6 +139,13 @@ public class WorkflowTaskManagerProxyBean
 	public List<WorkflowTask> getWorkflowTasksByWorkflowInstance(
 		long companyId, long workflowInstanceId, Boolean completed, int start,
 		int end, OrderByComparator orderByComparator) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public List<WorkflowTask> getWorkflowTasksStartedByUser(
+		long companyId, long userId, Boolean completed, int start, int end,
+		OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
