@@ -24,17 +24,26 @@ BlogsEntry entry = (BlogsEntry)request.getAttribute("view_entry_content.jsp-entr
 AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp-assetEntry");
 %>
 
-<c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW) && ((entry.getStatus() == WorkflowConstants.STATUS_APPROVED) || BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE)) %>">
-	<div class="entry <%= (entry.getStatus() == WorkflowConstants.STATUS_APPROVED) ? "" : "draft" %>">
+<c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW) && (entry.isApproved() || BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE)) %>">
+	<div class="entry <%= entry.isApproved() ? "" : "draft" %>">
 		<div class="entry-content">
 
 			<%
 			String strutsAction = ParamUtil.getString(request, "struts_action");
 			%>
 
-			<c:if test="<%= (entry.getStatus() == WorkflowConstants.STATUS_DRAFT) %>">
+			<c:if test="<%= !entry.isApproved() %>">
 				<h3>
-					<liferay-ui:message key="draft" />
+
+					<%
+					String msg = "draft";
+
+					if (entry.isPending()) {
+						msg = "pending-approval";
+					}
+					%>
+
+					<liferay-ui:message key="<%= msg %>" />
 				</h3>
 			</c:if>
 
