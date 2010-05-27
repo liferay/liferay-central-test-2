@@ -58,8 +58,6 @@ import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.GroupLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.OrganizationUtil;
-import com.liferay.portal.service.persistence.UserGroupUtil;
 import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -596,16 +594,16 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	public List<Group> getOrganizationsRelatedGroups(
-			List<Organization> organizations) 
-		throws PortalException, SystemException {
+			List<Organization> organizations)
+		throws SystemException {
 
 		List<Group> organizationGroups = new ArrayList<Group>();
 
 		for (int i = 0; i < organizations.size(); i++) {
 			Organization organization = organizations.get(i);
 
-			List<Group> groups = OrganizationUtil.getGroups(
-				organization.getPrimaryKey());
+			List<Group> groups = organizationPersistence.getGroups(
+				organization.getOrganizationId());
 
 			organizationGroups.addAll(groups);
 		}
@@ -696,15 +694,15 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	public List<Group> getUserGroupsRelatedGroups(List<UserGroup> userGroups)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<Group> userGroupGroups = new ArrayList<Group>();
 
 		for (int i = 0; i < userGroups.size(); i++) {
 			UserGroup userGroup = userGroups.get(i);
 
-			List<Group> groups = UserGroupUtil.getGroups(
-				userGroup.getPrimaryKey());
+			List<Group> groups = userGroupPersistence.getGroups(
+				userGroup.getUserGroupId());
 
 			userGroupGroups.addAll(groups);
 		}
