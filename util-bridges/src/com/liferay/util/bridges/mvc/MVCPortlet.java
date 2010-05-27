@@ -305,7 +305,7 @@ public class MVCPortlet extends LiferayPortlet {
 			String path, EventRequest eventRequest, EventResponse eventResponse)
 		throws IOException, PortletException {
 
-		include(path, eventRequest, eventResponse, PortletRequest.RENDER_PHASE);
+		include(path, eventRequest, eventResponse, PortletRequest.EVENT_PHASE);
 	}
 
 	protected void include(
