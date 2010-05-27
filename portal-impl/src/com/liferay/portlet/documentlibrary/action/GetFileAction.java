@@ -162,9 +162,8 @@ public class GetFileAction extends PortletAction {
 
 		if (Validator.isNotNull(uuid) && (groupId > 0)) {
 			try {
-				fileEntry =
-					DLFileEntryServiceUtil.getFileEntryByUuidAndGroupId(
-						uuid, groupId);
+				fileEntry = DLFileEntryServiceUtil.getFileEntryByUuidAndGroupId(
+					uuid, groupId);
 
 				folderId = fileEntry.getFolderId();
 				name = fileEntry.getName();

@@ -74,7 +74,6 @@
 <%@ page import="com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil" %>
-<%@ page import="com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLPermission" %>

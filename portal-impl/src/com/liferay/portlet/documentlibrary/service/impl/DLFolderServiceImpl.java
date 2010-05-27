@@ -191,14 +191,14 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 	}
 
 	public List<DLFolder> getFolders(long groupId, long parentFolderId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return dlFolderPersistence.filterFindByG_P(groupId, parentFolderId);
 	}
 
 	public List<DLFolder> getFolders(
 			long groupId, long parentFolderId, int start, int end)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return dlFolderPersistence.filterFindByG_P(
 			groupId, parentFolderId, start, end);
@@ -251,7 +251,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 	}
 
 	public int getFoldersCount(long groupId, long parentFolderId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return dlFolderPersistence.filterCountByG_P(groupId, parentFolderId);
 	}
@@ -374,8 +374,8 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 				}
 			}
 			catch (PortalException pe) {
-				if ((pe instanceof ExpiredLockException) ||
-					(pe instanceof NoSuchLockException)) {
+				if (pe instanceof ExpiredLockException ||
+					pe instanceof NoSuchLockException) {
 				}
 				else {
 					throw pe;

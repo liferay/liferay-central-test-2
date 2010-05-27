@@ -52,7 +52,8 @@ public class DLFileEntryFinderImpl
 		return doCountByG_F_S(groupId, folderIds, status, false);
 	}
 
-	public int filterCountByG_F_S(long groupId, List<Long> folderIds, int status)
+	public int filterCountByG_F_S(
+			long groupId, List<Long> folderIds, int status)
 		throws SystemException {
 
 		return doCountByG_F_S(groupId, folderIds, status, true);

@@ -312,9 +312,8 @@ public class WebServerServlet extends HttpServlet {
 		else if (pathArray.length == 2) {
 			groupId = GetterUtil.getLong(pathArray[0]);
 
-			dlFileEntry =
-				DLFileEntryServiceUtil.getFileEntryByUuidAndGroupId(
-					pathArray[1], groupId);
+			dlFileEntry = DLFileEntryServiceUtil.getFileEntryByUuidAndGroupId(
+				pathArray[1], groupId);
 
 			folderId = dlFileEntry.getFolderId();
 			fileName = dlFileEntry.getTitle();
