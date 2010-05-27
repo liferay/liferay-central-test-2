@@ -32,6 +32,7 @@ import java.io.Serializable;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import org.apache.commons.collections.map.LRUMap;
 
@@ -51,10 +52,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 	public void clearCache() {
 		clearLocalCache();
 
-		PortalCache[] portalCaches = _portalCaches.values().toArray(
-			new PortalCache[_portalCaches.size()]);
-
-		for (PortalCache portalCache : portalCaches) {
+		for (PortalCache portalCache : _portalCaches.values()) {
 			portalCache.removeAll();
 		}
 	}
@@ -62,16 +60,16 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 	public void clearCache(String className) {
 		clearLocalCache();
 
-		PortalCache portalCache = _getPortalCache(className);
+		PortalCache portalCache = _getPortalCache(className, false);
 
-		portalCache.removeAll();
+		if (portalCache != null) {
+			portalCache.removeAll();
+		}
 	}
 
 	public void clearLocalCache() {
 		if (_localCacheAvailable) {
-			Map<String, Object> localCache = _localCache.get();
-
-			localCache.clear();
+			_localCache.remove();
 		}
 	}
 
@@ -104,7 +102,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		}
 
 		if (result == null) {
-			PortalCache portalCache = _getPortalCache(classObj.getName());
+			PortalCache portalCache = _getPortalCache(classObj.getName(), true);
 
 			String cacheKey = _encodeCacheKey(primaryKeyObj);
 
@@ -166,7 +164,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		}
 
 		if (result == null) {
-			PortalCache portalCache = _getPortalCache(classObj.getName());
+			PortalCache portalCache = _getPortalCache(classObj.getName(), true);
 
 			String cacheKey = _encodeCacheKey(primaryKeyObj);
 
@@ -232,7 +230,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 			localCache.put(localCacheKey, result);
 		}
 
-		PortalCache portalCache = _getPortalCache(classObj.getName());
+		PortalCache portalCache = _getPortalCache(classObj.getName(), true);
 
 		String cacheKey = _encodeCacheKey(primaryKeyObj);
 
@@ -258,7 +256,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 			localCache.remove(localCacheKey);
 		}
 
-		PortalCache portalCache = _getPortalCache(classObj.getName());
+		PortalCache portalCache = _getPortalCache(classObj.getName(), true);
 
 		String cacheKey = _encodeCacheKey(primaryKeyObj);
 
@@ -280,16 +278,22 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 			primaryKeyObj.toString());
 	}
 
-	private PortalCache _getPortalCache(String className) {
+	private PortalCache _getPortalCache(
+			String className, boolean createIfAbsent) {
 		String groupKey = _GROUP_KEY_PREFIX.concat(className);
 
 		PortalCache portalCache = _portalCaches.get(groupKey);
 
-		if (portalCache == null) {
+		if (portalCache == null && createIfAbsent) {
 			portalCache = _multiVMPool.getCache(
 				groupKey, PropsValues.VALUE_OBJECT_ENTITY_BLOCKING_CACHE);
 
-			_portalCaches.put(groupKey, portalCache);
+			PortalCache previousPortalCache =
+				_portalCaches.putIfAbsent(groupKey, portalCache);
+
+			if (previousPortalCache != null) {
+				portalCache = previousPortalCache;
+			}
 		}
 
 		return portalCache;
@@ -327,7 +331,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 	}
 
 	private MultiVMPool _multiVMPool;
-	private Map<String, PortalCache> _portalCaches =
+	private ConcurrentMap<String, PortalCache> _portalCaches =
 		new ConcurrentHashMap<String, PortalCache>();
 
 }
