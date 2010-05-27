@@ -51,6 +51,8 @@ CKEDITOR.config.contentsCss = '<%= HtmlUtil.escape(cssPath) %>/main.css';
 
 CKEDITOR.config.resize_enabled = false;
 
+CKEDITOR.config.height = 280;
+
 CKEDITOR.config.stylesCombo_stylesSet = 'liferayStyles';
 
 CKEDITOR.config.toolbar_liferay = [

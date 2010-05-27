@@ -67,6 +67,12 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 	</script>
 </head>
 
+<style type="text/css">
+	table.cke_dialog {
+		position: absolute !important;
+	}
+</style>
+
 <body>
 
 <textarea id="CKEditor1" name="CKEditor1"></textarea>

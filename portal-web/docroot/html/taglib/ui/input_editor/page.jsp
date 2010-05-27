@@ -32,7 +32,7 @@ else {
 String toolbarSet = (String)request.getAttribute("liferay-ui:input-editor:toolbarSet");
 String initMethod = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:initMethod"), namespace + "initEditor");
 String onChangeMethod = (String)request.getAttribute("liferay-ui:input-editor:onChangeMethod");
-String height = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:height"), "350");
+String height = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:height"), "450");
 String width = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:width"), "640");
 
 StringBundler sb = new StringBundler();
@@ -87,4 +87,4 @@ sb.append(HttpUtil.encodeURL(cssClasses));
 String editorURL = sb.toString();
 %>
 
-<iframe <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> height="<%= height %>" id="<%= name %>" name="<%= name %>" src="<%= editorURL %>" style="border: none; overflow: hidden;" width="<%= width %>"></iframe>
+<iframe <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> height="<%= height %>" id="<%= name %>" name="<%= name %>" src="<%= editorURL %>" style="border: none;" width="<%= width %>"></iframe>
