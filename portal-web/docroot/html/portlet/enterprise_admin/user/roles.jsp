@@ -24,13 +24,12 @@ Long[] organizationIds = EnterpriseAdminUtil.getOrganizationIds(organizations);
 List<Role> roles = (List<Role>)request.getAttribute("user.roles");
 List<UserGroupRole> communityRoles = (List<UserGroupRole>)request.getAttribute("user.communityRoles");
 List<UserGroupRole> organizationRoles = (List<UserGroupRole>)request.getAttribute("user.organizationRoles");
+List<Group> allGroups = (List<Group>)request.getAttribute("user.allGroups");
 
 List <UserGroupRole> userGroupRoles = new ArrayList<UserGroupRole>();
 
 userGroupRoles.addAll(communityRoles);
 userGroupRoles.addAll(organizationRoles);
-
-List<Group> allGroups = (List<Group>)request.getAttribute("user.allGroups");
 %>
 
 <liferay-util:buffer var="removeRoleIcon">
@@ -107,10 +106,11 @@ List<Group> allGroups = (List<Group>)request.getAttribute("user.allGroups");
 		List<Role> groupRoles = RoleLocalServiceUtil.getGroupRoles(group.getGroupId());
 
 		if (!groupRoles.isEmpty()) {
+			Role groupRole = groupRoles.get(0);
 		%>
 
-			<liferay-util:param name="className" value="<%= EnterpriseAdminUtil.getCssClassName(groupRoles.get(0)) %>"  />
-			<liferay-util:param name="classHoverName" value="<%= EnterpriseAdminUtil.getCssClassName(groupRoles.get(0)) %>" />
+			<liferay-util:param name="className" value="<%= EnterpriseAdminUtil.getCssClassName(groupRole) %>"  />
+			<liferay-util:param name="classHoverName" value="<%= EnterpriseAdminUtil.getCssClassName(groupRole) %>" />
 	
 			<liferay-ui:search-container-column-text
 				name="group"
