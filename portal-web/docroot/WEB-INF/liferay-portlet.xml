@@ -14,7 +14,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/enterprise_admin/css/main.jsp</header-portlet-css>
 		<footer-portlet-javascript>/html/portlet/enterprise_admin/javascript.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
@@ -29,7 +29,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>0</render-weight>
-		<header-portlet-css>/html/portlet/search/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/search/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-search</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -71,7 +71,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/calendar/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/calendar/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-calendar</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -125,7 +125,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/directory/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/directory/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-directory</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -158,7 +158,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/journal/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/journal/css/main.jsp</header-portlet-css>
 		<header-portlet-javascript>/html/portlet/journal/javascript.js</header-portlet-javascript>
 		<css-class-wrapper>portlet-journal</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
@@ -207,7 +207,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/message_boards/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/message_boards/css/main.jsp</header-portlet-css>
 		<footer-portlet-javascript>/html/portlet/message_boards/javascript.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-message-boards</css-class-wrapper>
 		<facebook-integration>fbml</facebook-integration>
@@ -235,7 +235,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/document_library/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/document_library/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-document-library</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -269,7 +269,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/polls/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/polls/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-polls</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -307,7 +307,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/bookmarks/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/bookmarks/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-bookmarks</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -319,7 +319,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/communities/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/communities/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-communities</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -352,7 +352,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/image_gallery/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/image_gallery/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-image-gallery</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -386,7 +386,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/blogs/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/blogs/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-blogs</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -419,7 +419,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/wiki/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/wiki/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-wiki</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -443,7 +443,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>0</render-weight>
-		<header-portlet-css>/html/portlet/rss/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/rss/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-rss</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -465,7 +465,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/iframe/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/iframe/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-iframe</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -503,7 +503,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/wiki/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/wiki/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-wiki</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -522,7 +522,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/journal_content/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/journal_content/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-journal-content</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -535,7 +535,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/login/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/login/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-login</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -665,7 +665,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/enterprise_admin/css/main.jsp</header-portlet-css>
 		<footer-portlet-javascript>/html/portlet/enterprise_admin/javascript.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
@@ -693,7 +693,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/announcements/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/announcements/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-alerts</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -716,7 +716,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/announcements/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/announcements/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-announcements</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -731,7 +731,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/site_map/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/site_map/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-site-map</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -743,7 +743,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/portlet_configuration/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/portlet_configuration/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-configuration</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 		<system>true</system>
@@ -770,7 +770,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/communities/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/communities/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-communities</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 		<system>true</system>
@@ -791,7 +791,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/quick_note/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/quick_note/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-quick-note</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -820,7 +820,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/asset_tags_admin/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/asset_tags_admin/css/main.jsp</header-portlet-css>
 		<footer-portal-javascript>/html/js/liferay/service.js</footer-portal-javascript>
 		<footer-portlet-javascript>/html/portlet/asset_tags_admin/javascript.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-asset-tags-admin</css-class-wrapper>
@@ -850,7 +850,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>25</render-weight>
-		<header-portlet-css>/html/portlet/asset_publisher/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/asset_publisher/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-asset-publisher</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -888,7 +888,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/update_manager/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/update_manager/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-update-manager</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -927,7 +927,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/document_library/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/document_library/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-document-library</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -975,7 +975,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/blogs_aggregator/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/blogs_aggregator/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-blogs-aggregator</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1068,8 +1068,8 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/communities/css.jsp</header-portlet-css>
-		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/communities/css/main.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/enterprise_admin/css/main.jsp</header-portlet-css>
 		<footer-portlet-javascript>/html/portlet/enterprise_admin/javascript.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
@@ -1085,8 +1085,8 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/communities/css.jsp</header-portlet-css>
-		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/communities/css/main.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/enterprise_admin/css/main.jsp</header-portlet-css>
 		<footer-portlet-javascript>/html/portlet/enterprise_admin/javascript.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
@@ -1101,8 +1101,8 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/communities/css.jsp</header-portlet-css>
-		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/communities/css/main.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/enterprise_admin/css/main.jsp</header-portlet-css>
 		<footer-portlet-javascript>/html/portlet/enterprise_admin/javascript.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
@@ -1117,7 +1117,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/enterprise_admin/css/main.jsp</header-portlet-css>
 		<footer-portlet-javascript>/html/portlet/enterprise_admin/javascript.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
@@ -1132,7 +1132,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/enterprise_admin/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1146,7 +1146,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/enterprise_admin/css/main.jsp</header-portlet-css>
 		<footer-portlet-javascript>/html/portlet/enterprise_admin/javascript.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
@@ -1161,7 +1161,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/enterprise_admin/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1175,7 +1175,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/enterprise_admin/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1201,8 +1201,8 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/communities/css.jsp</header-portlet-css>
-		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/communities/css/main.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/enterprise_admin/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -1258,7 +1258,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/expando/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/expando/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-expando</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 		<system>true</system>
@@ -1275,8 +1275,8 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/communities/css.jsp</header-portlet-css>
-		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/communities/css/main.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/enterprise_admin/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 		<system>true</system>
 	</portlet>
@@ -1352,8 +1352,8 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/communities/css.jsp</header-portlet-css>
-		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/communities/css/main.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/enterprise_admin/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1367,7 +1367,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/asset_category_admin/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/asset_category_admin/css/main.jsp</header-portlet-css>
 		<footer-portal-javascript>/html/js/liferay/service.js</footer-portal-javascript>
 		<footer-portlet-javascript>/html/portlet/asset_category_admin/javascript.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-asset-category-admin</css-class-wrapper>
@@ -1396,8 +1396,8 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/communities/css.jsp</header-portlet-css>
-		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/communities/css/main.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/enterprise_admin/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1412,7 +1412,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/workflow_tasks/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/workflow_tasks/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-workflow-tasks</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1427,7 +1427,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/workflow_definitions/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/workflow_definitions/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-workflow-definitions</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1442,7 +1442,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/workflow_definitions/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/workflow_definitions/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-workflow-definitions</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1457,8 +1457,8 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
-		<header-portlet-css>/html/portlet/workflow_tasks/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/enterprise_admin/css/main.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/workflow_tasks/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-workflow-tasks</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1473,7 +1473,7 @@
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<header-portlet-css>/html/portlet/wiki/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/wiki/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-wiki</css-class-wrapper>
 	</portlet>
 	<role-mapper>
