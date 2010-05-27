@@ -852,10 +852,15 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			//String body = subject;
 
 			try {
+				boolean enabled = WorkflowThreadLocal.isEnabled();
+				WorkflowThreadLocal.setEnabled(false);
+
 				message = addDiscussionMessage(
 					null, userId, null, groupId, className, classPK, 0,
 					MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID, subject,
 					subject, new ServiceContext());
+
+				WorkflowThreadLocal.setEnabled(enabled);
 			}
 			catch (SystemException se) {
 				if (_log.isWarnEnabled()) {

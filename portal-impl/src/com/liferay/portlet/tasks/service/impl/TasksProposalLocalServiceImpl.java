@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.kernel.workflow.WorkflowThreadLocal;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
@@ -106,10 +107,15 @@ public class TasksProposalLocalServiceImpl
 
 		// Message boards
 
+		boolean enabled = WorkflowThreadLocal.isEnabled();
+		WorkflowThreadLocal.setEnabled(false);
+
 		mbMessageLocalService.addDiscussionMessage(
 			userId, proposal.getUserName(), groupId,
 			TasksProposal.class.getName(), proposalId,
 			WorkflowConstants.ACTION_PUBLISH);
+
+		WorkflowThreadLocal.setEnabled(enabled);
 
 		// Social
 
