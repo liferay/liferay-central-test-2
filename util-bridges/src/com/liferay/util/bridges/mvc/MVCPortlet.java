@@ -32,6 +32,8 @@ import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.EventRequest;
+import javax.portlet.EventResponse;
 import javax.portlet.PortletException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletRequestDispatcher;
@@ -291,12 +293,19 @@ public class MVCPortlet extends LiferayPortlet {
 	}
 
 	protected void include(
-			String path, PortletRequest portletRequest,
-			PortletResponse portletResponse)
+			String path, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws IOException, PortletException {
 
 		include(
-			path, portletRequest, portletResponse, PortletRequest.RENDER_PHASE);
+			path, actionRequest, actionResponse, PortletRequest.ACTION_PHASE);
+	}
+
+	protected void include(
+			String path, EventRequest eventRequest, EventResponse eventResponse)
+		throws IOException, PortletException {
+
+		include(path, eventRequest, eventResponse, PortletRequest.RENDER_PHASE);
 	}
 
 	protected void include(
@@ -321,6 +330,25 @@ public class MVCPortlet extends LiferayPortlet {
 				portletResponse.setProperty("clear-request-parameters", "true");
 			}
 		}
+	}
+
+	protected void include(
+			String path, RenderRequest renderRequest,
+			RenderResponse renderResponse)
+		throws IOException, PortletException {
+
+		include(
+			path, renderRequest, renderResponse, PortletRequest.RENDER_PHASE);
+	}
+
+	protected void include(
+			String path, ResourceRequest resourceRequest,
+			ResourceResponse resourceResponse)
+		throws IOException, PortletException {
+
+		include(
+			path, resourceRequest, resourceResponse,
+			PortletRequest.RESOURCE_PHASE);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(MVCPortlet.class);
