@@ -321,8 +321,16 @@ if (Validator.isNull(redirect)) {
 	</c:if>
 
 	<aui:button-row>
-		<c:if test="<%= (message == null) || (message.getStatus() != WorkflowConstants.STATUS_APPROVED) %>">
-			<aui:button name="saveDraftButton" onClick='<%= renderResponse.getNamespace() + "saveMessage(true);" %>' type="button" value="save-draft" />
+		<c:if test="<%= (message == null) || !message.isApproved() %>">
+			<%
+			String buttonLabel = "save-draft";
+
+			if (message.isPending()) {
+				buttonLabel = "save";
+			}
+			%>
+
+			<aui:button name="saveDraftButton" onClick='<%= renderResponse.getNamespace() + "saveMessage(true);" %>' type="button" value="<%= buttonLabel %>" />
 		</c:if>
 
 		<%
