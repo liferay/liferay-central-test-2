@@ -2054,6 +2054,7 @@ indexes=Index
 industry=Industri
 infringes-my-rights=Rättigheter saknas
 inherit=Ärva
+inherited-roles=Inherited Roles (Automatic Copy)
 initial-window-state=Initialt fönsterläge
 initiate-process=Sätt igång process
 input-permissions-configure-help=Ange rättigheter för den här resursen.

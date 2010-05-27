@@ -2054,6 +2054,7 @@ indexes=Index
 industry=Industria
 infringes-my-rights=Infringes my Rights (Automatic Copy)
 inherit=Hereta
+inherited-roles=Inherited Roles (Automatic Copy)
 initial-window-state=Finestra de l'estat inicial
 initiate-process=Inicia el procés
 input-permissions-configure-help=Configure the permissions for this resource. (Automatic Copy)

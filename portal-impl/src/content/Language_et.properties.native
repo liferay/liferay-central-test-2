@@ -2054,6 +2054,7 @@ indexes=Indeksid
 industry=Tööstus
 infringes-my-rights=Rikub minu õigusi
 inherit=Päri
+inherited-roles=Inherited Roles (Automatic Copy)
 initial-window-state=Esialgne akna olek
 initiate-process=Algata protsessi
 input-permissions-configure-help=Configure the permissions for this resource. (Automatic Copy)
