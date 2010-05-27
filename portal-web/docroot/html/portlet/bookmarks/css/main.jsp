@@ -19,7 +19,7 @@
 <%@ page import="com.liferay.portal.kernel.util.StringUtil" %>
 
 <liferay-util:buffer var="html">
-	<liferay-util:include page="/html/portlet/document_library/css.jsp" />
+	<liferay-util:include page="/html/portlet/document_library/css/main.jsp" />
 </liferay-util:buffer>
 
 <%
