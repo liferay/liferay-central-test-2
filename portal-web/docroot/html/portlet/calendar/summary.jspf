@@ -20,11 +20,11 @@ int maxDayOfMonth = selCal.getActualMaximum(Calendar.DATE);
 Set data = new HashSet();
 
 for (int i = 1; i <= maxDayOfMonth; i++) {
-	Calendar tempCal = (Calendar)selCal.clone();
+	Calendar tempCal = (Calendar)curCal.clone();
 
-	tempCal.set(Calendar.MONTH, selMonth);
+	tempCal.set(Calendar.MONTH, curMonth);
 	tempCal.set(Calendar.DATE, i);
-	tempCal.set(Calendar.YEAR, selYear);
+	tempCal.set(Calendar.YEAR, curYear);
 
 	boolean hasEvents = CalEventLocalServiceUtil.hasEvents(scopeGroupId, tempCal, eventType);
 
@@ -45,9 +45,9 @@ for (int i = 1; i <= maxDayOfMonth; i++) {
 				</div>
 
 				<liferay-ui:calendar
-					month="<%= selMonth %>"
-					day="<%= selDay %>"
-					year="<%= selYear %>"
+					month="<%= curMonth %>"
+					day="<%= curDay %>"
+					year="<%= curYear %>"
 					headerFormat="<%= dateFormatDate %>"
 					data="<%= data %>"
 				/>
