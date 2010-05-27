@@ -133,24 +133,6 @@ else if (selUser != null) {
 	}
 }
 
-List<Group> allGroups = new ArrayList<Group>();
-
-allGroups.addAll(groups);
-allGroups.addAll(GroupLocalServiceUtil.getOrganizationsGroups(organizations));
-allGroups.addAll(GroupLocalServiceUtil.getOrganizationsRelatedGroups(organizations));
-allGroups.addAll(GroupLocalServiceUtil.getUserGroupsGroups(userGroups));
-allGroups.addAll(GroupLocalServiceUtil.getUserGroupsRelatedGroups(userGroups));
-
-LinkedHashMap<Group, Role> inheritedGroupRoleMap = new LinkedHashMap<Group, Role>();
-
-for (Group group : allGroups) {
-	List<Role> groupRoles = RoleLocalServiceUtil.getGroupRoles(group.getGroupId());
-
-	for (Role groupRole : groupRoles) {
-		inheritedGroupRoleMap.put(group, groupRole);
-	}
-}
-
 String[] mainSections = PropsValues.USERS_FORM_ADD_MAIN;
 String[] identificationSections = PropsValues.USERS_FORM_ADD_IDENTIFICATION;
 String[] miscellaneousSections = PropsValues.USERS_FORM_ADD_MISCELLANEOUS;
@@ -212,7 +194,6 @@ String taglibOnSubmit = renderResponse.getNamespace() + "saveUser('" + ((selUser
 				request.setAttribute("user.groups", groups);
 				request.setAttribute("user.organizations", organizations);
 				request.setAttribute("user.roles", roles);
-				request.setAttribute("user.inheritedGroupRoleMap",inheritedGroupRoleMap);
 				request.setAttribute("user.communityRoles", communityRoles);
 				request.setAttribute("user.organizationRoles", organizationRoles);
 				request.setAttribute("user.userGroups", userGroups);

@@ -22,7 +22,6 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 List<Organization> organizations = (List<Organization>)request.getAttribute("user.organizations");
 Long[] organizationIds = EnterpriseAdminUtil.getOrganizationIds(organizations);
 List<Role> roles = (List<Role>)request.getAttribute("user.roles");
-LinkedHashMap<Group, Role> inheritedGroupRoleMap = (LinkedHashMap<Group, Role>)request.getAttribute("user.inheritedGroupRoleMap");
 List<UserGroupRole> communityRoles = (List<UserGroupRole>)request.getAttribute("user.communityRoles");
 List<UserGroupRole> organizationRoles = (List<UserGroupRole>)request.getAttribute("user.organizationRoles");
 
@@ -30,8 +29,6 @@ List <UserGroupRole> userGroupRoles = new ArrayList<UserGroupRole>();
 
 userGroupRoles.addAll(communityRoles);
 userGroupRoles.addAll(organizationRoles);
-
-List <Group> inheritedGroups = new ArrayList<Group>(inheritedGroupRoleMap.keySet());
 %>
 
 <liferay-util:buffer var="removeRoleIcon">
@@ -84,41 +81,6 @@ List <Group> inheritedGroups = new ArrayList<Group>(inheritedGroupRoleMap.keySet
 		url='<%= "javascript:" + renderResponse.getNamespace() + "openRegularRoleSelector();" %>'
 	/>
 </c:if>
-
-<br /><br />
-
-<h3><liferay-ui:message key="inherited-roles" /></h3>
-
-<liferay-ui:search-container
-	id='<%= renderResponse.getNamespace() + "inheritedRolesSearchContainer" %>'
-	headerNames="title"
->
-	<liferay-ui:search-container-results
-		results="<%= inheritedGroups %>"
-		total="<%= inheritedGroups.size() %>"
-	/>
-
-	<liferay-ui:search-container-row
-		className="com.liferay.portal.model.Group"
-		keyProperty="groupId"
-		modelVar="group"
-	>
-		<liferay-util:param name="className" value="<%= EnterpriseAdminUtil.getCssClassName(inheritedGroupRoleMap.get(group)) %>"  />
-		<liferay-util:param name="classHoverName" value="<%= EnterpriseAdminUtil.getCssClassName(inheritedGroupRoleMap.get(group)) %>" />
-
-		<liferay-ui:search-container-column-text
-			name="title"
-			value="<%= HtmlUtil.escape(inheritedGroupRoleMap.get(group).getTitle(locale)) %>"
-		/>
-
-		<liferay-ui:search-container-column-text
-			name="group"
-			value="<%= HtmlUtil.escape(group.getDescriptiveName()) %>"
-		/>
-	</liferay-ui:search-container-row>
-
-	<liferay-ui:search-iterator />
-</liferay-ui:search-container>
 
 <br /><br />
 
