@@ -52,8 +52,6 @@ import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.social.model.SocialEquityActionMapping;
 import com.liferay.util.UniqueList;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 
 import java.util.ArrayList;
@@ -829,14 +827,6 @@ public class ResourceActionsUtil {
 		throws Exception {
 
 		InputStream inputStream = classLoader.getResourceAsStream(source);
-
-		if (inputStream == null) {
-			File file = new File(source);
-
-			if (file.exists()) {
-				inputStream = new FileInputStream(file);
-			}
-		}
 
 		if (inputStream == null) {
 			if (_log.isWarnEnabled() && !source.endsWith("-ext.xml")) {
