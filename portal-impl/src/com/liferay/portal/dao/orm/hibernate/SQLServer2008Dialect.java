@@ -28,32 +28,30 @@ import org.hibernate.dialect.SQLServerDialect;
 public class SQLServer2008Dialect extends SQLServerDialect {
 
 	public String getLimitString(String sql, int offset, int limit) {
+		String lowerCaseSql = sql.toLowerCase();
 
-		int lastOrderByPos =
-			sql.toLowerCase().lastIndexOf("order by");
+		int lastOrderByPos = lowerCaseSql.lastIndexOf("order by");
 
-		if ((lastOrderByPos < 0) ||
-			StringUtil.endsWith(sql, StringPool.CLOSE_PARENTHESIS) ||
-			offset == 0) {
+		if ((lastOrderByPos < 0) || (offset == 0) ||
+			StringUtil.endsWith(sql, StringPool.CLOSE_PARENTHESIS)) {
 
 			return super.getLimitString(sql, 0, limit);
 		}
 		else {
-			int fromPos = sql.toLowerCase().indexOf("from");
+			int fromPos = lowerCaseSql.indexOf("from");
 
-			String orderby = sql.substring(lastOrderByPos, sql.length());
+			String orderBy = sql.substring(lastOrderByPos, sql.length());
 
 			String selectFrom = sql.substring(0, fromPos);
 
-			String selectFromWhere = sql.substring(
-				fromPos, lastOrderByPos);
+			String selectFromWhere = sql.substring(fromPos, lastOrderByPos);
 
-			StringBundler sb = new StringBundler(5);
+			StringBundler sb = new StringBundler(10);
 
 			sb.append("select * from (");
 			sb.append(selectFrom);
 			sb.append(", _page_row_num = row_number() over(");
-			sb.append(orderby);
+			sb.append(orderBy);
 			sb.append(")");
 			sb.append(selectFromWhere);
 			sb.append(" ) temp where _page_row_num between ");
@@ -66,7 +64,9 @@ public class SQLServer2008Dialect extends SQLServerDialect {
 	}
 
 	public boolean supportsLimitOffset() {
-		return true;
+		return _SUPPORTS_LIMIT_OFFSET;
 	}
+
+	private static final boolean _SUPPORTS_LIMIT_OFFSET = true;
 
 }
