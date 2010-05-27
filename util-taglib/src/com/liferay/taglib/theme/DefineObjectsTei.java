@@ -42,55 +42,54 @@ import javax.servlet.jsp.tagext.VariableInfo;
 public class DefineObjectsTei extends TagExtraInfo {
 
 	public VariableInfo[] getVariableInfo(TagData data) {
-		return new VariableInfo[] {
-			new VariableInfo(
-				"themeDisplay", ThemeDisplay.class.getName(), true,
-				VariableInfo.AT_END),
-			new VariableInfo(
-				"company", Company.class.getName(), true, VariableInfo.AT_END),
-			new VariableInfo(
-				"account", Account.class.getName(), true, VariableInfo.AT_END),
-			new VariableInfo(
-				"user", User.class.getName(), true, VariableInfo.AT_END),
-			new VariableInfo(
-				"realUser", User.class.getName(), true, VariableInfo.AT_END),
-			new VariableInfo(
-				"contact", Contact.class.getName(), true, VariableInfo.AT_END),
-			new VariableInfo(
-				"layout", Layout.class.getName(), true, VariableInfo.AT_END),
-			new VariableInfo(
-				"layouts", List.class.getName(), true, VariableInfo.AT_END),
-			new VariableInfo(
-				"plid", Long.class.getName(), true, VariableInfo.AT_END),
-			new VariableInfo(
-				"layoutTypePortlet", LayoutTypePortlet.class.getName(), true,
-				VariableInfo.AT_END),
-			new VariableInfo(
-				"scopeGroupId", Long.class.getName(), true,
-				VariableInfo.AT_END),
-			new VariableInfo(
-				"permissionChecker", PermissionChecker.class.getName(), true,
-				VariableInfo.AT_END),
-			new VariableInfo(
-				"locale", Locale.class.getName(), true, VariableInfo.AT_END),
-			new VariableInfo(
-				"timeZone", TimeZone.class.getName(), true,
-				VariableInfo.AT_END),
-			new VariableInfo(
-				"theme", Theme.class.getName(), true, VariableInfo.AT_END),
-			new VariableInfo(
-				"colorScheme", ColorScheme.class.getName(), true,
-				VariableInfo.AT_END),
-			new VariableInfo(
-				"portletDisplay", PortletDisplay.class.getName(), true,
-				VariableInfo.AT_END),
-
-			// Deprecated
-
-			new VariableInfo(
-				"portletGroupId", Long.class.getName(), true,
-				VariableInfo.AT_END)
-		};
+		return _variableInfo;
 	}
+
+	private static VariableInfo[] _variableInfo = new VariableInfo[] {
+		new VariableInfo(
+			"themeDisplay", ThemeDisplay.class.getName(), true,
+			VariableInfo.AT_END),
+		new VariableInfo(
+			"company", Company.class.getName(), true, VariableInfo.AT_END),
+		new VariableInfo(
+			"account", Account.class.getName(), true, VariableInfo.AT_END),
+		new VariableInfo(
+			"user", User.class.getName(), true, VariableInfo.AT_END),
+		new VariableInfo(
+			"realUser", User.class.getName(), true, VariableInfo.AT_END),
+		new VariableInfo(
+			"contact", Contact.class.getName(), true, VariableInfo.AT_END),
+		new VariableInfo(
+			"layout", Layout.class.getName(), true, VariableInfo.AT_END),
+		new VariableInfo(
+			"layouts", List.class.getName(), true, VariableInfo.AT_END),
+		new VariableInfo(
+			"plid", Long.class.getName(), true, VariableInfo.AT_END),
+		new VariableInfo(
+			"layoutTypePortlet", LayoutTypePortlet.class.getName(), true,
+			VariableInfo.AT_END),
+		new VariableInfo(
+			"scopeGroupId", Long.class.getName(), true, VariableInfo.AT_END),
+		new VariableInfo(
+			"permissionChecker", PermissionChecker.class.getName(), true,
+			VariableInfo.AT_END),
+		new VariableInfo(
+			"locale", Locale.class.getName(), true, VariableInfo.AT_END),
+		new VariableInfo(
+			"timeZone", TimeZone.class.getName(), true, VariableInfo.AT_END),
+		new VariableInfo(
+			"theme", Theme.class.getName(), true, VariableInfo.AT_END),
+		new VariableInfo(
+			"colorScheme", ColorScheme.class.getName(), true,
+			VariableInfo.AT_END),
+		new VariableInfo(
+			"portletDisplay", PortletDisplay.class.getName(), true,
+			VariableInfo.AT_END),
+
+		// Deprecated
+
+		new VariableInfo(
+			"portletGroupId", Long.class.getName(), true, VariableInfo.AT_END)
+	};
 
 }
