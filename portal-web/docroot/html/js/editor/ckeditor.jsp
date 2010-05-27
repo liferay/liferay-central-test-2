@@ -34,6 +34,12 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 <html>
 
 <head>
+	<style type="text/css">
+		table.cke_dialog {
+			position: absolute !important;
+		}
+	</style>
+
 	<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 
 	<script type="text/javascript">
@@ -66,12 +72,6 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 		}
 	</script>
 </head>
-
-<style type="text/css">
-	table.cke_dialog {
-		position: absolute !important;
-	}
-</style>
 
 <body>
 
