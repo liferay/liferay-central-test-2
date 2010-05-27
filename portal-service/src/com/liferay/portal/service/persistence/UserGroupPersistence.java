@@ -165,6 +165,63 @@ public interface UserGroupPersistence extends BasePersistence<UserGroup> {
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public java.util.List<com.liferay.portal.model.Group> getGroups(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Group> getGroups(long pk,
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Group> getGroups(long pk,
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int getGroupsSize(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public boolean containsGroup(long pk, long groupPK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public boolean containsGroups(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void addGroup(long pk, long groupPK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void addGroup(long pk, com.liferay.portal.model.Group group)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void addGroups(long pk, long[] groupPKs)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void addGroups(long pk,
+		java.util.List<com.liferay.portal.model.Group> groups)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void clearGroups(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void removeGroup(long pk, long groupPK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void removeGroup(long pk, com.liferay.portal.model.Group group)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void removeGroups(long pk, long[] groupPKs)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void removeGroups(long pk,
+		java.util.List<com.liferay.portal.model.Group> groups)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void setGroups(long pk, long[] groupPKs)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void setGroups(long pk,
+		java.util.List<com.liferay.portal.model.Group> groups)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portal.model.User> getUsers(long pk)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

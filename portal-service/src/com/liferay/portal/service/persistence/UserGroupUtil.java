@@ -306,6 +306,97 @@ public class UserGroupUtil {
 		return getPersistence().countAll();
 	}
 
+	public static java.util.List<com.liferay.portal.model.Group> getGroups(
+		long pk) throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().getGroups(pk);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Group> getGroups(
+		long pk, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().getGroups(pk, start, end);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Group> getGroups(
+		long pk, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().getGroups(pk, start, end, orderByComparator);
+	}
+
+	public static int getGroupsSize(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().getGroupsSize(pk);
+	}
+
+	public static boolean containsGroup(long pk, long groupPK)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().containsGroup(pk, groupPK);
+	}
+
+	public static boolean containsGroups(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().containsGroups(pk);
+	}
+
+	public static void addGroup(long pk, long groupPK)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().addGroup(pk, groupPK);
+	}
+
+	public static void addGroup(long pk, com.liferay.portal.model.Group group)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().addGroup(pk, group);
+	}
+
+	public static void addGroups(long pk, long[] groupPKs)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().addGroups(pk, groupPKs);
+	}
+
+	public static void addGroups(long pk,
+		java.util.List<com.liferay.portal.model.Group> groups)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().addGroups(pk, groups);
+	}
+
+	public static void clearGroups(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().clearGroups(pk);
+	}
+
+	public static void removeGroup(long pk, long groupPK)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeGroup(pk, groupPK);
+	}
+
+	public static void removeGroup(long pk, com.liferay.portal.model.Group group)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeGroup(pk, group);
+	}
+
+	public static void removeGroups(long pk, long[] groupPKs)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeGroups(pk, groupPKs);
+	}
+
+	public static void removeGroups(long pk,
+		java.util.List<com.liferay.portal.model.Group> groups)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeGroups(pk, groups);
+	}
+
+	public static void setGroups(long pk, long[] groupPKs)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().setGroups(pk, groupPKs);
+	}
+
+	public static void setGroups(long pk,
+		java.util.List<com.liferay.portal.model.Group> groups)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().setGroups(pk, groups);
+	}
+
 	public static java.util.List<com.liferay.portal.model.User> getUsers(
 		long pk) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().getUsers(pk);

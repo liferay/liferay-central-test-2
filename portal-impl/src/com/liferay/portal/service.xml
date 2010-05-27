@@ -1709,6 +1709,7 @@
 
 		<!-- Relationships -->
 
+		<column name="groups" type="Collection" entity="Group" mapping-table="Groups_UserGroups" />
 		<column name="users" type="Collection" entity="User" mapping-table="Users_UserGroups" />
 
 		<!-- Order -->

@@ -214,6 +214,16 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		userGroup = toUnwrappedModel(userGroup);
 
 		try {
+			clearGroups.clear(userGroup.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_GROUPS_USERGROUPS_NAME);
+		}
+
+		try {
 			clearUsers.clear(userGroup.getPrimaryKey());
 		}
 		catch (Exception e) {
@@ -1366,6 +1376,340 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		return count.intValue();
 	}
 
+	public List<com.liferay.portal.model.Group> getGroups(long pk)
+		throws SystemException {
+		return getGroups(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	}
+
+	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
+		int end) throws SystemException {
+		return getGroups(pk, start, end, null);
+	}
+
+	public static final FinderPath FINDER_PATH_GET_GROUPS = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_USERGROUPS,
+			UserGroupModelImpl.MAPPING_TABLE_GROUPS_USERGROUPS_NAME,
+			"getGroups",
+			new String[] {
+				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+
+	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(pk), String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<com.liferay.portal.model.Group> list = (List<com.liferay.portal.model.Group>)FinderCacheUtil.getResult(FINDER_PATH_GET_GROUPS,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				String sql = null;
+
+				if (orderByComparator != null) {
+					sql = _SQL_GETGROUPS.concat(ORDER_BY_CLAUSE)
+										.concat(orderByComparator.getOrderBy());
+				}
+
+				else {
+					sql = _SQL_GETGROUPS.concat(com.liferay.portal.model.impl.GroupModelImpl.ORDER_BY_SQL);
+				}
+
+				SQLQuery q = session.createSQLQuery(sql);
+
+				q.addEntity("Group_",
+					com.liferay.portal.model.impl.GroupImpl.class);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(pk);
+
+				list = (List<com.liferay.portal.model.Group>)QueryUtil.list(q,
+						getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<com.liferay.portal.model.Group>();
+				}
+
+				groupPersistence.cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_GET_GROUPS, finderArgs,
+					list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public static final FinderPath FINDER_PATH_GET_GROUPS_SIZE = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_USERGROUPS,
+			UserGroupModelImpl.MAPPING_TABLE_GROUPS_USERGROUPS_NAME,
+			"getGroupsSize", new String[] { Long.class.getName() });
+
+	public int getGroupsSize(long pk) throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(pk) };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_GET_GROUPS_SIZE,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				SQLQuery q = session.createSQLQuery(_SQL_GETGROUPSSIZE);
+
+				q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(pk);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_GET_GROUPS_SIZE,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public static final FinderPath FINDER_PATH_CONTAINS_GROUP = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_USERGROUPS,
+			UserGroupModelImpl.MAPPING_TABLE_GROUPS_USERGROUPS_NAME,
+			"containsGroup",
+			new String[] { Long.class.getName(), Long.class.getName() });
+
+	public boolean containsGroup(long pk, long groupPK)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(pk), new Long(groupPK) };
+
+		Boolean value = (Boolean)FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_GROUP,
+				finderArgs, this);
+
+		if (value == null) {
+			try {
+				value = Boolean.valueOf(containsGroup.contains(pk, groupPK));
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (value == null) {
+					value = Boolean.FALSE;
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_CONTAINS_GROUP,
+					finderArgs, value);
+			}
+		}
+
+		return value.booleanValue();
+	}
+
+	public boolean containsGroups(long pk) throws SystemException {
+		if (getGroupsSize(pk) > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public void addGroup(long pk, long groupPK) throws SystemException {
+		try {
+			addGroup.add(pk, groupPK);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_GROUPS_USERGROUPS_NAME);
+		}
+	}
+
+	public void addGroup(long pk, com.liferay.portal.model.Group group)
+		throws SystemException {
+		try {
+			addGroup.add(pk, group.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_GROUPS_USERGROUPS_NAME);
+		}
+	}
+
+	public void addGroups(long pk, long[] groupPKs) throws SystemException {
+		try {
+			for (long groupPK : groupPKs) {
+				addGroup.add(pk, groupPK);
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_GROUPS_USERGROUPS_NAME);
+		}
+	}
+
+	public void addGroups(long pk, List<com.liferay.portal.model.Group> groups)
+		throws SystemException {
+		try {
+			for (com.liferay.portal.model.Group group : groups) {
+				addGroup.add(pk, group.getPrimaryKey());
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_GROUPS_USERGROUPS_NAME);
+		}
+	}
+
+	public void clearGroups(long pk) throws SystemException {
+		try {
+			clearGroups.clear(pk);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_GROUPS_USERGROUPS_NAME);
+		}
+	}
+
+	public void removeGroup(long pk, long groupPK) throws SystemException {
+		try {
+			removeGroup.remove(pk, groupPK);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_GROUPS_USERGROUPS_NAME);
+		}
+	}
+
+	public void removeGroup(long pk, com.liferay.portal.model.Group group)
+		throws SystemException {
+		try {
+			removeGroup.remove(pk, group.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_GROUPS_USERGROUPS_NAME);
+		}
+	}
+
+	public void removeGroups(long pk, long[] groupPKs)
+		throws SystemException {
+		try {
+			for (long groupPK : groupPKs) {
+				removeGroup.remove(pk, groupPK);
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_GROUPS_USERGROUPS_NAME);
+		}
+	}
+
+	public void removeGroups(long pk,
+		List<com.liferay.portal.model.Group> groups) throws SystemException {
+		try {
+			for (com.liferay.portal.model.Group group : groups) {
+				removeGroup.remove(pk, group.getPrimaryKey());
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_GROUPS_USERGROUPS_NAME);
+		}
+	}
+
+	public void setGroups(long pk, long[] groupPKs) throws SystemException {
+		try {
+			Set<Long> groupPKSet = SetUtil.fromArray(groupPKs);
+
+			List<com.liferay.portal.model.Group> groups = getGroups(pk);
+
+			for (com.liferay.portal.model.Group group : groups) {
+				if (!groupPKSet.contains(group.getPrimaryKey())) {
+					removeGroup.remove(pk, group.getPrimaryKey());
+				}
+				else {
+					groupPKSet.remove(group.getPrimaryKey());
+				}
+			}
+
+			for (Long groupPK : groupPKSet) {
+				addGroup.add(pk, groupPK);
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_GROUPS_USERGROUPS_NAME);
+		}
+	}
+
+	public void setGroups(long pk, List<com.liferay.portal.model.Group> groups)
+		throws SystemException {
+		try {
+			long[] groupPKs = new long[groups.size()];
+
+			for (int i = 0; i < groups.size(); i++) {
+				com.liferay.portal.model.Group group = groups.get(i);
+
+				groupPKs[i] = group.getPrimaryKey();
+			}
+
+			setGroups(pk, groupPKs);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_GROUPS_USERGROUPS_NAME);
+		}
+	}
+
 	public List<com.liferay.portal.model.User> getUsers(long pk)
 		throws SystemException {
 		return getUsers(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
@@ -1716,6 +2060,12 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			}
 		}
 
+		containsGroup = new ContainsGroup(this);
+
+		addGroup = new AddGroup(this);
+		clearGroups = new ClearGroups(this);
+		removeGroup = new RemoveGroup(this);
+
 		containsUser = new ContainsUser(this);
 
 		addUser = new AddUser(this);
@@ -1829,10 +2179,178 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	protected WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(type = WorkflowInstanceLinkPersistence.class)
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	protected ContainsGroup containsGroup;
+	protected AddGroup addGroup;
+	protected ClearGroups clearGroups;
+	protected RemoveGroup removeGroup;
 	protected ContainsUser containsUser;
 	protected AddUser addUser;
 	protected ClearUsers clearUsers;
 	protected RemoveUser removeUser;
+
+	protected class ContainsGroup {
+		protected ContainsGroup(UserGroupPersistenceImpl persistenceImpl) {
+			super();
+
+			_mappingSqlQuery = MappingSqlQueryFactoryUtil.getMappingSqlQuery(getDataSource(),
+					_SQL_CONTAINSGROUP,
+					new int[] { Types.BIGINT, Types.BIGINT }, RowMapper.COUNT);
+		}
+
+		protected boolean contains(long userGroupId, long groupId) {
+			List<Integer> results = _mappingSqlQuery.execute(new Object[] {
+						new Long(userGroupId), new Long(groupId)
+					});
+
+			if (results.size() > 0) {
+				Integer count = results.get(0);
+
+				if (count.intValue() > 0) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		private MappingSqlQuery<Integer> _mappingSqlQuery;
+	}
+
+	protected class AddGroup {
+		protected AddGroup(UserGroupPersistenceImpl persistenceImpl) {
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"INSERT INTO Groups_UserGroups (userGroupId, groupId) VALUES (?, ?)",
+					new int[] { Types.BIGINT, Types.BIGINT });
+			_persistenceImpl = persistenceImpl;
+		}
+
+		protected void add(long userGroupId, long groupId)
+			throws SystemException {
+			if (!_persistenceImpl.containsGroup.contains(userGroupId, groupId)) {
+				ModelListener<com.liferay.portal.model.Group>[] groupListeners = groupPersistence.getListeners();
+
+				for (ModelListener<UserGroup> listener : listeners) {
+					listener.onBeforeAddAssociation(userGroupId,
+						com.liferay.portal.model.Group.class.getName(), groupId);
+				}
+
+				for (ModelListener<com.liferay.portal.model.Group> listener : groupListeners) {
+					listener.onBeforeAddAssociation(groupId,
+						UserGroup.class.getName(), userGroupId);
+				}
+
+				_sqlUpdate.update(new Object[] {
+						new Long(userGroupId), new Long(groupId)
+					});
+
+				for (ModelListener<UserGroup> listener : listeners) {
+					listener.onAfterAddAssociation(userGroupId,
+						com.liferay.portal.model.Group.class.getName(), groupId);
+				}
+
+				for (ModelListener<com.liferay.portal.model.Group> listener : groupListeners) {
+					listener.onAfterAddAssociation(groupId,
+						UserGroup.class.getName(), userGroupId);
+				}
+			}
+		}
+
+		private SqlUpdate _sqlUpdate;
+		private UserGroupPersistenceImpl _persistenceImpl;
+	}
+
+	protected class ClearGroups {
+		protected ClearGroups(UserGroupPersistenceImpl persistenceImpl) {
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"DELETE FROM Groups_UserGroups WHERE userGroupId = ?",
+					new int[] { Types.BIGINT });
+		}
+
+		protected void clear(long userGroupId) throws SystemException {
+			ModelListener<com.liferay.portal.model.Group>[] groupListeners = groupPersistence.getListeners();
+
+			List<com.liferay.portal.model.Group> groups = null;
+
+			if ((listeners.length > 0) || (groupListeners.length > 0)) {
+				groups = getGroups(userGroupId);
+
+				for (com.liferay.portal.model.Group group : groups) {
+					for (ModelListener<UserGroup> listener : listeners) {
+						listener.onBeforeRemoveAssociation(userGroupId,
+							com.liferay.portal.model.Group.class.getName(),
+							group.getPrimaryKey());
+					}
+
+					for (ModelListener<com.liferay.portal.model.Group> listener : groupListeners) {
+						listener.onBeforeRemoveAssociation(group.getPrimaryKey(),
+							UserGroup.class.getName(), userGroupId);
+					}
+				}
+			}
+
+			_sqlUpdate.update(new Object[] { new Long(userGroupId) });
+
+			if ((listeners.length > 0) || (groupListeners.length > 0)) {
+				for (com.liferay.portal.model.Group group : groups) {
+					for (ModelListener<UserGroup> listener : listeners) {
+						listener.onAfterRemoveAssociation(userGroupId,
+							com.liferay.portal.model.Group.class.getName(),
+							group.getPrimaryKey());
+					}
+
+					for (ModelListener<com.liferay.portal.model.Group> listener : groupListeners) {
+						listener.onAfterRemoveAssociation(group.getPrimaryKey(),
+							UserGroup.class.getName(), userGroupId);
+					}
+				}
+			}
+		}
+
+		private SqlUpdate _sqlUpdate;
+	}
+
+	protected class RemoveGroup {
+		protected RemoveGroup(UserGroupPersistenceImpl persistenceImpl) {
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"DELETE FROM Groups_UserGroups WHERE userGroupId = ? AND groupId = ?",
+					new int[] { Types.BIGINT, Types.BIGINT });
+			_persistenceImpl = persistenceImpl;
+		}
+
+		protected void remove(long userGroupId, long groupId)
+			throws SystemException {
+			if (_persistenceImpl.containsGroup.contains(userGroupId, groupId)) {
+				ModelListener<com.liferay.portal.model.Group>[] groupListeners = groupPersistence.getListeners();
+
+				for (ModelListener<UserGroup> listener : listeners) {
+					listener.onBeforeRemoveAssociation(userGroupId,
+						com.liferay.portal.model.Group.class.getName(), groupId);
+				}
+
+				for (ModelListener<com.liferay.portal.model.Group> listener : groupListeners) {
+					listener.onBeforeRemoveAssociation(groupId,
+						UserGroup.class.getName(), userGroupId);
+				}
+
+				_sqlUpdate.update(new Object[] {
+						new Long(userGroupId), new Long(groupId)
+					});
+
+				for (ModelListener<UserGroup> listener : listeners) {
+					listener.onAfterRemoveAssociation(userGroupId,
+						com.liferay.portal.model.Group.class.getName(), groupId);
+				}
+
+				for (ModelListener<com.liferay.portal.model.Group> listener : groupListeners) {
+					listener.onAfterRemoveAssociation(groupId,
+						UserGroup.class.getName(), userGroupId);
+				}
+			}
+		}
+
+		private SqlUpdate _sqlUpdate;
+		private UserGroupPersistenceImpl _persistenceImpl;
+	}
 
 	protected class ContainsUser {
 		protected ContainsUser(UserGroupPersistenceImpl persistenceImpl) {
@@ -2002,6 +2520,9 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	private static final String _SQL_SELECT_USERGROUP_WHERE = "SELECT userGroup FROM UserGroup userGroup WHERE ";
 	private static final String _SQL_COUNT_USERGROUP = "SELECT COUNT(userGroup) FROM UserGroup userGroup";
 	private static final String _SQL_COUNT_USERGROUP_WHERE = "SELECT COUNT(userGroup) FROM UserGroup userGroup WHERE ";
+	private static final String _SQL_GETGROUPS = "SELECT {Group_.*} FROM Group_ INNER JOIN Groups_UserGroups ON (Groups_UserGroups.groupId = Group_.groupId) WHERE (Groups_UserGroups.userGroupId = ?)";
+	private static final String _SQL_GETGROUPSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_UserGroups WHERE userGroupId = ?";
+	private static final String _SQL_CONTAINSGROUP = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_UserGroups WHERE userGroupId = ? AND groupId = ?";
 	private static final String _SQL_GETUSERS = "SELECT {User_.*} FROM User_ INNER JOIN Users_UserGroups ON (Users_UserGroups.userId = User_.userId) WHERE (Users_UserGroups.userGroupId = ?)";
 	private static final String _SQL_GETUSERSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_UserGroups WHERE userGroupId = ?";
 	private static final String _SQL_CONTAINSUSER = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_UserGroups WHERE userGroupId = ? AND userId = ?";

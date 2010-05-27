@@ -246,6 +246,13 @@ public class GroupLocalServiceUtil {
 		return getService().getOrganizationsGroups(organizations);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Group> getOrganizationsRelatedGroups(
+		java.util.List<com.liferay.portal.model.Organization> organizations)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getOrganizationsRelatedGroups(organizations);
+	}
+
 	public static java.util.List<com.liferay.portal.model.Group> getRoleGroups(
 		long roleId) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getRoleGroups(roleId);
@@ -305,6 +312,13 @@ public class GroupLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getUserGroupsGroups(userGroups);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Group> getUserGroupsRelatedGroups(
+		java.util.List<com.liferay.portal.model.UserGroup> userGroups)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getUserGroupsRelatedGroups(userGroups);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Group> getUserOrganizationsGroups(
