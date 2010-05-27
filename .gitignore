@@ -63,6 +63,8 @@
 /portal-service/*.iws
 /portal-service/classes
 /portal-service/portal-service*.jar
+/portal-service/test-classes
+/portal-service/test-results
 
 /portal-web/*.iml
 /portal-web/*.ipr
