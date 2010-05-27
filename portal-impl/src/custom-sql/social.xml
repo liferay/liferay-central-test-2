@@ -718,6 +718,9 @@
 	</sql>
 	<sql id="com.liferay.portlet.social.service.persistence.SocialActivityFinder.findByUserGroupsAndOrganizations">
 		<![CDATA[
+			SELECT
+				*
+			FROM 
 			(
 				SELECT
 					SocialActivity.activityId AS activityId, SocialActivity.createDate AS createDate
@@ -735,9 +738,9 @@
 						)
 					) AND
 					(mirrorActivityId = 0)
-			)
-			UNION ALL
-			(
+
+				UNION ALL
+
 				SELECT
 					SocialActivity.activityId AS activityId, SocialActivity.createDate AS createDate
 				FROM
@@ -760,7 +763,7 @@
 								Users_Orgs.userId = ?
 						)
 					)
-			)
+			) TEMP_TABLE
 			ORDER BY
 				createDate DESC
 		]]>
