@@ -128,16 +128,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 
 		<aui:button-row>
 			<c:if test="<%= (entry == null) || !entry.isApproved() %>">
-
-				<%
-				String buttonLabel = "save-draft";
-
-				if ((entry != null) && entry.isPending()) {
-					buttonLabel = "save";
-				}
-				%>
-
-				<aui:button name="saveDraftButton" onClick='<%= renderResponse.getNamespace() + "saveEntry(true);" %>' type="button" value="<%= buttonLabel %>" />
+				<aui:button name="saveDraftButton" onClick='<%= renderResponse.getNamespace() + "saveEntry(true);" %>' type="button" value='<%= ((entry != null) && entry.isPending()) ? "save" : "save-draft" %>' />
 			</c:if>
 
 			<%
