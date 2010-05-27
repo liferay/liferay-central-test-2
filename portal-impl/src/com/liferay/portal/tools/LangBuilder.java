@@ -205,8 +205,8 @@ public class LangBuilder {
 
 						String baseKey = line.substring(0, pos);
 
-						translatedText = props.getProperty(baseKey) +
-							_AUTOMATIC_COPY;
+						translatedText =
+							props.getProperty(baseKey) + _AUTOMATIC_COPY;
 					}
 					else if (key.equals("lang.dir")) {
 						translatedText = "ltr";
