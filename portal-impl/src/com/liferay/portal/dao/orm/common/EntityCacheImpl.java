@@ -284,12 +284,12 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 
 		PortalCache portalCache = _portalCaches.get(groupKey);
 
-		if (portalCache == null && createIfAbsent) {
+		if ((portalCache == null) && createIfAbsent) {
 			portalCache = _multiVMPool.getCache(
 				groupKey, PropsValues.VALUE_OBJECT_ENTITY_BLOCKING_CACHE);
 
-			PortalCache previousPortalCache =
-				_portalCaches.putIfAbsent(groupKey, portalCache);
+			PortalCache previousPortalCache = _portalCaches.putIfAbsent(
+				groupKey, portalCache);
 
 			if (previousPortalCache != null) {
 				portalCache = previousPortalCache;

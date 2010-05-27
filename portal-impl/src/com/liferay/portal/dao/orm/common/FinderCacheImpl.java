@@ -188,12 +188,12 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 
 		PortalCache portalCache = _portalCaches.get(groupKey);
 
-		if (portalCache == null && createIfAbsent) {
+		if ((portalCache == null) && createIfAbsent) {
 			portalCache = _multiVMPool.getCache(
 				groupKey, PropsValues.VALUE_OBJECT_FINDER_BLOCKING_CACHE);
 
-			PortalCache previousPortalCache =
-				_portalCaches.putIfAbsent(groupKey, portalCache);
+			PortalCache previousPortalCache = _portalCaches.putIfAbsent(
+				groupKey, portalCache);
 
 			if (previousPortalCache != null) {
 				portalCache = previousPortalCache;
