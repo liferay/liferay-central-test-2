@@ -50,7 +50,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 <h3><liferay-ui:message key="details" /></h3>
 
 <aui:fieldset column="<%= true %>" cssClass="aui-w50">
-	<aui:select bean="<%= selContact %>" label="title" model="<%= Contact.class %>" name="prefixId" listType="<%= ListTypeConstants.CONTACT_PREFIX %>" listTypeFieldName="prefixId" showEmptyOption="<%= true %>" />
+	<aui:select bean="<%= selContact %>" label="title[person]" model="<%= Contact.class %>" name="prefixId" listType="<%= ListTypeConstants.CONTACT_PREFIX %>" listTypeFieldName="prefixId" showEmptyOption="<%= true %>" />
 
 	<liferay-ui:error exception="<%= DuplicateUserScreenNameException.class %>" message="the-screen-name-you-requested-is-already-taken" />
 	<liferay-ui:error exception="<%= ReservedUserScreenNameException.class %>" message="the-screen-name-you-requested-is-reserved" />
