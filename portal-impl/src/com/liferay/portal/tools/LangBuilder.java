@@ -200,6 +200,14 @@ public class LangBuilder {
 					if (line.indexOf("{") != -1 || line.indexOf("<") != -1) {
 						translatedText = value + _AUTOMATIC_COPY;
 					}
+					else if (line.indexOf("[") != -1) {
+						pos = line.indexOf("[");
+
+						String baseKey = line.substring(0, pos);
+
+						translatedText = props.getProperty(baseKey) +
+							_AUTOMATIC_COPY;
+					}
 					else if (key.equals("lang.dir")) {
 						translatedText = "ltr";
 					}
