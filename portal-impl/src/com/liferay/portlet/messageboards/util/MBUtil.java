@@ -43,6 +43,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMailingList;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
@@ -86,10 +87,12 @@ public class MBUtil {
 			RenderResponse renderResponse)
 		throws Exception {
 
-		MBCategory category = MBCategoryLocalServiceUtil.getCategory(
-			categoryId);
+		if (categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+			MBCategory category = MBCategoryLocalServiceUtil.getCategory(
+				categoryId);
 
-		addPortletBreadcrumbEntries(category, request, renderResponse);
+			addPortletBreadcrumbEntries(category, request, renderResponse);
+		}
 	}
 
 	public static void addPortletBreadcrumbEntries(
