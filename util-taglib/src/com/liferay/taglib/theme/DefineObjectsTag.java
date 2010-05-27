@@ -78,8 +78,4 @@ public class DefineObjectsTag extends TagSupport {
 		return SKIP_BODY;
 	}
 
-	public int doEndTag() {
-		return EVAL_PAGE;
-	}
-
 }

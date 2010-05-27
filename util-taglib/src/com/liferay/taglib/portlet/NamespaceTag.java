@@ -51,8 +51,4 @@ public class NamespaceTag extends TagSupport {
 		return SKIP_BODY;
 	}
 
-	public int doEndTag() {
-		return EVAL_PAGE;
-	}
-
 }
