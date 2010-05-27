@@ -15,6 +15,8 @@
 package com.liferay.portal.tools.servicebuilder;
 
 import com.liferay.portal.freemarker.FreeMarkerUtil;
+import com.liferay.portal.kernel.configuration.Configuration;
+import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
@@ -36,6 +38,7 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ModelHintsUtil;
+import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil_IW;
 import com.liferay.portal.tools.SourceFormatter;
 import com.liferay.portal.util.InitUtil;
@@ -167,6 +170,31 @@ public class ServiceBuilder {
 			String propsUtil = System.getProperty("service.props.util");
 			String pluginName = System.getProperty("service.plugin.name");
 			String testDir = System.getProperty("service.test.dir");
+
+			if (Validator.isNotNull(pluginName)) {
+				ClassLoader classLoader = ServiceBuilder.class.getClassLoader();
+
+				Configuration configuration =
+					ConfigurationFactoryUtil.getConfiguration(
+						classLoader, "portlet");
+
+				Properties properties = configuration.getProperties();
+
+				String[] resourceActionConfigs = StringUtil.split(
+					properties.getProperty("resource.actions.configs"));
+
+				for (int i = 0; i < resourceActionConfigs.length; i++) {
+					try {
+						ResourceActionsUtil.read(
+							"ServiceBuilder", classLoader,
+							implDir + "/" + resourceActionConfigs[i]);
+					}
+					catch (Exception e) {
+						System.out.println(
+							"Unable to read " + resourceActionConfigs[i]);
+					}
+				}
+			}
 
 			serviceBuilder = new ServiceBuilder(
 				fileName, hbmFileName, ormFileName, modelHintsFileName,
