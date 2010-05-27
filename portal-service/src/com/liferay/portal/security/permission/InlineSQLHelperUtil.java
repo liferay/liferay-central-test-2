@@ -21,6 +21,10 @@ package com.liferay.portal.security.permission;
  */
 public class InlineSQLHelperUtil {
 
+	public static boolean isEnabled() {
+		return getInlineSQLHelper().isEnabled();
+	}
+
 	public static String replacePermissionCheck(
 		String sql, String className, String classPKField, String userIdField) {
 

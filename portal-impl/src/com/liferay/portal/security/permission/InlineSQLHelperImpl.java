@@ -31,6 +31,16 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 	public static final String JOIN_RESOURCE_PERMISSION =
 		InlineSQLHelper.class.getName() + ".joinResourcePermission";
 
+	public void afterPropertiesSet() {
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+			_enabled = true;
+		}
+	}
+
+	public boolean isEnabled() {
+		return _enabled;
+	}
+
 	public String replacePermissionCheck(
 		String sql, String className, String classPKField, String userIdField) {
 
@@ -50,6 +60,10 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 		String sql, String className, String classPKField, String userIdField,
 		long groupId, String bridgeJoin) {
 
+		if (!isEnabled()) {
+			return sql;
+		}
+
 		if (Validator.isNull(className)) {
 			new IllegalArgumentException("className is null");
 		}
@@ -59,10 +73,6 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 		}
 
 		if (Validator.isNull(sql)) {
-			return sql;
-		}
-
-		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6) {
 			return sql;
 		}
 
@@ -163,5 +173,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 	private static final String _ORDER_BY_CLAUSE = " ORDER BY ";
 
 	private static final String _WHERE_CLAUSE = " WHERE ";
+
+	private boolean _enabled;
 
 }
