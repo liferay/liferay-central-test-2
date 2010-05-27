@@ -39,7 +39,7 @@ import javax.servlet.jsp.tagext.VariableInfo;
  */
 public class DefineObjectsTei extends TagExtraInfo {
 
-	public VariableInfo[] getVariableInfo(TagData data) {
+	public VariableInfo[] getVariableInfo(TagData tagData) {
 		return _variableInfo;
 	}
 
