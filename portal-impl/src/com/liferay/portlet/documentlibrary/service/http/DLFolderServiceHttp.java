@@ -17,6 +17,7 @@ package com.liferay.portlet.documentlibrary.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
@@ -278,6 +279,173 @@ public class DLFolderServiceHttp {
 		}
 	}
 
+	public static java.util.List<java.lang.Object> getFileEntriesAndFileShortcuts(
+		HttpPrincipal httpPrincipal, long groupId,
+		java.util.List<java.lang.Long> folderIds, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = folderIds;
+
+			if (folderIds == null) {
+				paramObj1 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj2 = new IntegerWrapper(status);
+
+			Object paramObj3 = new IntegerWrapper(start);
+
+			Object paramObj4 = new IntegerWrapper(end);
+
+			MethodWrapper methodWrapper = new MethodWrapper(DLFolderServiceUtil.class.getName(),
+					"getFileEntriesAndFileShortcuts",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (java.util.List<java.lang.Object>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.util.List<java.lang.Object> getFileEntriesAndFileShortcuts(
+		HttpPrincipal httpPrincipal, long groupId, long folderId, int status,
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(folderId);
+
+			Object paramObj2 = new IntegerWrapper(status);
+
+			Object paramObj3 = new IntegerWrapper(start);
+
+			Object paramObj4 = new IntegerWrapper(end);
+
+			MethodWrapper methodWrapper = new MethodWrapper(DLFolderServiceUtil.class.getName(),
+					"getFileEntriesAndFileShortcuts",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (java.util.List<java.lang.Object>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static int getFileEntriesAndFileShortcutsCount(
+		HttpPrincipal httpPrincipal, long groupId,
+		java.util.List<java.lang.Long> folderIds, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = folderIds;
+
+			if (folderIds == null) {
+				paramObj1 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj2 = new IntegerWrapper(status);
+
+			MethodWrapper methodWrapper = new MethodWrapper(DLFolderServiceUtil.class.getName(),
+					"getFileEntriesAndFileShortcutsCount",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static int getFileEntriesAndFileShortcutsCount(
+		HttpPrincipal httpPrincipal, long groupId, long folderId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(folderId);
+
+			Object paramObj2 = new IntegerWrapper(status);
+
+			MethodWrapper methodWrapper = new MethodWrapper(DLFolderServiceUtil.class.getName(),
+					"getFileEntriesAndFileShortcutsCount",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
 		HttpPrincipal httpPrincipal, long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -435,6 +603,306 @@ public class DLFolderServiceHttp {
 			}
 
 			return (java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
+		HttpPrincipal httpPrincipal, long groupId, long parentFolderId,
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(parentFolderId);
+
+			Object paramObj2 = new IntegerWrapper(start);
+
+			Object paramObj3 = new IntegerWrapper(end);
+
+			MethodWrapper methodWrapper = new MethodWrapper(DLFolderServiceUtil.class.getName(),
+					"getFolders",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.util.List<java.lang.Object> getFoldersAndFileEntriesAndFileShortcuts(
+		HttpPrincipal httpPrincipal, long groupId,
+		java.util.List<java.lang.Long> folderIds, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = folderIds;
+
+			if (folderIds == null) {
+				paramObj1 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj2 = new IntegerWrapper(status);
+
+			Object paramObj3 = new IntegerWrapper(start);
+
+			Object paramObj4 = new IntegerWrapper(end);
+
+			MethodWrapper methodWrapper = new MethodWrapper(DLFolderServiceUtil.class.getName(),
+					"getFoldersAndFileEntriesAndFileShortcuts",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (java.util.List<java.lang.Object>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.util.List<java.lang.Object> getFoldersAndFileEntriesAndFileShortcuts(
+		HttpPrincipal httpPrincipal, long groupId, long folderId, int status,
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(folderId);
+
+			Object paramObj2 = new IntegerWrapper(status);
+
+			Object paramObj3 = new IntegerWrapper(start);
+
+			Object paramObj4 = new IntegerWrapper(end);
+
+			MethodWrapper methodWrapper = new MethodWrapper(DLFolderServiceUtil.class.getName(),
+					"getFoldersAndFileEntriesAndFileShortcuts",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (java.util.List<java.lang.Object>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static int getFoldersAndFileEntriesAndFileShortcutsCount(
+		HttpPrincipal httpPrincipal, long groupId,
+		java.util.List<java.lang.Long> folderIds, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = folderIds;
+
+			if (folderIds == null) {
+				paramObj1 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj2 = new IntegerWrapper(status);
+
+			MethodWrapper methodWrapper = new MethodWrapper(DLFolderServiceUtil.class.getName(),
+					"getFoldersAndFileEntriesAndFileShortcutsCount",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static int getFoldersAndFileEntriesAndFileShortcutsCount(
+		HttpPrincipal httpPrincipal, long groupId, long folderId, int status)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(folderId);
+
+			Object paramObj2 = new IntegerWrapper(status);
+
+			MethodWrapper methodWrapper = new MethodWrapper(DLFolderServiceUtil.class.getName(),
+					"getFoldersAndFileEntriesAndFileShortcutsCount",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static int getFoldersCount(HttpPrincipal httpPrincipal,
+		long groupId, long parentFolderId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(parentFolderId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(DLFolderServiceUtil.class.getName(),
+					"getFoldersCount", new Object[] { paramObj0, paramObj1 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void getSubfolderIds(HttpPrincipal httpPrincipal,
+		java.util.List<java.lang.Long> folderIds, long groupId, long folderId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			Object paramObj0 = folderIds;
+
+			if (folderIds == null) {
+				paramObj0 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj1 = new LongWrapper(groupId);
+
+			Object paramObj2 = new LongWrapper(folderId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(DLFolderServiceUtil.class.getName(),
+					"getSubfolderIds",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);

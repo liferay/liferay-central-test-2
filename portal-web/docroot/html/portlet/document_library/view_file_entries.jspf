@@ -37,17 +37,17 @@
 		}
 		else {
 			if (mergedView) {
-				results = DLFolderLocalServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(scopeGroupId, folderId, status, searchContainer.getStart(), searchContainer.getEnd());
+				results = DLFolderServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(scopeGroupId, folderId, status, searchContainer.getStart(), searchContainer.getEnd());
 			}
 			else {
-				results = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcuts(scopeGroupId, folderId, status, searchContainer.getStart(), searchContainer.getEnd());
+				results = DLFolderServiceUtil.getFileEntriesAndFileShortcuts(scopeGroupId, folderId, status, searchContainer.getStart(), searchContainer.getEnd());
 			}
 
 			if (mergedView) {
-				total = DLFolderLocalServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(scopeGroupId, folderId, status);
+				total = DLFolderServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(scopeGroupId, folderId, status);
 			}
 			else {
-				total = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCount(scopeGroupId, folderId, status);
+				total = DLFolderServiceUtil.getFileEntriesAndFileShortcutsCount(scopeGroupId, folderId, status);
 			}
 		}
 

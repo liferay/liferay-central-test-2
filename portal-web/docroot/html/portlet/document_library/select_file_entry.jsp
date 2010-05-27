@@ -48,11 +48,11 @@ if (folder != null) {
 
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-	int total = DLFolderLocalServiceUtil.getFoldersCount(groupId, folderId);
+	int total = DLFolderServiceUtil.getFoldersCount(groupId, folderId);
 
 	searchContainer.setTotal(total);
 
-	List results = DLFolderLocalServiceUtil.getFolders(groupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+	List results = DLFolderServiceUtil.getFolders(groupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
 
 	searchContainer.setResults(results);
 
@@ -88,10 +88,10 @@ if (folder != null) {
 
 		subfolderIds.add(new Long(curFolder.getFolderId()));
 
-		DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, groupId, curFolder.getFolderId());
+		DLFolderServiceUtil.getSubfolderIds(subfolderIds, groupId, curFolder.getFolderId());
 
 		int foldersCount = subfolderIds.size() - 1;
-		int fileEntriesCount = DLFileEntryLocalServiceUtil.getFoldersFileEntriesCount(groupId, subfolderIds, WorkflowConstants.STATUS_APPROVED);
+		int fileEntriesCount = DLFileEntryServiceUtil.getFoldersFileEntriesCount(groupId, subfolderIds, WorkflowConstants.STATUS_APPROVED);
 
 		row.addText(String.valueOf(foldersCount), rowURL);
 		row.addText(String.valueOf(fileEntriesCount), rowURL);
@@ -124,11 +124,11 @@ if (folder != null) {
 
 	searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-	total = DLFileEntryLocalServiceUtil.getFileEntriesCount(groupId, folderId);
+	total = DLFileEntryServiceUtil.getFileEntriesCount(groupId, folderId);
 
 	searchContainer.setTotal(total);
 
-	results = DLFileEntryLocalServiceUtil.getFileEntries(groupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+	results = DLFileEntryServiceUtil.getFileEntries(groupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
 
 	searchContainer.setResults(results);
 

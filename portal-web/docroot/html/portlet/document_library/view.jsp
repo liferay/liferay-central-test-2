@@ -40,8 +40,8 @@ if (permissionChecker.isCompanyAdmin() || permissionChecker.isCommunityAdmin(sco
 	status = WorkflowConstants.STATUS_ANY;
 }
 
-int foldersCount = DLFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId);
-int fileEntriesCount = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCount(scopeGroupId, folderId, status);
+int foldersCount = DLFolderServiceUtil.getFoldersCount(scopeGroupId, folderId);
+int fileEntriesCount = DLFolderServiceUtil.getFileEntriesAndFileShortcutsCount(scopeGroupId, folderId, status);
 
 long categoryId = ParamUtil.getLong(request, "categoryId");
 String tagName = ParamUtil.getString(request, "tag");
@@ -173,8 +173,8 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 								iteratorURL="<%= portletURL %>"
 							>
 								<liferay-ui:search-container-results
-									results="<%= DLFolderLocalServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd()) %>"
-									total="<%= DLFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId) %>"
+									results="<%= DLFolderServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd()) %>"
+									total="<%= DLFolderServiceUtil.getFoldersCount(scopeGroupId, folderId) %>"
 								/>
 
 								<liferay-ui:search-container-row
@@ -264,8 +264,8 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 				%>
 
 				<liferay-ui:search-container-results
-					results="<%= DLFileEntryLocalServiceUtil.getGroupFileEntries(scopeGroupId, groupFileEntriesUserId, searchContainer.getStart(), searchContainer.getEnd()) %>"
-					total="<%= DLFileEntryLocalServiceUtil.getGroupFileEntriesCount(scopeGroupId, groupFileEntriesUserId) %>"
+					results="<%= DLFileEntryServiceUtil.getGroupFileEntries(scopeGroupId, groupFileEntriesUserId, searchContainer.getStart(), searchContainer.getEnd()) %>"
+					total="<%= DLFileEntryServiceUtil.getGroupFileEntriesCount(scopeGroupId, groupFileEntriesUserId) %>"
 				/>
 
 				<liferay-ui:search-container-row

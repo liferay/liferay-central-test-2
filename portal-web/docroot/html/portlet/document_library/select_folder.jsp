@@ -49,11 +49,11 @@ if (folder != null) {
 
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-	int total = DLFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId);
+	int total = DLFolderServiceUtil.getFoldersCount(scopeGroupId, folderId);
 
 	searchContainer.setTotal(total);
 
-	List results = DLFolderLocalServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+	List results = DLFolderServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
 
 	searchContainer.setResults(results);
 
@@ -88,10 +88,10 @@ if (folder != null) {
 
 		subfolderIds.add(new Long(curFolder.getFolderId()));
 
-		DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
+		DLFolderServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
 
 		int foldersCount = subfolderIds.size() - 1;
-		int fileEntriesCount = DLFileEntryLocalServiceUtil.getFoldersFileEntriesCount(scopeGroupId, subfolderIds, WorkflowConstants.STATUS_APPROVED);
+		int fileEntriesCount = DLFileEntryServiceUtil.getFoldersFileEntriesCount(scopeGroupId, subfolderIds, WorkflowConstants.STATUS_APPROVED);
 
 		row.addText(String.valueOf(foldersCount), rowURL);
 		row.addText(String.valueOf(fileEntriesCount), rowURL);

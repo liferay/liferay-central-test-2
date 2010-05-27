@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -38,8 +37,8 @@ import java.io.InputStream;
 
 import java.rmi.RemoteException;
 
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -120,6 +119,46 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		deleteFolder(folderId);
 	}
 
+	public List<Object> getFileEntriesAndFileShortcuts(
+			long groupId, List<Long> folderIds, int status, int start, int end)
+		throws SystemException {
+
+		return dlFolderFinder.filterFindFE_FS_ByG_F_S(
+			groupId, folderIds, status, start, end);
+	}
+
+	public List<Object> getFileEntriesAndFileShortcuts(
+			long groupId, long folderId, int status, int start, int end)
+		throws SystemException {
+
+		List<Long> folderIds = new ArrayList<Long>();
+
+		folderIds.add(folderId);
+
+		return dlFolderFinder.filterFindFE_FS_ByG_F_S(
+			groupId, folderIds, status, start, end);
+	}
+
+	public int getFileEntriesAndFileShortcutsCount(
+			long groupId, List<Long> folderIds, int status)
+		throws SystemException {
+
+		return dlFolderFinder.filterCountFE_FS_ByG_F_S(
+			groupId, folderIds, status);
+	}
+
+	public int getFileEntriesAndFileShortcutsCount(
+			long groupId, long folderId, int status)
+		throws SystemException {
+
+		List<Long> folderIds = new ArrayList<Long>();
+
+		folderIds.add(folderId);
+
+		return dlFolderFinder.filterCountFE_FS_ByG_F_S(
+			groupId, folderIds, status);
+	}
+
 	public DLFolder getFolder(long folderId)
 		throws PortalException, SystemException {
 
@@ -154,25 +193,82 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 	public List<DLFolder> getFolders(long groupId, long parentFolderId)
 		throws PortalException, SystemException {
 
-		List<DLFolder> folders = dlFolderLocalService.getFolders(
-			groupId, parentFolderId);
+		return dlFolderPersistence.filterFindByG_P(groupId, parentFolderId);
+	}
 
-		folders = ListUtil.copy(folders);
+	public List<DLFolder> getFolders(
+			long groupId, long parentFolderId, int start, int end)
+		throws PortalException, SystemException {
 
-		Iterator<DLFolder> itr = folders.iterator();
+		return dlFolderPersistence.filterFindByG_P(
+			groupId, parentFolderId, start, end);
+	}
 
-		while (itr.hasNext()) {
-			DLFolder folder = itr.next();
+	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
+			long groupId, List<Long> folderIds, int status, int start, int end)
+		throws SystemException {
 
-			if (!DLFolderPermission.contains(
-					getPermissionChecker(), groupId, folder.getFolderId(),
-					ActionKeys.VIEW)) {
+		return dlFolderFinder.filterFindF_FE_FS_ByG_F_S(
+			groupId, folderIds, status, start, end);
+	}
 
-				itr.remove();
-			}
+	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
+			long groupId, long folderId, int status, int start, int end)
+		throws PortalException, SystemException {
+
+		DLFolderPermission.check(
+			getPermissionChecker(), groupId, folderId, ActionKeys.VIEW);
+
+		List<Long> folderIds = new ArrayList<Long>();
+
+		folderIds.add(folderId);
+
+		return getFoldersAndFileEntriesAndFileShortcuts(
+			groupId, folderIds, status, start, end);
+	}
+
+	public int getFoldersAndFileEntriesAndFileShortcutsCount(
+			long groupId, List<Long> folderIds, int status)
+		throws SystemException {
+
+		return dlFolderFinder.filterCountF_FE_FS_ByG_F_S(
+			groupId, folderIds, status);
+	}
+
+	public int getFoldersAndFileEntriesAndFileShortcutsCount(
+			long groupId, long folderId, int status)
+		throws PortalException, SystemException {
+
+		DLFolderPermission.check(
+			getPermissionChecker(), groupId, folderId, ActionKeys.VIEW);
+
+		List<Long> folderIds = new ArrayList<Long>();
+
+		folderIds.add(folderId);
+
+		return getFoldersAndFileEntriesAndFileShortcutsCount(
+			groupId, folderIds, status);
+	}
+
+	public int getFoldersCount(long groupId, long parentFolderId)
+		throws PortalException, SystemException {
+
+		return dlFolderPersistence.filterCountByG_P(groupId, parentFolderId);
+	}
+
+	public void getSubfolderIds(
+			List<Long> folderIds, long groupId, long folderId)
+		throws PortalException, SystemException {
+
+		List<DLFolder> folders = dlFolderPersistence.filterFindByG_P(
+			groupId, folderId);
+
+		for (DLFolder folder : folders) {
+			folderIds.add(folder.getFolderId());
+
+			getSubfolderIds(
+				folderIds, folder.getGroupId(), folder.getFolderId());
 		}
-
-		return folders;
 	}
 
 	public boolean hasInheritableLock(long folderId)
@@ -278,8 +374,8 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 				}
 			}
 			catch (PortalException pe) {
-				if (pe instanceof ExpiredLockException ||
-					pe instanceof NoSuchLockException) {
+				if ((pe instanceof ExpiredLockException) ||
+					(pe instanceof NoSuchLockException)) {
 				}
 				else {
 					throw pe;

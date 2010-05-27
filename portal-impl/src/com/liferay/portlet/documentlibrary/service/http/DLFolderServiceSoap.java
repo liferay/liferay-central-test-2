@@ -16,6 +16,7 @@ package com.liferay.portlet.documentlibrary.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 
@@ -132,6 +133,36 @@ public class DLFolderServiceSoap {
 		}
 	}
 
+	public static int getFileEntriesAndFileShortcutsCount(long groupId,
+		Long[] folderIds, int status) throws RemoteException {
+		try {
+			int returnValue = DLFolderServiceUtil.getFileEntriesAndFileShortcutsCount(groupId,
+					ListUtil.toList(folderIds), status);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getFileEntriesAndFileShortcutsCount(long groupId,
+		long folderId, int status) throws RemoteException {
+		try {
+			int returnValue = DLFolderServiceUtil.getFileEntriesAndFileShortcutsCount(groupId,
+					folderId, status);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap getFolder(
 		long folderId) throws RemoteException {
 		try {
@@ -184,6 +215,81 @@ public class DLFolderServiceSoap {
 				DLFolderServiceUtil.getFolders(groupId, parentFolderId);
 
 			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap[] getFolders(
+		long groupId, long parentFolderId, int start, int end)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> returnValue =
+				DLFolderServiceUtil.getFolders(groupId, parentFolderId, start,
+					end);
+
+			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getFoldersAndFileEntriesAndFileShortcutsCount(
+		long groupId, Long[] folderIds, int status) throws RemoteException {
+		try {
+			int returnValue = DLFolderServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(groupId,
+					ListUtil.toList(folderIds), status);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getFoldersAndFileEntriesAndFileShortcutsCount(
+		long groupId, long folderId, int status) throws RemoteException {
+		try {
+			int returnValue = DLFolderServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(groupId,
+					folderId, status);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getFoldersCount(long groupId, long parentFolderId)
+		throws RemoteException {
+		try {
+			int returnValue = DLFolderServiceUtil.getFoldersCount(groupId,
+					parentFolderId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void getSubfolderIds(Long[] folderIds, long groupId,
+		long folderId) throws RemoteException {
+		try {
+			DLFolderServiceUtil.getSubfolderIds(ListUtil.toList(folderIds),
+				groupId, folderId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

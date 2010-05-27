@@ -72,6 +72,34 @@ public class DLFolderServiceWrapper implements DLFolderService {
 		_dlFolderService.deleteFolder(groupId, parentFolderId, name);
 	}
 
+	public java.util.List<java.lang.Object> getFileEntriesAndFileShortcuts(
+		long groupId, java.util.List<java.lang.Long> folderIds, int status,
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlFolderService.getFileEntriesAndFileShortcuts(groupId,
+			folderIds, status, start, end);
+	}
+
+	public java.util.List<java.lang.Object> getFileEntriesAndFileShortcuts(
+		long groupId, long folderId, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlFolderService.getFileEntriesAndFileShortcuts(groupId,
+			folderId, status, start, end);
+	}
+
+	public int getFileEntriesAndFileShortcutsCount(long groupId,
+		java.util.List<java.lang.Long> folderIds, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlFolderService.getFileEntriesAndFileShortcutsCount(groupId,
+			folderIds, status);
+	}
+
+	public int getFileEntriesAndFileShortcutsCount(long groupId, long folderId,
+		int status) throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlFolderService.getFileEntriesAndFileShortcutsCount(groupId,
+			folderId, status);
+	}
+
 	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
 		long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -98,6 +126,57 @@ public class DLFolderServiceWrapper implements DLFolderService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlFolderService.getFolders(groupId, parentFolderId);
+	}
+
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
+		long groupId, long parentFolderId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFolderService.getFolders(groupId, parentFolderId, start, end);
+	}
+
+	public java.util.List<java.lang.Object> getFoldersAndFileEntriesAndFileShortcuts(
+		long groupId, java.util.List<java.lang.Long> folderIds, int status,
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlFolderService.getFoldersAndFileEntriesAndFileShortcuts(groupId,
+			folderIds, status, start, end);
+	}
+
+	public java.util.List<java.lang.Object> getFoldersAndFileEntriesAndFileShortcuts(
+		long groupId, long folderId, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFolderService.getFoldersAndFileEntriesAndFileShortcuts(groupId,
+			folderId, status, start, end);
+	}
+
+	public int getFoldersAndFileEntriesAndFileShortcutsCount(long groupId,
+		java.util.List<java.lang.Long> folderIds, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlFolderService.getFoldersAndFileEntriesAndFileShortcutsCount(groupId,
+			folderIds, status);
+	}
+
+	public int getFoldersAndFileEntriesAndFileShortcutsCount(long groupId,
+		long folderId, int status)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFolderService.getFoldersAndFileEntriesAndFileShortcutsCount(groupId,
+			folderId, status);
+	}
+
+	public int getFoldersCount(long groupId, long parentFolderId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFolderService.getFoldersCount(groupId, parentFolderId);
+	}
+
+	public void getSubfolderIds(java.util.List<java.lang.Long> folderIds,
+		long groupId, long folderId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_dlFolderService.getSubfolderIds(folderIds, groupId, folderId);
 	}
 
 	public boolean hasInheritableLock(long folderId)

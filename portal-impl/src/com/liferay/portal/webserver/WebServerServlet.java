@@ -98,7 +98,7 @@ public class WebServerServlet extends HttpServlet {
 				Company company = CompanyLocalServiceUtil.getCompany(companyId);
 
 				user = company.getDefaultUser();
- 			}
+			}
 
 			PrincipalThreadLocal.setName(user.getUserId());
 
@@ -313,7 +313,7 @@ public class WebServerServlet extends HttpServlet {
 			groupId = GetterUtil.getLong(pathArray[0]);
 
 			dlFileEntry =
-				DLFileEntryLocalServiceUtil.getFileEntryByUuidAndGroupId(
+				DLFileEntryServiceUtil.getFileEntryByUuidAndGroupId(
 					pathArray[1], groupId);
 
 			folderId = dlFileEntry.getFolderId();

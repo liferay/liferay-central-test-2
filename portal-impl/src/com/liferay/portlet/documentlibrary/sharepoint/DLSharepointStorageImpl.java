@@ -59,8 +59,8 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			return;
 		}
 
-		List<DLFileEntry> fileEntries =
-			DLFileEntryLocalServiceUtil.getFileEntries(groupId, parentFolderId);
+		List<DLFileEntry> fileEntries = DLFileEntryServiceUtil.getFileEntries(
+			groupId, parentFolderId);
 
 		for (DLFileEntry fileEntry : fileEntries) {
 			String documentPath = parentFolderPath.concat(
@@ -131,8 +131,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 
 		if (parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			List<DLFileEntry> fileEntries =
-				DLFileEntryLocalServiceUtil.getFileEntries(
-					groupId, parentFolderId);
+				DLFileEntryServiceUtil.getFileEntries(groupId, parentFolderId);
 
 			for (DLFileEntry fileEntry : fileEntries) {
 				documentsTree.addChild(

@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -30,9 +29,9 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -164,7 +163,7 @@ public class GetFileAction extends PortletAction {
 		if (Validator.isNotNull(uuid) && (groupId > 0)) {
 			try {
 				fileEntry =
-					DLFileEntryLocalServiceUtil.getFileEntryByUuidAndGroupId(
+					DLFileEntryServiceUtil.getFileEntryByUuidAndGroupId(
 						uuid, groupId);
 
 				folderId = fileEntry.getFolderId();
@@ -176,21 +175,17 @@ public class GetFileAction extends PortletAction {
 
 		if (fileShortcutId <= 0) {
 			if (Validator.isNotNull(name)) {
-				fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+				fileEntry = DLFileEntryServiceUtil.getFileEntry(
 					groupId, folderId, name);
 
 				title = fileEntry.getTitle();
 			}
 			else if (Validator.isNotNull(title)) {
-				fileEntry = DLFileEntryLocalServiceUtil.getFileEntryByTitle(
+				fileEntry = DLFileEntryServiceUtil.getFileEntryByTitle(
 					groupId, folderId, title);
 
 				name = fileEntry.getName();
 			}
-
-			DLFileEntryPermission.check(
-				themeDisplay.getPermissionChecker(), fileEntry,
-				ActionKeys.VIEW);
 		}
 		else {
 			DLFileShortcut fileShortcut =

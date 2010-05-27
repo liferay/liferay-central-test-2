@@ -75,6 +75,39 @@ public class DLFolderServiceUtil {
 		getService().deleteFolder(groupId, parentFolderId, name);
 	}
 
+	public static java.util.List<java.lang.Object> getFileEntriesAndFileShortcuts(
+		long groupId, java.util.List<java.lang.Long> folderIds, int status,
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getFileEntriesAndFileShortcuts(groupId, folderIds, status,
+			start, end);
+	}
+
+	public static java.util.List<java.lang.Object> getFileEntriesAndFileShortcuts(
+		long groupId, long folderId, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getFileEntriesAndFileShortcuts(groupId, folderId, status,
+			start, end);
+	}
+
+	public static int getFileEntriesAndFileShortcutsCount(long groupId,
+		java.util.List<java.lang.Long> folderIds, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getFileEntriesAndFileShortcutsCount(groupId, folderIds,
+			status);
+	}
+
+	public static int getFileEntriesAndFileShortcutsCount(long groupId,
+		long folderId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getFileEntriesAndFileShortcutsCount(groupId, folderId,
+			status);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
 		long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -101,6 +134,61 @@ public class DLFolderServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFolders(groupId, parentFolderId);
+	}
+
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
+		long groupId, long parentFolderId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getFolders(groupId, parentFolderId, start, end);
+	}
+
+	public static java.util.List<java.lang.Object> getFoldersAndFileEntriesAndFileShortcuts(
+		long groupId, java.util.List<java.lang.Long> folderIds, int status,
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getFoldersAndFileEntriesAndFileShortcuts(groupId,
+			folderIds, status, start, end);
+	}
+
+	public static java.util.List<java.lang.Object> getFoldersAndFileEntriesAndFileShortcuts(
+		long groupId, long folderId, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getFoldersAndFileEntriesAndFileShortcuts(groupId, folderId,
+			status, start, end);
+	}
+
+	public static int getFoldersAndFileEntriesAndFileShortcutsCount(
+		long groupId, java.util.List<java.lang.Long> folderIds, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getFoldersAndFileEntriesAndFileShortcutsCount(groupId,
+			folderIds, status);
+	}
+
+	public static int getFoldersAndFileEntriesAndFileShortcutsCount(
+		long groupId, long folderId, int status)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getFoldersAndFileEntriesAndFileShortcutsCount(groupId,
+			folderId, status);
+	}
+
+	public static int getFoldersCount(long groupId, long parentFolderId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getFoldersCount(groupId, parentFolderId);
+	}
+
+	public static void getSubfolderIds(
+		java.util.List<java.lang.Long> folderIds, long groupId, long folderId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().getSubfolderIds(folderIds, groupId, folderId);
 	}
 
 	public static boolean hasInheritableLock(long folderId)

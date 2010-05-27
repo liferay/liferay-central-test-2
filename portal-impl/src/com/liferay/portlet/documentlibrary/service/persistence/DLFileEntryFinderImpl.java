@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
@@ -48,12 +49,54 @@ public class DLFileEntryFinderImpl
 	public int countByG_F_S(long groupId, List<Long> folderIds, int status)
 		throws SystemException {
 
+		return doCountByG_F_S(groupId, folderIds, status, false);
+	}
+
+	public int filterCountByG_F_S(long groupId, List<Long> folderIds, int status)
+		throws SystemException {
+
+		return doCountByG_F_S(groupId, folderIds, status, true);
+	}
+
+	public List<DLFileEntry> findByNoAssets() throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_NO_ASSETS);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("DLFileEntry", DLFileEntryImpl.class);
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected int doCountByG_F_S(
+			long groupId, List<Long> folderIds, int status,
+			boolean inlineSQLHelper)
+		throws SystemException {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_G_F_S);
+
+			if (inlineSQLHelper) {
+				sql = InlineSQLHelperUtil.replacePermissionCheck(
+					sql, DLFileEntry.class.getName(), "DLFileEntry.fileEntryId",
+					"DLFileEntry.userId", groupId);
+			}
 
 			sql = StringUtil.replace(
 				sql, "[$FOLDER_ID$]", getFolderIds(folderIds));
@@ -92,28 +135,6 @@ public class DLFileEntryFinderImpl
 			}
 
 			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<DLFileEntry> findByNoAssets() throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_NO_ASSETS);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("DLFileEntry", DLFileEntryImpl.class);
-
-			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
