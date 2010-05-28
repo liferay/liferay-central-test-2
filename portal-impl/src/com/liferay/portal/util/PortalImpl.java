@@ -3705,12 +3705,8 @@ public class PortalImpl implements Portal {
 		}
 
 		if (e instanceof NoSuchImageException) {
-			// Don't allow falling through to the next else if block otherwise
-			// it will output anyway, since NoSuchImageException extends
-			// PortalException.
-
-			if (_imageServletlog.isWarnEnabled()) {
-				_imageServletlog.warn(e, e);
+			if (_logImageServlet.isWarnEnabled()) {
+				_logImageServlet.warn(e, e);
 			}
 		}
 		else if ((e instanceof PortalException) && _log.isInfoEnabled()) {
@@ -4423,9 +4419,10 @@ public class PortalImpl implements Portal {
 
 	private static final Date _UP_TIME = new Date();
 
-	private static Log _imageServletlog = LogFactoryUtil.getLog(
-		ImageServlet.class);
 	private static Log _log = LogFactoryUtil.getLog(PortalImpl.class);
+
+	private static Log _logImageServlet = LogFactoryUtil.getLog(
+		ImageServlet.class);
 
 	private String[] _allSystemCommunityRoles;
 	private String[] _allSystemGroups;
