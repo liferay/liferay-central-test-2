@@ -63,7 +63,7 @@ public class MBThreadFinderImpl
 	public int countByG_C(long groupId, long categoryId)
 		throws SystemException {
 
-		return doCountByG_C(groupId, categoryId, false);
+		return MBThreadUtil.countByG_C(groupId, categoryId);
 	}
 
 	public int countByG_C_S(long groupId, long categoryId, int status)
@@ -81,66 +81,9 @@ public class MBThreadFinderImpl
 	public int filterCountByG_C(long groupId, long categoryId)
 		throws SystemException {
 
-		return doCountByG_C(groupId, categoryId, true);
-	}
-
-	public int filterCountByG_C_S(long groupId, long categoryId, int status)
-		throws SystemException {
-
-		return doCountByG_C_S(groupId, categoryId, status, true);
-	}
-
-	public int filterCountByS_G_U_S(long groupId, long userId, int status)
-		throws SystemException {
-
-		return doCountByS_G_U_S(groupId, userId, status, true);
-	}
-
-	public List<MBThread> filterFindByG_C(
-			long groupId, long categoryId, int start, int end)
-		throws SystemException {
-
-		return doFindByG_C(groupId, categoryId, start, end, true);
-	}
-
-	public List<MBThread> filterFindByG_C_S(
-			long groupId, long categoryId, int status, int start, int end)
-		throws SystemException {
-
-		return doFindByG_C_S(groupId, categoryId, status, start, end, true);
-	}
-
-	public List<MBThread> filterFindByS_G_U_S(
-			long groupId, long userId, int status, int start, int end)
-		throws SystemException {
-
-		return doFindByS_G_U_S(groupId, userId, status, start, end, true);
-	}
-
-	public List<MBThread> findByG_C(
-			long groupId, long categoryId, int start, int end)
-		throws SystemException {
-
-		return doFindByG_C(groupId, categoryId, start, end, false);
-	}
-
-	public List<MBThread> findByG_C_S(
-			long groupId, long categoryId, int status, int start, int end)
-		throws SystemException {
-
-		return doFindByG_C_S(groupId, categoryId, status, start, end, false);
-	}
-
-	public List<MBThread> findByS_G_U_S(
-			long groupId, long userId, int status, int start, int end)
-		throws SystemException {
-
-		return doFindByS_G_U_S(groupId, userId, status, start, end, false);
-	}
-
-	protected int doCountByG_C(
-			long groupId, long categoryId, boolean inlineSQLHelper)
-		throws SystemException {
+		if (InlineSQLHelperUtil.isCommunityAdminOrOwner(groupId)) {
+			return MBThreadUtil.countByG_C(groupId, categoryId);
+		}
 
 		Session session = null;
 
@@ -149,11 +92,9 @@ public class MBThreadFinderImpl
 
 			String sql = CustomSQLUtil.get(COUNT_BY_G_C);
 
-			if (inlineSQLHelper) {
-				sql = InlineSQLHelperUtil.replacePermissionCheck(
-					sql, MBMessage.class.getName(), "MBMessage.messageId",
-					"MBMessage.userId", groupId);
-			}
+			sql = InlineSQLHelperUtil.replacePermissionCheck(
+				sql, MBMessage.class.getName(), "MBMessage.messageId",
+				"MBMessage.userId", groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -182,6 +123,91 @@ public class MBThreadFinderImpl
 		finally {
 			closeSession(session);
 		}
+	}
+
+	public int filterCountByG_C_S(long groupId, long categoryId, int status)
+		throws SystemException {
+
+		return doCountByG_C_S(groupId, categoryId, status, true);
+	}
+
+	public int filterCountByS_G_U_S(long groupId, long userId, int status)
+		throws SystemException {
+
+		return doCountByS_G_U_S(groupId, userId, status, true);
+	}
+
+	public List<MBThread> filterFindByG_C(
+			long groupId, long categoryId, int start, int end)
+		throws SystemException {
+
+		if (InlineSQLHelperUtil.isCommunityAdminOrOwner(groupId)) {
+			return MBThreadUtil.findByG_C(groupId, categoryId, start, end);
+		}
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_G_C);
+
+			sql = InlineSQLHelperUtil.replacePermissionCheck(
+				sql, MBMessage.class.getName(), "MBMessage.messageId",
+				"MBMessage.userId", groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("MBThread", MBThreadImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(categoryId);
+
+			return (List<MBThread>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<MBThread> filterFindByG_C_S(
+			long groupId, long categoryId, int status, int start, int end)
+		throws SystemException {
+
+		return doFindByG_C_S(groupId, categoryId, status, start, end, true);
+	}
+
+	public List<MBThread> filterFindByS_G_U_S(
+			long groupId, long userId, int status, int start, int end)
+		throws SystemException {
+
+		return doFindByS_G_U_S(groupId, userId, status, start, end, true);
+	}
+
+	public List<MBThread> findByG_C(
+			long groupId, long categoryId, int start, int end)
+		throws SystemException {
+
+		return MBThreadUtil.findByG_C(groupId, categoryId, start, end);
+	}
+
+	public List<MBThread> findByG_C_S(
+			long groupId, long categoryId, int status, int start, int end)
+		throws SystemException {
+
+		return doFindByG_C_S(groupId, categoryId, status, start, end, false);
+	}
+
+	public List<MBThread> findByS_G_U_S(
+			long groupId, long userId, int status, int start, int end)
+		throws SystemException {
+
+		return doFindByS_G_U_S(groupId, userId, status, start, end, false);
 	}
 
 	protected int doCountByG_C_S(
@@ -293,43 +319,6 @@ public class MBThreadFinderImpl
 			}
 
 			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected List<MBThread> doFindByG_C(
-			long groupId, long categoryId, int start, int end,
-			boolean inlineSQLHelper)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_G_C);
-
-			if (inlineSQLHelper) {
-				sql = InlineSQLHelperUtil.replacePermissionCheck(
-					sql, MBMessage.class.getName(), "MBMessage.messageId",
-					"MBMessage.userId", groupId);
-			}
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("MBThread", MBThreadImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-			qPos.add(categoryId);
-
-			return (List<MBThread>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
