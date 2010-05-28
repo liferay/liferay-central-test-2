@@ -2159,6 +2159,24 @@ public class ServiceBuilder {
 			return;
 		}
 
+		if (Validator.isNotNull(_pluginName)) {
+			boolean hasRemoteService = false;
+
+			for (int i = 0; i < _ejbList.size(); i++) {
+				Entity entity = _ejbList.get(i);
+
+				if (entity.hasRemoteService()) {
+					hasRemoteService = true;
+
+					break;
+				}
+			}
+
+			if (!hasRemoteService) {
+				return;
+			}
+		}
+
 		StringBuilder sb = new StringBuilder();
 
 		if (_ejbList.size() > 0) {
@@ -2206,11 +2224,6 @@ public class ServiceBuilder {
 
 					sb.append("\n\n");
 					sb.append(_processTemplate(_tplJsonJsMethod, context));
-				}
-			}
-			else {
-				if (Validator.isNotNull(_pluginName)) {
-					return;
 				}
 			}
 		}
