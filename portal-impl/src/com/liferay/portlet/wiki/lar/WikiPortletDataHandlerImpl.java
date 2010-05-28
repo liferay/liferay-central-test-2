@@ -405,7 +405,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 				importPage(context, nodePKs, pageEl, page);
 			}
 
-			for (Long nodeId : nodePKs.values()) {
+			for (long nodeId : nodePKs.values()) {
 				WikiCacheUtil.clearCache(nodeId);
 			}
 
