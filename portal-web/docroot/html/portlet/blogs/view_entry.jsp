@@ -48,6 +48,10 @@ request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
 	<portlet:param name="struts_action" value="/blogs/edit_entry" />
 </portlet:actionURL>
 
+<div align="right">
+	&laquo; <a href="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"><liferay-ui:message key="back" /></a>
+</div>
+
 <aui:form action="<%= editEntryURL %>" method="post" name="fm1" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveEntry();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="entryId" type="hidden" value="<%= String.valueOf(entryId) %>" />
