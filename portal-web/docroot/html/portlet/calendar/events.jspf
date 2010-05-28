@@ -23,6 +23,7 @@ headerNames.add("date");
 headerNames.add("time");
 headerNames.add("title");
 headerNames.add("type");
+headerNames.add("details");
 headerNames.add(StringPool.BLANK);
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, iteratorURL, headerNames, null);
@@ -83,6 +84,10 @@ for (int i = 0; i < results.size(); i++) {
 
 	row.addText(event.getTitle(), rowURL);
 	row.addText(LanguageUtil.get(pageContext, HtmlUtil.unescape(event.getType())), rowURL);
+
+	// Details
+
+	row.addJSP("left", SearchEntry.DEFAULT_VALIGN, "/html/portlet/calendar/view_event_recurrence.jsp");
 
 	// Action
 
