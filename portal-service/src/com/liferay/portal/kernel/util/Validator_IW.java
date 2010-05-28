@@ -144,6 +144,10 @@ public class Validator_IW {
 		return Validator.isUrl(url);
 	}
 
+	public boolean isVariableName(java.lang.String variableName) {
+		return Validator.isVariableName(variableName);
+	}
+
 	public boolean isVariableTerm(java.lang.String s) {
 		return Validator.isVariableTerm(s);
 	}

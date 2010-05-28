@@ -58,6 +58,7 @@
 		</operation>
 		<operation xmlns:operNS="urn:http.service.asset.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getEntriesRSS" qname="operNS:getEntriesRSS" returnQName="getEntriesRSSReturn" returnType="rtns:string" soapAction="">
 			<parameter xmlns:tns="http://persistence.service.asset.portlet.liferay.com" qname="entryQuery" type="tns:AssetEntryQuery"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="type" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="version" type="tns:double"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="displayStyle" type="tns:string"></parameter>
