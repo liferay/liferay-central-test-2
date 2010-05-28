@@ -111,14 +111,14 @@ userGroupRoles.addAll(organizationRoles);
 
 			<liferay-util:param name="className" value="<%= EnterpriseAdminUtil.getCssClassName(groupRole) %>"  />
 			<liferay-util:param name="classHoverName" value="<%= EnterpriseAdminUtil.getCssClassName(groupRole) %>" />
-	
+
 			<liferay-ui:search-container-column-text
 				name="group"
 				value="<%= HtmlUtil.escape(group.getDescriptiveName()) %>"
 			/>
 			<liferay-ui:search-container-column-text
 				name="title"
-				value="<%= HtmlUtil.escape(ListUtil.toString(groupRoles, "name")) %>"
+				value='<%= HtmlUtil.escape(ListUtil.toString(groupRoles, "name")) %>'
 			/>
 
 		<%
