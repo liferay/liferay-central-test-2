@@ -2208,6 +2208,11 @@ public class ServiceBuilder {
 					sb.append(_processTemplate(_tplJsonJsMethod, context));
 				}
 			}
+			else {
+				if (Validator.isNotNull(_pluginName)) {
+					return;
+				}
+			}
 		}
 
 		File jsonFile = new File(_jsonFileName);
