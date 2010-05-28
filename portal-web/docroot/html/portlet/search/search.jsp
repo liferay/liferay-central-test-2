@@ -30,14 +30,6 @@ long groupId = ParamUtil.getLong(request, "groupId");
 
 Group group = themeDisplay.getScopeGroup();
 
-String siteName = company.getName();
-
-LayoutSet layoutSet = layout.getLayoutSet();
-
-if (Validator.isNotNull(layoutSet.getVirtualHost())) {
-	siteName = layoutSet.getGroup().getName();
-}
-
 String keywords = ParamUtil.getString(request, "keywords");
 
 String format = ParamUtil.getString(request, "format");
@@ -111,7 +103,7 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 	</aui:fieldset>
 
 	<aui:button-row>
-		<aui:button onClick='<%= renderResponse.getNamespace() + "addSearchProvider();" %>' type="button" value='<%= LanguageUtil.format(pageContext, "add-x-as-a-search-provider", siteName, false) %>' />
+		<aui:button onClick='<%= renderResponse.getNamespace() + "addSearchProvider();" %>' type="button" value='<%= LanguageUtil.format(pageContext, "add-x-as-a-search-provider", company.getName(), false) %>' />
 	</aui:button-row>
 
 	<div class="search-msg">
@@ -363,10 +355,6 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 		</div>
 	</c:if>
 </aui:form>
-
-<liferay-util:html-top>
-	<link rel="search" type="application/opensearchdescription+xml" title="<%= LanguageUtil.format(pageContext, "x-search", siteName, false) %>" href="<%= themeDisplay.getPortalURL() %><%= PortalUtil.getPathMain() %>/search/open_search_description.xml?p_l_id=<%= themeDisplay.getPlid() %>&groupId=<%= groupId %>">
-</liferay-util:html-top>
 
 <aui:script>
 	function <portlet:namespace />addSearchProvider() {

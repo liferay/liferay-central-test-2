@@ -19,7 +19,7 @@
 <%
 long groupId = ParamUtil.getLong(request, "groupId");
 
-PortletURLImpl searchURL = new PortletURLImpl(request, PortletKeys.SEARCH, plid, PortletRequest.RENDER_PHASE);
+PortletURLImpl searchURL = new PortletURLImpl(request, PortletKeys.SEARCH, themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
 searchURL.setEscapeXml(true);
 
@@ -27,25 +27,13 @@ searchURL.setParameter("struts_action", "/search/search");
 searchURL.setParameter("groupId", String.valueOf(groupId));
 
 response.setContentType(ContentTypes.TEXT_XML_UTF8);
-
-String siteName = company.getName();
-
-if (plid > 0) {
-	LayoutSet layoutSet = layout.getLayoutSet();
-
-	if (Validator.isNotNull(layoutSet.getVirtualHost())) {
-		siteName = layoutSet.getGroup().getName();
-	}
-}
 %>
 
 <?xml version="1.0" encoding="UTF-8"?>
 
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
-	<ShortName><%= LanguageUtil.format(pageContext, "x-search", siteName, false) %></ShortName>
-	<Description><%= LanguageUtil.format(pageContext, "x-search-provider", siteName, false) %></Description>
-	<InputEncoding>UTF-8</InputEncoding>
-	<Image width="16" height="16"><%= themeDisplay.getPortalURL() %><%= themeDisplay.getPathThemeImages() %>/<%= PropsValues.THEME_SHORTCUT_ICON %></Image>
+	<ShortName><%= LanguageUtil.format(pageContext, "x-search", company.getName(), false) %></ShortName>
+	<Description><%= LanguageUtil.format(pageContext, "x-search-provider", company.getName(), false) %></Description>
 	<Url type="text/html" template="<%= searchURL.toString() %>&amp;keywords={searchTerms}" />
 	<Url type="application/atom+xml" template="<%= themeDisplay.getPortalURL() %><%= PortalUtil.getPathMain() %>/search/open_search?keywords={searchTerms}&amp;p={startPage?}&amp;c={count?}&amp;format=atom" />
 	<Url type="application/rss+xml" template="<%= themeDisplay.getPortalURL() %><%= PortalUtil.getPathMain() %>/search/open_search?keywords={searchTerms}&amp;p={startPage?}&amp;c={count?}&amp;format=rss" />
