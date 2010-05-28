@@ -37,6 +37,19 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 		}
 	}
 
+	public boolean isCommunityAdminOrOwner(long groupId) {
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
+		if (permissionChecker.isCommunityAdmin(groupId) ||
+			permissionChecker.isCommunityOwner(groupId)) {
+
+			return true;
+		}
+
+		return false;
+	}
+
 	public boolean isEnabled() {
 		return _enabled;
 	}
@@ -76,12 +89,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			return sql;
 		}
 
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
-		if (permissionChecker.isCommunityAdmin(groupId) ||
-			permissionChecker.isCommunityOwner(groupId)) {
-
+		if (isCommunityAdminOrOwner(groupId)) {
 			return sql;
 		}
 

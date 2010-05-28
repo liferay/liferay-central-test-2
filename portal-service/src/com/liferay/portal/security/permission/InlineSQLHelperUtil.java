@@ -21,6 +21,10 @@ package com.liferay.portal.security.permission;
  */
 public class InlineSQLHelperUtil {
 
+	public static boolean isCommunityAdminOrOwner(long groupId) {
+		return getInlineSQLHelper().isCommunityAdminOrOwner(groupId);
+	}
+
 	public static boolean isEnabled() {
 		return getInlineSQLHelper().isEnabled();
 	}

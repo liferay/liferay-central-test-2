@@ -21,6 +21,8 @@ package com.liferay.portal.security.permission;
  */
 public interface InlineSQLHelper {
 
+	public boolean isCommunityAdminOrOwner(long groupId);
+
 	public boolean isEnabled();
 
 	public String replacePermissionCheck(
