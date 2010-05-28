@@ -32,6 +32,8 @@ import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
+import com.liferay.portlet.wiki.util.WikiCacheThreadLocal;
+import com.liferay.portlet.wiki.util.WikiCacheUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -147,6 +149,8 @@ public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletPreferences preferences, String data)
 		throws PortletDataException {
 
+		WikiCacheThreadLocal.setClearCache(false);
+
 		try {
 			context.importPermissions(
 				"com.liferay.portlet.wiki", context.getSourceGroupId(),
@@ -192,6 +196,10 @@ public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 					context, nodePKs, pageEl, page);
 			}
 
+			for (Long nodeId : nodePKs.values()) {
+				WikiCacheUtil.clearCache(nodeId);
+			}
+
 			long nodeId = GetterUtil.getLong(
 				preferences.getValue("node-id", StringPool.BLANK));
 
@@ -205,6 +213,9 @@ public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
+		}
+		finally {
+			WikiCacheThreadLocal.setClearCache(true);
 		}
 	}
 

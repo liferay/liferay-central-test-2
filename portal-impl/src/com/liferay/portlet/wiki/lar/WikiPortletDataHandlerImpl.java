@@ -47,6 +47,8 @@ import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
+import com.liferay.portlet.wiki.util.WikiCacheThreadLocal;
+import com.liferay.portlet.wiki.util.WikiCacheUtil;
 import com.liferay.portlet.wiki.util.comparator.PageCreateDateComparator;
 
 import java.util.ArrayList;
@@ -361,6 +363,8 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletPreferences preferences, String data)
 		throws PortletDataException {
 
+		WikiCacheThreadLocal.setClearCache(false);
+
 		try {
 			context.importPermissions(
 				"com.liferay.portlet.wiki", context.getSourceGroupId(),
@@ -401,10 +405,17 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 				importPage(context, nodePKs, pageEl, page);
 			}
 
+			for (Long nodeId : nodePKs.values()) {
+				WikiCacheUtil.clearCache(nodeId);
+			}
+
 			return null;
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
+		}
+		finally {
+			WikiCacheThreadLocal.setClearCache(true);
 		}
 	}
 
