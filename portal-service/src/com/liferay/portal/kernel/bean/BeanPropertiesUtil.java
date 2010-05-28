@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.bean;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * <a href="BeanPropertiesUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -99,6 +101,14 @@ public class BeanPropertiesUtil {
 		Object bean, String param, String defaultValue) {
 
 		return getBeanProperties().getString(bean, param, defaultValue);
+	}
+
+	public static void setProperties(Object bean, HttpServletRequest request) {
+		getBeanProperties().setProperties(bean, request);
+	}
+
+	public static void setProperty(Object bean, String param, Object value) {
+		getBeanProperties().setProperty(bean, param, value);
 	}
 
 	public void setBeanProperties(BeanProperties beanProperties) {

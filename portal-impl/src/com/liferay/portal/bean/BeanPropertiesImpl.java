@@ -19,6 +19,12 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 
+import java.util.Enumeration;
+
+import javax.servlet.http.HttpServletRequest;
+
+import jodd.bean.BeanUtil;
+
 import org.apache.commons.beanutils.PropertyUtils;
 
 import org.springframework.beans.BeanUtils;
@@ -217,6 +223,18 @@ public class BeanPropertiesImpl implements BeanProperties {
 		}
 		else {
 			return beanValue;
+		}
+	}
+
+	public void setProperties(Object bean, HttpServletRequest request) {
+		Enumeration<String> enu = request.getParameterNames();
+
+		while (enu.hasMoreElements()) {
+			String name = enu.nextElement();
+
+			String value = request.getParameter(name);
+
+			BeanUtil.setPropertyForcedSilent(bean, name, value);
 		}
 	}
 
