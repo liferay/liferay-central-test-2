@@ -250,44 +250,44 @@ int tabIndex = 1;
 
 		A.each(
 			rows,
-			function(row, i) {
-				var elDepth = row.one('input[dataName="depth"]');
-				var elMetadataXML = row.one('input[dataName="metadata_xml"]');
-				var elName = row.one('input[dataName="name"]');
-				var elType = row.one('select[dataName="type"]');
-				var elIndexType = row.one('select[dataName="index_type"]');
-				var elRepeatable = row.one('input[dataName="repeatable"]');
+			function(item, index, collection) {
+				var elDepth = item.one('input[dataName="depth"]');
+				var elMetadataXML = item.one('input[dataName="metadata_xml"]');
+				var elName = item.one('input[dataName="name"]');
+				var elType = item.one('select[dataName="type"]');
+				var elIndexType = item.one('select[dataName="index_type"]');
+				var elRepeatable = item.one('input[dataName="repeatable"]');
 
 				if ((elDepth != null) && (elName != null) && (elType != null)) {
 					var elDepthValue = elDepth.val();
 					var elNameValue = encodeURIComponent(elName.val());
 					var elTypeValue = encodeURIComponent(elType.val());
-					var elIndexTypeValue = (elIndexType != null) ? elIndexType.val() : "";
+					var elIndexTypeValue = (elIndexType != null) ? elIndexType.val() : '';
 					var elRepeatableValue = (elRepeatable != null) ? elRepeatable.get('checked') : false;
 
-					if ((cmd == "add") || ((cmd == "remove") && (elCount != i))) {
+					if ((cmd == 'add') || ((cmd == 'remove') && (elCount != index))) {
 						for (var j = 0; j <= elDepthValue; j++) {
 							xsd += xmlIndent;
 						}
 
-						xsd += "<dynamic-element name='" + elNameValue + "' type='" + elTypeValue + "' index-type='" + elIndexTypeValue + "' repeatable='" + elRepeatableValue + "'>";
+						xsd += '<dynamic-element name="' + elNameValue + '" type="' + elTypeValue + '" index-type="' + elIndexTypeValue + '" repeatable="' + elRepeatableValue + '">';
 
-						if ((cmd == "add") && (elCount == i)) {
-							xsd += "<dynamic-element name='' type='' repeatable='false'></dynamic-element>\n";
+						if ((cmd == 'add') && (elCount == index)) {
+							xsd += '<dynamic-element name="" type="" repeatable="false"></dynamic-element>\n';
 						}
 						else {
 							if (elMetadataXML.val()) {
 								var metadataXML = decodeURIComponent(elMetadataXML.val()).replace(/[+]/g, ' ');
 
-								xsd += "\n";
+								xsd += '\n';
 								xsd += xmlIndent;
 								xsd += metadataXML;
-								xsd += "\n";
+								xsd += '\n';
 							}
 						}
 
 						var nextElDepth = null;
-						var nextRow = rows.item(i + 1);
+						var nextRow = rows.item(index + 1);
 
 						if (nextRow) {
 							nextElDepth = nextRow.one('input[dataName="depth"]');
@@ -301,7 +301,7 @@ int tabIndex = 1;
 									xsd += xmlIndent;
 								}
 
-								xsd += "</dynamic-element>\n";
+								xsd += '</dynamic-element>\n';
 							}
 							else if (elDepthValue > nextElDepthValue) {
 								var depthDiff = elDepthValue - nextElDepthValue;
@@ -313,11 +313,11 @@ int tabIndex = 1;
 										}
 									}
 
-									xsd += "</dynamic-element>\n";
+									xsd += '</dynamic-element>\n';
 								}
 							}
 							else {
-								xsd += "\n";
+								xsd += '\n';
 							}
 						}
 						else {
@@ -328,13 +328,13 @@ int tabIndex = 1;
 									}
 								}
 
-								xsd += "</dynamic-element>\n";
+								xsd += '</dynamic-element>\n';
 							}
 						}
 					}
-					else if ((cmd == "remove") && (elCount == i)) {
+					else if ((cmd == 'remove') && (elCount == index)) {
 						var nextElDepth = null;
-						var nextRow = rows.item(i + 1);
+						var nextRow = rows.item(index + 1);
 
 						if (nextRow) {
 							nextElDepth = nextRow.one('input[dataName="depth"]');
@@ -347,13 +347,13 @@ int tabIndex = 1;
 								var depthDiff = elDepthValue - nextElDepthValue;
 
 								for (var j = 0; j < depthDiff; j++) {
-									xsd += "</dynamic-element>\n";
+									xsd += '</dynamic-element>\n';
 								}
 							}
 						}
 						else {
 							for (var j = 0; j < elDepthValue; j++) {
-								xsd += "</dynamic-element>\n";
+								xsd += '</dynamic-element>\n';
 							}
 						}
 					}
@@ -361,11 +361,11 @@ int tabIndex = 1;
 			}
 		);
 
-		if ((cmd == "add") && (elCount == -1)) {
-			xsd += "<dynamic-element name='' type=''></dynamic-element>\n"
+		if ((cmd == 'add') && (elCount == -1)) {
+			xsd += '<dynamic-element name="" type=""></dynamic-element>\n';
 		}
 
-		xsd += "</root>";
+		xsd += '</root>';
 
 		return xsd;
 	}
