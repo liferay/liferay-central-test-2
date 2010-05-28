@@ -32,6 +32,7 @@ public class LDAPTests extends BaseTests {
 
 		testSuite.addTestSuite(AssertNoLDAPUsersTest.class);
 		testSuite.addTestSuite(EnableLDAPTest.class);
+		testSuite.addTestSuite(AddLDAPServerTest.class);
 		testSuite.addTestSuite(AssertLDAPConnectionTest.class);
 		testSuite.addTestSuite(AssertLDAPUsersTest.class);
 		testSuite.addTestSuite(LogoutTest.class);

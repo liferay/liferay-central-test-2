@@ -28,22 +28,19 @@ public class AssertLDAPUsersPresentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Users"));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("toggle_id_enterprise_admin_user_searchkeywords",
-			RuntimeVariables.replace("jane"));
+		selenium.type("//span/input", RuntimeVariables.replace("jane"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Jane"));
 		assertTrue(selenium.isTextPresent("Smith"));
 		assertTrue(selenium.isTextPresent("janesmith"));
-		selenium.type("toggle_id_enterprise_admin_user_searchkeywords",
-			RuntimeVariables.replace("luke"));
+		selenium.type("//span/input", RuntimeVariables.replace("luke"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Luke"));
 		assertTrue(selenium.isTextPresent("Skywalker"));
 		assertTrue(selenium.isTextPresent("lukeskywalker"));
-		selenium.type("toggle_id_enterprise_admin_user_searchkeywords",
-			RuntimeVariables.replace("martin"));
+		selenium.type("//span/input", RuntimeVariables.replace("martin"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Martin"));

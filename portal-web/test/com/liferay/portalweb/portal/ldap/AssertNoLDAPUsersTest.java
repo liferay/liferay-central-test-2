@@ -29,18 +29,15 @@ public class AssertNoLDAPUsersTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Users"));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("toggle_id_enterprise_admin_user_searchkeywords",
-			RuntimeVariables.replace("jane"));
+		selenium.type("//span/input", RuntimeVariables.replace("jane"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("No users were found."));
-		selenium.type("toggle_id_enterprise_admin_user_searchkeywords",
-			RuntimeVariables.replace("luke"));
+		selenium.type("//span/input", RuntimeVariables.replace("luke"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("No users were found."));
-		selenium.type("toggle_id_enterprise_admin_user_searchkeywords",
-			RuntimeVariables.replace("martin"));
+		selenium.type("//span/input", RuntimeVariables.replace("martin"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("No users were found."));

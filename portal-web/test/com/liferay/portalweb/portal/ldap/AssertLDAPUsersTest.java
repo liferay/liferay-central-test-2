@@ -65,6 +65,24 @@ public class AssertLDAPUsersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//span[3]/a/img")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("//span[3]/a/img", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Test LDAP Users']");
 
 		for (int second = 0;; second++) {
@@ -91,8 +109,25 @@ public class AssertLDAPUsersTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent("lukeskywalker@liferay.com"));
 		assertTrue(selenium.isTextPresent("martinluther@liferay.com"));
 		System.out.println("LDAP Users have been detected.");
-		selenium.click("link=Close");
-		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//button")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//button");
+		selenium.click(RuntimeVariables.replace("link=Control Panel"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

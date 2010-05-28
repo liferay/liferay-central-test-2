@@ -31,8 +31,5 @@ public class LoginAdminTest extends BaseTestCase {
 		selenium.click("_58_rememberMeCheckbox");
 		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
-		selenium.waitForPageToLoad("30000");
 	}
 }

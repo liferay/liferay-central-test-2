@@ -65,6 +65,24 @@ public class AssertLDAPConnectionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//span[3]/a/img")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("//span[3]/a/img", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Test LDAP Connection']");
 		Thread.sleep(5000);
 
@@ -88,6 +106,23 @@ public class AssertLDAPConnectionTest extends BaseTestCase {
 				"Liferay has successfully connected to the LDAP server."));
 		System.out.println(
 			"Liferay has successfully connected to the LDAP server.");
-		selenium.click("link=Close");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//button")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//button");
 	}
 }
