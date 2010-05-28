@@ -51,9 +51,8 @@ public class RateCategoryMessageTest extends BaseTestCase {
 		selenium.clickAt("link=T\u00e9st M\u00e9ssag\u00e9",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("0 (0 Votes)"),
-			selenium.getText(
-				"//div[@class='taglib-ratings thumbs']/div/div/div"));
+		assertTrue(selenium.isPartialText(
+				"//div[@class='taglib-ratings thumbs']/div/div/div", "0 Votes"));
 		assertTrue(selenium.isElementPresent(
 				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-up']"));
 		assertTrue(selenium.isElementPresent(

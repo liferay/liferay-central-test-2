@@ -52,23 +52,6 @@ public class AddCategoryMessageQuestionTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Post New Thread']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//div[@class='lfr-toolbar']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_19_subject",
 			RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9 Question"));
 		selenium.type("_19_textArea",
@@ -77,7 +60,13 @@ public class AddCategoryMessageQuestionTest extends BaseTestCase {
 		assertFalse(selenium.isChecked("_19_questionCheckbox"));
 		selenium.clickAt("_19_questionCheckbox", RuntimeVariables.replace(""));
 		assertTrue(selenium.isChecked("_19_questionCheckbox"));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace(
+				"T\u00e9st M\u00e9ssag\u00e9 Question"),
+			selenium.getText("//td[1]/a"));
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"T\u00e9st M\u00e9ssag\u00e9 Question"),

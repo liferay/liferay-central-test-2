@@ -51,34 +51,24 @@ public class AddCategoryMessageReply1Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//li[1]/span/a/span", RuntimeVariables.replace(""));
+		selenium.clickAt("//li[2]/span/a/span", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//div[@class='lfr-toolbar']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace(
 				"This is a t\u00e9st1 r\u00e9ply1 m\u00e9ssag\u00e91."));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("RE: T\u00e9st M\u00e9ssag\u00e9"),
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
+		assertEquals(RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9"),
 			selenium.getText("//form/div[2]"));
 		assertEquals(RuntimeVariables.replace("RE: T\u00e9st M\u00e9ssag\u00e9"),
 			selenium.getText("//a/strong"));
+		assertEquals(RuntimeVariables.replace("RE: T\u00e9st M\u00e9ssag\u00e9"),
+			selenium.getText(
+				"//div[5]/table/tbody/tr[1]/td[2]/div[1]/div/a/strong"));
 		assertEquals(RuntimeVariables.replace(
 				"This is a t\u00e9st1 r\u00e9ply1 m\u00e9ssag\u00e91."),
 			selenium.getText("//div[5]/table/tbody/tr[1]/td[2]/div[2]"));

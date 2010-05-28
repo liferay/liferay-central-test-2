@@ -66,7 +66,8 @@ public class MarkAsAnswerCategoryMessageQuestionReplyTest extends BaseTestCase {
 			}
 
 			try {
-				if (!selenium.isTextPresent("Mark as an Answer")) {
+				if (!selenium.isVisible(
+							"//div[5]/table/tbody/tr[1]/td[2]/div[1]/ul/li[1]/span/a/span")) {
 					break;
 				}
 			}
@@ -76,7 +77,8 @@ public class MarkAsAnswerCategoryMessageQuestionReplyTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertFalse(selenium.isTextPresent("Mark as an Answer"));
+		assertFalse(selenium.isVisible(
+				"//div[5]/table/tbody/tr[1]/td[2]/div[1]/ul/li[1]/span/a/span"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {

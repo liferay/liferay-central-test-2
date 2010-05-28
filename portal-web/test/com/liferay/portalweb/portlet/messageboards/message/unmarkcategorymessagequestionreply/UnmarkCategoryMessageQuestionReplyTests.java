@@ -39,7 +39,6 @@ public class UnmarkCategoryMessageQuestionReplyTests extends BaseTests {
 			MarkAsAnswerCategoryMessageQuestionReplyTest.class);
 		testSuite.addTestSuite(UnmarkCategoryMessageQuestionReplyTest.class);
 		testSuite.addTestSuite(TearDownMBCategoryTest.class);
-		testSuite.addTestSuite(TearDownMBMessageTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;

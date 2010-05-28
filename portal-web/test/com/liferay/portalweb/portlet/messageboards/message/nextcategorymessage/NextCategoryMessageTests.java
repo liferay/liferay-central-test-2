@@ -37,7 +37,6 @@ public class NextCategoryMessageTests extends BaseTests {
 		testSuite.addTestSuite(AddCategoryMessage3Test.class);
 		testSuite.addTestSuite(NextCategoryMessageTest.class);
 		testSuite.addTestSuite(TearDownMBCategoryTest.class);
-		testSuite.addTestSuite(TearDownMBMessageTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;

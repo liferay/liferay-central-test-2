@@ -66,11 +66,11 @@ public class SplitThreadCategoryMessageReplyBackButtonTest extends BaseTestCase 
 		selenium.clickAt("//div[5]/table/tbody/tr[2]/td/ul/li[4]/span/a/span",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='OK']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.keyPress("//div[1]/span", RuntimeVariables.replace("\\8"));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='OK']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"You have entered invalid data. Please try again."),

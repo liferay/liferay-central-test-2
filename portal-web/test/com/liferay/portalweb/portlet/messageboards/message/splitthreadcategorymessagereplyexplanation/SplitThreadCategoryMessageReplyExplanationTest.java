@@ -73,7 +73,7 @@ public class SplitThreadCategoryMessageReplyExplanationTest extends BaseTestCase
 			RuntimeVariables.replace("Thread Split Explanation"));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("This is a thread split explanation."));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='OK']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.open("/web/guest/home/");
 

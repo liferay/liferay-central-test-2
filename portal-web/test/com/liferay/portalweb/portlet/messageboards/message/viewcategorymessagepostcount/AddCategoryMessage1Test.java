@@ -51,28 +51,16 @@ public class AddCategoryMessage1Test extends BaseTestCase {
 		selenium.clickAt("//input[@value='Post New Thread']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//div[@class='lfr-toolbar']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_19_subject",
 			RuntimeVariables.replace("T\u00e9st1 M\u00e9ssag\u00e91"));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("This is a t\u00e9st1 m\u00e9ssag\u00e91."));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("T\u00e9st1 M\u00e9ssag\u00e91"),
+			selenium.getText("//td[1]/a"));
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("T\u00e9st1 M\u00e9ssag\u00e91"),
 			selenium.getText("//form/div[2]"));

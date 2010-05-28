@@ -38,7 +38,6 @@ public class MoveCategoryMessageToCategoryExplanationTests extends BaseTests {
 		testSuite.addTestSuite(
 			MoveCategoryMessageToCategoryExplanationTest.class);
 		testSuite.addTestSuite(TearDownMBCategoryTest.class);
-		testSuite.addTestSuite(TearDownMBMessageTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;

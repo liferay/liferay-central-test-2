@@ -37,7 +37,6 @@ public class AddCategoryMessageMultipleTests extends BaseTests {
 		testSuite.addTestSuite(AddCategoryMessage2Test.class);
 		testSuite.addTestSuite(AddCategoryMessage3Test.class);
 		testSuite.addTestSuite(TearDownMBCategoryTest.class);
-		testSuite.addTestSuite(TearDownMBMessageTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;

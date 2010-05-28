@@ -36,7 +36,6 @@ public class EditCategoryMessageSubjectTests extends BaseTests {
 		testSuite.addTestSuite(AddCategoryMessageTest.class);
 		testSuite.addTestSuite(EditCategoryMessageSubjectTest.class);
 		testSuite.addTestSuite(TearDownMBCategoryTest.class);
-		testSuite.addTestSuite(TearDownMBMessageTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;

@@ -55,8 +55,9 @@ public class UnmarkCategoryMessageQuestionReplyTest extends BaseTestCase {
 		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Unmark"),
-			selenium.getText("//td[2]/div[1]/div/div[2]/a"));
-		selenium.clickAt("//td[2]/div[1]/div/div[2]/a",
+			selenium.getText(
+				"//div[5]/table/tbody/tr[1]/td[2]/div[1]/div/div[2]/a"));
+		selenium.clickAt("//div[5]/table/tbody/tr[1]/td[2]/div[1]/div/div[2]/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -65,7 +66,8 @@ public class UnmarkCategoryMessageQuestionReplyTest extends BaseTestCase {
 			}
 
 			try {
-				if (!selenium.isTextPresent("Unmark")) {
+				if (!selenium.isVisible(
+							"//div[5]/table/tbody/tr[1]/td[2]/div[1]/div/div[2]/a")) {
 					break;
 				}
 			}
@@ -75,7 +77,8 @@ public class UnmarkCategoryMessageQuestionReplyTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertFalse(selenium.isTextPresent("Unmark"));
+		assertFalse(selenium.isVisible(
+				"//div[5]/table/tbody/tr[1]/td[2]/div[1]/div/div[2]/a"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {

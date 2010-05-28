@@ -38,7 +38,6 @@ public class SplitThreadCategoryMessageReplyBackButtonTests extends BaseTests {
 		testSuite.addTestSuite(
 			SplitThreadCategoryMessageReplyBackButtonTest.class);
 		testSuite.addTestSuite(TearDownMBCategoryTest.class);
-		testSuite.addTestSuite(TearDownMBMessageTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;

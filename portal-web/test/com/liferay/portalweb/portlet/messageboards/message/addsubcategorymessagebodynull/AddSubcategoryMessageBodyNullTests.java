@@ -36,7 +36,6 @@ public class AddSubcategoryMessageBodyNullTests extends BaseTests {
 		testSuite.addTestSuite(AddSubcategoryTest.class);
 		testSuite.addTestSuite(AddSubcategoryMessageBodyNullTest.class);
 		testSuite.addTestSuite(TearDownMBCategoryTest.class);
-		testSuite.addTestSuite(TearDownMBMessageTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;

@@ -185,7 +185,8 @@ public class MoveCategoryMessageToCategoryExplanationTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("Move Thread Explanation Post"),
 			selenium.getText("//tr[2]/td[1]/a"));
 		assertEquals(RuntimeVariables.replace("Move Thread Explanation Post"),
-			selenium.getText("//div[5]/table/tbody/tr[1]/td[2]/div[1]/div/a/b"));
+			selenium.getText(
+				"//div[5]/table/tbody/tr[1]/td[2]/div[1]/div/a/strong"));
 		assertEquals(RuntimeVariables.replace(
 				"This is a move thread explanation post."),
 			selenium.getText("//div[5]/table/tbody/tr[1]/td[2]/div[2]"));

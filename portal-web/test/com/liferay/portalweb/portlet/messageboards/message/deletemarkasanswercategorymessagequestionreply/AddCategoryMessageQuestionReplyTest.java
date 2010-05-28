@@ -51,31 +51,15 @@ public class AddCategoryMessageQuestionReplyTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//li[1]/span/a/span", RuntimeVariables.replace(""));
+		selenium.clickAt("//li[2]/span/a/span", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//div[@class='lfr-toolbar']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("This is an answer."));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
-				"RE: T\u00e9st M\u00e9ssag\u00e9 Question"),
+				"T\u00e9st M\u00e9ssag\u00e9 Question"),
 			selenium.getText("//form/div[2]"));
 		assertEquals(RuntimeVariables.replace(
 				"RE: T\u00e9st M\u00e9ssag\u00e9 Question"),
