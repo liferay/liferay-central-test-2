@@ -87,4 +87,4 @@ sb.append(HttpUtil.encodeURL(cssClasses));
 String editorURL = sb.toString();
 %>
 
-<iframe <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> height="<%= height %>" id="<%= name %>" name="<%= name %>" src="<%= editorURL %>" style="border: none;" width="<%= width %>"></iframe>
+<iframe <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> <%= BrowserSnifferUtil.isIe(request) && (BrowserSnifferUtil.getMajorVersion(request) <= 8) ? "frameborder=\"0\"" : StringPool.BLANK  %> height="<%= height %>" id="<%= name %>" name="<%= name %>" src="<%= editorURL %>" style="border: none;" width="<%= width %>"></iframe>
