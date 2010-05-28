@@ -15,6 +15,7 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.NoSuchCompanyException;
+import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.NoSuchUserException;
@@ -116,6 +117,7 @@ import com.liferay.portal.service.permission.LayoutSetPrototypePermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
+import com.liferay.portal.servlet.ImageServlet;
 import com.liferay.portal.servlet.filters.i18n.I18nFilter;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -3702,7 +3704,16 @@ public class PortalImpl implements Portal {
 					e.getMessage());
 		}
 
-		if ((e instanceof PortalException) && _log.isInfoEnabled()) {
+		if (e instanceof NoSuchImageException) {
+			// Don't allow falling through to the next else if block otherwise
+			// it will output anyway, since NoSuchImageException extends
+			// PortalException.
+
+			if (_imageServletlog.isWarnEnabled()) {
+				_imageServletlog.warn(e, e);
+			}
+		}
+		else if ((e instanceof PortalException) && _log.isInfoEnabled()) {
 			_log.info(e, e);
 		}
 		else if ((e instanceof SystemException) && _log.isWarnEnabled()) {
@@ -4412,6 +4423,8 @@ public class PortalImpl implements Portal {
 
 	private static final Date _UP_TIME = new Date();
 
+	private static Log _imageServletlog = LogFactoryUtil.getLog(
+		ImageServlet.class);
 	private static Log _log = LogFactoryUtil.getLog(PortalImpl.class);
 
 	private String[] _allSystemCommunityRoles;
