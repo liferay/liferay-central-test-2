@@ -103,6 +103,13 @@ public class SearchContainer<R> {
 			_cur = cur;
 		}
 
+		if (!_curParam.equals(DEFAULT_CUR_PARAM)) {
+			_deltaParam =
+				DEFAULT_CUR_PARAM +
+					StringUtil.replace(
+						_curParam, DEFAULT_CUR_PARAM, StringPool.BLANK);
+		}
+
 		setDelta(ParamUtil.getInteger(portletRequest, _deltaParam, delta));
 
 		_iteratorURL = iteratorURL;
