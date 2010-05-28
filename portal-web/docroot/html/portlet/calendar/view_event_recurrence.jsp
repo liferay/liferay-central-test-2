@@ -25,7 +25,7 @@ if (row != null) {
 	event = (CalEvent)row.getObject();
 }
 else {
-	event = (CalEvent)request.getAttribute("view.jsp-event");
+	event = (CalEvent)request.getAttribute("view_event.jsp-event");
 }
 
 Recurrence recurrence = null;
@@ -162,7 +162,6 @@ int yearlyInterval1 = ParamUtil.getInteger(request, "yearlyInterval1", 1);
 if ((event.getRepeating()) && (recurrence != null)) {
 	yearlyInterval1 = recurrence.getInterval();
 }
-
 %>
 
 <c:if test="<%= (recurrenceType == Recurrence.DAILY) %>">
