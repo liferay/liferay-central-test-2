@@ -21,12 +21,12 @@ package com.liferay.portal.security.permission;
  */
 public class InlineSQLHelperUtil {
 
-	public static boolean isCommunityAdminOrOwner(long groupId) {
-		return getInlineSQLHelper().isCommunityAdminOrOwner(groupId);
-	}
-
 	public static boolean isEnabled() {
 		return getInlineSQLHelper().isEnabled();
+	}
+
+	public static boolean isEnabled(long groupId) {
+		return getInlineSQLHelper().isEnabled(groupId);
 	}
 
 	public static String replacePermissionCheck(

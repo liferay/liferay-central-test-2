@@ -31,27 +31,36 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 	public static final String JOIN_RESOURCE_PERMISSION =
 		InlineSQLHelper.class.getName() + ".joinResourcePermission";
 
-	public void afterPropertiesSet() {
-		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-			_enabled = true;
-		}
+	public boolean isEnabled() {
+		return isEnabled(0);
 	}
 
-	public boolean isCommunityAdminOrOwner(long groupId) {
+	public boolean isEnabled(long groupId) {
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6) {
+			return false;
+		}
+
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
 
-		if (permissionChecker.isCommunityAdmin(groupId) ||
-			permissionChecker.isCommunityOwner(groupId)) {
-
-			return true;
+		if (permissionChecker == null) {
+			return false;
 		}
 
-		return false;
-	}
+		if (groupId > 0) {
+			if (permissionChecker.isCommunityAdmin(groupId) ||
+				permissionChecker.isCommunityOwner(groupId)) {
 
-	public boolean isEnabled() {
-		return _enabled;
+				return false;
+			}
+		}
+		else {
+			if (permissionChecker.isCompanyAdmin()) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	public String replacePermissionCheck(
@@ -73,7 +82,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 		String sql, String className, String classPKField, String userIdField,
 		long groupId, String bridgeJoin) {
 
-		if (!isEnabled()) {
+		if (!isEnabled(groupId)) {
 			return sql;
 		}
 
@@ -86,10 +95,6 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 		}
 
 		if (Validator.isNull(sql)) {
-			return sql;
-		}
-
-		if (isCommunityAdminOrOwner(groupId)) {
 			return sql;
 		}
 
@@ -181,7 +186,5 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 	private static final String _ORDER_BY_CLAUSE = " ORDER BY ";
 
 	private static final String _WHERE_CLAUSE = " WHERE ";
-
-	private boolean _enabled;
 
 }

@@ -1155,7 +1155,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				</#list>
 
 				int start, int end, OrderByComparator orderByComparator) throws SystemException {
-					if (!InlineSQLHelperUtil.isEnabled()) {
+					if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 						return findBy${finder.name}(
 
 						<#list finderColsList as finderCol>
@@ -1686,7 +1686,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			</#list>
 
 			) throws SystemException {
-				if (!InlineSQLHelperUtil.isEnabled()) {
+				if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 					return countBy${finder.name}(
 
 					<#list finderColsList as finderCol>
