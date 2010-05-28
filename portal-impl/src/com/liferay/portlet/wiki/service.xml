@@ -112,7 +112,7 @@
 		</finder>
 		<finder name="N_T" return-type="Collection">
 			<finder-column name="nodeId" />
-			<finder-column name="title" />
+			<finder-column name="title" case-sensitive="false" />
 		</finder>
 		<finder name="N_H" return-type="Collection">
 			<finder-column name="nodeId" />
@@ -120,11 +120,11 @@
 		</finder>
 		<finder name="N_P" return-type="Collection">
 			<finder-column name="nodeId" />
-			<finder-column name="parentTitle" />
+			<finder-column name="parentTitle" case-sensitive="false" />
 		</finder>
 		<finder name="N_R" return-type="Collection">
 			<finder-column name="nodeId" />
-			<finder-column name="redirectTitle" />
+			<finder-column name="redirectTitle" case-sensitive="false" />
 		</finder>
 		<finder name="N_S" return-type="Collection">
 			<finder-column name="nodeId" />
@@ -147,23 +147,23 @@
 		</finder>
 		<finder name="N_T_V" return-type="WikiPage" unique="true">
 			<finder-column name="nodeId" />
-			<finder-column name="title" />
+			<finder-column name="title" case-sensitive="false" />
 			<finder-column name="version" />
 		</finder>
 		<finder name="N_T_H" return-type="Collection">
 			<finder-column name="nodeId" />
-			<finder-column name="title" />
+			<finder-column name="title" case-sensitive="false" />
 			<finder-column name="head" />
 		</finder>
 		<finder name="N_T_S" return-type="Collection">
 			<finder-column name="nodeId" />
-			<finder-column name="title" />
+			<finder-column name="title" case-sensitive="false" />
 			<finder-column name="status" />
 		</finder>
 		<finder name="N_H_P" return-type="Collection">
 			<finder-column name="nodeId" />
 			<finder-column name="head" />
-			<finder-column name="parentTitle" />
+			<finder-column name="parentTitle" case-sensitive="false" />
 		</finder>
 		<finder name="N_H_S" return-type="Collection">
 			<finder-column name="nodeId" />
@@ -173,7 +173,7 @@
 		<finder name="N_H_P_S" return-type="Collection">
 			<finder-column name="nodeId" />
 			<finder-column name="head" />
-			<finder-column name="parentTitle" />
+			<finder-column name="parentTitle" case-sensitive="false" />
 			<finder-column name="status" />
 		</finder>
 
