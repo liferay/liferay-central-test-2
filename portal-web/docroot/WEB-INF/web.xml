@@ -1311,20 +1311,24 @@
 			<taglib-location>/WEB-INF/tld/displaytag.tld</taglib-location>
 		</taglib>
 		<taglib>
-			<taglib-uri>http://java.sun.com/jstl/core_rt</taglib-uri>
-			<taglib-location>/WEB-INF/tld/c-rt.tld</taglib-location>
+			<taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
+			<taglib-location>/WEB-INF/tld/c.tld</taglib-location>
 		</taglib>
 		<taglib>
-			<taglib-uri>http://java.sun.com/jstl/fmt_rt</taglib-uri>
-			<taglib-location>/WEB-INF/tld/fmt-rt.tld</taglib-location>
+			<taglib-uri>http://java.sun.com/jsp/jstl/fmt</taglib-uri>
+			<taglib-location>/WEB-INF/tld/fmt.tld</taglib-location>
 		</taglib>
 		<taglib>
-			<taglib-uri>http://java.sun.com/jstl/sql_rt</taglib-uri>
-			<taglib-location>/WEB-INF/tld/sql-rt.tld</taglib-location>
+			<taglib-uri>http://java.sun.com/jsp/jstl/functions</taglib-uri>
+			<taglib-location>/WEB-INF/tld/fn.tld</taglib-location>
 		</taglib>
 		<taglib>
-			<taglib-uri>http://java.sun.com/jstl/xml_rt</taglib-uri>
-			<taglib-location>/WEB-INF/tld/x-rt.tld</taglib-location>
+			<taglib-uri>http://java.sun.com/jsp/jstl/sql</taglib-uri>
+			<taglib-location>/WEB-INF/tld/sql.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jsp/jstl/xml</taglib-uri>
+			<taglib-location>/WEB-INF/tld/x.tld</taglib-location>
 		</taglib>
 		<taglib>
 			<taglib-uri>http://java.sun.com/portlet_2_0</taglib-uri>

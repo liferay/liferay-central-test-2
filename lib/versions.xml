@@ -1968,24 +1968,24 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/jstl.jar</file-name>
-		<version>1.0.6</version>
+		<file-name>portal/jstl-api.jar</file-name>
+		<version>1.2</version>
 		<project-name>JSTL</project-name>
-		<project-url>http://jakarta.apache.org/taglibs/doc/standard-1.0-doc/intro.html</project-url>
+		<project-url>https://jstl.dev.java.net</project-url>
 		<licenses>
 			<license>
-				<license-name>Apache License 2.0</license-name>
+				<license-name>LGPL 2.1</license-name>
 			</license>
 		</licenses>
 	</library>
 	<library>
 		<file-name>portal/jstl-impl.jar</file-name>
-		<version>1.0.6</version>
+		<version>1.2</version>
 		<project-name>JSTL</project-name>
-		<project-url>http://jakarta.apache.org/taglibs/doc/standard-1.0-doc/intro.html</project-url>
+		<project-url>https://jstl.dev.java.net</project-url>
 		<licenses>
 			<license>
-				<license-name>Apache License 2.0</license-name>
+				<license-name>LGPL 2.1</license-name>
 			</license>
 		</licenses>
 	</library>
