@@ -163,7 +163,6 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 								curParam="cur1"
 								delta="<%= foldersPerPage %>"
 								deltaConfigurable="<%= false %>"
-								deltaParam="delta1"
 								headerNames="<%= StringUtil.merge(folderColumns) %>"
 								iteratorURL="<%= portletURL %>"
 							>
