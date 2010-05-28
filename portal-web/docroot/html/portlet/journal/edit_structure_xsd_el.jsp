@@ -39,20 +39,19 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 Boolean hasSiblings = (Boolean)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_SIBLINGS);
 IntegerWrapper tabIndex = (IntegerWrapper)request.getAttribute(WebKeys.TAB_INDEX);
 
+String uniqueId = PwdGenerator.getPassword(4);
+
 String className = "portlet-section-alternate results-row alt";
 
 if (MathUtil.isEven(count.getValue())) {
 	className = "portlet-section-body results-row";
 }
-
-String key = PwdGenerator.KEY1 + PwdGenerator.KEY2 + PwdGenerator.KEY3;
-String uniqueId = PwdGenerator.getPassword(key, 4);
 %>
 
 <tr class="<%= className %>">
 	<td>
-		<aui:input name='<%= "structure_el_" + uniqueId + "_depth" %>' dataName="depth" type="hidden" value="<%= depth %>" />
-		<aui:input name='<%= "structure_el_" + uniqueId + "_metadata_xml" %>' dataName="metadata_xml" type="hidden" value="<%= HttpUtil.encodeURL(elMetadataXML) %>" />
+		<aui:input dataName="depth" name='<%= "structure_el_" + uniqueId + "_depth" %>' type="hidden" value="<%= depth %>" />
+		<aui:input dataName="metadata_xml" name='<%= "structure_el_" + uniqueId + "_metadata_xml" %>' type="hidden" value="<%= HttpUtil.encodeURL(elMetadataXML) %>" />
 
 		<table class="lfr-table">
 		<tr>
@@ -61,16 +60,16 @@ String uniqueId = PwdGenerator.getPassword(key, 4);
 			</c:if>
 
 			<td>
-				<aui:input label="" name='<%= "structure_el_" + uniqueId + "_name" %>' dataName="name" tabindex="<%= tabIndex.getValue() %>" type="text" size="20" value="<%= elName %>" />
+				<aui:input dataName="name" label="" name='<%= "structure_el_" + uniqueId + "_name" %>' tabindex="<%= tabIndex.getValue() %>" type="text" size="20" value="<%= elName %>" />
 			</td>
 			<td>
 				<c:choose>
 					<c:when test='<%= parentElType.equals("list") || parentElType.equals("multi-list") %>'>
-						<aui:input label="" name='<%= "structure_el_" + uniqueId + "_type" %>' dataName="type" tabindex="<%= tabIndex.getValue() %>" type="text" size="20" value="<%= elType %>" />
+						<aui:input dataName="type" label="" name='<%= "structure_el_" + uniqueId + "_type" %>' tabindex="<%= tabIndex.getValue() %>" type="text" size="20" value="<%= elType %>" />
 					</c:when>
 					<c:otherwise>
 						<aui:column>
-							<aui:select label="" name='<%= "structure_el_" + uniqueId + "_type" %>' dataName="type" showEmptyOption="<%= true %>" tabindex="<%= tabIndex.getValue() %>">
+							<aui:select dataName="type" label="" name='<%= "structure_el_" + uniqueId + "_type" %>' showEmptyOption="<%= true %>" tabindex="<%= tabIndex.getValue() %>">
 								<aui:option label="text" selected='<%= elType.equals("text") %>' />
 								<aui:option label="text-box" selected='<%= elType.equals("text_box") %>' value="text_box" />
 								<aui:option label="text-area" selected='<%= elType.equals("text_area") %>' value="text_area" />
@@ -85,7 +84,7 @@ String uniqueId = PwdGenerator.getPassword(key, 4);
 						</aui:column>
 
 						<aui:column>
-							<aui:select label="" name='<%= "structure_el_" + uniqueId + "_index_type" %>' dataName="index_type">
+							<aui:select dataName="index_type" label="" name='<%= "structure_el_" + uniqueId + "_index_type" %>'>
 								<aui:option label="not-searchable" />
 								<aui:option label="searchable-keyword" selected='<%= elIndexType.equals("keyword") %>' value="keyword" />
 								<aui:option label="searchable-text" selected='<%= elIndexType.equals("text") %>' value="text" />
@@ -97,7 +96,7 @@ String uniqueId = PwdGenerator.getPassword(key, 4);
 
 			<c:if test='<%= !parentElType.equals("list") && !parentElType.equals("multi-list") %>'>
 				<td>
-					<aui:input inlineLabel="right" label="repeatable" name='<%= "structure_el_" + uniqueId + "_repeatable" %>' dataName="repeatable" tabindex="<%= tabIndex.getValue() %>" type="checkbox" value="<%= repeatable %>" />
+					<aui:input dataName="repeatable" inlineLabel="right" label="repeatable" name='<%= "structure_el_" + uniqueId + "_repeatable" %>' tabindex="<%= tabIndex.getValue() %>" type="checkbox" value="<%= repeatable %>" />
 				</td>
 				<td>
 

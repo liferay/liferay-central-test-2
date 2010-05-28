@@ -192,7 +192,7 @@ int tabIndex = 1;
 					<aui:button onClick='<%= renderResponse.getNamespace() + "downloadStructureContent();" %>' type="button" value="download" />
 				</c:if>
 
-				<table id="<portlet:namespace />rowsWrapper" class="taglib-search-iterator">
+				<table class="taglib-search-iterator" id="<portlet:namespace />rowsWrapper">
 
 				<%
 				Document doc = SAXReaderUtil.read(xsd);
