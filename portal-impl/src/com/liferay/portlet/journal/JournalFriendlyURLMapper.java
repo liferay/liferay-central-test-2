@@ -74,7 +74,8 @@ public class JournalFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	public void populateParams(
-		String friendlyURLPath, Map<String, String[]> params) {
+		String friendlyURLPath, Map<String, String[]> params,
+		Map<String, Object> requestContext) {
 
 		String[] parts = StringUtil.split(friendlyURLPath, StringPool.SLASH);
 

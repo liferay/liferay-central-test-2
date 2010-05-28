@@ -209,7 +209,9 @@ public class PingbackMethodImpl implements Method {
 				end + Portal.FRIENDLY_URL_SEPARATOR.length() - 1);
 		}
 
-		friendlyURLMapper.populateParams(friendlyURL, params);
+		Map<String, Object> requestContext = new HashMap<String, Object>();
+
+		friendlyURLMapper.populateParams(friendlyURL, params, requestContext);
 
 		String param = getParam(params, "entryId");
 

@@ -48,7 +48,8 @@ public abstract class RSSFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	public void populateParams(
-		String friendlyURLPath, Map<String, String[]> params) {
+		String friendlyURLPath, Map<String, String[]> params,
+		Map<String, Object> requestContext) {
 
 		int x = friendlyURLPath.indexOf(StringPool.SLASH, 1);
 

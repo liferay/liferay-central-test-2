@@ -62,7 +62,8 @@ public class WAIFriendlyURLMapper implements FriendlyURLMapper {
 	}
 
 	public void populateParams(
-		String friendlyURLPath, Map<String, String[]> params) {
+		String friendlyURLPath, Map<String, String[]> params,
+		Map<String, Object> requestContext) {
 
 		int x = friendlyURLPath.indexOf(_MAPPING);
 		int y = friendlyURLPath.indexOf("/", x + _MAPPING.length() + 1);

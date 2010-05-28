@@ -260,7 +260,8 @@ public interface Portal {
 
 	public String getLayoutActualURL(
 			long groupId, boolean privateLayout, String mainPath,
-			String friendlyURL, Map<String, String[]> params)
+			String friendlyURL, Map<String, String[]> params,
+			Map<String, Object> requestContext)
 		throws PortalException, SystemException;
 
 	public String getLayoutEditPage(Layout layout);
@@ -380,15 +381,6 @@ public interface Portal {
 	public String getPortletDescription(String portletId, String languageId);
 
 	public String getPortletDescription(String portletId, User user);
-
-	public Object[] getPortletFriendlyURLMapper(
-			long groupId, boolean privateLayout, String url)
-		throws PortalException, SystemException;
-
-	public Object[] getPortletFriendlyURLMapper(
-			long groupId, boolean privateLayout, String url,
-			Map<String, String[]> params)
-		throws PortalException, SystemException;
 
 	public String getPortletId(HttpServletRequest request);
 

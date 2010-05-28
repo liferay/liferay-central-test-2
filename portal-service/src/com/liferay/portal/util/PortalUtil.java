@@ -418,11 +418,13 @@ public class PortalUtil {
 
 	public static String getLayoutActualURL(
 			long groupId, boolean privateLayout, String mainPath,
-			String friendlyURL, Map<String, String[]> params)
+			String friendlyURL, Map<String, String[]> params,
+			Map<String, Object> requestContext)
 		throws PortalException, SystemException {
 
 		return getPortal().getLayoutActualURL(
-			groupId, privateLayout, mainPath, friendlyURL, params);
+			groupId, privateLayout, mainPath, friendlyURL, params,
+			requestContext);
 	}
 
 	public static String getLayoutEditPage(Layout layout) {
@@ -699,23 +701,6 @@ public class PortalUtil {
 
 	public static String getPortletDescription(String portletId, User user) {
 		return getPortal().getPortletDescription(portletId, user);
-	}
-
-	public static Object[] getPortletFriendlyURLMapper(
-			long groupId, boolean privateLayout, String url)
-		throws PortalException, SystemException {
-
-		return getPortal().getPortletFriendlyURLMapper(
-			groupId, privateLayout, url);
-	}
-
-	public static Object[] getPortletFriendlyURLMapper(
-			long groupId, boolean privateLayout, String url,
-			Map<String, String[]> params)
-		throws PortalException, SystemException {
-
-		return getPortal().getPortletFriendlyURLMapper(
-			groupId, privateLayout, url, params);
 	}
 
 	public static String getPortletId(HttpServletRequest request) {

@@ -1385,12 +1385,13 @@ public class PortalImpl implements Portal {
 		throws PortalException, SystemException {
 
 		return getLayoutActualURL(
-			groupId, privateLayout, mainPath, friendlyURL, null);
+			groupId, privateLayout, mainPath, friendlyURL, null, null);
 	}
 
 	public String getLayoutActualURL(
 			long groupId, boolean privateLayout, String mainPath,
-			String friendlyURL, Map<String, String[]> params)
+			String friendlyURL, Map<String, String[]> params,
+			Map<String, Object> requestContext)
 		throws PortalException, SystemException {
 
 		Layout layout = null;
@@ -1412,7 +1413,7 @@ public class PortalImpl implements Portal {
 		}
 		else {
 			Object[] friendlyURLMapper = getPortletFriendlyURLMapper(
-				groupId, privateLayout, friendlyURL, params);
+				groupId, privateLayout, friendlyURL, params, requestContext);
 
 			layout = (Layout)friendlyURLMapper[0];
 			queryString = (String)friendlyURLMapper[1];
@@ -2267,15 +2268,8 @@ public class PortalImpl implements Portal {
 	}
 
 	public Object[] getPortletFriendlyURLMapper(
-			long groupId, boolean privateLayout, String url)
-		throws PortalException, SystemException {
-
-		return getPortletFriendlyURLMapper(groupId, privateLayout, url, null);
-	}
-
-	public Object[] getPortletFriendlyURLMapper(
 			long groupId, boolean privateLayout, String url,
-			Map<String, String[]> params)
+			Map<String, String[]> params, Map<String, Object> requestContext)
 		throws PortalException, SystemException {
 
 		boolean foundFriendlyURLMapper = false;
@@ -2361,11 +2355,11 @@ public class PortalImpl implements Portal {
 
 				if (friendlyURLMapper.isCheckMappingWithPrefix()) {
 					friendlyURLMapper.populateParams(
-						url.substring(pos + 2), actualParams);
+						url.substring(pos + 2), actualParams, requestContext);
 				}
 				else {
 					friendlyURLMapper.populateParams(
-						url.substring(pos), actualParams);
+						url.substring(pos), actualParams, requestContext);
 				}
 
 				queryString =

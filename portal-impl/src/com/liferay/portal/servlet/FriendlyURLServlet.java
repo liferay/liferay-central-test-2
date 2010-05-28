@@ -34,6 +34,7 @@ import com.liferay.portal.util.WebKeys;
 
 import java.io.IOException;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -241,8 +242,13 @@ public class FriendlyURLServlet extends HttpServlet {
 			friendlyURL = path.substring(pos, path.length());
 		}
 
+		Map<String, Object> requestContext = new HashMap<String, Object>();
+
+		requestContext.put("request", request);
+
 		return PortalUtil.getLayoutActualURL(
-			group.getGroupId(), _private, mainPath, friendlyURL, params);
+			group.getGroupId(), _private, mainPath, friendlyURL, params,
+			requestContext);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(FriendlyURLServlet.class);
