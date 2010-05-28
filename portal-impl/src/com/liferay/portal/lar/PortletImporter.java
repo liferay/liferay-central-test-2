@@ -495,7 +495,7 @@ public class PortletImporter {
 
 		AssetVocabulary importedVocabulary = null;
 
-		AssetVocabulary existingVocabulary = AssetVocabularyUtil.findByG_N(
+		AssetVocabulary existingVocabulary = AssetVocabularyUtil.fetchByG_N(
 			groupId, vocabulary.getName());
 
 		if (existingVocabulary == null) {
