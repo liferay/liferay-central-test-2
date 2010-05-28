@@ -72,6 +72,12 @@ public class OpenSearchUtil {
 	}
 
 	public static Element addElement(
+		Element el, String name, int namespaceType, long value) {
+
+		return addElement(el, name, namespaceType, String.valueOf(value));
+	}
+
+	public static Element addElement(
 		Element el, String name, int namespaceType, String value) {
 
 		Element returnElement = el.addElement(getQName(name, namespaceType));
