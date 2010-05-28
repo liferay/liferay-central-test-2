@@ -252,7 +252,7 @@ int tabIndex = 1;
 			rows,
 			function(row, i) {
 				var elDepth = row.one('input[dataName="depth"]');
-				var elMetadataXML = row.one('input[dataName="metadata_xml]');
+				var elMetadataXML = row.one('input[dataName="metadata_xml"]');
 				var elName = row.one('input[dataName="name"]');
 				var elType = row.one('select[dataName="type"]');
 				var elIndexType = row.one('select[dataName="index_type"]');
