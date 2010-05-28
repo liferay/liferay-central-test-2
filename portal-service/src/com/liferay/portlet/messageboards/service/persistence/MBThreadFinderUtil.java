@@ -22,11 +22,6 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  * @author Brian Wing Shun Chan
  */
 public class MBThreadFinderUtil {
-	public static int countByG_C(long groupId, long categoryId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().countByG_C(groupId, categoryId);
-	}
-
 	public static int countByG_C_S(long groupId, long categoryId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().countByG_C_S(groupId, categoryId, status);
@@ -70,12 +65,6 @@ public class MBThreadFinderUtil {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
 				   .filterFindByS_G_U_S(groupId, userId, status, start, end);
-	}
-
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_C(
-		long groupId, long categoryId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().findByG_C(groupId, categoryId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_C_S(

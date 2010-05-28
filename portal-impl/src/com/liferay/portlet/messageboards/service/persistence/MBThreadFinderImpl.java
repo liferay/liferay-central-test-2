@@ -60,12 +60,6 @@ public class MBThreadFinderImpl
 	public static String FIND_BY_S_G_U_S =
 		MBThreadFinder.class.getName() + ".findByS_G_U_S";
 
-	public int countByG_C(long groupId, long categoryId)
-		throws SystemException {
-
-		return MBThreadUtil.countByG_C(groupId, categoryId);
-	}
-
 	public int countByG_C_S(long groupId, long categoryId, int status)
 		throws SystemException {
 
@@ -81,7 +75,7 @@ public class MBThreadFinderImpl
 	public int filterCountByG_C(long groupId, long categoryId)
 		throws SystemException {
 
-		if (InlineSQLHelperUtil.isCommunityAdminOrOwner(groupId)) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return MBThreadUtil.countByG_C(groupId, categoryId);
 		}
 
@@ -141,7 +135,7 @@ public class MBThreadFinderImpl
 			long groupId, long categoryId, int start, int end)
 		throws SystemException {
 
-		if (InlineSQLHelperUtil.isCommunityAdminOrOwner(groupId)) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return MBThreadUtil.findByG_C(groupId, categoryId, start, end);
 		}
 
@@ -187,13 +181,6 @@ public class MBThreadFinderImpl
 		throws SystemException {
 
 		return doFindByS_G_U_S(groupId, userId, status, start, end, true);
-	}
-
-	public List<MBThread> findByG_C(
-			long groupId, long categoryId, int start, int end)
-		throws SystemException {
-
-		return MBThreadUtil.findByG_C(groupId, categoryId, start, end);
 	}
 
 	public List<MBThread> findByG_C_S(
