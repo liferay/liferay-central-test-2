@@ -14,7 +14,7 @@
 
 package com.liferay.portal.security.ntlm;
 
-import jodd.util.StringPool;
+import com.liferay.portal.kernel.util.StringPool;
 
 /**
  * <a href="NtlmServiceAccount.java.html"><b><i>View Source</i></b></a>
