@@ -28,7 +28,7 @@
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>0</render-weight>
+		<ajaxable>false</ajaxable>
 		<header-portlet-css>/html/portlet/search/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-search</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
