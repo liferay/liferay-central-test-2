@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
@@ -42,17 +43,23 @@ import java.util.List;
 public class DLFolderFinderImpl
 	extends BasePersistenceImpl<DLFolder> implements DLFolderFinder {
 
-	public static String COUNT_FE_FS_BY_G_F_S =
-		DLFolderFinder.class.getName() + ".countFE_FS_ByG_F_S";
+	public static String COUNT_F_BY_G_F_S =
+		DLFolderFinder.class.getName() + ".countF_ByG_F_S";
 
-	public static String COUNT_F_FE_FS_BY_G_F_S =
-		DLFolderFinder.class.getName() + ".countF_FE_FS_ByG_F_S";
+	public static String COUNT_FE_BY_G_F_S =
+		DLFolderFinder.class.getName() + ".countFE_ByG_F_S";
 
-	public static String FIND_FE_FS_BY_G_F_S =
-		DLFolderFinder.class.getName() + ".findFE_FS_ByG_F_S";
+	public static String COUNT_FS_BY_G_F_S =
+		DLFolderFinder.class.getName() + ".countFS_ByG_F_S";
 
-	public static String FIND_F_FE_FS_BY_G_F_S =
-		DLFolderFinder.class.getName() + ".findF_FE_FS_ByG_F_S";
+	public static String FIND_F_BY_G_F_S =
+		DLFolderFinder.class.getName() + ".findF_ByG_F_S";
+
+	public static String FIND_FE_BY_G_F_S =
+		DLFolderFinder.class.getName() + ".findFE_ByG_F_S";
+
+	public static String FIND_FS_BY_G_F_S =
+		DLFolderFinder.class.getName() + ".findFS_ByG_F_S";
 
 	public int countFE_FS_ByG_F_S(
 			long groupId, List<Long> folderIds, int status)
@@ -124,13 +131,33 @@ public class DLFolderFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_FE_FS_BY_G_F_S);
+			StringBundler sb = new StringBundler(5);
+
+			sb.append(StringPool.OPEN_PARENTHESIS);
+
+			String sql = CustomSQLUtil.get(COUNT_FE_BY_G_F_S);
 
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
-					sql, DLFileEntry.class.getName(), "DLFileEntry.fileEntryId",
-					"DLFileEntry.userId", groupId);
+					sql, DLFileEntry.class.getName(), _FE_ENTRY_ID, _FE_USER_ID,
+					groupId);
 			}
+
+			sb.append(sql);
+			sb.append(_UNION_ALL);
+
+			sql = CustomSQLUtil.get(COUNT_FS_BY_G_F_S);
+
+			if (inlineSQLHelper) {
+				sql = InlineSQLHelperUtil.replacePermissionCheck(
+					sql, DLFileShortcut.class.getName(), _FS_SHORTCUT_ID,
+					_FS_USER_ID, groupId);
+			}
+
+			sb.append(sql);
+			sb.append(StringPool.CLOSE_PARENTHESIS);
+
+			sql = sb.toString();
 
 			sql = StringUtil.replace(
 				sql, "[$FILE_ENTRY_FOLDER_ID$]",
@@ -198,13 +225,44 @@ public class DLFolderFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_F_FE_FS_BY_G_F_S);
+			StringBundler sb = new StringBundler(7);
+
+			sb.append(StringPool.OPEN_PARENTHESIS);
+
+			String sql = CustomSQLUtil.get(COUNT_F_BY_G_F_S);
 
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
-					sql, DLFileEntry.class.getName(), "DLFileEntry.fileEntryId",
-					"DLFileEntry.userId", groupId);
+					sql, DLFolder.class.getName(), _F_FOLDER_ID, _F_USER_ID,
+					groupId);
 			}
+
+			sb.append(sql);
+			sb.append(_UNION_ALL);
+
+			sql = CustomSQLUtil.get(COUNT_FE_BY_G_F_S);
+
+			if (inlineSQLHelper) {
+				sql = InlineSQLHelperUtil.replacePermissionCheck(
+					sql, DLFileEntry.class.getName(), _FE_ENTRY_ID, _FE_USER_ID,
+					groupId);
+			}
+
+			sb.append(sql);
+			sb.append(_UNION_ALL);
+
+			sql = CustomSQLUtil.get(COUNT_FS_BY_G_F_S);
+
+			if (inlineSQLHelper) {
+				sql = InlineSQLHelperUtil.replacePermissionCheck(
+					sql, DLFileShortcut.class.getName(), _FS_SHORTCUT_ID,
+					_FS_USER_ID, groupId);
+			}
+
+			sb.append(sql);
+			sb.append(StringPool.CLOSE_PARENTHESIS);
+
+			sql = sb.toString();
 
 			sql = StringUtil.replace(
 				sql, "[$FOLDER_PARENT_FOLDER_ID$]",
@@ -281,13 +339,33 @@ public class DLFolderFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_FE_FS_BY_G_F_S);
+			StringBundler sb = new StringBundler(5);
+
+			sb.append("SELECT * FROM ((");
+
+			String sql = CustomSQLUtil.get(FIND_FE_BY_G_F_S);
 
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
-					sql, DLFileEntry.class.getName(), "DLFileEntry.fileEntryId",
-					"DLFileEntry.userId", groupId);
+					sql, DLFileEntry.class.getName(), _FE_ENTRY_ID, _FE_USER_ID,
+					groupId);
 			}
+
+			sb.append(sql);
+			sb.append(_UNION_ALL);
+
+			sql = CustomSQLUtil.get(FIND_FS_BY_G_F_S);
+
+			if (inlineSQLHelper) {
+				sql = InlineSQLHelperUtil.replacePermissionCheck(
+					sql, DLFileShortcut.class.getName(), _FS_SHORTCUT_ID,
+					_FS_USER_ID, groupId);
+			}
+
+			sb.append(sql);
+			sb.append(")) TEMP_TABLE ORDER BY modelFolder DESC, title ASC");
+
+			sql = sb.toString();
 
 			sql = StringUtil.replace(
 				sql, "[$FILE_ENTRY_FOLDER_ID$]",
@@ -371,13 +449,44 @@ public class DLFolderFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_F_FE_FS_BY_G_F_S);
+			StringBundler sb = new StringBundler(7);
+
+			sb.append("SELECT * FROM ((");
+
+			String sql = CustomSQLUtil.get(FIND_F_BY_G_F_S);
 
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
-					sql, DLFileEntry.class.getName(), "DLFileEntry.fileEntryId",
-					"DLFileEntry.userId", groupId);
+					sql, DLFolder.class.getName(), _F_FOLDER_ID, _F_USER_ID,
+					groupId);
 			}
+
+			sb.append(sql);
+			sb.append(_UNION_ALL);
+
+			sql = CustomSQLUtil.get(FIND_FE_BY_G_F_S);
+
+			if (inlineSQLHelper) {
+				sql = InlineSQLHelperUtil.replacePermissionCheck(
+					sql, DLFileEntry.class.getName(), _FE_ENTRY_ID, _FE_USER_ID,
+					groupId);
+			}
+
+			sb.append(sql);
+			sb.append(_UNION_ALL);
+
+			sql = CustomSQLUtil.get(FIND_FS_BY_G_F_S);
+
+			if (inlineSQLHelper) {
+				sql = InlineSQLHelperUtil.replacePermissionCheck(
+					sql, DLFileShortcut.class.getName(), _FS_SHORTCUT_ID,
+					_FS_USER_ID, groupId);
+			}
+
+			sb.append(sql);
+			sb.append(")) TEMP_TABLE ORDER BY modelFolder DESC, title ASC");
+
+			sql = sb.toString();
 
 			sql = StringUtil.replace(
 				sql, "[$FOLDER_PARENT_FOLDER_ID$]",
@@ -492,5 +601,14 @@ public class DLFolderFinderImpl
 
 		return sb.toString();
 	}
+
+	private static final String _F_FOLDER_ID = "DLFolder.folderId";
+	private static final String _F_USER_ID = "DLFolder.userId";
+	private static final String _FE_ENTRY_ID = "DLFileEntry.fileEntryId";
+	private static final String _FE_USER_ID = "DLFileEntry.userId";
+	private static final String _FS_SHORTCUT_ID =
+		"DLFileShortcut.fileShortcutId";
+	private static final String _FS_USER_ID = "DLFileShortcut.userId";
+	private static final String _UNION_ALL = ") UNION ALL (";
 
 }
