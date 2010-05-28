@@ -79,6 +79,7 @@ public class EventTimeComparator implements Comparator<CalEvent> {
 
 		cal1.set(Calendar.YEAR, 1970);
 		cal1.set(Calendar.MONTH, 1);
+		cal1.set(Calendar.WEEK_OF_MONTH, 1);
 		cal1.set(Calendar.DAY_OF_YEAR, 1);
 
 		Calendar cal2 = Calendar.getInstance(_timeZone, _locale);
@@ -87,6 +88,7 @@ public class EventTimeComparator implements Comparator<CalEvent> {
 
 		cal2.set(Calendar.YEAR, 1970);
 		cal2.set(Calendar.MONTH, 1);
+		cal2.set(Calendar.WEEK_OF_MONTH, 1);
 		cal2.set(Calendar.DAY_OF_YEAR, 1);
 
 		return cal1.compareTo(cal2);
