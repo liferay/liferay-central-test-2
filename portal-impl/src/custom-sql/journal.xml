@@ -92,8 +92,7 @@
 					)
 				)
 			ORDER BY
-				articleId ASC,
-				version DESC
+				articleId ASC
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.journal.service.persistence.JournalFeedFinder.countByC_G_F_N_D">
