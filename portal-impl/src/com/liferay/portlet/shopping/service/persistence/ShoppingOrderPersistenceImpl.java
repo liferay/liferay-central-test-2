@@ -732,7 +732,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
 	public List<ShoppingOrder> filterFindByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return findByGroupId(groupId, start, end, orderByComparator);
 		}
 
@@ -1363,7 +1363,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	public List<ShoppingOrder> filterFindByG_U_PPPS(long groupId, long userId,
 		String ppPaymentStatus, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return findByG_U_PPPS(groupId, userId, ppPaymentStatus, start, end,
 				orderByComparator);
 		}
@@ -1596,7 +1596,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	}
 
 	public int filterCountByGroupId(long groupId) throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByGroupId(groupId);
 		}
 
@@ -1824,7 +1824,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
 	public int filterCountByG_U_PPPS(long groupId, long userId,
 		String ppPaymentStatus) throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByG_U_PPPS(groupId, userId, ppPaymentStatus);
 		}
 

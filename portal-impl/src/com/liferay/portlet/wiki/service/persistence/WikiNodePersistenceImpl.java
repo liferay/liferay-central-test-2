@@ -1137,7 +1137,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 	public List<WikiNode> filterFindByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return findByGroupId(groupId, start, end, orderByComparator);
 		}
 
@@ -1864,7 +1864,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	public int filterCountByGroupId(long groupId) throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByGroupId(groupId);
 		}
 
@@ -2013,7 +2013,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 	public int filterCountByG_N(long groupId, String name)
 		throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByG_N(groupId, name);
 		}
 

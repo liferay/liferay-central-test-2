@@ -1412,7 +1412,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 	public List<CalEvent> filterFindByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return findByGroupId(groupId, start, end, orderByComparator);
 		}
 
@@ -2047,7 +2047,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 	public List<CalEvent> filterFindByG_T(long groupId, String type, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return findByG_T(groupId, type, start, end, orderByComparator);
 		}
 
@@ -2410,7 +2410,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	public List<CalEvent> filterFindByG_R(long groupId, boolean repeating,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return findByG_R(groupId, repeating, start, end, orderByComparator);
 		}
 
@@ -2808,7 +2808,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	public int filterCountByGroupId(long groupId) throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByGroupId(groupId);
 		}
 
@@ -2957,7 +2957,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 	public int filterCountByG_T(long groupId, String type)
 		throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByG_T(groupId, type);
 		}
 
@@ -3067,7 +3067,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 	public int filterCountByG_R(long groupId, boolean repeating)
 		throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByG_R(groupId, repeating);
 		}
 

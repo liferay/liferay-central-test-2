@@ -650,7 +650,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 
 	public List<Team> filterFindByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return findByGroupId(groupId, start, end, orderByComparator);
 		}
 
@@ -972,7 +972,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	public int filterCountByGroupId(long groupId) throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByGroupId(groupId);
 		}
 
@@ -1075,7 +1075,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 
 	public int filterCountByG_N(long groupId, String name)
 		throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByG_N(groupId, name);
 		}
 

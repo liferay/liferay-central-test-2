@@ -1245,7 +1245,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 	public List<IGImage> filterFindByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return findByGroupId(groupId, start, end, orderByComparator);
 		}
 
@@ -2017,7 +2017,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 	public List<IGImage> filterFindByG_U(long groupId, long userId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return findByG_U(groupId, userId, start, end, orderByComparator);
 		}
 
@@ -2367,7 +2367,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	public List<IGImage> filterFindByG_F(long groupId, long folderId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return findByG_F(groupId, folderId, start, end, orderByComparator);
 		}
 
@@ -2758,7 +2758,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	public List<IGImage> filterFindByG_F_N(long groupId, long folderId,
 		String name, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return findByG_F_N(groupId, folderId, name, start, end,
 				orderByComparator);
 		}
@@ -3150,7 +3150,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	public int filterCountByGroupId(long groupId) throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByGroupId(groupId);
 		}
 
@@ -3427,7 +3427,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 	public int filterCountByG_U(long groupId, long userId)
 		throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByG_U(groupId, userId);
 		}
 
@@ -3523,7 +3523,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 	public int filterCountByG_F(long groupId, long folderId)
 		throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByG_F(groupId, folderId);
 		}
 
@@ -3639,7 +3639,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 	public int filterCountByG_F_N(long groupId, long folderId, String name)
 		throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByG_F_N(groupId, folderId, name);
 		}
 
