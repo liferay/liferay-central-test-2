@@ -103,10 +103,12 @@ public class SQLTransformer {
 			return sql;
 		}
 
-		if (_vendorMySQL &&
-			!PropsValues.DATABASE_MYSQL_FUNCTION_LOWER_ENABLED) {
+		if (_vendorMySQL) {
+			DB db = DBFactoryUtil.getDB();
 
-			sql = _removeLower(sql);
+			if (!db.isSupportsStringCaseSensitiveQuery()) {
+				sql = _removeLower(sql);
+			}
 		}
 
 		return sql;
