@@ -386,8 +386,8 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		lockLocalService.unlock(DLFolder.class.getName(), folderId);
 
 		try {
-			List<DLFileEntry> fileEntries = dlFileEntryService.getFileEntries(
-				groupId, folderId);
+			List<DLFileEntry> fileEntries =
+				dlFileEntryLocalService.getFileEntries(groupId, folderId);
 
 			for (DLFileEntry fileEntry : fileEntries) {
 				dlFileEntryService.unlockFileEntry(
