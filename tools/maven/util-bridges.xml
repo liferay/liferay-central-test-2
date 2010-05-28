@@ -30,7 +30,7 @@
 	</licenses>
 	<scm>
 		<connection>scm:svn:svn://svn.liferay.com/repos/public/portal/trunk/util-bridges</connection>
-		<url>http://svn.liferay.com/repos/public/portal/trunk/util-bridges</url>
+		<url>http://guest:guest@svn.liferay.com/repos/public/portal/trunk/util-bridges</url>
 	</scm>
 	<dependencies>
 		<dependency>

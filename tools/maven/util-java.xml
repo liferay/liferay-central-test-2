@@ -30,7 +30,7 @@
 	</licenses>
 	<scm>
 		<connection>scm:svn:svn://svn.liferay.com/repos/public/portal/trunk/util-java</connection>
-		<url>http://svn.liferay.com/repos/public/portal/trunk/util-java</url>
+		<url>http://guest:guest@svn.liferay.com/repos/public/portal/trunk/util-java</url>
 	</scm>
 	<dependencies>
 		<dependency>

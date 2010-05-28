@@ -15,7 +15,7 @@
 	<version>6.0.2-SNAPSHOT</version>
 	<scm>
 		<connection>scm:svn:svn://svn.liferay.com/repos/public/portal/trunk/support-maven/archetypes/liferay-theme-archetype</connection>
-		<url>http://svn.liferay.com/repos/public/portal/trunk/support-maven/archetypes/liferay-theme-archetype</url>
+		<url>http://guest:guest@svn.liferay.com/repos/public/portal/trunk/support-maven/archetypes/liferay-theme-archetype</url>
 	</scm>
 	<build>
 		<extensions>
