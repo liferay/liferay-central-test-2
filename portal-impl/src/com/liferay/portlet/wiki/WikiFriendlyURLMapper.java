@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortletKeys;
 
@@ -146,57 +145,71 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 		int x = friendlyURLPath.indexOf(StringPool.SLASH, 1);
 
-		String[] urlFragments = StringUtil.split(
-			friendlyURLPath.substring(x + 1), StringPool.SLASH);
+		String wikiPath = friendlyURLPath.substring(x + 1);
 
-		if (urlFragments.length >= 1) {
-			String urlFragment0 = urlFragments[0];
+		int lastSlash = wikiPath.lastIndexOf(StringPool.SLASH);
 
-			if (urlFragment0.equals("tag")) {
-				if (urlFragments.length >= 2) {
-					addParam(
-						params, "struts_action", "/wiki/view_tagged_pages");
+		if (lastSlash != -1) {
+			String lastFragment = wikiPath.substring(lastSlash + 1);
 
-					String tag = HttpUtil.decodeURL(urlFragments[1]);
+			boolean isWindowState =
+				(lastFragment.equalsIgnoreCase("exclusive") ||
+					lastFragment.equalsIgnoreCase("maximized") ||
+					lastFragment.equalsIgnoreCase("normal"));
 
-					addParam(params, "tag", tag);
-				}
+			if (isWindowState) {
+				addParam(params, "p_p_state", lastFragment);
+
+				wikiPath = wikiPath.substring(0, lastSlash);
+			}
+		}
+
+		String firstFragment = wikiPath;
+		int firstSlash = wikiPath.indexOf(StringPool.SLASH);
+
+		if (firstSlash != -1) {
+			firstFragment = wikiPath.substring(0, firstSlash);
+			wikiPath = wikiPath.substring(firstSlash + 1);
+		}
+		else {
+			wikiPath = null;
+		}
+
+		if (firstFragment.equalsIgnoreCase("tag") && wikiPath != null) {
+			addParam(params, "struts_action", "/wiki/view_tagged_pages");
+
+			String tag = HttpUtil.decodeURL(wikiPath);
+
+			addParam(params, "tag", tag);
+		}
+		else {
+			if (Validator.isNumber(firstFragment)) {
+				addParam(params, "nodeId", firstFragment);
+				addParam(params, "nodeName", StringPool.BLANK);
 			}
 			else {
-				if (Validator.isNumber(urlFragment0)) {
-					addParam(params, "nodeId", urlFragment0);
-					addParam(params, "nodeName", StringPool.BLANK);
+				addParam(params, "nodeId", StringPool.BLANK);
+				addParam(params, "nodeName", firstFragment);
+			}
+
+			if (wikiPath != null) {
+				if (wikiPath.equals("all_pages") ||
+					wikiPath.equals("draft_pages") ||
+					wikiPath.equals("orphan_pages") ||
+					wikiPath.equals("recent_changes")) {
+
+					addParam(
+						params, "struts_action",
+						"/wiki/view_" + wikiPath);
 				}
 				else {
-					addParam(params, "nodeId", StringPool.BLANK);
-					addParam(params, "nodeName", urlFragment0);
+					wikiPath = HttpUtil.decodeURL(wikiPath);
+
+					addParam(params, "title", wikiPath);
 				}
-
-				if (urlFragments.length >= 2) {
-					String urlFragments1 = HttpUtil.decodeURL(urlFragments[1]);
-
-					if (urlFragments1.equals("all_pages") ||
-						urlFragments1.equals("draft_pages") ||
-						urlFragments1.equals("orphan_pages") ||
-						urlFragments1.equals("recent_changes")) {
-
-						addParam(
-							params, "struts_action",
-							"/wiki/view_" + urlFragments1);
-					}
-					else {
-						addParam(params, "title", urlFragments1);
-					}
-				}
-
-				addParam(params, "tag", StringPool.BLANK);
 			}
 
-			if (urlFragments.length >= 3) {
-				String windowState = urlFragments[2];
-
-				addParam(params, "p_p_state", windowState);
-			}
+			addParam(params, "tag", StringPool.BLANK);
 		}
 	}
 

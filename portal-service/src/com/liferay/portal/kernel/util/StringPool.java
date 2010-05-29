@@ -35,6 +35,8 @@ public class StringPool {
 
 	public static final String BLANK = "";
 
+	public static final String CARET = "^";
+
 	public static final String CDATA_CLOSE = "]]>";
 
 	public static final String CDATA_OPEN = "<![CDATA[";
@@ -75,6 +77,8 @@ public class StringPool {
 
 	public static final String DOUBLE_SPACE = "  ";
 
+	public static final String EXCLAMATION = "!";
+
 	public static final String EQUAL = "=";
 
 	public static final String FALSE = "false";
@@ -83,9 +87,15 @@ public class StringPool {
 
 	public static final String FOUR_SPACES = "    ";
 
+	public static final String GRAVE_ACCENT = "`";
+
 	public static final String GREATER_THAN = ">";
 
 	public static final String GREATER_THAN_OR_EQUAL = ">=";
+
+	public static final String INVERTED_EXCLAMATION = "\u00A1";
+
+	public static final String INVERTED_QUESTION = "\u00BF";
 
 	public static final String IS_NOT_NULL = "IS NOT NULL";
 

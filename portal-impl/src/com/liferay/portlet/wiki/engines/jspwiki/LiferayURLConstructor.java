@@ -20,6 +20,7 @@ import com.ecyrd.jspwiki.url.URLConstructor;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portlet.wiki.util.WikiUtil;
 
 import java.util.Properties;
 
@@ -43,12 +44,15 @@ public class LiferayURLConstructor implements URLConstructor {
 	public String makeURL(
 		String context, String name, boolean absolute, String parameters) {
 
+		String decodedName = HttpUtil.encodeURL(
+			WikiUtil.decodeJSPWikiName(name));
+
 		if (Validator.isNotNull(parameters)) {
 			if (context.equals(WikiContext.ATTACH)) {
 				parameters = StringPool.QUESTION + parameters;
 			}
 			else if (context.equals(WikiContext.NONE)) {
-				if (name.indexOf(StringPool.QUESTION) != -1) {
+				if (decodedName.indexOf(StringPool.QUESTION) != -1) {
 					parameters = "&amp;" + parameters;
 				}
 				else {
@@ -67,23 +71,24 @@ public class LiferayURLConstructor implements URLConstructor {
 
 		if (context.equals(WikiContext.EDIT)) {
 			path =
-				"[$BEGIN_PAGE_TITLE_EDIT$]" + name + "[$END_PAGE_TITLE_EDIT$]";
+				"[$BEGIN_PAGE_TITLE_EDIT$]" + decodedName +
+					"[$END_PAGE_TITLE_EDIT$]";
 		}
 		else if (context.equals(WikiContext.VIEW)) {
-			path = "[$BEGIN_PAGE_TITLE$]" + name + "[$END_PAGE_TITLE$]";
+			path = "[$BEGIN_PAGE_TITLE$]" + decodedName + "[$END_PAGE_TITLE$]";
 		}
 		else if (context.equals(WikiContext.ATTACH)) {
-			if (name.indexOf(StringPool.SLASH) == -1) {
+			if (decodedName.indexOf(StringPool.SLASH) == -1) {
 				path =
 					"[$ATTACHMENT_URL_PREFIX$][$WIKI_PAGE_NAME$]/" +
-						HttpUtil.encodeURL(name);
+						decodedName;
 			}
 			else {
-				path = "[$ATTACHMENT_URL_PREFIX$]" + HttpUtil.encodeURL(name);
+				path = "[$ATTACHMENT_URL_PREFIX$]" + decodedName;
 			}
 		}
 		else {
-			path = name;
+			path = decodedName;
 		}
 
 		return path + parameters;

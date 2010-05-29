@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.engines.WikiEngine;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
+import com.liferay.portlet.wiki.util.WikiUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -73,7 +74,7 @@ public class JSPWikiEngine implements WikiEngine {
 				page, engine);
 
 			Collection<String> titles = engine.scanWikiLinks(
-				jspWikiPage, page.getContent());
+				jspWikiPage, WikiUtil.encodeJSPWikiContent(page.getContent()));
 
 			Map<String, Boolean> links = new HashMap<String, Boolean>();
 
@@ -132,7 +133,7 @@ public class JSPWikiEngine implements WikiEngine {
 	protected String convert(com.liferay.portlet.wiki.model.WikiPage page)
 		throws WikiException {
 
-		String content = page.getContent();
+		String content = WikiUtil.encodeJSPWikiContent(page.getContent());
 
 		if (Validator.isNull(content)) {
 			return StringPool.BLANK;
