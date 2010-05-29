@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.User;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.NoSuchEntryException;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.social.NoSuchEquityAssetEntryException;
@@ -47,6 +48,10 @@ public class SocialEquityLogLocalServiceImpl
 	public void addEquityLogs(
 			long userId, long assetEntryId, String actionId)
 		throws PortalException, SystemException {
+
+		if (!PropsValues.SOCIAL_EQUITY_EQUITY_LOG_SERVICE_ENABLED) {
+			return;
+		}
 
 		List<SocialEquityLog> equityLogs =
 			socialEquityLogPersistence.findByU_AEI_A_A(
@@ -83,6 +88,10 @@ public class SocialEquityLogLocalServiceImpl
 			long userId, String className, long classPK, String actionId)
 		throws PortalException, SystemException {
 
+		if (!PropsValues.SOCIAL_EQUITY_EQUITY_LOG_SERVICE_ENABLED) {
+			return;
+		}
+
 		AssetEntry assetEntry = null;
 
 		try {
@@ -98,6 +107,10 @@ public class SocialEquityLogLocalServiceImpl
 
 	public void checkEquityLogs() throws SystemException {
 		int validity = getEquityDate();
+
+		if (!PropsValues.SOCIAL_EQUITY_EQUITY_LOG_SERVICE_ENABLED) {
+			return;
+		}
 
 		runCheckSQL(_CHECK_SOCIAL_EQUITY_ASSET_ENTRY_IQ_1, validity);
 		runCheckSQL(_CHECK_SOCIAL_EQUITY_ASSET_ENTRY_IQ_2, validity);
@@ -121,6 +134,11 @@ public class SocialEquityLogLocalServiceImpl
 	}
 
 	public void deactivateEquityLogs(long assetEntryId)	throws SystemException {
+
+		if (!PropsValues.SOCIAL_EQUITY_EQUITY_LOG_SERVICE_ENABLED) {
+			return;
+		}
+
 		SocialEquityAssetEntry equityAssetEntry = null;
 
 		try {

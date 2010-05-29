@@ -978,6 +978,8 @@ public class PropsValues {
 
 	public static final int SOCIAL_EQUITY_EQUITY_LOG_CHECK_INTERVAL = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SOCIAL_EQUITY_EQUITY_LOG_CHECK_INTERVAL));
 
+	public static final boolean SOCIAL_EQUITY_EQUITY_LOG_SERVICE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.SOCIAL_EQUITY_EQUITY_LOG_SERVICE_ENABLED));
+
 	public static final String[] SPRING_CONFIGS = PropsUtil.getArray(PropsKeys.SPRING_CONFIGS);
 
 	public static boolean SPRING_HIBERNATE_SESSION_DELEGATED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.SPRING_HIBERNATE_SESSION_DELEGATED));
