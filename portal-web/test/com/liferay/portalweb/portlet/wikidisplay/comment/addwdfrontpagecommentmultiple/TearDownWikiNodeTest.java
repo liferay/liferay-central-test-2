@@ -54,7 +54,7 @@ public class TearDownWikiNodeTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 
 				boolean wikiNode1Present = selenium.isElementPresent(
-						"//strong/a");
+						"//td[4]/ul/li/strong/a");
 
 				if (!wikiNode1Present) {
 					label = 2;
@@ -62,7 +62,8 @@ public class TearDownWikiNodeTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+				selenium.clickAt("//td[4]/ul/li/strong/a",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -90,7 +91,7 @@ public class TearDownWikiNodeTest extends BaseTestCase {
 			case 2:
 
 				boolean wikiNode2Present = selenium.isElementPresent(
-						"//strong/a");
+						"//td[4]/ul/li/strong/a");
 
 				if (!wikiNode2Present) {
 					label = 3;
@@ -98,7 +99,8 @@ public class TearDownWikiNodeTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+				selenium.clickAt("//td[4]/ul/li/strong/a",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -126,7 +128,7 @@ public class TearDownWikiNodeTest extends BaseTestCase {
 			case 3:
 
 				boolean wikiNode3Present = selenium.isElementPresent(
-						"//strong/a");
+						"//td[4]/ul/li/strong/a");
 
 				if (!wikiNode3Present) {
 					label = 4;
@@ -134,7 +136,8 @@ public class TearDownWikiNodeTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+				selenium.clickAt("//td[4]/ul/li/strong/a",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -162,7 +165,7 @@ public class TearDownWikiNodeTest extends BaseTestCase {
 			case 4:
 
 				boolean wikiNode4Present = selenium.isElementPresent(
-						"//strong/a");
+						"//td[4]/ul/li/strong/a");
 
 				if (!wikiNode4Present) {
 					label = 5;
@@ -170,7 +173,8 @@ public class TearDownWikiNodeTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+				selenium.clickAt("//td[4]/ul/li/strong/a",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -198,7 +202,7 @@ public class TearDownWikiNodeTest extends BaseTestCase {
 			case 5:
 
 				boolean wikiNode5Present = selenium.isElementPresent(
-						"//strong/a");
+						"//td[4]/ul/li/strong/a");
 
 				if (!wikiNode5Present) {
 					label = 6;
@@ -206,7 +210,8 @@ public class TearDownWikiNodeTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+				selenium.clickAt("//td[4]/ul/li/strong/a",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
