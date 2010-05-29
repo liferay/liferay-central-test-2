@@ -477,12 +477,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 
 				${entity.name}.class.getName(),
 
-				<#if entity.hasColumn("resourcePrimKey")>
-					getResourcePrimKey()
-				<#else>
-					getPrimaryKey()
-				</#if>
-
+				getPrimaryKey()
 				);
 			}
 
