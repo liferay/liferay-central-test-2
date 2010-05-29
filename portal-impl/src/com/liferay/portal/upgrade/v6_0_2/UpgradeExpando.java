@@ -26,6 +26,7 @@ import com.liferay.portlet.wiki.model.WikiPage;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -174,7 +175,8 @@ public class UpgradeExpando extends UpgradeProcess {
 
 						if (_log.isDebugEnabled()) {
 							_log.debug(
-								"Copying row " + rowId + " into " + targetRowId);
+								"Copying row " + rowId + " into " +
+									targetRowId);
 						}
 
 						runSQL(
