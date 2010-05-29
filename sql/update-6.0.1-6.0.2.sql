@@ -6,7 +6,7 @@ COMMIT_TRANSACTION;
 
 update Company set maxUsers = 0;
 
-update ExpandoTable set name = 'CUSTOM_FIELDS' where name = 'DEFAULT_TABLE'
+update ExpandoTable set name = 'CUSTOM_FIELDS' where name = 'DEFAULT_TABLE';
 
 alter table LayoutSet add settings_ TEXT null;
 
