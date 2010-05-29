@@ -187,7 +187,7 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 	<div class="custom-attributes">
 		<liferay-ui:custom-attribute-list
 			className="<%= WikiPage.class.getName() %>"
-			classPK="<%= (wikiPage != null) ? wikiPage.getResourcePrimKey() : 0 %>"
+			classPK="<%= (wikiPage != null) ? wikiPage.getPrimaryKey() : 0 %>"
 			editable="<%= false %>"
 			label="<%= true %>"
 		/>

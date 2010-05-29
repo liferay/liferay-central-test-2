@@ -38,23 +38,18 @@ import java.util.List;
 public class UpgradeExpando extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		long classNameId = ClassNameLocalServiceUtil.getClassNameId(
-			JournalArticle.class.getName());
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Upgrading Expando for Journal");
 		}
 
-		updateTables(classNameId);
-
-		classNameId = ClassNameLocalServiceUtil.getClassNameId(
-			WikiPage.class.getName());
+		updateTables(_journalClassNameId);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Upgrading Expando for Wiki");
 		}
 
-		updateTables(classNameId);
+		updateTables(_wikiClassNameId);
 	}
 
 	protected boolean existsRow(long companyId, long tableId, Long classPK)
@@ -115,7 +110,8 @@ public class UpgradeExpando extends UpgradeProcess {
 
 	}
 
-	protected List<Long> getJournalArticleIds(long resourcePrimKey)
+	protected List<Long> getPrimaryKeys(
+			String tableName, String columnName, long resourcePrimKey)
 		throws Exception {
 
 		ArrayList<Long> ids = new ArrayList<Long>();
@@ -128,14 +124,15 @@ public class UpgradeExpando extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select id_ from JournalArticle where resourcePrimKey = ?");
+				"select " + columnName + " from " + tableName + " where " +
+					"resourcePrimKey = ?");
 
 			ps.setLong(1, resourcePrimKey);
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				long id = rs.getLong("id_");
+				long id = rs.getLong(columnName);
 
 				ids.add(id);
 			}
@@ -147,7 +144,7 @@ public class UpgradeExpando extends UpgradeProcess {
 		return ids;
 	}
 
-	protected void updateRows(long tableId) throws Exception {
+	protected void updateRows(long tableId, long classNameId) throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -167,9 +164,20 @@ public class UpgradeExpando extends UpgradeProcess {
 				long companyId = rs.getLong("companyId");
 				long classPK = rs.getLong("classPK");
 
-				List<Long> ids = getJournalArticleIds(classPK);
+				List<Long> primaryKeys = null;
 
-				for (Long id : ids) {
+				if (classNameId == _journalClassNameId) {
+					primaryKeys = getPrimaryKeys(
+						"JournalArticle", "id_", classPK);
+				}
+				else if (classNameId == _wikiClassNameId) {
+					primaryKeys = getPrimaryKeys("WikiPage", "pageId", classPK);
+				}
+				else {
+					primaryKeys = new ArrayList<Long>();
+				}
+
+				for (Long id : primaryKeys) {
 					if (!existsRow(companyId, tableId, id)) {
 						long targetRowId = increment();
 
@@ -190,7 +198,7 @@ public class UpgradeExpando extends UpgradeProcess {
 
 				}
 
-				if (!ids.isEmpty()) {
+				if (!primaryKeys.isEmpty()) {
 					runSQL("delete from ExpandoValue where rowId_ = " + rowId);
 					runSQL("delete from ExpandoRow where rowId_ = " + rowId);
 				}
@@ -221,7 +229,7 @@ public class UpgradeExpando extends UpgradeProcess {
 			while (rs.next()) {
 				long tableId = rs.getLong("tableId");
 
-				updateRows(tableId);
+				updateRows(tableId, classNameId);
 			}
 		}
 		finally {
@@ -281,6 +289,12 @@ public class UpgradeExpando extends UpgradeProcess {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
+
+	private long _journalClassNameId = ClassNameLocalServiceUtil.getClassNameId(
+		JournalArticle.class.getName());
+
+	private long _wikiClassNameId = ClassNameLocalServiceUtil.getClassNameId(
+		WikiPage.class.getName());
 
 	private static Log _log = LogFactoryUtil.getLog(UpgradeExpando.class);
 

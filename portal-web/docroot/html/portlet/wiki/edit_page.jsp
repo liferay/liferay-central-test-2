@@ -263,7 +263,7 @@ if (Validator.isNull(redirect)) {
 					<aui:fieldset>
 						<liferay-ui:custom-attribute-list
 							className="<%= WikiPage.class.getName() %>"
-							classPK="<%= (page != null) ? wikiPage.getResourcePrimKey() : 0 %>"
+							classPK="<%= (page != null) ? wikiPage.getPrimaryKey() : 0 %>"
 							editable="<%= true %>"
 							label="<%= true %>"
 						/>
