@@ -74,9 +74,9 @@ public class WorkflowInstanceManagerProxyBean
 	}
 
 	public WorkflowInstance startWorkflowInstance(
-		long companyId, long userId, String workflowDefinitionName,
-		Integer workflowDefinitionVersion, String transitionName,
-		Map<String, Serializable> workflowContext) {
+		long companyId, long groupId, long userId,
+		String workflowDefinitionName, Integer workflowDefinitionVersion,
+		String transitionName, Map<String, Serializable> workflowContext) {
 
 		throw new UnsupportedOperationException();
 	}

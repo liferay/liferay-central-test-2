@@ -84,6 +84,12 @@ public class WorkflowTaskManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
+	public int getWorkflowTaskCountBySubmittingUser(
+		long companyId, long userId, Boolean completed) {
+
+		throw new UnsupportedOperationException();
+	}
+
 	public int getWorkflowTaskCountByUser(
 		long companyId, long userId, Boolean completed) {
 
@@ -102,12 +108,6 @@ public class WorkflowTaskManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
-	public int getWorkflowTaskCountStartedByUser(
-		long companyId, long userId, Boolean completed) {
-
-		throw new UnsupportedOperationException();
-	}
-
 	public List<WorkflowTask> getWorkflowTasks(
 		long companyId, Boolean completed, int start, int end,
 		OrderByComparator orderByComparator) {
@@ -117,6 +117,13 @@ public class WorkflowTaskManagerProxyBean
 
 	public List<WorkflowTask> getWorkflowTasksByRole(
 		long companyId, long roleId, Boolean completed, int start, int end,
+		OrderByComparator orderByComparator) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public List<WorkflowTask> getWorkflowTasksBySubmittingUser(
+		long companyId, long userId, Boolean completed, int start, int end,
 		OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
@@ -139,13 +146,6 @@ public class WorkflowTaskManagerProxyBean
 	public List<WorkflowTask> getWorkflowTasksByWorkflowInstance(
 		long companyId, long workflowInstanceId, Boolean completed, int start,
 		int end, OrderByComparator orderByComparator) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public List<WorkflowTask> getWorkflowTasksStartedByUser(
-		long companyId, long userId, Boolean completed, int start, int end,
-		OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}

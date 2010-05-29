@@ -228,7 +228,7 @@ public class WorkflowInstanceLinkLocalServiceImpl
 
 		WorkflowInstance workflowInstance =
 			WorkflowInstanceManagerUtil.startWorkflowInstance(
-				companyId, userId, workflowDefinitionName,
+				companyId, groupId, userId, workflowDefinitionName,
 			workflowDefinitionVersion, null, workflowContext);
 
 		addWorkflowInstanceLink(

@@ -37,8 +37,8 @@ public class WorkflowLockingAdvice {
 		Object[] arguments = proceedingJoinPoint.getArgs();
 
 		if (methodName.equals(_START_WORKFLOW_INSTANCE_METHOD_NAME)) {
-			String workflowDefinitionName = (String)arguments[2];
-			Integer workflowDefinitionVersion = (Integer)arguments[3];
+			String workflowDefinitionName = (String)arguments[3];
+			Integer workflowDefinitionVersion = (Integer)arguments[4];
 
 			String className = WorkflowDefinition.class.getName();
 			String key = _encodeKey(

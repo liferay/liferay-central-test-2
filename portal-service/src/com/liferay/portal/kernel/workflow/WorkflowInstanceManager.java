@@ -61,9 +61,9 @@ public interface WorkflowInstanceManager {
 		throws WorkflowException;
 
 	public WorkflowInstance startWorkflowInstance(
-			long companyId, long userId, String workflowDefinitionName,
-			Integer workflowDefinitionVersion, String transitionName,
-			Map<String, Serializable> workflowContext)
+			long companyId, long groupId, long userId,
+			String workflowDefinitionName, Integer workflowDefinitionVersion,
+			String transitionName, Map<String, Serializable> workflowContext)
 		throws WorkflowException;
 
 	public WorkflowInstance updateWorkflowContext(
