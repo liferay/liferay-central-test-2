@@ -524,7 +524,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					<liferay-ui:custom-attributes-available className="<%= JournalArticle.class.getName() %>">
 						<liferay-ui:custom-attribute-list
 							className="<%= JournalArticle.class.getName() %>"
-							classPK="<%= (article != null) ? article.getResourcePrimKey() : 0 %>"
+							classPK="<%= (article != null) ? article.getPrimaryKey() : 0 %>"
 							editable="<%= true %>"
 							label="<%= true %>"
 						/>
