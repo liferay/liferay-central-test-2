@@ -101,6 +101,14 @@ public class WorkflowTaskManagerUtil {
 			companyId, roleId, completed);
 	}
 
+	public static int getWorkflowTaskCountBySubmittingUser(
+			long companyId, long userId, Boolean completed)
+		throws WorkflowException {
+
+		return _workflowTaskManager.getWorkflowTaskCountBySubmittingUser(
+			companyId, userId, completed);
+	}
+
 	public static int getWorkflowTaskCountByUser(
 			long companyId, long userId, Boolean completed)
 		throws WorkflowException {
@@ -125,14 +133,6 @@ public class WorkflowTaskManagerUtil {
 			companyId, workflowInstanceId, completed);
 	}
 
-	public static int getWorkflowTaskCountBySubmittingUser(
-			long companyId, long userId, Boolean completed)
-		throws WorkflowException {
-
-		return _workflowTaskManager.getWorkflowTaskCountBySubmittingUser(
-			companyId, userId, completed);
-	}
-
 	public static WorkflowTaskManager getWorkflowTaskManager() {
 		return _workflowTaskManager;
 	}
@@ -153,6 +153,15 @@ public class WorkflowTaskManagerUtil {
 
 		return _workflowTaskManager.getWorkflowTasksByRole(
 			companyId, roleId, completed, start, end, orderByComparator);
+	}
+
+	public static List<WorkflowTask> getWorkflowTasksBySubmittingUser(
+			long companyId, long userId, Boolean completed, int start, int end,
+			OrderByComparator orderByComparator)
+		throws WorkflowException {
+
+		return _workflowTaskManager.getWorkflowTasksBySubmittingUser(
+			companyId, userId, completed, start, end, orderByComparator);
 	}
 
 	public static List<WorkflowTask> getWorkflowTasksByUser(
@@ -181,15 +190,6 @@ public class WorkflowTaskManagerUtil {
 		return _workflowTaskManager.getWorkflowTasksByWorkflowInstance(
 			companyId, workflowInstanceId, completed, start, end,
 			orderByComparator);
-	}
-
-	public static List<WorkflowTask> getWorkflowTasksBySubmittingUser(
-			long companyId, long userId, Boolean completed, int start, int end,
-			OrderByComparator orderByComparator)
-		throws WorkflowException {
-
-		return _workflowTaskManager.getWorkflowTasksBySubmittingUser(
-			companyId, userId, completed, start, end, orderByComparator);
 	}
 
 	public static List<WorkflowTask> search(
