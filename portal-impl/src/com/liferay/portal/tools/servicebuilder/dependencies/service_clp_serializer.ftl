@@ -108,7 +108,7 @@ public class ClpSerializer {
 		if (obj instanceof BaseModel<?>) {
 			return translateInput((BaseModel<?>)obj);
 		}
-		else if (obj instanceof List) {
+		else if (obj instanceof List<?>) {
 			return translateInput((List<Object>)obj);
 		}
 		else {
@@ -190,7 +190,7 @@ public class ClpSerializer {
 		if (obj instanceof BaseModel<?>) {
 			return translateOutput((BaseModel<?>)obj);
 		}
-		else if (obj instanceof List) {
+		else if (obj instanceof List<?>) {
 			return translateOutput((List<Object>)obj);
 		}
 		else {
