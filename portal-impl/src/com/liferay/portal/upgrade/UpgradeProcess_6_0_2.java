@@ -33,8 +33,8 @@ public class UpgradeProcess_6_0_2 extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
 		upgrade(UpgradeSchema.class);
-		upgrade(UpgradeNestedPortlets.class);
 		upgrade(UpgradeExpando.class);
+		upgrade(UpgradeNestedPortlets.class);
 	}
 
 }

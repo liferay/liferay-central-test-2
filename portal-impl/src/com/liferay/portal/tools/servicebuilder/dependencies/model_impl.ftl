@@ -475,10 +475,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 					0,
 				</#if>
 
-				${entity.name}.class.getName(),
-
-				getPrimaryKey()
-				);
+				${entity.name}.class.getName(), getPrimaryKey());
 			}
 
 			return _expandoBridge;
