@@ -19,14 +19,14 @@ The portlet element contains the declarative data of a portlet.
 <!ELEMENT portlet (portlet-name, icon?, virtual-path?, struts-path?,
 configuration-path?, configuration-action-class?, indexer-class?,
 open-search-class?, scheduler-entry*, portlet-url-class?,
-friendly-url-mapper-class?, url-encoder-class?, portlet-data-handler-class?,
-portlet-layout-listener-class?, poller-processor-class?,
-pop-message-listener-class?, social-activity-interpreter-class?,
-social-request-interpreter-class?, webdav-storage-token?, webdav-storage-class?,
-xml-rpc-method-class?, control-panel-entry-category?,
-control-panel-entry-weight?, control-panel-entry-class?,
-asset-renderer-factory*, custom-attributes-display*, workflow-handler*,
-preferences-company-wide?, preferences-unique-per-layout?,
+friendly-url-mapper-class?, friendly-url-routes?, url-encoder-class?,
+portlet-data-handler-class?, portlet-layout-listener-class?,
+poller-processor-class?, pop-message-listener-class?,
+social-activity-interpreter-class?, social-request-interpreter-class?,
+webdav-storage-token?, webdav-storage-class?, xml-rpc-method-class?,
+control-panel-entry-category?, control-panel-entry-weight?,
+control-panel-entry-class?, asset-renderer-factory*, custom-attributes-display*,
+workflow-handler*, preferences-company-wide?, preferences-unique-per-layout?,
 preferences-owned-by-group?, use-default-template?, show-portlet-access-denied?,
 show-portlet-inactive?, action-url-redirect?, restore-current-view?,
 maximize-edit?, maximize-help?, pop-up-print?, layout-cacheable?, instanceable?,
@@ -201,6 +201,38 @@ http://docs.liferay.com/portal/6.0/javadocs/portal-impl/com/liferay/portlet/mess
 http://docs.liferay.com/portal/6.0/javadocs/portal-service/com/liferay/portal/kernel/portlet/FriendlyURLMapper.html
 -->
 <!ELEMENT friendly-url-mapper-class (#PCDATA)>
+
+<!--
+The friendly-url-routes contains routes that can be used by a friendly
+URL mapper.
+-->
+<!ELEMENT friendly-url-routes (route*)>
+
+<!--
+The route element contains information on a single route.
+-->
+<!ELEMENT route (route-pattern, route-default*)>
+
+<!--
+The route-pattern specifies the pattern of the mapped friendly URL.
+-->
+<!ELEMENT route-pattern (#PCDATA)>
+
+<!--
+The route-default specifies a default parameter that is not preset in the route
+pattern.
+-->
+<!ELEMENT route-default (route-default-parameter, route-default-value)>
+
+<!--
+The route-default-parameter specifies the URL parameter of this default.
+-->
+<!ELEMENT route-default-parameter (#PCDATA)>
+
+<!--
+The route-default-parameter specifies the default value of this parameter.
+-->
+<!ELEMENT route-default-value (#PCDATA)>
 
 <!--
 The url-encoder-class value must be a class that implements

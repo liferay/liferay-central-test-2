@@ -34,6 +34,10 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 		return _CHECK_MAPPING_WITH_PREFIX;
 	}
 
+	public void setRouter(Router router) {
+		this.router = router;
+	}
+
 	protected void addParam(
 		Map<String, String[]> params, String name, boolean value) {
 
@@ -103,6 +107,8 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 			return getPortletId();
 		}
 	}
+
+	protected Router router;
 
 	private static final boolean _CHECK_MAPPING_WITH_PREFIX = true;
 

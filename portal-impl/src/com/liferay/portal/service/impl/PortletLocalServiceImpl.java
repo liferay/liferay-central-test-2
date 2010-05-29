@@ -25,6 +25,8 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.portlet.Route;
+import com.liferay.portal.kernel.portlet.Router;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
 import com.liferay.portal.kernel.scheduler.TimeUnit;
@@ -716,6 +718,42 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return portlet;
 	}
 
+	protected void setFriendlyURLRoutes(
+		Portlet portlet, Element portletElement) {
+
+		Element friendlyUrlRoutesElement = portletElement.element(
+			"friendly-url-routes");
+
+		if (friendlyUrlRoutesElement == null) {
+			return;
+		}
+
+		Router router = new Router();
+
+		for (Element routeElement :
+				friendlyUrlRoutesElement.elements("route")) {
+
+			Route route = new Route();
+
+			String pattern = routeElement.elementText("route-pattern");
+
+			route.setPattern(pattern);
+
+			for (Element routeDefaultElement :
+					routeElement.elements("route-default")) {
+
+				String defaultParamater = routeDefaultElement.elementText(
+					"route-default-parameter");
+				String defaultValue = routeDefaultElement.elementText(
+					"route-default-value");
+
+				route.addDefaultValue(defaultParamater, defaultValue);
+			}
+
+			router.addRoute(route);
+		}
+	}
+
 	private String _encodeKey(long companyId) {
 		return _keyPrefix.concat(String.valueOf(companyId));
 	}
@@ -1202,6 +1240,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				else {
 					_friendlyURLMapperPortlets.put(portletId, portletModel);
 				}
+
+				setFriendlyURLRoutes(portletModel, portlet);
 
 				portletModel.setURLEncoderClass(GetterUtil.getString(
 					portlet.elementText("url-encoder-class"),

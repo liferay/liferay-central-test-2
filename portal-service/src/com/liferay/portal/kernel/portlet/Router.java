@@ -14,27 +14,25 @@
 
 package com.liferay.portal.kernel.portlet;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * <a href="FriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="Router.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Myunghun Kim
+ * @author Connor McKay
  * @author Brian Wing Shun Chan
- * @author Jorge Ferrer
  */
-public interface FriendlyURLMapper {
+public class Router {
 
-	public String buildPath(LiferayPortletURL portletURL);
+	public void addRoute(Route route) {
+		_routes.add(route);
+	}
 
-	public String getMapping();
+	public List<Route> getRoutes() {
+		return _routes;
+	}
 
-	public boolean isCheckMappingWithPrefix();
-
-	public void populateParams(
-		String friendlyURLPath, Map<String, String[]> params,
-		Map<String, Object> requestContext);
-
-	public void setRouter(Router router);
+	private List<Route> _routes = new ArrayList<Route>();
 
 }

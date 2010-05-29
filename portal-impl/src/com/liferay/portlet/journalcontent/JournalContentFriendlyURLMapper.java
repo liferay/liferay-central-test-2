@@ -17,6 +17,7 @@ package com.liferay.portlet.journalcontent;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.portlet.Router;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -155,6 +156,9 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 		params.put(
 			namespace + "struts_action",
 			new String[] {"/journal_content/view"});
+	}
+
+	public void setRouter(Router router) {
 	}
 
 	private static final boolean _CHECK_MAPPING_WITH_PREFIX = true;

@@ -17,6 +17,7 @@ package com.liferay.util.bridges.wai;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.portlet.Router;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PortletConstants;
@@ -96,6 +97,9 @@ public class WAIFriendlyURLMapper implements FriendlyURLMapper {
 		String path = friendlyURLPath.substring(y);
 
 		params.put(namespace + "appURL", new String[] {path});
+	}
+
+	public void setRouter(Router router) {
 	}
 
 	protected boolean hasBinaryExtension(String friendlyURLPath) {
