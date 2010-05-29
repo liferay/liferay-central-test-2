@@ -161,15 +161,18 @@ public class ActionUtil {
 		double version = ParamUtil.getDouble(request, "version");
 
 		WikiNode node = null;
-		if (nodeId != 0) {
-			try {
+
+		try {
+			if (nodeId > 0) {
 				node = WikiNodeServiceUtil.getNode(nodeId);
 			}
-			catch (NoSuchNodeException nsne) {
-			}
 		}
+		catch (NoSuchNodeException nsne) {
+		}
+
 		if (node == null) {
 			node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
+
 			if (node != null) {
 				nodeId = node.getNodeId();
 			}
