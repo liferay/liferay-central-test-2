@@ -49,7 +49,7 @@ public class SocialEquityLogLocalServiceImpl
 			long userId, long assetEntryId, String actionId)
 		throws PortalException, SystemException {
 
-		if (!PropsValues.SOCIAL_EQUITY_EQUITY_LOG_SERVICE_ENABLED) {
+		if (!PropsValues.SOCIAL_EQUITY_EQUITY_LOG_ENABLED) {
 			return;
 		}
 
@@ -88,7 +88,7 @@ public class SocialEquityLogLocalServiceImpl
 			long userId, String className, long classPK, String actionId)
 		throws PortalException, SystemException {
 
-		if (!PropsValues.SOCIAL_EQUITY_EQUITY_LOG_SERVICE_ENABLED) {
+		if (!PropsValues.SOCIAL_EQUITY_EQUITY_LOG_ENABLED) {
 			return;
 		}
 
@@ -108,7 +108,7 @@ public class SocialEquityLogLocalServiceImpl
 	public void checkEquityLogs() throws SystemException {
 		int validity = getEquityDate();
 
-		if (!PropsValues.SOCIAL_EQUITY_EQUITY_LOG_SERVICE_ENABLED) {
+		if (!PropsValues.SOCIAL_EQUITY_EQUITY_LOG_ENABLED) {
 			return;
 		}
 
@@ -134,8 +134,7 @@ public class SocialEquityLogLocalServiceImpl
 	}
 
 	public void deactivateEquityLogs(long assetEntryId)	throws SystemException {
-
-		if (!PropsValues.SOCIAL_EQUITY_EQUITY_LOG_SERVICE_ENABLED) {
+		if (!PropsValues.SOCIAL_EQUITY_EQUITY_LOG_ENABLED) {
 			return;
 		}
 
