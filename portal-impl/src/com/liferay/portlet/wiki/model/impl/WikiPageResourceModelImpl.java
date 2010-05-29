@@ -188,7 +188,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource> {
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
-					WikiPageResource.class.getName(), getResourcePrimKey());
+					WikiPageResource.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;
