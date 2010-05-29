@@ -94,6 +94,7 @@ userpassword:: e1NIQX1xVXFQNWN5eG02WWNUQWh6MDVIcGg1Z3Z1OU09</echo>
 		<antcall target="prepare-mysql" />
 
 		<antcall target="prepare-vm-server">
+			<param name="build.war" value="false" />
 			<param name="vm.vmdk.suffix" value="generic" />
 		 </antcall>
 

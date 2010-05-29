@@ -198,7 +198,14 @@ ${custom.properties}</echo>
 		<delete dir="dist" />
 		<mkdir dir="dist" />
 
-		<ant antfile="build-dist.xml" target="zip-portal-war-2.4" />
+		<if>
+			<not>
+				<isset property="build.war" />
+			</not>
+			<then>
+				<ant antfile="build-dist.xml" target="zip-portal-war-2.4" />
+			</then>
+		</if>
 
 		<echo>Copying ${vm.drive}\${vm.host}\${vm.host}.vmdk.${vm.vmdk.suffix} to ${vm.drive}\${vm.host}\${vm.host}.vmdk</echo>
 
@@ -221,17 +228,24 @@ ${custom.properties}</echo>
 127.0.0.1	www.easy.com
 127.0.0.1	www.fox.com</echo>
 
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} hosts dist\liferay-portal-${lp.version}.war tunnel-web\tunnel-web.war ${vm.username}@${vm.host}:/" />
-		</exec>
+ 		<if>
+			<not>
+				<isset property="build.war" />
+			</not>
+			<then>
+				<exec executable="${pscp.executable}">
+					<arg line="-pw ${vm.password} hosts dist\liferay-portal-${lp.version}.war tunnel-web\tunnel-web.war ${vm.username}@${vm.host}:/" />
+				</exec>
 
-		<delete file="hosts" />
+				<delete file="hosts" />
 
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c move /y C:\hosts C:\WINDOWS\system32\drivers\etc\hosts" />
-		</exec>
+				<exec executable="${plink.executable}">
+					<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c move /y C:\hosts C:\WINDOWS\system32\drivers\etc\hosts" />
+				</exec>
 
-		<ant antfile="build-dist.xml" target="zip-portal-dependencies" />
+				<ant antfile="build-dist.xml" target="zip-portal-dependencies" />
+			</then>
+		</if>
 	</target>
 
 	<target name="rebuild-database">
