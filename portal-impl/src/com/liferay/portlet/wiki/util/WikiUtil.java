@@ -80,9 +80,9 @@ public class WikiUtil {
 			page, viewPageURL, editPageURL, attachmentURLPrefix);
 	}
 
-	public static String decodeJSPWikiName(String JSPWikiName) {
+	public static String decodeJSPWikiName(String jspWikiName) {
 		return StringUtil.replace(
-			JSPWikiName, _JSP_WIKI_NAME_2, _JSP_WIKI_NAME_1);
+			jspWikiName, _JSP_WIKI_NAME_2, _JSP_WIKI_NAME_1);
 	}
 
 	public static String diffHtml (
@@ -372,9 +372,9 @@ public class WikiUtil {
 		return _instance._validate(nodeId, content, format);
 	}
 
-	private static String _decodeJSPWikiContent(String JSPWikicontent) {
+	private static String _decodeJSPWikiContent(String jspWikiContent) {
 		return StringUtil.replace(
-			JSPWikicontent, _JSP_WIKI_NAME_2, _JSP_WIKI_NAME_1);
+			jspWikiContent, _JSP_WIKI_NAME_2, _JSP_WIKI_NAME_1);
 	}
 
 	private static List<WikiNode> _orderNodes(

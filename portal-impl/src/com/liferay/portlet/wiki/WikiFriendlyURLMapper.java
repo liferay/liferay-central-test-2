@@ -152,12 +152,10 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 		if (lastSlash != -1) {
 			String lastFragment = wikiPath.substring(lastSlash + 1);
 
-			boolean isWindowState =
-				(lastFragment.equalsIgnoreCase("exclusive") ||
-					lastFragment.equalsIgnoreCase("maximized") ||
-					lastFragment.equalsIgnoreCase("normal"));
+			if (lastFragment.equalsIgnoreCase("exclusive") ||
+				lastFragment.equalsIgnoreCase("maximized") ||
+				lastFragment.equalsIgnoreCase("normal")) {
 
-			if (isWindowState) {
 				addParam(params, "p_p_state", lastFragment);
 
 				wikiPath = wikiPath.substring(0, lastSlash);
@@ -165,6 +163,7 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 		}
 
 		String firstFragment = wikiPath;
+
 		int firstSlash = wikiPath.indexOf(StringPool.SLASH);
 
 		if (firstSlash != -1) {
@@ -175,7 +174,7 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 			wikiPath = null;
 		}
 
-		if (firstFragment.equalsIgnoreCase("tag") && wikiPath != null) {
+		if (firstFragment.equalsIgnoreCase("tag") && (wikiPath != null)) {
 			addParam(params, "struts_action", "/wiki/view_tagged_pages");
 
 			String tag = HttpUtil.decodeURL(wikiPath);
