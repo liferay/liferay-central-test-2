@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.sender.MessageSender;
 import com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
+import com.liferay.portal.kernel.servlet.JspFactorySwapper;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.scheduler.SchedulerEngineProxy;
@@ -151,6 +152,10 @@ public class StartupAction extends SimpleAction {
 		}
 
 		DBUpgrader.verify();
+
+		// Liferay JspFactory
+
+		JspFactorySwapper.swap();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(StartupAction.class);

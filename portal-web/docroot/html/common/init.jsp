@@ -82,7 +82,6 @@
 <%@ page import="com.liferay.portal.kernel.search.Field" %>
 <%@ page import="com.liferay.portal.kernel.servlet.BrowserSnifferUtil" %>
 <%@ page import="com.liferay.portal.kernel.servlet.ImageServletTokenUtil" %>
-<%@ page import="com.liferay.portal.kernel.servlet.JspFactorySwapper" %>
 <%@ page import="com.liferay.portal.kernel.servlet.ServletContextUtil" %>
 <%@ page import="com.liferay.portal.kernel.servlet.SessionErrors" %>
 <%@ page import="com.liferay.portal.kernel.servlet.SessionMessages" %>
@@ -263,10 +262,6 @@
 
 <%@ page import="org.apache.commons.math.util.MathUtils" %>
 <%@ page import="org.apache.struts.Globals" %>
-
-<%
-JspFactorySwapper.swap();
-%>
 
 <liferay-theme:defineObjects />
 
