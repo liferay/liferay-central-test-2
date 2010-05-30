@@ -132,11 +132,13 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 <%-- Raw Text --%>
 
 <%
-StringBuilder pageBottomSB = (StringBuilder)request.getAttribute(WebKeys.PAGE_BOTTOM);
+StringBundler pageBottomSB = (StringBundler)request.getAttribute(WebKeys.PAGE_BOTTOM);
 %>
 
 <c:if test="<%= pageBottomSB != null %>">
-	<%= pageBottomSB.toString() %>
+	<%
+		pageBottomSB.writeTo(out);
+	%>
 </c:if>
 
 <%-- Theme JavaScript --%>

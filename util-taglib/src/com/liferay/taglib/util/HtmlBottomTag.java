@@ -14,6 +14,7 @@
 
 package com.liferay.taglib.util;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -41,11 +42,11 @@ public class HtmlBottomTag extends BodyTagSupport {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
-		StringBuilder sb = (StringBuilder)request.getAttribute(
+		StringBundler sb = (StringBundler)request.getAttribute(
 			WebKeys.PAGE_BOTTOM);
 
 		if (sb == null) {
-			sb = new StringBuilder();
+			sb = new StringBundler();
 
 			request.setAttribute(WebKeys.PAGE_BOTTOM, sb);
 		}
