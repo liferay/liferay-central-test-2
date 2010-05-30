@@ -391,10 +391,11 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 
 	public void updateAsset(long userId,
 		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
+		com.liferay.portlet.documentlibrary.model.DLFileVersion fileVersion,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_dlFileEntryLocalService.updateAsset(userId, fileEntry,
+		_dlFileEntryLocalService.updateAsset(userId, fileEntry, fileVersion,
 			assetCategoryIds, assetTagNames);
 	}
 

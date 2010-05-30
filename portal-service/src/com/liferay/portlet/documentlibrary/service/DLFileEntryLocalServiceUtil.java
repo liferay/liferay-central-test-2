@@ -388,11 +388,13 @@ public class DLFileEntryLocalServiceUtil {
 
 	public static void updateAsset(long userId,
 		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
+		com.liferay.portlet.documentlibrary.model.DLFileVersion fileVersion,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.updateAsset(userId, fileEntry, assetCategoryIds, assetTagNames);
+			.updateAsset(userId, fileEntry, fileVersion, assetCategoryIds,
+			assetTagNames);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
