@@ -69,7 +69,19 @@ public class RuntimePortletUtil {
 
 		return processPortlet(
 			servletContext, request, response, renderRequest, renderResponse,
-			portletId, queryString, null, null, null);
+			null, portletId, queryString, null, null, null, null, false);
+	}
+
+	public static String processPortlet(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, RenderRequest renderRequest,
+			RenderResponse renderResponse, String portletId, String queryString,
+			boolean writeOuput)
+		throws Exception {
+
+		return processPortlet(
+			servletContext, request, response, renderRequest, renderResponse,
+			null, portletId, queryString, null, null, null, null, writeOuput);
 	}
 
 	public static String processPortlet(
@@ -82,7 +94,21 @@ public class RuntimePortletUtil {
 		return processPortlet(
 			servletContext, request, response, renderRequest, renderResponse,
 			null, portletId, queryString, columnId, columnPos, columnCount,
-			null);
+			null, false);
+	}
+
+	public static String processPortlet(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, RenderRequest renderRequest,
+			RenderResponse renderResponse, String portletId, String queryString,
+			String columnId, Integer columnPos, Integer columnCount,
+			boolean writeOutput)
+		throws Exception {
+
+		return processPortlet(
+			servletContext, request, response, renderRequest, renderResponse,
+			null, portletId, queryString, columnId, columnPos, columnCount,
+			null, writeOutput);
 	}
 
 	public static String processPortlet(
@@ -95,7 +121,20 @@ public class RuntimePortletUtil {
 		return processPortlet(
 			servletContext, request, response, null, null, portlet,
 			portlet.getPortletId(), queryString, columnId, columnPos,
-			columnCount, path);
+			columnCount, path, false);
+	}
+
+	public static String processPortlet(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, Portlet portlet, String queryString,
+			String columnId, Integer columnPos, Integer columnCount,
+			String path, boolean writeOutput)
+		throws Exception {
+
+		return processPortlet(
+			servletContext, request, response, null, null, portlet,
+			portlet.getPortletId(), queryString, columnId, columnPos,
+			columnCount, path, writeOutput);
 	}
 
 	public static String processPortlet(
@@ -104,6 +143,19 @@ public class RuntimePortletUtil {
 			RenderResponse renderResponse, Portlet portlet, String portletId,
 			String queryString, String columnId, Integer columnPos,
 			Integer columnCount, String path)
+		throws Exception {
+
+		return processPortlet(servletContext, request, response, renderRequest,
+			renderResponse, portlet, portletId, queryString, columnId,
+			columnPos, columnCount, path, false);
+	}
+
+	public static String processPortlet(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, RenderRequest renderRequest,
+			RenderResponse renderResponse, Portlet portlet, String portletId,
+			String queryString, String columnId, Integer columnPos,
+			Integer columnCount, String path, boolean writeOutput)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
@@ -160,7 +212,7 @@ public class RuntimePortletUtil {
 		try {
 			return PortalUtil.renderPortlet(
 				servletContext, request, response, portlet, queryString,
-				columnId, columnPos, columnCount, path, false);
+				columnId, columnPos, columnCount, path, writeOutput);
 		}
 		finally {
 			portletDisplay.copyFrom(portletDisplayClone);
