@@ -553,9 +553,24 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 					</aui:select>
 
-					<aui:input classPK="<%= (article != null) ? article.getResourcePrimKey() : 0 %>" name="categories" type="assetCategories" />
+					<%
+					long classPK = 0;
 
-					<aui:input classPK="<%= (article != null) ? article.getResourcePrimKey() : 0 %>" name="tags" type="assetTags" />
+					if (article != null) {
+						try {
+							AssetEntryLocalServiceUtil.getEntry(JournalArticle.class.getName(), article.getPrimaryKey());
+
+							classPK = article.getPrimaryKey();
+						}
+						catch(NoSuchEntryException nsee) {
+							classPK = article.getResourcePrimKey();
+						}
+					}
+					%>
+
+					<aui:input classPK="<%= classPK %>" name="categories" type="assetCategories" />
+
+					<aui:input classPK="<%= classPK %>" name="tags" type="assetTags" />
 
 					<aui:input inlineLabel="left" label="searchable" name="indexable" />
 				</aui:fieldset>

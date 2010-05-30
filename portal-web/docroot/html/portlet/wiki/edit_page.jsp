@@ -306,11 +306,23 @@ if (Validator.isNull(redirect)) {
 				else if (templatePage != null) {
 					resourcePrimKey = templatePage.getResourcePrimKey();
 				}
+
+                long classPK = resourcePrimKey;
+
+                if (!newPage) {
+                    try {
+                        AssetEntryLocalServiceUtil.getEntry(WikiPage.class.getName(), wikiPage.getPrimaryKey());
+
+                        classPK = wikiPage.getPrimaryKey();
+                    }
+                    catch(NoSuchEntryException nsee) {
+                    }
+                }
 				%>
 
-				<aui:input classPK="<%= resourcePrimKey %>" name="categories" type="assetCategories" />
+				<aui:input classPK="<%= classPK %>" name="categories" type="assetCategories" />
 
-				<aui:input classPK="<%= resourcePrimKey %>" name="tags" type="assetTags" />
+				<aui:input classPK="<%= classPK %>" name="tags" type="assetTags" />
 
 				<aui:model-context bean="<%= new WikiPageImpl() %>" model="<%= WikiPage.class %>" />
 

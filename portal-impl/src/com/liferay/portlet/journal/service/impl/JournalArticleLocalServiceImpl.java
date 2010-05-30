@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.MathUtil;
@@ -65,6 +66,8 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.asset.NoSuchEntryException;
+import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.journal.ArticleContentException;
 import com.liferay.portlet.journal.ArticleDisplayDateException;
@@ -1825,7 +1828,9 @@ public class JournalArticleLocalServiceImpl
 
 		boolean visible = article.isApproved();
 
-		if (!visible &&
+		boolean createDraftAssetEntry = false;
+
+		if (!article.isApproved() &&
 			(article.getVersion() != JournalArticleConstants.DEFAULT_VERSION)) {
 
 			int approvedArticlesCount =
@@ -1834,16 +1839,26 @@ public class JournalArticleLocalServiceImpl
 					WorkflowConstants.STATUS_APPROVED);
 
 			if (approvedArticlesCount > 0) {
-				visible = true;
+				createDraftAssetEntry = true;
 			}
 		}
 
-		assetEntryLocalService.updateEntry(
-			userId, article.getGroupId(), JournalArticle.class.getName(),
-			article.getResourcePrimKey(), assetCategoryIds, assetTagNames,
-			visible, null, null, displayDate, expirationDate,
-			ContentTypes.TEXT_HTML, article.getTitle(),
-			article.getDescription(), null, null, 0, 0, null, false);
+		if (createDraftAssetEntry) {
+			assetEntryLocalService.updateEntry(
+				userId, article.getGroupId(), JournalArticle.class.getName(),
+				article.getPrimaryKey(), assetCategoryIds, assetTagNames,
+				false, null, null, displayDate, expirationDate,
+				ContentTypes.TEXT_HTML, article.getTitle(),
+				article.getDescription(), null, null, 0, 0, null, false);
+		}
+		else {
+			assetEntryLocalService.updateEntry(
+				userId, article.getGroupId(), JournalArticle.class.getName(),
+				article.getResourcePrimKey(), assetCategoryIds, assetTagNames,
+				visible, null, null, displayDate, expirationDate,
+				ContentTypes.TEXT_HTML, article.getTitle(),
+				article.getDescription(), null, null, 0, 0, null, false);
+		}
 	}
 
 	public JournalArticle updateContent(
@@ -1893,6 +1908,50 @@ public class JournalArticleLocalServiceImpl
 			if (status == WorkflowConstants.STATUS_APPROVED) {
 
 				// Asset
+
+				if ((oldStatus != WorkflowConstants.STATUS_APPROVED) &&
+					(article.getVersion() !=
+						JournalArticleConstants.DEFAULT_VERSION)) {
+
+					AssetEntry draftAssetEntry =  null;
+
+					try {
+						draftAssetEntry = assetEntryLocalService.getEntry(
+							JournalArticle.class.getName(),
+							article.getPrimaryKey());
+
+						Date[] dateInterval = getDateInterval(
+							article.getGroupId(), article.getArticleId(),
+							article.getDisplayDate(),
+							article.getExpirationDate());
+
+						Date displayDate = dateInterval[0];
+						Date expirationDate = dateInterval[1];
+
+						long[] assetCategoryIds = StringUtil.split(
+							ListUtil.toString(
+								draftAssetEntry.getCategories(), "categoryId"),
+							0L);
+						String[] assetTagNames = StringUtil.split(
+							ListUtil.toString(
+								draftAssetEntry.getTags(), "name"));
+
+						assetEntryLocalService.updateEntry(
+							userId, article.getGroupId(),
+							JournalArticle.class.getName(),
+							article.getResourcePrimKey(), assetCategoryIds,
+							assetTagNames, true, null, null, displayDate,
+							expirationDate, ContentTypes.TEXT_HTML,
+							article.getTitle(), article.getDescription(), null,
+							null, 0, 0, null, false);
+
+						assetEntryLocalService.deleteEntry(
+							JournalArticle.class.getName(),
+							article.getPrimaryKey());
+					}
+					catch(NoSuchEntryException nsee) {
+					}
+				}
 
 				assetEntryLocalService.updateVisible(
 					JournalArticle.class.getName(),

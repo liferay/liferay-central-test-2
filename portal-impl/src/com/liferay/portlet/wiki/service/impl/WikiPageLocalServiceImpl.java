@@ -53,6 +53,8 @@ import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.asset.NoSuchEntryException;
+import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.wiki.DuplicatePageException;
 import com.liferay.portlet.wiki.NoSuchPageException;
@@ -988,17 +990,40 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			String[] assetTagNames)
 		throws PortalException, SystemException {
 
-		boolean visible = false;
+		boolean visible = page.isApproved();
 
-		if (page.isApproved()) {
+		if (!page.isApproved()) {
 			visible = true;
 		}
+		boolean createDraftAssetEntry = false;
 
-		assetEntryLocalService.updateEntry(
-			userId, page.getGroupId(), WikiPage.class.getName(),
-			page.getResourcePrimKey(), assetCategoryIds, assetTagNames, visible,
-			null, null, null, null, ContentTypes.TEXT_HTML, page.getTitle(),
-			null, null, null, 0, 0, null, false);
+		if (!page.isApproved() &&
+			(page.getVersion() != WikiPageConstants.DEFAULT_VERSION)) {
+
+			int approvedPagesCount =
+				wikiPagePersistence.countByN_T_S(
+					page.getNodeId(), page.getTitle(),
+					WorkflowConstants.STATUS_APPROVED);
+
+			if (approvedPagesCount > 0) {
+				createDraftAssetEntry = true;
+			}
+		}
+
+		if (createDraftAssetEntry) {
+			assetEntryLocalService.updateEntry(
+				userId, page.getGroupId(), WikiPage.class.getName(),
+				page.getPrimaryKey(), assetCategoryIds, assetTagNames, false,
+				null, null, null, null, ContentTypes.TEXT_HTML, page.getTitle(),
+				null, null, null, 0, 0, null, false);
+		}
+		else {
+			assetEntryLocalService.updateEntry(
+				userId, page.getGroupId(), WikiPage.class.getName(),
+				page.getResourcePrimKey(), assetCategoryIds, assetTagNames,
+				visible, null, null, null, null, ContentTypes.TEXT_HTML,
+				page.getTitle(), null, null, null, 0, 0, null, false);
+		}
 	}
 
 	public WikiPage updatePage(
@@ -1155,6 +1180,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		Date now = new Date();
 
+		int oldStatus = page.getStatus();
+
 		page.setStatus(status);
 		page.setStatusByUserId(userId);
 		page.setStatusByUserName(user.getFullName());
@@ -1178,6 +1205,40 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			}
 
 			// Asset
+
+			if ((oldStatus != WorkflowConstants.STATUS_APPROVED) &&
+				(page.getVersion() !=
+					WikiPageConstants.DEFAULT_VERSION)) {
+
+				AssetEntry draftAssetEntry =  null;
+
+				try {
+					draftAssetEntry = assetEntryLocalService.getEntry(
+						WikiPage.class.getName(),
+						page.getPrimaryKey());
+
+					long[] assetCategoryIds = StringUtil.split(
+						ListUtil.toString(
+							draftAssetEntry.getCategories(), "categoryId"),
+						0L);
+					String[] assetTagNames = StringUtil.split(
+						ListUtil.toString(
+							draftAssetEntry.getTags(), "name"));
+
+					assetEntryLocalService.updateEntry(
+						userId, page.getGroupId(), WikiPage.class.getName(),
+						page.getResourcePrimKey(), assetCategoryIds,
+						assetTagNames, true, null, null, null, null,
+						ContentTypes.TEXT_HTML, page.getTitle(), null, null,
+						null, 0, 0, null, false);
+
+					assetEntryLocalService.deleteEntry(
+						WikiPage.class.getName(),
+						page.getPrimaryKey());
+				}
+				catch(NoSuchEntryException nsee) {
+				}
+			}
 
 			assetEntryLocalService.updateVisible(
 				WikiPage.class.getName(), page.getResourcePrimKey(), true);

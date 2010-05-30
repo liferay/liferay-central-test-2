@@ -26,6 +26,7 @@
 <%@ page import="com.liferay.portal.kernel.search.SearchContextFactory" %>
 <%@ page import="com.liferay.portlet.asset.NoSuchCategoryException" %>
 <%@ page import="com.liferay.portlet.asset.NoSuchCategoryPropertyException" %>
+<%@ page import="com.liferay.portlet.asset.NoSuchEntryException" %>
 <%@ page import="com.liferay.portlet.asset.NoSuchTagException" %>
 <%@ page import="com.liferay.portlet.asset.NoSuchTagPropertyException" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetCategory" %>

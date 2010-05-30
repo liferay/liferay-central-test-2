@@ -41,7 +41,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 		for (DLFileEntry fileEntry : fileEntries) {
 			try {
 				DLFileEntryLocalServiceUtil.updateAsset(
-					fileEntry.getUserId(), fileEntry, null, null);
+					fileEntry.getUserId(), fileEntry, null, null, null);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
