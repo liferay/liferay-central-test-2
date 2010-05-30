@@ -16,7 +16,6 @@ package com.liferay.taglib.theme;
 
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.theme.PortletDisplay;
@@ -75,12 +74,6 @@ public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
 		return EVAL_BODY_BUFFERED;
 	}
 
-	public int doAfterBody() {
-		_bodyContentString = getBodyContent().getString();
-
-		return SKIP_BODY;
-	}
-
 	public int doEndTag() throws JspException {
 		try {
 			ServletContext servletContext = getServletContext();
@@ -94,7 +87,8 @@ public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
 
 			// Portlet content
 
-			portletDisplay.setContent(_bodyContentString);
+			portletDisplay.setContent(
+				getBodyContentAsStringBundler().toString());
 
 			// Page
 
@@ -127,6 +121,5 @@ public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
 	private static final String _CONTENT_WRAPPER_POST = "</div>";
 
 	private String _page;
-	private String _bodyContentString = StringPool.BLANK;
 
 }
