@@ -34,13 +34,12 @@ if (scriptData == null) {
 <c:if test="<%= scriptData != null %>">
 	<script type="text/javascript">
 		// <![CDATA[
-			<%= scriptData.getRawSB().toString() %>
 
 			<%
-			String callback = scriptData.getCallbackSB().toString();
+				scriptData.getRawSB().writeTo(out);
 			%>
 
-			<c:if test="<%= Validator.isNotNull(callback) %>">
+			<c:if test="<%= scriptData.getCallbackSB().index() > 0 %>">
 
 				<%
 				Set<String> useSet = scriptData.getUseSet();
@@ -56,9 +55,13 @@ if (scriptData == null) {
 				%>
 
 				AUI().use(
-					<%= useSB.toString() %>
+					<%
+						useSB.writeTo(out);
+					%>
 					function(A) {
-						<%= callback %>
+						<%
+							scriptData.getCallbackSB().writeTo(out);
+						%>
 					}
 				);
 			</c:if>
