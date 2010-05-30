@@ -17,19 +17,18 @@ package com.liferay.taglib.ui;
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.taglib.BaseBodyTagSupport;
 import com.liferay.util.PwdGenerator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.BodyContent;
-import javax.servlet.jsp.tagext.BodyTagSupport;
 
 /**
  * <a href="PanelTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class PanelTag extends BodyTagSupport {
+public class PanelTag extends BaseBodyTagSupport {
 
 	public int doStartTag() {
 		HttpServletRequest request =
@@ -53,19 +52,11 @@ public class PanelTag extends BodyTagSupport {
 		return EVAL_BODY_BUFFERED;
 	}
 
-	public int doAfterBody() {
-		BodyContent bodyContent = getBodyContent();
-
-		_bodyContentString = bodyContent.getString();
-
-		return SKIP_BODY;
-	}
-
 	public int doEndTag() throws JspException {
 		try {
 			PortalIncludeUtil.include(pageContext, getStartPage());
 
-			pageContext.getOut().print(_bodyContentString);
+			getBodyContentAsStringBundler().writeTo(pageContext.getOut());
 
 			PortalIncludeUtil.include(pageContext, getEndPage());
 
@@ -143,6 +134,5 @@ public class PanelTag extends BodyTagSupport {
 	private boolean _persistState = true;
 	private boolean _extended;
  	private String _cssClass = StringPool.BLANK;
- 	private String _bodyContentString = StringPool.BLANK;
 
 }

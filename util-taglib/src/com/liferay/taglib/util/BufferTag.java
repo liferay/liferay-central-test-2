@@ -14,8 +14,6 @@
 
 package com.liferay.taglib.util;
 
-import com.liferay.portal.kernel.util.StringPool;
-
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
 /**
@@ -25,20 +23,13 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
  */
 public class BufferTag extends BodyTagSupport {
 
-	public int doAfterBody() {
-		_bodyContentString = getBodyContent().getString();
-
-		return SKIP_BODY;
-	}
-
 	public int doEndTag() {
 		try {
-			pageContext.setAttribute(_var, _bodyContentString);
+			pageContext.setAttribute(_var, getBodyContent().getString());
 
 			return EVAL_PAGE;
 		}
 		finally {
-			_bodyContentString = StringPool.BLANK;
 			_var = null;
 		}
 	}
@@ -51,7 +42,6 @@ public class BufferTag extends BodyTagSupport {
 		_var = var;
 	}
 
-	private String _bodyContentString = StringPool.BLANK;
 	private String _var;
 
 }

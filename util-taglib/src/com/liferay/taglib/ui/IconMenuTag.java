@@ -22,23 +22,19 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.taglib.BaseBodyTagSupport;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.BodyContent;
-import javax.servlet.jsp.tagext.BodyTagSupport;
 
 /**
  * <a href="IconMenuTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class IconMenuTag extends BodyTagSupport {
+public class IconMenuTag extends BaseBodyTagSupport {
 
 	public int doAfterBody() {
-		BodyContent bodyContent = getBodyContent();
-
-		_bodyContentString = bodyContent.getString();
 
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
@@ -85,7 +81,7 @@ public class IconMenuTag extends BodyTagSupport {
 				PortalIncludeUtil.include(pageContext, getStartPage());
 			}
 
-			pageContext.getOut().print(_bodyContentString);
+			getBodyContentAsStringBundler().writeTo(pageContext.getOut());
 
 			if ((iconCount != null) && (iconCount.getValue() >= 1) &&
 				((singleIcon == null) || _showWhenSingleIcon)) {
@@ -110,7 +106,6 @@ public class IconMenuTag extends BodyTagSupport {
 		finally {
 			if (!ServerDetector.isResin()) {
 				_align = "right";
-				_bodyContentString = StringPool.BLANK;
 				_cssClass = null;
 				_endPage = null;
 				_icon = null;
@@ -228,7 +223,6 @@ public class IconMenuTag extends BodyTagSupport {
 		"/html/taglib/ui/icon_menu/start.jsp";
 
 	private String _align = "right";
-	private String _bodyContentString = StringPool.BLANK;
 	private String _cssClass;
 	private String _endPage;
 	private String _icon;

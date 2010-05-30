@@ -15,27 +15,20 @@
 package com.liferay.taglib.util;
 
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.taglib.BaseBodyTagSupport;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.tagext.BodyTagSupport;
 
 /**
  * <a href="HtmlBottomTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class HtmlBottomTag extends BodyTagSupport {
+public class HtmlBottomTag extends BaseBodyTagSupport {
 
 	public int doStartTag() {
 		return EVAL_BODY_BUFFERED;
-	}
-
-	public int doAfterBody() {
-		_bodyContentString = getBodyContent().getString();
-
-		return SKIP_BODY;
 	}
 
 	public int doEndTag() {
@@ -51,11 +44,9 @@ public class HtmlBottomTag extends BodyTagSupport {
 			request.setAttribute(WebKeys.PAGE_BOTTOM, sb);
 		}
 
-		sb.append(_bodyContentString);
+		sb.append(getBodyContentAsStringBundler());
 
 		return EVAL_PAGE;
 	}
-
-	private String _bodyContentString = StringPool.BLANK;
 
 }

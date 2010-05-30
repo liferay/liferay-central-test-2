@@ -17,25 +17,20 @@ package com.liferay.taglib.ui;
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.taglib.BaseBodyTagSupport;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.BodyContent;
-import javax.servlet.jsp.tagext.BodyTagSupport;
 
 /**
  * <a href="IconListTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class IconListTag extends BodyTagSupport {
+public class IconListTag extends BaseBodyTagSupport {
 
 	public int doAfterBody() {
-		BodyContent bodyContent = getBodyContent();
-
-		_bodyContentString = bodyContent.getString();
 
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
@@ -82,7 +77,7 @@ public class IconListTag extends BodyTagSupport {
 				PortalIncludeUtil.include(pageContext, getStartPage());
 			}
 
-			pageContext.getOut().print(_bodyContentString);
+			getBodyContentAsStringBundler().writeTo(pageContext.getOut());
 
 			if ((iconCount != null) && (iconCount.getValue() > 1) &&
 				((singleIcon == null) || _showWhenSingleIcon)) {
@@ -99,7 +94,6 @@ public class IconListTag extends BodyTagSupport {
 		}
 		finally {
 			if (!ServerDetector.isResin()) {
-				_bodyContentString = StringPool.BLANK;
 				_endPage = null;
 				_showWhenSingleIcon = false;
 				_startPage = null;
@@ -155,7 +149,6 @@ public class IconListTag extends BodyTagSupport {
 	private static final String _START_PAGE =
 		"/html/taglib/ui/icon_list/start.jsp";
 
-	private String _bodyContentString = StringPool.BLANK;
 	private String _endPage;
 	private boolean _showWhenSingleIcon = false;
 	private String _startPage;

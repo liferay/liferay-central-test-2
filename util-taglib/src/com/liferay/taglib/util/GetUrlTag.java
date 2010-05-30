@@ -21,14 +21,14 @@ import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.BodyTagSupport;
+import javax.servlet.jsp.tagext.TagSupport;
 
 /**
  * <a href="GetUrlTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class GetUrlTag extends BodyTagSupport {
+public class GetUrlTag extends TagSupport {
 
 	public int doEndTag() throws JspException {
 		try {

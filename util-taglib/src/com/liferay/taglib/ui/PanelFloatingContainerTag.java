@@ -18,19 +18,18 @@ import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.taglib.BaseBodyTagSupport;
 import com.liferay.util.PwdGenerator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.BodyContent;
-import javax.servlet.jsp.tagext.BodyTagSupport;
 
 /**
  * <a href="PanelFloatingContainerTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class PanelFloatingContainerTag extends BodyTagSupport {
+public class PanelFloatingContainerTag extends BaseBodyTagSupport {
 
 	public int doStartTag() {
 		HttpServletRequest request =
@@ -73,9 +72,6 @@ public class PanelFloatingContainerTag extends BodyTagSupport {
 	}
 
 	public int doAfterBody() {
-		BodyContent bodyContent = getBodyContent();
-
-		_bodyContentString = bodyContent.getString();
 
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
@@ -108,7 +104,7 @@ public class PanelFloatingContainerTag extends BodyTagSupport {
 				PortalIncludeUtil.include(pageContext, getStartPage());
 			}
 
-			pageContext.getOut().print(_bodyContentString);
+			getBodyContentAsStringBundler().writeTo(pageContext.getOut());
 
 			if ((panelCount != null) && (panelCount.getValue() >= 1)) {
 				PortalIncludeUtil.include(pageContext, getEndPage());
@@ -225,6 +221,5 @@ public class PanelFloatingContainerTag extends BodyTagSupport {
 	private int _width = 300;
 	private Boolean _extended;
  	private String _cssClass = StringPool.BLANK;
- 	private String _bodyContentString = StringPool.BLANK;
 
 }

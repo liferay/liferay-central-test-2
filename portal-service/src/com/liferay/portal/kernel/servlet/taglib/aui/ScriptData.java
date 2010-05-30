@@ -45,6 +45,23 @@ public class ScriptData {
 		}
 	}
 
+	public void append(StringBundler content, String use) {
+		if (Validator.isNull(use)) {
+			_rawSB.append(content);
+		}
+		else {
+			_callbackSB.append("(function() {");
+			_callbackSB.append(content);
+			_callbackSB.append("})();");
+
+			String[] useArray = StringUtil.split(use);
+
+			for (int i = 0; i < useArray.length; i++) {
+				_useSet.add(useArray[i]);
+			}
+		}
+	}
+
 	public StringBundler getCallbackSB() {
 		return _callbackSB;
 	}

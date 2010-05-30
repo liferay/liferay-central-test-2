@@ -15,6 +15,7 @@
 package com.liferay.taglib.util;
 
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.taglib.BaseBodyTagSupport;
 import com.liferay.util.servlet.DynamicServletRequest;
 
 import java.util.LinkedHashMap;
@@ -22,7 +23,6 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.tagext.BodyTagSupport;
 
 /**
  * <a href="ParamAndPropertyAncestorTagImpl.java.html"><b><i>View Source</i></b>
@@ -31,7 +31,8 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
  * @author Brian Wing Shun Chan
  */
 public class ParamAndPropertyAncestorTagImpl
-	extends BodyTagSupport implements ParamAncestorTag, PropertyAncestorTag {
+	extends BaseBodyTagSupport
+	implements ParamAncestorTag, PropertyAncestorTag {
 
 	public void addParam(String name, String value) {
 		if (_params == null) {

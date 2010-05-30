@@ -17,29 +17,23 @@ package com.liferay.taglib.aui;
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.taglib.BaseBodyTagSupport;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.BodyTagSupport;
 
 /**
  * <a href="ScriptTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ScriptTag extends BodyTagSupport {
+public class ScriptTag extends BaseBodyTagSupport {
 
 	public static final String PAGE = "/html/taglib/aui/script/page.jsp";
-
-	public int doAfterBody() {
-		_bodyContentString = getBodyContent().getString();
-
-		return SKIP_BODY;
-	}
 
 	public int doEndTag() throws JspException {
 		HttpServletRequest request =
@@ -63,12 +57,13 @@ public class ScriptTag extends BodyTagSupport {
 				}
 			}
 
+			StringBundler bodyContentSB = getBodyContentAsStringBundler();
 			if (position.equals(_POSITION_INLINE)) {
 				ScriptData scriptData = new ScriptData();
 
 				request.setAttribute(ScriptTag.class.getName(), scriptData);
 
-				scriptData.append(_bodyContentString, _use);
+				scriptData.append(bodyContentSB, _use);
 
 				PortalIncludeUtil.include(pageContext, PAGE);
 			}
@@ -82,7 +77,7 @@ public class ScriptTag extends BodyTagSupport {
 					request.setAttribute(WebKeys.AUI_SCRIPT_DATA, scriptData);
 				}
 
-				scriptData.append(_bodyContentString, _use);
+				scriptData.append(bodyContentSB, _use);
 			}
 
 			return EVAL_PAGE;
@@ -102,7 +97,6 @@ public class ScriptTag extends BodyTagSupport {
 	}
 
 	protected void cleanUp() {
-		_bodyContentString = StringPool.BLANK;
 		_position = null;
 		_use = null;
 	}
@@ -119,7 +113,6 @@ public class ScriptTag extends BodyTagSupport {
 
 	private static final String _POSITION_INLINE = "inline";
 
-	private String _bodyContentString = StringPool.BLANK;
 	private String _position;
 	private String _use;
 

@@ -39,10 +39,6 @@ import javax.servlet.jsp.tagext.BodyContent;
  */
 public class SearchContainerColumnTextTag extends SearchContainerColumnTag {
 
-	public int doAfterBody() {
-		return SKIP_BODY;
-	}
-
 	public int doEndTag() {
 		try {
 			SearchContainerRowTag parentTag =
