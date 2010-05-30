@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
+import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -91,6 +92,10 @@ public class BodyContentWrapper extends BodyContent {
 
 	public String getString() {
 		return _unsyncStringWriter.toString();
+	}
+
+	public StringBundler getStringBundler() {
+		return _unsyncStringWriter.getStringBundler();
 	}
 
 	public boolean isAutoFlush() {
