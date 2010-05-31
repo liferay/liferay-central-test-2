@@ -241,18 +241,6 @@ public class StringUtil_IW {
 		return StringUtil.replace(s, begin, end, values);
 	}
 
-	public com.liferay.portal.kernel.util.StringBundler replaceToStringBundler(
-		java.lang.String s, java.lang.String begin, java.lang.String end,
-		java.util.Map<java.lang.String, java.lang.String> values) {
-		return StringUtil.replaceToStringBundler(s, begin, end, values);
-	}
-
-	public com.liferay.portal.kernel.util.StringBundler replaceWithStringBundler(
-		java.lang.String s, java.lang.String begin, java.lang.String end,
-		java.util.Map<java.lang.String, com.liferay.portal.kernel.util.StringBundler> values) {
-		return StringUtil.replaceWithStringBundler(s, begin, end, values);
-	}
-
 	public java.lang.String replace(java.lang.String s,
 		java.lang.String[] oldSubs, java.lang.String[] newSubs) {
 		return StringUtil.replace(s, oldSubs, newSubs);
@@ -302,6 +290,18 @@ public class StringUtil_IW {
 	public java.lang.String replaceLast(java.lang.String s,
 		java.lang.String[] oldSubs, java.lang.String[] newSubs) {
 		return StringUtil.replaceLast(s, oldSubs, newSubs);
+	}
+
+	public com.liferay.portal.kernel.util.StringBundler replaceToStringBundler(
+		java.lang.String s, java.lang.String begin, java.lang.String end,
+		java.util.Map<java.lang.String, java.lang.String> values) {
+		return StringUtil.replaceToStringBundler(s, begin, end, values);
+	}
+
+	public com.liferay.portal.kernel.util.StringBundler replaceWithStringBundler(
+		java.lang.String s, java.lang.String begin, java.lang.String end,
+		java.util.Map<java.lang.String, com.liferay.portal.kernel.util.StringBundler> values) {
+		return StringUtil.replaceWithStringBundler(s, begin, end, values);
 	}
 
 	public java.lang.String reverse(java.lang.String s) {

@@ -750,97 +750,6 @@ public class StringUtil {
 		return sb.toString();
 	}
 
-	public static StringBundler replaceToStringBundler(
-		String s, String begin, String end, Map<String, String> values) {
-
-		if ((s == null) || (begin == null) || (end == null) ||
-			(values == null) || (values.size() == 0)) {
-
-			return new StringBundler(s);
-		}
-
-		StringBundler sb = new StringBundler(values.size() * 2 + 1);
-
-		int pos = 0;
-
-		while (true) {
-			int x = s.indexOf(begin, pos);
-			int y = s.indexOf(end, x + begin.length());
-
-			if ((x == -1) || (y == -1)) {
-				sb.append(s.substring(pos, s.length()));
-
-				break;
-			}
-			else {
-				sb.append(s.substring(pos, x));
-
-				String oldValue = s.substring(x + begin.length(), y);
-
-				String newValue = values.get(oldValue);
-
-				if (newValue == null) {
-					newValue = oldValue;
-				}
-
-				sb.append(newValue);
-
-				pos = y + end.length();
-			}
-		}
-
-		return sb;
-	}
-
-	public static StringBundler replaceWithStringBundler(
-		String s, String begin, String end, Map<String, StringBundler> values) {
-
-		if ((s == null) || (begin == null) || (end == null) ||
-			(values == null) || (values.size() == 0)) {
-
-			return new StringBundler(s);
-		}
-
-		int size = values.size() + 1;
-
-		for (StringBundler valueSB : values.values()) {
-			size += valueSB.index();
-		}
-
-		StringBundler sb = new StringBundler(size);
-
-		int pos = 0;
-
-		while (true) {
-			int x = s.indexOf(begin, pos);
-			int y = s.indexOf(end, x + begin.length());
-
-			if ((x == -1) || (y == -1)) {
-				sb.append(s.substring(pos, s.length()));
-
-				break;
-			}
-			else {
-				sb.append(s.substring(pos, x));
-
-				String oldValue = s.substring(x + begin.length(), y);
-
-				StringBundler newValue = values.get(oldValue);
-
-				if (newValue == null) {
-					sb.append(oldValue);
-				}
-				else {
-					sb.append(newValue);
-				}
-
-				pos = y + end.length();
-			}
-		}
-
-		return sb;
-	}
-
 	public static String replace(String s, String[] oldSubs, String[] newSubs) {
 		if ((s == null) || (oldSubs == null) || (newSubs == null)) {
 			return null;
@@ -984,6 +893,97 @@ public class StringUtil {
 		}
 
 		return s;
+	}
+
+	public static StringBundler replaceToStringBundler(
+		String s, String begin, String end, Map<String, String> values) {
+
+		if ((s == null) || (begin == null) || (end == null) ||
+			(values == null) || (values.size() == 0)) {
+
+			return new StringBundler(s);
+		}
+
+		StringBundler sb = new StringBundler(values.size() * 2 + 1);
+
+		int pos = 0;
+
+		while (true) {
+			int x = s.indexOf(begin, pos);
+			int y = s.indexOf(end, x + begin.length());
+
+			if ((x == -1) || (y == -1)) {
+				sb.append(s.substring(pos, s.length()));
+
+				break;
+			}
+			else {
+				sb.append(s.substring(pos, x));
+
+				String oldValue = s.substring(x + begin.length(), y);
+
+				String newValue = values.get(oldValue);
+
+				if (newValue == null) {
+					newValue = oldValue;
+				}
+
+				sb.append(newValue);
+
+				pos = y + end.length();
+			}
+		}
+
+		return sb;
+	}
+
+	public static StringBundler replaceWithStringBundler(
+		String s, String begin, String end, Map<String, StringBundler> values) {
+
+		if ((s == null) || (begin == null) || (end == null) ||
+			(values == null) || (values.size() == 0)) {
+
+			return new StringBundler(s);
+		}
+
+		int size = values.size() + 1;
+
+		for (StringBundler valueSB : values.values()) {
+			size += valueSB.index();
+		}
+
+		StringBundler sb = new StringBundler(size);
+
+		int pos = 0;
+
+		while (true) {
+			int x = s.indexOf(begin, pos);
+			int y = s.indexOf(end, x + begin.length());
+
+			if ((x == -1) || (y == -1)) {
+				sb.append(s.substring(pos, s.length()));
+
+				break;
+			}
+			else {
+				sb.append(s.substring(pos, x));
+
+				String oldValue = s.substring(x + begin.length(), y);
+
+				StringBundler newValue = values.get(oldValue);
+
+				if (newValue == null) {
+					sb.append(oldValue);
+				}
+				else {
+					sb.append(newValue);
+				}
+
+				pos = y + end.length();
+			}
+		}
+
+		return sb;
 	}
 
 	public static String reverse(String s) {
@@ -1602,5 +1602,6 @@ public class StringUtil {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(StringUtil.class);
+
 
 }
