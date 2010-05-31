@@ -3838,20 +3838,15 @@ public class ServiceBuilder {
 		sb.append("/**\n");
 
 		if (Validator.isNotNull(comment)) {
-			String[] lines = comment.split(
-				"(\\n|\\r\\n|\\r|\u0085|\u2028|\u2029)");
-
-			for (String line : lines) {
-				sb.append(indentation);
-				sb.append(" * ");
-				sb.append(line);
-				sb.append("\n");
-			}
-		}
-
-		if (Validator.isNotNull(comment) && (tags.length > 0)) {
 			sb.append(indentation);
-			sb.append(" *\n");
+			sb.append(" * ");
+			sb.append(comment);
+			sb.append("\n");
+
+			if (tags.length > 0) {
+				sb.append(indentation);
+				sb.append(" *\n");
+			}
 		}
 
 		for (DocletTag tag : tags) {
