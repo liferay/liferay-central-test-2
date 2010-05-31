@@ -181,11 +181,15 @@ if (markupHeaders != null) {
 	}
 }
 
-StringBuilder pageTopSB = (StringBuilder)request.getAttribute(WebKeys.PAGE_TOP);
+StringBundler pageTopSB = (StringBundler)request.getAttribute(WebKeys.PAGE_TOP);
 %>
 
 <c:if test="<%= pageTopSB != null %>">
-	<%= pageTopSB.toString() %>
+
+	<%
+	pageTopSB.writeTo(out);
+	%>
+
 </c:if>
 
 <%-- Theme CSS --%>

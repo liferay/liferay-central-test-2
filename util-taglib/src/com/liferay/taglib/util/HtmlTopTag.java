@@ -34,11 +34,11 @@ public class HtmlTopTag extends BaseBodyTagSupport {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
-		StringBuilder sb = (StringBuilder)request.getAttribute(
+		StringBundler sb = (StringBundler)request.getAttribute(
 			WebKeys.PAGE_TOP);
 
 		if (sb == null) {
-			sb = new StringBuilder();
+			sb = new StringBundler();
 
 			request.setAttribute(WebKeys.PAGE_TOP, sb);
 		}
