@@ -543,7 +543,9 @@ public class GetterUtil {
 		return getIntegerValues(value, DEFAULT_INTEGER_VALUES);
 	}
 
-	public static int[] getIntegerValues(Serializable value, int[] defaultValue) {
+	public static int[] getIntegerValues(
+		Serializable value, int[] defaultValue) {
+
 		Class<?> classObject = value.getClass();
 
 		if (classObject.isArray()) {
@@ -598,7 +600,9 @@ public class GetterUtil {
 		return getLongValues(value, DEFAULT_LONG_VALUES);
 	}
 
-	public static long[] getLongValues(Serializable value, long[] defaultValue) {
+	public static long[] getLongValues(
+		Serializable value, long[] defaultValue) {
+
 		Class<?> classObject = value.getClass();
 
 		if (classObject.isArray()) {
