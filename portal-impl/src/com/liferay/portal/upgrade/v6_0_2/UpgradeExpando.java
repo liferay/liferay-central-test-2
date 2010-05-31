@@ -175,7 +175,7 @@ public class UpgradeExpando extends UpgradeProcess {
 		}
 	}
 
-	protected void updateRows(
+	protected void updateRow(
 			long companyId, long classPK, String tableName, long tableId,
 			String columnName, long rowId)
 		throws Exception {
@@ -195,8 +195,11 @@ public class UpgradeExpando extends UpgradeProcess {
 
 			rs = ps.executeQuery();
 
+			boolean delete = false;
+
 			while (rs.next()) {
 				long newClassPK = rs.getLong(columnName);
+				delete = true;
 
 				if (!hasRow(companyId, tableId, newClassPK)) {
 					long newRowId = increment();
@@ -207,8 +210,10 @@ public class UpgradeExpando extends UpgradeProcess {
 				}
 			}
 
-			runSQL("delete from ExpandoRow where rowId_ = " + rowId);
-			runSQL("delete from ExpandoValue where rowId_ = " + rowId);
+			if (delete) {
+				runSQL("delete from ExpandoRow where rowId_ = " + rowId);
+				runSQL("delete from ExpandoValue where rowId_ = " + rowId);
+			}
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
@@ -216,7 +221,7 @@ public class UpgradeExpando extends UpgradeProcess {
 	}
 
 	protected void updateRows(
-			long classNameId, String tableName, long tableId, String columnName)
+			String tableName, long tableId, String columnName)
 		throws Exception {
 
 		Connection con = null;
@@ -238,7 +243,7 @@ public class UpgradeExpando extends UpgradeProcess {
 				long companyId = rs.getLong("companyId");
 				long classPK = rs.getLong("classPK");
 
-				updateRows(
+				updateRow(
 					companyId, classPK, tableName, tableId, columnName, rowId);
 			}
 		}
@@ -276,7 +281,7 @@ public class UpgradeExpando extends UpgradeProcess {
 			while (rs.next()) {
 				long tableId = rs.getLong("tableId");
 
-				updateRows(classNameId, tableName, tableId, columnName);
+				updateRows(tableName, tableId, columnName);
 			}
 		}
 		finally {
