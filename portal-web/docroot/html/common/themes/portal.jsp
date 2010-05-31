@@ -22,10 +22,9 @@ String scroll = ParamUtil.getString(request, "scroll");
 
 <c:choose>
 	<c:when test="<%= themeDisplay.isFacebook() || themeDisplay.isStateExclusive() %>">
-		<%= request.getAttribute(WebKeys.LAYOUT_CONTENT) %>
-
 		<%
-		request.removeAttribute(WebKeys.LAYOUT_CONTENT);
+			LazyIncluder lazyIncluder = (LazyIncluder) request.getAttribute(WebKeys.LAYOUT_CONTENT_INCLUDER);
+			lazyIncluder.include(pageContext.getOut());
 		%>
 
 	</c:when>

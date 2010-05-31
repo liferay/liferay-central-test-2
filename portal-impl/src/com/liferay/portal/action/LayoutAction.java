@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.LazyIncluder;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -332,13 +333,9 @@ public class LayoutAction extends Action {
 		RequestDispatcher requestDispatcher =
 			servletContext.getRequestDispatcher(path);
 
-		StringServletResponse stringResponse = new StringServletResponse(
-			response);
-
-		requestDispatcher.include(request, stringResponse);
-
 		request.setAttribute(
-			WebKeys.LAYOUT_CONTENT, stringResponse.getString());
+			WebKeys.LAYOUT_CONTENT_INCLUDER,
+			new LazyIncluder(requestDispatcher, request, response));
 	}
 
 	protected void processEvent(
