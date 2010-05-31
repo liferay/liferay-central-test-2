@@ -801,7 +801,12 @@ public class StringUtil {
 			return new StringBundler(s);
 		}
 
-		StringBundler sb = new StringBundler(values.size() * 2 + 1);
+		int size = values.size() + 1;
+		for(StringBundler valueSB : values.values()) {
+			size += valueSB.index();
+		}
+
+		StringBundler sb = new StringBundler(size);
 
 		int pos = 0;
 
