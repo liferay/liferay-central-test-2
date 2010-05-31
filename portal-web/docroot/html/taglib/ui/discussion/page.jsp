@@ -71,7 +71,7 @@ else {
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>
 
-<c:if test="<%= (messagesCount > 1) || MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, userId, ActionKeys.ADD_DISCUSSION) %>">
+<c:if test="<%= (messagesCount > 1) || MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, userId, ActionKeys.VIEW) %>">
 	<div class="taglib-discussion">
 		<form action="<%= formAction %>" method="post" name="<%= formName %>">
 		<input name="<%= namespace %><%= Constants.CMD %>" type="hidden" value="" />
@@ -223,7 +223,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			for (i = 1; i <= messages.size(); i++) {
 				message = messages.get(i - 1);
 
-				if ((!message.isApproved() && (message.getUserId() != user.getUserId()) && !permissionChecker.isCommunityAdmin(scopeGroupId)) || !permissionChecker.hasPermission(scopeGroupId, MBMessage.class.getName(), message.getMessageId(), ActionKeys.VIEW)) {
+				if ((!message.isApproved() && (message.getUserId() != user.getUserId()) && !permissionChecker.isCommunityAdmin(scopeGroupId)) || !MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, userId, ActionKeys.VIEW)) {
 					continue;
 				}
 			%>
