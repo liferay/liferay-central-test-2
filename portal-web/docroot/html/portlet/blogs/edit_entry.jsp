@@ -139,6 +139,12 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 			}
 			%>
 
+			<c:if test="<%= (entry != null) && entry.isApproved() && WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(entry.getCompanyId(), entry.getGroupId(), BlogsEntry.class.getName()) %>">
+				<div class="portlet-msg-info">
+					<%= LanguageUtil.format(pageContext, "this-x-is-approved.-publishing-these-changes-will-cause-it-to-be-unpublished-and-go-through-the-approval-process-again", LanguageUtil.get(pageContext, "model.resource." + BlogsEntry.class.getName())) %>
+				</div>
+			</c:if>
+
 			<aui:button disabled="<%= pending %>" name="saveButton" type="submit" value="publish" />
 
 			<c:if test="<%= pending %>">
