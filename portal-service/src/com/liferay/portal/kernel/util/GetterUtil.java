@@ -301,17 +301,18 @@ public class GetterUtil {
 		return getBooleanValues(value, DEFAULT_BOOLEAN_VALUES);
 	}
 
-	@SuppressWarnings("unchecked")
 	public static boolean[] getBooleanValues(
 		Serializable value, boolean[] defaultValue) {
 
-		Class clazz = value.getClass();
+		Class<?> classObject = value.getClass();
 
-		if (clazz.isArray()) {
-			if (clazz.getComponentType().isAssignableFrom(String.class)) {
+		if (classObject.isArray()) {
+			Class<?> componentType = classObject.getComponentType();
+
+			if (componentType.isAssignableFrom(String.class)) {
 				return getBooleanValues((String[])value, defaultValue);
 			}
-			else if (clazz.getComponentType().isAssignableFrom(Boolean.class)) {
+			else if (componentType.isAssignableFrom(Boolean.class)) {
 				return (boolean[])value;
 			}
 		}
@@ -365,17 +366,18 @@ public class GetterUtil {
 		return getDateValues(value, dateFormat, DEFAULT_DATE_VALUES);
 	}
 
-	@SuppressWarnings("unchecked")
 	public static Date[] getDateValues(
 		Serializable value, DateFormat dateFormat, Date[] defaultValue) {
 
-		Class clazz = value.getClass();
+		Class<?> classObject = value.getClass();
 
-		if (clazz.isArray()) {
-			if (clazz.getComponentType().isAssignableFrom(String.class)) {
+		if (classObject.isArray()) {
+			Class<?> componentType = classObject.getComponentType();
+
+			if (componentType.isAssignableFrom(String.class)) {
 				return getDateValues((String[])value, dateFormat, defaultValue);
 			}
-			else if (clazz.getComponentType().isAssignableFrom(Date.class)) {
+			else if (componentType.isAssignableFrom(Date.class)) {
 				return (Date[])value;
 			}
 		}
@@ -423,17 +425,18 @@ public class GetterUtil {
 		return getDoubleValues(value, DEFAULT_DOUBLE_VALUES);
 	}
 
-	@SuppressWarnings("unchecked")
 	public static double[] getDoubleValues(
 		Serializable value, double[] defaultValue) {
 
-		Class clazz = value.getClass();
+		Class<?> classObject = value.getClass();
 
-		if (clazz.isArray()) {
-			if (clazz.getComponentType().isAssignableFrom(String.class)) {
+		if (classObject.isArray()) {
+			Class<?> componentType = classObject.getComponentType();
+
+			if (componentType.isAssignableFrom(String.class)) {
 				return getDoubleValues((String[])value, defaultValue);
 			}
-			else if (clazz.getComponentType().isAssignableFrom(Double.class)) {
+			else if (componentType.isAssignableFrom(Double.class)) {
 				return (double[])value;
 			}
 		}
@@ -481,17 +484,18 @@ public class GetterUtil {
 		return getFloatValues(value, DEFAULT_FLOAT_VALUES);
 	}
 
-	@SuppressWarnings("unchecked")
 	public static float[] getFloatValues(
 		Serializable value, float[] defaultValue) {
 
-		Class clazz = value.getClass();
+		Class<?> classObject = value.getClass();
 
-		if (clazz.isArray()) {
-			if (clazz.getComponentType().isAssignableFrom(String.class)) {
+		if (classObject.isArray()) {
+			Class<?> componentType = classObject.getComponentType();
+
+			if (componentType.isAssignableFrom(String.class)) {
 				return getFloatValues((String[])value, defaultValue);
 			}
-			else if (clazz.getComponentType().isAssignableFrom(Float.class)) {
+			else if (componentType.isAssignableFrom(Float.class)) {
 				return (float[])value;
 			}
 		}
@@ -539,15 +543,16 @@ public class GetterUtil {
 		return getIntegerValues(value, DEFAULT_INTEGER_VALUES);
 	}
 
-	@SuppressWarnings("unchecked")
 	public static int[] getIntegerValues(Serializable value, int[] defaultValue) {
-		Class clazz = value.getClass();
+		Class<?> classObject = value.getClass();
 
-		if (clazz.isArray()) {
-			if (clazz.getComponentType().isAssignableFrom(String.class)) {
+		if (classObject.isArray()) {
+			Class<?> componentType = classObject.getComponentType();
+
+			if (componentType.isAssignableFrom(String.class)) {
 				return getIntegerValues((String[])value, defaultValue);
 			}
-			else if (clazz.getComponentType().isAssignableFrom(Integer.class)) {
+			else if (componentType.isAssignableFrom(Integer.class)) {
 				return (int[])value;
 			}
 		}
@@ -593,15 +598,16 @@ public class GetterUtil {
 		return getLongValues(value, DEFAULT_LONG_VALUES);
 	}
 
-	@SuppressWarnings("unchecked")
 	public static long[] getLongValues(Serializable value, long[] defaultValue) {
-		Class clazz = value.getClass();
+		Class<?> classObject = value.getClass();
 
-		if (clazz.isArray()) {
-			if (clazz.getComponentType().isAssignableFrom(String.class)) {
+		if (classObject.isArray()) {
+			Class<?> componentType = classObject.getComponentType();
+
+			if (componentType.isAssignableFrom(String.class)) {
 				return getLongValues((String[])value, defaultValue);
 			}
-			else if (clazz.getComponentType().isAssignableFrom(Long.class)) {
+			else if (componentType.isAssignableFrom(Long.class)) {
 				return (long[])value;
 			}
 		}
@@ -647,17 +653,18 @@ public class GetterUtil {
 		return getShortValues(value, DEFAULT_SHORT_VALUES);
 	}
 
-	@SuppressWarnings("unchecked")
 	public static short[] getShortValues(
 		Serializable value, short[] defaultValue) {
 
-		Class clazz = value.getClass();
+		Class<?> classObject = value.getClass();
 
-		if (clazz.isArray()) {
-			if (clazz.getComponentType().isAssignableFrom(String.class)) {
+		if (classObject.isArray()) {
+			Class<?> componentType = classObject.getComponentType();
+
+			if (componentType.isAssignableFrom(String.class)) {
 				return getShortValues((String[])value, defaultValue);
 			}
-			else if (clazz.getComponentType().isAssignableFrom(Short.class)) {
+			else if (componentType.isAssignableFrom(Short.class)) {
 				return (short[])value;
 			}
 		}

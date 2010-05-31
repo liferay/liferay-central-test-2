@@ -775,9 +775,9 @@ public class ParamUtil {
 	}
 
 	public static void print(ServiceContext serviceContext) {
-		for (Map.Entry<String, Serializable> entry :
-				serviceContext.getAttributes().entrySet()) {
+		Map<String, Serializable> attributes = serviceContext.getAttributes();
 
+		for (Map.Entry<String, Serializable> entry : attributes.entrySet()) {
 			System.out.println(
 				entry.getKey() + " = " + String.valueOf(entry.getValue()));
 		}
