@@ -45,14 +45,13 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 	<div class="user-profile-image">
 
 		<%
-		boolean urlIsNotNull = Validator.isNotNull(url);
+		String taglibAlt = (userDisplay != null) ? HtmlUtil.escapeAttribute(userDisplay.getFullName()) : LanguageUtil.get(pageContext, "generic-portrait");
+		String taglibSrc = themeDisplay.getPathImage() + "/user_" + ((userDisplay != null) && userDisplay.isFemale() ? "female" : "male") + "_portrait?img_id=" + portraitId + "&t=" + tokenId;
 		%>
 
-		<c:if test="<%= urlIsNotNull %>"><a href="<%= url %>"></c:if>
-
-		<img alt="<%= (userDisplay != null) ? HtmlUtil.escapeAttribute(userDisplay.getFullName()) : LanguageUtil.get(pageContext, "generic-portrait") %>" class="avatar" src="<%= themeDisplay.getPathImage() %>/user_<%= (userDisplay != null) && userDisplay.isFemale() ? "female" : "male" %>_portrait?img_id=<%= portraitId %>&t=<%= tokenId %>" width="65" />
-
-		<c:if test="<%= urlIsNotNull %>"></a></c:if>
+		<aui:a href="<%= url %>">
+			<img alt="<%= taglibAlt %>" class="avatar" src="<%= HtmlUtil.escape(taglibSrc) %>" width="65" />
+		</aui:a>
 	</div>
 
 	<c:if test="<%= displayStyle == 1 %>">
@@ -66,11 +65,9 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 	<div class="user-details">
 		<c:choose>
 			<c:when test="<%= userDisplay != null %>">
-				<c:if test="<%= urlIsNotNull %>"><a class="user-name" href="<%= url %>"></c:if>
-
-				<%= HtmlUtil.escape(userDisplay.getFullName()) %>
-
-				<c:if test="<%= urlIsNotNull %>"></a></c:if>
+				<aui:a cssClass="user-name" href="<%= url %>">
+					<%= HtmlUtil.escape(userDisplay.getFullName()) %>
+				</aui:a>
 			</c:when>
 			<c:otherwise>
 				<%= HtmlUtil.escape(userName) %>
