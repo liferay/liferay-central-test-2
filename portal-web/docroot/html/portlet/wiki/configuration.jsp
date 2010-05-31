@@ -314,7 +314,7 @@ else if (tabs2.equals("page-updated-email")) {
 				<aui:input name="hiddenNodes" type="hidden" />
 
 				<%
-				Set<String> currentVisibleNodes = new HashSet<String>(allNodesNames);
+				Set<String> currentVisibleNodes = SetUtil.fromArray(StringUtil.split(allNodes));
 
 				// Left list
 
