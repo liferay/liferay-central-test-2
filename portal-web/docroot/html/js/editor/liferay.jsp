@@ -14,7 +14,7 @@
  */
 %>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page import="com.liferay.portal.kernel.servlet.BrowserSnifferUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
