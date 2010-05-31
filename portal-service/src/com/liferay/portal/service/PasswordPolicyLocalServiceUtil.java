@@ -153,6 +153,9 @@ public class PasswordPolicyLocalServiceUtil {
 		return getService().getDefaultPasswordPolicy(companyId);
 	}
 
+	/**
+	* @deprecated
+	*/
 	public static com.liferay.portal.model.PasswordPolicy getPasswordPolicy(
 		long companyId, long organizationId, long locationId)
 		throws com.liferay.portal.kernel.exception.PortalException,

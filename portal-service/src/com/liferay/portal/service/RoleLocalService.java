@@ -210,12 +210,22 @@ public interface RoleLocalService {
 	public boolean hasUserRole(long userId, long roleId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Returns true if the user has the regular role.
+	*
+	* @return true if the user has the regular role
+	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasUserRole(long userId, long companyId,
 		java.lang.String name, boolean inherited)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Returns true if the user has any one of the specified regular roles.
+	*
+	* @return true if the user has the regular role
+	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasUserRoles(long userId, long companyId,
 		java.lang.String[] names, boolean inherited)

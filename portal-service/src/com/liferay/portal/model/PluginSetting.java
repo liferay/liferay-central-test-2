@@ -40,15 +40,39 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface PluginSetting extends PluginSettingModel {
+	/**
+	* Adds a role to the list of roles.
+	*/
 	public void addRole(java.lang.String role);
 
+	/**
+	* Sets a string of ordered comma delimited plugin ids.
+	*/
 	public void setRoles(java.lang.String roles);
 
+	/**
+	* Gets an array of required roles of the plugin.
+	*
+	* @return an array of required roles of the plugin
+	*/
 	public java.lang.String[] getRolesArray();
 
+	/**
+	* Sets an array of required roles of the plugin.
+	*/
 	public void setRolesArray(java.lang.String[] rolesArray);
 
+	/**
+	* Returns true if the plugin has a role with the specified name.
+	*
+	* @return true if the plugin has a role with the specified name
+	*/
 	public boolean hasRoleWithName(java.lang.String roleName);
 
+	/**
+	* Returns true if the user has permission to use this plugin
+	*
+	* @return true if the user has permission to use this plugin
+	*/
 	public boolean hasPermission(long userId);
 }
