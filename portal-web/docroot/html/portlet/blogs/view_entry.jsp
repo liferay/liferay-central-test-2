@@ -44,9 +44,11 @@ request.setAttribute("view_entry_content.jsp-entry", entry);
 request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
 %>
 
-<div align="right">
-	&laquo; <a href="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"><liferay-ui:message key="back" /></a>
-</div>
+<liferay-ui:tabs
+	names='<%= entry.getTitle() %>'
+	backLabel='<%= "&laquo; " + LanguageUtil.get(pageContext, "back") %>'
+	backURL="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"
+/>
 
 <portlet:actionURL var="editEntryURL">
 	<portlet:param name="struts_action" value="/blogs/edit_entry" />

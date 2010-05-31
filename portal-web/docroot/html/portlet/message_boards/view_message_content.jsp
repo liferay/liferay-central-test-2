@@ -33,6 +33,17 @@ MBMessageFlag messageFlag = MBMessageFlagLocalServiceUtil.getReadFlag(themeDispl
 String threadView = messageDisplay.getThreadView();
 %>
 
+<portlet:renderURL var="backURL">
+	<portlet:param name="struts_action" value="/message_boards/view" />
+	<portlet:param name="mbCategoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
+</portlet:renderURL>
+
+<liferay-ui:tabs
+	names="<%= message.getSubject() %>"
+	backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(category.getName())) %>'
+	backURL="<%= backURL.toString() %>"
+/>
+
 <table cellpadding="0" cellspacing="0" width="100%">
 <tr>
 	<td class="stretch"></td>
@@ -216,10 +227,6 @@ String threadView = messageDisplay.getThreadView();
 	</div>
 
 	<div class="clear"></div>
-</div>
-
-<div class="portlet-section-header results-header title">
-	<%= HtmlUtil.escape(message.getSubject()) %>
 </div>
 
 <div>

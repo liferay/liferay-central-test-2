@@ -39,7 +39,11 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 	<aui:input name="parentFolderId" type="hidden" value="<%= parentFolderId %>" />
 
 	<c:if test="<%= folder != null %>">
-		<h3 class="folder-title"><%= folder.getName() %></h3>
+		<liferay-ui:tabs
+			names='<%= folder.getName() %>'
+			backLabel='<%= "&laquo; " + LanguageUtil.get(pageContext, "back") %>'
+			backURL="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"
+		/>
 	</c:if>
 
 	<liferay-ui:error exception="<%= DuplicateFileException.class %>" message="please-enter-a-unique-folder-name" />

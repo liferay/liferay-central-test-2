@@ -95,9 +95,28 @@ if (portletDisplay.isWebDAVEnabled()) {
 }
 
 request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
+
+String versionText = LanguageUtil.format(pageContext, "version-x", fileEntry.getVersion());
+
+if (Validator.isNull(fileEntry.getVersion())) {
+	versionText = LanguageUtil.get(pageContext, "not-approved");
+}
 %>
 
 <liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
+
+<c:if test="<%= folder != null %>">
+	<portlet:renderURL var="backURL">
+		<portlet:param name="struts_action" value="/document_library/view" />
+		<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
+	</portlet:renderURL>
+
+	<liferay-ui:tabs
+		names='<%= fileEntry.getTitle() + " (" + versionText + ")" %>'
+		backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(folder.getName())) %>'
+		backURL="<%= backURL.toString() %>"
+	/>
+</c:if>
 
 <c:if test="<%= isLocked.booleanValue() %>">
 	<c:choose>
@@ -126,16 +145,6 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 <aui:layout>
 	<aui:column columnWidth="<%= 75 %>" cssClass="file-entry-column file-entry-column-first" first="<%= true %>">
-
-		<%
-		String versionText = LanguageUtil.format(pageContext, "version-x", fileEntry.getVersion());
-
-		if (Validator.isNull(fileEntry.getVersion())) {
-			versionText = LanguageUtil.get(pageContext, "not-approved");
-		}
-		%>
-
-		<h3 class="file-entry-title"><%= fileEntry.getTitle() + " (" + versionText + ")" %></h3>
 
 		<div class="file-entry-categories">
 			<liferay-ui:asset-categories-summary

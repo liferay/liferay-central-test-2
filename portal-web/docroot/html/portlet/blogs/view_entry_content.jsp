@@ -51,14 +51,9 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 			</c:if>
 
 			<div class="entry-title">
-				<c:choose>
-					<c:when test='<%= strutsAction.equals("/blogs/view_entry") %>'>
-						<%= HtmlUtil.escape(entry.getTitle()) %>
-					</c:when>
-					<c:otherwise>
-						<aui:a href="<%= viewEntryURL %>"><%= HtmlUtil.escape(entry.getTitle()) %></aui:a>
-					</c:otherwise>
-				</c:choose>
+				<c:if test='<%= !strutsAction.equals("/blogs/view_entry") %>'>
+					<aui:a href="<%= viewEntryURL %>"><%= HtmlUtil.escape(entry.getTitle()) %></aui:a>
+				</c:if>
 			</div>
 
 			<div class="entry-date">
