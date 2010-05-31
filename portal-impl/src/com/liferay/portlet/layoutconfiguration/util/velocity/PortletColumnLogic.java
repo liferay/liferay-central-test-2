@@ -133,7 +133,7 @@ public class PortletColumnLogic extends RuntimeLogic {
 
 			String content = RuntimePortletUtil.processPortlet(
 				_servletContext, _request, _response, portlet, queryString,
-				columnId, columnPos, columnCount, path);
+				columnId, columnPos, columnCount, path, false);
 
 			sb.append(content);
 		}

@@ -70,6 +70,11 @@ public class RuntimeTag extends TagSupport {
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
+		if (pageContext != null) {
+			response = new PipingServletResponse(
+				response, pageContext.getOut());
+		}
+
 		PortletRequest portletRequest = (PortletRequest)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
 
@@ -94,11 +99,6 @@ public class RuntimeTag extends TagSupport {
 
 		String portletId = portletName;
 
-		HttpServletResponse servletResponse = response;
-		if (pageContext != null) {
-			servletResponse = new PipingServletResponse(response,
-				pageContext.getOut());
-		}
 		try {
 			request.setAttribute(WebKeys.RENDER_PORTLET_RESOURCE, Boolean.TRUE);
 
@@ -108,7 +108,7 @@ public class RuntimeTag extends TagSupport {
 			}
 
 			RuntimePortletUtil.processPortlet(
-				servletContext, request, servletResponse, renderRequest,
+				servletContext, request, response, renderRequest,
 				renderResponse, portletId, queryString, true);
 		}
 		finally {

@@ -64,37 +64,13 @@ public class RuntimePortletUtil {
 	public static String processPortlet(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response, RenderRequest renderRequest,
-			RenderResponse renderResponse, String portletId, String queryString)
-		throws Exception {
-
-		return processPortlet(
-			servletContext, request, response, renderRequest, renderResponse,
-			null, portletId, queryString, null, null, null, null, false);
-	}
-
-	public static String processPortlet(
-			ServletContext servletContext, HttpServletRequest request,
-			HttpServletResponse response, RenderRequest renderRequest,
 			RenderResponse renderResponse, String portletId, String queryString,
-			boolean writeOuput)
+			boolean writeOutput)
 		throws Exception {
 
 		return processPortlet(
 			servletContext, request, response, renderRequest, renderResponse,
-			null, portletId, queryString, null, null, null, null, writeOuput);
-	}
-
-	public static String processPortlet(
-			ServletContext servletContext, HttpServletRequest request,
-			HttpServletResponse response, RenderRequest renderRequest,
-			RenderResponse renderResponse, String portletId, String queryString,
-			String columnId, Integer columnPos, Integer columnCount)
-		throws Exception {
-
-		return processPortlet(
-			servletContext, request, response, renderRequest, renderResponse,
-			null, portletId, queryString, columnId, columnPos, columnCount,
-			null, false);
+			portletId, queryString, null, null, null, writeOutput);
 	}
 
 	public static String processPortlet(
@@ -115,19 +91,6 @@ public class RuntimePortletUtil {
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response, Portlet portlet, String queryString,
 			String columnId, Integer columnPos, Integer columnCount,
-			String path)
-		throws Exception {
-
-		return processPortlet(
-			servletContext, request, response, null, null, portlet,
-			portlet.getPortletId(), queryString, columnId, columnPos,
-			columnCount, path, false);
-	}
-
-	public static String processPortlet(
-			ServletContext servletContext, HttpServletRequest request,
-			HttpServletResponse response, Portlet portlet, String queryString,
-			String columnId, Integer columnPos, Integer columnCount,
 			String path, boolean writeOutput)
 		throws Exception {
 
@@ -135,19 +98,6 @@ public class RuntimePortletUtil {
 			servletContext, request, response, null, null, portlet,
 			portlet.getPortletId(), queryString, columnId, columnPos,
 			columnCount, path, writeOutput);
-	}
-
-	public static String processPortlet(
-			ServletContext servletContext, HttpServletRequest request,
-			HttpServletResponse response, RenderRequest renderRequest,
-			RenderResponse renderResponse, Portlet portlet, String portletId,
-			String queryString, String columnId, Integer columnPos,
-			Integer columnCount, String path)
-		throws Exception {
-
-		return processPortlet(servletContext, request, response, renderRequest,
-			renderResponse, portlet, portletId, queryString, columnId,
-			columnPos, columnCount, path, false);
 	}
 
 	public static String processPortlet(
@@ -305,7 +255,7 @@ public class RuntimePortletUtil {
 
 			String content = processPortlet(
 				servletContext, request, response, portlet, queryString,
-				columnId, columnPos, columnCount, null);
+				columnId, columnPos, columnCount, null, false);
 
 			contentsMap.put(portlet.getPortletId(), content);
 		}

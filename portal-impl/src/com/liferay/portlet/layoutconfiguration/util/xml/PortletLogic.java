@@ -78,7 +78,7 @@ public class PortletLogic extends RuntimeLogic {
 
 		return RuntimePortletUtil.processPortlet(
 			_servletContext, _request, _response, _renderRequest,
-			_renderResponse, portletId, queryString);
+			_renderResponse, portletId, queryString, false);
 	}
 
 	private ServletContext _servletContext;
