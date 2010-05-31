@@ -14,10 +14,15 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.service.ServiceContext;
+
+import java.io.Serializable;
+
 import java.text.DateFormat;
 
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.Map;
 
 import javax.portlet.PortletRequest;
 
@@ -145,6 +150,63 @@ public class ParamUtil {
 		return null;
 	}
 
+	public static boolean get(
+		ServiceContext serviceContext, String param, boolean defaultValue) {
+
+		return GetterUtil.get(serviceContext.getAttribute(param), defaultValue);
+	}
+
+	public static Date get(
+		ServiceContext serviceContext, String param, DateFormat dateFormat,
+		Date defaultValue) {
+
+		return GetterUtil.get(
+			serviceContext.getAttribute(param), dateFormat, defaultValue);
+	}
+
+	public static double get(
+		ServiceContext serviceContext, String param, double defaultValue) {
+
+		return GetterUtil.get(serviceContext.getAttribute(param), defaultValue);
+	}
+
+	public static float get(
+		ServiceContext serviceContext, String param, float defaultValue) {
+
+		return GetterUtil.get(serviceContext.getAttribute(param), defaultValue);
+	}
+
+	public static int get(
+		ServiceContext serviceContext, String param, int defaultValue) {
+
+		return GetterUtil.get(serviceContext.getAttribute(param), defaultValue);
+	}
+
+	public static long get(
+		ServiceContext serviceContext, String param, long defaultValue) {
+
+		return GetterUtil.get(serviceContext.getAttribute(param), defaultValue);
+	}
+
+	public static short get(
+		ServiceContext serviceContext, String param, short defaultValue) {
+
+		return GetterUtil.get(serviceContext.getAttribute(param), defaultValue);
+	}
+
+	public static String get(
+		ServiceContext serviceContext, String param, String defaultValue) {
+
+		String returnValue =
+			GetterUtil.get(serviceContext.getAttribute(param), defaultValue);
+
+		if (returnValue != null) {
+			return returnValue.trim();
+		}
+
+		return null;
+	}
+
 	public static boolean getBoolean(HttpServletRequest request, String param) {
 		return GetterUtil.getBoolean(request.getParameter(param));
 	}
@@ -165,6 +227,18 @@ public class ParamUtil {
 		PortletRequest portletRequest, String param, boolean defaultValue) {
 
 		return get(portletRequest, param, defaultValue);
+	}
+
+	public static boolean getBoolean(
+		ServiceContext serviceContext, String param) {
+
+		return GetterUtil.getBoolean(serviceContext.getAttribute(param));
+	}
+
+	public static boolean getBoolean(
+		ServiceContext serviceContext, String param, boolean defaultValue) {
+
+		return get(serviceContext, param, defaultValue);
 	}
 
 	public static boolean[] getBooleanValues(
@@ -193,6 +267,19 @@ public class ParamUtil {
 			portletRequest.getParameterValues(param), defaultValue);
 	}
 
+	public static boolean[] getBooleanValues(
+		ServiceContext serviceContext, String param) {
+
+		return getBooleanValues(serviceContext, param, new boolean[0]);
+	}
+
+	public static boolean[] getBooleanValues(
+		ServiceContext serviceContext, String param, boolean[] defaultValue) {
+
+		return GetterUtil.getBooleanValues(
+			serviceContext.getAttribute(param), defaultValue);
+	}
+
 	public static Date getDate(
 		HttpServletRequest request, String param, DateFormat dateFormat) {
 
@@ -218,6 +305,20 @@ public class ParamUtil {
 		Date defaultValue) {
 
 		return get(portletRequest, param, dateFormat, defaultValue);
+	}
+
+	public static Date getDate(
+		ServiceContext serviceContext, String param, DateFormat dateFormat) {
+
+		return GetterUtil.getDate(
+			serviceContext.getAttribute(param), dateFormat);
+	}
+
+	public static Date getDate(
+		ServiceContext serviceContext, String param, DateFormat dateFormat,
+		Date defaultValue) {
+
+		return get(serviceContext, param, dateFormat, defaultValue);
 	}
 
 	public static Date[] getDateValues(
@@ -248,6 +349,20 @@ public class ParamUtil {
 			portletRequest.getParameterValues(param), dateFormat, defaultValue);
 	}
 
+	public static Date[] getDateValues(
+		ServiceContext serviceContext, String param, DateFormat dateFormat) {
+
+		return getDateValues(serviceContext, param, dateFormat, new Date[0]);
+	}
+
+	public static Date[] getDateValues(
+		ServiceContext serviceContext, String param, DateFormat dateFormat,
+		Date[] defaultValue) {
+
+		return GetterUtil.getDateValues(
+			serviceContext.getAttribute(param), dateFormat, defaultValue);
+	}
+
 	public static double getDouble(HttpServletRequest request, String param) {
 		return GetterUtil.getDouble(request.getParameter(param));
 	}
@@ -268,6 +383,18 @@ public class ParamUtil {
 		PortletRequest portletRequest, String param, double defaultValue) {
 
 		return get(portletRequest, param, defaultValue);
+	}
+
+	public static double getDouble(
+		ServiceContext serviceContext, String param) {
+
+		return GetterUtil.getDouble(serviceContext.getAttribute(param));
+	}
+
+	public static double getDouble(
+		ServiceContext serviceContext, String param, double defaultValue) {
+
+		return get(serviceContext, param, defaultValue);
 	}
 
 	public static double[] getDoubleValues(
@@ -296,6 +423,19 @@ public class ParamUtil {
 			portletRequest.getParameterValues(param), defaultValue);
 	}
 
+	public static double[] getDoubleValues(
+		ServiceContext serviceContext, String param) {
+
+		return getDoubleValues(serviceContext, param, new double[0]);
+	}
+
+	public static double[] getDoubleValues(
+		ServiceContext serviceContext, String param, double[] defaultValue) {
+
+		return GetterUtil.getDoubleValues(
+			serviceContext.getAttribute(param), defaultValue);
+	}
+
 	public static float getFloat(HttpServletRequest request, String param) {
 		return GetterUtil.getFloat(request.getParameter(param));
 	}
@@ -314,6 +454,16 @@ public class ParamUtil {
 		PortletRequest portletRequest, String param, float defaultValue) {
 
 		return get(portletRequest, param, defaultValue);
+	}
+
+	public static float getFloat(ServiceContext serviceContext, String param) {
+		return GetterUtil.getFloat(serviceContext.getAttribute(param));
+	}
+
+	public static float getFloat(
+		ServiceContext serviceContext, String param, float defaultValue) {
+
+		return get(serviceContext, param, defaultValue);
 	}
 
 	public static float[] getFloatValues(
@@ -342,6 +492,19 @@ public class ParamUtil {
 			portletRequest.getParameterValues(param), defaultValue);
 	}
 
+	public static float[] getFloatValues(
+		ServiceContext serviceContext, String param) {
+
+		return getFloatValues(serviceContext, param, new float[0]);
+	}
+
+	public static float[] getFloatValues(
+		ServiceContext serviceContext, String param, float[] defaultValue) {
+
+		return GetterUtil.getFloatValues(
+			serviceContext.getAttribute(param), defaultValue);
+	}
+
 	public static int getInteger(HttpServletRequest request, String param) {
 		return GetterUtil.getInteger(request.getParameter(param));
 	}
@@ -360,6 +523,16 @@ public class ParamUtil {
 		PortletRequest portletRequest, String param, int defaultValue) {
 
 		return get(portletRequest, param, defaultValue);
+	}
+
+	public static int getInteger(ServiceContext serviceContext, String param) {
+		return GetterUtil.getInteger(serviceContext.getAttribute(param));
+	}
+
+	public static int getInteger(
+		ServiceContext serviceContext, String param, int defaultValue) {
+
+		return get(serviceContext, param, defaultValue);
 	}
 
 	public static int[] getIntegerValues(
@@ -388,6 +561,19 @@ public class ParamUtil {
 			portletRequest.getParameterValues(param), defaultValue);
 	}
 
+	public static int[] getIntegerValues(
+		ServiceContext serviceContext, String param) {
+
+		return getIntegerValues(serviceContext, param, new int[0]);
+	}
+
+	public static int[] getIntegerValues(
+		ServiceContext serviceContext, String param, int[] defaultValue) {
+
+		return GetterUtil.getIntegerValues(
+			serviceContext.getAttribute(param), defaultValue);
+	}
+
 	public static long getLong(HttpServletRequest request, String param) {
 		return GetterUtil.getLong(request.getParameter(param));
 	}
@@ -406,6 +592,16 @@ public class ParamUtil {
 		PortletRequest portletRequest, String param, long defaultValue) {
 
 		return get(portletRequest, param, defaultValue);
+	}
+
+	public static long getLong(ServiceContext serviceContext, String param) {
+		return GetterUtil.getLong(serviceContext.getAttribute(param));
+	}
+
+	public static long getLong(
+		ServiceContext serviceContext, String param, long defaultValue) {
+
+		return get(serviceContext, param, defaultValue);
 	}
 
 	public static long[] getLongValues(
@@ -434,6 +630,19 @@ public class ParamUtil {
 			portletRequest.getParameterValues(param), defaultValue);
 	}
 
+	public static long[] getLongValues(
+		ServiceContext serviceContext, String param) {
+
+		return getLongValues(serviceContext, param, new long[0]);
+	}
+
+	public static long[] getLongValues(
+		ServiceContext serviceContext, String param, long[] defaultValue) {
+
+		return GetterUtil.getLongValues(
+			serviceContext.getAttribute(param), defaultValue);
+	}
+
 	public static short getShort(HttpServletRequest request, String param) {
 		return GetterUtil.getShort(request.getParameter(param));
 	}
@@ -452,6 +661,16 @@ public class ParamUtil {
 		PortletRequest portletRequest, String param, short defaultValue) {
 
 		return get(portletRequest, param, defaultValue);
+	}
+
+	public static short getShort(ServiceContext serviceContext, String param) {
+		return GetterUtil.getShort(serviceContext.getAttribute(param));
+	}
+
+	public static short getShort(
+		ServiceContext serviceContext, String param, short defaultValue) {
+
+		return get(serviceContext, param, defaultValue);
 	}
 
 	public static short[] getShortValues(
@@ -480,6 +699,19 @@ public class ParamUtil {
 			portletRequest.getParameterValues(param), defaultValue);
 	}
 
+	public static short[] getShortValues(
+		ServiceContext serviceContext, String param) {
+
+		return getShortValues(serviceContext, param, new short[0]);
+	}
+
+	public static short[] getShortValues(
+		ServiceContext serviceContext, String param, short[] defaultValue) {
+
+		return GetterUtil.getShortValues(
+			serviceContext.getAttribute(param), defaultValue);
+	}
+
 	public static String getString(HttpServletRequest request, String param) {
 		return GetterUtil.getString(request.getParameter(param));
 	}
@@ -500,6 +732,18 @@ public class ParamUtil {
 		PortletRequest portletRequest, String param, String defaultValue) {
 
 		return get(portletRequest, param, defaultValue);
+	}
+
+	public static String getString(
+		ServiceContext serviceContext, String param) {
+
+		return GetterUtil.getString(serviceContext.getAttribute(param));
+	}
+
+	public static String getString(
+		ServiceContext serviceContext, String param, String defaultValue) {
+
+		return get(serviceContext, param, defaultValue);
 	}
 
 	public static void print(HttpServletRequest request) {
@@ -527,6 +771,15 @@ public class ParamUtil {
 			for (int i = 0; i < values.length; i++) {
 				System.out.println(param + "[" + i + "] = " + values[i]);
 			}
+		}
+	}
+
+	public static void print(ServiceContext serviceContext) {
+		for (Map.Entry<String, Serializable> entry :
+				serviceContext.getAttributes().entrySet()) {
+
+			System.out.println(
+				entry.getKey() + " = " + String.valueOf(entry.getValue()));
 		}
 	}
 
