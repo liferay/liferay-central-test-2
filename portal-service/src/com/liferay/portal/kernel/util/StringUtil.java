@@ -792,6 +792,49 @@ public class StringUtil {
 		return sb;
 	}
 
+	public static StringBundler replaceWithStringBundler(
+		String s, String begin, String end, Map<String, StringBundler> values) {
+
+		if ((s == null) || (begin == null) || (end == null) ||
+			(values == null) || (values.size() == 0)) {
+
+			return new StringBundler(s);
+		}
+
+		StringBundler sb = new StringBundler(values.size() * 2 + 1);
+
+		int pos = 0;
+
+		while (true) {
+			int x = s.indexOf(begin, pos);
+			int y = s.indexOf(end, x + begin.length());
+
+			if ((x == -1) || (y == -1)) {
+				sb.append(s.substring(pos, s.length()));
+
+				break;
+			}
+			else {
+				sb.append(s.substring(pos, x));
+
+				String oldValue = s.substring(x + begin.length(), y);
+
+				StringBundler newValue = values.get(oldValue);
+
+				if (newValue == null) {
+					sb.append(oldValue);
+				}
+				else {
+					sb.append(newValue);
+				}
+
+				pos = y + end.length();
+			}
+		}
+
+		return sb;
+	}
+
 	public static String replace(String s, String[] oldSubs, String[] newSubs) {
 		if ((s == null) || (oldSubs == null) || (newSubs == null)) {
 			return null;
