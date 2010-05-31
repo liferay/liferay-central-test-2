@@ -16,7 +16,8 @@
 
 <%@ include file="/html/portal/init.jsp" %>
 
+<%= request.getAttribute(WebKeys.LAYOUT_CONTENT) %>
+
 <%
-	LazyIncluder lazyIncluder = (LazyIncluder) request.getAttribute(WebKeys.LAYOUT_CONTENT_INCLUDER);
-	lazyIncluder.include(pageContext.getOut());
+request.removeAttribute(WebKeys.LAYOUT_CONTENT);
 %>
