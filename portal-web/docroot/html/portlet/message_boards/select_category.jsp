@@ -20,16 +20,19 @@
 MBCategory category = (MBCategory)request.getAttribute(WebKeys.MESSAGE_BOARDS_CATEGORY);
 
 long categoryId = BeanParamUtil.getLong(category, request, "mbCategoryId", MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
+String categoryName = LanguageUtil.get(pageContext, "message-boards-home");
 
 MBCategoryDisplay categoryDisplay = new MBCategoryDisplayImpl(scopeGroupId, categoryId);
 
 if (category != null) {
+	categoryName = category.getName();
+
 	MBUtil.addPortletBreadcrumbEntries(category, request, renderResponse);
 }
 %>
 
 <aui:form method="post" name="fm">
-	<liferay-ui:tabs names="categories" />
+	<liferay-ui:tabs names="message-boards-home" />
 
 	<liferay-ui:breadcrumb showGuestGroup="<%= false %>" showParentGroups="<%= false %>" showLayout="<%= false %>" />
 
@@ -109,6 +112,15 @@ if (category != null) {
 		resultRows.add(row);
 	}
 	%>
+
+	<aui:button-row>
+
+		<%
+		String taglibSelectOnClick = "opener." + renderResponse.getNamespace() + "selectCategory('" + categoryId + "','" + categoryName + "');window.close();";
+		%>
+
+		<aui:button onClick="<%= taglibSelectOnClick %>" value="choose-this-category" />
+	</aui:button-row>
 
 	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 </aui:form>

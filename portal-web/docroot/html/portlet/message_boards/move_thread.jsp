@@ -59,9 +59,13 @@ boolean quote = false;
 		<aui:field-wrapper label="category">
 
 			<%
-			MBCategory category = MBCategoryLocalServiceUtil.getCategory(categoryId);
+			MBCategory category = null;
 
-			category = category.toEscapedModel();
+			if (categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+				category = MBCategoryLocalServiceUtil.getCategory(categoryId);
+
+				category = category.toEscapedModel();
+			}
 			%>
 
 			<portlet:renderURL var="viewCategoryURL">
@@ -69,11 +73,11 @@ boolean quote = false;
 				<portlet:param name="mbCategoryId" value="<%= String.valueOf(categoryId) %>" />
 			</portlet:renderURL>
 
-			<aui:a href="<%= viewCategoryURL %>" id="categoryName"><%= category.getName() %></aui:a>
+			<aui:a href="<%= viewCategoryURL %>" id="categoryName"><%= category != null ? category.getName() : LanguageUtil.get(pageContext, "message-boards-home") %></aui:a>
 
 			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectCategoryURL">
 				<portlet:param name="struts_action" value="/message_boards/select_category" />
-				<portlet:param name="mbCategoryId" value="<%= String.valueOf(category.getParentCategoryId()) %>" />
+				<portlet:param name="mbCategoryId" value="<%= String.valueOf(category != null ? category.getParentCategoryId() : MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) %>" />
 			</portlet:renderURL>
 
 			<%

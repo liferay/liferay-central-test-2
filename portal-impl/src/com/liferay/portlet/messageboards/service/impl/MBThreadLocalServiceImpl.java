@@ -129,7 +129,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		// Category
 
-		if (!rootMessage.isDiscussion()) {
+		if (rootMessage.getCategoryId() > 0) {
 			MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 				thread.getCategoryId());
 
@@ -368,11 +368,19 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		long oldCategoryId = thread.getCategoryId();
 
-		MBCategory oldCategory = mbCategoryPersistence.findByPrimaryKey(
-			oldCategoryId);
+		MBCategory oldCategory = null;
 
-		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
-			categoryId);
+		if (oldCategoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+			oldCategory = mbCategoryPersistence.findByPrimaryKey(
+				oldCategoryId);
+		}
+
+		MBCategory category = null;
+
+		if (categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+			category = mbCategoryPersistence.findByPrimaryKey(
+				categoryId);
+		}
 
 		// Messages
 
@@ -380,7 +388,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			groupId, oldCategoryId, thread.getThreadId());
 
 		for (MBMessage message : messages) {
-			message.setCategoryId(category.getCategoryId());
+			message.setCategoryId(categoryId);
 
 			mbMessagePersistence.update(message, false);
 
@@ -396,22 +404,27 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		// Thread
 
-		thread.setCategoryId(category.getCategoryId());
+		thread.setCategoryId(categoryId);
 
 		mbThreadPersistence.update(thread, false);
 
 		// Category
 
-		oldCategory.setThreadCount(oldCategory.getThreadCount() - 1);
-		oldCategory.setMessageCount(
-			oldCategory.getMessageCount() - messages.size());
+		if (oldCategory != null) {
+			oldCategory.setThreadCount(oldCategory.getThreadCount() - 1);
+			oldCategory.setMessageCount(
+				oldCategory.getMessageCount() - messages.size());
 
-		mbCategoryPersistence.update(oldCategory, false);
+			mbCategoryPersistence.update(oldCategory, false);
+		}
 
-		category.setThreadCount(category.getThreadCount() + 1);
-		category.setMessageCount(category.getMessageCount() + messages.size());
+		if (category != null) {
+			category.setThreadCount(category.getThreadCount() + 1);
+			category.setMessageCount(
+				category.getMessageCount() + messages.size());
 
-		mbCategoryPersistence.update(category, false);
+			mbCategoryPersistence.update(category, false);
+		}
 
 		return thread;
 	}
