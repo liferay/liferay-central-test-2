@@ -61,6 +61,8 @@ import freemarker.log.Logger;
 import freemarker.template.TemplateHashModel;
 import freemarker.template.TemplateModelException;
 
+import java.beans.Introspector;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -81,8 +83,6 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import java.beans.Introspector;
 
 import org.dom4j.DocumentException;
 
@@ -741,7 +741,7 @@ public class ServiceBuilder {
 
 						if ((ejbNameWeight > collectionEntityWeight) ||
 							((ejbNameWeight == collectionEntityWeight) &&
-							(ejbName.compareTo(collectionEntity) > 0))) {
+							 (ejbName.compareTo(collectionEntity) > 0))) {
 
 							_entityMappings.put(mappingTable, entityMapping);
 						}
@@ -1298,6 +1298,14 @@ public class ServiceBuilder {
 		return _entityMappings.get(mappingTable);
 	}
 
+	public String getGeneratorClass(String idType) {
+		if (Validator.isNull(idType)) {
+			idType = "assigned";
+		}
+
+		return idType;
+	}
+
 	public String getJavadocComment(JavaClass javaClass) {
 		return _formatComment(
 			javaClass.getComment(), javaClass.getTags(), StringPool.BLANK);
@@ -1306,14 +1314,6 @@ public class ServiceBuilder {
 	public String getJavadocComment(JavaMethod javaMethod) {
 		return _formatComment(
 			javaMethod.getComment(), javaMethod.getTags(), StringPool.TAB);
-	}
-
-	public String getGeneratorClass(String idType) {
-		if (Validator.isNull(idType)) {
-			idType = "assigned";
-		}
-
-		return idType;
 	}
 
 	public String getListActualTypeArguments(Type type) {
@@ -1354,7 +1354,7 @@ public class ServiceBuilder {
 
 		if (Validator.isNull(entity.getPortletShortName()) ||
 			(noSuchEntityException.startsWith(entity.getPortletShortName()) &&
-			!noSuchEntityException.equals(entity.getPortletShortName()))) {
+			 !noSuchEntityException.equals(entity.getPortletShortName()))) {
 
 			noSuchEntityException = noSuchEntityException.substring(
 				entity.getPortletShortName().length());
@@ -1624,8 +1624,8 @@ public class ServiceBuilder {
 			return true;
 		}
 		else if (methodName.equals("findByPrimaryKey") ||
-				methodName.equals("fetchByPrimaryKey") ||
-				methodName.equals("remove")) {
+				 methodName.equals("fetchByPrimaryKey") ||
+				 methodName.equals("remove")) {
 
 			JavaParameter[] parameters = method.getParameters();
 
@@ -1671,30 +1671,30 @@ public class ServiceBuilder {
 			return false;
 		}
 		else if ((methodName.equals("getUser")) &&
-				(method.getParameters().length == 0)) {
+				 (method.getParameters().length == 0)) {
 
 			return false;
 		}
 		else if (methodName.equals("getUserId") &&
-				(method.getParameters().length == 0)) {
+				 (method.getParameters().length == 0)) {
 
 			return false;
 		}
 		else if ((methodName.endsWith("Finder")) &&
-				(methodName.startsWith("get") ||
-				methodName.startsWith("set"))) {
+				 (methodName.startsWith("get") ||
+				  methodName.startsWith("set"))) {
 
 			return false;
 		}
 		else if ((methodName.endsWith("Persistence")) &&
-				(methodName.startsWith("get") ||
-				methodName.startsWith("set"))) {
+				 (methodName.startsWith("get") ||
+				  methodName.startsWith("set"))) {
 
 			return false;
 		}
 		else if ((methodName.endsWith("Service")) &&
-				(methodName.startsWith("get") ||
-				methodName.startsWith("set"))) {
+				 (methodName.startsWith("get") ||
+				  methodName.startsWith("set"))) {
 
 			return false;
 		}
@@ -3838,7 +3838,8 @@ public class ServiceBuilder {
 		sb.append("/**\n");
 
 		if (Validator.isNotNull(comment)) {
-			String[] lines = comment.split(_NEW_LINE_CHARS);
+			String[] lines = comment.split(
+				"(\\n|\\r\\n|\\r|\u0085|\u2028|\u2029)");
 
 			for (String line : lines) {
 				sb.append(indentation);
@@ -4025,13 +4026,13 @@ public class ServiceBuilder {
 					sb.append("BOOLEAN");
 				}
 				else if (colType.equalsIgnoreCase("double") ||
-						colType.equalsIgnoreCase("float")) {
+						 colType.equalsIgnoreCase("float")) {
 
 					sb.append("DOUBLE");
 				}
 				else if (colType.equals("int") ||
-						colType.equals("Integer") ||
-						colType.equalsIgnoreCase("short")) {
+						 colType.equals("Integer") ||
+						 colType.equalsIgnoreCase("short")) {
 
 					sb.append("INTEGER");
 				}
@@ -4130,13 +4131,13 @@ public class ServiceBuilder {
 				sb.append("BOOLEAN");
 			}
 			else if (colType.equalsIgnoreCase("double") ||
-					colType.equalsIgnoreCase("float")) {
+					 colType.equalsIgnoreCase("float")) {
 
 				sb.append("DOUBLE");
 			}
 			else if (colType.equals("int") ||
-					colType.equals("Integer") ||
-					colType.equalsIgnoreCase("short")) {
+					 colType.equals("Integer") ||
+					 colType.equalsIgnoreCase("short")) {
 
 				sb.append("INTEGER");
 			}
@@ -4369,9 +4370,7 @@ public class ServiceBuilder {
 	private boolean _hasHttpMethods(JavaClass javaClass) {
 		JavaMethod[] methods = _getMethods(javaClass);
 
-		for (JavaMethod _method : methods) {
-			JavaMethod javaMethod = _method;
-
+		for (JavaMethod javaMethod : methods) {
 			if (!javaMethod.isConstructor() && javaMethod.isPublic() &&
 				isCustomMethod(javaMethod)) {
 
@@ -4402,9 +4401,6 @@ public class ServiceBuilder {
 		return StringUtil.replace(
 			FreeMarkerUtil.process(name, context), '\r', "");
 	}
-
-	protected static final String _NEW_LINE_CHARS =
-		"(\\n|\\r\\n|\\r|\u0085|\u2028|\u2029)";
 
 	private static final int _SESSION_TYPE_REMOTE = 0;
 
