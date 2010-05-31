@@ -219,7 +219,7 @@ if (image != null) {
 	function <portlet:namespace />saveImage() {
 		<%= HtmlUtil.escape(uploadProgressId) %>.startProgress();
 
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= image == null ? Constants.ADD : Constants.UPDATE %>";
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= (image == null) ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
 

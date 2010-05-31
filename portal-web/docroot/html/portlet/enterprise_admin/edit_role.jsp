@@ -140,7 +140,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 
 <aui:script>
 	function <portlet:namespace />saveRole() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= role == null ? Constants.ADD : Constants.UPDATE %>";
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= (role == null) ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/enterprise_admin/edit_role" /></portlet:actionURL>");
 	}
 

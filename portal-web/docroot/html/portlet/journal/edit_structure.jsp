@@ -407,7 +407,7 @@ int tabIndex = 1;
 	}
 
 	function <portlet:namespace />saveStructure(addAnother) {
-		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= structure == null ? Constants.ADD : Constants.UPDATE %>";
+		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= (structure == null) ? Constants.ADD : Constants.UPDATE %>";
 
 		<c:if test="<%= structure == null %>">
 			document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = document.<portlet:namespace />fm1.<portlet:namespace />newStructureId.value;

@@ -268,7 +268,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	}
 
 	function <portlet:namespace />saveTemplate() {
-		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= template == null ? Constants.ADD : Constants.UPDATE %>";
+		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= (template == null) ? Constants.ADD : Constants.UPDATE %>";
 
 		<c:if test="<%= template == null %>">
 			document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = document.<portlet:namespace />fm1.<portlet:namespace />newTemplateId.value;

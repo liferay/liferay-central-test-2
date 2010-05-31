@@ -299,7 +299,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	}
 
 	function <portlet:namespace />saveEvent() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= event == null ? Constants.ADD : Constants.UPDATE %>";
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= (event == null) ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
 

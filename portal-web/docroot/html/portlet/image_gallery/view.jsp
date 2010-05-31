@@ -210,11 +210,11 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 					<liferay-ui:icon
 						cssClass="folder-avatar"
 						image='<%= "../file_system/large/" + (((foldersCount + imagesCount) > 0) ? "folder_full_image" : "folder_empty") %>'
-						message='<%= folder != null ? folder.getName() : LanguageUtil.get(pageContext, "image-home") %>'
+						message='<%= (folder != null) ? folder.getName() : LanguageUtil.get(pageContext, "image-home") %>'
 					/>
 
 					<div class="folder-name">
-						<h4><%= folder != null ? folder.getName() : LanguageUtil.get(pageContext, "image-home") %></h4>
+						<h4><%= (folder != null) ? folder.getName() : LanguageUtil.get(pageContext, "image-home") %></h4>
 					</div>
 				</div>
 

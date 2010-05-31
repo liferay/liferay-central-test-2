@@ -189,7 +189,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 			%>
 
 			<c:if test="<%= categoriesCount > 0 %>">
-				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="messageBoardsCategoriesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, category != null ? "subcategories" : "categories") %>'>
+				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="messageBoardsCategoriesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, (category != null) ? "subcategories" : "categories") %>'>
 					<liferay-ui:search-container
 						curParam="cur1"
 						deltaConfigurable="<%= false %>"

@@ -44,7 +44,7 @@ portletURL.setParameter("struts_action", "/workflow_definitions/view");
 </portlet:actionURL>
 
 <aui:form action="<%= editWorkflowDefinitionURL %>" enctype="multipart/form-data" method="post">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= workflowDefinition == null ? Constants.ADD : Constants.UPDATE %>" />
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (workflowDefinition == null) ? Constants.ADD : Constants.UPDATE %>" />
 	<aui:input name="name" type="hidden" value="<%= name %>" />
 	<aui:input name="version" type="hidden" value="<%= version %>" />
 

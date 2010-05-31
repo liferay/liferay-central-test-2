@@ -45,7 +45,7 @@ long resetTicketMaxAge = BeanParamUtil.getLong(passwordPolicy, request, "resetTi
 </portlet:actionURL>
 
 <aui:form action="<%= editPasswordPolicyURL %>" method="post" name="fm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= passwordPolicy == null ? Constants.ADD : Constants.UPDATE %>" />
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (passwordPolicy == null) ? Constants.ADD : Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="passwordPolicyId" type="hidden" value="<%= passwordPolicyId %>" />
 
