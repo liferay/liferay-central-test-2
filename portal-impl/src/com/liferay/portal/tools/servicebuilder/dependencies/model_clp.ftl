@@ -15,6 +15,7 @@ import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
 
@@ -242,6 +243,44 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 			}
 		</#if>
 	</#list>
+
+	<#if entity.isWorkflowEnabled()>
+		public boolean isApproved() {
+			if (getStatus() == WorkflowConstants.STATUS_APPROVED) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
+		public boolean isDraft() {
+			if (getStatus() == WorkflowConstants.STATUS_DRAFT) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
+		public boolean isExpired() {
+			if (getStatus() == WorkflowConstants.STATUS_EXPIRED) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
+		public boolean isPending() {
+			if (getStatus() == WorkflowConstants.STATUS_PENDING) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+	</#if>
 
 	public ${entity.name} toEscapedModel() {
 		if (isEscapedModel()) {
