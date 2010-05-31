@@ -199,6 +199,7 @@ public class UpgradeExpando extends UpgradeProcess {
 
 			while (rs.next()) {
 				long newClassPK = rs.getLong(columnName);
+
 				delete = true;
 
 				if (!hasRow(companyId, tableId, newClassPK)) {
