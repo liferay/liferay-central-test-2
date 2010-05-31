@@ -281,10 +281,6 @@
 	padding: 4px;
 }
 
-.aui-tabview-list h1 {
-	font-size: 1.5em;
-}
-
 .ie7 .aui-tabview-list {
 	overflow: hidden;
 }

@@ -96,9 +96,6 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 		<c:when test="<%= themeDisplay.isFacebook() %>">
 			<fb:tabs>
 		</c:when>
-		<c:when test="<%= values.length == 1 %>">
-			<div class="aui-tabview-list">
-		</c:when>
 		<c:otherwise>
 			<input name="<%= namespace %><%= param %>TabsScroll" type="hidden" />
 
@@ -177,51 +174,35 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 				/>
 			</c:when>
 			<c:otherwise>
-				<c:choose>
-					<c:when test="<%= values.length == 1 %>">
-						<h1 class="<%= cssClassName %>">
-					</c:when>
-					<c:otherwise>
-						<li class="<%= cssClassName %>" id="<%= namespace %><%= param %><%= values[i] %>TabsId">
-					</c:otherwise>
-				</c:choose>
+				<li class="<%= cssClassName %>" id="<%= namespace %><%= param %><%= values[i] %>TabsId">
+					<span class="aui-tab-content">
+						<span class="aui-tab-label">
+							<c:choose>
+								<c:when test="<%= Validator.isNotNull(curURL) %>">
+									<a href="<%= curURL %>"
+										<c:if test="<%= Validator.isNotNull(curOnClick) %>">
+											onClick="<%= curOnClick %>"
+										</c:if>
+									>
+								</c:when>
+								<c:otherwise>
+									<span>
+								</c:otherwise>
+							</c:choose>
 
-				<span class="aui-tab-content">
-					<span class="aui-tab-label">
-						<c:choose>
-							<c:when test="<%= Validator.isNotNull(curURL) %>">
-								<a href="<%= curURL %>"
-									<c:if test="<%= Validator.isNotNull(curOnClick) %>">
-										onClick="<%= curOnClick %>"
-									</c:if>
-								>
-							</c:when>
-							<c:otherwise>
-								<span>
-							</c:otherwise>
-						</c:choose>
+							<%= LanguageUtil.get(pageContext, names[i]) %>
 
-						<%= LanguageUtil.get(pageContext, names[i]) %>
-
-						<c:choose>
-							<c:when test="<%= Validator.isNotNull(curURL) %>">
-								</a>
-							</c:when>
-							<c:otherwise>
-								</span>
-							</c:otherwise>
-						</c:choose>
+							<c:choose>
+								<c:when test="<%= Validator.isNotNull(curURL) %>">
+									</a>
+								</c:when>
+								<c:otherwise>
+									</span>
+								</c:otherwise>
+							</c:choose>
+						</span>
 					</span>
-				</span>
-
-				<c:choose>
-					<c:when test="<%= values.length == 1 %>">
-						</h1>
-					</c:when>
-					<c:otherwise>
-						</li>
-					</c:otherwise>
-				</c:choose>
+				</li>
 			</c:otherwise>
 		</c:choose>
 
@@ -247,29 +228,13 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 				/>
 			</c:when>
 			<c:otherwise>
-				<c:choose>
-					<c:when test="<%= values.length == 1 %>">
-						<span class="aui-tab toggle last">
-					</c:when>
-					<c:otherwise>
-						<li class="aui-tab toggle last">
-					</c:otherwise>
-				</c:choose>
-
-				<span class="aui-tab-content">
-					<span class="aui-tab-label">
-						<a href="<%= backURL %>" id="<%= namespace %><%= param %>TabsBack"><%= Validator.isNotNull(backLabel) ? backLabel : "&laquo;" + LanguageUtil.get(pageContext, "back") %></a>
-					</span>
-				</span>
-
-				<c:choose>
-					<c:when test="<%= values.length == 1 %>">
+				<li class="aui-tab toggle last">
+					<span class="aui-tab-content">
+						<span class="aui-tab-label">
+							<a href="<%= backURL %>" id="<%= namespace %><%= param %>TabsBack"><%= Validator.isNotNull(backLabel) ? backLabel : "&laquo;" + LanguageUtil.get(pageContext, "back") %></a>
 						</span>
-					</c:when>
-					<c:otherwise>
-						</li>
-					</c:otherwise>
-				</c:choose>
+					</span>
+				</li>
 			</c:otherwise>
 		</c:choose>
 	</c:if>
@@ -277,9 +242,6 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 	<c:choose>
 		<c:when test="<%= themeDisplay.isFacebook() %>">
 			</fb:tabs>
-		</c:when>
-		<c:when test="<%= values.length == 1 %>">
-			</div>
 		</c:when>
 		<c:otherwise>
 			</ul>
