@@ -145,13 +145,6 @@ public class SocialEquityLogLocalServiceUtil {
 		getService().deactivateEquityLogs(assetEntryId);
 	}
 
-	public static void processMessage(
-		com.liferay.portal.kernel.messaging.Message message)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().processMessage(message);
-	}
-
 	public static SocialEquityLogLocalService getService() {
 		if (_service == null) {
 			_service = (SocialEquityLogLocalService)PortalBeanLocatorUtil.locate(SocialEquityLogLocalService.class.getName());

@@ -19,8 +19,6 @@ import com.liferay.ibm.icu.util.GregorianCalendar;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PropsValues;
@@ -31,7 +29,6 @@ import com.liferay.portlet.social.model.SocialEquityAssetEntry;
 import com.liferay.portlet.social.model.SocialEquityLog;
 import com.liferay.portlet.social.model.SocialEquitySetting;
 import com.liferay.portlet.social.model.SocialEquitySettingConstants;
-import com.liferay.portlet.social.model.SocialEquityUser;
 import com.liferay.portlet.social.service.base.SocialEquityLogLocalServiceBaseImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
@@ -64,21 +61,26 @@ public class SocialEquityLogLocalServiceImpl
 			return;
 		}
 
+		User user = userPersistence.findByPrimaryKey(userId);
+
 		AssetEntry assetEntry = assetEntryPersistence.findByPrimaryKey(
 			assetEntryId);
+
+		User assetEntryUser = null;
+
+		try {
+			assetEntryUser = userPersistence.findByPrimaryKey(
+				assetEntry.getUserId());
+		}
+		catch (NoSuchUserException nsue) {
+		}
 
 		List<SocialEquitySetting> equitySettings =
 			socialEquitySettingLocalService.getEquitySettings(
 				assetEntry.getGroupId(), assetEntry.getClassNameId(), actionId);
 
 		for (SocialEquitySetting equitySetting : equitySettings) {
-			Message message = new Message();
-			message.put("method", "addEquityLog");
-			message.put("userId", userId);
-			message.put("assetEntryId", assetEntryId);
-			message.setPayload(equitySetting);
-
-			MessageBusUtil.sendMessage("liferay/social_equity", message);
+			addEquityLog(user, assetEntry, assetEntryUser, equitySetting);
 		}
 	}
 
@@ -136,55 +138,47 @@ public class SocialEquityLogLocalServiceImpl
 			return;
 		}
 
-		Message message = new Message();
-		message.put("method", "removeEquityLog");
-		message.put("assetEntryId", assetEntryId);
-
-		MessageBusUtil.sendMessage("liferay/social_equity", message);
-	}
-
-	public void processMessage(Message message)
-		throws PortalException, SystemException {
-
-		String destinationMethod = message.getString("method");
-
-		if ("addEquityLog".equals(destinationMethod)) {
-			long userId = message.getLong("userId");
-
-			long assetEntryId = message.getLong("assetEntryId");
-
-			SocialEquitySetting equitySetting =
-				(SocialEquitySetting)message.getPayload();
-
-			addEquityLog(userId, assetEntryId, equitySetting);
-		}
-		else if ("removeEquityLog".equals(destinationMethod)) {
-
-			long assetEntryId = message.getLong("assetEntryId");
-
-			removeEquityLogs(assetEntryId);
-		}
-	}
-
-	protected void addEquityLog(
-			long userId, long assetEntryId, SocialEquitySetting equitySetting)
-		throws PortalException, SystemException {
-
-		User user = userPersistence.findByPrimaryKey(userId);
-
-		AssetEntry assetEntry = assetEntryPersistence.fetchByPrimaryKey(
-			assetEntryId);
-
-		User assetEntryUser = null;
+		SocialEquityAssetEntry equityAssetEntry = null;
 
 		try {
-			assetEntryUser = userPersistence.findByPrimaryKey(
-				assetEntry.getUserId());
+			equityAssetEntry =
+				socialEquityAssetEntryPersistence.findByAssetEntryId(
+					assetEntryId);
+
+			socialEquityAssetEntryPersistence.removeByAssetEntryId(
+				assetEntryId);
+		}
+		catch (NoSuchEquityAssetEntryException nseaee) {
+			return;
+		}
+
+		User user = null;
+
+		try {
+			user = userPersistence.findByPrimaryKey(
+				equityAssetEntry.getUserId());
+
+			if (!user.isDefaultUser()) {
+				updateSocialEquityUser_CQ(
+					equityAssetEntry.getGroupId(), user.getUserId(),
+					-equityAssetEntry.getInformationEquity());
+				updateUser_CQ(
+					user, -equityAssetEntry.getInformationEquity());
+			}
 		}
 		catch (NoSuchUserException nsue) {
 		}
 
-		addEquityLog(user, assetEntry, assetEntryUser, equitySetting);
+		List<SocialEquityLog> equityLogs =
+			socialEquityLogPersistence.findByAEI_T_A(
+				assetEntryId, SocialEquitySettingConstants.TYPE_INFORMATION,
+				true);
+
+		for (SocialEquityLog equityLog : equityLogs) {
+			equityLog.setActive(false);
+
+			socialEquityLogPersistence.update(equityLog, false);
+		}
 	}
 
 	protected void addEquityLog(
@@ -194,9 +188,9 @@ public class SocialEquityLogLocalServiceImpl
 
 		int actionDate = getEquityDate();
 
-		double k = getK(
+		double k = calculateK(
 			equitySetting.getValue(), equitySetting.getValidity());
-		double b = getB(
+		double b = calculateB(
 			actionDate, equitySetting.getValue(), equitySetting.getValidity());
 
 		if (equitySetting.getType() ==
@@ -212,7 +206,7 @@ public class SocialEquityLogLocalServiceImpl
 			updateSocialEquityAssetEntry_IQ(
 				assetEntry.getEntryId(), actionDate, k, b);
 
-			double informationEquity = calculateEquity(k, actionDate, b);
+			double informationEquity = calculateEquity(actionDate, k, b);
 
 			updateAssetEntry(assetEntry, informationEquity);
 
@@ -228,7 +222,7 @@ public class SocialEquityLogLocalServiceImpl
 			SocialEquitySettingConstants.TYPE_PARTICIPATION) {
 
 			int count = socialEquityUserPersistence.countByG_U(
-					assetEntry.getGroupId(), user.getUserId());
+				assetEntry.getGroupId(), user.getUserId());
 
 			if (count == 0) {
 				addSocialEquityUser(assetEntry.getGroupId(), user);
@@ -236,9 +230,10 @@ public class SocialEquityLogLocalServiceImpl
 
 			if (!user.isDefaultUser()) {
 				updateSocialEquityUser_PQ(
-					assetEntry.getGroupId(), user.getUserId(), actionDate,k,b);
+					assetEntry.getGroupId(), user.getUserId(), actionDate, k,
+					b);
 
-				double participationEquity = calculateEquity(k, actionDate, b);
+				double participationEquity = calculateEquity(actionDate, k, b);
 
 				updateUser_PQ(user, participationEquity);
 			}
@@ -311,13 +306,20 @@ public class SocialEquityLogLocalServiceImpl
 		runSQL(sql);
 	}
 
-	protected double calculateEquity(double k, int actionDate, double b) {
+	protected double calculateB(int actionDate, int value, int validity) {
+		return calculateK(value, validity) * (actionDate + validity) * -1;
+	}
 
+	protected double calculateEquity(int actionDate, double k, double b) {
 		return k * actionDate + b;
 	}
 
-	protected double getB(int actionDate, int value, int validity) {
-		return getK(value, validity) * (actionDate + validity) * -1;
+	protected double calculateK(int value, int validity) {
+		if (validity == 0) {
+			return 0;
+		}
+
+		return ((double)value / validity) * -1;
 	}
 
 	protected int getEquityDate() {
@@ -328,14 +330,6 @@ public class SocialEquityLogLocalServiceImpl
 		Calendar calendar = new GregorianCalendar(2010, Calendar.JANUARY, 1);
 
 		return calendar.fieldDifference(date, Calendar.DATE);
-	}
-
-	protected double getK(int value, int validity) {
-		if (validity == 0) {
-			return 0;
-		}
-
-		return ((double)value / validity) * -1;
 	}
 
 	protected void removeEquityLogs(long assetEntryId)	throws SystemException {
@@ -459,12 +453,9 @@ public class SocialEquityLogLocalServiceImpl
 		runSQL(sql);
 	}
 
-	protected SocialEquityUser updateSocialEquityUser_PQ(
+	protected void updateSocialEquityUser_PQ(
 			long groupId, long userId, int activityDate, double k, double b)
 		throws SystemException {
-
-		SocialEquityUser old = socialEquityUserPersistence.fetchByG_U(
-			groupId, userId);
 
 		String sql = CustomSQLUtil.get(_UPDATE_SOCIAL_EQUITY_USER_PQ);
 
@@ -486,10 +477,6 @@ public class SocialEquityLogLocalServiceImpl
 			});
 
 		runSQL(sql);
-
-		socialEquityUserPersistence.clearCache(old);
-
-		return old;
 	}
 
 	protected void updateUser_CQ(User user, double newInformationEquity)
@@ -497,7 +484,6 @@ public class SocialEquityLogLocalServiceImpl
 
 		user.setSocialContributionEquity(
 			user.getSocialContributionEquity() + newInformationEquity);
-
 		user.setSocialPersonalEquity(
 			user.getSocialContributionEquity() +
 			user.getSocialParticipationEquity());
@@ -510,7 +496,6 @@ public class SocialEquityLogLocalServiceImpl
 
 		user.setSocialParticipationEquity(
 			user.getSocialParticipationEquity() + newParticipationEquity);
-
 		user.setSocialPersonalEquity(
 			user.getSocialContributionEquity() +
 			user.getSocialParticipationEquity());

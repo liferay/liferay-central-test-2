@@ -537,7 +537,6 @@ create index IX_F3AAD60D on SocialEquitySetting (groupId, classNameId, actionId)
 create index IX_903C1B28 on SocialEquitySetting (groupId, classNameId, actionId, type_);
 
 create unique index IX_D65D3521 on SocialEquityUser (groupId, userId);
-create unique index IX_6ECBD5D on SocialEquityUser (userId);
 
 create index IX_61171E99 on SocialRelation (companyId);
 create index IX_95135D1C on SocialRelation (companyId, type_);
