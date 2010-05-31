@@ -15,6 +15,8 @@
 package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
@@ -31,10 +33,6 @@ import javax.servlet.jsp.PageContext;
  * @author Shuyang Zhou
  */
 public class JspFactoryWrapper extends JspFactory {
-
-	public static final int JSP_WRITER_BUFFER_SIZE = GetterUtil.getInteger(
-		System.getProperty(
-			JspFactoryWrapper.class.getName() + ".jsp.writer.buffer.size"));
 
 	public JspFactoryWrapper(JspFactory jspFactory) {
 		_jspFactory = jspFactory;
@@ -57,7 +55,7 @@ public class JspFactoryWrapper extends JspFactory {
 
 		PageContext pageContext = _jspFactory.getPageContext(
 			servlet, servletRequest, servletResponse, errorPageURL,
-			needsSession, JSP_WRITER_BUFFER_SIZE, autoflush);
+			needsSession, _JSP_WRITER_BUFFER_SIZE, autoflush);
 
 		return new PageContextWrapper(pageContext);
 	}
@@ -72,6 +70,9 @@ public class JspFactoryWrapper extends JspFactory {
 
 		_jspFactory.releasePageContext(pageContext);
 	}
+
+	private static final int _JSP_WRITER_BUFFER_SIZE = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.JSP_WRITER_BUFFER_SIZE));
 
 	private JspFactory _jspFactory;
 
