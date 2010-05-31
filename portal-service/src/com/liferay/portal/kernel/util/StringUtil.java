@@ -802,7 +802,8 @@ public class StringUtil {
 		}
 
 		int size = values.size() + 1;
-		for(StringBundler valueSB : values.values()) {
+
+		for (StringBundler valueSB : values.values()) {
 			size += valueSB.index();
 		}
 

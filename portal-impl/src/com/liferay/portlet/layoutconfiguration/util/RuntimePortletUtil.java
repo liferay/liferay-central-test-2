@@ -252,15 +252,19 @@ public class RuntimePortletUtil {
 			Integer columnPos = (Integer)value[2];
 			Integer columnCount = (Integer)value[3];
 
-			UnsyncStringWriter stringWriter = new UnsyncStringWriter();
+			UnsyncStringWriter portletUnsyncStringWriter =
+				new UnsyncStringWriter();
+
 			PipingServletResponse pipingServletResponse =
-				new PipingServletResponse(response, stringWriter);
+				new PipingServletResponse(response, portletUnsyncStringWriter);
+
 			processPortlet(
 				servletContext, request, pipingServletResponse, portlet,
 				queryString, columnId, columnPos, columnCount, null, true);
 
-			contentsMap.put(portlet.getPortletId(),
-				stringWriter.getStringBundler());
+			contentsMap.put(
+				portlet.getPortletId(),
+				portletUnsyncStringWriter.getStringBundler());
 		}
 
 		StringBundler sb = StringUtil.replaceWithStringBundler(
