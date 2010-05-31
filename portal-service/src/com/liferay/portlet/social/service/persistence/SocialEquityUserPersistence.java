@@ -60,16 +60,17 @@ public interface SocialEquityUserPersistence extends BasePersistence<SocialEquit
 		long equityUserId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.social.model.SocialEquityUser findByUserId(
-		long userId)
+	public com.liferay.portlet.social.model.SocialEquityUser findByG_U(
+		long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquityUserException;
 
-	public com.liferay.portlet.social.model.SocialEquityUser fetchByUserId(
-		long userId) throws com.liferay.portal.kernel.exception.SystemException;
+	public com.liferay.portlet.social.model.SocialEquityUser fetchByG_U(
+		long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.social.model.SocialEquityUser fetchByUserId(
-		long userId, boolean retrieveFromCache)
+	public com.liferay.portlet.social.model.SocialEquityUser fetchByG_U(
+		long groupId, long userId, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialEquityUser> findAll()
@@ -84,14 +85,14 @@ public interface SocialEquityUserPersistence extends BasePersistence<SocialEquit
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void removeByUserId(long userId)
+	public void removeByG_U(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquityUserException;
 
 	public void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByUserId(long userId)
+	public int countByG_U(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()

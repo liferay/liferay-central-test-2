@@ -148,6 +148,16 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser> {
 
 	public void setGroupId(long groupId) {
 		_groupId = groupId;
+
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = groupId;
+		}
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public long getCompanyId() {
@@ -384,6 +394,8 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser> {
 	private long _equityUserId;
 	private String _equityUserUuid;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;

@@ -40,6 +40,9 @@
 	<bean id="destination.message_boards_mailing_list" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="name" value="liferay/message_boards_mailing_list" />
 	</bean>
+	<bean id="destination.social_equity" class="com.liferay.portal.kernel.messaging.SerialDestination">
+		<property name="name" value="liferay/social_equity" />
+	</bean>
 	<bean id="destination.wiki" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="name" value="liferay/wiki" />
 	</bean>
@@ -62,6 +65,7 @@
 	<bean id="messageListener.live_users" class="com.liferay.portal.liveusers.messaging.LiveUsersMessageListener" />
 	<bean id="messageListener.message_boards" class="com.liferay.portlet.messageboards.messaging.MBMessageListener" />
 	<bean id="messageListener.message_boards_mailing_list" class="com.liferay.portlet.messageboards.messaging.MailingListMessageListener" />
+	<bean id="messageListener.social_equity" class="com.liferay.portlet.social.messaging.SocialEquityLogMessageListener" />
 	<bean id="messageListener.wiki" class="com.liferay.portlet.wiki.messaging.WikiMessageListener" />
 
 	<!-- Configurator -->
@@ -79,6 +83,7 @@
 				<ref bean="destination.live_users" />
 				<ref bean="destination.message_boards" />
 				<ref bean="destination.message_boards_mailing_list" />
+				<ref bean="destination.social_equity" />
 				<ref bean="destination.wiki" />
 			</list>
 		</property>
@@ -135,6 +140,11 @@
 				<entry key="liferay/message_boards_mailing_list">
 					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
 						<ref bean="messageListener.message_boards_mailing_list" />
+					</list>
+				</entry>
+				<entry key="liferay/social_equity">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="messageListener.social_equity" />
 					</list>
 				</entry>
 				<entry key="liferay/wiki">

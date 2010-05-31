@@ -133,22 +133,23 @@ public class SocialEquityUserUtil {
 		return getPersistence().fetchByPrimaryKey(equityUserId);
 	}
 
-	public static com.liferay.portlet.social.model.SocialEquityUser findByUserId(
-		long userId)
+	public static com.liferay.portlet.social.model.SocialEquityUser findByG_U(
+		long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquityUserException {
-		return getPersistence().findByUserId(userId);
+		return getPersistence().findByG_U(groupId, userId);
 	}
 
-	public static com.liferay.portlet.social.model.SocialEquityUser fetchByUserId(
-		long userId) throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByUserId(userId);
-	}
-
-	public static com.liferay.portlet.social.model.SocialEquityUser fetchByUserId(
-		long userId, boolean retrieveFromCache)
+	public static com.liferay.portlet.social.model.SocialEquityUser fetchByG_U(
+		long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByUserId(userId, retrieveFromCache);
+		return getPersistence().fetchByG_U(groupId, userId);
+	}
+
+	public static com.liferay.portlet.social.model.SocialEquityUser fetchByG_U(
+		long groupId, long userId, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByG_U(groupId, userId, retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialEquityUser> findAll()
@@ -169,10 +170,10 @@ public class SocialEquityUserUtil {
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
-	public static void removeByUserId(long userId)
+	public static void removeByG_U(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquityUserException {
-		getPersistence().removeByUserId(userId);
+		getPersistence().removeByG_U(groupId, userId);
 	}
 
 	public static void removeAll()
@@ -180,9 +181,9 @@ public class SocialEquityUserUtil {
 		getPersistence().removeAll();
 	}
 
-	public static int countByUserId(long userId)
+	public static int countByG_U(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByUserId(userId);
+		return getPersistence().countByG_U(groupId, userId);
 	}
 
 	public static int countAll()

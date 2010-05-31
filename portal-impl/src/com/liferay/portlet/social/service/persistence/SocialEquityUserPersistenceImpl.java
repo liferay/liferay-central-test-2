@@ -67,14 +67,14 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 	public static final String FINDER_CLASS_NAME_ENTITY = SocialEquityUserImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
-	public static final FinderPath FINDER_PATH_FETCH_BY_USERID = new FinderPath(SocialEquityUserModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FETCH_BY_G_U = new FinderPath(SocialEquityUserModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityUserModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_ENTITY, "fetchByUserId",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_COUNT_BY_USERID = new FinderPath(SocialEquityUserModelImpl.ENTITY_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByG_U",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_U = new FinderPath(SocialEquityUserModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityUserModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByUserId",
-			new String[] { Long.class.getName() });
+			FINDER_CLASS_NAME_LIST, "countByG_U",
+			new String[] { Long.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(SocialEquityUserModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityUserModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
@@ -87,9 +87,11 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 			SocialEquityUserImpl.class, socialEquityUser.getPrimaryKey(),
 			socialEquityUser);
 
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_USERID,
-			new Object[] { new Long(socialEquityUser.getUserId()) },
-			socialEquityUser);
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
+			new Object[] {
+				new Long(socialEquityUser.getGroupId()),
+				new Long(socialEquityUser.getUserId())
+			}, socialEquityUser);
 	}
 
 	public void cacheResult(List<SocialEquityUser> socialEquityUsers) {
@@ -114,8 +116,11 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		EntityCacheUtil.removeResult(SocialEquityUserModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityUserImpl.class, socialEquityUser.getPrimaryKey());
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_USERID,
-			new Object[] { new Long(socialEquityUser.getUserId()) });
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
+			new Object[] {
+				new Long(socialEquityUser.getGroupId()),
+				new Long(socialEquityUser.getUserId())
+			});
 	}
 
 	public SocialEquityUser create(long equityUserId) {
@@ -213,8 +218,11 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 
 		SocialEquityUserModelImpl socialEquityUserModelImpl = (SocialEquityUserModelImpl)socialEquityUser;
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_USERID,
-			new Object[] { new Long(socialEquityUserModelImpl.getOriginalUserId()) });
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
+			new Object[] {
+				new Long(socialEquityUserModelImpl.getOriginalGroupId()),
+				new Long(socialEquityUserModelImpl.getOriginalUserId())
+			});
 
 		EntityCacheUtil.removeResult(SocialEquityUserModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityUserImpl.class, socialEquityUser.getPrimaryKey());
@@ -254,18 +262,23 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 			socialEquityUser);
 
 		if (!isNew &&
-				(socialEquityUser.getUserId() != socialEquityUserModelImpl.getOriginalUserId())) {
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_USERID,
+				((socialEquityUser.getGroupId() != socialEquityUserModelImpl.getOriginalGroupId()) ||
+				(socialEquityUser.getUserId() != socialEquityUserModelImpl.getOriginalUserId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
 				new Object[] {
+					new Long(socialEquityUserModelImpl.getOriginalGroupId()),
 					new Long(socialEquityUserModelImpl.getOriginalUserId())
 				});
 		}
 
 		if (isNew ||
-				(socialEquityUser.getUserId() != socialEquityUserModelImpl.getOriginalUserId())) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_USERID,
-				new Object[] { new Long(socialEquityUser.getUserId()) },
-				socialEquityUser);
+				((socialEquityUser.getGroupId() != socialEquityUserModelImpl.getOriginalGroupId()) ||
+				(socialEquityUser.getUserId() != socialEquityUserModelImpl.getOriginalUserId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
+				new Object[] {
+					new Long(socialEquityUser.getGroupId()),
+					new Long(socialEquityUser.getUserId())
+				}, socialEquityUser);
 		}
 
 		return socialEquityUser;
@@ -350,16 +363,19 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		return socialEquityUser;
 	}
 
-	public SocialEquityUser findByUserId(long userId)
+	public SocialEquityUser findByG_U(long groupId, long userId)
 		throws NoSuchEquityUserException, SystemException {
-		SocialEquityUser socialEquityUser = fetchByUserId(userId);
+		SocialEquityUser socialEquityUser = fetchByG_U(groupId, userId);
 
 		if (socialEquityUser == null) {
-			StringBundler msg = new StringBundler(4);
+			StringBundler msg = new StringBundler(6);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("userId=");
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(", userId=");
 			msg.append(userId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
@@ -374,19 +390,19 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		return socialEquityUser;
 	}
 
-	public SocialEquityUser fetchByUserId(long userId)
+	public SocialEquityUser fetchByG_U(long groupId, long userId)
 		throws SystemException {
-		return fetchByUserId(userId, true);
+		return fetchByG_U(groupId, userId, true);
 	}
 
-	public SocialEquityUser fetchByUserId(long userId, boolean retrieveFromCache)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId) };
+	public SocialEquityUser fetchByG_U(long groupId, long userId,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_USERID,
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_U,
 					finderArgs, this);
 		}
 
@@ -396,17 +412,21 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(2);
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_SOCIALEQUITYUSER_WHERE);
 
-				query.append(_FINDER_COLUMN_USERID_USERID_2);
+				query.append(_FINDER_COLUMN_G_U_GROUPID_2);
+
+				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
 
 				qPos.add(userId);
 
@@ -417,7 +437,7 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 				SocialEquityUser socialEquityUser = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_USERID,
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
 						finderArgs, list);
 				}
 				else {
@@ -425,8 +445,9 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 
 					cacheResult(socialEquityUser);
 
-					if ((socialEquityUser.getUserId() != userId)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_USERID,
+					if ((socialEquityUser.getGroupId() != groupId) ||
+							(socialEquityUser.getUserId() != userId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
 							finderArgs, socialEquityUser);
 					}
 				}
@@ -438,7 +459,7 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_USERID,
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
 						finderArgs, new ArrayList<SocialEquityUser>());
 				}
 
@@ -529,9 +550,9 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		return list;
 	}
 
-	public void removeByUserId(long userId)
+	public void removeByG_U(long groupId, long userId)
 		throws NoSuchEquityUserException, SystemException {
-		SocialEquityUser socialEquityUser = findByUserId(userId);
+		SocialEquityUser socialEquityUser = findByG_U(groupId, userId);
 
 		remove(socialEquityUser);
 	}
@@ -542,10 +563,10 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		}
 	}
 
-	public int countByUserId(long userId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId) };
+	public int countByG_U(long groupId, long userId) throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_U,
 				finderArgs, this);
 
 		if (count == null) {
@@ -554,17 +575,21 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(2);
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_SOCIALEQUITYUSER_WHERE);
 
-				query.append(_FINDER_COLUMN_USERID_USERID_2);
+				query.append(_FINDER_COLUMN_G_U_GROUPID_2);
+
+				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
 
 				qPos.add(userId);
 
@@ -578,8 +603,8 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_U, finderArgs,
+					count);
 
 				closeSession(session);
 			}
@@ -668,7 +693,8 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 	private static final String _SQL_SELECT_SOCIALEQUITYUSER_WHERE = "SELECT socialEquityUser FROM SocialEquityUser socialEquityUser WHERE ";
 	private static final String _SQL_COUNT_SOCIALEQUITYUSER = "SELECT COUNT(socialEquityUser) FROM SocialEquityUser socialEquityUser";
 	private static final String _SQL_COUNT_SOCIALEQUITYUSER_WHERE = "SELECT COUNT(socialEquityUser) FROM SocialEquityUser socialEquityUser WHERE ";
-	private static final String _FINDER_COLUMN_USERID_USERID_2 = "socialEquityUser.userId = ?";
+	private static final String _FINDER_COLUMN_G_U_GROUPID_2 = "socialEquityUser.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_U_USERID_2 = "socialEquityUser.userId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "socialEquityUser.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No SocialEquityUser exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No SocialEquityUser exists with the key {";

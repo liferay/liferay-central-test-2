@@ -150,6 +150,13 @@ public class SocialEquityLogLocalServiceWrapper
 		_socialEquityLogLocalService.deactivateEquityLogs(assetEntryId);
 	}
 
+	public void processMessage(
+		com.liferay.portal.kernel.messaging.Message message)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_socialEquityLogLocalService.processMessage(message);
+	}
+
 	public SocialEquityLogLocalService getWrappedSocialEquityLogLocalService() {
 		return _socialEquityLogLocalService;
 	}

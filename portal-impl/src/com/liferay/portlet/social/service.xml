@@ -231,7 +231,8 @@
 
 		<!-- Finder methods -->
 
-		<finder name="UserId" return-type="SocialEquityUser" unique="true">
+		<finder name="G_U" return-type="SocialEquityUser" unique="true">
+			<finder-column name="groupId" />
 			<finder-column name="userId" />
 		</finder>
 	</entity>
