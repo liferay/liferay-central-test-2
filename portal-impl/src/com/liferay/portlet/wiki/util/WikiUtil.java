@@ -348,7 +348,7 @@ public class WikiUtil {
 
 			if (ArrayUtil.contains(hiddenNodes, node.getName()) ||
 				!WikiNodePermission.contains(
-					permissionChecker, node.getNodeId(), ActionKeys.VIEW)) {
+					permissionChecker, node, ActionKeys.VIEW)) {
 
 				itr.remove();
 			}
