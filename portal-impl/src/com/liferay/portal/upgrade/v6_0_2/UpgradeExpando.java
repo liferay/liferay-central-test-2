@@ -18,17 +18,16 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
-import com.liferay.portal.service.ClassNameLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoTableConstants;
 import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <a href="UpgradeExpando.java.html"><b><i>View Source</i></b></a>
@@ -37,22 +36,74 @@ import java.util.List;
  */
 public class UpgradeExpando extends UpgradeProcess {
 
-	protected void doUpgrade() throws Exception {
+	protected void addRow(
+			long rowId, long companyId, long tableId, long classPK)
+		throws Exception {
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Upgrading Expando for Journal");
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"insert into ExpandoRow (rowId_, companyId, tableId, " +
+					"classPK) values (?, ?, ?, ?)");
+
+			ps.setLong(1, rowId);
+			ps.setLong(2, companyId);
+			ps.setLong(3, tableId);
+			ps.setLong(4, classPK);
+
+			ps.executeUpdate();
 		}
-
-		updateTables(_journalClassNameId);
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Upgrading Expando for Wiki");
+		finally {
+			DataAccess.cleanUp(con, ps);
 		}
-
-		updateTables(_wikiClassNameId);
 	}
 
-	protected boolean existsRow(long companyId, long tableId, Long classPK)
+	protected void addValue(
+			long valueId, long companyId, long tableId, long columnId,
+			long rowId, long classNameId, long classPK, String data)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"insert into ExpandoValue (valueId, companyId, tableId, " +
+					"columnId, rowId_, classNameId, classPK, data_) values " +
+						"(?, ?, ?, ?, ?, ?, ?, ?)");
+
+			ps.setLong(1, valueId);
+			ps.setLong(2, companyId);
+			ps.setLong(3, tableId);
+			ps.setLong(4, columnId);
+			ps.setLong(5, rowId);
+			ps.setLong(6, classNameId);
+			ps.setLong(7, classPK);
+			ps.setString(8, data);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
+		}
+	}
+
+	protected void doUpgrade() throws Exception {
+		updateTables(
+			JournalArticle.class.getName(),
+			JournalArticleImpl.TABLE_NAME, "id_");
+
+		updateTables(
+			WikiPage.class.getName(), WikiPageImpl.TABLE_NAME, "pageId");
+	}
+
+	protected boolean hasRow(long companyId, long tableId, long classPK)
 		throws Exception{
 
 		Connection con = null;
@@ -63,8 +114,8 @@ public class UpgradeExpando extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select * from ExpandoRow where companyId = ? and tableId = ?" +
-					" and classPK = ?");
+				"select count(*) from ExpandoRow where companyId = ? and " +
+					"tableId = ?  and classPK = ?");
 
 			ps.setLong(1, companyId);
 			ps.setLong(2, tableId);
@@ -72,15 +123,22 @@ public class UpgradeExpando extends UpgradeProcess {
 
 			rs = ps.executeQuery();
 
-			return rs.next();
+			while (rs.next()) {
+				long count = rs.getLong(1);
+
+				if (count > 0) {
+					return true;
+				}
+			}
+
+			return false;
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-
 	}
 
-	protected boolean existsValue(
+	protected boolean hasValue(
 			long companyId, long tableId, long columnId, long rowId)
 		throws Exception{
 
@@ -92,8 +150,8 @@ public class UpgradeExpando extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select * from ExpandoValue where companyId = ? and tableId =" +
-					" ? and columnId = ? and rowId_ = ?");
+				"select count(*) from ExpandoValue where companyId = ? and " +
+					"tableId = ? and columnId = ? and rowId_ = ?");
 
 			ps.setLong(1, companyId);
 			ps.setLong(2, tableId);
@@ -102,19 +160,25 @@ public class UpgradeExpando extends UpgradeProcess {
 
 			rs = ps.executeQuery();
 
-			return rs.next();
+			while (rs.next()) {
+				long count = rs.getLong(1);
+
+				if (count > 0) {
+					return true;
+				}
+			}
+
+			return false;
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-
 	}
 
-	protected List<Long> getPrimaryKeys(
-			String tableName, String columnName, long resourcePrimKey)
+	protected void updateRows(
+			long companyId, long classPK, String tableName, long tableId,
+			String columnName, long rowId)
 		throws Exception {
-
-		ArrayList<Long> ids = new ArrayList<Long>();
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -127,24 +191,34 @@ public class UpgradeExpando extends UpgradeProcess {
 				"select " + columnName + " from " + tableName + " where " +
 					"resourcePrimKey = ?");
 
-			ps.setLong(1, resourcePrimKey);
+			ps.setLong(1, classPK);
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				long id = rs.getLong(columnName);
+				long newClassPK = rs.getLong(columnName);
 
-				ids.add(id);
+				if (!hasRow(companyId, tableId, newClassPK)) {
+					long newRowId = increment();
+
+					addRow(newRowId, companyId, tableId, newClassPK);
+
+					updateValues(classPK, newClassPK, tableId, rowId, newRowId);
+				}
 			}
+
+			runSQL("delete from ExpandoRow where rowId_ = " + rowId);
+			runSQL("delete from ExpandoValue where rowId_ = " + rowId);
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-
-		return ids;
 	}
 
-	protected void updateRows(long tableId, long classNameId) throws Exception {
+	protected void updateRows(
+			long classNameId, String tableName, long tableId, String columnName)
+		throws Exception {
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -164,44 +238,8 @@ public class UpgradeExpando extends UpgradeProcess {
 				long companyId = rs.getLong("companyId");
 				long classPK = rs.getLong("classPK");
 
-				List<Long> primaryKeys = null;
-
-				if (classNameId == _journalClassNameId) {
-					primaryKeys = getPrimaryKeys(
-						"JournalArticle", "id_", classPK);
-				}
-				else if (classNameId == _wikiClassNameId) {
-					primaryKeys = getPrimaryKeys("WikiPage", "pageId", classPK);
-				}
-				else {
-					primaryKeys = new ArrayList<Long>();
-				}
-
-				for (Long id : primaryKeys) {
-					if (!existsRow(companyId, tableId, id)) {
-						long targetRowId = increment();
-
-						if (_log.isDebugEnabled()) {
-							_log.debug(
-								"Copying row " + rowId + " into " +
-									targetRowId);
-						}
-
-						runSQL(
-							"insert into ExpandoRow (rowId_, companyId, " +
-								"tableId, classPK) values (" + targetRowId +
-									", " + companyId + ", " + tableId + ", " +
-										id + ")");
-
-						updateValues(tableId, rowId, targetRowId, classPK, id);
-					}
-
-				}
-
-				if (!primaryKeys.isEmpty()) {
-					runSQL("delete from ExpandoValue where rowId_ = " + rowId);
-					runSQL("delete from ExpandoRow where rowId_ = " + rowId);
-				}
+				updateRows(
+					companyId, classPK, tableName, tableId, columnName, rowId);
 			}
 		}
 		finally {
@@ -209,7 +247,16 @@ public class UpgradeExpando extends UpgradeProcess {
 		}
 	}
 
-	protected void updateTables(long classNameId) throws Exception {
+	protected void updateTables(
+			String className, String tableName, String columnName)
+		throws Exception {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Upgrading " + tableName);
+		}
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -229,7 +276,7 @@ public class UpgradeExpando extends UpgradeProcess {
 			while (rs.next()) {
 				long tableId = rs.getLong("tableId");
 
-				updateRows(tableId, classNameId);
+				updateRows(classNameId, tableName, tableId, columnName);
 			}
 		}
 		finally {
@@ -238,8 +285,8 @@ public class UpgradeExpando extends UpgradeProcess {
 	}
 
 	protected void updateValues(
-			long tableId, long rowId, long targetRowId, long classPK,
-			long targetClassPK)
+			long classPK, long newClassPK, long tableId, long rowId,
+			long newRowId)
 		throws Exception {
 
 		Connection con = null;
@@ -260,28 +307,17 @@ public class UpgradeExpando extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				long valueId = rs.getLong("valueId");
 				long companyId = rs.getLong("companyId");
 				long columnId = rs.getLong("columnId");
 				long classNameId = rs.getLong("classNameId");
 				String data = rs.getString("data_");
 
-				long targetValueId = increment();
+				if (!hasValue(companyId, tableId, columnId, newRowId)) {
+					long newValueId = increment();
 
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Copying value " + valueId + " into " + targetValueId);
-				}
-
-				if (!existsValue(companyId, tableId, columnId, targetRowId)) {
-					runSQL(
-						"insert into ExpandoValue (valueId, companyId, " +
-							"tableId, columnId, rowId_, classNameId, classPK," +
-								" data_) values (" + targetValueId + ", " +
-									companyId + ", " + tableId + ", " +
-										columnId + ", " + targetRowId + ", " +
-											classNameId + ", " + targetClassPK +
-												", '" + data + "')");
+					addValue(
+						newValueId, companyId, tableId, columnId, newRowId,
+						classNameId, newClassPK, data);
 				}
 			}
 		}
@@ -289,12 +325,6 @@ public class UpgradeExpando extends UpgradeProcess {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
-
-	private long _journalClassNameId = ClassNameLocalServiceUtil.getClassNameId(
-		JournalArticle.class.getName());
-
-	private long _wikiClassNameId = ClassNameLocalServiceUtil.getClassNameId(
-		WikiPage.class.getName());
 
 	private static Log _log = LogFactoryUtil.getLog(UpgradeExpando.class);
 
