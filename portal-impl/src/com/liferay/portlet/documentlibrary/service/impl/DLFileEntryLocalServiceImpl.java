@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
@@ -683,7 +682,7 @@ public class DLFileEntryLocalServiceImpl
 
 		String mimeType = MimeTypesUtil.getContentType(fileEntry.getTitle());
 
-		boolean createDraftAssetEntry = false;
+		boolean addDraftAssetEntry = false;
 
 		if ((fileVersion != null) && !fileVersion.isApproved() &&
 			(fileVersion.getVersion() !=
@@ -695,11 +694,11 @@ public class DLFileEntryLocalServiceImpl
 					fileEntry.getName(), WorkflowConstants.STATUS_APPROVED);
 
 			if (approvedArticlesCount > 0) {
-				createDraftAssetEntry = true;
+				addDraftAssetEntry = true;
 			}
 		}
 
-		if (createDraftAssetEntry) {
+		if (addDraftAssetEntry) {
 			assetEntryLocalService.updateEntry(
 				userId, fileEntry.getGroupId(), DLFileEntry.class.getName(),
 				fileVersion.getFileVersionId(), assetCategoryIds, assetTagNames,
@@ -1149,20 +1148,16 @@ public class DLFileEntryLocalServiceImpl
 					(latestFileVersion.getVersion() !=
 						DLFileEntryConstants.DEFAULT_VERSION)) {
 
-					AssetEntry draftAssetEntry =  null;
+					AssetEntry draftAssetEntry = null;
 
 					try {
 						draftAssetEntry = assetEntryLocalService.getEntry(
 							DLFileEntry.class.getName(),
 							latestFileVersion.getPrimaryKey());
 
-						long[] assetCategoryIds = StringUtil.split(
-							ListUtil.toString(
-								draftAssetEntry.getCategories(), "categoryId"),
-							0L);
-						String[] assetTagNames = StringUtil.split(
-							ListUtil.toString(
-								draftAssetEntry.getTags(), "name"));
+						long[] assetCategoryIds =
+							draftAssetEntry.getCategoryIds();
+						String[] assetTagNames = draftAssetEntry.getTagNames();
 
 						assetEntryLocalService.updateEntry(
 							userId, fileEntry.getGroupId(),
@@ -1176,7 +1171,7 @@ public class DLFileEntryLocalServiceImpl
 						assetEntryLocalService.deleteEntry(
 							draftAssetEntry.getEntryId());
 					}
-					catch(NoSuchEntryException nsee) {
+					catch (NoSuchEntryException nsee) {
 					}
 				}
 

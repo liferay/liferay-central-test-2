@@ -319,6 +319,16 @@ public class AssetEntryWrapper implements AssetEntry {
 		return _assetEntry.getCategories();
 	}
 
+	public long[] getCategoryIds()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _assetEntry.getCategoryIds();
+	}
+
+	public java.lang.String[] getTagNames()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _assetEntry.getTagNames();
+	}
+
 	public java.util.List<com.liferay.portlet.asset.model.AssetTag> getTags()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetEntry.getTags();

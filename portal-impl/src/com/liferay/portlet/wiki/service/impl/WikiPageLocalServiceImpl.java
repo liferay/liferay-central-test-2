@@ -995,22 +995,21 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		if (!page.isApproved()) {
 			visible = true;
 		}
-		boolean createDraftAssetEntry = false;
+		boolean addDraftAssetEntry = false;
 
 		if (!page.isApproved() &&
 			(page.getVersion() != WikiPageConstants.DEFAULT_VERSION)) {
 
-			int approvedPagesCount =
-				wikiPagePersistence.countByN_T_S(
-					page.getNodeId(), page.getTitle(),
-					WorkflowConstants.STATUS_APPROVED);
+			int approvedPagesCount = wikiPagePersistence.countByN_T_S(
+				page.getNodeId(), page.getTitle(),
+				WorkflowConstants.STATUS_APPROVED);
 
 			if (approvedPagesCount > 0) {
-				createDraftAssetEntry = true;
+				addDraftAssetEntry = true;
 			}
 		}
 
-		if (createDraftAssetEntry) {
+		if (addDraftAssetEntry) {
 			assetEntryLocalService.updateEntry(
 				userId, page.getGroupId(), WikiPage.class.getName(),
 				page.getPrimaryKey(), assetCategoryIds, assetTagNames, false,
@@ -1207,23 +1206,16 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			// Asset
 
 			if ((oldStatus != WorkflowConstants.STATUS_APPROVED) &&
-				(page.getVersion() !=
-					WikiPageConstants.DEFAULT_VERSION)) {
+				(page.getVersion() != WikiPageConstants.DEFAULT_VERSION)) {
 
-				AssetEntry draftAssetEntry =  null;
+				AssetEntry draftAssetEntry = null;
 
 				try {
 					draftAssetEntry = assetEntryLocalService.getEntry(
-						WikiPage.class.getName(),
-						page.getPrimaryKey());
+						WikiPage.class.getName(), page.getPrimaryKey());
 
-					long[] assetCategoryIds = StringUtil.split(
-						ListUtil.toString(
-							draftAssetEntry.getCategories(), "categoryId"),
-						0L);
-					String[] assetTagNames = StringUtil.split(
-						ListUtil.toString(
-							draftAssetEntry.getTags(), "name"));
+					long[] assetCategoryIds = draftAssetEntry.getCategoryIds();
+					String[] assetTagNames = draftAssetEntry.getTagNames();
 
 					assetEntryLocalService.updateEntry(
 						userId, page.getGroupId(), WikiPage.class.getName(),
@@ -1233,10 +1225,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 						null, 0, 0, null, false);
 
 					assetEntryLocalService.deleteEntry(
-						WikiPage.class.getName(),
-						page.getPrimaryKey());
+						WikiPage.class.getName(), page.getPrimaryKey());
 				}
-				catch(NoSuchEntryException nsee) {
+				catch (NoSuchEntryException nsee) {
 				}
 			}
 
@@ -1575,7 +1566,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 
 		if (Validator.isNotNull(signature)) {
-			body +=  "\n" + signature;
+			body += "\n" + signature;
 		}
 
 		subjectPrefix = StringUtil.replace(

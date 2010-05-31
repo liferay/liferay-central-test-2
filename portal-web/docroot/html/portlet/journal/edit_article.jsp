@@ -562,7 +562,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 							classPK = article.getPrimaryKey();
 						}
-						catch(NoSuchEntryException nsee) {
+						catch (NoSuchEntryException nsee) {
 							classPK = article.getResourcePrimKey();
 						}
 					}

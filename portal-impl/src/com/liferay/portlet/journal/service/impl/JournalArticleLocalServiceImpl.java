@@ -34,7 +34,6 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.MathUtil;
@@ -1828,7 +1827,7 @@ public class JournalArticleLocalServiceImpl
 
 		boolean visible = article.isApproved();
 
-		boolean createDraftAssetEntry = false;
+		boolean addDraftAssetEntry = false;
 
 		if (!article.isApproved() &&
 			(article.getVersion() != JournalArticleConstants.DEFAULT_VERSION)) {
@@ -1839,11 +1838,11 @@ public class JournalArticleLocalServiceImpl
 					WorkflowConstants.STATUS_APPROVED);
 
 			if (approvedArticlesCount > 0) {
-				createDraftAssetEntry = true;
+				addDraftAssetEntry = true;
 			}
 		}
 
-		if (createDraftAssetEntry) {
+		if (addDraftAssetEntry) {
 			assetEntryLocalService.updateEntry(
 				userId, article.getGroupId(), JournalArticle.class.getName(),
 				article.getPrimaryKey(), assetCategoryIds, assetTagNames,
@@ -1913,7 +1912,7 @@ public class JournalArticleLocalServiceImpl
 					(article.getVersion() !=
 						JournalArticleConstants.DEFAULT_VERSION)) {
 
-					AssetEntry draftAssetEntry =  null;
+					AssetEntry draftAssetEntry = null;
 
 					try {
 						draftAssetEntry = assetEntryLocalService.getEntry(
@@ -1928,13 +1927,9 @@ public class JournalArticleLocalServiceImpl
 						Date displayDate = dateInterval[0];
 						Date expirationDate = dateInterval[1];
 
-						long[] assetCategoryIds = StringUtil.split(
-							ListUtil.toString(
-								draftAssetEntry.getCategories(), "categoryId"),
-							0L);
-						String[] assetTagNames = StringUtil.split(
-							ListUtil.toString(
-								draftAssetEntry.getTags(), "name"));
+						long[] assetCategoryIds =
+							draftAssetEntry.getCategoryIds();
+						String[] assetTagNames = draftAssetEntry.getTagNames();
 
 						assetEntryLocalService.updateEntry(
 							userId, article.getGroupId(),
@@ -1949,7 +1944,7 @@ public class JournalArticleLocalServiceImpl
 							JournalArticle.class.getName(),
 							article.getPrimaryKey());
 					}
-					catch(NoSuchEntryException nsee) {
+					catch (NoSuchEntryException nsee) {
 					}
 				}
 

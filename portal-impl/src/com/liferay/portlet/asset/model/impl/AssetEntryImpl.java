@@ -15,6 +15,8 @@
 package com.liferay.portlet.asset.model.impl;
 
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetTag;
@@ -35,6 +37,15 @@ public class AssetEntryImpl extends AssetEntryModelImpl implements AssetEntry {
 
 	public List<AssetCategory> getCategories() throws SystemException {
 		return AssetCategoryLocalServiceUtil.getEntryCategories(getEntryId());
+	}
+
+	public long[] getCategoryIds() throws SystemException {
+		return StringUtil.split(
+			ListUtil.toString(getCategories(), "categoryId"), 0L);
+	}
+
+	public String[] getTagNames() throws SystemException {
+		return StringUtil.split(ListUtil.toString(getTags(), "name"));
 	}
 
 	public List<AssetTag> getTags() throws SystemException {

@@ -249,22 +249,22 @@ portletURL.setParameter("name", name);
 			/>
 		</liferay-ui:custom-attributes-available>
 
-        <%
-        long classPK = 0;
+		<%
+		long classPK = 0;
 
-        if (fileEntry != null) {
-            DLFileVersion latestFileVersion = DLFileVersionLocalServiceUtil.getLatestFileVersion(fileEntry.getGroupId(), fileEntry.getFolderId(), fileEntry.getName());
+		if (fileEntry != null) {
+			DLFileVersion latestFileVersion = DLFileVersionLocalServiceUtil.getLatestFileVersion(fileEntry.getGroupId(), fileEntry.getFolderId(), fileEntry.getName());
 
-            try {
-                AssetEntryLocalServiceUtil.getEntry(DLFileEntry.class.getName(), latestFileVersion.getPrimaryKey());
+			try {
+				AssetEntryLocalServiceUtil.getEntry(DLFileEntry.class.getName(), latestFileVersion.getPrimaryKey());
 
-                classPK = latestFileVersion.getPrimaryKey();
-            }
-            catch(NoSuchEntryException nsee) {
-                classPK = fileEntry.getFileEntryId();
-            }
-        }
-        %>
+				classPK = latestFileVersion.getPrimaryKey();
+			}
+			catch (NoSuchEntryException nsee) {
+				classPK = fileEntry.getFileEntryId();
+			}
+		}
+		%>
 
 		<aui:input classPK="<%= classPK %>" name="categories" type="assetCategories" />
 
