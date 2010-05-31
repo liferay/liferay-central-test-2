@@ -156,7 +156,7 @@ portletURL.setParameter("name", name);
 
 	<c:if test="<%= fileEntry != null %>">
 		<liferay-ui:tabs
-			names='<%= fileEntry.getTitle() %>'
+			names="<%= fileEntry.getTitle() %>"
 			backLabel='<%= "&laquo; " + LanguageUtil.get(pageContext, "back") %>'
 			backURL="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"
 		/>

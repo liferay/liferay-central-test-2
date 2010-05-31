@@ -45,7 +45,7 @@ request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
 %>
 
 <liferay-ui:tabs
-	names='<%= entry.getTitle() %>'
+	names="<%= entry.getTitle() %>"
 	backLabel='<%= "&laquo; " + LanguageUtil.get(pageContext, "back") %>'
 	backURL="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"
 />

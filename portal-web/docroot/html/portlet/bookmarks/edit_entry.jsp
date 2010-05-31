@@ -53,7 +53,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 
 	<c:if test="<%= entry != null %>">
 		<liferay-ui:tabs
-			names='<%= entry.getName() %>'
+			names="<%= entry.getName() %>"
 			backLabel='<%= "&laquo; " + LanguageUtil.get(pageContext, "back") %>'
 			backURL="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"
 		/>

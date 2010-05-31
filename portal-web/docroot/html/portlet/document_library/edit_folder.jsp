@@ -40,7 +40,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 
 	<c:if test="<%= folder != null %>">
 		<liferay-ui:tabs
-			names='<%= folder.getName() %>'
+			names="<%= folder.getName() %>"
 			backLabel='<%= "&laquo; " + LanguageUtil.get(pageContext, "back") %>'
 			backURL="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"
 		/>

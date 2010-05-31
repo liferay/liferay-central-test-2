@@ -23,10 +23,9 @@ entry = entry.toEscapedModel();
 
 long entryId = entry.getEntryId();
 
-request.setAttribute("view_entry.jsp-entry", entry);
-
 BookmarksFolder folder = entry.getFolder();
-long folderId = folder.getFolderId();
+
+request.setAttribute("view_entry.jsp-entry", entry);
 %>
 
 <liferay-util:include page="/html/portlet/bookmarks/top_links.jsp" />
@@ -34,11 +33,11 @@ long folderId = folder.getFolderId();
 <c:if test="<%= folder != null %>">
 	<portlet:renderURL var="backURL">
 		<portlet:param name="struts_action" value="/bookmarks/view" />
-		<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
+		<portlet:param name="folderId" value="<%= String.valueOf(folder.getFolderId()) %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:tabs
-		names='<%= entry.getName() %>'
+		names="<%= entry.getName() %>"
 		backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(folder.getName())) %>'
 		backURL="<%= backURL.toString() %>"
 	/>
