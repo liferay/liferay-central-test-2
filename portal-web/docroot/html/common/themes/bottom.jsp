@@ -136,9 +136,11 @@ StringBundler pageBottomSB = (StringBundler)request.getAttribute(WebKeys.PAGE_BO
 %>
 
 <c:if test="<%= pageBottomSB != null %>">
+
 	<%
-		pageBottomSB.writeTo(out);
+	pageBottomSB.writeTo(out);
 	%>
+
 </c:if>
 
 <%-- Theme JavaScript --%>
