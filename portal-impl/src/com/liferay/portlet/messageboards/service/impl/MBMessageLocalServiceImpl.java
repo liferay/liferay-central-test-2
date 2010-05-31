@@ -1048,7 +1048,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MBCategory category = null;
 
-		if (message.getCategoryId() > 0) {
+		if ((message.getCategoryId() !=
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+			(message.getCategoryId() !=
+				MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+
 			category = mbCategoryPersistence.findByPrimaryKey(
 				message.getCategoryId());
 		}

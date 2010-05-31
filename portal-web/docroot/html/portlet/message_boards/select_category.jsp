@@ -20,13 +20,10 @@
 MBCategory category = (MBCategory)request.getAttribute(WebKeys.MESSAGE_BOARDS_CATEGORY);
 
 long categoryId = BeanParamUtil.getLong(category, request, "mbCategoryId", MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
-String categoryName = LanguageUtil.get(pageContext, "message-boards-home");
 
 MBCategoryDisplay categoryDisplay = new MBCategoryDisplayImpl(scopeGroupId, categoryId);
 
 if (category != null) {
-	categoryName = category.getName();
-
 	MBUtil.addPortletBreadcrumbEntries(category, request, renderResponse);
 }
 %>
@@ -116,7 +113,7 @@ if (category != null) {
 	<aui:button-row>
 
 		<%
-		String taglibSelectOnClick = "opener." + renderResponse.getNamespace() + "selectCategory('" + categoryId + "','" + categoryName + "');window.close();";
+		String taglibSelectOnClick = "opener." + renderResponse.getNamespace() + "selectCategory('" + categoryId + "','" + (category != null) ? category.getName() : LanguageUtil.get(pageContext, "message-boards-home") + "');window.close();";
 		%>
 
 		<aui:button onClick="<%= taglibSelectOnClick %>" value="choose-this-category" />

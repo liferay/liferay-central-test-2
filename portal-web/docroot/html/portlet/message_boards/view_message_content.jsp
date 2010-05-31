@@ -35,12 +35,12 @@ String threadView = messageDisplay.getThreadView();
 
 <portlet:renderURL var="backURL">
 	<portlet:param name="struts_action" value="/message_boards/view" />
-	<portlet:param name="mbCategoryId" value="<%= category != null ? String.valueOf(category.getCategoryId()) : String.valueOf(MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) %>" />
+	<portlet:param name="mbCategoryId" value="<%= (category != null) ? String.valueOf(category.getCategoryId()) : String.valueOf(MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) %>" />
 </portlet:renderURL>
 
 <liferay-ui:tabs
 	names="<%= message.getSubject() %>"
-	backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", category != null ? HtmlUtil.escape(category.getName()) : "message-boards-home") %>'
+	backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", (category != null) ? HtmlUtil.escape(category.getName()) : "message-boards-home") %>'
 	backURL="<%= backURL.toString() %>"
 />
 
@@ -144,12 +144,12 @@ String threadView = messageDisplay.getThreadView();
 	<div class="thread-actions">
 		<table class="lfr-table">
 		<tr>
-			<c:if test="<%= MBCategoryPermission.contains(permissionChecker, scopeGroupId, category != null ? category.getCategoryId() : MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID, ActionKeys.ADD_MESSAGE) %>">
+			<c:if test="<%= MBCategoryPermission.contains(permissionChecker, scopeGroupId, (category != null) ? category.getCategoryId() : MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID, ActionKeys.ADD_MESSAGE) %>">
 				<td>
 					<portlet:renderURL var="addMessageURL">
 						<portlet:param name="struts_action" value="/message_boards/edit_message" />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
-						<portlet:param name="mbCategoryId" value="<%= category != null ? String.valueOf(category.getCategoryId()) : String.valueOf(MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) %>" />
+						<portlet:param name="mbCategoryId" value="<%= (category != null) ? String.valueOf(category.getCategoryId()) : String.valueOf(MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) %>" />
 					</portlet:renderURL>
 
 					<liferay-ui:icon image="post" label="<%= true %>" message="post-new-thread" url="<%= addMessageURL %>" />
@@ -183,7 +183,7 @@ String threadView = messageDisplay.getThreadView();
 				</td>
 			</c:if>
 
-			<c:if test="<%= MBCategoryPermission.contains(permissionChecker, scopeGroupId, category != null ? category.getCategoryId() : MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID, ActionKeys.LOCK_THREAD) %>">
+			<c:if test="<%= MBCategoryPermission.contains(permissionChecker, scopeGroupId, (category != null) ? category.getCategoryId() : MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID, ActionKeys.LOCK_THREAD) %>">
 				<td>
 					<c:choose>
 						<c:when test="<%= thread.isLocked() %>">
@@ -210,12 +210,12 @@ String threadView = messageDisplay.getThreadView();
 				</td>
 			</c:if>
 
-			<c:if test="<%= MBCategoryPermission.contains(permissionChecker, scopeGroupId, category != null ? category.getCategoryId() : MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID, ActionKeys.MOVE_THREAD) %>">
+			<c:if test="<%= MBCategoryPermission.contains(permissionChecker, scopeGroupId, (category != null) ? category.getCategoryId() : MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID, ActionKeys.MOVE_THREAD) %>">
 				<td>
 					<portlet:renderURL var="editThreadURL">
 						<portlet:param name="struts_action" value="/message_boards/move_thread" />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
-						<portlet:param name="mbCategoryId" value="<%= category != null ? String.valueOf(category.getCategoryId()) : String.valueOf(MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) %>" />
+						<portlet:param name="mbCategoryId" value="<%= (category != null) ? String.valueOf(category.getCategoryId()) : String.valueOf(MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) %>" />
 						<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
 					</portlet:renderURL>
 

@@ -61,7 +61,7 @@ MBThread thread = messageDisplay.getThread();
 <c:choose>
 	<c:when test="<%= includeFormTag %>">
 		<aui:form>
-			<aui:input name="breadcrumbsCategoryId" type="hidden" value="<%= category != null ? category.getCategoryId() : MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID %>" />
+			<aui:input name="breadcrumbsCategoryId" type="hidden" value="<%= (category != null) ? category.getCategoryId() : MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID %>" />
 			<aui:input name="breadcrumbsMessageId" type="hidden" value="<%= message.getMessageId() %>" />
 			<aui:input name="threadId" type="hidden" value="<%= message.getThreadId() %>" />
 

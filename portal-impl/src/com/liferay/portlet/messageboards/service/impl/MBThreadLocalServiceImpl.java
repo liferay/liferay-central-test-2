@@ -129,7 +129,11 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		// Category
 
-		if (rootMessage.getCategoryId() > 0) {
+		if ((rootMessage.getCategoryId() !=
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+			(rootMessage.getCategoryId() !=
+				MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+
 			MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 				thread.getCategoryId());
 
