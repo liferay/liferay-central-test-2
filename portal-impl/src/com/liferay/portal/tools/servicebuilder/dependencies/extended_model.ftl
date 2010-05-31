@@ -28,6 +28,7 @@ public interface ${entity.name} extends ${entity.name}Model {
 
 	<#list methods as method>
 		<#if !method.isConstructor() && !method.isStatic() && method.isPublic()>
+			${serviceBuilder.getJavadocComment(method)}
 			public ${serviceBuilder.getTypeGenericsName(method.returns)} ${method.name} (
 
 			<#assign parameters = method.parameters>

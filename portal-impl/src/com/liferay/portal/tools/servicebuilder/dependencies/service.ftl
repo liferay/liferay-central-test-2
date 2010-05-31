@@ -36,6 +36,7 @@ public interface ${entity.name}${sessionTypeName}Service {
 
 	<#list methods as method>
 		<#if !method.isConstructor() && !method.isStatic() && method.isPublic() && serviceBuilder.isCustomMethod(method) && !serviceBuilder.isDuplicateMethod(method, tempMap)>
+			${serviceBuilder.getJavadocComment(method)}
 			<#if method.name = "dynamicQuery">
 				@SuppressWarnings("unchecked")
 			</#if>

@@ -28,6 +28,7 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 
 	<#list methods as method>
 		<#if !method.isConstructor() && !method.isStatic() && method.isPublic() && serviceBuilder.isCustomMethod(method)>
+			${serviceBuilder.getJavadocComment(method)}
 			<#if method.name = "dynamicQuery">
 				@SuppressWarnings("unchecked")
 			</#if>
