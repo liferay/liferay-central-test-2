@@ -1603,5 +1603,4 @@ public class StringUtil {
 
 	private static Log _log = LogFactoryUtil.getLog(StringUtil.class);
 
-
 }
