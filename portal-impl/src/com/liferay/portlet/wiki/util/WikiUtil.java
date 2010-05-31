@@ -316,30 +316,50 @@ public class WikiUtil {
 
 		long groupId = themeDisplay.getScopeGroupId();
 
-		String allNodes = ListUtil.toString(
-			WikiNodeLocalServiceUtil.getNodes(groupId), "name");
+		List<WikiNode> allNodes = WikiNodeLocalServiceUtil.getNodes(groupId);
+		List<String> allNodesNames = WikiUtil.getNodesNames(allNodes);
 
+		boolean needOrder = false;
+
+		String[] visibleNodes = null;
 		PortletPreferences preferences = portletRequest.getPreferences();
-
-		String[] visibleNodes = StringUtil.split(
-			preferences.getValue("visible-nodes", allNodes));
-		String[] hiddenNodes = StringUtil.split(
-			preferences.getValue("hidden-nodes", StringPool.BLANK));
+		String visibleNodesPreference = preferences.getValue(
+			"visible-nodes", null);
+		if (visibleNodesPreference == null) {
+			visibleNodes = allNodesNames.toArray(
+				new String[allNodesNames.size()]);
+		}
+		else {
+			visibleNodes = StringUtil.split(visibleNodesPreference);
+			needOrder = true;
+		}
+		String[] hiddenNodes = StringUtil.split(preferences.getValue(
+			"hidden-nodes", null));
 
 		return getNodes(
-			groupId, visibleNodes, hiddenNodes,
-			themeDisplay.getPermissionChecker());
+			allNodes, visibleNodes, hiddenNodes,
+			themeDisplay.getPermissionChecker(), needOrder, true);
 	}
 
 	public static List<WikiNode> getNodes(
-			long groupId, String[] visibleNodes, String[] hiddenNodes,
-			PermissionChecker permissionChecker)
+			List<WikiNode> nodes, String[] visibleNodes, String[] hiddenNodes,
+			PermissionChecker permissionChecker, boolean needOrder)
 		throws PortalException, SystemException {
 
-		List<WikiNode> nodes = WikiNodeLocalServiceUtil.getNodes(groupId);
+		return getNodes(nodes, visibleNodes, hiddenNodes, permissionChecker,
+			needOrder, false);
+	}
+
+	public static List<WikiNode> getNodes(
+			List<WikiNode> nodes, String[] visibleNodes, String[] hiddenNodes,
+			PermissionChecker permissionChecker, boolean needOrder,
+			boolean returnFirst)
+		throws PortalException, SystemException {
 
 		nodes = ListUtil.copy(nodes);
-		nodes = _orderNodes(nodes, visibleNodes);
+		if (needOrder) {
+			nodes = _orderNodes(nodes, visibleNodes);
+		}
 
 		Iterator<WikiNode> itr = nodes.iterator();
 
@@ -352,9 +372,31 @@ public class WikiUtil {
 
 				itr.remove();
 			}
+			else if (returnFirst) {
+				List<WikiNode> firstNodeList = new ArrayList<WikiNode>(1);
+				firstNodeList.add(node);
+				return firstNodeList;
+			}
+		}
+
+		if (returnFirst) {
+			return Collections.EMPTY_LIST;
 		}
 
 		return nodes;
+	}
+
+	public static List<String> getNodesNames(List<WikiNode> wikiNodes) {
+		if (wikiNodes == null || wikiNodes.size() == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
+		List<String> nodesNames = new ArrayList<String>(wikiNodes.size());
+		for(WikiNode wikiNode : wikiNodes) {
+			nodesNames.add(wikiNode.getName());
+		}
+
+		return nodesNames;
 	}
 
 	public static String processContent(String content) {
