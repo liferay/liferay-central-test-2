@@ -15,10 +15,10 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
+import com.liferay.portal.kernel.servlet.taglib.BaseBodyTagSupport;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.taglib.BaseBodyTagSupport;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
@@ -77,7 +77,7 @@ public class IconListTag extends BaseBodyTagSupport {
 				PortalIncludeUtil.include(pageContext, getStartPage());
 			}
 
-			getBodyContentAsStringBundler().writeTo(pageContext.getOut());
+			writeBodyContent(pageContext.getOut());
 
 			if ((iconCount != null) && (iconCount.getValue() > 1) &&
 				((singleIcon == null) || _showWhenSingleIcon)) {

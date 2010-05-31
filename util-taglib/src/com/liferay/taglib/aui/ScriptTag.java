@@ -15,13 +15,13 @@
 package com.liferay.taglib.aui;
 
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
+import com.liferay.portal.kernel.servlet.taglib.BaseBodyTagSupport;
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.taglib.BaseBodyTagSupport;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
@@ -58,6 +58,7 @@ public class ScriptTag extends BaseBodyTagSupport {
 			}
 
 			StringBundler bodyContentSB = getBodyContentAsStringBundler();
+
 			if (position.equals(_POSITION_INLINE)) {
 				ScriptData scriptData = new ScriptData();
 

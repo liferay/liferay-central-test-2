@@ -15,10 +15,10 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
+import com.liferay.portal.kernel.servlet.taglib.BaseBodyTagSupport;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.taglib.BaseBodyTagSupport;
 import com.liferay.util.PwdGenerator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -72,7 +72,6 @@ public class PanelFloatingContainerTag extends BaseBodyTagSupport {
 	}
 
 	public int doAfterBody() {
-
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
@@ -104,7 +103,7 @@ public class PanelFloatingContainerTag extends BaseBodyTagSupport {
 				PortalIncludeUtil.include(pageContext, getStartPage());
 			}
 
-			getBodyContentAsStringBundler().writeTo(pageContext.getOut());
+			writeBodyContent(pageContext.getOut());
 
 			if ((panelCount != null) && (panelCount.getValue() >= 1)) {
 				PortalIncludeUtil.include(pageContext, getEndPage());

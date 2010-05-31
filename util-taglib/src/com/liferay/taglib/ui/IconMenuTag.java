@@ -15,6 +15,7 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
+import com.liferay.portal.kernel.servlet.taglib.BaseBodyTagSupport;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
@@ -22,7 +23,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.taglib.BaseBodyTagSupport;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
@@ -35,7 +35,6 @@ import javax.servlet.jsp.JspException;
 public class IconMenuTag extends BaseBodyTagSupport {
 
 	public int doAfterBody() {
-
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
@@ -81,7 +80,7 @@ public class IconMenuTag extends BaseBodyTagSupport {
 				PortalIncludeUtil.include(pageContext, getStartPage());
 			}
 
-			getBodyContentAsStringBundler().writeTo(pageContext.getOut());
+			writeBodyContent(pageContext.getOut());
 
 			if ((iconCount != null) && (iconCount.getValue() >= 1) &&
 				((singleIcon == null) || _showWhenSingleIcon)) {

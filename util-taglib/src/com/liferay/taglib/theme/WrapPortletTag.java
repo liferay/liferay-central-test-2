@@ -16,6 +16,7 @@ package com.liferay.taglib.theme;
 
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.theme.PortletDisplay;
@@ -87,8 +88,9 @@ public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
 
 			// Portlet content
 
-			portletDisplay.setContent(
-				getBodyContentAsStringBundler().toString());
+			StringBundler bodyContentSB = getBodyContentAsStringBundler();
+
+			portletDisplay.setContent(bodyContentSB.toString());
 
 			// Page
 

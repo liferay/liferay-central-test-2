@@ -36,10 +36,14 @@ if (scriptData == null) {
 		// <![CDATA[
 
 			<%
-				scriptData.getRawSB().writeTo(out);
+			StringBundler rawSB = scriptData.getRawSB();
+
+			rawSB.writeTo(out);
+
+			StringBundler callbackSB = scriptData.getCallbackSB();
 			%>
 
-			<c:if test="<%= scriptData.getCallbackSB().index() > 0 %>">
+			<c:if test="<%= callbackSB.index() > 0 %>">
 
 				<%
 				Set<String> useSet = scriptData.getUseSet();
@@ -55,13 +59,17 @@ if (scriptData == null) {
 				%>
 
 				AUI().use(
+
 					<%
-						useSB.writeTo(out);
+					useSB.writeTo(out);
 					%>
+
 					function(A) {
+
 						<%
-							scriptData.getCallbackSB().writeTo(out);
+						callbackSB.writeTo(out);
 						%>
+
 					}
 				);
 			</c:if>

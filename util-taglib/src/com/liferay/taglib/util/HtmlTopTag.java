@@ -14,8 +14,8 @@
 
 package com.liferay.taglib.util;
 
+import com.liferay.portal.kernel.servlet.taglib.BaseBodyTagSupport;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.taglib.BaseBodyTagSupport;
 
 import javax.servlet.http.HttpServletRequest;
 

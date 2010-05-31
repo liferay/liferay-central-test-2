@@ -12,13 +12,16 @@
  * details.
  */
 
-package com.liferay.taglib;
+package com.liferay.portal.kernel.servlet.taglib;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BodyContentWrapper;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+
+import java.io.IOException;
+import java.io.Writer;
 
 import javax.servlet.jsp.tagext.BodyContent;
 import javax.servlet.jsp.tagext.BodyTagSupport;
@@ -32,24 +35,34 @@ public class BaseBodyTagSupport extends BodyTagSupport {
 
 	public StringBundler getBodyContentAsStringBundler() {
 		BodyContent bodyContent = getBodyContent();
+
 		if (bodyContent instanceof BodyContentWrapper) {
 			BodyContentWrapper bodyContentWrapper =
-				(BodyContentWrapper) bodyContent;
+				(BodyContentWrapper)bodyContent;
+
 			return bodyContentWrapper.getStringBundler();
 		}
 		else {
 			if (_log.isWarnEnabled()) {
-				_log.warn("This BodyContent is not BodyContentWrapper " +
-					"which should not happen, double check you deploy " +
-					"JspFactorySwapper properly. Optimization will fall back " +
-					"to Normal String handover.");
+				_log.warn(
+					"BodyContent is not BodyContentWrapper. Check " +
+						"JspFactorySwapper.");
 			}
+
 			String bodyContentString = bodyContent.getString();
+
 			if (bodyContentString == null) {
 				bodyContentString = StringPool.BLANK;
 			}
+
 			return new StringBundler(bodyContentString);
 		}
+	}
+
+	public void writeBodyContent(Writer writer) throws IOException {
+		StringBundler sb = getBodyContentAsStringBundler();
+
+		sb.writeTo(writer);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(BaseBodyTagSupport.class);

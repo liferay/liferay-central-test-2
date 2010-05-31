@@ -45,13 +45,13 @@ public class ScriptData {
 		}
 	}
 
-	public void append(StringBundler content, String use) {
+	public void append(StringBundler contentSB, String use) {
 		if (Validator.isNull(use)) {
-			_rawSB.append(content);
+			_rawSB.append(contentSB);
 		}
 		else {
 			_callbackSB.append("(function() {");
-			_callbackSB.append(content);
+			_callbackSB.append(contentSB);
 			_callbackSB.append("})();");
 
 			String[] useArray = StringUtil.split(use);
