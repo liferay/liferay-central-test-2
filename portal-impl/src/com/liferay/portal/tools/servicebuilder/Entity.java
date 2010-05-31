@@ -152,7 +152,7 @@ public class Entity {
 		for (int i = 0; i < _columnList.size(); i++) {
 			EntityColumn col = _columnList.get(i);
 
-			if (col.getMappingTable() != null &&
+			if ((col.getMappingTable() != null) &&
 				col.getMappingTable().equals(mappingTable)) {
 
 				return col;
@@ -475,7 +475,7 @@ public class Entity {
 
 	public boolean isWorkflowEnabled() {
 		if (hasColumn("status") && hasColumn("statusByUserId") &&
-			hasColumn("statusByUserId") && hasColumn("statusDate")) {
+			hasColumn("statusByUserName") && hasColumn("statusDate")) {
 
 			return true;
 		}
