@@ -5,9 +5,9 @@
 <html dir="#language("lang.dir")" lang="$w3c_language_id">
 
 <head>
-	<title>$the_title - $company_name</title>
-
 	$theme.include($top_head_include)
+
+	<title>$the_title - $company_name</title>
 </head>
 
 <body class="$css_class">
