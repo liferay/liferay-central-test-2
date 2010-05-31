@@ -26,7 +26,15 @@ String lang = GetterUtil.getString((String)request.getAttribute("aui:a:lang"));
 String target = GetterUtil.getString((String)request.getAttribute("aui:a:target"));
 %>
 
-<a <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> href="<%= HtmlUtil.escape(href) %>" <%= Validator.isNotNull(id) ? "id=\"" + namespace + id + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(lang) ? "lang=\"" + lang + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(target) ? "target=\"" + target + "\"" : StringPool.BLANK %> <%= _buildDynamicAttributes(dynamicAttributes) %>>
-	<c:if test="<%= Validator.isNotNull(label) %>">
-		<liferay-ui:message key="<%= label %>" />
-	</c:if>
+<c:choose>
+	<c:when test="<%= Validator.isNotNull(href) %>">
+		<a <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> href="<%= HtmlUtil.escape(href) %>" <%= Validator.isNotNull(id) ? "id=\"" + namespace + id + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(lang) ? "lang=\"" + lang + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(target) ? "target=\"" + target + "\"" : StringPool.BLANK %> <%= _buildDynamicAttributes(dynamicAttributes) %>>
+
+		<c:if test="<%= Validator.isNotNull(label) %>">
+			<liferay-ui:message key="<%= label %>" />
+		</c:if>
+	</c:when>
+	<c:otherwise>
+		<span <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(id) ? "id=\"" + namespace + id + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(lang) ? "lang=\"" + lang + "\"" : StringPool.BLANK %> <%= _buildDynamicAttributes(dynamicAttributes) %>>
+	</c:otherwise>
+</c:choose>
