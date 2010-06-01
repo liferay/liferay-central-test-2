@@ -251,6 +251,11 @@ public class RoleLocalServiceWrapper implements RoleLocalService {
 		return _roleLocalService.hasUserRole(userId, roleId);
 	}
 
+	/**
+	* Returns true if the user has the regular role.
+	*
+	* @return true if the user has the regular role
+	*/
 	public boolean hasUserRole(long userId, long companyId,
 		java.lang.String name, boolean inherited)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -258,6 +263,11 @@ public class RoleLocalServiceWrapper implements RoleLocalService {
 		return _roleLocalService.hasUserRole(userId, companyId, name, inherited);
 	}
 
+	/**
+	* Returns true if the user has any one of the specified regular roles.
+	*
+	* @return true if the user has the regular role
+	*/
 	public boolean hasUserRoles(long userId, long companyId,
 		java.lang.String[] names, boolean inherited)
 		throws com.liferay.portal.kernel.exception.PortalException,

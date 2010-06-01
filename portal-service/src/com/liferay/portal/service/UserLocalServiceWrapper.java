@@ -565,6 +565,11 @@ public class UserLocalServiceWrapper implements UserLocalService {
 		return _userLocalService.hasRoleUser(roleId, userId);
 	}
 
+	/**
+	* Returns true if the user has the role.
+	*
+	* @return true if the user has the role
+	*/
 	public boolean hasRoleUser(long companyId, java.lang.String name,
 		long userId, boolean inherited)
 		throws com.liferay.portal.kernel.exception.PortalException,
