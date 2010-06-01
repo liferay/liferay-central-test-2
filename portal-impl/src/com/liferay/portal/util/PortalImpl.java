@@ -2818,7 +2818,9 @@ public class PortalImpl implements Portal {
 
 			String minifierType = StringPool.BLANK;
 
-			if (uri.endsWith(".css") || uri.endsWith("css.jsp") || uri.endsWith("css/main.jsp")) {
+			if (uri.endsWith(".css") || uri.endsWith("css.jsp") ||
+				uri.endsWith("css/main.jsp")) {
+
 				if (themeDisplay.isThemeCssFastLoad()) {
 					minifierType = "css";
 				}
