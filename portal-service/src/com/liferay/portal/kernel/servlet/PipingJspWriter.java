@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
 
@@ -40,8 +41,8 @@ public class PipingJspWriter extends JspWriter {
 		_printWriter = new UnsyncPrintWriter(writer, true);
 	}
 
-	public void clear() {
-		throw new UnsupportedOperationException();
+	public void clear() throws IOException {
+		throw new IOException();
 	}
 
 	public void clearBuffer() {

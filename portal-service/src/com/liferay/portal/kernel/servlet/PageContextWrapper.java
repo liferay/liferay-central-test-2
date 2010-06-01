@@ -17,6 +17,7 @@ package com.liferay.portal.kernel.servlet;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 
 import java.io.IOException;
+import java.io.Writer;
 
 import java.util.Enumeration;
 
@@ -29,6 +30,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.ErrorData;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.BodyContent;
@@ -73,6 +75,10 @@ public class PageContextWrapper extends PageContext {
 
 	public ELContext getELContext() {
 		return _pageContext.getELContext();
+	}
+
+	public ErrorData getErrorData() {
+		return super.getErrorData();
 	}
 
 	public Exception getException() {
@@ -171,6 +177,10 @@ public class PageContextWrapper extends PageContext {
 			unsyncStringWriter);
 
 		return new BodyContentWrapper(bodyContent, unsyncStringWriter);
+	}
+
+	public JspWriter pushBody(Writer writer) {
+		return _pageContext.pushBody(new PipingJspWriter(writer));
 	}
 
 	public void release() {
