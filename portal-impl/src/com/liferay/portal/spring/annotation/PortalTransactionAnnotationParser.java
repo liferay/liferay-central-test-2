@@ -38,8 +38,9 @@ import org.springframework.transaction.interceptor.TransactionAttribute;
  * <a href="PortalTransactionAnnotationParser.java.html"><b><i>View Source</i>
  * </b></a>
  *
- * @author Michael Young
- * @author Shuyang Zhou
+ * @author	   Michael Young
+ * @author	   Shuyang Zhou
+ * @deprecated
  */
 public class PortalTransactionAnnotationParser
 	implements TransactionAnnotationParser, Serializable {
