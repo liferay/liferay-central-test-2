@@ -1220,12 +1220,12 @@
 		<put name="portlet_content" value="/portlet/shopping/view_item.jsp" />
 	</definition>
 
-	<!-- Social Equity -->
+	<!-- Social Equity Admin -->
 
-	<definition name="portlet.social_equity" extends="portlet" />
+	<definition name="portlet.social_equity_admin" extends="portlet" />
 
-	<definition name="portlet.social_equity.view" extends="portlet.social_equity">
-		<put name="portlet_content" value="/portlet/social_equity/view.jsp" />
+	<definition name="portlet.social_equity_admin.view" extends="portlet.social_equity_admin">
+		<put name="portlet_content" value="/portlet/social_equity_admin/view.jsp" />
 	</definition>
 
 	<!-- Update Manager -->

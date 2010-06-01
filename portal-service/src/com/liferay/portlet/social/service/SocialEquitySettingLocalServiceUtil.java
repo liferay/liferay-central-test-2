@@ -122,18 +122,24 @@ public class SocialEquitySettingLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialEquitySetting> getEquitySettings(
+		long groupId, java.lang.String className, java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getEquitySettings(groupId, className, actionId);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialEquitySetting> getEquitySettings(
 		long groupId, long classNameId, java.lang.String actionId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getEquitySettings(groupId, classNameId, actionId);
 	}
 
-	public static void updateSocialEquitySettings(java.lang.String model,
-		long groupId, long classNameId,
-		java.util.List<com.liferay.portlet.social.model.SocialEquityActionMapping> mappings)
+	public static void updateSocialEquitySettings(long groupId,
+		java.lang.String className,
+		java.util.List<com.liferay.portlet.social.model.SocialEquityActionMapping> equityActionMappings)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.updateSocialEquitySettings(model, groupId, classNameId, mappings);
+			.updateSocialEquitySettings(groupId, className, equityActionMappings);
 	}
 
 	public static SocialEquitySettingLocalService getService() {

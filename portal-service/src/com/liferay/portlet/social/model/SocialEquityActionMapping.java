@@ -24,34 +24,37 @@ import java.io.Serializable;
 public class SocialEquityActionMapping implements Serializable {
 
 	public SocialEquityActionMapping clone() {
+		SocialEquityActionMapping equityActionMapping =
+			new SocialEquityActionMapping();
 
-		SocialEquityActionMapping clone = new SocialEquityActionMapping();
+		equityActionMapping.setActionId(_actionId);
+		equityActionMapping.setClassName(_className);
+		equityActionMapping.setInformationLifespan(_informationLifespan);
+		equityActionMapping.setInformationValue(_informationValue);
+		equityActionMapping.setParticipationLifespan(_participationLifespan);
+		equityActionMapping.setParticipationValue(_participationValue);
 
-		clone.setActionKey(_actionKey);
-		clone.setInformationLifespan(_informationLifespan);
-		clone.setInformationValue(_informationValue);
-		clone.setParticipationLifespan(_participationLifespan);
-		clone.setParticipationValue(_participationValue);
-
-		return clone;
+		return equityActionMapping;
 	}
 
-	public boolean equals(SocialEquityActionMapping mapping, int type) {
-		if (type == SocialEquitySettingConstants.TYPE_INFORMATION) {
-			if (_informationValue != mapping.getInformationValue()) {
-				return false;
-			}
+	public boolean equals(
+		SocialEquityActionMapping equityActionMapping, int type) {
 
-			if (_informationLifespan != mapping.getInformationLifespan()) {
+		if (type == SocialEquitySettingConstants.TYPE_INFORMATION) {
+			if ((_informationLifespan !=
+					equityActionMapping.getInformationLifespan()) ||
+				(_informationValue !=
+					equityActionMapping.getInformationValue())) {
+
 				return false;
 			}
 		}
 		else {
-			if (_participationValue != mapping.getParticipationValue()) {
-				return false;
-			}
+			if ((_participationLifespan !=
+					equityActionMapping.getParticipationLifespan()) ||
+				(_participationValue !=
+					equityActionMapping.getParticipationValue())) {
 
-			if (_participationLifespan != mapping.getParticipationLifespan()) {
 				return false;
 			}
 		}
@@ -59,8 +62,12 @@ public class SocialEquityActionMapping implements Serializable {
 		return true;
 	}
 
-	public String getActionKey() {
-		return _actionKey;
+	public String getActionId() {
+		return _actionId;
+	}
+
+	public String getClassName() {
+		return _className;
 	}
 
 	public int getInformationLifespan() {
@@ -79,8 +86,12 @@ public class SocialEquityActionMapping implements Serializable {
 		return _participationValue;
 	}
 
-	public void setActionKey(String actionKey) {
-		_actionKey = actionKey;
+	public void setActionId(String actionId) {
+		_actionId = actionId;
+	}
+
+	public void setClassName(String className) {
+		_className = className;
 	}
 
 	public void setInformationLifespan(int informationLifespan) {
@@ -99,7 +110,8 @@ public class SocialEquityActionMapping implements Serializable {
 		_participationValue = participationValue;
 	}
 
-	private String _actionKey;
+	private String _actionId;
+	private String _className;
 	private int _informationLifespan;
 	private int _informationValue;
 	private int _participationLifespan;

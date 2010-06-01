@@ -205,7 +205,7 @@
 			<finder-column name="actionId" />
 			<finder-column name="type" />
 		</finder>
-		
+
 		<!-- References -->
 
 		<reference package-path="com.liferay.portal" entity="Group" />
@@ -235,6 +235,9 @@
 
 		<!-- Finder methods -->
 
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
 		<finder name="G_U" return-type="SocialEquityUser" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="userId" />

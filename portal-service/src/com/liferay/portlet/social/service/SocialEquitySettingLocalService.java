@@ -109,12 +109,17 @@ public interface SocialEquitySettingLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.social.model.SocialEquitySetting> getEquitySettings(
+		long groupId, java.lang.String className, java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.social.model.SocialEquitySetting> getEquitySettings(
 		long groupId, long classNameId, java.lang.String actionId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void updateSocialEquitySettings(java.lang.String model,
-		long groupId, long classNameId,
-		java.util.List<com.liferay.portlet.social.model.SocialEquityActionMapping> mappings)
+	public void updateSocialEquitySettings(long groupId,
+		java.lang.String className,
+		java.util.List<com.liferay.portlet.social.model.SocialEquityActionMapping> equityActionMappings)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 }

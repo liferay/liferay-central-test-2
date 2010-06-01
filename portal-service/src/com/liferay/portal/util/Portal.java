@@ -450,7 +450,7 @@ public interface Portal {
 	public List<SocialEquityActionMapping> getSocialEquityActionMappings(
 		String name);
 
-	public String[] getSocialEquityModels();
+	public String[] getSocialEquityClassNames();
 
 	public String getStaticResourceURL(
 		HttpServletRequest request, String uri);

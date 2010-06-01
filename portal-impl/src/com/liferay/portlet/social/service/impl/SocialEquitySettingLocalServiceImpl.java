@@ -48,6 +48,15 @@ public class SocialEquitySettingLocalServiceImpl
 		SocialEquitySettingLocalServiceImpl.class.getName();
 
 	public List<SocialEquitySetting> getEquitySettings(
+			long groupId, String className, String actionId)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return getEquitySettings(groupId, classNameId, actionId);
+	}
+
+	public List<SocialEquitySetting> getEquitySettings(
 			long groupId, long classNameId, String actionId)
 		throws SystemException {
 
@@ -126,12 +135,14 @@ public class SocialEquitySettingLocalServiceImpl
 	}
 
 	public void updateSocialEquitySettings(
-			String model, long groupId, long classNameId,
-			List<SocialEquityActionMapping> mappings)
+			long groupId, String className,
+			List<SocialEquityActionMapping> equityActionMappings)
 		throws PortalException, SystemException {
 
-		for (SocialEquityActionMapping mapping : mappings) {
-			updateSocialEquitySettings(model, groupId, classNameId, mapping);
+		for (SocialEquityActionMapping equityActionMapping :
+				equityActionMappings) {
+
+			updateSocialEquitySettings(groupId, className, equityActionMapping);
 		}
 	}
 
@@ -147,32 +158,34 @@ public class SocialEquitySettingLocalServiceImpl
 		return sb.toString();
 	}
 
-	protected SocialEquitySetting findOrCreateSocialEquitySetting(
-			long groupId, long classNameId, String actionId, int type)
+	protected SocialEquitySetting getEquitySetting(
+			long groupId, String className, String actionId, int type)
 		throws PortalException, SystemException {
 
-		SocialEquitySetting setting = null;
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		SocialEquitySetting equitySetting = null;
 
 		try {
-			setting = socialEquitySettingPersistence.findByG_C_A_T(
+			equitySetting = socialEquitySettingPersistence.findByG_C_A_T(
 				groupId, classNameId, actionId, type);
 		}
 		catch (NoSuchEquitySettingException nsqse) {
-			long equitySettingId = counterLocalService.increment();
-
 			Group group = groupLocalService.getGroup(groupId);
 
-			setting = socialEquitySettingPersistence.create(
+			long equitySettingId = counterLocalService.increment();
+
+			equitySetting = socialEquitySettingPersistence.create(
 				equitySettingId);
 
-			setting.setActionId(actionId);
-			setting.setClassNameId(classNameId);
-			setting.setCompanyId(group.getCompanyId());
-			setting.setGroupId(groupId);
-			setting.setType(type);
+			equitySetting.setGroupId(groupId);
+			equitySetting.setCompanyId(group.getCompanyId());
+			equitySetting.setClassNameId(classNameId);
+			equitySetting.setActionId(actionId);
+			equitySetting.setType(type);
 		}
 
-		return setting;
+		return equitySetting;
 	}
 
 	protected SocialEquitySetting getInformationEquitySetting(
@@ -203,53 +216,65 @@ public class SocialEquitySettingLocalServiceImpl
 	}
 
 	protected void updateSocialEquitySettings(
-			String model, long groupId, long classNameId,
-			SocialEquityActionMapping mapping)
+			long groupId, String className,
+			SocialEquityActionMapping equityActionMapping)
 		throws PortalException, SystemException {
 
-		SocialEquityActionMapping defaultMapping =
+		SocialEquityActionMapping defaultEquityActionMapping =
 			PortalUtil.getSocialEquityActionMapping(
-				model, mapping.getActionKey());
+				className, equityActionMapping.getActionId());
 
-		if (mapping.getInformationValue() > 0 &&
-			!mapping.equals(
-				defaultMapping,
+		if ((equityActionMapping.getInformationValue() > 0) &&
+			!equityActionMapping.equals(
+				defaultEquityActionMapping,
 				SocialEquitySettingConstants.TYPE_INFORMATION)) {
 
-			SocialEquitySetting setting = findOrCreateSocialEquitySetting(
-				groupId, classNameId, mapping.getActionKey(),
+			SocialEquitySetting equitySetting = getEquitySetting(
+				groupId, className, equityActionMapping.getActionId(),
 				SocialEquitySettingConstants.TYPE_INFORMATION);
 
-			if (mapping.getInformationValue() != setting.getValue() ||
-				mapping.getInformationLifespan() != setting.getValidity()) {
+			if ((equityActionMapping.getInformationValue() !=
+					equitySetting.getValue()) ||
+				(equityActionMapping.getInformationLifespan() !=
+						equitySetting.getValidity())) {
 
-				setting.setValue(mapping.getInformationValue());
-				setting.setValidity(mapping.getInformationLifespan());
+				equitySetting.setValue(
+					equityActionMapping.getInformationValue());
+				equitySetting.setValidity(
+					equityActionMapping.getInformationLifespan());
 
-				socialEquitySettingPersistence.update(setting, false);
+				socialEquitySettingPersistence.update(equitySetting, false);
 			}
 		}
 
-		if (mapping.getParticipationValue() > 0 &&
-			!mapping.equals(
-				defaultMapping,
+		if ((equityActionMapping.getParticipationValue() > 0) &&
+			!equityActionMapping.equals(
+				defaultEquityActionMapping,
 				SocialEquitySettingConstants.TYPE_PARTICIPATION)) {
 
-			SocialEquitySetting setting = findOrCreateSocialEquitySetting(
-					groupId, classNameId, mapping.getActionKey(),
+			SocialEquitySetting equitySetting = getEquitySetting(
+					groupId, className, equityActionMapping.getActionId(),
 					SocialEquitySettingConstants.TYPE_PARTICIPATION);
 
-			if (mapping.getParticipationValue() != setting.getValue() ||
-				mapping.getParticipationLifespan() != setting.getValidity()) {
+			if ((equityActionMapping.getParticipationValue() !=
+					equitySetting.getValue()) ||
+				(equityActionMapping.getParticipationLifespan() !=
+					equitySetting.getValidity())) {
 
-				setting.setValue(mapping.getParticipationValue());
-				setting.setValidity(mapping.getParticipationLifespan());
+				equitySetting.setValue(
+					equityActionMapping.getParticipationValue());
+				equitySetting.setValidity(
+					equityActionMapping.getParticipationLifespan());
 
-				socialEquitySettingPersistence.update(setting, false);
+				socialEquitySettingPersistence.update(equitySetting, false);
 			}
 		}
 
-		_portalCache.remove(encodeKey(classNameId, mapping.getActionKey()));
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		String key = encodeKey(classNameId, equityActionMapping.getActionId());
+
+		_portalCache.remove(key);
 	}
 
 	private static PortalCache _portalCache = MultiVMPoolUtil.getCache(

@@ -2229,11 +2229,11 @@
 	</portlet>
 	<portlet>
 		<portlet-name>155</portlet-name>
-		<display-name>Social Equity</display-name>
+		<display-name>Social Equity Admin</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/social_equity/view</value>
+			<value>/social_equity_admin/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -2241,7 +2241,10 @@
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<security-role-ref>
-			<role-name>administrator</role-name>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
 	<custom-window-state>
