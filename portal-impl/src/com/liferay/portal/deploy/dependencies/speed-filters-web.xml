@@ -23,7 +23,7 @@
 	</init-param>
 	<init-param>
 		<param-name>url-regex-pattern</param-name>
-		<param-value>.+/css\.jsp</param-value>
+		<param-value>.+/(css|main)\.jsp</param-value>
 	</init-param>
 	<init-param>
 		<param-name>pattern</param-name>
@@ -55,7 +55,7 @@
 	</init-param>
 	<init-param>
 		<param-name>url-regex-pattern</param-name>
-		<param-value>.+/css\.jsp</param-value>
+		<param-value>.+/(css|main)\.jsp</param-value>
 	</init-param>
 	<init-param>
 		<param-name>servlet-2.4-dispatcher</param-name>
@@ -107,7 +107,7 @@
 	</init-param>
 	<init-param>
 		<param-name>url-regex-pattern</param-name>
-		<param-value>.+/css\.jsp</param-value>
+		<param-value>.+/(css|main)\.jsp</param-value>
 	</init-param>
 	<init-param>
 		<param-name>Cache-Control</param-name>
@@ -147,7 +147,7 @@
 	</init-param>
 	<init-param>
 		<param-name>url-regex-pattern</param-name>
-		<param-value>.+/css\.jsp</param-value>
+		<param-value>.+/(css|main)\.jsp</param-value>
 	</init-param>
 	<init-param>
 		<param-name>servlet-2.4-dispatcher</param-name>

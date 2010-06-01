@@ -50,7 +50,7 @@
 		<filter-class>com.liferay.portal.servlet.filters.cache.CacheFilter</filter-class>
 		<init-param>
 			<param-name>url-regex-pattern</param-name>
-			<param-value>.+/(barebone|css|everything)\.jsp</param-value>
+			<param-value>.+/(barebone|css|everything|main)\.jsp</param-value>
 		</init-param>
 		<init-param>
 			<param-name>pattern</param-name>
@@ -70,7 +70,7 @@
 		<filter-class>com.liferay.portal.servlet.filters.etag.ETagFilter</filter-class>
 		<init-param>
 		<param-name>url-regex-pattern</param-name>
-			<param-value>.+/(barebone|css|everything)\.jsp</param-value>
+			<param-value>.+/(barebone|css|everything|main)\.jsp</param-value>
 		</init-param>
 	</filter>
 	<filter>
@@ -98,7 +98,7 @@
 		<filter-class>com.liferay.portal.servlet.filters.header.HeaderFilter</filter-class>
 		<init-param>
 			<param-name>url-regex-pattern</param-name>
-			<param-value>.+/(barebone|css|everything)\.jsp</param-value>
+			<param-value>.+/(barebone|css|everything|main)\.jsp</param-value>
 		</init-param>
 		<init-param>
 			<param-name>Cache-Control</param-name>
@@ -138,7 +138,7 @@
 		<filter-class>com.liferay.portal.servlet.filters.minifier.MinifierFilter</filter-class>
 		<init-param>
 			<param-name>url-regex-pattern</param-name>
-			<param-value>.+/(barebone|css|everything)\.jsp</param-value>
+			<param-value>.+/(barebone|css|everything|main)\.jsp</param-value>
 		</init-param>
 	</filter>
 	<filter>
