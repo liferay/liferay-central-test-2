@@ -49,7 +49,7 @@ public class ReadWriteLockKey<T> {
 			return true;
 		}
 
-		return true;
+		return false;
 	}
 
 	public T getKey() {

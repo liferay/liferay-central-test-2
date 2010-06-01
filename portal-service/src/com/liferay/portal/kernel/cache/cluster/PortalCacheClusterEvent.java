@@ -58,7 +58,7 @@ public class PortalCacheClusterEvent implements Serializable {
 			return true;
 		}
 
-		return true;
+		return false;
 	}
 
 	public String getCacheName() {
