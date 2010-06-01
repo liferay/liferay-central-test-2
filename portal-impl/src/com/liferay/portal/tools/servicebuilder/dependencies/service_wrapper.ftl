@@ -24,6 +24,8 @@ public class ${entity.name}${sessionTypeName}ServiceWrapper implements ${entity.
 
 	<#list methods as method>
 		<#if !method.isConstructor() && method.isPublic() && serviceBuilder.isCustomMethod(method)>
+			${serviceBuilder.getJavadocComment(method)}
+
 			<#if method.name = "dynamicQuery">
 				@SuppressWarnings("unchecked")
 			</#if>
