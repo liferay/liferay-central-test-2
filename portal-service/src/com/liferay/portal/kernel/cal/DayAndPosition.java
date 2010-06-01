@@ -72,7 +72,7 @@ public class DayAndPosition implements Cloneable, Serializable {
 	/**
 	 * Field NO_WEEKDAY
 	 */
-	public final static int NO_WEEKDAY = 0;
+	public static final int NO_WEEKDAY = 0;
 
 	/**
 	 * Constructor DayAndPosition

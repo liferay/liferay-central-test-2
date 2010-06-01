@@ -23,18 +23,18 @@ import javax.portlet.PortletMode;
  */
 public class LiferayPortletMode extends PortletMode {
 
-	public final static PortletMode ABOUT = new PortletMode("about");
+	public static final PortletMode ABOUT = new PortletMode("about");
 
-	public final static PortletMode CONFIG = new PortletMode("config");
+	public static final PortletMode CONFIG = new PortletMode("config");
 
-	public final static PortletMode EDIT_DEFAULTS =
+	public static final PortletMode EDIT_DEFAULTS =
 		new PortletMode("edit_defaults");
 
-	public final static PortletMode EDIT_GUEST = new PortletMode("edit_guest");
+	public static final PortletMode EDIT_GUEST = new PortletMode("edit_guest");
 
-	public final static PortletMode PREVIEW = new PortletMode("preview");
+	public static final PortletMode PREVIEW = new PortletMode("preview");
 
-	public final static PortletMode PRINT = new PortletMode("print");
+	public static final PortletMode PRINT = new PortletMode("print");
 
 	public LiferayPortletMode(String name) {
 		super(name);

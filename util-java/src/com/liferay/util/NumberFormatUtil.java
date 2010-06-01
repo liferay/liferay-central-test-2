@@ -21,27 +21,27 @@ import java.text.NumberFormat;
  *
  * @author Brian Wing Shun Chan
  */
-public final class NumberFormatUtil {
+public class NumberFormatUtil {
 
 	public static String format(
-		NumberFormat nf, double number, double defaultValue) {
+		NumberFormat numberFormat, double number, double defaultValue) {
 
 		if ((Double.isNaN(number)) || (Double.isInfinite(number))) {
-			return nf.format(defaultValue);
+			return numberFormat.format(defaultValue);
 		}
 		else {
-			return nf.format(number);
+			return numberFormat.format(number);
 		}
 	}
 
 	public static String format(
-		NumberFormat nf, float number, float defaultValue) {
+		NumberFormat numberFormat, float number, float defaultValue) {
 
 		if ((Float.isNaN(number)) || (Float.isInfinite(number))) {
-			return nf.format(defaultValue);
+			return numberFormat.format(defaultValue);
 		}
 		else {
-			return nf.format(number);
+			return numberFormat.format(number);
 		}
 	}
 

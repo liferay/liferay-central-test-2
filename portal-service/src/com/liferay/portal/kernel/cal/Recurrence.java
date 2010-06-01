@@ -64,27 +64,27 @@ public class Recurrence implements Serializable {
 	/**
 	 * Field DAILY
 	 */
-	public final static int DAILY = 3;
+	public static final int DAILY = 3;
 
 	/**
 	 * Field WEEKLY
 	 */
-	public final static int WEEKLY = 4;
+	public static final int WEEKLY = 4;
 
 	/**
 	 * Field MONTHLY
 	 */
-	public final static int MONTHLY = 5;
+	public static final int MONTHLY = 5;
 
 	/**
 	 * Field YEARLY
 	 */
-	public final static int YEARLY = 6;
+	public static final int YEARLY = 6;
 
 	/**
 	 * Field NO_RECURRENCE
 	 */
-	public final static int NO_RECURRENCE = 7;
+	public static final int NO_RECURRENCE = 7;
 
 	/**
 	 * Field dtStart

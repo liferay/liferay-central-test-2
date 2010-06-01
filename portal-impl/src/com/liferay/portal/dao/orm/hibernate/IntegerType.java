@@ -33,9 +33,9 @@ import org.hibernate.usertype.UserType;
  */
 public class IntegerType implements Serializable, UserType {
 
-	public final static int DEFAULT_VALUE = 0;
+	public static final int DEFAULT_VALUE = 0;
 
-	public final static int[] SQL_TYPES = new int[] {Types.INTEGER};
+	public static final int[] SQL_TYPES = new int[] {Types.INTEGER};
 
 	public Object assemble(Serializable cached, Object owner) {
 		return cached;

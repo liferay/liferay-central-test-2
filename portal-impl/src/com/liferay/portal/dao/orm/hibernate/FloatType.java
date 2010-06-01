@@ -32,9 +32,9 @@ import org.hibernate.usertype.UserType;
  */
 public class FloatType implements Serializable, UserType {
 
-	public final static float DEFAULT_VALUE = 0.0F;
+	public static final float DEFAULT_VALUE = 0.0F;
 
-	public final static int[] SQL_TYPES = new int[] {Types.FLOAT};
+	public static final int[] SQL_TYPES = new int[] {Types.FLOAT};
 
 	public Object assemble(Serializable cached, Object owner) {
 		return cached;

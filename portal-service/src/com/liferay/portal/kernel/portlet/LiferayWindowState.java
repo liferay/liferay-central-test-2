@@ -28,9 +28,9 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class LiferayWindowState extends WindowState {
 
-	public final static WindowState EXCLUSIVE = new WindowState("exclusive");
+	public static final WindowState EXCLUSIVE = new WindowState("exclusive");
 
-	public final static WindowState POP_UP = new WindowState("pop_up");
+	public static final WindowState POP_UP = new WindowState("pop_up");
 
 	public static boolean isExclusive(HttpServletRequest request) {
 		String state = _getWindowState(request);

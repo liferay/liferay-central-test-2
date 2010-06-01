@@ -26,17 +26,17 @@ import java.util.Calendar;
  */
 public class CronText {
 
-	public final static int DAILY_FREQUENCY = 3;
+	public static final int DAILY_FREQUENCY = 3;
 
-	public final static int MINUTELY_FREQUENCY = 2;
+	public static final int MINUTELY_FREQUENCY = 2;
 
-	public final static int MONTHLY_FREQUENCY = 4;
+	public static final int MONTHLY_FREQUENCY = 4;
 
-	public final static int NO_FREQUENCY = 1;
+	public static final int NO_FREQUENCY = 1;
 
-	public final static int WEEKLY_FREQUENCY = 5;
+	public static final int WEEKLY_FREQUENCY = 5;
 
-	public final static int YEARLY_FREQUENCY = 6;
+	public static final int YEARLY_FREQUENCY = 6;
 
 	public CronText(Calendar startDate) {
 		this(startDate, CronText.NO_FREQUENCY, 0);

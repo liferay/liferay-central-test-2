@@ -32,9 +32,9 @@ import org.hibernate.usertype.UserType;
  */
 public class ShortType implements Serializable, UserType {
 
-	public final static short DEFAULT_VALUE = 0;
+	public static final short DEFAULT_VALUE = 0;
 
-	public final static int[] SQL_TYPES = new int[] {Types.SMALLINT};
+	public static final int[] SQL_TYPES = new int[] {Types.SMALLINT};
 
 	public Object assemble(Serializable cached, Object owner) {
 		return cached;

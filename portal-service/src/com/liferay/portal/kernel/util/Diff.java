@@ -26,15 +26,15 @@ import java.util.List;
  */
 public interface Diff {
 
-	public final String OPEN_INS = "<ins>";
+	public static final String OPEN_INS = "<ins>";
 
-	public final String CLOSE_INS = "</ins>";
+	public static final String CLOSE_INS = "</ins>";
 
-	public final String OPEN_DEL = "<del>";
+	public static final String OPEN_DEL = "<del>";
 
-	public final String CLOSE_DEL = "</del>";
+	public static final String CLOSE_DEL = "</del>";
 
-	public final String CONTEXT_LINE = "#context#line#";
+	public static final String CONTEXT_LINE = "#context#line#";
 
 	public List<DiffResult>[] diff(Reader source, Reader target);
 

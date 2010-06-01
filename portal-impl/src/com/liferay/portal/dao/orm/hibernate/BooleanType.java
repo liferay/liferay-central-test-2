@@ -32,9 +32,9 @@ import org.hibernate.usertype.UserType;
  */
 public class BooleanType implements Serializable, UserType {
 
-	public final static boolean DEFAULT_VALUE = false;
+	public static final boolean DEFAULT_VALUE = false;
 
-	public final static int[] SQL_TYPES = new int[] {Types.BIT};
+	public static final int[] SQL_TYPES = new int[] {Types.BIT};
 
 	public Object assemble(Serializable cached, Object owner) {
 		return cached;

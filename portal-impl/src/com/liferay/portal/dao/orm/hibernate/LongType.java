@@ -34,9 +34,9 @@ import org.hibernate.usertype.UserType;
  */
 public class LongType implements Serializable, UserType {
 
-	public final static long DEFAULT_VALUE = 0;
+	public static final long DEFAULT_VALUE = 0;
 
-	public final static int[] SQL_TYPES = new int[] {Types.BIGINT};
+	public static final int[] SQL_TYPES = new int[] {Types.BIGINT};
 
 	public Object assemble(Serializable cached, Object owner) {
 		return cached;

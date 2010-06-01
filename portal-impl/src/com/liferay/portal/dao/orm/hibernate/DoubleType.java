@@ -32,9 +32,9 @@ import org.hibernate.usertype.UserType;
  */
 public class DoubleType implements Serializable, UserType {
 
-	public final static double DEFAULT_VALUE = 0.0;
+	public static final double DEFAULT_VALUE = 0.0;
 
-	public final static int[] SQL_TYPES = new int[] {Types.DOUBLE};
+	public static final int[] SQL_TYPES = new int[] {Types.DOUBLE};
 
 	public Object assemble(Serializable cached, Object owner) {
 		return cached;
