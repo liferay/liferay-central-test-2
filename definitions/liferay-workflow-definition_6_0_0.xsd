@@ -215,9 +215,9 @@
 	</xs:group>
 	<xs:group name="recipients-group">
 		<xs:choice>
-			<xs:element name="address" type="xs:string" />
-			<xs:element ref="role" />
-			<xs:element ref="user" />
+			<xs:element name="address" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element ref="role" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element ref="user" minOccurs="0" maxOccurs="unbounded" />
 		</xs:choice>
 	</xs:group>
 </xs:schema>
