@@ -719,7 +719,6 @@
 		<filter-name>Minifier Filter - JSP</filter-name>
 		<url-pattern>*.jsp</url-pattern>
 	</filter-mapping>
-
 	<filter-mapping>
 		<filter-name>Monitoring Filter</filter-name>
 		<url-pattern>/c/*</url-pattern>
