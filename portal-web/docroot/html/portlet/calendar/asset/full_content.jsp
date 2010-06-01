@@ -21,14 +21,14 @@ CalEvent event = (CalEvent)request.getAttribute(WebKeys.CALENDAR_EVENT);
 %>
 
 <div class="custom-attributes">
-<liferay-ui:custom-attributes-available className="<%= CalEvent.class.getName() %>">
-	<liferay-ui:custom-attribute-list
-		className="<%= CalEvent.class.getName() %>"
-		classPK="<%= (event != null) ? event.getEventId() : 0 %>"
-		editable="<%= false %>"
-		label="<%= true %>"
-	/>
-</liferay-ui:custom-attributes-available>
+	<liferay-ui:custom-attributes-available className="<%= CalEvent.class.getName() %>">
+		<liferay-ui:custom-attribute-list
+			className="<%= CalEvent.class.getName() %>"
+			classPK="<%= (event != null) ? event.getEventId() : 0 %>"
+			editable="<%= false %>"
+			label="<%= true %>"
+		/>
+	</liferay-ui:custom-attributes-available>
 </div>
 
 <%= event.getDescription() %><br />

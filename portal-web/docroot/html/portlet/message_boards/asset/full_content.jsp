@@ -28,11 +28,11 @@ body = StringUtil.replace(body, "@theme_images_path@/emoticons", themeDisplay.ge
 
 <div class="custom-attributes">
 	<liferay-ui:custom-attributes-available className="<%= MBMessage.class.getName() %>">
-			<liferay-ui:custom-attribute-list
-				className="<%= MBMessage.class.getName() %>"
-				classPK="<%= (message != null) ? message.getMessageId() : 0 %>"
-				editable="<%= false %>"
-				label="<%= true %>"
-			/>
+		<liferay-ui:custom-attribute-list
+			className="<%= MBMessage.class.getName() %>"
+			classPK="<%= (message != null) ? message.getMessageId() : 0 %>"
+			editable="<%= false %>"
+			label="<%= true %>"
+		/>
 	</liferay-ui:custom-attributes-available>
 </div>
