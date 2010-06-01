@@ -25,11 +25,11 @@ import org.aopalliance.intercept.MethodInvocation;
 public abstract class ChainableAroundMethodAdvice implements MethodInterceptor {
 
 	public abstract void afterReturning(
-			MethodInvocation MethodInvocation, Object result)
+			MethodInvocation methodInvocation, Object result)
 		throws Throwable;
 
 	public abstract void afterThrowing(
-			MethodInvocation MethodInvocation, Throwable throwable)
+			MethodInvocation methodInvocation, Throwable throwable)
 		throws Throwable;
 
 	public abstract Object before(MethodInvocation methodInvocation)
