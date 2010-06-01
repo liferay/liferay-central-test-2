@@ -20,6 +20,7 @@ import com.liferay.portal.RequiredRoleException;
 import com.liferay.portal.RoleNameException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
+import com.liferay.portal.kernel.cache.ThreadLocalCachable;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Indexer;
@@ -362,6 +363,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	 *
 	 * @return true if the user has the regular role
 	 */
+	@ThreadLocalCachable
 	public boolean hasUserRole(
 			long userId, long companyId, String name, boolean inherited)
 		throws PortalException, SystemException {
