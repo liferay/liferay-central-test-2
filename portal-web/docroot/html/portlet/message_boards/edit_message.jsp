@@ -209,7 +209,7 @@ if (Validator.isNull(redirect)) {
 								<%= existingName %>
 							</span>
 
-							<aui:input label="" name='<%= "msgFile" + (i + 1) %>' size="70" style="display: none;" type="file" />
+							<aui:input cssClass="aui-helper-hidden" label="" name='<%= "msgFile" + (i + 1) %>' size="70" type="file" />
 						</td>
 						<td>
 							<img id="<portlet:namespace />removeExisting<%= i + 1 %>" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_x.png" />
@@ -432,7 +432,7 @@ if (Validator.isNull(redirect)) {
 				function(event) {
 					var button = event.target;
 					var span = A.one("#<portlet:namespace />existingFile" + <%= i %>);
-					var file = A.one("#<portlet:namespace />msgFile" + <%= i %>);
+					var file = A.one("#<portlet:namespace />msgFile" + <%= i %>).ancestor('.aui-field');
 
 					if (button) {
 						button.remove();
@@ -442,7 +442,7 @@ if (Validator.isNull(redirect)) {
 						span.remove();
 					}
 
-					if (files) {
+					if (file) {
 						file.show();
 					}
 				}
