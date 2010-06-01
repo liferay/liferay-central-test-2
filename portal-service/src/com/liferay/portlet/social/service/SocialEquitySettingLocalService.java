@@ -111,4 +111,10 @@ public interface SocialEquitySettingLocalService {
 	public java.util.List<com.liferay.portlet.social.model.SocialEquitySetting> getEquitySettings(
 		long groupId, long classNameId, java.lang.String actionId)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void updateSocialEquitySettings(java.lang.String model,
+		long groupId, long classNameId,
+		java.util.List<com.liferay.portlet.social.model.SocialEquityActionMapping> mappings)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

@@ -840,6 +840,10 @@ public class PortalUtil {
 		return getPortal().getSocialEquityActionMappings(name);
 	}
 
+	public static String[] getSocialEquityModels() {
+		return getPortal().getSocialEquityModels();
+	}
+
 	public static String getStaticResourceURL(
 		HttpServletRequest request, String uri) {
 

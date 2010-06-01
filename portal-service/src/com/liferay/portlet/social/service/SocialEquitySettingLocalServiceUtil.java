@@ -127,6 +127,15 @@ public class SocialEquitySettingLocalServiceUtil {
 		return getService().getEquitySettings(groupId, classNameId, actionId);
 	}
 
+	public static void updateSocialEquitySettings(java.lang.String model,
+		long groupId, long classNameId,
+		java.util.List<com.liferay.portlet.social.model.SocialEquityActionMapping> mappings)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.updateSocialEquitySettings(model, groupId, classNameId, mappings);
+	}
+
 	public static SocialEquitySettingLocalService getService() {
 		if (_service == null) {
 			_service = (SocialEquitySettingLocalService)PortalBeanLocatorUtil.locate(SocialEquitySettingLocalService.class.getName());

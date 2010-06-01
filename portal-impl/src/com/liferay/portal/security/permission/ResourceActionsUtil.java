@@ -388,6 +388,10 @@ public class ResourceActionsUtil {
 		return roles;
 	}
 
+	public static String[] getSocialEquityModels() {
+		return _instance._getSocialEquityModels();
+	}
+
 	public static SocialEquityActionMapping getSocialEquityActionMapping(
 		String name, String actionId) {
 
@@ -755,6 +759,11 @@ public class ResourceActionsUtil {
 		return actions;
 	}
 
+	private String[] _getSocialEquityModels() {
+		Set<String> models = _socialEquityActionMappings.keySet();
+		return models.toArray(new String[models.size()]);
+	}
+
 	private SocialEquityActionMapping _getSocialEquityActionMapping(
 		String name, String actionId) {
 
@@ -1099,6 +1108,7 @@ public class ResourceActionsUtil {
 		SocialEquityActionMapping socialEquityActionMapping =
 			new SocialEquityActionMapping();
 
+		socialEquityActionMapping.setActionKey(actionKey);
 		socialEquityActionMapping.setInformationValue(informationValue);
 		socialEquityActionMapping.setInformationLifespan(informationLifespan);
 		socialEquityActionMapping.setParticipationValue(participationValue);

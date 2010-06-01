@@ -23,6 +23,46 @@ import java.io.Serializable;
  */
 public class SocialEquityActionMapping implements Serializable {
 
+	public SocialEquityActionMapping clone() {
+
+		SocialEquityActionMapping clone = new SocialEquityActionMapping();
+
+		clone.setActionKey(_actionKey);
+		clone.setInformationLifespan(_informationLifespan);
+		clone.setInformationValue(_informationValue);
+		clone.setParticipationLifespan(_participationLifespan);
+		clone.setParticipationValue(_participationValue);
+
+		return clone;
+	}
+
+	public boolean equals(SocialEquityActionMapping mapping, int type) {
+		if (type == SocialEquitySettingConstants.TYPE_INFORMATION) {
+			if (_informationValue != mapping.getInformationValue()) {
+				return false;
+			}
+
+			if (_informationLifespan != mapping.getInformationLifespan()) {
+				return false;
+			}
+		}
+		else {
+			if (_participationValue != mapping.getParticipationValue()) {
+				return false;
+			}
+
+			if (_participationLifespan != mapping.getParticipationLifespan()) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	public String getActionKey() {
+		return _actionKey;
+	}
+
 	public int getInformationLifespan() {
 		return _informationLifespan;
 	}
@@ -37,6 +77,10 @@ public class SocialEquityActionMapping implements Serializable {
 
 	public int getParticipationValue() {
 		return _participationValue;
+	}
+
+	public void setActionKey(String actionKey) {
+		_actionKey = actionKey;
 	}
 
 	public void setInformationLifespan(int informationLifespan) {
@@ -55,6 +99,7 @@ public class SocialEquityActionMapping implements Serializable {
 		_participationValue = participationValue;
 	}
 
+	private String _actionKey;
 	private int _informationLifespan;
 	private int _informationValue;
 	private int _participationLifespan;

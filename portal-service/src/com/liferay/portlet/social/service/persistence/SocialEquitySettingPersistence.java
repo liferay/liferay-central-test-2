@@ -93,39 +93,19 @@ public interface SocialEquitySettingPersistence extends BasePersistence<SocialEq
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquitySettingException;
 
-	public java.util.List<com.liferay.portlet.social.model.SocialEquitySetting> findByG_C_A_T(
+	public com.liferay.portlet.social.model.SocialEquitySetting findByG_C_A_T(
+		long groupId, long classNameId, java.lang.String actionId, int type)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquitySettingException;
+
+	public com.liferay.portlet.social.model.SocialEquitySetting fetchByG_C_A_T(
 		long groupId, long classNameId, java.lang.String actionId, int type)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.social.model.SocialEquitySetting> findByG_C_A_T(
+	public com.liferay.portlet.social.model.SocialEquitySetting fetchByG_C_A_T(
 		long groupId, long classNameId, java.lang.String actionId, int type,
-		int start, int end)
+		boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public java.util.List<com.liferay.portlet.social.model.SocialEquitySetting> findByG_C_A_T(
-		long groupId, long classNameId, java.lang.String actionId, int type,
-		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public com.liferay.portlet.social.model.SocialEquitySetting findByG_C_A_T_First(
-		long groupId, long classNameId, java.lang.String actionId, int type,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.social.NoSuchEquitySettingException;
-
-	public com.liferay.portlet.social.model.SocialEquitySetting findByG_C_A_T_Last(
-		long groupId, long classNameId, java.lang.String actionId, int type,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.social.NoSuchEquitySettingException;
-
-	public com.liferay.portlet.social.model.SocialEquitySetting[] findByG_C_A_T_PrevAndNext(
-		long equitySettingId, long groupId, long classNameId,
-		java.lang.String actionId, int type,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.social.NoSuchEquitySettingException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialEquitySetting> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -145,7 +125,8 @@ public interface SocialEquitySettingPersistence extends BasePersistence<SocialEq
 
 	public void removeByG_C_A_T(long groupId, long classNameId,
 		java.lang.String actionId, int type)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquitySettingException;
 
 	public void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException;

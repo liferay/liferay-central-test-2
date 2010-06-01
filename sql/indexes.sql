@@ -534,7 +534,7 @@ create index IX_E8DA181D on SocialEquityLog (assetEntryId, type_, active_);
 create index IX_60CD2F21 on SocialEquityLog (userId, assetEntryId, actionId, active_);
 
 create index IX_F3AAD60D on SocialEquitySetting (groupId, classNameId, actionId);
-create index IX_903C1B28 on SocialEquitySetting (groupId, classNameId, actionId, type_);
+create unique index IX_903C1B28 on SocialEquitySetting (groupId, classNameId, actionId, type_);
 
 create unique index IX_D65D3521 on SocialEquityUser (groupId, userId);
 

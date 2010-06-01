@@ -188,61 +188,28 @@ public class SocialEquitySettingUtil {
 			classNameId, actionId, orderByComparator);
 	}
 
-	public static java.util.List<com.liferay.portlet.social.model.SocialEquitySetting> findByG_C_A_T(
+	public static com.liferay.portlet.social.model.SocialEquitySetting findByG_C_A_T(
 		long groupId, long classNameId, java.lang.String actionId, int type)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquitySettingException {
 		return getPersistence()
 				   .findByG_C_A_T(groupId, classNameId, actionId, type);
 	}
 
-	public static java.util.List<com.liferay.portlet.social.model.SocialEquitySetting> findByG_C_A_T(
-		long groupId, long classNameId, java.lang.String actionId, int type,
-		int start, int end)
+	public static com.liferay.portlet.social.model.SocialEquitySetting fetchByG_C_A_T(
+		long groupId, long classNameId, java.lang.String actionId, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByG_C_A_T(groupId, classNameId, actionId, type, start,
-			end);
+				   .fetchByG_C_A_T(groupId, classNameId, actionId, type);
 	}
 
-	public static java.util.List<com.liferay.portlet.social.model.SocialEquitySetting> findByG_C_A_T(
+	public static com.liferay.portlet.social.model.SocialEquitySetting fetchByG_C_A_T(
 		long groupId, long classNameId, java.lang.String actionId, int type,
-		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByG_C_A_T(groupId, classNameId, actionId, type, start,
-			end, orderByComparator);
-	}
-
-	public static com.liferay.portlet.social.model.SocialEquitySetting findByG_C_A_T_First(
-		long groupId, long classNameId, java.lang.String actionId, int type,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.social.NoSuchEquitySettingException {
-		return getPersistence()
-				   .findByG_C_A_T_First(groupId, classNameId, actionId, type,
-			orderByComparator);
-	}
-
-	public static com.liferay.portlet.social.model.SocialEquitySetting findByG_C_A_T_Last(
-		long groupId, long classNameId, java.lang.String actionId, int type,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.social.NoSuchEquitySettingException {
-		return getPersistence()
-				   .findByG_C_A_T_Last(groupId, classNameId, actionId, type,
-			orderByComparator);
-	}
-
-	public static com.liferay.portlet.social.model.SocialEquitySetting[] findByG_C_A_T_PrevAndNext(
-		long equitySettingId, long groupId, long classNameId,
-		java.lang.String actionId, int type,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.social.NoSuchEquitySettingException {
-		return getPersistence()
-				   .findByG_C_A_T_PrevAndNext(equitySettingId, groupId,
-			classNameId, actionId, type, orderByComparator);
+				   .fetchByG_C_A_T(groupId, classNameId, actionId, type,
+			retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialEquitySetting> findAll()
@@ -271,7 +238,8 @@ public class SocialEquitySettingUtil {
 
 	public static void removeByG_C_A_T(long groupId, long classNameId,
 		java.lang.String actionId, int type)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquitySettingException {
 		getPersistence().removeByG_C_A_T(groupId, classNameId, actionId, type);
 	}
 

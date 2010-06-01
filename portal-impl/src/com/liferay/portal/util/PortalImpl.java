@@ -2735,6 +2735,10 @@ public class PortalImpl implements Portal {
 		return ResourceActionsUtil.getSocialEquityActionMappings(name);
 	}
 
+	public String[] getSocialEquityModels() {
+		return ResourceActionsUtil.getSocialEquityModels();
+	}
+
 	public String getStaticResourceURL(
 		HttpServletRequest request, String uri) {
 

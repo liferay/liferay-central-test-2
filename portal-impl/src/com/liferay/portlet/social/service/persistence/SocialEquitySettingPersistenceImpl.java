@@ -32,8 +32,10 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
+import com.liferay.portal.service.persistence.GroupPersistence;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -84,15 +86,12 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 				Long.class.getName(), Long.class.getName(),
 				String.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_FIND_BY_G_C_A_T = new FinderPath(SocialEquitySettingModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FETCH_BY_G_C_A_T = new FinderPath(SocialEquitySettingModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquitySettingModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByG_C_A_T",
+			FINDER_CLASS_NAME_ENTITY, "fetchByG_C_A_T",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
-				String.class.getName(), Integer.class.getName(),
-				
-			"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
+				String.class.getName(), Integer.class.getName()
 			});
 	public static final FinderPath FINDER_PATH_COUNT_BY_G_C_A_T = new FinderPath(SocialEquitySettingModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquitySettingModelImpl.FINDER_CACHE_ENABLED,
@@ -112,6 +111,15 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		EntityCacheUtil.putResult(SocialEquitySettingModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquitySettingImpl.class, socialEquitySetting.getPrimaryKey(),
 			socialEquitySetting);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_A_T,
+			new Object[] {
+				new Long(socialEquitySetting.getGroupId()),
+				new Long(socialEquitySetting.getClassNameId()),
+				
+			socialEquitySetting.getActionId(),
+				new Integer(socialEquitySetting.getType())
+			}, socialEquitySetting);
 	}
 
 	public void cacheResult(List<SocialEquitySetting> socialEquitySettings) {
@@ -135,6 +143,15 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 	public void clearCache(SocialEquitySetting socialEquitySetting) {
 		EntityCacheUtil.removeResult(SocialEquitySettingModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquitySettingImpl.class, socialEquitySetting.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_A_T,
+			new Object[] {
+				new Long(socialEquitySetting.getGroupId()),
+				new Long(socialEquitySetting.getClassNameId()),
+				
+			socialEquitySetting.getActionId(),
+				new Integer(socialEquitySetting.getType())
+			});
 	}
 
 	public SocialEquitySetting create(long equitySettingId) {
@@ -231,6 +248,17 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		SocialEquitySettingModelImpl socialEquitySettingModelImpl = (SocialEquitySettingModelImpl)socialEquitySetting;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_A_T,
+			new Object[] {
+				new Long(socialEquitySettingModelImpl.getOriginalGroupId()),
+				new Long(socialEquitySettingModelImpl.getOriginalClassNameId()),
+				
+			socialEquitySettingModelImpl.getOriginalActionId(),
+				new Integer(socialEquitySettingModelImpl.getOriginalType())
+			});
+
 		EntityCacheUtil.removeResult(SocialEquitySettingModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquitySettingImpl.class, socialEquitySetting.getPrimaryKey());
 
@@ -241,6 +269,10 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		com.liferay.portlet.social.model.SocialEquitySetting socialEquitySetting,
 		boolean merge) throws SystemException {
 		socialEquitySetting = toUnwrappedModel(socialEquitySetting);
+
+		boolean isNew = socialEquitySetting.isNew();
+
+		SocialEquitySettingModelImpl socialEquitySettingModelImpl = (SocialEquitySettingModelImpl)socialEquitySetting;
 
 		Session session = null;
 
@@ -263,6 +295,38 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		EntityCacheUtil.putResult(SocialEquitySettingModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquitySettingImpl.class, socialEquitySetting.getPrimaryKey(),
 			socialEquitySetting);
+
+		if (!isNew &&
+				((socialEquitySetting.getGroupId() != socialEquitySettingModelImpl.getOriginalGroupId()) ||
+				(socialEquitySetting.getClassNameId() != socialEquitySettingModelImpl.getOriginalClassNameId()) ||
+				!Validator.equals(socialEquitySetting.getActionId(),
+					socialEquitySettingModelImpl.getOriginalActionId()) ||
+				(socialEquitySetting.getType() != socialEquitySettingModelImpl.getOriginalType()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_A_T,
+				new Object[] {
+					new Long(socialEquitySettingModelImpl.getOriginalGroupId()),
+					new Long(socialEquitySettingModelImpl.getOriginalClassNameId()),
+					
+				socialEquitySettingModelImpl.getOriginalActionId(),
+					new Integer(socialEquitySettingModelImpl.getOriginalType())
+				});
+		}
+
+		if (isNew ||
+				((socialEquitySetting.getGroupId() != socialEquitySettingModelImpl.getOriginalGroupId()) ||
+				(socialEquitySetting.getClassNameId() != socialEquitySettingModelImpl.getOriginalClassNameId()) ||
+				!Validator.equals(socialEquitySetting.getActionId(),
+					socialEquitySettingModelImpl.getOriginalActionId()) ||
+				(socialEquitySetting.getType() != socialEquitySettingModelImpl.getOriginalType()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_A_T,
+				new Object[] {
+					new Long(socialEquitySetting.getGroupId()),
+					new Long(socialEquitySetting.getClassNameId()),
+					
+				socialEquitySetting.getActionId(),
+					new Integer(socialEquitySetting.getType())
+				}, socialEquitySetting);
+		}
 
 		return socialEquitySetting;
 	}
@@ -660,49 +724,69 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		}
 	}
 
-	public List<SocialEquitySetting> findByG_C_A_T(long groupId,
-		long classNameId, String actionId, int type) throws SystemException {
-		return findByG_C_A_T(groupId, classNameId, actionId, type,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public SocialEquitySetting findByG_C_A_T(long groupId, long classNameId,
+		String actionId, int type)
+		throws NoSuchEquitySettingException, SystemException {
+		SocialEquitySetting socialEquitySetting = fetchByG_C_A_T(groupId,
+				classNameId, actionId, type);
+
+		if (socialEquitySetting == null) {
+			StringBundler msg = new StringBundler(10);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(", classNameId=");
+			msg.append(classNameId);
+
+			msg.append(", actionId=");
+			msg.append(actionId);
+
+			msg.append(", type=");
+			msg.append(type);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchEquitySettingException(msg.toString());
+		}
+
+		return socialEquitySetting;
 	}
 
-	public List<SocialEquitySetting> findByG_C_A_T(long groupId,
-		long classNameId, String actionId, int type, int start, int end)
+	public SocialEquitySetting fetchByG_C_A_T(long groupId, long classNameId,
+		String actionId, int type) throws SystemException {
+		return fetchByG_C_A_T(groupId, classNameId, actionId, type, true);
+	}
+
+	public SocialEquitySetting fetchByG_C_A_T(long groupId, long classNameId,
+		String actionId, int type, boolean retrieveFromCache)
 		throws SystemException {
-		return findByG_C_A_T(groupId, classNameId, actionId, type, start, end,
-			null);
-	}
-
-	public List<SocialEquitySetting> findByG_C_A_T(long groupId,
-		long classNameId, String actionId, int type, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(classNameId),
 				
-				actionId, new Integer(type),
-				
-				String.valueOf(start), String.valueOf(end),
-				String.valueOf(orderByComparator)
+				actionId, new Integer(type)
 			};
 
-		List<SocialEquitySetting> list = (List<SocialEquitySetting>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_C_A_T,
-				finderArgs, this);
+		Object result = null;
 
-		if (list == null) {
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_C_A_T,
+					finderArgs, this);
+		}
+
+		if (result == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(6 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(5);
-				}
+				StringBundler query = new StringBundler(5);
 
 				query.append(_SQL_SELECT_SOCIALEQUITYSETTING_WHERE);
 
@@ -724,11 +808,6 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 
 				query.append(_FINDER_COLUMN_G_C_A_T_TYPE_2);
 
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
 				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
@@ -745,252 +824,52 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 
 				qPos.add(type);
 
-				list = (List<SocialEquitySetting>)QueryUtil.list(q,
-						getDialect(), start, end);
+				List<SocialEquitySetting> list = q.list();
+
+				result = list;
+
+				SocialEquitySetting socialEquitySetting = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_A_T,
+						finderArgs, list);
+				}
+				else {
+					socialEquitySetting = list.get(0);
+
+					cacheResult(socialEquitySetting);
+
+					if ((socialEquitySetting.getGroupId() != groupId) ||
+							(socialEquitySetting.getClassNameId() != classNameId) ||
+							(socialEquitySetting.getActionId() == null) ||
+							!socialEquitySetting.getActionId().equals(actionId) ||
+							(socialEquitySetting.getType() != type)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_A_T,
+							finderArgs, socialEquitySetting);
+					}
+				}
+
+				return socialEquitySetting;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
-				if (list == null) {
-					list = new ArrayList<SocialEquitySetting>();
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_A_T,
+						finderArgs, new ArrayList<SocialEquitySetting>());
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C_A_T,
-					finderArgs, list);
 
 				closeSession(session);
 			}
 		}
-
-		return list;
-	}
-
-	public SocialEquitySetting findByG_C_A_T_First(long groupId,
-		long classNameId, String actionId, int type,
-		OrderByComparator orderByComparator)
-		throws NoSuchEquitySettingException, SystemException {
-		List<SocialEquitySetting> list = findByG_C_A_T(groupId, classNameId,
-				actionId, type, 0, 1, orderByComparator);
-
-		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(10);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("groupId=");
-			msg.append(groupId);
-
-			msg.append(", classNameId=");
-			msg.append(classNameId);
-
-			msg.append(", actionId=");
-			msg.append(actionId);
-
-			msg.append(", type=");
-			msg.append(type);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchEquitySettingException(msg.toString());
-		}
 		else {
-			return list.get(0);
-		}
-	}
-
-	public SocialEquitySetting findByG_C_A_T_Last(long groupId,
-		long classNameId, String actionId, int type,
-		OrderByComparator orderByComparator)
-		throws NoSuchEquitySettingException, SystemException {
-		int count = countByG_C_A_T(groupId, classNameId, actionId, type);
-
-		List<SocialEquitySetting> list = findByG_C_A_T(groupId, classNameId,
-				actionId, type, count - 1, count, orderByComparator);
-
-		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(10);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("groupId=");
-			msg.append(groupId);
-
-			msg.append(", classNameId=");
-			msg.append(classNameId);
-
-			msg.append(", actionId=");
-			msg.append(actionId);
-
-			msg.append(", type=");
-			msg.append(type);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchEquitySettingException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public SocialEquitySetting[] findByG_C_A_T_PrevAndNext(
-		long equitySettingId, long groupId, long classNameId, String actionId,
-		int type, OrderByComparator orderByComparator)
-		throws NoSuchEquitySettingException, SystemException {
-		SocialEquitySetting socialEquitySetting = findByPrimaryKey(equitySettingId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			SocialEquitySetting[] array = new SocialEquitySettingImpl[3];
-
-			array[0] = getByG_C_A_T_PrevAndNext(session, socialEquitySetting,
-					groupId, classNameId, actionId, type, orderByComparator,
-					true);
-
-			array[1] = socialEquitySetting;
-
-			array[2] = getByG_C_A_T_PrevAndNext(session, socialEquitySetting,
-					groupId, classNameId, actionId, type, orderByComparator,
-					false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected SocialEquitySetting getByG_C_A_T_PrevAndNext(Session session,
-		SocialEquitySetting socialEquitySetting, long groupId,
-		long classNameId, String actionId, int type,
-		OrderByComparator orderByComparator, boolean previous) {
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(6 +
-					(orderByComparator.getOrderByFields().length * 6));
-		}
-		else {
-			query = new StringBundler(3);
-		}
-
-		query.append(_SQL_SELECT_SOCIALEQUITYSETTING_WHERE);
-
-		query.append(_FINDER_COLUMN_G_C_A_T_GROUPID_2);
-
-		query.append(_FINDER_COLUMN_G_C_A_T_CLASSNAMEID_2);
-
-		if (actionId == null) {
-			query.append(_FINDER_COLUMN_G_C_A_T_ACTIONID_1);
-		}
-		else {
-			if (actionId.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_G_C_A_T_ACTIONID_3);
+			if (result instanceof List<?>) {
+				return null;
 			}
 			else {
-				query.append(_FINDER_COLUMN_G_C_A_T_ACTIONID_2);
+				return (SocialEquitySetting)result;
 			}
-		}
-
-		query.append(_FINDER_COLUMN_G_C_A_T_TYPE_2);
-
-		if (orderByComparator != null) {
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			if (orderByFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(groupId);
-
-		qPos.add(classNameId);
-
-		if (actionId != null) {
-			qPos.add(actionId);
-		}
-
-		qPos.add(type);
-
-		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByValues(socialEquitySetting);
-
-			for (Object value : values) {
-				qPos.add(value);
-			}
-		}
-
-		List<SocialEquitySetting> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
 		}
 	}
 
@@ -1077,11 +956,12 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 	}
 
 	public void removeByG_C_A_T(long groupId, long classNameId,
-		String actionId, int type) throws SystemException {
-		for (SocialEquitySetting socialEquitySetting : findByG_C_A_T(groupId,
-				classNameId, actionId, type)) {
-			remove(socialEquitySetting);
-		}
+		String actionId, int type)
+		throws NoSuchEquitySettingException, SystemException {
+		SocialEquitySetting socialEquitySetting = findByG_C_A_T(groupId,
+				classNameId, actionId, type);
+
+		remove(socialEquitySetting);
 	}
 
 	public void removeAll() throws SystemException {
@@ -1308,6 +1188,8 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 	protected SocialRelationPersistence socialRelationPersistence;
 	@BeanReference(type = SocialRequestPersistence.class)
 	protected SocialRequestPersistence socialRequestPersistence;
+	@BeanReference(type = GroupPersistence.class)
+	protected GroupPersistence groupPersistence;
 	@BeanReference(type = ResourcePersistence.class)
 	protected ResourcePersistence resourcePersistence;
 	@BeanReference(type = UserPersistence.class)

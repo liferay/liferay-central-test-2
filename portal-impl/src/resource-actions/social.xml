@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<resource-action-mapping>
+	<portlet-resource>
+		<portlet-name>155</portlet-name>
+		<permissions>
+			<supports>
+				<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+			</supports>
+			<community-defaults/>
+			<guest-defaults/>
+			<guest-unsupported>
+				<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+			</guest-unsupported>
+		</permissions>
+	</portlet-resource>
+</resource-action-mapping>

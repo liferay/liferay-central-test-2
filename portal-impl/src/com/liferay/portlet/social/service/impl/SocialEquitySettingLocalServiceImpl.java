@@ -16,12 +16,15 @@ package com.liferay.portlet.social.service.impl;
 
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.social.NoSuchEquitySettingException;
 import com.liferay.portlet.social.model.SocialEquityActionMapping;
 import com.liferay.portlet.social.model.SocialEquitySetting;
 import com.liferay.portlet.social.model.SocialEquitySettingConstants;
@@ -122,6 +125,16 @@ public class SocialEquitySettingLocalServiceImpl
 		return equitySettings;
 	}
 
+	public void updateSocialEquitySettings(
+			String model, long groupId, long classNameId,
+			List<SocialEquityActionMapping> mappings)
+		throws PortalException, SystemException {
+
+		for (SocialEquityActionMapping mapping : mappings) {
+			updateSocialEquitySettings(model, groupId, classNameId, mapping);
+		}
+	}
+
 	protected String encodeKey(long classNameId, String actionId) {
 		StringBundler sb = new StringBundler(5);
 
@@ -132,6 +145,34 @@ public class SocialEquitySettingLocalServiceImpl
 		sb.append(actionId);
 
 		return sb.toString();
+	}
+
+	protected SocialEquitySetting findOrCreateSocialEquitySetting(
+			long groupId, long classNameId, String actionId, int type)
+		throws PortalException, SystemException {
+
+		SocialEquitySetting setting = null;
+
+		try {
+			setting = socialEquitySettingPersistence.findByG_C_A_T(
+				groupId, classNameId, actionId, type);
+		}
+		catch (NoSuchEquitySettingException nsqse) {
+			long equitySettingId = counterLocalService.increment();
+
+			Group group = groupLocalService.getGroup(groupId);
+
+			setting = socialEquitySettingPersistence.create(
+				equitySettingId);
+
+			setting.setActionId(actionId);
+			setting.setClassNameId(classNameId);
+			setting.setCompanyId(group.getCompanyId());
+			setting.setGroupId(groupId);
+			setting.setType(type);
+		}
+
+		return setting;
 	}
 
 	protected SocialEquitySetting getInformationEquitySetting(
@@ -159,6 +200,56 @@ public class SocialEquitySettingLocalServiceImpl
 			equityActionMapping.getParticipationLifespan());
 
 		return equitySetting;
+	}
+
+	protected void updateSocialEquitySettings(
+			String model, long groupId, long classNameId,
+			SocialEquityActionMapping mapping)
+		throws PortalException, SystemException {
+
+		SocialEquityActionMapping defaultMapping =
+			PortalUtil.getSocialEquityActionMapping(
+				model, mapping.getActionKey());
+
+		if (mapping.getInformationValue() > 0 &&
+			!mapping.equals(
+				defaultMapping,
+				SocialEquitySettingConstants.TYPE_INFORMATION)) {
+
+			SocialEquitySetting setting = findOrCreateSocialEquitySetting(
+				groupId, classNameId, mapping.getActionKey(),
+				SocialEquitySettingConstants.TYPE_INFORMATION);
+
+			if (mapping.getInformationValue() != setting.getValue() ||
+				mapping.getInformationLifespan() != setting.getValidity()) {
+
+				setting.setValue(mapping.getInformationValue());
+				setting.setValidity(mapping.getInformationLifespan());
+
+				socialEquitySettingPersistence.update(setting, false);
+			}
+		}
+
+		if (mapping.getParticipationValue() > 0 &&
+			!mapping.equals(
+				defaultMapping,
+				SocialEquitySettingConstants.TYPE_PARTICIPATION)) {
+
+			SocialEquitySetting setting = findOrCreateSocialEquitySetting(
+					groupId, classNameId, mapping.getActionKey(),
+					SocialEquitySettingConstants.TYPE_PARTICIPATION);
+
+			if (mapping.getParticipationValue() != setting.getValue() ||
+				mapping.getParticipationLifespan() != setting.getValidity()) {
+
+				setting.setValue(mapping.getParticipationValue());
+				setting.setValidity(mapping.getParticipationLifespan());
+
+				socialEquitySettingPersistence.update(setting, false);
+			}
+		}
+
+		_portalCache.remove(encodeKey(classNameId, mapping.getActionKey()));
 	}
 
 	private static PortalCache _portalCache = MultiVMPoolUtil.getCache(

@@ -23,10 +23,14 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.service.GroupLocalService;
+import com.liferay.portal.service.GroupService;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
+import com.liferay.portal.service.persistence.GroupFinder;
+import com.liferay.portal.service.persistence.GroupPersistence;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
@@ -299,6 +303,38 @@ public abstract class SocialEquitySettingLocalServiceBaseImpl
 		this.counterLocalService = counterLocalService;
 	}
 
+	public GroupLocalService getGroupLocalService() {
+		return groupLocalService;
+	}
+
+	public void setGroupLocalService(GroupLocalService groupLocalService) {
+		this.groupLocalService = groupLocalService;
+	}
+
+	public GroupService getGroupService() {
+		return groupService;
+	}
+
+	public void setGroupService(GroupService groupService) {
+		this.groupService = groupService;
+	}
+
+	public GroupPersistence getGroupPersistence() {
+		return groupPersistence;
+	}
+
+	public void setGroupPersistence(GroupPersistence groupPersistence) {
+		this.groupPersistence = groupPersistence;
+	}
+
+	public GroupFinder getGroupFinder() {
+		return groupFinder;
+	}
+
+	public void setGroupFinder(GroupFinder groupFinder) {
+		this.groupFinder = groupFinder;
+	}
+
 	public ResourceLocalService getResourceLocalService() {
 		return resourceLocalService;
 	}
@@ -414,6 +450,14 @@ public abstract class SocialEquitySettingLocalServiceBaseImpl
 	protected SocialRequestInterpreterLocalService socialRequestInterpreterLocalService;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	@BeanReference(type = GroupLocalService.class)
+	protected GroupLocalService groupLocalService;
+	@BeanReference(type = GroupService.class)
+	protected GroupService groupService;
+	@BeanReference(type = GroupPersistence.class)
+	protected GroupPersistence groupPersistence;
+	@BeanReference(type = GroupFinder.class)
+	protected GroupFinder groupFinder;
 	@BeanReference(type = ResourceLocalService.class)
 	protected ResourceLocalService resourceLocalService;
 	@BeanReference(type = ResourceService.class)

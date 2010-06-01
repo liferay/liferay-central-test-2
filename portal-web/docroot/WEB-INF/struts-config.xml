@@ -1591,6 +1591,13 @@
 			<forward name="portlet.requests.view" path="portlet.requests.view" />
 		</action>
 
+		<!-- Social Equity -->
+
+		<action path="/social_equity/view" forward="portlet.social_equity.view" />
+		<action path="/social_equity/view" type="com.liferay.portlet.social.action.ViewAction">
+			<forward name="portlet.social_equity.view" path="portlet.social_equity.view" />
+		</action>
+
 		<!-- Software Catalog -->
 
 		<action path="/software_catalog/edit_framework_version" type="com.liferay.portlet.softwarecatalog.action.EditFrameworkVersionAction">

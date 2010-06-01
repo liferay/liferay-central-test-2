@@ -137,6 +137,16 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 
 	public void setGroupId(long groupId) {
 		_groupId = groupId;
+
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = groupId;
+		}
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public long getCompanyId() {
@@ -161,6 +171,16 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 
 	public void setClassNameId(long classNameId) {
 		_classNameId = classNameId;
+
+		if (!_setOriginalClassNameId) {
+			_setOriginalClassNameId = true;
+
+			_originalClassNameId = classNameId;
+		}
+	}
+
+	public long getOriginalClassNameId() {
+		return _originalClassNameId;
 	}
 
 	public String getActionId() {
@@ -174,6 +194,14 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 
 	public void setActionId(String actionId) {
 		_actionId = actionId;
+
+		if (_originalActionId == null) {
+			_originalActionId = actionId;
+		}
+	}
+
+	public String getOriginalActionId() {
+		return GetterUtil.getString(_originalActionId);
 	}
 
 	public int getType() {
@@ -182,6 +210,16 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 
 	public void setType(int type) {
 		_type = type;
+
+		if (!_setOriginalType) {
+			_setOriginalType = true;
+
+			_originalType = type;
+		}
+	}
+
+	public int getOriginalType() {
+		return _originalType;
 	}
 
 	public int getValue() {
@@ -352,10 +390,17 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 
 	private long _equitySettingId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _classNameId;
+	private long _originalClassNameId;
+	private boolean _setOriginalClassNameId;
 	private String _actionId;
+	private String _originalActionId;
 	private int _type;
+	private int _originalType;
+	private boolean _setOriginalType;
 	private int _value;
 	private int _validity;
 	private transient ExpandoBridge _expandoBridge;

@@ -132,6 +132,15 @@ public class SocialEquitySettingLocalServiceWrapper
 			classNameId, actionId);
 	}
 
+	public void updateSocialEquitySettings(java.lang.String model,
+		long groupId, long classNameId,
+		java.util.List<com.liferay.portlet.social.model.SocialEquityActionMapping> mappings)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_socialEquitySettingLocalService.updateSocialEquitySettings(model,
+			groupId, classNameId, mappings);
+	}
+
 	public SocialEquitySettingLocalService getWrappedSocialEquitySettingLocalService() {
 		return _socialEquitySettingLocalService;
 	}
