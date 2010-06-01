@@ -24,6 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_AddCommentTest extends BaseTestCase {
 	public void testCA_AddComment() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -47,100 +49,13 @@ public class CA_AddCommentTest extends BaseTestCase {
 		selenium.clickAt("link=Permissions Test Folder",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("link=Permissions Test Subfolder",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=View")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=View", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Admin Permissions Test Document",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[6]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Comments", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("link=Add Comment")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Add Comment", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Be the first.", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -158,13 +73,12 @@ public class CA_AddCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_20_postReplyBody0",
-			RuntimeVariables.replace(
-				"I am a Communit Admin and I can write comments!"));
 		selenium.type("_20_postReplyBody0",
 			RuntimeVariables.replace(
 				"I am a Community Admin and I can write comments!"));
-		selenium.clickAt("_20_postReplyButton0", RuntimeVariables.replace(""));
+		selenium.keyPress("_20_postReplyBody0", RuntimeVariables.replace("\\48"));
+		selenium.keyPress("_20_postReplyBody0", RuntimeVariables.replace("\\8"));
+		selenium.clickAt("//input[@value='Reply']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

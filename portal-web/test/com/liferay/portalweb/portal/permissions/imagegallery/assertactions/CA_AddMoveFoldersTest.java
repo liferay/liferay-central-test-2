@@ -46,7 +46,8 @@ public class CA_AddMoveFoldersTest extends BaseTestCase {
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[2]/div/span/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li[1]/a",
+			RuntimeVariables.replace("Add Folder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_31_name",
 			RuntimeVariables.replace("Image Permissions Test Folder 2"));
@@ -57,7 +58,8 @@ public class CA_AddMoveFoldersTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent("Image Permissions Test Folder 2"));
 		selenium.clickAt("//tr[4]/td[1]/a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[2]/ul/li[3]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li[4]/a",
+			RuntimeVariables.replace("Add Subfolder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_31_name",
 			RuntimeVariables.replace("Image Permissions Test Subfolder 2"));

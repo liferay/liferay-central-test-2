@@ -24,6 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_EditFolderTest extends BaseTestCase {
 	public void testCA_EditFolder() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -44,8 +46,7 @@ public class CA_EditFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Document Library Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//td[4]/ul/li/strong/span",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//td[4]/ul/li/strong/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -53,7 +54,8 @@ public class CA_EditFolderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[5]/ul/li[2]/a")) {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -63,27 +65,9 @@ public class CA_EditFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[5]/ul/li[2]/a", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("_20_name",
-			RuntimeVariables.replace("Permissions Edited Test Folder"));
 		selenium.type("_20_name",
 			RuntimeVariables.replace("Permissions Edited Test Folder"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));

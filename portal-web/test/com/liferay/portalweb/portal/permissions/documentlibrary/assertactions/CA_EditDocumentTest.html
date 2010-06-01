@@ -9,6 +9,11 @@
 <tr><td rowspan="1" colspan="3">CA_EditDocumentTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Document Library Permissions Test Page</td>
 	<td></td>
@@ -24,44 +29,24 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//li[4]/span/a</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAtAndWait</td>
 	<td>link=Permissions Test Subfolder</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//li[5]/span/a</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAt</td>
-	<td>//strong/span</td>
+	<td>//td[5]/ul/li/strong/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Edit</td>
-	<td></td>
+	<td>waitForVisible</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Edit</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//li[6]/span/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>_20_title</td>
-	<td>Admin Permissions Edited Test Document</td>
+	<td>clickAndWait</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Edit</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -85,7 +70,7 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>link=Admin Permissions Edited Test Document.txt</td>
+	<td>link=Admin Permissions Edited Test Document</td>
 	<td></td>
 </tr>
 

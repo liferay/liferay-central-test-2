@@ -46,7 +46,8 @@ public class SA_AddTemporaryFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[2]/ul/li[2]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li[2]/a",
+			RuntimeVariables.replace("Add Folder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_31_name",
 			RuntimeVariables.replace("Portlet2 Temporary2 Folder2"));

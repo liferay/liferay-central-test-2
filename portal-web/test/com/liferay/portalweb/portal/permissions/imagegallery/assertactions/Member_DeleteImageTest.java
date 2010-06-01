@@ -48,7 +48,8 @@ public class Member_DeleteImageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[2]/a/img", RuntimeVariables.replace(""));
+		selenium.clickAt("//img[@alt='Edited Third Permissions Image - ']",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

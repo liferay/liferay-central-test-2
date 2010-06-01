@@ -24,6 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_EditCommentTest extends BaseTestCase {
 	public void testCA_EditComment() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -47,24 +49,10 @@ public class CA_EditCommentTest extends BaseTestCase {
 		selenium.clickAt("link=Permissions Edited Test Folder",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("link=Permissions Test Subfolder",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Admin Permissions Edited Test Document",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
@@ -74,7 +62,8 @@ public class CA_EditCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
+				if (selenium.isVisible(
+							"//td[2]/table[1]/tbody/tr/td[4]/span/a/span")) {
 					break;
 				}
 			}
@@ -84,46 +73,8 @@ public class CA_EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=View")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=View", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Comments", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//td[4]/span/a[2]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//td[4]/span/a[2]", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[2]/table[1]/tbody/tr/td[4]/span/a/span",
+			RuntimeVariables.replace("Edit"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -141,13 +92,13 @@ public class CA_EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_20_editReplyBody1",
-			RuntimeVariables.replace(
-				"I am a Communit Admin and I can write comments!"));
 		selenium.type("_20_editReplyBody1",
 			RuntimeVariables.replace(
 				"I am a Community Admin and I can write comments!\nThis is an edited comment."));
-		selenium.clickAt("_20_editReplyButton1", RuntimeVariables.replace(""));
+		selenium.keyPress("_20_editReplyBody1", RuntimeVariables.replace("\\48"));
+		selenium.keyPress("_20_editReplyBody1", RuntimeVariables.replace("\\8"));
+		selenium.clickAt("//input[@value='Update']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

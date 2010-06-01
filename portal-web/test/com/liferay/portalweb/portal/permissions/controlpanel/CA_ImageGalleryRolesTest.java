@@ -31,6 +31,14 @@ public class CA_ImageGalleryRolesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.check("_128_rowIds");
 		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.imagegalleryADD_IMAGE']");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.imagegalleryPERMISSIONS']");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.imagegalleryVIEW']");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.imagegallery.model.IGFolderACCESS']");
+		selenium.check(
 			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.imagegallery.model.IGFolderADD_IMAGE']");
 		selenium.check(
 			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.imagegallery.model.IGFolderADD_SUBFOLDER']");

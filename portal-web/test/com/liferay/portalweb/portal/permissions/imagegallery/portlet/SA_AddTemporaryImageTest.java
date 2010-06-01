@@ -50,8 +50,9 @@ public class SA_AddTemporaryImageTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Add Image"),
-			selenium.getText("//div[2]/ul/li[4]/a"));
-		selenium.clickAt("//div[2]/ul/li[4]/a", RuntimeVariables.replace(""));
+			selenium.getText("//div[2]/ul/li[5]/a"));
+		selenium.clickAt("//div[2]/ul/li[5]/a",
+			RuntimeVariables.replace("Add Image"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

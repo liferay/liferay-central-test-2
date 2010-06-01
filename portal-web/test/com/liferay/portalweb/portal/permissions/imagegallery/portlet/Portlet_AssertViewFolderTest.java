@@ -51,6 +51,6 @@ public class Portlet_AssertViewFolderTest extends BaseTestCase {
 		assertFalse(selenium.isTextPresent(
 				"You do not have the required permissions."));
 		assertEquals(RuntimeVariables.replace("Portlet2 Temporary2 Folder2"),
-			selenium.getText("//div/h3"));
+			selenium.getText("//li[1]/span/span/span"));
 	}
 }

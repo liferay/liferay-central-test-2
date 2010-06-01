@@ -47,7 +47,7 @@ public class Member_AssertCannotEditFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("//tr[4]/td[4]/ul/li/strong/a"));
+		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
 		assertFalse(selenium.isElementPresent("link=Edit"));
 		assertFalse(selenium.isElementPresent("link=Permissions"));
 		assertFalse(selenium.isElementPresent("link=Delete"));

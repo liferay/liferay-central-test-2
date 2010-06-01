@@ -47,14 +47,12 @@ public class SA_AllowViewPortletPermissionsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.check("15_ACTION_VIEW");
 		selenium.check("//tr[7]/td[5]/input");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
-		assertTrue(selenium.isChecked("15_ACTION_VIEW"));
 		assertTrue(selenium.isChecked("//tr[7]/td[5]/input"));
 	}
 }

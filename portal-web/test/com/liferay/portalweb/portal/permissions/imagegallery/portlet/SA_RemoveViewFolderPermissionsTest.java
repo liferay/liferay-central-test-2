@@ -69,8 +69,26 @@ public class SA_RemoveViewFolderPermissionsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("15_ACTION_VIEW")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.uncheck("15_ACTION_VIEW");
 		selenium.uncheck("//tr[7]/td[8]/input");
+		selenium.uncheck("//tr[13]/td[8]/input");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
@@ -78,5 +96,6 @@ public class SA_RemoveViewFolderPermissionsTest extends BaseTestCase {
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertFalse(selenium.isChecked("15_ACTION_VIEW"));
 		assertFalse(selenium.isChecked("//tr[7]/td[8]/input"));
+		assertFalse(selenium.isChecked("//tr[13]/td[8]/input"));
 	}
 }

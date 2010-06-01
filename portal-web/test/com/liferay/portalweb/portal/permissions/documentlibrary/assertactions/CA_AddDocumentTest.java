@@ -24,6 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_AddDocumentTest extends BaseTestCase {
 	public void testCA_AddDocument() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -47,45 +49,11 @@ public class CA_AddDocumentTest extends BaseTestCase {
 		selenium.clickAt("link=Permissions Test Folder",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("link=Permissions Test Subfolder",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//input[@value='Add Document']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li[5]/a",
+			RuntimeVariables.replace("Add Document"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 
@@ -126,8 +94,6 @@ public class CA_AddDocumentTest extends BaseTestCase {
 		selenium.type("_20_file",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\documentlibrary\\assertactions\\dependencies\\CA_TestDocument.txt"));
-		selenium.typeKeys("_20_title",
-			RuntimeVariables.replace("Admin Permissions Test Document"));
 		selenium.type("_20_title",
 			RuntimeVariables.replace("Admin Permissions Test Document"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
@@ -136,6 +102,6 @@ public class CA_AddDocumentTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent(
-				"link=Admin Permissions Test Document.txt"));
+				"link=Admin Permissions Test Document"));
 	}
 }

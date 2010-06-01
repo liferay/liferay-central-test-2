@@ -51,7 +51,7 @@ public class CA_AssertActionTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Export / Import"));
 		assertTrue(selenium.isElementPresent("//img[@alt='Remove']"));
 		assertEquals(RuntimeVariables.replace("Add Folder"),
-			selenium.getText("//div[2]/div/span/a/span"));
+			selenium.getText("//div[2]/ul/li[1]/a"));
 		selenium.clickAt("//td[4]/ul/li/strong", RuntimeVariables.replace(""));
 		assertEquals(RuntimeVariables.replace("Edit"),
 			selenium.getText(
@@ -74,7 +74,7 @@ public class CA_AssertActionTest extends BaseTestCase {
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Add Subfolder"),
-			selenium.getText("//div[2]/ul/li[3]/a"));
+			selenium.getText("//div[2]/ul/li[4]/a"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

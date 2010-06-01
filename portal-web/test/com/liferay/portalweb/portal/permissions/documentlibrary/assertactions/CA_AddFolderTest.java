@@ -24,6 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_AddFolderTest extends BaseTestCase {
 	public void testCA_AddFolder() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -44,28 +46,9 @@ public class CA_AddFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Document Library Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Add Subfolder']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li[1]/a",
+			RuntimeVariables.replace("Add Folder"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("_20_name",
-			RuntimeVariables.replace("Permissions Test Folder"));
 		selenium.type("_20_name",
 			RuntimeVariables.replace("Permissions Test Folder"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));

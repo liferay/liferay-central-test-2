@@ -24,8 +24,24 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class LoginUsersTest extends BaseTestCase {
 	public void testLoginUsers() throws Exception {
-		selenium.clickAt("link=Back to Guest", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Sign Out")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("link=Sign Out", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 

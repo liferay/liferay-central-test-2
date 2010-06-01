@@ -50,8 +50,6 @@ public class Portlet_AssertAccessInControlPanelTest extends BaseTestCase {
 		selenium.clickAt("link=Image Gallery", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Showing 0 results."),
-			selenium.getText("//form/div[2]/div/div"));
-		assertEquals(RuntimeVariables.replace("Access from my desktop."),
-			selenium.getText("//div[2]/div/div/div/a"));
+			selenium.getText("//div[2]/div[2]/div/div"));
 	}
 }

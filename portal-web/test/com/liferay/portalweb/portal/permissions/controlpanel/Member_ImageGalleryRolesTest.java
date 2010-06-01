@@ -31,6 +31,14 @@ public class Member_ImageGalleryRolesTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Image Gallery"));
 		selenium.waitForPageToLoad("30000");
 		selenium.uncheck("_128_rowIds");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.imagegalleryADD_IMAGE']");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.imagegalleryPERMISSIONS']");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.imagegalleryVIEW']");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.imagegallery.model.IGFolderACCESS']");
 		selenium.check(
 			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.imagegallery.model.IGFolderADD_IMAGE']");
 		selenium.uncheck(

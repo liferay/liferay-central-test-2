@@ -24,14 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SA_AddPageTest extends BaseTestCase {
 	public void testSA_AddPage() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id='_145_myPlacesContainer']/ul/li[5]/a/span")) {
+				if (selenium.isElementPresent("addPage")) {
 					break;
 				}
 			}
@@ -41,11 +42,27 @@ public class SA_AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='_145_myPlacesContainer']/ul/li[5]/a/span",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("addPage", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//input")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("//input",
+			RuntimeVariables.replace("Document Library Permissions Test Page"));
+		selenium.clickAt("save", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -54,7 +71,7 @@ public class SA_AddPageTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span")) {
+							"link=Document Library Permissions Test Page")) {
 					break;
 				}
 			}
@@ -64,31 +81,6 @@ public class SA_AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li/a/span",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("_88_name_en_US")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.type("_88_name_en_US",
-			RuntimeVariables.replace("Document Library Permissions Test Page"));
-		selenium.clickAt("//input[@value='Add Page']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Document Library Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
