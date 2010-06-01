@@ -34,6 +34,7 @@ List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames()
 %>
 
 <div class="taglib-custom-attributes-list">
+
 	<%
 	for (String attributeName : attributeNames) {
 	%>
