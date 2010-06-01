@@ -76,16 +76,14 @@ request.setAttribute("view_entry.jsp-entry", entry);
 			<%= entry.getComments() %>
 		</div>
 
-		<div class="custom-attributes">
-			<liferay-ui:custom-attributes-available className="<%= BookmarksEntry.class.getName() %>">
-				<liferay-ui:custom-attribute-list
-					className="<%= BookmarksEntry.class.getName() %>"
-					classPK="<%= (entry != null) ? entry.getEntryId() : 0 %>"
-					editable="<%= false %>"
-					label="<%= true %>"
-				/>
-			</liferay-ui:custom-attributes-available>
-		</div>
+		<liferay-ui:custom-attributes-available className="<%= BookmarksEntry.class.getName() %>">
+			<liferay-ui:custom-attribute-list
+				className="<%= BookmarksEntry.class.getName() %>"
+				classPK="<%= (entry != null) ? entry.getEntryId() : 0 %>"
+				editable="<%= false %>"
+				label="<%= true %>"
+			/>
+		</liferay-ui:custom-attributes-available>
 
 		<div class="entry-author">
 			<%= LanguageUtil.format(pageContext, "created-by-x", HtmlUtil.escape(PortalUtil.getUserName(entry.getUserId(), themeDisplay.getScopeGroupName()))) %>

@@ -130,16 +130,14 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 			<%= toFileEntry.getDescription() %>
 		</div>
 
-		<div class="custom-attributes">
-			<liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
-				<liferay-ui:custom-attribute-list
-					className="<%= DLFileEntry.class.getName() %>"
-					classPK="<%= (toFileEntry != null) ? toFileEntry.getFileEntryId() : 0 %>"
-					editable="<%= false %>"
-					label="<%= true %>"
-				/>
-			</liferay-ui:custom-attributes-available>
-		</div>
+		<liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
+			<liferay-ui:custom-attribute-list
+				className="<%= DLFileEntry.class.getName() %>"
+				classPK="<%= (toFileEntry != null) ? toFileEntry.getFileEntryId() : 0 %>"
+				editable="<%= false %>"
+				label="<%= true %>"
+			/>
+		</liferay-ui:custom-attributes-available>
 
 		<div class="file-entry-author">
 			<%= LanguageUtil.format(pageContext, "last-updated-by-x", HtmlUtil.escape(PortalUtil.getUserName(toFileEntry.getUserId(), toFileEntry.getUserName()))) %>

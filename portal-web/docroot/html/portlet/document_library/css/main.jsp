@@ -37,12 +37,12 @@
 	padding: 0.7em;
 }
 
-.portlet-document-library .custom-attributes label {
+.portlet-document-library .taglib-custom-attributes-list label {
 	display: block;
 	font-weight: bold;
 }
 
-.portlet-document-library .custom-attributes {
+.portlet-document-library .taglib-custom-attributes-list {
 	margin-bottom: 1em;
 }
 

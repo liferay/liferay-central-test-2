@@ -143,11 +143,11 @@ td.user-info {
 	clear: both;
 }
 
-.portlet-message-boards .custom-attributes {
+.portlet-message-boards .taglib-custom-attributes-list {
 	margin-bottom: 1em;
 }
 
-.portlet-message-boards .custom-attributes label {
+.portlet-message-boards .taglib-custom-attributes-list label {
 	display: block;
 	font-weight: bold;
 }

@@ -19,11 +19,11 @@
 .portlet-blogs .comments {
 }
 
-.portlet-blogs .custom-attributes {
+.portlet-blogs .taglib-custom-attributes-list {
 	margin-bottom: 1em;
 }
 
-.portlet-blogs .custom-attributes label {
+.portlet-blogs .taglib-custom-attributes-list label {
 	display: block;
 	font-weight: bold;
 }

@@ -76,16 +76,14 @@ if (portletDisplay.isWebDAVEnabled()) {
 			<%= image.getDescription() %>
 		</div>
 
-		<div class="custom-attributes">
-			<liferay-ui:custom-attributes-available className="<%= IGImage.class.getName() %>">
-				<liferay-ui:custom-attribute-list
-					className="<%= IGImage.class.getName() %>"
-					classPK="<%= (image != null) ? image.getImageId() : 0 %>"
-					editable="<%= false %>"
-					label="<%= true %>"
-				/>
-			</liferay-ui:custom-attributes-available>
-		</div>
+		<liferay-ui:custom-attributes-available className="<%= IGImage.class.getName() %>">
+			<liferay-ui:custom-attribute-list
+				className="<%= IGImage.class.getName() %>"
+				classPK="<%= (image != null) ? image.getImageId() : 0 %>"
+				editable="<%= false %>"
+				label="<%= true %>"
+			/>
+		</liferay-ui:custom-attributes-available>
 
 		<div class="image-author">
 			<%= LanguageUtil.format(pageContext, "last-updated-by-x", HtmlUtil.escape(PortalUtil.getUserName(image.getUserId(), themeDisplay.getScopeGroupName()))) %>

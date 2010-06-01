@@ -175,16 +175,14 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			<%= fileEntry.getDescription() %>
 		</div>
 
-		<div class="custom-attributes">
-			<liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
-				<liferay-ui:custom-attribute-list
-					className="<%= DLFileEntry.class.getName() %>"
-					classPK="<%= (fileEntry != null) ? fileEntry.getFileEntryId() : 0 %>"
-					editable="<%= false %>"
-					label="<%= true %>"
-				/>
-			</liferay-ui:custom-attributes-available>
-		</div>
+		<liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
+			<liferay-ui:custom-attribute-list
+				className="<%= DLFileEntry.class.getName() %>"
+				classPK="<%= (fileEntry != null) ? fileEntry.getFileEntryId() : 0 %>"
+				editable="<%= false %>"
+				label="<%= true %>"
+			/>
+		</liferay-ui:custom-attributes-available>
 
 		<div class="file-entry-author">
 			<%= LanguageUtil.format(pageContext, "last-updated-by-x", HtmlUtil.escape(PortalUtil.getUserName(fileEntry.getUserId(), fileEntry.getUserName()))) %>

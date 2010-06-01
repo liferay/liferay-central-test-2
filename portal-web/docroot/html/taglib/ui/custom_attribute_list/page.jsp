@@ -31,26 +31,30 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 String modelResourceName = ResourceActionsUtil.getModelResource(pageContext, className);
 
 List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames());
-
-for (String attributeName : attributeNames) {
 %>
 
-	<liferay-ui:custom-attribute
-		className="<%= className %>"
-		classPK="<%= classPK %>"
-		editable="<%= editable %>"
-		label="<%= label %>"
-		name="<%= attributeName %>"
-	/>
+<div class="taglib-custom-attributes-list">
+	<%
+	for (String attributeName : attributeNames) {
+	%>
 
-<%
-}
-%>
+		<liferay-ui:custom-attribute
+			className="<%= className %>"
+			classPK="<%= classPK %>"
+			editable="<%= editable %>"
+			label="<%= label %>"
+			name="<%= attributeName %>"
+		/>
 
-<c:if test="<%= attributeNames.isEmpty() %>">
-	<span class="aui-field">
-		<span class="aui-field-content">
-			<label><%= LanguageUtil.format(pageContext, "no-custom-fields-are-defined-for-x", modelResourceName) %></label>
+	<%
+	}
+	%>
+
+	<c:if test="<%= attributeNames.isEmpty() %>">
+		<span class="aui-field">
+			<span class="aui-field-content">
+				<label><%= LanguageUtil.format(pageContext, "no-custom-fields-are-defined-for-x", modelResourceName) %></label>
+			</span>
 		</span>
-	</span>
-</c:if>
+	</c:if>
+</div>

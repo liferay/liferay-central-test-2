@@ -120,14 +120,12 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 					<%= entry.getContent() %>
 
 					<liferay-ui:custom-attributes-available className="<%= BlogsEntry.class.getName() %>">
-						<div class="custom-attributes">
-							<liferay-ui:custom-attribute-list
-								className="<%= BlogsEntry.class.getName() %>"
-								classPK="<%= (entry != null) ? entry.getEntryId() : 0 %>"
-								editable="<%= false %>"
-								label="<%= true %>"
-							/>
-						</div>
+						<liferay-ui:custom-attribute-list
+							className="<%= BlogsEntry.class.getName() %>"
+							classPK="<%= (entry != null) ? entry.getEntryId() : 0 %>"
+							editable="<%= false %>"
+							label="<%= true %>"
+						/>
 					</liferay-ui:custom-attributes-available>
 				</c:when>
 				<c:when test="<%= pageDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE) %>">

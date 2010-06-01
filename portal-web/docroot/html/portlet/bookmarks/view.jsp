@@ -145,16 +145,14 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 							</div>
 						</div>
 
-						<div class="custom-attributes">
-							<liferay-ui:custom-attributes-available className="<%= BookmarksFolder.class.getName() %>">
-								<liferay-ui:custom-attribute-list
-									className="<%= BookmarksFolder.class.getName() %>"
-									classPK="<%= (folder != null) ? folder.getFolderId() : 0 %>"
-									editable="<%= false %>"
-									label="<%= true %>"
-								/>
-							</liferay-ui:custom-attributes-available>
-						</div>
+						<liferay-ui:custom-attributes-available className="<%= BookmarksFolder.class.getName() %>">
+							<liferay-ui:custom-attribute-list
+								className="<%= BookmarksFolder.class.getName() %>"
+								classPK="<%= (folder != null) ? folder.getFolderId() : 0 %>"
+								editable="<%= false %>"
+								label="<%= true %>"
+							/>
+						</liferay-ui:custom-attributes-available>
 					</c:if>
 
 					<c:if test="<%= foldersCount > 0 %>">

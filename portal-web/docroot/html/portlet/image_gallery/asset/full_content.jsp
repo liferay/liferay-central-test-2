@@ -24,13 +24,11 @@ IGImage image = (IGImage)request.getAttribute(WebKeys.IMAGE_GALLERY_IMAGE);
 
 <p class="asset-description"><%= image.getDescription() %></p>
 
-<div class="custom-attributes">
-	<liferay-ui:custom-attributes-available className="<%= IGImage.class.getName() %>">
-		<liferay-ui:custom-attribute-list
-			className="<%= IGImage.class.getName() %>"
-			classPK="<%= (image != null) ? image.getImageId() : 0 %>"
-			editable="<%= false %>"
-			label="<%= true %>"
-		/>
-	</liferay-ui:custom-attributes-available>
-</div>
+<liferay-ui:custom-attributes-available className="<%= IGImage.class.getName() %>">
+	<liferay-ui:custom-attribute-list
+		className="<%= IGImage.class.getName() %>"
+		classPK="<%= (image != null) ? image.getImageId() : 0 %>"
+		editable="<%= false %>"
+		label="<%= true %>"
+	/>
+</liferay-ui:custom-attributes-available>

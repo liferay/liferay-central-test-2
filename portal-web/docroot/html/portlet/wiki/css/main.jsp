@@ -98,11 +98,11 @@
 	padding: 3px;
 }
 
-.portlet-wiki .custom-attributes {
+.portlet-wiki .taglib-custom-attributes-list {
 	margin-bottom: 1em;
 }
 
-.portlet-wiki .custom-attributes label {
+.portlet-wiki .taglib-custom-attributes-list label {
 	display: block;
 	font-weight: bold;
 }

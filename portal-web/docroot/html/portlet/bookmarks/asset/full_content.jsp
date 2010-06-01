@@ -24,13 +24,11 @@ BookmarksEntry entry = (BookmarksEntry)request.getAttribute(WebKeys.BOOKMARKS_EN
 
 <p class="asset-description"><%= entry.getComments() %></p>
 
-<div class="custom-attributes">
-	<liferay-ui:custom-attributes-available className="<%= BookmarksEntry.class.getName() %>">
-		<liferay-ui:custom-attribute-list
-			className="<%= BookmarksEntry.class.getName() %>"
-			classPK="<%= (entry != null) ? entry.getEntryId() : 0 %>"
-			editable="<%= false %>"
-			label="<%= true %>"
-		/>
-	</liferay-ui:custom-attributes-available>
-</div>
+<liferay-ui:custom-attributes-available className="<%= BookmarksEntry.class.getName() %>">
+	<liferay-ui:custom-attribute-list
+		className="<%= BookmarksEntry.class.getName() %>"
+		classPK="<%= (entry != null) ? entry.getEntryId() : 0 %>"
+		editable="<%= false %>"
+		label="<%= true %>"
+	/>
+</liferay-ui:custom-attributes-available>
