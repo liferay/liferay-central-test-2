@@ -204,18 +204,9 @@ boolean smallImage = BeanParamUtil.getBoolean(article, request, "smallImage");
 String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL");
 %>
 
-<c:choose>
-	<c:when test="<%= article != null %>">
-		<liferay-util:include page="/html/portlet/journal/article_tabs.jsp">
-			<liferay-util:param name="tabs1" value="content" />
-		</liferay-util:include>
-	</c:when>
-	<c:otherwise>
-		<h1 class="article-title">
-			<liferay-ui:message key="new-web-content" />
-		</h1>
-	</c:otherwise>
-</c:choose>
+<liferay-util:include page="/html/portlet/journal/article_tabs.jsp">
+	<liferay-util:param name="tabs1" value="content" />
+</liferay-util:include>
 
 <aui:form enctype="multipart/form-data" method="post" name="fm2">
 	<input name="groupId" type="hidden" value="" />

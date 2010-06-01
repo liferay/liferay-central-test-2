@@ -34,24 +34,36 @@ PortletURL editArticleURL = renderResponse.createRenderURL();
 
 editArticleURL.setParameter("struts_action", "/journal/edit_article");
 editArticleURL.setParameter("redirect", redirect);
-editArticleURL.setParameter("groupId", String.valueOf(article.getGroupId()));
-editArticleURL.setParameter("articleId", article.getArticleId());
 
 PortletURL viewArticleHistoryURL = renderResponse.createRenderURL();
-
 viewArticleHistoryURL.setParameter("struts_action", "/journal/view_article_history");
 viewArticleHistoryURL.setParameter("redirect", redirect);
-viewArticleHistoryURL.setParameter("groupId", String.valueOf(article.getGroupId()));
-viewArticleHistoryURL.setParameter("articleId", article.getArticleId());
+
+if (article != null) {
+	editArticleURL.setParameter("groupId", String.valueOf(article.getGroupId()));
+	editArticleURL.setParameter("articleId", article.getArticleId());
+	viewArticleHistoryURL.setParameter("groupId", String.valueOf(article.getGroupId()));
+	viewArticleHistoryURL.setParameter("articleId", article.getArticleId());
+}
 %>
 
-<h1 class="article-title">
-	<%= article.getTitle() %>
-</h1>
+<c:choose>
+	<c:when test="<%= article != null %>">
+		<liferay-ui:tabs
+			names='<%= article.getTitle() %>'
+			backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		/>
 
-<liferay-ui:tabs
-	names="content,history"
-	url0="<%= editArticleURL.toString() %>"
-	url1="<%= viewArticleHistoryURL.toString() %>"
-	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-/>
+		<liferay-ui:tabs
+			names="content,history"
+			url0="<%= editArticleURL.toString() %>"
+			url1="<%= viewArticleHistoryURL.toString() %>"
+		/>
+	</c:when>
+	<c:otherwise>
+		<liferay-ui:tabs
+			names="new-web-content"
+			backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		/>
+	</c:otherwise>
+</c:choose>

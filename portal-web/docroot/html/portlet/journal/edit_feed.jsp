@@ -110,7 +110,7 @@ if (feed != null) {
 	<aui:input name="rendererTemplateId" type="hidden" value="<%= rendererTemplateId %>" />
 
 	<liferay-ui:tabs
-		names="feed"
+		names='<%= (feed != null) ? feed.getName() : "new-feed" %>'
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 

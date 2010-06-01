@@ -33,6 +33,11 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="nodeId" type="hidden" value="<%= nodeId %>" />
 
+	<liferay-ui:tabs
+		names='<%= (node != null) ? node.getName() : "new-wiki-node" %>'
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	/>
+
 	<liferay-ui:error exception="<%= DuplicateNodeNameException.class %>" message="please-enter-a-unique-node-name" />
 	<liferay-ui:error exception="<%= NodeNameException.class %>" message="please-enter-a-valid-name" />
 

@@ -80,17 +80,9 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 portletURL.setParameter("name", name);
 %>
 
-<c:choose>
-	<c:when test="<%= Validator.isNull(referringPortletResource) %>">
-		<liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
-	</c:when>
-	<c:otherwise>
-		<liferay-ui:tabs
-			names="document"
-			backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-		/>
-	</c:otherwise>
-</c:choose>
+<c:if test="<%= Validator.isNull(referringPortletResource) %>">
+	<liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
+</c:if>
 
 <c:if test="<%= isLocked.booleanValue() %>">
 	<c:choose>
@@ -154,13 +146,10 @@ portletURL.setParameter("name", name);
 	<aui:input name="newFolderId" type="hidden" value="<%= folderId %>" />
 	<aui:input name="name" type="hidden" value="<%= name %>" />
 
-	<c:if test="<%= fileEntry != null %>">
-		<liferay-ui:tabs
-			names="<%= fileEntry.getTitle() %>"
-			backLabel='<%= "&laquo; " + LanguageUtil.get(pageContext, "back") %>'
-			backURL="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"
-		/>
-	</c:if>
+	<liferay-ui:tabs
+		names='<%= (fileEntry != null) ? fileEntry.getTitle() : "new-document" %>'
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	/>
 
 	<liferay-ui:error exception="<%= DuplicateFileException.class %>" message="please-enter-a-unique-document-name" />
 	<liferay-ui:error exception="<%= DuplicateFolderNameException.class %>" message="please-enter-a-unique-document-name" />

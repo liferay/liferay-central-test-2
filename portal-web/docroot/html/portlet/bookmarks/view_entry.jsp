@@ -36,9 +36,17 @@ request.setAttribute("view_entry.jsp-entry", entry);
 		<portlet:param name="folderId" value="<%= String.valueOf(folder.getFolderId()) %>" />
 	</portlet:renderURL>
 
+	<%
+		String folderName = LanguageUtil.get(pageContext, "bookmarks-home");
+
+		if (Validator.isNotNull(folder.getName())) {
+			folderName = folder.getName();
+		}
+	%>
+
 	<liferay-ui:tabs
 		names="<%= entry.getName() %>"
-		backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(folder.getName())) %>'
+		backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(folderName)) %>'
 		backURL="<%= backURL.toString() %>"
 	/>
 </c:if>

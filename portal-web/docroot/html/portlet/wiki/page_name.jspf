@@ -14,8 +14,13 @@
  */
 %>
 
+<%
+String redirect = ParamUtil.getString(request, "redirect");
+%>
+
 <c:if test="<%= Validator.isNotNull(title) %>">
-	<h1 class="page-title">
-		<%= title %>
-	</h1>
+	<liferay-ui:tabs
+		names='<%= title %>'
+		backURL='<%= PortalUtil.escapeRedirect(redirect) %>'
+	/>
 </c:if>

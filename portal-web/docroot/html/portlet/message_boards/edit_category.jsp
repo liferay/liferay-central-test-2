@@ -38,6 +38,11 @@ catch (NoSuchMailingListException nsmle) {
 boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "active");
 %>
 
+<liferay-ui:tabs
+	names='<%= (category != null) ? category.getName() : "new-category" %>'
+	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+/>
+
 <portlet:actionURL var="editCategoryURL">
 	<portlet:param name="struts_action" value="/message_boards/edit_category" />
 </portlet:actionURL>

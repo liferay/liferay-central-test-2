@@ -38,6 +38,7 @@ editPageURL.setParameter("title", title);
 PortletURL viewPageDetailsURL = renderResponse.createRenderURL();
 
 viewPageDetailsURL.setParameter("struts_action", "/wiki/view_page_details");
+viewPageDetailsURL.setParameter("redirect", viewPageURL.toString());
 viewPageDetailsURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 viewPageDetailsURL.setParameter("title", wikiPage.getTitle());
 
@@ -70,7 +71,6 @@ attachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 			url3="<%= viewPageIncomingLinksURL.toString() %>"
 			url4="<%= viewPageOutgoingLinksURL.toString() %>"
 			url5="<%= attachmentsURL.toString() %>"
-			backURL="<%= viewPageURL.toString() %>"
 		/>
 	</c:when>
 	<c:otherwise>
@@ -81,7 +81,6 @@ attachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 			url2="<%= viewPageIncomingLinksURL.toString() %>"
 			url3="<%= viewPageOutgoingLinksURL.toString() %>"
 			url4="<%= attachmentsURL.toString() %>"
-			backURL="<%= viewPageURL.toString() %>"
 		/>
 	</c:otherwise>
 </c:choose>

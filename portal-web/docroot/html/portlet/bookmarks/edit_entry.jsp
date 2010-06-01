@@ -28,17 +28,9 @@ long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 %>
 
-<c:choose>
-	<c:when test="<%= Validator.isNull(referringPortletResource) %>">
-		<liferay-util:include page="/html/portlet/bookmarks/top_links.jsp" />
-	</c:when>
-	<c:otherwise>
-		<liferay-ui:tabs
-			names="entry"
-			backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-		/>
-	</c:otherwise>
-</c:choose>
+<c:if test="<%= Validator.isNull(referringPortletResource) %>">
+	<liferay-util:include page="/html/portlet/bookmarks/top_links.jsp" />
+</c:if>
 
 <portlet:actionURL var="editEntryURL">
 	<portlet:param name="struts_action" value="/bookmarks/edit_entry" />
@@ -51,13 +43,10 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 	<aui:input name="entryId" type="hidden" value="<%= entryId %>" />
 	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
 
-	<c:if test="<%= entry != null %>">
-		<liferay-ui:tabs
-			names="<%= entry.getName() %>"
-			backLabel='<%= "&laquo; " + LanguageUtil.get(pageContext, "back") %>'
-			backURL="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"
-		/>
-	</c:if>
+	<liferay-ui:tabs
+		names='<%= (entry != null) ? entry.getName() : "new-bookmark" %>'
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	/>
 
 	<liferay-ui:error exception="<%= EntryURLException.class %>" message="please-enter-a-valid-url" />
 	<liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="please-enter-a-valid-folder" />

@@ -127,6 +127,7 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 			PortletURL viewPageDetailsURL = PortletURLUtil.clone(viewPageURL, renderResponse);
 
 			viewPageDetailsURL.setParameter("struts_action", "/wiki/view_page_details");
+			viewPageDetailsURL.setParameter("redirect", currentURL);
 			%>
 
 			<liferay-ui:icon image="history" label="<%= true %>" message="details" method="get" url="<%= viewPageDetailsURL.toString() %>" />

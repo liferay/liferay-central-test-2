@@ -45,12 +45,11 @@ request.setAttribute("view_event.jsp-event", event);
 %>
 
 <liferay-ui:tabs
-	names="event"
+	names='<%= event.getTitle() %>'
 	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 
 <aui:layout cssClass="event">
-	<h3 class="event-title"><%= event.getTitle() %></h3>
 
 	<aui:column columnWidth="<%= 75 %>" cssClass="folder-column folder-column-first" first="<%= true %>">
 		<dl class="property-list">

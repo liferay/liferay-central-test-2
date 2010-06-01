@@ -52,9 +52,10 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 	<liferay-ui:error exception="<%= NoSuchChoiceException.class %>" message="please-select-an-option" />
 
 	<aui:fieldset>
-		<span style="font-size: small;"><strong>
-		<%= question.getTitle(locale) %>
-		</strong></span><br />
+ 		<liferay-ui:tabs
+			names='<%= question.getTitle(locale) %>'
+			backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		/>
 
 		<span style="font-size: x-small;">
 		<%= question.getDescription(locale) %>
@@ -118,9 +119,6 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 					<c:choose>
 						<c:when test="<%= !question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>">
 							<aui:button onClick="<%= viewQuestionURL %>" value="back-to-vote" />
-						</c:when>
-						<c:when test="<%= Validator.isNotNull(redirect) %>">
-							<aui:button onClick="<%= redirect %>" value="back" />
 						</c:when>
 					</c:choose>
 				</aui:button-row>

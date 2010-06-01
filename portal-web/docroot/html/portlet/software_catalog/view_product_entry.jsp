@@ -50,14 +50,14 @@ viewProductEntryURL.setParameter("struts_action", "/software_catalog/view_produc
 viewProductEntryURL.setParameter("tabs2", tabs2);
 viewProductEntryURL.setParameter("redirect", redirect);
 viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId));
+
+String productName = productEntry.getName() + ' ' + ((latestProductVersion == null) ? "" : latestProductVersion.getVersion());
 %>
 
 <liferay-ui:tabs
-	names="product"
+	names='<%= productName %>'
 	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
-
-<h3><%= productEntry.getName() %> <%= (latestProductVersion == null) ? "" : latestProductVersion.getVersion() %></h3>
 
 <table class="lfr-table">
 <tr>

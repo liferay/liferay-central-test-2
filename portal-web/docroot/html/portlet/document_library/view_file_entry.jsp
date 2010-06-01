@@ -114,9 +114,17 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 		<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 	</portlet:renderURL>
 
+	<%
+		String parentFolderName = LanguageUtil.get(pageContext, "document-home");
+
+		if (Validator.isNotNull(folder.getName())) {
+			parentFolderName = folder.getName();
+		}
+	%>
+
 	<liferay-ui:tabs
 		names='<%= fileEntry.getTitle() + " (" + versionText + ")" %>'
-		backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(folder.getName())) %>'
+		backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", parentFolderName) %>'
 		backURL="<%= backURL.toString() %>"
 	/>
 </c:if>

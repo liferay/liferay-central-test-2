@@ -32,9 +32,18 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 UnicodeProperties properties = new UnicodeProperties(true);
 Serializable defaultValue = null;
 
+String localizedName = StringPool.BLANK;
+
 if (column != null) {
 	properties = expandoBridge.getAttributeProperties(column.getName());
 	defaultValue = expandoBridge.getAttributeDefault(column.getName());
+
+	String name = column.getName();
+	localizedName = LanguageUtil.get(pageContext, name);
+
+	if (name.equals(localizedName)) {
+		localizedName = TextFormatter.format(name, TextFormatter.J);
+	}
 }
 
 boolean propertyHidden = GetterUtil.getBoolean(properties.get(ExpandoColumnConstants.PROPERTY_HIDDEN));
@@ -69,7 +78,7 @@ portletURL.setParameter("modelResource", modelResource);
 	<br />
 
 	<liferay-ui:tabs
-		names="custom-field"
+		names='<%= (column != null) ? localizedName : "new-custom-field" %>'
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 
@@ -81,22 +90,6 @@ portletURL.setParameter("modelResource", modelResource);
 	<aui:model-context bean="<%= column %>" model="<%= ExpandoColumn.class %>" />
 
 	<aui:fieldset>
-		<c:if test="<%= column != null %>">
-			<aui:field-wrapper label="name">
-
-				<%
-				String name = column.getName();
-				String localizedName = LanguageUtil.get(pageContext, name);
-
-				if (name.equals(localizedName)) {
-					localizedName = TextFormatter.format(name, TextFormatter.J);
-				}
-				%>
-
-				<%= HtmlUtil.escape(localizedName) %>
-			</aui:field-wrapper>
-		</c:if>
-
 		<c:choose>
 			<c:when test="<%= column != null %>">
 				<aui:field-wrapper helpMessage="custom-field-key-help" label="key">

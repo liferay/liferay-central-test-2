@@ -106,7 +106,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	<aui:input name="eventId" type="hidden" value="<%= eventId %>" />
 
 	<liferay-ui:tabs
-		names="event"
+		names='<%= (event != null) ? event.getTitle() : "new-event" %>'
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 

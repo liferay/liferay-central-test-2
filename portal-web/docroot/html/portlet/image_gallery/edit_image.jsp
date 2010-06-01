@@ -69,17 +69,9 @@ if (image != null) {
 	</aui:script>
 </c:if>
 
-<c:choose>
-	<c:when test="<%= Validator.isNull(referringPortletResource) %>">
-		<liferay-util:include page="/html/portlet/image_gallery/top_links.jsp" />
-	</c:when>
-	<c:otherwise>
-		<liferay-ui:tabs
-			names="image"
-			backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-		/>
-	</c:otherwise>
-</c:choose>
+<c:if test="<%= Validator.isNull(referringPortletResource) %>">
+	<liferay-util:include page="/html/portlet/image_gallery/top_links.jsp" />
+</c:if>
 
 <portlet:actionURL var="editImageURL">
 	<portlet:param name="struts_action" value="/image_gallery/edit_image" />
@@ -93,9 +85,10 @@ if (image != null) {
 	<aui:input name="imageId" type="hidden" value="<%= imageId %>" />
 	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
 
-	<c:if test="<%= image != null %>">
-		<h3 class="image-title"><%= image.getName() %></h3>
-	</c:if>
+	<liferay-ui:tabs
+		names='<%= image != null ? image.getName() : "new-image" %>'
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	/>
 
 	<liferay-ui:error exception="<%= DuplicateImageNameException.class %>" message="please-enter-a-unique-image-name" />
 

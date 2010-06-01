@@ -64,7 +64,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 <input name="<portlet:namespace />productVersionId" type="hidden" value="<%= productVersionId %>" />
 
 <liferay-ui:tabs
-	names="product-version"
+	names='<%= productEntry.getName() %>'
 	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 
@@ -74,8 +74,6 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 <liferay-ui:error exception="<%= ProductVersionDownloadURLException.class %>" message="please-enter-a-download-page-url-or-a-direct-download-url" />
 <liferay-ui:error exception="<%= ProductVersionFrameworkVersionException.class %>" message="please-select-at-least-one-framework-version" />
 <liferay-ui:error exception="<%= UnavailableProductVersionDirectDownloadURLException.class %>" message="please-enter-a-valid-direct-download-url" />
-
-<h3><%= productEntry.getName() %></h3>
 
 <fieldset>
 	<legend><liferay-ui:message key="main-fields" /></legend>

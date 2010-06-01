@@ -199,6 +199,11 @@ if (Validator.isNull(redirect)) {
 	<c:if test="<%= newPage %>">
 		<c:choose>
 			<c:when test="<%= editable %>">
+				<liferay-ui:tabs
+					names="new-wiki-page"
+					backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+				/>
+
 				<div class="portlet-msg-info">
 					<liferay-ui:message key="this-page-does-not-exist-yet-use-the-form-below-to-create-it" />
 				</div>
