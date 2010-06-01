@@ -290,7 +290,7 @@ public class JournalArticleFinderImpl
 			long companyId, long groupId, String keywords, Double version,
 			String type, String structureId, String templateId,
 			Date displayDateGT, Date displayDateLT, int status, Date reviewDate,
-			int start, int end, OrderByComparator obc)
+			int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 
 		String[] articleIds = null;
@@ -313,7 +313,7 @@ public class JournalArticleFinderImpl
 			companyId, groupId, articleIds, version, titles, descriptions,
 			contents, type, new String[] {structureId},
 			new String[] {templateId}, displayDateGT, displayDateLT, status,
-			reviewDate, andOperator, start, end, obc);
+			reviewDate, andOperator, start, end, orderByComparator);
 	}
 
 	public List<JournalArticle> findByReviewDate(
@@ -403,14 +403,15 @@ public class JournalArticleFinderImpl
 			String title, String description, String content, String type,
 			String structureId, String templateId, Date displayDateGT,
 			Date displayDateLT, int status, Date reviewDate,
-			boolean andOperator, int start, int end, OrderByComparator obc)
+			boolean andOperator, int start, int end,
+			OrderByComparator orderByComparator)
 		throws SystemException {
 
 		return findByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			companyId, groupId, articleId, version, title, description,
 			content, type, new String[] {structureId},
 			new String[] {templateId}, displayDateGT, displayDateLT, status,
-			reviewDate, andOperator, start, end, obc);
+			reviewDate, andOperator, start, end, orderByComparator);
 	}
 
 	public List<JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_S_R(
@@ -418,7 +419,8 @@ public class JournalArticleFinderImpl
 			String title, String description, String content, String type,
 			String[] structureIds, String[] templateIds, Date displayDateGT,
 			Date displayDateLT, int status, Date reviewDate,
-			boolean andOperator, int start, int end, OrderByComparator obc)
+			boolean andOperator, int start, int end,
+			OrderByComparator orderByComparator)
 		throws SystemException {
 
 		return findByC_G_A_V_T_D_C_T_S_T_D_S_R(
@@ -426,7 +428,7 @@ public class JournalArticleFinderImpl
 			new String[] {title}, new String[] {description},
 			new String[] {content}, type, structureIds, templateIds,
 			displayDateGT, displayDateLT, status, reviewDate, andOperator,
-			start, end, obc);
+			start, end, orderByComparator);
 	}
 
 	public List<JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_S_R(
@@ -435,7 +437,7 @@ public class JournalArticleFinderImpl
 			String type, String[] structureIds, String[] templateIds,
 			Date displayDateGT, Date displayDateLT, int status,
 			Date reviewDate, boolean andOperator, int start, int end,
-			OrderByComparator obc)
+			OrderByComparator orderByComparator)
 		throws SystemException {
 
 		articleIds = CustomSQLUtil.keywords(articleIds, false);
@@ -490,7 +492,7 @@ public class JournalArticleFinderImpl
 			}
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
-			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
+			sql = CustomSQLUtil.replaceOrderBy(sql, orderByComparator);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
