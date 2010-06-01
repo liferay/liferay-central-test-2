@@ -35,13 +35,17 @@ PortletURL editArticleURL = renderResponse.createRenderURL();
 editArticleURL.setParameter("struts_action", "/journal/edit_article");
 editArticleURL.setParameter("redirect", redirect);
 
+if (article != null) {
+	editArticleURL.setParameter("groupId", String.valueOf(article.getGroupId()));
+	editArticleURL.setParameter("articleId", article.getArticleId());
+}
+
 PortletURL viewArticleHistoryURL = renderResponse.createRenderURL();
+
 viewArticleHistoryURL.setParameter("struts_action", "/journal/view_article_history");
 viewArticleHistoryURL.setParameter("redirect", redirect);
 
 if (article != null) {
-	editArticleURL.setParameter("groupId", String.valueOf(article.getGroupId()));
-	editArticleURL.setParameter("articleId", article.getArticleId());
 	viewArticleHistoryURL.setParameter("groupId", String.valueOf(article.getGroupId()));
 	viewArticleHistoryURL.setParameter("articleId", article.getArticleId());
 }

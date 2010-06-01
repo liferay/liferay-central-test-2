@@ -142,6 +142,9 @@ public class ExpandoTableLocalServiceUtil {
 		return getService().addTable(companyId, classNameId, name);
 	}
 
+	/**
+	* @deprecated {@link #addTable(long, long, String)}
+	*/
 	public static com.liferay.portlet.expando.model.ExpandoTable addTable(
 		long classNameId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -156,6 +159,9 @@ public class ExpandoTableLocalServiceUtil {
 		return getService().addTable(companyId, className, name);
 	}
 
+	/**
+	* @deprecated {@link #addTable(long, String, String)}
+	*/
 	public static com.liferay.portlet.expando.model.ExpandoTable addTable(
 		java.lang.String className, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -227,6 +233,9 @@ public class ExpandoTableLocalServiceUtil {
 		return getService().getTable(companyId, classNameId, name);
 	}
 
+	/**
+	* @deprecated {@link #getTable(long, long, String)}
+	*/
 	public static com.liferay.portlet.expando.model.ExpandoTable getTable(
 		long classNameId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -241,6 +250,9 @@ public class ExpandoTableLocalServiceUtil {
 		return getService().getTable(companyId, className, name);
 	}
 
+	/**
+	* @deprecated {@link #getTable(long, String, String)}
+	*/
 	public static com.liferay.portlet.expando.model.ExpandoTable getTable(
 		java.lang.String className, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException,

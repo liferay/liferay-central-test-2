@@ -50,7 +50,6 @@ request.setAttribute("view_event.jsp-event", event);
 />
 
 <aui:layout cssClass="event">
-
 	<aui:column columnWidth="<%= 75 %>" cssClass="folder-column folder-column-first" first="<%= true %>">
 		<dl class="property-list">
 			<dt>

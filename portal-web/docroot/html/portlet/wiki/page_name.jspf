@@ -20,7 +20,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <c:if test="<%= Validator.isNotNull(title) %>">
 	<liferay-ui:tabs
-		names='<%= title %>'
-		backURL='<%= PortalUtil.escapeRedirect(redirect) %>'
+		names="<%= title %>"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 </c:if>

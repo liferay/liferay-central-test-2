@@ -14,15 +14,19 @@
 
 package com.liferay.portlet.expando.model.impl;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.model.ExpandoValue;
+import com.liferay.util.TextFormatter;
 
 import java.io.IOException;
 import java.io.Serializable;
+
+import java.util.Locale;
 
 /**
  * <a href="ExpandoColumnImpl.java.html"><b><i>View Source</i></b></a>
@@ -97,6 +101,18 @@ public class ExpandoColumnImpl
 		catch (Exception e) {
 			return null;
 		}
+	}
+
+	public String getDisplayName(Locale locale) {
+		String name = getName();
+
+		String displayName = LanguageUtil.get(locale, name);
+
+		if (name.equals(displayName)) {
+			displayName = TextFormatter.format(name, TextFormatter.J);
+		}
+
+		return displayName;
 	}
 
 	public String getTypeSettings() {

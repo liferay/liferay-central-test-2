@@ -166,6 +166,10 @@ public class ExpandoColumnWrapper implements ExpandoColumn {
 		return _expandoColumn.getDefaultValue();
 	}
 
+	public java.lang.String getDisplayName(java.util.Locale locale) {
+		return _expandoColumn.getDisplayName(locale);
+	}
+
 	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties() {
 		return _expandoColumn.getTypeSettingsProperties();
 	}

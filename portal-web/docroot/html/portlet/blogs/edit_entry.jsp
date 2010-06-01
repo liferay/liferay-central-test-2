@@ -40,7 +40,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 %>
 
 <liferay-ui:tabs
-	names='<%= entry != null ? entry.getTitle() : "new-blog-entry" %>'
+	names='<%= (entry != null) ? entry.getTitle() : "new-blog-entry" %>'
 	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 

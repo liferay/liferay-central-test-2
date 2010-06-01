@@ -32,18 +32,9 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 UnicodeProperties properties = new UnicodeProperties(true);
 Serializable defaultValue = null;
 
-String localizedName = StringPool.BLANK;
-
 if (column != null) {
 	properties = expandoBridge.getAttributeProperties(column.getName());
 	defaultValue = expandoBridge.getAttributeDefault(column.getName());
-
-	String name = column.getName();
-	localizedName = LanguageUtil.get(pageContext, name);
-
-	if (name.equals(localizedName)) {
-		localizedName = TextFormatter.format(name, TextFormatter.J);
-	}
 }
 
 boolean propertyHidden = GetterUtil.getBoolean(properties.get(ExpandoColumnConstants.PROPERTY_HIDDEN));
@@ -78,7 +69,7 @@ portletURL.setParameter("modelResource", modelResource);
 	<br />
 
 	<liferay-ui:tabs
-		names='<%= (column != null) ? localizedName : "new-custom-field" %>'
+		names='<%= (column != null) ? column.getDisplayName(locale) : "new-custom-field" %>'
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 

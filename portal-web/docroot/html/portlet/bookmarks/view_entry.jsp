@@ -37,11 +37,11 @@ request.setAttribute("view_entry.jsp-entry", entry);
 	</portlet:renderURL>
 
 	<%
-		String folderName = LanguageUtil.get(pageContext, "bookmarks-home");
+	String folderName = LanguageUtil.get(pageContext, "bookmarks-home");
 
-		if (Validator.isNotNull(folder.getName())) {
-			folderName = folder.getName();
-		}
+	if (Validator.isNotNull(folder.getName())) {
+		folderName = folder.getName();
+	}
 	%>
 
 	<liferay-ui:tabs

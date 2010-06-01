@@ -115,11 +115,11 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	</portlet:renderURL>
 
 	<%
-		String parentFolderName = LanguageUtil.get(pageContext, "document-home");
+	String parentFolderName = LanguageUtil.get(pageContext, "document-home");
 
-		if (Validator.isNotNull(folder.getName())) {
-			parentFolderName = folder.getName();
-		}
+	if (Validator.isNotNull(folder.getName())) {
+		parentFolderName = folder.getName();
+	}
 	%>
 
 	<liferay-ui:tabs
