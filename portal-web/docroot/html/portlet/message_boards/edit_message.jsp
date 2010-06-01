@@ -437,7 +437,7 @@ if (Validator.isNull(redirect)) {
 				function(event) {
 					var button = event.target;
 					var span = A.one("#<portlet:namespace />existingFile" + <%= i %>);
-					var file = A.one("#<portlet:namespace />msgFile" + <%= i %>).ancestor('.aui-field');
+					var file = A.one("#<portlet:namespace />msgFile" + <%= i %>);
 
 					if (button) {
 						button.remove();
@@ -448,7 +448,7 @@ if (Validator.isNull(redirect)) {
 					}
 
 					if (file) {
-						file.show();
+						file.ancestor('.aui-field').show();
 					}
 				}
 			);
