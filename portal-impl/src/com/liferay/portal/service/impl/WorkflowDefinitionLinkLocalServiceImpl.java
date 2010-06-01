@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowEngineManagerUtil;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.WorkflowDefinitionLink;
 import com.liferay.portal.service.base.WorkflowDefinitionLinkLocalServiceBaseImpl;
@@ -117,6 +118,12 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 		WorkflowDefinitionLink workflowDefinitionLink = null;
 
 		if (groupId > 0) {
+			Group group = groupLocalService.getGroup(groupId);
+
+			if (group.isLayout()) {
+				groupId = group.getParentGroupId();
+			}
+
 			workflowDefinitionLink =
 				workflowDefinitionLinkPersistence.fetchByG_C_C(
 					groupId, companyId, classNameId);
