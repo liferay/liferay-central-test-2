@@ -37,3 +37,14 @@ WikiPageDisplay pageDisplay = WikiCacheUtil.getDisplay(wikiPage.getNodeId(), wik
 %>
 
 <%= pageDisplay.getFormattedContent() %>
+
+<div class="custom-attributes">
+	<liferay-ui:custom-attributes-available className="<%= WikiPage.class.getName() %>">
+			<liferay-ui:custom-attribute-list
+				className="<%= WikiPage.class.getName() %>"
+				classPK="<%= (wikiPage != null) ? wikiPage.getPrimaryKey() : 0 %>"
+				editable="<%= false %>"
+				label="<%= true %>"
+			/>
+	</liferay-ui:custom-attributes-available>
+</div>

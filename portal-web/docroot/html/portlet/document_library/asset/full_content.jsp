@@ -27,3 +27,14 @@ DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRA
 </div>
 
 <p class="asset-description"><%= fileEntry.getDescription() %></p>
+
+<div class="custom-attributes">
+	<liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
+		<liferay-ui:custom-attribute-list
+			className="<%= DLFileEntry.class.getName() %>"
+			classPK="<%= (fileEntry != null) ? fileEntry.getFileEntryId() : 0 %>"
+			editable="<%= false %>"
+			label="<%= true %>"
+		/>
+	</liferay-ui:custom-attributes-available>
+</div>
