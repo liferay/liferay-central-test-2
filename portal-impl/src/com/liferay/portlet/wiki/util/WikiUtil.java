@@ -15,7 +15,6 @@
 package com.liferay.portlet.wiki.util;
 
 import com.liferay.portal.kernel.configuration.Filter;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
@@ -309,7 +308,7 @@ public class WikiUtil {
 	}
 
 	public static List<WikiNode> getNodes(PortletRequest portletRequest)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -334,7 +333,7 @@ public class WikiUtil {
 	public static List<WikiNode> getNodes(
 			long groupId, String[] visibleNodes, String[] hiddenNodes,
 			PermissionChecker permissionChecker)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<WikiNode> nodes = WikiNodeLocalServiceUtil.getNodes(groupId);
 
