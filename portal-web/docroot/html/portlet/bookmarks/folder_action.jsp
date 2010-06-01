@@ -62,7 +62,7 @@ if (row == null) {
 }
 %>
 
-<liferay-ui:icon-menu showExpanded="<%= view %>">
+<liferay-ui:icon-menu showExpanded="<%= view %>" showWhenSingleIcon="<%= view %>">
 	<c:if test="<%= (folder != null) && BookmarksFolderPermission.contains(permissionChecker, folder, ActionKeys.UPDATE) %>">
 		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/bookmarks/edit_folder" />

@@ -70,7 +70,7 @@ viewFolderURL.setParameter("struts_action", "/document_library/view");
 viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 %>
 
-<liferay-ui:icon-menu showExpanded="<%= view %>">
+<liferay-ui:icon-menu showExpanded="<%= view %>" showWhenSingleIcon="<%= view %>">
 	<c:choose>
 		<c:when test="<%= fileEntry != null %>">
 			<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW) %>">

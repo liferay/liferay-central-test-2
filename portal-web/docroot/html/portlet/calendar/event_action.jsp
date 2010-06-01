@@ -33,7 +33,7 @@ else {
 }
 %>
 
-<liferay-ui:icon-menu showExpanded="<%= view %>">
+<liferay-ui:icon-menu showExpanded="<%= view %>" showWhenSingleIcon="<%= view %>">
 	<c:if test="<%= CalEventPermission.contains(permissionChecker, event, ActionKeys.UPDATE) %>">
 		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/calendar/edit_event" />

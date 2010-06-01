@@ -42,7 +42,7 @@ else {
 }
 %>
 
-<liferay-ui:icon-menu showExpanded="<%= view %>">
+<liferay-ui:icon-menu showExpanded="<%= view %>" showWhenSingleIcon="<%= view %>">
 	<c:if test="<%= BookmarksEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) %>">
 		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/bookmarks/edit_entry" />
