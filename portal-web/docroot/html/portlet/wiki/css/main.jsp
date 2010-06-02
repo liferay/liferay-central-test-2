@@ -323,3 +323,7 @@
 	border: none;
 	padding: 0.1em 10px 0.1em 0;
 }
+
+.portlet-wiki #wikiCommentsPanelContainer {
+	border-width: 0;
+}

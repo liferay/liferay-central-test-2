@@ -101,34 +101,35 @@ request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
 </c:if>
 
 <c:if test="<%= enableComments %>">
-	<br />
+	<liferay-ui:panel-container extended="<%= false %>" id="blogsCommentsPanelContainer" persistState="<%= true %>">
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="blogsCommentsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "comments") %>'>
 
-	<liferay-ui:tabs names="comments" />
+			<c:if test="<%= PropsValues.BLOGS_TRACKBACK_ENABLED && entry.isAllowTrackbacks() %>">
+				<liferay-ui:message key="trackback-url" />:
 
-	<c:if test="<%= PropsValues.BLOGS_TRACKBACK_ENABLED && entry.isAllowTrackbacks() %>">
-		<liferay-ui:message key="trackback-url" />:
+				<liferay-ui:input-resource
+					url='<%= PortalUtil.getLayoutFullURL(themeDisplay) + Portal.FRIENDLY_URL_SEPARATOR + "blogs/trackback/" + entry.getUrlTitle() %>'
+				/>
 
-		<liferay-ui:input-resource
-			url='<%= PortalUtil.getLayoutFullURL(themeDisplay) + Portal.FRIENDLY_URL_SEPARATOR + "blogs/trackback/" + entry.getUrlTitle() %>'
-		/>
+				<br /><br />
+			</c:if>
 
-		<br /><br />
-	</c:if>
+			<portlet:actionURL var="discussionURL">
+				<portlet:param name="struts_action" value="/blogs/edit_entry_discussion" />
+			</portlet:actionURL>
 
-	<portlet:actionURL var="discussionURL">
-		<portlet:param name="struts_action" value="/blogs/edit_entry_discussion" />
-	</portlet:actionURL>
-
-	<liferay-ui:discussion
-		className="<%= BlogsEntry.class.getName() %>"
-		classPK="<%= entry.getEntryId() %>"
-		formAction="<%= discussionURL %>"
-		formName="fm2"
-		ratingsEnabled="<%= enableCommentRatings %>"
-		redirect="<%= currentURL %>"
-		subject="<%= entry.getTitle() %>"
-		userId="<%= entry.getUserId() %>"
-	/>
+			<liferay-ui:discussion
+				className="<%= BlogsEntry.class.getName() %>"
+				classPK="<%= entry.getEntryId() %>"
+				formAction="<%= discussionURL %>"
+				formName="fm2"
+				ratingsEnabled="<%= enableCommentRatings %>"
+				redirect="<%= currentURL %>"
+				subject="<%= entry.getTitle() %>"
+				userId="<%= entry.getUserId() %>"
+			/>
+		</liferay-ui:panel>
+	</liferay-ui:panel-container>
 </c:if>
 
 <%

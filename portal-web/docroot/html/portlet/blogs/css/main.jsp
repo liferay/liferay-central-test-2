@@ -144,3 +144,7 @@
 .portlet-blogs .taglib-social-bookmarks ul {
 	padding: 1em;
 }
+
+.portlet-blogs #blogsCommentsPanelContainer {
+	border-width: 0;
+}

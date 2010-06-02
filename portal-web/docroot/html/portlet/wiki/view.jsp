@@ -259,35 +259,26 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 	</c:if>
 
 	<c:if test="<%= enableComments %>">
+		<liferay-ui:panel-container extended="<%= false %>" id="wikiCommentsPanelContainer" persistState="<%= true %>">
+			<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="wikiCommentsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "comments") %>'>
 
-		<%
-		int discussionMessagesCount = 0;
+				<portlet:actionURL var="discussionURL">
+					<portlet:param name="struts_action" value="/wiki/edit_page_discussion" />
+				</portlet:actionURL>
 
-		if (wikiPage != null) {
-			discussionMessagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(PortalUtil.getClassNameId(WikiPage.class.getName()), wikiPage.getResourcePrimKey(), WorkflowConstants.STATUS_APPROVED);
-		}
-		%>
+				<liferay-ui:discussion
+					className="<%= WikiPage.class.getName() %>"
+					classPK="<%= wikiPage.getResourcePrimKey() %>"
+					formAction="<%= discussionURL %>"
+					formName="fm2"
+					ratingsEnabled="<%= enableCommentRatings %>"
+					redirect="<%= currentURL %>"
+					subject="<%= wikiPage.getTitle() %>"
+					userId="<%= wikiPage.getUserId() %>"
+				/>
 
-		<c:if test="<%= discussionMessagesCount > 0 %>">
-			<br />
-
-			<liferay-ui:tabs names="comments" />
-		</c:if>
-
-		<portlet:actionURL var="discussionURL">
-			<portlet:param name="struts_action" value="/wiki/edit_page_discussion" />
-		</portlet:actionURL>
-
-		<liferay-ui:discussion
-			className="<%= WikiPage.class.getName() %>"
-			classPK="<%= wikiPage.getResourcePrimKey() %>"
-			formAction="<%= discussionURL %>"
-			formName="fm2"
-			ratingsEnabled="<%= enableCommentRatings %>"
-			redirect="<%= currentURL %>"
-			subject="<%= wikiPage.getTitle() %>"
-			userId="<%= wikiPage.getUserId() %>"
-		/>
+			</liferay-ui:panel>
+		</liferay-ui:panel-container>
 	</c:if>
 </c:if>
 
