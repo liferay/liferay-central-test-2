@@ -158,7 +158,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Workflow
 
-
 		if ((trackbacks != null) && (trackbacks.length > 0)) {
 			serviceContext.setAttribute("trackbacks", trackbacks);
 		}
