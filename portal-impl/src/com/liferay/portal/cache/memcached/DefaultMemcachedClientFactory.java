@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.cache.memcached.factory;
+package com.liferay.portal.cache.memcached;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;

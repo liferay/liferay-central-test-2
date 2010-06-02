@@ -14,7 +14,6 @@
 
 package com.liferay.portal.cache.memcached;
 
-import com.liferay.portal.cache.memcached.factory.MemcachedClientFactory;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.cache.PortalCacheManager;
 
