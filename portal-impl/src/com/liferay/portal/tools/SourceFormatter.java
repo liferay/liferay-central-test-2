@@ -31,11 +31,14 @@ import com.liferay.portal.util.FileImpl;
 import com.liferay.portal.xml.SAXReaderImpl;
 
 import java.io.File;
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
+
 import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
@@ -46,40 +49,64 @@ import java.util.regex.Pattern;
 import org.apache.tools.ant.DirectoryScanner;
 
 /**
- * Source formatter.
- * <p>
- * Note for developers:
- * <li>do not use <code>DirectoryScanner.scan()</code> directly! Instead
- * use helper for that.
- * <li>do not report errors using <code>System.out</code>! Instead
- * use helper for that.
- *
  * <a href="SourceFormatter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Igor Spasic
  */
 public class SourceFormatter {
 
-	protected static SourceFormatterHelper helper;
+	public static void _checkPersistenceTestSuite() throws IOException {
+		String basedir = "./portal-impl/test";
 
-	public static void main(String[] args) {
-		boolean cache = false;
-
-		if (args.length == 1) {
-			if (args[0].equals("cached")) {
-				cache = true;
-			}
-		}
-		helper = new SourceFormatterHelper(cache);
-		try {
-			helper.init();
-		}
-		catch (IOException ioex) {
-			ioex.printStackTrace();
+		if (!_fileUtil.exists(basedir)) {
 			return;
 		}
 
+		DirectoryScanner directoryScanner = new DirectoryScanner();
+
+		directoryScanner.setBasedir(basedir);
+		directoryScanner.setIncludes(
+			new String[] {"**\\*PersistenceTest.java"});
+
+		List<String> fileNames = _sourceFormatterHelper.scanForFiles(
+			directoryScanner);
+
+		List<String> persistenceTests = new ArrayList<String>();
+
+		for (String fileName : fileNames) {
+			String persistenceTest = fileName.substring(
+				0, fileName.length() - 5);
+
+			persistenceTest = persistenceTest.substring(
+				persistenceTest.lastIndexOf(File.separator) + 1,
+				persistenceTest.length());
+
+			persistenceTests.add(persistenceTest);
+		}
+
+		String persistenceTestSuiteFileName =
+			basedir + "/com/liferay/portal/service/persistence/" +
+				"PersistenceTestSuite.java"; 
+
+		String persistenceTestSuiteContent = _fileUtil.read(
+			persistenceTestSuiteFileName);
+
+		for (String persistenceTest : persistenceTests) {
+			if (!persistenceTestSuiteContent.contains(persistenceTest)) {
+				_sourceFormatterHelper.printError(
+					persistenceTestSuiteFileName,
+					"PersistenceTestSuite: " + persistenceTest);
+			}
+		}
+	}
+
+	public static void main(String[] args) {
 		try {
+			_sourceFormatterHelper = new SourceFormatterHelper(true);
+
+			_sourceFormatterHelper.init();
+
 			_readExclusions();
 
 			Thread thread1 = new Thread () {
@@ -112,16 +139,11 @@ public class SourceFormatter {
 
 			thread1.join();
 			thread2.join();
+
+			_sourceFormatterHelper.close();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-		}
-
-		try {
-			helper.close();
-		}
-		catch (IOException ioex) {
-			ioex.printStackTrace();
 		}
 	}
 
@@ -196,45 +218,6 @@ public class SourceFormatter {
 		return content;
 	}
 
-	public static void _checkPersistenceTestSuite() throws IOException {
-		String basedir = "./portal-impl/test";
-
-		if (!_fileUtil.exists(basedir)) {
-			return;
-		}
-
-		DirectoryScanner ds = new DirectoryScanner();
-
-		ds.setBasedir(basedir);
-		ds.setIncludes(new String[] {"**\\*PersistenceTest.java"});
-
-		String[] files = helper.scanForFiles(ds);
-
-		List<String> persistenceTests = new ArrayList<String>();
-
-		for (String file : files) {
-			String persistenceTest = file.substring(0, file.length() - 5);
-
-			persistenceTest = persistenceTest.substring(
-				persistenceTest.lastIndexOf(File.separator) + 1,
-				persistenceTest.length());
-
-			persistenceTests.add(persistenceTest);
-		}
-
-		String persistenceTestSuite = _fileUtil.read(
-			basedir + "/com/liferay/portal/service/persistence/" +
-				"PersistenceTestSuite.java");
-
-		for (int i = 0, size = persistenceTests.size(); i < size; i++) {
-			String persistenceTest = persistenceTests.get(i);
-			if (persistenceTestSuite.indexOf(persistenceTest) == -1) {
-				helper.printFmtError(
-					files[i], "PersistenceTestSuite: " + persistenceTest);
-			}
-		}
-	}
-
 	private static void _checkXSS(String fileName, String jspContent) {
 		Matcher matcher = _xssPattern.matcher(jspContent);
 
@@ -288,7 +271,7 @@ public class SourceFormatter {
 			}
 
 			if (xssVulnerable) {
-				helper.printFmtError(
+				_sourceFormatterHelper.printError(
 					fileName, "(xss): " + fileName + " (" + jspVariable + ")");
 			}
 		}
@@ -297,15 +280,16 @@ public class SourceFormatter {
 	private static void _formatAntXML() throws DocumentException, IOException {
 		String basedir = "./";
 
-		DirectoryScanner ds = new DirectoryScanner();
+		DirectoryScanner directoryScanner = new DirectoryScanner();
 
-		ds.setBasedir(basedir);
-		ds.setIncludes(new String[] {"**\\b*.xml"});
+		directoryScanner.setBasedir(basedir);
+		directoryScanner.setIncludes(new String[] {"**\\b*.xml"});
 
-		String[] files = helper.scanForFiles(ds);
+		List<String> fileNames = _sourceFormatterHelper.scanForFiles(
+			directoryScanner);
 
-		for (String file : files) {
-			String content = _fileUtil.read(basedir + file);
+		for (String fileName : fileNames) {
+			String content = _fileUtil.read(basedir + fileName);
 
 			Document document = _saxReaderUtil.read(content);
 
@@ -323,8 +307,8 @@ public class SourceFormatter {
 				}
 
 				if (name.compareTo(previousName) < -1) {
-					helper.printFmtError(
-						file, file + " has an unordered target " + name);
+					_sourceFormatterHelper.printError(
+						fileName, fileName + " has an unordered target " + name);
 
 					break;
 				}
@@ -334,7 +318,7 @@ public class SourceFormatter {
 		}
 	}
 
-	public static String _formatImports(String imports) throws IOException {
+	private static String _formatImports(String imports) throws IOException {
 		if ((imports.indexOf("/*") != -1) ||
 			(imports.indexOf("*/") != -1) ||
 			(imports.indexOf("//") != -1)) {
@@ -397,44 +381,19 @@ public class SourceFormatter {
 
 		boolean portalJavaFiles = true;
 
-		String[] files = null;
+		Collection<String> fileNames = null;
 
 		if (_fileUtil.exists(basedir + "portal-impl")) {
-			files = _getPortalJavaFiles();
+			fileNames = _getPortalJavaFiles();
 		}
 		else {
 			portalJavaFiles = false;
 
-			files = _getPluginJavaFiles();
+			fileNames = _getPluginJavaFiles();
 		}
 
-//		Properties properties = new Properties();
-//
-//		File propertiesFile = _getPropertiesFile(basedir, ".java.temp");
-//
-//		String propertiesContent = StringPool.BLANK;
-//
-//		if (propertiesFile.exists()) {
-//			propertiesContent = _fileUtil.read(propertiesFile);
-//
-//			PropertiesUtil.load(properties, propertiesContent);
-//		}
-
-		for (int i = 0; i < files.length; i++) {
-			File file = new File(basedir + files[i]);
-
-//			String key = StringUtil.replace(
-//				file.getPath(), StringPool.BACK_SLASH, StringPool.SLASH);
-//
-//			long lastModified = GetterUtil.getLong(properties.getProperty(key));
-//
-//			if (file.lastModified() == lastModified) {
-//				continue;
-//			}
-//			else {
-//				properties.setProperty(
-//					key, String.valueOf(file.lastModified()));
-//			}
+		for (String fileName : fileNames) {
+			File file = new File(fileName);
 
 			String content = _fileUtil.read(file);
 
@@ -442,7 +401,7 @@ public class SourceFormatter {
 
 			className = className.substring(0, className.length() - 5);
 
-			String packagePath = files[i];
+			String packagePath = fileName;
 
 			int packagePathX = packagePath.indexOf(
 				File.separator + "src" + File.separator);
@@ -468,10 +427,10 @@ public class SourceFormatter {
 			}
 
 			String newContent = _formatJavaContent(
-				files[i], className, content);
+				fileName, className, content);
 
 			if (newContent.indexOf("$\n */") != -1) {
-				helper.printFmtError(files[i], "*: " + files[i]);
+				_sourceFormatterHelper.printError(fileName, "*: " + fileName);
 
 				newContent = StringUtil.replace(
 					newContent, "$\n */", "$\n *\n */");
@@ -481,15 +440,17 @@ public class SourceFormatter {
 				newContent = StringUtil.replace(
 					newContent, oldCopyright, copyright);
 
-				helper.printFmtError(files[i], "old (c): " + files[i]);
+				_sourceFormatterHelper.printError(
+					fileName, "old (c): " + fileName);
 			}
 
 			if (newContent.indexOf(copyright) == -1) {
-				helper.printFmtError(files[i], "(c): " + files[i]);
+				_sourceFormatterHelper.printError(fileName, "(c): " + fileName);
 			}
 
 			if (newContent.indexOf(className + ".java.html") == -1) {
-				helper.printFmtError(files[i], "Java2HTML: " + files[i]);
+				_sourceFormatterHelper.printError(
+					fileName, "Java2HTML: " + fileName);
 			}
 
 			if (newContent.contains(" * @author Raymond Aug") && 
@@ -498,7 +459,8 @@ public class SourceFormatter {
 				newContent = newContent.replaceFirst(
 					"Raymond Aug.++", "Raymond Aug\u00e9");
 
-				helper.printFmtError(files[i], "UTF-8: " + files[i]);
+				_sourceFormatterHelper.printError(
+					fileName, "UTF-8: " + fileName);
 			}
 
 			if (newContent.contains("com.liferay.portal.PortalException")) {
@@ -557,43 +519,40 @@ public class SourceFormatter {
 			}
 
 			if (newContent.indexOf("*/\npackage ") != -1) {
-				helper.printFmtError(files[i], "package: " + files[i]);
+				_sourceFormatterHelper.printError(
+					fileName, "package: " + fileName);
 			}
 
 			if (newContent.indexOf("    ") != -1) {
-				if (!files[i].endsWith("StringPool.java")) {
-					helper.printFmtError(files[i], "tab: " + files[i]);
+				if (!fileName.endsWith("StringPool.java")) {
+					_sourceFormatterHelper.printError(
+						fileName, "tab: " + fileName);
 				}
 			}
 
 			if (newContent.indexOf("  {") != -1) {
-				helper.printFmtError(files[i], "{:" + files[i]);
+				_sourceFormatterHelper.printError(fileName, "{:" + fileName);
 			}
 
 			if (!newContent.endsWith("\n\n}") &&
 				!newContent.endsWith("{\n}")) {
 
-				helper.printFmtError(files[i], "}: " + files[i]);
+				_sourceFormatterHelper.printError(fileName, "}: " + fileName);
 			}
 
 			if (portalJavaFiles && className.endsWith("ServiceImpl") &&
 				(newContent.indexOf("ServiceUtil.") != -1)) {
 
-				helper.printFmtError(files[i], "ServiceUtil: " + files[i]);
+				_sourceFormatterHelper.printError(
+					fileName, "ServiceUtil: " + fileName);
 			}
 
 			if ((newContent != null) && !content.equals(newContent)) {
 				_fileUtil.write(file, newContent);
 
-				helper.printFmtError(files[i], file);
+				_sourceFormatterHelper.printError(fileName, file);
 			}
 		}
-
-//		String newPropertiesContent = PropertiesUtil.toString(properties);
-//
-//		if (!propertiesContent.equals(newPropertiesContent)) {
-//			//_fileUtil.write(propertiesFile, newPropertiesContent);
-//		}
 	}
 
 	private static String _formatJavaContent(
@@ -677,7 +636,7 @@ public class SourceFormatter {
 					line.contains("String TABLE_SQL_CREATE = ")) {
 				}
 				else {
-					helper.printFmtError(
+					_sourceFormatterHelper.printError(
 						fileName, "> 80: " + fileName + " " + lineCount);
 				}
 			}
@@ -709,17 +668,18 @@ public class SourceFormatter {
 
 		List<String> list = new ArrayList<String>();
 
-		DirectoryScanner ds = new DirectoryScanner();
+		DirectoryScanner directoryScanner = new DirectoryScanner();
 
-		ds.setBasedir(basedir);
-		ds.setExcludes(
+		directoryScanner.setBasedir(basedir);
+		directoryScanner.setExcludes(
 			new String[] {
 				"**\\portal\\aui\\**", "**\\bin\\**", "**\\null.jsp",
 				"**\\tmp\\**", "**\\tools\\tck\\**"
 			});
-		ds.setIncludes(new String[] {"**\\*.jsp", "**\\*.jspf", "**\\*.vm"});
+		directoryScanner.setIncludes(
+			new String[] {"**\\*.jsp", "**\\*.jspf", "**\\*.vm"});
 
-		list.addAll(ListUtil.fromArray(helper.scanForFiles(ds)));
+		list.addAll(_sourceFormatterHelper.scanForFiles(directoryScanner));
 
 		String[] files = list.toArray(new String[list.size()]);
 
@@ -756,11 +716,13 @@ public class SourceFormatter {
 					newContent = StringUtil.replace(
 						newContent, oldCopyright, copyright);
 
-					helper.printFmtError(files[i], "old (c): " + files[i]);
+					_sourceFormatterHelper.printError(
+						files[i], "old (c): " + files[i]);
 				}
 
 				if (newContent.indexOf(copyright) == -1) {
-					helper.printFmtError(files[i], "(c): " + files[i]);
+					_sourceFormatterHelper.printError(
+						files[i], "(c): " + files[i]);
 				}
 			}
 
@@ -790,7 +752,8 @@ public class SourceFormatter {
 
 			if (newContent.indexOf("    ") != -1) {
 				if (!files[i].endsWith("template.vm")) {
-					helper.printFmtError(files[i], "tab: " + files[i]);
+					_sourceFormatterHelper.printError(
+						files[i], "tab: " + files[i]);
 				}
 			}
 
@@ -798,7 +761,7 @@ public class SourceFormatter {
 
 			if ((newContent != null) && !content.equals(newContent)) {
 				_fileUtil.write(file, newContent);
-				helper.printFmtError(files[i], file);
+				_sourceFormatterHelper.printError(files[i], file);
 			}
 		}
 
@@ -882,8 +845,8 @@ public class SourceFormatter {
 						content = sb.toString();
 					}
 					else {
-						helper.printFmtError(fileName,
-							"taglib: " + fileName + " " + lineCount);
+						_sourceFormatterHelper.printError(
+							fileName, "taglib: " + fileName + " " + lineCount);
 					}
 				}
 
@@ -966,18 +929,19 @@ public class SourceFormatter {
 			String webXML = ContentUtil.get(
 				"com/liferay/portal/deploy/dependencies/web.xml");
 
-			DirectoryScanner ds = new DirectoryScanner();
+			DirectoryScanner directoryScanner = new DirectoryScanner();
 
-			ds.setBasedir(basedir);
-			ds.setIncludes(new String[] {"**\\web.xml"});
+			directoryScanner.setBasedir(basedir);
+			directoryScanner.setIncludes(new String[] {"**\\web.xml"});
 
-			String[] files = helper.scanForFiles(ds);
+			List<String> fileNames = _sourceFormatterHelper.scanForFiles(
+				directoryScanner);
 
-			for (String file : files) {
-				String content = _fileUtil.read(basedir + file);
+			for (String fileName : fileNames) {
+				String content = _fileUtil.read(basedir + fileName);
 
 				if (content.equals(webXML)) {
-					helper.printFmtError(file, file);
+					_sourceFormatterHelper.printError(fileName, fileName);
 				}
 			}
 		}
@@ -1016,15 +980,15 @@ public class SourceFormatter {
 		}
 	}
 
-	private static String[] _getPluginJavaFiles() {
+	private static Collection<String> _getPluginJavaFiles() {
 		String basedir = "./";
 
-		Set<String> list = new TreeSet<String>();
+		Collection<String> fileNames = new TreeSet<String>();
 
-		DirectoryScanner ds = new DirectoryScanner();
+		DirectoryScanner directoryScanner = new DirectoryScanner();
 
-		ds.setBasedir(basedir);
-		ds.setExcludes(
+		directoryScanner.setBasedir(basedir);
+		directoryScanner.setExcludes(
 			new String[] {
 				"**\\bin\\**", "**\\model\\*Clp.java",
 				"**\\model\\impl\\*ModelImpl.java",
@@ -1049,22 +1013,22 @@ public class SourceFormatter {
 				"**\\service\\persistence\\*PersistenceImpl.java",
 				"**\\tmp\\**"
 			});
-		ds.setIncludes(new String[] {"**\\*.java"});
+		directoryScanner.setIncludes(new String[] {"**\\*.java"});
 
-		list.addAll(ListUtil.fromArray(helper.scanForFiles(ds)));
+		fileNames.addAll(_sourceFormatterHelper.scanForFiles(directoryScanner));
 
-		return list.toArray(new String[list.size()]);
+		return fileNames;
 	}
 
-	private static String[] _getPortalJavaFiles() {
+	private static Collection<String> _getPortalJavaFiles() {
 		String basedir = "./";
 
-		Set<String> list = new TreeSet<String>();
+		Collection<String> fileNames = new TreeSet<String>();
 
-		DirectoryScanner ds = new DirectoryScanner();
+		DirectoryScanner directoryScanner = new DirectoryScanner();
 
-		ds.setBasedir(basedir);
-		ds.setExcludes(
+		directoryScanner.setBasedir(basedir);
+		directoryScanner.setExcludes(
 			new String[] {
 				"**\\InstanceWrapperBuilder.java", "**\\*_IW.java",
 				"**\\PropsKeys.java", "**\\PropsValues.java",
@@ -1081,20 +1045,20 @@ public class SourceFormatter {
 				"**\\portlet\\**\\service\\**", "**\\tmp\\**",
 				"**\\tools\\ext_tmpl\\**",  "**\\tools\\tck\\**"
 			});
-		ds.setIncludes(new String[] {"**\\*.java"});
+		directoryScanner.setIncludes(new String[] {"**\\*.java"});
 
-		list.addAll(ListUtil.fromArray(helper.scanForFiles(ds)));
+		fileNames.addAll(_sourceFormatterHelper.scanForFiles(directoryScanner));
 
-		ds = new DirectoryScanner();
+		directoryScanner = new DirectoryScanner();
 
-		ds.setBasedir(basedir);
-		ds.setExcludes(
+		directoryScanner.setBasedir(basedir);
+		directoryScanner.setExcludes(
 			new String[] {
 				"**\\bin\\**", "**\\portal-client\\**",
 				"**\\tools\\ext_tmpl\\**", "**\\*_IW.java",
 				"**\\test\\**\\*PersistenceTest.java"
 			});
-		ds.setIncludes(
+		directoryScanner.setIncludes(
 			new String[] {
 				"**\\com\\liferay\\portal\\service\\ServiceContext*.java",
 				"**\\model\\BaseModel.java",
@@ -1117,9 +1081,9 @@ public class SourceFormatter {
 				"**\\util-bridges\\**\\*.java"
 			});
 
-		list.addAll(ListUtil.fromArray(helper.scanForFiles(ds)));
+		fileNames.addAll(_sourceFormatterHelper.scanForFiles(directoryScanner));
 
-		return list.toArray(new String[list.size()]);
+		return fileNames;
 	}
 
 	private static String _getTaglibRegex(String quoteType) {
@@ -1173,9 +1137,10 @@ public class SourceFormatter {
 		"tiles"
 	};
 
-	private static FileImpl _fileUtil = FileImpl.getInstance();
 	private static Properties _exclusions;
+	private static FileImpl _fileUtil = FileImpl.getInstance();
 	private static SAXReaderImpl _saxReaderUtil = SAXReaderImpl.getInstance();
+	private static SourceFormatterHelper _sourceFormatterHelper;
 	private static Pattern _xssPattern = Pattern.compile(
 		"String\\s+([^\\s]+)\\s*=\\s*(Bean)?ParamUtil\\.getString\\(");
 

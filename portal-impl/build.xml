@@ -1008,7 +1008,6 @@ ${exception.message}
 			newenvironment="true"
 		>
 			<jvmarg value="-Xmx128m" />
-			<arg value="cached" />
 		</java>
 
 		<delete file="ServiceBuilder.temp" />

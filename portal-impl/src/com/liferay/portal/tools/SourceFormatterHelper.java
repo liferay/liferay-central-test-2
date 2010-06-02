@@ -14,8 +14,12 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.util.SystemProperties;
+import com.liferay.portal.util.FileImpl;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,131 +28,102 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import jodd.util.PropertiesUtil;
-
 import org.apache.tools.ant.DirectoryScanner;
 
-import static com.liferay.util.SystemProperties.TMP_DIR;
-
 /**
- * Helper for {@link SourceFormatter}. Used for scanning directories for
- * matched files and as a single point of reporting errors.
- * Optionally, it supports caching, so only modified files will be
- * returned during directory scanning.
- *
  * <a href="SourceFormatterHelper.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Igor Spasic
+ * @author Brian Wing Shun Chan
  */
 public class SourceFormatterHelper {
 
-	protected final boolean useCache;
-	protected Properties timestamps;
-	protected File timestampsFile;
-	protected long start;
-
-	SourceFormatterHelper(boolean useCache) {
-		if (useCache) {
-			System.out.println("(i) caching is enabled");
-		}
-		this.useCache = useCache;
+	public SourceFormatterHelper(boolean useCache) {
+		_useProperties = useCache;
 	}
 
-	/**
-	 * Scans directories and returns matched files. If caching is turned onm
-	 * only new files will be returned - those with the timestamp later
-	 * then cached one. If caching is turned off all files will be returned.
-	 * <p>
-	 * Directory scanning is the actual performance bottle neck. To optimize
-	 * this, caching should be implemented inside of DirectoryScanner.
-	 */
-	public String[] scanForFiles(DirectoryScanner ds) {
-		ds.scan();
-		String[] allFiles = ds.getIncludedFiles();
-		if (useCache == false) {
-			return allFiles;
-		}
-		List<String> newFiles = new ArrayList<String>(allFiles.length);
-		for (String fileName : allFiles) {
-			boolean isNewFile = true;
-			File file = new File(fileName);
-			String storedTime = timestamps.getProperty(fileName);
-			if (storedTime != null) {
-
-				// existing file, compare the timestamps
-
-				String ts = timestamps.getProperty(fileName);
-				long timestamp = ts == null ? 0 : Long.parseLong(ts);
-				if (timestamp <= file.lastModified()) {
-					isNewFile = false;
-				}
-			}
-			if (isNewFile) {
-				newFiles.add(fileName);
-				timestamps.setProperty(fileName,
-						String.valueOf(file.lastModified()));
-			}
-		}
-		return newFiles.toArray(new String[newFiles.size()]);
-	}
-
-	/**
-	 * Returns Liferay temp folder.
-	 */
-	protected static File getLiferayTempFolder() {
-		File tempFolder = new File(SystemProperties.get(TMP_DIR), "liferay");
-		tempFolder.mkdirs();
-		return tempFolder;
-	}
-
-	/**
-	 * Initializes helper.
-	 */
-	public void init() throws IOException {
-		start = System.currentTimeMillis();
-		if (useCache == false) {
+	public void close() throws IOException {
+		if (!_useProperties) {
 			return;
 		}
-		String baseName = new File("./portal-iml").getAbsolutePath();
-		baseName = StringUtil.replace(
-			baseName,
+
+		String newPropertiesContent = PropertiesUtil.toString(_properties);
+
+		if (!_propertiesContent.equals(newPropertiesContent)) {
+			_fileUtil.write(_propertiesFile, newPropertiesContent);
+		}
+	}
+
+	public void init() throws IOException {
+		if (!_useProperties) {
+			return;
+		}
+
+		File basedirFile = new File("./");
+
+		String basedirAbsolutePath = StringUtil.replace(
+			basedirFile.getAbsolutePath(),
 			new String[] {".", ":", "/", "\\"},
 			new String[] {"_", "_", "_", "_"});
 
-		timestampsFile = new File(
-			getLiferayTempFolder(), baseName + ".properties");
-		timestampsFile.createNewFile();
-		timestamps = PropertiesUtil.createFromFile(timestampsFile);
+		String propertiesFileName =
+			System.getProperty("java.io.tmpdir") + "/SourceFormatter." +
+				basedirAbsolutePath;
+
+		_propertiesFile = new File(propertiesFileName);
+
+		if (_propertiesFile.exists()) {
+			_propertiesContent = _fileUtil.read(_propertiesFile);
+
+			PropertiesUtil.load(_properties, _propertiesContent);
+		}
 	}
 
-	/**
-	 * Closes helper.
-	 */
-	public void close() throws IOException {
-		if (useCache == true) {
-			PropertiesUtil.writeToFile(timestamps, timestampsFile);
-		}
-		System.out.println(
-			"elapsed: " + (System.currentTimeMillis() - start) + " ms.");
+	public void printError(String fileName, File file) {
+		printError(fileName, file.toString());
 	}
 
-	/**
-	 * Prints out format error message. All errors must be reported
-	 * through this method.
-	 * @see #printFmtError(String, java.io.File)
-	 */
-	public void printFmtError(String fileName, String message) {
-		if (useCache == true) {
-			timestamps.remove(fileName);
+	public void printError(String fileName, String message) {
+		if (_useProperties) {
+			_properties.remove(fileName);
 		}
+
 		System.out.println(message);
 	}
 
-	/**
-	 * Prints out file name that has format error. All errors must be
-	 * reported through this method.
-	 * @see #printFmtError(String, String)
-	 */
-	public void printFmtError(String fileName, File file) {
-		printFmtError(fileName, file.toString());
+	public List<String> scanForFiles(DirectoryScanner directoryScanner) {
+		directoryScanner.scan();
+
+		String[] fileNamesArray = directoryScanner.getIncludedFiles();
+
+		if (!_useProperties) {
+			return ListUtil.toList(fileNamesArray);
+		}
+
+		List<String> fileNames = new ArrayList<String>(fileNamesArray.length);
+
+		for (String fileName : fileNamesArray) {
+			File file = new File(fileName);
+
+			long timestamp = GetterUtil.getLong(
+				_properties.getProperty(fileName));
+
+			if (timestamp > file.lastModified()) {
+				fileNames.add(fileName);
+
+				_properties.setProperty(
+					fileName, String.valueOf(file.lastModified()));
+			}
+		}
+
+		return fileNames;
 	}
+
+	private static FileImpl _fileUtil = FileImpl.getInstance();
+
+	private Properties _properties = new Properties();
+	private String _propertiesContent = StringPool.BLANK;
+	private File _propertiesFile;
+	private boolean _useProperties;
 
 }
