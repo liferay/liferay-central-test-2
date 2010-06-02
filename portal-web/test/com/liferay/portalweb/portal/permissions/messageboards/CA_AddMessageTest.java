@@ -53,10 +53,18 @@ public class CA_AddMessageTest extends BaseTestCase {
 		selenium.type("_19_subject", RuntimeVariables.replace("Test Thread 1"));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("Test Thread Message 1"));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
+		assertEquals(RuntimeVariables.replace("Test Thread 1"),
+			selenium.getText("//td[1]/a"));
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Test Thread 1"),
-			selenium.getText("//form/div[2]"));
+			selenium.getText("//li[1]/span/span/span"));
 		assertEquals(RuntimeVariables.replace("Test Thread 1"),
 			selenium.getText("//a/strong"));
 		assertEquals(RuntimeVariables.replace("Test Thread Message 1"),

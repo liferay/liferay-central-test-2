@@ -58,7 +58,8 @@ public class Member_EditThreadTest extends BaseTestCase {
 			RuntimeVariables.replace("Test Thread 2 Edited"));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("Test Thread 2 Edited"));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Thread 2 Edited"));
 	}

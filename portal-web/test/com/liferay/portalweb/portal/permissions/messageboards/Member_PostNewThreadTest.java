@@ -56,7 +56,8 @@ public class Member_PostNewThreadTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_19_subject", RuntimeVariables.replace("Test Thread 2"));
 		selenium.type("_19_textArea", RuntimeVariables.replace("Test Thread 2"));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Thread 2"));
 	}
