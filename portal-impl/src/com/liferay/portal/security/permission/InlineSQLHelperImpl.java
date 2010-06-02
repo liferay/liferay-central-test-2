@@ -98,6 +98,9 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			return sql;
 		}
 
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
 		String permissionJoin = StringPool.BLANK;
 
 		if (Validator.isNotNull(bridgeJoin)) {
@@ -109,11 +112,11 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 		StringBundler ownerSQL = new StringBundler(5);
 
 		if (Validator.isNotNull(userIdField)) {
-			ownerSQL.append(" OR (");
+			ownerSQL.append("(");
 			ownerSQL.append(userIdField);
 			ownerSQL.append(" = ");
 			ownerSQL.append(String.valueOf(getUserId()));
-			ownerSQL.append(")");
+			ownerSQL.append(") OR ");
 		}
 
 		permissionJoin = StringUtil.replace(
@@ -121,12 +124,16 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			new String[] {
 				"[$CLASS_NAME$]",
 				"[$CLASS_PK_FIELD$]",
+				"[$COMPANY_ID$]",
+				"[$GROUP_ID$]",
 				"[$OWNER_CHECK$]",
 				"[$ROLE_IDS$]"
 			},
 			new String[] {
 				className,
 				classPKField,
+				String.valueOf(permissionChecker.getCompanyId()),
+				String.valueOf(groupId),
 				ownerSQL.toString(),
 				StringUtil.merge(getRoleIds(groupId))
 			});
