@@ -1225,13 +1225,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		List<String> workflowHandlerClasses =
 			portletModel.getWorkflowHandlerClasses();
 
-		itr2 = portletElement.elements("workflow-handler").iterator();
+		for (Element workflowHandlerClassElement :
+				portletElement.elements("workflow-handler")) {
 
-		while (itr2.hasNext()) {
-			Element workflowHandlerClassEl = itr2.next();
-
-			workflowHandlerClasses.add(
-				workflowHandlerClassEl.getText());
+			workflowHandlerClasses.add(workflowHandlerClassElement.getText());
 		}
 
 		portletModel.setPreferencesCompanyWide(
