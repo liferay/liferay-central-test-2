@@ -32,11 +32,17 @@ import net.spy.memcached.MemcachedClientIF;
 public class MemcachePortalCacheManager implements PortalCacheManager {
 
 	public void afterPropertiesSet() {
-		_portalCaches = new ConcurrentHashMap<String, PortalCache>();
+		_portalCaches = new ConcurrentHashMap<String, MemcachePortalCache>();
 	}
 
 	public void clearAll() {
 		_portalCaches.clear();
+	}
+
+	public void destroy() throws Exception {
+		for (MemcachePortalCache cache : _portalCaches.values()) {
+			cache.destroy();
+		}
 	}
 
 	public PortalCache getCache(String name) {
@@ -44,7 +50,7 @@ public class MemcachePortalCacheManager implements PortalCacheManager {
 	}
 
 	public PortalCache getCache(String name, boolean blocking) {
-		PortalCache portalCache = _portalCaches.get(name);
+		MemcachePortalCache portalCache = _portalCaches.get(name);
 
 		if (portalCache == null) {
 			try {
@@ -80,7 +86,7 @@ public class MemcachePortalCacheManager implements PortalCacheManager {
 	}
 
 	private MemcachedClientFactory _memcachedClientFactory;
-	private Map<String, PortalCache> _portalCaches;
+	private Map<String, MemcachePortalCache> _portalCaches;
 	private int _timeout;
 	private TimeUnit _timeoutTimeUnit;
 

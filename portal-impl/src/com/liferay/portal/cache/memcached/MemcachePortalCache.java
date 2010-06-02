@@ -41,10 +41,25 @@ public class MemcachePortalCache implements PortalCache {
 		_timeoutTimeUnit = timeoutTimeUnit;
 	}
 
+	public void destroy() {
+		_memcachedClient.shutdown();
+	}
+
 	public Object get(String key) {
 		Object cachedObject = null;
 
-		Future<Object> future = _memcachedClient.asyncGet(key);
+		Future<Object> future = null;
+
+		try {
+			future = _memcachedClient.asyncGet(key);
+		}
+		catch (IllegalArgumentException e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Error retrieving with key: " + key, e);
+			}
+
+			return null;
+		}
 
 		try {
 			cachedObject = future.get(_timeout, _timeoutTimeUnit);
@@ -65,7 +80,14 @@ public class MemcachePortalCache implements PortalCache {
 	}
 
 	public void put(String key, Object obj, int timeToLive) {
-		_memcachedClient.set(key, timeToLive, obj);
+		try {
+			_memcachedClient.set(key, timeToLive, obj);
+		}
+		catch (IllegalArgumentException e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Error storing value to cache: " + key, e);
+			}
+		}
 	}
 
 	public void put(String key, Serializable obj) {
@@ -73,11 +95,25 @@ public class MemcachePortalCache implements PortalCache {
 	}
 
 	public void put(String key, Serializable obj, int timeToLive) {
-		_memcachedClient.set(key, timeToLive, obj);
+		try {
+			_memcachedClient.set(key, timeToLive, obj);
+		}
+		catch (IllegalArgumentException e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Error storing value to cache: " + key, e);
+			}
+		}
 	}
 
 	public void remove(String key) {
-		_memcachedClient.delete(key);
+		try {
+			_memcachedClient.delete(key);
+		}
+		catch (IllegalArgumentException e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Error removing value from cache: " + key, e);
+			}
+		}
 	}
 
 	public void removeAll() {

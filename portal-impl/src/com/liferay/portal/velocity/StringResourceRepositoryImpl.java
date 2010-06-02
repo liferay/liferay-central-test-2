@@ -39,19 +39,21 @@ public class StringResourceRepositoryImpl implements StringResourceRepository {
 	public StringResource getStringResource(String key) {
 		Object resource = _portalCache.get(key);
 
-		if ((resource != null) && (resource instanceof StringResource)) {
-			return (StringResource)resource;
+		if ((resource != null) &&
+			(resource instanceof SerializableStringResource)) {
+			return ((SerializableStringResource)resource).toStringResource();
 		}
 
 		return null;
 	}
 
 	public void putStringResource(String key, String body) {
-		_portalCache.put(key , new StringResource(body, getEncoding()));
+		_portalCache.put(
+			key , new SerializableStringResource(body, getEncoding()));
 	}
 
 	public void putStringResource(String key, String body, String encoding) {
-		_portalCache.put(key , new StringResource(body, encoding));
+		_portalCache.put(key , new SerializableStringResource(body, encoding));
 	}
 
 	public void removeStringResource(String key) {
