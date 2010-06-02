@@ -158,21 +158,17 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Workflow
 
-		if (serviceContext.getWorkflowAction() ==
-				WorkflowConstants.ACTION_PUBLISH) {
 
-			if ((trackbacks != null) && (trackbacks.length > 0)) {
-				serviceContext.setAttribute("trackbacks", trackbacks);
-			}
-			else {
-				serviceContext.setAttribute("trackbacks", null);
-			}
-
-			WorkflowHandlerRegistryUtil.startWorkflowInstance(
-				user.getCompanyId(), groupId, userId,
-				BlogsEntry.class.getName(), entry.getEntryId(), entry,
-				serviceContext);
+		if ((trackbacks != null) && (trackbacks.length > 0)) {
+			serviceContext.setAttribute("trackbacks", trackbacks);
 		}
+		else {
+			serviceContext.setAttribute("trackbacks", null);
+		}
+
+		WorkflowHandlerRegistryUtil.startWorkflowInstance(
+			user.getCompanyId(), groupId, userId, BlogsEntry.class.getName(),
+			entry.getEntryId(), entry, serviceContext);
 
 		return entry;
 	}
@@ -545,24 +541,20 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			pingOldTrackbacks = true;
 		}
 
-		if (serviceContext.getWorkflowAction() ==
-				WorkflowConstants.ACTION_PUBLISH) {
+		serviceContext.setAttribute(
+			"pingOldTrackbacks", String.valueOf(pingOldTrackbacks));
 
-			serviceContext.setAttribute(
-				"pingOldTrackbacks", String.valueOf(pingOldTrackbacks));
-
-			if (Validator.isNotNull(trackbacks)) {
-				serviceContext.setAttribute("trackbacks", trackbacks);
-			}
-			else {
-				serviceContext.setAttribute("trackbacks", null);
-			}
-
-			WorkflowHandlerRegistryUtil.startWorkflowInstance(
-				user.getCompanyId(), entry.getGroupId(), userId,
-				BlogsEntry.class.getName(), entry.getEntryId(), entry,
-				serviceContext);
+		if (Validator.isNotNull(trackbacks)) {
+			serviceContext.setAttribute("trackbacks", trackbacks);
 		}
+		else {
+			serviceContext.setAttribute("trackbacks", null);
+		}
+
+		WorkflowHandlerRegistryUtil.startWorkflowInstance(
+			user.getCompanyId(), entry.getGroupId(), userId,
+			BlogsEntry.class.getName(), entry.getEntryId(), entry,
+			serviceContext);
 
 		return entry;
 	}

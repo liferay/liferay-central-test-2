@@ -60,6 +60,12 @@ public class WorkflowHandlerRegistryUtil {
 			long classPK, Object model, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		if (serviceContext.getWorkflowAction() !=
+				WorkflowConstants.ACTION_PUBLISH) {
+
+			return;
+		}
+
 		WorkflowHandler workflowHandler = getWorkflowHandler(className);
 
 		if (workflowHandler == null) {

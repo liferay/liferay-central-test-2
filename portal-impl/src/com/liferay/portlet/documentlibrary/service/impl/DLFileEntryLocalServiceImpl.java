@@ -235,14 +235,9 @@ public class DLFileEntryLocalServiceImpl
 
 		// Workflow
 
-		if (serviceContext.getWorkflowAction() ==
-				WorkflowConstants.ACTION_PUBLISH) {
-
-			WorkflowHandlerRegistryUtil.startWorkflowInstance(
-				user.getCompanyId(), groupId, userId,
-				DLFileEntry.class.getName(), fileEntryId, fileEntry,
-				serviceContext);
-		}
+		WorkflowHandlerRegistryUtil.startWorkflowInstance(
+			user.getCompanyId(), groupId, userId, DLFileEntry.class.getName(),
+			fileEntryId, fileEntry, serviceContext);
 
 		return fileEntry;
 	}
@@ -1088,14 +1083,9 @@ public class DLFileEntryLocalServiceImpl
 
 		// Workflow
 
-		if (serviceContext.getWorkflowAction() ==
-				WorkflowConstants.ACTION_PUBLISH) {
-
-			WorkflowHandlerRegistryUtil.startWorkflowInstance(
-				user.getCompanyId(), groupId, userId,
-				DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
-				fileEntry, serviceContext);
-		}
+		WorkflowHandlerRegistryUtil.startWorkflowInstance(
+			user.getCompanyId(), groupId, userId, DLFileEntry.class.getName(),
+			fileEntry.getFileEntryId(), fileEntry, serviceContext);
 
 		return fileEntry;
 	}

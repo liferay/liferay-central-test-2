@@ -415,19 +415,15 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Workflow
 
-		if (serviceContext.getWorkflowAction() ==
-				WorkflowConstants.ACTION_PUBLISH) {
+		String className = MBMessage.class.getName();
 
-			String className = MBMessage.class.getName();
-
-			if (message.isDiscussion()) {
-				className = MBDiscussion.class.getName();
-			}
-
-			WorkflowHandlerRegistryUtil.startWorkflowInstance(
-				user.getCompanyId(), groupId, userId, className,
-				message.getMessageId(), message, serviceContext);
+		if (message.isDiscussion()) {
+			className = MBDiscussion.class.getName();
 		}
+
+		WorkflowHandlerRegistryUtil.startWorkflowInstance(
+			user.getCompanyId(), groupId, userId, className,
+			message.getMessageId(), message, serviceContext);
 
 		// Testing roll back
 
@@ -1342,16 +1338,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Workflow
 
-		if (serviceContext.getWorkflowAction() ==
-				WorkflowConstants.ACTION_PUBLISH) {
+		serviceContext.setAttribute("update", Boolean.TRUE.toString());
 
-			serviceContext.setAttribute("update", Boolean.TRUE.toString());
-
-			WorkflowHandlerRegistryUtil.startWorkflowInstance(
-				companyId, message.getGroupId(), userId,
-				MBMessage.class.getName(), message.getMessageId(), message,
-				serviceContext);
-		}
+		WorkflowHandlerRegistryUtil.startWorkflowInstance(
+			companyId, message.getGroupId(), userId, MBMessage.class.getName(),
+			message.getMessageId(), message, serviceContext);
 
 		return message;
 	}

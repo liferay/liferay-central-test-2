@@ -215,14 +215,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Workflow
 
-		if (serviceContext.getWorkflowAction() ==
-				WorkflowConstants.ACTION_PUBLISH) {
-
-			WorkflowHandlerRegistryUtil.startWorkflowInstance(
-				user.getCompanyId(), page.getGroupId(), userId,
-				WikiPage.class.getName(), page.getResourcePrimKey(), page,
-				serviceContext);
-		}
+		WorkflowHandlerRegistryUtil.startWorkflowInstance(
+			user.getCompanyId(), page.getGroupId(), userId,
+			WikiPage.class.getName(), page.getResourcePrimKey(), page,
+			serviceContext);
 
 		return page;
 	}
@@ -1133,14 +1129,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Workflow
 
-		if (serviceContext.getWorkflowAction() ==
-				WorkflowConstants.ACTION_PUBLISH) {
-
-			WorkflowHandlerRegistryUtil.startWorkflowInstance(
-				user.getCompanyId(), page.getGroupId(), userId,
-				WikiPage.class.getName(), page.getResourcePrimKey(), page,
-				serviceContext);
-		}
+		WorkflowHandlerRegistryUtil.startWorkflowInstance(
+			user.getCompanyId(), page.getGroupId(), userId,
+			WikiPage.class.getName(), page.getResourcePrimKey(), page,
+			serviceContext);
 
 		return page;
 	}

@@ -342,14 +342,10 @@ public class JournalArticleLocalServiceImpl
 
 		// Workflow
 
-		if (serviceContext.getWorkflowAction() ==
-				WorkflowConstants.ACTION_PUBLISH) {
-
-			WorkflowHandlerRegistryUtil.startWorkflowInstance(
-				user.getCompanyId(), groupId, userId,
-				JournalArticle.class.getName(), article.getId(), article,
-				serviceContext);
-		}
+		WorkflowHandlerRegistryUtil.startWorkflowInstance(
+			user.getCompanyId(), groupId, userId,
+			JournalArticle.class.getName(), article.getId(), article,
+			serviceContext);
 
 		return article;
 	}
