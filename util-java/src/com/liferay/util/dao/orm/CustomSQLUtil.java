@@ -67,6 +67,10 @@ public class CustomSQLUtil {
 			keywordsArray, lowerCase);
 	}
 
+	public static String removeGroupBy(String sql) {
+		return _instance._customSQL.removeGroupBy(sql);
+	}
+
 	public static String removeOrderBy(String sql) {
 		return _instance._customSQL.removeOrderBy(sql);
 	}
@@ -92,6 +96,10 @@ public class CustomSQLUtil {
 
 		return _instance._customSQL.replaceKeywords(
 			sql, field, operator, last, values);
+	}
+
+	public static String replaceGroupBy(String sql, String groupBy) {
+		return _instance._customSQL.replaceGroupBy(sql, groupBy);
 	}
 
 	public static String replaceOrderBy(String sql, OrderByComparator obc) {
