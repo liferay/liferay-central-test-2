@@ -1613,69 +1613,68 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			portletModel.setPortletClass(GetterUtil.getString(
 				portletElement.elementText("portlet-class")));
 
-			Iterator<Element> itr2 = portletElement.elements("init-param").iterator();
+			Map<String, String> initParams = portletModel.getInitParams();
 
-			while (itr2.hasNext()) {
-				Element initParam = itr2.next();
+			for (Element initParamElement :
+					portletElement.elements("init-param")) {
 
-				portletModel.getInitParams().put(
-					initParam.elementText("name"),
-					initParam.elementText("value"));
+				initParams.put(
+					initParamElement.elementText("name"),
+					initParamElement.elementText("value"));
 			}
 
-			Element expirationCache = portletElement.element("expiration-cache");
+			Element expirationCacheElement = portletElement.element(
+				"expiration-cache");
 
-			if (expirationCache != null) {
-				portletModel.setExpCache(new Integer(GetterUtil.getInteger(
-					expirationCache.getText())));
+			if (expirationCacheElement != null) {
+				portletModel.setExpCache(
+					GetterUtil.getInteger(expirationCacheElement.getText()));
 			}
 
-			itr2 = portletElement.elements("supports").iterator();
+			for (Element supportsElement :
+					portletElement.elements("supports")) {
 
-			while (itr2.hasNext()) {
-				Element supports = itr2.next();
+				Map<String, Set<String>> portletModes =
+					portletModel.getPortletModes();
 
-				String mimeType = supports.elementText("mime-type");
+				String mimeType = supportsElement.elementText("mime-type");
 
-				Set<String> mimeTypePortletModes =
-					portletModel.getPortletModes().get(mimeType);
+				Set<String> mimeTypePortletModes = portletModes.get(mimeType);
 
 				if (mimeTypePortletModes == null) {
 					mimeTypePortletModes = new HashSet<String>();
 
-					portletModel.getPortletModes().put(
-						mimeType, mimeTypePortletModes);
+					portletModes.put(mimeType, mimeTypePortletModes);
 				}
 
 				mimeTypePortletModes.add(
 					PortletMode.VIEW.toString().toLowerCase());
 
-				Iterator<Element> itr3 = supports.elements(
-					"portlet-mode").iterator();
-
-				while (itr3.hasNext()) {
-					Element portletMode = itr3.next();
+				for (Element portletModeElement :
+						supportsElement.elements("portlet-mode")) {
 
 					mimeTypePortletModes.add(
-						portletMode.getTextTrim().toLowerCase());
+						portletModeElement.getTextTrim().toLowerCase());
 				}
 
-				Set<String> mimeTypeWindowStates =
-					portletModel.getWindowStates().get(mimeType);
+				Map<String, Set<String>> windowStates =
+					portletModel.getWindowStates(); 
+
+				Set<String> mimeTypeWindowStates = windowStates.get(mimeType);
 
 				if (mimeTypeWindowStates == null) {
 					mimeTypeWindowStates = new HashSet<String>();
 
-					portletModel.getWindowStates().put(
-						mimeType, mimeTypeWindowStates);
+					windowStates.put(mimeType, mimeTypeWindowStates);
 				}
 
 				mimeTypeWindowStates.add(
 					WindowState.NORMAL.toString().toLowerCase());
 
-				itr3 = supports.elements("window-state").iterator();
+				List<Element> windowStateElements = supportsElement.elements(
+					"window-state");
 
-				if (!itr3.hasNext()) {
+				if (windowStateElements.isEmpty()) {
 					mimeTypeWindowStates.add(
 						WindowState.MAXIMIZED.toString().toLowerCase());
 					mimeTypeWindowStates.add(
@@ -1686,11 +1685,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 						LiferayWindowState.POP_UP.toString().toLowerCase());
 				}
 
-				while (itr3.hasNext()) {
-					Element windowState = itr3.next();
-
+				for (Element windowStateElement : windowStateElements) {
 					mimeTypeWindowStates.add(
-						windowState.getTextTrim().toLowerCase());
+						windowStateElement.getTextTrim().toLowerCase());
 				}
 			}
 
@@ -1699,12 +1696,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			//supportedLocales.add(
 			//	LocaleUtil.toLanguageId(LocaleUtil.getDefault()));
 
-			itr2 = portletElement.elements("supported-locale").iterator();
+			for (Element supportedLocaleElement : portletElement.elements(
+					"supported-locale")) {
 
-			while (itr2.hasNext()) {
-				Element supportedLocaleEl = itr2.next();
-
-				String supportedLocale = supportedLocaleEl.getText();
+				String supportedLocale = supportedLocaleElement.getText();
 
 				supportedLocales.add(supportedLocale);
 			}
@@ -1730,7 +1725,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 					portletInfoTitle, portletInfoShortTitle,
 					portletInfoKeyWords, portletInfoDescription));
 
-			Element portletPreferences = portletElement.element("portlet-preferences");
+			Element portletPreferences = portletElement.element(
+				"portlet-preferences");
 
 			String defaultPreferences = null;
 			String preferencesValidator = null;
@@ -1774,47 +1770,43 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			Set<String> unlikedRoles = portletModel.getUnlinkedRoles();
 
-			itr2 = portletElement.elements("security-role-ref").iterator();
+			for (Element roleElement :
+					portletElement.elements("security-role-ref")) {
 
-			while (itr2.hasNext()) {
-				Element role = itr2.next();
-
-				unlikedRoles.add(role.elementText("role-name"));
+				unlikedRoles.add(roleElement.elementText("role-name"));
 			}
 
-			itr2 = portletElement.elements("supported-processing-event").iterator();
+			for (Element supportedProcessingEventElement :
+					portletElement.elements("supported-processing-event")) {
 
-			while (itr2.hasNext()) {
-				Element supportedProcessingEvent = itr2.next();
-
-				Element qNameEl = supportedProcessingEvent.element("qname");
-				Element nameEl = supportedProcessingEvent.element("name");
+				Element qNameElement = supportedProcessingEventElement.element(
+					"qname");
+				Element nameElement = supportedProcessingEventElement.element(
+					"name");
 
 				QName qName = PortletQNameUtil.getQName(
-					qNameEl, nameEl, portletApp.getDefaultNamespace());
+					qNameElement, nameElement, portletApp.getDefaultNamespace());
 
 				portletModel.addProcessingEvent(qName);
 			}
 
-			itr2 = portletElement.elements("supported-publishing-event").iterator();
+			for (Element supportedPublishingEventElement :
+					portletElement.elements("supported-publishing-event")) {
 
-			while (itr2.hasNext()) {
-				Element supportedPublishingEvent = itr2.next();
-
-				Element qNameEl = supportedPublishingEvent.element("qname");
-				Element nameEl = supportedPublishingEvent.element("name");
+				Element qNameElement = supportedPublishingEventElement.element(
+					"qname");
+				Element nameElement = supportedPublishingEventElement.element(
+					"name");
 
 				QName qName = PortletQNameUtil.getQName(
-					qNameEl, nameEl, portletApp.getDefaultNamespace());
+					qNameElement, nameElement, portletApp.getDefaultNamespace());
 
 				portletModel.addPublishingEvent(qName);
 			}
 
-			itr2 = portletElement.elements(
-				"supported-public-render-parameter").iterator();
-
-			while (itr2.hasNext()) {
-				Element supportedPublicRenderParameter = itr2.next();
+			for (Element supportedPublicRenderParameter :
+					portletElement.elements(
+						"supported-public-render-parameter")) {
 
 				String identifier =
 					supportedPublicRenderParameter.getTextTrim();
