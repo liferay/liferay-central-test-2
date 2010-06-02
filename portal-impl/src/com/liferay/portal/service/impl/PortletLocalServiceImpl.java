@@ -1144,21 +1144,26 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		setFriendlyURLRoutes(portletModel, portletElement);
 
-		portletModel.setURLEncoderClass(GetterUtil.getString(
-			portletElement.elementText("url-encoder-class"),
-			portletModel.getURLEncoderClass()));
-		portletModel.setPortletDataHandlerClass(GetterUtil.getString(
-			portletElement.elementText("portlet-data-handler-class"),
-			portletModel.getPortletDataHandlerClass()));
-		portletModel.setPortletLayoutListenerClass(GetterUtil.getString(
-			portletElement.elementText("portlet-layout-listener-class"),
-			portletModel.getPortletLayoutListenerClass()));
-		portletModel.setPollerProcessorClass(GetterUtil.getString(
-			portletElement.elementText("poller-processor-class"),
-			portletModel.getPollerProcessorClass()));
-		portletModel.setPopMessageListenerClass(GetterUtil.getString(
-			portletElement.elementText("pop-message-listener-class"),
-			portletModel.getPopMessageListenerClass()));
+		portletModel.setURLEncoderClass(
+			GetterUtil.getString(
+				portletElement.elementText("url-encoder-class"),
+				portletModel.getURLEncoderClass()));
+		portletModel.setPortletDataHandlerClass(
+			GetterUtil.getString(
+				portletElement.elementText("portlet-data-handler-class"),
+				portletModel.getPortletDataHandlerClass()));
+		portletModel.setPortletLayoutListenerClass(
+			GetterUtil.getString(
+				portletElement.elementText("portlet-layout-listener-class"),
+				portletModel.getPortletLayoutListenerClass()));
+		portletModel.setPollerProcessorClass(
+			GetterUtil.getString(
+				portletElement.elementText("poller-processor-class"),
+				portletModel.getPollerProcessorClass()));
+		portletModel.setPopMessageListenerClass(
+			GetterUtil.getString(
+				portletElement.elementText("pop-message-listener-class"),
+				portletModel.getPopMessageListenerClass()));
 		portletModel.setSocialActivityInterpreterClass(
 			GetterUtil.getString(
 				portletElement.elementText(
@@ -1169,24 +1174,30 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletElement.elementText(
 					"social-request-interpreter-class"),
 					portletModel.getSocialRequestInterpreterClass()));
-		portletModel.setWebDAVStorageToken(GetterUtil.getString(
-			portletElement.elementText("webdav-storage-token"),
-			portletModel.getWebDAVStorageToken()));
-		portletModel.setWebDAVStorageClass(GetterUtil.getString(
-			portletElement.elementText("webdav-storage-class"),
-			portletModel.getWebDAVStorageClass()));
-		portletModel.setXmlRpcMethodClass(GetterUtil.getString(
-			portletElement.elementText("xml-rpc-method-class"),
-			portletModel.getXmlRpcMethodClass()));
-		portletModel.setControlPanelEntryCategory(GetterUtil.getString(
-			portletElement.elementText("control-panel-entry-category"),
-			portletModel.getControlPanelEntryCategory()));
-		portletModel.setControlPanelEntryWeight(GetterUtil.getDouble(
-			portletElement.elementText("control-panel-entry-weight"),
-			portletModel.getControlPanelEntryWeight()));
-		portletModel.setControlPanelEntryClass(GetterUtil.getString(
-			portletElement.elementText("control-panel-entry-class"),
-			portletModel.getControlPanelEntryClass()));
+		portletModel.setWebDAVStorageToken(
+			GetterUtil.getString(
+				portletElement.elementText("webdav-storage-token"),
+				portletModel.getWebDAVStorageToken()));
+		portletModel.setWebDAVStorageClass(
+			GetterUtil.getString(
+				portletElement.elementText("webdav-storage-class"),
+				portletModel.getWebDAVStorageClass()));
+		portletModel.setXmlRpcMethodClass(
+			GetterUtil.getString(
+				portletElement.elementText("xml-rpc-method-class"),
+				portletModel.getXmlRpcMethodClass()));
+		portletModel.setControlPanelEntryCategory(
+			GetterUtil.getString(
+				portletElement.elementText("control-panel-entry-category"),
+				portletModel.getControlPanelEntryCategory()));
+		portletModel.setControlPanelEntryWeight(
+			GetterUtil.getDouble(
+				portletElement.elementText("control-panel-entry-weight"),
+				portletModel.getControlPanelEntryWeight()));
+		portletModel.setControlPanelEntryClass(
+			GetterUtil.getString(
+				portletElement.elementText("control-panel-entry-class"),
+				portletModel.getControlPanelEntryClass()));
 
 		List<String> assetRendererFactoryClasses =
 			portletModel.getAssetRendererFactoryClasses();
