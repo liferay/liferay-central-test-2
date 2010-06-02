@@ -363,10 +363,7 @@ public class ResourceActionsUtil {
 		}
 		else {
 			if (group != null) {
-				if (group.isOrganization() ||
-					(group.isStagingGroup() &&
-						group.getLiveGroup().isOrganization())) {
-
+				if (group.isOrganization()) {
 					types = new int[] {
 						RoleConstants.TYPE_REGULAR,
 						RoleConstants.TYPE_ORGANIZATION
