@@ -1125,17 +1125,17 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			portletModel.addSchedulerEntry(schedulerEntry);
 		}
 
-		portletModel.setPortletURLClass(GetterUtil.getString(
-			portletElement.elementText("portlet-url-class"),
-			portletModel.getPortletURLClass()));
+		portletModel.setPortletURLClass(
+			GetterUtil.getString(
+				portletElement.elementText("portlet-url-class"),
+				portletModel.getPortletURLClass()));
 
-		portletModel.setFriendlyURLMapperClass(GetterUtil.getString(
-			portletElement.elementText("friendly-url-mapper-class"),
-			portletModel.getFriendlyURLMapperClass()));
+		portletModel.setFriendlyURLMapperClass(
+			GetterUtil.getString(
+				portletElement.elementText("friendly-url-mapper-class"),
+				portletModel.getFriendlyURLMapperClass()));
 
-		if (Validator.isNull(
-				portletModel.getFriendlyURLMapperClass())) {
-
+		if (Validator.isNull(portletModel.getFriendlyURLMapperClass())) {
 			_friendlyURLMapperPortlets.remove(portletId);
 		}
 		else {
