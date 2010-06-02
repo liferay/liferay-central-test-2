@@ -216,7 +216,7 @@ AUI().add(
 						var suggestionsURL = A.substitute(
 							TPL_URL_SUGGESTIONS,
 							{
-								context: escape(context)
+								context: encodeURIComponent(context)
 							}
 						);
 
