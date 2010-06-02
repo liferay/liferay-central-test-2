@@ -172,7 +172,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 							>
 								<liferay-ui:search-container-results
 									results="<%= DLFolderServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd()) %>"
-									total="<%= DLFolderServiceUtil.getFoldersCount(scopeGroupId, folderId) %>"
+									total="<%= foldersCount %>"
 								/>
 
 								<liferay-ui:search-container-row
