@@ -39,7 +39,6 @@ import javax.portlet.ResourceResponse;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.codec.net.URLCodec;
-import org.apache.commons.lang.CharUtils;
 
 /**
  * <a href="PortletResponseUtil.java.html"><b><i>View Source</i></b></a>
@@ -240,7 +239,7 @@ public class PortletResponseUtil {
 			boolean ascii = true;
 
 			for (int i = 0; i < fileName.length(); i++) {
-				if (!CharUtils.isAscii(fileName.charAt(i))) {
+				if (!Validator.isAscii(fileName.charAt(i))) {
 					ascii = false;
 
 					break;
