@@ -111,30 +111,27 @@ long classPK = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.
 		</c:otherwise>
 	</c:choose>
 
-	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, PortletKeys.WORKFLOW_TASKS, ActionKeys.ASSIGN_USER_TASKS) %>">
+	<%
+	long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getCompanyId(), workflowTask.getWorkflowTaskId());
+	%>
 
-		<%
-		long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getCompanyId(), workflowTask.getWorkflowTaskId());
-		%>
+	<c:if test="<%= (pooledActorsIds != null) && (pooledActorsIds.length > 0) && !workflowTask.isCompleted() %>">
+		<aui:select inlineLabel="left" label="assigned-to" name="assigneeUserId" showEmptyOption="<%= true %>">
 
-		<c:if test="<%= (pooledActorsIds != null) && (pooledActorsIds.length > 0) && !workflowTask.isCompleted() %>">
-			<aui:select inlineLabel="left" label="assigned-to" name="assigneeUserId" showEmptyOption="<%= true %>">
+			<%
+			for (long pooledActorId : pooledActorsIds) {
+			%>
 
-				<%
-				for (long pooledActorId : pooledActorsIds) {
-				%>
+				<aui:option label="<%= HtmlUtil.escape(PortalUtil.getUserName(pooledActorId, StringPool.BLANK)) %>" selected="<%= workflowTask.getAssigneeUserId() == pooledActorId %>" value="<%= String.valueOf(pooledActorId) %>" />
 
-					<aui:option label="<%= HtmlUtil.escape(PortalUtil.getUserName(pooledActorId, StringPool.BLANK)) %>" selected="<%= workflowTask.getAssigneeUserId() == pooledActorId %>" value="<%= String.valueOf(pooledActorId) %>" />
+			<%
+			}
 
-				<%
-				}
+			String taglibAssignWorkflowTask = renderResponse.getNamespace() + "updateWorkflowTask('" + Constants.ASSIGN +"');";
+			%>
 
-				String taglibAssignWorkflowTask = renderResponse.getNamespace() + "updateWorkflowTask('" + Constants.ASSIGN +"');";
-				%>
-
-				<input name="assignButton" onClick="<%= taglibAssignWorkflowTask %>" type="button" value="<%= LanguageUtil.get(locale, "assign") %>" />
-			</aui:select>
-		</c:if>
+			<input name="assignButton" onClick="<%= taglibAssignWorkflowTask %>" type="button" value="<%= LanguageUtil.get(locale, "assign") %>" />
+		</aui:select>
 	</c:if>
 
 	<br />

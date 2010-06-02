@@ -15,11 +15,8 @@
 package com.liferay.portal.workflow;
 
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
-import com.liferay.portal.service.permission.PortletPermissionUtil;
-import com.liferay.portal.util.PortletKeys;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
@@ -45,10 +42,6 @@ public class WorkflowPermissionAdvice {
 			if (permissionChecker.getUserId() != userId) {
 				throw new PrincipalException();
 			}
-
-			PortletPermissionUtil.check(
-				permissionChecker, PortletKeys.WORKFLOW_TASKS,
-				ActionKeys.ASSIGN_USER_TASKS);
 		}
 
 		return proceedingJoinPoint.proceed();
