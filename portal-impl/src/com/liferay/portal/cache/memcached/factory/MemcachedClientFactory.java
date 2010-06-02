@@ -22,21 +22,21 @@ import net.spy.memcached.MemcachedClientIF;
  * @author Michael C. Han
  */
 public interface MemcachedClientFactory {
-	public MemcachedClientIF getMemcachedClient()
-		throws Exception;
-
-	public void returnMemcachedObject(MemcachedClientIF memcachedClient)
-		throws Exception;
-
-	public void invalidateMemcachedClient(MemcachedClientIF memcachedClient)
-		throws Exception;
-
-	public int getNumIdle();
-
-	public int getNumActive();
 
 	public void clear() throws Exception;
 
 	public void close() throws Exception;
+
+	public MemcachedClientIF getMemcachedClient() throws Exception;
+
+	public int getNumActive();
+
+	public int getNumIdle();
+
+	public void invalidateMemcachedClient(MemcachedClientIF memcachedClient)
+		throws Exception;
+
+	public void returnMemcachedObject(MemcachedClientIF memcachedClient)
+		throws Exception;
 
 }

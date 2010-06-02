@@ -53,9 +53,9 @@ public class MemcachePortalCache implements PortalCache {
 		try {
 			future = _memcachedClient.asyncGet(key);
 		}
-		catch (IllegalArgumentException e) {
+		catch (IllegalArgumentException iae) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Error retrieving with key: " + key, e);
+				_log.warn("Error retrieving with key " + key, iae);
 			}
 
 			return null;
@@ -83,9 +83,9 @@ public class MemcachePortalCache implements PortalCache {
 		try {
 			_memcachedClient.set(key, timeToLive, obj);
 		}
-		catch (IllegalArgumentException e) {
+		catch (IllegalArgumentException iae) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Error storing value to cache: " + key, e);
+				_log.warn("Error storing value with key " + key, iae);
 			}
 		}
 	}
@@ -98,9 +98,9 @@ public class MemcachePortalCache implements PortalCache {
 		try {
 			_memcachedClient.set(key, timeToLive, obj);
 		}
-		catch (IllegalArgumentException e) {
+		catch (IllegalArgumentException iae) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Error storing value to cache: " + key, e);
+				_log.warn("Error storing value with key " + key, iae);
 			}
 		}
 	}
@@ -109,9 +109,9 @@ public class MemcachePortalCache implements PortalCache {
 		try {
 			_memcachedClient.delete(key);
 		}
-		catch (IllegalArgumentException e) {
+		catch (IllegalArgumentException iae) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Error removing value from cache: " + key, e);
+				_log.warn("Error removing value with key " + key, iae);
 			}
 		}
 	}

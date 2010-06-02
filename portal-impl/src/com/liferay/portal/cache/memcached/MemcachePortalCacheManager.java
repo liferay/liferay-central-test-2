@@ -32,16 +32,19 @@ import net.spy.memcached.MemcachedClientIF;
 public class MemcachePortalCacheManager implements PortalCacheManager {
 
 	public void afterPropertiesSet() {
-		_portalCaches = new ConcurrentHashMap<String, MemcachePortalCache>();
+		_memcachePortalCaches =
+			new ConcurrentHashMap<String, MemcachePortalCache>();
 	}
 
 	public void clearAll() {
-		_portalCaches.clear();
+		_memcachePortalCaches.clear();
 	}
 
 	public void destroy() throws Exception {
-		for (MemcachePortalCache cache : _portalCaches.values()) {
-			cache.destroy();
+		for (MemcachePortalCache memcachePortalCache :
+				_memcachePortalCaches.values()) {
+
+			memcachePortalCache.destroy();
 		}
 	}
 
@@ -50,17 +53,18 @@ public class MemcachePortalCacheManager implements PortalCacheManager {
 	}
 
 	public PortalCache getCache(String name, boolean blocking) {
-		MemcachePortalCache portalCache = _portalCaches.get(name);
+		MemcachePortalCache memcachePortalCache = _memcachePortalCaches.get(
+			name);
 
-		if (portalCache == null) {
+		if (memcachePortalCache == null) {
 			try {
 				MemcachedClientIF memcachedClient  =
 					_memcachedClientFactory.getMemcachedClient();
 
-				portalCache = new MemcachePortalCache(
+				memcachePortalCache = new MemcachePortalCache(
 					memcachedClient, _timeout, _timeoutTimeUnit);
 
-				_portalCaches.put(name, portalCache);
+				_memcachePortalCaches.put(name, memcachePortalCache);
 			}
 			catch (Exception e) {
 				throw new IllegalStateException(
@@ -68,7 +72,7 @@ public class MemcachePortalCacheManager implements PortalCacheManager {
 			}
 		}
 
-		return portalCache;
+		return memcachePortalCache;
 	}
 
 	public void setMemcachedClientPool(
@@ -86,7 +90,7 @@ public class MemcachePortalCacheManager implements PortalCacheManager {
 	}
 
 	private MemcachedClientFactory _memcachedClientFactory;
-	private Map<String, MemcachePortalCache> _portalCaches;
+	private Map<String, MemcachePortalCache> _memcachePortalCaches;
 	private int _timeout;
 	private TimeUnit _timeoutTimeUnit;
 

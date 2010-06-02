@@ -14,6 +14,7 @@
 
 package com.liferay.portal.cache.memcached.factory;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -27,76 +28,66 @@ import net.spy.memcached.MemcachedClient;
 import net.spy.memcached.MemcachedClientIF;
 
 /**
- * <a href="DefaultMemcachedClientFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="DefaultMemcachedClientFactory.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Michael C. Han
  */
 public class DefaultMemcachedClientFactory implements MemcachedClientFactory {
 
+	public void clear() {
+	}
+
+	public void close() {
+	}
+
 	public MemcachedClientIF getMemcachedClient() throws Exception {
-		MemcachedClientIF memCachedClient = new MemcachedClient(
-			_memcachedConnectionFactory, _memcachedAddresses);
-
-		return memCachedClient;
+		return new MemcachedClient(_connectionFactory, _inetSocketAddresses);
 	}
 
-	public void returnMemcachedObject(MemcachedClientIF memcachedClient)
-		throws Exception {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public void invalidateMemcachedClient(MemcachedClientIF memcachedClient)
-		throws Exception {
-
+	public int getNumActive() {
 		throw new UnsupportedOperationException();
 	}
 
 	public int getNumIdle() {
-
 		throw new UnsupportedOperationException();
 	}
 
-	public int getNumActive() {
-
+	public void invalidateMemcachedClient(MemcachedClientIF memcachedClient) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void clear() throws Exception {
+	public void returnMemcachedObject(MemcachedClientIF memcachedClient) {
+		throw new UnsupportedOperationException();
 	}
 
-	public void close() throws Exception {
-
-	}
-
-	public void setMemcachedConnectionFactory(
-		ConnectionFactory memcachedConnectionFactory) {
-		_memcachedConnectionFactory = memcachedConnectionFactory;
-	}
-
-	public void setMemcachedAddresses(List<String> memcachedAddresses) {
-
-		for (String memcachedAddress : memcachedAddresses) {
-			String[] hostAndPort = StringUtil.split(
-				memcachedAddress, StringPool.COLON);
+	public void setAddresses(List<String> addresses) {
+		for (String address : addresses) {
+			String[] hostAndPort = StringUtil.split(address, StringPool.COLON);
 
 			String hostName = hostAndPort[0];
+
 			int port = _DEFAULT_MEMCACHED_PORT;
+
 			if (hostAndPort.length == 2) {
-				port = Integer.parseInt(hostAndPort[1]);
+				port = GetterUtil.getInteger(hostAndPort[1]);
 			}
 
-			InetSocketAddress inetSocketAddress =
-				new InetSocketAddress(hostName, port);
+			InetSocketAddress inetSocketAddress = new InetSocketAddress(
+				hostName, port);
 
-			_memcachedAddresses.add(inetSocketAddress);
+			_inetSocketAddresses.add(inetSocketAddress);
 		}
+	}
+
+	public void setConnectionFactory(ConnectionFactory connectionFactory) {
+		_connectionFactory = connectionFactory;
 	}
 
 	private static final int _DEFAULT_MEMCACHED_PORT = 11211;
 
-	private ConnectionFactory _memcachedConnectionFactory;
-	private List<InetSocketAddress> _memcachedAddresses =
+	private ConnectionFactory _connectionFactory;
+	private List<InetSocketAddress> _inetSocketAddresses =
 		new ArrayList<InetSocketAddress>();
 
 }
