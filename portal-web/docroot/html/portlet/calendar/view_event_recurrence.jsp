@@ -226,7 +226,7 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	<liferay-ui:message key="repeat-yearly" />:
 		<abbr class="rrule" title="FREQ=YEARLY">
 		<c:if test="<%= (yearlyType == 0) %>">
-			<liferay-ui:message arguments="<%= new Object[] {months[yearlyMonth0], String.valueOf(yearlyDay0), String.valueOf(yearlyInterval0)} %>" key="x-x-of-every-x-years" />
+			<liferay-ui:message arguments="<%= new Object[] {months[yearlyMonth0], yearlyDay0, yearlyInterval0} %>" key="x-x-of-every-x-years" />
 		</c:if>
 
 		<c:if test="<%= (yearlyType == 1) %>">
