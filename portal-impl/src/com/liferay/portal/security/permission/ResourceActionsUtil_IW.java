@@ -173,6 +173,10 @@ public class ResourceActionsUtil_IW {
 		return ResourceActionsUtil.getSocialEquityActionMappings(name);
 	}
 
+	public java.lang.String[] getSocialEquityClassNames() {
+		return ResourceActionsUtil.getSocialEquityClassNames();
+	}
+
 	public boolean hasModelResourceActions(java.lang.String name) {
 		return ResourceActionsUtil.hasModelResourceActions(name);
 	}
