@@ -18,13 +18,11 @@ import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.DiffHtmlUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InstancePool;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -48,6 +46,7 @@ import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
 import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -276,6 +275,36 @@ public class WikiUtil {
 		}
 	}
 
+	public static WikiNode getFirstNode(PortletRequest portletRequest)
+		throws SystemException {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+		long groupId = themeDisplay.getScopeGroupId();
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
+		List<WikiNode> nodes = WikiNodeLocalServiceUtil.getNodes(groupId);
+
+		PortletPreferences preferences = portletRequest.getPreferences();
+		String[] visibleNodesNames =
+			StringUtil.split(preferences.getValue("visible-nodes", null));
+		nodes = orderNodes(nodes, visibleNodesNames);
+
+		String[] hiddenNodes = StringUtil.split(
+			preferences.getValue("hidden-nodes", StringPool.BLANK));
+		Arrays.sort(hiddenNodes);
+
+		for(WikiNode node : nodes) {
+			if ((Arrays.binarySearch(hiddenNodes, node.getName()) < 0) &&
+				(WikiNodePermission.contains(permissionChecker, node,
+					ActionKeys.VIEW))) {
+				return node;
+			}
+		}
+		return null;
+	}
+
 	public static String getHelpPage(String format) {
 		return _instance._getHelpPage(format);
 	}
@@ -307,53 +336,61 @@ public class WikiUtil {
 		return sb.toString();
 	}
 
-	public static List<WikiNode> getNodes(PortletRequest portletRequest)
-		throws SystemException {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		long groupId = themeDisplay.getScopeGroupId();
-
-		String allNodes = ListUtil.toString(
-			WikiNodeLocalServiceUtil.getNodes(groupId), "name");
-
-		PortletPreferences preferences = portletRequest.getPreferences();
-
-		String[] visibleNodes = StringUtil.split(
-			preferences.getValue("visible-nodes", allNodes));
-		String[] hiddenNodes = StringUtil.split(
-			preferences.getValue("hidden-nodes", StringPool.BLANK));
-
-		return getNodes(
-			groupId, visibleNodes, hiddenNodes,
-			themeDisplay.getPermissionChecker());
-	}
-
 	public static List<WikiNode> getNodes(
-			long groupId, String[] visibleNodes, String[] hiddenNodes,
+			List<WikiNode> nodes, String[] hiddenNodes,
 			PermissionChecker permissionChecker)
 		throws SystemException {
 
-		List<WikiNode> nodes = WikiNodeLocalServiceUtil.getNodes(groupId);
+		List<WikiNode> resultNodes = new ArrayList<WikiNode>(nodes.size());
 
-		nodes = ListUtil.copy(nodes);
-		nodes = _orderNodes(nodes, visibleNodes);
-
-		Iterator<WikiNode> itr = nodes.iterator();
-
-		while (itr.hasNext()) {
-			WikiNode node = itr.next();
-
-			if (ArrayUtil.contains(hiddenNodes, node.getName()) ||
-				!WikiNodePermission.contains(
-					permissionChecker, node, ActionKeys.VIEW)) {
-
-				itr.remove();
+		Arrays.sort(hiddenNodes);
+		for(WikiNode node : nodes) {
+			if ((Arrays.binarySearch(hiddenNodes, node.getName()) < 0) &&
+				(WikiNodePermission.contains(permissionChecker, node,
+					ActionKeys.VIEW))) {
+				resultNodes.add(node);
 			}
 		}
 
-		return nodes;
+		return resultNodes;
+	}
+
+	public static List<String> getNodesNames(List<WikiNode> nodes) {
+
+		List<String> names = new ArrayList<String>(nodes.size());
+		for(WikiNode node : nodes) {
+			names.add(node.getName());
+		}
+
+		return names;
+	}
+
+	public static List<WikiNode> orderNodes(
+		List<WikiNode> nodes, String[] visibleNodesNames) {
+
+		if ((visibleNodesNames == null) || (visibleNodesNames.length == 0)) {
+			return nodes;
+		}
+
+		List<WikiNode> orderedNodes = new ArrayList<WikiNode>(nodes.size());
+
+		List<WikiNode> tailNodes = new ArrayList<WikiNode>(nodes);
+
+		for (String nodeName : visibleNodesNames) {
+			Iterator<WikiNode> tailNodesIterator = tailNodes.iterator();
+			while (tailNodesIterator.hasNext()) {
+				WikiNode node = tailNodesIterator.next();
+				if (node.getName().equals(nodeName)) {
+					orderedNodes.add(node);
+					tailNodesIterator.remove();
+					break;
+				}
+			}
+		}
+
+		orderedNodes.addAll(tailNodes);
+
+		return orderedNodes;
 	}
 
 	public static String processContent(String content) {
@@ -374,28 +411,6 @@ public class WikiUtil {
 	private static String _decodeJSPWikiContent(String jspWikiContent) {
 		return StringUtil.replace(
 			jspWikiContent, _JSP_WIKI_NAME_2, _JSP_WIKI_NAME_1);
-	}
-
-	private static List<WikiNode> _orderNodes(
-		List<WikiNode> nodes, String[] nodeNames) {
-
-		List<WikiNode> orderedNodes = new ArrayList<WikiNode>();
-
-		for (String nodeName : nodeNames) {
-			for (WikiNode node : nodes) {
-				if (node.getName().equals(nodeName)) {
-					orderedNodes.add(node);
-
-					nodes.remove(node);
-
-					break;
-				}
-			}
-		}
-
-		orderedNodes.addAll(nodes);
-
-		return orderedNodes;
 	}
 
 	private String _convert(

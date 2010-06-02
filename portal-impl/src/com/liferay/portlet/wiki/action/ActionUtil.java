@@ -40,8 +40,6 @@ import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import com.liferay.portlet.wiki.util.WikiUtil;
 
-import java.util.List;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
@@ -89,13 +87,11 @@ public class ActionUtil {
 				serviceContext);
 		}
 		else {
-			List<WikiNode> nodes = WikiUtil.getNodes(portletRequest);
-
-			if (nodes.size() == 0) {
+			node = WikiUtil.getFirstNode(portletRequest);
+			if (node == null) {
 				throw new PrincipalException();
 			}
-
-			node = nodes.get(0);
+			return node;
 		}
 
 		portletRequest.setAttribute(WebKeys.WIKI_NODE, node);

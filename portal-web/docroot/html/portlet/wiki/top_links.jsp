@@ -30,7 +30,7 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 
 	String keywords = ParamUtil.getString(request, "keywords");
 
-	List nodes = WikiUtil.getNodes(scopeGroupId, visibleNodes, hiddenNodes, permissionChecker);
+	List nodes = WikiUtil.getNodes(allNodes, hiddenNodes, permissionChecker);
 
 	PortletURL portletURL = renderResponse.createRenderURL();
 
