@@ -688,42 +688,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return portlet;
 	}
 
-	protected void setFriendlyURLRoutes(
-		Portlet portlet, Element portletElement) {
-
-		Element friendlyUrlRoutesElement = portletElement.element(
-			"friendly-url-routes");
-
-		if (friendlyUrlRoutesElement == null) {
-			return;
-		}
-
-		Router router = new Router();
-
-		for (Element routeElement :
-				friendlyUrlRoutesElement.elements("route")) {
-
-			Route route = new Route();
-
-			String pattern = routeElement.elementText("route-pattern");
-
-			route.setPattern(pattern);
-
-			for (Element routeDefaultElement :
-					routeElement.elements("route-default")) {
-
-				String defaultParamater = routeDefaultElement.elementText(
-					"route-default-parameter");
-				String defaultValue = routeDefaultElement.elementText(
-					"route-default-value");
-
-				route.addDefaultValue(defaultParamater, defaultValue);
-			}
-
-			router.addRoute(route);
-		}
-	}
-
 	private String _encodeKey(long companyId) {
 		return _keyPrefix.concat(String.valueOf(companyId));
 	}
@@ -1140,7 +1104,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			_friendlyURLMapperPortlets.put(portletId, portletModel);
 		}
 
-		setFriendlyURLRoutes(portletModel, portletElement);
+		_setFriendlyURLRoutes(portletModel, portletElement);
 
 		portletModel.setURLEncoderClass(
 			GetterUtil.getString(
@@ -1933,6 +1897,42 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 
 		return servletURLPatterns;
+	}
+
+	private void _setFriendlyURLRoutes(
+		Portlet portlet, Element portletElement) {
+	
+		Element friendlyUrlRoutesElement = portletElement.element(
+			"friendly-url-routes");
+	
+		if (friendlyUrlRoutesElement == null) {
+			return;
+		}
+	
+		Router router = new Router();
+	
+		for (Element routeElement :
+				friendlyUrlRoutesElement.elements("route")) {
+	
+			Route route = new Route();
+	
+			String pattern = routeElement.elementText("route-pattern");
+	
+			route.setPattern(pattern);
+	
+			for (Element routeDefaultElement :
+					routeElement.elements("route-default")) {
+	
+				String defaultParamater = routeDefaultElement.elementText(
+					"route-default-parameter");
+				String defaultValue = routeDefaultElement.elementText(
+					"route-default-value");
+	
+				route.addDefaultValue(defaultParamater, defaultValue);
+			}
+	
+			router.addRoute(route);
+		}
 	}
 
 	private void _setSpriteImages(
