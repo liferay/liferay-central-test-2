@@ -56,51 +56,6 @@ import org.apache.tools.ant.DirectoryScanner;
  */
 public class SourceFormatter {
 
-	public static void _checkPersistenceTestSuite() throws IOException {
-		String basedir = "./portal-impl/test";
-
-		if (!_fileUtil.exists(basedir)) {
-			return;
-		}
-
-		DirectoryScanner directoryScanner = new DirectoryScanner();
-
-		directoryScanner.setBasedir(basedir);
-		directoryScanner.setIncludes(
-			new String[] {"**\\*PersistenceTest.java"});
-
-		List<String> fileNames = _sourceFormatterHelper.scanForFiles(
-			directoryScanner);
-
-		List<String> persistenceTests = new ArrayList<String>();
-
-		for (String fileName : fileNames) {
-			String persistenceTest = fileName.substring(
-				0, fileName.length() - 5);
-
-			persistenceTest = persistenceTest.substring(
-				persistenceTest.lastIndexOf(File.separator) + 1,
-				persistenceTest.length());
-
-			persistenceTests.add(persistenceTest);
-		}
-
-		String persistenceTestSuiteFileName =
-			basedir + "/com/liferay/portal/service/persistence/" +
-				"PersistenceTestSuite.java"; 
-
-		String persistenceTestSuiteContent = _fileUtil.read(
-			persistenceTestSuiteFileName);
-
-		for (String persistenceTest : persistenceTests) {
-			if (!persistenceTestSuiteContent.contains(persistenceTest)) {
-				_sourceFormatterHelper.printError(
-					persistenceTestSuiteFileName,
-					"PersistenceTestSuite: " + persistenceTest);
-			}
-		}
-	}
-
 	public static void main(String[] args) {
 		try {
 			_sourceFormatterHelper = new SourceFormatterHelper(true);
@@ -216,6 +171,51 @@ public class SourceFormatter {
 				content.substring(y + 1, content.length());
 
 		return content;
+	}
+
+	private static void _checkPersistenceTestSuite() throws IOException {
+		String basedir = "./portal-impl/test";
+
+		if (!_fileUtil.exists(basedir)) {
+			return;
+		}
+
+		DirectoryScanner directoryScanner = new DirectoryScanner();
+
+		directoryScanner.setBasedir(basedir);
+		directoryScanner.setIncludes(
+			new String[] {"**\\*PersistenceTest.java"});
+
+		List<String> fileNames = _sourceFormatterHelper.scanForFiles(
+			directoryScanner);
+
+		List<String> persistenceTests = new ArrayList<String>();
+
+		for (String fileName : fileNames) {
+			String persistenceTest = fileName.substring(
+				0, fileName.length() - 5);
+
+			persistenceTest = persistenceTest.substring(
+				persistenceTest.lastIndexOf(File.separator) + 1,
+				persistenceTest.length());
+
+			persistenceTests.add(persistenceTest);
+		}
+
+		String persistenceTestSuiteFileName =
+			basedir + "/com/liferay/portal/service/persistence/" +
+				"PersistenceTestSuite.java"; 
+
+		String persistenceTestSuiteContent = _fileUtil.read(
+			persistenceTestSuiteFileName);
+
+		for (String persistenceTest : persistenceTests) {
+			if (!persistenceTestSuiteContent.contains(persistenceTest)) {
+				_sourceFormatterHelper.printError(
+					persistenceTestSuiteFileName,
+					"PersistenceTestSuite: " + persistenceTest);
+			}
+		}
 	}
 
 	private static void _checkXSS(String fileName, String jspContent) {
