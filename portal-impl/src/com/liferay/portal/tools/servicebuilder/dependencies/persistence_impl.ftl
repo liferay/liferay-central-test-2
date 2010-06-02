@@ -2780,9 +2780,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	</#list>
 
 	<#if entity.isPermissionCheckEnabled()>
-		private static final String _FILTER_SQL_SELECT_${entity.alias?upper_case}_WHERE = "SELECT {${entity.alias}.*} FROM ${entity.name} ${entity.alias} WHERE ";
+		private static final String _FILTER_SQL_SELECT_${entity.alias?upper_case}_WHERE = "SELECT DISTINCT {${entity.alias}.*} FROM ${entity.name} ${entity.alias} WHERE ";
 
-		private static final String _FILTER_SQL_COUNT_${entity.alias?upper_case}_WHERE = "SELECT COUNT(${entity.alias}.${entity.PKVarName}) AS COUNT_VALUE FROM ${entity.name} ${entity.alias} WHERE ";
+		private static final String _FILTER_SQL_COUNT_${entity.alias?upper_case}_WHERE = "SELECT COUNT(DISTINCT ${entity.alias}.${entity.PKVarName}) AS COUNT_VALUE FROM ${entity.name} ${entity.alias} WHERE ";
 
 		private static final String _FILTER_COLUMN_${entity.PKVarName?upper_case} = "${entity.alias}.${entity.PKVarName}";
 
