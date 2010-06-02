@@ -91,17 +91,21 @@ boolean enableComments = PropsValues.WIKI_PAGE_COMMENTS_ENABLED && GetterUtil.ge
 boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null), true);
 
 List<WikiNode> allNodes = WikiNodeLocalServiceUtil.getNodes(scopeGroupId);
-List<String> allNodesNames = WikiUtil.getNodesNames(allNodes);
-String visibleNodesPreference = preferences.getValue("visible-nodes", null);
+List<String> allNodeNames = WikiUtil.getNodeNames(allNodes);
 
 String[] visibleNodes = null;
-if(visibleNodesPreference != null) {
+
+String visibleNodesPreference = preferences.getValue("visible-nodes", null);
+
+if (visibleNodesPreference != null) {
 	visibleNodes = StringUtil.split(visibleNodesPreference);
+
 	allNodes = WikiUtil.orderNodes(allNodes, visibleNodes);
 }
 else {
-	visibleNodes = allNodesNames.toArray(new String[allNodesNames.size()]);
+	visibleNodes = allNodeNames.toArray(new String[allNodeNames.size()]);
 }
+
 String[] hiddenNodes = StringUtil.split(preferences.getValue("hidden-nodes", null));
 
 int rssDelta = GetterUtil.getInteger(preferences.getValue("rss-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);

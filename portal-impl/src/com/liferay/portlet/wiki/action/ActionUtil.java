@@ -88,9 +88,11 @@ public class ActionUtil {
 		}
 		else {
 			node = WikiUtil.getFirstNode(portletRequest);
+
 			if (node == null) {
 				throw new PrincipalException();
 			}
+
 			return node;
 		}
 

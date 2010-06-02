@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.util.DiffHtmlUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -287,9 +288,9 @@ public class WikiUtil {
 		List<WikiNode> nodes = WikiNodeLocalServiceUtil.getNodes(groupId);
 
 		PortletPreferences preferences = portletRequest.getPreferences();
-		String[] visibleNodesNames =
+		String[] visibleNodeNames =
 			StringUtil.split(preferences.getValue("visible-nodes", null));
-		nodes = orderNodes(nodes, visibleNodesNames);
+		nodes = orderNodes(nodes, visibleNodeNames);
 
 		String[] hiddenNodes = StringUtil.split(
 			preferences.getValue("hidden-nodes", StringPool.BLANK));
@@ -336,59 +337,64 @@ public class WikiUtil {
 		return sb.toString();
 	}
 
-	public static List<WikiNode> getNodes(
-			List<WikiNode> nodes, String[] hiddenNodes,
-			PermissionChecker permissionChecker)
-		throws SystemException {
+	public static List<String> getNodeNames(List<WikiNode> nodes) {
+		List<String> nodeNames = new ArrayList<String>(nodes.size());
 
-		List<WikiNode> resultNodes = new ArrayList<WikiNode>(nodes.size());
+		for (WikiNode node : nodes) {
+			nodeNames.add(node.getName());
+		}
+
+		return nodeNames;
+	}
+
+	public static List<WikiNode> getNodes(
+		List<WikiNode> nodes, String[] hiddenNodes,
+		PermissionChecker permissionChecker) {
+
+		nodes = ListUtil.copy(nodes);
 
 		Arrays.sort(hiddenNodes);
-		for(WikiNode node : nodes) {
-			if ((Arrays.binarySearch(hiddenNodes, node.getName()) < 0) &&
-				(WikiNodePermission.contains(permissionChecker, node,
-					ActionKeys.VIEW))) {
-				resultNodes.add(node);
+
+		Iterator<WikiNode> itr = nodes.iterator();
+
+		while (itr.hasNext()) {
+			WikiNode node = itr.next();
+
+			if ((Arrays.binarySearch(hiddenNodes, node.getName()) < 0) ||
+				!WikiNodePermission.contains(
+					permissionChecker, node, ActionKeys.VIEW)) {
+
+				itr.remove();
 			}
 		}
 
-		return resultNodes;
-	}
-
-	public static List<String> getNodesNames(List<WikiNode> nodes) {
-
-		List<String> names = new ArrayList<String>(nodes.size());
-		for(WikiNode node : nodes) {
-			names.add(node.getName());
-		}
-
-		return names;
+		return nodes;
 	}
 
 	public static List<WikiNode> orderNodes(
-		List<WikiNode> nodes, String[] visibleNodesNames) {
+		List<WikiNode> nodes, String[] visibleNodeNames) {
 
-		if ((visibleNodesNames == null) || (visibleNodesNames.length == 0)) {
+		if ((visibleNodeNames == null) || (visibleNodeNames.length == 0)) {
 			return nodes;
 		}
 
+		nodes = ListUtil.copy(nodes);
+
 		List<WikiNode> orderedNodes = new ArrayList<WikiNode>(nodes.size());
 
-		List<WikiNode> tailNodes = new ArrayList<WikiNode>(nodes);
-
-		for (String nodeName : visibleNodesNames) {
-			Iterator<WikiNode> tailNodesIterator = tailNodes.iterator();
-			while (tailNodesIterator.hasNext()) {
-				WikiNode node = tailNodesIterator.next();
-				if (node.getName().equals(nodeName)) {
+		for (String visibleNodeName : visibleNodeNames) {
+			for (WikiNode node : nodes) {
+				if (node.getName().equals(visibleNodeName)) {
 					orderedNodes.add(node);
-					tailNodesIterator.remove();
+
+					nodes.remove(node);
+
 					break;
 				}
 			}
 		}
 
-		orderedNodes.addAll(tailNodes);
+		orderedNodes.addAll(nodes);
 
 		return orderedNodes;
 	}
