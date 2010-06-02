@@ -897,12 +897,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		String servletContextName, Element element,
 		PortletCategory portletCategory, Set<String> portletIds) {
 
-		Iterator<Element> itr1 = element.elements("category").iterator();
-
-		while (itr1.hasNext()) {
-			Element category = itr1.next();
-
-			String name = category.attributeValue("name");
+		for (Element categoryElement : element.elements("category")) {
+			String name = categoryElement.attributeValue("name");
 
 			PortletCategory curPortletCategory = new PortletCategory(name);
 
@@ -910,12 +906,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			Set<String> curPortletIds = curPortletCategory.getPortletIds();
 
-			Iterator<Element> itr2 = category.elements("portlet").iterator();
-
-			while (itr2.hasNext()) {
-				Element portlet = itr2.next();
-
-				String portletId = portlet.attributeValue("id");
+			for (Element portletElement : categoryElement.elements("portlet")) {
+				String portletId = portletElement.attributeValue("id");
 
 				if (Validator.isNotNull(servletContextName)) {
 					portletId =
@@ -930,7 +922,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			}
 
 			_readLiferayDisplay(
-				servletContextName, category, curPortletCategory, portletIds);
+				servletContextName, categoryElement, curPortletCategory,
+				portletIds);
 		}
 	}
 
@@ -1026,13 +1019,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		Map<String, String> roleMappers = new HashMap<String, String>();
 
-		Iterator<Element> itr1 = rootElement.elements("role-mapper").iterator();
-
-		while (itr1.hasNext()) {
-			Element roleMapper = itr1.next();
-
-			String roleName = roleMapper.elementText("role-name");
-			String roleLink = roleMapper.elementText("role-link");
+		for (Element roleMapperElement : rootElement.elements("role-mapper")) {
+			String roleName = roleMapperElement.elementText("role-name");
+			String roleLink = roleMapperElement.elementText("role-link");
 
 			roleMappers.put(roleName, roleLink);
 		}
@@ -1040,31 +1029,22 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		Map<String, String> customUserAttributes =
 			portletApp.getCustomUserAttributes();
 
-		itr1 = rootElement.elements("custom-user-attribute").iterator();
+		for (Element customUserAttributeElement :
+				rootElement.elements("custom-user-attribute")) {
 
-		while (itr1.hasNext()) {
-			Element customUserAttribute = itr1.next();
-
-			String customClass = customUserAttribute.elementText(
+			String customClass = customUserAttributeElement.elementText(
 				"custom-class");
 
-			Iterator<Element> itr2 = customUserAttribute.elements(
-				"name").iterator();
+			for (Element nameElement :
+					customUserAttributeElement.elements("name")) {
 
-			while (itr2.hasNext()) {
-				Element nameEl = itr2.next();
-
-				String name = nameEl.getText();
+				String name = nameElement.getText();
 
 				customUserAttributes.put(name, customClass);
 			}
 		}
 
-		itr1 = rootElement.elements("portlet").iterator();
-
-		while (itr1.hasNext()) {
-			Element portlet = itr1.next();
-
+		for (Element portlet : rootElement.elements("portlet")) {
 			String portletId = portlet.elementText("portlet-name");
 
 			if (Validator.isNotNull(servletContextName)) {
