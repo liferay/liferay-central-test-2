@@ -131,7 +131,7 @@
 			>
 
 				<%
-				buffer.append(workflowHandler.getType());
+				buffer.append(ResourceActionsUtil.getModelResource(locale, workflowHandler.getClassName()));
 				%>
 
 			</liferay-ui:search-container-column-text>
