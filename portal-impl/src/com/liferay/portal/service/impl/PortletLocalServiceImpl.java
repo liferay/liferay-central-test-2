@@ -609,11 +609,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			// Check for missing entries in liferay-portlet.xml
 
-			Iterator<String> itr = portletIds.iterator();
-
-			while (itr.hasNext()) {
-				String portletId = itr.next();
-
+			for (String portletId : portletIds) {
 				if (_log.isWarnEnabled() &&
 					!liferayPortletIds.contains(portletId)) {
 
@@ -626,11 +622,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			// Check for missing entries in portlet.xml
 
-			itr = liferayPortletIds.iterator();
-
-			while (itr.hasNext()) {
-				String portletId = itr.next();
-
+			for (String portletId : liferayPortletIds) {
 				if (_log.isWarnEnabled() && !portletIds.contains(portletId)) {
 					_log.warn(
 						"Portlet with the name " + portletId +
@@ -641,11 +633,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			// Return the new portlets
 
-			itr = portletIds.iterator();
-
-			while (itr.hasNext()) {
-				String portletId = itr.next();
-
+			for (String portletId : portletIds) {
 				Portlet portlet = _getPortletsPool().get(portletId);
 
 				portlets.add(portlet);
@@ -754,11 +742,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 	private String _getPortletId(String securityPath) {
 		if (_portletIdsByStrutsPath.size() == 0) {
-			Iterator<Portlet> itr = _getPortletsPool().values().iterator();
-
-			while (itr.hasNext()) {
-				Portlet portlet = itr.next();
-
+			for (Portlet portlet : _getPortletsPool().values()) {
 				_portletIdsByStrutsPath.put(
 					portlet.getStrutsPath(), portlet.getPortletId());
 			}
@@ -815,7 +799,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		while (itr.hasNext()) {
 			Portlet portlet = itr.next();
 
-			if (!portlet.getPortletId().startsWith(portletNamePrefix)) {
+			String portletId = portlet.getPortletId();
+
+			if (!portletId.startsWith(portletNamePrefix)) {
 				itr.remove();
 			}
 		}
@@ -828,12 +814,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		List<Portlet> portlets = new ArrayList<Portlet>();
 
-		Iterator<Map.Entry<String, Portlet>> itr =
-			portletsPool.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry<String, Portlet> entry = itr.next();
-
+		for (Map.Entry<String, Portlet> entry : portletsPool.entrySet()) {
 			String portletId = entry.getKey();
 			Portlet portlet = entry.getValue();
 
@@ -845,7 +826,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				}
 			}
 			else {
-				if (portletId.indexOf(PortletConstants.WAR_SEPARATOR) == -1) {
+				if (!portletId.contains(PortletConstants.WAR_SEPARATOR)) {
 					portlets.add(portlet);
 				}
 			}
@@ -880,11 +861,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				return portletsPool;
 			}
 
-			Iterator<Portlet> itr = parentPortletsPool.values().iterator();
-
-			while (itr.hasNext()) {
-				Portlet portlet = itr.next();
-
+			for (Portlet portlet : parentPortletsPool.values()) {
 				portlet = (Portlet)portlet.clone();
 
 				portlet.setCompanyId(companyId);
@@ -892,11 +869,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletsPool.put(portlet.getPortletId(), portlet);
 			}
 
-			itr = portletPersistence.findByCompanyId(companyId).iterator();
+			List<Portlet> portlets = portletPersistence.findByCompanyId(
+				companyId);
 
-			while (itr.hasNext()) {
-				Portlet portlet = itr.next();
-
+			for (Portlet portlet : portlets) {
 				Portlet portletModel = portletsPool.get(portlet.getPortletId());
 
 				// Portlet may be null if it exists in the database but its
@@ -918,10 +894,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	}
 
 	private void _readLiferayDisplay(
-		String servletContextName, Element el, PortletCategory portletCategory,
-		Set<String> portletIds) {
+		String servletContextName, Element element,
+		PortletCategory portletCategory, Set<String> portletIds) {
 
-		Iterator<Element> itr1 = el.elements("category").iterator();
+		Iterator<Element> itr1 = element.elements("category").iterator();
 
 		while (itr1.hasNext()) {
 			Element category = itr1.next();
