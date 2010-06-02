@@ -3206,8 +3206,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	private static final String _FINDER_COLUMN_G_T_TYPE_3 = "(calEvent.type IS NULL OR calEvent.type = ?)";
 	private static final String _FINDER_COLUMN_G_R_GROUPID_2 = "calEvent.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_R_REPEATING_2 = "calEvent.repeating = ?";
-	private static final String _FILTER_SQL_SELECT_CALEVENT_WHERE = "SELECT {calEvent.*} FROM CalEvent calEvent WHERE ";
-	private static final String _FILTER_SQL_COUNT_CALEVENT_WHERE = "SELECT COUNT(calEvent.eventId) AS COUNT_VALUE FROM CalEvent calEvent WHERE ";
+	private static final String _FILTER_SQL_SELECT_CALEVENT_WHERE = "SELECT DISTINCT {calEvent.*} FROM CalEvent calEvent WHERE ";
+	private static final String _FILTER_SQL_COUNT_CALEVENT_WHERE = "SELECT COUNT(DISTINCT calEvent.eventId) AS COUNT_VALUE FROM CalEvent calEvent WHERE ";
 	private static final String _FILTER_COLUMN_EVENTID = "calEvent.eventId";
 	private static final String _FILTER_COLUMN_USERID = "calEvent.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "calEvent";
