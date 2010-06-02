@@ -78,8 +78,8 @@ public class Writer_WebContentRolesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.check("_128_rowIds");
 		selenium.uncheck(
-			"//input[@name='_128_rowIds' and @value='15CONFIGURATION']");
-		selenium.check("//input[@name='_128_rowIds' and @value='15VIEW']");
+			"//input[@name='_128_rowIds' and @value='56CONFIGURATION']");
+		selenium.check("//input[@name='_128_rowIds' and @value='56VIEW']");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));

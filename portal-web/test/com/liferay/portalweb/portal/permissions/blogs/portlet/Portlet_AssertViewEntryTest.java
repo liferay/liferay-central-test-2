@@ -48,7 +48,7 @@ public class Portlet_AssertViewEntryTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Portlet1 Temporary1 Entry1"),
-			selenium.getText("//form/div/div[1]/div[1]"));
+			selenium.getText("//span/span/span"));
 		assertEquals(RuntimeVariables.replace(
 				"This is a temporary portlet permissions entry!"),
 			selenium.getText("//p"));

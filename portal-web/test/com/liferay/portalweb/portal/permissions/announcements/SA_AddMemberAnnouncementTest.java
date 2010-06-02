@@ -71,10 +71,10 @@ public class SA_AddMemberAnnouncementTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Entry']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_84_title",
-			RuntimeVariables.replace("Test Member Announcement"));
 		selenium.type("_84_title",
 			RuntimeVariables.replace("Test Member Announcement"));
+		selenium.type("_84_url",
+			RuntimeVariables.replace("http://www.liferay.com"));
 		selenium.type("_84_content",
 			RuntimeVariables.replace("This is a test Member Announcement."));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));

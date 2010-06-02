@@ -257,6 +257,19 @@ public class SA_TearDownTest extends BaseTestCase {
 				selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+
+				boolean welcomePresent = selenium.isElementPresent(
+						"//li/ul/li[1]/div/div[3]/a");
+
+				if (welcomePresent) {
+					label = 6;
+
+					continue;
+				}
+
+				selenium.clickAt("//li/div/div[1]", RuntimeVariables.replace(""));
+
+			case 6:
 				selenium.clickAt("//li[2]/div/div[3]/a",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");

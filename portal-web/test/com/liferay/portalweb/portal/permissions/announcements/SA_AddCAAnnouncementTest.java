@@ -70,10 +70,10 @@ public class SA_AddCAAnnouncementTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Entry']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_84_title",
-			RuntimeVariables.replace("Test CA Announcement"));
 		selenium.type("_84_title",
 			RuntimeVariables.replace("Test CA Announcement"));
+		selenium.type("_84_url",
+			RuntimeVariables.replace("http://www.liferay.com"));
 		selenium.type("_84_content",
 			RuntimeVariables.replace("This is a test CA Announcement."));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));

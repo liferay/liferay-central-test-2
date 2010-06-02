@@ -48,7 +48,8 @@ public class Portlet_AssertCannotAddCommentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Comments"),
-			selenium.getText("//li/span/span/span"));
+			selenium.getText("//ul[2]/li/span/span/span"));
+		assertFalse(selenium.isElementPresent("link=Be the first."));
 		assertFalse(selenium.isElementPresent("link=Add Comment"));
 	}
 }
