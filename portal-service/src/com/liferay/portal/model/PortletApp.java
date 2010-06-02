@@ -35,6 +35,8 @@ public interface PortletApp extends Serializable {
 
 	public void addPortletURLListener(PortletURLListener portletURLListener);
 
+	public void addServletURLPatterns(Set<String> servletURLPatterns);
+
 	public void addPublicRenderParameter(
 		PublicRenderParameter publicRenderParameter);
 

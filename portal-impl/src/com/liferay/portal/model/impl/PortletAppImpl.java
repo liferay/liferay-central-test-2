@@ -84,6 +84,10 @@ public class PortletAppImpl implements PortletApp {
 		addPublicRenderParameter(publicRenderParameter);
 	}
 
+	public void addServletURLPatterns(Set<String> servletURLPatterns) {
+		_servletURLPatterns.addAll(servletURLPatterns);
+	}
+
 	public Map<String, String[]> getContainerRuntimeOptions() {
 		return _containerRuntimeOptions;
 	}
