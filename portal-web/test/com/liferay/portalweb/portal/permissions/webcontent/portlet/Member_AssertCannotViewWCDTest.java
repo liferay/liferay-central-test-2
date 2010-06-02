@@ -47,6 +47,7 @@ public class Member_AssertCannotViewWCDTest extends BaseTestCase {
 		selenium.clickAt("link=Web Content Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("//section"));
+		assertTrue(selenium.isTextPresent(
+				"You do not have the roles required to access this portlet. "));
 	}
 }

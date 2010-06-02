@@ -48,7 +48,5 @@ public class SA_LoginTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Sign In']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Guest", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 	}
 }

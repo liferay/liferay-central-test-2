@@ -59,7 +59,7 @@ public class CA_RestoreMemberWCDViewPermissionsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//tr[5]/td[2]/input")) {
+				if (selenium.isElementPresent("//tr[5]/td[4]/input")) {
 					break;
 				}
 			}
@@ -69,12 +69,12 @@ public class CA_RestoreMemberWCDViewPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.check("//tr[5]/td[2]/input");
+		selenium.check("//tr[5]/td[4]/input");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
-		assertTrue(selenium.isChecked("//tr[5]/td[2]/input"));
+		assertTrue(selenium.isChecked("//tr[5]/td[4]/input"));
 	}
 }

@@ -80,14 +80,15 @@ public class Member_WebContentRolesTest extends BaseTestCase {
 		selenium.clickAt("link=Define Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_128_add-permissions",
-			RuntimeVariables.replace("www"));
+			RuntimeVariables.replace("wwwwwwwwww"));
 		selenium.keyPress("_128_add-permissions",
 			RuntimeVariables.replace("\\13"));
 		selenium.waitForPageToLoad("30000");
 		selenium.uncheck("_128_rowIds");
-		selenium.uncheck(
-			"//input[@name='_128_rowIds' and @value='56CONFIGURATION']");
-		selenium.check("//input[@name='_128_rowIds' and @value='56VIEW']");
+		selenium.uncheck("//input[@value='15ACCESS_IN_CONTROL_PANEL']");
+		selenium.uncheck("//input[@value='15ADD_TO_PAGE']");
+		selenium.uncheck("//input[@value='15CONFIGURATION']");
+		selenium.check("//input[@value='15VIEW']");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));

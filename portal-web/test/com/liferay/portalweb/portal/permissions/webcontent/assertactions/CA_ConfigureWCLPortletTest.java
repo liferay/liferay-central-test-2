@@ -47,7 +47,7 @@ public class CA_ConfigureWCLPortletTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_86_groupId", RuntimeVariables.replace("label=Guest"));
+		selenium.select("_86_groupId", RuntimeVariables.replace("label=Liferay"));
 		selenium.select("_86_type", RuntimeVariables.replace("label=General"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

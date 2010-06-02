@@ -29,9 +29,9 @@ public class CA_WebContentListRolesTest extends BaseTestCase {
 		selenium.select("_128_add-permissions",
 			RuntimeVariables.replace("label=Web Content List"));
 		selenium.waitForPageToLoad("30000");
-		selenium.check("_128_rowIds");
-		selenium.check(
-			"//input[@name='_128_rowIds' and @value='62CONFIGURATION']");
+		selenium.check("//input[@value='62VIEW']");
+		selenium.check("//input[@value='62ADD_TO_PAGE']");
+		selenium.check("//input[@value='62CONFIGURATION']");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));

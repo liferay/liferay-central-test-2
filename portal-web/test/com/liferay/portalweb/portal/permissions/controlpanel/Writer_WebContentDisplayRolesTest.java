@@ -30,8 +30,9 @@ public class Writer_WebContentDisplayRolesTest extends BaseTestCase {
 		selenium.select("_128_add-permissions",
 			RuntimeVariables.replace("label=Web Content Display"));
 		selenium.waitForPageToLoad("30000");
-		selenium.check("_128_rowIds");
-		selenium.check("//input[@name='_128_rowIds' and @value='56VIEW']");
+		selenium.check("//input[@value='56ADD_TO_PAGE']");
+		selenium.check("//input[@value='56CONFIGURATION']");
+		selenium.check("//input[@value='56VIEW']");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));

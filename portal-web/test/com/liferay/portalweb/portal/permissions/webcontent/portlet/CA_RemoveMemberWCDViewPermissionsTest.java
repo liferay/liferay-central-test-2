@@ -70,15 +70,15 @@ public class CA_RemoveMemberWCDViewPermissionsTest extends BaseTestCase {
 		}
 
 		selenium.uncheck("15_ACTION_VIEW");
-		selenium.uncheck("//tr[5]/td[2]/input");
-		selenium.uncheck("//tr[13]/td[2]/input");
+		selenium.uncheck("//tr[5]/td[4]/input");
+		selenium.uncheck("//tr[13]/td[4]/input");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
 		assertFalse(selenium.isChecked("15_ACTION_VIEW"));
-		assertFalse(selenium.isChecked("//tr[5]/td[2]/input"));
-		assertFalse(selenium.isChecked("//tr[13]/td[2]/input"));
+		assertFalse(selenium.isChecked("//tr[5]/td[4]/input"));
+		assertFalse(selenium.isChecked("//tr[13]/td[4]/input"));
 	}
 }
