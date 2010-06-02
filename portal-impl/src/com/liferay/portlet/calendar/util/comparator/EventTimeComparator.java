@@ -50,15 +50,19 @@ public class EventTimeComparator implements Comparator<CalEvent> {
 			return 1;
 		}
 
-		int value = compareTime(
-			getStartDate(event1, _timeZone), getStartDate(event2, _timeZone));
+		Date startDate1 = getStartDate(event1, _timeZone);
+		Date startDate2 = getStartDate(event2, _timeZone);
+
+		int value = startDate1.compareTo(startDate2);
 
 		if (value != 0) {
 			return value;
 		}
 
-		value = compareTime(
-			getEndDate(event1, _timeZone), getEndDate(event2, _timeZone));
+		Date endDate1 = getEndDate(event1, _timeZone);
+		Date endDate2 = getEndDate(event2, _timeZone);
+
+		value = endDate1.compareTo(endDate2);
 
 		if (value != 0) {
 			return value;
@@ -70,26 +74,6 @@ public class EventTimeComparator implements Comparator<CalEvent> {
 	protected int compareTitle(CalEvent event1, CalEvent event2) {
 		return event1.getTitle().toLowerCase().compareTo(
 			event2.getTitle().toLowerCase());
-	}
-
-	protected int compareTime(Date date1, Date date2) {
-		Calendar cal1 = Calendar.getInstance(_timeZone, _locale);
-
-		cal1.setTime(date1);
-
-		cal1.set(Calendar.YEAR, 1970);
-		cal1.set(Calendar.MONTH, 1);
-		cal1.set(Calendar.DAY_OF_YEAR, 1);
-
-		Calendar cal2 = Calendar.getInstance(_timeZone, _locale);
-
-		cal2.setTime(date2);
-
-		cal2.set(Calendar.YEAR, 1970);
-		cal2.set(Calendar.MONTH, 1);
-		cal2.set(Calendar.DAY_OF_YEAR, 1);
-
-		return cal1.compareTo(cal2);
 	}
 
 	protected Date getEndDate(CalEvent event, TimeZone timeZone) {
