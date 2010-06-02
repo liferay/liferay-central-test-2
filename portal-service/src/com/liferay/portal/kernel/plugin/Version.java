@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.io.Serializable;
+
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.concurrent.ConcurrentHashMap;
@@ -28,7 +30,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author Jorge Ferrer
  */
-public class Version implements Comparable<Version> {
+public class Version implements Comparable<Version>, Serializable {
 
 	public static final String UNKNOWN = "unknown";
 

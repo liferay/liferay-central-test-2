@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.xml;
 
+import java.io.Serializable;
+
 import java.util.List;
 
 /**
@@ -21,7 +23,7 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  */
-public interface XPath {
+public interface XPath extends Serializable {
 
 	public boolean booleanValueOf(Object context);
 

@@ -14,12 +14,14 @@
 
 package com.liferay.portal.kernel.xml;
 
+import java.io.Serializable;
+
 /**
  * <a href="QName.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public interface QName {
+public interface QName extends Serializable {
 
 	public String getLocalPart();
 

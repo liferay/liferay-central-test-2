@@ -17,6 +17,8 @@ package com.liferay.portal.plugin;
 import com.liferay.portal.kernel.plugin.Version;
 import com.liferay.portal.kernel.util.StringPool;
 
+import java.io.Serializable;
+
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.concurrent.ConcurrentHashMap;
@@ -26,7 +28,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author Jorge Ferrer
  */
-public class ModuleId {
+public class ModuleId implements Serializable {
 
 	public static ModuleId getInstance(String moduleId) {
 		ModuleId moduleIdObj = _moduleIds.get(moduleId);

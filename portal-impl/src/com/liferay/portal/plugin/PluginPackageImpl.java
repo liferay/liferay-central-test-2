@@ -23,6 +23,8 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,7 +39,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  * @author Jorge Ferrer
  */
 public class PluginPackageImpl
-	implements Comparable<PluginPackage>, PluginPackage {
+	implements Comparable<PluginPackage>, PluginPackage, Serializable {
 
 	public static final String STATUS_ALL = "all";
 

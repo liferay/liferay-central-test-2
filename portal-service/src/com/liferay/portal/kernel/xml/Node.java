@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.xml;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.io.Writer;
 
 import java.util.List;
@@ -24,7 +25,7 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  */
-public interface Node {
+public interface Node extends Serializable {
 
 	public String asXML();
 
