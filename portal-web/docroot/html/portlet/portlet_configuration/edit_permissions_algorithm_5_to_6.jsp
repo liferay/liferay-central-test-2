@@ -162,19 +162,19 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 
 		roles.remove(administrator);
 
-		if (group.isCommunity()) {
-			Role communityAdministrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.COMMUNITY_ADMINISTRATOR);
-			Role communityOwner = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.COMMUNITY_OWNER);
-
-			roles.remove(communityAdministrator);
-			roles.remove(communityOwner);
-		}
-		else if (group.isOrganization()) {
+		if (group.isOrganization() || (group.isStagingGroup() && group.getLiveGroup().isOrganization())) {
 			Role organizationAdministrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_ADMINISTRATOR);
 			Role organizationOwner = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
 
 			roles.remove(organizationAdministrator);
 			roles.remove(organizationOwner);
+		}
+		else if (group.isCommunity()) {
+			Role communityAdministrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.COMMUNITY_ADMINISTRATOR);
+			Role communityOwner = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.COMMUNITY_OWNER);
+
+			roles.remove(communityAdministrator);
+			roles.remove(communityOwner);
 		}
 
 		if (group.isCommunity() || group.isOrganization()) {
