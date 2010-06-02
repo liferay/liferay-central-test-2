@@ -250,11 +250,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			new ArrayList<CustomAttributesDisplay>(
 				_customAttributesDisplayPortlets.size());
 
-		Iterator<Map.Entry<String, Portlet>> itr =
-			_customAttributesDisplayPortlets.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry<String, Portlet> entry = itr.next();
+		for (Map.Entry<String, Portlet> entry :
+				_customAttributesDisplayPortlets.entrySet()) {
 
 			Portlet portlet = entry.getValue();
 
@@ -285,11 +282,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		List<Portlet> portlets = new ArrayList<Portlet>(
 			_friendlyURLMapperPortlets.size());
 
-		Iterator<Map.Entry<String, Portlet>> itr =
-			_friendlyURLMapperPortlets.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry<String, Portlet> entry = itr.next();
+		for (Map.Entry<String, Portlet> entry :
+				_friendlyURLMapperPortlets.entrySet()) {
 
 			Portlet portlet = entry.getValue();
 
@@ -308,11 +302,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		List<FriendlyURLMapper> friendlyURLMappers =
 			new ArrayList<FriendlyURLMapper>(_friendlyURLMapperPortlets.size());
 
-		Iterator<Map.Entry<String, Portlet>> itr =
-			_friendlyURLMapperPortlets.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry<String, Portlet> entry = itr.next();
+		for (Map.Entry<String, Portlet> entry :
+				_friendlyURLMapperPortlets.entrySet()) {
 
 			Portlet portlet = entry.getValue();
 
