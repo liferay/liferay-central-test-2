@@ -61,6 +61,8 @@ while (itr.hasNext()) {
 
 	if (!PortletPermissionUtil.contains(permissionChecker, plid, portlet, ActionKeys.VIEW)) {
 		itr.remove();
+
+		continue;
 	}
 
 	portletTitles.add(PortalUtil.getPortletTitle(portlet, application, locale));
