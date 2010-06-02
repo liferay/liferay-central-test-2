@@ -1202,35 +1202,28 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		List<String> assetRendererFactoryClasses =
 			portletModel.getAssetRendererFactoryClasses();
 
-		itr2 = portletElement.elements("asset-renderer-factory").iterator();
-
-		while (itr2.hasNext()) {
-			Element assetRendererFactoryClassEl = itr2.next();
+		for (Element assetRendererFactoryClassElement : 
+				portletElement.elements("asset-renderer-factory")) {
 
 			assetRendererFactoryClasses.add(
-				assetRendererFactoryClassEl.getText());
+				assetRendererFactoryClassElement.getText());
 		}
 
 		List<String> customAttributesDisplayClasses =
 			portletModel.getCustomAttributesDisplayClasses();
 
-		itr2 = portletElement.elements("custom-attributes-display").iterator();
-
-		while (itr2.hasNext()) {
-			Element customAttributesDisplayClassEl = itr2.next();
+		for (Element customAttributesDisplayClassElement :
+				portletElement.elements("custom-attributes-display")) {
 
 			customAttributesDisplayClasses.add(
-				customAttributesDisplayClassEl.getText());
+				customAttributesDisplayClassElement.getText());
 		}
 
-		if (portletModel.getCustomAttributesDisplayClasses().
-			isEmpty()) {
-
+		if (customAttributesDisplayClasses.isEmpty()) {
 			_customAttributesDisplayPortlets.remove(portletId);
 		}
 		else {
-			_customAttributesDisplayPortlets.put(
-				portletId, portletModel);
+			_customAttributesDisplayPortlets.put(portletId, portletModel);
 		}
 
 		List<String> workflowHandlerClasses =
