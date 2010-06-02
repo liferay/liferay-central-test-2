@@ -59,7 +59,7 @@ while (itr.hasNext()) {
 		continue;
 	}
 
-	if (!PortletPermissionUtil.contains(permissionChecker, plid, portlet, ActionKeys.VIEW)) {
+	if (layoutTypePortlet.hasPortletId(portlet.getPortletId()) && !PortletPermissionUtil.contains(permissionChecker, plid, portlet, ActionKeys.VIEW)) {
 		itr.remove();
 
 		continue;
