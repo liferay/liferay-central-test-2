@@ -172,8 +172,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	public Portlet clonePortlet(long companyId, String portletId)
 		throws SystemException {
 
-		Portlet portlet = portletLocalService.getPortletById(
-			companyId, portletId);
+		Portlet portlet = getPortletById(companyId, portletId);
 
 		return (Portlet)portlet.clone();
 	}
@@ -349,7 +348,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 
 		if (portletId.equals(PortletKeys.LIFERAY_PORTAL)) {
-			return null;
+			return portlet;
 		}
 		
 		if (_portletsPool.isEmpty()) {
