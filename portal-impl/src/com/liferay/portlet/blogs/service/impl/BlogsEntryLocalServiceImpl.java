@@ -338,8 +338,9 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(entryId);
 
-		return blogsEntryPersistence.findByGroupId_PrevAndNext(
+		return blogsEntryPersistence.findByG_S_PrevAndNext(
 			entry.getEntryId(), entry.getGroupId(),
+			WorkflowConstants.STATUS_APPROVED,
 			new EntryDisplayDateComparator(true));
 	}
 
