@@ -344,64 +344,65 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			}
 		}
 
-		if ((portlet == null) &&
-			(!portletId.equals(PortletKeys.LIFERAY_PORTAL))) {
+		if (portlet != null) {
+			return portlet;
+		}
 
-			if (_portletsPool.isEmpty()) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("No portlets are installed");
-				}
+		if (portletId.equals(PortletKeys.LIFERAY_PORTAL)) {
+			return null;
+		}
+		
+		if (_portletsPool.isEmpty()) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("No portlets are installed");
 			}
-			else {
-				if (_log.isInfoEnabled()) {
-					_log.info(
-						"Portlet not found for " + companyId + " " + portletId);
-				}
-
-				portlet = new PortletImpl(CompanyConstants.SYSTEM, portletId);
-
-				portlet.setTimestamp(System.currentTimeMillis());
-
-				PortletApp portletApp = _getPortletApp(StringPool.BLANK);
-
-				portlet.setPortletApp(portletApp);
-
-				portlet.setPortletName(portletId);
-				portlet.setDisplayName(portletId);
-				portlet.setPortletClass(MVCPortlet.class.getName());
-
-				Map<String, String> initParams = portlet.getInitParams();
-
-				initParams.put(
-					"view-jsp", "/html/portal/undeployed_portlet.jsp");
-
-				Set<String> mimeTypePortletModes = new HashSet<String>();
-
-				mimeTypePortletModes.add(
-					PortletMode.VIEW.toString().toLowerCase());
-
-				portlet.getPortletModes().put(
-					ContentTypes.TEXT_HTML, mimeTypePortletModes);
-
-				Set<String> mimeTypeWindowStates = new HashSet<String>();
-
-				mimeTypeWindowStates.add(
-					WindowState.NORMAL.toString().toLowerCase());
-
-				portlet.getWindowStates().put(
-					ContentTypes.TEXT_HTML, mimeTypeWindowStates);
-
-				portlet.setPortletInfo(
-					new PortletInfo(
-						portletId, portletId, portletId, portletId));
-
-				if (portletId.indexOf("_INSTANCE_") != -1) {
-					portlet.setInstanceable(true);
-				}
-
-				portlet.setActive(true);
-				portlet.setUndeployedPortlet(true);
+		}
+		else {
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Portlet not found for " + companyId + " " + portletId);
 			}
+
+			portlet = new PortletImpl(CompanyConstants.SYSTEM, portletId);
+
+			portlet.setTimestamp(System.currentTimeMillis());
+
+			PortletApp portletApp = _getPortletApp(StringPool.BLANK);
+
+			portlet.setPortletApp(portletApp);
+
+			portlet.setPortletName(portletId);
+			portlet.setDisplayName(portletId);
+			portlet.setPortletClass(MVCPortlet.class.getName());
+
+			Map<String, String> initParams = portlet.getInitParams();
+
+			initParams.put("view-jsp", "/html/portal/undeployed_portlet.jsp");
+
+			Set<String> mimeTypePortletModes = new HashSet<String>();
+
+			mimeTypePortletModes.add(PortletMode.VIEW.toString().toLowerCase());
+
+			portlet.getPortletModes().put(
+				ContentTypes.TEXT_HTML, mimeTypePortletModes);
+
+			Set<String> mimeTypeWindowStates = new HashSet<String>();
+
+			mimeTypeWindowStates.add(
+				WindowState.NORMAL.toString().toLowerCase());
+
+			portlet.getWindowStates().put(
+				ContentTypes.TEXT_HTML, mimeTypeWindowStates);
+
+			portlet.setPortletInfo(
+				new PortletInfo(portletId, portletId, portletId, portletId));
+
+			if (PortletConstants.getInstanceId(portletId) != null) {
+				portlet.setInstanceable(true);
+			}
+
+			portlet.setActive(true);
+			portlet.setUndeployedPortlet(true);
 		}
 
 		return portlet;
