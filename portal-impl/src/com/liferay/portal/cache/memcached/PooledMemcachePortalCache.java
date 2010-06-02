@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -14,13 +14,15 @@
 
 package com.liferay.portal.cache.memcached;
 
-import net.spy.memcached.MemcachedClientIF;
 import com.liferay.portal.cache.memcached.factory.MemcachedClientFactory;
 import com.liferay.portal.kernel.cache.PortalCache;
 
 import java.io.Serializable;
+
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+
+import net.spy.memcached.MemcachedClientIF;
 
 /**
  * <a href="PooledMemcachePortalCache.java.html"><b><i>View Source</i></b></a>
@@ -39,7 +41,7 @@ public class PooledMemcachePortalCache implements PortalCache {
 	}
 
 	public Object get(String key) {
-		MemcachedClientIF memcachedClient;
+		MemcachedClientIF memcachedClient = null;
 
 		try {
 			memcachedClient = _memcachedClientFactory.getMemcachedClient();
@@ -72,7 +74,7 @@ public class PooledMemcachePortalCache implements PortalCache {
 	}
 
 	public void put(String key, Object obj, int timeToLive) {
-		MemcachedClientIF memcachedClient;
+		MemcachedClientIF memcachedClient = null;
 
 		try {
 			memcachedClient = _memcachedClientFactory.getMemcachedClient();
@@ -91,11 +93,10 @@ public class PooledMemcachePortalCache implements PortalCache {
 
 	public void put(String key, Serializable obj) {
 		put(key, obj, _timeToLive);
-
 	}
 
 	public void put(String key, Serializable obj, int timeToLive) {
-		MemcachedClientIF memcachedClient;
+		MemcachedClientIF memcachedClient = null;
 
 		try {
 			memcachedClient = _memcachedClientFactory.getMemcachedClient();
@@ -113,7 +114,7 @@ public class PooledMemcachePortalCache implements PortalCache {
 	}
 
 	public void remove(String key) {
-		MemcachedClientIF memcachedClient;
+		MemcachedClientIF memcachedClient = null;
 
 		try {
 			memcachedClient = _memcachedClientFactory.getMemcachedClient();
@@ -131,7 +132,7 @@ public class PooledMemcachePortalCache implements PortalCache {
 	}
 
 	public void removeAll() {
-		MemcachedClientIF memcachedClient;
+		MemcachedClientIF memcachedClient = null;
 
 		try {
 			memcachedClient = _memcachedClientFactory.getMemcachedClient();
@@ -157,10 +158,8 @@ public class PooledMemcachePortalCache implements PortalCache {
 			_memcachedClientFactory.returnMemcachedObject(memcachedClient);
 		}
 		catch (Exception e) {
-			//nothing to be done...
 		}
 	}
-
 
 	private MemcachedClientFactory _memcachedClientFactory;
 	private int _timeout;

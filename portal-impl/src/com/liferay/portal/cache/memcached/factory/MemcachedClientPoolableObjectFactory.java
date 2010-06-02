@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -14,16 +14,17 @@
 
 package com.liferay.portal.cache.memcached.factory;
 
-import net.spy.memcached.ConnectionFactory;
-import net.spy.memcached.MemcachedClient;
-import net.spy.memcached.MemcachedClientIF;
-
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.net.InetSocketAddress;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import net.spy.memcached.ConnectionFactory;
+import net.spy.memcached.MemcachedClient;
+import net.spy.memcached.MemcachedClientIF;
 
 import org.apache.commons.pool.PoolableObjectFactory;
 
@@ -72,13 +73,13 @@ public class MemcachedClientPoolableObjectFactory
 		for (String memcachedAddress : memcachedAddresses) {
 			String[] hostAndPort = StringUtil.split(
 				memcachedAddress, StringPool.COLON);
-			
+
 			String hostName = hostAndPort[0];
 			int port = _DEFAULT_MEMCACHED_PORT;
 			if (hostAndPort.length == 2) {
 				port = Integer.parseInt(hostAndPort[1]);
 			}
-			
+
 			InetSocketAddress inetSocketAddress =
 				new InetSocketAddress(hostName, port);
 
@@ -87,8 +88,9 @@ public class MemcachedClientPoolableObjectFactory
 	}
 
 	private static final int _DEFAULT_MEMCACHED_PORT = 11211;
-	
+
 	private ConnectionFactory _memcachedConnectionFactory;
 	private List<InetSocketAddress> _memcachedAddresses =
 		new ArrayList<InetSocketAddress>();
+
 }

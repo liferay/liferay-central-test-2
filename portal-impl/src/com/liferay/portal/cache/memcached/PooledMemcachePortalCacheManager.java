@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -30,11 +30,11 @@ import java.util.concurrent.TimeUnit;
 public class PooledMemcachePortalCacheManager implements PortalCacheManager {
 
 	public void afterPropertiesSet() {
-		_cacheMap = new ConcurrentHashMap<String, PortalCache>();
+		_portalCaches = new ConcurrentHashMap<String, PortalCache>();
 	}
 
 	public void clearAll() {
-		_cacheMap.clear();
+		_portalCaches.clear();
 	}
 
 	public PortalCache getCache(String name) {
@@ -42,20 +42,21 @@ public class PooledMemcachePortalCacheManager implements PortalCacheManager {
 	}
 
 	public PortalCache getCache(String name, boolean blocking) {
-		PortalCache cache = _cacheMap.get(name);
+		PortalCache portalCache = _portalCaches.get(name);
 
-		if (cache == null) {
-			cache = new PooledMemcachePortalCache(
+		if (portalCache == null) {
+			portalCache = new PooledMemcachePortalCache(
 				_memcachedClientFactory, _timeout, _timeoutTimeUnit);
 
-			_cacheMap.put(name, cache);
+			_portalCaches.put(name, portalCache);
 		}
 
-		return cache;
+		return portalCache;
 	}
 
 	public void setMemcachedClientPool(
 		MemcachedClientFactory memcachedClientFactory) {
+
 		_memcachedClientFactory = memcachedClientFactory;
 	}
 
@@ -67,8 +68,9 @@ public class PooledMemcachePortalCacheManager implements PortalCacheManager {
 		_timeoutTimeUnit = TimeUnit.valueOf(timeoutTimeUnit);
 	}
 
-	private Map<String, PortalCache> _cacheMap;
 	private MemcachedClientFactory _memcachedClientFactory;
+	private Map<String, PortalCache> _portalCaches;
 	private int _timeout;
 	private TimeUnit _timeoutTimeUnit;
+
 }

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -14,14 +14,16 @@
 
 package com.liferay.portal.cache.memcached;
 
-import net.spy.memcached.MemcachedClientIF;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.io.Serializable;
+
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+
+import net.spy.memcached.MemcachedClientIF;
 
 /**
  * <a href="MemcachePortalCache.java.html"><b><i>View Source</i></b></a>
@@ -47,10 +49,11 @@ public class MemcachePortalCache implements PortalCache {
 		try {
 			cachedObject = future.get(_timeout, _timeoutTimeUnit);
 		}
-		catch (Throwable e) {
+		catch (Throwable t) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Memcache operation error", e);
+				_log.warn("Memcache operation error", t);
 			}
+
 			future.cancel(true);
 		}
 
@@ -62,13 +65,11 @@ public class MemcachePortalCache implements PortalCache {
 	}
 
 	public void put(String key, Object obj, int timeToLive) {
-
 		_memcachedClient.set(key, timeToLive, obj);
 	}
 
 	public void put(String key, Serializable obj) {
 		put(key, obj, _timeToLive);
-
 	}
 
 	public void put(String key, Serializable obj, int timeToLive) {
@@ -90,9 +91,9 @@ public class MemcachePortalCache implements PortalCache {
 	private static final Log _log = LogFactoryUtil.getLog(
 		MemcachePortalCache.class);
 
+	private MemcachedClientIF _memcachedClient;
 	private int _timeout;
 	private TimeUnit _timeoutTimeUnit;
 	private int _timeToLive;
 
-	private MemcachedClientIF _memcachedClient;
 }

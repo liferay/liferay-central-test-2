@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -14,15 +14,17 @@
 
 package com.liferay.portal.cache.memcached.factory;
 
-import net.spy.memcached.ConnectionFactory;
-import net.spy.memcached.MemcachedClient;
-import net.spy.memcached.MemcachedClientIF;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.net.InetSocketAddress;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import net.spy.memcached.ConnectionFactory;
+import net.spy.memcached.MemcachedClient;
+import net.spy.memcached.MemcachedClientIF;
 
 /**
  * <a href="DefaultMemcachedClientFactory.java.html"><b><i>View Source</i></b></a>
@@ -30,7 +32,7 @@ import java.util.List;
  * @author Michael C. Han
  */
 public class DefaultMemcachedClientFactory implements MemcachedClientFactory {
-	
+
 	public MemcachedClientIF getMemcachedClient() throws Exception {
 		MemcachedClientIF memCachedClient = new MemcachedClient(
 			_memcachedConnectionFactory, _memcachedAddresses);
@@ -96,4 +98,5 @@ public class DefaultMemcachedClientFactory implements MemcachedClientFactory {
 	private ConnectionFactory _memcachedConnectionFactory;
 	private List<InetSocketAddress> _memcachedAddresses =
 		new ArrayList<InetSocketAddress>();
+
 }
