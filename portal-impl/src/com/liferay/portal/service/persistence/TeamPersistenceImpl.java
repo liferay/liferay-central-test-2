@@ -1806,8 +1806,8 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	private static final String _FINDER_COLUMN_G_N_NAME_1 = "team.name IS NULL";
 	private static final String _FINDER_COLUMN_G_N_NAME_2 = "team.name = ?";
 	private static final String _FINDER_COLUMN_G_N_NAME_3 = "(team.name IS NULL OR team.name = ?)";
-	private static final String _FILTER_SQL_SELECT_TEAM_WHERE = "SELECT DISTINCT {team.*} FROM Team team WHERE ";
-	private static final String _FILTER_SQL_COUNT_TEAM_WHERE = "SELECT COUNT(DISTINCT team.teamId) AS COUNT_VALUE FROM Team team WHERE ";
+	private static final String _FILTER_SQL_SELECT_TEAM_WHERE = "SELECT {team.*} FROM Team team WHERE ";
+	private static final String _FILTER_SQL_COUNT_TEAM_WHERE = "SELECT COUNT(team.teamId) AS COUNT_VALUE FROM Team team WHERE ";
 	private static final String _FILTER_COLUMN_TEAMID = "team.teamId";
 	private static final String _FILTER_COLUMN_USERID = "team.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "team";

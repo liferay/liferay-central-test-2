@@ -3799,8 +3799,8 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	private static final String _FINDER_COLUMN_G_F_N_NAME_1 = "igImage.name IS NULL";
 	private static final String _FINDER_COLUMN_G_F_N_NAME_2 = "igImage.name = ?";
 	private static final String _FINDER_COLUMN_G_F_N_NAME_3 = "(igImage.name IS NULL OR igImage.name = ?)";
-	private static final String _FILTER_SQL_SELECT_IGIMAGE_WHERE = "SELECT DISTINCT {igImage.*} FROM IGImage igImage WHERE ";
-	private static final String _FILTER_SQL_COUNT_IGIMAGE_WHERE = "SELECT COUNT(DISTINCT igImage.imageId) AS COUNT_VALUE FROM IGImage igImage WHERE ";
+	private static final String _FILTER_SQL_SELECT_IGIMAGE_WHERE = "SELECT {igImage.*} FROM IGImage igImage WHERE ";
+	private static final String _FILTER_SQL_COUNT_IGIMAGE_WHERE = "SELECT COUNT(igImage.imageId) AS COUNT_VALUE FROM IGImage igImage WHERE ";
 	private static final String _FILTER_COLUMN_IMAGEID = "igImage.imageId";
 	private static final String _FILTER_COLUMN_USERID = "igImage.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "igImage";

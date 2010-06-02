@@ -1641,8 +1641,8 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	private static final String _FINDER_COLUMN_C_C_CLASSPK_1 = "tasksProposal.classPK IS NULL";
 	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "tasksProposal.classPK = ?";
 	private static final String _FINDER_COLUMN_C_C_CLASSPK_3 = "(tasksProposal.classPK IS NULL OR tasksProposal.classPK = ?)";
-	private static final String _FILTER_SQL_SELECT_TASKSPROPOSAL_WHERE = "SELECT DISTINCT {tasksProposal.*} FROM TasksProposal tasksProposal WHERE ";
-	private static final String _FILTER_SQL_COUNT_TASKSPROPOSAL_WHERE = "SELECT COUNT(DISTINCT tasksProposal.proposalId) AS COUNT_VALUE FROM TasksProposal tasksProposal WHERE ";
+	private static final String _FILTER_SQL_SELECT_TASKSPROPOSAL_WHERE = "SELECT {tasksProposal.*} FROM TasksProposal tasksProposal WHERE ";
+	private static final String _FILTER_SQL_COUNT_TASKSPROPOSAL_WHERE = "SELECT COUNT(tasksProposal.proposalId) AS COUNT_VALUE FROM TasksProposal tasksProposal WHERE ";
 	private static final String _FILTER_COLUMN_PROPOSALID = "tasksProposal.proposalId";
 	private static final String _FILTER_COLUMN_USERID = "tasksProposal.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "tasksProposal";

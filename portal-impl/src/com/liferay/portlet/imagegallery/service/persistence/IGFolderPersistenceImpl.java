@@ -2680,8 +2680,8 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	private static final String _FINDER_COLUMN_G_P_N_NAME_1 = "igFolder.name IS NULL";
 	private static final String _FINDER_COLUMN_G_P_N_NAME_2 = "igFolder.name = ?";
 	private static final String _FINDER_COLUMN_G_P_N_NAME_3 = "(igFolder.name IS NULL OR igFolder.name = ?)";
-	private static final String _FILTER_SQL_SELECT_IGFOLDER_WHERE = "SELECT DISTINCT {igFolder.*} FROM IGFolder igFolder WHERE ";
-	private static final String _FILTER_SQL_COUNT_IGFOLDER_WHERE = "SELECT COUNT(DISTINCT igFolder.folderId) AS COUNT_VALUE FROM IGFolder igFolder WHERE ";
+	private static final String _FILTER_SQL_SELECT_IGFOLDER_WHERE = "SELECT {igFolder.*} FROM IGFolder igFolder WHERE ";
+	private static final String _FILTER_SQL_COUNT_IGFOLDER_WHERE = "SELECT COUNT(igFolder.folderId) AS COUNT_VALUE FROM IGFolder igFolder WHERE ";
 	private static final String _FILTER_COLUMN_FOLDERID = "igFolder.folderId";
 	private static final String _FILTER_COLUMN_USERID = "igFolder.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "igFolder";
