@@ -41,7 +41,11 @@ public class StringResourceRepositoryImpl implements StringResourceRepository {
 
 		if ((resource != null) &&
 			(resource instanceof SerializableStringResource)) {
-			return ((SerializableStringResource)resource).toStringResource();
+
+			SerializableStringResource serializableStringResource =
+				(SerializableStringResource)resource;
+
+			return serializableStringResource.toStringResource();
 		}
 
 		return null;
