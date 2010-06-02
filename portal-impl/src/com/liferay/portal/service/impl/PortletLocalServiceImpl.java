@@ -541,11 +541,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			// Check for missing entries in liferay-portlet.xml
 
-			Iterator<String> portletIdsItr = portletIds.iterator();
-
-			while (portletIdsItr.hasNext()) {
-				String portletId = portletIdsItr.next();
-
+			for (String portletId : portletIds) {
 				if (_log.isWarnEnabled() &&
 					!liferayPortletIds.contains(portletId)) {
 
@@ -558,12 +554,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			// Check for missing entries in portlet.xml
 
-			Iterator<String> liferayPortletIdsItr =
-				liferayPortletIds.iterator();
-
-			while (liferayPortletIdsItr.hasNext()) {
-				String portletId = liferayPortletIdsItr.next();
-
+			for (String portletId : liferayPortletIds) {
 				if (_log.isWarnEnabled() && !portletIds.contains(portletId)) {
 					_log.warn(
 						"Portlet with the name " + portletId +
@@ -993,25 +984,21 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				"com/liferay/portal/deploy/dependencies/liferay-display.xml");
 		}
 
-		Document doc = SAXReaderUtil.read(xml, true);
+		Document document = SAXReaderUtil.read(xml, true);
 
-		Element root = doc.getRootElement();
+		Element rootElement = document.getRootElement();
 
 		Set<String> portletIds = new HashSet<String>();
 
 		_readLiferayDisplay(
-			servletContextName, root, portletCategory, portletIds);
+			servletContextName, rootElement, portletCategory, portletIds);
 
 		// Portlets that do not belong to any categories should default to the
 		// Undefined category
 
 		Set<String> undefinedPortletIds = new HashSet<String>();
 
-		Iterator<Portlet> itr = _getPortletsPool().values().iterator();
-
-		while (itr.hasNext()) {
-			Portlet portlet = itr.next();
-
+		for (Portlet portlet : _getPortletsPool().values()) {
 			String portletId = portlet.getPortletId();
 
 			PortletApp portletApp = portlet.getPortletApp();
@@ -1034,7 +1021,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			}
 		}
 
-		if (undefinedPortletIds.size() > 0) {
+		if (!undefinedPortletIds.isEmpty()) {
 			PortletCategory undefinedCategory = new PortletCategory(
 				"category.undefined");
 
@@ -1064,15 +1051,15 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			return liferayPortletIds;
 		}
 
-		Document doc = SAXReaderUtil.read(xml, true);
+		Document document = SAXReaderUtil.read(xml, true);
 
-		Element root = doc.getRootElement();
+		Element rootElement = document.getRootElement();
 
 		PortletApp portletApp = _getPortletApp(servletContextName);
 
 		Map<String, String> roleMappers = new HashMap<String, String>();
 
-		Iterator<Element> itr1 = root.elements("role-mapper").iterator();
+		Iterator<Element> itr1 = rootElement.elements("role-mapper").iterator();
 
 		while (itr1.hasNext()) {
 			Element roleMapper = itr1.next();
@@ -1086,7 +1073,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		Map<String, String> customUserAttributes =
 			portletApp.getCustomUserAttributes();
 
-		itr1 = root.elements("custom-user-attribute").iterator();
+		itr1 = rootElement.elements("custom-user-attribute").iterator();
 
 		while (itr1.hasNext()) {
 			Element customUserAttribute = itr1.next();
@@ -1106,7 +1093,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			}
 		}
 
-		itr1 = root.elements("portlet").iterator();
+		itr1 = rootElement.elements("portlet").iterator();
 
 		while (itr1.hasNext()) {
 			Element portlet = itr1.next();
@@ -1550,10 +1537,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			return portletIds;
 		}
 
-		Document doc = SAXReaderUtil.read(
+		Document document = SAXReaderUtil.read(
 			xml, PropsValues.PORTLET_XML_VALIDATE);
 
-		Element root = doc.getRootElement();
+		Element rootElement = document.getRootElement();
 
 		PortletApp portletApp = _getPortletApp(servletContextName);
 
@@ -1561,7 +1548,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		Set<String> userAttributes = portletApp.getUserAttributes();
 
-		Iterator<Element> itr1 = root.elements("user-attribute").iterator();
+		Iterator<Element> itr1 = rootElement.elements(
+			"user-attribute").iterator();
 
 		while (itr1.hasNext()) {
 			Element userAttribute = itr1.next();
@@ -1571,13 +1559,13 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			userAttributes.add(name);
 		}
 
-		String defaultNamespace = root.elementText("default-namespace");
+		String defaultNamespace = rootElement.elementText("default-namespace");
 
 		if (Validator.isNotNull(defaultNamespace)) {
 			portletApp.setDefaultNamespace(defaultNamespace);
 		}
 
-		itr1 = root.elements("event-definition").iterator();
+		itr1 = rootElement.elements("event-definition").iterator();
 
 		while (itr1.hasNext()) {
 			Element eventDefinitionEl = itr1.next();
@@ -1595,7 +1583,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			portletApp.addEventDefinition(eventDefinition);
 		}
 
-		itr1 = root.elements("public-render-parameter").iterator();
+		itr1 = rootElement.elements("public-render-parameter").iterator();
 
 		while (itr1.hasNext()) {
 			Element publicRenderParameterEl = itr1.next();
@@ -1614,7 +1602,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			portletApp.addPublicRenderParameter(publicRenderParameter);
 		}
 
-		itr1 = root.elements("container-runtime-option").iterator();
+		itr1 = rootElement.elements("container-runtime-option").iterator();
 
 		while (itr1.hasNext()) {
 			Element containerRuntimeOption = itr1.next();
@@ -1641,7 +1629,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		long timestamp = ServletContextUtil.getLastModified(servletContext);
 
-		itr1 = root.elements("portlet").iterator();
+		itr1 = rootElement.elements("portlet").iterator();
 
 		while (itr1.hasNext()) {
 			Element portlet = itr1.next();
@@ -1906,7 +1894,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			}
 		}
 
-		itr1 = root.elements("filter").iterator();
+		itr1 = rootElement.elements("filter").iterator();
 
 		while (itr1.hasNext()) {
 			Element filter = itr1.next();
@@ -1942,7 +1930,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			portletApp.addPortletFilter(portletFilter);
 		}
 
-		itr1 = root.elements("filter-mapping").iterator();
+		itr1 = rootElement.elements("filter-mapping").iterator();
 
 		while (itr1.hasNext()) {
 			Element filterMapping = itr1.next();
@@ -1984,7 +1972,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			}
 		}
 
-		itr1 = root.elements("listener").iterator();
+		itr1 = rootElement.elements("listener").iterator();
 
 		while (itr1.hasNext()) {
 			Element listener = itr1.next();
@@ -2007,22 +1995,20 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			return servletURLPatterns;
 		}
 
-		Document doc = SAXReaderUtil.read(xml);
+		Document document = SAXReaderUtil.read(xml);
 
-		Element root = doc.getRootElement();
+		Element rootElement = document.getRootElement();
 
-		Iterator<Element> itr = root.elements("servlet-mapping").iterator();
+		for (Element servletMappingElement :
+				rootElement.elements("servlet-mapping")) {
 
-		while (itr.hasNext()) {
-			Element servletMapping = itr.next();
-
-			String urlPattern = servletMapping.elementText("url-pattern");
+			String urlPattern = servletMappingElement.elementText(
+				"url-pattern");
 
 			servletURLPatterns.add(urlPattern);
 		}
 
 		return servletURLPatterns;
-
 	}
 
 	private void _setSpriteImages(
