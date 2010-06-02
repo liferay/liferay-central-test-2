@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.util.Time;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.util.CalUtil;
 
-import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Locale;
