@@ -469,8 +469,20 @@ public class JournalArticleFinderImpl
 					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
 			}
 			else if (version <= 0) {
+				StringBundler sb = new StringBundler(
+					"articleId, MAX(version) as version");
+
+				for (String field : orderByComparator.getOrderByFields()) {
+					if (field.equals("articleId") || field.equals("version")) {
+						continue;
+					}
+
+					sb.append(", ");
+					sb.append(field);
+				}
+
 				sql = StringUtil.replace(
-					sql, "id_ AS id", "DISTINCT articleId");
+					sql, "id_ AS id", sb.toString());
 
 				sql = StringUtil.replace(
 					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
@@ -492,6 +504,11 @@ public class JournalArticleFinderImpl
 			}
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
+
+			if ((version != null) && (version <= 0)) {
+				sql = CustomSQLUtil.replaceGroupBy(sql, "articleId");
+			}
+
 			sql = CustomSQLUtil.replaceOrderBy(sql, orderByComparator);
 
 			SQLQuery q = session.createSQLQuery(sql);
