@@ -1234,49 +1234,62 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				workflowHandlerClassEl.getText());
 		}
 
-		portletModel.setPreferencesCompanyWide(GetterUtil.getBoolean(
-			portletElement.elementText("preferences-company-wide"),
-			portletModel.isPreferencesCompanyWide()));
+		portletModel.setPreferencesCompanyWide(
+			GetterUtil.getBoolean(
+				portletElement.elementText("preferences-company-wide"),
+				portletModel.isPreferencesCompanyWide()));
 		portletModel.setPreferencesUniquePerLayout(
 			GetterUtil.getBoolean(
 				portletElement.elementText("preferences-unique-per-layout"),
 				portletModel.isPreferencesUniquePerLayout()));
-		portletModel.setPreferencesOwnedByGroup(GetterUtil.getBoolean(
-			portletElement.elementText("preferences-owned-by-group"),
-			portletModel.isPreferencesOwnedByGroup()));
-		portletModel.setUseDefaultTemplate(GetterUtil.getBoolean(
-			portletElement.elementText("use-default-template"),
-			portletModel.isUseDefaultTemplate()));
-		portletModel.setShowPortletAccessDenied(GetterUtil.getBoolean(
-			portletElement.elementText("show-portlet-access-denied"),
-			portletModel.isShowPortletAccessDenied()));
-		portletModel.setShowPortletInactive(GetterUtil.getBoolean(
-			portletElement.elementText("show-portlet-inactive"),
-			portletModel.isShowPortletInactive()));
-		portletModel.setActionURLRedirect(GetterUtil.getBoolean(
-			portletElement.elementText("action-url-redirect"),
-			portletModel.isActionURLRedirect()));
-		portletModel.setRestoreCurrentView(GetterUtil.getBoolean(
-			portletElement.elementText("restore-current-view"),
-			portletModel.isRestoreCurrentView()));
-		portletModel.setMaximizeEdit(GetterUtil.getBoolean(
-			portletElement.elementText("maximize-edit"),
-			portletModel.isMaximizeEdit()));
-		portletModel.setMaximizeHelp(GetterUtil.getBoolean(
-			portletElement.elementText("maximize-help"),
-			portletModel.isMaximizeHelp()));
-		portletModel.setPopUpPrint(GetterUtil.getBoolean(
-			portletElement.elementText("pop-up-print"),
-			portletModel.isPopUpPrint()));
-		portletModel.setLayoutCacheable(GetterUtil.getBoolean(
-			portletElement.elementText("layout-cacheable"),
-			portletModel.isLayoutCacheable()));
-		portletModel.setInstanceable(GetterUtil.getBoolean(
-			portletElement.elementText("instanceable"),
-			portletModel.isInstanceable()));
-		portletModel.setScopeable(GetterUtil.getBoolean(
-			portletElement.elementText("scopeable"),
-			portletModel.isScopeable()));
+		portletModel.setPreferencesOwnedByGroup(
+			GetterUtil.getBoolean(
+				portletElement.elementText("preferences-owned-by-group"),
+				portletModel.isPreferencesOwnedByGroup()));
+		portletModel.setUseDefaultTemplate(
+			GetterUtil.getBoolean(
+				portletElement.elementText("use-default-template"),
+				portletModel.isUseDefaultTemplate()));
+		portletModel.setShowPortletAccessDenied(
+			GetterUtil.getBoolean(
+				portletElement.elementText("show-portlet-access-denied"),
+				portletModel.isShowPortletAccessDenied()));
+		portletModel.setShowPortletInactive(
+			GetterUtil.getBoolean(
+				portletElement.elementText("show-portlet-inactive"),
+				portletModel.isShowPortletInactive()));
+		portletModel.setActionURLRedirect(
+			GetterUtil.getBoolean(
+				portletElement.elementText("action-url-redirect"),
+				portletModel.isActionURLRedirect()));
+		portletModel.setRestoreCurrentView(
+			GetterUtil.getBoolean(
+				portletElement.elementText("restore-current-view"),
+				portletModel.isRestoreCurrentView()));
+		portletModel.setMaximizeEdit(
+			GetterUtil.getBoolean(
+				portletElement.elementText("maximize-edit"),
+				portletModel.isMaximizeEdit()));
+		portletModel.setMaximizeHelp(
+			GetterUtil.getBoolean(
+				portletElement.elementText("maximize-help"),
+				portletModel.isMaximizeHelp()));
+		portletModel.setPopUpPrint(
+			GetterUtil.getBoolean(
+				portletElement.elementText("pop-up-print"),
+				portletModel.isPopUpPrint()));
+		portletModel.setLayoutCacheable(
+			GetterUtil.getBoolean(
+				portletElement.elementText("layout-cacheable"),
+				portletModel.isLayoutCacheable()));
+		portletModel.setInstanceable(
+			GetterUtil.getBoolean(
+				portletElement.elementText("instanceable"),
+				portletModel.isInstanceable()));
+		portletModel.setScopeable(
+			GetterUtil.getBoolean(
+				portletElement.elementText("scopeable"),
+				portletModel.isScopeable()));
 		portletModel.setUserPrincipalStrategy(
 			GetterUtil.getString(
 				portletElement.elementText("user-principal-strategy"),
