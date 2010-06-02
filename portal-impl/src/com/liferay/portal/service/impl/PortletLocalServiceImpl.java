@@ -350,7 +350,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		if (portletId.equals(PortletKeys.LIFERAY_PORTAL)) {
 			return portlet;
 		}
-		
+
 		if (_portletsPool.isEmpty()) {
 			if (_log.isDebugEnabled()) {
 				_log.debug("No portlets are installed");
@@ -1495,13 +1495,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		Set<String> userAttributes = portletApp.getUserAttributes();
 
-		Iterator<Element> itr1 = rootElement.elements(
-			"user-attribute").iterator();
+		for (Element userAttributeElement :
+				rootElement.elements("user-attribute")) {
 
-		while (itr1.hasNext()) {
-			Element userAttribute = itr1.next();
-
-			String name = userAttribute.elementText("name");
+			String name = userAttributeElement.elementText("name");
 
 			userAttributes.add(name);
 		}
@@ -1512,17 +1509,15 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			portletApp.setDefaultNamespace(defaultNamespace);
 		}
 
-		itr1 = rootElement.elements("event-definition").iterator();
+		for (Element eventDefinitionElement :
+				rootElement.elements("event-definition")) {
 
-		while (itr1.hasNext()) {
-			Element eventDefinitionEl = itr1.next();
-
-			Element qNameEl = eventDefinitionEl.element("qname");
-			Element nameEl = eventDefinitionEl.element("name");
-			String valueType = eventDefinitionEl.elementText("value-type");
+			Element qNameElement = eventDefinitionElement.element("qname");
+			Element nameElement = eventDefinitionElement.element("name");
+			String valueType = eventDefinitionElement.elementText("value-type");
 
 			QName qName = PortletQNameUtil.getQName(
-				qNameEl, nameEl, portletApp.getDefaultNamespace());
+				qNameElement, nameElement, portletApp.getDefaultNamespace());
 
 			EventDefinition eventDefinition = new EventDefinitionImpl(
 				qName, valueType, portletApp);
@@ -1530,18 +1525,17 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			portletApp.addEventDefinition(eventDefinition);
 		}
 
-		itr1 = rootElement.elements("public-render-parameter").iterator();
+		for (Element publicRenderParameterElement :
+				rootElement.elements("public-render-parameter")) {
 
-		while (itr1.hasNext()) {
-			Element publicRenderParameterEl = itr1.next();
-
-			String identifier = publicRenderParameterEl.elementText(
+			String identifier = publicRenderParameterElement.elementText(
 				"identifier");
-			Element qNameEl = publicRenderParameterEl.element("qname");
-			Element nameEl = publicRenderParameterEl.element("name");
+			Element qNameElement = publicRenderParameterElement.element(
+				"qname");
+			Element nameElement = publicRenderParameterElement.element("name");
 
 			QName qName = PortletQNameUtil.getQName(
-				qNameEl, nameEl, portletApp.getDefaultNamespace());
+				qNameElement, nameElement, portletApp.getDefaultNamespace());
 
 			PublicRenderParameter publicRenderParameter =
 				new PublicRenderParameterImpl(identifier, qName, portletApp);
@@ -1549,21 +1543,24 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			portletApp.addPublicRenderParameter(publicRenderParameter);
 		}
 
-		itr1 = rootElement.elements("container-runtime-option").iterator();
-
-		while (itr1.hasNext()) {
-			Element containerRuntimeOption = itr1.next();
+		for (Element containerRuntimeOptionElement :
+				rootElement.elements("container-runtime-option")) {
 
 			String name = GetterUtil.getString(
-				containerRuntimeOption.elementText("name"));
+				containerRuntimeOptionElement.elementText("name"));
 
 			List<String> values = new ArrayList<String>();
 
-			for (Element value : containerRuntimeOption.elements("value")) {
-				values.add(value.getTextTrim());
+			for (Element valueElement :
+					containerRuntimeOptionElement.elements("value")) {
+
+				values.add(valueElement.getTextTrim());
 			}
 
-			portletApp.getContainerRuntimeOptions().put(
+			Map<String, String[]> containerRuntimeOptions =
+				portletApp.getContainerRuntimeOptions();
+
+			containerRuntimeOptions.put(
 				name, values.toArray(new String[values.size()]));
 
 			if (name.equals(
@@ -1576,11 +1573,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		long timestamp = ServletContextUtil.getLastModified(servletContext);
 
-		itr1 = rootElement.elements("portlet").iterator();
-
-		while (itr1.hasNext()) {
-			Element portlet = itr1.next();
-
+		for (Element portlet : rootElement.elements("portlet")) {
 			String portletName = portlet.elementText("portlet-name");
 
 			String portletId = portletName;
@@ -1841,34 +1834,26 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			}
 		}
 
-		itr1 = rootElement.elements("filter").iterator();
-
-		while (itr1.hasNext()) {
-			Element filter = itr1.next();
-
-			String filterName = filter.elementText("filter-name");
-			String filterClass = filter.elementText("filter-class");
+		for (Element filterElement : rootElement.elements("filter")) {
+			String filterName = filterElement.elementText("filter-name");
+			String filterClass = filterElement.elementText("filter-class");
 
 			Set<String> lifecycles = new LinkedHashSet<String>();
 
-			Iterator<Element> itr2 = filter.elements("lifecycle").iterator();
+			for (Element lifecycleElement :
+					filterElement.elements("lifecycle")) {
 
-			while (itr2.hasNext()) {
-				Element lifecycle = itr2.next();
-
-				lifecycles.add(lifecycle.getText());
+				lifecycles.add(lifecycleElement.getText());
 			}
 
 			Map<String, String> initParams = new HashMap<String, String>();
 
-			itr2 = filter.elements("init-param").iterator();
-
-			while (itr2.hasNext()) {
-				Element initParam = itr2.next();
+			for (Element initParamElement :
+					filterElement.elements("init-param")) {
 
 				initParams.put(
-					initParam.elementText("name"),
-					initParam.elementText("value"));
+					initParamElement.elementText("name"),
+					initParamElement.elementText("value"));
 			}
 
 			PortletFilter portletFilter = new PortletFilterImpl(
@@ -1877,20 +1862,15 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			portletApp.addPortletFilter(portletFilter);
 		}
 
-		itr1 = rootElement.elements("filter-mapping").iterator();
+		for (Element filterMappingElement :
+				rootElement.elements("filter-mapping")) {
 
-		while (itr1.hasNext()) {
-			Element filterMapping = itr1.next();
+			String filterName = filterMappingElement.elementText("filter-name");
 
-			String filterName = filterMapping.elementText("filter-name");
+			for (Element portletNameElement :
+					filterMappingElement.elements("portlet-name")) {
 
-			Iterator<Element> itr2 = filterMapping.elements(
-				"portlet-name").iterator();
-
-			while (itr2.hasNext()) {
-				Element portletNameEl = itr2.next();
-
-				String portletName = portletNameEl.getTextTrim();
+				String portletName = portletNameElement.getTextTrim();
 
 				PortletFilter portletFilter = portletApp.getPortletFilter(
 					filterName);
@@ -1919,12 +1899,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			}
 		}
 
-		itr1 = rootElement.elements("listener").iterator();
-
-		while (itr1.hasNext()) {
-			Element listener = itr1.next();
-
-			String listenerClass = listener.elementText("listener-class");
+		for (Element listenerElement : rootElement.elements("listener")) {
+			String listenerClass = listenerElement.elementText(
+				"listener-class");
 
 			PortletURLListener portletURLListener = new PortletURLListenerImpl(
 				listenerClass, portletApp);
