@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.InputStream;
 
@@ -43,12 +44,14 @@ public class LanguageResources {
 			return null;
 		}
 
-		Map<String, String> languageMap = _localeLanguageMap.get(locale);
+		Map<String, String> languageMap = _languageMaps.get(locale);
+
 		if (languageMap == null) {
 			languageMap = loadLocale(locale);
 		}
 
 		String value = languageMap.get(key);
+
 		if (value == null) {
 			return getMessage(getSuperLocale(locale), key);
 		}
@@ -59,7 +62,8 @@ public class LanguageResources {
 
 	public static Map<String, String> putLanguageMap(
 		Locale locale, Map<String, String> languageMap) {
-		return _localeLanguageMap.put(locale, languageMap);
+
+		return _languageMaps.put(locale, languageMap);
 	}
 
 	public void setConfig(String config) {
@@ -67,15 +71,15 @@ public class LanguageResources {
 	}
 
 	private static Locale getSuperLocale(Locale locale) {
-		if (!locale.getVariant().equals(StringPool.BLANK)) {
+		if (Validator.isNotNull(locale.getVariant())) {
 			return new Locale(locale.getLanguage(), locale.getCountry());
 		}
 
-		if (!locale.getCountry().equals(StringPool.BLANK)) {
+		if (Validator.isNotNull(locale.getCountry())) {
 			return new Locale(locale.getLanguage());
 		}
 
-		if (!locale.getLanguage().equals(StringPool.BLANK)) {
+		if (Validator.isNotNull(locale.getLanguage())) {
 			return new Locale(StringPool.BLANK);
 		}
 
@@ -83,57 +87,65 @@ public class LanguageResources {
 	}
 
 	private static Map<String, String> loadLocale(Locale locale) {
-
 		String[] names = StringUtil.split(
 			_config.replace(StringPool.PERIOD, StringPool.SLASH));
+
 		Map<String, String> languageMap = null;
+
 		if (names.length > 0) {
 			String localeName = locale.toString();
+
 			languageMap = new HashMap<String, String>();
-			for (int i = 0; i < names.length; i++) {
-				String name = names[i];
+
+			for (String name : names) {
 				StringBundler sb = new StringBundler(4);
+
 				sb.append(name);
+
 				if (localeName.length() > 0) {
-					sb.append("_");
+					sb.append(StringPool.UNDERLINE);
 					sb.append(localeName);
 				}
+
 				sb.append(".properties");
 
 				Properties properties = loadProperties(sb.toString());
-				for(Map.Entry<Object, Object> entry : properties.entrySet()) {
-					languageMap.put(
-						(String)entry.getKey(), (String)entry.getValue());
+
+				for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+					String key = (String)entry.getKey();
+					String value = (String)entry.getValue();
+
+					languageMap.put(key, value);
 				}
 			}
 		}
 		else {
-			languageMap = Collections.emptyMap();
+			languageMap = Collections.EMPTY_MAP;
 		}
-		_localeLanguageMap.put(locale, languageMap);
+
+		_languageMaps.put(locale, languageMap);
+
 		return languageMap;
 	}
 
 	private static Properties loadProperties(String name) {
-
 		Properties properties = new Properties();
 
 		try {
-			ClassLoader classLoader =
-				LanguageResources.class.getClassLoader();
+			ClassLoader classLoader = LanguageResources.class.getClassLoader();
+
 			URL url = classLoader.getResource(name);
 
 			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Attempting to load " + name);
+				_log.info("Attempting to load " + name);
 			}
 
 			if (url != null) {
-				InputStream is = url.openStream();
+				InputStream inputStream = url.openStream();
 
-				properties.load(is);
+				properties.load(inputStream);
 
-				is.close();
+				inputStream.close();
 
 				if (_log.isInfoEnabled()) {
 					_log.info(
@@ -143,18 +155,18 @@ public class LanguageResources {
 			}
 		}
 		catch (Exception e) {
-			_log.warn(e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
 		}
 
 		return properties;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
-		LanguageResources.class);
+	private static Log _log = LogFactoryUtil.getLog(LanguageResources.class);
 
 	private static String _config;
-
-	private static Map<Locale, Map<String, String>> _localeLanguageMap =
+	private static Map<Locale, Map<String, String>> _languageMaps =
 		new ConcurrentHashMap<Locale, Map<String, String>>(64);
 
 }

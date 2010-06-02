@@ -472,9 +472,12 @@ public class HookHotDeployListener
 				is.close();
 
 				Map<String, String> languageMap = new HashMap<String, String>();
-				for(Map.Entry<Object, Object> entry : properties.entrySet()) {
-					languageMap.put((String)entry.getKey(),
-						(String)entry.getValue());
+
+				for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+					String key = (String)entry.getKey();
+					String value = (String)entry.getValue();
+
+					languageMap.put(key, value);
 				}
 
 				Locale locale = getLocale(languagePropertiesLocation);
@@ -756,6 +759,7 @@ public class HookHotDeployListener
 		int y = languagePropertiesLocation.indexOf(".properties");
 
 		Locale locale = null;
+
 		if ((x != -1) && (y != 1)) {
 			String localeKey = languagePropertiesLocation.substring(x + 1, y);
 
@@ -1849,19 +1853,21 @@ public class HookHotDeployListener
 			Map<String, String> oldLanguageMap =
 				LanguageResources.putLanguageMap(locale, languageMap);
 
-			_oldLocaleLanguageMap.put(locale, oldLanguageMap);
+			_languagesMap.put(locale, oldLanguageMap);
 		}
 
 		public void unregisterLanguages() {
+			for (Map.Entry<Locale, Map<String, String>> entry :
+					_languagesMap.entrySet()) {
 
-			for(Map.Entry<Locale, Map<String, String>> localeEntry :
-				_oldLocaleLanguageMap.entrySet()) {
-				LanguageResources.putLanguageMap(localeEntry.getKey(),
-					localeEntry.getValue());
+				Locale locale = entry.getKey();
+				Map<String, String> languageMap = entry.getValue();
+
+				LanguageResources.putLanguageMap(locale, languageMap);
 			}
 		}
 
-		private Map<Locale, Map<String, String>> _oldLocaleLanguageMap =
+		private Map<Locale, Map<String, String>> _languagesMap =
 			new HashMap<Locale, Map<String, String>>();
 
 	}
