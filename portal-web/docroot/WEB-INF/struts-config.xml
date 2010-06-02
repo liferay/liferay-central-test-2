@@ -1990,10 +1990,6 @@
 
 	<controller processorClass="com.liferay.portal.struts.PortalRequestProcessor" contentType="text/html; charset=UTF-8" />
 
-	<!-- Message Resources -->
-
-	<message-resources parameter="content.Language,content.Language-ext" factory="com.liferay.portal.struts.MultiMessageResourcesFactory" />
-
 	<!-- Tiles Plugin -->
 
 	<plug-in className="com.liferay.portal.struts.PortalTilesPlugin">
