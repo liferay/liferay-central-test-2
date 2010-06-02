@@ -1277,47 +1277,42 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		portletModel.setScopeable(GetterUtil.getBoolean(
 			portletElement.elementText("scopeable"),
 			portletModel.isScopeable()));
-		portletModel.setUserPrincipalStrategy(GetterUtil.getString(
-			portletElement.elementText("user-principal-strategy"),
-			portletModel.getUserPrincipalStrategy()));
-		portletModel.setPrivateRequestAttributes(GetterUtil.getBoolean(
-			portletElement.elementText("private-request-attributes"),
-			portletModel.isPrivateRequestAttributes()));
-		portletModel.setPrivateSessionAttributes(GetterUtil.getBoolean(
-			portletElement.elementText("private-session-attributes"),
-			portletModel.isPrivateSessionAttributes()));
-		portletModel.setRenderWeight(GetterUtil.getInteger(
-			portletElement.elementText("render-weight"),
-			portletModel.getRenderWeight()));
-		portletModel.setAjaxable(GetterUtil.getBoolean(
-			portletElement.elementText("ajaxable"),
-			portletModel.isAjaxable()));
+		portletModel.setUserPrincipalStrategy(
+			GetterUtil.getString(
+				portletElement.elementText("user-principal-strategy"),
+				portletModel.getUserPrincipalStrategy()));
+		portletModel.setPrivateRequestAttributes(
+			GetterUtil.getBoolean(
+				portletElement.elementText("private-request-attributes"),
+				portletModel.isPrivateRequestAttributes()));
+		portletModel.setPrivateSessionAttributes(
+			GetterUtil.getBoolean(
+				portletElement.elementText("private-session-attributes"),
+				portletModel.isPrivateSessionAttributes()));
+		portletModel.setRenderWeight(
+			GetterUtil.getInteger(
+				portletElement.elementText("render-weight"),
+				portletModel.getRenderWeight()));
+		portletModel.setAjaxable(
+			GetterUtil.getBoolean(
+				portletElement.elementText("ajaxable"),
+				portletModel.isAjaxable()));
 
 		List<String> headerPortalCssList =
 			portletModel.getHeaderPortalCss();
 
-		itr2 = portletElement.elements("header-portal-css").iterator();
+		for (Element headerPortalCssElement :
+				portletElement.elements("header-portal-css")) {
 
-		while (itr2.hasNext()) {
-			Element headerPortalCssEl = itr2.next();
-
-			headerPortalCssList.add(headerPortalCssEl.getText());
+			headerPortalCssList.add(headerPortalCssElement.getText());
 		}
 
-		List<String> headerPortletCssList =
-			portletModel.getHeaderPortletCss();
+		List<String> headerPortletCssList = portletModel.getHeaderPortletCss();
 
-		List<Element> list = new ArrayList<Element>();
+		for (Element headerPortletCssElement :
+				portletElement.elements("header-portlet-css")) {
 
-		list.addAll(portletElement.elements("header-css"));
-		list.addAll(portletElement.elements("header-portlet-css"));
-
-		itr2 = list.iterator();
-
-		while (itr2.hasNext()) {
-			Element headerPortletCssEl = itr2.next();
-
-			headerPortletCssList.add(headerPortletCssEl.getText());
+			headerPortletCssList.add(headerPortletCssElement.getText());
 		}
 
 		List<String> headerPortalJavaScriptList =
@@ -1326,31 +1321,23 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		itr2 = portletElement.elements("header-portal-javascript").iterator();
 
 		while (itr2.hasNext()) {
-			Element headerPortalJavaScriptEl = itr2.next();
+			Element headerPortalJavaScriptElement = itr2.next();
 
 			headerPortalJavaScriptList.add(
-				headerPortalJavaScriptEl.getText());
+				headerPortalJavaScriptElement.getText());
 		}
 
 		List<String> headerPortletJavaScriptList =
 			portletModel.getHeaderPortletJavaScript();
 
-		list.clear();
-
-		list.addAll(portletElement.elements("header-javascript"));
-		list.addAll(portletElement.elements("header-portlet-javascript"));
-
-		itr2 = list.iterator();
-
-		while (itr2.hasNext()) {
-			Element headerPortletJavaScriptEl = itr2.next();
+		for (Element headerPortletJavaScriptElement :
+				portletElement.elements("header-portlet-javascript")) {
 
 			headerPortletJavaScriptList.add(
-				headerPortletJavaScriptEl.getText());
+				headerPortletJavaScriptElement.getText());
 		}
 
-		List<String> footerPortalCssList =
-			portletModel.getFooterPortalCss();
+		List<String> footerPortalCssList = portletModel.getFooterPortalCss();
 
 		for (Element footerPortalCssElement :
 				portletElement.elements("footer-portal-css")) {
@@ -1358,8 +1345,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			footerPortalCssList.add(footerPortalCssElement.getText());
 		}
 
-		List<String> footerPortletCssList =
-			portletModel.getFooterPortletCss();
+		List<String> footerPortletCssList = portletModel.getFooterPortletCss();
 
 		for (Element footerPortletCssElement :
 				portletElement.elements("footer-portlet-css")) {
