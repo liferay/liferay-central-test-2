@@ -1026,33 +1026,38 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			return;
 		}
 
-		portletModel.setIcon(GetterUtil.getString(
-			portletElement.elementText("icon"), portletModel.getIcon()));
-		portletModel.setVirtualPath(GetterUtil.getString(
-			portletElement.elementText("virtual-path"),
-			portletModel.getVirtualPath()));
-		portletModel.setStrutsPath(GetterUtil.getString(
-			portletElement.elementText("struts-path"),
-			portletModel.getStrutsPath()));
+		portletModel.setIcon(
+			GetterUtil.getString(
+				portletElement.elementText("icon"), portletModel.getIcon()));
+		portletModel.setVirtualPath(
+			GetterUtil.getString(
+				portletElement.elementText("virtual-path"),
+				portletModel.getVirtualPath()));
+		portletModel.setStrutsPath(
+			GetterUtil.getString(
+				portletElement.elementText("struts-path"),
+				portletModel.getStrutsPath()));
 
 		if (Validator.isNotNull(
 				portletElement.elementText("configuration-path"))) {
 
 			_log.error(
-				"The configuration-path element is no longer " +
-					"supported. Use configuration-action-class " +
-						"instead.");
+				"The configuration-path element is no longer supported. Use " +
+					"configuration-action-class instead.");
 		}
 
-		portletModel.setConfigurationActionClass(GetterUtil.getString(
-			portletElement.elementText("configuration-action-class"),
-			portletModel.getConfigurationActionClass()));
-		portletModel.setIndexerClass(GetterUtil.getString(
-			portletElement.elementText("indexer-class"),
-			portletModel.getIndexerClass()));
-		portletModel.setOpenSearchClass(GetterUtil.getString(
-			portletElement.elementText("open-search-class"),
-			portletModel.getOpenSearchClass()));
+		portletModel.setConfigurationActionClass(
+			GetterUtil.getString(
+				portletElement.elementText("configuration-action-class"),
+				portletModel.getConfigurationActionClass()));
+		portletModel.setIndexerClass(
+			GetterUtil.getString(
+				portletElement.elementText("indexer-class"),
+				portletModel.getIndexerClass()));
+		portletModel.setOpenSearchClass(
+			GetterUtil.getString(
+				portletElement.elementText("open-search-class"),
+				portletModel.getOpenSearchClass()));
 
 		Iterator<Element> itr2 = portletElement.elementIterator(
 			"scheduler-entry");
@@ -1347,47 +1352,39 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		List<String> footerPortalCssList =
 			portletModel.getFooterPortalCss();
 
-		itr2 = portletElement.elements("footer-portal-css").iterator();
+		for (Element footerPortalCssElement :
+				portletElement.elements("footer-portal-css")) {
 
-		while (itr2.hasNext()) {
-			Element footerPortalCssEl = itr2.next();
-
-			footerPortalCssList.add(footerPortalCssEl.getText());
+			footerPortalCssList.add(footerPortalCssElement.getText());
 		}
 
 		List<String> footerPortletCssList =
 			portletModel.getFooterPortletCss();
 
-		itr2 = portletElement.elements("footer-portlet-css").iterator();
+		for (Element footerPortletCssElement :
+				portletElement.elements("footer-portlet-css")) {
 
-		while (itr2.hasNext()) {
-			Element footerPortletCssEl = itr2.next();
-
-			footerPortletCssList.add(footerPortletCssEl.getText());
+			footerPortletCssList.add(footerPortletCssElement.getText());
 		}
 
 		List<String> footerPortalJavaScriptList =
 			portletModel.getFooterPortalJavaScript();
 
-		itr2 = portletElement.elements("footer-portal-javascript").iterator();
-
-		while (itr2.hasNext()) {
-			Element footerPortalJavaScriptEl = itr2.next();
+		for (Element footerPortalJavaScriptElement :
+				portletElement.elements("footer-portal-javascript")) {
 
 			footerPortalJavaScriptList.add(
-				footerPortalJavaScriptEl.getText());
+				footerPortalJavaScriptElement.getText());
 		}
 
 		List<String> footerPortletJavaScriptList =
 			portletModel.getFooterPortletJavaScript();
 
-		itr2 = portletElement.elements("footer-portlet-javascript").iterator();
-
-		while (itr2.hasNext()) {
-			Element footerPortletJavaScriptEl = itr2.next();
+		for (Element footerPortletJavaScriptElement :
+				portletElement.elements("footer-portlet-javascript")) {
 
 			footerPortletJavaScriptList.add(
-				footerPortletJavaScriptEl.getText());
+				footerPortletJavaScriptElement.getText());
 		}
 
 		portletModel.setCssClassWrapper(GetterUtil.getString(
