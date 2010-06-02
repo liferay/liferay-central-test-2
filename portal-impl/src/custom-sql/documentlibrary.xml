@@ -37,7 +37,7 @@
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.countF_ByG_F_S">
 		<![CDATA[
 			SELECT
-				COUNT(*) AS COUNT_VALUE
+				COUNT(DISTINCT folderId) AS COUNT_VALUE
 			FROM
 				DLFolder
 			WHERE
@@ -76,7 +76,7 @@
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.findF_ByG_F_S">
 		<![CDATA[
 			SELECT
-				folderId AS modelFolderId, name AS name, name AS title, 0 AS fileShortcutId, 1 AS modelFolder
+				DISTINCT folderId AS modelFolderId, name AS name, name AS title, 0 AS fileShortcutId, 1 AS modelFolder
 			FROM
 				DLFolder
 			WHERE
