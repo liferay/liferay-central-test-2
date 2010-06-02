@@ -1573,8 +1573,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		long timestamp = ServletContextUtil.getLastModified(servletContext);
 
-		for (Element portlet : rootElement.elements("portlet")) {
-			String portletName = portlet.elementText("portlet-name");
+		for (Element portletElement : rootElement.elements("portlet")) {
+			String portletName = portletElement.elementText("portlet-name");
 
 			String portletId = portletName;
 
@@ -1608,12 +1608,12 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			portletModel.setPortletName(portletName);
 			portletModel.setDisplayName(GetterUtil.getString(
-				portlet.elementText("display-name"),
+				portletElement.elementText("display-name"),
 				portletModel.getDisplayName()));
 			portletModel.setPortletClass(GetterUtil.getString(
-				portlet.elementText("portlet-class")));
+				portletElement.elementText("portlet-class")));
 
-			Iterator<Element> itr2 = portlet.elements("init-param").iterator();
+			Iterator<Element> itr2 = portletElement.elements("init-param").iterator();
 
 			while (itr2.hasNext()) {
 				Element initParam = itr2.next();
@@ -1623,14 +1623,14 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 					initParam.elementText("value"));
 			}
 
-			Element expirationCache = portlet.element("expiration-cache");
+			Element expirationCache = portletElement.element("expiration-cache");
 
 			if (expirationCache != null) {
 				portletModel.setExpCache(new Integer(GetterUtil.getInteger(
 					expirationCache.getText())));
 			}
 
-			itr2 = portlet.elements("supports").iterator();
+			itr2 = portletElement.elements("supports").iterator();
 
 			while (itr2.hasNext()) {
 				Element supports = itr2.next();
@@ -1699,7 +1699,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			//supportedLocales.add(
 			//	LocaleUtil.toLanguageId(LocaleUtil.getDefault()));
 
-			itr2 = portlet.elements("supported-locale").iterator();
+			itr2 = portletElement.elements("supported-locale").iterator();
 
 			while (itr2.hasNext()) {
 				Element supportedLocaleEl = itr2.next();
@@ -1710,9 +1710,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			}
 
 			portletModel.setResourceBundle(
-				portlet.elementText("resource-bundle"));
+				portletElement.elementText("resource-bundle"));
 
-			Element portletInfo = portlet.element("portlet-info");
+			Element portletInfo = portletElement.element("portlet-info");
 
 			String portletInfoTitle = null;
 			String portletInfoShortTitle = null;
@@ -1730,7 +1730,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 					portletInfoTitle, portletInfoShortTitle,
 					portletInfoKeyWords, portletInfoDescription));
 
-			Element portletPreferences = portlet.element("portlet-preferences");
+			Element portletPreferences = portletElement.element("portlet-preferences");
 
 			String defaultPreferences = null;
 			String preferencesValidator = null;
@@ -1774,7 +1774,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			Set<String> unlikedRoles = portletModel.getUnlinkedRoles();
 
-			itr2 = portlet.elements("security-role-ref").iterator();
+			itr2 = portletElement.elements("security-role-ref").iterator();
 
 			while (itr2.hasNext()) {
 				Element role = itr2.next();
@@ -1782,7 +1782,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				unlikedRoles.add(role.elementText("role-name"));
 			}
 
-			itr2 = portlet.elements("supported-processing-event").iterator();
+			itr2 = portletElement.elements("supported-processing-event").iterator();
 
 			while (itr2.hasNext()) {
 				Element supportedProcessingEvent = itr2.next();
@@ -1796,7 +1796,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletModel.addProcessingEvent(qName);
 			}
 
-			itr2 = portlet.elements("supported-publishing-event").iterator();
+			itr2 = portletElement.elements("supported-publishing-event").iterator();
 
 			while (itr2.hasNext()) {
 				Element supportedPublishingEvent = itr2.next();
@@ -1810,7 +1810,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletModel.addPublishingEvent(qName);
 			}
 
-			itr2 = portlet.elements(
+			itr2 = portletElement.elements(
 				"supported-public-render-parameter").iterator();
 
 			while (itr2.hasNext()) {
