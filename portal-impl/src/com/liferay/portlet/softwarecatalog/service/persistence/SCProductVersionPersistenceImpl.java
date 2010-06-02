@@ -1614,9 +1614,9 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 	private static final String _FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_1 =
 		"scProductVersion.directDownloadURL IS NULL";
 	private static final String _FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_2 =
-		"lower(scProductVersion.directDownloadURL) = ?";
+		"lower(scProductVersion.directDownloadURL) = lower(?)";
 	private static final String _FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_3 =
-		"(scProductVersion.directDownloadURL IS NULL OR lower(scProductVersion.directDownloadURL) = ?)";
+		"(scProductVersion.directDownloadURL IS NULL OR lower(scProductVersion.directDownloadURL) = lower(?))";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "scProductVersion.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No SCProductVersion exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No SCProductVersion exists with the key {";

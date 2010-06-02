@@ -2486,8 +2486,8 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 	private static final String _FINDER_COLUMN_G_U_USERID_2 = "bookmarksEntry.userId = ?";
 	private static final String _FINDER_COLUMN_G_F_GROUPID_2 = "bookmarksEntry.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_F_FOLDERID_2 = "bookmarksEntry.folderId = ?";
-	private static final String _FILTER_SQL_SELECT_BOOKMARKSENTRY_WHERE = "SELECT {bookmarksEntry.*} FROM BookmarksEntry bookmarksEntry WHERE ";
-	private static final String _FILTER_SQL_COUNT_BOOKMARKSENTRY_WHERE = "SELECT COUNT(bookmarksEntry.entryId) AS COUNT_VALUE FROM BookmarksEntry bookmarksEntry WHERE ";
+	private static final String _FILTER_SQL_SELECT_BOOKMARKSENTRY_WHERE = "SELECT DISTINCT {bookmarksEntry.*} FROM BookmarksEntry bookmarksEntry WHERE ";
+	private static final String _FILTER_SQL_COUNT_BOOKMARKSENTRY_WHERE = "SELECT COUNT(DISTINCT bookmarksEntry.entryId) AS COUNT_VALUE FROM BookmarksEntry bookmarksEntry WHERE ";
 	private static final String _FILTER_COLUMN_ENTRYID = "bookmarksEntry.entryId";
 	private static final String _FILTER_COLUMN_USERID = "bookmarksEntry.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "bookmarksEntry";

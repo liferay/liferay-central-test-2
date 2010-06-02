@@ -6607,8 +6607,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	private static final String _FINDER_COLUMN_G_UT_S_URLTITLE_2 = "journalArticle.urlTitle = ? AND ";
 	private static final String _FINDER_COLUMN_G_UT_S_URLTITLE_3 = "(journalArticle.urlTitle IS NULL OR journalArticle.urlTitle = ?) AND ";
 	private static final String _FINDER_COLUMN_G_UT_S_STATUS_2 = "journalArticle.status = ?";
-	private static final String _FILTER_SQL_SELECT_JOURNALARTICLE_WHERE = "SELECT {journalArticle.*} FROM JournalArticle journalArticle WHERE ";
-	private static final String _FILTER_SQL_COUNT_JOURNALARTICLE_WHERE = "SELECT COUNT(journalArticle.id) AS COUNT_VALUE FROM JournalArticle journalArticle WHERE ";
+	private static final String _FILTER_SQL_SELECT_JOURNALARTICLE_WHERE = "SELECT DISTINCT {journalArticle.*} FROM JournalArticle journalArticle WHERE ";
+	private static final String _FILTER_SQL_COUNT_JOURNALARTICLE_WHERE = "SELECT COUNT(DISTINCT journalArticle.id) AS COUNT_VALUE FROM JournalArticle journalArticle WHERE ";
 	private static final String _FILTER_COLUMN_ID = "journalArticle.id";
 	private static final String _FILTER_COLUMN_USERID = "journalArticle.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "journalArticle";

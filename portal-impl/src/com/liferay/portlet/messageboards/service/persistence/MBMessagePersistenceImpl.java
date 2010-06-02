@@ -8504,8 +8504,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	private static final String _FINDER_COLUMN_G_C_T_S_CATEGORYID_2 = "mbMessage.categoryId = ? AND ";
 	private static final String _FINDER_COLUMN_G_C_T_S_THREADID_2 = "mbMessage.threadId = ? AND ";
 	private static final String _FINDER_COLUMN_G_C_T_S_STATUS_2 = "mbMessage.status = ?";
-	private static final String _FILTER_SQL_SELECT_MBMESSAGE_WHERE = "SELECT {mbMessage.*} FROM MBMessage mbMessage WHERE ";
-	private static final String _FILTER_SQL_COUNT_MBMESSAGE_WHERE = "SELECT COUNT(mbMessage.messageId) AS COUNT_VALUE FROM MBMessage mbMessage WHERE ";
+	private static final String _FILTER_SQL_SELECT_MBMESSAGE_WHERE = "SELECT DISTINCT {mbMessage.*} FROM MBMessage mbMessage WHERE ";
+	private static final String _FILTER_SQL_COUNT_MBMESSAGE_WHERE = "SELECT COUNT(DISTINCT mbMessage.messageId) AS COUNT_VALUE FROM MBMessage mbMessage WHERE ";
 	private static final String _FILTER_COLUMN_MESSAGEID = "mbMessage.messageId";
 	private static final String _FILTER_COLUMN_USERID = "mbMessage.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "mbMessage";

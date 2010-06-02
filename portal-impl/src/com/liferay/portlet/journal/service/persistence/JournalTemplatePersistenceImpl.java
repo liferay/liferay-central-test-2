@@ -2975,8 +2975,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	private static final String _FINDER_COLUMN_G_S_STRUCTUREID_1 = "journalTemplate.structureId IS NULL";
 	private static final String _FINDER_COLUMN_G_S_STRUCTUREID_2 = "journalTemplate.structureId = ?";
 	private static final String _FINDER_COLUMN_G_S_STRUCTUREID_3 = "(journalTemplate.structureId IS NULL OR journalTemplate.structureId = ?)";
-	private static final String _FILTER_SQL_SELECT_JOURNALTEMPLATE_WHERE = "SELECT {journalTemplate.*} FROM JournalTemplate journalTemplate WHERE ";
-	private static final String _FILTER_SQL_COUNT_JOURNALTEMPLATE_WHERE = "SELECT COUNT(journalTemplate.id) AS COUNT_VALUE FROM JournalTemplate journalTemplate WHERE ";
+	private static final String _FILTER_SQL_SELECT_JOURNALTEMPLATE_WHERE = "SELECT DISTINCT {journalTemplate.*} FROM JournalTemplate journalTemplate WHERE ";
+	private static final String _FILTER_SQL_COUNT_JOURNALTEMPLATE_WHERE = "SELECT COUNT(DISTINCT journalTemplate.id) AS COUNT_VALUE FROM JournalTemplate journalTemplate WHERE ";
 	private static final String _FILTER_COLUMN_ID = "journalTemplate.id";
 	private static final String _FILTER_COLUMN_USERID = "journalTemplate.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "journalTemplate";
