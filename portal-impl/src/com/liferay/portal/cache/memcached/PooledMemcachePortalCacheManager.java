@@ -33,9 +33,7 @@ public class PooledMemcachePortalCacheManager implements PortalCacheManager {
 	}
 
 	public void destroy() throws Exception {
-		for (PooledMemcachePortalCache portalCache :
-				_portalCaches.values()) {
-
+		for (PortalCache portalCache : _portalCaches.values()) {
 			portalCache.destroy();
 		}
 	}
@@ -49,7 +47,7 @@ public class PooledMemcachePortalCacheManager implements PortalCacheManager {
 	}
 
 	public PortalCache getCache(String name, boolean blocking) {
-		PooledMemcachePortalCache portalCache = _portalCaches.get(name);
+		PortalCache portalCache = _portalCaches.get(name);
 
 		if (portalCache == null) {
 			portalCache = new PooledMemcachePortalCache(
@@ -83,8 +81,8 @@ public class PooledMemcachePortalCacheManager implements PortalCacheManager {
 
 	private boolean _debug;
 	private MemcachedClientFactory _memcachedClientFactory;
-	private Map<String, PooledMemcachePortalCache> _portalCaches =
-		new ConcurrentHashMap<String, PooledMemcachePortalCache>();
+	private Map<String, PortalCache> _portalCaches =
+		new ConcurrentHashMap<String, PortalCache>();
 	private int _timeout;
 	private TimeUnit _timeoutTimeUnit;
 

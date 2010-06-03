@@ -30,20 +30,20 @@ public class PooledMemcachedClientFactory implements MemcachedClientFactory {
 		return (MemcachedClientIF)_memcachedClientPool.borrowObject();
 	}
 
-	public void destroy() {
-		try {
-			close();
-		}
-		catch (Exception e) {
-		}
+	public void clear() throws Exception {
+		_memcachedClientPool.clear();
 	}
 
 	public void close() throws Exception {
 		_memcachedClientPool.close();
 	}
 
-	public void clear() throws Exception {
-		_memcachedClientPool.clear();
+	public void destroy() {
+		try {
+			close();
+		}
+		catch (Exception e) {
+		}
 	}
 
 	public int getNumActive() {

@@ -52,44 +52,12 @@ public class MemcachePortalCache
 		_memcachedClient.shutdown();
 	}
 
-	public Object get(String key) {
-		String processedKey = processKey(_name.concat(key));
-
-		Object cachedObject = null;
-
-		Future<Object> future = null;
-
-		try {
-			future = _memcachedClient.asyncGet(processedKey);
-		}
-		catch (IllegalArgumentException iae) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Error retrieving with key " + key, iae);
-			}
-
-			return null;
-		}
-
-		try {
-			cachedObject = future.get(_timeout, _timeoutTimeUnit);
-		}
-		catch (Throwable t) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Memcache operation error", t);
-			}
-
-			future.cancel(true);
-		}
-
-		return cachedObject;
-	}
-
 	public Collection<Object> get(Collection<String> keys) {
-
 		List<String> processedKeys = new ArrayList<String>(keys.size());
 
 		for (String key : keys) {
 			String processedKey = processKey(_name.concat(key));
+
 			processedKeys.add(processedKey);
 		}
 
@@ -106,10 +74,10 @@ public class MemcachePortalCache
 			return null;
 		}
 
-		Map<String, Object> cachedObjects = null;
+		Map<String, Object> values = null;
 
 		try {
-			cachedObjects = future.get(_timeout, _timeoutTimeUnit);
+			values = future.get(_timeout, _timeoutTimeUnit);
 		}
 		catch (Throwable t) {
 			if (_log.isWarnEnabled()) {
@@ -119,7 +87,39 @@ public class MemcachePortalCache
 			future.cancel(true);
 		}
 
-		return cachedObjects.values();
+		return values.values();
+	}
+
+	public Object get(String key) {
+		String processedKey = processKey(_name.concat(key));
+
+		Future<Object> future = null;
+
+		try {
+			future = _memcachedClient.asyncGet(processedKey);
+		}
+		catch (IllegalArgumentException iae) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Error retrieving with key " + key, iae);
+			}
+
+			return null;
+		}
+
+		Object value = null;
+
+		try {
+			value = future.get(_timeout, _timeoutTimeUnit);
+		}
+		catch (Throwable t) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Memcache operation error", t);
+			}
+
+			future.cancel(true);
+		}
+
+		return value;
 	}
 
 	public void put(String key, Object obj) {
