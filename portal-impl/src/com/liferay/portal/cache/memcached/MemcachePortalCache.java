@@ -14,7 +14,7 @@
 
 package com.liferay.portal.cache.memcached;
 
-import com.liferay.portal.cache.AbstractPortalCache;
+import com.liferay.portal.kernel.cache.BasePortalCache;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -31,8 +31,8 @@ import net.spy.memcached.MemcachedClientIF;
  *
  * @author Michael C. Han
  */
-public class MemcachePortalCache extends AbstractPortalCache
-	implements PortalCache {
+public class MemcachePortalCache
+	extends BasePortalCache implements PortalCache {
 
 	public MemcachePortalCache(
 		MemcachedClientIF memcachedClient, int timeout,
@@ -48,9 +48,8 @@ public class MemcachePortalCache extends AbstractPortalCache
 	}
 
 	public Object get(String key) {
-
 		String processedKey = processKey(key);
-		
+
 		Object cachedObject = null;
 
 		Future<Object> future = null;
@@ -85,7 +84,6 @@ public class MemcachePortalCache extends AbstractPortalCache
 	}
 
 	public void put(String key, Object obj, int timeToLive) {
-
 		String processedKey = processKey(key);
 
 		try {
@@ -103,9 +101,8 @@ public class MemcachePortalCache extends AbstractPortalCache
 	}
 
 	public void put(String key, Serializable obj, int timeToLive) {
-
 		String processedKey = processKey(key);
-		
+
 		try {
 			_memcachedClient.set(processedKey, timeToLive, obj);
 		}
@@ -117,7 +114,6 @@ public class MemcachePortalCache extends AbstractPortalCache
 	}
 
 	public void remove(String key) {
-
 		String processedKey = processKey(key);
 
 		try {

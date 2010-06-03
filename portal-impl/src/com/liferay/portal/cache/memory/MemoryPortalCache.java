@@ -14,7 +14,7 @@
 
 package com.liferay.portal.cache.memory;
 
-import com.liferay.portal.cache.AbstractPortalCache;
+import com.liferay.portal.kernel.cache.BasePortalCache;
 import com.liferay.portal.kernel.cache.PortalCache;
 
 import java.io.Serializable;
@@ -27,8 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author Brian Wing Shun Chan
  */
-public class MemoryPortalCache extends AbstractPortalCache
-	implements PortalCache {
+public class MemoryPortalCache extends BasePortalCache implements PortalCache {
 
 	public MemoryPortalCache(int initialCapacity) {
 		 _map = new ConcurrentHashMap<String, Object>(initialCapacity);

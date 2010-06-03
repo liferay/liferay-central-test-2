@@ -14,7 +14,7 @@
 
 package com.liferay.portal.cache.ehcache;
 
-import com.liferay.portal.cache.AbstractPortalCache;
+import com.liferay.portal.kernel.cache.BasePortalCache;
 import com.liferay.portal.kernel.cache.PortalCache;
 
 import java.io.Serializable;
@@ -27,8 +27,7 @@ import net.sf.ehcache.Element;
  *
  * @author Brian Wing Shun Chan
  */
-public class EhcachePortalCache extends AbstractPortalCache
-	implements PortalCache {
+public class EhcachePortalCache extends BasePortalCache implements PortalCache {
 
 	public EhcachePortalCache(Ehcache cache) {
 		_cache = cache;
@@ -48,13 +47,13 @@ public class EhcachePortalCache extends AbstractPortalCache
 	}
 
 	public void put(String key, Object obj) {
-		Element element = _createElement(key, obj);
+		Element element = createElement(key, obj);
 
 		_cache.put(element);
 	}
 
 	public void put(String key, Object obj, int timeToLive) {
-		Element element = _createElement(key, obj);
+		Element element = createElement(key, obj);
 
 		element.setTimeToLive(timeToLive);
 
@@ -62,13 +61,13 @@ public class EhcachePortalCache extends AbstractPortalCache
 	}
 
 	public void put(String key, Serializable obj) {
-		Element element = _createElement(key, obj);
+		Element element = createElement(key, obj);
 
 		_cache.put(element);
 	}
 
 	public void put(String key, Serializable obj, int timeToLive) {
-		Element element = _createElement(key, obj);
+		Element element = createElement(key, obj);
 
 		element.setTimeToLive(timeToLive);
 
@@ -85,7 +84,7 @@ public class EhcachePortalCache extends AbstractPortalCache
 		_cache.removeAll();
 	}
 
-	private Element _createElement(String key, Object obj) {
+	protected Element createElement(String key, Object obj) {
 		String processedKey = processKey(key);
 
 		Element element = new Element(processedKey, obj);

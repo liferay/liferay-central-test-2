@@ -30,10 +30,6 @@ import net.spy.memcached.MemcachedClientIF;
  */
 public class MemcachePortalCacheManager implements PortalCacheManager {
 
-	public void setDebug(boolean debug) {
-		_debug = debug;
-	}
-
 	public void clearAll() {
 		_memcachePortalCaches.clear();
 	}
@@ -63,7 +59,7 @@ public class MemcachePortalCacheManager implements PortalCacheManager {
 					memcachedClient, _timeout, _timeoutTimeUnit);
 
 				memcachePortalCache.setDebug(_debug);
-				
+
 				_memcachePortalCaches.put(name, memcachePortalCache);
 			}
 			catch (Exception e) {
@@ -73,6 +69,10 @@ public class MemcachePortalCacheManager implements PortalCacheManager {
 		}
 
 		return memcachePortalCache;
+	}
+
+	public void setDebug(boolean debug) {
+		_debug = debug;
 	}
 
 	public void setMemcachedClientPool(

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -12,16 +12,22 @@
  * details.
  */
 
-package com.liferay.portal.cache;
-
-import com.liferay.portal.kernel.cache.PortalCache;
+package com.liferay.portal.kernel.cache;
 
 /**
- * <a href="AbstractPortalCache.java.html"><b><i>View Source</i></b></a>
+ * <a href="BasePortalCache.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
-public abstract class AbstractPortalCache implements PortalCache {
+public abstract class BasePortalCache implements PortalCache {
+
+	public boolean isDebug() {
+		return _debug;
+	}
+
+	public void setDebug(boolean debug) {
+		_debug = debug;
+	}
 
 	protected String processKey(String key) {
 		if (!_debug) {
@@ -32,13 +38,6 @@ public abstract class AbstractPortalCache implements PortalCache {
 		}
 	}
 
-	public boolean isDebug() {
-		return _debug;
-	}
-
-	public void setDebug(boolean debug) {
-		_debug = debug;
-	}
-
 	private boolean _debug;
+
 }

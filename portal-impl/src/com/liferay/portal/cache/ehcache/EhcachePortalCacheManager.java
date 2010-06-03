@@ -152,7 +152,7 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 
 	private String _configPropertyKey;
 	private CacheManager _cacheManager;
-	private boolean _debug; 
+	private boolean _debug;
 	private ManagementService _managementService;
 	private MBeanServer _mBeanServer;
 	private boolean _registerCacheManager = true;

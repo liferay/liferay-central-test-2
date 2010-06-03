@@ -49,7 +49,7 @@ public class PooledMemcachePortalCacheManager implements PortalCacheManager {
 				_memcachedClientFactory, _timeout, _timeoutTimeUnit);
 
 			portalCache.setDebug(_debug);
-			
+
 			_portalCaches.put(name, portalCache);
 		}
 

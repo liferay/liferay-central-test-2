@@ -28,12 +28,12 @@ import java.util.concurrent.ConcurrentHashMap;
 public class MemoryPortalCacheManager implements PortalCacheManager {
 
 	public void afterPropertiesSet() {
-		_cacheMap = new ConcurrentHashMap<String, PortalCache>(
+		_portalCaches = new ConcurrentHashMap<String, PortalCache>(
 			_cacheManagerInitialCapacity);
 	}
 
 	public void clearAll() {
-		_cacheMap.clear();
+		_portalCaches.clear();
 	}
 
 	public PortalCache getCache(String name) {
@@ -41,17 +41,17 @@ public class MemoryPortalCacheManager implements PortalCacheManager {
 	}
 
 	public PortalCache getCache(String name, boolean blocking) {
-		PortalCache cache = _cacheMap.get(name);
+		PortalCache portalCache = _portalCaches.get(name);
 
-		if (cache == null) {
-			cache = new MemoryPortalCache(_cacheInitialCapacity);
+		if (portalCache == null) {
+			portalCache = new MemoryPortalCache(_cacheInitialCapacity);
 
-			cache.setDebug(_debug);
+			portalCache.setDebug(_debug);
 
-			_cacheMap.put(name, cache);
+			_portalCaches.put(name, portalCache);
 		}
 
-		return cache;
+		return portalCache;
 	}
 
 	public void setCacheInitialCapacity(int cacheInitialCapacity) {
@@ -70,7 +70,7 @@ public class MemoryPortalCacheManager implements PortalCacheManager {
 
 	private int _cacheInitialCapacity = 10000;
 	private int _cacheManagerInitialCapacity = 10000;
-	private Map<String, PortalCache> _cacheMap;
 	private boolean _debug;
+	private Map<String, PortalCache> _portalCaches;
 
 }
