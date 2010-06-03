@@ -902,13 +902,13 @@ public class PropsValues {
 
 	public static final String[] ROLES_REGULAR_SUBTYPES = PropsUtil.getArray(PropsKeys.ROLES_REGULAR_SUBTYPES);
 
-	public static final String SANITIZER_IMPL = PropsUtil.get(PropsKeys.SANITIZER_IMPL);
-
 	public static final String SANDBOX_DIR = PropsUtil.get(PropsKeys.SANDBOX_DIR);
 
 	public static final boolean SANDBOX_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.SANDBOX_ENABLED));
 
 	public static final long SANDBOX_INTERVAL = GetterUtil.getLong(PropsUtil.get(PropsKeys.SANDBOX_INTERVAL));
+
+	public static final String SANITIZER_IMPL = PropsUtil.get(PropsKeys.SANITIZER_IMPL);
 
 	public static final boolean SC_PRODUCT_COMMENTS_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.SC_PRODUCT_COMMENTS_ENABLED));
 

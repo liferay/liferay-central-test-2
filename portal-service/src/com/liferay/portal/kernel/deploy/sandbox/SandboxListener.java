@@ -23,8 +23,6 @@ import java.io.File;
  */
 public interface SandboxListener {
 
-	public String getType();
-
 	public void deploy(File dir);
 
 }

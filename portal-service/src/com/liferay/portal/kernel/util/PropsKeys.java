@@ -1309,13 +1309,13 @@ public interface PropsKeys {
 
 	public static final String ROLES_REGULAR_SUBTYPES = "roles.regular.subtypes";
 
-	public static final String SANITIZER_IMPL = "sanitizer.impl";
-
 	public static final String SANDBOX_DIR = "sandbox.dir";
 
 	public static final String SANDBOX_ENABLED = "sandbox.enabled";
 
 	public static final String SANDBOX_INTERVAL = "sandbox.interval";
+
+	public static final String SANITIZER_IMPL = "sanitizer.impl";
 
 	public static final String SC_IMAGE_MAX_SIZE = "sc.image.max.size";
 
