@@ -35,13 +35,14 @@ import java.util.Properties;
  */
 public class PropertiesUtil {
 
-	public static void copyProperties(Properties from, Properties to) {
-		Iterator<Map.Entry<Object, Object>> itr = from.entrySet().iterator();
+	public static void copyProperties(
+		Properties sourceProperties, Properties targetProperties) {
 
-		while (itr.hasNext()) {
-			Map.Entry<Object, Object> entry = itr.next();
+		for (Map.Entry<Object, Object> entry : sourceProperties.entrySet()) {
+			String key = (String)entry.getKey();
+			String value = (String)entry.getValue();
 
-			to.setProperty((String)entry.getKey(), (String)entry.getValue());
+			targetProperties.setProperty(key, value);
 		}
 	}
 
@@ -114,28 +115,32 @@ public class PropertiesUtil {
 		return list(properties);
 	}
 
-	public static void list(Map<String, String> map, PrintStream out) {
+	public static void list(Map<String, String> map, PrintStream printWriter) {
 		Properties properties = fromMap(map);
 
-		properties.list(out);
+		properties.list(printWriter);
 	}
 
-	public static void list(Map<String, String> map, PrintWriter out) {
+	public static void list(Map<String, String> map, PrintWriter printWriter) {
 		Properties properties = fromMap(map);
 
-		properties.list(out);
+		properties.list(printWriter);
 	}
 
 	public static String list(Properties properties) {
-		UnsyncByteArrayOutputStream ubaos = new UnsyncByteArrayOutputStream();
-		PrintStream ps = new PrintStream(ubaos);
+		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
+			new UnsyncByteArrayOutputStream();
 
-		properties.list(ps);
+		PrintStream printStream = new PrintStream(unsyncByteArrayOutputStream);
 
-		return ubaos.toString();
+		properties.list(printStream);
+
+		return unsyncByteArrayOutputStream.toString();
 	}
 
-	public static void load(Properties p, String s) throws IOException {
+	public static void load(Properties properties, String s)
+		throws IOException {
+
 		if (Validator.isNotNull(s)) {
 			s = UnicodeFormatter.toString(s);
 
@@ -146,15 +151,15 @@ public class PropertiesUtil {
 			s = StringUtil.replace(s, "\\u0020", " ");
 			s = StringUtil.replace(s, "\\u005c", "\\");
 
-			p.load(new UnsyncByteArrayInputStream(s.getBytes()));
+			properties.load(new UnsyncByteArrayInputStream(s.getBytes()));
 
 			List<String> propertyNames = Collections.list(
-				(Enumeration<String>)p.propertyNames());
+				(Enumeration<String>)properties.propertyNames());
 
 			for (int i = 0; i < propertyNames.size(); i++) {
 				String key = propertyNames.get(i);
 
-				String value = p.getProperty(key);
+				String value = properties.getProperty(key);
 
 				// Trim values because it may leave a trailing \r in certain
 				// Windows environments. This is a known case for loading SQL
@@ -163,7 +168,7 @@ public class PropertiesUtil {
 				if (value != null) {
 					value = value.trim();
 
-					p.setProperty(key, value);
+					properties.setProperty(key, value);
 				}
 			}
 		}
@@ -177,34 +182,36 @@ public class PropertiesUtil {
 		return p;
 	}
 
-	public static void merge(Properties p1, Properties p2) {
-		Enumeration<String> enu = (Enumeration<String>)p2.propertyNames();
+	public static void merge(Properties properties1, Properties properties2) {
+		Enumeration<String> enu =
+			(Enumeration<String>)properties2.propertyNames();
 
 		while (enu.hasMoreElements()) {
 			String key = enu.nextElement();
-			String value = p2.getProperty(key);
+			String value = properties2.getProperty(key);
 
-			p1.setProperty(key, value);
+			properties1.setProperty(key, value);
 		}
 	}
 
-	public static String toString(Properties p) {
+	public static String toString(Properties properties) {
 		SafeProperties safeProperties = null;
 
-		if (p instanceof SafeProperties) {
-			safeProperties = (SafeProperties)p;
+		if (properties instanceof SafeProperties) {
+			safeProperties = (SafeProperties)properties;
 		}
 
 		StringBundler sb = null;
 
-		if (p.isEmpty()) {
+		if (properties.isEmpty()) {
 			sb = new StringBundler();
 		}
 		else {
-			sb = new StringBundler(p.size() * 4);
+			sb = new StringBundler(properties.size() * 4);
 		}
 
-		Enumeration<String> enu = (Enumeration<String>)p.propertyNames();
+		Enumeration<String> enu =
+			(Enumeration<String>)properties.propertyNames();
 
 		while (enu.hasMoreElements()) {
 			String key = enu.nextElement();
@@ -216,7 +223,7 @@ public class PropertiesUtil {
 				sb.append(safeProperties.getEncodedProperty(key));
 			}
 			else {
-				sb.append(p.getProperty(key));
+				sb.append(properties.getProperty(key));
 			}
 
 			sb.append(StringPool.NEW_LINE);
@@ -225,18 +232,19 @@ public class PropertiesUtil {
 		return sb.toString();
 	}
 
-	public static void trimKeys(Properties p) {
-		Enumeration<String> enu = (Enumeration<String>)p.propertyNames();
+	public static void trimKeys(Properties properties) {
+		Enumeration<String> enu =
+			(Enumeration<String>)properties.propertyNames();
 
 		while (enu.hasMoreElements()) {
 			String key = enu.nextElement();
-			String value = p.getProperty(key);
+			String value = properties.getProperty(key);
 
 			String trimmedKey = key.trim();
 
 			if (!key.equals(trimmedKey)) {
-				p.remove(key);
-				p.setProperty(trimmedKey, value);
+				properties.remove(key);
+				properties.setProperty(trimmedKey, value);
 			}
 		}
 	}
