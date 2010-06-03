@@ -46,6 +46,8 @@ public class MemoryPortalCacheManager implements PortalCacheManager {
 		if (cache == null) {
 			cache = new MemoryPortalCache(_cacheInitialCapacity);
 
+			cache.setDebug(_debug);
+
 			_cacheMap.put(name, cache);
 		}
 
@@ -62,8 +64,13 @@ public class MemoryPortalCacheManager implements PortalCacheManager {
 		_cacheManagerInitialCapacity = cacheManagerInitialCapacity;
 	}
 
+	public void setDebug(boolean debug) {
+		_debug = debug;
+	}
+
 	private int _cacheInitialCapacity = 10000;
 	private int _cacheManagerInitialCapacity = 10000;
 	private Map<String, PortalCache> _cacheMap;
+	private boolean _debug;
 
 }
