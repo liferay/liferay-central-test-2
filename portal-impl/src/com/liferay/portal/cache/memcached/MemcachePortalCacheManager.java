@@ -30,9 +30,8 @@ import net.spy.memcached.MemcachedClientIF;
  */
 public class MemcachePortalCacheManager implements PortalCacheManager {
 
-	public void afterPropertiesSet() {
-		_memcachePortalCaches =
-			new ConcurrentHashMap<String, MemcachePortalCache>();
+	public void setDebug(boolean debug) {
+		_debug = debug;
 	}
 
 	public void clearAll() {
@@ -63,6 +62,8 @@ public class MemcachePortalCacheManager implements PortalCacheManager {
 				memcachePortalCache = new MemcachePortalCache(
 					memcachedClient, _timeout, _timeoutTimeUnit);
 
+				memcachePortalCache.setDebug(_debug);
+				
 				_memcachePortalCaches.put(name, memcachePortalCache);
 			}
 			catch (Exception e) {
@@ -88,8 +89,10 @@ public class MemcachePortalCacheManager implements PortalCacheManager {
 		_timeoutTimeUnit = TimeUnit.valueOf(timeoutTimeUnit);
 	}
 
+	private boolean _debug;
 	private MemcachedClientFactory _memcachedClientFactory;
-	private Map<String, MemcachePortalCache> _memcachePortalCaches;
+	private Map<String, MemcachePortalCache> _memcachePortalCaches =
+		new ConcurrentHashMap<String, MemcachePortalCache>();
 	private int _timeout;
 	private TimeUnit _timeoutTimeUnit;
 

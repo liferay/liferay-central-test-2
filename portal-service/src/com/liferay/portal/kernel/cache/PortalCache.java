@@ -37,4 +37,6 @@ public interface PortalCache {
 
 	public void removeAll();
 
+	public void setDebug(boolean debug);
+
 }

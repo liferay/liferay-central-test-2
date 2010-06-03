@@ -171,6 +171,10 @@ public class BlockingPortalCache implements PortalCache {
 		_competeLatchMap.clear();
 	}
 
+	public void setDebug(boolean debug) {
+		_portalCache.setDebug(debug);
+	}
+
 	private static ThreadLocal<CompeteLatch> _competeLatch =
 		new ThreadLocal<CompeteLatch>();
 	private final ConcurrentMap<String, CompeteLatch> _competeLatchMap =

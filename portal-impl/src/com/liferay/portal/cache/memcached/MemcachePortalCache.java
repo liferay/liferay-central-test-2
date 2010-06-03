@@ -14,6 +14,7 @@
 
 package com.liferay.portal.cache.memcached;
 
+import com.liferay.portal.cache.AbstractPortalCache;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -30,7 +31,8 @@ import net.spy.memcached.MemcachedClientIF;
  *
  * @author Michael C. Han
  */
-public class MemcachePortalCache implements PortalCache {
+public class MemcachePortalCache extends AbstractPortalCache
+	implements PortalCache {
 
 	public MemcachePortalCache(
 		MemcachedClientIF memcachedClient, int timeout,
@@ -46,12 +48,15 @@ public class MemcachePortalCache implements PortalCache {
 	}
 
 	public Object get(String key) {
+
+		String processedKey = processKey(key);
+		
 		Object cachedObject = null;
 
 		Future<Object> future = null;
 
 		try {
-			future = _memcachedClient.asyncGet(key);
+			future = _memcachedClient.asyncGet(processedKey);
 		}
 		catch (IllegalArgumentException iae) {
 			if (_log.isWarnEnabled()) {
@@ -80,8 +85,11 @@ public class MemcachePortalCache implements PortalCache {
 	}
 
 	public void put(String key, Object obj, int timeToLive) {
+
+		String processedKey = processKey(key);
+
 		try {
-			_memcachedClient.set(key, timeToLive, obj);
+			_memcachedClient.set(processedKey, timeToLive, obj);
 		}
 		catch (IllegalArgumentException iae) {
 			if (_log.isWarnEnabled()) {
@@ -95,8 +103,11 @@ public class MemcachePortalCache implements PortalCache {
 	}
 
 	public void put(String key, Serializable obj, int timeToLive) {
+
+		String processedKey = processKey(key);
+		
 		try {
-			_memcachedClient.set(key, timeToLive, obj);
+			_memcachedClient.set(processedKey, timeToLive, obj);
 		}
 		catch (IllegalArgumentException iae) {
 			if (_log.isWarnEnabled()) {
@@ -106,8 +117,11 @@ public class MemcachePortalCache implements PortalCache {
 	}
 
 	public void remove(String key) {
+
+		String processedKey = processKey(key);
+
 		try {
-			_memcachedClient.delete(key);
+			_memcachedClient.delete(processedKey);
 		}
 		catch (IllegalArgumentException iae) {
 			if (_log.isWarnEnabled()) {

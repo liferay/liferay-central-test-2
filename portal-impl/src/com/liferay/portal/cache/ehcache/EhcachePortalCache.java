@@ -14,6 +14,7 @@
 
 package com.liferay.portal.cache.ehcache;
 
+import com.liferay.portal.cache.AbstractPortalCache;
 import com.liferay.portal.kernel.cache.PortalCache;
 
 import java.io.Serializable;
@@ -26,14 +27,17 @@ import net.sf.ehcache.Element;
  *
  * @author Brian Wing Shun Chan
  */
-public class EhcachePortalCache implements PortalCache {
+public class EhcachePortalCache extends AbstractPortalCache
+	implements PortalCache {
 
 	public EhcachePortalCache(Ehcache cache) {
 		_cache = cache;
 	}
 
 	public Object get(String key) {
-		Element element = _cache.get(key);
+		String processedKey = processKey(key);
+
+		Element element = _cache.get(processedKey);
 
 		if (element == null) {
 			return null;
@@ -44,13 +48,13 @@ public class EhcachePortalCache implements PortalCache {
 	}
 
 	public void put(String key, Object obj) {
-		Element element = new Element(key, obj);
+		Element element = _createElement(key, obj);
 
 		_cache.put(element);
 	}
 
 	public void put(String key, Object obj, int timeToLive) {
-		Element element = new Element(key, obj);
+		Element element = _createElement(key, obj);
 
 		element.setTimeToLive(timeToLive);
 
@@ -58,13 +62,13 @@ public class EhcachePortalCache implements PortalCache {
 	}
 
 	public void put(String key, Serializable obj) {
-		Element element = new Element(key, obj);
+		Element element = _createElement(key, obj);
 
 		_cache.put(element);
 	}
 
 	public void put(String key, Serializable obj, int timeToLive) {
-		Element element = new Element(key, obj);
+		Element element = _createElement(key, obj);
 
 		element.setTimeToLive(timeToLive);
 
@@ -72,11 +76,21 @@ public class EhcachePortalCache implements PortalCache {
 	}
 
 	public void remove(String key) {
-		_cache.remove(key);
+		String processedKey = processKey(key);
+
+		_cache.remove(processedKey);
 	}
 
 	public void removeAll() {
 		_cache.removeAll();
+	}
+
+	private Element _createElement(String key, Object obj) {
+		String processedKey = processKey(key);
+
+		Element element = new Element(processedKey, obj);
+
+		return element;
 	}
 
 	private Ehcache _cache;

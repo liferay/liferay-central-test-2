@@ -104,6 +104,8 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 
 		PortalCache portalCache = new EhcachePortalCache(cache);
 
+		portalCache.setDebug(_debug);
+
 		if (PropsValues.EHCACHE_BLOCKING_CACHE_ALLOWED && blocking) {
 			portalCache = new BlockingPortalCache(portalCache);
 		}
@@ -117,6 +119,10 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 
 	public void setConfigPropertyKey(String configPropertyKey) {
 		_configPropertyKey = configPropertyKey;
+	}
+
+	public void setDebug(boolean debug) {
+		_debug = debug;
 	}
 
 	public void setMBeanServer(MBeanServer mBeanServer) {
@@ -146,6 +152,7 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 
 	private String _configPropertyKey;
 	private CacheManager _cacheManager;
+	private boolean _debug; 
 	private ManagementService _managementService;
 	private MBeanServer _mBeanServer;
 	private boolean _registerCacheManager = true;
