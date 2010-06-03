@@ -17,6 +17,7 @@ package com.liferay.portal.kernel.scheduler;
 import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.Serializable;
+
 import java.util.Date;
 
 /**
