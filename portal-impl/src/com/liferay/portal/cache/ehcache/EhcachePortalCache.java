@@ -15,7 +15,6 @@
 package com.liferay.portal.cache.ehcache;
 
 import com.liferay.portal.kernel.cache.BasePortalCache;
-import com.liferay.portal.kernel.cache.PortalCache;
 
 import java.io.Serializable;
 
@@ -31,7 +30,7 @@ import net.sf.ehcache.Element;
  *
  * @author Brian Wing Shun Chan
  */
-public class EhcachePortalCache extends BasePortalCache implements PortalCache {
+public class EhcachePortalCache extends BasePortalCache {
 
 	public EhcachePortalCache(Ehcache cache) {
 		_cache = cache;

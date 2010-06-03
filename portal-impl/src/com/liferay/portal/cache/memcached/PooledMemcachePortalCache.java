@@ -15,7 +15,6 @@
 package com.liferay.portal.cache.memcached;
 
 import com.liferay.portal.kernel.cache.BasePortalCache;
-import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -35,8 +34,7 @@ import net.spy.memcached.MemcachedClientIF;
  *
  * @author Michael C. Han
  */
-public class PooledMemcachePortalCache
-	extends BasePortalCache implements PortalCache {
+public class PooledMemcachePortalCache extends BasePortalCache {
 
 	public PooledMemcachePortalCache(
 		String name, MemcachedClientFactory memcachedClientFactory, int timeout,
