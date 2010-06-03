@@ -25,8 +25,6 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
-import com.liferay.portal.kernel.portlet.Route;
-import com.liferay.portal.kernel.portlet.Router;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
 import com.liferay.portal.kernel.scheduler.TimeUnit;
@@ -1104,8 +1102,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			_friendlyURLMapperPortlets.put(portletId, portletModel);
 		}
 
-		_setFriendlyURLRoutes(portletModel, portletElement);
-
+		portletModel.setFriendlyURLRoutes(
+			GetterUtil.getString(
+				portletElement.elementText("friendly-url-routes"),
+				portletModel.getFriendlyURLRoutes()));
 		portletModel.setURLEncoderClass(
 			GetterUtil.getString(
 				portletElement.elementText("url-encoder-class"),
@@ -1897,42 +1897,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 
 		return servletURLPatterns;
-	}
-
-	private void _setFriendlyURLRoutes(
-		Portlet portlet, Element portletElement) {
-	
-		Element friendlyUrlRoutesElement = portletElement.element(
-			"friendly-url-routes");
-	
-		if (friendlyUrlRoutesElement == null) {
-			return;
-		}
-	
-		Router router = new Router();
-	
-		for (Element routeElement :
-				friendlyUrlRoutesElement.elements("route")) {
-	
-			Route route = new Route();
-	
-			String pattern = routeElement.elementText("route-pattern");
-	
-			route.setPattern(pattern);
-	
-			for (Element routeDefaultElement :
-					routeElement.elements("route-default")) {
-	
-				String defaultParamater = routeDefaultElement.elementText(
-					"route-default-parameter");
-				String defaultValue = routeDefaultElement.elementText(
-					"route-default-value");
-	
-				route.addDefaultValue(defaultParamater, defaultValue);
-			}
-	
-			router.addRoute(route);
-		}
 	}
 
 	private void _setSpriteImages(

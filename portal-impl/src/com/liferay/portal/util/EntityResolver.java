@@ -130,6 +130,11 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		),
 
 		new KeyValuePair(
+			"-//Liferay//DTD Friendly URL Routes 6.0.0//EN",
+			"liferay-friendly-url-routes_6_0_0.dtd"
+		),
+
+		new KeyValuePair(
 			"-//Liferay//DTD Hook 5.1.0//EN",
 			"liferay-hook_5_1_0.dtd"
 		),

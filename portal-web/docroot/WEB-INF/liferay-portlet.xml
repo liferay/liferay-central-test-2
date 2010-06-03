@@ -189,15 +189,7 @@
 			</trigger>
 		</scheduler-entry>
 		<friendly-url-mapper-class>com.liferay.portlet.messageboards.MBFriendlyURLMapper</friendly-url-mapper-class>
-		<friendly-url-routes>
-			<route>
-				<route-pattern>/message_boards/home</route-pattern>
-				<route-default>
-					<route-default-parameter>topLink</route-default-parameter>
-					<route-default-value>message-boards-home</route-default-value>
-				</route-default>
-			</route>
-		</friendly-url-routes>
+		<friendly-url-routes>com/liferay/portlet/messageboards/friendly-url-routes.xml</friendly-url-routes>
 		<portlet-data-handler-class>com.liferay.portlet.messageboards.lar.MBPortletDataHandlerImpl</portlet-data-handler-class>
 		<pop-message-listener-class>com.liferay.portlet.messageboards.pop.MessageListenerImpl</pop-message-listener-class>
 		<social-activity-interpreter-class>com.liferay.portlet.messageboards.social.MBActivityInterpreter</social-activity-interpreter-class>

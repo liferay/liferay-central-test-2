@@ -320,6 +320,24 @@ public interface Portlet extends PortletModel {
 	public com.liferay.portal.kernel.portlet.FriendlyURLMapper getFriendlyURLMapperInstance();
 
 	/**
+	* Gets the class loader resource path to the friendly URL routes of the
+	portlet.
+	*
+	* @return the class loader resource path to the friendly URL routes of the
+	portlet
+	*/
+	public java.lang.String getFriendlyURLRoutes();
+
+	/**
+	* Sets the class loader resource path to the friendly URL routes of the
+	portlet.
+	*
+	* @param friendlyURLRoutes the class loader resource path to the friendly
+	URL routes of the portlet
+	*/
+	public void setFriendlyURLRoutes(java.lang.String friendlyURLRoutes);
+
+	/**
 	* Gets the name of the URL encoder class of the portlet.
 	*
 	* @return the name of the URL encoder class of the portlet

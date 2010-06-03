@@ -112,6 +112,7 @@
 		<dtd publicId="-//Liferay//DTD Display 5.1.0//EN" location="${definitions.dir}/liferay-display_5_1_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Display 5.2.0//EN" location="${definitions.dir}/liferay-display_5_2_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Display 6.0.0//EN" location="${definitions.dir}/liferay-display_6_0_0.dtd" />
+		<dtd publicId="-//Liferay//DTD Friendly URL Routes 6.0.0//EN" location="${definitions.dir}/liferay-friendly-url-routes_6_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Hook 5.1.0//EN" location="${definitions.dir}/liferay-hook_5_1_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Hook 5.2.0//EN" location="${definitions.dir}/liferay-hook_5_2_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Hook 6.0.0//EN" location="${definitions.dir}/liferay-hook_6_0_0.dtd" />
