@@ -16,9 +16,15 @@ package com.liferay.portal.cache.memcached;
 
 import com.liferay.portal.kernel.cache.BasePortalCache;
 import com.liferay.portal.kernel.cache.PortalCache;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.io.Serializable;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
@@ -33,12 +39,21 @@ public class PooledMemcachePortalCache
 	extends BasePortalCache implements PortalCache {
 
 	public PooledMemcachePortalCache(
-		MemcachedClientFactory memcachedClientFactory, int timeout,
+		String name, MemcachedClientFactory memcachedClientFactory, int timeout,
 		TimeUnit timeoutTimeUnit) {
 
+		_cacheName = name;
 		_memcachedClientFactory = memcachedClientFactory;
 		_timeout = timeout;
 		_timeoutTimeUnit = timeoutTimeUnit;
+	}
+
+	public void destroy() {
+		try {
+			_memcachedClientFactory.close();
+		}
+		catch (Exception e) {
+		}
 	}
 
 	public Object get(String key) {
@@ -51,12 +66,21 @@ public class PooledMemcachePortalCache
 			return null;
 		}
 
-		String processedKey = processKey(key);
+		String processedKey = processKey(_cacheName + key);
 
 		try {
 			Object cachedObject = null;
 
-			Future<Object> future = memcachedClient.asyncGet(processedKey);
+			Future<Object> future = null;
+			
+			try {
+				future = memcachedClient.asyncGet(processedKey);
+			}
+			catch (IllegalArgumentException iae) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Error retrieving with keys " + key, iae);
+				}
+			}
 
 			try {
 				cachedObject = future.get(_timeout, _timeoutTimeUnit);
@@ -70,6 +94,57 @@ public class PooledMemcachePortalCache
 		finally {
 			cleanupClient(memcachedClient);
 		}
+	}
+
+	public Collection<Object> get(Collection<String> keys) {
+		MemcachedClientIF memcachedClient = null;
+
+		try {
+			memcachedClient = _memcachedClientFactory.getMemcachedClient();
+		}
+		catch (Exception e) {
+			return null;
+		}
+
+		List<String> processedKeys = new ArrayList<String>(keys.size());
+
+		for (String key : keys) {
+			String processedKey = processKey(_cacheName + key);
+			processedKeys.add(processedKey);
+		}
+
+
+		Future<Map<String,Object>> future = null;
+
+		Map<String, Object> cachedObjects = null;
+		try {
+			try {
+				future = memcachedClient.asyncGetBulk(processedKeys);
+			}
+			catch (IllegalArgumentException iae) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Error retrieving with keys " + keys, iae);
+				}
+
+				future.cancel(true);
+			}
+
+			try {
+			cachedObjects = future.get(_timeout, _timeoutTimeUnit);
+			}
+			catch (Throwable t) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Memcache operation error", t);
+				}
+
+				future.cancel(true);
+			}
+		}
+		finally {
+			cleanupClient(memcachedClient);
+		}
+
+		return cachedObjects.values();
 	}
 
 	public void put(String key, Object obj) {
@@ -86,11 +161,16 @@ public class PooledMemcachePortalCache
 			return;
 		}
 
-		String processedKey = processKey(key);
+		String processedKey = processKey(_cacheName + key);
 
 		try {
 			memcachedClient.set(processedKey, timeToLive, obj);
 		}
+		catch (IllegalArgumentException iae) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Error storing value with key " + key, iae);
+			}
+		}		
 		finally {
 			cleanupClient(memcachedClient);
 		}
@@ -110,11 +190,16 @@ public class PooledMemcachePortalCache
 			return;
 		}
 
-		String processedKey = processKey(key);
+		String processedKey = processKey(_cacheName + key);
 
 		try {
 			memcachedClient.set(processedKey, timeToLive, obj);
 		}
+		catch (IllegalArgumentException iae) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Error storing value with key " + key, iae);
+			}
+		}		
 		finally {
 			cleanupClient(memcachedClient);
 		}
@@ -130,10 +215,15 @@ public class PooledMemcachePortalCache
 			return;
 		}
 
-		String processedKey = processKey(key);
+		String processedKey = processKey(_cacheName + key);
 
 		try {
 			memcachedClient.delete(processedKey);
+		}
+		catch (IllegalArgumentException iae) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Error deleting value with key " + key, iae);
+			}
 		}
 		finally {
 			cleanupClient(memcachedClient);
@@ -170,6 +260,10 @@ public class PooledMemcachePortalCache
 		}
 	}
 
+	private static final Log _log = LogFactoryUtil.getLog(
+		MemcachePortalCache.class);
+
+	private String _cacheName;
 	private MemcachedClientFactory _memcachedClientFactory;
 	private int _timeout;
 	private TimeUnit _timeoutTimeUnit;

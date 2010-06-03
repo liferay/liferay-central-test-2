@@ -30,6 +30,14 @@ public class PooledMemcachedClientFactory implements MemcachedClientFactory {
 		return (MemcachedClientIF)_memcachedClientPool.borrowObject();
 	}
 
+	public void destroy() {
+		try {
+			close();
+		}
+		catch (Exception e) {
+		}
+	}
+
 	public void close() throws Exception {
 		_memcachedClientPool.close();
 	}

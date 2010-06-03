@@ -30,7 +30,14 @@ import java.util.concurrent.TimeUnit;
 public class PooledMemcachePortalCacheManager implements PortalCacheManager {
 
 	public void afterPropertiesSet() {
-		_portalCaches = new ConcurrentHashMap<String, PortalCache>();
+	}
+
+	public void destroy() throws Exception {
+		for (PooledMemcachePortalCache portalCache :
+				_portalCaches.values()) {
+
+			portalCache.destroy();
+		}
 	}
 
 	public void clearAll() {
@@ -42,11 +49,11 @@ public class PooledMemcachePortalCacheManager implements PortalCacheManager {
 	}
 
 	public PortalCache getCache(String name, boolean blocking) {
-		PortalCache portalCache = _portalCaches.get(name);
+		PooledMemcachePortalCache portalCache = _portalCaches.get(name);
 
 		if (portalCache == null) {
 			portalCache = new PooledMemcachePortalCache(
-				_memcachedClientFactory, _timeout, _timeoutTimeUnit);
+				name, _memcachedClientFactory, _timeout, _timeoutTimeUnit);
 
 			portalCache.setDebug(_debug);
 
@@ -76,7 +83,8 @@ public class PooledMemcachePortalCacheManager implements PortalCacheManager {
 
 	private boolean _debug;
 	private MemcachedClientFactory _memcachedClientFactory;
-	private Map<String, PortalCache> _portalCaches;
+	private Map<String, PooledMemcachePortalCache> _portalCaches =
+		new ConcurrentHashMap<String, PooledMemcachePortalCache>();
 	private int _timeout;
 	private TimeUnit _timeoutTimeUnit;
 
