@@ -24,6 +24,7 @@ import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.portletpermis
 import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.social.Social522LatestTests;
 import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.tags.Tags522LatestTests;
 import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.webcontent.WebContent522LatestTests;
+import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.wiki.Wiki522LatestTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -48,6 +49,7 @@ public class ViewSampleData522LatestTests extends BaseTests {
 		testSuite.addTest(Social522LatestTests.suite());
 		testSuite.addTest(Tags522LatestTests.suite());
 		testSuite.addTest(WebContent522LatestTests.suite());
+		testSuite.addTest(Wiki522LatestTests.suite());
 
 		return testSuite;
 	}
