@@ -335,8 +335,9 @@ public class LayoutAction extends Action {
 			servletContext.getRequestDispatcher(path);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
-		PipingServletResponse pipingServletResponse =
-			new PipingServletResponse(response, unsyncStringWriter);
+
+		PipingServletResponse pipingServletResponse = new PipingServletResponse(
+			response, unsyncStringWriter);
 
 		requestDispatcher.include(request, pipingServletResponse);
 

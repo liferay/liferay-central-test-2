@@ -18,6 +18,8 @@
 
 <%
 StringBundler sb = (StringBundler)request.getAttribute(WebKeys.LAYOUT_CONTENT);
+
 sb.writeTo(out);
+
 request.removeAttribute(WebKeys.LAYOUT_CONTENT);
 %>
