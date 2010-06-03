@@ -657,7 +657,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 
 		return (FriendlyURLMapper)InstancePool.get(getFriendlyURLMapperClass());
 	}
-	
+
 	/**
 	 * Gets the class loader resource path to the friendly URL routes of the
 	 * portlet.
@@ -679,7 +679,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	public void setFriendlyURLRoutes(String friendlyURLRoutes) {
 		_friendlyURLRoutes = friendlyURLRoutes;
 	}
-	
+
 	/**
 	 * Gets the name of the URL encoder class of the portlet.
 	 *

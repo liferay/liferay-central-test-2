@@ -1164,7 +1164,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		List<String> assetRendererFactoryClasses =
 			portletModel.getAssetRendererFactoryClasses();
 
-		for (Element assetRendererFactoryClassElement : 
+		for (Element assetRendererFactoryClassElement :
 				portletElement.elements("asset-renderer-factory")) {
 
 			assetRendererFactoryClasses.add(
@@ -1523,7 +1523,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			}
 
 			Map<String, Set<String>> windowStates =
-				portletModel.getWindowStates(); 
+				portletModel.getWindowStates();
 
 			Set<String> mimeTypeWindowStates = windowStates.get(mimeType);
 
