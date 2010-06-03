@@ -195,6 +195,7 @@ public class GlobalStartupAction extends SimpleAction {
 		}
 
 		// Launch browser
+
 		if (Validator.isNotNull(PropsValues.BROWSER_LAUNCHER_URL)) {
 			Thread browserLauncherThread = new Thread(new BrowserLauncher());
 
