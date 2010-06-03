@@ -16,6 +16,8 @@ package com.liferay.portal.kernel.cache;
 
 import java.io.Serializable;
 
+import java.util.Collection;
+
 /**
  * <a href="PortalCache.java.html"><b><i>View Source</i></b></a>
  *
@@ -24,6 +26,8 @@ import java.io.Serializable;
 public interface PortalCache {
 
 	public Object get(String key);
+
+	public Collection<Object> get(Collection<String> key);
 
 	public void put(String key, Object obj);
 

@@ -19,6 +19,9 @@ import com.liferay.portal.kernel.cache.PortalCache;
 
 import java.io.Serializable;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -34,27 +37,50 @@ public class MemoryPortalCache extends BasePortalCache implements PortalCache {
 	}
 
 	public Object get(String key) {
-		return _map.get(key);
+		String processedKey = processKey(key);
+
+		return _map.get(processedKey);
 	}
 
+	public Collection<Object> get(Collection<String> keys) {
+
+		List<Object> cachedResults = new ArrayList<Object>(keys.size());
+
+		for (String key : keys) {
+			cachedResults.add(get(key));
+		}
+
+		return cachedResults;
+	}
+	
 	public void put(String key, Object obj) {
-		_map.put(key, obj);
+		String processedKey = processKey(key);
+
+		_map.put(processedKey, obj);
 	}
 
 	public void put(String key, Object obj, int timeToLive) {
-		_map.put(key, obj);
+		String processedKey = processKey(key);
+
+		_map.put(processedKey, obj);
 	}
 
 	public void put(String key, Serializable obj) {
-		_map.put(key, obj);
+		String processedKey = processKey(key);
+
+		_map.put(processedKey, obj);
 	}
 
 	public void put(String key, Serializable obj, int timeToLive) {
-		_map.put(key, obj);
+		String processedKey = processKey(key);
+
+		_map.put(processedKey, obj);
 	}
 
 	public void remove(String key) {
-		_map.remove(key);
+		String processedKey = processKey(key);
+
+		_map.remove(processedKey);
 	}
 
 	public void removeAll() {

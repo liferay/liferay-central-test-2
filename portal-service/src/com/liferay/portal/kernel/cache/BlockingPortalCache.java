@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.concurrent.CompeteLatch;
 
 import java.io.Serializable;
 
+import java.util.Collection;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -71,6 +72,10 @@ public class BlockingPortalCache implements PortalCache {
 		}
 
 		return obj;
+	}
+
+	public Collection<Object> get(Collection<String> keys) {
+		return _portalCache.get(keys);
 	}
 
 	public void put(String key, Object obj) {

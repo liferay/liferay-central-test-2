@@ -21,6 +21,10 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.io.Serializable;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
@@ -78,6 +82,44 @@ public class MemcachePortalCache
 		}
 
 		return cachedObject;
+	}
+
+	public Collection<Object> get(Collection<String> keys) {
+
+		List<String> processedKeys = new ArrayList<String>(keys.size());
+
+		for (String key : keys) {
+			String processedKey = processKey(_cacheName + key);
+			processedKeys.add(processedKey);
+		}
+
+		Future<Map<String,Object>> future = null;
+
+		try {
+			future = _memcachedClient.asyncGetBulk(processedKeys);
+		}
+		catch (IllegalArgumentException iae) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Error retrieving with keys " + keys, iae);
+			}
+
+			return null;
+		}
+
+		Map<String, Object> cachedObjects = null;
+
+		try {
+			cachedObjects = future.get(_timeout, _timeoutTimeUnit);
+		}
+		catch (Throwable t) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Memcache operation error", t);
+			}
+
+			future.cancel(true);
+		}
+
+		return cachedObjects.values();
 	}
 
 	public void put(String key, Object obj) {
