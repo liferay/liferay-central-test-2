@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.util.BrowserLauncher;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -194,10 +195,11 @@ public class GlobalStartupAction extends SimpleAction {
 		}
 
 		// Launch browser
+		if (Validator.isNotNull(PropsValues.BROWSER_LAUNCHER_URL)) {
+			Thread browserLauncherThread = new Thread(new BrowserLauncher());
 
-		Thread browserLauncherThread = new Thread(new BrowserLauncher());
-
-		browserLauncherThread.start();
+			browserLauncherThread.start();
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(GlobalStartupAction.class);
