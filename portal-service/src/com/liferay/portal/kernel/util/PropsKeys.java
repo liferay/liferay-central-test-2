@@ -1309,11 +1309,11 @@ public interface PropsKeys {
 
 	public static final String ROLES_REGULAR_SUBTYPES = "roles.regular.subtypes";
 
-	public static final String SANDBOX_DIR = "sandbox.dir";
+	public static final String SANDBOX_DEPLOY_DIR = "sandbox.deploy.dir";
 
-	public static final String SANDBOX_ENABLED = "sandbox.enabled";
+	public static final String SANDBOX_DEPLOY_ENABLED = "sandbox.deploy.enabled";
 
-	public static final String SANDBOX_INTERVAL = "sandbox.interval";
+	public static final String SANDBOX_DEPLOY_INTERVAL = "sandbox.deploy.interval";
 
 	public static final String SANITIZER_IMPL = "sanitizer.impl";
 
