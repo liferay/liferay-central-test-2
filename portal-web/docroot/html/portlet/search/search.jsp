@@ -259,7 +259,7 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 
 				// Tags
 
-				String[] tags = StringUtil.split(el.elementText("tags"));
+				String[] tags = StringUtil.split(el.elementText("tags").replaceAll("[\\[\\]]",""));
 
 				String[] tagsQueryTerms = queryTerms;
 
@@ -270,9 +270,15 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 				for (int k = 0; k < tags.length; k++) {
 					String tag = tags[k];
 
+					String newKeywords = tag.trim();
+
+					if (newKeywords.matches(".+\\s.+")) {
+						newKeywords = "\"" + tag + "\"";
+					}
+
 					PortletURL tagURL = PortletURLUtil.clone(portletURL, renderResponse);
 
-					tagURL.setParameter("keywords", Field.ASSET_TAG_NAMES + StringPool.COLON + tag);
+					tagURL.setParameter("keywords", Field.ASSET_TAG_NAMES + StringPool.COLON + newKeywords);
 					tagURL.setParameter("format", format);
 
 					if (k == 0) {
