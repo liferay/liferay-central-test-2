@@ -14,6 +14,9 @@
 
 package com.liferay.portlet.social.model;
 
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
+
 /**
  * <a href="SocialActivityFeedEntry.java.html"><b><i>View Source</i></b></a>
  *
@@ -26,9 +29,9 @@ public class SocialActivityFeedEntry {
 	}
 
 	public SocialActivityFeedEntry(String link, String title, String body) {
-		_link = link;
-		_title = title;
-		_body = body;
+		setLink(link);
+		setTitle(title);
+		setBody(body);
 	}
 
 	public String getPortletId() {
@@ -36,7 +39,7 @@ public class SocialActivityFeedEntry {
 	}
 
 	public void setPortletId(String portletId) {
-		_portletId = portletId;
+		_portletId = GetterUtil.getString(portletId);
 	}
 
 	public String getLink() {
@@ -44,7 +47,7 @@ public class SocialActivityFeedEntry {
 	}
 
 	public void setLink(String link) {
-		_link = link;
+		_link = GetterUtil.getString(link);
 	}
 
 	public String getTitle() {
@@ -52,7 +55,7 @@ public class SocialActivityFeedEntry {
 	}
 
 	public void setTitle(String title) {
-		_title = title;
+		_title = GetterUtil.getString(title);
 	}
 
 	public String getBody() {
@@ -60,12 +63,12 @@ public class SocialActivityFeedEntry {
 	}
 
 	public void setBody(String body) {
-		_body = body;
+		_body = GetterUtil.getString(body);
 	}
 
-	private String _portletId;
-	private String _link;
-	private String _title;
-	private String _body;
+	private String _portletId = StringPool.BLANK;
+	private String _link = StringPool.BLANK;
+	private String _title = StringPool.BLANK;
+	private String _body = StringPool.BLANK;
 
 }
