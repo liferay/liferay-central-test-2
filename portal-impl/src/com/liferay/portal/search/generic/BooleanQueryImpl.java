@@ -14,9 +14,9 @@
 
 package com.liferay.portal.search.generic;
 
+import com.liferay.portal.kernel.search.BaseBooleanQueryImpl;
 import com.liferay.portal.kernel.search.BooleanClause;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
-import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.Query;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ import java.util.List;
  *
  * @author Michael C. Han
  */
-public class BooleanQueryImpl implements BooleanQuery {
+public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 
 	public void add(Query query, BooleanClauseOccur occur) {
 		_clauses.add(new BooleanClauseImpl(query, occur));

@@ -14,9 +14,9 @@
 
 package com.liferay.portal.search.lucene;
 
+import com.liferay.portal.kernel.search.BaseBooleanQueryImpl;
 import com.liferay.portal.kernel.search.BooleanClause;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
-import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.ParseException;
 import com.liferay.portal.kernel.search.Query;
 
@@ -28,7 +28,7 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  */
-public class BooleanQueryImpl implements BooleanQuery {
+public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 
 	public BooleanQueryImpl() {
 		_booleanQuery = new org.apache.lucene.search.BooleanQuery();

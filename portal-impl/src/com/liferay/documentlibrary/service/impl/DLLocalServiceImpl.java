@@ -34,7 +34,6 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -110,7 +109,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 			long companyId, String portletId, long groupId,
 			long userId, long[] repositoryIds, String keywords, int start,
 			int end)
-		throws SystemException {
+			throws SystemException {
 
 		try {
 			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
@@ -165,11 +164,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
 
-			if (Validator.isNotNull(keywords)) {
-				searchQuery.addTerm(Field.CONTENT, keywords);
-				searchQuery.addTerm(Field.PROPERTIES, keywords);
-				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords, true);
-			}
+			searchQuery.addTerms(_KEYWORDS_FIELDS, keywords);
 
 			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
 
@@ -337,5 +332,9 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 	@BeanReference(type = Hook.class)
 	protected Hook hook;
+
+	private static final String[] _KEYWORDS_FIELDS = new String[] {
+		Field.ASSET_TAG_NAMES, Field.CONTENT, Field.PROPERTIES
+	};
 
 }

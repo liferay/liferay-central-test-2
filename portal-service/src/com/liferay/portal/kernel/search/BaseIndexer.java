@@ -327,14 +327,7 @@ public abstract class BaseIndexer implements Indexer {
 			return;
 		}
 
-		searchQuery.addTerm(Field.USER_NAME, keywords);
-		searchQuery.addTerm(Field.TITLE, keywords);
-		searchQuery.addTerm(Field.CONTENT, keywords);
-		searchQuery.addTerm(Field.DESCRIPTION, keywords);
-		searchQuery.addTerm(Field.PROPERTIES, keywords);
-		searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords, true);
-		searchQuery.addTerm(Field.URL, keywords);
-		searchQuery.addTerm(Field.COMMENTS, keywords);
+		searchQuery.addTerms(_KEYWORDS_FIELDS, keywords);
 	}
 
 	protected void addSearchNodeIds(
@@ -514,6 +507,11 @@ public abstract class BaseIndexer implements Indexer {
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
 	}
+
+	private static final String[] _KEYWORDS_FIELDS = new String[] {
+		Field.ASSET_TAG_NAMES, Field.COMMENTS, Field.CONTENT, Field.DESCRIPTION,
+		Field.PROPERTIES, Field.TITLE, Field.URL, Field.USER_NAME
+	};
 
 	private static Log _log = LogFactoryUtil.getLog(BaseIndexer.class);
 
