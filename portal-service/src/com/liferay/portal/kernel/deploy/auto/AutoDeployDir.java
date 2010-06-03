@@ -97,11 +97,11 @@ public class AutoDeployDir {
 			try {
 				Thread currentThread = Thread.currentThread();
 
-				_scanner = new AutoDeployScanner(
+				_autoDeployScanner = new AutoDeployScanner(
 					currentThread.getThreadGroup(),
 					AutoDeployScanner.class.getName(), this);
 
-				_scanner.start();
+				_autoDeployScanner.start();
 
 				if (_log.isInfoEnabled()) {
 					_log.info("Auto deploy scanner started for " + _deployDir);
@@ -123,8 +123,8 @@ public class AutoDeployDir {
 	}
 
 	public void stop() {
-		if (_scanner != null) {
-			_scanner.pause();
+		if (_autoDeployScanner != null) {
+			_autoDeployScanner.pause();
 		}
 	}
 
@@ -228,6 +228,7 @@ public class AutoDeployDir {
 	private static Log _log = LogFactoryUtil.getLog(AutoDeployDir.class);
 
 	private List<AutoDeployListener> _autoDeployListeners;
+	private AutoDeployScanner _autoDeployScanner;
 	private Set<String> _blacklistFiles;
 	private int _blacklistThreshold;
 	private File _deployDir;
@@ -235,6 +236,5 @@ public class AutoDeployDir {
 	private Map<String, IntegerWrapper> _inProcessFiles;
 	private long _interval;
 	private String _name;
-	private AutoDeployScanner _scanner;
 
 }
