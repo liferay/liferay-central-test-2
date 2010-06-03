@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.scheduler;
 
 import com.liferay.portal.kernel.util.StringBundler;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -23,7 +24,7 @@ import java.util.Date;
  *
  * @author Shuyang Zhou
  */
-public abstract class BaseTrigger implements Trigger {
+public abstract class BaseTrigger implements Trigger, Serializable {
 
 	public BaseTrigger(
 		String jobName, String groupName, TriggerType triggerType,

@@ -153,7 +153,7 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 	}
 
 	private String _description;
-	private MessageListener _eventListener;
+	private transient MessageListener _eventListener;
 	private String _eventListenerClass;
 	private String _propertyKey;
 	private TimeUnit _timeUnit;
