@@ -21,6 +21,9 @@ package com.liferay.portal.kernel.cache;
  */
 public abstract class BasePortalCache implements PortalCache {
 
+	public void destroy() {
+	}
+
 	public boolean isDebug() {
 		return _debug;
 	}

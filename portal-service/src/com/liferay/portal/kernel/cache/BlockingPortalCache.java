@@ -33,6 +33,13 @@ public class BlockingPortalCache implements PortalCache {
 		_portalCache = portalCache;
 	}
 
+	public void destroy() {
+	}
+
+	public Collection<Object> get(Collection<String> keys) {
+		return _portalCache.get(keys);
+	}
+
 	public Object get(String key) {
 		Object obj = _portalCache.get(key);
 
@@ -72,10 +79,6 @@ public class BlockingPortalCache implements PortalCache {
 		}
 
 		return obj;
-	}
-
-	public Collection<Object> get(Collection<String> keys) {
-		return _portalCache.get(keys);
 	}
 
 	public void put(String key, Object obj) {

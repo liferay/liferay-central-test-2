@@ -25,9 +25,11 @@ import java.util.Collection;
  */
 public interface PortalCache {
 
-	public Object get(String key);
+	public void destroy();
 
-	public Collection<Object> get(Collection<String> key);
+	public Collection<Object> get(Collection<String> keys);
+
+	public Object get(String key);
 
 	public void put(String key, Object obj);
 

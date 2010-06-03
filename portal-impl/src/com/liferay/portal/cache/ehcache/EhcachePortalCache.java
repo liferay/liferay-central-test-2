@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.cache.BasePortalCache;
 import com.liferay.portal.kernel.cache.PortalCache;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -50,14 +51,13 @@ public class EhcachePortalCache extends BasePortalCache implements PortalCache {
 	}
 
 	public Collection<Object> get(Collection<String> keys) {
-
-		List<Object> cachedResults = new ArrayList<Object>(keys.size());
+		List<Object> values = new ArrayList<Object>(keys.size());
 
 		for (String key : keys) {
-			cachedResults.add(get(key));
+			values.add(get(key));
 		}
 
-		return cachedResults;
+		return values;
 	}
 
 	public void put(String key, Object obj) {

@@ -36,23 +36,22 @@ public class MemoryPortalCache extends BasePortalCache implements PortalCache {
 		 _map = new ConcurrentHashMap<String, Object>(initialCapacity);
 	}
 
+	public Collection<Object> get(Collection<String> keys) {
+		List<Object> values = new ArrayList<Object>(keys.size());
+
+		for (String key : keys) {
+			values.add(get(key));
+		}
+
+		return values;
+	}
+
 	public Object get(String key) {
 		String processedKey = processKey(key);
 
 		return _map.get(processedKey);
 	}
 
-	public Collection<Object> get(Collection<String> keys) {
-
-		List<Object> cachedResults = new ArrayList<Object>(keys.size());
-
-		for (String key : keys) {
-			cachedResults.add(get(key));
-		}
-
-		return cachedResults;
-	}
-	
 	public void put(String key, Object obj) {
 		String processedKey = processKey(key);
 
