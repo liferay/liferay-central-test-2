@@ -79,6 +79,10 @@ public class HeaderFilter extends BasePortalFilter {
 		while (enu.hasMoreElements()) {
 			String name = enu.nextElement();
 
+			if (name.equals(_URL_REGEX_PATTERN)) {
+				continue;
+			}
+
 			String value = _filterConfig.getInitParameter(name);
 
 			if (name.equals(_EXPIRES) && Validator.isNumber(value)) {
@@ -132,6 +136,8 @@ public class HeaderFilter extends BasePortalFilter {
 	private static final String _EXPIRES = "Expires";
 
 	private static final String _TIME_ZONE = StringPool.UTC;
+
+	private static final String _URL_REGEX_PATTERN = "url-regex-pattern";
 
 	private Format _dateFormat;
 	private FilterConfig _filterConfig;
