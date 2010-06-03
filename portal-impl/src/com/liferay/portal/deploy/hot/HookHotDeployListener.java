@@ -15,7 +15,7 @@
 package com.liferay.portal.deploy.hot;
 
 import com.liferay.portal.events.EventsProcessorUtil;
-import com.liferay.portal.kernel.bean.ContextClassLoaderBeanHandler;
+import com.liferay.portal.kernel.bean.ClassLoaderBeanHandler;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
@@ -1330,11 +1330,11 @@ public class HookHotDeployListener
 			InvocationHandler invocationHandler =
 				Proxy.getInvocationHandler(originalService);
 
-			if (invocationHandler instanceof ContextClassLoaderBeanHandler) {
-				ContextClassLoaderBeanHandler contextClassLoaderBeanHandler =
-					(ContextClassLoaderBeanHandler)invocationHandler;
+			if (invocationHandler instanceof ClassLoaderBeanHandler) {
+				ClassLoaderBeanHandler classLoaderBeanHandler =
+					(ClassLoaderBeanHandler)invocationHandler;
 
-				originalService =  contextClassLoaderBeanHandler.getBean();
+				originalService =  classLoaderBeanHandler.getBean();
 			}
 		}
 
@@ -1343,8 +1343,7 @@ public class HookHotDeployListener
 
 		Object customTarget = Proxy.newProxyInstance(
 			portletClassLoader, new Class<?>[] {serviceTypeClass},
-			new ContextClassLoaderBeanHandler(
-				customService, portletClassLoader));
+			new ClassLoaderBeanHandler(customService, portletClassLoader));
 
 		TargetSource customTargetSource = new SingletonTargetSource(
 			customTarget);

@@ -15,60 +15,18 @@
 package com.liferay.portal.kernel.bean;
 
 import java.lang.Object;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 /**
  * <a href="ContextClassLoaderBeanHandler.java.html"><b><i>View Source</i></b>
  * </a>
  *
- * @author Brian Wing Shun Chan
+ * @author	   Brian Wing Shun Chan
+ * @deprecated
  */
-public class ContextClassLoaderBeanHandler implements InvocationHandler {
+public class ContextClassLoaderBeanHandler extends ClassLoaderBeanHandler {
 
 	public ContextClassLoaderBeanHandler(Object bean, ClassLoader classLoader) {
-		_bean = bean;
-		_classLoader = classLoader;
+		super(bean, classLoader);
 	}
-
-	public Object getBean() {
-		return _bean;
-	}
-
-	public ClassLoader getClassLoader() {
-		return _classLoader;
-	}
-
-	public Object invoke(Object proxy, Method method, Object[] args)
-		throws Throwable {
-
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		try {
-			if ((_classLoader != null) &&
-				(contextClassLoader != _classLoader)) {
-
-				currentThread.setContextClassLoader(_classLoader);
-			}
-
-			return method.invoke(_bean, args);
-		}
-		catch (InvocationTargetException ite) {
-			throw ite.getTargetException();
-		}
-		finally {
-			if ((_classLoader != null) &&
-				(contextClassLoader != _classLoader)) {
-
-				currentThread.setContextClassLoader(contextClassLoader);
-			}
-		}
-	}
-
-	private Object _bean;
-	private ClassLoader _classLoader;
 
 }

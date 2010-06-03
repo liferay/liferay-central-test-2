@@ -14,7 +14,7 @@
 
 package com.liferay.portal.dao.orm.hibernate;
 
-import com.liferay.portal.kernel.bean.ContextClassLoaderBeanHandler;
+import com.liferay.portal.kernel.bean.ClassLoaderBeanHandler;
 import com.liferay.portal.kernel.dao.orm.Dialect;
 import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.Session;
@@ -98,7 +98,7 @@ public class SessionFactoryImpl implements SessionFactory {
 			liferaySession = (Session)Proxy.newProxyInstance(
 				_sessionFactoryClassLoader,
 				new Class[] {Session.class},
-				new ContextClassLoaderBeanHandler(
+				new ClassLoaderBeanHandler(
 					liferaySession, _sessionFactoryClassLoader));
 		}
 

@@ -14,7 +14,7 @@
 
 package com.liferay.portal.kernel.scheduler;
 
-import com.liferay.portal.kernel.bean.ContextClassLoaderBeanHandler;
+import com.liferay.portal.kernel.bean.ClassLoaderBeanHandler;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
@@ -56,7 +56,7 @@ public class SchedulerEngineUtil {
 
 			schedulerEventListener = (MessageListener)Proxy.newProxyInstance(
 				classLoader, new Class[] {MessageListener.class},
-				new ContextClassLoaderBeanHandler(
+				new ClassLoaderBeanHandler(
 					schedulerEventListener, classLoader));
 		}
 		catch (Exception e) {
