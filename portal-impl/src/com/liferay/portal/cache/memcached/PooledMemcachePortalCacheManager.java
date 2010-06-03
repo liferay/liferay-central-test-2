@@ -48,10 +48,16 @@ public class PooledMemcachePortalCacheManager implements PortalCacheManager {
 			portalCache = new PooledMemcachePortalCache(
 				_memcachedClientFactory, _timeout, _timeoutTimeUnit);
 
+			portalCache.setDebug(_debug);
+			
 			_portalCaches.put(name, portalCache);
 		}
 
 		return portalCache;
+	}
+
+	public void setDebug(boolean debug) {
+		_debug = debug;
 	}
 
 	public void setMemcachedClientPool(
@@ -68,6 +74,7 @@ public class PooledMemcachePortalCacheManager implements PortalCacheManager {
 		_timeoutTimeUnit = TimeUnit.valueOf(timeoutTimeUnit);
 	}
 
+	private boolean _debug;
 	private MemcachedClientFactory _memcachedClientFactory;
 	private Map<String, PortalCache> _portalCaches;
 	private int _timeout;

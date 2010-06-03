@@ -14,6 +14,7 @@
 
 package com.liferay.portal.cache.memcached;
 
+import com.liferay.portal.cache.AbstractPortalCache;
 import com.liferay.portal.kernel.cache.PortalCache;
 
 import java.io.Serializable;
@@ -28,7 +29,8 @@ import net.spy.memcached.MemcachedClientIF;
  *
  * @author Michael C. Han
  */
-public class PooledMemcachePortalCache implements PortalCache {
+public class PooledMemcachePortalCache extends AbstractPortalCache
+	implements PortalCache {
 
 	public PooledMemcachePortalCache(
 		MemcachedClientFactory memcachedClientFactory, int timeout,
@@ -49,10 +51,12 @@ public class PooledMemcachePortalCache implements PortalCache {
 			return null;
 		}
 
+		String processedKey = processKey(key);
+
 		try {
 			Object cachedObject = null;
 
-			Future<Object> future = memcachedClient.asyncGet(key);
+			Future<Object> future = memcachedClient.asyncGet(processedKey);
 
 			try {
 				cachedObject = future.get(_timeout, _timeoutTimeUnit);
@@ -82,8 +86,10 @@ public class PooledMemcachePortalCache implements PortalCache {
 			return;
 		}
 
+		String processedKey = processKey(key);
+
 		try {
-			memcachedClient.set(key, timeToLive, obj);
+			memcachedClient.set(processedKey, timeToLive, obj);
 		}
 		finally {
 			cleanupClient(memcachedClient);
@@ -104,8 +110,10 @@ public class PooledMemcachePortalCache implements PortalCache {
 			return;
 		}
 
+		String processedKey = processKey(key);
+
 		try {
-			memcachedClient.set(key, timeToLive, obj);
+			memcachedClient.set(processedKey, timeToLive, obj);
 		}
 		finally {
 			cleanupClient(memcachedClient);
@@ -122,8 +130,10 @@ public class PooledMemcachePortalCache implements PortalCache {
 			return;
 		}
 
+		String processedKey = processKey(key);
+
 		try {
-			memcachedClient.delete(key);
+			memcachedClient.delete(processedKey);
 		}
 		finally {
 			cleanupClient(memcachedClient);
