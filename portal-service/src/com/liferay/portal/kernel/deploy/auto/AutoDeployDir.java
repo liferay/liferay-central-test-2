@@ -46,7 +46,8 @@ public class AutoDeployDir {
 		_destDir = destDir;
 		_interval = interval;
 		_blacklistThreshold = blacklistThreshold;
-		_listeners = new CopyOnWriteArrayList<AutoDeployListener>(listeners);
+		_autoDeployListeners = new CopyOnWriteArrayList<AutoDeployListener>(
+			listeners);
 		_inProcessFiles = new HashMap<String, IntegerWrapper>();
 		_blacklistFiles = new HashSet<String>();
 	}
@@ -68,7 +69,7 @@ public class AutoDeployDir {
 	}
 
 	public List<AutoDeployListener> getListeners() {
-		return _listeners;
+		return _autoDeployListeners;
 	}
 
 	public String getName() {
@@ -76,7 +77,7 @@ public class AutoDeployDir {
 	}
 
 	public void registerListener(AutoDeployListener listener) {
-		_listeners.add(listener);
+		_autoDeployListeners.add(listener);
 	}
 
 	public void start() {
@@ -127,8 +128,8 @@ public class AutoDeployDir {
 		}
 	}
 
-	public void unregisterListener(AutoDeployListener listener) {
-		_listeners.remove(listener);
+	public void unregisterListener(AutoDeployListener autoDeployListener) {
+		_autoDeployListeners.remove(autoDeployListener);
 	}
 
 	protected void processFile(File file) {
@@ -177,8 +178,8 @@ public class AutoDeployDir {
 		}
 
 		try {
-			for (AutoDeployListener listener : _listeners) {
-				listener.deploy(file);
+			for (AutoDeployListener autoDeployListener : _autoDeployListeners) {
+				autoDeployListener.deploy(file);
 			}
 
 			if (file.delete()) {
@@ -212,9 +213,7 @@ public class AutoDeployDir {
 	protected void scanDirectory() {
 		File[] files = _deployDir.listFiles();
 
-		for (int i = 0; i < files.length; i++) {
-			File file = files[i];
-
+		for (File file : files) {
 			String fileName = file.getName().toLowerCase();
 
 			if ((file.isFile()) &&
@@ -228,13 +227,13 @@ public class AutoDeployDir {
 
 	private static Log _log = LogFactoryUtil.getLog(AutoDeployDir.class);
 
+	private List<AutoDeployListener> _autoDeployListeners;
 	private Set<String> _blacklistFiles;
 	private int _blacklistThreshold;
 	private File _deployDir;
 	private File _destDir;
 	private Map<String, IntegerWrapper> _inProcessFiles;
 	private long _interval;
-	private List<AutoDeployListener> _listeners;
 	private String _name;
 	private AutoDeployScanner _scanner;
 

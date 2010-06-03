@@ -32,12 +32,12 @@ public class AutoDeployException extends PortalException {
 		super(msg);
 	}
 
-	public AutoDeployException(Throwable cause) {
-		super(cause);
-	}
-
 	public AutoDeployException(String msg, Throwable cause) {
 		super(msg, cause);
+	}
+
+	public AutoDeployException(Throwable cause) {
+		super(cause);
 	}
 
 }
