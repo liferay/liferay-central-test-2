@@ -38,8 +38,8 @@ import org.apache.tools.ant.DirectoryScanner;
  */
 public class SourceFormatterHelper {
 
-	public SourceFormatterHelper(boolean useCache) {
-		_useProperties = useCache;
+	public SourceFormatterHelper(boolean useProperties) {
+		_useProperties = useProperties;
 	}
 
 	public void close() throws IOException {
@@ -67,7 +67,7 @@ public class SourceFormatterHelper {
 			new String[] {"_", "_", "_", "_"});
 
 		String propertiesFileName =
-			System.getProperty("java.io.tmpdir") + "/SourceFormatter." +
+			System.getProperty("java.io.tmpdir") + "SourceFormatter." +
 				basedirAbsolutePath;
 
 		_propertiesFile = new File(propertiesFileName);
@@ -108,7 +108,7 @@ public class SourceFormatterHelper {
 			long timestamp = GetterUtil.getLong(
 				_properties.getProperty(fileName));
 
-			if (timestamp > file.lastModified()) {
+			if (timestamp < file.lastModified()) {
 				fileNames.add(fileName);
 
 				_properties.setProperty(
