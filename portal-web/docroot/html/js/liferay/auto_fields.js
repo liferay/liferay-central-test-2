@@ -206,8 +206,7 @@ AUI().add(
 						if (activeRows.size() == 0) {
 							deletedRow.clone();
 						}
-
-						if (activeRows.size() > 0) {
+						else {
 							var historyState = A.bind(deletedRow.set, deletedRow, 'active', true);
 
 							instance._undoManager.add(historyState);
