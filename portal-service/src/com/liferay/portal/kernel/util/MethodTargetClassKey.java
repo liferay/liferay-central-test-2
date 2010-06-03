@@ -58,19 +58,19 @@ public class MethodTargetClassKey {
 
 	public int hashCode() {
 		if (_hashCode == 0) {
-			int hash = 77;
+			int hashCode = 77;
 
 			if (_method != null) {
-				hash += _method.hashCode();
+				hashCode += _method.hashCode();
 			}
 
-			hash = 11 * hash;
+			hashCode = 11 * hashCode;
 
 			if (_targetClass != null) {
-				hash += _targetClass.hashCode();
+				hashCode += _targetClass.hashCode();
 			}
 
-			_hashCode = hash;
+			_hashCode = hashCode;
 		}
 
 		return _hashCode;
