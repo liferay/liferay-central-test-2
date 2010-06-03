@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.audit.AuditMessage;
 import com.liferay.portal.kernel.audit.AuditRouterUtil;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -28,6 +29,7 @@ import com.liferay.portal.kernel.portlet.PortletModeFactory;
 import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.Base64;
@@ -332,13 +334,14 @@ public class LayoutAction extends Action {
 		RequestDispatcher requestDispatcher =
 			servletContext.getRequestDispatcher(path);
 
-		StringServletResponse stringResponse = new StringServletResponse(
-			response);
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
+		PipingServletResponse pipingServletResponse =
+			new PipingServletResponse(response, unsyncStringWriter);
 
-		requestDispatcher.include(request, stringResponse);
+		requestDispatcher.include(request, pipingServletResponse);
 
 		request.setAttribute(
-			WebKeys.LAYOUT_CONTENT, stringResponse.getString());
+			WebKeys.LAYOUT_CONTENT, unsyncStringWriter.getStringBundler());
 	}
 
 	protected void processEvent(
