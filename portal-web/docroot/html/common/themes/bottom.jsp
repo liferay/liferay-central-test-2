@@ -18,15 +18,6 @@
 
 <%-- Portal JavaScript --%>
 
-<c:if test="<%= themeDisplay.isIncludePortletCssJs() %>">
-
-	<%
-	long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/html/js", true);
-	%>
-
-	<script src="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getPathJavaScript() + "/liferay/portlet_css.js", javaScriptLastModified)) %>" type="text/javascript"></script>
-</c:if>
-
 <%-- Portlet CSS References --%>
 
 <%
