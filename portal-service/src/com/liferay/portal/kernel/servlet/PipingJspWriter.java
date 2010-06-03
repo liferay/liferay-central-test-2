@@ -140,24 +140,24 @@ public class PipingJspWriter extends JspWriter {
 		_printWriter.println(string);
 	}
 
-	public void write(char[] cbuf) throws IOException {
-		_printWriter.write(cbuf);
+	public void write(char[] charArray) {
+		_printWriter.write(charArray);
 	}
 
 	public void write(char[] charArray, int offset, int length) {
 		_printWriter.write(charArray, offset, length);
 	}
 
-	public void write(int c) throws IOException {
+	public void write(int c) {
 		_printWriter.write(c);
 	}
 
-	public void write(String str) throws IOException {
-		_printWriter.write(str);
+	public void write(String string) {
+		_printWriter.write(string);
 	}
 
-	public void write(String str, int off, int len) throws IOException {
-		_printWriter.write(str, off, len);
+	public void write(String string, int offset, int length) {
+		_printWriter.write(string, offset, length);
 	}
 
 	private PrintWriter _printWriter;
