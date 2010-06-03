@@ -109,7 +109,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 			long companyId, String portletId, long groupId,
 			long userId, long[] repositoryIds, String keywords, int start,
 			int end)
-			throws SystemException {
+		throws SystemException {
 
 		try {
 			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();

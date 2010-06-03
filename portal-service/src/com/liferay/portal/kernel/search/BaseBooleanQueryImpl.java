@@ -39,7 +39,7 @@ public abstract class BaseBooleanQueryImpl implements BooleanQuery{
 			fields = new String[0];
 		}
 
-		Map<String, List<String>> termFieldsValuesMap = mapTermFieldsValues(
+		Map<String, List<String>> termFieldsValuesMap = getTermFieldsValuesMap(
 			fields, values);
 
 		List<String> valuesList = termFieldsValuesMap.remove("no_field");
@@ -68,45 +68,7 @@ public abstract class BaseBooleanQueryImpl implements BooleanQuery{
 		}
 	}
 
-	protected Map<String, List<String>> mapTermFieldsValues(
-			String[] fields, String values)
-		throws ParseException {
-
-		Map<String, List<String>> termFieldsValuesMap =
-			new HashMap<String, List<String>>();
-
-		for (String field : fields) {
-			List<String> valuesList = new ArrayList<String>();
-
-			values = mapTermFieldValues(
-				field, values, valuesList,
-				"(?i)^.*" + field + ":([\"\'])(.+?)(\\1).*$", "$1$2$3");
-
-			values = mapTermFieldValues(
-				field, values, valuesList,
-				"(?i)^.*" + field + ":([^\\s\"']*).*$", "$1");
-
-			termFieldsValuesMap.put(field, valuesList);
-		}
-
-		values = values.trim();
-
-		List<String> valuesList = new ArrayList<String>();
-
-		if (Validator.isNotNull(values)) {
-			values = mapTermFieldValues(
-				null, values, valuesList,
-				"^[^\"\']*([\"\'])(.+?)(\\1)[^\"\']*$", "$1$2$3");
-
-			valuesList.add(values);
-		}
-
-		termFieldsValuesMap.put("no_field", valuesList);
-
-		return termFieldsValuesMap;
-	}
-
-	protected String mapTermFieldValues(
+	protected String getTermFieldRemainderValues(
 			String field, String values, List<String> valuesList,
 			String pattern, String replacement) {
 
@@ -122,7 +84,7 @@ public abstract class BaseBooleanQueryImpl implements BooleanQuery{
 			field += ":";
 		}
 		else {
-			field = "";
+			field = StringPool.BLANK;
 		}
 
 		while (values.matches(pattern)) {
@@ -138,6 +100,43 @@ public abstract class BaseBooleanQueryImpl implements BooleanQuery{
 		}
 
 		return values;
+	}
+
+	protected Map<String, List<String>> getTermFieldsValuesMap(
+		String[] fields, String values) {
+
+		Map<String, List<String>> termFieldsValuesMap =
+			new HashMap<String, List<String>>();
+
+		for (String field : fields) {
+			List<String> valuesList = new ArrayList<String>();
+
+			values = getTermFieldRemainderValues(
+				field, values, valuesList,
+				"(?i)^.*" + field + ":([\"\'])(.+?)(\\1).*$", "$1$2$3");
+
+			values = getTermFieldRemainderValues(
+				field, values, valuesList,
+				"(?i)^.*" + field + ":([^\\s\"']*).*$", "$1");
+
+			termFieldsValuesMap.put(field, valuesList);
+		}
+
+		values = values.trim();
+
+		List<String> valuesList = new ArrayList<String>();
+
+		if (Validator.isNotNull(values)) {
+			values = getTermFieldRemainderValues(
+				null, values, valuesList,
+				"^[^\"\']*([\"\'])(.+?)(\\1)[^\"\']*$", "$1$2$3");
+
+			valuesList.add(values);
+		}
+
+		termFieldsValuesMap.put("no_field", valuesList);
+
+		return termFieldsValuesMap;
 	}
 
 }
