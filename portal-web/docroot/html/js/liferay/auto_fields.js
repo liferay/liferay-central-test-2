@@ -207,9 +207,11 @@ AUI().add(
 							deletedRow.clone();
 						}
 
-						var historyState = A.bind(deletedRow.set, deletedRow, 'active', true);
+						if (activeRows.size() > 0) {
+							var historyState = A.bind(deletedRow.set, deletedRow, 'active', true);
 
-						instance._undoManager.add(historyState);
+							instance._undoManager.add(historyState);
+						}
 					},
 
 					_syncFields: function() {
