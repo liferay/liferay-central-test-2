@@ -46,6 +46,7 @@ public class DefaultWorkflowInstance implements Serializable, WorkflowInstance {
 	public Date getEndDate() {
 		return _endDate;
 	}
+
 	public WorkflowInstance getParentWorkflowInstance() {
 		return _parentWorkflowInstance;
 	}
