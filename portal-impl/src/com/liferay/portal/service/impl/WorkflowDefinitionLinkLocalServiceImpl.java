@@ -76,7 +76,7 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 
 		try {
 			WorkflowDefinitionLink workflowDefinitionLink =
-				getWorkflowDefinitionLink(companyId, groupId, className, true);
+				getWorkflowDefinitionLink(companyId, groupId, className);
 
 			deleteWorkflowDefinitionLink(workflowDefinitionLink);
 		}
