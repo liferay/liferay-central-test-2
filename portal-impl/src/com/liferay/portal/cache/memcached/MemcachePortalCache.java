@@ -35,9 +35,10 @@ public class MemcachePortalCache
 	extends BasePortalCache implements PortalCache {
 
 	public MemcachePortalCache(
-		MemcachedClientIF memcachedClient, int timeout,
+		String name, MemcachedClientIF memcachedClient, int timeout,
 		TimeUnit timeoutTimeUnit) {
 
+		_cacheName = name;
 		_memcachedClient = memcachedClient;
 		_timeout = timeout;
 		_timeoutTimeUnit = timeoutTimeUnit;
@@ -48,7 +49,7 @@ public class MemcachePortalCache
 	}
 
 	public Object get(String key) {
-		String processedKey = processKey(key);
+		String processedKey = processKey(_cacheName + key);
 
 		Object cachedObject = null;
 
@@ -84,7 +85,7 @@ public class MemcachePortalCache
 	}
 
 	public void put(String key, Object obj, int timeToLive) {
-		String processedKey = processKey(key);
+		String processedKey = processKey(_cacheName + key);
 
 		try {
 			_memcachedClient.set(processedKey, timeToLive, obj);
@@ -101,7 +102,7 @@ public class MemcachePortalCache
 	}
 
 	public void put(String key, Serializable obj, int timeToLive) {
-		String processedKey = processKey(key);
+		String processedKey = processKey(_cacheName + key);
 
 		try {
 			_memcachedClient.set(processedKey, timeToLive, obj);
@@ -114,7 +115,7 @@ public class MemcachePortalCache
 	}
 
 	public void remove(String key) {
-		String processedKey = processKey(key);
+		String processedKey = processKey(_cacheName + key);
 
 		try {
 			_memcachedClient.delete(processedKey);
@@ -137,6 +138,7 @@ public class MemcachePortalCache
 	private static final Log _log = LogFactoryUtil.getLog(
 		MemcachePortalCache.class);
 
+	private String _cacheName;
 	private MemcachedClientIF _memcachedClient;
 	private int _timeout;
 	private TimeUnit _timeoutTimeUnit;
