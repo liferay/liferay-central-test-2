@@ -24,7 +24,7 @@ import java.util.Date;
  *
  * @author Shuyang Zhou
  */
-public abstract class BaseTrigger implements Trigger, Serializable {
+public abstract class BaseTrigger implements Serializable, Trigger {
 
 	public BaseTrigger(
 		String jobName, String groupName, TriggerType triggerType,
