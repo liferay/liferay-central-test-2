@@ -24,7 +24,7 @@
 					var nameRE = new RegExp(config.name + '/liferay-([A-Za-z0-9-]+)-min(\.js)');
 
 					path = path.replace(nameRE, '$1$2');
-					path = path.replace('-', '_');
+					path = path.replace(/-/g, '_');
 
 					config.path = path;
 				}
