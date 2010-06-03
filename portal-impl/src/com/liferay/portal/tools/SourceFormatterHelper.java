@@ -105,14 +105,17 @@ public class SourceFormatterHelper {
 		for (String fileName : fileNamesArray) {
 			File file = new File(fileName);
 
+			String encodedFileName = StringUtil.replace(
+				fileName, StringPool.BACK_SLASH, StringPool.SLASH);
+
 			long timestamp = GetterUtil.getLong(
-				_properties.getProperty(fileName));
+				_properties.getProperty(encodedFileName));
 
 			if (timestamp < file.lastModified()) {
 				fileNames.add(fileName);
 
 				_properties.setProperty(
-					fileName, String.valueOf(file.lastModified()));
+					encodedFileName, String.valueOf(file.lastModified()));
 			}
 		}
 
