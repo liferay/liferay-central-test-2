@@ -57,7 +57,19 @@ public class MethodTargetClassKey {
 	}
 
 	public int hashCode() {
-		return toString().hashCode();
+		if (_hashCode == 0) {
+			int hash = 77;
+			if (_method != null) {
+				hash += _method.hashCode();
+			}
+			hash = 11 * hash;
+			if (_targetClass != null) {
+				hash += _targetClass.hashCode();
+			}
+			_hashCode = hash;
+		}
+
+		return _hashCode;
 	}
 
 	public String toString() {
@@ -96,6 +108,7 @@ public class MethodTargetClassKey {
 		return _toString;
 	}
 
+	private int _hashCode;
 	private Method _method;
 	private Class<?> _targetClass;
 	private String _toString;
