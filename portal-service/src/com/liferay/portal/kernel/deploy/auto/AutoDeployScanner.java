@@ -22,12 +22,12 @@ package com.liferay.portal.kernel.deploy.auto;
  */
 public class AutoDeployScanner extends Thread {
 
-	public AutoDeployScanner(ThreadGroup group, String name,
-							 AutoDeployDir dir) {
+	public AutoDeployScanner(
+		ThreadGroup threadGroup, String name, AutoDeployDir autoDeployDir) {
 
-		super(group, name);
+		super(threadGroup, name);
 
-		_dir = dir;
+		_autoDeployDir = autoDeployDir;
 
 		setContextClassLoader(getClass().getClassLoader());
 		setDaemon(true);
@@ -43,12 +43,12 @@ public class AutoDeployScanner extends Thread {
 
 		while (_started) {
 			try {
-				sleep(_dir.getInterval());
+				sleep(_autoDeployDir.getInterval());
 			}
 			catch (InterruptedException ie) {
 			}
 
-			_dir.scanDirectory();
+			_autoDeployDir.scanDirectory();
 		}
 	}
 
@@ -56,7 +56,7 @@ public class AutoDeployScanner extends Thread {
 		_started = false;
 	}
 
-	private AutoDeployDir _dir;
+	private AutoDeployDir _autoDeployDir;
 	private boolean _started = true;
 
 }

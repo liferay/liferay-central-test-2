@@ -29,8 +29,8 @@ public class AutoDeployUtil {
 		return _instance._getDir(name);
 	}
 
-	public static void registerDir(AutoDeployDir dir) {
-		_instance._registerDir(dir);
+	public static void registerDir(AutoDeployDir autoDeployDir) {
+		_instance._registerDir(autoDeployDir);
 	}
 
 	public static void unregisterDir(String name) {
@@ -38,29 +38,29 @@ public class AutoDeployUtil {
 	}
 
 	private AutoDeployUtil() {
-		_dirs = new HashMap<String, AutoDeployDir>();
+		_autoDeployDirs = new HashMap<String, AutoDeployDir>();
 	}
 
 	private AutoDeployDir _getDir(String name) {
-		return _dirs.get(name);
+		return _autoDeployDirs.get(name);
 	}
 
-	private void _registerDir(AutoDeployDir dir) {
-		_dirs.put(dir.getName(), dir);
+	private void _registerDir(AutoDeployDir autoDeployDir) {
+		_autoDeployDirs.put(autoDeployDir.getName(), autoDeployDir);
 
-		dir.start();
+		autoDeployDir.start();
 	}
 
 	private void _unregisterDir(String name) {
-		AutoDeployDir dir = _dirs.remove(name);
+		AutoDeployDir autoDeployDir = _autoDeployDirs.remove(name);
 
-		if (dir != null) {
-			dir.stop();
+		if (autoDeployDir != null) {
+			autoDeployDir.stop();
 		}
 	}
 
 	private static AutoDeployUtil _instance = new AutoDeployUtil();
 
-	private Map<String, AutoDeployDir> _dirs;
+	private Map<String, AutoDeployDir> _autoDeployDirs;
 
 }
