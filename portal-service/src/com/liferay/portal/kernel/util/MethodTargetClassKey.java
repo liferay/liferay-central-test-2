@@ -58,15 +58,12 @@ public class MethodTargetClassKey {
 
 	public int hashCode() {
 		if (_hashCode == 0) {
-			int hash = 77;
-			if (_method != null) {
-				hash += _method.hashCode();
-			}
-			hash = 11 * hash;
-			if (_targetClass != null) {
-				hash += _targetClass.hashCode();
-			}
-			_hashCode = hash;
+			HashCode hashCode = HashCodeFactoryUtil.getHashCode();
+
+			hashCode.append(_method);
+			hashCode.append(_targetClass);
+
+			_hashCode = hashCode.toHashCode();
 		}
 
 		return _hashCode;
