@@ -67,7 +67,7 @@ public class SourceFormatterHelper {
 			new String[] {"_", "_", "_", "_"});
 
 		String propertiesFileName =
-			System.getProperty("java.io.tmpdir") + "SourceFormatter." +
+			System.getProperty("java.io.tmpdir") + "/SourceFormatter." +
 				basedirAbsolutePath;
 
 		_propertiesFile = new File(propertiesFileName);
