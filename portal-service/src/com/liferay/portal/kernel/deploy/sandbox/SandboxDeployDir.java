@@ -19,6 +19,9 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.io.File;
 
+import java.io.FileFilter;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -78,6 +81,12 @@ public class SandboxDeployDir {
 		}
 
 		if (_interval > 0) {
+
+			_existingDirs = new ArrayList<File>();
+			for (File dir : _listSubdirs()) {
+				_existingDirs.add(dir);
+			}
+
 			try {
 				Thread currentThread = Thread.currentThread();
 
@@ -120,7 +129,7 @@ public class SandboxDeployDir {
 		_sandboxDeployListeners.remove(sandboxDeployListener);
 	}
 
-	protected void processFile(File file) {
+	protected void deployDir(File file) {
 		String fileName = file.getName();
 
 		if (!file.canRead()) {
@@ -151,19 +160,60 @@ public class SandboxDeployDir {
 		}
 	}
 
-	protected void scanDirectory() {
-		File[] files = _deployDir.listFiles();
+	protected void undeployDir(File file) {
+		try {
+			for (SandboxDeployListener sandboxDeployListener :
+					_sandboxDeployListeners) {
 
-		for (File file : files) {
-			if (file.isDirectory()) {
-				processFile(file);
+				sandboxDeployListener.undeploy(file);
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
+	protected void scanDirectory() {
+		File[] currentDirs = _listSubdirs();
+
+		if (currentDirs.length != _existingDirs.size()) {
+			for (File dir : currentDirs) {
+				if (_existingDirs.contains(dir) == false) {
+					_existingDirs.add(dir);
+					deployDir(dir);
+				}
+			}
+		}
+
+		Iterator<File> iterator = _existingDirs.iterator();
+		while (iterator.hasNext()) {
+			File dir = iterator.next();
+			if (dir.exists() == false) {
+				iterator.remove();
+				undeployDir(dir);
 			}
 		}
 	}
 
+	private File[] _listSubdirs() {
+		File[] dirs = _deployDir.listFiles(_dirOnlyFileFilter);
+		if (dirs == null) {
+			dirs = new File[0];
+		}
+		return dirs;
+	}
+
+	private static final FileFilter _dirOnlyFileFilter = new FileFilter() {
+		public boolean accept(File file) {
+			return file.isDirectory();
+		}
+	};
+
+
 	private static Log _log = LogFactoryUtil.getLog(SandboxDeployDir.class);
 
 	private File _deployDir;
+	private List<File> _existingDirs;
 	private long _interval;
 	private String _name;
 	private List<SandboxDeployListener> _sandboxDeployListeners;

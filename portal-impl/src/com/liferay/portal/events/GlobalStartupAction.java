@@ -21,6 +21,10 @@ import com.liferay.portal.kernel.deploy.auto.AutoDeployListener;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
+import com.liferay.portal.kernel.deploy.sandbox.SandboxDeployDir;
+import com.liferay.portal.kernel.deploy.sandbox.SandboxDeployListener;
+import com.liferay.portal.kernel.deploy.sandbox.SandboxDeployThemeListener;
+import com.liferay.portal.kernel.deploy.sandbox.SandboxDeployUtil;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -70,6 +74,13 @@ public class GlobalStartupAction extends SimpleAction {
 			}
 		}
 
+		return list;
+	}
+
+	public static List<SandboxDeployListener> getSandboxDeployListeners() {
+		List<SandboxDeployListener> list =
+			new ArrayList<SandboxDeployListener>();
+		list.add(new SandboxDeployThemeListener());
 		return list;
 	}
 
@@ -152,6 +163,45 @@ public class GlobalStartupAction extends SimpleAction {
 		catch (Exception e) {
 			_log.error(e);
 		}
+
+		// Sandobox deploy
+
+		try {
+			if (PrefsPropsUtil.getBoolean(
+					PropsKeys.SANDBOX_DEPLOY_ENABLED,
+					PropsValues.SANDBOX_DEPLOY_ENABLED)) {
+
+				if (_log.isInfoEnabled()) {
+					_log.info("Registering sandbox deploy directories");
+				}
+
+				File deployDir = new File(
+					PrefsPropsUtil.getString(
+						PropsKeys.SANDBOX_DEPLOY_DIR,
+						PropsValues.SANDBOX_DEPLOY_DIR));
+				long interval = PrefsPropsUtil.getLong(
+					PropsKeys.SANDBOX_DEPLOY_INTERVAL,
+					PropsValues.SANDBOX_DEPLOY_INTERVAL);
+
+				List<SandboxDeployListener> sandboxDeployListeners =
+					getSandboxDeployListeners();
+
+				SandboxDeployDir sandboxDeployDir = new SandboxDeployDir(
+					SandboxDeployDir.DEFAULT_NAME, deployDir, interval,
+					sandboxDeployListeners);
+
+				SandboxDeployUtil.registerDir(sandboxDeployDir);
+			}
+			else {
+				if (_log.isInfoEnabled()) {
+					_log.info("Not registering sandbox deploy directories");
+				}
+			}
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
 
 		// JCR
 

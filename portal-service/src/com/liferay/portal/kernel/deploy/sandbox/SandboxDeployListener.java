@@ -24,6 +24,8 @@ import java.io.File;
  */
 public interface SandboxDeployListener {
 
-	public void deploy(File file) throws SandboxDeployException;
+	public void deploy(File dir) throws SandboxDeployException;
+
+	public void undeploy(File dir) throws SandboxDeployException;
 
 }
