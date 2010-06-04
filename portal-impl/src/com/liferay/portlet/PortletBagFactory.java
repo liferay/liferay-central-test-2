@@ -493,9 +493,7 @@ public class PortletBagFactory {
 		for (Element routeElement : rootElement.elements("route")) {
 			String pattern = routeElement.elementText("pattern");
 
-			Route route = new Route();
-
-			route.setPattern(pattern);
+			Route route = router.addRoute(pattern);
 
 			for (Element defaultParameterElement :
 					routeElement.elements("default-parameter")) {
@@ -505,11 +503,7 @@ public class PortletBagFactory {
 
 				route.addDefaultParameter(name, value);
 			}
-
-			router.addRoute(route);
 		}
-
-		router.init();
 
 		return router;
 	}

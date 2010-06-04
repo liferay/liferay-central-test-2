@@ -29,35 +29,7 @@ import java.util.regex.Pattern;
  */
 public class RoutePart {
 
-	public String getFragmentName() {
-		return _fragmentName;
-	}
-
-	public String getName() {
-		return _name;
-	}
-
-	public String getPattern() {
-		return _pattern.toString();
-	}
-
-	public boolean matches(Map<String, String> parameters) {
-		String value = parameters.get(_name);
-
-		if (value == null) {
-			return false;
-		}
-
-		return matches(value);
-	}
-
-	public boolean matches(String parameter) {
-		Matcher matcher = _pattern.matcher(parameter);
-
-		return matcher.matches();
-	}
-
-	public void setFragment(String fragment) {
+	public RoutePart(String fragment) {
 		fragment = fragment.substring(1, fragment.length() - 1);
 
 		if (Validator.isNull(fragment)) {
@@ -87,6 +59,34 @@ public class RoutePart {
 
 		_fragmentName = StringPool.OPEN_CURLY_BRACE.concat(_name).concat(
 			StringPool.CLOSE_CURLY_BRACE);
+	}
+
+	public String getFragmentName() {
+		return _fragmentName;
+	}
+
+	public String getName() {
+		return _name;
+	}
+
+	public String getPattern() {
+		return _pattern.toString();
+	}
+
+	public boolean matches(Map<String, String> parameters) {
+		String value = parameters.get(_name);
+
+		if (value == null) {
+			return false;
+		}
+
+		return matches(value);
+	}
+
+	public boolean matches(String parameter) {
+		Matcher matcher = _pattern.matcher(parameter);
+
+		return matcher.matches();
 	}
 
 	private static Pattern _defaultPattern = Pattern.compile("[a-zA-Z_]+");

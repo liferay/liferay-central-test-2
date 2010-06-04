@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.util.HttpUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -31,6 +30,30 @@ import java.util.regex.Pattern;
  * @author Brian Wing Shun Chan
  */
 public class Route {
+
+	public Route(String pattern) {
+		_urlPattern = pattern;
+
+		String regex = escapeRegex(pattern);
+
+		Matcher matcher = _fragmentPattern.matcher(pattern);
+
+		while (matcher.find()) {
+			String fragment = matcher.group();
+
+			RoutePart routePart = new RoutePart(fragment);
+
+			_routeParts.add(routePart);
+
+			_urlPattern = _urlPattern.replace(
+				fragment, routePart.getFragmentName());
+
+			regex = regex.replace(
+				escapeRegex(fragment), "(" + routePart.getPattern() + ")");
+		}
+
+		_regexPattern = Pattern.compile(regex);
+	}
 
 	public void addDefaultParameter(String name, String value) {
 		_defaultParameters.put(name, value);
@@ -58,7 +81,7 @@ public class Route {
 			}
 		}
 
-		String url = _patternString;
+		String url = _urlPattern;
 
 		for (RoutePart routePart : _routeParts) {
 			if (!routePart.matches(parameters)) {
@@ -83,38 +106,8 @@ public class Route {
 		return url;
 	}
 
-	public void setPattern(String pattern) {
-		_patternString = pattern;
-		
-		_routeParts = new LinkedList<RoutePart>();
-
-		Matcher matcher = _fragmentPattern.matcher(_patternString);
-		
-		pattern = escapeRegex(pattern);
-		
-		while (matcher.find()) {
-			String fragment = matcher.group();
-
-			RoutePart routePart = new RoutePart();
-
-			routePart.setFragment(fragment);
-
-			_routeParts.add(routePart);
-
-			_patternString = _patternString.replace(
-				fragment, routePart.getFragmentName());
-
-			pattern = pattern.replace(
-				escapeRegex(fragment), "(" + routePart.getPattern() + ")");
-		}
-		
-		System.out.println("Pattern: " + pattern);
-
-		_pattern = Pattern.compile(pattern);
-	}
-
 	public Map<String, String> urlToParameters(String url) {
-		Matcher matcher = _pattern.matcher(url);
+		Matcher matcher = _regexPattern.matcher(url);
 
 		if (!matcher.matches()) {
 			return null;
@@ -146,8 +139,8 @@ public class Route {
 
 	private Map<String, String> _defaultParameters =
 		new HashMap<String, String>();
-	private Pattern _pattern;
-	private String _patternString;
-	private List<RoutePart> _routeParts;
+	private Pattern _regexPattern;
+	private List<RoutePart> _routeParts = new ArrayList<RoutePart>();
+	private String _urlPattern;
 
 }

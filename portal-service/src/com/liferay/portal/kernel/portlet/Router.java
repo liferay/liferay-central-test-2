@@ -34,8 +34,12 @@ import java.util.Map;
  */
 public class Router {
 
-	public void addRoute(Route route) {
+	public Route addRoute(String pattern) {
+		Route route = new Route(pattern);
+
 		_routes.add(route);
+
+		return route;
 	}
 
 	public String parametersToUrl(Map<String, String> parameters)
