@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MapUtil;
-import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -50,6 +49,8 @@ import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
 import com.liferay.portlet.wiki.util.WikiCacheThreadLocal;
 import com.liferay.portlet.wiki.util.WikiCacheUtil;
 import com.liferay.portlet.wiki.util.comparator.PageVersionComparator;
+
+import java.io.InputStream;
 
 import java.util.List;
 import java.util.Map;
@@ -253,21 +254,17 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				List<Element> attachmentEls = pageEl.elements("attachment");
 
-				List<ObjectValuePair<String, byte[]>> files =
-					new ArrayList<ObjectValuePair<String, byte[]>>();
-
 				for (Element attachmentEl : attachmentEls) {
 					String name = attachmentEl.attributeValue("name");
 					String binPath = attachmentEl.attributeValue("bin-path");
 
-					byte[] bytes = context.getZipEntryAsByteArray(binPath);
+					InputStream inputStream = context.getZipEntryAsInputStream(
+						binPath);
 
-					files.add(new ObjectValuePair<String, byte[]>(name, bytes));
-				}
-
-				if (files.size() > 0) {
-					WikiPageLocalServiceUtil.addPageAttachments(
-						nodeId, page.getTitle(), files);
+					WikiPageLocalServiceUtil.addPageAttachment(
+						importedPage.getCompanyId(),
+						importedPage.getAttachmentsDir(),
+						importedPage.getModifiedDate(), name, inputStream);
 				}
 			}
 

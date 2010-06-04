@@ -78,6 +78,8 @@ import com.liferay.portlet.wiki.util.comparator.PageCreateDateComparator;
 import com.liferay.portlet.wiki.util.comparator.PageVersionComparator;
 import com.liferay.util.UniqueList;
 
+import java.io.InputStream;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -221,6 +223,35 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			serviceContext);
 
 		return page;
+	}
+
+	public void addPageAttachment(
+			long companyId, String dirName, Date modifiedDate, String fileName,
+			InputStream inputStream)
+		throws PortalException, SystemException {
+
+		if (inputStream == null) {
+			return;
+		}
+
+		String portletId = CompanyConstants.SYSTEM_STRING;
+		long groupId = GroupConstants.DEFAULT_PARENT_GROUP_ID;
+		long repositoryId = CompanyConstants.SYSTEM;
+
+		try {
+			dlService.addDirectory(companyId, repositoryId, dirName);
+		}
+		catch (DuplicateDirectoryException dde) {
+		}
+
+		try {
+			dlLocalService.addFile(
+				companyId, portletId, groupId, repositoryId,
+				dirName + "/" + fileName, false, 0, StringPool.BLANK,
+				modifiedDate, new ServiceContext(), inputStream);
+		}
+		catch (DuplicateFileException dfe) {
+		}
 	}
 
 	public void addPageAttachments(

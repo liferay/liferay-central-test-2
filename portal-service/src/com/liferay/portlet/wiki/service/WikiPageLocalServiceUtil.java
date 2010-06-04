@@ -153,6 +153,16 @@ public class WikiPageLocalServiceUtil {
 			serviceContext);
 	}
 
+	public static void addPageAttachment(long companyId,
+		java.lang.String dirName, java.util.Date modifiedDate,
+		java.lang.String fileName, java.io.InputStream inputStream)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.addPageAttachment(companyId, dirName, modifiedDate, fileName,
+			inputStream);
+	}
+
 	public static void addPageAttachments(long nodeId, java.lang.String title,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<java.lang.String, byte[]>> files)
 		throws com.liferay.portal.kernel.exception.PortalException,
