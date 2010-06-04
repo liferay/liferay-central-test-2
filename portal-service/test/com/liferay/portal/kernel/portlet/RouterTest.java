@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.portlet;
 
 import com.liferay.portal.kernel.test.TestCase;
+import com.liferay.portal.util.InitUtil;
 
 import java.util.Map;
 
@@ -25,6 +26,10 @@ import java.util.Map;
  * @author Brian Wing Shun Chan
  */
 public class RouterTest extends TestCase {
+
+	public RouterTest() {
+		InitUtil.initWithSpring();
+	}
 
 	public void test() {
 		Router router = new Router();
