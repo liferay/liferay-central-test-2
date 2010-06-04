@@ -238,6 +238,12 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		_portletAppInitialized = false;
 		_strutsBridges = false;
 
+		PortletBagFactory portletBagFactory = new PortletBagFactory();
+
+		portletBagFactory.setClassLoader(portletClassLoader);
+		portletBagFactory.setServletContext(servletContext);
+		portletBagFactory.setWARFile(true);
+
 		Iterator<Portlet> itr = portlets.iterator();
 
 		while (itr.hasNext()) {
@@ -251,8 +257,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				_portletAppInitialized = true;
 			}
 
-			PortletBag portletBag = initPortlet(
-				portlet, servletContext, portletClassLoader);
+			PortletBag portletBag = initPortlet(portlet, portletBagFactory);
 
 			if (portletBag == null) {
 				itr.remove();
@@ -438,12 +443,10 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 	}
 
 	protected PortletBag initPortlet(
-			Portlet portlet, ServletContext servletContext,
-			ClassLoader portletClassLoader)
+			Portlet portlet, PortletBagFactory portletBagFactory)
 		throws Exception {
 
-		PortletBag portletBag = PortletBagFactory.create(
-			portlet, servletContext, portletClassLoader);
+		PortletBag portletBag = portletBagFactory.create(portlet);
 
 		if (portletBag == null) {
 			return null;
