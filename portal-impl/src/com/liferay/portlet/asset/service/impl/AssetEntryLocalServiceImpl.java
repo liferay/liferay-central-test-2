@@ -300,18 +300,18 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	}
 
 	@Async
-	public AssetEntry incrementViewCounter(
+	public void incrementViewCounter(
 			long userId, String className, long classPK)
 		throws PortalException, SystemException {
 
 		// Entry
 
 		if (!PropsValues.ASSET_ENTRY_INCREMENT_VIEW_COUNTER_ENABLED) {
-			return null;
+			return;
 		}
 
 		if (classPK <= 0) {
-			return null;
+			return;
 		}
 
 		long classNameId = PortalUtil.getClassNameId(className);
@@ -331,8 +331,6 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			socialEquityLogLocalService.addEquityLogs(
 				userId, entry.getEntryId(), ActionKeys.VIEW);
 		}
-
-		return entry;
 	}
 
 	public Hits search(

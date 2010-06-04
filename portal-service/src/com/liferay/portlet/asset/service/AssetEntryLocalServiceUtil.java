@@ -228,11 +228,11 @@ public class AssetEntryLocalServiceUtil {
 		return getService().getTopViewedEntries(className, asc, start, end);
 	}
 
-	public static com.liferay.portlet.asset.model.AssetEntry incrementViewCounter(
-		long userId, java.lang.String className, long classPK)
+	public static void incrementViewCounter(long userId,
+		java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().incrementViewCounter(userId, className, classPK);
+		getService().incrementViewCounter(userId, className, classPK);
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,

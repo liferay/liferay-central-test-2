@@ -190,8 +190,8 @@ public interface AssetEntryLocalService {
 		java.lang.String[] className, boolean asc, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.asset.model.AssetEntry incrementViewCounter(
-		long userId, java.lang.String className, long classPK)
+	public void incrementViewCounter(long userId, java.lang.String className,
+		long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
