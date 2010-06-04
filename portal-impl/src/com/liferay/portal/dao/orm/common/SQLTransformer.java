@@ -89,8 +89,8 @@ public class SQLTransformer {
 		return sql;
 	}
 
-	private String _transformMod(String sql) {
-		Matcher matcher = MOD_TRANSFORMER.matcher(sql);
+	private String _replaceMode(String sql) {
+		Matcher matcher = _modPattern.matcher(sql);
 
 		return matcher.replaceAll("$1 % $2");
 	}
@@ -117,7 +117,7 @@ public class SQLTransformer {
 			}
 		}
 		else if (_vendorSQLServer) {
-			newSQL = _transformMod(newSQL);
+			newSQL = _replaceMode(newSQL);
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -140,7 +140,7 @@ public class SQLTransformer {
 
 	private static SQLTransformer _instance = new SQLTransformer();
 
-	private static final Pattern MOD_TRANSFORMER = Pattern.compile(
+	private static Pattern _modPattern = Pattern.compile(
 		"mod\\((.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
 
 	private Map<String, String> _sqlMap;
