@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,8 +35,6 @@ public class SQLTransformer {
 	}
 
 	private SQLTransformer() {
-		_sqlMap = new HashMap<String, String>();
-
 		DB db = DBFactoryUtil.getDB();
 
 		if (db.getType().equals(DB.TYPE_MYSQL)) {
@@ -100,14 +96,7 @@ public class SQLTransformer {
 			return sql;
 		}
 
-		String newSQL = _sqlMap.get(sql);
-
-		if (newSQL != null) {
-			return newSQL;
-		}
-		else {
-			newSQL = sql;
-		}
+		String newSQL = sql;
 
 		if (_vendorMySQL) {
 			DB db = DBFactoryUtil.getDB();
@@ -125,10 +114,6 @@ public class SQLTransformer {
 			_log.debug("Modified SQL " + newSQL);
 		}
 
-		if (!sql.equals(newSQL)) {
-			_sqlMap.put(sql, newSQL);
-		}
-
 		return sql;
 	}
 
@@ -143,7 +128,6 @@ public class SQLTransformer {
 	private static Pattern _modPattern = Pattern.compile(
 		"mod\\((.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
 
-	private Map<String, String> _sqlMap;
 	private boolean _vendorMySQL;
 	private boolean _vendorSQLServer;
 
