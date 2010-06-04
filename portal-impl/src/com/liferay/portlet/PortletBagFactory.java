@@ -114,52 +114,22 @@ public class PortletBagFactory {
 		javax.portlet.Portlet portletInstance =
 			(javax.portlet.Portlet)portletClass.newInstance();
 
-		ConfigurationAction configurationActionInstance = null;
+		ConfigurationAction configurationActionInstance =
+			newConfigurationAction(portlet);
 
-		if (Validator.isNotNull(portlet.getConfigurationActionClass())) {
-			configurationActionInstance = (ConfigurationAction)newInstance(
-				ConfigurationAction.class,
-				portlet.getConfigurationActionClass());
-		}
+		Indexer indexerInstance = newIndexer(portlet);
 
-		Indexer indexerInstance = null;
-
-		if (Validator.isNotNull(portlet.getIndexerClass())) {
-			indexerInstance = (Indexer)newInstance(
-				Indexer.class, portlet.getIndexerClass());
-
-			IndexerRegistryUtil.register(indexerInstance);
-		}
-
-		OpenSearch openSearchInstance = null;
-
-		if (Validator.isNotNull(portlet.getOpenSearchClass())) {
-			openSearchInstance = (OpenSearch)newInstance(
-				OpenSearch.class, portlet.getOpenSearchClass());
-		}
+		OpenSearch openSearchInstance = newOpenSearch(portlet);
 
 		initSchedulers(portlet);
 
-		FriendlyURLMapper friendlyURLMapperInstance = null;
+		FriendlyURLMapper friendlyURLMapperInstance = newFriendlyURLMapper(
+			portlet);
 
-		if (Validator.isNotNull(portlet.getFriendlyURLMapperClass())) {
-			friendlyURLMapperInstance = (FriendlyURLMapper)newInstance(
-				FriendlyURLMapper.class, portlet.getFriendlyURLMapperClass());
-		}
+		URLEncoder urlEncoderInstance = newURLEncoder(portlet);
 
-		URLEncoder urlEncoderInstance = null;
-
-		if (Validator.isNotNull(portlet.getURLEncoderClass())) {
-			urlEncoderInstance = (URLEncoder)newInstance(
-				URLEncoder.class, portlet.getURLEncoderClass());
-		}
-
-		PortletDataHandler portletDataHandlerInstance = null;
-
-		if (Validator.isNotNull(portlet.getPortletDataHandlerClass())) {
-			portletDataHandlerInstance = (PortletDataHandler)newInstance(
-				PortletDataHandler.class, portlet.getPortletDataHandlerClass());
-		}
+		PortletDataHandler portletDataHandlerInstance = newPortletDataHandler(
+			portlet);
 
 		PortletLayoutListener portletLayoutListenerInstance = null;
 
@@ -464,6 +434,41 @@ public class PortletBagFactory {
 		}
 	}
 
+	protected ConfigurationAction newConfigurationAction(Portlet portlet)
+		throws Exception {
+
+		if (Validator.isNull(portlet.getConfigurationActionClass())) {
+			return null;
+		}
+
+		return (ConfigurationAction)newInstance(
+			ConfigurationAction.class, portlet.getConfigurationActionClass());
+	}
+
+	protected FriendlyURLMapper newFriendlyURLMapper(Portlet portlet)
+		throws Exception {
+
+		if (Validator.isNull(portlet.getFriendlyURLMapperClass())) {
+			return null;
+		}
+
+		return (FriendlyURLMapper)newInstance(
+			FriendlyURLMapper.class, portlet.getFriendlyURLMapperClass());
+	}
+
+	protected Indexer newIndexer(Portlet portlet) throws Exception {
+		if (Validator.isNull(portlet.getIndexerClass())) {
+			return null;
+		}
+
+		Indexer indexerInstance = (Indexer)newInstance(
+			Indexer.class, portlet.getIndexerClass());
+
+		IndexerRegistryUtil.register(indexerInstance);
+
+		return indexerInstance;
+	}
+
 	protected Object newInstance(Class<?> interfaceClass, String implClassName)
 		throws Exception {
 
@@ -483,6 +488,35 @@ public class PortletBagFactory {
 
 			return classObj.newInstance();
 		}
+	}
+
+	protected OpenSearch newOpenSearch(Portlet portlet) throws Exception {
+		if (Validator.isNull(portlet.getOpenSearchClass())) {
+			return null;
+		}
+
+		return (OpenSearch)newInstance(
+			OpenSearch.class, portlet.getOpenSearchClass());
+	}
+
+	protected PortletDataHandler newPortletDataHandler(Portlet portlet)
+		throws Exception {
+
+		if (Validator.isNull(portlet.getPortletDataHandlerClass())) {
+			return null;
+		}
+
+		return (PortletDataHandler)newInstance(
+			PortletDataHandler.class, portlet.getPortletDataHandlerClass());
+	}
+
+	protected URLEncoder newURLEncoder(Portlet portlet) throws Exception {
+		if (Validator.isNull(portlet.getURLEncoderClass())) {
+			return null;
+		}
+
+		return (URLEncoder)newInstance(
+			URLEncoder.class, portlet.getURLEncoderClass());
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PortletBagFactory.class);
