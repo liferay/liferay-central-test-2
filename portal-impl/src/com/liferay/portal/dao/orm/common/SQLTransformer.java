@@ -85,7 +85,7 @@ public class SQLTransformer {
 		return sql;
 	}
 
-	private String _replaceMode(String sql) {
+	private String _replaceMod(String sql) {
 		Matcher matcher = _modPattern.matcher(sql);
 
 		return matcher.replaceAll("$1 % $2");
@@ -106,7 +106,7 @@ public class SQLTransformer {
 			}
 		}
 		else if (_vendorSQLServer) {
-			newSQL = _replaceMode(newSQL);
+			newSQL = _replaceMod(newSQL);
 		}
 
 		if (_log.isDebugEnabled()) {
