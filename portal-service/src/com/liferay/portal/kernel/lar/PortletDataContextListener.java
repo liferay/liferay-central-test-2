@@ -15,11 +15,7 @@
 package com.liferay.portal.kernel.lar;
 
 /**
- * <a href="PortletDataContextImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * Listenes to context events.
- * </p>
+ * <a href="PortletDataContextListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Raymond Augé
  */

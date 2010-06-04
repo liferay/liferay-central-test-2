@@ -20,22 +20,28 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 /**
- * <a href="PortletDataContextListenerImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletDataContextListenerImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Raymond Augé
  */
 public class PortletDataContextListenerImpl
 	implements PortletDataContextListener {
 
-	public PortletDataContextListenerImpl(PortletDataContext context) {
+	public PortletDataContextListenerImpl(
+		PortletDataContext portletDataContext) {
 	}
 
 	public void onAddZipEntry(String path) {
-		_log.info("Export: " + path);
+		if (_log.isInfoEnabled()) {
+			_log.info("Export " + path);
+		}
 	}
 
 	public void onGetZipEntry(String path) {
-		_log.info("Import: " + path);
+		if (_log.isInfoEnabled()) {
+			_log.info("Import " + path);
+		}
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

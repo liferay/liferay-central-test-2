@@ -230,10 +230,10 @@ public interface PortletDataContext extends Serializable {
 
 	public void setPlid(long plid);
 
-	public void setPrivateLayout(boolean privateLayout);
-
 	public void setPortetDataContextListener(
 		PortletDataContextListener portletDataContextListener);
+
+	public void setPrivateLayout(boolean privateLayout);
 
 	public void setScopeGroupId(long scopeGroupId);
 
