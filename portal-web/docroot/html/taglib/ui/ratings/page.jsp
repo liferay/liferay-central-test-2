@@ -64,20 +64,23 @@ if (ratingsEntry != null) {
 	<div class="taglib-ratings <%= type %>">
 		<c:choose>
 			<c:when test='<%= type.equals("stars") %>'>
-				<div class="liferay-rating-vote" id="<%= randomNamespace %>ratingStar">
+				<c:choose>
+					<c:when test='<%= themeDisplay.isSignedIn() %>'>
+						<div class="liferay-rating-vote" id="<%= randomNamespace %>ratingStar">
 
-					<%
-					for (int i = 1; i <= numberOfStars; i++) {
-					%>
+							<%
+							for (int i = 1; i <= numberOfStars; i++) {
+							%>
 
-						<aui:input checked="<%= i == yourScore %>" label='<%= (yourScore == i) ? LanguageUtil.format(pageContext, "you-have-rated-this-x-stars-out-of-x", new Object[] {i, numberOfStars}) : LanguageUtil.format(pageContext, "rate-this-x-stars-out-of-x", new Object[] {i, numberOfStars}) %>' name="rating" type="radio" value="<%= i %>" />
+								<aui:input checked="<%= i == yourScore %>" label='<%= (yourScore == i) ? LanguageUtil.format(pageContext, "you-have-rated-this-x-stars-out-of-x", new Object[] {i, numberOfStars}) : LanguageUtil.format(pageContext, "rate-this-x-stars-out-of-x", new Object[] {i, numberOfStars}) %>' name="rating" type="radio" value="<%= i %>" />
 
-					<%
-					}
-					%>
+							<%
+							}
+							%>
 
-				</div>
-
+						</div>
+					</c:when>
+				</c:choose>
 				<div class="liferay-rating-score" id="<%= randomNamespace %>ratingScore"></div>
 			</c:when>
 			<c:when test='<%= type.equals("thumbs") %>'>
@@ -184,32 +187,38 @@ if (ratingsEntry != null) {
 
 		<c:choose>
 			<c:when test='<%= type.equals("stars") %>'>
-				var saveCallback = function(event, id, obj) {
-					var json = this.get('responseData');
-					var label = getLabel('<liferay-ui:message key="average" />', json.totalEntries, json.averageScore);
-					var averageIndex = json.averageScore - 1;
+				<c:choose>
+					<c:when test='<%= themeDisplay.isSignedIn() %>'>
+						var saveCallback = function(event, id, obj) {
+							var json = this.get('responseData');
+							var label = getLabel('<liferay-ui:message key="average" />', json.totalEntries, json.averageScore);
+							var averageIndex = json.averageScore - 1;
 
-					ratingScore.set('label', label);
-					ratingScore.select(averageIndex);
-				};
+							ratingScore.set('label', label);
+							ratingScore.select(averageIndex);
+						};
 
-				var rating = new A.StarRating(
-					{
-						after: {
-							itemSelect: function() {
-								var url = '<%= url %>';
-								var score = this.get('selectedIndex') + 1;
+						var rating = new A.StarRating(
+							{
+								after: {
+									itemSelect: function() {
+										var url = '<%= url %>';
+										var score = this.get('selectedIndex') + 1;
 
-								sendVoteRequest(url, score, saveCallback);
+										sendVoteRequest(url, score, saveCallback);
+									}
+								},
+								render: null,
+								boundingBox: '#<%= randomNamespace %>ratingStar',
+								canReset: false,
+								defaultSelected: <%= yourScore %>,
+								label: '<liferay-ui:message key="your-rating" />'
 							}
-						},
-						render: null,
-						boundingBox: '#<%= randomNamespace %>ratingStar',
-						canReset: false,
-						defaultSelected: <%= yourScore %>,
-						label: '<liferay-ui:message key="your-rating" />'
-					}
-				);
+						);
+
+						rating.render();
+					</c:when>
+				</c:choose>
 
 				var ratingScore = new A.StarRating(
 					{
@@ -224,8 +233,6 @@ if (ratingsEntry != null) {
 				);
 
 				ratingScore.get('boundingBox').on('mouseenter', showScoreTooltip);
-
-				rating.render();
 				ratingScore.render();
 			</c:when>
 			<c:when test='<%= type.equals("thumbs") && themeDisplay.isSignedIn() %>'>
