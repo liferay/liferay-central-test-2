@@ -53,6 +53,7 @@
 <%@ include file="/html/portal/css/taglib/diff_html.jspf" %>
 <%@ include file="/html/portal/css/taglib/discussion.jspf" %>
 <%@ include file="/html/portal/css/taglib/flags.jspf" %>
+<%@ include file="/html/portal/css/taglib/header.jspf" %>
 <%@ include file="/html/portal/css/taglib/icon.jspf" %>
 <%@ include file="/html/portal/css/taglib/icon_help.jspf" %>
 <%@ include file="/html/portal/css/taglib/icon_list.jspf" %>

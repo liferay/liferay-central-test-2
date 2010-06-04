@@ -1,0 +1,38 @@
+<%
+/**
+ * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+%>
+
+<%@ include file="/html/taglib/ui/header/init.jsp" %>
+
+<div class="ui-header <%= (cssClass != null) ? cssClass : "" %>">
+	<c:if test="<%= Validator.isNotNull(backURL) %>">
+
+		<%
+		if (!backURL.startsWith("javascript:")) {
+			backURL = HtmlUtil.escape(PortalUtil.escapeRedirect(backURL));
+		}
+		%>
+
+		<span class="header-back-to">
+			<a href="<%= backURL %>" id="<%= namespace %>TabsBack"><%= Validator.isNotNull(backLabel) ? backLabel : "&laquo;" + LanguageUtil.get(pageContext, "back") %></a>
+		</span>
+	</c:if>
+
+	<h1 class="header-title">
+		<span>
+			<%= LanguageUtil.get(pageContext, title) %>
+		</span>
+	</h1>
+</div>
