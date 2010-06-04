@@ -81,6 +81,7 @@ if (ratingsEntry != null) {
 						</div>
 					</c:when>
 				</c:choose>
+
 				<div class="liferay-rating-score" id="<%= randomNamespace %>ratingScore"></div>
 			</c:when>
 			<c:when test='<%= type.equals("thumbs") %>'>
