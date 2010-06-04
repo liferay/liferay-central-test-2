@@ -55,7 +55,6 @@ import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.ControlPanelEntry;
-import com.liferay.portlet.PortletBagImpl;
 import com.liferay.portlet.PortletQNameUtil;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.expando.model.CustomAttributesDisplay;
@@ -724,10 +723,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
-			getRootPortletId());
+		PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
-		return portletBagImpl.getPortletDataHandlerInstance();
+		return portletBag.getPortletDataHandlerInstance();
 	}
 
 	/**
@@ -866,10 +864,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
-			getRootPortletId());
+		PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
-		return portletBagImpl.getSocialActivityInterpreterInstance();
+		return portletBag.getSocialActivityInterpreterInstance();
 	}
 
 	/**
@@ -904,10 +901,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
-			getRootPortletId());
+		PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
-		return portletBagImpl.getSocialRequestInterpreterInstance();
+		return portletBag.getSocialRequestInterpreterInstance();
 	}
 
 	/**
@@ -958,10 +954,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
-			getRootPortletId());
+		PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
-		return portletBagImpl.getWebDAVStorageInstance();
+		return portletBag.getWebDAVStorageInstance();
 	}
 
 	/**
@@ -993,10 +988,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
-			getRootPortletId());
+		PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
-		return portletBagImpl.getXmlRpcMethodInstance();
+		return portletBag.getXmlRpcMethodInstance();
 	}
 
 	/**
@@ -1078,10 +1072,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
-			getRootPortletId());
+		PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
-		return portletBagImpl.getControlPanelEntryInstance();
+		return portletBag.getControlPanelEntryInstance();
 	}
 
 	/**
@@ -1118,10 +1111,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
-			getRootPortletId());
+		PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
-		return portletBagImpl.getAssetRendererFactoryInstances();
+		return portletBag.getAssetRendererFactoryInstances();
 	}
 
 	/**
@@ -1158,10 +1150,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
-			getRootPortletId());
+		PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
-		return portletBagImpl.getCustomAttributesDisplayInstances();
+		return portletBag.getCustomAttributesDisplayInstances();
 	}
 
 	/**
