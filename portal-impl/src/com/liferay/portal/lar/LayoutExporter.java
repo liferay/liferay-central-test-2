@@ -196,6 +196,9 @@ public class LayoutExporter {
 			companyId, groupId, parameterMap, new HashSet<String>(), startDate,
 			endDate, zipWriter);
 
+		context.setPortetDataContextListener(
+			new PortletDataContextListenerImpl(context));
+
 		// Build compatibility
 
 		Document doc = SAXReaderUtil.createDocument();

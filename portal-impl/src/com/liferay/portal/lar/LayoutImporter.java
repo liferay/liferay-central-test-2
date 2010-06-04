@@ -181,6 +181,9 @@ public class LayoutImporter {
 			companyId, groupId, parameterMap, new HashSet<String>(), strategy,
 			zipReader);
 
+		context.setPortetDataContextListener(
+			new PortletDataContextListenerImpl(context));
+
 		context.setPrivateLayout(privateLayout);
 
 		// Zip

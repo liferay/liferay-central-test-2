@@ -196,6 +196,9 @@ public class PortletExporter {
 			companyId, scopeGroupId, parameterMap, new HashSet<String>(),
 			startDate, endDate, zipWriter);
 
+		context.setPortetDataContextListener(
+			new PortletDataContextListenerImpl(context));
+
 		context.setPlid(plid);
 		context.setOldPlid(plid);
 		context.setScopeLayoutId(scopeLayoutId);

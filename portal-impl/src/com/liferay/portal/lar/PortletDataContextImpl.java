@@ -19,6 +19,7 @@ import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
+import com.liferay.portal.kernel.lar.PortletDataContextListener;
 import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
@@ -364,6 +365,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public void addZipEntry(String path, byte[] bytes) throws SystemException {
+		if (_portletDataContextListener != null) {
+			_portletDataContextListener.onAddZipEntry(path);
+		}
+
 		try {
 			getZipWriter().addEntry(path, bytes);
 		}
@@ -374,6 +379,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public void addZipEntry(String path, InputStream is)
 		throws SystemException {
+
+		if (_portletDataContextListener != null) {
+			_portletDataContextListener.onAddZipEntry(path);
+		}
 
 		try {
 			getZipWriter().addEntry(path, is);
@@ -388,6 +397,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public void addZipEntry(String path, String s) throws SystemException {
+		if (_portletDataContextListener != null) {
+			_portletDataContextListener.onAddZipEntry(path);
+		}
+
 		try {
 			getZipWriter().addEntry(path, s);
 		}
@@ -398,6 +411,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public void addZipEntry(String path, StringBuilder sb)
 		throws SystemException {
+
+		if (_portletDataContextListener != null) {
+			_portletDataContextListener.onAddZipEntry(path);
+		}
 
 		try {
 			getZipWriter().addEntry(path, sb);
@@ -568,10 +585,18 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public byte[] getZipEntryAsByteArray(String path) {
+		if (_portletDataContextListener != null) {
+			_portletDataContextListener.onGetZipEntry(path);
+		}
+
 		return getZipReader().getEntryAsByteArray(path);
 	}
 
 	public InputStream getZipEntryAsInputStream(String path) {
+		if (_portletDataContextListener != null) {
+			_portletDataContextListener.onGetZipEntry(path);
+		}
+
 		return getZipReader().getEntryAsInputStream(path);
 	}
 
@@ -580,6 +605,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public String getZipEntryAsString(String path) {
+		if (_portletDataContextListener != null) {
+			_portletDataContextListener.onGetZipEntry(path);
+		}
+
 		return getZipReader().getEntryAsString(path);
 	}
 
@@ -865,6 +894,12 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_plid = plid;
 	}
 
+	public void setPortetDataContextListener(
+		PortletDataContextListener portletDataContextListener) {
+
+		_portletDataContextListener = portletDataContextListener;
+	}
+
 	public void setPrivateLayout(boolean privateLayout) {
 		_privateLayout = privateLayout;
 	}
@@ -1011,6 +1046,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private Map<String, List<KeyValuePair>> _permissionsMap =
 		new HashMap<String, List<KeyValuePair>>();
 	private long _plid;
+	private PortletDataContextListener _portletDataContextListener;
 	private Set<String> _primaryKeys;
 	private boolean _privateLayout;
 	private Map<String, List<RatingsEntry>> _ratingsEntriesMap =

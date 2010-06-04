@@ -232,6 +232,9 @@ public interface PortletDataContext extends Serializable {
 
 	public void setPrivateLayout(boolean privateLayout);
 
+	public void setPortetDataContextListener(
+		PortletDataContextListener portletDataContextListener);
+
 	public void setScopeGroupId(long scopeGroupId);
 
 	public void setScopeLayoutId(long scopeLayoutId);
