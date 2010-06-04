@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.deploy.sandbox.SandboxDeployDir;
 import com.liferay.portal.kernel.deploy.sandbox.SandboxDeployListener;
-import com.liferay.portal.kernel.deploy.sandbox.SandboxDeployThemeListener;
 import com.liferay.portal.kernel.deploy.sandbox.SandboxDeployUtil;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.log.Log;
@@ -52,62 +51,89 @@ import java.util.List;
 public class GlobalStartupAction extends SimpleAction {
 
 	public static List<AutoDeployListener> getAutoDeployListeners() {
-		List<AutoDeployListener> list = new ArrayList<AutoDeployListener>();
+		List<AutoDeployListener> autoDeployListeners =
+			new ArrayList<AutoDeployListener>();
 
-		String[] autoDeployListeners =
-			PropsUtil.getArray(PropsKeys.AUTO_DEPLOY_LISTENERS);
+		String[] autoDeployListenerClassNames = PropsUtil.getArray(
+			PropsKeys.AUTO_DEPLOY_LISTENERS);
 
-		for (int i = 0; i < autoDeployListeners.length; i++) {
+		for (String autoDeployListenerClassName :
+				autoDeployListenerClassNames) {
+
 			try {
 				if (_log.isDebugEnabled()) {
-					_log.debug("Instantiating " + autoDeployListeners[i]);
+					_log.debug("Instantiating " + autoDeployListenerClassName);
 				}
 
 				AutoDeployListener autoDeployListener =
 					(AutoDeployListener)Class.forName(
-						autoDeployListeners[i]).newInstance();
+						autoDeployListenerClassName).newInstance();
 
-				list.add(autoDeployListener);
+				autoDeployListeners.add(autoDeployListener);
 			}
 			catch (Exception e) {
 				_log.error(e);
 			}
 		}
 
-		return list;
-	}
-
-	public static List<SandboxDeployListener> getSandboxDeployListeners() {
-		List<SandboxDeployListener> list =
-			new ArrayList<SandboxDeployListener>();
-		list.add(new SandboxDeployThemeListener());
-		return list;
+		return autoDeployListeners;
 	}
 
 	public static List<HotDeployListener> getHotDeployListeners() {
-		List<HotDeployListener> list = new ArrayList<HotDeployListener>();
+		List<HotDeployListener> hotDeployListeners =
+			new ArrayList<HotDeployListener>();
 
-		String[] hotDeployListeners =
-			PropsUtil.getArray(PropsKeys.HOT_DEPLOY_LISTENERS);
+		String[] hotDeployListenerClassNames = PropsUtil.getArray(
+			PropsKeys.HOT_DEPLOY_LISTENERS);
 
-		for (int i = 0; i < hotDeployListeners.length; i++) {
+		for (String hotDeployListenerClassName : hotDeployListenerClassNames) {
 			try {
 				if (_log.isDebugEnabled()) {
-					_log.debug("Instantiating " + hotDeployListeners[i]);
+					_log.debug("Instantiating " + hotDeployListenerClassName);
 				}
 
 				HotDeployListener hotDeployListener =
 					(HotDeployListener)Class.forName(
-						hotDeployListeners[i]).newInstance();
+						hotDeployListenerClassName).newInstance();
 
-				list.add(hotDeployListener);
+				hotDeployListeners.add(hotDeployListener);
 			}
 			catch (Exception e) {
 				_log.error(e);
 			}
 		}
 
-		return list;
+		return hotDeployListeners;
+	}
+
+	public static List<SandboxDeployListener> getSandboxDeployListeners() {
+		List<SandboxDeployListener> sandboxDeployListeners =
+			new ArrayList<SandboxDeployListener>();
+
+		String[] sandboxDeployListenerClassNames = PropsUtil.getArray(
+			PropsKeys.SANDBOX_DEPLOY_LISTENERS);
+
+		for (String sandboxDeployListenerClassName :
+				sandboxDeployListenerClassNames) {
+
+			try {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Instantiating " + sandboxDeployListenerClassName);
+				}
+
+				SandboxDeployListener sandboxDeployListener =
+					(SandboxDeployListener)Class.forName(
+						sandboxDeployListenerClassName).newInstance();
+
+				sandboxDeployListeners.add(sandboxDeployListener);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return sandboxDeployListeners;
 	}
 
 	public void run(String[] ids) {
@@ -201,7 +227,6 @@ public class GlobalStartupAction extends SimpleAction {
 		catch (Exception e) {
 			_log.error(e);
 		}
-
 
 		// JCR
 

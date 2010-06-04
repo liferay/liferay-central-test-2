@@ -14,13 +14,13 @@
 
 package com.liferay.portal.kernel.deploy.sandbox;
 
+import com.liferay.portal.kernel.io.DirectoryFilter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 
 import java.io.File;
 
-import java.io.FileFilter;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -81,11 +81,8 @@ public class SandboxDeployDir {
 		}
 
 		if (_interval > 0) {
-
-			_existingDirs = new ArrayList<File>();
-			for (File dir : _listSubdirs()) {
-				_existingDirs.add(dir);
-			}
+			_existingDirs = ListUtil.fromArray(
+				_deployDir.listFiles(_directoryFilter));
 
 			try {
 				Thread currentThread = Thread.currentThread();
@@ -160,6 +157,32 @@ public class SandboxDeployDir {
 		}
 	}
 
+	protected void scanDirectory() {
+		File[] currentDirs = _deployDir.listFiles(_directoryFilter);
+
+		if (currentDirs.length != _existingDirs.size()) {
+			for (File dir : currentDirs) {
+				if (!_existingDirs.contains(dir)) {
+					_existingDirs.add(dir);
+
+					deployDir(dir);
+				}
+			}
+		}
+
+		Iterator<File> itr = _existingDirs.iterator();
+
+		while (itr.hasNext()) {
+			File dir = itr.next();
+
+			if (!dir.exists()) {
+				itr.remove();
+
+				undeployDir(dir);
+			}
+		}
+	}
+
 	protected void undeployDir(File file) {
 		try {
 			for (SandboxDeployListener sandboxDeployListener :
@@ -173,46 +196,10 @@ public class SandboxDeployDir {
 		}
 	}
 
-	protected void scanDirectory() {
-		File[] currentDirs = _listSubdirs();
-
-		if (currentDirs.length != _existingDirs.size()) {
-			for (File dir : currentDirs) {
-				if (_existingDirs.contains(dir) == false) {
-					_existingDirs.add(dir);
-					deployDir(dir);
-				}
-			}
-		}
-
-		Iterator<File> iterator = _existingDirs.iterator();
-		while (iterator.hasNext()) {
-			File dir = iterator.next();
-			if (dir.exists() == false) {
-				iterator.remove();
-				undeployDir(dir);
-			}
-		}
-	}
-
-	private File[] _listSubdirs() {
-		File[] dirs = _deployDir.listFiles(_dirOnlyFileFilter);
-		if (dirs == null) {
-			dirs = new File[0];
-		}
-		return dirs;
-	}
-
-	private static final FileFilter _dirOnlyFileFilter = new FileFilter() {
-		public boolean accept(File file) {
-			return file.isDirectory();
-		}
-	};
-
-
 	private static Log _log = LogFactoryUtil.getLog(SandboxDeployDir.class);
 
 	private File _deployDir;
+	private DirectoryFilter _directoryFilter = new DirectoryFilter();
 	private List<File> _existingDirs;
 	private long _interval;
 	private String _name;

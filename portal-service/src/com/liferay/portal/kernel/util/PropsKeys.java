@@ -1317,6 +1317,8 @@ public interface PropsKeys {
 
 	public static final String SANDBOX_DEPLOY_INTERVAL = "sandbox.deploy.interval";
 
+	public static final String SANDBOX_DEPLOY_LISTENERS = "sandbox.deploy.listeners";
+
 	public static final String SANITIZER_IMPL = "sanitizer.impl";
 
 	public static final String SC_IMAGE_MAX_SIZE = "sc.image.max.size";
