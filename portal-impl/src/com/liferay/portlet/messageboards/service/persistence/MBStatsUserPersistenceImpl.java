@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -1659,8 +1660,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 				List<ModelListener<MBStatsUser>> listenersList = new ArrayList<ModelListener<MBStatsUser>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener<MBStatsUser>)Class.forName(
-							listenerClassName).newInstance());
+					listenersList.add((ModelListener<MBStatsUser>)InstanceFactory.newInstance(
+							listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

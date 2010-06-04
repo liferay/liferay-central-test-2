@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -1293,8 +1294,8 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 				List<ModelListener<ShoppingCart>> listenersList = new ArrayList<ModelListener<ShoppingCart>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener<ShoppingCart>)Class.forName(
-							listenerClassName).newInstance());
+					listenersList.add((ModelListener<ShoppingCart>)InstanceFactory.newInstance(
+							listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

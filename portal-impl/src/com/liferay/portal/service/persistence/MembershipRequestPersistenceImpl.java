@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -1448,8 +1449,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 				List<ModelListener<MembershipRequest>> listenersList = new ArrayList<ModelListener<MembershipRequest>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener<MembershipRequest>)Class.forName(
-							listenerClassName).newInstance());
+					listenersList.add((ModelListener<MembershipRequest>)InstanceFactory.newInstance(
+							listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

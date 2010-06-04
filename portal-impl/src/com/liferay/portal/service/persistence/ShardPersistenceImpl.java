@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -850,8 +851,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 				List<ModelListener<Shard>> listenersList = new ArrayList<ModelListener<Shard>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener<Shard>)Class.forName(
-							listenerClassName).newInstance());
+					listenersList.add((ModelListener<Shard>)InstanceFactory.newInstance(
+							listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

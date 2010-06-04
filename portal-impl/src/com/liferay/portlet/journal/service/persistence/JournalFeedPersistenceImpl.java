@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -1814,8 +1815,8 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 				List<ModelListener<JournalFeed>> listenersList = new ArrayList<ModelListener<JournalFeed>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener<JournalFeed>)Class.forName(
-							listenerClassName).newInstance());
+					listenersList.add((ModelListener<JournalFeed>)InstanceFactory.newInstance(
+							listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

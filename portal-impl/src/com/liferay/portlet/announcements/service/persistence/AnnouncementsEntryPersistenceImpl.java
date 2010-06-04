@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -1886,8 +1887,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 				List<ModelListener<AnnouncementsEntry>> listenersList = new ArrayList<ModelListener<AnnouncementsEntry>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener<AnnouncementsEntry>)Class.forName(
-							listenerClassName).newInstance());
+					listenersList.add((ModelListener<AnnouncementsEntry>)InstanceFactory.newInstance(
+							listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

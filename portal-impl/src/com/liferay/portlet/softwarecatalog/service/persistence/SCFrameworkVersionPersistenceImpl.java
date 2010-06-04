@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -2062,8 +2063,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 				List<ModelListener<SCFrameworkVersion>> listenersList = new ArrayList<ModelListener<SCFrameworkVersion>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener<SCFrameworkVersion>)Class.forName(
-							listenerClassName).newInstance());
+					listenersList.add((ModelListener<SCFrameworkVersion>)InstanceFactory.newInstance(
+							listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

@@ -65,7 +65,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="feedURL" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tagURL" type="tns:string"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.asset.portlet.liferay.com" xmlns:rtns="http://model.asset.portlet.liferay.com" name="incrementViewCounter" qname="operNS:incrementViewCounter" returnQName="incrementViewCounterReturn" returnType="rtns:AssetEntrySoap" soapAction="">
+		<operation xmlns:operNS="urn:http.service.asset.portlet.liferay.com" name="incrementViewCounter" qname="operNS:incrementViewCounter" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
 		</operation>

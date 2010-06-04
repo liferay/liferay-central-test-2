@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -1959,8 +1960,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 				List<ModelListener<JournalArticleImage>> listenersList = new ArrayList<ModelListener<JournalArticleImage>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener<JournalArticleImage>)Class.forName(
-							listenerClassName).newInstance());
+					listenersList.add((ModelListener<JournalArticleImage>)InstanceFactory.newInstance(
+							listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);
