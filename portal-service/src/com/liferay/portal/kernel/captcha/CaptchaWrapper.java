@@ -31,6 +31,7 @@ public class CaptchaWrapper implements Captcha {
 
 	public CaptchaWrapper(Captcha captcha) {
 		_captcha = captcha;
+		_originalCaptcha = captcha;
 	}
 
 	public void check(HttpServletRequest request) throws CaptchaTextException {
@@ -69,6 +70,16 @@ public class CaptchaWrapper implements Captcha {
 		_captcha.serveImage(portletRequest, portletResponse);
 	}
 
+	public void setCaptcha(Captcha captcha) {
+		if (captcha == null) {
+			_captcha = _originalCaptcha;
+		}
+		else {
+			_captcha = captcha;
+		}
+	}
+
 	private Captcha _captcha;
+	private Captcha _originalCaptcha;
 
 }

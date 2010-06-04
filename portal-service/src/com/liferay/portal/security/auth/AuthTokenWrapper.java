@@ -27,6 +27,7 @@ public class AuthTokenWrapper implements AuthToken {
 
 	public AuthTokenWrapper(AuthToken authToken) {
 		_authToken = authToken;
+		_originalAuthToken = authToken;
 	}
 
 	public void check(HttpServletRequest request) throws PortalException {
@@ -43,6 +44,16 @@ public class AuthTokenWrapper implements AuthToken {
 		return _authToken.getToken(request, plid, portletId);
 	}
 
+	public void setAuthToken(AuthToken authToken) {
+		if (authToken == null) {
+			_authToken = _originalAuthToken;
+		}
+		else {
+			_authToken = authToken;
+		}
+	}
+
 	private AuthToken _authToken;
+	private AuthToken _originalAuthToken;
 
 }

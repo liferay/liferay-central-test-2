@@ -17,6 +17,9 @@ package com.liferay.portal.deploy.hot;
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.bean.ClassLoaderBeanHandler;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.captcha.Captcha;
+import com.liferay.portal.kernel.captcha.CaptchaUtil;
+import com.liferay.portal.kernel.captcha.CaptchaWrapper;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployDir;
@@ -61,6 +64,9 @@ import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.security.auth.AuthFailure;
 import com.liferay.portal.security.auth.AuthPipeline;
+import com.liferay.portal.security.auth.AuthToken;
+import com.liferay.portal.security.auth.AuthTokenUtil;
+import com.liferay.portal.security.auth.AuthTokenWrapper;
 import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.security.auth.AutoLogin;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
@@ -135,10 +141,12 @@ public class HookHotDeployListener
 		"application.startup.events",
 		"auth.failure",
 		"auth.max.failures",
+		"auth.token.impl",
 		"auth.pipeline.post",
 		"auth.pipeline.pre",
 		"auto.login.hooks",
 		"captcha.check.portal.create_account",
+		"captcha.engine.impl",
 		"control.panel.entry.class.default",
 		"convert.processes",
 		"default.landing.page.path",
@@ -276,6 +284,20 @@ public class HookHotDeployListener
 		}
 
 		resetPortalProperties(servletContextName, portalProperties, false);
+
+		if (portalProperties.containsKey(PropsKeys.AUTH_TOKEN_IMPL)) {
+			AuthTokenWrapper authTokenWrapper =
+				(AuthTokenWrapper)AuthTokenUtil.getAuthToken();
+
+			authTokenWrapper.setAuthToken(null);
+		}
+
+		if (portalProperties.containsKey(PropsKeys.CAPTCHA_ENGINE_IMPL)) {
+			CaptchaWrapper captchaWrapper =
+				(CaptchaWrapper)CaptchaUtil.getCaptcha();
+
+			captchaWrapper.setCaptcha(null);
+		}
 
 		if (portalProperties.containsKey(
 				PropsKeys.CONTROL_PANEL_DEFAULT_ENTRY_CLASS)) {
@@ -1149,6 +1171,32 @@ public class HookHotDeployListener
 		}
 
 		resetPortalProperties(servletContextName, portalProperties, true);
+
+		if (portalProperties.containsKey(PropsKeys.AUTH_TOKEN_IMPL)) {
+			String authTokenClassName = portalProperties.getProperty(
+				PropsKeys.AUTH_TOKEN_IMPL);
+
+			AuthToken authToken = (AuthToken)newInstance(
+				portletClassLoader, AuthToken.class, authTokenClassName);
+
+			AuthTokenWrapper authTokenWrapper =
+				(AuthTokenWrapper)AuthTokenUtil.getAuthToken();
+
+			authTokenWrapper.setAuthToken(authToken);
+		}
+
+		if (portalProperties.containsKey(PropsKeys.CAPTCHA_ENGINE_IMPL)) {
+			String captchaClassName = portalProperties.getProperty(
+				PropsKeys.CAPTCHA_ENGINE_IMPL);
+
+			Captcha captcha = (Captcha)newInstance(
+				portletClassLoader, Captcha.class, captchaClassName);
+
+			CaptchaWrapper captchaWrapper =
+				(CaptchaWrapper)CaptchaUtil.getCaptcha();
+
+			captchaWrapper.setCaptcha(captcha);
+		}
 
 		if (portalProperties.containsKey(
 				PropsKeys.CONTROL_PANEL_DEFAULT_ENTRY_CLASS)) {
