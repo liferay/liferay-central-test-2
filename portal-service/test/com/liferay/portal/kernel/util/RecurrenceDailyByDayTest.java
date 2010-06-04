@@ -14,21 +14,21 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.cal.DayAndPosition;
 import com.liferay.portal.kernel.cal.Duration;
 import com.liferay.portal.kernel.cal.Recurrence;
 
 import java.util.Calendar;
 
 /**
- * <a href="RecurrenceDailyTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="RecurrenceDailyByDayTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Douglas Wong
  */
-public class RecurrenceDailyTest extends RecurrenceTestCase {
+public class RecurrenceDailyByDayTest extends RecurrenceTestCase {
 
 	public void testDtStart() throws Exception {
-		Recurrence recurrence = _getRecurrence(
-			_dtStart, DURATION_ONE_HOUR, 2);
+		Recurrence recurrence = _getRecurrence(_dtStart, DURATION_ONE_HOUR);
 
 		Calendar beforeDtStart = getCalendar(2008, FEBRUARY, 5, 22, 9);
 
@@ -46,8 +46,7 @@ public class RecurrenceDailyTest extends RecurrenceTestCase {
 	}
 
 	public void testRecurrence() throws Exception {
-		Recurrence recurrence = _getRecurrence(
-			_dtStart, DURATION_ONE_HOUR, 1);
+		Recurrence recurrence = _getRecurrence(_dtStart, DURATION_ONE_HOUR);
 
 		Calendar beforeRecurrence = getCalendar(2008, FEBRUARY, 5, 22, 9);
 
@@ -56,8 +55,8 @@ public class RecurrenceDailyTest extends RecurrenceTestCase {
 		Calendar duringRecurrence1 = getCalendar(2008, FEBRUARY, 5, 22, 10);
 		Calendar duringRecurrence2 = getCalendar(2008, FEBRUARY, 6, 22, 10);
 		Calendar duringRecurrence3 = getCalendar(2008, FEBRUARY, 8, 22, 10);
-		Calendar duringRecurrence4 = getCalendar(2008, FEBRUARY, 9, 22, 10);
-		Calendar duringRecurrence5 = getCalendar(2008, FEBRUARY, 10, 22, 10);
+		Calendar duringRecurrence4 = getCalendar(2008, FEBRUARY, 11, 22, 10);
+		Calendar duringRecurrence5 = getCalendar(2008, FEBRUARY, 12, 22, 10);
 		Calendar duringRecurrence6 = getCalendar(2008, FEBRUARY, 15, 22, 10);
 
 		assertRecurrenceEquals(true, recurrence, duringRecurrence1);
@@ -68,13 +67,20 @@ public class RecurrenceDailyTest extends RecurrenceTestCase {
 		assertRecurrenceEquals(true, recurrence, duringRecurrence6);
 
 		Calendar afterRecurrence = getCalendar(2008, FEBRUARY, 5, 23, 10);
+		Calendar duringWeekend1 = getCalendar(2008, FEBRUARY, 9, 22, 10);
+		Calendar duringWeekend2 = getCalendar(2008, FEBRUARY, 10, 22, 10);
+		Calendar duringWeekend3 = getCalendar(2008, FEBRUARY, 16, 22, 10);
+		Calendar duringWeekend4 = getCalendar(2008, FEBRUARY, 17, 22, 10);
 
 		assertRecurrenceEquals(false, recurrence, afterRecurrence);
+		assertRecurrenceEquals(false, recurrence, duringWeekend1);
+		assertRecurrenceEquals(false, recurrence, duringWeekend2);
+		assertRecurrenceEquals(false, recurrence, duringWeekend3);
+		assertRecurrenceEquals(false, recurrence, duringWeekend4);
 	}
 
 	public void testRecurrenceCrossDates() throws Exception {
-		Recurrence recurrence = _getRecurrence(
-			_dtStart, DURATION_TWO_HOURS, 1);
+		Recurrence recurrence = _getRecurrence(_dtStart, DURATION_TWO_HOURS);
 
 		Calendar duringRecurrence = getCalendar(2008, FEBRUARY, 6, 0, 9);
 
@@ -85,24 +91,8 @@ public class RecurrenceDailyTest extends RecurrenceTestCase {
 		assertRecurrenceEquals(false, recurrence, afterRecurrence);
 	}
 
-	public void testRecurrenceWithInterval() throws Exception {
-		Recurrence recurrence = _getRecurrence(
-			_dtStart, DURATION_ONE_HOUR, 2);
-
-		Calendar duringRecurrence1 = getCalendar(2008, FEBRUARY, 5, 22, 15);
-		Calendar duringRecurrence2 = getCalendar(2008, FEBRUARY, 6, 22, 15);
-		Calendar duringRecurrence3 = getCalendar(2008, FEBRUARY, 7, 22, 15);
-		Calendar duringRecurrence4 = getCalendar(2008, FEBRUARY, 8, 22, 15);
-
-		assertRecurrenceEquals(true, recurrence, duringRecurrence1);
-		assertRecurrenceEquals(false, recurrence, duringRecurrence2);
-		assertRecurrenceEquals(true, recurrence, duringRecurrence3);
-		assertRecurrenceEquals(false, recurrence, duringRecurrence4);
-	}
-
 	public void testRecurrenceWithUntilDate() throws Exception {
-		Recurrence recurrence = _getRecurrence(
-			_dtStart, DURATION_ONE_HOUR, 1);
+		Recurrence recurrence = _getRecurrence(_dtStart, DURATION_ONE_HOUR);
 
 		recurrence.setUntil(getCalendar(2008, FEBRUARY, 6, 22, 0));
 
@@ -119,12 +109,19 @@ public class RecurrenceDailyTest extends RecurrenceTestCase {
 		2008, FEBRUARY, 5, 22, 10);
 
 	private static Recurrence _getRecurrence(
-		Calendar dtStart, Duration duration, int interval) {
+		Calendar dtStart, Duration duration) {
 
 		Recurrence recurrence = new Recurrence(
 			dtStart, duration, Recurrence.DAILY);
 
-		recurrence.setInterval(interval);
+		DayAndPosition[] days = {
+			new DayAndPosition(MONDAY, 0),
+			new DayAndPosition(TUESDAY, 0),
+			new DayAndPosition(WEDNESDAY, 0),
+			new DayAndPosition(THURSDAY, 0),
+			new DayAndPosition(FRIDAY, 0)};
+
+		recurrence.setByDay(days);
 
 		return recurrence;
 	}

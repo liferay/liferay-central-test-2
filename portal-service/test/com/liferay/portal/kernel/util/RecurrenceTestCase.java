@@ -38,12 +38,6 @@ public abstract class RecurrenceTestCase extends TestCase {
 
 	public static final int FRIDAY = Calendar.FRIDAY;
 
-	public static final int HOUR_AFTER = 12;
-
-	public static final int HOUR_BEFORE = 11;
-
-	public static final int HOUR_DURING = 11;
-
 	public static final int JANUARY = Calendar.JANUARY;
 
 	public static final int JULY = Calendar.JULY;
@@ -53,12 +47,6 @@ public abstract class RecurrenceTestCase extends TestCase {
 	public static final int MARCH = Calendar.MARCH;
 
 	public static final int MAY = Calendar.MAY;
-
-	public static final int MINUTE_AFTER = 22;
-
-	public static final int MINUTE_BEFORE = 20;
-
-	public static final int MINUTE_DURING = 21;
 
 	public static final int MONDAY = Calendar.MONDAY;
 
@@ -78,77 +66,24 @@ public abstract class RecurrenceTestCase extends TestCase {
 
 	public static final int WEDNESDAY = Calendar.WEDNESDAY;
 
-	public abstract void testByDay() throws Exception;
+	protected static final Duration DURATION_ONE_HOUR = getDuration(
+		0, 0, 1, 0, 0);
 
-	public abstract void testByDayAndMonth() throws Exception;
+	protected static final Duration DURATION_TWO_HOURS = getDuration(
+		0, 0, 2, 0, 0);
 
-	public abstract void testByDayAndMonthAndYearDay() throws Exception;
+	protected static final Duration DURATION_CROSS_WEEK = getDuration(
+		0, 8, 0, 0, 0);
 
-	public abstract void testByDayAndMonthDay() throws Exception;
+	protected static void assertRecurrenceEquals(
+		boolean expected, Recurrence recurrence, Calendar calendar) {
 
-	public abstract void testByDayAndMonthDayAndMonth() throws Exception;
-
-	public abstract void testByDayAndMonthDayAndYearDay() throws Exception;
-
-	public abstract void testByDayAndWeekNo() throws Exception;
-
-	public abstract void testByDayAndWeekNoAndMonth() throws Exception;
-
-	public abstract void testByDayAndWeekNoAndMonthDay() throws Exception;
-
-	public abstract void testByDayAndWeekNoAndYearDay() throws Exception;
-
-	public abstract void testByDayAndYearDay() throws Exception;
-
-	public abstract void testByMonth() throws Exception;
-
-	public abstract void testByMonthAndYearDay() throws Exception;
-
-	public abstract void testByMonthDay() throws Exception;
-
-	public abstract void testByMonthDayAndMonth() throws Exception;
-
-	public abstract void testByMonthDayAndMonthAndYearDay() throws Exception;
-
-	public abstract void testByMonthDayAndYearDay() throws Exception;
-
-	public abstract void testByWeekNo() throws Exception;
-
-	public abstract void testByWeekNoAndMonth() throws Exception;
-
-	public abstract void testByWeekNoAndMonthAndYearDay() throws Exception;
-
-	public abstract void testByWeekNoAndMonthDay() throws Exception;
-
-	public abstract void testByWeekNoAndMonthDayAndMonth() throws Exception;
-
-	public abstract void testByWeekNoAndMonthDayAndYearDay()
-		throws Exception;
-
-	public abstract void testByWeekNoAndYearDay() throws Exception;
-
-	public abstract void testByYearDay() throws Exception;
-
-	protected void assertIsInRecurrence(
-			boolean expected, Recurrence recurrence, int year, int month,
-			int date)
-		throws Exception {
-
-		assertEquals(
-			false,
-			recurrence.isInRecurrence(
-				getCalendarBeforeTime(year, month, date)));
 		assertEquals(
 			expected,
-			recurrence.isInRecurrence(
-				getCalendarDuringTime(year, month, date)));
-		assertEquals(
-			false,
-			recurrence.isInRecurrence(
-				getCalendarAfterTime(year, month, date)));
+			recurrence.isInRecurrence(calendar));
 	}
 
-	protected Calendar getCalendar(
+	protected static Calendar getCalendar(
 		int year, int month, int date, int hour, int minute) {
 
 		Calendar calendar = new GregorianCalendar();
@@ -158,23 +93,11 @@ public abstract class RecurrenceTestCase extends TestCase {
 		return calendar;
 	}
 
-	protected Duration getDefaultDuration() {
+	protected static Duration getDefaultDuration() {
 		return getDuration(0, 0, 1, 0, 0);
 	}
 
-	private Calendar getCalendarAfterTime(int year, int month, int date) {
-		return getCalendar(year, month, date, HOUR_AFTER, MINUTE_AFTER);
-	}
-
-	private Calendar getCalendarBeforeTime(int year, int month, int date) {
-		return getCalendar(year, month, date, HOUR_BEFORE, MINUTE_BEFORE);
-	}
-
-	private Calendar getCalendarDuringTime(int year, int month, int date) {
-		return getCalendar(year, month, date, HOUR_DURING, MINUTE_DURING);
-	}
-
-	private Duration getDuration(
+	protected static Duration getDuration(
 		int weeks, int days, int hours, int minutes, int seconds) {
 
 		Duration duration = new Duration(days, hours, minutes, seconds);
