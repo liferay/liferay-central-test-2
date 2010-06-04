@@ -88,7 +88,8 @@ public class BaseLDAPToPortalConverter implements LDAPToPortalConverter {
 
 		long creatorUserId = 0;
 		boolean passwordReset = false;
-		boolean autoScreenName = false;
+		boolean autoScreenName = PrefsPropsUtil.getBoolean(
+			companyId, PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE);
 
 		String screenName = LDAPUtil.getAttributeValue(
 			attributes, userMappings, UserConverterKeys.SCREEN_NAME).
@@ -141,10 +142,7 @@ public class BaseLDAPToPortalConverter implements LDAPToPortalConverter {
 					emailAddress);
 		}
 
-		if (Validator.isNull(screenName) &&
-			!PrefsPropsUtil.getBoolean(
-				companyId, PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE)) {
-
+		if (Validator.isNull(screenName) && !autoScreenName) {
 			throw new UserScreenNameException(
 				"Screen name cannot be null for " +
 					ContactConstants.getFullName(

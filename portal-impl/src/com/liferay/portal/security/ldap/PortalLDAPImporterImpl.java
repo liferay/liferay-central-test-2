@@ -293,7 +293,9 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 				companyId, PropsKeys.COMPANY_SECURITY_AUTH_TYPE,
 				PropsValues.COMPANY_SECURITY_AUTH_TYPE);
 
-			if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
+			if (authType.equals(CompanyConstants.AUTH_TYPE_SN) &&
+				!ldapUser.isAutoScreenName()) {
+
 				user = UserLocalServiceUtil.getUserByScreenName(
 					companyId, ldapUser.getScreenName());
 			}
