@@ -27,9 +27,8 @@ import java.util.Calendar;
  */
 public class RecurrenceMonthlyByMonthDayTest extends RecurrenceTestCase {
 
-	public void testDtStart() throws Exception {
-		Recurrence recurrence = _getRecurrence(
-			_dtStart, DURATION_ONE_HOUR, 15, 1);
+	public void testDtStart() {
+		Recurrence recurrence = getRecurrence(dtStart, durationOneHour, 15, 1);
 
 		Calendar beforeDtStart = getCalendar(2008, FEBRUARY, 5, 22, 9);
 
@@ -48,9 +47,8 @@ public class RecurrenceMonthlyByMonthDayTest extends RecurrenceTestCase {
 		assertRecurrenceEquals(false, recurrence, afterDtStart2);
 	}
 
-	public void testRecurrence() throws Exception {
-		Recurrence recurrence = _getRecurrence(
-			_dtStart, DURATION_ONE_HOUR, 15, 1);
+	public void testRecurrence() {
+		Recurrence recurrence = getRecurrence(dtStart, durationOneHour, 15, 1);
 
 		Calendar beforeRecurrence = getCalendar(2008, FEBRUARY, 15, 22, 9);
 
@@ -67,9 +65,8 @@ public class RecurrenceMonthlyByMonthDayTest extends RecurrenceTestCase {
 		assertRecurrenceEquals(false, recurrence, afterRecurrence);
 	}
 
-	public void testRecurrenceCrossDates() throws Exception {
-		Recurrence recurrence = _getRecurrence(
-			_dtStart, DURATION_TWO_HOURS, 15, 1);
+	public void testRecurrenceCrossDates() {
+		Recurrence recurrence = getRecurrence(dtStart, durationTwoHours, 15, 1);
 
 		Calendar duringRecurrence = getCalendar(2008, FEBRUARY, 16, 0, 9);
 
@@ -80,9 +77,9 @@ public class RecurrenceMonthlyByMonthDayTest extends RecurrenceTestCase {
 		assertRecurrenceEquals(false, recurrence, afterRecurrence);
 	}
 
-	public void testRecurrenceCrossWeeks() throws Exception {
-		Recurrence recurrence = _getRecurrence(
-			_dtStart, DURATION_CROSS_WEEK, 15, 1);
+	public void testRecurrenceCrossWeeks() {
+		Recurrence recurrence = getRecurrence(
+			dtStart, durationCrossWeek, 15, 1);
 
 		Calendar duringRecurrence = getCalendar(2008, FEBRUARY, 23, 22, 9);
 
@@ -93,9 +90,9 @@ public class RecurrenceMonthlyByMonthDayTest extends RecurrenceTestCase {
 		assertRecurrenceEquals(false, recurrence, afterRecurrence);
 	}
 
-	public void testRecurrenceCrossYears() throws Exception {
-		Recurrence recurrence = _getRecurrence(
-			_dtStart, DURATION_CROSS_WEEK, 29, 1);
+	public void testRecurrenceCrossYears() {
+		Recurrence recurrence = getRecurrence(
+			dtStart, durationCrossWeek, 29, 1);
 
 		Calendar duringRecurrence = getCalendar(2009, JANUARY, 6, 22, 9);
 
@@ -106,9 +103,8 @@ public class RecurrenceMonthlyByMonthDayTest extends RecurrenceTestCase {
 		assertRecurrenceEquals(false, recurrence, afterRecurrence);
 	}
 
-	public void testRecurrenceWithInterval() throws Exception {
-		Recurrence recurrence = _getRecurrence(
-			_dtStart, DURATION_ONE_HOUR, 15, 2);
+	public void testRecurrenceWithInterval() {
+		Recurrence recurrence = getRecurrence(dtStart, durationOneHour, 15, 2);
 
 		Calendar duringRecurrence1 = getCalendar(2008, FEBRUARY, 15, 22, 15);
 		Calendar duringRecurrence2 = getCalendar(2008, MARCH, 15, 22, 15);
@@ -121,9 +117,8 @@ public class RecurrenceMonthlyByMonthDayTest extends RecurrenceTestCase {
 		assertRecurrenceEquals(false, recurrence, duringRecurrence4);
 	}
 
-	public void testRecurrenceWithLeapYear() throws Exception {
-		Recurrence recurrence = _getRecurrence(
-			_dtStart, DURATION_TWO_HOURS, 29, 1);
+	public void testRecurrenceWithLeapYear() {
+		Recurrence recurrence = getRecurrence(dtStart, durationTwoHours, 29, 1);
 
 		Calendar duringRecurrence1 = getCalendar(2008, FEBRUARY, 29, 22, 10);
 		Calendar duringRecurrence2 = getCalendar(2008, MARCH, 1, 0, 9);
@@ -142,9 +137,8 @@ public class RecurrenceMonthlyByMonthDayTest extends RecurrenceTestCase {
 		assertRecurrenceEquals(false, recurrence, afterRecurrence3);
 	}
 
-	public void testRecurrenceWithUntilDate() throws Exception {
-		Recurrence recurrence = _getRecurrence(
-			_dtStart, DURATION_ONE_HOUR, 15, 1);
+	public void testRecurrenceWithUntilDate() {
+		Recurrence recurrence = getRecurrence(dtStart, durationOneHour, 15, 1);
 
 		recurrence.setUntil(getCalendar(2008, MARCH, 15, 22, 0));
 
@@ -157,10 +151,7 @@ public class RecurrenceMonthlyByMonthDayTest extends RecurrenceTestCase {
 		assertRecurrenceEquals(false, recurrence, afterUntil);
 	}
 
-	private static final Calendar _dtStart = getCalendar(
-		2008, FEBRUARY, 5, 22, 10);
-
-	private static Recurrence _getRecurrence(
+	protected Recurrence getRecurrence(
 		Calendar dtStart, Duration duration, int monthDay, int interval) {
 
 		Recurrence recurrence = new Recurrence(

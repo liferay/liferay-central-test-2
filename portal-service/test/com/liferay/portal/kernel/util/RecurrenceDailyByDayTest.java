@@ -27,8 +27,8 @@ import java.util.Calendar;
  */
 public class RecurrenceDailyByDayTest extends RecurrenceTestCase {
 
-	public void testDtStart() throws Exception {
-		Recurrence recurrence = _getRecurrence(_dtStart, DURATION_ONE_HOUR);
+	public void testDtStart() {
+		Recurrence recurrence = getRecurrence(dtStart, durationOneHour);
 
 		Calendar beforeDtStart = getCalendar(2008, FEBRUARY, 5, 22, 9);
 
@@ -45,8 +45,8 @@ public class RecurrenceDailyByDayTest extends RecurrenceTestCase {
 		assertRecurrenceEquals(false, recurrence, afterDtStart);
 	}
 
-	public void testRecurrence() throws Exception {
-		Recurrence recurrence = _getRecurrence(_dtStart, DURATION_ONE_HOUR);
+	public void testRecurrence() {
+		Recurrence recurrence = getRecurrence(dtStart, durationOneHour);
 
 		Calendar beforeRecurrence = getCalendar(2008, FEBRUARY, 5, 22, 9);
 
@@ -79,8 +79,8 @@ public class RecurrenceDailyByDayTest extends RecurrenceTestCase {
 		assertRecurrenceEquals(false, recurrence, duringWeekend4);
 	}
 
-	public void testRecurrenceCrossDates() throws Exception {
-		Recurrence recurrence = _getRecurrence(_dtStart, DURATION_TWO_HOURS);
+	public void testRecurrenceCrossDates() {
+		Recurrence recurrence = getRecurrence(dtStart, durationTwoHours);
 
 		Calendar duringRecurrence = getCalendar(2008, FEBRUARY, 6, 0, 9);
 
@@ -91,8 +91,8 @@ public class RecurrenceDailyByDayTest extends RecurrenceTestCase {
 		assertRecurrenceEquals(false, recurrence, afterRecurrence);
 	}
 
-	public void testRecurrenceWithUntilDate() throws Exception {
-		Recurrence recurrence = _getRecurrence(_dtStart, DURATION_ONE_HOUR);
+	public void testRecurrenceWithUntilDate() {
+		Recurrence recurrence = getRecurrence(dtStart, durationOneHour);
 
 		recurrence.setUntil(getCalendar(2008, FEBRUARY, 6, 22, 0));
 
@@ -105,12 +105,7 @@ public class RecurrenceDailyByDayTest extends RecurrenceTestCase {
 		assertRecurrenceEquals(false, recurrence, afterUntil);
 	}
 
-	private static final Calendar _dtStart = getCalendar(
-		2008, FEBRUARY, 5, 22, 10);
-
-	private static Recurrence _getRecurrence(
-		Calendar dtStart, Duration duration) {
-
+	protected Recurrence getRecurrence(Calendar dtStart, Duration duration) {
 		Recurrence recurrence = new Recurrence(
 			dtStart, duration, Recurrence.DAILY);
 

@@ -66,24 +66,13 @@ public abstract class RecurrenceTestCase extends TestCase {
 
 	public static final int WEDNESDAY = Calendar.WEDNESDAY;
 
-	protected static final Duration DURATION_ONE_HOUR = getDuration(
-		0, 0, 1, 0, 0);
-
-	protected static final Duration DURATION_TWO_HOURS = getDuration(
-		0, 0, 2, 0, 0);
-
-	protected static final Duration DURATION_CROSS_WEEK = getDuration(
-		0, 8, 0, 0, 0);
-
-	protected static void assertRecurrenceEquals(
+	protected void assertRecurrenceEquals(
 		boolean expected, Recurrence recurrence, Calendar calendar) {
 
-		assertEquals(
-			expected,
-			recurrence.isInRecurrence(calendar));
+		assertEquals(expected, recurrence.isInRecurrence(calendar));
 	}
 
-	protected static Calendar getCalendar(
+	protected Calendar getCalendar(
 		int year, int month, int date, int hour, int minute) {
 
 		Calendar calendar = new GregorianCalendar();
@@ -93,11 +82,11 @@ public abstract class RecurrenceTestCase extends TestCase {
 		return calendar;
 	}
 
-	protected static Duration getDefaultDuration() {
+	protected Duration getDefaultDuration() {
 		return getDuration(0, 0, 1, 0, 0);
 	}
 
-	protected static Duration getDuration(
+	protected Duration getDuration(
 		int weeks, int days, int hours, int minutes, int seconds) {
 
 		Duration duration = new Duration(days, hours, minutes, seconds);
@@ -106,5 +95,10 @@ public abstract class RecurrenceTestCase extends TestCase {
 
 		return duration;
 	}
+
+	protected Calendar dtStart = getCalendar(2008, FEBRUARY, 5, 22, 10);
+	protected Duration durationCrossWeek = getDuration(0, 8, 0, 0, 0);
+	protected Duration durationOneHour = getDuration(0, 0, 1, 0, 0);
+	protected Duration durationTwoHours = getDuration(0, 0, 2, 0, 0);
 
 }
