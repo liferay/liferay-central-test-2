@@ -205,25 +205,7 @@ public class PortletBagFactory {
 		}
 
 		List<AssetRendererFactory> assetRendererFactoryInstances =
-			new ArrayList<AssetRendererFactory>();
-
-		for (String assetRendererFactoryClass :
-				portlet.getAssetRendererFactoryClasses()) {
-
-			AssetRendererFactory assetRendererFactoryInstance =
-				(AssetRendererFactory)newInstance(
-					AssetRendererFactory.class, assetRendererFactoryClass);
-
-			assetRendererFactoryInstance.setClassNameId(
-				PortalUtil.getClassNameId(
-					assetRendererFactoryInstance.getClassName()));
-			assetRendererFactoryInstance.setPortletId(portlet.getPortletId());
-
-			assetRendererFactoryInstances.add(assetRendererFactoryInstance);
-
-			AssetRendererFactoryRegistryUtil.register(
-				assetRendererFactoryInstance);
-		}
+			newAssetRendererFactoryInstances(portlet);
 
 		List<CustomAttributesDisplay> customAttributesDisplayInstances =
 			new ArrayList<CustomAttributesDisplay>();
@@ -416,6 +398,44 @@ public class PortletBagFactory {
 		for (SchedulerEntry schedulerEntry : schedulerEntries) {
 			initScheduler(schedulerEntry);
 		}
+	}
+
+	protected AssetRendererFactory newAssetRendererFactoryInstance(
+			Portlet portlet, String assetRendererFactoryClass)
+		throws Exception {
+
+		AssetRendererFactory assetRendererFactoryInstance =
+			(AssetRendererFactory)newInstance(
+				AssetRendererFactory.class, assetRendererFactoryClass);
+
+		assetRendererFactoryInstance.setClassNameId(
+			PortalUtil.getClassNameId(
+				assetRendererFactoryInstance.getClassName()));
+		assetRendererFactoryInstance.setPortletId(portlet.getPortletId());
+
+		AssetRendererFactoryRegistryUtil.register(assetRendererFactoryInstance);
+
+		return assetRendererFactoryInstance;
+	}
+
+	protected List<AssetRendererFactory> newAssetRendererFactoryInstances(
+			Portlet portlet)
+		throws Exception {
+
+		List<AssetRendererFactory> assetRendererFactoryInstances =
+			new ArrayList<AssetRendererFactory>();
+
+		for (String assetRendererFactoryClass :
+				portlet.getAssetRendererFactoryClasses()) {
+
+			AssetRendererFactory assetRendererFactoryInstance =
+				newAssetRendererFactoryInstance(
+					portlet, assetRendererFactoryClass);
+
+			assetRendererFactoryInstances.add(assetRendererFactoryInstance);
+		}
+
+		return assetRendererFactoryInstances;
 	}
 
 	protected ConfigurationAction newConfigurationAction(Portlet portlet)
