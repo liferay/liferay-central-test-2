@@ -15,12 +15,16 @@
 		<property name="dataSource" ref="liferayDataSource" />
 		<property name="sessionFactory" ref="liferaySessionFactory" />
 	</bean>
-	<bean id="serviceAdvice" class="com.liferay.portal.cache.ThreadLocalCacheAdvice">
+	<bean id="serviceAdvice" name="asyncAdvice" class="com.liferay.portal.messaging.async.aop.AsyncAdvice">
 		<property name="nextMethodInterceptor">
-			<bean class="com.liferay.portal.spring.transaction.TransactionInterceptor">
-				<property name="transactionManager" ref="liferayTransactionManager" />
-				<property name="transactionAttributeSource">
-					<bean class="com.liferay.portal.spring.transaction.AnnotationTransactionAttributeSource" />
+			<bean class="com.liferay.portal.cache.ThreadLocalCacheAdvice">
+				<property name="nextMethodInterceptor">
+					<bean class="com.liferay.portal.spring.transaction.TransactionInterceptor">
+						<property name="transactionManager" ref="liferayTransactionManager" />
+						<property name="transactionAttributeSource">
+							<bean class="com.liferay.portal.spring.transaction.AnnotationTransactionAttributeSource" />
+						</property>
+					</bean>
 				</property>
 			</bean>
 		</property>
