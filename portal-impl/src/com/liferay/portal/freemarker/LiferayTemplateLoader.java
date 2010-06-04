@@ -16,6 +16,7 @@ package com.liferay.portal.freemarker;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.InstanceFactory;
 
 import freemarker.cache.TemplateLoader;
 
@@ -100,8 +101,8 @@ public class LiferayTemplateLoader implements TemplateLoader {
 
 			try {
 				FreeMarkerTemplateLoader freeMarkerTemplateLoader =
-					(FreeMarkerTemplateLoader)Class.forName(
-						freeMarkerTemplateLoaderClassName).newInstance();
+					(FreeMarkerTemplateLoader)InstanceFactory.newInstance(
+						freeMarkerTemplateLoaderClassName);
 
 				freeMarkerTemplateLoaders.add(freeMarkerTemplateLoader);
 			}

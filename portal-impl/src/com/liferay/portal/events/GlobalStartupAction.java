@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
+import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
@@ -66,8 +67,8 @@ public class GlobalStartupAction extends SimpleAction {
 				}
 
 				AutoDeployListener autoDeployListener =
-					(AutoDeployListener)Class.forName(
-						autoDeployListenerClassName).newInstance();
+					(AutoDeployListener)InstanceFactory.newInstance(
+						autoDeployListenerClassName);
 
 				autoDeployListeners.add(autoDeployListener);
 			}
@@ -93,8 +94,8 @@ public class GlobalStartupAction extends SimpleAction {
 				}
 
 				HotDeployListener hotDeployListener =
-					(HotDeployListener)Class.forName(
-						hotDeployListenerClassName).newInstance();
+					(HotDeployListener)InstanceFactory.newInstance(
+						hotDeployListenerClassName);
 
 				hotDeployListeners.add(hotDeployListener);
 			}
@@ -123,8 +124,8 @@ public class GlobalStartupAction extends SimpleAction {
 				}
 
 				SandboxDeployListener sandboxDeployListener =
-					(SandboxDeployListener)Class.forName(
-						sandboxDeployListenerClassName).newInstance();
+					(SandboxDeployListener)InstanceFactory.newInstance(
+						sandboxDeployListenerClassName);
 
 				sandboxDeployListeners.add(sandboxDeployListener);
 			}

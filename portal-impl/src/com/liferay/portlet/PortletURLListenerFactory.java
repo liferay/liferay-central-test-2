@@ -14,6 +14,7 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletURLListener;
 
@@ -132,18 +133,12 @@ public class PortletURLListenerFactory {
 		try {
 			if (portletURLGenerationListener == null) {
 				portletURLGenerationListener =
-					(PortletURLGenerationListener)Class.forName(
-						portletURLListener.getListenerClass()).newInstance();
+					(PortletURLGenerationListener)InstanceFactory.newInstance(
+						portletURLListener.getListenerClass());
 			}
 		}
-		catch (ClassNotFoundException cnofe) {
-			throw new UnavailableException(cnofe.getMessage());
-		}
-		catch (InstantiationException ie) {
-			throw new UnavailableException(ie.getMessage());
-		}
-		catch (IllegalAccessException iae) {
-			throw new UnavailableException(iae.getMessage());
+		catch (Exception e) {
+			throw new UnavailableException(e.getMessage());
 		}
 
 		return portletURLGenerationListener;
