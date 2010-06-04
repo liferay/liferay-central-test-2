@@ -95,6 +95,8 @@ public interface Group extends GroupModel {
 
 	public boolean isOrganization();
 
+	public boolean isOrganizationOrStaging();
+
 	public boolean isStagingGroup();
 
 	public boolean isUser();
