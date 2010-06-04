@@ -31,7 +31,7 @@ public class RouterTest extends TestCase {
 		InitUtil.initWithSpring();
 	}
 
-	public void test() {
+	public void testRouteReproduction() {
 		Router router = new Router();
 
 		Route route = router.addRoute("GET/{controller}/{action}");
@@ -40,14 +40,15 @@ public class RouterTest extends TestCase {
 		route.addDefaultParameter("method", "GET");
 		route.addDefaultParameter("format", "html");
 
-		Map<String, String> parameters = router.urlToParameters(
-			"GET/boxes/index");
+		assertEquals(router, "GET/boxes/index");
+	}
 
-		System.out.println(parameters.toString());
+	protected void assertEquals(Router router, String url) {
+		Map<String, String> parameters = router.urlToParameters(url);
 
 		String generatedUrl = router.parametersToUrl(parameters);
 
-		System.out.println(generatedUrl);
+		assertEquals(url, generatedUrl);
 	}
 
 }
