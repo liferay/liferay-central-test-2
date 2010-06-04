@@ -21,8 +21,18 @@ package com.liferay.portal.kernel.util;
  */
 public class InstanceFactory {
 
+	public static Object newInstance(String className) throws Exception {
+		return newInstance(null, className);
+	}
+
 	public static Object newInstance(ClassLoader classLoader, String className)
 		throws Exception {
+
+		if (classLoader == null) {
+			Thread currentThread = Thread.currentThread();
+
+			classLoader = currentThread.getContextClassLoader();
+		}
 
 		Class<?> classObj = classLoader.loadClass(className);
 
