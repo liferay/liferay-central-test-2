@@ -95,7 +95,7 @@
 		<order by="asc">
 			<order-column name="nodeId" />
 			<order-column name="title" case-sensitive="false" />
-			<order-column name="version" />
+			<order-column name="version" order-by="desc" />
 		</order>
 
 		<!-- Finder methods -->
