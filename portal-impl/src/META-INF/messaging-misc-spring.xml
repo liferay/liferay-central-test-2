@@ -40,6 +40,9 @@
 	<bean id="destination.message_boards_mailing_list" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="name" value="liferay/message_boards_mailing_list" />
 	</bean>
+	<bean id="destination.message_bus_async" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<property name="name" value="liferay/message_bus_async" />
+	</bean>
 	<bean id="destination.wiki" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="name" value="liferay/wiki" />
 	</bean>
@@ -62,6 +65,7 @@
 	<bean id="messageListener.live_users" class="com.liferay.portal.liveusers.messaging.LiveUsersMessageListener" />
 	<bean id="messageListener.message_boards" class="com.liferay.portlet.messageboards.messaging.MBMessageListener" />
 	<bean id="messageListener.message_boards_mailing_list" class="com.liferay.portlet.messageboards.messaging.MailingListMessageListener" />
+	<bean id="messageListener.message_bus_async" class="com.liferay.portal.messaging.async.AsyncInvokeMessageListener" />
 	<bean id="messageListener.wiki" class="com.liferay.portlet.wiki.messaging.WikiMessageListener" />
 
 	<!-- Configurator -->
@@ -79,6 +83,7 @@
 				<ref bean="destination.live_users" />
 				<ref bean="destination.message_boards" />
 				<ref bean="destination.message_boards_mailing_list" />
+				<ref bean="destination.message_bus_async" />
 				<ref bean="destination.wiki" />
 			</list>
 		</property>
@@ -137,6 +142,11 @@
 						<ref bean="messageListener.message_boards_mailing_list" />
 					</list>
 				</entry>
+				<entry key="liferay/message_bus_async">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="messageListener.message_bus_async" />
+					</list>
+				</entry>
 				<entry key="liferay/wiki">
 					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
 						<ref bean="messageListener.wiki" />
@@ -144,5 +154,10 @@
 				</entry>
 			</map>
 		</property>
+	</bean>
+
+	<bean id="asyncAdviceConfigurator" class="com.liferay.portal.messaging.async.aop.config.AsyncAdviceConfigurator">
+		<property name="asyncAdvice" ref="asyncAdvice" />
+		<property name="defaultDestination" value="liferay/message_bus_async" />
 	</bean>
 </beans>

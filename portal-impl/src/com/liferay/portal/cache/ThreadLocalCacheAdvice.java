@@ -21,13 +21,9 @@ import com.liferay.portal.kernel.cache.ThreadLocalCacheManager;
 import com.liferay.portal.kernel.util.MethodTargetClassKey;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.spring.aop.BaseChainableAroundMethodAdvice;
+import com.liferay.portal.spring.aop.BaseAnnotationChainableAroundMethodAdvice;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
-
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.aopalliance.intercept.MethodInvocation;
 
@@ -36,17 +32,18 @@ import org.aopalliance.intercept.MethodInvocation;
  *
  * @author Shuyang Zhou
  */
-public class ThreadLocalCacheAdvice extends BaseChainableAroundMethodAdvice {
+public class ThreadLocalCacheAdvice
+	extends BaseAnnotationChainableAroundMethodAdvice<ThreadLocalCachable> {
 
 	public void afterReturning(
 			MethodInvocation methodInvocation, Object result)
 		throws Throwable {
 
-		MethodTargetClassKey methodTargetClassKey = _buildMethodTargetClassKey(
+		MethodTargetClassKey methodTargetClassKey = buildMethodTargetClassKey(
 			methodInvocation);
 
 		ThreadLocalCachable threadLocalCachable =
-			_findThreadLocalCachableAnnotation(methodTargetClassKey);
+			findAnnotation(methodTargetClassKey);
 
 		if (threadLocalCachable == _nullThreadLocalCacheable) {
 			return;
@@ -67,11 +64,11 @@ public class ThreadLocalCacheAdvice extends BaseChainableAroundMethodAdvice {
 	}
 
 	public Object before(MethodInvocation methodInvocation) throws Throwable {
-		MethodTargetClassKey methodTargetClassKey = _buildMethodTargetClassKey(
+		MethodTargetClassKey methodTargetClassKey = buildMethodTargetClassKey(
 			methodInvocation);
 
 		ThreadLocalCachable threadLocalCachable =
-			_findThreadLocalCachableAnnotation(methodTargetClassKey);
+			findAnnotation(methodTargetClassKey);
 
 		if (threadLocalCachable == _nullThreadLocalCacheable) {
 			return null;
@@ -92,6 +89,14 @@ public class ThreadLocalCacheAdvice extends BaseChainableAroundMethodAdvice {
 		return value;
 	}
 
+	public Class<ThreadLocalCachable> getAnnotationClass() {
+		return ThreadLocalCachable.class;
+	}
+
+	public ThreadLocalCachable getNullAnnotation() {
+		return _nullThreadLocalCacheable;
+	}
+
 	private String _buildCacheKey(Object[] arguments) {
 		StringBundler sb = new StringBundler(arguments.length * 2 - 1);
 
@@ -104,65 +109,6 @@ public class ThreadLocalCacheAdvice extends BaseChainableAroundMethodAdvice {
 		}
 
 		return sb.toString();
-	}
-
-	private MethodTargetClassKey _buildMethodTargetClassKey(
-		MethodInvocation methodInvocation) {
-
-		Method method = methodInvocation.getMethod();
-
-		Class<?> targetClass = null;
-
-		Object thisObject = methodInvocation.getThis();
-
-		if (thisObject != null) {
-			targetClass = thisObject.getClass();
-		}
-
-		return new MethodTargetClassKey(method, targetClass);
-	}
-
-	private ThreadLocalCachable _findThreadLocalCachableAnnotation(
-		MethodTargetClassKey methodTargetClassKey){
-
-		ThreadLocalCachable threadLocalCachable = _threadLocalCachables.get(
-			methodTargetClassKey);
-
-		if (threadLocalCachable != null) {
-			return threadLocalCachable;
-		}
-
-		Method method = methodTargetClassKey.getMethod();
-		Class<?> targetClass = methodTargetClassKey.getTargetClass();
-
-		Method targetMethod = null;
-
-		if (targetClass != null) {
-			try {
-				targetMethod = targetClass.getDeclaredMethod(
-					method.getName(), method.getParameterTypes());
-			}
-			catch (Throwable t) {
-			}
-		}
-
-		if (targetMethod != null) {
-			threadLocalCachable = targetMethod.getAnnotation(
-				ThreadLocalCachable.class);
-		}
-
-		if (threadLocalCachable == null) {
-			threadLocalCachable = method.getAnnotation(
-				ThreadLocalCachable.class);
-		}
-
-		if (threadLocalCachable == null) {
-			threadLocalCachable = _nullThreadLocalCacheable;
-		}
-
-		_threadLocalCachables.put(methodTargetClassKey, threadLocalCachable);
-
-		return threadLocalCachable;
 	}
 
 	private static Object _nullResult = new Object();
@@ -179,9 +125,5 @@ public class ThreadLocalCacheAdvice extends BaseChainableAroundMethodAdvice {
 			}
 
 		};
-
-	private Map<MethodTargetClassKey, ThreadLocalCachable>
-		_threadLocalCachables =
-			new ConcurrentHashMap<MethodTargetClassKey, ThreadLocalCachable>();
 
 }

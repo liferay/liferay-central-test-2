@@ -41,12 +41,17 @@ public abstract class ChainableAroundMethodAdvice implements MethodInterceptor {
 		Object returnValue = before(methodInvocation);
 
 		if (returnValue != null) {
-			return returnValue;
+			if (returnValue == discardResult) {
+				return null;
+			}
+			else {
+				return returnValue;
+			}
 		}
 
 		try {
-			if (_nextMethodInterceptor != null) {
-				returnValue = _nextMethodInterceptor.invoke(methodInvocation);
+			if (nextMethodInterceptor != null) {
+				returnValue = nextMethodInterceptor.invoke(methodInvocation);
 			}
 			else {
 				returnValue = methodInvocation.proceed();
@@ -66,9 +71,11 @@ public abstract class ChainableAroundMethodAdvice implements MethodInterceptor {
 	public void setNextMethodInterceptor(
 		MethodInterceptor nextMethodInterceptor) {
 
-		_nextMethodInterceptor = nextMethodInterceptor;
+		this.nextMethodInterceptor = nextMethodInterceptor;
 	}
 
-	private MethodInterceptor _nextMethodInterceptor;
+	protected Object discardResult = new Object();
+
+	protected MethodInterceptor nextMethodInterceptor;
 
 }

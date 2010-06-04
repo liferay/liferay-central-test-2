@@ -64,6 +64,8 @@ public interface DestinationNames {
 	public static final String MESSAGE_BOARDS_MAILING_LIST =
 		"liferay/message_boards_mailing_list";
 
+	public static final String MESSAGE_BUS_ASYNC = "liferay/message_bus_async";
+
 	public static final String MESSAGE_BUS_DEFAULT_RESPONSE=
 		"liferay/message_bus/default_response";
 

@@ -26,6 +26,14 @@ public class MethodTargetClassKey {
 	public MethodTargetClassKey(Method method, Class<?> targetClass) {
 		_method = method;
 		_targetClass = targetClass;
+		if (_targetClass != null) {
+			try {
+				_targetMethod = _targetClass.getDeclaredMethod(
+					_method.getName(), _method.getParameterTypes());
+			}
+			catch (Throwable t) {
+			}
+		}
 	}
 
 	public boolean equals(Object obj) {
@@ -56,6 +64,10 @@ public class MethodTargetClassKey {
 		return _targetClass;
 	}
 
+	public Method getTargetMethod() {
+		return _targetMethod;
+	}
+
 	public int hashCode() {
 		if (_hashCode == 0) {
 			int hashCode = 77;
@@ -77,10 +89,6 @@ public class MethodTargetClassKey {
 	}
 
 	public String toString() {
-		return _toString();
-	}
-
-	private String _toString() {
 		if (_toString == null) {
 			Class<?>[] parameterTypes = _method.getParameterTypes();
 
@@ -115,6 +123,7 @@ public class MethodTargetClassKey {
 	private int _hashCode;
 	private Method _method;
 	private Class<?> _targetClass;
+	private Method _targetMethod;
 	private String _toString;
 
 }

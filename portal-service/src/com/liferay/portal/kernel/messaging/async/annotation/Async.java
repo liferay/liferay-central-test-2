@@ -12,30 +12,21 @@
  * details.
  */
 
-package com.liferay.portal.spring.aop;
+package com.liferay.portal.kernel.messaging.async.annotation;
 
-import org.aopalliance.intercept.MethodInvocation;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * <a href="BaseChainableAroundMethodAdvice.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="Async.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
  */
-public class BaseChainableAroundMethodAdvice
-	extends ChainableAroundMethodAdvice {
-
-	public void afterReturning(MethodInvocation methodInvocation, Object result)
-		throws Throwable {
-	}
-
-	public void afterThrowing(
-			MethodInvocation methodInvocation, Throwable throwable)
-		throws Throwable {
-	}
-
-	public Object before(MethodInvocation methodInvocation) throws Throwable {
-		return null;
-	}
-
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface Async {
 }
