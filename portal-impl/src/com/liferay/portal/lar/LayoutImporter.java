@@ -467,6 +467,16 @@ public class LayoutImporter {
 			}
 
 			layout.setCompanyId(user.getCompanyId());
+
+			if (parentLayoutId > 0) {
+				long parentLayoutPlid = newLayoutIdPlidMap.get(parentLayoutId);
+
+				Layout parentLayout = LayoutLocalServiceUtil.getLayout(
+					parentLayoutPlid);
+
+				parentLayoutId = parentLayout.getLayoutId();
+			}
+
 			layout.setParentLayoutId(parentLayoutId);
 			layout.setName(name);
 			layout.setTitle(title);
