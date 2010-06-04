@@ -56,7 +56,6 @@ public class AddCommunityWikiWikiPageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertEquals(RuntimeVariables.replace("Wiki Wiki Page Community"),
-			selenium.getText("//tr[4]/td[1]"));
+		assertTrue(selenium.isTextPresent("Wiki Wiki Page Community"));
 	}
 }
