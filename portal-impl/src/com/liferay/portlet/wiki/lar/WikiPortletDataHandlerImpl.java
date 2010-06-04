@@ -169,7 +169,6 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			WikiPage page)
 		throws Exception {
 
-
 		long userId = context.getUserId(page.getUserUuid());
 		long nodeId = MapUtil.getLong(
 			nodePKs, page.getNodeId(), page.getNodeId());
