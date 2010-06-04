@@ -209,7 +209,7 @@ public class MainServlet extends ActionServlet {
 		}
 
 		try {
-			initSevletContextPool();
+			initServletContextPool();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -920,7 +920,7 @@ public class MainServlet extends ActionServlet {
 		}
 	}
 
-	protected void initSevletContextPool() throws Exception {
+	protected void initServletContextPool() throws Exception {
 		ServletContext servletContext = getServletContext();
 
 		String contextPath = PortalUtil.getPathContext();
