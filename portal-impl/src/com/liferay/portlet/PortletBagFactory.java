@@ -24,6 +24,8 @@ import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
+import com.liferay.portal.kernel.portlet.Route;
+import com.liferay.portal.kernel.portlet.Router;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
@@ -39,11 +41,15 @@ import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.ProxyFactory;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webdav.WebDAVStorage;
 import com.liferay.portal.kernel.webdav.WebDAVUtil;
 import com.liferay.portal.kernel.workflow.WorkflowHandler;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.xmlrpc.Method;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
@@ -452,8 +458,48 @@ public class PortletBagFactory {
 			return null;
 		}
 
-		return (FriendlyURLMapper)newInstance(
+		FriendlyURLMapper friendlyURLMapper = (FriendlyURLMapper)newInstance(
 			FriendlyURLMapper.class, portlet.getFriendlyURLMapperClass());
+
+		Router router = newFriendlyURLRouter(portlet);
+
+		friendlyURLMapper.setRouter(router);
+
+		return friendlyURLMapper;
+	}
+
+	protected Router newFriendlyURLRouter(Portlet portlet) throws Exception {
+		if (Validator.isNull(portlet.getFriendlyURLRoutes())) {
+			return null;
+		}
+
+		Router router = new Router();
+
+		String xml = StringUtil.read(
+			_classLoader, portlet.getFriendlyURLRoutes());
+
+		Document document = SAXReaderUtil.read(xml);
+
+		Element rootElement = document.getRootElement();
+
+		for (Element routeElement : rootElement.elements("route")) {
+			String pattern = routeElement.elementText("pattern");
+
+			Route route = new Route();
+
+			route.setPattern(pattern);
+
+			for (Element defaultElement : routeElement.elements("default")) {
+				String parameter = defaultElement.attributeValue("parameter");
+				String value = defaultElement.getText();
+
+				route.addDefaultValue(parameter, value);
+			}
+
+			router.addRoute(route);
+		}
+
+		return router;
 	}
 
 	protected Indexer newIndexer(Portlet portlet) throws Exception {
