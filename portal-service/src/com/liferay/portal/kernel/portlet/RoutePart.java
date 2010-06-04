@@ -41,14 +41,30 @@ public class RoutePart {
 		return _pattern.toString();
 	}
 
-	public void init() {
-		_fragment = _fragment.substring(1, _fragment.length() - 1);
+	public boolean matches(Map<String, String> parameters) {
+		String value = parameters.get(_name);
 
-		if (Validator.isNull(_fragment)) {
+		if (value == null) {
+			return false;
+		}
+
+		return matches(value);
+	}
+
+	public boolean matches(String parameter) {
+		Matcher matcher = _pattern.matcher(parameter);
+
+		return matcher.matches();
+	}
+
+	public void setFragment(String fragment) {
+		fragment = fragment.substring(1, fragment.length() - 1);
+
+		if (Validator.isNull(fragment)) {
 			throw new IllegalArgumentException("Fragment is null");
 		}
 
-		String[] fragmentParts = _fragment.split(StringPool.COLON, 2);
+		String[] fragmentParts = fragment.split(StringPool.COLON, 2);
 
 		if (fragmentParts.length == 2) {
 			String pattern = fragmentParts[0];
@@ -73,29 +89,8 @@ public class RoutePart {
 			StringPool.CLOSE_CURLY_BRACE);
 	}
 
-	public boolean matches(Map<String, String> parameters) {
-		String value = parameters.get(_name);
-
-		if (value == null) {
-			return false;
-		}
-
-		return matches(value);
-	}
-
-	public boolean matches(String parameter) {
-		Matcher matcher = _pattern.matcher(parameter);
-
-		return matcher.matches();
-	}
-
-	public void setFragment(String fragment) {
-		_fragment = fragment;
-	}
-
 	private static Pattern _defaultPattern = Pattern.compile("[a-zA-Z_]+");
 
-	private String _fragment;
 	private String _fragmentName;
 	private String _name;
 	private Pattern _pattern;

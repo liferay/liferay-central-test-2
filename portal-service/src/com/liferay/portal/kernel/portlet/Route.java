@@ -40,41 +40,6 @@ public class Route {
 		return _defaultParameters;
 	}
 
-	public String getPattern() {
-		return _patternString;
-	}
-
-	public void init() {
-		_routeParts = new LinkedList<RoutePart>();
-
-		Matcher matcher = _fragmentPattern.matcher(_patternString);
-
-		while (matcher.find()) {
-			String fragment = matcher.group();
-
-			RoutePart routePart = new RoutePart();
-
-			routePart.setFragment(fragment);
-
-			routePart.init();
-
-			_routeParts.add(routePart);
-
-			_patternString = _patternString.replace(
-				fragment, routePart.getFragmentName());
-		}
-
-		_patternString = escapeRegex(_patternString);
-
-		for (RoutePart routePart : _routeParts) {
-			_patternString = _patternString.replace(
-				escapeRegex(routePart.getFragmentName()),
-				"(" + routePart.getPattern().toString() + ")");
-		}
-
-		_pattern = Pattern.compile(_patternString);
-	}
-
 	public String parametersToUrl(Map<String, String> parameters) {
 		List<String> names = new ArrayList<String>();
 
@@ -120,6 +85,32 @@ public class Route {
 
 	public void setPattern(String pattern) {
 		_patternString = pattern;
+		
+		_routeParts = new LinkedList<RoutePart>();
+
+		Matcher matcher = _fragmentPattern.matcher(_patternString);
+		
+		pattern = escapeRegex(pattern);
+		
+		while (matcher.find()) {
+			String fragment = matcher.group();
+
+			RoutePart routePart = new RoutePart();
+
+			routePart.setFragment(fragment);
+
+			_routeParts.add(routePart);
+
+			_patternString = _patternString.replace(
+				fragment, routePart.getFragmentName());
+
+			pattern = pattern.replace(
+				escapeRegex(fragment), "(" + routePart.getPattern() + ")");
+		}
+		
+		System.out.println("Pattern: " + pattern);
+
+		_pattern = Pattern.compile(pattern);
 	}
 
 	public Map<String, String> urlToParameters(String url) {
@@ -132,8 +123,8 @@ public class Route {
 		Map<String, String> parameters = new HashMap<String, String>(
 			_defaultParameters);
 
-		for (int i = 0; i < _routeParts.size(); i++) {
-			RoutePart routePart = _routeParts.get(i);
+		for (int i = 1; i <= _routeParts.size(); i++) {
+			RoutePart routePart = _routeParts.get(i - 1);
 
 			String value = matcher.group(i);
 

@@ -36,15 +36,13 @@ public class RouterTest extends TestCase {
 
 		Route route = new Route();
 
-		route.setPattern("GET/{controller}");
+		route.setPattern("GET/{controller}/{action}");
 
-		route.addDefaultParameter("action", "index");
+		//route.addDefaultParameter("action", "index");
 		route.addDefaultParameter("method", "GET");
 		route.addDefaultParameter("format", "html");
 
 		router.addRoute(route);
-
-		router.init();
 
 		Map<String, String> parameters = router.urlToParameters(
 			"GET/boxes/index");

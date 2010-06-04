@@ -38,12 +38,6 @@ public class Router {
 		_routes.add(route);
 	}
 
-	public void init() {
-		for (Route route : _routes) {
-			route.init();
-		}
-	}
-
 	public String parametersToUrl(Map<String, String> parameters)
 		throws RouteNotFoundException {
 
