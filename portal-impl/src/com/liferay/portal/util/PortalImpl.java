@@ -81,7 +81,6 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceCode;
@@ -2533,8 +2532,6 @@ public class PortalImpl implements Portal {
 	}
 
 	public PreferencesValidator getPreferencesValidator(Portlet portlet) {
-		PortletApp portletApp = portlet.getPortletApp();
-
 		PortletBag portletBag = PortletBagPool.get(portlet.getRootPortletId());
 
 		return portletBag.getPreferencesValidatorInstance();

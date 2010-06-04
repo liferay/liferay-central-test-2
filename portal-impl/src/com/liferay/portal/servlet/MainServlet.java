@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
-import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
@@ -861,7 +860,7 @@ public class MainServlet extends ActionServlet {
 				initPortletApp(portlet, servletContext);
 			}
 
-			PortletBag portletBag = portletBagFactory.create(portlet);
+			portletBagFactory.create(portlet);
 		}
 
 		return portlets;

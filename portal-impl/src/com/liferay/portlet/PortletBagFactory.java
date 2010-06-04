@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.poller.PollerProcessor;
+import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.PortletBag;
@@ -137,36 +138,13 @@ public class PortletBagFactory {
 		PortletDataHandler portletDataHandlerInstance = newPortletDataHandler(
 			portlet);
 
-		PortletLayoutListener portletLayoutListenerInstance = null;
+		PortletLayoutListener portletLayoutListenerInstance =
+			newPortletLayoutListener(portlet);
 
-		if (Validator.isNotNull(portlet.getPortletLayoutListenerClass())) {
-			portletLayoutListenerInstance = (PortletLayoutListener)newInstance(
-				PortletLayoutListener.class,
-				portlet.getPortletLayoutListenerClass());
-		}
+		PollerProcessor pollerProcessorInstance = newPollerProcessor(portlet);
 
-		PollerProcessor pollerProcessorInstance = null;
-
-		if (Validator.isNotNull(portlet.getPollerProcessorClass())) {
-			pollerProcessorInstance = (PollerProcessor)newInstance(
-				PollerProcessor.class, portlet.getPollerProcessorClass());
-
-			PollerProcessorUtil.addPollerProcessor(
-				portlet.getPortletId(),
-				new ShardPollerProcessorWrapper(pollerProcessorInstance));
-		}
-
-		com.liferay.portal.kernel.pop.MessageListener
-			popMessageListenerInstance = null;
-
-		if (Validator.isNotNull(portlet.getPopMessageListenerClass())) {
-			popMessageListenerInstance =
-				(com.liferay.portal.kernel.pop.MessageListener)newInstance(
-					com.liferay.portal.kernel.pop.MessageListener.class,
-					portlet.getPopMessageListenerClass());
-
-			POPServerUtil.addListener(popMessageListenerInstance);
-		}
+		MessageListener popMessageListenerInstance = newPOPMessageListener(
+			portlet);
 
 		SocialActivityInterpreter socialActivityInterpreterInstance = null;
 
@@ -545,6 +523,39 @@ public class PortletBagFactory {
 			OpenSearch.class, portlet.getOpenSearchClass());
 	}
 
+	protected PollerProcessor newPollerProcessor(Portlet portlet)
+		throws Exception {
+
+		if (Validator.isNull(portlet.getPollerProcessorClass())) {
+			return null;
+		}
+
+		PollerProcessor pollerProcessorInstance = (PollerProcessor)newInstance(
+			PollerProcessor.class, portlet.getPollerProcessorClass());
+
+		PollerProcessorUtil.addPollerProcessor(
+			portlet.getPortletId(),
+			new ShardPollerProcessorWrapper(pollerProcessorInstance));
+
+		return pollerProcessorInstance;
+	}
+
+	protected MessageListener newPOPMessageListener(Portlet portlet)
+		throws Exception {
+
+		if (Validator.isNull(portlet.getPopMessageListenerClass())) {
+			return null;
+		}
+
+		MessageListener popMessageListenerInstance =
+			(MessageListener)newInstance(
+				MessageListener.class, portlet.getPopMessageListenerClass());
+
+		POPServerUtil.addListener(popMessageListenerInstance);
+
+		return popMessageListenerInstance;
+	}
+
 	protected PortletDataHandler newPortletDataHandler(Portlet portlet)
 		throws Exception {
 
@@ -554,6 +565,18 @@ public class PortletBagFactory {
 
 		return (PortletDataHandler)newInstance(
 			PortletDataHandler.class, portlet.getPortletDataHandlerClass());
+	}
+
+	protected PortletLayoutListener newPortletLayoutListener(Portlet portlet)
+		throws Exception {
+
+		if (Validator.isNull(portlet.getPortletLayoutListenerClass())) {
+			return null;
+		}
+
+		return (PortletLayoutListener)newInstance(
+			PortletLayoutListener.class,
+			portlet.getPortletLayoutListenerClass());
 	}
 
 	protected URLEncoder newURLEncoder(Portlet portlet) throws Exception {
