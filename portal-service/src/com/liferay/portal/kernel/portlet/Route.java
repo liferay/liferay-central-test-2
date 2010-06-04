@@ -14,8 +14,15 @@
 
 package com.liferay.portal.kernel.portlet;
 
+import com.liferay.portal.kernel.util.HttpUtil;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * <a href="Route.java.html"><b><i>View Source</i></b></a>
@@ -25,23 +32,131 @@ import java.util.Map;
  */
 public class Route {
 
-	public void addDefaultValue(String parameter, String value) {
-		_defaultValues.put(parameter, value);
+	public void addDefaultParameter(String name, String value) {
+		_defaultParameters.put(name, value);
 	}
 
-	public Map<String, String> getDefaultValues() {
-		return _defaultValues;
+	public Map<String, String> getDefaultParameters() {
+		return _defaultParameters;
 	}
 
 	public String getPattern() {
-		return _pattern;
+		return _patternString;
+	}
+
+	public void init() {
+		_routeParts = new LinkedList<RoutePart>();
+
+		Matcher matcher = _fragmentPattern.matcher(_patternString);
+
+		while (matcher.find()) {
+			String fragment = matcher.group();
+
+			RoutePart routePart = new RoutePart();
+
+			routePart.setFragment(fragment);
+
+			routePart.init();
+
+			_routeParts.add(routePart);
+
+			_patternString = _patternString.replace(
+				fragment, routePart.getFragmentName());
+		}
+
+		_patternString = escapeRegex(_patternString);
+
+		for (RoutePart routePart : _routeParts) {
+			_patternString = _patternString.replace(
+				escapeRegex(routePart.getFragmentName()),
+				"(" + routePart.getPattern().toString() + ")");
+		}
+
+		_pattern = Pattern.compile(_patternString);
+	}
+
+	public String parametersToUrl(Map<String, String> parameters) {
+		List<String> names = new ArrayList<String>();
+
+		if (!_defaultParameters.isEmpty()) {
+			for (Map.Entry<String, String> entry :
+					_defaultParameters.entrySet()) {
+
+				String name = entry.getKey();
+				String value = entry.getValue();
+
+				if (!value.equals(parameters.get(name))) {
+					return null;
+				}
+
+				names.add(name);
+			}
+		}
+
+		String url = _patternString;
+
+		for (RoutePart routePart : _routeParts) {
+			if (!routePart.matches(parameters)) {
+				return null;
+			}
+
+			String name = routePart.getName();
+
+			names.add(name);
+
+			String value = parameters.get(name);
+
+			value = HttpUtil.encodeURL(value);
+
+			url = url.replace(routePart.getFragmentName(), value);
+		}
+
+		for (String name : names) {
+			parameters.remove(name);
+		}
+
+		return url;
 	}
 
 	public void setPattern(String pattern) {
-		_pattern = pattern;
+		_patternString = pattern;
 	}
 
-	private Map<String, String> _defaultValues = new HashMap<String, String>();
-	private String _pattern;
+	public Map<String, String> urlToParameters(String url) {
+		Matcher matcher = _pattern.matcher(url);
+
+		if (!matcher.matches()) {
+			return null;
+		}
+
+		Map<String, String> parameters = new HashMap<String, String>(
+			_defaultParameters);
+
+		for (int i = 0; i < _routeParts.size(); i++) {
+			RoutePart routePart = _routeParts.get(i);
+
+			String value = matcher.group(i);
+
+			parameters.put(routePart.getName(), value);
+		}
+
+		return parameters;
+	}
+
+	protected String escapeRegex(String s) {
+		Matcher matcher = _escapeRegexPattern.matcher(s);
+
+		return matcher.replaceAll("\\\\$0");
+	}
+
+	private static Pattern _escapeRegexPattern = Pattern.compile(
+		"[\\{\\}\\(\\)\\[\\]\\*\\+\\?\\$\\^\\.\\#\\\\]");
+	private static Pattern _fragmentPattern = Pattern.compile("\\{.+?\\}");
+
+	private Map<String, String> _defaultParameters =
+		new HashMap<String, String>();
+	private Pattern _pattern;
+	private String _patternString;
+	private List<RoutePart> _routeParts;
 
 }
