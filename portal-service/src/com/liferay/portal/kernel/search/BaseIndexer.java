@@ -508,7 +508,7 @@ public abstract class BaseIndexer implements Indexer {
 		throws Exception {
 	}
 
-	private static final String[] _KEYWORDS_FIELDS = new String[] {
+	private static final String[] _KEYWORDS_FIELDS = {
 		Field.ASSET_TAG_NAMES, Field.COMMENTS, Field.CONTENT, Field.DESCRIPTION,
 		Field.PROPERTIES, Field.TITLE, Field.URL, Field.USER_NAME
 	};

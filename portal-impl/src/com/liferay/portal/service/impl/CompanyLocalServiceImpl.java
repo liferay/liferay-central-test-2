@@ -774,7 +774,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 	private static final String _DEFAULT_VIRTUAL_HOST = "localhost";
 
-	private static final String[] _KEYWORDS_FIELDS = new String[] {
+	private static final String[] _KEYWORDS_FIELDS = {
 		Field.ASSET_TAG_NAMES, Field.CONTENT, Field.DESCRIPTION,
 		Field.PROPERTIES, Field.TITLE
 	};

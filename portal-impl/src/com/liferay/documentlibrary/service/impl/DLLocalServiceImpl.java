@@ -333,7 +333,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 	@BeanReference(type = Hook.class)
 	protected Hook hook;
 
-	private static final String[] _KEYWORDS_FIELDS = new String[] {
+	private static final String[] _KEYWORDS_FIELDS = {
 		Field.ASSET_TAG_NAMES, Field.CONTENT, Field.PROPERTIES
 	};
 
