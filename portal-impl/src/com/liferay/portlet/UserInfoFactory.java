@@ -136,8 +136,10 @@ public class UserInfoFactory {
 						PortletContextBagPool.get(
 							portletApp.getServletContextName());
 
-					cua = portletContextBag.getCustomUserAttributes().get(
-						attrCustomClass);
+					Map<String, CustomUserAttributes> customUserAttributes =
+						portletContextBag.getCustomUserAttributes();
+
+					cua = customUserAttributes.get(attrCustomClass);
 
 					cua = (CustomUserAttributes)cua.clone();
 				}
