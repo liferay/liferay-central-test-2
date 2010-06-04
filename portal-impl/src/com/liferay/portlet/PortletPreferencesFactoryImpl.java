@@ -17,17 +17,12 @@ package com.liferay.portlet;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
-import com.liferay.portal.kernel.portlet.PortletBag;
-import com.liferay.portal.kernel.portlet.PortletBagPool;
-import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -333,25 +328,7 @@ public class PortletPreferencesFactoryImpl
 	}
 
 	public PreferencesValidator getPreferencesValidator(Portlet portlet) {
-		PortletApp portletApp = portlet.getPortletApp();
-
-		if (portletApp.isWARFile()) {
-			PortletBag portletBag = PortletBagPool.get(
-				portlet.getRootPortletId());
-
-			return portletBag.getPreferencesValidatorInstance();
-		}
-		else {
-			PreferencesValidator preferencesValidator = null;
-
-			if (Validator.isNotNull(portlet.getPreferencesValidator())) {
-				preferencesValidator =
-					(PreferencesValidator)InstancePool.get(
-						portlet.getPreferencesValidator());
-			}
-
-			return preferencesValidator;
-		}
+		return PortalUtil.getPreferencesValidator(portlet);
 	}
 
 	protected PortletPreferences getPortletSetup(
