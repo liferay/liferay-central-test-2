@@ -39,9 +39,8 @@ public class ProxyFactory {
 			String implClassName)
 		throws Exception {
 
-		Class<?> classObj = classLoader.loadClass(implClassName);
-
-		Object instance = classObj.newInstance();
+		Object instance = InstanceFactory.newInstance(
+			classLoader, implClassName);
 
 		return Proxy.newProxyInstance(
 			classLoader, interfaceClasses,
