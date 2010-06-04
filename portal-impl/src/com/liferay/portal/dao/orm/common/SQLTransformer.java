@@ -22,6 +22,8 @@ import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * <a href="SQLTransformer.java.html"><b><i>View Source</i></b></a>
@@ -42,6 +44,9 @@ public class SQLTransformer {
 		if (db.getType().equals(DB.TYPE_MYSQL)) {
 			_vendorMySQL = true;
 		}
+		else if (db.getType().equals(DB.TYPE_SQLSERVER)) {
+			_vendorSQLServer = true;
+		}
 	}
 
 	private String _removeLower(String sql) {
@@ -49,12 +54,6 @@ public class SQLTransformer {
 
 		if (x == -1) {
 			return sql;
-		}
-
-		String newSQL = _sqlMap.get(sql);
-
-		if (newSQL != null) {
-			return newSQL;
 		}
 
 		StringBuilder sb = new StringBuilder(sql.length());
@@ -85,16 +84,15 @@ public class SQLTransformer {
 			}
 		}
 
-		newSQL = sb.toString();
+		sql = sb.toString();
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Original SQL " + sql);
-			_log.debug("Modified SQL " + newSQL);
-		}
+		return sql;
+	}
 
-		_sqlMap.put(sql, newSQL);
+	private String _transformMod(String sql) {
+		Matcher matcher = MOD_TRANSFORMER.matcher(sql);
 
-		return newSQL;
+		return matcher.replaceAll("$1 % $2");
 	}
 
 	private String _transform(String sql) {
@@ -102,12 +100,33 @@ public class SQLTransformer {
 			return sql;
 		}
 
+		String newSQL = _sqlMap.get(sql);
+
+		if (newSQL != null) {
+			return newSQL;
+		}
+		else {
+			newSQL = sql;
+		}
+
 		if (_vendorMySQL) {
 			DB db = DBFactoryUtil.getDB();
 
 			if (!db.isSupportsStringCaseSensitiveQuery()) {
-				sql = _removeLower(sql);
+				newSQL = _removeLower(newSQL);
 			}
+		}
+		else if (_vendorSQLServer) {
+			newSQL = _transformMod(newSQL);
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Original SQL " + sql);
+			_log.debug("Modified SQL " + newSQL);
+		}
+
+		if (!sql.equals(newSQL)) {
+			_sqlMap.put(sql, newSQL);
 		}
 
 		return sql;
@@ -121,7 +140,11 @@ public class SQLTransformer {
 
 	private static SQLTransformer _instance = new SQLTransformer();
 
+	private static final Pattern MOD_TRANSFORMER = Pattern.compile(
+		"mod\\((.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
+
 	private Map<String, String> _sqlMap;
 	private boolean _vendorMySQL;
+	private boolean _vendorSQLServer;
 
 }
