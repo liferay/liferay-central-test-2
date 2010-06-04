@@ -49,9 +49,8 @@ import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
 import com.liferay.portlet.wiki.util.WikiCacheThreadLocal;
 import com.liferay.portlet.wiki.util.WikiCacheUtil;
-import com.liferay.portlet.wiki.util.comparator.PageCreateDateComparator;
+import com.liferay.portlet.wiki.util.comparator.PageVersionComparator;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -88,9 +87,10 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
-		List<WikiPage> nodePages = WikiPageUtil.findByNodeId(
-			node.getNodeId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			new PageCreateDateComparator(true));
+		List<WikiPage> nodePages = WikiPageUtil.findByN_S(
+			node.getNodeId(), WorkflowConstants.STATUS_APPROVED,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			new PageVersionComparator(true));
 
 		for (WikiPage page : nodePages) {
 			exportPage(context, nodesEl, pagesEl, page);
@@ -168,9 +168,6 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			WikiPage page)
 		throws Exception {
 
-		if (page.getStatus() != WorkflowConstants.STATUS_APPROVED) {
-			return;
-		}
 
 		long userId = context.getUserId(page.getUserUuid());
 		long nodeId = MapUtil.getLong(
@@ -179,12 +176,16 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		long[] assetCategoryIds = null;
 		String[] assetTagNames = null;
 
-		if (context.getBooleanParameter(_NAMESPACE, "categories")) {
+		if (context.getBooleanParameter(_NAMESPACE, "categories") &&
+			page.isHead()) {
+
 			assetCategoryIds = context.getAssetCategoryIds(
 				WikiPage.class, page.getResourcePrimKey());
 		}
 
-		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
+		if (context.getBooleanParameter(_NAMESPACE, "tags") &&
+			page.isHead()) {
+
 			assetTagNames = context.getAssetTagNames(
 				WikiPage.class, page.getResourcePrimKey());
 		}
@@ -270,9 +271,11 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 				}
 			}
 
-			context.importPermissions(
-				WikiPage.class, page.getResourcePrimKey(),
-				importedPage.getResourcePrimKey());
+			if (page.isHead()) {
+				context.importPermissions(
+					WikiPage.class, page.getResourcePrimKey(),
+					importedPage.getResourcePrimKey());
+			}
 
 			if (context.getBooleanParameter(_NAMESPACE, "comments") &&
 				page.isHead()) {
@@ -282,7 +285,9 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 					importedPage.getResourcePrimKey(), context.getGroupId());
 			}
 
-			if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
+			if (context.getBooleanParameter(_NAMESPACE, "ratings") &&
+				page.isHead()) {
+
 				context.importRatingsEntries(
 					WikiPage.class, page.getResourcePrimKey(),
 					importedPage.getResourcePrimKey());
@@ -466,21 +471,29 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			context.addPermissions(WikiPage.class, page.getResourcePrimKey());
 
-			if (context.getBooleanParameter(_NAMESPACE, "categories")) {
+			if (context.getBooleanParameter(_NAMESPACE, "categories") &&
+				page.isHead()) {
+
 				context.addAssetCategories(
 					WikiPage.class, page.getResourcePrimKey());
 			}
 
-			if (context.getBooleanParameter(_NAMESPACE, "comments")) {
+			if (context.getBooleanParameter(_NAMESPACE, "comments") &&
+				page.isHead()) {
+
 				context.addComments(WikiPage.class, page.getResourcePrimKey());
 			}
 
-			if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
+			if (context.getBooleanParameter(_NAMESPACE, "ratings") &&
+				page.isHead()) {
+
 				context.addRatingsEntries(
 					WikiPage.class, page.getResourcePrimKey());
 			}
 
-			if (context.getBooleanParameter(_NAMESPACE, "tags")) {
+			if (context.getBooleanParameter(_NAMESPACE, "tags") &&
+				page.isHead()) {
+
 				context.addAssetTags(WikiPage.class, page.getResourcePrimKey());
 			}
 
