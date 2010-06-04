@@ -112,8 +112,7 @@ public class AddNullTitleTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
 		assertTrue(selenium.isTextPresent("Please enter a valid name."));
-		selenium.clickAt("//div[4]/span[3]/span/input",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("_15_tabs1TabsBack", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=Null Test Article"));
 	}

@@ -46,7 +46,7 @@ public class DeleteTemporaryEventTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Calendar", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//tr[5]/td[4]/ul/li/strong/a",
+		selenium.clickAt("//tr[6]/td[4]/ul/li/strong/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {

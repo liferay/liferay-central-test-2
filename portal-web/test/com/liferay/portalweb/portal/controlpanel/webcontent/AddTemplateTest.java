@@ -51,7 +51,6 @@ public class AddTemplateTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Template']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_15_newTemplateId", RuntimeVariables.replace("Test"));
 		selenium.type("_15_newTemplateId", RuntimeVariables.replace("Test"));
 		selenium.type("_15_name",
 			RuntimeVariables.replace("Test Web Content Template"));

@@ -51,8 +51,6 @@ public class AddLocalizedStructureTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Structure']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_15_newStructureId",
-			RuntimeVariables.replace("LOCALIZED"));
 		selenium.type("_15_newStructureId",
 			RuntimeVariables.replace("LOCALIZED"));
 		selenium.type("_15_name",
@@ -67,9 +65,11 @@ public class AddLocalizedStructureTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Update']",
 			RuntimeVariables.replace(""));
 		Thread.sleep(5000);
-		assertEquals("page-name", selenium.getValue("_15_structure_el0_name"));
+		assertEquals("page-name",
+			selenium.getValue("//td[1]/span/span/span/input"));
 		assertEquals("page-description",
-			selenium.getValue("_15_structure_el1_name"));
+			selenium.getValue(
+				"//tr[2]/td/table/tbody/tr/td[1]/span/span/span/input"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=LOCALIZED"));

@@ -94,7 +94,7 @@ public class AddDeletableMessageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d"),
-			selenium.getText("//form/div[2]"));
+			selenium.getText("//li[1]/span/span/span"));
 		assertEquals(RuntimeVariables.replace(
 				"T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d"),
 			selenium.getText("//a/strong"));

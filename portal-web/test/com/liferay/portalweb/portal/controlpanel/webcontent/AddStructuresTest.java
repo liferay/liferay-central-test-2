@@ -60,19 +60,16 @@ public class AddStructuresTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Row']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_15_structure_el0_name",
+		selenium.type("//td[1]/span/span/span/input",
 			RuntimeVariables.replace("Itp"));
-		selenium.type("_15_structure_el0_name", RuntimeVariables.replace("Itp"));
-		selenium.select("_15_structure_el0_type",
+		selenium.select("//span/select",
 			RuntimeVariables.replace("label=Link to Page"));
 		selenium.clickAt("//input[@value='Add Row']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_15_structure_el0_name",
+		selenium.type("//tr[2]/td/table/tbody/tr/td[1]/span/span/span/input",
 			RuntimeVariables.replace("title"));
-		selenium.type("_15_structure_el0_name",
-			RuntimeVariables.replace("title"));
-		selenium.select("_15_structure_el0_type",
+		selenium.select("//tr[2]/td/table/tbody/tr/td[2]/div[1]/div/span/span/span/select",
 			RuntimeVariables.replace("label=Text"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

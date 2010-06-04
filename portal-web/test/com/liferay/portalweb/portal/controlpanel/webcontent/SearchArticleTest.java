@@ -100,7 +100,7 @@ public class SearchArticleTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isElementPresent(
 						"link=Test Web Content Article"));
-				selenium.type("_15_version", RuntimeVariables.replace("1.1"));
+				selenium.type("_15_version", RuntimeVariables.replace("test"));
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
@@ -166,7 +166,7 @@ public class SearchArticleTest extends BaseTestCase {
 				assertTrue(selenium.isElementPresent(
 						"link=Test Web Content Article"));
 				selenium.select("_15_status",
-					RuntimeVariables.replace("label=Not Approved"));
+					RuntimeVariables.replace("label=Draft"));
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");

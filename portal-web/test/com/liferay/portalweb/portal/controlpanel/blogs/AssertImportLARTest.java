@@ -74,7 +74,7 @@ public class AssertImportLARTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//form/div/div[1]/div[1]")) {
+				if (selenium.isVisible("//span/span/span")) {
 					break;
 				}
 			}
@@ -85,7 +85,9 @@ public class AssertImportLARTest extends BaseTestCase {
 		}
 
 		assertEquals(RuntimeVariables.replace("Test Entry"),
-			selenium.getText("//form/div/div[1]/div[1]"));
+			selenium.getText("//span/span/span"));
+		assertEquals(RuntimeVariables.replace("This is a test entry."),
+			selenium.getText("//p"));
 		assertEquals(RuntimeVariables.replace("This is a test entry comment."),
 			selenium.getText("//td[2]/div[1]"));
 	}

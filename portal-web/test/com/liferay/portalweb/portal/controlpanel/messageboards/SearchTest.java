@@ -46,6 +46,64 @@ public class SearchTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Message Boards", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.type("_19_keywords1", RuntimeVariables.replace("T\u00e9st"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=T\u00e9st M\u00e9ssag\u00e9"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Control Panel")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Message Boards", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_19_keywords1", RuntimeVariables.replace("T\u00e9st"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=T\u00e9st M\u00e9ssag\u00e9"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Control Panel")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Message Boards", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_19_keywords1", RuntimeVariables.replace("T\u00e9st"));

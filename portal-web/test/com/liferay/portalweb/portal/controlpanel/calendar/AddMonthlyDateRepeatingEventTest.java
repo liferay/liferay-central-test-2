@@ -49,7 +49,7 @@ public class AddMonthlyDateRepeatingEventTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Events", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//td[5]/ul/li/strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[6]/ul/li/strong/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
