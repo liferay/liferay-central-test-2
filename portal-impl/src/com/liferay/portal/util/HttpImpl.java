@@ -191,7 +191,7 @@ public class HttpImpl implements Http {
 
 	public String decodePath(String path) {
 		path =  StringUtil.replace(path, StringPool.SLASH, _TEMP_SLASH);
-		path = HttpUtil.decodeURL(path, true);
+		path = decodeURL(path, true);
 		path =  StringUtil.replace(path, _TEMP_SLASH, StringPool.SLASH);
 
 		return path;
@@ -232,7 +232,7 @@ public class HttpImpl implements Http {
 
 	public String encodePath(String path) {
 		path = StringUtil.replace(path, StringPool.SLASH, _TEMP_SLASH);
-		path = HttpUtil.encodeURL(path, true);
+		path = encodeURL(path, true);
 		path = StringUtil.replace(path, _TEMP_SLASH, StringPool.SLASH);
 
 		return path;
