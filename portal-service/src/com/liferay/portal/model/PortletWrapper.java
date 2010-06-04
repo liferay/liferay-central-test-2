@@ -344,10 +344,6 @@ public class PortletWrapper implements Portlet {
 		return _portlet.getPortletDataHandlerInstance();
 	}
 
-	public com.liferay.portal.kernel.portlet.PortletLayoutListener getPortletLayoutListener() {
-		return _portlet.getPortletLayoutListener();
-	}
-
 	public java.lang.String getPortletLayoutListenerClass() {
 		return _portlet.getPortletLayoutListenerClass();
 	}

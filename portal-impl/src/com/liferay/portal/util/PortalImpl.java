@@ -54,7 +54,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -2536,23 +2535,9 @@ public class PortalImpl implements Portal {
 	public PreferencesValidator getPreferencesValidator(Portlet portlet) {
 		PortletApp portletApp = portlet.getPortletApp();
 
-		if (portletApp.isWARFile()) {
-			PortletBag portletBag = PortletBagPool.get(
-				portlet.getRootPortletId());
+		PortletBag portletBag = PortletBagPool.get(portlet.getRootPortletId());
 
-			return portletBag.getPreferencesValidatorInstance();
-		}
-		else {
-			PreferencesValidator preferencesValidator = null;
-
-			if (Validator.isNotNull(portlet.getPreferencesValidator())) {
-				preferencesValidator =
-					(PreferencesValidator)InstancePool.get(
-						portlet.getPreferencesValidator());
-			}
-
-			return preferencesValidator;
-		}
+		return portletBag.getPreferencesValidatorInstance();
 	}
 
 	public long getScopeGroupId(HttpServletRequest request)

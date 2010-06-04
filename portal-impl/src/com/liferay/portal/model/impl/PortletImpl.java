@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -491,14 +490,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		if (_portletApp.isWARFile()) {
-			PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+		PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
-			return portletBag.getConfigurationActionInstance();
-		}
-
-		return (ConfigurationAction)InstancePool.get(
-			getConfigurationActionClass());
+		return portletBag.getConfigurationActionInstance();
 	}
 
 	/**
@@ -529,13 +523,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		if (_portletApp.isWARFile()) {
-			PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+		PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
-			return portletBag.getIndexerInstance();
-		}
-
-		return (Indexer)InstancePool.get(getIndexerClass());
+		return portletBag.getIndexerInstance();
 	}
 
 	/**
@@ -566,13 +556,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		if (_portletApp.isWARFile()) {
-			PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+		PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
-			return portletBag.getOpenSearchInstance();
-		}
-
-		return (OpenSearch)InstancePool.get(getOpenSearchClass());
+		return portletBag.getOpenSearchInstance();
 	}
 
 	/**
@@ -649,13 +635,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		if (_portletApp.isWARFile()) {
-			PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+		PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
-			return portletBag.getFriendlyURLMapperInstance();
-		}
-
-		return (FriendlyURLMapper)InstancePool.get(getFriendlyURLMapperClass());
+		return portletBag.getFriendlyURLMapperInstance();
 	}
 
 	/**
@@ -708,13 +690,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		if (_portletApp.isWARFile()) {
-			PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+		PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
-			return portletBag.getURLEncoderInstance();
-		}
-
-		return (URLEncoder)InstancePool.get(getURLEncoderClass());
+		return portletBag.getURLEncoderInstance();
 	}
 
 	/**
@@ -746,29 +724,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		if (_portletApp.isWARFile()) {
-			PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
-				getRootPortletId());
+		PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
+			getRootPortletId());
 
-			return portletBagImpl.getPortletDataHandlerInstance();
-		}
-
-		return (PortletDataHandler)InstancePool.get(
-			getPortletDataHandlerClass());
-	}
-
-	/**
-	 * Gets the portlet layout listener of the portlet.
-	 *
-	 * @return the name of the portlet layout listener class of the portlet
-	 */
-	public PortletLayoutListener getPortletLayoutListener() {
-		if (Validator.isNull(getPortletLayoutListenerClass())) {
-			return null;
-		}
-
-		return (PortletLayoutListener)InstancePool.get(
-			getPortletLayoutListenerClass());
+		return portletBagImpl.getPortletDataHandlerInstance();
 	}
 
 	/**
@@ -802,14 +761,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		if (_portletApp.isWARFile()) {
-			PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+		PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
-			return portletBag.getPortletLayoutListenerInstance();
-		}
-
-		return (PortletLayoutListener)InstancePool.get(
-			getPortletLayoutListenerClass());
+		return portletBag.getPortletLayoutListenerInstance();
 	}
 
 	/**
@@ -841,13 +795,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		if (_portletApp.isWARFile()) {
-			PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+		PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
-			return portletBag.getPollerProcessorInstance();
-		}
-
-		return (PollerProcessor)InstancePool.get(getPollerProcessorClass());
+		return portletBag.getPollerProcessorInstance();
 	}
 
 	/**
@@ -879,13 +829,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		if (_portletApp.isWARFile()) {
-			PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+		PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
-			return portletBag.getPopMessageListenerInstance();
-		}
-
-		return (MessageListener)InstancePool.get(getPopMessageListenerClass());
+		return portletBag.getPopMessageListenerInstance();
 	}
 
 	/**
@@ -920,15 +866,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		if (_portletApp.isWARFile()) {
-			PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
-				getRootPortletId());
+		PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
+			getRootPortletId());
 
-			return portletBagImpl.getSocialActivityInterpreterInstance();
-		}
-
-		return (SocialActivityInterpreter)InstancePool.get(
-			getSocialActivityInterpreterClass());
+		return portletBagImpl.getSocialActivityInterpreterInstance();
 	}
 
 	/**
@@ -963,15 +904,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		if (_portletApp.isWARFile()) {
-			PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
-				getRootPortletId());
+		PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
+			getRootPortletId());
 
-			return portletBagImpl.getSocialRequestInterpreterInstance();
-		}
-
-		return (SocialRequestInterpreter)InstancePool.get(
-			getSocialRequestInterpreterClass());
+		return portletBagImpl.getSocialRequestInterpreterInstance();
 	}
 
 	/**
@@ -1022,15 +958,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		if (_portletApp.isWARFile()) {
-			PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
-				getRootPortletId());
+		PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
+			getRootPortletId());
 
-			return portletBagImpl.getWebDAVStorageInstance();
-		}
-
-		return (WebDAVStorage)InstancePool.get(
-			getWebDAVStorageClass());
+		return portletBagImpl.getWebDAVStorageInstance();
 	}
 
 	/**
@@ -1062,14 +993,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		if (_portletApp.isWARFile()) {
-			PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
-				getRootPortletId());
+		PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
+			getRootPortletId());
 
-			return portletBagImpl.getXmlRpcMethodInstance();
-		}
-
-		return (Method)InstancePool.get(getXmlRpcMethodClass());
+		return portletBagImpl.getXmlRpcMethodInstance();
 	}
 
 	/**
@@ -1151,14 +1078,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		if (_portletApp.isWARFile()) {
-			PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
-				getRootPortletId());
+		PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
+			getRootPortletId());
 
-			return portletBagImpl.getControlPanelEntryInstance();
-		}
-
-		return (ControlPanelEntry)InstancePool.get(getControlPanelEntryClass());
+		return portletBagImpl.getControlPanelEntryInstance();
 	}
 
 	/**
@@ -1195,32 +1118,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		if (_portletApp.isWARFile()) {
-			PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
-				getRootPortletId());
+		PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
+			getRootPortletId());
 
-			return portletBagImpl.getAssetRendererFactoryInstances();
-		}
-
-		List<AssetRendererFactory> assetRendererFactoryInstances =
-			new ArrayList<AssetRendererFactory>();
-
-		for (String assetRendererFactoryClass :
-				getAssetRendererFactoryClasses()) {
-
-			AssetRendererFactory assetRendererFactoryInstance =
-				(AssetRendererFactory)InstancePool.get(
-					assetRendererFactoryClass);
-
-			assetRendererFactoryInstance.setClassNameId(
-				PortalUtil.getClassNameId(
-					assetRendererFactoryInstance.getClassName()));
-			assetRendererFactoryInstance.setPortletId(getPortletId());
-
-			assetRendererFactoryInstances.add(assetRendererFactoryInstance);
-		}
-
-		return assetRendererFactoryInstances;
+		return portletBagImpl.getAssetRendererFactoryInstances();
 	}
 
 	/**
@@ -1257,33 +1158,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		if (_portletApp.isWARFile()) {
-			PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
-				getRootPortletId());
+		PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
+			getRootPortletId());
 
-			return portletBagImpl.getCustomAttributesDisplayInstances();
-		}
-
-		List<CustomAttributesDisplay> customAttributesDisplayInstances =
-			new ArrayList<CustomAttributesDisplay>();
-
-		for (String customAttributesDisplayClass :
-				getCustomAttributesDisplayClasses()) {
-
-			CustomAttributesDisplay customAttributesDisplayInstance =
-				(CustomAttributesDisplay)InstancePool.get(
-					customAttributesDisplayClass);
-
-			customAttributesDisplayInstance.setClassNameId(
-				PortalUtil.getClassNameId(
-					customAttributesDisplayInstance.getClassName()));
-			customAttributesDisplayInstance.setPortletId(getPortletId());
-
-			customAttributesDisplayInstances.add(
-				customAttributesDisplayInstance);
-		}
-
-		return customAttributesDisplayInstances;
+		return portletBagImpl.getCustomAttributesDisplayInstances();
 	}
 
 	/**
@@ -1318,23 +1196,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		if (_portletApp.isWARFile()) {
-			PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+		PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
-			return portletBag.getWorkflowHandlerInstances();
-		}
-
-		List<WorkflowHandler> workflowHandlerInstances =
-			new ArrayList<WorkflowHandler>();
-
-		for (String workflowHandlerClass : getWorkflowHandlerClasses()) {
-			WorkflowHandler workflowHandlerInstance =
-				(WorkflowHandler)InstancePool.get(workflowHandlerClass);
-
-			workflowHandlerInstances.add(workflowHandlerInstance);
-		}
-
-		return workflowHandlerInstances;
+		return portletBag.getWorkflowHandlerInstances();
 	}
 
 	/**

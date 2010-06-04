@@ -26,14 +26,12 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
-import com.liferay.portal.kernel.poller.PollerProcessor;
+import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
-import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.TimeUnit;
 import com.liferay.portal.kernel.scheduler.TriggerType;
-import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
 import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
@@ -41,24 +39,16 @@ import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PortalInitableUtil;
-import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.webdav.WebDAVStorage;
-import com.liferay.portal.kernel.webdav.WebDAVUtil;
-import com.liferay.portal.kernel.workflow.WorkflowHandler;
-import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
-import com.liferay.portal.kernel.xmlrpc.Method;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
@@ -69,8 +59,6 @@ import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletURLListener;
 import com.liferay.portal.model.User;
 import com.liferay.portal.plugin.PluginPackageIndexer;
-import com.liferay.portal.poller.PollerProcessorUtil;
-import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
@@ -96,20 +84,12 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portal.xmlrpc.XmlRpcServlet;
+import com.liferay.portlet.PortletBagFactory;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletFilterFactory;
 import com.liferay.portlet.PortletInstanceFactoryUtil;
 import com.liferay.portlet.PortletURLListenerFactory;
-import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
-import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.social.messaging.CheckEquityLogMessageListener;
-import com.liferay.portlet.social.model.SocialActivityInterpreter;
-import com.liferay.portlet.social.model.SocialRequestInterpreter;
-import com.liferay.portlet.social.model.impl.SocialActivityInterpreterImpl;
-import com.liferay.portlet.social.model.impl.SocialRequestInterpreterImpl;
-import com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceUtil;
-import com.liferay.portlet.social.service.SocialRequestInterpreterLocalServiceUtil;
 import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.EncryptedServletRequest;
 
@@ -284,117 +264,11 @@ public class MainServlet extends ActionServlet {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Initialize indexers");
-		}
-
-		try {
-			initIndexers(portlets);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Initialize schedulers");
-		}
-
-		try {
-			initSchedulers(portlets);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Initialize poller processors");
-		}
-
-		try {
-			initPollerProcessors(portlets);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Initialize POP message listeners");
-		}
-
-		try {
-			initPOPMessageListeners(portlets);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Initialize social activity interpreters");
-		}
-
-		try {
-			initSocialActivityInterpreters(portlets);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Initialize social request interpreters");
+			_log.debug("Initialize social log scheduler");
 		}
 
 		try {
 			initSocialEquityLogScheduler();
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		try {
-			initSocialRequestInterpreters(portlets);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Initialize WebDAV storages");
-		}
-
-		try {
-			initWebDAVStorages(portlets);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Initialize XML-RPC methods");
-		}
-
-		try {
-			initXmlRpcMethods(portlets);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Initialize asset renderer factories");
-		}
-
-		try {
-			initAssetRendererFactories(portlets);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Initialize workflow handlers");
-		}
-
-		try {
-			initWorkflowHandlers(portlets);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -873,39 +747,6 @@ public class MainServlet extends ActionServlet {
 		}
 	}
 
-	protected void initAssetRendererFactories(List<Portlet> portlets)
-		throws Exception {
-
-		Iterator<Portlet> itr = portlets.iterator();
-
-		while (itr.hasNext()) {
-			Portlet portlet = itr.next();
-
-			List<AssetRendererFactory> assetRendererFactories =
-				portlet.getAssetRendererFactoryInstances();
-
-			if (assetRendererFactories == null) {
-				continue;
-			}
-
-			for (AssetRendererFactory assetRendererFactory :
-					assetRendererFactories) {
-
-				String assetRendererEnabledKey =
-					PropsKeys.ASSET_RENDERER_ENABLED +
-						assetRendererFactory.getClass().getName();
-
-				boolean assetRendererEnabledValue = GetterUtil.getBoolean(
-					PropsUtil.get(assetRendererEnabledKey), true);
-
-				if (assetRendererEnabledValue) {
-					AssetRendererFactoryRegistryUtil.register(
-						assetRendererFactory);
-				}
-			}
-		}
-	}
-
 	protected void initCompanies() throws Exception {
 		ServletContext servletContext = getServletContext();
 
@@ -920,26 +761,6 @@ public class MainServlet extends ActionServlet {
 		ServletContext servletContext = getServletContext();
 
 		ExtRegistry.registerPortal(servletContext);
-	}
-
-	protected void initIndexers(List<Portlet> portlets) throws Exception {
-		IndexerRegistryUtil.register(new PluginPackageIndexer());
-
-		Iterator<Portlet> itr = portlets.iterator();
-
-		while (itr.hasNext()) {
-			Portlet portlet = itr.next();
-
-			String indexerClass = portlet.getIndexerClass();
-
-			if (!portlet.isActive() || Validator.isNull(indexerClass)) {
-				continue;
-			}
-
-			Indexer indexer = (Indexer)InstancePool.get(indexerClass);
-
-			IndexerRegistryUtil.register(indexer);
-		}
 	}
 
 	protected void initLayoutTemplates(
@@ -964,6 +785,8 @@ public class MainServlet extends ActionServlet {
 	protected PluginPackage initPluginPackage() throws Exception {
 		ServletContext servletContext = getServletContext();
 
+		IndexerRegistryUtil.register(new PluginPackageIndexer());
+
 		return PluginPackageHotDeployListener.readPluginPackage(servletContext);
 	}
 
@@ -974,45 +797,6 @@ public class MainServlet extends ActionServlet {
 
 		PortalInitableUtil.flushInitables();
 		HotDeployUtil.flushPrematureEvents();
-	}
-
-	protected void initPollerProcessors(List<Portlet> portlets)
-		throws Exception {
-
-		Iterator<Portlet> itr = portlets.iterator();
-
-		while (itr.hasNext()) {
-			Portlet portlet = itr.next();
-
-			PollerProcessor pollerProcessor =
-				portlet.getPollerProcessorInstance();
-
-			if (!portlet.isActive() || (pollerProcessor == null)) {
-				continue;
-			}
-
-			PollerProcessorUtil.addPollerProcessor(
-				portlet.getPortletId(), pollerProcessor);
-		}
-	}
-
-	protected void initPOPMessageListeners(List<Portlet> portlets)
-		throws Exception {
-
-		Iterator<Portlet> itr = portlets.iterator();
-
-		while (itr.hasNext()) {
-			Portlet portlet = itr.next();
-
-			com.liferay.portal.kernel.pop.MessageListener popMessageListener =
-				portlet.getPopMessageListenerInstance();
-
-			if (!portlet.isActive() || (popMessageListener == null)) {
-				continue;
-			}
-
-			POPServerUtil.addListener(popMessageListener);
-		}
 	}
 
 	protected void initPortletApp(
@@ -1061,6 +845,13 @@ public class MainServlet extends ActionServlet {
 
 		PortletLocalServiceUtil.initEAR(servletContext, xmls, pluginPackage);
 
+		PortletBagFactory portletBagFactory = new PortletBagFactory();
+
+		portletBagFactory.setClassLoader(
+			PortalClassLoaderUtil.getClassLoader());
+		portletBagFactory.setServletContext(servletContext);
+		portletBagFactory.setWARFile(false);
+
 		List<Portlet> portlets = PortletLocalServiceUtil.getPortlets();
 
 		for (int i = 0; i < portlets.size(); i++) {
@@ -1070,7 +861,7 @@ public class MainServlet extends ActionServlet {
 				initPortletApp(portlet, servletContext);
 			}
 
-			PortletInstanceFactoryUtil.create(portlet, servletContext);
+			PortletBag portletBag = portletBagFactory.create(portlet);
 		}
 
 		return portlets;
@@ -1129,81 +920,12 @@ public class MainServlet extends ActionServlet {
 		}
 	}
 
-	protected void initSchedulers(List<Portlet> portlets) throws Exception {
-		if (!PropsValues.SCHEDULER_ENABLED) {
-			return;
-		}
-
-		for (Portlet portlet : portlets) {
-			if (!portlet.isActive()) {
-				continue;
-			}
-
-			List<SchedulerEntry> schedulerEntries =
-				portlet.getSchedulerEntries();
-
-			if ((schedulerEntries == null) || schedulerEntries.isEmpty()) {
-				continue;
-			}
-
-			for (SchedulerEntry schedulerEntry : schedulerEntries) {
-				String propertyKey = schedulerEntry.getPropertyKey();
-
-				if (Validator.isNotNull(propertyKey)) {
-					String triggerValue = PrefsPropsUtil.getString(propertyKey);
-
-					if (_log.isDebugEnabled()) {
-						_log.debug(
-							"Scheduler property key " + propertyKey +
-								" has trigger value " + triggerValue);
-					}
-
-					if (Validator.isNull(triggerValue)) {
-						throw new SchedulerException(
-							"Property key " + propertyKey +
-								" requires a value");
-					}
-
-					schedulerEntry.setTriggerValue(triggerValue);
-				}
-
-				SchedulerEngineUtil.schedule(
-					schedulerEntry, PortalClassLoaderUtil.getClassLoader());
-			}
-		}
-	}
-
 	protected void initSevletContextPool() throws Exception {
 		ServletContext servletContext = getServletContext();
 
 		String contextPath = PortalUtil.getPathContext();
 
 		ServletContextPool.put(contextPath, servletContext);
-	}
-
-	protected void initSocialActivityInterpreters(List<Portlet> portlets)
-		throws Exception {
-
-		Iterator<Portlet> itr = portlets.iterator();
-
-		while (itr.hasNext()) {
-			Portlet portlet = itr.next();
-
-			SocialActivityInterpreter socialActivityInterpreter =
-				portlet.getSocialActivityInterpreterInstance();
-
-			if (!portlet.isActive() ||
-				(socialActivityInterpreter == null)) {
-
-				continue;
-			}
-
-			socialActivityInterpreter = new SocialActivityInterpreterImpl(
-				portlet.getPortletId(), socialActivityInterpreter);
-
-			SocialActivityInterpreterLocalServiceUtil.addActivityInterpreter(
-				socialActivityInterpreter);
-		}
 	}
 
 	protected void initSocialEquityLogScheduler() throws Exception {
@@ -1218,29 +940,6 @@ public class MainServlet extends ActionServlet {
 
 		SchedulerEngineUtil.schedule(
 			schedulerEntry, PortalClassLoaderUtil.getClassLoader());
-	}
-
-	protected void initSocialRequestInterpreters(List<Portlet> portlets)
-		throws Exception {
-
-		Iterator<Portlet> itr = portlets.iterator();
-
-		while (itr.hasNext()) {
-			Portlet portlet = itr.next();
-
-			SocialRequestInterpreter socialRequestInterpreter =
-				portlet.getSocialRequestInterpreterInstance();
-
-			if (!portlet.isActive() || (socialRequestInterpreter == null)) {
-				continue;
-			}
-
-			socialRequestInterpreter = new SocialRequestInterpreterImpl(
-				portlet.getPortletId(), socialRequestInterpreter);
-
-			SocialRequestInterpreterLocalServiceUtil.addRequestInterpreter(
-				socialRequestInterpreter);
-		}
 	}
 
 	protected void initThemes(
@@ -1262,24 +961,6 @@ public class MainServlet extends ActionServlet {
 			servletContext, null, true, xmls, pluginPackage);
 	}
 
-	protected void initWebDAVStorages(List<Portlet> portlets) throws Exception {
-		Iterator<Portlet> itr = portlets.iterator();
-
-		while (itr.hasNext()) {
-			Portlet portlet = itr.next();
-
-			WebDAVStorage webDAVStorage = portlet.getWebDAVStorageInstance();
-
-			if (!portlet.isActive() || (webDAVStorage == null)) {
-				continue;
-			}
-
-			webDAVStorage.setToken(portlet.getWebDAVStorageToken());
-
-			WebDAVUtil.addStorage(webDAVStorage);
-		}
-	}
-
 	protected void initWebSettings() throws Exception {
 		ServletContext servletContext = getServletContext();
 
@@ -1287,41 +968,6 @@ public class MainServlet extends ActionServlet {
 			servletContext.getResource("/WEB-INF/web.xml"));
 
 		checkWebSettings(xml);
-	}
-
-	protected void initWorkflowHandlers(List<Portlet> portlets)
-		throws Exception {
-
-		Iterator<Portlet> itr = portlets.iterator();
-
-		while (itr.hasNext()) {
-			Portlet portlet = itr.next();
-
-			List<WorkflowHandler> workflowHandlers =
-				portlet.getWorkflowHandlerInstances();
-
-			if (workflowHandlers == null) {
-				continue;
-			}
-
-			WorkflowHandlerRegistryUtil.register(workflowHandlers);
-		}
-	}
-
-	protected void initXmlRpcMethods(List<Portlet> portlets) throws Exception {
-		Iterator<Portlet> itr = portlets.iterator();
-
-		while (itr.hasNext()) {
-			Portlet portlet = itr.next();
-
-			Method method = portlet.getXmlRpcMethodInstance();
-
-			if (!portlet.isActive() || (method == null)) {
-				continue;
-			}
-
-			XmlRpcServlet.registerMethod(method);
-		}
 	}
 
 	protected long loginUser(

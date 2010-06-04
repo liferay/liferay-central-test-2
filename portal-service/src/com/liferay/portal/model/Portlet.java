@@ -382,13 +382,6 @@ public interface Portlet extends PortletModel {
 	public com.liferay.portal.kernel.lar.PortletDataHandler getPortletDataHandlerInstance();
 
 	/**
-	* Gets the portlet layout listener of the portlet.
-	*
-	* @return the name of the portlet layout listener class of the portlet
-	*/
-	public com.liferay.portal.kernel.portlet.PortletLayoutListener getPortletLayoutListener();
-
-	/**
 	* Gets the name of the portlet layout listener class of the portlet.
 	*
 	* @return the name of the portlet layout listener class of the portlet
