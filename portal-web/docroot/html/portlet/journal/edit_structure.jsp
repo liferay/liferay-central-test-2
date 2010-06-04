@@ -37,6 +37,8 @@ Group group = GroupLocalServiceUtil.getGroup(groupId);
 String structureId = BeanParamUtil.getString(structure, request, "structureId");
 String newStructureId = ParamUtil.getString(request, "newStructureId");
 
+boolean autoStructureId = ParamUtil.getBoolean(request, "autoStructureId", false);
+
 JournalStructure parentStructure = null;
 
 String parentStructureId = BeanParamUtil.getString(structure, request, "parentStructureId");
@@ -115,7 +117,7 @@ int tabIndex = 1;
 					<c:otherwise>
 						<aui:input cssClass="lfr-input-text-container" field="structureId" fieldParam="newStructureId" label="id" name="newStructureId" value="<%= newStructureId %>" />
 
-						<aui:input label="autogenerate-id" name="autoStructureId" type="checkbox" />
+						<aui:input label="autogenerate-id" name="autoStructureId" type="checkbox" value="<%= autoStructureId %>" />
 					</c:otherwise>
 				</c:choose>
 			</c:when>
