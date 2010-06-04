@@ -20,30 +20,28 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
 
 /**
- * <a href="AsyncInvokeMessageListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="AsyncMessageListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
-public class AsyncInvokeMessageListener implements MessageListener {
+public class AsyncMessageListener implements MessageListener {
 
 	public void receive(Message message) {
-		Object payload =  message.getPayload();
-		if (payload == null) {
-			_log.warn("Missing payload :" + message);
-			return;
-		}
-		if (!(payload instanceof Runnable)) {
-			_log.warn("Wrong payload type :" + message);
-		}
-		Runnable runnable = (Runnable) payload;
 		try {
-			runnable.run();
-		} catch (Throwable t) {
-			_log.error("Fail to run method : " + message, t);
+			doReceive(message);
+		}
+		catch (Exception e) {
+			_log.error("Unable to process message " + message, e);
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
-		AsyncInvokeMessageListener.class);
+	protected void doReceive(Message message) throws Exception {
+		Runnable runnable = (Runnable)message.getPayload();
+
+		runnable.run();
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(AsyncMessageListener.class);
 
 }

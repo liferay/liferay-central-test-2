@@ -20,12 +20,14 @@ import java.lang.reflect.Method;
  * <a href="MethodTargetClassKey.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
 public class MethodTargetClassKey {
 
 	public MethodTargetClassKey(Method method, Class<?> targetClass) {
 		_method = method;
 		_targetClass = targetClass;
+
 		if (_targetClass != null) {
 			try {
 				_targetMethod = _targetClass.getDeclaredMethod(

@@ -12,11 +12,8 @@
  * details.
  */
 
-package com.liferay.portal.messaging.async.aop.config;
+package com.liferay.portal.messaging.async;
 
-import com.liferay.portal.messaging.async.aop.AsyncAdvice;
-
-import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -28,35 +25,35 @@ public class AsyncAdviceConfigurator {
 
 	public void afterPropertiesSet() {
 		if (_asyncAdvice == null) {
-			throw new IllegalArgumentException("AsyncAdvice is null");
+			throw new IllegalArgumentException("Async advice is null");
 		}
-		if (_defaultDestination == null) {
+
+		if (_defaultDestinationName == null) {
 			throw new IllegalArgumentException(
 				"Default destination name is null");
 		}
-		if (_destinations == null) {
-			_destinations = Collections.emptyMap();
+
+		_asyncAdvice.setDefaultDestinationName(_defaultDestinationName);
+
+		if (_destinationNames != null) {
+			_asyncAdvice.setDestinationNames(_destinationNames);
 		}
-		_asyncAdvice.setDefaultDestination(_defaultDestination);
-		_asyncAdvice.setDestinations(_destinations);
 	}
 
 	public void setAsyncAdvice(AsyncAdvice asyncAdvice) {
 		_asyncAdvice = asyncAdvice;
 	}
 
-	public void setDefaultDestination(String defaultDestination) {
-		_defaultDestination = defaultDestination;
+	public void setDefaultDestinationName(String defaultDestinationName) {
+		_defaultDestinationName = defaultDestinationName;
 	}
 
-	public void setDestinations(Map<Class<?>, String> destinations) {
-		_destinations = destinations;
+	public void setDestinationNames(Map<Class<?>, String> destinationNames) {
+		_destinationNames = destinationNames;
 	}
 
 	private AsyncAdvice _asyncAdvice;
-
-	private String _defaultDestination;
-
-	private Map<Class<?>, String> _destinations;
+	private String _defaultDestinationName;
+	private Map<Class<?>, String> _destinationNames;
 
 }

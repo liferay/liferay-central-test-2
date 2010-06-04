@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.messaging.async.annotation;
+package com.liferay.portal.kernel.messaging.async;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

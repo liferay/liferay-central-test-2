@@ -21,6 +21,8 @@ package com.liferay.portal.kernel.messaging;
  */
 public interface DestinationNames {
 
+	public static final String ASYNC_SERVICE = "liferay/async_service";
+
 	public static final String AUDIT = "liferay/audit";
 
 	public static final String BLOGS = "liferay/blogs";
@@ -63,8 +65,6 @@ public interface DestinationNames {
 
 	public static final String MESSAGE_BOARDS_MAILING_LIST =
 		"liferay/message_boards_mailing_list";
-
-	public static final String MESSAGE_BUS_ASYNC = "liferay/message_bus_async";
 
 	public static final String MESSAGE_BUS_DEFAULT_RESPONSE=
 		"liferay/message_bus/default_response";

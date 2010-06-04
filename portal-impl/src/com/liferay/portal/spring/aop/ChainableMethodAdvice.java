@@ -18,22 +18,25 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * <a href="ChainableAroundMethodAdvice.java.html"><b><i>View Source</i></b></a>
+ * <a href="ChainableMethodAdvice.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
-public abstract class ChainableAroundMethodAdvice implements MethodInterceptor {
+public abstract class ChainableMethodAdvice implements MethodInterceptor {
 
-	public abstract void afterReturning(
-			MethodInvocation methodInvocation, Object result)
-		throws Throwable;
+	public void afterReturning(MethodInvocation methodInvocation, Object result)
+		throws Throwable {
+	}
 
-	public abstract void afterThrowing(
+	public void afterThrowing(
 			MethodInvocation methodInvocation, Throwable throwable)
-		throws Throwable;
+		throws Throwable {
+	}
 
-	public abstract Object before(MethodInvocation methodInvocation)
-		throws Throwable;
+	public Object before(MethodInvocation methodInvocation) throws Throwable {
+		return null;
+	}
 
 	public final Object invoke(MethodInvocation methodInvocation)
 		throws Throwable {
@@ -41,7 +44,7 @@ public abstract class ChainableAroundMethodAdvice implements MethodInterceptor {
 		Object returnValue = before(methodInvocation);
 
 		if (returnValue != null) {
-			if (returnValue == discardResult) {
+			if (returnValue == nullResult) {
 				return null;
 			}
 			else {
@@ -74,8 +77,7 @@ public abstract class ChainableAroundMethodAdvice implements MethodInterceptor {
 		this.nextMethodInterceptor = nextMethodInterceptor;
 	}
 
-	protected Object discardResult = new Object();
-
 	protected MethodInterceptor nextMethodInterceptor;
+	protected Object nullResult = new Object();
 
 }

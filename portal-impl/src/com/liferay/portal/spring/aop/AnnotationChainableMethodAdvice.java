@@ -25,26 +25,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * <a href="BaseAnnotationChainableAroundMethodAdvice.java.html"><b><i>
- * View Source</i></b></a>
+ * <a href="AnnotationChainableMethodAdvice.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
-public abstract class BaseAnnotationChainableAroundMethodAdvice
-	<T extends Annotation> extends ChainableAroundMethodAdvice {
-
-	public void afterReturning(MethodInvocation methodInvocation, Object result)
-		throws Throwable {
-	}
-
-	public void afterThrowing(
-			MethodInvocation methodInvocation, Throwable throwable)
-		throws Throwable {
-	}
-
-	public Object before(MethodInvocation methodInvocation) throws Throwable {
-		return null;
-	}
+public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
+	extends ChainableMethodAdvice {
 
 	public abstract Class<T> getAnnotationClass();
 
@@ -67,8 +55,7 @@ public abstract class BaseAnnotationChainableAroundMethodAdvice
 	}
 
 	protected T findAnnotation(MethodTargetClassKey methodTargetClassKey){
-
-		T annotation = annotationCache.get(methodTargetClassKey);
+		T annotation = _annotations.get(methodTargetClassKey);
 
 		if (annotation != null) {
 			return annotation;
@@ -92,13 +79,12 @@ public abstract class BaseAnnotationChainableAroundMethodAdvice
 			annotation = getNullAnnotation();
 		}
 
-		annotationCache.put(methodTargetClassKey, annotation);
+		_annotations.put(methodTargetClassKey, annotation);
 
 		return annotation;
 	}
 
-	protected Map<MethodTargetClassKey, T>
-		annotationCache =
-			new ConcurrentHashMap<MethodTargetClassKey, T>();
+	protected Map<MethodTargetClassKey, T> _annotations =
+		new ConcurrentHashMap<MethodTargetClassKey, T>();
 
 }

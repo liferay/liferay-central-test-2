@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.cache.ThreadLocalCacheManager;
 import com.liferay.portal.kernel.util.MethodTargetClassKey;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.spring.aop.BaseAnnotationChainableAroundMethodAdvice;
+import com.liferay.portal.spring.aop.AnnotationChainableMethodAdvice;
 
 import java.lang.annotation.Annotation;
 
@@ -31,9 +31,10 @@ import org.aopalliance.intercept.MethodInvocation;
  * <a href="ThreadLocalCacheAdvice.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
 public class ThreadLocalCacheAdvice
-	extends BaseAnnotationChainableAroundMethodAdvice<ThreadLocalCachable> {
+	extends AnnotationChainableMethodAdvice<ThreadLocalCachable> {
 
 	public void afterReturning(
 			MethodInvocation methodInvocation, Object result)
@@ -42,8 +43,8 @@ public class ThreadLocalCacheAdvice
 		MethodTargetClassKey methodTargetClassKey = buildMethodTargetClassKey(
 			methodInvocation);
 
-		ThreadLocalCachable threadLocalCachable =
-			findAnnotation(methodTargetClassKey);
+		ThreadLocalCachable threadLocalCachable = findAnnotation(
+			methodTargetClassKey);
 
 		if (threadLocalCachable == _nullThreadLocalCacheable) {
 			return;
@@ -56,7 +57,7 @@ public class ThreadLocalCacheAdvice
 		String cacheKey = _buildCacheKey(methodInvocation.getArguments());
 
 		if (result == null) {
-			threadLocalCache.put(cacheKey, _nullResult);
+			threadLocalCache.put(cacheKey, nullResult);
 		}
 		else {
 			threadLocalCache.put(cacheKey, result);
@@ -67,8 +68,8 @@ public class ThreadLocalCacheAdvice
 		MethodTargetClassKey methodTargetClassKey = buildMethodTargetClassKey(
 			methodInvocation);
 
-		ThreadLocalCachable threadLocalCachable =
-			findAnnotation(methodTargetClassKey);
+		ThreadLocalCachable threadLocalCachable = findAnnotation(
+			methodTargetClassKey);
 
 		if (threadLocalCachable == _nullThreadLocalCacheable) {
 			return null;
@@ -82,7 +83,7 @@ public class ThreadLocalCacheAdvice
 
 		Object value = threadLocalCache.get(cacheKey);
 
-		if (value == _nullResult) {
+		if (value == nullResult) {
 			return null;
 		}
 
@@ -110,8 +111,6 @@ public class ThreadLocalCacheAdvice
 
 		return sb.toString();
 	}
-
-	private static Object _nullResult = new Object();
 
 	private static ThreadLocalCachable _nullThreadLocalCacheable =
 		new ThreadLocalCachable() {
