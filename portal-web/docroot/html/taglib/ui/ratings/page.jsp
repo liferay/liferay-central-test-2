@@ -233,6 +233,7 @@ if (ratingsEntry != null) {
 				);
 
 				ratingScore.get('boundingBox').on('mouseenter', showScoreTooltip);
+
 				ratingScore.render();
 			</c:when>
 			<c:when test='<%= type.equals("thumbs") && themeDisplay.isSignedIn() %>'>
