@@ -457,9 +457,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Asset
 
 		assetEntryLocalService.deleteEntry(
-			WikiPage.class.getName(), page.getResourcePrimKey());
-		assetEntryLocalService.deleteEntry(
 			WikiPage.class.getName(), page.getPrimaryKey());
+		assetEntryLocalService.deleteEntry(
+			WikiPage.class.getName(), page.getResourcePrimKey());
 
 		// Resources
 
@@ -1089,7 +1089,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		long resourcePrimKey =
 			wikiPageResourceLocalService.getPageResourcePrimKey(
 				nodeId, title);
-
 		long groupId = oldPage.getGroupId();
 
 		WikiPage page = oldPage;
@@ -1289,11 +1288,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			List<WikiPage> pages = wikiPagePersistence.findByN_T_H(
 				page.getNodeId(), page.getTitle(), true);
 
-			for (WikiPage otherVersion : pages) {
-				if (!otherVersion.equals(page)) {
-					otherVersion.setHead(false);
+			for (WikiPage curPage : pages) {
+				if (!curPage.equals(page)) {
+					curPage.setHead(false);
 
-					wikiPagePersistence.update(otherVersion, false);
+					wikiPagePersistence.update(curPage, false);
 				}
 			}
 		}
@@ -1307,11 +1306,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				page.getNodeId(), page.getTitle(),
 				WorkflowConstants.STATUS_APPROVED);
 
-			for (WikiPage otherVersion : pages) {
-				if (!otherVersion.equals(page)) {
-					otherVersion.setHead(true);
+			for (WikiPage curPage : pages) {
+				if (!curPage.equals(page)) {
+					curPage.setHead(true);
 
-					wikiPagePersistence.update(otherVersion, false);
+					wikiPagePersistence.update(curPage, false);
 
 					break;
 				}
