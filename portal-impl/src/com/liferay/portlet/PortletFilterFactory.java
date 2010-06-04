@@ -47,37 +47,42 @@ public class PortletFilterFactory {
 	}
 
 	private PortletFilterFactory() {
-		_pool = new ConcurrentHashMap<String, Map<String, PortletFilter>>();
+		_portletFilters =
+			new ConcurrentHashMap<String, Map<String, PortletFilter>>();
 	}
 
 	private PortletFilter _create(
 			com.liferay.portal.model.PortletFilter portletFilterModel,
-			PortletContext ctx)
+			PortletContext portletContext)
 		throws PortletException {
 
 		PortletApp portletApp = portletFilterModel.getPortletApp();
 
-		Map<String, PortletFilter> portletFilters = _pool.get(
+		Map<String, PortletFilter> portletFilters = _portletFilters.get(
 			portletApp.getServletContextName());
 
 		if (portletFilters == null) {
 			portletFilters = new ConcurrentHashMap<String, PortletFilter>();
 
-			_pool.put(portletApp.getServletContextName(), portletFilters);
+			_portletFilters.put(
+				portletApp.getServletContextName(), portletFilters);
 		}
 
 		PortletFilter portletFilter = portletFilters.get(
 			portletFilterModel.getFilterName());
 
 		if (portletFilter == null) {
-			FilterConfig filterConfig =
-				FilterConfigFactory.create(portletFilterModel, ctx);
+			FilterConfig filterConfig = FilterConfigFactory.create(
+				portletFilterModel, portletContext);
 
 			if (portletApp.isWARFile()) {
 				PortletContextBag portletContextBag = PortletContextBagPool.get(
 					portletApp.getServletContextName());
 
-				portletFilter = portletContextBag.getPortletFilters().get(
+				Map<String, PortletFilter> curPortletFilters =
+					portletContextBag.getPortletFilters();
+
+				portletFilter = curPortletFilters.get(
 					portletFilterModel.getFilterName());
 
 				portletFilter = _init(
@@ -99,7 +104,7 @@ public class PortletFilterFactory {
 
 		PortletApp portletApp = portletFilterModel.getPortletApp();
 
-		Map<String, PortletFilter> portletFilters = _pool.get(
+		Map<String, PortletFilter> portletFilters = _portletFilters.get(
 			portletApp.getServletContextName());
 
 		if (portletFilters == null) {
@@ -154,6 +159,6 @@ public class PortletFilterFactory {
 
 	private static PortletFilterFactory _instance = new PortletFilterFactory();
 
-	private Map<String, Map<String, PortletFilter>> _pool;
+	private Map<String, Map<String, PortletFilter>> _portletFilters;
 
 }
