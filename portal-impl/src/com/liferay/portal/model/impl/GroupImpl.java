@@ -349,16 +349,6 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		return hasClassName(Organization.class);
 	}
 
-	public boolean isOrganizationOrStaging() {
-		if (isOrganization() ||
-			(isStagingGroup() && getLiveGroup().isOrganization())) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
 	public boolean isStagingGroup() {
 		if (getLiveGroupId() == GroupConstants.DEFAULT_LIVE_GROUP_ID) {
 			return false;
