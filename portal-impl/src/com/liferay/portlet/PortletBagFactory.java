@@ -146,21 +146,8 @@ public class PortletBagFactory {
 		MessageListener popMessageListenerInstance = newPOPMessageListener(
 			portlet);
 
-		SocialActivityInterpreter socialActivityInterpreterInstance = null;
-
-		if (Validator.isNotNull(portlet.getSocialActivityInterpreterClass())) {
-			socialActivityInterpreterInstance =
-				(SocialActivityInterpreter)newInstance(
-					SocialActivityInterpreter.class,
-					portlet.getSocialActivityInterpreterClass());
-
-			socialActivityInterpreterInstance =
-				new SocialActivityInterpreterImpl(
-					portlet.getPortletId(), socialActivityInterpreterInstance);
-
-			SocialActivityInterpreterLocalServiceUtil.addActivityInterpreter(
-				socialActivityInterpreterInstance);
-		}
+		SocialActivityInterpreter socialActivityInterpreterInstance =
+			initSocialActivityInterpreterInstance(portlet);
 
 		SocialRequestInterpreter socialRequestInterpreterInstance = null;
 
@@ -400,6 +387,29 @@ public class PortletBagFactory {
 		}
 	}
 
+	protected SocialActivityInterpreter initSocialActivityInterpreterInstance(
+			Portlet portlet)
+		throws Exception {
+
+		if (Validator.isNull(portlet.getSocialActivityInterpreterClass())) {
+			return null;
+		}
+
+		SocialActivityInterpreter socialActivityInterpreterInstance =
+			(SocialActivityInterpreter)newInstance(
+				SocialActivityInterpreter.class,
+				portlet.getSocialActivityInterpreterClass());
+
+		socialActivityInterpreterInstance =
+			new SocialActivityInterpreterImpl(
+				portlet.getPortletId(), socialActivityInterpreterInstance);
+
+		SocialActivityInterpreterLocalServiceUtil.addActivityInterpreter(
+			socialActivityInterpreterInstance);
+
+		return socialActivityInterpreterInstance;
+	}
+
 	protected AssetRendererFactory newAssetRendererFactoryInstance(
 			Portlet portlet, String assetRendererFactoryClass)
 		throws Exception {
@@ -487,15 +497,19 @@ public class PortletBagFactory {
 
 			route.setPattern(pattern);
 
-			for (Element defaultElement : routeElement.elements("default")) {
-				String parameter = defaultElement.attributeValue("parameter");
-				String value = defaultElement.getText();
+			for (Element defaultParameterElement :
+					routeElement.elements("default-parameter")) {
 
-				route.addDefaultValue(parameter, value);
+				String name = defaultParameterElement.attributeValue("name");
+				String value = defaultParameterElement.getText();
+
+				route.addDefaultParameter(name, value);
 			}
 
 			router.addRoute(route);
 		}
+
+		router.init();
 
 		return router;
 	}
