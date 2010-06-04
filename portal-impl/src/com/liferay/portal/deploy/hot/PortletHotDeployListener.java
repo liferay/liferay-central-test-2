@@ -249,18 +249,19 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		while (itr.hasNext()) {
 			Portlet portlet = itr.next();
 
-			if (!_portletAppInitialized) {
-				initPortletApp(
-					portlet, servletContextName, servletContext,
-					portletClassLoader);
-
-				_portletAppInitialized = true;
-			}
-
 			PortletBag portletBag = initPortlet(portlet, portletBagFactory);
 
 			if (portletBag == null) {
 				itr.remove();
+			}
+			else {
+				if (!_portletAppInitialized) {
+					initPortletApp(
+						portlet, servletContextName, servletContext,
+						portletClassLoader);
+
+					_portletAppInitialized = true;
+				}
 			}
 		}
 

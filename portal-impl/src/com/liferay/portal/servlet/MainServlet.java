@@ -856,11 +856,11 @@ public class MainServlet extends ActionServlet {
 		for (int i = 0; i < portlets.size(); i++) {
 			Portlet portlet = portlets.get(i);
 
+			portletBagFactory.create(portlet);
+
 			if (i == 0) {
 				initPortletApp(portlet, servletContext);
 			}
-
-			portletBagFactory.create(portlet);
 		}
 
 		return portlets;
