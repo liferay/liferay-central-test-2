@@ -611,8 +611,6 @@ public interface PropsKeys {
 
 	public static final String INDEX_READ_ONLY = "index.read.only";
 
-	public static final String INDEX_REPLICATE_LUCENE_WRITE_MESSAGE = "index.replicate.lucene.write.message";
-
 	public static final String INDEX_WITH_THREAD = "index.with.thread";
 
 	public static final String INVITATION_EMAIL_MAX_RECIPIENTS = "invitation.email.max.recipients";
@@ -962,6 +960,8 @@ public interface PropsKeys {
 	public static final String LUCENE_MERGE_FACTOR = "lucene.merge.factor";
 
 	public static final String LUCENE_OPTIMIZE_INTERVAL = "lucene.optimize.interval";
+
+	public static final String LUCENE_REPLICATE_WRITE = "lucene.replicate.write";
 
 	public static final String LUCENE_STORE_JDBC_AUTO_CLEAN_UP_ENABLED = "lucene.store.jdbc.auto.clean.up.enabled";
 

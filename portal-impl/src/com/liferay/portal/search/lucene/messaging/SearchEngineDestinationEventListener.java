@@ -15,6 +15,7 @@
 package com.liferay.portal.search.lucene.messaging;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.cluster.messaging.ClusterBridgeMessageListener;
 import com.liferay.portal.kernel.messaging.BaseDestinationEventListener;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
@@ -26,10 +27,8 @@ import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.search.messaging.BaseSearchEngineMessageListener;
 import com.liferay.portal.kernel.search.messaging.SearchReaderMessageListener;
 import com.liferay.portal.kernel.search.messaging.SearchWriterMessageListener;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.search.lucene.LuceneSearchEngineImpl;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 /**
  * <a href="SearchEngineDestinationEventListener.java.html"><b><i>View Source
@@ -55,16 +54,17 @@ public class SearchEngineDestinationEventListener
 		BaseSearchEngineMessageListener baseSearchEngineMessageListener =
 			(BaseSearchEngineMessageListener)messageListener;
 
-		if (!baseSearchEngineMessageListener.getSearchEngineName().contains(
-				LuceneSearchEngineImpl.NAME)) {
+		String searchEngineName =
+			baseSearchEngineMessageListener.getSearchEngineName();
 
+		if (!searchEngineName.contains(LuceneSearchEngineImpl.NAME)) {
 			setBooleanQueryFactory(
 				new com.liferay.portal.search.generic.
 					BooleanQueryFactoryImpl());
 			setTermQueryFactory(
 				new com.liferay.portal.search.generic.TermQueryFactoryImpl());
-			
-			_indexWriteEventMessageListener.setActive(false);
+
+			_clusterSearchWriterMessageListener.setActive(false);
 		}
 	}
 
@@ -83,21 +83,28 @@ public class SearchEngineDestinationEventListener
 		BaseSearchEngineMessageListener baseSearchEngineMessageListener =
 			(BaseSearchEngineMessageListener)messageListener;
 
-		if (!baseSearchEngineMessageListener.getSearchEngineName().contains(
-				LuceneSearchEngineImpl.NAME)) {
+		String searchEngineName =
+			baseSearchEngineMessageListener.getSearchEngineName();
 
+		if (!searchEngineName.contains(LuceneSearchEngineImpl.NAME)) {
 			setBooleanQueryFactory(
 				new com.liferay.portal.search.lucene.BooleanQueryFactoryImpl());
 			setTermQueryFactory(
 				new com.liferay.portal.search.lucene.TermQueryFactoryImpl());
 
-			_indexWriteEventMessageListener.setActive(_replicateWriteEvent);
+			_clusterSearchWriterMessageListener.setActive(
+				PropsValues.LUCENE_REPLICATE_WRITE);
 		}
 	}
 
-	public void setIndexWriteEventMessageListener(
-		IndexWriteEventReplicationMessageListener indexWriteEventMessageListener) {
-		_indexWriteEventMessageListener = indexWriteEventMessageListener;
+	public void setClusterSearchWriterMessageListener(
+		ClusterBridgeMessageListener clusterSearchWriterMessageListener) {
+
+		_clusterSearchWriterMessageListener =
+			clusterSearchWriterMessageListener;
+
+		_clusterSearchWriterMessageListener.setActive(
+			PropsValues.LUCENE_REPLICATE_WRITE);
 	}
 
 	public void setSearchReaderMessageListener(
@@ -144,9 +151,7 @@ public class SearchEngineDestinationEventListener
 		termQueryFactoryUtil.setTermQueryFactory(termQueryFactory);
 	}
 
-	private IndexWriteEventReplicationMessageListener _indexWriteEventMessageListener;
-	private boolean _replicateWriteEvent = GetterUtil.getBoolean(
-		PropsUtil.get(PropsKeys.INDEX_REPLICATE_LUCENE_WRITE_MESSAGE), false);
+	private ClusterBridgeMessageListener _clusterSearchWriterMessageListener;
 	private SearchReaderMessageListener _searchReaderMessageListener;
 	private SearchWriterMessageListener _searchWriterMessageListener;
 

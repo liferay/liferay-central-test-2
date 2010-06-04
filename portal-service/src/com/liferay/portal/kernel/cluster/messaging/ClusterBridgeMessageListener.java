@@ -31,8 +31,9 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 public class ClusterBridgeMessageListener implements MessageListener {
 
 	public void receive(Message message) {
-
-		// Prevent circular message sending
+		if (!_active) {
+			return;
+		}
 
 		if (ClusterLinkUtil.isForwardMessage(message)) {
 			return;
@@ -58,6 +59,10 @@ public class ClusterBridgeMessageListener implements MessageListener {
 		}
 	}
 
+	public void setActive(boolean active) {
+		_active = active;
+	}
+
 	public void setPriority(Priority priority) {
 		_priority = priority;
 	}
@@ -65,6 +70,7 @@ public class ClusterBridgeMessageListener implements MessageListener {
 	private static Log _log = LogFactoryUtil.getLog(
 		ClusterBridgeMessageListener.class);
 
+	private boolean _active = true;
 	private Priority _priority;
 
 }

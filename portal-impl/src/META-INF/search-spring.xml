@@ -74,13 +74,9 @@
 	<bean id="messageListener.search_writer" class="com.liferay.portal.kernel.search.messaging.SearchWriterMessageListener">
 		<property name="searchEngine" ref="searchEngine.lucene" />
 	</bean>
-	<bean id="messageListener.search_writer_cluster" class="com.liferay.portal.search.lucene.messaging.IndexWriteEventReplicationMessageListener">
-		<property name="clusterBridgeMessageListener">
-			<bean class="com.liferay.portal.kernel.cluster.messaging.ClusterBridgeMessageListener">
-				<property name="priority">
-					<util:constant static-field="com.liferay.portal.kernel.cluster.Priority.LEVEL5" />
-				</property>
-			</bean>		
+	<bean id="messageListener.search_writer_cluster" class="com.liferay.portal.kernel.cluster.messaging.ClusterBridgeMessageListener">
+		<property name="priority">
+			<util:constant static-field="com.liferay.portal.kernel.cluster.Priority.LEVEL5" />
 		</property>
 	</bean>
 	<bean id="messagingConfigurator.search" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator">
@@ -89,9 +85,9 @@
 				<entry key="liferay/search_reader">
 					<list>
 						<bean class="com.liferay.portal.search.lucene.messaging.SearchEngineDestinationEventListener">
+							<property name="clusterSearchWriterMessageListener" ref="messageListener.search_writer_cluster" />
 							<property name="searchReaderMessageListener" ref="messageListener.search_reader" />
 							<property name="searchWriterMessageListener" ref="messageListener.search_writer" />
-							<property name="indexWriteEventMessageListener" ref="messageListener.search_writer_cluster" />
 						</bean>
 					</list>
 				</entry>
