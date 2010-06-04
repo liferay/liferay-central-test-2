@@ -427,6 +427,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		assetEntryLocalService.deleteEntry(
 			WikiPage.class.getName(), page.getResourcePrimKey());
+		assetEntryLocalService.deleteEntry(
+			WikiPage.class.getName(), page.getPrimaryKey());
 
 		// Resources
 
@@ -1038,19 +1040,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		WikiPage oldPage = null;
 
 		try {
-			oldPage = getDraftPage(nodeId, title);
+			oldPage = wikiPagePersistence.findByN_T_First(nodeId, title, null);
 		}
-		catch (NoSuchPageException nspe1) {
-			try {
-				oldPage = getPage(nodeId, title);
-			}
-			catch (NoSuchPageException nspe2) {
-				return addPage(
-					null, userId, nodeId, title,
-					WikiPageConstants.DEFAULT_VERSION, content, summary,
-					minorEdit, format, true, parentTitle, redirectTitle,
-					serviceContext);
-			}
+		catch (NoSuchPageException nspe) {
+			return addPage(
+				null, userId, nodeId, title, WikiPageConstants.DEFAULT_VERSION,
+				content, summary, minorEdit, format, true, parentTitle,
+				redirectTitle, serviceContext);
 		}
 
 		double oldVersion = oldPage.getVersion();
@@ -1059,7 +1055,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			throw new PageVersionException();
 		}
 
-		long resourcePrimKey = oldPage.getResourcePrimKey();
+		long resourcePrimKey =
+			wikiPageResourceLocalService.getPageResourcePrimKey(
+				nodeId, title);
+
 		long groupId = oldPage.getGroupId();
 
 		WikiPage page = oldPage;
@@ -1180,31 +1179,15 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		if (status == WorkflowConstants.STATUS_APPROVED) {
 
-			// Last approved page
-
-			List<WikiPage> pages = wikiPagePersistence.findByN_T_H(
-				page.getNodeId(), page.getTitle(), true, 0, 1);
-
-			if (!pages.isEmpty()) {
-				WikiPage lastApprovedPage = pages.get(0);
-
-				if (!page.equals(lastApprovedPage)) {
-					lastApprovedPage.setHead(false);
-
-					wikiPagePersistence.update(lastApprovedPage, false);
-				}
-			}
-
 			// Asset
 
 			if ((oldStatus != WorkflowConstants.STATUS_APPROVED) &&
 				(page.getVersion() != WikiPageConstants.DEFAULT_VERSION)) {
 
-				AssetEntry draftAssetEntry = null;
-
 				try {
-					draftAssetEntry = assetEntryLocalService.getEntry(
-						WikiPage.class.getName(), page.getPrimaryKey());
+					AssetEntry draftAssetEntry =
+						assetEntryLocalService.getEntry(
+							WikiPage.class.getName(), page.getPrimaryKey());
 
 					long[] assetCategoryIds = draftAssetEntry.getCategoryIds();
 					String[] assetTagNames = draftAssetEntry.getTagNames();
@@ -1216,8 +1199,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 						ContentTypes.TEXT_HTML, page.getTitle(), null, null,
 						null, 0, 0, null, false);
 
-					assetEntryLocalService.deleteEntry(
-						WikiPage.class.getName(), page.getPrimaryKey());
 				}
 				catch (NoSuchEntryException nsee) {
 				}
@@ -1273,6 +1254,17 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			// Head
 
 			page.setHead(true);
+
+			List<WikiPage> pages = wikiPagePersistence.findByN_T_H(
+				page.getNodeId(), page.getTitle(), true);
+
+			for (WikiPage otherVersion : pages) {
+				if (!otherVersion.equals(page)) {
+					otherVersion.setHead(false);
+
+					wikiPagePersistence.update(otherVersion, false);
+				}
+			}
 		}
 		else {
 
@@ -1280,15 +1272,18 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 			page.setHead(false);
 
-			List<WikiPage> pages = wikiPagePersistence.findByN_T_H(
-				page.getNodeId(), page.getTitle(), false, 0, 1);
+			List<WikiPage> pages = wikiPagePersistence.findByN_T_S(
+				page.getNodeId(), page.getTitle(),
+				WorkflowConstants.STATUS_APPROVED);
 
-			if (!pages.isEmpty()) {
-				WikiPage previousVersionPage = pages.get(0);
+			for (WikiPage otherVersion : pages) {
+				if (!otherVersion.equals(page)) {
+					otherVersion.setHead(true);
 
-				previousVersionPage.setHead(true);
+					wikiPagePersistence.update(otherVersion, false);
 
-				wikiPagePersistence.update(previousVersionPage, false);
+					break;
+				}
 			}
 		}
 
