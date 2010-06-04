@@ -114,7 +114,7 @@ public class SQLTransformer {
 			_log.debug("Modified SQL " + newSQL);
 		}
 
-		return sql;
+		return newSQL;
 	}
 
 	private static final String _LOWER_CLOSE = StringPool.CLOSE_PARENTHESIS;
