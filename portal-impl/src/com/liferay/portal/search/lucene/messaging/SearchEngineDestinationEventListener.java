@@ -26,7 +26,10 @@ import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.search.messaging.BaseSearchEngineMessageListener;
 import com.liferay.portal.kernel.search.messaging.SearchReaderMessageListener;
 import com.liferay.portal.kernel.search.messaging.SearchWriterMessageListener;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.search.lucene.LuceneSearchEngineImpl;
+import com.liferay.portal.util.PropsUtil;
 
 /**
  * <a href="SearchEngineDestinationEventListener.java.html"><b><i>View Source
@@ -36,20 +39,6 @@ import com.liferay.portal.search.lucene.LuceneSearchEngineImpl;
  */
 public class SearchEngineDestinationEventListener
 	extends BaseDestinationEventListener {
-
-	public SearchEngineDestinationEventListener() {
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public SearchEngineDestinationEventListener(
-		SearchReaderMessageListener searchReaderMessageListener,
-		SearchWriterMessageListener searchWriterMessageListener) {
-
-		_searchReaderMessageListener = searchReaderMessageListener;
-		_searchWriterMessageListener = searchWriterMessageListener;
-	}
 
 	public void messageListenerRegistered(
 		String destinationName, MessageListener messageListener) {
@@ -74,6 +63,8 @@ public class SearchEngineDestinationEventListener
 					BooleanQueryFactoryImpl());
 			setTermQueryFactory(
 				new com.liferay.portal.search.generic.TermQueryFactoryImpl());
+			
+			_indexWriteEventMessageListener.setActive(false);
 		}
 	}
 
@@ -99,7 +90,14 @@ public class SearchEngineDestinationEventListener
 				new com.liferay.portal.search.lucene.BooleanQueryFactoryImpl());
 			setTermQueryFactory(
 				new com.liferay.portal.search.lucene.TermQueryFactoryImpl());
+
+			_indexWriteEventMessageListener.setActive(_replicateWriteEvent);
 		}
+	}
+
+	public void setIndexWriteEventMessageListener(
+		IndexWriteEventReplicationMessageListener indexWriteEventMessageListener) {
+		_indexWriteEventMessageListener = indexWriteEventMessageListener;
 	}
 
 	public void setSearchReaderMessageListener(
@@ -146,6 +144,9 @@ public class SearchEngineDestinationEventListener
 		termQueryFactoryUtil.setTermQueryFactory(termQueryFactory);
 	}
 
+	private IndexWriteEventReplicationMessageListener _indexWriteEventMessageListener;
+	private boolean _replicateWriteEvent = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.INDEX_REPLICATE_LUCENE_WRITE_MESSAGE), false);
 	private SearchReaderMessageListener _searchReaderMessageListener;
 	private SearchWriterMessageListener _searchWriterMessageListener;
 
