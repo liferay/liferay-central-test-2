@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -37,6 +38,7 @@ import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.HttpMethods;
+import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
@@ -3592,55 +3594,52 @@ public class PortalImpl implements Portal {
 		RequestDispatcher requestDispatcher =
 			servletContext.getRequestDispatcher(path);
 
-		if (writeOutput) {
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
+		PipingServletResponse pipingServletResponse = new PipingServletResponse(
+			response, unsyncStringWriter);
 
-			// LEP-766
+		requestDispatcher.include(request, pipingServletResponse);
 
-			response.setContentType(ContentTypes.TEXT_HTML_UTF8);
+		boolean showPortlet = true;
 
-			requestDispatcher.include(request, response);
+		Boolean portletConfiguratorVisibility =
+			(Boolean)request.getAttribute(
+				WebKeys.PORTLET_CONFIGURATOR_VISIBILITY);
 
-			return StringPool.BLANK;
+		if (portletConfiguratorVisibility != null) {
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+			try {
+				if (!PortletPermissionUtil.contains(
+						themeDisplay.getPermissionChecker(),
+						themeDisplay.getPlid(), portlet.getPortletId(),
+						ActionKeys.CONFIGURATION)) {
+
+					showPortlet = false;
+				}
+			}
+			catch (Exception e) {
+				throw new ServletException(e);
+			}
+
+			request.removeAttribute(
+				WebKeys.PORTLET_CONFIGURATOR_VISIBILITY);
 		}
-		else {
-			StringServletResponse stringResponse = new StringServletResponse(
-				response);
 
-			requestDispatcher.include(request, stringResponse);
-
-			boolean showPortlet = true;
-
-			Boolean portletConfiguratorVisibility =
-				(Boolean)request.getAttribute(
-					WebKeys.PORTLET_CONFIGURATOR_VISIBILITY);
-
-			if (portletConfiguratorVisibility != null) {
-				ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-					WebKeys.THEME_DISPLAY);
-
-				try {
-					if (!PortletPermissionUtil.contains(
-							themeDisplay.getPermissionChecker(),
-							themeDisplay.getPlid(), portlet.getPortletId(),
-							ActionKeys.CONFIGURATION)) {
-
-						showPortlet = false;
-					}
-				}
-				catch (Exception e) {
-					throw new ServletException(e);
-				}
-
-				request.removeAttribute(
-					WebKeys.PORTLET_CONFIGURATOR_VISIBILITY);
-			}
-
-			if (showPortlet) {
-				return stringResponse.getString();
-			}
-			else {
+		if (showPortlet) {
+			if (writeOutput) {
+				response.setContentType(ContentTypes.TEXT_HTML_UTF8);
+				unsyncStringWriter.getStringBundler().writeTo(
+					response.getWriter());
 				return StringPool.BLANK;
 			}
+			else {
+				return unsyncStringWriter.toString();
+			}
+		}
+		else {
+			return StringPool.BLANK;
 		}
 	}
 
