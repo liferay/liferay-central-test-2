@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
-import com.liferay.portal.kernel.servlet.UnbufferedJspWriter;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
@@ -241,8 +240,8 @@ public class RuntimePortletUtil {
 
 		Map<Portlet, Object[]> portletsMap = processor.getPortletsMap();
 
-		Map<String, String> contentsMap = new HashMap<String, String>(
-			portletsMap.size());
+		Map<String, StringBundler> contentsMap =
+			new HashMap<String, StringBundler>(portletsMap.size());
 
 		for (Map.Entry<Portlet, Object[]> entry : portletsMap.entrySet()) {
 			Portlet portlet = entry.getKey();
@@ -253,17 +252,25 @@ public class RuntimePortletUtil {
 			Integer columnPos = (Integer)value[2];
 			Integer columnCount = (Integer)value[3];
 
-			String content = processPortlet(
-				servletContext, request, response, portlet, queryString,
-				columnId, columnPos, columnCount, null, false);
+			UnsyncStringWriter portletUnsyncStringWriter =
+				new UnsyncStringWriter();
 
-			contentsMap.put(portlet.getPortletId(), content);
+			PipingServletResponse pipingServletResponse =
+				new PipingServletResponse(response, portletUnsyncStringWriter);
+
+			processPortlet(
+				servletContext, request, pipingServletResponse, portlet,
+				queryString, columnId, columnPos, columnCount, null, true);
+
+			contentsMap.put(
+				portlet.getPortletId(),
+				portletUnsyncStringWriter.getStringBundler());
 		}
 
-		StringBundler sb = StringUtil.replaceToStringBundler(
+		StringBundler sb = StringUtil.replaceWithStringBundler(
 			output, "[$TEMPLATE_PORTLET_", "$]", contentsMap);
 
-		sb.writeTo(new UnbufferedJspWriter(jspWriter));
+		sb.writeTo(jspWriter);
 	}
 
 	public static String processXML(
