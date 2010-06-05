@@ -61,7 +61,7 @@ public class Router {
 
 		throw new RouteNotFoundException(
 			"No route could be found to use for parameters " +
-				parameters.toString());
+				MapUtil.toString(parameters));
 	}
 
 	public Map<String, String> urlToParameters(String url)
