@@ -284,6 +284,7 @@ public class SourceFormatter {
 
 		directoryScanner.setBasedir(basedir);
 		directoryScanner.setIncludes(new String[] {"**\\b*.xml"});
+		directoryScanner.setExcludes(new String[] {"**\\tools\\tck\\**"});
 
 		List<String> fileNames = _sourceFormatterHelper.scanForFiles(
 			directoryScanner);
