@@ -38,44 +38,107 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 		this.router = router;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	protected void addParam(
-		Map<String, String[]> params, String name, boolean value) {
+		Map<String, String[]> parameterMap, String name, boolean value) {
 
-		addParam(params, name, String.valueOf(value));
+		addParameter(parameterMap, name, value);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	protected void addParam(
-		Map<String, String[]> params, String name, double value) {
+		Map<String, String[]> parameterMap, String name, double value) {
 
-		addParam(params, name, String.valueOf(value));
+		addParameter(parameterMap, name, value);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	protected void addParam(
-		Map<String, String[]> params, String name, int value) {
+		Map<String, String[]> parameterMap, String name, int value) {
 
-		addParam(params, name, String.valueOf(value));
+		addParameter(parameterMap, name, value);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	protected void addParam(
-		Map<String, String[]> params, String name, long value) {
+		Map<String, String[]> parameterMap, String name, long value) {
 
-		addParam(params, name, String.valueOf(value));
+		addParameter(parameterMap, name, value);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	protected void addParam(
-		Map<String, String[]> params, String name, short value) {
+		Map<String, String[]> parameterMap, String name, Object value) {
 
-		addParam(params, name, String.valueOf(value));
+		addParameter(parameterMap, name, value);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	protected void addParam(
-		Map<String, String[]> params, String name, Object value) {
+		Map<String, String[]> parameterMap, String name, short value) {
 
-		addParam(params, name, String.valueOf(value));
+		addParameter(parameterMap, name, value);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	protected void addParam(
-		Map<String, String[]> params, String name, String value) {
+		Map<String, String[]> parameterMap, String name, String value) {
+
+		addParameter(parameterMap, name, value);
+	}
+
+	protected void addParameter(
+		Map<String, String[]> parameterMap, String name, boolean value) {
+
+		addParameter(parameterMap, name, String.valueOf(value));
+	}
+
+	protected void addParameter(
+		Map<String, String[]> parameterMap, String name, double value) {
+
+		addParameter(parameterMap, name, String.valueOf(value));
+	}
+
+	protected void addParameter(
+		Map<String, String[]> parameterMap, String name, int value) {
+
+		addParameter(parameterMap, name, String.valueOf(value));
+	}
+
+	protected void addParameter(
+		Map<String, String[]> parameterMap, String name, long value) {
+
+		addParameter(parameterMap, name, String.valueOf(value));
+	}
+
+	protected void addParameter(
+		Map<String, String[]> parameterMap, String name, Object value) {
+
+		addParameter(parameterMap, name, String.valueOf(value));
+	}
+
+	protected void addParameter(
+		Map<String, String[]> parameterMap, String name, short value) {
+
+		addParameter(parameterMap, name, String.valueOf(value));
+	}
+
+	protected void addParameter(
+		Map<String, String[]> parameterMap, String name, String value) {
 
 		try {
 			if (!PortalUtil.isReservedParameter(name)) {
@@ -90,7 +153,7 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 				}
 			}
 
-			params.put(name, new String[] {value});
+			parameterMap.put(name, new String[] {value});
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -98,14 +161,7 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 	}
 
 	protected String getNamespace() {
-		try {
-			return PortalUtil.getPortletNamespace(getPortletId());
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			return getPortletId();
-		}
+		return PortalUtil.getPortletNamespace(getPortletId());
 	}
 
 	protected Router router;
