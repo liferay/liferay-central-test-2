@@ -14,12 +14,15 @@
 
 package com.liferay.portal.messaging.async;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.async.Async;
 import com.liferay.portal.kernel.util.MethodTargetClassKey;
 import com.liferay.portal.spring.aop.AnnotationChainableMethodAdvice;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 
 import java.util.Map;
 
@@ -42,6 +45,17 @@ public class AsyncAdvice extends AnnotationChainableMethodAdvice<Async> {
 		Async async = findAnnotation(methodTargetClassKey);
 
 		if (async == _nullAsync) {
+			return null;
+		}
+
+		Method method = methodTargetClassKey.getMethod();
+		if (method.getReturnType() != void.class) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Detect a non-void with Async annotation, will " +
+					"ignore Async and degenerate to normal sync invoking :" +
+					method);
+			}
+			_annotations.put(methodTargetClassKey, _nullAsync);
 			return null;
 		}
 
@@ -106,6 +120,8 @@ public class AsyncAdvice extends AnnotationChainableMethodAdvice<Async> {
 			}
 
 		};
+
+	private static Log _log = LogFactoryUtil.getLog(AsyncAdvice.class);
 
 	private String _defaultDestinationName;
 	private Map<Class<?>, String> _destinationNames;
