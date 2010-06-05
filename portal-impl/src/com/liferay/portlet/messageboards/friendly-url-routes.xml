@@ -4,6 +4,6 @@
 <routes>
 	<route>
 		<pattern>/message_boards/home</pattern>
-		<default parameter="topLink">message-boards-home</default>
+		<default-parameter name="topLink">message-boards-home</default-parameter>
 	</route>
 </routes>
