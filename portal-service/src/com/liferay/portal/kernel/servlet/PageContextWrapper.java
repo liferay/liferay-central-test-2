@@ -93,7 +93,7 @@ public class PageContextWrapper extends PageContext {
 	}
 
 	public JspWriter getOut() {
-		return _pageContext.getOut();
+		return new PipingJspWriter(_pageContext.getOut());
 	}
 
 	public Object getPage() {
