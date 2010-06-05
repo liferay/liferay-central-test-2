@@ -486,7 +486,7 @@ public class PortletBagFactory {
 		String xml = StringUtil.read(
 			_classLoader, portlet.getFriendlyURLRoutes());
 
-		Document document = SAXReaderUtil.read(xml);
+		Document document = SAXReaderUtil.read(xml, true);
 
 		Element rootElement = document.getRootElement();
 
