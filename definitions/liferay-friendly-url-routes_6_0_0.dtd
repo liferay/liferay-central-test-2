@@ -15,7 +15,7 @@ friendly URL mapper routes.
 <!--
 The route element contains information on a single route.
 -->
-<!ELEMENT route (pattern, default*)>
+<!ELEMENT route (pattern, default-parameter*)>
 
 <!--
 The pattern element specifies the pattern of the mapped friendly URL.
@@ -31,6 +31,6 @@ in the route pattern.
 <!--
 The name attribute specifies the name of the default URL parameter.
 -->
-<!ATTLIST default
+<!ATTLIST default-parameter
 	name CDATA #REQUIRED
 >
