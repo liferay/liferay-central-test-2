@@ -3595,6 +3595,7 @@ public class PortalImpl implements Portal {
 			servletContext.getRequestDispatcher(path);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
+
 		PipingServletResponse pipingServletResponse = new PipingServletResponse(
 			response, unsyncStringWriter);
 
@@ -3602,9 +3603,8 @@ public class PortalImpl implements Portal {
 
 		boolean showPortlet = true;
 
-		Boolean portletConfiguratorVisibility =
-			(Boolean)request.getAttribute(
-				WebKeys.PORTLET_CONFIGURATOR_VISIBILITY);
+		Boolean portletConfiguratorVisibility = (Boolean)request.getAttribute(
+			WebKeys.PORTLET_CONFIGURATOR_VISIBILITY);
 
 		if (portletConfiguratorVisibility != null) {
 			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
@@ -3623,15 +3623,17 @@ public class PortalImpl implements Portal {
 				throw new ServletException(e);
 			}
 
-			request.removeAttribute(
-				WebKeys.PORTLET_CONFIGURATOR_VISIBILITY);
+			request.removeAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY);
 		}
 
 		if (showPortlet) {
 			if (writeOutput) {
 				response.setContentType(ContentTypes.TEXT_HTML_UTF8);
-				unsyncStringWriter.getStringBundler().writeTo(
-					response.getWriter());
+
+				StringBundler sb = unsyncStringWriter.getStringBundler();
+
+				sb.writeTo(response.getWriter());
+
 				return StringPool.BLANK;
 			}
 			else {
