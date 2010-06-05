@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.lang.reflect.Constructor;
 
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -194,6 +195,48 @@ public class MapUtil {
 		}
 
 		return (LinkedHashMap<String, T>) map;
+	}
+
+	public static String toString(Map<?, ?> map) {
+		StringBundler sb = new StringBundler(map.size() * 4 + 1);
+
+		sb.append(StringPool.OPEN_CURLY_BRACE);
+
+		Iterator<?> itr = map.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry<Object, Object> entry =
+				(Map.Entry<Object, Object>)itr.next();
+
+			Object key = entry.getKey();
+			Object value = entry.getValue();
+
+			sb.append(key);
+			sb.append(StringPool.EQUAL);
+
+			if (value instanceof Map<?, ?>) {
+				sb.append(MapUtil.toString((Map<?, ?>)value));
+			}
+			else if (value instanceof String[]) {
+				String valueString = StringUtil.merge(
+					(String[])value, StringPool.COMMA_AND_SPACE);
+
+				sb.append(
+					StringPool.OPEN_BRACKET.concat(valueString).concat(
+						StringPool.CLOSE_BRACKET));
+			}
+			else {
+				sb.append(value);
+			}
+
+			if (itr.hasNext()) {
+				sb.append(StringPool.COMMA_AND_SPACE);
+			}
+		}
+
+		sb.append(StringPool.CLOSE_CURLY_BRACE);
+
+		return sb.toString();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(MapUtil.class);
