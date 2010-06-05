@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.portlet;
 
+import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -73,8 +74,8 @@ public class RoutePart {
 		return _pattern.toString();
 	}
 
-	public boolean matches(Map<String, String> parameters) {
-		String value = parameters.get(_name);
+	public boolean matches(Map<String, ?> parameters) {
+		String value = MapUtil.getString(parameters, _name);
 
 		if (value == null) {
 			return false;

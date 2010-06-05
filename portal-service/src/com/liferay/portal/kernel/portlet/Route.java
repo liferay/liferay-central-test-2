@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.portlet;
 
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.MapUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,7 +64,7 @@ public class Route {
 		return _defaultParameters;
 	}
 
-	public String parametersToUrl(Map<String, String> parameters) {
+	public String parametersToUrl(Map<String, ?> parameters) {
 		List<String> names = new ArrayList<String>();
 
 		if (!_defaultParameters.isEmpty()) {
@@ -73,7 +74,7 @@ public class Route {
 				String name = entry.getKey();
 				String value = entry.getValue();
 
-				if (!value.equals(parameters.get(name))) {
+				if (!value.equals(MapUtil.getString(parameters, name))) {
 					return null;
 				}
 
@@ -92,7 +93,7 @@ public class Route {
 
 			names.add(name);
 
-			String value = parameters.get(name);
+			String value = MapUtil.getString(parameters, name);
 
 			value = HttpUtil.encodeURL(value);
 

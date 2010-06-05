@@ -17,6 +17,7 @@ package com.liferay.portal.kernel.portlet;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
@@ -42,7 +43,7 @@ public class Router {
 		return route;
 	}
 
-	public String parametersToUrl(Map<String, String> parameters)
+	public String parametersToUrl(Map<String, ?> parameters)
 		throws RouteNotFoundException {
 
 		for (Route route : _routes) {
@@ -99,17 +100,15 @@ public class Router {
 			"No route could be found to match url " + url);
 	}
 
-	protected String parametersToQueryString(Map<String, String> parameters) {
+	protected String parametersToQueryString(Map<String, ?> parameters) {
 		StringBundler sb = new StringBundler(parameters.size() * 4 - 1);
 
-		Iterator<Map.Entry<String, String>> itr =
-			parameters.entrySet().iterator();
+		Iterator<String> itr = parameters.keySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry<String, String> entry = itr.next();
+			String name = itr.next();
 
-			String name = entry.getKey();
-			String value = entry.getValue();
+			String value = MapUtil.getString(parameters, name);
 
 			sb.append(HttpUtil.encodeURL(name));
 			sb.append(StringPool.EQUAL);
