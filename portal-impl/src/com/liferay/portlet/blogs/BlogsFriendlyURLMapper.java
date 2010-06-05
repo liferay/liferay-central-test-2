@@ -85,12 +85,12 @@ public class BlogsFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	public void populateParams(
-		String friendlyURLPath, Map<String, String[]> params,
+		String friendlyURLPath, Map<String, String[]> parameterMap,
 		Map<String, Object> requestContext) {
 
-		addParam(params, "p_p_id", _PORTLET_ID);
-		addParam(params, "p_p_lifecycle", "0");
-		addParam(params, "p_p_mode", PortletMode.VIEW);
+		addParameter(parameterMap, "p_p_id", _PORTLET_ID);
+		addParameter(parameterMap, "p_p_lifecycle", "0");
+		addParameter(parameterMap, "p_p_mode", PortletMode.VIEW);
 
 		int x = friendlyURLPath.indexOf("/", 1);
 		int y = friendlyURLPath.indexOf("/", x + 1);
@@ -100,7 +100,7 @@ public class BlogsFriendlyURLMapper extends BaseFriendlyURLMapper {
 		}
 
 		if ((x + 1) == friendlyURLPath.length()) {
-			addParam(params, "struts_action", "/blogs/view");
+			addParameter(parameterMap, "struts_action", "/blogs/view");
 
 			return;
 		}
@@ -108,29 +108,31 @@ public class BlogsFriendlyURLMapper extends BaseFriendlyURLMapper {
 		String type = friendlyURLPath.substring(x + 1, y);
 
 		if (type.equals("rss")) {
-			addParam(params, "p_p_lifecycle", "1");
-			addParam(params, "p_p_state", LiferayWindowState.EXCLUSIVE);
+			addParameter(parameterMap, "p_p_lifecycle", "1");
+			addParameter(
+				parameterMap, "p_p_state", LiferayWindowState.EXCLUSIVE);
 
-			addParam(params, "struts_action", "/blogs/rss");
+			addParameter(parameterMap, "struts_action", "/blogs/rss");
 		}
 		else if (type.equals("trackback")) {
-			addParam(params, "p_p_lifecycle", "1");
-			addParam(params, "p_p_state", LiferayWindowState.EXCLUSIVE);
+			addParameter(parameterMap, "p_p_lifecycle", "1");
+			addParameter(
+				parameterMap, "p_p_state", LiferayWindowState.EXCLUSIVE);
 
-			addParam(params, "struts_action", "/blogs/trackback");
+			addParameter(parameterMap, "struts_action", "/blogs/trackback");
 
 			type = friendlyURLPath.substring(y + 1);
 
-			addParam(params, getEntryIdParam(type), type);
+			addParameter(parameterMap, getEntryIdParam(type), type);
 		}
 		else {
-			addParam(params, "struts_action", "/blogs/view_entry");
+			addParameter(parameterMap, "struts_action", "/blogs/view_entry");
 
-			addParam(params, getEntryIdParam(type), type);
+			addParameter(parameterMap, getEntryIdParam(type), type);
 		}
 
 		if (friendlyURLPath.indexOf("maximized", x) != -1) {
-			addParam(params, "p_p_state", WindowState.MAXIMIZED);
+			addParameter(parameterMap, "p_p_state", WindowState.MAXIMIZED);
 		}
 	}
 

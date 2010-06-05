@@ -142,7 +142,7 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	public void populateParams(
-		String friendlyURLPath, Map<String, String[]> params,
+		String friendlyURLPath, Map<String, String[]> parameterMap,
 		Map<String, Object> requestContext) {
 
 		int x = friendlyURLPath.indexOf(StringPool.SLASH, 1);
@@ -162,20 +162,21 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 			String namespace = PortalUtil.getPortletNamespace(portletId);
 
-			params.put("p_p_id", new String[] {portletId});
+			parameterMap.put("p_p_id", new String[] {portletId});
 
 			if (friendlyURLPath.indexOf("maximized", x) != -1) {
-				addParam(params, "p_p_state", WindowState.MAXIMIZED);
+				addParameter(parameterMap, "p_p_state", WindowState.MAXIMIZED);
 			}
 
-			params.put("p_p_mode", new String[] {PortletMode.VIEW.toString()});
+			parameterMap.put(
+				"p_p_mode", new String[] {PortletMode.VIEW.toString()});
 
 			if (type.equals("rss")) {
-				params.put(
+				parameterMap.put(
 					namespace + "struts_action",
 					new String[] {"/asset_publisher/rss"});
 
-				params.put("p_p_lifecycle", new String[] {"2"});
+				parameterMap.put("p_p_lifecycle", new String[] {"2"});
 			}
 			else {
 				if ((urlFragments.length > 3) && urlFragments[2].equals("id")) {
@@ -190,26 +191,27 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 					urlTitle = urlFragments[2];
 				}
 
-				params.put("p_p_lifecycle", new String[] {"0"});
+				parameterMap.put("p_p_lifecycle", new String[] {"0"});
 
-				params.put(
+				parameterMap.put(
 					namespace + "struts_action",
 					new String[] {"/asset_publisher/view_content"});
-				params.put(namespace + "type", new String[] {type});
+				parameterMap.put(namespace + "type", new String[] {type});
 
 				if (Validator.isNotNull(assetEntryId)) {
-					params.put(
+					parameterMap.put(
 						namespace + "assetEntryId",
 						new String[] {assetEntryId});
 				}
 				else {
 					if (groupId > 0) {
-						params.put(
+						parameterMap.put(
 							namespace + "groupId",
 							new String[] {String.valueOf(groupId)});
 					}
 
-					params.put(namespace + "urlTitle", new String[] {urlTitle});
+					parameterMap.put(
+						namespace + "urlTitle", new String[] {urlTitle});
 				}
 			}
 		}

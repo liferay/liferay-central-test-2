@@ -63,7 +63,7 @@ public class WAIFriendlyURLMapper implements FriendlyURLMapper {
 	}
 
 	public void populateParams(
-		String friendlyURLPath, Map<String, String[]> params,
+		String friendlyURLPath, Map<String, String[]> parameterMap,
 		Map<String, Object> requestContext) {
 
 		int x = friendlyURLPath.indexOf(_MAPPING);
@@ -77,26 +77,27 @@ public class WAIFriendlyURLMapper implements FriendlyURLMapper {
 
 		String portletId = prefix + PortletConstants.WAR_SEPARATOR + prefix;
 
-		params.put("p_p_id", new String[] {portletId});
-		params.put("p_p_lifecycle", new String[] {"0"});
+		parameterMap.put("p_p_id", new String[] {portletId});
+		parameterMap.put("p_p_lifecycle", new String[] {"0"});
 
 		if (hasBinaryExtension(friendlyURLPath)) {
-			params.put(
+			parameterMap.put(
 				"p_p_state",
 				new String[] {LiferayWindowState.EXCLUSIVE.toString()});
 		}
 		else {
-			params.put(
+			parameterMap.put(
 				"p_p_state", new String[] {WindowState.MAXIMIZED.toString()});
 		}
 
-		params.put("p_p_mode", new String[] {PortletMode.VIEW.toString()});
+		parameterMap.put(
+			"p_p_mode", new String[] {PortletMode.VIEW.toString()});
 
 		String namespace = PortalUtil.getPortletNamespace(portletId);
 
 		String path = friendlyURLPath.substring(y);
 
-		params.put(namespace + "appURL", new String[] {path});
+		parameterMap.put(namespace + "appURL", new String[] {path});
 	}
 
 	public void setRouter(Router router) {

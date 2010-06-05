@@ -115,19 +115,19 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	public void populateParams(
-		String friendlyURLPath, Map<String, String[]> params,
+		String friendlyURLPath, Map<String, String[]> parameterMap,
 		Map<String, Object> requestContext) {
 
-		addParam(params, "p_p_id", _PORTLET_ID);
-		addParam(params, "p_p_lifecycle", "0");
-		addParam(params, "p_p_mode", PortletMode.VIEW);
+		addParameter(parameterMap, "p_p_id", _PORTLET_ID);
+		addParameter(parameterMap, "p_p_lifecycle", "0");
+		addParameter(parameterMap, "p_p_mode", PortletMode.VIEW);
 
 		int x = friendlyURLPath.indexOf("/", 1);
 
 		if ((x + 1) == friendlyURLPath.length()) {
-			addParam(params, "struts_action", "/message_boards/view");
-			addParam(
-				params, "mbCategoryId",
+			addParameter(parameterMap, "struts_action", "/message_boards/view");
+			addParameter(
+				parameterMap, "mbCategoryId",
 				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 
 			return;
@@ -151,30 +151,32 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 			String categoryId =
 				friendlyURLPath.substring(y + 1, z);
 
-			addParam(params, "struts_action", "/message_boards/view");
-			addParam(params, "mbCategoryId", categoryId);
+			addParameter(parameterMap, "struts_action", "/message_boards/view");
+			addParameter(parameterMap, "mbCategoryId", categoryId);
 		}
 		else if (type.equals("message")) {
 			String messageId =
 				friendlyURLPath.substring(y + 1, z);
 
-			addParam(params, "struts_action", "/message_boards/view_message");
-			addParam(params, "messageId", messageId);
+			addParameter(
+				parameterMap, "struts_action", "/message_boards/view_message");
+			addParameter(parameterMap, "messageId", messageId);
 		}
 		else if (type.equals("my-posts") || type.equals("my-subscriptions") ||
 				 type.equals("recent-posts") || type.equals("statistics") ||
 				 type.equals("banned-users")) {
 
-			addParam(params, "struts_action", "/message_boards/view");
-			addParam(params, "topLink", type);
+			addParameter(parameterMap, "struts_action", "/message_boards/view");
+			addParameter(parameterMap, "topLink", type);
 		}
 		else if (type.equals("search")) {
-			addParam(params, "struts_action", "/message_boards/search");
-			addParam(params, "topLink", "message-boards-home");
+			addParameter(
+				parameterMap, "struts_action", "/message_boards/search");
+			addParameter(parameterMap, "topLink", "message-boards-home");
 		}
 
 		if (friendlyURLPath.indexOf("maximized", x) != -1) {
-			addParam(params, "p_p_state", WindowState.MAXIMIZED);
+			addParameter(parameterMap, "p_p_state", WindowState.MAXIMIZED);
 		}
 	}
 

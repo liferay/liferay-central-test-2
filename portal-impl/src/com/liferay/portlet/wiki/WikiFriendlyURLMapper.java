@@ -134,14 +134,14 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	public void populateParams(
-		String friendlyURLPath, Map<String, String[]> params,
+		String friendlyURLPath, Map<String, String[]> parameterMap,
 		Map<String, Object> requestContext) {
 
-		addParam(params, "p_p_id", _PORTLET_ID);
-		addParam(params, "p_p_lifecycle", "0");
-		addParam(params, "p_p_mode", PortletMode.VIEW);
+		addParameter(parameterMap, "p_p_id", _PORTLET_ID);
+		addParameter(parameterMap, "p_p_lifecycle", "0");
+		addParameter(parameterMap, "p_p_mode", PortletMode.VIEW);
 
-		addParam(params, "struts_action", "/wiki/view");
+		addParameter(parameterMap, "struts_action", "/wiki/view");
 
 		int x = friendlyURLPath.indexOf(StringPool.SLASH, 1);
 
@@ -156,7 +156,7 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 				lastFragment.equalsIgnoreCase("maximized") ||
 				lastFragment.equalsIgnoreCase("normal")) {
 
-				addParam(params, "p_p_state", lastFragment);
+				addParameter(parameterMap, "p_p_state", lastFragment);
 
 				wikiPath = wikiPath.substring(0, lastSlash);
 			}
@@ -175,20 +175,21 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 		}
 
 		if (firstFragment.equalsIgnoreCase("tag") && (wikiPath != null)) {
-			addParam(params, "struts_action", "/wiki/view_tagged_pages");
+			addParameter(
+				parameterMap, "struts_action", "/wiki/view_tagged_pages");
 
 			String tag = HttpUtil.decodeURL(wikiPath);
 
-			addParam(params, "tag", tag);
+			addParameter(parameterMap, "tag", tag);
 		}
 		else {
 			if (Validator.isNumber(firstFragment)) {
-				addParam(params, "nodeId", firstFragment);
-				addParam(params, "nodeName", StringPool.BLANK);
+				addParameter(parameterMap, "nodeId", firstFragment);
+				addParameter(parameterMap, "nodeName", StringPool.BLANK);
 			}
 			else {
-				addParam(params, "nodeId", StringPool.BLANK);
-				addParam(params, "nodeName", firstFragment);
+				addParameter(parameterMap, "nodeId", StringPool.BLANK);
+				addParameter(parameterMap, "nodeName", firstFragment);
 			}
 
 			if (wikiPath != null) {
@@ -197,18 +198,18 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 					wikiPath.equals("orphan_pages") ||
 					wikiPath.equals("recent_changes")) {
 
-					addParam(
-						params, "struts_action",
+					addParameter(
+						parameterMap, "struts_action",
 						"/wiki/view_" + wikiPath);
 				}
 				else {
 					wikiPath = HttpUtil.decodeURL(wikiPath);
 
-					addParam(params, "title", wikiPath);
+					addParameter(parameterMap, "title", wikiPath);
 				}
 			}
 
-			addParam(params, "tag", StringPool.BLANK);
+			addParameter(parameterMap, "tag", StringPool.BLANK);
 		}
 	}
 
