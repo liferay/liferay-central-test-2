@@ -55,7 +55,7 @@ public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
 	}
 
 	protected T findAnnotation(MethodTargetClassKey methodTargetClassKey){
-		T annotation = _annotations.get(methodTargetClassKey);
+		T annotation = annotations.get(methodTargetClassKey);
 
 		if (annotation != null) {
 			return annotation;
@@ -79,12 +79,12 @@ public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
 			annotation = getNullAnnotation();
 		}
 
-		_annotations.put(methodTargetClassKey, annotation);
+		annotations.put(methodTargetClassKey, annotation);
 
 		return annotation;
 	}
 
-	protected Map<MethodTargetClassKey, T> _annotations =
+	protected Map<MethodTargetClassKey, T> annotations =
 		new ConcurrentHashMap<MethodTargetClassKey, T>();
 
 }

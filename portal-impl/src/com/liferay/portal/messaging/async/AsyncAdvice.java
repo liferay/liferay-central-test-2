@@ -49,13 +49,16 @@ public class AsyncAdvice extends AnnotationChainableMethodAdvice<Async> {
 		}
 
 		Method method = methodTargetClassKey.getMethod();
+
 		if (method.getReturnType() != void.class) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Detect a non-void with Async annotation, will " +
-					"ignore Async and degenerate to normal sync invoking :" +
-					method);
+				_log.warn(
+					"Async annotation on method " + method.getName() +
+						" does not return void");
 			}
-			_annotations.put(methodTargetClassKey, _nullAsync);
+
+			annotations.put(methodTargetClassKey, _nullAsync);
+
 			return null;
 		}
 
