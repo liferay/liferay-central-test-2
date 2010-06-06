@@ -934,6 +934,11 @@
 		<servlet-class>com.liferay.portal.xmlrpc.XmlRpcServlet</servlet-class>
 		<load-on-startup>2</load-on-startup>
 	</servlet>
+	<servlet>
+		<servlet-name>Clean Up Servlet</servlet-name>
+		<servlet-class>com.liferay.portal.servlet.CleanUpServlet</servlet-class>
+		<load-on-startup>3</load-on-startup>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>Main Servlet</servlet-name>
 		<url-pattern>/c/*</url-pattern>
