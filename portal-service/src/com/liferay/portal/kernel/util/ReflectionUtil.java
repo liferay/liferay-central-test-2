@@ -44,14 +44,14 @@ public class ReflectionUtil {
 
 	public static Object newInstance(String className, String p1) {
 		try {
-			Class<?> classObj = Class.forName(className);
+			Class<?> classObject = Class.forName(className);
 
-			Constructor<?> classConstructor =
-				classObj.getConstructor(new Class[] {String.class});
+			Constructor<?> classConstructor = classObject.getConstructor(
+				new Class[] {String.class});
 
-			Object[] args = new Object[] {p1};
+			Object[] arguments = new Object[] {p1};
 
-			return classConstructor.newInstance(args);
+			return classConstructor.newInstance(arguments);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
