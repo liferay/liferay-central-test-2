@@ -32,6 +32,7 @@ public class TimeZoneThreadLocal {
 	}
 
 	private static ThreadLocal<TimeZone> _timeZone =
-		new AutoResetThreadLocal<TimeZone>();
+		new AutoResetThreadLocal<TimeZone>(
+			TimeZoneThreadLocal.class + "._timeZone");
 
 }

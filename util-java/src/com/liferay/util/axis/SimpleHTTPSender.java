@@ -157,7 +157,8 @@ public class SimpleHTTPSender extends HTTPSender {
 	private static Log _log = LogFactoryUtil.getLog(SimpleHTTPSender.class);
 
 	private static ThreadLocal<String> _currentCookie =
-		new InitialThreadLocal<String>(StringPool.BLANK);
+		new InitialThreadLocal<String>(
+			SimpleHTTPSender.class + "._currentCookie", StringPool.BLANK);
 	private static Pattern _pattern = Pattern.compile(
 		SystemProperties.get(
 			SimpleHTTPSender.class.getName() + ".regexp.pattern"));

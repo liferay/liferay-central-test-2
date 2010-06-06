@@ -32,6 +32,7 @@ public class SocialActivityThreadLocal {
 	}
 
 	private static ThreadLocal<Boolean> _enabled =
-		new InitialThreadLocal<Boolean>(true);
+		new InitialThreadLocal<Boolean>(
+			SocialActivityThreadLocal.class + "._enabled", true);
 
 }

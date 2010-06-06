@@ -32,6 +32,6 @@ public class LocaleThreadLocal {
 	}
 
 	private static ThreadLocal<Locale> _locale =
-		new AutoResetThreadLocal<Locale>();
+		new AutoResetThreadLocal<Locale>(LocaleThreadLocal.class + "._locale");
 
 }

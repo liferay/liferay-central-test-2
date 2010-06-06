@@ -35,7 +35,9 @@ public class ThreadLocalRegistryTest extends TestCase {
 			public void run() {
 				try {
 					ThreadLocal<Boolean> threadLocal =
-						new AutoResetThreadLocal<Boolean>(Boolean.FALSE);
+						new AutoResetThreadLocal<Boolean>(
+							ThreadLocalRegistryTest.class.getName(),
+							Boolean.FALSE);
 
 					ThreadLocal<?>[] threadLocals =
 						ThreadLocalRegistry.captureSnapshot();
@@ -101,7 +103,8 @@ public class ThreadLocalRegistryTest extends TestCase {
 
 		assertEquals(0, threadLocals.length);
 
-		ThreadLocal<Integer> threadLocal = new AutoResetThreadLocal<Integer>(0);
+		ThreadLocal<Integer> threadLocal = new AutoResetThreadLocal<Integer>(
+			ThreadLocalRegistryTest.class.getName(), 0);
 
 		threadLocals = ThreadLocalRegistry.captureSnapshot();
 

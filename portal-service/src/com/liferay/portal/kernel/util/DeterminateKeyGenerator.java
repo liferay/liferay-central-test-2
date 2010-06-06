@@ -101,6 +101,7 @@ public class DeterminateKeyGenerator {
 
 	private static ThreadLocal<Map<String, Integer>> _seedMap =
 		new AutoResetThreadLocal<Map<String, Integer>>(
+			DeterminateKeyGenerator.class + "._seedMap",
 			new HashMap<String, Integer>());
 
 }

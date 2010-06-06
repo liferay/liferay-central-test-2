@@ -33,6 +33,8 @@ public class LDAPUserTransactionThreadLocal {
 	}
 
 	private static ThreadLocal<Boolean> _originatesFromLDAP =
-		new InitialThreadLocal<Boolean>(false);
+		new InitialThreadLocal<Boolean>(
+			LDAPUserTransactionThreadLocal.class + "._originatesFromLDAP",
+			false);
 
 }

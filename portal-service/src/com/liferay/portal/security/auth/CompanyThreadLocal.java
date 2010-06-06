@@ -69,6 +69,7 @@ public class CompanyThreadLocal {
 	private static Log _log = LogFactoryUtil.getLog(CompanyThreadLocal.class);
 
 	private static ThreadLocal<Long> _companyId =
-		new AutoResetThreadLocal<Long>(CompanyConstants.SYSTEM);
+		new AutoResetThreadLocal<Long>(
+			CompanyThreadLocal.class + "._companyId", CompanyConstants.SYSTEM);
 
 }

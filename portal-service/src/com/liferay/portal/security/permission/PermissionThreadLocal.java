@@ -42,8 +42,10 @@ public class PermissionThreadLocal {
 	}
 
 	private static ThreadLocal<Boolean> _addResource =
-		new AutoResetThreadLocal<Boolean>(Boolean.TRUE);
+		new AutoResetThreadLocal<Boolean>(
+			PermissionThreadLocal.class + "._addResource", true);
 	private static ThreadLocal<PermissionChecker> _permissionChecker =
-		new AutoResetThreadLocal<PermissionChecker>();
+		new AutoResetThreadLocal<PermissionChecker>(
+			PermissionThreadLocal.class + "._permissionChecker");
 
 }

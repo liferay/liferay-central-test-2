@@ -78,11 +78,12 @@ public class BatchSessionImpl implements BatchSession {
 		_counter.set(_counter.get() + 1);
 	}
 
-	private static final Long _INITIAL_COUNTER = new Long(1);
+	private static final long _INITIAL_COUNTER = 1;
 
-	private static ThreadLocal<Long> _counter =
-		new InitialThreadLocal<Long>(_INITIAL_COUNTER);
+	private static ThreadLocal<Long> _counter = new InitialThreadLocal<Long>(
+		BatchSessionImpl.class + "._counter", _INITIAL_COUNTER);
 	private static ThreadLocal<Boolean> _enabled =
-		new InitialThreadLocal<Boolean>(Boolean.FALSE);
+		new InitialThreadLocal<Boolean>(
+			BatchSessionImpl.class + "._enabled", false);
 
 }

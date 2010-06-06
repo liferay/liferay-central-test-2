@@ -27,7 +27,8 @@ import java.lang.reflect.Method;
  */
 public class InitialThreadLocal<T> extends ThreadLocal<T> {
 
-	public InitialThreadLocal(T initialValue) {
+	public InitialThreadLocal(String name, T initialValue) {
+		_name = name;
 		_initialValue = initialValue;
 
 		if (_initialValue instanceof Cloneable) {
@@ -38,6 +39,15 @@ public class InitialThreadLocal<T> extends ThreadLocal<T> {
 			catch (Exception e) {
 				_log.error(e, e);
 			}
+		}
+	}
+
+	public String toString() {
+		if (_name != null) {
+			return _name;
+		}
+		else {
+			return super.toString();
 		}
 	}
 
@@ -60,5 +70,6 @@ public class InitialThreadLocal<T> extends ThreadLocal<T> {
 
 	private Method _cloneMethod;
 	private T _initialValue;
+	private String _name;
 
 }

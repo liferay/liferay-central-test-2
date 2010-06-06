@@ -81,6 +81,7 @@ public class DataSampleThreadLocal implements Cloneable {
 
 	private static ThreadLocal<DataSampleThreadLocal> _dataSampleThreadLocal =
 		new AutoResetThreadLocal<DataSampleThreadLocal>(
+			DataSampleThreadLocal.class + "._dataSampleThreadLocal",
 			new DataSampleThreadLocal());
 	private static boolean _monitoringDataSampleThreadLocal =
 		PropsValues.MONITORING_DATA_SAMPLE_THREAD_LOCAL;

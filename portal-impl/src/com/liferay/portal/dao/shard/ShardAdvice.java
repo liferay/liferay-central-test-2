@@ -374,7 +374,8 @@ public class ShardAdvice {
 		new ThreadLocal<Stack<String>>();
 	private static ThreadLocal<Object> _globalCall = new ThreadLocal<Object>();
 	private static ThreadLocal<String> _shardName =
-		new InitialThreadLocal<String>(PropsValues.SHARD_DEFAULT_NAME);
+		new InitialThreadLocal<String>(
+			ShardAdvice.class + "._shardName", PropsValues.SHARD_DEFAULT_NAME);
 
 	private ShardDataSourceTargetSource _shardDataSourceTargetSource;
 	private ShardSessionFactoryTargetSource _shardSessionFactoryTargetSource;

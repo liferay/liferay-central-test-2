@@ -324,8 +324,11 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 
 	static {
 		if (PropsValues.VALUE_OBJECT_ENTITY_THREAD_LOCAL_CACHE_MAX_SIZE > 0) {
-			_localCache = new AutoResetThreadLocal<LRUMap>(new LRUMap(
-				PropsValues.VALUE_OBJECT_ENTITY_THREAD_LOCAL_CACHE_MAX_SIZE));
+			_localCache = new AutoResetThreadLocal<LRUMap>(
+				EntityCacheImpl.class + "._localCache",
+				new LRUMap(
+					PropsValues.
+						VALUE_OBJECT_ENTITY_THREAD_LOCAL_CACHE_MAX_SIZE));
 			_localCacheAvailable = true;
 		}
 	}

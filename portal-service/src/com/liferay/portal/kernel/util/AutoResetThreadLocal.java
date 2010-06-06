@@ -21,12 +21,12 @@ package com.liferay.portal.kernel.util;
  */
 public class AutoResetThreadLocal<T> extends InitialThreadLocal<T> {
 
-	public AutoResetThreadLocal() {
-		this(null);
+	public AutoResetThreadLocal(String name) {
+		super(name, null);
 	}
 
-	public AutoResetThreadLocal(T initialValue) {
-		super(initialValue);
+	public AutoResetThreadLocal(String name, T initialValue) {
+		super(name, initialValue);
 	}
 
 	public void set(T value) {

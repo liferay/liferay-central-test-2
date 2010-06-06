@@ -72,6 +72,7 @@ public class ThreadLocalCacheManager {
 	private static ThreadLocal<Map<Lifecycle, Map<String, ThreadLocalCache<?>>>>
 		_threadLocalCacheMaps = new InitialThreadLocal
 			<Map<Lifecycle, Map<String, ThreadLocalCache<?>>>>(
+				ThreadLocalCacheManager.class + "._threadLocalCacheMaps",
 				new EnumMap<Lifecycle, Map<String, ThreadLocalCache<?>>>(
 					Lifecycle.class));
 

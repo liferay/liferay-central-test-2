@@ -165,8 +165,10 @@ public class PermissionCacheUtil {
 
 	static {
 		if (PropsValues.PERMISSIONS_THREAD_LOCAL_CACHE_MAX_SIZE > 0) {
-			_localCache = new AutoResetThreadLocal<LRUMap>(new LRUMap(
-				PropsValues.PERMISSIONS_THREAD_LOCAL_CACHE_MAX_SIZE));
+			_localCache = new AutoResetThreadLocal<LRUMap>(
+				PermissionCacheUtil.class + "._localCache",
+				new LRUMap(
+					PropsValues.PERMISSIONS_THREAD_LOCAL_CACHE_MAX_SIZE));
 			_localCacheAvailable = true;
 		}
 	}

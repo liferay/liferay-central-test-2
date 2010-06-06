@@ -32,6 +32,7 @@ public class ServiceContextThreadLocal {
 	}
 
 	private static ThreadLocal<ServiceContext> _serviceContextThreadLocal =
-		new AutoResetThreadLocal<ServiceContext>();
+		new AutoResetThreadLocal<ServiceContext>(
+			ServiceContextThreadLocal.class + "._serviceContextThreadLocal");
 
 }
