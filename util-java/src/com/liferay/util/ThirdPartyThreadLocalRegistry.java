@@ -40,6 +40,10 @@ public class ThirdPartyThreadLocalRegistry {
 	public static void resetThreadLocals() {
 		Set<ThreadLocal<?>> threadLocalSet = _threadLocalSet.get();
 
+		if (threadLocalSet == null) {
+			return;
+		}
+
 		for (ThreadLocal<?> threadLocal : threadLocalSet) {
 			threadLocal.remove();
 		}
