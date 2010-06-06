@@ -42,7 +42,7 @@ import com.liferay.util.ThirdPartyThreadLocalRegistry;
 import java.sql.Connection;
 import java.sql.Statement;
 
-import org.apache.axis.utils.XMLUtils;
+import java.util.Timer;
 
 /**
  * <a href="GlobalShutdownAction.java.html"><b><i>View Source</i></b></a>
@@ -144,11 +144,9 @@ public class GlobalShutdownAction extends SimpleAction {
 		ThirdPartyThreadLocalRegistry.resetThreadLocals();
 		ThreadLocalRegistry.resetThreadLocals();
 
-		ThreadLocal<?> threadLocal =
-			(ThreadLocal<?>)ReflectionUtil.getFieldValue(
-				XMLUtils.class, "documentBuilder");
-
-		threadLocal.remove();
+		clearReferences("com.mysql.jdbc.Connection", "cancelTimer");
+		clearReferences("org.apache.axis.utils.XMLUtils", "documentBuilder");
+		//clearReferences("org.joni.StackMachine", "stacks");
 
 		// Hypersonic
 
@@ -223,6 +221,40 @@ public class GlobalShutdownAction extends SimpleAction {
 			}
 
 			threadGroup.destroy();
+		}
+	}
+
+	protected void clearReferences(String className, String fieldName) {
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader =
+			currentThread.getContextClassLoader();
+
+		Class<?> classObj = null;
+
+		try {
+			classObj = contextClassLoader.loadClass(className);
+
+			return;
+		}
+		catch (Exception e) {
+		}
+
+		Object fieldValue = ReflectionUtil.getFieldValue(className, fieldName);
+
+		if (fieldValue == null) {
+			return;
+		}
+
+		if (fieldValue instanceof ThreadLocal<?>) {
+			ThreadLocal<?> threadLocal = (ThreadLocal<?>)fieldValue;
+
+			threadLocal.remove();
+		}
+		else if (fieldValue instanceof Timer) {
+			Timer timer = (Timer)fieldValue;
+
+			timer.cancel();
 		}
 	}
 
