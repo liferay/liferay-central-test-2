@@ -240,7 +240,7 @@ public class GlobalShutdownAction extends SimpleAction {
 		catch (Exception e) {
 		}
 
-		Object fieldValue = ReflectionUtil.getFieldValue(className, fieldName);
+		Object fieldValue = ReflectionUtil.getFieldValue(classObj, fieldName);
 
 		if (fieldValue == null) {
 			return;
