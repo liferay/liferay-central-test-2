@@ -91,6 +91,10 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 		return _MAPPING;
 	}
 
+	public Router getRouter() {
+		return router;
+	}
+
 	public boolean isCheckMappingWithPrefix() {
 		return _CHECK_MAPPING_WITH_PREFIX;
 	}
@@ -161,6 +165,7 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 	}
 
 	public void setRouter(Router router) {
+		this.router = router;
 	}
 
 	private static final boolean _CHECK_MAPPING_WITH_PREFIX = true;
@@ -171,5 +176,7 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 		PortletKeys.JOURNAL_CONTENT + "_INSTANCE_0000";
 
 	private static final String _PORTLET_ID = PortletKeys.JOURNAL_CONTENT;
+
+	protected Router router;
 
 }

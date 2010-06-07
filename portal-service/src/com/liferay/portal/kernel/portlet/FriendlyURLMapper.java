@@ -29,6 +29,8 @@ public interface FriendlyURLMapper {
 
 	public String getMapping();
 
+	public Router getRouter();
+
 	public boolean isCheckMappingWithPrefix();
 
 	public void populateParams(

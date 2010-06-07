@@ -30,6 +30,10 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 
 	public abstract String getPortletId();
 
+	public Router getRouter() {
+		return router;
+	}
+
 	public boolean isCheckMappingWithPrefix() {
 		return _CHECK_MAPPING_WITH_PREFIX;
 	}

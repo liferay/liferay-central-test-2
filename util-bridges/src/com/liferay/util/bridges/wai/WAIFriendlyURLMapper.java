@@ -58,6 +58,10 @@ public class WAIFriendlyURLMapper implements FriendlyURLMapper {
 		return _MAPPING;
 	}
 
+	public Router getRouter() {
+		return router;
+	}
+
 	public boolean isCheckMappingWithPrefix() {
 		return _CHECK_MAPPING_WITH_PREFIX;
 	}
@@ -101,6 +105,7 @@ public class WAIFriendlyURLMapper implements FriendlyURLMapper {
 	}
 
 	public void setRouter(Router router) {
+		this.router = router;
 	}
 
 	protected boolean hasBinaryExtension(String friendlyURLPath) {
@@ -123,5 +128,7 @@ public class WAIFriendlyURLMapper implements FriendlyURLMapper {
 		".css", ".doc", ".gif", ".jpeg", ".jpg", ".js", ".odp", ".png", ".ppt",
 		".tgz", ".xls", ".zip",
 	};
+
+	protected Router router;
 
 }
