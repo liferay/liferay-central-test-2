@@ -34,22 +34,23 @@ public class CacheKeyGeneratorUtil {
 	}
 
 	public static CacheKeyGenerator getCacheKeyGenerator(String cacheName) {
-		ThreadLocalCache<CacheKeyGenerator>
-			threadLocalCacheKeyGenerators =
-				ThreadLocalCacheManager.getThreadLocalCache(Lifecycle.ETERNAL,
-					CacheKeyGeneratorUtil.class.getName());
+		ThreadLocalCache<CacheKeyGenerator> threadLocalCacheKeyGenerators =
+			ThreadLocalCacheManager.getThreadLocalCache(
+				Lifecycle.ETERNAL, CacheKeyGeneratorUtil.class.getName());
 
-		CacheKeyGenerator cacheKeyGenerator =
-			threadLocalCacheKeyGenerators.get(cacheName);
+		CacheKeyGenerator cacheKeyGenerator = threadLocalCacheKeyGenerators.get(
+			cacheName);
 
 		if (cacheKeyGenerator != null) {
 			return cacheKeyGenerator;
 		}
 
 		cacheKeyGenerator = _cacheKeyGenerators.get(cacheName);
+
 		if (cacheKeyGenerator == null) {
 			cacheKeyGenerator = _defaultCacheKeyGenerator;
 		}
+
 		cacheKeyGenerator = cacheKeyGenerator.clone();
 
 		threadLocalCacheKeyGenerators.put(cacheName, cacheKeyGenerator);

@@ -35,17 +35,21 @@ public class HashCodeCacheKeyGenerator extends BaseCacheKeyGenerator {
 
 	public String getCacheKey(String[] keys) {
 		int hashCode = 0;
-		for(String key : keys) {
+
+		for (String key : keys) {
 			hashCode = 31 * hashCode + key.hashCode();
 		}
+
 		return String.valueOf(hashCode);
 	}
 
 	public String getCacheKey(StringBundler sb) {
 		int hashCode = 0;
-		for(int i = 0; i < sb.index(); i++) {
+
+		for (int i = 0; i < sb.index(); i++) {
 			hashCode = 31 * hashCode + sb.stringAt(i).hashCode();
 		}
+
 		return String.valueOf(hashCode);
 	}
 

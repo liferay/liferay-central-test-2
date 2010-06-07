@@ -41,6 +41,7 @@ public class JavaMD5CacheKeyGenerator extends BaseCacheKeyGenerator {
 
 	public JavaMD5CacheKeyGenerator(int maxLength)
 		throws NoSuchAlgorithmException {
+
 		_maxLength = maxLength;
 		_messageDigest = MessageDigest.getInstance(_ALGORITHM_MD5);
 		_charsetEncoder = CharsetEncoderUtil.getCharsetEncoder(StringPool.UTF8);
@@ -49,9 +50,9 @@ public class JavaMD5CacheKeyGenerator extends BaseCacheKeyGenerator {
 	public CacheKeyGenerator clone() {
 		try {
 			return new JavaMD5CacheKeyGenerator(_maxLength);
-		} catch (NoSuchAlgorithmException ex) {
-			throw new IllegalStateException(
-				"Fail to look up MD5 digester.", ex);
+		}
+		catch (NoSuchAlgorithmException nsae) {
+			throw new IllegalStateException(nsae.getMessage(), nsae);
 		}
 	}
 
@@ -59,12 +60,15 @@ public class JavaMD5CacheKeyGenerator extends BaseCacheKeyGenerator {
 		if ((_maxLength > -1) && (key.length() < _maxLength)) {
 			return key;
 		}
+
 		try {
-			_messageDigest.update(_charsetEncoder.encode(
-				CharBuffer.wrap(key)));
+			_messageDigest.update(_charsetEncoder.encode(CharBuffer.wrap(key)));
+
 			byte[] bytes = _messageDigest.digest();
+
 			return encodeCacheKey(bytes);
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			_log.error(e, e);
 
 			return key;
@@ -79,15 +83,20 @@ public class JavaMD5CacheKeyGenerator extends BaseCacheKeyGenerator {
 		if ((_maxLength > -1) && (sb.length() < _maxLength)) {
 			return sb.toString();
 		}
+
 		try {
 			for (int i = 0; i < sb.index(); i++) {
 				String key = sb.stringAt(i);
+
 				_messageDigest.update(
 					_charsetEncoder.encode(CharBuffer.wrap(key)));
 			}
+
 			byte[] bytes = _messageDigest.digest();
+
 			return encodeCacheKey(bytes);
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			_log.error(e, e);
 
 			return sb.toString();
@@ -99,18 +108,15 @@ public class JavaMD5CacheKeyGenerator extends BaseCacheKeyGenerator {
 	}
 
 	protected String encodeCacheKey(byte[] bytes) {
-
 		for (int i = 0; i < bytes.length; i++) {
 			int value = bytes[i] & 0xff;
+
 			_encodeBuffer[i * 2] = _HEX_CHARACTERS[value >> 4];
 			_encodeBuffer[i * 2 + 1] = _HEX_CHARACTERS[value & 0xf];
 		}
 
 		return new String(_encodeBuffer);
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-			JavaMD5CacheKeyGenerator.class);
 
 	private static final String _ALGORITHM_MD5 = "MD5";
 
@@ -119,9 +125,12 @@ public class JavaMD5CacheKeyGenerator extends BaseCacheKeyGenerator {
 		'e', 'f'
 	};
 
+	private static Log _log = LogFactoryUtil.getLog(
+		JavaMD5CacheKeyGenerator.class);
+
 	private CharsetEncoder _charsetEncoder;
-	private MessageDigest _messageDigest;
 	private char[] _encodeBuffer = new char[32];
 	private int _maxLength = -1;
+	private MessageDigest _messageDigest;
 
 }

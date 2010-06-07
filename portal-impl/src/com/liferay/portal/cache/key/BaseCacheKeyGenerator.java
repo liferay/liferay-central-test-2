@@ -26,16 +26,19 @@ public abstract class BaseCacheKeyGenerator implements CacheKeyGenerator {
 
 	public CacheKeyGenerator append(String key) {
 		keyBundler.append(key);
+
 		return this;
 	}
 
 	public CacheKeyGenerator append(String[] keys) {
 		keyBundler.append(keys);
+
 		return this;
 	}
 
 	public CacheKeyGenerator append(StringBundler sb) {
 		keyBundler.append(sb);
+
 		return this;
 	}
 
@@ -43,7 +46,9 @@ public abstract class BaseCacheKeyGenerator implements CacheKeyGenerator {
 
 	public String finish() {
 		String cacheKey = getCacheKey(keyBundler);
+
 		keyBundler.setIndex(0);
+
 		return cacheKey;
 	}
 

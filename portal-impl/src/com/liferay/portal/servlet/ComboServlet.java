@@ -14,6 +14,7 @@
 
 package com.liferay.portal.servlet;
 
+import com.liferay.portal.kernel.cache.key.CacheKeyGenerator;
 import com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil;
 import com.liferay.portal.kernel.nio.charset.CharsetEncoderUtil;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
@@ -155,9 +156,12 @@ public class ComboServlet extends HttpServlet {
 			sb.append(lastModified);
 		}
 
-		String cacheFileName = _TEMP_DIR.concat(
+		CacheKeyGenerator cacheKeyGenerator =
 			CacheKeyGeneratorUtil.getCacheKeyGenerator(
-				ComboServlet.class.getName()).getCacheKey(sb));
+				ComboServlet.class.getName());
+
+		String cacheFileName = _TEMP_DIR.concat(
+			cacheKeyGenerator.getCacheKey(sb));
 
 		return new File(cacheFileName);
 	}

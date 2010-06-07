@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.CacheRegistryItem;
 import com.liferay.portal.kernel.cache.MultiVMPool;
 import com.liferay.portal.kernel.cache.PortalCache;
+import com.liferay.portal.kernel.cache.key.CacheKeyGenerator;
 import com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.Session;
@@ -269,17 +270,22 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 	}
 
 	private String _encodeCacheKey(Serializable primaryKeyObj) {
-		return CacheKeyGeneratorUtil.getCacheKeyGenerator(CACHE_NAME).
-			getCacheKey(primaryKeyObj.toString());
+		CacheKeyGenerator cacheKeyGenerator =
+			CacheKeyGeneratorUtil.getCacheKeyGenerator(CACHE_NAME);
+
+		return cacheKeyGenerator.getCacheKey(primaryKeyObj.toString());
 	}
 
 	private String _encodeLocalCacheKey(
 		Class<?> classObj, Serializable primaryKeyObj) {
 
-		return CacheKeyGeneratorUtil.getCacheKeyGenerator(CACHE_NAME)
-			.append(classObj.getName())
-			.append(primaryKeyObj.toString())
-			.finish();
+		CacheKeyGenerator cacheKeyGenerator =
+			CacheKeyGeneratorUtil.getCacheKeyGenerator(CACHE_NAME);
+
+		cacheKeyGenerator.append(classObj.getName());
+		cacheKeyGenerator.append(primaryKeyObj.toString());
+
+		return cacheKeyGenerator.finish();
 	}
 
 	private PortalCache _getPortalCache(
