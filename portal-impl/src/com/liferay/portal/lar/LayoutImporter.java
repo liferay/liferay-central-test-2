@@ -485,30 +485,35 @@ public class LayoutImporter {
 
 			if (layout.isTypePortlet() &&
 				Validator.isNotNull(layout.getTypeSettings()) &&
+
 				!portletsMergeMode.equals(
 					PortletDataHandlerKeys.PORTLETS_MERGE_MODE_REPLACE)) {
 
 				mergePortlets(layout, typeSettings, portletsMergeMode);
 			}
 			else if (layout.isTypeLinkToLayout() &&
-				Validator.isNotNull(layout.getTypeSettings())) {
+					 Validator.isNotNull(layout.getTypeSettings())) {
 
 				UnicodeProperties typeSettingsProperties =
 					layout.getTypeSettingsProperties();
-				String oldLinkToLayoutId =
-					typeSettingsProperties.getProperty("linkToLayoutId");
 
-				if (Validator.isNotNull(oldLinkToLayoutId)) {
-					long linkToLayoutPlid =
-						newLayoutIdPlidMap.get(Long.valueOf(oldLinkToLayoutId));
-					Layout linkToLayout =
-						LayoutLocalServiceUtil.getLayout(linkToLayoutPlid);
+				long oldLinkToLayoutId = GetterUtil.getLong(
+					typeSettingsProperties.getProperty("linkToLayoutId"));
+
+				if (oldLinkToLayoutId > 0) {
+					long linkToLayoutPlid = newLayoutIdPlidMap.get(
+						oldLinkToLayoutId);
+
+					Layout linkToLayout = LayoutLocalServiceUtil.getLayout(
+						linkToLayoutPlid);
 
 					typeSettingsProperties.setProperty(
 						"linkToLayoutId",
 						String.valueOf(linkToLayout.getLayoutId()));
+
 					layout.setTypeSettingsProperties(typeSettingsProperties);
-				} else {
+				}
+				else {
 					layout.setTypeSettings(typeSettings);
 				}
 			}
