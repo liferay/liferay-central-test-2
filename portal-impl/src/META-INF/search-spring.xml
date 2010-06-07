@@ -46,7 +46,7 @@
 	<bean id="com.liferay.portal.kernel.search.BooleanQueryFactoryUtil" class="com.liferay.portal.kernel.search.BooleanQueryFactoryUtil">
 		<property name="booleanQueryFactory" ref= "com.liferay.portal.kernel.search.BooleanQueryFactory" />
 	</bean>
-	<bean id="com.liferay.portal.kernel.search.SortFactory" class="com.liferay.portal.search.generic.SortFactoryImpl" />
+	<bean id="com.liferay.portal.kernel.search.SortFactory" class="com.liferay.portal.kernel.search.SortFactoryImpl" />
 	<bean id="com.liferay.portal.kernel.search.SortFactoryUtil" class="com.liferay.portal.kernel.search.SortFactoryUtil">
 		<property name="sortFactory" ref="com.liferay.portal.kernel.search.SortFactory" />
 	</bean>
