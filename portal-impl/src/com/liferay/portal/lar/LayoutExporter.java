@@ -491,8 +491,14 @@ public class LayoutExporter {
 			// Log
 
 			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Exporting layouts takes " + stopWatch.getTime() + " ms");
+				if (stopWatch != null) {
+					_log.info(
+						"Exporting layouts takes " + stopWatch.getTime() +
+							" ms");
+				}
+				else {
+					_log.info("Exporting layouts is finished");
+				}
 			}
 
 			// Zip
