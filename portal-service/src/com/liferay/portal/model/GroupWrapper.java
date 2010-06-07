@@ -329,6 +329,10 @@ public class GroupWrapper implements Group {
 		return _group.isOrganization();
 	}
 
+	public boolean isOrganization(boolean stagingInclude) {
+		return _group.isOrganization(stagingInclude);
+	}
+
 	public boolean isStagingGroup() {
 		return _group.isStagingGroup();
 	}

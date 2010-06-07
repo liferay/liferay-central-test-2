@@ -169,7 +169,7 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 			roles.remove(communityAdministrator);
 			roles.remove(communityOwner);
 		}
-		else if (group.isOrganization()) {
+		else if (group.isOrganization(true)) {
 			Role organizationAdministrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_ADMINISTRATOR);
 			Role organizationOwner = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
 
