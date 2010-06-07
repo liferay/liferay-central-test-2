@@ -90,6 +90,10 @@ public class PortletConfigImpl implements LiferayPortletConfig {
 		return Collections.enumeration(_portlet.getInitParams().keySet());
 	}
 
+	public Portlet getPortlet() {
+		return _portlet;
+	}
+
 	public PortletContext getPortletContext() {
 		return _portletContext;
 	}

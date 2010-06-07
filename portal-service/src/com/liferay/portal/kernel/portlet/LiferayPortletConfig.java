@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.portlet;
 
+import com.liferay.portal.model.Portlet;
+
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 
@@ -29,6 +31,8 @@ public interface LiferayPortletConfig extends PortletConfig {
 
 	public static final String RUNTIME_OPTION_PORTAL_CONTEXT =
 		"com.liferay.portal.portalContext";
+
+	public Portlet getPortlet();
 
 	public PortletContext getPortletContext();
 
