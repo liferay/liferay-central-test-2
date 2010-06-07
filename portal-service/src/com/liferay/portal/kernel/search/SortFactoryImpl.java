@@ -29,4 +29,13 @@ public class SortFactoryImpl implements SortFactory {
 		return new Sort(fieldName, type, reverse);
 	}
 
+	public Sort[] getDefaultSorts() {
+		return _DEFAULT_SORTS;
+	}
+
+	private static final Sort[] _DEFAULT_SORTS = new Sort[] {
+		new Sort(null, Sort.SCORE_TYPE, false),
+		new Sort(Field.MODIFIED, Sort.LONG_TYPE, true)
+	};
+
 }

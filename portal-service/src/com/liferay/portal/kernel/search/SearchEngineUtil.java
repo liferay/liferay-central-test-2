@@ -118,7 +118,7 @@ public class SearchEngineUtil {
 		}
 
 		return _searchEngine.getSearcher().search(
-			companyId, query, _DEFAULT_SORT, start, end);
+			companyId, query, SortFactoryUtil.getDefaultSorts(), start, end);
 	}
 
 	public static Hits search(
@@ -155,7 +155,8 @@ public class SearchEngineUtil {
 				companyId, groupIds, userId, className, query);
 		}
 
-		return search(companyId, query, _DEFAULT_SORT, start, end);
+		return search(
+			companyId, query, SortFactoryUtil.getDefaultSorts(), start, end);
 	}
 
 	public static Hits search(
@@ -252,11 +253,6 @@ public class SearchEngineUtil {
 
 		_searchPermissionChecker = searchPermissionChecker;
 	}
-
-	private static final Sort[] _DEFAULT_SORT = new Sort[] {
-		new Sort(null, Sort.SCORE_TYPE, false),
-		new Sort(Field.MODIFIED, Sort.LONG_TYPE, true)
-	};
 
 	private static Log _log = LogFactoryUtil.getLog(SearchEngineUtil.class);
 

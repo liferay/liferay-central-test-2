@@ -25,4 +25,6 @@ public interface SortFactory {
 
 	public Sort create(String fieldName, int type, boolean reverse);
 
+	public Sort[] getDefaultSorts();
+
 }

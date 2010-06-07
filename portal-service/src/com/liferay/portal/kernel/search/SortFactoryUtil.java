@@ -29,6 +29,10 @@ public class SortFactoryUtil {
 		return getSortFactory().create(fieldName, type, reverse);
 	}
 
+	public static Sort[] getDefaultSorts() {
+		return getSortFactory().getDefaultSorts();
+	}
+
 	public static SortFactory getSortFactory() {
 		return _sortFactory;
 	}
