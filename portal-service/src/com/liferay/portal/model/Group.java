@@ -95,7 +95,7 @@ public interface Group extends GroupModel {
 
 	public boolean isOrganization();
 
-	public boolean isOrganization(boolean stagingInclude);
+	public boolean isOrganization(boolean includeStaging);
 
 	public boolean isStagingGroup();
 

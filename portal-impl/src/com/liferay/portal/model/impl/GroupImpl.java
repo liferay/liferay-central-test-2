@@ -354,10 +354,11 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		return isOrganization(false);
 	}
 
-	public boolean isOrganization(boolean stagingInclude) {
-		if (stagingInclude) {
+	public boolean isOrganization(boolean includeStaging) {
+		if (includeStaging) {
 			if (isOrganization() ||
 				(isStagingGroup() && getLiveGroup().isOrganization())) {
+
 				return true;
 			}
 			else {
