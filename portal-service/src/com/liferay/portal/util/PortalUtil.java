@@ -299,9 +299,7 @@ public class PortalUtil {
 		return getPortal().getCustomSQLFunctionIsNull();
 	}
 
-	public static Date getDate(int month, int day, int year)
-		throws PortalException {
-
+	public static Date getDate(int month, int day, int year) {
 		return getPortal().getDate(month, day, year);
 	}
 

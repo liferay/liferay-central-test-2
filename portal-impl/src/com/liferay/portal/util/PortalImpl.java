@@ -1152,8 +1152,13 @@ public class PortalImpl implements Portal {
 		return PropsValues.CUSTOM_SQL_FUNCTION_ISNULL;
 	}
 
-	public Date getDate(int month, int day, int year) throws PortalException {
-		return getDate(month, day, year, null);
+	public Date getDate(int month, int day, int year) {
+		try {
+			return getDate(month, day, year, null);
+		}
+		catch (PortalException pe) {
+			throw new RuntimeException();
+		}
 	}
 
 	public Date getDate(
