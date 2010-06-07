@@ -366,9 +366,14 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"processAction for " + _portletId + " takes " +
-					stopWatch.getTime() + " ms");
+			if (stopWatch != null) {
+				_log.debug(
+					"processAction for " + _portletId + " takes " +
+						stopWatch.getTime() + " ms");
+			}
+			else {
+				_log.debug("processAction for " + _portletId + " is finished");
+			}
 		}
 	}
 
