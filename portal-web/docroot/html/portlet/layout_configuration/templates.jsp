@@ -74,7 +74,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 						<div class="lfr-layout-template">
 							<img onclick="document.getElementById('layoutTemplateId<%= i %>').checked = true;" src="<%= layoutTemplate.getContextPath() %><%= layoutTemplate.getThumbnailPath() %>" />
 
-							<aui:input id='<%= "layoutTemplateId" + i %>' label="<%= layoutTemplate.getName() %>" name="layoutTemplateId" checked="<%= layoutTypePortlet.getLayoutTemplateId().equals(layoutTemplate.getLayoutTemplateId()) %>" type="radio" value="<%= layoutTemplate.getLayoutTemplateId() %>" />
+							<aui:input checked="<%= layoutTypePortlet.getLayoutTemplateId().equals(layoutTemplate.getLayoutTemplateId()) %>" id='<%= "layoutTemplateId" + i %>' label="<%= layoutTemplate.getName() %>" name="layoutTemplateId" type="radio" value="<%= layoutTemplate.getLayoutTemplateId() %>" />
 						</div>
 
 					<%
