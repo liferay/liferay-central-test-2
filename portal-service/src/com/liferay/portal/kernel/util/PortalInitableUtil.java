@@ -24,7 +24,7 @@ import java.util.Vector;
  */
 public class PortalInitableUtil {
 
-	public synchronized static void flushInitables() {
+	public static synchronized void flushInitables() {
 		if (_initables != null) {
 			for (PortalInitable initable : _initables) {
 				initable.portalInit();
@@ -34,7 +34,7 @@ public class PortalInitableUtil {
 		}
 	}
 
-	public synchronized static void init(PortalInitable initable) {
+	public static synchronized void init(PortalInitable initable) {
 		if (_initables == null) {
 			initable.portalInit();
 		}
