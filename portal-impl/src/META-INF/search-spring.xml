@@ -13,19 +13,16 @@
 
 	<bean id="indexSearcher.portal" class="com.liferay.portal.search.IndexSearcherImpl" />
 	<bean id="indexWriter.portal" class="com.liferay.portal.search.IndexWriterImpl" />
+	<bean id="com.liferay.portal.kernel.search.PortalSearchEngine" class="com.liferay.portal.search.PortalSearchEngineImpl" />
+	<bean id="com.liferay.portal.kernel.search.SearchEngine" class="com.liferay.portal.search.SearchEngineImpl">
+		<property name="searcher" ref="indexSearcher.portal" />
+		<property name="writer" ref="indexWriter.portal" />
+	</bean>
+	<bean id="com.liferay.portal.kernel.search.SearchPermissionChecker" class="com.liferay.portal.search.SearchPermissionCheckerImpl" />
 	<bean id="com.liferay.portal.kernel.search.SearchEngineUtil" class="com.liferay.portal.kernel.search.SearchEngineUtil">
-		<property name="portalSearchEngine">
-			<bean class="com.liferay.portal.search.PortalSearchEngineImpl" />
-		</property>
-		<property name="searchEngine">
-			<bean class="com.liferay.portal.search.SearchEngineImpl">
-				<property name="searcher" ref="indexSearcher.portal" />
-				<property name="writer" ref="indexWriter.portal" />
-			</bean>
-		</property>
-		<property name="searchPermissionChecker">
-			<bean class="com.liferay.portal.search.SearchPermissionCheckerImpl" />
-		</property>
+		<property name="portalSearchEngine" ref="com.liferay.portal.kernel.search.PortalSearchEngine" />
+		<property name="searchEngine" ref="com.liferay.portal.kernel.search.SearchEngine" />
+		<property name="searchPermissionChecker" ref="com.liferay.portal.kernel.search.SearchPermissionChecker" />
 	</bean>
 
 	<!-- Lucene search engine -->
