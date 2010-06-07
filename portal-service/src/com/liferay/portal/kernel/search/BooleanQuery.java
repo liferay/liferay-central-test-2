@@ -23,8 +23,10 @@ import java.util.List;
  */
 public interface BooleanQuery extends Query {
 
-	public void add(Query query, BooleanClauseOccur occur)
+	public void add(Query query, BooleanClauseOccur booleanClauseOccur)
 		throws ParseException;
+
+	public void add(Query query, String occur) throws ParseException;
 
 	public void addExactTerm(String field, boolean value);
 

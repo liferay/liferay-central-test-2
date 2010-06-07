@@ -17,6 +17,7 @@ package com.liferay.portal.search.lucene;
 import com.liferay.portal.kernel.search.BaseBooleanQueryImpl;
 import com.liferay.portal.kernel.search.BooleanClause;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
+import com.liferay.portal.kernel.search.BooleanClauseOccurImpl;
 import com.liferay.portal.kernel.search.ParseException;
 import com.liferay.portal.kernel.search.Query;
 
@@ -34,17 +35,24 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 		_booleanQuery = new org.apache.lucene.search.BooleanQuery();
 	}
 
-	public void add(Query query, BooleanClauseOccur occur)
+	public void add(Query query, BooleanClauseOccur booleanClauseOccur)
 		throws ParseException {
 
 		try {
 			_booleanQuery.add(
 				QueryTranslator.translate(query),
-				BooleanClauseOccurTranslator.translate(occur));
+				BooleanClauseOccurTranslator.translate(booleanClauseOccur));
 		}
 		catch (org.apache.lucene.queryParser.ParseException pe) {
 			throw new ParseException(pe.getMessage());
 		}
+	}
+
+	public void add(Query query, String occur) throws ParseException {
+		BooleanClauseOccur booleanClauseOccur = new BooleanClauseOccurImpl(
+			occur);
+
+		add(query, booleanClauseOccur);
 	}
 
 	public void addExactTerm(String field, boolean value) {

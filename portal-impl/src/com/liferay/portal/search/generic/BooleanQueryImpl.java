@@ -17,6 +17,7 @@ package com.liferay.portal.search.generic;
 import com.liferay.portal.kernel.search.BaseBooleanQueryImpl;
 import com.liferay.portal.kernel.search.BooleanClause;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
+import com.liferay.portal.kernel.search.BooleanClauseOccurImpl;
 import com.liferay.portal.kernel.search.Query;
 
 import java.util.ArrayList;
@@ -30,8 +31,15 @@ import java.util.List;
  */
 public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 
-	public void add(Query query, BooleanClauseOccur occur) {
-		_clauses.add(new BooleanClauseImpl(query, occur));
+	public void add(Query query, BooleanClauseOccur booleanClauseOccur) {
+		_clauses.add(new BooleanClauseImpl(query, booleanClauseOccur));
+	}
+
+	public void add(Query query, String occur) {
+		BooleanClauseOccur booleanClauseOccur = new BooleanClauseOccurImpl(
+			occur);
+
+		add(query, booleanClauseOccur);
 	}
 
 	public void addExactTerm(String field, boolean value) {
