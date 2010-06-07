@@ -58,6 +58,20 @@ public class StringBundler {
 		_arrayIndex = 1;
 	}
 
+	public StringBundler(String[] ss) {
+		this(ss, 0);
+	}
+
+	public StringBundler(String[] ss, int extraSpace) {
+		_array = new String[ss.length + extraSpace];
+
+		for(int i = 0; i < ss.length; i++) {
+			if (ss[i] != null && ss[i].length() > 0) {
+				_array[_arrayIndex++] = ss[i];
+			}
+		}
+	}
+
 	public StringBundler append(boolean b) {
 		if (b) {
 			return append(_TRUE);
@@ -72,7 +86,12 @@ public class StringBundler {
 	}
 
 	public StringBundler append(char[] charArray) {
-		return append(new String(charArray));
+		if (charArray == null) {
+			return append("null");
+		}
+		else {
+			return append(new String(charArray));
+		}
 	}
 
 	public StringBundler append(double d) {
@@ -109,6 +128,24 @@ public class StringBundler {
 		}
 
 		_array[_arrayIndex++] = s;
+
+		return this;
+	}
+
+	public StringBundler append(String[] ss) {
+		if ((ss == null) || (ss.length == 0)) {
+			return this;
+		}
+
+		if ((_array.length - _arrayIndex) < ss.length) {
+			expandCapacity((_array.length + ss.length) * 2);
+		}
+
+		for(int i = 0; i < ss.length; i++) {
+			if (ss[i] != null && ss[i].length() > 0) {
+				_array[_arrayIndex++] = ss[i];
+			}
+		}
 
 		return this;
 	}
