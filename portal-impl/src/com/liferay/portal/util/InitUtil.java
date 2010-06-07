@@ -38,7 +38,7 @@ import org.apache.commons.lang.time.StopWatch;
  */
 public class InitUtil {
 
-	public synchronized static void init() {
+	public static synchronized void init() {
 		if (_initialized) {
 			return;
 		}
