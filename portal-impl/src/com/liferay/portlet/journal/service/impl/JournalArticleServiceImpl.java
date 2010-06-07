@@ -134,8 +134,8 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		JournalPermission.check(
-			getPermissionChecker(), groupId, ActionKeys.EXPIRE);
+		JournalArticlePermission.check(
+			getPermissionChecker(), groupId, articleId, ActionKeys.EXPIRE);
 
 		return journalArticleLocalService.expireArticle(
 			getUserId(), groupId, articleId, version, articleURL,
