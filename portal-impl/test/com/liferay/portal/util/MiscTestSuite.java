@@ -16,6 +16,7 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.image.ImageProcessorImplTest;
 import com.liferay.portal.xmlrpc.XmlRpcParserTest;
+import com.liferay.portlet.RouterImplTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -33,6 +34,7 @@ public class MiscTestSuite extends TestSuite {
 		testSuite.addTestSuite(FileMultiValueMapTest.class);
 		testSuite.addTestSuite(ImageProcessorImplTest.class);
 		testSuite.addTestSuite(MemoryMultiValueMapTest.class);
+		testSuite.addTestSuite(RouterImplTest.class);
 		testSuite.addTestSuite(XmlRpcParserTest.class);
 
 		return testSuite;

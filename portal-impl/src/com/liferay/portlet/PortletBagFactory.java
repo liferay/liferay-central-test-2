@@ -481,7 +481,7 @@ public class PortletBagFactory {
 			return null;
 		}
 
-		Router router = new Router();
+		Router router = new RouterImpl();
 
 		String xml = StringUtil.read(
 			_classLoader, portlet.getFriendlyURLRoutes());

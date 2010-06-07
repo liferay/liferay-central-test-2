@@ -14,15 +14,7 @@
 
 package com.liferay.portal.kernel.portlet;
 
-import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.MapUtil;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * <a href="Route.java.html"><b><i>View Source</i></b></a>
@@ -30,118 +22,14 @@ import java.util.regex.Pattern;
  * @author Connor McKay
  * @author Brian Wing Shun Chan
  */
-public class Route {
+public interface Route {
 
-	public Route(String pattern) {
-		_urlPattern = pattern;
+	public void addDefaultParameter(String name, String value);
 
-		String regex = escapeRegex(pattern);
+	public Map<String, String> getDefaultParameters();
 
-		Matcher matcher = _fragmentPattern.matcher(pattern);
+	public String parametersToUrl(Map<String, ?> parameters);
 
-		while (matcher.find()) {
-			String fragment = matcher.group();
-
-			RoutePart routePart = new RoutePart(fragment);
-
-			_routeParts.add(routePart);
-
-			_urlPattern = _urlPattern.replace(
-				fragment, routePart.getFragmentName());
-
-			regex = regex.replace(
-				escapeRegex(fragment), "(" + routePart.getPattern() + ")");
-		}
-
-		_regexPattern = Pattern.compile(regex);
-	}
-
-	public void addDefaultParameter(String name, String value) {
-		_defaultParameters.put(name, value);
-	}
-
-	public Map<String, String> getDefaultParameters() {
-		return _defaultParameters;
-	}
-
-	public String parametersToUrl(Map<String, ?> parameters) {
-		List<String> names = new ArrayList<String>();
-
-		if (!_defaultParameters.isEmpty()) {
-			for (Map.Entry<String, String> entry :
-					_defaultParameters.entrySet()) {
-
-				String name = entry.getKey();
-				String value = entry.getValue();
-
-				if (!value.equals(MapUtil.getString(parameters, name))) {
-					return null;
-				}
-
-				names.add(name);
-			}
-		}
-
-		String url = _urlPattern;
-
-		for (RoutePart routePart : _routeParts) {
-			if (!routePart.matches(parameters)) {
-				return null;
-			}
-
-			String name = routePart.getName();
-
-			names.add(name);
-
-			String value = MapUtil.getString(parameters, name);
-
-			value = HttpUtil.encodeURL(value);
-
-			url = url.replace(routePart.getFragmentName(), value);
-		}
-
-		for (String name : names) {
-			parameters.remove(name);
-		}
-
-		return url;
-	}
-
-	public Map<String, String> urlToParameters(String url) {
-		Matcher matcher = _regexPattern.matcher(url);
-
-		if (!matcher.matches()) {
-			return null;
-		}
-
-		Map<String, String> parameters = new HashMap<String, String>(
-			_defaultParameters);
-
-		for (int i = 1; i <= _routeParts.size(); i++) {
-			RoutePart routePart = _routeParts.get(i - 1);
-
-			String value = matcher.group(i);
-
-			parameters.put(routePart.getName(), value);
-		}
-
-		return parameters;
-	}
-
-	protected String escapeRegex(String s) {
-		Matcher matcher = _escapeRegexPattern.matcher(s);
-
-		return matcher.replaceAll("\\\\$0");
-	}
-
-	private static Pattern _escapeRegexPattern = Pattern.compile(
-		"[\\{\\}\\(\\)\\[\\]\\*\\+\\?\\$\\^\\.\\#\\\\]");
-	private static Pattern _fragmentPattern = Pattern.compile("\\{.+?\\}");
-
-	private Map<String, String> _defaultParameters =
-		new HashMap<String, String>();
-	private Pattern _regexPattern;
-	private List<RoutePart> _routeParts = new ArrayList<RoutePart>();
-	private String _urlPattern;
+	public Map<String, String> urlToParameters(String url);
 
 }

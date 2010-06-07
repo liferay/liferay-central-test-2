@@ -12,85 +12,87 @@
  * details.
  */
 
-package com.liferay.portal.kernel.portlet;
+package com.liferay.portlet;
 
-import com.liferay.portal.kernel.test.TestCase;
+import com.liferay.portal.kernel.portlet.Route;
+import com.liferay.portal.util.BaseTestCase;
 import com.liferay.portal.util.InitUtil;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <a href="RouterTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="RouterImplTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Connor McKay
  * @author Brian Wing Shun Chan
  */
-public class RouterTest extends TestCase {
+public class RouterImplTest extends BaseTestCase {
 
-	public RouterTest() {
+	public RouterImplTest() {
 		InitUtil.initWithSpring();
 	}
 
 	public void setUp() {
-		_router = new Router();
+		_routerImpl = new RouterImpl();
 
-		Route route = _router.addRoute("GET/{controller}");
+		Route route = _routerImpl.addRoute("GET/{controller}");
 
 		route.addDefaultParameter("action", "index");
 		route.addDefaultParameter("format", "html");
 		route.addDefaultParameter("method", "GET");
 
-		route = _router.addRoute("GET/{controller}.{format}");
+		route = _routerImpl.addRoute("GET/{controller}.{format}");
 
 		route.addDefaultParameter("action", "index");
 		route.addDefaultParameter("method", "GET");
 
-		route = _router.addRoute("POST/{controller}");
+		route = _routerImpl.addRoute("POST/{controller}");
 
 		route.addDefaultParameter("action", "create");
 		route.addDefaultParameter("format", "html");
 		route.addDefaultParameter("method", "POST");
 
-		route = _router.addRoute("POST/{controller}.{format}");
+		route = _routerImpl.addRoute("POST/{controller}.{format}");
 
 		route.addDefaultParameter("action", "create");
 		route.addDefaultParameter("method", "POST");
 
-		route = _router.addRoute("GET/{controller}/{\\d+:id}");
+		route = _routerImpl.addRoute("GET/{controller}/{\\d+:id}");
 
 		route.addDefaultParameter("action", "view");
 		route.addDefaultParameter("format", "html");
 		route.addDefaultParameter("method", "GET");
 
-		route = _router.addRoute("GET/{controller}/{\\d+:id}.{format}");
+		route = _routerImpl.addRoute("GET/{controller}/{\\d+:id}.{format}");
 
 		route.addDefaultParameter("action", "view");
 		route.addDefaultParameter("method", "GET");
 
-		route = _router.addRoute("POST/{controller}/{\\d+:id}");
+		route = _routerImpl.addRoute("POST/{controller}/{\\d+:id}");
 
 		route.addDefaultParameter("action", "update");
 		route.addDefaultParameter("format", "html");
 		route.addDefaultParameter("method", "POST");
 
-		route = _router.addRoute("POST/{controller}/{\\d+:id}.{format}");
+		route = _routerImpl.addRoute("POST/{controller}/{\\d+:id}.{format}");
 
 		route.addDefaultParameter("action", "update");
 		route.addDefaultParameter("method", "POST");
 
-		route = _router.addRoute("{method}/{controller}/{\\d+:id}/{action}");
+		route = _routerImpl.addRoute(
+			"{method}/{controller}/{\\d+:id}/{action}");
 
 		route.addDefaultParameter("format", "html");
 
-		route = _router.addRoute(
+		route = _routerImpl.addRoute(
 			"{method}/{controller}/{\\d+:id}/{action}.{format}");
 
-		route = _router.addRoute("{method}/{controller}/{action}");
+		route = _routerImpl.addRoute("{method}/{controller}/{action}");
 
 		route.addDefaultParameter("format", "html");
 
-		route = _router.addRoute("{method}/{controller}/{action}.{format}");
+		route = _routerImpl.addRoute("{method}/{controller}/{action}.{format}");
 	}
 
 	public void testPriority() {
@@ -168,9 +170,9 @@ public class RouterTest extends TestCase {
 	}
 
 	protected void assertEqualsParametersToUrl(String url, String expectedUrl) {
-		Map<String, String> parameters = _router.urlToParameters(url);
+		Map<String, String> parameters = _routerImpl.urlToParameters(url);
 
-		String generatedUrl = _router.parametersToUrl(parameters);
+		String generatedUrl = _routerImpl.parametersToUrl(parameters);
 
 		assertEquals(expectedUrl, generatedUrl);
 	}
@@ -178,13 +180,14 @@ public class RouterTest extends TestCase {
 	protected void assertEqualsUrlToParameters(String url, String queryString) {
 		Map<String, String> parameters = new HashMap<String, String>();
 
-		_router.queryStringToParameters(queryString, parameters);
+		_routerImpl.queryStringToParameters(queryString, parameters);
 
-		Map<String, String> generatedParameters = _router.urlToParameters(url);
+		Map<String, String> generatedParameters = _routerImpl.urlToParameters(
+			url);
 
 		assertEquals(parameters, generatedParameters);
 	}
 
-	private Router _router;
+	private RouterImpl _routerImpl;
 
 }
