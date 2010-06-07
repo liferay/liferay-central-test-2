@@ -14,13 +14,30 @@
 
 package com.liferay.portal.kernel.cache.key;
 
+import com.liferay.portal.kernel.util.StringBundler;
+
 /**
  * <a href="CacheKeyGenerator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ * @author Shuyang Zhou
  */
-public interface CacheKeyGenerator {
+public interface CacheKeyGenerator extends Cloneable {
+
+	public CacheKeyGenerator append(String key);
+
+	public CacheKeyGenerator append(String[] keys);
+
+	public CacheKeyGenerator append(StringBundler sb);
+
+	public CacheKeyGenerator clone();
+
+	public String finish();
 
 	public String getCacheKey(String key);
+
+	public String getCacheKey(String[] keys);
+
+	public String getCacheKey(StringBundler sb);
 
 }

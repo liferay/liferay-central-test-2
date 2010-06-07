@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
+import com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
@@ -48,7 +49,8 @@ public class FinderPath {
 			sb.append(String.valueOf(arg));
 		}
 
-		return sb.toString();
+		return CacheKeyGeneratorUtil.getCacheKeyGenerator(
+			FinderCache.class.getName()).getCacheKey(sb);
 	}
 
 	public String encodeLocalCacheKey(Object[] args) {
@@ -61,7 +63,8 @@ public class FinderPath {
 			sb.append(String.valueOf(arg));
 		}
 
-		return sb.toString();
+		return CacheKeyGeneratorUtil.getCacheKeyGenerator(
+			FinderCache.class.getName()).getCacheKey(sb);
 	}
 
 	public String getClassName() {

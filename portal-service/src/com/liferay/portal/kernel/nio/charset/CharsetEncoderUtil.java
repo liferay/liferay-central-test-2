@@ -49,7 +49,7 @@ public class CharsetEncoderUtil {
 		return encode(charsetName, CharBuffer.wrap(string));
 	}
 
-	private static CharsetEncoder getCharsetEncoder(String charsetName) {
+	public static CharsetEncoder getCharsetEncoder(String charsetName) {
 		Charset charset = Charset.forName(charsetName);
 
 		CharsetEncoder charsetEncoder = charset.newEncoder();

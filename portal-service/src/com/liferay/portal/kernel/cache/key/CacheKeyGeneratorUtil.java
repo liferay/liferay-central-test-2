@@ -14,6 +14,10 @@
 
 package com.liferay.portal.kernel.cache.key;
 
+import com.liferay.portal.kernel.cache.Lifecycle;
+import com.liferay.portal.kernel.cache.ThreadLocalCache;
+import com.liferay.portal.kernel.cache.ThreadLocalCacheManager;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,22 +25,36 @@ import java.util.Map;
  * <a href="CacheKeyGeneratorUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ * @author Shuyang Zhou
  */
 public class CacheKeyGeneratorUtil {
 
-	public static String getCacheKey(String cacheName, String key) {
-		CacheKeyGenerator cacheKeyGenerator = _cacheKeyGenerators.get(
-			cacheName);
+	public static CacheKeyGenerator getCacheKeyGenerator() {
+		return getCacheKeyGenerator(null);
+	}
 
+	public static CacheKeyGenerator getCacheKeyGenerator(String cacheName) {
+		ThreadLocalCache<CacheKeyGenerator>
+			threadLocalCacheKeyGenerators =
+				ThreadLocalCacheManager.getThreadLocalCache(Lifecycle.ETERNAL,
+					CacheKeyGeneratorUtil.class.getName());
+
+		CacheKeyGenerator cacheKeyGenerator =
+			threadLocalCacheKeyGenerators.get(cacheName);
+
+		if (cacheKeyGenerator != null) {
+			return cacheKeyGenerator;
+		}
+
+		cacheKeyGenerator = _cacheKeyGenerators.get(cacheName);
 		if (cacheKeyGenerator == null) {
 			cacheKeyGenerator = _defaultCacheKeyGenerator;
 		}
+		cacheKeyGenerator = cacheKeyGenerator.clone();
 
-		if (cacheKeyGenerator != null) {
-			return cacheKeyGenerator.getCacheKey(key);
-		}
+		threadLocalCacheKeyGenerators.put(cacheName, cacheKeyGenerator);
 
-		return key;
+		return cacheKeyGenerator;
 	}
 
 	public void setCacheKeyGenerators(

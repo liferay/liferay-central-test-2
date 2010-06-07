@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.CacheRegistryItem;
 import com.liferay.portal.kernel.cache.MultiVMPool;
 import com.liferay.portal.kernel.cache.PortalCache;
+import com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
@@ -268,14 +269,17 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 	}
 
 	private String _encodeCacheKey(Serializable primaryKeyObj) {
-		return String.valueOf(primaryKeyObj);
+		return CacheKeyGeneratorUtil.getCacheKeyGenerator(CACHE_NAME).
+			getCacheKey(primaryKeyObj.toString());
 	}
 
 	private String _encodeLocalCacheKey(
 		Class<?> classObj, Serializable primaryKeyObj) {
 
-		return classObj.getName().concat(StringPool.PERIOD).concat(
-			primaryKeyObj.toString());
+		return CacheKeyGeneratorUtil.getCacheKeyGenerator(CACHE_NAME)
+			.append(classObj.getName())
+			.append(primaryKeyObj.toString())
+			.finish();
 	}
 
 	private PortalCache _getPortalCache(
@@ -294,6 +298,8 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 			if (previousPortalCache != null) {
 				portalCache = previousPortalCache;
 			}
+
+			portalCache.setDebug(true);
 		}
 
 		return portalCache;

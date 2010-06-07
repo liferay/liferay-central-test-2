@@ -156,8 +156,8 @@ public class ComboServlet extends HttpServlet {
 		}
 
 		String cacheFileName = _TEMP_DIR.concat(
-			CacheKeyGeneratorUtil.getCacheKey(
-				ComboServlet.class.getName(), sb.toString()));
+			CacheKeyGeneratorUtil.getCacheKeyGenerator(
+				ComboServlet.class.getName()).getCacheKey(sb));
 
 		return new File(cacheFileName);
 	}

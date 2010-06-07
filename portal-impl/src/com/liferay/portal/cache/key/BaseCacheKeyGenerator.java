@@ -18,35 +18,35 @@ import com.liferay.portal.kernel.cache.key.CacheKeyGenerator;
 import com.liferay.portal.kernel.util.StringBundler;
 
 /**
- * <a href="HashCodeCacheKeyGenerator.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseCacheKeyGenerator.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael C. Han
  * @author Shuyang Zhou
  */
-public class HashCodeCacheKeyGenerator extends BaseCacheKeyGenerator {
+public abstract class BaseCacheKeyGenerator implements CacheKeyGenerator {
 
-	public CacheKeyGenerator clone() {
-		return new HashCodeCacheKeyGenerator();
+	public CacheKeyGenerator append(String key) {
+		keyBundler.append(key);
+		return this;
 	}
 
-	public String getCacheKey(String key) {
-		return String.valueOf(key.hashCode());
+	public CacheKeyGenerator append(String[] keys) {
+		keyBundler.append(keys);
+		return this;
 	}
 
-	public String getCacheKey(String[] keys) {
-		int hashCode = 0;
-		for(String key : keys) {
-			hashCode = 31 * hashCode + key.hashCode();
-		}
-		return String.valueOf(hashCode);
+	public CacheKeyGenerator append(StringBundler sb) {
+		keyBundler.append(sb);
+		return this;
 	}
 
-	public String getCacheKey(StringBundler sb) {
-		int hashCode = 0;
-		for(int i = 0; i < sb.index(); i++) {
-			hashCode = 31 * hashCode + sb.stringAt(i).hashCode();
-		}
-		return String.valueOf(hashCode);
+	public abstract CacheKeyGenerator clone();
+
+	public String finish() {
+		String cacheKey = getCacheKey(keyBundler);
+		keyBundler.setIndex(0);
+		return cacheKey;
 	}
+
+	protected StringBundler keyBundler = new StringBundler();
 
 }
