@@ -1152,6 +1152,10 @@ public class PortalImpl implements Portal {
 		return PropsValues.CUSTOM_SQL_FUNCTION_ISNULL;
 	}
 
+	public Date getDate(int month, int day, int year) throws PortalException {
+		return getDate(month, day, year, null);
+	}
+
 	public Date getDate(
 			int month, int day, int year, int hour, int min, PortalException pe)
 		throws PortalException {
@@ -1165,7 +1169,12 @@ public class PortalImpl implements Portal {
 		throws PortalException {
 
 		if (!Validator.isGregorianDate(month, day, year)) {
-			throw pe;
+			if (pe != null) {
+				throw pe;
+			}
+			else {
+				return null;
+			}
 		}
 		else {
 			Calendar cal = null;

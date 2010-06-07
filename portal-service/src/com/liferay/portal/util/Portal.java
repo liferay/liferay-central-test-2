@@ -200,6 +200,8 @@ public interface Portal {
 
 	public String getCustomSQLFunctionIsNull();
 
+	public Date getDate(int month, int day, int year) throws PortalException;
+
 	public Date getDate(
 			int month, int day, int year, int hour, int min, PortalException pe)
 		throws PortalException;
