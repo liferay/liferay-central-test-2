@@ -58,16 +58,18 @@ public class StringBundler {
 		_arrayIndex = 1;
 	}
 
-	public StringBundler(String[] ss) {
-		this(ss, 0);
+	public StringBundler(String[] stringArray) {
+		this(stringArray, 0);
 	}
 
-	public StringBundler(String[] ss, int extraSpace) {
-		_array = new String[ss.length + extraSpace];
+	public StringBundler(String[] stringArray, int extraSpace) {
+		_array = new String[stringArray.length + extraSpace];
 
-		for(int i = 0; i < ss.length; i++) {
-			if (ss[i] != null && ss[i].length() > 0) {
-				_array[_arrayIndex++] = ss[i];
+		for (int i = 0; i < stringArray.length; i++) {
+			String s = stringArray[i];
+
+			if ((s != null) && (s.length() > 0)) {
+				_array[_arrayIndex++] = s;
 			}
 		}
 	}
@@ -132,18 +134,20 @@ public class StringBundler {
 		return this;
 	}
 
-	public StringBundler append(String[] ss) {
-		if ((ss == null) || (ss.length == 0)) {
+	public StringBundler append(String[] stringArray) {
+		if ((stringArray == null) || (stringArray.length == 0)) {
 			return this;
 		}
 
-		if ((_array.length - _arrayIndex) < ss.length) {
-			expandCapacity((_array.length + ss.length) * 2);
+		if ((_array.length - _arrayIndex) < stringArray.length) {
+			expandCapacity((_array.length + stringArray.length) * 2);
 		}
 
-		for(int i = 0; i < ss.length; i++) {
-			if (ss[i] != null && ss[i].length() > 0) {
-				_array[_arrayIndex++] = ss[i];
+		for (int i = 0; i < stringArray.length; i++) {
+			String s = stringArray[i];
+
+			if ((s != null) && (s.length() > 0)) {
+				_array[_arrayIndex++] = s;
 			}
 		}
 
