@@ -107,7 +107,7 @@ public class SearchContainer<R> {
 
 		if (!_curParam.equals(DEFAULT_CUR_PARAM)) {
 			_deltaParam =
-				DEFAULT_CUR_PARAM +
+				DEFAULT_DELTA_PARAM +
 					StringUtil.replace(
 						_curParam, DEFAULT_CUR_PARAM, StringPool.BLANK);
 		}
