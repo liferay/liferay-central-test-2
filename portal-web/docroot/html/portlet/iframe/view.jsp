@@ -151,7 +151,7 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 
 	Liferay.provide(
 		window,
-		'<portlet:namespace />init'
+		'<portlet:namespace />init',
 		function() {
 			var A = AUI();
 
@@ -180,7 +180,7 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 
 	Liferay.provide(
 		window,
-		'<portlet:namespace />updateHash'
+		'<portlet:namespace />updateHash',
 		function(url) {
 			var A = AUI();
 
