@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.CookieUtil;
 
 import java.io.IOException;
@@ -69,6 +70,28 @@ public class OpenSSOUtil {
 		throws IOException {
 
 		return _instance._isAuthenticated(request, serviceUrl);
+	}
+
+	public static boolean isValidService(String serviceUrl) {
+		if (Validator.isNull(serviceUrl)) {
+			return false;
+		}
+
+		String[] cookieNames = _instance._getCookieNames(serviceUrl);
+
+		if (cookieNames.length == 0) {
+			return false;
+		}
+
+		return true;
+	}
+
+	public static boolean isValidUrl(String url) {
+		return _instance._isValidUrl(url);
+	}
+
+	public static boolean isValidUrls(String[] urls) {
+		return _instance._isValidUrls(urls);
 	}
 
 	private OpenSSOUtil() {
@@ -291,6 +314,55 @@ public class OpenSSOUtil {
 		}
 
 		return authenticated;
+	}
+
+	private boolean _isConnected(String url) {
+		try {
+			URL urlObj = new URL(url);
+
+			HttpURLConnection urlc = (HttpURLConnection)urlObj.openConnection();
+
+			int responseCode = urlc.getResponseCode();
+
+			if (responseCode != HttpURLConnection.HTTP_OK) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Attributes response code " + responseCode);
+				}
+
+				return false;
+			}
+		}
+		catch (IOException ioe) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(ioe, ioe);
+			}
+
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean _isValidUrl(String url) {
+		if (Validator.isNull(url)) {
+			return false;
+		}
+
+		if (!_isConnected(url)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean _isValidUrls(String[] urls) {
+		for (String url : urls) {
+			if (!_isValidUrl(url)) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	private void _setCookieProperty(

@@ -549,6 +549,10 @@
 		<put name="portlet_content" value="/portlet/enterprise_admin/settings/test_ldap_users.jsp" />
 	</definition>
 
+	<definition name="portlet.enterprise_admin.test_opensso_configuration" extends="portlet.enterprise_admin">
+		<put name="portlet_content" value="/portlet/enterprise_admin/settings/test_opensso_configuration.jsp" />
+	</definition>
+
 	<definition name="portlet.enterprise_admin.view" extends="portlet.enterprise_admin">
 		<put name="portlet_content" value="/portlet/enterprise_admin/view.jsp" />
 	</definition>

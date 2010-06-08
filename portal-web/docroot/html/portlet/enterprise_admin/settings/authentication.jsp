@@ -140,6 +140,14 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings--" + PropsK
 			<aui:input cssClass="lfr-input-text-container" label="first-name-attribute" name='<%= "settings--" + PropsKeys.OPEN_SSO_FIRST_NAME_ATTR + "--" %>' type="text" value="<%= openSsoFirstNameAttr %>" />
 
 			<aui:input cssClass="lfr-input-text-container" label="last-name-attribute" name='<%= "settings--" + PropsKeys.OPEN_SSO_LAST_NAME_ATTR + "--" %>' type="text" value="<%= openSsoLastNameAttr %>" />
+
+			<aui:button-row>
+				<%
+				String taglibOnClick = renderResponse.getNamespace() + "testSettings('openssoConfiguration');";
+				%>
+
+				<aui:button onClick='<%= taglibOnClick %>' value="test-opensso-configuration" />
+			</aui:button-row>
 		</aui:fieldset>
 	</liferay-ui:section>
 	<liferay-ui:section>
@@ -152,3 +160,50 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings--" + PropsK
 		</aui:fieldset>
 	</liferay-ui:section>
 </liferay-ui:tabs>
+
+<aui:script>
+	Liferay.provide(
+		window,
+		'<portlet:namespace />testSettings',
+		function(type) {
+			var A = AUI();
+
+			var url = null;
+
+			var data = {};
+
+			if (type == "openssoConfiguration") {
+				url = "<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/test_opensso_configuration" /></portlet:renderURL>";
+
+				data.<portlet:namespace />openSsoLoginUrl = document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.OPEN_SSO_LOGIN_URL %>--'].value;
+				data.<portlet:namespace />openSsoLogoutUrl = document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.OPEN_SSO_LOGOUT_URL %>--'].value;
+				data.<portlet:namespace />openSsoServiceUrl = document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.OPEN_SSO_SERVICE_URL %>--'].value;
+				data.<portlet:namespace />openSsoScreenNameAttr = document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.OPEN_SSO_SCREEN_NAME_ATTR %>--'].value;
+				data.<portlet:namespace />openSsoEmailAddressAttr = document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.OPEN_SSO_EMAIL_ADDRESS_ATTR %>--'].value;
+				data.<portlet:namespace />openSsoFirstNameAttr = document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.OPEN_SSO_FIRST_NAME_ATTR %>--'].value;
+				data.<portlet:namespace />openSsoLastNameAttr = document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.OPEN_SSO_LAST_NAME_ATTR %>--'].value;
+			}
+
+			if (url != null) {
+				var dialog = new A.Dialog(
+					{
+						centered: true,
+						destroyOnClose: true,
+						modal: true,
+						title: Liferay.Language.get('OpenSSO'),
+						width: 600
+					}
+				).render();
+
+				dialog.plug(
+					A.Plugin.IO,
+					{
+						data: data,
+						uri: url
+					}
+				);
+			}
+		},
+		['aui-dialog', 'aui-io']
+	);
+</aui:script>
