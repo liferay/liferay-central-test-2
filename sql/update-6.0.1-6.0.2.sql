@@ -15,7 +15,7 @@ update MBThread set categoryId = -1 where groupId = 0;
 alter table PasswordPolicy add minAlphanumeric INTEGER;
 alter table PasswordPolicy add minLowerCase INTEGER;
 alter table PasswordPolicy add minNumbers INTEGER;
-alter table PasswordPolicy add minSpecial INTEGER;
+alter table PasswordPolicy add minSymbols INTEGER;
 alter table PasswordPolicy add minUpperCase INTEGER;
 alter table PasswordPolicy add resetTicketMaxAge LONG;
 
