@@ -14,10 +14,10 @@
 
 package com.liferay.util;
 
-import java.util.Date;
-
 import com.liferay.ibm.icu.util.Calendar;
 import com.liferay.ibm.icu.util.GregorianCalendar;
+
+import java.util.Date;
 
 /**
  * <a href="SocialEquity.java.html"><b><i>View Source</i></b>
@@ -51,19 +51,19 @@ public class SocialEquity extends Number {
 	public double getB() {
 		return _b;
 	}
-	
+
 	public double getK() {
 		return _k;
 	}
-	
+
 	public double getValue() {
 		return getValue(getEquityDate(new Date()));
 	}
-	
+
 	public double getValue(int equityDate) {
 		return _k * equityDate + _b;
 	}
-	
+
 	@Override
 	public int intValue() {
 		return (int)doubleValue();
@@ -78,14 +78,15 @@ public class SocialEquity extends Number {
 		_k = _k - value._k;
 		_b = _b - value._b;
 	}
-	
+
 	protected int getEquityDate(Date date) {
 		Calendar calendar = new GregorianCalendar(2010, Calendar.JANUARY, 1);
 
 		return calendar.fieldDifference(date, Calendar.DATE);
 	}
-	
+
 	private int _equityDate = 0;
 	private double _b = 0;
 	private double _k = 0;
+
 }

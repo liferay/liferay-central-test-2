@@ -49,24 +49,24 @@ public class AssetEntryImpl extends AssetEntryModelImpl implements AssetEntry {
 
 	public double getSocialInformationEquity() throws SystemException {
 		if (_informationEquityBase == -1) {
-			_informationEquityBase = 
+			_informationEquityBase =
 				SocialEquityAssetEntryLocalServiceUtil.getInformationEquity(
 					getEntryId());
 		}
-		
+
 		SocialEquity iqCounter =
 			(SocialEquity)CounterCacheAdvice.getCounterValue(
 				"com.liferay.portlet.social.service." +
 				"SocialEquityLogLocalService#" +
 				"updateSocialEquityAssetEntry_IQ", getEntryId());
-		
+
 		if (iqCounter == null) {
 			return _informationEquityBase;
 		}
-		
+
 		return _informationEquityBase + iqCounter.getValue();
 	}
-	
+
 	public String[] getTagNames() throws SystemException {
 		return StringUtil.split(ListUtil.toString(getTags(), "name"));
 	}
@@ -75,16 +75,16 @@ public class AssetEntryImpl extends AssetEntryModelImpl implements AssetEntry {
 		return AssetTagLocalServiceUtil.getEntryTags(getEntryId());
 	}
 
-	public void setSocialInformationEquity(double informationEquity) 
+	public void setSocialInformationEquity(double informationEquity)
 		throws SystemException {
-		
+
 		if (_informationEquityBase == -1) {
 			getSocialInformationEquity();
 		}
-		
+
 		_informationEquityBase = _informationEquityBase + informationEquity;
 	}
-	
+
 	private double _informationEquityBase = -1;
-	
+
 }

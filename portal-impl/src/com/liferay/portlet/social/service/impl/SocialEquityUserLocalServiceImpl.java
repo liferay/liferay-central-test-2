@@ -14,14 +14,6 @@
 
 package com.liferay.portlet.social.service.impl;
 
-import java.util.List;
-
-import org.hibernate.criterion.AggregateProjection;
-import org.hibernate.criterion.Projections;
-
-import com.liferay.portal.dao.orm.hibernate.CriterionImpl;
-import com.liferay.portal.dao.orm.hibernate.ProjectionListImpl;
-import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
@@ -32,6 +24,8 @@ import com.liferay.portlet.social.model.SocialEquityUser;
 import com.liferay.portlet.social.model.impl.SocialEquityUserImpl;
 import com.liferay.portlet.social.service.base.SocialEquityUserLocalServiceBaseImpl;
 
+import java.util.List;
+
 /**
  * <a href="SocialEquityUserLocalServiceImpl.java.html"><b><i>View Source</i>
  * </b></a>
@@ -40,42 +34,43 @@ import com.liferay.portlet.social.service.base.SocialEquityUserLocalServiceBaseI
  */
 public class SocialEquityUserLocalServiceImpl
 	extends SocialEquityUserLocalServiceBaseImpl {
-	
+
 	public SocialEquityUser getSocialEquityUserAggregate(long userId)
 		throws SystemException {
-		
+
 		SocialEquityUser socialEquityUser = new SocialEquityUserImpl();
-		
+
 		DynamicQuery query = DynamicQueryFactoryUtil.forClass(
 			SocialEquityUser.class);
-		
+
 		ProjectionList projections = ProjectionFactoryUtil.projectionList();
-		
+
 		projections.add(ProjectionFactoryUtil.sum("contributionK"));
 		projections.add(ProjectionFactoryUtil.sum("contributionB"));
 		projections.add(ProjectionFactoryUtil.sum("participationK"));
 		projections.add(ProjectionFactoryUtil.sum("participationB"));
-		
+
 		query.setProjection(projections);
-		
+
 		query.add(RestrictionsFactoryUtil.eq("userId", userId));
-		
+
 		List<?> result = dynamicQuery(query);
-		
+
 		Object[] values = (Object[])result.get(0);
-			
+
 		if (values[0] != null)
 			socialEquityUser.setContributionK((Double)values[0]);
-		
+
 		if (values[1] != null)
 			socialEquityUser.setContributionB((Double)values[1]);
-		
+
 		if (values[2] != null)
 			socialEquityUser.setParticipationK((Double)values[2]);
-		
+
 		if (values[3] != null)
 			socialEquityUser.setParticipationB((Double)values[3]);
-				
+
 		return socialEquityUser;
 	}
+
 }

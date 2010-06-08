@@ -29,7 +29,7 @@ public class ConcurrentCounter {
 	public ConcurrentCounter(int value) {
 		_value = value;
 	}
-	
+
 	public ConcurrentCounter(long value) {
 		_value = value;
 	}
@@ -48,7 +48,7 @@ public class ConcurrentCounter {
 			_value = value;
 		}
 	}
-	
+
 	public synchronized void decrement(Number count) {
 		if (count instanceof Integer) {
 			_value = getIntValue() - count.intValue();
@@ -63,7 +63,7 @@ public class ConcurrentCounter {
 			((SocialEquity)_value).subtract((SocialEquity)count);
 		}
 	}
-	
+
 	public synchronized void increment(double count) {
 		_value = getDoubleValue() + count;
 	}
@@ -71,7 +71,7 @@ public class ConcurrentCounter {
 	public synchronized void increment(int count) {
 		_value = getIntValue() + count;
 	}
-	
+
 	public synchronized void increment(long count) {
 		_value = getLongValue() + count;
 	}
@@ -98,15 +98,15 @@ public class ConcurrentCounter {
 	public int getIntValue() {
 		return _value.intValue();
 	}
-	
+
 	public long getLongValue() {
 		return _value.longValue();
 	}
-	
+
 	public Number getValue() {
 		return _value;
 	}
-	
+
 	private Number _value = 0;
 
 }

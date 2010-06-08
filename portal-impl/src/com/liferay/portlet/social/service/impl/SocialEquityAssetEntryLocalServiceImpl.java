@@ -14,16 +14,14 @@
 
 package com.liferay.portlet.social.service.impl;
 
-import java.util.Date;
-
-import sun.misc.Perf.GetPerfAction;
-
 import com.liferay.ibm.icu.util.Calendar;
 import com.liferay.ibm.icu.util.GregorianCalendar;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portlet.social.NoSuchEquityAssetEntryException;
 import com.liferay.portlet.social.model.SocialEquityAssetEntry;
 import com.liferay.portlet.social.service.base.SocialEquityAssetEntryLocalServiceBaseImpl;
+
+import java.util.Date;
 
 /**
  * <a href="SocialEquityAssetEntryLocalServiceImpl.java.html"><b><i>View Source
@@ -33,35 +31,36 @@ import com.liferay.portlet.social.service.base.SocialEquityAssetEntryLocalServic
  */
 public class SocialEquityAssetEntryLocalServiceImpl
 	extends SocialEquityAssetEntryLocalServiceBaseImpl {
-	
+
 	public double getInformationEquity(long assetEntryId)
 		throws SystemException {
-		
+
 		double informationEquity = 0;
-		
+
 		try {
-			SocialEquityAssetEntry socialEquityAssetEntry = 
+			SocialEquityAssetEntry socialEquityAssetEntry =
 				socialEquityAssetEntryPersistence.findByAssetEntryId(
 					assetEntryId);
-			
+
 			informationEquity = calculateEquity(
-				getEquityDate(new Date()), 
+				getEquityDate(new Date()),
 				socialEquityAssetEntry.getInformationK(),
 				socialEquityAssetEntry.getInformationB());
 		}
 		catch (NoSuchEquityAssetEntryException nseaee) {
 		}
-		
+
 		return informationEquity;
 	}
 
 	protected double calculateEquity(int actionDate, double k, double b) {
 		return k * actionDate + b;
 	}
-		
+
 	protected int getEquityDate(Date date) {
 		Calendar calendar = new GregorianCalendar(2010, Calendar.JANUARY, 1);
 
 		return calendar.fieldDifference(date, Calendar.DATE);
 	}
+
 }

@@ -210,12 +210,12 @@ public class MainServlet extends ActionServlet {
 		}
 
 		try {
-			initCounterFlushScheduler();		
+			initCounterFlushScheduler();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-		
+
 		if (_log.isDebugEnabled()) {
 			_log.debug("Initialize servlet context pool");
 		}
@@ -782,7 +782,7 @@ public class MainServlet extends ActionServlet {
 		SchedulerEngineUtil.schedule(
 			schedulerEntry, PortalClassLoaderUtil.getClassLoader());
 	}
-	
+
 	protected void initExt() throws Exception {
 		ServletContext servletContext = getServletContext();
 

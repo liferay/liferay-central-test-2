@@ -14,11 +14,11 @@
 
 package com.liferay.portlet.social.model.impl;
 
-import java.util.Date;
-
 import com.liferay.ibm.icu.util.Calendar;
 import com.liferay.ibm.icu.util.GregorianCalendar;
 import com.liferay.portlet.social.model.SocialEquityUser;
+
+import java.util.Date;
 
 /**
  * <a href="SocialEquityUserImpl.java.html"><b><i>View Source</i></b></a>
@@ -44,10 +44,11 @@ public class SocialEquityUserImpl
 	protected double calculateEquity(int actionDate, double k, double b) {
 		return k * actionDate + b;
 	}
-	
+
 	protected int getEquityDate(Date date) {
 		Calendar calendar = new GregorianCalendar(2010, Calendar.JANUARY, 1);
 
 		return calendar.fieldDifference(date, Calendar.DATE);
 	}
+
 }

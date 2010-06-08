@@ -380,54 +380,54 @@ public class UserImpl extends UserModelImpl implements User {
 
 	public double getSocialContributionEquity() throws SystemException {
 		if (_contributionEquityBase == -1) {
-			SocialEquityUser socialEquityUser = 
+			SocialEquityUser socialEquityUser =
 				SocialEquityUserLocalServiceUtil.getSocialEquityUserAggregate(
 					getUserId());
-			
+
 			_contributionEquityBase = socialEquityUser.getContributionEquity();
 			_participationEquityBase= socialEquityUser.getParticipationEquity();
 		}
-		
+
 		SocialEquity cqCounter =
 			(SocialEquity)CounterCacheAdvice.getCounterValue(
 				"com.liferay.portlet.social.service." +
 				"SocialEquityLogLocalService#" +
 				"updateUser_CQ#none", getUserId());
-		
+
 		if (cqCounter == null) {
 			return _contributionEquityBase;
 		}
-		
+
 		return _contributionEquityBase + cqCounter.getValue();
 	}
-	
+
 	public double getSocialParticipationEquity() throws SystemException {
 		if (_participationEquityBase == -1) {
-			SocialEquityUser socialEquityUser = 
+			SocialEquityUser socialEquityUser =
 				SocialEquityUserLocalServiceUtil.getSocialEquityUserAggregate(
 					getUserId());
-			
+
 			_contributionEquityBase = socialEquityUser.getContributionEquity();
 			_participationEquityBase= socialEquityUser.getParticipationEquity();
 		}
-		
+
 		SocialEquity pqCounter =
 			(SocialEquity)CounterCacheAdvice.getCounterValue(
 				"com.liferay.portlet.social.service." +
 				"SocialEquityLogLocalService#" +
 				"updateUser_PQ#none", getUserId());
-		
+
 		if (pqCounter == null) {
 			return _participationEquityBase;
 		}
-		
+
 		return _participationEquityBase + pqCounter.getValue();
 	}
-	
+
 	public double getSocialPersonalEquity() throws SystemException {
 		return getSocialContributionEquity() + getSocialParticipationEquity();
 	}
-	
+
 	public long[] getTeamIds() throws SystemException {
 		List<Team> teams = getTeams();
 
@@ -585,21 +585,21 @@ public class UserImpl extends UserModelImpl implements User {
 
 	public void setSocialContributionEquity(double contributionEquity)
 		throws SystemException {
-		
+
 		if (_contributionEquityBase == -1) {
 			getSocialContributionEquity();
 		}
-		
+
 		_contributionEquityBase = _contributionEquityBase + contributionEquity;
 	}
-	
+
 	public void setSocialParticipationEquity(double participationEquity)
 		throws SystemException {
-		
+
 		if (_participationEquityBase == -1) {
 			getSocialParticipationEquity();
 		}
-		
+
 		_participationEquityBase=_participationEquityBase + participationEquity;
 	}
 
