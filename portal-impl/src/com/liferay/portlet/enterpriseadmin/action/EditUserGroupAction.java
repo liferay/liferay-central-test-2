@@ -22,9 +22,11 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.UserGroupServiceUtil;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portlet.communities.util.CommunitiesUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -128,19 +130,32 @@ public class EditUserGroupAction extends PortletAction {
 		String name = ParamUtil.getString(actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
 
+		UserGroup userGroup = null;
+
 		if (userGroupId <= 0) {
 
 			// Add user group
 
-			UserGroupServiceUtil.addUserGroup(name, description);
+			userGroup = UserGroupServiceUtil.addUserGroup(name, description);
 		}
 		else {
 
 			// Update user group
 
-			UserGroupServiceUtil.updateUserGroup(
+			userGroup = UserGroupServiceUtil.updateUserGroup(
 				userGroupId, name, description);
 		}
+
+		// Layout set prototypes
+
+		long publicLayoutSetPrototypeId = ParamUtil.getLong(
+			actionRequest, "publicLayoutSetPrototypeId");
+		long privateLayoutSetPrototypeId = ParamUtil.getLong(
+			actionRequest, "privateLayoutSetPrototypeId");
+
+		CommunitiesUtil.applyLayoutSetPrototypes(
+			userGroup.getGroup(), publicLayoutSetPrototypeId,
+			privateLayoutSetPrototypeId);
 	}
 
 }
