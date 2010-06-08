@@ -13,6 +13,7 @@
 	<packaging>maven-plugin</packaging>
 	<name>Liferay Maven 2 Plugin</name>
 	<version>6.0.2-SNAPSHOT</version>
+	<description>Contains goals to manage Liferay plugins.</description>
 	<scm>
 		<connection>scm:svn:svn://svn.liferay.com/repos/public/portal/trunk/support-maven/plugins/liferay-maven-plugin</connection>
 		<url>http://guest:guest@svn.liferay.com/repos/public/portal/trunk/support-maven/plugins/liferay-maven-plugin</url>

@@ -6,6 +6,7 @@
 	<artifactId>portal-service</artifactId>
 	<name>Liferay Portal Service</name>
 	<version>@version@</version>
+	<description>Exposes portal functionallity to plugins.</description>
 	<url>http://www.liferay.com</url>
 	<developers>
 		<developer>

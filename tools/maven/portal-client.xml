@@ -6,6 +6,7 @@
 	<artifactId>portal-client</artifactId>
 	<name>Liferay Portal Client</name>
 	<version>@version@</version>
+	<description>Provides access to the portal services through SOAP.</description>
 	<url>http://www.liferay.com</url>
 	<developers>
 		<developer>

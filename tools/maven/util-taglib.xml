@@ -6,6 +6,7 @@
 	<artifactId>util-taglib</artifactId>
 	<name>Liferay Util Taglib</name>
 	<version>@version@</version>
+	<description>Taglib classes implementation.</description>
 	<url>http://www.liferay.com</url>
 	<developers>
 		<developer>

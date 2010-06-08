@@ -6,6 +6,7 @@
 	<artifactId>util-bridges</artifactId>
 	<name>Liferay Util Bridges</name>
 	<version>@version@</version>
+	<description>Provides classes to bridge web frameworks into portal.</description>
 	<url>http://www.liferay.com</url>
 	<developers>
 		<developer>
