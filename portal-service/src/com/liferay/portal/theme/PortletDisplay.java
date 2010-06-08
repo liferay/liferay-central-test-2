@@ -17,10 +17,13 @@ package com.liferay.portal.theme;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.io.Writer;
 
 import javax.portlet.PortletPreferences;
 
@@ -520,12 +523,17 @@ public class PortletDisplay implements Serializable {
 		_restoreCurrentView = restoreCurrentView;
 	}
 
-	public String getContent() {
+	public StringBundler getContent() {
 		return _content;
 	}
 
-	public void setContent(String content) {
-		_content = content;
+	public void setContent(StringBundler content) {
+		if (content == null) {
+			_content = _blankStringBundler;
+		}
+		else {
+			_content = content;
+		}
 	}
 
 	public PortletPreferences getPortletSetup() {
@@ -534,6 +542,10 @@ public class PortletDisplay implements Serializable {
 
 	public void setPortletSetup(PortletPreferences portletSetup) {
 		_portletSetup = portletSetup;
+	}
+
+	public void outputContent(Writer outputWriter) throws IOException {
+		_content.writeTo(outputWriter);
 	}
 
 	public void recycle() {
@@ -596,7 +608,7 @@ public class PortletDisplay implements Serializable {
 		_urlRefresh = StringPool.BLANK;
 		_webDAVEnabled = false;
 		_restoreCurrentView = false;
-		_content = StringPool.BLANK;
+		_content.setIndex(0);
 		_portletSetup = null;
 	}
 
@@ -723,6 +735,9 @@ public class PortletDisplay implements Serializable {
 
 	private static Log _log = LogFactoryUtil.getLog(PortletDisplay.class);
 
+	private static StringBundler _blankStringBundler =
+		new StringBundler(StringPool.BLANK);
+
 	private ThemeDisplay _themeDisplay;
 	private String _id = StringPool.BLANK;
 	private String _rootPortletId = StringPool.BLANK;
@@ -782,7 +797,7 @@ public class PortletDisplay implements Serializable {
 	private String _urlRefresh = StringPool.BLANK;
 	private boolean _webDAVEnabled;
 	private boolean _restoreCurrentView;
-	private String _content = StringPool.BLANK;
+	private StringBundler _content = _blankStringBundler;
 	private PortletPreferences _portletSetup;
 
 }

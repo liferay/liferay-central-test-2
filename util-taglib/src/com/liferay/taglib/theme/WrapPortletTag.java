@@ -14,9 +14,8 @@
 
 package com.liferay.taglib.theme;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
-import com.liferay.portal.kernel.servlet.StringServletResponse;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.theme.PortletDisplay;
@@ -55,12 +54,13 @@ public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
 		RequestDispatcher requestDispatcher =
 			servletContext.getRequestDispatcher(portletPage);
 
-		StringServletResponse stringResponse =
-			new StringServletResponse(response);
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
+		PipingServletResponse pipingServletResponse =
+			new PipingServletResponse(response, unsyncStringWriter);
 
-		requestDispatcher.include(request, stringResponse);
+		requestDispatcher.include(request, pipingServletResponse);
 
-		portletDisplay.setContent(stringResponse.getString());
+		portletDisplay.setContent(unsyncStringWriter.getStringBundler());
 
 		// Page
 
@@ -88,9 +88,7 @@ public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
 
 			// Portlet content
 
-			StringBundler bodyContentSB = getBodyContentAsStringBundler();
-
-			portletDisplay.setContent(bodyContentSB.toString());
+			portletDisplay.setContent(getBodyContentAsStringBundler());
 
 			// Page
 

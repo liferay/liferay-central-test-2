@@ -1,9 +1,9 @@
 #set ($portlet_display = $portletDisplay)
+#set ($output_writer = $outputWriter)
 
 #set ($portlet_id = $htmlUtil.escape($portlet_display.getId()))
 #set ($portlet_title = $portlet_display.getTitle())
 #set ($portlet_description = $portlet_display.getDescription())
-#set ($portlet_content = $portlet_display.getContent())
 #set ($portlet_back_url = $htmlUtil.escape($portlet_display.getURLBack()))
 #set ($show_portlet_description = $sessionClicks.get($request, "show-portlet-description-$portlet_id", "true"))
 #set ($valid_portlet_description = $validator.isNotNull($portlet_description) && $portlet_description.indexOf('javax.portlet.description') == -1)
@@ -34,6 +34,6 @@
 	#end
 
 	<div class="portlet-content">
-		$portlet_content
+		$portlet_display.outputContent($output_writer)
 	</div>
 </section>

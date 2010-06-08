@@ -1,8 +1,8 @@
 #set ($portlet_display = $portletDisplay)
+#set ($output_writer = $outputWriter)
 
 #set ($portlet_id = $htmlUtil.escapeAttribute($portlet_display.getId()))
 #set ($portlet_title = $portlet_display.getTitle())
-#set ($portlet_content = $portlet_display.getContent())
 #set ($portlet_back_url = $htmlUtil.escape($portlet_display.getURLBack()))
 
 <section class="portlet" id="portlet_$portlet_id">
@@ -24,6 +24,6 @@
 	</header>
 
 	<div class="portlet-content">
-		$portlet_content
+		$portlet_display.outputContent($output_writer)
 	</div>
 </section>
