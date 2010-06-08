@@ -457,9 +457,17 @@ public class LayoutImporter {
 			}
 
 			if (layout == null) {
-				long plid = CounterLocalServiceUtil.increment();
+				Layout sameFriendlyUrlLayout =
+					LayoutUtil.fetchByG_P_F(groupId, privateLayout, friendlyURL);
 
-				layout = LayoutUtil.create(plid);
+				if(sameFriendlyUrlLayout != null) {
+					layout = sameFriendlyUrlLayout;
+				}
+				else {
+					long plid = CounterLocalServiceUtil.increment();
+
+					layout = LayoutUtil.create(plid);
+				}
 
 				layout.setGroupId(groupId);
 				layout.setPrivateLayout(privateLayout);
