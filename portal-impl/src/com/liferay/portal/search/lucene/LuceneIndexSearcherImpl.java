@@ -62,6 +62,8 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			searcher = LuceneHelperUtil.getSearcher(companyId, true);
 
 			if (sorts != null) {
+				searcher.setDefaultFieldSortScoring(true, true);
+
 				SortField[] sortFields = new SortField[sorts.length];
 
 				for (int i = 0; i < sorts.length; i++) {
