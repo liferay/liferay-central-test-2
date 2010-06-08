@@ -37,6 +37,7 @@
 /portal-client/*.ipr
 /portal-client/*.iws
 /portal-client/classes
+/portal-client/portal-client*.asc
 /portal-client/portal-client*.jar
 /portal-client/src
 
@@ -44,6 +45,7 @@
 /portal-impl/*.ipr
 /portal-impl/*.iws
 /portal-impl/classes
+/portal-impl/portal-impl*.asc
 /portal-impl/portal-impl*.jar
 /portal-impl/service.xml
 /portal-impl/ServiceBuilder.temp
@@ -62,6 +64,7 @@
 /portal-service/*.ipr
 /portal-service/*.iws
 /portal-service/classes
+/portal-service/portal-service*.asc
 /portal-service/portal-service*.jar
 /portal-service/test-classes
 /portal-service/test-results
@@ -72,6 +75,7 @@
 /portal-web/classes
 /portal-web/liferay-portal.war
 /portal-web/portal-web.war
+/portal-web/portal-web.war.asc
 /portal-web/ROOT.war
 /portal-web/test-classes
 /portal-web/test-output
@@ -157,6 +161,8 @@
 /support-tomcat/classes
 /support-tomcat/support-tomcat.jar
 
+/tools/maven/*.asc
+
 /tools/tck
 
 /tools/zip_tmpl/license
@@ -171,6 +177,7 @@
 /util-bridges/*.ipr
 /util-bridges/*.iws
 /util-bridges/classes
+/util-bridges/util-bridges*.asc
 /util-bridges/util-bridges*.jar
 
 /util-java/*.iml
@@ -179,10 +186,12 @@
 /util-java/classes
 /util-java/test-classes
 /util-java/test-results
+/util-java/util-java*.asc
 /util-java/util-java*.jar
 
 /util-taglib/*.iml
 /util-taglib/*.ipr
 /util-taglib/*.iws
 /util-taglib/classes
+/util-taglib/util-taglib*.asc
 /util-taglib/util-taglib*.jar

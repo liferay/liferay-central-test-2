@@ -7,10 +7,14 @@
 
 	<taskdef classname="com.oopsconsultancy.xmltask.ant.XmlTask" classpathref="lib.classpath" name="xmltask" />
 
+	<condition property="gpg.extension" value=".exe" else="">
+		<contains string="${os.name}" substring="Windows" casesensitive="false" />
+	</condition>
 	<condition property="maven.extension" value=".bat" else="">
 		<contains string="${os.name}" substring="Windows" casesensitive="false" />
 	</condition>
 
+	<property name="gpg.executable" value="gpg${gpg.extension}" />
 	<property name="maven.executable" value="mvn${maven.extension}" />
 
 	<target name="deploy-artifact">
@@ -21,9 +25,12 @@
 		</copy>
 
 		<exec dir="." executable="${maven.executable}" failonerror="true">
-			<arg value="deploy:deploy-file" />
+			<arg value="gpg:sign-and-deploy-file" />
 			<arg value="-DartifactId=${artifact.id}" />
 			<arg value="-Dfile=${artifact.id}/${artifact.id}.${packaging}" />
+			<arg value="-Dgpg.executable=${gpg.executable}" />
+			<arg value="-Dgpg.keyname=${gpg.keyname}" />
+			<arg value="-Dgpg.passphrase=${gpg.passphrase}" />
 			<arg value="-DgroupId=com.liferay.portal" />
 			<arg value="-Dpackaging=${packaging}" />
 			<arg value="-DpomFile=tools/maven/${artifact.id}.pom" />
@@ -41,24 +48,32 @@
 			</not>
 			<then>
 				<exec dir="." executable="${maven.executable}" failonerror="true">
-					<arg value="deploy:deploy-file" />
+					<arg value="gpg:sign-and-deploy-file" />
 					<arg value="-DartifactId=${artifact.id}" />
+					<arg value="-Dclassifier=javadoc" />
 					<arg value="-Dfile=${artifact.id}/${artifact.id}-javadoc.${packaging}" />
 					<arg value="-DgeneratePom=false" />
+					<arg value="-Dgpg.executable=${gpg.executable}" />
+					<arg value="-Dgpg.keyname=${gpg.keyname}" />
+					<arg value="-Dgpg.passphrase=${gpg.passphrase}" />
 					<arg value="-DgroupId=com.liferay.portal" />
-					<arg value="-Dpackaging=javadoc" />
+					<arg value="-Dpackaging=jar" />
 					<arg value="-DrepositoryId=${maven.repository.id}" />
 					<arg value="-Durl=${maven.url}" />
 					<arg value="-Dversion=${maven.version}" />
 				</exec>
 
 				<exec dir="." executable="${maven.executable}" failonerror="true">
-					<arg value="deploy:deploy-file" />
+					<arg value="gpg:sign-and-deploy-file" />
 					<arg value="-DartifactId=${artifact.id}" />
 					<arg value="-Dfile=${artifact.id}/${artifact.id}-sources.${packaging}" />
+					<arg value="-Dclassifier=sources" />
 					<arg value="-DgeneratePom=false" />
+					<arg value="-Dgpg.executable=${gpg.executable}" />
+					<arg value="-Dgpg.keyname=${gpg.keyname}" />
+					<arg value="-Dgpg.passphrase=${gpg.passphrase}" />
 					<arg value="-DgroupId=com.liferay.portal" />
-					<arg value="-Dpackaging=java-source" />
+					<arg value="-Dpackaging=jar" />
 					<arg value="-DrepositoryId=${maven.repository.id}" />
 					<arg value="-Durl=${maven.url}" />
 					<arg value="-Dversion=${maven.version}" />
