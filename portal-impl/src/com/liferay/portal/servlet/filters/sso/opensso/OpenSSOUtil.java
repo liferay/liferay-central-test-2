@@ -48,6 +48,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author Prashant Dighe
  * @author Brian Wing Shun Chan
+ * @author Wesley Gong
  */
 public class OpenSSOUtil {
 
@@ -229,7 +230,9 @@ public class OpenSSOUtil {
 		cookieNames = cookieNamesList.toArray(
 			new String[cookieNamesList.size()]);
 
-		_cookieNamesMap.put(serviceUrl, cookieNames);
+		if (cookieNames.length > 0) {
+			_cookieNamesMap.put(serviceUrl, cookieNames);
+		}
 
 		return cookieNames;
 	}
@@ -260,6 +263,11 @@ public class OpenSSOUtil {
 			"Content-type", "application/x-www-form-urlencoded");
 
 		String[] cookieNames = _getCookieNames(serviceUrl);
+
+		if (cookieNames.length == 0) {
+			throw new IOException(
+				"Cookie names from OpenSSO service are not accessible");
+		}
 
 		_setCookieProperty(request, urlc, cookieNames);
 
