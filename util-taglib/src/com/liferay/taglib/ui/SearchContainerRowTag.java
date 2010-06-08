@@ -296,9 +296,11 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 			_row = new ResultRow(model, primaryKey, _rowIndex, _bold);
 		}
 		else {
-			long primaryKey = BeanPropertiesUtil.getLong(model, _keyProperty);
+			Object primaryKey = BeanPropertiesUtil.getObject(
+				model, _keyProperty);
 
-			_row = new ResultRow(model, primaryKey, _rowIndex, _bold);
+			_row = new ResultRow(
+				model, String.valueOf(primaryKey), _rowIndex, _bold);
 		}
 
 		pageContext.setAttribute(_indexVar, _rowIndex);
