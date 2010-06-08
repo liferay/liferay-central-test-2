@@ -365,30 +365,6 @@ public class UserWrapper implements User {
 		_user.setActive(active);
 	}
 
-	public double getSocialContributionEquity() {
-		return _user.getSocialContributionEquity();
-	}
-
-	public void setSocialContributionEquity(double socialContributionEquity) {
-		_user.setSocialContributionEquity(socialContributionEquity);
-	}
-
-	public double getSocialParticipationEquity() {
-		return _user.getSocialParticipationEquity();
-	}
-
-	public void setSocialParticipationEquity(double socialParticipationEquity) {
-		_user.setSocialParticipationEquity(socialParticipationEquity);
-	}
-
-	public double getSocialPersonalEquity() {
-		return _user.getSocialPersonalEquity();
-	}
-
-	public void setSocialPersonalEquity(double socialPersonalEquity) {
-		_user.setSocialPersonalEquity(socialPersonalEquity);
-	}
-
 	public com.liferay.portal.model.User toEscapedModel() {
 		return _user.toEscapedModel();
 	}
@@ -596,6 +572,21 @@ public class UserWrapper implements User {
 		return _user.getRoles();
 	}
 
+	public double getSocialContributionEquity()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _user.getSocialContributionEquity();
+	}
+
+	public double getSocialParticipationEquity()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _user.getSocialParticipationEquity();
+	}
+
+	public double getSocialPersonalEquity()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _user.getSocialPersonalEquity();
+	}
+
 	public long[] getTeamIds()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _user.getTeamIds();
@@ -681,6 +672,16 @@ public class UserWrapper implements User {
 
 	public void setPasswordUnencrypted(java.lang.String passwordUnencrypted) {
 		_user.setPasswordUnencrypted(passwordUnencrypted);
+	}
+
+	public void setSocialContributionEquity(double contributionEquity)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_user.setSocialContributionEquity(contributionEquity);
+	}
+
+	public void setSocialParticipationEquity(double participationEquity)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_user.setSocialParticipationEquity(participationEquity);
 	}
 
 	public User getWrappedUser() {

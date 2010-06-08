@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.cache.CounterCacheAdvice;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -51,6 +52,9 @@ import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.social.model.SocialEquityUser;
+import com.liferay.portlet.social.service.SocialEquityUserLocalServiceUtil;
+import com.liferay.util.SocialEquity;
 import com.liferay.util.UniqueList;
 
 import java.util.Date;
@@ -374,6 +378,56 @@ public class UserImpl extends UserModelImpl implements User {
 		return RoleLocalServiceUtil.getUserRoles(getUserId());
 	}
 
+	public double getSocialContributionEquity() throws SystemException {
+		if (_contributionEquityBase == -1) {
+			SocialEquityUser socialEquityUser = 
+				SocialEquityUserLocalServiceUtil.getSocialEquityUserAggregate(
+					getUserId());
+			
+			_contributionEquityBase = socialEquityUser.getContributionEquity();
+			_participationEquityBase= socialEquityUser.getParticipationEquity();
+		}
+		
+		SocialEquity cqCounter =
+			(SocialEquity)CounterCacheAdvice.getCounterValue(
+				"com.liferay.portlet.social.service." +
+				"SocialEquityLogLocalService#" +
+				"updateUser_CQ#none", getUserId());
+		
+		if (cqCounter == null) {
+			return _contributionEquityBase;
+		}
+		
+		return _contributionEquityBase + cqCounter.getValue();
+	}
+	
+	public double getSocialParticipationEquity() throws SystemException {
+		if (_participationEquityBase == -1) {
+			SocialEquityUser socialEquityUser = 
+				SocialEquityUserLocalServiceUtil.getSocialEquityUserAggregate(
+					getUserId());
+			
+			_contributionEquityBase = socialEquityUser.getContributionEquity();
+			_participationEquityBase= socialEquityUser.getParticipationEquity();
+		}
+		
+		SocialEquity pqCounter =
+			(SocialEquity)CounterCacheAdvice.getCounterValue(
+				"com.liferay.portlet.social.service." +
+				"SocialEquityLogLocalService#" +
+				"updateUser_PQ#none", getUserId());
+		
+		if (pqCounter == null) {
+			return _participationEquityBase;
+		}
+		
+		return _participationEquityBase + pqCounter.getValue();
+	}
+	
+	public double getSocialPersonalEquity() throws SystemException {
+		return getSocialContributionEquity() + getSocialParticipationEquity();
+	}
+	
 	public long[] getTeamIds() throws SystemException {
 		List<Team> teams = getTeams();
 
@@ -529,6 +583,26 @@ public class UserImpl extends UserModelImpl implements User {
 		_passwordUnencrypted = passwordUnencrypted;
 	}
 
+	public void setSocialContributionEquity(double contributionEquity)
+		throws SystemException {
+		
+		if (_contributionEquityBase == -1) {
+			getSocialContributionEquity();
+		}
+		
+		_contributionEquityBase = _contributionEquityBase + contributionEquity;
+	}
+	
+	public void setSocialParticipationEquity(double participationEquity)
+		throws SystemException {
+		
+		if (_participationEquityBase == -1) {
+			getSocialParticipationEquity();
+		}
+		
+		_participationEquityBase=_participationEquityBase + participationEquity;
+	}
+
 	public void setTimeZoneId(String timeZoneId) {
 		if (Validator.isNull(timeZoneId)) {
 			timeZoneId = TimeZoneUtil.getDefault().getID();
@@ -539,7 +613,9 @@ public class UserImpl extends UserModelImpl implements User {
 		super.setTimeZoneId(timeZoneId);
 	}
 
+	private double _contributionEquityBase = -1;
 	private Locale _locale;
+	private double _participationEquityBase = -1;
 	private boolean _passwordModified;
 	private String _passwordUnencrypted;
 	private TimeZone _timeZone;

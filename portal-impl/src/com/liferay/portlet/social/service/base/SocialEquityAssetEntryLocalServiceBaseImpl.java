@@ -32,7 +32,7 @@ import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 
-import com.liferay.portlet.social.model.SocialRelation;
+import com.liferay.portlet.social.model.SocialEquityAssetEntry;
 import com.liferay.portlet.social.service.SocialActivityInterpreterLocalService;
 import com.liferay.portlet.social.service.SocialActivityLocalService;
 import com.liferay.portlet.social.service.SocialEquityAssetEntryLocalService;
@@ -58,85 +58,93 @@ import java.util.List;
 import javax.sql.DataSource;
 
 /**
- * <a href="SocialRelationLocalServiceBaseImpl.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="SocialEquityAssetEntryLocalServiceBaseImpl.java.html"><b><i>View
+ * Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public abstract class SocialRelationLocalServiceBaseImpl
-	implements SocialRelationLocalService {
-	public SocialRelation addSocialRelation(SocialRelation socialRelation)
+public abstract class SocialEquityAssetEntryLocalServiceBaseImpl
+	implements SocialEquityAssetEntryLocalService {
+	public SocialEquityAssetEntry addSocialEquityAssetEntry(
+		SocialEquityAssetEntry socialEquityAssetEntry)
 		throws SystemException {
-		socialRelation.setNew(true);
+		socialEquityAssetEntry.setNew(true);
 
-		return socialRelationPersistence.update(socialRelation, false);
+		return socialEquityAssetEntryPersistence.update(socialEquityAssetEntry,
+			false);
 	}
 
-	public SocialRelation createSocialRelation(long relationId) {
-		return socialRelationPersistence.create(relationId);
+	public SocialEquityAssetEntry createSocialEquityAssetEntry(
+		long equityAssetEntryId) {
+		return socialEquityAssetEntryPersistence.create(equityAssetEntryId);
 	}
 
-	public void deleteSocialRelation(long relationId)
+	public void deleteSocialEquityAssetEntry(long equityAssetEntryId)
 		throws PortalException, SystemException {
-		socialRelationPersistence.remove(relationId);
+		socialEquityAssetEntryPersistence.remove(equityAssetEntryId);
 	}
 
-	public void deleteSocialRelation(SocialRelation socialRelation)
+	public void deleteSocialEquityAssetEntry(
+		SocialEquityAssetEntry socialEquityAssetEntry)
 		throws SystemException {
-		socialRelationPersistence.remove(socialRelation);
+		socialEquityAssetEntryPersistence.remove(socialEquityAssetEntry);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return socialRelationPersistence.findWithDynamicQuery(dynamicQuery);
+		return socialEquityAssetEntryPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
 		throws SystemException {
-		return socialRelationPersistence.findWithDynamicQuery(dynamicQuery,
+		return socialEquityAssetEntryPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
-		return socialRelationPersistence.findWithDynamicQuery(dynamicQuery,
+		return socialEquityAssetEntryPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
 	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return socialRelationPersistence.countWithDynamicQuery(dynamicQuery);
+		return socialEquityAssetEntryPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
-	public SocialRelation getSocialRelation(long relationId)
-		throws PortalException, SystemException {
-		return socialRelationPersistence.findByPrimaryKey(relationId);
+	public SocialEquityAssetEntry getSocialEquityAssetEntry(
+		long equityAssetEntryId) throws PortalException, SystemException {
+		return socialEquityAssetEntryPersistence.findByPrimaryKey(equityAssetEntryId);
 	}
 
-	public List<SocialRelation> getSocialRelations(int start, int end)
+	public List<SocialEquityAssetEntry> getSocialEquityAssetEntries(int start,
+		int end) throws SystemException {
+		return socialEquityAssetEntryPersistence.findAll(start, end);
+	}
+
+	public int getSocialEquityAssetEntriesCount() throws SystemException {
+		return socialEquityAssetEntryPersistence.countAll();
+	}
+
+	public SocialEquityAssetEntry updateSocialEquityAssetEntry(
+		SocialEquityAssetEntry socialEquityAssetEntry)
 		throws SystemException {
-		return socialRelationPersistence.findAll(start, end);
+		socialEquityAssetEntry.setNew(false);
+
+		return socialEquityAssetEntryPersistence.update(socialEquityAssetEntry,
+			true);
 	}
 
-	public int getSocialRelationsCount() throws SystemException {
-		return socialRelationPersistence.countAll();
-	}
-
-	public SocialRelation updateSocialRelation(SocialRelation socialRelation)
+	public SocialEquityAssetEntry updateSocialEquityAssetEntry(
+		SocialEquityAssetEntry socialEquityAssetEntry, boolean merge)
 		throws SystemException {
-		socialRelation.setNew(false);
+		socialEquityAssetEntry.setNew(false);
 
-		return socialRelationPersistence.update(socialRelation, true);
-	}
-
-	public SocialRelation updateSocialRelation(SocialRelation socialRelation,
-		boolean merge) throws SystemException {
-		socialRelation.setNew(false);
-
-		return socialRelationPersistence.update(socialRelation, merge);
+		return socialEquityAssetEntryPersistence.update(socialEquityAssetEntry,
+			merge);
 	}
 
 	public SocialActivityLocalService getSocialActivityLocalService() {
@@ -385,7 +393,7 @@ public abstract class SocialRelationLocalServiceBaseImpl
 
 	protected void runSQL(String sql) throws SystemException {
 		try {
-			DataSource dataSource = socialRelationPersistence.getDataSource();
+			DataSource dataSource = socialEquityAssetEntryPersistence.getDataSource();
 
 			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
 					sql, new int[0]);

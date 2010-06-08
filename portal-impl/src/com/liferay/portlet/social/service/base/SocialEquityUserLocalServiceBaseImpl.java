@@ -32,7 +32,7 @@ import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 
-import com.liferay.portlet.social.model.SocialRelation;
+import com.liferay.portlet.social.model.SocialEquityUser;
 import com.liferay.portlet.social.service.SocialActivityInterpreterLocalService;
 import com.liferay.portlet.social.service.SocialActivityLocalService;
 import com.liferay.portlet.social.service.SocialEquityAssetEntryLocalService;
@@ -58,85 +58,86 @@ import java.util.List;
 import javax.sql.DataSource;
 
 /**
- * <a href="SocialRelationLocalServiceBaseImpl.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="SocialEquityUserLocalServiceBaseImpl.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public abstract class SocialRelationLocalServiceBaseImpl
-	implements SocialRelationLocalService {
-	public SocialRelation addSocialRelation(SocialRelation socialRelation)
-		throws SystemException {
-		socialRelation.setNew(true);
+public abstract class SocialEquityUserLocalServiceBaseImpl
+	implements SocialEquityUserLocalService {
+	public SocialEquityUser addSocialEquityUser(
+		SocialEquityUser socialEquityUser) throws SystemException {
+		socialEquityUser.setNew(true);
 
-		return socialRelationPersistence.update(socialRelation, false);
+		return socialEquityUserPersistence.update(socialEquityUser, false);
 	}
 
-	public SocialRelation createSocialRelation(long relationId) {
-		return socialRelationPersistence.create(relationId);
+	public SocialEquityUser createSocialEquityUser(long equityUserId) {
+		return socialEquityUserPersistence.create(equityUserId);
 	}
 
-	public void deleteSocialRelation(long relationId)
+	public void deleteSocialEquityUser(long equityUserId)
 		throws PortalException, SystemException {
-		socialRelationPersistence.remove(relationId);
+		socialEquityUserPersistence.remove(equityUserId);
 	}
 
-	public void deleteSocialRelation(SocialRelation socialRelation)
+	public void deleteSocialEquityUser(SocialEquityUser socialEquityUser)
 		throws SystemException {
-		socialRelationPersistence.remove(socialRelation);
+		socialEquityUserPersistence.remove(socialEquityUser);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return socialRelationPersistence.findWithDynamicQuery(dynamicQuery);
+		return socialEquityUserPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
 		throws SystemException {
-		return socialRelationPersistence.findWithDynamicQuery(dynamicQuery,
+		return socialEquityUserPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
-		return socialRelationPersistence.findWithDynamicQuery(dynamicQuery,
+		return socialEquityUserPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
 	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return socialRelationPersistence.countWithDynamicQuery(dynamicQuery);
+		return socialEquityUserPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
-	public SocialRelation getSocialRelation(long relationId)
+	public SocialEquityUser getSocialEquityUser(long equityUserId)
 		throws PortalException, SystemException {
-		return socialRelationPersistence.findByPrimaryKey(relationId);
+		return socialEquityUserPersistence.findByPrimaryKey(equityUserId);
 	}
 
-	public List<SocialRelation> getSocialRelations(int start, int end)
+	public List<SocialEquityUser> getSocialEquityUsers(int start, int end)
 		throws SystemException {
-		return socialRelationPersistence.findAll(start, end);
+		return socialEquityUserPersistence.findAll(start, end);
 	}
 
-	public int getSocialRelationsCount() throws SystemException {
-		return socialRelationPersistence.countAll();
+	public int getSocialEquityUsersCount() throws SystemException {
+		return socialEquityUserPersistence.countAll();
 	}
 
-	public SocialRelation updateSocialRelation(SocialRelation socialRelation)
+	public SocialEquityUser updateSocialEquityUser(
+		SocialEquityUser socialEquityUser) throws SystemException {
+		socialEquityUser.setNew(false);
+
+		return socialEquityUserPersistence.update(socialEquityUser, true);
+	}
+
+	public SocialEquityUser updateSocialEquityUser(
+		SocialEquityUser socialEquityUser, boolean merge)
 		throws SystemException {
-		socialRelation.setNew(false);
+		socialEquityUser.setNew(false);
 
-		return socialRelationPersistence.update(socialRelation, true);
-	}
-
-	public SocialRelation updateSocialRelation(SocialRelation socialRelation,
-		boolean merge) throws SystemException {
-		socialRelation.setNew(false);
-
-		return socialRelationPersistence.update(socialRelation, merge);
+		return socialEquityUserPersistence.update(socialEquityUser, merge);
 	}
 
 	public SocialActivityLocalService getSocialActivityLocalService() {
@@ -385,7 +386,7 @@ public abstract class SocialRelationLocalServiceBaseImpl
 
 	protected void runSQL(String sql) throws SystemException {
 		try {
-			DataSource dataSource = socialRelationPersistence.getDataSource();
+			DataSource dataSource = socialEquityUserPersistence.getDataSource();
 
 			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
 					sql, new int[0]);

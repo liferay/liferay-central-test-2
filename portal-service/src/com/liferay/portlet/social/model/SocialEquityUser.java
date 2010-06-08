@@ -40,4 +40,7 @@ package com.liferay.portlet.social.model;
  * @generated
  */
 public interface SocialEquityUser extends SocialEquityUserModel {
+	public double getContributionEquity();
+
+	public double getParticipationEquity();
 }

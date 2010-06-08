@@ -145,6 +145,49 @@ public class SocialEquityLogLocalServiceUtil {
 		getService().deactivateEquityLogs(assetEntryId);
 	}
 
+	public static void incrementSocialEquityAssetEntry_IQ(long assetEntryId,
+		double k, double b) {
+		getService().incrementSocialEquityAssetEntry_IQ(assetEntryId, k, b);
+	}
+
+	public static void incrementSocialEquityUser_CQ(java.lang.String id,
+		double k, double b) {
+		getService().incrementSocialEquityUser_CQ(id, k, b);
+	}
+
+	public static void incrementSocialEquityUser_PQ(java.lang.String id,
+		double k, double b) {
+		getService().incrementSocialEquityUser_PQ(id, k, b);
+	}
+
+	public static void incrementUser_CQ(long userId, double k, double b) {
+		getService().incrementUser_CQ(userId, k, b);
+	}
+
+	public static void incrementUser_PQ(long userId, double k, double b) {
+		getService().incrementUser_PQ(userId, k, b);
+	}
+
+	public static void updateSocialEquityAssetEntry_IQ(long assetEntryId,
+		double k, double b)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().updateSocialEquityAssetEntry_IQ(assetEntryId, k, b);
+	}
+
+	public static void updateSocialEquityUser_CQ(java.lang.String id, double k,
+		double b)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().updateSocialEquityUser_CQ(id, k, b);
+	}
+
+	public static void updateSocialEquityUser_PQ(java.lang.String id, double k,
+		double b)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().updateSocialEquityUser_PQ(id, k, b);
+	}
+
 	public static SocialEquityLogLocalService getService() {
 		if (_service == null) {
 			_service = (SocialEquityLogLocalService)PortalBeanLocatorUtil.locate(SocialEquityLogLocalService.class.getName());
