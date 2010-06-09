@@ -57,9 +57,24 @@ spring.configs=\
 		#META-INF/audit-spring.xml,\
 		META-INF/dynamic-data-source-spring.xml,\
 		META-INF/shard-data-source-spring.xml,\
+        #META-INF/memcached-spring.xml,\
 		#META-INF/monitoring-spring.xml,\
 		\
 		META-INF/ext-spring.xml]]></echo>
+	</target>
+
+	<target name="run-db-sharding-plugins-ee-tomcat-mysql">
+		<antcall target="prepare-mysql" />
+
+		<antcall target="prepare-db-sharding" />
+
+		<antcall target="prepare-sharding-properties" />
+
+		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
+			<property name="portlet.plugins.includes" value="chat-portlet,flash-portlet,google-adsense-portlet,google-gadget-portlet,google-maps-portlet,ip-geocoder-portlet,knowledge-base-portlet,mail-portlet,opensocial-portlet,social-coding-portlet,social-networking-portlet,twitter-portlet,weather-portlet,web-form-portlet,wsrp-portlet" />
+			<property name="skip.rebuild-database" value="true" />
+			<property name="test.name" value="EEPluginsTestSuite" />
+		</ant>
 	</target>
 
 	<target name="run-db-sharding-tomcat-mysql">

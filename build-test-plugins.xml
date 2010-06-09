@@ -37,6 +37,75 @@ plugins.includes=${plugins.includes}</echo>
 		</copy>
 	</target>
 
+	<target name="run-ee-plugins-jboss-mysql">
+		<antcall target="prepare-mysql" />
+
+		<ant antfile="build-test-jboss.xml" target="run-selenium-jboss">
+			<property name="test.name" value="EEPluginsTestSuite" />
+			<property name="portlet.plugins.includes" value="chat-portlet,flash-portlet,google-adsense-portlet,google-gadget-portlet,google-maps-portlet,ip-geocoder-portlet,knowledge-base-portlet,mail-portlet,opensocial-portlet,social-coding-portlet,social-networking-portlet,twitter-portlet,weather-portlet,web-form-portlet,wsrp-portlet" />
+		</ant>
+	</target>
+
+	<target name="run-ee-plugins-tomcat-mysql">
+		<antcall target="prepare-mysql" />
+
+		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
+			<property name="test.name" value="EEPluginsTestSuite" />
+			<property name="portlet.plugins.includes" value="chat-portlet,flash-portlet,google-adsense-portlet,google-gadget-portlet,google-maps-portlet,ip-geocoder-portlet,knowledge-base-portlet,mail-portlet,opensocial-portlet,social-coding-portlet,social-networking-portlet,twitter-portlet,weather-portlet,web-form-portlet,wsrp-portlet" />
+		</ant>
+	</target>
+
+	<target name="run-ee-plugins-tomcat-oracle">
+		<antcall target="prepare-oracle" />
+
+		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
+			<property name="test.name" value="EEPluginsTestSuite" />
+			<property name="portlet.plugins.includes" value="chat-portlet,flash-portlet,google-adsense-portlet,google-gadget-portlet,google-maps-portlet,ip-geocoder-portlet,knowledge-base-portlet,mail-portlet,opensocial-portlet,social-coding-portlet,social-networking-portlet,twitter-portlet,weather-portlet,web-form-portlet,wsrp-portlet" />
+		</ant>
+	</target>
+
+	<target name="run-ee-plugins-tomcat-postgresql">
+		<antcall target="prepare-postgresql" />
+
+		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
+			<property name="test.name" value="EEPluginsTestSuite" />
+			<property name="portlet.plugins.includes" value="chat-portlet,flash-portlet,google-adsense-portlet,google-gadget-portlet,google-maps-portlet,ip-geocoder-portlet,knowledge-base-portlet,mail-portlet,opensocial-portlet,social-coding-portlet,social-networking-portlet,twitter-portlet,weather-portlet,web-form-portlet,wsrp-portlet" />
+		</ant>
+	</target>
+
+	<target name="run-ee-plugins-tomcat-sql-server">
+		<antcall target="prepare-sql-server" />
+
+		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
+			<property name="test.name" value="EEPluginsTestSuite" />
+			<property name="portlet.plugins.includes" value="chat-portlet,flash-portlet,google-adsense-portlet,google-gadget-portlet,google-maps-portlet,ip-geocoder-portlet,knowledge-base-portlet,mail-portlet,opensocial-portlet,social-coding-portlet,social-networking-portlet,twitter-portlet,weather-portlet,web-form-portlet,wsrp-portlet" />
+		</ant>
+	</target>
+
+	<target name="run-ee-plugins-weblogic-10.3-mysql">
+		<antcall target="prepare-mysql" />
+
+		<ant antfile="build-test-weblogic-10.3.xml" target="run-selenium-weblogic-10.3">
+			<property name="test.name" value="EEPluginsTestSuite" />
+		</ant>
+	</target>
+
+	<target name="run-ee-plugins-websphere-6.1-mysql">
+		<antcall target="prepare-mysql" />
+
+		<ant antfile="build-test-websphere-6.1.xml" target="run-selenium-websphere-6.1">
+			<property name="test.name" value="EEPluginsTestSuite" />
+		</ant>
+	</target>
+
+	<target name="run-ee-plugins-websphere-7.0-mysql">
+		<antcall target="prepare-mysql" />
+
+		<ant antfile="build-test-websphere-7.0.xml" target="run-selenium-websphere-7.0">
+			<property name="test.name" value="EEPluginsTestSuite" />
+		</ant>
+	</target>
+
 	<target name="run-plugins1-jboss-mysql">
 		<antcall target="prepare-mysql" />
 
