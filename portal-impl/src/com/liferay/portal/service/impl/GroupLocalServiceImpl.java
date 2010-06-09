@@ -19,6 +19,7 @@ import com.liferay.portal.GroupFriendlyURLException;
 import com.liferay.portal.GroupNameException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutSetException;
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
@@ -910,8 +911,19 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		// Asset
 
 		if ((serviceContext != null) && group.isCommunity()) {
+			User user = null;
+			try {
+				user = userPersistence.findByPrimaryKey(
+					group.getCreatorUserId());
+
+			}
+			catch (NoSuchUserException nsue) {
+				user = userPersistence.findByPrimaryKey(
+					serviceContext.getUserId());
+			}
+
 			updateAsset(
-				group.getCreatorUserId(), group,
+				user.getUserId(), group,
 				serviceContext.getAssetCategoryIds(),
 				serviceContext.getAssetTagNames());
 		}
