@@ -27,13 +27,13 @@ public class ReleaseInfo {
 
 	static String name = "Liferay Portal Community Edition";
 
-	static String version = "6.0.2";
+	static String version = "6.0.3";
 
-	static String versionDisplayName = "6.0.2 CE";
+	static String versionDisplayName = "6.0.3 CE";
 
 	static String codeName = "Bunyan";
 
-	static String build = "6002";
+	static String build = "6003";
 
 	static String date = "June 8, 2010";
 
@@ -94,6 +94,8 @@ public class ReleaseInfo {
 	public static int RELEASE_6_0_1_BUILD_NUMBER = 6001;
 
 	public static int RELEASE_6_0_2_BUILD_NUMBER = 6002;
+
+	public static int RELEASE_6_0_3_BUILD_NUMBER = 6003;
 
 	public static final String getVersion() {
 		return version;

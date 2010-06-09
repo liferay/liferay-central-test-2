@@ -1,0 +1,1 @@
+alter table PasswordPolicy add minSymbols INTEGER;
