@@ -60,6 +60,7 @@ import com.liferay.portalweb.portlet.wiki.wikipage.linkwikipagetowikipage.LinkWi
 import com.liferay.portalweb.portlet.wiki.wikipage.previewfrontpage.PreviewFrontPageTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.previewfrontpagechildpage.PreviewFrontPageChildPageTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.removeredirectwikipage.RemoveRedirectWikiPageTests;
+import com.liferay.portalweb.portlet.wiki.wikipage.renamefrontpagechildpage.RenameFrontPageChildPageTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.renamewikipagetitle.RenameWikiPageTitleTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.renamewikipagetitleduplicate.RenameWikiPageTitleDuplicateTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.renamewikipagetitlenull.RenameWikiPageTitleNullTests;
@@ -139,6 +140,7 @@ public class WikiPageTests extends BaseTests {
 		testSuite.addTest(PreviewFrontPageTests.suite());
 		testSuite.addTest(PreviewFrontPageChildPageTests.suite());
 		testSuite.addTest(RemoveRedirectWikiPageTests.suite());
+		testSuite.addTest(RenameFrontPageChildPageTests.suite());
 		testSuite.addTest(RenameWikiPageTitleTests.suite());
 		testSuite.addTest(RenameWikiPageTitleDuplicateTests.suite());
 		testSuite.addTest(RenameWikiPageTitleNullTests.suite());
