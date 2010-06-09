@@ -22,6 +22,7 @@ import com.liferay.portalweb.portlet.wiki.wikipage.addfrontpagechildpagename255c
 import com.liferay.portalweb.portlet.wiki.wikipage.addfrontpagechildpagenameduplicate.AddFrontPageChildPageNameDuplicateTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.addfrontpagechildpagenamenull.AddFrontPageChildPageNameNullTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.addfrontpagechildpagenamesymbol.AddFrontPageChildPageNameSymbolTests;
+import com.liferay.portalweb.portlet.wiki.wikipage.addfrontpagesearch.AddFrontPageSearchTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.addwikipage.AddWikiPageTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.addwikipagechildpage.AddWikiPageChildPageTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.addwikipagechildpagemultiple.AddWikiPageChildPageMultipleTests;
@@ -35,6 +36,7 @@ import com.liferay.portalweb.portlet.wiki.wikipage.addwikipagenamebackslash.AddW
 import com.liferay.portalweb.portlet.wiki.wikipage.addwikipagenameduplicate.AddWikiPageNameDuplicateTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.addwikipagenamenull.AddWikiPageNameNullTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.addwikipagenamesymbol.AddWikiPageNameSymbolTests;
+import com.liferay.portalweb.portlet.wiki.wikipage.addwikipagesearch.AddWikiPageSearchTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.canceladdfrontpage.CancelAddFrontPageTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.canceladdfrontpagechildpage.CancelAddFrontPageChildPageTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.changeparentfrontpagechildpage255tonone.ChangeParentFrontPageChildPage255ToNoneTests;
@@ -96,6 +98,7 @@ public class WikiPageTests extends BaseTests {
 		testSuite.addTest(AddFrontPageChildPageNameDuplicateTests.suite());
 		testSuite.addTest(AddFrontPageChildPageNameNullTests.suite());
 		testSuite.addTest(AddFrontPageChildPageNameSymbolTests.suite());
+		testSuite.addTest(AddFrontPageSearchTests.suite());
 		testSuite.addTest(AddWikiPageTests.suite());
 		testSuite.addTest(AddWikiPageChildPageTests.suite());
 		testSuite.addTest(AddWikiPageChildPageMultipleTests.suite());
@@ -110,6 +113,7 @@ public class WikiPageTests extends BaseTests {
 		testSuite.addTest(AddWikiPageNameDuplicateTests.suite());
 		testSuite.addTest(AddWikiPageNameNullTests.suite());
 		testSuite.addTest(AddWikiPageNameSymbolTests.suite());
+		testSuite.addTest(AddWikiPageSearchTests.suite());
 		testSuite.addTest(CancelAddFrontPageTests.suite());
 		testSuite.addTest(CancelAddFrontPageChildPageTests.suite());
 		testSuite.addTest(ChangeParentFrontPageChildPage255ToNoneTests.suite());
