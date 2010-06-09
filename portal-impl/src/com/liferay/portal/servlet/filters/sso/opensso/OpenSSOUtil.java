@@ -72,18 +72,8 @@ public class OpenSSOUtil {
 		return _instance._isAuthenticated(request, serviceUrl);
 	}
 
-	public static boolean isValidService(String serviceUrl) {
-		if (Validator.isNull(serviceUrl)) {
-			return false;
-		}
-
-		String[] cookieNames = _instance._getCookieNames(serviceUrl);
-
-		if (cookieNames.length == 0) {
-			return false;
-		}
-
-		return true;
+	public static boolean isValidServiceUrl(String serviceUrl) {
+		return _instance._isValidServiceUrl(serviceUrl);
 	}
 
 	public static boolean isValidUrl(String url) {
@@ -316,7 +306,25 @@ public class OpenSSOUtil {
 		return authenticated;
 	}
 
-	private boolean _isConnected(String url) {
+	private boolean _isValidServiceUrl(String serviceUrl) {
+		if (Validator.isNull(serviceUrl)) {
+			return false;
+		}
+
+		String[] cookieNames = _instance._getCookieNames(serviceUrl);
+
+		if (cookieNames.length == 0) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean _isValidUrl(String url) {
+		if (Validator.isNull(url)) {
+			return false;
+		}
+
 		try {
 			URL urlObj = new URL(url);
 
@@ -337,18 +345,6 @@ public class OpenSSOUtil {
 				_log.warn(ioe, ioe);
 			}
 
-			return false;
-		}
-
-		return true;
-	}
-
-	private boolean _isValidUrl(String url) {
-		if (Validator.isNull(url)) {
-			return false;
-		}
-
-		if (!_isConnected(url)) {
 			return false;
 		}
 

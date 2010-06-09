@@ -142,6 +142,7 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings--" + PropsK
 			<aui:input cssClass="lfr-input-text-container" label="last-name-attribute" name='<%= "settings--" + PropsKeys.OPEN_SSO_LAST_NAME_ATTR + "--" %>' type="text" value="<%= openSsoLastNameAttr %>" />
 
 			<aui:button-row>
+
 				<%
 				String taglibOnClick = renderResponse.getNamespace() + "testSettings('openssoConfiguration');";
 				%>
