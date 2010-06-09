@@ -44,6 +44,10 @@ public class PortletSessionTracker
 		_instance._add(session);
 	}
 
+	public static void remove(HttpSession session) {
+		_instance._removeSession(session.getId());
+	}
+
 	public static HttpSessionBindingListener getInstance() {
 		return _instance;
 	}

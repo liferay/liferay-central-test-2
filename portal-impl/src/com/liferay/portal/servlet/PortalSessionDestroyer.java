@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.servlet.PortletSessionTracker;
 import com.liferay.portal.kernel.util.PortalInitable;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.model.User;
@@ -101,7 +102,15 @@ public class PortalSessionDestroyer implements PortalInitable {
 		}
 
 		try {
-			session.removeAttribute(WebKeys.PORTLET_SESSION_TRACKER);
+			PortletSessionTracker portletSessionTracker =
+				(PortletSessionTracker)session.getAttribute(
+					WebKeys.PORTLET_SESSION_TRACKER);
+
+			if (portletSessionTracker != null) {
+				PortletSessionTracker.remove(session);
+
+				session.removeAttribute(WebKeys.PORTLET_SESSION_TRACKER);
+			}
 		}
 		catch (IllegalStateException ise) {
 			if (_log.isWarnEnabled()) {
