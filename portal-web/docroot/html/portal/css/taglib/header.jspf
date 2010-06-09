@@ -15,7 +15,7 @@
 %>
 
 .header-title {
-	border-bottom: 1px solid #AAAAAA;
+	border-bottom: 1px solid #AAA;
 }
 
 .header-back-to {
