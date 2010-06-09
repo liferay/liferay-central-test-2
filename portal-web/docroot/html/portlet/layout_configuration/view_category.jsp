@@ -133,30 +133,6 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 					<c:when test="<%= layout.isTypePortlet() %>">
 
 						<%
-						Set<String> headerPortalCssSet = new LinkedHashSet<String>();
-
-						for (String headerPortalCss : portlet.getHeaderPortalCss()) {
-							if (!HttpUtil.hasProtocol(headerPortalCss)) {
-								headerPortalCss = PortalUtil.getStaticResourceURL(request, request.getContextPath() + headerPortalCss, portlet.getTimestamp());
-							}
-
-							if (!headerPortalCssSet.contains(headerPortalCss)) {
-								headerPortalCssSet.add(headerPortalCss);
-							}
-						}
-
-						Set<String> headerPortletCssSet = new LinkedHashSet<String>();
-
-						for (String headerPortletCss : portlet.getHeaderPortletCss()) {
-							if (!HttpUtil.hasProtocol(headerPortletCss)) {
-								headerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getContextPath() + headerPortletCss, portlet.getTimestamp());
-							}
-
-							if (!headerPortletCssSet.contains(headerPortletCss)) {
-								headerPortletCssSet.add(headerPortletCss);
-							}
-						}
-
 						Set<String> footerPortalCssSet = new LinkedHashSet<String>();
 
 						for (String footerPortalCss : portlet.getFooterPortalCss()) {
@@ -166,42 +142,6 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 
 							if (!footerPortalCssSet.contains(footerPortalCss)) {
 								footerPortalCssSet.add(footerPortalCss);
-							}
-						}
-
-						Set<String> footerPortletCssSet = new LinkedHashSet<String>();
-
-						for (String footerPortletCss : portlet.getFooterPortletCss()) {
-							if (!HttpUtil.hasProtocol(footerPortletCss)) {
-								footerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getContextPath() + footerPortletCss, portlet.getTimestamp());
-							}
-
-							if (!footerPortletCssSet.contains(footerPortletCss)) {
-								footerPortletCssSet.add(footerPortletCss);
-							}
-						}
-
-						Set<String> headerPortalJavaScriptSet = new LinkedHashSet<String>();
-
-						for (String headerPortalJavaScript : portlet.getHeaderPortalJavaScript()) {
-							if (!HttpUtil.hasProtocol(headerPortalJavaScript)) {
-								headerPortalJavaScript = PortalUtil.getStaticResourceURL(request, request.getContextPath() + headerPortalJavaScript, portlet.getTimestamp());
-							}
-
-							if (!headerPortalJavaScriptSet.contains(headerPortalJavaScript) && !themeDisplay.isIncludedJs(headerPortalJavaScript)) {
-								headerPortalJavaScriptSet.add(headerPortalJavaScript);
-							}
-						}
-
-						Set<String> headerPortletJavaScriptSet = new LinkedHashSet<String>();
-
-						for (String headerPortletJavaScript : portlet.getHeaderPortletJavaScript()) {
-							if (!HttpUtil.hasProtocol(headerPortletJavaScript)) {
-								headerPortletJavaScript = PortalUtil.getStaticResourceURL(request, portlet.getContextPath() + headerPortletJavaScript, portlet.getTimestamp());
-							}
-
-							if (!headerPortletJavaScriptSet.contains(headerPortletJavaScript)) {
-								headerPortletJavaScriptSet.add(headerPortletJavaScript);
 							}
 						}
 
@@ -217,6 +157,18 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 							}
 						}
 
+						Set<String> footerPortletCssSet = new LinkedHashSet<String>();
+
+						for (String footerPortletCss : portlet.getFooterPortletCss()) {
+							if (!HttpUtil.hasProtocol(footerPortletCss)) {
+								footerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getContextPath() + footerPortletCss, portlet.getTimestamp());
+							}
+
+							if (!footerPortletCssSet.contains(footerPortletCss)) {
+								footerPortletCssSet.add(footerPortletCss);
+							}
+						}
+
 						Set<String> footerPortletJavaScriptSet = new LinkedHashSet<String>();
 
 						for (String footerPortletJavaScript : portlet.getFooterPortletJavaScript()) {
@@ -228,17 +180,65 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 								footerPortletJavaScriptSet.add(footerPortletJavaScript);
 							}
 						}
+
+						Set<String> headerPortalCssSet = new LinkedHashSet<String>();
+
+						for (String headerPortalCss : portlet.getHeaderPortalCss()) {
+							if (!HttpUtil.hasProtocol(headerPortalCss)) {
+								headerPortalCss = PortalUtil.getStaticResourceURL(request, request.getContextPath() + headerPortalCss, portlet.getTimestamp());
+							}
+
+							if (!headerPortalCssSet.contains(headerPortalCss)) {
+								headerPortalCssSet.add(headerPortalCss);
+							}
+						}
+
+						Set<String> headerPortalJavaScriptSet = new LinkedHashSet<String>();
+
+						for (String headerPortalJavaScript : portlet.getHeaderPortalJavaScript()) {
+							if (!HttpUtil.hasProtocol(headerPortalJavaScript)) {
+								headerPortalJavaScript = PortalUtil.getStaticResourceURL(request, request.getContextPath() + headerPortalJavaScript, portlet.getTimestamp());
+							}
+
+							if (!headerPortalJavaScriptSet.contains(headerPortalJavaScript) && !themeDisplay.isIncludedJs(headerPortalJavaScript)) {
+								headerPortalJavaScriptSet.add(headerPortalJavaScript);
+							}
+						}
+
+						Set<String> headerPortletCssSet = new LinkedHashSet<String>();
+
+						for (String headerPortletCss : portlet.getHeaderPortletCss()) {
+							if (!HttpUtil.hasProtocol(headerPortletCss)) {
+								headerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getContextPath() + headerPortletCss, portlet.getTimestamp());
+							}
+
+							if (!headerPortletCssSet.contains(headerPortletCss)) {
+								headerPortletCssSet.add(headerPortletCss);
+							}
+						}
+
+						Set<String> headerPortletJavaScriptSet = new LinkedHashSet<String>();
+
+						for (String headerPortletJavaScript : portlet.getHeaderPortletJavaScript()) {
+							if (!HttpUtil.hasProtocol(headerPortletJavaScript)) {
+								headerPortletJavaScript = PortalUtil.getStaticResourceURL(request, portlet.getContextPath() + headerPortletJavaScript, portlet.getTimestamp());
+							}
+
+							if (!headerPortletJavaScriptSet.contains(headerPortletJavaScript)) {
+								headerPortletJavaScriptSet.add(headerPortletJavaScript);
+							}
+						}
 						%>
 
 						<div
 							class="lfr-portlet-item <c:if test="<%= portletLocked %>">lfr-portlet-used</c:if> <c:if test="<%= portletInstanceable %>">lfr-instanceable</c:if>"
 							footerPortalCssPaths="<%= StringUtil.merge(footerPortalCssSet) %>"
-							footerPortletCssPaths="<%= StringUtil.merge(footerPortletCssSet) %>"
-							headerPortalCssPaths="<%= StringUtil.merge(headerPortalCssSet) %>"
-							headerPortletCssPaths="<%= StringUtil.merge(headerPortletCssSet) %>"
 							footerPortalJavaScriptPaths="<%= StringUtil.merge(footerPortalJavaScriptSet) %>"
+							footerPortletCssPaths="<%= StringUtil.merge(footerPortletCssSet) %>"
 							footerPortletJavaScriptPaths="<%= StringUtil.merge(footerPortletJavaScriptSet) %>"
+							headerPortalCssPaths="<%= StringUtil.merge(headerPortalCssSet) %>"
 							headerPortalJavaScriptPaths="<%= StringUtil.merge(headerPortalJavaScriptSet) %>"
+							headerPortletCssPaths="<%= StringUtil.merge(headerPortletCssSet) %>"
 							headerPortletJavaScriptPaths="<%= StringUtil.merge(headerPortletJavaScriptSet) %>"
 							id="<portlet:namespace />portletItem<%= portlet.getPortletId() %>"
 							instanceable="<%= portletInstanceable %>"

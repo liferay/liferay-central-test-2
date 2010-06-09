@@ -244,31 +244,30 @@ AUI().add(
 					var plid = portlet.attr('plid');
 					var portletId = portlet.attr('portletId');
 					var portletUsed = portlet.hasClass('lfr-portlet-used');
-					var headerPortalCssPaths = (portlet.attr('headerPortalCssPaths') || '').split(',');
-		            var headerPortletCssPaths = (portlet.attr('headerPortletCssPaths') || '').split(',');
 					var footerPortalCssPaths = (portlet.attr('footerPortalCssPaths') || '').split(',');
-					var footerPortletCssPaths = (portlet.attr('footerPortletCssPaths') || '').split(',');
-
 					var footerPortalJavaScriptPaths = (portlet.attr('footerPortalJavaScriptPaths') || '').split(',');
+					var footerPortletCssPaths = (portlet.attr('footerPortletCssPaths') || '').split(',');
 		            var footerPortletJavaScriptPaths = (portlet.attr('footerPortletJavaScriptPaths') || '').split(',');
+					var headerPortalCssPaths = (portlet.attr('headerPortalCssPaths') || '').split(',');
 					var headerPortalJavaScriptPaths = (portlet.attr('headerPortalJavaScriptPaths') || '').split(',');
+		            var headerPortletCssPaths = (portlet.attr('headerPortletCssPaths') || '').split(',');
 					var headerPortletJavaScriptPaths = (portlet.attr('headerPortletJavaScriptPaths') || '').split(',');
 
 					portletMetaData = {
 						instanceable: instanceable,
 						plid: plid,
 						portletId: portletId,
-						portletPaths: {
-							footerPortletCssPaths: footerPortletCssPaths,
-							headerPortletCssPaths: headerPortletCssPaths,
-							footerPortletJavaScriptPaths: footerPortletJavaScriptPaths,
-							headerPortletJavaScriptPaths: headerPortletJavaScriptPaths
-						},
 						portalPaths: {
 							footerPortalCssPaths: footerPortalCssPaths,
-							headerPortalCssPaths: headerPortalCssPaths,
 							footerPortalJavaScriptPaths: footerPortalJavaScriptPaths,
+							headerPortalCssPaths: headerPortalCssPaths,
 							headerPortalJavaScriptPaths: headerPortalJavaScriptPaths
+						},
+						portletPaths: {
+							footerPortletCssPaths: footerPortletCssPaths,
+							footerPortletJavaScriptPaths: footerPortletJavaScriptPaths,
+							headerPortletCssPaths: headerPortletCssPaths,
+							headerPortletJavaScriptPaths: headerPortletJavaScriptPaths
 						},
 						portletUsed: portletUsed
 					};
