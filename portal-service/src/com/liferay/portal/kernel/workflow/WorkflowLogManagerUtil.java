@@ -27,6 +27,21 @@ import java.util.List;
  */
 public class WorkflowLogManagerUtil {
 
+	public static int getWorkflowLogCount(long companyId, long workflowTaskId)
+		throws WorkflowException {
+
+		return _workflowLogManager.getWorkflowLogCount(
+			companyId, workflowTaskId);
+	}
+
+	public static int getWorkflowLogCountByWorkflowInstance(
+			long companyId, long workflowInstanceId)
+		throws WorkflowException {
+
+		return _workflowLogManager.getWorkflowLogCountByWorkflowInstance(
+			companyId, workflowInstanceId);
+	}
+
 	public static List<WorkflowLog> getWorkflowLogs(
 			long companyId, long workflowTaskId, int start, int end,
 			OrderByComparator orderByComparator)
@@ -36,11 +51,13 @@ public class WorkflowLogManagerUtil {
 			companyId, workflowTaskId, start, end, orderByComparator);
 	}
 
-	public static int getWorkflowLogCount(long companyId, long workflowTaskId)
+	public static List<WorkflowLog> getWorkflowLogsByWorkflowInstance(
+			long companyId, long workflowInstanceId, int start, int end,
+			OrderByComparator orderByComparator)
 		throws WorkflowException {
 
-		return _workflowLogManager.getWorkflowLogCount(
-			companyId, workflowTaskId);
+		return _workflowLogManager.getWorkflowLogsByWorkflowInstance(
+			companyId, workflowInstanceId, start, end, orderByComparator);
 	}
 
 	public static WorkflowLogManager getWorkflowLogManager() {
