@@ -69,9 +69,7 @@ public class LiferayResourceLoader extends ResourceLoader {
 
 		for (int i = 0; (is == null) && (i < _listeners.length); i++) {
 			if (_listeners[i] != null) {
-				if (is == null) {
-					is = _listeners[i].getResourceStream(source);
-				}
+				is = _listeners[i].getResourceStream(source);
 			}
 		}
 
