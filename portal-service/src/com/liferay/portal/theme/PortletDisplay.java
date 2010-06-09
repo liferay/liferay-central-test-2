@@ -536,16 +536,16 @@ public class PortletDisplay implements Serializable {
 		}
 	}
 
+	public void writeContent(Writer writer) throws IOException {
+		_content.writeTo(writer);
+	}
+
 	public PortletPreferences getPortletSetup() {
 		return _portletSetup;
 	}
 
 	public void setPortletSetup(PortletPreferences portletSetup) {
 		_portletSetup = portletSetup;
-	}
-
-	public void outputContent(Writer outputWriter) throws IOException {
-		_content.writeTo(outputWriter);
 	}
 
 	public void recycle() {
@@ -735,8 +735,8 @@ public class PortletDisplay implements Serializable {
 
 	private static Log _log = LogFactoryUtil.getLog(PortletDisplay.class);
 
-	private static StringBundler _blankStringBundler =
-		new StringBundler(StringPool.BLANK);
+	private static StringBundler _blankStringBundler = new StringBundler(
+		StringPool.BLANK);
 
 	private ThemeDisplay _themeDisplay;
 	private String _id = StringPool.BLANK;

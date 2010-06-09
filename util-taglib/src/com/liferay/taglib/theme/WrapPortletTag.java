@@ -55,8 +55,9 @@ public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
 			servletContext.getRequestDispatcher(portletPage);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
-		PipingServletResponse pipingServletResponse =
-			new PipingServletResponse(response, unsyncStringWriter);
+
+		PipingServletResponse pipingServletResponse = new PipingServletResponse(
+			response, unsyncStringWriter);
 
 		requestDispatcher.include(request, pipingServletResponse);
 

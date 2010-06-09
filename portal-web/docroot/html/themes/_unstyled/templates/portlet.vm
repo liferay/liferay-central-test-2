@@ -1,5 +1,4 @@
 #set ($portlet_display = $portletDisplay)
-#set ($output_writer = $outputWriter)
 
 #set ($portlet_id = $htmlUtil.escapeAttribute($portlet_display.getId()))
 #set ($portlet_title = $portlet_display.getTitle())
@@ -24,6 +23,6 @@
 	</header>
 
 	<div class="portlet-content">
-		$portlet_display.outputContent($output_writer)
+		$portlet_display.writeContent($writer)
 	</div>
 </section>

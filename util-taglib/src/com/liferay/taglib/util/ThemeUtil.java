@@ -311,7 +311,7 @@ public class ThemeUtil {
 
 		velocityContext.put("taglibLiferay", velocityTaglib);
 		velocityContext.put("theme", velocityTaglib);
-		velocityContext.put("outputWriter", writer);
+		velocityContext.put("writer", writer);
 
 		// Merge templates
 
