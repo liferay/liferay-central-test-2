@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.util.Randomizer;
 import java.util.Map;
 
 /**
- * <a href="CustomUserAttributes.java.html"><b><i>View Source</i></b></a>
+ * <a href="CustomUserAttributesImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * A separate instance of this class is created every time
@@ -32,7 +32,7 @@ import java.util.Map;
  *
  * @author Brian Wing Shun Chan
  */
-public class CustomUserAttributes implements Cloneable {
+public class CustomUserAttributesImpl implements CustomUserAttributes {
 
 	public String getValue(String name, Map<String, String> userInfo) {
 		if (name == null) {
@@ -58,9 +58,10 @@ public class CustomUserAttributes implements Cloneable {
 	}
 
 	public Object clone() {
-		return new CustomUserAttributes();
+		return new CustomUserAttributesImpl();
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CustomUserAttributes.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		CustomUserAttributesImpl.class);
 
 }
