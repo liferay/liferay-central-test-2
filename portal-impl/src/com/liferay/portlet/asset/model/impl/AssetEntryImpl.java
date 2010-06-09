@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.asset.model.impl;
 
-import com.liferay.portal.cache.CounterCacheAdvice;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -23,8 +22,6 @@ import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
-import com.liferay.portlet.social.service.SocialEquityAssetEntryLocalServiceUtil;
-import com.liferay.util.SocialEquity;
 
 import java.util.List;
 
@@ -47,26 +44,6 @@ public class AssetEntryImpl extends AssetEntryModelImpl implements AssetEntry {
 			ListUtil.toString(getCategories(), "categoryId"), 0L);
 	}
 
-	public double getSocialInformationEquity() throws SystemException {
-		if (_informationEquityBase == -1) {
-			_informationEquityBase =
-				SocialEquityAssetEntryLocalServiceUtil.getInformationEquity(
-					getEntryId());
-		}
-
-		SocialEquity iqCounter =
-			(SocialEquity)CounterCacheAdvice.getCounterValue(
-				"com.liferay.portlet.social.service." +
-				"SocialEquityLogLocalService#" +
-				"updateSocialEquityAssetEntry_IQ", getEntryId());
-
-		if (iqCounter == null) {
-			return _informationEquityBase;
-		}
-
-		return _informationEquityBase + iqCounter.getValue();
-	}
-
 	public String[] getTagNames() throws SystemException {
 		return StringUtil.split(ListUtil.toString(getTags(), "name"));
 	}
@@ -74,17 +51,5 @@ public class AssetEntryImpl extends AssetEntryModelImpl implements AssetEntry {
 	public List<AssetTag> getTags() throws SystemException {
 		return AssetTagLocalServiceUtil.getEntryTags(getEntryId());
 	}
-
-	public void setSocialInformationEquity(double informationEquity)
-		throws SystemException {
-
-		if (_informationEquityBase == -1) {
-			getSocialInformationEquity();
-		}
-
-		_informationEquityBase = _informationEquityBase + informationEquity;
-	}
-
-	private double _informationEquityBase = -1;
 
 }

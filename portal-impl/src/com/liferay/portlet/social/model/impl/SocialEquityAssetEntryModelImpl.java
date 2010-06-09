@@ -64,9 +64,10 @@ public class SocialEquityAssetEntryModelImpl extends BaseModelImpl<SocialEquityA
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "assetEntryId", new Integer(Types.BIGINT) },
 			{ "informationK", new Integer(Types.DOUBLE) },
-			{ "informationB", new Integer(Types.DOUBLE) }
+			{ "informationB", new Integer(Types.DOUBLE) },
+			{ "informationEquity", new Integer(Types.DOUBLE) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table SocialEquityAssetEntry (equityAssetEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,assetEntryId LONG,informationK DOUBLE,informationB DOUBLE)";
+	public static final String TABLE_SQL_CREATE = "create table SocialEquityAssetEntry (equityAssetEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,assetEntryId LONG,informationK DOUBLE,informationB DOUBLE,informationEquity DOUBLE)";
 	public static final String TABLE_SQL_DROP = "drop table SocialEquityAssetEntry";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -89,6 +90,7 @@ public class SocialEquityAssetEntryModelImpl extends BaseModelImpl<SocialEquityA
 		model.setAssetEntryId(soapModel.getAssetEntryId());
 		model.setInformationK(soapModel.getInformationK());
 		model.setInformationB(soapModel.getInformationB());
+		model.setInformationEquity(soapModel.getInformationEquity());
 
 		return model;
 	}
@@ -196,6 +198,14 @@ public class SocialEquityAssetEntryModelImpl extends BaseModelImpl<SocialEquityA
 		_informationB = informationB;
 	}
 
+	public double getInformationEquity() {
+		return _informationEquity;
+	}
+
+	public void setInformationEquity(double informationEquity) {
+		_informationEquity = informationEquity;
+	}
+
 	public SocialEquityAssetEntry toEscapedModel() {
 		if (isEscapedModel()) {
 			return (SocialEquityAssetEntry)this;
@@ -230,6 +240,7 @@ public class SocialEquityAssetEntryModelImpl extends BaseModelImpl<SocialEquityA
 		clone.setAssetEntryId(getAssetEntryId());
 		clone.setInformationK(getInformationK());
 		clone.setInformationB(getInformationB());
+		clone.setInformationEquity(getInformationEquity());
 
 		return clone;
 	}
@@ -277,7 +288,7 @@ public class SocialEquityAssetEntryModelImpl extends BaseModelImpl<SocialEquityA
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{equityAssetEntryId=");
 		sb.append(getEquityAssetEntryId());
@@ -293,13 +304,15 @@ public class SocialEquityAssetEntryModelImpl extends BaseModelImpl<SocialEquityA
 		sb.append(getInformationK());
 		sb.append(", informationB=");
 		sb.append(getInformationB());
+		sb.append(", informationEquity=");
+		sb.append(getInformationEquity());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.social.model.SocialEquityAssetEntry");
@@ -333,6 +346,10 @@ public class SocialEquityAssetEntryModelImpl extends BaseModelImpl<SocialEquityA
 			"<column><column-name>informationB</column-name><column-value><![CDATA[");
 		sb.append(getInformationB());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>informationEquity</column-name><column-value><![CDATA[");
+		sb.append(getInformationEquity());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -349,5 +366,6 @@ public class SocialEquityAssetEntryModelImpl extends BaseModelImpl<SocialEquityA
 	private boolean _setOriginalAssetEntryId;
 	private double _informationK;
 	private double _informationB;
+	private double _informationEquity;
 	private transient ExpandoBridge _expandoBridge;
 }

@@ -313,10 +313,11 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		socialEquityUserImpl.setGroupId(socialEquityUser.getGroupId());
 		socialEquityUserImpl.setCompanyId(socialEquityUser.getCompanyId());
 		socialEquityUserImpl.setUserId(socialEquityUser.getUserId());
-		socialEquityUserImpl.setContributionK(socialEquityUser.getContributionK());
-		socialEquityUserImpl.setContributionB(socialEquityUser.getContributionB());
+		socialEquityUserImpl.setContributionEquity(socialEquityUser.getContributionEquity());
 		socialEquityUserImpl.setParticipationK(socialEquityUser.getParticipationK());
 		socialEquityUserImpl.setParticipationB(socialEquityUser.getParticipationB());
+		socialEquityUserImpl.setParticipationEquity(socialEquityUser.getParticipationEquity());
+		socialEquityUserImpl.setPersonalEquity(socialEquityUser.getPersonalEquity());
 
 		return socialEquityUserImpl;
 	}

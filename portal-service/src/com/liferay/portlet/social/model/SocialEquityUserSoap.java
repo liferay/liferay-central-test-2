@@ -44,10 +44,11 @@ public class SocialEquityUserSoap implements Serializable {
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
-		soapModel.setContributionK(model.getContributionK());
-		soapModel.setContributionB(model.getContributionB());
+		soapModel.setContributionEquity(model.getContributionEquity());
 		soapModel.setParticipationK(model.getParticipationK());
 		soapModel.setParticipationB(model.getParticipationB());
+		soapModel.setParticipationEquity(model.getParticipationEquity());
+		soapModel.setPersonalEquity(model.getPersonalEquity());
 
 		return soapModel;
 	}
@@ -134,20 +135,12 @@ public class SocialEquityUserSoap implements Serializable {
 		_userId = userId;
 	}
 
-	public double getContributionK() {
-		return _contributionK;
+	public double getContributionEquity() {
+		return _contributionEquity;
 	}
 
-	public void setContributionK(double contributionK) {
-		_contributionK = contributionK;
-	}
-
-	public double getContributionB() {
-		return _contributionB;
-	}
-
-	public void setContributionB(double contributionB) {
-		_contributionB = contributionB;
+	public void setContributionEquity(double contributionEquity) {
+		_contributionEquity = contributionEquity;
 	}
 
 	public double getParticipationK() {
@@ -166,12 +159,29 @@ public class SocialEquityUserSoap implements Serializable {
 		_participationB = participationB;
 	}
 
+	public double getParticipationEquity() {
+		return _participationEquity;
+	}
+
+	public void setParticipationEquity(double participationEquity) {
+		_participationEquity = participationEquity;
+	}
+
+	public double getPersonalEquity() {
+		return _personalEquity;
+	}
+
+	public void setPersonalEquity(double personalEquity) {
+		_personalEquity = personalEquity;
+	}
+
 	private long _equityUserId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
-	private double _contributionK;
-	private double _contributionB;
+	private double _contributionEquity;
 	private double _participationK;
 	private double _participationB;
+	private double _participationEquity;
+	private double _personalEquity;
 }

@@ -110,6 +110,14 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 		_socialEquityAssetEntry.setInformationB(informationB);
 	}
 
+	public double getInformationEquity() {
+		return _socialEquityAssetEntry.getInformationEquity();
+	}
+
+	public void setInformationEquity(double informationEquity) {
+		_socialEquityAssetEntry.setInformationEquity(informationEquity);
+	}
+
 	public com.liferay.portlet.social.model.SocialEquityAssetEntry toEscapedModel() {
 		return _socialEquityAssetEntry.toEscapedModel();
 	}

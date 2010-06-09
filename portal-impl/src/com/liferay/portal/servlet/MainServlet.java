@@ -15,7 +15,6 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.NoSuchLayoutException;
-import com.liferay.portal.cache.messaging.CounterCacheFlushMessageListener;
 import com.liferay.portal.deploy.hot.PluginPackageHotDeployListener;
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.events.StartupAction;
@@ -124,7 +123,6 @@ import org.apache.struts.tiles.TilesUtilImpl;
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  * @author Brian Myunghun Kim
- * @author Zsolt Berentey
  */
 public class MainServlet extends ActionServlet {
 
@@ -203,17 +201,6 @@ public class MainServlet extends ActionServlet {
 				"Stopping the server due to unexpected startup errors");
 
 			System.exit(0);
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Initialize counter cache flush scheduler");
-		}
-
-		try {
-			initCounterFlushScheduler();
-		}
-		catch (Exception e) {
-			_log.error(e, e);
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -767,20 +754,6 @@ public class MainServlet extends ActionServlet {
 		for (int i = 0; i < webIds.length; i++) {
 			PortalInstances.initCompany(servletContext, webIds[i]);
 		}
-	}
-
-	protected void initCounterFlushScheduler() throws Exception {
-		SchedulerEntry schedulerEntry = new SchedulerEntryImpl();
-
-		schedulerEntry.setEventListenerClass(
-			CounterCacheFlushMessageListener.class.getName());
-		schedulerEntry.setTimeUnit(TimeUnit.SECOND);
-		schedulerEntry.setTriggerType(TriggerType.SIMPLE);
-		schedulerEntry.setTriggerValue(
-			PropsValues.COUNTER_WRITE_BACK_INTERVAL);
-
-		SchedulerEngineUtil.schedule(
-			schedulerEntry, PortalClassLoaderUtil.getClassLoader());
 	}
 
 	protected void initExt() throws Exception {

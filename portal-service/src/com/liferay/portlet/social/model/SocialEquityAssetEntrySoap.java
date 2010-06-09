@@ -48,6 +48,7 @@ public class SocialEquityAssetEntrySoap implements Serializable {
 		soapModel.setAssetEntryId(model.getAssetEntryId());
 		soapModel.setInformationK(model.getInformationK());
 		soapModel.setInformationB(model.getInformationB());
+		soapModel.setInformationEquity(model.getInformationEquity());
 
 		return soapModel;
 	}
@@ -159,6 +160,14 @@ public class SocialEquityAssetEntrySoap implements Serializable {
 		_informationB = informationB;
 	}
 
+	public double getInformationEquity() {
+		return _informationEquity;
+	}
+
+	public void setInformationEquity(double informationEquity) {
+		_informationEquity = informationEquity;
+	}
+
 	private long _equityAssetEntryId;
 	private long _groupId;
 	private long _companyId;
@@ -166,4 +175,5 @@ public class SocialEquityAssetEntrySoap implements Serializable {
 	private long _assetEntryId;
 	private double _informationK;
 	private double _informationB;
+	private double _informationEquity;
 }

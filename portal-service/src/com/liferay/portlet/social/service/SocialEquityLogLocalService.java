@@ -122,30 +122,4 @@ public interface SocialEquityLogLocalService {
 
 	public void deactivateEquityLogs(long assetEntryId)
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public void incrementSocialEquityAssetEntry_IQ(long assetEntryId, double k,
-		double b);
-
-	public void incrementSocialEquityUser_CQ(java.lang.String id, double k,
-		double b);
-
-	public void incrementSocialEquityUser_PQ(java.lang.String id, double k,
-		double b);
-
-	public void incrementUser_CQ(long userId, double k, double b);
-
-	public void incrementUser_PQ(long userId, double k, double b);
-
-	public void updateSocialEquityAssetEntry_IQ(long assetEntryId, double k,
-		double b) throws com.liferay.portal.kernel.exception.SystemException;
-
-	public void updateSocialEquityUser_CQ(java.lang.String id, double k,
-		double b)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public void updateSocialEquityUser_PQ(java.lang.String id, double k,
-		double b)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
 }

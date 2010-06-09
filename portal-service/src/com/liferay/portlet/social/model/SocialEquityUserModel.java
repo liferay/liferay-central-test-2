@@ -70,13 +70,9 @@ public interface SocialEquityUserModel extends BaseModel<SocialEquityUser> {
 
 	public void setUserUuid(String userUuid);
 
-	public double getContributionK();
+	public double getContributionEquity();
 
-	public void setContributionK(double contributionK);
-
-	public double getContributionB();
-
-	public void setContributionB(double contributionB);
+	public void setContributionEquity(double contributionEquity);
 
 	public double getParticipationK();
 
@@ -85,6 +81,14 @@ public interface SocialEquityUserModel extends BaseModel<SocialEquityUser> {
 	public double getParticipationB();
 
 	public void setParticipationB(double participationB);
+
+	public double getParticipationEquity();
+
+	public void setParticipationEquity(double participationEquity);
+
+	public double getPersonalEquity();
+
+	public void setPersonalEquity(double personalEquity);
 
 	public SocialEquityUser toEscapedModel();
 

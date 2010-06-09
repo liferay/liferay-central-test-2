@@ -35,7 +35,8 @@ create table SocialEquityAssetEntry (
 	userId LONG,
 	assetEntryId LONG,
 	informationK DOUBLE,
-	informationB DOUBLE
+	informationB DOUBLE,
+	informationEquity DOUBLE
 );
 
 create table SocialEquityHistory (
@@ -77,10 +78,11 @@ create table SocialEquityUser (
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
-	contributionK DOUBLE,
-	contributionB DOUBLE,
+	contributionEquity DOUBLE,
 	participationK DOUBLE,
-	participationB DOUBLE
+	participationB DOUBLE,
+	participationEquity DOUBLE,
+	personalEquity DOUBLE
 );
 
 create table Ticket (

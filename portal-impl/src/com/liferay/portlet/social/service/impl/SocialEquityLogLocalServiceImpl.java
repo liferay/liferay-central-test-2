@@ -17,11 +17,8 @@ package com.liferay.portlet.social.service.impl;
 import com.liferay.ibm.icu.util.Calendar;
 import com.liferay.ibm.icu.util.GregorianCalendar;
 import com.liferay.portal.NoSuchUserException;
-import com.liferay.portal.cache.CounterCacheAdvice;
-import com.liferay.portal.kernel.cache.BufferedCounter;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PropsValues;
@@ -33,7 +30,6 @@ import com.liferay.portlet.social.model.SocialEquityLog;
 import com.liferay.portlet.social.model.SocialEquitySetting;
 import com.liferay.portlet.social.model.SocialEquitySettingConstants;
 import com.liferay.portlet.social.service.base.SocialEquityLogLocalServiceBaseImpl;
-import com.liferay.util.SocialEquity;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.Date;
@@ -116,13 +112,19 @@ public class SocialEquityLogLocalServiceImpl
 			return;
 		}
 
-		runCheckSQL(_CHECK_SOCIAL_EQUITY_ASSET_ENTRY_IQ, validity);
+		runCheckSQL(_CHECK_SOCIAL_EQUITY_ASSET_ENTRY_IQ_1, validity);
+		runCheckSQL(_CHECK_SOCIAL_EQUITY_ASSET_ENTRY_IQ_2, validity);
+		runCheckSQL(_CHECK_ASSET_ENTRY, validity);
 
 		assetEntryPersistence.clearCache();
 
 		runCheckSQL(_CHECK_SOCIAL_EQUITY_USER, validity);
 		runCheckSQL(_CHECK_SOCIAL_EQUITY_USER_CQ, validity);
-		runCheckSQL(_CHECK_SOCIAL_EQUITY_USER_PQ, validity);
+		runCheckSQL(_CHECK_SOCIAL_EQUITY_USER_PQ_1, validity);
+		runCheckSQL(_CHECK_SOCIAL_EQUITY_USER_PQ_2, validity);
+		runCheckSQL(_CHECK_SOCIAL_EQUITY_USER_PEQ, validity);
+		runCheckSQL(_CHECK_USER_CQ_PQ, validity);
+		runCheckSQL(_CHECK_USER_PEQ, validity);
 
 		userPersistence.clearCache();
 
@@ -157,14 +159,11 @@ public class SocialEquityLogLocalServiceImpl
 				equityAssetEntry.getUserId());
 
 			if (!user.isDefaultUser()) {
-				getSocialEquityLogLocalService().incrementSocialEquityUser_CQ(
-					equityAssetEntry.getGroupId() + StringPool.POUND +
-					user.getUserId(), -equityAssetEntry.getInformationK(),
-					-equityAssetEntry.getInformationB());
-
-				getSocialEquityLogLocalService().incrementUser_CQ(
-					user.getUserId(), -equityAssetEntry.getInformationK(),
-					-equityAssetEntry.getInformationB());
+				updateSocialEquityUser_CQ(
+					equityAssetEntry.getGroupId(), user.getUserId(),
+					-equityAssetEntry.getInformationEquity());
+				updateUser_CQ(
+					user, -equityAssetEntry.getInformationEquity());
 			}
 		}
 		catch (NoSuchUserException nsue) {
@@ -180,153 +179,6 @@ public class SocialEquityLogLocalServiceImpl
 
 			socialEquityLogPersistence.update(equityLog, false);
 		}
-	}
-
-	@BufferedCounter
-	public void incrementSocialEquityAssetEntry_IQ(
-		long assetEntryId, double k, double b) {
-	}
-
-	@BufferedCounter
-	public void incrementSocialEquityUser_CQ(String id, double k, double b) {
-	}
-
-	@BufferedCounter
-	public void incrementSocialEquityUser_PQ(String id, double k, double b) {
-	}
-
-	@BufferedCounter(flushMethod="none")
-	public void incrementUser_CQ(long userId, double k, double b) {
-	}
-
-	@BufferedCounter(flushMethod="none")
-	public void incrementUser_PQ(long userId, double k, double b) {
-	}
-
-	public void updateSocialEquityAssetEntry_IQ(
-			long assetEntryId, double k, double b)
-		throws SystemException {
-
-		AssetEntry assetEntry = assetEntryPersistence.fetchByPrimaryKey(
-			assetEntryId);
-
-		assetEntry.setSocialInformationEquity(calculateEquity(
-			getEquityDate(), k, b));
-
-		String sql = CustomSQLUtil.get(_UPDATE_SOCIAL_EQUITY_ASSET_ENTRY_IQ);
-
-		sql = StringUtil.replace(
-			sql,
-			new String[] {
-				"[$ASSET_ENTRY_ID$]",
-				"[$INFORMATION_B$]",
-				"[$INFORMATION_K$]"
-			},
-			new String[] {
-				String.valueOf(assetEntryId),
-				String.valueOf(b),
-				String.valueOf(k)
-			});
-
-		runSQL(sql);
-	}
-
-	public void updateSocialEquityUser_CQ(String id, double k, double b)
-		throws PortalException, SystemException {
-
-		long groupId = Long.valueOf(
-			StringUtil.extractFirst(id, StringPool.POUND));
-
-		long userId = Long.valueOf(
-			StringUtil.extractLast(id, StringPool.POUND));
-
-		User user = userLocalService.getUser(userId);
-
-		user.getSocialContributionEquity();
-
-		int count = socialEquityUserPersistence.countByG_U(
-			groupId, userId);
-
-		if (count == 0) {
-			addSocialEquityUser(groupId, user);
-		}
-
-		user.setSocialContributionEquity(calculateEquity(
-			getEquityDate(), k, b));
-
-		SocialEquity userContributionEquity =
-			(SocialEquity)CounterCacheAdvice.getCounterValue(
-				"com.liferay.portlet.social.service." +
-				"SocialEquityLogLocalService#updateUser_CQ#none", userId);
-
-		userContributionEquity.subtract(new SocialEquity(k, b));
-
-		String sql = CustomSQLUtil.get(_UPDATE_SOCIAL_EQUITY_USER_CQ);
-
-		sql = StringUtil.replace(
-			sql,
-			new String[] {
-				"[$GROUP_ID$]",
-				"[$USER_ID$]",
-				"[$CONTRIBUTION_B$]",
-				"[$CONTRIBUTION_K$]"
-			},
-			new String[] {
-				String.valueOf(groupId),
-				String.valueOf(userId),
-				String.valueOf(b),
-				String.valueOf(k)
-			});
-
-		runSQL(sql);
-	}
-
-	public void updateSocialEquityUser_PQ(String id, double k, double b)
-		throws PortalException, SystemException {
-
-		long groupId = Long.valueOf(
-				StringUtil.extractFirst(id, StringPool.POUND));
-
-		long userId = Long.valueOf(
-			StringUtil.extractLast(id, StringPool.POUND));
-
-		User user = userLocalService.getUser(userId);
-
-		int count = socialEquityUserPersistence.countByG_U(
-			groupId, userId);
-
-		if (count == 0) {
-			addSocialEquityUser(groupId, user);
-		}
-
-		user.setSocialParticipationEquity(calculateEquity(
-				getEquityDate(), k, b));
-
-		SocialEquity userParticipationEquity =
-			(SocialEquity)CounterCacheAdvice.getCounterValue(
-				"com.liferay.portlet.social.service." +
-				"SocialEquityLogLocalService#updateUser_PQ#none", userId);
-
-		userParticipationEquity.subtract(new SocialEquity(k, b));
-
-		String sql = CustomSQLUtil.get(_UPDATE_SOCIAL_EQUITY_USER_PQ);
-
-		sql = StringUtil.replace(
-			sql,
-			new String[] {
-				"[$GROUP_ID$]",
-				"[$PARTICIPATION_B$]",
-				"[$PARTICIPATION_K$]",
-				"[$USER_ID$]"
-			},
-			new String[] {
-				String.valueOf(groupId),
-				String.valueOf(b),
-				String.valueOf(k),
-				String.valueOf(userId)
-			});
-
-		runSQL(sql);
 	}
 
 	protected void addEquityLog(
@@ -351,32 +203,39 @@ public class SocialEquityLogLocalServiceImpl
 				addSocialEquityAssetEntry(assetEntry);
 			}
 
-			getSocialEquityLogLocalService().incrementSocialEquityAssetEntry_IQ(
-				assetEntry.getEntryId(), k, b);
+			updateSocialEquityAssetEntry_IQ(
+				assetEntry.getEntryId(), actionDate, k, b);
 
-			//updateAssetEntry(assetEntry, informationEquity);
+			double informationEquity = calculateEquity(actionDate, k, b);
+
+			updateAssetEntry(assetEntry, informationEquity);
 
 			if ((assetEntryUser != null) && !assetEntryUser.isDefaultUser()) {
-				getSocialEquityLogLocalService().incrementSocialEquityUser_CQ(
-					assetEntry.getGroupId() + StringPool.POUND +
-						assetEntryUser.getUserId(),
-					k,b);
+				updateSocialEquityUser_CQ(
+					assetEntry.getGroupId(), assetEntryUser.getUserId(),
+					informationEquity);
 
-				getSocialEquityLogLocalService().incrementUser_CQ(
-					assetEntryUser.getUserId(), k, b);
+				updateUser_CQ(assetEntryUser, informationEquity);
 			}
 		}
 		else if (equitySetting.getType() ==
 			SocialEquitySettingConstants.TYPE_PARTICIPATION) {
 
-			if (!user.isDefaultUser()) {
-				getSocialEquityLogLocalService().incrementSocialEquityUser_PQ(
-					assetEntry.getGroupId() + StringPool.POUND +
-						user.getUserId(),
-					k, b);
+			int count = socialEquityUserPersistence.countByG_U(
+				assetEntry.getGroupId(), user.getUserId());
 
-				getSocialEquityLogLocalService().incrementUser_PQ(
-					user.getUserId(), k, b);
+			if (count == 0) {
+				addSocialEquityUser(assetEntry.getGroupId(), user);
+			}
+
+			if (!user.isDefaultUser()) {
+				updateSocialEquityUser_PQ(
+					assetEntry.getGroupId(), user.getUserId(), actionDate, k,
+					b);
+
+				double participationEquity = calculateEquity(actionDate, k, b);
+
+				updateUser_PQ(user, participationEquity);
 			}
 		}
 
@@ -473,6 +332,50 @@ public class SocialEquityLogLocalServiceImpl
 		return calendar.fieldDifference(date, Calendar.DATE);
 	}
 
+	protected void removeEquityLogs(long assetEntryId)	throws SystemException {
+		SocialEquityAssetEntry equityAssetEntry = null;
+
+		try {
+			equityAssetEntry =
+				socialEquityAssetEntryPersistence.findByAssetEntryId(
+					assetEntryId);
+
+			socialEquityAssetEntryPersistence.removeByAssetEntryId(
+				assetEntryId);
+		}
+		catch (NoSuchEquityAssetEntryException nseaee) {
+			return;
+		}
+
+		User user = null;
+
+		try {
+			user = userPersistence.findByPrimaryKey(
+				equityAssetEntry.getUserId());
+
+			if (!user.isDefaultUser()) {
+				updateSocialEquityUser_CQ(
+					equityAssetEntry.getGroupId(), user.getUserId(),
+					-equityAssetEntry.getInformationEquity());
+				updateUser_CQ(
+					user, -equityAssetEntry.getInformationEquity());
+			}
+		}
+		catch (NoSuchUserException nsue) {
+		}
+
+		List<SocialEquityLog> equityLogs =
+			socialEquityLogPersistence.findByAEI_T_A(
+				assetEntryId, SocialEquitySettingConstants.TYPE_INFORMATION,
+				true);
+
+		for (SocialEquityLog equityLog : equityLogs) {
+			equityLog.setActive(false);
+
+			socialEquityLogPersistence.update(equityLog, false);
+		}
+	}
+
 	protected void runCheckSQL(String sqlId, int validity)
 		throws SystemException {
 
@@ -494,6 +397,112 @@ public class SocialEquityLogLocalServiceImpl
 		runSQL(sql);
 	}
 
+	protected void updateAssetEntry(
+			AssetEntry assetEntry, double informationEquity)
+		throws SystemException {
+
+		assetEntry.setSocialInformationEquity(
+			assetEntry.getSocialInformationEquity() + informationEquity);
+
+		assetEntryPersistence.update(assetEntry, true);
+	}
+
+	protected void updateSocialEquityAssetEntry_IQ(
+			long assetEntryId, int activityDate, double k, double b)
+		throws SystemException {
+
+		String sql = CustomSQLUtil.get(_UPDATE_SOCIAL_EQUITY_ASSET_ENTRY_IQ);
+
+		sql = StringUtil.replace(
+			sql,
+			new String[] {
+				"[$ACTIVITY_DATE$]",
+				"[$ASSET_ENTRY_ID$]",
+				"[$INFORMATION_B$]",
+				"[$INFORMATION_K$]"
+			},
+			new String[] {
+				String.valueOf(activityDate),
+				String.valueOf(assetEntryId),
+				String.valueOf(b),
+				String.valueOf(k)
+			});
+
+		runSQL(sql);
+	}
+
+	protected void updateSocialEquityUser_CQ(
+			long groupId, long userId, double newInformationEquity)
+		throws SystemException {
+
+		String sql = CustomSQLUtil.get(_UPDATE_SOCIAL_EQUITY_USER_CQ);
+
+		sql = StringUtil.replace(
+			sql,
+			new String[] {
+				"[$GROUP_ID$]",
+				"[$USER_ID$]",
+				"[$NEW_IQ$]"
+			},
+			new String[] {
+				String.valueOf(groupId),
+				String.valueOf(userId),
+				String.valueOf(newInformationEquity)
+			});
+
+		runSQL(sql);
+	}
+
+	protected void updateSocialEquityUser_PQ(
+			long groupId, long userId, int activityDate, double k, double b)
+		throws SystemException {
+
+		String sql = CustomSQLUtil.get(_UPDATE_SOCIAL_EQUITY_USER_PQ);
+
+		sql = StringUtil.replace(
+			sql,
+			new String[] {
+				"[$ACTIVITY_DATE$]",
+				"[$GROUP_ID$]",
+				"[$PARTICIPATION_B$]",
+				"[$PARTICIPATION_K$]",
+				"[$USER_ID$]"
+			},
+			new String[] {
+				String.valueOf(activityDate),
+				String.valueOf(groupId),
+				String.valueOf(b),
+				String.valueOf(k),
+				String.valueOf(userId)
+			});
+
+		runSQL(sql);
+	}
+
+	protected void updateUser_CQ(User user, double newInformationEquity)
+		throws SystemException {
+
+		user.setSocialContributionEquity(
+			user.getSocialContributionEquity() + newInformationEquity);
+		user.setSocialPersonalEquity(
+			user.getSocialContributionEquity() +
+			user.getSocialParticipationEquity());
+
+		userPersistence.update(user, false);
+	}
+
+	protected void updateUser_PQ(User user, double newParticipationEquity)
+		throws SystemException {
+
+		user.setSocialParticipationEquity(
+			user.getSocialParticipationEquity() + newParticipationEquity);
+		user.setSocialPersonalEquity(
+			user.getSocialContributionEquity() +
+			user.getSocialParticipationEquity());
+
+		userPersistence.update(user, false);
+	}
+
 	private static final String _ADD_SOCIAL_EQUITY_ASSET_ENTRY =
 		SocialEquityLogLocalServiceImpl.class.getName() +
 			".addSocialEquityAssetEntry";
@@ -502,9 +511,16 @@ public class SocialEquityLogLocalServiceImpl
 		SocialEquityLogLocalServiceImpl.class.getName() +
 			".addSocialEquityUser";
 
-	private static final String _CHECK_SOCIAL_EQUITY_ASSET_ENTRY_IQ =
+	private static final String _CHECK_ASSET_ENTRY =
+		SocialEquityLogLocalServiceImpl.class.getName() + ".checkAssetEntry";
+
+	private static final String _CHECK_SOCIAL_EQUITY_ASSET_ENTRY_IQ_1 =
 		SocialEquityLogLocalServiceImpl.class.getName() +
-			".checkSocialEquityAssetEntry_IQ";
+			".checkSocialEquityAssetEntry_IQ_1";
+
+	private static final String _CHECK_SOCIAL_EQUITY_ASSET_ENTRY_IQ_2 =
+		SocialEquityLogLocalServiceImpl.class.getName() +
+			".checkSocialEquityAssetEntry_IQ_2";
 
 	private static final String _CHECK_SOCIAL_EQUITY_LOGS =
 		SocialEquityLogLocalServiceImpl.class.getName() +
@@ -518,9 +534,23 @@ public class SocialEquityLogLocalServiceImpl
 		SocialEquityLogLocalServiceImpl.class.getName() +
 			".checkSocialEquityUser_CQ";
 
-	private static final String _CHECK_SOCIAL_EQUITY_USER_PQ =
+	private static final String _CHECK_SOCIAL_EQUITY_USER_PEQ =
 		SocialEquityLogLocalServiceImpl.class.getName() +
-			".checkSocialEquityUser_PQ";
+			".checkSocialEquityUser_PEQ";
+
+	private static final String _CHECK_SOCIAL_EQUITY_USER_PQ_1 =
+		SocialEquityLogLocalServiceImpl.class.getName() +
+			".checkSocialEquityUser_PQ_1";
+
+	private static final String _CHECK_SOCIAL_EQUITY_USER_PQ_2 =
+		SocialEquityLogLocalServiceImpl.class.getName() +
+			".checkSocialEquityUser_PQ_2";
+
+	private static final String _CHECK_USER_CQ_PQ =
+		SocialEquityLogLocalServiceImpl.class.getName() + ".checkUser_CQ_PQ";
+
+	private static final String _CHECK_USER_PEQ =
+		SocialEquityLogLocalServiceImpl.class.getName() + ".checkUser_PEQ";
 
 	private static final String _UPDATE_SOCIAL_EQUITY_ASSET_ENTRY_IQ =
 		SocialEquityLogLocalServiceImpl.class.getName() +

@@ -79,7 +79,7 @@
 		<reference package-path="com.liferay.portal" entity="Layout" />
 	</entity>
 	<entity name="SocialActivityInterpreter" local-service="true" remote-service="false" tx-manager="none" />
-	<entity name="SocialEquityAssetEntry" local-service="true" remote-service="false">
+	<entity name="SocialEquityAssetEntry" local-service="false" remote-service="false">
 
 		<!-- PK fields -->
 
@@ -99,6 +99,7 @@
 		<column name="assetEntryId" type="long" />
 		<column name="informationK" type="double" />
 		<column name="informationB" type="double" />
+		<column name="informationEquity" type="double" />
 
 		<!-- Finder methods -->
 
@@ -209,7 +210,7 @@
 
 		<reference package-path="com.liferay.portal" entity="Group" />
 	</entity>
-	<entity name="SocialEquityUser" local-service="true" remote-service="false">
+	<entity name="SocialEquityUser" local-service="false" remote-service="false">
 
 		<!-- PK fields -->
 
@@ -226,10 +227,11 @@
 
  		<!-- Other fields -->
 
-		<column name="contributionK" type="double" />
-		<column name="contributionB" type="double" />
+		<column name="contributionEquity" type="double" />
 		<column name="participationK" type="double" />
 		<column name="participationB" type="double" />
+		<column name="participationEquity" type="double" />
+		<column name="personalEquity" type="double" />
 
 		<!-- Finder methods -->
 
