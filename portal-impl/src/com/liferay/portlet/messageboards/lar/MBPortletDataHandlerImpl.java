@@ -691,7 +691,10 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		MBMessage importedMessage = null;
 
 		try {
-			if (categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+			if ((categoryId !=
+					MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+				(categoryId != MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+
 				MBCategoryUtil.findByPrimaryKey(categoryId);
 			}
 
