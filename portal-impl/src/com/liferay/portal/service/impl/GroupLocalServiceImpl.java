@@ -930,8 +930,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			}
 
 			updateAsset(
-				user.getUserId(), group,
-				serviceContext.getAssetCategoryIds(),
+				user.getUserId(), group, serviceContext.getAssetCategoryIds(),
 				serviceContext.getAssetTagNames());
 		}
 
