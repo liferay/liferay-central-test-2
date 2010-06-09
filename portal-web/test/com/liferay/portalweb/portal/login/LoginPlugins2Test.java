@@ -52,8 +52,6 @@ public class LoginPlugins2Test extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.type("_58_login",
 					RuntimeVariables.replace("test@liferay.com"));
-				selenium.type("_58_login",
-					RuntimeVariables.replace("hashi@liferay.com"));
 				selenium.type("_58_password", RuntimeVariables.replace("test"));
 				selenium.click("_58_rememberMeCheckbox");
 
