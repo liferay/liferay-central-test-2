@@ -192,7 +192,7 @@ int tabIndex = 1;
 					<aui:button onClick='<%= renderResponse.getNamespace() + "downloadStructureContent();" %>' type="button" value="download" />
 				</c:if>
 
-				<table class="taglib-search-iterator" id="<portlet:namespace />rowsWrapper">
+				<table class="taglib-search-iterator">
 
 				<%
 				Document doc = SAXReaderUtil.read(xsd);
@@ -238,134 +238,120 @@ int tabIndex = 1;
 	}
 
 	function <portlet:namespace />getXsd(cmd, elCount) {
-		var A = AUI();
-
 		if (cmd == null) {
 			cmd = "add";
 		}
 
 		var xsd = "<root>\n";
 
-		var rows = A.all('#<portlet:namespace />rowsWrapper tr.results-row');
+		if ((cmd == "add") && (elCount == -1)) {
+			xsd += "<dynamic-element name='' type=''></dynamic-element>\n"
+		}
 
-		A.each(
-			rows,
-			function(item, index, collection) {
-				var elDepth = item.one('input[dataName="depth"]');
-				var elMetadataXML = item.one('input[dataName="metadata_xml"]');
-				var elName = item.one('input[dataName="name"]');
-				var elType = item.one('select[dataName="type"]');
-				var elIndexType = item.one('select[dataName="index_type"]');
-				var elRepeatable = item.one('input[dataName="repeatable"]');
+		for (i = 0; i >= 0; i++) {
+			var elDepth = document.getElementById("<portlet:namespace />structure_el" + i + "_depth");
+			var elMetadataXML = document.getElementById("<portlet:namespace />structure_el" + i + "_metadata_xml");
+			var elName = document.getElementById("<portlet:namespace />structure_el" + i + "_name");
+			var elType = document.getElementById("<portlet:namespace />structure_el" + i + "_type");
+			var elIndexType = document.getElementById("<portlet:namespace />structure_el" + i + "_index_type");
+			var elRepeatable = document.getElementById("<portlet:namespace />structure_el" + i + "_repeatable");
 
-				if ((elDepth != null) && (elName != null) && (elType != null)) {
-					var elDepthValue = elDepth.val();
-					var elNameValue = encodeURIComponent(elName.val());
-					var elTypeValue = encodeURIComponent(elType.val());
-					var elIndexTypeValue = (elIndexType != null) ? elIndexType.val() : '';
-					var elRepeatableValue = (elRepeatable != null) ? elRepeatable.get('checked') : false;
+			if ((elDepth != null) && (elName != null) && (elType != null)) {
+				var elDepthValue = elDepth.value;
+				var elNameValue = encodeURIComponent(elName.value);
+				var elTypeValue = encodeURIComponent(elType.value);
+				var elIndexTypeValue = (elIndexType != null) ? elIndexType.value : "";
+				var elRepeatableValue = (elRepeatable != null) ? elRepeatable.checked : false;
 
-					if ((cmd == 'add') || ((cmd == 'remove') && (elCount != index))) {
-						for (var j = 0; j <= elDepthValue; j++) {
+				if ((cmd == "add") || ((cmd == "remove") && (elCount != i))) {
+					for (var j = 0; j <= elDepthValue; j++) {
+						xsd += xmlIndent;
+					}
+
+					xsd += "<dynamic-element name='" + elNameValue + "' type='" + elTypeValue + "' index-type='" + elIndexTypeValue + "' repeatable='" + elRepeatableValue + "'>";
+
+					if ((cmd == "add") && (elCount == i)) {
+						xsd += "<dynamic-element name='' type='' repeatable='false'></dynamic-element>\n";
+					}
+					else {
+						if (elMetadataXML.value) {
+							var metadataXML = decodeURIComponent(elMetadataXML.value).replace(/[+]/g, ' ');
+
+							xsd += "\n";
 							xsd += xmlIndent;
+							xsd += metadataXML;
+							xsd += "\n";
 						}
+					}
 
-						xsd += '<dynamic-element name="' + elNameValue + '" type="' + elTypeValue + '" index-type="' + elIndexTypeValue + '" repeatable="' + elRepeatableValue + '">';
+					var nextElDepth = document.getElementById("<portlet:namespace />structure_el" + (i + 1) + "_depth");
 
-						if ((cmd == 'add') && (elCount == index)) {
-							xsd += '<dynamic-element name="" type="" repeatable="false"></dynamic-element>\n';
-						}
-						else {
-							if (elMetadataXML.val()) {
-								var metadataXML = decodeURIComponent(elMetadataXML.val()).replace(/[+]/g, ' ');
+					if (nextElDepth != null) {
+						var nextElDepthValue = nextElDepth.value;
 
-								xsd += '\n';
+						if (elDepthValue == nextElDepthValue) {
+							for (var j = 0; j < elDepthValue; j++) {
 								xsd += xmlIndent;
-								xsd += metadataXML;
-								xsd += '\n';
 							}
+
+							xsd += "</dynamic-element>\n";
 						}
+						else if (elDepthValue > nextElDepthValue) {
+							var depthDiff = elDepthValue - nextElDepthValue;
 
-						var nextElDepth = null;
-						var nextRow = rows.item(index + 1);
-
-						if (nextRow) {
-							nextElDepth = nextRow.one('input[dataName="depth"]');
-						}
-
-						if (nextElDepth != null) {
-							var nextElDepthValue = nextElDepth.val();
-
-							if (elDepthValue == nextElDepthValue) {
-								for (var j = 0; j < elDepthValue; j++) {
-									xsd += xmlIndent;
-								}
-
-								xsd += '</dynamic-element>\n';
-							}
-							else if (elDepthValue > nextElDepthValue) {
-								var depthDiff = elDepthValue - nextElDepthValue;
-
-								for (var j = 0; j <= depthDiff; j++) {
-									if (j != 0) {
-										for (var k = 0; k <= depthDiff - j; k++) {
-											xsd += xmlIndent;
-										}
-									}
-
-									xsd += '</dynamic-element>\n';
-								}
-							}
-							else {
-								xsd += '\n';
-							}
-						}
-						else {
-							for (var j = 0; j <= elDepthValue; j++) {
+							for (var j = 0; j <= depthDiff; j++) {
 								if (j != 0) {
-									for (var k = 0; k <= elDepthValue - j; k++) {
+									for (var k = 0; k <= depthDiff - j; k++) {
 										xsd += xmlIndent;
 									}
 								}
 
-								xsd += '</dynamic-element>\n';
-							}
-						}
-					}
-					else if ((cmd == 'remove') && (elCount == index)) {
-						var nextElDepth = null;
-						var nextRow = rows.item(index + 1);
-
-						if (nextRow) {
-							nextElDepth = nextRow.one('input[dataName="depth"]');
-						}
-
-						if (nextElDepth != null) {
-							var nextElDepthValue = nextElDepth.val();
-
-							if (elDepthValue > nextElDepthValue) {
-								var depthDiff = elDepthValue - nextElDepthValue;
-
-								for (var j = 0; j < depthDiff; j++) {
-									xsd += '</dynamic-element>\n';
-								}
+								xsd += "</dynamic-element>\n";
 							}
 						}
 						else {
-							for (var j = 0; j < elDepthValue; j++) {
-								xsd += '</dynamic-element>\n';
+							xsd += "\n";
+						}
+					}
+					else {
+						for (var j = 0; j <= elDepthValue; j++) {
+							if (j != 0) {
+								for (var k = 0; k <= elDepthValue - j; k++) {
+									xsd += xmlIndent;
+								}
 							}
+
+							xsd += "</dynamic-element>\n";
+						}
+					}
+				}
+				else if ((cmd == "remove") && (elCount == i)) {
+					var nextElDepth = document.getElementById("<portlet:namespace />structure_el" + (i + 1) + "_depth");
+
+					if (nextElDepth != null) {
+						var nextElDepthValue = nextElDepth.value;
+
+						if (elDepthValue > nextElDepthValue) {
+							var depthDiff = elDepthValue - nextElDepthValue;
+
+							for (var j = 0; j < depthDiff; j++) {
+								xsd += "</dynamic-element>\n";
+							}
+						}
+					}
+					else {
+						for (var j = 0; j < elDepthValue; j++) {
+							xsd += "</dynamic-element>\n";
 						}
 					}
 				}
 			}
-		);
-
-		if ((cmd == 'add') && (elCount == -1)) {
-			xsd += '<dynamic-element name="" type=""></dynamic-element>\n';
+			else {
+				break;
+			}
 		}
 
-		xsd += '</root>';
+		xsd += "</root>";
 
 		return xsd;
 	}
