@@ -107,7 +107,7 @@ public class PortalSessionDestroyer implements PortalInitable {
 					WebKeys.PORTLET_SESSION_TRACKER);
 
 			if (portletSessionTracker != null) {
-				PortletSessionTracker.remove(session);
+				PortletSessionTracker.invalidate(session);
 
 				session.removeAttribute(WebKeys.PORTLET_SESSION_TRACKER);
 			}

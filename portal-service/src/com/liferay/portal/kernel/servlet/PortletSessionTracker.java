@@ -44,7 +44,7 @@ public class PortletSessionTracker
 		_instance._add(session);
 	}
 
-	public static void remove(HttpSession session) {
+	public static void invalidate(HttpSession session) {
 		_instance._invalidate(session.getId());
 	}
 
