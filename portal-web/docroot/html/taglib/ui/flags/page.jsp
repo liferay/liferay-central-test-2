@@ -76,7 +76,7 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 		</aui:script>
 	</c:when>
 	<c:otherwise>
-		<div id="<portlet:namespace />signIn" style="display:none">
+		<div id="<%= randomNamespace %>signIn" style="display:none">
 			<liferay-ui:message key="please-sign-in-to-flag-this-as-inappropriate" />
 		</div>
 
@@ -86,7 +86,7 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 				function(event) {
 					var popup = new A.Dialog(
 						{
-							bodyContent: A.one('#<portlet:namespace />signIn').html(),
+							bodyContent: A.one('#<%= randomNamespace %>signIn').html(),
 							centered: true,
 							destroyOnClose: true,
 							title: '<liferay-ui:message key="report-inappropriate-content" />',
