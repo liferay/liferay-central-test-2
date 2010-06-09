@@ -912,14 +912,21 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		if ((serviceContext != null) && group.isCommunity()) {
 			User user = null;
+
 			try {
 				user = userPersistence.findByPrimaryKey(
 					group.getCreatorUserId());
 
 			}
-			catch (NoSuchUserException nsue) {
-				user = userPersistence.findByPrimaryKey(
-					serviceContext.getUserId());
+			catch (NoSuchUserException nsue1) {
+				try {
+					user = userPersistence.findByPrimaryKey(
+						serviceContext.getUserId());
+				}
+				catch (NoSuchUserException nsue2) {
+					user = userLocalService.getDefaultUser(
+						group.getCompanyId());
+				}
 			}
 
 			updateAsset(
