@@ -249,17 +249,26 @@ AUI().add(
 					var footerPortalCssPaths = (portlet.attr('footerPortalCssPaths') || '').split(',');
 					var footerPortletCssPaths = (portlet.attr('footerPortletCssPaths') || '').split(',');
 
+					var footerPortalJavaScriptPaths = (portlet.attr('footerPortalJavaScriptPaths') || '').split(',');
+		            var footerPortletJavaScriptPaths = (portlet.attr('footerPortletJavaScriptPaths') || '').split(',');
+					var headerPortalJavaScriptPaths = (portlet.attr('headerPortalJavaScriptPaths') || '').split(',');
+					var headerPortletJavaScriptPaths = (portlet.attr('headerPortletJavaScriptPaths') || '').split(',');
+
 					portletMetaData = {
 						instanceable: instanceable,
 						plid: plid,
 						portletId: portletId,
 						portletPaths: {
-							footer: footerPortletCssPaths,
-							header: headerPortletCssPaths
+							footerPortletCssPaths: footerPortletCssPaths,
+							headerPortletCssPaths: headerPortletCssPaths,
+							footerPortletJavaScriptPaths: footerPortletJavaScriptPaths,
+							headerPortletJavaScriptPaths: headerPortletJavaScriptPaths
 						},
 						portalPaths: {
-							footer: footerPortalCssPaths,
-							header: headerPortalCssPaths
+							footerPortalCssPaths: footerPortalCssPaths,
+							headerPortalCssPaths: headerPortalCssPaths,
+							footerPortalJavaScriptPaths: footerPortalJavaScriptPaths,
+							headerPortalJavaScriptPaths: headerPortalJavaScriptPaths
 						},
 						portletUsed: portletUsed
 					};
@@ -360,16 +369,24 @@ AUI().add(
 			_loadPortletFiles: function(portletMetaData) {
 				var instance = this;
 
-				var headerPortalCssPaths = portletMetaData.portalPaths.header;
-				var footerPortalCssPaths = portletMetaData.portalPaths.footer;
-				var headerPortletCssPaths = portletMetaData.portletPaths.header;
-				var footerPortletCssPaths = portletMetaData.portletPaths.footer;
+				var headerPortalCssPaths = portletMetaData.portalPaths.headerPortalCssPaths;
+				var footerPortalCssPaths = portletMetaData.portalPaths.footerPortalCssPaths;
+				var headerPortletCssPaths = portletMetaData.portletPaths.headerPortletCssPaths;
+				var footerPortletCssPaths = portletMetaData.portletPaths.footerPortletCssPaths;
+
+				var headerPortalJavaScriptPaths = portletMetaData.portalPaths.headerPortalJavaScriptPaths;
+				var footerPortalJavaScriptPaths = portletMetaData.portalPaths.footerPortalJavaScriptPaths;
+				var headerPortletJavaScriptPaths = portletMetaData.portletPaths.headerPortletJavaScriptPaths;
+				var footerPortletJavaScriptPaths = portletMetaData.portletPaths.footerPortletJavaScriptPaths;
 
 				var head = A.one('head');
 				var body = A.getBody();
 
 				var headerCSS = headerPortalCssPaths.concat(headerPortletCssPaths);
 				var footerCSS = footerPortalCssPaths.concat(footerPortletCssPaths);
+
+				var headerJS = headerPortalJavaScriptPaths.concat(headerPortletJavaScriptPaths);
+				var footerJS = footerPortalJavaScriptPaths.concat(footerPortletJavaScriptPaths);
 
 				A.Get.css(
 					headerCSS,
@@ -389,10 +406,21 @@ AUI().add(
 					}
 				);
 
+				var lastChild = body.get('lastChild').getDOM();
+
 				A.Get.css(
 					footerCSS,
 					{
-						insertBefore: body.get('lastChild')
+						insertBefore: lastChild
+					}
+				);
+
+				A.Get.script(headerJS);
+
+				A.Get.script(
+					footerJS,
+					{
+						insertBefore: lastChild
 					}
 				);
 			},
