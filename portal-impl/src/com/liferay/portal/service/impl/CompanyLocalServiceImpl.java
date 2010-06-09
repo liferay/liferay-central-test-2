@@ -34,7 +34,6 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
@@ -645,9 +644,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 					PropsKeys.LOCALES, StringPool.BLANK);
 				String newLocales = properties.getProperty(PropsKeys.LOCALES);
 
-				newLocales = validateLocales(newLocales);
-				properties.setProperty(PropsKeys.LOCALES, newLocales);
-
 				if (!Validator.equals(oldLocales, newLocales)) {
 					LanguageUtil.resetAvailableLocales(companyId);
 				}
@@ -774,20 +770,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		else if (!Validator.isDomain(mx)) {
 			throw new CompanyMxException();
 		}
-	}
-
-	private String validateLocales(String newLocales)
-		throws PortalException {
-
-		if (StringUtil.startsWith(newLocales, ",")) {
-			newLocales = newLocales.substring(1);
-		}
-
-		if (StringUtil.endsWith(newLocales, ",")) {
-			newLocales = newLocales.substring(0, newLocales.length() - 1);
-		}
-
-		return newLocales;
 	}
 
 	private static final String _DEFAULT_VIRTUAL_HOST = "localhost";
