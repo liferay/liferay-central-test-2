@@ -316,6 +316,10 @@
 		<priority value="WARN" />
 	</category>
 
+	<category name="com.liferay.portal.security.auth.OpenSSOAutoLogin">
+		<priority value="WARN" />
+	</category>
+
 	<category name="com.liferay.portal.security.auth.PrincipalThreadLocal">
 		<priority value="ERROR" />
 	</category>
