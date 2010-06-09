@@ -891,14 +891,25 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				context.getGroupId(), article.getStructureId());
 
 			if (structure == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Structure " + article.getStructureId() + " is " +
-							"missing for article " + article.getArticleId() +
-								", skipping this article.");
+				String newStructureId =
+					structureIds.get(article.getStructureId());
+
+				if (Validator.isNotNull(newStructureId)) {
+					structure = JournalStructureUtil.fetchByG_S(
+						context.getGroupId(), String.valueOf(newStructureId));
 				}
 
-				return;
+                if (structure == null) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Structure " + article.getStructureId() + " is " +
+								"missing for article " +
+								article.getArticleId() +
+								", skipping this article.");
+					}
+
+					return;
+                }
 			}
 		}
 
@@ -907,14 +918,25 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				context.getGroupId(), article.getTemplateId());
 
 			if (template == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Template " + article.getTemplateId() + " is missing " +
-							"for article " + article.getArticleId() +
-								", skipping this article.");
+				String newTemplateId =
+					templateIds.get(article.getTemplateId());
+
+				if (Validator.isNotNull(newTemplateId)) {
+					template = JournalTemplateUtil.fetchByG_T(
+						context.getGroupId(), newTemplateId);
 				}
 
-				return;
+				if (template == null) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Template " + article.getTemplateId() +
+								" is missing " + "for article " +
+								article.getArticleId() +
+								", skipping this article.");
+					}
+
+					return;
+				}
 			}
 		}
 
