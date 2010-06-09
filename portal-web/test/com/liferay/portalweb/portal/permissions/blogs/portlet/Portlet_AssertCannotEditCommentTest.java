@@ -48,7 +48,7 @@ public class Portlet_AssertCannotEditCommentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Comments"),
-			selenium.getText("//ul[2]/li/span/span/span"));
+			selenium.getText("//div[2]/div/div[1]/div/span"));
 		assertFalse(selenium.isElementPresent("link=Edit"));
 	}
 }
