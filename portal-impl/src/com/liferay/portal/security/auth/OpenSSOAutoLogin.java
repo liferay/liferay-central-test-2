@@ -94,7 +94,7 @@ public class OpenSSOAutoLogin implements AutoLogin {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Validating user information for " + firstName + " " +
-						lastName + " with screenname " + screenName +
+						lastName + " with screen name " + screenName +
 						" and email address " + emailAddress);
 			}
 
