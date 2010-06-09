@@ -34,7 +34,7 @@ public class DLFileEntryCustomAttributesDisplay
 	}
 
 	public String getIconPath(ThemeDisplay themeDisplay) {
-		return themeDisplay.getPathThemeImages() + "/document_library/page.png";
+		return themeDisplay.getPathThemeImages() + "/common/clip.png";
 	}
 
 }

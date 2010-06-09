@@ -73,7 +73,7 @@ public class BlogsEntryWorkflowHandler extends BaseWorkflowHandler {
 	}
 
 	protected String getIconPath(ThemeDisplay themeDisplay) {
-		return themeDisplay.getPathThemeImages() + "/common/page.png";
+		return themeDisplay.getPathThemeImages() + "/blogs/blogs.png";
 	}
 
 }

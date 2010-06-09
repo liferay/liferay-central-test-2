@@ -34,7 +34,7 @@ public class BlogsEntryCustomAttributesDisplay
 	}
 
 	public String getIconPath(ThemeDisplay themeDisplay) {
-		return themeDisplay.getPathThemeImages() + "/common/page.png";
+		return themeDisplay.getPathThemeImages() + "/blogs/blogs.png";
 	}
 
 }

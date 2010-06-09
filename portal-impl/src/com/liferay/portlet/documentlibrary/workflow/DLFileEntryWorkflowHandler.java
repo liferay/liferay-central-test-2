@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.workflow.BaseWorkflowHandler;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 
@@ -60,6 +61,10 @@ public class DLFileEntryWorkflowHandler extends BaseWorkflowHandler {
 
 		return DLFileEntryLocalServiceUtil.updateStatus(
 			userId, classPK, status, serviceContext);
+	}
+
+	protected String getIconPath(ThemeDisplay themeDisplay) {
+		return themeDisplay.getPathThemeImages() + "/common/clip.png";
 	}
 
 }
