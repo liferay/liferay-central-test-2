@@ -45,7 +45,7 @@ public class PortletSessionTracker
 	}
 
 	public static void remove(HttpSession session) {
-		_instance._removeSession(session.getId());
+		_instance._invalidate(session.getId());
 	}
 
 	public static HttpSessionBindingListener getInstance() {
@@ -60,7 +60,7 @@ public class PortletSessionTracker
 	}
 
 	public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
-		_removeSession(httpSessionEvent.getSession().getId());
+		_invalidate(httpSessionEvent.getSession().getId());
 	}
 
 	public void valueBound(HttpSessionBindingEvent event) {
@@ -89,12 +89,6 @@ public class PortletSessionTracker
 			}
 
 			portletSessions.add(session);
-		}
-	}
-
-	private void _removeSession(String sessionId) {
-		synchronized (_sessions) {
-			_sessions.remove(sessionId);
 		}
 	}
 
