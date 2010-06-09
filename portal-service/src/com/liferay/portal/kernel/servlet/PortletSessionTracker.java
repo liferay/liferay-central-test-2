@@ -25,6 +25,8 @@ import java.util.Set;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
 
 /**
  * <a href="PortletSessionTracker.java.html"><b><i>View Source</i></b></a>
@@ -36,7 +38,7 @@ import javax.servlet.http.HttpSessionBindingListener;
  * @author Rudy Hilado
  */
 public class PortletSessionTracker
-	implements HttpSessionBindingListener, Serializable {
+	implements HttpSessionListener, HttpSessionBindingListener, Serializable {
 
 	public static void add(HttpSession session) {
 		_instance._add(session);
@@ -50,6 +52,13 @@ public class PortletSessionTracker
 		_instance._invalidate(sessionId);
 	}
 
+	public void sessionCreated(HttpSessionEvent httpSessionEvent) {
+	}
+
+	public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
+		_removeSession(httpSessionEvent.getSession().getId());
+	}
+
 	public void valueBound(HttpSessionBindingEvent event) {
 	}
 
@@ -59,6 +68,8 @@ public class PortletSessionTracker
 
 	private PortletSessionTracker() {
 		_sessions = new HashMap<String, Set<HttpSession>>();
+
+		PortletSessionListenerManager.addListener(this);
 	}
 
 	private void _add(HttpSession session) {
@@ -77,32 +88,37 @@ public class PortletSessionTracker
 		}
 	}
 
+	private void _removeSession(String sessionId) {
+		synchronized (_sessions) {
+			_sessions.remove(sessionId);
+		}
+	}
+
 	private void _invalidate(String sessionId) {
-		Set<HttpSession> sessionsToInvalidate = new HashSet<HttpSession>();
+		Set<HttpSession> sessionsToInvalidate = null;
 
 		synchronized (_sessions) {
 			Set<HttpSession> portletSessions = _sessions.get(sessionId);
 
 			if (portletSessions != null) {
-				Iterator<HttpSession> itr = portletSessions.iterator();
-
-				while (itr.hasNext()) {
-					sessionsToInvalidate.add(itr.next());
-				}
+				sessionsToInvalidate = new HashSet<HttpSession>(
+					portletSessions);
 			}
 
 			_sessions.remove(sessionId);
 		}
 
-		Iterator<HttpSession> itr = sessionsToInvalidate.iterator();
+		if (sessionsToInvalidate != null) {
+			Iterator<HttpSession> itr = sessionsToInvalidate.iterator();
 
-		while (itr.hasNext()) {
-			HttpSession session = itr.next();
+			while (itr.hasNext()) {
+				HttpSession session = itr.next();
 
-			try {
-				session.invalidate();
-			}
-			catch (Exception e) {
+				try {
+					session.invalidate();
+				}
+				catch (Exception e) {
+				}
 			}
 		}
 	}
