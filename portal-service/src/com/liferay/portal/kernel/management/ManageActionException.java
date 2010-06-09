@@ -14,19 +14,25 @@
 
 package com.liferay.portal.kernel.management;
 
+import com.liferay.portal.kernel.exception.PortalException;
+
 /**
  * <a href="ManageActionException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
  */
-public class ManageActionException extends Exception {
+public class ManageActionException extends PortalException {
 
-	public ManageActionException(String message) {
-		super(message);
+	public ManageActionException() {
+		super();
 	}
 
-	public ManageActionException(String message, Throwable cause) {
-		super(message, cause);
+	public ManageActionException(String msg) {
+		super(msg);
+	}
+
+	public ManageActionException(String msg, Throwable cause) {
+		super(msg, cause);
 	}
 
 	public ManageActionException(Throwable cause) {

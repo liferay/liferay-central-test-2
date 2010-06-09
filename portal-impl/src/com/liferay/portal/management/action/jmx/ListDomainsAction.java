@@ -14,6 +14,8 @@
 
 package com.liferay.portal.management.action.jmx;
 
+import javax.management.MBeanServer;
+
 /**
  * <a href="ListDomainsAction.java.html"><b><i>View Source</i></b></a>
  *
@@ -21,14 +23,16 @@ package com.liferay.portal.management.action.jmx;
  */
 public class ListDomainsAction extends BaseJMXManageAction {
 
-	private String[] domains;
-
 	public void action() {
-		domains = getMBeanServer().getDomains();
+		MBeanServer mBeanServer = getMBeanServer();
+
+		_domains = mBeanServer.getDomains();
 	}
 
 	public String[] getDomains() {
-		return domains;
+		return _domains;
 	}
+
+	private String[] _domains;
 
 }

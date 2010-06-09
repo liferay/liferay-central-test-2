@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.management.ManageActionException;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.management.MBeanServer;
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 
@@ -36,13 +37,18 @@ public class ListMBeansAction extends BaseJMXManageAction {
 
 	public void action() throws ManageActionException {
 		try {
-			Set<ObjectName> objectNames = getMBeanServer().queryNames(
-					null, new ObjectName(_domainName.concat(":*")));
+			MBeanServer mBeanServer = getMBeanServer();
+
+			Set<ObjectName> objectNames = mBeanServer.queryNames(
+				null, new ObjectName(_domainName.concat(":*")));
+
 			_mBeans = new HashSet<MBean>(objectNames.size());
+
 			for (ObjectName objectName : objectNames) {
 				_mBeans.add(new MBean(objectName));
 			}
-		} catch (MalformedObjectNameException mone) {
+		}
+		catch (MalformedObjectNameException mone) {
 			throw new ManageActionException(mone);
 		}
 	}

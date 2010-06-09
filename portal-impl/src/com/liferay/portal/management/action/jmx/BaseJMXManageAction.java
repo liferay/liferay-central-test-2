@@ -28,20 +28,20 @@ import javax.management.MBeanServer;
  */
 public abstract class BaseJMXManageAction implements ManageAction {
 
-	private static AtomicReference<MBeanServer> _mBeanServerRef =
-		new AtomicReference<MBeanServer>();
-
 	protected MBeanServer getMBeanServer() {
-		MBeanServer mBeanServer = _mBeanServerRef.get();
+		MBeanServer mBeanServer = _mBeanServerReference.get();
 
 		if (mBeanServer == null) {
-			mBeanServer = (MBeanServer) PortalBeanLocatorUtil.locate(
+			mBeanServer = (MBeanServer)PortalBeanLocatorUtil.locate(
 				"mBeanServer");
 
-			_mBeanServerRef.compareAndSet(null, mBeanServer);
+			_mBeanServerReference.compareAndSet(null, mBeanServer);
 		}
 
 		return mBeanServer;
 	}
+
+	private static AtomicReference<MBeanServer> _mBeanServerReference =
+		new AtomicReference<MBeanServer>();
 
 }

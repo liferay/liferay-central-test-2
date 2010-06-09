@@ -17,6 +17,7 @@ package com.liferay.portal.management.action.jmx;
 import com.liferay.portal.kernel.management.ManageActionException;
 
 import javax.management.Attribute;
+import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
 /**
@@ -28,6 +29,7 @@ public class SetAttributeAction extends BaseJMXManageAction {
 
 	public SetAttributeAction(
 		ObjectName objectName, String name, Object value) {
+
 		_objectName = objectName;
 		_name = name;
 		_value = value;
@@ -35,10 +37,12 @@ public class SetAttributeAction extends BaseJMXManageAction {
 
 	public void action() throws ManageActionException {
 		try {
-			getMBeanServer().setAttribute(_objectName,
-				new Attribute(_name, _value));
-		} catch (Exception ex) {
-			throw new ManageActionException(ex);
+			MBeanServer mBeanServer = getMBeanServer();
+
+			mBeanServer.setAttribute(_objectName, new Attribute(_name, _value));
+		}
+		catch (Exception e) {
+			throw new ManageActionException(e);
 		}
 	}
 

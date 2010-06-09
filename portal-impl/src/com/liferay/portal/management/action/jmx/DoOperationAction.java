@@ -16,6 +16,7 @@ package com.liferay.portal.management.action.jmx;
 
 import com.liferay.portal.kernel.management.ManageActionException;
 
+import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
 /**
@@ -26,21 +27,25 @@ import javax.management.ObjectName;
 public class DoOperationAction extends BaseJMXManageAction {
 
 	public DoOperationAction(
-		ObjectName objectName, String operationName, Object[] params,
+		ObjectName objectName, String operationName, Object[] parameters,
 		String[] signature) {
 
 		_objectName = objectName;
 		_operationName = operationName;
-		_parameters = params;
+		_parameters = parameters;
 		_signature = signature;
 	}
 
 	public void action() throws ManageActionException {
 		try {
-			_result = getMBeanServer().invoke(_objectName, _operationName,
-				_parameters, _signature);
-		} catch (Exception ex) {
-			throw new ManageActionException(ex);
+			MBeanServer mBeanServer = getMBeanServer();
+
+			_result = mBeanServer.invoke(
+				_objectName, _operationName, _parameters, _signature);
+
+		}
+		catch (Exception e) {
+			throw new ManageActionException(e);
 		}
 	}
 
