@@ -91,6 +91,13 @@ public class OpenSSOAutoLogin implements AutoLogin {
 			String firstName = nameValues.get(firstNameAttr);
 			String lastName = nameValues.get(lastNameAttr);
 
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Validating user information for " + firstName + " " +
+						lastName + " with screenname " + screenName +
+						" and email address " + emailAddress);
+			}
+
 			if (Validator.isNull(emailAddress)) {
 				throw new AutoLoginException("Email address is null");
 			}
@@ -113,6 +120,10 @@ public class OpenSSOAutoLogin implements AutoLogin {
 					// complain of this error. Cause is unknown.
 
 					locale = themeDisplay.getLocale();
+				}
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("Adding user " + screenName);
 				}
 
 				user = addUser(
