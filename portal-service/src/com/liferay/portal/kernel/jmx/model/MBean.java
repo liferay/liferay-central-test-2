@@ -35,14 +35,9 @@ import javax.management.ObjectName;
  */
 public class MBean implements Serializable {
 
-	public MBean(String domainName, String mBeanName) {
-		_domainName = domainName;
-		_mBeanName = mBeanName;
-		_loaded = false;
-	}
-
 	public MBean(ObjectName objectName) {
 		this(objectName.getDomain(), objectName.getKeyPropertyListString());
+
 		_objectName = objectName;
 	}
 
@@ -51,6 +46,11 @@ public class MBean implements Serializable {
 		_mBeanName = objectName.getKeyPropertyListString();
 		_mBeanInfo = mBeanInfo;
 		_loaded = true;
+	}
+
+	public MBean(String domainName, String mBeanName) {
+		_domainName = domainName;
+		_mBeanName = mBeanName;
 	}
 
 	public String getDomainName() {
@@ -68,26 +68,30 @@ public class MBean implements Serializable {
 	public ObjectName getObjectName() throws MalformedObjectNameException {
 		if (_objectName == null) {
 			_objectName = new ObjectName(
-				_domainName.concat(":").concat(_mBeanName));
+				_domainName.concat(StringPool.COLON).concat(_mBeanName));
 		}
+
 		return _objectName;
 	}
 
 	public List<String> getPath() {
-
 		if (_path == null) {
-			String[] steps = StringUtil.split(_mBeanName);
-			_path = new ArrayList<String>(steps.length);
-			for (String step : steps) {
-				String[] keyValuePair = StringUtil.split(step,
-					StringPool.EQUAL);
-				if (keyValuePair.length != 2) {
-					_log.error("Wrong MBean name syntax:" + _mBeanName);
-				} else {
-					_path.add(keyValuePair[1]);
+			String[] parts = StringUtil.split(_mBeanName);
+
+			_path = new ArrayList<String>(parts.length);
+
+			for (String part : parts) {
+				String[] kvp = StringUtil.split(part, StringPool.EQUAL);
+
+				if (kvp.length != 2) {
+					_log.error("Invalid MBean name syntax " + _mBeanName);
+				}
+				else {
+					_path.add(kvp[1]);
 				}
 			}
 		}
+
 		return _path;
 	}
 
