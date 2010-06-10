@@ -26,154 +26,131 @@ public class BatchablePipe<K, V> {
 
 	public BatchablePipe() {
 		_headEntry = new Entry<K, V>(null);
-		_lastEntryRef = new AtomicReference<Entry<K, V>>(_headEntry);
+		_lastEntryReference = new AtomicReference<Entry<K, V>>(_headEntry);
 	}
 
-	/**
-	 * Put an IncreasableEntry into pipe, do increase if possible, otherwise
-	 * append new entry to the tail.
-	 *
-	 * @param entry The new entry
-	 * @return true if append the new entry to the tail, false if do increase
-	 * successfully
-	 */
-	public boolean put(IncreasableEntry<K, V> entry) {
-		Entry<K, V> newEntry = new Entry<K, V>(entry);
+	public boolean put(IncreasableEntry<K, V> increasableEntry) {
+		Entry<K, V> newEntry = new Entry<K, V>(increasableEntry);
+
 		while (true) {
-			if (doIncrease(entry)) {
-				// Increase successfuly, no need to append new entry
+			if (_doIncrease(increasableEntry)) {
 				return false;
 			}
 
-			Entry<K, V> lastEntryLink = _lastEntryRef.get();
+			Entry<K, V> lastEntryLink = _lastEntryReference.get();
 			Entry<K, V> nextEntryLink = lastEntryLink._nextEntry.getReference();
+
 			if (nextEntryLink == null) {
-				// Try to append to last, return on success, retry on fail
 				if (lastEntryLink._nextEntry.compareAndSet(
-					null, newEntry, false, false)) {
-					_lastEntryRef.set(newEntry);
+						null, newEntry, false, false)) {
+
+					_lastEntryReference.set(newEntry);
+
 					return true;
 				}
 			}
 			else {
-				// _lastEntryRef is out of date, update it.
-				// The only reason for this is some other thread just appended
-				// a new entry, so it is worthy to try doBatch() again.
-				_lastEntryRef.compareAndSet(lastEntryLink, nextEntryLink);
+				_lastEntryReference.compareAndSet(lastEntryLink, nextEntryLink);
 			}
 		}
-
 	}
 
 	public IncreasableEntry<K, V> take() {
 		boolean[] marked = {false};
 
 		Retry:
+
 		while (true) {
-			// Start searching first takable entry from head
-			Entry<K, V> predecessor = _headEntry;
-			Entry<K, V> current = predecessor._nextEntry.getReference();
-			// Do searching until reaching the tail
-			while (current != null) {
-				Entry<K, V> successor = current._nextEntry.get(marked);
-				// Do physically clean up if current is marked as logicly
-				// removed
+			Entry<K, V> predecessorEntry = _headEntry;
+			Entry<K, V> currentEntry =
+				predecessorEntry._nextEntry.getReference();
+
+			while (currentEntry != null) {
+				Entry<K, V> successorEntry = currentEntry._nextEntry.get(
+					marked);
+
 				if (marked[0]) {
-					// Try to physically clean up current
-					if (predecessor._nextEntry.compareAndSet(
-						current, successor, false, false) == false) {
-						// Some other thread just clean it up, retry to avoid
-						// corrupt links.
+					if (!predecessorEntry._nextEntry.compareAndSet(
+							currentEntry, successorEntry, false, false)) {
+
 						continue Retry;
 					}
-					// clean up successfully, rediect the links
-					current = predecessor._nextEntry.getReference();
+
+					currentEntry = predecessorEntry._nextEntry.getReference();
+
 					continue;
 				}
 
-				// Current entry is valid, try to logicly remove it.
-				if (current._nextEntry.compareAndSet(
-					successor, successor, false, true)) {
-					return current._entry;
+				if (currentEntry._nextEntry.compareAndSet(
+						successorEntry, successorEntry, false, true)) {
+
+					return currentEntry._increasableEntry;
 				}
 				else {
-					// Some other thread just removed
-					// (either logicly or physically) current, retry
 					continue Retry;
 				}
 			}
-			// Nothing is takable, which means the pipe is empty currently
+
 			return null;
 		}
 	}
 
-	/**
-	 * Do increase and physically clean up logicly removed entries.
-	 * @param entry The entry trys to batch
-	 * @return true on success batch, otherwise false
-	 */
-	private boolean doIncrease(IncreasableEntry<K, V> entry) {
+	private boolean _doIncrease(IncreasableEntry<K, V> increasableEntry) {
 		boolean[] marked = {false};
 
 		Retry:
+
 		while (true) {
-			// Start searching from head
-			Entry<K, V> predecessor = _headEntry;
-			Entry<K, V> current = predecessor._nextEntry.getReference();
-			// Do searching until reaching the tail
-			while (current != null) {
-				Entry<K, V> successor = current._nextEntry.get(marked);
-				// Do physically clean up if current is marked as
-				// logicly removed
+			Entry<K, V> predecessorEntry = _headEntry;
+			Entry<K, V> currentEntry =
+				predecessorEntry._nextEntry.getReference();
+
+			while (currentEntry != null) {
+				Entry<K, V> successorEntry = currentEntry._nextEntry.get(
+					marked);
+
 				if (marked[0]) {
-					// Try to physically clean up current
-					if (predecessor._nextEntry.compareAndSet(
-						current, successor, false, false) == false) {
-						// Some other thread just clean it up, retry to avoid
-						// corrupt links.
+					if (!predecessorEntry._nextEntry.compareAndSet(
+							currentEntry, successorEntry, false, false)) {
+
 						continue Retry;
 					}
-					// clean up successfully, rediect the links
-					current = predecessor._nextEntry.getReference();
+
+					currentEntry = predecessorEntry._nextEntry.getReference();
+
 					continue;
 				}
 
-				// Current entry is valid, try to batch it.
-				if (current._entry.getKey().equals(entry.getKey())) {
-					// Find a match entry, do increase. If race condition
-					// happens here(at the mean time some other thread already
-					// take this entry off from pipe), the increase will depends
-					// on IncreasableEntry's synchronization logic to prevent
-					// losing increase value.
-					// In other word, even other thread take off this entry
-					// already, before it calls get to retrieve the value, it is
-					// still valid to do increase
-					return current._entry.increase(entry.getValue());
+				if (currentEntry._increasableEntry.getKey().equals(
+						increasableEntry.getKey())) {
+
+					return currentEntry._increasableEntry.increase(
+						increasableEntry.getValue());
 				}
-				// Move forward
-				predecessor = current;
-				current = successor;
+
+				predecessorEntry = currentEntry;
+				currentEntry = successorEntry;
 			}
-			// Already searched the whole list, nothing batchable
-			_lastEntryRef.set(predecessor);
+
+			_lastEntryReference.set(predecessorEntry);
+
 			return false;
 		}
 	}
 
+	private final Entry<K, V> _headEntry;
+	private final AtomicReference<Entry<K, V>> _lastEntryReference;
+
 	private static class Entry<K, V> {
 
-		private Entry(IncreasableEntry<K, V> entry) {
-			_entry = entry;
-			_nextEntry = new AtomicMarkableReference<Entry<K, V>>(
-				null, false);
+		private Entry(IncreasableEntry<K, V> increasableEntry) {
+			_increasableEntry = increasableEntry;
+			_nextEntry = new AtomicMarkableReference<Entry<K, V>>(null, false);
 		}
 
-		private IncreasableEntry<K, V> _entry;
+		private IncreasableEntry<K, V> _increasableEntry;
 		private AtomicMarkableReference<Entry<K, V>> _nextEntry;
 
 	}
-
-	private final Entry<K, V> _headEntry;
-	private final AtomicReference<Entry<K, V>> _lastEntryRef;
 
 }

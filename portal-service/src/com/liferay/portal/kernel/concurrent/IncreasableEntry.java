@@ -22,19 +22,6 @@ import java.util.concurrent.atomic.AtomicMarkableReference;
 /**
  * <a href="IncreasableEntry.java.html"><b><i>View Source</i></b></a>
  *
- * <B>Semantic note:</B>
- * <P>
- * This base class provides a mechanism which allows modifying entry's value
- * (base one the current value) before first get happens. Once the value has
- * been got by get() method, all modification requests will be rejected.
- * </P>
- * <P>
- * Subclass should overwrite doIncrease(V originalValue, V deltaValue) to
- * provide actual increase logic, base class handles all thread safety
- * protection, so subclass can do any logic in doIncrease without worry about
- * synchronization. To protect internal logic, all fields and concrete methods
- * are final.
- * </P>
  * @author Shuyang Zhou
  */
 public abstract class IncreasableEntry<K, V> {
@@ -46,21 +33,21 @@ public abstract class IncreasableEntry<K, V> {
 
 	public abstract V doIncrease(V originalValue, V deltaValue);
 
-	@SuppressWarnings("unchecked")
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
 		}
 
-		if (!(obj instanceof IncreasableEntry)) {
+		if (!(obj instanceof IncreasableEntry<?, ?>)) {
 			return false;
 		}
 
-		IncreasableEntry<K, V> entry = (IncreasableEntry<K, V>)obj;
+		IncreasableEntry<K, V> increasableEntry = (IncreasableEntry<K, V>)obj;
 
-		if (Validator.equals(_key, entry._key) &&
-			Validator.equals(_markedValue.getReference(),
-			entry._markedValue.getReference())) {
+		if (Validator.equals(_key, increasableEntry._key) &&
+			Validator.equals(
+				_markedValue.getReference(),
+				increasableEntry._markedValue.getReference())) {
 
 			return true;
 		}
@@ -72,14 +59,10 @@ public abstract class IncreasableEntry<K, V> {
 		return _key;
 	}
 
-	/**
-	 * Get the value and mark the flag to stop modifying the value in the
-	 * future.
-	 * @return The value object
-	 */
 	public final V getValue() {
 		while (true) {
 			V value = _markedValue.getReference();
+
 			if (_markedValue.attemptMark(value, true)) {
 				return value;
 			}
@@ -104,15 +87,7 @@ public abstract class IncreasableEntry<K, V> {
 		return hash;
 	}
 
-	/**
-	 * Modify the value object base on the given delta value, if the value has
-	 * been marked to forbid modifying, this method will return false without
-	 * doing any modification.
-	 * @param deltaValue The delta value trying to add to the current one
-	 * @return true if successfully increaes the value, otherwise false
-	 */
 	public final boolean increase(V deltaValue) {
-
 		boolean[] marked = {false};
 
 		while (true) {
@@ -123,8 +98,9 @@ public abstract class IncreasableEntry<K, V> {
 			}
 			else {
 				V newValue = doIncrease(originalValue, deltaValue);
+
 				if (_markedValue.compareAndSet(
-					originalValue, newValue, false, false)) {
+						originalValue, newValue, false, false)) {
 
 					return true;
 				}
@@ -145,7 +121,6 @@ public abstract class IncreasableEntry<K, V> {
 	}
 
 	private final K _key;
-
 	private final AtomicMarkableReference<V> _markedValue;
 
 }
