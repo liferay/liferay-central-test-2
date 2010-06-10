@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.wiki.action;
 
+import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
@@ -67,7 +68,8 @@ public class EditPageAttachmentAction extends PortletAction {
 			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchNodeException ||
+			if (e instanceof DuplicateFileException ||
+				e instanceof NoSuchNodeException ||
 				e instanceof NoSuchPageException ||
 				e instanceof PrincipalException) {
 
