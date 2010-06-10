@@ -14,6 +14,7 @@
 
 package com.liferay.portal.dao.shard;
 
+import com.liferay.counter.service.persistence.CounterFinder;
 import com.liferay.counter.service.persistence.CounterPersistence;
 import com.liferay.portal.NoSuchCompanyException;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -210,6 +211,7 @@ public class ShardAdvice {
 
 		if (target instanceof ClassNamePersistence ||
 			target instanceof CompanyPersistence ||
+			target instanceof CounterFinder ||
 			target instanceof CounterPersistence ||
 			target instanceof ReleasePersistence ||
 			target instanceof ShardPersistence) {
