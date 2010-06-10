@@ -44,7 +44,7 @@ public class WikiNodeServiceImpl extends WikiNodeServiceBaseImpl {
 			ActionKeys.ADD_NODE);
 
 		return wikiNodeLocalService.addNode(
-			getUserId(), name, description, serviceContext);
+			null, getUserId(), name, description, serviceContext);
 	}
 
 	public void deleteNode(long nodeId)

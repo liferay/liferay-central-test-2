@@ -53,14 +53,6 @@ import java.util.Map;
 public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 	public WikiNode addNode(
-			long userId, String name, String description,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addNode(null, userId, name, description, serviceContext);
-	}
-
-	public WikiNode addNode(
 			String uuid, long userId, String name, String description,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -259,7 +251,9 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 		WikiNode node = getNode(nodeId);
 
-		getWikiImporter(importer).importPages(userId, node, files, options);
+		WikiImporter wikiImporter = getWikiImporter(importer);
+
+		wikiImporter.importPages(userId, node, files, options);
 	}
 
 	public void subscribeNode(long userId, long nodeId)

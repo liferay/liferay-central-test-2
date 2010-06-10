@@ -124,15 +124,6 @@ public class WikiNodeLocalServiceWrapper implements WikiNodeLocalService {
 		return _wikiNodeLocalService.updateWikiNode(wikiNode, merge);
 	}
 
-	public com.liferay.portlet.wiki.model.WikiNode addNode(long userId,
-		java.lang.String name, java.lang.String description,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _wikiNodeLocalService.addNode(userId, name, description,
-			serviceContext);
-	}
-
 	public com.liferay.portlet.wiki.model.WikiNode addNode(
 		java.lang.String uuid, long userId, java.lang.String name,
 		java.lang.String description,

@@ -83,7 +83,7 @@ public class ActionUtil {
 			}
 
 			node = WikiNodeLocalServiceUtil.addNode(
-				themeDisplay.getUserId(), nodeName, StringPool.BLANK,
+				null, themeDisplay.getUserId(), nodeName, StringPool.BLANK,
 				serviceContext);
 		}
 		else {

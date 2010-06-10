@@ -155,7 +155,8 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 
 			importedNode = WikiNodeLocalServiceUtil.addNode(
-				userId, node.getName(), node.getDescription(), serviceContext);
+				null, userId, node.getName(), node.getDescription(),
+				serviceContext);
 		}
 
 		nodePKs.put(node.getNodeId(), importedNode.getNodeId());
