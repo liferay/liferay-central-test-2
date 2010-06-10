@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
-import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -61,7 +60,6 @@ import java.io.Serializable;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -1716,7 +1714,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					SQLQuery q = session.createSQLQuery(sql);
 
-					q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+					q.addScalar(COUNT_COLUMN_NAME, com.liferay.portal.kernel.dao.orm.Type.LONG);
 
 					QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1951,7 +1949,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 						SQLQuery q = session.createSQLQuery(_SQL_GET${tempEntity.names?upper_case}SIZE);
 
-						q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+						q.addScalar(COUNT_COLUMN_NAME, com.liferay.portal.kernel.dao.orm.Type.LONG);
 
 						QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2260,7 +2258,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 				SQLQuery q = session.createSQLQuery("SELECT COUNT(*) AS COUNT_VALUE FROM ${entity.table} WHERE ${scopeColumn.name} = ? AND (left${pkColumn.methodName} = 0 OR left${pkColumn.methodName} IS NULL OR right${pkColumn.methodName} = 0 OR right${pkColumn.methodName} IS NULL)");
 
-				q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+				q.addScalar(COUNT_COLUMN_NAME, com.liferay.portal.kernel.dao.orm.Type.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2309,7 +2307,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 				SQLQuery q = session.createSQLQuery("SELECT right${pkColumn.methodName} FROM ${entity.table} WHERE (${scopeColumn.name} = ?) AND (parent${pkColumn.methodName} = ?) ORDER BY right${pkColumn.methodName} DESC");
 
-				q.addScalar("right${pkColumn.methodName}", Type.LONG);
+				q.addScalar("right${pkColumn.methodName}", com.liferay.portal.kernel.dao.orm.Type.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2349,7 +2347,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 				SQLQuery q = session.createSQLQuery("SELECT ${pkColumn.name} FROM ${entity.table} WHERE ${scopeColumn.name} = ? AND parent${pkColumn.methodName} = ? ORDER BY ${pkColumn.name} ASC");
 
-				q.addScalar("${pkColumn.name}", Type.LONG);
+				q.addScalar("${pkColumn.name}", com.liferay.portal.kernel.dao.orm.Type.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2481,7 +2479,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				protected Contains${tempEntity.name}(${entity.name}PersistenceImpl persistenceImpl) {
 					super();
 
-					_mappingSqlQuery = MappingSqlQueryFactoryUtil.getMappingSqlQuery(getDataSource(), _SQL_CONTAINS${tempEntity.name?upper_case}, new int[] {Types.${entitySqlType}, Types.${tempEntitySqlType}}, RowMapper.COUNT);
+					_mappingSqlQuery = MappingSqlQueryFactoryUtil.getMappingSqlQuery(getDataSource(), _SQL_CONTAINS${tempEntity.name?upper_case}, new int[] {java.sql.Types.${entitySqlType}, java.sql.Types.${tempEntitySqlType}}, RowMapper.COUNT);
 				}
 
 				protected boolean contains(${entity.PKClassName} ${entity.PKVarName}, ${tempEntity.PKClassName} ${tempEntity.PKVarName}) {
@@ -2506,7 +2504,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				protected class Add${tempEntity.name} {
 
 					protected Add${tempEntity.name}(${entity.name}PersistenceImpl persistenceImpl) {
-						_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "INSERT INTO ${column.mappingTable} (${entity.PKVarName}, ${tempEntity.PKVarName}) VALUES (?, ?)", new int[] {Types.${entitySqlType}, Types.${tempEntitySqlType}});
+						_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "INSERT INTO ${column.mappingTable} (${entity.PKVarName}, ${tempEntity.PKVarName}) VALUES (?, ?)", new int[] {java.sql.Types.${entitySqlType}, java.sql.Types.${tempEntitySqlType}});
 						_persistenceImpl = persistenceImpl;
 					}
 
@@ -2542,7 +2540,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				protected class Clear${tempEntity.names} {
 
 					protected Clear${tempEntity.names}(${entity.name}PersistenceImpl persistenceImpl) {
-						_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "DELETE FROM ${column.mappingTable} WHERE ${entity.PKVarName} = ?", new int[] {Types.${entitySqlType}});
+						_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "DELETE FROM ${column.mappingTable} WHERE ${entity.PKVarName} = ?", new int[] {java.sql.Types.${entitySqlType}});
 					}
 
 					protected void clear(${entity.PKClassName} ${entity.PKVarName}) throws SystemException {
@@ -2586,7 +2584,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				protected class Remove${tempEntity.name} {
 
 					protected Remove${tempEntity.name}(${entity.name}PersistenceImpl persistenceImpl) {
-						_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "DELETE FROM ${column.mappingTable} WHERE ${entity.PKVarName} = ? AND ${tempEntity.PKVarName} = ?", new int[] {Types.${entitySqlType}, Types.${tempEntitySqlType}});
+						_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "DELETE FROM ${column.mappingTable} WHERE ${entity.PKVarName} = ? AND ${tempEntity.PKVarName} = ?", new int[] {java.sql.Types.${entitySqlType}, java.sql.Types.${tempEntitySqlType}});
 						_persistenceImpl = persistenceImpl;
 					}
 
@@ -2632,7 +2630,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		protected class ExpandTreeLeft${pkColumn.methodName} {
 
 			protected ExpandTreeLeft${pkColumn.methodName}() {
-				_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "UPDATE ${entity.table} SET left${pkColumn.methodName} = (left${pkColumn.methodName} + 2) WHERE (${scopeColumn.name} = ?) AND (left${pkColumn.methodName} > ?)", new int[] {Types.${serviceBuilder.getSqlType("long")}, Types.${serviceBuilder.getSqlType("long")}});
+				_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "UPDATE ${entity.table} SET left${pkColumn.methodName} = (left${pkColumn.methodName} + 2) WHERE (${scopeColumn.name} = ?) AND (left${pkColumn.methodName} > ?)", new int[] {java.sql.Types.${serviceBuilder.getSqlType("long")}, java.sql.Types.${serviceBuilder.getSqlType("long")}});
 			}
 
 			protected void expand(long ${scopeColumn.name}, long left${pkColumn.methodName}) {
@@ -2646,7 +2644,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		protected class ExpandTreeRight${pkColumn.methodName} {
 
 			protected ExpandTreeRight${pkColumn.methodName}() {
-				_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "UPDATE ${entity.table} SET right${pkColumn.methodName} = (right${pkColumn.methodName} + 2) WHERE (${scopeColumn.name} = ?) AND (right${pkColumn.methodName} > ?)", new int[] {Types.${serviceBuilder.getSqlType("long")}, Types.${serviceBuilder.getSqlType("long")}});
+				_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "UPDATE ${entity.table} SET right${pkColumn.methodName} = (right${pkColumn.methodName} + 2) WHERE (${scopeColumn.name} = ?) AND (right${pkColumn.methodName} > ?)", new int[] {java.sql.Types.${serviceBuilder.getSqlType("long")}, java.sql.Types.${serviceBuilder.getSqlType("long")}});
 			}
 
 			protected void expand(long ${scopeColumn.name}, long right${pkColumn.methodName}) {
@@ -2660,7 +2658,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		protected class ShrinkTreeLeft${pkColumn.methodName} {
 
 			protected ShrinkTreeLeft${pkColumn.methodName}() {
-				_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "UPDATE ${entity.table} SET left${pkColumn.methodName} = (left${pkColumn.methodName} - ?) WHERE (${scopeColumn.name} = ?) AND (left${pkColumn.methodName} > ?)", new int[] {Types.${serviceBuilder.getSqlType("long")}, Types.${serviceBuilder.getSqlType("long")}, Types.${serviceBuilder.getSqlType("long")}});
+				_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "UPDATE ${entity.table} SET left${pkColumn.methodName} = (left${pkColumn.methodName} - ?) WHERE (${scopeColumn.name} = ?) AND (left${pkColumn.methodName} > ?)", new int[] {java.sql.Types.${serviceBuilder.getSqlType("long")}, java.sql.Types.${serviceBuilder.getSqlType("long")}, java.sql.Types.${serviceBuilder.getSqlType("long")}});
 			}
 
 			protected void shrink(long ${scopeColumn.name}, long left${pkColumn.methodName}, long delta) {
@@ -2674,7 +2672,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		protected class ShrinkTreeRight${pkColumn.methodName} {
 
 			protected ShrinkTreeRight${pkColumn.methodName}() {
-				_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "UPDATE ${entity.table} SET right${pkColumn.methodName} = (right${pkColumn.methodName} - ?) WHERE (${scopeColumn.name} = ?) AND (right${pkColumn.methodName} > ?)", new int[] {Types.${serviceBuilder.getSqlType("long")}, Types.${serviceBuilder.getSqlType("long")}, Types.${serviceBuilder.getSqlType("long")}});
+				_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "UPDATE ${entity.table} SET right${pkColumn.methodName} = (right${pkColumn.methodName} - ?) WHERE (${scopeColumn.name} = ?) AND (right${pkColumn.methodName} > ?)", new int[] {java.sql.Types.${serviceBuilder.getSqlType("long")}, java.sql.Types.${serviceBuilder.getSqlType("long")}, java.sql.Types.${serviceBuilder.getSqlType("long")}});
 			}
 
 			protected void shrink(long ${scopeColumn.name}, long right${pkColumn.methodName}, long delta) {
@@ -2688,7 +2686,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		protected class UpdateTree {
 
 			protected UpdateTree() {
-				_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "UPDATE ${entity.table} SET left${pkColumn.methodName} = ?, right${pkColumn.methodName} = ? WHERE ${pkColumn.name} = ?", new int[] {Types.${serviceBuilder.getSqlType("long")}, Types.${serviceBuilder.getSqlType("long")}, Types.${serviceBuilder.getSqlType("long")}});
+				_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "UPDATE ${entity.table} SET left${pkColumn.methodName} = ?, right${pkColumn.methodName} = ? WHERE ${pkColumn.name} = ?", new int[] {java.sql.Types.${serviceBuilder.getSqlType("long")}, java.sql.Types.${serviceBuilder.getSqlType("long")}, java.sql.Types.${serviceBuilder.getSqlType("long")}});
 			}
 
 			protected void update(long ${pkColumn.name}, long left${pkColumn.methodName}, long right${pkColumn.methodName}) {
