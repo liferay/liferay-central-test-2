@@ -1,4 +1,3 @@
-
 <%
 /**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
@@ -37,16 +36,18 @@ WorkflowTaskDisplayTerms displayTerms = (WorkflowTaskDisplayTerms)searchContaine
 			<aui:select name="<%= displayTerms.TYPE %>">
 
 				<%
-					List<WorkflowHandler> workflowHhandlers = WorkflowHandlerRegistryUtil.getWorkflowHandlers();
+				String displayTermsType = displayTerms.getType();
 
-					for (WorkflowHandler workflowHandler : workflowHhandlers) {
-						boolean selected = displayTerms.getType().equals(workflowHandler.getType(LocaleUtil.getDefault()));
-					%>
+				List<WorkflowHandler> workflowHhandlers = WorkflowHandlerRegistryUtil.getWorkflowHandlers();
 
-						<aui:option label="<%= workflowHandler.getType(locale)  %>" selected="<%= selected %>" value="<%= workflowHandler.getType(LocaleUtil.getDefault()) %>" />
+				for (WorkflowHandler workflowHandler : workflowHhandlers) {
+					String defaultWorkflowHandlerType = workflowHandler.getType(LocaleUtil.getDefault());
+				%>
+
+					<aui:option label="<%= workflowHandler.getType(locale) %>" selected="<%= displayTermsType.equals(defaultWorkflowHandlerType) %>" value="<%= defaultWorkflowHandlerType %>" />
 
 				<%
-					}
+				}
 				%>
 
 			</aui:select>
