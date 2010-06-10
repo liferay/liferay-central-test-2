@@ -15,6 +15,7 @@
 package com.liferay.portlet.polls.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.polls.service.PollsVoteServiceUtil;
 import com.liferay.portlet.polls.util.PollsUtil;
 
@@ -33,7 +34,8 @@ public class ViewQuestionAction extends EditQuestionAction {
 		long questionId = ParamUtil.getLong(actionRequest, "questionId");
 		long choiceId = ParamUtil.getLong(actionRequest, "choiceId");
 
-		PollsVoteServiceUtil.addVote(questionId, choiceId);
+		PollsVoteServiceUtil.addVote(
+			questionId, choiceId, new ServiceContext());
 
 		PollsUtil.saveVote(actionRequest, questionId);
 	}

@@ -37,10 +37,10 @@ public class PollsVoteServiceWrapper implements PollsVoteService {
 	}
 
 	public com.liferay.portlet.polls.model.PollsVote addVote(long questionId,
-		long choiceId)
+		long choiceId, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _pollsVoteService.addVote(questionId, choiceId);
+		return _pollsVoteService.addVote(questionId, choiceId, serviceContext);
 	}
 
 	public PollsVoteService getWrappedPollsVoteService() {

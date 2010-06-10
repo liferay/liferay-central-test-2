@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -62,7 +63,8 @@ import com.liferay.portlet.polls.service.PollsVoteServiceUtil;
  */
 public class PollsVoteServiceHttp {
 	public static com.liferay.portlet.polls.model.PollsVote addVote(
-		HttpPrincipal httpPrincipal, long questionId, long choiceId)
+		HttpPrincipal httpPrincipal, long questionId, long choiceId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -70,8 +72,15 @@ public class PollsVoteServiceHttp {
 
 			Object paramObj1 = new LongWrapper(choiceId);
 
+			Object paramObj2 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj2 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(PollsVoteServiceUtil.class.getName(),
-					"addVote", new Object[] { paramObj0, paramObj1 });
+					"addVote", new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			Object returnObj = null;
 

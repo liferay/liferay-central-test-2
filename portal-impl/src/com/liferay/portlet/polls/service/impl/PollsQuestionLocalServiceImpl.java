@@ -231,20 +231,6 @@ public class PollsQuestionLocalServiceImpl
 			Map<Locale, String> descriptionMap, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire)
-		throws PortalException, SystemException {
-
-		return updateQuestion(
-			userId, questionId, titleMap, descriptionMap, expirationDateMonth,
-			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, neverExpire, null, new ServiceContext());
-	}
-
-	public PollsQuestion updateQuestion(
-			long userId, long questionId, Map<Locale, String> titleMap,
-			Map<Locale, String> descriptionMap, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, List<PollsChoice> choices,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {

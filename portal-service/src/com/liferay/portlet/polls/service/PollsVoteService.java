@@ -47,7 +47,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 	PortalException.class, SystemException.class})
 public interface PollsVoteService {
 	public com.liferay.portlet.polls.model.PollsVote addVote(long questionId,
-		long choiceId)
+		long choiceId, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 }

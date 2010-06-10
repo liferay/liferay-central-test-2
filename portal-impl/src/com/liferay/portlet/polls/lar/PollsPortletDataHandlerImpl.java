@@ -214,7 +214,8 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 					userId, existingQuestion.getQuestionId(),
 					question.getTitleMap(), question.getDescriptionMap(),
 					expirationMonth, expirationDay, expirationYear,
-					expirationHour, expirationMinute, neverExpire);
+					expirationHour, expirationMinute, neverExpire, null,
+					serviceContext);
 			}
 		}
 		else {

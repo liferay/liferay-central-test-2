@@ -38,10 +38,11 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class PollsVoteServiceUtil {
 	public static com.liferay.portlet.polls.model.PollsVote addVote(
-		long questionId, long choiceId)
+		long questionId, long choiceId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().addVote(questionId, choiceId);
+		return getService().addVote(questionId, choiceId, serviceContext);
 	}
 
 	public static PollsVoteService getService() {

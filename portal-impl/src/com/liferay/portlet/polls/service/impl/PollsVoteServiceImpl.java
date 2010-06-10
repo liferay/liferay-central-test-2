@@ -30,7 +30,8 @@ import com.liferay.portlet.polls.service.permission.PollsQuestionPermission;
  */
 public class PollsVoteServiceImpl extends PollsVoteServiceBaseImpl {
 
-	public PollsVote addVote(long questionId, long choiceId)
+	public PollsVote addVote(
+			long questionId, long choiceId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		long userId = 0;
@@ -46,7 +47,7 @@ public class PollsVoteServiceImpl extends PollsVoteServiceBaseImpl {
 			getPermissionChecker(), questionId, ActionKeys.ADD_VOTE);
 
 		return pollsVoteLocalService.addVote(
-			userId, questionId, choiceId, new ServiceContext());
+			userId, questionId, choiceId, serviceContext);
 	}
 
 }
