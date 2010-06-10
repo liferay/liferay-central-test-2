@@ -17,6 +17,7 @@ package com.liferay.portal.kernel.workflow;
 import com.liferay.portal.NoSuchWorkflowDefinitionLinkException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.service.ServiceContext;
 
 import java.io.Serializable;
@@ -94,6 +95,9 @@ public class WorkflowHandlerRegistryUtil {
 			WorkflowConstants.CONTEXT_ENTRY_CLASS_NAME, className);
 		workflowContext.put(
 			WorkflowConstants.CONTEXT_ENTRY_CLASS_PK, String.valueOf(classPK));
+		workflowContext.put(
+			WorkflowConstants.CONTEXT_ENTRY_TYPE,
+			workflowHandler.getType(LocaleUtil.getDefault()));
 		workflowContext.put(
 			WorkflowConstants.CONTEXT_SERVICE_CONTEXT, serviceContext);
 

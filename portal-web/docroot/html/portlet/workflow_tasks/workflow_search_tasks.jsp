@@ -34,7 +34,22 @@ WorkflowTaskDisplayTerms displayTerms = (WorkflowTaskDisplayTerms)searchContaine
 			<aui:input name="<%= displayTerms.NAME %>" size="20" value="<%= displayTerms.getName() %>" />
 		</aui:column>
 		<aui:column>
-			<aui:input name="<%= displayTerms.TYPE %>" size="20" value="<%= displayTerms.getType() %>" />
+			<aui:select name="<%= displayTerms.TYPE %>">
+
+				<%
+					List<WorkflowHandler> workflowHhandlers = WorkflowHandlerRegistryUtil.getWorkflowHandlers();
+
+					for (WorkflowHandler workflowHandler : workflowHhandlers) {
+						boolean selected = displayTerms.getType().equals(workflowHandler.getType(LocaleUtil.getDefault()));
+					%>
+
+						<aui:option label="<%= workflowHandler.getType(locale)  %>" selected="<%= selected %>" value="<%= workflowHandler.getType(LocaleUtil.getDefault()) %>" />
+
+				<%
+					}
+				%>
+
+			</aui:select>
 		</aui:column>
 	</aui:fieldset>
 </liferay-ui:search-toggle>

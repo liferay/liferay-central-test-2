@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.workflow.BaseWorkflowHandler;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.asset.model.AssetRenderer;
@@ -28,6 +29,7 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 
 import java.io.Serializable;
 
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -44,8 +46,8 @@ public class MBMessageWorkflowHandler extends BaseWorkflowHandler {
 		return CLASS_NAME;
 	}
 
-	public String getType() {
-		return TYPE_CONTENT;
+	public String getType(Locale locale) {
+		return ResourceActionsUtil.getModelResource(locale, CLASS_NAME);
 	}
 
 	public Object updateStatus(

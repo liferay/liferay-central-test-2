@@ -67,10 +67,6 @@ public abstract class BaseWorkflowHandler implements WorkflowHandler {
 		return null;
 	}
 
-	public String getType() {
-		return TYPE_UNKNOWN;
-	}
-
 	public PortletURL getURLEdit(
 		long classPK, LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse) {

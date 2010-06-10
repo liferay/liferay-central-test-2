@@ -14,6 +14,9 @@
 
 package com.liferay.portlet.messageboards.workflow;
 
+import java.util.Locale;
+
+import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
 
 /**
@@ -29,8 +32,8 @@ public class MBDiscussionWorkflowHandler extends MBMessageWorkflowHandler {
 		return CLASS_NAME;
 	}
 
-	public String getType() {
-		return TYPE_CONTENT;
+	public String getType(Locale locale) {
+		return ResourceActionsUtil.getModelResource(locale, CLASS_NAME);
 	}
 
 }

@@ -28,7 +28,6 @@
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowTaskDueDateException" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil" %>
 <%@ page import="com.liferay.portal.kernel.workflow.comparator.WorkflowComparatorFactoryUtil" %>
-<%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
 <%@ page import="com.liferay.portlet.workflowtasks.search.WorkflowTaskDisplayTerms" %>
 <%@ page import="com.liferay.portlet.workflowtasks.search.WorkflowTaskSearch" %>
 <%@ page import="com.liferay.portlet.workflowtasks.search.WorkflowTaskSearchTerms" %>

@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 
 import java.io.Serializable;
 
+import java.util.Locale;
 import java.util.Map;
 
 import javax.portlet.PortletURL;
@@ -34,19 +35,13 @@ import javax.portlet.PortletURL;
  */
 public interface WorkflowHandler {
 
-	public static final String TYPE_CONTENT = "content";
-
-	public static final String TYPE_DOCUMENT = "document";
-
-	public static final String TYPE_UNKNOWN = "unknown";
-
 	public String getClassName();
 
 	public String getIconPath(LiferayPortletRequest liferayPortletRequest);
 
 	public String getTitle(long classPK);
 
-	public String getType();
+	public String getType(Locale locale);
 
 	public PortletURL getURLEdit(
 		long classPK, LiferayPortletRequest liferayPortletRequest,
