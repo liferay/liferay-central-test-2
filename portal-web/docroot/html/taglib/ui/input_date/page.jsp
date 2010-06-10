@@ -76,7 +76,7 @@ if (yearValue > 0) {
 }
 %>
 
-<div class="aui-helper-clearfix aui-datepicker aui-datepicker-display <%= Validator.isNotNull(cssClass) ? cssClass : StringPool.BLANK %>" id="<%= randomNamespace %>displayDate">
+<div class="aui-datepicker aui-datepicker-display aui-helper-clearfix <%= Validator.isNotNull(cssClass) ? cssClass : StringPool.BLANK %>" id="<%= randomNamespace %>displayDate">
 	<div class="aui-datepicker-select-wrapper">
 		<c:choose>
 			<c:when test="<%= monthAndYearParam.equals(namespace) %>">
