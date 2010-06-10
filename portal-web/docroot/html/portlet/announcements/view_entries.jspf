@@ -40,7 +40,7 @@ boolean hasResults = total > 0;
 <%
 flagValue = AnnouncementsFlagConstants.HIDDEN;
 
-searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, "no-entries-were-found");
+SearchContainer searchContainer1 = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, "no-entries-were-found");
 %>
 
 <div class="read-entries">
@@ -52,7 +52,7 @@ hasResults = hasResults || (total > 0);
 %>
 
 <c:if test="<%= total > 0 %>">
-	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="article" />
+	<liferay-ui:search-paginator searchContainer="<%= searchContainer1 %>" type="article" />
 </c:if>
 
 <aui:script>
