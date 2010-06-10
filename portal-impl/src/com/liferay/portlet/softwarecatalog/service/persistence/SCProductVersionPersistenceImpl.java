@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
-import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -54,8 +53,6 @@ import com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl;
 import com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionModelImpl;
 
 import java.io.Serializable;
-
-import java.sql.Types;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -1118,7 +1115,8 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETSCFRAMEWORKVERSIONSSIZE);
 
-				q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+				q.addScalar(COUNT_COLUMN_NAME,
+					com.liferay.portal.kernel.dao.orm.Type.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1430,7 +1428,8 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 
 			_mappingSqlQuery = MappingSqlQueryFactoryUtil.getMappingSqlQuery(getDataSource(),
 					_SQL_CONTAINSSCFRAMEWORKVERSION,
-					new int[] { Types.BIGINT, Types.BIGINT }, RowMapper.COUNT);
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT },
+					RowMapper.COUNT);
 		}
 
 		protected boolean contains(long productVersionId,
@@ -1458,7 +1457,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 			SCProductVersionPersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"INSERT INTO SCFrameworkVersi_SCProductVers (productVersionId, frameworkVersionId) VALUES (?, ?)",
-					new int[] { Types.BIGINT, Types.BIGINT });
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT });
 			_persistenceImpl = persistenceImpl;
 		}
 
@@ -1506,7 +1505,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 			SCProductVersionPersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM SCFrameworkVersi_SCProductVers WHERE productVersionId = ?",
-					new int[] { Types.BIGINT });
+					new int[] { java.sql.Types.BIGINT });
 		}
 
 		protected void clear(long productVersionId) throws SystemException {
@@ -1561,7 +1560,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 			SCProductVersionPersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM SCFrameworkVersi_SCProductVers WHERE productVersionId = ? AND frameworkVersionId = ?",
-					new int[] { Types.BIGINT, Types.BIGINT });
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT });
 			_persistenceImpl = persistenceImpl;
 		}
 

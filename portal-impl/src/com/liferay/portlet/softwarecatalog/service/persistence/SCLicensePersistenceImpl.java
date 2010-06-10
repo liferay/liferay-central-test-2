@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
-import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -53,8 +52,6 @@ import com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl;
 import com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl;
 
 import java.io.Serializable;
-
-import java.sql.Types;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -1218,7 +1215,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETSCPRODUCTENTRIESSIZE);
 
-				q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+				q.addScalar(COUNT_COLUMN_NAME,
+					com.liferay.portal.kernel.dao.orm.Type.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1527,7 +1525,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 			_mappingSqlQuery = MappingSqlQueryFactoryUtil.getMappingSqlQuery(getDataSource(),
 					_SQL_CONTAINSSCPRODUCTENTRY,
-					new int[] { Types.BIGINT, Types.BIGINT }, RowMapper.COUNT);
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT },
+					RowMapper.COUNT);
 		}
 
 		protected boolean contains(long licenseId, long productEntryId) {
@@ -1553,7 +1552,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		protected AddSCProductEntry(SCLicensePersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"INSERT INTO SCLicenses_SCProductEntries (licenseId, productEntryId) VALUES (?, ?)",
-					new int[] { Types.BIGINT, Types.BIGINT });
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT });
 			_persistenceImpl = persistenceImpl;
 		}
 
@@ -1601,7 +1600,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			SCLicensePersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM SCLicenses_SCProductEntries WHERE licenseId = ?",
-					new int[] { Types.BIGINT });
+					new int[] { java.sql.Types.BIGINT });
 		}
 
 		protected void clear(long licenseId) throws SystemException {
@@ -1653,7 +1652,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		protected RemoveSCProductEntry(SCLicensePersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM SCLicenses_SCProductEntries WHERE licenseId = ? AND productEntryId = ?",
-					new int[] { Types.BIGINT, Types.BIGINT });
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT });
 			_persistenceImpl = persistenceImpl;
 		}
 

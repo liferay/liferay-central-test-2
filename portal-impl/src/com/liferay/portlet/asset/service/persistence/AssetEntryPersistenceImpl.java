@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
-import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -65,8 +64,6 @@ import com.liferay.portlet.wiki.service.persistence.WikiPagePersistence;
 import com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence;
 
 import java.io.Serializable;
-
-import java.sql.Types;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -1123,7 +1120,8 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETASSETCATEGORIESSIZE);
 
-				q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+				q.addScalar(COUNT_COLUMN_NAME,
+					com.liferay.portal.kernel.dao.orm.Type.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1472,7 +1470,8 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETASSETTAGSSIZE);
 
-				q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+				q.addScalar(COUNT_COLUMN_NAME,
+					com.liferay.portal.kernel.dao.orm.Type.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1811,7 +1810,8 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 			_mappingSqlQuery = MappingSqlQueryFactoryUtil.getMappingSqlQuery(getDataSource(),
 					_SQL_CONTAINSASSETCATEGORY,
-					new int[] { Types.BIGINT, Types.BIGINT }, RowMapper.COUNT);
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT },
+					RowMapper.COUNT);
 		}
 
 		protected boolean contains(long entryId, long categoryId) {
@@ -1837,7 +1837,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		protected AddAssetCategory(AssetEntryPersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"INSERT INTO AssetEntries_AssetCategories (entryId, categoryId) VALUES (?, ?)",
-					new int[] { Types.BIGINT, Types.BIGINT });
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT });
 			_persistenceImpl = persistenceImpl;
 		}
 
@@ -1885,7 +1885,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			AssetEntryPersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM AssetEntries_AssetCategories WHERE entryId = ?",
-					new int[] { Types.BIGINT });
+					new int[] { java.sql.Types.BIGINT });
 		}
 
 		protected void clear(long entryId) throws SystemException {
@@ -1936,7 +1936,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		protected RemoveAssetCategory(AssetEntryPersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM AssetEntries_AssetCategories WHERE entryId = ? AND categoryId = ?",
-					new int[] { Types.BIGINT, Types.BIGINT });
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT });
 			_persistenceImpl = persistenceImpl;
 		}
 
@@ -1985,7 +1985,8 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 			_mappingSqlQuery = MappingSqlQueryFactoryUtil.getMappingSqlQuery(getDataSource(),
 					_SQL_CONTAINSASSETTAG,
-					new int[] { Types.BIGINT, Types.BIGINT }, RowMapper.COUNT);
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT },
+					RowMapper.COUNT);
 		}
 
 		protected boolean contains(long entryId, long tagId) {
@@ -2011,7 +2012,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		protected AddAssetTag(AssetEntryPersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"INSERT INTO AssetEntries_AssetTags (entryId, tagId) VALUES (?, ?)",
-					new int[] { Types.BIGINT, Types.BIGINT });
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT });
 			_persistenceImpl = persistenceImpl;
 		}
 
@@ -2056,7 +2057,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		protected ClearAssetTags(AssetEntryPersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM AssetEntries_AssetTags WHERE entryId = ?",
-					new int[] { Types.BIGINT });
+					new int[] { java.sql.Types.BIGINT });
 		}
 
 		protected void clear(long entryId) throws SystemException {
@@ -2107,7 +2108,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		protected RemoveAssetTag(AssetEntryPersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM AssetEntries_AssetTags WHERE entryId = ? AND tagId = ?",
-					new int[] { Types.BIGINT, Types.BIGINT });
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT });
 			_persistenceImpl = persistenceImpl;
 		}
 

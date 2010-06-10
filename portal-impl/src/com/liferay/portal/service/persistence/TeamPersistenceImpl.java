@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
-import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -51,8 +50,6 @@ import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.io.Serializable;
-
-import java.sql.Types;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -994,7 +991,8 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1109,7 +1107,8 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1259,7 +1258,8 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETUSERSSIZE);
 
-				q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+				q.addScalar(COUNT_COLUMN_NAME,
+					com.liferay.portal.kernel.dao.orm.Type.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1638,7 +1638,8 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 
 			_mappingSqlQuery = MappingSqlQueryFactoryUtil.getMappingSqlQuery(getDataSource(),
 					_SQL_CONTAINSUSER,
-					new int[] { Types.BIGINT, Types.BIGINT }, RowMapper.COUNT);
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT },
+					RowMapper.COUNT);
 		}
 
 		protected boolean contains(long teamId, long userId) {
@@ -1664,7 +1665,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		protected AddUser(TeamPersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"INSERT INTO Users_Teams (teamId, userId) VALUES (?, ?)",
-					new int[] { Types.BIGINT, Types.BIGINT });
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT });
 			_persistenceImpl = persistenceImpl;
 		}
 
@@ -1706,7 +1707,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		protected ClearUsers(TeamPersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM Users_Teams WHERE teamId = ?",
-					new int[] { Types.BIGINT });
+					new int[] { java.sql.Types.BIGINT });
 		}
 
 		protected void clear(long teamId) throws SystemException {
@@ -1756,7 +1757,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		protected RemoveUser(TeamPersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM Users_Teams WHERE teamId = ? AND userId = ?",
-					new int[] { Types.BIGINT, Types.BIGINT });
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT });
 			_persistenceImpl = persistenceImpl;
 		}
 

@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
-import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -53,8 +52,6 @@ import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 
 import java.io.Serializable;
-
-import java.sql.Types;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -1838,7 +1835,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETGROUPSSIZE);
 
-				q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+				q.addScalar(COUNT_COLUMN_NAME,
+					com.liferay.portal.kernel.dao.orm.Type.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2169,7 +2167,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETUSERSSIZE);
 
-				q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+				q.addScalar(COUNT_COLUMN_NAME,
+					com.liferay.portal.kernel.dao.orm.Type.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2426,7 +2425,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			SQLQuery q = session.createSQLQuery(
 					"SELECT COUNT(*) AS COUNT_VALUE FROM Organization_ WHERE companyId = ? AND (leftOrganizationId = 0 OR leftOrganizationId IS NULL OR rightOrganizationId = 0 OR rightOrganizationId IS NULL)");
 
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2481,7 +2481,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			SQLQuery q = session.createSQLQuery(
 					"SELECT rightOrganizationId FROM Organization_ WHERE (companyId = ?) AND (parentOrganizationId = ?) ORDER BY rightOrganizationId DESC");
 
-			q.addScalar("rightOrganizationId", Type.LONG);
+			q.addScalar("rightOrganizationId",
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2523,7 +2524,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			SQLQuery q = session.createSQLQuery(
 					"SELECT organizationId FROM Organization_ WHERE companyId = ? AND parentOrganizationId = ? ORDER BY organizationId ASC");
 
-			q.addScalar("organizationId", Type.LONG);
+			q.addScalar("organizationId",
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2738,7 +2740,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 			_mappingSqlQuery = MappingSqlQueryFactoryUtil.getMappingSqlQuery(getDataSource(),
 					_SQL_CONTAINSGROUP,
-					new int[] { Types.BIGINT, Types.BIGINT }, RowMapper.COUNT);
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT },
+					RowMapper.COUNT);
 		}
 
 		protected boolean contains(long organizationId, long groupId) {
@@ -2764,7 +2767,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		protected AddGroup(OrganizationPersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"INSERT INTO Groups_Orgs (organizationId, groupId) VALUES (?, ?)",
-					new int[] { Types.BIGINT, Types.BIGINT });
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT });
 			_persistenceImpl = persistenceImpl;
 		}
 
@@ -2807,7 +2810,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		protected ClearGroups(OrganizationPersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM Groups_Orgs WHERE organizationId = ?",
-					new int[] { Types.BIGINT });
+					new int[] { java.sql.Types.BIGINT });
 		}
 
 		protected void clear(long organizationId) throws SystemException {
@@ -2857,7 +2860,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		protected RemoveGroup(OrganizationPersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM Groups_Orgs WHERE organizationId = ? AND groupId = ?",
-					new int[] { Types.BIGINT, Types.BIGINT });
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT });
 			_persistenceImpl = persistenceImpl;
 		}
 
@@ -2902,7 +2905,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 			_mappingSqlQuery = MappingSqlQueryFactoryUtil.getMappingSqlQuery(getDataSource(),
 					_SQL_CONTAINSUSER,
-					new int[] { Types.BIGINT, Types.BIGINT }, RowMapper.COUNT);
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT },
+					RowMapper.COUNT);
 		}
 
 		protected boolean contains(long organizationId, long userId) {
@@ -2928,7 +2932,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		protected AddUser(OrganizationPersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"INSERT INTO Users_Orgs (organizationId, userId) VALUES (?, ?)",
-					new int[] { Types.BIGINT, Types.BIGINT });
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT });
 			_persistenceImpl = persistenceImpl;
 		}
 
@@ -2971,7 +2975,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		protected ClearUsers(OrganizationPersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM Users_Orgs WHERE organizationId = ?",
-					new int[] { Types.BIGINT });
+					new int[] { java.sql.Types.BIGINT });
 		}
 
 		protected void clear(long organizationId) throws SystemException {
@@ -3021,7 +3025,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		protected RemoveUser(OrganizationPersistenceImpl persistenceImpl) {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM Users_Orgs WHERE organizationId = ? AND userId = ?",
-					new int[] { Types.BIGINT, Types.BIGINT });
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT });
 			_persistenceImpl = persistenceImpl;
 		}
 
@@ -3070,7 +3074,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		protected ExpandTreeLeftOrganizationId() {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"UPDATE Organization_ SET leftOrganizationId = (leftOrganizationId + 2) WHERE (companyId = ?) AND (leftOrganizationId > ?)",
-					new int[] { Types.BIGINT, Types.BIGINT });
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT });
 		}
 
 		protected void expand(long companyId, long leftOrganizationId) {
@@ -3084,7 +3088,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		protected ExpandTreeRightOrganizationId() {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"UPDATE Organization_ SET rightOrganizationId = (rightOrganizationId + 2) WHERE (companyId = ?) AND (rightOrganizationId > ?)",
-					new int[] { Types.BIGINT, Types.BIGINT });
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT });
 		}
 
 		protected void expand(long companyId, long rightOrganizationId) {
@@ -3098,7 +3102,10 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		protected ShrinkTreeLeftOrganizationId() {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"UPDATE Organization_ SET leftOrganizationId = (leftOrganizationId - ?) WHERE (companyId = ?) AND (leftOrganizationId > ?)",
-					new int[] { Types.BIGINT, Types.BIGINT, Types.BIGINT });
+					new int[] {
+						java.sql.Types.BIGINT, java.sql.Types.BIGINT,
+						java.sql.Types.BIGINT
+					});
 		}
 
 		protected void shrink(long companyId, long leftOrganizationId,
@@ -3113,7 +3120,10 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		protected ShrinkTreeRightOrganizationId() {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"UPDATE Organization_ SET rightOrganizationId = (rightOrganizationId - ?) WHERE (companyId = ?) AND (rightOrganizationId > ?)",
-					new int[] { Types.BIGINT, Types.BIGINT, Types.BIGINT });
+					new int[] {
+						java.sql.Types.BIGINT, java.sql.Types.BIGINT,
+						java.sql.Types.BIGINT
+					});
 		}
 
 		protected void shrink(long companyId, long rightOrganizationId,
@@ -3128,7 +3138,10 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		protected UpdateTree() {
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"UPDATE Organization_ SET leftOrganizationId = ?, rightOrganizationId = ? WHERE organizationId = ?",
-					new int[] { Types.BIGINT, Types.BIGINT, Types.BIGINT });
+					new int[] {
+						java.sql.Types.BIGINT, java.sql.Types.BIGINT,
+						java.sql.Types.BIGINT
+					});
 		}
 
 		protected void update(long organizationId, long leftOrganizationId,
