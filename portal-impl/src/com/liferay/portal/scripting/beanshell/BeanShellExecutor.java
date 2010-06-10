@@ -44,6 +44,7 @@ public class BeanShellExecutor implements ScriptingExecutor {
 			Set<String> allowedClasses, Map<String, Object> inputObjects,
 			Set<String> outputNames, String script)
 		throws ScriptingException {
+
 		if (allowedClasses != null) {
 			throw new ExecutionException(
 				"Constrained execution not supported for BeanShell");
@@ -51,7 +52,8 @@ public class BeanShellExecutor implements ScriptingExecutor {
 
 		try {
 			Interpreter interpreter = new Interpreter();
-			for(Map.Entry<String, Object> entry : inputObjects.entrySet()) {
+
+			for (Map.Entry<String, Object> entry : inputObjects.entrySet()) {
 				interpreter.set(entry.getKey(), entry.getValue());
 			}
 
@@ -69,7 +71,7 @@ public class BeanShellExecutor implements ScriptingExecutor {
 
 			return outputObjects;
 		}
-		catch(Exception e) {
+		catch (Exception e) {
 			throw new ScriptingException(e.getMessage(), e);
 		}
 	}
