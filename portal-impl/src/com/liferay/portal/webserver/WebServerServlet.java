@@ -304,7 +304,7 @@ public class WebServerServlet extends HttpServlet {
 			folderId = fileShortcut.getToFolderId();
 			name = fileShortcut.getToName();
 
-			dlFileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+			dlFileEntry = DLFileEntryServiceUtil.getFileEntry(
 				groupId, folderId, name);
 
 			fileName = dlFileEntry.getTitle();
