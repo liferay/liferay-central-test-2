@@ -922,8 +922,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				context.getGroupId(), article.getTemplateId());
 
 			if (template == null) {
-				String newTemplateId =
-					templateIds.get(article.getTemplateId());
+				String newTemplateId = templateIds.get(article.getTemplateId());
 
 				if (Validator.isNotNull(newTemplateId)) {
 					template = JournalTemplateUtil.fetchByG_T(
