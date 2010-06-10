@@ -76,23 +76,30 @@ if (yearValue > 0) {
 }
 %>
 
-<div <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> id="<%= randomNamespace %>displayDate"></div>
+<div class="aui-helper-clearfix aui-datepicker aui-datepicker-display <%= Validator.isNotNull(cssClass) ? cssClass : StringPool.BLANK %>" id="<%= randomNamespace %>displayDate">
+	<div class="aui-datepicker-select-wrapper">
+		<c:choose>
+			<c:when test="<%= monthAndYearParam.equals(namespace) %>">
 
-<c:choose>
-	<c:when test="<%= monthAndYearParam.equals(namespace) %>">
+				<%
+				int[] monthIds = CalendarUtil.getMonthIds();
+				String[] months = CalendarUtil.getMonths(locale);
+				%>
 
-		<%
-		int[] monthIds = CalendarUtil.getMonthIds();
-		String[] months = CalendarUtil.getMonths(locale);
-		%>
+				<%@ include file="select_month.jspf" %>
+			</c:when>
+		</c:choose>
 
-		<%@ include file="select_month.jspf" %>
-	</c:when>
-</c:choose>
+		<%@ include file="select_day.jspf" %>
 
-<select class="aui-helper-hidden" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<%= dayParam %>" name="<%= dayParam %>"></select>
-
-<select class="aui-helper-hidden" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<%= yearParam %>" name="<%= yearParam %>"></select>
+		<%@ include file="select_year.jspf" %>
+	</div>
+	<div class="aui-datepicker-button-wrapper">
+		<button class="aui-buttonitem aui-buttonitem-content aui-buttonitem-icon-only aui-component aui-state-default aui-widget" id="buttonTest" type="button">
+			<span class="aui-buttonitem-icon aui-icon aui-icon-calendar"></span>
+		</button>
+	</div>
+</div>
 
 <input class="<%= disabled ? "disabled" : "" %>" id="<%= imageInputId %>Input" type="hidden" />
 
@@ -108,28 +115,21 @@ if (yearValue > 0) {
 				)
 			],
 			dateFormat: '%m/%e/%Y',
-			dayField: '#<%= dayParam %>',
-			dayFieldName: '<%= dayParam %>',
+			dayNode: '#<%= dayParam %>',
 			disabled: <%= disabled %>,
-			displayBoundingBox: '#<%= randomNamespace %>displayDate',
 			firstDayOfWeek: <%= firstDayOfWeek %>,
-			monthField: '#<%= monthParam %>',
-			monthFieldName: '<%= monthParam %>',
+			monthNode: '#<%= monthParam %>',
+			srcNode: '#<%= randomNamespace %>displayDate',
 			on: {
 				select: function(event) {
 					var formatted = event.date.formatted[0];
 
 					A.one('#<%= imageInputId %>Input').val(formatted);
-				},
-				render: function() {
-					A.one('#<%= monthParam %>').removeClass('aui-helper-hidden');
-					A.one('#<%= dayParam %>').removeClass('aui-helper-hidden');
-					A.one('#<%= yearParam %>').removeClass('aui-helper-hidden');
 				}
 			},
 			populateMonth: false,
-			yearField: '#<%= yearParam %>',
-			yearFieldName: '<%= yearParam %>',
+			populateYear: false,
+			yearNode: '#<%= yearParam %>',
 			yearRange: [<%= yearRangeStart %>, <%= yearRangeEnd %>]
 		}
 	).render();
