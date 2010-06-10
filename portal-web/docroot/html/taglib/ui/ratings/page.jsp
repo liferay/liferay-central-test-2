@@ -28,8 +28,8 @@ String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_ui_rating
 String className = (String)request.getAttribute("liferay-ui:ratings:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:ratings:classPK"));
 int numberOfStars = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:ratings:numberOfStars"));
-RatingsEntry ratingsEntry = (RatingsEntry)request.getAttribute("liferay-ui:ratings:ratingsEntry");
-RatingsStats ratingsStats = (RatingsStats)request.getAttribute("liferay-ui:ratings:ratingsStats");
+Boolean preSetRatingsEntry = (Boolean)request.getAttribute("liferay-ui:ratings:preSetRatingsEntry");
+Boolean preSetRatingsStats = (Boolean)request.getAttribute("liferay-ui:ratings:preSetRatingsStats");
 String type = GetterUtil.getString((String)request.getAttribute("liferay-ui:ratings:type"));
 String url = (String)request.getAttribute("liferay-ui:ratings:url");
 
@@ -37,26 +37,31 @@ if (numberOfStars < 1) {
 	numberOfStars = 1;
 }
 
-if (ratingsEntry == null) {
-	try {
-		ratingsEntry = RatingsEntryLocalServiceUtil.getEntry(themeDisplay.getUserId(), className, classPK);
-	}
-	catch (NoSuchEntryException nsee) {
-	}
-}
-
-if (ratingsStats == null) {
-	ratingsStats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
-}
-
 if (Validator.isNull(url)) {
 	url = themeDisplay.getPathMain() + "/ratings/rate_entry";
 }
-
+RatingsEntry ratingsEntry = null;
+RatingsStats ratingsStats = null;
 double yourScore = 0.0;
 
-if (ratingsEntry != null) {
-	yourScore = ratingsEntry.getScore();
+try {
+	if(preSetRatingsEntry) {
+		ratingsEntry = (RatingsEntry)request.getAttribute("liferay-ui:ratings:ratingsEntry");
+	}
+	else {
+		ratingsEntry = RatingsEntryLocalServiceUtil.getEntry(themeDisplay.getUserId(), className, classPK);
+	}
+	if(ratingsEntry != null) {
+		yourScore = ratingsEntry.getScore();
+	}
+}
+catch (NoSuchEntryException nsee) {
+}
+if(preSetRatingsStats) {
+	ratingsStats = (RatingsStats)request.getAttribute("liferay-ui:ratings:ratingsStats");
+}
+if(ratingsStats == null) {
+	ratingsStats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 }
 %>
 
