@@ -899,7 +899,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 						context.getGroupId(), String.valueOf(newStructureId));
 				}
 
-                if (structure == null) {
+				if (structure == null) {
 					if (_log.isWarnEnabled()) {
 						StringBundler sb = new StringBundler();
 
@@ -913,7 +913,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					}
 
 					return;
-                }
+				}
 			}
 		}
 
