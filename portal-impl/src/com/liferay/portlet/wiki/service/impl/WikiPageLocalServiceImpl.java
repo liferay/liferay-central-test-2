@@ -15,7 +15,6 @@
 package com.liferay.portlet.wiki.service.impl;
 
 import com.liferay.documentlibrary.DuplicateDirectoryException;
-import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -244,14 +243,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		catch (DuplicateDirectoryException dde) {
 		}
 
-		try {
-			dlLocalService.addFile(
-				companyId, portletId, groupId, repositoryId,
-				dirName + "/" + fileName, false, 0, StringPool.BLANK,
-				modifiedDate, new ServiceContext(), inputStream);
-		}
-		catch (DuplicateFileException dfe) {
-		}
+		dlLocalService.addFile(
+			companyId, portletId, groupId, repositoryId,
+			dirName + "/" + fileName, false, 0, StringPool.BLANK,
+			modifiedDate, new ServiceContext(), inputStream);
 	}
 
 	public void addPageAttachments(
