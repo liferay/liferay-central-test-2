@@ -901,7 +901,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
                 if (structure == null) {
 					if (_log.isWarnEnabled()) {
-						StringBunder sb = new StringBunder();
+						StringBundler sb = new StringBundler();
 
 						sb.append("Structure ");
 						sb.append(article.getStructureId());
@@ -931,7 +931,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				if (template == null) {
 					if (_log.isWarnEnabled()) {
-						StringBunder sb = new StringBunder();
+						StringBundler sb = new StringBundler();
 
 						sb.append("Template ");
 						sb.append(article.getTemplateId());
