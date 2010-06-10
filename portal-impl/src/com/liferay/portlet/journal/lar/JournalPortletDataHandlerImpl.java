@@ -891,8 +891,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				context.getGroupId(), article.getStructureId());
 
 			if (structure == null) {
-				String newStructureId =
-					structureIds.get(article.getStructureId());
+				String newStructureId = structureIds.get(
+					article.getStructureId());
 
 				if (Validator.isNotNull(newStructureId)) {
 					structure = JournalStructureUtil.fetchByG_S(
@@ -901,11 +901,15 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
                 if (structure == null) {
 					if (_log.isWarnEnabled()) {
-						_log.warn(
-							"Structure " + article.getStructureId() + " is " +
-								"missing for article " +
-								article.getArticleId() +
-								", skipping this article.");
+						StringBunder sb = new StringBunder();
+
+						sb.append("Structure ");
+						sb.append(article.getStructureId());
+						sb.append(" is missing for article ");
+						sb.append(article.getArticleId());
+						sb.append(", skipping this article.");
+
+						_log.warn(sb.toString());
 					}
 
 					return;
@@ -928,11 +932,15 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				if (template == null) {
 					if (_log.isWarnEnabled()) {
-						_log.warn(
-							"Template " + article.getTemplateId() +
-								" is missing " + "for article " +
-								article.getArticleId() +
-								", skipping this article.");
+						StringBunder sb = new StringBunder();
+
+						sb.append("Template ");
+						sb.append(article.getTemplateId());
+						sb.append(" is missing for article ");
+						sb.append(article.getArticleId());
+						sb.append(", skipping this article.");
+
+						_log.warn(sb.toString());
 					}
 
 					return;
