@@ -7,7 +7,7 @@
 	<packaging>pom</packaging>
 	<name>Liferay Maven 2 Support</name>
 	<version>6.0.3-SNAPSHOT</version>
-	<description>Parent project to support Maven 2 sub projects.</description>
+	<description>Parent project to support Maven 2 subprojects.</description>
 	<url>http://www.liferay.com</url>
 	<developers>
 		<developer>

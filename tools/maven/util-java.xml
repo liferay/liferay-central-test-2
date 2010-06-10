@@ -6,7 +6,7 @@
 	<artifactId>util-java</artifactId>
 	<name>Liferay Util Java</name>
 	<version>@version@</version>
-	<description>Random utility classes.</description>
+	<description>Contains useful utilities. Classes are loaded separately for each plugin.</description>
 	<url>http://www.liferay.com</url>
 	<developers>
 		<developer>

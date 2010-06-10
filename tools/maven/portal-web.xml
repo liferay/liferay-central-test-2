@@ -6,7 +6,7 @@
 	<artifactId>portal-web</artifactId>
 	<name>Liferay Portal Web</name>
 	<version>@version@</version>
-	<description>Contains all the web ui of the portal.</description>
+	<description>Contains the portal client side implementation.</description>
 	<url>http://www.liferay.com</url>
 	<developers>
 		<developer>

@@ -6,7 +6,7 @@
 	<artifactId>portal-impl</artifactId>
 	<name>Liferay Portal Impl</name>
 	<version>@version@</version>
-	<description>Is the core project of the portal.</description>
+	<description>Contains implementation for the portal services.</description>
 	<url>http://www.liferay.com</url>
 	<developers>
 		<developer>
