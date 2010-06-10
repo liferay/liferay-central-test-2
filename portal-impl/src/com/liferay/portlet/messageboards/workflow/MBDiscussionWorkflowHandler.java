@@ -14,10 +14,10 @@
 
 package com.liferay.portlet.messageboards.workflow;
 
-import java.util.Locale;
-
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
+
+import java.util.Locale;
 
 /**
  * <a href="MBDiscussionWorkflowHandler.java.html"><b><i>View Source</i></b></a>
