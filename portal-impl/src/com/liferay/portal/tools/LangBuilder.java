@@ -269,6 +269,9 @@ public class LangBuilder {
 							translatedText, "&#39;", "\'");
 					}
 
+					translatedText = StringUtil.replace(
+						translatedText.trim(), "  ", " ");
+
 					unsyncBufferedWriter.write(key + "=" + translatedText);
 
 					unsyncBufferedWriter.newLine();
