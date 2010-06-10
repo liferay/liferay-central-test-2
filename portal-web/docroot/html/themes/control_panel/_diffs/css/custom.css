@@ -123,6 +123,11 @@ html > .lfr-dockbar-pinned {
 	padding-left: 25px;
 }
 
+#panel-manage-content .lfr-panel-title span {
+	background: transparent url(../images/common/community_icon.png) no-repeat 0 50%;
+	padding-left: 25px;
+}
+
 .lfr-ctrl-panel .user-greeting .sign-out {
 	color: #600;
 	font-size: 10px;
@@ -291,6 +296,13 @@ html > .lfr-dockbar-pinned {
 .lfr-ctrl-panel .portlet-content {
 	padding: 0;
 	padding-top: 10px;
+}
+
+.lfr-title-scope-selector {
+	background-color: #FFF;
+	border: 1px solid #BBB;
+	margin-left: 3em;
+	padding: 0 0.5em;
 }
 
 /* ---------- Manage portal ---------- */
