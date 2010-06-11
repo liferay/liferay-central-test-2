@@ -76,7 +76,7 @@ if (ratingsEntry != null) {
 								for (int i = 1; i <= numberOfStars; i++) {
 								%>
 
-									<a class="aui-rating-element <%= (i <= yourScore) ? "aui-rating-element-on" : StringPool.BLANK %>" href="javascript:;" href="javascript:;"></a>
+									<a class="aui-rating-element <%= (i <= yourScore) ? "aui-rating-element-on" : StringPool.BLANK %>" href="javascript:;"></a>
 
 									<aui:input checked="<%= i == yourScore %>" label='<%= (yourScore == i) ? LanguageUtil.format(pageContext, "you-have-rated-this-x-stars-out-of-x", new Object[] {i, numberOfStars}) : LanguageUtil.format(pageContext, "rate-this-x-stars-out-of-x", new Object[] {i, numberOfStars}) %>' name="rating" type="radio" value="<%= i %>" />
 
@@ -101,7 +101,7 @@ if (ratingsEntry != null) {
 						for (int i = 1; i <= numberOfStars; i++) {
 						%>
 
-							<a class="aui-rating-element <%= (i <= ratingsStats.getAverageScore()) ? "aui-rating-element-on" : StringPool.BLANK %>" href="javascript:;" href="javascript:;"></a>
+							<a class="aui-rating-element <%= (i <= ratingsStats.getAverageScore()) ? "aui-rating-element-on" : StringPool.BLANK %>" href="javascript:;"></a>
 
 						<%
 						}
