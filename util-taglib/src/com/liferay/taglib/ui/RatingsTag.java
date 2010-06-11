@@ -42,12 +42,14 @@ public class RatingsTag extends IncludeTag {
 
 	public void setRatingsEntry(RatingsEntry ratingsEntry) {
 		_ratingsEntry = ratingsEntry;
-		_preSetRatingsEntry = true;
+
+		_setRatingsEntry = true;
 	}
 
 	public void setRatingsStats(RatingsStats ratingsStats) {
 		_ratingsStats = ratingsStats;
-		_preSetRatingsStats = true;
+
+		_setRatingsStats = true;
 	}
 
 	public void setType(String type) {
@@ -62,10 +64,10 @@ public class RatingsTag extends IncludeTag {
 		_className = null;
 		_classPK = 0;
 		_numberOfStars = 5;
-		_preSetRatingsEntry = false;
-		_preSetRatingsStats = false;
 		_ratingsEntry = null;
 		_ratingsStats = null;
+		_setRatingsEntry = false;
+		_setRatingsStats = false;
 		_type = "stars";
 		_url = null;
 	}
@@ -84,18 +86,14 @@ public class RatingsTag extends IncludeTag {
 			"liferay-ui:ratings:classPK", String.valueOf(_classPK));
 		request.setAttribute(
 			"liferay-ui:ratings:numberOfStars", String.valueOf(_numberOfStars));
+		request.setAttribute("liferay-ui:ratings:ratingsEntry", _ratingsEntry);
+		request.setAttribute("liferay-ui:ratings:ratingsStats", _ratingsStats);
 		request.setAttribute(
-			"liferay-ui:ratings:preSetRatingsEntry", _preSetRatingsEntry);
-		if (_preSetRatingsEntry) {
-			request.setAttribute(
-				"liferay-ui:ratings:ratingsEntry", _ratingsEntry);
-		}
+			"liferay-ui:ratings:setRatingsEntry",
+			String.valueOf(_setRatingsEntry));
 		request.setAttribute(
-			"liferay-ui:ratings:preSetRatingsStats", _preSetRatingsStats);
-		if (_preSetRatingsStats) {
-			request.setAttribute(
-				"liferay-ui:ratings:ratingsStats", _ratingsStats);
-		}
+			"liferay-ui:ratings:setRatingsStats",
+			String.valueOf(_setRatingsStats));
 		request.setAttribute("liferay-ui:ratings:type", _type);
 		request.setAttribute("liferay-ui:ratings:url", _url);
 	}
@@ -107,10 +105,10 @@ public class RatingsTag extends IncludeTag {
 	private String _className;
 	private long _classPK;
 	private int _numberOfStars = 5;
-	private boolean _preSetRatingsEntry;
-	private boolean _preSetRatingsStats;
 	private RatingsEntry _ratingsEntry;
 	private RatingsStats _ratingsStats;
+	private boolean _setRatingsEntry;
+	private boolean _setRatingsStats;
 	private String _type = "stars";
 	private String _url;
 
