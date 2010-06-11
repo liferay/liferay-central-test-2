@@ -44,12 +44,15 @@ public class GetAttributesAction extends BaseJMXManageAction {
 
 			MBeanAttributeInfo[] mBeanAttributeInfos =
 				mBeanInfo.getAttributes();
+
 			String[] attributeNames = new String[mBeanAttributeInfos.length];
-			for(int i = 0; i < attributeNames.length; i++) {
+
+			for (int i = 0; i < attributeNames.length; i++) {
 				attributeNames[i] = mBeanAttributeInfos[i].getName();
 			}
-			_attributeList = mBeanServer.getAttributes(objectName,
-				attributeNames);
+
+			_attributeList = mBeanServer.getAttributes(
+				objectName, attributeNames);
 		}
 		catch (Exception e) {
 			throw new ManageActionException(e);
