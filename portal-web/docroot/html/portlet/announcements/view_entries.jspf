@@ -100,7 +100,7 @@ hasResults = hasResults || (total > 0);
 			}
 
 			entry.show();
-			
+
 			location.reload();
 		},
 		['aui-base']
