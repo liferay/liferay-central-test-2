@@ -26,17 +26,38 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class ViewAnnouncementDeliveryTest extends BaseTestCase {
 	public void testViewAnnouncementDelivery() throws Exception {
 		selenium.open("/web/guest/home");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=My Account")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("link=My Account", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[4]/ul/li[1]/a", RuntimeVariables.replace(""));
-		assertTrue(selenium.isChecked("//td[2]/input[2]"));
-		assertTrue(selenium.isChecked("//td[3]/input[2]"));
-		assertTrue(selenium.isChecked("//tr[4]/td[2]/input[2]"));
-		assertTrue(selenium.isChecked("//tr[5]/td[2]/input[2]"));
-		assertTrue(selenium.isChecked("//tr[4]/td[3]/input[2]"));
-		assertTrue(selenium.isChecked("//tr[5]/td[3]/input[2]"));
-		assertTrue(selenium.isChecked("//td[4]/input[2]"));
-		assertTrue(selenium.isChecked("//tr[4]/td[4]/input[2]"));
-		assertTrue(selenium.isChecked("//tr[5]/td[4]/input[2]"));
+		selenium.clickAt("announcementsLink", RuntimeVariables.replace(""));
+		assertTrue(selenium.isChecked(
+				"_2_announcementsTypegeneralEmailCheckbox"));
+		assertTrue(selenium.isChecked("_2_announcementsTypegeneralSmsCheckbox"));
+		assertTrue(selenium.isElementPresent(
+				"//input[@id='_2_announcementsTypegeneralWebsiteCheckbox' and @disabled='disabled']"));
+		assertTrue(selenium.isChecked("_2_announcementsTypenewsSmsCheckbox"));
+		assertTrue(selenium.isChecked("_2_announcementsTypenewsSmsCheckbox"));
+		assertTrue(selenium.isElementPresent(
+				"//input[@id='_2_announcementsTypenewsWebsiteCheckbox' and @disabled='disabled']"));
+		assertTrue(selenium.isChecked("_2_announcementsTypetestEmailCheckbox"));
+		assertTrue(selenium.isChecked("_2_announcementsTypetestSmsCheckbox"));
+		assertTrue(selenium.isElementPresent(
+				"//input[@id='_2_announcementsTypetestWebsiteCheckbox' and @disabled='disabled']"));
 	}
 }

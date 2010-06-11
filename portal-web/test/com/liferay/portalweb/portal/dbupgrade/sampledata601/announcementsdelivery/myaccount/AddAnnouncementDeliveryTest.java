@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.dbupgrade.sampledata522.announcementsdelivery.myaccount;
+package com.liferay.portalweb.portal.dbupgrade.sampledata601.announcementsdelivery.myaccount;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -37,7 +37,7 @@ public class AddAnnouncementDeliveryTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("link=My Account")) {
+						if (selenium.isVisible("link=Joe Bloggs")) {
 							break;
 						}
 					}
@@ -47,7 +47,7 @@ public class AddAnnouncementDeliveryTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("link=My Account", RuntimeVariables.replace(""));
+				selenium.clickAt("link=Joe Bloggs", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("announcementsLink",
 					RuntimeVariables.replace(""));
@@ -140,7 +140,7 @@ public class AddAnnouncementDeliveryTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
-					selenium.getText("//div[2]/div/div/div"));
+					selenium.getText("//section/div/div/div/div"));
 				assertTrue(selenium.isChecked(
 						"_2_announcementsTypegeneralEmailCheckbox"));
 				assertTrue(selenium.isChecked(

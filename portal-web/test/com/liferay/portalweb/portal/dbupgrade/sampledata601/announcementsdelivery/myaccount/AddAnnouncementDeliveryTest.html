@@ -14,18 +14,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=My Account</td>
+	<td>waitForVisible</td>
+	<td>link=Joe Bloggs</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=My Account</td>
+	<td>link=Joe Bloggs</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>link=Alerts and Announcements</td>
+	<td>announcementsLink</td>
 	<td></td>
 </tr>
 <tr>
@@ -70,26 +70,6 @@
 </tr>
 <tr>
 	<td>store</td>
-	<td>eval(selenium.isChecked('_2_announcementsTypegeneralWebsiteCheckbox'))</td>
-	<td>generalWebsiteChecked</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>${generalWebsiteChecked}</td>
-	<td>GeneralWebsiteChecked</td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>_2_announcementsTypegeneralWebsiteCheckbox</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>GeneralWebsiteChecked</td>
-	<td></td>
-</tr>
-<tr>
-	<td>store</td>
 	<td>eval(selenium.isChecked('_2_announcementsTypenewsEmailCheckbox'))</td>
 	<td>newsEmailChecked</td>
 </tr>
@@ -126,26 +106,6 @@
 <tr>
 	<td>label</td>
 	<td>NewsSmsChecked</td>
-	<td></td>
-</tr>
-<tr>
-	<td>store</td>
-	<td>eval(selenium.isChecked('_2_announcementsTypenewsWebsiteCheckbox'))</td>
-	<td>newsWebsiteChecked</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>${newsWebsiteChecked}</td>
-	<td>NewsWebsiteChecked</td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>_2_announcementsTypenewsWebsiteCheckbox</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>NewsWebsiteChecked</td>
 	<td></td>
 </tr>
 <tr>
@@ -189,33 +149,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>store</td>
-	<td>eval(selenium.isChecked('_2_announcementsTypetestWebsiteCheckbox'))</td>
-	<td>testWebsiteChecked</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>${testWebsiteChecked}</td>
-	<td>TestWebsiteChecked</td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>_2_announcementsTypetestWebsiteCheckbox</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>TestWebsiteChecked</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAtAndWait</td>
 	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[2]/div/div/div</td>
+	<td>//section/div/div/div/div</td>
 	<td>Your request processed successfully.</td>
 </tr>
 <tr>
@@ -229,8 +169,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertChecked</td>
-	<td>_2_announcementsTypegeneralWebsiteCheckbox</td>
+	<td>assertElementPresent</td>
+	<td>//input[@id='_2_announcementsTypegeneralWebsiteCheckbox' and @disabled='']</td>
 	<td></td>
 </tr>
 <tr>
@@ -244,8 +184,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertChecked</td>
-	<td>_2_announcementsTypenewsWebsiteCheckbox</td>
+	<td>assertElementPresent</td>
+	<td>//input[@id='_2_announcementsTypenewsWebsiteCheckbox' and @disabled='']</td>
 	<td></td>
 </tr>
 <tr>
@@ -259,8 +199,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertChecked</td>
-	<td>_2_announcementsTypetestWebsiteCheckbox</td>
+	<td>assertElementPresent</td>
+	<td>//input[@id='_2_announcementsTypetestWebsiteCheckbox' and @disabled='']</td>
 	<td></td>
 </tr>
 

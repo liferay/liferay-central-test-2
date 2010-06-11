@@ -30,13 +30,30 @@ public class AddAnnouncementDeliveryTest extends BaseTestCase {
 			switch (label) {
 			case 1:
 				selenium.open("/web/guest/home");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("link=My Account")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.clickAt("link=My Account", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("link=Alerts and Announcements",
 					RuntimeVariables.replace(""));
 
 				boolean generalEmailChecked = selenium.isChecked(
-						"//tr[2]/td[2]/input[2]");
+						"_2_announcementsTypegeneralEmailCheckbox");
 
 				if (generalEmailChecked) {
 					label = 2;
@@ -44,55 +61,55 @@ public class AddAnnouncementDeliveryTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//tr[2]/td[2]/input[2]",
+				selenium.clickAt("_2_announcementsTypegeneralEmailCheckbox",
 					RuntimeVariables.replace(""));
 
 			case 2:
 
-				boolean newsEmailChecked = selenium.isChecked(
-						"//tr[3]/td[2]/input[2]");
+				boolean generalSmsChecked = selenium.isChecked(
+						"_2_announcementsTypegeneralSmsCheckbox");
 
-				if (newsEmailChecked) {
+				if (generalSmsChecked) {
 					label = 3;
 
 					continue;
 				}
 
-				selenium.clickAt("//tr[3]/td[2]/input[2]",
+				selenium.clickAt("_2_announcementsTypegeneralSmsCheckbox",
 					RuntimeVariables.replace(""));
 
 			case 3:
 
-				boolean testEmailChecked = selenium.isChecked(
-						"//div[2]/table/tbody/tr[4]/td[2]/input[2]");
+				boolean generalWebsiteChecked = selenium.isChecked(
+						"_2_announcementsTypegeneralWebsiteCheckbox");
 
-				if (testEmailChecked) {
+				if (generalWebsiteChecked) {
 					label = 4;
 
 					continue;
 				}
 
-				selenium.clickAt("//div[2]/table/tbody/tr[4]/td[2]/input[2]",
+				selenium.clickAt("_2_announcementsTypegeneralWebsiteCheckbox",
 					RuntimeVariables.replace(""));
 
 			case 4:
 
-				boolean generalSmsChecked = selenium.isChecked(
-						"//td[3]/input[2]");
+				boolean newsEmailChecked = selenium.isChecked(
+						"_2_announcementsTypenewsEmailCheckbox");
 
-				if (generalSmsChecked) {
+				if (newsEmailChecked) {
 					label = 5;
 
 					continue;
 				}
 
-				selenium.clickAt("//td[3]/input[2]",
+				selenium.clickAt("_2_announcementsTypenewsEmailCheckbox",
 					RuntimeVariables.replace(""));
 
 			case 5:
 
 				boolean newsSmsChecked = selenium.isChecked(
-						"//tr[3]/td[3]/input[2]");
+						"_2_announcementsTypenewsSmsCheckbox");
 
 				if (newsSmsChecked) {
 					label = 6;
@@ -100,55 +117,55 @@ public class AddAnnouncementDeliveryTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//tr[3]/td[3]/input[2]",
+				selenium.clickAt("_2_announcementsTypenewsSmsCheckbox",
 					RuntimeVariables.replace(""));
 
 			case 6:
 
-				boolean testSmsChecked = selenium.isChecked(
-						"//tr[4]/td[3]/input[2]");
+				boolean newsWebsiteChecked = selenium.isChecked(
+						"_2_announcementsTypenewsWebsiteCheckbox");
 
-				if (testSmsChecked) {
+				if (newsWebsiteChecked) {
 					label = 7;
 
 					continue;
 				}
 
-				selenium.clickAt("//tr[4]/td[3]/input[2]",
+				selenium.clickAt("_2_announcementsTypenewsWebsiteCheckbox",
 					RuntimeVariables.replace(""));
 
 			case 7:
 
-				boolean generalWebsiteChecked = selenium.isChecked(
-						"//td[4]/input[2]");
+				boolean testEmailChecked = selenium.isChecked(
+						"_2_announcementsTypetestEmailCheckbox");
 
-				if (generalWebsiteChecked) {
+				if (testEmailChecked) {
 					label = 8;
 
 					continue;
 				}
 
-				selenium.clickAt("//td[4]/input[2]",
+				selenium.clickAt("_2_announcementsTypetestEmailCheckbox",
 					RuntimeVariables.replace(""));
 
 			case 8:
 
-				boolean newsWebsiteChecked = selenium.isChecked(
-						"//tr[3]/td[4]/input[2]");
+				boolean testSmsChecked = selenium.isChecked(
+						"_2_announcementsTypetestSmsCheckbox");
 
-				if (newsWebsiteChecked) {
+				if (testSmsChecked) {
 					label = 9;
 
 					continue;
 				}
 
-				selenium.clickAt("//tr[3]/td[4]/input[2]",
+				selenium.clickAt("_2_announcementsTypetestSmsCheckbox",
 					RuntimeVariables.replace(""));
 
 			case 9:
 
 				boolean testWebsiteChecked = selenium.isChecked(
-						"//tr[4]/td[4]/input[2]");
+						"_2_announcementsTypetestWebsiteCheckbox");
 
 				if (testWebsiteChecked) {
 					label = 10;
@@ -156,7 +173,7 @@ public class AddAnnouncementDeliveryTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//tr[4]/td[4]/input[2]",
+				selenium.clickAt("_2_announcementsTypetestWebsiteCheckbox",
 					RuntimeVariables.replace(""));
 
 			case 10:
@@ -166,16 +183,24 @@ public class AddAnnouncementDeliveryTest extends BaseTestCase {
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
 					selenium.getText("//div[2]/div/div/div"));
-				assertTrue(selenium.isChecked("//tr[2]/td[2]/input[2]"));
-				assertTrue(selenium.isChecked("//td[3]/input[2]"));
-				assertTrue(selenium.isChecked("//tr[3]/td[2]/input[2]"));
 				assertTrue(selenium.isChecked(
-						"//div[2]/table/tbody/tr[4]/td[2]/input[2]"));
-				assertTrue(selenium.isChecked("//tr[3]/td[3]/input[2]"));
-				assertTrue(selenium.isChecked("//tr[4]/td[3]/input[2]"));
-				assertTrue(selenium.isChecked("//td[4]/input[2]"));
-				assertTrue(selenium.isChecked("//tr[3]/td[4]/input[2]"));
-				assertTrue(selenium.isChecked("//tr[4]/td[4]/input[2]"));
+						"_2_announcementsTypegeneralEmailCheckbox"));
+				assertTrue(selenium.isChecked(
+						"_2_announcementsTypegeneralSmsCheckbox"));
+				assertTrue(selenium.isChecked(
+						"_2_announcementsTypegeneralWebsiteCheckbox"));
+				assertTrue(selenium.isChecked(
+						"_2_announcementsTypenewsSmsCheckbox"));
+				assertTrue(selenium.isChecked(
+						"_2_announcementsTypenewsSmsCheckbox"));
+				assertTrue(selenium.isChecked(
+						"_2_announcementsTypenewsWebsiteCheckbox"));
+				assertTrue(selenium.isChecked(
+						"_2_announcementsTypetestEmailCheckbox"));
+				assertTrue(selenium.isChecked(
+						"_2_announcementsTypetestSmsCheckbox"));
+				assertTrue(selenium.isChecked(
+						"_2_announcementsTypetestWebsiteCheckbox"));
 
 			case 100:
 				label = -1;

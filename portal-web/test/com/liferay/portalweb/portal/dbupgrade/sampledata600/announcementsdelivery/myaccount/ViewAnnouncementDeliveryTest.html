@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head profile="http://selenium-ide.openqa.org/profiles/test-case">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="" />
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ViewAnnouncementDeliveryTest</title>
 </head>
 <body>
@@ -17,48 +14,68 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Control Panel</td>
+	<td>waitForVisible</td>
+	<td>link=Joe Bloggs</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=My Account</td>
+	<td>link=Joe Bloggs</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//div[4]/ul/li[1]/a</td>
+	<td>announcementsLink</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>//td[2]/span/span/span/input[2]</td>
+	<td>_2_announcementsTypegeneralEmailCheckbox</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>//tr[4]/td[2]/span/span/span/input[2]</td>
+	<td>_2_announcementsTypegeneralSmsCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//input[@id='_2_announcementsTypegeneralWebsiteCheckbox' and @disabled='']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>//tr[5]/td[2]/span/span/span/input[2]</td>
+	<td>_2_announcementsTypenewsSmsCheckbox</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>//td[3]/span/span/span/input[2]</td>
+	<td>_2_announcementsTypenewsSmsCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//input[@id='_2_announcementsTypenewsWebsiteCheckbox' and @disabled='']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>//tr[4]/td[3]/span/span/span/input[2]</td>
+	<td>_2_announcementsTypetestEmailCheckbox</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>//tr[5]/td[3]/span/span/span/input[2]</td>
+	<td>_2_announcementsTypetestSmsCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//input[@id='_2_announcementsTypetestWebsiteCheckbox' and @disabled='']</td>
 	<td></td>
 </tr>
 

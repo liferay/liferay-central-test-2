@@ -26,19 +26,37 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class ViewAnnouncementDeliveryTest extends BaseTestCase {
 	public void testViewAnnouncementDelivery() throws Exception {
 		selenium.open("/web/guest/home");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=My Account")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("link=My Account", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Alerts and Announcements",
 			RuntimeVariables.replace(""));
-		assertTrue(selenium.isChecked("//tr[2]/td[2]/input[2]"));
-		assertTrue(selenium.isChecked("//td[3]/input[2]"));
-		assertTrue(selenium.isChecked("//tr[3]/td[2]/input[2]"));
 		assertTrue(selenium.isChecked(
-				"//div[2]/table/tbody/tr[4]/td[2]/input[2]"));
-		assertTrue(selenium.isChecked("//tr[3]/td[3]/input[2]"));
-		assertTrue(selenium.isChecked("//tr[4]/td[3]/input[2]"));
-		assertTrue(selenium.isChecked("//td[4]/input[2]"));
-		assertTrue(selenium.isChecked("//tr[3]/td[4]/input[2]"));
-		assertTrue(selenium.isChecked("//tr[4]/td[4]/input[2]"));
+				"_2_announcementsTypegeneralEmailCheckbox"));
+		assertTrue(selenium.isChecked("_2_announcementsTypegeneralSmsCheckbox"));
+		assertTrue(selenium.isChecked(
+				"_2_announcementsTypegeneralWebsiteCheckbox"));
+		assertTrue(selenium.isChecked("_2_announcementsTypenewsSmsCheckbox"));
+		assertTrue(selenium.isChecked("_2_announcementsTypenewsSmsCheckbox"));
+		assertTrue(selenium.isChecked("_2_announcementsTypenewsWebsiteCheckbox"));
+		assertTrue(selenium.isChecked("_2_announcementsTypetestEmailCheckbox"));
+		assertTrue(selenium.isChecked("_2_announcementsTypetestSmsCheckbox"));
+		assertTrue(selenium.isChecked("_2_announcementsTypetestWebsiteCheckbox"));
 	}
 }
