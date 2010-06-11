@@ -21,6 +21,7 @@ import com.liferay.portalweb.portlet.blogs.entry.addentrycontentmultipleword.Add
 import com.liferay.portalweb.portlet.blogs.entry.addentrycontentnull.AddEntryContentNullTests;
 import com.liferay.portalweb.portlet.blogs.entry.addentrydraft.AddEntryDraftTests;
 import com.liferay.portalweb.portlet.blogs.entry.addentrymultiple.AddEntryMultipleTests;
+import com.liferay.portalweb.portlet.blogs.entry.addentryscopepage.AddEntryScopePageTests;
 import com.liferay.portalweb.portlet.blogs.entry.addentrytitle150characters.AddEntryTitle150CharactersTests;
 import com.liferay.portalweb.portlet.blogs.entry.addentrytitle151characters.AddEntryTitle151CharactersTests;
 import com.liferay.portalweb.portlet.blogs.entry.addentrytitleescapecharacters.AddEntryTitleEscapeCharactersTests;
@@ -42,6 +43,7 @@ import com.liferay.portalweb.portlet.blogs.entry.rateentryentrydetails.RateEntry
 import com.liferay.portalweb.portlet.blogs.entry.viewcountentryentrydetails.ViewCountEntryEntryDetailsTests;
 import com.liferay.portalweb.portlet.blogs.entry.viewentry.ViewEntryTests;
 import com.liferay.portalweb.portlet.blogs.entry.viewentryentrydetails.ViewEntryEntryDetailsTests;
+import com.liferay.portalweb.portlet.blogs.entry.viewentryscopepage.ViewEntryScopePageTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -62,6 +64,7 @@ public class EntryTests extends BaseTests {
 		testSuite.addTest(AddEntryContentNullTests.suite());
 		testSuite.addTest(AddEntryDraftTests.suite());
 		testSuite.addTest(AddEntryMultipleTests.suite());
+		testSuite.addTest(AddEntryScopePageTests.suite());
 		testSuite.addTest(AddEntryTitle150CharactersTests.suite());
 		testSuite.addTest(AddEntryTitle151CharactersTests.suite());
 		testSuite.addTest(AddEntryTitleEscapeCharactersTests.suite());
@@ -83,6 +86,7 @@ public class EntryTests extends BaseTests {
 		testSuite.addTest(ViewCountEntryEntryDetailsTests.suite());
 		testSuite.addTest(ViewEntryTests.suite());
 		testSuite.addTest(ViewEntryEntryDetailsTests.suite());
+		testSuite.addTest(ViewEntryScopePageTests.suite());
 
 		return testSuite;
 	}
