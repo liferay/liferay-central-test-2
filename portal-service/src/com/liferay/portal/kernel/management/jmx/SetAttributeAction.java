@@ -12,52 +12,42 @@
  * details.
  */
 
-package com.liferay.portal.kernel.management.action.jmx;
+package com.liferay.portal.kernel.management.jmx;
 
-import com.liferay.portal.kernel.jmx.model.MBean;
 import com.liferay.portal.kernel.management.ManageActionException;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import javax.management.Attribute;
 import javax.management.MBeanServer;
-import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 
 /**
- * <a href="ListMBeansAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="SetAttributeAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
  */
-public class ListMBeansAction extends BaseJMXManageAction {
+public class SetAttributeAction extends BaseJMXManageAction {
 
-	public ListMBeansAction(String domainName) {
-		_domainName = domainName;
+	public SetAttributeAction(
+		ObjectName objectName, String name, Object value) {
+
+		_objectName = objectName;
+		_name = name;
+		_value = value;
 	}
 
 	public void action() throws ManageActionException {
 		try {
 			MBeanServer mBeanServer = getMBeanServer();
 
-			Set<ObjectName> objectNames = mBeanServer.queryNames(
-				null, new ObjectName(_domainName.concat(":*")));
-
-			_mBeans = new HashSet<MBean>(objectNames.size());
-
-			for (ObjectName objectName : objectNames) {
-				_mBeans.add(new MBean(objectName));
-			}
+			mBeanServer.setAttribute(_objectName, new Attribute(_name, _value));
 		}
-		catch (MalformedObjectNameException mone) {
-			throw new ManageActionException(mone);
+		catch (Exception e) {
+			throw new ManageActionException(e);
 		}
 	}
 
-	public Set<MBean> getMBeans() {
-		return _mBeans;
-	}
-
-	private String _domainName;
-	private Set<MBean> _mBeans;
+	private String _name;
+	private ObjectName _objectName;
+	private Object _value;
 
 }

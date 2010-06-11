@@ -12,42 +12,51 @@
  * details.
  */
 
-package com.liferay.portal.kernel.management.action.jmx;
+package com.liferay.portal.kernel.management.jmx;
 
 import com.liferay.portal.kernel.management.ManageActionException;
 
-import javax.management.Attribute;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
 /**
- * <a href="SetAttributeAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="DoOperationAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
  */
-public class SetAttributeAction extends BaseJMXManageAction {
+public class DoOperationAction extends BaseJMXManageAction {
 
-	public SetAttributeAction(
-		ObjectName objectName, String name, Object value) {
+	public DoOperationAction(
+		ObjectName objectName, String operationName, Object[] parameters,
+		String[] signature) {
 
 		_objectName = objectName;
-		_name = name;
-		_value = value;
+		_operationName = operationName;
+		_parameters = parameters;
+		_signature = signature;
 	}
 
 	public void action() throws ManageActionException {
 		try {
 			MBeanServer mBeanServer = getMBeanServer();
 
-			mBeanServer.setAttribute(_objectName, new Attribute(_name, _value));
+			_result = mBeanServer.invoke(
+				_objectName, _operationName, _parameters, _signature);
+
 		}
 		catch (Exception e) {
 			throw new ManageActionException(e);
 		}
 	}
 
-	private String _name;
+	public Object getResult() {
+		return _result;
+	}
+
 	private ObjectName _objectName;
-	private Object _value;
+	private String _operationName;
+	private Object[] _parameters;
+	private Object _result;
+	private String[] _signature;
 
 }

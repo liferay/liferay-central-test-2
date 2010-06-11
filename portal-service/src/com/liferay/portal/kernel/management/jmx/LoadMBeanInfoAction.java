@@ -12,25 +12,23 @@
  * details.
  */
 
-package com.liferay.portal.kernel.management.action.jmx;
+package com.liferay.portal.kernel.management.jmx;
 
 import com.liferay.portal.kernel.jmx.model.MBean;
 import com.liferay.portal.kernel.management.ManageActionException;
 
-import javax.management.AttributeList;
-import javax.management.MBeanAttributeInfo;
 import javax.management.MBeanInfo;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
 /**
- * <a href="GetAttributesAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="LoadMBeanInfoAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
  */
-public class GetAttributesAction extends BaseJMXManageAction {
+public class LoadMBeanInfoAction extends BaseJMXManageAction {
 
-	public GetAttributesAction(MBean mBean) {
+	public LoadMBeanInfoAction(MBean mBean) {
 		_mBean = mBean;
 	}
 
@@ -42,28 +40,17 @@ public class GetAttributesAction extends BaseJMXManageAction {
 
 			MBeanInfo mBeanInfo = mBeanServer.getMBeanInfo(objectName);
 
-			MBeanAttributeInfo[] mBeanAttributeInfos =
-				mBeanInfo.getAttributes();
-
-			String[] attributeNames = new String[mBeanAttributeInfos.length];
-
-			for (int i = 0; i < attributeNames.length; i++) {
-				attributeNames[i] = mBeanAttributeInfos[i].getName();
-			}
-
-			_attributeList = mBeanServer.getAttributes(
-				objectName, attributeNames);
+			_mBean = new MBean(objectName, mBeanInfo);
 		}
 		catch (Exception e) {
 			throw new ManageActionException(e);
 		}
 	}
 
-	public AttributeList getAttributeList() {
-		return _attributeList;
+	public MBean getMBean() {
+		return _mBean;
 	}
 
-	private AttributeList _attributeList;
 	private MBean _mBean;
 
 }

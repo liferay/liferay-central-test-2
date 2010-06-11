@@ -12,51 +12,52 @@
  * details.
  */
 
-package com.liferay.portal.kernel.management.action.jmx;
+package com.liferay.portal.kernel.management.jmx;
 
+import com.liferay.portal.kernel.jmx.model.MBean;
 import com.liferay.portal.kernel.management.ManageActionException;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.management.MBeanServer;
+import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 
 /**
- * <a href="DoOperationAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="ListMBeansAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
  */
-public class DoOperationAction extends BaseJMXManageAction {
+public class ListMBeansAction extends BaseJMXManageAction {
 
-	public DoOperationAction(
-		ObjectName objectName, String operationName, Object[] parameters,
-		String[] signature) {
-
-		_objectName = objectName;
-		_operationName = operationName;
-		_parameters = parameters;
-		_signature = signature;
+	public ListMBeansAction(String domainName) {
+		_domainName = domainName;
 	}
 
 	public void action() throws ManageActionException {
 		try {
 			MBeanServer mBeanServer = getMBeanServer();
 
-			_result = mBeanServer.invoke(
-				_objectName, _operationName, _parameters, _signature);
+			Set<ObjectName> objectNames = mBeanServer.queryNames(
+				null, new ObjectName(_domainName.concat(":*")));
 
+			_mBeans = new HashSet<MBean>(objectNames.size());
+
+			for (ObjectName objectName : objectNames) {
+				_mBeans.add(new MBean(objectName));
+			}
 		}
-		catch (Exception e) {
-			throw new ManageActionException(e);
+		catch (MalformedObjectNameException mone) {
+			throw new ManageActionException(mone);
 		}
 	}
 
-	public Object getResult() {
-		return _result;
+	public Set<MBean> getMBeans() {
+		return _mBeans;
 	}
 
-	private ObjectName _objectName;
-	private String _operationName;
-	private Object[] _parameters;
-	private Object _result;
-	private String[] _signature;
+	private String _domainName;
+	private Set<MBean> _mBeans;
 
 }

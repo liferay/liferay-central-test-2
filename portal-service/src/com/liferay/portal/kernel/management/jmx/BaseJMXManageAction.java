@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.management.action.jmx;
+package com.liferay.portal.kernel.management.jmx;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.management.ManageAction;
