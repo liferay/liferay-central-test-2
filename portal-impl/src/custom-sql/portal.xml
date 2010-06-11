@@ -232,7 +232,7 @@
 		<![CDATA[
 			INNER JOIN
 				ResourcePermission ON
-					(ResourcePermission.primKey = Group_.groupId)
+					(ResourcePermission.primKey = CAST(Group_.groupId AS CHAR(255)))
 			INNER JOIN
 				ResourceAction ON
 					(ResourceAction.name = ResourcePermission.name)
