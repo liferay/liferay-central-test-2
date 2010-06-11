@@ -53,7 +53,7 @@ public class ViewEntryDisplayStyleTitleTest extends BaseTestCase {
 		selenium.clickAt("//div[2]/div[3]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Title"),
-			selenium.getText("//form/div/div[1]/div[1]"));
+			selenium.getText("//span/span/span"));
 		assertEquals(RuntimeVariables.replace("Content."),
 			selenium.getText("//p"));
 	}

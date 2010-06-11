@@ -29,24 +29,29 @@
 	<td>Test Entry</td>
 </tr>
 <tr>
-	<td>assertPartialText</td>
-	<td>//div[2]/div[3]/a</td>
-	<td>Read More</td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>link=Test Entry</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//div[2]/div[3]</td>
+	<td>This is a test entry comment! <br /> Read More About Test Entry »</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//form/div/div[1]/div[1]</td>
+	<td>//div[2]/div[3]/a</td>
+	<td>Read More About Test Entry »</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//div[2]/div[3]/a</td>
+	<td>Read More »</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//span/span/span</td>
 	<td>Test Entry</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//form/div/div[3]</td>
-	<td>This is a test entry comment! <br /> Read More About Test Entry »</td>
+	<td>This is a test entry comment!</td>
 </tr>
 
 </tbody></table>

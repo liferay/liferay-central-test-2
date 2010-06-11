@@ -52,5 +52,11 @@ public class ViewEntryDisplayStyleAbstractTest extends BaseTestCase {
 			selenium.getText("//div[2]/div[3]"));
 		assertEquals(RuntimeVariables.replace("Read More About Title \u00bb"),
 			selenium.getText("//div[2]/div[3]/a"));
+		selenium.clickAt("//div[2]/div[3]/a", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("Title"),
+			selenium.getText("//span/span/span"));
+		assertEquals(RuntimeVariables.replace("Content."),
+			selenium.getText("//p"));
 	}
 }
