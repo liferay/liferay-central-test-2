@@ -192,20 +192,6 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 		}
 	}
 
-	public PollsVote remove(PollsVote pollsVote) throws SystemException {
-		for (ModelListener<PollsVote> listener : listeners) {
-			listener.onBeforeRemove(pollsVote);
-		}
-
-		pollsVote = removeImpl(pollsVote);
-
-		for (ModelListener<PollsVote> listener : listeners) {
-			listener.onAfterRemove(pollsVote);
-		}
-
-		return pollsVote;
-	}
-
 	protected PollsVote removeImpl(PollsVote pollsVote)
 		throws SystemException {
 		pollsVote = toUnwrappedModel(pollsVote);

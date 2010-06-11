@@ -223,21 +223,6 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		}
 	}
 
-	public BlogsStatsUser remove(BlogsStatsUser blogsStatsUser)
-		throws SystemException {
-		for (ModelListener<BlogsStatsUser> listener : listeners) {
-			listener.onBeforeRemove(blogsStatsUser);
-		}
-
-		blogsStatsUser = removeImpl(blogsStatsUser);
-
-		for (ModelListener<BlogsStatsUser> listener : listeners) {
-			listener.onAfterRemove(blogsStatsUser);
-		}
-
-		return blogsStatsUser;
-	}
-
 	protected BlogsStatsUser removeImpl(BlogsStatsUser blogsStatsUser)
 		throws SystemException {
 		blogsStatsUser = toUnwrappedModel(blogsStatsUser);

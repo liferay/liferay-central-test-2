@@ -215,21 +215,6 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		}
 	}
 
-	public EmailAddress remove(EmailAddress emailAddress)
-		throws SystemException {
-		for (ModelListener<EmailAddress> listener : listeners) {
-			listener.onBeforeRemove(emailAddress);
-		}
-
-		emailAddress = removeImpl(emailAddress);
-
-		for (ModelListener<EmailAddress> listener : listeners) {
-			listener.onAfterRemove(emailAddress);
-		}
-
-		return emailAddress;
-	}
-
 	protected EmailAddress removeImpl(EmailAddress emailAddress)
 		throws SystemException {
 		emailAddress = toUnwrappedModel(emailAddress);

@@ -225,20 +225,6 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		}
 	}
 
-	public MBCategory remove(MBCategory mbCategory) throws SystemException {
-		for (ModelListener<MBCategory> listener : listeners) {
-			listener.onBeforeRemove(mbCategory);
-		}
-
-		mbCategory = removeImpl(mbCategory);
-
-		for (ModelListener<MBCategory> listener : listeners) {
-			listener.onAfterRemove(mbCategory);
-		}
-
-		return mbCategory;
-	}
-
 	protected MBCategory removeImpl(MBCategory mbCategory)
 		throws SystemException {
 		mbCategory = toUnwrappedModel(mbCategory);

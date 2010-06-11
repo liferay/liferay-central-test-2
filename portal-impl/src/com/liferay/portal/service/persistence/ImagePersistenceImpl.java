@@ -156,20 +156,6 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		}
 	}
 
-	public Image remove(Image image) throws SystemException {
-		for (ModelListener<Image> listener : listeners) {
-			listener.onBeforeRemove(image);
-		}
-
-		image = removeImpl(image);
-
-		for (ModelListener<Image> listener : listeners) {
-			listener.onAfterRemove(image);
-		}
-
-		return image;
-	}
-
 	protected Image removeImpl(Image image) throws SystemException {
 		image = toUnwrappedModel(image);
 

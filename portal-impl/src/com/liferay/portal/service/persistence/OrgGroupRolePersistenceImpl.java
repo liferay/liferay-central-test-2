@@ -170,21 +170,6 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 		}
 	}
 
-	public OrgGroupRole remove(OrgGroupRole orgGroupRole)
-		throws SystemException {
-		for (ModelListener<OrgGroupRole> listener : listeners) {
-			listener.onBeforeRemove(orgGroupRole);
-		}
-
-		orgGroupRole = removeImpl(orgGroupRole);
-
-		for (ModelListener<OrgGroupRole> listener : listeners) {
-			listener.onAfterRemove(orgGroupRole);
-		}
-
-		return orgGroupRole;
-	}
-
 	protected OrgGroupRole removeImpl(OrgGroupRole orgGroupRole)
 		throws SystemException {
 		orgGroupRole = toUnwrappedModel(orgGroupRole);

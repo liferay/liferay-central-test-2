@@ -308,21 +308,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 		}
 	}
 
-	public DLFileEntry remove(DLFileEntry dlFileEntry)
-		throws SystemException {
-		for (ModelListener<DLFileEntry> listener : listeners) {
-			listener.onBeforeRemove(dlFileEntry);
-		}
-
-		dlFileEntry = removeImpl(dlFileEntry);
-
-		for (ModelListener<DLFileEntry> listener : listeners) {
-			listener.onAfterRemove(dlFileEntry);
-		}
-
-		return dlFileEntry;
-	}
-
 	protected DLFileEntry removeImpl(DLFileEntry dlFileEntry)
 		throws SystemException {
 		dlFileEntry = toUnwrappedModel(dlFileEntry);

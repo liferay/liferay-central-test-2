@@ -169,20 +169,6 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		}
 	}
 
-	public AssetTag remove(AssetTag assetTag) throws SystemException {
-		for (ModelListener<AssetTag> listener : listeners) {
-			listener.onBeforeRemove(assetTag);
-		}
-
-		assetTag = removeImpl(assetTag);
-
-		for (ModelListener<AssetTag> listener : listeners) {
-			listener.onAfterRemove(assetTag);
-		}
-
-		return assetTag;
-	}
-
 	protected AssetTag removeImpl(AssetTag assetTag) throws SystemException {
 		assetTag = toUnwrappedModel(assetTag);
 

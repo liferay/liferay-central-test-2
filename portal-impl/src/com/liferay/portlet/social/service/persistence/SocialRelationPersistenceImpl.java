@@ -288,21 +288,6 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		}
 	}
 
-	public SocialRelation remove(SocialRelation socialRelation)
-		throws SystemException {
-		for (ModelListener<SocialRelation> listener : listeners) {
-			listener.onBeforeRemove(socialRelation);
-		}
-
-		socialRelation = removeImpl(socialRelation);
-
-		for (ModelListener<SocialRelation> listener : listeners) {
-			listener.onAfterRemove(socialRelation);
-		}
-
-		return socialRelation;
-	}
-
 	protected SocialRelation removeImpl(SocialRelation socialRelation)
 		throws SystemException {
 		socialRelation = toUnwrappedModel(socialRelation);

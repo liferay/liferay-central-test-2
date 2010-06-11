@@ -164,21 +164,6 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 		}
 	}
 
-	public WebDAVProps remove(WebDAVProps webDAVProps)
-		throws SystemException {
-		for (ModelListener<WebDAVProps> listener : listeners) {
-			listener.onBeforeRemove(webDAVProps);
-		}
-
-		webDAVProps = removeImpl(webDAVProps);
-
-		for (ModelListener<WebDAVProps> listener : listeners) {
-			listener.onAfterRemove(webDAVProps);
-		}
-
-		return webDAVProps;
-	}
-
 	protected WebDAVProps removeImpl(WebDAVProps webDAVProps)
 		throws SystemException {
 		webDAVProps = toUnwrappedModel(webDAVProps);

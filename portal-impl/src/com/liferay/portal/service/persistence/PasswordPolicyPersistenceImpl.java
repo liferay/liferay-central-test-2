@@ -190,21 +190,6 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		}
 	}
 
-	public PasswordPolicy remove(PasswordPolicy passwordPolicy)
-		throws SystemException {
-		for (ModelListener<PasswordPolicy> listener : listeners) {
-			listener.onBeforeRemove(passwordPolicy);
-		}
-
-		passwordPolicy = removeImpl(passwordPolicy);
-
-		for (ModelListener<PasswordPolicy> listener : listeners) {
-			listener.onAfterRemove(passwordPolicy);
-		}
-
-		return passwordPolicy;
-	}
-
 	protected PasswordPolicy removeImpl(PasswordPolicy passwordPolicy)
 		throws SystemException {
 		passwordPolicy = toUnwrappedModel(passwordPolicy);

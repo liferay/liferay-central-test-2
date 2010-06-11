@@ -321,20 +321,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		}
 	}
 
-	public User remove(User user) throws SystemException {
-		for (ModelListener<User> listener : listeners) {
-			listener.onBeforeRemove(user);
-		}
-
-		user = removeImpl(user);
-
-		for (ModelListener<User> listener : listeners) {
-			listener.onAfterRemove(user);
-		}
-
-		return user;
-	}
-
 	protected User removeImpl(User user) throws SystemException {
 		user = toUnwrappedModel(user);
 

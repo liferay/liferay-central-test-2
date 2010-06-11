@@ -212,21 +212,6 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		}
 	}
 
-	public UserGroupRole remove(UserGroupRole userGroupRole)
-		throws SystemException {
-		for (ModelListener<UserGroupRole> listener : listeners) {
-			listener.onBeforeRemove(userGroupRole);
-		}
-
-		userGroupRole = removeImpl(userGroupRole);
-
-		for (ModelListener<UserGroupRole> listener : listeners) {
-			listener.onAfterRemove(userGroupRole);
-		}
-
-		return userGroupRole;
-	}
-
 	protected UserGroupRole removeImpl(UserGroupRole userGroupRole)
 		throws SystemException {
 		userGroupRole = toUnwrappedModel(userGroupRole);

@@ -256,21 +256,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
-	public DLFileShortcut remove(DLFileShortcut dlFileShortcut)
-		throws SystemException {
-		for (ModelListener<DLFileShortcut> listener : listeners) {
-			listener.onBeforeRemove(dlFileShortcut);
-		}
-
-		dlFileShortcut = removeImpl(dlFileShortcut);
-
-		for (ModelListener<DLFileShortcut> listener : listeners) {
-			listener.onAfterRemove(dlFileShortcut);
-		}
-
-		return dlFileShortcut;
-	}
-
 	protected DLFileShortcut removeImpl(DLFileShortcut dlFileShortcut)
 		throws SystemException {
 		dlFileShortcut = toUnwrappedModel(dlFileShortcut);

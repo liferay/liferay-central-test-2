@@ -215,21 +215,6 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 		}
 	}
 
-	public SCProductScreenshot remove(SCProductScreenshot scProductScreenshot)
-		throws SystemException {
-		for (ModelListener<SCProductScreenshot> listener : listeners) {
-			listener.onBeforeRemove(scProductScreenshot);
-		}
-
-		scProductScreenshot = removeImpl(scProductScreenshot);
-
-		for (ModelListener<SCProductScreenshot> listener : listeners) {
-			listener.onAfterRemove(scProductScreenshot);
-		}
-
-		return scProductScreenshot;
-	}
-
 	protected SCProductScreenshot removeImpl(
 		SCProductScreenshot scProductScreenshot) throws SystemException {
 		scProductScreenshot = toUnwrappedModel(scProductScreenshot);

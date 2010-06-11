@@ -163,21 +163,6 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 		}
 	}
 
-	public ShoppingItemPrice remove(ShoppingItemPrice shoppingItemPrice)
-		throws SystemException {
-		for (ModelListener<ShoppingItemPrice> listener : listeners) {
-			listener.onBeforeRemove(shoppingItemPrice);
-		}
-
-		shoppingItemPrice = removeImpl(shoppingItemPrice);
-
-		for (ModelListener<ShoppingItemPrice> listener : listeners) {
-			listener.onAfterRemove(shoppingItemPrice);
-		}
-
-		return shoppingItemPrice;
-	}
-
 	protected ShoppingItemPrice removeImpl(ShoppingItemPrice shoppingItemPrice)
 		throws SystemException {
 		shoppingItemPrice = toUnwrappedModel(shoppingItemPrice);

@@ -205,22 +205,6 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		}
 	}
 
-	public WorkflowDefinitionLink remove(
-		WorkflowDefinitionLink workflowDefinitionLink)
-		throws SystemException {
-		for (ModelListener<WorkflowDefinitionLink> listener : listeners) {
-			listener.onBeforeRemove(workflowDefinitionLink);
-		}
-
-		workflowDefinitionLink = removeImpl(workflowDefinitionLink);
-
-		for (ModelListener<WorkflowDefinitionLink> listener : listeners) {
-			listener.onAfterRemove(workflowDefinitionLink);
-		}
-
-		return workflowDefinitionLink;
-	}
-
 	protected WorkflowDefinitionLink removeImpl(
 		WorkflowDefinitionLink workflowDefinitionLink)
 		throws SystemException {

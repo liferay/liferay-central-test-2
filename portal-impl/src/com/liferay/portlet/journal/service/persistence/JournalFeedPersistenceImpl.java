@@ -221,21 +221,6 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		}
 	}
 
-	public JournalFeed remove(JournalFeed journalFeed)
-		throws SystemException {
-		for (ModelListener<JournalFeed> listener : listeners) {
-			listener.onBeforeRemove(journalFeed);
-		}
-
-		journalFeed = removeImpl(journalFeed);
-
-		for (ModelListener<JournalFeed> listener : listeners) {
-			listener.onAfterRemove(journalFeed);
-		}
-
-		return journalFeed;
-	}
-
 	protected JournalFeed removeImpl(JournalFeed journalFeed)
 		throws SystemException {
 		journalFeed = toUnwrappedModel(journalFeed);

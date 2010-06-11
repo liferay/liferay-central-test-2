@@ -177,20 +177,6 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		}
 	}
 
-	public Team remove(Team team) throws SystemException {
-		for (ModelListener<Team> listener : listeners) {
-			listener.onBeforeRemove(team);
-		}
-
-		team = removeImpl(team);
-
-		for (ModelListener<Team> listener : listeners) {
-			listener.onAfterRemove(team);
-		}
-
-		return team;
-	}
-
 	protected Team removeImpl(Team team) throws SystemException {
 		team = toUnwrappedModel(team);
 

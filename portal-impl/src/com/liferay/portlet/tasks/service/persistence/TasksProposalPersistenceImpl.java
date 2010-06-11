@@ -203,21 +203,6 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 		}
 	}
 
-	public TasksProposal remove(TasksProposal tasksProposal)
-		throws SystemException {
-		for (ModelListener<TasksProposal> listener : listeners) {
-			listener.onBeforeRemove(tasksProposal);
-		}
-
-		tasksProposal = removeImpl(tasksProposal);
-
-		for (ModelListener<TasksProposal> listener : listeners) {
-			listener.onAfterRemove(tasksProposal);
-		}
-
-		return tasksProposal;
-	}
-
 	protected TasksProposal removeImpl(TasksProposal tasksProposal)
 		throws SystemException {
 		tasksProposal = toUnwrappedModel(tasksProposal);

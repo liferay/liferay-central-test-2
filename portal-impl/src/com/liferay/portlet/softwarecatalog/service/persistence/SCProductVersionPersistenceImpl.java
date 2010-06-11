@@ -188,21 +188,6 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 		}
 	}
 
-	public SCProductVersion remove(SCProductVersion scProductVersion)
-		throws SystemException {
-		for (ModelListener<SCProductVersion> listener : listeners) {
-			listener.onBeforeRemove(scProductVersion);
-		}
-
-		scProductVersion = removeImpl(scProductVersion);
-
-		for (ModelListener<SCProductVersion> listener : listeners) {
-			listener.onAfterRemove(scProductVersion);
-		}
-
-		return scProductVersion;
-	}
-
 	protected SCProductVersion removeImpl(SCProductVersion scProductVersion)
 		throws SystemException {
 		scProductVersion = toUnwrappedModel(scProductVersion);

@@ -228,20 +228,6 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		}
 	}
 
-	public AssetLink remove(AssetLink assetLink) throws SystemException {
-		for (ModelListener<AssetLink> listener : listeners) {
-			listener.onBeforeRemove(assetLink);
-		}
-
-		assetLink = removeImpl(assetLink);
-
-		for (ModelListener<AssetLink> listener : listeners) {
-			listener.onAfterRemove(assetLink);
-		}
-
-		return assetLink;
-	}
-
 	protected AssetLink removeImpl(AssetLink assetLink)
 		throws SystemException {
 		assetLink = toUnwrappedModel(assetLink);

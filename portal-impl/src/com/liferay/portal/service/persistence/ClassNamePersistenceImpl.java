@@ -157,20 +157,6 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 		}
 	}
 
-	public ClassName remove(ClassName className) throws SystemException {
-		for (ModelListener<ClassName> listener : listeners) {
-			listener.onBeforeRemove(className);
-		}
-
-		className = removeImpl(className);
-
-		for (ModelListener<ClassName> listener : listeners) {
-			listener.onAfterRemove(className);
-		}
-
-		return className;
-	}
-
 	protected ClassName removeImpl(ClassName className)
 		throws SystemException {
 		className = toUnwrappedModel(className);

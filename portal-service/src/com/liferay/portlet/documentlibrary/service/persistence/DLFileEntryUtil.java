@@ -17,6 +17,8 @@ package com.liferay.portlet.documentlibrary.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 
@@ -76,6 +78,17 @@ public class DLFileEntryUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int, OrderByComparator)
+	 */
+	public static List<DLFileEntry> findWithDynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		return getPersistence()
+				   .findWithDynamicQuery(dynamicQuery, start, end,
+			orderByComparator);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
 	 */
 	public static DLFileEntry remove(DLFileEntry dlFileEntry)
@@ -89,6 +102,14 @@ public class DLFileEntryUtil {
 	public static DLFileEntry update(DLFileEntry dlFileEntry, boolean merge)
 		throws SystemException {
 		return getPersistence().update(dlFileEntry, merge);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean, ServiceContext)
+	 */
+	public static DLFileEntry update(DLFileEntry dlFileEntry, boolean merge,
+		ServiceContext serviceContext) throws SystemException {
+		return getPersistence().update(dlFileEntry, merge, serviceContext);
 	}
 
 	public static void cacheResult(

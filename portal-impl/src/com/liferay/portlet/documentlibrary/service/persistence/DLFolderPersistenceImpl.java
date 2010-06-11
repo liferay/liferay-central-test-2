@@ -268,20 +268,6 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 		}
 	}
 
-	public DLFolder remove(DLFolder dlFolder) throws SystemException {
-		for (ModelListener<DLFolder> listener : listeners) {
-			listener.onBeforeRemove(dlFolder);
-		}
-
-		dlFolder = removeImpl(dlFolder);
-
-		for (ModelListener<DLFolder> listener : listeners) {
-			listener.onAfterRemove(dlFolder);
-		}
-
-		return dlFolder;
-	}
-
 	protected DLFolder removeImpl(DLFolder dlFolder) throws SystemException {
 		dlFolder = toUnwrappedModel(dlFolder);
 

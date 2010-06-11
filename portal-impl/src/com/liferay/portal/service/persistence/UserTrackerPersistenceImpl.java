@@ -180,21 +180,6 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		}
 	}
 
-	public UserTracker remove(UserTracker userTracker)
-		throws SystemException {
-		for (ModelListener<UserTracker> listener : listeners) {
-			listener.onBeforeRemove(userTracker);
-		}
-
-		userTracker = removeImpl(userTracker);
-
-		for (ModelListener<UserTracker> listener : listeners) {
-			listener.onAfterRemove(userTracker);
-		}
-
-		return userTracker;
-	}
-
 	protected UserTracker removeImpl(UserTracker userTracker)
 		throws SystemException {
 		userTracker = toUnwrappedModel(userTracker);

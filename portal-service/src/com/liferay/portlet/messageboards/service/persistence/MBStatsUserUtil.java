@@ -17,6 +17,8 @@ package com.liferay.portlet.messageboards.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.messageboards.model.MBStatsUser;
 
@@ -76,6 +78,17 @@ public class MBStatsUserUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int, OrderByComparator)
+	 */
+	public static List<MBStatsUser> findWithDynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		return getPersistence()
+				   .findWithDynamicQuery(dynamicQuery, start, end,
+			orderByComparator);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
 	 */
 	public static MBStatsUser remove(MBStatsUser mbStatsUser)
@@ -89,6 +102,14 @@ public class MBStatsUserUtil {
 	public static MBStatsUser update(MBStatsUser mbStatsUser, boolean merge)
 		throws SystemException {
 		return getPersistence().update(mbStatsUser, merge);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean, ServiceContext)
+	 */
+	public static MBStatsUser update(MBStatsUser mbStatsUser, boolean merge,
+		ServiceContext serviceContext) throws SystemException {
+		return getPersistence().update(mbStatsUser, merge, serviceContext);
 	}
 
 	public static void cacheResult(

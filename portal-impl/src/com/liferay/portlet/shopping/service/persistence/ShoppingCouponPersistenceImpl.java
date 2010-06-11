@@ -178,21 +178,6 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 		}
 	}
 
-	public ShoppingCoupon remove(ShoppingCoupon shoppingCoupon)
-		throws SystemException {
-		for (ModelListener<ShoppingCoupon> listener : listeners) {
-			listener.onBeforeRemove(shoppingCoupon);
-		}
-
-		shoppingCoupon = removeImpl(shoppingCoupon);
-
-		for (ModelListener<ShoppingCoupon> listener : listeners) {
-			listener.onAfterRemove(shoppingCoupon);
-		}
-
-		return shoppingCoupon;
-	}
-
 	protected ShoppingCoupon removeImpl(ShoppingCoupon shoppingCoupon)
 		throws SystemException {
 		shoppingCoupon = toUnwrappedModel(shoppingCoupon);

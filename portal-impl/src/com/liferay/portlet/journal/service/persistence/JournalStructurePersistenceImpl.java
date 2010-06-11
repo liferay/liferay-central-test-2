@@ -254,21 +254,6 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		}
 	}
 
-	public JournalStructure remove(JournalStructure journalStructure)
-		throws SystemException {
-		for (ModelListener<JournalStructure> listener : listeners) {
-			listener.onBeforeRemove(journalStructure);
-		}
-
-		journalStructure = removeImpl(journalStructure);
-
-		for (ModelListener<JournalStructure> listener : listeners) {
-			listener.onAfterRemove(journalStructure);
-		}
-
-		return journalStructure;
-	}
-
 	protected JournalStructure removeImpl(JournalStructure journalStructure)
 		throws SystemException {
 		journalStructure = toUnwrappedModel(journalStructure);

@@ -185,21 +185,6 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		}
 	}
 
-	public SocialEquityLog remove(SocialEquityLog socialEquityLog)
-		throws SystemException {
-		for (ModelListener<SocialEquityLog> listener : listeners) {
-			listener.onBeforeRemove(socialEquityLog);
-		}
-
-		socialEquityLog = removeImpl(socialEquityLog);
-
-		for (ModelListener<SocialEquityLog> listener : listeners) {
-			listener.onAfterRemove(socialEquityLog);
-		}
-
-		return socialEquityLog;
-	}
-
 	protected SocialEquityLog removeImpl(SocialEquityLog socialEquityLog)
 		throws SystemException {
 		socialEquityLog = toUnwrappedModel(socialEquityLog);

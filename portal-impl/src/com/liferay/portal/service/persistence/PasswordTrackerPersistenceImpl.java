@@ -160,21 +160,6 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 		}
 	}
 
-	public PasswordTracker remove(PasswordTracker passwordTracker)
-		throws SystemException {
-		for (ModelListener<PasswordTracker> listener : listeners) {
-			listener.onBeforeRemove(passwordTracker);
-		}
-
-		passwordTracker = removeImpl(passwordTracker);
-
-		for (ModelListener<PasswordTracker> listener : listeners) {
-			listener.onAfterRemove(passwordTracker);
-		}
-
-		return passwordTracker;
-	}
-
 	protected PasswordTracker removeImpl(PasswordTracker passwordTracker)
 		throws SystemException {
 		passwordTracker = toUnwrappedModel(passwordTracker);

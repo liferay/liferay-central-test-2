@@ -231,21 +231,6 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 		}
 	}
 
-	public BookmarksEntry remove(BookmarksEntry bookmarksEntry)
-		throws SystemException {
-		for (ModelListener<BookmarksEntry> listener : listeners) {
-			listener.onBeforeRemove(bookmarksEntry);
-		}
-
-		bookmarksEntry = removeImpl(bookmarksEntry);
-
-		for (ModelListener<BookmarksEntry> listener : listeners) {
-			listener.onAfterRemove(bookmarksEntry);
-		}
-
-		return bookmarksEntry;
-	}
-
 	protected BookmarksEntry removeImpl(BookmarksEntry bookmarksEntry)
 		throws SystemException {
 		bookmarksEntry = toUnwrappedModel(bookmarksEntry);

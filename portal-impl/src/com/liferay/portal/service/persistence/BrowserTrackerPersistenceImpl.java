@@ -162,21 +162,6 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 		}
 	}
 
-	public BrowserTracker remove(BrowserTracker browserTracker)
-		throws SystemException {
-		for (ModelListener<BrowserTracker> listener : listeners) {
-			listener.onBeforeRemove(browserTracker);
-		}
-
-		browserTracker = removeImpl(browserTracker);
-
-		for (ModelListener<BrowserTracker> listener : listeners) {
-			listener.onAfterRemove(browserTracker);
-		}
-
-		return browserTracker;
-	}
-
 	protected BrowserTracker removeImpl(BrowserTracker browserTracker)
 		throws SystemException {
 		browserTracker = toUnwrappedModel(browserTracker);

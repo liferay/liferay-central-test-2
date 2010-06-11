@@ -168,22 +168,6 @@ public class SocialEquityAssetEntryPersistenceImpl extends BasePersistenceImpl<S
 		}
 	}
 
-	public SocialEquityAssetEntry remove(
-		SocialEquityAssetEntry socialEquityAssetEntry)
-		throws SystemException {
-		for (ModelListener<SocialEquityAssetEntry> listener : listeners) {
-			listener.onBeforeRemove(socialEquityAssetEntry);
-		}
-
-		socialEquityAssetEntry = removeImpl(socialEquityAssetEntry);
-
-		for (ModelListener<SocialEquityAssetEntry> listener : listeners) {
-			listener.onAfterRemove(socialEquityAssetEntry);
-		}
-
-		return socialEquityAssetEntry;
-	}
-
 	protected SocialEquityAssetEntry removeImpl(
 		SocialEquityAssetEntry socialEquityAssetEntry)
 		throws SystemException {

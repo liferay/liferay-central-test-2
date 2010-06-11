@@ -183,20 +183,6 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 		}
 	}
 
-	public Permission remove(Permission permission) throws SystemException {
-		for (ModelListener<Permission> listener : listeners) {
-			listener.onBeforeRemove(permission);
-		}
-
-		permission = removeImpl(permission);
-
-		for (ModelListener<Permission> listener : listeners) {
-			listener.onAfterRemove(permission);
-		}
-
-		return permission;
-	}
-
 	protected Permission removeImpl(Permission permission)
 		throws SystemException {
 		permission = toUnwrappedModel(permission);

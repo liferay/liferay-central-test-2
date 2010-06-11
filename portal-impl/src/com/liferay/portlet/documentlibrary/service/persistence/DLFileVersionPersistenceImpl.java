@@ -220,21 +220,6 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		}
 	}
 
-	public DLFileVersion remove(DLFileVersion dlFileVersion)
-		throws SystemException {
-		for (ModelListener<DLFileVersion> listener : listeners) {
-			listener.onBeforeRemove(dlFileVersion);
-		}
-
-		dlFileVersion = removeImpl(dlFileVersion);
-
-		for (ModelListener<DLFileVersion> listener : listeners) {
-			listener.onAfterRemove(dlFileVersion);
-		}
-
-		return dlFileVersion;
-	}
-
 	protected DLFileVersion removeImpl(DLFileVersion dlFileVersion)
 		throws SystemException {
 		dlFileVersion = toUnwrappedModel(dlFileVersion);

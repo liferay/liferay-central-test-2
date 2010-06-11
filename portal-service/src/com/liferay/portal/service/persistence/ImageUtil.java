@@ -17,7 +17,9 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Image;
+import com.liferay.portal.service.ServiceContext;
 
 import java.util.List;
 
@@ -74,6 +76,17 @@ public class ImageUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int, OrderByComparator)
+	 */
+	public static List<Image> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		return getPersistence()
+				   .findWithDynamicQuery(dynamicQuery, start, end,
+			orderByComparator);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
 	 */
 	public static Image remove(Image image) throws SystemException {
@@ -86,6 +99,14 @@ public class ImageUtil {
 	public static Image update(Image image, boolean merge)
 		throws SystemException {
 		return getPersistence().update(image, merge);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean, ServiceContext)
+	 */
+	public static Image update(Image image, boolean merge,
+		ServiceContext serviceContext) throws SystemException {
+		return getPersistence().update(image, merge, serviceContext);
 	}
 
 	public static void cacheResult(com.liferay.portal.model.Image image) {

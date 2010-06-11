@@ -205,21 +205,6 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 		}
 	}
 
-	public MBStatsUser remove(MBStatsUser mbStatsUser)
-		throws SystemException {
-		for (ModelListener<MBStatsUser> listener : listeners) {
-			listener.onBeforeRemove(mbStatsUser);
-		}
-
-		mbStatsUser = removeImpl(mbStatsUser);
-
-		for (ModelListener<MBStatsUser> listener : listeners) {
-			listener.onAfterRemove(mbStatsUser);
-		}
-
-		return mbStatsUser;
-	}
-
 	protected MBStatsUser removeImpl(MBStatsUser mbStatsUser)
 		throws SystemException {
 		mbStatsUser = toUnwrappedModel(mbStatsUser);

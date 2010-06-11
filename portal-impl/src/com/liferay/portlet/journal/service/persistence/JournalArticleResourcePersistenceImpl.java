@@ -189,22 +189,6 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 		}
 	}
 
-	public JournalArticleResource remove(
-		JournalArticleResource journalArticleResource)
-		throws SystemException {
-		for (ModelListener<JournalArticleResource> listener : listeners) {
-			listener.onBeforeRemove(journalArticleResource);
-		}
-
-		journalArticleResource = removeImpl(journalArticleResource);
-
-		for (ModelListener<JournalArticleResource> listener : listeners) {
-			listener.onAfterRemove(journalArticleResource);
-		}
-
-		return journalArticleResource;
-	}
-
 	protected JournalArticleResource removeImpl(
 		JournalArticleResource journalArticleResource)
 		throws SystemException {

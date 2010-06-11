@@ -142,20 +142,6 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 		}
 	}
 
-	public Account remove(Account account) throws SystemException {
-		for (ModelListener<Account> listener : listeners) {
-			listener.onBeforeRemove(account);
-		}
-
-		account = removeImpl(account);
-
-		for (ModelListener<Account> listener : listeners) {
-			listener.onAfterRemove(account);
-		}
-
-		return account;
-	}
-
 	protected Account removeImpl(Account account) throws SystemException {
 		account = toUnwrappedModel(account);
 

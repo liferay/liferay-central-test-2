@@ -298,21 +298,6 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
-	public SocialActivity remove(SocialActivity socialActivity)
-		throws SystemException {
-		for (ModelListener<SocialActivity> listener : listeners) {
-			listener.onBeforeRemove(socialActivity);
-		}
-
-		socialActivity = removeImpl(socialActivity);
-
-		for (ModelListener<SocialActivity> listener : listeners) {
-			listener.onAfterRemove(socialActivity);
-		}
-
-		return socialActivity;
-	}
-
 	protected SocialActivity removeImpl(SocialActivity socialActivity)
 		throws SystemException {
 		socialActivity = toUnwrappedModel(socialActivity);

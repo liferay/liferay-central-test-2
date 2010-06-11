@@ -17,7 +17,9 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.ClassName;
+import com.liferay.portal.service.ServiceContext;
 
 import java.util.List;
 
@@ -75,6 +77,17 @@ public class ClassNameUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int, OrderByComparator)
+	 */
+	public static List<ClassName> findWithDynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		return getPersistence()
+				   .findWithDynamicQuery(dynamicQuery, start, end,
+			orderByComparator);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
 	 */
 	public static ClassName remove(ClassName className)
@@ -88,6 +101,14 @@ public class ClassNameUtil {
 	public static ClassName update(ClassName className, boolean merge)
 		throws SystemException {
 		return getPersistence().update(className, merge);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean, ServiceContext)
+	 */
+	public static ClassName update(ClassName className, boolean merge,
+		ServiceContext serviceContext) throws SystemException {
+		return getPersistence().update(className, merge, serviceContext);
 	}
 
 	public static void cacheResult(com.liferay.portal.model.ClassName className) {

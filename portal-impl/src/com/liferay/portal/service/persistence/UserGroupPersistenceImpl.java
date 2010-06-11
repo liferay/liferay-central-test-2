@@ -193,20 +193,6 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		}
 	}
 
-	public UserGroup remove(UserGroup userGroup) throws SystemException {
-		for (ModelListener<UserGroup> listener : listeners) {
-			listener.onBeforeRemove(userGroup);
-		}
-
-		userGroup = removeImpl(userGroup);
-
-		for (ModelListener<UserGroup> listener : listeners) {
-			listener.onAfterRemove(userGroup);
-		}
-
-		return userGroup;
-	}
-
 	protected UserGroup removeImpl(UserGroup userGroup)
 		throws SystemException {
 		userGroup = toUnwrappedModel(userGroup);

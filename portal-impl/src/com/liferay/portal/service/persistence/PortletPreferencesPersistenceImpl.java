@@ -223,21 +223,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 		}
 	}
 
-	public PortletPreferences remove(PortletPreferences portletPreferences)
-		throws SystemException {
-		for (ModelListener<PortletPreferences> listener : listeners) {
-			listener.onBeforeRemove(portletPreferences);
-		}
-
-		portletPreferences = removeImpl(portletPreferences);
-
-		for (ModelListener<PortletPreferences> listener : listeners) {
-			listener.onAfterRemove(portletPreferences);
-		}
-
-		return portletPreferences;
-	}
-
 	protected PortletPreferences removeImpl(
 		PortletPreferences portletPreferences) throws SystemException {
 		portletPreferences = toUnwrappedModel(portletPreferences);

@@ -193,21 +193,6 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		}
 	}
 
-	public ExpandoTable remove(ExpandoTable expandoTable)
-		throws SystemException {
-		for (ModelListener<ExpandoTable> listener : listeners) {
-			listener.onBeforeRemove(expandoTable);
-		}
-
-		expandoTable = removeImpl(expandoTable);
-
-		for (ModelListener<ExpandoTable> listener : listeners) {
-			listener.onAfterRemove(expandoTable);
-		}
-
-		return expandoTable;
-	}
-
 	protected ExpandoTable removeImpl(ExpandoTable expandoTable)
 		throws SystemException {
 		expandoTable = toUnwrappedModel(expandoTable);

@@ -252,20 +252,6 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 	}
 
-	public CalEvent remove(CalEvent calEvent) throws SystemException {
-		for (ModelListener<CalEvent> listener : listeners) {
-			listener.onBeforeRemove(calEvent);
-		}
-
-		calEvent = removeImpl(calEvent);
-
-		for (ModelListener<CalEvent> listener : listeners) {
-			listener.onAfterRemove(calEvent);
-		}
-
-		return calEvent;
-	}
-
 	protected CalEvent removeImpl(CalEvent calEvent) throws SystemException {
 		calEvent = toUnwrappedModel(calEvent);
 

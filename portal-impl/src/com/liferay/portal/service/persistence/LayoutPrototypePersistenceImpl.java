@@ -173,21 +173,6 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 		}
 	}
 
-	public LayoutPrototype remove(LayoutPrototype layoutPrototype)
-		throws SystemException {
-		for (ModelListener<LayoutPrototype> listener : listeners) {
-			listener.onBeforeRemove(layoutPrototype);
-		}
-
-		layoutPrototype = removeImpl(layoutPrototype);
-
-		for (ModelListener<LayoutPrototype> listener : listeners) {
-			listener.onAfterRemove(layoutPrototype);
-		}
-
-		return layoutPrototype;
-	}
-
 	protected LayoutPrototype removeImpl(LayoutPrototype layoutPrototype)
 		throws SystemException {
 		layoutPrototype = toUnwrappedModel(layoutPrototype);

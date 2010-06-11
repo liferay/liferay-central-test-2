@@ -283,21 +283,6 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		}
 	}
 
-	public JournalContentSearch remove(
-		JournalContentSearch journalContentSearch) throws SystemException {
-		for (ModelListener<JournalContentSearch> listener : listeners) {
-			listener.onBeforeRemove(journalContentSearch);
-		}
-
-		journalContentSearch = removeImpl(journalContentSearch);
-
-		for (ModelListener<JournalContentSearch> listener : listeners) {
-			listener.onAfterRemove(journalContentSearch);
-		}
-
-		return journalContentSearch;
-	}
-
 	protected JournalContentSearch removeImpl(
 		JournalContentSearch journalContentSearch) throws SystemException {
 		journalContentSearch = toUnwrappedModel(journalContentSearch);

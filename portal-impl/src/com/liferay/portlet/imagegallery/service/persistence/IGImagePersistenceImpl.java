@@ -292,20 +292,6 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
-	public IGImage remove(IGImage igImage) throws SystemException {
-		for (ModelListener<IGImage> listener : listeners) {
-			listener.onBeforeRemove(igImage);
-		}
-
-		igImage = removeImpl(igImage);
-
-		for (ModelListener<IGImage> listener : listeners) {
-			listener.onAfterRemove(igImage);
-		}
-
-		return igImage;
-	}
-
 	protected IGImage removeImpl(IGImage igImage) throws SystemException {
 		igImage = toUnwrappedModel(igImage);
 

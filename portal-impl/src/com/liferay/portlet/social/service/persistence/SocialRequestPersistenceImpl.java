@@ -320,21 +320,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
-	public SocialRequest remove(SocialRequest socialRequest)
-		throws SystemException {
-		for (ModelListener<SocialRequest> listener : listeners) {
-			listener.onBeforeRemove(socialRequest);
-		}
-
-		socialRequest = removeImpl(socialRequest);
-
-		for (ModelListener<SocialRequest> listener : listeners) {
-			listener.onAfterRemove(socialRequest);
-		}
-
-		return socialRequest;
-	}
-
 	protected SocialRequest removeImpl(SocialRequest socialRequest)
 		throws SystemException {
 		socialRequest = toUnwrappedModel(socialRequest);

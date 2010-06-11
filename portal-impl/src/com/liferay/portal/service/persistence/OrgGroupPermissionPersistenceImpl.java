@@ -173,21 +173,6 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 		}
 	}
 
-	public OrgGroupPermission remove(OrgGroupPermission orgGroupPermission)
-		throws SystemException {
-		for (ModelListener<OrgGroupPermission> listener : listeners) {
-			listener.onBeforeRemove(orgGroupPermission);
-		}
-
-		orgGroupPermission = removeImpl(orgGroupPermission);
-
-		for (ModelListener<OrgGroupPermission> listener : listeners) {
-			listener.onAfterRemove(orgGroupPermission);
-		}
-
-		return orgGroupPermission;
-	}
-
 	protected OrgGroupPermission removeImpl(
 		OrgGroupPermission orgGroupPermission) throws SystemException {
 		orgGroupPermission = toUnwrappedModel(orgGroupPermission);

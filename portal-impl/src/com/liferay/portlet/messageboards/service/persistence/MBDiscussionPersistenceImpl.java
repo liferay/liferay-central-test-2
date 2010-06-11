@@ -194,21 +194,6 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 		}
 	}
 
-	public MBDiscussion remove(MBDiscussion mbDiscussion)
-		throws SystemException {
-		for (ModelListener<MBDiscussion> listener : listeners) {
-			listener.onBeforeRemove(mbDiscussion);
-		}
-
-		mbDiscussion = removeImpl(mbDiscussion);
-
-		for (ModelListener<MBDiscussion> listener : listeners) {
-			listener.onAfterRemove(mbDiscussion);
-		}
-
-		return mbDiscussion;
-	}
-
 	protected MBDiscussion removeImpl(MBDiscussion mbDiscussion)
 		throws SystemException {
 		mbDiscussion = toUnwrappedModel(mbDiscussion);

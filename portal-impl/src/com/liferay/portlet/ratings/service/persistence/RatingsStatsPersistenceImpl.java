@@ -169,21 +169,6 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 		}
 	}
 
-	public RatingsStats remove(RatingsStats ratingsStats)
-		throws SystemException {
-		for (ModelListener<RatingsStats> listener : listeners) {
-			listener.onBeforeRemove(ratingsStats);
-		}
-
-		ratingsStats = removeImpl(ratingsStats);
-
-		for (ModelListener<RatingsStats> listener : listeners) {
-			listener.onAfterRemove(ratingsStats);
-		}
-
-		return ratingsStats;
-	}
-
 	protected RatingsStats removeImpl(RatingsStats ratingsStats)
 		throws SystemException {
 		ratingsStats = toUnwrappedModel(ratingsStats);

@@ -304,20 +304,6 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
-	public Layout remove(Layout layout) throws SystemException {
-		for (ModelListener<Layout> listener : listeners) {
-			listener.onBeforeRemove(layout);
-		}
-
-		layout = removeImpl(layout);
-
-		for (ModelListener<Layout> listener : listeners) {
-			listener.onAfterRemove(layout);
-		}
-
-		return layout;
-	}
-
 	protected Layout removeImpl(Layout layout) throws SystemException {
 		layout = toUnwrappedModel(layout);
 

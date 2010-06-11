@@ -193,21 +193,6 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 		}
 	}
 
-	public PluginSetting remove(PluginSetting pluginSetting)
-		throws SystemException {
-		for (ModelListener<PluginSetting> listener : listeners) {
-			listener.onBeforeRemove(pluginSetting);
-		}
-
-		pluginSetting = removeImpl(pluginSetting);
-
-		for (ModelListener<PluginSetting> listener : listeners) {
-			listener.onAfterRemove(pluginSetting);
-		}
-
-		return pluginSetting;
-	}
-
 	protected PluginSetting removeImpl(PluginSetting pluginSetting)
 		throws SystemException {
 		pluginSetting = toUnwrappedModel(pluginSetting);

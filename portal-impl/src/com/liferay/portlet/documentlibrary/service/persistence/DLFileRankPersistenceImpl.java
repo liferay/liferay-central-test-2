@@ -220,20 +220,6 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 		}
 	}
 
-	public DLFileRank remove(DLFileRank dlFileRank) throws SystemException {
-		for (ModelListener<DLFileRank> listener : listeners) {
-			listener.onBeforeRemove(dlFileRank);
-		}
-
-		dlFileRank = removeImpl(dlFileRank);
-
-		for (ModelListener<DLFileRank> listener : listeners) {
-			listener.onAfterRemove(dlFileRank);
-		}
-
-		return dlFileRank;
-	}
-
 	protected DLFileRank removeImpl(DLFileRank dlFileRank)
 		throws SystemException {
 		dlFileRank = toUnwrappedModel(dlFileRank);

@@ -300,21 +300,6 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		}
 	}
 
-	public ExpandoValue remove(ExpandoValue expandoValue)
-		throws SystemException {
-		for (ModelListener<ExpandoValue> listener : listeners) {
-			listener.onBeforeRemove(expandoValue);
-		}
-
-		expandoValue = removeImpl(expandoValue);
-
-		for (ModelListener<ExpandoValue> listener : listeners) {
-			listener.onAfterRemove(expandoValue);
-		}
-
-		return expandoValue;
-	}
-
 	protected ExpandoValue removeImpl(ExpandoValue expandoValue)
 		throws SystemException {
 		expandoValue = toUnwrappedModel(expandoValue);

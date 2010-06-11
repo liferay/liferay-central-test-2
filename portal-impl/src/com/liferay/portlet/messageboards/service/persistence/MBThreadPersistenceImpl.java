@@ -237,20 +237,6 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
-	public MBThread remove(MBThread mbThread) throws SystemException {
-		for (ModelListener<MBThread> listener : listeners) {
-			listener.onBeforeRemove(mbThread);
-		}
-
-		mbThread = removeImpl(mbThread);
-
-		for (ModelListener<MBThread> listener : listeners) {
-			listener.onAfterRemove(mbThread);
-		}
-
-		return mbThread;
-	}
-
 	protected MBThread removeImpl(MBThread mbThread) throws SystemException {
 		mbThread = toUnwrappedModel(mbThread);
 

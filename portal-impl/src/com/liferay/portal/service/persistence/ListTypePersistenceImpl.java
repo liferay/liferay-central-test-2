@@ -156,20 +156,6 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 		}
 	}
 
-	public ListType remove(ListType listType) throws SystemException {
-		for (ModelListener<ListType> listener : listeners) {
-			listener.onBeforeRemove(listType);
-		}
-
-		listType = removeImpl(listType);
-
-		for (ModelListener<ListType> listener : listeners) {
-			listener.onAfterRemove(listType);
-		}
-
-		return listType;
-	}
-
 	protected ListType removeImpl(ListType listType) throws SystemException {
 		listType = toUnwrappedModel(listType);
 

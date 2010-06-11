@@ -200,20 +200,6 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
-	public AssetEntry remove(AssetEntry assetEntry) throws SystemException {
-		for (ModelListener<AssetEntry> listener : listeners) {
-			listener.onBeforeRemove(assetEntry);
-		}
-
-		assetEntry = removeImpl(assetEntry);
-
-		for (ModelListener<AssetEntry> listener : listeners) {
-			listener.onAfterRemove(assetEntry);
-		}
-
-		return assetEntry;
-	}
-
 	protected AssetEntry removeImpl(AssetEntry assetEntry)
 		throws SystemException {
 		assetEntry = toUnwrappedModel(assetEntry);

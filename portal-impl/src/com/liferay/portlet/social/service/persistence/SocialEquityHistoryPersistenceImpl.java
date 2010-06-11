@@ -149,21 +149,6 @@ public class SocialEquityHistoryPersistenceImpl extends BasePersistenceImpl<Soci
 		}
 	}
 
-	public SocialEquityHistory remove(SocialEquityHistory socialEquityHistory)
-		throws SystemException {
-		for (ModelListener<SocialEquityHistory> listener : listeners) {
-			listener.onBeforeRemove(socialEquityHistory);
-		}
-
-		socialEquityHistory = removeImpl(socialEquityHistory);
-
-		for (ModelListener<SocialEquityHistory> listener : listeners) {
-			listener.onAfterRemove(socialEquityHistory);
-		}
-
-		return socialEquityHistory;
-	}
-
 	protected SocialEquityHistory removeImpl(
 		SocialEquityHistory socialEquityHistory) throws SystemException {
 		socialEquityHistory = toUnwrappedModel(socialEquityHistory);

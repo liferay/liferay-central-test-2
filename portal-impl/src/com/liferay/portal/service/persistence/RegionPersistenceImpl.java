@@ -181,20 +181,6 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		}
 	}
 
-	public Region remove(Region region) throws SystemException {
-		for (ModelListener<Region> listener : listeners) {
-			listener.onBeforeRemove(region);
-		}
-
-		region = removeImpl(region);
-
-		for (ModelListener<Region> listener : listeners) {
-			listener.onAfterRemove(region);
-		}
-
-		return region;
-	}
-
 	protected Region removeImpl(Region region) throws SystemException {
 		region = toUnwrappedModel(region);
 

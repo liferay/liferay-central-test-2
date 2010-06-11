@@ -205,20 +205,6 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		}
 	}
 
-	public Company remove(Company company) throws SystemException {
-		for (ModelListener<Company> listener : listeners) {
-			listener.onBeforeRemove(company);
-		}
-
-		company = removeImpl(company);
-
-		for (ModelListener<Company> listener : listeners) {
-			listener.onAfterRemove(company);
-		}
-
-		return company;
-	}
-
 	protected Company removeImpl(Company company) throws SystemException {
 		company = toUnwrappedModel(company);
 

@@ -180,20 +180,6 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 		}
 	}
 
-	public ExpandoRow remove(ExpandoRow expandoRow) throws SystemException {
-		for (ModelListener<ExpandoRow> listener : listeners) {
-			listener.onBeforeRemove(expandoRow);
-		}
-
-		expandoRow = removeImpl(expandoRow);
-
-		for (ModelListener<ExpandoRow> listener : listeners) {
-			listener.onAfterRemove(expandoRow);
-		}
-
-		return expandoRow;
-	}
-
 	protected ExpandoRow removeImpl(ExpandoRow expandoRow)
 		throws SystemException {
 		expandoRow = toUnwrappedModel(expandoRow);

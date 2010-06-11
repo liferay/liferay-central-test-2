@@ -270,21 +270,6 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 		}
 	}
 
-	public JournalTemplate remove(JournalTemplate journalTemplate)
-		throws SystemException {
-		for (ModelListener<JournalTemplate> listener : listeners) {
-			listener.onBeforeRemove(journalTemplate);
-		}
-
-		journalTemplate = removeImpl(journalTemplate);
-
-		for (ModelListener<JournalTemplate> listener : listeners) {
-			listener.onAfterRemove(journalTemplate);
-		}
-
-		return journalTemplate;
-	}
-
 	protected JournalTemplate removeImpl(JournalTemplate journalTemplate)
 		throws SystemException {
 		journalTemplate = toUnwrappedModel(journalTemplate);

@@ -240,21 +240,6 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 	}
 
-	public TasksReview remove(TasksReview tasksReview)
-		throws SystemException {
-		for (ModelListener<TasksReview> listener : listeners) {
-			listener.onBeforeRemove(tasksReview);
-		}
-
-		tasksReview = removeImpl(tasksReview);
-
-		for (ModelListener<TasksReview> listener : listeners) {
-			listener.onAfterRemove(tasksReview);
-		}
-
-		return tasksReview;
-	}
-
 	protected TasksReview removeImpl(TasksReview tasksReview)
 		throws SystemException {
 		tasksReview = toUnwrappedModel(tasksReview);

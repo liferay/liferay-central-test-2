@@ -181,20 +181,6 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 	}
 
-	public SCLicense remove(SCLicense scLicense) throws SystemException {
-		for (ModelListener<SCLicense> listener : listeners) {
-			listener.onBeforeRemove(scLicense);
-		}
-
-		scLicense = removeImpl(scLicense);
-
-		for (ModelListener<SCLicense> listener : listeners) {
-			listener.onAfterRemove(scLicense);
-		}
-
-		return scLicense;
-	}
-
 	protected SCLicense removeImpl(SCLicense scLicense)
 		throws SystemException {
 		scLicense = toUnwrappedModel(scLicense);

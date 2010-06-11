@@ -202,21 +202,6 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		}
 	}
 
-	public SocialEquitySetting remove(SocialEquitySetting socialEquitySetting)
-		throws SystemException {
-		for (ModelListener<SocialEquitySetting> listener : listeners) {
-			listener.onBeforeRemove(socialEquitySetting);
-		}
-
-		socialEquitySetting = removeImpl(socialEquitySetting);
-
-		for (ModelListener<SocialEquitySetting> listener : listeners) {
-			listener.onAfterRemove(socialEquitySetting);
-		}
-
-		return socialEquitySetting;
-	}
-
 	protected SocialEquitySetting removeImpl(
 		SocialEquitySetting socialEquitySetting) throws SystemException {
 		socialEquitySetting = toUnwrappedModel(socialEquitySetting);

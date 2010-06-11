@@ -240,21 +240,6 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		}
 	}
 
-	public AssetVocabulary remove(AssetVocabulary assetVocabulary)
-		throws SystemException {
-		for (ModelListener<AssetVocabulary> listener : listeners) {
-			listener.onBeforeRemove(assetVocabulary);
-		}
-
-		assetVocabulary = removeImpl(assetVocabulary);
-
-		for (ModelListener<AssetVocabulary> listener : listeners) {
-			listener.onAfterRemove(assetVocabulary);
-		}
-
-		return assetVocabulary;
-	}
-
 	protected AssetVocabulary removeImpl(AssetVocabulary assetVocabulary)
 		throws SystemException {
 		assetVocabulary = toUnwrappedModel(assetVocabulary);

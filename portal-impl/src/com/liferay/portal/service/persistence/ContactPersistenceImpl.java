@@ -156,20 +156,6 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 		}
 	}
 
-	public Contact remove(Contact contact) throws SystemException {
-		for (ModelListener<Contact> listener : listeners) {
-			listener.onBeforeRemove(contact);
-		}
-
-		contact = removeImpl(contact);
-
-		for (ModelListener<Contact> listener : listeners) {
-			listener.onAfterRemove(contact);
-		}
-
-		return contact;
-	}
-
 	protected Contact removeImpl(Contact contact) throws SystemException {
 		contact = toUnwrappedModel(contact);
 

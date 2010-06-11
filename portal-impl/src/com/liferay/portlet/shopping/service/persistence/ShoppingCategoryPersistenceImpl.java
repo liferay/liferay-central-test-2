@@ -178,21 +178,6 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 		}
 	}
 
-	public ShoppingCategory remove(ShoppingCategory shoppingCategory)
-		throws SystemException {
-		for (ModelListener<ShoppingCategory> listener : listeners) {
-			listener.onBeforeRemove(shoppingCategory);
-		}
-
-		shoppingCategory = removeImpl(shoppingCategory);
-
-		for (ModelListener<ShoppingCategory> listener : listeners) {
-			listener.onAfterRemove(shoppingCategory);
-		}
-
-		return shoppingCategory;
-	}
-
 	protected ShoppingCategory removeImpl(ShoppingCategory shoppingCategory)
 		throws SystemException {
 		shoppingCategory = toUnwrappedModel(shoppingCategory);

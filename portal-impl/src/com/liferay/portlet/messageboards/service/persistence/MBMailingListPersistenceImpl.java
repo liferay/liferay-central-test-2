@@ -220,21 +220,6 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		}
 	}
 
-	public MBMailingList remove(MBMailingList mbMailingList)
-		throws SystemException {
-		for (ModelListener<MBMailingList> listener : listeners) {
-			listener.onBeforeRemove(mbMailingList);
-		}
-
-		mbMailingList = removeImpl(mbMailingList);
-
-		for (ModelListener<MBMailingList> listener : listeners) {
-			listener.onAfterRemove(mbMailingList);
-		}
-
-		return mbMailingList;
-	}
-
 	protected MBMailingList removeImpl(MBMailingList mbMailingList)
 		throws SystemException {
 		mbMailingList = toUnwrappedModel(mbMailingList);

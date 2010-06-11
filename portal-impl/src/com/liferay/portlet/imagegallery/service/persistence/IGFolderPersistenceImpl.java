@@ -254,20 +254,6 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		}
 	}
 
-	public IGFolder remove(IGFolder igFolder) throws SystemException {
-		for (ModelListener<IGFolder> listener : listeners) {
-			listener.onBeforeRemove(igFolder);
-		}
-
-		igFolder = removeImpl(igFolder);
-
-		for (ModelListener<IGFolder> listener : listeners) {
-			listener.onAfterRemove(igFolder);
-		}
-
-		return igFolder;
-	}
-
 	protected IGFolder removeImpl(IGFolder igFolder) throws SystemException {
 		igFolder = toUnwrappedModel(igFolder);
 

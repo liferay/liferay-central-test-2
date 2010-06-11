@@ -199,21 +199,6 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 		}
 	}
 
-	public SCFrameworkVersion remove(SCFrameworkVersion scFrameworkVersion)
-		throws SystemException {
-		for (ModelListener<SCFrameworkVersion> listener : listeners) {
-			listener.onBeforeRemove(scFrameworkVersion);
-		}
-
-		scFrameworkVersion = removeImpl(scFrameworkVersion);
-
-		for (ModelListener<SCFrameworkVersion> listener : listeners) {
-			listener.onAfterRemove(scFrameworkVersion);
-		}
-
-		return scFrameworkVersion;
-	}
-
 	protected SCFrameworkVersion removeImpl(
 		SCFrameworkVersion scFrameworkVersion) throws SystemException {
 		scFrameworkVersion = toUnwrappedModel(scFrameworkVersion);

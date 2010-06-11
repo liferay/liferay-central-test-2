@@ -145,20 +145,6 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 		}
 	}
 
-	public Counter remove(Counter counter) throws SystemException {
-		for (ModelListener<Counter> listener : listeners) {
-			listener.onBeforeRemove(counter);
-		}
-
-		counter = removeImpl(counter);
-
-		for (ModelListener<Counter> listener : listeners) {
-			listener.onAfterRemove(counter);
-		}
-
-		return counter;
-	}
-
 	protected Counter removeImpl(Counter counter) throws SystemException {
 		counter = toUnwrappedModel(counter);
 

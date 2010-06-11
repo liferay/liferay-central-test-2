@@ -156,20 +156,6 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		}
 	}
 
-	public OrgLabor remove(OrgLabor orgLabor) throws SystemException {
-		for (ModelListener<OrgLabor> listener : listeners) {
-			listener.onBeforeRemove(orgLabor);
-		}
-
-		orgLabor = removeImpl(orgLabor);
-
-		for (ModelListener<OrgLabor> listener : listeners) {
-			listener.onAfterRemove(orgLabor);
-		}
-
-		return orgLabor;
-	}
-
 	protected OrgLabor removeImpl(OrgLabor orgLabor) throws SystemException {
 		orgLabor = toUnwrappedModel(orgLabor);
 

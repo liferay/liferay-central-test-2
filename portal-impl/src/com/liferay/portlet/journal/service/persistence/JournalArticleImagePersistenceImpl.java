@@ -240,21 +240,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		}
 	}
 
-	public JournalArticleImage remove(JournalArticleImage journalArticleImage)
-		throws SystemException {
-		for (ModelListener<JournalArticleImage> listener : listeners) {
-			listener.onBeforeRemove(journalArticleImage);
-		}
-
-		journalArticleImage = removeImpl(journalArticleImage);
-
-		for (ModelListener<JournalArticleImage> listener : listeners) {
-			listener.onAfterRemove(journalArticleImage);
-		}
-
-		return journalArticleImage;
-	}
-
 	protected JournalArticleImage removeImpl(
 		JournalArticleImage journalArticleImage) throws SystemException {
 		journalArticleImage = toUnwrappedModel(journalArticleImage);

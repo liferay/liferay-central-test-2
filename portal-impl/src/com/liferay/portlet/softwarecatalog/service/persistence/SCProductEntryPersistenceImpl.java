@@ -226,21 +226,6 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
-	public SCProductEntry remove(SCProductEntry scProductEntry)
-		throws SystemException {
-		for (ModelListener<SCProductEntry> listener : listeners) {
-			listener.onBeforeRemove(scProductEntry);
-		}
-
-		scProductEntry = removeImpl(scProductEntry);
-
-		for (ModelListener<SCProductEntry> listener : listeners) {
-			listener.onAfterRemove(scProductEntry);
-		}
-
-		return scProductEntry;
-	}
-
 	protected SCProductEntry removeImpl(SCProductEntry scProductEntry)
 		throws SystemException {
 		scProductEntry = toUnwrappedModel(scProductEntry);

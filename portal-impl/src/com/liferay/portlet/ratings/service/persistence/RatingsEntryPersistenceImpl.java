@@ -190,21 +190,6 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		}
 	}
 
-	public RatingsEntry remove(RatingsEntry ratingsEntry)
-		throws SystemException {
-		for (ModelListener<RatingsEntry> listener : listeners) {
-			listener.onBeforeRemove(ratingsEntry);
-		}
-
-		ratingsEntry = removeImpl(ratingsEntry);
-
-		for (ModelListener<RatingsEntry> listener : listeners) {
-			listener.onAfterRemove(ratingsEntry);
-		}
-
-		return ratingsEntry;
-	}
-
 	protected RatingsEntry removeImpl(RatingsEntry ratingsEntry)
 		throws SystemException {
 		ratingsEntry = toUnwrappedModel(ratingsEntry);

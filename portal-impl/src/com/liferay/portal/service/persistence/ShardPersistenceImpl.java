@@ -173,20 +173,6 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 		}
 	}
 
-	public Shard remove(Shard shard) throws SystemException {
-		for (ModelListener<Shard> listener : listeners) {
-			listener.onBeforeRemove(shard);
-		}
-
-		shard = removeImpl(shard);
-
-		for (ModelListener<Shard> listener : listeners) {
-			listener.onAfterRemove(shard);
-		}
-
-		return shard;
-	}
-
 	protected Shard removeImpl(Shard shard) throws SystemException {
 		shard = toUnwrappedModel(shard);
 

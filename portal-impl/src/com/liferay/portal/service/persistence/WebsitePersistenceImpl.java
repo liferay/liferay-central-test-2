@@ -213,20 +213,6 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		}
 	}
 
-	public Website remove(Website website) throws SystemException {
-		for (ModelListener<Website> listener : listeners) {
-			listener.onBeforeRemove(website);
-		}
-
-		website = removeImpl(website);
-
-		for (ModelListener<Website> listener : listeners) {
-			listener.onAfterRemove(website);
-		}
-
-		return website;
-	}
-
 	protected Website removeImpl(Website website) throws SystemException {
 		website = toUnwrappedModel(website);
 

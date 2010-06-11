@@ -230,20 +230,6 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
-	public Address remove(Address address) throws SystemException {
-		for (ModelListener<Address> listener : listeners) {
-			listener.onBeforeRemove(address);
-		}
-
-		address = removeImpl(address);
-
-		for (ModelListener<Address> listener : listeners) {
-			listener.onAfterRemove(address);
-		}
-
-		return address;
-	}
-
 	protected Address removeImpl(Address address) throws SystemException {
 		address = toUnwrappedModel(address);
 

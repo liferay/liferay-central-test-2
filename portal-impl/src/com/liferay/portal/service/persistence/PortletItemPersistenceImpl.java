@@ -207,21 +207,6 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		}
 	}
 
-	public PortletItem remove(PortletItem portletItem)
-		throws SystemException {
-		for (ModelListener<PortletItem> listener : listeners) {
-			listener.onBeforeRemove(portletItem);
-		}
-
-		portletItem = removeImpl(portletItem);
-
-		for (ModelListener<PortletItem> listener : listeners) {
-			listener.onAfterRemove(portletItem);
-		}
-
-		return portletItem;
-	}
-
 	protected PortletItem removeImpl(PortletItem portletItem)
 		throws SystemException {
 		portletItem = toUnwrappedModel(portletItem);

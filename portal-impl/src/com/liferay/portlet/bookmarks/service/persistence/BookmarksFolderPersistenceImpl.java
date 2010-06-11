@@ -232,21 +232,6 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 		}
 	}
 
-	public BookmarksFolder remove(BookmarksFolder bookmarksFolder)
-		throws SystemException {
-		for (ModelListener<BookmarksFolder> listener : listeners) {
-			listener.onBeforeRemove(bookmarksFolder);
-		}
-
-		bookmarksFolder = removeImpl(bookmarksFolder);
-
-		for (ModelListener<BookmarksFolder> listener : listeners) {
-			listener.onAfterRemove(bookmarksFolder);
-		}
-
-		return bookmarksFolder;
-	}
-
 	protected BookmarksFolder removeImpl(BookmarksFolder bookmarksFolder)
 		throws SystemException {
 		bookmarksFolder = toUnwrappedModel(bookmarksFolder);

@@ -203,21 +203,6 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 		}
 	}
 
-	public UserIdMapper remove(UserIdMapper userIdMapper)
-		throws SystemException {
-		for (ModelListener<UserIdMapper> listener : listeners) {
-			listener.onBeforeRemove(userIdMapper);
-		}
-
-		userIdMapper = removeImpl(userIdMapper);
-
-		for (ModelListener<UserIdMapper> listener : listeners) {
-			listener.onAfterRemove(userIdMapper);
-		}
-
-		return userIdMapper;
-	}
-
 	protected UserIdMapper removeImpl(UserIdMapper userIdMapper)
 		throws SystemException {
 		userIdMapper = toUnwrappedModel(userIdMapper);

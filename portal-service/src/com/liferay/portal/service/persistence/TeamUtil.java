@@ -17,7 +17,9 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Team;
+import com.liferay.portal.service.ServiceContext;
 
 import java.util.List;
 
@@ -74,6 +76,17 @@ public class TeamUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int, OrderByComparator)
+	 */
+	public static List<Team> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		return getPersistence()
+				   .findWithDynamicQuery(dynamicQuery, start, end,
+			orderByComparator);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
 	 */
 	public static Team remove(Team team) throws SystemException {
@@ -86,6 +99,14 @@ public class TeamUtil {
 	public static Team update(Team team, boolean merge)
 		throws SystemException {
 		return getPersistence().update(team, merge);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean, ServiceContext)
+	 */
+	public static Team update(Team team, boolean merge,
+		ServiceContext serviceContext) throws SystemException {
+		return getPersistence().update(team, merge, serviceContext);
 	}
 
 	public static void cacheResult(com.liferay.portal.model.Team team) {

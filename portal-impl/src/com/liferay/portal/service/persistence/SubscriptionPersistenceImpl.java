@@ -216,21 +216,6 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		}
 	}
 
-	public Subscription remove(Subscription subscription)
-		throws SystemException {
-		for (ModelListener<Subscription> listener : listeners) {
-			listener.onBeforeRemove(subscription);
-		}
-
-		subscription = removeImpl(subscription);
-
-		for (ModelListener<Subscription> listener : listeners) {
-			listener.onAfterRemove(subscription);
-		}
-
-		return subscription;
-	}
-
 	protected Subscription removeImpl(Subscription subscription)
 		throws SystemException {
 		subscription = toUnwrappedModel(subscription);

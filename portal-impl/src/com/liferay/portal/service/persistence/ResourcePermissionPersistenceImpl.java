@@ -246,21 +246,6 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		}
 	}
 
-	public ResourcePermission remove(ResourcePermission resourcePermission)
-		throws SystemException {
-		for (ModelListener<ResourcePermission> listener : listeners) {
-			listener.onBeforeRemove(resourcePermission);
-		}
-
-		resourcePermission = removeImpl(resourcePermission);
-
-		for (ModelListener<ResourcePermission> listener : listeners) {
-			listener.onAfterRemove(resourcePermission);
-		}
-
-		return resourcePermission;
-	}
-
 	protected ResourcePermission removeImpl(
 		ResourcePermission resourcePermission) throws SystemException {
 		resourcePermission = toUnwrappedModel(resourcePermission);

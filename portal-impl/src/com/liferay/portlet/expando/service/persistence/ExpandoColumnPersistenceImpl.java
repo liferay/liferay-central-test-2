@@ -186,21 +186,6 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 		}
 	}
 
-	public ExpandoColumn remove(ExpandoColumn expandoColumn)
-		throws SystemException {
-		for (ModelListener<ExpandoColumn> listener : listeners) {
-			listener.onBeforeRemove(expandoColumn);
-		}
-
-		expandoColumn = removeImpl(expandoColumn);
-
-		for (ModelListener<ExpandoColumn> listener : listeners) {
-			listener.onAfterRemove(expandoColumn);
-		}
-
-		return expandoColumn;
-	}
-
 	protected ExpandoColumn removeImpl(ExpandoColumn expandoColumn)
 		throws SystemException {
 		expandoColumn = toUnwrappedModel(expandoColumn);

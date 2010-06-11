@@ -160,21 +160,6 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 		}
 	}
 
-	public UserTrackerPath remove(UserTrackerPath userTrackerPath)
-		throws SystemException {
-		for (ModelListener<UserTrackerPath> listener : listeners) {
-			listener.onBeforeRemove(userTrackerPath);
-		}
-
-		userTrackerPath = removeImpl(userTrackerPath);
-
-		for (ModelListener<UserTrackerPath> listener : listeners) {
-			listener.onAfterRemove(userTrackerPath);
-		}
-
-		return userTrackerPath;
-	}
-
 	protected UserTrackerPath removeImpl(UserTrackerPath userTrackerPath)
 		throws SystemException {
 		userTrackerPath = toUnwrappedModel(userTrackerPath);

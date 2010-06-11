@@ -187,21 +187,6 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		}
 	}
 
-	public AnnouncementsDelivery remove(
-		AnnouncementsDelivery announcementsDelivery) throws SystemException {
-		for (ModelListener<AnnouncementsDelivery> listener : listeners) {
-			listener.onBeforeRemove(announcementsDelivery);
-		}
-
-		announcementsDelivery = removeImpl(announcementsDelivery);
-
-		for (ModelListener<AnnouncementsDelivery> listener : listeners) {
-			listener.onAfterRemove(announcementsDelivery);
-		}
-
-		return announcementsDelivery;
-	}
-
 	protected AnnouncementsDelivery removeImpl(
 		AnnouncementsDelivery announcementsDelivery) throws SystemException {
 		announcementsDelivery = toUnwrappedModel(announcementsDelivery);

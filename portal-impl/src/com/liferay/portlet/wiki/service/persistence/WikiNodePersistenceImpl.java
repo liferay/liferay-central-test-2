@@ -224,20 +224,6 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		}
 	}
 
-	public WikiNode remove(WikiNode wikiNode) throws SystemException {
-		for (ModelListener<WikiNode> listener : listeners) {
-			listener.onBeforeRemove(wikiNode);
-		}
-
-		wikiNode = removeImpl(wikiNode);
-
-		for (ModelListener<WikiNode> listener : listeners) {
-			listener.onAfterRemove(wikiNode);
-		}
-
-		return wikiNode;
-	}
-
 	protected WikiNode removeImpl(WikiNode wikiNode) throws SystemException {
 		wikiNode = toUnwrappedModel(wikiNode);
 

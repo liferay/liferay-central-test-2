@@ -443,20 +443,6 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		}
 	}
 
-	public MBMessage remove(MBMessage mbMessage) throws SystemException {
-		for (ModelListener<MBMessage> listener : listeners) {
-			listener.onBeforeRemove(mbMessage);
-		}
-
-		mbMessage = removeImpl(mbMessage);
-
-		for (ModelListener<MBMessage> listener : listeners) {
-			listener.onAfterRemove(mbMessage);
-		}
-
-		return mbMessage;
-	}
-
 	protected MBMessage removeImpl(MBMessage mbMessage)
 		throws SystemException {
 		mbMessage = toUnwrappedModel(mbMessage);

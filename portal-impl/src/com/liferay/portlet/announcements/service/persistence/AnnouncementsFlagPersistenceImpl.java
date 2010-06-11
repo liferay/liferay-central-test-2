@@ -191,21 +191,6 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 		}
 	}
 
-	public AnnouncementsFlag remove(AnnouncementsFlag announcementsFlag)
-		throws SystemException {
-		for (ModelListener<AnnouncementsFlag> listener : listeners) {
-			listener.onBeforeRemove(announcementsFlag);
-		}
-
-		announcementsFlag = removeImpl(announcementsFlag);
-
-		for (ModelListener<AnnouncementsFlag> listener : listeners) {
-			listener.onAfterRemove(announcementsFlag);
-		}
-
-		return announcementsFlag;
-	}
-
 	protected AnnouncementsFlag removeImpl(AnnouncementsFlag announcementsFlag)
 		throws SystemException {
 		announcementsFlag = toUnwrappedModel(announcementsFlag);

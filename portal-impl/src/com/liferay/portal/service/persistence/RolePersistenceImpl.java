@@ -225,20 +225,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
-	public Role remove(Role role) throws SystemException {
-		for (ModelListener<Role> listener : listeners) {
-			listener.onBeforeRemove(role);
-		}
-
-		role = removeImpl(role);
-
-		for (ModelListener<Role> listener : listeners) {
-			listener.onAfterRemove(role);
-		}
-
-		return role;
-	}
-
 	protected Role removeImpl(Role role) throws SystemException {
 		role = toUnwrappedModel(role);
 

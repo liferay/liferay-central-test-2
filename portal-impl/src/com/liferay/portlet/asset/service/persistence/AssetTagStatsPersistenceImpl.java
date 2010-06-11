@@ -196,21 +196,6 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		}
 	}
 
-	public AssetTagStats remove(AssetTagStats assetTagStats)
-		throws SystemException {
-		for (ModelListener<AssetTagStats> listener : listeners) {
-			listener.onBeforeRemove(assetTagStats);
-		}
-
-		assetTagStats = removeImpl(assetTagStats);
-
-		for (ModelListener<AssetTagStats> listener : listeners) {
-			listener.onAfterRemove(assetTagStats);
-		}
-
-		return assetTagStats;
-	}
-
 	protected AssetTagStats removeImpl(AssetTagStats assetTagStats)
 		throws SystemException {
 		assetTagStats = toUnwrappedModel(assetTagStats);

@@ -17,7 +17,9 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.service.ServiceContext;
 
 import java.util.List;
 
@@ -75,6 +77,17 @@ public class UserGroupUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int, OrderByComparator)
+	 */
+	public static List<UserGroup> findWithDynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		return getPersistence()
+				   .findWithDynamicQuery(dynamicQuery, start, end,
+			orderByComparator);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
 	 */
 	public static UserGroup remove(UserGroup userGroup)
@@ -88,6 +101,14 @@ public class UserGroupUtil {
 	public static UserGroup update(UserGroup userGroup, boolean merge)
 		throws SystemException {
 		return getPersistence().update(userGroup, merge);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean, ServiceContext)
+	 */
+	public static UserGroup update(UserGroup userGroup, boolean merge,
+		ServiceContext serviceContext) throws SystemException {
+		return getPersistence().update(userGroup, merge, serviceContext);
 	}
 
 	public static void cacheResult(com.liferay.portal.model.UserGroup userGroup) {

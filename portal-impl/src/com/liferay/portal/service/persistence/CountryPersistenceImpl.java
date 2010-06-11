@@ -193,20 +193,6 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		}
 	}
 
-	public Country remove(Country country) throws SystemException {
-		for (ModelListener<Country> listener : listeners) {
-			listener.onBeforeRemove(country);
-		}
-
-		country = removeImpl(country);
-
-		for (ModelListener<Country> listener : listeners) {
-			listener.onAfterRemove(country);
-		}
-
-		return country;
-	}
-
 	protected Country removeImpl(Country country) throws SystemException {
 		country = toUnwrappedModel(country);
 

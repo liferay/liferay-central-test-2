@@ -323,20 +323,6 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
-	public Group remove(Group group) throws SystemException {
-		for (ModelListener<Group> listener : listeners) {
-			listener.onBeforeRemove(group);
-		}
-
-		group = removeImpl(group);
-
-		for (ModelListener<Group> listener : listeners) {
-			listener.onAfterRemove(group);
-		}
-
-		return group;
-	}
-
 	protected Group removeImpl(Group group) throws SystemException {
 		group = toUnwrappedModel(group);
 

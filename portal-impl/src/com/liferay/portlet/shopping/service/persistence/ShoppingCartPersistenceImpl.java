@@ -193,21 +193,6 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 		}
 	}
 
-	public ShoppingCart remove(ShoppingCart shoppingCart)
-		throws SystemException {
-		for (ModelListener<ShoppingCart> listener : listeners) {
-			listener.onBeforeRemove(shoppingCart);
-		}
-
-		shoppingCart = removeImpl(shoppingCart);
-
-		for (ModelListener<ShoppingCart> listener : listeners) {
-			listener.onAfterRemove(shoppingCart);
-		}
-
-		return shoppingCart;
-	}
-
 	protected ShoppingCart removeImpl(ShoppingCart shoppingCart)
 		throws SystemException {
 		shoppingCart = toUnwrappedModel(shoppingCart);

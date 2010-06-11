@@ -186,21 +186,6 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 		}
 	}
 
-	public MembershipRequest remove(MembershipRequest membershipRequest)
-		throws SystemException {
-		for (ModelListener<MembershipRequest> listener : listeners) {
-			listener.onBeforeRemove(membershipRequest);
-		}
-
-		membershipRequest = removeImpl(membershipRequest);
-
-		for (ModelListener<MembershipRequest> listener : listeners) {
-			listener.onAfterRemove(membershipRequest);
-		}
-
-		return membershipRequest;
-	}
-
 	protected MembershipRequest removeImpl(MembershipRequest membershipRequest)
 		throws SystemException {
 		membershipRequest = toUnwrappedModel(membershipRequest);

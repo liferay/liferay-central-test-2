@@ -470,20 +470,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
-	public WikiPage remove(WikiPage wikiPage) throws SystemException {
-		for (ModelListener<WikiPage> listener : listeners) {
-			listener.onBeforeRemove(wikiPage);
-		}
-
-		wikiPage = removeImpl(wikiPage);
-
-		for (ModelListener<WikiPage> listener : listeners) {
-			listener.onAfterRemove(wikiPage);
-		}
-
-		return wikiPage;
-	}
-
 	protected WikiPage removeImpl(WikiPage wikiPage) throws SystemException {
 		wikiPage = toUnwrappedModel(wikiPage);
 

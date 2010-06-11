@@ -211,20 +211,6 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 		}
 	}
 
-	public Phone remove(Phone phone) throws SystemException {
-		for (ModelListener<Phone> listener : listeners) {
-			listener.onBeforeRemove(phone);
-		}
-
-		phone = removeImpl(phone);
-
-		for (ModelListener<Phone> listener : listeners) {
-			listener.onAfterRemove(phone);
-		}
-
-		return phone;
-	}
-
 	protected Phone removeImpl(Phone phone) throws SystemException {
 		phone = toUnwrappedModel(phone);
 

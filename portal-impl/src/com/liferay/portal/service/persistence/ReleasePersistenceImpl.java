@@ -157,20 +157,6 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 		}
 	}
 
-	public Release remove(Release release) throws SystemException {
-		for (ModelListener<Release> listener : listeners) {
-			listener.onBeforeRemove(release);
-		}
-
-		release = removeImpl(release);
-
-		for (ModelListener<Release> listener : listeners) {
-			listener.onAfterRemove(release);
-		}
-
-		return release;
-	}
-
 	protected Release removeImpl(Release release) throws SystemException {
 		release = toUnwrappedModel(release);
 

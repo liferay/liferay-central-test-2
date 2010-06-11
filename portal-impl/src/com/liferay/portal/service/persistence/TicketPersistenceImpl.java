@@ -157,20 +157,6 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 		}
 	}
 
-	public Ticket remove(Ticket ticket) throws SystemException {
-		for (ModelListener<Ticket> listener : listeners) {
-			listener.onBeforeRemove(ticket);
-		}
-
-		ticket = removeImpl(ticket);
-
-		for (ModelListener<Ticket> listener : listeners) {
-			listener.onAfterRemove(ticket);
-		}
-
-		return ticket;
-	}
-
 	protected Ticket removeImpl(Ticket ticket) throws SystemException {
 		ticket = toUnwrappedModel(ticket);
 

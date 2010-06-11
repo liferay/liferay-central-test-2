@@ -302,21 +302,6 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		}
 	}
 
-	public AssetCategory remove(AssetCategory assetCategory)
-		throws SystemException {
-		for (ModelListener<AssetCategory> listener : listeners) {
-			listener.onBeforeRemove(assetCategory);
-		}
-
-		assetCategory = removeImpl(assetCategory);
-
-		for (ModelListener<AssetCategory> listener : listeners) {
-			listener.onAfterRemove(assetCategory);
-		}
-
-		return assetCategory;
-	}
-
 	protected AssetCategory removeImpl(AssetCategory assetCategory)
 		throws SystemException {
 		assetCategory = toUnwrappedModel(assetCategory);

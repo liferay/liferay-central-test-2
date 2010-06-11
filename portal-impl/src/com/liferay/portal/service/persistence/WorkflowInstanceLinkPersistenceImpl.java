@@ -164,21 +164,6 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 		}
 	}
 
-	public WorkflowInstanceLink remove(
-		WorkflowInstanceLink workflowInstanceLink) throws SystemException {
-		for (ModelListener<WorkflowInstanceLink> listener : listeners) {
-			listener.onBeforeRemove(workflowInstanceLink);
-		}
-
-		workflowInstanceLink = removeImpl(workflowInstanceLink);
-
-		for (ModelListener<WorkflowInstanceLink> listener : listeners) {
-			listener.onAfterRemove(workflowInstanceLink);
-		}
-
-		return workflowInstanceLink;
-	}
-
 	protected WorkflowInstanceLink removeImpl(
 		WorkflowInstanceLink workflowInstanceLink) throws SystemException {
 		workflowInstanceLink = toUnwrappedModel(workflowInstanceLink);

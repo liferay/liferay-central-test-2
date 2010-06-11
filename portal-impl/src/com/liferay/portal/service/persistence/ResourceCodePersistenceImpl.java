@@ -198,21 +198,6 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 		}
 	}
 
-	public ResourceCode remove(ResourceCode resourceCode)
-		throws SystemException {
-		for (ModelListener<ResourceCode> listener : listeners) {
-			listener.onBeforeRemove(resourceCode);
-		}
-
-		resourceCode = removeImpl(resourceCode);
-
-		for (ModelListener<ResourceCode> listener : listeners) {
-			listener.onAfterRemove(resourceCode);
-		}
-
-		return resourceCode;
-	}
-
 	protected ResourceCode removeImpl(ResourceCode resourceCode)
 		throws SystemException {
 		resourceCode = toUnwrappedModel(resourceCode);

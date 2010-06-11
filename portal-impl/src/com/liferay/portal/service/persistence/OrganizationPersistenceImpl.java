@@ -217,21 +217,6 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
-	public Organization remove(Organization organization)
-		throws SystemException {
-		for (ModelListener<Organization> listener : listeners) {
-			listener.onBeforeRemove(organization);
-		}
-
-		organization = removeImpl(organization);
-
-		for (ModelListener<Organization> listener : listeners) {
-			listener.onAfterRemove(organization);
-		}
-
-		return organization;
-	}
-
 	protected Organization removeImpl(Organization organization)
 		throws SystemException {
 		organization = toUnwrappedModel(organization);

@@ -413,20 +413,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		}
 	}
 
-	public BlogsEntry remove(BlogsEntry blogsEntry) throws SystemException {
-		for (ModelListener<BlogsEntry> listener : listeners) {
-			listener.onBeforeRemove(blogsEntry);
-		}
-
-		blogsEntry = removeImpl(blogsEntry);
-
-		for (ModelListener<BlogsEntry> listener : listeners) {
-			listener.onAfterRemove(blogsEntry);
-		}
-
-		return blogsEntry;
-	}
-
 	protected BlogsEntry removeImpl(BlogsEntry blogsEntry)
 		throws SystemException {
 		blogsEntry = toUnwrappedModel(blogsEntry);

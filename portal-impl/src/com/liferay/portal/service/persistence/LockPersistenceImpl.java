@@ -187,20 +187,6 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		}
 	}
 
-	public Lock remove(Lock lock) throws SystemException {
-		for (ModelListener<Lock> listener : listeners) {
-			listener.onBeforeRemove(lock);
-		}
-
-		lock = removeImpl(lock);
-
-		for (ModelListener<Lock> listener : listeners) {
-			listener.onAfterRemove(lock);
-		}
-
-		return lock;
-	}
-
 	protected Lock removeImpl(Lock lock) throws SystemException {
 		lock = toUnwrappedModel(lock);
 

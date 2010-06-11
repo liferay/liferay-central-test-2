@@ -181,21 +181,6 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		}
 	}
 
-	public ServiceComponent remove(ServiceComponent serviceComponent)
-		throws SystemException {
-		for (ModelListener<ServiceComponent> listener : listeners) {
-			listener.onBeforeRemove(serviceComponent);
-		}
-
-		serviceComponent = removeImpl(serviceComponent);
-
-		for (ModelListener<ServiceComponent> listener : listeners) {
-			listener.onAfterRemove(serviceComponent);
-		}
-
-		return serviceComponent;
-	}
-
 	protected ServiceComponent removeImpl(ServiceComponent serviceComponent)
 		throws SystemException {
 		serviceComponent = toUnwrappedModel(serviceComponent);

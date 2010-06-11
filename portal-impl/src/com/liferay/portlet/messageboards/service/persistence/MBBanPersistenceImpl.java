@@ -199,20 +199,6 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 		}
 	}
 
-	public MBBan remove(MBBan mbBan) throws SystemException {
-		for (ModelListener<MBBan> listener : listeners) {
-			listener.onBeforeRemove(mbBan);
-		}
-
-		mbBan = removeImpl(mbBan);
-
-		for (ModelListener<MBBan> listener : listeners) {
-			listener.onAfterRemove(mbBan);
-		}
-
-		return mbBan;
-	}
-
 	protected MBBan removeImpl(MBBan mbBan) throws SystemException {
 		mbBan = toUnwrappedModel(mbBan);
 

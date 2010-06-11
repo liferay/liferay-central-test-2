@@ -260,21 +260,6 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 		}
 	}
 
-	public MBMessageFlag remove(MBMessageFlag mbMessageFlag)
-		throws SystemException {
-		for (ModelListener<MBMessageFlag> listener : listeners) {
-			listener.onBeforeRemove(mbMessageFlag);
-		}
-
-		mbMessageFlag = removeImpl(mbMessageFlag);
-
-		for (ModelListener<MBMessageFlag> listener : listeners) {
-			listener.onAfterRemove(mbMessageFlag);
-		}
-
-		return mbMessageFlag;
-	}
-
 	protected MBMessageFlag removeImpl(MBMessageFlag mbMessageFlag)
 		throws SystemException {
 		mbMessageFlag = toUnwrappedModel(mbMessageFlag);

@@ -172,20 +172,6 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 		}
 	}
 
-	public Resource remove(Resource resource) throws SystemException {
-		for (ModelListener<Resource> listener : listeners) {
-			listener.onBeforeRemove(resource);
-		}
-
-		resource = removeImpl(resource);
-
-		for (ModelListener<Resource> listener : listeners) {
-			listener.onAfterRemove(resource);
-		}
-
-		return resource;
-	}
-
 	protected Resource removeImpl(Resource resource) throws SystemException {
 		resource = toUnwrappedModel(resource);
 
