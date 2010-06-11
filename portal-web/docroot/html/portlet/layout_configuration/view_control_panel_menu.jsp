@@ -88,7 +88,7 @@
 					}
 				}
 
-				title = "<a href=\"javascript:;\" class=\"lfr-group-selector\">" + HtmlUtil.escape(StringUtil.shorten(curGroupName, 25)) + "</a>";
+				title = "<a href=\"javascript:;\" class=\"lfr-floating-trigger lfr-group-selector\">" + HtmlUtil.escape(StringUtil.shorten(curGroupName, 25)) + "</a>";
 			}
 			else if (category.equals(PortletCategoryKeys.PORTAL) && (CompanyLocalServiceUtil.getCompaniesCount(false) > 1)) {
 				title = HtmlUtil.escape(company.getName());
