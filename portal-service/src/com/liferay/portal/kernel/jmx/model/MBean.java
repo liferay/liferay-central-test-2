@@ -16,6 +16,8 @@ package com.liferay.portal.kernel.jmx.model;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.HashCode;
+import com.liferay.portal.kernel.util.HashCodeFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -55,7 +57,6 @@ public class MBean implements Serializable {
 	}
 
 	public boolean equals(Object obj) {
-
 		if (this == obj) {
 			return true;
 		}
@@ -118,17 +119,12 @@ public class MBean implements Serializable {
 	}
 
 	public int hashCode() {
-		int hash = 77;
-		if (_domainName != null) {
-			hash += _domainName.hashCode();
-		}
+		HashCode hashCode = HashCodeFactoryUtil.getHashCode();
 
-		hash = 11 * hash;
+		hashCode.append(_domainName);
+		hashCode.append(_mBeanName);
 
-		if (_mBeanName != null) {
-			hash += _mBeanName.hashCode();
-		}
-		return hash;
+		return hashCode.toHashCode();
 	}
 
 	public boolean isLoaded() {
