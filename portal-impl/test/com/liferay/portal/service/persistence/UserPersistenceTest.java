@@ -101,9 +101,6 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		newUser.setLockoutDate(nextDate());
 		newUser.setAgreedToTermsOfUse(randomBoolean());
 		newUser.setActive(randomBoolean());
-		newUser.setSocialContributionEquity(nextDouble());
-		newUser.setSocialParticipationEquity(nextDouble());
-		newUser.setSocialPersonalEquity(nextDouble());
 
 		_persistence.update(newUser, false);
 
@@ -160,12 +157,6 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingUser.getAgreedToTermsOfUse(),
 			newUser.getAgreedToTermsOfUse());
 		assertEquals(existingUser.getActive(), newUser.getActive());
-		assertEquals(existingUser.getSocialContributionEquity(),
-			newUser.getSocialContributionEquity());
-		assertEquals(existingUser.getSocialParticipationEquity(),
-			newUser.getSocialParticipationEquity());
-		assertEquals(existingUser.getSocialPersonalEquity(),
-			newUser.getSocialPersonalEquity());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -274,9 +265,6 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		user.setLockoutDate(nextDate());
 		user.setAgreedToTermsOfUse(randomBoolean());
 		user.setActive(randomBoolean());
-		user.setSocialContributionEquity(nextDouble());
-		user.setSocialParticipationEquity(nextDouble());
-		user.setSocialPersonalEquity(nextDouble());
 
 		_persistence.update(user, false);
 

@@ -121,8 +121,6 @@ public class AssetEntryJSONSerializer {
 		jsonObj.put("width", model.getWidth());
 		jsonObj.put("priority", model.getPriority());
 		jsonObj.put("viewCount", model.getViewCount());
-		jsonObj.put("socialInformationEquity",
-			model.getSocialInformationEquity());
 
 		return jsonObj;
 	}

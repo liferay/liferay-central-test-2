@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
- * <a href="SocialEquityLogLocalService.java.html"><b><i>View Source</i></b></a>
+ * <a href="SocialEquityUserLocalService.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -31,7 +31,7 @@ import com.liferay.portal.kernel.exception.SystemException;
  * <p>
  * This interface defines the service. The default implementation is
  * {@link
- * com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl}}.
+ * com.liferay.portlet.social.service.impl.SocialEquityUserLocalServiceImpl}}.
  * Modify methods in that class and rerun ServiceBuilder to populate this class
  * and all other generated classes.
  * </p>
@@ -41,25 +41,25 @@ import com.liferay.portal.kernel.exception.SystemException;
  * </p>
  *
  * @author    Brian Wing Shun Chan
- * @see       SocialEquityLogLocalServiceUtil
+ * @see       SocialEquityUserLocalServiceUtil
  * @generated
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface SocialEquityLogLocalService {
-	public com.liferay.portlet.social.model.SocialEquityLog addSocialEquityLog(
-		com.liferay.portlet.social.model.SocialEquityLog socialEquityLog)
+public interface SocialEquityUserLocalService {
+	public com.liferay.portlet.social.model.SocialEquityUser addSocialEquityUser(
+		com.liferay.portlet.social.model.SocialEquityUser socialEquityUser)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.social.model.SocialEquityLog createSocialEquityLog(
-		long equityLogId);
+	public com.liferay.portlet.social.model.SocialEquityUser createSocialEquityUser(
+		long equityUserId);
 
-	public void deleteSocialEquityLog(long equityLogId)
+	public void deleteSocialEquityUser(long equityUserId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteSocialEquityLog(
-		com.liferay.portlet.social.model.SocialEquityLog socialEquityLog)
+	public void deleteSocialEquityUser(
+		com.liferay.portlet.social.model.SocialEquityUser socialEquityUser)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@SuppressWarnings("unchecked")
@@ -84,66 +84,34 @@ public interface SocialEquityLogLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.social.model.SocialEquityLog getSocialEquityLog(
-		long equityLogId)
+	public com.liferay.portlet.social.model.SocialEquityUser getSocialEquityUser(
+		long equityUserId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.social.model.SocialEquityLog> getSocialEquityLogs(
+	public java.util.List<com.liferay.portlet.social.model.SocialEquityUser> getSocialEquityUsers(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getSocialEquityLogsCount()
+	public int getSocialEquityUsersCount()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.social.model.SocialEquityLog updateSocialEquityLog(
-		com.liferay.portlet.social.model.SocialEquityLog socialEquityLog)
+	public com.liferay.portlet.social.model.SocialEquityUser updateSocialEquityUser(
+		com.liferay.portlet.social.model.SocialEquityUser socialEquityUser)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.social.model.SocialEquityLog updateSocialEquityLog(
-		com.liferay.portlet.social.model.SocialEquityLog socialEquityLog,
+	public com.liferay.portlet.social.model.SocialEquityUser updateSocialEquityUser(
+		com.liferay.portlet.social.model.SocialEquityUser socialEquityUser,
 		boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void addEquityLogs(long userId, long assetEntryId,
-		java.lang.String actionId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.util.SocialEquity getContributionEquity(
+		long userId) throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void addEquityLogs(long userId, java.lang.String className,
-		long classPK, java.lang.String actionId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public void checkEquityLogs()
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public void deactivateEquityLogs(long assetEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public void incrementSocialEquityAssetEntry_IQ(long assetEntryId,
-		com.liferay.portal.kernel.counter.SocialEquityCounter value);
-
-	public void incrementSocialEquityUser_CQ(java.lang.String id,
-		com.liferay.portal.kernel.counter.SocialEquityCounter value);
-
-	public void incrementSocialEquityUser_PQ(java.lang.String id,
-		com.liferay.portal.kernel.counter.SocialEquityCounter value);
-
-	public void updateSocialEquityAssetEntry_IQ(long assetEntryId,
-		com.liferay.portal.kernel.counter.SocialEquityCounter counter)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public void updateSocialEquityUser_CQ(java.lang.String id,
-		com.liferay.portal.kernel.counter.SocialEquityCounter counter)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public void updateSocialEquityUser_PQ(java.lang.String id,
-		com.liferay.portal.kernel.counter.SocialEquityCounter counter)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.util.SocialEquity getParticipationEquity(
+		long userId) throws com.liferay.portal.kernel.exception.SystemException;
 }

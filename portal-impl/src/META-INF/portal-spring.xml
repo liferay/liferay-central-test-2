@@ -341,6 +341,7 @@
 	<bean id="com.liferay.portlet.social.service.persistence.SocialEquityLogPersistence" class="com.liferay.portlet.social.service.persistence.SocialEquityLogPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.social.service.SocialEquitySettingLocalService" class="com.liferay.portlet.social.service.impl.SocialEquitySettingLocalServiceImpl" />
 	<bean id="com.liferay.portlet.social.service.persistence.SocialEquitySettingPersistence" class="com.liferay.portlet.social.service.persistence.SocialEquitySettingPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.social.service.SocialEquityUserLocalService" class="com.liferay.portlet.social.service.impl.SocialEquityUserLocalServiceImpl" />
 	<bean id="com.liferay.portlet.social.service.persistence.SocialEquityUserPersistence" class="com.liferay.portlet.social.service.persistence.SocialEquityUserPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.social.service.SocialRelationLocalService" class="com.liferay.portlet.social.service.impl.SocialRelationLocalServiceImpl" />
 	<bean id="com.liferay.portlet.social.service.persistence.SocialRelationPersistence" class="com.liferay.portlet.social.service.persistence.SocialRelationPersistenceImpl" parent="basePersistence" />
