@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.management.action.jmx;
+package com.liferay.portal.kernel.management.action.jmx;
 
 import com.liferay.portal.kernel.jmx.model.MBean;
 import com.liferay.portal.kernel.management.ManageActionException;
