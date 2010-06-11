@@ -34,16 +34,32 @@ String scoreString = numberFormat.format(score);
 		<%= scoreString %> Stars
 	</c:when>
 	<c:otherwise>
-		<div class="taglib-ratings score" id="<%= randomNamespace %>averageRating"></div>
+		<div class="taglib-ratings score" id="<%= randomNamespace %>averageRating">
+			<div class="aui-helper-clearfix" id="<%= randomNamespace %>averageRatingCB">
+
+				<%
+				for (int i = 1; i <= 5; i++) {
+				%>
+
+					<a class="aui-rating-element <%= (i <= score) ? "aui-rating-element-on" : StringPool.BLANK %>" href="javascript:;"></a>
+
+				<%
+				}
+				%>
+
+			</div>
+		</div>
 
 		<aui:script use="aui-rating">
 			var ratingScore = new A.Rating(
 				{
 					boundingBox: '#<%= randomNamespace %>averageRating',
 					defaultSelected: <%= MathUtil.format(score, 1, 1) %>,
-					disabled: true
+					disabled: true,
+					srcNode: '#<%= randomNamespace %>averageRatingCB'
 				}
-			);
+			)
+			.render();
 
 			ratingScore.get('boundingBox').on(
 				'mouseenter',
