@@ -53,6 +53,6 @@ public class WorkflowLogManagerProxyBean
 		OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
-
 	}
+
 }
