@@ -300,20 +300,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		}
 	}
 
-	public ${entity.name} remove(${entity.name} ${entity.varName}) throws SystemException {
-		for (ModelListener<${entity.name}> listener : listeners) {
-			listener.onBeforeRemove(${entity.varName});
-		}
-
-		${entity.varName} = removeImpl(${entity.varName});
-
-		for (ModelListener<${entity.name}> listener : listeners) {
-			listener.onAfterRemove(${entity.varName});
-		}
-
-		return ${entity.varName};
-	}
-
 	protected ${entity.name} removeImpl(${entity.name} ${entity.varName}) throws SystemException {
 		${entity.varName} = toUnwrappedModel(${entity.varName});
 

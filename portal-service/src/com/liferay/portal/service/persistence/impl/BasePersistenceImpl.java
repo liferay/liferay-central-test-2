@@ -30,6 +30,8 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import java.io.Serializable;
@@ -192,9 +194,18 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		throw new UnsupportedOperationException();
 	}
 
-	@SuppressWarnings("unused")
 	public T remove(T model) throws SystemException {
-		throw new UnsupportedOperationException();
+		for (ModelListener<T> listener : listeners) {
+			listener.onBeforeRemove(model);
+		}
+
+		model = removeImpl(model);
+
+		for (ModelListener<T> listener : listeners) {
+			listener.onAfterRemove(model);
+		}
+
+		return model;
 	}
 
 	public void setDataSource(DataSource dataSource) {
@@ -253,9 +264,22 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		return model;
 	}
 
-	@SuppressWarnings("unused")
-	public T updateImpl(T model, boolean merge) throws SystemException {
-		throw new UnsupportedOperationException();
+	public T update(T model, boolean merge, ServiceContext serviceContext)
+		throws SystemException {
+
+		ServiceContext previousServiceContext =
+			ServiceContextThreadLocal.getServiceContext();
+
+		try {
+			ServiceContextThreadLocal.setServiceContext(serviceContext);
+
+			update(model, merge);
+
+			return model;
+		}
+		finally {
+			ServiceContextThreadLocal.setServiceContext(previousServiceContext);
+		}
 	}
 
 	protected void appendOrderByComparator(
@@ -287,6 +311,16 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 				}
 			}
 		}
+	}
+
+	@SuppressWarnings("unused")
+	protected T removeImpl(T model) throws SystemException {
+		throw new UnsupportedOperationException();
+	}
+
+	@SuppressWarnings("unused")
+	protected T updateImpl(T model, boolean merge) throws SystemException {
+		throw new UnsupportedOperationException();
 	}
 
 	protected static final String ORDER_BY_ASC = " ASC";

@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.ServiceContext;
 
 import java.io.Serializable;
 
@@ -77,5 +78,8 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	public void unregisterListener(ModelListener<T> listener);
 
 	public T update(T model, boolean merge) throws SystemException;
+
+	public T update(T model, boolean merge, ServiceContext serviceContext)
+		throws SystemException;
 
 }
