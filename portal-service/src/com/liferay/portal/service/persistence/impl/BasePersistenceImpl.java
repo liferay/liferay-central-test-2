@@ -68,13 +68,13 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 
 		dynamicQuery.setProjection(ProjectionFactoryUtil.rowCount());
 
-		List<?> results = findWithDynamicQuery(dynamicQuery);
+		List<Long> results = findWithDynamicQuery(dynamicQuery);
 
 		if (results.isEmpty()) {
 			return 0;
 		}
 		else {
-			return ((Long)results.get(0)).longValue();
+			return (results.get(0)).longValue();
 		}
 	}
 
