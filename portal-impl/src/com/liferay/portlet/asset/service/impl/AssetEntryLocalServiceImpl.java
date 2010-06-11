@@ -75,12 +75,10 @@ import java.util.Map;
  *
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
- * @author Zsolt Berentey
  */
 public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
-	public void deleteEntry(AssetEntry entry)
-		throws PortalException, SystemException {
+	public void deleteEntry(AssetEntry entry) throws SystemException {
 
 		// Entry
 
@@ -104,7 +102,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	}
 
 	public void deleteEntry(String className, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 

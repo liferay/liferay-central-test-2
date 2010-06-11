@@ -70,10 +70,11 @@ public class SocialEquityUserPersistenceTest extends BasePersistenceTestCase {
 		newSocialEquityUser.setGroupId(nextLong());
 		newSocialEquityUser.setCompanyId(nextLong());
 		newSocialEquityUser.setUserId(nextLong());
-		newSocialEquityUser.setContributionK(nextDouble());
-		newSocialEquityUser.setContributionB(nextDouble());
+		newSocialEquityUser.setContributionEquity(nextDouble());
 		newSocialEquityUser.setParticipationK(nextDouble());
 		newSocialEquityUser.setParticipationB(nextDouble());
+		newSocialEquityUser.setParticipationEquity(nextDouble());
+		newSocialEquityUser.setPersonalEquity(nextDouble());
 
 		_persistence.update(newSocialEquityUser, false);
 
@@ -87,14 +88,16 @@ public class SocialEquityUserPersistenceTest extends BasePersistenceTestCase {
 			newSocialEquityUser.getCompanyId());
 		assertEquals(existingSocialEquityUser.getUserId(),
 			newSocialEquityUser.getUserId());
-		assertEquals(existingSocialEquityUser.getContributionK(),
-			newSocialEquityUser.getContributionK());
-		assertEquals(existingSocialEquityUser.getContributionB(),
-			newSocialEquityUser.getContributionB());
+		assertEquals(existingSocialEquityUser.getContributionEquity(),
+			newSocialEquityUser.getContributionEquity());
 		assertEquals(existingSocialEquityUser.getParticipationK(),
 			newSocialEquityUser.getParticipationK());
 		assertEquals(existingSocialEquityUser.getParticipationB(),
 			newSocialEquityUser.getParticipationB());
+		assertEquals(existingSocialEquityUser.getParticipationEquity(),
+			newSocialEquityUser.getParticipationEquity());
+		assertEquals(existingSocialEquityUser.getPersonalEquity(),
+			newSocialEquityUser.getPersonalEquity());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -171,10 +174,11 @@ public class SocialEquityUserPersistenceTest extends BasePersistenceTestCase {
 		socialEquityUser.setGroupId(nextLong());
 		socialEquityUser.setCompanyId(nextLong());
 		socialEquityUser.setUserId(nextLong());
-		socialEquityUser.setContributionK(nextDouble());
-		socialEquityUser.setContributionB(nextDouble());
+		socialEquityUser.setContributionEquity(nextDouble());
 		socialEquityUser.setParticipationK(nextDouble());
 		socialEquityUser.setParticipationB(nextDouble());
+		socialEquityUser.setParticipationEquity(nextDouble());
+		socialEquityUser.setPersonalEquity(nextDouble());
 
 		_persistence.update(socialEquityUser, false);
 

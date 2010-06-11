@@ -146,46 +146,8 @@ public class SocialEquityLogLocalServiceWrapper
 	}
 
 	public void deactivateEquityLogs(long assetEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_socialEquityLogLocalService.deactivateEquityLogs(assetEntryId);
-	}
-
-	public void incrementSocialEquityAssetEntry_IQ(long assetEntryId,
-		com.liferay.portal.kernel.counter.SocialEquityCounter value) {
-		_socialEquityLogLocalService.incrementSocialEquityAssetEntry_IQ(assetEntryId,
-			value);
-	}
-
-	public void incrementSocialEquityUser_CQ(java.lang.String id,
-		com.liferay.portal.kernel.counter.SocialEquityCounter value) {
-		_socialEquityLogLocalService.incrementSocialEquityUser_CQ(id, value);
-	}
-
-	public void incrementSocialEquityUser_PQ(java.lang.String id,
-		com.liferay.portal.kernel.counter.SocialEquityCounter value) {
-		_socialEquityLogLocalService.incrementSocialEquityUser_PQ(id, value);
-	}
-
-	public void updateSocialEquityAssetEntry_IQ(long assetEntryId,
-		com.liferay.portal.kernel.counter.SocialEquityCounter counter)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		_socialEquityLogLocalService.updateSocialEquityAssetEntry_IQ(assetEntryId,
-			counter);
-	}
-
-	public void updateSocialEquityUser_CQ(java.lang.String id,
-		com.liferay.portal.kernel.counter.SocialEquityCounter counter)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_socialEquityLogLocalService.updateSocialEquityUser_CQ(id, counter);
-	}
-
-	public void updateSocialEquityUser_PQ(java.lang.String id,
-		com.liferay.portal.kernel.counter.SocialEquityCounter counter)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_socialEquityLogLocalService.updateSocialEquityUser_PQ(id, counter);
+		_socialEquityLogLocalService.deactivateEquityLogs(assetEntryId);
 	}
 
 	public SocialEquityLogLocalService getWrappedSocialEquityLogLocalService() {

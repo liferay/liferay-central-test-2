@@ -78,6 +78,10 @@ public interface SocialEquityAssetEntryModel extends BaseModel<SocialEquityAsset
 
 	public void setInformationB(double informationB);
 
+	public double getInformationEquity();
+
+	public void setInformationEquity(double informationEquity);
+
 	public SocialEquityAssetEntry toEscapedModel();
 
 	public boolean isNew();

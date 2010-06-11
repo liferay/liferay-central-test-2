@@ -134,12 +134,6 @@ public interface User extends UserModel {
 	public java.util.List<com.liferay.portal.model.Role> getRoles()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public double getSocialContributionEquity();
-
-	public double getSocialParticipationEquity();
-
-	public double getSocialPersonalEquity();
-
 	public long[] getTeamIds()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -196,8 +190,4 @@ public interface User extends UserModel {
 	public void setPasswordUnencrypted(java.lang.String passwordUnencrypted);
 
 	public void setTimeZoneId(java.lang.String timeZoneId);
-
-	public void updateSocialContributionEquity(double value);
-
-	public void updateSocialParticipationEquity(double value);
 }

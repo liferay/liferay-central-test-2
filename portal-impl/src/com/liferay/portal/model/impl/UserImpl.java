@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.SetUtil;
-import com.liferay.portal.kernel.util.SocialEquity;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
@@ -52,7 +51,6 @@ import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.social.service.SocialEquityUserLocalServiceUtil;
 import com.liferay.util.UniqueList;
 
 import java.util.Date;
@@ -62,7 +60,6 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.TimeZone;
 import java.util.TreeSet;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * <a href="UserImpl.java.html"><b><i>View Source</i></b></a>
@@ -377,46 +374,6 @@ public class UserImpl extends UserModelImpl implements User {
 		return RoleLocalServiceUtil.getUserRoles(getUserId());
 	}
 
-	public double getSocialContributionEquity() {
-		if (_socialContributionEquity == null) {
-			try {
-				SocialEquity contributionEquity =
-					SocialEquityUserLocalServiceUtil.getContributionEquity(
-						getUserId());
-
-				_socialContributionEquity =
-					new AtomicReference<Double>(contributionEquity.getValue());
-			}
-			catch (SystemException se) {
-				return 0;
-			}
-		}
-
-		return _socialContributionEquity.get();
-	}
-
-	public double getSocialParticipationEquity() {
-		if (_socialParticipationEquity == null) {
-			try {
-				SocialEquity participationEquity =
-					SocialEquityUserLocalServiceUtil.getParticipationEquity(
-						getUserId());
-
-				_socialParticipationEquity =
-					new AtomicReference<Double>(participationEquity.getValue());
-			}
-			catch (SystemException se) {
-				return 0;
-			}
-		}
-
-		return _socialParticipationEquity.get();
-	}
-
-	public double getSocialPersonalEquity() {
-		return getSocialContributionEquity() + getSocialParticipationEquity();
-	}
-
 	public long[] getTeamIds() throws SystemException {
 		List<Team> teams = getTeams();
 
@@ -582,43 +539,9 @@ public class UserImpl extends UserModelImpl implements User {
 		super.setTimeZoneId(timeZoneId);
 	}
 
-	public void updateSocialContributionEquity(double value) {
-		if (_socialContributionEquity != null) {
-			double currentValue = 0;
-
-			double newValue = 0;
-
-			do {
-				currentValue = _socialContributionEquity.get();
-
-				newValue = currentValue + value;
-
-			} while (!_socialContributionEquity.compareAndSet(
-				currentValue, newValue));
-		}
-	}
-
-	public void updateSocialParticipationEquity(double value) {
-		if (_socialParticipationEquity != null) {
-			double currentValue = 0;
-
-			double newValue = 0;
-
-			do {
-				currentValue = _socialParticipationEquity.get();
-
-				newValue = currentValue + value;
-
-			} while (!_socialParticipationEquity.compareAndSet(
-				currentValue, newValue));
-		}
-	}
-
 	private Locale _locale;
 	private boolean _passwordModified;
 	private String _passwordUnencrypted;
-	private AtomicReference<Double> _socialContributionEquity;
-	private AtomicReference<Double> _socialParticipationEquity;
 	private TimeZone _timeZone;
 
 }

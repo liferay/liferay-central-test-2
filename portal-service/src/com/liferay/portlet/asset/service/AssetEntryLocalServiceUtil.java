@@ -122,8 +122,7 @@ public class AssetEntryLocalServiceUtil {
 
 	public static void deleteEntry(
 		com.liferay.portlet.asset.model.AssetEntry entry)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteEntry(entry);
 	}
 
@@ -134,8 +133,7 @@ public class AssetEntryLocalServiceUtil {
 	}
 
 	public static void deleteEntry(java.lang.String className, long classPK)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteEntry(className, classPK);
 	}
 

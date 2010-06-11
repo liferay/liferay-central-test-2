@@ -74,6 +74,7 @@ public class SocialEquityAssetEntryPersistenceTest
 		newSocialEquityAssetEntry.setAssetEntryId(nextLong());
 		newSocialEquityAssetEntry.setInformationK(nextDouble());
 		newSocialEquityAssetEntry.setInformationB(nextDouble());
+		newSocialEquityAssetEntry.setInformationEquity(nextDouble());
 
 		_persistence.update(newSocialEquityAssetEntry, false);
 
@@ -93,6 +94,8 @@ public class SocialEquityAssetEntryPersistenceTest
 			newSocialEquityAssetEntry.getInformationK());
 		assertEquals(existingSocialEquityAssetEntry.getInformationB(),
 			newSocialEquityAssetEntry.getInformationB());
+		assertEquals(existingSocialEquityAssetEntry.getInformationEquity(),
+			newSocialEquityAssetEntry.getInformationEquity());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -174,6 +177,7 @@ public class SocialEquityAssetEntryPersistenceTest
 		socialEquityAssetEntry.setAssetEntryId(nextLong());
 		socialEquityAssetEntry.setInformationK(nextDouble());
 		socialEquityAssetEntry.setInformationB(nextDouble());
+		socialEquityAssetEntry.setInformationEquity(nextDouble());
 
 		_persistence.update(socialEquityAssetEntry, false);
 

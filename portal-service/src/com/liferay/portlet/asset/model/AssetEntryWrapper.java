@@ -245,6 +245,14 @@ public class AssetEntryWrapper implements AssetEntry {
 		_assetEntry.setViewCount(viewCount);
 	}
 
+	public double getSocialInformationEquity() {
+		return _assetEntry.getSocialInformationEquity();
+	}
+
+	public void setSocialInformationEquity(double socialInformationEquity) {
+		_assetEntry.setSocialInformationEquity(socialInformationEquity);
+	}
+
 	public com.liferay.portlet.asset.model.AssetEntry toEscapedModel() {
 		return _assetEntry.toEscapedModel();
 	}
@@ -316,10 +324,6 @@ public class AssetEntryWrapper implements AssetEntry {
 		return _assetEntry.getCategoryIds();
 	}
 
-	public double getSocialInformationEquity() {
-		return _assetEntry.getSocialInformationEquity();
-	}
-
 	public java.lang.String[] getTagNames()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetEntry.getTagNames();
@@ -328,10 +332,6 @@ public class AssetEntryWrapper implements AssetEntry {
 	public java.util.List<com.liferay.portlet.asset.model.AssetTag> getTags()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetEntry.getTags();
-	}
-
-	public void updateSocialInformationEquity(double value) {
-		_assetEntry.updateSocialInformationEquity(value);
 	}
 
 	public AssetEntry getWrappedAssetEntry() {
