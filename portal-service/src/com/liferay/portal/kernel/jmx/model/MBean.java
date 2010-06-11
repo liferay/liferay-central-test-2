@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
@@ -51,6 +52,27 @@ public class MBean implements Serializable {
 	public MBean(String domainName, String mBeanName) {
 		_domainName = domainName;
 		_mBeanName = mBeanName;
+	}
+
+	public boolean equals(Object obj) {
+
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof MBean)) {
+			return false;
+		}
+
+		MBean mBean = (MBean)obj;
+
+		if (Validator.equals(_domainName, mBean._domainName) &&
+			Validator.equals(_mBeanName, mBean._mBeanName)) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	public String getDomainName() {
@@ -93,6 +115,20 @@ public class MBean implements Serializable {
 		}
 
 		return _path;
+	}
+
+	public int hashCode() {
+		int hash = 77;
+		if (_domainName != null) {
+			hash += _domainName.hashCode();
+		}
+
+		hash = 11 * hash;
+
+		if (_mBeanName != null) {
+			hash += _mBeanName.hashCode();
+		}
+		return hash;
 	}
 
 	public boolean isLoaded() {
