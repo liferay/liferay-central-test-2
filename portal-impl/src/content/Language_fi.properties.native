@@ -180,7 +180,6 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
-model.resource.com.liferay.knowledgebase.model.KBArticle=Knowledge Base artikkeli
 model.resource.com.liferay.portal.model.Group=Yhteisö
 model.resource.com.liferay.portal.model.Layout=Sivu
 model.resource.com.liferay.portal.model.LayoutPrototype=Page Template (Automatic Copy)

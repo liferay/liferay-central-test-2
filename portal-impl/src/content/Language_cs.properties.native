@@ -180,7 +180,6 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
-model.resource.com.liferay.knowledgebase.model.KBArticle=Článek databáze znalostí
 model.resource.com.liferay.portal.model.Group=Skupina dat
 model.resource.com.liferay.portal.model.Layout=Rozvržení stránky
 model.resource.com.liferay.portal.model.LayoutPrototype=Šablona stránky

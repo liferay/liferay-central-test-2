@@ -180,7 +180,6 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
-model.resource.com.liferay.knowledgebase.model.KBArticle=Статья Базы Знаний
 model.resource.com.liferay.portal.model.Group=Сообщество
 model.resource.com.liferay.portal.model.Layout=Страница
 model.resource.com.liferay.portal.model.LayoutPrototype=Page Template (Automatic Copy)

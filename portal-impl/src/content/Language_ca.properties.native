@@ -180,7 +180,6 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
-model.resource.com.liferay.knowledgebase.model.KBArticle=Knowledge Base Article (Automatic Copy)
 model.resource.com.liferay.portal.model.Group=Communitat
 model.resource.com.liferay.portal.model.Layout=Pàgina
 model.resource.com.liferay.portal.model.LayoutPrototype=Page Template (Automatic Copy)

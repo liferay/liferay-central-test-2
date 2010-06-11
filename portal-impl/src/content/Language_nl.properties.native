@@ -180,7 +180,6 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
-model.resource.com.liferay.knowledgebase.model.KBArticle=Kennisbankartikel
 model.resource.com.liferay.portal.model.Group=Groep
 model.resource.com.liferay.portal.model.Layout=Pagina
 model.resource.com.liferay.portal.model.LayoutPrototype=Paginasjabloon

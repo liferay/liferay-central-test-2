@@ -180,7 +180,6 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
-model.resource.com.liferay.knowledgebase.model.KBArticle=Bilgi Tabanlı Makale
 model.resource.com.liferay.portal.model.Group=Topluluk
 model.resource.com.liferay.portal.model.Layout=Sayfa
 model.resource.com.liferay.portal.model.LayoutPrototype=Page Template (Automatic Copy)

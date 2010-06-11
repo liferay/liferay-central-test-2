@@ -180,7 +180,6 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
-model.resource.com.liferay.knowledgebase.model.KBArticle=知識ベースの記事
 model.resource.com.liferay.portal.model.Group=コミュニティ
 model.resource.com.liferay.portal.model.Layout=ページ
 model.resource.com.liferay.portal.model.LayoutPrototype=ページのテンプレート

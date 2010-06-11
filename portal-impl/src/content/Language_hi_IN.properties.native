@@ -180,7 +180,6 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
-model.resource.com.liferay.knowledgebase.model.KBArticle=ज्ञान आधारी लेख
 model.resource.com.liferay.portal.model.Group=कम्यूनिटी
 model.resource.com.liferay.portal.model.Layout=पन्ना
 model.resource.com.liferay.portal.model.LayoutPrototype=पन्ने का नमूना

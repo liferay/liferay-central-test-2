@@ -180,7 +180,6 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
-model.resource.com.liferay.knowledgebase.model.KBArticle=知识库文章
 model.resource.com.liferay.portal.model.Group=群組
 model.resource.com.liferay.portal.model.Layout=設計
 model.resource.com.liferay.portal.model.LayoutPrototype=頁模板

@@ -180,7 +180,6 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
-model.resource.com.liferay.knowledgebase.model.KBArticle=Tudásbázis cikk
 model.resource.com.liferay.portal.model.Group=Közösség
 model.resource.com.liferay.portal.model.Layout=Oldal
 model.resource.com.liferay.portal.model.LayoutPrototype=Oldal sablon

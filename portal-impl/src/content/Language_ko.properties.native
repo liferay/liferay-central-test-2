@@ -180,7 +180,6 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
-model.resource.com.liferay.knowledgebase.model.KBArticle=지식 기준 기사
 model.resource.com.liferay.portal.model.Group=지역 사회
 model.resource.com.liferay.portal.model.Layout=페이지
 model.resource.com.liferay.portal.model.LayoutPrototype=페이지 템플렛
