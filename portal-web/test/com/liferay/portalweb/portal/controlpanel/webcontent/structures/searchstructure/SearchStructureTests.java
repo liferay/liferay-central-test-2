@@ -12,31 +12,26 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.controlpanel.webcontent;
+package com.liferay.portalweb.portal.controlpanel.webcontent.structures.searchstructure;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portal.controlpanel.webcontent.lar.LARTests;
-import com.liferay.portalweb.portal.controlpanel.webcontent.structures.StructuresTests;
-import com.liferay.portalweb.portal.controlpanel.webcontent.templates.TemplatesTests;
-import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.WCWebContentTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="WebContentTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchStructureTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class WebContentTests extends BaseTests {
+public class SearchStructureTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(LARTests.suite());
-		testSuite.addTest(StructuresTests.suite());
-		testSuite.addTest(TemplatesTests.suite());
-		testSuite.addTest(WCWebContentTests.suite());
+		testSuite.addTestSuite(AddStructureTest.class);
+		testSuite.addTestSuite(SearchStructureTest.class);
+		testSuite.addTestSuite(TearDownStructureTest.class);
 
 		return testSuite;
 	}
