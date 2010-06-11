@@ -11,6 +11,14 @@
 		</ant>
 	</target>
 
+	<target name="run-portal-web-tomcat-hsql">
+		<antcall target="prepare-hsql" />
+
+		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
+			<property name="test.name" value="PortalWebTestSuite" />
+		</ant>
+	</target>
+
 	<target name="run-portal-web-tomcat-mysql">
 		<antcall target="prepare-mysql" />
 

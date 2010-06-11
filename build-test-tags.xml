@@ -11,6 +11,14 @@
 		</ant>
 	</target>
 
+	<target name="run-tags-tomcat-hsql">
+		<antcall target="prepare-hsql" />
+
+		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
+			<property name="test.name" value="TagsTestSuite" />
+		</ant>
+	</target>
+
 	<target name="run-tags-tomcat-mysql">
 		<antcall target="prepare-mysql" />
 

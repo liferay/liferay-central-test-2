@@ -61,6 +61,12 @@
 		<antcall target="prepare-common" />
 	</target>
 
+	<target name="prepare-hsql">
+		<echo file="test.${user.name}.properties">db.type=hsql</echo>
+
+		<antcall target="prepare-common" />
+	</target>
+
 	<target name="prepare-mysql">
 		<echo file="test.${user.name}.properties">db.type=mysql</echo>
 
@@ -565,7 +571,12 @@ file.
 
 	<target name="run-selenium-test">
 		<if>
+			<and>
 			<equals arg1="${test.class}" arg2="PortalWebTestSuite" />
+				<not>
+					<equals arg1="${db.type}" arg2="hsql" />
+				</not>
+			</and>
 			<then>
 				<ant dir="portal-impl" target="test-class" inheritAll="false">
 					<property name="class" value="ServiceHttpTestSuite" />
