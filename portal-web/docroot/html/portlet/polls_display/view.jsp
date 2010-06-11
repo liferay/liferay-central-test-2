@@ -34,7 +34,7 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 		long choiceId = ParamUtil.getLong(request, "choiceId");
 
 		try {
-			PollsVoteServiceUtil.addVote(question.getQuestionId(), choiceId);
+			PollsVoteServiceUtil.addVote(question.getQuestionId(), choiceId, new ServiceContext());
 
 			SessionMessages.add(renderRequest, "vote_added");
 
