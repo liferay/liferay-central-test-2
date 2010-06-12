@@ -33,7 +33,7 @@ Contact selContact = (Contact)request.getAttribute("user.selContact");
 				<aui:input label="icq" name="icqSn" />
 
 				<c:if test="<%= Validator.isNotNull(selContact.getIcqSn()) %>">
-					<img alt="" src="http://web.icq.com/whitepages/online?icq=<%= selContact.getIcqSn() %>&img=5" />
+					<img alt="" src="http://web.icq.com/whitepages/online?icq=<%= HtmlUtil.escapeAttribute(selContact.getIcqSn()) %>&img=5" />
 				</c:if>
 			</div>
 
@@ -45,7 +45,7 @@ Contact selContact = (Contact)request.getAttribute("user.selContact");
 				<aui:input label="skype" name="skypeSn" />
 
 				<c:if test="<%= Validator.isNotNull(selContact.getSkypeSn()) %>">
-					<a href="callto://<%= selContact.getSkypeSn() %>"><img alt="<liferay-ui:message key="call-this-user" />" src="http://mystatus.skype.com/smallicon/<%= selContact.getSkypeSn() %>" /></a>
+					<a href="callto://<%= HtmlUtil.escapeAttribute(selContact.getSkypeSn()) %>"><img alt="<liferay-ui:message key="call-this-user" />" src="http://mystatus.skype.com/smallicon/<%= HtmlUtil.escapeAttribute(selContact.getSkypeSn()) %>" /></a>
 				</c:if>
 			</div>
 
@@ -53,7 +53,7 @@ Contact selContact = (Contact)request.getAttribute("user.selContact");
 				<aui:input label="ym" name="ymSn" />
 
 				<c:if test="<%= Validator.isNotNull(selContact.getYmSn()) %>">
-					<img alt="" src="http://opi.yahoo.com/online?u=<%= selContact.getYmSn() %>&m=g&t=0" />
+					<img alt="" src="http://opi.yahoo.com/online?u=<%= HtmlUtil.escapeAttribute(selContact.getYmSn()) %>&m=g&t=0" />
 				</c:if>
 			</div>
 		</aui:fieldset>

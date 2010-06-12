@@ -24,6 +24,6 @@ Contact selContact = (Contact)request.getAttribute("user.selContact");
 	<h3><liferay-ui:message key="sms" /></h3>
 
 	<ul class="property-list">
-		<li><%= selContact.getSmsSn() %></li>
+		<li><%= HtmlUtil.escape(selContact.getSmsSn()) %></li>
 	</ul>
 </c:if>

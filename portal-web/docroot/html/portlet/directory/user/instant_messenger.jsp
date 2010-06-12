@@ -36,7 +36,7 @@ String ym = selContact.getYmSn();
 				<liferay-ui:message key="aim" />
 			</dt>
 			<dd>
-				<%= aim %>
+				<%= HtmlUtil.escape(aim) %>
 			</dd>
 		</c:if>
 
@@ -45,9 +45,9 @@ String ym = selContact.getYmSn();
 				<liferay-ui:message key="icq" />
 			</dt>
 			<dd>
-				<%= icq %>
+				<%= HtmlUtil.escape(icq) %>
 
-				<img alt="" class="instant-messenger-logo" src="http://web.icq.com/whitepages/online?icq=<%= icq %>&img=5" />
+				<img alt="" class="instant-messenger-logo" src="http://web.icq.com/whitepages/online?icq=<%= HtmlUtil.escapeAttribute(icq) %>&img=5" />
 			</dd>
 		</c:if>
 
@@ -56,7 +56,7 @@ String ym = selContact.getYmSn();
 				<liferay-ui:message key="jabber" />
 			</dt>
 			<dd>
-				<%= jabber %>
+				<%= HtmlUtil.escape(jabber) %>
 			</dd>
 		</c:if>
 
@@ -65,7 +65,7 @@ String ym = selContact.getYmSn();
 				<liferay-ui:message key="msn" />
 			</dt>
 			<dd>
-				<%= msn %>
+				<%= HtmlUtil.escape(msn) %>
 			</dd>
 		</c:if>
 
@@ -74,8 +74,8 @@ String ym = selContact.getYmSn();
 				<liferay-ui:message key="skype" />
 			</dt>
 			<dd>
-				<%= skype %>
-				<a href="callto://<%= skype %>"><img alt="<liferay-ui:message key="call-this-user" />" class="instant-messenger-logo" src="http://mystatus.skype.com/smallicon/<%= skype %>" /></a>
+				<%= HtmlUtil.escape(skype) %>
+				<a href="callto://<%= HtmlUtil.escapeAttribute(skype) %>"><img alt="<liferay-ui:message key="call-this-user" />" class="instant-messenger-logo" src="http://mystatus.skype.com/smallicon/<%= HtmlUtil.escapeAttribute(skype) %>" /></a>
 			</dd>
 		</c:if>
 
@@ -84,8 +84,8 @@ String ym = selContact.getYmSn();
 				<liferay-ui:message key="ym" />
 			</dt>
 			<dd>
-				<%= ym %>
-				<img alt="" class="instant-messenger-logo" src="http://opi.yahoo.com/online?u=<%= ym %>&m=g&t=0" />
+				<%= HtmlUtil.escape(ym) %>
+				<img alt="" class="instant-messenger-logo" src="http://opi.yahoo.com/online?u=<%= HtmlUtil.escapeAttribute(ym) %>&m=g&t=0" />
 			</dd>
 		</c:if>
 	</dl>

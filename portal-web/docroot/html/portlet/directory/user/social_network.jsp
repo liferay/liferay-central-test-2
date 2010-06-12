@@ -33,7 +33,7 @@ String twitter = selContact.getTwitterSn();
 				<liferay-ui:message key="facebook" />
 			</dt>
 			<dd>
-				<%= facebook %>
+				<%= HtmlUtil.escape(facebook) %>
 			</dd>
 		</c:if>
 
@@ -42,7 +42,7 @@ String twitter = selContact.getTwitterSn();
 				<liferay-ui:message key="myspace" />
 			</dt>
 			<dd>
-				<%= mySpace %>
+				<%= HtmlUtil.escape(mySpace) %>
 			</dd>
 		</c:if>
 
@@ -51,7 +51,7 @@ String twitter = selContact.getTwitterSn();
 				<liferay-ui:message key="twitter" />
 			</dt>
 			<dd>
-				<%= twitter %>
+				<%= HtmlUtil.escape(twitter) %>
 			</dd>
 		</c:if>
 	</dl>

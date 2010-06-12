@@ -109,7 +109,7 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 		<span class="aui-field-content">
 			<c:if test='<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>'>
 				<label <%= labelTag %>>
-					<liferay-ui:message key="<%= label %>" />
+					<liferay-ui:message key="<%= HtmlUtil.escape(label) %>" />
 
 					<c:if test="<%= Validator.isNotNull(helpMessage) %>">
 						<liferay-ui:icon-help message="<%= helpMessage %>" />
@@ -263,7 +263,7 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 
 			<c:if test='<%= Validator.isNotNull(label) && inlineLabel.equals("right") %>'>
 				<label <%= labelTag %>>
-					<liferay-ui:message key="<%= label %>" />
+					<liferay-ui:message key="<%= HtmlUtil.escape(label) %>" />
 
 					<c:if test="<%= Validator.isNotNull(helpMessage) %>">
 						<liferay-ui:icon-help message="<%= helpMessage %>" />
