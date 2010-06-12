@@ -17,7 +17,7 @@
 <%
 LinkedHashMap<Long, long[]> scopes = AnnouncementsUtil.getAnnouncementScopes(user.getUserId());
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", delta, portletURL, null, "no-entries-were-found");
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, "no-entries-were-found");
 
 List<AnnouncementsEntry> results = null;
 int total = 0;
@@ -40,11 +40,11 @@ boolean hasResults = total > 0;
 <%
 flagValue = AnnouncementsFlagConstants.HIDDEN;
 
-SearchContainer searchContainer1 = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, "no-entries-were-found");
+searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, "no-entries-were-found");
 %>
 
 <div class="read-entries">
-	<%@ include file="/html/portlet/announcements/read_entry_iterator.jspf" %>
+	<%@ include file="/html/portlet/announcements/entry_iterator.jspf" %>
 </div>
 
 <%
@@ -52,7 +52,7 @@ hasResults = hasResults || (total > 0);
 %>
 
 <c:if test="<%= total > 0 %>">
-	<liferay-ui:search-paginator searchContainer="<%= searchContainer1 %>" type="article" />
+	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="article" />
 </c:if>
 
 <aui:script>
