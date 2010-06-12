@@ -316,17 +316,26 @@ public class StripFilter extends BasePortalFilter {
 			_MARKER_SCRIPT_CLOSE_NEXTS);
 
 		if (endIndex == -1) {
-			_log.error("Missing </script>");
+			_log.error("Missing /script>");
 
 			return currentIndex + 1;
 		}
 
 		int newBeginIndex = endIndex + _MARKER_SCRIPT_CLOSE.length;
 
+		if (oldByteArray[endIndex - 1] == CharPool.BACK_SLASH) {
+			_log.info("Skip Strip \\/script>");
+
+			newBytes.write(oldByteArray, currentIndex,
+				newBeginIndex - currentIndex);
+
+			return newBeginIndex;
+		}
+
 		newBeginIndex += countContinuousWhiteSpace(oldByteArray, newBeginIndex);
 
 		String content = new String(
-			oldByteArray, beginIndex, endIndex - beginIndex);
+			oldByteArray, beginIndex, endIndex - beginIndex - 1);
 
 		if (Validator.isNull(content)) {
 			return newBeginIndex;
@@ -372,6 +381,7 @@ public class StripFilter extends BasePortalFilter {
 		newBytes.write(_CDATA_OPEN);
 		newBytes.write(contentByteBuffer.array(), 0, contentByteBuffer.limit());
 		newBytes.write(_CDATA_CLOSE);
+		newBytes.write(CharPool.LESS_THAN);
 		newBytes.write(_MARKER_SCRIPT_CLOSE);
 
 		return newBeginIndex;
@@ -513,7 +523,7 @@ public class StripFilter extends BasePortalFilter {
 
 	private static final byte[] _MARKER_PRE_OPEN = "pre>".getBytes();
 
-	private static final byte[] _MARKER_SCRIPT_CLOSE = "</script>".getBytes();
+	private static final byte[] _MARKER_SCRIPT_CLOSE = "/script>".getBytes();
 
 	private static final int[] _MARKER_SCRIPT_CLOSE_NEXTS =
 		KMPSearch.generateNexts(_MARKER_SCRIPT_CLOSE);
