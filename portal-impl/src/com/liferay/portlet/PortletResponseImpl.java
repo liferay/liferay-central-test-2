@@ -307,14 +307,20 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		}
 
 		try {
-			portletURLImpl.setWindowState(_portletRequestImpl.getWindowState());
+			if (!lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+				portletURLImpl.setWindowState(
+					_portletRequestImpl.getWindowState());
+			}
 		}
 		catch (WindowStateException wse) {
 			_log.error(wse.getMessage());
 		}
 
 		try {
-			portletURLImpl.setPortletMode(_portletRequestImpl.getPortletMode());
+			if (!lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+				portletURLImpl.setPortletMode(
+					_portletRequestImpl.getPortletMode());
+			}
 		}
 		catch (PortletModeException pme) {
 			_log.error(pme.getMessage());
