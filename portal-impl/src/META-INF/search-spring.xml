@@ -11,12 +11,12 @@
 
 	<!-- Portal search engine -->
 
-	<bean id="indexSearcher.portal" class="com.liferay.portal.search.IndexSearcherImpl" />
-	<bean id="indexWriter.portal" class="com.liferay.portal.search.IndexWriterImpl" />
+	<bean id="com.liferay.portal.search.IndexSearcherImpl" class="com.liferay.portal.search.IndexSearcherImpl" />
+	<bean id="com.liferay.portal.search.IndexWriterImpl" class="com.liferay.portal.search.IndexWriterImpl" />
 	<bean id="com.liferay.portal.kernel.search.PortalSearchEngine" class="com.liferay.portal.search.PortalSearchEngineImpl" />
 	<bean id="com.liferay.portal.kernel.search.SearchEngine" class="com.liferay.portal.search.SearchEngineImpl">
-		<property name="searcher" ref="indexSearcher.portal" />
-		<property name="writer" ref="indexWriter.portal" />
+		<property name="searcher" ref="com.liferay.portal.search.IndexSearcherImpl" />
+		<property name="writer" ref="com.liferay.portal.search.IndexWriterImpl" />
 	</bean>
 	<bean id="com.liferay.portal.kernel.search.SearchPermissionChecker" class="com.liferay.portal.search.SearchPermissionCheckerImpl" />
 	<bean id="com.liferay.portal.kernel.search.SearchEngineUtil" class="com.liferay.portal.kernel.search.SearchEngineUtil">
@@ -27,11 +27,11 @@
 
 	<!-- Lucene search engine -->
 
-	<bean id="indexSearcher.lucene" class="com.liferay.portal.search.lucene.LuceneIndexSearcherImpl" />
-	<bean id="indexWriter.lucene" class="com.liferay.portal.search.lucene.LuceneIndexWriterImpl" />
-	<bean id="searchEngine.lucene" class="com.liferay.portal.search.lucene.LuceneSearchEngineImpl">
-		<property name="searcher" ref="indexSearcher.lucene" />
-		<property name="writer" ref="indexWriter.lucene" />
+	<bean id="com.liferay.portal.search.lucene.LuceneIndexSearcherImpl" class="com.liferay.portal.search.lucene.LuceneIndexSearcherImpl" />
+	<bean id="com.liferay.portal.search.lucene.LuceneIndexWriterImpl" class="com.liferay.portal.search.lucene.LuceneIndexWriterImpl" />
+	<bean id="com.liferay.portal.search.lucene.LuceneSearchEngineImpl" class="com.liferay.portal.search.lucene.LuceneSearchEngineImpl">
+		<property name="searcher" ref="com.liferay.portal.search.lucene.LuceneIndexSearcherImpl" />
+		<property name="writer" ref="com.liferay.portal.search.lucene.LuceneIndexWriterImpl" />
 	</bean>
 	<bean id="com.liferay.portal.search.lucene.LuceneHelperUtil" class="com.liferay.portal.search.lucene.LuceneHelperUtil">
 		<property name="luceneHelper">
@@ -67,10 +67,10 @@
 		<property name="name" value="liferay/search_writer" />
 	</bean>
 	<bean id="messageListener.search_reader" class="com.liferay.portal.kernel.search.messaging.SearchReaderMessageListener">
-		<property name="searchEngine" ref="searchEngine.lucene" />
+		<property name="searchEngine" ref="com.liferay.portal.search.lucene.LuceneSearchEngineImpl" />
 	</bean>
 	<bean id="messageListener.search_writer" class="com.liferay.portal.kernel.search.messaging.SearchWriterMessageListener">
-		<property name="searchEngine" ref="searchEngine.lucene" />
+		<property name="searchEngine" ref="com.liferay.portal.search.lucene.LuceneSearchEngineImpl" />
 	</bean>
 	<bean id="messageListener.search_writer_cluster" class="com.liferay.portal.kernel.cluster.messaging.ClusterBridgeMessageListener">
 		<property name="priority">
