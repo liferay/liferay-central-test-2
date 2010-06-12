@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -268,6 +269,7 @@ public class UpdateLayoutAction extends Action {
 				jsonObj.put("refresh", true);
 			}
 
+			response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 			ServletResponseUtil.write(response, jsonObj.toString());
 		}
 		else {

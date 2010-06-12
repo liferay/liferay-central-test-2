@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.nio.charset.CharsetEncoderUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -257,7 +258,7 @@ public class StripFilter extends BasePortalFilter {
 
 			response.setContentType(contentType);
 
-			if (contentType.indexOf("text/") != -1) {
+			if (contentType.startsWith(ContentTypes.TEXT_HTML)) {
 				byte[] oldByteArray = null;
 				int length = 0;
 
