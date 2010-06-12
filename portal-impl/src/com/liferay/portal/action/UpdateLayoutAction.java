@@ -270,6 +270,7 @@ public class UpdateLayoutAction extends Action {
 			}
 
 			response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
+
 			ServletResponseUtil.write(response, jsonObj.toString());
 		}
 		else {
