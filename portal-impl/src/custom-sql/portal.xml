@@ -210,7 +210,7 @@
 		<![CDATA[
 			INNER JOIN
 				Resource_ ON
-					(Resource_.primKey = Group_.groupId)
+					(Resource_.primKey = CAST(Group_.groupId AS CHAR(255)))
 			INNER JOIN
 				ResourceCode ON
 					(ResourceCode.codeId = Resource_.codeId)
