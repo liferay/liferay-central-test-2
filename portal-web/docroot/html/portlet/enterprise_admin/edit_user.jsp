@@ -259,7 +259,7 @@ String taglibOnSubmit = renderResponse.getNamespace() + "saveUser('" + ((selUser
 						<aui:button type="submit" />
 
 						<%
-						String taglibOnClick = backURL.equals(StringPool.BLANK) ? "location.href = '" + backURL + "';" : backURL;
+						String taglibOnClick = Validator.isNull(backURL) ? "location.href = '';" : backURL;
 						%>
 
 						<aui:button onClick="<%= taglibOnClick %>" type="cancel" />
