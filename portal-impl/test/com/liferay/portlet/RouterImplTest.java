@@ -15,10 +15,11 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.portlet.Route;
+import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.util.BaseTestCase;
 import com.liferay.portal.util.InitUtil;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -97,12 +98,7 @@ public class RouterImplTest extends BaseTestCase {
 
 	public void testPriority() {
 		assertEqualsParametersToUrl(
-			"GET/boxes/index?place=house", "GET/boxes?place=house");
-	}
-
-	public void testQueryStringOverride() {
-		assertEqualsParametersToUrl(
-			"GET/boxes/5/something?action=nowhere", "GET/boxes/5/something");
+			"GET/boxes/index", "GET/boxes");
 	}
 
 	public void testReproduction() {
@@ -116,7 +112,6 @@ public class RouterImplTest extends BaseTestCase {
 		assertEqualsParametersToUrl("GET/boxes.xml");
 		assertEqualsParametersToUrl("POST/boxes");
 		assertEqualsParametersToUrl("POST/boxes.xml");
-		assertEqualsParametersToUrl("POST/boxes.xml?hello=something");
 	}
 
 	public void testUrlToParameters() {
@@ -153,15 +148,14 @@ public class RouterImplTest extends BaseTestCase {
 	}
 
 	protected void assertEquals(
-		Map<String, String> expected, Map<String, String> actual) {
+		Map<String, ?> expected, Map<String, ?> actual) {
 
 		assertEquals(expected.size(), actual.size());
 
-		for (Map.Entry<String, String> entry : expected.entrySet()) {
-			String name = entry.getKey();
-			String value = entry.getValue();
-
-			assertEquals(value, actual.get(name));
+		for (String name : expected.keySet()) {
+			assertEquals(
+				MapUtil.getString(expected, name),
+				MapUtil.getString(actual, name));
 		}
 	}
 
@@ -178,9 +172,8 @@ public class RouterImplTest extends BaseTestCase {
 	}
 
 	protected void assertEqualsUrlToParameters(String url, String queryString) {
-		Map<String, String> parameters = new HashMap<String, String>();
-
-		_routerImpl.queryStringToParameters(queryString, parameters);
+		Map<String, String[]> parameters = HttpUtil.parameterMapFromString(
+			queryString);
 
 		Map<String, String> generatedParameters = _routerImpl.urlToParameters(
 			url);
