@@ -1897,6 +1897,9 @@ public class JournalArticleLocalServiceImpl
 				article.getVersion())) {
 
 			if (status == WorkflowConstants.STATUS_APPROVED) {
+				updateUrlTitles(
+					article.getGroupId(), article.getArticleId(),
+					article.getUrlTitle());
 
 				// Asset
 
@@ -1956,13 +1959,6 @@ public class JournalArticleLocalServiceImpl
 					JournalArticle.class);
 
 				indexer.reindex(article);
-
-				// URL titles
-
-				updateUrlTitles(
-					article.getGroupId(), article.getArticleId(),
-					article.getUrlTitle());
-
 			}
 			else {
 				if (article.isApproved()) {
