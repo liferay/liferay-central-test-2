@@ -97,8 +97,7 @@ public class RouterImplTest extends BaseTestCase {
 	}
 
 	public void testPriority() {
-		assertEqualsParametersToUrl(
-			"GET/boxes/index", "GET/boxes");
+		assertEqualsParametersToUrl("GET/boxes/index", "GET/boxes");
 	}
 
 	public void testReproduction() {
