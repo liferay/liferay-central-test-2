@@ -36,9 +36,17 @@ portletURL.setParameter("portletResource", portletResource);
 	<liferay-util:param name="tabs1" value="setup" />
 </liferay-util:include>
 
-<liferay-util:include page="/html/portlet/portlet_configuration/tabs2.jsp">
-	<liferay-util:param name="tabs2" value="archived" />
-</liferay-util:include>
+<portlet:renderURL var="backURL">
+	<portlet:param name="struts_action" value="/portlet_configuration/edit_configuration" />
+	<portlet:param name="redirect" value="<%= redirect %>" />
+	<portlet:param name="returnToFullPageURL" value="<%= returnToFullPageURL %>" />
+	<portlet:param name="portletResource" value="<%= portletResource %>" />
+</portlet:renderURL>
+
+<liferay-ui:tabs
+	names="backed-up-setups"
+	backURL="<%= backURL %>"
+/>
 
 <liferay-ui:error exception="<%= NoSuchPortletItemException.class %>" message="the-setup-could-not-be-found" />
 <liferay-ui:error exception="<%= PortletItemNameException.class %>" message="please-enter-a-valid-setup-name" />
@@ -62,7 +70,7 @@ portletURL.setParameter("portletResource", portletResource);
 	headerNames.add("modified-date");
 	headerNames.add(StringPool.BLANK);
 
-	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-archived-setups");
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-backed-up-setups");
 
 	List archivedSetups = PortletItemLocalServiceUtil.getPortletItems(scopeGroupId, selPortlet.getRootPortletId(), com.liferay.portal.model.PortletPreferences.class.getName());
 
@@ -107,11 +115,11 @@ portletURL.setParameter("portletResource", portletResource);
 
 	<div class="separator"><!-- --></div>
 
-	<liferay-ui:message key="archive-name-for-current-setup" />
+	<aui:input label="back-up-name-for-current-setup" name="name" size="20" type="text" />
 
-	<aui:input name="name" size="20" type="text" />
-
-	<aui:button type="submit" />
+	<aui:button-row>
+		<aui:button type="submit" />
+	</aui:button-row>
 </aui:form>
 
 <%
