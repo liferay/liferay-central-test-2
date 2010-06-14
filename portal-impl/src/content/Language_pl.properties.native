@@ -763,6 +763,7 @@ approve=Zatwierdź
 approved=Zatwierdzony
 arabic=Arabski
 archive-name-for-current-setup=Nazwa archiwum dla bieżącej konfiguracji
+archive-restore-setup=Archive/Restore Setup (Automatic Copy)
 archived-setups=Zarchiwizowane konfiguracje
 archived=Zarchiwizowane
 are-you-sure-you-want-to-approve-this-proposal=Czy na pewno chcesz zatwierdzić ten wniosek?

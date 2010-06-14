@@ -763,6 +763,7 @@ approve=Утвердить
 approved=Утвержденный
 arabic=Арабский
 archive-name-for-current-setup=Имя архива для текущего набора настроек
+archive-restore-setup=Archive/Restore Setup (Automatic Copy)
 archived-setups=Архивированные настройки
 archived=Архивированные
 are-you-sure-you-want-to-approve-this-proposal=Вы уверены, что хотите одобрить это предложение?

@@ -763,6 +763,7 @@ approve=Onaylama
 approved=Onaylanmış
 arabic=Arapça
 archive-name-for-current-setup=Arşiv/kayıt adı için güncel ayarlar/kurulum
+archive-restore-setup=Archive/Restore Setup (Automatic Copy)
 archived-setups=Arşiv/kayıt ayarları/kurulumu
 archived=Arşiv/kayıtlı
 are-you-sure-you-want-to-approve-this-proposal=Bu öneriyi/tasarıyı onaylamak istediğinizden emin misiniz?

@@ -763,6 +763,7 @@ approve=स्वीकृत
 approved=स्वीकृत किया गया (अप्रूव्ड)
 arabic=अरेबिक
 archive-name-for-current-setup=मौजूदा सेटअप के लिए संग्रह (आर्काइव) का नाम
+archive-restore-setup=Archive/Restore Setup (Automatic Copy)
 archived-setups=आर्काइव्ड सेटअप
 archived=संग्रह (आर्काइव्ड)
 are-you-sure-you-want-to-approve-this-proposal=क्या आप सुनिश्चित हैं कि आप इस प्रस्ताव को मंजूर करना चाहते हैं?

@@ -763,6 +763,7 @@ approve=Hyväksy
 approved=Hyväksytty
 arabic=Arabialainen
 archive-name-for-current-setup=Arkisto nimi nykyisille asetuksille
+archive-restore-setup=Archive/Restore Setup (Automatic Copy)
 archived-setups=Arkistoidut asetukset
 archived=Arkistoitu
 are-you-sure-you-want-to-approve-this-proposal=Oletko varma, että haluat hyväksyä tämän ehdotuksen?

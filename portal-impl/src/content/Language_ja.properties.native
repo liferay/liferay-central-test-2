@@ -763,6 +763,7 @@ approve=承認
 approved=承認済み
 arabic=アラビア語
 archive-name-for-current-setup=現在のセットアップのアーカイブ名
+archive-restore-setup=アーカイブか回復の組み立て (Automatic Translation)
 archived-setups=アーカイブされたセットアップ
 archived=アーカイブ
 are-you-sure-you-want-to-approve-this-proposal=この申請を承認しますか？

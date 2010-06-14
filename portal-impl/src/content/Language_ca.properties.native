@@ -763,6 +763,7 @@ approve=Aprovació
 approved=Aprovat
 arabic=Àrab
 archive-name-for-current-setup=Nom de l'arxiu de les configuracions actuals.
+archive-restore-setup=Archive/Restore Setup (Automatic Copy)
 archived-setups=Configuracions desades
 archived=Desats
 are-you-sure-you-want-to-approve-this-proposal=Esteu segur que voleu aprovar aquesta proposta ?

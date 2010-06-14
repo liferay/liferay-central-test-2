@@ -763,6 +763,7 @@ approve=Kinnita
 approved=Kinnitatud
 arabic=Araabia
 archive-name-for-current-setup=Arhiivi nimi praegusele seadistusele
+archive-restore-setup=Archive/Restore Setup (Automatic Copy)
 archived-setups=Arhiveeritud seadistused
 archived=Arhiveeritud
 are-you-sure-you-want-to-approve-this-proposal=Kas oled kindel, et soovid seda ettepanekut kinnitada?

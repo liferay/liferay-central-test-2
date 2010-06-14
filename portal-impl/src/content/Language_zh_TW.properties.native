@@ -763,6 +763,7 @@ approve=批准
 approved=批准
 arabic=阿拉伯
 archive-name-for-current-setup=檔案名字對於當前的設定
+archive-restore-setup=檔案或恢復設定 (Automatic Translation)
 archived-setups=被歸檔的設定
 archived=歸檔
 are-you-sure-you-want-to-approve-this-proposal=是否確實要批准這個提案嗎?
