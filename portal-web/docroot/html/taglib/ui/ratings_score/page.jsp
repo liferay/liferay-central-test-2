@@ -35,7 +35,7 @@ String scoreString = numberFormat.format(score);
 	</c:when>
 	<c:otherwise>
 		<div class="taglib-ratings score" id="<%= randomNamespace %>averageRating">
-			<div class="aui-helper-clearfix" id="<%= randomNamespace %>averageRatingCB">
+			<div class="aui-helper-clearfix" id="<%= randomNamespace %>averageRatingContent">
 
 				<%
 				for (int i = 1; i <= 5; i++) {
@@ -56,10 +56,9 @@ String scoreString = numberFormat.format(score);
 					boundingBox: '#<%= randomNamespace %>averageRating',
 					defaultSelected: <%= MathUtil.format(score, 1, 1) %>,
 					disabled: true,
-					srcNode: '#<%= randomNamespace %>averageRatingCB'
+					srcNode: '#<%= randomNamespace %>averageRatingContent'
 				}
-			)
-			.render();
+			).render();
 
 			ratingScore.get('boundingBox').on(
 				'mouseenter',
