@@ -3275,11 +3275,13 @@ public class PortalImpl implements Portal {
 			return true;
 		}
 
-		if (layout.isTypeControlPanel()) {
+		if (layout.isTypeControlPanel() &&
+			isControlPanelPortlet(portletId, themeDisplay)) {
 			return true;
 		}
 
-		if (layoutTypePortlet.hasPortletId(portletId)) {
+		if (layout.isTypePortlet() &&
+			layoutTypePortlet.hasPortletId(portletId)) {
 			return true;
 		}
 

@@ -62,7 +62,7 @@ if (Validator.isNotNull(ppid)) {
 	portlet = PortletLocalServiceUtil.getPortletById(ppid);
 
 	if ((portlet == null) ||
-		(!portlet.isSystem() && !PortalUtil.isControlPanelPortlet(ppid, category, themeDisplay))) {
+		(!portlet.isSystem() && !PortalUtil.isControlPanelPortlet(ppid, category, themeDisplay)) && !PortalUtil.isAllowAddPortletDefaultResource(request, portlet)) {
 
 		denyAccess = true;
 	}
