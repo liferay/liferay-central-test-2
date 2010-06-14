@@ -48,8 +48,8 @@ public class FormTag extends IncludeTag {
 		_escapeXml = escapeXml;
 	}
 
-	public void setInlineLabel(boolean inlineLabel) {
-		_inlineLabel = inlineLabel;
+	public void setInlineLabels(boolean inlineLabels) {
+		_inlineLabels = inlineLabels;
 	}
 
 	public void setName(String name) {
@@ -68,7 +68,7 @@ public class FormTag extends IncludeTag {
 		_action = null;
 		_cssClass = null;
 		_escapeXml = true;
-		_inlineLabel = false;
+		_inlineLabels = false;
 		_name = "fm";
 		_onSubmit = null;
 		_useNamespace = true;
@@ -98,7 +98,7 @@ public class FormTag extends IncludeTag {
 		request.setAttribute(
 			"aui:form:dynamicAttributes", getDynamicAttributes());
 		request.setAttribute(
-			"aui:form:inlineLabel", String.valueOf(_inlineLabel));
+			"aui:form:inlineLabels", String.valueOf(_inlineLabels));
 		request.setAttribute("aui:form:name", _name);
 		request.setAttribute("aui:form:onSubmit", _onSubmit);
 		request.setAttribute(
@@ -114,7 +114,7 @@ public class FormTag extends IncludeTag {
 	private String _action;
 	private String _cssClass;
 	private boolean _escapeXml = true;
-	private boolean _inlineLabel;
+	private boolean _inlineLabels;
 	private String _name = "fm";
 	private String _onSubmit;
 	private boolean _useNamespace = true;
