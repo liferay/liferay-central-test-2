@@ -1013,7 +1013,7 @@ public class PortalUtil {
 		return getPortal().isCompanyAdmin(user);
 	}
 
-	public boolean isControlPanelPortlet(
+	public static boolean isControlPanelPortlet(
 			String portletId, String category, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
@@ -1021,7 +1021,7 @@ public class PortalUtil {
 			portletId, category, themeDisplay);
 	}
 
-	public boolean isControlPanelPortlet(
+	public static boolean isControlPanelPortlet(
 			String portletId, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
