@@ -16,10 +16,10 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-configuration .backed-up-setups {
-	text-align: right;
+.portlet-configuration .archived-setups {
 	margin-bottom: 1em;
 	margin-right: 0.5em;
+	text-align: right;
 }
 
 .portlet-configuration .edit-permissions form:after {

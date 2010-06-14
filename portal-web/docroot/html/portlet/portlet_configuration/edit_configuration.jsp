@@ -17,9 +17,10 @@
 <%@ include file="/html/portlet/portlet_configuration/init.jsp" %>
 
 <%
-String portletResource = ParamUtil.getString(request, "portletResource");
 String redirect = ParamUtil.getString(request, "redirect");
 String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL");
+
+String portletResource = ParamUtil.getString(request, "portletResource");
 
 String path = (String)request.getAttribute(WebKeys.CONFIGURATION_ACTION_PATH);
 %>
@@ -29,16 +30,15 @@ String path = (String)request.getAttribute(WebKeys.CONFIGURATION_ACTION_PATH);
 </liferay-util:include>
 
 <c:if test="<%= GroupPermissionUtil.contains(permissionChecker, layout.getGroupId(), ActionKeys.MANAGE_ARCHIVED_SETUPS) %>">
-	<portlet:renderURL var="backedUpSetupsURL">
+	<portlet:renderURL var="archivedSetupsURL">
 		<portlet:param name="struts_action" value="/portlet_configuration/edit_archived_setups" />
 		<portlet:param name="redirect" value="<%= redirect %>" />
 		<portlet:param name="returnToFullPageURL" value="<%= returnToFullPageURL %>" />
 		<portlet:param name="portletResource" value="<%= portletResource %>" />
-		<portlet:param name="" value="" />
 	</portlet:renderURL>
 
-	<div class="backed-up-setups">
-		<liferay-ui:icon message="back-up-restore-setup" image="export" label="<%= true %>" url="<%= backedUpSetupsURL %>" />
+	<div class="archived-setups">
+		<liferay-ui:icon message="archive-restore-setup" image="export" label="<%= true %>" url="<%= archivedSetupsURL %>" />
 	</div>
 </c:if>
 

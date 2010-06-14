@@ -44,7 +44,7 @@ portletURL.setParameter("portletResource", portletResource);
 </portlet:renderURL>
 
 <liferay-ui:tabs
-	names="backed-up-setups"
+	names="archived-setups"
 	backURL="<%= backURL %>"
 />
 
@@ -70,7 +70,7 @@ portletURL.setParameter("portletResource", portletResource);
 	headerNames.add("modified-date");
 	headerNames.add(StringPool.BLANK);
 
-	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-backed-up-setups");
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-archived-setups");
 
 	List archivedSetups = PortletItemLocalServiceUtil.getPortletItems(scopeGroupId, selPortlet.getRootPortletId(), com.liferay.portal.model.PortletPreferences.class.getName());
 
@@ -115,7 +115,7 @@ portletURL.setParameter("portletResource", portletResource);
 
 	<div class="separator"><!-- --></div>
 
-	<aui:input label="back-up-name-for-current-setup" name="name" size="20" type="text" />
+	<aui:input label="archive-name-for-current-setup" name="name" size="20" type="text" />
 
 	<aui:button-row>
 		<aui:button type="submit" />
