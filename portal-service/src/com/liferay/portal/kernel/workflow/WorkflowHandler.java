@@ -43,8 +43,7 @@ public interface WorkflowHandler {
 	public AssetRenderer getAssetRenderer(long classPK)
 		throws PortalException, SystemException;
 
-	public AssetRendererFactory getAssetRendererFactory()
-		throws PortalException, SystemException;
+	public AssetRendererFactory getAssetRendererFactory();
 
 	public String getClassName();
 
@@ -66,9 +65,8 @@ public interface WorkflowHandler {
 		String noSuchEntryRedirect);
 
 	public String render(
-			long classPK, RenderRequest renderRequest,
-			RenderResponse renderResponse, String template)
-		throws Exception;
+		long classPK, RenderRequest renderRequest,
+		RenderResponse renderResponse, String template);
 
 	public void startWorkflowInstance(
 			long companyId, long groupId, long userId, long classPK,

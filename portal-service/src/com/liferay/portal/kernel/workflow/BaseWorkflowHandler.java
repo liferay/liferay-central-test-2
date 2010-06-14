@@ -48,8 +48,7 @@ public abstract class BaseWorkflowHandler implements WorkflowHandler {
 	public AssetRenderer getAssetRenderer(long classPK)
 		throws PortalException, SystemException {
 
-		AssetRendererFactory assetRendererFactory =
-			getAssetRendererFactory();
+		AssetRendererFactory assetRendererFactory = getAssetRendererFactory();
 
 		if (assetRendererFactory != null) {
 			return assetRendererFactory.getAssetRenderer(classPK);
@@ -59,9 +58,7 @@ public abstract class BaseWorkflowHandler implements WorkflowHandler {
 		}
 	}
 
-	public AssetRendererFactory getAssetRendererFactory()
-		throws PortalException, SystemException {
-
+	public AssetRendererFactory getAssetRendererFactory() {
 		return AssetRendererFactoryRegistryUtil.
 			getAssetRendererFactoryByClassName(getClassName());
 	}
@@ -153,9 +150,8 @@ public abstract class BaseWorkflowHandler implements WorkflowHandler {
 	}
 
 	public String render(
-			long classPK, RenderRequest renderRequest,
-			RenderResponse renderResponse, String template)
-		throws Exception{
+		long classPK, RenderRequest renderRequest,
+		RenderResponse renderResponse, String template) {
 
 		try {
 			AssetRenderer assetRenderer = getAssetRenderer(classPK);
