@@ -16,14 +16,14 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
-<aui:form method="post" name="fm">
+<%
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setParameter("struts_action", "/enterprise_admin/select_regular_role");
+%>
+
+<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 	<liferay-ui:tabs names="roles" />
-
-	<%
-	PortletURL portletURL = renderResponse.createRenderURL();
-
-	portletURL.setParameter("struts_action", "/enterprise_admin/select_regular_role");
-	%>
 
 	<liferay-ui:search-container
 		headerNames="name"
