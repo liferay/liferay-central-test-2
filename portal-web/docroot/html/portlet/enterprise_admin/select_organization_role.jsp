@@ -28,10 +28,12 @@ long uniqueOrganizationId = 0;
 
 List<Organization> organizations = null;
 
-if (step == 1) {
-	long[] organizationIds = StringUtil.split(ParamUtil.getString(request, "organizationIds"), 0L);
+String organizationIds = ParamUtil.getString(request, "organizationIds");
 
-	organizations = OrganizationLocalServiceUtil.getOrganizations(organizationIds);
+portletURL.setParameter("organizationIds", organizationIds);
+
+if (step == 1) {
+	organizations = OrganizationLocalServiceUtil.getOrganizations(StringUtil.split(organizationIds, 0L));
 
 	if (filterManageableOrganizations) {
 		organizations = EnterpriseAdminUtil.filterOrganizations(permissionChecker, organizations);
@@ -43,12 +45,13 @@ if (step == 1) {
 		uniqueOrganizationId = organizations.get(0).getOrganizationId();
 	}
 }
+
+long organizationId = ParamUtil.getLong(request, "organizationId", uniqueOrganizationId);
 %>
 
-<aui:form method="post" name="fm">
+<aui:form method="post" name="fm" action="<%= portletURL.toString() %>">
 	<c:choose>
 		<c:when test="<%= step == 1 %>">
-			<aui:input name="step" type="hidden" value="2" />
 			<aui:input name="organizationId" type="hidden" />
 
 			<liferay-ui:tabs names="organization-roles" />
@@ -56,6 +59,10 @@ if (step == 1) {
 			<div class="portlet-msg-info">
 				<liferay-ui:message key="please-select-an-organization-to-which-you-will-assign-an-organization-role" />
 			</div>
+
+			<%
+			portletURL.setParameter("step", "1");
+			%>
 
 			<liferay-ui:search-container
 				searchContainer="<%= new OrganizationSearch(renderRequest, portletURL) %>"
@@ -155,17 +162,22 @@ if (step == 1) {
 				function <portlet:namespace />selectOrganization(organizationId) {
 					document.<portlet:namespace />fm.<portlet:namespace />organizationId.value = organizationId;
 
+					<%
+					portletURL.setParameter("step", "2");
+					%>
+
 					submitForm(document.<portlet:namespace />fm, "<%= portletURL.toString() %>");
 				}
 			</aui:script>
 		</c:when>
 
 		<c:when test="<%= step == 2 %>">
+			<aui:input name="organizationId" type="hidden" value="<%= String.valueOf(organizationId) %>" />
+			<aui:input name="step" type="hidden" value="2" />
+
 			<liferay-ui:tabs names="organization-roles" />
 
 			<%
-			long organizationId = ParamUtil.getLong(request, "organizationId", uniqueOrganizationId);
-
 			Organization organization = OrganizationServiceUtil.getOrganization(organizationId);
 
 			portletURL.setParameter("step", "1");
@@ -176,6 +188,11 @@ if (step == 1) {
 			<div class="breadcrumbs">
 				<%= breadcrumbs %>
 			</div>
+
+			<%
+			portletURL.setParameter("organizationId", String.valueOf(organizationId));
+			portletURL.setParameter("step", "2");
+			%>
 
 			<liferay-ui:search-container
 				headerNames="name"
