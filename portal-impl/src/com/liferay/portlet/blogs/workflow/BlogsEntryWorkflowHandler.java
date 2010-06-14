@@ -41,6 +41,14 @@ public class BlogsEntryWorkflowHandler extends BaseWorkflowHandler {
 
 	public static final String CLASS_NAME = BlogsEntry.class.getName();
 
+	public AssetRenderer getAssetRenderer(long classPK)
+		throws PortalException, SystemException {
+
+		BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
+
+		return new BlogsEntryAssetRenderer(entry);
+	}
+
 	public String getClassName() {
 		return CLASS_NAME;
 	}
@@ -64,14 +72,6 @@ public class BlogsEntryWorkflowHandler extends BaseWorkflowHandler {
 
 		return BlogsEntryLocalServiceUtil.updateStatus(
 			userId, classPK, status, serviceContext);
-	}
-
-	protected AssetRenderer getAssetRenderer(long classPK)
-		throws PortalException, SystemException {
-
-		BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
-
-		return new BlogsEntryAssetRenderer(entry);
 	}
 
 	protected String getIconPath(ThemeDisplay themeDisplay) {

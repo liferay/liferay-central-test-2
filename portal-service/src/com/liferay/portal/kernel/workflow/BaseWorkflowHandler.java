@@ -32,6 +32,8 @@ import java.io.Serializable;
 import java.util.Map;
 
 import javax.portlet.PortletURL;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
 /**
  * <a href="BaseWorkflowHandler.java.html"><b><i>View Source</i></b></a>
@@ -39,8 +41,30 @@ import javax.portlet.PortletURL;
  * @author Bruno Farache
  * @author Marcellus Tavares
  * @author Juan Fernández
+ * @author Julio Camarero
  */
 public abstract class BaseWorkflowHandler implements WorkflowHandler {
+
+	public AssetRenderer getAssetRenderer(long classPK)
+		throws PortalException, SystemException {
+
+		AssetRendererFactory assetRendererFactory =
+			getAssetRendererFactory();
+
+		if (assetRendererFactory != null) {
+			return assetRendererFactory.getAssetRenderer(classPK);
+		}
+		else {
+			return null;
+		}
+	}
+
+	public AssetRendererFactory getAssetRendererFactory()
+		throws PortalException, SystemException {
+
+		return AssetRendererFactoryRegistryUtil.
+			getAssetRendererFactoryByClassName(getClassName());
+	}
 
 	public String getIconPath(LiferayPortletRequest liferayPortletRequest) {
 		ThemeDisplay themeDisplay =
@@ -48,6 +72,23 @@ public abstract class BaseWorkflowHandler implements WorkflowHandler {
 				WebKeys.THEME_DISPLAY);
 
 		return getIconPath(themeDisplay);
+	}
+
+	public String getSummary(long classPK) {
+		try {
+			AssetRenderer assetRenderer = getAssetRenderer(classPK);
+
+			if (assetRenderer != null) {
+				return assetRenderer.getSummary();
+			}
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
+		}
+
+		return null;
 	}
 
 	public String getTitle(long classPK) {
@@ -88,6 +129,51 @@ public abstract class BaseWorkflowHandler implements WorkflowHandler {
 		return null;
 	}
 
+	public String getURLViewInContext(
+		long classPK, LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse,
+		String noSuchEntryRedirect) {
+
+		try {
+			AssetRenderer assetRenderer = getAssetRenderer(classPK);
+
+			if (assetRenderer != null) {
+				return assetRenderer.getURLViewInContext(
+					liferayPortletRequest, liferayPortletResponse,
+					noSuchEntryRedirect);
+			}
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
+		}
+
+		return null;
+	}
+
+	public String render(
+			long classPK, RenderRequest renderRequest,
+			RenderResponse renderResponse, String template)
+		throws Exception{
+
+		try {
+			AssetRenderer assetRenderer = getAssetRenderer(classPK);
+
+			if (assetRenderer != null) {
+				return assetRenderer.render(
+					renderRequest, renderResponse, template);
+			}
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
+		}
+
+		return null;
+	}
+
 	public void startWorkflowInstance(
 			long companyId, long groupId, long userId, long classPK,
 			Object model, Map<String, Serializable> workflowContext)
@@ -96,21 +182,6 @@ public abstract class BaseWorkflowHandler implements WorkflowHandler {
 		WorkflowInstanceLinkLocalServiceUtil.startWorkflowInstance(
 			companyId, groupId, userId, getClassName(), classPK,
 			workflowContext);
-	}
-
-	protected AssetRenderer getAssetRenderer(long classPK)
-		throws PortalException, SystemException {
-
-		AssetRendererFactory assetRendererFactory =
-			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
-				getClassName());
-
-		if (assetRendererFactory != null) {
-			return assetRendererFactory.getAssetRenderer(classPK);
-		}
-		else {
-			return null;
-		}
 	}
 
 	protected String getIconPath(ThemeDisplay themeDisplay) {

@@ -18,6 +18,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portlet.asset.model.AssetRenderer;
+import com.liferay.portlet.asset.model.AssetRendererFactory;
 
 import java.io.Serializable;
 
@@ -25,6 +27,8 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.portlet.PortletURL;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
 /**
  * <a href="WorkflowHandler.java.html"><b><i>View Source</i></b></a>
@@ -32,12 +36,21 @@ import javax.portlet.PortletURL;
  * @author Bruno Farache
  * @author Macerllus Tavares
  * @author Juan Fernández
+ * @author Julio Camarero
  */
 public interface WorkflowHandler {
+
+	public AssetRenderer getAssetRenderer(long classPK)
+		throws PortalException, SystemException;
+
+	public AssetRendererFactory getAssetRendererFactory()
+		throws PortalException, SystemException;
 
 	public String getClassName();
 
 	public String getIconPath(LiferayPortletRequest liferayPortletRequest);
+
+	public String getSummary(long classPK);
 
 	public String getTitle(long classPK);
 
@@ -46,6 +59,16 @@ public interface WorkflowHandler {
 	public PortletURL getURLEdit(
 		long classPK, LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse);
+
+	public String getURLViewInContext(
+		long classPK, LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse,
+		String noSuchEntryRedirect);
+
+	public String render(
+			long classPK, RenderRequest renderRequest,
+			RenderResponse renderResponse, String template)
+		throws Exception;
 
 	public void startWorkflowInstance(
 			long companyId, long groupId, long userId, long classPK,

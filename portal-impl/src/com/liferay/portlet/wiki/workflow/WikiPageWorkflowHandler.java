@@ -36,10 +36,19 @@ import java.util.Map;
  * <a href="WikiPageWorkflowHandler.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ * @author Julio Camarero
  */
 public class WikiPageWorkflowHandler extends BaseWorkflowHandler {
 
 	public static final String CLASS_NAME = WikiPage.class.getName();
+
+	public AssetRenderer getAssetRenderer(long classPK)
+		throws PortalException, SystemException {
+
+		WikiPage page = WikiPageLocalServiceUtil.getPage(classPK);
+
+		return new WikiPageAssetRenderer(page);
+	}
 
 	public String getClassName() {
 		return CLASS_NAME;
@@ -64,14 +73,6 @@ public class WikiPageWorkflowHandler extends BaseWorkflowHandler {
 
 		return WikiPageLocalServiceUtil.updateStatus(
 			userId, classPK, status, serviceContext);
-	}
-
-	protected AssetRenderer getAssetRenderer(long classPK)
-		throws PortalException, SystemException {
-
-		WikiPage page = WikiPageLocalServiceUtil.getPage(classPK);
-
-		return new WikiPageAssetRenderer(page);
 	}
 
 	protected String getIconPath(ThemeDisplay themeDisplay) {

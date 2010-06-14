@@ -39,10 +39,20 @@ import java.util.Map;
  * @author Bruno Farache
  * @author Marcellus Tavares
  * @author Juan Fernández
+ * @author Julio Camarero
  */
 public class JournalArticleWorkflowHandler extends BaseWorkflowHandler {
 
 	public static final String CLASS_NAME = JournalArticle.class.getName();
+
+	public AssetRenderer getAssetRenderer(long classPK)
+		throws PortalException, SystemException {
+
+		JournalArticle article = JournalArticleLocalServiceUtil.getArticle(
+			classPK);
+
+		return new JournalArticleAssetRenderer(article);
+	}
 
 	public String getClassName() {
 		return CLASS_NAME;
@@ -67,15 +77,6 @@ public class JournalArticleWorkflowHandler extends BaseWorkflowHandler {
 
 		return JournalArticleLocalServiceUtil.updateStatus(
 			userId, classPK, status, serviceContext);
-	}
-
-	protected AssetRenderer getAssetRenderer(long classPK)
-		throws PortalException, SystemException {
-
-		JournalArticle article = JournalArticleLocalServiceUtil.getArticle(
-			classPK);
-
-		return new JournalArticleAssetRenderer(article);
 	}
 
 	protected String getIconPath(ThemeDisplay themeDisplay) {

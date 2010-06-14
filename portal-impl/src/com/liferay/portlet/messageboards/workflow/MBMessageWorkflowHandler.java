@@ -37,10 +37,19 @@ import java.util.Map;
  *
  * @author Alexander Chow
  * @author Jorge Ferrer
+ * @author Julio Camarero
  */
 public class MBMessageWorkflowHandler extends BaseWorkflowHandler {
 
 	public static final String CLASS_NAME = MBMessage.class.getName();
+
+	public AssetRenderer getAssetRenderer(long classPK)
+		throws PortalException, SystemException {
+
+		MBMessage message = MBMessageLocalServiceUtil.getMessage(classPK);
+
+		return new MBMessageAssetRenderer(message);
+	}
 
 	public String getClassName() {
 		return CLASS_NAME;
@@ -65,14 +74,6 @@ public class MBMessageWorkflowHandler extends BaseWorkflowHandler {
 
 		return MBMessageLocalServiceUtil.updateStatus(
 			userId, classPK, status, serviceContext);
-	}
-
-	protected AssetRenderer getAssetRenderer(long classPK)
-		throws PortalException, SystemException {
-
-		MBMessage message = MBMessageLocalServiceUtil.getMessage(classPK);
-
-		return new MBMessageAssetRenderer(message);
 	}
 
 	protected String getIconPath(ThemeDisplay themeDisplay) {
