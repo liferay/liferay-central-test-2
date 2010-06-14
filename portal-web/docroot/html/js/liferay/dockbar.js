@@ -61,6 +61,7 @@ AUI().add(
 								node: '#dockbar',
 								points: ['tc', 'bc']
 							},
+							bodyContent: '',
 							boundingBox: '#' + instance._namespace + 'dockbarMessages',
 							header: 'My messages',
 							name: 'messages',
