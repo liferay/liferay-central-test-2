@@ -170,6 +170,7 @@ if (step == 1) {
 		</c:when>
 
 		<c:when test="<%= step == 2 %>">
+
 			<%
 			long organizationId = ParamUtil.getLong(request, "organizationId", uniqueOrganizationId);
 			%>

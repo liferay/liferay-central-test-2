@@ -126,6 +126,7 @@ if (step == 1) {
 		</c:when>
 
 		<c:when test="<%= step == 2 %>">
+
 			<%
 			long groupId = ParamUtil.getLong(request, "groupId", uniqueGroupId);
 			%>
