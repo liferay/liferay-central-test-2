@@ -314,7 +314,7 @@ if (ratingsEntry != null) {
 						},
 						boundingBox: '#<%= randomNamespace %>ratingThumb',
 						label: label,
-						srcNode: '#<%= randomNamespace %>ratingThumbg'
+						srcNode: '#<%= randomNamespace %>ratingThumbContent'
 					}
 				).render();
 
