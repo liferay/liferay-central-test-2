@@ -69,7 +69,7 @@ if (ratingsEntry != null) {
 				<c:choose>
 					<c:when test='<%= themeDisplay.isSignedIn() %>'>
 						<div class="liferay-rating-vote" id="<%= randomNamespace %>ratingStar">
-							<div id="<%= randomNamespace %>ratingStarCB">
+							<div id="<%= randomNamespace %>ratingStarContent">
 								<div class="aui-rating-label-element"><liferay-ui:message key="your-rating" /></div>
 
 								<%
@@ -90,7 +90,7 @@ if (ratingsEntry != null) {
 				</c:choose>
 
 				<div class="liferay-rating-score" id="<%= randomNamespace %>ratingScore">
-					<div id="<%= randomNamespace %>ratingScoreCB">
+					<div id="<%= randomNamespace %>ratingScoreContent">
 						<div class="aui-rating-label-element">
 							<liferay-ui:message key="average" />
 
@@ -114,7 +114,7 @@ if (ratingsEntry != null) {
 				<c:choose>
 					<c:when test='<%= themeDisplay.isSignedIn() %>'>
 						<div class="aui-thumbrating liferay-rating-vote" id="<%= randomNamespace %>ratingThumb">
-							<div class="aui-helper-clearfix aui-rating-content aui-thumbrating-content" id="<%= randomNamespace %>ratingThumbCB">
+							<div class="aui-helper-clearfix aui-rating-content aui-thumbrating-content" id="<%= randomNamespace %>ratingThumbContent">
 								<div class="aui-rating-label-element">
 									<c:choose>
 										<c:when test="<%= (ratingsStats.getAverageScore() * ratingsStats.getTotalEntries() == 0) %>">
@@ -257,7 +257,7 @@ if (ratingsEntry != null) {
 								boundingBox: '#<%= randomNamespace %>ratingStar',
 								canReset: false,
 								defaultSelected: <%= yourScore %>,
-								srcNode: '#<%= randomNamespace %>ratingStarCB'
+								srcNode: '#<%= randomNamespace %>ratingStarContent'
 							}
 						);
 
@@ -273,7 +273,7 @@ if (ratingsEntry != null) {
 						disabled: true,
 						label: getLabel('<liferay-ui:message key="average" />', <%= ratingsStats.getTotalEntries() %>, <%= ratingsStats.getAverageScore() %>),
 						size: <%= numberOfStars %>,
-						srcNode: '#<%= randomNamespace %>ratingScoreCB'
+						srcNode: '#<%= randomNamespace %>ratingScoreContent'
 					}
 				);
 
@@ -314,10 +314,9 @@ if (ratingsEntry != null) {
 						},
 						boundingBox: '#<%= randomNamespace %>ratingThumb',
 						label: label,
-						srcNode: '#<%= randomNamespace %>ratingThumbCB'
+						srcNode: '#<%= randomNamespace %>ratingThumbg'
 					}
-				)
-				.render();
+				).render();
 
 				ratingThumb.select(yourScoreindex);
 			</c:when>
