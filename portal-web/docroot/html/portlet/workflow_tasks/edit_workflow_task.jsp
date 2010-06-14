@@ -21,8 +21,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 WorkflowTask workflowTask = (WorkflowTask)request.getAttribute(WebKeys.WORKFLOW_TASK);
 
-request.setAttribute("edit_workflow_task.jsp-workflow_task", workflowTask);
-
 Calendar dueDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 if (workflowTask.getDueDate() != null) {
@@ -30,7 +28,6 @@ if (workflowTask.getDueDate() != null) {
 }
 
 WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(company.getCompanyId(), workflowTask.getWorkflowInstanceId());
-long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getCompanyId(), workflowTask.getWorkflowTaskId());
 
 Map<String, Serializable> workflowContext = workflowInstance.getWorkflowContext();
 
@@ -38,6 +35,8 @@ long companyId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstant
 long groupId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_GROUP_ID));
 String className = (String)workflowContext.get(WorkflowConstants.CONTEXT_ENTRY_CLASS_NAME);
 long classPK = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_ENTRY_CLASS_PK));
+
+long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getCompanyId(), workflowTask.getWorkflowTaskId());
 %>
 
 <portlet:renderURL var="backURL">
@@ -46,7 +45,6 @@ long classPK = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.
 
 <liferay-ui:tabs
 	names="<%= workflowTask.getName() %>"
-	backLabel='<%= "&laquo; " + LanguageUtil.get(pageContext, "back") %>'
 	backURL="<%= backURL.toString() %>"
 />
 
@@ -60,7 +58,7 @@ long classPK = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.
 					<aui:field-wrapper label="assigned-to">
 						<c:choose>
 							<c:when test="<%= workflowTask.getAssigneeUserId() > 0 %>">
-									<%= HtmlUtil.escape(PortalUtil.getUserName(workflowTask.getAssigneeUserId(), StringPool.BLANK)) %>
+								<%= HtmlUtil.escape(PortalUtil.getUserName(workflowTask.getAssigneeUserId(), StringPool.BLANK)) %>
 							</c:when>
 							<c:otherwise>
 								<liferay-ui:message key="nobody" />
@@ -83,7 +81,7 @@ long classPK = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.
 
 						&nbsp;
 
-						<c:if test="<%= (pooledActorsIds != null) && (pooledActorsIds.length > 0) && !workflowTask.isCompleted() %>">
+						<c:if test="<%= (pooledActorsIds.length > 0) && !workflowTask.isCompleted() %>">
 							<%= StringPool.DASH %>
 
 							<portlet:actionURL var="assignURL">
@@ -144,6 +142,7 @@ long classPK = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.
 
 				<%
 				WorkflowHandler workflowHandler = WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
+
 				AssetRenderer assetRenderer =  workflowHandler.getAssetRenderer(classPK);
 				AssetRendererFactory assetRendererFactory =  workflowHandler.getAssetRendererFactory();
 

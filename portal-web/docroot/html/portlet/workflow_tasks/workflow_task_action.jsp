@@ -17,25 +17,19 @@
 <%@ include file="/html/portlet/workflow_tasks/init.jsp" %>
 
 <%
-String randomId = StringPool.BLANK;
+String randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 WorkflowTask workflowTask = null;
 
-boolean view = false;
-
 if (row != null) {
 	Object result = row.getObject();
 
 	workflowTask = (WorkflowTask)row.getParameter("workflowTask");
-
-	randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 }
 else {
-	workflowTask = (WorkflowTask)request.getAttribute("edit_workflow_task.jsp-workflow_task");
-
-	view = true;
+	workflowTask = (WorkflowTask)request.getAttribute(WebKeys.WORKFLOW_TASK);
 }
 
 long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getCompanyId(), workflowTask.getWorkflowTaskId());
@@ -47,7 +41,7 @@ if (workflowTask.getDueDate() != null) {
 }
 %>
 
-<liferay-ui:icon-menu showExpanded="<%= view %>" showWhenSingleIcon="<%= view %>">
+<liferay-ui:icon-menu showExpanded="<%= (row == null) %>" showWhenSingleIcon="<%= (row == null) %>">
 	<c:if test="<%= !workflowTask.isCompleted() && _isWorkflowTaskAssignedToUser(workflowTask, user) %>">
 
 		<%
@@ -93,7 +87,7 @@ if (workflowTask.getDueDate() != null) {
 		<liferay-ui:icon cssClass='<%= "workflow-task-" + randomId + " task-assign-to-me-link" %>' image="assign" message="assign-to-me" method="get" url="<%= assignToMeURL %>" />
 	</c:if>
 
-	<c:if test="<%= (pooledActorsIds != null) && (pooledActorsIds.length > 0) && !workflowTask.isCompleted() %>">
+	<c:if test="<%= (pooledActorsIds.length > 0) && !workflowTask.isCompleted() %>">
 		<portlet:actionURL var="assignURL">
 			<portlet:param name="struts_action" value="/workflow_tasks/edit_workflow_task" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ASSIGN %>" />
@@ -117,7 +111,7 @@ if (workflowTask.getDueDate() != null) {
 </liferay-ui:icon-menu>
 
 <div class="aui-helper-hidden" id="<%= randomId %>updateAsignee">
-	<c:if test="<%= (pooledActorsIds != null) && (pooledActorsIds.length > 0) && !workflowTask.isCompleted() %>">
+	<c:if test="<%= (pooledActorsIds.length > 0) && !workflowTask.isCompleted() %>">
 		<aui:select label="assign-to" name="assigneeUserId" showEmptyOption="<%= true %>">
 
 			<%
@@ -145,7 +139,7 @@ if (workflowTask.getDueDate() != null) {
 </div>
 
 <div class="aui-helper-hidden" id="<%= randomId %>updateComments">
-	<aui:input name="comment" type="textarea" rows="10" cols="55" />
+	<aui:input cols="55" name="comment" type="textarea" rows="10" />
 </div>
 
 <aui:script use="aui-dialog">
@@ -191,10 +185,10 @@ if (workflowTask.getDueDate() != null) {
 		).render();
 	};
 
-	A.all('.workflow-task-<%= randomId %> a').on('click',
-		function(event){
+	A.all('.workflow-task-<%= randomId %> a').on(
+		'click',
+		function(event) {
 			var href = event.currentTarget.attr('href');
-			console.log('href',href);
 
 			event.halt();
 
@@ -203,14 +197,14 @@ if (workflowTask.getDueDate() != null) {
 			if (event.currentTarget.ancestor().hasClass('task-due-date-link')) {
 				content = A.one('#<%= randomId %>updateDueDate');
 			}
-			else if(event.currentTarget.ancestor().hasClass('task-assign-to-me-link')) {
+			else if (event.currentTarget.ancestor().hasClass('task-assign-to-me-link')) {
 				content = A.one('#<%= randomId %>updateAsigneeToMe');
 			}
-			else if(event.currentTarget.ancestor().hasClass('task-assign-link')){
+			else if (event.currentTarget.ancestor().hasClass('task-assign-link')) {
 				content = A.one('#<%= randomId %>updateAsignee');
 			}
 
-	        showPopup (href, content);
+			showPopup(href, content);
 		}
 	);
 </aui:script>
