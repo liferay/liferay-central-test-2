@@ -285,8 +285,6 @@ public class JournalArticleLocalServiceImpl
 
 		journalArticlePersistence.update(article, false);
 
-		updateUrlTitles(groupId, articleId, article.getUrlTitle());
-
 		// Resources
 
 		if (serviceContext.getAddCommunityPermissions() ||
@@ -1760,8 +1758,6 @@ public class JournalArticleLocalServiceImpl
 
 		journalArticlePersistence.update(article, false);
 
-		updateUrlTitles(groupId, articleId, article.getUrlTitle());
-
 		// Asset
 
 		long[] assetCategoryIds = serviceContext.getAssetCategoryIds();
@@ -1960,6 +1956,13 @@ public class JournalArticleLocalServiceImpl
 					JournalArticle.class);
 
 				indexer.reindex(article);
+
+				// URL titles
+
+				updateUrlTitles(
+					article.getGroupId(), article.getArticleId(),
+					article.getUrlTitle());
+
 			}
 			else {
 				if (article.isApproved()) {
