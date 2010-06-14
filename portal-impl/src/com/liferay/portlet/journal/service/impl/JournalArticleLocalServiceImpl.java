@@ -285,6 +285,8 @@ public class JournalArticleLocalServiceImpl
 
 		journalArticlePersistence.update(article, false);
 
+		updateUrlTitles(groupId, articleId, article.getUrlTitle());
+
 		// Resources
 
 		if (serviceContext.getAddCommunityPermissions() ||
@@ -1197,8 +1199,8 @@ public class JournalArticleLocalServiceImpl
 	public JournalArticle getDisplayArticle(long groupId, String articleId)
 		throws PortalException, SystemException {
 
-		List<JournalArticle> articles = journalArticlePersistence.findByG_A_S(
-			groupId, articleId, WorkflowConstants.STATUS_APPROVED);
+		List<JournalArticle> articles = journalArticlePersistence.findByG_A(
+			groupId, articleId);
 
 		if (articles.size() == 0) {
 			throw new NoSuchArticleException();
@@ -1758,6 +1760,8 @@ public class JournalArticleLocalServiceImpl
 
 		journalArticlePersistence.update(article, false);
 
+		updateUrlTitles(groupId, articleId, article.getUrlTitle());
+
 		// Asset
 
 		long[] assetCategoryIds = serviceContext.getAssetCategoryIds();
@@ -1956,13 +1960,6 @@ public class JournalArticleLocalServiceImpl
 					JournalArticle.class);
 
 				indexer.reindex(article);
-
-				// URL titles
-
-				updateUrlTitles(
-					article.getGroupId(), article.getArticleId(),
-					article.getUrlTitle());
-
 			}
 			else {
 				if (article.isApproved()) {
