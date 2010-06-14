@@ -45,13 +45,12 @@ if (step == 1) {
 		uniqueGroupId = groups.get(0).getGroupId();
 	}
 }
-
-long groupId = ParamUtil.getLong(request, "groupId", uniqueGroupId);
 %>
 
-<aui:form method="post" name="fm" action="<%= portletURL.toString() %>">
+<aui:form method="post" name="fm">
 	<c:choose>
 		<c:when test="<%= step == 1 %>">
+			<aui:input name="step" type="hidden" value="2" />
 			<aui:input name="groupId" type="hidden" />
 
 			<liferay-ui:tabs names="community-roles" />
@@ -59,10 +58,6 @@ long groupId = ParamUtil.getLong(request, "groupId", uniqueGroupId);
 			<div class="portlet-msg-info">
 				<liferay-ui:message key="please-select-a-community-to-which-you-will-assign-a-community-role" />
 			</div>
-
-			<%
-			portletURL.setParameter("step", "1");
-			%>
 
 			<liferay-ui:search-container
 				searchContainer="<%= new GroupSearch(renderRequest, portletURL) %>"
@@ -118,22 +113,17 @@ long groupId = ParamUtil.getLong(request, "groupId", uniqueGroupId);
 				function <portlet:namespace />selectGroup(groupId) {
 					document.<portlet:namespace />fm.<portlet:namespace />groupId.value = groupId;
 
-					<%
-					portletURL.setParameter("step", "2");
-					%>
-
 					submitForm(document.<portlet:namespace />fm, "<%= portletURL.toString() %>");
 				}
 			</aui:script>
 		</c:when>
 
 		<c:when test="<%= step == 2 %>">
-			<aui:input name="groupId" type="hidden" value="<%= String.valueOf(groupId) %>" />
-			<aui:input name="step" type="hidden" value="2" />
-
 			<liferay-ui:tabs names="community-roles" />
 
 			<%
+			long groupId = ParamUtil.getLong(request, "groupId", uniqueGroupId);
+
 			Group group = GroupServiceUtil.getGroup(groupId);
 
 			portletURL.setParameter("step", "1");
@@ -144,11 +134,6 @@ long groupId = ParamUtil.getLong(request, "groupId", uniqueGroupId);
 			<div class="breadcrumbs">
 				<%= breadcrumbs %>
 			</div>
-
-			<%
-			portletURL.setParameter("groupId", String.valueOf(groupId));
-			portletURL.setParameter("step", "2");
-			%>
 
 			<liferay-ui:search-container
 				headerNames="name"

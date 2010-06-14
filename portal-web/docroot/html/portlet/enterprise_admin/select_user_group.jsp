@@ -16,16 +16,16 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
-<%
-String target = ParamUtil.getString(request, "target");
-
-PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setParameter("struts_action", "/enterprise_admin/select_user_group");
-%>
-
-<aui:form method="post" name="fm" action="<%= portletURL.toString() %>">
+<aui:form method="post" name="fm">
 	<liferay-ui:tabs names="user-groups" />
+
+	<%
+	String target = ParamUtil.getString(request, "target");
+
+	PortletURL portletURL = renderResponse.createRenderURL();
+
+	portletURL.setParameter("struts_action", "/enterprise_admin/select_user_group");
+	%>
 
 	<liferay-ui:search-container
 		searchContainer="<%= new UserGroupSearch(renderRequest, portletURL) %>"
