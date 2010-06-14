@@ -258,7 +258,11 @@ String taglibOnSubmit = renderResponse.getNamespace() + "saveUser('" + ((selUser
 					<aui:button-row>
 						<aui:button type="submit" />
 
-						<aui:button onClick="<%= backURL %>" type="cancel" />
+						<%
+						String taglibOnClick = backURL.equals(StringPool.BLANK) ? "location.href = '" + backURL + "';" : backURL;
+						%>
+
+						<aui:button onClick="<%= taglibOnClick %>" type="cancel" />
 					</aui:button-row>
 
 					<c:if test="<%= (selUser != null) && (passwordPolicy != null) && selUser.getLockout() %>">
