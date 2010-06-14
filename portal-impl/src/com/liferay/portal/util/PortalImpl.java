@@ -3404,6 +3404,35 @@ public class PortalImpl implements Portal {
 		return permissionChecker.isCompanyAdmin();
 	}
 
+	public boolean isControlPanelPortlet(
+			String portletId, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		for (String category : PortletCategoryKeys.ALL) {
+			if (isControlPanelPortlet(portletId, category, themeDisplay)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public boolean isControlPanelPortlet(
+			String portletId, String category, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		List<Portlet> portlets = getControlPanelPortlets(
+			category, themeDisplay);
+
+		for (Portlet portlet : portlets) {
+			if (portlet.getPortletId().equals(portletId)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public boolean isLayoutFirstPageable(Layout layout) {
 		LayoutSettings layoutSettings = LayoutSettings.getInstance(layout);
 

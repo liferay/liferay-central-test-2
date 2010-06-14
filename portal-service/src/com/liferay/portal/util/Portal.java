@@ -534,6 +534,14 @@ public interface Portal {
 
 	public boolean isCompanyAdmin(User user) throws Exception;
 
+	public boolean isControlPanelPortlet(
+			String portletId, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException;
+
+	public boolean isControlPanelPortlet(
+			String portletId, String category, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException;
+
 	public boolean isLayoutFirstPageable(Layout layout);
 
 	public boolean isLayoutFirstPageable(String type);

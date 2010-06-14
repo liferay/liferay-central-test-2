@@ -1013,6 +1013,21 @@ public class PortalUtil {
 		return getPortal().isCompanyAdmin(user);
 	}
 
+	public boolean isControlPanelPortlet(
+			String portletId, String category, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return getPortal().isControlPanelPortlet(
+			portletId, category, themeDisplay);
+	}
+
+	public boolean isControlPanelPortlet(
+			String portletId, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return getPortal().isControlPanelPortlet(portletId, themeDisplay);
+	}
+
 	public static boolean isLayoutFirstPageable(Layout layout) {
 		return getPortal().isLayoutFirstPageable(layout);
 	}

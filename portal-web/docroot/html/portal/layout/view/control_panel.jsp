@@ -62,7 +62,7 @@ if (Validator.isNotNull(ppid)) {
 	portlet = PortletLocalServiceUtil.getPortletById(ppid);
 
 	if ((portlet == null) ||
-		(!portlet.isSystem() && !_hasPortlet(ppid, category, themeDisplay))) {
+		(!portlet.isSystem() && !PortalUtil.isControlPanelPortlet(ppid, category, themeDisplay))) {
 
 		denyAccess = true;
 	}
@@ -138,17 +138,3 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 </c:choose>
 
 <%@ include file="/html/portal/layout/view/common.jspf" %>
-
-<%!
-private static boolean _hasPortlet(String portletId, String category, ThemeDisplay themeDisplay) throws Exception {
-	List<Portlet> portlets = PortalUtil.getControlPanelPortlets(category, themeDisplay);
-
-	for (Portlet portlet : portlets) {
-		if (portlet.getPortletId().equals(portletId)) {
-			return true;
-		}
-	}
-
-	return false;
-}
-%>
