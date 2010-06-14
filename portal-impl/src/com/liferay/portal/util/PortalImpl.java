@@ -3407,19 +3407,6 @@ public class PortalImpl implements Portal {
 	}
 
 	public boolean isControlPanelPortlet(
-			String portletId, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		for (String category : PortletCategoryKeys.ALL) {
-			if (isControlPanelPortlet(portletId, category, themeDisplay)) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	public boolean isControlPanelPortlet(
 			String portletId, String category, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
@@ -3428,6 +3415,19 @@ public class PortalImpl implements Portal {
 
 		for (Portlet portlet : portlets) {
 			if (portlet.getPortletId().equals(portletId)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public boolean isControlPanelPortlet(
+			String portletId, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		for (String category : PortletCategoryKeys.ALL) {
+			if (isControlPanelPortlet(portletId, category, themeDisplay)) {
 				return true;
 			}
 		}
