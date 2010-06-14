@@ -536,11 +536,11 @@ public interface Portal {
 
 	public boolean isControlPanelPortlet(
 			String portletId, String category, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException;
+		throws SystemException;
 
 	public boolean isControlPanelPortlet(
 			String portletId, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException;
+		throws SystemException;
 
 	public boolean isLayoutFirstPageable(Layout layout);
 

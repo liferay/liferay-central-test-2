@@ -1015,7 +1015,7 @@ public class PortalUtil {
 
 	public static boolean isControlPanelPortlet(
 			String portletId, String category, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return getPortal().isControlPanelPortlet(
 			portletId, category, themeDisplay);
@@ -1023,7 +1023,7 @@ public class PortalUtil {
 
 	public static boolean isControlPanelPortlet(
 			String portletId, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return getPortal().isControlPanelPortlet(portletId, themeDisplay);
 	}

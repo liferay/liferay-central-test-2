@@ -3410,7 +3410,7 @@ public class PortalImpl implements Portal {
 
 	public boolean isControlPanelPortlet(
 			String portletId, String category, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<Portlet> portlets = getControlPanelPortlets(
 			category, themeDisplay);
@@ -3426,7 +3426,7 @@ public class PortalImpl implements Portal {
 
 	public boolean isControlPanelPortlet(
 			String portletId, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		for (String category : PortletCategoryKeys.ALL) {
 			if (isControlPanelPortlet(portletId, category, themeDisplay)) {
