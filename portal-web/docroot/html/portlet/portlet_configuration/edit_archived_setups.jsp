@@ -44,8 +44,8 @@ portletURL.setParameter("portletResource", portletResource);
 </portlet:renderURL>
 
 <liferay-ui:header
-	title="archived-setups"
 	backURL="<%= backURL %>"
+  title="archived-setups"
 />
 
 <liferay-ui:error exception="<%= NoSuchPortletItemException.class %>" message="the-setup-could-not-be-found" />

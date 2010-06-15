@@ -39,8 +39,8 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", B
 	<aui:input name="parentFolderId" type="hidden" value="<%= parentFolderId %>" />
 
 	<liferay-ui:header
-		title='<%= (folder != null) ? folder.getName() : "new-folder" %>'
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+    title='<%= (folder != null) ? folder.getName() : "new-folder" %>'
 	/>
 
 	<liferay-ui:error exception="<%= FolderNameException.class %>" message="please-enter-a-valid-name" />

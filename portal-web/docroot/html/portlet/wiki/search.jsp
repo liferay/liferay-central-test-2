@@ -45,8 +45,8 @@ boolean createNewPage = true;
 	<aui:input name="nodeId" type="hidden" value="<%= nodeId %>" />
 
 	<liferay-ui:header
-		title="search"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+    title="search"
 	/>
 
 	<h1 class="page-title"><liferay-ui:message key="search-results" /></h1>

@@ -38,8 +38,8 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 
 	<liferay-ui:header
-		title="community"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+    title="community"
 	/>
 
 	<liferay-ui:error exception="<%= MembershipRequestCommentsException.class %>" message="please-enter-valid-comments" />

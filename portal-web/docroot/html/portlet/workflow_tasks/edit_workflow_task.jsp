@@ -44,8 +44,8 @@ long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getC
 </portlet:renderURL>
 
 <liferay-ui:header
-	title="<%= workflowTask.getName() %>"
 	backURL="<%= backURL.toString() %>"
+  title="<%= workflowTask.getName() %>"
 />
 
 <aui:layout>

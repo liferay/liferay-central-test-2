@@ -94,8 +94,8 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	<aui:input name="saveAndContinue" type="hidden" />
 
 	<liferay-ui:header
-		title='<%= (template != null) ? template.getName() : "new-template" %>'
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+    title='<%= (template != null) ? template.getName() : "new-template" %>'
 	/>
 
 	<liferay-ui:error exception="<%= DuplicateTemplateIdException.class %>" message="please-enter-a-unique-id" />

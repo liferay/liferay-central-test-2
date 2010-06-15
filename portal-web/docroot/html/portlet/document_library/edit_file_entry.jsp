@@ -147,8 +147,8 @@ portletURL.setParameter("name", name);
 	<aui:input name="name" type="hidden" value="<%= name %>" />
 
 	<liferay-ui:header
-		title='<%= (fileEntry != null) ? fileEntry.getTitle() : "new-document" %>'
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+    title='<%= (fileEntry != null) ? fileEntry.getTitle() : "new-document" %>'
 	/>
 
 	<liferay-ui:error exception="<%= DuplicateFileException.class %>" message="please-enter-a-unique-document-name" />

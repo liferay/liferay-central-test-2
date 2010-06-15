@@ -35,8 +35,8 @@ String newTemplateId = ParamUtil.getString(request, "newTemplateId");
 	<aui:input name="oldTemplateId" type="hidden" value="<%= oldTemplateId %>" />
 
 	<liferay-ui:header
-		title="template"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+    title="template"
 	/>
 
 	<liferay-ui:error exception="<%= DuplicateTemplateIdException.class %>" message="please-enter-a-unique-id" />

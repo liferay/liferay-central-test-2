@@ -64,8 +64,8 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 <input name="<portlet:namespace />productVersionId" type="hidden" value="<%= productVersionId %>" />
 
 <liferay-ui:header
-	title="<%= productEntry.getName() %>"
 	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+  title="<%= productEntry.getName() %>"
 />
 
 <liferay-ui:error exception="<%= DuplicateProductVersionDirectDownloadURLException.class %>" message="please-enter-a-unique-direct-download-url" />

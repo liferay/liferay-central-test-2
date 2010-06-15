@@ -30,8 +30,8 @@ long frameworkVersionId = BeanParamUtil.getLong(frameworkVersion, request, "fram
 <input name="<portlet:namespace />frameworkVersionId" type="hidden" value="<%= frameworkVersionId %>" />
 
 <liferay-ui:header
-	title='<%= (frameworkVersion != null) ? frameworkVersion.getName() : "new-framework-version" %>'
 	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+  title='<%= (frameworkVersion != null) ? frameworkVersion.getName() : "new-framework-version" %>'
 />
 
 <liferay-ui:error exception="<%= FrameworkVersionNameException.class %>" message="please-enter-a-valid-name" />

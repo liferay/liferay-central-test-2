@@ -16,7 +16,10 @@
 
 <%@ include file="/html/portlet/shopping/init.jsp" %>
 
-<liferay-ui:header title="error" backURL="javascript:history.go(-1);" />
+<liferay-ui:header 
+  title="error" 
+  backURL="javascript:history.go(-1);" 
+/>
 
 <liferay-ui:error exception="<%= NoSuchCategoryException.class %>" message="the-category-could-not-be-found" />
 <liferay-ui:error exception="<%= NoSuchCouponException.class %>" message="the-coupon-could-not-be-found" />

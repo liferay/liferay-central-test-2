@@ -99,8 +99,8 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 	<aui:input name="itemIds" type="hidden" />
 
 	<liferay-ui:header
-		title="cart"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+    title="cart"
 	/>
 
 	<liferay-ui:error exception="<%= CartMinQuantityException.class %>">

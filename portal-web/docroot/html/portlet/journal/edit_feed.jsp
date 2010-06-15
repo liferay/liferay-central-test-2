@@ -110,8 +110,8 @@ if (feed != null) {
 	<aui:input name="rendererTemplateId" type="hidden" value="<%= rendererTemplateId %>" />
 
 	<liferay-ui:header
-		title='<%= (feed != null) ? feed.getName() : "new-feed" %>'
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+    title='<%= (feed != null) ? feed.getName() : "new-feed" %>'
 	/>
 
 	<liferay-ui:error exception="<%= DuplicateFeedIdException.class %>" message="please-enter-a-unique-id" />

@@ -74,8 +74,8 @@ if (choiceName > 0) {
 	<aui:input name="choiceName" type="hidden" value="" />
 
 	<liferay-ui:header
-		title='<%= (question != null) ? question.getTitle(locale) : "new-question" %>'
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+    title='<%= (question != null) ? question.getTitle(locale) : "new-question" %>'
 	/>
 
 	<liferay-ui:error exception="<%= QuestionChoiceException.class %>" message="please-enter-valid-choices" />

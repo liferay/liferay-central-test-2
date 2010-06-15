@@ -64,8 +64,8 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 	<aui:input name="couponId" type="hidden" value="<%= couponId %>" />
 
 	<liferay-ui:header
-		title="coupon"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+    title="coupon"
 	/>
 
 	<liferay-ui:error exception="<%= CouponCodeException.class %>" message="please-enter-a-valid-code" />

@@ -53,8 +53,8 @@ viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 %>
 
 <liferay-ui:header
-	title='<%= productEntry.getName() + " " + ((latestProductVersion == null) ? "" : latestProductVersion.getVersion()) %>'
 	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+  title='<%= productEntry.getName() + " " + ((latestProductVersion == null) ? "" : latestProductVersion.getVersion()) %>'
 />
 
 <table class="lfr-table">

@@ -73,8 +73,8 @@ request.setAttribute("edit_community_assignments.jsp-portletURL", portletURL);
 		</c:when>
 		<c:otherwise>
 			<liferay-ui:header
-				title="roles"
 				backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+        title="roles"
 			/>
 		</c:otherwise>
 	</c:choose>

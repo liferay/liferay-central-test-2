@@ -200,8 +200,8 @@ if (Validator.isNull(redirect)) {
 		<c:choose>
 			<c:when test="<%= editable %>">
 				<liferay-ui:header
-					title="new-wiki-page"
 					backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+          title="new-wiki-page"
 				/>
 
 				<div class="portlet-msg-info">
