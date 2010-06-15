@@ -25,10 +25,10 @@ if (!strutsAction.equals("/login/create_account") && company.isStrangers()) {
 	showCreateAccountIcon = true;
 }
 
-boolean showFacebookIcon = false;
+boolean showFacebookConnectIcon = false;
 
-if (!strutsAction.equals("/login/facebook") && FacebookConnectUtil.isEnabled(company.getCompanyId())) {
-	showFacebookIcon = true;
+if (!strutsAction.equals("/login/facebook_connect") && FacebookConnectUtil.isEnabled(company.getCompanyId())) {
+	showFacebookConnectIcon = true;
 }
 
 boolean showForgotPasswordIcon = false;
@@ -61,15 +61,15 @@ if (Validator.isNotNull(strutsAction) && !strutsAction.equals("/login/login")) {
 				/>
 			</c:if>
 
-			<c:if test="<%= showFacebookIcon %>">
-				<portlet:actionURL var="facebookURL">
-					<portlet:param name="struts_action" value="/login/facebook" />
+			<c:if test="<%= showFacebookConnectIcon %>">
+				<portlet:actionURL var="facebookConnectURL">
+					<portlet:param name="struts_action" value="/login/facebook_connect" />
 				</portlet:actionURL>
 
 				<liferay-ui:icon
 					image="status_online"
-					message="facebook-connect"
-					url="<%= facebookURL %>"
+					message="facebook"
+					url="<%= facebookConnectURL %>"
 				/>
 			</c:if>
 

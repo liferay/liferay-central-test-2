@@ -33,6 +33,14 @@ String casServerName = ParamUtil.getString(request, "settings--" + PropsKeys.CAS
 String casServerUrl = ParamUtil.getString(request, "settings--" + PropsKeys.CAS_SERVER_URL + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_SERVER_URL, PropsValues.CAS_SERVER_URL));
 String casServiceUrl = ParamUtil.getString(request, "settings--" + PropsKeys.CAS_SERVICE_URL + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_SERVICE_URL, PropsValues.CAS_SERVICE_URL));
 
+boolean facebookConnectAuthEnabled = ParamUtil.getBoolean(request, "settings--" + PropsKeys.FACEBOOK_CONNECT_AUTH_ENABLED + "--", FacebookConnectUtil.isEnabled(company.getCompanyId()));
+String facebookConnectAppId = ParamUtil.getString(request, "settings--" + PropsKeys.FACEBOOK_CONNECT_APP_ID + "--", FacebookConnectUtil.getAppId(company.getCompanyId()));
+String facebookConnectAppSecret = ParamUtil.getString(request, "settings--" + PropsKeys.FACEBOOK_CONNECT_APP_SECRET + "--", FacebookConnectUtil.getAppSecret(company.getCompanyId()));
+String facebookConnectGraphURL = ParamUtil.getString(request, "settings--" + PropsKeys.FACEBOOK_CONNECT_GRAPH_URL + "--", FacebookConnectUtil.getGraphURL(company.getCompanyId()));
+String facebookConnectOauthAuthURL = ParamUtil.getString(request, "settings--" + PropsKeys.FACEBOOK_CONNECT_OAUTH_AUTH_URL + "--", FacebookConnectUtil.getAuthURL(company.getCompanyId()));
+String facebookConnectOauthTokenURL = ParamUtil.getString(request, "settings--" + PropsKeys.FACEBOOK_CONNECT_OAUTH_TOKEN_URL + "--", FacebookConnectUtil.getAccessTokenURL(company.getCompanyId()));
+String facebookConnectRedirectURL = ParamUtil.getString(request, "settings--" + PropsKeys.FACEBOOK_CONNECT_OAUTH_REDIRECT_URL + "--", FacebookConnectUtil.getRedirectURL(company.getCompanyId()));
+
 boolean ntlmAuthEnabled = ParamUtil.getBoolean(request, "settings--" + PropsKeys.NTLM_AUTH_ENABLED + "--", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.NTLM_AUTH_ENABLED, PropsValues.NTLM_AUTH_ENABLED));
 String ntlmDomainController = ParamUtil.getString(request, "settings--" + PropsKeys.NTLM_DOMAIN_CONTROLLER + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.NTLM_DOMAIN_CONTROLLER, PropsValues.NTLM_DOMAIN_CONTROLLER));
 String ntlmDomainControllerName = ParamUtil.getString(request, "settings--" + PropsKeys.NTLM_DOMAIN_CONTROLLER_NAME + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.NTLM_DOMAIN_CONTROLLER_NAME, PropsValues.NTLM_DOMAIN_CONTROLLER_NAME));
@@ -59,7 +67,7 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings--" + PropsK
 <h3><liferay-ui:message key="authentication" /></h3>
 
 <liferay-ui:tabs
-	names="general,ldap,cas,ntlm,open-id,open-sso,siteminder"
+	names="general,ldap,cas,facebook,ntlm,open-id,open-sso,siteminder"
 	refresh="<%= false %>"
 >
 	<liferay-ui:section>
@@ -101,6 +109,23 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings--" + PropsK
 			<aui:input cssClass="lfr-input-text-container" label="server-url" name='<%= "settings--" + PropsKeys.CAS_SERVER_URL + "--" %>' type="text" value="<%= casServerUrl %>" />
 
 			<aui:input cssClass="lfr-input-text-container" label="service-url" name='<%= "settings--" + PropsKeys.CAS_SERVICE_URL + "--" %>' type="text" value="<%= casServiceUrl %>" />
+		</aui:fieldset>
+	</liferay-ui:section>
+	<liferay-ui:section>
+		<aui:fieldset>
+			<aui:input inlineLabel="left" label="enabled" name='<%= "settings--" + PropsKeys.FACEBOOK_CONNECT_AUTH_ENABLED + "--" %>' type="checkbox" value="<%= facebookConnectAuthEnabled %>" />
+
+			<aui:input cssClass="lfr-input-text-container" label="application-id" name='<%= "settings--" + PropsKeys.FACEBOOK_CONNECT_APP_ID + "--" %>' type="text" value="<%= facebookConnectAppId %>" />
+
+			<aui:input cssClass="lfr-input-text-container" label="application-secret" name='<%= "settings--" + PropsKeys.FACEBOOK_CONNECT_APP_SECRET + "--" %>' type="text" value="<%= facebookConnectAppSecret %>" />
+
+			<aui:input cssClass="lfr-input-text-container" label="graph-url" name='<%= "settings--" + PropsKeys.FACEBOOK_CONNECT_GRAPH_URL + "--" %>' type="text" value="<%= facebookConnectGraphURL %>" />
+
+			<aui:input cssClass="lfr-input-text-container" label="oauth-authentication-url" name='<%= "settings--" + PropsKeys.FACEBOOK_CONNECT_OAUTH_AUTH_URL + "--" %>' type="text" value="<%= facebookConnectOauthAuthURL %>" />
+
+			<aui:input cssClass="lfr-input-text-container" label="oauth-token-url" name='<%= "settings--" + PropsKeys.FACEBOOK_CONNECT_OAUTH_TOKEN_URL + "--" %>' type="text" value="<%= facebookConnectOauthTokenURL %>" />
+
+			<aui:input cssClass="lfr-input-text-container" label="redirect-url" name='<%= "settings--" + PropsKeys.FACEBOOK_CONNECT_OAUTH_REDIRECT_URL + "--" %>' type="text" value="<%= facebookConnectRedirectURL %>" />
 		</aui:fieldset>
 	</liferay-ui:section>
 	<liferay-ui:section>

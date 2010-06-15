@@ -80,6 +80,7 @@
 <%@ page import="com.liferay.portal.service.permission.UserPermissionUtil" %>
 <%@ page import="com.liferay.portal.servlet.PortalSessionContext" %>
 <%@ page import="com.liferay.portal.servlet.filters.sso.opensso.OpenSSOUtil" %>
+<%@ page import="com.liferay.portal.util.FacebookConnectUtil" %>
 <%@ page import="com.liferay.portal.util.comparator.UserTrackerModifiedDateComparator" %>
 <%@ page import="com.liferay.portlet.announcements.model.AnnouncementsDelivery" %>
 <%@ page import="com.liferay.portlet.announcements.model.AnnouncementsEntryConstants" %>
