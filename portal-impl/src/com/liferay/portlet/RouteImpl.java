@@ -61,8 +61,16 @@ public class RouteImpl implements Route {
 		_defaultParameters.put(name, value);
 	}
 
+	public void addIgnoredParameter(String name) {
+		_ignoredParameters.add(name);
+	}
+
 	public Map<String, String> getDefaultParameters() {
 		return _defaultParameters;
+	}
+
+	public List<String> getIgnoredParameters() {
+		return _ignoredParameters;
 	}
 
 	public String parametersToUrl(Map<String, ?> parameters) {
@@ -86,22 +94,30 @@ public class RouteImpl implements Route {
 		String url = _urlPattern;
 
 		for (RoutePart routePart : _routeParts) {
-			if (!routePart.matches(parameters)) {
-				return null;
-			}
-
 			String name = routePart.getName();
-
-			names.add(name);
 
 			String value = MapUtil.getString(parameters, name);
 
+			if (value == null) {
+				return null;
+			}
+
 			value = HttpUtil.encodeURL(value);
+
+			if (!routePart.matches(value)) {
+				return null;
+			}
+
+			names.add(name);
 
 			url = url.replace(routePart.getFragmentName(), value);
 		}
 
 		for (String name : names) {
+			parameters.remove(name);
+		}
+
+		for (String name : _ignoredParameters) {
 			parameters.remove(name);
 		}
 
@@ -123,6 +139,8 @@ public class RouteImpl implements Route {
 
 			String value = matcher.group(i);
 
+			value = HttpUtil.decodeURL(value);
+
 			parameters.put(routePart.getName(), value);
 		}
 
@@ -141,6 +159,7 @@ public class RouteImpl implements Route {
 
 	private Map<String, String> _defaultParameters =
 		new HashMap<String, String>();
+	private List<String> _ignoredParameters = new ArrayList<String>();
 	private Pattern _regexPattern;
 	private List<RoutePart> _routeParts = new ArrayList<RoutePart>();
 	private String _urlPattern;

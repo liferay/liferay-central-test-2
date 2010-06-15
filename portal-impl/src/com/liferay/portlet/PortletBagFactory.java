@@ -503,6 +503,14 @@ public class PortletBagFactory {
 
 				route.addDefaultParameter(name, value);
 			}
+
+			for (Element ignoredParameterElement :
+					routeElement.elements("ignored-parameter")) {
+
+				String name = ignoredParameterElement.attributeValue("name");
+
+				route.addIgnoredParameter(name);
+			}
 		}
 
 		return router;

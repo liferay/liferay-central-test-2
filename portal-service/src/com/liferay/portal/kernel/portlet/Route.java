@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.portlet;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,7 +27,11 @@ public interface Route {
 
 	public void addDefaultParameter(String name, String value);
 
+	public void addIgnoredParameter(String name);
+
 	public Map<String, String> getDefaultParameters();
+
+	public List<String> getIgnoredParameters();
 
 	public String parametersToUrl(Map<String, ?> parameters);
 

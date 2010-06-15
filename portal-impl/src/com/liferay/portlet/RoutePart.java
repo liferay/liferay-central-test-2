@@ -14,11 +14,9 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -74,23 +72,13 @@ public class RoutePart {
 		return _pattern.toString();
 	}
 
-	public boolean matches(Map<String, ?> parameters) {
-		String value = MapUtil.getString(parameters, _name);
-
-		if (value == null) {
-			return false;
-		}
-
-		return matches(value);
-	}
-
 	public boolean matches(String parameter) {
 		Matcher matcher = _pattern.matcher(parameter);
 
 		return matcher.matches();
 	}
 
-	private static Pattern _defaultPattern = Pattern.compile("[a-zA-Z_]+");
+	private static Pattern _defaultPattern = Pattern.compile("[^/\\.]+");
 
 	private String _fragmentName;
 	private String _name;
