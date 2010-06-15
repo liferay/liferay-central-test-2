@@ -640,6 +640,7 @@
 		<field name="graceLoginCount" type="int" />
 		<field name="screenName" type="String" />
 		<field name="emailAddress" type="String" />
+		<field name="facebookId" type="long" />
 		<field name="openId" type="String">
 			<hint name="max-length">1024</hint>
 			<hint name="display-width">400</hint>

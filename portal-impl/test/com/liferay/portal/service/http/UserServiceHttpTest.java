@@ -56,6 +56,7 @@ public class UserServiceHttpTest extends BaseServiceHttpTestCase {
 		String screenName = StringPool.BLANK;
 		String emailAddress =
 			"UserServiceHttpTest." + nextLong() + "@liferay.com";
+		long facebookId = 0;
 		String openId = StringPool.BLANK;
 		Locale locale = LocaleUtil.getDefault();
 		String firstName = "UserServiceHttpTest";
@@ -79,9 +80,10 @@ public class UserServiceHttpTest extends BaseServiceHttpTestCase {
 		return UserServiceHttp.addUser(
 			getHttpPrincipal(), TestPropsValues.COMPANY_ID, autoPassword,
 			password1, password2, autoScreenName, screenName, emailAddress,
-			openId, locale, firstName, middleName, lastName, prefixId, suffixId,
-			male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
-			organizationIds, roleIds, userGroupIds, sendMail, serviceContext);
+			facebookId, openId, locale, firstName, middleName, lastName,
+			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
+			jobTitle, groupIds, organizationIds, roleIds, userGroupIds,
+			sendMail, serviceContext);
 	}
 
 }

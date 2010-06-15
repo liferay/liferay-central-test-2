@@ -783,6 +783,7 @@
 			<basic name="graceLoginCount" />
 			<basic name="screenName" />
 			<basic name="emailAddress" />
+			<basic name="facebookId" />
 			<basic name="openId" />
 			<basic name="portraitId" />
 			<basic name="languageId" />

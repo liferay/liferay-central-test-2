@@ -640,6 +640,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		userImpl.setGraceLoginCount(user.getGraceLoginCount());
 		userImpl.setScreenName(user.getScreenName());
 		userImpl.setEmailAddress(user.getEmailAddress());
+		userImpl.setFacebookId(user.getFacebookId());
 		userImpl.setOpenId(user.getOpenId());
 		userImpl.setPortraitId(user.getPortraitId());
 		userImpl.setLanguageId(user.getLanguageId());

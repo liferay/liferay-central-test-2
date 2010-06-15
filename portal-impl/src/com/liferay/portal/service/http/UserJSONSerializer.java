@@ -86,6 +86,7 @@ public class UserJSONSerializer {
 		jsonObj.put("graceLoginCount", model.getGraceLoginCount());
 		jsonObj.put("screenName", model.getScreenName());
 		jsonObj.put("emailAddress", model.getEmailAddress());
+		jsonObj.put("facebookId", model.getFacebookId());
 		jsonObj.put("openId", model.getOpenId());
 		jsonObj.put("portraitId", model.getPortraitId());
 		jsonObj.put("languageId", model.getLanguageId());

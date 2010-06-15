@@ -279,6 +279,7 @@ public class OpenIdAction extends PortletAction {
 			String password2 = password1;
 			boolean autoScreenName = true;
 			String screenName = StringPool.BLANK;
+			long facebookId = 0;
 			Locale locale = themeDisplay.getLocale();
 			String middleName = StringPool.BLANK;
 			int prefixId = 0;
@@ -298,10 +299,10 @@ public class OpenIdAction extends PortletAction {
 
 			user = UserLocalServiceUtil.addUser(
 				creatorUserId, companyId, autoPassword, password1, password2,
-				autoScreenName, screenName, emailAddress, openId, locale,
-				firstName, middleName, lastName, prefixId, suffixId, male,
-				birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
-				organizationIds, roleIds, userGroupIds, sendEmail,
+				autoScreenName, screenName, emailAddress, facebookId, openId,
+				locale, firstName, middleName, lastName, prefixId, suffixId,
+				male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
+				groupIds, organizationIds, roleIds, userGroupIds, sendEmail,
 				serviceContext);
 		}
 

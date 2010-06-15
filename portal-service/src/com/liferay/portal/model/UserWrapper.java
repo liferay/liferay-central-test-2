@@ -193,6 +193,14 @@ public class UserWrapper implements User {
 		_user.setEmailAddress(emailAddress);
 	}
 
+	public long getFacebookId() {
+		return _user.getFacebookId();
+	}
+
+	public void setFacebookId(long facebookId) {
+		_user.setFacebookId(facebookId);
+	}
+
 	public java.lang.String getOpenId() {
 		return _user.getOpenId();
 	}

@@ -75,6 +75,7 @@ public class UserModelImpl extends BaseModelImpl<User> {
 			{ "graceLoginCount", new Integer(Types.INTEGER) },
 			{ "screenName", new Integer(Types.VARCHAR) },
 			{ "emailAddress", new Integer(Types.VARCHAR) },
+			{ "facebookId", new Integer(Types.BIGINT) },
 			{ "openId", new Integer(Types.VARCHAR) },
 			{ "portraitId", new Integer(Types.BIGINT) },
 			{ "languageId", new Integer(Types.VARCHAR) },
@@ -99,7 +100,7 @@ public class UserModelImpl extends BaseModelImpl<User> {
 			{ "socialParticipationEquity", new Integer(Types.DOUBLE) },
 			{ "socialPersonalEquity", new Integer(Types.DOUBLE) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table User_ (uuid_ VARCHAR(75) null,userId LONG not null primary key,companyId LONG,createDate DATE null,modifiedDate DATE null,defaultUser BOOLEAN,contactId LONG,password_ VARCHAR(75) null,passwordEncrypted BOOLEAN,passwordReset BOOLEAN,passwordModifiedDate DATE null,reminderQueryQuestion VARCHAR(75) null,reminderQueryAnswer VARCHAR(75) null,graceLoginCount INTEGER,screenName VARCHAR(75) null,emailAddress VARCHAR(75) null,openId VARCHAR(1024) null,portraitId LONG,languageId VARCHAR(75) null,timeZoneId VARCHAR(75) null,greeting VARCHAR(255) null,comments STRING null,firstName VARCHAR(75) null,middleName VARCHAR(75) null,lastName VARCHAR(75) null,jobTitle VARCHAR(100) null,loginDate DATE null,loginIP VARCHAR(75) null,lastLoginDate DATE null,lastLoginIP VARCHAR(75) null,lastFailedLoginDate DATE null,failedLoginAttempts INTEGER,lockout BOOLEAN,lockoutDate DATE null,agreedToTermsOfUse BOOLEAN,active_ BOOLEAN,socialContributionEquity DOUBLE,socialParticipationEquity DOUBLE,socialPersonalEquity DOUBLE)";
+	public static final String TABLE_SQL_CREATE = "create table User_ (uuid_ VARCHAR(75) null,userId LONG not null primary key,companyId LONG,createDate DATE null,modifiedDate DATE null,defaultUser BOOLEAN,contactId LONG,password_ VARCHAR(75) null,passwordEncrypted BOOLEAN,passwordReset BOOLEAN,passwordModifiedDate DATE null,reminderQueryQuestion VARCHAR(75) null,reminderQueryAnswer VARCHAR(75) null,graceLoginCount INTEGER,screenName VARCHAR(75) null,emailAddress VARCHAR(75) null,facebookId LONG,openId VARCHAR(1024) null,portraitId LONG,languageId VARCHAR(75) null,timeZoneId VARCHAR(75) null,greeting VARCHAR(255) null,comments STRING null,firstName VARCHAR(75) null,middleName VARCHAR(75) null,lastName VARCHAR(75) null,jobTitle VARCHAR(100) null,loginDate DATE null,loginIP VARCHAR(75) null,lastLoginDate DATE null,lastLoginIP VARCHAR(75) null,lastFailedLoginDate DATE null,failedLoginAttempts INTEGER,lockout BOOLEAN,lockoutDate DATE null,agreedToTermsOfUse BOOLEAN,active_ BOOLEAN,socialContributionEquity DOUBLE,socialParticipationEquity DOUBLE,socialPersonalEquity DOUBLE)";
 	public static final String TABLE_SQL_DROP = "drop table User_";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -130,6 +131,7 @@ public class UserModelImpl extends BaseModelImpl<User> {
 		model.setGraceLoginCount(soapModel.getGraceLoginCount());
 		model.setScreenName(soapModel.getScreenName());
 		model.setEmailAddress(soapModel.getEmailAddress());
+		model.setFacebookId(soapModel.getFacebookId());
 		model.setOpenId(soapModel.getOpenId());
 		model.setPortraitId(soapModel.getPortraitId());
 		model.setLanguageId(soapModel.getLanguageId());
@@ -467,6 +469,14 @@ public class UserModelImpl extends BaseModelImpl<User> {
 		return GetterUtil.getString(_originalEmailAddress);
 	}
 
+	public long getFacebookId() {
+		return _facebookId;
+	}
+
+	public void setFacebookId(long facebookId) {
+		_facebookId = facebookId;
+	}
+
 	public String getOpenId() {
 		if (_openId == null) {
 			return StringPool.BLANK;
@@ -778,6 +788,7 @@ public class UserModelImpl extends BaseModelImpl<User> {
 		clone.setGraceLoginCount(getGraceLoginCount());
 		clone.setScreenName(getScreenName());
 		clone.setEmailAddress(getEmailAddress());
+		clone.setFacebookId(getFacebookId());
 		clone.setOpenId(getOpenId());
 		clone.setPortraitId(getPortraitId());
 		clone.setLanguageId(getLanguageId());
@@ -848,7 +859,7 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(79);
+		StringBundler sb = new StringBundler(81);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -882,6 +893,8 @@ public class UserModelImpl extends BaseModelImpl<User> {
 		sb.append(getScreenName());
 		sb.append(", emailAddress=");
 		sb.append(getEmailAddress());
+		sb.append(", facebookId=");
+		sb.append(getFacebookId());
 		sb.append(", openId=");
 		sb.append(getOpenId());
 		sb.append(", portraitId=");
@@ -934,7 +947,7 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(121);
+		StringBundler sb = new StringBundler(124);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.User");
@@ -1003,6 +1016,10 @@ public class UserModelImpl extends BaseModelImpl<User> {
 		sb.append(
 			"<column><column-name>emailAddress</column-name><column-value><![CDATA[");
 		sb.append(getEmailAddress());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>facebookId</column-name><column-value><![CDATA[");
+		sb.append(getFacebookId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>openId</column-name><column-value><![CDATA[");
@@ -1129,6 +1146,7 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	private String _originalScreenName;
 	private String _emailAddress;
 	private String _originalEmailAddress;
+	private long _facebookId;
 	private String _openId;
 	private String _originalOpenId;
 	private long _portraitId;

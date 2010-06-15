@@ -86,13 +86,14 @@ public class ViewAction extends PortletAction {
 
 				AdminUtil.updateUser(
 					actionRequest, user.getUserId(), user.getScreenName(),
-					user.getEmailAddress(), user.getOpenId(), languageId,
-					user.getTimeZoneId(), user.getGreeting(),
-					user.getComments(), contact.getSmsSn(), contact.getAimSn(),
-					contact.getFacebookSn(), contact.getIcqSn(),
-					contact.getJabberSn(), contact.getMsnSn(),
-					contact.getMySpaceSn(), contact.getSkypeSn(),
-					contact.getTwitterSn(), contact.getYmSn());
+					user.getEmailAddress(), user.getFacebookId(),
+					user.getOpenId(), languageId, user.getTimeZoneId(),
+					user.getGreeting(), user.getComments(), contact.getSmsSn(),
+					contact.getAimSn(), contact.getFacebookSn(),
+					contact.getIcqSn(), contact.getJabberSn(),
+					contact.getMsnSn(), contact.getMySpaceSn(),
+					contact.getSkypeSn(), contact.getTwitterSn(),
+					contact.getYmSn());
 			}
 
 			session.setAttribute(Globals.LOCALE_KEY, locale);

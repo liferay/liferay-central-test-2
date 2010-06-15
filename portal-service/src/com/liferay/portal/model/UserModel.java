@@ -128,6 +128,10 @@ public interface UserModel extends BaseModel<User> {
 
 	public void setEmailAddress(String emailAddress);
 
+	public long getFacebookId();
+
+	public void setFacebookId(long facebookId);
+
 	@AutoEscape
 	public String getOpenId();
 

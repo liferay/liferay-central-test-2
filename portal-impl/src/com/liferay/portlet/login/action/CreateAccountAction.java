@@ -196,6 +196,7 @@ public class CreateAccountAction extends PortletAction {
 		String screenName = ParamUtil.getString(actionRequest, "screenName");
 		String emailAddress = ParamUtil.getString(
 			actionRequest, "emailAddress");
+		long facebookId = ParamUtil.getLong(actionRequest, "facebookId");
 		String openId = ParamUtil.getString(actionRequest, "openId");
 		String firstName = ParamUtil.getString(actionRequest, "firstName");
 		String middleName = ParamUtil.getString(actionRequest, "middleName");
@@ -243,7 +244,7 @@ public class CreateAccountAction extends PortletAction {
 
 		User user = UserServiceUtil.addUser(
 			company.getCompanyId(), autoPassword, password1, password2,
-			autoScreenName, screenName, emailAddress, openId,
+			autoScreenName, screenName, emailAddress, facebookId, openId,
 			themeDisplay.getLocale(), firstName, middleName, lastName, prefixId,
 			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
 			groupIds, organizationIds, roleIds, userGroupIds, sendEmail,

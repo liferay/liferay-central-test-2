@@ -147,6 +147,7 @@ public class TCKAction extends Action {
 			boolean autoScreenName = false;
 			String screenName = "tck";
 			String emailAddress = "tck@liferay.com";
+			long facebookId = 0;
 			String openId = StringPool.BLANK;
 			Locale locale = Locale.US;
 			String firstName = "TCK";
@@ -169,10 +170,10 @@ public class TCKAction extends Action {
 
 			return UserLocalServiceUtil.addUser(
 				creatorUserId, companyId, autoPassword, password1, password2,
-				autoScreenName, screenName, emailAddress, openId, locale,
-				firstName, middleName, lastName, prefixId, suffixId, male,
-				birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
-				organizationIds, roleIds, userGroupIds, sendEmail,
+				autoScreenName, screenName, emailAddress, facebookId, openId,
+				locale, firstName, middleName, lastName, prefixId, suffixId,
+				male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
+				groupIds, organizationIds, roleIds, userGroupIds, sendEmail,
 				serviceContext);
 		}
 	}

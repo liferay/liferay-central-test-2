@@ -56,6 +56,7 @@ public class UserServiceTest extends BaseServiceTestCase {
 		boolean autoScreenName = true;
 		String screenName = StringPool.BLANK;
 		String emailAddress = "UserServiceTest." + nextLong() + "@liferay.com";
+		long facebookId = 0;
 		String openId = StringPool.BLANK;
 		Locale locale = LocaleUtil.getDefault();
 		String firstName = "UserServiceTest";
@@ -78,10 +79,10 @@ public class UserServiceTest extends BaseServiceTestCase {
 
 		return UserServiceUtil.addUser(
 			TestPropsValues.COMPANY_ID, autoPassword, password1, password2,
-			autoScreenName, screenName, emailAddress, openId, locale, firstName,
-			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
-			birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds,
-			roleIds, userGroupIds, sendMail, serviceContext);
+			autoScreenName, screenName, emailAddress, facebookId, openId,
+			locale, firstName, middleName, lastName, prefixId, suffixId, male,
+			birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
+			organizationIds, roleIds, userGroupIds, sendMail, serviceContext);
 	}
 
 }

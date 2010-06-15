@@ -304,6 +304,7 @@ public class EditUserAction extends PortletAction {
 		String screenName = ParamUtil.getString(actionRequest, "screenName");
 		String emailAddress = ParamUtil.getString(
 			actionRequest, "emailAddress");
+		long facebookId = 0;
 		String openId = ParamUtil.getString(actionRequest, "openId");
 		String languageId = ParamUtil.getString(actionRequest, "languageId");
 		String timeZoneId = ParamUtil.getString(actionRequest, "timeZoneId");
@@ -357,7 +358,7 @@ public class EditUserAction extends PortletAction {
 
 		user = UserServiceUtil.addUser(
 			themeDisplay.getCompanyId(), autoPassword, password1, password2,
-			autoScreenName, screenName, emailAddress, openId,
+			autoScreenName, screenName, emailAddress, facebookId, openId,
 			LocaleUtil.getDefault(), firstName, middleName, lastName, prefixId,
 			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
 			groupIds, organizationIds, roleIds, userGroupIds, sendEmail,
@@ -372,8 +373,8 @@ public class EditUserAction extends PortletAction {
 			user = UserServiceUtil.updateUser(
 				user.getUserId(), StringPool.BLANK, StringPool.BLANK,
 				StringPool.BLANK, false, reminderQueryQuestion,
-				reminderQueryAnswer, screenName, emailAddress, openId,
-				languageId, timeZoneId, greeting, comments, firstName,
+				reminderQueryAnswer, screenName, emailAddress, facebookId,
+				openId, languageId, timeZoneId, greeting, comments, firstName,
 				middleName, lastName, prefixId, suffixId, male, birthdayMonth,
 				birthdayDay, birthdayYear, smsSn, aimSn, facebookSn, icqSn,
 				jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle,
@@ -500,6 +501,7 @@ public class EditUserAction extends PortletAction {
 			user, actionRequest, "screenName");
 		String emailAddress = BeanParamUtil.getString(
 			user, actionRequest, "emailAddress");
+		long facebookId = user.getFacebookId();
 		String openId = BeanParamUtil.getString(user, actionRequest, "openId");
 		String oldLanguageId = user.getLanguageId();
 		String languageId = BeanParamUtil.getString(
@@ -575,13 +577,13 @@ public class EditUserAction extends PortletAction {
 		user = UserServiceUtil.updateUser(
 			user.getUserId(), oldPassword, newPassword1, newPassword2,
 			passwordReset, reminderQueryQuestion, reminderQueryAnswer,
-			screenName, emailAddress, openId, languageId, timeZoneId,greeting,
-			comments, firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
-			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
-			jobTitle, groupIds, organizationIds, roleIds, userGroupRoles,
-			userGroupIds, addresses, emailAddresses, phones, websites,
-			announcementsDeliveries, serviceContext);
+			screenName, emailAddress, facebookId, openId, languageId,
+			timeZoneId, greeting, comments, firstName, middleName, lastName,
+			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
+			smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn,
+			skypeSn, twitterSn, ymSn, jobTitle, groupIds, organizationIds,
+			roleIds, userGroupRoles, userGroupIds, addresses, emailAddresses,
+			phones, websites, announcementsDeliveries, serviceContext);
 
 		if (oldScreenName.equals(user.getScreenName())) {
 			oldScreenName = StringPool.BLANK;

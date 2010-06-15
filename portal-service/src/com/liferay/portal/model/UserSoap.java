@@ -57,6 +57,7 @@ public class UserSoap implements Serializable {
 		soapModel.setGraceLoginCount(model.getGraceLoginCount());
 		soapModel.setScreenName(model.getScreenName());
 		soapModel.setEmailAddress(model.getEmailAddress());
+		soapModel.setFacebookId(model.getFacebookId());
 		soapModel.setOpenId(model.getOpenId());
 		soapModel.setPortraitId(model.getPortraitId());
 		soapModel.setLanguageId(model.getLanguageId());
@@ -272,6 +273,14 @@ public class UserSoap implements Serializable {
 		_emailAddress = emailAddress;
 	}
 
+	public long getFacebookId() {
+		return _facebookId;
+	}
+
+	public void setFacebookId(long facebookId) {
+		_facebookId = facebookId;
+	}
+
 	public String getOpenId() {
 		return _openId;
 	}
@@ -484,6 +493,7 @@ public class UserSoap implements Serializable {
 	private int _graceLoginCount;
 	private String _screenName;
 	private String _emailAddress;
+	private long _facebookId;
 	private String _openId;
 	private long _portraitId;
 	private String _languageId;

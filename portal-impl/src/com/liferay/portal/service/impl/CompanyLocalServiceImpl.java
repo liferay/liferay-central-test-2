@@ -313,6 +313,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			String screenName = PropsValues.DEFAULT_ADMIN_SCREEN_NAME;
 			String emailAddress =
 				PropsValues.DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX + "@" + mx;
+			long facebookId = 0;
 			String openId = StringPool.BLANK;
 			Locale locale = defaultUser.getLocale();
 			String firstName = PropsValues.DEFAULT_ADMIN_FIRST_NAME;
@@ -349,10 +350,10 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			userLocalService.addUser(
 				creatorUserId, companyId, autoPassword, password1, password2,
-				autoScreenName, screenName, emailAddress, openId, locale,
-				firstName, middleName, lastName, prefixId, suffixId, male,
-				birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
-				organizationIds, roleIds, userGroupIds, sendEmail,
+				autoScreenName, screenName, emailAddress, facebookId, openId,
+				locale, firstName, middleName, lastName, prefixId, suffixId,
+				male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
+				groupIds, organizationIds, roleIds, userGroupIds, sendEmail,
 				serviceContext);
 		}
 

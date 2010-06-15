@@ -148,18 +148,18 @@ public class UserServiceSoap {
 		boolean autoPassword, java.lang.String password1,
 		java.lang.String password2, boolean autoScreenName,
 		java.lang.String screenName, java.lang.String emailAddress,
-		java.lang.String openId, String locale, java.lang.String firstName,
-		java.lang.String middleName, java.lang.String lastName, int prefixId,
-		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-		int birthdayYear, java.lang.String jobTitle, long[] groupIds,
-		long[] organizationIds, long[] roleIds, long[] userGroupIds,
-		boolean sendEmail,
+		long facebookId, java.lang.String openId, String locale,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
+		long[] roleIds, long[] userGroupIds, boolean sendEmail,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.addUser(companyId,
 					autoPassword, password1, password2, autoScreenName,
-					screenName, emailAddress, openId,
+					screenName, emailAddress, facebookId, openId,
 					LocaleUtil.fromLanguageId(locale), firstName, middleName,
 					lastName, prefixId, suffixId, male, birthdayMonth,
 					birthdayDay, birthdayYear, jobTitle, groupIds,
@@ -179,12 +179,13 @@ public class UserServiceSoap {
 		boolean autoPassword, java.lang.String password1,
 		java.lang.String password2, boolean autoScreenName,
 		java.lang.String screenName, java.lang.String emailAddress,
-		java.lang.String openId, String locale, java.lang.String firstName,
-		java.lang.String middleName, java.lang.String lastName, int prefixId,
-		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-		int birthdayYear, java.lang.String jobTitle, long[] groupIds,
-		long[] organizationIds, long[] roleIds, long[] userGroupIds,
-		boolean sendEmail, com.liferay.portal.model.AddressSoap[] addresses,
+		long facebookId, java.lang.String openId, String locale,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
+		long[] roleIds, long[] userGroupIds, boolean sendEmail,
+		com.liferay.portal.model.AddressSoap[] addresses,
 		com.liferay.portal.model.EmailAddressSoap[] emailAddresses,
 		com.liferay.portal.model.PhoneSoap[] phones,
 		com.liferay.portal.model.WebsiteSoap[] websites,
@@ -194,7 +195,7 @@ public class UserServiceSoap {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.addUser(companyId,
 					autoPassword, password1, password2, autoScreenName,
-					screenName, emailAddress, openId,
+					screenName, emailAddress, facebookId, openId,
 					LocaleUtil.fromLanguageId(locale), firstName, middleName,
 					lastName, prefixId, suffixId, male, birthdayMonth,
 					birthdayDay, birthdayYear, jobTitle, groupIds,
@@ -566,6 +567,18 @@ public class UserServiceSoap {
 		}
 	}
 
+	public static void updateFacebookId(long userId, long facebookId)
+		throws RemoteException {
+		try {
+			UserServiceUtil.updateFacebookId(userId, facebookId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portal.model.UserSoap updateLockout(long userId,
 		boolean lockout) throws RemoteException {
 		try {
@@ -663,13 +676,13 @@ public class UserServiceSoap {
 		java.lang.String newPassword2, boolean passwordReset,
 		java.lang.String reminderQueryQuestion,
 		java.lang.String reminderQueryAnswer, java.lang.String screenName,
-		java.lang.String emailAddress, java.lang.String openId,
-		java.lang.String languageId, java.lang.String timeZoneId,
-		java.lang.String greeting, java.lang.String comments,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, int prefixId, int suffixId, boolean male,
-		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String smsSn, java.lang.String aimSn,
+		java.lang.String emailAddress, long facebookId,
+		java.lang.String openId, java.lang.String languageId,
+		java.lang.String timeZoneId, java.lang.String greeting,
+		java.lang.String comments, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName, int prefixId,
+		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
+		int birthdayYear, java.lang.String smsSn, java.lang.String aimSn,
 		java.lang.String facebookSn, java.lang.String icqSn,
 		java.lang.String jabberSn, java.lang.String msnSn,
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
@@ -684,12 +697,12 @@ public class UserServiceSoap {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.updateUser(userId,
 					oldPassword, newPassword1, newPassword2, passwordReset,
 					reminderQueryQuestion, reminderQueryAnswer, screenName,
-					emailAddress, openId, languageId, timeZoneId, greeting,
-					comments, firstName, middleName, lastName, prefixId,
-					suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
-					smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn,
-					mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle, groupIds,
-					organizationIds, roleIds,
+					emailAddress, facebookId, openId, languageId, timeZoneId,
+					greeting, comments, firstName, middleName, lastName,
+					prefixId, suffixId, male, birthdayMonth, birthdayDay,
+					birthdayYear, smsSn, aimSn, facebookSn, icqSn, jabberSn,
+					msnSn, mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle,
+					groupIds, organizationIds, roleIds,
 					com.liferay.portal.model.impl.UserGroupRoleModelImpl.toModels(
 						userGroupRoles), userGroupIds, serviceContext);
 
@@ -707,13 +720,13 @@ public class UserServiceSoap {
 		java.lang.String newPassword2, boolean passwordReset,
 		java.lang.String reminderQueryQuestion,
 		java.lang.String reminderQueryAnswer, java.lang.String screenName,
-		java.lang.String emailAddress, java.lang.String openId,
-		java.lang.String languageId, java.lang.String timeZoneId,
-		java.lang.String greeting, java.lang.String comments,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, int prefixId, int suffixId, boolean male,
-		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String smsSn, java.lang.String aimSn,
+		java.lang.String emailAddress, long facebookId,
+		java.lang.String openId, java.lang.String languageId,
+		java.lang.String timeZoneId, java.lang.String greeting,
+		java.lang.String comments, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName, int prefixId,
+		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
+		int birthdayYear, java.lang.String smsSn, java.lang.String aimSn,
 		java.lang.String facebookSn, java.lang.String icqSn,
 		java.lang.String jabberSn, java.lang.String msnSn,
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
@@ -732,12 +745,12 @@ public class UserServiceSoap {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.updateUser(userId,
 					oldPassword, newPassword1, newPassword2, passwordReset,
 					reminderQueryQuestion, reminderQueryAnswer, screenName,
-					emailAddress, openId, languageId, timeZoneId, greeting,
-					comments, firstName, middleName, lastName, prefixId,
-					suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
-					smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn,
-					mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle, groupIds,
-					organizationIds, roleIds,
+					emailAddress, facebookId, openId, languageId, timeZoneId,
+					greeting, comments, firstName, middleName, lastName,
+					prefixId, suffixId, male, birthdayMonth, birthdayDay,
+					birthdayYear, smsSn, aimSn, facebookSn, icqSn, jabberSn,
+					msnSn, mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle,
+					groupIds, organizationIds, roleIds,
 					com.liferay.portal.model.impl.UserGroupRoleModelImpl.toModels(
 						userGroupRoles), userGroupIds,
 					com.liferay.portal.model.impl.AddressModelImpl.toModels(

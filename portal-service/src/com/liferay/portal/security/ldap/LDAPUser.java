@@ -61,6 +61,10 @@ public class LDAPUser {
 		return _user.getEmailAddress();
 	}
 
+	public long getFacebookId() {
+		return _user.getFacebookId();
+	}
+
 	public String getFacebookSn() {
 		return _contact.getFacebookSn();
 	}
@@ -249,6 +253,10 @@ public class LDAPUser {
 
 	public void setEmailAddress(String emailAddress) {
 		_user.setEmailAddress(emailAddress);
+	}
+
+	public void setFacebookId(long facebookId) {
+		_user.setFacebookId(facebookId);
 	}
 
 	public void setFacebookSn(String facebookSn) {

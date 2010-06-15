@@ -384,4 +384,6 @@ alter table User_ add socialContributionEquity DOUBLE;
 alter table User_ add socialParticipationEquity DOUBLE;
 alter table User_ add socialPersonalEquity DOUBLE;
 
+alter table User_ add facebookId LONG;
+
 alter table WikiPageResource add uuid_ VARCHAR(75) null;

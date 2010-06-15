@@ -1647,6 +1647,7 @@ create table User_ (
 	graceLoginCount INTEGER,
 	screenName VARCHAR(75) null,
 	emailAddress VARCHAR(75) null,
+	facebookId LONG,
 	openId VARCHAR(1024) null,
 	portraitId LONG,
 	languageId VARCHAR(75) null,

@@ -296,13 +296,13 @@ public class UserServiceHttp {
 		HttpPrincipal httpPrincipal, long companyId, boolean autoPassword,
 		java.lang.String password1, java.lang.String password2,
 		boolean autoScreenName, java.lang.String screenName,
-		java.lang.String emailAddress, java.lang.String openId,
-		java.util.Locale locale, java.lang.String firstName,
-		java.lang.String middleName, java.lang.String lastName, int prefixId,
-		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-		int birthdayYear, java.lang.String jobTitle, long[] groupIds,
-		long[] organizationIds, long[] roleIds, long[] userGroupIds,
-		boolean sendEmail,
+		java.lang.String emailAddress, long facebookId,
+		java.lang.String openId, java.util.Locale locale,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
+		long[] roleIds, long[] userGroupIds, boolean sendEmail,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -337,84 +337,86 @@ public class UserServiceHttp {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = openId;
+			Object paramObj7 = new LongWrapper(facebookId);
+
+			Object paramObj8 = openId;
 
 			if (openId == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
+				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = locale;
+			Object paramObj9 = locale;
 
 			if (locale == null) {
-				paramObj8 = new NullWrapper("java.util.Locale");
+				paramObj9 = new NullWrapper("java.util.Locale");
 			}
 
-			Object paramObj9 = firstName;
+			Object paramObj10 = firstName;
 
 			if (firstName == null) {
-				paramObj9 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj10 = middleName;
-
-			if (middleName == null) {
 				paramObj10 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj11 = lastName;
+			Object paramObj11 = middleName;
 
-			if (lastName == null) {
+			if (middleName == null) {
 				paramObj11 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj12 = new IntegerWrapper(prefixId);
+			Object paramObj12 = lastName;
 
-			Object paramObj13 = new IntegerWrapper(suffixId);
+			if (lastName == null) {
+				paramObj12 = new NullWrapper("java.lang.String");
+			}
 
-			Object paramObj14 = new BooleanWrapper(male);
+			Object paramObj13 = new IntegerWrapper(prefixId);
 
-			Object paramObj15 = new IntegerWrapper(birthdayMonth);
+			Object paramObj14 = new IntegerWrapper(suffixId);
 
-			Object paramObj16 = new IntegerWrapper(birthdayDay);
+			Object paramObj15 = new BooleanWrapper(male);
 
-			Object paramObj17 = new IntegerWrapper(birthdayYear);
+			Object paramObj16 = new IntegerWrapper(birthdayMonth);
 
-			Object paramObj18 = jobTitle;
+			Object paramObj17 = new IntegerWrapper(birthdayDay);
+
+			Object paramObj18 = new IntegerWrapper(birthdayYear);
+
+			Object paramObj19 = jobTitle;
 
 			if (jobTitle == null) {
-				paramObj18 = new NullWrapper("java.lang.String");
+				paramObj19 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj19 = groupIds;
+			Object paramObj20 = groupIds;
 
 			if (groupIds == null) {
-				paramObj19 = new NullWrapper("[J");
-			}
-
-			Object paramObj20 = organizationIds;
-
-			if (organizationIds == null) {
 				paramObj20 = new NullWrapper("[J");
 			}
 
-			Object paramObj21 = roleIds;
+			Object paramObj21 = organizationIds;
 
-			if (roleIds == null) {
+			if (organizationIds == null) {
 				paramObj21 = new NullWrapper("[J");
 			}
 
-			Object paramObj22 = userGroupIds;
+			Object paramObj22 = roleIds;
 
-			if (userGroupIds == null) {
+			if (roleIds == null) {
 				paramObj22 = new NullWrapper("[J");
 			}
 
-			Object paramObj23 = new BooleanWrapper(sendEmail);
+			Object paramObj23 = userGroupIds;
 
-			Object paramObj24 = serviceContext;
+			if (userGroupIds == null) {
+				paramObj23 = new NullWrapper("[J");
+			}
+
+			Object paramObj24 = new BooleanWrapper(sendEmail);
+
+			Object paramObj25 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj24 = new NullWrapper(
+				paramObj25 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -426,7 +428,7 @@ public class UserServiceHttp {
 						paramObj10, paramObj11, paramObj12, paramObj13,
 						paramObj14, paramObj15, paramObj16, paramObj17,
 						paramObj18, paramObj19, paramObj20, paramObj21,
-						paramObj22, paramObj23, paramObj24
+						paramObj22, paramObj23, paramObj24, paramObj25
 					});
 
 			Object returnObj = null;
@@ -459,13 +461,13 @@ public class UserServiceHttp {
 		HttpPrincipal httpPrincipal, long companyId, boolean autoPassword,
 		java.lang.String password1, java.lang.String password2,
 		boolean autoScreenName, java.lang.String screenName,
-		java.lang.String emailAddress, java.lang.String openId,
-		java.util.Locale locale, java.lang.String firstName,
-		java.lang.String middleName, java.lang.String lastName, int prefixId,
-		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-		int birthdayYear, java.lang.String jobTitle, long[] groupIds,
-		long[] organizationIds, long[] roleIds, long[] userGroupIds,
-		boolean sendEmail,
+		java.lang.String emailAddress, long facebookId,
+		java.lang.String openId, java.util.Locale locale,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
+		long[] roleIds, long[] userGroupIds, boolean sendEmail,
 		java.util.List<com.liferay.portal.model.Address> addresses,
 		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
 		java.util.List<com.liferay.portal.model.Phone> phones,
@@ -505,114 +507,116 @@ public class UserServiceHttp {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = openId;
+			Object paramObj7 = new LongWrapper(facebookId);
+
+			Object paramObj8 = openId;
 
 			if (openId == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
+				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = locale;
+			Object paramObj9 = locale;
 
 			if (locale == null) {
-				paramObj8 = new NullWrapper("java.util.Locale");
+				paramObj9 = new NullWrapper("java.util.Locale");
 			}
 
-			Object paramObj9 = firstName;
+			Object paramObj10 = firstName;
 
 			if (firstName == null) {
-				paramObj9 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj10 = middleName;
-
-			if (middleName == null) {
 				paramObj10 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj11 = lastName;
+			Object paramObj11 = middleName;
 
-			if (lastName == null) {
+			if (middleName == null) {
 				paramObj11 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj12 = new IntegerWrapper(prefixId);
+			Object paramObj12 = lastName;
 
-			Object paramObj13 = new IntegerWrapper(suffixId);
+			if (lastName == null) {
+				paramObj12 = new NullWrapper("java.lang.String");
+			}
 
-			Object paramObj14 = new BooleanWrapper(male);
+			Object paramObj13 = new IntegerWrapper(prefixId);
 
-			Object paramObj15 = new IntegerWrapper(birthdayMonth);
+			Object paramObj14 = new IntegerWrapper(suffixId);
 
-			Object paramObj16 = new IntegerWrapper(birthdayDay);
+			Object paramObj15 = new BooleanWrapper(male);
 
-			Object paramObj17 = new IntegerWrapper(birthdayYear);
+			Object paramObj16 = new IntegerWrapper(birthdayMonth);
 
-			Object paramObj18 = jobTitle;
+			Object paramObj17 = new IntegerWrapper(birthdayDay);
+
+			Object paramObj18 = new IntegerWrapper(birthdayYear);
+
+			Object paramObj19 = jobTitle;
 
 			if (jobTitle == null) {
-				paramObj18 = new NullWrapper("java.lang.String");
+				paramObj19 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj19 = groupIds;
+			Object paramObj20 = groupIds;
 
 			if (groupIds == null) {
-				paramObj19 = new NullWrapper("[J");
-			}
-
-			Object paramObj20 = organizationIds;
-
-			if (organizationIds == null) {
 				paramObj20 = new NullWrapper("[J");
 			}
 
-			Object paramObj21 = roleIds;
+			Object paramObj21 = organizationIds;
 
-			if (roleIds == null) {
+			if (organizationIds == null) {
 				paramObj21 = new NullWrapper("[J");
 			}
 
-			Object paramObj22 = userGroupIds;
+			Object paramObj22 = roleIds;
 
-			if (userGroupIds == null) {
+			if (roleIds == null) {
 				paramObj22 = new NullWrapper("[J");
 			}
 
-			Object paramObj23 = new BooleanWrapper(sendEmail);
+			Object paramObj23 = userGroupIds;
 
-			Object paramObj24 = addresses;
-
-			if (addresses == null) {
-				paramObj24 = new NullWrapper("java.util.List");
+			if (userGroupIds == null) {
+				paramObj23 = new NullWrapper("[J");
 			}
 
-			Object paramObj25 = emailAddresses;
+			Object paramObj24 = new BooleanWrapper(sendEmail);
 
-			if (emailAddresses == null) {
+			Object paramObj25 = addresses;
+
+			if (addresses == null) {
 				paramObj25 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj26 = phones;
+			Object paramObj26 = emailAddresses;
 
-			if (phones == null) {
+			if (emailAddresses == null) {
 				paramObj26 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj27 = websites;
+			Object paramObj27 = phones;
 
-			if (websites == null) {
+			if (phones == null) {
 				paramObj27 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj28 = announcementsDelivers;
+			Object paramObj28 = websites;
 
-			if (announcementsDelivers == null) {
+			if (websites == null) {
 				paramObj28 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj29 = serviceContext;
+			Object paramObj29 = announcementsDelivers;
+
+			if (announcementsDelivers == null) {
+				paramObj29 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj30 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj29 = new NullWrapper(
+				paramObj30 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -625,7 +629,8 @@ public class UserServiceHttp {
 						paramObj14, paramObj15, paramObj16, paramObj17,
 						paramObj18, paramObj19, paramObj20, paramObj21,
 						paramObj22, paramObj23, paramObj24, paramObj25,
-						paramObj26, paramObj27, paramObj28, paramObj29
+						paramObj26, paramObj27, paramObj28, paramObj29,
+						paramObj30
 					});
 
 			Object returnObj = null;
@@ -1633,6 +1638,40 @@ public class UserServiceHttp {
 		}
 	}
 
+	public static void updateFacebookId(HttpPrincipal httpPrincipal,
+		long userId, long facebookId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(userId);
+
+			Object paramObj1 = new LongWrapper(facebookId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
+					"updateFacebookId", new Object[] { paramObj0, paramObj1 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.portal.model.User updateLockout(
 		HttpPrincipal httpPrincipal, long userId, boolean lockout)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -1925,13 +1964,13 @@ public class UserServiceHttp {
 		java.lang.String newPassword1, java.lang.String newPassword2,
 		boolean passwordReset, java.lang.String reminderQueryQuestion,
 		java.lang.String reminderQueryAnswer, java.lang.String screenName,
-		java.lang.String emailAddress, java.lang.String openId,
-		java.lang.String languageId, java.lang.String timeZoneId,
-		java.lang.String greeting, java.lang.String comments,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, int prefixId, int suffixId, boolean male,
-		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String smsSn, java.lang.String aimSn,
+		java.lang.String emailAddress, long facebookId,
+		java.lang.String openId, java.lang.String languageId,
+		java.lang.String timeZoneId, java.lang.String greeting,
+		java.lang.String comments, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName, int prefixId,
+		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
+		int birthdayYear, java.lang.String smsSn, java.lang.String aimSn,
 		java.lang.String facebookSn, java.lang.String icqSn,
 		java.lang.String jabberSn, java.lang.String msnSn,
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
@@ -1990,166 +2029,168 @@ public class UserServiceHttp {
 				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj9 = openId;
+			Object paramObj9 = new LongWrapper(facebookId);
+
+			Object paramObj10 = openId;
 
 			if (openId == null) {
-				paramObj9 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj10 = languageId;
-
-			if (languageId == null) {
 				paramObj10 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj11 = timeZoneId;
+			Object paramObj11 = languageId;
 
-			if (timeZoneId == null) {
+			if (languageId == null) {
 				paramObj11 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj12 = greeting;
+			Object paramObj12 = timeZoneId;
 
-			if (greeting == null) {
+			if (timeZoneId == null) {
 				paramObj12 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj13 = comments;
+			Object paramObj13 = greeting;
 
-			if (comments == null) {
+			if (greeting == null) {
 				paramObj13 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj14 = firstName;
+			Object paramObj14 = comments;
 
-			if (firstName == null) {
+			if (comments == null) {
 				paramObj14 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj15 = middleName;
+			Object paramObj15 = firstName;
 
-			if (middleName == null) {
+			if (firstName == null) {
 				paramObj15 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj16 = lastName;
+			Object paramObj16 = middleName;
 
-			if (lastName == null) {
+			if (middleName == null) {
 				paramObj16 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj17 = new IntegerWrapper(prefixId);
+			Object paramObj17 = lastName;
 
-			Object paramObj18 = new IntegerWrapper(suffixId);
-
-			Object paramObj19 = new BooleanWrapper(male);
-
-			Object paramObj20 = new IntegerWrapper(birthdayMonth);
-
-			Object paramObj21 = new IntegerWrapper(birthdayDay);
-
-			Object paramObj22 = new IntegerWrapper(birthdayYear);
-
-			Object paramObj23 = smsSn;
-
-			if (smsSn == null) {
-				paramObj23 = new NullWrapper("java.lang.String");
+			if (lastName == null) {
+				paramObj17 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj24 = aimSn;
+			Object paramObj18 = new IntegerWrapper(prefixId);
 
-			if (aimSn == null) {
+			Object paramObj19 = new IntegerWrapper(suffixId);
+
+			Object paramObj20 = new BooleanWrapper(male);
+
+			Object paramObj21 = new IntegerWrapper(birthdayMonth);
+
+			Object paramObj22 = new IntegerWrapper(birthdayDay);
+
+			Object paramObj23 = new IntegerWrapper(birthdayYear);
+
+			Object paramObj24 = smsSn;
+
+			if (smsSn == null) {
 				paramObj24 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj25 = facebookSn;
+			Object paramObj25 = aimSn;
 
-			if (facebookSn == null) {
+			if (aimSn == null) {
 				paramObj25 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj26 = icqSn;
+			Object paramObj26 = facebookSn;
 
-			if (icqSn == null) {
+			if (facebookSn == null) {
 				paramObj26 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj27 = jabberSn;
+			Object paramObj27 = icqSn;
 
-			if (jabberSn == null) {
+			if (icqSn == null) {
 				paramObj27 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj28 = msnSn;
+			Object paramObj28 = jabberSn;
 
-			if (msnSn == null) {
+			if (jabberSn == null) {
 				paramObj28 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj29 = mySpaceSn;
+			Object paramObj29 = msnSn;
 
-			if (mySpaceSn == null) {
+			if (msnSn == null) {
 				paramObj29 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj30 = skypeSn;
+			Object paramObj30 = mySpaceSn;
 
-			if (skypeSn == null) {
+			if (mySpaceSn == null) {
 				paramObj30 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj31 = twitterSn;
+			Object paramObj31 = skypeSn;
 
-			if (twitterSn == null) {
+			if (skypeSn == null) {
 				paramObj31 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj32 = ymSn;
+			Object paramObj32 = twitterSn;
 
-			if (ymSn == null) {
+			if (twitterSn == null) {
 				paramObj32 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj33 = jobTitle;
+			Object paramObj33 = ymSn;
 
-			if (jobTitle == null) {
+			if (ymSn == null) {
 				paramObj33 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj34 = groupIds;
+			Object paramObj34 = jobTitle;
 
-			if (groupIds == null) {
-				paramObj34 = new NullWrapper("[J");
+			if (jobTitle == null) {
+				paramObj34 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj35 = organizationIds;
+			Object paramObj35 = groupIds;
 
-			if (organizationIds == null) {
+			if (groupIds == null) {
 				paramObj35 = new NullWrapper("[J");
 			}
 
-			Object paramObj36 = roleIds;
+			Object paramObj36 = organizationIds;
 
-			if (roleIds == null) {
+			if (organizationIds == null) {
 				paramObj36 = new NullWrapper("[J");
 			}
 
-			Object paramObj37 = userGroupRoles;
+			Object paramObj37 = roleIds;
+
+			if (roleIds == null) {
+				paramObj37 = new NullWrapper("[J");
+			}
+
+			Object paramObj38 = userGroupRoles;
 
 			if (userGroupRoles == null) {
-				paramObj37 = new NullWrapper("java.util.List");
+				paramObj38 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj38 = userGroupIds;
+			Object paramObj39 = userGroupIds;
 
 			if (userGroupIds == null) {
-				paramObj38 = new NullWrapper("[J");
+				paramObj39 = new NullWrapper("[J");
 			}
 
-			Object paramObj39 = serviceContext;
+			Object paramObj40 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj39 = new NullWrapper(
+				paramObj40 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -2165,7 +2206,7 @@ public class UserServiceHttp {
 						paramObj26, paramObj27, paramObj28, paramObj29,
 						paramObj30, paramObj31, paramObj32, paramObj33,
 						paramObj34, paramObj35, paramObj36, paramObj37,
-						paramObj38, paramObj39
+						paramObj38, paramObj39, paramObj40
 					});
 
 			Object returnObj = null;
@@ -2199,13 +2240,13 @@ public class UserServiceHttp {
 		java.lang.String newPassword1, java.lang.String newPassword2,
 		boolean passwordReset, java.lang.String reminderQueryQuestion,
 		java.lang.String reminderQueryAnswer, java.lang.String screenName,
-		java.lang.String emailAddress, java.lang.String openId,
-		java.lang.String languageId, java.lang.String timeZoneId,
-		java.lang.String greeting, java.lang.String comments,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, int prefixId, int suffixId, boolean male,
-		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String smsSn, java.lang.String aimSn,
+		java.lang.String emailAddress, long facebookId,
+		java.lang.String openId, java.lang.String languageId,
+		java.lang.String timeZoneId, java.lang.String greeting,
+		java.lang.String comments, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName, int prefixId,
+		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
+		int birthdayYear, java.lang.String smsSn, java.lang.String aimSn,
 		java.lang.String facebookSn, java.lang.String icqSn,
 		java.lang.String jabberSn, java.lang.String msnSn,
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
@@ -2269,196 +2310,198 @@ public class UserServiceHttp {
 				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj9 = openId;
+			Object paramObj9 = new LongWrapper(facebookId);
+
+			Object paramObj10 = openId;
 
 			if (openId == null) {
-				paramObj9 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj10 = languageId;
-
-			if (languageId == null) {
 				paramObj10 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj11 = timeZoneId;
+			Object paramObj11 = languageId;
 
-			if (timeZoneId == null) {
+			if (languageId == null) {
 				paramObj11 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj12 = greeting;
+			Object paramObj12 = timeZoneId;
 
-			if (greeting == null) {
+			if (timeZoneId == null) {
 				paramObj12 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj13 = comments;
+			Object paramObj13 = greeting;
 
-			if (comments == null) {
+			if (greeting == null) {
 				paramObj13 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj14 = firstName;
+			Object paramObj14 = comments;
 
-			if (firstName == null) {
+			if (comments == null) {
 				paramObj14 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj15 = middleName;
+			Object paramObj15 = firstName;
 
-			if (middleName == null) {
+			if (firstName == null) {
 				paramObj15 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj16 = lastName;
+			Object paramObj16 = middleName;
 
-			if (lastName == null) {
+			if (middleName == null) {
 				paramObj16 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj17 = new IntegerWrapper(prefixId);
+			Object paramObj17 = lastName;
 
-			Object paramObj18 = new IntegerWrapper(suffixId);
-
-			Object paramObj19 = new BooleanWrapper(male);
-
-			Object paramObj20 = new IntegerWrapper(birthdayMonth);
-
-			Object paramObj21 = new IntegerWrapper(birthdayDay);
-
-			Object paramObj22 = new IntegerWrapper(birthdayYear);
-
-			Object paramObj23 = smsSn;
-
-			if (smsSn == null) {
-				paramObj23 = new NullWrapper("java.lang.String");
+			if (lastName == null) {
+				paramObj17 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj24 = aimSn;
+			Object paramObj18 = new IntegerWrapper(prefixId);
 
-			if (aimSn == null) {
+			Object paramObj19 = new IntegerWrapper(suffixId);
+
+			Object paramObj20 = new BooleanWrapper(male);
+
+			Object paramObj21 = new IntegerWrapper(birthdayMonth);
+
+			Object paramObj22 = new IntegerWrapper(birthdayDay);
+
+			Object paramObj23 = new IntegerWrapper(birthdayYear);
+
+			Object paramObj24 = smsSn;
+
+			if (smsSn == null) {
 				paramObj24 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj25 = facebookSn;
+			Object paramObj25 = aimSn;
 
-			if (facebookSn == null) {
+			if (aimSn == null) {
 				paramObj25 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj26 = icqSn;
+			Object paramObj26 = facebookSn;
 
-			if (icqSn == null) {
+			if (facebookSn == null) {
 				paramObj26 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj27 = jabberSn;
+			Object paramObj27 = icqSn;
 
-			if (jabberSn == null) {
+			if (icqSn == null) {
 				paramObj27 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj28 = msnSn;
+			Object paramObj28 = jabberSn;
 
-			if (msnSn == null) {
+			if (jabberSn == null) {
 				paramObj28 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj29 = mySpaceSn;
+			Object paramObj29 = msnSn;
 
-			if (mySpaceSn == null) {
+			if (msnSn == null) {
 				paramObj29 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj30 = skypeSn;
+			Object paramObj30 = mySpaceSn;
 
-			if (skypeSn == null) {
+			if (mySpaceSn == null) {
 				paramObj30 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj31 = twitterSn;
+			Object paramObj31 = skypeSn;
 
-			if (twitterSn == null) {
+			if (skypeSn == null) {
 				paramObj31 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj32 = ymSn;
+			Object paramObj32 = twitterSn;
 
-			if (ymSn == null) {
+			if (twitterSn == null) {
 				paramObj32 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj33 = jobTitle;
+			Object paramObj33 = ymSn;
 
-			if (jobTitle == null) {
+			if (ymSn == null) {
 				paramObj33 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj34 = groupIds;
+			Object paramObj34 = jobTitle;
 
-			if (groupIds == null) {
-				paramObj34 = new NullWrapper("[J");
+			if (jobTitle == null) {
+				paramObj34 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj35 = organizationIds;
+			Object paramObj35 = groupIds;
 
-			if (organizationIds == null) {
+			if (groupIds == null) {
 				paramObj35 = new NullWrapper("[J");
 			}
 
-			Object paramObj36 = roleIds;
+			Object paramObj36 = organizationIds;
 
-			if (roleIds == null) {
+			if (organizationIds == null) {
 				paramObj36 = new NullWrapper("[J");
 			}
 
-			Object paramObj37 = userGroupRoles;
+			Object paramObj37 = roleIds;
+
+			if (roleIds == null) {
+				paramObj37 = new NullWrapper("[J");
+			}
+
+			Object paramObj38 = userGroupRoles;
 
 			if (userGroupRoles == null) {
-				paramObj37 = new NullWrapper("java.util.List");
+				paramObj38 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj38 = userGroupIds;
+			Object paramObj39 = userGroupIds;
 
 			if (userGroupIds == null) {
-				paramObj38 = new NullWrapper("[J");
+				paramObj39 = new NullWrapper("[J");
 			}
 
-			Object paramObj39 = addresses;
+			Object paramObj40 = addresses;
 
 			if (addresses == null) {
-				paramObj39 = new NullWrapper("java.util.List");
-			}
-
-			Object paramObj40 = emailAddresses;
-
-			if (emailAddresses == null) {
 				paramObj40 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj41 = phones;
+			Object paramObj41 = emailAddresses;
 
-			if (phones == null) {
+			if (emailAddresses == null) {
 				paramObj41 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj42 = websites;
+			Object paramObj42 = phones;
 
-			if (websites == null) {
+			if (phones == null) {
 				paramObj42 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj43 = announcementsDelivers;
+			Object paramObj43 = websites;
 
-			if (announcementsDelivers == null) {
+			if (websites == null) {
 				paramObj43 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj44 = serviceContext;
+			Object paramObj44 = announcementsDelivers;
+
+			if (announcementsDelivers == null) {
+				paramObj44 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj45 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj44 = new NullWrapper(
+				paramObj45 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -2475,7 +2518,7 @@ public class UserServiceHttp {
 						paramObj30, paramObj31, paramObj32, paramObj33,
 						paramObj34, paramObj35, paramObj36, paramObj37,
 						paramObj38, paramObj39, paramObj40, paramObj41,
-						paramObj42, paramObj43, paramObj44
+						paramObj42, paramObj43, paramObj44, paramObj45
 					});
 
 			Object returnObj = null;
