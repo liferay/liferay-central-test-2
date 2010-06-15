@@ -66,7 +66,7 @@ if (Validator.isNotNull(curCategoryIds)) {
 	<aui:input name="<%= hiddenInput %>" type="hidden" />
 </div>
 
-<aui:script use="liferay-categories-selector">
+<aui:script use="liferay-asset-categories-selector">
 	new Liferay.AssetCategoriesSelector(
 		{
 			contentBox: '#<%= namespace + randomNamespace %>assetCategoriesSelector',

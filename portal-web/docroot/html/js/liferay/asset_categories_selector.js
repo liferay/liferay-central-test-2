@@ -1,5 +1,5 @@
 AUI().add(
-	'liferay-categories-selector',
+	'liferay-asset-categories-selector',
 	function(A) {
 		var Lang = A.Lang;
 
@@ -347,6 +347,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-tree', 'liferay-tags-selector']
+		requires: ['aui-tree', 'liferay-asset-tags-selector']
 	}
 );

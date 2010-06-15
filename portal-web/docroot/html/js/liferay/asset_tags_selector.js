@@ -1,5 +1,5 @@
 AUI().add(
-	'liferay-tags-selector',
+	'liferay-asset-tags-selector',
 	function(A) {
 		var Lang = A.Lang;
 

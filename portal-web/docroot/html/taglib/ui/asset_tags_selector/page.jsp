@@ -49,7 +49,7 @@ if (curTagsParam != null) {
 	<input class="lfr-tag-selector-input" id="<%= randomNamespace %>assetTagNames" size="15" type="text" />
 </div>
 
-<aui:script use="liferay-tags-selector">
+<aui:script use="liferay-asset-tags-selector">
 	new Liferay.AssetTagsSelector(
 		{
 			allowSuggestions: true,
