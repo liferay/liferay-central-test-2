@@ -24,6 +24,7 @@ import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
+import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
