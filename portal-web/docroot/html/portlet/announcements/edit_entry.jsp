@@ -52,9 +52,9 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 	<aui:input name="entryId" type="hidden" value="<%= entryId %>" />
 	<aui:input name="alert" type="hidden" value="<%= portletName.equals(PortletKeys.ALERTS) %>" />
 
-	<liferay-ui:header
+	<liferay-ui:header	
+		cbackURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 		title="entry"
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 
 	<liferay-ui:error exception="<%= EntryContentException.class %>" message="please-enter-valid-content" />

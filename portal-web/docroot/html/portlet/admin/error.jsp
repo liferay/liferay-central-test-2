@@ -16,6 +16,12 @@
 
 <%@ include file="/html/portlet/admin/init.jsp" %>
 
-<liferay-ui:header title="error" backURL="javascript:history.go(-1);" />
+<liferay-ui:header 
+	backURL="javascript:history.go(-1);"
+	title="error" 
+/>
 
-<liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />
+<liferay-ui:error 
+	exception="<%= PrincipalException.class %>" 
+	message="you-do-not-have-the-required-permissions" 
+/>
