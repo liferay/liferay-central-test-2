@@ -93,6 +93,8 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 		catch (Exception e) {
 			category = new MBCategoryImpl();
 
+			category.setCategoryId(getCategoryId());
+
 			_log.error(e);
 		}
 

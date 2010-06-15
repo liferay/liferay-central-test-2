@@ -69,7 +69,7 @@ boolean quote = false;
 				<portlet:param name="mbCategoryId" value="<%= String.valueOf(categoryId) %>" />
 			</portlet:renderURL>
 
-			<aui:a href="<%= viewCategoryURL %>" id="categoryName"><%= (categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) ? category.getName() : LanguageUtil.get(pageContext, "message-boards-home") %></aui:a>
+			<aui:a href="<%= viewCategoryURL %>" id="categoryName"><%= ((categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) && (categoryId != MBCategoryConstants.DISCUSSION_CATEGORY_ID)) ? category.getName() : LanguageUtil.get(pageContext, "message-boards-home") %></aui:a>
 
 			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectCategoryURL">
 				<portlet:param name="struts_action" value="/message_boards/select_category" />

@@ -1063,6 +1063,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 		else {
 			category = new MBCategoryImpl();
+
+			category.setCategoryId(message.getCategoryId());
 		}
 
 		MBMessage parentMessage = null;
