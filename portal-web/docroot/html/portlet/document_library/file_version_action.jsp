@@ -30,7 +30,7 @@ Boolean hasLock = (Boolean)objArray[5];
 %>
 
 <liferay-ui:icon-menu>
-	<c:if test="<%= showActions && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) && (!isLocked.booleanValue() || hasLock.booleanValue()) %>">
+	<c:if test="<%= showActions && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) && (!isLocked || hasLock) %>">
 		<portlet:renderURL var="redirectURL">
 			<portlet:param name="struts_action" value="/document_library/view" />
 			<portlet:param name="folderId" value="<%= String.valueOf(fileVersion.getFolderId()) %>" />

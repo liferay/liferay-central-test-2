@@ -84,9 +84,9 @@ portletURL.setParameter("name", name);
 	<liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
 </c:if>
 
-<c:if test="<%= isLocked.booleanValue() %>">
+<c:if test="<%= isLocked %>">
 	<c:choose>
-		<c:when test="<%= hasLock.booleanValue() %>">
+		<c:when test="<%= hasLock %>">
 			<div class="portlet-msg-success">
 				<c:choose>
 					<c:when test="<%= lock.isNeverExpires() %>">
@@ -282,11 +282,11 @@ portletURL.setParameter("name", name);
 		</c:if>
 
 		<aui:button-row>
-			<aui:button disabled="<%= isLocked.booleanValue() && !hasLock.booleanValue() %>" type="submit" value="save" />
+			<aui:button disabled="<%= isLocked && !hasLock %>" type="submit" value="save" />
 
-			<c:if test="<%= (fileEntry != null) && ((isLocked.booleanValue() && hasLock.booleanValue()) || !isLocked.booleanValue()) %>">
+			<c:if test="<%= (fileEntry != null) && ((isLocked && hasLock) || !isLocked) %>">
 				<c:choose>
-					<c:when test="<%= !hasLock.booleanValue() %>">
+					<c:when test="<%= !hasLock %>">
 						<aui:button onClick='<%= renderResponse.getNamespace() + "lock();" %>' value="lock" />
 					</c:when>
 					<c:otherwise>
