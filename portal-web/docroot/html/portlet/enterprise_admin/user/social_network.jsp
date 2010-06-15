@@ -27,7 +27,6 @@ Contact selContact = (Contact)request.getAttribute("user.selContact");
 		<aui:model-context bean="<%= selContact %>" model="<%= Contact.class %>" />
 
 		<aui:fieldset>
-
 			<div class="social-network">
 				<aui:input label="facebook" name="facebookSn" />
 
