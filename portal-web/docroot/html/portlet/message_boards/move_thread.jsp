@@ -42,8 +42,8 @@ boolean quote = false;
 	<aui:input name="threadId" type="hidden" value="<%= thread.getThreadId() %>" />
 	<aui:input name="mbCategoryId" type="hidden" value="<%= categoryId %>" />
 
-	<liferay-ui:tabs
-		names="message"
+	<liferay-ui:header
+		title="message"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 
