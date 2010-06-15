@@ -26,10 +26,8 @@ public interface Router {
 
 	public Route addRoute(String pattern);
 
-	public String parametersToUrl(Map<String, ?> parameters)
-		throws RouteNotFoundException;
+	public String parametersToUrl(Map<String, ?> parameters);
 
-	public Map<String, String> urlToParameters(String url)
-		throws RouteNotFoundException;
+	public Map<String, String> urlToParameters(String url);
 
 }

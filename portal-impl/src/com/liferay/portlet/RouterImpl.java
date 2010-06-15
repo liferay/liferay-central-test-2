@@ -17,9 +17,7 @@ package com.liferay.portlet;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.Route;
-import com.liferay.portal.kernel.portlet.RouteNotFoundException;
 import com.liferay.portal.kernel.portlet.Router;
-import com.liferay.portal.kernel.util.MapUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,9 +39,7 @@ public class RouterImpl implements Router {
 		return route;
 	}
 
-	public String parametersToUrl(Map<String, ?> parameters)
-		throws RouteNotFoundException {
-
+	public String parametersToUrl(Map<String, ?> parameters) {
 		for (Route route : _routes) {
 			String url = route.parametersToUrl(parameters);
 
@@ -52,14 +48,10 @@ public class RouterImpl implements Router {
 			}
 		}
 
-		throw new RouteNotFoundException(
-			"No route could be found to use for parameters " +
-				MapUtil.toString(parameters));
+		return null;
 	}
 
-	public Map<String, String> urlToParameters(String url)
-		throws RouteNotFoundException {
-
+	public Map<String, String> urlToParameters(String url) {
 		for (Route route : _routes) {
 			Map<String, String> parameters = route.urlToParameters(url);
 
@@ -68,8 +60,7 @@ public class RouterImpl implements Router {
 			}
 		}
 
-		throw new RouteNotFoundException(
-			"No route could be found to match url " + url);
+		return null;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(Router.class);
