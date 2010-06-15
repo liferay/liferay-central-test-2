@@ -53,8 +53,8 @@ portletURL.setParameter("nodeId", String.valueOf(nodeId));
 	<aui:input name="importer" type="hidden" value="<%= tabs2 %>" />
 
 	<liferay-ui:header
+		title="import-pages"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-    title="import-pages"
 	/>
 
 	<liferay-ui:tabs

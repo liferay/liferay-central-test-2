@@ -40,8 +40,8 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 %>
 
 <liferay-ui:header
+	title='<%= (entry != null) ? entry.getTitle() : "new-blog-entry" %>'
 	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-  title='<%= (entry != null) ? entry.getTitle() : "new-blog-entry" %>'
 />
 
 <portlet:actionURL var="editEntryURL">

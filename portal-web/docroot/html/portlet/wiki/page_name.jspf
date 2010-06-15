@@ -16,7 +16,7 @@
 
 <c:if test="<%= Validator.isNotNull(title) %>">
 	<liferay-ui:header
+		title="<%= title %>"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-    title="<%= title %>"
 	/>
 </c:if>

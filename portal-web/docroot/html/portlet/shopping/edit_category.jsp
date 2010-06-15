@@ -37,8 +37,8 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 	<aui:input name="parentCategoryId" type="hidden" value="<%= parentCategoryId %>" />
 
 	<liferay-ui:header
+		title="category"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-    title="category"
 	/>
 
 	<liferay-ui:error exception="<%= CategoryNameException.class %>" message="please-enter-a-valid-name" />

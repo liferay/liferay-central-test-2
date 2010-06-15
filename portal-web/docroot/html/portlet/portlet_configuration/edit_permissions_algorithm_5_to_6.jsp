@@ -146,8 +146,8 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 
 		<c:if test="<%= Validator.isNotNull(modelResource) %>">
  			<liferay-ui:header
+ 				title="permissions"
 				backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-        title="permissions"
 			/>
 		</c:if>
 

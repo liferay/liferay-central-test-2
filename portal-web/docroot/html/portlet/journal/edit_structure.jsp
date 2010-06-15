@@ -92,8 +92,8 @@ int tabIndex = 1;
 	<aui:input name="saveAndContinue" type="hidden" />
 
 	<liferay-ui:header
+		title='<%= (structure != null) ? structure.getName() : "new-structure" %>'
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-    title='<%= (structure != null) ? structure.getName() : "new-structure" %>'
 	/>
 
 	<liferay-ui:error exception="<%= DuplicateStructureIdException.class %>" message="please-enter-a-unique-id" />

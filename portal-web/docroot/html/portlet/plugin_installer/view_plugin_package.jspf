@@ -23,8 +23,8 @@ PluginPackage pluginPackage = PluginPackageUtil.getPluginPackageByModuleId(modul
 <aui:input type="hidden" name="deploymentContext" value="<%= pluginPackage.getContext() %>" />
 
 <liferay-ui:header
+	title="<%= pluginPackage.getName() %>"
 	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-  title="<%= pluginPackage.getName() %>"
 />
 
 <liferay-ui:success key="pluginDownloaded" message="the-plugin-was-downloaded-successfully-and-is-now-being-installed" />

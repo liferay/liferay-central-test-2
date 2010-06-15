@@ -34,8 +34,8 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 	<aui:input name="nodeId" type="hidden" value="<%= nodeId %>" />
 
 	<liferay-ui:header
+		title='<%= (node != null) ? node.getName() : "new-wiki-node" %>'
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-    title='<%= (node != null) ? node.getName() : "new-wiki-node" %>'
 	/>
 
 	<liferay-ui:error exception="<%= DuplicateNodeNameException.class %>" message="please-enter-a-unique-node-name" />

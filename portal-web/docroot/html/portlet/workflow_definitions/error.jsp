@@ -16,10 +16,7 @@
 
 <%@ include file="/html/portlet/workflow_definitions/init.jsp" %>
 
-<liferay-ui:header
-  backURL="javascript:history.go(-1);"
-  title="error" 
-/>
+<liferay-ui:header title="error" backURL="javascript:history.go(-1);" />
 
 <liferay-ui:error exception="<%= RequiredWorkflowDefinitionException.class %>" message="you-cannot-deactivate-or-delete-this-definition" />
 <liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />

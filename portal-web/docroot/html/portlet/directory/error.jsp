@@ -16,10 +16,7 @@
 
 <%@ include file="/html/portlet/directory/init.jsp" %>
 
-<liferay-ui:header 
-  title="error" 
-  backURL="javascript:history.go(-1);" 
-/>
+<liferay-ui:header title="error" backURL="javascript:history.go(-1);" />
 
 <liferay-ui:error exception="<%= NoSuchOrganizationException.class %>" message="the-organization-could-not-be-found" />
 <liferay-ui:error exception="<%= NoSuchUserException.class %>" message="the-user-could-not-be-found" />

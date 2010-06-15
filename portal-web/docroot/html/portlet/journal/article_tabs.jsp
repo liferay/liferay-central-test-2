@@ -54,8 +54,8 @@ if (article != null) {
 <c:choose>
 	<c:when test="<%= article != null %>">
 		<liferay-ui:header
+			title='<%= article.getTitle() %>'
 			backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-      title='<%= article.getTitle() %>'
 		/>
 
 		<liferay-ui:tabs

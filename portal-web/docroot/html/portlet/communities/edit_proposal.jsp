@@ -323,9 +323,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 
 <br />
 
-<liferay-ui:header 
-  title="reviewers" 
-/>
+<liferay-ui:header title="reviewers" />
 
 <%
 List<String> headerNames = new ArrayList<String>();

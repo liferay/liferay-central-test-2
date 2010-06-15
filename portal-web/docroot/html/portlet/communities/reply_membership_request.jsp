@@ -43,8 +43,8 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 	<aui:input name="membershipRequestId" type="hidden" value="<%= membershipRequest.getMembershipRequestId() %>" />
 
 	<liferay-ui:header
+		title="community"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-    title="community"
 	/>
 
 	<liferay-ui:error exception="<%= DuplicateGroupException.class %>" message="please-enter-a-unique-name" />

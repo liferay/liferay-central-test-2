@@ -39,9 +39,9 @@ String threadView = messageDisplay.getThreadView();
 </portlet:renderURL>
 
 <liferay-ui:header
-  backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", (category != null) ? HtmlUtil.escape(category.getName()) : "message-boards-home") %>'
-	backURL="<%= backURL.toString() %>"
 	title="<%= message.getSubject() %>"
+	backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", (category != null) ? HtmlUtil.escape(category.getName()) : "message-boards-home") %>'
+	backURL="<%= backURL.toString() %>"
 />
 
 <table cellpadding="0" cellspacing="0" width="100%">

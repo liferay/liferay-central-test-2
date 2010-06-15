@@ -86,8 +86,8 @@ if (image != null) {
 	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
 
 	<liferay-ui:header
+		title='<%= image != null ? image.getName() : "new-image" %>'
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-    title='<%= image != null ? image.getName() : "new-image" %>'
 	/>
 
 	<liferay-ui:error exception="<%= DuplicateImageNameException.class %>" message="please-enter-a-unique-image-name" />

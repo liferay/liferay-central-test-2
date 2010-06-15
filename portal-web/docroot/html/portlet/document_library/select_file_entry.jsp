@@ -29,9 +29,7 @@ if (folder != null) {
 %>
 
 <aui:form method="post" name="fm">
-	<liferay-ui:header 
-    title="document-home" 
-  />
+	<liferay-ui:header title="document-home" />
 
 	<liferay-ui:breadcrumb showGuestGroup="<%= false %>" showParentGroups="<%= false %>" showLayout="<%= false %>" />
 

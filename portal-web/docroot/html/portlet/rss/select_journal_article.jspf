@@ -27,10 +27,7 @@ portletURL.setParameter("typeSelection", JournalArticle.class.getName());
 portletURL.setParameter("assetOrder", String.valueOf(assetOrder));
 %>
 
-<liferay-ui:header 
-  backURL="<%= configurationRenderURL.toString() %>" 
-  title="web-content" 
-/>
+<liferay-ui:header title="web-content" backURL="<%= configurationRenderURL.toString() %>" />
 
 <%
 ArticleSearch searchContainer = new ArticleSearch(renderRequest, portletURL);

@@ -127,9 +127,7 @@ for (int i = 0; i < choices.size(); i++) {
 	<c:if test="<%= PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.UPDATE) %>">
 		<br />
 
-		<liferay-ui:header 
-      title="actual-votes" 
-    />
+		<liferay-ui:header title="actual-votes" />
 
 		<%
 		PortletURL portletURL = renderResponse.createRenderURL();
