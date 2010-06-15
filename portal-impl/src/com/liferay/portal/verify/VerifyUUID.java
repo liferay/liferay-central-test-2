@@ -112,6 +112,11 @@ public class VerifyUUID extends VerifyProcess {
 			JournalTemplateLocalServiceUtil.class.getName(),
 			"JournalTemplate",
 			"id_"
+		},
+		new String[] {
+			WikiPageResourceLocalServiceUtil.class.getName(),
+			"WikiPageResource",
+			"resourcePrimKey"
 		}
 	};
 
