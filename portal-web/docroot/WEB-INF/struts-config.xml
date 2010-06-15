@@ -1301,6 +1301,10 @@
 			<forward name="portlet.login.create_account" path="portlet.login.create_account" />
 		</action>
 
+		<action path="/login/facebook" type="com.liferay.portlet.login.action.FacebookConnectAction" />
+
+		<action path="/login/facebook_oauth" type="com.liferay.portlet.login.action.FacebookConnectAction" />
+
 		<action path="/login/forgot_password" type="com.liferay.portlet.login.action.ForgotPasswordAction">
 			<forward name="portlet.login.forgot_password" path="portlet.login.forgot_password" />
 		</action>

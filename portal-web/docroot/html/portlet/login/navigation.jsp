@@ -37,6 +37,12 @@ if (!strutsAction.equals("/login/open_id") && OpenIdUtil.isEnabled(company.getCo
 	showOpenIdIcon = true;
 }
 
+boolean showFacebookIcon = false;
+
+if (!strutsAction.equals("/login/facebook") && FacebookConnectUtil.isEnabled(company.getCompanyId())) {
+	showFacebookIcon = true;
+}
+
 boolean showSignInIcon = false;
 
 if (Validator.isNotNull(strutsAction) && !strutsAction.equals("/login/login")) {
@@ -82,6 +88,19 @@ if (Validator.isNotNull(strutsAction) && !strutsAction.equals("/login/login")) {
 
 				<liferay-ui:icon image="help" message="forgot-password" url="<%= forgotPasswordURL %>" />
 			</c:if>
+
+			<c:if test="<%= showFacebookIcon %>">
+				<portlet:actionURL var="facebookURL">
+					<portlet:param name="struts_action" value="/login/facebook" />
+				</portlet:actionURL>
+
+				<liferay-ui:icon
+					image="status_online"
+					message="facebook-connect"
+					url="<%= facebookURL %>"
+				/>
+			</c:if>
+
 		</liferay-ui:icon-list>
 	</div>
 </c:if>

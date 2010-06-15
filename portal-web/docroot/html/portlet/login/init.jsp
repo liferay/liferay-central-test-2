@@ -49,6 +49,7 @@
 <%@ page import="com.liferay.portal.UserScreenNameException" %>
 <%@ page import="com.liferay.portal.WebsiteURLException" %>
 <%@ page import="com.liferay.portal.security.auth.AuthException" %>
+<%@ page import="com.liferay.portal.util.FacebookConnectUtil" %>
 <%@ page import="com.liferay.portal.util.OpenIdUtil" %>
 <%@ page import="com.liferay.portlet.login.action.ForgotPasswordAction" %>
 <%@ page import="com.liferay.portlet.login.util.LoginUtil" %>
