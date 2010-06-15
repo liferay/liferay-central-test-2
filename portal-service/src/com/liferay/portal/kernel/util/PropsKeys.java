@@ -147,7 +147,7 @@ public interface PropsKeys {
 
 	public static final String AUTO_DEPLOY_INTERVAL = "auto.deploy.interval";
 
-    public static final String AUTO_DEPLOY_JBOSS_PREFIX = "auto.deploy.jboss.prefix";
+	public static final String AUTO_DEPLOY_JBOSS_PREFIX = "auto.deploy.jboss.prefix";
 
 	public static final String AUTO_DEPLOY_LISTENERS = "auto.deploy.listeners";
 
@@ -509,7 +509,19 @@ public interface PropsKeys {
 
 	public static final String EHCACHE_SINGLE_VM_CONFIG_LOCATION = "ehcache.single.vm.config.location";
 
+	public static final String FACEBOOK_CONNECT_APP_ID = "facebook.connect.app.id";
+
+	public static final String FACEBOOK_CONNECT_APP_SECRET = "facebook.connect.app.secret";
+
 	public static final String FACEBOOK_CONNECT_AUTH_ENABLED = "facebook.connect.auth.enabled";
+
+	public static final String FACEBOOK_CONNECT_GRAPH_URL = "facebook.connect.graph.url";
+
+	public static final String FACEBOOK_CONNECT_OAUTH_AUTH_URL = "facebook.connect.oauth.auth.url";
+
+	public static final String FACEBOOK_CONNECT_OAUTH_REDIRECT_URL = "facebook.connect.oauth.redirect.url";
+
+	public static final String FACEBOOK_CONNECT_OAUTH_TOKEN_URL = "facebook.connect.oauth.token.url";
 
 	public static final String FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS = "field.editable.com.liferay.portal.model.User.emailAddress";
 

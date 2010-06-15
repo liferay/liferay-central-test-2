@@ -33,10 +33,6 @@ public interface WebKeys {
 
 	public static final String CURRENT_URL = "CURRENT_URL";
 
-	public static final String FACEBOOK_ACCESS_TOKEN = "FACEBOOK_ACCESS_TOKEN";
-
-	public static final String FACEBOOK_USER_EMAIL = "FACEBOOK_USER_EMAIL";
-
 	public static final String LAST_PATH = "LAST_PATH";
 
 	public static final String LAYOUT = "LAYOUT";

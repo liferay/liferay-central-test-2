@@ -14,16 +14,6 @@
 
 package com.liferay.portlet.login.action;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
-import javax.portlet.PortletConfig;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.Http;
@@ -31,10 +21,22 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.FacebookConnectUtil;
+import com.liferay.portal.util.WebKeys;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 
 /**
  * <a href="FacebookConnectAction.java.html"><b><i>View Source</i></b></a>
@@ -48,24 +50,26 @@ public class FacebookConnectAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay) actionRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long companyId = themeDisplay.getCompanyId();
 
-		if (FacebookConnectUtil.isEnabled(companyId)) {
-
-			String redirect = HttpUtil.addParameter(
-				FacebookConnectUtil.getAuthURL(companyId), "client_id",
-				FacebookConnectUtil.getAppId(companyId));
-
-			redirect = HttpUtil.addParameter(redirect, "redirect_uri",
-				FacebookConnectUtil.getRedirectURL(companyId));
-
-			redirect = HttpUtil.addParameter(redirect, "scope", "email");
-
-			actionResponse.sendRedirect(redirect);
+		if (!FacebookConnectUtil.isEnabled(companyId)) {
+			return;
 		}
+
+		String redirect = HttpUtil.addParameter(
+			FacebookConnectUtil.getAuthURL(companyId), "client_id",
+			FacebookConnectUtil.getAppId(companyId));
+
+		redirect = HttpUtil.addParameter(
+			redirect, "redirect_uri",
+			FacebookConnectUtil.getRedirectURL(companyId));
+
+		redirect = HttpUtil.addParameter(redirect, "scope", "email");
+
+		actionResponse.sendRedirect(redirect);
 	}
 
 	public ActionForward strutsExecute(
@@ -83,14 +87,17 @@ public class FacebookConnectAction extends PortletAction {
 		String token = getAccessToken(companyId, code);
 
 		if (Validator.isNotNull(token)) {
-			String email = getUserEmail(companyId, token);
+			String emailAddress = getEmailAddress(companyId, token);
 
-			if (Validator.isNotNull(email)) {
-				request.getSession().setAttribute(WebKeys.FACEBOOK_USER_EMAIL, email);
+			if (Validator.isNotNull(emailAddress)) {
+				HttpSession session = request.getSession();
+
+				session.setAttribute(
+					WebKeys.FACEBOOK_USER_EMAIL_ADDRESS, emailAddress);
 			}
 		}
 
-		response.sendRedirect("/");
+		response.sendRedirect(themeDisplay.getPathContext());
 
 		return null;
 	}
@@ -118,7 +125,7 @@ public class FacebookConnectAction extends PortletAction {
 		String content = HttpUtil.URLtoString(options);
 
 		if (Validator.isNotNull(content)) {
-			int x = content.indexOf(ACCESS_TOKEN_PARAM_STRING);
+			int x = content.indexOf("access_token=");
 
 			if (x >= 0) {
 				int y = content.indexOf(StringPool.AMPERSAND, x);
@@ -127,19 +134,19 @@ public class FacebookConnectAction extends PortletAction {
 					y = content.length();
 				}
 
-				return content.substring(x +
-					ACCESS_TOKEN_PARAM_STRING.length(), y);
+				return content.substring(x + 13, y);
 			}
 		}
 
 		return null;
 	}
 
-	protected String getUserEmail(long companyId, String token)
+	protected String getEmailAddress(long companyId, String token)
 		throws Exception {
 
-		String url = HttpUtil.addParameter(FacebookConnectUtil.getGraphURL(
-			companyId) + "/me", "access_token", token);
+		String url = HttpUtil.addParameter(
+			FacebookConnectUtil.getGraphURL(companyId) + "/me", "access_token",
+			token);
 
 		url = HttpUtil.addParameter(url, "fields", "email,verified");
 
@@ -150,17 +157,14 @@ public class FacebookConnectAction extends PortletAction {
 		String content = HttpUtil.URLtoString(options);
 
 		if (Validator.isNotNull(content)) {
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(content);
 
-			JSONObject jsonObj = JSONFactoryUtil.createJSONObject(content);
-
-			if (jsonObj.getBoolean("verified")) {
-
-				return jsonObj.getString("email");
+			if (jsonObject.getBoolean("verified")) {
+				return jsonObject.getString("email");
 			}
 		}
 
 		return null;
 	}
 
-	private static final String ACCESS_TOKEN_PARAM_STRING = "access_token=";
 }

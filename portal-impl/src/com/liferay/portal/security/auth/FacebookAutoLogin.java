@@ -14,17 +14,17 @@
 
 package com.liferay.portal.security.auth;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * <a href="FacebookAutoLogin.java.html"><b><i>View Source</i></b></a>
@@ -34,27 +34,26 @@ import com.liferay.portal.util.PortalUtil;
 public class FacebookAutoLogin implements AutoLogin {
 
 	public String[] login(
-			HttpServletRequest request, HttpServletResponse response)
-		throws AutoLoginException {
+		HttpServletRequest request, HttpServletResponse response) {
 
 		String[] credentials = null;
 
 		try {
 			HttpSession session = request.getSession();
 
-			String email =  (String) session.getAttribute(
-				WebKeys.FACEBOOK_USER_EMAIL);
+			String emailAddress =  (String)session.getAttribute(
+				WebKeys.FACEBOOK_USER_EMAIL_ADDRESS);
 
-			if (Validator.isNull(email)) {
+			if (Validator.isNull(emailAddress)) {
 				return null;
 			}
 
-			session.removeAttribute(WebKeys.FACEBOOK_USER_EMAIL);
+			session.removeAttribute(WebKeys.FACEBOOK_USER_EMAIL_ADDRESS);
 
 			long companyId = PortalUtil.getCompanyId(request);
 
 			User user = UserLocalServiceUtil.getUserByEmailAddress(
-				companyId, email);
+				companyId, emailAddress);
 
 			credentials = new String[3];
 
@@ -70,4 +69,5 @@ public class FacebookAutoLogin implements AutoLogin {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(FacebookAutoLogin.class);
+
 }

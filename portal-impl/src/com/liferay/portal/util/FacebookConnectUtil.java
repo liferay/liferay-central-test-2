@@ -28,33 +28,40 @@ public class FacebookConnectUtil {
 		throws SystemException {
 
 		return PrefsPropsUtil.getString(
-			companyId, "facebook.connect.oauth.token.url");
+			companyId, PropsKeys.FACEBOOK_CONNECT_OAUTH_TOKEN_URL,
+			PropsValues.FACEBOOK_CONNECT_OAUTH_TOKEN_URL);
 	}
 
 	public static String getAppId(long companyId) throws SystemException {
-		return PrefsPropsUtil.getString(companyId, "facebook.connect.app.id");
+		return PrefsPropsUtil.getString(
+			companyId, PropsKeys.FACEBOOK_CONNECT_APP_ID,
+			PropsValues.FACEBOOK_CONNECT_APP_ID);
 	}
 
 	public static String getAppSecret(long companyId) throws SystemException {
 		return PrefsPropsUtil.getString(
-			companyId, "facebook.connect.app.secret");
+			companyId, PropsKeys.FACEBOOK_CONNECT_APP_SECRET,
+			PropsValues.FACEBOOK_CONNECT_APP_SECRET);
 	}
 
 	public static String getAuthURL(long companyId) throws SystemException {
 		return PrefsPropsUtil.getString(
-			companyId, "facebook.connect.oauth.auth.url");
+			companyId, PropsKeys.FACEBOOK_CONNECT_OAUTH_AUTH_URL,
+			PropsValues.FACEBOOK_CONNECT_OAUTH_AUTH_URL);
 	}
 
 	public static String getGraphURL(long companyId) throws SystemException {
-
-		return PrefsPropsUtil.getString(companyId, "facebook.connect.graph.url");
+		return PrefsPropsUtil.getString(
+			companyId, PropsKeys.FACEBOOK_CONNECT_GRAPH_URL,
+			PropsValues.FACEBOOK_CONNECT_GRAPH_URL);
 	}
 
 	public static String getRedirectURL(long companyId)
 		throws SystemException {
 
 		return PrefsPropsUtil.getString(
-			companyId, "facebook.connect.oauth.redirect.url");
+			companyId, PropsKeys.FACEBOOK_CONNECT_OAUTH_REDIRECT_URL,
+			PropsValues.FACEBOOK_CONNECT_OAUTH_REDIRECT_URL);
 	}
 
 	public static boolean isEnabled(long companyId) throws SystemException {
@@ -62,4 +69,5 @@ public class FacebookConnectUtil {
 			companyId, PropsKeys.FACEBOOK_CONNECT_AUTH_ENABLED,
 			PropsValues.FACEBOOK_CONNECT_AUTH_ENABLED);
 	}
+
 }
