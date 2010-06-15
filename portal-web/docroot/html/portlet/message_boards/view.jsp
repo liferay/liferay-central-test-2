@@ -175,8 +175,8 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 				<portlet:param name="mbCategoryId" value="<%= String.valueOf(parentCategoryId) %>" />
 			</portlet:renderURL>
 
-			<liferay-ui:tabs
-				names="<%= category.getName() %>"
+			<liferay-ui:header
+				title="<%= category.getName() %>"
 				backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(parentCategoryName)) %>'
 				backURL="<%= backURL.toString() %>"
 			/>
