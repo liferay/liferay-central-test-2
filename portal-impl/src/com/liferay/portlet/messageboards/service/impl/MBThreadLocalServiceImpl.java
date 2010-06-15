@@ -511,9 +511,15 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		// Category
 
-		category.setThreadCount(category.getThreadCount() + 1);
+		if ((message.getCategoryId() !=
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+			(message.getCategoryId() !=
+				MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
 
-		mbCategoryPersistence.update(category, false);
+			category.setThreadCount(category.getThreadCount() + 1);
+
+			mbCategoryPersistence.update(category, false);
+		}
 
 		return thread;
 	}

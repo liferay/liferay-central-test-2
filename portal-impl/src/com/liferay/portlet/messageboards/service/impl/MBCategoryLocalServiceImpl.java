@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
@@ -31,6 +30,7 @@ import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMailingList;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.service.base.MBCategoryLocalServiceBaseImpl;
 
 import java.util.ArrayList;
@@ -138,6 +138,12 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
+		if ((categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) ||
+			(categoryId == MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+
+			return;
+		}
+
 		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 			categoryId);
 
@@ -149,6 +155,12 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			long categoryId, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
+
+		if ((categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) ||
+			(categoryId == MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+
+			return;
+		}
 
 		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 			categoryId);
@@ -284,7 +296,18 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	public MBCategory getCategory(long categoryId)
 		throws PortalException, SystemException {
 
-		return mbCategoryPersistence.findByPrimaryKey(categoryId);
+		MBCategory category = null;
+
+		if (categoryId > 0) {
+			category = mbCategoryPersistence.findByPrimaryKey(categoryId);
+		}
+		else {
+			category = new MBCategoryImpl();
+			category.setCategoryId(categoryId);
+			category.setParentCategoryId(categoryId);
+		}
+
+		return category;
 	}
 
 	public List<MBCategory> getCompanyCategories(
@@ -330,24 +353,6 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		return mbCategoryFinder.countByS_G_U(groupId, userId);
 	}
 
-	public MBCategory getSystemCategory() throws SystemException {
-		long categoryId = CompanyConstants.SYSTEM;
-
-		MBCategory category = mbCategoryPersistence.fetchByPrimaryKey(
-			categoryId);
-
-		if (category == null) {
-			category = mbCategoryPersistence.create(categoryId);
-
-			category.setCompanyId(CompanyConstants.SYSTEM);
-			category.setUserId(CompanyConstants.SYSTEM);
-
-			mbCategoryPersistence.update(category, false);
-		}
-
-		return category;
-	}
-
 	public void subscribeCategory(long userId, long groupId, long categoryId)
 		throws PortalException, SystemException {
 
@@ -382,6 +387,12 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		// Merge categories
+
+		if ((categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) ||
+			(categoryId == MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+
+			return null;
+		}
 
 		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 			categoryId);
@@ -542,15 +553,19 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			}
 		}
 
-		MBCategory toCategory = mbCategoryPersistence.findByPrimaryKey(
-			toCategoryId);
+		if ((toCategoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+			(toCategoryId != MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
 
-		toCategory.setThreadCount(
-			fromCategory.getThreadCount() + toCategory.getThreadCount());
-		toCategory.setMessageCount(
-			fromCategory.getMessageCount() + toCategory.getMessageCount());
+			MBCategory toCategory = mbCategoryPersistence.findByPrimaryKey(
+				toCategoryId);
 
-		mbCategoryPersistence.update(toCategory, false);
+			toCategory.setThreadCount(
+				fromCategory.getThreadCount() + toCategory.getThreadCount());
+			toCategory.setMessageCount(
+				fromCategory.getMessageCount() + toCategory.getMessageCount());
+
+			mbCategoryPersistence.update(toCategory, false);
+		}
 
 		deleteCategory(fromCategory);
 	}

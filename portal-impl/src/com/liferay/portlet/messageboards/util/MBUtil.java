@@ -154,6 +154,14 @@ public class MBUtil {
 			RenderResponse renderResponse)
 		throws Exception {
 
+		if ((message.getCategoryId() ==
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) ||
+			(message.getCategoryId() ==
+				MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+
+			return;
+		}
+
 		MBCategory category = message.getCategory();
 
 		addPortletBreadcrumbEntries(category, request, renderResponse);

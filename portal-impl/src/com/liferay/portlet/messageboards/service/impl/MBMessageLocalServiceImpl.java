@@ -76,6 +76,7 @@ import com.liferay.portlet.messageboards.model.MBMessageConstants;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.MBThreadConstants;
+import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMessageDisplayImpl;
 import com.liferay.portlet.messageboards.service.base.MBMessageLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.social.MBActivityKeys;
@@ -605,7 +606,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			// Category
 
-			if (!message.isDiscussion()) {
+			if ((message.getCategoryId() !=
+					MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+				(message.getCategoryId() !=
+					MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+
 				MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 					message.getCategoryId());
 
@@ -675,7 +680,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			// Category
 
-			if (!message.isDiscussion()) {
+			if ((message.getCategoryId() !=
+					MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+				(message.getCategoryId() !=
+					MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+
 				MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 					message.getCategoryId());
 
@@ -1051,6 +1060,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			category = mbCategoryPersistence.findByPrimaryKey(
 				message.getCategoryId());
+		}
+		else {
+			category = new MBCategoryImpl();
 		}
 
 		MBMessage parentMessage = null;
@@ -1668,7 +1680,14 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		List<Long> categoryIds = new ArrayList<Long>();
 
 		categoryIds.add(message.getCategoryId());
-		categoryIds.addAll(category.getAncestorCategoryIds());
+
+		if ((message.getCategoryId() !=
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+			(message.getCategoryId() !=
+				MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+
+			categoryIds.addAll(category.getAncestorCategoryIds());
+		}
 
 		String messageURL =
 			layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR +
