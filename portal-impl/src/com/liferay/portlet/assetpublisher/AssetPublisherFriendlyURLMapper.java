@@ -115,16 +115,16 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 					friendlyURLPath += "id/" + assetEntryId;
 				}
 
+				if (windowState.equals(WindowState.MAXIMIZED)) {
+					friendlyURLPath += StringPool.SLASH + windowState;
+				}
+
 				portletURL.addParameterIncludedInPath("type");
 				portletURL.addParameterIncludedInPath("assetEntryId");
 			}
 		}
 
 		if (Validator.isNotNull(friendlyURLPath)) {
-			if (windowState.equals(WindowState.MAXIMIZED)) {
-				friendlyURLPath += StringPool.SLASH + windowState;
-			}
-
 			portletURL.addParameterIncludedInPath("p_p_id");
 
 			portletURL.addParameterIncludedInPath("struts_action");
