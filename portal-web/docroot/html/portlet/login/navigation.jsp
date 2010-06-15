@@ -67,7 +67,7 @@ if (Validator.isNotNull(strutsAction) && !strutsAction.equals("/login/login")) {
 				</portlet:actionURL>
 
 				<liferay-ui:icon
-					image="status_online"
+					image="../social_bookmarks/facebook"
 					message="facebook"
 					url="<%= facebookConnectURL %>"
 				/>
