@@ -567,18 +567,6 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void updateFacebookId(long userId, long facebookId)
-		throws RemoteException {
-		try {
-			UserServiceUtil.updateFacebookId(userId, facebookId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.portal.model.UserSoap updateLockout(long userId,
 		boolean lockout) throws RemoteException {
 		try {

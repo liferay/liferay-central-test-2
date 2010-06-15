@@ -1638,40 +1638,6 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static void updateFacebookId(HttpPrincipal httpPrincipal,
-		long userId, long facebookId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(userId);
-
-			Object paramObj1 = new LongWrapper(facebookId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
-					"updateFacebookId", new Object[] { paramObj0, paramObj1 });
-
-			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static com.liferay.portal.model.User updateLockout(
 		HttpPrincipal httpPrincipal, long userId, boolean lockout)
 		throws com.liferay.portal.kernel.exception.PortalException,

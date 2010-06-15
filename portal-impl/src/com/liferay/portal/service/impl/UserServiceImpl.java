@@ -503,15 +503,6 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			userId, password, emailAddress1, emailAddress2);
 	}
 
-	public void updateFacebookId(long userId, long facebookId)
-		throws PortalException, SystemException {
-
-		UserPermissionUtil.check(
-			getPermissionChecker(), userId, ActionKeys.UPDATE);
-
-		userLocalService.updateFacebookId(userId, facebookId);
-	}
-
 	public User updateLockout(long userId, boolean lockout)
 		throws PortalException, SystemException {
 

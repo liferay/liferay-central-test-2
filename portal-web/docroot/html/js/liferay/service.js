@@ -355,7 +355,6 @@ Liferay.Service.registerClass(
 		updateActive: true,
 		updateAgreedToTermsOfUse: true,
 		updateEmailAddress: true,
-		updateFacebookId: true,
 		updateLockout: true,
 		updateOpenId: true,
 		updateOrganizations: true,

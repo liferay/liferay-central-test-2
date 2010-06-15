@@ -286,12 +286,6 @@ public class UserServiceUtil {
 			.updateEmailAddress(userId, password, emailAddress1, emailAddress2);
 	}
 
-	public static void updateFacebookId(long userId, long facebookId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().updateFacebookId(userId, facebookId);
-	}
-
 	public static com.liferay.portal.model.User updateLockout(long userId,
 		boolean lockout)
 		throws com.liferay.portal.kernel.exception.PortalException,

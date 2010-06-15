@@ -280,12 +280,6 @@ public class UserServiceWrapper implements UserService {
 			emailAddress2);
 	}
 
-	public void updateFacebookId(long userId, long facebookId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_userService.updateFacebookId(userId, facebookId);
-	}
-
 	public com.liferay.portal.model.User updateLockout(long userId,
 		boolean lockout)
 		throws com.liferay.portal.kernel.exception.PortalException,
