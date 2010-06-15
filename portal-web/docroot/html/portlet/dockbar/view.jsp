@@ -134,14 +134,14 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 							<c:if test="<%= themeDisplay.isShowPageSettingsIcon() && !group.isLayoutPrototype() %>">
 
 								<%
-								String settingsURL = themeDisplay.getURLPageSettings().toString();
+								String pageSettingsURL = themeDisplay.getURLPageSettings().toString();
 
-								settingsURL = HttpUtil.removeParameter(settingsURL, "tabs1");
-								settingsURL = HttpUtil.setParameter(settingsURL, PortalUtil.getPortletNamespace(PortletKeys.LAYOUT_MANAGEMENT) + "tabs1", "settings");
+								pageSettingsURL = HttpUtil.removeParameter(pageSettingsURL, "tabs1");
+								pageSettingsURL = HttpUtil.setParameter(pageSettingsURL, PortalUtil.getPortletNamespace(PortletKeys.LAYOUT_MANAGEMENT) + "tabs1", "settings");
 								%>
 
 								<li class="settings">
-									<aui:a href='<%= settingsURL %>' label="settings" />
+									<aui:a href="<%= pageSettingsURL %>" label="settings" />
 								</li>
 							</c:if>
 
