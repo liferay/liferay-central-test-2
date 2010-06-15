@@ -98,8 +98,8 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="itemIds" type="hidden" />
 
-	<liferay-ui:tabs
-		names="cart"
+	<liferay-ui:header
+		title="cart"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 

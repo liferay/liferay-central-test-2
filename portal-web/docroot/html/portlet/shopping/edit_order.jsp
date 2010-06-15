@@ -51,8 +51,8 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 			<br /><br />
 		</c:when>
 		<c:otherwise>
-			<liferay-ui:tabs
-				names="order"
+			<liferay-ui:header
+				title="order"
 				backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 			/>
 		</c:otherwise>

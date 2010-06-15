@@ -24,10 +24,8 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 
 <c:choose>
 	<c:when test="<%= PropsValues.LIVE_USERS_ENABLED && PropsValues.SESSION_TRACKER_MEMORY_ENABLED %>">
-		<liferay-ui:tabs
-			names="live-sessions"
-			param="tabs2"
-			url="<%= portletURLString %>"
+		<liferay-ui:header
+			title="live-sessions"
 		/>
 
 		<liferay-ui:search-container

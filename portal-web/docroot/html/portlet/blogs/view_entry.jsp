@@ -44,8 +44,8 @@ request.setAttribute("view_entry_content.jsp-entry", entry);
 request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
 %>
 
-<liferay-ui:tabs
-	names="<%= entry.getTitle() %>"
+<liferay-ui:header
+	title="<%= entry.getTitle() %>"
 	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 

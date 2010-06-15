@@ -52,7 +52,7 @@ if (step == 1) {
 		<c:when test="<%= step == 1 %>">
 			<aui:input name="groupId" type="hidden" />
 
-			<liferay-ui:tabs names="community-roles" />
+			<liferay-ui:header title="community-roles" />
 
 			<div class="portlet-msg-info">
 				<liferay-ui:message key="please-select-a-community-to-which-you-will-assign-a-community-role" />
@@ -134,7 +134,7 @@ if (step == 1) {
 			<aui:input name="step" type="hidden" value="2" />
 			<aui:input name="groupId" type="hidden" value="<%= String.valueOf(groupId) %>" />
 
-			<liferay-ui:tabs names="community-roles" />
+			<liferay-ui:header title="community-roles" />
 
 			<%
 			Group group = GroupServiceUtil.getGroup(groupId);

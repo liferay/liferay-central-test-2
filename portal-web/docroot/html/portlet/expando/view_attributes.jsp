@@ -35,8 +35,8 @@ portletURL.setParameter("modelResource", modelResource);
 
 <br />
 
-<liferay-ui:tabs
-	names="custom-fields"
+<liferay-ui:header
+	title="custom-fields"
 	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 

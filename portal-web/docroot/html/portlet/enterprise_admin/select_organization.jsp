@@ -23,7 +23,7 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_organization"
 %>
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
-	<liferay-ui:tabs names="organizations" />
+	<liferay-ui:header title="organizations" />
 
 	<liferay-ui:search-container
 		searchContainer="<%= new OrganizationSearch(renderRequest, portletURL) %>"

@@ -28,8 +28,8 @@ String keywords = ParamUtil.getString(request, "keywords");
 	<liferay-portlet:renderURLParams varImpl="searchURL" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
-	<liferay-ui:tabs
-		names="search"
+	<liferay-ui:header
+		title="search"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 

@@ -37,8 +37,8 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 
-	<liferay-ui:tabs
-		names="community"
+	<liferay-ui:header
+		title="community"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 

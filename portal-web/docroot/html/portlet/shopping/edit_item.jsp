@@ -93,8 +93,8 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 	<aui:input name="pricesCount" type="hidden" value="<%= pricesCount %>" />
 	<aui:input name="priceId" type="hidden" />
 
-	<liferay-ui:tabs
-		names="item"
+	<liferay-ui:header
+		title="item"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 

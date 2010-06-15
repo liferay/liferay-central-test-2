@@ -36,8 +36,8 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 	<aui:input name="categoryId" type="hidden" value="<%= categoryId %>" />
 	<aui:input name="parentCategoryId" type="hidden" value="<%= parentCategoryId %>" />
 
-	<liferay-ui:tabs
-		names="category"
+	<liferay-ui:header
+		title="category"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 

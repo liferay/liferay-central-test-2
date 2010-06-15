@@ -323,7 +323,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 
 <br />
 
-<liferay-ui:tabs names="reviewers" />
+<liferay-ui:header title="reviewers" />
 
 <%
 List<String> headerNames = new ArrayList<String>();
@@ -390,7 +390,7 @@ for (int i = 0; i < results.size(); i++) {
 
 <br />
 
-<liferay-ui:tabs names="comments" />
+<liferay-ui:header title="comments" />
 
 <portlet:actionURL var="discussionURL">
 	<portlet:param name="struts_action" value="/communities/edit_proposal_discussion" />

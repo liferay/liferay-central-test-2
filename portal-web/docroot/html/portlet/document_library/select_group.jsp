@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <aui:form method="post" name="fm">
-	<liferay-ui:tabs names="communities" />
+	<liferay-ui:header title="communities" />
 
 	<%
 	PortletURL portletURL = renderResponse.createRenderURL();

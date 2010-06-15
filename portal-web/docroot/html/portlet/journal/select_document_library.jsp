@@ -35,7 +35,7 @@ if (folder != null) {
 %>
 
 <aui:form method="post" name="">
-	<liferay-ui:tabs names="folders" />
+	<liferay-ui:header title="folders" />
 
 	<liferay-ui:breadcrumb showGuestGroup="<%= false %>" showParentGroups="<%= false %>" showLayout="<%= false %>" />
 
@@ -104,7 +104,7 @@ if (folder != null) {
 
 	<br />
 
-	<liferay-ui:tabs names="documents" />
+	<liferay-ui:header title="documents" />
 
 	<%
 	headerNames.clear();

@@ -63,8 +63,8 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 <input name="<portlet:namespace />productVersionId" type="hidden" value="<%= productVersionId %>" />
 
-<liferay-ui:tabs
-	names="<%= productEntry.getName() %>"
+<liferay-ui:header
+	title="<%= productEntry.getName() %>"
 	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 

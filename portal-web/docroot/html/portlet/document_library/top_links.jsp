@@ -127,6 +127,6 @@
 		</div>
 	</c:when>
 	<c:when test="<%= showTabs && showSubfolders %>">
-		<liferay-ui:tabs names="document-home" />
+		<liferay-ui:header title="document-home" />
 	</c:when>
 </c:choose>

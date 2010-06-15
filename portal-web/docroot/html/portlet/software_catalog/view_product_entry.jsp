@@ -52,8 +52,8 @@ viewProductEntryURL.setParameter("redirect", redirect);
 viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId));
 %>
 
-<liferay-ui:tabs
-	names='<%= productEntry.getName() + " " + ((latestProductVersion == null) ? "" : latestProductVersion.getVersion()) %>'
+<liferay-ui:header
+	title='<%= productEntry.getName() + " " + ((latestProductVersion == null) ? "" : latestProductVersion.getVersion()) %>'
 	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 

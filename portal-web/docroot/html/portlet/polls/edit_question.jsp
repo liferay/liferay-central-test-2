@@ -73,8 +73,8 @@ if (choiceName > 0) {
 	<aui:input name="choicesCount" type="hidden" value="<%= choicesCount %>" />
 	<aui:input name="choiceName" type="hidden" value="" />
 
-	<liferay-ui:tabs
-		names='<%= (question != null) ? question.getTitle(locale) : "new-question" %>'
+	<liferay-ui:header
+		title='<%= (question != null) ? question.getTitle(locale) : "new-question" %>'
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 

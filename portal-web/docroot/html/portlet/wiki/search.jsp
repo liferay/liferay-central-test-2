@@ -44,8 +44,8 @@ boolean createNewPage = true;
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="nodeId" type="hidden" value="<%= nodeId %>" />
 
-	<liferay-ui:tabs
-		names="search"
+	<liferay-ui:header
+		title="search"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 

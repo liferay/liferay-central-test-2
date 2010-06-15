@@ -29,7 +29,7 @@ if (folder != null) {
 %>
 
 <aui:form method="post" name="fm">
-	<liferay-ui:tabs names="document-home" />
+	<liferay-ui:header title="document-home" />
 
 	<liferay-ui:breadcrumb showGuestGroup="<%= false %>" showParentGroups="<%= false %>" showLayout="<%= false %>" />
 
@@ -108,7 +108,7 @@ if (folder != null) {
 		<br />
 	</c:if>
 
-	<liferay-ui:tabs names="documents" />
+	<liferay-ui:header title="documents" />
 
 	<%
 	headerNames.clear();

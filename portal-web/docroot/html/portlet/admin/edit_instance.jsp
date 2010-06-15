@@ -33,8 +33,8 @@ long companyId = BeanParamUtil.getLong(company2, request, "companyId");
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="companyId" type="hidden" value="<%= companyId %>" />
 
-	<liferay-ui:tabs
-		names="instance"
+	<liferay-ui:header
+		title="instance"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 

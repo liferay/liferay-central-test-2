@@ -16,7 +16,7 @@
 
 <%@ include file="/html/portlet/message_boards/init.jsp" %>
 
-<liferay-ui:tabs names="error" backURL="javascript:history.go(-1);" />
+<liferay-ui:header title="error" backURL="javascript:history.go(-1);" />
 
 <liferay-ui:error exception="<%= BannedUserException.class %>" message="you-have-been-banned-by-the-moderator" />
 <liferay-ui:error exception="<%= NoSuchCategoryException.class %>" message="the-category-could-not-be-found" />

@@ -161,7 +161,7 @@ int organizationIdsPos = ParamUtil.getInteger(request, "organizationIdsPos");
 		Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationIdsArray[organizationIdsPos]);
 		%>
 
-		<liferay-ui:tabs names="<%= HtmlUtil.escape(organization.getName()) %>" />
+		<liferay-ui:header title="<%= HtmlUtil.escape(organization.getName()) %>" />
 
 		<%
 		List permissions = PermissionLocalServiceUtil.getGroupPermissions(organization.getGroup().getGroupId(), resource.getResourceId());

@@ -36,8 +36,8 @@ double version = ParamUtil.getDouble(request, "version");
 	<aui:input name="oldArticleId" type="hidden" value="<%= oldArticleId %>" />
 	<aui:input name="version" type="hidden" value="<%= version %>" />
 
-	<liferay-ui:tabs
-		names="web-content"
+	<liferay-ui:header
+		title="web-content"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 

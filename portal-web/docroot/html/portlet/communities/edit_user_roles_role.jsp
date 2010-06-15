@@ -33,8 +33,8 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_user_roles.jsp-po
 
 <br />
 
-<liferay-ui:tabs
-	names="roles"
+<liferay-ui:header
+	title="roles"
 />
 
 <%

@@ -38,8 +38,8 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", I
 	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
 	<aui:input name="parentFolderId" type="hidden" value="<%= parentFolderId %>" />
 
-	<liferay-ui:tabs
-		names='<%= (folder != null) ? folder.getName() : "new-folder" %>'
+	<liferay-ui:header
+		title='<%= (folder != null) ? folder.getName() : "new-folder" %>'
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 

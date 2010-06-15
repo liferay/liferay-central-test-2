@@ -25,7 +25,7 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_user_group");
 %>
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
-	<liferay-ui:tabs names="user-groups" />
+	<liferay-ui:header title="user-groups" />
 
 	<liferay-ui:search-container
 		searchContainer="<%= new UserGroupSearch(renderRequest, portletURL) %>"

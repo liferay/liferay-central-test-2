@@ -26,8 +26,8 @@
 	StructureSearch searchContainer = new StructureSearch(renderRequest, 10, portletURL);
 	%>
 
-	<liferay-ui:tabs
-		names="structures"
+	<liferay-ui:header
+		title="structures"
 	/>
 
 	<liferay-ui:search-form

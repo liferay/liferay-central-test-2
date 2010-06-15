@@ -23,7 +23,7 @@ long categoryId = BeanParamUtil.getLong(category, request, "categoryId", Shoppin
 %>
 
 <aui:form method="post" name="fm">
-	<liferay-ui:tabs names="categories" />
+	<liferay-ui:header title="categories" />
 
 	<c:if test="<%= category != null %>">
 		<div class="breadcrumbs">

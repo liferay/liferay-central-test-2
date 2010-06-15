@@ -339,7 +339,7 @@ if (articleDisplay != null) {
 				%>
 
 				<c:if test="<%= discussionMessagesCount > 0 %>">
-					<liferay-ui:tabs names="comments" />
+					<liferay-ui:header title="comments" />
 				</c:if>
 
 				<portlet:actionURL var="discussionURL">

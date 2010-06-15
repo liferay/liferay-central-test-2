@@ -52,8 +52,8 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 	<liferay-ui:error exception="<%= NoSuchChoiceException.class %>" message="please-select-an-option" />
 
 	<aui:fieldset>
- 		<liferay-ui:tabs
-			names="<%= question.getTitle(locale) %>"
+ 		<liferay-ui:header
+			title="<%= question.getTitle(locale) %>"
 			backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 		/>
 

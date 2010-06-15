@@ -24,8 +24,8 @@ String targetName = (String)renderRequest.getAttribute(WebKeys.TARGET_NAME);
 List[] diffResults = (List[])renderRequest.getAttribute(WebKeys.DIFF_RESULTS);
 %>
 
-<liferay-ui:tabs
-	names="compare-versions"
+<liferay-ui:header
+	title="compare-versions"
 	backURL="<%= PortalUtil.escapeRedirect(backURL) %>"
 />
 

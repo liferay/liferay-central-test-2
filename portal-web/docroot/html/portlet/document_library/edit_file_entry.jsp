@@ -146,8 +146,8 @@ portletURL.setParameter("name", name);
 	<aui:input name="newFolderId" type="hidden" value="<%= folderId %>" />
 	<aui:input name="name" type="hidden" value="<%= name %>" />
 
-	<liferay-ui:tabs
-		names='<%= (fileEntry != null) ? fileEntry.getTitle() : "new-document" %>'
+	<liferay-ui:header
+		title='<%= (fileEntry != null) ? fileEntry.getTitle() : "new-document" %>'
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 

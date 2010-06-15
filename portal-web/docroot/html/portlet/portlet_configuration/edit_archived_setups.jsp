@@ -43,8 +43,8 @@ portletURL.setParameter("portletResource", portletResource);
 	<portlet:param name="portletResource" value="<%= portletResource %>" />
 </portlet:renderURL>
 
-<liferay-ui:tabs
-	names="archived-setups"
+<liferay-ui:header
+	title="archived-setups"
 	backURL="<%= backURL %>"
 />
 

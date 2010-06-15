@@ -49,8 +49,8 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 	<aui:input name="itemId" type="hidden" value="<%= item.getItemId() %>" />
 	<aui:input name="fields" type="hidden" />
 
-	<liferay-ui:tabs
-		names="item"
+	<liferay-ui:header
+		title="item"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 

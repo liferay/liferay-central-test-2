@@ -29,8 +29,8 @@ long frameworkVersionId = BeanParamUtil.getLong(frameworkVersion, request, "fram
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 <input name="<portlet:namespace />frameworkVersionId" type="hidden" value="<%= frameworkVersionId %>" />
 
-<liferay-ui:tabs
-	names='<%= (frameworkVersion != null) ? frameworkVersion.getName() : "new-framework-version" %>'
+<liferay-ui:header
+	title='<%= (frameworkVersion != null) ? frameworkVersion.getName() : "new-framework-version" %>'
 	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 

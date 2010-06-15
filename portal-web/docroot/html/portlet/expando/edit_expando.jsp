@@ -68,8 +68,8 @@ portletURL.setParameter("modelResource", modelResource);
 
 	<br />
 
-	<liferay-ui:tabs
-		names='<%= (column != null) ? column.getDisplayName(locale) : "new-custom-field" %>'
+	<liferay-ui:header
+		title='<%= (column != null) ? column.getDisplayName(locale) : "new-custom-field" %>'
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 

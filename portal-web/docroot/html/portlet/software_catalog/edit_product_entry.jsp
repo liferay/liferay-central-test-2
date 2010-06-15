@@ -55,8 +55,8 @@ int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", product
 <input name="<portlet:namespace />productEntryId" type="hidden" value="<%= productEntryId %>" />
 <input name="<portlet:namespace />screenshotsCount" type="hidden" value="<%= screenshotsCount %>" />
 
-<liferay-ui:tabs
-	names='<%= (productEntry != null) ? productEntry.getName() : "new-product" %>'
+<liferay-ui:header
+	title='<%= (productEntry != null) ? productEntry.getName() : "new-product" %>'
 	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 
@@ -209,7 +209,7 @@ int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", product
 
 <br /><br />
 
-<liferay-ui:tabs names="plugin-repository" />
+<liferay-ui:header title="plugin-repository" />
 
 <table class="lfr-table">
 <tr>
@@ -232,7 +232,7 @@ int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", product
 
 <br />
 
-<liferay-ui:tabs names="screenshots" />
+<liferay-ui:header title="screenshots" />
 
 <table class="lfr-table">
 

@@ -116,7 +116,7 @@ int userGroupIdsPos = ParamUtil.getInteger(request, "userGroupIdsPos");
 		UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(userGroupIdsArray[userGroupIdsPos]);
 		%>
 
-		<liferay-ui:tabs names="<%= userGroup.getName() %>" />
+		<liferay-ui:header title="<%= userGroup.getName() %>" />
 
 		<%
 		List permissions = PermissionLocalServiceUtil.getGroupPermissions(userGroup.getGroup().getGroupId(), resource.getResourceId());

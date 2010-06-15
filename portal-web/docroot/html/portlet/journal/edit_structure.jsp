@@ -91,8 +91,8 @@ int tabIndex = 1;
 	<aui:input name="move_depth" type="hidden" />
 	<aui:input name="saveAndContinue" type="hidden" />
 
-	<liferay-ui:tabs
-		names='<%= (structure != null) ? structure.getName() : "new-structure" %>'
+	<liferay-ui:header
+		title='<%= (structure != null) ? structure.getName() : "new-structure" %>'
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 

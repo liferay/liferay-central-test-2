@@ -34,8 +34,8 @@ String newTemplateId = ParamUtil.getString(request, "newTemplateId");
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="oldTemplateId" type="hidden" value="<%= oldTemplateId %>" />
 
-	<liferay-ui:tabs
-		names="template"
+	<liferay-ui:header
+		title="template"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 

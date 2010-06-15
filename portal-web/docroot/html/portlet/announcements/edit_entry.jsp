@@ -52,8 +52,8 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 	<aui:input name="entryId" type="hidden" value="<%= entryId %>" />
 	<aui:input name="alert" type="hidden" value="<%= portletName.equals(PortletKeys.ALERTS) %>" />
 
-	<liferay-ui:tabs
-		names="entry"
+	<liferay-ui:header
+		title="entry"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 

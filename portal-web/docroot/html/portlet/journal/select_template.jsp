@@ -26,8 +26,8 @@
 	TemplateSearch searchContainer = new TemplateSearch(renderRequest, 10, portletURL);
 	%>
 
-	<liferay-ui:tabs
-		names="templates"
+	<liferay-ui:header
+		title="templates"
 	/>
 
 	<liferay-ui:search-form

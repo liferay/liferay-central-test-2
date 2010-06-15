@@ -43,8 +43,8 @@ long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getC
 	<portlet:param name="struts_action" value="/workflow_tasks/view" />
 </portlet:renderURL>
 
-<liferay-ui:tabs
-	names="<%= workflowTask.getName() %>"
+<liferay-ui:header
+	title="<%= workflowTask.getName() %>"
 	backURL="<%= backURL.toString() %>"
 />
 

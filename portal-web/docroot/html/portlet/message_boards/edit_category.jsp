@@ -38,8 +38,8 @@ catch (NoSuchMailingListException nsmle) {
 boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "active");
 %>
 
-<liferay-ui:tabs
-	names='<%= (category != null) ? category.getName() : "new-category" %>'
+<liferay-ui:header
+	title='<%= (category != null) ? category.getName() : "new-category" %>'
 	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 

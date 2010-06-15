@@ -44,8 +44,8 @@ if ((event.getRepeating()) && (recurrence != null)) {
 request.setAttribute("view_event.jsp-event", event);
 %>
 
-<liferay-ui:tabs
-	names='<%= event.getTitle() %>'
+<liferay-ui:header
+	title='<%= event.getTitle() %>'
 	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 

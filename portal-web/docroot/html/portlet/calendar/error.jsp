@@ -16,7 +16,7 @@
 
 <%@ include file="/html/portlet/calendar/init.jsp" %>
 
-<liferay-ui:tabs names="error" backURL="javascript:history.go(-1);" />
+<liferay-ui:header title="error" backURL="javascript:history.go(-1);" />
 
 <liferay-ui:error exception="<%= ImportEventsException.class %>" message="please-enter-a-file-with-a-valid-file-type" />
 <liferay-ui:error exception="<%= NoSuchEventException.class %>" message="the-event-could-not-be-found" />

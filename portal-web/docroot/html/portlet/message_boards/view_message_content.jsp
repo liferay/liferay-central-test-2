@@ -38,8 +38,8 @@ String threadView = messageDisplay.getThreadView();
 	<portlet:param name="mbCategoryId" value="<%= (category != null) ? String.valueOf(category.getCategoryId()) : String.valueOf(MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) %>" />
 </portlet:renderURL>
 
-<liferay-ui:tabs
-	names="<%= message.getSubject() %>"
+<liferay-ui:header
+	title="<%= message.getSubject() %>"
 	backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", (category != null) ? HtmlUtil.escape(category.getName()) : "message-boards-home") %>'
 	backURL="<%= backURL.toString() %>"
 />

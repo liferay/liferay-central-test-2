@@ -85,8 +85,8 @@ if (image != null) {
 	<aui:input name="imageId" type="hidden" value="<%= imageId %>" />
 	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
 
-	<liferay-ui:tabs
-		names='<%= image != null ? image.getName() : "new-image" %>'
+	<liferay-ui:header
+		title='<%= image != null ? image.getName() : "new-image" %>'
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 
