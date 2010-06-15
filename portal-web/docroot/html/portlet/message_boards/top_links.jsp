@@ -26,6 +26,8 @@ long categoryId = BeanParamUtil.getLong(category, request, "mbCategoryId", MBCat
 boolean viewCategory = GetterUtil.getBoolean((String)request.getAttribute("view.jsp-viewCategory"));
 
 PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setParameter("struts_action", "/message_boards/view");
 %>
 
 <div class="top-links-container">
