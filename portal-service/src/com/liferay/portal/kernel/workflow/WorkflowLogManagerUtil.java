@@ -27,13 +27,6 @@ import java.util.List;
  */
 public class WorkflowLogManagerUtil {
 
-	public static int getWorkflowLogCount(long companyId, long workflowTaskId)
-		throws WorkflowException {
-
-		return _workflowLogManager.getWorkflowLogCount(
-			companyId, workflowTaskId);
-	}
-
 	public static int getWorkflowLogCountByWorkflowInstance(
 			long companyId, long workflowInstanceId)
 		throws WorkflowException {
@@ -42,13 +35,16 @@ public class WorkflowLogManagerUtil {
 			companyId, workflowInstanceId);
 	}
 
-	public static List<WorkflowLog> getWorkflowLogs(
-			long companyId, long workflowTaskId, int start, int end,
-			OrderByComparator orderByComparator)
+	public static int getWorkflowLogCountByWorkflowTask(
+			long companyId, long workflowTaskId)
 		throws WorkflowException {
 
-		return _workflowLogManager.getWorkflowLogs(
-			companyId, workflowTaskId, start, end, orderByComparator);
+		return _workflowLogManager.getWorkflowLogCountByWorkflowTask(
+			companyId, workflowTaskId);
+	}
+
+	public static WorkflowLogManager getWorkflowLogManager() {
+		return _workflowLogManager;
 	}
 
 	public static List<WorkflowLog> getWorkflowLogsByWorkflowInstance(
@@ -60,8 +56,13 @@ public class WorkflowLogManagerUtil {
 			companyId, workflowInstanceId, start, end, orderByComparator);
 	}
 
-	public static WorkflowLogManager getWorkflowLogManager() {
-		return _workflowLogManager;
+	public static List<WorkflowLog> getWorkflowLogsByWorkflowTask(
+			long companyId, long workflowTaskId, int start, int end,
+			OrderByComparator orderByComparator)
+		throws WorkflowException {
+
+		return _workflowLogManager.getWorkflowLogsByWorkflowTask(
+			companyId, workflowTaskId, start, end, orderByComparator);
 	}
 
 	public void setWorkflowLogManager(WorkflowLogManager workflowLogManager) {

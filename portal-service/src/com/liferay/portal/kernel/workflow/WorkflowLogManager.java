@@ -30,20 +30,21 @@ import java.util.List;
 @MessagingProxy(mode = ProxyMode.SYNC)
 public interface WorkflowLogManager {
 
-	public int getWorkflowLogCount(long companyId, long workflowTaskId)
-		throws WorkflowException;
-
 	public int getWorkflowLogCountByWorkflowInstance(
 			long companyId, long workflowInstanceId)
 		throws WorkflowException;
 
-	public List<WorkflowLog> getWorkflowLogs(
-			long companyId, long workflowTaskId, int start,	int end,
-			OrderByComparator orderByComparator)
+	public int getWorkflowLogCountByWorkflowTask(
+			long companyId, long workflowTaskId)
 		throws WorkflowException;
 
 	public List<WorkflowLog> getWorkflowLogsByWorkflowInstance(
 			long companyId, long workflowInstanceId, int start,	int end,
+			OrderByComparator orderByComparator)
+		throws WorkflowException;
+
+	public List<WorkflowLog> getWorkflowLogsByWorkflowTask(
+			long companyId, long workflowTaskId, int start,	int end,
 			OrderByComparator orderByComparator)
 		throws WorkflowException;
 
