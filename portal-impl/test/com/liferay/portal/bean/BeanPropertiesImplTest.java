@@ -34,6 +34,29 @@ public class BeanPropertiesImplTest extends BaseBeanTestCase {
 		}
 	}
 
+	public void testSetInvalidDestinationType() {
+		FooBean fooBean = new FooBean();
+
+		assertEquals(0, fooBean.getInt());
+		assertNull(fooBean.getInteger());
+
+		try {
+			bp.setProperty(fooBean, "int", "123");
+		}
+		catch (IllegalArgumentException ignore) {
+			fail();
+		}
+		try {
+			bp.setProperty(fooBean, "integer", "123");
+		}
+		catch (IllegalArgumentException ignore) {
+			fail();
+		}
+
+		assertEquals(0, fooBean.getInt());
+		assertNull(fooBean.getInteger());
+	}
+
 	public void testBigBoolean() {
 		FooBean fooBean = new FooBean();
 		final String propertyName = "bigBoolean";
@@ -267,23 +290,5 @@ public class BeanPropertiesImplTest extends BaseBeanTestCase {
 			fail();
 		}
 	}
-
-/*	public void testBigFloat() {
-		FooBean fooBean = new FooBean();
-		final String propertyName = "bigFloat";
-
-		assertNull(fooBean.getBigFloat());
-
-		try {
-			bp.setProperty(fooBean, propertyName, Float.valueOf(17.3F));
-		}
-		catch (Exception ignore) {
-			fail();
-		}
-		assertEquals(17.3F, fooBean.getBigFloat().floatValue(), 0.0001);
-
-		double floatValue = bp.getDouble(fooBean, propertyName, -1);
-		assertEquals(17.3, floatValue, 0.0001);
-	}*/
 
 }
