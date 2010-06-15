@@ -162,7 +162,15 @@ public class ModelHintsImpl implements ModelHints {
 			return false;
 		}
 		else {
-			return (Boolean)fields.get(field + _LOCALIZATION_SUFFIX);
+			Boolean localized = (Boolean)fields.get(
+				field + _LOCALIZATION_SUFFIX);
+
+			if (localized != null) {
+				return localized;
+			}
+			else {
+				return false;
+			}
 		}
 	}
 
