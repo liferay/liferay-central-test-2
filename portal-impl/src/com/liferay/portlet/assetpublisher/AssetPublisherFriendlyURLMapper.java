@@ -115,7 +115,9 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 					friendlyURLPath += "id/" + assetEntryId;
 				}
 
-				if (windowState.equals(WindowState.MAXIMIZED)) {
+				if ((windowState != null) &&
+					 windowState.equals(WindowState.MAXIMIZED)) {
+
 					friendlyURLPath += StringPool.SLASH + windowState;
 				}
 
