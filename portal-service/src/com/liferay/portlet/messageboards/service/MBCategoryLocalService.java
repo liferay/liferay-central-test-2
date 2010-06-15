@@ -231,10 +231,6 @@ public interface MBCategoryLocalService {
 	public int getSubscribedCategoriesCount(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.messageboards.model.MBCategory getSystemCategory()
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	public void subscribeCategory(long userId, long groupId, long categoryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

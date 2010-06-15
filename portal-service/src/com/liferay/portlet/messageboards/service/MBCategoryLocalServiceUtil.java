@@ -293,11 +293,6 @@ public class MBCategoryLocalServiceUtil {
 		return getService().getSubscribedCategoriesCount(groupId, userId);
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBCategory getSystemCategory()
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getSystemCategory();
-	}
-
 	public static void subscribeCategory(long userId, long groupId,
 		long categoryId)
 		throws com.liferay.portal.kernel.exception.PortalException,

@@ -296,11 +296,6 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 			userId);
 	}
 
-	public com.liferay.portlet.messageboards.model.MBCategory getSystemCategory()
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _mbCategoryLocalService.getSystemCategory();
-	}
-
 	public void subscribeCategory(long userId, long groupId, long categoryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
