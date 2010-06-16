@@ -14,281 +14,207 @@
 
 package com.liferay.portal.bean;
 
+import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
+import com.liferay.portal.util.BaseTestCase;
+
 /**
  * <a href="BeanPropertiesImplTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Igor Spasic
  */
-public class BeanPropertiesImplTest extends BaseBeanTestCase {
-
-	public static final String NONEXISTING = "nonexisting";
-
-	public void testSetNonExistingProperty() {
-		FooBean fooBean = new FooBean();
-
-		try {
-			bp.setProperty(fooBean, NONEXISTING, new Object());
-		}
-		catch (Exception ignore) {
-			fail();
-		}
-	}
-
-	public void testSetInvalidDestinationType() {
-		FooBean fooBean = new FooBean();
-
-		assertEquals(0, fooBean.getInt());
-		assertNull(fooBean.getInteger());
-
-		try {
-			bp.setProperty(fooBean, "int", "123");
-		}
-		catch (IllegalArgumentException ignore) {
-			fail();
-		}
-		try {
-			bp.setProperty(fooBean, "integer", "123");
-		}
-		catch (IllegalArgumentException ignore) {
-			fail();
-		}
-
-		assertEquals(0, fooBean.getInt());
-		assertNull(fooBean.getInteger());
-	}
-
-	public void testBigBoolean() {
-		FooBean fooBean = new FooBean();
-		final String propertyName = "bigBoolean";
-
-		assertNull(fooBean.getBigBoolean());
-
-		try {
-			bp.setProperty(fooBean, propertyName, Boolean.TRUE);
-		}
-		catch (Exception ignore) {
-			fail();
-		}
-		assertEquals(Boolean.TRUE, fooBean.getBigBoolean());
-
-		boolean booleanValue = bp.getBoolean(fooBean, propertyName, false);
-		assertTrue(booleanValue);
-
-		try {
-			booleanValue = bp.getBoolean(fooBean, NONEXISTING, false);
-			assertFalse(booleanValue);
-		}
-		catch (Exception ignore) {
-			fail();
-		}
-	}
+public class BeanPropertiesImplTest extends BaseTestCase {
 
 	public void testBoolean() {
-		FooBean fooBean = new FooBean();
-		final String propertyName = "boolean";
+		Foo foo = new Foo();
 
-		assertFalse(fooBean.getBoolean());
+		assertFalse(foo.getBoolean());
 
-		try {
-			bp.setProperty(fooBean, propertyName, Boolean.TRUE);
-		}
-		catch (Exception ignore) {
-			fail();
-		}
-		assertTrue(fooBean.getBoolean());
+		BeanPropertiesUtil.setProperty(foo, "boolean", Boolean.TRUE);
 
-		boolean booleanValue = bp.getBoolean(fooBean, propertyName, false);
-		assertTrue(booleanValue);
+		assertTrue(foo.getBoolean());
 
-		try {
-			booleanValue = bp.getBoolean(fooBean, NONEXISTING, false);
-			assertFalse(booleanValue);
-		}
-		catch (Exception ignore) {
-			fail();
-		}
+		boolean value = BeanPropertiesUtil.getBoolean(foo, "boolean", false);
+
+		assertTrue(value);
+
+		value = BeanPropertiesUtil.getBoolean(foo, _NONEXISTENT, false);
+
+		assertFalse(value);
 	}
 
-	public void testInteger() {
-		FooBean fooBean = new FooBean();
-		final String propertyName = "integer";
+	public void testBooleanObject() {
+		Foo foo = new Foo();
 
-		assertNull(fooBean.getInteger());
+		assertNull(foo.getBooleanObject());
 
-		try {
-			bp.setProperty(fooBean, propertyName, Integer.valueOf(173));
-		}
-		catch (Exception ignore) {
-			fail();
-		}
-		assertEquals(173, fooBean.getInteger().intValue());
+		BeanPropertiesUtil.setProperty(foo, "booleanObject", Boolean.TRUE);
 
-		int integerValue = bp.getInteger(fooBean, propertyName, -1);
-		assertEquals(173, integerValue);
+		assertEquals(Boolean.TRUE, foo.getBooleanObject());
 
-		try {
-			integerValue = bp.getInteger(fooBean, NONEXISTING, -1);
-			assertEquals(-1, integerValue);
-		}
-		catch (Exception ignore) {
-			fail();
-		}
-	}
+		boolean value = BeanPropertiesUtil.getBoolean(
+			foo, "booleanObject", false);
 
-	public void testInt() {
-		FooBean fooBean = new FooBean();
-		final String propertyName = "int";
+		assertTrue(value);
 
-		assertEquals(0, fooBean.getInt());
+		value = BeanPropertiesUtil.getBoolean(foo, _NONEXISTENT, false);
 
-		try {
-			bp.setProperty(fooBean, propertyName, Integer.valueOf(173));
-		}
-		catch (Exception ignore) {
-			fail();
-		}
-		assertEquals(173, fooBean.getInt());
-
-		int intValue = bp.getInteger(fooBean, propertyName, -1);
-		assertEquals(173, intValue);
-
-		try {
-			intValue = bp.getInteger(fooBean, NONEXISTING, -1);
-			assertEquals(-1, intValue);
-		}
-		catch (Exception ignore) {
-			fail();
-		}
-	}
-
-	public void testBigLong() {
-		FooBean fooBean = new FooBean();
-		final String propertyName = "bigLong";
-
-		assertNull(fooBean.getBigLong());
-
-		try {
-			bp.setProperty(fooBean, propertyName, Long.valueOf(173L));
-		}
-		catch (Exception ignore) {
-			fail();
-		}
-		assertEquals(173L, fooBean.getBigLong().longValue());
-
-		long longValue = bp.getLong(fooBean, propertyName, -1);
-		assertEquals(173L, longValue);
-
-		try {
-			longValue = bp.getLong(fooBean, NONEXISTING, -1);
-			assertEquals(-1, longValue);
-		}
-		catch (Exception ignore) {
-			fail();
-		}
-	}
-
-	public void testLong() {
-		FooBean fooBean = new FooBean();
-		final String propertyName = "long";
-
-		assertEquals(0, fooBean.getLong());
-
-		try {
-			bp.setProperty(fooBean, propertyName, Long.valueOf(173L));
-		}
-		catch (Exception ignore) {
-			fail();
-		}
-		assertEquals(173L, fooBean.getLong());
-
-		long longValue = bp.getLong(fooBean, propertyName, -1);
-		assertEquals(173, longValue);
-
-		try {
-			longValue = bp.getLong(fooBean, NONEXISTING, -1);
-			assertEquals(-1, longValue);
-		}
-		catch (Exception ignore) {
-			fail();
-		}
-	}
-
-	public void testBigDouble() {
-		FooBean fooBean = new FooBean();
-		final String propertyName = "bigDouble";
-
-		assertNull(fooBean.getBigDouble());
-
-		try {
-			bp.setProperty(fooBean, propertyName, Double.valueOf(17.3));
-		}
-		catch (Exception ignore) {
-			fail();
-		}
-		assertEquals(17.3, fooBean.getBigDouble().doubleValue(), 0.0001);
-
-		double doubleValue = bp.getDouble(fooBean, propertyName, -1);
-		assertEquals(17.3, doubleValue, 0.0001);
-
-		try {
-			doubleValue = bp.getDouble(fooBean, NONEXISTING, -1.1);
-			assertEquals(-1.1, doubleValue, 0.0001);
-		}
-		catch (Exception ignore) {
-			fail();
-		}
+		assertFalse(value);
 	}
 
 	public void testDouble() {
-		FooBean fooBean = new FooBean();
-		final String propertyName = "double";
+		Foo foo = new Foo();
 
-		assertEquals(0.0D, fooBean.getDouble(), 0.001);
+		assertEquals(0.0D, foo.getDouble(), 0.001);
 
-		try {
-			bp.setProperty(fooBean, propertyName, Double.valueOf(17.3));
-		}
-		catch (Exception ignore) {
-			fail();
-		}
-		assertEquals(17.3, fooBean.getDouble(), 0.0001);
+		BeanPropertiesUtil.setProperty(foo, "double", Double.valueOf(17.3));
 
-		double doubleValue = bp.getDouble(fooBean, propertyName, -1);
-		assertEquals(17.3, doubleValue, 0.0001);
+		assertEquals(17.3, foo.getDouble(), 0.0001);
 
-		try {
-			doubleValue = bp.getDouble(fooBean, NONEXISTING, -1.1);
-			assertEquals(-1.1, doubleValue, 0.0001);
-		}
-		catch (Exception ignore) {
-			fail();
-		}
+		double value = BeanPropertiesUtil.getDouble(foo, "double", -1);
+
+		assertEquals(17.3, value, 0.0001);
+
+		value = BeanPropertiesUtil.getDouble(foo, _NONEXISTENT, -1.1);
+
+		assertEquals(-1.1, value, 0.0001);
+	}
+
+	public void testDoubleObject() {
+		Foo foo = new Foo();
+
+		assertNull(foo.getDoubleObject());
+
+		BeanPropertiesUtil.setProperty(
+			foo, "doubleObject", Double.valueOf(17.3));
+
+		assertEquals(17.3, foo.getDoubleObject().doubleValue(), 0.0001);
+
+		double value = BeanPropertiesUtil.getDouble(foo, "doubleObject", -1);
+
+		assertEquals(17.3, value, 0.0001);
+
+		value = BeanPropertiesUtil.getDouble(foo, _NONEXISTENT, -1.1);
+
+		assertEquals(-1.1, value, 0.0001);
+	}
+
+	public void testInt() {
+		Foo foo = new Foo();
+
+		assertEquals(0, foo.getInt());
+
+		BeanPropertiesUtil.setProperty(foo, "int", Integer.valueOf(173));
+
+		assertEquals(173, foo.getInt());
+
+		int value = BeanPropertiesUtil.getInteger(foo, "int", -1);
+
+		assertEquals(173, value);
+
+		value = BeanPropertiesUtil.getInteger(foo, _NONEXISTENT, -1);
+
+		assertEquals(-1, value);
+	}
+
+	public void testInteger() {
+		Foo foo = new Foo();
+
+		assertNull(foo.getInteger());
+
+		BeanPropertiesUtil.setProperty(foo, "integer", Integer.valueOf(173));
+
+		assertEquals(173, foo.getInteger().intValue());
+
+		int value = BeanPropertiesUtil.getInteger(foo, "integer", -1);
+
+		assertEquals(173, value);
+
+		value = BeanPropertiesUtil.getInteger(foo, _NONEXISTENT, -1);
+
+		assertEquals(-1, value);
+	}
+
+	public void testLong() {
+		Foo foo = new Foo();
+
+		assertEquals(0, foo.getLong());
+
+		BeanPropertiesUtil.setProperty(foo, "long", Long.valueOf(173L));
+
+		assertEquals(173L, foo.getLong());
+
+		long value = BeanPropertiesUtil.getLong(foo, "long", -1);
+
+		assertEquals(173, value);
+
+		value = BeanPropertiesUtil.getLong(foo, _NONEXISTENT, -1);
+
+		assertEquals(-1, value);
+	}
+
+	public void testLongObject() {
+		Foo foo = new Foo();
+
+		assertNull(foo.getLongObject());
+
+		BeanPropertiesUtil.setProperty(foo, "longObject", Long.valueOf(173L));
+
+		assertEquals(173L, foo.getLongObject().longValue());
+
+		long value = BeanPropertiesUtil.getLong(foo, "longObject", -1);
+
+		assertEquals(173L, value);
+
+		value = BeanPropertiesUtil.getLong(foo, _NONEXISTENT, -1);
+
+		assertEquals(-1, value);
+	}
+
+	public void testSetInnerProperty() {
+		Bar bar = new Bar();
+
+		BeanPropertiesUtil.setProperty(bar, "foo.int", Integer.valueOf(173));
+
+		assertEquals(173, bar.getFoo().getInt());
+	}
+
+	public void testSetInvalidDestinationType() {
+		Foo foo = new Foo();
+
+		assertEquals(0, foo.getInt());
+		assertNull(foo.getInteger());
+
+		BeanPropertiesUtil.setProperty(foo, "int", "123");
+		BeanPropertiesUtil.setProperty(foo, "integer", "123");
+
+		assertEquals(0, foo.getInt());
+		assertNull(foo.getInteger());
+	}
+
+	public void testSetNonExistingProperty() {
+		Foo foo = new Foo();
+
+		BeanPropertiesUtil.setProperty(foo, _NONEXISTENT, new Object());
 	}
 
 	public void testString() {
-		FooBean fooBean = new FooBean();
-		final String propertyName = "string";
+		Foo foo = new Foo();
 
-		assertNull(fooBean.getString());
+		assertNull(foo.getString());
 
-		try {
-			bp.setProperty(fooBean, propertyName, "test");
-		}
-		catch (Exception ignore) {
-			fail();
-		}
-		assertEquals("test", fooBean.getString());
+		BeanPropertiesUtil.setProperty(foo, "string", "test");
 
-		String value = bp.getString(fooBean, propertyName);
+		assertEquals("test", foo.getString());
+
+		String value = BeanPropertiesUtil.getString(foo, "string");
+
 		assertEquals("test", value);
 
-		try {
-			value = bp.getString(fooBean, NONEXISTING, "none");
-			assertEquals("none", value);
-		}
-		catch (Exception ignore) {
-			fail();
-		}
+		value = BeanPropertiesUtil.getString(foo, _NONEXISTENT, "none");
+
+		assertEquals("none", value);
 	}
+
+	private static final String _NONEXISTENT = "nonexistent";
 
 }

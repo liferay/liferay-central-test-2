@@ -15,24 +15,20 @@
 package com.liferay.portal.bean;
 
 /**
- * <a href="FooBean2.java.html"><b><i>View Source</i></b></a>
+ * <a href="Bar.java.html"><b><i>View Source</i></b></a>
  *
  * @author Igor Spasic
  */
-public class FooBean2 {
+public class Bar {
 
-	public FooBean2() {
-		_foo = new FooBean();
-	}
-
-	public FooBean getFoo() {
+	public Foo getFoo() {
 		return _foo;
 	}
 
-	public void setFoo(FooBean foo) {
-		this._foo = foo;
+	public void setFoo(Foo foo) {
+		_foo = foo;
 	}
 
-	private FooBean _foo;
+	private Foo _foo = new Foo();
 
 }
