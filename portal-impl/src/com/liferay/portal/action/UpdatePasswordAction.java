@@ -32,9 +32,13 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.login.util.LoginUtil;
 
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletURL;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -75,7 +79,13 @@ public class UpdatePasswordAction extends Action {
 		try {
 			updatePassword(request, response, themeDisplay, ticket);
 
-			return mapping.findForward(ActionConstants.COMMON_REFERER);
+			PortletURL portletURL = new PortletURLImpl(
+				request, PortletKeys.LOGIN, themeDisplay.getPlid(),
+					PortletRequest.RENDER_PHASE);
+
+			response.sendRedirect(portletURL.toString());
+
+			return null;
 		}
 		catch (Exception e) {
 			if (e instanceof UserPasswordException) {
