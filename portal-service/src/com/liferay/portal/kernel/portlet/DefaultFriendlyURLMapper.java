@@ -49,8 +49,6 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 			return null;
 		}
 
-		// Remove mapped parameters from URL
-
 		for (String name : portletURLParameters.keySet()) {
 			if (!parameters.containsKey(name)) {
 				portletURL.addParameterIncludedInPath(name);
@@ -83,6 +81,7 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 				_log.warn(
 					"No route could be found to match URL " + friendlyURLPath);
 			}
+
 			return;
 		}
 
@@ -96,6 +95,7 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 	protected String getLifecycle(LiferayPortletURL portletURL) {
 		String lifecycle = portletURL.getLifecycle();
+
 		if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
 			return "1";
 		}
@@ -105,10 +105,11 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 		else if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 			return "2";
 		}
+
 		return null;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-			DefaultFriendlyURLMapper.class);
+		DefaultFriendlyURLMapper.class);
 
 }
