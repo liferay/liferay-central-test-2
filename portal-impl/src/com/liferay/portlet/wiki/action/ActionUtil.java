@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowThreadLocal;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
@@ -202,9 +203,18 @@ public class ActionUtil {
 					serviceContext.setAddGuestPermissions(false);
 				}
 
-				page = WikiPageLocalServiceUtil.addPage(
-					userId, nodeId, title, null, WikiPageConstants.NEW, true,
-					serviceContext);
+				boolean workflowEnabled = WorkflowThreadLocal.isEnabled();
+
+				try {
+					WorkflowThreadLocal.setEnabled(false);
+
+					page = WikiPageLocalServiceUtil.addPage(
+						userId, nodeId, title, null, WikiPageConstants.NEW,
+						true, serviceContext);
+				}
+				finally {
+					WorkflowThreadLocal.setEnabled(workflowEnabled);
+				}
 			}
 			else {
 				throw nspe;
