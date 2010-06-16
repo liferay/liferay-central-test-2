@@ -15,6 +15,7 @@
 package com.liferay.portlet.wiki.util;
 
 import com.liferay.portal.kernel.configuration.Filter;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
@@ -277,7 +278,7 @@ public class WikiUtil {
 	}
 
 	public static WikiNode getFirstNode(PortletRequest portletRequest)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);

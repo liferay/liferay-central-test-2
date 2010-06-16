@@ -23,7 +23,9 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
@@ -37,6 +39,7 @@ import com.liferay.portlet.wiki.service.base.WikiNodeLocalServiceBaseImpl;
 
 import java.io.File;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -51,6 +54,37 @@ import java.util.Map;
  * @author Raymond Augé
  */
 public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
+
+	public List<WikiNode> addDefaultNode(long groupId)
+		throws PortalException, SystemException {
+
+		Group group = groupLocalService.getGroup(groupId);
+		long userId = userLocalService.getDefaultUserId(group.getCompanyId());
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setScopeGroupId(groupId);
+
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+
+		WikiNode node = addDefaultNode(userId, serviceContext);
+
+		List<WikiNode> nodes = new ArrayList<WikiNode>(1);
+
+		nodes.add(node);
+
+		return nodes;
+	}
+
+	public WikiNode addDefaultNode(long userId, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		String nodeName = PropsUtil.get(PropsKeys.WIKI_INITIAL_NODE_NAME);
+
+		return addNode(
+			null, userId, nodeName, StringPool.BLANK, serviceContext);
+	}
 
 	public WikiNode addNode(
 			String uuid, long userId, String name, String description,
@@ -230,14 +264,29 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		return wikiNodePersistence.findByG_N(groupId, nodeName);
 	}
 
-	public List<WikiNode> getNodes(long groupId) throws SystemException {
-		return wikiNodePersistence.findByGroupId(groupId);
+	public List<WikiNode> getNodes(long groupId)
+		throws PortalException, SystemException {
+
+		List<WikiNode> nodes = wikiNodePersistence.findByGroupId(groupId);
+
+		if (nodes.isEmpty()) {
+			nodes = addDefaultNode(groupId);
+		}
+
+		return nodes;
 	}
 
 	public List<WikiNode> getNodes(long groupId, int start, int end)
-		throws SystemException {
+		throws PortalException, SystemException {
 
-		return wikiNodePersistence.findByGroupId(groupId, start, end);
+		List<WikiNode> nodes =
+			wikiNodePersistence.findByGroupId(groupId, start, end);
+
+		if (nodes.isEmpty()) {
+			nodes = addDefaultNode(groupId);
+		}
+
+		return nodes;
 	}
 
 	public int getNodesCount(long groupId) throws SystemException {

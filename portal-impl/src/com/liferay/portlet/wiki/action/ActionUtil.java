@@ -17,8 +17,6 @@ package com.liferay.portlet.wiki.action;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -27,7 +25,6 @@ import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
@@ -66,8 +63,6 @@ public class ActionUtil {
 			themeDisplay.getScopeGroupId());
 
 		if (nodesCount == 0) {
-			String nodeName = PropsUtil.get(PropsKeys.WIKI_INITIAL_NODE_NAME);
-
 			Layout layout = themeDisplay.getLayout();
 
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
@@ -82,9 +77,8 @@ public class ActionUtil {
 				serviceContext.setAddGuestPermissions(false);
 			}
 
-			node = WikiNodeLocalServiceUtil.addNode(
-				null, themeDisplay.getUserId(), nodeName, StringPool.BLANK,
-				serviceContext);
+			node = WikiNodeLocalServiceUtil.addDefaultNode(
+				themeDisplay.getUserId(), serviceContext);
 		}
 		else {
 			node = WikiUtil.getFirstNode(portletRequest);
