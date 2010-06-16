@@ -250,15 +250,6 @@
 		<css-class-wrapper>portlet-dictionary</css-class-wrapper>
 	</portlet>
 	<portlet>
-		<portlet-name>24</portlet-name>
-		<icon>/html/icons/default.png</icon>
-		<struts-path>sms</struts-path>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>50</render-weight>
-		<css-class-wrapper>portlet-sms</css-class-wrapper>
-	</portlet>
-	<portlet>
 		<portlet-name>25</portlet-name>
 		<icon>/html/icons/polls.png</icon>
 		<struts-path>polls</struts-path>
