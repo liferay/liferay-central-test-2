@@ -109,11 +109,6 @@ public interface WikiNodeLocalService {
 		com.liferay.portlet.wiki.model.WikiNode wikiNode, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.wiki.model.WikiNode> addDefaultNode(
-		long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
 	public com.liferay.portlet.wiki.model.WikiNode addDefaultNode(long userId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,

@@ -55,28 +55,6 @@ import java.util.Map;
  */
 public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
-	public List<WikiNode> addDefaultNode(long groupId)
-		throws PortalException, SystemException {
-
-		Group group = groupLocalService.getGroup(groupId);
-		long userId = userLocalService.getDefaultUserId(group.getCompanyId());
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setScopeGroupId(groupId);
-
-		serviceContext.setAddCommunityPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-
-		WikiNode node = addDefaultNode(userId, serviceContext);
-
-		List<WikiNode> nodes = new ArrayList<WikiNode>(1);
-
-		nodes.add(node);
-
-		return nodes;
-	}
-
 	public WikiNode addDefaultNode(long userId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -279,8 +257,8 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 	public List<WikiNode> getNodes(long groupId, int start, int end)
 		throws PortalException, SystemException {
 
-		List<WikiNode> nodes =
-			wikiNodePersistence.findByGroupId(groupId, start, end);
+		List<WikiNode> nodes = wikiNodePersistence.findByGroupId(
+			groupId, start, end);
 
 		if (nodes.isEmpty()) {
 			nodes = addDefaultNode(groupId);
@@ -335,6 +313,29 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		wikiNodePersistence.update(node, false);
 
 		return node;
+	}
+
+	protected List<WikiNode> addDefaultNode(long groupId)
+		throws PortalException, SystemException {
+
+		Group group = groupPersistence.findByPrimaryKey(groupId);
+
+		long defaultUserId = userLocalService.getDefaultUserId(
+			group.getCompanyId());
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setScopeGroupId(groupId);
+
+		WikiNode node = addDefaultNode(defaultUserId, serviceContext);
+
+		List<WikiNode> nodes = new ArrayList<WikiNode>(1);
+
+		nodes.add(node);
+
+		return nodes;
 	}
 
 	protected WikiImporter getWikiImporter(String importer)

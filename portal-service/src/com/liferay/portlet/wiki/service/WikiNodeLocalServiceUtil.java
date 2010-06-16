@@ -127,13 +127,6 @@ public class WikiNodeLocalServiceUtil {
 		return getService().updateWikiNode(wikiNode, merge);
 	}
 
-	public static java.util.List<com.liferay.portlet.wiki.model.WikiNode> addDefaultNode(
-		long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().addDefaultNode(groupId);
-	}
-
 	public static com.liferay.portlet.wiki.model.WikiNode addDefaultNode(
 		long userId, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,

@@ -124,13 +124,6 @@ public class WikiNodeLocalServiceWrapper implements WikiNodeLocalService {
 		return _wikiNodeLocalService.updateWikiNode(wikiNode, merge);
 	}
 
-	public java.util.List<com.liferay.portlet.wiki.model.WikiNode> addDefaultNode(
-		long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _wikiNodeLocalService.addDefaultNode(groupId);
-	}
-
 	public com.liferay.portlet.wiki.model.WikiNode addDefaultNode(long userId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
