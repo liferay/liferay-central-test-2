@@ -89,13 +89,17 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 	}
 
 	function <portlet:namespace />deleteOrganizations() {
-		var organizationIds = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		Liferay.Util.listCheckedExcept(
+			document.<portlet:namespace />fm,
+			'<portlet:namespace />allRowIds',
+			function(organizationIds) {
+				if (!organizationIds) {
+					return;
+				}
 
-		if (!organizationIds) {
-			return;
-		}
-
-		<portlet:namespace />doDeleteOrganizationOrUserGroup('<%= Organization.class.getName() %>', organizationIds);
+				<portlet:namespace />doDeleteOrganizationOrUserGroup('<%= Organization.class.getName() %>', organizationIds);
+			}
+		);
 	}
 
 	function <portlet:namespace />deleteUserGroup(userGroupId) {
@@ -103,41 +107,49 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 	}
 
 	function <portlet:namespace />deleteUserGroups() {
-		var userGroupIds = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		Liferay.Util.listCheckedExcept(
+			document.<portlet:namespace />fm,
+			'<portlet:namespace />allRowIds',
+			function(userGroupIds) {
+				if (!userGroupIds) {
+					return;
+				}
 
-		if (!userGroupIds) {
-			return;
-		}
-
-		<portlet:namespace />doDeleteOrganizationOrUserGroup('<%= UserGroup.class.getName() %>', userGroupIds);
+				<portlet:namespace />doDeleteOrganizationOrUserGroup('<%= UserGroup.class.getName() %>', userGroupIds);
+			}
+		);
 	}
 
 	function <portlet:namespace />deleteUsers(cmd) {
 		var deleteUsers = true;
 
-		var deleteUserIds = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		Liferay.Util.listCheckedExcept(
+			document.<portlet:namespace />fm,
+			'<portlet:namespace />allRowIds',
+			function(deleteUserIds) {
+				if (!deleteUserIds) {
+					deleteUsers = false;
+				}
+				else if (cmd == '<%= Constants.DEACTIVATE %>') {
+					if (!confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-deactivate-the-selected-users") %>')) {
+						deleteUsers = false;
+					}
+				}
+				else if (cmd == '<%= Constants.DELETE %>') {
+					if (!confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-permanently-delete-the-selected-users") %>')) {
+						deleteUsers = false;
+					}
+				}
 
-		if (!deleteUserIds) {
-			deleteUsers = false;
-		}
-		else if (cmd == "<%= Constants.DEACTIVATE %>") {
-			if (!confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-deactivate-the-selected-users") %>')) {
-				deleteUsers = false;
+				if (deleteUsers) {
+					document.<portlet:namespace />fm.method = 'post';
+					document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
+					document.<portlet:namespace />fm.<portlet:namespace />redirect.value = document.<portlet:namespace />fm.<portlet:namespace />usersRedirect.value;
+					document.<portlet:namespace />fm.<portlet:namespace />deleteUserIds.value = deleteUserIds;
+					submitForm(document.<portlet:namespace />fm, '<portlet:actionURL><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:actionURL>');
+				}
 			}
-		}
-		else if (cmd == "<%= Constants.DELETE %>") {
-			if (!confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-permanently-delete-the-selected-users") %>')) {
-				deleteUsers = false;
-			}
-		}
-
-		if (deleteUsers) {
-			document.<portlet:namespace />fm.method = "post";
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
-			document.<portlet:namespace />fm.<portlet:namespace />redirect.value = document.<portlet:namespace />fm.<portlet:namespace />usersRedirect.value;
-			document.<portlet:namespace />fm.<portlet:namespace />deleteUserIds.value = deleteUserIds;
-			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:actionURL>");
-		}
+		);
 	}
 
 	function <portlet:namespace />doDeleteOrganizationOrUserGroup(className, id) {

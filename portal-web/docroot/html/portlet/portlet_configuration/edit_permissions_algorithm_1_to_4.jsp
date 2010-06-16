@@ -422,22 +422,50 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 	}
 
 	function <portlet:namespace />updateOrganizationPermissions() {
-		document.<portlet:namespace />fm.<portlet:namespace />organizationIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		submitForm(document.<portlet:namespace />fm);
+		Liferay.Util.listCheckedExcept(
+			document.<portlet:namespace />fm,
+			'<portlet:namespace />allRowIds',
+			function(organizations) {
+				document.<portlet:namespace />fm.<portlet:namespace />organizationIds.value = organizations;
+
+				submitForm(document.<portlet:namespace />fm);
+			}
+		);
 	}
 
 	function <portlet:namespace />updateRolePermissions() {
-		document.<portlet:namespace />fm.<portlet:namespace />roleIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		submitForm(document.<portlet:namespace />fm);
+		Liferay.Util.listCheckedExcept(
+			document.<portlet:namespace />fm,
+			'<portlet:namespace />allRowIds',
+			function(roles) {
+				document.<portlet:namespace />fm.<portlet:namespace />roleIds.value = roles;
+
+				submitForm(document.<portlet:namespace />fm);
+			}
+		);
 	}
 
 	function <portlet:namespace />updateUserGroupPermissions() {
-		document.<portlet:namespace />fm.<portlet:namespace />userGroupIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		submitForm(document.<portlet:namespace />fm);
+		Liferay.Util.listCheckedExcept(
+			document.<portlet:namespace />fm,
+			'<portlet:namespace />allRowIds',
+			function(userGroups) {
+				document.<portlet:namespace />fm.<portlet:namespace />userGroupIds.value = userGroups;
+
+				submitForm(document.<portlet:namespace />fm);
+			}
+		);
 	}
 
 	function <portlet:namespace />updateUserPermissions() {
-		document.<portlet:namespace />fm.<portlet:namespace />userIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		submitForm(document.<portlet:namespace />fm);
+		Liferay.Util.listCheckedExcept(
+			document.<portlet:namespace />fm,
+			'<portlet:namespace />allRowIds',
+			function(userPermissions) {
+				document.<portlet:namespace />fm.<portlet:namespace />userIds.value = userPermissions;
+
+				submitForm(document.<portlet:namespace />fm);
+			}
+		);
 	}
 </aui:script>

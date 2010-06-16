@@ -66,19 +66,28 @@ String defaultContent = ContentUtil.get(PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE
 </c:if>
 
 <aui:script>
-	function <portlet:namespace />getEditorContent() {
-		var xslContent = AUI().one('input[name=<portlet:namespace />xslContent]');
+	Liferay.provide(
+		window,
+		'<portlet:namespace />getEditorContent',
+		function(callback) {
+			var A = AUI();
 
-		if (xslContent) {
-			var content = decodeURIComponent(xslContent.val());
-		}
+			var xslContent = A.one('input[name=<portlet:namespace />xslContent]');
 
-		if (!content) {
-			content = "<%= UnicodeFormatter.toString(defaultContent) %>";
-		}
+			if (xslContent) {
+				var content = decodeURIComponent(xslContent.val());
+			}
 
-		return content;
-	}
+			if (!content) {
+				content = "<%= UnicodeFormatter.toString(defaultContent) %>";
+			}
+
+			if (callback) {
+				callback(content);
+			}
+		},
+		['aui-base']
+	);
 
 	Liferay.provide(
 		window,
@@ -133,7 +142,11 @@ String defaultContent = ContentUtil.get(PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE
 		['aui-dialog']
 	);
 
-	document.<portlet:namespace />editorForm.<portlet:namespace />xslContent.value = <portlet:namespace />getEditorContent();
+	<portlet:namespace />getEditorContent(
+		function(content) {
+			document.<portlet:namespace />editorForm.<portlet:namespace />xslContent.value = content;
+		}
+	);
 
 	Liferay.Util.resizeTextarea('<portlet:namespace />xslContent', <%= useEditorCodepress %>, true);
 </aui:script>

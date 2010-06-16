@@ -157,16 +157,22 @@ portletURL.setParameter("typeSelection", JournalArticle.class.getName());
 
 	Liferay.Util.actsAsAspect(window);
 
-	window.before(
-		'<portlet:namespace />selectAsset',
+	Liferay.provide(
+		window,
+		'<portlet:namespace />setFormURL',
 		function() {
-			var fm = AUI().one(document.<portlet:namespace />fm);
+			var A = AUI();
+
+			var fm = A.one(document.<portlet:namespace />fm);
 
 			if (fm) {
 				fm.attr('action', <portlet:namespace />configurationActionURL);
 			}
-		}
+		},
+		['aui-base']
 	);
+
+	window.before('<portlet:namespace />selectAsset', <portlet:namespace />setFormURL);
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.ARTICLE_ID %>);

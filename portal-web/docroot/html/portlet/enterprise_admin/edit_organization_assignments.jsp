@@ -91,19 +91,49 @@ request.setAttribute("edit_organization_assignments.jsp-portletURL", portletURL)
 
 <aui:script>
 	function <portlet:namespace />updateOrganizationUserGroups(assignmentsRedirect) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "organization_user_groups";
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'organization_user_groups';
 		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
-		document.<portlet:namespace />fm.<portlet:namespace />addUserGroupIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		document.<portlet:namespace />fm.<portlet:namespace />removeUserGroupIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		submitForm(document.<portlet:namespace />fm);
+
+		Liferay.Util.listCheckedExcept(
+			document.<portlet:namespace />fm,
+			'<portlet:namespace />allRowIds',
+			function(addGroups) {
+				document.<portlet:namespace />fm.<portlet:namespace />addUserGroupIds.value = addGroups;
+
+				Liferay.Util.listUncheckedExcept(
+					document.<portlet:namespace />fm,
+					'<portlet:namespace />allRowIds',
+					function(removeGroups) {
+						document.<portlet:namespace />fm.<portlet:namespace />removeUserGroupIds.value = removeGroups;
+
+						submitForm(document.<portlet:namespace />fm);
+					}
+				);
+			}
+		);
 	}
 
 	function <portlet:namespace />updateOrganizationUsers(assignmentsRedirect) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "organization_users";
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'organization_users';
 		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
-		document.<portlet:namespace />fm.<portlet:namespace />addUserIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		submitForm(document.<portlet:namespace />fm);
+
+		Liferay.Util.listCheckedExcept(
+			document.<portlet:namespace />fm,
+			'<portlet:namespace />allRowIds',
+			function(addUsers) {
+				document.<portlet:namespace />fm.<portlet:namespace />addUserIds.value = addUsers;
+
+				Liferay.Util.listUncheckedExcept(
+					document.<portlet:namespace />fm,
+					'<portlet:namespace />allRowIds',
+					function(removeUsers) {
+						document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = removeUsers;
+
+						submitForm(document.<portlet:namespace />fm);
+					}
+				);
+			}
+		);
 	}
 </aui:script>
 
