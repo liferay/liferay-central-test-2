@@ -77,20 +77,21 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 			context.addPermissions(
 				"com.liferay.portlet.blogs", context.getGroupId());
 
-			Document doc = SAXReaderUtil.createDocument();
+			Document document = SAXReaderUtil.createDocument();
 
-			Element root = doc.addElement("blogs-data");
+			Element rootElement = document.addElement("blogs-data");
 
-			root.addAttribute("group-id", String.valueOf(context.getGroupId()));
+			rootElement.addAttribute(
+				"group-id", String.valueOf(context.getGroupId()));
 
 			List<BlogsEntry> entries = BlogsEntryUtil.findByGroupId(
 				context.getGroupId());
 
 			for (BlogsEntry entry : entries) {
-				exportEntry(context, root, entry);
+				exportEntry(context, rootElement, entry);
 			}
 
-			return doc.formattedString();
+			return document.formattedString();
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -119,14 +120,12 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 				"com.liferay.portlet.blogs", context.getSourceGroupId(),
 				context.getGroupId());
 
-			Document doc = SAXReaderUtil.read(data);
+			Document document = SAXReaderUtil.read(data);
 
-			Element root = doc.getRootElement();
+			Element rootElement = document.getRootElement();
 
-			List<Element> entryEls = root.elements("entry");
-
-			for (Element entryEl : entryEls) {
-				String path = entryEl.attributeValue("path");
+			for (Element entryElement : rootElement.elements("entry")) {
+				String path = entryElement.attributeValue("path");
 
 				if (!context.isPathNotProcessed(path)) {
 					continue;
@@ -167,9 +166,9 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
-		Element entryEl = root.addElement("entry");
+		Element entryElement = root.addElement("entry");
 
-		entryEl.addAttribute("path", path);
+		entryElement.addAttribute("path", path);
 
 		context.addPermissions(BlogsEntry.class, entry.getEntryId());
 

@@ -85,20 +85,21 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 			context.addPermissions(
 				"com.liferay.portlet.bookmarks", context.getGroupId());
 
-			Document doc = SAXReaderUtil.createDocument();
+			Document document = SAXReaderUtil.createDocument();
 
-			Element root = doc.addElement("bookmarks-data");
+			Element rootElement = document.addElement("bookmarks-data");
 
-			root.addAttribute("group-id", String.valueOf(context.getGroupId()));
+			rootElement.addAttribute(
+				"group-id", String.valueOf(context.getGroupId()));
 
-			Element foldersEl = root.addElement("folders");
-			Element entriesEl = root.addElement("entries");
+			Element foldersElement = rootElement.addElement("folders");
+			Element entriesElement = rootElement.addElement("entries");
 
 			List<BookmarksFolder> folders = BookmarksFolderUtil.findByGroupId(
 				context.getGroupId());
 
 			for (BookmarksFolder folder : folders) {
-				exportFolder(context, foldersEl, entriesEl, folder);
+				exportFolder(context, foldersElement, entriesElement, folder);
 			}
 
 			List<BookmarksEntry> entries = BookmarksEntryUtil.findByG_F(
@@ -106,10 +107,10 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 				BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 			for (BookmarksEntry entry : entries) {
-				exportEntry(context, null, entriesEl, entry);
+				exportEntry(context, null, entriesElement, entry);
 			}
 
-			return doc.formattedString();
+			return document.formattedString();
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -138,19 +139,14 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 				"com.liferay.portlet.bookmarks", context.getSourceGroupId(),
 				context.getGroupId());
 
-			Document doc = SAXReaderUtil.read(data);
+			Document document = SAXReaderUtil.read(data);
 
-			Element root = doc.getRootElement();
+			Element rootElement = document.getRootElement();
 
-			List<Element> folderEls = root.element("folders").elements(
-				"folder");
+			Element foldersElement = rootElement.element("folders");
 
-			Map<Long, Long> folderPKs =
-				(Map<Long, Long>)context.getNewPrimaryKeysMap(
-					BookmarksFolder.class);
-
-			for (Element folderEl : folderEls) {
-				String path = folderEl.attributeValue("path");
+			for (Element folderElement : foldersElement.elements("folder")) {
+				String path = folderElement.attributeValue("path");
 
 				if (!context.isPathNotProcessed(path)) {
 					continue;
@@ -159,13 +155,13 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 				BookmarksFolder folder =
 					(BookmarksFolder)context.getZipEntryAsObject(path);
 
-				importFolder(context, folderPKs, folder);
+				importFolder(context, folder);
 			}
 
-			List<Element> entryEls = root.element("entries").elements("entry");
+			Element entriesElement = rootElement.element("entries");
 
-			for (Element entryEl : entryEls) {
-				String path = entryEl.attributeValue("path");
+			for (Element entryElement : entriesElement.elements("entry")) {
+				String path = entryElement.attributeValue("path");
 
 				if (!context.isPathNotProcessed(path)) {
 					continue;
@@ -174,7 +170,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 				BookmarksEntry entry =
 					(BookmarksEntry)context.getZipEntryAsObject(path);
 
-				importEntry(context, folderPKs, entry);
+				importEntry(context, entry);
 			}
 
 			return null;
@@ -185,19 +181,21 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected void exportFolder(
-			PortletDataContext context, Element foldersEl, Element entriesEl,
+			PortletDataContext context,
+			Element foldersElement, Element entriesElement,
 			BookmarksFolder folder)
 		throws PortalException, SystemException {
 
 		if (context.isWithinDateRange(folder.getModifiedDate())) {
-			exportParentFolder(context, foldersEl, folder.getParentFolderId());
+			exportParentFolder(
+				context, foldersElement, folder.getParentFolderId());
 
 			String path = getFolderPath(context, folder);
 
 			if (context.isPathNotProcessed(path)) {
-				Element folderEl = foldersEl.addElement("folder");
+				Element folderElement = foldersElement.addElement("folder");
 
-				folderEl.addAttribute("path", path);
+				folderElement.addAttribute("path", path);
 
 				folder.setUserUuid(folder.getUserUuid());
 
@@ -212,12 +210,13 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 			folder.getGroupId(), folder.getFolderId());
 
 		for (BookmarksEntry entry : entries) {
-			exportEntry(context, foldersEl, entriesEl, entry);
+			exportEntry(context, foldersElement, entriesElement, entry);
 		}
 	}
 
 	protected void exportEntry(
-			PortletDataContext context, Element foldersEl, Element entriesEl,
+			PortletDataContext context,
+			Element foldersElement, Element entriesElement,
 			BookmarksEntry entry)
 		throws PortalException, SystemException {
 
@@ -225,16 +224,16 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
-		if (foldersEl != null) {
-			exportParentFolder(context, foldersEl, entry.getFolderId());
+		if (foldersElement != null) {
+			exportParentFolder(context, foldersElement, entry.getFolderId());
 		}
 
 		String path = getEntryPath(context, entry);
 
 		if (context.isPathNotProcessed(path)) {
-			Element entryEl = entriesEl.addElement("entry");
+			Element entryElement = entriesElement.addElement("entry");
 
-			entryEl.addAttribute("path", path);
+			entryElement.addAttribute("path", path);
 
 			context.addPermissions(BookmarksEntry.class, entry.getEntryId());
 
@@ -259,7 +258,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected void exportParentFolder(
-			PortletDataContext context, Element foldersEl, long folderId)
+			PortletDataContext context, Element foldersElement, long folderId)
 		throws PortalException, SystemException {
 
 		if (folderId == BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
@@ -268,14 +267,14 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		BookmarksFolder folder = BookmarksFolderUtil.findByPrimaryKey(folderId);
 
-		exportParentFolder(context, foldersEl, folder.getParentFolderId());
+		exportParentFolder(context, foldersElement, folder.getParentFolderId());
 
 		String path = getFolderPath(context, folder);
 
 		if (context.isPathNotProcessed(path)) {
-			Element folderEl = foldersEl.addElement("folder");
+			Element folderElement = foldersElement.addElement("folder");
 
-			folderEl.addAttribute("path", path);
+			folderElement.addAttribute("path", path);
 
 			folder.setUserUuid(folder.getUserUuid());
 
@@ -324,13 +323,16 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		return sb.toString();
 	}
 
-	protected void importEntry(
-			PortletDataContext context, Map<Long, Long> folderPKs,
-			BookmarksEntry entry)
+	protected void importEntry(PortletDataContext context, BookmarksEntry entry)
 		throws Exception {
 
 		long userId = context.getUserId(entry.getUserUuid());
 		long groupId = context.getGroupId();
+
+		Map<Long, Long> folderPKs =
+			(Map<Long, Long>)context.getNewPrimaryKeysMap(
+				BookmarksFolder.class);
+
 		long folderId = MapUtil.getLong(
 			folderPKs, entry.getFolderId(), entry.getFolderId());
 
@@ -364,7 +366,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 			BookmarksFolder folder =
 				(BookmarksFolder)context.getZipEntryAsObject(path);
 
-			importFolder(context, folderPKs, folder);
+			importFolder(context, folder);
 
 			folderId = MapUtil.getLong(
 				folderPKs, entry.getFolderId(), entry.getFolderId());
@@ -416,11 +418,15 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected void importFolder(
-			PortletDataContext context, Map<Long, Long> folderPKs,
-			BookmarksFolder folder)
+			PortletDataContext context, BookmarksFolder folder)
 		throws Exception {
 
 		long userId = context.getUserId(folder.getUserUuid());
+
+		Map<Long, Long> folderPKs =
+			(Map<Long, Long>)context.getNewPrimaryKeysMap(
+				BookmarksFolder.class);
+
 		long parentFolderId = MapUtil.getLong(
 			folderPKs, folder.getParentFolderId(), folder.getParentFolderId());
 
@@ -441,7 +447,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 			BookmarksFolder parentFolder =
 				(BookmarksFolder)context.getZipEntryAsObject(path);
 
-			importFolder(context, folderPKs, parentFolder);
+			importFolder(context, parentFolder);
 
 			parentFolderId = MapUtil.getLong(
 				folderPKs, folder.getParentFolderId(),
