@@ -415,7 +415,7 @@ if (portletDisplay.isModeEdit()) {
 	urlEdit.setPortletMode(PortletMode.VIEW);
 }
 else {
-	if (portlet.isMaximizeEdit()) {
+	if (portlet.isMaximizeEdit() || portletDisplay.isStateMax()) {
 		urlEdit.setWindowState(WindowState.MAXIMIZED);
 	}
 	else {
