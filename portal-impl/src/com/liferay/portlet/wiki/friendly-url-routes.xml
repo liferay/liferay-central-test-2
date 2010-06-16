@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<!DOCTYPE routes PUBLIC "-//Liferay//DTD Friendly URL Routes 6.0.0//EN" "http://www.liferay.com/dtd/liferay-friendly-url-routes_6_0_0.dtd">
+<routes>
+	<route>
+		<pattern>/tag/{tag}</pattern>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/wiki/view_tagged_pages</default-parameter>
+		<ignored-parameter name="nodeId" />
+		<ignored-parameter name="nodeName" />
+	</route>
+	<route>
+		<pattern>/{\d+:nodeId}/all_pages</pattern>
+		<default-parameter name="nodeName"></default-parameter>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/wiki/view_all_pages</default-parameter>
+		<default-parameter name="tag"></default-parameter>
+	</route>
+	<route>
+		<pattern>/{\d+:nodeId}/draft_pages</pattern>
+		<default-parameter name="nodeName"></default-parameter>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/wiki/view_draft_pages</default-parameter>
+		<default-parameter name="tag"></default-parameter>
+	</route>
+	<route>
+		<pattern>/{\d+:nodeId}/orphan_pages</pattern>
+		<default-parameter name="nodeName"></default-parameter>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/wiki/view_orphan_pages</default-parameter>
+		<default-parameter name="tag"></default-parameter>
+	</route>
+	<route>
+		<pattern>/{\d+:nodeId}/recent_changes</pattern>
+		<default-parameter name="nodeName"></default-parameter>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/wiki/view_recent_changes</default-parameter>
+		<default-parameter name="tag"></default-parameter>
+	</route>
+	<route>
+		<pattern>/{nodeName}/all_pages</pattern>
+		<default-parameter name="nodeId"></default-parameter>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/wiki/view_all_pages</default-parameter>
+		<default-parameter name="tag"></default-parameter>
+	</route>
+	<route>
+		<pattern>/{nodeName}/draft_pages</pattern>
+		<default-parameter name="nodeId"></default-parameter>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/wiki/view_draft_pages</default-parameter>
+		<default-parameter name="tag"></default-parameter>
+	</route>
+	<route>
+		<pattern>/{nodeName}/orphan_pages</pattern>
+		<default-parameter name="nodeId"></default-parameter>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/wiki/view_orphan_pages</default-parameter>
+		<default-parameter name="tag"></default-parameter>
+	</route>
+	<route>
+		<pattern>/{nodeName}/recent_changes</pattern>
+		<default-parameter name="nodeId"></default-parameter>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/wiki/view_recent_changes</default-parameter>
+		<default-parameter name="tag"></default-parameter>
+	</route>
+	<route>
+		<pattern>/{\d+:nodeId}/{[^/]+:title}</pattern>
+		<default-parameter name="nodeName"></default-parameter>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/wiki/view</default-parameter>
+		<default-parameter name="tag"></default-parameter>
+	</route>
+	<route>
+		<pattern>/{nodeName}/{[^/]+:title}</pattern>
+		<default-parameter name="nodeId"></default-parameter>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/wiki/view</default-parameter>
+		<default-parameter name="tag"></default-parameter>
+	</route>
+	<route>
+		<pattern>/tag/{tag}/{p_p_state}</pattern>
+		<default-parameter name="struts_action">/wiki/view_tagged_pages</default-parameter>
+		<ignored-parameter name="nodeId" />
+		<ignored-parameter name="nodeName" />
+	</route>
+	<route>
+		<pattern>/{\d+:nodeId}/all_pages/{p_p_state}</pattern>
+		<default-parameter name="nodeName"></default-parameter>
+		<default-parameter name="struts_action">/wiki/view_all_pages</default-parameter>
+		<default-parameter name="tag"></default-parameter>
+	</route>
+	<route>
+		<pattern>/{\d+:nodeId}/draft_pages/{p_p_state}</pattern>
+		<default-parameter name="nodeName"></default-parameter>
+		<default-parameter name="struts_action">/wiki/view_draft_pages</default-parameter>
+		<default-parameter name="tag"></default-parameter>
+	</route>
+	<route>
+		<pattern>/{\d+:nodeId}/orphan_pages/{p_p_state}</pattern>
+		<default-parameter name="nodeName"></default-parameter>
+		<default-parameter name="struts_action">/wiki/view_orphan_pages</default-parameter>
+		<default-parameter name="tag"></default-parameter>
+	</route>
+	<route>
+		<pattern>/{\d+:nodeId}/recent_changes/{p_p_state}</pattern>
+		<default-parameter name="nodeName"></default-parameter>
+		<default-parameter name="struts_action">/wiki/view_recent_changes</default-parameter>
+		<default-parameter name="tag"></default-parameter>
+	</route>
+	<route>
+		<pattern>/{nodeName}/all_pages/{p_p_state}</pattern>
+		<default-parameter name="nodeId"></default-parameter>
+		<default-parameter name="struts_action">/wiki/view_all_pages</default-parameter>
+		<default-parameter name="tag"></default-parameter>
+	</route>
+	<route>
+		<pattern>/{nodeName}/draft_pages/{p_p_state}</pattern>
+		<default-parameter name="nodeId"></default-parameter>
+		<default-parameter name="struts_action">/wiki/view_draft_pages</default-parameter>
+		<default-parameter name="tag"></default-parameter>
+	</route>
+	<route>
+		<pattern>/{nodeName}/orphan_pages/{p_p_state}</pattern>
+		<default-parameter name="nodeId"></default-parameter>
+		<default-parameter name="struts_action">/wiki/view_orphan_pages</default-parameter>
+		<default-parameter name="tag"></default-parameter>
+	</route>
+	<route>
+		<pattern>/{nodeName}/recent_changes/{p_p_state}</pattern>
+		<default-parameter name="nodeId"></default-parameter>
+		<default-parameter name="struts_action">/wiki/view_recent_changes</default-parameter>
+		<default-parameter name="tag"></default-parameter>
+	</route>
+	<route>
+		<pattern>/{\d+:nodeId}/{[^/]+:title}/{p_p_state}</pattern>
+		<default-parameter name="nodeName"></default-parameter>
+		<default-parameter name="struts_action">/wiki/view</default-parameter>
+		<default-parameter name="tag"></default-parameter>
+	</route>
+	<route>
+		<pattern>/{nodeName}/{[^/]+:title}/{p_p_state}</pattern>
+		<default-parameter name="nodeId"></default-parameter>
+		<default-parameter name="struts_action">/wiki/view</default-parameter>
+		<default-parameter name="tag"></default-parameter>
+	</route>
+</routes>

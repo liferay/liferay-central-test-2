@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE routes PUBLIC "-//Liferay//DTD Friendly URL Routes 6.0.0//EN" "http://www.liferay.com/dtd/liferay-friendly-url-routes_6_0_0.dtd">
+<routes>
+	<route>
+		<pattern>/</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/blogs/view</default-parameter>
+	</route>
+	<route>
+		<pattern>/rss</pattern>
+		<default-parameter name="p_p_lifecycle">1</default-parameter>
+		<default-parameter name="p_p_state">exclusive</default-parameter>
+		<default-parameter name="struts_action">/blogs/rss</default-parameter>
+	</route>
+	<route>
+		<pattern>/trackback/{\d+:entryId}</pattern>
+		<default-parameter name="p_p_lifecycle">1</default-parameter>
+		<default-parameter name="p_p_state">exclusive</default-parameter>
+		<default-parameter name="struts_action">/blogs/trackback</default-parameter>
+	</route>
+	<route>
+		<pattern>/trackback/{urlTitle}</pattern>
+		<default-parameter name="p_p_lifecycle">1</default-parameter>
+		<default-parameter name="p_p_state">exclusive</default-parameter>
+		<default-parameter name="struts_action">/blogs/trackback</default-parameter>
+	</route>
+	<route>
+		<pattern>/{\d+:entryId}</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/blogs/view_entry</default-parameter>
+	</route>
+	<route>
+		<pattern>/{urlTitle}</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/blogs/view_entry</default-parameter>
+	</route>
+	<route>
+		<pattern>/{p_p_state}</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="struts_action">/blogs/view</default-parameter>
+	</route>
+	<route>
+		<pattern>/rss/{p_p_state}</pattern>
+		<default-parameter name="p_p_lifecycle">1</default-parameter>
+		<default-parameter name="struts_action">/blogs/rss</default-parameter>
+	</route>
+	<route>
+		<pattern>/trackback/{\d+:entryId}/{p_p_state}</pattern>
+		<default-parameter name="p_p_lifecycle">1</default-parameter>
+		<default-parameter name="struts_action">/blogs/trackback</default-parameter>
+	</route>
+	<route>
+		<pattern>/trackback/{urlTitle}/{p_p_state}</pattern>
+		<default-parameter name="p_p_lifecycle">1</default-parameter>
+		<default-parameter name="struts_action">/blogs/trackback</default-parameter>
+	</route>
+	<route>
+		<pattern>/{\d+:entryId}/{p_p_state}</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="struts_action">/blogs/view_entry</default-parameter>
+	</route>
+	<route>
+		<pattern>/{urlTitle}/{p_p_state}</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="struts_action">/blogs/view_entry</default-parameter>
+	</route>
+</routes>
