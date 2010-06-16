@@ -143,7 +143,7 @@
 			>
 
 				<%
-				List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogsByWorkflowInstance(company.getCompanyId(), workflowTask.getWorkflowTaskId(), 0, 1, WorkflowComparatorFactoryUtil.getLogCreateDateComparator());
+				List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogsByWorkflowInstance(company.getCompanyId(), workflowTask.getWorkflowInstanceId(), 0, 1, WorkflowComparatorFactoryUtil.getLogCreateDateComparator());
 
 				if (workflowLogs.isEmpty()) {
 					buffer.append(LanguageUtil.get(pageContext, "never"));
