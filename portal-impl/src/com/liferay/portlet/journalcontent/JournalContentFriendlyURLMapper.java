@@ -91,6 +91,10 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 		return _MAPPING;
 	}
 
+	public String getPortletId() {
+		return _PORTLET_ID;
+	}
+
 	public Router getRouter() {
 		return router;
 	}
@@ -162,6 +166,12 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 		parameterMap.put(
 			namespace + "struts_action",
 			new String[] {"/journal_content/view"});
+	}
+
+	public void setMapping(String mapping) {
+	}
+
+	public void setPortletId(String portletId) {
 	}
 
 	public void setRouter(Router router) {

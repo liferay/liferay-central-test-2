@@ -311,6 +311,14 @@ public class PortletWrapper implements Portlet {
 		return _portlet.getFriendlyURLMapperInstance();
 	}
 
+	public java.lang.String getFriendlyURLMapping() {
+		return _portlet.getFriendlyURLMapping();
+	}
+
+	public void setFriendlyURLMapping(java.lang.String friendlyURLMapping) {
+		_portlet.setFriendlyURLMapping(friendlyURLMapping);
+	}
+
 	public java.lang.String getFriendlyURLRoutes() {
 		return _portlet.getFriendlyURLRoutes();
 	}

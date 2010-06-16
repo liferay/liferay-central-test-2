@@ -132,10 +132,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		String configurationActionClass, String indexerClass,
 		String openSearchClass, List<SchedulerEntry> schedulerEntries,
 		String portletURLClass, String friendlyURLMapperClass,
-		String friendlyURLRoutes, String urlEncoderClass,
-		String portletDataHandlerClass, String portletLayoutListenerClass,
-		String pollerProcessorClass, String popMessageListenerClass,
-		String socialActivityInterpreterClass,
+		String friendlyURLMapping, String friendlyURLRoutes,
+		String urlEncoderClass, String portletDataHandlerClass,
+		String portletLayoutListenerClass, String pollerProcessorClass,
+		String popMessageListenerClass, String socialActivityInterpreterClass,
 		String socialRequestInterpreterClass, String webDAVStorageToken,
 		String webDAVStorageClass, String xmlRpcMethodClass,
 		String controlPanelEntryCategory, double controlPanelEntryWeight,
@@ -184,6 +184,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_schedulerEntries = schedulerEntries;
 		_portletURLClass = portletURLClass;
 		_friendlyURLMapperClass = friendlyURLMapperClass;
+		_friendlyURLMapping = friendlyURLMapping;
 		_friendlyURLRoutes = friendlyURLRoutes;
 		_urlEncoderClass = urlEncoderClass;
 		_portletDataHandlerClass = portletDataHandlerClass;
@@ -617,7 +618,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * Sets the name of the friendly URL mapper class of the portlet.
 	 *
-	 * @param friendlyURLMapperClass the name of the friendly URL plugin class
+	 * @param friendlyURLMapperClass the name of the friendly URL mapper class
 	 *		  of the portlet
 	 */
 	public void setFriendlyURLMapperClass(String friendlyURLMapperClass) {
@@ -637,6 +638,25 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
 		return portletBag.getFriendlyURLMapperInstance();
+	}
+
+	/**
+	 * Gets the name of the friendly URL mapping of the portlet.
+	 *
+	 * @return the name of the friendly URL mapping of the portlet
+	 */
+	public String getFriendlyURLMapping() {
+		return _friendlyURLMapping;
+	}
+
+	/**
+	 * Sets the name of the friendly URL mapping of the portlet.
+	 *
+	 * @param friendlyURLMapping the name of the friendly URL mapping of the
+	 *		  portlet
+	 */
+	public void setFriendlyURLMapping(String friendlyURLMapping) {
+		_friendlyURLMapping = friendlyURLMapping;
 	}
 
 	/**
@@ -2884,10 +2904,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getStrutsPath(), getPortletName(), getDisplayName(),
 			getPortletClass(), getConfigurationActionClass(), getIndexerClass(),
 			getOpenSearchClass(), getSchedulerEntries(), getPortletURLClass(),
-			getFriendlyURLMapperClass(), getFriendlyURLRoutes(),
-			getURLEncoderClass(), getPortletDataHandlerClass(),
-			getPortletLayoutListenerClass(), getPollerProcessorClass(),
-			getPopMessageListenerClass(), getSocialActivityInterpreterClass(),
+			getFriendlyURLMapperClass(), getFriendlyURLMapping(),
+			getFriendlyURLRoutes(), getURLEncoderClass(),
+			getPortletDataHandlerClass(), getPortletLayoutListenerClass(),
+			getPollerProcessorClass(), getPopMessageListenerClass(),
+			getSocialActivityInterpreterClass(),
 			getSocialRequestInterpreterClass(), getWebDAVStorageToken(),
 			getWebDAVStorageClass(), getXmlRpcMethodClass(),
 			getControlPanelEntryCategory(), getControlPanelEntryWeight(),
@@ -3023,6 +3044,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * The name of the friendly URL mapper class of the portlet.
 	 */
 	private String _friendlyURLMapperClass;
+
+	/**
+	 * The name of the friendly URL mapping of the portlet.
+	 */
+	private String _friendlyURLMapping;
 
 	/**
 	 * The the class loader resource path to the friendly URL routes of the

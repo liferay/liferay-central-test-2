@@ -1102,6 +1102,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			_friendlyURLMapperPortlets.put(portletId, portletModel);
 		}
 
+		portletModel.setFriendlyURLMapping(
+			GetterUtil.getString(
+				portletElement.elementText("friendly-url-mapping"),
+				portletModel.getFriendlyURLMapping()));
 		portletModel.setFriendlyURLRoutes(
 			GetterUtil.getString(
 				portletElement.elementText("friendly-url-routes"),

@@ -28,7 +28,13 @@ import java.util.Map;
  */
 public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 
-	public abstract String getPortletId();
+	public String getMapping() {
+		return _mapping;
+	}
+
+	public String getPortletId() {
+		return _portletId;
+	}
 
 	public Router getRouter() {
 		return router;
@@ -36,6 +42,14 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 
 	public boolean isCheckMappingWithPrefix() {
 		return _CHECK_MAPPING_WITH_PREFIX;
+	}
+
+	public void setMapping(String mapping) {
+		_mapping = mapping;
+	}
+
+	public void setPortletId(String portletId) {
+		_portletId = portletId;
 	}
 
 	public void setRouter(Router router) {
@@ -174,5 +188,8 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 
 	private static Log _log = LogFactoryUtil.getLog(
 		BaseFriendlyURLMapper.class);
+
+	private String _mapping;
+	private String _portletId;
 
 }

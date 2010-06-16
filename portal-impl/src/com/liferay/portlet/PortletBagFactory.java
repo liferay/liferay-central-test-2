@@ -469,6 +469,9 @@ public class PortletBagFactory {
 		FriendlyURLMapper friendlyURLMapper = (FriendlyURLMapper)newInstance(
 			FriendlyURLMapper.class, portlet.getFriendlyURLMapperClass());
 
+		friendlyURLMapper.setMapping(portlet.getFriendlyURLMapping());
+		friendlyURLMapper.setPortletId(portlet.getPortletId());
+
 		Router router = newFriendlyURLRouter(portlet);
 
 		friendlyURLMapper.setRouter(router);

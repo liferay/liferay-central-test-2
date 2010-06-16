@@ -58,6 +58,10 @@ public class WAIFriendlyURLMapper implements FriendlyURLMapper {
 		return _MAPPING;
 	}
 
+	public String getPortletId() {
+		return _portletId;
+	}
+
 	public Router getRouter() {
 		return router;
 	}
@@ -104,6 +108,13 @@ public class WAIFriendlyURLMapper implements FriendlyURLMapper {
 		parameterMap.put(namespace + "appURL", new String[] {path});
 	}
 
+	public void setMapping(String mapping) {
+	}
+
+	public void setPortletId(String portletId) {
+		_portletId = portletId;
+	}
+
 	public void setRouter(Router router) {
 		this.router = router;
 	}
@@ -130,5 +141,7 @@ public class WAIFriendlyURLMapper implements FriendlyURLMapper {
 	};
 
 	protected Router router;
+
+	private String _portletId;
 
 }

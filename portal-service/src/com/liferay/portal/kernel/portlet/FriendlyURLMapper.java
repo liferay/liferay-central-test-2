@@ -29,6 +29,8 @@ public interface FriendlyURLMapper {
 
 	public String getMapping();
 
+	public String getPortletId();
+
 	public Router getRouter();
 
 	public boolean isCheckMappingWithPrefix();
@@ -36,6 +38,10 @@ public interface FriendlyURLMapper {
 	public void populateParams(
 		String friendlyURLPath, Map<String, String[]> parameterMap,
 		Map<String, Object> requestContext);
+
+	public void setPortletId(String portletId);
+
+	public void setMapping(String mapping);
 
 	public void setRouter(Router router);
 

@@ -306,7 +306,7 @@ public interface Portlet extends PortletModel {
 	/**
 	* Sets the name of the friendly URL mapper class of the portlet.
 	*
-	* @param friendlyURLMapperClass the name of the friendly URL plugin class
+	* @param friendlyURLMapperClass the name of the friendly URL mapper class
 	of the portlet
 	*/
 	public void setFriendlyURLMapperClass(
@@ -318,6 +318,21 @@ public interface Portlet extends PortletModel {
 	* @return the friendly URL mapper instance of the portlet
 	*/
 	public com.liferay.portal.kernel.portlet.FriendlyURLMapper getFriendlyURLMapperInstance();
+
+	/**
+	* Gets the name of the friendly URL mapping of the portlet.
+	*
+	* @return the name of the friendly URL mapping of the portlet
+	*/
+	public java.lang.String getFriendlyURLMapping();
+
+	/**
+	* Sets the name of the friendly URL mapping of the portlet.
+	*
+	* @param friendlyURLMapping the name of the friendly URL mapping of the
+	portlet
+	*/
+	public void setFriendlyURLMapping(java.lang.String friendlyURLMapping);
 
 	/**
 	* Gets the class loader resource path to the friendly URL routes of the

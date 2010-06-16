@@ -2793,6 +2793,7 @@
 			<transient name="footerPortletCss" />
 			<transient name="footerPortletJavaScript" />
 			<transient name="friendlyURLMapperClass" />
+			<transient name="friendlyURLMapping" />
 			<transient name="friendlyURLRoutes" />
 			<transient name="headerPortalCss" />
 			<transient name="headerPortalJavaScript" />
