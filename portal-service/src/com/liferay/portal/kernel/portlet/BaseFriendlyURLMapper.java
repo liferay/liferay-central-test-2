@@ -44,12 +44,20 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 		return _CHECK_MAPPING_WITH_PREFIX;
 	}
 
+	public boolean isPortletInstanceable() {
+		return _portletInstanceable;
+	}
+
 	public void setMapping(String mapping) {
 		_mapping = mapping;
 	}
 
 	public void setPortletId(String portletId) {
 		_portletId = portletId;
+	}
+
+	public void setPortletInstanceable(boolean portletInstanceable) {
+		_portletInstanceable = portletInstanceable;
 	}
 
 	public void setRouter(Router router) {
@@ -191,5 +199,6 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 
 	private String _mapping;
 	private String _portletId;
+	private boolean _portletInstanceable;
 
 }

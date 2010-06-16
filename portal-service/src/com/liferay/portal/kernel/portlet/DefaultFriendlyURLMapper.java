@@ -63,6 +63,22 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 		return friendlyURLPath;
 	}
 
+	protected String getLifecycle(LiferayPortletURL portletURL) {
+		String lifecycle = portletURL.getLifecycle();
+
+		if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
+			return "1";
+		}
+		else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
+			return "0";
+		}
+		else if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+			return "2";
+		}
+
+		return null;
+	}
+
 	public void populateParams(
 		String friendlyURLPath, Map<String, String[]> parameterMap,
 		Map<String, Object> requestContext) {
@@ -97,22 +113,6 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 			addParameter(parameterMap, name, value);
 		}
-	}
-
-	protected String getLifecycle(LiferayPortletURL portletURL) {
-		String lifecycle = portletURL.getLifecycle();
-
-		if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
-			return "1";
-		}
-		else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
-			return "0";
-		}
-		else if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-			return "2";
-		}
-
-		return null;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

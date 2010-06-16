@@ -103,6 +103,10 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 		return _CHECK_MAPPING_WITH_PREFIX;
 	}
 
+	public boolean isPortletInstanceable() {
+		return true;
+	}
+
 	public void populateParams(
 		String friendlyURLPath, Map<String, String[]> parameterMap,
 		Map<String, Object> requestContext) {
@@ -172,6 +176,9 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 	}
 
 	public void setPortletId(String portletId) {
+	}
+
+	public void setPortletInstanceable(boolean portletInstanceable) {
 	}
 
 	public void setRouter(Router router) {

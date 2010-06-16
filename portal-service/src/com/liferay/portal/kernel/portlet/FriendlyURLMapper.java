@@ -35,11 +35,15 @@ public interface FriendlyURLMapper {
 
 	public boolean isCheckMappingWithPrefix();
 
+	public boolean isPortletInstanceable();
+
 	public void populateParams(
 		String friendlyURLPath, Map<String, String[]> parameterMap,
 		Map<String, Object> requestContext);
 
 	public void setPortletId(String portletId);
+
+	public void setPortletInstanceable(boolean portletInstanceable);
 
 	public void setMapping(String mapping);
 

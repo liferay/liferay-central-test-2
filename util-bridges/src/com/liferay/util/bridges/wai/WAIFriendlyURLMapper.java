@@ -70,6 +70,10 @@ public class WAIFriendlyURLMapper implements FriendlyURLMapper {
 		return _CHECK_MAPPING_WITH_PREFIX;
 	}
 
+	public boolean isPortletInstanceable() {
+		return false;
+	}
+
 	public void populateParams(
 		String friendlyURLPath, Map<String, String[]> parameterMap,
 		Map<String, Object> requestContext) {
@@ -113,6 +117,9 @@ public class WAIFriendlyURLMapper implements FriendlyURLMapper {
 
 	public void setPortletId(String portletId) {
 		_portletId = portletId;
+	}
+
+	public void setPortletInstanceable(boolean portletInstanceable) {
 	}
 
 	public void setRouter(Router router) {
