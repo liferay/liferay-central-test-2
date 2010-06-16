@@ -14,6 +14,7 @@
 
 package com.liferay.portal.language;
 
+import com.liferay.portal.kernel.cache.key.CacheKeyGenerator;
 import com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil;
 import com.liferay.portal.kernel.util.ConcurrentHashSet;
 import com.liferay.portal.kernel.util.StringPool;
@@ -63,8 +64,15 @@ public class LanguageResources {
 	}
 
 	private String _getCacheKey(Locale locale, String key) {
-		return String.valueOf(locale).concat(StringPool.POUND).concat(
-			CacheKeyGeneratorUtil.getCacheKey(getClass().getName(), key));
+		CacheKeyGenerator cacheKeyGenerator =
+			CacheKeyGeneratorUtil.getCacheKeyGenerator(
+				LanguageResources.class.getName());
+
+		cacheKeyGenerator.append(String.valueOf(locale));
+		cacheKeyGenerator.append(StringPool.POUND);
+		cacheKeyGenerator.append(key);
+
+		return cacheKeyGenerator.finish();
 	}
 
 	private String _getMessage(Locale locale, String key) {
