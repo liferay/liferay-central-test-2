@@ -600,7 +600,7 @@ public class JournalArticleFinderImpl
 			articles = JournalArticleUtil.findByG_A(groupId, articleId, 0, 1);
 		}
 		else {
-			articles = JournalArticleUtil.findByG_A_S(
+			articles = JournalArticleUtil.findByG_A_ST(
 				groupId, articleId, status, 0, 1);
 		}
 

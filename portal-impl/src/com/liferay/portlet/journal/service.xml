@@ -66,7 +66,7 @@
 		<finder name="SmallImageId" return-type="Collection">
 			<finder-column name="smallImageId" />
 		</finder>
-		<finder name="R_S" return-type="Collection">
+		<finder name="R_ST" return-type="Collection">
 			<finder-column name="resourcePrimKey" />
 			<finder-column name="status" />
 		</finder>
@@ -90,7 +90,7 @@
 			<finder-column name="groupId" />
 			<finder-column name="status" />
 		</finder>
-		<finder name="C_S" return-type="Collection">
+		<finder name="C_ST" return-type="Collection">
 			<finder-column name="companyId" />
 			<finder-column name="status" />
 		</finder>
@@ -99,12 +99,12 @@
 			<finder-column name="articleId" />
 			<finder-column name="version" />
 		</finder>
-		<finder name="G_A_S" return-type="Collection">
+		<finder name="G_A_ST" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="articleId" />
 			<finder-column name="status" />
 		</finder>
-		<finder name="G_UT_S" return-type="Collection">
+		<finder name="G_UT_ST" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="urlTitle" />
 			<finder-column name="status" />

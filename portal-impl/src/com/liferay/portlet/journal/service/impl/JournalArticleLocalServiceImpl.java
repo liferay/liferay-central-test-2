@@ -1178,7 +1178,7 @@ public class JournalArticleLocalServiceImpl
 				companyId, start, end, new ArticleIDComparator(true));
 		}
 		else {
-			return journalArticlePersistence.findByC_S(
+			return journalArticlePersistence.findByC_ST(
 				companyId, status, start, end, new ArticleIDComparator(true));
 		}
 	}
@@ -1190,7 +1190,7 @@ public class JournalArticleLocalServiceImpl
 			return journalArticlePersistence.countByCompanyId(companyId);
 		}
 		else {
-			return journalArticlePersistence.countByC_S(companyId, status);
+			return journalArticlePersistence.countByC_ST(companyId, status);
 		}
 	}
 
@@ -1235,18 +1235,18 @@ public class JournalArticleLocalServiceImpl
 		OrderByComparator orderByComparator = new ArticleVersionComparator();
 
 		if (status == WorkflowConstants.STATUS_ANY) {
-			articles = journalArticlePersistence.findByR_S(
+			articles = journalArticlePersistence.findByR_ST(
 				resourcePrimKey, WorkflowConstants.STATUS_APPROVED, 0, 1,
 				orderByComparator);
 
 			if (articles.size() == 0) {
-				articles = journalArticlePersistence.findByR_S(
+				articles = journalArticlePersistence.findByR_ST(
 					resourcePrimKey, WorkflowConstants.STATUS_PENDING, 0, 1,
 					orderByComparator);
 			}
 		}
 		else {
-			articles = journalArticlePersistence.findByR_S(
+			articles = journalArticlePersistence.findByR_ST(
 				resourcePrimKey, status, 0, 1, orderByComparator);
 		}
 
@@ -1277,7 +1277,7 @@ public class JournalArticleLocalServiceImpl
 				groupId, articleId, 0, 1, orderByComparator);
 		}
 		else {
-			articles = journalArticlePersistence.findByG_A_S(
+			articles = journalArticlePersistence.findByG_A_ST(
 				groupId, articleId, status, 0, 1, orderByComparator);
 		}
 
@@ -1301,7 +1301,7 @@ public class JournalArticleLocalServiceImpl
 				groupId, urlTitle, 0, 1, orderByComparator);
 		}
 		else {
-			articles = journalArticlePersistence.findByG_UT_S(
+			articles = journalArticlePersistence.findByG_UT_ST(
 				groupId, urlTitle, status, 0, 1, orderByComparator);
 		}
 
@@ -1825,7 +1825,7 @@ public class JournalArticleLocalServiceImpl
 			(article.getVersion() != JournalArticleConstants.DEFAULT_VERSION)) {
 
 			int approvedArticlesCount =
-				journalArticlePersistence.countByG_A_S(
+				journalArticlePersistence.countByG_A_ST(
 					article.getGroupId(), article.getArticleId(),
 					WorkflowConstants.STATUS_APPROVED);
 
@@ -2396,7 +2396,7 @@ public class JournalArticleLocalServiceImpl
 
 		Date[] dateInterval = new Date[2];
 
-		List<JournalArticle> articles = journalArticlePersistence.findByG_A_S(
+		List<JournalArticle> articles = journalArticlePersistence.findByG_A_ST(
 			groupId, articleId, WorkflowConstants.STATUS_APPROVED);
 
 		boolean expiringArticle = true;
@@ -2825,7 +2825,7 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		List<JournalArticle> approvedArticles =
-			journalArticlePersistence.findByG_A_S(
+			journalArticlePersistence.findByG_A_ST(
 				article.getGroupId(), article.getArticleId(),
 				WorkflowConstants.STATUS_APPROVED, 0, 2);
 
