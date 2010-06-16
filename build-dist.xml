@@ -566,6 +566,11 @@ release was successful.</echo>
 			/>
 		</unzip>
 
+		<replace file="${app.server.parent.dir}/jboss-5.1.0/server/web/conf/jboss-service.xml">
+			<replacetoken><![CDATA[<attribute name="Port">-1</attribute>]]></replacetoken>
+			<replacevalue><![CDATA[<attribute name="Port"><value-factory bean="ServiceBindingManager" method="getIntBinding"><parameter>jboss:service=Naming</parameter><parameter>Port</parameter></value-factory></attribute>]]></replacevalue>
+		</replace>
+
 		<move file="${app.server.parent.dir}/jboss-5.1.0/server/web" tofile="${app.server.parent.dir}/jboss-5.1.0/server/default" />
 	</target>
 
