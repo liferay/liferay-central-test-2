@@ -149,16 +149,15 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 					}
 
 					String checkboxFieldName = null;
-					String checkboxFieldId = null;
 
 					if (roleName.equals(RoleConstants.GUEST)) {
 						checkboxFieldName = namespace + "guestPermissions";
-						checkboxFieldId = checkboxFieldName + StringPool.UNDERLINE + action;
 					}
 					else {
 						checkboxFieldName = namespace + "communityPermissions";
-						checkboxFieldId = checkboxFieldName + StringPool.UNDERLINE + action;
 					}
+
+					String checkboxFieldId = checkboxFieldName + StringPool.UNDERLINE + action;
 				%>
 
 					<td style="text-align: center;" <%= (action.equals(ActionKeys.VIEW)) ? "class=\"aui-helper-hidden-accessible\"" : "" %>>
