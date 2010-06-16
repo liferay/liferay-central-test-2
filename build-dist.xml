@@ -24,9 +24,8 @@
 
 		<echo file="app.server.${user.name}.properties">app.server.type=glassfish
 
-app.server.glassfish.version=3
-app.server.glassfish.zip.name=glassfish-v3-prelude.zip
-app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/release/$${app.server.glassfish.zip.name}</echo>
+app.server.glassfish.zip.name=glassfish-v3-web.zip
+app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app.server.glassfish.zip.name}</echo>
 
 		<ant target="deploy" inheritAll="false" />
 
