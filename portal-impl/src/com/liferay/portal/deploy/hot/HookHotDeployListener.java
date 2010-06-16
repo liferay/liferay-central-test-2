@@ -86,6 +86,8 @@ import com.liferay.portal.service.ReleaseLocalServiceUtil;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.servlet.filters.autologin.AutoLoginFilter;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
+import com.liferay.portal.struts.MultiMessageResources;
+import com.liferay.portal.struts.MultiMessageResourcesFactory;
 import com.liferay.portal.upgrade.UpgradeProcessUtil;
 import com.liferay.portal.util.JavaScriptBundleUtil;
 import com.liferay.portal.util.PortalInstances;
@@ -493,19 +495,10 @@ public class HookHotDeployListener
 
 				is.close();
 
-				Map<String, String> languageMap = new HashMap<String, String>();
+				String localeKey = getLocaleKey(languagePropertiesLocation);
 
-				for (Map.Entry<Object, Object> entry : properties.entrySet()) {
-					String key = (String)entry.getKey();
-					String value = (String)entry.getValue();
-
-					languageMap.put(key, value);
-				}
-
-				Locale locale = getLocale(languagePropertiesLocation);
-
-				if (locale != null) {
-					languagesContainer.addLanguage(locale, languageMap);
+				if (localeKey != null) {
+					languagesContainer.addLanguage(localeKey, properties);
 				}
 			}
 			catch (Exception e) {
@@ -776,21 +769,23 @@ public class HookHotDeployListener
 		}
 	}
 
-	protected Locale getLocale(String languagePropertiesLocation) {
+	protected String getLocaleKey(String languagePropertiesLocation) {
 		int x = languagePropertiesLocation.indexOf(StringPool.UNDERLINE);
 		int y = languagePropertiesLocation.indexOf(".properties");
-
-		Locale locale = null;
 
 		if ((x != -1) && (y != 1)) {
 			String localeKey = languagePropertiesLocation.substring(x + 1, y);
 
-			locale = LocaleUtil.fromLanguageId(localeKey);
+			Locale locale = LocaleUtil.fromLanguageId(localeKey);
 
 			locale = LanguageUtil.getLocale(locale.getLanguage());
+
+			if (locale != null) {
+				return locale.toString();
+			}
 		}
 
-		return locale;
+		return null;
 	}
 
 	protected BasePersistence<?> getPersistence(String modelName) {
@@ -1894,28 +1889,31 @@ public class HookHotDeployListener
 
 	private class LanguagesContainer {
 
-		public void addLanguage(
-			Locale locale, Map<String, String> languageMap) {
+		public void addLanguage(String localeKey, Properties properties) {
+			_multiMessageResources.putLocale(localeKey);
 
-			Map<String, String> oldLanguageMap =
-				LanguageResources.putLanguageMap(locale, languageMap);
+			Properties oldProperties = _multiMessageResources.putMessages(
+				properties, localeKey);
 
-			_languagesMap.put(locale, oldLanguageMap);
+			_languagesMap.put(localeKey, oldProperties);
+
+			LanguageResources.clearCache();
 		}
 
 		public void unregisterLanguages() {
-			for (Map.Entry<Locale, Map<String, String>> entry :
-					_languagesMap.entrySet()) {
+			for (String key : _languagesMap.keySet()) {
+				Properties properties = _languagesMap.get(key);
 
-				Locale locale = entry.getKey();
-				Map<String, String> languageMap = entry.getValue();
-
-				LanguageResources.putLanguageMap(locale, languageMap);
+				_multiMessageResources.putMessages(properties, key);
 			}
+
+			LanguageResources.clearCache();
 		}
 
-		private Map<Locale, Map<String, String>> _languagesMap =
-			new HashMap<Locale, Map<String, String>>();
+		private Map<String, Properties> _languagesMap =
+			new HashMap<String, Properties>();
+		private MultiMessageResources _multiMessageResources =
+			MultiMessageResourcesFactory.getInstance();
 
 	}
 

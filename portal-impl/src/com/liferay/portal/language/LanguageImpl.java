@@ -506,7 +506,22 @@ public class LanguageImpl implements Language {
 		}
 
 		if ((value == null) || value.equals(defaultValue)) {
-			value = LanguageResources.getMessage(locale, key);
+			if (LanguageResources.isInitializing()) {
+
+				// LEP-4505
+
+				ResourceBundle resourceBundle = ResourceBundle.getBundle(
+					"content/Language", locale);
+
+				try {
+					value = resourceBundle.getString(key);
+				}
+				catch (MissingResourceException mre) {
+				}
+			}
+			else {
+				value = LanguageResources.getMessage(locale, key);
+			}
 		}
 
 		if ((value == null) || value.equals(defaultValue)) {

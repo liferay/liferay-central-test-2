@@ -118,9 +118,6 @@
 			<bean class="com.liferay.portal.json.JSONFactoryImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.language.LanguageResources" class="com.liferay.portal.language.LanguageResources">
-		<property name="config" value="content.Language,content.Language-ext" />
-	</bean>
 	<bean id="com.liferay.portal.kernel.language.LanguageUtil" class="com.liferay.portal.kernel.language.LanguageUtil">
 		<property name="language">
 			<bean class="com.liferay.portal.language.LanguageImpl" />

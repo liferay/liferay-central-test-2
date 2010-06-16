@@ -48,6 +48,7 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.language.LanguageResources;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
@@ -71,6 +72,7 @@ import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.servlet.filters.i18n.I18nFilter;
+import com.liferay.portal.struts.MultiMessageResources;
 import com.liferay.portal.struts.PortletRequestProcessor;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.util.ContentUtil;
@@ -341,6 +343,13 @@ public class MainServlet extends ActionServlet {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Initialize message resources");
+		}
+
+		try {
+			initMessageResources();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -779,6 +788,16 @@ public class MainServlet extends ActionServlet {
 
 		LayoutTemplateLocalServiceUtil.init(
 			servletContext, xmls, pluginPackage);
+	}
+
+	protected void initMessageResources() throws Exception {
+		ServletContext servletContext = getServletContext();
+
+		MultiMessageResources messageResources =
+			(MultiMessageResources)servletContext.getAttribute(
+				Globals.MESSAGES_KEY);
+
+		LanguageResources.init(messageResources);
 	}
 
 	protected PluginPackage initPluginPackage() throws Exception {

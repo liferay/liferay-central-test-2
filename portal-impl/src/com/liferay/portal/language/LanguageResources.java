@@ -14,159 +14,91 @@
 
 package com.liferay.portal.language;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil;
+import com.liferay.portal.kernel.util.ConcurrentHashSet;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 
-import java.io.InputStream;
-
-import java.net.URL;
-
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
+import org.apache.struts.util.MessageResources;
 
 /**
  * <a href="LanguageResources.java.html"><b><i>View Source</i></b></a>
  *
- * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
 public class LanguageResources {
 
+	public static void clearCache() {
+		_instance._clearCache();
+	}
+
 	public static String getMessage(Locale locale, String key) {
-		if (locale == null) {
-			return null;
-		}
+		return _instance._getMessage(locale, key);
+	}
 
-		Map<String, String> languageMap = _languageMaps.get(locale);
+	public static void init(MessageResources messageResources) {
+		_instance._init(messageResources);
+	}
 
-		if (languageMap == null) {
-			languageMap = loadLocale(locale);
-		}
-
-		String value = languageMap.get(key);
-
-		if (value == null) {
-			return getMessage(getSuperLocale(locale), key);
+	public static boolean isInitializing() {
+		if (_instance._messageResources == null) {
+			return true;
 		}
 		else {
-			return value;
+			return false;
 		}
 	}
 
-	public static Map<String, String> putLanguageMap(
-		Locale locale, Map<String, String> languageMap) {
-
-		return _languageMaps.put(locale, languageMap);
+	private LanguageResources() {
+		_cacheValues = new ConcurrentHashMap<String, String>(10000);
+		_nullCacheKeys = new ConcurrentHashSet<String>(10000);
 	}
 
-	public void setConfig(String config) {
-		_config = config;
+	private void _clearCache() {
+		_cacheValues.clear();
 	}
 
-	private static Locale getSuperLocale(Locale locale) {
-		if (Validator.isNotNull(locale.getVariant())) {
-			return new Locale(locale.getLanguage(), locale.getCountry());
-		}
-
-		if (Validator.isNotNull(locale.getCountry())) {
-			return new Locale(locale.getLanguage());
-		}
-
-		if (Validator.isNotNull(locale.getLanguage())) {
-			return new Locale(StringPool.BLANK);
-		}
-
-		return null;
+	private String _getCacheKey(Locale locale, String key) {
+		return String.valueOf(locale).concat(StringPool.POUND).concat(
+			CacheKeyGeneratorUtil.getCacheKey(getClass().getName(), key));
 	}
 
-	private static Map<String, String> loadLocale(Locale locale) {
-		String[] names = StringUtil.split(
-			_config.replace(StringPool.PERIOD, StringPool.SLASH));
+	private String _getMessage(Locale locale, String key) {
+		String cacheKey = _getCacheKey(locale, key);
 
-		Map<String, String> languageMap = null;
+		String cacheValue = _cacheValues.get(cacheKey);
 
-		if (names.length > 0) {
-			String localeName = locale.toString();
-
-			languageMap = new HashMap<String, String>();
-
-			for (String name : names) {
-				StringBundler sb = new StringBundler(4);
-
-				sb.append(name);
-
-				if (localeName.length() > 0) {
-					sb.append(StringPool.UNDERLINE);
-					sb.append(localeName);
-				}
-
-				sb.append(".properties");
-
-				Properties properties = loadProperties(sb.toString());
-
-				for (Map.Entry<Object, Object> entry : properties.entrySet()) {
-					String key = (String)entry.getKey();
-					String value = (String)entry.getValue();
-
-					languageMap.put(key, value);
-				}
-			}
-		}
-		else {
-			languageMap = Collections.EMPTY_MAP;
-		}
-
-		_languageMaps.put(locale, languageMap);
-
-		return languageMap;
-	}
-
-	private static Properties loadProperties(String name) {
-		Properties properties = new Properties();
-
-		try {
-			ClassLoader classLoader = LanguageResources.class.getClassLoader();
-
-			URL url = classLoader.getResource(name);
-
-			if (_log.isInfoEnabled()) {
-				_log.info("Attempting to load " + name);
+		if (cacheValue == null) {
+			if (_nullCacheKeys.contains(cacheKey)) {
+				return null;
 			}
 
-			if (url != null) {
-				InputStream inputStream = url.openStream();
+			cacheValue = _messageResources.getMessage(locale, key);
 
-				properties.load(inputStream);
+			if (cacheValue == null) {
+				_nullCacheKeys.add(cacheKey);
 
-				inputStream.close();
-
-				if (_log.isInfoEnabled()) {
-					_log.info(
-						"Loading " + url + " with " + properties.size() +
-							" values");
-				}
+				return null;
 			}
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e, e);
-			}
+
+			_cacheValues.put(cacheKey, cacheValue);
 		}
 
-		return properties;
+		return cacheValue;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(LanguageResources.class);
+	private void _init(MessageResources messageResources) {
+		_messageResources = messageResources;
+	}
 
-	private static String _config;
-	private static Map<Locale, Map<String, String>> _languageMaps =
-		new ConcurrentHashMap<Locale, Map<String, String>>(64);
+	private static LanguageResources _instance = new LanguageResources();
+
+	private Map<String, String> _cacheValues;
+	private Set<String> _nullCacheKeys;
+	private MessageResources _messageResources;
 
 }
