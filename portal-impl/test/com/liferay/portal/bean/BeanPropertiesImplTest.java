@@ -64,6 +64,43 @@ public class BeanPropertiesImplTest extends BaseTestCase {
 		assertFalse(value);
 	}
 
+	public void testByte() {
+		Foo foo = new Foo();
+
+		assertEquals(0, foo.getByte());
+
+		BeanPropertiesUtil.setProperty(foo, "byte", Byte.valueOf((byte) 17));
+
+		assertEquals(17, foo.getByte());
+
+		byte value = BeanPropertiesUtil.getByte(foo, "byte", (byte) -1);
+
+		assertEquals(17, value);
+
+		value = BeanPropertiesUtil.getByte(foo, _NONEXISTENT, (byte) -1);
+
+		assertEquals(-1, value);
+	}
+
+	public void testByteObject() {
+		Foo foo = new Foo();
+
+		assertNull(foo.getByteObject());
+
+		BeanPropertiesUtil.setProperty(
+			foo, "byteObject", Byte.valueOf((byte) 13));
+
+		assertEquals(13, foo.getByteObject().byteValue());
+
+		byte value = BeanPropertiesUtil.getByte(foo, "byteObject", (byte) -1);
+
+		assertEquals(13, value);
+
+		value = BeanPropertiesUtil.getByte(foo, _NONEXISTENT, (byte) -1);
+
+		assertEquals(-1, value);
+	}
+
 	public void testCopyEditabileProperties() {
 		Foo foo = _createPopulatedFoo();
 		Foo dest = new Foo();
@@ -182,6 +219,43 @@ public class BeanPropertiesImplTest extends BaseTestCase {
 		value = BeanPropertiesUtil.getDouble(foo, _NONEXISTENT, -1.1);
 
 		assertEquals(-1.1, value, 0.0001);
+	}
+
+	public void testFloat() {
+		Foo foo = new Foo();
+
+		assertEquals(0.0F, foo.getFloat(), 0.001);
+
+		BeanPropertiesUtil.setProperty(foo, "float", Float.valueOf(17.3F));
+
+		assertEquals(17.3F, foo.getFloat(), 0.0001);
+
+		float value = BeanPropertiesUtil.getFloat(foo, "float", -1F);
+
+		assertEquals(17.3F, value, 0.0001);
+
+		value = BeanPropertiesUtil.getFloat(foo, _NONEXISTENT, -1.1F);
+
+		assertEquals(-1.1F, value, 0.0001);
+	}
+
+	public void testFloatObject() {
+		Foo foo = new Foo();
+
+		assertNull(foo.getFloatObject());
+
+		BeanPropertiesUtil.setProperty(
+			foo, "floatObject", Float.valueOf(17.3F));
+
+		assertEquals(17.3F, foo.getFloatObject().floatValue(), 0.0001);
+
+		float value = BeanPropertiesUtil.getFloat(foo, "floatObject", -1F);
+
+		assertEquals(17.3F, value, 0.0001);
+
+		value = BeanPropertiesUtil.getFloat(foo, _NONEXISTENT, -1.1F);
+
+		assertEquals(-1.1F, value, 0.0001);
 	}
 
 	public void testInt() {
@@ -331,6 +405,44 @@ public class BeanPropertiesImplTest extends BaseTestCase {
 		BeanPropertiesUtil.setProperty(foo, _NONEXISTENT, new Object());
 	}
 
+	public void testShort() {
+		Foo foo = new Foo();
+
+		assertEquals(0, foo.getShort());
+
+		BeanPropertiesUtil.setProperty(foo, "short", Short.valueOf((short) 173));
+
+		assertEquals(173, foo.getShort());
+
+		short value = BeanPropertiesUtil.getShort(foo, "short", (short) -1);
+
+		assertEquals(173, value);
+
+		value = BeanPropertiesUtil.getShort(foo, _NONEXISTENT, (short) -1);
+
+		assertEquals(-1, value);
+	}
+
+	public void testShortObject() {
+		Foo foo = new Foo();
+
+		assertNull(foo.getShortObject());
+
+		BeanPropertiesUtil.setProperty(
+			foo, "shortObject", Short.valueOf((short) 13));
+
+		assertEquals(13, foo.getShortObject().shortValue());
+
+		short value = BeanPropertiesUtil.getShort(
+			foo, "shortObject", (short) -1);
+
+		assertEquals(13, value);
+
+		value = BeanPropertiesUtil.getShort(foo, _NONEXISTENT, (short) -1);
+
+		assertEquals(-1, value);
+	}
+
 	public void testString() {
 		Foo foo = new Foo();
 
@@ -379,6 +491,7 @@ public class BeanPropertiesImplTest extends BaseTestCase {
 		foo.setDouble(37.1);
 		foo.setFloat(3.7f);
 		foo.setInt(173);
+		foo.setShort((short) 173);
 		foo.setInteger(Integer.valueOf(1730));
 		foo.setLong(1773L);
 		foo.setString("test");

@@ -81,6 +81,35 @@ public class BeanPropertiesImpl implements BeanProperties {
 		}
 	}
 
+	public byte getByte(Object bean, String param) {
+		return getByte(bean, param, GetterUtil.DEFAULT_BYTE);
+	}
+
+	public byte getByte(Object bean, String param, byte defaultValue) {
+		Byte beanValue = null;
+
+		if (bean != null) {
+			try {
+				beanValue = (Byte)PropertyUtils.getProperty(bean, param);
+			}
+			catch (NoSuchMethodException nsme) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsme.getMessage());
+				}
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (beanValue == null) {
+			return defaultValue;
+		}
+		else {
+			return beanValue.byteValue();
+		}
+	}
+
 	public double getDouble(Object bean, String param) {
 		return getDouble(bean, param, GetterUtil.DEFAULT_DOUBLE);
 	}
@@ -107,6 +136,35 @@ public class BeanPropertiesImpl implements BeanProperties {
 		}
 		else {
 			return beanValue.doubleValue();
+		}
+	}
+
+	public float getFloat(Object bean, String param) {
+		return getFloat(bean, param, GetterUtil.DEFAULT_FLOAT);
+	}
+
+	public float getFloat(Object bean, String param, float defaultValue) {
+		Float beanValue = null;
+
+		if (bean != null) {
+			try {
+				beanValue = (Float)PropertyUtils.getProperty(bean, param);
+			}
+			catch (NoSuchMethodException nsme) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsme.getMessage());
+				}
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (beanValue == null) {
+			return defaultValue;
+		}
+		else {
+			return beanValue.floatValue();
 		}
 	}
 
@@ -194,6 +252,35 @@ public class BeanPropertiesImpl implements BeanProperties {
 		}
 		else {
 			return beanValue;
+		}
+	}
+
+	public short getShort(Object bean, String param) {
+		return getShort(bean, param, GetterUtil.DEFAULT_SHORT);
+	}
+
+	public short getShort(Object bean, String param, short defaultValue) {
+		Short beanValue = null;
+
+		if (bean != null) {
+			try {
+				beanValue = (Short)PropertyUtils.getProperty(bean, param);
+			}
+			catch (NoSuchMethodException nsme) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsme.getMessage());
+				}
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (beanValue == null) {
+			return defaultValue;
+		}
+		else {
+			return beanValue.shortValue();
 		}
 	}
 

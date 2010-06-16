@@ -33,6 +33,8 @@ public class GetterUtil {
 
 	public static final boolean[] DEFAULT_BOOLEAN_VALUES = new boolean[0];
 
+	public static final byte DEFAULT_BYTE = 0;
+
 	public static final Date[] DEFAULT_DATE_VALUES = new Date[0];
 
 	public static final double DEFAULT_DOUBLE = 0.0;

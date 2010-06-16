@@ -29,13 +29,11 @@ public class BeanPropertiesUtil {
 
 	public static void copyProperties(
 		Object source, Object target, Class<?> editable) {
-
 		getBeanProperties().copyProperties(source, target, editable);
 	}
 
 	public static void copyProperties(
 		Object source, Object target, String[] ignoreProperties) {
-
 		getBeanProperties().copyProperties(source, target, ignoreProperties);
 	}
 
@@ -49,8 +47,16 @@ public class BeanPropertiesUtil {
 
 	public static boolean getBoolean(
 		Object bean, String param, boolean defaultValue) {
-
 		return getBeanProperties().getBoolean(bean, param, defaultValue);
+	}
+
+	public static byte getByte(Object bean, String param) {
+		return getBeanProperties().getByte(bean, param);
+	}
+
+	public static byte getByte(
+		Object bean, String param, byte defaultValue) {
+		return getBeanProperties().getByte(bean, param, defaultValue);
 	}
 
 	public static double getDouble(Object bean, String param) {
@@ -59,8 +65,16 @@ public class BeanPropertiesUtil {
 
 	public static double getDouble(
 		Object bean, String param, double defaultValue) {
-
 		return getBeanProperties().getDouble(bean, param, defaultValue);
+	}
+
+	public static float getFloat(Object bean, String param) {
+		return getBeanProperties().getFloat(bean, param);
+	}
+
+	public static float getFloat(
+		Object bean, String param, float defaultValue) {
+		return getBeanProperties().getFloat(bean, param, defaultValue);
 	}
 
 	public static int getInteger(Object bean, String param) {
@@ -69,7 +83,6 @@ public class BeanPropertiesUtil {
 
 	public static int getInteger(
 		Object bean, String param, int defaultValue) {
-
 		return getBeanProperties().getInteger(bean, param, defaultValue);
 	}
 
@@ -79,7 +92,6 @@ public class BeanPropertiesUtil {
 
 	public static long getLong(
 		Object bean, String param, long defaultValue) {
-
 		return getBeanProperties().getLong(bean, param, defaultValue);
 	}
 
@@ -89,8 +101,16 @@ public class BeanPropertiesUtil {
 
 	public static Object getObject(
 		Object bean, String param, Object defaultValue) {
-
 		return getBeanProperties().getObject(bean, param, defaultValue);
+	}
+
+	public static short getShort(Object bean, String param) {
+		return getBeanProperties().getShort(bean, param);
+	}
+
+	public static short getShort(
+		Object bean, String param, short defaultValue) {
+		return getBeanProperties().getShort(bean, param, defaultValue);
 	}
 
 	public static String getString(Object bean, String param) {
@@ -99,8 +119,11 @@ public class BeanPropertiesUtil {
 
 	public static String getString(
 		Object bean, String param, String defaultValue) {
-
 		return getBeanProperties().getString(bean, param, defaultValue);
+	}
+
+	public void setBeanProperties(BeanProperties beanProperties) {
+		_beanProperties = beanProperties;
 	}
 
 	public static void setProperties(Object bean, HttpServletRequest request) {
@@ -109,10 +132,6 @@ public class BeanPropertiesUtil {
 
 	public static void setProperty(Object bean, String param, Object value) {
 		getBeanProperties().setProperty(bean, param, value);
-	}
-
-	public void setBeanProperties(BeanProperties beanProperties) {
-		_beanProperties = beanProperties;
 	}
 
 	private static BeanProperties _beanProperties;

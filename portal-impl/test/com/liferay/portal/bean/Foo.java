@@ -48,6 +48,9 @@ public class Foo extends FooBase {
 		if (_char != foo._char) {
 			return false;
 		}
+		if (_short != foo._short) {
+			return false;
+		}
 		if (Double.compare(foo._double, _double) != 0) {
 			return false;
 		}
@@ -61,6 +64,10 @@ public class Foo extends FooBase {
 		}
 		if (_byteObject != null ? !_byteObject.equals(foo._byteObject) :
 			foo._byteObject != null) {
+			return false;
+		}
+		if (_shortObject != null ? !_shortObject.equals(foo._shortObject) :
+			foo._shortObject != null) {
 			return false;
 		}
 		if (_doubleObject != null ? !_doubleObject.equals(foo._doubleObject) :
@@ -140,6 +147,14 @@ public class Foo extends FooBase {
 		return _map;
 	}
 
+	public short getShort() {
+		return _short;
+	}
+
+	public Short getShortObject() {
+		return _shortObject;
+	}
+
 	public String getString() {
 		return _string;
 	}
@@ -196,6 +211,14 @@ public class Foo extends FooBase {
 		this._map = map;
 	}
 
+	public void setShort(short s) {
+		_short = s;
+	}
+
+	public void setShortObject(Short shortObject) {
+		_shortObject = shortObject;
+	}
+
 	public void setString(String string) {
 		_string = string;
 	}
@@ -216,6 +239,8 @@ public class Foo extends FooBase {
 	private Float _floatObject;
 	private List<?> _list;
 	private Map<?, ?> _map;
+	private short _short;
+	private Short _shortObject;
 	private String _string;
 	private String[] _stringArray;
 

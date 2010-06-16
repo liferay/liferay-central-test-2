@@ -34,9 +34,17 @@ public interface BeanProperties {
 
 	public boolean getBoolean(Object bean, String param, boolean defaultValue);
 
+	public byte getByte(Object bean, String param);
+
+	public byte getByte(Object bean, String param, byte defaultValue);
+
 	public double getDouble(Object bean, String param);
 
 	public double getDouble(Object bean, String param, double defaultValue);
+
+	public float getFloat(Object bean, String param);
+
+	public float getFloat(Object bean, String param, float defaultValue);
 
 	public int getInteger(Object bean, String param);
 
@@ -49,6 +57,10 @@ public interface BeanProperties {
 	public Object getObject(Object bean, String param);
 
 	public Object getObject(Object bean, String param, Object defaultValue);
+
+	public short getShort(Object bean, String param);
+
+	public short getShort(Object bean, String param, short defaultValue);
 
 	public String getString(Object bean, String param);
 
