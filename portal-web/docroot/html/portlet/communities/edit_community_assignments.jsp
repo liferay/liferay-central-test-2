@@ -101,94 +101,34 @@ request.setAttribute("edit_community_assignments.jsp-portletURL", portletURL);
 
 <aui:script>
 	function <portlet:namespace />updateGroupOrganizations(assignmentsRedirect) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'group_organizations';
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "group_organizations";
 		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
-
-		Liferay.Util.listCheckedExcept(
-			document.<portlet:namespace />fm,
-			'<portlet:namespace />allRowIds',
-			function(addOrganizations) {
-				document.<portlet:namespace />fm.<portlet:namespace />addOrganizationIds.value = addOrganizations;
-
-				Liferay.Util.listUncheckedExcept(
-					document.<portlet:namespace />fm,
-					'<portlet:namespace />allRowIds',
-					function(removeOrganizations) {
-						document.<portlet:namespace />fm.<portlet:namespace />removeOrganizationIds.value = removeOrganizations;
-
-						submitForm(document.<portlet:namespace />fm, '<portlet:actionURL><portlet:param name="struts_action" value="/communities/edit_community_assignments" /></portlet:actionURL>');
-					}
-				);
-			}
-		);
+		document.<portlet:namespace />fm.<portlet:namespace />addOrganizationIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		document.<portlet:namespace />fm.<portlet:namespace />removeOrganizationIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/communities/edit_community_assignments" /></portlet:actionURL>");
 	}
 
 	function <portlet:namespace />updateGroupUserGroups(assignmentsRedirect) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'group_user_groups';
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "group_user_groups";
 		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
-
-		Liferay.Util.listCheckedExcept(
-			document.<portlet:namespace />fm,
-			'<portlet:namespace />allRowIds',
-			function(addGroups) {
-				document.<portlet:namespace />fm.<portlet:namespace />addUserGroupIds.value = addGroups;
-
-				Liferay.Util.listUncheckedExcept(
-					document.<portlet:namespace />fm,
-					'<portlet:namespace />allRowIds',
-					function(removeGroups) {
-						document.<portlet:namespace />fm.<portlet:namespace />removeUserGroupIds.value = removeGroups;
-
-						submitForm(document.<portlet:namespace />fm, '<portlet:actionURL><portlet:param name="struts_action" value="/communities/edit_community_assignments" /></portlet:actionURL>');
-					}
-				);
-			}
-		);
+		document.<portlet:namespace />fm.<portlet:namespace />addUserGroupIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		document.<portlet:namespace />fm.<portlet:namespace />removeUserGroupIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/communities/edit_community_assignments" /></portlet:actionURL>");
 	}
 
 	function <portlet:namespace />updateGroupUsers(assignmentsRedirect) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'group_users';
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "group_users";
 		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
-
-		Liferay.Util.listCheckedExcept(
-			document.<portlet:namespace />fm,
-			'<portlet:namespace />allRowIds',
-			function(addUsers) {
-				document.<portlet:namespace />fm.<portlet:namespace />addUserIds.value = addUsers;
-
-				Liferay.Util.listUncheckedExcept(
-					document.<portlet:namespace />fm,
-					'<portlet:namespace />allRowIds',
-					function(removeUsers) {
-						document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = removeUsers;
-
-						submitForm(document.<portlet:namespace />fm, '<portlet:actionURL><portlet:param name="struts_action" value="/communities/edit_community_assignments" /></portlet:actionURL>');
-					}
-				);
-			}
-		);
+		document.<portlet:namespace />fm.<portlet:namespace />addUserIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/communities/edit_community_assignments" /></portlet:actionURL>");
 	}
 
 	function <portlet:namespace />updateUserGroupRole(assignmentsRedirect) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'user_group_role';
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "user_group_role";
 		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
-
-		Liferay.Util.listCheckedExcept(
-			document.<portlet:namespace />fm,
-			'<portlet:namespace />allRowIds',
-			function(addRoles) {
-				document.<portlet:namespace />fm.<portlet:namespace />addRoleIds.value = addRoles;
-
-				Liferay.Util.listUncheckedExcept(
-					document.<portlet:namespace />fm,
-					'<portlet:namespace />allRowIds',
-					function(removeRoles) {
-						document.<portlet:namespace />fm.<portlet:namespace />removeRoleIds.value = removeRoles;
-
-						submitForm(document.<portlet:namespace />fm, '<portlet:actionURL><portlet:param name="struts_action" value="/communities/edit_community_assignments" /></portlet:actionURL>');
-					}
-				);
-			}
-		);
+		document.<portlet:namespace />fm.<portlet:namespace />addRoleIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		document.<portlet:namespace />fm.<portlet:namespace />removeRoleIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/communities/edit_community_assignments" /></portlet:actionURL>");
 	}
 </aui:script>

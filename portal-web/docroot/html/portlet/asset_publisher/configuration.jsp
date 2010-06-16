@@ -29,7 +29,7 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationActionURL" />
 <liferay-portlet:renderURL portletConfiguration="true" varImpl="configurationRenderURL" />
 
-<aui:form action="<%= configurationActionURL %>" method="post" name="fm" onSubmit="event.preventDefault();">
+<aui:form action="<%= configurationActionURL %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
 	<aui:input name="redirect" type="hidden" value="<%= configurationRenderURL.toString() %>" />
@@ -559,6 +559,20 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 		submitForm(document.<portlet:namespace />fm);
 	}
 
+	function <portlet:namespace />saveSelectBoxes() {
+		if (document.<portlet:namespace />fm.<portlet:namespace />scopeIds) {
+			document.<portlet:namespace />fm.<portlet:namespace />scopeIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentScopeIds);
+		}
+
+		if (document.<portlet:namespace />fm.<portlet:namespace />classNameIds) {
+			document.<portlet:namespace />fm.<portlet:namespace />classNameIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentClassNameIds);
+		}
+
+		document.<portlet:namespace />fm.<portlet:namespace />metadataFields.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentMetadataFields);
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
 	function <portlet:namespace />selectAsset(assetEntryId, assetParentId, assetTitle, assetEntryOrder) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'add-selection';
 		document.<portlet:namespace />fm.<portlet:namespace />assetEntryId.value = assetEntryId;
@@ -575,68 +589,6 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 
 		submitForm(document.<portlet:namespace />fm, '<%= configurationRenderURL.toString() %>');
 	}
-
-	Liferay.provide(
-		window,
-		'<portlet:namespace />saveSelectBoxes',
-		function() {
-			var A = AUI();
-
-			var queue = new Liferay.AsyncQueue();
-
-			if (document.<portlet:namespace />fm.<portlet:namespace />scopeIds) {
-				queue.addWithCallback(
-					{
-						fn: Liferay.Util.listSelect,
-						args: [
-							document.<portlet:namespace />fm.<portlet:namespace />currentScopeIds,
-							null,
-							function(values) {
-								document.<portlet:namespace />fm.<portlet:namespace />scopeIds.value = values;
-							}
-						]
-					}
-				);
-			}
-
-			if (document.<portlet:namespace />fm.<portlet:namespace />classNameIds) {
-				queue.addWithCallback(
-					{
-						fn: Liferay.Util.listSelect,
-						args: [
-							document.<portlet:namespace />fm.<portlet:namespace />currentClassNameIds,
-							null,
-							function(values) {
-								document.<portlet:namespace />fm.<portlet:namespace />classNameIds.value = values;
-							}
-						]
-					}
-				);
-			}
-
-			queue.addWithCallback(
-				{
-					fn: Liferay.Util.listSelect,
-					args: [
-						document.<portlet:namespace />fm.<portlet:namespace />currentMetadataFields,
-						null,
-						function(values) {
-							document.<portlet:namespace />fm.<portlet:namespace />metadataFields.value = values;
-						}
-					]
-				}
-			);
-
-			queue.add(
-				function() {
-					submitForm(document.<portlet:namespace />fm);
-				}
-			);
-
-			queue.run();
-		},
-		['liferay-async-queue']
-	);
 
 	Liferay.Util.toggleSelectBox('<portlet:namespace />anyAssetType','false','<portlet:namespace />classNamesBoxes');
 	Liferay.Util.toggleBoxes('<portlet:namespace />enableRSSCheckbox','<portlet:namespace />rssOptions');

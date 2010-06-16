@@ -273,6 +273,99 @@ Liferay.Util = {
 		return !!(window.Array && object.constructor == window.Array);
 	},
 
+	listChecked: function(form) {
+		var s = [];
+
+		form = AUI().one(form);
+
+		if (form) {
+			form.all('input[type=checkbox]').each(
+				function(item, index, collection) {
+					var val = item.val();
+
+					if (val && item.get('checked')) {
+						s.push(val);
+					}
+				}
+			);
+		}
+
+		return s.join(',');
+	},
+
+	listCheckedExcept: function(form, except) {
+		var s = [];
+
+		form = AUI().one(form);
+
+		if (form) {
+			form.all('input[type=checkbox]').each(
+				function(item, index, collection) {
+					var val = item.val();
+
+					if (val && item.get('name') != except && item.get('checked')) {
+						s.push(val);
+					}
+				}
+			);
+		}
+
+		return s.join(',');
+	},
+
+	listSelect: function(box, delimeter) {
+		var s = [];
+
+		delimeter = delimeter || ',';
+
+		if (box == null) {
+			return '';
+		}
+
+		var select = AUI().one(box);
+
+		if (select) {
+			var options = select.all('option');
+
+			options.each(
+				function(item, index, collection) {
+					var val = item.val();
+
+					if (val) {
+						s.push(val);
+					}
+				}
+			);
+		}
+
+		if (s[0] == '.none') {
+			return '';
+		}
+		else {
+			return s.join(delimeter);
+		}
+	},
+
+	listUncheckedExcept: function(form, except) {
+		var s = [];
+
+		form = AUI().one(form);
+
+		if (form) {
+			form.all('input[type=checkbox]').each(
+				function(item, index, collection) {
+					var val = item.val();
+
+					if (val && item.get('name') != except && !item.get('checked')) {
+						s.push(val);
+					}
+				}
+			);
+		}
+
+		return s.join(',');
+	},
+
 	processTab: function(id) {
 		document.all[id].selection.text = String.fromCharCode(9);
 		document.all[id].focus();
@@ -786,136 +879,6 @@ Liferay.provide(
 		}
 	},
 	['aui-dialog', 'aui-io']
-);
-
-Liferay.provide(
-	Liferay.Util,
-	'listChecked',
-	function(form, callback) {
-		var A = AUI();
-
-		var s = [];
-
-		form = A.one(form);
-
-		if (form) {
-			form.all('input[type=checkbox]').each(
-				function(item, index, collection) {
-					var val = item.val();
-
-					if (val && item.get('checked')) {
-						s.push(val);
-					}
-				}
-			);
-		}
-
-		if (callback) {
-			callback(s.join(','));
-		}
-	},
-	['aui-base']
-);
-
-Liferay.provide(
-	Liferay.Util,
-	'listCheckedExcept',
-	function(form, except, callback) {
-		var A = AUI();
-
-		var s = [];
-
-		form = A.one(form);
-
-		if (form) {
-			form.all('input[type=checkbox]').each(
-				function(item, index, collection) {
-					var val = item.val();
-
-					if (val && item.get('name') != except && item.get('checked')) {
-						s.push(val);
-					}
-				}
-			);
-		}
-
-		if (callback) {
-			callback(s.join(','));
-		}
-	},
-	['aui-base']
-);
-
-Liferay.provide(
-	Liferay.Util,
-	'listUncheckedExcept',
-	function(form, except, callback) {
-		var A = AUI();
-
-		var s = [];
-
-		form = A.one(form);
-
-		if (form) {
-			form.all('input[type=checkbox]').each(
-				function(item, index, collection) {
-					var val = item.val();
-
-					if (val && item.get('name') != except && !item.get('checked')) {
-						s.push(val);
-					}
-				}
-			);
-		}
-
-		if (callback) {
-			callback(s.join(','));
-		}
-	},
-	['aui-base']
-);
-
-Liferay.provide(
-	Liferay.Util,
-	'listSelect',
-	function(box, delimeter, callback) {
-		var A = AUI();
-
-		var s = [];
-
-		delimeter = delimeter || ',';
-
-		if (box == null) {
-			return '';
-		}
-
-		var select = A.one(box);
-
-		if (select) {
-			var options = select.all('option');
-
-			options.each(
-				function(item, index, collection) {
-					var val = item.val();
-
-					if (val) {
-						s.push(val);
-					}
-				}
-			);
-		}
-
-		var data = '';
-
-		if (s[0] != '.none') {
-			data = s.join(delimeter);
-		}
-
-		if (callback) {
-			callback(data);
-		}
-	},
-	['aui-base']
 );
 
 Liferay.provide(

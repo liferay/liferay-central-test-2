@@ -120,26 +120,11 @@ portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()
 
 <aui:script>
 	function <portlet:namespace />updateUserGroupUsers(assignmentsRedirect) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'user_group_users';
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "user_group_users";
 		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
-
-		Liferay.Util.listCheckedExcept(
-			document.<portlet:namespace />fm,
-			'<portlet:namespace />allRowIds',
-			function(addUsers) {
-				document.<portlet:namespace />fm.<portlet:namespace />addUserIds.value = addUsers;
-
-				Liferay.Util.listUncheckedExcept(
-					document.<portlet:namespace />fm,
-					'<portlet:namespace />allRowIds',
-					function(removeUsers) {
-						document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = removeUsers;
-
-						submitForm(document.<portlet:namespace />fm);
-					}
-				);
-			}
-		);
+		document.<portlet:namespace />fm.<portlet:namespace />addUserIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		submitForm(document.<portlet:namespace />fm);
 	}
 </aui:script>
 

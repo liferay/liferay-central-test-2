@@ -127,26 +127,11 @@ portletURL.setParameter("teamId", String.valueOf(team.getTeamId()));
 
 <aui:script>
 	function <portlet:namespace />updateTeamUsers(assignmentsRedirect) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'team_users';
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "team_users";
 		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
-
-		Liferay.Util.listCheckedExcept(
-			document.<portlet:namespace />fm,
-			'<portlet:namespace />allRowIds',
-			function(addUsers) {
-				document.<portlet:namespace />fm.<portlet:namespace />addUserIds.value = addUsers;
-
-				Liferay.Util.listUncheckedExcept(
-					document.<portlet:namespace />fm,
-					'<portlet:namespace />allRowIds',
-					function(removeUsers) {
-						document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = removeUsers;
-
-						submitForm(document.<portlet:namespace />fm);
-					}
-				);
-			}
-		);
+		document.<portlet:namespace />fm.<portlet:namespace />addUserIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		submitForm(document.<portlet:namespace />fm);
 	}
 </aui:script>
 
