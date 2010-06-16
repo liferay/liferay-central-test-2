@@ -28,8 +28,8 @@ portletURL.setParameter("assetOrder", String.valueOf(assetOrder));
 %>
 
 <liferay-ui:header
-	title="web-content"
 	backURL="<%= configurationRenderURL.toString() %>"
+	title="web-content"
 />
 
 <%

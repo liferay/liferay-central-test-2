@@ -17,8 +17,8 @@
 <%@ include file="/html/portlet/polls/init.jsp" %>
 
 <liferay-ui:header
-	title="error"
 	backURL="javascript:history.go(-1);"
+	title="error"
 />
 
 <liferay-ui:error exception="<%= NoSuchQuestionException.class %>" message="the-question-could-not-be-found" />

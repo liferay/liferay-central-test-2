@@ -34,7 +34,7 @@ portletURL.setParameter("typeSelection", typeSelection);
 
 <liferay-ui:header
 	backURL="<%= configurationRenderURL.toString() %>"
-	title='<%= LanguageUtil.get(pageContext, "select") + StringPool.COLON + StringPool.SPACE + ResourceActionsUtil.getModelResource(locale, typeSelection) %>'	
+	title='<%= LanguageUtil.get(pageContext, "select") + StringPool.COLON + StringPool.SPACE + ResourceActionsUtil.getModelResource(locale, typeSelection) %>'
 />
 
 <div class="asset-search">

@@ -17,8 +17,8 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <liferay-ui:header
-	title="error"
 	backURL="javascript:history.go(-1);"
+	title="error"
 />
 
 <liferay-ui:error exception="<%= NoSuchOrganizationException.class %>" message="the-organization-could-not-be-found" />

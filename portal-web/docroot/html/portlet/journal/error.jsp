@@ -17,8 +17,8 @@
 <%@ include file="/html/portlet/journal/init.jsp" %>
 
 <liferay-ui:header
-	title="error"
 	backURL="javascript:history.go(-1);"
+	title="error"
 />
 
 <liferay-ui:error exception="<%= NoSuchArticleException.class %>" message="the-web-content-could-not-be-found" />

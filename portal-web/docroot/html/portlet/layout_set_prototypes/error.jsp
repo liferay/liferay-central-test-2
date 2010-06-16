@@ -17,8 +17,8 @@
 <%@ include file="/html/portlet/layout_set_prototypes/init.jsp" %>
 
 <liferay-ui:header
-	title="error"
 	backURL="javascript:history.go(-1);"
+	title="error"
 />
 
 <liferay-ui:error exception="<%= NoSuchLayoutSetPrototypeException.class %>" message="the-page-template-could-not-be-found" />

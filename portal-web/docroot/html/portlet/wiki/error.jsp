@@ -17,8 +17,8 @@
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
 <liferay-ui:header
-	title="error"
 	backURL="javascript:history.go(-1);"
+	title="error"
 />
 
 <liferay-ui:error exception="<%= DuplicateFileException.class %>" message="please-enter-a-file-with-a-valid-file-name" />
