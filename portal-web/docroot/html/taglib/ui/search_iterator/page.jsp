@@ -259,12 +259,13 @@ List<String> primaryKeys = new ArrayList<String>();
 				else if ((j + 1) == entries.size()) {
 					columnClassName = " last";
 				}
-
-				boolean hasHeader = headerNames != null && headerNames.size() >= j + 1;
-				String headerHTML = "headers=\"" + randomId + "_col-" + (j + 1) + "\"";
 			%>
 
-				<td class="align-<%= entry.getAlign() %> col-<%= j + 1 %><%= row.isBold() ? " taglib-search-iterator-highlighted" : "" %><%= columnClassName %> valign-<%= entry.getValign() %>" colspan="<%= entry.getColspan() %>" <%= hasHeader ? headerHTML : StringPool.BLANK %>>
+				<td class="align-<%= entry.getAlign() %> col-<%= j + 1 %><%= row.isBold() ? " taglib-search-iterator-highlighted" : "" %><%= columnClassName %> valign-<%= entry.getValign() %>" colspan="<%= entry.getColspan() %>"
+					<c:if test="<%= (headerNames != null) && (headerNames.size() >= (j + 1)) %>">
+						headers="<%= randomId %>_col-<%= (j + 1) %>"
+					</c:if>
+				>
 
 					<%
 					entry.print(pageContext);
