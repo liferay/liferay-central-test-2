@@ -124,6 +124,20 @@ public class WikiNodeLocalServiceWrapper implements WikiNodeLocalService {
 		return _wikiNodeLocalService.updateWikiNode(wikiNode, merge);
 	}
 
+	public java.util.List<com.liferay.portlet.wiki.model.WikiNode> addDefaultNode(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _wikiNodeLocalService.addDefaultNode(groupId);
+	}
+
+	public com.liferay.portlet.wiki.model.WikiNode addDefaultNode(long userId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _wikiNodeLocalService.addDefaultNode(userId, serviceContext);
+	}
+
 	public com.liferay.portlet.wiki.model.WikiNode addNode(
 		java.lang.String uuid, long userId, java.lang.String name,
 		java.lang.String description,
@@ -212,13 +226,15 @@ public class WikiNodeLocalServiceWrapper implements WikiNodeLocalService {
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiNode> getNodes(
 		long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _wikiNodeLocalService.getNodes(groupId);
 	}
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiNode> getNodes(
 		long groupId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _wikiNodeLocalService.getNodes(groupId, start, end);
 	}
 
