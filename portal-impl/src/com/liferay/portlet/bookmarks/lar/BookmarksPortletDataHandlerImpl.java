@@ -66,7 +66,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 					BookmarksPortletDataHandlerImpl.class, "deleteData")) {
 
 				BookmarksFolderLocalServiceUtil.deleteFolders(
-					context.getGroupId());
+					context.getScopeGroupId());
 			}
 
 			return null;
@@ -83,27 +83,27 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		try {
 			context.addPermissions(
-				"com.liferay.portlet.bookmarks", context.getGroupId());
+				"com.liferay.portlet.bookmarks", context.getScopeGroupId());
 
 			Document document = SAXReaderUtil.createDocument();
 
 			Element rootElement = document.addElement("bookmarks-data");
 
 			rootElement.addAttribute(
-				"group-id", String.valueOf(context.getGroupId()));
+				"group-id", String.valueOf(context.getScopeGroupId()));
 
 			Element foldersElement = rootElement.addElement("folders");
 			Element entriesElement = rootElement.addElement("entries");
 
 			List<BookmarksFolder> folders = BookmarksFolderUtil.findByGroupId(
-				context.getGroupId());
+				context.getScopeGroupId());
 
 			for (BookmarksFolder folder : folders) {
 				exportFolder(context, foldersElement, entriesElement, folder);
 			}
 
 			List<BookmarksEntry> entries = BookmarksEntryUtil.findByG_F(
-				context.getGroupId(),
+				context.getScopeGroupId(),
 				BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 			for (BookmarksEntry entry : entries) {
@@ -137,7 +137,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		try {
 			context.importPermissions(
 				"com.liferay.portlet.bookmarks", context.getSourceGroupId(),
-				context.getGroupId());
+				context.getScopeGroupId());
 
 			Document document = SAXReaderUtil.read(data);
 
@@ -327,7 +327,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws Exception {
 
 		long userId = context.getUserId(entry.getUserUuid());
-		long groupId = context.getGroupId();
+		long groupId = context.getScopeGroupId();
 
 		Map<Long, Long> folderPKs =
 			(Map<Long, Long>)context.getNewPrimaryKeysMap(
@@ -468,7 +468,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				BookmarksFolder existingFolder =
 					BookmarksFolderUtil.fetchByUUID_G(
-						folder.getUuid(), context.getGroupId());
+						folder.getUuid(), context.getScopeGroupId());
 
 				if (existingFolder == null) {
 					importedFolder = BookmarksFolderLocalServiceUtil.addFolder(

@@ -916,7 +916,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		if (Validator.isNotNull(article.getStructureId())) {
 			JournalStructure structure = JournalStructureUtil.fetchByG_S(
-				context.getGroupId(), article.getStructureId());
+				context.getScopeGroupId(), article.getStructureId());
 
 			if (structure == null) {
 				String newStructureId = structureIds.get(
@@ -924,7 +924,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				if (Validator.isNotNull(newStructureId)) {
 					structure = JournalStructureUtil.fetchByG_S(
-						context.getGroupId(), String.valueOf(newStructureId));
+						context.getScopeGroupId(),
+						String.valueOf(newStructureId));
 				}
 
 				if (structure == null) {
@@ -947,14 +948,14 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		if (Validator.isNotNull(article.getTemplateId())) {
 			JournalTemplate template = JournalTemplateUtil.fetchByG_T(
-				context.getGroupId(), article.getTemplateId());
+				context.getScopeGroupId(), article.getTemplateId());
 
 			if (template == null) {
 				String newTemplateId = templateIds.get(article.getTemplateId());
 
 				if (Validator.isNotNull(newTemplateId)) {
 					template = JournalTemplateUtil.fetchByG_T(
-						context.getGroupId(), newTemplateId);
+						context.getScopeGroupId(), newTemplateId);
 				}
 
 				if (template == null) {
@@ -1211,7 +1212,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		JournalFeed feed = (JournalFeed)context.getZipEntryAsObject(path);
 
 		long userId = context.getUserId(feed.getUserUuid());
-		long groupId = context.getGroupId();
+		long groupId = context.getScopeGroupId();
 
 		String feedId = feed.getFeedId();
 		boolean autoFeedId = false;
@@ -1379,7 +1380,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			(JournalStructure)context.getZipEntryAsObject(path);
 
 		long userId = context.getUserId(structure.getUserUuid());
-		long groupId = context.getGroupId();
+		long groupId = context.getScopeGroupId();
 
 		String structureId = structure.getStructureId();
 		boolean autoStructureId = false;
@@ -1619,13 +1620,13 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					JournalPortletDataHandlerImpl.class, "deleteData")) {
 
 				JournalArticleLocalServiceUtil.deleteArticles(
-					context.getGroupId());
+					context.getScopeGroupId());
 
 				JournalTemplateLocalServiceUtil.deleteTemplates(
-					context.getGroupId());
+					context.getScopeGroupId());
 
 				JournalStructureLocalServiceUtil.deleteStructures(
-					context.getGroupId());
+					context.getScopeGroupId());
 			}
 
 			return preferences;
@@ -1731,7 +1732,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		try {
 			context.importPermissions(
 				"com.liferay.portlet.journal", context.getSourceGroupId(),
-				context.getGroupId());
+				context.getScopeGroupId());
 
 			Document doc = SAXReaderUtil.read(data);
 

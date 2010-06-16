@@ -145,7 +145,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setCreateDate(folder.getCreateDate());
 		serviceContext.setModifiedDate(folder.getModifiedDate());
-		serviceContext.setScopeGroupId(context.getGroupId());
+		serviceContext.setScopeGroupId(context.getScopeGroupId());
 
 		if ((parentFolderId != IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			(parentFolderId == folder.getParentFolderId())) {
@@ -172,11 +172,11 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
 				IGFolder existingFolder = IGFolderUtil.fetchByUUID_G(
-					folder.getUuid(), context.getGroupId());
+					folder.getUuid(), context.getScopeGroupId());
 
 				if (existingFolder == null) {
 					String name = getFolderName(
-						context.getCompanyId(), context.getGroupId(),
+						context.getCompanyId(), context.getScopeGroupId(),
 						parentFolderId, folder.getName(), 2);
 
 					importedFolder = IGFolderLocalServiceUtil.addFolder(
@@ -192,7 +192,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 			else {
 				String name = getFolderName(
-					context.getCompanyId(), context.getGroupId(),
+					context.getCompanyId(), context.getScopeGroupId(),
 					parentFolderId, folder.getName(), 2);
 
 				importedFolder = IGFolderLocalServiceUtil.addFolder(
@@ -234,7 +234,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws Exception {
 
 		long userId = context.getUserId(image.getUserUuid());
-		long groupId = context.getGroupId();
+		long groupId = context.getScopeGroupId();
 
 		Map<Long, Long> folderPKs =
 			(Map<Long, Long>)context.getNewPrimaryKeysMap(IGFolder.class);
@@ -372,7 +372,8 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (!context.addPrimaryKey(
 					IGPortletDataHandlerImpl.class, "deleteData")) {
 
-				IGFolderLocalServiceUtil.deleteFolders(context.getGroupId());
+				IGFolderLocalServiceUtil.deleteFolders(
+					context.getScopeGroupId());
 			}
 
 			return null;

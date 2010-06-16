@@ -103,7 +103,7 @@ public class JournalContentPortletDataHandlerImpl
 
 		try {
 			context.addPermissions(
-				"com.liferay.portlet.journal", context.getGroupId());
+				"com.liferay.portlet.journal", context.getScopeGroupId());
 
 			String articleId = preferences.getValue("article-id", null);
 
@@ -212,7 +212,7 @@ public class JournalContentPortletDataHandlerImpl
 		try {
 			context.importPermissions(
 				"com.liferay.portlet.journal", context.getSourceGroupId(),
-				context.getGroupId());
+				context.getScopeGroupId());
 
 			if (Validator.isNull(data)) {
 				return null;
@@ -314,14 +314,14 @@ public class JournalContentPortletDataHandlerImpl
 				articleId = MapUtil.getString(articleIds, articleId, articleId);
 
 				preferences.setValue(
-					"group-id", String.valueOf(context.getGroupId()));
+					"group-id", String.valueOf(context.getScopeGroupId()));
 				preferences.setValue("article-id", articleId);
 
 				Layout layout = LayoutLocalServiceUtil.getLayout(
 					context.getPlid());
 
 				JournalContentSearchLocalServiceUtil.updateContentSearch(
-					context.getGroupId(), layout.isPrivateLayout(),
+					context.getScopeGroupId(), layout.isPrivateLayout(),
 					layout.getLayoutId(), portletId, articleId, true);
 			}
 

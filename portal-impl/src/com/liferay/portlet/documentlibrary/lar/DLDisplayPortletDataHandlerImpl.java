@@ -74,7 +74,8 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		try {
 			context.addPermissions(
-				"com.liferay.portlet.documentlibrary", context.getGroupId());
+				"com.liferay.portlet.documentlibrary",
+				context.getScopeGroupId());
 
 			long rootFolderId = GetterUtil.getLong(
 				preferences.getValue("rootFolderId", null));
@@ -90,7 +91,7 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			if (rootFolderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 				List<DLFolder> folders = DLFolderUtil.findByGroupId(
-					context.getGroupId());
+					context.getScopeGroupId());
 
 				for (DLFolder folder : folders) {
 					DLPortletDataHandlerImpl.exportFolder(
@@ -136,7 +137,7 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		try {
 			context.importPermissions(
 				"com.liferay.portlet.documentlibrary",
-				context.getSourceGroupId(), context.getGroupId());
+				context.getSourceGroupId(), context.getScopeGroupId());
 
 			Document doc = SAXReaderUtil.read(data);
 

@@ -97,13 +97,14 @@ public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 
 			context.addPermissions(
-				"com.liferay.portlet.polls", context.getGroupId());
+				"com.liferay.portlet.polls", context.getScopeGroupId());
 
 			Document doc = SAXReaderUtil.createDocument();
 
 			Element root = doc.addElement("polls-display-data");
 
-			root.addAttribute("group-id", String.valueOf(context.getGroupId()));
+			root.addAttribute(
+				"group-id", String.valueOf(context.getScopeGroupId()));
 
 			Element questionsEl = root.addElement("questions");
 			Element choicesEl = root.addElement("choices");
@@ -135,7 +136,7 @@ public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		try {
 			context.importPermissions(
 				"com.liferay.portlet.polls", context.getSourceGroupId(),
-				context.getGroupId());
+				context.getScopeGroupId());
 
 			if (Validator.isNull(data)) {
 				return null;

@@ -58,7 +58,8 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (!context.addPrimaryKey(
 					BlogsPortletDataHandlerImpl.class, "deleteData")) {
 
-				BlogsEntryLocalServiceUtil.deleteEntries(context.getGroupId());
+				BlogsEntryLocalServiceUtil.deleteEntries(
+					context.getScopeGroupId());
 			}
 
 			return null;
@@ -75,17 +76,17 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		try {
 			context.addPermissions(
-				"com.liferay.portlet.blogs", context.getGroupId());
+				"com.liferay.portlet.blogs", context.getScopeGroupId());
 
 			Document document = SAXReaderUtil.createDocument();
 
 			Element rootElement = document.addElement("blogs-data");
 
 			rootElement.addAttribute(
-				"group-id", String.valueOf(context.getGroupId()));
+				"group-id", String.valueOf(context.getScopeGroupId()));
 
 			List<BlogsEntry> entries = BlogsEntryUtil.findByGroupId(
-				context.getGroupId());
+				context.getScopeGroupId());
 
 			for (BlogsEntry entry : entries) {
 				exportEntry(context, rootElement, entry);
@@ -118,7 +119,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		try {
 			context.importPermissions(
 				"com.liferay.portlet.blogs", context.getSourceGroupId(),
-				context.getGroupId());
+				context.getScopeGroupId());
 
 			Document document = SAXReaderUtil.read(data);
 
@@ -251,7 +252,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAssetTagNames(assetTagNames);
 		serviceContext.setCreateDate(entry.getCreateDate());
 		serviceContext.setModifiedDate(entry.getModifiedDate());
-		serviceContext.setScopeGroupId(context.getGroupId());
+		serviceContext.setScopeGroupId(context.getScopeGroupId());
 
 		if (status != WorkflowConstants.STATUS_APPROVED) {
 			serviceContext.setWorkflowAction(
@@ -264,7 +265,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
 			BlogsEntry existingEntry = BlogsEntryUtil.fetchByUUID_G(
-				entry.getUuid(), context.getGroupId());
+				entry.getUuid(), context.getScopeGroupId());
 
 			if (existingEntry == null) {
 				importedEntry = BlogsEntryLocalServiceUtil.addEntry(
@@ -297,7 +298,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
 			context.importComments(
 				BlogsEntry.class, entry.getEntryId(),
-				importedEntry.getEntryId(), context.getGroupId());
+				importedEntry.getEntryId(), context.getScopeGroupId());
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "ratings")) {

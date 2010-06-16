@@ -121,7 +121,7 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				PollsChoice existingChoice =
 					PollsChoiceFinderUtil.fetchByUUID_G(
-						choice.getUuid(), context.getGroupId());
+						choice.getUuid(), context.getScopeGroupId());
 
 				if (existingChoice == null) {
 					importedChoice = PollsChoiceLocalServiceUtil.addChoice(
@@ -200,7 +200,7 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
 			PollsQuestion existingQuestion =  PollsQuestionUtil.fetchByUUID_G(
-				question.getUuid(), context.getGroupId());
+				question.getUuid(), context.getScopeGroupId());
 
 			if (existingQuestion == null) {
 				importedQuestion = PollsQuestionLocalServiceUtil.addQuestion(
@@ -278,7 +278,7 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 					PollsPortletDataHandlerImpl.class, "deleteData")) {
 
 				PollsQuestionLocalServiceUtil.deleteQuestions(
-					context.getGroupId());
+					context.getScopeGroupId());
 			}
 
 			return null;
@@ -295,20 +295,21 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		try {
 			context.addPermissions(
-				"com.liferay.portlet.polls", context.getGroupId());
+				"com.liferay.portlet.polls", context.getScopeGroupId());
 
 			Document doc = SAXReaderUtil.createDocument();
 
 			Element root = doc.addElement("polls-data");
 
-			root.addAttribute("group-id", String.valueOf(context.getGroupId()));
+			root.addAttribute(
+				"group-id", String.valueOf(context.getScopeGroupId()));
 
 			Element questionsEl = root.addElement("questions");
 			Element choicesEl = root.addElement("choices");
 			Element votesEl = root.addElement("votes");
 
 			List<PollsQuestion> questions = PollsQuestionUtil.findByGroupId(
-				context.getGroupId());
+				context.getScopeGroupId());
 
 			for (PollsQuestion question : questions) {
 				exportQuestion(
@@ -338,7 +339,7 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 		try {
 			context.importPermissions(
 				"com.liferay.portlet.polls", context.getSourceGroupId(),
-				context.getGroupId());
+				context.getScopeGroupId());
 
 			Document doc = SAXReaderUtil.read(data);
 

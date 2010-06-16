@@ -111,13 +111,14 @@ public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 
 			context.addPermissions(
-				"com.liferay.portlet.wiki", context.getGroupId());
+				"com.liferay.portlet.wiki", context.getScopeGroupId());
 
 			Document doc = SAXReaderUtil.createDocument();
 
 			Element root = doc.addElement("wiki-display-data");
 
-			root.addAttribute("group-id", String.valueOf(context.getGroupId()));
+			root.addAttribute(
+				"group-id", String.valueOf(context.getScopeGroupId()));
 
 			Element nodesEl = root.addElement("nodes");
 			Element pagesEl = root.addElement("pages");
@@ -154,7 +155,7 @@ public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		try {
 			context.importPermissions(
 				"com.liferay.portlet.wiki", context.getSourceGroupId(),
-				context.getGroupId());
+				context.getScopeGroupId());
 
 			if (Validator.isNull(data)) {
 				return null;

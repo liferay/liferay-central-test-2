@@ -110,7 +110,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setCreateDate(node.getCreateDate());
 		serviceContext.setModifiedDate(node.getModifiedDate());
-		serviceContext.setScopeGroupId(context.getGroupId());
+		serviceContext.setScopeGroupId(context.getScopeGroupId());
 
 		WikiNode importedNode = null;
 
@@ -118,14 +118,14 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
 			WikiNode existingNode = WikiNodeUtil.fetchByUUID_G(
-				node.getUuid(), context.getGroupId());
+				node.getUuid(), context.getScopeGroupId());
 
 			String nodeName = PropsUtil.get(PropsKeys.WIKI_INITIAL_NODE_NAME);
 
 			if ((existingNode == null) && node.getName().equals(nodeName)) {
 				try {
 					WikiNodeUtil.removeByG_N(
-						context.getGroupId(), node.getName());
+						context.getScopeGroupId(), node.getName());
 				}
 				catch (NoSuchNodeException nsne) {
 				}
@@ -148,7 +148,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (node.getName().equals(nodeName)) {
 				try {
 					WikiNodeUtil.removeByG_N(
-						context.getGroupId(), node.getName());
+						context.getScopeGroupId(), node.getName());
 				}
 				catch (NoSuchNodeException nsne) {
 				}
@@ -214,7 +214,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
 				WikiPage existingPage = WikiPageUtil.fetchByUUID_G(
-					page.getUuid(), context.getGroupId());
+					page.getUuid(), context.getScopeGroupId());
 
 				if (existingPage == null) {
 					try {
@@ -279,7 +279,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				context.importComments(
 					WikiPage.class, page.getResourcePrimKey(),
-					importedPage.getResourcePrimKey(), context.getGroupId());
+					importedPage.getResourcePrimKey(), context.getScopeGroupId());
 			}
 
 			if (context.getBooleanParameter(_NAMESPACE, "ratings") &&
@@ -304,7 +304,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (!context.addPrimaryKey(
 					WikiPortletDataHandlerImpl.class, "deleteData")) {
 
-				WikiNodeLocalServiceUtil.deleteNodes(context.getGroupId());
+				WikiNodeLocalServiceUtil.deleteNodes(context.getScopeGroupId());
 			}
 
 			return null;
@@ -321,19 +321,20 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		try {
 			context.addPermissions(
-				"com.liferay.portlet.wiki", context.getGroupId());
+				"com.liferay.portlet.wiki", context.getScopeGroupId());
 
 			Document doc = SAXReaderUtil.createDocument();
 
 			Element root = doc.addElement("wiki-data");
 
-			root.addAttribute("group-id", String.valueOf(context.getGroupId()));
+			root.addAttribute(
+				"group-id", String.valueOf(context.getScopeGroupId()));
 
 			Element nodesEl = root.addElement("nodes");
 			Element pagesEl = root.addElement("pages");
 
 			List<WikiNode> nodes = WikiNodeUtil.findByGroupId(
-				context.getGroupId());
+				context.getScopeGroupId());
 
 			for (WikiNode node : nodes) {
 				exportNode(context, nodesEl, pagesEl, node);
@@ -370,7 +371,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		try {
 			context.importPermissions(
 				"com.liferay.portlet.wiki", context.getSourceGroupId(),
-				context.getGroupId());
+				context.getScopeGroupId());
 
 			Document doc = SAXReaderUtil.read(data);
 

@@ -80,7 +80,7 @@ public class PageCommentsPortletDataHandlerImpl extends BasePortletDataHandler {
 		try {
 			context.importComments(
 				Layout.class, GetterUtil.getLong(data), context.getPlid(),
-				context.getGroupId());
+				context.getScopeGroupId());
 
 			return null;
 		}

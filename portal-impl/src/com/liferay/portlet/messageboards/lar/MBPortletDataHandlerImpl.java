@@ -83,7 +83,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 					MBPortletDataHandlerImpl.class, "deleteData")) {
 
 				MBCategoryLocalServiceUtil.deleteCategories(
-					context.getGroupId());
+					context.getScopeGroupId());
 			}
 
 			return null;
@@ -100,13 +100,14 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		try {
 			context.addPermissions(
-				"com.liferay.portlet.messageboards", context.getGroupId());
+				"com.liferay.portlet.messageboards", context.getScopeGroupId());
 
 			Document doc = SAXReaderUtil.createDocument();
 
 			Element root = doc.addElement("message-boards-data");
 
-			root.addAttribute("group-id", String.valueOf(context.getGroupId()));
+			root.addAttribute(
+				"group-id", String.valueOf(context.getScopeGroupId()));
 
 			Element categoriesEl = root.addElement("categories");
 			Element messagesEl = root.addElement("messages");
@@ -114,7 +115,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			Element userBansEl = root.addElement("user-bans");
 
 			List<MBCategory> categories = MBCategoryUtil.findByGroupId(
-				context.getGroupId());
+				context.getScopeGroupId());
 
 			for (MBCategory category : categories) {
 				exportCategory(
@@ -123,7 +124,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 
 			List<MBMessage> messages = MBMessageUtil.findByG_C(
-				context.getGroupId(),
+				context.getScopeGroupId(),
 				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 
 			for (MBMessage message : messages) {
@@ -133,7 +134,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			if (context.getBooleanParameter(_NAMESPACE, "user-bans")) {
 				List<MBBan> bans = MBBanUtil.findByGroupId(
-					context.getGroupId());
+					context.getScopeGroupId());
 
 				for (MBBan ban : bans) {
 					exportUserBan(context, userBansEl, ban);
@@ -169,7 +170,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		try {
 			context.importPermissions(
 				"com.liferay.portlet.messageboards", context.getSourceGroupId(),
-				context.getGroupId());
+				context.getScopeGroupId());
 
 			Document doc = SAXReaderUtil.read(data);
 
@@ -455,7 +456,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		serviceContext.setCreateDate(ban.getCreateDate());
 		serviceContext.setModifiedDate(ban.getModifiedDate());
-		serviceContext.setScopeGroupId(context.getGroupId());
+		serviceContext.setScopeGroupId(context.getScopeGroupId());
 
 		List<User> users = UserUtil.findByUuid(ban.getBanUserUuid());
 
@@ -506,7 +507,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setCreateDate(category.getCreateDate());
 		serviceContext.setModifiedDate(category.getModifiedDate());
-		serviceContext.setScopeGroupId(context.getGroupId());
+		serviceContext.setScopeGroupId(context.getScopeGroupId());
 
 		if ((parentCategoryId !=
 				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
@@ -540,7 +541,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
 				MBCategory existingCategory = MBCategoryUtil.fetchByUUID_G(
-					category.getUuid(), context.getGroupId());
+					category.getUuid(), context.getScopeGroupId());
 
 				if (existingCategory == null) {
 					importedCategory = MBCategoryLocalServiceUtil.addCategory(
@@ -667,7 +668,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAssetTagNames(assetTagNames);
 		serviceContext.setCreateDate(message.getCreateDate());
 		serviceContext.setModifiedDate(message.getModifiedDate());
-		serviceContext.setScopeGroupId(context.getGroupId());
+		serviceContext.setScopeGroupId(context.getScopeGroupId());
 
 		if (message.getStatus() != WorkflowConstants.STATUS_APPROVED) {
 			serviceContext.setWorkflowAction(
@@ -709,12 +710,12 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
 				MBMessage existingMessage = MBMessageUtil.fetchByUUID_G(
-					message.getUuid(), context.getGroupId());
+					message.getUuid(), context.getScopeGroupId());
 
 				if (existingMessage == null) {
 					importedMessage = MBMessageLocalServiceUtil.addMessage(
 						message.getUuid(), userId, userName,
-						context.getGroupId(), categoryId, threadId,
+						context.getScopeGroupId(), categoryId, threadId,
 						parentMessageId, message.getSubject(),
 						message.getBody(), files, message.getAnonymous(),
 						message.getPriority(), message.getAllowPingbacks(),
@@ -730,7 +731,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 			else {
 				importedMessage = MBMessageLocalServiceUtil.addMessage(
-					userId, userName, context.getGroupId(), categoryId,
+					userId, userName, context.getScopeGroupId(), categoryId,
 					threadId, parentMessageId, message.getSubject(),
 					message.getBody(), files, message.getAnonymous(),
 					message.getPriority(), message.getAllowPingbacks(),

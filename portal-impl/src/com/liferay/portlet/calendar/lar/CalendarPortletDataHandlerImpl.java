@@ -57,7 +57,8 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (!context.addPrimaryKey(
 					CalendarPortletDataHandlerImpl.class, "deleteData")) {
 
-				CalEventLocalServiceUtil.deleteEvents(context.getGroupId());
+				CalEventLocalServiceUtil.deleteEvents(
+					context.getScopeGroupId());
 			}
 			return null;
 		}
@@ -73,17 +74,17 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		try {
 			context.addPermissions(
-				"com.liferay.portlet.calendar", context.getGroupId());
+				"com.liferay.portlet.calendar", context.getScopeGroupId());
 
 			Document document = SAXReaderUtil.createDocument();
 
 			Element rootElement = document.addElement("calendar-data");
 
 			rootElement.addAttribute(
-				"group-id", String.valueOf(context.getGroupId()));
+				"group-id", String.valueOf(context.getScopeGroupId()));
 
 			List<CalEvent> events = CalEventUtil.findByGroupId(
-				context.getGroupId());
+				context.getScopeGroupId());
 
 			for (CalEvent event : events) {
 				exportEvent(context, rootElement, event);
@@ -116,7 +117,7 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 		try {
 			context.importPermissions(
 				"com.liferay.portlet.calendar", context.getSourceGroupId(),
-				context.getGroupId());
+				context.getScopeGroupId());
 
 			Document document = SAXReaderUtil.read(data);
 
@@ -255,7 +256,7 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAssetTagNames(assetTagNames);
 		serviceContext.setCreateDate(event.getCreateDate());
 		serviceContext.setModifiedDate(event.getModifiedDate());
-		serviceContext.setScopeGroupId(context.getGroupId());
+		serviceContext.setScopeGroupId(context.getScopeGroupId());
 
 		CalEvent importedEvent = null;
 
@@ -263,7 +264,7 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
 			CalEvent existingEvent = CalEventUtil.fetchByUUID_G(
-				event.getUuid(), context.getGroupId());
+				event.getUuid(), context.getScopeGroupId());
 
 			if (existingEvent == null) {
 				importedEvent = CalEventLocalServiceUtil.addEvent(
@@ -308,7 +309,7 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
 			context.importComments(
 				CalEvent.class, event.getEventId(), importedEvent.getEventId(),
-				context.getGroupId());
+				context.getScopeGroupId());
 		}
 	}
 

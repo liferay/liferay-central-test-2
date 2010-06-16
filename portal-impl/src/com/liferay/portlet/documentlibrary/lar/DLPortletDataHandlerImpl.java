@@ -82,7 +82,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (!context.addPrimaryKey(
 					DLPortletDataHandlerImpl.class, "deleteData")) {
 
-				DLFolderLocalServiceUtil.deleteFolders(context.getGroupId());
+				DLFolderLocalServiceUtil.deleteFolders(
+					context.getScopeGroupId());
 			}
 
 			return null;
@@ -148,7 +149,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		DLFileVersion fileVersion =
 			DLFileVersionLocalServiceUtil.getFileVersion(
-				context.getGroupId(), fileEntry.getFolderId(),
+				context.getScopeGroupId(), fileEntry.getFolderId(),
 				fileEntry.getName(), fileEntry.getVersion());
 
 		if (fileVersion.getStatus() != WorkflowConstants.STATUS_APPROVED) {
@@ -305,7 +306,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		String binPath = fileEntryEl.attributeValue("bin-path");
 
 		long userId = context.getUserId(fileEntry.getUserUuid());
-		long groupId = context.getGroupId();
+		long groupId = context.getScopeGroupId();
 
 		Map<Long, Long> folderPKs =
 			(Map<Long, Long>)context.getNewPrimaryKeysMap(
@@ -552,7 +553,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			serviceContext.setAssetTagNames(assetTagNames);
 			serviceContext.setCreateDate(fileShortcut.getCreateDate());
 			serviceContext.setModifiedDate(fileShortcut.getModifiedDate());
-			serviceContext.setScopeGroupId(context.getGroupId());
+			serviceContext.setScopeGroupId(context.getScopeGroupId());
 
 			DLFileShortcut importedFileShortcut = null;
 
@@ -561,7 +562,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				DLFileShortcut existingFileShortcut =
 					DLFileShortcutUtil.fetchByUUID_G(
-						fileShortcut.getUuid(), context.getGroupId());
+						fileShortcut.getUuid(), context.getScopeGroupId());
 
 				if (existingFileShortcut == null) {
 					importedFileShortcut =
@@ -654,8 +655,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			DLFolderUtil.findByPrimaryKey(folderId);
 
 			DLFileRankLocalServiceUtil.updateFileRank(
-				context.getGroupId(), context.getCompanyId(), userId, folderId,
-				name, serviceContext);
+				context.getScopeGroupId(), context.getCompanyId(), userId,
+				folderId, name, serviceContext);
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(
@@ -683,7 +684,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws Exception {
 
 		long userId = context.getUserId(folder.getUserUuid());
-		long groupId = context.getGroupId();
+		long groupId = context.getScopeGroupId();
 
 		Map<Long, Long> folderPKs =
 			(Map<Long, Long>)context.getNewPrimaryKeysMap(DLFolder.class);
