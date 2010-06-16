@@ -137,6 +137,8 @@ public interface PortletDataContext extends Serializable {
 
 	public Map<?, ?> getNewPrimaryKeysMap(Class<?> classObj);
 
+	public Map<?, ?> getNewPrimaryKeysMap(String className);
+
 	public long getOldPlid();
 
 	public Map<String, String[]> getParameterMap();

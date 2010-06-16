@@ -501,12 +501,16 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public Map<?, ?> getNewPrimaryKeysMap(Class<?> classObj) {
-		Map<?, ?> map = _newPrimaryKeysMaps.get(classObj.getName());
+		return getNewPrimaryKeysMap(classObj.getName());
+	}
+
+	public Map<?, ?> getNewPrimaryKeysMap(String className) {
+		Map<?, ?> map = _newPrimaryKeysMaps.get(className);
 
 		if (map == null) {
 			map = new HashMap<Object, Object>();
 
-			_newPrimaryKeysMaps.put(classObj.getName(), map);
+			_newPrimaryKeysMaps.put(className, map);
 		}
 
 		return map;
