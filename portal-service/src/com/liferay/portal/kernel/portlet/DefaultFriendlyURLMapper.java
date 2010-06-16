@@ -68,11 +68,11 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 		Map<String, Object> requestContext) {
 
 		addParameter(parameterMap, "p_p_id", getPortletId());
-		
+
 		if (!parameterMap.containsKey("p_p_lifecycle")) {
 			addParameter(parameterMap, "p_p_lifecycle", "0");
 		}
-		
+
 		if (!parameterMap.containsKey("p_p_mode")) {
 			addParameter(parameterMap, "p_p_mode", PortletMode.VIEW);
 		}
