@@ -15,6 +15,8 @@
 package com.liferay.portlet.journalarticles.action;
 
 import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -67,7 +69,12 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		preferences.setValue("order-by-col", orderByCol);
 		preferences.setValue("order-by-type", orderByType);
 
-		preferences.store();
+		if (SessionErrors.isEmpty(actionRequest)) {
+			preferences.store();
+
+			SessionMessages.add(
+				actionRequest, portletConfig.getPortletName() + ".doConfigure");
+		}
 
 		actionResponse.sendRedirect(
 			ParamUtil.getString(actionRequest, "redirect"));
