@@ -116,17 +116,13 @@ for (int i = 0; i < locales.length; i++) {
 
 			<c:choose>
 				<c:when test="<%= (displayStyle == LanguageTag.LIST_LONG_TEXT) || (displayStyle == LanguageTag.LIST_SHORT_TEXT) %>">
-					<a href="<%= formAction %>&<%= name %>=<%= locales[i].getLanguage() + "_" + locales[i].getCountry() %>" lang="<%= LocaleUtil.toW3cLanguageId(locales[i]) %>">
+					<a class="taglib-language-list-text <%= (i + 1 < locales.length) ? StringPool.BLANK : "last" %>" href="<%= formAction %>&<%= name %>=<%= locales[i].getLanguage() + "_" + locales[i].getCountry() %>" lang="<%= LocaleUtil.toW3cLanguageId(locales[i]) %>">
 						<%= language %>
 
 						<c:if test="<%= duplicateLanguages.contains(locales[i].getLanguage()) %>">
 							(<%= country %>)
 						</c:if>
 					</a>
-
-					<c:if test="<%= i + 1 < locales.length %>">
-						|
-					</c:if>
 				</c:when>
 				<c:otherwise>
 					<liferay-ui:icon
