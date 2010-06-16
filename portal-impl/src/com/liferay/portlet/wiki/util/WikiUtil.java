@@ -360,7 +360,7 @@ public class WikiUtil {
 		while (itr.hasNext()) {
 			WikiNode node = itr.next();
 
-			if ((Arrays.binarySearch(hiddenNodes, node.getName()) < 0) ||
+			if (!(Arrays.binarySearch(hiddenNodes, node.getName()) < 0) ||
 				!WikiNodePermission.contains(
 					permissionChecker, node, ActionKeys.VIEW)) {
 
