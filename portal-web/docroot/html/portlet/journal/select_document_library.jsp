@@ -174,12 +174,13 @@ if (folder != null) {
 		sb.append("opener.");
 		sb.append(renderResponse.getNamespace());
 		sb.append("selectDocumentLibrary('");
-		sb.append(themeDisplay.getPortalURL());
 		sb.append(themeDisplay.getPathContext());
 		sb.append("/documents/");
 		sb.append(groupId);
 		sb.append(StringPool.SLASH);
-		sb.append(fileEntry.getUuid());
+		sb.append(fileEntry.getFolderId());
+		sb.append(StringPool.SLASH);
+		sb.append(HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())));
 		sb.append("'); window.close();");
 
 		row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sb.toString());
