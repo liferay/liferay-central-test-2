@@ -77,68 +77,74 @@ public class BeanPropertiesImplTest extends BaseTestCase {
 		assertEquals(foo.getInt(), dest.getInt());
 		assertEquals(foo.getLongObject(), dest.getLongObject());
 		assertEquals(foo.getLong(), dest.getLong());
+
+		Bar bar = new Bar();
+		bar.setFoo(foo);
+		Bar destBar = new Bar();
+
+		try {
+			BeanPropertiesUtil.copyProperties(bar, destBar, FooBase.class);
+			fail();
+		} catch (Exception ignore) {
+		}
 	}
 
 	public void testCopyProperties() {
 		Foo foo = _createPopulatedFoo();
-		Foo dest = new Foo();
+		Foo destFoo = new Foo();
 
-		assertFalse(dest.equals(foo));
+		assertFalse(destFoo.equals(foo));
 
-		BeanPropertiesUtil.copyProperties(foo, dest);
+		BeanPropertiesUtil.copyProperties(foo, destFoo);
 
-		assertEquals(dest, foo);
-	}
+		assertEquals(destFoo, foo);
 
-	private Foo _createPopulatedFoo() {
-		Foo foo = new Foo();
-		foo.setBooleanObject(Boolean.TRUE);
-		foo.setByteObject(Byte.valueOf((byte) 7));
-		foo.setDoubleObject(Double.valueOf(17.3));
-		foo.setFloatObject(Float.valueOf(13.7f));
-		foo.setBoolean(true);
-		foo.setByte((byte) 13);
-		foo.setChar('L');
-		foo.setCharacter(Character.valueOf('P'));
-		foo.setDouble(37.1);
-		foo.setFloat(3.7f);
-		foo.setInt(173);
-		foo.setInteger(Integer.valueOf(1730));
-		foo.setLong(1773L);
-		foo.setString("test");
-		foo.setStringArray(new String[] {"a", "b", "c"});
+		Bar bar = new Bar();
+		bar.setFoo(foo);
+		Bar destBar = new Bar();
 
-		HashMap<String, Integer> m = new HashMap<String, Integer>();
-		m.put("one", Integer.valueOf(1));
-		m.put("two", Integer.valueOf(2));
-		foo.setMap(m);
+		assertNotSame(destBar.getFoo(), foo);
+		
+		BeanPropertiesUtil.copyProperties(bar, destBar);
 
-		ArrayList<Integer> l = new ArrayList<Integer>();
-		l.add(Integer.valueOf(101));
-		l.add(Integer.valueOf(102));
-		l.add(Integer.valueOf(103));
-		foo.setList(l);
-
-		return foo;
+		assertSame(destBar.getFoo(), foo);
 	}
 
 	public void testCopySomeProperties() {
 		Foo foo = _createPopulatedFoo();
-		Foo dest = new Foo();
+		Foo destFoo = new Foo();
 
-		assertFalse(dest.equals(foo));
+		assertFalse(destFoo.equals(foo));
 
 		BeanPropertiesUtil.copyProperties(
-			foo, dest, new String[] {"string", "integer"});
+			foo, destFoo, new String[] {"string", "integer"});
 
-		assertFalse(dest.equals(foo));
-		assertNull(dest.getString());
-		assertNull(dest.getInteger());
+		assertFalse(destFoo.equals(foo));
+		assertNull(destFoo.getString());
+		assertNull(destFoo.getInteger());
 
-		dest.setString(foo.getString());
-		dest.setInteger(foo.getInteger());
+		destFoo.setString(foo.getString());
+		destFoo.setInteger(foo.getInteger());
 
-		assertEquals(dest, foo);
+		assertEquals(destFoo, foo);
+
+		Bar bar = new Bar();
+		bar.setFoo(foo);
+		Bar destBar = new Bar();
+
+		BeanPropertiesUtil.copyProperties(
+			bar, destBar, new String[] {"foo.string", "foo.integer"});
+
+		// inner properties are not excluded!
+		assertEquals(destBar.getFoo(), bar.getFoo());
+		assertSame(destBar.getFoo(), bar.getFoo());
+
+		destBar = new Bar();
+
+		BeanPropertiesUtil.copyProperties(
+			bar, destBar, new String[] {"foo"});
+
+		assertNotSame(destBar.getFoo(), bar.getFoo());
 	}
 
 	public void testDouble() {
@@ -214,6 +220,23 @@ public class BeanPropertiesImplTest extends BaseTestCase {
 		assertEquals(-1, value);
 	}
 
+	public void testList() {
+		Foo foo = _createPopulatedFoo();
+
+		int value = BeanPropertiesUtil.getInteger(foo, "list[1]", -1);
+
+		assertEquals(102, value);
+
+		value = BeanPropertiesUtil.getInteger(foo, "list[3]", -1);
+
+		assertEquals(-1, value);
+		assertEquals(3, foo.getList().size());
+
+		BeanPropertiesUtil.setProperty(foo, "list[3]", Integer.valueOf(200));
+
+		assertEquals(3, foo.getList().size());
+	}
+
 	public void testLong() {
 		Foo foo = new Foo();
 
@@ -250,11 +273,35 @@ public class BeanPropertiesImplTest extends BaseTestCase {
 		assertEquals(-1, value);
 	}
 
+	public void testMap() {
+		Foo foo = _createPopulatedFoo();
+
+		int value = BeanPropertiesUtil.getInteger(foo, "map[two]", -1);
+
+		// map is not supported
+		assertEquals(-1, value);
+	}
+
 	public void testMissingInnerProperty() {
 		Bar bar = new Bar();
 		bar.setFoo(null);
 
 		BeanPropertiesUtil.setProperty(bar, "foo.int", Integer.valueOf(173));
+	}
+
+	public void testObject() {
+		Foo foo = new Foo();
+		foo.setString("test");
+
+		String value =
+			(String) BeanPropertiesUtil.getObject(foo, "string", "none");
+
+		assertEquals("test", value);
+
+		value = (String) BeanPropertiesUtil.getObject(
+			foo, _NONEXISTENT, "none");
+
+		assertEquals("none", value);
 	}
 
 	public void testSetInnerProperty() {
@@ -317,6 +364,38 @@ public class BeanPropertiesImplTest extends BaseTestCase {
 		BeanPropertiesUtil.setProperty(bar, "foo.stringArray[3]", "four");
 
 		assertEquals(3, foo.getStringArray().length);
+	}
+
+	private Foo _createPopulatedFoo() {
+		Foo foo = new Foo();
+		foo.setBooleanObject(Boolean.TRUE);
+		foo.setByteObject(Byte.valueOf((byte) 7));
+		foo.setDoubleObject(Double.valueOf(17.3));
+		foo.setFloatObject(Float.valueOf(13.7f));
+		foo.setBoolean(true);
+		foo.setByte((byte) 13);
+		foo.setChar('L');
+		foo.setCharacter(Character.valueOf('P'));
+		foo.setDouble(37.1);
+		foo.setFloat(3.7f);
+		foo.setInt(173);
+		foo.setInteger(Integer.valueOf(1730));
+		foo.setLong(1773L);
+		foo.setString("test");
+		foo.setStringArray(new String[] {"a", "b", "c"});
+
+		HashMap<String, Integer> m = new HashMap<String, Integer>();
+		m.put("one", Integer.valueOf(1));
+		m.put("two", Integer.valueOf(2));
+		foo.setMap(m);
+
+		ArrayList<Integer> l = new ArrayList<Integer>();
+		l.add(Integer.valueOf(101));
+		l.add(Integer.valueOf(102));
+		l.add(Integer.valueOf(103));
+		foo.setList(l);
+
+		return foo;
 	}
 
 	private static final String _NONEXISTENT = "nonexistent";
