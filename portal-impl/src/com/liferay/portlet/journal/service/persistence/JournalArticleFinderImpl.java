@@ -15,6 +15,7 @@
 package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.kernel.dao.orm.QueryPos;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
@@ -555,7 +556,8 @@ public class JournalArticleFinderImpl
 
 			List<JournalArticle> articles = new ArrayList<JournalArticle>();
 
-			Iterator<Object[]> itr = q.list().iterator();
+			Iterator<Object[]> itr = ((List<Object[]>) QueryUtil.list(
+				q, getDialect(), start, end)).iterator();
 
 			while (itr.hasNext()) {
 				Object value = itr.next();
