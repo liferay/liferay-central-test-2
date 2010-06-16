@@ -18,27 +18,32 @@
 
 <%
 boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT);
+String redirect = ParamUtil.getString(request, "redirect");
+
+String strutsAction = ParamUtil.getString(request, "struts_action");
+
+WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
+WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
+
+String keywords = ParamUtil.getString(request, "keywords");
+
+List nodes = WikiUtil.getNodes(allNodes, hiddenNodes, permissionChecker);
+
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setParameter("nodeName", node.getName());
 %>
 
-<c:if test="<%= !print && portletName.equals(PortletKeys.WIKI) %>">
+<c:if test="<%= portletName.equals(PortletKeys.WIKI_ADMIN) %>">
+	<liferay-ui:header
+		title="<%= node.getName() %>"
+		backURL="<%= redirect %>"
+	/>
+</c:if>
 
-	<%
-	String strutsAction = ParamUtil.getString(request, "struts_action");
-
-	WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
-	WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
-
-	String keywords = ParamUtil.getString(request, "keywords");
-
-	List nodes = WikiUtil.getNodes(allNodes, hiddenNodes, permissionChecker);
-
-	PortletURL portletURL = renderResponse.createRenderURL();
-
-	portletURL.setParameter("nodeName", node.getName());
-	%>
-
+<c:if test="<%= !print %>">
 	<div class="top-links-container">
-		<c:if test="<%= nodes.size() > 1 %>">
+		<c:if test="<%= (nodes.size() > 1) && portletName.equals(PortletKeys.WIKI) %>">
 			<div class="top-links-nodes">
 
 				<%

@@ -23,7 +23,7 @@ portletURL.setParameter("struts_action", "/wiki/view_nodes");
 
 List<String> headerNames = new ArrayList<String>();
 
-headerNames.add("node");
+headerNames.add("wiki");
 headerNames.add("num-of-pages");
 headerNames.add("last-post-date");
 headerNames.add(StringPool.BLANK);
@@ -56,7 +56,7 @@ searchContainer.setResults(results);
 
 		PortletURL rowURL = renderResponse.createRenderURL();
 
-		rowURL.setParameter("struts_action", "/wiki/edit_node");
+		rowURL.setParameter("struts_action", "/wiki/view_all_pages");
 		rowURL.setParameter("redirect", currentURL);
 		rowURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 

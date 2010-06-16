@@ -2196,7 +2196,7 @@
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/wiki_admin/view</value>
+			<value>/wiki_admin/view_nodes</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
