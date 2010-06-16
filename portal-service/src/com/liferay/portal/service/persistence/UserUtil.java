@@ -303,25 +303,6 @@ public class UserUtil {
 			orderByComparator);
 	}
 
-	public static com.liferay.portal.model.User findByOpenId(
-		java.lang.String openId)
-		throws com.liferay.portal.NoSuchUserException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByOpenId(openId);
-	}
-
-	public static com.liferay.portal.model.User fetchByOpenId(
-		java.lang.String openId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByOpenId(openId);
-	}
-
-	public static com.liferay.portal.model.User fetchByOpenId(
-		java.lang.String openId, boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByOpenId(openId, retrieveFromCache);
-	}
-
 	public static com.liferay.portal.model.User findByPortraitId(
 		long portraitId)
 		throws com.liferay.portal.NoSuchUserException,
@@ -419,6 +400,25 @@ public class UserUtil {
 				   .fetchByC_EA(companyId, emailAddress, retrieveFromCache);
 	}
 
+	public static com.liferay.portal.model.User findByC_O(long companyId,
+		java.lang.String openId)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByC_O(companyId, openId);
+	}
+
+	public static com.liferay.portal.model.User fetchByC_O(long companyId,
+		java.lang.String openId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByC_O(companyId, openId);
+	}
+
+	public static com.liferay.portal.model.User fetchByC_O(long companyId,
+		java.lang.String openId, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByC_O(companyId, openId, retrieveFromCache);
+	}
+
 	public static java.util.List<com.liferay.portal.model.User> findByC_A(
 		long companyId, boolean active)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -506,12 +506,6 @@ public class UserUtil {
 		getPersistence().removeByEmailAddress(emailAddress);
 	}
 
-	public static void removeByOpenId(java.lang.String openId)
-		throws com.liferay.portal.NoSuchUserException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByOpenId(openId);
-	}
-
 	public static void removeByPortraitId(long portraitId)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -541,6 +535,12 @@ public class UserUtil {
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByC_EA(companyId, emailAddress);
+	}
+
+	public static void removeByC_O(long companyId, java.lang.String openId)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByC_O(companyId, openId);
 	}
 
 	public static void removeByC_A(long companyId, boolean active)
@@ -573,11 +573,6 @@ public class UserUtil {
 		return getPersistence().countByEmailAddress(emailAddress);
 	}
 
-	public static int countByOpenId(java.lang.String openId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByOpenId(openId);
-	}
-
 	public static int countByPortraitId(long portraitId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByPortraitId(portraitId);
@@ -601,6 +596,11 @@ public class UserUtil {
 	public static int countByC_EA(long companyId, java.lang.String emailAddress)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByC_EA(companyId, emailAddress);
+	}
+
+	public static int countByC_O(long companyId, java.lang.String openId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByC_O(companyId, openId);
 	}
 
 	public static int countByC_A(long companyId, boolean active)

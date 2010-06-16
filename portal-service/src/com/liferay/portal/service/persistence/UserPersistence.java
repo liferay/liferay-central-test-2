@@ -153,17 +153,6 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.model.User findByOpenId(java.lang.String openId)
-		throws com.liferay.portal.NoSuchUserException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public com.liferay.portal.model.User fetchByOpenId(java.lang.String openId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public com.liferay.portal.model.User fetchByOpenId(
-		java.lang.String openId, boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	public com.liferay.portal.model.User findByPortraitId(long portraitId)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -225,6 +214,19 @@ public interface UserPersistence extends BasePersistence<User> {
 		java.lang.String emailAddress, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public com.liferay.portal.model.User findByC_O(long companyId,
+		java.lang.String openId)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.User fetchByC_O(long companyId,
+		java.lang.String openId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.User fetchByC_O(long companyId,
+		java.lang.String openId, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portal.model.User> findByC_A(
 		long companyId, boolean active)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -280,10 +282,6 @@ public interface UserPersistence extends BasePersistence<User> {
 	public void removeByEmailAddress(java.lang.String emailAddress)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void removeByOpenId(java.lang.String openId)
-		throws com.liferay.portal.NoSuchUserException,
-			com.liferay.portal.kernel.exception.SystemException;
-
 	public void removeByPortraitId(long portraitId)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -301,6 +299,10 @@ public interface UserPersistence extends BasePersistence<User> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByC_EA(long companyId, java.lang.String emailAddress)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void removeByC_O(long companyId, java.lang.String openId)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -322,9 +324,6 @@ public interface UserPersistence extends BasePersistence<User> {
 	public int countByEmailAddress(java.lang.String emailAddress)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByOpenId(java.lang.String openId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	public int countByPortraitId(long portraitId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -338,6 +337,9 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByC_EA(long companyId, java.lang.String emailAddress)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByC_O(long companyId, java.lang.String openId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByC_A(long companyId, boolean active)

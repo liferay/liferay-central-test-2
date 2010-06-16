@@ -498,10 +498,10 @@ public class UserLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.User getUserByOpenId(
-		java.lang.String openId)
+		long companyId, java.lang.String openId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getUserByOpenId(openId);
+		return getService().getUserByOpenId(companyId, openId);
 	}
 
 	public static com.liferay.portal.model.User getUserByPortraitId(

@@ -247,7 +247,8 @@ public class OpenIdAction extends PortletAction {
 		User user = null;
 
 		try {
-			user = UserLocalServiceUtil.getUserByOpenId(openId);
+			user = UserLocalServiceUtil.getUserByOpenId(
+				themeDisplay.getCompanyId(), openId);
 		}
 		catch (NoSuchUserException nsue) {
 			if (Validator.isNull(firstName) || Validator.isNull(lastName) ||
@@ -349,7 +350,8 @@ public class OpenIdAction extends PortletAction {
 			discovered, portletURL.toString(), themeDisplay.getPortalURL());
 
 		try {
-			UserLocalServiceUtil.getUserByOpenId(openId);
+			UserLocalServiceUtil.getUserByOpenId(
+				themeDisplay.getCompanyId(), openId);
 		}
 		catch (NoSuchUserException nsue) {
 			String screenName = OpenIdUtil.getScreenName(openId);

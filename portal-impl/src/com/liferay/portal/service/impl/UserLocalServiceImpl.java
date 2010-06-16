@@ -1301,10 +1301,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return userPersistence.findByC_U(companyId, userId);
 	}
 
-	public User getUserByOpenId(String openId)
+	public User getUserByOpenId(long companyId, String openId)
 		throws PortalException, SystemException {
 
-		return userPersistence.findByOpenId(openId);
+		return userPersistence.findByC_O(companyId, openId);
 	}
 
 	public User getUserByPortraitId(long portraitId)

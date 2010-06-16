@@ -488,11 +488,11 @@ public class UserLocalServiceWrapper implements UserLocalService {
 		return _userLocalService.getUserById(companyId, userId);
 	}
 
-	public com.liferay.portal.model.User getUserByOpenId(
+	public com.liferay.portal.model.User getUserByOpenId(long companyId,
 		java.lang.String openId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _userLocalService.getUserByOpenId(openId);
+		return _userLocalService.getUserByOpenId(companyId, openId);
 	}
 
 	public com.liferay.portal.model.User getUserByPortraitId(long portraitId)

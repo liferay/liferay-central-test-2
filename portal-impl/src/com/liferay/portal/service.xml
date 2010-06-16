@@ -1649,9 +1649,6 @@
 		<finder name="EmailAddress" return-type="Collection">
 			<finder-column name="emailAddress" />
 		</finder>
-		<finder name="OpenId" return-type="User">
-			<finder-column name="openId" />
-		</finder>
 		<finder name="PortraitId" return-type="User">
 			<finder-column name="portraitId" />
 		</finder>
@@ -1670,6 +1667,10 @@
 		<finder name="C_EA" return-type="User" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="emailAddress" />
+		</finder>
+		<finder name="C_O" return-type="User">
+			<finder-column name="companyId" />
+			<finder-column name="openId" />
 		</finder>
 		<finder name="C_A" return-type="Collection">
 			<finder-column name="companyId" />
