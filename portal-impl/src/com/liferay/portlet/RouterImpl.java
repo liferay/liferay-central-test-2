@@ -14,8 +14,6 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.Route;
 import com.liferay.portal.kernel.portlet.Router;
 
@@ -62,8 +60,6 @@ public class RouterImpl implements Router {
 
 		return null;
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(Router.class);
 
 	private List<Route> _routes = new ArrayList<Route>();
 
