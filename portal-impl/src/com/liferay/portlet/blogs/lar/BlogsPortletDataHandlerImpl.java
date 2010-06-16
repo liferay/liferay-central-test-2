@@ -18,10 +18,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
-import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
-import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -49,56 +47,6 @@ import javax.portlet.PortletPreferences;
  */
 public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 
-	public PortletPreferences deleteData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
-		throws PortletDataException {
-
-		try {
-			if (!context.addPrimaryKey(
-					BlogsPortletDataHandlerImpl.class, "deleteData")) {
-
-				BlogsEntryLocalServiceUtil.deleteEntries(
-					context.getScopeGroupId());
-			}
-
-			return null;
-		}
-		catch (Exception e) {
-			throw new PortletDataException(e);
-		}
-	}
-
-	public String exportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
-		throws PortletDataException {
-
-		try {
-			context.addPermissions(
-				"com.liferay.portlet.blogs", context.getScopeGroupId());
-
-			Document document = SAXReaderUtil.createDocument();
-
-			Element rootElement = document.addElement("blogs-data");
-
-			rootElement.addAttribute(
-				"group-id", String.valueOf(context.getScopeGroupId()));
-
-			List<BlogsEntry> entries = BlogsEntryUtil.findByGroupId(
-				context.getScopeGroupId());
-
-			for (BlogsEntry entry : entries) {
-				exportEntry(context, rootElement, entry);
-			}
-
-			return document.formattedString();
-		}
-		catch (Exception e) {
-			throw new PortletDataException(e);
-		}
-	}
-
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
 			_entries, _categories, _comments, _ratings, _tags
@@ -111,42 +59,75 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		};
 	}
 
-	public PortletPreferences importData(
+	protected PortletPreferences doDeleteData(
+			PortletDataContext context, String portletId,
+			PortletPreferences preferences)
+		throws Exception {
+
+		if (!context.addPrimaryKey(
+				BlogsPortletDataHandlerImpl.class, "deleteData")) {
+
+			BlogsEntryLocalServiceUtil.deleteEntries(context.getScopeGroupId());
+		}
+
+		return null;
+	}
+
+	protected String doExportData(
+			PortletDataContext context, String portletId,
+			PortletPreferences preferences)
+		throws Exception {
+
+		context.addPermissions(
+			"com.liferay.portlet.blogs", context.getScopeGroupId());
+
+		Document document = SAXReaderUtil.createDocument();
+
+		Element rootElement = document.addElement("blogs-data");
+
+		rootElement.addAttribute(
+			"group-id", String.valueOf(context.getScopeGroupId()));
+
+		List<BlogsEntry> entries = BlogsEntryUtil.findByGroupId(
+			context.getScopeGroupId());
+
+		for (BlogsEntry entry : entries) {
+			exportEntry(context, rootElement, entry);
+		}
+
+		return document.formattedString();
+	}
+
+	protected PortletPreferences doImportData(
 			PortletDataContext context, String portletId,
 			PortletPreferences preferences, String data)
-		throws PortletDataException {
+		throws Exception {
 
-		try {
-			context.importPermissions(
-				"com.liferay.portlet.blogs", context.getSourceGroupId(),
-				context.getScopeGroupId());
+		context.importPermissions(
+			"com.liferay.portlet.blogs", context.getSourceGroupId(),
+			context.getScopeGroupId());
 
-			Document document = SAXReaderUtil.read(data);
+		Document document = SAXReaderUtil.read(data);
 
-			Element rootElement = document.getRootElement();
+		Element rootElement = document.getRootElement();
 
-			for (Element entryElement : rootElement.elements("entry")) {
-				String path = entryElement.attributeValue("path");
+		for (Element entryElement : rootElement.elements("entry")) {
+			String path = entryElement.attributeValue("path");
 
-				if (!context.isPathNotProcessed(path)) {
-					continue;
-				}
-
-				BlogsEntry entry = (BlogsEntry)context.getZipEntryAsObject(
-					path);
-
-				importEntry(context, entry);
+			if (!context.isPathNotProcessed(path)) {
+				continue;
 			}
 
-			if (context.getBooleanParameter(_NAMESPACE, "wordpress")) {
-				WordPressImporter.importData(context);
-			}
+			BlogsEntry entry = (BlogsEntry)context.getZipEntryAsObject(path);
 
-			return null;
+			importEntry(context, entry);
 		}
-		catch (Exception e) {
-			throw new PortletDataException(e);
+
+		if (context.getBooleanParameter(_NAMESPACE, "wordpress")) {
+			WordPressImporter.importData(context);
 		}
+
+		return null;
 	}
 
 	protected void exportEntry(
@@ -261,9 +242,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		BlogsEntry importedEntry = null;
 
-		if (context.getDataStrategy().equals(
-				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
-
+		if (context.isDataStrategyMirror()) {
 			BlogsEntry existingEntry = BlogsEntryUtil.fetchByUUID_G(
 				entry.getUuid(), context.getScopeGroupId());
 

@@ -16,7 +16,6 @@ package com.liferay.portlet.pagecomments.lar;
 
 import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
-import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -33,37 +32,6 @@ import javax.portlet.PortletPreferences;
  */
 public class PageCommentsPortletDataHandlerImpl extends BasePortletDataHandler {
 
-	public PortletPreferences deleteData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
-		throws PortletDataException {
-
-		try {
-			MBMessageLocalServiceUtil.deleteDiscussionMessages(
-				Layout.class.getName(), context.getPlid());
-
-			return null;
-		}
-		catch (Exception e) {
-			throw new PortletDataException(e);
-		}
-	}
-
-	public String exportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
-		throws PortletDataException {
-
-		try {
-			context.addComments(Layout.class, new Long(context.getPlid()));
-
-			return String.valueOf(context.getPlid());
-		}
-		catch (Exception e) {
-			throw new PortletDataException(e);
-		}
-	}
-
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {_comments};
 	}
@@ -72,21 +40,37 @@ public class PageCommentsPortletDataHandlerImpl extends BasePortletDataHandler {
 		return new PortletDataHandlerControl[] {_comments};
 	}
 
-	public PortletPreferences importData(
+	protected PortletPreferences doDeleteData(
+			PortletDataContext context, String portletId,
+			PortletPreferences preferences)
+		throws Exception {
+
+		MBMessageLocalServiceUtil.deleteDiscussionMessages(
+			Layout.class.getName(), context.getPlid());
+
+		return null;
+	}
+
+	protected String doExportData(
+			PortletDataContext context, String portletId,
+			PortletPreferences preferences)
+		throws Exception {
+
+		context.addComments(Layout.class, context.getPlid());
+
+		return String.valueOf(context.getPlid());
+	}
+
+	protected PortletPreferences doImportData(
 			PortletDataContext context, String portletId,
 			PortletPreferences preferences, String data)
-		throws PortletDataException {
+		throws Exception {
 
-		try {
-			context.importComments(
-				Layout.class, GetterUtil.getLong(data), context.getPlid(),
-				context.getScopeGroupId());
+		context.importComments(
+			Layout.class, GetterUtil.getLong(data), context.getPlid(),
+			context.getScopeGroupId());
 
-			return null;
-		}
-		catch (Exception e) {
-			throw new PortletDataException(e);
-		}
+		return null;
 	}
 
 	private static final String _NAMESPACE = "page_comments";

@@ -16,7 +16,6 @@ package com.liferay.portlet.sitemap.lar;
 
 import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
-import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.util.StringPool;
 
@@ -30,33 +29,6 @@ import javax.portlet.PortletPreferences;
  */
 public class SitemapPortletDataHandlerImpl extends BasePortletDataHandler {
 
-	public PortletPreferences deleteData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
-		throws PortletDataException {
-
-		try {
-			preferences.setValue("root-layout-id", StringPool.BLANK);
-			preferences.setValue("display-depth", StringPool.BLANK);
-			preferences.setValue("include-root-in-tree", StringPool.BLANK);
-			preferences.setValue("show-current-page", StringPool.BLANK);
-			preferences.setValue("use-html-title", StringPool.BLANK);
-			preferences.setValue("show-hidden-pages", StringPool.BLANK);
-
-			return preferences;
-		}
-		catch (Exception e) {
-			throw new PortletDataException(e);
-		}
-	}
-
-	public String exportData(
-		PortletDataContext context, String portletId,
-		PortletPreferences preferences) {
-
-		return StringPool.BLANK;
-	}
-
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[0];
 	}
@@ -65,15 +37,37 @@ public class SitemapPortletDataHandlerImpl extends BasePortletDataHandler {
 		return new PortletDataHandlerControl[0];
 	}
 
-	public PortletPreferences importData(
-		PortletDataContext context, String portletId,
-		PortletPreferences preferences, String data) {
+	public boolean isPublishToLiveByDefault() {
+		return _PUBLISH_TO_LIVE_BY_DEFAULT;
+	}
+
+	protected PortletPreferences doDeleteData(
+			PortletDataContext context, String portletId,
+			PortletPreferences preferences)
+		throws Exception {
+
+		preferences.setValue("root-layout-id", StringPool.BLANK);
+		preferences.setValue("display-depth", StringPool.BLANK);
+		preferences.setValue("include-root-in-tree", StringPool.BLANK);
+		preferences.setValue("show-current-page", StringPool.BLANK);
+		preferences.setValue("use-html-title", StringPool.BLANK);
+		preferences.setValue("show-hidden-pages", StringPool.BLANK);
 
 		return preferences;
 	}
 
-	public boolean isPublishToLiveByDefault() {
-		return _PUBLISH_TO_LIVE_BY_DEFAULT;
+	protected String doExportData(
+		PortletDataContext context, String portletId,
+		PortletPreferences preferences) {
+
+		return StringPool.BLANK;
+	}
+
+	protected PortletPreferences doImportData(
+		PortletDataContext context, String portletId,
+		PortletPreferences preferences, String data) {
+
+		return preferences;
 	}
 
 	private static final boolean _PUBLISH_TO_LIVE_BY_DEFAULT = true;
