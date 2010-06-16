@@ -29,8 +29,8 @@ String keywords = ParamUtil.getString(request, "keywords");
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
 	<liferay-ui:header
-		title="search"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		title="search"
 	/>
 
 	<%

@@ -16,7 +16,10 @@
 
 <%@ include file="/html/portlet/bookmarks/init.jsp" %>
 
-<liferay-ui:header title="error" backURL="javascript:history.go(-1);" />
+<liferay-ui:header
+	title="error"
+	backURL="javascript:history.go(-1);"
+/>
 
 <liferay-ui:error exception="<%= NoSuchEntryException.class %>" message="the-entry-could-not-be-found" />
 <liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="the-folder-could-not-be-found" />

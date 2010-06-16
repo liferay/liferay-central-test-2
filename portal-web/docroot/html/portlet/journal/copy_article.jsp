@@ -37,8 +37,8 @@ double version = ParamUtil.getDouble(request, "version");
 	<aui:input name="version" type="hidden" value="<%= version %>" />
 
 	<liferay-ui:header
-		title="web-content"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		title="web-content"
 	/>
 
 	<liferay-ui:error exception="<%= DuplicateArticleIdException.class %>" message="please-enter-a-unique-id" />

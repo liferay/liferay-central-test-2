@@ -35,8 +35,8 @@ String newStructureId = ParamUtil.getString(request, "newStructureId");
 	<aui:input name="oldStructureId" type="hidden" value="<%= oldStructureId %>" />
 
 	<liferay-ui:header
-		title="structure"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		title="structure"
 	/>
 
 	<liferay-ui:error exception="<%= DuplicateStructureIdException.class %>" message="please-enter-a-unique-id" />

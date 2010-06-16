@@ -94,8 +94,8 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 	<aui:input name="priceId" type="hidden" />
 
 	<liferay-ui:header
-		title="item"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		title="item"
 	/>
 
 	<liferay-ui:error exception="<%= DuplicateItemSKUException.class %>" message="the-item-sku-you-requested-is-already-taken" />

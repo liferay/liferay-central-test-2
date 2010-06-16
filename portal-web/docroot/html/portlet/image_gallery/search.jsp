@@ -54,8 +54,8 @@ boolean useAssetEntryQuery = false;
 	<aui:input name="searchFolderIds" type="hidden" value="<%= searchFolderIds %>" />
 
 	<liferay-ui:header
-		title="search"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		title="search"
 	/>
 
 	<%

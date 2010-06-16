@@ -45,8 +45,8 @@ request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
 %>
 
 <liferay-ui:header
-	title="<%= entry.getTitle() %>"
 	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	title="<%= entry.getTitle() %>"
 />
 
 <portlet:actionURL var="editEntryURL">

@@ -56,8 +56,8 @@ int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", product
 <input name="<portlet:namespace />screenshotsCount" type="hidden" value="<%= screenshotsCount %>" />
 
 <liferay-ui:header
-	title='<%= (productEntry != null) ? productEntry.getName() : "new-product" %>'
 	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	title='<%= (productEntry != null) ? productEntry.getName() : "new-product" %>'
 />
 
 <liferay-ui:error exception="<%= DuplicateProductEntryModuleIdException.class %>" message="please-enter-a-unique-group-id-and-artifact-id-combination" />

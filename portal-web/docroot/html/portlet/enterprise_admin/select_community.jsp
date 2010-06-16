@@ -26,7 +26,9 @@ portletURL.setParameter("target", target);
 %>
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
-	<liferay-ui:header title="communities" />
+	<liferay-ui:header
+		title="communities"
+	/>
 
 	<liferay-ui:search-container
 		searchContainer="<%= new GroupSearch(renderRequest, portletURL) %>"

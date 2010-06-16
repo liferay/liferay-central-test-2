@@ -310,7 +310,9 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) || portletName.equals(PortletKeys.MY_PAGES) %>">
 		<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) %>">
 			<div>
-				<liferay-ui:header title='<%= LanguageUtil.get(pageContext, "edit-pages-for-community") + ": " + liveGroup.getName() %>' />
+				<liferay-ui:header
+					title='<%= LanguageUtil.get(pageContext, "edit-pages-for-community") + ": " + liveGroup.getName() %>'
+				/>
 			</div>
 
 			<br />

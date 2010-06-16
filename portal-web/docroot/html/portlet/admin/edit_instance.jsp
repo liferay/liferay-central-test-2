@@ -34,8 +34,8 @@ long companyId = BeanParamUtil.getLong(company2, request, "companyId");
 	<aui:input name="companyId" type="hidden" value="<%= companyId %>" />
 
 	<liferay-ui:header
-		title="instance"
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		title="instance"
 	/>
 
 	<liferay-ui:error exception="<%= CompanyMxException.class %>" message="please-enter-a-valid-mail-domain" />

@@ -39,8 +39,8 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 %>
 
 <liferay-ui:header
-	title='<%= (category != null) ? category.getName() : "new-category" %>'
 	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	title='<%= (category != null) ? category.getName() : "new-category" %>'
 />
 
 <portlet:actionURL var="editCategoryURL">

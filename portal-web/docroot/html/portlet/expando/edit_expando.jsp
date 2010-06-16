@@ -69,8 +69,8 @@ portletURL.setParameter("modelResource", modelResource);
 	<br />
 
 	<liferay-ui:header
-		title='<%= (column != null) ? column.getDisplayName(locale) : "new-custom-field" %>'
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		title='<%= (column != null) ? column.getDisplayName(locale) : "new-custom-field" %>'
 	/>
 
 	<liferay-ui:error exception="<%= ColumnNameException.class %>" message="please-enter-a-valid-name" />

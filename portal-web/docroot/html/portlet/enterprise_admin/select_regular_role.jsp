@@ -23,7 +23,9 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_regular_role"
 %>
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
-	<liferay-ui:header title="roles" />
+	<liferay-ui:header
+		title="roles"
+	/>
 
 	<liferay-ui:search-container
 		headerNames="name"

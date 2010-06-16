@@ -16,7 +16,10 @@
 
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
-<liferay-ui:header title="error" backURL="javascript:history.go(-1);" />
+<liferay-ui:header
+	backURL="javascript:history.go(-1);"
+	title="error"
+/>
 
 <liferay-ui:error exception="<%= NoSuchGroupException.class %>" message="the-community-could-not-be-found" />
 <liferay-ui:error exception="<%= NoSuchLayoutException.class %>" message="the-page-could-not-be-found" />

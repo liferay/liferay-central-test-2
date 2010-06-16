@@ -141,7 +141,9 @@ else if (tabs2.equals("organization-roles")) {
 		boolean isGuestRole = role.getName().equals(RoleConstants.GUEST);
 		%>
 
-		<liferay-ui:header title="<%= role.getTitle(locale) %>" />
+		<liferay-ui:header
+			title="<%= role.getTitle(locale) %>"
+		/>
 
 		<%
 		List permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), resource.getResourceId());
