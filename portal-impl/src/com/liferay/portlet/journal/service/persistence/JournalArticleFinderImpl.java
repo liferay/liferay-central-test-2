@@ -556,8 +556,8 @@ public class JournalArticleFinderImpl
 
 			List<JournalArticle> articles = new ArrayList<JournalArticle>();
 
-			Iterator<Object[]> itr = ((List<Object[]>) QueryUtil.list(
-				q, getDialect(), start, end)).iterator();
+			Iterator<Object[]> itr = (Iterator<Object[]>)QueryUtil.iterate(
+				q, getDialect(), start, end);
 
 			while (itr.hasNext()) {
 				Object value = itr.next();
