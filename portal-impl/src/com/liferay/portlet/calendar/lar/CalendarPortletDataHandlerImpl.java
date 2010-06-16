@@ -75,20 +75,21 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 			context.addPermissions(
 				"com.liferay.portlet.calendar", context.getGroupId());
 
-			Document doc = SAXReaderUtil.createDocument();
+			Document document = SAXReaderUtil.createDocument();
 
-			Element root = doc.addElement("calendar-data");
+			Element rootElement = document.addElement("calendar-data");
 
-			root.addAttribute("group-id", String.valueOf(context.getGroupId()));
+			rootElement.addAttribute(
+				"group-id", String.valueOf(context.getGroupId()));
 
 			List<CalEvent> events = CalEventUtil.findByGroupId(
 				context.getGroupId());
 
 			for (CalEvent event : events) {
-				exportEvent(context, root, event);
+				exportEvent(context, rootElement, event);
 			}
 
-			return doc.formattedString();
+			return document.formattedString();
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -117,14 +118,12 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 				"com.liferay.portlet.calendar", context.getSourceGroupId(),
 				context.getGroupId());
 
-			Document doc = SAXReaderUtil.read(data);
+			Document document = SAXReaderUtil.read(data);
 
-			Element root = doc.getRootElement();
+			Element rootElement = document.getRootElement();
 
-			List<Element> eventsEl = root.elements("event");
-
-			for (Element eventEl : eventsEl) {
-				String path = eventEl.attributeValue("path");
+			for (Element eventElement : rootElement.elements("event")) {
+				String path = eventElement.attributeValue("path");
 
 				if (!context.isPathNotProcessed(path)) {
 					continue;
@@ -143,7 +142,7 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected void exportEvent(
-			PortletDataContext context, Element root, CalEvent event)
+			PortletDataContext context, Element rootElement, CalEvent event)
 		throws PortalException, SystemException {
 
 		if (!context.isWithinDateRange(event.getModifiedDate())) {
@@ -156,9 +155,9 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
-		Element eventEl = root.addElement("event");
+		Element eventElement = rootElement.addElement("event");
 
-		eventEl.addAttribute("path", path);
+		eventElement.addAttribute("path", path);
 
 		event.setUserUuid(event.getUserUuid());
 
