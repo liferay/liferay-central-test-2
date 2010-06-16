@@ -35,6 +35,7 @@ import com.liferay.portal.model.Image;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.imagegallery.DuplicateImageNameException;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGFolderConstants;
@@ -43,6 +44,7 @@ import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
+import com.liferay.util.PwdGenerator;
 
 import java.io.File;
 
@@ -111,9 +113,26 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	public static void importFolder(
-			PortletDataContext context, Map<Long, Long> folderPKs,
-			IGFolder folder)
+			PortletDataContext context, Element folderEl)
 		throws Exception {
+
+		String path = folderEl.attributeValue("path");
+
+		if (!context.isPathNotProcessed(path)) {
+			return;
+		}
+
+		IGFolder folder = (IGFolder)context.getZipEntryAsObject(path);
+
+		importFolder(context, folder);
+	}
+
+	public static void importFolder(
+			PortletDataContext context, IGFolder folder)
+		throws Exception {
+
+		Map<Long, Long> folderPKs =
+			(Map<Long, Long>)context.getNewPrimaryKeysMap(IGFolder.class);
 
 		long userId = context.getUserId(folder.getUserUuid());
 		long parentFolderId = MapUtil.getLong(
@@ -134,7 +153,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			IGFolder parentFolder = (IGFolder)context.getZipEntryAsObject(path);
 
-			importFolder(context, folderPKs, parentFolder);
+			importFolder(context, parentFolder);
 
 			parentFolderId = MapUtil.getLong(
 				folderPKs, folder.getParentFolderId(),
@@ -193,10 +212,31 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 	}
 
-	public static void importImage(
-			PortletDataContext context, Map<Long, Long> folderPKs,
-			IGImage image, String binPath)
+	public static void importImage(PortletDataContext context, Element imageEl)
 		throws Exception {
+
+		String path = imageEl.attributeValue("path");
+
+		String binPath = imageEl.attributeValue("bin-path");
+
+		if (!context.isPathNotProcessed(path)) {
+			return;
+		}
+
+		IGImage image = (IGImage)context.getZipEntryAsObject(path);
+
+		importImage(context, image, binPath);
+	}
+
+	public static void importImage(
+			PortletDataContext context, IGImage image, String binPath)
+		throws Exception {
+
+		Map<Long, Long> folderPKs =
+			(Map<Long, Long>)context.getNewPrimaryKeysMap(IGFolder.class);
+
+		Map<Long, Long> igImagePKs =
+			(Map<Long, Long>)context.getNewPrimaryKeysMap(IGImage.class);
 
 		long userId = context.getUserId(image.getUserUuid());
 		long groupId = context.getGroupId();
@@ -250,7 +290,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			IGFolder folder = (IGFolder)context.getZipEntryAsObject(path);
 
-			importFolder(context, folderPKs, folder);
+			importFolder(context, folder);
 
 			folderId = MapUtil.getLong(
 				folderPKs, image.getFolderId(), image.getFolderId());
@@ -279,10 +319,28 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 				}
 			}
 			else {
-				importedImage = IGImageLocalServiceUtil.addImage(
-					null, userId, groupId, folderId, image.getName(),
-					image.getDescription(), imageFile, image.getImageType(),
-					serviceContext);
+				String name = image.getName();
+
+				try {
+					importedImage = IGImageLocalServiceUtil.addImage(
+						null, userId, groupId, folderId, name,
+						image.getDescription(), imageFile, image.getImageType(),
+						serviceContext);
+				}
+				catch (DuplicateImageNameException dine) {
+					String[] nameParts = name.split("\\.", 2);
+
+					name = nameParts[0] + PwdGenerator.getPassword();
+
+					if (nameParts.length > 1) {
+						name += StringPool.PERIOD + nameParts[1];
+					}
+
+					importedImage = IGImageLocalServiceUtil.addImage(
+						null, userId, groupId, folderId, name,
+						image.getDescription(), imageFile, image.getImageType(),
+						serviceContext);
+				}
 			}
 
 			context.importPermissions(
@@ -293,6 +351,8 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 					IGImage.class, image.getImageId(),
 					importedImage.getImageId());
 			}
+
+			igImagePKs.put(image.getImageId(), importedImage.getImageId());
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(
@@ -326,28 +386,27 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			context.addPermissions(
-				"com.liferay.portlet.imagegallery", context.getGroupId());
+			long groupId = context.getScopeGroupId();
+
+			context.addPermissions("com.liferay.portlet.imagegallery", groupId);
 
 			Document doc = SAXReaderUtil.createDocument();
 
 			Element root = doc.addElement("image-gallery");
 
-			root.addAttribute("group-id", String.valueOf(context.getGroupId()));
+			root.addAttribute("group-id", String.valueOf(groupId));
 
 			Element foldersEl = root.addElement("folders");
 			Element imagesEl = root.addElement("images");
 
-			List<IGFolder> folders = IGFolderUtil.findByGroupId(
-				context.getGroupId());
+			List<IGFolder> folders = IGFolderUtil.findByGroupId(groupId);
 
 			for (IGFolder folder : folders) {
 				exportFolder(context, foldersEl, imagesEl, folder);
 			}
 
 			List<IGImage> images = IGImageUtil.findByG_F(
-				context.getGroupId(),
-				IGFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+				groupId, IGFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 			for (IGImage image : images) {
 				exportImage(context, null, imagesEl, image);
@@ -380,7 +439,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		try {
 			context.importPermissions(
 				"com.liferay.portlet.imagegallery",
-				context.getSourceGroupId(), context.getGroupId());
+				context.getSourceGroupId(), context.getScopeGroupId());
 
 			Document doc = SAXReaderUtil.read(data);
 
@@ -388,9 +447,6 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			List<Element> folderEls = root.element("folders").elements(
 				"folder");
-
-			Map<Long, Long> folderPKs =
-				(Map<Long, Long>)context.getNewPrimaryKeysMap(IGFolder.class);
 
 			for (Element folderEl : folderEls) {
 				String path = folderEl.attributeValue("path");
@@ -401,7 +457,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				IGFolder folder = (IGFolder)context.getZipEntryAsObject(path);
 
-				importFolder(context, folderPKs, folder);
+				importFolder(context, folder);
 			}
 
 			List<Element> imageEls = root.element("images").elements("image");
@@ -417,7 +473,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				String binPath = imageEl.attributeValue("bin-path");
 
-				importImage(context, folderPKs, image, binPath);
+				importImage(context, image, binPath);
 			}
 
 			return null;
@@ -543,7 +599,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		return sb.toString();
 	}
 
-	protected static String getImagePath(
+	public static String getImagePath(
 		PortletDataContext context, IGImage image) {
 
 		StringBundler sb = new StringBundler(4);

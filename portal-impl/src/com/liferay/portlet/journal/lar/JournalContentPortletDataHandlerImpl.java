@@ -32,12 +32,7 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.lar.DLPortletDataHandlerImpl;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.model.DLFileRank;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.imagegallery.lar.IGPortletDataHandlerImpl;
-import com.liferay.portlet.imagegallery.model.IGFolder;
-import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
@@ -107,6 +102,9 @@ public class JournalContentPortletDataHandlerImpl
 		throws PortletDataException {
 
 		try {
+			context.addPermissions(
+				"com.liferay.portlet.journal", context.getGroupId());
+
 			String articleId = preferences.getValue("article-id", null);
 
 			if (articleId == null) {
@@ -150,9 +148,6 @@ public class JournalContentPortletDataHandlerImpl
 			if (article == null) {
 				return StringPool.BLANK;
 			}
-
-			context.addPermissions(
-				"com.liferay.portlet.journal", context.getGroupId());
 
 			Document doc = SAXReaderUtil.createDocument();
 
@@ -227,39 +222,6 @@ public class JournalContentPortletDataHandlerImpl
 
 			Element root = doc.getRootElement();
 
-			Element structureEl = root.element("structure");
-
-			Map<String, String> structureIds =
-				(Map<String, String>)context.getNewPrimaryKeysMap(
-					JournalStructure.class);
-
-			if (structureEl != null) {
-				JournalPortletDataHandlerImpl.importStructure(
-					context, structureIds, structureEl);
-			}
-
-			Element templateEl = root.element("template");
-
-			Map<String, String> templateIds =
-				(Map<String, String>)context.getNewPrimaryKeysMap(
-					JournalTemplate.class);
-
-			if (templateEl != null) {
-				JournalPortletDataHandlerImpl.importTemplate(
-					context, structureIds, templateIds, templateEl);
-			}
-
-			Element articleEl = root.element("article");
-
-			Map<String, String> articleIds =
-				(Map<String, String>)context.getNewPrimaryKeysMap(
-					JournalArticle.class);
-
-			if (articleEl != null) {
-				JournalPortletDataHandlerImpl.importArticle(
-					context, structureIds, templateIds, articleIds, articleEl);
-			}
-
 			Element dlFoldersEl = root.element("dl-folders");
 
 			List<Element> dlFolderEls = Collections.EMPTY_LIST;
@@ -268,20 +230,8 @@ public class JournalContentPortletDataHandlerImpl
 				dlFolderEls = dlFoldersEl.elements("folder");
 			}
 
-			Map<Long, Long> dlFolderPKs =
-				(Map<Long, Long>)context.getNewPrimaryKeysMap(DLFolder.class);
-
 			for (Element folderEl : dlFolderEls) {
-				String path = folderEl.attributeValue("path");
-
-				if (!context.isPathNotProcessed(path)) {
-					continue;
-				}
-
-				DLFolder folder = (DLFolder)context.getZipEntryAsObject(path);
-
-				DLPortletDataHandlerImpl.importFolder(
-					context, dlFolderPKs, folder);
+				DLPortletDataHandlerImpl.importFolder(context, folderEl);
 			}
 
 			Element dlFileEntriesEl = root.element("dl-file-entries");
@@ -292,24 +242,8 @@ public class JournalContentPortletDataHandlerImpl
 				dlFileEntryEls = dlFileEntriesEl.elements("file-entry");
 			}
 
-			Map<String, String> fileEntryNames =
-				(Map<String, String>)context.getNewPrimaryKeysMap(
-					DLFileEntry.class);
-
 			for (Element fileEntryEl : dlFileEntryEls) {
-				String path = fileEntryEl.attributeValue("path");
-
-				if (!context.isPathNotProcessed(path)) {
-					continue;
-				}
-
-				DLFileEntry fileEntry =
-					(DLFileEntry)context.getZipEntryAsObject(path);
-
-				String binPath = fileEntryEl.attributeValue("bin-path");
-
-				DLPortletDataHandlerImpl.importFileEntry(
-					context, dlFolderPKs, fileEntryNames, fileEntry, binPath);
+				DLPortletDataHandlerImpl.importFileEntry(context, fileEntryEl);
 			}
 
 			Element dlFileRanksEl = root.element("dl-file-ranks");
@@ -321,17 +255,7 @@ public class JournalContentPortletDataHandlerImpl
 			}
 
 			for (Element fileRankEl : dlFileRankEls) {
-				String path = fileRankEl.attributeValue("path");
-
-				if (!context.isPathNotProcessed(path)) {
-					continue;
-				}
-
-				DLFileRank fileRank =
-					(DLFileRank)context.getZipEntryAsObject(path);
-
-				DLPortletDataHandlerImpl.importFileRank(
-					context, dlFolderPKs, fileEntryNames, fileRank);
+				DLPortletDataHandlerImpl.importFileRank(context, fileRankEl);
 			}
 
 			Element igFoldersEl = root.element("ig-folders");
@@ -342,20 +266,8 @@ public class JournalContentPortletDataHandlerImpl
 				igFolderEls = igFoldersEl.elements("folder");
 			}
 
-			Map<Long, Long> igFolderPKs =
-				(Map<Long, Long>)context.getNewPrimaryKeysMap(IGFolder.class);
-
 			for (Element folderEl : igFolderEls) {
-				String path = folderEl.attributeValue("path");
-
-				if (!context.isPathNotProcessed(path)) {
-					continue;
-				}
-
-				IGFolder folder = (IGFolder)context.getZipEntryAsObject(path);
-
-				IGPortletDataHandlerImpl.importFolder(
-					context, igFolderPKs, folder);
+				IGPortletDataHandlerImpl.importFolder(context, folderEl);
 			}
 
 			Element igImagesEl = root.element("ig-images");
@@ -367,19 +279,33 @@ public class JournalContentPortletDataHandlerImpl
 			}
 
 			for (Element imageEl : igImageEls) {
-				String path = imageEl.attributeValue("path");
-
-				if (!context.isPathNotProcessed(path)) {
-					continue;
-				}
-
-				IGImage image = (IGImage)context.getZipEntryAsObject(path);
-
-				String binPath = imageEl.attributeValue("bin-path");
-
-				IGPortletDataHandlerImpl.importImage(
-					context, igFolderPKs, image, binPath);
+				IGPortletDataHandlerImpl.importImage(context, imageEl);
 			}
+
+			Element structureEl = root.element("structure");
+
+			if (structureEl != null) {
+				JournalPortletDataHandlerImpl.importStructure(
+					context, structureEl);
+			}
+
+			Element templateEl = root.element("template");
+
+			if (templateEl != null) {
+				JournalPortletDataHandlerImpl.importTemplate(
+					context, templateEl);
+			}
+
+			Element articleEl = root.element("article");
+
+			if (articleEl != null) {
+				JournalPortletDataHandlerImpl.importArticle(
+					context, articleEl);
+			}
+
+			Map<String, String> articleIds =
+				(Map<String, String>)context.getNewPrimaryKeysMap(
+					JournalArticle.class);
 
 			String articleId = preferences.getValue(
 				"article-id", StringPool.BLANK);

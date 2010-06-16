@@ -26,9 +26,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.model.DLFileRank;
-import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
@@ -148,43 +145,15 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 			List<Element> folderEls = root.element("folders").elements(
 				"folder");
 
-			Map<Long, Long> folderPKs =
-				(Map<Long, Long>)context.getNewPrimaryKeysMap(DLFolder.class);
-
 			for (Element folderEl : folderEls) {
-				String path = folderEl.attributeValue("path");
-
-				if (!context.isPathNotProcessed(path)) {
-					continue;
-				}
-
-				DLFolder folder = (DLFolder)context.getZipEntryAsObject(path);
-
-				DLPortletDataHandlerImpl.importFolder(
-					context, folderPKs, folder);
+				DLPortletDataHandlerImpl.importFolder(context, folderEl);
 			}
 
 			List<Element> fileEntryEls = root.element("file-entries").elements(
 				"file-entry");
 
-			Map<String, String> fileEntryNames =
-				(Map<String, String>)context.getNewPrimaryKeysMap(
-					DLFileEntry.class);
-
 			for (Element fileEntryEl : fileEntryEls) {
-				String path = fileEntryEl.attributeValue("path");
-
-				if (!context.isPathNotProcessed(path)) {
-					continue;
-				}
-
-				DLFileEntry fileEntry =
-					(DLFileEntry)context.getZipEntryAsObject(path);
-
-				String binPath = fileEntryEl.attributeValue("bin-path");
-
-				DLPortletDataHandlerImpl.importFileEntry(
-					context, folderPKs, fileEntryNames, fileEntry, binPath);
+				DLPortletDataHandlerImpl.importFileEntry(context, fileEntryEl);
 			}
 
 			if (context.getBooleanParameter(_NAMESPACE, "shortcuts")) {
@@ -192,17 +161,8 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 					"file-shortcuts").elements("file-shortcut");
 
 				for (Element fileShortcutEl : fileShortcutEls) {
-					String path = fileShortcutEl.attributeValue("path");
-
-					if (!context.isPathNotProcessed(path)) {
-						continue;
-					}
-
-					DLFileShortcut fileShortcut =
-						(DLFileShortcut)context.getZipEntryAsObject(path);
-
 					DLPortletDataHandlerImpl.importFileShortcut(
-						context, folderPKs, fileEntryNames, fileShortcut);
+						context, fileShortcutEl);
 				}
 			}
 
@@ -211,19 +171,13 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 					"file-rank");
 
 				for (Element fileRankEl : fileRankEls) {
-					String path = fileRankEl.attributeValue("path");
-
-					if (!context.isPathNotProcessed(path)) {
-						continue;
-					}
-
-					DLFileRank fileRank =
-						(DLFileRank)context.getZipEntryAsObject(path);
-
 					DLPortletDataHandlerImpl.importFileRank(
-						context, folderPKs, fileEntryNames, fileRank);
+						context, fileRankEl);
 				}
 			}
+
+			Map<Long, Long> folderPKs =
+				(Map<Long, Long>)context.getNewPrimaryKeysMap(DLFolder.class);
 
 			long rootFolderId = GetterUtil.getLong(
 				root.attributeValue("root-folder-id"));
