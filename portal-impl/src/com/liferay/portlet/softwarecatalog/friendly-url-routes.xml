@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!DOCTYPE routes PUBLIC "-//Liferay//DTD Friendly URL Routes 6.0.0//EN" "http://www.liferay.com/dtd/liferay-friendly-url-routes_6_0_0.dtd">
+
+<routes>
+	<route>
+		<pattern>/products/{productEntryId:\d+}</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/software_catalog/view_product_entry</default-parameter>
+	</route>
+	<route>
+		<pattern>/products/{productEntryId:\d+}/edit</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/software_catalog/edit_product_entry</default-parameter>
+	</route>
+	<route>
+		<pattern>/framework_versions/{frameworkVersionId:\d+}/edit</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/software_catalog/edit_framework_version</default-parameter>
+	</route>
+	<route>
+		<pattern>/licenses/{licenseId:\d+}/edit</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/software_catalog/edit_license</default-parameter>
+	</route>
+	<route>
+		<pattern>/products/new</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/software_catalog/edit_product_entry</default-parameter>
+	</route>
+	<route>
+		<pattern>/framework_versions/new</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/software_catalog/edit_framework_version</default-parameter>
+	</route>
+	<route>
+		<pattern>/licenses/new</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/software_catalog/edit_license</default-parameter>
+	</route>
+	<route>
+		<pattern>/products/{productEntryId:\d+}/versions/{productVersionId:\d+}/edit</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/software_catalog/edit_product_version</default-parameter>
+	</route>
+	<route>
+		<pattern>/products/{productEntryId:\d+}/versions/new</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/software_catalog/edit_product_version</default-parameter>
+	</route>
+	<route>
+		<pattern>/{tabs1}</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/software_catalog/view</default-parameter>
+	</route>
+	<route>
+		<pattern>/products/{productEntryId:\d+}/{p_p_state}</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="struts_action">/software_catalog/view_product_entry</default-parameter>
+	</route>
+	<route>
+		<pattern>/products/{productEntryId:\d+}/edit/{p_p_state}</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="struts_action">/software_catalog/edit_product_entry</default-parameter>
+	</route>
+	<route>
+		<pattern>/framework_versions/{frameworkVersionId:\d+}/edit/{p_p_state}</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="struts_action">/software_catalog/edit_framework_version</default-parameter>
+	</route>
+	<route>
+		<pattern>/licenses/{licenseId:\d+}/edit/{p_p_state}</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="struts_action">/software_catalog/edit_license</default-parameter>
+	</route>
+	<route>
+		<pattern>/products/new/{p_p_state}</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="struts_action">/software_catalog/edit_product_entry</default-parameter>
+	</route>
+	<route>
+		<pattern>/framework_versions/new/{p_p_state}</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="struts_action">/software_catalog/edit_framework_version</default-parameter>
+	</route>
+	<route>
+		<pattern>/licenses/new/{p_p_state}</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="struts_action">/software_catalog/edit_license</default-parameter>
+	</route>
+	<route>
+		<pattern>/products/{productEntryId:\d+}/versions/{productVersionId:\d+}/edit/{p_p_state}</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="struts_action">/software_catalog/edit_product_version</default-parameter>
+	</route>
+	<route>
+		<pattern>/products/{productEntryId:\d+}/versions/new/{p_p_state}</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="struts_action">/software_catalog/edit_product_version</default-parameter>
+	</route>
+	<route>
+		<pattern>/{tabs1}/{p_p_state}</pattern>
+		<default-parameter name="p_p_lifecycle">0</default-parameter>
+		<default-parameter name="struts_action">/software_catalog/view</default-parameter>
+	</route>
+</routes>

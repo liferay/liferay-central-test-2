@@ -795,7 +795,9 @@
 		<icon>/html/icons/default.png</icon>
 		<struts-path>software_catalog</struts-path>
 		<indexer-class>com.liferay.portlet.softwarecatalog.util.SCIndexer</indexer-class>
-		<friendly-url-mapper-class>com.liferay.portlet.softwarecatalog.SCFriendlyURLMapper</friendly-url-mapper-class>
+		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
+		<friendly-url-mapping>software_catalog</friendly-url-mapping>
+		<friendly-url-routes>com/liferay/portlet/softwarecatalog/friendly-url-routes.xml</friendly-url-routes>
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>10.0</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
