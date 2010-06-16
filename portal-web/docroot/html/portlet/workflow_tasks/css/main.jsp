@@ -43,8 +43,12 @@ html = StringUtil.replace(html, "portlet-document-library", "portlet-workflow-ta
 	font-weight: bold;
 }
 
+.portlet-workflow-tasks .task-author, .portlet-workflow-tasks .task-due-date, .portlet-workflow-tasks .task-type-0, .portlet-workflow-tasks .task-type-1, .portlet-workflow-tasks .task-type-2, .portlet-workflow-tasks .task-date, .portlet-workflow-tasks .task-status {
+	background: url() no-repeat 0 50%;
+}
+
 .portlet-workflow-tasks .task-author {
-	background: url(<%= themeImagesPath %>/common/assign.png) no-repeat 0 50%;
+	background-image: url(<%= themeImagesPath %>/common/assign.png);
 	border-width: 0;
 	color: #000;
 	float: none;
@@ -71,25 +75,25 @@ html = StringUtil.replace(html, "portlet-document-library", "portlet-workflow-ta
 }
 
 .portlet-workflow-tasks .task-due-date {
-	background: url(<%= themeImagesPath %>/common/time.png) no-repeat 0 50%;
+	background-image: url(<%= themeImagesPath %>/common/time.png);
 	padding-left: 25px;
 }
 
 .portlet-workflow-tasks .task-type-0 {
-	background: url(<%= themeImagesPath %>/common/recent_changes.png) no-repeat 0 50%;
+	background-image: url(<%= themeImagesPath %>/common/recent_changes.png);
 }
 
 .portlet-workflow-tasks .task-type-1 {
-	background: url(<%= themeImagesPath %>/common/assign.png) no-repeat 0 50%;
+	background-image: url(<%= themeImagesPath %>/common/assign.png);
 }
 
 .portlet-workflow-tasks .task-type-2 {
-	background: url(<%= themeImagesPath %>/common/time.png) no-repeat 0 50%;
+	background-image: url(<%= themeImagesPath %>/common/time.png);
 	padding-left: 30px;
 }
 
 .portlet-workflow-tasks .task-date {
-	background: url(<%= themeImagesPath %>/common/date.png) no-repeat 0 50%;
+	background-image: url(<%= themeImagesPath %>/common/date.png);
 	border-width: 0;
 	color: #000;
 	float: none;
@@ -100,7 +104,7 @@ html = StringUtil.replace(html, "portlet-document-library", "portlet-workflow-ta
 }
 
 .portlet-workflow-tasks .task-status {
-	background: url(<%= themeImagesPath %>/common/recent_changes.png) no-repeat 0 50%;
+	background-image: url(<%= themeImagesPath %>/common/recent_changes.png);
 	color: #000;
 	padding-left: 25px;
 	padding-right: 10px;
