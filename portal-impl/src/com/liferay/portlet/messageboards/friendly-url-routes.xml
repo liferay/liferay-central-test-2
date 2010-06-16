@@ -9,12 +9,12 @@
 		<default-parameter name="struts_action">/message_boards/view</default-parameter>
 	</route>
 	<route>
-		<pattern>/category/{\d+:mbCategoryId}</pattern>
+		<pattern>/category/{mbCategoryId:\d+}</pattern>
 		<default-parameter name="p_p_state">normal</default-parameter>
 		<default-parameter name="struts_action">/message_boards/view</default-parameter>
 	</route>
 	<route>
-		<pattern>/view_message/{\d+:messageId}</pattern>
+		<pattern>/view_message/{messageId:\d+}</pattern>
 		<default-parameter name="p_p_state">normal</default-parameter>
 		<default-parameter name="struts_action">/message_boards/view_message</default-parameter>
 	</route>
@@ -34,11 +34,11 @@
 		<default-parameter name="struts_action">/message_boards/view</default-parameter>
 	</route>
 	<route>
-		<pattern>/category/{\d+:mbCategoryId}/{p_p_state}</pattern>
+		<pattern>/category/{mbCategoryId:\d+}/{p_p_state}</pattern>
 		<default-parameter name="struts_action">/message_boards/view</default-parameter>
 	</route>
 	<route>
-		<pattern>/view_message/{\d+:messageId}/{p_p_state}</pattern>
+		<pattern>/view_message/{messageId:\d+}/{p_p_state}</pattern>
 		<default-parameter name="struts_action">/message_boards/view_message</default-parameter>
 	</route>
 	<route>

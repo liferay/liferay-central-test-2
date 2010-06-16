@@ -10,28 +10,28 @@
 		<ignored-parameter name="nodeName" />
 	</route>
 	<route>
-		<pattern>/{\d+:nodeId}/all_pages</pattern>
+		<pattern>/{nodeId:\d+}/all_pages</pattern>
 		<default-parameter name="nodeName"></default-parameter>
 		<default-parameter name="p_p_state">normal</default-parameter>
 		<default-parameter name="struts_action">/wiki/view_all_pages</default-parameter>
 		<default-parameter name="tag"></default-parameter>
 	</route>
 	<route>
-		<pattern>/{\d+:nodeId}/draft_pages</pattern>
+		<pattern>/{nodeId:\d+}/draft_pages</pattern>
 		<default-parameter name="nodeName"></default-parameter>
 		<default-parameter name="p_p_state">normal</default-parameter>
 		<default-parameter name="struts_action">/wiki/view_draft_pages</default-parameter>
 		<default-parameter name="tag"></default-parameter>
 	</route>
 	<route>
-		<pattern>/{\d+:nodeId}/orphan_pages</pattern>
+		<pattern>/{nodeId:\d+}/orphan_pages</pattern>
 		<default-parameter name="nodeName"></default-parameter>
 		<default-parameter name="p_p_state">normal</default-parameter>
 		<default-parameter name="struts_action">/wiki/view_orphan_pages</default-parameter>
 		<default-parameter name="tag"></default-parameter>
 	</route>
 	<route>
-		<pattern>/{\d+:nodeId}/recent_changes</pattern>
+		<pattern>/{nodeId:\d+}/recent_changes</pattern>
 		<default-parameter name="nodeName"></default-parameter>
 		<default-parameter name="p_p_state">normal</default-parameter>
 		<default-parameter name="struts_action">/wiki/view_recent_changes</default-parameter>
@@ -66,14 +66,14 @@
 		<default-parameter name="tag"></default-parameter>
 	</route>
 	<route>
-		<pattern>/{\d+:nodeId}/{[^/]+:title}</pattern>
+		<pattern>/{nodeId:\d+}/{title:[^/]+}</pattern>
 		<default-parameter name="nodeName"></default-parameter>
 		<default-parameter name="p_p_state">normal</default-parameter>
 		<default-parameter name="struts_action">/wiki/view</default-parameter>
 		<default-parameter name="tag"></default-parameter>
 	</route>
 	<route>
-		<pattern>/{nodeName}/{[^/]+:title}</pattern>
+		<pattern>/{nodeName}/{title:[^/]+}</pattern>
 		<default-parameter name="nodeId"></default-parameter>
 		<default-parameter name="p_p_state">normal</default-parameter>
 		<default-parameter name="struts_action">/wiki/view</default-parameter>
@@ -86,25 +86,25 @@
 		<ignored-parameter name="nodeName" />
 	</route>
 	<route>
-		<pattern>/{\d+:nodeId}/all_pages/{p_p_state}</pattern>
+		<pattern>/{nodeId:\d+}/all_pages/{p_p_state}</pattern>
 		<default-parameter name="nodeName"></default-parameter>
 		<default-parameter name="struts_action">/wiki/view_all_pages</default-parameter>
 		<default-parameter name="tag"></default-parameter>
 	</route>
 	<route>
-		<pattern>/{\d+:nodeId}/draft_pages/{p_p_state}</pattern>
+		<pattern>/{nodeId:\d+}/draft_pages/{p_p_state}</pattern>
 		<default-parameter name="nodeName"></default-parameter>
 		<default-parameter name="struts_action">/wiki/view_draft_pages</default-parameter>
 		<default-parameter name="tag"></default-parameter>
 	</route>
 	<route>
-		<pattern>/{\d+:nodeId}/orphan_pages/{p_p_state}</pattern>
+		<pattern>/{nodeId:\d+}/orphan_pages/{p_p_state}</pattern>
 		<default-parameter name="nodeName"></default-parameter>
 		<default-parameter name="struts_action">/wiki/view_orphan_pages</default-parameter>
 		<default-parameter name="tag"></default-parameter>
 	</route>
 	<route>
-		<pattern>/{\d+:nodeId}/recent_changes/{p_p_state}</pattern>
+		<pattern>/{nodeId:\d+}/recent_changes/{p_p_state}</pattern>
 		<default-parameter name="nodeName"></default-parameter>
 		<default-parameter name="struts_action">/wiki/view_recent_changes</default-parameter>
 		<default-parameter name="tag"></default-parameter>
@@ -134,13 +134,13 @@
 		<default-parameter name="tag"></default-parameter>
 	</route>
 	<route>
-		<pattern>/{\d+:nodeId}/{[^/]+:title}/{p_p_state}</pattern>
+		<pattern>/{nodeId:\d+}/{title:[^/]+}/{p_p_state}</pattern>
 		<default-parameter name="nodeName"></default-parameter>
 		<default-parameter name="struts_action">/wiki/view</default-parameter>
 		<default-parameter name="tag"></default-parameter>
 	</route>
 	<route>
-		<pattern>/{nodeName}/{[^/]+:title}/{p_p_state}</pattern>
+		<pattern>/{nodeName}/{title:[^/]+}/{p_p_state}</pattern>
 		<default-parameter name="nodeId"></default-parameter>
 		<default-parameter name="struts_action">/wiki/view</default-parameter>
 		<default-parameter name="tag"></default-parameter>

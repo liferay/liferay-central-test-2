@@ -38,18 +38,18 @@ public class RoutePart {
 		String[] fragmentParts = fragment.split(StringPool.COLON, 2);
 
 		if (fragmentParts.length == 2) {
-			String pattern = fragmentParts[0];
+			_name = fragmentParts[0];
+			String pattern = fragmentParts[1];
 
 			if (Validator.isNull(pattern)) {
 				throw new IllegalArgumentException("Pattern is null");
 			}
 
 			_pattern = Pattern.compile(pattern);
-			_name = fragmentParts[1];
 		}
 		else {
-			_pattern = _defaultPattern;
 			_name = fragmentParts[0];
+			_pattern = _defaultPattern;
 		}
 
 		if (Validator.isNull(_name)) {

@@ -15,7 +15,7 @@
 		<default-parameter name="struts_action">/blogs/rss</default-parameter>
 	</route>
 	<route>
-		<pattern>/trackback/{\d+:entryId}</pattern>
+		<pattern>/trackback/{entryId:\d+}</pattern>
 		<default-parameter name="p_p_lifecycle">1</default-parameter>
 		<default-parameter name="p_p_state">exclusive</default-parameter>
 		<default-parameter name="struts_action">/blogs/trackback</default-parameter>
@@ -27,7 +27,7 @@
 		<default-parameter name="struts_action">/blogs/trackback</default-parameter>
 	</route>
 	<route>
-		<pattern>/{\d+:entryId}</pattern>
+		<pattern>/{entryId:\d+}</pattern>
 		<default-parameter name="p_p_lifecycle">0</default-parameter>
 		<default-parameter name="p_p_state">normal</default-parameter>
 		<default-parameter name="struts_action">/blogs/view_entry</default-parameter>
@@ -49,7 +49,7 @@
 		<default-parameter name="struts_action">/blogs/rss</default-parameter>
 	</route>
 	<route>
-		<pattern>/trackback/{\d+:entryId}/{p_p_state}</pattern>
+		<pattern>/trackback/{entryId:\d+}/{p_p_state}</pattern>
 		<default-parameter name="p_p_lifecycle">1</default-parameter>
 		<default-parameter name="struts_action">/blogs/trackback</default-parameter>
 	</route>
@@ -59,7 +59,7 @@
 		<default-parameter name="struts_action">/blogs/trackback</default-parameter>
 	</route>
 	<route>
-		<pattern>/{\d+:entryId}/{p_p_state}</pattern>
+		<pattern>/{entryId:\d+}/{p_p_state}</pattern>
 		<default-parameter name="p_p_lifecycle">0</default-parameter>
 		<default-parameter name="struts_action">/blogs/view_entry</default-parameter>
 	</route>
