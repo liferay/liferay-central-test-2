@@ -10,7 +10,7 @@
 				modules = [modules];
 			}
 
-			var guid = A.guid('lfr-provide');
+			var guid = A.guid();
 			var before;
 
 			if (A.Lang.isObject(methodFn, true)) {
@@ -66,8 +66,6 @@
 				return methodFn.toString();
 			};
 
-			proxy._guid = guid;
-
 			obj[methodName] = proxy;
 		},
 
@@ -94,8 +92,6 @@
 
 		_replaceMethod: function(obj, methodName, methodFn) {
 			var instance = this;
-
-			methodFn._guid = obj[methodName]['_guid'];
 
 			var AOP = Dependency._getAOP(obj, methodName);
 
