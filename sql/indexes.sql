@@ -229,6 +229,7 @@ create index IX_9356F865 on JournalArticle (groupId);
 create index IX_68C0F69C on JournalArticle (groupId, articleId);
 create index IX_4D5CD982 on JournalArticle (groupId, articleId, status);
 create unique index IX_85C52EEC on JournalArticle (groupId, articleId, version);
+create index IX_301D024B on JournalArticle (groupId, status);
 create index IX_2E207659 on JournalArticle (groupId, structureId);
 create index IX_8DEAE14E on JournalArticle (groupId, templateId);
 create index IX_22882D02 on JournalArticle (groupId, urlTitle);

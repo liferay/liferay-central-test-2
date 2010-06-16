@@ -1684,8 +1684,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			if (context.getBooleanParameter(_NAMESPACE, "articles")) {
 				List<JournalArticle> articles =
-					JournalArticleUtil.findByGroupId(
-						groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					JournalArticleUtil.findByG_ST(
+						groupId, WorkflowConstants.STATUS_APPROVED,
+						QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 						new ArticleIDComparator(true));
 
 				for (JournalArticle article : articles) {
