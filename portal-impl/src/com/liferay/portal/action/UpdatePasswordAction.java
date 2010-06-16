@@ -39,6 +39,7 @@ import com.liferay.portlet.login.util.LoginUtil;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -81,7 +82,7 @@ public class UpdatePasswordAction extends Action {
 
 			PortletURL portletURL = new PortletURLImpl(
 				request, PortletKeys.LOGIN, themeDisplay.getPlid(),
-					PortletRequest.RENDER_PHASE);
+				PortletRequest.RENDER_PHASE);
 
 			response.sendRedirect(portletURL.toString());
 
