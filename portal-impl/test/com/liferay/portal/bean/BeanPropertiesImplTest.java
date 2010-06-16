@@ -17,6 +17,9 @@ package com.liferay.portal.bean;
 import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.util.BaseTestCase;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * <a href="BeanPropertiesImplTest.java.html"><b><i>View Source</i></b></a>
  *
@@ -59,6 +62,83 @@ public class BeanPropertiesImplTest extends BaseTestCase {
 		value = BeanPropertiesUtil.getBoolean(foo, _NONEXISTENT, false);
 
 		assertFalse(value);
+	}
+
+	public void testCopyEditabileProperties() {
+		Foo foo = _createPopulatedFoo();
+		Foo dest = new Foo();
+
+		assertFalse(dest.equals(foo));
+
+		BeanPropertiesUtil.copyProperties(foo, dest, FooBase.class);
+
+		assertFalse(dest.equals(foo));
+		assertEquals(foo.getInteger(), dest.getInteger());
+		assertEquals(foo.getInt(), dest.getInt());
+		assertEquals(foo.getLongObject(), dest.getLongObject());
+		assertEquals(foo.getLong(), dest.getLong());
+	}
+
+	public void testCopyProperties() {
+		Foo foo = _createPopulatedFoo();
+		Foo dest = new Foo();
+
+		assertFalse(dest.equals(foo));
+
+		BeanPropertiesUtil.copyProperties(foo, dest);
+
+		assertEquals(dest, foo);
+	}
+
+	private Foo _createPopulatedFoo() {
+		Foo foo = new Foo();
+		foo.setBooleanObject(Boolean.TRUE);
+		foo.setByteObject(Byte.valueOf((byte) 7));
+		foo.setDoubleObject(Double.valueOf(17.3));
+		foo.setFloatObject(Float.valueOf(13.7f));
+		foo.setBoolean(true);
+		foo.setByte((byte) 13);
+		foo.setChar('L');
+		foo.setCharacter(Character.valueOf('P'));
+		foo.setDouble(37.1);
+		foo.setFloat(3.7f);
+		foo.setInt(173);
+		foo.setInteger(Integer.valueOf(1730));
+		foo.setLong(1773L);
+		foo.setString("test");
+		foo.setStringArray(new String[] {"a", "b", "c"});
+
+		HashMap<String, Integer> m = new HashMap<String, Integer>();
+		m.put("one", Integer.valueOf(1));
+		m.put("two", Integer.valueOf(2));
+		foo.setMap(m);
+
+		ArrayList<Integer> l = new ArrayList<Integer>();
+		l.add(Integer.valueOf(101));
+		l.add(Integer.valueOf(102));
+		l.add(Integer.valueOf(103));
+		foo.setList(l);
+
+		return foo;
+	}
+
+	public void testCopySomeProperties() {
+		Foo foo = _createPopulatedFoo();
+		Foo dest = new Foo();
+
+		assertFalse(dest.equals(foo));
+
+		BeanPropertiesUtil.copyProperties(
+			foo, dest, new String[] {"string", "integer"});
+
+		assertFalse(dest.equals(foo));
+		assertNull(dest.getString());
+		assertNull(dest.getInteger());
+
+		dest.setString(foo.getString());
+		dest.setInteger(foo.getInteger());
+
+		assertEquals(dest, foo);
 	}
 
 	public void testDouble() {
@@ -170,6 +250,13 @@ public class BeanPropertiesImplTest extends BaseTestCase {
 		assertEquals(-1, value);
 	}
 
+	public void testMissingInnerProperty() {
+		Bar bar = new Bar();
+		bar.setFoo(null);
+
+		BeanPropertiesUtil.setProperty(bar, "foo.int", Integer.valueOf(173));
+	}
+
 	public void testSetInnerProperty() {
 		Bar bar = new Bar();
 
@@ -213,6 +300,23 @@ public class BeanPropertiesImplTest extends BaseTestCase {
 		value = BeanPropertiesUtil.getString(foo, _NONEXISTENT, "none");
 
 		assertEquals("none", value);
+	}
+
+	public void testStringArray() {
+		Bar bar = new Bar();
+		Foo foo = bar.getFoo();
+
+		foo.setStringArray(new String[] {
+			"one", "two", "three"
+		});
+
+		BeanPropertiesUtil.setProperty(bar, "foo.stringArray[1]", "TWO");
+
+		assertEquals("TWO", foo.getStringArray()[1]);
+
+		BeanPropertiesUtil.setProperty(bar, "foo.stringArray[3]", "four");
+
+		assertEquals(3, foo.getStringArray().length);
 	}
 
 	private static final String _NONEXISTENT = "nonexistent";

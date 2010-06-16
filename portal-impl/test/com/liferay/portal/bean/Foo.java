@@ -14,6 +14,7 @@
 
 package com.liferay.portal.bean;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +23,74 @@ import java.util.Map;
  *
  * @author Igor Spasic
  */
-public class Foo {
+public class Foo extends FooBase {
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+
+		Foo foo = (Foo) o;
+		if (super.equals(foo) == false) {
+			return false;
+		}
+
+		if (_boolean != foo._boolean) {
+			return false;
+		}
+		if (_byte != foo._byte) {
+			return false;
+		}
+		if (_char != foo._char) {
+			return false;
+		}
+		if (Double.compare(foo._double, _double) != 0) {
+			return false;
+		}
+		if (Float.compare(foo._float, _float) != 0) {
+			return false;
+		}
+		if (_booleanObject != null ?
+			!_booleanObject.equals(foo._booleanObject) :
+			foo._booleanObject != null) {
+			return false;
+		}
+		if (_byteObject != null ? !_byteObject.equals(foo._byteObject) :
+			foo._byteObject != null) {
+			return false;
+		}
+		if (_doubleObject != null ? !_doubleObject.equals(foo._doubleObject) :
+			foo._doubleObject != null) {
+			return false;
+		}
+		if (_floatObject != null ? !_floatObject.equals(foo._floatObject) :
+			foo._floatObject != null) {
+			return false;
+		}
+		if (_character != null ? !_character.equals(foo._character) :
+			foo._character != null) {
+			return false;
+		}
+		if (_list != null ? !_list.equals(foo._list) :
+			foo._list != null) {
+			return false;
+		}
+		if (_map != null ? !_map.equals(foo._map) : foo._map != null) {
+			return false;
+		}
+		if (_string != null ? !_string.equals(foo._string) :
+			foo._string != null) {
+			return false;
+		}
+		if (!Arrays.equals(_stringArray, foo._stringArray)) {
+			return false;
+		}
+		return true;
+	}
 
 	public boolean getBoolean() {
 		return _boolean;
@@ -64,24 +132,8 @@ public class Foo {
 		return _floatObject;
 	}
 
-	public int getInt() {
-		return _int;
-	}
-
-	public Integer getInteger() {
-		return _integer;
-	}
-
 	public List<?> getList() {
 		return _list;
-	}
-
-	public long getLong() {
-		return _long;
-	}
-
-	public Long getLongObject() {
-		return _longObject;
 	}
 
 	public Map<?, ?> getMap() {
@@ -136,24 +188,8 @@ public class Foo {
 		_floatObject = floatObject;
 	}
 
-	public void setInt(int i) {
-		_int = i;
-	}
-
-	public void setInteger(Integer integer) {
-		_integer = integer;
-	}
-
 	public void setList(List<?> list) {
 		_list = list;
-	}
-
-	public void setLong(long l) {
-		_long = l;
-	}
-
-	public void setLongObject(Long longObject) {
-		_longObject = longObject;
 	}
 
 	public void setMap(Map<?, ?> map) {
@@ -178,11 +214,7 @@ public class Foo {
 	private Double _doubleObject;
 	private float _float;
 	private Float _floatObject;
-	private int _int;
-	private Integer _integer;
 	private List<?> _list;
-	private long _long;
-	private Long _longObject;
 	private Map<?, ?> _map;
 	private String _string;
 	private String[] _stringArray;
