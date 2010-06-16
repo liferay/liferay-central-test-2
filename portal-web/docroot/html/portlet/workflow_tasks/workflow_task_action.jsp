@@ -144,21 +144,22 @@ if (workflowTask.getDueDate() != null) {
 
 <aui:script use="aui-dialog">
 	var showPopup = function(url, content) {
-		var form = A.Node.create('<form/>');
+		var form = A.Node.create('<form />');
 
 		form.setAttribute('action', url);
 		form.setAttribute('method', 'POST');
 
 		var comments = A.one('#<%= randomId %>updateComments');
 
-		form.append(content);
-		form.append(comments);
-
 		if (content) {
+			form.append(content);
 			content.show();
 		}
 
-		comments.show();
+		if (comments) {
+			form.append(comments);
+			comments.show();
+		}
 
 		var dialog = new A.Dialog(
 			{
@@ -188,23 +189,24 @@ if (workflowTask.getDueDate() != null) {
 	A.all('.workflow-task-<%= randomId %> a').on(
 		'click',
 		function(event) {
-			var href = event.currentTarget.attr('href');
+			var icon = event.currentTarget;
+			var li = icon.get('parentNode');
 
-			event.halt();
+			event.preventDefault();
 
-			var content = '';
+			var content = null;
 
-			if (event.currentTarget.ancestor().hasClass('task-due-date-link')) {
-				content = A.one('#<%= randomId %>updateDueDate');
+			if (li.hasClass('task-due-date-link')) {
+				content = '#<%= randomId %>updateDueDate';
 			}
-			else if (event.currentTarget.ancestor().hasClass('task-assign-to-me-link')) {
-				content = A.one('#<%= randomId %>updateAsigneeToMe');
+			else if (li.hasClass('task-assign-to-me-link')) {
+				content = '#<%= randomId %>updateAsigneeToMe';
 			}
-			else if (event.currentTarget.ancestor().hasClass('task-assign-link')) {
-				content = A.one('#<%= randomId %>updateAsignee');
+			else if (li.hasClass('task-assign-link')) {
+				content = '#<%= randomId %>updateAsignee';
 			}
 
-			showPopup(href, content);
+			showPopup(icon.attr('href'), A.one(content));
 		}
 	);
 </aui:script>
