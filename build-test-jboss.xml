@@ -17,9 +17,18 @@
 	</target>
 
 	<target name="run-selenium-jboss">
-		<ant antfile="build-dist.xml" target="build-dist-jboss" />
+		<if>
+			<not>
+				<isset property="build.app.server" />
+			</not>
+			<then>
+				<ant antfile="build-dist.xml" target="build-dist-jboss" />
+			</then>
+		</if>
 
 		<antcall target="revert-test-properties" />
+
+		<antcall target="prepare-virtual-host-name-properties" />
 
 		<antcall target="start-selenium" />
 
