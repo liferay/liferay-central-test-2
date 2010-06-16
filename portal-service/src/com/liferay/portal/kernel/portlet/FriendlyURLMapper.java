@@ -41,11 +41,11 @@ public interface FriendlyURLMapper {
 		String friendlyURLPath, Map<String, String[]> parameterMap,
 		Map<String, Object> requestContext);
 
+	public void setMapping(String mapping);
+
 	public void setPortletId(String portletId);
 
 	public void setPortletInstanceable(boolean portletInstanceable);
-
-	public void setMapping(String mapping);
 
 	public void setRouter(Router router);
 
