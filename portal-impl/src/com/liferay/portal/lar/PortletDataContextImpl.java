@@ -856,6 +856,15 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
+	public boolean isDataStrategyMirror() {
+		if (_dataStrategy.equals(PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public boolean isPathNotProcessed(String path) {
 		return !addPrimaryKey(String.class, path);
 	}

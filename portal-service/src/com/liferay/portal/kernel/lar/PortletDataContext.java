@@ -216,6 +216,8 @@ public interface PortletDataContext extends Serializable {
 			Class<?> classObj, long classPK, long newClassPK)
 		throws PortalException, SystemException;
 
+	public boolean isDataStrategyMirror();
+
 	public boolean isPathNotProcessed(String path);
 
 	public boolean isPrivateLayout();

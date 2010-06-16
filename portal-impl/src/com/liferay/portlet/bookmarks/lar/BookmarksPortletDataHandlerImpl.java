@@ -14,16 +14,11 @@
 
 package com.liferay.portlet.bookmarks.lar;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
-import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.xml.Document;
@@ -31,7 +26,6 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.bookmarks.NoSuchFolderException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
@@ -56,67 +50,6 @@ import javax.portlet.PortletPreferences;
  */
 public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 
-	public PortletPreferences deleteData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
-		throws PortletDataException {
-
-		try {
-			if (!context.addPrimaryKey(
-					BookmarksPortletDataHandlerImpl.class, "deleteData")) {
-
-				BookmarksFolderLocalServiceUtil.deleteFolders(
-					context.getScopeGroupId());
-			}
-
-			return null;
-		}
-		catch (Exception e) {
-			throw new PortletDataException(e);
-		}
-	}
-
-	public String exportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
-		throws PortletDataException {
-
-		try {
-			context.addPermissions(
-				"com.liferay.portlet.bookmarks", context.getScopeGroupId());
-
-			Document document = SAXReaderUtil.createDocument();
-
-			Element rootElement = document.addElement("bookmarks-data");
-
-			rootElement.addAttribute(
-				"group-id", String.valueOf(context.getScopeGroupId()));
-
-			Element foldersElement = rootElement.addElement("folders");
-			Element entriesElement = rootElement.addElement("entries");
-
-			List<BookmarksFolder> folders = BookmarksFolderUtil.findByGroupId(
-				context.getScopeGroupId());
-
-			for (BookmarksFolder folder : folders) {
-				exportFolder(context, foldersElement, entriesElement, folder);
-			}
-
-			List<BookmarksEntry> entries = BookmarksEntryUtil.findByG_F(
-				context.getScopeGroupId(),
-				BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-
-			for (BookmarksEntry entry : entries) {
-				exportEntry(context, null, entriesElement, entry);
-			}
-
-			return document.formattedString();
-		}
-		catch (Exception e) {
-			throw new PortletDataException(e);
-		}
-	}
-
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
 			_foldersAndEntries, _categories, _ratings, _tags
@@ -129,62 +62,107 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		};
 	}
 
-	public PortletPreferences importData(
+	protected PortletPreferences doDeleteData(
+			PortletDataContext context, String portletId,
+			PortletPreferences preferences)
+		throws Exception {
+
+		if (!context.addPrimaryKey(
+				BookmarksPortletDataHandlerImpl.class, "deleteData")) {
+
+			BookmarksFolderLocalServiceUtil.deleteFolders(
+				context.getScopeGroupId());
+		}
+
+		return null;
+	}
+
+	protected String doExportData(
+			PortletDataContext context, String portletId,
+			PortletPreferences preferences)
+		throws Exception {
+
+		context.addPermissions(
+			"com.liferay.portlet.bookmarks", context.getScopeGroupId());
+
+		Document document = SAXReaderUtil.createDocument();
+
+		Element rootElement = document.addElement("bookmarks-data");
+
+		rootElement.addAttribute(
+			"group-id", String.valueOf(context.getScopeGroupId()));
+
+		Element foldersElement = rootElement.addElement("folders");
+		Element entriesElement = rootElement.addElement("entries");
+
+		List<BookmarksFolder> folders = BookmarksFolderUtil.findByGroupId(
+			context.getScopeGroupId());
+
+		for (BookmarksFolder folder : folders) {
+			exportFolder(context, foldersElement, entriesElement, folder);
+		}
+
+		List<BookmarksEntry> entries = BookmarksEntryUtil.findByG_F(
+			context.getScopeGroupId(),
+			BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
+		for (BookmarksEntry entry : entries) {
+			exportEntry(context, null, entriesElement, entry);
+		}
+
+		return document.formattedString();
+	}
+
+	protected PortletPreferences doImportData(
 			PortletDataContext context, String portletId,
 			PortletPreferences preferences, String data)
-		throws PortletDataException {
+		throws Exception {
 
-		try {
-			context.importPermissions(
-				"com.liferay.portlet.bookmarks", context.getSourceGroupId(),
-				context.getScopeGroupId());
+		context.importPermissions(
+			"com.liferay.portlet.bookmarks", context.getSourceGroupId(),
+			context.getScopeGroupId());
 
-			Document document = SAXReaderUtil.read(data);
+		Document document = SAXReaderUtil.read(data);
 
-			Element rootElement = document.getRootElement();
+		Element rootElement = document.getRootElement();
 
-			Element foldersElement = rootElement.element("folders");
+		Element foldersElement = rootElement.element("folders");
 
-			for (Element folderElement : foldersElement.elements("folder")) {
-				String path = folderElement.attributeValue("path");
+		for (Element folderElement : foldersElement.elements("folder")) {
+			String path = folderElement.attributeValue("path");
 
-				if (!context.isPathNotProcessed(path)) {
-					continue;
-				}
-
-				BookmarksFolder folder =
-					(BookmarksFolder)context.getZipEntryAsObject(path);
-
-				importFolder(context, folder);
+			if (!context.isPathNotProcessed(path)) {
+				continue;
 			}
 
-			Element entriesElement = rootElement.element("entries");
+			BookmarksFolder folder =
+				(BookmarksFolder)context.getZipEntryAsObject(path);
 
-			for (Element entryElement : entriesElement.elements("entry")) {
-				String path = entryElement.attributeValue("path");
+			importFolder(context, folder);
+		}
 
-				if (!context.isPathNotProcessed(path)) {
-					continue;
-				}
+		Element entriesElement = rootElement.element("entries");
 
-				BookmarksEntry entry =
-					(BookmarksEntry)context.getZipEntryAsObject(path);
+		for (Element entryElement : entriesElement.elements("entry")) {
+			String path = entryElement.attributeValue("path");
 
-				importEntry(context, entry);
+			if (!context.isPathNotProcessed(path)) {
+				continue;
 			}
 
-			return null;
+			BookmarksEntry entry = (BookmarksEntry)context.getZipEntryAsObject(
+				path);
+
+			importEntry(context, entry);
 		}
-		catch (Exception e) {
-			throw new PortletDataException(e);
-		}
+
+		return null;
 	}
 
 	protected void exportFolder(
-			PortletDataContext context,
-			Element foldersElement, Element entriesElement,
-			BookmarksFolder folder)
-		throws PortalException, SystemException {
+			PortletDataContext context, Element foldersElement,
+			Element entriesElement, BookmarksFolder folder)
+		throws Exception {
 
 		if (context.isWithinDateRange(folder.getModifiedDate())) {
 			exportParentFolder(
@@ -215,10 +193,9 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected void exportEntry(
-			PortletDataContext context,
-			Element foldersElement, Element entriesElement,
-			BookmarksEntry entry)
-		throws PortalException, SystemException {
+			PortletDataContext context, Element foldersElement,
+			Element entriesElement, BookmarksEntry entry)
+		throws Exception {
 
 		if (!context.isWithinDateRange(entry.getModifiedDate())) {
 			return;
@@ -259,7 +236,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	protected void exportParentFolder(
 			PortletDataContext context, Element foldersElement, long folderId)
-		throws PortalException, SystemException {
+		throws Exception {
 
 		if (folderId == BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			return;
@@ -327,7 +304,6 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws Exception {
 
 		long userId = context.getUserId(entry.getUserUuid());
-		long groupId = context.getScopeGroupId();
 
 		Map<Long, Long> folderPKs =
 			(Map<Long, Long>)context.getNewPrimaryKeysMap(
@@ -374,46 +350,38 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		BookmarksEntry importedEntry = null;
 
-		try {
-			if (context.getDataStrategy().equals(
-					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
+		if (context.isDataStrategyMirror()) {
+			BookmarksEntry existingEntry = BookmarksEntryUtil.fetchByUUID_G(
+				entry.getUuid(), context.getScopeGroupId());
 
-				BookmarksEntry existingEntry = BookmarksEntryUtil.fetchByUUID_G(
-					entry.getUuid(), groupId);
-
-				if (existingEntry == null) {
-					importedEntry = BookmarksEntryLocalServiceUtil.addEntry(
-						entry.getUuid(), userId, groupId, folderId,
-						entry.getName(), entry.getUrl(), entry.getComments(),
-						serviceContext);
-				}
-				else {
-					importedEntry = BookmarksEntryLocalServiceUtil.updateEntry(
-						userId, existingEntry.getEntryId(), groupId, folderId,
-						entry.getName(), entry.getUrl(), entry.getComments(),
-						serviceContext);
-				}
+			if (existingEntry == null) {
+				importedEntry = BookmarksEntryLocalServiceUtil.addEntry(
+					entry.getUuid(), userId, context.getScopeGroupId(),
+					folderId, entry.getName(), entry.getUrl(),
+					entry.getComments(), serviceContext);
 			}
 			else {
-				importedEntry = BookmarksEntryLocalServiceUtil.addEntry(
-					null, userId, groupId, folderId, entry.getName(),
+				importedEntry = BookmarksEntryLocalServiceUtil.updateEntry(
+					userId, existingEntry.getEntryId(),
+					context.getScopeGroupId(), folderId, entry.getName(),
 					entry.getUrl(), entry.getComments(), serviceContext);
 			}
+		}
+		else {
+			importedEntry = BookmarksEntryLocalServiceUtil.addEntry(
+				null, userId, context.getScopeGroupId(), folderId,
+				entry.getName(), entry.getUrl(), entry.getComments(),
+				serviceContext);
+		}
 
-			context.importPermissions(
+		context.importPermissions(
+			BookmarksEntry.class, entry.getEntryId(),
+			importedEntry.getEntryId());
+
+		if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
+			context.importRatingsEntries(
 				BookmarksEntry.class, entry.getEntryId(),
 				importedEntry.getEntryId());
-
-			if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
-				context.importRatingsEntries(
-					BookmarksEntry.class, entry.getEntryId(),
-					importedEntry.getEntryId());
-			}
-		}
-		catch (NoSuchFolderException nsfe) {
-			_log.error(
-				"Could not find the parent folder for entry " +
-					entry.getEntryId());
 		}
 	}
 
@@ -456,57 +424,38 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		BookmarksFolder importedFolder = null;
 
-		try {
-			if (parentFolderId !=
-				BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+		if (context.getDataStrategy().equals(
+				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
-				BookmarksFolderUtil.findByPrimaryKey(parentFolderId);
-			}
+			BookmarksFolder existingFolder = BookmarksFolderUtil.fetchByUUID_G(
+				folder.getUuid(), context.getScopeGroupId());
 
-			if (context.getDataStrategy().equals(
-					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
-
-				BookmarksFolder existingFolder =
-					BookmarksFolderUtil.fetchByUUID_G(
-						folder.getUuid(), context.getScopeGroupId());
-
-				if (existingFolder == null) {
-					importedFolder = BookmarksFolderLocalServiceUtil.addFolder(
-						folder.getUuid(), userId, parentFolderId,
-						folder.getName(), folder.getDescription(),
-						serviceContext);
-				}
-				else {
-					importedFolder =
-						BookmarksFolderLocalServiceUtil.updateFolder(
-							existingFolder.getFolderId(), parentFolderId,
-							folder.getName(), folder.getDescription(), false,
-							serviceContext);
-				}
-			}
-			else {
+			if (existingFolder == null) {
 				importedFolder = BookmarksFolderLocalServiceUtil.addFolder(
-					null, userId, parentFolderId, folder.getName(),
+					folder.getUuid(), userId, parentFolderId, folder.getName(),
 					folder.getDescription(), serviceContext);
 			}
-
-			folderPKs.put(folder.getFolderId(), importedFolder.getFolderId());
-
-			context.importPermissions(
-				BookmarksFolder.class, folder.getFolderId(),
-				importedFolder.getFolderId());
+			else {
+				importedFolder = BookmarksFolderLocalServiceUtil.updateFolder(
+					existingFolder.getFolderId(), parentFolderId,
+					folder.getName(), folder.getDescription(), false,
+					serviceContext);
+			}
 		}
-		catch (NoSuchFolderException nsfe) {
-			_log.error(
-				"Could not find the parent folder for folder " +
-					folder.getFolderId());
+		else {
+			importedFolder = BookmarksFolderLocalServiceUtil.addFolder(
+				null, userId, parentFolderId, folder.getName(),
+				folder.getDescription(), serviceContext);
 		}
+
+		folderPKs.put(folder.getFolderId(), importedFolder.getFolderId());
+
+		context.importPermissions(
+			BookmarksFolder.class, folder.getFolderId(),
+			importedFolder.getFolderId());
 	}
 
 	private static final String _NAMESPACE = "bookmarks";
-
-	private static Log _log = LogFactoryUtil.getLog(
-		BookmarksPortletDataHandlerImpl.class);
 
 	private static PortletDataHandlerBoolean _categories =
 		new PortletDataHandlerBoolean(_NAMESPACE, "categories");

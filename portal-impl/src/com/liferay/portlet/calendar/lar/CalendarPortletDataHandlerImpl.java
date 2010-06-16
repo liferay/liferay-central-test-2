@@ -18,10 +18,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
-import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
-import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.xml.Document;
@@ -48,55 +46,6 @@ import javax.portlet.PortletPreferences;
  */
 public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 
-	public PortletPreferences deleteData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
-		throws PortletDataException {
-
-		try {
-			if (!context.addPrimaryKey(
-					CalendarPortletDataHandlerImpl.class, "deleteData")) {
-
-				CalEventLocalServiceUtil.deleteEvents(
-					context.getScopeGroupId());
-			}
-			return null;
-		}
-		catch (Exception e) {
-			throw new PortletDataException(e);
-		}
-	}
-
-	public String exportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
-		throws PortletDataException {
-
-		try {
-			context.addPermissions(
-				"com.liferay.portlet.calendar", context.getScopeGroupId());
-
-			Document document = SAXReaderUtil.createDocument();
-
-			Element rootElement = document.addElement("calendar-data");
-
-			rootElement.addAttribute(
-				"group-id", String.valueOf(context.getScopeGroupId()));
-
-			List<CalEvent> events = CalEventUtil.findByGroupId(
-				context.getScopeGroupId());
-
-			for (CalEvent event : events) {
-				exportEvent(context, rootElement, event);
-			}
-
-			return document.formattedString();
-		}
-		catch (Exception e) {
-			throw new PortletDataException(e);
-		}
-	}
-
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
 			_events, _categories, _comments, _tags
@@ -109,37 +58,71 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 		};
 	}
 
-	public PortletPreferences importData(
+	protected PortletPreferences doDeleteData(
+			PortletDataContext context, String portletId,
+			PortletPreferences preferences)
+		throws Exception {
+
+		if (!context.addPrimaryKey(
+				CalendarPortletDataHandlerImpl.class, "deleteData")) {
+
+			CalEventLocalServiceUtil.deleteEvents(context.getScopeGroupId());
+		}
+
+		return null;
+	}
+
+	protected String doExportData(
+			PortletDataContext context, String portletId,
+			PortletPreferences preferences)
+		throws Exception {
+
+		context.addPermissions(
+			"com.liferay.portlet.calendar", context.getScopeGroupId());
+
+		Document document = SAXReaderUtil.createDocument();
+
+		Element rootElement = document.addElement("calendar-data");
+
+		rootElement.addAttribute(
+			"group-id", String.valueOf(context.getScopeGroupId()));
+
+		List<CalEvent> events = CalEventUtil.findByGroupId(
+			context.getScopeGroupId());
+
+		for (CalEvent event : events) {
+			exportEvent(context, rootElement, event);
+		}
+
+		return document.formattedString();
+	}
+
+	protected PortletPreferences doImportData(
 			PortletDataContext context, String portletId,
 			PortletPreferences preferences, String data)
-		throws PortletDataException {
+		throws Exception {
 
-		try {
-			context.importPermissions(
-				"com.liferay.portlet.calendar", context.getSourceGroupId(),
-				context.getScopeGroupId());
+		context.importPermissions(
+			"com.liferay.portlet.calendar", context.getSourceGroupId(),
+			context.getScopeGroupId());
 
-			Document document = SAXReaderUtil.read(data);
+		Document document = SAXReaderUtil.read(data);
 
-			Element rootElement = document.getRootElement();
+		Element rootElement = document.getRootElement();
 
-			for (Element eventElement : rootElement.elements("event")) {
-				String path = eventElement.attributeValue("path");
+		for (Element eventElement : rootElement.elements("event")) {
+			String path = eventElement.attributeValue("path");
 
-				if (!context.isPathNotProcessed(path)) {
-					continue;
-				}
-
-				CalEvent event = (CalEvent)context.getZipEntryAsObject(path);
-
-				importEvent(context, event);
+			if (!context.isPathNotProcessed(path)) {
+				continue;
 			}
 
-			return null;
+			CalEvent event = (CalEvent)context.getZipEntryAsObject(path);
+
+			importEvent(context, event);
 		}
-		catch (Exception e) {
-			throw new PortletDataException(e);
-		}
+
+		return null;
 	}
 
 	protected void exportEvent(
@@ -260,9 +243,7 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		CalEvent importedEvent = null;
 
-		if (context.getDataStrategy().equals(
-				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
-
+		if (context.isDataStrategyMirror()) {
 			CalEvent existingEvent = CalEventUtil.fetchByUUID_G(
 				event.getUuid(), context.getScopeGroupId());
 
