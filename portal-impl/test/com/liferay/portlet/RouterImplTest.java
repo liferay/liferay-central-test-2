@@ -59,35 +59,35 @@ public class RouterImplTest extends BaseTestCase {
 		route.addDefaultParameter("action", "create");
 		route.addDefaultParameter("method", "POST");
 
-		route = _routerImpl.addRoute("GET/{controller}/{\\d+:id}");
+		route = _routerImpl.addRoute("GET/{controller}/{id:\\d+}");
 
 		route.addDefaultParameter("action", "view");
 		route.addDefaultParameter("format", "html");
 		route.addDefaultParameter("method", "GET");
 
-		route = _routerImpl.addRoute("GET/{controller}/{\\d+:id}.{format}");
+		route = _routerImpl.addRoute("GET/{controller}/{id:\\d+}.{format}");
 
 		route.addDefaultParameter("action", "view");
 		route.addDefaultParameter("method", "GET");
 
-		route = _routerImpl.addRoute("POST/{controller}/{\\d+:id}");
+		route = _routerImpl.addRoute("POST/{controller}/{id:\\d+}");
 
 		route.addDefaultParameter("action", "update");
 		route.addDefaultParameter("format", "html");
 		route.addDefaultParameter("method", "POST");
 
-		route = _routerImpl.addRoute("POST/{controller}/{\\d+:id}.{format}");
+		route = _routerImpl.addRoute("POST/{controller}/{id:\\d+}.{format}");
 
 		route.addDefaultParameter("action", "update");
 		route.addDefaultParameter("method", "POST");
 
 		route = _routerImpl.addRoute(
-			"{method}/{controller}/{\\d+:id}/{action}");
+			"{method}/{controller}/{id:\\d+}/{action}");
 
 		route.addDefaultParameter("format", "html");
 
 		route = _routerImpl.addRoute(
-			"{method}/{controller}/{\\d+:id}/{action}.{format}");
+			"{method}/{controller}/{id:\\d+}/{action}.{format}");
 
 		route = _routerImpl.addRoute("{method}/{controller}/{action}");
 
