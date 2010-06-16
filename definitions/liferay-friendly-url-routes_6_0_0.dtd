@@ -42,7 +42,7 @@ the generation of URLs.
 <!ELEMENT ignored-parameter EMPTY>
 
 <!--
-The name attributes specifies the name of the parameter to be ignored.
+The name attribute specifies the name of the parameter to be ignored.
 -->
 <!ATTLIST ignored-parameter
 	name CDATA #REQUIRED
