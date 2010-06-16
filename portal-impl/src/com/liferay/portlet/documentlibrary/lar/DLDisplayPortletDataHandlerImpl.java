@@ -176,13 +176,14 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 				}
 			}
 
-			Map<Long, Long> folderPKs =
-				(Map<Long, Long>)context.getNewPrimaryKeysMap(DLFolder.class);
-
 			long rootFolderId = GetterUtil.getLong(
 				root.attributeValue("root-folder-id"));
 
 			if (Validator.isNotNull(rootFolderId)) {
+				Map<Long, Long> folderPKs =
+					(Map<Long, Long>)context.getNewPrimaryKeysMap(
+						DLFolder.class);
+
 				rootFolderId = MapUtil.getLong(
 					folderPKs, rootFolderId, rootFolderId);
 

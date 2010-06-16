@@ -131,10 +131,11 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletDataContext context, IGFolder folder)
 		throws Exception {
 
+		long userId = context.getUserId(folder.getUserUuid());
+
 		Map<Long, Long> folderPKs =
 			(Map<Long, Long>)context.getNewPrimaryKeysMap(IGFolder.class);
 
-		long userId = context.getUserId(folder.getUserUuid());
 		long parentFolderId = MapUtil.getLong(
 			folderPKs, folder.getParentFolderId(), folder.getParentFolderId());
 
@@ -232,14 +233,12 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletDataContext context, IGImage image, String binPath)
 		throws Exception {
 
+		long userId = context.getUserId(image.getUserUuid());
+		long groupId = context.getGroupId();
+
 		Map<Long, Long> folderPKs =
 			(Map<Long, Long>)context.getNewPrimaryKeysMap(IGFolder.class);
 
-		Map<Long, Long> igImagePKs =
-			(Map<Long, Long>)context.getNewPrimaryKeysMap(IGImage.class);
-
-		long userId = context.getUserId(image.getUserUuid());
-		long groupId = context.getGroupId();
 		long folderId = MapUtil.getLong(
 			folderPKs, image.getFolderId(), image.getFolderId());
 
@@ -351,6 +350,9 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 					IGImage.class, image.getImageId(),
 					importedImage.getImageId());
 			}
+
+			Map<Long, Long> igImagePKs =
+				(Map<Long, Long>)context.getNewPrimaryKeysMap(IGImage.class);
 
 			igImagePKs.put(image.getImageId(), importedImage.getImageId());
 		}

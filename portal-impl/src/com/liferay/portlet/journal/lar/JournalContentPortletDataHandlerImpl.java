@@ -303,14 +303,14 @@ public class JournalContentPortletDataHandlerImpl
 					context, articleEl);
 			}
 
-			Map<String, String> articleIds =
-				(Map<String, String>)context.getNewPrimaryKeysMap(
-					JournalArticle.class);
-
 			String articleId = preferences.getValue(
 				"article-id", StringPool.BLANK);
 
 			if (Validator.isNotNull(articleId)) {
+				Map<String, String> articleIds =
+					(Map<String, String>)context.getNewPrimaryKeysMap(
+						JournalArticle.class);
+
 				articleId = MapUtil.getString(articleIds, articleId, articleId);
 
 				preferences.setValue(

@@ -362,14 +362,16 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				String path = DLPortletDataHandlerImpl.getFileEntryPath(
 					context, fileEntry);
 
-				entityEl.addElement("dl-reference").addAttribute("path", path);
+				Element dlReferenceEl = entityEl.addElement("dl-reference");
+
+				dlReferenceEl.addAttribute("path", path);
 
 				DLPortletDataHandlerImpl.exportFileEntry(
 					context, foldersEl, fileEntriesEl, fileRanksEl, fileEntry);
 
-				String reference = "[$dl-reference=" + path + "$]";
+				String dlReference = "[$dl-reference=" + path + "$]";
 
-				sb.replace(beginPos, endPos, reference);
+				sb.replace(beginPos, endPos, dlReference);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
@@ -521,14 +523,16 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				String path = IGPortletDataHandlerImpl.getImagePath(
 					context, image);
 
-				entityEl.addElement("ig-reference").addAttribute("path", path);
+				Element igReferenceEl = entityEl.addElement("ig-reference");
+
+				igReferenceEl.addAttribute("path", path);
 
 				IGPortletDataHandlerImpl.exportImage(
 					context, foldersEl, imagesEl, image);
 
-				String reference = "[$ig-reference=" + path + "$]";
+				String igReference = "[$ig-reference=" + path + "$]";
 
-				sb.replace(beginPos, endPos, reference);
+				sb.replace(beginPos, endPos, igReference);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
@@ -769,18 +773,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
-		Map<String, String> structureIds =
-			(Map<String, String>)context.getNewPrimaryKeysMap(
-				JournalStructure.class);
-
-		Map<String, String> templateIds =
-			(Map<String, String>)context.getNewPrimaryKeysMap(
-				JournalTemplate.class);
-
-		Map<String, String> articleIds =
-			(Map<String, String>)context.getNewPrimaryKeysMap(
-				JournalArticle.class);
-
 		JournalArticle article = (JournalArticle)context.getZipEntryAsObject(
 			path);
 
@@ -800,6 +792,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			autoArticleId = true;
 		}
+
+		Map<String, String> articleIds =
+			(Map<String, String>)context.getNewPrimaryKeysMap(
+				JournalArticle.class);
 
 		String newArticleId = articleIds.get(articleId);
 
@@ -825,8 +821,17 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		article.setContent(content);
 
+		Map<String, String> structureIds =
+			(Map<String, String>)context.getNewPrimaryKeysMap(
+				JournalStructure.class);
+
 		String parentStructureId = MapUtil.getString(
 			structureIds, article.getStructureId(), article.getStructureId());
+
+		Map<String, String> templateIds =
+			(Map<String, String>)context.getNewPrimaryKeysMap(
+				JournalTemplate.class);
+
 		String parentTemplateId = MapUtil.getString(
 			templateIds, article.getTemplateId(), article.getTemplateId());
 
@@ -1156,10 +1161,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		List<Element> dlReferenceEls = parentEl.elements("dl-reference");
 
 		for (Element dlReferenceEl : dlReferenceEls) {
-			String referencePath = dlReferenceEl.attributeValue("path");
+			String dlReferencePath = dlReferenceEl.attributeValue("path");
 
 			DLFileEntry fileEntry = (DLFileEntry)context.getZipEntryAsObject(
-				referencePath);
+				dlReferencePath);
 
 			if (fileEntry == null) {
 				continue;
@@ -1175,7 +1180,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				continue;
 			}
 
-			String reference = "[$dl-reference=" + referencePath + "$]";
+			String dlReference = "[$dl-reference=" + dlReferencePath + "$]";
 
 			StringBundler sb = new StringBundler(6);
 
@@ -1187,7 +1192,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			sb.append(
 				HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())));
 
-			content = StringUtil.replace(content, reference, sb.toString());
+			content = StringUtil.replace(content, dlReference, sb.toString());
 		}
 
 		return content;
@@ -1203,18 +1208,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
-		Map<String, String> structureIds =
-			(Map<String, String>)context.getNewPrimaryKeysMap(
-				JournalStructure.class);
-
-		Map<String, String> templateIds =
-			(Map<String, String>)context.getNewPrimaryKeysMap(
-				JournalTemplate.class);
-
-		Map<String, String> feedIds =
-			(Map<String, String>)context.getNewPrimaryKeysMap(
-				JournalFeed.class);
-
 		JournalFeed feed = (JournalFeed)context.getZipEntryAsObject(path);
 
 		long userId = context.getUserId(feed.getUserUuid());
@@ -1229,8 +1222,17 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			autoFeedId = true;
 		}
 
+		Map<String, String> structureIds =
+			(Map<String, String>)context.getNewPrimaryKeysMap(
+				JournalStructure.class);
+
 		String parentStructureId = MapUtil.getString(
 			structureIds, feed.getStructureId(), feed.getStructureId());
+
+		Map<String, String> templateIds =
+			(Map<String, String>)context.getNewPrimaryKeysMap(
+				JournalTemplate.class);
+
 		String parentTemplateId = MapUtil.getString(
 			templateIds, feed.getTemplateId(), feed.getTemplateId());
 		String parentRenderTemplateId = MapUtil.getString(
@@ -1299,6 +1301,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				feed.getFeedVersion(), serviceContext);
 		}
 
+		Map<String, String> feedIds =
+			(Map<String, String>)context.getNewPrimaryKeysMap(
+				JournalFeed.class);
+
 		feedIds.put(feedId, existingFeed.getFeedId());
 
 		context.importPermissions(
@@ -1324,9 +1330,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		List<Element> igReferenceEls = parentEl.elements("ig-reference");
 
 		for (Element igReferenceEl : igReferenceEls) {
-			String referencePath = igReferenceEl.attributeValue("path");
+			String igReferencePath = igReferenceEl.attributeValue("path");
 
-			IGImage image = (IGImage)context.getZipEntryAsObject(referencePath);
+			IGImage image = (IGImage)context.getZipEntryAsObject(
+				igReferencePath);
 
 			if (image == null) {
 				continue;
@@ -1341,7 +1348,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				continue;
 			}
 
-			String reference = "[$ig-reference=" + referencePath + "$]";
+			String igReference = "[$ig-reference=" + igReferencePath + "$]";
 
 			StringBundler sb = new StringBundler(6);
 
@@ -1352,7 +1359,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			sb.append("&t=");
 			sb.append(System.currentTimeMillis());
 
-			content = StringUtil.replace(content, reference, sb.toString());
+			content = StringUtil.replace(content, igReference, sb.toString());
 		}
 
 		return content;
@@ -1367,10 +1374,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (!context.isPathNotProcessed(path)) {
 			return;
 		}
-
-		Map<String, String> structureIds =
-			(Map<String, String>)context.getNewPrimaryKeysMap(
-				JournalStructure.class);
 
 		JournalStructure structure =
 			(JournalStructure)context.getZipEntryAsObject(path);
@@ -1441,6 +1444,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				structure.getDescription(), structure.getXsd(), serviceContext);
 		}
 
+		Map<String, String> structureIds =
+			(Map<String, String>)context.getNewPrimaryKeysMap(
+				JournalStructure.class);
+
 		structureIds.put(structureId, existingStructure.getStructureId());
 
 		context.importPermissions(
@@ -1467,14 +1474,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
-		Map<String, String> structureIds =
-			(Map<String, String>)context.getNewPrimaryKeysMap(
-				JournalStructure.class);
-
-		Map<String, String> templateIds =
-			(Map<String, String>)context.getNewPrimaryKeysMap(
-				JournalTemplate.class);
-
 		JournalTemplate template = (JournalTemplate)context.getZipEntryAsObject(
 			path);
 
@@ -1490,21 +1489,24 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			autoTemplateId = true;
 		}
 
+		Map<String, String> structureIds =
+			(Map<String, String>)context.getNewPrimaryKeysMap(
+				JournalStructure.class);
+
 		String parentStructureId = MapUtil.getString(
 			structureIds, template.getStructureId(), template.getStructureId());
 
-		String content = template.getXsl();
+		String xsl = template.getXsl();
 
-		content = importDLFileEntries(context, templateEl, content);
-		content = importIGImages(context, templateEl, content);
+		xsl = importDLFileEntries(context, templateEl, xsl);
+		xsl = importIGImages(context, templateEl, xsl);
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-		content = StringUtil.replace(
-			content, "@data_handler_group_friendly_url@",
-			group.getFriendlyURL());
+		xsl = StringUtil.replace(
+			xsl, "@data_handler_group_friendly_url@", group.getFriendlyURL());
 
-		template.setXsl(content);
+		template.setXsl(xsl);
 
 		boolean formatXsl = false;
 
@@ -1586,6 +1588,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				template.getCacheable(), template.isSmallImage(),
 				template.getSmallImageURL(), smallFile, serviceContext);
 		}
+
+		Map<String, String> templateIds =
+			(Map<String, String>)context.getNewPrimaryKeysMap(
+				JournalTemplate.class);
 
 		templateIds.put(templateId, existingTemplate.getTemplateId());
 
@@ -1734,8 +1740,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			List<Element> folderEls = root.element("dl-folders").elements(
 				"folder");
 
-			for (Element folderEl : folderEls) {
-				DLPortletDataHandlerImpl.importFolder(context, folderEl);
+			for (Element dlFolderEl : folderEls) {
+				DLPortletDataHandlerImpl.importFolder(context, dlFolderEl);
 			}
 
 			List<Element> fileEntryEls = root.element(

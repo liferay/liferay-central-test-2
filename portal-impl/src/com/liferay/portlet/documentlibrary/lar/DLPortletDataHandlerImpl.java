@@ -304,20 +304,13 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		String binPath = fileEntryEl.attributeValue("bin-path");
 
+		long userId = context.getUserId(fileEntry.getUserUuid());
+		long groupId = context.getGroupId();
+
 		Map<Long, Long> folderPKs =
 			(Map<Long, Long>)context.getNewPrimaryKeysMap(
 				DLFolder.class);
 
-		Map<String, String> fileEntryNames =
-			(Map<String, String>)context.getNewPrimaryKeysMap(
-				DLFileEntry.class.getName() + ".name");
-
-		Map<Long, Long> fileEntryPKs =
-			(Map<Long, Long>)context.getNewPrimaryKeysMap(
-				DLFileEntry.class);
-
-		long userId = context.getUserId(fileEntry.getUserUuid());
-		long groupId = context.getGroupId();
 		long folderId = MapUtil.getLong(
 			folderPKs, fileEntry.getFolderId(), fileEntry.getFolderId());
 
@@ -402,8 +395,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 						userId, existingFileEntry, latestFileVersion,
 						assetCategoryIds, assetTagNames);
 
-					// Indexer
-
 					Indexer indexer = IndexerRegistryUtil.getIndexer(
 						DLFileEntry.class);
 
@@ -416,11 +407,13 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				String title = fileEntry.getTitle();
 
 				try {
-					importedFileEntry = DLFileEntryLocalServiceUtil.addFileEntry(
-						null, userId, groupId, folderId, fileEntry.getName(),
-						title, fileEntry.getDescription(), null,
-						fileEntry.getExtraSettings(), is, fileEntry.getSize(),
-						serviceContext);
+					importedFileEntry =
+						DLFileEntryLocalServiceUtil.addFileEntry(
+							null, userId, groupId, folderId,
+							fileEntry.getName(),
+							title, fileEntry.getDescription(), null,
+							fileEntry.getExtraSettings(), is,
+							fileEntry.getSize(), serviceContext);
 				}
 				catch (DuplicateFileException dfe) {
 					String[] titleParts = title.split("\\.", 2);
@@ -431,16 +424,27 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 						title += StringPool.PERIOD + titleParts[1];
 					}
 
-					importedFileEntry = DLFileEntryLocalServiceUtil.addFileEntry(
-						null, userId, groupId, folderId, fileEntry.getName(),
-						title, fileEntry.getDescription(), null,
-						fileEntry.getExtraSettings(), is, fileEntry.getSize(),
-						serviceContext);
+					importedFileEntry =
+						DLFileEntryLocalServiceUtil.addFileEntry(
+							null, userId, groupId, folderId,
+							fileEntry.getName(), title,
+							fileEntry.getDescription(), null,
+							fileEntry.getExtraSettings(), is,
+							fileEntry.getSize(), serviceContext);
 				}
 			}
 
+			Map<Long, Long> fileEntryPKs =
+				(Map<Long, Long>)context.getNewPrimaryKeysMap(
+					DLFileEntry.class);
+
 			fileEntryPKs.put(
 				fileEntry.getFileEntryId(), importedFileEntry.getFileEntryId());
+
+			Map<String, String> fileEntryNames =
+				(Map<String, String>)context.getNewPrimaryKeysMap(
+					DLFileEntry.class.getName() + ".name");
+
 			fileEntryNames.put(
 				fileEntry.getName(), importedFileEntry.getName());
 
@@ -497,26 +501,29 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletDataContext context, DLFileShortcut fileShortcut)
 		throws Exception {
 
+		long userId = context.getUserId(fileShortcut.getUserUuid());
+
 		Map<Long, Long> folderPKs =
 			(Map<Long, Long>)context.getNewPrimaryKeysMap(
 				DLFolder.class);
 
-		Map<String, String> fileEntryNames =
-			(Map<String, String>)context.getNewPrimaryKeysMap(
-				DLFileEntry.class.getName() + ".name");
-
-		long userId = context.getUserId(fileShortcut.getUserUuid());
 		long folderId = MapUtil.getLong(
 			folderPKs, fileShortcut.getFolderId(),
 			fileShortcut.getFolderId());
 		long toFolderId = MapUtil.getLong(
 			folderPKs, fileShortcut.getToFolderId(),
 			fileShortcut.getToFolderId());
+
+		Map<String, String> fileEntryNames =
+			(Map<String, String>)context.getNewPrimaryKeysMap(
+				DLFileEntry.class.getName() + ".name");
+
 		String toName = MapUtil.getString(
 			fileEntryNames, fileShortcut.getToName(), fileShortcut.getToName());
 
 		try {
 			DLFolder folder = DLFolderUtil.findByPrimaryKey(folderId);
+
 			DLFolderUtil.findByPrimaryKey(toFolderId);
 
 			long groupId = folder.getGroupId();
@@ -607,17 +614,18 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletDataContext context, DLFileRank rank)
 		throws Exception {
 
+		long userId = context.getUserId(rank.getUserUuid());
+
 		Map<Long, Long> folderPKs =
 			(Map<Long, Long>)context.getNewPrimaryKeysMap(
 				DLFolder.class);
 
+		long folderId = MapUtil.getLong(
+			folderPKs, rank.getFolderId(), rank.getFolderId());
+
 		Map<String, String> fileEntryNames =
 			(Map<String, String>)context.getNewPrimaryKeysMap(
 				DLFileEntry.class.getName() + ".name");
-
-		long userId = context.getUserId(rank.getUserUuid());
-		long folderId = MapUtil.getLong(
-			folderPKs, rank.getFolderId(), rank.getFolderId());
 
 		String name = fileEntryNames.get(rank.getName());
 
@@ -674,11 +682,12 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletDataContext context, DLFolder folder)
 		throws Exception {
 
+		long userId = context.getUserId(folder.getUserUuid());
+		long groupId = context.getGroupId();
+
 		Map<Long, Long> folderPKs =
 			(Map<Long, Long>)context.getNewPrimaryKeysMap(DLFolder.class);
 
-		long userId = context.getUserId(folder.getUserUuid());
-		long groupId = context.getGroupId();
 		long parentFolderId = MapUtil.getLong(
 			folderPKs, folder.getParentFolderId(),
 			folder.getParentFolderId());
@@ -1014,7 +1023,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			return folderId;
 		}
 	}
-
 
 	protected static boolean isDuplicateFileEntry(
 		DLFileEntry fileEntry1, DLFileEntry fileEntry2) {
