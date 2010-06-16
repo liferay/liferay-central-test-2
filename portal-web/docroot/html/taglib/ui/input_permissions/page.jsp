@@ -149,19 +149,22 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 					}
 
 					String checkboxFieldName = null;
+					String checkboxFieldId = null;
 
 					if (roleName.equals(RoleConstants.GUEST)) {
 						checkboxFieldName = namespace + "guestPermissions";
+						checkboxFieldId = checkboxFieldName + StringPool.UNDERLINE + action;
 					}
 					else {
 						checkboxFieldName = namespace + "communityPermissions";
+						checkboxFieldId = checkboxFieldName + StringPool.UNDERLINE + action;
 					}
 				%>
 
 					<td style="text-align: center;" <%= (action.equals(ActionKeys.VIEW)) ? "class=\"aui-helper-hidden-accessible\"" : "" %>>
-						<label class="hidden-label" for="<%= checkboxFieldName %>"><liferay-ui:message arguments="<%= new Object[] {ResourceActionsUtil.getAction(pageContext, action), role.getTitle(themeDisplay.getLocale())} %>" key="give-x-permission-to-users-with-role-x" /></label>
+						<label class="hidden-label" for="<%= checkboxFieldId %>"><liferay-ui:message arguments="<%= new Object[] {ResourceActionsUtil.getAction(pageContext, action), role.getTitle(themeDisplay.getLocale())} %>" key="give-x-permission-to-users-with-role-x" /></label>
 
-						<input <%= checked ? "checked" : "" %> <%= disabled ? "disabled" : "" %>  id="<%= checkboxFieldName %>" name="<%= checkboxFieldName %>" type="checkbox" value="<%= action %>" />
+						<input <%= checked ? "checked" : "" %> <%= disabled ? "disabled" : "" %>  id="<%= checkboxFieldId %>" name="<%= checkboxFieldName %>" type="checkbox" value="<%= action %>" />
 					</td>
 
 				<%
