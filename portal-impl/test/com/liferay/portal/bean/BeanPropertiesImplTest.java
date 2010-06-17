@@ -125,8 +125,14 @@ public class BeanPropertiesImplTest extends BaseTestCase {
 
 		Bar destinationBar = new Bar();
 
-		BeanPropertiesUtil.copyProperties(
-			sourceBar, destinationBar, FooParent.class);
+		try {
+			BeanPropertiesUtil.copyProperties(
+				sourceBar, destinationBar, FooParent.class);
+
+			fail();
+		}
+		catch (Exception ignore) {
+		}
 	}
 
 	public void testCopyProperties() {
