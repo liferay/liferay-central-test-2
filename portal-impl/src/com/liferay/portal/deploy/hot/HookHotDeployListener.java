@@ -86,8 +86,6 @@ import com.liferay.portal.service.ReleaseLocalServiceUtil;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.servlet.filters.autologin.AutoLoginFilter;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
-import com.liferay.portal.struts.MultiMessageResources;
-import com.liferay.portal.struts.MultiMessageResourcesFactory;
 import com.liferay.portal.upgrade.UpgradeProcessUtil;
 import com.liferay.portal.util.JavaScriptBundleUtil;
 import com.liferay.portal.util.PortalInstances;
@@ -495,10 +493,19 @@ public class HookHotDeployListener
 
 				is.close();
 
-				String localeKey = getLocaleKey(languagePropertiesLocation);
+				Map<String, String> languageMap = new HashMap<String, String>();
 
-				if (localeKey != null) {
-					languagesContainer.addLanguage(localeKey, properties);
+				for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+					String key = (String)entry.getKey();
+					String value = (String)entry.getValue();
+
+					languageMap.put(key, value);
+				}
+
+				Locale locale = getLocale(languagePropertiesLocation);
+
+				if (locale != null) {
+					languagesContainer.addLanguage(locale, languageMap);
 				}
 			}
 			catch (Exception e) {
@@ -769,21 +776,20 @@ public class HookHotDeployListener
 		}
 	}
 
-	protected String getLocaleKey(String languagePropertiesLocation) {
+	protected Locale getLocale(String languagePropertiesLocation) {
 		int x = languagePropertiesLocation.indexOf(StringPool.UNDERLINE);
 		int y = languagePropertiesLocation.indexOf(".properties");
+
+		Locale locale = null;
 
 		if ((x != -1) && (y != 1)) {
 			String localeKey = languagePropertiesLocation.substring(x + 1, y);
 
-			Locale locale = LocaleUtil.fromLanguageId(localeKey);
+			locale = LocaleUtil.fromLanguageId(localeKey);
 
-			if (locale != null) {
-				return locale.toString();
-			}
 		}
 
-		return null;
+		return locale;
 	}
 
 	protected BasePersistence<?> getPersistence(String modelName) {
@@ -1887,31 +1893,28 @@ public class HookHotDeployListener
 
 	private class LanguagesContainer {
 
-		public void addLanguage(String localeKey, Properties properties) {
-			_multiMessageResources.putLocale(localeKey);
+		public void addLanguage(
+			Locale locale, Map<String, String> languageMap) {
 
-			Properties oldProperties = _multiMessageResources.putMessages(
-				properties, localeKey);
+			Map<String, String> oldLanguageMap =
+				LanguageResources.putLanguageMap(locale, languageMap);
 
-			_languagesMap.put(localeKey, oldProperties);
-
-			LanguageResources.clearCache();
+			_languagesMap.put(locale, oldLanguageMap);
 		}
 
 		public void unregisterLanguages() {
-			for (String key : _languagesMap.keySet()) {
-				Properties properties = _languagesMap.get(key);
+			for (Map.Entry<Locale, Map<String, String>> entry :
+					_languagesMap.entrySet()) {
 
-				_multiMessageResources.putMessages(properties, key);
+				Locale locale = entry.getKey();
+				Map<String, String> languageMap = entry.getValue();
+
+				LanguageResources.putLanguageMap(locale, languageMap);
 			}
-
-			LanguageResources.clearCache();
 		}
 
-		private Map<String, Properties> _languagesMap =
-			new HashMap<String, Properties>();
-		private MultiMessageResources _multiMessageResources =
-			MultiMessageResourcesFactory.getInstance();
+		private Map<Locale, Map<String, String>> _languagesMap =
+			new HashMap<Locale, Map<String, String>>();
 
 	}
 
