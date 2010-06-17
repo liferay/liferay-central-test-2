@@ -778,8 +778,6 @@ public class HookHotDeployListener
 
 			Locale locale = LocaleUtil.fromLanguageId(localeKey);
 
-			locale = LanguageUtil.getLocale(locale.getLanguage());
-
 			if (locale != null) {
 				return locale.toString();
 			}
