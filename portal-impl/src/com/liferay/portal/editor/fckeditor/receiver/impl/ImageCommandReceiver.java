@@ -183,6 +183,7 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 		IGFolder folder = new IGFolderImpl();
 
 		folder.setFolderId(IGFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+		folder.setGroupId(groupId);
 
 		if (folderName.equals(StringPool.SLASH)) {
 			return folder;

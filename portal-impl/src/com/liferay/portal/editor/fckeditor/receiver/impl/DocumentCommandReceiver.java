@@ -173,6 +173,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		DLFolder folder = new DLFolderImpl();
 
 		folder.setFolderId(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+		folder.setGroupId(groupId);
 
 		if (folderName.equals(StringPool.SLASH)) {
 			return folder;
