@@ -87,9 +87,14 @@ String redirect = ParamUtil.getString(request, "redirect");
 </aui:form>
 
 <aui:script>
-	function <portlet:namespace />saveConfiguration() {
-		document.<portlet:namespace />fm.<portlet:namespace />languageIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentLanguageIds);
+	Liferay.provide(
+		window,
+		'<portlet:namespace />saveConfiguration',
+		function() {
+			document.<portlet:namespace />fm.<portlet:namespace />languageIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentLanguageIds);
 
-		submitForm(document.<portlet:namespace />fm);
-	}
+			submitForm(document.<portlet:namespace />fm);
+		},
+		['liferay-util-list-fields']
+	);
 </aui:script>

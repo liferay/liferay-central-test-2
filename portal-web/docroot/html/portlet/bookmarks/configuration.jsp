@@ -175,13 +175,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 		nameEl.innerHTML = "";
 	}
 
-	function <portlet:namespace />saveConfiguration() {
-		document.<portlet:namespace />fm.<portlet:namespace />folderColumns.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentFolderColumns);
-		document.<portlet:namespace />fm.<portlet:namespace />entryColumns.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentEntryColumns);
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-
 	function <%= PortalUtil.getPortletNamespace(portletResource) %>selectFolder(rootFolderId, rootFolderName) {
 		document.<portlet:namespace />fm.<portlet:namespace />rootFolderId.value = rootFolderId;
 
@@ -190,4 +183,16 @@ String redirect = ParamUtil.getString(request, "redirect");
 		nameEl.href = "<liferay-portlet:renderURL portletName="<%= portletResource %>"><portlet:param name="struts_action" value='<%= strutsAction + "/view" %>' /></liferay-portlet:renderURL>&<portlet:namespace />folderId=" + rootFolderId;
 		nameEl.innerHTML = rootFolderName + "&nbsp;";
 	}
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />saveConfiguration',
+		function() {
+			document.<portlet:namespace />fm.<portlet:namespace />folderColumns.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentFolderColumns);
+			document.<portlet:namespace />fm.<portlet:namespace />entryColumns.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentEntryColumns);
+
+			submitForm(document.<portlet:namespace />fm);
+		},
+		['liferay-util-list-fields']
+	);
 </aui:script>

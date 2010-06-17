@@ -514,12 +514,6 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />updateDisplayOrder() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "display_order";
-		document.<portlet:namespace />fm.<portlet:namespace />layoutIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox);
-		submitForm(document.<portlet:namespace />fm);
-	}
-
 	function <portlet:namespace />updateLogo() {
 		document.<portlet:namespace />fm.encoding = "multipart/form-data";
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "logo";
@@ -585,6 +579,17 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 			}
 		},
 		['aui-base']
+	);
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />updateDisplayOrder',
+		function() {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "display_order";
+			document.<portlet:namespace />fm.<portlet:namespace />layoutIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox);
+			submitForm(document.<portlet:namespace />fm);
+		},
+		['liferay-util-list-fields']
 	);
 
 	Liferay.provide(

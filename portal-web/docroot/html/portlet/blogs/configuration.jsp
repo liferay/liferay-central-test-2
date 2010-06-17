@@ -323,12 +323,17 @@ else if (tabs2.equals("entry-updated-email")) {
 </aui:form>
 
 <aui:script>
-	function <portlet:namespace />saveConfiguration() {
-		<c:if test='<%= tabs2.equals("display-settings") %>'>
-			document.<portlet:namespace />fm.<portlet:namespace />visibleNodes.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentVisibleNodes);
-			document.<portlet:namespace />fm.<portlet:namespace />hiddenNodes.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />availableVisibleNodes);
-		</c:if>
+	Liferay.provide(
+		window,
+		'<portlet:namespace />saveConfiguration',
+		function() {
+			<c:if test='<%= tabs2.equals("display-settings") %>'>
+				document.<portlet:namespace />fm.<portlet:namespace />visibleNodes.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentVisibleNodes);
+				document.<portlet:namespace />fm.<portlet:namespace />hiddenNodes.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />availableVisibleNodes);
+			</c:if>
 
-		submitForm(document.<portlet:namespace />fm);
-	}
+			submitForm(document.<portlet:namespace />fm);
+		},
+		['liferay-util-list-fields']
+	);
 </aui:script>

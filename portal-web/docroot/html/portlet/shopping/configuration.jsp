@@ -369,17 +369,22 @@ else if (tabs3.equals("shipping-email")) {
 		return "<%= UnicodeFormatter.toString(editorContent) %>";
 	}
 
-	function <portlet:namespace />saveConfiguration() {
-		<c:if test='<%= tabs2.equals("payment-settings") %>'>
-			document.<portlet:namespace />fm.<portlet:namespace />ccTypes.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_cc_types);
-		</c:if>
+	Liferay.provide(
+		window,
+		'<portlet:namespace />saveConfiguration',
+		function() {
+			<c:if test='<%= tabs2.equals("payment-settings") %>'>
+				document.<portlet:namespace />fm.<portlet:namespace />ccTypes.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_cc_types);
+			</c:if>
 
-		<c:if test='<%= tabs3.endsWith("-email") %>'>
-			document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = window.<portlet:namespace />editor.getHTML();
-		</c:if>
+			<c:if test='<%= tabs3.endsWith("-email") %>'>
+				document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = window.<portlet:namespace />editor.getHTML();
+			</c:if>
 
-		submitForm(document.<portlet:namespace />fm);
-	}
+			submitForm(document.<portlet:namespace />fm);
+		},
+		['liferay-util-list-fields']
+	);
 </aui:script>
 
 <%!

@@ -66,6 +66,18 @@ rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
 
 <br />
 
-<input type="button" value="<liferay-ui:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />symbols.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions); submitForm(document.<portlet:namespace />fm);" />
+<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveCurrency();" />
 
 </form>
+
+<aui:script>
+	Liferay.provide(
+		window,
+		'<portlet:namespace />saveCurrency',
+		function() {
+			document.<portlet:namespace />fm.<portlet:namespace />symbols.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
+			submitForm(document.<portlet:namespace />fm);
+		},
+		['liferay-util-list-fields']
+	);
+</aui:script>

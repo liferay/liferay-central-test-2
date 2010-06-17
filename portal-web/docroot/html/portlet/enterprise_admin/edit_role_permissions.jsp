@@ -219,14 +219,19 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		<portlet:namespace />updateGroups(selectedGroupIds, selectedGroupNames, target);
 	}
 
-	function <portlet:namespace />updateActions() {
-		var selectedTargets = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+	Liferay.provide(
+		window,
+		'<portlet:namespace />updateActions',
+		function() {
+			var selectedTargets = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "actions";
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<%= portletURL.toString() %>";
-		document.<portlet:namespace />fm.<portlet:namespace />selectedTargets.value = selectedTargets;
-		submitForm(document.<portlet:namespace />fm);
-	}
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "actions";
+			document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<%= portletURL.toString() %>";
+			document.<portlet:namespace />fm.<portlet:namespace />selectedTargets.value = selectedTargets;
+			submitForm(document.<portlet:namespace />fm);
+		},
+		['liferay-util-list-fields']
+	);
 
 	function <portlet:namespace />updateGroups(selectedGroupIds, selectedGroupNames, target) {
 		document.<portlet:namespace />fm['<portlet:namespace />groupIds' + target].value = selectedGroupIds.join(',');

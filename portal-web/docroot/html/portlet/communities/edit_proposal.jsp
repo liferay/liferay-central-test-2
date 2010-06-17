@@ -423,20 +423,25 @@ for (int i = 0; i < results.size(); i++) {
 		}
 	}
 
-	function <portlet:namespace />saveProposal() {
-		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = '<%= Constants.UPDATE %>';
+	Liferay.provide(
+		window,
+		'<portlet:namespace />saveProposal',
+		function() {
+			document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = '<%= Constants.UPDATE %>';
 
-		<%
-		for (int i = 2; i <= workflowStages; i++) {
-			String workflowRoleName = workflowRoleNames[i - 1];
-		%>
+			<%
+			for (int i = 2; i <= workflowStages; i++) {
+				String workflowRoleName = workflowRoleNames[i - 1];
+			%>
 
-			document.<portlet:namespace />fm1.<portlet:namespace />reviewUserIds_<%= i %>.value = Liferay.Util.listSelect(document.<portlet:namespace />fm1.<portlet:namespace />current_reviewers_<%= i %>);
+				document.<portlet:namespace />fm1.<portlet:namespace />reviewUserIds_<%= i %>.value = Liferay.Util.listSelect(document.<portlet:namespace />fm1.<portlet:namespace />current_reviewers_<%= i %>);
 
-		<%
-		}
-		%>
+			<%
+			}
+			%>
 
-		submitForm(document.<portlet:namespace />fm1);
-	}
+			submitForm(document.<portlet:namespace />fm1);
+		},
+		['liferay-util-list-fields']
+	);
 </aui:script>
