@@ -54,11 +54,15 @@ public class ShoppingItemImpl
 			catch (Exception e) {
 				category = new ShoppingCategoryImpl();
 
+				category.setGroupId(getGroupId());
+
 				_log.error(e);
 			}
 		}
 		else {
 			category = new ShoppingCategoryImpl();
+
+			category.setGroupId(getGroupId());
 		}
 
 		return category;
