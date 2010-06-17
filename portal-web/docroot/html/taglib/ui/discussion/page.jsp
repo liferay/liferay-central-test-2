@@ -111,7 +111,12 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 							<liferay-ui:message key="no-comments-yet" /> <a href="<%= taglibPostReplyURL %>"><liferay-ui:message key="be-the-first" /></a>
 						</c:when>
 						<c:otherwise>
-							<liferay-ui:icon image="reply" label="<%= true %>" message="add-comment" url="<%= taglibPostReplyURL %>" />
+							<liferay-ui:icon
+								image="reply"
+								label="<%= true %>"
+								message="add-comment"
+								url="<%= taglibPostReplyURL %>"
+							/>
 						</c:otherwise>
 					</c:choose>
 				</td>
@@ -321,7 +326,12 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 									String taglibPostReplyURL = "javascript:" + randomNamespace + "showForm('" + randomNamespace + "postReplyForm" + i + "', '" + randomNamespace + "postReplyBody" + i + "');";
 									%>
 
-									<liferay-ui:icon image="reply" label="<%= true %>" message="post-reply" url="<%= taglibPostReplyURL %>" />
+									<liferay-ui:icon
+										image="reply"
+										label="<%= true %>"
+										message="post-reply"
+										url="<%= taglibPostReplyURL %>"
+									/>
 								</td>
 							</c:if>
 
@@ -332,7 +342,11 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 								%>
 
 								<td>
-									<liferay-ui:icon image="top" label="<%= true %>" url="<%= taglibTopURL %>" />
+									<liferay-ui:icon
+										image="top"
+										label="<%= true %>"
+										url="<%= taglibTopURL %>"
+										/>
 								</td>
 
 								<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, userId, ActionKeys.UPDATE_DISCUSSION) %>">
@@ -342,7 +356,11 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 									%>
 
 									<td>
-										<liferay-ui:icon image="edit" label="<%= true %>" url="<%= taglibEditURL %>" />
+										<liferay-ui:icon
+											image="edit"
+											label="<%= true %>"
+											url="<%= taglibEditURL %>"
+										/>
 									</td>
 								</c:if>
 
@@ -353,7 +371,10 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 									%>
 
 									<td>
-										<liferay-ui:icon-delete label="<%= true %>" url="<%= taglibDeleteURL %>" />
+										<liferay-ui:icon-delete
+											label="<%= true %>"
+											url="<%= taglibDeleteURL %>"
+										/>
 									</td>
 								</c:if>
 							</c:if>
