@@ -77,26 +77,18 @@ List hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(layout.get
 		<span style="font-size: xx-small;">
 
 		<%
-		StringBundler sb = new StringBundler(8);
-
-		sb.append(PortalUtil.getLayoutFriendlyURL(layout, themeDisplay));
-		sb.append(Portal.FRIENDLY_URL_SEPARATOR);
-		sb.append("journal_content/");
-
-		if (Validator.isNotNull(targetPortletId)) {
-			sb.append(targetPortletId);
-		}
-		else {
-			sb.append(PortletKeys.JOURNAL_CONTENT);
+		if (Validator.isNull(targetPortletId)) {
+			targetPortletId = PortletKeys.JOURNAL_CONTENT;
 		}
 
-		sb.append("/");
-		sb.append(String.valueOf(articleGroupId));
-		sb.append("/");
-		sb.append(articleId);
+		PortletURL webContentPortletURL = PortletURLFactoryUtil.create(request, targetPortletId, plid, PortletRequest.RENDER_PHASE);
+
+		webContentPortletURL.setParameter("struts_action", "/journal_content/view");
+		webContentPortletURL.setParameter("groupId", String.valueOf(articleGroupId));
+		webContentPortletURL.setParameter("articleId", articleId);
 		%>
 
-		<br /><a href="<%= sb.toString() %>"><%= themeDisplay.getPortalURL() %><%= StringUtil.shorten(sb.toString(), 100) %></a>
+		<br /><a href="<%= webContentPortletURL.toString() %>"><%= StringUtil.shorten(webContentPortletURL.toString(), 100) %></a>
 
 		</span>
 	</c:otherwise>
