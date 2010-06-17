@@ -108,13 +108,6 @@
 			<xs:group ref="recipients-group" />
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="roles">
-		<xs:complexType>
-			<xs:choice minOccurs="0" maxOccurs="1">
-				<xs:element ref="role" minOccurs="1" maxOccurs="unbounded"/>
-			</xs:choice>
-		</xs:complexType>
-	</xs:element>
 	<xs:element name="role">
 		<xs:complexType>
 			<xs:sequence>
@@ -131,6 +124,13 @@
 				<xs:element name="name" type="xs:string" minOccurs="0" />
 				<xs:element name="auto-create" type="xs:boolean" minOccurs="0" default="true" />
 			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="roles">
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="1">
+				<xs:element ref="role" minOccurs="1" maxOccurs="unbounded" />
+			</xs:choice>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="state">

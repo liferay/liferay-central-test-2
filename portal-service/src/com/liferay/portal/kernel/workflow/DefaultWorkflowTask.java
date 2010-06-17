@@ -39,7 +39,10 @@ public class DefaultWorkflowTask implements Serializable, WorkflowTask {
 			return -1;
 		}
 
-		return _workflowTaskAssignees.get(0).getAssigneeClassPK();
+		WorkflowTaskAssignee workflowTaskAssignee = _workflowTaskAssignees.get(
+			0);
+		
+		return workflowTaskAssignee.getAssigneeClassPK();
 	}
 
 	public Date getCompletionDate() {
@@ -103,11 +106,17 @@ public class DefaultWorkflowTask implements Serializable, WorkflowTask {
 			return false;
 		}
 
-		WorkflowTaskAssignee workflowTaskAssignee =
-			_workflowTaskAssignees.get(0);
+		WorkflowTaskAssignee workflowTaskAssignee = _workflowTaskAssignees.get(
+			0);
 
-		return User.class.getName().equals(
-			workflowTaskAssignee.getAssigneeClassName());
+		if (User.class.getName().equals(
+				workflowTaskAssignee.getAssigneeClassName())) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public boolean isAsynchronous() {

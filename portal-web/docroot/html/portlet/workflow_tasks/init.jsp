@@ -25,7 +25,6 @@
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowLog" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowLogManagerUtil" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowTask" %>
-<%@ page import="com.liferay.portal.kernel.workflow.WorkflowTaskAssignee" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowTaskDueDateException" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil" %>
 <%@ page import="com.liferay.portal.kernel.workflow.comparator.WorkflowComparatorFactoryUtil" %>

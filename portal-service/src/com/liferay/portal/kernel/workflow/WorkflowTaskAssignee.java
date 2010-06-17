@@ -30,12 +30,13 @@ public class WorkflowTaskAssignee implements Serializable {
 		return new WorkflowTaskAssignee(Role.class.getName(), roleId);
 	}
 
-	public static final WorkflowTaskAssignee USER(long roleId) {
-		return new WorkflowTaskAssignee(User.class.getName(), roleId);
+	public static final WorkflowTaskAssignee USER(long userId) {
+		return new WorkflowTaskAssignee(User.class.getName(), userId);
 	}
 
 	public WorkflowTaskAssignee(
 		String assigneeClassName, long assigneeClassPK) {
+
 		_assigneeClassName = assigneeClassName;
 		_assigneeClassPK = assigneeClassPK;
 	}
@@ -50,4 +51,5 @@ public class WorkflowTaskAssignee implements Serializable {
 
 	private String _assigneeClassName;
 	private long _assigneeClassPK;
+
 }
