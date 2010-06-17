@@ -17,6 +17,7 @@ package com.liferay.portlet;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,6 +41,8 @@ public class PortalContextImpl implements PortalContext {
 	static List<WindowState> windowStates = new ArrayList<WindowState>();
 
 	static {
+		props.setProperty(MARKUP_HEAD_ELEMENT_SUPPORT, StringPool.TRUE);
+
 		portletModes.add(PortletMode.EDIT);
 		portletModes.add(PortletMode.HELP);
 		portletModes.add(PortletMode.VIEW);

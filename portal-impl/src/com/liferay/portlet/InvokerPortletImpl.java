@@ -645,6 +645,8 @@ public class InvokerPortletImpl implements InvokerPortlet {
 				portletRequest, portletResponse, lifecycle, filterChain);
 		}
 
+		portletResponse.transferMarkupHeadElements();
+
 		Map<String, String[]> properties = portletResponse.getProperties();
 
 		if ((properties != null) && (properties.size() > 0)) {

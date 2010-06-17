@@ -65,4 +65,6 @@ public interface LiferayPortletResponse extends PortletResponse {
 
 	public void setIntHeader(String name, int value);
 
+	public void transferMarkupHeadElements();
+
 }

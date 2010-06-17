@@ -16,6 +16,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
@@ -38,10 +39,13 @@ import com.liferay.portal.util.WebKeys;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.portlet.MimeResponse;
 import javax.portlet.PortletException;
 import javax.portlet.PortletModeException;
 import javax.portlet.PortletPreferences;
@@ -56,7 +60,16 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
 import org.w3c.dom.DOMException;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
@@ -171,6 +184,29 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		if (key == null) {
 			throw new IllegalArgumentException();
 		}
+
+		// LPS-8358
+
+		if (key.equalsIgnoreCase(MimeResponse.MARKUP_HEAD_ELEMENT)) {
+			List<Element> values = _markupHeadElements.get(key);
+
+			if (values != null) {
+				if (element != null) {
+					values.add(element);
+				}
+				else {
+					_markupHeadElements.remove(key);
+				}
+			}
+			else {
+				if (element != null) {
+					values = new ArrayList<Element>();
+					values.add(element);
+
+					_markupHeadElements.put(key, values);
+				}
+			}
+		}
 	}
 
 	public void addProperty(String key, String value) {
@@ -191,7 +227,19 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 	}
 
 	public Element createElement(String tagName) throws DOMException {
-		return null;
+		if (_document == null) {
+			try {
+				DocumentBuilderFactory factory =
+					DocumentBuilderFactory.newInstance();
+
+				_document = factory.newDocumentBuilder().newDocument();
+			}
+			catch (ParserConfigurationException pce) {
+				throw new RuntimeException(pce);
+			}
+		}
+
+		return _document.createElement(tagName);
 	}
 
 	public LiferayPortletURL createLiferayPortletURL(String lifecycle) {
@@ -560,6 +608,52 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		}
 	}
 
+	public void transferMarkupHeadElements() {
+		List<Element> elements =
+			_markupHeadElements.get(MimeResponse.MARKUP_HEAD_ELEMENT);
+
+		if ((elements == null) || elements.isEmpty()) {
+			return;
+		}
+
+		HttpServletRequest servletRequest = getHttpServletRequest();
+
+		List<String> markupHeadElements =
+			(List<String>)servletRequest.getAttribute(
+				MimeResponse.MARKUP_HEAD_ELEMENT);
+
+		if (markupHeadElements == null) {
+			markupHeadElements = new ArrayList<String>();
+		}
+
+		for (Element element : elements) {
+			try {
+				UnsyncStringWriter unsyncStringWriter =
+					new UnsyncStringWriter();
+
+				Transformer transformer =
+					TransformerFactory.newInstance().newTransformer();
+
+				transformer.setOutputProperty(
+					OutputKeys.OMIT_XML_DECLARATION, "yes");
+
+				transformer.transform(
+					new DOMSource(element),
+					new StreamResult(unsyncStringWriter));
+
+				markupHeadElements.add(unsyncStringWriter.toString());
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e);
+				}
+			}
+		}
+
+		servletRequest.setAttribute(
+			MimeResponse.MARKUP_HEAD_ELEMENT, markupHeadElements);
+	}
+
 	protected void init(
 		PortletRequestImpl portletRequestImpl, HttpServletResponse response,
 		String portletName, long companyId, long plid) {
@@ -584,6 +678,9 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 	private long _plid;
 	private URLEncoder _urlEncoder;
 	private Map<String, Object> _headers = new LinkedHashMap<String, Object>();
+	private Map<String, List<Element>> _markupHeadElements =
+		new LinkedHashMap<String, List<Element>>();
 	private boolean _wsrp;
+	private Document _document;
 
 }
