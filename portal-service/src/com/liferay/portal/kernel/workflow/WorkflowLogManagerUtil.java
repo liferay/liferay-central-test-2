@@ -28,19 +28,19 @@ import java.util.List;
 public class WorkflowLogManagerUtil {
 
 	public static int getWorkflowLogCountByWorkflowInstance(
-			long companyId, long workflowInstanceId)
+			long companyId, long workflowInstanceId, List<Integer> logTypes)
 		throws WorkflowException {
 
 		return _workflowLogManager.getWorkflowLogCountByWorkflowInstance(
-			companyId, workflowInstanceId);
+			companyId, workflowInstanceId, logTypes);
 	}
 
 	public static int getWorkflowLogCountByWorkflowTask(
-			long companyId, long workflowTaskId)
+			long companyId, long workflowTaskId, List<Integer> logTypes)
 		throws WorkflowException {
 
 		return _workflowLogManager.getWorkflowLogCountByWorkflowTask(
-			companyId, workflowTaskId);
+			companyId, workflowTaskId, logTypes);
 	}
 
 	public static WorkflowLogManager getWorkflowLogManager() {
@@ -48,21 +48,23 @@ public class WorkflowLogManagerUtil {
 	}
 
 	public static List<WorkflowLog> getWorkflowLogsByWorkflowInstance(
-			long companyId, long workflowInstanceId, int start, int end,
-			OrderByComparator orderByComparator)
+			long companyId, long workflowInstanceId, List<Integer> logTypes,
+			int start, int end, OrderByComparator orderByComparator)
 		throws WorkflowException {
 
 		return _workflowLogManager.getWorkflowLogsByWorkflowInstance(
-			companyId, workflowInstanceId, start, end, orderByComparator);
+			companyId, workflowInstanceId, logTypes,
+			start, end, orderByComparator);
 	}
 
 	public static List<WorkflowLog> getWorkflowLogsByWorkflowTask(
-			long companyId, long workflowTaskId, int start, int end,
-			OrderByComparator orderByComparator)
+			long companyId, long workflowTaskId, List<Integer> logTypes,
+			int start, int end, OrderByComparator orderByComparator)
 		throws WorkflowException {
 
 		return _workflowLogManager.getWorkflowLogsByWorkflowTask(
-			companyId, workflowTaskId, start, end, orderByComparator);
+			companyId, workflowTaskId, logTypes,
+			start, end, orderByComparator);
 	}
 
 	public void setWorkflowLogManager(WorkflowLogManager workflowLogManager) {
