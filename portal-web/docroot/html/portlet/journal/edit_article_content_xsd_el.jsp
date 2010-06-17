@@ -204,7 +204,9 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 						</aui:select>
 
 						<span class="journal-icon-button journal-delete-field">
-							<liferay-ui:icon image="delete" /><liferay-ui:message key="delete-selected-value" />
+							<liferay-ui:icon
+								image="delete"
+							/><liferay-ui:message key="delete-selected-value" />
 						</span>
 
 						<div class="journal-edit-field-control">
@@ -215,7 +217,9 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 							<input class="journal-list-value" size="15" title="<liferay-ui:message key="item-value" />" type="text" value="value" />
 
 							<span class="journal-icon-button journal-add-field">
-								<liferay-ui:icon image="add" /> <liferay-ui:message key="add-to-list" />
+								<liferay-ui:icon
+									image="add"
+								/> <liferay-ui:message key="add-to-list" />
 							</span>
 						</div>
 					</div>
@@ -264,7 +268,9 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 						</aui:select>
 
 						<span class="journal-icon-button journal-delete-field">
-							<liferay-ui:icon image="delete" /><liferay-ui:message key="delete-selected-value" />
+							<liferay-ui:icon
+								image="delete"
+							/><liferay-ui:message key="delete-selected-value" />
 						</span>
 
 						<div class="journal-edit-field-control">
@@ -275,7 +281,9 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 							<input class="journal-list-value" size="15" title="<liferay-ui:message key="item-value" />" type="text" value="value" />
 
 							<span class="journal-icon-button journal-add-field">
-								<liferay-ui:icon image="add" /> <liferay-ui:message key="add-to-list" />
+								<liferay-ui:icon
+									image="add"
+								/> <liferay-ui:message key="add-to-list" />
 							</span>
 						</div>
 					</div>
@@ -323,7 +331,11 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 			</div>
 
 			<c:if test="<%= elRepeatable %>">
-				<span class="repeatable-field-image"><liferay-ui:icon image="add" /></span>
+				<span class="repeatable-field-image">
+				<liferay-ui:icon
+					image="add"
+				/>
+				</span>
 			</c:if>
 		</div>
 

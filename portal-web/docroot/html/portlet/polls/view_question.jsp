@@ -92,7 +92,12 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 						<portlet:param name="viewResults" value="1" />
 					</portlet:renderURL>
 
-					<liferay-ui:icon image="view" label="<%= true %>" message="view-results" url="<%= viewResultsURL %>" />
+					<liferay-ui:icon
+						image="view"
+						label="<%= true %>"
+						message="view-results"
+						url="<%= viewResultsURL %>"
+					/>
 				</c:if>
 
 				<aui:button-row>

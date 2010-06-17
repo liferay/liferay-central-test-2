@@ -31,7 +31,10 @@ JournalStructure structure = (JournalStructure)row.getObject();
 			<portlet:param name="structureId" value="<%= structure.getStructureId() %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+		<liferay-ui:icon
+			image="edit"
+			url="<%= editURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= JournalStructurePermission.contains(permissionChecker, structure, ActionKeys.PERMISSIONS) %>">
@@ -42,7 +45,10 @@ JournalStructure structure = (JournalStructure)row.getObject();
 			var="permissionsURL"
 		/>
 
-		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+		<liferay-ui:icon
+			image="permissions"
+			url="<%= permissionsURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_STRUCTURE) %>">
@@ -53,7 +59,10 @@ JournalStructure structure = (JournalStructure)row.getObject();
 			<portlet:param name="oldStructureId" value="<%= structure.getStructureId() %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="copy" url="<%= copyURL.toString() %>" />
+		<liferay-ui:icon
+			image="copy"
+			url="<%= copyURL.toString() %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ARTICLE) %>">
@@ -64,7 +73,11 @@ JournalStructure structure = (JournalStructure)row.getObject();
 			<portlet:param name="structureId" value="<%= structure.getStructureId() %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="add_article" message="add-web-content" url="<%= addArticleURL %>" />
+		<liferay-ui:icon
+			image="add_article"
+			message="add-web-content"
+			url="<%= addArticleURL %>"
+		/>
 	</c:if>
 
 	<portlet:renderURL var="viewArticleURL">
@@ -74,7 +87,11 @@ JournalStructure structure = (JournalStructure)row.getObject();
 		<portlet:param name="structureId" value="<%= structure.getStructureId() %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="view_articles" message="view-web-content" url="<%= viewArticleURL %>" />
+	<liferay-ui:icon
+		image="view_articles"
+		message="view-web-content"
+		url="<%= viewArticleURL %>"
+	/>
 
 	<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_TEMPLATE) %>">
 		<portlet:renderURL var="addTemplateURL">
@@ -84,7 +101,11 @@ JournalStructure structure = (JournalStructure)row.getObject();
 			<portlet:param name="structureId" value="<%= structure.getStructureId() %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="add_template" message="add-template" url="<%= addTemplateURL %>" />
+		<liferay-ui:icon
+			image="add_template"
+			message="add-template"
+			url="<%= addTemplateURL %>"
+		/>
 	</c:if>
 
 	<portlet:renderURL var="viewTemplateURL">
@@ -94,7 +115,11 @@ JournalStructure structure = (JournalStructure)row.getObject();
 		<portlet:param name="structureId" value="<%= structure.getStructureId() %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="view_templates" message="view-templates" url="<%= viewTemplateURL %>" />
+	<liferay-ui:icon
+		image="view_templates"
+		message="view-templates"
+		url="<%= viewTemplateURL %>"
+	/>
 
 	<c:if test="<%= JournalStructurePermission.contains(permissionChecker, structure, ActionKeys.DELETE) %>">
 		<portlet:actionURL var="deleteURL">
@@ -105,6 +130,8 @@ JournalStructure structure = (JournalStructure)row.getObject();
 			<portlet:param name="deleteStructureIds" value="<%= structure.getStructureId() %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon-delete url="<%= deleteURL %>" />
+		<liferay-ui:icon-delete
+			url="<%= deleteURL %>"
+		/>
 	</c:if>
 </liferay-ui:icon-menu>

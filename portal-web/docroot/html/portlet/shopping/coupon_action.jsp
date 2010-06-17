@@ -29,7 +29,10 @@ ShoppingCoupon coupon = (ShoppingCoupon)row.getObject();
 		<portlet:param name="couponId" value="<%= String.valueOf(coupon.getCouponId()) %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="edit" url="<%= editURL %>" />
+	<liferay-ui:icon
+		image="edit"
+		url="<%= editURL %>"
+	/>
 
 	<portlet:actionURL var="deleteURL">
 		<portlet:param name="struts_action" value="/shopping/edit_coupon" />

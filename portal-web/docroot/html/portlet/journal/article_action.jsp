@@ -32,7 +32,10 @@ JournalArticle article = (JournalArticle)row.getObject();
 			<portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+		<liferay-ui:icon
+			image="edit"
+			url="<%= editURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.PERMISSIONS) %>">
@@ -43,7 +46,10 @@ JournalArticle article = (JournalArticle)row.getObject();
 			var="permissionsURL"
 		/>
 
-		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+		<liferay-ui:icon
+			image="permissions"
+			url="<%= permissionsURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.VIEW) %>">
@@ -60,7 +66,11 @@ JournalArticle article = (JournalArticle)row.getObject();
 		sb.append(article.getVersion());
 		%>
 
-		<liferay-ui:icon image="preview" target="_blank" url="<%= sb.toString() %>" />
+		<liferay-ui:icon
+			image="preview"
+			target="_blank"
+			url="<%= sb.toString() %>"
+		/>
 
 		<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ARTICLE) %>">
 			<portlet:renderURL var="copyURL">
@@ -71,7 +81,10 @@ JournalArticle article = (JournalArticle)row.getObject();
 				<portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
 			</portlet:renderURL>
 
-			<liferay-ui:icon image="copy" url="<%= copyURL.toString() %>" />
+			<liferay-ui:icon
+				image="copy"
+				url="<%= copyURL.toString() %>"
+			/>
 		</c:if>
 	</c:if>
 

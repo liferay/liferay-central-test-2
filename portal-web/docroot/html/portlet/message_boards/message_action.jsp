@@ -36,7 +36,10 @@ MBThread thread = message.getThread();
 			<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+		<liferay-ui:icon
+			image="edit"
+			url="<%= editURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.PERMISSIONS) && !thread.isLocked() %>">
@@ -47,11 +50,19 @@ MBThread thread = message.getThread();
 			var="permissionsURL"
 		/>
 
-		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+		<liferay-ui:icon
+			image="permissions"
+			url="<%= permissionsURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.VIEW) %>">
-		<liferay-ui:icon image="rss" method="get" target="_blank" url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&threadId=" + message.getThreadId() + rssURLParams %>' />
+		<liferay-ui:icon
+			image="rss"
+			method="get"
+			target="_blank"
+			url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&threadId=" + message.getThreadId() + rssURLParams %>'
+		/>
 	</c:if>
 
 	<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.SUBSCRIBE) %>">
@@ -64,7 +75,10 @@ MBThread thread = message.getThread();
 					<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />
 				</portlet:actionURL>
 
-				<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" />
+				<liferay-ui:icon
+					image="unsubscribe"
+					url="<%= unsubscribeURL %>"
+				/>
 			</c:when>
 			<c:otherwise>
 				<portlet:actionURL var="subscribeURL">
@@ -74,7 +88,10 @@ MBThread thread = message.getThread();
 					<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />
 				</portlet:actionURL>
 
-				<liferay-ui:icon image="subscribe" url="<%= subscribeURL %>" />
+				<liferay-ui:icon
+					image="subscribe"
+					url="<%= subscribeURL %>"
+				/>
 			</c:otherwise>
 		</c:choose>
 	</c:if>
@@ -89,7 +106,11 @@ MBThread thread = message.getThread();
 					<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
 				</portlet:actionURL>
 
-				<liferay-ui:icon image="unlock" message="unlock-thread" url="<%= unlockThreadURL %>" />
+				<liferay-ui:icon
+					image="unlock"
+					message="unlock-thread"
+					url="<%= unlockThreadURL %>"
+				/>
 			</c:when>
 			<c:otherwise>
 				<portlet:actionURL var="lockThreadURL">
@@ -100,7 +121,11 @@ MBThread thread = message.getThread();
 					<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
 				</portlet:actionURL>
 
-				<liferay-ui:icon image="lock" message="lock-thread" url="<%= lockThreadURL %>" />
+				<liferay-ui:icon
+					image="lock"
+					message="lock-thread"
+					url="<%= lockThreadURL %>"
+				/>
 			</c:otherwise>
 		</c:choose>
 	</c:if>
@@ -113,7 +138,11 @@ MBThread thread = message.getThread();
 			<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="forward" message="move-thread" url="<%= moveThreadURL %>" />
+		<liferay-ui:icon
+			image="forward"
+			message="move-thread"
+			url="<%= moveThreadURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.DELETE) && !thread.isLocked() %>">
@@ -124,6 +153,8 @@ MBThread thread = message.getThread();
 			<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon-delete url="<%= deleteURL %>" />
+		<liferay-ui:icon-delete
+			url="<%= deleteURL %>"
+		/>
 	</c:if>
 </liferay-ui:icon-menu>

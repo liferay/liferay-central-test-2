@@ -29,7 +29,10 @@ ShoppingOrder order = (ShoppingOrder)row.getObject();
 		<portlet:param name="orderId" value="<%= String.valueOf(order.getOrderId()) %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="edit" url="<%= editURL %>" />
+	<liferay-ui:icon
+		image="edit"
+		url="<%= editURL %>"
+	/>
 
 	<c:if test="<%= ShoppingOrderPermission.contains(permissionChecker, scopeGroupId, order, ActionKeys.DELETE) %>">
 		<portlet:actionURL var="deleteURL">
@@ -39,6 +42,8 @@ ShoppingOrder order = (ShoppingOrder)row.getObject();
 			<portlet:param name="deleteOrderIds" value="<%= String.valueOf(order.getOrderId()) %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon-delete url="<%= deleteURL %>" />
+		<liferay-ui:icon-delete
+			url="<%= deleteURL %>"
+		/>
 	</c:if>
 </liferay-ui:icon-menu>

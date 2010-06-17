@@ -30,7 +30,10 @@ ShoppingCategory category = (ShoppingCategory)row.getObject();
 			<portlet:param name="categoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+		<liferay-ui:icon
+			image="edit"
+			url="<%= editURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= ShoppingCategoryPermission.contains(permissionChecker, category, ActionKeys.PERMISSIONS) %>">
@@ -41,7 +44,10 @@ ShoppingCategory category = (ShoppingCategory)row.getObject();
 			var="permissionsURL"
 		/>
 
-		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+		<liferay-ui:icon
+			image="permissions"
+			url="<%= permissionsURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= ShoppingCategoryPermission.contains(permissionChecker, category, ActionKeys.DELETE) %>">
