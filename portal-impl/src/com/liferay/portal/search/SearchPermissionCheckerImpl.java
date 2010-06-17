@@ -307,13 +307,13 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		catch (NoSuchResourceException nsre) {
 		}
 
-		long[] groupResourceIds = new long[groupIds.length];
+		long[] groupResourceIds = new long[groups.size()];
 
 		try {
-			for (int i = 0; i < groupIds.length ; i++ ) {
+			for (int i = 0; i < groups.size() ; i++ ) {
 				Resource groupResource = ResourceLocalServiceUtil.getResource(
 					companyId, className, ResourceConstants.SCOPE_GROUP,
-					String.valueOf(groupIds[i]));
+					String.valueOf(groups.get(i).getGroupId()));
 
 				groupResourceIds[i] = groupResource.getResourceId();
 			}
