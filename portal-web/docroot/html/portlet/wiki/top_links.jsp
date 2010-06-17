@@ -83,7 +83,7 @@ portletURL.setParameter("nodeName", node.getName());
 				frontPageURL.setParameter("title", WikiPageConstants.FRONT_PAGE);
 				%>
 
-				<liferay-ui:icon 
+				<liferay-ui:icon
 					cssClass="top-link"
 					image="../aui/home"
 					label="<%= true %>"

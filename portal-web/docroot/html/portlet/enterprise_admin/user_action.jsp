@@ -83,7 +83,6 @@ long userId = user2.getUserId();
 			target="_blank"
 			url="<%= impersonateUserURL %>"
 		/>
-		
 	</c:if>
 
 	<c:if test="<%= UserPermissionUtil.contains(permissionChecker, userId, ActionKeys.DELETE) %>">
