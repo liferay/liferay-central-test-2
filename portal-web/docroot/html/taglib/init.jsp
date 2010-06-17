@@ -147,22 +147,4 @@ private static String _buildLabel(String inlineLabel, boolean showForLabel, Stri
 
 	return sb.toString();
 }
-
-private static String _getAttributeIgnoreCase(Map<String, Object> dynamicAttributes, String attribute) {
-	if (dynamicAttributes == null) {
-		return null;
-	}
-
-	attribute = attribute.toLowerCase();
-
-	for (Map.Entry<String, Object> entry : dynamicAttributes.entrySet()) {
-		String key = entry.getKey().toLowerCase();
-
-		if (key.equals(attribute)) {
-			return String.valueOf(entry.getValue());
-		}
-	}
-
-	return null;
-}
 %>
