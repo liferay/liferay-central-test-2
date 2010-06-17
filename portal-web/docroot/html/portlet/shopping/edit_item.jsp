@@ -382,7 +382,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 									<aui:input field="discount" fieldParam='<%= "discount" + i %>' label="discount" model="<%= ShoppingItemPrice.class %>" name="discount" value="<%= percentFormat.format(discount) %>" />
 								</td>
 								<td>
-									<aui:input name="taxable" param='<%= "taxable" + i %>' type="checkbox" value="<%= taxable %>" />
+									<aui:input label="taxable" name='<%= "taxable" + i %>' param='<%= "taxable" + i %>' type="checkbox" value="<%= taxable %>" />
 								</td>
 							</tr>
 							</table>
