@@ -41,7 +41,7 @@ public class DefaultWorkflowTask implements Serializable, WorkflowTask {
 
 		WorkflowTaskAssignee workflowTaskAssignee = _workflowTaskAssignees.get(
 			0);
-		
+
 		return workflowTaskAssignee.getAssigneeClassPK();
 	}
 
