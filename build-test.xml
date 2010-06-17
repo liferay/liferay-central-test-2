@@ -244,7 +244,7 @@
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="control-panel-password-policies" />
-			<param name="test.ant.script.suite" value="ControlPanelAdminTestSuite" />
+			<param name="test.ant.script.suite" value="ControlPanelPasswordPoliciesTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
@@ -285,11 +285,6 @@
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="permissions-blogs" />
 			<param name="test.ant.script.suite" value="PermissionsBlogsTestSuite" />
-		</antcall>
-
-		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="permissions-control-panel" />
-			<param name="test.ant.script.suite" value="PermissionsControlPanelTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
@@ -441,7 +436,7 @@
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-icefaces-ipc-ajax-push" />
 			<param name="test.ant.script.suite" value="PluginsSampleIcefacesIPCAjaxPushTestSuite" />
-			<param name="test.ant.script.plugins" value="chat-portlet" />
+			<param name="test.ant.script.plugins" value="sample-icefaces-ipc-ajax-push-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 		</antcall>
 
@@ -482,7 +477,7 @@
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-jsf-1.1-myfaces-jsp" />
-			<param name="test.ant.script.suite" value="PluginsSampleJSF11MyfacesJSPTTestSuite" />
+			<param name="test.ant.script.suite" value="PluginsSampleJSF11MyfacesJSPTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-jsf-1.1-myfaces-jsp-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 		</antcall>
@@ -509,9 +504,9 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="plugins-sample-jsf-1.2.sun-jsp" />
+			<param name="test.ant.script.command" value="plugins-sample-jsf-1.2-sun-jsp" />
 			<param name="test.ant.script.suite" value="PluginsSampleJSF12SunJSPTestSuite" />
-			<param name="test.ant.script.plugins" value="sample-jsf-1.2.sun-jsp-portlet" />
+			<param name="test.ant.script.plugins" value="sample-jsf-1.2-sun-jsp-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 		</antcall>
 
@@ -699,14 +694,14 @@
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-clp" />
-			<param name="test.ant.script.suite" value="PluginsCLPTestSuite" />
+			<param name="test.ant.script.suite" value="PluginsTestCLPTestSuite" />
 			<param name="test.ant.script.plugins" value="chat-portlet,test-clp-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="plugins-dependecy" />
-			<param name="test.ant.script.suite" value="PluginsDependencyTestSuite" />
+			<param name="test.ant.script.command" value="plugins-test-dependecy" />
+			<param name="test.ant.script.suite" value="PluginsTestDependencyTestSuite" />
 			<param name="test.ant.script.plugins" value="test-dependency-able-portlet,test-dependency-baker-portlet,test-dependency-charlie-portlet,test-dependency-dog-portlet,test-dependency-easy-portlet,test-dependency-fox-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 		</antcall>
@@ -856,10 +851,6 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="portal-web-activities" />
-			<param name="test.ant.script.suite" value="PortalWebActivitiesTestSuite" />
-		</antcall>
-		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-document-library" />
 			<param name="test.ant.script.suite" value="PortalWebDocumentLibraryTestSuite" />
 		</antcall>
@@ -991,7 +982,7 @@
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-sitemap" />
-			<param name="test.ant.script.suite" value="PortalWebSitemapTestSuite" />
+			<param name="test.ant.script.suite" value="PortalWebSiteMapTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
@@ -1062,11 +1053,6 @@
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="staging-blogs" />
 			<param name="test.ant.script.suite" value="StagingBlogsTestSuite" />
-		</antcall>
-
-		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="staging-control-panel" />
-			<param name="test.ant.script.suite" value="StagingControlPanelTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
@@ -1644,7 +1630,7 @@ file.
 	</target>
 
 	<target name="run-selenium-test">
-		<if>
+		<!--<if>
 			<and>
 			<equals arg1="${test.class}" arg2="PortalWebTestSuite" />
 				<not>
@@ -1660,7 +1646,7 @@ file.
 					<property name="class" value="ServiceSoapTestSuite" />
 				</ant>
 			</then>
-		</if>
+		</if>-->
 
 		<ant dir="portal-web" target="test-class" inheritAll="false">
 			<property name="class" value="${test.class}" />
