@@ -14,6 +14,8 @@
 
 package com.liferay.portal.bean;
 
+import com.liferay.portal.kernel.util.Validator;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -23,80 +25,40 @@ import java.util.Map;
  *
  * @author Igor Spasic
  */
-public class Foo extends FooBase {
+public class Foo extends FooParent {
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
+	public boolean equals(Object obj) {
+		if (this == obj) {
 			return true;
 		}
-		if (o == null || getClass() != o.getClass()) {
+
+		if (!(obj instanceof Foo)) {
 			return false;
 		}
 
-		Foo foo = (Foo) o;
-		if (super.equals(foo) == false) {
-			return false;
+		Foo foo = (Foo)obj;
+
+		if (super.equals(foo) && Validator.equals(_boolean, foo._boolean) &&
+			Validator.equals(_booleanObject, foo._booleanObject) &&
+			Validator.equals(_byte, foo._byte) &&
+			Validator.equals(_byteObject, foo._byteObject) &&
+			Validator.equals(_char, foo._char) &&
+			Validator.equals(_character, foo._character) &&
+			Validator.equals(_double, foo._double) &&
+			Validator.equals(_doubleObject, foo._doubleObject) &&
+			Validator.equals(_float, foo._float) &&
+			Validator.equals(_floatObject, foo._floatObject) &&
+			Validator.equals(_list, foo._list) &&
+			Validator.equals(_map, foo._map) &&
+			Validator.equals(_short, foo._short) &&
+			Validator.equals(_shortObject, foo._shortObject) &&
+			Validator.equals(_string, foo._string) &&
+			Arrays.equals(_stringArray, foo._stringArray)) {
+
+			return true;
 		}
 
-		if (_boolean != foo._boolean) {
-			return false;
-		}
-		if (_byte != foo._byte) {
-			return false;
-		}
-		if (_char != foo._char) {
-			return false;
-		}
-		if (_short != foo._short) {
-			return false;
-		}
-		if (Double.compare(foo._double, _double) != 0) {
-			return false;
-		}
-		if (Float.compare(foo._float, _float) != 0) {
-			return false;
-		}
-		if (_booleanObject != null ?
-			!_booleanObject.equals(foo._booleanObject) :
-			foo._booleanObject != null) {
-			return false;
-		}
-		if (_byteObject != null ? !_byteObject.equals(foo._byteObject) :
-			foo._byteObject != null) {
-			return false;
-		}
-		if (_shortObject != null ? !_shortObject.equals(foo._shortObject) :
-			foo._shortObject != null) {
-			return false;
-		}
-		if (_doubleObject != null ? !_doubleObject.equals(foo._doubleObject) :
-			foo._doubleObject != null) {
-			return false;
-		}
-		if (_floatObject != null ? !_floatObject.equals(foo._floatObject) :
-			foo._floatObject != null) {
-			return false;
-		}
-		if (_character != null ? !_character.equals(foo._character) :
-			foo._character != null) {
-			return false;
-		}
-		if (_list != null ? !_list.equals(foo._list) :
-			foo._list != null) {
-			return false;
-		}
-		if (_map != null ? !_map.equals(foo._map) : foo._map != null) {
-			return false;
-		}
-		if (_string != null ? !_string.equals(foo._string) :
-			foo._string != null) {
-			return false;
-		}
-		if (!Arrays.equals(_stringArray, foo._stringArray)) {
-			return false;
-		}
-		return true;
+		return false;
 	}
 
 	public boolean getBoolean() {

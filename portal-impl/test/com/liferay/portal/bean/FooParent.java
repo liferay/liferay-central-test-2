@@ -14,38 +14,35 @@
 
 package com.liferay.portal.bean;
 
+import com.liferay.portal.kernel.util.Validator;
+
 /**
- * <a href="FooBeanInterface.java.html"><b><i>View Source</i></b></a>
+ * <a href="FooParent.java.html"><b><i>View Source</i></b></a>
  *
  * @author Igor Spasic
  */
-public class FooBase {
+public class FooParent {
 
-	public boolean equals(Object o) {
-		if (this == o) {
+	public boolean equals(Object obj) {
+		if (this == obj) {
 			return true;
 		}
-		if (!(o instanceof FooBase)) {
+
+		if (!(obj instanceof FooParent)) {
 			return false;
 		}
 
-		FooBase that = (FooBase) o;
-		if (_int != that._int) {
-			return false;
-		}
-		if (_long != that._long) {
-			return false;
-		}
-		if (_longObject != null ? !_longObject.equals(that._longObject) :
-			that._longObject != null) {
-			return false;
-		}
-		if (_integer != null ? !_integer.equals(that._integer) :
-			that._integer != null) {
-			return false;
+		FooParent fooParent = (FooParent)obj;
+
+		if (Validator.equals(_int, fooParent._int) &&
+			Validator.equals(_integer, fooParent._integer) &&
+			Validator.equals(_long, fooParent._long) &&
+			Validator.equals(_longObject, fooParent._longObject)) {
+
+			return true;
 		}
 
-		return true;
+		return false;
 	}
 
 	public int getInt() {

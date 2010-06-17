@@ -19,6 +19,8 @@ import com.liferay.portal.util.BaseTestCase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <a href="BeanPropertiesImplTest.java.html"><b><i>View Source</i></b></a>
@@ -69,15 +71,15 @@ public class BeanPropertiesImplTest extends BaseTestCase {
 
 		assertEquals(0, foo.getByte());
 
-		BeanPropertiesUtil.setProperty(foo, "byte", Byte.valueOf((byte) 17));
+		BeanPropertiesUtil.setProperty(foo, "byte", Byte.valueOf((byte)17));
 
 		assertEquals(17, foo.getByte());
 
-		byte value = BeanPropertiesUtil.getByte(foo, "byte", (byte) -1);
+		byte value = BeanPropertiesUtil.getByte(foo, "byte", (byte)-1);
 
 		assertEquals(17, value);
 
-		value = BeanPropertiesUtil.getByte(foo, _NONEXISTENT, (byte) -1);
+		value = BeanPropertiesUtil.getByte(foo, _NONEXISTENT, (byte)-1);
 
 		assertEquals(-1, value);
 	}
@@ -88,100 +90,107 @@ public class BeanPropertiesImplTest extends BaseTestCase {
 		assertNull(foo.getByteObject());
 
 		BeanPropertiesUtil.setProperty(
-			foo, "byteObject", Byte.valueOf((byte) 13));
+			foo, "byteObject", Byte.valueOf((byte)13));
 
 		assertEquals(13, foo.getByteObject().byteValue());
 
-		byte value = BeanPropertiesUtil.getByte(foo, "byteObject", (byte) -1);
+		byte value = BeanPropertiesUtil.getByte(foo, "byteObject", (byte)-1);
 
 		assertEquals(13, value);
 
-		value = BeanPropertiesUtil.getByte(foo, _NONEXISTENT, (byte) -1);
+		value = BeanPropertiesUtil.getByte(foo, _NONEXISTENT, (byte)-1);
 
 		assertEquals(-1, value);
 	}
 
-	public void testCopyEditabileProperties() {
-		Foo foo = _createPopulatedFoo();
-		Foo dest = new Foo();
+	public void testCopyEditableProperties() {
+		Foo sourceFoo = createFoo();
 
-		assertFalse(dest.equals(foo));
+		Foo destinationFoo = new Foo();
 
-		BeanPropertiesUtil.copyProperties(foo, dest, FooBase.class);
+		assertFalse(destinationFoo.equals(sourceFoo));
 
-		assertFalse(dest.equals(foo));
-		assertEquals(foo.getInteger(), dest.getInteger());
-		assertEquals(foo.getInt(), dest.getInt());
-		assertEquals(foo.getLongObject(), dest.getLongObject());
-		assertEquals(foo.getLong(), dest.getLong());
+		BeanPropertiesUtil.copyProperties(
+			sourceFoo, destinationFoo, FooParent.class);
 
-		Bar bar = new Bar();
-		bar.setFoo(foo);
-		Bar destBar = new Bar();
+		assertFalse(destinationFoo.equals(sourceFoo));
+		assertEquals(sourceFoo.getInteger(), destinationFoo.getInteger());
+		assertEquals(sourceFoo.getInt(), destinationFoo.getInt());
+		assertEquals(sourceFoo.getLongObject(), destinationFoo.getLongObject());
+		assertEquals(sourceFoo.getLong(), destinationFoo.getLong());
 
-		try {
-			BeanPropertiesUtil.copyProperties(bar, destBar, FooBase.class);
-			fail();
-		} catch (Exception ignore) {
-		}
+		Bar sourceBar = new Bar();
+
+		sourceBar.setFoo(sourceFoo);
+
+		Bar destinationBar = new Bar();
+
+		BeanPropertiesUtil.copyProperties(
+			sourceBar, destinationBar, FooParent.class);
 	}
 
 	public void testCopyProperties() {
-		Foo foo = _createPopulatedFoo();
-		Foo destFoo = new Foo();
+		Foo sourceFoo = createFoo();
 
-		assertFalse(destFoo.equals(foo));
+		Foo destinationFoo = new Foo();
 
-		BeanPropertiesUtil.copyProperties(foo, destFoo);
+		assertFalse(destinationFoo.equals(sourceFoo));
 
-		assertEquals(destFoo, foo);
+		BeanPropertiesUtil.copyProperties(sourceFoo, destinationFoo);
 
-		Bar bar = new Bar();
-		bar.setFoo(foo);
-		Bar destBar = new Bar();
+		assertEquals(destinationFoo, sourceFoo);
 
-		assertNotSame(destBar.getFoo(), foo);
+		Bar sourceBar = new Bar();
 
-		BeanPropertiesUtil.copyProperties(bar, destBar);
+		sourceBar.setFoo(sourceFoo);
 
-		assertSame(destBar.getFoo(), foo);
+		Bar destinationBar = new Bar();
+
+		assertNotSame(destinationBar.getFoo(), sourceFoo);
+
+		BeanPropertiesUtil.copyProperties(sourceBar, destinationBar);
+
+		assertSame(destinationBar.getFoo(), sourceFoo);
 	}
 
 	public void testCopySomeProperties() {
-		Foo foo = _createPopulatedFoo();
-		Foo destFoo = new Foo();
+		Foo sourceFoo = createFoo();
 
-		assertFalse(destFoo.equals(foo));
+		Foo destinationFoo = new Foo();
 
-		BeanPropertiesUtil.copyProperties(
-			foo, destFoo, new String[] {"string", "integer"});
-
-		assertFalse(destFoo.equals(foo));
-		assertNull(destFoo.getString());
-		assertNull(destFoo.getInteger());
-
-		destFoo.setString(foo.getString());
-		destFoo.setInteger(foo.getInteger());
-
-		assertEquals(destFoo, foo);
-
-		Bar bar = new Bar();
-		bar.setFoo(foo);
-		Bar destBar = new Bar();
+		assertFalse(destinationFoo.equals(sourceFoo));
 
 		BeanPropertiesUtil.copyProperties(
-			bar, destBar, new String[] {"foo.string", "foo.integer"});
+			sourceFoo, destinationFoo, new String[] {"string", "integer"});
 
-		// inner properties are not excluded!
-		assertEquals(destBar.getFoo(), bar.getFoo());
-		assertSame(destBar.getFoo(), bar.getFoo());
+		assertFalse(destinationFoo.equals(sourceFoo));
+		assertNull(destinationFoo.getString());
+		assertNull(destinationFoo.getInteger());
 
-		destBar = new Bar();
+		destinationFoo.setString(sourceFoo.getString());
+		destinationFoo.setInteger(sourceFoo.getInteger());
+
+		assertEquals(destinationFoo, sourceFoo);
+
+		Bar sourceBar = new Bar();
+
+		sourceBar.setFoo(sourceFoo);
+
+		Bar destinationBar = new Bar();
 
 		BeanPropertiesUtil.copyProperties(
-			bar, destBar, new String[] {"foo"});
+			sourceBar, destinationBar,
+			new String[] {"foo.string", "foo.integer"});
 
-		assertNotSame(destBar.getFoo(), bar.getFoo());
+		assertEquals(destinationBar.getFoo(), sourceBar.getFoo());
+		assertSame(destinationBar.getFoo(), sourceBar.getFoo());
+
+		destinationBar = new Bar();
+
+		BeanPropertiesUtil.copyProperties(
+			sourceBar, destinationBar, new String[] {"foo"});
+
+		assertNotSame(destinationBar.getFoo(), sourceBar.getFoo());
 	}
 
 	public void testDouble() {
@@ -295,7 +304,7 @@ public class BeanPropertiesImplTest extends BaseTestCase {
 	}
 
 	public void testList() {
-		Foo foo = _createPopulatedFoo();
+		Foo foo = createFoo();
 
 		int value = BeanPropertiesUtil.getInteger(foo, "list[1]", -1);
 
@@ -348,16 +357,16 @@ public class BeanPropertiesImplTest extends BaseTestCase {
 	}
 
 	public void testMap() {
-		Foo foo = _createPopulatedFoo();
+		Foo foo = createFoo();
 
 		int value = BeanPropertiesUtil.getInteger(foo, "map[two]", -1);
 
-		// map is not supported
 		assertEquals(-1, value);
 	}
 
 	public void testMissingInnerProperty() {
 		Bar bar = new Bar();
+
 		bar.setFoo(null);
 
 		BeanPropertiesUtil.setProperty(bar, "foo.int", Integer.valueOf(173));
@@ -365,15 +374,15 @@ public class BeanPropertiesImplTest extends BaseTestCase {
 
 	public void testObject() {
 		Foo foo = new Foo();
+
 		foo.setString("test");
 
-		String value =
-			(String) BeanPropertiesUtil.getObject(foo, "string", "none");
+		String value = (String)BeanPropertiesUtil.getObject(
+			foo, "string", "none");
 
 		assertEquals("test", value);
 
-		value = (String) BeanPropertiesUtil.getObject(
-			foo, _NONEXISTENT, "none");
+		value = (String)BeanPropertiesUtil.getObject(foo, _NONEXISTENT, "none");
 
 		assertEquals("none", value);
 	}
@@ -410,15 +419,15 @@ public class BeanPropertiesImplTest extends BaseTestCase {
 
 		assertEquals(0, foo.getShort());
 
-		BeanPropertiesUtil.setProperty(foo, "short", Short.valueOf((short) 173));
+		BeanPropertiesUtil.setProperty(foo, "short", Short.valueOf((short)173));
 
 		assertEquals(173, foo.getShort());
 
-		short value = BeanPropertiesUtil.getShort(foo, "short", (short) -1);
+		short value = BeanPropertiesUtil.getShort(foo, "short", (short)-1);
 
 		assertEquals(173, value);
 
-		value = BeanPropertiesUtil.getShort(foo, _NONEXISTENT, (short) -1);
+		value = BeanPropertiesUtil.getShort(foo, _NONEXISTENT, (short)-1);
 
 		assertEquals(-1, value);
 	}
@@ -429,16 +438,16 @@ public class BeanPropertiesImplTest extends BaseTestCase {
 		assertNull(foo.getShortObject());
 
 		BeanPropertiesUtil.setProperty(
-			foo, "shortObject", Short.valueOf((short) 13));
+			foo, "shortObject", Short.valueOf((short)13));
 
 		assertEquals(13, foo.getShortObject().shortValue());
 
 		short value = BeanPropertiesUtil.getShort(
-			foo, "shortObject", (short) -1);
+			foo, "shortObject", (short)-1);
 
 		assertEquals(13, value);
 
-		value = BeanPropertiesUtil.getShort(foo, _NONEXISTENT, (short) -1);
+		value = BeanPropertiesUtil.getShort(foo, _NONEXISTENT, (short)-1);
 
 		assertEquals(-1, value);
 	}
@@ -463,11 +472,10 @@ public class BeanPropertiesImplTest extends BaseTestCase {
 
 	public void testStringArray() {
 		Bar bar = new Bar();
+
 		Foo foo = bar.getFoo();
 
-		foo.setStringArray(new String[] {
-			"one", "two", "three"
-		});
+		foo.setStringArray(new String[] {"one", "two", "three"});
 
 		BeanPropertiesUtil.setProperty(bar, "foo.stringArray[1]", "TWO");
 
@@ -478,35 +486,43 @@ public class BeanPropertiesImplTest extends BaseTestCase {
 		assertEquals(3, foo.getStringArray().length);
 	}
 
-	private Foo _createPopulatedFoo() {
+	protected Foo createFoo() {
 		Foo foo = new Foo();
-		foo.setBooleanObject(Boolean.TRUE);
-		foo.setByteObject(Byte.valueOf((byte) 7));
-		foo.setDoubleObject(Double.valueOf(17.3));
-		foo.setFloatObject(Float.valueOf(13.7f));
+
 		foo.setBoolean(true);
-		foo.setByte((byte) 13);
+		foo.setBooleanObject(Boolean.TRUE);
+		foo.setByte((byte)13);
+		foo.setByteObject(Byte.valueOf((byte)7));
 		foo.setChar('L');
 		foo.setCharacter(Character.valueOf('P'));
 		foo.setDouble(37.1);
+		foo.setDoubleObject(Double.valueOf(17.3));
 		foo.setFloat(3.7f);
+		foo.setFloatObject(Float.valueOf(13.7f));
 		foo.setInt(173);
-		foo.setShort((short) 173);
 		foo.setInteger(Integer.valueOf(1730));
+
+		List<Integer> list = new ArrayList<Integer>();
+
+		list.add(Integer.valueOf(101));
+		list.add(Integer.valueOf(102));
+		list.add(Integer.valueOf(103));
+
+		foo.setList(list);
+
 		foo.setLong(1773L);
+
+		Map<String, Integer> map = new HashMap<String, Integer>();
+
+		map.put("one", Integer.valueOf(1));
+		map.put("two", Integer.valueOf(2));
+
+		foo.setMap(map);
+
+		foo.setShort((short)173);
+		foo.setShortObject(Short.valueOf((short)173));
 		foo.setString("test");
 		foo.setStringArray(new String[] {"a", "b", "c"});
-
-		HashMap<String, Integer> m = new HashMap<String, Integer>();
-		m.put("one", Integer.valueOf(1));
-		m.put("two", Integer.valueOf(2));
-		foo.setMap(m);
-
-		ArrayList<Integer> l = new ArrayList<Integer>();
-		l.add(Integer.valueOf(101));
-		l.add(Integer.valueOf(102));
-		l.add(Integer.valueOf(103));
-		foo.setList(l);
 
 		return foo;
 	}
