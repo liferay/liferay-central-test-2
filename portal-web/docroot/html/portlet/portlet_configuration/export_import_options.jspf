@@ -119,10 +119,10 @@
 							<aui:field-wrapper label="date-range">
 								<ul>
 									<li>
-										<aui:input checked="<%= true %>" id="dateRangeAll" inlineLabel="right" label="all" name="dateRange" onClick='<%= renderResponse.getNamespace() + "hideDateRange()" %>' type="radio" value="<%= false %>" />
+										<aui:input checked="<%= true %>" id="dateRangeAll" inlineLabel="right" label="all" name="range" onClick='<%= renderResponse.getNamespace() + "hideDateRange()" %>' type="radio" value="all" />
 									</li>
 									<li>
-										<aui:input id="dateRangeRange" inlineLabel="right" label="range" name="dateRange" onClick='<%= renderResponse.getNamespace() + "showDateRange()" %>' type="radio" value="<%= true %>" />
+										<aui:input id="dateRangeRange" inlineLabel="right" label="range" name="range" onClick='<%= renderResponse.getNamespace() + "showDateRange()" %>' type="radio" value="dateRange" />
 
 										<%
 										Calendar today = CalendarFactoryUtil.getCalendar(timeZone, locale);

@@ -60,6 +60,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="ExportImportAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ * @author Raymond Augé
  */
 public class ExportImportAction extends EditConfigurationAction {
 
@@ -153,12 +154,12 @@ public class ExportImportAction extends EditConfigurationAction {
 			long groupId = ParamUtil.getLong(actionRequest, "groupId");
 			String fileName = ParamUtil.getString(
 				actionRequest, "exportFileName");
-			boolean dateRange = ParamUtil.getBoolean(
-				actionRequest, "dateRange");
+			String range = ParamUtil.getString(actionRequest, "range");
+
 			Date startDate = null;
 			Date endDate = null;
 
-			if (dateRange) {
+			if (range.equals("dateRange")) {
 				int startDateMonth = ParamUtil.getInteger(
 					actionRequest, "startDateMonth");
 				int startDateDay = ParamUtil.getInteger(
