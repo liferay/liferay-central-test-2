@@ -34,6 +34,9 @@ CustomAttributesDisplay customAttributesDisplay = (CustomAttributesDisplay)row.g
 			<portlet:param name="modelResource" value="<%= customAttributesDisplay.getClassName() %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+		<liferay-ui:icon
+			image="edit"
+			url="<%= editURL %>"
+		/>
 	</c:if>
 </liferay-ui:icon-menu>

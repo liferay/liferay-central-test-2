@@ -98,7 +98,11 @@ if (Validator.isNotNull(strutsAction) && !strutsAction.equals("/login/login")) {
 					<portlet:param name="struts_action" value="/login/forgot_password" />
 				</portlet:renderURL>
 
-				<liferay-ui:icon image="help" message="forgot-password" url="<%= forgotPasswordURL %>" />
+				<liferay-ui:icon
+					image="help"
+					message="forgot-password"
+					url="<%= forgotPasswordURL %>"
+				/>
 			</c:if>
 		</liferay-ui:icon-list>
 	</div>

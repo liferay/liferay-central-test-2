@@ -50,7 +50,10 @@ else {
 			<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+		<liferay-ui:icon
+			image="edit"
+			url="<%= editURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= BookmarksEntryPermission.contains(permissionChecker, entry, ActionKeys.PERMISSIONS) %>">
@@ -61,7 +64,10 @@ else {
 			var="permissionsURL"
 		/>
 
-		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+		<liferay-ui:icon
+			image="permissions"
+			url="<%= permissionsURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= BookmarksEntryPermission.contains(permissionChecker, entry, ActionKeys.DELETE) %>">

@@ -39,13 +39,23 @@ portletURL.setParameter("tag", StringPool.BLANK);
 			portletURL.setParameter("topLink", "bookmarks-home");
 			%>
 
-			<liferay-ui:icon cssClass="top-link" image="../aui/home" label="<%= true %>" message="bookmarks-home" url='<%= (topLink.equals("bookmarks-home") && folderId == 0 && viewFolder && !useAssetEntryQuery) ? StringPool.BLANK : portletURL.toString() %>' />
+			<liferay-ui:icon
+				cssClass="top-link"
+				image="../aui/home"
+				label="<%= true %>"
+				message="bookmarks-home"
+				url='<%= (topLink.equals("bookmarks-home") && folderId == 0 && viewFolder && !useAssetEntryQuery) ? StringPool.BLANK : portletURL.toString() %>'
+			/>
 
 			<%
 			portletURL.setParameter("topLink", "recent-entries");
 			%>
 
-			<liferay-ui:icon cssClass='<%= "top-link" + (themeDisplay.isSignedIn() ? StringPool.BLANK : " last") %>' image="../aui/clock" label="<%= true %>" message="recent-entries" url='<%= (topLink.equals("recent-entries") && !useAssetEntryQuery) ? StringPool.BLANK : portletURL.toString() %>'/>
+			<liferay-ui:icon
+				cssClass='<%= "top-link" + (themeDisplay.isSignedIn() ? StringPool.BLANK : " last") %>'
+				image="../aui/clock" label="<%= true %>"
+				message="recent-entries" url='<%= (topLink.equals("recent-entries") && !useAssetEntryQuery) ? StringPool.BLANK : portletURL.toString() %>'
+			/>
 
 			<c:if test="<%= themeDisplay.isSignedIn() %>">
 
@@ -53,7 +63,13 @@ portletURL.setParameter("tag", StringPool.BLANK);
 				portletURL.setParameter("topLink", "my-entries");
 				%>
 
-				<liferay-ui:icon cssClass="top-link last" image="../aui/person" label="<%= true %>" message="my-entries" url='<%= (topLink.equals("my-entries") && !useAssetEntryQuery) ? StringPool.BLANK : portletURL.toString() %>'/>
+				<liferay-ui:icon
+					cssClass="top-link last"
+					image="../aui/person"
+					label="<%= true %>"
+					message="my-entries"
+					url='<%= (topLink.equals("my-entries") && !useAssetEntryQuery) ? StringPool.BLANK : portletURL.toString() %>'
+				/>
 			</c:if>
 		</div>
 

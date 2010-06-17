@@ -70,7 +70,10 @@ if (row == null) {
 			<portlet:param name="folderId" value="<%= String.valueOf(folder.getFolderId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+		<liferay-ui:icon
+			image="edit"
+			url="<%= editURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= showPermissionsURL %>">
@@ -81,7 +84,10 @@ if (row == null) {
 			var="permissionsURL"
 		/>
 
-		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+		<liferay-ui:icon
+			image="permissions"
+			url="<%= permissionsURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= (folder != null) && BookmarksFolderPermission.contains(permissionChecker, folder, ActionKeys.DELETE) %>">
@@ -97,7 +103,9 @@ if (row == null) {
 			<portlet:param name="folderId" value="<%= String.valueOf(folder.getFolderId()) %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon-delete url="<%= deleteURL %>" />
+		<liferay-ui:icon-delete
+			url="<%= deleteURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= BookmarksFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER) %>">
@@ -117,6 +125,10 @@ if (row == null) {
 			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="../bookmarks/add_bookmark" message="add-bookmark" url="<%= editEntryURL %>" />
+		<liferay-ui:icon
+			image="../bookmarks/add_bookmark"
+			message="add-bookmark"
+			url="<%= editEntryURL %>"
+		/>
 	</c:if>
 </liferay-ui:icon-menu>

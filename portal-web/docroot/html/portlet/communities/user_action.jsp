@@ -33,6 +33,9 @@ Group group = (Group)row.getParameter("group");
 			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="assign_user_roles" url="<%= assignURL %>" />
+		<liferay-ui:icon
+			image="assign_user_roles"
+			url="<%= assignURL %>"
+		/>
 	</c:if>
 </liferay-ui:icon-menu>

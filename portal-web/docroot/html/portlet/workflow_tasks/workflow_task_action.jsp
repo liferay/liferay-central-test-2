@@ -67,7 +67,13 @@ if (workflowTask.getDueDate() != null) {
 				</c:if>
 			</portlet:actionURL>
 
-			<liferay-ui:icon cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>' image="../aui/shuffle" message="<%= message %>" method="get" url="<%= editURL %>" />
+			<liferay-ui:icon
+				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
+				image="../aui/shuffle"
+				message="<%= message %>"
+				method="get"
+				url="<%= editURL %>"
+			/>
 
 		<%
 		}
@@ -84,7 +90,13 @@ if (workflowTask.getDueDate() != null) {
 			<portlet:param name="assigneeUserId" value="<%= String.valueOf(user.getUserId()) %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon cssClass='<%= "workflow-task-" + randomId + " task-assign-to-me-link" %>' image="assign" message="assign-to-me" method="get" url="<%= assignToMeURL %>" />
+		<liferay-ui:icon
+			cssClass='<%= "workflow-task-" + randomId + " task-assign-to-me-link" %>'
+			image="assign"
+			message="assign-to-me"
+			method="get"
+			url="<%= assignToMeURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= (pooledActorsIds.length > 0) && !workflowTask.isCompleted() %>">
@@ -95,7 +107,13 @@ if (workflowTask.getDueDate() != null) {
 			<portlet:param name="workflowTaskId" value="<%= String.valueOf(workflowTask.getWorkflowTaskId()) %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon cssClass='<%= "workflow-task-" + randomId + " task-assign-link" %>' image="assign" message="assign-to-..." method="get" url="<%= assignURL %>" />
+		<liferay-ui:icon
+			cssClass='<%= "workflow-task-" + randomId + " task-assign-link" %>'
+			image="assign"
+			message="assign-to-..."
+			method="get"
+			url="<%= assignURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= !workflowTask.isCompleted() %>">
@@ -106,7 +124,13 @@ if (workflowTask.getDueDate() != null) {
 			<portlet:param name="workflowTaskId" value="<%= StringUtil.valueOf(workflowTask.getWorkflowTaskId()) %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon cssClass='<%= "workflow-task-" + randomId + " task-due-date-link" %>' image="time" message="update-due-date" method="get" url="<%= updateDueDateURL %>" />
+		<liferay-ui:icon
+			cssClass='<%= "workflow-task-" + randomId + " task-due-date-link" %>'
+			image="time"
+			message="update-due-date"
+			method="get"
+			url="<%= updateDueDateURL %>"
+		/>
 	</c:if>
 </liferay-ui:icon-menu>
 

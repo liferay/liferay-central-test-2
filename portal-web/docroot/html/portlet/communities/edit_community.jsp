@@ -104,7 +104,14 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 									<portlet:param name="privateLayout" value="<%= Boolean.FALSE.toString() %>" />
 								</liferay-portlet:actionURL>
 
-								<liferay-ui:icon image="view" label="<%= true %>" message="open-public-pages" method="get" target="_blank" url="<%= publicPagesURL.toString() %>" />
+								<liferay-ui:icon
+									image="view"
+									label="<%= true %>"
+									message="open-public-pages"
+									method="get"
+									target="_blank"
+									url="<%= publicPagesURL.toString() %>"
+								/>
 							</c:when>
 							<c:otherwise>
 								<liferay-ui:message key="this-community-does-not-have-any-public-pages" />
@@ -141,7 +148,14 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 									<portlet:param name="privateLayout" value="<%= Boolean.TRUE.toString() %>" />
 								</liferay-portlet:actionURL>
 
-								<liferay-ui:icon image="view" label="<%= true %>" message="open-private-pages" method="get" target="_blank" url="<%= privatePagesURL.toString() %>" />
+								<liferay-ui:icon
+									image="view"
+									label="<%= true %>"
+									message="open-private-pages"
+									method="get"
+									target="_blank"
+									url="<%= privatePagesURL.toString() %>"
+								/>
 							</c:when>
 							<c:otherwise>
 								<liferay-ui:message key="this-community-does-not-have-any-private-pages" />

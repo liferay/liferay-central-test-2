@@ -33,7 +33,10 @@ String tabs1 = (String)objArray[1];
 			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+		<liferay-ui:icon
+			image="edit"
+			url="<%= editURL %>"
+		/>
 	</c:if>
 
 	<%--<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.PERMISSIONS) %>">
@@ -44,7 +47,10 @@ String tabs1 = (String)objArray[1];
 			var="permissionsURL"
 		/>
 
-		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+		<liferay-ui:icon
+	   		image="permissions"
+			url="<%= permissionsURL %>"
+		/>
 	</c:if>--%>
 
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS) %>">
@@ -54,7 +60,11 @@ String tabs1 = (String)objArray[1];
 			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="pages" message="manage-pages" url="<%= managePagesURL %>" />
+		<liferay-ui:icon
+			image="pages"
+			message="manage-pages"
+			url="<%= managePagesURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_TEAMS) %>">
@@ -64,7 +74,11 @@ String tabs1 = (String)objArray[1];
 			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="group" message="manage-teams" url="<%= manageTeamsURL %>" />
+		<liferay-ui:icon
+			image="group"
+			message="manage-teams"
+			url="<%= manageTeamsURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= permissionChecker.isCommunityOwner(group.getGroupId()) || GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_USER_ROLES) %>">
@@ -74,7 +88,10 @@ String tabs1 = (String)objArray[1];
 			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="assign_user_roles" url="<%= assignUserRolesURL %>" />
+		<liferay-ui:icon
+			image="assign_user_roles"
+			url="<%= assignUserRolesURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_MEMBERS) %>">
@@ -84,7 +101,11 @@ String tabs1 = (String)objArray[1];
 			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="assign" message="assign-members" url="<%= assignMembersURL %>" />
+		<liferay-ui:icon
+			image="assign"
+			message="assign-members"
+			url="<%= assignMembersURL %>"
+		/>
 
 		<c:if test="<%= group.getType() == GroupConstants.TYPE_COMMUNITY_RESTRICTED %>">
 			<portlet:renderURL var="viewMembershipRequestsURL">
@@ -93,7 +114,11 @@ String tabs1 = (String)objArray[1];
 				<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 			</portlet:renderURL>
 
-			<liferay-ui:icon image="manage_task" message="view-membership-requests" url="<%= viewMembershipRequestsURL %>" />
+			<liferay-ui:icon
+				image="manage_task"
+				message="view-membership-requests"
+				url="<%= viewMembershipRequestsURL %>"
+			/>
 		</c:if>
 	</c:if>
 
@@ -108,7 +133,10 @@ String tabs1 = (String)objArray[1];
 					<portlet:param name="removeUserIds" value="<%= String.valueOf(user.getUserId()) %>" />
 				</portlet:actionURL>
 
-				<liferay-ui:icon image="leave" url="<%= leaveURL %>" />
+				<liferay-ui:icon
+					image="leave"
+					url="<%= leaveURL %>"
+				/>
 			</c:if>
 		</c:when>
 		<c:otherwise>
@@ -124,7 +152,10 @@ String tabs1 = (String)objArray[1];
 								<portlet:param name="addUserIds" value="<%= String.valueOf(user.getUserId()) %>" />
 							</portlet:actionURL>
 
-							<liferay-ui:icon image="join" url="<%= joinURL %>" />
+							<liferay-ui:icon
+								image="join"
+								url="<%= joinURL %>"
+							/>
 						</c:when>
 						<c:when test="<%= group.getType() == GroupConstants.TYPE_COMMUNITY_RESTRICTED %>">
 							<portlet:renderURL var="membershipRequestURL">
@@ -133,7 +164,11 @@ String tabs1 = (String)objArray[1];
 								<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 							</portlet:renderURL>
 
-							<liferay-ui:icon image="post" message="request-membership" url="<%= membershipRequestURL %>" />
+							<liferay-ui:icon
+								image="post"
+								message="request-membership"
+								url="<%= membershipRequestURL %>"
+							/>
 						</c:when>
 					</c:choose>
 				</c:when>
@@ -147,7 +182,10 @@ String tabs1 = (String)objArray[1];
 							<portlet:param name="removeUserIds" value="<%= String.valueOf(user.getUserId()) %>" />
 						</portlet:actionURL>
 
-						<liferay-ui:icon image="leave" url="<%= leaveURL %>" />
+						<liferay-ui:icon
+							image="leave"
+							url="<%= leaveURL %>"
+						/>
 					</c:if>
 				</c:otherwise>
 			</c:choose>

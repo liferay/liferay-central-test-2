@@ -289,7 +289,11 @@ if (articleDisplay != null) {
 							<portlet:param name="version" value="<%= String.valueOf(articleDisplay.getVersion()) %>" />
 						</liferay-portlet:renderURL>
 
-						<liferay-ui:icon image="edit" message="edit-web-content" url="<%= editURL %>" />
+						<liferay-ui:icon
+							image="edit"
+							message="edit-web-content"
+							url="<%= editURL %>"
+						/>
 					</c:if>
 
 					<c:if test="<%= showEditTemplateIcon %>">
@@ -301,11 +305,21 @@ if (articleDisplay != null) {
 							<portlet:param name="templateId" value="<%= articleDisplay.getTemplateId() %>" />
 						</liferay-portlet:renderURL>
 
-						<liferay-ui:icon image="../file_system/small/xml" message="edit-template" url="<%= editTemplateURL %>" />
+						<liferay-ui:icon
+							image="../file_system/small/xml"
+							message="edit-template"
+							url="<%= editTemplateURL %>"
+						/>
 					</c:if>
 
 					<c:if test="<%= showSelectArticleIcon %>">
-						<liferay-ui:icon cssClass="portlet-configuration" image="configuration" message="select-web-content" method="get" url="<%= portletDisplay.getURLConfiguration() %>" />
+						<liferay-ui:icon
+							cssClass="portlet-configuration"
+							image="configuration"
+							message="select-web-content"
+							method="get"
+							url="<%= portletDisplay.getURLConfiguration() %>"
+						/>
 					</c:if>
 
 					<c:if test="<%= showAddArticleIcon %>">
@@ -316,7 +330,11 @@ if (articleDisplay != null) {
 							<portlet:param name="referringPortletResource" value="<%= PortletKeys.JOURNAL_CONTENT %>" />
 						</liferay-portlet:renderURL>
 
-						<liferay-ui:icon image="add_article" message="add-web-content" url="<%= addArticleURL %>" />
+						<liferay-ui:icon
+							image="add_article"
+							message="add-web-content"
+							url="<%= addArticleURL %>"
+						/>
 					</c:if>
 				</div>
 			</div>

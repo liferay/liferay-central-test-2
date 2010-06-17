@@ -36,6 +36,10 @@ MembershipRequest membershipRequest = (MembershipRequest)objArray[2];
 			<portlet:param name="membershipRequestId" value="<%= String.valueOf(membershipRequest.getMembershipRequestId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="reply" message="reply" url="<%= replyRequestURL %>" />
+		<liferay-ui:icon
+			image="reply"
+			message="reply"
+			url="<%= replyRequestURL %>"
+		/>
 	</c:if>
 </liferay-ui:icon-menu>

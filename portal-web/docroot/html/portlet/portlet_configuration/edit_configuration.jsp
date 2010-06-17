@@ -38,7 +38,12 @@ String path = (String)request.getAttribute(WebKeys.CONFIGURATION_ACTION_PATH);
 	</portlet:renderURL>
 
 	<div class="archived-setups">
-		<liferay-ui:icon message="archive-restore-setup" image="export" label="<%= true %>" url="<%= archivedSetupsURL %>" />
+		<liferay-ui:icon
+			message="archive-restore-setup"
+			image="export"
+			label="<%= true %>"
+			url="<%= archivedSetupsURL %>"
+		/>
 	</div>
 </c:if>
 

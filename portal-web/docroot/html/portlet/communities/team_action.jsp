@@ -30,7 +30,10 @@ Team team = (Team)row.getObject();
 			<portlet:param name="teamId" value="<%= String.valueOf(team.getTeamId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+		<liferay-ui:icon
+			image="edit"
+			url="<%= editURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= TeamPermissionUtil.contains(permissionChecker, team.getTeamId(), ActionKeys.ASSIGN_MEMBERS) %>">
@@ -40,7 +43,11 @@ Team team = (Team)row.getObject();
 			<portlet:param name="teamId" value="<%= String.valueOf(team.getTeamId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="assign" message="assign-members" url="<%= assignMembersURL %>" />
+		<liferay-ui:icon
+			image="assign"
+			message="assign-members"
+			url="<%= assignMembersURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= TeamPermissionUtil.contains(permissionChecker, team.getTeamId(), ActionKeys.DELETE) %>">
@@ -51,6 +58,8 @@ Team team = (Team)row.getObject();
 			<portlet:param name="teamId" value="<%= String.valueOf(team.getTeamId()) %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon-delete url="<%= deleteURL %>" />
+		<liferay-ui:icon-delete
+			url="<%= deleteURL %>"
+		/>
 	</c:if>
 </liferay-ui:icon-menu>

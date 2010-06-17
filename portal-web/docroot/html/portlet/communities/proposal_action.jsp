@@ -31,7 +31,10 @@ TasksProposal proposal = (TasksProposal)row.getObject();
 			<portlet:param name="proposalId" value="<%= String.valueOf(proposal.getProposalId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+		<liferay-ui:icon
+			image="edit"
+			url="<%= editURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, proposal.getGroupId(), ActionKeys.MANAGE_LAYOUTS) %>">
@@ -43,6 +46,8 @@ TasksProposal proposal = (TasksProposal)row.getObject();
 			<portlet:param name="proposalId" value="<%= String.valueOf(proposal.getProposalId()) %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon-delete url="<%= deleteURL %>" />
+		<liferay-ui:icon-delete
+			url="<%= deleteURL %>"
+		/>
 	</c:if>
 </liferay-ui:icon-menu>

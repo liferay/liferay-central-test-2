@@ -34,7 +34,11 @@ String portletResource = (String)objects[1];
 		<portlet:param name="name" value="<%= portletItem.getName() %>" />
 	</portlet:actionURL>
 
-	<liferay-ui:icon image="undo" message="restore" url="<%= restoreURL %>" />
+	<liferay-ui:icon
+		image="undo"
+		message="restore"
+		url="<%= restoreURL %>"
+	/>
 
 	<portlet:actionURL var="deleteURL">
 		<portlet:param name="struts_action" value="/portlet_configuration/edit_archived_setups" />
@@ -44,5 +48,7 @@ String portletResource = (String)objects[1];
 		<portlet:param name="portletItemId" value="<%= String.valueOf(portletItem.getPortletItemId()) %>" />
 	</portlet:actionURL>
 
-	<liferay-ui:icon-delete url="<%= deleteURL %>" />
+	<liferay-ui:icon-delete
+		url="<%= deleteURL %>"
+	/>
 </liferay-ui:icon-menu>
