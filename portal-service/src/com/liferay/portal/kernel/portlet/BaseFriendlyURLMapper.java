@@ -68,52 +68,7 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 	 * @deprecated
 	 */
 	protected void addParam(
-		Map<String, String[]> parameterMap, String name, boolean value) {
-
-		addParameter(parameterMap, name, value);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	protected void addParam(
-		Map<String, String[]> parameterMap, String name, double value) {
-
-		addParameter(parameterMap, name, value);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	protected void addParam(
-		Map<String, String[]> parameterMap, String name, int value) {
-
-		addParameter(parameterMap, name, value);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	protected void addParam(
-		Map<String, String[]> parameterMap, String name, long value) {
-
-		addParameter(parameterMap, name, value);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	protected void addParam(
 		Map<String, String[]> parameterMap, String name, Object value) {
-
-		addParameter(parameterMap, name, value);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	protected void addParam(
-		Map<String, String[]> parameterMap, String name, short value) {
 
 		addParameter(parameterMap, name, value);
 	}

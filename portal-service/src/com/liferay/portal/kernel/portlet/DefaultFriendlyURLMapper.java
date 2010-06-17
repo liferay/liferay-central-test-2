@@ -42,12 +42,9 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 		Map<String, String[]> parameters = new HashMap<String, String[]>(
 			portletURLParameters);
 
-		WindowState windowState = portletURL.getWindowState();
-		parameters.put("p_p_state", new String[] {String.valueOf(windowState)});
-		parameters.put("p_p_lifecycle", new String[] {getLifecycle(portletURL)});
-
 		if (isPortletInstanceable()) {
 			String portletId = portletURL.getPortletId();
+
 			parameters.put("p_p_id", new String[] {portletId});
 
 			if (Validator.isNotNull(portletId)) {
@@ -56,10 +53,18 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 				if (parts.length > 1) {
 					String instanceId = parts[1];
+
 					parameters.put("instanceId", new String[] {instanceId});
 				}
 			}
 		}
+
+		parameters.put(
+			"p_p_lifecycle", new String[] {getLifecycle(portletURL)});
+
+		WindowState windowState = portletURL.getWindowState();
+
+		parameters.put("p_p_state", new String[] {String.valueOf(windowState)});
 
 		String friendlyURLPath = router.parametersToUrl(parameters);
 
@@ -67,13 +72,13 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 			return null;
 		}
 
+		portletURL.addParameterIncludedInPath("p_p_id");
+
 		for (String name : portletURLParameters.keySet()) {
 			if (!parameters.containsKey(name)) {
 				portletURL.addParameterIncludedInPath(name);
 			}
 		}
-
-		portletURL.addParameterIncludedInPath("p_p_id");
 
 		friendlyURLPath = StringPool.SLASH.concat(getMapping()).concat(
 			friendlyURLPath);
