@@ -17,17 +17,18 @@
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
 <%
-boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT);
-String redirect = ParamUtil.getString(request, "redirect");
-
 String strutsAction = ParamUtil.getString(request, "struts_action");
+
+String redirect = ParamUtil.getString(request, "redirect");
 
 WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 String keywords = ParamUtil.getString(request, "keywords");
 
-List nodes = WikiUtil.getNodes(allNodes, hiddenNodes, permissionChecker);
+List<WikiNode> nodes = WikiUtil.getNodes(allNodes, hiddenNodes, permissionChecker);
+
+boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -48,7 +49,7 @@ portletURL.setParameter("nodeName", node.getName());
 
 				<%
 				for (int i = 0; i < nodes.size(); i++) {
-					WikiNode curNode = (WikiNode)nodes.get(i);
+					WikiNode curNode = nodes.get(i);
 
 					String cssClass = StringPool.BLANK;
 
