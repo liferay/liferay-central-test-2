@@ -2252,7 +2252,9 @@ AUI().add(
 					publishBtn.detach('click');
 				}
 
-				saveArticleBtn.detach('click');
+				if (saveArticleBtn) {
+					saveArticleBtn.detach('click');
+				}
 
 				editButtons.on(
 					'click',
@@ -2281,12 +2283,14 @@ AUI().add(
 					}
 				);
 
-				saveArticleBtn.on(
-					'click',
-					function() {
-						instance.saveArticle();
-					}
-				);
+				if (saveArticleBtn) {
+					saveArticleBtn.on(
+						'click',
+						function() {
+							instance.saveArticle();
+						}
+					);
+				}
 
 				if (publishBtn) {
 					publishBtn.on(
