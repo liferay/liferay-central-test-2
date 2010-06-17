@@ -1296,15 +1296,24 @@ Liferay.provide(
 Liferay.provide(
 	Liferay.Util,
 	'toggleBoxes',
-	function(checkBoxId, toggleBoxId) {
+	function(checkBoxId, toggleBoxId, inverted) {
 		var A = AUI();
 
 		var checkBox = A.one('#' + checkBoxId);
 		var toggleBox = A.one('#' + toggleBoxId);
 
 		if (checkBox && toggleBox) {
-			if (!checkBox.get('checked')) {
+			var checked = checkBox.get('checked');
+
+			if (checked) {
+				toggleBox.show();
+			}
+			else {
 				toggleBox.hide();
+			}
+
+			if (inverted) {
+				toggleBox.toggle();
 			}
 
 			checkBox.on(
