@@ -120,7 +120,9 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 				%>
 
 					<aui:select label="new-parent" name="newParentTitle">
-						<aui:option label="none" selected="<%= Validator.isNull(wikiPage.getParentTitle()) %>" value="" />
+						<aui:option selected="<%= Validator.isNull(wikiPage.getParentTitle()) %>" value="">
+							<liferay-ui:message key="none" />
+						</aui:option>
 
 						<%
 						for (WikiPage childPage : childPages) {
