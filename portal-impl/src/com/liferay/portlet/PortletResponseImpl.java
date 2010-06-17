@@ -36,6 +36,8 @@ import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
+import java.io.Writer;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
@@ -60,6 +62,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
@@ -185,8 +188,6 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 			throw new IllegalArgumentException();
 		}
 
-		// LPS-8358
-
 		if (key.equalsIgnoreCase(MimeResponse.MARKUP_HEAD_ELEMENT)) {
 			List<Element> values = _markupHeadElements.get(key);
 
@@ -201,6 +202,7 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 			else {
 				if (element != null) {
 					values = new ArrayList<Element>();
+
 					values.add(element);
 
 					_markupHeadElements.put(key, values);
@@ -229,27 +231,21 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 	public Element createElement(String tagName) throws DOMException {
 		if (_document == null) {
 			try {
-				DocumentBuilderFactory factory =
+				DocumentBuilderFactory documentBuilderFactory =
 					DocumentBuilderFactory.newInstance();
 
-				_document = factory.newDocumentBuilder().newDocument();
+				DocumentBuilder documentBuilder =
+					documentBuilderFactory.newDocumentBuilder();
+
+				_document = documentBuilder.newDocument();
 			}
 			catch (ParserConfigurationException pce) {
-				throw new RuntimeException(pce);
+				throw new DOMException(
+					DOMException.INVALID_STATE_ERR, pce.getMessage());
 			}
 		}
 
 		return _document.createElement(tagName);
-	}
-
-	public LiferayPortletURL createLiferayPortletURL(String lifecycle) {
-		return createLiferayPortletURL(_portletName, lifecycle);
-	}
-
-	public LiferayPortletURL createLiferayPortletURL(
-		String portletName, String lifecycle) {
-
-		return createLiferayPortletURL(_plid, portletName, lifecycle);
 	}
 
 	public LiferayPortletURL createLiferayPortletURL(
@@ -378,6 +374,16 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		}
 
 		return portletURLImpl;
+	}
+
+	public LiferayPortletURL createLiferayPortletURL(String lifecycle) {
+		return createLiferayPortletURL(_portletName, lifecycle);
+	}
+
+	public LiferayPortletURL createLiferayPortletURL(
+		String portletName, String lifecycle) {
+
+		return createLiferayPortletURL(_plid, portletName, lifecycle);
 	}
 
 	public PortletURL createRenderURL() {
@@ -609,18 +615,17 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 	}
 
 	public void transferMarkupHeadElements() {
-		List<Element> elements =
-			_markupHeadElements.get(MimeResponse.MARKUP_HEAD_ELEMENT);
+		List<Element> elements = _markupHeadElements.get(
+			MimeResponse.MARKUP_HEAD_ELEMENT);
 
 		if ((elements == null) || elements.isEmpty()) {
 			return;
 		}
 
-		HttpServletRequest servletRequest = getHttpServletRequest();
+		HttpServletRequest request = getHttpServletRequest();
 
-		List<String> markupHeadElements =
-			(List<String>)servletRequest.getAttribute(
-				MimeResponse.MARKUP_HEAD_ELEMENT);
+		List<String> markupHeadElements = (List<String>)request.getAttribute(
+			MimeResponse.MARKUP_HEAD_ELEMENT);
 
 		if (markupHeadElements == null) {
 			markupHeadElements = new ArrayList<String>();
@@ -628,29 +633,29 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 
 		for (Element element : elements) {
 			try {
-				UnsyncStringWriter unsyncStringWriter =
-					new UnsyncStringWriter();
+				Writer writer = new UnsyncStringWriter();
 
-				Transformer transformer =
-					TransformerFactory.newInstance().newTransformer();
+				TransformerFactory transformerFactory =
+					TransformerFactory.newInstance();
+
+				Transformer transformer = transformerFactory.newTransformer();
 
 				transformer.setOutputProperty(
 					OutputKeys.OMIT_XML_DECLARATION, "yes");
 
 				transformer.transform(
-					new DOMSource(element),
-					new StreamResult(unsyncStringWriter));
+					new DOMSource(element), new StreamResult(writer));
 
-				markupHeadElements.add(unsyncStringWriter.toString());
+				markupHeadElements.add(writer.toString());
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(e);
+					_log.warn(e, e);
 				}
 			}
 		}
 
-		servletRequest.setAttribute(
+		request.setAttribute(
 			MimeResponse.MARKUP_HEAD_ELEMENT, markupHeadElements);
 	}
 
@@ -669,18 +674,18 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 
 	private static Log _log = LogFactoryUtil.getLog(PortletResponseImpl.class);
 
-	private PortletRequestImpl _portletRequestImpl;
-	private HttpServletResponse _response;
-	private String _portletName;
-	private Portlet _portlet;
-	private String _namespace;
 	private long _companyId;
-	private long _plid;
-	private URLEncoder _urlEncoder;
+	private Document _document;
 	private Map<String, Object> _headers = new LinkedHashMap<String, Object>();
 	private Map<String, List<Element>> _markupHeadElements =
 		new LinkedHashMap<String, List<Element>>();
+	private String _namespace;
+	private long _plid;
+	private Portlet _portlet;
+	private String _portletName;
+	private PortletRequestImpl _portletRequestImpl;
+	private HttpServletResponse _response;
+	private URLEncoder _urlEncoder;
 	private boolean _wsrp;
-	private Document _document;
 
 }

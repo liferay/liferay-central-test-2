@@ -17,7 +17,6 @@ package com.liferay.portlet;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,12 +35,13 @@ import javax.portlet.WindowState;
  */
 public class PortalContextImpl implements PortalContext {
 
-	static Properties props = new Properties();
+	static Properties properties = new Properties();
 	static List<PortletMode> portletModes = new ArrayList<PortletMode>();
 	static List<WindowState> windowStates = new ArrayList<WindowState>();
 
 	static {
-		props.setProperty(MARKUP_HEAD_ELEMENT_SUPPORT, StringPool.TRUE);
+		properties.setProperty(
+			MARKUP_HEAD_ELEMENT_SUPPORT, Boolean.TRUE.toString());
 
 		portletModes.add(PortletMode.EDIT);
 		portletModes.add(PortletMode.HELP);
@@ -92,11 +92,11 @@ public class PortalContextImpl implements PortalContext {
 	}
 
 	public String getProperty(String name) {
-		return props.getProperty(name);
+		return properties.getProperty(name);
 	}
 
 	public Enumeration<String> getPropertyNames() {
-		return (Enumeration<String>)props.propertyNames();
+		return (Enumeration<String>)properties.propertyNames();
 	}
 
 	public Enumeration<PortletMode> getSupportedPortletModes() {
