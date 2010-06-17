@@ -57,6 +57,8 @@ String articleId = BeanParamUtil.getString(article, request, "articleId");
 String newArticleId = ParamUtil.getString(request, "newArticleId");
 String instanceIdKey = PwdGenerator.KEY1 + PwdGenerator.KEY2 + PwdGenerator.KEY3;
 
+boolean autoArticleId = ParamUtil.getBoolean(request, "autoArticleId", false);
+
 double version = BeanParamUtil.getDouble(article, request, "version", JournalArticleConstants.DEFAULT_VERSION);
 
 Calendar displayDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
@@ -268,7 +270,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 								<c:otherwise>
 									<aui:input cssClass="lfr-input-text-container" field="articleId" fieldParam="newArticleId" label="id" name="newArticleId" value="<%= newArticleId %>" />
 
-									<aui:input label="autogenerate-id" name="autoArticleId" type="checkbox" />
+									<aui:input label="autogenerate-id" name="autoArticleId" type="checkbox" value="<%= autoArticleId %>" />
 								</c:otherwise>
 							</c:choose>
 						</c:when>
