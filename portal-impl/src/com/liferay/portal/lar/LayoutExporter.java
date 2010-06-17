@@ -245,168 +245,48 @@ public class LayoutExporter {
 				groupId, privateLayout, layoutIds);
 		}
 
+		Layout firstLayout = layouts.get(0);
+
+		List<Portlet> portlets = getAlwaysExportablePortlets(
+			context.getCompanyId());
+
+		for (Portlet portlet : portlets) {
+			String portletId = portlet.getRootPortletId();
+
+			if (portlet.isScopeable() && firstLayout.hasScopeGroup()) {
+				String key = PortletPermissionUtil.getPrimaryKey(
+					firstLayout.getPlid(), portletId);
+
+				portletIds.put(
+					key,
+					new Object[] {
+						portletId, firstLayout.getPlid(),
+						firstLayout.getScopeGroup().getGroupId(),
+						firstLayout.getLayoutId()
+					}
+				);
+			}
+			else {
+				String key = PortletPermissionUtil.getPrimaryKey(
+					0, portletId);
+
+				if (portletIds.get(key) == null) {
+					portletIds.put(
+						key,
+						new Object[] {
+							portletId, firstLayout.getPlid(), groupId, 0L
+						}
+					);
+				}
+			}
+		}
+
 		Element layoutsEl = root.addElement("layouts");
 
 		for (Layout layout : layouts) {
-			boolean deleteLayout = MapUtil.getBoolean(
-				parameterMap, "delete_" + layout.getPlid());
-
-			if (deleteLayout) {
-				Element el = layoutsEl.addElement("layout");
-
-				el.addAttribute(
-					"layout-id", String.valueOf(layout.getLayoutId()));
-				el.addAttribute("delete", String.valueOf(true));
-
-				continue;
-			}
-
-			fixTypeSettings(layout);
-
-			context.setPlid(layout.getPlid());
-
-			Document layoutDoc = SAXReaderUtil.createDocument();
-
-			Element layoutEl = layoutDoc.addElement("layout");
-
-			layoutEl.addAttribute("old-plid", String.valueOf(layout.getPlid()));
-			layoutEl.addAttribute(
-				"layout-id", String.valueOf(layout.getLayoutId()));
-			layoutEl.addElement("parent-layout-id").addText(
-				String.valueOf(layout.getParentLayoutId()));
-			layoutEl.addElement("name").addCDATA(layout.getName());
-			layoutEl.addElement("title").addCDATA(layout.getTitle());
-			layoutEl.addElement("description").addText(layout.getDescription());
-			layoutEl.addElement("type").addText(layout.getType());
-			layoutEl.addElement("type-settings").addCDATA(
-				layout.getTypeSettings());
-			layoutEl.addElement("hidden").addText(
-				String.valueOf(layout.getHidden()));
-			layoutEl.addElement("friendly-url").addText(
-				layout.getFriendlyURL());
-			layoutEl.addElement("icon-image").addText(
-				String.valueOf(layout.getIconImage()));
-
-			if (layout.isIconImage()) {
-				Image image = ImageLocalServiceUtil.getImage(
-					layout.getIconImageId());
-
-				if (image != null) {
-					String iconPath = getLayoutIconPath(context, layout, image);
-
-					layoutEl.addElement("icon-image-path").addText(
-						iconPath);
-
-					context.addZipEntry(iconPath, image.getTextObj());
-				}
-			}
-
-			layoutEl.addElement("theme-id").addText(layout.getThemeId());
-			layoutEl.addElement("color-scheme-id").addText(
-				layout.getColorSchemeId());
-			layoutEl.addElement("wap-theme-id").addText(layout.getWapThemeId());
-			layoutEl.addElement("wap-color-scheme-id").addText(
-				layout.getWapColorSchemeId());
-			layoutEl.addElement("css").addCDATA(layout.getCss());
-			layoutEl.addElement("priority").addText(
-				String.valueOf(layout.getPriority()));
-
-			// Layout permissions
-
-			if (exportPermissions) {
-				_permissionExporter.exportLayoutPermissions(
-					context, layoutCache, companyId, groupId, layout, layoutEl,
-					exportUserPermissions);
-			}
-
-			if (layout.isTypePortlet()) {
-				LayoutTypePortlet layoutTypePortlet =
-					(LayoutTypePortlet)layout.getLayoutType();
-
-				long scopeGroupId = groupId;
-
-				for (String portletId : layoutTypePortlet.getPortletIds()) {
-					javax.portlet.PortletPreferences jxPreferences =
-						PortletPreferencesFactoryUtil.getLayoutPortletSetup(
-							layout, portletId);
-
-					long scopeLayoutId = GetterUtil.getLong(
-						jxPreferences.getValue("lfr-scope-layout-id", null));
-
-					if (scopeLayoutId != 0) {
-						Layout scopeLayout = LayoutLocalServiceUtil.getLayout(
-							groupId, layout.isPrivateLayout(), scopeLayoutId);
-
-						Group scopeGroup = scopeLayout.getScopeGroup();
-
-						if (scopeGroup != null) {
-							scopeGroupId = scopeGroup.getGroupId();
-						}
-					}
-
-					String key = PortletPermissionUtil.getPrimaryKey(
-						layout.getPlid(), portletId);
-
-					portletIds.put(
-						key,
-						new Object[] {
-							portletId, layout.getPlid(), scopeGroupId,
-							scopeLayoutId
-						}
-					);
-				}
-			}
-
-			List<Portlet> portlets = getAlwaysExportablePortlets(
-				context.getCompanyId());
-
-			for (Portlet portlet : portlets) {
-				String portletId = portlet.getRootPortletId();
-
-				if (portlet.isScopeable() && layout.hasScopeGroup()) {
-					String key = PortletPermissionUtil.getPrimaryKey(
-						layout.getPlid(), portletId);
-
-					portletIds.put(
-						key,
-						new Object[] {
-							portletId, layout.getPlid(),
-							layout.getScopeGroup().getGroupId(),
-							layout.getLayoutId()
-						}
-					);
-				}
-				else {
-					String key = PortletPermissionUtil.getPrimaryKey(
-						0, portletId);
-
-					if (portletIds.get(key) == null) {
-						portletIds.put(
-							key,
-							new Object[] {
-								portletId, layout.getPlid(), groupId, 0L
-							}
-						);
-					}
-				}
-			}
-
-			String layoutPath = context.getLayoutPath(layout.getLayoutId()) +
-				"/layout.xml";
-
-			Element el = layoutsEl.addElement("layout");
-
-			el.addAttribute("layout-id", String.valueOf(layout.getLayoutId()));
-			el.addAttribute("path", layoutPath);
-
-			_portletExporter.exportPortletData(
-				context, layoutConfigurationPortlet, layout, null, layoutEl);
-
-			try {
-				context.addZipEntry(layoutPath, layoutDoc.formattedString());
-			}
-			catch (IOException ioe) {
-			}
+			exportLayout(
+				context, layoutConfigurationPortlet, layoutCache, portletIds,
+				exportPermissions, exportUserPermissions, layout, layoutsEl);
 		}
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM < 5) {
@@ -550,6 +430,122 @@ public class LayoutExporter {
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
+	}
+
+	protected void exportLayout(
+			PortletDataContext context, Portlet layoutConfigurationPortlet,
+			LayoutCache layoutCache, Map<String, Object[]> portletIds,
+			boolean exportPermissions, boolean exportUserPermissions,
+			Layout layout, Element layoutsEl)
+		throws PortalException, SystemException {
+
+		String path = context.getLayoutPath(
+			layout.getLayoutId()) + "/layout.xml";
+
+		if (!context.isPathNotProcessed(path)) {
+			return;
+		}
+
+		Element layoutEl = layoutsEl.addElement("layout");
+
+		layoutEl.addAttribute(
+			"layout-id", String.valueOf(layout.getLayoutId()));
+
+		boolean deleteLayout = MapUtil.getBoolean(
+			context.getParameterMap(), "delete_" + layout.getPlid());
+
+		if (deleteLayout) {
+			layoutEl.addAttribute("delete", String.valueOf(true));
+
+			return;
+		}
+
+		context.setPlid(layout.getPlid());
+
+		long scopeGroupId = context.getScopeGroupId();
+
+		if (layout.isIconImage()) {
+			Image image = ImageLocalServiceUtil.getImage(
+				layout.getIconImageId());
+
+			if (image != null) {
+				String iconPath = getLayoutIconPath(context, layout, image);
+
+				layoutEl.addElement("icon-image-path").addText(iconPath);
+
+				context.addZipEntry(iconPath, image.getTextObj());
+			}
+		}
+
+		_portletExporter.exportPortletData(
+			context, layoutConfigurationPortlet, layout, null, layoutEl);
+
+		// Layout permissions
+
+		if (exportPermissions) {
+			_permissionExporter.exportLayoutPermissions(
+				context, layoutCache, context.getCompanyId(),
+				context.getScopeGroupId(), layout, layoutEl,
+				exportUserPermissions);
+		}
+
+		if (layout.isTypePortlet()) {
+			LayoutTypePortlet layoutTypePortlet =
+				(LayoutTypePortlet)layout.getLayoutType();
+
+			for (String portletId : layoutTypePortlet.getPortletIds()) {
+				javax.portlet.PortletPreferences jxPreferences =
+					PortletPreferencesFactoryUtil.getLayoutPortletSetup(
+						layout, portletId);
+
+				long scopeLayoutId = GetterUtil.getLong(
+					jxPreferences.getValue("lfr-scope-layout-id", null));
+
+				if (scopeLayoutId != 0) {
+					Layout scopeLayout = LayoutLocalServiceUtil.getLayout(
+						scopeGroupId, layout.isPrivateLayout(), scopeLayoutId);
+
+					Group scopeGroup = scopeLayout.getScopeGroup();
+
+					if (scopeGroup != null) {
+						scopeGroupId = scopeGroup.getGroupId();
+					}
+				}
+
+				String key = PortletPermissionUtil.getPrimaryKey(
+					layout.getPlid(), portletId);
+
+				portletIds.put(
+					key,
+					new Object[] {
+						portletId, layout.getPlid(), scopeGroupId,
+						scopeLayoutId
+					}
+				);
+			}
+		}
+		else if (layout.isTypeLinkToLayout()) {
+			UnicodeProperties typeSettingsProperties =
+				layout.getTypeSettingsProperties();
+
+			long linkToLayoutId = GetterUtil.getLong(
+				typeSettingsProperties.getProperty(
+					"linkToLayoutId", StringPool.BLANK));
+
+			Layout linkedToLayout = LayoutUtil.findByG_P_L(
+				scopeGroupId, layout.isPrivateLayout(), linkToLayoutId);
+
+			exportLayout(
+				context, layoutConfigurationPortlet, layoutCache, portletIds,
+				exportPermissions, exportUserPermissions, linkedToLayout,
+				layoutsEl);
+		}
+
+		fixTypeSettings(layout);
+
+		layoutEl.addAttribute("path", path);
+
+		context.addZipEntry(path, layout);
 	}
 
 	protected void exportTheme(LayoutSet layoutSet, ZipWriter zipWriter)

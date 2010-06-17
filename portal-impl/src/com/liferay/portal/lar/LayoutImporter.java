@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.ReleaseInfo;
@@ -45,10 +44,12 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipReaderFactoryUtil;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -305,8 +306,8 @@ public class LayoutImporter {
 
 		Set<Long> newLayoutIds = new HashSet<Long>();
 
-		Map<Long, Long> newLayoutIdPlidMap =
-			(Map<Long, Long>)context.getNewPrimaryKeysMap(Layout.class);
+		Map<Long, Layout> newLayoutIdPlidMap =
+			(Map<Long, Layout>)context.getNewPrimaryKeysMap(Layout.class);
 
 		List<Element> layoutEls = root.element("layouts").elements("layout");
 
@@ -317,266 +318,12 @@ public class LayoutImporter {
 		}
 
 		for (Element layoutRefEl : layoutEls) {
-			long layoutId = GetterUtil.getInteger(
-				layoutRefEl.attributeValue("layout-id"));
-
-			long oldLayoutId = layoutId;
-
-			boolean deleteLayout = GetterUtil.getBoolean(
-				layoutRefEl.attributeValue("delete"));
-
-			if (deleteLayout) {
-				try {
-					LayoutLocalServiceUtil.deleteLayout(
-						context.getGroupId(), privateLayout, oldLayoutId);
-				}
-				catch (NoSuchLayoutException nsle) {
-					_log.warn(
-						"Error deleting layout for {" + sourceGroupId + ", " +
-							privateLayout + ", " + oldLayoutId + "}");
-				}
-
-				continue;
-			}
-
-			String layoutPath = layoutRefEl.attributeValue("path");
-
-			Element layoutEl = null;
-
-			try {
-				Document layoutDoc = SAXReaderUtil.read(
-					context.getZipEntryAsString(layoutPath));
-
-				layoutEl = layoutDoc.getRootElement();
-			}
-			catch (DocumentException de) {
-				throw new SystemException(de);
-			}
-
-			long parentLayoutId = GetterUtil.getInteger(
-				layoutEl.elementText("parent-layout-id"));
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Importing layout with layout id " + layoutId +
-						" and parent layout id " + parentLayoutId);
-			}
-
-			long oldPlid = GetterUtil.getInteger(
-				layoutEl.attributeValue("old-plid"));
-
-			String name = layoutEl.elementText("name");
-			String title = layoutEl.elementText("title");
-			String description = layoutEl.elementText("description");
-			String type = layoutEl.elementText("type");
-			String typeSettings = layoutEl.elementText("type-settings");
-			boolean hidden = GetterUtil.getBoolean(
-				layoutEl.elementText("hidden"));
-			String friendlyURL = layoutEl.elementText("friendly-url");
-			boolean iconImage = GetterUtil.getBoolean(
-				layoutEl.elementText("icon-image"));
-
-			byte[] iconBytes = null;
-
-			if (iconImage) {
-				String path = layoutEl.elementText("icon-image-path");
-
-				iconBytes = context.getZipEntryAsByteArray(path);
-			}
-
-			if (useThemeZip) {
-				themeId = StringPool.BLANK;
-				colorSchemeId = StringPool.BLANK;
-			}
-			else {
-				themeId = layoutEl.elementText("theme-id");
-				colorSchemeId = layoutEl.elementText("color-scheme-id");
-			}
-
-			String wapThemeId = layoutEl.elementText("wap-theme-id");
-			String wapColorSchemeId = layoutEl.elementText(
-				"wap-color-scheme-id");
-			String css = layoutEl.elementText("css");
-			int priority = GetterUtil.getInteger(
-				layoutEl.elementText("priority"));
-
-			Layout layout = null;
-
-			if (layoutsImportMode.equals(
-					PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE_ADD_AS_NEW)) {
-
-				layoutId = LayoutLocalServiceUtil.getNextLayoutId(
-					groupId, privateLayout);
-				friendlyURL = StringPool.SLASH + layoutId;
-			}
-			else if (layoutsImportMode.equals(
-					PortletDataHandlerKeys.
-						LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_NAME)) {
-
-				Locale locale = LocaleUtil.getDefault();
-
-				String localizedName = LocalizationUtil.getLocalization(
-					name, LocaleUtil.toLanguageId(locale));
-
-				for (Layout curLayout : previousLayouts) {
-					if (curLayout.getName(locale).equals(localizedName)) {
-						layout = curLayout;
-
-						break;
-					}
-				}
-
-				if (layout == null) {
-					layoutId = LayoutLocalServiceUtil.getNextLayoutId(
-						groupId, privateLayout);
-				}
-			}
-			else {
-				layout = LayoutUtil.fetchByG_P_L(
-					groupId, privateLayout, layoutId);
-
-				if (layout == null) {
-					layoutId = LayoutLocalServiceUtil.getNextLayoutId(
-						groupId, privateLayout);
-				}
-			}
-
-			if (_log.isDebugEnabled()) {
-				if (layout == null) {
-					_log.debug(
-						"Layout with {groupId=" + groupId + ",privateLayout=" +
-							privateLayout + ",layoutId=" + layoutId +
-								"} does not exist");
-				}
-				else {
-					_log.debug(
-						"Layout with {groupId=" + groupId + ",privateLayout=" +
-							privateLayout + ",layoutId=" + layoutId +
-								"} exists");
-				}
-			}
-
-			if (layout == null) {
-				Layout existingLayout = LayoutUtil.fetchByG_P_F(
-					groupId, privateLayout, friendlyURL);
-
-				if (existingLayout != null) {
-					layout = existingLayout;
-				}
-				else {
-					long plid = CounterLocalServiceUtil.increment();
-
-					layout = LayoutUtil.create(plid);
-				}
-
-				layout.setGroupId(groupId);
-				layout.setPrivateLayout(privateLayout);
-				layout.setLayoutId(layoutId);
-			}
-
-			layout.setCompanyId(user.getCompanyId());
-
-			if (parentLayoutId > 0) {
-				long parentLayoutPlid = newLayoutIdPlidMap.get(parentLayoutId);
-
-				Layout parentLayout = LayoutLocalServiceUtil.getLayout(
-					parentLayoutPlid);
-
-				parentLayoutId = parentLayout.getLayoutId();
-			}
-
-			layout.setParentLayoutId(parentLayoutId);
-			layout.setName(name);
-			layout.setTitle(title);
-			layout.setDescription(description);
-			layout.setType(type);
-
-			if (layout.isTypePortlet() &&
-				Validator.isNotNull(layout.getTypeSettings()) &&
-
-				!portletsMergeMode.equals(
-					PortletDataHandlerKeys.PORTLETS_MERGE_MODE_REPLACE)) {
-
-				mergePortlets(layout, typeSettings, portletsMergeMode);
-			}
-			else if (layout.isTypeLinkToLayout() &&
-					 Validator.isNotNull(layout.getTypeSettings())) {
-
-				UnicodeProperties typeSettingsProperties =
-					layout.getTypeSettingsProperties();
-
-				long oldLinkToLayoutId = GetterUtil.getLong(
-					typeSettingsProperties.getProperty("linkToLayoutId"));
-
-				if (oldLinkToLayoutId > 0) {
-					long linkToLayoutPlid = newLayoutIdPlidMap.get(
-						oldLinkToLayoutId);
-
-					Layout linkToLayout = LayoutLocalServiceUtil.getLayout(
-						linkToLayoutPlid);
-
-					typeSettingsProperties.setProperty(
-						"linkToLayoutId",
-						String.valueOf(linkToLayout.getLayoutId()));
-
-					layout.setTypeSettingsProperties(typeSettingsProperties);
-				}
-				else {
-					layout.setTypeSettings(typeSettings);
-				}
-			}
-			else {
-				layout.setTypeSettings(typeSettings);
-			}
-
-			layout.setHidden(hidden);
-			layout.setFriendlyURL(friendlyURL);
-
-			if (iconImage) {
-				layout.setIconImage(iconImage);
-
-				if (layout.isNew()) {
-					long iconImageId = CounterLocalServiceUtil.increment();
-
-					layout.setIconImageId(iconImageId);
-				}
-			}
-
-			layout.setThemeId(themeId);
-			layout.setColorSchemeId(colorSchemeId);
-			layout.setWapThemeId(wapThemeId);
-			layout.setWapColorSchemeId(wapColorSchemeId);
-			layout.setCss(css);
-			layout.setPriority(priority);
-
-			fixTypeSettings(layout);
-
-			LayoutUtil.update(layout, false);
-
-			if ((iconBytes != null) && (iconBytes.length > 0)) {
-				ImageLocalServiceUtil.updateImage(
-					layout.getIconImageId(), iconBytes);
-			}
-
-			context.setPlid(layout.getPlid());
-			context.setOldPlid(oldPlid);
-
-			newLayoutIdPlidMap.put(oldLayoutId, layout.getPlid());
-
-			newLayoutIds.add(layoutId);
-
-			newLayouts.add(layout);
-
-			// Layout permissions
-
-			if (importPermissions) {
-				_permissionImporter.importLayoutPermissions(
-					layoutCache, companyId, groupId, userId, layout, layoutEl,
-					root, importUserPermissions);
-			}
-
-			_portletImporter.importPortletData(
-				context, PortletKeys.LAYOUT_CONFIGURATION, null, layoutEl);
+			importLayout(
+				context, user, layoutCache, previousLayouts, newLayouts,
+				newLayoutIdPlidMap, newLayoutIds, portletsMergeMode, themeId,
+				colorSchemeId, layoutsImportMode, privateLayout,
+				importPermissions, importUserPermissions, useThemeZip, root,
+				layoutRefEl);
 		}
 
 		List<Element> portletEls = root.element("portlets").elements("portlet");
@@ -594,7 +341,7 @@ public class LayoutImporter {
 				String portletId = portletRefEl.attributeValue("portlet-id");
 				long layoutId = GetterUtil.getLong(
 					portletRefEl.attributeValue("layout-id"));
-				long plid = newLayoutIdPlidMap.get(layoutId);
+				long plid = newLayoutIdPlidMap.get(layoutId).getPlid();
 
 				context.setPlid(plid);
 
@@ -615,7 +362,7 @@ public class LayoutImporter {
 			String portletId = portletRefEl.attributeValue("portlet-id");
 			long layoutId = GetterUtil.getLong(
 				portletRefEl.attributeValue("layout-id"));
-			long plid = newLayoutIdPlidMap.get(layoutId);
+			long plid = newLayoutIdPlidMap.get(layoutId).getPlid();
 			long oldPlid = GetterUtil.getLong(
 				portletRefEl.attributeValue("old-plid"));
 
@@ -873,6 +620,253 @@ public class LayoutImporter {
 		}
 
 		return assetVocabulary;
+	}
+
+	protected void importLayout(
+			PortletDataContext context, User user, LayoutCache layoutCache,
+			List<Layout> previousLayouts,
+			List<Layout> newLayouts, Map<Long, Layout> newLayoutIdPlidMap,
+			Set<Long> newLayoutIds, String portletsMergeMode, String themeId,
+			String colorSchemeId,
+			String layoutsImportMode, boolean privateLayout,
+			boolean importPermissions, boolean importUserPermissions,
+			boolean useThemeZip, Element root, Element layoutEl)
+		throws PortalException, SystemException {
+
+		String path = layoutEl.attributeValue("path");
+
+		if (!context.isPathNotProcessed(path)) {
+			return;
+		}
+
+		long groupId = context.getGroupId();
+		long sourceGroupId = context.getSourceGroupId();
+
+		long layoutId = GetterUtil.getInteger(
+			layoutEl.attributeValue("layout-id"));
+
+		long oldLayoutId = layoutId;
+
+		boolean deleteLayout = GetterUtil.getBoolean(
+			layoutEl.attributeValue("delete"));
+
+		if (deleteLayout) {
+			try {
+				LayoutLocalServiceUtil.deleteLayout(
+					context.getGroupId(), privateLayout, oldLayoutId);
+			}
+			catch (NoSuchLayoutException nsle) {
+				_log.warn(
+					"Error deleting layout for {" + sourceGroupId + ", " +
+						privateLayout + ", " + oldLayoutId + "}");
+			}
+
+			return;
+		}
+
+		Layout layout = (Layout)context.getZipEntryAsObject(path);
+
+		long parentLayoutId = layout.getParentLayoutId();
+
+		Node parentElNode = root.selectSingleNode(
+			"./layouts/layout[@layout-id='" + parentLayoutId + "']");
+
+		if (parentLayoutId != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID &&
+			parentElNode != null) {
+
+			importLayout(
+				context, user, layoutCache, previousLayouts, newLayouts,
+				newLayoutIdPlidMap, newLayoutIds, portletsMergeMode, themeId,
+				colorSchemeId, layoutsImportMode, privateLayout,
+				importPermissions, importUserPermissions, useThemeZip, root,
+				(Element)parentElNode);
+
+			Layout parentLayout = newLayoutIdPlidMap.get(parentLayoutId);
+
+			parentLayoutId = parentLayout.getLayoutId();
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Importing layout with layout id " + layoutId +
+					" and parent layout id " + parentLayoutId);
+		}
+
+		Layout exsistingLayout = null;
+		Layout importedLayout = null;
+
+		String friendlyURL = layout.getFriendlyURL();
+
+		if (layoutsImportMode.equals(
+				PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE_ADD_AS_NEW)) {
+
+			layoutId = LayoutLocalServiceUtil.getNextLayoutId(
+				groupId, privateLayout);
+			friendlyURL = StringPool.SLASH + layoutId;
+		}
+		else if (layoutsImportMode.equals(
+				PortletDataHandlerKeys.
+					LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_NAME)) {
+
+			Locale locale = LocaleUtil.getDefault();
+
+			String localizedName = layout.getName(locale);
+
+			for (Layout curLayout : previousLayouts) {
+				if (curLayout.getName(locale).equals(localizedName)) {
+					exsistingLayout = curLayout;
+
+					break;
+				}
+			}
+
+			if (exsistingLayout == null) {
+				layoutId = LayoutLocalServiceUtil.getNextLayoutId(
+					groupId, privateLayout);
+			}
+		}
+		else {
+			exsistingLayout = LayoutUtil.fetchByG_P_L(
+				groupId, privateLayout, layoutId);
+
+			if (exsistingLayout == null) {
+				layoutId = LayoutLocalServiceUtil.getNextLayoutId(
+					groupId, privateLayout);
+			}
+		}
+
+		if (_log.isDebugEnabled()) {
+			if (layout == null) {
+				_log.debug(
+					"Layout with {groupId=" + groupId + ",privateLayout=" +
+						privateLayout + ",layoutId=" + layoutId +
+							"} does not exist");
+			}
+			else {
+				_log.debug(
+					"Layout with {groupId=" + groupId + ",privateLayout=" +
+						privateLayout + ",layoutId=" + layoutId +
+							"} exists");
+			}
+		}
+
+		if (exsistingLayout == null) {
+			long plid = CounterLocalServiceUtil.increment();
+
+			importedLayout = LayoutUtil.create(plid);
+
+			importedLayout.setGroupId(groupId);
+			importedLayout.setPrivateLayout(privateLayout);
+			importedLayout.setLayoutId(layoutId);
+
+			long iconImageId = CounterLocalServiceUtil.increment();
+
+			importedLayout.setIconImageId(iconImageId);
+		}
+		else {
+			importedLayout = exsistingLayout;
+		}
+
+		newLayoutIdPlidMap.put(oldLayoutId, importedLayout);
+
+		importedLayout.setCompanyId(user.getCompanyId());
+		importedLayout.setParentLayoutId(parentLayoutId);
+		importedLayout.setName(layout.getName());
+		importedLayout.setTitle(layout.getTitle());
+		importedLayout.setDescription(layout.getDescription());
+		importedLayout.setType(layout.getType());
+
+		if (layout.isTypePortlet() &&
+			Validator.isNotNull(layout.getTypeSettings()) &&
+			!portletsMergeMode.equals(
+				PortletDataHandlerKeys.PORTLETS_MERGE_MODE_REPLACE)) {
+
+			mergePortlets(
+				importedLayout, layout.getTypeSettings(), portletsMergeMode);
+		}
+		else if (layout.isTypeLinkToLayout()) {
+			UnicodeProperties typeSettingsProperties =
+				layout.getTypeSettingsProperties();
+
+			long linkToLayoutId = GetterUtil.getLong(
+				typeSettingsProperties.getProperty(
+					"linkToLayoutId", StringPool.BLANK));
+
+			Node linkedLayoutElNode = root.selectSingleNode(
+				"./layouts/layout[@layout-id='" + linkToLayoutId + "']");
+
+			importLayout(
+				context, user, layoutCache, previousLayouts, newLayouts,
+				newLayoutIdPlidMap, newLayoutIds, portletsMergeMode, themeId,
+				colorSchemeId, layoutsImportMode, privateLayout,
+				importPermissions, importUserPermissions, useThemeZip, root,
+				(Element)linkedLayoutElNode);
+
+			Layout linkedLayout = newLayoutIdPlidMap.get(linkToLayoutId);
+
+			typeSettingsProperties.setProperty(
+				"linkToLayoutId", String.valueOf(linkedLayout.getLayoutId()));
+
+			importedLayout.setTypeSettings(layout.getTypeSettings());
+		}
+		else {
+			importedLayout.setTypeSettings(layout.getTypeSettings());
+		}
+
+		importedLayout.setHidden(layout.isHidden());
+		importedLayout.setFriendlyURL(friendlyURL);
+
+		if (useThemeZip) {
+			importedLayout.setThemeId(StringPool.BLANK);
+			importedLayout.setColorSchemeId(StringPool.BLANK);
+		}
+		else {
+			importedLayout.setThemeId(layout.getThemeId());
+			importedLayout.setColorSchemeId(layout.getColorSchemeId());
+		}
+
+		importedLayout.setWapThemeId(layout.getWapThemeId());
+		importedLayout.setWapColorSchemeId(layout.getWapColorSchemeId());
+		importedLayout.setCss(layout.getCss());
+		importedLayout.setPriority(layout.getPriority());
+
+		fixTypeSettings(importedLayout);
+
+		if (layout.isIconImage()) {
+			String iconImagePath = layoutEl.elementText("icon-image-path");
+
+			byte[] iconBytes = context.getZipEntryAsByteArray(iconImagePath);
+
+			if ((iconBytes != null) && (iconBytes.length > 0)) {
+				importedLayout.setIconImage(true);
+
+				ImageLocalServiceUtil.updateImage(
+					importedLayout.getIconImageId(), iconBytes);
+			}
+		}
+		else {
+			ImageLocalServiceUtil.deleteImage(importedLayout.getIconImageId());
+		}
+
+		LayoutUtil.update(importedLayout, false);
+
+		context.setPlid(importedLayout.getPlid());
+		context.setOldPlid(layout.getPlid());
+
+		newLayoutIds.add(importedLayout.getLayoutId());
+
+		newLayouts.add(importedLayout);
+
+		// Layout permissions
+
+		if (importPermissions) {
+			_permissionImporter.importLayoutPermissions(
+				layoutCache, context.getCompanyId(), groupId, user.getUserId(),
+				importedLayout, layoutEl, root, importUserPermissions);
+		}
+
+		_portletImporter.importPortletData(
+			context, PortletKeys.LAYOUT_CONFIGURATION, null, layoutEl);
 	}
 
 	protected String importTheme(LayoutSet layoutSet, InputStream themeZip)
