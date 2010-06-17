@@ -311,9 +311,11 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 
 		try {
 			for (int i = 0; i < groups.size() ; i++ ) {
+				Group group = groups.get(i);
+
 				Resource groupResource = ResourceLocalServiceUtil.getResource(
 					companyId, className, ResourceConstants.SCOPE_GROUP,
-					String.valueOf(groups.get(i).getGroupId()));
+					String.valueOf(group.getGroupId()));
 
 				groupResourceIds[i] = groupResource.getResourceId();
 			}
