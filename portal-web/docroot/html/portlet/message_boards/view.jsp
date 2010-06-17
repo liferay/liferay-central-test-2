@@ -271,9 +271,9 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 				String[] threadPriority = MBUtil.getThreadPriority(preferences, themeDisplay.getLanguageId(), thread.getPriority(), themeDisplay);
 
 				if ((threadPriority != null) && (thread.getPriority() > 0)) {
-					sb.append("<img class=\"thread-priority\" alt=\"");
+					sb.append("<img align=\"left\" alt=\"");
 					sb.append(threadPriority[0]);
-					sb.append("\" src=\"");
+					sb.append("\" border=\"0\" src=\"");
 					sb.append(threadPriority[1]);
 					sb.append("\" title=\"");
 					sb.append(threadPriority[0]);
@@ -281,9 +281,9 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 				}
 
 				if (thread.isLocked()) {
-					sb.append("<img class=\"thread-priority\" alt=\"");
+					sb.append("<img align=\"left\" alt=\"");
 					sb.append(LanguageUtil.get(pageContext, "thread-locked"));
-					sb.append("\" src=\"");
+					sb.append("\" border=\"0\" src=\"");
 					sb.append(themeDisplay.getPathThemeImages() + "/common/lock.png");
 					sb.append("\" title=\"");
 					sb.append(LanguageUtil.get(pageContext, "thread-locked"));
@@ -512,9 +512,9 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 			String[] threadPriority = MBUtil.getThreadPriority(preferences, themeDisplay.getLanguageId(), thread.getPriority(), themeDisplay);
 
 			if ((threadPriority != null) && (thread.getPriority() > 0)) {
-				sb.append("<img class=\"thread-priority\" alt=\"");
+				sb.append("<img align=\"left\" alt=\"");
 				sb.append(threadPriority[0]);
-				sb.append("\" src=\"");
+				sb.append("\" border=\"0\" src=\"");
 				sb.append(threadPriority[1]);
 				sb.append("\" title=\"");
 				sb.append(threadPriority[0]);

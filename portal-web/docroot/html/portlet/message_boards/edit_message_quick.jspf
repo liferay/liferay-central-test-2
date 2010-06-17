@@ -61,10 +61,10 @@ boolean quote = ParamUtil.getBoolean(request, "quote");
 
 <aui:form action="<%= editMessageURL %>" method="post" name="addQuickReplyFm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveMessage();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
-	<aui:input id="editMessageQuick_redirect" name="redirect" type="hidden" value="<%= currentURL %>" />
+	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="messageId" type="hidden" value="<%= messageId %>" />
 	<aui:input name="mbCategoryId" type="hidden" value="<%= categoryId %>" />
-	<aui:input id="editMessageQuick_threadId" name="threadId" type="hidden" value="<%= threadId %>" />
+	<aui:input name="threadId" type="hidden" value="<%= threadId %>" />
 	<aui:input name="parentMessageId" type="hidden" value="<%= parentMessageId %>" />
 	<aui:input name="subject" type="hidden" value="<%= subject %>" />
 	<aui:input name="workflowAction" type="hidden" value="<%= String.valueOf(WorkflowConstants.ACTION_PUBLISH) %>" />
