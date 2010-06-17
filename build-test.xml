@@ -16,6 +16,220 @@
 	<propertycopy name="db.username" from="db.${db.type}.username" silent="true" />
 	<propertycopy name="db.password" from="db.${db.type}.password" silent="true" />
 
+	<target name="build-test-ant-script">
+		<mkdir dir="portal-web/test-ant-scripts" />
+
+		<if>
+			<isset property="test.ant.script.plugins" />
+			<then>
+				<echo file="portal-web/test-ant-scripts/build-test-${test.ant.script.command}.xml"><![CDATA[<?xml version="1.0"?>
+
+					<project name="portal-test-${test.ant.script.command}" basedir="../../." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
+						<import file="../../build-test.xml" />
+
+						<target name="run-${test.ant.script.command}-jboss-mysql">
+							<antcall target="prepare-mysql" />
+
+							<ant antfile="build-test-jboss.xml" target="run-selenium-jboss">
+								<property name="${test.ant.script.plugins.type}.plugins.includes" value="${test.ant.script.plugins}" />
+								<property name="test.name" value="${test.ant.script.suite}" />
+							</ant>
+						</target>
+
+						<target name="run-${test.ant.script.command}-tomcat-hsql">
+							<antcall target="prepare-hsql" />
+
+							<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
+								<property name="${test.ant.script.plugins.type}.plugins.includes" value="${test.ant.script.plugins}" />
+								<property name="test.name" value="${test.ant.script.suite}" />
+							</ant>
+						</target>
+
+						<target name="run-${test.ant.script.command}-tomcat-mysql">
+							<antcall target="prepare-mysql" />
+
+							<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
+								<property name="${test.ant.script.plugins.type}.plugins.includes" value="${test.ant.script.plugins}" />
+								<property name="test.name" value="${test.ant.script.suite}" />
+							</ant>
+						</target>
+
+						<target name="run-${test.ant.script.command}-tomcat-oracle">
+							<antcall target="prepare-oracle" />
+
+							<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
+								<property name="${test.ant.script.plugins.type}.plugins.includes" value="${test.ant.script.plugins}" />
+								<property name="test.name" value="${test.ant.script.suite}" />
+							</ant>
+						</target>
+
+						<target name="run-${test.ant.script.command}-tomcat-postgresql">
+							<antcall target="prepare-postgresql" />
+
+							<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
+								<property name="${test.ant.script.plugins.type}.plugins.includes" value="${test.ant.script.plugins}" />
+								<property name="test.name" value="${test.ant.script.suite}" />
+							</ant>
+						</target>
+
+						<target name="run-${test.ant.script.command}-tomcat-sql-server">
+							<antcall target="prepare-sql-server" />
+
+							<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
+								<property name="${test.ant.script.plugins.type}.plugins.includes" value="${test.ant.script.plugins}" />
+								<property name="test.name" value="${test.ant.script.suite}" />
+							</ant>
+						</target>
+
+						<target name="run-${test.ant.script.command}-weblogic-10.3-mysql">
+							<antcall target="prepare-mysql" />
+
+							<ant antfile="build-test-weblogic-10.3.xml" target="run-selenium-weblogic-10.3">
+								<property name="test.name" value="${test.ant.script.suite}" />
+							</ant>
+						</target>
+
+						<target name="run-${test.ant.script.command}-websphere-6.1-mysql">
+							<antcall target="prepare-mysql" />
+
+							<ant antfile="build-test-websphere-6.1.xml" target="run-selenium-websphere-6.1">
+								<property name="test.name" value="${test.ant.script.suite}" />
+							</ant>
+						</target>
+
+						<target name="run-${test.ant.script.command}-websphere-7.0-mysql">
+							<antcall target="prepare-mysql" />
+
+							<ant antfile="build-test-websphere-7.0.xml" target="run-selenium-websphere-7.0">
+								<property name="test.name" value="${test.ant.script.suite}" />
+							</ant>
+						</target>
+					</project>
+				]]></echo>
+			</then>
+			<else>
+				<echo file="portal-web/test-ant-scripts/build-test-${test.ant.script.command}.xml"><![CDATA[<?xml version="1.0"?>
+
+					<project name="portal-test-${test.ant.script.command}" basedir="../../." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
+						<import file="../../build-test.xml" />
+
+						<target name="run-${test.ant.script.command}-jboss-mysql">
+							<antcall target="prepare-mysql" />
+
+							<ant antfile="build-test-jboss.xml" target="run-selenium-jboss">
+								<property name="test.name" value="${test.ant.script.suite}" />
+							</ant>
+						</target>
+
+						<target name="run-${test.ant.script.command}-tomcat-hsql">
+							<antcall target="prepare-hsql" />
+
+							<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
+								<property name="test.name" value="${test.ant.script.suite}" />
+							</ant>
+						</target>
+
+						<target name="run-${test.ant.script.command}-tomcat-mysql">
+							<antcall target="prepare-mysql" />
+
+							<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
+								<property name="test.name" value="${test.ant.script.suite}" />
+							</ant>
+						</target>
+
+						<target name="run-${test.ant.script.command}-tomcat-oracle">
+							<antcall target="prepare-oracle" />
+
+							<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
+								<property name="test.name" value="${test.ant.script.suite}" />
+							</ant>
+						</target>
+
+						<target name="run-${test.ant.script.command}-tomcat-postgresql">
+							<antcall target="prepare-postgresql" />
+
+							<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
+								<property name="test.name" value="${test.ant.script.suite}" />
+							</ant>
+						</target>
+
+						<target name="run-${test.ant.script.command}-tomcat-sql-server">
+							<antcall target="prepare-sql-server" />
+
+							<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
+								<property name="test.name" value="${test.ant.script.suite}" />
+							</ant>
+						</target>
+
+						<target name="run-${test.ant.script.command}-weblogic-10.3-mysql">
+							<antcall target="prepare-mysql" />
+
+							<ant antfile="build-test-weblogic-10.3.xml" target="run-selenium-weblogic-10.3">
+								<property name="test.name" value="${test.ant.script.suite}" />
+							</ant>
+						</target>
+
+						<target name="run-${test.ant.script.command}-websphere-6.1-mysql">
+							<antcall target="prepare-mysql" />
+
+							<ant antfile="build-test-websphere-6.1.xml" target="run-selenium-websphere-6.1">
+								<property name="test.name" value="${test.ant.script.suite}" />
+							</ant>
+						</target>
+
+						<target name="run-${test.ant.script.command}-websphere-7.0-mysql">
+							<antcall target="prepare-mysql" />
+
+							<ant antfile="build-test-websphere-7.0.xml" target="run-selenium-websphere-7.0">
+								<property name="test.name" value="${test.ant.script.suite}" />
+							</ant>
+						</target>
+					</project>
+				]]></echo>
+			</else>
+		</if>
+
+		<java
+			classname="com.liferay.portal.tools.XMLFormatter"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+			<jvmarg value="-Dxml.formatter.file=portal-web/test-ant-scripts/build-test-${test.ant.script.command}.xml" />
+			<jvmarg value="-Dxml.formatter.strip.comments=true" />
+		</java>
+	</target>
+
+	<target name="build-test-ant-scripts">
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="control-panel-admin" />
+			<param name="test.ant.script.suite" value="ControlPanelAdminTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="permissions-announcements" />
+			<param name="test.ant.script.suite" value="PermissionsAnnouncementsTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="plugins-chat" />
+			<param name="test.ant.script.suite" value="PluginsChatTestSuite" />
+			<param name="test.ant.script.plugins" value="chat-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="portal-web-activities" />
+			<param name="test.ant.script.suite" value="PortalWebActivitiesTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="tags-blogs" />
+			<param name="test.ant.script.suite" value="TagsBlogsTestSuite" />
+		</antcall>
+	</target>
+
 	<target name="clean-up-bundles">
 		<delete file="test.${user.name}.properties" />
 
@@ -630,6 +844,16 @@ file.
 			</then>
 		</if>
 
+		<if>
+			<isset property="webs.plugins.includes" />
+			<then>
+				<ant antfile="build-test-plugins.xml" target="deploy-simple-server-plugins">
+					<property name="plugin.types" value="webs" />
+					<property name="plugins.includes" value="${webs.plugins.includes}" />
+				</ant>
+			</then>
+		</if>
+
 		<parallel>
 			<exec dir="${simple.server.bin.dir}" executable="${simple.server.start.executable}" resolveexecutable="true">
 				<arg line="${simple.server.start.executable.arg.line}" />
@@ -644,6 +868,7 @@ file.
 					<or>
 						<isset property="portlet.plugins.includes" />
 						<isset property="theme.plugins.includes" />
+						<isset property="webs.plugins.includes" />
 					</or>
 					<then>
 						<sleep seconds="30" />
