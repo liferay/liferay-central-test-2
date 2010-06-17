@@ -74,7 +74,10 @@ if (row == null) {
 			<portlet:param name="folderId" value="<%= String.valueOf(folder.getFolderId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+		<liferay-ui:icon
+			image="edit"
+			url="<%= editURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= showPermissionsURL %>">
@@ -85,7 +88,10 @@ if (row == null) {
 			var="permissionsURL"
 		/>
 
-		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+		<liferay-ui:icon
+			image="permissions"
+			url="<%= permissionsURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= (folder != null) && IGFolderPermission.contains(permissionChecker, folder, ActionKeys.DELETE) %>">
@@ -101,7 +107,9 @@ if (row == null) {
 			<portlet:param name="folderId" value="<%= String.valueOf(folder.getFolderId()) %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon-delete url="<%= deleteURL %>" />
+		<liferay-ui:icon-delete
+			url="<%= deleteURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= IGFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER) %>">
@@ -111,7 +119,11 @@ if (row == null) {
 			<portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="add_folder" message='<%= (folder != null) ? "add-subfolder" : "add-folder" %>' url="<%= addFolderURL %>" />
+		<liferay-ui:icon
+			image="add_folder"
+			message='<%= (folder != null) ? "add-subfolder" : "add-folder" %>'
+			url="<%= addFolderURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= IGFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_IMAGE) %>">
@@ -121,15 +133,28 @@ if (row == null) {
 			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="../image_gallery/add_image" message="add-image" url="<%= editImageURL %>" />
+		<liferay-ui:icon
+			image="../image_gallery/add_image"
+			message="add-image"
+			url="<%= editImageURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= (imagesCount > 0) && IGFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.VIEW) %>">
-		<liferay-ui:icon cssClass='<%= randomNamespace + "-slide-show" %>' image="../image_gallery/slide_show" message="view-slide-show" url="javascript:;" />
+		<liferay-ui:icon
+			cssClass='<%= randomNamespace + "-slide-show" %>'
+			image="../image_gallery/slide_show"
+			message="view-slide-show"
+			url="javascript:;"
+		/>
 	</c:if>
 
 	<c:if test="<%= (portletDisplay.isWebDAVEnabled()) && IGFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.VIEW) %>">
-		<liferay-ui:icon cssClass='<%= randomNamespace + "-webdav-action" %>' image="desktop" message="access-from-desktop" url="javascript:;" />
+		<liferay-ui:icon
+			cssClass='<%= randomNamespace + "-webdav-action" %>'
+			image="desktop" message="access-from-desktop"
+			url="javascript:;"
+		/>
 	</c:if>
 </liferay-ui:icon-menu>
 

@@ -25,7 +25,10 @@
 				<portlet:param name="name" value="<%= HtmlUtil.unescape(fileEntry.getName()) %>" />
 			</portlet:actionURL>
 
-			<liferay-ui:icon image="lock" url="<%= lockURL %>" />
+			<liferay-ui:icon
+				image="lock"
+				url="<%= lockURL %>"
+			/>
 		</c:when>
 		<c:otherwise>
 			<c:if test="<%= fileEntry.hasLock(user.getUserId()) || permissionChecker.isCommunityAdmin(fileEntry.getGroupId()) %>">
@@ -37,7 +40,10 @@
 					<portlet:param name="name" value="<%= HtmlUtil.unescape(fileEntry.getName()) %>" />
 				</portlet:actionURL>
 
-				<liferay-ui:icon image="unlock" url="<%= unlockURL %>" />
+				<liferay-ui:icon
+					image="unlock"
+					url="<%= unlockURL %>"
+				/>
 			</c:if>
 		</c:otherwise>
 	</c:choose>

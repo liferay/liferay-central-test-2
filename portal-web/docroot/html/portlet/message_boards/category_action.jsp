@@ -32,7 +32,10 @@ Set<Long> categorySubscriptionClassPKs = (Set<Long>)row.getParameter("categorySu
 			<portlet:param name="mbCategoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+		<liferay-ui:icon
+			image="edit"
+			url="<%= editURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.PERMISSIONS) %>">
@@ -43,10 +46,20 @@ Set<Long> categorySubscriptionClassPKs = (Set<Long>)row.getParameter("categorySu
 			var="permissionsURL"
 		/>
 
-		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+		<liferay-ui:icon
+			image="permissions"
+			url="<%= permissionsURL %>"
+		/>
+		
 	</c:if>
 
-	<liferay-ui:icon image="rss" method="get" target="_blank" url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&mbCategoryId=" + category.getCategoryId() + rssURLParams %>' />
+	<liferay-ui:icon
+		image="rss"
+		method="get"
+		target="_blank"
+		url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&mbCategoryId=" + category.getCategoryId() + rssURLParams %>'
+	/>
+
 
 	<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.SUBSCRIBE) %>">
 		<c:choose>
@@ -58,7 +71,10 @@ Set<Long> categorySubscriptionClassPKs = (Set<Long>)row.getParameter("categorySu
 					<portlet:param name="mbCategoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
 				</portlet:actionURL>
 
-				<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" />
+				<liferay-ui:icon
+					image="unsubscribe"
+					url="<%= unsubscribeURL %>"
+				/>
 			</c:when>
 			<c:otherwise>
 				<portlet:actionURL var="subscribeURL">
@@ -68,7 +84,10 @@ Set<Long> categorySubscriptionClassPKs = (Set<Long>)row.getParameter("categorySu
 					<portlet:param name="mbCategoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
 				</portlet:actionURL>
 
-				<liferay-ui:icon image="subscribe" url="<%= subscribeURL %>" />
+				<liferay-ui:icon
+					image="subscribe"
+					url="<%= subscribeURL %>"
+				/>
 			</c:otherwise>
 		</c:choose>
 	</c:if>
@@ -81,6 +100,8 @@ Set<Long> categorySubscriptionClassPKs = (Set<Long>)row.getParameter("categorySu
 			<portlet:param name="mbCategoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon-delete url="<%= deleteURL %>" />
+		<liferay-ui:icon-delete
+			url="<%= deleteURL %>"
+		/>
 	</c:if>
 </liferay-ui:icon-menu>

@@ -137,7 +137,9 @@
 		<div class="vocabulary-edit">
 			<div class="vocabulary-close">
 				<span>
-					<liferay-ui:icon image="close" />
+					<liferay-ui:icon
+						image="close"
+					/>
 				</span>
 			</div>
 
@@ -159,9 +161,17 @@
 
 					<input class="category-property-value" type="text" />
 
-					<span class="add-category-property"><liferay-ui:icon image="add" /></span>
+					<span class="add-category-property">
+						<liferay-ui:icon
+							image="add"
+						/>
+					</span>
 
-					<span class="delete-category-property"><liferay-ui:icon image="delete" /></span>
+					<span class="delete-category-property">
+						<liferay-ui:icon
+							image="delete"
+						/>
+					</span>
 				</div>
 
 				<br />

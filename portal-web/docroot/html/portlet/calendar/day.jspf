@@ -189,7 +189,10 @@ if (!partDayResults.isEmpty()) {
 								<portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" />
 							</portlet:renderURL>
 
-							<liferay-ui:icon image="edit" url="<%= editAllDayEventURL %>" />
+							<liferay-ui:icon
+								image="edit"
+								url="<%= editAllDayEventURL %>"
+							/>
 						</c:if>
 					</div>
 
@@ -257,7 +260,10 @@ if (!partDayResults.isEmpty()) {
 								<portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" />
 							</portlet:renderURL>
 
-							<liferay-ui:icon image="edit" url="<%= editDayEventURL %>" />
+							<liferay-ui:icon
+								image="edit"
+								url="<%= editDayEventURL %>"
+							/>
 						</c:if>
 					</div>
 

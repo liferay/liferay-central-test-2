@@ -22,7 +22,10 @@
 			<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+		<liferay-ui:icon
+			image="edit"
+			url="<%= editURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= DLFolderPermission.contains(permissionChecker, curFolder, ActionKeys.PERMISSIONS) %>">
@@ -33,7 +36,10 @@
 			var="permissionsURL"
 		/>
 
-		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+		<liferay-ui:icon
+			image="permissions"
+			url="<%= permissionsURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= DLFolderPermission.contains(permissionChecker, curFolder, ActionKeys.DELETE) %>">
@@ -44,6 +50,8 @@
 			<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon-delete url="<%= deleteURL %>" />
+		<liferay-ui:icon-delete
+			url="<%= deleteURL %>"
+		/>
 	</c:if>
 </liferay-ui:icon-menu>

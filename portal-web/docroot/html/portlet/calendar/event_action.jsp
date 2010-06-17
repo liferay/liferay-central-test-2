@@ -41,7 +41,10 @@ else {
 			<portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+		<liferay-ui:icon
+			image="edit"
+			url="<%= editURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= CalEventPermission.contains(permissionChecker, event, ActionKeys.VIEW) %>">
@@ -51,7 +54,10 @@ else {
 			<portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon image="export" url='<%= exportURL %>'/>
+		<liferay-ui:icon
+			image="export"
+			url='<%= exportURL %>'
+		/>
 	</c:if>
 
 	<c:if test="<%= CalEventPermission.contains(permissionChecker, event, ActionKeys.PERMISSIONS) %>">
@@ -62,7 +68,10 @@ else {
 			var="permissionsURL"
 		/>
 
-		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+		<liferay-ui:icon
+			image="permissions"
+			url="<%= permissionsURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= CalEventPermission.contains(permissionChecker, event, ActionKeys.DELETE) %>">

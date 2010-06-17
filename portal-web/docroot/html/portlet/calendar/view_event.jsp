@@ -53,7 +53,9 @@ request.setAttribute("view_event.jsp-event", event);
 	<aui:column columnWidth="<%= 75 %>" cssClass="folder-column folder-column-first" first="<%= true %>">
 		<dl class="property-list">
 			<dt>
-				<liferay-ui:icon image="../common/calendar" />
+				<liferay-ui:icon
+					image="../common/calendar"
+				/>
 
 				<liferay-ui:message key="start-date" />:
 			</dt>
@@ -70,7 +72,9 @@ request.setAttribute("view_event.jsp-event", event);
 			<dt>
 				<c:choose>
 					<c:when test="<%= (endDateType == 0) || (endDateType == 2) %>">
-						<liferay-ui:icon image="../common/calendar" />
+						<liferay-ui:icon
+							image="../common/calendar"
+						/>
 
 						<liferay-ui:message key="end-date" />:
 					</c:when>
@@ -93,7 +97,9 @@ request.setAttribute("view_event.jsp-event", event);
 				</c:if>
 			</dd>
 			<dt>
-				<liferay-ui:icon image="../common/time" />
+				<liferay-ui:icon
+					image="../common/time"
+				/>
 
 				<liferay-ui:message key="duration" />:
 			</dt>
@@ -143,7 +149,9 @@ request.setAttribute("view_event.jsp-event", event);
 				</c:if>
 			</dd>
 			<dt>
-				<liferay-ui:icon image="../common/attributes" />
+				<liferay-ui:icon
+					image="../common/attributes"
+				/>
 
 				<liferay-ui:message key="type" />:
 			</dt>
@@ -153,7 +161,10 @@ request.setAttribute("view_event.jsp-event", event);
 		</dl>
 
 		<c:if test="<% recurrence.getOccurrence() != null %>">
-			<liferay-ui:icon image="../common/undo" /> <liferay-util:include page="/html/portlet/calendar/view_event_recurrence.jsp" />
+			<liferay-ui:icon
+				image="../common/undo"
+			/>
+			<liferay-util:include page="/html/portlet/calendar/view_event_recurrence.jsp" />
 		</c:if>
 
 		<liferay-ui:custom-attributes-available className="<%= CalEvent.class.getName() %>">

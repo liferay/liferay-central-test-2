@@ -36,7 +36,10 @@ long layoutPrototypeId = layoutPrototype.getLayoutPrototypeId();
 			<portlet:param name="layoutPrototypeId" value="<%= String.valueOf(layoutPrototypeId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+		<liferay-ui:icon
+			image="edit"
+			url="<%= editURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= LayoutPrototypePermissionUtil.contains(permissionChecker, layoutPrototypeId, ActionKeys.PERMISSIONS) %>">
@@ -47,7 +50,10 @@ long layoutPrototypeId = layoutPrototype.getLayoutPrototypeId();
 			var="permissionsURL"
 		/>
 
-		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+		<liferay-ui:icon
+			image="permissions"
+			url="<%= permissionsURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= LayoutPrototypePermissionUtil.contains(permissionChecker, layoutPrototypeId, ActionKeys.DELETE) %>">
@@ -58,6 +64,8 @@ long layoutPrototypeId = layoutPrototype.getLayoutPrototypeId();
 			<portlet:param name="layoutPrototypeIds" value="<%= String.valueOf(layoutPrototypeId) %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon-delete url="<%= deleteURL %>" />
+		<liferay-ui:icon-delete
+			url="<%= deleteURL %>"
+		/>
 	</c:if>
 </liferay-ui:icon-menu>

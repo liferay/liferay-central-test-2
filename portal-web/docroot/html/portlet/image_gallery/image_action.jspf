@@ -24,7 +24,11 @@ boolean view = GetterUtil.getBoolean((String)request.getAttribute("view_image.js
 	String downloadURL = themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getLargeImageId() + "&fileName=" + HttpUtil.encodeURL(image.getNameWithExtension()) + "&t=" + ImageServletTokenUtil.getToken(image.getLargeImageId());
 	%>
 
-	<liferay-ui:icon image="download" message='<%= LanguageUtil.get(pageContext, "download") + " (" + TextFormatter.formatKB(image.getImageSize(), locale) + "k)" %>' url="<%= downloadURL %>" />
+	<liferay-ui:icon
+		image="download"
+		message='<%= LanguageUtil.get(pageContext, "download") + " (" + TextFormatter.formatKB(image.getImageSize(), locale) + "k)" %>'
+		url="<%= downloadURL %>"
+	/>
 </c:if>
 
 <c:if test="<%= !view && IGImagePermission.contains(permissionChecker, image, ActionKeys.VIEW) %>">
@@ -34,7 +38,10 @@ boolean view = GetterUtil.getBoolean((String)request.getAttribute("view_image.js
 		<portlet:param name="imageId" value="<%= String.valueOf(image.getImageId()) %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="view" url="<%= viewURL %>" />
+	<liferay-ui:icon
+		image="view"
+		url="<%= viewURL %>"
+	/>
 </c:if>
 
 <c:if test="<%= IGImagePermission.contains(permissionChecker, image, ActionKeys.UPDATE) %>">
@@ -44,7 +51,10 @@ boolean view = GetterUtil.getBoolean((String)request.getAttribute("view_image.js
 		<portlet:param name="imageId" value="<%= String.valueOf(image.getImageId()) %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="edit" url="<%= editURL %>" />
+	<liferay-ui:icon
+		image="edit"
+		url="<%= editURL %>"
+	/>
 </c:if>
 
 <c:if test="<%= IGImagePermission.contains(permissionChecker, image, ActionKeys.PERMISSIONS) %>">
@@ -55,7 +65,10 @@ boolean view = GetterUtil.getBoolean((String)request.getAttribute("view_image.js
 		var="permissionsURL"
 	/>
 
-	<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+	<liferay-ui:icon
+		image="permissions"
+		url="<%= permissionsURL %>"
+	/>
 </c:if>
 
 <c:if test="<%= IGImagePermission.contains(permissionChecker, image, ActionKeys.DELETE) %>">
@@ -66,5 +79,7 @@ boolean view = GetterUtil.getBoolean((String)request.getAttribute("view_image.js
 		<portlet:param name="imageId" value="<%= String.valueOf(image.getImageId()) %>" />
 	</portlet:actionURL>
 
-	<liferay-ui:icon-delete url="<%= deleteURL %>" />
+	<liferay-ui:icon-delete
+		url="<%= deleteURL %>"
+	/>
 </c:if>

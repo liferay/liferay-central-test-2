@@ -23,7 +23,11 @@ int abstractLength = (Integer)request.getAttribute(WebKeys.ASSET_PUBLISHER_ABSTR
 
 <%= StringUtil.shorten(event.getDescription(), abstractLength) %><br />
 
-<liferay-ui:icon image="../common/calendar" /> <liferay-ui:message key="start-date" />:
+<liferay-ui:icon
+	image="../common/calendar"
+/>
+
+<liferay-ui:message key="start-date" />:
 
 <c:choose>
 	<c:when test="<%= event.isTimeZoneSensitive() %>">

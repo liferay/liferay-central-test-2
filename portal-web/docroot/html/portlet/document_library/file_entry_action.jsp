@@ -91,7 +91,10 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 					<portlet:param name="name" value="<%= HtmlUtil.unescape(fileEntry.getName()) %>" />
 				</portlet:renderURL>
 
-				<liferay-ui:icon image="edit" url="<%= editURL %>" />
+				<liferay-ui:icon
+					image="edit"
+					url="<%= editURL %>"
+				/>
 			</c:if>
 
 			<c:if test="<%= showActions %>">
@@ -106,7 +109,10 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 					var="permissionsURL"
 				/>
 
-				<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+				<liferay-ui:icon
+					image="permissions"
+					url="<%= permissionsURL %>"
+				/>
 			</c:if>
 
 			<c:if test="<%= !view && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) %>">
@@ -118,7 +124,9 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 					<portlet:param name="name" value="<%= HtmlUtil.unescape(fileEntry.getName()) %>" />
 				</portlet:actionURL>
 
-				<liferay-ui:icon-delete url="<%= deleteURL %>" />
+				<liferay-ui:icon-delete
+					url="<%= deleteURL %>"
+				/>
 			</c:if>
 		</c:when>
 		<c:otherwise>
@@ -144,7 +152,10 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 					<portlet:param name="fileShortcutId" value="<%= String.valueOf(fileShortcut.getFileShortcutId()) %>" />
 				</portlet:renderURL>
 
-				<liferay-ui:icon image="view" url="<%= viewShortcutURL %>" />
+				<liferay-ui:icon
+					image="view"
+					url="<%= viewShortcutURL %>"
+				/>
 			</c:if>
 
 			<c:if test="<%= view && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
@@ -155,7 +166,12 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 					<portlet:param name="name" value="<%= HtmlUtil.unescape(fileShortcut.getToName()) %>" />
 				</portlet:renderURL>
 
-				<liferay-ui:icon image="view" message="view-original-file" url="<%= viewOriginalFileURL %>" />
+				<liferay-ui:icon
+					image="view"
+					message="view-original-file"
+					url="<%= viewOriginalFileURL %>"
+				/>
+				
 			</c:if>
 
 			<c:if test="<%= showActions %>">
@@ -169,7 +185,10 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 					<portlet:param name="fileShortcutId" value="<%= String.valueOf(fileShortcut.getFileShortcutId()) %>" />
 				</portlet:renderURL>
 
-				<liferay-ui:icon image="edit" url="<%= editShortcutURL %>" />
+				<liferay-ui:icon
+					image="edit"
+					url="<%= editShortcutURL %>"
+				/>
 			</c:if>
 
 			<c:if test="<%= showActions && DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.PERMISSIONS) %>">
@@ -180,7 +199,10 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 					var="shortcutPermissionsURL"
 				/>
 
-				<liferay-ui:icon image="permissions" url="<%= shortcutPermissionsURL %>" />
+				<liferay-ui:icon
+					image="permissions"
+					url="<%= shortcutPermissionsURL %>"
+				/>
 			</c:if>
 
 			<c:if test="<%= showActions && DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.DELETE) %>">
@@ -191,7 +213,9 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 					<portlet:param name="fileShortcutId" value="<%= String.valueOf(fileShortcut.getFileShortcutId()) %>" />
 				</portlet:actionURL>
 
-				<liferay-ui:icon-delete url="<%= deleteShortcutURL %>" />
+				<liferay-ui:icon-delete
+					url="<%= deleteShortcutURL %>"
+				/>
 			</c:if>
 		</c:otherwise>
 	</c:choose>
