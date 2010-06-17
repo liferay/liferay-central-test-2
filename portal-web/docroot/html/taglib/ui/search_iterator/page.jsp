@@ -189,35 +189,33 @@ List<String> primaryKeys = new ArrayList<String>();
 			ResultRow row = (ResultRow)resultRows.get(i);
 
 			String rowClassName = "portlet-section-alternate results-row alt";
-			String rowClassHoverName = "portlet-section-alternate-hover results-row alt hover";
 
 			primaryKeys.add(row.getPrimaryKey());
 
 			if (MathUtil.isEven(i)) {
 				rowClassName = "portlet-section-body results-row";
-				rowClassHoverName = "portlet-section-body-hover results-row hover";
+			}
+
+			if (searchContainer.isHover()) {
+				rowClassName += " hover";
+			}
+			else {
+				rowClassName += " no-hover";
 			}
 
 			if (Validator.isNotNull(row.getClassName())) {
 				rowClassName += " " + row.getClassName();
 			}
 
-			if (Validator.isNotNull(row.getClassHoverName())) {
-				rowClassHoverName += " " + row.getClassHoverName();
-			}
-
 			if (row.isRestricted()) {
 				rowClassName += " restricted";
-				rowClassHoverName += " restricted";
 			}
 
 			if ((i + 1) == resultRows.size()) {
 				rowClassName += " last";
-				rowClassHoverName += " last";
 			}
 
 			row.setClassName(rowClassName);
-			row.setClassHoverName(rowClassHoverName);
 
 			request.setAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW, row);
 
@@ -234,11 +232,7 @@ List<String> primaryKeys = new ArrayList<String>();
 			}
 		%>
 
-			<tr class="<%= rowClassName %>"
-				<c:if test="<%= searchContainer.isHover() %>">
-					onmouseover="this.className = '<%= rowClassHoverName %>';" onmouseout="this.className = '<%= rowClassName %>';"
-				</c:if>
-			>
+			<tr class="<%= rowClassName %>">
 
 			<%
 			for (int j = 0; j < entries.size(); j++) {
