@@ -75,6 +75,31 @@ public class KMPSearch {
 		return nexts;
 	}
 
+	public static int[] generateNexts(CharSequence pattern) {
+		int length = pattern.length();
+
+		int[] nexts = new int[length];
+
+		nexts[0] = -1;
+
+		int i = 0;
+		int j = -1;
+
+		while (i < length - 1) {
+			if ((j == -1) || (pattern.charAt(i) == pattern.charAt(j))) {
+				i++;
+				j++;
+
+				nexts[i] = j;
+			}
+			else {
+				j = nexts[j];
+			}
+		}
+
+		return nexts;
+	}
+
 	public static int search(byte[] text, byte[] pattern) {
 		int[] nexts = generateNexts(pattern);
 
@@ -143,6 +168,50 @@ public class KMPSearch {
 
 		while (i < length && j < patternLength) {
 			if ((j == -1) || (text[i + offset] == pattern[j])) {
+				i++;
+				j++;
+			}
+			else {
+				j = nexts[j];
+			}
+		}
+
+		if (j >= patternLength) {
+			return i - patternLength + offset;
+		}
+		else {
+			return -1;
+		}
+	}
+
+	public static int search(CharSequence text, CharSequence pattern) {
+		int[] nexts = generateNexts(pattern);
+
+		return search(text, 0, text.length(), pattern, nexts);
+	}
+
+	public static int search(CharSequence text, CharSequence pattern,
+		int[] nexts) {
+		return search(text, 0, text.length(), pattern, nexts);
+	}
+
+	public static int search(
+		CharSequence text, int offset, CharSequence pattern, int[] nexts) {
+
+		return search(text, offset, text.length() - offset, pattern, nexts);
+	}
+
+	public static int search(
+		CharSequence text, int offset, int length, CharSequence pattern,
+		int[] nexts) {
+
+		int patternLength = pattern.length();
+
+		int i = 0;
+		int j = 0;
+
+		while (i < length && j < patternLength) {
+			if ((j == -1) || (text.charAt(i + offset) == pattern.charAt(j))) {
 				i++;
 				j++;
 			}
