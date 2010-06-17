@@ -23,7 +23,11 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 %>
 
 <liferay-util:buffer var="removeGroupIcon">
-	<liferay-ui:icon image="unlink" label="<%= true %>" message="remove" />
+	<liferay-ui:icon
+		image="unlink"
+		label="<%= true %>"
+		message="remove"
+	/>
 </liferay-util:buffer>
 
 <h3><liferay-ui:message key="communities" /></h3>

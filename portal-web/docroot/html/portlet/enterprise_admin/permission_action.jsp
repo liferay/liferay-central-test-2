@@ -38,5 +38,8 @@ Role role = (Role)objArray[1];
 		<portlet:param name="actionId" value="<%= String.valueOf(permission.getActionId()) %>" />
 	</portlet:actionURL>
 
-	<liferay-ui:icon image="delete" url="<%= deletePermissionURL %>" />
+	<liferay-ui:icon
+		image="delete"
+		url="<%= deletePermissionURL %>"
+	/>
 </liferay-ui:icon-menu>

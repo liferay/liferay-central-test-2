@@ -31,7 +31,10 @@ WorkflowDefinition workflowDefinition = (WorkflowDefinition)row.getObject();
 		<portlet:param name="version" value="<%= String.valueOf(workflowDefinition.getVersion()) %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="edit" url="<%= editURL %>" />
+	<liferay-ui:icon
+		image="edit"
+		url="<%= editURL %>"
+	/>
 
 	<c:if test="<%= !workflowDefinition.isActive() %>">
 		<portlet:actionURL var="restoreWorkflowDefinitionURL">
@@ -42,7 +45,10 @@ WorkflowDefinition workflowDefinition = (WorkflowDefinition)row.getObject();
 			<portlet:param name="version" value="<%= String.valueOf(workflowDefinition.getVersion()) %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon image="activate" url="<%= restoreWorkflowDefinitionURL %>" />
+		<liferay-ui:icon
+			image="activate"
+			url="<%= restoreWorkflowDefinitionURL %>"
+		/>
 	</c:if>
 
 	<portlet:actionURL var="deleteURL">
@@ -58,7 +64,9 @@ WorkflowDefinition workflowDefinition = (WorkflowDefinition)row.getObject();
 			<liferay-ui:icon-deactivate url="<%= deleteURL %>" />
 		</c:when>
 		<c:otherwise>
-			<liferay-ui:icon-delete url="<%= deleteURL %>" />
+			<liferay-ui:icon-delete
+				url="<%= deleteURL %>"
+			/>
 		</c:otherwise>
 	</c:choose>
 </liferay-ui:icon-menu>

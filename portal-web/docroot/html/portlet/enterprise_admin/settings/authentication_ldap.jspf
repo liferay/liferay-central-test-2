@@ -146,13 +146,21 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0)) {
 							String taglibUpURL = "javascript:" + renderResponse.getNamespace() + "raiseLDAPServerPriority(" + ldapServerId + ");";
 							%>
 
-							<liferay-ui:icon image="top" message="up" url="<%= taglibUpURL %>" />
+							<liferay-ui:icon
+								image="top"
+								message="up"
+								url="<%= taglibUpURL %>"
+							/>
 
 							<%
 							String taglibDownURL = "javascript:" + renderResponse.getNamespace() + "lowerLDAPServerPriority(" + ldapServerId + ");";
 							%>
 
-							<liferay-ui:icon image="bottom" message="down" url="<%= taglibDownURL %>" />
+							<liferay-ui:icon
+								image="bottom"
+								message="down"
+								url="<%= taglibDownURL %>"
+							/>
 
 							<portlet:renderURL var="editURL">
 								<portlet:param name="struts_action" value="/enterprise_admin_settings/edit_ldap_server" />
@@ -160,7 +168,10 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0)) {
 								<portlet:param name="ldapServerId" value="<%= String.valueOf(ldapServerId) %>" />
 							</portlet:renderURL>
 
-							<liferay-ui:icon image="edit" url="<%= editURL %>" />
+							<liferay-ui:icon
+								image="edit"
+								url="<%= editURL %>"
+							/>
 
 							<portlet:actionURL var="deleteURL">
 								<portlet:param name="struts_action" value="/enterprise_admin_settings/edit_ldap_server" />

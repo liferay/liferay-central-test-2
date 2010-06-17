@@ -38,7 +38,10 @@ long userId = user2.getUserId();
 			<portlet:param name="p_u_i_d" value="<%= String.valueOf(userId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editUserURL %>" />
+		<liferay-ui:icon
+			image="edit"
+			url="<%= editUserURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= UserPermissionUtil.contains(permissionChecker, userId, ActionKeys.PERMISSIONS) %>">
@@ -49,7 +52,10 @@ long userId = user2.getUserId();
 			var="permissionsUserURL"
 		/>
 
-		<liferay-ui:icon image="permissions" url="<%= permissionsUserURL %>" />
+		<liferay-ui:icon
+			image="permissions"
+			url="<%= permissionsUserURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= UserPermissionUtil.contains(permissionChecker, userId, ActionKeys.UPDATE) && (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE || PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE) %>">
@@ -59,7 +65,11 @@ long userId = user2.getUserId();
 			<portlet:param name="groupId" value="<%= String.valueOf(user2.getGroup().getGroupId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="pages" message="manage-pages" url="<%= managePagesURL %>" />
+		<liferay-ui:icon
+			image="pages"
+			message="manage-pages"
+			url="<%= managePagesURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= !PropsValues.PORTAL_JAAS_ENABLE && PropsValues.PORTAL_IMPERSONATION_ENABLE && (userId != user.getUserId()) && !themeDisplay.isImpersonated() && UserPermissionUtil.contains(permissionChecker, userId, ActionKeys.IMPERSONATE) %>">
@@ -68,7 +78,12 @@ long userId = user2.getUserId();
 			var="impersonateUserURL"
 		/>
 
-		<liferay-ui:icon image="impersonate_user" target="_blank" url="<%= impersonateUserURL %>" />
+		<liferay-ui:icon
+			image="impersonate_user"
+			target="_blank"
+			url="<%= impersonateUserURL %>"
+		/>
+		
 	</c:if>
 
 	<c:if test="<%= UserPermissionUtil.contains(permissionChecker, userId, ActionKeys.DELETE) %>">
@@ -80,7 +95,10 @@ long userId = user2.getUserId();
 				<portlet:param name="deleteUserIds" value="<%= String.valueOf(userId) %>" />
 			</portlet:actionURL>
 
-			<liferay-ui:icon image="activate" url="<%= restoreUserURL %>" />
+			<liferay-ui:icon
+				image="activate"
+				url="<%= restoreUserURL %>"
+			/>
 		</c:if>
 
 		<portlet:actionURL var="deleteUserURL">

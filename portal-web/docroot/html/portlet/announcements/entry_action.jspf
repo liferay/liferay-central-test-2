@@ -25,7 +25,11 @@
 					<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
 				</portlet:renderURL>
 
-				<liferay-ui:icon image="edit" label="<%= true %>" url="<%= editURL %>" />
+				<liferay-ui:icon
+					image="edit"
+					label="<%= true %>"
+					url="<%= editURL %>"
+				/>
 			</td>
 		</c:if>
 
@@ -38,7 +42,10 @@
 					<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
 				</portlet:actionURL>
 
-				<liferay-ui:icon-delete label="<%= true %>" url="<%= deleteURL %>" />
+				<liferay-ui:icon-delete
+					label="<%= true %>"
+					url="<%= deleteURL %>"
+				/>
 			</td>
 		</c:if>
 

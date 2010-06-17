@@ -32,7 +32,10 @@ long productEntryId = productEntry.getProductEntryId();
 			<portlet:param name="productEntryId" value="<%= String.valueOf(productEntryId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+		<liferay-ui:icon
+			image="edit"
+			url="<%= editURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= SCProductEntryPermission.contains(permissionChecker, productEntry, ActionKeys.PERMISSIONS) %>">
@@ -43,7 +46,10 @@ long productEntryId = productEntry.getProductEntryId();
 			var="permissionsURL"
 		/>
 
-		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+		<liferay-ui:icon
+			image="permissions"
+			url="<%= permissionsURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= SCProductEntryPermission.contains(permissionChecker, productEntry, ActionKeys.DELETE) %>">
@@ -54,6 +60,8 @@ long productEntryId = productEntry.getProductEntryId();
 			<portlet:param name="productEntryId" value="<%= String.valueOf(productEntryId) %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon-delete url="<%= deleteURL %>" />
+		<liferay-ui:icon-delete
+			url="<%= deleteURL %>"
+		/>
 	</c:if>
 </liferay-ui:icon-menu>

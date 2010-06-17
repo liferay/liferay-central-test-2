@@ -33,7 +33,11 @@ userGroupRoles.addAll(organizationRoles);
 %>
 
 <liferay-util:buffer var="removeRoleIcon">
-	<liferay-ui:icon image="unlink" label="<%= true %>" message="remove" />
+	<liferay-ui:icon
+		image="unlink"
+		label="<%= true %>"
+		message="remove"
+	/>
 </liferay-util:buffer>
 
 <aui:input name="groupRolesRoleIds" type="hidden" value='<%= ListUtil.toString(userGroupRoles, "roleId") %>' />

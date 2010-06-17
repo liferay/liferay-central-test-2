@@ -120,7 +120,9 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 											String taglibURL = "javascript:" + renderResponse.getNamespace() + "selectionForType('" + curRendererFactory.getClassName() + "')";
 										%>
 
-											<liferay-ui:icon message='<%= "model.resource." + curRendererFactory.getClassName() %>' src="<%= curRendererFactory.getIconPath(renderRequest) %>" url="<%= taglibURL %>" />
+											<liferay-ui:icon
+												message='<%= "model.resource." + curRendererFactory.getClassName() %>' src="<%= curRendererFactory.getIconPath(renderRequest) %>" url="<%= taglibURL %>"
+											/>
 
 										<%
 										}

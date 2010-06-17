@@ -86,7 +86,9 @@
 		<div class="tag-edit">
 			<div class="tag-close">
 				<span>
-					<liferay-ui:icon image="close" />
+					<liferay-ui:icon
+						image="close"
+					/>
 				</span>
 			</div>
 
@@ -108,9 +110,17 @@
 
 					<input class="property-value" type="text" />
 
-					<span class="add-property"><liferay-ui:icon image="add" /></span>
+					<span class="add-property">
+						<liferay-ui:icon
+							image="add"
+						/>
+					</span>
 
-					<span class="delete-property"><liferay-ui:icon image="delete" /></span>
+					<span class="delete-property">
+						<liferay-ui:icon
+						image="delete"
+					/>
+					</span>
 				</div>
 
 				<br />

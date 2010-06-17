@@ -34,7 +34,10 @@ UserGroup userGroup = (UserGroup)row.getObject();
 			<portlet:param name="userGroupId" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+		<liferay-ui:icon
+			image="edit"
+			url="<%= editURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.PERMISSIONS) %>">
@@ -45,7 +48,10 @@ UserGroup userGroup = (UserGroup)row.getObject();
 			var="permissionsURL"
 		/>
 
-		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+		<liferay-ui:icon
+			image="permissions"
+			url="<%= permissionsURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.MANAGE_LAYOUTS) %>">
@@ -55,7 +61,11 @@ UserGroup userGroup = (UserGroup)row.getObject();
 			<portlet:param name="groupId" value="<%= String.valueOf(userGroup.getGroup().getGroupId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="pages" message="manage-pages" url="<%= managePagesURL %>" />
+		<liferay-ui:icon
+			image="pages"
+			message="manage-pages"
+			url="<%= managePagesURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.ASSIGN_MEMBERS) %>">
@@ -65,7 +75,11 @@ UserGroup userGroup = (UserGroup)row.getObject();
 			<portlet:param name="userGroupId" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="assign" message="assign-members" url="<%= assignURL %>" />
+		<liferay-ui:icon
+			image="assign"
+			message="assign-members"
+			url="<%= assignURL %>"
+		/>
 	</c:if>
 
 	<portlet:renderURL var="viewUsersURL">
@@ -75,7 +89,12 @@ UserGroup userGroup = (UserGroup)row.getObject();
 		<portlet:param name="userGroupId" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="view_users" message="view-users" method="get" url="<%= viewUsersURL %>" />
+	<liferay-ui:icon
+		image="view_users"
+		message="view-users"
+		method="get"
+		url="<%= viewUsersURL %>"
+	/>
 
 	<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.DELETE) %>">
 
@@ -83,6 +102,9 @@ UserGroup userGroup = (UserGroup)row.getObject();
 		String taglibDeleteURL = "javascript:" + renderResponse.getNamespace() + "deleteUserGroup('" + userGroup.getUserGroupId() + "');";
 		%>
 
-		<liferay-ui:icon image="delete" url="<%= taglibDeleteURL %>" />
+		<liferay-ui:icon
+			image="delete"
+			url="<%= taglibDeleteURL %>"
+		/>
 	</c:if>
 </liferay-ui:icon-menu>

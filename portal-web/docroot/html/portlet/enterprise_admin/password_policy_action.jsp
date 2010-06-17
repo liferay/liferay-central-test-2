@@ -34,7 +34,10 @@ PasswordPolicy passwordPolicy = (PasswordPolicy)row.getObject();
 			<portlet:param name="passwordPolicyId" value="<%= String.valueOf(passwordPolicy.getPasswordPolicyId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+		<liferay-ui:icon
+			image="edit"
+			url="<%= editURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= PasswordPolicyPermissionUtil.contains(permissionChecker, passwordPolicy.getPasswordPolicyId(), ActionKeys.PERMISSIONS) %>">
@@ -45,7 +48,10 @@ PasswordPolicy passwordPolicy = (PasswordPolicy)row.getObject();
 			var="permissionsURL"
 		/>
 
-		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+		<liferay-ui:icon
+			image="permissions"
+			url="<%= permissionsURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= PasswordPolicyPermissionUtil.contains(permissionChecker, passwordPolicy.getPasswordPolicyId(), ActionKeys.ASSIGN_MEMBERS) %>">
@@ -55,7 +61,11 @@ PasswordPolicy passwordPolicy = (PasswordPolicy)row.getObject();
 			<portlet:param name="passwordPolicyId" value="<%= String.valueOf(passwordPolicy.getPasswordPolicyId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="assign" message="assign-members" url="<%= assignMembersURL %>" />
+		<liferay-ui:icon
+			image="assign"
+			message="assign-members"
+			url="<%= assignMembersURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= !passwordPolicy.getDefaultPolicy() && PasswordPolicyPermissionUtil.contains(permissionChecker, passwordPolicy.getPasswordPolicyId(), ActionKeys.DELETE) %>">

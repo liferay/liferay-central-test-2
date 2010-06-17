@@ -30,7 +30,10 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 			<portlet:param name="title" value="<%= HtmlUtil.unescape(wikiPage.getTitle()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+		<liferay-ui:icon
+			image="edit"
+			url="<%= editURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.PERMISSIONS) %>">
@@ -41,7 +44,10 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 			var="permissionsURL"
 		/>
 
-		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+		<liferay-ui:icon
+			image="permissions"
+			url="<%= permissionsURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) && WikiNodePermission.contains(permissionChecker, wikiPage.getNodeId(), ActionKeys.ADD_PAGE) %>">
@@ -55,7 +61,10 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 			<portlet:param name="templateTitle" value="<%= HtmlUtil.unescape(wikiPage.getTitle()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="copy" url="<%= copyPageURL.toString() %>" />
+		<liferay-ui:icon
+			image="copy"
+			url="<%= copyPageURL.toString() %>"
+		/>
 
 		<portlet:renderURL var="movePageURL">
 			<portlet:param name="struts_action" value="/wiki/move_page" />
@@ -64,7 +73,11 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 			<portlet:param name="title" value="<%= HtmlUtil.unescape(wikiPage.getTitle()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="forward" message="move" url="<%= movePageURL.toString() %>" />
+		<liferay-ui:icon
+			image="forward"
+			message="move"
+			url="<%= movePageURL.toString() %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.SUBSCRIBE) %>">
@@ -78,7 +91,10 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 					<portlet:param name="title" value="<%= HtmlUtil.unescape(wikiPage.getTitle()) %>" />
 				</portlet:actionURL>
 
-				<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" />
+				<liferay-ui:icon
+					image="unsubscribe"
+					url="<%= unsubscribeURL %>"
+				/>
 			</c:when>
 			<c:otherwise>
 				<portlet:actionURL var="subscribeURL">
@@ -89,7 +105,10 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 					<portlet:param name="title" value="<%= HtmlUtil.unescape(wikiPage.getTitle()) %>" />
 				</portlet:actionURL>
 
-				<liferay-ui:icon image="subscribe" url="<%= subscribeURL %>" />
+				<liferay-ui:icon
+					image="subscribe"
+					url="<%= subscribeURL %>"
+				/>
 			</c:otherwise>
 		</c:choose>
 	</c:if>

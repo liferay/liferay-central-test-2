@@ -77,7 +77,12 @@ String defaultControlPanelThemeId = ParamUtil.getString(request, "settings--" + 
 	</aui:a>
 
 	<div class="portrait-icons">
-		<liferay-ui:icon image="edit" label="<%= true %>" message="change" url="<%= taglibEditURL %>" />
+		<liferay-ui:icon
+			image="edit"
+			label="<%= true %>"
+			message="change"
+			url="<%= taglibEditURL %>"
+		/>
 
 		<c:if test="<%= company.getLogoId() != 0 %>">
 
@@ -85,7 +90,12 @@ String defaultControlPanelThemeId = ParamUtil.getString(request, "settings--" + 
 			String taglibDeleteURL = "javascript:" + renderResponse.getNamespace() + "deleteLogo('" + themeDisplay.getPathImage() + "/company_logo?img_id=0');";
 			%>
 
-			<liferay-ui:icon cssClass="modify-link" image="delete" label="<%= true %>" url="<%= taglibDeleteURL %>" />
+			<liferay-ui:icon
+				cssClass="modify-link"
+				image="delete"
+				label="<%= true %>"
+				url="<%= taglibDeleteURL %>"
+			/>
 
 			<aui:input name="deleteLogo" type="hidden" value="<%= deleteLogo %>" />
 		</c:if>

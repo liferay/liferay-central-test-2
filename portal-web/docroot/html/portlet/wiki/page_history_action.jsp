@@ -33,6 +33,10 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 			<portlet:param name="version" value="<%= String.valueOf(wikiPage.getVersion()) %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon image="undo" message="revert" url="<%= revertURL %>" />
+		<liferay-ui:icon
+			image="undo"
+			message="revert"
+			url="<%= revertURL %>"
+		/>
 	</c:if>
 </liferay-ui:icon-menu>

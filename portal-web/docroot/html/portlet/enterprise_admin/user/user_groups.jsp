@@ -21,7 +21,11 @@ List<UserGroup> userGroups = (List<UserGroup>)request.getAttribute("user.userGro
 %>
 
 <liferay-util:buffer var="removeUserGroupIcon">
-	<liferay-ui:icon image="unlink" label="<%= true %>" message="remove" />
+	<liferay-ui:icon
+		image="unlink"
+		label="<%= true %>"
+		message="remove"
+	/>
 </liferay-util:buffer>
 
 <h3><liferay-ui:message key="user-groups" /></h3>

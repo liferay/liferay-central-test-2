@@ -23,7 +23,11 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 %>
 
 <liferay-util:buffer var="removeOrganizationIcon">
-	<liferay-ui:icon image="unlink" label="<%= true %>" message="remove" />
+	<liferay-ui:icon
+		image="unlink"
+		label="<%= true %>"
+		message="remove"
+	/>
 </liferay-util:buffer>
 
 <h3><liferay-ui:message key="organizations" /></h3>

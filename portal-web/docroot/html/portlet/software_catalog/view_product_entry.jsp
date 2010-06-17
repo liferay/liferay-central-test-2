@@ -172,11 +172,19 @@ viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 			</td>
 			<td>
 				<c:if test="<%= Validator.isNotNull(latestProductVersion.getDownloadPageURL()) %>">
-					<liferay-ui:icon image="download" message="download-page" url="<%= latestProductVersion.getDownloadPageURL() %>" />
+					<liferay-ui:icon
+						image="download"
+						message="download-page"
+						url="<%= latestProductVersion.getDownloadPageURL() %>"
+					/>
 				</c:if>
 
 				<c:if test="<%= Validator.isNotNull(latestProductVersion.getDirectDownloadURL()) %>">
-					<liferay-ui:icon image="download" message="direct-download" url="<%= latestProductVersion.getDirectDownloadURL() %>" />
+					<liferay-ui:icon
+						image="download"
+						message="direct-download"
+						url="<%= latestProductVersion.getDirectDownloadURL() %>"
+					/>
 				</c:if>
 			</td>
 		</tr>

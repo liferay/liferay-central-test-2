@@ -130,7 +130,13 @@ if (!paginationType.equals("none")) {
 	</portlet:resourceURL>
 
 	<div class="subscribe">
-		<liferay-ui:icon image="rss" label="<%= true %>" method="get" target="_blank" url="<%= rssURL %>" />
+		<liferay-ui:icon
+			image="rss"
+			label="<%= true %>"
+			method="get"
+			target="_blank"
+			url="<%= rssURL %>"
+		/>
 	</div>
 
 	<liferay-util:html-top>

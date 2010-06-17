@@ -32,7 +32,10 @@ String licenseId = String.valueOf(license.getLicenseId());
 			<portlet:param name="licenseId" value="<%= licenseId %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+		<liferay-ui:icon
+			image="edit"
+			url="<%= editURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= SCLicensePermission.contains(permissionChecker, license.getLicenseId(), ActionKeys.UPDATE) %>">
@@ -43,6 +46,8 @@ String licenseId = String.valueOf(license.getLicenseId());
 			<portlet:param name="licenseId" value="<%= licenseId %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon-delete url="<%= deleteURL %>" />
+		<liferay-ui:icon-delete
+			url="<%= deleteURL %>"
+		/>
 	</c:if>
 </liferay-ui:icon-menu>

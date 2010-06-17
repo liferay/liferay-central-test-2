@@ -32,7 +32,10 @@ String frameworkVersionId =	String.valueOf(frameworkVersion.getFrameworkVersionI
 			<portlet:param name="frameworkVersionId" value="<%= frameworkVersionId %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+		<liferay-ui:icon
+			image="edit"
+			url="<%= editURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= SCFrameworkVersionPermission.contains(permissionChecker, frameworkVersion, ActionKeys.PERMISSIONS) %>">
@@ -43,7 +46,10 @@ String frameworkVersionId =	String.valueOf(frameworkVersion.getFrameworkVersionI
 			var="permissionsURL"
 		/>
 
-		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+		<liferay-ui:icon
+			image="permissions"
+			url="<%= permissionsURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= SCFrameworkVersionPermission.contains(permissionChecker, frameworkVersion, ActionKeys.DELETE) %>">
@@ -54,6 +60,8 @@ String frameworkVersionId =	String.valueOf(frameworkVersion.getFrameworkVersionI
 			<portlet:param name="frameworkVersionId" value="<%= frameworkVersionId %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon-delete url="<%= deleteURL %>" />
+		<liferay-ui:icon-delete
+			url="<%= deleteURL %>"
+		/>
 	</c:if>
 </liferay-ui:icon-menu>

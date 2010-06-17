@@ -38,7 +38,10 @@ long organizationGroupId = organization.getGroup().getGroupId();
 			<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editOrganizationURL %>" />
+		<liferay-ui:icon
+			image="edit"
+			url="<%= editOrganizationURL %>"
+		/>
 	</c:if>
 
 	<%--<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.PERMISSIONS) %>">
@@ -49,7 +52,10 @@ long organizationGroupId = organization.getGroup().getGroupId();
 			var="editOrganizationPermissionsURL"
 		/>
 
-		<liferay-ui:icon image="permissions" url="<%= editOrganizationPermissionsURL %>" />
+		<liferay-ui:icon
+			image="permissions"
+			url="<%= editOrganizationPermissionsURL %>"
+		/>
 	</c:if>--%>
 
 	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_LAYOUTS) %>">
@@ -59,7 +65,11 @@ long organizationGroupId = organization.getGroup().getGroupId();
 			<portlet:param name="groupId" value="<%= String.valueOf(organizationGroupId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="pages" message="manage-pages" url="<%= managePagesURL %>" />
+		<liferay-ui:icon
+			image="pages"
+			message="manage-pages"
+			url="<%= managePagesURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_TEAMS) %>">
@@ -69,7 +79,11 @@ long organizationGroupId = organization.getGroup().getGroupId();
 			<portlet:param name="groupId" value="<%= String.valueOf(organizationGroupId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="group" message="manage-teams" url="<%= manageTeamsURL %>" />
+		<liferay-ui:icon
+			image="group"
+			message="manage-teams"
+			url="<%= manageTeamsURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= permissionChecker.isCommunityOwner(organizationGroupId) || OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ASSIGN_USER_ROLES) %>">
@@ -79,7 +93,10 @@ long organizationGroupId = organization.getGroup().getGroupId();
 			<portlet:param name="groupId" value="<%= String.valueOf(organizationGroupId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="assign_user_roles" url="<%= assignUserRolesURL %>" />
+		<liferay-ui:icon
+			image="assign_user_roles"
+			url="<%= assignUserRolesURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ASSIGN_MEMBERS) %>">
@@ -89,7 +106,11 @@ long organizationGroupId = organization.getGroup().getGroupId();
 			<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="assign" message="assign-members" url="<%= assignMembersURL %>" />
+		<liferay-ui:icon
+			image="assign"
+			message="assign-members"
+			url="<%= assignMembersURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_USERS) %>">
@@ -99,7 +120,11 @@ long organizationGroupId = organization.getGroup().getGroupId();
 			<portlet:param name="organizationsSearchContainerPrimaryKeys" value="<%= String.valueOf(organizationId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="add_user" message="add-user" url="<%= addUserURL %>" />
+		<liferay-ui:icon
+			image="add_user"
+			message="add-user"
+			url="<%= addUserURL %>"
+		/>
 	</c:if>
 
 	<portlet:renderURL var="viewUsersURL">
@@ -108,7 +133,12 @@ long organizationGroupId = organization.getGroup().getGroupId();
 		<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="view_users" message="view-users" method="get" url="<%= viewUsersURL %>" />
+	<liferay-ui:icon
+		image="view_users"
+		message="view-users"
+		method="get"
+		url="<%= viewUsersURL %>"
+	/>
 
 	<c:if test="<%= organization.isParentable() %>">
 
@@ -126,7 +156,11 @@ long organizationGroupId = organization.getGroup().getGroupId();
 					<portlet:param name="type" value="<%= childrenType %>" />
 				</portlet:renderURL>
 
-				<liferay-ui:icon image="add_location" message='<%= LanguageUtil.format(pageContext, "add-x", new String[] {LanguageUtil.get(pageContext, childrenType)}) %>' url="<%= addSuborganizationURL %>" />
+				<liferay-ui:icon
+					image="add_location"
+					message='<%= LanguageUtil.format(pageContext, "add-x", new String[] {LanguageUtil.get(pageContext, childrenType)}) %>'
+					url="<%= addSuborganizationURL %>"
+				/>
 			</c:if>
 
 		<%
@@ -139,7 +173,13 @@ long organizationGroupId = organization.getGroup().getGroupId();
 			<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="view_locations" message="view-suborganizations" method="get" url="<%= viewSuborganizationsURL %>" />
+		<liferay-ui:icon
+			image="view_locations"
+			message="view-suborganizations"
+			method="get"
+			url="<%= viewSuborganizationsURL %>"
+		/>
+
 	</c:if>
 
 	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.DELETE) %>">
@@ -148,6 +188,9 @@ long organizationGroupId = organization.getGroup().getGroupId();
 		String taglibDeleteURL = "javascript:" + renderResponse.getNamespace() + "deleteOrganization('" + organizationId + "');";
 		%>
 
-		<liferay-ui:icon image="delete" url="<%= taglibDeleteURL %>" />
+		<liferay-ui:icon
+			image="delete"
+			url="<%= taglibDeleteURL %>"
+		/>
 	</c:if>
 </liferay-ui:icon-menu>

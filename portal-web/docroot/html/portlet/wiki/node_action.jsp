@@ -30,7 +30,10 @@ WikiNode node = (WikiNode)row.getObject();
 			<portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+		<liferay-ui:icon
+			image="edit"
+			url="<%= editURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= WikiNodePermission.contains(permissionChecker, node, ActionKeys.PERMISSIONS) %>">
@@ -41,7 +44,10 @@ WikiNode node = (WikiNode)row.getObject();
 			var="permissionsURL"
 		/>
 
-		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+		<liferay-ui:icon
+			image="permissions"
+			url="<%= permissionsURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= WikiNodePermission.contains(permissionChecker, node, ActionKeys.IMPORT) %>">
@@ -51,10 +57,18 @@ WikiNode node = (WikiNode)row.getObject();
 			<portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="post" message="import-pages" url="<%= importURL %>" />
+		<liferay-ui:icon
+			image="post"
+			message="import-pages"
+			url="<%= importURL %>"
+		/>
 	</c:if>
 
-	<liferay-ui:icon image="rss" target="_blank" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&nodeId=" + node.getNodeId() + rssURLParams %>' />
+	<liferay-ui:icon
+		image="rss"
+		target="_blank"
+		url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&nodeId=" + node.getNodeId() + rssURLParams %>'
+		/>
 
 	<c:if test="<%= WikiNodePermission.contains(permissionChecker, node, ActionKeys.SUBSCRIBE) %>">
 		<c:choose>
@@ -66,7 +80,10 @@ WikiNode node = (WikiNode)row.getObject();
 					<portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" />
 				</portlet:actionURL>
 
-				<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" />
+				<liferay-ui:icon
+					image="unsubscribe"
+					url="<%= unsubscribeURL %>"
+				/>
 			</c:when>
 			<c:otherwise>
 				<portlet:actionURL var="subscribeURL">
@@ -76,7 +93,10 @@ WikiNode node = (WikiNode)row.getObject();
 					<portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" />
 				</portlet:actionURL>
 
-				<liferay-ui:icon image="subscribe" url="<%= subscribeURL %>" />
+				<liferay-ui:icon
+					image="subscribe"
+					url="<%= subscribeURL %>"
+				/>
 			</c:otherwise>
 		</c:choose>
 	</c:if>
@@ -89,6 +109,8 @@ WikiNode node = (WikiNode)row.getObject();
 			<portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon-delete url="<%= deleteURL %>" />
+		<liferay-ui:icon-delete
+			url="<%= deleteURL %>"
+		/>
 	</c:if>
 </liferay-ui:icon-menu>

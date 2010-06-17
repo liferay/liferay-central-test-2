@@ -38,6 +38,10 @@ String redirect = (String)objArray[3];
 			<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon image="unlink" message="remove" url="<%= portletURL %>" />
+		<liferay-ui:icon
+			image="unlink"
+			message="remove"
+			url="<%= portletURL %>"
+		/>
 	</c:if>
 </liferay-ui:icon-menu>
