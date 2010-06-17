@@ -94,10 +94,6 @@ public class InputTag extends IncludeTag {
 		_onClick = onClick;
 	}
 
-	public void setOnclick(String onclick) {
-		setOnClick(onclick);
-	}
-
 	public void setPrefix(String prefix) {
 		_prefix = prefix;
 	}

@@ -44,10 +44,6 @@ public class ButtonTag extends IncludeTag {
 		_onClick = onClick;
 	}
 
-	public void setOnclick(String onclick) {
-		setOnClick(onclick);
-	}
-
 	public void setType(String type) {
 		_type = type;
 	}
