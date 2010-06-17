@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import javax.portlet.ActionRequest;
@@ -60,7 +61,14 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 				actionRequest, portletResource);
 
 		preferences.setValue("show-listed", String.valueOf(showListed));
-		preferences.setValue("target-portlet-id", targetPortletId);
+
+		if (!showListed) {
+			preferences.setValue("target-portlet-id", targetPortletId);
+		}
+		else {
+			preferences.setValue("target-portlet-id", StringPool.BLANK);
+		}
+
 		preferences.setValue("type", type);
 
 		preferences.store();
