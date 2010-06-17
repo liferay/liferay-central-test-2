@@ -85,9 +85,9 @@ portletURL.setParameter("struts_action", "/message_boards/view");
 			<div class="category-search">
 				<aui:form action="<%= searchURL %>" method="get" name="searchFm">
 					<liferay-portlet:renderURLParams varImpl="searchURL" />
-					<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-					<aui:input name="breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
-					<aui:input name="searchCategoryId" type="hidden" value="<%= categoryId %>" />
+					<aui:input id="topLinks_redirect" name="redirect" type="hidden" value="<%= currentURL %>" />
+					<aui:input id="topLinks_breadcrumbsCategoryId" name="breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
+					<aui:input id="topLinks_searchCategoryId" name="searchCategoryId" type="hidden" value="<%= categoryId %>" />
 
 					<span class="aui-search-bar">
 						<aui:input id="keywords1" inlineField="<%= true %>" label="" name="keywords" size="30" title="search-messages" type="text" />
