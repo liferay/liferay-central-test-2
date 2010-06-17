@@ -353,24 +353,24 @@ public class StripFilter extends BasePortalFilter {
 
 		int position = oldCharBuffer.position();
 
-		int endIndex = KMPSearch.search(
+		int length = KMPSearch.search(
 			oldCharBuffer, _MARKER_PRE_OPEN.length + 1, _MARKER_PRE_CLOSE,
 			_MARKER_PRE_CLOSE_NEXTS);
 
-		if (endIndex == -1) {
+		if (length == -1) {
 			_log.error("Missing </pre>");
 
 			outputOpenTag(oldCharBuffer, writer, _MARKER_PRE_OPEN);
 			return;
 		}
 
-		int length = endIndex + _MARKER_PRE_CLOSE.length() - position;
+		length += _MARKER_PRE_CLOSE.length();
 
-		char[] temp = new char[length];
+		String content = oldCharBuffer.subSequence(0, length).toString();
 
-		oldCharBuffer.get(temp);
+		oldCharBuffer.position(position + length);
 
-		writer.write(temp);
+		writer.write(content);
 
 		skipWhiteSpace(oldCharBuffer, writer);
 	}
@@ -381,24 +381,24 @@ public class StripFilter extends BasePortalFilter {
 
 		int position = oldCharBuffer.position();
 
-		int endIndex = KMPSearch.search(
+		int length = KMPSearch.search(
 			oldCharBuffer, _MARKER_TEXTAREA_OPEN.length + 1,
 			_MARKER_TEXTAREA_CLOSE, _MARKER_TEXTAREA_CLOSE_NEXTS);
 
-		if (endIndex == -1) {
+		if (length == -1) {
 			_log.error("Missing </textArea>");
 
 			outputOpenTag(oldCharBuffer, writer, _MARKER_TEXTAREA_OPEN);
 			return;
 		}
 
-		int length = endIndex + _MARKER_TEXTAREA_CLOSE.length() - position;
+		length += _MARKER_TEXTAREA_CLOSE.length();
 
-		char[] temp = new char[length];
+		String content = oldCharBuffer.subSequence(0, length).toString();
 
-		oldCharBuffer.get(temp, 0, length);
+		oldCharBuffer.position(position + length);
 
-		writer.write(temp);
+		writer.write(content);
 
 		skipWhiteSpace(oldCharBuffer, writer);
 	}
