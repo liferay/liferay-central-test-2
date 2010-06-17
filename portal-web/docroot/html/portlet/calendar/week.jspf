@@ -196,12 +196,10 @@ Format dateFormatDayOfWeek = FastDateFormatFactoryUtil.getSimpleDateFormat("EEE"
 
 					boolean allDay = CalUtil.isAllDay(event, timeZone, locale);
 
-					className = "portlet-section-body results-row";
-					String classHoverName = "portlet-section-body-hover results-row hover";
+					className = "portlet-section-body results-row hover";
 
 					if (MathUtil.isEven(j)) {
-						className = "portlet-section-alternate results-row alt";
-						classHoverName = "portlet-section-alternate-hover results-row alt hover";
+						className = "portlet-section-alternate results-row alt hover";
 					}
 				%>
 

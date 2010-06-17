@@ -127,7 +127,6 @@ if (Validator.isNull(redirect)) {
 	int depth = 0;
 
 	String className = "portlet-section-body results-row";
-	String classHoverName = "portlet-section-body-hover results-row hover";
 
 	request.setAttribute("edit_message.jsp-assetTagNames", ParamUtil.getString(request, "assetTagNames"));
 	%>
@@ -382,7 +381,6 @@ if (Validator.isNull(redirect)) {
 		int depth = 0;
 
 		String className = "portlet-section-body results-row";
-		String classHoverName = "portlet-section-body-hover results-row hover";
 		%>
 
 		<%@ include file="/html/portlet/message_boards/view_thread_message.jspf" %>

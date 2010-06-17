@@ -44,9 +44,6 @@ public class SearchContainerRowParameterTag extends TagSupport {
 		if (_name.equals("className")) {
 			row.setClassName(_name);
 		}
-		else if (_name.equals("classHoverName")) {
-			row.setClassHoverName((String)_value);
-		}
 		else if (_name.equals("restricted")) {
 			row.setRestricted(GetterUtil.getBoolean((String)_value, false));
 		}

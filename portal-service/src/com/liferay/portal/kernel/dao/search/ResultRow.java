@@ -92,14 +92,6 @@ public class ResultRow {
 		_className = className;
 	}
 
-	public String getClassHoverName() {
-		return _classHoverName;
-	}
-
-	public void setClassHoverName(String classHoverName) {
-		_classHoverName = classHoverName;
-	}
-
 	public List<SearchEntry> getEntries() {
 		return _entries;
 	}
@@ -386,7 +378,6 @@ public class ResultRow {
 	private boolean _bold;
 	private boolean _restricted;
 	private String _className;
-	private String _classHoverName;
 	private List<SearchEntry> _entries;
 	private Map<String, Object> _params;
 

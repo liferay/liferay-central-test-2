@@ -39,12 +39,10 @@ for (int i = 0; i < choices.size(); i++) {
 
 	int choiceVotes = choice.getVotesCount();
 
-	String className = "portlet-section-body results-row";
-	String classHoverName = "portlet-section-body-hover results-row hover";
+	String className = "portlet-section-body results-row hover";
 
 	if (MathUtil.isEven(i)) {
-		className = "portlet-section-alternate results-row alt";
-		classHoverName = "portlet-section-alternate-hover results-row alt hover";
+		className = "portlet-section-alternate results-row alt hover";
 	}
 
 	double votesPercent = 0.0;
@@ -62,7 +60,7 @@ for (int i = 0; i < choices.size(); i++) {
 	int votesPercentWidth = (int)Math.floor(votesPercent * votesPixelWidth);
 %>
 
-<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
+<tr class="<%= className %>" style="font-size: x-small;">
 	<td>
 		<%= percentFormat.format(votesPercent) %>
 	</td>

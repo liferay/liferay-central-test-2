@@ -382,12 +382,10 @@ portletURL.setParameter("tabs1", tabs1);
 
 						article = article.toEscapedModel();
 
-						String className = "portlet-section-body results-row";
-						String classHoverName = "portlet-section-body-hover results-row hover";
+						String className = "portlet-section-body results-row hover";
 
 						if (MathUtil.isEven(i)) {
-							className = "portlet-section-alternate results-row alt";
-							classHoverName = "portlet-section-alternate-hover results-row alt hover";
+							className = "portlet-section-alternate results-row alt hover";
 						}
 					%>
 
@@ -399,7 +397,7 @@ portletURL.setParameter("tabs1", tabs1);
 							<portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
 						</portlet:renderURL>
 
-						<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
+						<tr class="<%= className %>" style="font-size: x-small;">
 							<td>
 								<aui:a href="<%= editArticleURL %>"><%= article.getArticleId() %></aui:a>
 							</td>
@@ -432,12 +430,10 @@ portletURL.setParameter("tabs1", tabs1);
 
 						structure = structure.toEscapedModel();
 
-						String className = "portlet-section-body results-row";
-						String classHoverName = "portlet-section-body-hover results-row hover";
+						String className = "portlet-section-body results-row hover";
 
 						if (MathUtil.isEven(i)) {
-							className = "portlet-section-alternate results-row alt";
-							classHoverName = "portlet-section-alternate-hover results-row alt hover";
+							className = "portlet-section-alternate results-row alt hover";
 						}
 					%>
 
@@ -448,7 +444,7 @@ portletURL.setParameter("tabs1", tabs1);
 							<portlet:param name="structureId" value="<%= structure.getStructureId() %>" />
 						</portlet:renderURL>
 
-						<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
+						<tr class="<%= className %>" style="font-size: x-small;">
 							<td>
 								<aui:a href="<%= editStructureURL %>"><%= structure.getId() %></aui:a>
 							</td>
@@ -481,12 +477,10 @@ portletURL.setParameter("tabs1", tabs1);
 
 						template = template.toEscapedModel();
 
-						String className = "portlet-section-body results-row";
-						String classHoverName = "portlet-section-body-hover results-row hover";
+						String className = "portlet-section-body results-row hover";
 
 						if (MathUtil.isEven(recentTemplatesSize - i - 1)) {
-							className = "portlet-section-alternate results-row alt";
-							classHoverName = "portlet-section-alternate-hover results-row alt hover";
+							className = "portlet-section-alternate results-row alt hover";
 						}
 					%>
 
@@ -497,7 +491,7 @@ portletURL.setParameter("tabs1", tabs1);
 							<portlet:param name="templateId" value="<%= template.getTemplateId() %>" />
 						</portlet:renderURL>
 
-						<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
+						<tr class="<%= className %>" style="font-size: x-small;">
 							<td>
 								<aui:a href="<%= editTemplateURL %>"><%= template.getId() %></aui:a>
 							</td>

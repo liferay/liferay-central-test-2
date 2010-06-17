@@ -199,7 +199,6 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 				modelVar="role"
 			>
 				<liferay-util:param name="className" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
-				<liferay-util:param name="classHoverName" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
 
 				<%
 				String definePermissionsHREF = null;

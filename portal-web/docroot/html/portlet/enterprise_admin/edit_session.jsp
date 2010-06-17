@@ -105,16 +105,14 @@ userTracker = userTracker.toEscapedModel();
 							for (int i = 0; i < paths.size(); i++) {
 								UserTrackerPath userTrackerPath = paths.get(i);
 
-								String className = "portlet-section-body results-row";
-								String classHoverName = "portlet-section-body-hover results-row hover";
+								String className = "portlet-section-body results-row hover";
 
 								if (MathUtil.isEven(i)) {
-									className = "portlet-section-alternate results-row alt";
-									classHoverName = "portlet-section-alternate-hover results-row alt hover";
+									className = "portlet-section-alternate results-row alt hover";
 								}
 							%>
 
-								<tr class="<%= className %>" style="font-size: xx-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
+								<tr class="<%= className %>" style="font-size: xx-small;">
 									<td class="lfr-top">
 										<%= StringUtil.replace(userTrackerPath.getPath(), "&", "& ") %>
 									</td>
@@ -157,16 +155,14 @@ userTracker = userTracker.toEscapedModel();
 									while (itr.hasNext()) {
 										String attrName = (String)itr.next();
 
-										String className = "portlet-section-body results-row";
-										String classHoverName = "portlet-section-body-hover results-row hover";
+										String className = "portlet-section-body results-row hover";
 
 										if (MathUtil.isEven(counter++)) {
-											className = "portlet-section-alternate results-row alt";
-											classHoverName = "portlet-section-alternate-hover results-row alt hover";
+											className = "portlet-section-alternate results-row alt hover";
 										}
 							%>
 
-										<tr class="<%= className %>" style="font-size: xx-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
+										<tr class="<%= className %>" style="font-size: xx-small;">
 											<td class="lfr-top">
 												<%= attrName %>
 											</td>

@@ -76,10 +76,10 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 <c:if test="<%= show && assetRenderer.hasViewPermission(permissionChecker) %>">
 
 	<%
-	String style = "class=\"portlet-section-body results-row\" onmouseover=\"this.className = 'portlet-section-body-hover results-row hover';\" onmouseout=\"this.className = 'portlet-section-body results-row';\"";
+	String style = "class=\"portlet-section-body results-row hover\"";
 
 	if (assetEntryIndex % 2 == 0) {
-		style = "class=\"portlet-section-alternate results-row alt\" onmouseover=\"this.className = 'portlet-section-alternate-hover results-row alt hover';\" onmouseout=\"this.className = 'portlet-section-alternate results-row alt';\"";
+		style = "class=\"portlet-section-alternate results-row alt hover\"";
 	}
 	%>
 

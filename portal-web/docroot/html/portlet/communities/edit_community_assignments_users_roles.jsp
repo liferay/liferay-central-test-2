@@ -111,7 +111,6 @@ for (int i = 0; i < results.size(); i++) {
 	// CSS
 
 	row.setClassName(EnterpriseAdminUtil.getCssClassName(role));
-	row.setClassHoverName(EnterpriseAdminUtil.getCssClassName(role));
 
 	// Add result row
 
