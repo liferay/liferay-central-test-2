@@ -39,7 +39,7 @@ public class WorkflowTaskSearch extends SearchContainer<WorkflowTask> {
 	static Map<String, String> orderableHeaders = new HashMap<String, String>();
 
 	static {
-		headerNames.add("name");
+		headerNames.add("task");
 		headerNames.add("asset-title");
 		headerNames.add("last-activity-date");
 		headerNames.add("due-date");

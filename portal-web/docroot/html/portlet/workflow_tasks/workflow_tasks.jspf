@@ -106,7 +106,7 @@
 				buffer.append("<span class=\"name\" id=\"");
 				buffer.append(workflowTask.getWorkflowTaskId());
 				buffer.append("\">");
-				buffer.append(workflowTask.getName());
+				buffer.append(LanguageUtil.get(pageContext, workflowTask.getName()));
 				buffer.append("</span>");
 				%>
 
@@ -184,7 +184,7 @@
 				<%
 				String state = WorkflowInstanceLinkLocalServiceUtil.getState(companyId, groupId, className, classPK);
 
-				buffer.append(state);
+				buffer.append(LanguageUtil.get(pageContext, state));
 				%>
 
 			</liferay-ui:search-container-column-text>

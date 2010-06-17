@@ -343,6 +343,11 @@ action.VIEW_USER=Ver usuario
 ## Messages
 ##
 
+approve-content=Aprobar el contenido
+assigned-to=Asignado a
+resubmit=Reintentar
+review-content=Revisar el contenido
+review-failed=Rechazar contenido
 1-day=1 día
 1-minute=1 minuto
 1-month=1 mes
@@ -868,12 +873,12 @@ assign-regular-roles=Asignar roles normales
 assign-reviewers=Asignar revisores
 assign-students=Asignar estudiantes
 assign-teachers=Asignar profesores
-assign-to-...=Asigne a… (Automatic Translation)
+assign-to-...=Asignar a…
 assign-to-communities=Asignar a comunidades
 assign-to-me=Asígnármelo a mi
 assign-to-organizations=Asignar a organizaciones
 assign-to-users=Asignar a usuarios
-assign-to=Asigne a (Automatic Translation)
+assign-to=Asignar a
 assign-user-permissions=Asignar permisos de usuario
 assign-user-roles=Asignar roles de usuario
 assign-users=Asignar usuarios
@@ -882,7 +887,7 @@ assign=Asignar
 assigned-issues=Issues asignados
 assigned-to-me=Asignado a mí
 assigned-to-my-roles=Asignado a uno de mis roles
-assigned-to-x=Assigned to {0} (Automatic Copy)
+assigned-to-x=Asignado a {0}
 assigned=Asignado
 assignee=Persona asignada
 associate=Asignar
