@@ -157,6 +157,14 @@ public class BeanPropertiesImplTest extends BaseTestCase {
 		BeanPropertiesUtil.copyProperties(sourceBar, destinationBar);
 
 		assertSame(destinationBar.getFoo(), sourceFoo);
+
+		Baz baz = new Baz();
+
+		destinationFoo = new Foo();
+
+		BeanPropertiesUtil.copyProperties(baz, destinationFoo);
+
+		assertEquals("read-only", destinationFoo.getString());
 	}
 
 	public void testCopySomeProperties() {
@@ -391,6 +399,18 @@ public class BeanPropertiesImplTest extends BaseTestCase {
 		value = (String)BeanPropertiesUtil.getObject(foo, _NONEXISTENT, "none");
 
 		assertEquals("none", value);
+	}
+
+	public void testReadOnlyProperties() {
+		Baz baz = new Baz();
+
+		BeanPropertiesUtil.setProperty(baz, "string", "value");
+
+		assertEquals("read-only", baz.getString());
+
+		String value = BeanPropertiesUtil.getString(baz, "string", "none");
+
+		assertEquals("read-only", value);
 	}
 
 	public void testSetInnerProperty() {
