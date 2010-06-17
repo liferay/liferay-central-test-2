@@ -888,7 +888,7 @@ else {
 <c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
 
 		<%
-		String modules = "";
+		String modules = StringPool.BLANK;
 
 		if (showConfigurationIcon) {
 			modules += "aui-editable";
