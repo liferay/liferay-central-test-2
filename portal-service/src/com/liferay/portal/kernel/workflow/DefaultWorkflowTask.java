@@ -14,9 +14,15 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import com.liferay.portal.model.User;
+
 import java.io.Serializable;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,16 +34,12 @@ import java.util.Map;
  */
 public class DefaultWorkflowTask implements Serializable, WorkflowTask {
 
-	public String getAssigneeEmailAddress() {
-		return _assigneeEmailAddress;
-	}
-
-	public long getAssigneeRoleId() {
-		return _assigneeRoleId;
-	}
-
 	public long getAssigneeUserId() {
-		return _assigneeUserId;
+		if (!isAssignedToSingleUser()) {
+			return -1;
+		}
+
+		return _workflowTaskAssignees.get(0).getAssigneeClassPK();
 	}
 
 	public Date getCompletionDate() {
@@ -80,8 +82,32 @@ public class DefaultWorkflowTask implements Serializable, WorkflowTask {
 		return _workflowInstanceId;
 	}
 
+	public List<WorkflowTaskAssignee> getWorkflowTaskAssignees() {
+		if (_workflowTaskAssignees == null) {
+			return Collections.EMPTY_LIST;
+		}
+
+		return _workflowTaskAssignees;
+	}
+
 	public long getWorkflowTaskId() {
 		return _workflowTaskId;
+	}
+
+	public boolean isAssignedToSingleUser() {
+		if (_workflowTaskAssignees == null) {
+			return false;
+		}
+
+		if (_workflowTaskAssignees.size() != 1) {
+			return false;
+		}
+
+		WorkflowTaskAssignee workflowTaskAssignee =
+			_workflowTaskAssignees.get(0);
+
+		return User.class.getName().equals(
+			workflowTaskAssignee.getAssigneeClassName());
 	}
 
 	public boolean isAsynchronous() {
@@ -95,18 +121,6 @@ public class DefaultWorkflowTask implements Serializable, WorkflowTask {
 		else {
 			return false;
 		}
-	}
-
-	public void setAssigneeEmailAddress(String assigneeEmailAddress) {
-		_assigneeEmailAddress = assigneeEmailAddress;
-	}
-
-	public void setAssigneeRoleId(long assigneeRoleId) {
-		_assigneeRoleId = assigneeRoleId;
-	}
-
-	public void setAssigneeUserId(long assigneeUserId) {
-		_assigneeUserId = assigneeUserId;
 	}
 
 	public void setAsynchronous(boolean asynchronous) {
@@ -155,13 +169,20 @@ public class DefaultWorkflowTask implements Serializable, WorkflowTask {
 		_workflowInstanceId = workflowInstanceId;
 	}
 
+	public void setWorkflowTaskAssignees(
+		Collection<WorkflowTaskAssignee> workflowTaskAssignees) {
+
+		if (_workflowTaskAssignees == null) {
+			_workflowTaskAssignees  = new ArrayList<WorkflowTaskAssignee>();
+		}
+
+		_workflowTaskAssignees.addAll(workflowTaskAssignees);
+	}
+
 	public void setWorkflowTaskId(long workflowTaskId) {
 		_workflowTaskId = workflowTaskId;
 	}
 
-	private String _assigneeEmailAddress;
-	private long _assigneeRoleId;
-	private long _assigneeUserId;
 	private boolean _asynchronous;
 	private Date _completionDate;
 	private Date _createDate;
@@ -173,6 +194,7 @@ public class DefaultWorkflowTask implements Serializable, WorkflowTask {
 	private String _workflowDefinitionName;
 	private int _workflowDefinitionVersion;
 	private long _workflowInstanceId;
+	private List<WorkflowTaskAssignee> _workflowTaskAssignees;
 	private long _workflowTaskId;
 
 }

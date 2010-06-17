@@ -57,7 +57,7 @@ long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getC
 				<div class="task-author">
 					<aui:field-wrapper label="assigned-to">
 						<c:choose>
-							<c:when test="<%= workflowTask.getAssigneeUserId() > 0 %>">
+							<c:when test="<%= workflowTask.isAssignedToSingleUser() %>">
 								<%= HtmlUtil.escape(PortalUtil.getUserName(workflowTask.getAssigneeUserId(), StringPool.BLANK)) %>
 							</c:when>
 							<c:otherwise>
@@ -65,7 +65,7 @@ long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getC
 							</c:otherwise>
 						</c:choose>
 
-						<c:if test="<%= workflowTask.getAssigneeUserId() != user.getUserId() %>">
+						<c:if test="<%= !workflowTask.isAssignedToSingleUser() %>">
 							<%= StringPool.DASH %>
 
 							<portlet:actionURL var="assignToMeURL">

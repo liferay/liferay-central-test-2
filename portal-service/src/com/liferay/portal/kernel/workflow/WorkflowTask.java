@@ -17,6 +17,7 @@ package com.liferay.portal.kernel.workflow;
 import java.io.Serializable;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,10 +29,6 @@ import java.util.Map;
  * @author Marcellus Tavares
  */
 public interface WorkflowTask {
-
-	public String getAssigneeEmailAddress();
-
-	public long getAssigneeRoleId();
 
 	public long getAssigneeUserId();
 
@@ -55,7 +52,11 @@ public interface WorkflowTask {
 
 	public long getWorkflowInstanceId();
 
+	public List<WorkflowTaskAssignee> getWorkflowTaskAssignees();
+
 	public long getWorkflowTaskId();
+
+	public boolean isAssignedToSingleUser();
 
 	public boolean isAsynchronous();
 

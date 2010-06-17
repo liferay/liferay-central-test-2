@@ -25,6 +25,7 @@
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowLog" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowLogManagerUtil" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowTask" %>
+<%@ page import="com.liferay.portal.kernel.workflow.WorkflowTaskAssignee" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowTaskDueDateException" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil" %>
 <%@ page import="com.liferay.portal.kernel.workflow.comparator.WorkflowComparatorFactoryUtil" %>
@@ -41,9 +42,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 <%!
 private boolean _isWorkflowTaskAssignedToUser(WorkflowTask workflowTask, User user) {
-	if ((workflowTask.getAssigneeUserId() == user.getUserId()) ||
-		(Validator.equals(workflowTask.getAssigneeEmailAddress(), user.getEmailAddress()))) {
-
+	if (workflowTask.getAssigneeUserId() == user.getUserId()) {
 		return true;
 	}
 

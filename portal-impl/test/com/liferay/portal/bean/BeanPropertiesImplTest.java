@@ -141,7 +141,7 @@ public class BeanPropertiesImplTest extends BaseTestCase {
 		Bar destBar = new Bar();
 
 		assertNotSame(destBar.getFoo(), foo);
-		
+
 		BeanPropertiesUtil.copyProperties(bar, destBar);
 
 		assertSame(destBar.getFoo(), foo);

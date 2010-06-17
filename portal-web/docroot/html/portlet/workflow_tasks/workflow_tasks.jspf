@@ -66,7 +66,7 @@
 				>
 
 					<%
-					if (workflowTask.getAssigneeUserId() != 0 ){
+					if (workflowTask.isAssignedToSingleUser()) {
 						User assigneeUser = UserLocalServiceUtil.getUser(workflowTask.getAssigneeUserId());
 
 						buffer.append("<img alt=\"");
