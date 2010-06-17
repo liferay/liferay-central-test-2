@@ -17,5 +17,10 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <c:if test="<%= portletDisplay.isShowPrintIcon() %>">
-	<liferay-ui:icon cssClass="portlet-print portlet-print-icon" image="../portlet/print" message="print" target="_blank" toolTip="<%= false %>" url="<%= portletDisplay.getURLPrint() %>" />
+	<liferay-ui:icon
+		cssClass="portlet-print portlet-print-icon"
+		image="../portlet/print"
+		message="print" target="_blank"
+		toolTip="<%= false %>" url="<%= portletDisplay.getURLPrint() %>"
+	/>
 </c:if>

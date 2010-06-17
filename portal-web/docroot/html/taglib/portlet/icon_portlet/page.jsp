@@ -35,5 +35,8 @@ else {
 %>
 
 <c:if test="<%= showPortletIcon %>">
-	<liferay-ui:icon message="<%= message %>" src="<%= src %>" />
+	<liferay-ui:icon
+		message="<%= message %>"
+		src="<%= src %>"
+	/>
 </c:if>

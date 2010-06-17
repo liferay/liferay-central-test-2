@@ -17,5 +17,10 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <c:if test="<%= portletDisplay.isShowEditDefaultsIcon() %>">
-	<liferay-ui:icon image="../portlet/edit_defaults" message="default-preferences" toolTip="<%= false %>" url="<%= portletDisplay.getURLEditDefaults() %>" />
+	<liferay-ui:icon
+		image="../portlet/edit_defaults"
+		message="default-preferences"
+		toolTip="<%= false %>"
+		url="<%= portletDisplay.getURLEditDefaults() %>"
+	/>
 </c:if>

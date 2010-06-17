@@ -17,5 +17,11 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <c:if test="<%= portletDisplay.isShowBackIcon() %>">
-	<liferay-ui:icon cssClass="portlet-back portlet-back-icon" image="../portlet/back" message="back" toolTip="<%= false %>" url="<%= portletDisplay.getURLBack() %>" />
+	<liferay-ui:icon
+		cssClass="portlet-back portlet-back-icon"
+		image="../portlet/back"
+		message="back"
+		toolTip="<%= false %>"
+		url="<%= portletDisplay.getURLBack() %>"
+	/>
 </c:if>
