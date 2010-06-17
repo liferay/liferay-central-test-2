@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
-import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;
@@ -362,9 +361,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				DLFolderUtil.findByPrimaryKey(folderId);
 			}
 
-			if (context.getDataStrategy().equals(
-					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
-
+			if (context.isDataStrategyMirror()) {
 				DLFileEntry existingFileEntry = DLFileEntryUtil.fetchByUUID_G(
 					fileEntry.getUuid(), groupId);
 
@@ -557,9 +554,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			DLFileShortcut importedFileShortcut = null;
 
-			if (context.getDataStrategy().equals(
-					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
-
+			if (context.isDataStrategyMirror()) {
 				DLFileShortcut existingFileShortcut =
 					DLFileShortcutUtil.fetchByUUID_G(
 						fileShortcut.getUuid(), context.getScopeGroupId());
@@ -721,9 +716,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				DLFolderUtil.findByPrimaryKey(parentFolderId);
 			}
 
-			if (context.getDataStrategy().equals(
-					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
-
+			if (context.isDataStrategyMirror()) {
 				DLFolder existingFolder = DLFolderUtil.fetchByUUID_G(
 					folder.getUuid(), groupId);
 

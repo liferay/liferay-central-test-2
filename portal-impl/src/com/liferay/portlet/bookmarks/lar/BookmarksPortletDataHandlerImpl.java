@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
-import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.xml.Document;
@@ -424,9 +423,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		BookmarksFolder importedFolder = null;
 
-		if (context.getDataStrategy().equals(
-				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
-
+		if (context.isDataStrategyMirror()) {
 			BookmarksFolder existingFolder = BookmarksFolderUtil.fetchByUUID_G(
 				folder.getUuid(), context.getScopeGroupId());
 

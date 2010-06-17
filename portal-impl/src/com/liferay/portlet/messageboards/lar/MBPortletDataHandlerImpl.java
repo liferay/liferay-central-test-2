@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
-import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MapUtil;
@@ -537,9 +536,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				MBCategoryUtil.findByPrimaryKey(parentCategoryId);
 			}
 
-			if (context.getDataStrategy().equals(
-					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
-
+			if (context.isDataStrategyMirror()) {
 				MBCategory existingCategory = MBCategoryUtil.fetchByUUID_G(
 					category.getUuid(), context.getScopeGroupId());
 
@@ -706,9 +703,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				MBThreadUtil.findByPrimaryKey(threadId);
 			}
 
-			if (context.getDataStrategy().equals(
-					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
-
+			if (context.isDataStrategyMirror()) {
 				MBMessage existingMessage = MBMessageUtil.fetchByUUID_G(
 					message.getUuid(), context.getScopeGroupId());
 

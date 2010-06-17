@@ -129,9 +129,9 @@ public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Document document = SAXReaderUtil.read(data);
 
-		Element root = document.getRootElement();
+		Element rootElement = document.getRootElement();
 
-		Element questionsElement = root.element("questions");
+		Element questionsElement = rootElement.element("questions");
 
 		for (Element questionEl : questionsElement.elements("question")) {
 			String path = questionEl.attributeValue("path");
@@ -146,7 +146,7 @@ public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 			PollsPortletDataHandlerImpl.importQuestion(context, question);
 		}
 
-		Element choicesElement = root.element("choices");
+		Element choicesElement = rootElement.element("choices");
 
 		for (Element choiceElement : choicesElement.elements("choice")) {
 			String path = choiceElement.attributeValue("path");
@@ -161,7 +161,7 @@ public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "votes")) {
-			Element votesElement = root.element("votes");
+			Element votesElement = rootElement.element("votes");
 
 			for (Element voteElement : votesElement.elements("vote")) {
 				String path = voteElement.attributeValue("path");

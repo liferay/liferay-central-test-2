@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
-import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -168,9 +167,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 				IGFolderUtil.findByPrimaryKey(parentFolderId);
 			}
 
-			if (context.getDataStrategy().equals(
-					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
-
+			if (context.isDataStrategyMirror()) {
 				IGFolder existingFolder = IGFolderUtil.fetchByUUID_G(
 					folder.getUuid(), context.getScopeGroupId());
 
@@ -298,9 +295,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		IGImage importedImage = null;
 
 		try {
-			if (context.getDataStrategy().equals(
-					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
-
+			if (context.isDataStrategyMirror()) {
 				IGImage existingImage = IGImageUtil.fetchByUUID_G(
 					image.getUuid(), groupId);
 

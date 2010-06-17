@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.polls.lar;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
@@ -68,7 +67,7 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static void exportChoice(
 			PortletDataContext context, Element questionsElement,
 			PollsChoice choice)
-		throws SystemException {
+		throws Exception {
 
 		String path = getChoicePath(context, choice);
 
@@ -129,7 +128,7 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static void exportVote(
 			PortletDataContext context, Element questionsElement,
 			PollsVote vote)
-		throws SystemException {
+		throws Exception {
 
 		String path = getVotePath(context, vote);
 

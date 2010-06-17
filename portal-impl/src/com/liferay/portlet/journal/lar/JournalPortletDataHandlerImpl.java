@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
-import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
@@ -1072,9 +1071,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		JournalArticle importedArticle = null;
 
-		if (context.getDataStrategy().equals(
-				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
-
+		if (context.isDataStrategyMirror()) {
 			JournalArticle existingArticle = JournalArticleUtil.fetchByUUID_G(
 				article.getUuid(), groupId);
 
@@ -1263,9 +1260,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		JournalFeed existingFeed = null;
 
-		if (context.getDataStrategy().equals(
-				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
-
+		if (context.isDataStrategyMirror()) {
 			existingFeed = JournalFeedUtil.fetchByUUID_G(
 				feed.getUuid(), groupId);
 
@@ -1414,9 +1409,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		JournalStructure existingStructure = null;
 
-		if (context.getDataStrategy().equals(
-				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
-
+		if (context.isDataStrategyMirror()) {
 			existingStructure = JournalStructureUtil.fetchByUUID_G(
 				structure.getUuid(), groupId);
 
@@ -1554,9 +1547,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		JournalTemplate existingTemplate = null;
 
-		if (context.getDataStrategy().equals(
-				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
-
+		if (context.isDataStrategyMirror()) {
 			existingTemplate = JournalTemplateUtil.fetchByUUID_G(
 				template.getUuid(), groupId);
 
