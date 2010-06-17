@@ -62,7 +62,7 @@ double version = GetterUtil.getDouble((String)request.getAttribute("aui:workflow
 
 			sb.append(StringPool.SPACE);
 			sb.append(StringPool.OPEN_PARENTHESIS);
-			sb.append(workflowStatus);
+			sb.append(LanguageUtil.get(pageContext, workflowStatus));
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 
 			additionalText = sb.toString();
