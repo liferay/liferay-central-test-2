@@ -64,6 +64,15 @@ public class WorkflowInstanceManagerUtil {
 			completed);
 	}
 
+	public int getWorkflowInstanceCount(
+			long companyId, Long userId, String assetClassName,
+			Long assetClassPK, Boolean completed)
+		throws WorkflowException {
+
+		return _workflowInstanceManager.getWorkflowInstanceCount(
+			companyId, userId, assetClassName, assetClassPK, completed);
+	}
+
 	public static WorkflowInstanceManager getWorkflowInstanceManager() {
 		return _workflowInstanceManager;
 	}
@@ -78,6 +87,17 @@ public class WorkflowInstanceManagerUtil {
 			companyId, workflowDefinitionName,
 			workflowDefinitionVersion, completed, start,
 			end, orderByComparator);
+	}
+
+	public List<WorkflowInstance> getWorkflowInstances(
+			long companyId, Long userId, String assetClassName,
+			Long assetClassPK, Boolean completed, int start,
+			int end, OrderByComparator orderByComparator)
+		throws WorkflowException {
+
+		return _workflowInstanceManager.getWorkflowInstances(
+			companyId, userId, assetClassName, assetClassPK,
+			completed, start, end, orderByComparator);
 	}
 
 	public static WorkflowInstance signalWorkflowInstance(

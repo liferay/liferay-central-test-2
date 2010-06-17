@@ -49,9 +49,20 @@ public interface WorkflowInstanceManager {
 			Integer workflowDefinitionVersion, Boolean completed)
 		throws WorkflowException;
 
+	public int getWorkflowInstanceCount(
+			long companyId, Long userId, String assetClassName,
+			Long assetClassPK, Boolean completed)
+		throws WorkflowException;
+
 	public List<WorkflowInstance> getWorkflowInstances(
 			long companyId, String workflowDefinitionName,
 			Integer workflowDefinitionVersion, Boolean completed, int start,
+			int end, OrderByComparator orderByComparator)
+		throws WorkflowException;
+
+	public List<WorkflowInstance> getWorkflowInstances(
+			long companyId, Long userId, String assetClassName,
+			Long assetClassPK, Boolean completed, int start,
 			int end, OrderByComparator orderByComparator)
 		throws WorkflowException;
 

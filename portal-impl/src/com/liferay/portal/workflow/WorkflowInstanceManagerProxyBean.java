@@ -16,6 +16,7 @@ package com.liferay.portal.workflow;
 
 import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowInstance;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManager;
 
@@ -58,10 +59,28 @@ public class WorkflowInstanceManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
+	public int getWorkflowInstanceCount(
+			long companyId, Long userId, String assetClassName,
+			Long assetClassPK, Boolean completed) 
+		throws WorkflowException {
+
+		throw new UnsupportedOperationException();
+	}
+
 	public List<WorkflowInstance> getWorkflowInstances(
-		long companyId, String workflowDefinitionName,
-		Integer workflowDefinitionVersion, Boolean completed, int start,
-		int end, OrderByComparator orderByComparator) {
+			long companyId, String workflowDefinitionName,
+			Integer workflowDefinitionVersion, Boolean completed, int start,
+			int end, OrderByComparator orderByComparator)
+		throws WorkflowException {		
+
+		throw new UnsupportedOperationException();
+	}
+
+	public List<WorkflowInstance> getWorkflowInstances(
+			long companyId, Long userId, String assetClassName, Long assetClassPK,
+			Boolean completed, int start, int end,
+			OrderByComparator orderByComparator)
+		throws WorkflowException {
 
 		throw new UnsupportedOperationException();
 	}
