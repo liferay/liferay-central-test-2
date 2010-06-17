@@ -148,6 +148,8 @@ long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getC
 
 				PortletURL editPortletURL = workflowHandler.getURLEdit(classPK, (LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
 				String viewPortletURL = workflowHandler.getURLViewInContext(classPK, (LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, null);
+
+				viewPortletURL = HttpUtil.setParameter(viewPortletURL, "redirect", currentURL);
 				%>
 
 				<div class="task-content-actions">

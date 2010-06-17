@@ -1448,6 +1448,8 @@
 
 		<action path="/my_workflow_tasks/view" forward="portlet.workflow_tasks.view" />
 
+        <action path="/my_workflow_tasks/view_content" forward="portlet.asset_publisher.view_content" />
+
 		<!-- Navigation -->
 
 		<action path="/navigation/view" forward="portlet.navigation.view" />
@@ -2085,6 +2087,8 @@
 		</action>
 
 		<action path="/workflow_tasks/view" forward="portlet.workflow_tasks.view" />
+
+        <action path="/workflow_tasks/view_content" forward="portlet.asset_publisher.view_content" />
 
 		<!-- XSL Content -->
 
