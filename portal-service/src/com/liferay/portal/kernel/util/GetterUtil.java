@@ -35,7 +35,7 @@ public class GetterUtil {
 
 	public static final byte DEFAULT_BYTE = 0;
 
-	public static final byte DEFAULT_BYTE_VALUES = new byte[0];
+	public static final byte[] DEFAULT_BYTE_VALUES = new byte[0];
 
 	public static final Date[] DEFAULT_DATE_VALUES = new Date[0];
 
