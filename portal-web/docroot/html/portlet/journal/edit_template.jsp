@@ -37,8 +37,6 @@ Group group = GroupLocalServiceUtil.getGroup(groupId);
 String templateId = BeanParamUtil.getString(template, request, "templateId");
 String newTemplateId = ParamUtil.getString(request, "newTemplateId");
 
-boolean autoTemplateId = ParamUtil.getBoolean(request, "autoTemplateId", false);
-
 String structureId = BeanParamUtil.getString(template, request, "structureId");
 
 String structureName = StringPool.BLANK;
@@ -130,7 +128,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 					<c:otherwise>
 						<aui:input cssClass="lfr-input-text-container" label="id" name="newTemplateId" field="templateId" fieldParam="newTemplateId" value="<%= newTemplateId %>" />
 
-						<aui:input label="autogenerate-id" name="autoTemplateId" type="checkbox" value="<%= autoTemplateId %>" />
+						<aui:input label="autogenerate-id" name="autoTemplateId" type="checkbox" />
 					</c:otherwise>
 				</c:choose>
 			</c:when>
