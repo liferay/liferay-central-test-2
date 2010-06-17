@@ -646,7 +646,8 @@ Liferay.Service.registerClass(
 	Liferay.Service.Expando, "ExpandoValue",
 	{
 		addValue: true,
-		getData: true
+		getData: true,
+		getJSONData: true
 	}
 );
 

@@ -89,5 +89,38 @@ public class ExpandoValueServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.expando.model.ExpandoValueSoap addValue(
+		long companyId, java.lang.String className, java.lang.String tableName,
+		java.lang.String columnName, long classPK, java.lang.String data)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.expando.model.ExpandoValue returnValue = ExpandoValueServiceUtil.addValue(companyId,
+					className, tableName, columnName, classPK, data);
+
+			return com.liferay.portlet.expando.model.ExpandoValueSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.kernel.json.JSONObject getJSONData(
+		long companyId, java.lang.String className, java.lang.String tableName,
+		java.lang.String columnName, long classPK) throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONObject returnValue = ExpandoValueServiceUtil.getJSONData(companyId,
+					className, tableName, columnName, classPK);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(ExpandoValueServiceSoap.class);
 }

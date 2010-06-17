@@ -16,6 +16,9 @@ package com.liferay.portlet.expando.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.ExpandoValue;
@@ -46,6 +49,21 @@ public class ExpandoValueServiceImpl extends ExpandoValueServiceBaseImpl {
 			companyId, className, tableName, columnName, classPK, data);
 	}
 
+	public ExpandoValue addValue(
+			long companyId, String className, String tableName,
+			String columnName, long classPK, String data)
+		throws PortalException, SystemException {
+
+		ExpandoColumn column = expandoColumnLocalService.getColumn(
+			companyId, className, tableName, columnName);
+
+		ExpandoColumnPermission.check(
+			getPermissionChecker(), column, ActionKeys.UPDATE);
+
+		return expandoValueLocalService.addValue(
+			companyId, className, tableName, columnName, classPK, data);
+	}
+
 	public Serializable getData(
 			long companyId, String className, String tableName,
 			String columnName, long classPK)
@@ -59,6 +77,28 @@ public class ExpandoValueServiceImpl extends ExpandoValueServiceBaseImpl {
 
 			return expandoValueLocalService.getData(
 				companyId, className, tableName, columnName, classPK);
+		}
+		else {
+			return null;
+		}
+	}
+
+	public JSONObject getJSONData(
+			long companyId, String className, String tableName,
+			String columnName, long classPK)
+		throws PortalException, SystemException {
+
+		ExpandoColumn column = expandoColumnLocalService.getColumn(
+			companyId, className, tableName, columnName);
+
+		if (ExpandoColumnPermission.contains(
+				getPermissionChecker(), column, ActionKeys.VIEW)) {
+
+			String data = expandoValueLocalService.getData(
+				companyId, className, tableName, columnName, classPK,
+				StringPool.BLANK);
+
+			return JSONFactoryUtil.createJSONObject(data);
 		}
 		else {
 			return null;

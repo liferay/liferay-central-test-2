@@ -45,6 +45,15 @@ public class ExpandoValueServiceWrapper implements ExpandoValueService {
 			columnName, classPK, data);
 	}
 
+	public com.liferay.portlet.expando.model.ExpandoValue addValue(
+		long companyId, java.lang.String className, java.lang.String tableName,
+		java.lang.String columnName, long classPK, java.lang.String data)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _expandoValueService.addValue(companyId, className, tableName,
+			columnName, classPK, data);
+	}
+
 	public java.io.Serializable getData(long companyId,
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK)
@@ -52,6 +61,15 @@ public class ExpandoValueServiceWrapper implements ExpandoValueService {
 			com.liferay.portal.kernel.exception.SystemException {
 		return _expandoValueService.getData(companyId, className, tableName,
 			columnName, classPK);
+	}
+
+	public com.liferay.portal.kernel.json.JSONObject getJSONData(
+		long companyId, java.lang.String className, java.lang.String tableName,
+		java.lang.String columnName, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _expandoValueService.getJSONData(companyId, className,
+			tableName, columnName, classPK);
 	}
 
 	public ExpandoValueService getWrappedExpandoValueService() {
