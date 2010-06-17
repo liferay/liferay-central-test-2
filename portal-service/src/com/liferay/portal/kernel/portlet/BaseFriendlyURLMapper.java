@@ -128,43 +128,27 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 	}
 
 	protected void addParameter(
-		Map<String, String[]> parameterMap, String name, boolean value) {
-
-		addParameter(parameterMap, name, String.valueOf(value));
-	}
-
-	protected void addParameter(
-		Map<String, String[]> parameterMap, String name, double value) {
-
-		addParameter(parameterMap, name, String.valueOf(value));
-	}
-
-	protected void addParameter(
-		Map<String, String[]> parameterMap, String name, int value) {
-
-		addParameter(parameterMap, name, String.valueOf(value));
-	}
-
-	protected void addParameter(
-		Map<String, String[]> parameterMap, String name, long value) {
-
-		addParameter(parameterMap, name, String.valueOf(value));
-	}
-
-	protected void addParameter(
 		Map<String, String[]> parameterMap, String name, Object value) {
 
-		addParameter(parameterMap, name, String.valueOf(value));
-	}
-
-	protected void addParameter(
-		Map<String, String[]> parameterMap, String name, short value) {
-
-		addParameter(parameterMap, name, String.valueOf(value));
+		addParameter(getNamespace(), parameterMap, name, String.valueOf(value));
 	}
 
 	protected void addParameter(
 		Map<String, String[]> parameterMap, String name, String value) {
+
+		addParameter(getNamespace(), parameterMap, name, value);
+	}
+
+	protected void addParameter(
+		String namespace, Map<String, String[]> parameterMap, String name,
+		Object value) {
+
+		addParameter(namespace, parameterMap, name, String.valueOf(value));
+	}
+
+	protected void addParameter(
+		String namespace, Map<String, String[]> parameterMap, String name,
+		String value) {
 
 		try {
 			if (!PortalUtil.isReservedParameter(name)) {
@@ -175,7 +159,7 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 					name = prpIdentifers.get(name);
 				}
 				else {
-					name = getNamespace() + name;
+					name = namespace + name;
 				}
 			}
 

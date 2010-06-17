@@ -17,6 +17,9 @@ package com.liferay.portal.kernel.portlet;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.PortletConstants;
+import com.liferay.portal.util.PortalUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,8 +43,23 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 			portletURLParameters);
 
 		WindowState windowState = portletURL.getWindowState();
-		addParameter(parameters, "p_p_state", windowState);
-		addParameter(parameters, "p_p_lifecycle", getLifecycle(portletURL));
+		parameters.put("p_p_state", new String[] {String.valueOf(windowState)});
+		parameters.put("p_p_lifecycle", new String[] {getLifecycle(portletURL)});
+
+		if (isPortletInstanceable()) {
+			String portletId = portletURL.getPortletId();
+			parameters.put("p_p_id", new String[] {portletId});
+
+			if (Validator.isNotNull(portletId)) {
+				String[] parts = portletId.split(
+					PortletConstants.INSTANCE_SEPARATOR);
+
+				if (parts.length > 1) {
+					String instanceId = parts[1];
+					parameters.put("instanceId", new String[] {instanceId});
+				}
+			}
+		}
 
 		String friendlyURLPath = router.parametersToUrl(parameters);
 
@@ -67,16 +85,6 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 		String friendlyURLPath, Map<String, String[]> parameterMap,
 		Map<String, Object> requestContext) {
 
-		addParameter(parameterMap, "p_p_id", getPortletId());
-
-		if (!parameterMap.containsKey("p_p_lifecycle")) {
-			addParameter(parameterMap, "p_p_lifecycle", "0");
-		}
-
-		if (!parameterMap.containsKey("p_p_mode")) {
-			addParameter(parameterMap, "p_p_mode", PortletMode.VIEW);
-		}
-
 		friendlyURLPath = friendlyURLPath.substring(getMapping().length() + 1);
 
 		Map<String, String> routeParameters = router.urlToParameters(
@@ -91,11 +99,55 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 			return;
 		}
 
+		String portletId = null;
+		String namespace = null;
+
+		if (isPortletInstanceable()) {
+			portletId = routeParameters.remove("p_p_id");
+
+			if (Validator.isNull(portletId)) {
+				String instanceId = routeParameters.remove("instanceId");
+
+				if (Validator.isNull(instanceId)) {
+					if (_log.isErrorEnabled()) {
+						_log.error(
+							"Either p_p_id or instanceId must be provided " +
+								"for an instanceable portlet");
+					}
+
+					return;
+				}
+				else {
+					portletId =
+						getPortletId() + PortletConstants.INSTANCE_SEPARATOR +
+							instanceId;
+					namespace = PortalUtil.getPortletNamespace(portletId);
+				}
+			}
+			else {
+				namespace = PortalUtil.getPortletNamespace(portletId);
+			}
+		}
+		else {
+			portletId = getPortletId();
+			namespace = getNamespace();
+		}
+
+		addParameter(namespace, parameterMap, "p_p_id", portletId);
+
+		if (!parameterMap.containsKey("p_p_lifecycle")) {
+			addParameter(namespace, parameterMap, "p_p_lifecycle", "0");
+		}
+
+		if (!parameterMap.containsKey("p_p_mode")) {
+			addParameter(namespace, parameterMap, "p_p_mode", PortletMode.VIEW);
+		}
+
 		for (Map.Entry<String, String> entry : routeParameters.entrySet()) {
 			String name = entry.getKey();
 			String value = entry.getValue();
 
-			addParameter(parameterMap, name, value);
+			addParameter(namespace, parameterMap, name, value);
 		}
 	}
 

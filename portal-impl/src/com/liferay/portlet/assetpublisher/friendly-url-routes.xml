@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE routes PUBLIC "-//Liferay//DTD Friendly URL Routes 6.0.0//EN" "http://www.liferay.com/dtd/liferay-friendly-url-routes_6_0_0.dtd">
+
+<routes>
+	<route>
+		<pattern>/{instanceId}/rss</pattern>
+		<default-parameter name="p_p_lifecycle">2</default-parameter>
+		<default-parameter name="struts_action">/asset_publisher/rss</default-parameter>
+	</route>
+	<route>
+		<pattern>/{instanceId}/{type}/{urlTitle:(?!id)[^/]+}/{groupId:\d+}</pattern>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/asset_publisher/view_content</default-parameter>
+		<ignored-parameter name="assetEntryId" />
+	</route>
+	<route>
+		<pattern>/{instanceId}/{type}/{urlTitle:(?!id)[^/]+}</pattern>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/asset_publisher/view_content</default-parameter>
+		<ignored-parameter name="assetEntryId" />
+	</route>
+	<route>
+		<pattern>/{instanceId}/{type}/id/{assetEntryId:\d+}</pattern>
+		<default-parameter name="p_p_state">normal</default-parameter>
+		<default-parameter name="struts_action">/asset_publisher/view_content</default-parameter>
+	</route>
+	<route>
+		<pattern>/{instanceId}/{type}/{urlTitle:(?!id)[^/]+}/{groupId:\d+}/{p_p_state}</pattern>
+		<default-parameter name="struts_action">/asset_publisher/view_content</default-parameter>
+		<ignored-parameter name="assetEntryId" />
+	</route>
+	<route>
+		<pattern>/{instanceId}/{type}/{urlTitle:(?!id)[^/]+}/{p_p_state}</pattern>
+		<default-parameter name="struts_action">/asset_publisher/view_content</default-parameter>
+		<ignored-parameter name="assetEntryId" />
+	</route>
+	<route>
+		<pattern>/{instanceId}/{type}/id/{assetEntryId:\d+}/{p_p_state}</pattern>
+		<default-parameter name="struts_action">/asset_publisher/view_content</default-parameter>
+	</route>
+</routes>
