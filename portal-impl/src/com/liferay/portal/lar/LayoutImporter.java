@@ -102,6 +102,7 @@ import org.apache.commons.lang.time.StopWatch;
  * @author Wesley Gong
  * @author Zsigmond Rab
  * @author Douglas Wong
+ * @author Julio Camarero
  */
 public class LayoutImporter {
 
@@ -666,32 +667,6 @@ public class LayoutImporter {
 
 		Layout layout = (Layout)context.getZipEntryAsObject(path);
 
-		long parentLayoutId = layout.getParentLayoutId();
-
-		Node parentElNode = root.selectSingleNode(
-			"./layouts/layout[@layout-id='" + parentLayoutId + "']");
-
-		if (parentLayoutId != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID &&
-			parentElNode != null) {
-
-			importLayout(
-				context, user, layoutCache, previousLayouts, newLayouts,
-				newLayoutIdPlidMap, newLayoutIds, portletsMergeMode, themeId,
-				colorSchemeId, layoutsImportMode, privateLayout,
-				importPermissions, importUserPermissions, useThemeZip, root,
-				(Element)parentElNode);
-
-			Layout parentLayout = newLayoutIdPlidMap.get(parentLayoutId);
-
-			parentLayoutId = parentLayout.getLayoutId();
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Importing layout with layout id " + layoutId +
-					" and parent layout id " + parentLayoutId);
-		}
-
 		Layout exsistingLayout = null;
 		Layout importedLayout = null;
 
@@ -726,8 +701,8 @@ public class LayoutImporter {
 			}
 		}
 		else {
-			exsistingLayout = LayoutUtil.fetchByG_P_L(
-				groupId, privateLayout, layoutId);
+			exsistingLayout = LayoutUtil.fetchByG_P_F(
+				groupId, privateLayout, friendlyURL);
 
 			if (exsistingLayout == null) {
 				layoutId = LayoutLocalServiceUtil.getNextLayoutId(
@@ -769,6 +744,32 @@ public class LayoutImporter {
 
 		newLayoutIdPlidMap.put(oldLayoutId, importedLayout);
 
+		long parentLayoutId = layout.getParentLayoutId();
+
+		Node parentElNode = root.selectSingleNode(
+			"./layouts/layout[@layout-id='" + parentLayoutId + "']");
+
+		if (parentLayoutId != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID &&
+			parentElNode != null) {
+
+			importLayout(
+				context, user, layoutCache, previousLayouts, newLayouts,
+				newLayoutIdPlidMap, newLayoutIds, portletsMergeMode, themeId,
+				colorSchemeId, layoutsImportMode, privateLayout,
+				importPermissions, importUserPermissions, useThemeZip, root,
+				(Element)parentElNode);
+
+			Layout parentLayout = newLayoutIdPlidMap.get(parentLayoutId);
+
+			parentLayoutId = parentLayout.getLayoutId();
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Importing layout with layout id " + layoutId +
+					" and parent layout id " + parentLayoutId);
+		}
+
 		importedLayout.setCompanyId(user.getCompanyId());
 		importedLayout.setParentLayoutId(parentLayoutId);
 		importedLayout.setName(layout.getName());
@@ -792,20 +793,22 @@ public class LayoutImporter {
 				typeSettingsProperties.getProperty(
 					"linkToLayoutId", StringPool.BLANK));
 
-			Node linkedLayoutElNode = root.selectSingleNode(
-				"./layouts/layout[@layout-id='" + linkToLayoutId + "']");
+			if (linkToLayoutId > 0) {
+				Node linkedLayoutElNode = root.selectSingleNode(
+					"./layouts/layout[@layout-id='" + linkToLayoutId + "']");
 
-			importLayout(
-				context, user, layoutCache, previousLayouts, newLayouts,
-				newLayoutIdPlidMap, newLayoutIds, portletsMergeMode, themeId,
-				colorSchemeId, layoutsImportMode, privateLayout,
-				importPermissions, importUserPermissions, useThemeZip, root,
-				(Element)linkedLayoutElNode);
+				importLayout(
+					context, user, layoutCache, previousLayouts, newLayouts,
+					newLayoutIdPlidMap, newLayoutIds, portletsMergeMode, themeId,
+					colorSchemeId, layoutsImportMode, privateLayout,
+					importPermissions, importUserPermissions, useThemeZip, root,
+					(Element)linkedLayoutElNode);
 
-			Layout linkedLayout = newLayoutIdPlidMap.get(linkToLayoutId);
+				Layout linkedLayout = newLayoutIdPlidMap.get(linkToLayoutId);
 
-			typeSettingsProperties.setProperty(
-				"linkToLayoutId", String.valueOf(linkedLayout.getLayoutId()));
+				typeSettingsProperties.setProperty(
+					"linkToLayoutId", String.valueOf(linkedLayout.getLayoutId()));
+			}
 
 			importedLayout.setTypeSettings(layout.getTypeSettings());
 		}
