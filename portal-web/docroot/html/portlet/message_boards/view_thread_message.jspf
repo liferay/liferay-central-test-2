@@ -17,9 +17,9 @@
 <div class="message-container" style="margin-left: <%= depth * 10 %>px;">
 	<a id="<portlet:namespace />message_<%= message.getMessageId() %>"></a>
 
-	<table cellpadding="0" cellspacing="0" class="<%= className %>" id="<portlet:namespace />message_<%= message.getMessageId() %>" width="100%">
+	<table class="thread-message-view <%= className %>" id="<portlet:namespace />message_<%= message.getMessageId() %>">
 	<tr>
-		<td class="lfr-top user-info" rowspan="2">
+		<td class="lfr-top user-info" <%= editable ? "rowspan=\"2\"" : StringPool.BLANK %>>
 			<c:choose>
 				<c:when test="<%= message.isAnonymous() %>">
 					<liferay-ui:message key="anonymous" />
@@ -443,7 +443,7 @@
 
 	<c:if test="<%= editable %>">
 		<tr>
-			<td class="thread-bottom" valign="bottom">
+			<td class="thread-bottom">
 				<c:if test="<%= enableRatings %>">
 					<liferay-ui:ratings
 						className="<%= MBMessage.class.getName() %>"
