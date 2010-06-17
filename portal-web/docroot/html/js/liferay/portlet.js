@@ -1,8 +1,27 @@
 Liferay.Portlet = {
 	list: [],
 
-	add: function(options) {
+	isStatic: function(portletId) {
 		var instance = this;
+
+		var id = Liferay.Util.getPortletId(portletId.id || portletId);
+
+		return (id in instance._staticPortlets);
+	},
+
+	refreshLayout: function(portletBound) {
+	},
+
+	_staticPortlets: {}
+};
+
+Liferay.provide(
+	Liferay.Portlet,
+	'add',
+	function(options) {
+		var instance = this;
+
+		var A = AUI();
 
 		var plid = options.plid || themeDisplay.getPlid();
 		var portletId = options.portletId;
@@ -11,17 +30,17 @@ Liferay.Portlet = {
 		var placeHolder = options.placeHolder;
 
 		if (!placeHolder) {
-			placeHolder = AUI().Node.create('<div class="loading-animation" />');
+			placeHolder = A.Node.create('<div class="loading-animation" />');
 		}
 		else {
-			placeHolder = AUI().one(placeHolder);
+			placeHolder = A.one(placeHolder);
 		}
 
 		var positionOptions = options.positionOptions;
 		var beforePortletLoaded = options.beforePortletLoaded;
 		var onComplete = options.onComplete;
 
-		var container = AUI().one(Liferay.Layout.options.dropContainer);
+		var container = A.one(Liferay.Layout.options.dropContainer);
 
 		if (!container) {
 			return;
@@ -81,8 +100,13 @@ Liferay.Portlet = {
 			}
 		);
 	},
+	['aui-base']
+);
 
-	addHTML: function(options) {
+Liferay.provide(
+	Liferay.Portlet,
+	'addHTML',
+	function(options) {
 		var instance = this;
 
 		var A = AUI();
@@ -149,49 +173,50 @@ Liferay.Portlet = {
 			beforePortletLoaded(placeHolder);
 		}
 
-		A.use(
-			'io-request',
-			'parse-content',
-			function(A) {
-				A.io.request(
-					url,
-					{
-						data: data,
-						dataType: dataType,
-						on: {
-							success: function(event, id, obj) {
-								var instance = this;
+		A.io.request(
+			url,
+			{
+				data: data,
+				dataType: dataType,
+				on: {
+					success: function(event, id, obj) {
+						var instance = this;
 
-								var response = this.get('responseData');
+						var response = this.get('responseData');
 
-								if (dataType == 'html') {
-									addPortletReturn(response);
-								}
-								else {
-									if (response.refresh) {
-										location.reload();
-									}
-									else {
-										addPortletReturn(response.portletHTML);
-									}
-								}
+						if (dataType == 'html') {
+							addPortletReturn(response);
+						}
+						else {
+							if (response.refresh) {
+								location.reload();
+							}
+							else {
+								addPortletReturn(response.portletHTML);
 							}
 						}
 					}
-				);
+				}
 			}
 		);
 	},
+	['aui-io-request', 'aui-parse-content']
+);
 
-	close: function(portlet, skipConfirm, options) {
+Liferay.provide(
+	Liferay.Portlet,
+	'close',
+	function(portlet, skipConfirm, options) {
 		var instance = this;
+
+		var A = AUI();
 
 		if (skipConfirm || confirm(Liferay.Language.get('are-you-sure-you-want-to-remove-this-component'))) {
 			options = options || {};
 
 			var plid = options.plid || themeDisplay.getPlid();
 			var doAsUserId = options.doAsUserId || themeDisplay.getDoAsUserIdEncoded();
-			var currentPortlet = AUI().one(portlet);
+			var currentPortlet = A.one(portlet);
 
 			if (currentPortlet) {
 				var portletId = currentPortlet.portletId;
@@ -207,20 +232,15 @@ Liferay.Portlet = {
 
 				var url = themeDisplay.getPathMain() + '/portal/update_layout';
 
-				AUI().use(
-					'aui-io-request',
-					function(A) {
-						A.io.request(
-							url,
-							{
-								data: {
-									cmd: 'delete',
-									doAsUserId: doAsUserId,
-									p_l_id: plid,
-									p_p_id: portletId
-								}
-							}
-						);
+				A.io.request(
+					url,
+					{
+						data: {
+							cmd: 'delete',
+							doAsUserId: doAsUserId,
+							p_l_id: plid,
+							p_p_id: portletId
+						}
 					}
 				);
 
@@ -237,16 +257,116 @@ Liferay.Portlet = {
 			self.focus();
 		}
 	},
+	['aui-io-request']
+);
 
-	isStatic: function(portletId) {
+Liferay.provide(
+	Liferay.Portlet,
+	'minimize',
+	function(portlet, el, options) {
 		var instance = this;
 
-		var id = Liferay.Util.getPortletId(portletId.id || portletId);
+		var A = AUI();
 
-		return (id in instance._staticPortlets);
+		options = options || {};
+
+		var plid = options.plid || themeDisplay.getPlid();
+		var doAsUserId = options.doAsUserId || themeDisplay.getDoAsUserIdEncoded();
+
+		portlet = A.one(portlet);
+
+		if (portlet) {
+			var content = portlet.one('.portlet-content-container');
+
+			if (content) {
+				var restore = content.hasClass('aui-helper-hidden');
+
+				content.toggle();
+				portlet.toggleClass('portlet-minimized');
+
+				var link = A.one(el);
+
+				if (link) {
+					var img = link.one('img');
+
+					if (img) {
+						var title = (restore) ? Liferay.Language.get('minimize') : Liferay.Language.get('restore');
+
+						var imgSrc = img.attr('src');
+
+						if (restore) {
+							imgSrc = imgSrc.replace(/restore.png$/, 'minimize.png');
+						}
+						else {
+							imgSrc = imgSrc.replace(/minimize.png$/, 'restore.png');
+						}
+
+						img.attr('alt', title);
+						img.attr('title', title);
+
+						link.attr('title', title);
+						img.attr('src', imgSrc);
+					}
+				}
+
+				var html = '';
+				var portletBody = content.one('.portlet-body');
+
+				if (portletBody) {
+					html = portletBody.html();
+				}
+
+				var hasBodyContent = !!(A.Lang.trim(html));
+
+				if (hasBodyContent) {
+					content.unplug(A.Plugin.IO);
+				}
+				else {
+					content.plug(
+						A.Plugin.IO,
+						{
+							autoLoad: false,
+							data: {
+								doAsUserId: doAsUserId,
+								p_l_id: plid,
+								p_p_id: portlet.portletId,
+								p_p_state: 'exclusive'
+							},
+							showLoading: false,
+							uri: themeDisplay.getPathMain() + '/portal/render_portlet'
+						}
+					);
+				}
+
+				A.io.request(
+					themeDisplay.getPathMain() + '/portal/update_layout',
+					{
+						after: {
+							success: function() {
+								if (restore && content.io) {
+									content.io.start();
+								}
+							}
+						},
+						data: {
+							cmd: 'minimize',
+							doAsUserId: doAsUserId,
+							p_l_id: plid,
+							p_p_id: portlet.portletId,
+							p_p_restore: restore
+						}
+					}
+				);
+			}
+		}
 	},
+	['aui-io']
+);
 
-	onLoad: function(options) {
+Liferay.provide(
+	Liferay.Portlet,
+	'onLoad',
+	function(options) {
 		var instance = this;
 
 		var A = AUI();
@@ -397,8 +517,73 @@ Liferay.Portlet = {
 			}
 		}
 	},
+	['aui-base']
+);
 
-	openConfiguration: function(portlet, portletId, configurationURL, namespacedId) {
+Liferay.provide(
+	Liferay.Portlet,
+	'refresh',
+	function(portlet) {
+		var instance = this;
+
+		var A = AUI();
+
+		portlet = A.one(portlet);
+
+		if (portlet && portlet.refreshURL) {
+			var url = portlet.refreshURL;
+			var id = portlet.attr('portlet');
+
+			var placeHolder = A.Node.create('<div class="loading-animation" id="p_load' + id + '" />');
+
+			portlet.placeBefore(placeHolder);
+			portlet.remove();
+
+			instance.addHTML(
+				{
+					data: {
+						p_p_state: 'normal'
+					},
+					onComplete: function(portlet, portletId) {
+						portlet.refreshURL = url;
+					},
+					placeHolder: placeHolder,
+					url: url
+				}
+			);
+		}
+	},
+	['aui-base']
+);
+
+Liferay.provide(
+	Liferay.Portlet,
+	'registerStatic',
+	function(portletId) {
+		var instance = this;
+
+		var A = AUI();
+
+		var Node = A.Node;
+
+		if (Node && portletId instanceof Node) {
+			portletId = portletId.attr('id');
+		}
+		else if (portletId.id) {
+			portletId = portletId.id;
+		}
+
+		var id = Liferay.Util.getPortletId(portletId);
+
+		instance._staticPortlets[id] = true;
+	},
+	['aui-base']
+);
+
+Liferay.provide(
+	Liferay.Portlet,
+	'openConfiguration',
+	function(portlet, portletId, configurationURL, namespacedId) {
 		var instance = this;
 
 		var A = AUI();
@@ -489,160 +674,7 @@ Liferay.Portlet = {
 			);
 		}
 	},
-
-	refresh: function(portlet) {
-		var instance = this;
-
-		portlet = AUI().one(portlet);
-
-		if (portlet && portlet.refreshURL) {
-			var url = portlet.refreshURL;
-			var id = portlet.attr('portlet');
-
-			var placeHolder = AUI().Node.create('<div class="loading-animation" id="p_load' + id + '" />');
-
-			portlet.placeBefore(placeHolder);
-			portlet.remove();
-
-			instance.addHTML(
-				{
-					data: {
-						p_p_state: 'normal'
-					},
-					onComplete: function(portlet, portletId) {
-						portlet.refreshURL = url;
-					},
-					placeHolder: placeHolder,
-					url: url
-				}
-			);
-		}
-	},
-
-	refreshLayout: function(portletBound) {
-	},
-
-	registerStatic: function(portletId) {
-		var instance = this;
-
-		var Node = AUI().Node;
-
-		if (Node && portletId instanceof Node) {
-			portletId = portletId.attr('id');
-		}
-		else if (portletId.id) {
-			portletId = portletId.id;
-		}
-
-		var id = Liferay.Util.getPortletId(portletId);
-
-		instance._staticPortlets[id] = true;
-	},
-
-	_staticPortlets: {}
-};
-
-Liferay.provide(
-	Liferay.Portlet,
-	'minimize',
-	function(portlet, el, options) {
-		var instance = this;
-
-		var A = AUI();
-
-		options = options || {};
-
-		var plid = options.plid || themeDisplay.getPlid();
-		var doAsUserId = options.doAsUserId || themeDisplay.getDoAsUserIdEncoded();
-
-		portlet = A.one(portlet);
-
-		if (portlet) {
-			var content = portlet.one('.portlet-content-container');
-
-			if (content) {
-				var restore = content.hasClass('aui-helper-hidden');
-
-				content.toggle();
-				portlet.toggleClass('portlet-minimized');
-
-				var link = A.one(el);
-
-				if (link) {
-					var img = link.one('img');
-
-					if (img) {
-						var title = (restore) ? Liferay.Language.get('minimize') : Liferay.Language.get('restore');
-
-						var imgSrc = img.attr('src');
-
-						if (restore) {
-							imgSrc = imgSrc.replace(/restore.png$/, 'minimize.png');
-						}
-						else {
-							imgSrc = imgSrc.replace(/minimize.png$/, 'restore.png');
-						}
-
-						img.attr('alt', title);
-						img.attr('title', title);
-
-						link.attr('title', title);
-						img.attr('src', imgSrc);
-					}
-				}
-
-				var html = '';
-				var portletBody = content.one('.portlet-body');
-
-				if (portletBody) {
-					html = portletBody.html();
-				}
-
-				var hasBodyContent = !!(A.Lang.trim(html));
-
-				if (hasBodyContent) {
-					content.unplug(A.Plugin.IO);
-				}
-				else {
-					content.plug(
-						A.Plugin.IO,
-						{
-							autoLoad: false,
-							data: {
-								doAsUserId: doAsUserId,
-								p_l_id: plid,
-								p_p_id: portlet.portletId,
-								p_p_state: 'exclusive'
-							},
-							showLoading: false,
-							uri: themeDisplay.getPathMain() + '/portal/render_portlet'
-						}
-					);
-				}
-
-				A.io.request(
-					themeDisplay.getPathMain() + '/portal/update_layout',
-					{
-						after: {
-							success: function() {
-								if (restore && content.io) {
-									content.io.start();
-								}
-							}
-						},
-						data: {
-							cmd: 'minimize',
-							doAsUserId: doAsUserId,
-							p_l_id: plid,
-							p_p_id: portlet.portletId,
-							p_p_restore: restore
-						}
-					}
-				);
-			}
-		}
-	},
-	['aui-io']
+	['aui-dialog', 'aui-loading-mask']
 );
 
 Liferay.provide(
