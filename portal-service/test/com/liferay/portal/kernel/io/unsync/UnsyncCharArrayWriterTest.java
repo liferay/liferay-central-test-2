@@ -33,7 +33,6 @@ import java.util.Arrays;
 public class UnsyncCharArrayWriterTest extends TestCase {
 
 	public void testAppendChar() {
-
 		UnsyncCharArrayWriter unsyncCharArrayWriter =
 			new UnsyncCharArrayWriter();
 
@@ -50,7 +49,6 @@ public class UnsyncCharArrayWriterTest extends TestCase {
 	}
 
 	public void testAppendCharSequence() {
-
 		UnsyncCharArrayWriter unsyncCharArrayWriter =
 			new UnsyncCharArrayWriter();
 
@@ -83,7 +81,6 @@ public class UnsyncCharArrayWriterTest extends TestCase {
 	}
 
 	public void testReset() {
-
 		UnsyncCharArrayWriter unsyncCharArrayWriter =
 			new UnsyncCharArrayWriter();
 
@@ -94,7 +91,6 @@ public class UnsyncCharArrayWriterTest extends TestCase {
 		unsyncCharArrayWriter.reset();
 
 		assertEquals(0, unsyncCharArrayWriter.size());
-
 	}
 
 	public void testToCharBuffer() {
@@ -122,7 +118,6 @@ public class UnsyncCharArrayWriterTest extends TestCase {
 	}
 
 	public void testWriteChar() {
-
 		UnsyncCharArrayWriter unsyncCharArrayWriter =
 			new UnsyncCharArrayWriter();
 
@@ -139,7 +134,6 @@ public class UnsyncCharArrayWriterTest extends TestCase {
 	}
 
 	public void testWriteCharArray() {
-
 		UnsyncCharArrayWriter unsyncCharArrayWriter =
 			new UnsyncCharArrayWriter();
 
@@ -159,7 +153,6 @@ public class UnsyncCharArrayWriterTest extends TestCase {
 	}
 
 	public void testWriteString() {
-
 		UnsyncCharArrayWriter unsyncCharArrayWriter =
 			new UnsyncCharArrayWriter();
 
@@ -179,7 +172,6 @@ public class UnsyncCharArrayWriterTest extends TestCase {
 	}
 
 	public void testWriteTo() throws IOException {
-		// write to CharBuffer
 		UnsyncCharArrayWriter unsyncCharArrayWriter =
 			new UnsyncCharArrayWriter();
 
@@ -195,19 +187,20 @@ public class UnsyncCharArrayWriterTest extends TestCase {
 		charBuffer.position(0);
 		assertEquals("ab", charBuffer.toString());
 
-		// write to OutputStream
 		ByteArrayOutputStream byteArrayOutputStream =
 			new ByteArrayOutputStream();
-		length = unsyncCharArrayWriter.writeTo(byteArrayOutputStream,
-			StringPool.UTF8);
+
+		length = unsyncCharArrayWriter.writeTo(
+			byteArrayOutputStream, StringPool.UTF8);
 
 		assertEquals(4, length);
 		assertEquals(4, byteArrayOutputStream.size());
-		assertTrue(Arrays.equals("abcd".getBytes(),
-			byteArrayOutputStream.toByteArray()));
+		assertTrue(
+			Arrays.equals(
+				"abcd".getBytes(), byteArrayOutputStream.toByteArray()));
 
-		// write to Writer
 		StringWriter stringWriter = new StringWriter();
+
 		length = unsyncCharArrayWriter.writeTo(stringWriter);
 
 		assertEquals(4, length);

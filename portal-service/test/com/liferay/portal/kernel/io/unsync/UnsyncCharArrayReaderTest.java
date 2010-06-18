@@ -69,6 +69,7 @@ public class UnsyncCharArrayReaderTest extends TestCase {
 		}
 
 		charBuffer.position(0);
+
 		read = unsyncCharArrayReader.read(charBuffer);
 
 		assertEquals(_SIZE - size, read);
@@ -78,7 +79,7 @@ public class UnsyncCharArrayReaderTest extends TestCase {
 		}
 	}
 
-	public void testClose() throws IOException {
+	public void testClose() {
 		UnsyncCharArrayReader unsyncCharArrayReader = new UnsyncCharArrayReader(
 			_BUFFER);
 
@@ -221,10 +222,8 @@ public class UnsyncCharArrayReaderTest extends TestCase {
 		long size = _SIZE * 2 / 3;
 
 		assertEquals(size, unsyncCharArrayReader.skip(size));
-		assertEquals(
-			size, unsyncCharArrayReader.index);
-		assertEquals(
-			_SIZE - size, unsyncCharArrayReader.skip(size));
+		assertEquals(size, unsyncCharArrayReader.index);
+		assertEquals(_SIZE - size, unsyncCharArrayReader.skip(size));
 		assertEquals(_SIZE, unsyncCharArrayReader.index);
 	}
 

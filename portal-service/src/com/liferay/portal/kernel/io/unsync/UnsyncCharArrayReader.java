@@ -26,20 +26,20 @@ import java.nio.CharBuffer;
  */
 public class UnsyncCharArrayReader extends Reader {
 
-	public UnsyncCharArrayReader(char[] buffer) {
-		this.buffer = buffer;
-		this.index = 0;
-		this.capacity = buffer.length;
+	public UnsyncCharArrayReader(char[] charArray) {
+		buffer = charArray;
+		capacity = charArray.length;
+		index = 0;
 	}
 
-	public UnsyncCharArrayReader(char[] buffer, int offset, int length) {
-		this.buffer = buffer;
-		this.index = offset;
-		this.capacity = Math.min(buffer.length, offset + length);
-		this.markIndex = offset;
+	public UnsyncCharArrayReader(char[] charArray, int offset, int length) {
+		buffer = charArray;
+		capacity = Math.min(charArray.length, offset + length);
+		index = offset;
+		markIndex = offset;
 	}
 
-	public void close() throws IOException {
+	public void close() {
 		buffer = null;
 	}
 
@@ -58,22 +58,26 @@ public class UnsyncCharArrayReader extends Reader {
 		if (buffer == null) {
 			throw new IOException("Stream closed");
 		}
+
 		if (index >= capacity) {
 			return -1;
-		} else {
+		}
+		else {
 			return buffer[index++];
 		}
 	}
 
-	public int read(char[] cbuf) throws IOException {
-		return read(cbuf, 0, cbuf.length);
+	public int read(char[] charArray) throws IOException {
+		return read(charArray, 0, charArray.length);
 	}
 
 	public int read(char[] charArray, int offset, int length)
-			throws IOException {
+		throws IOException {
+
 		if (buffer == null) {
 			throw new IOException("Stream closed");
 		}
+
 		if (length <= 0) {
 			return 0;
 		}
@@ -95,11 +99,12 @@ public class UnsyncCharArrayReader extends Reader {
 		return read;
 	}
 
-	public int read(CharBuffer target) throws IOException {
+	public int read(CharBuffer charBuffer) throws IOException {
 		if (buffer == null) {
 			throw new IOException("Stream closed");
 		}
-		int length = target.remaining();
+
+		int length = charBuffer.remaining();
 
 		if (length <= 0) {
 			return 0;
@@ -113,7 +118,7 @@ public class UnsyncCharArrayReader extends Reader {
 			length = capacity - index;
 		}
 
-		target.put(buffer, index, length);
+		charBuffer.put(buffer, index, length);
 
 		index += length;
 
@@ -124,28 +129,39 @@ public class UnsyncCharArrayReader extends Reader {
 		if (buffer == null) {
 			throw new IOException("Stream closed");
 		}
-		return capacity > index;
+
+		if (capacity > index) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public void reset() throws IOException {
 		if (buffer == null) {
 			throw new IOException("Stream closed");
 		}
+
 		index = markIndex;
 	}
 
-	public long skip(long n) throws IOException {
+	public long skip(long skip) throws IOException {
 		if (buffer == null) {
 			throw new IOException("Stream closed");
 		}
-		if (n < 0) {
+
+		if (skip < 0) {
 			return 0;
 		}
-		if (index + n > capacity) {
-			n = capacity - index;
+
+		if (index + skip > capacity) {
+			skip = capacity - index;
 		}
-		index += n;
-		return n;
+
+		index += skip;
+
+		return skip;
 	}
 
 	protected char[] buffer;

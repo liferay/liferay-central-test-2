@@ -41,28 +41,37 @@ public class UnsyncCharArrayWriter extends Writer {
 
 	public Writer append(char c) {
 		write(c);
+
 		return this;
 	}
 
 	public Writer append(CharSequence charSequence) {
 		String string = null;
+
 		if (charSequence == null) {
 			string = StringPool.NULL;
-		} else {
+		}
+		else {
 			string = charSequence.toString();
 		}
+
 		write(string, 0, string.length());
+
 		return this;
 	}
 
 	public Writer append(CharSequence charSequence, int start, int end) {
 		String string = null;
+
 		if (charSequence == null) {
 			string = StringPool.NULL;
-		} else {
+		}
+		else {
 			string = charSequence.subSequence(start, end).toString();
 		}
+
 		write(string, 0, string.length());
+
 		return this;
 	}
 
@@ -127,7 +136,7 @@ public class UnsyncCharArrayWriter extends Writer {
 			buffer = newBuffer;
 		}
 
-		buffer[index] = (char) c;
+		buffer[index] = (char)c;
 
 		index = newIndex;
 	}
@@ -174,17 +183,22 @@ public class UnsyncCharArrayWriter extends Writer {
 		return length;
 	}
 
-	public int writeTo(OutputStream out, String charsetName)
+	public int writeTo(OutputStream outputStream, String charsetName)
 		throws IOException {
-		ByteBuffer byteBuffer = CharsetEncoderUtil.encode(charsetName, buffer,
-			0, index);
+
+		ByteBuffer byteBuffer = CharsetEncoderUtil.encode(
+			charsetName, buffer, 0, index);
+
 		int length = byteBuffer.limit();
-		out.write(byteBuffer.array(), 0, length);
+
+		outputStream.write(byteBuffer.array(), 0, length);
+
 		return length;
 	}
 
-	public int writeTo(Writer out) throws IOException {
-		out.write(buffer, 0, index);
+	public int writeTo(Writer writer) throws IOException {
+		writer.write(buffer, 0, index);
+
 		return index;
 	}
 
