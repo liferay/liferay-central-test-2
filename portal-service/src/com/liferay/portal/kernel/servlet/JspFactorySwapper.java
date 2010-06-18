@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.servlet;
 
+import com.liferay.portal.kernel.util.ServerDetector;
+
 import javax.servlet.jsp.JspFactory;
 
 /**
@@ -24,6 +26,10 @@ import javax.servlet.jsp.JspFactory;
 public class JspFactorySwapper {
 
 	public static void swap() {
+		if (ServerDetector.isWebLogic()) {
+			return;
+		}
+
 		JspFactory jspFactory = JspFactory.getDefaultFactory();
 
 		if (jspFactory instanceof JspFactoryWrapper) {
