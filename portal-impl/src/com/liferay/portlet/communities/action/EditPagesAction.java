@@ -267,7 +267,7 @@ public class EditPagesAction extends PortletAction {
 		}
 
 		try {
-			ActionUtil.getGroup(renderRequest);
+			getGroup(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchGroupException ||
@@ -309,16 +309,7 @@ public class EditPagesAction extends PortletAction {
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
-		long groupId = ParamUtil.getLong(portletRequest, "groupId");
-
-		Group group = null;
-
-		if (groupId > 0) {
-			group = GroupLocalServiceUtil.getGroup(groupId);
-		}
-		else {
-			group = themeDisplay.getScopeGroup();
-		}
+		Group group = getGroup(portletRequest);
 
 		if (group == null) {
 			throw new PrincipalException();
@@ -407,6 +398,10 @@ public class EditPagesAction extends PortletAction {
 				throw new PrincipalException();
 			}
 		}
+	}
+
+	protected Group getGroup(PortletRequest portletRequest) throws Exception {
+		return ActionUtil.getGroup(portletRequest);
 	}
 
 	protected UnicodeProperties getTypeSettingsProperties(

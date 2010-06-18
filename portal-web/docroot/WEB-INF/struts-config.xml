@@ -1043,7 +1043,7 @@
 
         <!-- Group Pages -->
 
-        <action path="/group_pages/edit_pages" type="com.liferay.portlet.communities.action.EditPagesAction">
+        <action path="/group_pages/edit_pages" type="com.liferay.portlet.grouppages.action.EditPagesAction">
             <forward name="portlet.communities.edit_pages" path="portlet.communities.edit_pages" />
             <forward name="portlet.communities.error" path="portlet.communities.error" />
         </action>

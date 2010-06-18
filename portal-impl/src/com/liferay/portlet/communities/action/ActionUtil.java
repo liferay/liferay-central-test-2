@@ -25,7 +25,6 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.MembershipRequestLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.TeamLocalServiceUtil;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
@@ -35,6 +34,7 @@ import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -115,14 +115,16 @@ public class ActionUtil
 		}
 	}
 
-	public static void getGroup(ActionRequest actionRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
+	public static Group getGroup(PortletRequest portletRequest)
+		throws Exception {
 
-		getGroup(request);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		return getGroup(request);
 	}
 
-	public static void getGroup(HttpServletRequest request) throws Exception {
+	public static Group getGroup(HttpServletRequest request) throws Exception {
 		long groupId = ParamUtil.getLong(request, "groupId");
 
 		Group group = null;
@@ -130,21 +132,10 @@ public class ActionUtil
 		if (groupId > 0) {
 			group = GroupLocalServiceUtil.getGroup(groupId);
 		}
-		else {
-			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
-			group = themeDisplay.getScopeGroup();
-		}
 
 		request.setAttribute(WebKeys.GROUP, group);
-	}
 
-	public static void getGroup(RenderRequest renderRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getGroup(request);
+		return group;
 	}
 
 	public static void getMembershipRequest(ActionRequest actionRequest)
