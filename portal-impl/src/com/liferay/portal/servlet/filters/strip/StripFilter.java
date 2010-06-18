@@ -65,43 +65,23 @@ public class StripFilter extends BasePortalFilter {
 		}
 	}
 
-	protected boolean skipWhiteSpace(CharBuffer oldCharBuffer, Writer writer)
-		throws IOException {
+	protected boolean hasMarker(CharBuffer charBuffer, char[] marker) {
+		int position = charBuffer.position();
 
-		boolean skipped = false;
-		for(int i = oldCharBuffer.position(); i < oldCharBuffer.limit(); i++) {
-			char c = oldCharBuffer.get();
-			if ((c == CharPool.SPACE) || (c == CharPool.TAB) ||
-				(c == CharPool.RETURN) || (c == CharPool.NEW_LINE)) {
-				skipped = true;
-				continue;
-			}
-			else {
-				oldCharBuffer.position(i);
-				break;
-			}
-		}
-		if (skipped) {
-			writer.write(CharPool.SPACE);
-		}
-		return skipped;
-	}
-
-	protected boolean hasMarker(CharBuffer oldCharBuffer, char[] marker) {
-		int position = oldCharBuffer.position();
-
-		if ((position + marker.length) >= oldCharBuffer.limit()) {
+		if ((position + marker.length) >= charBuffer.limit()) {
 			return false;
 		}
 
 		for (int i = 0; i < marker.length; i++) {
 			char c = marker[i];
-			char oldC = oldCharBuffer.charAt(i);
+
+			char oldC = charBuffer.charAt(i);
 
 			if ((c != oldC) && (Character.toUpperCase(c) != oldC)) {
 				return false;
 			}
 		}
+
 		return true;
 	}
 
@@ -159,45 +139,51 @@ public class StripFilter extends BasePortalFilter {
 	}
 
 	protected void outputCloseTag(
-			CharBuffer oldCharBuffer, Writer writer, String closeTag)
+			CharBuffer charBuffer, Writer writer, String closeTag)
 		throws IOException {
 
 		writer.write(closeTag);
-		oldCharBuffer.position(oldCharBuffer.position() + closeTag.length());
-		skipWhiteSpace(oldCharBuffer, writer);
+
+		charBuffer.position(charBuffer.position() + closeTag.length());
+
+		skipWhiteSpace(charBuffer, writer);
 	}
 
 	protected void outputOpenTag(
-			CharBuffer oldCharBuffer, Writer writer, char[] openTag)
+		CharBuffer charBuffer, Writer writer, char[] openTag)
 		throws IOException {
 
 		writer.write(openTag);
-		oldCharBuffer.position(oldCharBuffer.position() + openTag.length);
+
+		charBuffer.position(charBuffer.position() + openTag.length);
 	}
 
 	protected void processCSS(
-			CharBuffer oldCharBuffer, Writer writer)
+			CharBuffer charBuffer, Writer writer)
 		throws IOException {
 
-		outputOpenTag(oldCharBuffer, writer, _MARKER_STYLE_OPEN);
+		outputOpenTag(charBuffer, writer, _MARKER_STYLE_OPEN);
 
 		int length = KMPSearch.search(
-			oldCharBuffer, _MARKER_STYLE_CLOSE, _MARKER_STYLE_CLOSE_NEXTS);
+			charBuffer, _MARKER_STYLE_CLOSE, _MARKER_STYLE_CLOSE_NEXTS);
 
 		if (length == -1) {
 			_log.error("Missing </style>");
+
 			return;
 		}
 
 		if (length == 0) {
-			outputCloseTag(oldCharBuffer, writer, _MARKER_STYLE_CLOSE);
+			outputCloseTag(charBuffer, writer, _MARKER_STYLE_CLOSE);
+
 			return;
 		}
 
-		String content = oldCharBuffer.subSequence(0, length).toString();
+		String content = charBuffer.subSequence(0, length).toString();
 
-		int position = oldCharBuffer.position();
-		oldCharBuffer.position(position + length);
+		int position = charBuffer.position();
+
+		charBuffer.position(position + length);
 
 		String minifiedContent = content;
 
@@ -231,7 +217,7 @@ public class StripFilter extends BasePortalFilter {
 			writer.write(minifiedContent);
 		}
 
-		outputCloseTag(oldCharBuffer, writer, _MARKER_STYLE_CLOSE);
+		outputCloseTag(charBuffer, writer, _MARKER_STYLE_CLOSE);
 	}
 
 	protected void processFilter(
@@ -268,6 +254,7 @@ public class StripFilter extends BasePortalFilter {
 			if (contentType.startsWith(ContentTypes.TEXT_HTML)) {
 				CharBuffer oldCharBuffer = CharBuffer.wrap(
 					stringResponse.getString());
+
 				strip(oldCharBuffer, response.getWriter());
 			}
 			else {
@@ -286,28 +273,31 @@ public class StripFilter extends BasePortalFilter {
 	}
 
 	protected void processJavaScript(
-			CharBuffer oldCharBuffer, Writer writer, char[] openTag)
+			CharBuffer charBuffer, Writer writer, char[] openTag)
 		throws IOException {
 
-		outputOpenTag(oldCharBuffer, writer, openTag);
+		outputOpenTag(charBuffer, writer, openTag);
 
 		int length = KMPSearch.search(
-			oldCharBuffer, _MARKER_SCRIPT_CLOSE, _MARKER_SCRIPT_CLOSE_NEXTS);
+			charBuffer, _MARKER_SCRIPT_CLOSE, _MARKER_SCRIPT_CLOSE_NEXTS);
 
 		if (length == -1) {
 			_log.error("Missing </script>");
+
 			return;
 		}
 
 		if (length == 0) {
-			outputCloseTag(oldCharBuffer, writer, _MARKER_SCRIPT_CLOSE);
+			outputCloseTag(charBuffer, writer, _MARKER_SCRIPT_CLOSE);
+
 			return;
 		}
 
-		String content = oldCharBuffer.subSequence(0, length).toString();
+		String content = charBuffer.subSequence(0, length).toString();
 
-		int position = oldCharBuffer.position();
-		oldCharBuffer.position(position + length);
+		int position = charBuffer.position();
+
+		charBuffer.position(position + length);
 
 		String minifiedContent = content;
 
@@ -344,11 +334,10 @@ public class StripFilter extends BasePortalFilter {
 			writer.write(_CDATA_CLOSE);
 		}
 
-		outputCloseTag(oldCharBuffer, writer, _MARKER_SCRIPT_CLOSE);
+		outputCloseTag(charBuffer, writer, _MARKER_SCRIPT_CLOSE);
 	}
 
-	protected void processPre(
-			CharBuffer oldCharBuffer, Writer writer)
+	protected void processPre(CharBuffer oldCharBuffer, Writer writer)
 		throws IOException {
 
 		int position = oldCharBuffer.position();
@@ -361,6 +350,7 @@ public class StripFilter extends BasePortalFilter {
 			_log.error("Missing </pre>");
 
 			outputOpenTag(oldCharBuffer, writer, _MARKER_PRE_OPEN);
+
 			return;
 		}
 
@@ -375,8 +365,7 @@ public class StripFilter extends BasePortalFilter {
 		skipWhiteSpace(oldCharBuffer, writer);
 	}
 
-	protected void processTextArea(
-			CharBuffer oldCharBuffer, Writer writer)
+	protected void processTextArea(CharBuffer oldCharBuffer, Writer writer)
 		throws IOException {
 
 		int position = oldCharBuffer.position();
@@ -403,51 +392,78 @@ public class StripFilter extends BasePortalFilter {
 		skipWhiteSpace(oldCharBuffer, writer);
 	}
 
-	protected void strip(
-			CharBuffer oldCharBuffer, Writer writer)
+	protected boolean skipWhiteSpace(CharBuffer charBuffer, Writer writer)
 		throws IOException {
 
-		skipWhiteSpace(oldCharBuffer, writer);
+		boolean skipped = false;
 
-		while (oldCharBuffer.hasRemaining()) {
-			char c = oldCharBuffer.get();
+		for (int i = charBuffer.position(); i < charBuffer.limit(); i++) {
+			char c = charBuffer.get();
+
+			if ((c == CharPool.SPACE) || (c == CharPool.TAB) ||
+				(c == CharPool.RETURN) || (c == CharPool.NEW_LINE)) {
+
+				skipped = true;
+
+				continue;
+			}
+			else {
+				charBuffer.position(i);
+
+				break;
+			}
+		}
+
+		if (skipped) {
+			writer.write(CharPool.SPACE);
+		}
+
+		return skipped;
+	}
+
+	protected void strip(CharBuffer charBuffer, Writer writer)
+		throws IOException {
+
+		skipWhiteSpace(charBuffer, writer);
+
+		while (charBuffer.hasRemaining()) {
+			char c = charBuffer.get();
+
 			writer.write(c);
 
 			if (c == CharPool.LESS_THAN) {
-				if (hasMarker(oldCharBuffer, _MARKER_PRE_OPEN)) {
-					processPre(oldCharBuffer, writer);
+				if (hasMarker(charBuffer, _MARKER_PRE_OPEN)) {
+					processPre(charBuffer, writer);
 
 					continue;
 				}
-				else if (hasMarker(oldCharBuffer, _MARKER_TEXTAREA_OPEN)) {
-					processTextArea(oldCharBuffer, writer);
+				else if (hasMarker(charBuffer, _MARKER_TEXTAREA_OPEN)) {
+					processTextArea(charBuffer, writer);
 
 					continue;
 				}
-				else if (hasMarker(oldCharBuffer, _MARKER_JS_OPEN)) {
-					processJavaScript(oldCharBuffer, writer, _MARKER_JS_OPEN);
+				else if (hasMarker(charBuffer, _MARKER_JS_OPEN)) {
+					processJavaScript(charBuffer, writer, _MARKER_JS_OPEN);
 
 					continue;
 				}
-				else if (hasMarker(oldCharBuffer, _MARKER_SCRIPT_OPEN)) {
-					processJavaScript(oldCharBuffer, writer,
-						_MARKER_SCRIPT_OPEN);
+				else if (hasMarker(charBuffer, _MARKER_SCRIPT_OPEN)) {
+					processJavaScript(charBuffer, writer, _MARKER_SCRIPT_OPEN);
 
 					continue;
 				}
-				else if (hasMarker(oldCharBuffer, _MARKER_STYLE_OPEN)) {
-					processCSS(oldCharBuffer, writer);
+				else if (hasMarker(charBuffer, _MARKER_STYLE_OPEN)) {
+					processCSS(charBuffer, writer);
 
 					continue;
 				}
 			}
 			else if (c == CharPool.GREATER_THAN) {
-				skipWhiteSpace(oldCharBuffer, writer);
+				skipWhiteSpace(charBuffer, writer);
 			}
 		}
 
 		writer.flush();
-
 	}
 
 	private static final String _CDATA_CLOSE = "/*]]>*/";
