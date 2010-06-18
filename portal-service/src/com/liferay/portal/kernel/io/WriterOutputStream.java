@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 
 import java.nio.ByteBuffer;
@@ -34,44 +33,48 @@ import java.nio.charset.CoderResult;
  */
 public class WriterOutputStream extends OutputStream {
 
-	public WriterOutputStream(Writer writer)
-		throws UnsupportedEncodingException {
-		this(writer, StringPool.UTF8, _DEFAULT_INTPUT_BUFFER_SIZE,
+	public WriterOutputStream(Writer writer) {
+		this(
+			writer, StringPool.UTF8, _DEFAULT_INTPUT_BUFFER_SIZE,
 			_DEFAULT_OUTPUT_BUFFER_SIZE, false);
 	}
 
-	public WriterOutputStream(Writer writer, String charsetName)
-		throws UnsupportedEncodingException {
-		this(writer, charsetName, _DEFAULT_INTPUT_BUFFER_SIZE,
+	public WriterOutputStream(Writer writer, String charsetName) {
+		this(
+			writer, charsetName, _DEFAULT_INTPUT_BUFFER_SIZE,
 			_DEFAULT_OUTPUT_BUFFER_SIZE, false);
 	}
 
-	public WriterOutputStream(Writer writer, String charsetName,
-			boolean autoFlush)
-		throws UnsupportedEncodingException {
-		this(writer, charsetName, _DEFAULT_INTPUT_BUFFER_SIZE,
+	public WriterOutputStream(
+		Writer writer, String charsetName, boolean autoFlush) {
+
+		this(
+			writer, charsetName, _DEFAULT_INTPUT_BUFFER_SIZE,
 			_DEFAULT_OUTPUT_BUFFER_SIZE, autoFlush);
 	}
 
-	public WriterOutputStream(Writer writer, String charsetName,
-			int inputBufferSize, int outputBufferSize)
-		throws UnsupportedEncodingException {
+	public WriterOutputStream(
+		Writer writer, String charsetName, int inputBufferSize,
+		int outputBufferSize) {
+
 		this(writer, charsetName, inputBufferSize, outputBufferSize, false);
 	}
 
-	public WriterOutputStream(Writer writer, String charsetName,
-			int inputBufferSize, int outputBufferSize, boolean autoFlush)
-			throws UnsupportedEncodingException {
+	public WriterOutputStream(
+		Writer writer, String charsetName, int inputBufferSize,
+		int outputBufferSize, boolean autoFlush) {
+
 		if (inputBufferSize < 4) {
 			throw new IllegalArgumentException(
-				"The minimum input buffer size is 4, current value:"
-					+ inputBufferSize);
+				"Input buffer size " + inputBufferSize + " is less than 4");
 		}
+
 		if (outputBufferSize <= 0) {
 			throw new IllegalArgumentException(
-				"Output buffer size has to be a positive number, current value:"
-					+ outputBufferSize);
+				"Output buffer size " + outputBufferSize +
+					" must be a positive number");
 		}
+
 		_writer = writer;
 		_charsetName = charsetName;
 		_charsetDecoder = CharsetDecoderUtil.getCharsetDecoder(charsetName);
@@ -83,11 +86,13 @@ public class WriterOutputStream extends OutputStream {
 	public void close() throws IOException {
 		_doDecode(true);
 		_doFlush();
+
 		_writer.close();
 	}
 
 	public void flush() throws IOException {
 		_doFlush();
+
 		_writer.flush();
 	}
 
@@ -101,27 +106,34 @@ public class WriterOutputStream extends OutputStream {
 
 	public void write(byte[] byteArray, int offset, int length)
 		throws IOException {
+
 		while (length > 0) {
 			int blockSize = Math.min(length, _inputBuffer.remaining());
+
 			_inputBuffer.put(byteArray, offset, blockSize);
+
 			_doDecode(false);
+
 			length -= blockSize;
 			offset += blockSize;
 		}
+
 		if (_autoFlush) {
 			_doFlush();
 		}
 	}
 
-	public void write(int byteValue) throws IOException {
-		write(new byte[]{(byte) byteValue}, 0, 1);
+	public void write(int b) throws IOException {
+		write(new byte[] {(byte)b}, 0, 1);
 	}
 
 	private void _doDecode(boolean endOfInput) throws IOException {
 		_inputBuffer.flip();
+
 		while (true) {
-			CoderResult coderResult = _charsetDecoder.decode(_inputBuffer,
-				_outputBuffer, endOfInput);
+			CoderResult coderResult = _charsetDecoder.decode(
+				_inputBuffer, _outputBuffer, endOfInput);
+
 			if (coderResult.isOverflow()) {
 				_doFlush();
 			}
@@ -129,16 +141,17 @@ public class WriterOutputStream extends OutputStream {
 				break;
 			}
 			else {
-				throw new IOException("Unexcepted coder result :" +
-					coderResult);
+				throw new IOException("Unexcepted coder result " + coderResult);
 			}
 		}
+
 		_inputBuffer.compact();
 	}
 
 	private void _doFlush() throws IOException {
 		if (_outputBuffer.position() > 0) {
 			_writer.write(_outputBuffer.array(), 0, _outputBuffer.position());
+
 			_outputBuffer.rewind();
 		}
 	}

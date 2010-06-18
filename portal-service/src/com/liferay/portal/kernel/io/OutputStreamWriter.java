@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 
 import java.nio.ByteBuffer;
@@ -33,24 +32,22 @@ import java.nio.charset.CharsetEncoder;
  */
 public class OutputStreamWriter extends Writer {
 
-	public OutputStreamWriter(OutputStream out)
-		throws UnsupportedEncodingException {
-		this(out, StringPool.UTF8);
+	public OutputStreamWriter(OutputStream outputStream) {
+		this(outputStream, StringPool.UTF8);
 	}
 
-	public OutputStreamWriter(OutputStream out, String charsetName)
-		throws UnsupportedEncodingException {
-		_out = out;
+	public OutputStreamWriter(OutputStream outputStream, String charsetName) {
+		_outputStream = outputStream;
 		_charsetName = charsetName;
 		_charsetEncoder = CharsetEncoderUtil.getCharsetEncoder(charsetName);
 	}
 
 	public void close() throws IOException {
-		_out.close();
+		_outputStream.close();
 	}
 
 	public void flush() throws IOException {
-		_out.flush();
+		_outputStream.flush();
 	}
 
 	public String getEncoding() {
@@ -59,26 +56,31 @@ public class OutputStreamWriter extends Writer {
 
 	public void write(char[] charArray, int offset, int length)
 		throws IOException {
+
 		ByteBuffer byteBuffer = _charsetEncoder.encode(
 			CharBuffer.wrap(charArray, offset, length));
-		_out.write(byteBuffer.array(), 0, byteBuffer.limit());
+
+		_outputStream.write(byteBuffer.array(), 0, byteBuffer.limit());
 	}
 
-	public void write(int charValue) throws IOException {
+	public void write(int c) throws IOException {
 		ByteBuffer byteBuffer = _charsetEncoder.encode(
-			CharBuffer.wrap(new char[]{(char)charValue}));
-		_out.write(byteBuffer.array(), 0, byteBuffer.limit());
+			CharBuffer.wrap(new char[] {(char)c}));
+
+		_outputStream.write(byteBuffer.array(), 0, byteBuffer.limit());
 	}
 
 	public void write(String string, int offset, int length)
 		throws IOException {
+
 		ByteBuffer byteBuffer = _charsetEncoder.encode(
 			CharBuffer.wrap(string, offset, length));
-		_out.write(byteBuffer.array(), 0, byteBuffer.limit());
+
+		_outputStream.write(byteBuffer.array(), 0, byteBuffer.limit());
 	}
 
 	private CharsetEncoder _charsetEncoder;
 	private String _charsetName;
-	private OutputStream _out;
+	private OutputStream _outputStream;
 
 }

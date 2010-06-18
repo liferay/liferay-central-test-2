@@ -19,7 +19,9 @@ import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.CharArrayWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.StringWriter;
+import java.io.Writer;
 
 /**
  * <a href="WriterOutputStreamTest.java.html"><b><i>View Source</i></b></a>
@@ -30,149 +32,180 @@ public class WriterOutputStreamTest extends TestCase {
 
 	public void testACSIIOutput() throws IOException {
 
-		// autoFlush = true;
-		StringWriter stringWriter = new StringWriter();
-		WriterOutputStream writerOutputStream = new WriterOutputStream(
-			stringWriter, StringPool.UTF8, true);
+		// Auto flush
 
-		String expectedResult = _testACSIIOutput[0];
-		writerOutputStream.write(_testACSIIInput[0]);
-		assertEquals(expectedResult, stringWriter.toString());
+		Writer writer = new StringWriter();
 
-		expectedResult += _testACSIIOutput[1];
-		writerOutputStream.write(_testACSIIInput[1]);
-		assertEquals(expectedResult, stringWriter.toString());
+		OutputStream outputStream = new WriterOutputStream(
+			writer, StringPool.UTF8, true);
 
-		expectedResult += _testACSIIOutput[2];
-		writerOutputStream.write(_testACSIIInput[2]);
-		assertEquals(expectedResult, stringWriter.toString());
+		String[] asciiOutput = {"This ", "is ", "an ", "ACSII ", " test"};
+		byte[][] asciiInput = {
+			asciiOutput[0].getBytes(), asciiOutput[1].getBytes(),
+			asciiOutput[2].getBytes(), asciiOutput[3].getBytes(),
+			asciiOutput[4].getBytes()};
 
-		expectedResult += _testACSIIOutput[3];
-		writerOutputStream.write(_testACSIIInput[3]);
-		assertEquals(expectedResult, stringWriter.toString());
+		String expectedResult = asciiOutput[0];
 
-		expectedResult += _testACSIIOutput[4];
-		writerOutputStream.write(_testACSIIInput[4]);
-		assertEquals(expectedResult, stringWriter.toString());
+		outputStream.write(asciiInput[0]);
 
-		// autoFlush = false;
-		stringWriter = new StringWriter();
-		writerOutputStream = new WriterOutputStream(stringWriter,
-			StringPool.UTF8, false);
+		assertEquals(expectedResult, writer.toString());
 
-		writerOutputStream.write(_testACSIIInput[0]);
-		assertEquals("", stringWriter.toString());
+		expectedResult += asciiOutput[1];
 
-		writerOutputStream.write(_testACSIIInput[1]);
-		assertEquals("", stringWriter.toString());
+		outputStream.write(asciiInput[1]);
 
-		writerOutputStream.write(_testACSIIInput[2]);
-		assertEquals("", stringWriter.toString());
+		assertEquals(expectedResult, writer.toString());
 
-		writerOutputStream.write(_testACSIIInput[3]);
-		assertEquals("", stringWriter.toString());
+		expectedResult += asciiOutput[2];
 
-		writerOutputStream.write(_testACSIIInput[4]);
-		assertEquals("", stringWriter.toString());
+		outputStream.write(asciiInput[2]);
 
-		writerOutputStream.flush();
-		assertEquals(expectedResult, stringWriter.toString());
+		assertEquals(expectedResult, writer.toString());
+
+		expectedResult += asciiOutput[3];
+
+		outputStream.write(asciiInput[3]);
+
+		assertEquals(expectedResult, writer.toString());
+
+		expectedResult += asciiOutput[4];
+
+		outputStream.write(asciiInput[4]);
+
+		assertEquals(expectedResult, writer.toString());
+
+		// Do not auto flush
+
+		writer = new StringWriter();
+
+		outputStream = new WriterOutputStream(writer, StringPool.UTF8, false);
+
+		outputStream.write(asciiInput[0]);
+
+		assertEquals("", writer.toString());
+
+		outputStream.write(asciiInput[1]);
+
+		assertEquals("", writer.toString());
+
+		outputStream.write(asciiInput[2]);
+
+		assertEquals("", writer.toString());
+
+		outputStream.write(asciiInput[3]);
+
+		assertEquals("", writer.toString());
+
+		outputStream.write(asciiInput[4]);
+
+		assertEquals("", writer.toString());
+
+		outputStream.flush();
+
+		assertEquals(expectedResult, writer.toString());
 	}
 
 	public void testChineseOutput() throws IOException {
 
-		// autoFlush = true;
-		StringWriter stringWriter = new StringWriter();
-		WriterOutputStream writerOutputStream = new WriterOutputStream(
-			stringWriter, StringPool.UTF8, true);
+		// Auto flush
 
-		String expectedResult = _testChineseOutput[0];
-		writerOutputStream.write(_testChineseInput[0]);
-		assertEquals(expectedResult, stringWriter.toString());
+		Writer writer = new StringWriter();
 
-		expectedResult += _testChineseOutput[1];
-		writerOutputStream.write(_testChineseInput[1]);
-		assertEquals(expectedResult, stringWriter.toString());
+		OutputStream outputStream = new WriterOutputStream(
+			writer, StringPool.UTF8, true);
 
-		expectedResult += _testChineseOutput[2];
-		writerOutputStream.write(_testChineseInput[2]);
-		assertEquals(expectedResult, stringWriter.toString());
+		String[] chineseOutput = {"这是", "一个", "中文", "解码 ", "测试"};
+		byte[][] chineseInput = {
+			chineseOutput[0].getBytes(), chineseOutput[1].getBytes(),
+			chineseOutput[2].getBytes(), chineseOutput[3].getBytes(),
+			chineseOutput[4].getBytes()};
 
-		expectedResult += _testChineseOutput[3];
-		writerOutputStream.write(_testChineseInput[3]);
-		assertEquals(expectedResult, stringWriter.toString());
+		String expectedResult = chineseOutput[0];
 
-		expectedResult += _testChineseOutput[4];
-		writerOutputStream.write(_testChineseInput[4]);
-		assertEquals(expectedResult, stringWriter.toString());
+		outputStream.write(chineseInput[0]);
 
-		// autoFlush = false;
-		stringWriter = new StringWriter();
-		writerOutputStream = new WriterOutputStream(stringWriter,
-			StringPool.UTF8, false);
+		assertEquals(expectedResult, writer.toString());
 
-		writerOutputStream.write(_testChineseInput[0]);
-		assertEquals("", stringWriter.toString());
+		expectedResult += chineseOutput[1];
 
-		writerOutputStream.write(_testChineseInput[1]);
-		assertEquals("", stringWriter.toString());
+		outputStream.write(chineseInput[1]);
 
-		writerOutputStream.write(_testChineseInput[2]);
-		assertEquals("", stringWriter.toString());
+		assertEquals(expectedResult, writer.toString());
 
-		writerOutputStream.write(_testChineseInput[3]);
-		assertEquals("", stringWriter.toString());
+		expectedResult += chineseOutput[2];
 
-		writerOutputStream.write(_testChineseInput[4]);
-		assertEquals("", stringWriter.toString());
+		outputStream.write(chineseInput[2]);
 
-		writerOutputStream.flush();
-		assertEquals(expectedResult, stringWriter.toString());
+		assertEquals(expectedResult, writer.toString());
+
+		expectedResult += chineseOutput[3];
+
+		outputStream.write(chineseInput[3]);
+
+		assertEquals(expectedResult, writer.toString());
+
+		expectedResult += chineseOutput[4];
+
+		outputStream.write(chineseInput[4]);
+
+		assertEquals(expectedResult, writer.toString());
+
+		// Do not auto flush
+
+		writer = new StringWriter();
+
+		outputStream = new WriterOutputStream(writer, StringPool.UTF8, false);
+
+		outputStream.write(chineseInput[0]);
+
+		assertEquals("", writer.toString());
+
+		outputStream.write(chineseInput[1]);
+
+		assertEquals("", writer.toString());
+
+		outputStream.write(chineseInput[2]);
+
+		assertEquals("", writer.toString());
+
+		outputStream.write(chineseInput[3]);
+
+		assertEquals("", writer.toString());
+
+		outputStream.write(chineseInput[4]);
+
+		assertEquals("", writer.toString());
+
+		outputStream.flush();
+
+		assertEquals(expectedResult, writer.toString());
 	}
 
-	public void testNoneAlignOutput() throws IOException {
+	public void testNonAlignOutput() throws IOException {
 		CharArrayWriter charArrayWriter = new CharArrayWriter();
+
 		WriterOutputStream writerOutputStream = new WriterOutputStream(
 			charArrayWriter, StringPool.UTF8, true);
 
 		int charNumber = 0;
-		for(byte b : _noneAlignInput) {
+
+		String nonAlignOutput = "非对齐测试中文输出";
+		byte[] nonAlignInput = nonAlignOutput.getBytes();
+
+		for (byte b : nonAlignInput) {
 			writerOutputStream.write(b);
+
 			int currentCharNumber = charArrayWriter.size();
+
 			if (currentCharNumber > charNumber) {
 				charNumber = currentCharNumber;
-				assertEquals(_noneAlignOutput.charAt(charNumber - 1),
+
+				assertEquals(
+					nonAlignOutput.charAt(charNumber - 1),
 					charArrayWriter.toCharArray()[charNumber - 1]);
 			}
 		}
 	}
-
-	private static final String[] _testACSIIOutput =
-		{"This ", "is ", "a ", "ACSII ", " test"};
-
-	private static final byte[][] _testACSIIInput =
-		{
-			_testACSIIOutput[0].getBytes(),
-			_testACSIIOutput[1].getBytes(),
-			_testACSIIOutput[2].getBytes(),
-			_testACSIIOutput[3].getBytes(),
-			_testACSIIOutput[4].getBytes()
-		};
-
-	private static final String[] _testChineseOutput =
-		{"这是", "一个", "中文", "解码 ", "测试"};
-
-	private static final byte[][] _testChineseInput =
-		{
-			_testChineseOutput[0].getBytes(),
-			_testChineseOutput[1].getBytes(),
-			_testChineseOutput[2].getBytes(),
-			_testChineseOutput[3].getBytes(),
-			_testChineseOutput[4].getBytes()
-		};
-
-	private static final String _noneAlignOutput = "非对齐测试中文输出";
-
-	private static final byte[] _noneAlignInput = _noneAlignOutput.getBytes();
 
 }
