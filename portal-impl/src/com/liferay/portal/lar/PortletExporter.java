@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.kernel.zip.ZipWriterFactoryUtil;
@@ -150,6 +151,8 @@ public class PortletExporter {
 		if (exportPortletDataAll) {
 			exportPortletData = true;
 		}
+
+		long lastPublishDate = System.currentTimeMillis();
 
 		StopWatch stopWatch = null;
 
@@ -280,7 +283,24 @@ public class PortletExporter {
 			throw new SystemException(ioe);
 		}
 
-		return zipWriter.getFile();
+		try {
+			return zipWriter.getFile();
+		}
+		finally {
+			try {
+				javax.portlet.PortletPreferences preferences =
+					PortletPreferencesFactoryUtil.getPortletSetup(
+						layout, portletId, StringPool.BLANK);
+
+				preferences.setValue(
+					"last-publish-date", String.valueOf(lastPublishDate));
+
+				preferences.store();
+			}
+			catch (Exception e) {
+				throw new PortalException(e);
+			}
+		}
 	}
 
 	protected void exportCategories(PortletDataContext context)
@@ -747,6 +767,14 @@ public class PortletExporter {
 
 				root.addAttribute("archive-user-uuid", user.getUuid());
 				root.addAttribute("archive-name", portletItem.getName());
+			}
+
+			List<Node> nodes = preferencesDoc.selectNodes(
+				"/portlet-preferences/preference[name/text() = " +
+					"'last-publish-date']");
+
+			for (Node node : nodes) {
+				preferencesDoc.remove(node);
 			}
 
 			String path = getPortletPreferencesPath(

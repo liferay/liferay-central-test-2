@@ -122,6 +122,9 @@
 										<aui:input checked="<%= true %>" id="dateRangeAll" inlineLabel="right" label="all" name="range" onClick='<%= renderResponse.getNamespace() + "hideDateRange()" %>' type="radio" value="all" />
 									</li>
 									<li>
+										<aui:input inlineLabel="right" label="from-last-publish-date" name="range" onClick='<%= renderResponse.getNamespace() + "hideDateRange()" %>' type="radio" value="fromLastPublishDate" />
+									</li>
+									<li>
 										<aui:input id="dateRangeRange" inlineLabel="right" label="range" name="range" onClick='<%= renderResponse.getNamespace() + "showDateRange()" %>' type="radio" value="dateRange" />
 
 										<%

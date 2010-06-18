@@ -20,9 +20,13 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutServiceUtil;
+import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -76,7 +80,28 @@ public class ExportPagesAction extends PortletAction {
 			Date startDate = null;
 			Date endDate = null;
 
-			if (range.equals("dateRange")) {
+			if (range.equals("fromLastPublishDate")) {
+				LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+					groupId, privateLayout);
+
+				UnicodeProperties settingsProperties =
+					layoutSet.getSettingsProperties();
+
+				long lastPublishDate = GetterUtil.getLong(
+					settingsProperties.getProperty("last-publish-date"));
+
+				if (lastPublishDate > 0) {
+					Calendar cal = Calendar.getInstance(
+						themeDisplay.getTimeZone(), themeDisplay.getLocale());
+
+					endDate = cal.getTime();
+
+					cal.setTimeInMillis(lastPublishDate);
+
+					startDate = cal.getTime();
+				}
+			}
+			else if (range.equals("dateRange")) {
 				int startDateMonth = ParamUtil.getInteger(
 					actionRequest, "startDateMonth");
 				int startDateDay = ParamUtil.getInteger(

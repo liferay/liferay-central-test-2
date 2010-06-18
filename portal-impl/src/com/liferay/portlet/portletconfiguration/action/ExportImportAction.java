@@ -26,14 +26,19 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.communities.util.StagingUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
@@ -46,6 +51,7 @@ import java.util.Date;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -159,7 +165,29 @@ public class ExportImportAction extends EditConfigurationAction {
 			Date startDate = null;
 			Date endDate = null;
 
-			if (range.equals("dateRange")) {
+			if (range.equals("fromLastPublishDate")) {
+				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+
+				PortletPreferences preferences =
+					PortletPreferencesFactoryUtil.getPortletSetup(
+						layout, portlet.getPortletId(), StringPool.BLANK);
+
+				long lastPublishDate = GetterUtil.getLong(
+					preferences.getValue(
+						"last-publish-date", StringPool.BLANK));
+
+				if (lastPublishDate > 0) {
+					Calendar cal = Calendar.getInstance(
+						themeDisplay.getTimeZone(), themeDisplay.getLocale());
+
+					endDate = cal.getTime();
+
+					cal.setTimeInMillis(lastPublishDate);
+
+					startDate = cal.getTime();
+				}
+			}
+			else if (range.equals("dateRange")) {
 				int startDateMonth = ParamUtil.getInteger(
 					actionRequest, "startDateMonth");
 				int startDateDay = ParamUtil.getInteger(

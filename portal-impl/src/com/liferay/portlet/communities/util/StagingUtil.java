@@ -38,10 +38,12 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -53,6 +55,7 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
+import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.http.GroupServiceHttp;
 import com.liferay.portal.service.http.LayoutServiceHttp;
@@ -988,6 +991,27 @@ public class StagingUtil {
 
 			endDate = _getDate(actionRequest, "endDate", true).getTime();
 		}
+		else if (range.equals("fromLastPublishDate")) {
+			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+				sourceGroupId, privateLayout);
+
+			UnicodeProperties settingsProperties =
+				layoutSet.getSettingsProperties();
+
+			long lastPublishDate = GetterUtil.getLong(
+				settingsProperties.getProperty("last-publish-date"));
+
+			if (lastPublishDate > 0) {
+				Calendar cal = Calendar.getInstance(
+					themeDisplay.getTimeZone(), themeDisplay.getLocale());
+
+				endDate = cal.getTime();
+
+				cal.setTimeInMillis(lastPublishDate);
+
+				startDate = cal.getTime();
+			}
+		}
 		else if (range.equals("last")) {
 			int rangeLast = ParamUtil.getInteger(actionRequest, "last");
 
@@ -1133,6 +1157,27 @@ public class StagingUtil {
 			startDate = _getDate(actionRequest, "startDate", true).getTime();
 
 			endDate = _getDate(actionRequest, "endDate", true).getTime();
+		}
+		else if (range.equals("fromLastPublishDate")) {
+			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+				groupId, privateLayout);
+
+			UnicodeProperties settingsProperties =
+				layoutSet.getSettingsProperties();
+
+			long lastPublishDate = GetterUtil.getLong(
+				settingsProperties.getProperty("last-publish-date"));
+
+			if (lastPublishDate > 0) {
+				Calendar cal = Calendar.getInstance(
+					themeDisplay.getTimeZone(), themeDisplay.getLocale());
+
+				endDate = cal.getTime();
+
+				cal.setTimeInMillis(lastPublishDate);
+
+				startDate = cal.getTime();
+			}
 		}
 		else if (range.equals("last")) {
 			int rangeLast = ParamUtil.getInteger(actionRequest, "last");

@@ -101,7 +101,10 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 
 								<ul>
 									<li>
-										<aui:input checked="<%= true %>" id="rangeAll" label="all" name="range" onClick='<%= renderResponse.getNamespace() + "hideDateRange()" %>' type="radio" value="all" />
+										<aui:input id="rangeAll" label="all" name="range" onClick='<%= renderResponse.getNamespace() + "hideDateRange()" %>' type="radio" value="all" />
+									</li>
+									<li>
+										<aui:input checked="<%= true %>" inlineLabel="right" label="from-last-publish-date" name="range" onClick='<%= renderResponse.getNamespace() + "hideDateRange()" %>' type="radio" value="from-last-publish-date" />
 									</li>
 									<li>
 										<aui:input helpMessage="export-date-range-help" id="rangeDateRange" label="date-range" name="range" onClick='<%= renderResponse.getNamespace() + "showDateRange()" %>' type="radio" value="dateRange" />

@@ -174,6 +174,8 @@ public class LayoutExporter {
 			_log.debug("Export theme " + exportTheme);
 		}
 
+		long lastPublishDate = System.currentTimeMillis();
+
 		StopWatch stopWatch = null;
 
 		if (_log.isInfoEnabled()) {
@@ -389,7 +391,20 @@ public class LayoutExporter {
 			throw new SystemException(ioe);
 		}
 
-		return zipWriter.getFile();
+		try {
+			return zipWriter.getFile();
+		}
+		finally {
+			UnicodeProperties settingsProperties =
+				layoutSet.getSettingsProperties();
+
+			settingsProperties.setProperty(
+				"last-publish-date", String.valueOf(lastPublishDate));
+
+			LayoutSetLocalServiceUtil.updateSettings(
+				layoutSet.getGroupId(), layoutSet.isPrivateLayout(),
+				settingsProperties.toString());
+		}
 	}
 
 	protected void exportCategories(PortletDataContext context)
