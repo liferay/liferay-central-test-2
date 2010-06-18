@@ -19,11 +19,11 @@
 <%
 String redirect = (String)request.getAttribute("view_entry_content.jsp-redirect");
 
+SearchContainer searchContainer = (SearchContainer)request.getAttribute("view_entry_content.jsp-searchContainer");
+
 BlogsEntry entry = (BlogsEntry)request.getAttribute("view_entry_content.jsp-entry");
 
 AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp-assetEntry");
-
-SearchContainer searchContainer = (SearchContainer)request.getAttribute("view_entry_content.jsp-searchContainer");
 %>
 
 <c:choose>
@@ -238,10 +238,12 @@ SearchContainer searchContainer = (SearchContainer)request.getAttribute("view_en
 		<div class="separator"><!-- --></div>
 	</c:when>
 	<c:otherwise>
+
 		<%
 		if (searchContainer != null) {
 			searchContainer.setTotal(searchContainer.getTotal() - 1);
 		}
 		%>
+
 	</c:otherwise>
 </c:choose>
