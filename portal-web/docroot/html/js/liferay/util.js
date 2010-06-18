@@ -1305,6 +1305,17 @@ Liferay.provide(
 );
 
 Liferay.provide(
+	Liferay.Util,
+	'updateCheckboxValue',
+	function(checkbox) {
+		var A = AUI();
+
+		A.one(checkbox).previous().val(checkbox.checked);
+	},
+	['aui-base']
+);
+
+Liferay.provide(
 	window,
 	'submitForm',
 	function(form, action, singleSubmit) {
