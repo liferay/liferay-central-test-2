@@ -18,6 +18,11 @@
 
 <%
 String googleAppsUsername = ParamUtil.getString(request, "settings--" + PropsKeys.GOOGLE_APPS_USERNAME + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.GOOGLE_APPS_USERNAME));
+String googleAppsPassword = ParamUtil.getString(request, "settings--" + PropsKeys.GOOGLE_APPS_PASSWORD + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.GOOGLE_APPS_PASSWORD));
+
+if (Validator.isNotNull(googleAppsPassword)) {
+	googleAppsPassword = Portal.TEMP_OBFUSCATION_VALUE;
+}
 %>
 
 <h3><liferay-ui:message key="google-apps" /></h3>
@@ -25,5 +30,5 @@ String googleAppsUsername = ParamUtil.getString(request, "settings--" + PropsKey
 <aui:fieldset>
 	<aui:input cssClass="lfr-input-text-container" label="user-name" name='<%= "settings--" + PropsKeys.GOOGLE_APPS_USERNAME + "--" %>' type="text" value="<%= googleAppsUsername %>" />
 
-	<aui:input cssClass="lfr-input-text-container" label="password" name='<%= "settings--" + PropsKeys.GOOGLE_APPS_PASSWORD + "--" %>' type="password" value="<%= Portal.TEMP_OBFUSCATION_VALUE %>" />
+	<aui:input cssClass="lfr-input-text-container" label="password" name='<%= "settings--" + PropsKeys.GOOGLE_APPS_PASSWORD + "--" %>' type="password" value="<%= googleAppsPassword %>" />
 </aui:fieldset>
