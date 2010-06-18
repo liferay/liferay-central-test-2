@@ -145,8 +145,8 @@ portletURL.setParameter("nodeName", node.getName());
 			<div class="page-search">
 				<aui:form action="<%= searchURL %>" method="get" name="searchFm">
 					<liferay-portlet:renderURLParams varImpl="searchURL" />
-					<aui:input id="topLinks_redirect" name="redirect" type="hidden" value="<%= currentURL %>" />
-					<aui:input id="topLinks_nodeId" name="nodeId" type="hidden" value="<%= node.getNodeId() %>" />
+					<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+					<aui:input name="nodeId" type="hidden" value="<%= node.getNodeId() %>" />
 
 					<span class="aui-search-bar">
 						<aui:input inlineField="<%= true %>" label="" name="keywords" size="30" title="search-pages" type="text" value="<%= keywords %>" />
