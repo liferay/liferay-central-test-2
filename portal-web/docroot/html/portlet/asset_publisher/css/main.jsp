@@ -276,8 +276,10 @@
 }
 
 .portlet-configuration .dl-file-icon {
+	border-width: 0;
 	margin-right: 0.3em;
 	position: relative;
+	text-align: left;
 	top: 0.4em;
 }
 
