@@ -34,14 +34,16 @@ if (messageFlag != null) {
 	lastReadTime = messageFlag.getModifiedDate().getTime();
 }
 
-String className = "portlet-section-alternate results-row alt hover";
+String className = "portlet-section-alternate results-row alt";
+String classHoverName = "portlet-section-alternate-hover results-row alt hover";
 
 if (treeWalker.isOdd()) {
-	className = "portlet-section-body results-row hover";
+	className = "portlet-section-body results-row";
+	classHoverName = "portlet-section-body-hover results-row hover";
 }
 %>
 
-<tr class="<%= className %>">
+<tr class="<%= className %>" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
 	<td style="padding-left: <%= depth > 0 ? depth * 10 : 5 %>px; width: 90%;" valign="middle">
 		<c:if test="<%= !message.isRoot() %>">
 			<c:choose>

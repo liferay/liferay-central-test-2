@@ -25,14 +25,16 @@ MBThread thread = (MBThread)request.getAttribute(WebKeys.MESSAGE_BOARDS_TREE_WAL
 boolean lastNode = ((Boolean)request.getAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE)).booleanValue();
 int depth = ((Integer)request.getAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH)).intValue();
 
-String className = "portlet-section-body results-row hover";
+String className = "portlet-section-body results-row";
+String classHoverName = "portlet-section-body-hover results-row hover";
 
 if (treeWalker.isOdd()) {
-	className = "portlet-section-alternate results-row alt hover";
+	className = "portlet-section-alternate results-row alt";
+	classHoverName = "portlet-section-alternate-hover results-row alt hover";
 }
 %>
 
-<tr class="<%= className %>">
+<tr class="<%= className %>" onmouseover="this.className = '<%= classHoverName %>';" onmouseout="this.className = '<%= className %>';">
 	<td style="padding-left: <%= depth * 10 %>px; width: 90%">
 		<c:if test="<%= !message.isRoot() %>">
 			<c:choose>

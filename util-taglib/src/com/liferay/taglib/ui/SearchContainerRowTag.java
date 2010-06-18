@@ -51,6 +51,9 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 		if (name.equals("className")) {
 			_row.setClassName(value);
 		}
+		else if (name.equals("classHoverName")) {
+			_row.setClassHoverName(value);
+		}
 		else if (name.equals("restricted")) {
 			_row.setRestricted(GetterUtil.getBoolean(value, false));
 		}

@@ -35,17 +35,17 @@
 	background-image: url(../images/arrows/06_down.png);
 }
 
-tr.results-row.hover td, tr.results-row.no-hover td{
+.results-row td {
 	background: none;
 	padding: 5px 10px;
 }
 
-tr.results-row.hover:hover, tr.results-row.alt.hover:hover {
-	background: #BCC3CC;
+.results-row.alt td {
+	background: #DDE1E6;
 }
 
-tr.results-row.alt.hover, tr.results-row.alt.no-hover {
-	background: #DDE1E6;
+.results-row.hover td {
+	background: #BCC3CC;
 }
 
 /* ---------- Dragging/sorting indicators ---------- */
