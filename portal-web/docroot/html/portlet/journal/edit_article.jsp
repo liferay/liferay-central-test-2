@@ -255,7 +255,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			<liferay-ui:error exception="<%= DuplicateArticleIdException.class %>" message="please-enter-a-unique-id" />
 			<liferay-ui:asset-tags-error />
 
-			<table class="lfr-table" id="<portlet:namespace />articleHeaderEdit">
+			<table class="lfr-table journal-article-header-edit" id="<portlet:namespace />articleHeaderEdit">
 			<tr>
 				<td>
 					<c:choose>
@@ -479,7 +479,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				</c:choose>
 
 				<c:if test="<%= article == null %>">
-					<aui:field-wrapper label="permissions">
+					<aui:field-wrapper cssClass="journal-article-permissions" label="permissions">
 						<liferay-ui:input-permissions
 							modelName="<%= JournalArticle.class.getName() %>"
 						/>
@@ -569,7 +569,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 			<br />
 
-			<aui:button-row>
+			<aui:button-row cssClass="journal-article-button-row">
 
 				<%
 				boolean hasSavePermission = false;

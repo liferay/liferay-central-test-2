@@ -109,7 +109,7 @@
 	position: relative;
 }
 
-.portlet-journal .journal-edit-mode .structure-tree li.structure-field.repeated-field {
+.portlet-journal-edit-mode .structure-tree li.structure-field.repeated-field {
 	background: #F7FAFB;
 	border: 1px dashed #C6D9F0;
 }
@@ -118,11 +118,11 @@
 	background: #F7FAFB;
 }
 
-.portlet-journal .journal-edit-mode .structure-tree li.structure-field.repeated-field.selected {
+.portlet-journal-edit-mode .structure-tree li.structure-field.repeated-field.selected {
 	border: 1px dashed #C3E7CC;
 }
 
-.portlet-journal .structure-tree .journal-edit-mode span.folder, .portlet-journal .structure-tree .journal-edit-mode span.file {
+.portlet-journal-edit-mode .structure-tree span.folder, .portlet-journal-edit-mode .structure-tree span.file {
 	display: block;
 	padding: 10px;
 	padding-top: 0;
@@ -136,7 +136,7 @@
 	display: none;
 }
 
-.portlet-journal .journal-edit-mode .structure-tree .aui-placeholder, .portlet-journal .journal-edit-mode .structure-tree .aui-tree-placeholder, .portlet-journal .journal-edit-mode .structure-tree .aui-tree-sub-placeholder {
+.portlet-journal-edit-mode .structure-tree .aui-placeholder, .portlet-journal-edit-mode .structure-tree .aui-tree-placeholder, .portlet-journal-edit-mode .structure-tree .aui-tree-sub-placeholder {
 	-ms-filter: alpha(opacity=75);
 	background: #fff;
 	border: 1px #cdcdcd dashed;
@@ -155,14 +155,14 @@
 	position: relative;
 }
 
-.portlet-journal .journal-edit-mode .structure-tree li {
+.portlet-journal-edit-mode .structure-tree li {
 	background: url(<%= themeImagesPath %>/journal/form_builder_bg.png);
 	border: 1px #C6D9F0 solid;
 	margin: 15px;
 	padding: 10px 10px 10px 22px;
 }
 
-.portlet-journal .journal-edit-mode .structure-tree li.parent-structure-field {
+.portlet-journal-edit-mode .structure-tree li.parent-structure-field {
 	background: none;
 	background-color: #FFFFE6;
 	border: 1px dotted #FFE67F;
@@ -182,7 +182,7 @@
 	margin: 0;
 }
 
-.portlet-journal .journal-edit-mode .structure-tree li.structure-field.selected {
+.portlet-journal-edit-mode .structure-tree li.structure-field.selected {
 	background: #EBFFEE;
 	border: 1px #C3E7CC solid;
 }
@@ -208,7 +208,7 @@
 	display: none;
 }
 
-.portlet-journal .journal-edit-mode .structure-tree li.structure-field.yui3-dd-draggable .journal-article-move-handler {
+.portlet-journal-edit-mode .structure-tree li.structure-field.yui3-dd-draggable .journal-article-move-handler {
 	background: transparent url(<%= themeImagesPath %>/application/handle_sort_vertical.png) no-repeat scroll right 50%;
 	cursor: move;
 	display: block;
@@ -225,7 +225,7 @@
 	padding-top: 5px;
 }
 
-.portlet-journal .journal-edit-mode .structure-tree li.structure-field .journal-article-buttons {
+.portlet-journal-edit-mode .structure-tree li.structure-field .journal-article-buttons {
 	display: block;
 	height: 27px;
 	margin-top: 5px;
@@ -261,10 +261,6 @@
 
 .portlet-journal .journal-article-instructions-container {
 	display: normal;
-}
-
-.portlet-journal .journal-edit-mode .structure-tree li.structure-field .journal-article-instructions-container {
-	display: none;
 }
 
 .journal-component {
@@ -362,7 +358,7 @@
 	cursor: pointer;
 }
 
-.journal-edit-mode .structure-tree li.structure-field .journal-article-close {
+.portlet-journal-edit-mode .structure-tree li.structure-field .journal-article-close {
 	background: url(<%= themeImagesPath %>/journal/form_builder_close.png);
 	cursor: pointer;
 	display: block;
@@ -372,10 +368,6 @@
 	top: -9px;
 	width: 29px;
 	z-index: 420;
-}
-
-.journal-edit-mode .structure-tree li.parent-structure-field .journal-article-close {
-	display: none;
 }
 
 .journal-article-helper {
@@ -427,23 +419,11 @@
 	display: none;
 }
 
-.portlet-journal .journal-edit-mode .structure-tree li.structure-field .journal-edit-field-control {
+.portlet-journal-edit-mode .structure-tree li.structure-field .journal-edit-field-control {
 	display: block;
 }
 
-.portlet-journal .journal-edit-mode .structure-tree li.parent-structure-field .journal-delete-field {
-	display: none;
-}
-
-.portlet-journal .journal-edit-mode .structure-tree li.repeated-field .journal-edit-field-control {
-	display: none;
-}
-
-.portlet-journal .journal-edit-mode .structure-tree li.repeated-field .journal-delete-field {
-	display: none;
-}
-
-.portlet-journal .journal-edit-mode .journal-list-subfield .journal-icon-button {
+.portlet-journal-edit-mode .journal-list-subfield .journal-icon-button {
 	display: inline;
 }
 
@@ -516,10 +496,6 @@
 	height: 6em;
 }
 
-.save-structure-button {
-	display: none;
-}
-
 .structure-message {
 	margin-top: 5px;
 }
@@ -582,10 +558,6 @@
 	margin-top: 1.5em;
 }
 
-.portlet-journal .journal-edit-mode .repeatable-field-image {
-	display: none;
-}
-
 .portlet-journal .repeatable-field-image {
 	cursor: pointer;
 	position: absolute;
@@ -595,4 +567,13 @@
 
 .portlet-journal .lfr-textarea {
 	width: 350px;
+}
+
+.portlet-journal-edit-mode .journal-article-header-edit, .portlet-journal-edit-mode #journalAbstractPanel, .portlet-journal-edit-mode #journalCategorizationPanel, .portlet-journal-edit-mode #journalSchedulePanel, .portlet-journal-edit-mode .journal-article-button-row, .portlet-journal-edit-mode .panel-page-menu, .portlet-journal-edit-mode .journal-article-permissions, .portlet-journal-edit-mode .repeatable-field-image, .portlet-journal-edit-mode .structure-tree li.structure-field .journal-article-instructions-container, .portlet-journal-edit-mode .structure-tree li.parent-structure-field .journal-article-close, .portlet-journal-edit-mode .structure-tree li.parent-structure-field .journal-delete-field, .portlet-journal-edit-mode .structure-tree li.repeated-field .journal-edit-field-control, .portlet-journal-edit-mode .structure-tree li.repeated-field .journal-delete-field {
+	display: none;
+}
+
+.portlet-journal-edit-mode .panel-page-application {
+	float: none;
+	width: 100%;
 }

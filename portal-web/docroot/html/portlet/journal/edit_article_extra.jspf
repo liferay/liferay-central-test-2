@@ -49,7 +49,7 @@
 
 			<div class="structure-controls">
 				<span class="structure-buttons">
-					<aui:button cssClass="save-structure-button" name="saveStructureBtn" type="button" value="save" />
+					<aui:button cssClass="save-structure-button aui-helper-hidden" name="saveStructureBtn" type="button" value="save" />
 
 					<aui:button cssClass="edit-structure-button" name="editStructureBtn" type="button" value="edit" />
 				</span>

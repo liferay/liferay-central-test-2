@@ -569,19 +569,16 @@ AUI().add(
 			disableEditMode: function() {
 				var instance = this;
 
-				var articleHeaderEdit = instance.getById('articleHeaderEdit');
+				A.getBody().removeClass('portlet-journal-edit-mode');
+
 				var editStructureBtn = instance.getById('editStructureBtn');
-				var fieldsContainer = instance.getById('#journalArticleContainer');
 				var journalComponentList = instance.getById('#journalComponentList');
 				var saveStructureBtn = instance.getById('saveStructureBtn');
 
 				instance.closeEditFieldOptions();
 
-				articleHeaderEdit.show();
-				saveStructureBtn.hide();
+				saveStructureBtn.ancestor('.aui-button').hide();
 				journalComponentList.hide();
-
-				fieldsContainer.removeClass('journal-edit-mode');
 
 				var structureBtnText = Liferay.Language.get('edit');
 
@@ -598,18 +595,6 @@ AUI().add(
 						null,
 						30000
 					);
-				}
-
-				var columnFirst = A.one('.aui-column-first');
-				var columnLast = A.one('.aui-column-last');
-
-				if (columnFirst) {
-					columnFirst.show();
-				}
-
-				if (columnLast) {
-					columnLast.setStyle('float', '');
-					columnLast.replaceClass('aui-w100', 'aui-w75');
 				}
 			},
 
@@ -667,17 +652,16 @@ AUI().add(
 			enableEditMode: function() {
 				var instance = this;
 
-				var articleHeaderEdit = instance.getById('articleHeaderEdit');
+				A.getBody().addClass('portlet-journal-edit-mode');
+
 				var editStructureBtn = instance.getById('editStructureBtn');
-				var fieldsContainer = instance.getById('#journalArticleContainer');
 				var journalComponentList = instance.getById('#journalComponentList');
 				var saveStructureBtn = instance.getById('saveStructureBtn');
 
 				instance.editContainerNormalMode();
 
-				articleHeaderEdit.hide();
-				saveStructureBtn.show();
-				fieldsContainer.addClass('journal-edit-mode');
+				saveStructureBtn.ancestor('.aui-button').show();
+
 				journalComponentList.show();
 
 				var structureTree = instance.getById('#structureTree');
@@ -688,19 +672,8 @@ AUI().add(
 				structureTree.all('.journal-list-label').attr('disabled', '');
 
 				var structureMessage = instance.getById('structureMessage');
+
 				instance.clearMessage(structureMessage);
-
-				var columnFirst = A.one('.aui-column-first');
-				var columnLast = A.one('.aui-column-last');
-
-				if (columnFirst) {
-					columnFirst.hide();
-				}
-
-				if (columnLast) {
-					columnLast.setStyle('float', 'left');
-					columnLast.replaceClass('aui-w75', 'aui-w100');
-				}
 			},
 
 			enableFields: function() {
@@ -2400,12 +2373,12 @@ AUI().add(
 					}
 				);
 
+				var body = A.getBody();
+
 				editStructureBtn.on(
 					'click',
 					function(event) {
-						var fieldsContainer = instance.getById('#journalArticleContainer');
-
-						if (fieldsContainer.hasClass('journal-edit-mode')) {
+						if (body.hasClass('portlet-journal-edit-mode')) {
 							instance.disableEditMode();
 						}
 						else {
