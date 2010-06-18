@@ -311,7 +311,18 @@ public class EditPagesAction extends PortletAction {
 
 		long groupId = ParamUtil.getLong(portletRequest, "groupId");
 
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
+		Group group = null;
+
+		if (groupId > 0) {
+			group = GroupLocalServiceUtil.getGroup(groupId);
+		}
+		else {
+			group = themeDisplay.getScopeGroup();
+		}
+
+		if (group == null) {
+			throw new PrincipalException();
+		}
 
 		Layout layout = themeDisplay.getLayout();
 
