@@ -14,10 +14,15 @@
 
 package com.liferay.portal.kernel.servlet;
 
+import com.liferay.portal.kernel.io.OutputStreamWriter;
+import com.liferay.portal.kernel.io.WriterOutputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 
 import javax.servlet.ServletOutputStream;
@@ -37,6 +42,10 @@ public class PipingServletResponse extends HttpServletResponseWrapper {
 
 		super(response);
 
+		if (outputStream == null) {
+			throw new NullPointerException("OutputStream is null");
+		}
+
 		_servletOutputStream = new PipingServletOutputStream(outputStream);
 	}
 
@@ -44,6 +53,10 @@ public class PipingServletResponse extends HttpServletResponseWrapper {
 		HttpServletResponse response, PrintWriter printWriter) {
 
 		super(response);
+
+		if (printWriter == null) {
+			throw new NullPointerException("PrintWriter is null");
+		}
 
 		_printWriter = printWriter;
 	}
@@ -53,11 +66,19 @@ public class PipingServletResponse extends HttpServletResponseWrapper {
 
 		super(response);
 
+		if (servletOutputStream == null) {
+			throw new NullPointerException("ServletOutputStream is null");
+		}
+
 		_servletOutputStream = servletOutputStream;
 	}
 
 	public PipingServletResponse(HttpServletResponse response, Writer writer) {
 		super(response);
+
+		if (writer == null) {
+			throw new NullPointerException("Writer is null");
+		}
 
 		_printWriter = new UnsyncPrintWriter(writer, true);
 	}
@@ -68,22 +89,56 @@ public class PipingServletResponse extends HttpServletResponseWrapper {
 			pageContext.getOut());
 	}
 
-	public ServletOutputStream getOutputStream() {
-		if (_servletOutputStream == null) {
-			throw new IllegalStateException("Servlet output stream is null");
+	public ServletOutputStream getOutputStream()
+		throws UnsupportedEncodingException {
+
+		if (_calledGetWriter) {
+			throw new IllegalStateException("Cannot obtain OutputStream " +
+				"because Writer is already in use");
 		}
+
+		if (_servletOutputStream == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Get OutputStream on a PipingServletResponse " +
+					"with Writer. Will do auto convert, but this is very bad " +
+					"for performance.");
+			}
+			_servletOutputStream = new PipingServletOutputStream(
+				new WriterOutputStream(_printWriter));
+		}
+
+		_calledGetOutputStream = true;
 
 		return  _servletOutputStream;
 	}
 
-	public PrintWriter getWriter() {
-		if (_printWriter == null) {
-			throw new IllegalStateException("Print writer is null");
+	public PrintWriter getWriter() throws UnsupportedEncodingException {
+
+		if (_calledGetOutputStream) {
+			throw new IllegalStateException("Cannot obtain Writer " +
+				"because OutputStream is already in use");
 		}
+
+		if (_printWriter == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Get Writer on a PipingServletResponse with " +
+					"OuputStream. Will do auto convert, but this is very " +
+					"bad for performance.");
+			}
+			_printWriter = new UnsyncPrintWriter(new OutputStreamWriter(
+				_servletOutputStream));
+		}
+
+		_calledGetWriter = true;
 
 		return _printWriter;
 	}
 
+	private static Log _log = LogFactoryUtil.getLog(
+		PipingServletResponse.class);
+
+	private boolean _calledGetOutputStream;
+	private boolean _calledGetWriter;
 	private PrintWriter _printWriter;
 	private ServletOutputStream _servletOutputStream;
 
