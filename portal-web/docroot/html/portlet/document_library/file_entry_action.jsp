@@ -171,7 +171,6 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 					message="view-original-file"
 					url="<%= viewOriginalFileURL %>"
 				/>
-				
 			</c:if>
 
 			<c:if test="<%= showActions %>">
