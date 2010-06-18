@@ -155,7 +155,7 @@ long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getC
 
 				<div class="task-content-actions">
 					<liferay-ui:icon-list>
-						<c:if test="<%= viewPortletURL != null %>">
+						<c:if test="<%= (viewPortletURL != null) && assetRenderer.hasEditPermission(permissionChecker) %>">
 							<liferay-ui:icon image="view" url="<%= viewPortletURL %>" />
 						</c:if>
 
@@ -168,7 +168,14 @@ long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getC
 							editPortletURL.setParameter("redirect", currentURL);
 							%>
 
-							<liferay-ui:icon image="edit" url="<%= editPortletURL.toString() %>" />
+							<c:choose>
+								<c:when test="<%= assetRenderer.hasEditPermission(permissionChecker) %>">
+									<liferay-ui:icon image="edit" url="<%= editPortletURL.toString() %>" />
+								</c:when>
+								<c:otherwise>
+									<liferay-ui:icon-help message="please-assign-the-task-to-yourself-to-be-able-to-edit-the-content" />
+								</c:otherwise>
+							</c:choose>
 						</c:if>
 					</liferay-ui:icon-list>
 				</div>
