@@ -44,7 +44,7 @@ public class StripFilterTest extends TestCase {
 		assertFalse(stripFilter.hasMarker(charBuffer, marker));
 		assertEquals(2, charBuffer.position());
 
-		// Do not match
+		// No match
 
 		charBuffer = CharBuffer.wrap("abcdef");
 		marker = "abce".toCharArray();
@@ -72,7 +72,7 @@ public class StripFilterTest extends TestCase {
 	public void testProcessCSS() throws IOException {
 		StripFilter stripFilter = new StripFilter();
 
-		// Miss close tag
+		// Missing close tag
 
 		CharBuffer charBuffer = CharBuffer.wrap("style type=\"text/css\">abc");
 
@@ -123,7 +123,7 @@ public class StripFilterTest extends TestCase {
 			stringWriter.toString());
 		assertEquals(code.length() + 30, charBuffer.position());
 
-		// Minifier code with tail spaces
+		// Minifier code with trailing spaces
 
 		charBuffer = CharBuffer.wrap(
 			"style type=\"text/css\">" + code + "</style> \r\t\n");
@@ -140,7 +140,7 @@ public class StripFilterTest extends TestCase {
 	public void testProcessJavaScript() throws IOException {
 		StripFilter stripFilter = new StripFilter();
 
-		// Miss close tag
+		// Missing close tag
 
 		CharBuffer charBuffer = CharBuffer.wrap("script>abc");
 		StringWriter stringWriter = new StringWriter();
@@ -189,7 +189,7 @@ public class StripFilterTest extends TestCase {
 			stringWriter.toString());
 		assertEquals(code.length() + 16, charBuffer.position());
 
-		// Minifier code with tail spaces
+		// Minifier code with trailing spaces
 
 		charBuffer = CharBuffer.wrap("script>" + code + "</script> \t\r\n");
 		stringWriter = new StringWriter();
@@ -206,7 +206,7 @@ public class StripFilterTest extends TestCase {
 	public void testProcessPre() throws IOException {
 		StripFilter stripFilter = new StripFilter();
 
-		// Miss close tag
+		// Missing close tag
 
 		CharBuffer charBuffer = CharBuffer.wrap("pre>abcde");
 		StringWriter stringWriter = new StringWriter();
@@ -216,7 +216,7 @@ public class StripFilterTest extends TestCase {
 		assertEquals("pre>", stringWriter.toString());
 		assertEquals(4, charBuffer.position());
 
-		// Without tail spaces
+		// Without trailing spaces
 
 		charBuffer = CharBuffer.wrap("pre>a b </pre>");
 		stringWriter = new StringWriter();
@@ -226,7 +226,7 @@ public class StripFilterTest extends TestCase {
 		assertEquals("pre>a b </pre>", stringWriter.toString());
 		assertEquals(14, charBuffer.position());
 
-		// With tail spaces
+		// With trailing spaces
 
 		charBuffer = CharBuffer.wrap("pre>a b </pre> \r\n\tc");
 		stringWriter = new StringWriter();
@@ -240,7 +240,7 @@ public class StripFilterTest extends TestCase {
 	public void testProcessTextArea() throws IOException {
 		StripFilter stripFilter = new StripFilter();
 
-		// Miss close tag
+		// Missing close tag
 
 		CharBuffer charBuffer = CharBuffer.wrap("textarea >abcde");
 		StringWriter stringWriter = new StringWriter();
@@ -250,7 +250,7 @@ public class StripFilterTest extends TestCase {
 		assertEquals("textarea ", stringWriter.toString());
 		assertEquals(9, charBuffer.position());
 
-		// Without tail spaces
+		// Without trailing spaces
 
 		charBuffer = CharBuffer.wrap("textarea >a b </textarea>");
 		stringWriter = new StringWriter();
@@ -260,7 +260,7 @@ public class StripFilterTest extends TestCase {
 		assertEquals("textarea >a b </textarea>", stringWriter.toString());
 		assertEquals(25, charBuffer.position());
 
-		// With tail spaces
+		// With trailing spaces
 
 		charBuffer = CharBuffer.wrap("textarea >a b </textarea> \r\n\tc");
 		stringWriter = new StringWriter();
