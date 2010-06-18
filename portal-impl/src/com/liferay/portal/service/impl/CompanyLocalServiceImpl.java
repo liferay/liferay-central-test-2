@@ -49,6 +49,7 @@ import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.CompanyLocalServiceBaseImpl;
+import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.Encryptor;
@@ -653,7 +654,9 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			for (String key : properties.keySet()) {
 				String value = properties.getProperty(key);
 
-				preferences.setValue(key, value);
+				if (!value.equals(Portal.TEMP_OBFUSCATION_VALUE)) {
+					preferences.setValue(key, value);
+				}
 			}
 
 			preferences.store();

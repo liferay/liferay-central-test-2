@@ -82,6 +82,9 @@ public interface Portal {
 
 	public static final String PORTLET_XML_FILE_NAME_STANDARD = "portlet.xml";
 
+	public static final String TEMP_OBFUSCATION_VALUE =
+		"TEMP_OBFUSCATION_VALUE";
+
 	/**
 	 * Adds the description for a page. This appends to the existing page
 	 * description.
