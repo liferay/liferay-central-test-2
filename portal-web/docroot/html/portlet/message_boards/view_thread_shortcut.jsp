@@ -57,7 +57,7 @@ if (treeWalker.isOdd()) {
 		<%
 		String layoutFullURL = PortalUtil.getLayoutFullURL(themeDisplay);
 
-		String messageURL = layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR + "message_boards/message/" + selMessage.getMessageId();
+		String messageURL = layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR + "message_boards/view_message/" + selMessage.getMessageId();
 
 		if (windowState.equals(WindowState.MAXIMIZED)) {
 			messageURL += "/maximized";
