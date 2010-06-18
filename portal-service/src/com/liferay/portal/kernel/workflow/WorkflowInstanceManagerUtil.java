@@ -64,7 +64,7 @@ public class WorkflowInstanceManagerUtil {
 			completed);
 	}
 
-	public int getWorkflowInstanceCount(
+	public static int getWorkflowInstanceCount(
 			long companyId, Long userId, String assetClassName,
 			Long assetClassPK, Boolean completed)
 		throws WorkflowException {
@@ -89,7 +89,7 @@ public class WorkflowInstanceManagerUtil {
 			end, orderByComparator);
 	}
 
-	public List<WorkflowInstance> getWorkflowInstances(
+	public static List<WorkflowInstance> getWorkflowInstances(
 			long companyId, Long userId, String assetClassName,
 			Long assetClassPK, Boolean completed, int start,
 			int end, OrderByComparator orderByComparator)
