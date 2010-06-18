@@ -98,7 +98,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 
 			<div class="journal-article-component-container">
 				<c:if test='<%= elType.equals("text") %>'>
-					<aui:input cssClass="lfr-input-text-container" label="" name="text" size="55" type="text" value="<%= elContent %>" />
+					<aui:input cssClass="lfr-input-text-container" label="" name='<%= languageId + "text" %>' size="55" type="text" value="<%= elContent %>" />
 				</c:if>
 
 				<c:if test='<%= elType.equals("text_box") %>'>
