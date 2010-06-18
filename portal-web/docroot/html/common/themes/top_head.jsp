@@ -49,7 +49,7 @@ if (layout != null) {
 	else if (layout.isTypePortlet()) {
 		portlets = layoutTypePortlet.getAllPortlets();
 
-		if (themeDisplay.isStateMaximized()) {
+		if (themeDisplay.isStateMaximized() || themeDisplay.isStatePopUp()) {
 			if (Validator.isNotNull(ppid)) {
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), ppid);
 
