@@ -54,6 +54,8 @@ public interface WorkflowInstance {
 
 	public long getWorkflowInstanceId();
 
+	public boolean isComplete();
+
 	public void setParentWorkflowInstance(
 		WorkflowInstance parentWorkflowInstance);
 

@@ -48,8 +48,8 @@ public class JournalArticleWorkflowHandler extends BaseWorkflowHandler {
 	public AssetRenderer getAssetRenderer(long classPK)
 		throws PortalException, SystemException {
 
-		JournalArticle article = JournalArticleLocalServiceUtil.getArticle(
-			classPK);
+		JournalArticle article =
+			JournalArticleLocalServiceUtil.getLatestArticle(classPK);
 
 		return new JournalArticleAssetRenderer(article);
 	}
@@ -68,15 +68,18 @@ public class JournalArticleWorkflowHandler extends BaseWorkflowHandler {
 
 		long userId = GetterUtil.getLong(
 			(String)workflowContext.get(WorkflowConstants.CONTEXT_USER_ID));
-		long classPK = GetterUtil.getLong(
+		long resourcePrimKey = GetterUtil.getLong(
 			(String)workflowContext.get(
 				WorkflowConstants.CONTEXT_ENTRY_CLASS_PK));
 
 		ServiceContext serviceContext = (ServiceContext)workflowContext.get(
 			"serviceContext");
 
+		JournalArticle article =
+			JournalArticleLocalServiceUtil.getLatestArticle(resourcePrimKey);
+
 		return JournalArticleLocalServiceUtil.updateStatus(
-			userId, classPK, status, serviceContext);
+			userId, article, status, null, serviceContext);
 	}
 
 	protected String getIconPath(ThemeDisplay themeDisplay) {

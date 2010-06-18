@@ -342,8 +342,8 @@ public class JournalArticleLocalServiceImpl
 
 		WorkflowHandlerRegistryUtil.startWorkflowInstance(
 			user.getCompanyId(), groupId, userId,
-			JournalArticle.class.getName(), article.getId(), article,
-			serviceContext);
+			JournalArticle.class.getName(), article.getResourcePrimKey(),
+			article, serviceContext);
 
 		return article;
 	}
@@ -1242,6 +1242,12 @@ public class JournalArticleLocalServiceImpl
 			if (articles.size() == 0) {
 				articles = journalArticlePersistence.findByR_ST(
 					resourcePrimKey, WorkflowConstants.STATUS_PENDING, 0, 1,
+					orderByComparator);
+			}
+
+			if (articles.size() == 0) {
+				articles = journalArticlePersistence.findByR_ST(
+					resourcePrimKey, WorkflowConstants.STATUS_DRAFT, 0, 1,
 					orderByComparator);
 			}
 		}

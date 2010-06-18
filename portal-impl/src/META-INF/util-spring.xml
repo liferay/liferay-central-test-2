@@ -248,6 +248,11 @@
 			<bean class="com.liferay.portal.workflow.WorkflowHandlerRegistryImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.workflow.permission.WorkflowPermissionUtil" class="com.liferay.portal.kernel.workflow.permission.WorkflowPermissionUtil">
+		<property name="workflowPermission">
+			<bean class="com.liferay.portal.workflow.permission.WorkflowPermissionImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.xml.SAXReader" class="com.liferay.portal.xml.SAXReaderImpl" />
 	<bean id="com.liferay.portal.kernel.xml.SAXReaderUtil" class="com.liferay.portal.kernel.xml.SAXReaderUtil">
 		<property name="SAXReader" ref="com.liferay.portal.kernel.xml.SAXReader" />

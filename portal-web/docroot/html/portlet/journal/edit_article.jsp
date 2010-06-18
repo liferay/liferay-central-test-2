@@ -569,6 +569,20 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 			<br />
 
+			<%
+			boolean pending = false;
+
+			if (article != null) {
+				pending = article.isPending();
+			}
+			%>
+
+			<c:if test="<%= pending %>">
+				<div class="portlet-msg-info">
+					<liferay-ui:message key="there-is-a-publication-workflow-in-process" />
+				</div>
+			</c:if>
+
 			<aui:button-row cssClass="journal-article-button-row">
 
 				<%
@@ -585,19 +599,8 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				<c:if test="<%= hasSavePermission %>">
 					<aui:button name="saveArticleBtn" value="save" />
 
-					<%
-					boolean pending = false;
-
-					if (article != null) {
-						pending = article.isPending();
-					}
-					%>
-
 					<aui:button disabled="<%= pending %>" name="publishBtn" value="publish" />
 
-					<c:if test="<%= pending %>">
-						<liferay-ui:icon-help message="there-is-a-publication-workflow-in-process" />
-					</c:if>
 				</c:if>
 
 				<c:if test="<%= Validator.isNotNull(structureId) %>">

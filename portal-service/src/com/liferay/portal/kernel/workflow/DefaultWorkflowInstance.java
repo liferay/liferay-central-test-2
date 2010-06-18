@@ -84,6 +84,10 @@ public class DefaultWorkflowInstance implements Serializable, WorkflowInstance {
 		return _workflowInstanceId;
 	}
 
+	public boolean isComplete() {
+		return (getEndDate() != null);
+	}
+
 	public void setChildrenWorkflowInstances(
 		List<WorkflowInstance> childrenWorkflowInstances) {
 

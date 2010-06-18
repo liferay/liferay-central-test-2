@@ -16,8 +16,12 @@ package com.liferay.portlet.journal.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.workflow.permission.WorkflowPermission;
+import com.liferay.portal.kernel.workflow.permission.WorkflowPermissionUtil;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.workflow.permission.WorkflowPermissionImpl;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
@@ -62,6 +66,17 @@ public class JournalArticlePermission {
 	public static boolean contains(
 		PermissionChecker permissionChecker, JournalArticle article,
 		String actionId) {
+
+		if (article.isPending() && !actionId.equals(ActionKeys.VIEW)) {
+			Boolean hasPermission = WorkflowPermissionUtil.hasPermission(
+				article.getCompanyId(), article.getGroupId(),
+				JournalArticle.class.getName(), article.getResourcePrimKey(),
+				permissionChecker.getUserId(), actionId);
+
+			if (hasPermission != null) {
+				return hasPermission.booleanValue();
+			}
+		}
 
 		if (permissionChecker.hasOwnerPermission(
 				article.getCompanyId(), JournalArticle.class.getName(),
