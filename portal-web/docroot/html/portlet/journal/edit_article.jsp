@@ -216,11 +216,11 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	<input name="xml" type="hidden" value="" />
 </aui:form>
 
-<portlet:actionURL var="editArticleActionURL">
+<portlet:actionURL var="editArticleActionURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
 	<portlet:param name="struts_action" value="/journal/edit_article" />
 </portlet:actionURL>
 
-<portlet:renderURL var="editArticleRenderURL">
+<portlet:renderURL var="editArticleRenderURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
 	<portlet:param name="struts_action" value="/journal/edit_article" />
 </portlet:renderURL>
 
@@ -315,7 +315,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 							<table class="lfr-table">
 							<tr>
 								<td>
-									<aui:select disabled="<%= article == null %>" label="default-language" name="defaultLanguageIdSelect">
+									<aui:select disabled="<%= article == null %>" id="defaultLanguageIdSelect" label="default-language" name="defaultLanguageId">
 
 										<%
 										if ((availableLocales != null) && (availableLocales.length > 0)) {
@@ -668,7 +668,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	}
 
 	function <portlet:namespace />getLanguageViewURL(languageId) {
-		return "<liferay-portlet:renderURL><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /></liferay-portlet:renderURL>&<portlet:namespace />version=<%= version %>&<portlet:namespace />languageId=" + languageId;
+		return "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /><portlet:param name="version" value="<%= String.valueOf(version) %>" /></portlet:renderURL>&<portlet:namespace />languageId=" + languageId;
 	}
 
 	function <portlet:namespace />initEditor() {

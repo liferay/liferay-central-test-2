@@ -8,6 +8,7 @@ AUI().add(
 				'<span class="journal-article-close"></span>' +
 				'<span class="folder">' +
 					'<div class="field-container">' +
+						'<input class="journal-article-localized" type="hidden" value="false" />' +
 						'<div class="journal-article-move-handler"></div>' +
 						'<label for="" class="journal-article-field-label"><span>{fieldLabel}</span></label>' +
 						'<div class="journal-article-component-container"></div>' +
@@ -440,23 +441,35 @@ AUI().add(
 
 				var articleContent = instance.getArticleContentXML();
 				var cmdInput = instance.getByName(form, 'cmd');
-				var defaultLocaleInput = instance.getByName(form, 'defaultLocale');
+				var contentInput = instance.getByName(form, 'content');
 				var languageIdInput = instance.getByName(form, 'languageId');
+				var lastLanguageIdInput = instance.getByName(form, 'lastLanguageId');
 				var redirectInput = instance.getByName(form, 'redirect');
 
-				if (instance.articleChanged() && confirm(Liferay.Language.get('would-you-like-to-save-the-changes-made-to-this-language'))) {
-					var contentInput = instance.getByName(form, 'content');
+				if (instance.articleChanged()) {
+					if (confirm(Liferay.Language.get('would-you-like-to-save-the-changes-made-to-this-language'))) {
+						cmdInput.val('update');
 
-					cmdInput.val('update');
-					contentInput.val(articleContent);
-				}
-				else {
-					if (!confirm(Liferay.Language.get('are-you-sure-you-want-to-switch-the-languages-view'))) {
-						languageIdInput.one('option[value=' + defaultLocaleInput.val() + ']').attr('selected', 'selected');
+						contentInput.val(articleContent);
+					}
+					else {
+						if (!confirm(Liferay.Language.get('are-you-sure-you-want-to-switch-the-languages-view'))) {
+							languageIdInput.val(lastLanguageIdInput.val());
 
-						return;
+							return;
+						}
+						else {
+							contentInput.val('');
+						}
 					}
 				}
+				else {
+					contentInput.val('');
+				}
+
+				var workflowActionInput = instance.getByName(form, 'workflowAction');
+
+				workflowActionInput.val(Liferay.Workflow.STATUS_ANY);
 
 				var languageId = languageIdInput.val();
 				var getLanguageViewURL = window[instance.portletNamespace + 'getLanguageViewURL'];
@@ -2178,7 +2191,7 @@ AUI().add(
 						var source = instance.getSelectedField();
 						var defaultLocale = instance.getDefaultLocale();
 						var checkbox = event.target;
-						var isLocalized = checkbox.test('input[type=checkbox]');
+						var isLocalized = checkbox.get('checked');
 						var localizedValue = source.one('.journal-article-localized');
 
 						if (languageIdSelect) {
