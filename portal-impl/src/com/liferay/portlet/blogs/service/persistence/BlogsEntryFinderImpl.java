@@ -159,6 +159,7 @@ public class BlogsEntryFinderImpl
 			qPos.add(companyId);
 			qPos.add(groupId);
 			qPos.add(groupId);
+			qPos.add(groupId);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
 				qPos.add(status);
