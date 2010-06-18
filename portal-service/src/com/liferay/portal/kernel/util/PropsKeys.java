@@ -493,6 +493,8 @@ public interface PropsKeys {
 
 	public static final String DL_LAYOUTS_SYNC_PUBLIC_FOLDER = "dl.layouts.sync.public.folder";
 
+	public static final String DL_PUBLISH_TO_LIVE_BY_DEFAULT = "dl.publish.to.live.by.default";
+
 	public static final String DL_WEBDAV_HOLD_LOCK = "dl.webdav.hold.lock";
 
 	public static final String DL_WEBDAV_SAVE_TO_SINGLE_VERSION = "dl.webdav.save.to.single.version";
@@ -602,6 +604,8 @@ public interface PropsKeys {
 	public static final String IG_IMAGE_MAX_SIZE = "ig.image.max.size";
 
 	public static final String IG_IMAGE_THUMBNAIL_MAX_DIMENSION = "ig.image.thumbnail.max.dimension";
+
+	public static final String IG_PUBLISH_TO_LIVE_BY_DEFAULT = "ig.publish.to.live.by.default";
 
 	public static final String IMAGE_DEFAULT_COMPANY_LOGO = "image.default.company.logo";
 

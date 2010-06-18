@@ -378,6 +378,8 @@ public class PropsValues {
 
 	public static final boolean DL_LAYOUTS_SYNC_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DL_LAYOUTS_SYNC_ENABLED));
 
+	public static final boolean DL_PUBLISH_TO_LIVE_BY_DEFAULT = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DL_PUBLISH_TO_LIVE_BY_DEFAULT));
+
 	public static boolean DL_WEBDAV_HOLD_LOCK = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DL_WEBDAV_HOLD_LOCK));
 
 	public static boolean DL_WEBDAV_SAVE_TO_SINGLE_VERSION = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DL_WEBDAV_SAVE_TO_SINGLE_VERSION));
@@ -459,6 +461,8 @@ public class PropsValues {
 	public static final int IG_IMAGE_MAX_SIZE = GetterUtil.getInteger(PropsUtil.get(PropsKeys.IG_IMAGE_MAX_SIZE));
 
 	public static final int IG_IMAGE_THUMBNAIL_MAX_DIMENSION = GetterUtil.getInteger(PropsUtil.get(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION));
+
+	public static final boolean IG_PUBLISH_TO_LIVE_BY_DEFAULT = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.IG_PUBLISH_TO_LIVE_BY_DEFAULT));
 
 	public static final String IMAGE_HOOK_FILE_SYSTEM_ROOT_DIR = PropsUtil.get(PropsKeys.IMAGE_HOOK_FILE_SYSTEM_ROOT_DIR);
 

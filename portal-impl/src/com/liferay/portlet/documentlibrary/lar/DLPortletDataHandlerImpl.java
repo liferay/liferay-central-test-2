@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
@@ -826,6 +827,14 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 	}
 
+	public boolean isAlwaysExportable() {
+		return _ALWAYS_EXPORTABLE;
+	}
+
+	public boolean isPublishToLiveByDefault() {
+		return PropsValues.DL_PUBLISH_TO_LIVE_BY_DEFAULT;
+	}
+
 	protected static void exportFileRank(
 			PortletDataContext context, Element fileRanksEl,
 			DLFileRank fileRank)
@@ -1042,6 +1051,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			return false;
 		}
 	}
+
+	private static final boolean _ALWAYS_EXPORTABLE = true;
 
 	private static final String _NAMESPACE = "document_library";
 

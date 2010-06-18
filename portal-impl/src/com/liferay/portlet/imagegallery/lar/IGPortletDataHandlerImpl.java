@@ -34,6 +34,7 @@ import com.liferay.portal.model.Image;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.imagegallery.DuplicateImageNameException;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
@@ -481,6 +482,14 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 	}
 
+	public boolean isAlwaysExportable() {
+		return _ALWAYS_EXPORTABLE;
+	}
+
+	public boolean isPublishToLiveByDefault() {
+		return PropsValues.DL_PUBLISH_TO_LIVE_BY_DEFAULT;
+	}
+
 	protected static void exportFolder(
 			PortletDataContext context, Element foldersEl, Element imagesEl,
 			IGFolder folder)
@@ -622,6 +631,8 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		return sb.toString();
 	}
+
+	private static final boolean _ALWAYS_EXPORTABLE = true;
 
 	private static final String _NAMESPACE = "image_gallery";
 
