@@ -6,9 +6,20 @@
 
 .breadcrumbs li {
 	background: url(../images/arrows/05_right.png) no-repeat 100% 50%;
-	display: inline;
+	display: inline-block;
 	margin-right: 5px;
+	max-width: 50%;
 	padding-right: 15px;
+	vertical-align: middle;
+}
+
+.ie7 .breadcrumbs li {
+	display: inline;
+	zoom: 1;
+}
+
+.breadcrumbs a {
+	display: block;
 }
 
 .breadcrumbs .last {
@@ -31,14 +42,11 @@
 	background-color: #FFF;
 	border: 1px solid #DEDEDE;
 	border-color: #C0C2C5;
-	height: 1.8em;
 	margin: 0;
 }
 
 .site-breadcrumbs li {
 	background-image: none;
-	float: left;
-	line-height: 1.8em;
 	margin-right: 0;
 	padding-left: 0.75em;
 	padding-right: 0;
@@ -47,8 +55,7 @@
 .site-breadcrumbs li span {
 	background: url(../images/common/breadcrumbs.png) no-repeat 100% 50%;
 	display: block;
-	line-height: 1.8em;
-	padding: 0 15px 0 0;
+	padding: 0.5em 15px 0.5em 0;
 }
 
 .site-breadcrumbs li span a {
@@ -66,7 +73,6 @@
 }
 
 .site-breadcrumbs .last {
-	display: inline;
 	font-size: 1em;
 	margin-top: 0;
 	padding-right: 0;

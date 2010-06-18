@@ -70,20 +70,6 @@ html > .lfr-dockbar-pinned {
 	z-index: 1000;
 }
 
-/* ---------- Site breadcrumbs ---------- */
-
-.site-breadcrumbs ul {
-	height: 2.3em;
-}
-
-.site-breadcrumbs li {
-	float: left;
-}
-
-.site-breadcrumbs li span {
-	line-height: 2.3em;
-}
-
 /* ---------- Control panel ---------- */
 
 .lfr-ctrl-panel {
