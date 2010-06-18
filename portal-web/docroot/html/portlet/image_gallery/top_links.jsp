@@ -46,8 +46,6 @@ portletURL.setParameter("tag", StringPool.BLANK);
 				message="image-home"
 				url='<%= (topLink.equals("image-home") && folderId == 0 && viewFolder && !useAssetEntryQuery) ? StringPool.BLANK : portletURL.toString() %>'
 			/>
-				
-
 
 			<%
 			portletURL.setParameter("topLink", "recent-images");

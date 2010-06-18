@@ -50,7 +50,6 @@ Set<Long> categorySubscriptionClassPKs = (Set<Long>)row.getParameter("categorySu
 			image="permissions"
 			url="<%= permissionsURL %>"
 		/>
-		
 	</c:if>
 
 	<liferay-ui:icon
