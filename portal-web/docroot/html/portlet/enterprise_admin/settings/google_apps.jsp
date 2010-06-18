@@ -19,7 +19,6 @@
 <%
 String googleAppsUsername = ParamUtil.getString(request, "settings--" + PropsKeys.GOOGLE_APPS_USERNAME + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.GOOGLE_APPS_USERNAME));
 String googleAppsPassword = ParamUtil.getString(request, "settings--" + PropsKeys.GOOGLE_APPS_PASSWORD + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.GOOGLE_APPS_PASSWORD));
-String googleAppsPasswordTemp = googleAppsPassword.equals("") ? "" : PwdGenerator.getPassword();
 %>
 
 <h3><liferay-ui:message key="google-apps" /></h3>
@@ -27,7 +26,5 @@ String googleAppsPasswordTemp = googleAppsPassword.equals("") ? "" : PwdGenerato
 <aui:fieldset>
 	<aui:input cssClass="lfr-input-text-container" label="user-name" name='<%= "settings--" + PropsKeys.GOOGLE_APPS_USERNAME + "--" %>' type="text" value="<%= googleAppsUsername %>" />
 
-	<aui:input cssClass="lfr-input-text-container" label="password" name='<%= "settings--" + PropsKeys.GOOGLE_APPS_PASSWORD + "--" %>' type="password" value="<%= googleAppsPasswordTemp %>" />
-
-	<aui:input name='<%= "settings--" + PropsKeys.GOOGLE_APPS_PASSWORD + ".temp--" %>' type="hidden" value="<%= googleAppsPasswordTemp %>" />
+	<aui:input cssClass="lfr-input-text-container" label="password" name='<%= "settings--" + PropsKeys.GOOGLE_APPS_PASSWORD + "--" %>' type="password" value="<%= googleAppsPassword %>" />
 </aui:fieldset>
