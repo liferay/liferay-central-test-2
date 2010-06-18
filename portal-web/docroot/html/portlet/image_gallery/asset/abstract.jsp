@@ -27,7 +27,7 @@ Image smallImage = ImageLocalServiceUtil.getImage(image.getSmallImageId());
 
 <c:if test="<%= smallImage != null %>">
 	<aui:a href="<%= assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, StringPool.BLANK) %>">
-		<img style="text-align: left;" alt="<liferay-ui:message key="<%= assetRenderer.getViewInContextMessage() %>" />" class="asset-small-image" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= smallImage.getImageId() %>">
+		<img alt="<liferay-ui:message key="<%= assetRenderer.getViewInContextMessage() %>" />" class="asset-small-image" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= smallImage.getImageId() %>" style="text-align: left;" />
 	</aui:a>
 </c:if>
 
