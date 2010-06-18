@@ -154,6 +154,10 @@ public class PortletExporter {
 
 		long lastPublishDate = System.currentTimeMillis();
 
+		if (endDate != null) {
+			lastPublishDate = endDate.getTime();
+		}
+
 		StopWatch stopWatch = null;
 
 		if (_log.isInfoEnabled()) {
