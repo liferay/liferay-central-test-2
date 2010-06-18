@@ -15,6 +15,7 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.image.ImageProcessorImplTest;
+import com.liferay.portal.servlet.filters.strip.StripFilterTest;
 import com.liferay.portal.xmlrpc.XmlRpcParserTest;
 import com.liferay.portlet.RouterImplTest;
 
@@ -35,6 +36,7 @@ public class MiscTestSuite extends TestSuite {
 		testSuite.addTestSuite(ImageProcessorImplTest.class);
 		testSuite.addTestSuite(MemoryMultiValueMapTest.class);
 		testSuite.addTestSuite(RouterImplTest.class);
+		testSuite.addTestSuite(StripFilterTest.class);
 		testSuite.addTestSuite(XmlRpcParserTest.class);
 
 		return testSuite;
