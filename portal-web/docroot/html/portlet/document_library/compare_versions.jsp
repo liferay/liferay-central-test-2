@@ -30,7 +30,7 @@ List[] diffResults = (List[])renderRequest.getAttribute(WebKeys.DIFF_RESULTS);
 />
 
 <liferay-ui:diff
+	diffResults="<%= diffResults %>"
 	sourceName="<%= sourceName %>"
 	targetName="<%= targetName %>"
-	diffResults="<%= diffResults %>"
 />

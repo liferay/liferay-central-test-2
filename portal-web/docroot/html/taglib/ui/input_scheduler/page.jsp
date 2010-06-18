@@ -28,28 +28,28 @@
 	<aui:field-wrapper label="start-date">
 		<div class="aui-field-row">
 			<liferay-ui:input-date
-				monthParam="schedulerStartDateMonth"
-				monthValue="<%= cal.get(Calendar.MONTH) %>"
 				dayParam="schedulerStartDateDay"
 				dayValue="<%= cal.get(Calendar.DATE) %>"
+				disabled="<%= false %>"
+				firstDayOfWeek="<%= cal.getFirstDayOfWeek() - 1 %>"
+				monthParam="schedulerStartDateMonth"
+				monthValue="<%= cal.get(Calendar.MONTH) %>"
 				yearParam="schedulerStartDateYear"
 				yearValue="<%= cal.get(Calendar.YEAR) %>"
 				yearRangeStart="<%= cal.get(Calendar.YEAR) %>"
 				yearRangeEnd="<%= cal.get(Calendar.YEAR) + 5 %>"
-				firstDayOfWeek="<%= cal.getFirstDayOfWeek() - 1 %>"
-				disabled="<%= false %>"
 			/>
 
 			&nbsp;
 
 			<liferay-ui:input-time
+				amPmParam="schedulerStartDateAmPm"
+				amPmValue="<%= cal.get(Calendar.AM_PM) %>"
 				hourParam="schedulerStartDateHour"
 				hourValue="<%= cal.get(Calendar.HOUR) %>"
 				minuteParam="schedulerStartDateMinute"
 				minuteValue="<%= cal.get(Calendar.MINUTE) %>"
 				minuteInterval="<%= 1 %>"
-				amPmParam="schedulerStartDateAmPm"
-				amPmValue="<%= cal.get(Calendar.AM_PM) %>"
 			/>
 		</div>
 	</aui:field-wrapper>
@@ -63,16 +63,16 @@
 			<aui:input first="true" inlineField="<%= true %>" label="end-by" name="endDateType" type="radio" value="1" />
 
 			<liferay-ui:input-date
-				monthParam="schedulerEndDateMonth"
-				monthValue="<%= cal.get(Calendar.MONTH) %>"
 				dayParam="schedulerEndDateDay"
 				dayValue="<%= cal.get(Calendar.DATE) %>"
+				disabled="<%= false %>"
+				firstDayOfWeek="<%= cal.getFirstDayOfWeek() - 1 %>"
+				monthParam="schedulerEndDateMonth"
+				monthValue="<%= cal.get(Calendar.MONTH) %>"
 				yearParam="schedulerEndDateYear"
 				yearValue="<%= cal.get(Calendar.YEAR) %>"
 				yearRangeStart="<%= cal.get(Calendar.YEAR) %>"
 				yearRangeEnd="<%= cal.get(Calendar.YEAR) + 5 %>"
-				firstDayOfWeek="<%= cal.getFirstDayOfWeek() - 1 %>"
-				disabled="<%= false %>"
 			/>
 
 			&nbsp;

@@ -148,7 +148,9 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 			<aui:button disabled="<%= pending %>" name="saveButton" type="submit" value="publish" />
 
 			<c:if test="<%= pending %>">
-				<liferay-ui:icon-help message="there-is-a-publication-workflow-in-process" />
+				<liferay-ui:icon-help
+					message="there-is-a-publication-workflow-in-process"
+				/>
 			</c:if>
 
 			<aui:button name="cancelButton" onClick="<%= redirect %>" type="cancel" />

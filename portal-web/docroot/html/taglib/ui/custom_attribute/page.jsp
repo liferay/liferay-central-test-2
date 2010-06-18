@@ -111,29 +111,29 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 								%>
 
 								<liferay-ui:input-date
-									monthParam='<%= "ExpandoAttribute--" + name + "--Month" %>'
-									monthValue='<%= valueDate.get(Calendar.MONTH) %>'
 									dayParam='<%= "ExpandoAttribute--" + name + "--Day" %>'
 									dayValue="<%= valueDate.get(Calendar.DATE) %>"
+									disabled="<%= false %>"
+									firstDayOfWeek="<%= valueDate.getFirstDayOfWeek() - 1 %>"
+									monthParam='<%= "ExpandoAttribute--" + name + "--Month" %>'
+									monthValue='<%= valueDate.get(Calendar.MONTH) %>'
 									yearParam='<%= "ExpandoAttribute--" + name + "--Year" %>'
 									yearValue="<%= valueDate.get(Calendar.YEAR) %>"
 									yearRangeStart="<%= valueDate.get(Calendar.YEAR) - 100 %>"
 									yearRangeEnd="<%= valueDate.get(Calendar.YEAR) + 100 %>"
-									firstDayOfWeek="<%= valueDate.getFirstDayOfWeek() - 1 %>"
-									disabled="<%= false %>"
 								/>
 
 								&nbsp;
 
 								<liferay-ui:input-time
+									amPmParam='<%= "ExpandoAttribute--" + name + "--AmPm" %>'
+									amPmValue="<%= valueDate.get(Calendar.AM_PM) %>"
+									disabled="<%= false %>"
 									hourParam='<%= "ExpandoAttribute--" + name + "--Hour" %>'
 									hourValue="<%= valueDate.get(Calendar.HOUR) %>"
 									minuteParam='<%= "ExpandoAttribute--" + name + "--Minute" %>'
 									minuteValue="<%= valueDate.get(Calendar.MINUTE) %>"
 									minuteInterval="1"
-									amPmParam='<%= "ExpandoAttribute--" + name + "--AmPm" %>'
-									amPmValue="<%= valueDate.get(Calendar.AM_PM) %>"
-									disabled="<%= false %>"
 								/>
 							</span>
 						</c:when>

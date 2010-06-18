@@ -359,7 +359,9 @@ if (Validator.isNull(redirect)) {
 					<aui:button disabled="<%= pending %>" name="publishButton" onClick='<%= renderResponse.getNamespace() + "publishPage();" %>' type="button" value="publish" />
 
 					<c:if test="<%= pending %>">
-						<liferay-ui:icon-help message="there-is-a-publication-workflow-in-process" />
+						<liferay-ui:icon-help
+							message="there-is-a-publication-workflow-in-process"
+						/>
 					</c:if>
 
 					<aui:button name="previewButton" onClick='<%= renderResponse.getNamespace() + "previewPage();" %>' type="button" value="preview" />

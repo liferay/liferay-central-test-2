@@ -51,9 +51,9 @@ String type = ParamUtil.getString(request, "type");
 		%>
 
 		<liferay-ui:diff
+			diffResults="<%= diffResults %>"
 			sourceName="<%= title + StringPool.SPACE + sourceVersion %>"
 			targetName="<%= title + StringPool.SPACE + targetVersion %>"
-			diffResults="<%= diffResults %>"
 		/>
 	</c:otherwise>
 </c:choose>

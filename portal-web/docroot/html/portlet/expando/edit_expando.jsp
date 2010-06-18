@@ -160,16 +160,16 @@ portletURL.setParameter("modelResource", modelResource);
 
 					<aui:field-wrapper label="default-value">
 						<liferay-ui:input-date
+							dayValue="<%= defaultValueDate.get(Calendar.DATE) %>"
+							dayParam="defaultValueDay"
+							disabled="<%= false %>"
+							firstDayOfWeek="<%= defaultValueDate.getFirstDayOfWeek() - 1 %>"
 							monthParam="defaultValueMonth"
 							monthValue="<%= defaultValueDate.get(Calendar.MONTH) %>"
-							dayParam="defaultValueDay"
-							dayValue="<%= defaultValueDate.get(Calendar.DATE) %>"
 							yearParam="defaultValueYear"
 							yearValue="<%= defaultValueDate.get(Calendar.YEAR) %>"
 							yearRangeStart="<%= defaultValueDate.get(Calendar.YEAR) - 100 %>"
 							yearRangeEnd="<%= defaultValueDate.get(Calendar.YEAR) + 100 %>"
-							firstDayOfWeek="<%= defaultValueDate.getFirstDayOfWeek() - 1 %>"
-							disabled="<%= false %>"
 						/>
 
 						&nbsp;

@@ -103,7 +103,9 @@
 			<div class="tag-properties">
 				<liferay-ui:message key="properties" />:
 
-				<liferay-ui:icon-help message="properties-are-a-way-to-add-more-detailed-information-to-a-specific-tag" />
+				<liferay-ui:icon-help
+					message="properties-are-a-way-to-add-more-detailed-information-to-a-specific-tag"
+				/>
 
 				<div class="aui-helper-hidden tag-property-row">
 					<input class="property-key" type="text" />

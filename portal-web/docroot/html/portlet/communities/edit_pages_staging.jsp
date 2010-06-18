@@ -100,7 +100,9 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-work
 				<td>
 					<liferay-ui:message key="content-creators" />
 
-					<liferay-ui:icon-help message="stage-1-role-help" />
+					<liferay-ui:icon-help
+						message="stage-1-role-help"
+					/>
 				</td>
 			</tr>
 
@@ -137,13 +139,19 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-work
 
 						<c:choose>
 							<c:when test="<%= i == 1 %>">
-								<liferay-ui:icon-help message="stage-2-role-help" />
+								<liferay-ui:icon-help
+									message="stage-2-role-help"
+								/>
 							</c:when>
 							<c:when test="<%= i == workflowStages %>">
-								<liferay-ui:icon-help message="stage-last-role-help" />
+								<liferay-ui:icon-help
+									message="stage-last-role-help"
+								/>
 							</c:when>
 							<c:otherwise>
-								<liferay-ui:icon-help message="stage-review-role-help" />
+								<liferay-ui:icon-help
+									message="stage-review-role-help"
+								/>
 							</c:otherwise>
 						</c:choose>
 					</td>

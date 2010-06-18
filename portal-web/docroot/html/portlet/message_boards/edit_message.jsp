@@ -346,7 +346,9 @@ if (Validator.isNull(redirect)) {
 		<aui:button disabled="<%= pending %>" name="saveButton" type="submit" value="publish" />
 
 		<c:if test="<%= pending %>">
-			<liferay-ui:icon-help message="there-is-a-publication-workflow-in-process" />
+			<liferay-ui:icon-help
+				message="there-is-a-publication-workflow-in-process"
+			/>
 		</c:if>
 
 		<c:if test="<%= MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_FILE) %>">

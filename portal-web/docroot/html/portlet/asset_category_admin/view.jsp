@@ -154,7 +154,9 @@
 			<div class="vocabulary-properties">
 				<liferay-ui:message key="properties" />:
 
-				<liferay-ui:icon-help message="properties-are-a-way-to-add-more-detailed-information-to-a-specific-category" />
+				<liferay-ui:icon-help
+					message="properties-are-a-way-to-add-more-detailed-information-to-a-specific-category"
+				/>
 
 				<div class="aui-helper-hidden vocabulary-property-row">
 					<input class="category-property-key" type="text" />

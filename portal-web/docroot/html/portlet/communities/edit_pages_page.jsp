@@ -267,7 +267,9 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 
 						<input name="TypeSettingsProperties--query-string--" size="30" type="text" value="<%= HtmlUtil.escape(queryString) %>" />
 
-						<liferay-ui:icon-help message="query-string-help" />
+						<liferay-ui:icon-help
+							message="query-string-help"
+						/>
 					</td>
 				</tr>
 			</c:when>
