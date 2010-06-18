@@ -55,7 +55,6 @@ import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.io.Writer;
 
 import java.security.Key;
@@ -70,7 +69,6 @@ import java.util.Set;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletModeException;
 import javax.portlet.PortletRequest;
-import javax.portlet.PortletURL;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceURL;
 import javax.portlet.WindowState;
@@ -84,8 +82,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  */
-public class PortletURLImpl
-	implements LiferayPortletURL, PortletURL, ResourceURL, Serializable {
+public class PortletURLImpl implements LiferayPortletURL {
 
 	public PortletURLImpl(
 		HttpServletRequest request, String portletId, long plid,
