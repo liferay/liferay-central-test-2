@@ -42,7 +42,7 @@ if (treeWalker.isOdd()) {
 %>
 
 <tr class="<%= className %>">
-	<td style="padding-left: <%= depth > 0 ? depth * 10 : 5 %>px; width: 90%;" valign="middle">
+	<td style="padding-left: <%= depth > 0 ? depth * 10 : 5 %>px; width: 90%; vertical-align: middle;">
 		<c:if test="<%= !message.isRoot() %>">
 			<c:choose>
 				<c:when test="<%= !lastNode %>">
@@ -57,7 +57,7 @@ if (treeWalker.isOdd()) {
 		<%
 		String layoutFullURL = PortalUtil.getLayoutFullURL(themeDisplay);
 
-		String messageURL = layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR + "message_boards/message/" + selMessage.getMessageId();
+		String messageURL = layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR + "message_boards/view_message/" + selMessage.getMessageId();
 
 		if (windowState.equals(WindowState.MAXIMIZED)) {
 			messageURL += "/maximized";
@@ -88,7 +88,7 @@ if (treeWalker.isOdd()) {
 			</c:if>
 		</a>
 	</td>
-	<td nowrap>
+	<td style="white-space: nowrap;">
 		<a href="<%= rowHREF %>">
 			<c:if test="<%= !readFlag %>">
 				<strong>
@@ -108,7 +108,7 @@ if (treeWalker.isOdd()) {
 			</c:if>
 		</a>
 	</td>
-	<td nowrap>
+	<td style="white-space: nowrap;">
 		<a href="<%= rowHREF %>"><%= dateFormatDateTime.format(message.getModifiedDate()) %></a>
 	</td>
 </tr>

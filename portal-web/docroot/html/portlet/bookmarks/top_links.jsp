@@ -81,9 +81,9 @@ portletURL.setParameter("tag", StringPool.BLANK);
 			<div class="folder-search">
 				<aui:form action="<%= searchURL %>" method="get" name="searchFm">
 					<liferay-portlet:renderURLParams varImpl="searchURL" />
-					<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-					<aui:input name="breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
-					<aui:input name="searchFolderIds" type="hidden" value="<%= folderId %>" />
+					<aui:input id="topLinks_redirect" name="redirect" type="hidden" value="<%= currentURL %>" />
+					<aui:input id="topLinks_breadcrumbsFolderId" name="breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
+					<aui:input id="topLinks_searchFolderIds" name="searchFolderIds" type="hidden" value="<%= folderId %>" />
 
 					<span class="aui-search-bar">
 						<aui:input inlineField="<%= true %>" id="keywords1" label="" name="keywords" size="30" title="search-bookmarks" type="text" />
