@@ -16,6 +16,7 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Address;
@@ -26,10 +27,12 @@ import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.base.CompanyServiceBaseImpl;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 
 import java.io.File;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -204,6 +207,36 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 			throw new PrincipalException();
 		}
 
+		if (properties.containsKey(PropsKeys.GOOGLE_APPS_PASSWORD)) {
+			String defaultPassword = PrefsPropsUtil.getString(
+				companyId, PropsKeys.GOOGLE_APPS_PASSWORD);
+
+			fixPassword(
+				companyId, properties, PropsKeys.GOOGLE_APPS_PASSWORD,
+				PropsKeys.GOOGLE_APPS_PASSWORD + ".temp", defaultPassword);
+		}
+		else {
+			String defaultPassword = PrefsPropsUtil.getString(
+				companyId, PropsKeys.LDAP_SECURITY_CREDENTIALS);
+
+			List<String> tempKeys = new ArrayList<String>();
+
+			String prefix = PropsKeys.LDAP_SECURITY_CREDENTIALS + ".temp";
+
+			for (String key : properties.keySet()) {
+				if (key.startsWith(prefix)) {
+					tempKeys.add(key);
+				}
+			}
+
+			for (String tempKey : tempKeys) {
+				String key = tempKey.replace(".temp", "");
+
+				fixPassword(
+					companyId, properties, key, tempKey, defaultPassword);
+			}
+		}
+
 		companyLocalService.updatePreferences(companyId, properties);
 	}
 
@@ -222,6 +255,22 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 		companyLocalService.updateSecurity(
 			companyId, authType, autoLogin, sendPassword, strangers,
 			strangersWithMx, strangersVerify, communityLogo);
+	}
+
+	protected void fixPassword(
+			long companyId, UnicodeProperties properties, String key,
+			String tempKey, String defaultPassword)
+		throws SystemException {
+
+		String password = properties.get(key);
+
+		String tempPassword = properties.get(tempKey);
+
+		if (password.equals(tempPassword)) {
+			properties.setProperty(key, defaultPassword);
+		}
+
+		properties.remove(tempKey);
 	}
 
 }
