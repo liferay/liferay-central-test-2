@@ -28,6 +28,8 @@ public interface WorkflowLog {
 
 	public static final int TASK_ASSIGN = 1;
 
+	public static final int TASK_COMPLETION = 3;
+
 	public static final int TASK_UPDATE = 2;
 
 	public static final int TRANSITION = 0;

@@ -207,6 +207,7 @@ long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getC
 				List<Integer> logTypes = new ArrayList<Integer>();
 				logTypes.add(WorkflowLog.TASK_ASSIGN);
 				logTypes.add(WorkflowLog.TRANSITION);
+				logTypes.add(WorkflowLog.TASK_COMPLETION);
 
 				List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogsByWorkflowInstance(company.getCompanyId(), workflowTask.getWorkflowInstanceId(), logTypes, QueryUtil.ALL_POS, QueryUtil.ALL_POS, WorkflowComparatorFactoryUtil.getLogCreateDateComparator(true));
 
