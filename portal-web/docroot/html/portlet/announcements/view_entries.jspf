@@ -88,7 +88,18 @@ hasResults = hasResults || (total > 0);
 
 			Liferay.Service.Announcements.AnnouncementsFlag.addFlag({entryId : entryId, flag: <%= AnnouncementsFlagConstants.HIDDEN %>});
 
-			Liferay.Portlet.refresh('#p_p_id<portlet:namespace />');
+			var readContainer = A.all('#p_p_id<portlet:namespace /> .read-entries');
+			var control = entry.all('.control-entry a');
+
+			if (readContainer) {
+				readContainer.append(entry);
+			}
+
+			if (control) {
+				control.html('<liferay-ui:message key="show" />');
+			}
+
+			entry.show();
 		},
 		['aui-base']
 	);
