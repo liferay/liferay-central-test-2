@@ -92,11 +92,6 @@ public class PipingServletResponse extends HttpServletResponseWrapper {
 	public ServletOutputStream getOutputStream()
 		throws UnsupportedEncodingException {
 
-		if (_calledGetWriter) {
-			throw new IllegalStateException("Cannot obtain OutputStream " +
-				"because Writer is already in use");
-		}
-
 		if (_servletOutputStream == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("Get OutputStream on a PipingServletResponse " +
@@ -104,20 +99,14 @@ public class PipingServletResponse extends HttpServletResponseWrapper {
 					"for performance.");
 			}
 			_servletOutputStream = new PipingServletOutputStream(
-				new WriterOutputStream(_printWriter));
+				new WriterOutputStream(_printWriter, getCharacterEncoding(),
+					true));
 		}
-
-		_calledGetOutputStream = true;
 
 		return  _servletOutputStream;
 	}
 
 	public PrintWriter getWriter() throws UnsupportedEncodingException {
-
-		if (_calledGetOutputStream) {
-			throw new IllegalStateException("Cannot obtain Writer " +
-				"because OutputStream is already in use");
-		}
 
 		if (_printWriter == null) {
 			if (_log.isWarnEnabled()) {
@@ -129,16 +118,12 @@ public class PipingServletResponse extends HttpServletResponseWrapper {
 				_servletOutputStream));
 		}
 
-		_calledGetWriter = true;
-
 		return _printWriter;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
 		PipingServletResponse.class);
 
-	private boolean _calledGetOutputStream;
-	private boolean _calledGetWriter;
 	private PrintWriter _printWriter;
 	private ServletOutputStream _servletOutputStream;
 
