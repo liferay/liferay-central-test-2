@@ -243,7 +243,7 @@
 <aui:script use="lfr-panel-floating">
 	var groupSelectorPanel = Liferay.Panel.get('groupSelectorPanel');
 
-	if(groupSelectorPanel) {
+	if (groupSelectorPanel) {
 		groupSelectorPanel.get('trigger').swallowEvent('mousedown');
 	}
 </aui:script>
