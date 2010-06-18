@@ -88,6 +88,10 @@ public class ConvertDatabase extends ConvertProcess {
 				"Collecting information for database tables to migration");
 
 			for (String modelName : modelNames) {
+				if (!modelName.contains(".model.")) {
+					continue;
+				}
+
 				String implClassName = modelName.replaceFirst(
 					"(\\.model\\.)(\\p{Upper}.*)", "$1impl.$2Impl");
 
