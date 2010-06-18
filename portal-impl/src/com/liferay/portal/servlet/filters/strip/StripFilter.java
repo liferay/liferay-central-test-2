@@ -168,7 +168,9 @@ public class StripFilter extends BasePortalFilter {
 			charBuffer, _MARKER_STYLE_CLOSE, _MARKER_STYLE_CLOSE_NEXTS);
 
 		if (length == -1) {
-			_log.error("Missing </style>");
+			if (_log.isWarnEnabled()) {
+				_log.warn("Missing </style>");
+			}
 
 			return;
 		}
@@ -282,7 +284,9 @@ public class StripFilter extends BasePortalFilter {
 			charBuffer, _MARKER_SCRIPT_CLOSE, _MARKER_SCRIPT_CLOSE_NEXTS);
 
 		if (length == -1) {
-			_log.error("Missing </script>");
+			if (_log.isWarnEnabled()) {
+				_log.warn("Missing </script>");
+			}
 
 			return;
 		}
@@ -347,7 +351,9 @@ public class StripFilter extends BasePortalFilter {
 			_MARKER_PRE_CLOSE_NEXTS);
 
 		if (length == -1) {
-			_log.error("Missing </pre>");
+			if (_log.isWarnEnabled()) {
+				_log.warn("Missing </pre>");
+			}
 
 			outputOpenTag(oldCharBuffer, writer, _MARKER_PRE_OPEN);
 
@@ -375,7 +381,9 @@ public class StripFilter extends BasePortalFilter {
 			_MARKER_TEXTAREA_CLOSE, _MARKER_TEXTAREA_CLOSE_NEXTS);
 
 		if (length == -1) {
-			_log.error("Missing </textArea>");
+			if (_log.isWarnEnabled()) {
+				_log.warn("Missing </textArea>");
+			}
 
 			outputOpenTag(oldCharBuffer, writer, _MARKER_TEXTAREA_OPEN);
 			return;
