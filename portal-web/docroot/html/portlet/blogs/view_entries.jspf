@@ -97,6 +97,8 @@ for (Object result : results) {
 	request.setAttribute("view_entry_content.jsp-entry", entry);
 
 	request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
+
+	request.setAttribute("view_entry_content.jsp-searchContainer", searchContainer);
 %>
 
 	<liferay-util:include page="/html/portlet/blogs/view_entry_content.jsp" />
