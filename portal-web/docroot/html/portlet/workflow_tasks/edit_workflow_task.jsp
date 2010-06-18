@@ -286,11 +286,11 @@ long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getC
 				</portlet:actionURL>
 
 				<liferay-ui:discussion
-					className="<%= WorkflowTask.class.getName() %>"
-					classPK="<%= workflowTask.getWorkflowTaskId() %>"
+					className="<%= WorkflowInstance.class.getName() %>"
+					classPK="<%= workflowTask.getWorkflowInstanceId() %>"
 					formAction="<%= discussionURL %>"
 					formName="fm1"
-					ratingsEnabled="<%= true %>"
+					ratingsEnabled="<%= false %>"
 					redirect="<%= currentURL %>"
 					subject="<%= workflowTask.getName() %>"
 					userId="<%= user.getUserId() %>"
