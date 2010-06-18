@@ -25,7 +25,7 @@ DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRA
 
 <div class="asset-resource-info">
 	<aui:a href="<%= assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, StringPool.BLANK) %>">
-		<img alt="<liferay-ui:message key="<%= assetRenderer.getViewInContextMessage() %>" />" class="dl-file-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/small/<%= DLUtil.getFileIcon(fileEntry.getName()) %>.png">
+		<img alt="<liferay-ui:message key="<%= assetRenderer.getViewInContextMessage() %>" />" class="dl-file-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/small/<%= DLUtil.getFileIcon(fileEntry.getName()) %>.png" />
 
 		<%= fileEntry.getTitle() %>
 	</aui:a>
