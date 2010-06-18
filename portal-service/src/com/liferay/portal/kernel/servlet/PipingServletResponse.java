@@ -43,7 +43,7 @@ public class PipingServletResponse extends HttpServletResponseWrapper {
 		super(response);
 
 		if (outputStream == null) {
-			throw new NullPointerException("OutputStream is null");
+			throw new NullPointerException("Output stream is null");
 		}
 
 		_servletOutputStream = new PipingServletOutputStream(outputStream);
@@ -55,7 +55,7 @@ public class PipingServletResponse extends HttpServletResponseWrapper {
 		super(response);
 
 		if (printWriter == null) {
-			throw new NullPointerException("PrintWriter is null");
+			throw new NullPointerException("Print writer is null");
 		}
 
 		_printWriter = printWriter;
@@ -67,7 +67,7 @@ public class PipingServletResponse extends HttpServletResponseWrapper {
 		super(response);
 
 		if (servletOutputStream == null) {
-			throw new NullPointerException("ServletOutputStream is null");
+			throw new NullPointerException("Servlet output stream is null");
 		}
 
 		_servletOutputStream = servletOutputStream;
@@ -94,28 +94,29 @@ public class PipingServletResponse extends HttpServletResponseWrapper {
 
 		if (_servletOutputStream == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Get OutputStream on a PipingServletResponse " +
-					"with Writer. Will do auto convert, but this is very bad " +
-					"for performance.");
+				_log.warn(
+					"Getting an output stream when a writer is available is " +
+						"not recommended because it is slow");
 			}
+
 			_servletOutputStream = new PipingServletOutputStream(
-				new WriterOutputStream(_printWriter, getCharacterEncoding(),
-					true));
+				new WriterOutputStream(
+					_printWriter, getCharacterEncoding(), true));
 		}
 
 		return  _servletOutputStream;
 	}
 
 	public PrintWriter getWriter() throws UnsupportedEncodingException {
-
 		if (_printWriter == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Get Writer on a PipingServletResponse with " +
-					"OuputStream. Will do auto convert, but this is very " +
-					"bad for performance.");
+				_log.warn(
+					"Getting a writer when an output stream is available is " +
+						"not recommended because it is slow");
 			}
-			_printWriter = new UnsyncPrintWriter(new OutputStreamWriter(
-				_servletOutputStream));
+
+			_printWriter = new UnsyncPrintWriter(
+				new OutputStreamWriter(_servletOutputStream));
 		}
 
 		return _printWriter;
