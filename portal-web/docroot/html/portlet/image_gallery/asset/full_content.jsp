@@ -20,7 +20,7 @@
 IGImage image = (IGImage)request.getAttribute(WebKeys.IMAGE_GALLERY_IMAGE);
 %>
 
-<img border="1" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getLargeImageId() %>&t=<%= ImageServletTokenUtil.getToken(image.getLargeImageId()) %>" />
+<img src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getLargeImageId() %>&amp;t=<%= ImageServletTokenUtil.getToken(image.getLargeImageId()) %>" />
 
 <p class="asset-description"><%= image.getDescription() %></p>
 
