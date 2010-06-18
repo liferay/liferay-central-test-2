@@ -219,12 +219,13 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 		<%
 		String valueString = StringPool.BLANK;
 
-		if (type.equals("text") || type.equals("textarea")) {
-			valueString = ParamUtil.get(request, name, StringPool.BLANK);
-		}
-
-		if (Validator.isNull(valueString) && (value != null)) {
+		if (value != null) {
 			valueString = value.toString();
+		}
+		else {
+			if (type.equals("text") || type.equals("textarea")) {
+				valueString = ParamUtil.get(request, name, StringPool.BLANK);
+			}
 		}
 
 		if (Validator.isNotNull(valueString)) {
