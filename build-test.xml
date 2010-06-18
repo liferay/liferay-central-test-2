@@ -735,7 +735,7 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="plugins-test-twitter" />
+			<param name="test.ant.script.command" value="plugins-twitter" />
 			<param name="test.ant.script.suite" value="PluginsTwitterTestSuite" />
 			<param name="test.ant.script.plugins" value="twitter-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
@@ -756,9 +756,9 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="plugins-webform" />
-			<param name="test.ant.script.suite" value="PluginsWebformTestSuite" />
-			<param name="test.ant.script.plugins" value="webform-portlet" />
+			<param name="test.ant.script.command" value="plugins-web-form" />
+			<param name="test.ant.script.suite" value="PluginsWebFormTestSuite" />
+			<param name="test.ant.script.plugins" value="web-form-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 		</antcall>
 
@@ -981,7 +981,7 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="portal-web-sitemap" />
+			<param name="test.ant.script.command" value="portal-web-site-map" />
 			<param name="test.ant.script.suite" value="PortalWebSiteMapTestSuite" />
 		</antcall>
 
