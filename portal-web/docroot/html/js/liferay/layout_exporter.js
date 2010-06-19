@@ -13,8 +13,9 @@ Liferay.provide(
 
 		options = options || {};
 
-		var pane = options.pane;
+		var namespace = options.namespace;
 		var obj = options.obj;
+		var pane = options.pane;
 		var publish = options.publish;
 
 		if (obj && obj.checked) {
@@ -25,8 +26,8 @@ Liferay.provide(
 			}
 
 			if (!publish) {
-				var publishBtn = A.one('#publishBtn');
-				var selectBtn = A.one('#selectBtn');
+				var publishBtn = A.one('#' + namespace + 'publishBtn');
+				var selectBtn = A.one('#' + namespace + 'selectBtn');
 
 				if (publishBtn) {
 					publishBtn.show();
@@ -37,7 +38,7 @@ Liferay.provide(
 				}
 			}
 			else {
-				var changeBtn = A.one('#changeBtn');
+				var changeBtn = A.one('#' + namespace + 'changeBtn');
 
 				if (changeBtn) {
 					changeBtn.hide();
@@ -187,8 +188,9 @@ Liferay.provide(
 
 		options = options || {};
 
-		var pane = options.pane;
+		var namespace = options.namespace;
 		var obj = options.obj;
+		var pane = options.pane;
 		var publish = options.publish;
 
 		if (obj && obj.checked) {
@@ -199,8 +201,8 @@ Liferay.provide(
 			}
 
 			if (!publish) {
-				var publishBtn = A.one('#publishBtn');
-				var selectBtn = A.one('#selectBtn');
+				var publishBtn = A.one('#' + namespace + 'publishBtn');
+				var selectBtn = A.one('#' + namespace + 'selectBtn');
 
 				if (publishBtn) {
 					publishBtn.hide();
@@ -211,7 +213,7 @@ Liferay.provide(
 				}
 			}
 			else {
-				var changeBtn = A.one('#changeBtn');
+				var changeBtn = A.one('#' + namespace + 'changeBtn');
 
 				if (changeBtn) {
 					changeBtn.show();
