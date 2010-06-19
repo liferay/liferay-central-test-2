@@ -57,8 +57,6 @@ public class Member_WebContentRolesTest extends BaseTestCase {
 		selenium.uncheck(
 			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.journalADD_TEMPLATE']");
 		selenium.uncheck(
-			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.journalAPPROVE_ARTICLE']");
-		selenium.uncheck(
 			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.journal.model.JournalStructureDELETE']");
 		selenium.uncheck(
 			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.journal.model.JournalStructurePERMISSIONS']");

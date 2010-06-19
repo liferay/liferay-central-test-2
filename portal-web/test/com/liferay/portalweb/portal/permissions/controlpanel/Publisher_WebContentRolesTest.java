@@ -57,8 +57,6 @@ public class Publisher_WebContentRolesTest extends BaseTestCase {
 			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.journalADD_STRUCTURE']");
 		selenium.uncheck(
 			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.journalADD_TEMPLATE']");
-		selenium.check(
-			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.journalAPPROVE_ARTICLE']");
 		selenium.uncheck(
 			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.journal.model.JournalStructureDELETE']");
 		selenium.uncheck(

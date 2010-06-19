@@ -61,8 +61,6 @@ public class CA_WebContentRolesTest extends BaseTestCase {
 		selenium.check(
 			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.journalADD_TEMPLATE']");
 		selenium.check(
-			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.journalAPPROVE_ARTICLE']");
-		selenium.check(
 			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.journal.model.JournalStructureDELETE']");
 		selenium.check(
 			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.journal.model.JournalStructurePERMISSIONS']");
