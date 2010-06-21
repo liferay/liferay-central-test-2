@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletMode;
 import com.liferay.portal.kernel.portlet.PortletModeFactory;
 import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
+import com.liferay.portal.kernel.servlet.HeaderCacheServletResponse;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
@@ -95,6 +96,7 @@ import com.liferay.portlet.ResourceResponseImpl;
 import com.liferay.portlet.StateAwareResponseImpl;
 import com.liferay.portlet.login.util.LoginUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
+import com.liferay.util.servlet.filters.CacheResponseUtil;
 
 import java.io.InputStream;
 import java.io.Serializable;
@@ -137,6 +139,15 @@ public class LayoutAction extends Action {
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response)
 		throws Exception {
+
+		HeaderCacheServletResponse headerCacheServletResponse = null;
+		if (response instanceof HeaderCacheServletResponse) {
+			headerCacheServletResponse = (HeaderCacheServletResponse) response;
+		}
+		else {
+			headerCacheServletResponse = new HeaderCacheServletResponse(
+				response);
+		}
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -194,7 +205,7 @@ public class LayoutAction extends Action {
 					_log.debug("Redirect requested layout to " + authLoginURL);
 				}
 
-				response.sendRedirect(authLoginURL);
+				headerCacheServletResponse.sendRedirect(authLoginURL);
 			}
 			else {
 				String redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
@@ -203,7 +214,7 @@ public class LayoutAction extends Action {
 					_log.debug("Redirect default layout to " + redirect);
 				}
 
-				response.sendRedirect(redirect);
+				headerCacheServletResponse.sendRedirect(redirect);
 			}
 
 			return null;
@@ -216,7 +227,11 @@ public class LayoutAction extends Action {
 		}
 
 		if (plid > 0) {
-			return processLayout(mapping, request, response, plid);
+			ActionForward actionForward = processLayout(mapping, request,
+				headerCacheServletResponse, plid);
+			CacheResponseUtil.setHeaders(response,
+				headerCacheServletResponse.getHeaders());
+			return actionForward;
 		}
 		else {
 			try {
@@ -225,8 +240,10 @@ public class LayoutAction extends Action {
 				return mapping.findForward(ActionConstants.COMMON_FORWARD_JSP);
 			}
 			catch (Exception e) {
-				PortalUtil.sendError(e, request, response);
+				PortalUtil.sendError(e, request, headerCacheServletResponse);
 
+				CacheResponseUtil.setHeaders(response,
+					headerCacheServletResponse.getHeaders());
 				return null;
 			}
 		}

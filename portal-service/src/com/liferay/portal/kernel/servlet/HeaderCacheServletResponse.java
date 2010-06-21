@@ -27,8 +27,7 @@ import javax.servlet.http.HttpServletResponseWrapper;
  *
  * @author Shuyang Zhou
  */
-public abstract class HeaderCacheServletResponse
-	extends HttpServletResponseWrapper {
+public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 
 	public HeaderCacheServletResponse(HttpServletResponse response) {
 		super(response);
