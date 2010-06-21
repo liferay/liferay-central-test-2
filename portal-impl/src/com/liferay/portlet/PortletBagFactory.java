@@ -515,13 +515,13 @@ public class PortletBagFactory {
 
 				route.addIgnoredParameter(name);
 			}
-			
+
 			for (Element overriddenParameterElement :
 					routeElement.elements("overridden-parameter")) {
-				
+
 				String name = overriddenParameterElement.attributeValue("name");
 				String value = overriddenParameterElement.getText();
-				
+
 				route.addOverriddenParameter(name, value);
 			}
 		}

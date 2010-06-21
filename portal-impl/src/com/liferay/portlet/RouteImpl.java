@@ -64,7 +64,7 @@ public class RouteImpl implements Route {
 	public void addIgnoredParameter(String name) {
 		_ignoredParameters.add(name);
 	}
-	
+
 	public void addOverriddenParameter(String name, String value) {
 		_overriddenParameters.put(name, value);
 	}
@@ -76,7 +76,7 @@ public class RouteImpl implements Route {
 	public List<String> getIgnoredParameters() {
 		return _ignoredParameters;
 	}
-	
+
 	public Map<String, String> getOverriddenParameters() {
 		return _overriddenParameters;
 	}
@@ -151,7 +151,7 @@ public class RouteImpl implements Route {
 
 			parameters.put(routePart.getName(), value);
 		}
-		
+
 		parameters.putAll(_overriddenParameters);
 
 		return parameters;

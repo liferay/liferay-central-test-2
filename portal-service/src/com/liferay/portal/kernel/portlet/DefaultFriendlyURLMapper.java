@@ -48,9 +48,9 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 		defaultReservedParameters = new LinkedHashMap<String, String>();
 
 		defaultReservedParameters.put("p_p_lifecycle", "0");
-		defaultReservedParameters.put("p_p_mode", PortletMode.VIEW.toString());
 		defaultReservedParameters.put(
 			"p_p_state", WindowState.NORMAL.toString());
+		defaultReservedParameters.put("p_p_mode", PortletMode.VIEW.toString());
 	}
 
 	public void addDefaultIgnoredParameter(String name) {
@@ -128,9 +128,10 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 			portletURL.getParameterMap();
 
 		for (Map.Entry<String, String[]> entry :
-			portletURLParameters.entrySet()) {
+				portletURLParameters.entrySet()) {
 
 			String[] values = entry.getValue();
+
 			if (values.length > 0) {
 				routeParameters.put(entry.getKey(), values[0]);
 			}
@@ -159,35 +160,31 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	protected String getPortletId(Map<String, String> routeParameters) {
-		String portletId = null;
+		if (!isPortletInstanceable()) {
+			return getPortletId();
+		}
 
-		if (isPortletInstanceable()) {
-			portletId = routeParameters.remove("p_p_id");
+		String portletId = routeParameters.remove("p_p_id");
 
-			if (Validator.isNull(portletId)) {
-				String instanceId = routeParameters.remove("instanceId");
+		if (Validator.isNotNull(portletId)) {
+			return portletId;
+		}
 
-				if (Validator.isNull(instanceId)) {
-					if (_log.isErrorEnabled()) {
-						_log.error(
-							"Either p_p_id or instanceId must be provided " +
-								"for an instanceable portlet");
-					}
+		String instanceId = routeParameters.remove("instanceId");
 
-					return null;
-				}
-				else {
-					portletId =
-						getPortletId() + PortletConstants.INSTANCE_SEPARATOR +
-							instanceId;
-				}
+		if (Validator.isNull(instanceId)) {
+			if (_log.isErrorEnabled()) {
+				_log.error(
+					"Either p_p_id or instanceId must be provided for an " +
+						"instanceable portlet");
 			}
+
+			return null;
 		}
 		else {
-			portletId = getPortletId();
+			return getPortletId().concat(
+				PortletConstants.INSTANCE_SEPARATOR).concat(instanceId);
 		}
-
-		return portletId;
 	}
 
 	protected void populateParams(
@@ -204,7 +201,7 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 		// Copy default reserved parameters if they aren't already set
 
 		for (Map.Entry<String, String> entry :
-			defaultReservedParameters.entrySet()) {
+				defaultReservedParameters.entrySet()) {
 
 			String key = entry.getKey();
 
@@ -239,9 +236,7 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 		Map<String, String> reservedParameters =
 			portletURL.getReservedParameterMap();
 
-		for (Map.Entry<String, String> entry :
-			reservedParameters.entrySet()) {
-
+		for (Map.Entry<String, String> entry : reservedParameters.entrySet()) {
 			String key = entry.getKey();
 			String value = entry.getValue();
 

@@ -289,8 +289,7 @@ public class PortletURLImpl implements LiferayPortletURL {
 
 		if (portletDisplay.getColumnPos() > 0) {
 			_reservedParameters.put(
-				"p_p_col_pos",
-				String.valueOf(portletDisplay.getColumnPos()));
+				"p_p_col_pos", String.valueOf(portletDisplay.getColumnPos()));
 		}
 
 		if (portletDisplay.getColumnCount() > 0) {
@@ -697,6 +696,11 @@ public class PortletURLImpl implements LiferayPortletURL {
 		sb.append(StringPool.AMPERSAND);
 	}
 
+	protected void clearCache() {
+		_reservedParameters = null;
+		_toString = null;
+	}
+
 	protected String generateToString() {
 		StringBundler sb = new StringBundler(32);
 
@@ -800,7 +804,7 @@ public class PortletURLImpl implements LiferayPortletURL {
 		addPortletAuthToken(sb, key);
 
 		for (Map.Entry<String, String> entry :
-			getReservedParameterMap().entrySet()) {
+				getReservedParameterMap().entrySet()) {
 
 			String name = entry.getKey();
 
@@ -1266,11 +1270,6 @@ public class PortletURLImpl implements LiferayPortletURL {
 				return value;
 			}
 		}
-	}
-
-	private void clearCache() {
-		_reservedParameters = null;
-		_toString = null;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PortletURLImpl.class);

@@ -50,10 +50,10 @@ The name attribute specifies the name of the parameter to be ignored.
 >
 
 <!--
-The overridden-parameter element specifies a parameter that should set to a
+The overridden-parameter element specifies a parameter that should be set to a
 certain value when a URL is recognized. This override value will be set
-regardless of any pre-existing value, including one from a default-parameter or
-one extracted from the url.
+regardless of any preexisting value, including one from a default-parameter or
+one extracted from the URL.
 -->
 <!ELEMENT overridden-parameter (#PCDATA)>
 
