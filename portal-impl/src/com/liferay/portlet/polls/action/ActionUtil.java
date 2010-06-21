@@ -20,8 +20,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.service.PollsQuestionServiceUtil;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -31,24 +30,6 @@ import javax.servlet.http.HttpServletRequest;
  * @author Brian Wing Shun Chan
  */
 public class ActionUtil {
-
-	public static void getQuestion(ActionRequest actionRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		getQuestion(request);
-	}
-
-	public static void getQuestion(RenderRequest renderRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getQuestion(request);
-	}
 
 	public static void getQuestion(HttpServletRequest request)
 		throws Exception {
@@ -62,6 +43,15 @@ public class ActionUtil {
 		}
 
 		request.setAttribute(WebKeys.POLLS_QUESTION, question);
+	}
+
+	public static void getQuestion(PortletRequest portletRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		getQuestion(request);
 	}
 
 }

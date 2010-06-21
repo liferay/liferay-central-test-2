@@ -22,8 +22,7 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -34,18 +33,25 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil {
 
-	public static void getFolder(ActionRequest actionRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
+	public static void getEntry(HttpServletRequest request) throws Exception {
+		long entryId = ParamUtil.getLong(request, "entryId");
 
-		getFolder(request);
+		BookmarksEntry entry = null;
+
+		if (entryId > 0) {
+			entry = BookmarksEntryServiceUtil.getEntry(entryId);
+		}
+
+		request.setAttribute(WebKeys.BOOKMARKS_ENTRY, entry);
 	}
 
-	public static void getFolder(RenderRequest renderRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
+	public static void getEntry(PortletRequest portletRequest)
+		throws Exception {
 
-		getFolder(request);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		getEntry(request);
 	}
 
 	public static void getFolder(HttpServletRequest request) throws Exception {
@@ -60,30 +66,13 @@ public class ActionUtil {
 		request.setAttribute(WebKeys.BOOKMARKS_FOLDER, folder);
 	}
 
-	public static void getEntry(ActionRequest actionRequest) throws Exception {
+	public static void getFolder(PortletRequest portletRequest)
+		throws Exception {
+
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
+			portletRequest);
 
-		getEntry(request);
-	}
-
-	public static void getEntry(RenderRequest renderRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getEntry(request);
-	}
-
-	public static void getEntry(HttpServletRequest request) throws Exception {
-		long entryId = ParamUtil.getLong(request, "entryId");
-
-		BookmarksEntry entry = null;
-
-		if (entryId > 0) {
-			entry = BookmarksEntryServiceUtil.getEntry(entryId);
-		}
-
-		request.setAttribute(WebKeys.BOOKMARKS_ENTRY, entry);
+		getFolder(request);
 	}
 
 }

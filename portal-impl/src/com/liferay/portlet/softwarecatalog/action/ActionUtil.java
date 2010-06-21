@@ -28,8 +28,7 @@ import com.liferay.portlet.softwarecatalog.service.SCLicenseServiceUtil;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceUtil;
 import com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceUtil;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -39,24 +38,6 @@ import javax.servlet.http.HttpServletRequest;
  * @author Jorge Ferrer
  */
 public class ActionUtil {
-
-	public static void getFrameworkVersion(ActionRequest actionRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		getFrameworkVersion(request);
-	}
-
-	public static void getFrameworkVersion(RenderRequest renderRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getFrameworkVersion(request);
-	}
 
 	public static void getFrameworkVersion(HttpServletRequest request)
 		throws Exception {
@@ -76,22 +57,13 @@ public class ActionUtil {
 			WebKeys.SOFTWARE_CATALOG_FRAMEWORK_VERSION, frameworkVersion);
 	}
 
-	public static void getLicense(ActionRequest actionRequest)
+	public static void getFrameworkVersion(PortletRequest portletRequest)
 		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
+			portletRequest);
 
-		getLicense(request);
-	}
-
-	public static void getLicense(RenderRequest renderRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getLicense(request);
+		getFrameworkVersion(request);
 	}
 
 	public static void getLicense(HttpServletRequest request) throws Exception {
@@ -106,22 +78,13 @@ public class ActionUtil {
 		request.setAttribute(WebKeys.SOFTWARE_CATALOG_LICENSE, license);
 	}
 
-	public static void getProductEntry(ActionRequest actionRequest)
+	public static void getLicense(PortletRequest portletRequest)
 		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
+			portletRequest);
 
-		getProductEntry(request);
-	}
-
-	public static void getProductEntry(RenderRequest renderRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getProductEntry(request);
+		getLicense(request);
 	}
 
 	public static void getProductEntry(HttpServletRequest request)
@@ -140,22 +103,13 @@ public class ActionUtil {
 			WebKeys.SOFTWARE_CATALOG_PRODUCT_ENTRY, productEntry);
 	}
 
-	public static void getProductVersion(ActionRequest actionRequest)
+	public static void getProductEntry(PortletRequest portletRequest)
 		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
+			portletRequest);
 
-		getProductVersion(request);
-	}
-
-	public static void getProductVersion(RenderRequest renderRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getProductVersion(request);
+		getProductEntry(request);
 	}
 
 	public static void getProductVersion(HttpServletRequest request)
@@ -214,6 +168,15 @@ public class ActionUtil {
 		else {
 			getProductEntry(request);
 		}
+	}
+
+	public static void getProductVersion(PortletRequest portletRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		getProductVersion(request);
 	}
 
 }

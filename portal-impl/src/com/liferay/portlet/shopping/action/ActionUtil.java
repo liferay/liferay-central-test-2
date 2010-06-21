@@ -28,8 +28,7 @@ import com.liferay.portlet.shopping.service.ShoppingCouponServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingItemServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingOrderServiceUtil;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -39,24 +38,6 @@ import javax.servlet.http.HttpServletRequest;
  * @author Brian Wing Shun Chan
  */
 public class ActionUtil {
-
-	public static void getCategory(ActionRequest actionRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		getCategory(request);
-	}
-
-	public static void getCategory(RenderRequest renderRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getCategory(request);
-	}
 
 	public static void getCategory(HttpServletRequest request)
 		throws Exception {
@@ -75,18 +56,13 @@ public class ActionUtil {
 		request.setAttribute(WebKeys.SHOPPING_CATEGORY, category);
 	}
 
-	public static void getCoupon(ActionRequest actionRequest) throws Exception {
+	public static void getCategory(PortletRequest portletRequest)
+		throws Exception {
+
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
+			portletRequest);
 
-		getCoupon(request);
-	}
-
-	public static void getCoupon(RenderRequest renderRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getCoupon(request);
+		getCategory(request);
 	}
 
 	public static void getCoupon(HttpServletRequest request) throws Exception {
@@ -105,18 +81,13 @@ public class ActionUtil {
 		request.setAttribute(WebKeys.SHOPPING_COUPON, coupon);
 	}
 
-	public static void getItem(ActionRequest actionRequest) throws Exception {
+	public static void getCoupon(PortletRequest portletRequest)
+		throws Exception {
+
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
+			portletRequest);
 
-		getItem(request);
-	}
-
-	public static void getItem(RenderRequest renderRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getItem(request);
+		getCoupon(request);
 	}
 
 	public static void getItem(HttpServletRequest request) throws Exception {
@@ -131,18 +102,11 @@ public class ActionUtil {
 		request.setAttribute(WebKeys.SHOPPING_ITEM, item);
 	}
 
-	public static void getOrder(ActionRequest actionRequest) throws Exception {
+	public static void getItem(PortletRequest portletRequest) throws Exception {
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
+			portletRequest);
 
-		getOrder(request);
-	}
-
-	public static void getOrder(RenderRequest renderRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getOrder(request);
+		getItem(request);
 	}
 
 	public static void getOrder(HttpServletRequest request) throws Exception {
@@ -159,6 +123,15 @@ public class ActionUtil {
 		}
 
 		request.setAttribute(WebKeys.SHOPPING_ORDER, order);
+	}
+
+	public static void getOrder(PortletRequest portletRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		getOrder(request);
 	}
 
 }

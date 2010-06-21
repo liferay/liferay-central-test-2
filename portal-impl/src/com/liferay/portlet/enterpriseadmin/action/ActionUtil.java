@@ -36,8 +36,7 @@ import com.liferay.portal.service.WebsiteServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -48,24 +47,6 @@ import javax.servlet.http.HttpServletRequest;
  * @author Alexander Chow
  */
 public class ActionUtil {
-
-	public static void getAddress(ActionRequest actionRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		getAddress(request);
-	}
-
-	public static void getAddress(RenderRequest renderRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getAddress(request);
-	}
 
 	public static void getAddress(HttpServletRequest request)
 		throws Exception {
@@ -81,22 +62,13 @@ public class ActionUtil {
 		request.setAttribute(WebKeys.ADDRESS, address);
 	}
 
-	public static void getEmailAddress(ActionRequest actionRequest)
+	public static void getAddress(PortletRequest portletRequest)
 		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
+			portletRequest);
 
-		getEmailAddress(request);
-	}
-
-	public static void getEmailAddress(RenderRequest renderRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getEmailAddress(request);
+		getAddress(request);
 	}
 
 	public static void getEmailAddress(HttpServletRequest request)
@@ -114,48 +86,13 @@ public class ActionUtil {
 		request.setAttribute(WebKeys.EMAIL_ADDRESS, emailAddress);
 	}
 
-	public static void getPhone(ActionRequest actionRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		getPhone(request);
-	}
-
-	public static void getPhone(RenderRequest renderRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getPhone(request);
-	}
-
-	public static void getPhone(HttpServletRequest request) throws Exception {
-		long phoneId = ParamUtil.getLong(request, "phoneId");
-
-		Phone phone = null;
-
-		if (phoneId > 0) {
-			phone = PhoneServiceUtil.getPhone(phoneId);
-		}
-
-		request.setAttribute(WebKeys.PHONE, phone);
-	}
-
-	public static void getOrganization(ActionRequest actionRequest)
+	public static void getEmailAddress(PortletRequest portletRequest)
 		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
+			portletRequest);
 
-		getOrganization(request);
-	}
-
-	public static void getOrganization(RenderRequest renderRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getOrganization(request);
+		getEmailAddress(request);
 	}
 
 	public static void getOrganization(HttpServletRequest request)
@@ -173,22 +110,13 @@ public class ActionUtil {
 		request.setAttribute(WebKeys.ORGANIZATION, organization);
 	}
 
-	public static void getOrgLabor(ActionRequest actionRequest)
+	public static void getOrganization(PortletRequest portletRequest)
 		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
+			portletRequest);
 
-		getOrgLabor(request);
-	}
-
-	public static void getOrgLabor(RenderRequest renderRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getOrgLabor(request);
+		getOrganization(request);
 	}
 
 	public static void getOrgLabor(HttpServletRequest request)
@@ -205,22 +133,13 @@ public class ActionUtil {
 		request.setAttribute(WebKeys.ORG_LABOR, orgLabor);
 	}
 
-	public static void getPasswordPolicy(ActionRequest actionRequest)
+	public static void getOrgLabor(PortletRequest portletRequest)
 		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
+			portletRequest);
 
-		getPasswordPolicy(request);
-	}
-
-	public static void getPasswordPolicy(RenderRequest renderRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getPasswordPolicy(request);
+		getOrgLabor(request);
 	}
 
 	public static void getPasswordPolicy(HttpServletRequest request)
@@ -238,18 +157,34 @@ public class ActionUtil {
 		request.setAttribute(WebKeys.PASSWORD_POLICY, passwordPolicy);
 	}
 
-	public static void getRole(ActionRequest actionRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
+	public static void getPasswordPolicy(PortletRequest portletRequest)
+		throws Exception {
 
-		getRole(request);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		getPasswordPolicy(request);
 	}
 
-	public static void getRole(RenderRequest renderRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
+	public static void getPhone(HttpServletRequest request) throws Exception {
+		long phoneId = ParamUtil.getLong(request, "phoneId");
 
-		getRole(request);
+		Phone phone = null;
+
+		if (phoneId > 0) {
+			phone = PhoneServiceUtil.getPhone(phoneId);
+		}
+
+		request.setAttribute(WebKeys.PHONE, phone);
+	}
+
+	public static void getPhone(PortletRequest portletRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		getPhone(request);
 	}
 
 	public static void getRole(HttpServletRequest request)
@@ -266,22 +201,11 @@ public class ActionUtil {
 		request.setAttribute(WebKeys.ROLE, role);
 	}
 
-	public static void getUserGroup(ActionRequest actionRequest)
-		throws Exception {
-
+	public static void getRole(PortletRequest portletRequest) throws Exception {
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
+			portletRequest);
 
-		getUserGroup(request);
-	}
-
-	public static void getUserGroup(RenderRequest renderRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getUserGroup(request);
+		getRole(request);
 	}
 
 	public static void getUserGroup(HttpServletRequest request)
@@ -298,22 +222,13 @@ public class ActionUtil {
 		request.setAttribute(WebKeys.USER_GROUP, userGroup);
 	}
 
-	public static void getWebsite(ActionRequest actionRequest)
+	public static void getUserGroup(PortletRequest portletRequest)
 		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
+			portletRequest);
 
-		getWebsite(request);
-	}
-
-	public static void getWebsite(RenderRequest renderRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getWebsite(request);
+		getUserGroup(request);
 	}
 
 	public static void getWebsite(HttpServletRequest request) throws Exception {
@@ -326,6 +241,15 @@ public class ActionUtil {
 		}
 
 		request.setAttribute(WebKeys.WEBSITE, website);
+	}
+
+	public static void getWebsite(PortletRequest portletRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		getWebsite(request);
 	}
 
 }

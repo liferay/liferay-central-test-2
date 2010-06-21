@@ -20,8 +20,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -31,20 +30,6 @@ import javax.servlet.http.HttpServletRequest;
  * @author Raymond Augé
  */
 public class ActionUtil {
-
-	public static void getColumn(ActionRequest actionRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		getColumn(request);
-	}
-
-	public static void getColumn(RenderRequest renderRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getColumn(request);
-	}
 
 	public static void getColumn(HttpServletRequest request) throws Exception {
 		long columnId = ParamUtil.getLong(request, "columnId");
@@ -56,6 +41,15 @@ public class ActionUtil {
 		}
 
 		request.setAttribute(WebKeys.EXPANDO_COLUMN, column);
+	}
+
+	public static void getColumn(PortletRequest portletRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		getColumn(request);
 	}
 
 }

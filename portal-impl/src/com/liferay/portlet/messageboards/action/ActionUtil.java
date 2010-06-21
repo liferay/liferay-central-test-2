@@ -27,8 +27,7 @@ import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -38,24 +37,6 @@ import javax.servlet.http.HttpServletRequest;
  * @author Brian Wing Shun Chan
  */
 public class ActionUtil {
-
-	public static void getCategory(ActionRequest actionRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		getCategory(request);
-	}
-
-	public static void getCategory(RenderRequest renderRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getCategory(request);
-	}
 
 	public static void getCategory(HttpServletRequest request)
 		throws Exception {
@@ -82,22 +63,13 @@ public class ActionUtil {
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_CATEGORY, category);
 	}
 
-	public static void getMessage(ActionRequest actionRequest)
+	public static void getCategory(PortletRequest portletRequest)
 		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
+			portletRequest);
 
-		getMessage(request);
-	}
-
-	public static void getMessage(RenderRequest renderRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getMessage(request);
+		getCategory(request);
 	}
 
 	public static void getMessage(HttpServletRequest request) throws Exception {
@@ -112,22 +84,13 @@ public class ActionUtil {
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE, message);
 	}
 
-	public static void getThreadMessage(ActionRequest actionRequest)
+	public static void getMessage(PortletRequest portletRequest)
 		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
+			portletRequest);
 
-		getThreadMessage(request);
-	}
-
-	public static void getThreadMessage(RenderRequest renderRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getThreadMessage(request);
+		getMessage(request);
 	}
 
 	public static void getThreadMessage(HttpServletRequest request)
@@ -145,6 +108,15 @@ public class ActionUtil {
 		}
 
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE, message);
+	}
+
+	public static void getThreadMessage(PortletRequest portletRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		getThreadMessage(request);
 	}
 
 }

@@ -20,8 +20,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventServiceUtil;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -31,20 +30,6 @@ import javax.servlet.http.HttpServletRequest;
  * @author Brian Wing Shun Chan
  */
 public class ActionUtil {
-
-	public static void getEvent(ActionRequest actionRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		getEvent(request);
-	}
-
-	public static void getEvent(RenderRequest renderRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getEvent(request);
-	}
 
 	public static void getEvent(HttpServletRequest request) throws Exception {
 		long eventId = ParamUtil.getLong(request, "eventId");
@@ -56,6 +41,15 @@ public class ActionUtil {
 		}
 
 		request.setAttribute(WebKeys.CALENDAR_EVENT, event);
+	}
+
+	public static void getEvent(PortletRequest portletRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		getEvent(request);
 	}
 
 }

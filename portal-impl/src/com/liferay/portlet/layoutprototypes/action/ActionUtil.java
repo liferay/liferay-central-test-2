@@ -32,15 +32,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil {
 
-	public static void getLayoutPrototype(PortletRequest portletRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			portletRequest);
-
-		getLayoutPrototype(request);
-	}
-
 	public static void getLayoutPrototype(HttpServletRequest request)
 		throws Exception {
 
@@ -57,6 +48,15 @@ public class ActionUtil {
 		}
 
 		request.setAttribute(WebKeys.LAYOUT_PROTOTYPE, layoutPrototype);
+	}
+
+	public static void getLayoutPrototype(PortletRequest portletRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		getLayoutPrototype(request);
 	}
 
 }

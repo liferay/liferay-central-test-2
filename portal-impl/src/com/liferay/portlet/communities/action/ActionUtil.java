@@ -139,8 +139,8 @@ public class ActionUtil
 	public static void getMembershipRequest(HttpServletRequest request)
 		throws Exception {
 
-		long membershipRequestId =
-			ParamUtil.getLong(request, "membershipRequestId");
+		long membershipRequestId = ParamUtil.getLong(
+			request, "membershipRequestId");
 
 		MembershipRequest membershipRequest = null;
 

@@ -36,7 +36,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import javax.portlet.PortletPreferences;
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 /**
  * <a href="ActionUtil.java.html"><b><i>View Source</i></b></a>
@@ -46,10 +46,10 @@ import javax.portlet.RenderRequest;
 public class ActionUtil {
 
 	public static void getLayoutPublicRenderParameters(
-			RenderRequest renderRequest)
+			PortletRequest portletRequest)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Set<String> identifiers = new HashSet<String>();
@@ -77,15 +77,15 @@ public class ActionUtil {
 			}
 		}
 
-		renderRequest.setAttribute(
+		portletRequest.setAttribute(
 			WebKeys.PUBLIC_RENDER_PARAMETERS, publicRenderParameters);
 	}
 
 	public static void getPublicRenderParameterConfigurationList(
-			RenderRequest renderRequest, Portlet portlet)
+			PortletRequest portletRequest, Portlet portlet)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
@@ -110,15 +110,15 @@ public class ActionUtil {
 			String mappingValue = null;
 			boolean ignoreValue = false;
 
-			if (SessionErrors.isEmpty(renderRequest)) {
+			if (SessionErrors.isEmpty(portletRequest)) {
 				mappingValue = preferences.getValue(mappingKey, null);
 				ignoreValue = GetterUtil.getBoolean(
 					preferences.getValue(ignoreKey, null));
 			}
 			else {
-				mappingValue = ParamUtil.getString(renderRequest, mappingKey);
+				mappingValue = ParamUtil.getString(portletRequest, mappingKey);
 				ignoreValue = GetterUtil.getBoolean(
-					ParamUtil.getString(renderRequest, ignoreKey));
+					ParamUtil.getString(portletRequest, ignoreKey));
 			}
 
 			publicRenderParameterConfigurations.add(
@@ -130,7 +130,7 @@ public class ActionUtil {
 			publicRenderParameterConfigurations,
 			new PublicRenderParameterIdentifierConfigurationComparator());
 
-		renderRequest.setAttribute(
+		portletRequest.setAttribute(
 			WebKeys.PUBLIC_RENDER_PARAMETER_CONFIGURATIONS,
 			publicRenderParameterConfigurations);
 	}

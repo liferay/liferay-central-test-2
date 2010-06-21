@@ -25,8 +25,7 @@ import com.liferay.portlet.blogs.NoSuchEntryException;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -36,20 +35,6 @@ import javax.servlet.http.HttpServletRequest;
  * @author Brian Wing Shun Chan
  */
 public class ActionUtil {
-
-	public static void getEntry(ActionRequest actionRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		getEntry(request);
-	}
-
-	public static void getEntry(RenderRequest renderRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getEntry(request);
-	}
 
 	public static void getEntry(HttpServletRequest request) throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
@@ -88,6 +73,15 @@ public class ActionUtil {
 		}
 
 		request.setAttribute(WebKeys.BLOGS_ENTRY, entry);
+	}
+
+	public static void getEntry(PortletRequest portletRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		getEntry(request);
 	}
 
 }

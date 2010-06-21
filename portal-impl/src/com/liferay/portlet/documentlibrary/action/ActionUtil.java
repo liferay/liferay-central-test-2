@@ -28,8 +28,7 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -39,24 +38,6 @@ import javax.servlet.http.HttpServletRequest;
  * @author Brian Wing Shun Chan
  */
 public class ActionUtil {
-
-	public static void getFileEntry(ActionRequest actionRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		getFileEntry(request);
-	}
-
-	public static void getFileEntry(RenderRequest renderRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getFileEntry(request);
-	}
 
 	public static void getFileEntry(HttpServletRequest request)
 		throws Exception {
@@ -89,22 +70,13 @@ public class ActionUtil {
 		request.setAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY, fileEntry);
 	}
 
-	public static void getFileShortcut(ActionRequest actionRequest)
+	public static void getFileEntry(PortletRequest portletRequest)
 		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
+			portletRequest);
 
-		getFileShortcut(request);
-	}
-
-	public static void getFileShortcut(RenderRequest renderRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getFileShortcut(request);
+		getFileEntry(request);
 	}
 
 	public static void getFileShortcut(HttpServletRequest request)
@@ -123,18 +95,13 @@ public class ActionUtil {
 			WebKeys.DOCUMENT_LIBRARY_FILE_SHORTCUT, fileShortcut);
 	}
 
-	public static void getFolder(ActionRequest actionRequest) throws Exception {
+	public static void getFileShortcut(PortletRequest portletRequest)
+		throws Exception {
+
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
+			portletRequest);
 
-		getFolder(request);
-	}
-
-	public static void getFolder(RenderRequest renderRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getFolder(request);
+		getFileShortcut(request);
 	}
 
 	public static void getFolder(HttpServletRequest request) throws Exception {
@@ -149,6 +116,15 @@ public class ActionUtil {
 		}
 
 		request.setAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER, folder);
+	}
+
+	public static void getFolder(PortletRequest portletRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		getFolder(request);
 	}
 
 }

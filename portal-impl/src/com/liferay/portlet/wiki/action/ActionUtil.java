@@ -38,9 +38,7 @@ import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import com.liferay.portlet.wiki.util.WikiUtil;
 
-import javax.portlet.ActionRequest;
 import javax.portlet.PortletRequest;
-import javax.portlet.RenderRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -131,20 +129,6 @@ public class ActionUtil {
 		return node;
 	}
 
-	public static void getPage(ActionRequest actionRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		getPage(request);
-	}
-
-	public static void getPage(RenderRequest renderRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getPage(request);
-	}
-
 	public static void getPage(HttpServletRequest request) throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -222,6 +206,13 @@ public class ActionUtil {
 		}
 
 		request.setAttribute(WebKeys.WIKI_PAGE, page);
+	}
+
+	public static void getPage(PortletRequest portletRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		getPage(request);
 	}
 
 }

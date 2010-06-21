@@ -23,8 +23,7 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -34,20 +33,6 @@ import javax.servlet.http.HttpServletRequest;
  * @author Brian Wing Shun Chan
  */
 public class ActionUtil {
-
-	public static void getFolder(ActionRequest actionRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		getFolder(request);
-	}
-
-	public static void getFolder(RenderRequest renderRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getFolder(request);
-	}
 
 	public static void getFolder(HttpServletRequest request) throws Exception {
 		long folderId = ParamUtil.getLong(request, "folderId");
@@ -63,18 +48,13 @@ public class ActionUtil {
 		request.setAttribute(WebKeys.IMAGE_GALLERY_FOLDER, folder);
 	}
 
-	public static void getImage(ActionRequest actionRequest) throws Exception {
+	public static void getFolder(PortletRequest portletRequest)
+		throws Exception {
+
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
+			portletRequest);
 
-		getImage(request);
-	}
-
-	public static void getImage(RenderRequest renderRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getImage(request);
+		getFolder(request);
 	}
 
 	public static void getImage(HttpServletRequest request) throws Exception {
@@ -87,6 +67,15 @@ public class ActionUtil {
 		}
 
 		request.setAttribute(WebKeys.IMAGE_GALLERY_IMAGE, image);
+	}
+
+	public static void getImage(PortletRequest portletRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		getImage(request);
 	}
 
 }

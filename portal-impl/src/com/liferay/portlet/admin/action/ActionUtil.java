@@ -20,8 +20,7 @@ import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -31,24 +30,6 @@ import javax.servlet.http.HttpServletRequest;
  * @author Brian Wing Shun Chan
  */
 public class ActionUtil {
-
-	public static void getInstance(ActionRequest actionRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		getInstance(request);
-	}
-
-	public static void getInstance(RenderRequest renderRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getInstance(request);
-	}
 
 	public static void getInstance(HttpServletRequest request)
 		throws Exception {
@@ -62,6 +43,15 @@ public class ActionUtil {
 		}
 
 		request.setAttribute(WebKeys.SEL_COMPANY, company);
+	}
+
+	public static void getInstance(PortletRequest portletRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		getInstance(request);
 	}
 
 }

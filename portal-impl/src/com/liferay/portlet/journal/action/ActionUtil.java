@@ -29,8 +29,7 @@ import com.liferay.portlet.journal.service.JournalStructureServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -40,34 +39,6 @@ import javax.servlet.http.HttpServletRequest;
  * @author Brian Wing Shun Chan
  */
 public class ActionUtil {
-
-	public static void getArticle(ActionRequest actionRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		getArticle(request);
-
-		JournalArticle article = (JournalArticle)actionRequest.getAttribute(
-			WebKeys.JOURNAL_ARTICLE);
-
-		JournalUtil.addRecentArticle(actionRequest, article);
-	}
-
-	public static void getArticle(RenderRequest renderRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getArticle(request);
-
-		JournalArticle article = (JournalArticle)renderRequest.getAttribute(
-			WebKeys.JOURNAL_ARTICLE);
-
-		JournalUtil.addRecentArticle(renderRequest, article);
-	}
 
 	public static void getArticle(HttpServletRequest request) throws Exception {
 		long groupId = ParamUtil.getLong(request, "groupId");
@@ -83,18 +54,18 @@ public class ActionUtil {
 		request.setAttribute(WebKeys.JOURNAL_ARTICLE, article);
 	}
 
-	public static void getFeed(ActionRequest actionRequest) throws Exception {
+	public static void getArticle(PortletRequest portletRequest)
+		throws Exception {
+
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
+			portletRequest);
 
-		getFeed(request);
-	}
+		getArticle(request);
 
-	public static void getFeed(RenderRequest renderRequest) throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
+		JournalArticle article = (JournalArticle)portletRequest.getAttribute(
+			WebKeys.JOURNAL_ARTICLE);
 
-		getFeed(request);
+		JournalUtil.addRecentArticle(portletRequest, article);
 	}
 
 	public static void getFeed(HttpServletRequest request) throws Exception {
@@ -110,34 +81,11 @@ public class ActionUtil {
 		request.setAttribute(WebKeys.JOURNAL_FEED, feed);
 	}
 
-	public static void getStructure(ActionRequest actionRequest)
-		throws Exception {
-
+	public static void getFeed(PortletRequest portletRequest) throws Exception {
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
+			portletRequest);
 
-		getStructure(request);
-
-		JournalStructure structure =
-			(JournalStructure)actionRequest.getAttribute(
-				WebKeys.JOURNAL_STRUCTURE);
-
-		JournalUtil.addRecentStructure(actionRequest, structure);
-	}
-
-	public static void getStructure(RenderRequest renderRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getStructure(request);
-
-		JournalStructure structure =
-			(JournalStructure)renderRequest.getAttribute(
-				WebKeys.JOURNAL_STRUCTURE);
-
-		JournalUtil.addRecentStructure(renderRequest, structure);
+		getFeed(request);
 	}
 
 	public static void getStructure(HttpServletRequest request)
@@ -156,32 +104,19 @@ public class ActionUtil {
 		request.setAttribute(WebKeys.JOURNAL_STRUCTURE, structure);
 	}
 
-	public static void getTemplate(ActionRequest actionRequest)
+	public static void getStructure(PortletRequest portletRequest)
 		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
+			portletRequest);
 
-		getTemplate(request);
+		getStructure(request);
 
-		JournalTemplate template = (JournalTemplate)actionRequest.getAttribute(
-			WebKeys.JOURNAL_TEMPLATE);
+		JournalStructure structure =
+			(JournalStructure)portletRequest.getAttribute(
+				WebKeys.JOURNAL_STRUCTURE);
 
-		JournalUtil.addRecentTemplate(actionRequest, template);
-	}
-
-	public static void getTemplate(RenderRequest renderRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getTemplate(request);
-
-		JournalTemplate template = (JournalTemplate)renderRequest.getAttribute(
-			WebKeys.JOURNAL_TEMPLATE);
-
-		JournalUtil.addRecentTemplate(renderRequest, template);
+		JournalUtil.addRecentStructure(portletRequest, structure);
 	}
 
 	public static void getTemplate(HttpServletRequest request)
@@ -198,6 +133,20 @@ public class ActionUtil {
 		}
 
 		request.setAttribute(WebKeys.JOURNAL_TEMPLATE, template);
+	}
+
+	public static void getTemplate(PortletRequest portletRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		getTemplate(request);
+
+		JournalTemplate template = (JournalTemplate)portletRequest.getAttribute(
+			WebKeys.JOURNAL_TEMPLATE);
+
+		JournalUtil.addRecentTemplate(portletRequest, template);
 	}
 
 }

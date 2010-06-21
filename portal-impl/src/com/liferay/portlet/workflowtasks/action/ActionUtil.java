@@ -22,8 +22,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -33,24 +32,6 @@ import javax.servlet.http.HttpServletRequest;
  * @author Marcellus Tavares
  */
 public class ActionUtil {
-
-	public static void getWorkflowTask(ActionRequest actionRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		getWorkflowTask(request);
-	}
-
-	public static void getWorkflowTask(RenderRequest renderRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		getWorkflowTask(request);
-	}
 
 	public static void getWorkflowTask(HttpServletRequest request)
 		throws Exception {
@@ -68,6 +49,15 @@ public class ActionUtil {
 		}
 
 		request.setAttribute(WebKeys.WORKFLOW_TASK, workflowTask);
+	}
+
+	public static void getWorkflowTask(PortletRequest portletRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		getWorkflowTask(request);
 	}
 
 }
