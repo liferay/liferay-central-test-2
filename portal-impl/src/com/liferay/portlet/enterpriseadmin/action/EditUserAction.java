@@ -517,9 +517,9 @@ public class EditUserAction extends PortletAction {
 		String lastName = BeanParamUtil.getString(
 			user, actionRequest, "lastName");
 		int prefixId = BeanParamUtil.getInteger(
-			user, actionRequest, "prefixId");
+			contact, actionRequest, "prefixId");
 		int suffixId = BeanParamUtil.getInteger(
-			user, actionRequest, "suffixId");
+			contact, actionRequest, "suffixId");
 		boolean male = BeanParamUtil.getBoolean(
 			user, actionRequest, "male", true);
 
