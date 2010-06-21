@@ -32,10 +32,8 @@ import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import java.util.List;
 
-import javax.portlet.ActionRequest;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
-import javax.portlet.RenderRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -46,17 +44,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil
 	extends com.liferay.portlet.enterpriseadmin.action.ActionUtil {
-
-	public static void copyPreferences(
-			ActionRequest actionRequest, Layout targetLayout,
-			Layout sourceLayout)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		copyPreferences(request, targetLayout, sourceLayout);
-	}
 
 	public static void copyPreferences(
 			HttpServletRequest request, Layout targetLayout,
@@ -115,6 +102,17 @@ public class ActionUtil
 		}
 	}
 
+	public static void copyPreferences(
+			PortletRequest portletRequest, Layout targetLayout,
+			Layout sourceLayout)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		copyPreferences(request, targetLayout, sourceLayout);
+	}
+
 	public static Group getGroup(HttpServletRequest request) throws Exception {
 		long groupId = ParamUtil.getLong(request, "groupId");
 
@@ -138,15 +136,6 @@ public class ActionUtil
 		return getGroup(request);
 	}
 
-	public static void getMembershipRequest(ActionRequest actionRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		getMembershipRequest(request);
-	}
-
 	public static void getMembershipRequest(HttpServletRequest request)
 		throws Exception {
 
@@ -164,22 +153,13 @@ public class ActionUtil
 		request.setAttribute(WebKeys.MEMBERSHIP_REQUEST, membershipRequest);
 	}
 
-	public static void getMembershipRequest(RenderRequest renderRequest)
+	public static void getMembershipRequest(PortletRequest portletRequest)
 		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
+			portletRequest);
 
 		getMembershipRequest(request);
-	}
-
-	public static void getTeam(ActionRequest actionRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		getTeam(request);
 	}
 
 	public static void getTeam(HttpServletRequest request)
@@ -196,11 +176,11 @@ public class ActionUtil
 		request.setAttribute(WebKeys.TEAM, team);
 	}
 
-	public static void getTeam(RenderRequest renderRequest)
+	public static void getTeam(PortletRequest portletRequest)
 		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
+			portletRequest);
 
 		getTeam(request);
 	}
