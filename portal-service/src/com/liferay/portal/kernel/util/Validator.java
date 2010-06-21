@@ -43,6 +43,38 @@ public class Validator {
 		}
 	}
 
+	public static boolean equals(int int1, int int2) {
+		return int1 == int2;
+	}
+
+	public static boolean equals(long long1, long long2) {
+		return long1 == long2;
+	}
+
+	public static boolean equals(byte byte1, byte byte2) {
+		return byte1 == byte2;
+	}
+
+	public static boolean equals(short short1, short short2) {
+		return short1 == short2;
+	}
+
+	public static boolean equals(char char1, char char2) {
+		return char1 == char2;
+	}
+
+	public static boolean equals(boolean boolean1, boolean boolean2) {
+		return boolean1 == boolean2;
+	}
+
+	public static boolean equals(float float1, float float2) {
+		return Float.compare(float1, float2) == 0;
+	}
+
+	public static boolean equals(double double1, double double2) {
+		return Double.compare(double1, double2) == 0;
+	}
+
 	public static boolean isAddress(String address) {
 		if (isNull(address)) {
 			return false;
