@@ -115,15 +115,6 @@ public class ActionUtil
 		}
 	}
 
-	public static Group getGroup(PortletRequest portletRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			portletRequest);
-
-		return getGroup(request);
-	}
-
 	public static Group getGroup(HttpServletRequest request) throws Exception {
 		long groupId = ParamUtil.getLong(request, "groupId");
 
@@ -136,6 +127,15 @@ public class ActionUtil
 		request.setAttribute(WebKeys.GROUP, group);
 
 		return group;
+	}
+
+	public static Group getGroup(PortletRequest portletRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		return getGroup(request);
 	}
 
 	public static void getMembershipRequest(ActionRequest actionRequest)
