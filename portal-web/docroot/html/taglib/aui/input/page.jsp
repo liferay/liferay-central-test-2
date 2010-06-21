@@ -172,6 +172,10 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 			booleanValue = GetterUtil.getBoolean(valueString);
 		}
 
+		if (Validator.isNotNull(checked)) {
+			booleanValue = checked;
+		}
+
 		booleanValue = ParamUtil.getBoolean(request, name, booleanValue);
 		%>
 
