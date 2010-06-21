@@ -15,6 +15,11 @@
 package com.liferay.portalweb.portal.controlpanel.settings;
 
 import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.controlpanel.settings.portalsettings.PortalSettingsTests;
+import com.liferay.portalweb.portal.controlpanel.settings.settingsadditionalemailaddress.SettingsAdditionalEmailAddressTests;
+import com.liferay.portalweb.portal.controlpanel.settings.settingsaddress.SettingsAddressTests;
+import com.liferay.portalweb.portal.controlpanel.settings.settingsphonenumber.SettingsPhoneNumberTests;
+import com.liferay.portalweb.portal.controlpanel.settings.settingswebsite.SettingsWebsiteTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -29,48 +34,11 @@ public class SettingsTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(EditGeneralSettingsTest.class);
-		testSuite.addTestSuite(AssertAuthenticationCASTest.class);
-		testSuite.addTestSuite(AssertAuthenticationGeneralTest.class);
-		testSuite.addTestSuite(AssertAuthenticationLDAPTest.class);
-		testSuite.addTestSuite(AssertAuthenticationNTLMTest.class);
-		testSuite.addTestSuite(AssertAuthenticationOpenIDTest.class);
-		testSuite.addTestSuite(AssertAuthenticationOpenSSOTest.class);
-		testSuite.addTestSuite(AssertAuthenticationSiteMinderTest.class);
-		testSuite.addTestSuite(AssertUsersFieldsSettingsTest.class);
-		testSuite.addTestSuite(EnterReservedUserSNTest.class);
-		testSuite.addTestSuite(AddReservedUserSNTest.class);
-		testSuite.addTestSuite(EnterReservedUserEmailTest.class);
-		testSuite.addTestSuite(AddReservedUserEmailTest.class);
-		testSuite.addTestSuite(AssertUsersDefaultAssociationsTest.class);
-		testSuite.addTestSuite(AssertMailHostNamesTest.class);
-		testSuite.addTestSuite(AssertEmailNotificationSenderTest.class);
-		testSuite.addTestSuite(
-			AssertEmailNotificationAccountCreationTest.class);
-		testSuite.addTestSuite(
-			AssertEmailNotificationPasswordChangedTest.class);
-		testSuite.addTestSuite(AddSettingsAddressTest.class);
-		testSuite.addTestSuite(AddSettingsAddress2Test.class);
-		testSuite.addTestSuite(AddSettingsPhoneNumberTest.class);
-		testSuite.addTestSuite(AddSettingsPhoneNumber2Test.class);
-		testSuite.addTestSuite(AddSettingsEmailAddressTest.class);
-		testSuite.addTestSuite(AddSettingsEmailAddress2Test.class);
-		testSuite.addTestSuite(AddSettingsWebsitesTest.class);
-		testSuite.addTestSuite(AddSettingsWebsites2Test.class);
-		testSuite.addTestSuite(AddNullSettingsStreetAddressTest.class);
-		testSuite.addTestSuite(AddNullSettingsCityAddressTest.class);
-		testSuite.addTestSuite(AddNullSettingsZipAddressTest.class);
-		testSuite.addTestSuite(AddInvalidSettingsPhoneNumberTest.class);
-		testSuite.addTestSuite(AddNullSettingsPhoneNumberTest.class);
-		testSuite.addTestSuite(AddInvalidSettingsEmailTest.class);
-		testSuite.addTestSuite(AddNullSettingsEmailTest.class);
-		testSuite.addTestSuite(AddInvalidSettingsURLTest.class);
-		testSuite.addTestSuite(AddNullSettingsURLTest.class);
-		testSuite.addTestSuite(EditTimeZoneTest.class);
-		testSuite.addTestSuite(AssertGoogleAppsTest.class);
-		testSuite.addTestSuite(MonitoringTest.class);
-		testSuite.addTestSuite(PluginsConfigurationTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTest(PortalSettingsTests.suite());
+		testSuite.addTest(SettingsAddressTests.suite());
+		testSuite.addTest(SettingsAdditionalEmailAddressTests.suite());
+		testSuite.addTest(SettingsPhoneNumberTests.suite());
+		testSuite.addTest(SettingsWebsiteTests.suite());
 
 		return testSuite;
 	}
