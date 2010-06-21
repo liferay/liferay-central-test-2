@@ -19,16 +19,19 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.model.EventDefinition;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletURLListener;
 import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.model.SpriteImage;
+import com.liferay.util.UniqueList;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
@@ -55,6 +58,10 @@ public class PortletAppImpl implements PortletApp {
 
 	public void addEventDefinition(EventDefinition eventDefinition) {
 		_eventDefinitions.add(eventDefinition);
+	}
+
+	public void addPortlet(Portlet portlet) {
+		_portlets.add(portlet);
 	}
 
 	public void addPortletFilter(PortletFilter portletFilter) {
@@ -106,6 +113,10 @@ public class PortletAppImpl implements PortletApp {
 
 	public Set<PortletFilter> getPortletFilters() {
 		return _portletFilters;
+	}
+
+	public List<Portlet> getPortlets() {
+		return _portlets;
 	}
 
 	public PortletURLListener getPortletURLListener(String listenerClass) {
@@ -184,6 +195,7 @@ public class PortletAppImpl implements PortletApp {
 		new LinkedHashSet<PortletFilter>();
 	private Map<String, PortletFilter> _portletFiltersByFilterName =
 		new HashMap<String, PortletFilter>();
+	private List<Portlet> _portlets = new UniqueList<Portlet>();
 	private Set<PortletURLListener> _portletURLListeners =
 		new LinkedHashSet<PortletURLListener>();
 	private Map<String, PortletURLListener>

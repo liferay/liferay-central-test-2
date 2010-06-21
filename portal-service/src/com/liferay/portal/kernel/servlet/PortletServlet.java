@@ -41,6 +41,9 @@ import javax.servlet.http.HttpSession;
  */
 public class PortletServlet extends HttpServlet {
 
+	public static final String PORTLET_APP =
+		"com.liferay.portal.model.PortletApp";
+
 	public static final String PORTLET_CLASS_LOADER = "PORTLET_CLASS_LOADER";
 
 	public static final String PORTLET_SERVLET_CONFIG =

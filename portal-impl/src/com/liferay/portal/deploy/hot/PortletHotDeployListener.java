@@ -481,6 +481,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		PortletApp portletApp = portlet.getPortletApp();
 
+		servletContext.setAttribute(PortletServlet.PORTLET_APP, portletApp);
+
 		Map<String, String> customUserAttributes =
 			portletApp.getCustomUserAttributes();
 

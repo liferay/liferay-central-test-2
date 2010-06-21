@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.xml.QName;
 
 import java.io.Serializable;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
@@ -30,6 +31,8 @@ import java.util.Set;
 public interface PortletApp extends Serializable {
 
 	public void addEventDefinition(EventDefinition eventDefinition);
+
+	public void addPortlet(Portlet portlet);
 
 	public void addPortletFilter(PortletFilter portletFilter);
 
@@ -51,6 +54,8 @@ public interface PortletApp extends Serializable {
 	public PortletFilter getPortletFilter(String filterName);
 
 	public Set<PortletFilter> getPortletFilters();
+
+	public List<Portlet> getPortlets();
 
 	public PortletURLListener getPortletURLListener(String listenerClass);
 

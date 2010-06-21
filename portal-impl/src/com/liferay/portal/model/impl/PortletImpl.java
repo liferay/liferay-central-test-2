@@ -2745,6 +2745,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void setPortletApp(PortletApp portletApp) {
 		_portletApp = portletApp;
+
+		_portletApp.addPortlet(this);
 	}
 
 	/**
