@@ -28,23 +28,23 @@ import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
- * <a href="UpgradeLegacyPermissions.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradePermission.java.html"><b><i>View Source</i></b></a>
  *
  * @author Raymond Augé
  */
-public class UpgradeLegacyPermissions extends UpgradeProcess {
+public class UpgradePermission extends UpgradeProcess {
 
 	protected void addRole(
 			long companyId, long classNameId, String name, int type)
@@ -407,7 +407,6 @@ public class UpgradeLegacyPermissions extends UpgradeProcess {
 	private static final String _ROLE_PORTAL_CONTENT_REVIEWER =
 		"Portal Content Reviewer";
 
-	private static Log _log = LogFactoryUtil.getLog(
-		UpgradeLegacyPermissions.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradePermission.class);
 
 }
