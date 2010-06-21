@@ -23,11 +23,10 @@ import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 
+import jodd.bean.BeanTool;
 import jodd.bean.BeanUtil;
 
-import org.apache.commons.beanutils.PropertyUtils;
-
-import org.springframework.beans.BeanUtils;
+import jodd.util.ReflectUtil;
 
 /**
  * <a href="BeanPropertiesImpl.java.html"><b><i>View Source</i></b></a>
@@ -37,19 +36,34 @@ import org.springframework.beans.BeanUtils;
 public class BeanPropertiesImpl implements BeanProperties {
 
 	public void copyProperties(Object source, Object target) {
-		BeanUtils.copyProperties(source, target);
+		try {
+			BeanTool.copyProperties(source, target);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 	}
 
 	public void copyProperties(
 		Object source, Object target, Class<?> editable) {
 
-		BeanUtils.copyProperties(source, target, editable);
+		try {
+			BeanTool.copyProperties(source, target, editable);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 	}
 
 	public void copyProperties(
 		Object source, Object target, String[] ignoreProperties) {
 
-		BeanUtils.copyProperties(source, target, ignoreProperties);
+		try {
+			BeanTool.copyProperties(source, target, ignoreProperties, false);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 	}
 
 	public boolean getBoolean(Object bean, String param) {
@@ -61,15 +75,12 @@ public class BeanPropertiesImpl implements BeanProperties {
 
 		if (bean != null) {
 			try {
-				beanValue = (Boolean)PropertyUtils.getProperty(bean, param);
-			}
-			catch (NoSuchMethodException nsme) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(nsme.getMessage());
-				}
+				Object value = BeanUtil.getProperty(bean, param);
+
+				beanValue = ReflectUtil.castType(value, Boolean.class);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 
@@ -90,15 +101,12 @@ public class BeanPropertiesImpl implements BeanProperties {
 
 		if (bean != null) {
 			try {
-				beanValue = (Byte)PropertyUtils.getProperty(bean, param);
-			}
-			catch (NoSuchMethodException nsme) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(nsme.getMessage());
-				}
+				Object value = BeanUtil.getProperty(bean, param);
+
+				beanValue = ReflectUtil.castType(value, Byte.class);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 
@@ -119,15 +127,12 @@ public class BeanPropertiesImpl implements BeanProperties {
 
 		if (bean != null) {
 			try {
-				beanValue = (Double)PropertyUtils.getProperty(bean, param);
-			}
-			catch (NoSuchMethodException nsme) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(nsme.getMessage());
-				}
+				Object value = BeanUtil.getProperty(bean, param);
+
+				beanValue = ReflectUtil.castType(value, Double.class);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 
@@ -148,15 +153,12 @@ public class BeanPropertiesImpl implements BeanProperties {
 
 		if (bean != null) {
 			try {
-				beanValue = (Float)PropertyUtils.getProperty(bean, param);
-			}
-			catch (NoSuchMethodException nsme) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(nsme.getMessage());
-				}
+				Object value = BeanUtil.getProperty(bean, param);
+
+				beanValue = ReflectUtil.castType(value, Float.class);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 
@@ -177,15 +179,12 @@ public class BeanPropertiesImpl implements BeanProperties {
 
 		if (bean != null) {
 			try {
-				beanValue = (Integer)PropertyUtils.getProperty(bean, param);
-			}
-			catch (NoSuchMethodException nsme) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(nsme.getMessage());
-				}
+				Object value = BeanUtil.getProperty(bean, param);
+
+				beanValue = ReflectUtil.castType(value, Integer.class);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 
@@ -206,15 +205,12 @@ public class BeanPropertiesImpl implements BeanProperties {
 
 		if (bean != null) {
 			try {
-				beanValue = (Long)PropertyUtils.getProperty(bean, param);
-			}
-			catch (NoSuchMethodException nsme) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(nsme.getMessage());
-				}
+				Object value = BeanUtil.getProperty(bean, param);
+
+				beanValue = ReflectUtil.castType(value, Long.class);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 
@@ -235,15 +231,10 @@ public class BeanPropertiesImpl implements BeanProperties {
 
 		if (bean != null) {
 			try {
-				beanValue = PropertyUtils.getProperty(bean, param);
-			}
-			catch (NoSuchMethodException nsme) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(nsme.getMessage());
-				}
+				beanValue = BeanUtil.getProperty(bean, param);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 
@@ -264,15 +255,12 @@ public class BeanPropertiesImpl implements BeanProperties {
 
 		if (bean != null) {
 			try {
-				beanValue = (Short)PropertyUtils.getProperty(bean, param);
-			}
-			catch (NoSuchMethodException nsme) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(nsme.getMessage());
-				}
+				Object value = BeanUtil.getProperty(bean, param);
+
+				beanValue = ReflectUtil.castType(value, Short.class);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 
@@ -293,15 +281,12 @@ public class BeanPropertiesImpl implements BeanProperties {
 
 		if (bean != null) {
 			try {
-				beanValue = (String)PropertyUtils.getProperty(bean, param);
-			}
-			catch (NoSuchMethodException nsme) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(nsme.getMessage());
-				}
+				Object value = BeanUtil.getProperty(bean, param);
+
+				beanValue = ReflectUtil.castType(value, String.class);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 
@@ -327,15 +312,10 @@ public class BeanPropertiesImpl implements BeanProperties {
 
 	public void setProperty(Object bean, String param, Object value) {
 		try {
-			PropertyUtils.setProperty(bean, param, value);
-		}
-		catch (NoSuchMethodException nsme) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(nsme.getMessage());
-			}
+			BeanUtil.setProperty(bean, param, value);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 	}
 
