@@ -707,8 +707,6 @@ public class PortletURLImpl implements LiferayPortletURL {
 		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-
 		Portlet portlet = getPortlet();
 
 		String portalURL = null;
