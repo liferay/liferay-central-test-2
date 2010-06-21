@@ -31,6 +31,69 @@ import java.util.regex.Pattern;
  */
 public class Validator {
 
+	public static boolean equals(boolean boolean1, boolean boolean2) {
+		if (boolean1 == boolean2) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean equals(byte byte1, byte byte2) {
+		if (byte1 == byte2) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean equals(char char1, char char2) {
+		if (char1 == char2) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean equals(double double1, double double2) {
+		if (Double.compare(double1, double2) == 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean equals(float float1, float float2) {
+		if (Float.compare(float1, float2) == 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean equals(int int1, int int2) {
+		if (int1 == int2) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean equals(long long1, long long2) {
+		if (long1 == long2) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public static boolean equals(Object obj1, Object obj2) {
 		if ((obj1 == null) && (obj2 == null)) {
 			return true;
@@ -43,36 +106,13 @@ public class Validator {
 		}
 	}
 
-	public static boolean equals(int int1, int int2) {
-		return int1 == int2;
-	}
-
-	public static boolean equals(long long1, long long2) {
-		return long1 == long2;
-	}
-
-	public static boolean equals(byte byte1, byte byte2) {
-		return byte1 == byte2;
-	}
-
 	public static boolean equals(short short1, short short2) {
-		return short1 == short2;
-	}
-
-	public static boolean equals(char char1, char char2) {
-		return char1 == char2;
-	}
-
-	public static boolean equals(boolean boolean1, boolean boolean2) {
-		return boolean1 == boolean2;
-	}
-
-	public static boolean equals(float float1, float float2) {
-		return Float.compare(float1, float2) == 0;
-	}
-
-	public static boolean equals(double double1, double double2) {
-		return Double.compare(double1, double2) == 0;
+		if (short1 == short2) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public static boolean isAddress(String address) {
@@ -389,20 +429,29 @@ public class Validator {
 		return true;
 	}
 
+	public static boolean isNotNull(Long l) {
+		return !isNull(l);
+	}
+
 	public static boolean isNotNull(Object obj) {
 		return !isNull(obj);
 	}
 
-	public static boolean isNotNull(Long l) {
-		return !isNull(l);
+	public static boolean isNotNull(Object[] array) {
+		return !isNull(array);
 	}
 
 	public static boolean isNotNull(String s) {
 		return !isNull(s);
 	}
 
-	public static boolean isNotNull(Object[] array) {
-		return !isNull(array);
+	public static boolean isNull(Long l) {
+		if ((l == null) || (l.longValue() == 0)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public static boolean isNull(Object obj) {
@@ -420,8 +469,8 @@ public class Validator {
 		}
 	}
 
-	public static boolean isNull(Long l) {
-		if ((l == null) || (l.longValue() == 0)) {
+	public static boolean isNull(Object[] array) {
+		if ((array == null) || (array.length == 0)) {
 			return true;
 		}
 		else {
@@ -470,15 +519,6 @@ public class Validator {
 		}
 
 		return false;
-	}
-
-	public static boolean isNull(Object[] array) {
-		if ((array == null) || (array.length == 0)) {
-			return true;
-		}
-		else {
-			return false;
-		}
 	}
 
 	public static boolean isNumber(String number) {
