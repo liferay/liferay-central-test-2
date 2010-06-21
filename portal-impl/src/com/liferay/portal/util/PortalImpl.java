@@ -2382,10 +2382,10 @@ public class PortalImpl implements Portal {
 					friendlyURLMapper.populateParams(
 						url.substring(pos), actualParams, requestContext);
 				}
-				
+
 				// Remove all the query string parameters from actualParams so
-				// that they aren't duplicated. See LPS-4980.
-				
+				// that they are not duplicated. See LPS-10436.
+
 				if (params != null) {
 					for (String key : params.keySet()) {
 						actualParams.remove(key);
