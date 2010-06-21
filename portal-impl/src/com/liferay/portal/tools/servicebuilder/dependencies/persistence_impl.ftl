@@ -1461,14 +1461,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					sql = query.toString();
 				}
-
-				<#if entity.getOrder()??>
-					else {
+				else {
+					<#if entity.getOrder()??>
 						sql = _SQL_SELECT_${entity.alias?upper_case}.concat(${entity.name}ModelImpl.ORDER_BY_JPQL);
-					}
-				<#else>
-					sql = _SQL_SELECT_${entity.alias?upper_case};
-				</#if>
+					<#else>
+						sql = _SQL_SELECT_${entity.alias?upper_case};
+					</#if>
+				}
 
 				Query q = session.createQuery(sql);
 
@@ -1844,14 +1843,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						if (orderByComparator != null) {
 							sql = _SQL_GET${tempEntity.names?upper_case}.concat(ORDER_BY_CLAUSE).concat(orderByComparator.getOrderBy());
 						}
-
-						<#if tempEntity.getOrder()??>
-							else {
+						else {
+							<#if tempEntity.getOrder()??>
 								sql = _SQL_GET${tempEntity.names?upper_case}.concat(${tempEntity.packagePath}.model.impl.${tempEntity.name}ModelImpl.ORDER_BY_SQL);
-							}
-						<#else>
-							sql = _SQL_GET${tempEntity.names?upper_case};
-						</#if>
+							<#else>
+								sql = _SQL_GET${tempEntity.names?upper_case};
+							</#if>
+						}
 
 						SQLQuery q = session.createSQLQuery(sql);
 
