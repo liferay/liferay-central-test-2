@@ -22,10 +22,12 @@ import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.util.PortalUtil;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.portlet.PortletMode;
-import javax.portlet.PortletRequest;
 import javax.portlet.WindowState;
 
 /**
@@ -35,55 +37,55 @@ import javax.portlet.WindowState;
  */
 public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 
+	public DefaultFriendlyURLMapper() {
+		defaultIgnoredParameters = new LinkedHashSet<String>();
+
+		defaultIgnoredParameters.add("p_p_id");
+		defaultIgnoredParameters.add("p_p_col_id");
+		defaultIgnoredParameters.add("p_p_col_pos");
+		defaultIgnoredParameters.add("p_p_col_count");
+
+		defaultReservedParameters = new LinkedHashMap<String, String>();
+
+		defaultReservedParameters.put("p_p_lifecycle", "0");
+		defaultReservedParameters.put("p_p_mode", PortletMode.VIEW.toString());
+		defaultReservedParameters.put(
+			"p_p_state", WindowState.NORMAL.toString());
+	}
+
+	public void addDefaultIgnoredParameter(String name) {
+		defaultIgnoredParameters.add(name);
+	}
+
+	public void addDefaultReservedParameter(String name, String value) {
+		defaultReservedParameters.put(name, value);
+	}
+
 	public String buildPath(LiferayPortletURL portletURL) {
-		Map<String, String[]> portletURLParameters =
-			portletURL.getParameterMap();
+		Map<String, String> routeParameters = new HashMap<String, String>();
 
-		Map<String, String[]> parameters = new HashMap<String, String[]>(
-			portletURLParameters);
+		buildRouteParameters(portletURL, routeParameters);
 
-		if (isPortletInstanceable()) {
-			String portletId = portletURL.getPortletId();
-
-			parameters.put("p_p_id", new String[] {portletId});
-
-			if (Validator.isNotNull(portletId)) {
-				String[] parts = portletId.split(
-					PortletConstants.INSTANCE_SEPARATOR);
-
-				if (parts.length > 1) {
-					String instanceId = parts[1];
-
-					parameters.put("instanceId", new String[] {instanceId});
-				}
-			}
-		}
-
-		parameters.put(
-			"p_p_lifecycle", new String[] {getLifecycle(portletURL)});
-
-		WindowState windowState = portletURL.getWindowState();
-
-		parameters.put("p_p_state", new String[] {String.valueOf(windowState)});
-
-		String friendlyURLPath = router.parametersToUrl(parameters);
+		String friendlyURLPath = router.parametersToUrl(routeParameters);
 
 		if (friendlyURLPath == null) {
 			return null;
 		}
 
-		portletURL.addParameterIncludedInPath("p_p_id");
-
-		for (String name : portletURLParameters.keySet()) {
-			if (!parameters.containsKey(name)) {
-				portletURL.addParameterIncludedInPath(name);
-			}
-		}
+		addParametersIncludedInPath(portletURL, routeParameters);
 
 		friendlyURLPath = StringPool.SLASH.concat(getMapping()).concat(
 			friendlyURLPath);
 
 		return friendlyURLPath;
+	}
+
+	public Set<String> getDefaultIgnoredParameters() {
+		return defaultIgnoredParameters;
+	}
+
+	public Map<String, String> getDefaultReservedParameters() {
+		return defaultReservedParameters;
 	}
 
 	public void populateParams(
@@ -104,8 +106,60 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 			return;
 		}
 
+		String portletId = getPortletId(routeParameters);
+
+		if (portletId == null) {
+			return;
+		}
+
+		String namespace = PortalUtil.getPortletNamespace(portletId);
+
+		addParameter(namespace, parameterMap, "p_p_id", portletId);
+
+		populateParams(parameterMap, namespace, routeParameters);
+	}
+
+	protected void buildRouteParameters(
+		LiferayPortletURL portletURL, Map<String, String> routeParameters) {
+
+		// Copy application parameters
+
+		Map<String, String[]> portletURLParameters =
+			portletURL.getParameterMap();
+
+		for (Map.Entry<String, String[]> entry :
+			portletURLParameters.entrySet()) {
+
+			String[] values = entry.getValue();
+			if (values.length > 0) {
+				routeParameters.put(entry.getKey(), values[0]);
+			}
+		}
+
+		// Populate virtual parameters for instanceable portlets
+
+		if (isPortletInstanceable()) {
+			String portletId = portletURL.getPortletId();
+
+			routeParameters.put("p_p_id", portletId);
+
+			if (Validator.isNotNull(portletId)) {
+				String[] parts = portletId.split(
+					PortletConstants.INSTANCE_SEPARATOR);
+
+				if (parts.length > 1) {
+					routeParameters.put("instanceId", parts[1]);
+				}
+			}
+		}
+
+		// Copy reserved parameters
+
+		routeParameters.putAll(portletURL.getReservedParameterMap());
+	}
+
+	protected String getPortletId(Map<String, String> routeParameters) {
 		String portletId = null;
-		String namespace = null;
 
 		if (isPortletInstanceable()) {
 			portletId = routeParameters.remove("p_p_id");
@@ -120,57 +174,87 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 								"for an instanceable portlet");
 					}
 
-					return;
+					return null;
 				}
 				else {
 					portletId =
 						getPortletId() + PortletConstants.INSTANCE_SEPARATOR +
 							instanceId;
-					namespace = PortalUtil.getPortletNamespace(portletId);
 				}
-			}
-			else {
-				namespace = PortalUtil.getPortletNamespace(portletId);
 			}
 		}
 		else {
 			portletId = getPortletId();
-			namespace = getNamespace();
 		}
 
-		addParameter(namespace, parameterMap, "p_p_id", portletId);
+		return portletId;
+	}
 
-		if (!parameterMap.containsKey("p_p_lifecycle")) {
-			addParameter(namespace, parameterMap, "p_p_lifecycle", "0");
-		}
+	protected void populateParams(
+		Map<String, String[]> parameterMap, String namespace,
+		Map<String, String> routeParameters) {
 
-		if (!parameterMap.containsKey("p_p_mode")) {
-			addParameter(namespace, parameterMap, "p_p_mode", PortletMode.VIEW);
-		}
+		// Copy route parameters
 
 		for (Map.Entry<String, String> entry : routeParameters.entrySet()) {
-			String name = entry.getKey();
+			addParameter(
+				namespace, parameterMap, entry.getKey(), entry.getValue());
+		}
+
+		// Copy default reserved parameters if they aren't already set
+
+		for (Map.Entry<String, String> entry :
+			defaultReservedParameters.entrySet()) {
+
+			String key = entry.getKey();
+
+			if (!parameterMap.containsKey(key)) {
+				addParameter(namespace, parameterMap, key, entry.getValue());
+			}
+		}
+	}
+
+	protected void addParametersIncludedInPath(
+		LiferayPortletURL portletURL, Map<String, String> routeParameters) {
+
+		// Hide default ignored parameters
+
+		for (String name : defaultIgnoredParameters) {
+			portletURL.addParameterIncludedInPath(name);
+		}
+
+		// Hide application parameters removed by the router
+
+		Map<String, String[]> portletURLParameters =
+			portletURL.getParameterMap();
+
+		for (String name : portletURLParameters.keySet()) {
+			if (!routeParameters.containsKey(name)) {
+				portletURL.addParameterIncludedInPath(name);
+			}
+		}
+
+		// Hide reserved parameters removed by the router or set to the defaults
+
+		Map<String, String> reservedParameters =
+			portletURL.getReservedParameterMap();
+
+		for (Map.Entry<String, String> entry :
+			reservedParameters.entrySet()) {
+
+			String key = entry.getKey();
 			String value = entry.getValue();
 
-			addParameter(namespace, parameterMap, name, value);
+			if (!routeParameters.containsKey(key) ||
+				value.equals(defaultReservedParameters.get(key))) {
+
+				portletURL.addParameterIncludedInPath(key);
+			}
 		}
 	}
 
-	protected String getLifecycle(LiferayPortletURL portletURL) {
-		String lifecycle = portletURL.getLifecycle();
-
-		if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
-			return "1";
-		}
-		else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
-			return "0";
-		}
-		else if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-			return "2";
-		}
-
-		return null;
-	}
+	protected Set<String> defaultIgnoredParameters;
+	protected Map<String, String> defaultReservedParameters;
 
 	private static Log _log = LogFactoryUtil.getLog(
 		DefaultFriendlyURLMapper.class);

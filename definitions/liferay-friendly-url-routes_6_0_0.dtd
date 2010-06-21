@@ -15,7 +15,7 @@ friendly URL mapper routes.
 <!--
 The route element contains information on a single route.
 -->
-<!ELEMENT route (pattern, default-parameter*, ignored-parameter*)>
+<!ELEMENT route (pattern, default-parameter*, ignored-parameter*, overridden-parameter*)>
 
 <!--
 The pattern element specifies the pattern of the mapped friendly URL.
@@ -36,8 +36,9 @@ The name attribute specifies the name of the default URL parameter.
 >
 
 <!--
-The ignored-parameter element specifies a parameter that should be ignored in
-the generation of URLs.
+The ignored-parameter element specifies a parameter that should be ignored and
+not included in generated URLs. Ignored parameters do not effect URL
+recognition.
 -->
 <!ELEMENT ignored-parameter EMPTY>
 
@@ -45,5 +46,20 @@ the generation of URLs.
 The name attribute specifies the name of the parameter to be ignored.
 -->
 <!ATTLIST ignored-parameter
+	name CDATA #REQUIRED
+>
+
+<!--
+The overridden-parameter element specifies a parameter that should set to a
+certain value when a URL is recognized. This override value will be set
+regardless of any pre-existing value, including one from a default-parameter or
+one extracted from the url.
+-->
+<!ELEMENT overridden-parameter (#PCDATA)>
+
+<!--
+The name attribute specifies the name of the parameter to be overridden.
+-->
+<!ATTLIST overridden-parameter
 	name CDATA #REQUIRED
 >

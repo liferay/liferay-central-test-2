@@ -64,6 +64,10 @@ public class RouteImpl implements Route {
 	public void addIgnoredParameter(String name) {
 		_ignoredParameters.add(name);
 	}
+	
+	public void addOverriddenParameter(String name, String value) {
+		_overriddenParameters.put(name, value);
+	}
 
 	public Map<String, String> getDefaultParameters() {
 		return _defaultParameters;
@@ -71,6 +75,10 @@ public class RouteImpl implements Route {
 
 	public List<String> getIgnoredParameters() {
 		return _ignoredParameters;
+	}
+	
+	public Map<String, String> getOverriddenParameters() {
+		return _overriddenParameters;
 	}
 
 	public String parametersToUrl(Map<String, ?> parameters) {
@@ -143,6 +151,8 @@ public class RouteImpl implements Route {
 
 			parameters.put(routePart.getName(), value);
 		}
+		
+		parameters.putAll(_overriddenParameters);
 
 		return parameters;
 	}
@@ -160,6 +170,8 @@ public class RouteImpl implements Route {
 	private Map<String, String> _defaultParameters =
 		new HashMap<String, String>();
 	private List<String> _ignoredParameters = new ArrayList<String>();
+	private Map<String, String> _overriddenParameters =
+		new HashMap<String, String>();
 	private Pattern _regexPattern;
 	private List<RoutePart> _routeParts = new ArrayList<RoutePart>();
 	private String _urlPattern;

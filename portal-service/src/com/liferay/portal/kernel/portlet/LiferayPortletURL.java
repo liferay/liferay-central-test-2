@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.portlet;
 
 import java.io.Serializable;
 
+import java.util.Map;
 import java.util.Set;
 
 import javax.portlet.PortletURL;
@@ -36,6 +37,8 @@ public interface LiferayPortletURL
 	public String getParameter(String name);
 
 	public String getPortletId();
+
+	public Map<String, String> getReservedParameterMap();
 
 	public String getResourceID();
 

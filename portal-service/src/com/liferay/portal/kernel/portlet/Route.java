@@ -29,9 +29,13 @@ public interface Route {
 
 	public void addIgnoredParameter(String name);
 
+	public void addOverriddenParameter(String name, String value);
+
 	public Map<String, String> getDefaultParameters();
 
 	public List<String> getIgnoredParameters();
+
+	public Map<String, String> getOverriddenParameters();
 
 	public String parametersToUrl(Map<String, ?> parameters);
 

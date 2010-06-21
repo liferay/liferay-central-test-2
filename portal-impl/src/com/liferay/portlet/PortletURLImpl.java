@@ -81,6 +81,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
+ * @author Connor McKay
  */
 public class PortletURLImpl implements LiferayPortletURL {
 
@@ -242,6 +243,65 @@ public class PortletURLImpl implements LiferayPortletURL {
 		return _portletRequest;
 	}
 
+	public Map<String, String> getReservedParameterMap() {
+		if (_reservedParameters != null) {
+			return _reservedParameters;
+		}
+
+		_reservedParameters = new LinkedHashMap<String, String>();
+
+		_reservedParameters.put("p_p_id", _portletId);
+
+		if (_lifecycle.equals(PortletRequest.ACTION_PHASE)) {
+			_reservedParameters.put("p_p_lifecycle", "1");
+		}
+		else if (_lifecycle.equals(PortletRequest.RENDER_PHASE)) {
+			_reservedParameters.put("p_p_lifecycle", "0");
+		}
+		else if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+			_reservedParameters.put("p_p_lifecycle", "2");
+		}
+
+		if (_windowState != null) {
+			_reservedParameters.put("p_p_state", _windowState.toString());
+		}
+
+		if (_portletMode != null) {
+			_reservedParameters.put("p_p_mode", _portletMode.toString());
+		}
+
+		if (_resourceID != null) {
+			_reservedParameters.put("p_p_resource_id", _resourceID);
+		}
+
+		if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+			_reservedParameters.put("p_p_cacheability", _cacheability);
+		}
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
+		if (Validator.isNotNull(portletDisplay.getColumnId())) {
+			_reservedParameters.put("p_p_col_id", portletDisplay.getColumnId());
+		}
+
+		if (portletDisplay.getColumnPos() > 0) {
+			_reservedParameters.put(
+				"p_p_col_pos",
+				String.valueOf(portletDisplay.getColumnPos()));
+		}
+
+		if (portletDisplay.getColumnCount() > 0) {
+			_reservedParameters.put(
+				"p_p_col_count",
+				String.valueOf(portletDisplay.getColumnCount()));
+		}
+
+		return _reservedParameters;
+	}
+
 	public String getResourceID() {
 		return _resourceID;
 	}
@@ -309,9 +369,7 @@ public class PortletURLImpl implements LiferayPortletURL {
 	public void setAnchor(boolean anchor) {
 		_anchor = anchor;
 
-		// Clear cache
-
-		_toString = null;
+		clearCache();
 	}
 
 	public void setCacheability(String cacheability) {
@@ -350,9 +408,7 @@ public class PortletURLImpl implements LiferayPortletURL {
 
 		_cacheability = cacheability;
 
-		// Clear cache
-
-		_toString = null;
+		clearCache();
 	}
 
 	public void setCopyCurrentPublicRenderParameters(
@@ -370,49 +426,37 @@ public class PortletURLImpl implements LiferayPortletURL {
 	public void setDoAsGroupId(long doAsGroupId) {
 		_doAsGroupId = doAsGroupId;
 
-		// Clear cache
-
-		_toString = null;
+		clearCache();
 	}
 
 	public void setDoAsUserId(long doAsUserId) {
 		_doAsUserId = doAsUserId;
 
-		// Clear cache
-
-		_toString = null;
+		clearCache();
 	}
 
 	public void setDoAsUserLanguageId(String doAsUserLanguageId) {
 		_doAsUserLanguageId = doAsUserLanguageId;
 
-		// Clear cache
-
-		_toString = null;
+		clearCache();
 	}
 
 	public void setEncrypt(boolean encrypt) {
 		_encrypt = encrypt;
 
-		// Clear cache
-
-		_toString = null;
+		clearCache();
 	}
 
 	public void setEscapeXml(boolean escapeXml) {
 		_escapeXml = escapeXml;
 
-		// Clear cache
-
-		_toString = null;
+		clearCache();
 	}
 
 	public void setLifecycle(String lifecycle) {
 		_lifecycle = lifecycle;
 
-		// Clear cache
-
-		_toString = null;
+		clearCache();
 	}
 
 	public void setParameter(String name, String value) {
@@ -453,9 +497,7 @@ public class PortletURLImpl implements LiferayPortletURL {
 			_params.put(name, values);
 		}
 
-		// Clear cache
-
-		_toString = null;
+		clearCache();
 	}
 
 	public void setParameters(Map<String, String[]> params) {
@@ -488,25 +530,19 @@ public class PortletURLImpl implements LiferayPortletURL {
 			_params = newParams;
 		}
 
-		// Clear cache
-
-		_toString = null;
+		clearCache();
 	}
 
 	public void setPlid(long plid) {
 		_plid = plid;
 
-		// Clear cache
-
-		_toString = null;
+		clearCache();
 	}
 
 	public void setPortletId(String portletId) {
 		_portletId = portletId;
 
-		// Clear cache
-
-		_toString = null;
+		clearCache();
 	}
 
 	public void setPortletMode(PortletMode portletMode)
@@ -523,9 +559,7 @@ public class PortletURLImpl implements LiferayPortletURL {
 
 		_portletMode = portletMode;
 
-		// Clear cache
-
-		_toString = null;
+		clearCache();
 	}
 
 	public void setPortletMode(String portletMode) throws PortletModeException {
@@ -541,9 +575,7 @@ public class PortletURLImpl implements LiferayPortletURL {
 	public void setRefererPlid(long refererPlid) {
 		_refererPlid = refererPlid;
 
-		// Clear cache
-
-		_toString = null;
+		clearCache();
 	}
 
 	public void setResourceID(String resourceID) {
@@ -553,9 +585,7 @@ public class PortletURLImpl implements LiferayPortletURL {
 	public void setSecure(boolean secure) {
 		_secure = secure;
 
-		// Clear cache
-
-		_toString = null;
+		clearCache();
 	}
 
 	public void setWindowState(String windowState) throws WindowStateException {
@@ -578,9 +608,7 @@ public class PortletURLImpl implements LiferayPortletURL {
 			_windowState = windowState;
 		}
 
-		// Clear cache
-
-		_toString = null;
+		clearCache();
 	}
 
 	public String toString() {
@@ -762,26 +790,6 @@ public class PortletURLImpl implements LiferayPortletURL {
 					sb.append("/-");
 					sb.append(friendlyURLPath);
 				}
-
-				if (_lifecycle.equals(PortletRequest.RENDER_PHASE)) {
-					addParameterIncludedInPath("p_p_lifecycle");
-				}
-
-				//if ((_windowState != null) &&
-				//	_windowState.equals(WindowState.MAXIMIZED)) {
-
-					addParameterIncludedInPath("p_p_state");
-				//}
-
-				//if ((_portletMode != null) &&
-				//	_portletMode.equals(PortletMode.VIEW)) {
-
-					addParameterIncludedInPath("p_p_mode");
-				//}
-
-				addParameterIncludedInPath("p_p_col_id");
-				addParameterIncludedInPath("p_p_col_pos");
-				addParameterIncludedInPath("p_p_col_count");
 			}
 
 			sb.append(StringPool.QUESTION);
@@ -791,89 +799,15 @@ public class PortletURLImpl implements LiferayPortletURL {
 
 		addPortletAuthToken(sb, key);
 
-		if (!isParameterIncludedInPath("p_p_id")) {
-			sb.append("p_p_id");
-			sb.append(StringPool.EQUAL);
-			sb.append(processValue(key, _portletId));
-			sb.append(StringPool.AMPERSAND);
-		}
+		for (Map.Entry<String, String> entry :
+			getReservedParameterMap().entrySet()) {
 
-		if (!isParameterIncludedInPath("p_p_lifecycle")) {
-			sb.append("p_p_lifecycle");
-			sb.append(StringPool.EQUAL);
+			String name = entry.getKey();
 
-			if (_lifecycle.equals(PortletRequest.ACTION_PHASE)) {
-				sb.append(processValue(key, "1"));
-			}
-			else if (_lifecycle.equals(PortletRequest.RENDER_PHASE)) {
-				sb.append(processValue(key, "0"));
-			}
-			else if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-				sb.append(processValue(key, "2"));
-			}
-
-			sb.append(StringPool.AMPERSAND);
-		}
-
-		if (!isParameterIncludedInPath("p_p_state")) {
-			if (_windowState != null) {
-				sb.append("p_p_state");
+			if (!isParameterIncludedInPath(name)) {
+				sb.append(name);
 				sb.append(StringPool.EQUAL);
-				sb.append(processValue(key, _windowState.toString()));
-				sb.append(StringPool.AMPERSAND);
-			}
-		}
-
-		if (!isParameterIncludedInPath("p_p_mode")) {
-			if (_portletMode != null) {
-				sb.append("p_p_mode");
-				sb.append(StringPool.EQUAL);
-				sb.append(processValue(key, _portletMode.toString()));
-				sb.append(StringPool.AMPERSAND);
-			}
-		}
-
-		if (!isParameterIncludedInPath("p_p_resource_id")) {
-			if (_resourceID != null) {
-				sb.append("p_p_resource_id");
-				sb.append(StringPool.EQUAL);
-				sb.append(processValue(key, _resourceID));
-				sb.append(StringPool.AMPERSAND);
-			}
-		}
-
-		if (!isParameterIncludedInPath("p_p_cacheability")) {
-			if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-				sb.append("p_p_cacheability");
-				sb.append(StringPool.EQUAL);
-				sb.append(processValue(key, _cacheability));
-				sb.append(StringPool.AMPERSAND);
-			}
-		}
-
-		if (!isParameterIncludedInPath("p_p_col_id")) {
-			if (Validator.isNotNull(portletDisplay.getColumnId())) {
-				sb.append("p_p_col_id");
-				sb.append(StringPool.EQUAL);
-				sb.append(processValue(key, portletDisplay.getColumnId()));
-				sb.append(StringPool.AMPERSAND);
-			}
-		}
-
-		if (!isParameterIncludedInPath("p_p_col_pos")) {
-			if (portletDisplay.getColumnPos() > 0) {
-				sb.append("p_p_col_pos");
-				sb.append(StringPool.EQUAL);
-				sb.append(processValue(key, portletDisplay.getColumnPos()));
-				sb.append(StringPool.AMPERSAND);
-			}
-		}
-
-		if (!isParameterIncludedInPath("p_p_col_count")) {
-			if (portletDisplay.getColumnCount() > 0) {
-				sb.append("p_p_col_count");
-				sb.append(StringPool.EQUAL);
-				sb.append(processValue(key, portletDisplay.getColumnCount()));
+				sb.append(processValue(key, entry.getValue()));
 				sb.append(StringPool.AMPERSAND);
 			}
 		}
@@ -1334,6 +1268,11 @@ public class PortletURLImpl implements LiferayPortletURL {
 		}
 	}
 
+	private void clearCache() {
+		_reservedParameters = null;
+		_toString = null;
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(PortletURLImpl.class);
 
 	private boolean _anchor = true;
@@ -1359,6 +1298,7 @@ public class PortletURLImpl implements LiferayPortletURL {
 	private long _refererPlid;
 	private Map<String, String[]> _removePublicRenderParameters;
 	private HttpServletRequest _request;
+	private Map<String, String> _reservedParameters;
 	private String _resourceID;
 	private boolean _secure;
 	private String _toString;
