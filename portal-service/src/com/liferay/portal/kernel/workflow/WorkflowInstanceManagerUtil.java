@@ -55,6 +55,15 @@ public class WorkflowInstanceManagerUtil {
 	}
 
 	public static int getWorkflowInstanceCount(
+			long companyId, Long userId, String assetClassName,
+			Long assetClassPK, Boolean completed)
+		throws WorkflowException {
+
+		return _workflowInstanceManager.getWorkflowInstanceCount(
+			companyId, userId, assetClassName, assetClassPK, completed);
+	}
+
+	public static int getWorkflowInstanceCount(
 			long companyId, String workflowDefinitionName,
 			Integer workflowDefinitionVersion, Boolean completed)
 		throws WorkflowException {
@@ -64,17 +73,19 @@ public class WorkflowInstanceManagerUtil {
 			completed);
 	}
 
-	public static int getWorkflowInstanceCount(
-			long companyId, Long userId, String assetClassName,
-			Long assetClassPK, Boolean completed)
-		throws WorkflowException {
-
-		return _workflowInstanceManager.getWorkflowInstanceCount(
-			companyId, userId, assetClassName, assetClassPK, completed);
-	}
-
 	public static WorkflowInstanceManager getWorkflowInstanceManager() {
 		return _workflowInstanceManager;
+	}
+
+	public static List<WorkflowInstance> getWorkflowInstances(
+			long companyId, Long userId, String assetClassName,
+			Long assetClassPK, Boolean completed, int start,
+			int end, OrderByComparator orderByComparator)
+		throws WorkflowException {
+
+		return _workflowInstanceManager.getWorkflowInstances(
+			companyId, userId, assetClassName, assetClassPK,
+			completed, start, end, orderByComparator);
 	}
 
 	public static List<WorkflowInstance> getWorkflowInstances(
@@ -87,17 +98,6 @@ public class WorkflowInstanceManagerUtil {
 			companyId, workflowDefinitionName,
 			workflowDefinitionVersion, completed, start,
 			end, orderByComparator);
-	}
-
-	public static List<WorkflowInstance> getWorkflowInstances(
-			long companyId, Long userId, String assetClassName,
-			Long assetClassPK, Boolean completed, int start,
-			int end, OrderByComparator orderByComparator)
-		throws WorkflowException {
-
-		return _workflowInstanceManager.getWorkflowInstances(
-			companyId, userId, assetClassName, assetClassPK,
-			completed, start, end, orderByComparator);
 	}
 
 	public static WorkflowInstance signalWorkflowInstance(
