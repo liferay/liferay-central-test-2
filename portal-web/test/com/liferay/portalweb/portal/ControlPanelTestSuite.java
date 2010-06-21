@@ -25,8 +25,8 @@ import com.liferay.portalweb.portal.controlpanel.pagetemplates.PageTemplatesTest
 import com.liferay.portalweb.portal.controlpanel.passwordpolicies.PasswordPoliciesTests;
 import com.liferay.portalweb.portal.controlpanel.polls.PollsTests;
 import com.liferay.portalweb.portal.controlpanel.settings.SettingsTests;
-import com.liferay.portalweb.portal.controlpanel.user.UserTests;
 import com.liferay.portalweb.portal.controlpanel.usergroup.UserGroupTests;
+import com.liferay.portalweb.portal.controlpanel.users.UsersTests;
 import com.liferay.portalweb.portal.controlpanel.virtualhosting.VirtualHostingTests;
 import com.liferay.portalweb.portal.controlpanel.webcontent.WebContentTests;
 import com.liferay.portalweb.portal.login.LoginTests;
@@ -56,8 +56,8 @@ public class ControlPanelTestSuite extends BaseTests {
 		testSuite.addTest(PasswordPoliciesTests.suite());
 		testSuite.addTest(PollsTests.suite());
 		testSuite.addTest(SettingsTests.suite());
-		testSuite.addTest(UserTests.suite());
 		testSuite.addTest(UserGroupTests.suite());
+		testSuite.addTest(UsersTests.suite());
 		testSuite.addTest(VirtualHostingTests.suite());
 		testSuite.addTest(WebContentTests.suite());
 

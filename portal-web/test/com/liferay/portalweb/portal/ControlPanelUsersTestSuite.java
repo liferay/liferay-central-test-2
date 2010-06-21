@@ -14,24 +14,24 @@
 
 package com.liferay.portalweb.portal;
 
-import com.liferay.portalweb.portal.controlpanel.user.UserTests;
+import com.liferay.portalweb.portal.controlpanel.users.UsersTests;
 import com.liferay.portalweb.portal.login.LoginTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="ControlPanelUserTestSuite.java.html"><b><i>View Source</i></b></a>
+ * <a href="ControlPanelUsersTestSuite.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ControlPanelUserTestSuite extends BaseTests {
+public class ControlPanelUsersTestSuite extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTest(LoginTests.suite());
-		testSuite.addTest(UserTests.suite());
+		testSuite.addTest(UsersTests.suite());
 
 		testSuite.addTestSuite(StopSeleniumTest.class);
 

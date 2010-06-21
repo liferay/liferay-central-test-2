@@ -258,13 +258,13 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="control-panel-user" />
-			<param name="test.ant.script.suite" value="ControlPanelUserTestSuite" />
+			<param name="test.ant.script.command" value="control-panel-user-group" />
+			<param name="test.ant.script.suite" value="ControlPanelUserGroupTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="control-panel-user-group" />
-			<param name="test.ant.script.suite" value="ControlPanelUserGroupTestSuite" />
+			<param name="test.ant.script.command" value="control-panel-users" />
+			<param name="test.ant.script.suite" value="ControlPanelUsersTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
