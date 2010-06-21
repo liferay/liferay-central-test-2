@@ -198,7 +198,7 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 				namespace, parameterMap, entry.getKey(), entry.getValue());
 		}
 
-		// Copy default reserved parameters if they aren't already set
+		// Copy default reserved parameters if they are not already set
 
 		for (Map.Entry<String, String> entry :
 				defaultReservedParameters.entrySet()) {
