@@ -175,7 +175,7 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 		booleanValue = ParamUtil.getBoolean(request, name, booleanValue);
 		%>
 
-		<input id="<%= id %>" name="<%= namespace + name %>" type="hidden" value="<%= value %>" />
+		<input id="<%= id %>" name="<%= namespace + name %>" type="hidden" value="<%= booleanValue %>" />
 
 		<input <%= booleanValue ? "checked" : StringPool.BLANK %> class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>Checkbox" name="<%= namespace + name %>Checkbox" onClick="Liferay.Util.updateCheckboxValue(this); <%= onClick %>" <%= Validator.isNotNull(title) ? "title=\"" + title + "\"" : StringPool.BLANK %> type="checkbox" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 	</c:when>
