@@ -11,9 +11,9 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.portal.workflow.permission;
 
-import com.liferay.portal.kernel.workflow.permission.WorkflowPermission;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.workflow.WorkflowException;
@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.workflow.WorkflowInstance;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManagerUtil;
 import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil;
+import com.liferay.portal.kernel.workflow.permission.WorkflowPermission;
 import com.liferay.portal.model.WorkflowInstanceLink;
 import com.liferay.portal.service.WorkflowDefinitionLinkLocalServiceUtil;
 import com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil;
@@ -39,32 +40,8 @@ public class WorkflowPermissionImpl implements WorkflowPermission {
 		long userId, String actionId) {
 
 		try {
-			if (!WorkflowDefinitionLinkLocalServiceUtil.
-					hasWorkflowDefinitionLink(companyId, groupId, className)) {
-
-				return null;
-			}
-
-			if (WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(
-				companyId, groupId, className, classPK)) {
-
-				WorkflowInstanceLink workflowInstanceLink =
-					WorkflowInstanceLinkLocalServiceUtil.
-						getWorkflowInstanceLink(
-							companyId, groupId, className, classPK);
-
-				WorkflowInstance workflowInstance =
-					WorkflowInstanceManagerUtil.getWorkflowInstance(
-						companyId,
-						workflowInstanceLink.getWorkflowInstanceId());
-
-				if (workflowInstance.isComplete()) {
-					return null;
-				}
-
-				return isWorkflowTaskAssignedToUser(
-					companyId, userId, workflowInstance);
-			}
+			return doHasPermission(
+				companyId, groupId, className, classPK, userId, actionId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -73,24 +50,54 @@ public class WorkflowPermissionImpl implements WorkflowPermission {
 		return null;
 	}
 
-	protected boolean isWorkflowTaskAssignedToUser(
-		long companyId, long userId, WorkflowInstance workflowInstance) {
+	protected Boolean doHasPermission(
+			long companyId, long groupId, String className, long classPK,
+			long userId, String actionId)
+		throws Exception {
 
-		try {
-			List<WorkflowTask> workflowTasks =
-				WorkflowTaskManagerUtil.getWorkflowTasksByWorkflowInstance(
-					companyId, workflowInstance.getWorkflowInstanceId(),
-					Boolean.FALSE, 0, 100, null);
+		if (!WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(
+				companyId, groupId, className)) {
 
-			for (WorkflowTask workflowTask : workflowTasks) {
-				if (workflowTask.isAssignedToSingleUser() &&
-					(workflowTask.getAssigneeUserId() == userId)) {
-
-					return true;
-				}
-			}
+			return null;
 		}
-		catch (WorkflowException e) {
+
+		if (WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(
+				companyId, groupId, className, classPK)) {
+
+			WorkflowInstanceLink workflowInstanceLink =
+				WorkflowInstanceLinkLocalServiceUtil.getWorkflowInstanceLink(
+						companyId, groupId, className, classPK);
+
+			WorkflowInstance workflowInstance =
+				WorkflowInstanceManagerUtil.getWorkflowInstance(
+					companyId, workflowInstanceLink.getWorkflowInstanceId());
+
+			if (workflowInstance.isComplete()) {
+				return null;
+			}
+
+			return isWorkflowTaskAssignedToUser(
+				companyId, userId, workflowInstance);
+		}
+
+		return null;
+	}
+
+	protected boolean isWorkflowTaskAssignedToUser(
+			long companyId, long userId, WorkflowInstance workflowInstance)
+		throws WorkflowException {
+
+		List<WorkflowTask> workflowTasks =
+			WorkflowTaskManagerUtil.getWorkflowTasksByWorkflowInstance(
+				companyId, workflowInstance.getWorkflowInstanceId(),
+				Boolean.FALSE, 0, 100, null);
+
+		for (WorkflowTask workflowTask : workflowTasks) {
+			if ((workflowTask.isAssignedToSingleUser()) &&
+				(workflowTask.getAssigneeUserId() == userId)) {
+
+				return true;
+			}
 		}
 
 		return false;

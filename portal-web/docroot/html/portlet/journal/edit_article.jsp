@@ -600,7 +600,6 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					<aui:button name="saveArticleBtn" value="save" />
 
 					<aui:button disabled="<%= pending %>" name="publishBtn" value="publish" />
-
 				</c:if>
 
 				<c:if test="<%= Validator.isNotNull(structureId) %>">
