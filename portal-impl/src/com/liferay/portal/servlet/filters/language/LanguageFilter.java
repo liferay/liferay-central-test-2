@@ -18,19 +18,31 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.language.UnicodeLanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
+import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.util.servlet.ServletResponseUtil;
 
+import java.util.List;
 import java.util.Locale;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.portlet.PortletConfig;
+
 import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -41,6 +53,28 @@ import javax.servlet.http.HttpServletResponse;
  * @author Shuyang Zhou
  */
 public class LanguageFilter extends BasePortalFilter {
+
+	public void init(FilterConfig filterConfig) {
+		super.init(filterConfig);
+
+		ServletContext servletContext = filterConfig.getServletContext();
+
+		PortletApp portletApp = (PortletApp)servletContext.getAttribute(
+			PortletServlet.PORTLET_APP);
+
+		if ((portletApp == null) || !portletApp.isWARFile()) {
+			return;
+		}
+
+		List<Portlet> portlets = portletApp.getPortlets();
+
+		if (portlets.size() <= 0) {
+			return;
+		}
+
+		_portletConfig = PortletConfigFactory.create(
+			portlets.get(0), filterConfig.getServletContext());
+	}
 
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
@@ -85,7 +119,25 @@ public class LanguageFilter extends BasePortalFilter {
 
 			sb.append(content.substring(x, y));
 			sb.append(StringPool.APOSTROPHE);
-			sb.append(UnicodeLanguageUtil.get(locale, key));
+
+			String value = null;
+
+			if (_portletConfig != null) {
+				ResourceBundle resourceBundle =
+					_portletConfig.getResourceBundle(locale);
+
+				try {
+					value = resourceBundle.getString(key);
+				}
+				catch (MissingResourceException mre) {
+				}
+			}
+
+			if (Validator.isNull(value)) {
+				value = UnicodeLanguageUtil.get(locale, key);
+			}
+
+			sb.append(value);
 			sb.append(StringPool.APOSTROPHE);
 
 			x = matcher.end(0);
@@ -100,5 +152,7 @@ public class LanguageFilter extends BasePortalFilter {
 
 	private static Pattern _pattern = Pattern.compile(
 		"Liferay\\.Language\\.get\\([\"']([^)]+)[\"']\\)");
+
+	private PortletConfig _portletConfig;
 
 }
