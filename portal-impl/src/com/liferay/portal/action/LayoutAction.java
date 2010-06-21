@@ -141,8 +141,9 @@ public class LayoutAction extends Action {
 		throws Exception {
 
 		HeaderCacheServletResponse headerCacheServletResponse = null;
+
 		if (response instanceof HeaderCacheServletResponse) {
-			headerCacheServletResponse = (HeaderCacheServletResponse) response;
+			headerCacheServletResponse = (HeaderCacheServletResponse)response;
 		}
 		else {
 			headerCacheServletResponse = new HeaderCacheServletResponse(
@@ -227,10 +228,12 @@ public class LayoutAction extends Action {
 		}
 
 		if (plid > 0) {
-			ActionForward actionForward = processLayout(mapping, request,
-				headerCacheServletResponse, plid);
-			CacheResponseUtil.setHeaders(response,
-				headerCacheServletResponse.getHeaders());
+			ActionForward actionForward = processLayout(
+				mapping, request, headerCacheServletResponse, plid);
+
+			CacheResponseUtil.setHeaders(
+				response, headerCacheServletResponse.getHeaders());
+
 			return actionForward;
 		}
 		else {
@@ -242,8 +245,9 @@ public class LayoutAction extends Action {
 			catch (Exception e) {
 				PortalUtil.sendError(e, request, headerCacheServletResponse);
 
-				CacheResponseUtil.setHeaders(response,
-					headerCacheServletResponse.getHeaders());
+				CacheResponseUtil.setHeaders(
+					response, headerCacheServletResponse.getHeaders());
+
 				return null;
 			}
 		}
