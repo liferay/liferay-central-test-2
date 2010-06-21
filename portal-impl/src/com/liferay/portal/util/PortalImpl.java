@@ -4399,7 +4399,6 @@ public class PortalImpl implements Portal {
 	private void _initCustomSQL() {
 		_customSqlClassNames = new String[] {
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.GROUP$]",
-			"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.LAYOUT$]",
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ORGANIZATION$]",
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ROLE$]",
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.USER$]",
@@ -4422,7 +4421,6 @@ public class PortalImpl implements Portal {
 
 		_customSqlClassNameIds = new String[] {
 			String.valueOf(PortalUtil.getClassNameId(Group.class)),
-			String.valueOf(PortalUtil.getClassNameId(Layout.class)),
 			String.valueOf(PortalUtil.getClassNameId(Organization.class)),
 			String.valueOf(PortalUtil.getClassNameId(Role.class)),
 			String.valueOf(PortalUtil.getClassNameId(User.class)),

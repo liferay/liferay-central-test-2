@@ -43,20 +43,6 @@
 								WHERE
 									groupId = ?
 							)
-						) AND
-						(
-							(Group_.classNameId <> [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.LAYOUT$]) OR
-							(
-								Group_.parentGroupId NOT IN(
-									SELECT
-										groupId
-									FROM
-										Group_
-									WHERE
-										(liveGroupId <> 0) AND
-										(groupId <> ?)
-								)
-							)
 						)
 					)
 				)
@@ -122,53 +108,32 @@
 	<sql id="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder.findByGroupIds">
 		<![CDATA[
 			SELECT
-				statsUserId
+				{BlogsStatsUser.*}
 			FROM
-			(
-				SELECT
-					BlogsStatsUser.statsUserId AS statsUserId, BlogsStatsUser.userId AS userId
-				FROM
-					BlogsStatsUser
-				INNER JOIN
-					Group_ ON
-						(Group_.groupId = BlogsStatsUser.groupId)
-				WHERE
+				BlogsStatsUser
+			INNER JOIN
+				Group_ ON
+					(Group_.groupId = BlogsStatsUser.groupId)
+			WHERE
+				(
+					(Group_.companyId = ?) AND
+					(Group_.groupId = ?) OR
 					(
-						(Group_.companyId = ?) AND
-						(Group_.groupId = ?) OR
+						(Group_.liveGroupId = 0) AND
 						(
-							(Group_.liveGroupId = 0) AND
-							(
-								Group_.groupId NOT IN(
-									SELECT
-										liveGroupId
-									FROM
-										Group_
-									WHERE
-										groupId = ?
-								)
-							) AND
-							(
-								(Group_.classNameId <> [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.LAYOUT$]) OR
-								(
-									Group_.parentGroupId NOT IN(
-										SELECT
-											groupId
-										FROM
-											Group_
-										WHERE
-											(liveGroupId <> 0) AND
-											(groupId <> ?)
-									)
-								)
+							Group_.groupId NOT IN(
+								SELECT
+									liveGroupId
+								FROM
+									Group_
+								WHERE
+									groupId = ?
 							)
 						)
 					)
-				ORDER BY
-					BlogsStatsUser.lastPostDate DESC
-			) TEMP_TABLE
-			GROUP BY
-				userId
+				)
+			ORDER BY
+				BlogsStatsUser.lastPostDate DESC
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder.findByOrganizationIds">

@@ -120,30 +120,16 @@ public class BlogsStatsUserFinderImpl
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar("statsUserId", Type.LONG);
+			q.addEntity("BlogsStatsUser", BlogsStatsUserImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
 			qPos.add(groupId);
 			qPos.add(groupId);
-			qPos.add(groupId);
 
-			List<BlogsStatsUser> statsUsers = new ArrayList<BlogsStatsUser>();
-			
-			Iterator<Long> itr = (Iterator<Long>)QueryUtil.iterate(
+			return (List<BlogsStatsUser>)QueryUtil.list(
 				q, getDialect(), start, end);
-
-			while (itr.hasNext()) {
-				Long statsUserId = itr.next();
-
-				BlogsStatsUser statsUser =
-					BlogsStatsUserUtil.findByPrimaryKey(statsUserId);
-
-				statsUsers.add(statsUser);
-			}
-
-			return statsUsers;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
