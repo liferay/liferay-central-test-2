@@ -80,28 +80,7 @@ public class ExportPagesAction extends PortletAction {
 			Date startDate = null;
 			Date endDate = null;
 
-			if (range.equals("fromLastPublishDate")) {
-				LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-					groupId, privateLayout);
-
-				UnicodeProperties settingsProperties =
-					layoutSet.getSettingsProperties();
-
-				long lastPublishDate = GetterUtil.getLong(
-					settingsProperties.getProperty("last-publish-date"));
-
-				if (lastPublishDate > 0) {
-					Calendar cal = Calendar.getInstance(
-						themeDisplay.getTimeZone(), themeDisplay.getLocale());
-
-					endDate = cal.getTime();
-
-					cal.setTimeInMillis(lastPublishDate);
-
-					startDate = cal.getTime();
-				}
-			}
-			else if (range.equals("dateRange")) {
+			if (range.equals("dateRange")) {
 				int startDateMonth = ParamUtil.getInteger(
 					actionRequest, "startDateMonth");
 				int startDateDay = ParamUtil.getInteger(
@@ -145,6 +124,27 @@ public class ExportPagesAction extends PortletAction {
 					endDateMonth, endDateDay, endDateYear, endDateHour,
 					endDateMinute, themeDisplay.getTimeZone(),
 					new PortalException());
+			}
+			else if (range.equals("fromLastPublishDate")) {
+				LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+					groupId, privateLayout);
+
+				UnicodeProperties settingsProperties =
+					layoutSet.getSettingsProperties();
+
+				long lastPublishDate = GetterUtil.getLong(
+					settingsProperties.getProperty("last-publish-date"));
+
+				if (lastPublishDate > 0) {
+					Calendar cal = Calendar.getInstance(
+						themeDisplay.getTimeZone(), themeDisplay.getLocale());
+
+					endDate = cal.getTime();
+
+					cal.setTimeInMillis(lastPublishDate);
+
+					startDate = cal.getTime();
+				}
 			}
 
 			File file = LayoutServiceUtil.exportLayoutsAsFile(

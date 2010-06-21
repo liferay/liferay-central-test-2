@@ -292,14 +292,14 @@ public class PortletExporter {
 		}
 		finally {
 			try {
-				javax.portlet.PortletPreferences preferences =
+				javax.portlet.PortletPreferences jxPreferences =
 					PortletPreferencesFactoryUtil.getPortletSetup(
 						layout, portletId, StringPool.BLANK);
 
-				preferences.setValue(
+				jxPreferences.setValue(
 					"last-publish-date", String.valueOf(lastPublishDate));
 
-				preferences.store();
+				jxPreferences.store();
 			}
 			catch (Exception e) {
 				throw new PortalException(e);
