@@ -23,15 +23,9 @@ import java.util.concurrent.ThreadFactory;
  */
 public class NamedThreadFactory implements ThreadFactory {
 
-	public NamedThreadFactory(String name, int priority) {
-		this(name, priority, PortalClassLoaderUtil.getClassLoader());
-	}
-
 	public NamedThreadFactory(
-		String name, int priority, ClassLoader classLoader) {
+		String name, int priority, ClassLoader contextClassLoader) {
 
-		_contextClassLoader = classLoader;
-		
 		SecurityManager securityManager = System.getSecurityManager();
 
 		if (securityManager != null) {
@@ -45,6 +39,7 @@ public class NamedThreadFactory implements ThreadFactory {
 
 		_name = name;
 		_priority = priority;
+		_contextClassLoader = contextClassLoader;
 	}
 
 	public Thread newThread(Runnable runnable) {

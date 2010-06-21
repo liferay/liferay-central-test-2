@@ -17,6 +17,7 @@ package com.liferay.portal.kernel.messaging;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ConcurrentHashSet;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.NamedThreadFactory;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -272,10 +273,13 @@ public abstract class BaseDestination implements Destination {
 
 	protected void doOpen() {
 		if ((_threadPoolExecutor == null) || _threadPoolExecutor.isShutdown()) {
+			ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
+
 			_threadPoolExecutor = new ThreadPoolExecutor(
 				_workersCoreSize, _workersMaxSize, 0L, TimeUnit.MILLISECONDS,
 				new LinkedBlockingQueue<Runnable>(),
-				new NamedThreadFactory(getName(), Thread.NORM_PRIORITY));
+				new NamedThreadFactory(
+					getName(), Thread.NORM_PRIORITY, classLoader));
 		}
 	}
 
