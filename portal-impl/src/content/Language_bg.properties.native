@@ -4227,6 +4227,7 @@ there-are-no-top-posters=Няма топ автори.
 there-are-no-topics=Няма теми.
 there-are-no-users-to-invite=Няма потребители, които да бъдат поканени.
 there-are-no-workflow-definitions=There are no workflow definitions. (Automatic Copy)
+there-is-a-publication-workflow-in-process=There is a publication workflow in process. Some actions may be disabled depending on the status and your role through this process. (Automatic Copy)
 there-is-already-a-page-with-the-specified-title=Вече съществува страница с избраното заглавие.
 there-is-another-category-with-the-same-name-and-the-same-parent=There is another category with the same name and the same parent. (Automatic Copy)
 there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields=Съществуват данни във формата. Моля, експортирайте и изтрийте данните преди да правите промени по полетата.

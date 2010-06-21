@@ -4227,6 +4227,7 @@ there-are-no-top-posters=Nincsenek leggyakoribb hozzászólók.
 there-are-no-topics=Nincsenek témák.
 there-are-no-users-to-invite=Nincsenek meghívható felhasználók.
 there-are-no-workflow-definitions=Nincsenek munkafolyamat definiciók.
+there-is-a-publication-workflow-in-process=There is a publication workflow in process. Some actions may be disabled depending on the status and your role through this process. (Automatic Copy)
 there-is-already-a-page-with-the-specified-title=A megadott címmel már létezik oldal.
 there-is-another-category-with-the-same-name-and-the-same-parent=Van más kategória ugyanazon néven és szülővel.
 there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields=Az űrlap már tartalmaz adatokat. Exportálja és törölje a mezők megváltoztatása előtt.

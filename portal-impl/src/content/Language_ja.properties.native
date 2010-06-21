@@ -4227,6 +4227,7 @@ there-are-no-top-posters=投稿されていません。
 there-are-no-topics=トピックはありません。
 there-are-no-users-to-invite=招待するユーザはいません。
 there-are-no-workflow-definitions=ワークフローの定義がありません。
+there-is-a-publication-workflow-in-process=プロセスに出版物のワークフローがある。 ある行為はこのプロセスによって状態およびあなたの役割によって不具であるかもしれない。 (Automatic Translation)
 there-is-already-a-page-with-the-specified-title=指定したタイトルのページは既にあります。
 there-is-another-category-with-the-same-name-and-the-same-parent=同じ名前および同じ親とのもう一つの部門がある。
 there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields=フォームデータが既にあります。フィールドを変更する前に、エクスポートし、削除してください。

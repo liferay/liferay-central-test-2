@@ -4227,6 +4227,7 @@ there-are-no-top-posters=Nebyli nalezeni žádní vyhodnotitelní přispěvatel�
 there-are-no-topics=Nebyla nalezena žádná témata.
 there-are-no-users-to-invite=Nebili nalezeni žádní uživatelé, které by bylo možné pozvat.
 there-are-no-workflow-definitions=Nebyly nalezeny žádné definice workflow.
+there-is-a-publication-workflow-in-process=There is a publication workflow in process. Some actions may be disabled depending on the status and your role through this process. (Automatic Copy)
 there-is-already-a-page-with-the-specified-title=Stránka se stejným názvem již existuje.
 there-is-another-category-with-the-same-name-and-the-same-parent=Kategorie se shodným názvem a "rodičem" již existuje.
 there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields=Formulář obsahuje data, která je nutné před dalšími úpravami vymazat. Doporučujeme provést export.

@@ -4227,6 +4227,7 @@ there-are-no-top-posters=אין מודעות עליונות.
 there-are-no-topics=אין נושאים.
 there-are-no-users-to-invite=There are no users to invite. (Automatic Copy)
 there-are-no-workflow-definitions=There are no workflow definitions. (Automatic Copy)
+there-is-a-publication-workflow-in-process=There is a publication workflow in process. Some actions may be disabled depending on the status and your role through this process. (Automatic Copy)
 there-is-already-a-page-with-the-specified-title=קיים כבר העמוד עם הכותרת המבוקשת
 there-is-another-category-with-the-same-name-and-the-same-parent=There is another category with the same name and the same parent. (Automatic Copy)
 there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields=קובץ המידע קיים. אנא ייצא ומחק אותו לפני ביצוע השינויים בשדותיו.

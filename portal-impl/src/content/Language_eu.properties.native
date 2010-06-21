@@ -4227,6 +4227,7 @@ there-are-no-top-posters=Ez dago erabiltzaile aktiborik.
 there-are-no-topics=Ez dago gairik.
 there-are-no-users-to-invite=Ez daude erabiltzaileak gonbidatzeko.
 there-are-no-workflow-definitions=Ez dago workflow definiziorik.
+there-is-a-publication-workflow-in-process=There is a publication workflow in process. Some actions may be disabled depending on the status and your role through this process. (Automatic Copy)
 there-is-already-a-page-with-the-specified-title=Zehaztutako izenburua daukan orri bat existitzen da dagoeneko.
 there-is-another-category-with-the-same-name-and-the-same-parent=Izen eta aita berdineko beste kategoria bat existitzen da.
 there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields=Existitzen da datu formulario bat. Mesedez, esportatu eta ezabatu eremuetan aldaketak egin baina lehenago.

@@ -4227,6 +4227,7 @@ there-are-no-top-posters=Нет частых отправителей.
 there-are-no-topics=Нет тем.
 there-are-no-users-to-invite=Нет пользователей для приглашения.
 there-are-no-workflow-definitions=There are no workflow definitions. (Automatic Copy)
+there-is-a-publication-workflow-in-process=There is a publication workflow in process. Some actions may be disabled depending on the status and your role through this process. (Automatic Copy)
 there-is-already-a-page-with-the-specified-title=Уже есть страница с таким заголовком.
 there-is-another-category-with-the-same-name-and-the-same-parent=There is another category with the same name and the same parent. (Automatic Copy)
 there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields=Уже есть данные формы. Пожалуйста, экспортируйте и сотрите их перед внесением изменений в поля.

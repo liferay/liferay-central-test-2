@@ -4227,6 +4227,7 @@ there-are-no-top-posters=Il n'y a aucun publicateur vedette.
 there-are-no-topics=Il n'y a aucun sujet.
 there-are-no-users-to-invite=Il n'y a aucun utilisateur à inviter.
 there-are-no-workflow-definitions=Il n'y a aucune définition de déroulement des opérations. (Automatic Translation)
+there-is-a-publication-workflow-in-process=Il y a un déroulement des opérations de publication dans le processus. Quelques actions peuvent être handicapées selon le statut et votre rôle par ce processus. (Automatic Translation)
 there-is-already-a-page-with-the-specified-title=Il y a déjà une page avec le titre indiqué.
 there-is-another-category-with-the-same-name-and-the-same-parent=Il y a une autre catégorie avec le même nom et le même parent.
 there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields=Il y a des données existantes de forme. Exportez-et veuillez supprimez-le avant d'apporter des modifications aux champs.

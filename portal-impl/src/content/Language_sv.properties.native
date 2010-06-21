@@ -4227,6 +4227,7 @@ there-are-no-top-posters=Det finns inga toppförfattare.
 there-are-no-topics=Det finns inga ämnen.
 there-are-no-users-to-invite=Det finns inga användare att bjuda in.
 there-are-no-workflow-definitions=Det finns inga arbetsflödesdefinitioner.
+there-is-a-publication-workflow-in-process=There is a publication workflow in process. Some actions may be disabled depending on the status and your role through this process. (Automatic Copy)
 there-is-already-a-page-with-the-specified-title=Det finns redan en sida med denna titel.
 there-is-another-category-with-the-same-name-and-the-same-parent=Det finns en annan kategori med samma namn och överliggande kategori.
 there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields=Det finns existerande formulärdata. Var vänlig och exportera och ta bort det innan du gör ändringar i fälten.
