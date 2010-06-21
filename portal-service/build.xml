@@ -9,6 +9,10 @@
 	<target name="compile">
 		<mkdir dir="classes" />
 
+		<copy todir="classes">
+			<fileset dir="src" excludes="**/*.java" />
+		</copy>
+
 		<path id="web-lib.classpath">
 			<fileset dir="${project.dir}/lib/development" includes="junit.jar" />
 		</path>
