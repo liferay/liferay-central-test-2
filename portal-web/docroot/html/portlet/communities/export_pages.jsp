@@ -83,7 +83,7 @@ if (selPlid > 0) {
 	publish = true;
 }
 else {
-	selectedPlids = GetterUtil.getLongValues(StringUtil.split(SessionTreeJSClicks.getOpenNodes(request, treeKey + "Selected"), ","));
+	selectedPlids = GetterUtil.getLongValues(StringUtil.split(SessionTreeJSClicks.getOpenNodes(request, treeKey + "SelectedNode"), ","));
 }
 
 List results = new ArrayList();
@@ -102,7 +102,7 @@ if (!localPublishing) {
 	popupId = "publish-to-remote";
 	selGroup = liveGroup;
 	selectedPlids = new long[0];
-	SessionTreeJSClicks.closeNodes(request, treeKey + "Selected");
+	SessionTreeJSClicks.closeNodes(request, treeKey + "SelectedNode");
 }
 
 boolean privateLayout = tabs1.equals("private-pages");
@@ -243,19 +243,23 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 
 			<br />
 
-			<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="selectURL">
-				<portlet:param name="struts_action" value="/communities/export_pages" />
-				<portlet:param name="tabs1" value="<%= tabs1 %>" />
-				<portlet:param name="pagesRedirect" value="<%= pagesRedirect %>" />
-				<portlet:param name="groupId" value="<%= String.valueOf(selGroupId) %>" />
-				<portlet:param name="localPublishing" value="<%= String.valueOf(localPublishing) %>" />
-			</portlet:renderURL>
+			<%
+			PortletURL selectURL = renderResponse.createRenderURL();
+			selectURL.setParameter("struts_action", "/communities/export_pages");
+			selectURL.setParameter("tabs1", tabs1);
+			selectURL.setParameter("pagesRedirect", pagesRedirect);
+			selectURL.setParameter("groupId", String.valueOf(selGroupId));
+			selectURL.setParameter("localPublishing", String.valueOf(localPublishing));
+			selectURL.setWindowState(LiferayWindowState.EXCLUSIVE);
+
+			String taglibOnClick = "AUI().DialogManager.refreshByChild('#" + popupId + "');";
+			%>
 
 			<c:choose>
 				<c:when test="<%= !publish %>">
 
 					<%
-					String taglibOnClick = "AUI().DialogManager.refreshByChild('#" + popupId + "', { url: '" + selectURL + StringPool.AMPERSAND + renderResponse.getNamespace() + "publish=true' });";
+					selectURL.setParameter("publish", String.valueOf(Boolean.TRUE));
 					%>
 
 					<aui:button name="selectBtn" onClick="<%= taglibOnClick %>" value="select" />
@@ -270,19 +274,26 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 					<c:if test="<%= selPlid <= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>">
 
 						<%
-						String taglibOnClick = "AUI().DialogManager.refreshByChild('#" + popupId + "', { url: '" + selectURL + StringPool.AMPERSAND + renderResponse.getNamespace() + "publish=false' });";
+						selectURL.setParameter("publish", String.valueOf(Boolean.FALSE));
 						%>
 
 						<aui:button name="changeBtn" onClick="<%= taglibOnClick %>" value="change-selection" />
 					</c:if>
 
 					<%
-					String taglibOnClick = "if (confirm('" + UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-" + actionKey + "-these-pages") + "')) { submitForm(document." + renderResponse.getNamespace() + "exportPagesFm); }";
+					taglibOnClick = "if (confirm('" + UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-" + actionKey + "-these-pages") + "')) { submitForm(document." + renderResponse.getNamespace() + "exportPagesFm); }";
 					%>
 
 					<aui:button name="publishBtn" value="<%= actionKey %>" onClick="<%= taglibOnClick %>" />
 				</c:otherwise>
 			</c:choose>
+
+			<aui:script use="aui-dialog">
+				var dialog = A.DialogManager.findByChild('#<%= popupId %>');
+
+				dialog.io.set('uri', '<%= selectURL %>');
+			</aui:script>
+
 		</liferay-ui:section>
 		<liferay-ui:section>
 			<%@ include file="/html/portlet/communities/export_pages_options.jspf" %>
