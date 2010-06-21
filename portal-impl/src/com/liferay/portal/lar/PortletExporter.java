@@ -94,7 +94,7 @@ public class PortletExporter {
 	public byte[] exportPortletInfo(
 			long plid, long groupId, String portletId,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
-		throws PortalException, SystemException {
+		throws Exception {
 
 		File file = exportPortletInfoAsFile(
 			plid, groupId, portletId, parameterMap, startDate, endDate);
@@ -113,7 +113,7 @@ public class PortletExporter {
 	public File exportPortletInfoAsFile(
 			long plid, long groupId, String portletId,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
-		throws PortalException, SystemException {
+		throws Exception {
 
 		boolean exportCategories = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.CATEGORIES);
@@ -291,19 +291,7 @@ public class PortletExporter {
 			return zipWriter.getFile();
 		}
 		finally {
-			try {
-				javax.portlet.PortletPreferences jxPreferences =
-					PortletPreferencesFactoryUtil.getPortletSetup(
-						layout, portletId, StringPool.BLANK);
-
-				jxPreferences.setValue(
-					"last-publish-date", String.valueOf(lastPublishDate));
-
-				jxPreferences.store();
-			}
-			catch (Exception e) {
-				throw new PortalException(e);
-			}
+			updateLastPublishDate(layout, portletId, lastPublishDate);
 		}
 	}
 
@@ -682,7 +670,7 @@ public class PortletExporter {
 
 	protected void exportPortletData(
 			PortletDataContext context, Portlet portlet, Layout layout,
-			javax.portlet.PortletPreferences portletPreferences,
+			javax.portlet.PortletPreferences jxPreferences,
 			Element parentEl)
 		throws SystemException {
 
@@ -707,7 +695,7 @@ public class PortletExporter {
 
 		try {
 			data = portletDataHandler.exportData(
-				context, portletId, portletPreferences);
+				context, portletId, jxPreferences);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -1096,6 +1084,20 @@ public class PortletExporter {
 		sb.append(".xml");
 
 		return sb.toString();
+	}
+
+	protected void updateLastPublishDate(
+			Layout layout, String portletId, long lastPublishDate)
+		throws Exception {
+
+		javax.portlet.PortletPreferences jxPreferences =
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				layout, portletId, StringPool.BLANK);
+
+		jxPreferences.setValue(
+			"last-publish-date", String.valueOf(lastPublishDate));
+
+		jxPreferences.store();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PortletExporter.class);

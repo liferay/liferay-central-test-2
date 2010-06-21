@@ -126,7 +126,7 @@ public class LayoutExporter {
 	public byte[] exportLayouts(
 			long groupId, boolean privateLayout, long[] layoutIds,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
-		throws PortalException, SystemException {
+		throws Exception {
 
 		File file = exportLayoutsAsFile(
 			groupId, privateLayout, layoutIds, parameterMap, startDate,
@@ -146,7 +146,7 @@ public class LayoutExporter {
 	public File exportLayoutsAsFile(
 			long groupId, boolean privateLayout, long[] layoutIds,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
-		throws PortalException, SystemException {
+		throws Exception {
 
 		boolean exportCategories = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.CATEGORIES);
@@ -399,15 +399,7 @@ public class LayoutExporter {
 			return zipWriter.getFile();
 		}
 		finally {
-			UnicodeProperties settingsProperties =
-				layoutSet.getSettingsProperties();
-
-			settingsProperties.setProperty(
-				"last-publish-date", String.valueOf(lastPublishDate));
-
-			LayoutSetLocalServiceUtil.updateSettings(
-				layoutSet.getGroupId(), layoutSet.isPrivateLayout(),
-				settingsProperties.toString());
+			updateLastPublishDate(layoutSet, lastPublishDate);
 		}
 	}
 
@@ -801,6 +793,21 @@ public class LayoutExporter {
 		sb.append(image.getType());
 
 		return sb.toString();
+	}
+
+	protected void updateLastPublishDate(
+			LayoutSet layoutSet, long lastPublishDate)
+		throws Exception {
+
+		UnicodeProperties settingsProperties =
+			layoutSet.getSettingsProperties();
+
+		settingsProperties.setProperty(
+			"last-publish-date", String.valueOf(lastPublishDate));
+
+		LayoutSetLocalServiceUtil.updateSettings(
+			layoutSet.getGroupId(), layoutSet.isPrivateLayout(),
+			settingsProperties.toString());
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutExporter.class);

@@ -393,11 +393,22 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
-		LayoutExporter layoutExporter = new LayoutExporter();
+		try {
+			LayoutExporter layoutExporter = new LayoutExporter();
 
-		return layoutExporter.exportLayoutsAsFile(
-			groupId, privateLayout, layoutIds, parameterMap, startDate,
-			endDate);
+			return layoutExporter.exportLayoutsAsFile(
+				groupId, privateLayout, layoutIds, parameterMap, startDate,
+				endDate);
+		}
+		catch (PortalException pe) {
+			throw pe;
+		}
+		catch (SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	public byte[] exportPortletInfo(
@@ -424,10 +435,21 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
-		PortletExporter portletExporter = new PortletExporter();
+		try {
+			PortletExporter portletExporter = new PortletExporter();
 
-		return portletExporter.exportPortletInfoAsFile(
-			plid, groupId, portletId, parameterMap, startDate, endDate);
+			return portletExporter.exportPortletInfoAsFile(
+				plid, groupId, portletId, parameterMap, startDate, endDate);
+		}
+		catch (PortalException pe) {
+			throw pe;
+		}
+		catch (SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	public long getDefaultPlid(long groupId) throws SystemException {
