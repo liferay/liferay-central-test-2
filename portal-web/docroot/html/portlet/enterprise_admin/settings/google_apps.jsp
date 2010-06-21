@@ -18,7 +18,7 @@
 
 <%
 String googleAppsUsername = ParamUtil.getString(request, "settings--" + PropsKeys.GOOGLE_APPS_USERNAME + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.GOOGLE_APPS_USERNAME));
-String googleAppsPassword = ParamUtil.getString(request, "settings--" + PropsKeys.GOOGLE_APPS_PASSWORD + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.GOOGLE_APPS_PASSWORD), Portal.TEMP_OBFUSCATION_VALUE);
+String googleAppsPassword = ParamUtil.getString(request, "settings--" + PropsKeys.GOOGLE_APPS_PASSWORD + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.GOOGLE_APPS_PASSWORD, Portal.TEMP_OBFUSCATION_VALUE));
 %>
 
 <h3><liferay-ui:message key="google-apps" /></h3>
