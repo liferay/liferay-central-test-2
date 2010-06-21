@@ -36,12 +36,11 @@ import jodd.util.ReflectUtil;
 public class BeanPropertiesImpl implements BeanProperties {
 
 	public void copyProperties(Object source, Object target) {
-
 		try {
 			BeanTool.copyProperties(source, target);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 	}
 
@@ -52,7 +51,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 			BeanTool.copyProperties(source, target, editable);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 	}
 
@@ -63,7 +62,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 			BeanTool.copyProperties(source, target, ignoreProperties, false);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 	}
 
@@ -77,10 +76,11 @@ public class BeanPropertiesImpl implements BeanProperties {
 		if (bean != null) {
 			try {
 				Object value = BeanUtil.getProperty(bean, param);
+
 				beanValue = ReflectUtil.castType(value, Boolean.class);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 
@@ -102,10 +102,11 @@ public class BeanPropertiesImpl implements BeanProperties {
 		if (bean != null) {
 			try {
 				Object value = BeanUtil.getProperty(bean, param);
+
 				beanValue = ReflectUtil.castType(value, Byte.class);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 
@@ -127,10 +128,11 @@ public class BeanPropertiesImpl implements BeanProperties {
 		if (bean != null) {
 			try {
 				Object value = BeanUtil.getProperty(bean, param);
+
 				beanValue = ReflectUtil.castType(value, Double.class);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 
@@ -152,10 +154,11 @@ public class BeanPropertiesImpl implements BeanProperties {
 		if (bean != null) {
 			try {
 				Object value = BeanUtil.getProperty(bean, param);
+
 				beanValue = ReflectUtil.castType(value, Float.class);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 
@@ -177,10 +180,11 @@ public class BeanPropertiesImpl implements BeanProperties {
 		if (bean != null) {
 			try {
 				Object value = BeanUtil.getProperty(bean, param);
+
 				beanValue = ReflectUtil.castType(value, Integer.class);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 
@@ -202,10 +206,11 @@ public class BeanPropertiesImpl implements BeanProperties {
 		if (bean != null) {
 			try {
 				Object value = BeanUtil.getProperty(bean, param);
+
 				beanValue = ReflectUtil.castType(value, Long.class);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 
@@ -229,7 +234,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 				beanValue = BeanUtil.getProperty(bean, param);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 
@@ -251,10 +256,11 @@ public class BeanPropertiesImpl implements BeanProperties {
 		if (bean != null) {
 			try {
 				Object value = BeanUtil.getProperty(bean, param);
+
 				beanValue = ReflectUtil.castType(value, Short.class);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 
@@ -276,10 +282,11 @@ public class BeanPropertiesImpl implements BeanProperties {
 		if (bean != null) {
 			try {
 				Object value = BeanUtil.getProperty(bean, param);
+
 				beanValue = ReflectUtil.castType(value, String.class);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 
@@ -308,7 +315,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 			BeanUtil.setProperty(bean, param, value);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 	}
 
