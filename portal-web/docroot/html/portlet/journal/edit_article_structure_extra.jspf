@@ -249,5 +249,5 @@
 </div>
 
 <div id="<portlet:namespace />repeatableBtnTemplate">
-	<aui:button cssClass="repeatable-button" type="button" value="repeat" />
+	<input class="repeatable-button" type="button" value="<liferay-ui:message key="repeat" />" />
 </div>
