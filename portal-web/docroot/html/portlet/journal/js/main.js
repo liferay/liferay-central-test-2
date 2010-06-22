@@ -40,7 +40,7 @@ AUI().add(
 									'</span>' +
 								'</span>' +
 							'</span>' +
-							'<input type="button" class="edit-button" value="{editOptionsLanguage}"/>' +
+							'{editBtnTemplateHTML}' +
 							'{repeatableBtnTemplateHTML}' +
 						'</div>' +
 					'</div>' +
@@ -330,7 +330,7 @@ AUI().add(
 						points: ['lc', 'rc']
 					},
 					bodyContent: editContainerWrapper,
-					trigger: 'input.edit-button'
+					trigger: '.edit-button .aui-button-input'
 				}
 			).render();
 
@@ -836,7 +836,7 @@ AUI().add(
 			getEditButton: function(source) {
 				var instance = this;
 
-				return source.one('input.edit-button');
+				return source.one('.edit-button .aui-button-input');
 			},
 
 			getEditButtons: function() {
@@ -844,7 +844,7 @@ AUI().add(
 
 				var structureTreeId = instance._guid('#structureTree');
 
-				return A.all(structureTreeId + ' div.journal-article-buttons input.edit-button');
+				return A.all(structureTreeId + ' div.journal-article-buttons .edit-button .aui-button-input');
 			},
 
 			getFieldInstance: function(source) {
@@ -892,7 +892,7 @@ AUI().add(
 
 				var structureTreeId = instance._guid('#structureTree');
 
-				return A.all(structureTreeId + ' div.journal-article-buttons input.repeatable-button');
+				return A.all(structureTreeId + ' div.journal-article-buttons .repeatable-button .aui-button-input');
 			},
 
 			getRepeatedSiblings: function(fieldInstance) {
@@ -1236,7 +1236,7 @@ AUI().add(
 					instructions.val(fieldInstance.get('instructions'));
 					predefinedValue.val(fieldInstance.get('predefinedValue'));
 
-					var elements = editContainerWrapper.all('input[type=text], select, textarea, input[type=checkbox]');
+					var elements = editContainerWrapper.all('input[type=text], select:not([name$=fieldType]), textarea, input[type=checkbox]');
 
 					if (fieldInstance.get('repeated') || fieldInstance.get('parentStructureId')) {
 						elements.attr('disabled', 'disabled');
@@ -3029,9 +3029,15 @@ AUI().add(
 						if (!instance.fieldContainer) {
 							var htmlTemplate = [];
 							var fieldLabel = Liferay.Language.get('field');
-							var editOptionsLanguage = Liferay.Language.get('edit-options');
 							var requiredFieldLanguage = Liferay.Language.get('this-field-is-required');
 							var variableNameLanguage = Liferay.Language.get('variable-name');
+
+							var editBtnTemplate = instance.getById('editBtnTemplate');
+							var editBtnTemplateHTML = '';
+
+							if (editBtnTemplate) {
+								editBtnTemplateHTML = editBtnTemplate.html();
+							}
 
 							var repeatableBtnTemplate = instance.getById('repeatableBtnTemplate');
 							var repeatableBtnTemplateHTML = '';
@@ -3048,7 +3054,7 @@ AUI().add(
 							htmlTemplate = A.substitute(
 								TPL_FIELD_CONTAINER,
 								{
-									editOptionsLanguage: editOptionsLanguage,
+									editBtnTemplateHTML: editBtnTemplateHTML,
 									fieldLabel: fieldLabel,
 									instanceId: randomInstanceId,
 									portletNamespace: instance.portletNamespace,
@@ -3248,7 +3254,7 @@ AUI().add(
 								fieldContainer.append(repeatableFieldImageModel);
 
 								if (repeatableAddIcon) {
-									repeatableAddIcon.setStyle('display', 'inline-block').show();
+									repeatableAddIcon.show();
 								}
 							}
 							else {

@@ -248,6 +248,10 @@
 	</aui:fieldset>
 </div>
 
-<div id="<portlet:namespace />repeatableBtnTemplate">
-	<input class="repeatable-button" type="button" value="<liferay-ui:message key="repeat" />" />
+<div class="aui-html-template" id="<portlet:namespace />editBtnTemplate">
+	<aui:button cssClass="edit-button" type="button" value="edit-options" />
+</div>
+
+<div class="aui-html-template" id="<portlet:namespace />repeatableBtnTemplate">
+	<aui:button cssClass="repeatable-button aui-helper-hidden" type="button" value="repeat" />
 </div>

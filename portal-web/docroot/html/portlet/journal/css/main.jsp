@@ -528,10 +528,6 @@
 	width: 470px;
 }
 
-.portlet-journal .repeatable-button {
-	display: none;
-}
-
 .portlet-journal .structure-controls {
 	margin-top: 5px;
 }
