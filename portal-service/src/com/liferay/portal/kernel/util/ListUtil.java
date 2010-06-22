@@ -148,6 +148,31 @@ public class ListUtil {
 		return fromArray(StringUtil.split(s, StringPool.NEW_LINE));
 	}
 
+	public static <E> boolean remove(List<E> list, E item) {
+		return remove(list, item, true);
+	}
+
+	public static <E> boolean remove(List<E> list, E item, boolean deepEquals) {
+		if (deepEquals) {
+			return list.remove(item);
+		}
+		else {
+			Iterator<E> itr = list.iterator();
+
+			while (itr.hasNext()) {
+				E curItem = itr.next();
+
+				if (curItem == item) {
+					itr.remove();
+
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
 	public static <E> List<E> sort(List<E> list) {
 		return sort(list, null);
 	}
