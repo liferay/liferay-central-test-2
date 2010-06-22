@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.language;
 
 import java.util.Locale;
 
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -113,6 +114,36 @@ public class LanguageUtil {
 			pageContext, pattern, arguments, translateArguments);
 	}
 
+	public static String format(
+		PortletConfig portletConfig, Locale locale, String pattern,
+		Object argument) {
+
+		return getLanguage().format(portletConfig, locale, pattern, argument);
+	}
+
+	public static String format(
+		PortletConfig portletConfig, Locale locale, String pattern,
+		Object argument, boolean translateArguments) {
+
+		return getLanguage().format(
+			portletConfig, locale, pattern, argument, translateArguments);
+	}
+
+	public static String format(
+		PortletConfig portletConfig, Locale locale, String pattern,
+		Object[] arguments) {
+
+		return getLanguage().format(portletConfig, locale, pattern, arguments);
+	}
+
+	public static String format(
+		PortletConfig portletConfig, Locale locale, String pattern,
+		Object[] arguments, boolean translateArguments) {
+
+		return getLanguage().format(
+			portletConfig, locale, pattern, arguments, translateArguments);
+	}
+
 	public static String get(Locale locale, String key) {
 		return getLanguage().get(locale, key);
 	}
@@ -129,6 +160,19 @@ public class LanguageUtil {
 		PageContext pageContext, String key, String defaultValue) {
 
 		return getLanguage().get(pageContext, key, defaultValue);
+	}
+
+	public static String get(
+		PortletConfig portletConfig, Locale locale, String key) {
+
+		return getLanguage().get(portletConfig, locale, key);
+	}
+
+	public static String get(
+		PortletConfig portletConfig, Locale locale, String key,
+		String defaultValue) {
+
+		return getLanguage().get(portletConfig, locale, key, defaultValue);
 	}
 
 	public static Locale[] getAvailableLocales() {

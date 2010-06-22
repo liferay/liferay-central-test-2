@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.language;
 
 import java.util.Locale;
 
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -69,6 +70,22 @@ public interface Language {
 		PageContext pageContext, String pattern, Object[] arguments,
 		boolean translateArguments);
 
+	public String format(
+		PortletConfig portletConfig, Locale locale, String pattern,
+		Object argument);
+
+	public String format(
+		PortletConfig portletConfig, Locale locale, String pattern,
+		Object argument, boolean translateArguments);
+
+	public String format(
+		PortletConfig portletConfig, Locale locale, String pattern,
+		Object[] arguments);
+
+	public String format(
+		PortletConfig portletConfig, Locale locale, String pattern,
+		Object[] arguments, boolean translateArguments);
+
 	public String get(Locale locale, String key);
 
 	public String get(Locale locale, String key, String defaultValue);
@@ -76,6 +93,12 @@ public interface Language {
 	public String get(PageContext pageContext, String key);
 
 	public String get(PageContext pageContext, String key, String defaultValue);
+
+	public String get(PortletConfig portletConfig, Locale locale, String key);
+
+	public String get(
+		PortletConfig portletConfig, Locale locale, String key,
+		String defaultValue);
 
 	public Locale[] getAvailableLocales();
 

@@ -248,6 +248,69 @@ public class LanguageImpl implements Language {
 		return value;
 	}
 
+	public String format(
+		PortletConfig portletConfig, Locale locale, String pattern,
+		Object argument) {
+
+		return format(
+		portletConfig, locale, pattern, new Object[] {argument}, true);
+	}
+
+	public String format(
+		PortletConfig portletConfig, Locale locale, String pattern,
+		Object argument, boolean translateArguments) {
+
+		return format(
+			portletConfig, locale, pattern, new Object[] {argument},
+			translateArguments);
+	}
+
+	public String format(
+		PortletConfig portletConfig, Locale locale, String pattern,
+		Object[] arguments) {
+
+		return format(portletConfig, locale, pattern, arguments, true);
+	}
+
+	public String format(
+		PortletConfig portletConfig, Locale locale, String pattern,
+		Object[] arguments, boolean translateArguments) {
+
+		String value = null;
+
+		try {
+			pattern = get(portletConfig, locale, pattern);
+
+			if (arguments != null) {
+				pattern = _escapePattern(pattern);
+
+				Object[] formattedArguments = new Object[arguments.length];
+
+				for (int i = 0; i < arguments.length; i++) {
+					if (translateArguments) {
+						formattedArguments[i] = get(
+							locale, arguments[i].toString());
+					}
+					else {
+						formattedArguments[i] = arguments[i];
+					}
+				}
+
+				value = MessageFormat.format(pattern, formattedArguments);
+			}
+			else {
+				value = pattern;
+			}
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
+		}
+
+		return value;
+	}
+
 	public void init() {
 		_instances.clear();
 	}
@@ -258,7 +321,7 @@ public class LanguageImpl implements Language {
 
 	public String get(Locale locale, String key, String defaultValue) {
 		try {
-			return _get(null, locale, key, defaultValue);
+			return _get(null, null, locale, key, defaultValue);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -277,7 +340,27 @@ public class LanguageImpl implements Language {
 		PageContext pageContext, String key, String defaultValue) {
 
 		try {
-			return _get(pageContext, null, key, defaultValue);
+			return _get(pageContext, null, null, key, defaultValue);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
+
+			return defaultValue;
+		}
+	}
+
+	public String get(PortletConfig portletConfig, Locale locale, String key) {
+		return get(portletConfig, locale, key, key);
+	}
+
+	public String get(
+		PortletConfig portletConfig, Locale locale, String key,
+		String defaultValue) {
+
+		try {
+			return _get(null, portletConfig, locale, key, defaultValue);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -457,8 +540,8 @@ public class LanguageImpl implements Language {
 	}
 
 	private String _get(
-			PageContext pageContext, Locale locale, String key,
-			String defaultValue)
+			PageContext pageContext, PortletConfig portletConfig, Locale locale,
+			String key, String defaultValue)
 		throws Exception {
 
 		if (key == null) {
@@ -476,31 +559,31 @@ public class LanguageImpl implements Language {
 
 			locale = themeDisplay.getLocale();
 
-			PortletConfig portletConfig = (PortletConfig)request.getAttribute(
+			portletConfig = (PortletConfig)request.getAttribute(
 				JavaConstants.JAVAX_PORTLET_CONFIG);
+		}
 
-			if (portletConfig != null) {
-				ResourceBundle resourceBundle = portletConfig.getResourceBundle(
-					locale);
+		if (portletConfig != null) {
+			ResourceBundle resourceBundle = portletConfig.getResourceBundle(
+				locale);
+
+			try {
+				value = resourceBundle.getString(key);
+			}
+			catch (MissingResourceException mre) {
+			}
+
+			// LEP-7393
+
+			if (((value == null) || (value.equals(defaultValue))) &&
+				(portletConfig.getPortletName().equals(
+					PortletKeys.PORTLET_CONFIGURATION))) {
 
 				try {
-					value = resourceBundle.getString(key);
+					value = _getPortletConfigurationValue(
+						pageContext, locale, key);
 				}
 				catch (MissingResourceException mre) {
-				}
-
-				// LEP-7393
-
-				if (((value == null) || (value.equals(defaultValue))) &&
-					(portletConfig.getPortletName().equals(
-						PortletKeys.PORTLET_CONFIGURATION))) {
-
-					try {
-						value = _getPortletConfigurationValue(
-							pageContext, locale, key);
-					}
-					catch (MissingResourceException mre) {
-					}
 				}
 			}
 		}
@@ -516,7 +599,8 @@ public class LanguageImpl implements Language {
 				if (pos != -1) {
 					key = key.substring(0, pos);
 
-					return _get(pageContext, locale, key, defaultValue);
+					return _get(
+						pageContext, portletConfig, locale, key, defaultValue);
 				}
 			}
 		}
