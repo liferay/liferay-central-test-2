@@ -387,9 +387,9 @@ public class CustomSQL {
 	}
 
 	public String replaceKeywords(
-		String sql, String field, int[] values, boolean last) {
+		String sql, String field, boolean last, int[] values) {
 
-		StringBundler oldSql = new StringBundler(6);
+		StringBundler oldSql = new StringBundler(4);
 
 		oldSql.append("(");
 		oldSql.append(field);
@@ -403,7 +403,7 @@ public class CustomSQL {
 			return StringUtil.replace(sql, oldSql.toString(), StringPool.BLANK);
 		}
 
-		StringBundler newSql = new StringBundler(values.length * 6 + 3);
+		StringBundler newSql = new StringBundler(values.length * 4 + 3);
 
 		newSql.append("(");
 
