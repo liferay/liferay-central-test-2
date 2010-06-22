@@ -35,10 +35,12 @@ import com.liferay.portlet.documentlibrary.lar.DLPortletDataHandlerImpl;
 import com.liferay.portlet.imagegallery.lar.IGPortletDataHandlerImpl;
 import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.model.JournalArticleConstants;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
+import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 
@@ -218,6 +220,17 @@ public class JournalContentPortletDataHandlerImpl
 				return null;
 			}
 
+			long articleGroupId = GetterUtil.getLong(
+					preferences.getValue("group-id", StringPool.BLANK));
+			String articleId = preferences.getValue(
+					"article-id", StringPool.BLANK);
+
+			if(JournalArticleUtil.fetchByG_A_V(
+					articleGroupId, articleId,
+						JournalArticleConstants.DEFAULT_VERSION) != null){
+				return preferences;
+			}
+
 			Document doc = SAXReaderUtil.read(data);
 
 			Element root = doc.getRootElement();
@@ -302,9 +315,6 @@ public class JournalContentPortletDataHandlerImpl
 				JournalPortletDataHandlerImpl.importArticle(
 					context, articleEl);
 			}
-
-			String articleId = preferences.getValue(
-				"article-id", StringPool.BLANK);
 
 			if (Validator.isNotNull(articleId)) {
 				Map<String, String> articleIds =
