@@ -478,7 +478,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 				if (ResourcePermissionLocalServiceUtil.
 					getResourcePermissionsCount(
-						companyId, name, ResourceConstants.SCOPE_INDIVIDUAL, 
+						companyId, name, ResourceConstants.SCOPE_INDIVIDUAL,
 						primKey) == 0) {
 
 					throw new NoSuchResourceException();
