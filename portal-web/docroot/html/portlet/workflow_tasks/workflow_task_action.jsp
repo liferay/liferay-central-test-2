@@ -136,7 +136,7 @@ if (workflowTask.getDueDate() != null) {
 
 <div class="aui-helper-hidden" id="<%= randomId %>updateAsignee">
 	<c:if test="<%= (pooledActorsIds.length > 0) && !workflowTask.isCompleted() %>">
-		<aui:select label="assign-to" name="assigneeUserId" showEmptyOption="<%= true %>">
+		<aui:select label="assign-to" name="assigneeUserId">
 
 			<%
 			for (long pooledActorId : pooledActorsIds) {
