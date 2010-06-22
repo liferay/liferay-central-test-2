@@ -625,10 +625,9 @@ public class LayoutImporter {
 
 	protected void importLayout(
 			PortletDataContext context, User user, LayoutCache layoutCache,
-			List<Layout> previousLayouts,
-			List<Layout> newLayouts, Map<Long, Layout> newLayoutIdPlidMap,
-			Set<Long> newLayoutIds, String portletsMergeMode, String themeId,
-			String colorSchemeId,
+			List<Layout> previousLayouts, List<Layout> newLayouts,
+			Map<Long, Layout> newLayoutIdPlidMap, Set<Long> newLayoutIds,
+			String portletsMergeMode, String themeId, String colorSchemeId,
 			String layoutsImportMode, boolean privateLayout,
 			boolean importPermissions, boolean importUserPermissions,
 			boolean useThemeZip, Element root, Element layoutEl)
