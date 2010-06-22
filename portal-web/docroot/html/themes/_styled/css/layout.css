@@ -35,13 +35,15 @@
 	padding: 5px;
 }
 
-.portlet-column-content-first,
-.portlet-column-content-only {
+.portlet-column-content-only,
+.ltr .portlet-column-content-first,
+.rtl .portlet-column-content-last {
 	padding-left: 0;
 }
 
-.portlet-column-content-last,
-.portlet-column-content-only {
+.portlet-column-content-only,
+.ltr .portlet-column-content-last,
+.rtl .portlet-column-content-first {
 	padding-right: 0;
 }
 
