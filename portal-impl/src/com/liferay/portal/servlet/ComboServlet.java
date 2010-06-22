@@ -14,28 +14,21 @@
 
 package com.liferay.portal.servlet;
 
-import com.liferay.portal.kernel.cache.key.CacheKeyGenerator;
-import com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil;
-import com.liferay.portal.kernel.nio.charset.CharsetEncoderUtil;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.MinifierUtil;
-import com.liferay.util.SystemProperties;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.File;
 import java.io.IOException;
 
-import java.nio.ByteBuffer;
-
-import java.util.Enumeration;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
@@ -61,52 +54,12 @@ public class ComboServlet extends HttpServlet {
 			return;
 		}
 
-		byte[] bytes = null;
-		int length = 0;
+		String minifierType = ParamUtil.getString(request, "minifierType");
 
-		File cacheFile = getCacheFile(request);
-
-		if (cacheFile.exists()) {
-			bytes = FileUtil.getBytes(cacheFile);
-			length = bytes.length;
-		}
-		else {
-			StringBundler sb = new StringBundler(parameterMap.size());
-
-			for (String modulePath : parameterMap.keySet()) {
-				File file = getFile(modulePath);
-
-				if (file != null) {
-					String moduleContent = FileUtil.read(file);
-
-					sb.append(moduleContent);
-				}
-			}
-
-			String content = sb.toString();
-
-			if (Validator.isNotNull(content)) {
-				String minifierType = ParamUtil.getString(
-					request, "minifierType");
-
-				if (minifierType.equals("css")) {
-					content = MinifierUtil.minifyCss(content);
-				}
-				else if (minifierType.equals("js")) {
-					content = MinifierUtil.minifyJavaScript(content);
-				}
-
-				ByteBuffer contentByteBuffer = CharsetEncoderUtil.encode(
-					StringPool.UTF8, content);
-
-				bytes = contentByteBuffer.array();
-				length = contentByteBuffer.limit();
-
-				FileUtil.write(cacheFile, bytes, 0, length);
-			}
-			else {
-				bytes = new byte[0];
-			}
+		int size = parameterMap.size();
+		byte[][] bytesArray = new byte[size][];
+		for (String modulePath : parameterMap.keySet()) {
+			bytesArray[--size] = getFileContent(modulePath, minifierType);
 		}
 
 		String contentType = ContentTypes.TEXT_JAVASCRIPT;
@@ -122,48 +75,7 @@ public class ComboServlet extends HttpServlet {
 
 		response.setContentType(contentType);
 
-		ServletResponseUtil.write(response, bytes, length);
-	}
-
-	protected File getCacheFile(HttpServletRequest request) throws IOException {
-		StringBundler sb = new StringBundler(5);
-
-		sb.append(request.getRequestURI());
-
-		String queryString = request.getQueryString();
-
-		if (queryString != null) {
-			sb.append(StringPool.QUESTION);
-			sb.append(queryString);
-		}
-
-		long lastModified = 0;
-
-		Enumeration<String> enu = request.getParameterNames();
-
-		while (enu.hasMoreElements()) {
-			String modulePath = enu.nextElement();
-
-			File file = getFile(modulePath);
-
-			if (file != null) {
-				lastModified += file.lastModified();
-			}
-		}
-
-		if (lastModified > 0) {
-			sb.append(StringPool.AMPERSAND);
-			sb.append(lastModified);
-		}
-
-		CacheKeyGenerator cacheKeyGenerator =
-			CacheKeyGeneratorUtil.getCacheKeyGenerator(
-				ComboServlet.class.getName());
-
-		String cacheFileName = _TEMP_DIR.concat(
-			cacheKeyGenerator.getCacheKey(sb));
-
-		return new File(cacheFileName);
+		ServletResponseUtil.write(response, bytesArray);
 	}
 
 	protected File getFile(String path) throws IOException {
@@ -210,11 +122,46 @@ public class ComboServlet extends HttpServlet {
 		return null;
 	}
 
+	private byte[] getFileContent(String path, String minifierType)
+		throws IOException {
+
+		byte[] fileContent = _fileContentMap.get(path);
+
+		if (fileContent == null) {
+			File file = getFile(path);
+			if (file == null) {
+				fileContent = _EMPTY_FILE_CONTENT;
+			}
+			else {
+				String stringFileContent = FileUtil.read(file);
+				if (minifierType.equals("css")) {
+					stringFileContent = MinifierUtil.minifyCss(
+						stringFileContent);
+				}
+				else if (minifierType.equals("js")) {
+					stringFileContent = MinifierUtil.minifyJavaScript(
+						stringFileContent);
+				}
+				fileContent = stringFileContent.getBytes(StringPool.UTF8);
+			}
+
+			byte[] oldFileContent =
+				_fileContentMap.putIfAbsent(path, fileContent);
+			if (oldFileContent != null) {
+				fileContent = oldFileContent;
+			}
+		}
+
+		return fileContent;
+	}
+
 	private static final String _CSS_EXTENSION = "css";
+
+	private static final byte[] _EMPTY_FILE_CONTENT = new byte[0];
 
 	private static final String _JAVASCRIPT_DIR = "html/js";
 
-	private static final String _TEMP_DIR =
-		SystemProperties.get(SystemProperties.TMP_DIR) + "/liferay/combo/";
+	private ConcurrentMap<String, byte[]> _fileContentMap =
+		new ConcurrentHashMap<String, byte[]>();
 
 }
