@@ -15,7 +15,7 @@
 package com.liferay.portal.kernel.workflow.permission;
 
 /**
- * <a href="WorkflowHandlerRegistryUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowPermissionUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  */
