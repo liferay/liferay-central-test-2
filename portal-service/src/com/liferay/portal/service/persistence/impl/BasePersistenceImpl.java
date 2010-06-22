@@ -220,7 +220,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	public void unregisterListener(ModelListener<T> listener) {
 		List<ModelListener<T>> listenersList = ListUtil.fromArray(listeners);
 
-		ListUtil.remove(listenersList, listener, false);
+		ListUtil.remove(listenersList, listener);
 
 		listeners = listenersList.toArray(
 			new ModelListener[listenersList.size()]);
