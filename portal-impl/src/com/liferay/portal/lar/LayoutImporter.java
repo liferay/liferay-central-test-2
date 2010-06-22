@@ -21,7 +21,6 @@ import com.liferay.portal.LayoutImportException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.cluster.ClusterLinkUtil;
 import com.liferay.portal.kernel.cluster.Priority;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
@@ -253,24 +252,19 @@ public class LayoutImporter {
 		boolean useThemeZip = false;
 
 		if (themeZip != null) {
-			try {
-				String importThemeId = importTheme(layoutSet, themeZip);
+			String importThemeId = importTheme(layoutSet, themeZip);
 
-				if (importThemeId != null) {
-					themeId = importThemeId;
-					colorSchemeId =
-						ColorSchemeImpl.getDefaultRegularColorSchemeId();
+			if (importThemeId != null) {
+				themeId = importThemeId;
+				colorSchemeId =
+					ColorSchemeImpl.getDefaultRegularColorSchemeId();
 
-					useThemeZip = true;
-				}
-
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Importing theme takes " + stopWatch.getTime() + " ms");
-				}
+				useThemeZip = true;
 			}
-			catch (Exception e) {
-				throw new SystemException(e);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Importing theme takes " + stopWatch.getTime() + " ms");
 			}
 		}
 
