@@ -70,13 +70,8 @@ body #banner .logo a {
 	text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
 }
 
-#skip-to-content {
-	right: 0;
-}
-
 #skip-to-content:focus {
-	left: auto;
-	width: auto;
+	clip: auto;
 	right: 0;
 	z-index: 200;
 }

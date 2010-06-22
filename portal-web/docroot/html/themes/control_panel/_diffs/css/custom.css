@@ -60,12 +60,10 @@ html > .lfr-dockbar-pinned {
 
 #skip-to-content {
 	color: #FFF;
-	right: 0;
 }
 
 #skip-to-content:focus {
-	left: auto;
-	width: auto;
+	clip: auto;
 	right: 1em;
 	z-index: 1000;
 }

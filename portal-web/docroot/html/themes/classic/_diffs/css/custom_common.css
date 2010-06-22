@@ -85,11 +85,13 @@
 
 /* ---------- Hidden Accessible ---------- */
 
-#skip-to-content, #banner h2, #banner h3, #navigation h1, .site-breadcrumbs h1 {
-	left: -99999px;
-	overflow: hidden;
+#skip-to-content,
+#banner h2,
+#banner h3,
+#navigation h1,
+.site-breadcrumbs h1 {
+	clip: rect(0 0 0 0);
 	position: absolute;
-	width: 1%;
 }
 
 /* ---------- Extras ---------- */
