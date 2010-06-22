@@ -255,14 +255,16 @@ viewPagesURL.setParameter("struts_action", "/my_places/view");
 viewPagesURL.setParameter("groupId", String.valueOf(groupId));
 viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
-if (organization != null) {
-	EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
-}
-else {
-	PortalUtil.addPortletBreadcrumbEntry(request, group.getDescriptiveName(), null);
-}
+if (!portletName.equals(PortletKeys.GROUP_PAGES)) {
+	if (organization != null) {
+		EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
+	}
+	else {
+		PortalUtil.addPortletBreadcrumbEntry(request, group.getDescriptiveName(), null);
+	}
 
-PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "manage-pages"), currentURL);
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "manage-pages"), currentURL);
+}
 
 request.setAttribute("edit_pages.jsp-tab4", tabs4);
 
