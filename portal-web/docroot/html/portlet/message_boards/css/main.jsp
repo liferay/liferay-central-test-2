@@ -94,12 +94,6 @@
 	border: none;
 }
 
-.portlet-message-boards .message-container .thread-message-view {
-	border-collapse: collapse;
-	padding: 0;
-	width: 100%;
-}
-
 .portlet-message-boards .thread-top {
 	border-bottom: 1px solid #ccc;
 	padding: 3px 5px;
@@ -179,8 +173,8 @@ td.user-info {
 
 .portlet-message-boards .toggle_id_message_boards_view_message_thread {
 	border: 1px solid #ccc;
-	margin: 5px 0px 0px 0px;
-	width:100%;
+	margin: 5px 0 0 0;
+	width: 100%;
 }
 
 .portlet-message-boards .thread-controls {
@@ -206,7 +200,7 @@ td.user-info {
 	float: left;
 }
 
-.portlet-message-boards .thread-view {
+.portlet-message-boards .thread-view, .portlet-message-boards .message-container .thread-message-view {
 	border-collapse: collapse;
 	padding: 0;
 	width: 100%;
@@ -222,7 +216,7 @@ td.user-info {
 }
 
 .portlet-message-boards .message-scroll {
-	margin: 5px 0px 0px 0px;
+	margin: 5px 0 0 0;
 }
 
 .portlet-message-boards .lfr-textarea.message-edit {
