@@ -1090,8 +1090,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_RESOURCECODE;
+				else {
+					sql = _SQL_SELECT_RESOURCECODE;
+				}
 
 				Query q = session.createQuery(sql);
 

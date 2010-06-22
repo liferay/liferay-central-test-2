@@ -1044,7 +1044,6 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_COUNTRY.concat(CountryModelImpl.ORDER_BY_JPQL);
 				}

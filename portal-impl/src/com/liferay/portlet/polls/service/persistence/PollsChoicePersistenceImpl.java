@@ -1101,7 +1101,6 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_POLLSCHOICE.concat(PollsChoiceModelImpl.ORDER_BY_JPQL);
 				}

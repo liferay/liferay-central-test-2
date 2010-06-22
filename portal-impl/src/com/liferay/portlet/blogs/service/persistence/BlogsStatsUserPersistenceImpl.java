@@ -1641,7 +1641,6 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_BLOGSSTATSUSER.concat(BlogsStatsUserModelImpl.ORDER_BY_JPQL);
 				}

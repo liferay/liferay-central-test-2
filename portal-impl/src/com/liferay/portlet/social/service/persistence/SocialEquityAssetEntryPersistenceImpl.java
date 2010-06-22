@@ -487,8 +487,9 @@ public class SocialEquityAssetEntryPersistenceImpl extends BasePersistenceImpl<S
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_SOCIALEQUITYASSETENTRY;
+				else {
+					sql = _SQL_SELECT_SOCIALEQUITYASSETENTRY;
+				}
 
 				Query q = session.createQuery(sql);
 

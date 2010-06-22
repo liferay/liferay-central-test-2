@@ -822,7 +822,6 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_RESOURCEACTION.concat(ResourceActionModelImpl.ORDER_BY_JPQL);
 				}

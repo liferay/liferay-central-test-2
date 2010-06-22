@@ -2216,7 +2216,6 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_JOURNALTEMPLATE.concat(JournalTemplateModelImpl.ORDER_BY_JPQL);
 				}

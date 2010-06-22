@@ -492,8 +492,9 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_WEBDAVPROPS;
+				else {
+					sql = _SQL_SELECT_WEBDAVPROPS;
+				}
 
 				Query q = session.createQuery(sql);
 

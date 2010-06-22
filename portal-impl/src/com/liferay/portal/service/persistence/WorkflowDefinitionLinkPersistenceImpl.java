@@ -1162,7 +1162,6 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_WORKFLOWDEFINITIONLINK.concat(WorkflowDefinitionLinkModelImpl.ORDER_BY_JPQL);
 				}

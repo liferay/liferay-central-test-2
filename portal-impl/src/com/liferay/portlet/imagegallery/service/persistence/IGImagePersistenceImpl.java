@@ -2857,7 +2857,6 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_IGIMAGE.concat(IGImageModelImpl.ORDER_BY_JPQL);
 				}

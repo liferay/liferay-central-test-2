@@ -614,7 +614,6 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_SHOPPINGITEMPRICE.concat(ShoppingItemPriceModelImpl.ORDER_BY_JPQL);
 				}

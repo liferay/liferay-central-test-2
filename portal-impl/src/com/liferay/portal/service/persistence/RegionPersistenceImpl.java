@@ -1155,7 +1155,6 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_REGION.concat(RegionModelImpl.ORDER_BY_JPQL);
 				}

@@ -1796,7 +1796,6 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_PHONE.concat(PhoneModelImpl.ORDER_BY_JPQL);
 				}

@@ -1443,7 +1443,6 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_DLFILERANK.concat(DLFileRankModelImpl.ORDER_BY_JPQL);
 				}

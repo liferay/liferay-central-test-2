@@ -2502,8 +2502,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_JOURNALCONTENTSEARCH;
+				else {
+					sql = _SQL_SELECT_JOURNALCONTENTSEARCH;
+				}
 
 				Query q = session.createQuery(sql);
 

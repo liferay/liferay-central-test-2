@@ -589,7 +589,6 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_IMAGE.concat(ImageModelImpl.ORDER_BY_JPQL);
 				}

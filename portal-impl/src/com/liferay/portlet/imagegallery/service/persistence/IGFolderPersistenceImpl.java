@@ -2009,7 +2009,6 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_IGFOLDER.concat(IGFolderModelImpl.ORDER_BY_JPQL);
 				}

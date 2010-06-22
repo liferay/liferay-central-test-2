@@ -859,8 +859,9 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_ORGGROUPROLE;
+				else {
+					sql = _SQL_SELECT_ORGGROUPROLE;
+				}
 
 				Query q = session.createQuery(sql);
 

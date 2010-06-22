@@ -1030,8 +1030,9 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_POLLSVOTE;
+				else {
+					sql = _SQL_SELECT_POLLSVOTE;
+				}
 
 				Query q = session.createQuery(sql);
 

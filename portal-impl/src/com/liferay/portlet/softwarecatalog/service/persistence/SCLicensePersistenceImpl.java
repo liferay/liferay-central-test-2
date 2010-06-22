@@ -914,7 +914,6 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_SCLICENSE.concat(SCLicenseModelImpl.ORDER_BY_JPQL);
 				}
@@ -1145,7 +1144,6 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 					sql = _SQL_GETSCPRODUCTENTRIES.concat(ORDER_BY_CLAUSE)
 												  .concat(orderByComparator.getOrderBy());
 				}
-
 				else {
 					sql = _SQL_GETSCPRODUCTENTRIES.concat(com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryModelImpl.ORDER_BY_SQL);
 				}

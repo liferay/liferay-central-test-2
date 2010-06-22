@@ -808,8 +808,9 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_PERMISSION;
+				else {
+					sql = _SQL_SELECT_PERMISSION;
+				}
 
 				Query q = session.createQuery(sql);
 
@@ -1046,7 +1047,6 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 					sql = _SQL_GETGROUPS.concat(ORDER_BY_CLAUSE)
 										.concat(orderByComparator.getOrderBy());
 				}
-
 				else {
 					sql = _SQL_GETGROUPS.concat(com.liferay.portal.model.impl.GroupModelImpl.ORDER_BY_SQL);
 				}
@@ -1381,7 +1381,6 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 					sql = _SQL_GETROLES.concat(ORDER_BY_CLAUSE)
 									   .concat(orderByComparator.getOrderBy());
 				}
-
 				else {
 					sql = _SQL_GETROLES.concat(com.liferay.portal.model.impl.RoleModelImpl.ORDER_BY_SQL);
 				}
@@ -1714,8 +1713,9 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 					sql = _SQL_GETUSERS.concat(ORDER_BY_CLAUSE)
 									   .concat(orderByComparator.getOrderBy());
 				}
-
-				sql = _SQL_GETUSERS;
+				else {
+					sql = _SQL_GETUSERS;
+				}
 
 				SQLQuery q = session.createSQLQuery(sql);
 

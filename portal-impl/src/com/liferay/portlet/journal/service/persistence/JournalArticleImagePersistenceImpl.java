@@ -1541,8 +1541,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_JOURNALARTICLEIMAGE;
+				else {
+					sql = _SQL_SELECT_JOURNALARTICLEIMAGE;
+				}
 
 				Query q = session.createQuery(sql);
 

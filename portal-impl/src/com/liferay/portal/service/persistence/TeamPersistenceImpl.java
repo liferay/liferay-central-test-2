@@ -853,7 +853,6 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_TEAM.concat(TeamModelImpl.ORDER_BY_JPQL);
 				}
@@ -1190,8 +1189,9 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 					sql = _SQL_GETUSERS.concat(ORDER_BY_CLAUSE)
 									   .concat(orderByComparator.getOrderBy());
 				}
-
-				sql = _SQL_GETUSERS;
+				else {
+					sql = _SQL_GETUSERS;
+				}
 
 				SQLQuery q = session.createSQLQuery(sql);
 

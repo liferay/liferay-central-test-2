@@ -899,8 +899,9 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_MBDISCUSSION;
+				else {
+					sql = _SQL_SELECT_MBDISCUSSION;
+				}
 
 				Query q = session.createQuery(sql);
 

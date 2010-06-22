@@ -1340,7 +1340,6 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_SHOPPINGITEM.concat(ShoppingItemModelImpl.ORDER_BY_JPQL);
 				}
@@ -1794,7 +1793,6 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 					sql = _SQL_GETSHOPPINGITEMPRICES.concat(ORDER_BY_CLAUSE)
 													.concat(orderByComparator.getOrderBy());
 				}
-
 				else {
 					sql = _SQL_GETSHOPPINGITEMPRICES.concat(com.liferay.portlet.shopping.model.impl.ShoppingItemPriceModelImpl.ORDER_BY_SQL);
 				}

@@ -821,8 +821,9 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_ASSETENTRY;
+				else {
+					sql = _SQL_SELECT_ASSETENTRY;
+				}
 
 				Query q = session.createQuery(sql);
 
@@ -1050,7 +1051,6 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 					sql = _SQL_GETASSETCATEGORIES.concat(ORDER_BY_CLAUSE)
 												 .concat(orderByComparator.getOrderBy());
 				}
-
 				else {
 					sql = _SQL_GETASSETCATEGORIES.concat(com.liferay.portlet.asset.model.impl.AssetCategoryModelImpl.ORDER_BY_SQL);
 				}
@@ -1400,7 +1400,6 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 					sql = _SQL_GETASSETTAGS.concat(ORDER_BY_CLAUSE)
 										   .concat(orderByComparator.getOrderBy());
 				}
-
 				else {
 					sql = _SQL_GETASSETTAGS.concat(com.liferay.portlet.asset.model.impl.AssetTagModelImpl.ORDER_BY_SQL);
 				}

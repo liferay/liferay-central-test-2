@@ -791,8 +791,9 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_ANNOUNCEMENTSDELIVERY;
+				else {
+					sql = _SQL_SELECT_ANNOUNCEMENTSDELIVERY;
+				}
 
 				Query q = session.createQuery(sql);
 

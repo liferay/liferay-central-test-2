@@ -2899,7 +2899,6 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_ASSETCATEGORY.concat(AssetCategoryModelImpl.ORDER_BY_JPQL);
 				}
@@ -3633,8 +3632,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 					sql = _SQL_GETASSETENTRIES.concat(ORDER_BY_CLAUSE)
 											  .concat(orderByComparator.getOrderBy());
 				}
-
-				sql = _SQL_GETASSETENTRIES;
+				else {
+					sql = _SQL_GETASSETENTRIES;
+				}
 
 				SQLQuery q = session.createSQLQuery(sql);
 

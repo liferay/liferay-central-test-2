@@ -1818,7 +1818,6 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_EMAILADDRESS.concat(EmailAddressModelImpl.ORDER_BY_JPQL);
 				}

@@ -832,8 +832,9 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_PLUGINSETTING;
+				else {
+					sql = _SQL_SELECT_PLUGINSETTING;
+				}
 
 				Query q = session.createQuery(sql);
 

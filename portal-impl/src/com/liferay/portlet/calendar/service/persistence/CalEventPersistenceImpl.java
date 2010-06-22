@@ -2492,7 +2492,6 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_CALEVENT.concat(CalEventModelImpl.ORDER_BY_JPQL);
 				}

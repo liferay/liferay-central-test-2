@@ -800,7 +800,6 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_ANNOUNCEMENTSFLAG.concat(AnnouncementsFlagModelImpl.ORDER_BY_JPQL);
 				}

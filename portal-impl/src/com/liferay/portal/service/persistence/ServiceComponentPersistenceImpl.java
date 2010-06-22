@@ -821,7 +821,6 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_SERVICECOMPONENT.concat(ServiceComponentModelImpl.ORDER_BY_JPQL);
 				}

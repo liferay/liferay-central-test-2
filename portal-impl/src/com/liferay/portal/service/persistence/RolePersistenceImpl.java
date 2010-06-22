@@ -1597,7 +1597,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_ROLE.concat(RoleModelImpl.ORDER_BY_JPQL);
 				}
@@ -2032,7 +2031,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 					sql = _SQL_GETGROUPS.concat(ORDER_BY_CLAUSE)
 										.concat(orderByComparator.getOrderBy());
 				}
-
 				else {
 					sql = _SQL_GETGROUPS.concat(com.liferay.portal.model.impl.GroupModelImpl.ORDER_BY_SQL);
 				}
@@ -2367,8 +2365,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 					sql = _SQL_GETPERMISSIONS.concat(ORDER_BY_CLAUSE)
 											 .concat(orderByComparator.getOrderBy());
 				}
-
-				sql = _SQL_GETPERMISSIONS;
+				else {
+					sql = _SQL_GETPERMISSIONS;
+				}
 
 				SQLQuery q = session.createSQLQuery(sql);
 
@@ -2709,8 +2708,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 					sql = _SQL_GETUSERS.concat(ORDER_BY_CLAUSE)
 									   .concat(orderByComparator.getOrderBy());
 				}
-
-				sql = _SQL_GETUSERS;
+				else {
+					sql = _SQL_GETUSERS;
+				}
 
 				SQLQuery q = session.createSQLQuery(sql);
 

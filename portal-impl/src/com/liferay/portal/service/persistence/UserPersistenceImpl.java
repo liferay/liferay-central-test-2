@@ -2663,8 +2663,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_USER;
+				else {
+					sql = _SQL_SELECT_USER;
+				}
 
 				Query q = session.createQuery(sql);
 
@@ -3454,7 +3455,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					sql = _SQL_GETGROUPS.concat(ORDER_BY_CLAUSE)
 										.concat(orderByComparator.getOrderBy());
 				}
-
 				else {
 					sql = _SQL_GETGROUPS.concat(com.liferay.portal.model.impl.GroupModelImpl.ORDER_BY_SQL);
 				}
@@ -3788,7 +3788,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					sql = _SQL_GETORGANIZATIONS.concat(ORDER_BY_CLAUSE)
 											   .concat(orderByComparator.getOrderBy());
 				}
-
 				else {
 					sql = _SQL_GETORGANIZATIONS.concat(com.liferay.portal.model.impl.OrganizationModelImpl.ORDER_BY_SQL);
 				}
@@ -4138,8 +4137,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					sql = _SQL_GETPERMISSIONS.concat(ORDER_BY_CLAUSE)
 											 .concat(orderByComparator.getOrderBy());
 				}
-
-				sql = _SQL_GETPERMISSIONS;
+				else {
+					sql = _SQL_GETPERMISSIONS;
+				}
 
 				SQLQuery q = session.createSQLQuery(sql);
 
@@ -4480,7 +4480,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					sql = _SQL_GETROLES.concat(ORDER_BY_CLAUSE)
 									   .concat(orderByComparator.getOrderBy());
 				}
-
 				else {
 					sql = _SQL_GETROLES.concat(com.liferay.portal.model.impl.RoleModelImpl.ORDER_BY_SQL);
 				}
@@ -4811,7 +4810,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					sql = _SQL_GETTEAMS.concat(ORDER_BY_CLAUSE)
 									   .concat(orderByComparator.getOrderBy());
 				}
-
 				else {
 					sql = _SQL_GETTEAMS.concat(com.liferay.portal.model.impl.TeamModelImpl.ORDER_BY_SQL);
 				}
@@ -5142,7 +5140,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					sql = _SQL_GETUSERGROUPS.concat(ORDER_BY_CLAUSE)
 											.concat(orderByComparator.getOrderBy());
 				}
-
 				else {
 					sql = _SQL_GETUSERGROUPS.concat(com.liferay.portal.model.impl.UserGroupModelImpl.ORDER_BY_SQL);
 				}

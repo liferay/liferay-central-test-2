@@ -797,7 +797,6 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_EXPANDOCOLUMN.concat(ExpandoColumnModelImpl.ORDER_BY_JPQL);
 				}

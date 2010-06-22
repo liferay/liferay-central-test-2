@@ -792,8 +792,9 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_JOURNALARTICLERESOURCE;
+				else {
+					sql = _SQL_SELECT_JOURNALARTICLERESOURCE;
+				}
 
 				Query q = session.createQuery(sql);
 

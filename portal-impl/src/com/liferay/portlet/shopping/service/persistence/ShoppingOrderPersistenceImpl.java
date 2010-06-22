@@ -1463,7 +1463,6 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_SHOPPINGORDER.concat(ShoppingOrderModelImpl.ORDER_BY_JPQL);
 				}

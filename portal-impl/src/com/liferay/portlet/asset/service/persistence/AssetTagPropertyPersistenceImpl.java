@@ -1397,7 +1397,6 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_ASSETTAGPROPERTY.concat(AssetTagPropertyModelImpl.ORDER_BY_JPQL);
 				}

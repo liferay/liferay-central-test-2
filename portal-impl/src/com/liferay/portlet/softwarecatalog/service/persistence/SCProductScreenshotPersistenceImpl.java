@@ -1073,7 +1073,6 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_SCPRODUCTSCREENSHOT.concat(SCProductScreenshotModelImpl.ORDER_BY_JPQL);
 				}

@@ -611,8 +611,9 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_CONTACT;
+				else {
+					sql = _SQL_SELECT_CONTACT;
+				}
 
 				Query q = session.createQuery(sql);
 

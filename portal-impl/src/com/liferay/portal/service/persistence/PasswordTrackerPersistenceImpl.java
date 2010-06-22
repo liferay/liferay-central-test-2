@@ -604,7 +604,6 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_PASSWORDTRACKER.concat(PasswordTrackerModelImpl.ORDER_BY_JPQL);
 				}

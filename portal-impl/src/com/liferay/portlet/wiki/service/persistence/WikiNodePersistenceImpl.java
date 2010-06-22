@@ -1607,7 +1607,6 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_WIKINODE.concat(WikiNodeModelImpl.ORDER_BY_JPQL);
 				}

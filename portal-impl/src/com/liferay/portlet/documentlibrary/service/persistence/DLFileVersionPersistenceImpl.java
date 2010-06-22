@@ -1284,7 +1284,6 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_DLFILEVERSION.concat(DLFileVersionModelImpl.ORDER_BY_JPQL);
 				}

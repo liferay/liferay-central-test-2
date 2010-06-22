@@ -1799,7 +1799,6 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_WEBSITE.concat(WebsiteModelImpl.ORDER_BY_JPQL);
 				}

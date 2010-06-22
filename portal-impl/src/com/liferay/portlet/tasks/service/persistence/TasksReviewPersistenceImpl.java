@@ -1993,7 +1993,6 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_TASKSREVIEW.concat(TasksReviewModelImpl.ORDER_BY_JPQL);
 				}

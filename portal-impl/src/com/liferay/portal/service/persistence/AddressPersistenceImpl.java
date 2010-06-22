@@ -2134,7 +2134,6 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_ADDRESS.concat(AddressModelImpl.ORDER_BY_JPQL);
 				}

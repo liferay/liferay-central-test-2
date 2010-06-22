@@ -1184,7 +1184,6 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_MEMBERSHIPREQUEST.concat(MembershipRequestModelImpl.ORDER_BY_JPQL);
 				}

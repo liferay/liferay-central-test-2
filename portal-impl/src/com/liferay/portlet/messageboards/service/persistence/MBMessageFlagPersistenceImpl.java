@@ -2199,8 +2199,9 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_MBMESSAGEFLAG;
+				else {
+					sql = _SQL_SELECT_MBMESSAGEFLAG;
+				}
 
 				Query q = session.createQuery(sql);
 

@@ -1560,7 +1560,6 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_SCPRODUCTENTRY.concat(SCProductEntryModelImpl.ORDER_BY_JPQL);
 				}
@@ -2011,7 +2010,6 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 					sql = _SQL_GETSCLICENSES.concat(ORDER_BY_CLAUSE)
 											.concat(orderByComparator.getOrderBy());
 				}
-
 				else {
 					sql = _SQL_GETSCLICENSES.concat(com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl.ORDER_BY_SQL);
 				}

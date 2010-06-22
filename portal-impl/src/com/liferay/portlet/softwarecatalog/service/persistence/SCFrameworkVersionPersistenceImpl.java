@@ -1353,7 +1353,6 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_SCFRAMEWORKVERSION.concat(SCFrameworkVersionModelImpl.ORDER_BY_JPQL);
 				}
@@ -1725,7 +1724,6 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 					sql = _SQL_GETSCPRODUCTVERSIONS.concat(ORDER_BY_CLAUSE)
 												   .concat(orderByComparator.getOrderBy());
 				}
-
 				else {
 					sql = _SQL_GETSCPRODUCTVERSIONS.concat(com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionModelImpl.ORDER_BY_SQL);
 				}

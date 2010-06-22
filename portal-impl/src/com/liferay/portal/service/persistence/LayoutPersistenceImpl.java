@@ -2495,7 +2495,6 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_LAYOUT.concat(LayoutModelImpl.ORDER_BY_JPQL);
 				}

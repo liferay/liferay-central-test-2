@@ -898,8 +898,9 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_SOCIALEQUITYSETTING;
+				else {
+					sql = _SQL_SELECT_SOCIALEQUITYSETTING;
+				}
 
 				Query q = session.createQuery(sql);
 

@@ -5603,7 +5603,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_BLOGSENTRY.concat(BlogsEntryModelImpl.ORDER_BY_JPQL);
 				}

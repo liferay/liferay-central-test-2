@@ -609,7 +609,6 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_SHOPPINGITEMFIELD.concat(ShoppingItemFieldModelImpl.ORDER_BY_JPQL);
 				}

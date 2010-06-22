@@ -5390,7 +5390,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_JOURNALARTICLE.concat(JournalArticleModelImpl.ORDER_BY_JPQL);
 				}

@@ -1359,7 +1359,6 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_JOURNALFEED.concat(JournalFeedModelImpl.ORDER_BY_JPQL);
 				}

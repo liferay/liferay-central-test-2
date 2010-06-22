@@ -888,8 +888,9 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_LAYOUTSETPROTOTYPE;
+				else {
+					sql = _SQL_SELECT_LAYOUTSETPROTOTYPE;
+				}
 
 				Query q = session.createQuery(sql);
 

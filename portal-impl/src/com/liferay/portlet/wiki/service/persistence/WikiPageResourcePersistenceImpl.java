@@ -821,8 +821,9 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_WIKIPAGERESOURCE;
+				else {
+					sql = _SQL_SELECT_WIKIPAGERESOURCE;
+				}
 
 				Query q = session.createQuery(sql);
 

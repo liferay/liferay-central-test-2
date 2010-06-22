@@ -1155,8 +1155,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_USERTRACKER;
+				else {
+					sql = _SQL_SELECT_USERTRACKER;
+				}
 
 				Query q = session.createQuery(sql);
 

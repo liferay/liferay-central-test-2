@@ -2751,8 +2751,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_SOCIALRELATION;
+				else {
+					sql = _SQL_SELECT_SOCIALRELATION;
+				}
 
 				Query q = session.createQuery(sql);
 

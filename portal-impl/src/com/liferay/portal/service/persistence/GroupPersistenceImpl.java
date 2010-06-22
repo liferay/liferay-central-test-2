@@ -2060,7 +2060,6 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_GROUP_.concat(GroupModelImpl.ORDER_BY_JPQL);
 				}
@@ -2707,7 +2706,6 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					sql = _SQL_GETORGANIZATIONS.concat(ORDER_BY_CLAUSE)
 											   .concat(orderByComparator.getOrderBy());
 				}
-
 				else {
 					sql = _SQL_GETORGANIZATIONS.concat(com.liferay.portal.model.impl.OrganizationModelImpl.ORDER_BY_SQL);
 				}
@@ -3057,8 +3055,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					sql = _SQL_GETPERMISSIONS.concat(ORDER_BY_CLAUSE)
 											 .concat(orderByComparator.getOrderBy());
 				}
-
-				sql = _SQL_GETPERMISSIONS;
+				else {
+					sql = _SQL_GETPERMISSIONS;
+				}
 
 				SQLQuery q = session.createSQLQuery(sql);
 
@@ -3399,7 +3398,6 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					sql = _SQL_GETROLES.concat(ORDER_BY_CLAUSE)
 									   .concat(orderByComparator.getOrderBy());
 				}
-
 				else {
 					sql = _SQL_GETROLES.concat(com.liferay.portal.model.impl.RoleModelImpl.ORDER_BY_SQL);
 				}
@@ -3732,7 +3730,6 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					sql = _SQL_GETUSERGROUPS.concat(ORDER_BY_CLAUSE)
 											.concat(orderByComparator.getOrderBy());
 				}
-
 				else {
 					sql = _SQL_GETUSERGROUPS.concat(com.liferay.portal.model.impl.UserGroupModelImpl.ORDER_BY_SQL);
 				}
@@ -4074,8 +4071,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					sql = _SQL_GETUSERS.concat(ORDER_BY_CLAUSE)
 									   .concat(orderByComparator.getOrderBy());
 				}
-
-				sql = _SQL_GETUSERS;
+				else {
+					sql = _SQL_GETUSERS;
+				}
 
 				SQLQuery q = session.createSQLQuery(sql);
 

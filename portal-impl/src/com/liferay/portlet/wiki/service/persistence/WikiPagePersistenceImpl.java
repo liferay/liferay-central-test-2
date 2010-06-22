@@ -5925,7 +5925,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_WIKIPAGE.concat(WikiPageModelImpl.ORDER_BY_JPQL);
 				}

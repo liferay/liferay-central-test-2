@@ -1240,7 +1240,6 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_TASKSPROPOSAL.concat(TasksProposalModelImpl.ORDER_BY_JPQL);
 				}

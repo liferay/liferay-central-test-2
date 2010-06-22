@@ -973,8 +973,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_USERIDMAPPER;
+				else {
+					sql = _SQL_SELECT_USERIDMAPPER;
+				}
 
 				Query q = session.createQuery(sql);
 

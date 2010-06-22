@@ -609,7 +609,6 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_ORGLABOR.concat(OrgLaborModelImpl.ORDER_BY_JPQL);
 				}

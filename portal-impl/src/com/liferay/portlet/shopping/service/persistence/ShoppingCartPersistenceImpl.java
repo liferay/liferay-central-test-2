@@ -1033,8 +1033,9 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_SHOPPINGCART;
+				else {
+					sql = _SQL_SELECT_SHOPPINGCART;
+				}
 
 				Query q = session.createQuery(sql);
 

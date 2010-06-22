@@ -1814,7 +1814,6 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_MBCATEGORY.concat(MBCategoryModelImpl.ORDER_BY_JPQL);
 				}

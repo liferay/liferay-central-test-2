@@ -328,8 +328,9 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_ACCOUNT;
+				else {
+					sql = _SQL_SELECT_ACCOUNT;
+				}
 
 				Query q = session.createQuery(sql);
 

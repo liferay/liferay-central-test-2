@@ -3013,7 +3013,6 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_EXPANDOVALUE.concat(ExpandoValueModelImpl.ORDER_BY_JPQL);
 				}

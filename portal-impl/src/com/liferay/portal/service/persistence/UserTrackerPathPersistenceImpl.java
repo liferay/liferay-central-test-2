@@ -599,8 +599,9 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_USERTRACKERPATH;
+				else {
+					sql = _SQL_SELECT_USERTRACKERPATH;
+				}
 
 				Query q = session.createQuery(sql);
 

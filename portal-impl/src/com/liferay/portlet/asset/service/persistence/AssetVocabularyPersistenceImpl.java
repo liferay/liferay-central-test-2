@@ -1639,7 +1639,6 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_ASSETVOCABULARY.concat(AssetVocabularyModelImpl.ORDER_BY_JPQL);
 				}

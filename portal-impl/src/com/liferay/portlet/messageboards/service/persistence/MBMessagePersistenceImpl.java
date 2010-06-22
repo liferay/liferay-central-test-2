@@ -6730,7 +6730,6 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_MBMESSAGE.concat(MBMessageModelImpl.ORDER_BY_JPQL);
 				}

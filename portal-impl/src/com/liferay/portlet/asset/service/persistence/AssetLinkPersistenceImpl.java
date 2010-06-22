@@ -2065,7 +2065,6 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_ASSETLINK.concat(AssetLinkModelImpl.ORDER_BY_JPQL);
 				}

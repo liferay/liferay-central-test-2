@@ -703,8 +703,9 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_PASSWORDPOLICY;
+				else {
+					sql = _SQL_SELECT_PASSWORDPOLICY;
+				}
 
 				Query q = session.createQuery(sql);
 

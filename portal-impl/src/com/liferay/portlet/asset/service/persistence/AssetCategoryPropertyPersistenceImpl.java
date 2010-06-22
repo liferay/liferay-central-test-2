@@ -1409,7 +1409,6 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_ASSETCATEGORYPROPERTY.concat(AssetCategoryPropertyModelImpl.ORDER_BY_JPQL);
 				}

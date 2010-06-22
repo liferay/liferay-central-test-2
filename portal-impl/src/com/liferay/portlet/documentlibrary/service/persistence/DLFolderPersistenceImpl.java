@@ -2331,7 +2331,6 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_DLFOLDER.concat(DLFolderModelImpl.ORDER_BY_JPQL);
 				}

@@ -757,8 +757,9 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_EXPANDOROW;
+				else {
+					sql = _SQL_SELECT_EXPANDOROW;
+				}
 
 				Query q = session.createQuery(sql);
 

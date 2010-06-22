@@ -954,8 +954,9 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_PASSWORDPOLICYREL;
+				else {
+					sql = _SQL_SELECT_PASSWORDPOLICYREL;
+				}
 
 				Query q = session.createQuery(sql);
 

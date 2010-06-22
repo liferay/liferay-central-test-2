@@ -1261,8 +1261,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_MBMAILINGLIST;
+				else {
+					sql = _SQL_SELECT_MBMAILINGLIST;
+				}
 
 				Query q = session.createQuery(sql);
 

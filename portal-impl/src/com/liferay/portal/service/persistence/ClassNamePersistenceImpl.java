@@ -472,8 +472,9 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_CLASSNAME;
+				else {
+					sql = _SQL_SELECT_CLASSNAME;
+				}
 
 				Query q = session.createQuery(sql);
 

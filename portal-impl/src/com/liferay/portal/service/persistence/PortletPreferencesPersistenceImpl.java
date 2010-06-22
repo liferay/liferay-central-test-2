@@ -1445,8 +1445,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_PORTLETPREFERENCES;
+				else {
+					sql = _SQL_SELECT_PORTLETPREFERENCES;
+				}
 
 				Query q = session.createQuery(sql);
 

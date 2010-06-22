@@ -1165,8 +1165,9 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_COMPANY;
+				else {
+					sql = _SQL_SELECT_COMPANY;
+				}
 
 				Query q = session.createQuery(sql);
 

@@ -763,8 +763,9 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_RESOURCE;
+				else {
+					sql = _SQL_SELECT_RESOURCE;
+				}
 
 				Query q = session.createQuery(sql);
 

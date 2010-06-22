@@ -468,8 +468,9 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_BROWSERTRACKER;
+				else {
+					sql = _SQL_SELECT_BROWSERTRACKER;
+				}
 
 				Query q = session.createQuery(sql);
 

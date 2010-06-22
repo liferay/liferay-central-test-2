@@ -871,8 +871,9 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_ORGGROUPPERMISSION;
+				else {
+					sql = _SQL_SELECT_ORGGROUPPERMISSION;
+				}
 
 				Query q = session.createQuery(sql);
 

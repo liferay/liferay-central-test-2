@@ -477,8 +477,9 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_RELEASE;
+				else {
+					sql = _SQL_SELECT_RELEASE;
+				}
 
 				Query q = session.createQuery(sql);
 

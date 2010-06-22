@@ -2736,7 +2736,6 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_SOCIALACTIVITY.concat(SocialActivityModelImpl.ORDER_BY_JPQL);
 				}

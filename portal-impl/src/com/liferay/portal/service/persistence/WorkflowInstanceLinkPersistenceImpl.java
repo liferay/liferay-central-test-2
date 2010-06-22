@@ -670,7 +670,6 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_WORKFLOWINSTANCELINK.concat(WorkflowInstanceLinkModelImpl.ORDER_BY_JPQL);
 				}

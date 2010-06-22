@@ -915,8 +915,9 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_LAYOUTSET;
+				else {
+					sql = _SQL_SELECT_LAYOUTSET;
+				}
 
 				Query q = session.createQuery(sql);
 

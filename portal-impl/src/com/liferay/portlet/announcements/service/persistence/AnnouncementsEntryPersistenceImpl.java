@@ -1543,7 +1543,6 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_ANNOUNCEMENTSENTRY.concat(AnnouncementsEntryModelImpl.ORDER_BY_JPQL);
 				}

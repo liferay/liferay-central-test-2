@@ -1703,8 +1703,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_USERGROUPROLE;
+				else {
+					sql = _SQL_SELECT_USERGROUPROLE;
+				}
 
 				Query q = session.createQuery(sql);
 

@@ -2602,7 +2602,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_DLFILEENTRY.concat(DLFileEntryModelImpl.ORDER_BY_JPQL);
 				}

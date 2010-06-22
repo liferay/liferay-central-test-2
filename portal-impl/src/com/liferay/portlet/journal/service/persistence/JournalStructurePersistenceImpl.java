@@ -2074,7 +2074,6 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_JOURNALSTRUCTURE.concat(JournalStructureModelImpl.ORDER_BY_JPQL);
 				}

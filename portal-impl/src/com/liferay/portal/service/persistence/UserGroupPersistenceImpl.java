@@ -1101,7 +1101,6 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_USERGROUP.concat(UserGroupModelImpl.ORDER_BY_JPQL);
 				}
@@ -1401,7 +1400,6 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 					sql = _SQL_GETGROUPS.concat(ORDER_BY_CLAUSE)
 										.concat(orderByComparator.getOrderBy());
 				}
-
 				else {
 					sql = _SQL_GETGROUPS.concat(com.liferay.portal.model.impl.GroupModelImpl.ORDER_BY_SQL);
 				}
@@ -1735,8 +1733,9 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 					sql = _SQL_GETUSERS.concat(ORDER_BY_CLAUSE)
 									   .concat(orderByComparator.getOrderBy());
 				}
-
-				sql = _SQL_GETUSERS;
+				else {
+					sql = _SQL_GETUSERS;
+				}
 
 				SQLQuery q = session.createSQLQuery(sql);
 

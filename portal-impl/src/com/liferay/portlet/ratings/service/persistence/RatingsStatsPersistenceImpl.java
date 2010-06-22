@@ -496,8 +496,9 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_RATINGSSTATS;
+				else {
+					sql = _SQL_SELECT_RATINGSSTATS;
+				}
 
 				Query q = session.createQuery(sql);
 

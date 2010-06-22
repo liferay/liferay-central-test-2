@@ -1911,7 +1911,6 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_BOOKMARKSENTRY.concat(BookmarksEntryModelImpl.ORDER_BY_JPQL);
 				}

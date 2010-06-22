@@ -2420,8 +2420,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_DLFILESHORTCUT;
+				else {
+					sql = _SQL_SELECT_DLFILESHORTCUT;
+				}
 
 				Query q = session.createQuery(sql);
 

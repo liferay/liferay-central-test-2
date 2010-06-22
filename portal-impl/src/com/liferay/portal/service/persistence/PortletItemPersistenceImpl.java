@@ -1192,8 +1192,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_PORTLETITEM;
+				else {
+					sql = _SQL_SELECT_PORTLETITEM;
+				}
 
 				Query q = session.createQuery(sql);
 

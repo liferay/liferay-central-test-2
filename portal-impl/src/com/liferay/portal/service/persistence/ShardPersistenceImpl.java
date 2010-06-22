@@ -627,8 +627,9 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_SHARD;
+				else {
+					sql = _SQL_SELECT_SHARD;
+				}
 
 				Query q = session.createQuery(sql);
 

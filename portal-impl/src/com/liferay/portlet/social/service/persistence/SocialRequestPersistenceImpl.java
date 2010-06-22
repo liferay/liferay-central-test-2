@@ -3164,7 +3164,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_SOCIALREQUEST.concat(SocialRequestModelImpl.ORDER_BY_JPQL);
 				}

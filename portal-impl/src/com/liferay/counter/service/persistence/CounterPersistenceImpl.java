@@ -316,8 +316,9 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_COUNTER;
+				else {
+					sql = _SQL_SELECT_COUNTER;
+				}
 
 				Query q = session.createQuery(sql);
 

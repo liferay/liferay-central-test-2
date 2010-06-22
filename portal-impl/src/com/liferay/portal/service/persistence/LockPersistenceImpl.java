@@ -1089,8 +1089,9 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_LOCK;
+				else {
+					sql = _SQL_SELECT_LOCK;
+				}
 
 				Query q = session.createQuery(sql);
 

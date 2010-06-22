@@ -1051,7 +1051,6 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_SHOPPINGCATEGORY.concat(ShoppingCategoryModelImpl.ORDER_BY_JPQL);
 				}

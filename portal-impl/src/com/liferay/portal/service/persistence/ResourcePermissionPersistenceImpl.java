@@ -1858,8 +1858,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_RESOURCEPERMISSION;
+				else {
+					sql = _SQL_SELECT_RESOURCEPERMISSION;
+				}
 
 				Query q = session.createQuery(sql);
 

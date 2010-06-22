@@ -823,8 +823,9 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_EXPANDOTABLE;
+				else {
+					sql = _SQL_SELECT_EXPANDOTABLE;
+				}
 
 				Query q = session.createQuery(sql);
 

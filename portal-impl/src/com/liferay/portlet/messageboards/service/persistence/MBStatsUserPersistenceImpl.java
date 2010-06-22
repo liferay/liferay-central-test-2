@@ -1337,7 +1337,6 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_MBSTATSUSER.concat(MBStatsUserModelImpl.ORDER_BY_JPQL);
 				}

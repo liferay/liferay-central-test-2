@@ -1176,7 +1176,6 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_POLLSQUESTION.concat(PollsQuestionModelImpl.ORDER_BY_JPQL);
 				}

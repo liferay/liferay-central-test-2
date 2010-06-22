@@ -777,7 +777,6 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_SHOPPINGCOUPON.concat(ShoppingCouponModelImpl.ORDER_BY_JPQL);
 				}

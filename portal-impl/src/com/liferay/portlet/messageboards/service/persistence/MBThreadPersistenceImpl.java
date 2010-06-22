@@ -2124,7 +2124,6 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_MBTHREAD.concat(MBThreadModelImpl.ORDER_BY_JPQL);
 				}

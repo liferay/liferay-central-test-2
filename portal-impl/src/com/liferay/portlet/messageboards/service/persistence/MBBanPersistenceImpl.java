@@ -1281,8 +1281,9 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_MBBAN;
+				else {
+					sql = _SQL_SELECT_MBBAN;
+				}
 
 				Query q = session.createQuery(sql);
 

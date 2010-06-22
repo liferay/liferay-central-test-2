@@ -688,7 +688,6 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_ASSETTAG.concat(AssetTagModelImpl.ORDER_BY_JPQL);
 				}
@@ -900,8 +899,9 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 					sql = _SQL_GETASSETENTRIES.concat(ORDER_BY_CLAUSE)
 											  .concat(orderByComparator.getOrderBy());
 				}
-
-				sql = _SQL_GETASSETENTRIES;
+				else {
+					sql = _SQL_GETASSETENTRIES;
+				}
 
 				SQLQuery q = session.createSQLQuery(sql);
 

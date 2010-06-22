@@ -476,7 +476,6 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_TICKET.concat(TicketModelImpl.ORDER_BY_JPQL);
 				}

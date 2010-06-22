@@ -1390,8 +1390,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 					sql = query.toString();
 				}
-
-				sql = _SQL_SELECT_SUBSCRIPTION;
+				else {
+					sql = _SQL_SELECT_SUBSCRIPTION;
+				}
 
 				Query q = session.createQuery(sql);
 

@@ -615,7 +615,6 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 
 					sql = query.toString();
 				}
-
 				else {
 					sql = _SQL_SELECT_LISTTYPE.concat(ListTypeModelImpl.ORDER_BY_JPQL);
 				}
