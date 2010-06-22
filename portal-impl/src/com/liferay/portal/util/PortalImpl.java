@@ -2328,30 +2328,12 @@ public class PortalImpl implements Portal {
 
 				friendlyURL = url.substring(0, pos);
 
-				InheritableMap<String, String[]> inheritedParams = null;
+				InheritableMap<String, String[]> actualParams =
+					new InheritableMap<String, String[]>();
 
 				if (params != null) {
-					inheritedParams =
-						new InheritableMap<String, String[]>(params);
+					actualParams.setParentMap(params);
 				}
-				else {
-					inheritedParams = new InheritableMap<String, String[]>();
-				}
-
-				/*Object lifecycle = actualParams.get("p_p_lifecycle");
-
-				if ((lifecycle == null) ||
-					(((String[])lifecycle).length == 0)) {
-
-					actualParams.put("p_p_lifecycle", "0");
-				}
-
-				Object state = actualParams.get("p_p_state");
-
-				if ((state == null) || (((String[])state).length == 0)) {
-					actualParams.put(
-						"p_p_state", WindowState.MAXIMIZED.toString());
-				}*/
 
 				Map<String, String> prpIdentifiers =
 					new HashMap<String, String>();
@@ -2378,16 +2360,13 @@ public class PortalImpl implements Portal {
 
 				if (friendlyURLMapper.isCheckMappingWithPrefix()) {
 					friendlyURLMapper.populateParams(
-						url.substring(pos + 2), inheritedParams,
+						url.substring(pos + 2), actualParams,
 						requestContext);
 				}
 				else {
 					friendlyURLMapper.populateParams(
-						url.substring(pos), inheritedParams, requestContext);
+						url.substring(pos), actualParams, requestContext);
 				}
-
-				Map<String, String[]> actualParams =
-					inheritedParams.getChildMap();
 
 				queryString =
 					StringPool.AMPERSAND +

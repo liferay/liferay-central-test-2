@@ -21,34 +21,56 @@ import java.util.Map;
  * <a href="InheritableMap.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael Young
+ * @author Connor McKay
  */
-public class InheritableMap<K,V> extends HashMap<K,V> {
-
+public class InheritableMap<K, V> extends HashMap<K, V> {
+	
 	public InheritableMap() {
 		super();
 	}
-
-	public InheritableMap(Map<? extends K,? extends V> map) {
+	
+	public InheritableMap(Map<? extends K, ? extends V> map) {
 		super(map);
+	}
+	
+	public boolean containsKey(Object key) {
+		if (_parentMap != null && _parentMap.containsKey(key)) {
+		 	return true;
+		}
+		else {
+			return super.containsKey(key);
+		}
+	}
+	
+	public boolean containsValue(Object value) {
+		if (_parentMap != null && _parentMap.containsValue(value)) {
+			return true;
+		}
+		else {
+			return super.containsValue(value);
+		}
 	}
 
 	public V get(Object key) {
-		if (super.containsKey(key)) {
+	 	if (super.containsKey(key)) {
 			return super.get(key);
 		}
-		else {
-			return _childMap.get(key);
+		else if (_parentMap != null) {
+			return _parentMap.get(key);
 		}
+		
+		return null;
+	}
+	
+	public Map<K, V> getParentMap() {
+		return _parentMap;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void setParentMap(Map<? extends K, ? extends V> map) {
+		_parentMap = (Map<K, V>) map;
 	}
 
-	public Map<K, V> getChildMap() {
-		return _childMap;
-	}
-
-	public V put(K key, V value) {
-		return _childMap.put(key, value);
-	}
-
-	private Map<K, V> _childMap = new HashMap<K,V>();
+	private Map<K, V> _parentMap;
 
 }
