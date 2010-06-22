@@ -151,6 +151,44 @@ public class ServletResponseUtil {
 		write(response, bytes, 0);
 	}
 
+	public static void write(HttpServletResponse response, byte[][] bytesArray)
+		throws IOException {
+
+		int contentLength = 0;
+		for(byte[] bytes : bytesArray) {
+			contentLength += bytes.length;
+		}
+
+		try {
+
+			// LEP-3122
+
+			if (!response.isCommitted()) {
+
+				response.setContentLength(contentLength);
+
+				ServletOutputStream servletOutputStream =
+					response.getOutputStream();
+
+				for(byte[] bytes : bytesArray) {
+					servletOutputStream.write(bytes);
+				}
+			}
+		}
+		catch (IOException ioe) {
+			if (ioe instanceof SocketException ||
+				ioe.getClass().getName().equals(_CLIENT_ABORT_EXCEPTION)) {
+
+				if (_log.isWarnEnabled()) {
+					_log.warn(ioe);
+				}
+			}
+			else {
+				throw ioe;
+			}
+		}
+	}
+
 	public static void write(
 			HttpServletResponse response, byte[] bytes, int contentLength)
 		throws IOException {
