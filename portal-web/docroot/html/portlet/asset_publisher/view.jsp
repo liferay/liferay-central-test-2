@@ -140,7 +140,7 @@ if (!paginationType.equals("none")) {
 	</div>
 
 	<liferay-util:html-top>
-		<link href="<%= rssURL %>" rel="alternate" title="RSS" type="application/rss+xml" />
+		<link href="<%= HtmlUtil.escape(rssURL) %>" rel="alternate" title="RSS" type="application/rss+xml" />
 	</liferay-util:html-top>
 </c:if>
 
