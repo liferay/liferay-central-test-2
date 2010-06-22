@@ -17,15 +17,13 @@
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "pending");
 
-String tabs1Names = "pending,completed";
-
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("tabs1", tabs1);
 %>
 
 <liferay-ui:tabs
-	names="<%= tabs1Names %>"
+	names="pending,completed"
 	portletURL="<%= portletURL %>"
 />
 
@@ -34,49 +32,46 @@ try {
 	String type = "completed";
 %>
 
-<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
+	<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
+		<c:choose>
+			<c:when test='<%= portletName.equals(PortletKeys.MY_WORKFLOW_TASKS) && tabs1.equals("pending") %>'>
+				<liferay-ui:search-form
+					page="/html/portlet/workflow_tasks/workflow_search_tasks.jsp"
+				/>
 
-	<c:choose>
-		<c:when test='<%= portletName.equals(PortletKeys.MY_WORKFLOW_TASKS) && tabs1.equals("pending") %>'>
-			<liferay-ui:search-form
-				page="/html/portlet/workflow_tasks/workflow_search_tasks.jsp"
-			/>
+				<div class="separator" />
 
-			<div class="separator" />
+				<liferay-ui:panel-container extended="<%= true %>" id="workflowTasksPanelContainer" persistState="<%= true %>">
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="myTasksPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "assigned-to-me") %>'>
 
-			<liferay-ui:panel-container extended="<%= true %>" id="workflowTasksPanelContainer" persistState="<%= true %>">
+						<%
+						type = "assigned-to-me";
+						%>
 
-				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="myTasksPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "assigned-to-me") %>'>
+						<%@ include file="/html/portlet/workflow_tasks/workflow_tasks.jspf" %>
+					</liferay-ui:panel>
 
-					<%
-					type = "assigned-to-me";
-					%>
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="workflowTasksPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "assigned-to-my-roles") %>'>
 
-					<%@ include file="/html/portlet/workflow_tasks/workflow_tasks.jspf" %>
-				</liferay-ui:panel>
+						<%
+						type = "assigned-to-my-roles";
+						%>
 
-				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="workflowTasksPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "assigned-to-my-roles") %>'>
+						<%@ include file="/html/portlet/workflow_tasks/workflow_tasks.jspf" %>
+					</liferay-ui:panel>
+				</liferay-ui:panel-container>
+			</c:when>
+			<c:otherwise>
+				<liferay-ui:search-form
+					page="/html/portlet/workflow_tasks/workflow_search_tasks.jsp"
+				/>
 
-					<%
-					type = "assigned-to-my-roles";
-					%>
+				<div class="separator" />
 
-					<%@ include file="/html/portlet/workflow_tasks/workflow_tasks.jspf" %>
-				</liferay-ui:panel>
-
-			</liferay-ui:panel-container>
-		</c:when>
-		<c:otherwise>
-			<liferay-ui:search-form
-				page="/html/portlet/workflow_tasks/workflow_search_tasks.jsp"
-			/>
-
-			<div class="separator" />
-
-			<%@ include file="/html/portlet/workflow_tasks/workflow_tasks.jspf" %>
-		</c:otherwise>
-	</c:choose>
-</aui:form>
+				<%@ include file="/html/portlet/workflow_tasks/workflow_tasks.jspf" %>
+			</c:otherwise>
+		</c:choose>
+	</aui:form>
 
 <%
 }
