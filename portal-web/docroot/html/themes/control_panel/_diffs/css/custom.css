@@ -237,6 +237,10 @@ html > .lfr-dockbar-pinned {
 	color: #000;
 }
 
+.lfr-ctrl-panel .panel-page-category a img {
+	margin-right: 3px;
+}
+
 .lfr-ctrl-panel .panel-page-category .selected-portlet {
 	background: #BCC7CA url(../images/common/selected_portlet_bg.png) repeat-x 0 0;
 	border-bottom: 1px solid #ECF0F1;
