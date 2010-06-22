@@ -4,7 +4,7 @@
 <liferay-portlet-app>
 	<portlet>
 		<portlet-name>2</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/my_account.png</icon>
 		<struts-path>my_account</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>my</control-panel-entry-category>
@@ -34,7 +34,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>6</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/reverend_fun.png</icon>
 		<struts-path>reverend_fun</struts-path>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -76,7 +76,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>9</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/admin.png</icon>
 		<struts-path>admin</struts-path>
 		<scheduler-entry>
 			<scheduler-event-listener-class>com.liferay.portlet.admin.messaging.PluginRepositoriesMessageListener</scheduler-event-listener-class>
@@ -105,7 +105,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>10</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/address_book.png</icon>
 		<struts-path>address_book</struts-path>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
@@ -116,7 +116,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>11</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/directory.png</icon>
 		<struts-path>directory</struts-path>
 		<open-search-class>com.liferay.portlet.directory.util.DirectoryOpenSearchImpl</open-search-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
@@ -129,7 +129,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>15</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/journal.png</icon>
 		<struts-path>journal</struts-path>
 		<configuration-action-class>com.liferay.portlet.journal.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.journal.util.JournalIndexer</indexer-class>
@@ -247,7 +247,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>23</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/dictionary.png</icon>
 		<struts-path>dictionary</struts-path>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -271,7 +271,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>26</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/translator.png</icon>
 		<struts-path>translator</struts-path>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -280,7 +280,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>27</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/unit_converter.png</icon>
 		<struts-path>unit_converter</struts-path>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -289,7 +289,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>28</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/bookmarks.png</icon>
 		<struts-path>bookmarks</struts-path>
 		<configuration-action-class>com.liferay.portlet.bookmarks.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.bookmarks.util.BookmarksIndexer</indexer-class>
@@ -321,7 +321,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>30</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/network.png</icon>
 		<struts-path>network</struts-path>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
@@ -426,7 +426,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>37</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/words.png</icon>
 		<struts-path>words</struts-path>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
@@ -449,7 +449,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>47</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/hello_world.png</icon>
 		<struts-path>hello_world</struts-path>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -458,7 +458,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>48</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/iframe.png</icon>
 		<struts-path>iframe</struts-path>
 		<configuration-action-class>com.liferay.portlet.iframe.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
@@ -471,7 +471,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>49</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/my_places.png</icon>
 		<struts-path>my_places</struts-path>
 		<use-default-template>false</use-default-template>
 		<show-portlet-access-denied>false</show-portlet-access-denied>
@@ -484,7 +484,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>50</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/hello_velocity.png</icon>
 		<struts-path>hello_velocity</struts-path>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -493,7 +493,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>54</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/wiki_display.png</icon>
 		<struts-path>wiki_display</struts-path>
 		<configuration-action-class>com.liferay.portlet.wikidisplay.action.ConfigurationActionImpl</configuration-action-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
@@ -566,7 +566,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>62</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/journal_articles.png</icon>
 		<struts-path>journal_articles</struts-path>
 		<configuration-action-class>com.liferay.portlet.journalarticles.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
@@ -589,7 +589,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>66</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/web_proxy.png</icon>
 		<struts-path>web_proxy</struts-path>
 		<configuration-action-class>com.liferay.portlet.webproxy.action.ConfigurationActionImpl</configuration-action-class>
 		<instanceable>true</instanceable>
@@ -600,7 +600,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>67</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/amazon_rankings.png</icon>
 		<struts-path>amazon_rankings</struts-path>
 		<configuration-action-class>com.liferay.portlet.amazonrankings.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
@@ -611,7 +611,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>70</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/password_generator.png</icon>
 		<struts-path>password_generator</struts-path>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -648,7 +648,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>77</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/journal_content_search.png</icon>
 		<struts-path>journal_content_search</struts-path>
 		<configuration-action-class>com.liferay.portlet.journalcontentsearch.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
@@ -661,7 +661,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>79</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/enterprise_admin.png</icon>
 		<struts-path>enterprise_admin</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<use-default-template>false</use-default-template>
@@ -674,7 +674,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>82</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/language.png</icon>
 		<struts-path>language</struts-path>
 		<configuration-action-class>com.liferay.portlet.language.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
@@ -724,7 +724,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>85</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/site_map.png</icon>
 		<struts-path>site_map</struts-path>
 		<configuration-action-class>com.liferay.portlet.sitemap.action.ConfigurationActionImpl</configuration-action-class>
 		<portlet-data-handler-class>com.liferay.portlet.sitemap.lar.SitemapPortletDataHandlerImpl</portlet-data-handler-class>
@@ -740,7 +740,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>86</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/portlet_configuration.png</icon>
 		<struts-path>portlet_configuration</struts-path>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
@@ -753,7 +753,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>87</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/layout_configuration.png</icon>
 		<struts-path>layout_configuration</struts-path>
 		<use-default-template>false</use-default-template>
 		<show-portlet-access-denied>false</show-portlet-access-denied>
@@ -766,7 +766,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>88</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/layout_management.png</icon>
 		<struts-path>layout_management</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<use-default-template>false</use-default-template>
@@ -780,7 +780,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>90</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/portal.png</icon>
 		<struts-path>portal</struts-path>
 		<system>true</system>
 	</portlet>
@@ -799,7 +799,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>98</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/software_catalog.png</icon>
 		<struts-path>software_catalog</struts-path>
 		<indexer-class>com.liferay.portlet.softwarecatalog.util.SCIndexer</indexer-class>
 		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
@@ -816,7 +816,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>99</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/asset_tags_admin.png</icon>
 		<struts-path>asset_tags_admin</struts-path>
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>11.0</control-panel-entry-weight>
@@ -832,7 +832,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>100</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/invitation.png</icon>
 		<struts-path>invitation</struts-path>
 		<configuration-action-class>com.liferay.portlet.invitation.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
@@ -862,7 +862,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>102</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/xsl_content.png</icon>
 		<struts-path>xsl_content</struts-path>
 		<configuration-action-class>com.liferay.portlet.xslcontent.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
@@ -875,7 +875,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>103</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/tags_compiler.png</icon>
 		<struts-path>tags_compiler</struts-path>
 		<friendly-url-mapper-class>com.liferay.portlet.tagscompiler.TagsCompilerFriendlyURLMapper</friendly-url-mapper-class>
 		<friendly-url-mapping>tags</friendly-url-mapping>
@@ -890,7 +890,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>104</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/update_manager.png</icon>
 		<struts-path>update_manager</struts-path>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
@@ -902,7 +902,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>107</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/page_comments.png</icon>
 		<struts-path>page_comments</struts-path>
 		<portlet-data-handler-class>com.liferay.portlet.pagecomments.lar.PageCommentsPortletDataHandlerImpl</portlet-data-handler-class>
 		<use-default-template>false</use-default-template>
@@ -943,7 +943,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>111</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/plugin_installer.png</icon>
 		<struts-path>plugin_installer</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<use-default-template>false</use-default-template>
@@ -955,7 +955,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>113</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/portlet_css.png</icon>
 		<struts-path>portlet_css</struts-path>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
@@ -1003,7 +1003,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>118</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/nested_portlets.png</icon>
 		<struts-path>nested_portlets</struts-path>
 		<configuration-action-class>com.liferay.portlet.nestedportlets.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
@@ -1016,7 +1016,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>119</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/asset.png</icon>
 		<struts-path>asset</struts-path>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
@@ -1026,7 +1026,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>120</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/tasks.png</icon>
 		<struts-path>tasks</struts-path>
 		<social-activity-interpreter-class>com.liferay.portlet.tasks.social.TasksActivityInterpreter</social-activity-interpreter-class>
 		<use-default-template>false</use-default-template>
@@ -1046,7 +1046,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>122</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/asset_categories_navigation.png</icon>
 		<struts-path>asset_categories_navigation</struts-path>
 		<configuration-action-class>com.liferay.portlet.assetcategoriesnavigation.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
@@ -1059,7 +1059,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>124</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/social.png</icon>
 		<struts-path>social</struts-path>
 		<social-activity-interpreter-class>com.liferay.portlet.social.util.PortalActivityInterpreter</social-activity-interpreter-class>
 		<social-request-interpreter-class>com.liferay.portlet.social.util.PortalRequestInterpreter</social-request-interpreter-class>
@@ -1067,7 +1067,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>125</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/enterprise_admin_users.png</icon>
 		<struts-path>enterprise_admin_users</struts-path>
 		<indexer-class>com.liferay.portlet.enterpriseadmin.util.UserIndexer</indexer-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
@@ -1088,7 +1088,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>126</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/enterprise_admin_organizations.png</icon>
 		<struts-path>enterprise_admin_organizations</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
@@ -1105,7 +1105,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>127</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/enterprise_admin_user_groups.png</icon>
 		<struts-path>enterprise_admin_user_groups</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
@@ -1121,7 +1121,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>128</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/enterprise_admin_roles.png</icon>
 		<struts-path>enterprise_admin_roles</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
@@ -1136,7 +1136,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>129</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/enterprise_admin_password_policies.png</icon>
 		<struts-path>enterprise_admin_password_policies</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
@@ -1150,7 +1150,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>130</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/enterprise_admin_settings.png</icon>
 		<struts-path>enterprise_admin_settings</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
@@ -1165,7 +1165,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>131</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/enterprise_admin_monitoring.png</icon>
 		<struts-path>enterprise_admin_monitoring</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
@@ -1179,7 +1179,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>132</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/enterprise_admin_plugins.png</icon>
 		<struts-path>enterprise_admin_plugins</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
@@ -1193,7 +1193,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>133</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/portlet_sharing.png</icon>
 		<struts-path>portlet_sharing</struts-path>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
@@ -1204,7 +1204,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>134</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/enterprise_admin_communities.png</icon>
 		<struts-path>enterprise_admin_communities</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
@@ -1221,7 +1221,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>135</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/admin_instances.png</icon>
 		<struts-path>admin_instances</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>server</control-panel-entry-category>
@@ -1235,7 +1235,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>136</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/admin_plugins.png</icon>
 		<struts-path>admin_plugins</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>server</control-panel-entry-category>
@@ -1249,7 +1249,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>137</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/admin_server.png</icon>
 		<struts-path>admin_server</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>server</control-panel-entry-category>
@@ -1263,7 +1263,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>139</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/expando.png</icon>
 		<struts-path>expando</struts-path>
 		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>8.0</control-panel-entry-weight>
@@ -1278,7 +1278,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>140</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/my_pages.png</icon>
 		<struts-path>my_pages</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>my</control-panel-entry-category>
@@ -1295,7 +1295,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>141</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/asset_tags_navigation.png</icon>
 		<struts-path>asset_tags_navigation</struts-path>
 		<configuration-action-class>com.liferay.portlet.assettagsnavigation.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
@@ -1308,7 +1308,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>142</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/flags.png</icon>
 		<struts-path>flags</struts-path>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
@@ -1320,7 +1320,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>143</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/page_flags.png</icon>
 		<struts-path>page_flags</struts-path>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
@@ -1330,7 +1330,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>144</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/ratings.png</icon>
 		<struts-path>ratings</struts-path>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
@@ -1342,7 +1342,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>145</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/dockbar.png</icon>
 		<struts-path>dockbar</struts-path>
 		<use-default-template>false</use-default-template>
 		<show-portlet-access-denied>false</show-portlet-access-denied>
@@ -1355,7 +1355,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>146</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/layout_prototypes.png</icon>
 		<struts-path>layout_prototypes</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
@@ -1371,7 +1371,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>147</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/asset_category_admin.png</icon>
 		<struts-path>asset_category_admin</struts-path>
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>12.0</control-panel-entry-weight>
@@ -1387,7 +1387,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>148</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/asset_tags_cloud.png</icon>
 		<struts-path>asset_tags_cloud</struts-path>
 		<use-default-template>false</use-default-template>
 		<layout-cacheable>true</layout-cacheable>
@@ -1399,7 +1399,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>149</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/layout_set_prototypes.png</icon>
 		<struts-path>layout_set_prototypes</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
@@ -1415,7 +1415,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>150</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/workflow_tasks.png</icon>
 		<struts-path>workflow_tasks</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
@@ -1430,7 +1430,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>151</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/workflow_definitions.png</icon>
 		<struts-path>workflow_definitions</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
@@ -1445,7 +1445,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>152</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/workflow_definition_links.png</icon>
 		<struts-path>workflow_definition_links</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>content</control-panel-entry-category>
@@ -1460,7 +1460,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>153</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/my_workflow_tasks.png</icon>
 		<struts-path>my_workflow_tasks</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>my</control-panel-entry-category>
@@ -1491,7 +1491,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>155</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/social_equity_admin.png</icon>
 		<struts-path>social_equity_admin</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>content</control-panel-entry-category>
@@ -1505,7 +1505,7 @@
 	</portlet>
     <portlet>
         <portlet-name>156</portlet-name>
-        <icon>/html/icons/default.png</icon>
+        <icon>/html/icons/group_pages.png</icon>
         <struts-path>group_pages</struts-path>
         <portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
         <control-panel-entry-category>content</control-panel-entry-category>
