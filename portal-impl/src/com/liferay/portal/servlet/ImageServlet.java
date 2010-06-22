@@ -263,7 +263,7 @@ public class ImageServlet extends HttpServlet {
 		int height = ParamUtil.getInteger(request, "height", image.getHeight());
 		int width = ParamUtil.getInteger(request, "width", image.getWidth());
 
-		if ((height > image.getHeight()) && (width > image.getWidth())) {
+		if ((height >= image.getHeight()) && (width >= image.getWidth())) {
 			return image.getTextObj();
 		}
 
