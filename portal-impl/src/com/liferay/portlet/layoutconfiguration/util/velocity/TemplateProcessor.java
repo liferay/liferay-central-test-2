@@ -15,6 +15,7 @@
 package com.liferay.portlet.layoutconfiguration.util.velocity;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.util.comparator.PortletRenderWeightComparator;
 
@@ -85,10 +86,18 @@ public class TemplateProcessor {
 	}
 
 	public String processPortlet(String portletId) throws Exception {
-		RuntimeLogic logic = new PortletLogic(
-			_servletContext, _request, _response, portletId);
+		try {
+			_request.setAttribute(
+				WebKeys.RENDER_PORTLET_RESOURCE, Boolean.TRUE);
 
-		return logic.processContent(new HashMap<String, String>());
+			RuntimeLogic logic = new PortletLogic(
+				_servletContext, _request, _response, portletId);
+
+			return logic.processContent(new HashMap<String, String>());
+		}
+		finally {
+			_request.removeAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
+		}
 	}
 
 	public Map<Portlet, Object[]> getPortletsMap() {
