@@ -57,7 +57,9 @@ public class ComboServlet extends HttpServlet {
 		String minifierType = ParamUtil.getString(request, "minifierType");
 
 		int size = parameterMap.size();
+
 		byte[][] bytesArray = new byte[size][];
+
 		for (String modulePath : parameterMap.keySet()) {
 			bytesArray[--size] = getFileContent(modulePath, minifierType);
 		}
@@ -125,33 +127,40 @@ public class ComboServlet extends HttpServlet {
 	private byte[] getFileContent(String path, String minifierType)
 		throws IOException {
 
-		String cacheKey = path.concat(StringPool.QUESTION).concat(minifierType);
+		String fileContentKey = path.concat(StringPool.QUESTION).concat(
+			minifierType);
 
-		byte[] fileContent = _fileContentMap.get(cacheKey);
+		byte[] fileContent = _fileContents.get(fileContentKey);
 
-		if (fileContent == null) {
-			File file = getFile(path);
-			if (file == null) {
-				fileContent = _EMPTY_FILE_CONTENT;
+		if (fileContent != null) {
+			return fileContent;
+		}
+
+		File file = getFile(path);
+
+		if (file == null) {
+			fileContent = _EMPTY_FILE_CONTENT;
+		}
+		else {
+			String stringFileContent = FileUtil.read(file);
+
+			if (minifierType.equals("css")) {
+				stringFileContent = MinifierUtil.minifyCss(
+					stringFileContent);
 			}
-			else {
-				String stringFileContent = FileUtil.read(file);
-				if (minifierType.equals("css")) {
-					stringFileContent = MinifierUtil.minifyCss(
-						stringFileContent);
-				}
-				else if (minifierType.equals("js")) {
-					stringFileContent = MinifierUtil.minifyJavaScript(
-						stringFileContent);
-				}
-				fileContent = stringFileContent.getBytes(StringPool.UTF8);
+			else if (minifierType.equals("js")) {
+				stringFileContent = MinifierUtil.minifyJavaScript(
+					stringFileContent);
 			}
 
-			byte[] oldFileContent =
-				_fileContentMap.putIfAbsent(cacheKey, fileContent);
-			if (oldFileContent != null) {
-				fileContent = oldFileContent;
-			}
+			fileContent = stringFileContent.getBytes(StringPool.UTF8);
+		}
+
+		byte[] oldFileContent = _fileContents.putIfAbsent(
+			fileContentKey, fileContent);
+
+		if (oldFileContent != null) {
+			fileContent = oldFileContent;
 		}
 
 		return fileContent;
@@ -163,7 +172,7 @@ public class ComboServlet extends HttpServlet {
 
 	private static final String _JAVASCRIPT_DIR = "html/js";
 
-	private ConcurrentMap<String, byte[]> _fileContentMap =
+	private ConcurrentMap<String, byte[]> _fileContents =
 		new ConcurrentHashMap<String, byte[]>();
 
 }
