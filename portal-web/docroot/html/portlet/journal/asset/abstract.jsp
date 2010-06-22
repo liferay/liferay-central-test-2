@@ -42,7 +42,7 @@ JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(articleReso
 	%>
 
 	<div class="asset-small-image">
-		<img alt="" class="asset-small-image" src="<%= src %>" width="150" />
+		<img alt="" class="asset-small-image" src="<%= HtmlUtil.escape(src) %>" width="150" />
 	</div>
 </c:if>
 
