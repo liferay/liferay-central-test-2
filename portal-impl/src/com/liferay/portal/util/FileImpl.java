@@ -41,6 +41,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
+import java.io.RandomAccessFile;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.Writer;
@@ -401,11 +402,10 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 			return null;
 		}
 
-		FileInputStream is = new FileInputStream(file);
-
-		byte[] bytes = getBytes(is, (int)file.length());
-
-		is.close();
+		RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r");
+		byte[] bytes = new byte[(int)randomAccessFile.length()];
+		randomAccessFile.readFully(bytes);
+		randomAccessFile.close();
 
 		return bytes;
 	}
@@ -568,13 +568,8 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	}
 
 	public String read(File file, boolean raw) throws IOException {
-		FileInputStream fis = new FileInputStream(file);
 
-		byte[] bytes = new byte[fis.available()];
-
-		fis.read(bytes);
-
-		fis.close();
+		byte[] bytes = getBytes(file);
 
 		String s = new String(bytes, StringPool.UTF8);
 
