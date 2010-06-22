@@ -70,6 +70,7 @@ import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialRequestInterpreterLocalServiceUtil;
+import com.liferay.util.log4j.Log4JUtil;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -232,6 +233,11 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		servletContext.setAttribute(
 			PortletServlet.PORTLET_CLASS_LOADER, portletClassLoader);
+
+		// Logging
+
+		Log4JUtil.configureLog4J(
+			portletClassLoader.getResource("META-INF/portal-log4j.xml"));
 
 		// Portlet context wrapper
 

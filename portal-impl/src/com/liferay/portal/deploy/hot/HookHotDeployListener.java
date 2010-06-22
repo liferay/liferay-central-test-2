@@ -95,6 +95,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.ControlPanelEntry;
 import com.liferay.portlet.DefaultControlPanelEntryFactory;
 import com.liferay.util.UniqueList;
+import com.liferay.util.log4j.Log4JUtil;
 
 import java.io.File;
 import java.io.InputStream;
@@ -399,6 +400,9 @@ public class HookHotDeployListener
 		_servletContextNames.add(servletContextName);
 
 		ClassLoader portletClassLoader = event.getContextClassLoader();
+
+		Log4JUtil.configureLog4J(
+			portletClassLoader.getResource("META-INF/portal-log4j.xml"));
 
 		Document doc = SAXReaderUtil.read(xml, true);
 
