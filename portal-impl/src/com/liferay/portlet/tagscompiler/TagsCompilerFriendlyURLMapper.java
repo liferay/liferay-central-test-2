@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.util.PortletKeys;
 
 import java.util.Map;
 
@@ -38,14 +37,6 @@ public class TagsCompilerFriendlyURLMapper extends BaseFriendlyURLMapper {
 		return null;
 	}
 
-	public String getMapping() {
-		return _MAPPING;
-	}
-
-	public String getPortletId() {
-		return _PORTLET_ID;
-	}
-
 	public boolean isCheckMappingWithPrefix() {
 		return _CHECK_MAPPING_WITH_PREFIX;
 	}
@@ -54,7 +45,7 @@ public class TagsCompilerFriendlyURLMapper extends BaseFriendlyURLMapper {
 		String friendlyURLPath, Map<String, String[]> parameterMap,
 		Map<String, Object> requestContext) {
 
-		addParameter(parameterMap, "p_p_id", _PORTLET_ID);
+		addParameter(parameterMap, "p_p_id", getPortletId());
 		addParameter(parameterMap, "p_p_lifecycle", "0");
 		addParameter(parameterMap, "p_p_state", WindowState.NORMAL);
 		addParameter(parameterMap, "p_p_mode", PortletMode.VIEW);
@@ -84,9 +75,5 @@ public class TagsCompilerFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	private static final boolean _CHECK_MAPPING_WITH_PREFIX = false;
-
-	private static final String _MAPPING = "tags";
-
-	private static final String _PORTLET_ID = PortletKeys.TAGS_COMPILER;
 
 }

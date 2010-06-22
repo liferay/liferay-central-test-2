@@ -145,7 +145,7 @@
 		</scheduler-entry>
 		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
 		<friendly-url-mapping>journal</friendly-url-mapping>
-		<friendly-url-routes>com/liferay/portlet/journal/friendly-url-routes.xml</friendly-url-routes>
+		<friendly-url-routes>com/liferay/portlet/journal/journal-friendly-url-routes.xml</friendly-url-routes>
 		<portlet-data-handler-class>com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl</portlet-data-handler-class>
 		<webdav-storage-token>journal</webdav-storage-token>
 		<webdav-storage-class>com.liferay.portlet.journal.webdav.JournalWebDAVStorageImpl</webdav-storage-class>
@@ -193,7 +193,7 @@
 		</scheduler-entry>
 		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
 		<friendly-url-mapping>message_boards</friendly-url-mapping>
-		<friendly-url-routes>com/liferay/portlet/messageboards/friendly-url-routes.xml</friendly-url-routes>
+		<friendly-url-routes>com/liferay/portlet/messageboards/message-boards-friendly-url-routes.xml</friendly-url-routes>
 		<portlet-data-handler-class>com.liferay.portlet.messageboards.lar.MBPortletDataHandlerImpl</portlet-data-handler-class>
 		<pop-message-listener-class>com.liferay.portlet.messageboards.pop.MessageListenerImpl</pop-message-listener-class>
 		<social-activity-interpreter-class>com.liferay.portlet.messageboards.social.MBActivityInterpreter</social-activity-interpreter-class>
@@ -223,6 +223,9 @@
 		<configuration-action-class>com.liferay.portlet.documentlibrary.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.documentlibrary.util.DLIndexer</indexer-class>
 		<open-search-class>com.liferay.portlet.documentlibrary.util.DLOpenSearchImpl</open-search-class>
+		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
+		<friendly-url-mapping>document_library</friendly-url-mapping>
+		<friendly-url-routes>com/liferay/portlet/documentlibrary/document-library-friendly-url-routes.xml</friendly-url-routes>
 		<portlet-data-handler-class>com.liferay.portlet.documentlibrary.lar.DLPortletDataHandlerImpl</portlet-data-handler-class>
 		<social-activity-interpreter-class>com.liferay.portlet.documentlibrary.social.DLActivityInterpreter</social-activity-interpreter-class>
 		<webdav-storage-token>document_library</webdav-storage-token>
@@ -368,7 +371,7 @@
 		</scheduler-entry>
 		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
 		<friendly-url-mapping>blogs</friendly-url-mapping>
-		<friendly-url-routes>com/liferay/portlet/blogs/friendly-url-routes.xml</friendly-url-routes>
+		<friendly-url-routes>com/liferay/portlet/blogs/blogs-friendly-url-routes.xml</friendly-url-routes>
 		<portlet-data-handler-class>com.liferay.portlet.blogs.lar.BlogsPortletDataHandlerImpl</portlet-data-handler-class>
 		<social-activity-interpreter-class>com.liferay.portlet.blogs.social.BlogsActivityInterpreter</social-activity-interpreter-class>
 		<xml-rpc-method-class>com.liferay.portlet.blogs.util.PingbackMethodImpl</xml-rpc-method-class>
@@ -406,7 +409,7 @@
 		<open-search-class>com.liferay.portlet.wiki.util.WikiOpenSearchImpl</open-search-class>
 		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
 		<friendly-url-mapping>wiki</friendly-url-mapping>
-		<friendly-url-routes>com/liferay/portlet/wiki/friendly-url-routes.xml</friendly-url-routes>
+		<friendly-url-routes>com/liferay/portlet/wiki/wiki-friendly-url-routes.xml</friendly-url-routes>
 		<portlet-data-handler-class>com.liferay.portlet.wiki.lar.WikiPortletDataHandlerImpl</portlet-data-handler-class>
 		<social-activity-interpreter-class>com.liferay.portlet.wiki.social.WikiActivityInterpreter</social-activity-interpreter-class>
 		<asset-renderer-factory>com.liferay.portlet.wiki.asset.WikiPageAssetRendererFactory</asset-renderer-factory>
@@ -511,7 +514,7 @@
 		<configuration-action-class>com.liferay.portlet.journalcontent.action.ConfigurationActionImpl</configuration-action-class>
 		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
 		<friendly-url-mapping>journal_content</friendly-url-mapping>
-		<friendly-url-routes>com/liferay/portlet/journalcontent/friendly-url-routes.xml</friendly-url-routes>
+		<friendly-url-routes>com/liferay/portlet/journalcontent/journal-content-friendly-url-routes.xml</friendly-url-routes>
 		<portlet-data-handler-class>com.liferay.portlet.journal.lar.JournalContentPortletDataHandlerImpl</portlet-data-handler-class>
 		<portlet-layout-listener-class>com.liferay.portlet.journalcontent.JournalContentPortletLayoutListener</portlet-layout-listener-class>
 		<custom-attributes-display>com.liferay.portlet.journal.JournalArticleCustomAttributesDisplay</custom-attributes-display>
@@ -801,7 +804,7 @@
 		<indexer-class>com.liferay.portlet.softwarecatalog.util.SCIndexer</indexer-class>
 		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
 		<friendly-url-mapping>software_catalog</friendly-url-mapping>
-		<friendly-url-routes>com/liferay/portlet/softwarecatalog/friendly-url-routes.xml</friendly-url-routes>
+		<friendly-url-routes>com/liferay/portlet/softwarecatalog/software-catalog-friendly-url-routes.xml</friendly-url-routes>
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>10.0</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
@@ -846,7 +849,7 @@
 		<indexer-class>com.liferay.portlet.assetpublisher.util.AssetIndexer</indexer-class>
 		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
 		<friendly-url-mapping>asset_publisher</friendly-url-mapping>
-		<friendly-url-routes>com/liferay/portlet/assetpublisher/friendly-url-routes.xml</friendly-url-routes>
+		<friendly-url-routes>com/liferay/portlet/assetpublisher/asset-publisher-friendly-url-routes.xml</friendly-url-routes>
 		<use-default-template>false</use-default-template>
 		<layout-cacheable>true</layout-cacheable>
 		<instanceable>true</instanceable>
@@ -875,6 +878,7 @@
 		<icon>/html/icons/default.png</icon>
 		<struts-path>tags_compiler</struts-path>
 		<friendly-url-mapper-class>com.liferay.portlet.tagscompiler.TagsCompilerFriendlyURLMapper</friendly-url-mapper-class>
+		<friendly-url-mapping>tags</friendly-url-mapping>
 		<use-default-template>false</use-default-template>
 		<show-portlet-access-denied>false</show-portlet-access-denied>
 		<show-portlet-inactive>false</show-portlet-inactive>
@@ -924,6 +928,9 @@
 		<struts-path>document_library_display</struts-path>
 		<configuration-action-class>com.liferay.portlet.documentlibrary.action.ConfigurationActionImpl</configuration-action-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
+		<friendly-url-mapping>document_library_display</friendly-url-mapping>
+		<friendly-url-routes>com/liferay/portlet/documentlibrary/document-library-display-friendly-url-routes.xml</friendly-url-routes>
 		<portlet-data-handler-class>com.liferay.portlet.documentlibrary.lar.DLDisplayPortletDataHandlerImpl</portlet-data-handler-class>
 		<use-default-template>false</use-default-template>
 		<instanceable>true</instanceable>
@@ -985,7 +992,9 @@
 	<portlet>
 		<portlet-name>116</portlet-name>
 		<struts-path>activities</struts-path>
-		<friendly-url-mapper-class>com.liferay.portlet.activities.ActivitiesFriendlyURLMapper</friendly-url-mapper-class>
+		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
+		<friendly-url-mapping>activities</friendly-url-mapping>
+		<friendly-url-routes>com/liferay/portal/kernel/portlet/rss-friendly-url-routes.xml</friendly-url-routes>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>

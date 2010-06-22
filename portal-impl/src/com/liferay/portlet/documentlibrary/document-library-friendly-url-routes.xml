@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE routes PUBLIC "-//Liferay//DTD Friendly URL Routes 6.0.0//EN" "http://www.liferay.com/dtd/liferay-friendly-url-routes_6_0_0.dtd">
+
+<routes>
+	<route>
+		<pattern>/</pattern>
+		<default-parameter name="folderId">0</default-parameter>
+		<default-parameter name="struts_action">/document_library/view</default-parameter>
+	</route>
+	<route>
+		<pattern>/view/{folderId:\d+}</pattern>
+		<default-parameter name="struts_action">/document_library/view</default-parameter>
+	</route>
+	<route>
+		<pattern>/view/{folderId:\d+}/{name}</pattern>
+		<default-parameter name="struts_action">/document_library/view_file_entry</default-parameter>
+	</route>
+	<route>
+		<pattern>/{topLink}</pattern>
+	</route>
+</routes>
