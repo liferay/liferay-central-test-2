@@ -90,7 +90,7 @@ if (treeWalker.isOdd()) {
 			</c:if>
 		</a>
 	</td>
-	<td nowrap>
+	<td style="white-space: nowrap;">
 		<a href="<%= rowHREF %>">
 			<c:if test="<%= !readFlag %>">
 				<strong>
@@ -110,7 +110,7 @@ if (treeWalker.isOdd()) {
 			</c:if>
 		</a>
 	</td>
-	<td nowrap>
+	<td style="white-space: nowrap;">
 		<a href="<%= rowHREF %>"><%= dateFormatDateTime.format(message.getModifiedDate()) %></a>
 	</td>
 </tr>
