@@ -14,6 +14,20 @@
  */
 %>
 
+.taglib-discussion table.add-comment {
+	border: 0;
+	border-collapse: collapse;
+	cellpadding: 0;
+	width: 100%;
+}
+
+.taglib-discussion table.tree-walker {
+	border: 0;
+	border-collapse: collapse;
+	cellpadding: 4px;
+	width: 100%;
+}
+
 .taglib-discussion td img {
 	vertical-align: middle;
 }

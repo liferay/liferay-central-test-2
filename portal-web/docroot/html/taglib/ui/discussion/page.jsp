@@ -73,7 +73,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 <c:if test="<%= (messagesCount > 1) || MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, userId, ActionKeys.VIEW) %>">
 	<div class="taglib-discussion">
-		<form action="<%= formAction %>" method="post" name="<%= formName %>">
+		<form action="<%= HtmlUtil.escape(formAction) %>" method="post" name="<%= formName %>">
 		<input name="<%= namespace %><%= Constants.CMD %>" type="hidden" value="" />
 		<input name="<%= namespace %>redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 		<input name="<%= namespace %>className" type="hidden" value="<%= className %>" />
@@ -92,7 +92,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 		%>
 
 		<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, userId, ActionKeys.ADD_DISCUSSION) %>">
-			<table border="0" cellpadding="0" cellspacing="0" id="<%= randomNamespace %>messageScroll0" width="100%">
+			<table class="add-comment" id="<%= randomNamespace %>messageScroll0">
 			<tr>
 				<td id="<%= randomNamespace %>messageScroll<%= message.getMessageId() %>">
 					<input name="<%= namespace %>messageId<%= i %>" type="hidden" value="<%= message.getMessageId() %>" />
@@ -147,7 +147,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			<a name="<%= randomNamespace %>messages_top"></a>
 
 			<c:if test="<%= treeWalker != null %>">
-				<table border="0" cellpadding="4" cellspacing="0" width="100%">
+				<table class="tree-walker">
 				<tr class="portlet-section-header results-header" style="font-size: x-small; font-weight: bold;">
 					<td colspan="2">
 						<liferay-ui:message key="threaded-replies" />
@@ -192,7 +192,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 				<br />
 			</c:if>
 
-			<table class="lfr-table" width="100%">
+			<table class="lfr-grid lfr-table">
 
 			<%
 			SearchContainer searchContainer = null;
@@ -242,7 +242,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 					</td>
 				</tr>
 				<tr>
-					<td align="center" class="lfr-top">
+					<td class="lfr-center lfr-top">
 						<liferay-ui:user-display
 							userId="<%= message.getUserId() %>"
 							userName="<%= HtmlUtil.escape(message.getUserName()) %>"

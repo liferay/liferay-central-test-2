@@ -14,6 +14,10 @@
  */
 %>
 
+td.lfr-center {
+	text-align: center;
+}
+
 td.lfr-top {
 	vertical-align: top;
 }
