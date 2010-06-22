@@ -37,8 +37,8 @@ if (portletName.equals(PortletKeys.WORKFLOW_TASKS)) {
 		totalTasks = WorkflowTaskManagerUtil.searchCount(company.getCompanyId(), 0, searchTerms.getKeywords(), null, null);
 	}
 }
-else if (toolbarItem.equals("assigned-to-my-roles")) {
-	searchContainer.setEmptyResultsMessage("there-are-no-tasks-assigned-to-my-roles");
+else if (type.equals("assigned-to-my-roles")) {
+	searchContainer.setEmptyResultsMessage("there-are-no-pending-tasks-assigned-to-your-roles");
 
 	if (searchTerms.isAdvancedSearch()){
 		resultsTasks = WorkflowTaskManagerUtil.search(company.getCompanyId(),  user.getUserId(), searchTerms.getName(), searchTerms.getType(), null, null, false, true, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
@@ -52,7 +52,7 @@ else if (toolbarItem.equals("assigned-to-my-roles")) {
 else {
 	boolean completedTasks = false;
 
-	if (toolbarItem.equals("my-completed-tasks")) {
+	if (type.equals("completed")) {
 		completedTasks = true;
 
 		searchContainer.setEmptyResultsMessage("there-are-no-completed-tasks");
@@ -69,5 +69,9 @@ else {
 		resultsTasks = WorkflowTaskManagerUtil.search(company.getCompanyId(), user.getUserId(), searchTerms.getKeywords(), completedTasks, false, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 		totalTasks = WorkflowTaskManagerUtil.searchCount(company.getCompanyId(), user.getUserId(), searchTerms.getKeywords(), completedTasks, false);
 	}
+}
+
+if (Validator.isNotNull(searchTerms.getKeywords()) || Validator.isNotNull(searchTerms.getName()) || Validator.isNotNull(searchTerms.getType())) {
+	searchContainer.setEmptyResultsMessage(searchContainer.getEmptyResultsMessage() + "-with-the-specified-search-criteria");
 }
 %>

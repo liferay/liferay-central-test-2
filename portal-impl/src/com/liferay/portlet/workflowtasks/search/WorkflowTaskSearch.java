@@ -45,7 +45,7 @@ public class WorkflowTaskSearch extends SearchContainer<WorkflowTask> {
 		headerNames.add("due-date");
 		headerNames.add("state");
 
-		orderableHeaders.put("name", "name");
+		orderableHeaders.put("task", "task");
 		orderableHeaders.put("due-date", "due-date");
 	}
 

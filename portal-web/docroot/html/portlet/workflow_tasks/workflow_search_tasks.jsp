@@ -17,9 +17,7 @@
 <%@ include file="/html/portlet/workflow_tasks/init.jsp" %>
 
 <%
-SearchContainer searchContainer = (SearchContainer)request.getAttribute("liferay-ui:search:searchContainer");
-
-WorkflowTaskDisplayTerms displayTerms = (WorkflowTaskDisplayTerms)searchContainer.getDisplayTerms();
+WorkflowTaskDisplayTerms displayTerms = new WorkflowTaskDisplayTerms(renderRequest);
 %>
 
 <liferay-ui:search-toggle
