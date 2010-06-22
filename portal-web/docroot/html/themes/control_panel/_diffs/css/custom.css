@@ -211,7 +211,7 @@ html > .lfr-dockbar-pinned {
 	display: block;
 	font-size: 12px;
 	line-height: 22px;
-	padding: 0 20px;
+	padding: 0 6px;
 }
 
 .lfr-ctrl-panel .panel-page-category .category-portlets a:hover {
