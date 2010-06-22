@@ -41,9 +41,11 @@ public class WriterOutputStreamTest extends TestCase {
 
 		String[] asciiOutput = {"This ", "is ", "an ", "ACSII ", " test"};
 		byte[][] asciiInput = {
-			asciiOutput[0].getBytes(), asciiOutput[1].getBytes(),
-			asciiOutput[2].getBytes(), asciiOutput[3].getBytes(),
-			asciiOutput[4].getBytes()};
+			asciiOutput[0].getBytes(StringPool.UTF8),
+			asciiOutput[1].getBytes(StringPool.UTF8),
+			asciiOutput[2].getBytes(StringPool.UTF8),
+			asciiOutput[3].getBytes(StringPool.UTF8),
+			asciiOutput[4].getBytes(StringPool.UTF8)};
 
 		String expectedResult = asciiOutput[0];
 
@@ -117,9 +119,11 @@ public class WriterOutputStreamTest extends TestCase {
 
 		String[] chineseOutput = {"这是", "一个", "中文", "解码 ", "测试"};
 		byte[][] chineseInput = {
-			chineseOutput[0].getBytes(), chineseOutput[1].getBytes(),
-			chineseOutput[2].getBytes(), chineseOutput[3].getBytes(),
-			chineseOutput[4].getBytes()};
+			chineseOutput[0].getBytes(StringPool.UTF8),
+			chineseOutput[1].getBytes(StringPool.UTF8),
+			chineseOutput[2].getBytes(StringPool.UTF8),
+			chineseOutput[3].getBytes(StringPool.UTF8),
+			chineseOutput[4].getBytes(StringPool.UTF8)};
 
 		String expectedResult = chineseOutput[0];
 
@@ -191,7 +195,7 @@ public class WriterOutputStreamTest extends TestCase {
 		int charNumber = 0;
 
 		String nonAlignOutput = "非对齐测试中文输出";
-		byte[] nonAlignInput = nonAlignOutput.getBytes();
+		byte[] nonAlignInput = nonAlignOutput.getBytes(StringPool.UTF8);
 
 		for (byte b : nonAlignInput) {
 			writerOutputStream.write(b);
