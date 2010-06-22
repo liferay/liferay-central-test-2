@@ -101,8 +101,7 @@ boolean localPublishing = ParamUtil.getBoolean(request, "localPublishing", true)
 if (!localPublishing) {
 	popupId = "publish-to-remote";
 	selGroup = liveGroup;
-	selectedPlids = new long[0];
-	SessionTreeJSClicks.closeNodes(request, treeKey + "SelectedNode");
+	treeKey = "remoteLayoutsTree";
 }
 
 boolean privateLayout = tabs1.equals("private-pages");
