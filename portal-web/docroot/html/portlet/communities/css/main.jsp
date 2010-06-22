@@ -178,6 +178,11 @@
 	background: #1E2529;
 }
 
+.portlet-communities table .lfr-top h1.header-title,
+.portlet-enterprise-admin table.lfr-top h1.header-title {
+	margin: -0.5em 0 0.5em 0
+}
+
 .aui-tree-node-selected {
 	background: #eee;
 }

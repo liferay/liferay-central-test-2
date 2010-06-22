@@ -170,10 +170,10 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 		<c:if test="<%= !group.isLayoutPrototype() %>">
 			<c:choose>
 				<c:when test="<%= selLayout != null %>">
-					<%= LanguageUtil.get(pageContext, "edit-" + (privateLayout ? "private" : "public") + "-page") %>: <liferay-ui:breadcrumb selLayout="<%= selLayout %>" selLayoutParam="selPlid" portletURL="<%= breadcrumbURL %>" />
+					<liferay-ui:header title='<%= selLayout.getName(locale) %>' />
 				</c:when>
 				<c:otherwise>
-					<%= LanguageUtil.get(pageContext, "manage-top-" + (privateLayout ? "private" : "public") + "-pages-for") %>: <a href="<%= breadcrumbURL.toString() %>"><%= HtmlUtil.escape(rootNodeName) %></a>
+					<liferay-ui:header title='<%= LanguageUtil.get(pageContext, "manage-top-" + (privateLayout ? "private" : "public") + "-pages-for") + StringPool.SPACE + HtmlUtil.escape(rootNodeName) %>' />
 				</c:otherwise>
 			</c:choose>
 		</c:if>
