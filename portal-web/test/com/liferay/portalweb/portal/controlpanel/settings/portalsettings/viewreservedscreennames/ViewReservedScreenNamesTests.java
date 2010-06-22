@@ -31,7 +31,6 @@ public class ViewReservedScreenNamesTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(ViewReservedScreenNamesTest.class);
-		testSuite.addTestSuite(TearDownSettingsConfigurationTest.class);
 
 		return testSuite;
 	}

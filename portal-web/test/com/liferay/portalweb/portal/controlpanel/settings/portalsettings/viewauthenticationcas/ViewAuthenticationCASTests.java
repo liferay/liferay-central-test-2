@@ -30,7 +30,6 @@ public class ViewAuthenticationCASTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(ViewAuthenticationCASTest.class);
-		testSuite.addTestSuite(TearDownSettingsConfigurationTest.class);
 
 		return testSuite;
 	}

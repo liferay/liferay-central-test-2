@@ -31,7 +31,6 @@ public class ViewEmailNotificationPasswordChangedTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(ViewEmailNotificationPasswordChangedTest.class);
-		testSuite.addTestSuite(TearDownSettingsConfigurationTest.class);
 
 		return testSuite;
 	}

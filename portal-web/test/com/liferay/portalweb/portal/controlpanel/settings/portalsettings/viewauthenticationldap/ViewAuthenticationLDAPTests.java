@@ -30,7 +30,6 @@ public class ViewAuthenticationLDAPTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(ViewAuthenticationLDAPTest.class);
-		testSuite.addTestSuite(TearDownSettingsConfigurationTest.class);
 
 		return testSuite;
 	}

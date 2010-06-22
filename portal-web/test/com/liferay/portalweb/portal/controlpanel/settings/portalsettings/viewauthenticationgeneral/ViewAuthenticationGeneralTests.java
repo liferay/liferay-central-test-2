@@ -31,7 +31,6 @@ public class ViewAuthenticationGeneralTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(ViewAuthenticationGeneralTest.class);
-		testSuite.addTestSuite(TearDownSettingsConfigurationTest.class);
 
 		return testSuite;
 	}

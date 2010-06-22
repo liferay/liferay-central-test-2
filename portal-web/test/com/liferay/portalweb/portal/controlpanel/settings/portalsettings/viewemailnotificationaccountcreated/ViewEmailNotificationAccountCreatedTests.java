@@ -31,7 +31,6 @@ public class ViewEmailNotificationAccountCreatedTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(ViewEmailNotificationAccountCreatedTest.class);
-		testSuite.addTestSuite(TearDownSettingsConfigurationTest.class);
 
 		return testSuite;
 	}

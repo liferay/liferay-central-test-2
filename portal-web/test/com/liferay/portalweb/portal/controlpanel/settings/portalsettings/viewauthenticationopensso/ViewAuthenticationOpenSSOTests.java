@@ -31,7 +31,6 @@ public class ViewAuthenticationOpenSSOTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(ViewAuthenticationOpenSSOTest.class);
-		testSuite.addTestSuite(TearDownSettingsConfigurationTest.class);
 
 		return testSuite;
 	}
