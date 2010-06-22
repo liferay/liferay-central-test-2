@@ -45,7 +45,7 @@ if (assetTagNames.length == 0) {
 					portletURL.setParameter("tag", assetTagNames[i]);
 				%>
 
-					<a class="tag" href="<%= portletURL.toString() %>"><%= assetTagNames[i] %></a>
+					<a class="tag" href="<%= HtmlUtil.escape(portletURL.toString()) %>"><%= assetTagNames[i] %></a>
 
 				<%
 				}
