@@ -47,9 +47,11 @@ public class PortletInstanceFactoryUtil {
 	}
 
 	public void destroy() {
-		//must retain for compliance w/ spring destroy methods
+
+		// LPS-10473
+
 	}
-	
+
 	public void setPortletInstanceFactory(
 		PortletInstanceFactory portletInstanceFactory) {
 
