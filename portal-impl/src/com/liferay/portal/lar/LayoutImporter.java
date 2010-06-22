@@ -958,19 +958,19 @@ public class LayoutImporter {
 		Layout layout, String newTypeSettings, String portletsMergeMode) {
 
 		try {
-			UnicodeProperties previousProps =
+			UnicodeProperties previousProperties =
 				layout.getTypeSettingsProperties();
 			LayoutTypePortlet previousLayoutType =
 				(LayoutTypePortlet)layout.getLayoutType();
 			List<String> previousColumns =
 				previousLayoutType.getLayoutTemplate().getColumns();
 
-			UnicodeProperties newProps = new UnicodeProperties(true);
+			UnicodeProperties newProperties = new UnicodeProperties(true);
 
-			newProps.load(newTypeSettings);
+			newProperties.load(newTypeSettings);
 
-			String layoutTemplateId = newProps.getProperty(
-					LayoutTypePortletConstants.LAYOUT_TEMPLATE_ID);
+			String layoutTemplateId = newProperties.getProperty(
+				LayoutTypePortletConstants.LAYOUT_TEMPLATE_ID);
 
 			LayoutTemplate newLayoutTemplate =
 				LayoutTemplateLocalServiceUtil.getLayoutTemplate(
@@ -979,8 +979,7 @@ public class LayoutImporter {
 			String[] lostPortletIds = new String[0];
 
 			for (String columnId : newLayoutTemplate.getColumns()) {
-				String columnValue =
-					newProps.getProperty(columnId);
+				String columnValue = newProperties.getProperty(columnId);
 
 				String[] portletIds = StringUtil.split(columnValue);
 
@@ -989,14 +988,13 @@ public class LayoutImporter {
 						lostPortletIds, portletIds);
 				}
 				else {
-
 					String[] previousPortletIds = StringUtil.split(
-						previousProps.getProperty(columnId));
+						previousProperties.getProperty(columnId));
 
 					portletIds = appendPortletIds(
 						previousPortletIds, portletIds, portletsMergeMode);
 
-					previousProps.setProperty(
+					previousProperties.setProperty(
 						columnId, StringUtil.merge(portletIds));
 				}
 			}
@@ -1006,15 +1004,14 @@ public class LayoutImporter {
 			String columnId = previousColumns.get(0);
 
 			String[] portletIds = StringUtil.split(
-				previousProps.getProperty(columnId));
+				previousProperties.getProperty(columnId));
 
 			appendPortletIds(portletIds, lostPortletIds, portletsMergeMode);
 
-			previousProps.setProperty(
+			previousProperties.setProperty(
 				columnId, StringUtil.merge(portletIds));
 
-			layout.setTypeSettings(previousProps.toString());
-
+			layout.setTypeSettings(previousProperties.toString());
 		}
 		catch (IOException ioe) {
 			layout.setTypeSettings(newTypeSettings);
