@@ -22,7 +22,7 @@ String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL")
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
-Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
+Portlet selPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
 
 String path = (String)request.getAttribute(WebKeys.CONFIGURATION_ACTION_PATH);
 %>
@@ -57,7 +57,7 @@ String path = (String)request.getAttribute(WebKeys.CONFIGURATION_ACTION_PATH);
 	<aui:script use="aui-base">
 		if (window.parent) {
 			<c:choose>
-				<c:when test="<%= portlet != null && portlet.isAjaxable() == false %>">
+				<c:when test="<%= !selPortlet.isAjaxable() %>">
 					window.parent.location.reload();
 				</c:when>
 				<c:otherwise>
