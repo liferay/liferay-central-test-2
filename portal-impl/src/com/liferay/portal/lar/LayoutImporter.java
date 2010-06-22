@@ -21,7 +21,6 @@ import com.liferay.portal.LayoutImportException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.cluster.ClusterLinkUtil;
 import com.liferay.portal.kernel.cluster.Priority;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
@@ -42,7 +41,6 @@ import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
-import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -109,7 +107,7 @@ public class LayoutImporter {
 	public void importLayouts(
 			long userId, long groupId, boolean privateLayout,
 			Map<String, String[]> parameterMap, File file)
-		throws PortalException, SystemException {
+		throws Exception {
 
 		boolean deleteMissingLayouts = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
@@ -190,7 +188,7 @@ public class LayoutImporter {
 
 		// Zip
 
-		Element root = null;
+		Element rootElement = null;
 		InputStream themeZip = null;
 
 		// Manifest
@@ -202,9 +200,9 @@ public class LayoutImporter {
 		}
 
 		try {
-			Document doc = SAXReaderUtil.read(xml);
+			Document document = SAXReaderUtil.read(xml);
 
-			root = doc.getRootElement();
+			rootElement = document.getRootElement();
 		}
 		catch (Exception e) {
 			throw new LARFileException(e);
@@ -212,12 +210,12 @@ public class LayoutImporter {
 
 		// Build compatibility
 
-		Element header = root.element("header");
+		Element headerElement = rootElement.element("header");
 
 		int buildNumber = ReleaseInfo.getBuildNumber();
 
 		int importBuildNumber = GetterUtil.getInteger(
-			header.attributeValue("build-number"));
+			headerElement.attributeValue("build-number"));
 
 		if (buildNumber != importBuildNumber) {
 			throw new LayoutImportException(
@@ -227,17 +225,17 @@ public class LayoutImporter {
 
 		// Type compatibility
 
-		String larType = header.attributeValue("type");
+		String larType = headerElement.attributeValue("type");
 
 		if (!larType.equals("layout-set")) {
 			throw new LARTypeException(
 				"Invalid type of LAR file (" + larType + ")");
 		}
 
-		// Import GroupId
+		// Group id
 
 		long sourceGroupId = GetterUtil.getLong(
-			header.attributeValue("group-id"));
+			headerElement.attributeValue("group-id"));
 
 		context.setSourceGroupId(sourceGroupId);
 
@@ -249,8 +247,8 @@ public class LayoutImporter {
 
 		// Look and feel
 
-		String themeId = header.attributeValue("theme-id");
-		String colorSchemeId = header.attributeValue("color-scheme-id");
+		String themeId = headerElement.attributeValue("theme-id");
+		String colorSchemeId = headerElement.attributeValue("color-scheme-id");
 
 		boolean useThemeZip = false;
 
@@ -293,10 +291,10 @@ public class LayoutImporter {
 			_portletImporter.readCategories(context);
 		}
 
-		_portletImporter.readComments(context, root);
-		_portletImporter.readLocks(context, root);
-		_portletImporter.readRatings(context, root);
-		_portletImporter.readTags(context, root);
+		_portletImporter.readComments(context, rootElement);
+		_portletImporter.readLocks(context, rootElement);
+		_portletImporter.readRatings(context, rootElement);
+		_portletImporter.readTags(context, rootElement);
 
 		// Layouts
 
@@ -307,42 +305,46 @@ public class LayoutImporter {
 
 		Set<Long> newLayoutIds = new HashSet<Long>();
 
-		Map<Long, Layout> newLayoutIdPlidMap =
+		Map<Long, Layout> newLayoutsMap =
 			(Map<Long, Layout>)context.getNewPrimaryKeysMap(Layout.class);
 
-		List<Element> layoutEls = root.element("layouts").elements("layout");
+		Element layoutsElement = rootElement.element("layouts");
+
+		List<Element> layoutElements = layoutsElement.elements("layout");
 
 		if (_log.isDebugEnabled()) {
-			if (layoutEls.size() > 0) {
+			if (layoutElements.size() > 0) {
 				_log.debug("Importing layouts");
 			}
 		}
 
-		for (Element layoutRefEl : layoutEls) {
+		for (Element layoutElement : layoutElements) {
 			importLayout(
 				context, user, layoutCache, previousLayouts, newLayouts,
-				newLayoutIdPlidMap, newLayoutIds, portletsMergeMode, themeId,
+				newLayoutsMap, newLayoutIds, portletsMergeMode, themeId,
 				colorSchemeId, layoutsImportMode, privateLayout,
-				importPermissions, importUserPermissions, useThemeZip, root,
-				layoutRefEl);
+				importPermissions, importUserPermissions, useThemeZip,
+				rootElement, layoutElement);
 		}
 
-		List<Element> portletEls = root.element("portlets").elements("portlet");
+		Element portletsElement = rootElement.element("portlets");
+
+		List<Element> portletElements = portletsElement.elements("portlet");
 
 		// Delete portlet data
 
 		if (deletePortletData) {
 			if (_log.isDebugEnabled()) {
-				if (portletEls.size() > 0) {
+				if (portletElements.size() > 0) {
 					_log.debug("Deleting portlet data");
 				}
 			}
 
-			for (Element portletRefEl : portletEls) {
-				String portletId = portletRefEl.attributeValue("portlet-id");
+			for (Element portletElement : portletElements) {
+				String portletId = portletElement.attributeValue("portlet-id");
 				long layoutId = GetterUtil.getLong(
-					portletRefEl.attributeValue("layout-id"));
-				long plid = newLayoutIdPlidMap.get(layoutId).getPlid();
+					portletElement.attributeValue("layout-id"));
+				long plid = newLayoutsMap.get(layoutId).getPlid();
 
 				context.setPlid(plid);
 
@@ -353,36 +355,29 @@ public class LayoutImporter {
 		// Import portlets
 
 		if (_log.isDebugEnabled()) {
-			if (portletEls.size() > 0) {
+			if (portletElements.size() > 0) {
 				_log.debug("Importing portlets");
 			}
 		}
 
-		for (Element portletRefEl : portletEls) {
-			String portletPath = portletRefEl.attributeValue("path");
-			String portletId = portletRefEl.attributeValue("portlet-id");
+		for (Element portletElement : portletElements) {
+			String portletPath = portletElement.attributeValue("path");
+			String portletId = portletElement.attributeValue("portlet-id");
 			long layoutId = GetterUtil.getLong(
-				portletRefEl.attributeValue("layout-id"));
-			long plid = newLayoutIdPlidMap.get(layoutId).getPlid();
+				portletElement.attributeValue("layout-id"));
+			long plid = newLayoutsMap.get(layoutId).getPlid();
 			long oldPlid = GetterUtil.getLong(
-				portletRefEl.attributeValue("old-plid"));
+				portletElement.attributeValue("old-plid"));
 
 			Layout layout = LayoutUtil.findByPrimaryKey(plid);
 
 			context.setPlid(plid);
 			context.setOldPlid(oldPlid);
 
-			Element portletEl = null;
+			Document portletDocument = SAXReaderUtil.read(
+				context.getZipEntryAsString(portletPath));
 
-			try {
-				Document portletDoc = SAXReaderUtil.read(
-					context.getZipEntryAsString(portletPath));
-
-				portletEl = portletDoc.getRootElement();
-			}
-			catch (DocumentException de) {
-				throw new SystemException(de);
-			}
+			portletElement = portletDocument.getRootElement();
 
 			// The order of the import is important. You must always import
 			// the portlet preferences first, then the portlet data, then
@@ -393,39 +388,39 @@ public class LayoutImporter {
 
 			_portletImporter.importPortletPreferences(
 				context, layoutSet.getCompanyId(), layout.getGroupId(),
-				layout, null, portletEl, importPortletSetup,
+				layout, null, portletElement, importPortletSetup,
 				importPortletArchivedSetups, importPortletUserPreferences,
 				false);
 
 			// Portlet data scope
 
 			long scopeLayoutId = GetterUtil.getLong(
-				portletEl.attributeValue("scope-layout-id"));
+				portletElement.attributeValue("scope-layout-id"));
 
 			context.setScopeLayoutId(scopeLayoutId);
 
 			// Portlet data
 
-			Element portletDataEl = portletEl.element("portlet-data");
+			Element portletDataElement = portletElement.element("portlet-data");
 
-			if (importPortletData && (portletDataEl != null)) {
+			if (importPortletData && (portletDataElement != null)) {
 				_portletImporter.importPortletData(
-					context, portletId, plid, portletDataEl);
+					context, portletId, plid, portletDataElement);
 			}
 
 			// Portlet permissions
 
 			if (importPermissions) {
 				_permissionImporter.importPortletPermissions(
-					layoutCache, companyId, groupId, userId, layout, portletEl,
-					portletId, importUserPermissions);
+					layoutCache, companyId, groupId, userId, layout,
+					portletElement, portletId, importUserPermissions);
 			}
 
 			// Archived setups
 
 			_portletImporter.importPortletPreferences(
 				context, layoutSet.getCompanyId(), groupId, null, null,
-				portletEl, importPortletSetup, importPortletArchivedSetups,
+				portletElement, importPortletSetup, importPortletArchivedSetups,
 				importPortletUserPreferences, false);
 		}
 
@@ -493,7 +488,7 @@ public class LayoutImporter {
 	protected void deleteMissingLayouts(
 			long groupId, boolean privateLayout, Set<Long> newLayoutIds,
 			List<Layout> previousLayouts)
-		throws PortalException, SystemException {
+		throws Exception {
 
 		// Layouts
 
@@ -518,9 +513,7 @@ public class LayoutImporter {
 		LayoutSetLocalServiceUtil.updatePageCount(groupId, privateLayout);
 	}
 
-	protected void fixTypeSettings(Layout layout)
-		throws PortalException, SystemException {
-
+	protected void fixTypeSettings(Layout layout) throws Exception {
 		if (!layout.isTypeURL()) {
 			return;
 		}
@@ -626,14 +619,14 @@ public class LayoutImporter {
 	protected void importLayout(
 			PortletDataContext context, User user, LayoutCache layoutCache,
 			List<Layout> previousLayouts, List<Layout> newLayouts,
-			Map<Long, Layout> newLayoutIdPlidMap, Set<Long> newLayoutIds,
+			Map<Long, Layout> newLayoutsMap, Set<Long> newLayoutIds,
 			String portletsMergeMode, String themeId, String colorSchemeId,
 			String layoutsImportMode, boolean privateLayout,
 			boolean importPermissions, boolean importUserPermissions,
-			boolean useThemeZip, Element root, Element layoutEl)
-		throws PortalException, SystemException {
+			boolean useThemeZip, Element rootElement, Element layoutElement)
+		throws Exception {
 
-		String path = layoutEl.attributeValue("path");
+		String path = layoutElement.attributeValue("path");
 
 		if (!context.isPathNotProcessed(path)) {
 			return;
@@ -643,12 +636,12 @@ public class LayoutImporter {
 		long sourceGroupId = context.getSourceGroupId();
 
 		long layoutId = GetterUtil.getInteger(
-			layoutEl.attributeValue("layout-id"));
+			layoutElement.attributeValue("layout-id"));
 
 		long oldLayoutId = layoutId;
 
 		boolean deleteLayout = GetterUtil.getBoolean(
-			layoutEl.attributeValue("delete"));
+			layoutElement.attributeValue("delete"));
 
 		if (deleteLayout) {
 			try {
@@ -679,8 +672,8 @@ public class LayoutImporter {
 			friendlyURL = StringPool.SLASH + layoutId;
 		}
 		else if (layoutsImportMode.equals(
-				PortletDataHandlerKeys.
-					LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_NAME)) {
+					PortletDataHandlerKeys.
+						LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_NAME)) {
 
 			Locale locale = LocaleUtil.getDefault();
 
@@ -741,24 +734,24 @@ public class LayoutImporter {
 			importedLayout = exsistingLayout;
 		}
 
-		newLayoutIdPlidMap.put(oldLayoutId, importedLayout);
+		newLayoutsMap.put(oldLayoutId, importedLayout);
 
 		long parentLayoutId = layout.getParentLayoutId();
 
-		Node parentElNode = root.selectSingleNode(
+		Node parentLayoutNode = rootElement.selectSingleNode(
 			"./layouts/layout[@layout-id='" + parentLayoutId + "']");
 
-		if (parentLayoutId != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID &&
-			parentElNode != null) {
+		if ((parentLayoutId != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) &&
+			(parentLayoutNode != null)) {
 
 			importLayout(
 				context, user, layoutCache, previousLayouts, newLayouts,
-				newLayoutIdPlidMap, newLayoutIds, portletsMergeMode, themeId,
+				newLayoutsMap, newLayoutIds, portletsMergeMode, themeId,
 				colorSchemeId, layoutsImportMode, privateLayout,
-				importPermissions, importUserPermissions, useThemeZip, root,
-				(Element)parentElNode);
+				importPermissions, importUserPermissions, useThemeZip,
+				rootElement, (Element)parentLayoutNode);
 
-			Layout parentLayout = newLayoutIdPlidMap.get(parentLayoutId);
+			Layout parentLayout = newLayoutsMap.get(parentLayoutId);
 
 			parentLayoutId = parentLayout.getLayoutId();
 		}
@@ -793,20 +786,21 @@ public class LayoutImporter {
 					"linkToLayoutId", StringPool.BLANK));
 
 			if (linkToLayoutId > 0) {
-				Node linkedLayoutElNode = root.selectSingleNode(
+				Node linkedLayoutNode = rootElement.selectSingleNode(
 					"./layouts/layout[@layout-id='" + linkToLayoutId + "']");
 
 				importLayout(
 					context, user, layoutCache, previousLayouts, newLayouts,
-					newLayoutIdPlidMap, newLayoutIds, portletsMergeMode, themeId,
+					newLayoutsMap, newLayoutIds, portletsMergeMode, themeId,
 					colorSchemeId, layoutsImportMode, privateLayout,
-					importPermissions, importUserPermissions, useThemeZip, root,
-					(Element)linkedLayoutElNode);
+					importPermissions, importUserPermissions, useThemeZip,
+					rootElement, (Element)linkedLayoutNode);
 
-				Layout linkedLayout = newLayoutIdPlidMap.get(linkToLayoutId);
+				Layout linkedLayout = newLayoutsMap.get(linkToLayoutId);
 
 				typeSettingsProperties.setProperty(
-					"linkToLayoutId", String.valueOf(linkedLayout.getLayoutId()));
+					"linkToLayoutId",
+					String.valueOf(linkedLayout.getLayoutId()));
 			}
 
 			importedLayout.setTypeSettings(layout.getTypeSettings());
@@ -835,7 +829,7 @@ public class LayoutImporter {
 		fixTypeSettings(importedLayout);
 
 		if (layout.isIconImage()) {
-			String iconImagePath = layoutEl.elementText("icon-image-path");
+			String iconImagePath = layoutElement.elementText("icon-image-path");
 
 			byte[] iconBytes = context.getZipEntryAsByteArray(iconImagePath);
 
@@ -864,15 +858,16 @@ public class LayoutImporter {
 		if (importPermissions) {
 			_permissionImporter.importLayoutPermissions(
 				layoutCache, context.getCompanyId(), groupId, user.getUserId(),
-				importedLayout, layoutEl, root, importUserPermissions);
+				importedLayout, layoutElement, rootElement,
+				importUserPermissions);
 		}
 
 		_portletImporter.importPortletData(
-			context, PortletKeys.LAYOUT_CONFIGURATION, null, layoutEl);
+			context, PortletKeys.LAYOUT_CONFIGURATION, null, layoutElement);
 	}
 
 	protected String importTheme(LayoutSet layoutSet, InputStream themeZip)
-		throws IOException {
+		throws Exception {
 
 		ThemeLoader themeLoader = ThemeLoaderFactory.getDefaultThemeLoader();
 
@@ -1021,7 +1016,7 @@ public class LayoutImporter {
 			layout.setTypeSettings(previousProps.toString());
 
 		}
-		catch (IOException e) {
+		catch (IOException ioe) {
 			layout.setTypeSettings(newTypeSettings);
 		}
 	}

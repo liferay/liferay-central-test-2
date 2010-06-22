@@ -675,6 +675,15 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			layoutImporter.importLayouts(
 				userId, groupId, privateLayout, parameterMap, file);
 		}
+		catch (PortalException pe) {
+			throw pe;
+		}
+		catch (SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 		finally {
 			BatchSessionUtil.setEnabled(false);
 		}

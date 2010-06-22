@@ -14,8 +14,6 @@
 
 package com.liferay.portal.lar;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
@@ -63,7 +61,6 @@ import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryUtil;
 
 import java.io.File;
-import java.io.IOException;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -95,7 +92,7 @@ public class LayoutExporter {
 		"/[$SAME_GROUP_FRIENDLY_URL$]";
 
 	public static List<Portlet> getAlwaysExportablePortlets(long companyId)
-		throws SystemException {
+		throws Exception {
 
 		List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(companyId);
 
@@ -134,9 +131,6 @@ public class LayoutExporter {
 
 		try {
 			return FileUtil.getBytes(file);
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
 		}
 		finally {
 			file.delete();
@@ -207,30 +201,32 @@ public class LayoutExporter {
 
 		// Build compatibility
 
-		Document doc = SAXReaderUtil.createDocument();
+		Document document = SAXReaderUtil.createDocument();
 
-		Element root = doc.addElement("root");
+		Element rootElement = document.addElement("root");
 
-		Element header = root.addElement("header");
+		Element headerElement = rootElement.addElement("header");
 
-		header.addAttribute(
+		headerElement.addAttribute(
 			"build-number", String.valueOf(ReleaseInfo.getBuildNumber()));
-		header.addAttribute("export-date", Time.getRFC822());
+		headerElement.addAttribute("export-date", Time.getRFC822());
 
 		if (context.hasDateRange()) {
-			header.addAttribute(
+			headerElement.addAttribute(
 				"start-date", String.valueOf(context.getStartDate()));
-			header.addAttribute(
+			headerElement.addAttribute(
 				"end-date", String.valueOf(context.getEndDate()));
 		}
 
-		header.addAttribute("type", "layout-set");
-		header.addAttribute("group-id", String.valueOf(groupId));
-		header.addAttribute("private-layout", String.valueOf(privateLayout));
-		header.addAttribute("theme-id", layoutSet.getThemeId());
-		header.addAttribute("color-scheme-id", layoutSet.getColorSchemeId());
+		headerElement.addAttribute("type", "layout-set");
+		headerElement.addAttribute("group-id", String.valueOf(groupId));
+		headerElement.addAttribute(
+			"private-layout", String.valueOf(privateLayout));
+		headerElement.addAttribute("theme-id", layoutSet.getThemeId());
+		headerElement.addAttribute(
+			"color-scheme-id", layoutSet.getColorSchemeId());
 
-		// Layout Configuration Portlet
+		// Layout configuration portlet
 
 		Portlet layoutConfigurationPortlet =
 			PortletLocalServiceUtil.getPortletById(
@@ -253,8 +249,7 @@ public class LayoutExporter {
 
 		Layout firstLayout = layouts.get(0);
 
-		List<Portlet> portlets = getAlwaysExportablePortlets(
-			context.getCompanyId());
+		List<Portlet> portlets = getAlwaysExportablePortlets(companyId);
 
 		for (Portlet portlet : portlets) {
 			String portletId = portlet.getRootPortletId();
@@ -287,22 +282,23 @@ public class LayoutExporter {
 			}
 		}
 
-		Element layoutsEl = root.addElement("layouts");
+		Element layoutsElement = rootElement.addElement("layouts");
 
 		for (Layout layout : layouts) {
 			exportLayout(
 				context, layoutConfigurationPortlet, layoutCache, portletIds,
-				exportPermissions, exportUserPermissions, layout, layoutsEl);
+				exportPermissions, exportUserPermissions, layout,
+				layoutsElement);
 		}
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM < 5) {
-			Element rolesEl = root.addElement("roles");
+			Element rolesElement = rootElement.addElement("roles");
 
 			// Layout roles
 
 			if (exportPermissions) {
 				_permissionExporter.exportLayoutRoles(
-					layoutCache, companyId, groupId, rolesEl);
+					layoutCache, companyId, groupId, rolesElement);
 			}
 		}
 
@@ -310,7 +306,7 @@ public class LayoutExporter {
 
 		long previousScopeGroupId = context.getScopeGroupId();
 
-		Element portletsEl = root.addElement("portlets");
+		Element portletsElement = rootElement.addElement("portlets");
 
 		for (Map.Entry<String, Object[]> portletIdsEntry :
 				portletIds.entrySet()) {
@@ -328,10 +324,10 @@ public class LayoutExporter {
 			context.setScopeLayoutId(scopeLayoutId);
 
 			boolean[] exportPortletControls = getExportPortletControls(
-				context.getCompanyId(), portletId, context, parameterMap);
+				companyId, portletId, context, parameterMap);
 
 			_portletExporter.exportPortlet(
-				context, layoutCache, portletId, layout, portletsEl,
+				context, layoutCache, portletId, layout, portletsElement,
 				defaultUserId, exportPermissions, exportPortletArchivedSetups,
 				exportPortletControls[0], exportPortletControls[1],
 				exportPortletUserPreferences, exportUserPermissions);
@@ -347,11 +343,11 @@ public class LayoutExporter {
 
 		// Comments
 
-		_portletExporter.exportComments(context, root);
+		_portletExporter.exportComments(context, rootElement);
 
 		// Locks
 
-		_portletExporter.exportLocks(context, root);
+		_portletExporter.exportLocks(context, rootElement);
 
 		// Portlet data permissions
 
@@ -361,39 +357,33 @@ public class LayoutExporter {
 
 		// Ratings
 
-		_portletExporter.exportRatings(context, root);
+		_portletExporter.exportRatings(context, rootElement);
 
 		// Tags
 
-		_portletExporter.exportTags(context, root);
+		_portletExporter.exportTags(context, rootElement);
 
 		// Look and feel
 
-		try {
-			if (exportTheme) {
-				exportTheme(layoutSet, zipWriter);
-			}
-
-			// Log
-
-			if (_log.isInfoEnabled()) {
-				if (stopWatch != null) {
-					_log.info(
-						"Exporting layouts takes " + stopWatch.getTime() +
-							" ms");
-				}
-				else {
-					_log.info("Exporting layouts is finished");
-				}
-			}
-
-			// Zip
-
-			context.addZipEntry("/manifest.xml", doc.formattedString());
+		if (exportTheme) {
+			exportTheme(layoutSet, zipWriter);
 		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
+
+		// Log
+
+		if (_log.isInfoEnabled()) {
+			if (stopWatch != null) {
+				_log.info(
+					"Exporting layouts takes " + stopWatch.getTime() + " ms");
+			}
+			else {
+				_log.info("Exporting layouts is finished");
+			}
 		}
+
+		// Zip
+
+		context.addZipEntry("/manifest.xml", document.formattedString());
 
 		try {
 			return zipWriter.getFile();
@@ -404,51 +394,46 @@ public class LayoutExporter {
 	}
 
 	protected void exportCategories(PortletDataContext context)
-		throws SystemException {
+		throws Exception {
 
-		try {
-			Document doc = SAXReaderUtil.createDocument();
+		Document document = SAXReaderUtil.createDocument();
 
-			Element root = doc.addElement("categories-hierarchy");
+		Element rootElement = document.addElement("categories-hierarchy");
 
-			Element vocabulariesEl = root.addElement("vocabularies");
+		Element vocabulariesElement = rootElement.addElement("vocabularies");
 
-			List<AssetVocabulary> assetVocabularies =
-				AssetVocabularyLocalServiceUtil.getGroupVocabularies(
-					context.getGroupId());
+		List<AssetVocabulary> assetVocabularies =
+			AssetVocabularyLocalServiceUtil.getGroupVocabularies(
+				context.getGroupId());
 
-			for (AssetVocabulary assetVocabulary : assetVocabularies) {
-				_portletExporter.exportVocabulary(
-					context, vocabulariesEl, assetVocabulary);
-			}
-
-			Element categoriesEl = root.addElement("categories");
-
-			List<AssetCategory> assetCategories =
-				AssetCategoryUtil.findByGroupId(context.getGroupId());
-
-			for (AssetCategory assetCategory : assetCategories) {
-				_portletExporter.exportCategory(
-					context, vocabulariesEl, categoriesEl, assetCategory);
-			}
-
-			_portletExporter.exportCategories(context, root);
-
-			context.addZipEntry(
-				context.getRootPath() + "/categories-hierarchy.xml",
-				doc.formattedString());
+		for (AssetVocabulary assetVocabulary : assetVocabularies) {
+			_portletExporter.exportVocabulary(
+				context, vocabulariesElement, assetVocabulary);
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
+
+		Element categoriesElement = rootElement.addElement("categories");
+
+		List<AssetCategory> assetCategories =
+			AssetCategoryUtil.findByGroupId(context.getGroupId());
+
+		for (AssetCategory assetCategory : assetCategories) {
+			_portletExporter.exportCategory(
+				context, vocabulariesElement, categoriesElement, assetCategory);
 		}
+
+		_portletExporter.exportCategories(context, rootElement);
+
+		context.addZipEntry(
+			context.getRootPath() + "/categories-hierarchy.xml",
+			document.formattedString());
 	}
 
 	protected void exportLayout(
 			PortletDataContext context, Portlet layoutConfigurationPortlet,
 			LayoutCache layoutCache, Map<String, Object[]> portletIds,
 			boolean exportPermissions, boolean exportUserPermissions,
-			Layout layout, Element layoutsEl)
-		throws PortalException, SystemException {
+			Layout layout, Element layoutsElement)
+		throws Exception {
 
 		String path = context.getLayoutPath(
 			layout.getLayoutId()) + "/layout.xml";
@@ -457,16 +442,16 @@ public class LayoutExporter {
 			return;
 		}
 
-		Element layoutEl = layoutsEl.addElement("layout");
+		Element layoutElement = layoutsElement.addElement("layout");
 
-		layoutEl.addAttribute(
+		layoutElement.addAttribute(
 			"layout-id", String.valueOf(layout.getLayoutId()));
 
 		boolean deleteLayout = MapUtil.getBoolean(
 			context.getParameterMap(), "delete_" + layout.getPlid());
 
 		if (deleteLayout) {
-			layoutEl.addAttribute("delete", String.valueOf(true));
+			layoutElement.addAttribute("delete", String.valueOf(true));
 
 			return;
 		}
@@ -482,21 +467,21 @@ public class LayoutExporter {
 			if (image != null) {
 				String iconPath = getLayoutIconPath(context, layout, image);
 
-				layoutEl.addElement("icon-image-path").addText(iconPath);
+				layoutElement.addElement("icon-image-path").addText(iconPath);
 
 				context.addZipEntry(iconPath, image.getTextObj());
 			}
 		}
 
 		_portletExporter.exportPortletData(
-			context, layoutConfigurationPortlet, layout, null, layoutEl);
+			context, layoutConfigurationPortlet, layout, null, layoutElement);
 
 		// Layout permissions
 
 		if (exportPermissions) {
 			_permissionExporter.exportLayoutPermissions(
 				context, layoutCache, context.getCompanyId(),
-				context.getScopeGroupId(), layout, layoutEl,
+				context.getScopeGroupId(), layout, layoutElement,
 				exportUserPermissions);
 		}
 
@@ -549,18 +534,18 @@ public class LayoutExporter {
 			exportLayout(
 				context, layoutConfigurationPortlet, layoutCache, portletIds,
 				exportPermissions, exportUserPermissions, linkedToLayout,
-				layoutsEl);
+				layoutsElement);
 		}
 
 		fixTypeSettings(layout);
 
-		layoutEl.addAttribute("path", path);
+		layoutElement.addAttribute("path", path);
 
 		context.addZipEntry(path, layout);
 	}
 
 	protected void exportTheme(LayoutSet layoutSet, ZipWriter zipWriter)
-		throws IOException, SystemException {
+		throws Exception {
 
 		Theme theme = layoutSet.getTheme();
 
@@ -639,7 +624,7 @@ public class LayoutExporter {
 	}
 
 	protected void exportThemeFiles(String path, File dir, ZipWriter zipWriter)
-		throws IOException {
+		throws Exception {
 
 		if ((dir == null) || (!dir.exists())) {
 			return;
@@ -661,7 +646,7 @@ public class LayoutExporter {
 	}
 
 	protected void fixTypeSettings(Layout layout)
-		throws PortalException, SystemException {
+		throws Exception {
 
 		if (!layout.isTypeURL()) {
 			return;
@@ -712,7 +697,7 @@ public class LayoutExporter {
 	protected boolean[] getExportPortletControls(
 			long companyId, String portletId, PortletDataContext context,
 			Map<String, String[]> parameterMap)
-		throws SystemException {
+		throws Exception {
 
 		boolean exportPortletData = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_DATA);
