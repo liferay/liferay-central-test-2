@@ -177,6 +177,36 @@ public class PortletResponseUtil {
 		}
 	}
 
+	public static void write(MimeResponse mimeResponse, byte[][] bytesArray)
+		throws IOException {
+
+		// LEP-3122
+
+		if (!mimeResponse.isCommitted()) {
+
+			// LEP-536
+
+			int contentLength = 0;
+
+			for (byte[] bytes : bytesArray) {
+				contentLength += bytes.length;
+			}
+
+			if (mimeResponse instanceof ResourceResponse) {
+				ResourceResponse resourceResponse =
+					(ResourceResponse)mimeResponse;
+
+				resourceResponse.setContentLength(contentLength);
+			}
+
+			OutputStream outputStream = mimeResponse.getPortletOutputStream();
+
+			for (byte[] bytes : bytesArray) {
+				outputStream.write(bytes);
+			}
+		}
+	}
+
 	public static void write(MimeResponse mimeResponse, InputStream is)
 		throws IOException {
 
