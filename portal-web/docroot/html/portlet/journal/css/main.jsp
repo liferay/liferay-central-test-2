@@ -228,12 +228,21 @@
 .portlet-journal-edit-mode .structure-tree li.structure-field .journal-article-buttons {
 	display: block;
 	height: 27px;
-	margin-top: 5px;
+	margin-top: 18px;
 	text-align: right;
 }
 
-.portlet-journal .journal-article-buttons {
+.portlet-journal .journal-article-buttons, .portlet-journal .structure-tree li.structure-field.repeated-field .journal-article-variable-name {
 	display: none;
+}
+
+.portlet-journal .journal-article-buttons .edit-button, .portlet-journal .journal-article-buttons .repeatable-button {
+	float: left;
+	margin-left: 3px;
+}
+
+.portlet-journal .journal-article-variable-name .aui-field-label {
+	font-weight: normal;
 }
 
 .portlet-journal .component-group-title {
