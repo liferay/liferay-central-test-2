@@ -170,10 +170,14 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 		<c:if test="<%= !group.isLayoutPrototype() %>">
 			<c:choose>
 				<c:when test="<%= selLayout != null %>">
-					<liferay-ui:header title='<%= selLayout.getName(locale) %>' />
+					<liferay-ui:header
+						title="<%= selLayout.getName(locale) %>"
+					/>
 				</c:when>
 				<c:otherwise>
-					<liferay-ui:header title='<%= LanguageUtil.get(pageContext, "manage-top-" + (privateLayout ? "private" : "public") + "-pages-for") + StringPool.SPACE + HtmlUtil.escape(rootNodeName) %>' />
+					<liferay-ui:header
+						title='<%= LanguageUtil.get(pageContext, "manage-top-" + (privateLayout ? "private" : "public") + "-pages-for") + StringPool.SPACE + HtmlUtil.escape(rootNodeName) %>'
+					/>
 				</c:otherwise>
 			</c:choose>
 		</c:if>
