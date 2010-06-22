@@ -43,7 +43,7 @@ public class InheritableMap<K, V> extends HashMap<K, V> {
 	}
 
 	public boolean containsValue(Object value) {
-		if (_parentMap != null && _parentMap.containsValue(value)) {
+		if ((_parentMap != null) && _parentMap.containsValue(value)) {
 			return true;
 		}
 		else {
@@ -66,9 +66,8 @@ public class InheritableMap<K, V> extends HashMap<K, V> {
 		return _parentMap;
 	}
 
-	@SuppressWarnings("unchecked")
-	public void setParentMap(Map<? extends K, ? extends V> map) {
-		_parentMap = (Map<K, V>) map;
+	public void setParentMap(Map<? extends K, ? extends V> parentMap) {
+		_parentMap = (Map<K, V>)parentMap;
 	}
 
 	private Map<K, V> _parentMap;
