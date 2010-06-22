@@ -15,17 +15,23 @@
 %>
 
 .taglib-discussion table.add-comment {
-	border: 0;
+	border-width: 0;
 	border-collapse: collapse;
-	cellpadding: 0;
 	width: 100%;
 }
 
+.taglib-discussion table.add-comment td {
+	padding: 0
+}
+
 .taglib-discussion table.tree-walker {
-	border: 0;
+	border-width: 0;
 	border-collapse: collapse;
-	cellpadding: 4px;
 	width: 100%;
+}
+
+.taglib-discussion table.tree-walker td {
+	padding: 4px;
 }
 
 .taglib-discussion td img {
