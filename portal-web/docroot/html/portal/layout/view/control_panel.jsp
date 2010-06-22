@@ -115,7 +115,9 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 			curGroup = scopeLayout.getGroup();
 		}
 
-		PortalUtil.addPortletBreadcrumbEntry(request, categoryTitle, null);
+		if (!category.equals(PortletCategoryKeys.CONTENT)) {
+			PortalUtil.addPortletBreadcrumbEntry(request, categoryTitle, null);
+		}
 		%>
 
 		<div id="content-wrapper">
