@@ -85,7 +85,10 @@ public class SourceFormatterHelper {
 
 	public void printError(String fileName, String message) {
 		if (_useProperties) {
-			_properties.remove(fileName);
+			String encodedFileName = StringUtil.replace(
+				fileName, StringPool.BACK_SLASH, StringPool.SLASH);
+
+			_properties.remove(encodedFileName);
 		}
 
 		System.out.println(message);
