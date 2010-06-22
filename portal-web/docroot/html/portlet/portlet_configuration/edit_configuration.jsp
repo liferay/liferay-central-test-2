@@ -22,6 +22,8 @@ String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL")
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
+Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
+
 String path = (String)request.getAttribute(WebKeys.CONFIGURATION_ACTION_PATH);
 %>
 
@@ -53,10 +55,17 @@ String path = (String)request.getAttribute(WebKeys.CONFIGURATION_ACTION_PATH);
 
 <c:if test='<%= themeDisplay.isStatePopUp() && SessionMessages.contains(renderRequest, portletName + ".doConfigure") %>'>
 	<aui:script use="aui-base">
-		var curPortletBoundaryId = '#p_p_id_<%= portletResource %>_';
-
 		if (window.parent) {
-			window.parent.Liferay.Portlet.refresh(curPortletBoundaryId);
+			<c:choose>
+				<c:when test="<%= portlet != null && portlet.isAjaxable() == false %>">
+					window.parent.location.reload();
+				</c:when>
+				<c:otherwise>
+					var curPortletBoundaryId = '#p_p_id_<%= portletResource %>_';
+
+					window.parent.Liferay.Portlet.refresh(curPortletBoundaryId);
+				</c:otherwise>
+			</c:choose>
 		}
 	</aui:script>
 </c:if>
