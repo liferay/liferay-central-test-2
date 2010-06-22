@@ -24,15 +24,15 @@ import java.util.Map;
  * @author Connor McKay
  */
 public class InheritableMap<K, V> extends HashMap<K, V> {
-	
+
 	public InheritableMap() {
 		super();
 	}
-	
+
 	public InheritableMap(Map<? extends K, ? extends V> map) {
 		super(map);
 	}
-	
+
 	public boolean containsKey(Object key) {
 		if (_parentMap != null && _parentMap.containsKey(key)) {
 		 	return true;
@@ -41,7 +41,7 @@ public class InheritableMap<K, V> extends HashMap<K, V> {
 			return super.containsKey(key);
 		}
 	}
-	
+
 	public boolean containsValue(Object value) {
 		if (_parentMap != null && _parentMap.containsValue(value)) {
 			return true;
@@ -58,14 +58,14 @@ public class InheritableMap<K, V> extends HashMap<K, V> {
 		else if (_parentMap != null) {
 			return _parentMap.get(key);
 		}
-		
+
 		return null;
 	}
-	
+
 	public Map<K, V> getParentMap() {
 		return _parentMap;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void setParentMap(Map<? extends K, ? extends V> map) {
 		_parentMap = (Map<K, V>) map;
