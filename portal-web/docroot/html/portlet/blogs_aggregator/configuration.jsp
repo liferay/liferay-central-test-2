@@ -48,7 +48,7 @@ if (organizationId > 0) {
 			<aui:option label="scope" selected='<%= selectionMethod.equals("scope") %>' />
 		</aui:select>
 
-		<div id="<portlet:namespace />UsersSelectionOptions">
+		<div id="<portlet:namespace />usersSelectionOptions">
 			<aui:field-wrapper label="organization">
 				<span id="<portlet:namespace />organizationName"><%= HtmlUtil.escape(organizationName) %></span>
 
@@ -130,7 +130,7 @@ if (organizationId > 0) {
 	var selectionMethod = A.one('#<portlet:namespace />selectionMethod');
 
 	function showHiddenFields() {
-		var usersSelectionOptions = A.one('#<portlet:namespace />UsersSelectionOptions');
+		var usersSelectionOptions = A.one('#<portlet:namespace />usersSelectionOptions');
 
 		if (selectionMethod.val() == 'users') {
 			usersSelectionOptions.show();
