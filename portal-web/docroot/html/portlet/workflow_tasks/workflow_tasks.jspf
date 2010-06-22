@@ -99,7 +99,6 @@
 				buffer="buffer"
 				href="<%= rowURL %>"
 				name="name"
-				orderable="<%= true %>"
 			>
 
 				<%
