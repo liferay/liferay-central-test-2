@@ -403,8 +403,11 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		}
 
 		RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r");
+
 		byte[] bytes = new byte[(int)randomAccessFile.length()];
+
 		randomAccessFile.readFully(bytes);
+
 		randomAccessFile.close();
 
 		return bytes;
@@ -568,7 +571,6 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	}
 
 	public String read(File file, boolean raw) throws IOException {
-
 		byte[] bytes = getBytes(file);
 
 		String s = new String(bytes, StringPool.UTF8);
