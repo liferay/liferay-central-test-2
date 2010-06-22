@@ -29,6 +29,10 @@
 	clear: left;
 }
 
+.portlet-asset-publisher .asset-back-to {
+	text-align: right;
+}
+
 .portlet-asset-publisher .asset-content .asset-description {
 	clear: left;
 	font-style: italic;
