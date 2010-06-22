@@ -16,7 +16,7 @@
 
 <%@ include file="/html/taglib/ui/header/init.jsp" %>
 
-<div class="ui-header <%= (cssClass != null) ? cssClass : "" %>">
+<div class="taglib-header <%= (cssClass != null) ? cssClass : "" %>">
 	<c:if test="<%= Validator.isNotNull(backURL) %>">
 
 		<%
