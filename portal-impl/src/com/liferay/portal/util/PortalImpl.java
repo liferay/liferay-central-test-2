@@ -56,6 +56,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.InheritableMap;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -2327,13 +2328,14 @@ public class PortalImpl implements Portal {
 
 				friendlyURL = url.substring(0, pos);
 
-				Map<String, String[]> actualParams = null;
+				InheritableMap<String, String[]> inheritedParams = null;
 
 				if (params != null) {
-					actualParams = new HashMap<String, String[]>(params);
+					inheritedParams =
+						new InheritableMap<String, String[]>(params);
 				}
 				else {
-					actualParams = new HashMap<String, String[]>();
+					inheritedParams = new InheritableMap<String, String[]>();
 				}
 
 				/*Object lifecycle = actualParams.get("p_p_lifecycle");
@@ -2376,21 +2378,16 @@ public class PortalImpl implements Portal {
 
 				if (friendlyURLMapper.isCheckMappingWithPrefix()) {
 					friendlyURLMapper.populateParams(
-						url.substring(pos + 2), actualParams, requestContext);
+						url.substring(pos + 2), inheritedParams,
+						requestContext);
 				}
 				else {
 					friendlyURLMapper.populateParams(
-						url.substring(pos), actualParams, requestContext);
+						url.substring(pos), inheritedParams, requestContext);
 				}
 
-				// Remove all the query string parameters from actualParams so
-				// that they are not duplicated. See LPS-10436.
-
-				if (params != null) {
-					for (String key : params.keySet()) {
-						actualParams.remove(key);
-					}
-				}
+				Map<String, String[]> actualParams =
+					inheritedParams.getChildMap();
 
 				queryString =
 					StringPool.AMPERSAND +
