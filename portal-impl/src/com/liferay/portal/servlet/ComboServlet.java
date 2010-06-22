@@ -125,7 +125,9 @@ public class ComboServlet extends HttpServlet {
 	private byte[] getFileContent(String path, String minifierType)
 		throws IOException {
 
-		byte[] fileContent = _fileContentMap.get(path);
+		String cacheKey = path.concat(StringPool.QUESTION).concat(minifierType);
+
+		byte[] fileContent = _fileContentMap.get(cacheKey);
 
 		if (fileContent == null) {
 			File file = getFile(path);
@@ -146,7 +148,7 @@ public class ComboServlet extends HttpServlet {
 			}
 
 			byte[] oldFileContent =
-				_fileContentMap.putIfAbsent(path, fileContent);
+				_fileContentMap.putIfAbsent(cacheKey, fileContent);
 			if (oldFileContent != null) {
 				fileContent = oldFileContent;
 			}
