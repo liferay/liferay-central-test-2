@@ -401,8 +401,7 @@ public class HookHotDeployListener
 
 		ClassLoader portletClassLoader = event.getContextClassLoader();
 
-		Log4JUtil.configureLog4J(
-			portletClassLoader.getResource("META-INF/portal-log4j.xml"));
+		initLogger(portletClassLoader);
 
 		Document doc = SAXReaderUtil.read(xml, true);
 
@@ -1100,6 +1099,11 @@ public class HookHotDeployListener
 			hotDeployListenersContainer.registerHotDeployListener(
 				hotDeployListener);
 		}
+	}
+
+	protected void initLogger(ClassLoader portletClassLoader) {
+		Log4JUtil.configureLog4J(
+			portletClassLoader.getResource("META-INF/portal-log4j.xml"));
 	}
 
 	@SuppressWarnings("unchecked")

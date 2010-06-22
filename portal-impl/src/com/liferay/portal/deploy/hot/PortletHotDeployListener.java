@@ -234,10 +234,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		servletContext.setAttribute(
 			PortletServlet.PORTLET_CLASS_LOADER, portletClassLoader);
 
-		// Logging
+		// Logger
 
-		Log4JUtil.configureLog4J(
-			portletClassLoader.getResource("META-INF/portal-log4j.xml"));
+		initLogger(portletClassLoader);
 
 		// Portlet context wrapper
 
@@ -447,6 +446,11 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 						" was unregistered");
 			}
 		}
+	}
+
+	protected void initLogger(ClassLoader portletClassLoader) {
+		Log4JUtil.configureLog4J(
+			portletClassLoader.getResource("META-INF/portal-log4j.xml"));
 	}
 
 	protected PortletBag initPortlet(
