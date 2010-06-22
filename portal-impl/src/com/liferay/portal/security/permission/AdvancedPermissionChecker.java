@@ -475,18 +475,29 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		List<Resource> resources = new ArrayList<Resource>(4);
 
 		try {
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+				if (ResourcePermissionLocalServiceUtil.
+					getResourcePermissionsCount(
+						companyId, name, ResourceConstants.SCOPE_INDIVIDUAL, 
+						primKey) == 0) {
+
+					throw new NoSuchResourceException();
+				}
+			}
+
 			Resource resource = ResourceLocalServiceUtil.getResource(
 				companyId, name, ResourceConstants.SCOPE_INDIVIDUAL, primKey);
 
 			resources.add(resource);
 		}
 		catch (NoSuchResourceException nsre) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Resource " + companyId + " " + name + " " +
-						ResourceConstants.SCOPE_INDIVIDUAL + " " + primKey +
-							" does not exist");
-			}
+			ResourceLocalServiceUtil.addResources(
+				companyId, groupId, 0, name, primKey, false, true, true);
+
+			Resource resource = ResourceLocalServiceUtil.getResource(
+				companyId, name, ResourceConstants.SCOPE_INDIVIDUAL, primKey);
+
+			resources.add(resource);
 		}
 
 		// Group
