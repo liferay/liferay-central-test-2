@@ -243,6 +243,7 @@
 
 .portlet-journal .journal-article-variable-name .aui-field-label {
 	font-weight: normal;
+	margin-right: 5px;
 }
 
 .portlet-journal .component-group-title {

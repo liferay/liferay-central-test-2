@@ -325,7 +325,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 			</c:if>
 
 			<div class="journal-article-buttons">
-				<aui:input cssClass="journal-article-variable-name" inlineField="<%= true %>" id='<%= elInstanceId + \"variableName\" %>' label="variable-name" name="variableName" size="25" type="text" value="<%= elName %>" />
+				<aui:input cssClass="journal-article-variable-name" inlineField="<%= true %>" id='<%= elInstanceId + "variableName" %>' label="variable-name" name="variableName" size="25" type="text" value="<%= elName %>" />
 
 				<input class="edit-button" type="button" value="<liferay-ui:message key="edit-options" />">
 

@@ -394,6 +394,8 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 											</div>
 
 											<div class="journal-article-buttons">
+												<aui:input cssClass="journal-article-variable-name" inlineField="<%= true %>" id="TextAreaFieldvariableName" label="variable-name" name="variableName" size="25" type="text" value="content" />
+
 												<input class="edit-button" type="button" value="<liferay-ui:message key="edit-options" />" />
 
 												<input class="repeatable-button" type="button" value="<liferay-ui:message key="repeat" />" />

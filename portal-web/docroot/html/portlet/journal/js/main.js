@@ -19,7 +19,7 @@ AUI().add(
 		};
 
 		var getUID = function() {
-			return parseInt(Math.random() * Math.pow(10, 4), 10);
+			return (++ A.Env._uidx);
 		};
 
 		var TPL_FIELD_CONTAINER = '<div><li class="structure-field">' +
@@ -272,7 +272,8 @@ AUI().add(
 						var variableNameInput = instance.getById(randomInstanceId + 'variableName');
 
 						if (variableNameInput) {
-							variableNameInput.selectText();
+							Liferay.Util.focusFormField(variableNameInput);
+							variableNameInput.select();
 						}
 					}
 					else {
@@ -3264,7 +3265,7 @@ AUI().add(
 						var instance = this;
 
 						var fieldLabel = instance.getFieldLabelElement();
-						var input = fieldLabel.get('parentNode').one('.aui-field-input');
+						var input = fieldLabel.get('parentNode').one('.journal-article-component-container .aui-field-input');
 
 						if (input) {
 							input.attr('id', value);
