@@ -133,7 +133,9 @@ public class ComboServlet extends HttpServlet {
 
 		FileContentBag fileContentBag = _fileContents.get(fileContentKey);
 
-		if (fileContentBag != null && !PropsValues.COMBO_SERVLET_DEVELOPMENT) {
+		if ((fileContentBag != null) &&
+			!PropsValues.COMBO_CHECK_TIMESTAMP) {
+
 			return fileContentBag._fileContent;
 		}
 
@@ -141,8 +143,8 @@ public class ComboServlet extends HttpServlet {
 
 		long lastModified = file.lastModified();
 
-		if (fileContentBag != null && PropsValues.COMBO_SERVLET_DEVELOPMENT) {
-			if (lastModified == fileContentBag._lastModifiedTime) {
+		if ((fileContentBag != null) && PropsValues.COMBO_CHECK_TIMESTAMP) {
+			if (lastModified == fileContentBag._lastModified) {
 				return fileContentBag._fileContent;
 			}
 			else {
@@ -179,18 +181,6 @@ public class ComboServlet extends HttpServlet {
 		return fileContentBag._fileContent;
 	}
 
-	private static class FileContentBag {
-
-		public FileContentBag(byte[] fileContent, long lastModifiedTime) {
-			_fileContent = fileContent;
-			_lastModifiedTime = lastModifiedTime;
-		}
-
-		private byte[] _fileContent;
-		private long _lastModifiedTime;
-
-	}
-
 	private static final String _CSS_EXTENSION = "css";
 
 	private static final FileContentBag _EMPTY_FILE_CONTENT_BAG =
@@ -200,5 +190,17 @@ public class ComboServlet extends HttpServlet {
 
 	private ConcurrentMap<String, FileContentBag> _fileContents =
 		new ConcurrentHashMap<String, FileContentBag>();
+
+	private static class FileContentBag {
+
+		public FileContentBag(byte[] fileContent, long lastModifiedTime) {
+			_fileContent = fileContent;
+			_lastModified = lastModifiedTime;
+		}
+
+		private byte[] _fileContent;
+		private long _lastModified;
+
+	}
 
 }

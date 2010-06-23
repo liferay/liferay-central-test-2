@@ -218,7 +218,7 @@ public class PropsValues {
 
 	public static final String CMIS_SYSTEM_ROOT_DIR = PropsUtil.get(PropsKeys.CMIS_SYSTEM_ROOT_DIR);
 
-	public static final boolean COMBO_SERVLET_DEVELOPMENT = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.COMBO_SERVLET_DEVELOPMENT));
+	public static final boolean COMBO_CHECK_TIMESTAMP = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.COMBO_CHECK_TIMESTAMP));
 
 	public static final boolean COMMUNITIES_CONTROL_PANEL_MEMBERS_VISIBLE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.COMMUNITIES_CONTROL_PANEL_MEMBERS_VISIBLE));
 
