@@ -317,12 +317,7 @@ public class GroupImpl extends GroupModelImpl implements Group {
 	}
 
 	public boolean isCommunity() {
-		if (isStagingGroup() && getLiveGroup().isOrganization()) {
-			return false;
-		}
-		else {
-			return hasClassName(Group.class);
-		}
+		return hasClassName(Group.class);
 	}
 
 	public boolean isCompany() {
@@ -351,23 +346,7 @@ public class GroupImpl extends GroupModelImpl implements Group {
 	}
 
 	public boolean isOrganization() {
-		return isOrganization(false);
-	}
-
-	public boolean isOrganization(boolean includeStaging) {
-		if (includeStaging) {
-			if (isOrganization() ||
-				(isStagingGroup() && getLiveGroup().isOrganization())) {
-
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
-		else {
-			return hasClassName(Organization.class);
-		}
+		return hasClassName(Organization.class);
 	}
 
 	public boolean isStagingGroup() {

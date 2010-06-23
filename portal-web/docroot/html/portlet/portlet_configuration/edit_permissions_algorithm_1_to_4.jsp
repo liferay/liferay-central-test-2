@@ -147,7 +147,7 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 				tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
 				tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", StringPool.BLANK);
 			}
-			else if (group.isOrganization(true)) {
+			else if (group.isOrganization()) {
 				tabs2Names = StringUtil.replace(tabs2Names, "community,", "organization,");
 				tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", "organization-roles,");
 			}
@@ -163,7 +163,7 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 				tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
 				tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", StringPool.BLANK);
 			}
-			else if (group.isOrganization(true)) {
+			else if (group.isOrganization()) {
 				tabs2Names = StringUtil.replace(tabs2Names, "community,", "organization,");
 				tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", "organization-roles,");
 			}
