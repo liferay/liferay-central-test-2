@@ -74,8 +74,6 @@ public interface DestinationNames {
 
 	public static final String MONITORING = "liferay/monitoring";
 
-	public static final String OPENSOCIAL = "liferay/opensocial";
-
 	public static final String POLLER = "liferay/poller";
 
 	public static final String POLLER_RESPONSE = "liferay/poller_response";
