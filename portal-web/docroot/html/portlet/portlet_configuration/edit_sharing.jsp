@@ -91,7 +91,9 @@ String widgetURL = PortalUtil.getWidgetURL(portlet, themeDisplay);
 				String callbackURL = widgetURL;
 
 				if (portlet.getFacebookIntegration().equals(PortletConstants.FACEBOOK_INTEGRATION_FBML)) {
-					PortletURL fbmlPortletURL = new PortletURLImpl(request, portletResource, plid, PortletRequest.RENDER_PHASE);
+					LiferayPortletURL fbmlPortletURL = (LiferayPortletURL)renderResponse.createRenderURL();
+
+					fbmlPortletURL.setPortletId(portletResource);
 
 					fbmlPortletURL.setParameter("struts_action", "/message_boards/view");
 

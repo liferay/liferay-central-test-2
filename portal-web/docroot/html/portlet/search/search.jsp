@@ -213,7 +213,10 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 					if (dlLinkToViewURL) {
 						long dlPlid = PortalUtil.getPlidFromPortletId(fileEntry.getGroupId(), PortletKeys.DOCUMENT_LIBRARY);
 
-						PortletURL viewURL = new PortletURLImpl(request, PortletKeys.DOCUMENT_LIBRARY, dlPlid, PortletRequest.RENDER_PHASE);
+						LiferayPortletURL viewURL = (LiferayPortletURL)renderResponse.createRenderURL();
+
+						viewURL.setPlid(dlPlid);
+						viewURL.setPortletId(PortletKeys.DOCUMENT_LIBRARY);
 
 						viewURL.setParameter("struts_action", "/document_library/view_file_entry");
 						viewURL.setParameter("redirect", currentURL);

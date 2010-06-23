@@ -16,6 +16,8 @@
 
 <%@ include file="/html/taglib/ui/search/init.jsp" %>
 
+<portlet:defineObjects />
+
 <%
 long groupId = ParamUtil.getLong(request, namespace + "groupId");
 
@@ -23,8 +25,10 @@ Group group = themeDisplay.getScopeGroup();
 
 String keywords = ParamUtil.getString(request, namespace + "keywords");
 
-PortletURL portletURL = new PortletURLImpl(request, PortletKeys.SEARCH, plid, PortletRequest.RENDER_PHASE);
+LiferayPortletURL portletURL = (LiferayPortletURL)renderResponse.createRenderURL();
 
+portletURL.setPortletId(PortletKeys.SEARCH);
+	
 portletURL.setWindowState(WindowState.MAXIMIZED);
 portletURL.setPortletMode(PortletMode.VIEW);
 

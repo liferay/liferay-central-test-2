@@ -18,22 +18,26 @@
 
 <%@ page import="com.liferay.taglib.ui.LanguageTag" %>
 
+<portlet:defineObjects />
+
 <%
 String formName = (String)request.getAttribute("liferay-ui:language:formName");
 
 String formAction = (String)request.getAttribute("liferay-ui:language:formAction");
 
 if (Validator.isNull(formAction)) {
-	PortletURLImpl portletURLImpl = new PortletURLImpl(request, PortletKeys.LANGUAGE, plid, PortletRequest.ACTION_PHASE);
+	LiferayPortletURL portletURL = (LiferayPortletURL)renderResponse.createActionURL();
 
-	portletURLImpl.setWindowState(WindowState.NORMAL);
-	portletURLImpl.setPortletMode(PortletMode.VIEW);
-	portletURLImpl.setAnchor(false);
+	portletURL.setPortletId(PortletKeys.LANGUAGE);
 
-	portletURLImpl.setParameter("struts_action", "/language/view");
-	//portletURLImpl.setParameter("redirect", currentURL);
+	portletURL.setWindowState(WindowState.NORMAL);
+	portletURL.setPortletMode(PortletMode.VIEW);
+	portletURL.setAnchor(false);
 
-	formAction = portletURLImpl.toString();
+	portletURL.setParameter("struts_action", "/language/view");
+	//portletURL.setParameter("redirect", currentURL);
+
+	formAction = portletURL.toString();
 }
 
 String name = (String)request.getAttribute("liferay-ui:language:name");

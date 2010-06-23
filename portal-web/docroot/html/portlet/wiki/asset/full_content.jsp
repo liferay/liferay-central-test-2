@@ -19,13 +19,17 @@
 <%
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
-PortletURL viewPageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid, PortletRequest.ACTION_PHASE);
+LiferayPortletURL viewPageURL = (LiferayPortletURL)renderResponse.createActionURL();
+
+viewPageURL.setPortletId(PortletKeys.WIKI);
 
 viewPageURL.setPortletMode(PortletMode.VIEW);
 
 viewPageURL.setParameter("struts_action", "/wiki/view");
 
-PortletURL editPageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid, PortletRequest.ACTION_PHASE);
+LiferayPortletURL editPageURL = (LiferayPortletURL)renderResponse.createActionURL();
+
+editPageURL.setPortletId(PortletKeys.WIKI);
 
 editPageURL.setPortletMode(PortletMode.VIEW);
 

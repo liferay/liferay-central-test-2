@@ -18,6 +18,8 @@
 
 <%@ page import="com.liferay.portal.service.permission.OrganizationPermissionUtil" %>
 
+<portlet:defineObjects />
+
 <%
 int max = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:my_places:max"));
 
@@ -32,7 +34,9 @@ List<Group> myPlaces = user.getMyPlaces(max);
 	<ul class="taglib-my-places">
 
 		<%
-		PortletURL portletURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid, PortletRequest.ACTION_PHASE);
+		LiferayPortletURL portletURL = (LiferayPortletURL)renderResponse.createActionURL();
+
+		portletURL.setPortletId(PortletKeys.MY_PLACES);
 
 		portletURL.setWindowState(WindowState.NORMAL);
 		portletURL.setPortletMode(PortletMode.VIEW);
@@ -57,7 +61,9 @@ List<Group> myPlaces = user.getMyPlaces(max);
 				organization = OrganizationLocalServiceUtil.getOrganization(myPlace.getClassPK());
 
 				if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.MANAGE_LAYOUTS)) {
-					PortletURL addPageURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid, PortletRequest.ACTION_PHASE);
+					LiferayPortletURL addPageURL = (LiferayPortletURL)renderResponse.createActionURL();
+
+					addPageURL.setPortletId(PortletKeys.MY_PLACES);
 
 					addPageURL.setWindowState(WindowState.NORMAL);
 					addPageURL.setPortletMode(PortletMode.VIEW);
@@ -76,7 +82,9 @@ List<Group> myPlaces = user.getMyPlaces(max);
 			}
 			else if (regularCommunity) {
 				if (GroupPermissionUtil.contains(permissionChecker, myPlace.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
-					PortletURL addPageURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid, PortletRequest.ACTION_PHASE);
+					LiferayPortletURL addPageURL = (LiferayPortletURL)renderResponse.createActionURL();
+
+					addPageURL.setPortletId(PortletKeys.MY_PLACES);
 
 					addPageURL.setWindowState(WindowState.NORMAL);
 					addPageURL.setPortletMode(PortletMode.VIEW);
@@ -94,7 +102,9 @@ List<Group> myPlaces = user.getMyPlaces(max);
 				}
 			}
 			else if (userCommunity) {
-				PortletURL publicAddPageURL = new PortletURLImpl(request, PortletKeys.MY_ACCOUNT, plid, PortletRequest.RENDER_PHASE);
+				LiferayPortletURL publicAddPageURL = (LiferayPortletURL)renderResponse.createRenderURL();
+
+				publicAddPageURL.setPortletId(PortletKeys.MY_ACCOUNT);
 
 				publicAddPageURL.setWindowState(WindowState.MAXIMIZED);
 				publicAddPageURL.setPortletMode(PortletMode.VIEW);
@@ -108,7 +118,9 @@ List<Group> myPlaces = user.getMyPlaces(max);
 
 				long privateAddPagePlid = myPlace.getDefaultPrivatePlid();
 
-				PortletURL privateAddPageURL = new PortletURLImpl(request, PortletKeys.MY_ACCOUNT, plid, PortletRequest.RENDER_PHASE);
+				LiferayPortletURL privateAddPageURL = (LiferayPortletURL)renderResponse.createRenderURL();
+
+				privateAddPageURL.setPortletId(PortletKeys.MY_ACCOUNT);
 
 				privateAddPageURL.setWindowState(WindowState.MAXIMIZED);
 				privateAddPageURL.setPortletMode(PortletMode.VIEW);

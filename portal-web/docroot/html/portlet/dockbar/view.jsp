@@ -220,7 +220,9 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 
 					refererGroupDescriptiveName = myPlace.getDescriptiveName();
 
-					PortletURL portletURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid, PortletRequest.ACTION_PHASE);
+					LiferayPortletURL portletURL = (LiferayPortletURL)renderResponse.createActionURL();
+
+					portletURL.setPortletId(PortletKeys.MY_PLACES);
 
 					portletURL.setWindowState(WindowState.NORMAL);
 					portletURL.setPortletMode(PortletMode.VIEW);
