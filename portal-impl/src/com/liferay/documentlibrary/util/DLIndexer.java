@@ -148,14 +148,17 @@ public class DLIndexer extends BaseIndexer {
 						fileEntryId);
 		}
 
-		InputStream is = null;
-
 		boolean indexContent = true;
+
+		InputStream is = null;
 
 		try {
 			Hook hook = HookFactory.getInstance();
 
-			if (PropsValues.DL_FILE_INDEXING_MAX_SIZE != -1) {
+			if (PropsValues.DL_FILE_INDEXING_MAX_SIZE == 0) {
+				indexContent = false;
+			}
+			else if (PropsValues.DL_FILE_INDEXING_MAX_SIZE != -1) {
 				long size = hook.getFileSize(companyId, repositoryId, fileName);
 
 				if (size > PropsValues.DL_FILE_INDEXING_MAX_SIZE) {
