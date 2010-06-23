@@ -85,8 +85,6 @@
 							<antcall target="prepare-mysql" />
 
 							<ant antfile="build-test-weblogic-10.3.xml" target="run-selenium-weblogic-10.3">
-								<property name="plink.executable" value="../../tools/putty/plink.exe"/>
-								<property name="pscp.executable" value="../../tools/putty/pscp.exe"/>
 								<property name="test.name" value="${test.ant.script.suite}" />
 							</ant>
 						</target>
@@ -95,8 +93,6 @@
 							<antcall target="prepare-mysql" />
 
 							<ant antfile="build-test-websphere-6.1.xml" target="run-selenium-websphere-6.1">
-								<property name="plink.executable" value="../../tools/putty/plink.exe"/>
-								<property name="pscp.executable" value="../../tools/putty/pscp.exe"/>
 								<property name="test.name" value="${test.ant.script.suite}" />
 							</ant>
 						</target>
@@ -105,8 +101,6 @@
 							<antcall target="prepare-mysql" />
 
 							<ant antfile="build-test-websphere-7.0.xml" target="run-selenium-websphere-7.0">
-								<property name="plink.executable" value="../../tools/putty/plink.exe"/>
-								<property name="pscp.executable" value="../../tools/putty/pscp.exe"/>
 								<property name="test.name" value="${test.ant.script.suite}" />
 							</ant>
 						</target>
@@ -171,8 +165,6 @@
 							<antcall target="prepare-mysql" />
 
 							<ant antfile="build-test-weblogic-10.3.xml" target="run-selenium-weblogic-10.3">
-								<property name="plink.executable" value="../../tools/putty/plink.exe"/>
-								<property name="pscp.executable" value="../../tools/putty/pscp.exe"/>
 								<property name="test.name" value="${test.ant.script.suite}" />
 							</ant>
 						</target>
@@ -181,8 +173,6 @@
 							<antcall target="prepare-mysql" />
 
 							<ant antfile="build-test-websphere-6.1.xml" target="run-selenium-websphere-6.1">
-								<property name="plink.executable" value="../../tools/putty/plink.exe"/>
-								<property name="pscp.executable" value="../../tools/putty/pscp.exe"/>
 								<property name="test.name" value="${test.ant.script.suite}" />
 							</ant>
 						</target>
@@ -191,8 +181,6 @@
 							<antcall target="prepare-mysql" />
 
 							<ant antfile="build-test-websphere-7.0.xml" target="run-selenium-websphere-7.0">
-								<property name="plink.executable" value="../../tools/putty/plink.exe"/>
-								<property name="pscp.executable" value="../../tools/putty/pscp.exe"/>
 								<property name="test.name" value="${test.ant.script.suite}" />
 							</ant>
 						</target>

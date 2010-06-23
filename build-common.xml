@@ -3,6 +3,8 @@
 <project name="common" xmlns:antelope="antlib:ise.antelope.tasks">
 	<property name="project.dir" value=".." />
 
+	<property name="plink.executable" location="${project.dir}/tools/putty/plink.exe" />
+	<property name="pscp.executable" location="${project.dir}/tools/putty/pscp.exe" />
 	<property name="test.properties" value="com/liferay/portal/tools/dependencies/portal-tools.properties" />
 
 	<property environment="env" />
