@@ -90,7 +90,7 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 		}
 
 		Map<String, InvokerPortlet> portletInstances = _pool.get(
-			portlet.getRootPortletId());                                                                  	
+			portlet.getRootPortletId());                                                                  
 
 		if (portletInstances == null) {
 			portletInstances = new ConcurrentHashMap<String, InvokerPortlet>();
@@ -165,9 +165,11 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 	}
 
 	public void destroy() {
-		//done for spring
+
+		// LPS-10473
+
 	}
-	
+
 	public void destroy(Portlet portlet) {
 		clear(portlet);
 
