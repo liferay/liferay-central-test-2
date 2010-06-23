@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
@@ -149,15 +150,27 @@ public class DLIndexer extends BaseIndexer {
 
 		InputStream is = null;
 
+		boolean indexContent = true;
+
 		try {
 			Hook hook = HookFactory.getInstance();
 
-			is = hook.getFileAsStream(companyId, repositoryId, fileName);
+			if (PropsValues.DL_FILE_INDEXING_MAX_SIZE != -1) {
+				long size = hook.getFileSize(companyId, repositoryId, fileName);
+
+				if (size > PropsValues.DL_FILE_INDEXING_MAX_SIZE) {
+					indexContent = false;
+				}
+			}
+
+			if (indexContent) {
+				is = hook.getFileAsStream(companyId, repositoryId, fileName);
+			}
 		}
 		catch (Exception e) {
 		}
 
-		if (is == null) {
+		if (indexContent && (is == null)) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Document " + companyId + " " + portletId + " " +
@@ -180,13 +193,16 @@ public class DLIndexer extends BaseIndexer {
 		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
 		document.addKeyword(Field.USER_ID, userId);
 
-		try {
-			document.addFile(Field.CONTENT, is, fileEntry.getTitle());
-		}
-		catch (IOException ioe) {
-			throw new SearchException(
-				"Cannot extract text from file" + companyId + " " + portletId +
-					" " + scopeGroupId + " " + repositoryId + " " + fileName);
+		if (indexContent) {
+			try {
+				document.addFile(Field.CONTENT, is, fileEntry.getTitle());
+			}
+			catch (IOException ioe) {
+				throw new SearchException(
+					"Cannot extract text from file" + companyId + " " +
+						portletId +	" " + scopeGroupId + " " + repositoryId +
+						" " + fileName);
+			}
 		}
 
 		document.addText(Field.PROPERTIES, properties);
