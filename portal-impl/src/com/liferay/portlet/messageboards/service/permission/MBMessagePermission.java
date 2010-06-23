@@ -77,8 +77,7 @@ public class MBMessagePermission {
 		if (message.isPending() && !actionId.equals(ActionKeys.VIEW)) {
 			Boolean hasPermission = WorkflowPermissionUtil.hasPermission(
 				permissionChecker, message.getGroupId(),
-				MBMessage.class.getName(), message.getMessageId(),
-				permissionChecker.getUserId(), actionId);
+				MBMessage.class.getName(), message.getMessageId(), actionId);
 
 			if (hasPermission != null) {
 				return hasPermission.booleanValue();

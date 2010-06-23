@@ -39,12 +39,11 @@ public class WorkflowPermissionImpl implements WorkflowPermission {
 
 	public Boolean hasPermission(
 		PermissionChecker permissionChecker, long groupId, String className,
-		long classPK, long userId, String actionId) {
+		long classPK, String actionId) {
 
 		try {
 			return doHasPermission(
-				permissionChecker, groupId, className, classPK, userId,
-				actionId);
+				permissionChecker, groupId, className, classPK, actionId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -55,7 +54,7 @@ public class WorkflowPermissionImpl implements WorkflowPermission {
 
 	protected Boolean doHasPermission(
 			PermissionChecker permissionChecker, long groupId, String className,
-			long classPK, long userId, String actionId)
+			long classPK, String actionId)
 		throws Exception {
 
 		long companyId = permissionChecker.getCompanyId();
@@ -88,7 +87,7 @@ public class WorkflowPermissionImpl implements WorkflowPermission {
 			}
 
 			boolean hasPermission = isWorkflowTaskAssignedToUser(
-				companyId, userId, workflowInstance);
+				permissionChecker, workflowInstance);
 
 			if (!hasPermission && actionId.equals(ActionKeys.VIEW)) {
 				return null;
@@ -102,17 +101,20 @@ public class WorkflowPermissionImpl implements WorkflowPermission {
 	}
 
 	protected boolean isWorkflowTaskAssignedToUser(
-			long companyId, long userId, WorkflowInstance workflowInstance)
+			PermissionChecker permissionChecker,
+			WorkflowInstance workflowInstance)
 		throws WorkflowException {
 
 		List<WorkflowTask> workflowTasks =
 			WorkflowTaskManagerUtil.getWorkflowTasksByWorkflowInstance(
-				companyId, workflowInstance.getWorkflowInstanceId(),
-				Boolean.FALSE, 0, 100, null);
+				permissionChecker.getCompanyId(),
+				workflowInstance.getWorkflowInstanceId(), Boolean.FALSE, 0, 100,
+				null);
 
 		for (WorkflowTask workflowTask : workflowTasks) {
 			if ((workflowTask.isAssignedToSingleUser()) &&
-				(workflowTask.getAssigneeUserId() == userId)) {
+				(workflowTask.getAssigneeUserId() ==
+					permissionChecker.getUserId())) {
 
 				return true;
 			}

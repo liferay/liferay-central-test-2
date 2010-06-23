@@ -69,7 +69,7 @@ public class JournalArticlePermission {
 			Boolean hasPermission = WorkflowPermissionUtil.hasPermission(
 				permissionChecker, article.getGroupId(),
 				JournalArticle.class.getName(), article.getResourcePrimKey(),
-				permissionChecker.getUserId(), actionId);
+				actionId);
 
 			if (hasPermission != null) {
 				return hasPermission.booleanValue();

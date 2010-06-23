@@ -56,8 +56,7 @@ public class BlogsEntryPermission {
 		if (entry.isPending() && !actionId.equals(ActionKeys.VIEW)) {
 			Boolean hasPermission = WorkflowPermissionUtil.hasPermission(
 				permissionChecker, entry.getGroupId(),
-				BlogsEntry.class.getName(), entry.getEntryId(),
-				permissionChecker.getUserId(), actionId);
+				BlogsEntry.class.getName(), entry.getEntryId(), actionId);
 
 			if (hasPermission != null) {
 				return hasPermission.booleanValue();

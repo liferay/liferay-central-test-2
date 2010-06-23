@@ -29,10 +29,10 @@ public class WorkflowPermissionUtil {
 
 	public static Boolean hasPermission(
 		PermissionChecker permissionChecker, long groupId, String className,
-		long classPK, long userId, String actionId) {
+		long classPK, String actionId) {
 
 		return getWorkflowPermission().hasPermission(
-			permissionChecker, groupId, className, classPK, userId, actionId);
+			permissionChecker, groupId, className, classPK, actionId);
 	}
 
 	public void setWorkflowPermission(WorkflowPermission WorkflowPermission) {

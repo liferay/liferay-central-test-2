@@ -25,6 +25,6 @@ public interface WorkflowPermission {
 
 	public Boolean hasPermission(
 		PermissionChecker permissionChecker, long groupId, String className,
-		long classPK, long userId, String actionId);
+		long classPK, String actionId);
 
 }
