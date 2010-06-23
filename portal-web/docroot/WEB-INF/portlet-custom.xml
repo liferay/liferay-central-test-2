@@ -368,7 +368,7 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 		<supported-public-render-parameter>categoryId</supported-public-render-parameter>
-		<supported-public-render-parameter>tag</supported-public-render-parameter>		
+		<supported-public-render-parameter>tag</supported-public-render-parameter>
 	</portlet>
 	<portlet>
 		<portlet-name>29</portlet-name>
@@ -2241,6 +2241,46 @@
         </supports>
         <resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
     </portlet>
+    <portlet>
+		<portlet-name>157</portlet-name>
+		<display-name>Workflow Instances</display-name>
+		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
+		<init-param>
+			<name>view-action</name>
+			<value>/workflow_instances/view</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>158</portlet-name>
+		<display-name>My Workflow Instances</display-name>
+		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
+		<init-param>
+			<name>view-action</name>
+			<value>/my_workflow_instances/view</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 	<custom-window-state>
 		<window-state>exclusive</window-state>
 	</custom-window-state>

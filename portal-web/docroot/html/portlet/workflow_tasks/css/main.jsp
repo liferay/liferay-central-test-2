@@ -23,7 +23,7 @@
 </liferay-util:buffer>
 
 <%
-html = StringUtil.replace(html, "documentLibraryPanelContainer", "workfloTaskPanelContainer");
+html = StringUtil.replace(html, "documentLibraryPanelContainer", "workflowTaskPanelContainer");
 html = StringUtil.replace(html, "file-entries", "tasks");
 html = StringUtil.replace(html, "file-entry", "task");
 html = StringUtil.replace(html, "portlet-document-library", "portlet-workflow-tasks");

@@ -122,6 +122,10 @@ public class PortletKeys {
 
 	public static final String MY_PLACES = "49";
 
+	public static final String MY_WORKFLOW_INSTANCES = "158";
+
+	public static final String MY_WORKFLOW_TASKS = "153";
+
 	public static final String NESTED_PORTLETS = "118";
 
 	public static final String ORGANIZATION_ADMIN = "80";
@@ -194,12 +198,12 @@ public class PortletKeys {
 
 	public static final String WIKI_ADMIN = "154";
 
-	public static final String WORKFLOW_TASKS = "150";
+	public static final String WORKFLOW_CONFIGURATION = "152";
 
 	public static final String WORKFLOW_DEFINITIONS = "151";
 
-	public static final String WORKFLOW_CONFIGURATION = "152";
+	public static final String WORKFLOW_INSTANCES = "157";
 
-	public static final String MY_WORKFLOW_TASKS = "153";
+	public static final String WORKFLOW_TASKS = "150";
 
 }
