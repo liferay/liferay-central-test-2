@@ -129,7 +129,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		boolean workflowEnabled = WorkflowThreadLocal.isEnabled();
 
-		WorkflowThreadLocal.setEnabled(workflowEnabled);
+		WorkflowThreadLocal.setEnabled(false);
 
 		try {
 			return addDiscussionMessage(
