@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.MinifierUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.File;
@@ -130,16 +131,27 @@ public class ComboServlet extends HttpServlet {
 		String fileContentKey = path.concat(StringPool.QUESTION).concat(
 			minifierType);
 
-		byte[] fileContent = _fileContents.get(fileContentKey);
+		FileContentBag fileContentBag = _fileContents.get(fileContentKey);
 
-		if (fileContent != null) {
-			return fileContent;
+		if (fileContentBag != null && !PropsValues.COMBO_SERVLET_DEVELOPMENT) {
+			return fileContentBag._fileContent;
 		}
 
 		File file = getFile(path);
 
+		long lastModified = file.lastModified();
+
+		if (fileContentBag != null && PropsValues.COMBO_SERVLET_DEVELOPMENT) {
+			if (lastModified == fileContentBag._lastModifiedTime) {
+				return fileContentBag._fileContent;
+			}
+			else {
+				_fileContents.remove(fileContentKey, fileContentBag);
+			}
+ 		}
+
 		if (file == null) {
-			fileContent = _EMPTY_FILE_CONTENT;
+			fileContentBag = _EMPTY_FILE_CONTENT_BAG;
 		}
 		else {
 			String stringFileContent = FileUtil.read(file);
@@ -153,26 +165,40 @@ public class ComboServlet extends HttpServlet {
 					stringFileContent);
 			}
 
-			fileContent = stringFileContent.getBytes(StringPool.UTF8);
+			fileContentBag = new FileContentBag(
+				stringFileContent.getBytes(StringPool.UTF8), lastModified);
 		}
 
-		byte[] oldFileContent = _fileContents.putIfAbsent(
-			fileContentKey, fileContent);
+		FileContentBag oldFileContentBag = _fileContents.putIfAbsent(
+			fileContentKey, fileContentBag);
 
-		if (oldFileContent != null) {
-			fileContent = oldFileContent;
+		if (oldFileContentBag != null) {
+			fileContentBag = oldFileContentBag;
 		}
 
-		return fileContent;
+		return fileContentBag._fileContent;
+	}
+
+	private static class FileContentBag {
+
+		public FileContentBag(byte[] fileContent, long lastModifiedTime) {
+			_fileContent = fileContent;
+			_lastModifiedTime = lastModifiedTime;
+		}
+
+		private byte[] _fileContent;
+		private long _lastModifiedTime;
+
 	}
 
 	private static final String _CSS_EXTENSION = "css";
 
-	private static final byte[] _EMPTY_FILE_CONTENT = new byte[0];
+	private static final FileContentBag _EMPTY_FILE_CONTENT_BAG =
+		new FileContentBag(new byte[0], 0);
 
 	private static final String _JAVASCRIPT_DIR = "html/js";
 
-	private ConcurrentMap<String, byte[]> _fileContents =
-		new ConcurrentHashMap<String, byte[]>();
+	private ConcurrentMap<String, FileContentBag> _fileContents =
+		new ConcurrentHashMap<String, FileContentBag>();
 
 }
