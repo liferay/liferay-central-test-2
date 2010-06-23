@@ -41,7 +41,6 @@ import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Portlet;
@@ -734,8 +733,8 @@ public class StagingUtil {
 			Group stagingGroup = GroupServiceUtil.addGroup(
 				liveGroup.getGroupId(),
 				liveGroup.getDescriptiveName() + " (Staging)",
-				liveGroup.getDescription(),
-				GroupConstants.TYPE_COMMUNITY_PRIVATE, null,
+				liveGroup.getDescription(), liveGroup.getType(),
+				liveGroup.getFriendlyURL().concat("-staging"),
 				liveGroup.isActive(), null);
 
 			if (liveGroup.hasPrivateLayouts()) {
