@@ -122,7 +122,7 @@ pageContext.setAttribute("portletURL", portletURL);
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 		%>
 
-		<%= LanguageUtil.format(pageContext, "community-x-does-not-have-any-private-pages", group.getDescriptiveName()) %>
+		<liferay-ui:message arguments="<%= group.getDescriptiveName() %>" key="community-x-does-not-have-any-private-pages" />
 	</liferay-ui:error>
 
 	<liferay-ui:error exception="<%= RequiredGroupException.class %>">

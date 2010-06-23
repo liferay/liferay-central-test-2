@@ -107,7 +107,7 @@ if (!tabs2.equals("pages")) {
 	</c:if>
 
 	<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.KEYWORD_CONFLICT %>">
-		<%= LanguageUtil.format(pageContext, "please-enter-a-friendly-url-that-does-not-conflict-with-the-keyword-x", lfurle.getKeywordConflict()) %>
+		<liferay-ui:message arguments="<%= lfurle.getKeywordConflict() %>" key="please-enter-a-friendly-url-that-does-not-conflict-with-the-keyword-x" />
 	</c:if>
 
 	<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.POSSIBLE_DUPLICATE %>">
@@ -136,7 +136,7 @@ if (!tabs2.equals("pages")) {
 	<c:when test='<%= tabs2.equals("virtual-host") %>'>
 		<liferay-ui:message key="enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url" />
 
-		<%= LanguageUtil.format(pageContext, "for-example,-if-the-public-virtual-host-is-www.helloworld.com-and-the-friendly-url-is-/helloworld", new Object[] {HttpUtil.getProtocol(request), themeDisplay.getPortalURL() + themeDisplay.getPathFriendlyURLPublic()}) %>
+		<liferay-ui:message arguments="<%= new Object[] {HttpUtil.getProtocol(request), themeDisplay.getPortalURL() + themeDisplay.getPathFriendlyURLPublic()} %>" key="for-example,-if-the-public-virtual-host-is-www.helloworld.com-and-the-friendly-url-is-/helloworld" />
 
 		<br /><br />
 
@@ -178,7 +178,7 @@ if (!tabs2.equals("pages")) {
 
 			<liferay-ui:message key="enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages" />
 
-			<%= LanguageUtil.format(pageContext, "the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages", new Object[] {publicVirtualHost + themeDisplay.getPathFriendlyURLPublic(), themeDisplay.getPortalURL() + themeDisplay.getPathFriendlyURLPrivateGroup()}) %>
+			<liferay-ui:message arguments="<%= new Object[] {publicVirtualHost + themeDisplay.getPathFriendlyURLPublic(), themeDisplay.getPortalURL() + themeDisplay.getPathFriendlyURLPrivateGroup()} %>" key="the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages" />
 
 			<br /><br />
 
@@ -284,7 +284,7 @@ if (!tabs2.equals("pages")) {
 			<aui:a href="http://www.sitemaps.org" target="_blank">http://www.sitemaps.org</aui:a>
 		</liferay-util:buffer>
 
-		<liferay-ui:message key="the-sitemap-protocol-notifies-search-engines-of-the-structure-of-the-website" /> <%= LanguageUtil.format(pageContext, "see-x-for-more-information", new Object[] {linkContent}) %>
+		<liferay-ui:message key="the-sitemap-protocol-notifies-search-engines-of-the-structure-of-the-website" /> <liferay-ui:message arguments="<%= linkContent %>" key="see-x-for-more-information" />
 
 		<br /><br />
 
@@ -371,13 +371,13 @@ if (!tabs2.equals("pages")) {
 		%>
 
 		<div class="portlet-msg-info">
-			<%= LanguageUtil.format(pageContext, "you-can-configure-the-top-level-pages-of-this-public-website-to-merge-with-the-top-level-pages-of-the-public-x-community", company.getGroup().getDescriptiveName(), false) %>
+			<liferay-ui:message arguments="<%= company.getGroup().getDescriptiveName() %>" key="you-can-configure-the-top-level-pages-of-this-public-website-to-merge-with-the-top-level-pages-of-the-public-x-community" />
 		</div>
 
 		<table class="lfr-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.format(pageContext, "merge-x-public-pages", company.getGroup().getDescriptiveName(), false) %>
+				<liferay-ui:message arguments="<%= company.getGroup().getDescriptiveName() %>" key="merge-x-public-pages" />
 			</td>
 			<td>
 				<liferay-ui:input-checkbox param="mergeGuestPublicPages" defaultValue="<%= mergeGuestPublicPages %>" />
