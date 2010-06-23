@@ -363,7 +363,14 @@ public class LayoutImporter {
 			long oldPlid = GetterUtil.getLong(
 				portletElement.attributeValue("old-plid"));
 
-			Layout layout = LayoutUtil.findByPrimaryKey(plid);
+			Layout layout = null;
+
+			try {
+				layout = LayoutUtil.findByPrimaryKey(plid);
+			}
+			catch (NoSuchLayoutException nsle) {
+				continue;
+			}
 
 			context.setPlid(plid);
 			context.setOldPlid(oldPlid);
@@ -620,12 +627,6 @@ public class LayoutImporter {
 			boolean useThemeZip, Element rootElement, Element layoutElement)
 		throws Exception {
 
-		String path = layoutElement.attributeValue("path");
-
-		if (!context.isPathNotProcessed(path)) {
-			return;
-		}
-
 		long groupId = context.getGroupId();
 		long sourceGroupId = context.getSourceGroupId();
 
@@ -639,8 +640,14 @@ public class LayoutImporter {
 
 		if (deleteLayout) {
 			try {
-				LayoutLocalServiceUtil.deleteLayout(
-					context.getGroupId(), privateLayout, oldLayoutId);
+				Layout layout = LayoutLocalServiceUtil.getLayout(
+					groupId, privateLayout, oldLayoutId);
+
+				if (layout != null) {
+					newLayoutsMap.put(oldLayoutId, layout);
+
+					LayoutLocalServiceUtil.deleteLayout(layout);
+				}
 			}
 			catch (NoSuchLayoutException nsle) {
 				_log.warn(
@@ -648,6 +655,12 @@ public class LayoutImporter {
 						privateLayout + ", " + oldLayoutId + "}");
 			}
 
+			return;
+		}
+
+		String path = layoutElement.attributeValue("path");
+
+		if (!context.isPathNotProcessed(path)) {
 			return;
 		}
 
