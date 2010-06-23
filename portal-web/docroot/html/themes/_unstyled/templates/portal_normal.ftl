@@ -48,8 +48,8 @@
 			</div>
 		</#if>
 
-		<#if $has_navigation>
-			<#include "$full_templates_path/navigation.vm" />
+		<#if has_navigation>
+			<#include "${full_templates_path}/navigation.ftl" />
 		</#if>
 	</header>
 

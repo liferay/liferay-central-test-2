@@ -199,10 +199,10 @@
 		<#assign css_class = css_class + " guest-community" />
 	</#if>
 
-	<#if $is_signed_in>
-		<#assign $css_class = $css_class + " signed-in" />
+	<#if is_signed_in>
+		<#assign css_class = css_class + " signed-in" />
 	<#else>
-		<#assign $css_class = $css_class + " signed-out" />
+		<#assign css_class = css_class + " signed-out" />
 	</#if>
 
 	<#if layout.isPublicLayout()>
@@ -230,10 +230,10 @@
 
 	<#assign community_default_private_url = htmlUtil.escape(my_places_portlet_url.toString()) />
 
-	<#assign $community_default_url = $community_default_public_url/>
+	<#assign community_default_url = community_default_public_url/>
 
-	<#if $layout.isPrivateLayout()>
-		<#assign $community_default_url = $community_default_private_url/>
+	<#if layout.isPrivateLayout()>
+		<#assign community_default_url = community_default_private_url/>
 	</#if>
 </#if>
 
@@ -262,6 +262,8 @@
 </#if>
 
 <#-- ---------- Navigation ---------- -->
+
+<#assign has_navigation = false />
 
 <#if navItems??>
 	<#assign nav_items = navItems/>
