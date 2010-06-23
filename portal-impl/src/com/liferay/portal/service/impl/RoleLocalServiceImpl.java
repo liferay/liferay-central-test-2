@@ -225,6 +225,10 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			group = layout.getGroup();
 		}
 
+		if (group.isStagingGroup()) {
+			group = group.getLiveGroup();
+		}
+
 		Role role = null;
 
 		if (group.isCommunity() || group.isLayoutPrototype() ||
@@ -396,8 +400,8 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			long userId, long companyId, String[] names, boolean inherited)
 		throws PortalException, SystemException {
 
-		for (int i = 0; i < names.length; i++) {
-			if (hasUserRole(userId, companyId, names[i], inherited)) {
+		for (String name : names) {
+			if (hasUserRole(userId, companyId, name, inherited)) {
 				return true;
 			}
 		}
