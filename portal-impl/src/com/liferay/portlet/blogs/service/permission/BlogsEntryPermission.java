@@ -16,7 +16,9 @@ package com.liferay.portlet.blogs.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.workflow.permission.WorkflowPermissionUtil;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
@@ -50,6 +52,17 @@ public class BlogsEntryPermission {
 	public static boolean contains(
 		PermissionChecker permissionChecker, BlogsEntry entry,
 		String actionId) {
+
+		if (entry.isPending() && !actionId.equals(ActionKeys.VIEW)) {
+			Boolean hasPermission = WorkflowPermissionUtil.hasPermission(
+				permissionChecker, entry.getGroupId(),
+				BlogsEntry.class.getName(), entry.getEntryId(),
+				permissionChecker.getUserId(), actionId);
+
+			if (hasPermission != null) {
+				return hasPermission.booleanValue();
+			}
+		}
 
 		if (permissionChecker.hasOwnerPermission(
 				entry.getCompanyId(), BlogsEntry.class.getName(),

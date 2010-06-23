@@ -27,7 +27,7 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 %>
 
 <c:choose>
-	<c:when test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW) && (entry.isApproved() || BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE)) %>">
+	<c:when test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW) && (entry.isApproved() || (entry.getUserId() == user.getUserId()) || BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE)) %>">
 		<div class="entry <%= entry.isApproved() ? "" : "draft" %>">
 			<div class="entry-content">
 

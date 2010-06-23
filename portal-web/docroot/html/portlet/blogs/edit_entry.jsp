@@ -126,18 +126,24 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 			</aui:field-wrapper>
 		</c:if>
 
+		<%
+		boolean pending = false;
+
+		if (entry != null) {
+			pending = entry.isPending();
+		}
+		%>
+
+		<c:if test="<%= pending %>">
+			<div class="portlet-msg-info">
+				<liferay-ui:message key="there-is-a-publication-workflow-in-process" />
+			</div>
+		</c:if>
+
 		<aui:button-row>
 			<c:if test="<%= (entry == null) || !entry.isApproved() %>">
 				<aui:button name="saveDraftButton" onClick='<%= renderResponse.getNamespace() + "saveEntry(true);" %>' type="button" value='<%= ((entry != null) && entry.isPending()) ? "save" : "save-draft" %>' />
 			</c:if>
-
-			<%
-			boolean pending = false;
-
-			if (entry != null) {
-				pending = entry.isPending();
-			}
-			%>
 
 			<c:if test="<%= (entry != null) && entry.isApproved() && WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(entry.getCompanyId(), entry.getGroupId(), BlogsEntry.class.getName()) %>">
 				<div class="portlet-msg-info">
@@ -146,12 +152,6 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 			</c:if>
 
 			<aui:button disabled="<%= pending %>" name="saveButton" type="submit" value="publish" />
-
-			<c:if test="<%= pending %>">
-				<liferay-ui:icon-help
-					message="there-is-a-publication-workflow-in-process"
-				/>
-			</c:if>
 
 			<aui:button name="cancelButton" onClick="<%= redirect %>" type="cancel" />
 		</aui:button-row>
