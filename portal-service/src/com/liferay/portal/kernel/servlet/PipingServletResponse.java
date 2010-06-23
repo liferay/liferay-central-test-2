@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 
 import javax.servlet.ServletOutputStream;
@@ -89,9 +88,7 @@ public class PipingServletResponse extends HttpServletResponseWrapper {
 			pageContext.getOut());
 	}
 
-	public ServletOutputStream getOutputStream()
-		throws UnsupportedEncodingException {
-
+	public ServletOutputStream getOutputStream() {
 		if (_servletOutputStream == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
@@ -107,7 +104,7 @@ public class PipingServletResponse extends HttpServletResponseWrapper {
 		return  _servletOutputStream;
 	}
 
-	public PrintWriter getWriter() throws UnsupportedEncodingException {
+	public PrintWriter getWriter() {
 		if (_printWriter == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
