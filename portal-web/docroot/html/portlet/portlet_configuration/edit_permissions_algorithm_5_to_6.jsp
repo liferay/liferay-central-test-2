@@ -39,7 +39,7 @@ String selResourceDescription = modelResourceDescription;
 String selResourceName = modelResourceName;
 
 if (Validator.isNull(modelResource)) {
-	PortletURL portletURL = renderResponse.createActionURL();
+	PortletURLImpl portletURL = (PortletURLImpl)renderResponse.createActionURL();
 
 	portletURL.setPortletId(portletResource);
 

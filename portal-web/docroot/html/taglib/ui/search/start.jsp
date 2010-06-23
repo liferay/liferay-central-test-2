@@ -28,7 +28,7 @@ String keywords = ParamUtil.getString(request, namespace + "keywords");
 LiferayPortletURL portletURL = (LiferayPortletURL)renderResponse.createRenderURL();
 
 portletURL.setPortletId(PortletKeys.SEARCH);
-	
+
 portletURL.setWindowState(WindowState.MAXIMIZED);
 portletURL.setPortletMode(PortletMode.VIEW);
 
