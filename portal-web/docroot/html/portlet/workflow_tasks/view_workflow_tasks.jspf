@@ -77,7 +77,7 @@ try {
 }
 catch (Exception e) {
 	if (_log.isWarnEnabled()) {
-		_log.warn("Error retrieving the tasks of user " + user.getUserId(), e);
+		_log.warn("Error retrieving tasks for user " + user.getUserId(), e);
 	}
 %>
 

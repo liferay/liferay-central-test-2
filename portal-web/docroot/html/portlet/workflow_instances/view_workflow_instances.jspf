@@ -42,7 +42,7 @@ try {
 }
 catch (Exception e) {
 	if (_log.isWarnEnabled()) {
-		_log.warn("Error retrieving the workflow instances", e);
+		_log.warn("Error retrieving workflow instances", e);
 	}
 %>
 
