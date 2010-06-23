@@ -90,7 +90,7 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 		}
 
 		Map<String, InvokerPortlet> portletInstances = _pool.get(
-			portlet.getRootPortletId());                                                                  
+			portlet.getRootPortletId());
 
 		if (portletInstances == null) {
 			portletInstances = new ConcurrentHashMap<String, InvokerPortlet>();
