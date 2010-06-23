@@ -325,18 +325,24 @@ if (Validator.isNull(redirect)) {
 		<liferay-ui:captcha url="<%= captchaURL %>" />
 	</c:if>
 
+	<%
+	boolean pending = false;
+
+	if (message != null) {
+		pending = message.isPending();
+	}
+	%>
+
+	<c:if test="<%= pending %>">
+		<div class="portlet-msg-info">
+			<liferay-ui:message key="there-is-a-publication-workflow-in-process" />
+		</div>
+	</c:if>
+
 	<aui:button-row>
 		<c:if test="<%= (message == null) || !message.isApproved() %>">
 			<aui:button name="saveDraftButton" onClick='<%= renderResponse.getNamespace() + "saveMessage(true);" %>' type="button" value='<%= ((message != null) && message.isPending()) ? "save" : "save-draft" %>' />
 		</c:if>
-
-		<%
-		boolean pending = false;
-
-		if (message != null) {
-			pending = message.isPending();
-		}
-		%>
 
 		<c:if test="<%= (message != null) && message.isApproved() && WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(message.getCompanyId(), message.getGroupId(), MBMessage.class.getName()) %>">
 			<div class="portlet-msg-info">
@@ -345,12 +351,6 @@ if (Validator.isNull(redirect)) {
 		</c:if>
 
 		<aui:button disabled="<%= pending %>" name="saveButton" type="submit" value="publish" />
-
-		<c:if test="<%= pending %>">
-			<liferay-ui:icon-help
-				message="there-is-a-publication-workflow-in-process"
-			/>
-		</c:if>
 
 		<c:if test="<%= MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_FILE) %>">
 
