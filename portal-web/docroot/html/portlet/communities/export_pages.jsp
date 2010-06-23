@@ -62,6 +62,14 @@ if (selGroup.isStagingGroup()) {
 	treeKey = "stageLayoutsTree";
 }
 
+boolean localPublishing = ParamUtil.getBoolean(request, "localPublishing", true);
+
+if (!localPublishing) {
+	popupId = "publish-to-remote";
+	selGroup = liveGroup;
+	treeKey = "remoteLayoutsTree";
+}
+
 long selPlid = ParamUtil.getLong(request, "selPlid", LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
 Layout selLayout = null;
@@ -94,14 +102,6 @@ for (int i = 0; i < selectedPlids.length; i++) {
 	}
 	catch (NoSuchLayoutException nsle) {
 	}
-}
-
-boolean localPublishing = ParamUtil.getBoolean(request, "localPublishing", true);
-
-if (!localPublishing) {
-	popupId = "publish-to-remote";
-	selGroup = liveGroup;
-	treeKey = "remoteLayoutsTree";
 }
 
 boolean privateLayout = tabs1.equals("private-pages");
