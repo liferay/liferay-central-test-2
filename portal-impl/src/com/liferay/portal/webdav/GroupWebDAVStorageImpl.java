@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.webdav.BaseWebDAVStorageImpl;
 import com.liferay.portal.kernel.webdav.Resource;
 import com.liferay.portal.kernel.webdav.WebDAVRequest;
 import com.liferay.portal.kernel.webdav.WebDAVUtil;
+import com.liferay.portal.model.Group;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +33,16 @@ import java.util.List;
 public class GroupWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 	public Resource getResource(WebDAVRequest webDavRequest) {
+		verifyGroup(webDavRequest);
+
 		String path = getRootPath() + webDavRequest.getPath();
 
 		return new BaseResourceImpl(path, StringPool.BLANK, StringPool.BLANK);
 	}
 
 	public List<Resource> getResources(WebDAVRequest webDavRequest) {
+		verifyGroup(webDavRequest);
+
 		List<Resource> resources = new ArrayList<Resource>();
 
 		String path = getRootPath() + webDavRequest.getPath();
@@ -47,6 +52,30 @@ public class GroupWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 
 		return resources;
+	}
+
+	protected void verifyGroup(WebDAVRequest webDavRequest) {
+		String path = webDavRequest.getPath();
+
+		try {
+			long companyId = webDavRequest.getCompanyId();
+			long userId = webDavRequest.getUserId();
+
+			List<Group> groups =
+				CompanyWebDAVStorageImpl.getGroups(companyId, userId);
+
+			for (Group group : groups) {
+				if (path.equals(group.getFriendlyURL())) {
+					return;
+				}
+			}
+		}
+		catch (Exception e) {
+		}
+
+		throw new RuntimeException(
+			"Invalid group for given credentials " +
+				webDavRequest.getRootPath() + path);
 	}
 
 }

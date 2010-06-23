@@ -50,53 +50,21 @@ public class CompanyWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			long companyId = webDavRequest.getCompanyId();
 			long userId = webDavRequest.getUserId();
 
-			List<Resource> resources = new ArrayList<Resource>();
-
-			// Communities
-
-			LinkedHashMap<String, Object> params =
-				new LinkedHashMap<String, Object>();
-
-			params.put("usersGroups", userId);
-
-			List<Group> groups = GroupLocalServiceUtil.search(
-				companyId, null, null, params, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS);
-
-			for (Group group : groups) {
-				Resource resource = getResource(group);
-
-				resources.add(resource);
-			}
-
-			// Organizations
-
-			groups = GroupLocalServiceUtil.getUserOrganizationsGroups(
-				userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-
-			for (Group group : groups) {
-				Resource resource = getResource(group);
-
-				resources.add(resource);
-			}
-
-			// User
-
-			Group group = GroupLocalServiceUtil.getUserGroup(companyId, userId);
-
-			Resource resource = getResource(group);
-
-			resources.add(resource);
-
-			return resources;
+			return getResources(companyId, userId);
 		}
 		catch (Exception e) {
 			throw new WebDAVException(e);
 		}
 	}
 
-	protected Resource getResource(Group group) throws WebDAVException {
-		try {
+	protected List<Resource> getResources(long companyId, long userId)
+		throws Exception {
+
+		List<Group> groups = getGroups(companyId, userId);
+
+		List<Resource> resources = new ArrayList<Resource>(groups.size());
+
+		for (Group group : groups) {
 			Company company = CompanyLocalServiceUtil.getCompanyById(
 				group.getCompanyId());
 
@@ -108,11 +76,38 @@ public class CompanyWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			name = name.substring(1, name.length());
 
-			return new BaseResourceImpl(parentPath, name, name);
+			resources.add(new BaseResourceImpl(parentPath, name, name));
 		}
-		catch (Exception e) {
-			throw new WebDAVException(e);
-		}
+
+		return resources;
+	}
+
+	protected static List<Group> getGroups(long companyId, long userId)
+		throws Exception {
+
+		List<Group> groups = new ArrayList<Group>();
+
+		// Communities
+
+		LinkedHashMap<String, Object> params =
+			new LinkedHashMap<String, Object>();
+
+		params.put("usersGroups", userId);
+
+		groups.addAll(GroupLocalServiceUtil.search(
+			companyId, null, null, params, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS));
+
+		// Organizations
+
+		groups.addAll(GroupLocalServiceUtil.getUserOrganizationsGroups(
+			userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS));
+
+		// User
+
+		groups.add(GroupLocalServiceUtil.getUserGroup(companyId, userId));
+
+		return groups;
 	}
 
 }
