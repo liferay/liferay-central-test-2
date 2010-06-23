@@ -165,7 +165,7 @@ public class BaseLDAPToPortalConverter implements LDAPToPortalConverter {
 		user.setEmailAddress(emailAddress);
 		user.setFirstName(firstName);
 		user.setJobTitle(jobTitle);
-		user.setLanguageId(locale.getLanguage());
+		user.setLanguageId(locale.toString());
 		user.setLastName(lastName);
 		user.setMiddleName(middleName);
 		user.setOpenId(openId);
