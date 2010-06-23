@@ -79,4 +79,6 @@ public interface LiferayPortletURL
 
 	public void setPortletId(String portletId);
 
+	public void setRefererPlid(long refererPlid);
+
 }
