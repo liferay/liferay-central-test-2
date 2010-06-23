@@ -43,7 +43,7 @@ List groupNames = (List)objArray[8];
 				String taglibHREF = "javascript:" + renderResponse.getNamespace() + "removeGroup(" + i + ", '" + target + "');";
 		%>
 
-				<span class="permission-scope"><%= group.getName() %><aui:a cssClass="permission-scope-delete" href="<%= taglibHREF %>"><span>x</span></aui:a></span>
+				<span class="permission-scope"><%= group.getDescriptiveName() %><aui:a cssClass="permission-scope-delete" href="<%= taglibHREF %>"><span>x</span></aui:a></span>
 
 		<%
 			}

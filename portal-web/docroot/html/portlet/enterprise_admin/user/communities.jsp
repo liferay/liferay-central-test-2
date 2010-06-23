@@ -49,7 +49,7 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 	>
 		<liferay-ui:search-container-column-text
 			name="name"
-			property="name"
+			value="<%= HtmlUtil.escape(group.getDescriptiveName()) %>"
 		/>
 
 		<liferay-ui:search-container-column-text

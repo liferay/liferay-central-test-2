@@ -38,7 +38,7 @@ Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
 <liferay-ui:success key="membership_reply_sent" message="your-reply-will-be-sent-to-the-user-by-email" />
 
-<liferay-ui:message key="edit-requests-for-community" />: <%= group.getName() %>
+<liferay-ui:message key="edit-requests-for-community" />: <%= HtmlUtil.escape(group.getDescriptiveName()) %>
 
 <br /><br />
 

@@ -59,7 +59,7 @@ request.setAttribute("edit_community_assignments.jsp-portletURL", portletURL);
 	<c:choose>
 		<c:when test="<%= selUser == null %>">
 			<div>
-				<liferay-ui:message key="edit-assignments-for-community" />: <%= group.getName() %>
+				<liferay-ui:message key="edit-assignments-for-community" />: <%= group.getDescriptiveName() %>
 			</div>
 
 			<br />

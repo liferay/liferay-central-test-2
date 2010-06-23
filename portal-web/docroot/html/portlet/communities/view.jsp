@@ -122,7 +122,7 @@ pageContext.setAttribute("portletURL", portletURL);
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 		%>
 
-		<%= LanguageUtil.format(pageContext, "community-x-does-not-have-any-private-pages", group.getName()) %>
+		<%= LanguageUtil.format(pageContext, "community-x-does-not-have-any-private-pages", group.getDescriptiveName()) %>
 	</liferay-ui:error>
 
 	<liferay-ui:error exception="<%= RequiredGroupException.class %>">
@@ -186,7 +186,7 @@ pageContext.setAttribute("portletURL", portletURL);
 
 		StringBundler sb = new StringBundler();
 
-		sb.append(group.getName());
+		sb.append(group.getDescriptiveName());
 
 		int publicLayoutsPageCount = group.getPublicLayoutsPageCount();
 		int privateLayoutsPageCount = group.getPrivateLayoutsPageCount();

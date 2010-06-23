@@ -101,7 +101,7 @@ if (step == 1) {
 					<liferay-ui:search-container-column-text
 						href="<%= rowHREF %>"
 						name="name"
-						property="name"
+						value="<%= HtmlUtil.escape(group.getDescriptiveName()) %>"
 					/>
 
 					<liferay-ui:search-container-column-text

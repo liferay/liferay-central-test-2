@@ -48,7 +48,7 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 
 	<aui:fieldset>
 		<aui:field-wrapper label="community">
-			<%= group.getName() %>
+			<%= group.getDescriptiveName() %>
 		</aui:field-wrapper>
 
 		<c:if test="<%= Validator.isNotNull(group.getDescription()) %>">

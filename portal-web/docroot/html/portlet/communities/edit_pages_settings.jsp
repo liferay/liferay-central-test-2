@@ -371,13 +371,13 @@ if (!tabs2.equals("pages")) {
 		%>
 
 		<div class="portlet-msg-info">
-			<liferay-ui:message key="you-can-configure-the-top-level-pages-of-this-public-website-to-merge-with-the-top-level-pages-of-the-public-guest-community" />
+			<%= LanguageUtil.format(pageContext, "you-can-configure-the-top-level-pages-of-this-public-website-to-merge-with-the-top-level-pages-of-the-public-x-community", company.getGroup().getDescriptiveName(), false) %>
 		</div>
 
 		<table class="lfr-table">
 		<tr>
 			<td>
-				<liferay-ui:message key="merge-guest-public-pages" />
+				<%= LanguageUtil.format(pageContext, "merge-x-public-pages", company.getGroup().getDescriptiveName(), false) %>
 			</td>
 			<td>
 				<liferay-ui:input-checkbox param="mergeGuestPublicPages" defaultValue="<%= mergeGuestPublicPages %>" />

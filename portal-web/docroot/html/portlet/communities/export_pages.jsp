@@ -125,7 +125,7 @@ else if (liveGroup.isUser()) {
 	user2 = UserLocalServiceUtil.getUserById(liveGroup.getClassPK());
 }
 
-String rootNodeName = liveGroup.getName();
+String rootNodeName = liveGroup.getDescriptiveName();
 
 if (liveGroup.isOrganization()) {
 	rootNodeName = organization.getName();

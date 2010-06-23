@@ -63,13 +63,8 @@ else {
 
 				String blogType = LanguageUtil.get(pageContext, "personal");
 
-				if (group.isCommunity()) {
-					blogType = group.getName();// + " " + LanguageUtil.get(pageContext, "community");
-				}
-				else if (group.isOrganization()) {
-					Organization organization = OrganizationLocalServiceUtil.getOrganization(group.getClassPK());
-
-					blogType = organization.getName();// + " " + LanguageUtil.get(pageContext, "organization");
+				if (group.isCommunity() || group.isOrganization()) {
+					blogType = group.getDescriptiveName();// + " " + LanguageUtil.get(pageContext, "community");
 				}
 
 				int entryCount = BlogsEntryLocalServiceUtil.getGroupUserEntriesCount(group.getGroupId(), user2.getUserId(), WorkflowConstants.STATUS_APPROVED);

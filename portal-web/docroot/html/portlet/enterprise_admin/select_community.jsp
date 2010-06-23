@@ -80,7 +80,7 @@ portletURL.setParameter("target", target);
 			sb.append("selectGroup('");
 			sb.append(group.getGroupId());
 			sb.append("', '");
-			sb.append(UnicodeFormatter.toString(group.getName()));
+			sb.append(UnicodeFormatter.toString(group.getDescriptiveName()));
 			sb.append("', '");
 			sb.append(target);
 			sb.append("');");
@@ -92,7 +92,7 @@ portletURL.setParameter("target", target);
 			<liferay-ui:search-container-column-text
 				href="<%= rowHREF %>"
 				name="name"
-				property="name"
+				value="<%= HtmlUtil.escape(group.getDescriptiveName()) %>"
 			/>
 
 			<liferay-ui:search-container-column-text

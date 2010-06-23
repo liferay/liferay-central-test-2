@@ -25,7 +25,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
-String groupName = group.getName();
+String groupName = group.getDescriptiveName();
 
 Role role = (Role)request.getAttribute(WebKeys.ROLE);
 
@@ -36,10 +36,6 @@ int roleType = RoleConstants.TYPE_COMMUNITY;
 Organization organization = null;
 
 if (group.isOrganization()) {
-	organization = OrganizationLocalServiceUtil.getOrganization(group.getClassPK());
-
-	groupName = organization.getName();
-
 	roleType = RoleConstants.TYPE_ORGANIZATION;
 }
 

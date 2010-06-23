@@ -192,7 +192,7 @@ else {
 
 LayoutLister layoutLister = new LayoutLister();
 
-String rootNodeName = liveGroup.getName();
+String rootNodeName = liveGroup.getDescriptiveName();
 
 if (liveGroup.isOrganization()) {
 	rootNodeName = organization.getName();
@@ -313,7 +313,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) %>">
 			<div>
 				<liferay-ui:header
-					title='<%= LanguageUtil.get(pageContext, "edit-pages-for-community") + ": " + liveGroup.getName() %>'
+					title='<%= LanguageUtil.get(pageContext, "edit-pages-for-community") + ": " + liveGroup.getDescriptiveName() %>'
 				/>
 			</div>
 

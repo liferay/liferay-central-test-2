@@ -250,7 +250,7 @@ for (int i = 0; i < results.size(); i++) {
 		for (int j = 0; j < groups.size(); j++) {
 			Group group = (Group)groups.get(j);
 
-			sb.append(group.getName());
+			sb.append(group.getDescriptiveName());
 
 			if (j < groups.size() - 1) {
 				sb.append(StringPool.COMMA);
