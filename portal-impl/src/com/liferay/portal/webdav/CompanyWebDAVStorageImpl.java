@@ -14,20 +14,20 @@
 
 package com.liferay.portal.webdav;
 
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.webdav.BaseResourceImpl;
 import com.liferay.portal.kernel.webdav.BaseWebDAVStorageImpl;
 import com.liferay.portal.kernel.webdav.Resource;
 import com.liferay.portal.kernel.webdav.WebDAVException;
 import com.liferay.portal.kernel.webdav.WebDAVRequest;
+import com.liferay.portal.kernel.webdav.WebDAVUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.User;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
-import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -47,30 +47,30 @@ public class CompanyWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		throws WebDAVException {
 
 		try {
-			long companyId = webDavRequest.getCompanyId();
 			long userId = webDavRequest.getUserId();
 
-			return getResources(companyId, userId);
+			return getResources(userId);
 		}
 		catch (Exception e) {
 			throw new WebDAVException(e);
 		}
 	}
 
-	protected List<Resource> getResources(long companyId, long userId)
+	protected List<Resource> getResources(long userId)
 		throws Exception {
 
-		List<Group> groups = getGroups(companyId, userId);
+		User user = UserLocalServiceUtil.getUserById(userId);
+
+		Company company = CompanyLocalServiceUtil.getCompanyById(
+			user.getCompanyId());
+
+		List<Group> groups = WebDAVUtil.getGroups(user);
 
 		List<Resource> resources = new ArrayList<Resource>(groups.size());
 
 		for (Group group : groups) {
-			Company company = CompanyLocalServiceUtil.getCompanyById(
-				group.getCompanyId());
-
-			String webId = company.getWebId();
-
-			String parentPath = getRootPath() + StringPool.SLASH + webId;
+			String parentPath =
+				getRootPath() + StringPool.SLASH + company.getWebId();
 
 			String name = group.getFriendlyURL();
 
@@ -80,34 +80,6 @@ public class CompanyWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 
 		return resources;
-	}
-
-	protected static List<Group> getGroups(long companyId, long userId)
-		throws Exception {
-
-		List<Group> groups = new ArrayList<Group>();
-
-		// Communities
-
-		LinkedHashMap<String, Object> params =
-			new LinkedHashMap<String, Object>();
-
-		params.put("usersGroups", userId);
-
-		groups.addAll(GroupLocalServiceUtil.search(
-			companyId, null, null, params, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS));
-
-		// Organizations
-
-		groups.addAll(GroupLocalServiceUtil.getUserOrganizationsGroups(
-			userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS));
-
-		// User
-
-		groups.add(GroupLocalServiceUtil.getUserGroup(companyId, userId));
-
-		return groups;
 	}
 
 }

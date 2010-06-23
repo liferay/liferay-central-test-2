@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.webdav.BaseResourceImpl;
 import com.liferay.portal.kernel.webdav.BaseWebDAVStorageImpl;
 import com.liferay.portal.kernel.webdav.Resource;
+import com.liferay.portal.kernel.webdav.WebDAVException;
 import com.liferay.portal.kernel.webdav.WebDAVRequest;
 import com.liferay.portal.kernel.webdav.WebDAVUtil;
 import com.liferay.portal.model.Group;
@@ -32,7 +33,9 @@ import java.util.List;
  */
 public class GroupWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
-	public Resource getResource(WebDAVRequest webDavRequest) {
+	public Resource getResource(WebDAVRequest webDavRequest)
+		throws WebDAVException {
+
 		verifyGroup(webDavRequest);
 
 		String path = getRootPath() + webDavRequest.getPath();
@@ -40,7 +43,9 @@ public class GroupWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		return new BaseResourceImpl(path, StringPool.BLANK, StringPool.BLANK);
 	}
 
-	public List<Resource> getResources(WebDAVRequest webDavRequest) {
+	public List<Resource> getResources(WebDAVRequest webDavRequest)
+		throws WebDAVException {
+
 		verifyGroup(webDavRequest);
 
 		List<Resource> resources = new ArrayList<Resource>();
@@ -54,15 +59,15 @@ public class GroupWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		return resources;
 	}
 
-	protected void verifyGroup(WebDAVRequest webDavRequest) {
+	protected void verifyGroup(WebDAVRequest webDavRequest)
+		throws WebDAVException {
+
 		String path = webDavRequest.getPath();
 
 		try {
-			long companyId = webDavRequest.getCompanyId();
 			long userId = webDavRequest.getUserId();
 
-			List<Group> groups =
-				CompanyWebDAVStorageImpl.getGroups(companyId, userId);
+			List<Group> groups = WebDAVUtil.getGroups(userId);
 
 			for (Group group : groups) {
 				if (path.equals(group.getFriendlyURL())) {
@@ -73,7 +78,7 @@ public class GroupWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		catch (Exception e) {
 		}
 
-		throw new RuntimeException(
+		throw new WebDAVException(
 			"Invalid group for given credentials " +
 				webDavRequest.getRootPath() + path);
 	}

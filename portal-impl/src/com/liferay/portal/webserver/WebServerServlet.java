@@ -16,7 +16,6 @@ package com.liferay.portal.webserver;
 
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.freemarker.FreeMarkerUtil;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.freemarker.FreeMarkerContext;
 import com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -25,16 +24,15 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
-import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.Validator_IW;
+import com.liferay.portal.kernel.webdav.WebDAVUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
@@ -45,7 +43,6 @@ import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.comparator.GroupFriendlyURLComparator;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -68,8 +65,6 @@ import java.io.InputStream;
 import java.text.Format;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -151,52 +146,6 @@ public class WebServerServlet extends HttpServlet {
 		Group group = user.getGroup();
 
 		return group.getGroupId();
-	}
-
-	protected List<Group> getGroups(User user) throws Exception {
-
-		// Guest
-
-		if (user.isDefaultUser()) {
-			List<Group> groups = new ArrayList<Group>();
-
-			Group group = GroupLocalServiceUtil.getGroup(
-				user.getCompanyId(), GroupConstants.GUEST);
-
-			groups.add(group);
-
-			return groups;
-		}
-
-		// Communities
-
-		LinkedHashMap<String, Object> params =
-			new LinkedHashMap<String, Object>();
-
-		params.put("usersGroups", user.getUserId());
-
-		OrderByComparator orderByComparator = new GroupFriendlyURLComparator(
-			true);
-
-		List<Group> groups = GroupLocalServiceUtil.search(
-			user.getCompanyId(), null, null, params, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, orderByComparator);
-
-		// Organizations
-
-		groups.addAll(
-			GroupLocalServiceUtil.getUserOrganizationsGroups(
-				user.getUserId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS));
-
-		// User
-
-		if (!user.isDefaultUser()) {
-			groups.add(user.getGroup());
-		}
-
-		Collections.sort(groups, orderByComparator);
-
-		return groups;
 	}
 
 	protected void sendDocumentLibrary(
@@ -422,7 +371,7 @@ public class WebServerServlet extends HttpServlet {
 
 		List<WebServerEntry> webServerEntries = new ArrayList<WebServerEntry>();
 
-		List<Group> groups = getGroups(user);
+		List<Group> groups = WebDAVUtil.getGroups(user);
 
 		for (Group group : groups) {
 			String name = HttpUtil.fixPath(group.getFriendlyURL());
