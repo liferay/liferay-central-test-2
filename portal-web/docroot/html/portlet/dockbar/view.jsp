@@ -228,7 +228,6 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 					portletURL.setPortletMode(PortletMode.VIEW);
 
 					portletURL.setParameter("struts_action", "/my_places/view");
-
 					portletURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
 
 					if (myPlace.getPublicLayoutsPageCount() > 0) {

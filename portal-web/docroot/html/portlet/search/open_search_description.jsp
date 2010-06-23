@@ -23,8 +23,9 @@ long groupId = ParamUtil.getLong(request, "groupId");
 
 LiferayPortletURL searchURL = (LiferayPortletURL)renderResponse.createRenderURL();
 
-searchURL.setEscapeXml(true);
 searchURL.setPortletId(PortletKeys.SEARCH);
+
+searchURL.setEscapeXml(true);
 
 searchURL.setParameter("struts_action", "/search/search");
 searchURL.setParameter("groupId", String.valueOf(groupId));

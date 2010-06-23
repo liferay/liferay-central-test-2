@@ -42,7 +42,7 @@ String selResourceDescription = modelResourceDescription;
 String selResourceName = modelResourceName;
 
 if (Validator.isNull(modelResource)) {
-	PortletURLImpl portletURL = (PortletURLImpl)renderResponse.createRenderURL();
+	LiferayPortletURL portletURL = (LiferayPortletURL)renderResponse.createRenderURL();
 
 	portletURL.setPortletId(portletResource);
 

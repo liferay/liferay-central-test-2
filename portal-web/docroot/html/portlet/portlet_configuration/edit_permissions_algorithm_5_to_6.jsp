@@ -39,7 +39,7 @@ String selResourceDescription = modelResourceDescription;
 String selResourceName = modelResourceName;
 
 if (Validator.isNull(modelResource)) {
-	PortletURLImpl portletURL = (PortletURLImpl)renderResponse.createActionURL();
+	LiferayPortletURL portletURL = (LiferayPortletURL)renderResponse.createActionURL();
 
 	portletURL.setPortletId(portletResource);
 
@@ -116,7 +116,7 @@ Group controlPanelGroup = GroupLocalServiceUtil.getGroup(company.getCompanyId(),
 
 long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(controlPanelGroup.getGroupId(), true);
 
-PortletURLImpl definePermissionsURL = (PortletURLImpl)renderResponse.createRenderURL();
+LiferayPortletURL definePermissionsURL = (LiferayPortletURL)renderResponse.createRenderURL();
 
 definePermissionsURL.setPlid(controlPanelPlid);
 definePermissionsURL.setPortletId(PortletKeys.ENTERPRISE_ADMIN_ROLES);
