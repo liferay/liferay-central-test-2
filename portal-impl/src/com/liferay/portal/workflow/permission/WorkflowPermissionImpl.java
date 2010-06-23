@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil;
 import com.liferay.portal.kernel.workflow.permission.WorkflowPermission;
 import com.liferay.portal.model.WorkflowInstanceLink;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.WorkflowDefinitionLinkLocalServiceUtil;
 import com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil;
@@ -86,8 +87,15 @@ public class WorkflowPermissionImpl implements WorkflowPermission {
 				return null;
 			}
 
-			return isWorkflowTaskAssignedToUser(
+			boolean hasPermission = isWorkflowTaskAssignedToUser(
 				companyId, userId, workflowInstance);
+
+			if (!hasPermission && actionId.equals(ActionKeys.VIEW)) {
+				return null;
+			}
+			else {
+				return hasPermission;
+			}
 		}
 
 		return null;
