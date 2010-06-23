@@ -126,6 +126,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 			mbMessagePersistence.remove(message);
 
+			// Workflow
+
 			workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
 				message.getCompanyId(), message.getGroupId(),
 				MBMessage.class.getName(), message.getMessageId());
