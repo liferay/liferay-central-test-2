@@ -45,8 +45,6 @@ String backURL = ParamUtil.getString(request, "backURL");
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="modelResource" value="<%= User.class.getName() %>" />
 		</liferay-portlet:renderURL>
-
-		<span class="lfr-toolbar-button custom-attributes-button"><a href="<%= expandoURL %>"><liferay-ui:message key="custom-fields" /></a></span>
 	</c:if>
 
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.EXPORT_USER) %>">
