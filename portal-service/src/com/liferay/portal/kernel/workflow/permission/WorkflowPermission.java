@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.workflow.permission;
 
+import com.liferay.portal.security.permission.PermissionChecker;
+
 /**
  * <a href="WorkflowPermission.java.html"><b><i>View Source</i></b></a>
  *
@@ -22,7 +24,7 @@ package com.liferay.portal.kernel.workflow.permission;
 public interface WorkflowPermission {
 
 	public Boolean hasPermission(
-		long companyId, long groupId, String className, long classPK,
-		long userId, String actionId);
+		PermissionChecker permissionChecker, long groupId, String className,
+		long classPK, long userId, String actionId);
 
 }

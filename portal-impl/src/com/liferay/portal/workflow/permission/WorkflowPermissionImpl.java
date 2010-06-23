@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil;
 import com.liferay.portal.kernel.workflow.permission.WorkflowPermission;
 import com.liferay.portal.model.WorkflowInstanceLink;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.WorkflowDefinitionLinkLocalServiceUtil;
 import com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil;
 
@@ -36,12 +37,13 @@ import java.util.List;
 public class WorkflowPermissionImpl implements WorkflowPermission {
 
 	public Boolean hasPermission(
-		long companyId, long groupId, String className, long classPK,
-		long userId, String actionId) {
+		PermissionChecker permissionChecker, long groupId, String className,
+		long classPK, long userId, String actionId) {
 
 		try {
 			return doHasPermission(
-				companyId, groupId, className, classPK, userId, actionId);
+				permissionChecker, groupId, className, classPK, userId,
+				actionId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -51,9 +53,17 @@ public class WorkflowPermissionImpl implements WorkflowPermission {
 	}
 
 	protected Boolean doHasPermission(
-			long companyId, long groupId, String className, long classPK,
-			long userId, String actionId)
+			PermissionChecker permissionChecker, long groupId, String className,
+			long classPK, long userId, String actionId)
 		throws Exception {
+
+		long companyId = permissionChecker.getCompanyId();
+
+		if (permissionChecker.isCompanyAdmin() ||
+			permissionChecker.isCommunityAdmin(groupId)) {
+
+			return Boolean.TRUE;
+		}
 
 		if (!WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(
 				companyId, groupId, className)) {
