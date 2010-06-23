@@ -19,7 +19,7 @@
 <%
 ScoreSearchEntry entry = (ScoreSearchEntry)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW_ENTRY);
 
-double score = MathUtils.round((entry.getScore() * 10) / 2, 1, BigDecimal.ROUND_UP);
+double score = MathUtils.round((entry.getScore() * 10) / 2, 1, BigDecimal.ROUND_HALF_UP);
 %>
 
 <liferay-ui:ratings-score score="<%= score %>" />

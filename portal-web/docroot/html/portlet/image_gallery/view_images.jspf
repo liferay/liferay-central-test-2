@@ -68,7 +68,7 @@
 							<%
 							double score = ((Double)scores.get(i)).doubleValue();
 
-							score = MathUtils.round((score * 10) / 2, 1, BigDecimal.ROUND_UP);
+							score = MathUtils.round((score * 10) / 2, 1, BigDecimal.ROUND_HALF_UP);
 							%>
 
 							<liferay-ui:ratings-score score="<%= score %>" />
