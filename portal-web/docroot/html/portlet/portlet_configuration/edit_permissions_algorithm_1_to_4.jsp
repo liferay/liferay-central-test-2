@@ -124,11 +124,10 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 				</liferay-util:include>
 			</c:when>
 			<c:otherwise>
-				<div>
-					<liferay-ui:message key="edit-permissions-for" /> <%= selResourceName %>: <a href="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"><%= selResourceDescription %></a>
-				</div>
-
-				<br />
+				<liferay-ui:header
+					backURL="<%= redirect %>"
+					title="<%= selResourceDescription %>"
+				/>
 			</c:otherwise>
 		</c:choose>
 

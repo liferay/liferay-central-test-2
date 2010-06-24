@@ -60,9 +60,10 @@ request.setAttribute("edit_organization_assignments.jsp-portletURL", portletURL)
 	<aui:input name="assignmentsRedirect" type="hidden" />
 	<aui:input name="organizationId" type="hidden" value="<%= organization.getOrganizationId() %>" />
 
-	<liferay-ui:message key="edit-assignments-for-organization" />: <%= HtmlUtil.escape(organization.getName()) %>
-
-	<br /><br />
+	<liferay-ui:header
+		backURL="<%= redirect %>"
+		title='<%= HtmlUtil.escape(organization.getName()) %>'
+	/>
 
 	<%
 	String tabs2Names = "users";
@@ -76,7 +77,6 @@ request.setAttribute("edit_organization_assignments.jsp-portletURL", portletURL)
 		names="<%= tabs2Names %>"
 		param="tabs2"
 		url="<%= portletURL.toString() %>"
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 
 	<c:choose>

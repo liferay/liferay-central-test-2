@@ -105,6 +105,4 @@ request.setAttribute("edit_role_permissions.jsp-role", role);
 request.setAttribute("edit_role_permissions.jsp-portletResource", portletResource);
 %>
 
-<h3><%= role.getTitle(locale) %></h3>
-
 <liferay-ui:tabs names="<%= tabs1Names %>" />

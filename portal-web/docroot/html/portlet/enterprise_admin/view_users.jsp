@@ -20,6 +20,7 @@
 PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 
 String viewUsersRedirect = ParamUtil.getString(request, "viewUsersRedirect");
+String backURL = ParamUtil.getString(request, "backURL", viewUsersRedirect);
 
 if (Validator.isNotNull(viewUsersRedirect)) {
 	portletURL.setParameter("viewUsersRedirect", viewUsersRedirect);
@@ -30,7 +31,6 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 
 <liferay-util:include page="/html/portlet/enterprise_admin/user/toolbar.jsp">
 	<liferay-util:param name="toolbarItem" value="view-all" />
-	<liferay-util:param name="backURL" value="<%= viewUsersRedirect %>" />
 </liferay-util:include>
 
 <c:if test="<%= Validator.isNotNull(viewUsersRedirect) %>">
@@ -91,7 +91,10 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 	<c:if test="<%= organization != null %>">
 		<aui:input name="<%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
 
-		<h3><%= LanguageUtil.format(pageContext, "users-of-x", HtmlUtil.escape(organization.getName())) %></h3>
+		<liferay-ui:header
+			backURL="<%= backURL %>"
+			title='<%= HtmlUtil.escape(organization.getName()) %>'
+		/>
 
 		<%
 		EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
@@ -104,7 +107,10 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 	<c:if test="<%= role != null %>">
 		<aui:input name="<%= UserDisplayTerms.ROLE_ID %>" type="hidden" value="<%= role.getRoleId() %>" />
 
-		<h3><%= LanguageUtil.format(pageContext, "users-with-role-x", HtmlUtil.escape(role.getTitle(locale))) %></h3>
+		<liferay-ui:header
+			backURL="<%= backURL %>"
+			title='<%= HtmlUtil.escape(role.getTitle(locale)) %>'
+		/>
 
 		<%
 		PortalUtil.addPortletBreadcrumbEntry(request, role.getName(), null);
@@ -116,7 +122,10 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 	<c:if test="<%= userGroup != null %>">
 		<aui:input name="<%= UserDisplayTerms.USER_GROUP_ID %>" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
 
-		<h3><%= LanguageUtil.format(pageContext, "users-of-x", HtmlUtil.escape(userGroup.getName())) %></h3>
+		<liferay-ui:header
+			backURL="<%= backURL %>"
+			title='<%= HtmlUtil.escape(userGroup.getName()) %>'
+		/>
 
 		<%
 		PortalUtil.addPortletBreadcrumbEntry(request, userGroup.getName(), null);

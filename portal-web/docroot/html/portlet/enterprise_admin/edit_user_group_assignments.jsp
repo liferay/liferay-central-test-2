@@ -45,15 +45,15 @@ portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()
 	<aui:input name="assignmentsRedirect" type="hidden" />
 	<aui:input name="userGroupId" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
 
-	<liferay-ui:message key="edit-assignments-for-user-group" />: <%= userGroup.getName() %>
-
-	<br /><br />
+	<liferay-ui:header
+		backURL="<%= redirect %>"
+		title='<%= HtmlUtil.escape(userGroup.getName()) %>'
+	/>
 
 	<liferay-ui:tabs
 		names="current,available"
 		param="tabs2"
 		url="<%= portletURL.toString() %>"
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 
 	<aui:input name="addUserIds" type="hidden" />

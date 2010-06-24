@@ -18,6 +18,7 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
+String backURL = ParamUtil.getString(request, "backURL", redirect);
 
 long groupId = ParamUtil.getLong(request, "groupId");
 
@@ -43,10 +44,16 @@ pageContext.setAttribute("portletURL", portletURL);
 	<div>
 		<c:choose>
 			<c:when test="<%= group.isOrganization() %>">
-				<liferay-ui:message key="manage-teams-for-organization" />: <%= group.getDescriptiveName() %>
+				<liferay-ui:header
+					backURL="<%= backURL %>"
+					title="<%= group.getDescriptiveName() %>"
+				/>
 			</c:when>
 			<c:otherwise>
-				<liferay-ui:message key="manage-teams-for-community" />: <%= group.getDescriptiveName() %>
+				<liferay-ui:header
+					backURL="<%= backURL %>"
+					title="<%= group.getDescriptiveName() %>"
+				/>
 			</c:otherwise>
 		</c:choose>
 	</div>

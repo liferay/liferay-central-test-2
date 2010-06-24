@@ -141,20 +141,12 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 				</liferay-util:include>
 			</c:when>
 			<c:otherwise>
-				<div>
-					<liferay-ui:message key="edit-permissions-for" /> <%= selResourceName %>: <a href="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"><%= selResourceDescription %></a>
-				</div>
-
-				<br />
+				<liferay-ui:header
+					backURL="<%= redirect %>"
+					title="<%= selResourceDescription %>"
+			   />
 			</c:otherwise>
 		</c:choose>
-
-		<c:if test="<%= Validator.isNotNull(modelResource) %>">
- 			<liferay-ui:header
-				backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
- 				title="permissions"
-			/>
-		</c:if>
 
 		<%
 		List<String> actions = ResourceActionsUtil.getResourceActions(portletResource, modelResource);

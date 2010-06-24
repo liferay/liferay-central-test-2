@@ -37,12 +37,16 @@ long resetTicketMaxAge = BeanParamUtil.getLong(passwordPolicy, request, "resetTi
 
 <liferay-util:include page="/html/portlet/enterprise_admin/password_policy/toolbar.jsp">
 	<liferay-util:param name="toolbarItem" value='<%= (passwordPolicy == null) ? "add" : "view-all" %>' />
-	<liferay-util:param name="backURL" value="<%= backURL %>" />
 </liferay-util:include>
 
 <portlet:actionURL var="editPasswordPolicyURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy" />
 </portlet:actionURL>
+
+<liferay-ui:header
+	backURL="<%= backURL %>"
+	title='<%= (passwordPolicy == null) ? "new-password-policy" : passwordPolicy.getName() %>'
+/>
 
 <aui:form action="<%= editPasswordPolicyURL %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (passwordPolicy == null) ? Constants.ADD : Constants.UPDATE %>" />

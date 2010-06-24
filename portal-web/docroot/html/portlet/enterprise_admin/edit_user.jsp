@@ -176,13 +176,17 @@ if (Validator.isNotNull(historyKey)) {
 <c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 	<liferay-util:include page="/html/portlet/enterprise_admin/user/toolbar.jsp">
 		<liferay-util:param name="toolbarItem" value='<%= (selUser == null) ? "add" : "view-all" %>' />
-		<liferay-util:param name="backURL" value="<%= backURL %>" />
 	</liferay-util:include>
 </c:if>
 
 <%
 String taglibOnSubmit = renderResponse.getNamespace() + "saveUser('" + ((selUser == null) ? Constants.ADD : Constants.UPDATE) + "');";
 %>
+
+<liferay-ui:header
+	backURL="<%= backURL %>"
+	title='<%= (selUser == null) ? "new-user" : selUser.getFullName() %>'
+/>
 
 <aui:form method="post" name="fm" onSubmit="<%= taglibOnSubmit %>">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />

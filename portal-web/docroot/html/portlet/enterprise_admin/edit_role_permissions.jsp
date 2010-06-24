@@ -77,11 +77,16 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 	<c:when test="<%= !portletName.equals(PortletKeys.ADMIN_SERVER) %>">
 		<liferay-util:include page="/html/portlet/enterprise_admin/role/toolbar.jsp">
 			<liferay-util:param name="toolbarItem" value='<%= (role == null) ? "add" : "view-all" %>' />
-			<liferay-util:param name="backURL" value="<%= PortalUtil.escapeRedirect(backURL) %>" />
 		</liferay-util:include>
+
+		<liferay-ui:header
+			backURL="<%= backURL %>"
+			title='<%= role.getTitle(locale) %>'
+		/>
 
 		<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_tabs.jsp">
 			<liferay-util:param name="tabs1" value="define-permissions" />
+			<liferay-util:param name="backURL" value="<%= backURL %>" />
 		</liferay-util:include>
 	</c:when>
 	<c:otherwise>

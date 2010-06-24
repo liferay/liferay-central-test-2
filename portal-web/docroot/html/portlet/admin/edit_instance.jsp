@@ -35,7 +35,7 @@ long companyId = BeanParamUtil.getLong(company2, request, "companyId");
 
 	<liferay-ui:header
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-		title="instance"
+		title='<%= (company2 == null) ? "new-portal-instance" : company2.getName() %>'
 	/>
 
 	<liferay-ui:error exception="<%= CompanyMxException.class %>" message="please-enter-a-valid-mail-domain" />

@@ -51,15 +51,15 @@ portletURL.setParameter("teamId", String.valueOf(team.getTeamId()));
 	<aui:input name="assignmentsRedirect" type="hidden" />
 	<aui:input name="teamId" type="hidden" value="<%= String.valueOf(team.getTeamId()) %>" />
 
-	<liferay-ui:message key="edit-assignments-for-team" />: <%= team.getName() %>
-
-	<br /><br />
+	<liferay-ui:header
+		backURL="<%= redirect %>"
+		title="<%= team.getName() %>"
+	/>
 
 	<liferay-ui:tabs
 		names="current,available"
 		param="tabs1"
 		url="<%= portletURL.toString() %>"
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 
 	<aui:input name="addUserIds" type="hidden" />

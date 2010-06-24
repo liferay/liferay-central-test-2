@@ -38,14 +38,14 @@ Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
 <liferay-ui:success key="membership_reply_sent" message="your-reply-will-be-sent-to-the-user-by-email" />
 
-<liferay-ui:message key="edit-requests-for-community" />: <%= HtmlUtil.escape(group.getDescriptiveName()) %>
-
-<br /><br />
+<liferay-ui:header
+	backURL="<%= redirect %>"
+	title='<%= HtmlUtil.escape(group.getDescriptiveName()) %>'
+/>
 
 <liferay-ui:tabs
 	names="pending,approved,denied"
 	url="<%= currentURL %>"
-	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 
 <%

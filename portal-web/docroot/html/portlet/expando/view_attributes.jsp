@@ -29,15 +29,9 @@ portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("modelResource", modelResource);
 %>
 
-<div>
-	<liferay-ui:message key="edit-custom-fields-for" />: <aui:a href="<%= PortalUtil.escapeRedirect(portletURL.toString()) %>"><%= modelResourceName %></aui:a>
-</div>
-
-<br />
-
 <liferay-ui:header
 	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-	title="custom-fields"
+	title='<%= modelResourceName %>'
 />
 
 <%

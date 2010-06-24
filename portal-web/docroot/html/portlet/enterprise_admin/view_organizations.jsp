@@ -30,7 +30,6 @@ if (Validator.isNotNull(viewOrganizationsRedirect)) {
 
 <liferay-util:include page="/html/portlet/enterprise_admin/organization/toolbar.jsp">
 	<liferay-util:param name="toolbarItem" value="view-all" />
-	<liferay-util:param name="backURL" value="<%= viewOrganizationsRedirect %>" />
 </liferay-util:include>
 
 <c:if test="<%= Validator.isNotNull(viewOrganizationsRedirect) %>">

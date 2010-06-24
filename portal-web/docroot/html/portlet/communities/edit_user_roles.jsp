@@ -23,6 +23,8 @@ String cur = ParamUtil.getString(request, "cur");
 
 String redirect = ParamUtil.getString(request, "redirect");
 
+String backURL = ParamUtil.getString(request, "backURL", redirect);
+
 Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
 String groupName = group.getDescriptiveName();
@@ -86,9 +88,10 @@ request.setAttribute("edit_user_roles.jsp-portletURL", portletURL);
 	<aui:input name="groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
 	<aui:input name="roleId" type="hidden" value="<%= roleId %>" />
 
-	<%= LanguageUtil.get(pageContext, "assign-" + (group.isOrganization() ? "organization" : "community") + "-roles-to-users") %>
-
-	<br /><br />
+	<liferay-ui:header
+		backURL="<%= backURL %>"
+		title='<%= group.getDescriptiveName() %>'
+	/>
 
 	<c:choose>
 		<c:when test="<%= role == null %>">

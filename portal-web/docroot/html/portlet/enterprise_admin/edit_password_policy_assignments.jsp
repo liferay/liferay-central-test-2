@@ -55,15 +55,15 @@ portletURL.setParameter("tabs3", tabs3);
 	<aui:input name="assignmentsRedirect" type="hidden" />
 	<aui:input name="passwordPolicyId" type="hidden" value="<%= String.valueOf(passwordPolicy.getPasswordPolicyId()) %>" />
 
-	<liferay-ui:message key="edit-assignments-for-password-policy" />: <%= HtmlUtil.escape(passwordPolicy.getName()) %>
-
-	<br /><br />
+	<liferay-ui:header
+		backURL="<%= redirect %>"
+		title='<%= HtmlUtil.escape(passwordPolicy.getName()) %>'
+	/>
 
 	<liferay-ui:tabs
 		names="users,organizations"
 		param="tabs2"
 		url="<%= portletURL.toString() %>"
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 
 	<c:choose>

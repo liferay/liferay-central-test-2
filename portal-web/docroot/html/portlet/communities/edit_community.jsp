@@ -43,6 +43,11 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 		</liferay-util:include>
 	</c:if>
 
+	<liferay-ui:header
+		backURL="<%= redirect %>"
+		title='<%= (group == null) ? "new-community" : group.getDescriptiveName() %>'
+	/>
+
 	<liferay-ui:error exception="<%= DuplicateGroupException.class %>" message="please-enter-a-unique-name" />
 	<liferay-ui:error exception="<%= GroupNameException.class %>" message="please-enter-a-valid-name" />
 	<liferay-ui:error exception="<%= RequiredGroupException.class %>" message="old-group-name-is-a-required-system-group" />

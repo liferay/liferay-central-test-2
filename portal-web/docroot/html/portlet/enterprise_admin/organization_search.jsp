@@ -21,6 +21,8 @@ themeDisplay.setIncludeServiceJs(true);
 
 OrganizationSearch searchContainer = (OrganizationSearch)request.getAttribute("liferay-ui:search:searchContainer");
 
+String viewOrganizationsRedirect = ParamUtil.getString(request, "viewOrganizationsRedirect");
+
 OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContainer.getDisplayTerms();
 
 String type = displayTerms.getType();
@@ -39,7 +41,10 @@ if (displayTerms.getParentOrganizationId() > 0) {
 <c:if test="<%= organization != null %>">
 	<aui:input name="<%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
 
-	<h3><%= LanguageUtil.format(pageContext, "suborganizations-of-x", HtmlUtil.escape(organization.getName())) %></h3>
+	<liferay-ui:header
+		title='<%= LanguageUtil.format(pageContext, "suborganizations-of-x", HtmlUtil.escape(organization.getName())) %>'
+		backURL="<%= viewOrganizationsRedirect %>"
+	/>
 
 	<%
 	EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);

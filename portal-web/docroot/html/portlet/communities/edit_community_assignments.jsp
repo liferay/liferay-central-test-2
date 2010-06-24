@@ -58,17 +58,15 @@ request.setAttribute("edit_community_assignments.jsp-portletURL", portletURL);
 
 	<c:choose>
 		<c:when test="<%= selUser == null %>">
-			<div>
-				<liferay-ui:message key="edit-assignments-for-community" />: <%= group.getDescriptiveName() %>
-			</div>
-
-			<br />
+			<liferay-ui:header
+				backURL="<%= redirect %>"
+				title='<%= group.getDescriptiveName() %>'
+			/>
 
 			<liferay-ui:tabs
 				names="users,organizations,user-groups"
 				param="tabs1"
 				url="<%= portletURL.toString() %>"
-				backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 			/>
 		</c:when>
 		<c:otherwise>

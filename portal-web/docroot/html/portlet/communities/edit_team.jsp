@@ -34,16 +34,10 @@ if (group.isOrganization()) {
 }
 %>
 
-<div>
-	<c:choose>
-		<c:when test="<%= group.isOrganization() %>">
-			<liferay-ui:message key="manage-teams-for-organization" />: <%= group.getDescriptiveName() %>
-		</c:when>
-		<c:otherwise>
-			<liferay-ui:message key="manage-teams-for-community" />: <%= group.getDescriptiveName() %>
-		</c:otherwise>
-	</c:choose>
-</div>
+<liferay-ui:header
+	backURL="<%= redirect %>"
+	title='<%= group.getDescriptiveName() + ": " + ((team == null) ?  LanguageUtil.get(pageContext, "new-team") : team.getName()) %>'
+/>
 
 <portlet:actionURL var="editTeamURL">
 	<portlet:param name="struts_action" value="/communities/edit_team" />

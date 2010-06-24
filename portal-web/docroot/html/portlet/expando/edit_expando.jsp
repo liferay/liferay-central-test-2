@@ -62,15 +62,9 @@ portletURL.setParameter("modelResource", modelResource);
 	<aui:input name="columnId" type="hidden" value="<%= columnId %>" />
 	<aui:input name="modelResource" type="hidden" value="<%= modelResource %>" />
 
-	<div>
-		<liferay-ui:message key="edit-custom-fields-for" />: <aui:a href="<%= PortalUtil.escapeRedirect(redirect) %>"><%= modelResourceName %></aui:a>
-	</div>
-
-	<br />
-
 	<liferay-ui:header
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-		title='<%= (column != null) ? column.getDisplayName(locale) : "new-custom-field" %>'
+		backURL="<%= redirect %>"
+		title='<%= modelResourceName + ": " + ((column == null) ? LanguageUtil.get(locale, "new-custom-field") : column.getName()) %>'
 	/>
 
 	<liferay-ui:error exception="<%= ColumnNameException.class %>" message="please-enter-a-valid-name" />
