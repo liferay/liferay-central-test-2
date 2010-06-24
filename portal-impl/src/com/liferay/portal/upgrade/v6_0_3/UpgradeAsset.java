@@ -143,7 +143,7 @@ public class UpgradeAsset extends UpgradeProcess {
 			"com.liferay.portlet.journal.model.JournalArticle")) {
 
 			tableAndColumn[0] = "JournalArticle";
-			tableAndColumn[1] = "id_";
+			tableAndColumn[1] = "resourcePrimKey";
 		}
 		else if (className.equals(
 			"com.liferay.portlet.messageboards.model.MBMessage")) {
@@ -155,7 +155,7 @@ public class UpgradeAsset extends UpgradeProcess {
 			"com.liferay.portlet.wiki.model.WikiPage")) {
 
 			tableAndColumn[0] = "WikiPage";
-			tableAndColumn[1] = "pageId";
+			tableAndColumn[1] = "resourcePrimKey";
 		}
 
 		return tableAndColumn;
