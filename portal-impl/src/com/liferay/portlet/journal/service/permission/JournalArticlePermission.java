@@ -65,7 +65,7 @@ public class JournalArticlePermission {
 		PermissionChecker permissionChecker, JournalArticle article,
 		String actionId) {
 
-		if (article.isPending() && !actionId.equals(ActionKeys.VIEW)) {
+		if (article.isPending()) {
 			Boolean hasPermission = WorkflowPermissionUtil.hasPermission(
 				permissionChecker, article.getGroupId(),
 				JournalArticle.class.getName(), article.getResourcePrimKey(),

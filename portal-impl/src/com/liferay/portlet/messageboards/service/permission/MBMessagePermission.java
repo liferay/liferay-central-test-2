@@ -23,6 +23,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
+import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
@@ -74,10 +75,16 @@ public class MBMessagePermission {
 
 		long groupId = message.getGroupId();
 
-		if (message.isPending() && !actionId.equals(ActionKeys.VIEW)) {
+		if (message.isPending()) {
+			String className = MBMessage.class.getName();
+
+			if (message.isDiscussion()) {
+				className = MBDiscussion.class.getName();
+			}
+
 			Boolean hasPermission = WorkflowPermissionUtil.hasPermission(
-				permissionChecker, message.getGroupId(),
-				MBMessage.class.getName(), message.getMessageId(), actionId);
+				permissionChecker, message.getGroupId(), className,
+				message.getMessageId(), actionId);
 
 			if (hasPermission != null) {
 				return hasPermission.booleanValue();
