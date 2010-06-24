@@ -41,7 +41,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 
 <liferay-ui:header
 	backURL="<%= backURL %>"
-	title='<%= (role == null) ? "new-role" : role.getTitle(locale) %>' 
+	title='<%= (role == null) ? "new-role" : role.getTitle(locale) %>'
 />
 
 <c:if test="<%= role != null %>">

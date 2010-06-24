@@ -36,7 +36,7 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 
 	<liferay-ui:header
 		backURL="<%= backURL %>"
-		title='<%= (userGroup == null) ? "new-user-group" : userGroup.getName()%>'
+		title='<%= (userGroup == null) ? "new-user-group" : userGroup.getName() %>'
 	/>
 
 	<liferay-ui:error exception="<%= DuplicateUserGroupException.class %>" message="please-enter-a-unique-name" />
