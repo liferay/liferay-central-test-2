@@ -128,6 +128,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			mbMessagePersistence.remove(message);
 
 			// Workflow
+
 			String className = MBMessage.class.getName();
 
 			if (message.isDiscussion()) {
@@ -135,8 +136,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			}
 
 			workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
-				message.getCompanyId(), message.getGroupId(),
-				className, message.getMessageId());
+				message.getCompanyId(), message.getGroupId(), className,
+				message.getMessageId());
 		}
 
 		// Category
