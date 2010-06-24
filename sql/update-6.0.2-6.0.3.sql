@@ -1,3 +1,5 @@
+alter table AssetEntry add classUuid VARCHAR(75) null;
+
 alter table PasswordPolicy add minSymbols INTEGER;
 
 alter table User_ add facebookId LONG;
