@@ -73,17 +73,13 @@ public class RouteImpl implements Route {
 	}
 
 	public String parametersToUrl(Map<String, String> parameters) {
-		for (Map.Entry<String, String> entry : _defaultParameters.entrySet()) {
-			String name = entry.getKey();
-			String value = entry.getValue();
-
-			if (!value.equals(MapUtil.getString(parameters, name))) {
-				return null;
-			}
-		}
-
 		InheritableMap<String, String> allParameters =
 			new InheritableMap<String, String>();
+		
+		allParameters.setParentMap(parameters);
+
+		// Virtual parameters may sometimes be checked by default parameters,
+		// so the order here is important.
 
 		for (Map.Entry<String, StringParser> entry :
 				_generatedParameters.entrySet()) {
@@ -96,8 +92,15 @@ public class RouteImpl implements Route {
 				return null;
 			}
 		}
+		
+		for (Map.Entry<String, String> entry : _defaultParameters.entrySet()) {
+			String name = entry.getKey();
+			String value = entry.getValue();
 
-		allParameters.setParentMap(parameters);
+			if (!value.equals(MapUtil.getString(allParameters, name))) {
+				return null;
+			}
+		}
 
 		String url = _parser.build(allParameters);
 
@@ -105,13 +108,13 @@ public class RouteImpl implements Route {
 			return null;
 		}
 
-		for (String name : _defaultParameters.keySet()) {
+		for (String name : _generatedParameters.keySet()) {
 			// Virtual parameters will never be placed in the query string,
 			// so parameters is modified directly instead of allParameters.
 			parameters.remove(name);
 		}
 
-		for (String name : _generatedParameters.keySet()) {
+		for (String name : _defaultParameters.keySet()) {
 			parameters.remove(name);
 		}
 
@@ -129,6 +132,12 @@ public class RouteImpl implements Route {
 			return false;
 		}
 
+		parameters.putAll(_defaultParameters);
+		parameters.putAll(_overriddenParameters);
+
+		// Generated parameters may be dependent on default parameters or
+		// overridden parameters, so the order here is important.
+
 		for (Map.Entry<String, StringParser> entry :
 				_generatedParameters.entrySet()) {
 
@@ -144,9 +153,6 @@ public class RouteImpl implements Route {
 				parameters.put(name, value);
 			}
 		}
-
-		parameters.putAll(_defaultParameters);
-		parameters.putAll(_overriddenParameters);
 
 		return true;
 	}
