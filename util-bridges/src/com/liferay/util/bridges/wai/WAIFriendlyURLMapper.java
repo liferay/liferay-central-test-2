@@ -35,8 +35,8 @@ import javax.portlet.WindowState;
  */
 public class WAIFriendlyURLMapper implements FriendlyURLMapper {
 
-	public String buildPath(LiferayPortletURL portletURL) {
-		String portletId = portletURL.getPortletId();
+	public String buildPath(LiferayPortletURL liferayPortletURL) {
+		String portletId = liferayPortletURL.getPortletId();
 
 		String prefix = portletId;
 
@@ -46,9 +46,10 @@ public class WAIFriendlyURLMapper implements FriendlyURLMapper {
 			prefix = portletId.substring(0, pos);
 		}
 
-		String appUrl = GetterUtil.getString(portletURL.getParameter("appURL"));
+		String appUrl = GetterUtil.getString(
+			liferayPortletURL.getParameter("appURL"));
 
-		portletURL.addParameterIncludedInPath("p_p_id");
+		liferayPortletURL.addParameterIncludedInPath("p_p_id");
 
 		return StringPool.SLASH + _MAPPING + StringPool.SLASH + prefix +
 			StringPool.SLASH + appUrl;

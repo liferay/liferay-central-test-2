@@ -44,7 +44,7 @@ import javax.servlet.http.HttpServletResponse;
 public class StrutsURLEncoder implements URLEncoder {
 
 	public static void setParameters(
-		LiferayPortletURL portletURL, String queryString) {
+		LiferayPortletURL liferayPortletURL, String queryString) {
 
 		String[] params = StringUtil.split(queryString, "&");
 
@@ -57,7 +57,7 @@ public class StrutsURLEncoder implements URLEncoder {
 
 				if (param.equals("windowState")) {
 					try {
-						portletURL.setWindowState(
+						liferayPortletURL.setWindowState(
 							WindowStateFactory.getWindowState(value));
 					}
 					catch (WindowStateException wse) {
@@ -66,7 +66,7 @@ public class StrutsURLEncoder implements URLEncoder {
 				}
 				else if (param.equals("portletMode")) {
 					try {
-						portletURL.setPortletMode(
+						liferayPortletURL.setPortletMode(
 							PortletModeFactory.getPortletMode(value));
 					}
 					catch (PortletModeException pme) {
@@ -80,10 +80,10 @@ public class StrutsURLEncoder implements URLEncoder {
 						lifecycle = PortletRequest.ACTION_PHASE;
 					}
 
-					portletURL.setLifecycle(lifecycle);
+					liferayPortletURL.setLifecycle(lifecycle);
 				}
 				else {
-					portletURL.setParameter(
+					liferayPortletURL.setParameter(
 						param, HttpUtil.decodeURL(value), true);
 				}
 			}
@@ -92,14 +92,14 @@ public class StrutsURLEncoder implements URLEncoder {
 
 	public StrutsURLEncoder(
 		String contextPath, String mainPath, String servletMapping,
-		LiferayPortletURL portletURL) {
+		LiferayPortletURL liferayPortletURL) {
 
 		_contextPath = contextPath;
 		_mainPath = mainPath;
 		_setServletMapping(servletMapping);
-		_portletURL = portletURL;
-		_windowState = portletURL.getWindowState();
-		_portletMode = portletURL.getPortletMode();
+		_liferayPortletURL = liferayPortletURL;
+		_windowState = liferayPortletURL.getWindowState();
+		_portletMode = liferayPortletURL.getPortletMode();
 	}
 
 	public String encodeURL(HttpServletResponse response, String path) {
@@ -122,17 +122,17 @@ public class StrutsURLEncoder implements URLEncoder {
 
 			// Reset portlet URL settings so it can be reused
 
-			_portletURL.setLifecycle(PortletRequest.RENDER_PHASE);
-			_portletURL.setParameters(new HashMap<String, String[]>());
+			_liferayPortletURL.setLifecycle(PortletRequest.RENDER_PHASE);
+			_liferayPortletURL.setParameters(new HashMap<String, String[]>());
 
 			try {
-				_portletURL.setWindowState(_windowState);
+				_liferayPortletURL.setWindowState(_windowState);
 			}
 			catch (WindowStateException wse) {
 			}
 
 			try {
-				_portletURL.setPortletMode(_portletMode);
+				_liferayPortletURL.setPortletMode(_portletMode);
 			}
 			catch (PortletModeException pme) {
 			}
@@ -176,15 +176,15 @@ public class StrutsURLEncoder implements URLEncoder {
 				_log.debug("Struts action " + strutsAction);
 			}
 
-			_portletURL.setParameter("struts_action", strutsAction);
+			_liferayPortletURL.setParameter("struts_action", strutsAction);
 
 			// Set the query string
 
-			setParameters(_portletURL, queryString);
+			setParameters(_liferayPortletURL, queryString);
 
 			// Return the portlet URL
 
-			encodedURL = _portletURL.toString();
+			encodedURL = _liferayPortletURL.toString();
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Encoded portlet URL " + encodedURL);
@@ -215,10 +215,10 @@ public class StrutsURLEncoder implements URLEncoder {
 	private static Log _log = LogFactoryUtil.getLog(StrutsURLEncoder.class);
 
 	private String _contextPath;
+	private LiferayPortletURL _liferayPortletURL;
 	private String _mainPath;
-	private String _servletMapping = StringPool.BLANK;
-	private LiferayPortletURL _portletURL;
-	private WindowState _windowState;
 	private PortletMode _portletMode;
+	private String _servletMapping = StringPool.BLANK;
+	private WindowState _windowState;
 
 }

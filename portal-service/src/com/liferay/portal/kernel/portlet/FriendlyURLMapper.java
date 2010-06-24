@@ -25,7 +25,7 @@ import java.util.Map;
  */
 public interface FriendlyURLMapper {
 
-	public String buildPath(LiferayPortletURL portletURL);
+	public String buildPath(LiferayPortletURL liferayPortletURL);
 
 	public String getMapping();
 

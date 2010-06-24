@@ -61,10 +61,10 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 		defaultReservedParameters.put(name, value);
 	}
 
-	public String buildPath(LiferayPortletURL portletURL) {
+	public String buildPath(LiferayPortletURL liferayPortletURL) {
 		Map<String, String> routeParameters = new HashMap<String, String>();
 
-		buildRouteParameters(portletURL, routeParameters);
+		buildRouteParameters(liferayPortletURL, routeParameters);
 
 		String friendlyURLPath = router.parametersToUrl(routeParameters);
 
@@ -72,7 +72,7 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 			return null;
 		}
 
-		addParametersIncludedInPath(portletURL, routeParameters);
+		addParametersIncludedInPath(liferayPortletURL, routeParameters);
 
 		friendlyURLPath = StringPool.SLASH.concat(getMapping()).concat(
 			friendlyURLPath);
@@ -120,12 +120,13 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	protected void buildRouteParameters(
-		LiferayPortletURL portletURL, Map<String, String> routeParameters) {
+		LiferayPortletURL liferayPortletURL,
+		Map<String, String> routeParameters) {
 
 		// Copy application parameters
 
 		Map<String, String[]> portletURLParameters =
-			portletURL.getParameterMap();
+			liferayPortletURL.getParameterMap();
 
 		for (Map.Entry<String, String[]> entry :
 				portletURLParameters.entrySet()) {
@@ -140,7 +141,7 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 		// Populate virtual parameters for instanceable portlets
 
 		if (isPortletInstanceable()) {
-			String portletId = portletURL.getPortletId();
+			String portletId = liferayPortletURL.getPortletId();
 
 			routeParameters.put("p_p_id", portletId);
 
@@ -156,7 +157,7 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 		// Copy reserved parameters
 
-		routeParameters.putAll(portletURL.getReservedParameterMap());
+		routeParameters.putAll(liferayPortletURL.getReservedParameterMap());
 	}
 
 	protected String getPortletId(Map<String, String> routeParameters) {
@@ -212,29 +213,30 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	protected void addParametersIncludedInPath(
-		LiferayPortletURL portletURL, Map<String, String> routeParameters) {
+		LiferayPortletURL liferayPortletURL,
+		Map<String, String> routeParameters) {
 
 		// Hide default ignored parameters
 
 		for (String name : defaultIgnoredParameters) {
-			portletURL.addParameterIncludedInPath(name);
+			liferayPortletURL.addParameterIncludedInPath(name);
 		}
 
 		// Hide application parameters removed by the router
 
 		Map<String, String[]> portletURLParameters =
-			portletURL.getParameterMap();
+			liferayPortletURL.getParameterMap();
 
 		for (String name : portletURLParameters.keySet()) {
 			if (!routeParameters.containsKey(name)) {
-				portletURL.addParameterIncludedInPath(name);
+				liferayPortletURL.addParameterIncludedInPath(name);
 			}
 		}
 
 		// Hide reserved parameters removed by the router or set to the defaults
 
 		Map<String, String> reservedParameters =
-			portletURL.getReservedParameterMap();
+			liferayPortletURL.getReservedParameterMap();
 
 		for (Map.Entry<String, String> entry : reservedParameters.entrySet()) {
 			String key = entry.getKey();
@@ -243,7 +245,7 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 			if (!routeParameters.containsKey(key) ||
 				value.equals(defaultReservedParameters.get(key))) {
 
-				portletURL.addParameterIncludedInPath(key);
+				liferayPortletURL.addParameterIncludedInPath(key);
 			}
 		}
 	}

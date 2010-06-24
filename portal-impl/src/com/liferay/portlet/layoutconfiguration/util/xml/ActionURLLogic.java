@@ -54,7 +54,7 @@ public class ActionURLLogic extends RuntimeLogic {
 
 		Element root = doc.getRootElement();
 
-		LiferayPortletURL portletURL =
+		LiferayPortletURL liferayPortletURL =
 			_renderResponseImpl.createLiferayPortletURL(getLifecycle());
 
 		String portletId = root.attributeValue("portlet-name");
@@ -62,7 +62,7 @@ public class ActionURLLogic extends RuntimeLogic {
 		if (portletId != null) {
 			portletId = PortalUtil.getJsSafePortletId(portletId);
 
-			portletURL.setPortletId(portletId);
+			liferayPortletURL.setPortletId(portletId);
 		}
 
 		for (int i = 1;; i++) {
@@ -73,10 +73,10 @@ public class ActionURLLogic extends RuntimeLogic {
 				break;
 			}
 
-			portletURL.setParameter(paramName, paramValue);
+			liferayPortletURL.setParameter(paramName, paramValue);
 		}
 
-		return portletURL.toString();
+		return liferayPortletURL.toString();
 	}
 
 	public String getLifecycle() {

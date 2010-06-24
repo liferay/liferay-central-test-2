@@ -63,10 +63,10 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 			portletName = _getPortletName(request);
 		}
 
-		LiferayPortletURL portletURL = _getLiferayPortletURL(
+		LiferayPortletURL liferayPortletURL = _getLiferayPortletURL(
 			request, plid, portletName, lifecycle);
 
-		if (portletURL == null) {
+		if (liferayPortletURL == null) {
 			_log.error(
 				"Render response is null because this tag is not being " +
 					"called within the context of a portlet");
@@ -75,55 +75,55 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 		}
 
 		if (Validator.isNotNull(windowState)) {
-			portletURL.setWindowState(
+			liferayPortletURL.setWindowState(
 				WindowStateFactory.getWindowState(windowState));
 		}
 
 		if (Validator.isNotNull(portletMode)) {
-			portletURL.setPortletMode(
+			liferayPortletURL.setPortletMode(
 				PortletModeFactory.getPortletMode(portletMode));
 		}
 
 		if (secure != null) {
-			portletURL.setSecure(secure.booleanValue());
+			liferayPortletURL.setSecure(secure.booleanValue());
 		}
 		else {
-			portletURL.setSecure(request.isSecure());
+			liferayPortletURL.setSecure(request.isSecure());
 		}
 
 		if (copyCurrentRenderParameters != null) {
-			portletURL.setCopyCurrentRenderParameters(
+			liferayPortletURL.setCopyCurrentRenderParameters(
 				copyCurrentRenderParameters.booleanValue());
 		}
 
 		if (escapeXml != null) {
-			portletURL.setEscapeXml(escapeXml.booleanValue());
+			liferayPortletURL.setEscapeXml(escapeXml.booleanValue());
 		}
 
 		if (lifecycle.equals(PortletRequest.ACTION_PHASE) &&
 			Validator.isNotNull(name)) {
 
-			portletURL.setParameter(ActionRequest.ACTION_NAME, name);
+			liferayPortletURL.setParameter(ActionRequest.ACTION_NAME, name);
 		}
 
 		if (resourceID != null) {
-			portletURL.setResourceID(resourceID);
+			liferayPortletURL.setResourceID(resourceID);
 		}
 
 		if (cacheability != null) {
-			portletURL.setCacheability(cacheability);
+			liferayPortletURL.setCacheability(cacheability);
 		}
 
 		if (anchor != null) {
-			portletURL.setAnchor(anchor.booleanValue());
+			liferayPortletURL.setAnchor(anchor.booleanValue());
 		}
 
 		if (encrypt != null) {
-			portletURL.setEncrypt(encrypt.booleanValue());
+			liferayPortletURL.setEncrypt(encrypt.booleanValue());
 		}
 
 		if (doAsUserId > 0) {
-			portletURL.setDoAsUserId(doAsUserId);
+			liferayPortletURL.setDoAsUserId(doAsUserId);
 		}
 
 		if ((portletConfiguration != null) &&
@@ -135,26 +135,26 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 				request, "portletResource");
 			String previewWidth = ParamUtil.getString(request, "previewWidth");
 
-			portletURL.setParameter(
+			liferayPortletURL.setParameter(
 				"struts_action", "/portlet_configuration/edit_configuration");
-			portletURL.setParameter("returnToFullPageURL", returnToFullPageURL);
-			portletURL.setParameter("portletResource", portletResource);
-			portletURL.setParameter("previewWidth", previewWidth);
+			liferayPortletURL.setParameter("returnToFullPageURL", returnToFullPageURL);
+			liferayPortletURL.setParameter("portletResource", portletResource);
+			liferayPortletURL.setParameter("previewWidth", previewWidth);
 		}
 
 		if (params != null) {
-			MapUtil.merge(portletURL.getParameterMap(), params);
+			MapUtil.merge(liferayPortletURL.getParameterMap(), params);
 
-			portletURL.setParameters(params);
+			liferayPortletURL.setParameters(params);
 		}
 
-		String portletURLToString = portletURL.toString();
+		String portletURLToString = liferayPortletURL.toString();
 
 		if (Validator.isNotNull(var)) {
 			pageContext.setAttribute(var, portletURLToString);
 		}
 		else if (Validator.isNotNull(varImpl)) {
-			pageContext.setAttribute(varImpl, portletURL);
+			pageContext.setAttribute(varImpl, liferayPortletURL);
 		}
 		else {
 			pageContext.getOut().print(portletURLToString);
