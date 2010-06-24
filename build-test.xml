@@ -396,7 +396,7 @@
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-random-bible-verse" />
-			<param name="test.ant.script.suite" value="RandomBibleVerseTestSuite" />
+			<param name="test.ant.script.suite" value="PluginsRandomBibleVerseTestSuite" />
 			<param name="test.ant.script.plugins" value="random-bible-verse-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 		</antcall>
@@ -870,7 +870,7 @@
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-hello-world" />
-			<param name="test.ant.script.suite" value="PortalHelloWorldTestSuite" />
+			<param name="test.ant.script.suite" value="PortalWebHelloWorldTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
