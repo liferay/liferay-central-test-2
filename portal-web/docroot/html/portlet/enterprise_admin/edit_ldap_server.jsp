@@ -27,7 +27,12 @@ String ldapServerName = ParamUtil.getString(request, "settings--ldap.server.name
 String ldapBaseProviderUrl = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_BASE_PROVIDER_URL + postfix + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_BASE_PROVIDER_URL + postfix));
 String ldapBaseDN = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_BASE_DN + postfix + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_BASE_DN + postfix));
 String ldapSecurityPrincipal = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_SECURITY_PRINCIPAL + postfix + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_SECURITY_PRINCIPAL + postfix));
-String ldapSecurityCredentials = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_SECURITY_CREDENTIALS + postfix + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_SECURITY_CREDENTIALS + postfix, Portal.TEMP_OBFUSCATION_VALUE));
+String ldapSecurityCredentials = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_SECURITY_CREDENTIALS + postfix + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_SECURITY_CREDENTIALS + postfix));
+
+if (Validator.isNotNull(ldapSecurityCredentials)) {
+	ldapSecurityCredentials = Portal.TEMP_OBFUSCATION_VALUE;
+}
+
 String ldapAuthSearchFilter = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_AUTH_SEARCH_FILTER + postfix + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_AUTH_SEARCH_FILTER + postfix));
 String ldapImportUserSearchFilter = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER + postfix + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER + postfix));
 String ldapImportGroupSearchFilter = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER + postfix + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER + postfix));
