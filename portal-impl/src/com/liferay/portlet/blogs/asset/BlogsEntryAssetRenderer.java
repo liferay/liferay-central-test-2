@@ -106,6 +106,10 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 		return _entry.getUserId();
 	}
 
+	public String getUuid() {
+		return _entry.getUuid();
+	}
+
 	public boolean hasEditPermission(PermissionChecker permissionChecker) {
 		return BlogsEntryPermission.contains(
 			permissionChecker, _entry, ActionKeys.UPDATE);

@@ -91,6 +91,10 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 		return _message.getUserId();
 	}
 
+	public String getUuid() {
+		return _message.getUuid();
+	}
+
 	public boolean hasEditPermission(PermissionChecker permissionChecker)
 		throws PortalException, SystemException {
 

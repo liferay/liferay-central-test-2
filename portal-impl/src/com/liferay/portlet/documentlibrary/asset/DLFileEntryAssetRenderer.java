@@ -125,6 +125,10 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 		return _entry.getUserId();
 	}
 
+	public String getUuid() {
+		return _entry.getUuid();
+	}
+
 	public boolean hasEditPermission(PermissionChecker permissionChecker)
 		throws PortalException, SystemException {
 

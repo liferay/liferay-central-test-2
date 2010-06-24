@@ -98,6 +98,10 @@ public class CalEventAssetRenderer extends BaseAssetRenderer {
 		return _event.getUserId();
 	}
 
+	public String getUuid() {
+		return _event.getUuid();
+	}
+
 	public boolean hasEditPermission(PermissionChecker permissionChecker) {
 		return CalEventPermission.contains(
 			permissionChecker, _event, ActionKeys.UPDATE);

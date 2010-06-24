@@ -102,6 +102,10 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 		return _image.getUserId();
 	}
 
+	public String getUuid() {
+		return _image.getUuid();
+	}
+
 	public String getViewInContextMessage() {
 		return "view-album";
 	}

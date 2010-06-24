@@ -120,6 +120,10 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 		return _page.getUserId();
 	}
 
+	public String getUuid() {
+		return _page.getUuid();
+	}
+
 	public boolean hasEditPermission(PermissionChecker permissionChecker) {
 		return WikiPagePermission.contains(
 			permissionChecker, _page, ActionKeys.UPDATE);

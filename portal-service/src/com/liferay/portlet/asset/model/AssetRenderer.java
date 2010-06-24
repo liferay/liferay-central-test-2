@@ -63,6 +63,8 @@ public interface AssetRenderer {
 
 	public String getUrlTitle();
 
+	public String getUuid();
+
 	public String getURLViewInContext(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse,

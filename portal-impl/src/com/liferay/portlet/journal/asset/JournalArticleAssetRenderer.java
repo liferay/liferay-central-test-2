@@ -154,6 +154,10 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 		return _article.getUserId();
 	}
 
+	public String getUuid() {
+		return _article.getUuid();
+	}
+
 	public String getViewInContextMessage() {
 		return "view";
 	}
