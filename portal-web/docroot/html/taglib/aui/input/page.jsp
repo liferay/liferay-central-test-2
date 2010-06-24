@@ -166,14 +166,10 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 			valueString = value.toString();
 		}
 
-		boolean booleanValue = false;
+		boolean booleanValue = checked;
 
 		if (value != null) {
 			booleanValue = GetterUtil.getBoolean(valueString);
-		}
-
-		if (Validator.isNotNull(checked)) {
-			booleanValue = checked;
 		}
 
 		booleanValue = ParamUtil.getBoolean(request, name, booleanValue);
