@@ -36,16 +36,12 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_user_roles.jsp-po
 <div class="portlet-section-body results-row" style="border: 1px solid; padding: 5px;">
 	<%= LanguageUtil.format(pageContext, "step-x-of-x", new String[] {"2", "2"}) %>
 
-	<%= LanguageUtil.get(pageContext, "assign-" + (group.isOrganization() ? "organization" : "community") + "-roles-to-users") %>
-
 	<em>Current</em> signifies current users associated with the <em><%= HtmlUtil.escape(role.getTitle(locale)) %></em> role. <em>Available</em> signifies all users associated with the <em><%= HtmlUtil.escape(groupName) %></em> <%= (group.isOrganization()) ? "organization" : "community" %>.
 </div>
 
 <br />
 
-<liferay-ui:header
-	title="users"
-/>
+<h3><liferay-ui:message key="users" /></h3>
 
 <liferay-ui:tabs
 	names="current,available"

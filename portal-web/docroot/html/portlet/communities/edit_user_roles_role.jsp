@@ -33,9 +33,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_user_roles.jsp-po
 
 <br />
 
-<liferay-ui:header
-	title="roles"
-/>
+<h3><liferay-ui:message key="roles" /></h3>
 
 <%
 RoleSearch searchContainer = new RoleSearch(renderRequest, portletURL);
