@@ -66,9 +66,11 @@ public class UpgradeAsset extends UpgradeProcess {
 
 				classPs = con.prepareStatement(
 					"select * from " + tableAndColumn[0] + " where " +
-						tableAndColumn[1] + " = ?");
+						tableAndColumn[1] + " = ? or " + tableAndColumn[2] +
+						" = ?");
 
 				classPs.setLong(1, classPK);
+				classPs.setLong(2, classPK);
 
 				classRs = classPs.executeQuery();
 
@@ -93,11 +95,12 @@ public class UpgradeAsset extends UpgradeProcess {
 	}
 
 	private String[] getTableAndColumnName(String className)  {
-		String[] tableAndColumn = new String[2];
+		String[] tableAndColumn = new String[3];
 
 		if (className.equals("com.liferay.portal.model.User")) {
 			tableAndColumn[0] = "User_";
 			tableAndColumn[1] = "userId";
+			tableAndColumn[2] = "userId";
 		}
 		else if (className.equals("com.liferay.portal.model.Group")) {
 
@@ -110,52 +113,61 @@ public class UpgradeAsset extends UpgradeProcess {
 
 			tableAndColumn[0] = "BlogsEntry";
 			tableAndColumn[1] = "entryId";
+			tableAndColumn[2] = "entryId";
 		}
 		if (className.equals(
 			"com.liferay.portlet.bookmarks.model.BookmarksEntry")) {
 
 			tableAndColumn[0] = "BookmarksEntry";
 			tableAndColumn[1] = "entryId";
+			tableAndColumn[2] = "entryId";
 		}
 		if (className.equals("com.liferay.portlet.calendar.model.CalEvent")) {
 			tableAndColumn[0] = "CalEvent";
 			tableAndColumn[1] = "eventId";
+			tableAndColumn[2] = "eventId";
 		}
 		else if (className.equals(
 			"com.liferay.portlet.documentlibrary.model.DLFileEntry")) {
 
 			tableAndColumn[0] = "DLFileEntry";
 			tableAndColumn[1] = "fileEntryId";
+			tableAndColumn[2] = "fileEntryId";
 		}
 		else if (className.equals(
 			"com.liferay.portlet.documentlibrary.model.DLFileShortcut")) {
 
 			tableAndColumn[0] = "DLFileShortcut";
 			tableAndColumn[1] = "fileShortcutId";
+			tableAndColumn[2] = "fileShortcutId";
 		}
 		else if (className.equals(
 			"com.liferay.portlet.imagegallery.model.IGImage")) {
 
 			tableAndColumn[0] = "IGImage";
 			tableAndColumn[1] = "imageId";
+			tableAndColumn[2] = "imageId";
 		}
 		else if (className.equals(
 			"com.liferay.portlet.journal.model.JournalArticle")) {
 
 			tableAndColumn[0] = "JournalArticle";
 			tableAndColumn[1] = "resourcePrimKey";
+			tableAndColumn[2] = "id_";
 		}
 		else if (className.equals(
 			"com.liferay.portlet.messageboards.model.MBMessage")) {
 
 			tableAndColumn[0] = "MBMessage";
 			tableAndColumn[1] = "messageId";
+			tableAndColumn[2] = "messageId";
 		}
 		else if (className.equals(
 			"com.liferay.portlet.wiki.model.WikiPage")) {
 
 			tableAndColumn[0] = "WikiPage";
 			tableAndColumn[1] = "resourcePrimKey";
+			tableAndColumn[2] = "pageId";
 		}
 
 		return tableAndColumn;
