@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.CompanyPersistence;
@@ -100,6 +101,14 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(AssetEntryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByCompanyId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_G_CU = new FinderPath(AssetEntryModelImpl.ENTITY_CACHE_ENABLED,
+			AssetEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
+			"fetchByG_CU",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_CU = new FinderPath(AssetEntryModelImpl.ENTITY_CACHE_ENABLED,
+			AssetEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByG_CU",
+			new String[] { Long.class.getName(), String.class.getName() });
 	public static final FinderPath FINDER_PATH_FETCH_BY_C_C = new FinderPath(AssetEntryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
 			"fetchByC_C",
@@ -118,6 +127,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 	public void cacheResult(AssetEntry assetEntry) {
 		EntityCacheUtil.putResult(AssetEntryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetEntryImpl.class, assetEntry.getPrimaryKey(), assetEntry);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_CU,
+			new Object[] {
+				new Long(assetEntry.getGroupId()),
+				
+			assetEntry.getClassUuid()
+			}, assetEntry);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
@@ -146,6 +162,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 	public void clearCache(AssetEntry assetEntry) {
 		EntityCacheUtil.removeResult(AssetEntryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetEntryImpl.class, assetEntry.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_CU,
+			new Object[] {
+				new Long(assetEntry.getGroupId()),
+				
+			assetEntry.getClassUuid()
+			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
@@ -253,6 +276,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 		AssetEntryModelImpl assetEntryModelImpl = (AssetEntryModelImpl)assetEntry;
 
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_CU,
+			new Object[] {
+				new Long(assetEntryModelImpl.getOriginalGroupId()),
+				
+			assetEntryModelImpl.getOriginalClassUuid()
+			});
+
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
 				new Long(assetEntryModelImpl.getOriginalClassNameId()),
@@ -296,6 +326,30 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			AssetEntryImpl.class, assetEntry.getPrimaryKey(), assetEntry);
 
 		if (!isNew &&
+				((assetEntry.getGroupId() != assetEntryModelImpl.getOriginalGroupId()) ||
+				!Validator.equals(assetEntry.getClassUuid(),
+					assetEntryModelImpl.getOriginalClassUuid()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_CU,
+				new Object[] {
+					new Long(assetEntryModelImpl.getOriginalGroupId()),
+					
+				assetEntryModelImpl.getOriginalClassUuid()
+				});
+		}
+
+		if (isNew ||
+				((assetEntry.getGroupId() != assetEntryModelImpl.getOriginalGroupId()) ||
+				!Validator.equals(assetEntry.getClassUuid(),
+					assetEntryModelImpl.getOriginalClassUuid()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_CU,
+				new Object[] {
+					new Long(assetEntry.getGroupId()),
+					
+				assetEntry.getClassUuid()
+				}, assetEntry);
+		}
+
+		if (!isNew &&
 				((assetEntry.getClassNameId() != assetEntryModelImpl.getOriginalClassNameId()) ||
 				(assetEntry.getClassPK() != assetEntryModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
@@ -337,6 +391,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		assetEntryImpl.setModifiedDate(assetEntry.getModifiedDate());
 		assetEntryImpl.setClassNameId(assetEntry.getClassNameId());
 		assetEntryImpl.setClassPK(assetEntry.getClassPK());
+		assetEntryImpl.setClassUuid(assetEntry.getClassUuid());
 		assetEntryImpl.setVisible(assetEntry.isVisible());
 		assetEntryImpl.setStartDate(assetEntry.getStartDate());
 		assetEntryImpl.setEndDate(assetEntry.getEndDate());
@@ -666,6 +721,132 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	public AssetEntry findByG_CU(long groupId, String classUuid)
+		throws NoSuchEntryException, SystemException {
+		AssetEntry assetEntry = fetchByG_CU(groupId, classUuid);
+
+		if (assetEntry == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(", classUuid=");
+			msg.append(classUuid);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+
+		return assetEntry;
+	}
+
+	public AssetEntry fetchByG_CU(long groupId, String classUuid)
+		throws SystemException {
+		return fetchByG_CU(groupId, classUuid, true);
+	}
+
+	public AssetEntry fetchByG_CU(long groupId, String classUuid,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(groupId), classUuid };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_CU,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(3);
+
+				query.append(_SQL_SELECT_ASSETENTRY_WHERE);
+
+				query.append(_FINDER_COLUMN_G_CU_GROUPID_2);
+
+				if (classUuid == null) {
+					query.append(_FINDER_COLUMN_G_CU_CLASSUUID_1);
+				}
+				else {
+					if (classUuid.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_G_CU_CLASSUUID_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_G_CU_CLASSUUID_2);
+					}
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (classUuid != null) {
+					qPos.add(classUuid);
+				}
+
+				List<AssetEntry> list = q.list();
+
+				result = list;
+
+				AssetEntry assetEntry = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_CU,
+						finderArgs, list);
+				}
+				else {
+					assetEntry = list.get(0);
+
+					cacheResult(assetEntry);
+
+					if ((assetEntry.getGroupId() != groupId) ||
+							(assetEntry.getClassUuid() == null) ||
+							!assetEntry.getClassUuid().equals(classUuid)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_CU,
+							finderArgs, assetEntry);
+					}
+				}
+
+				return assetEntry;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_CU,
+						finderArgs, new ArrayList<AssetEntry>());
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (AssetEntry)result;
+			}
+		}
+	}
+
 	public AssetEntry findByC_C(long classNameId, long classPK)
 		throws NoSuchEntryException, SystemException {
 		AssetEntry assetEntry = fetchByC_C(classNameId, classPK);
@@ -862,6 +1043,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	public void removeByG_CU(long groupId, String classUuid)
+		throws NoSuchEntryException, SystemException {
+		AssetEntry assetEntry = findByG_CU(groupId, classUuid);
+
+		remove(assetEntry);
+	}
+
 	public void removeByC_C(long classNameId, long classPK)
 		throws NoSuchEntryException, SystemException {
 		AssetEntry assetEntry = findByC_C(classNameId, classPK);
@@ -912,6 +1100,69 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 				}
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByG_CU(long groupId, String classUuid)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(groupId), classUuid };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_CU,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(3);
+
+				query.append(_SQL_COUNT_ASSETENTRY_WHERE);
+
+				query.append(_FINDER_COLUMN_G_CU_GROUPID_2);
+
+				if (classUuid == null) {
+					query.append(_FINDER_COLUMN_G_CU_CLASSUUID_1);
+				}
+				else {
+					if (classUuid.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_G_CU_CLASSUUID_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_G_CU_CLASSUUID_2);
+					}
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (classUuid != null) {
+					qPos.add(classUuid);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_CU,
 					finderArgs, count);
 
 				closeSession(session);
@@ -2145,6 +2396,10 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 	private static final String _SQL_GETASSETTAGSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM AssetEntries_AssetTags WHERE entryId = ?";
 	private static final String _SQL_CONTAINSASSETTAG = "SELECT COUNT(*) AS COUNT_VALUE FROM AssetEntries_AssetTags WHERE entryId = ? AND tagId = ?";
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "assetEntry.companyId = ?";
+	private static final String _FINDER_COLUMN_G_CU_GROUPID_2 = "assetEntry.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_CU_CLASSUUID_1 = "assetEntry.classUuid IS NULL";
+	private static final String _FINDER_COLUMN_G_CU_CLASSUUID_2 = "assetEntry.classUuid = ?";
+	private static final String _FINDER_COLUMN_G_CU_CLASSUUID_3 = "(assetEntry.classUuid IS NULL OR assetEntry.classUuid = ?)";
 	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "assetEntry.classNameId = ? AND ";
 	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "assetEntry.classPK = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "assetEntry.";

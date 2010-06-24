@@ -69,6 +69,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "classNameId", new Integer(Types.BIGINT) },
 			{ "classPK", new Integer(Types.BIGINT) },
+			{ "classUuid", new Integer(Types.VARCHAR) },
 			{ "visible", new Integer(Types.BOOLEAN) },
 			{ "startDate", new Integer(Types.TIMESTAMP) },
 			{ "endDate", new Integer(Types.TIMESTAMP) },
@@ -84,7 +85,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 			{ "priority", new Integer(Types.DOUBLE) },
 			{ "viewCount", new Integer(Types.INTEGER) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table AssetEntry (entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,visible BOOLEAN,startDate DATE null,endDate DATE null,publishDate DATE null,expirationDate DATE null,mimeType VARCHAR(75) null,title VARCHAR(255) null,description STRING null,summary STRING null,url STRING null,height INTEGER,width INTEGER,priority DOUBLE,viewCount INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table AssetEntry (entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,classUuid VARCHAR(75) null,visible BOOLEAN,startDate DATE null,endDate DATE null,publishDate DATE null,expirationDate DATE null,mimeType VARCHAR(75) null,title VARCHAR(255) null,description STRING null,summary STRING null,url STRING null,height INTEGER,width INTEGER,priority DOUBLE,viewCount INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table AssetEntry";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -108,6 +109,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setClassNameId(soapModel.getClassNameId());
 		model.setClassPK(soapModel.getClassPK());
+		model.setClassUuid(soapModel.getClassUuid());
 		model.setVisible(soapModel.getVisible());
 		model.setStartDate(soapModel.getStartDate());
 		model.setEndDate(soapModel.getEndDate());
@@ -189,6 +191,16 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 
 	public void setGroupId(long groupId) {
 		_groupId = groupId;
+
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = groupId;
+		}
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public long getCompanyId() {
@@ -286,6 +298,27 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 
 	public long getOriginalClassPK() {
 		return _originalClassPK;
+	}
+
+	public String getClassUuid() {
+		if (_classUuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _classUuid;
+		}
+	}
+
+	public void setClassUuid(String classUuid) {
+		_classUuid = classUuid;
+
+		if (_originalClassUuid == null) {
+			_originalClassUuid = classUuid;
+		}
+	}
+
+	public String getOriginalClassUuid() {
+		return GetterUtil.getString(_originalClassUuid);
 	}
 
 	public boolean getVisible() {
@@ -465,6 +498,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 		clone.setModifiedDate(getModifiedDate());
 		clone.setClassNameId(getClassNameId());
 		clone.setClassPK(getClassPK());
+		clone.setClassUuid(getClassUuid());
 		clone.setVisible(getVisible());
 		clone.setStartDate(getStartDate());
 		clone.setEndDate(getEndDate());
@@ -526,7 +560,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(47);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("{entryId=");
 		sb.append(getEntryId());
@@ -546,6 +580,8 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 		sb.append(getClassNameId());
 		sb.append(", classPK=");
 		sb.append(getClassPK());
+		sb.append(", classUuid=");
+		sb.append(getClassUuid());
 		sb.append(", visible=");
 		sb.append(getVisible());
 		sb.append(", startDate=");
@@ -580,7 +616,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(73);
+		StringBundler sb = new StringBundler(76);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.asset.model.AssetEntry");
@@ -621,6 +657,10 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 		sb.append(
 			"<column><column-name>classPK</column-name><column-value><![CDATA[");
 		sb.append(getClassPK());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classUuid</column-name><column-value><![CDATA[");
+		sb.append(getClassUuid());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>visible</column-name><column-value><![CDATA[");
@@ -686,6 +726,8 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 
 	private long _entryId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;
@@ -698,6 +740,8 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 	private long _classPK;
 	private long _originalClassPK;
 	private boolean _setOriginalClassPK;
+	private String _classUuid;
+	private String _originalClassUuid;
 	private boolean _visible;
 	private Date _startDate;
 	private Date _endDate;

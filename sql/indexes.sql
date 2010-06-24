@@ -38,7 +38,9 @@ create index IX_2ED82CAD on AssetEntries_AssetTags (entryId);
 create index IX_B2A61B55 on AssetEntries_AssetTags (tagId);
 
 create unique index IX_1E9D371D on AssetEntry (classNameId, classPK);
+create index IX_FC1F9C7B on AssetEntry (classUuid);
 create index IX_7306C60 on AssetEntry (companyId);
+create index IX_1EBA6821 on AssetEntry (groupId, classUuid);
 
 create index IX_128516C8 on AssetLink (entryId1);
 create index IX_56E0AB21 on AssetLink (entryId1, entryId2);

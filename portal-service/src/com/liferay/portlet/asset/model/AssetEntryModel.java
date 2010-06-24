@@ -92,6 +92,11 @@ public interface AssetEntryModel extends BaseModel<AssetEntry> {
 
 	public void setClassPK(long classPK);
 
+	@AutoEscape
+	public String getClassUuid();
+
+	public void setClassUuid(String classUuid);
+
 	public boolean getVisible();
 
 	public boolean isVisible();

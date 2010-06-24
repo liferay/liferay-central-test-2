@@ -71,6 +71,7 @@ public class AssetEntryJSONSerializer {
 		jsonObj.put("modifiedDate", modifiedDateJSON);
 		jsonObj.put("classNameId", model.getClassNameId());
 		jsonObj.put("classPK", model.getClassPK());
+		jsonObj.put("classUuid", model.getClassUuid());
 		jsonObj.put("visible", model.getVisible());
 
 		Date startDate = model.getStartDate();

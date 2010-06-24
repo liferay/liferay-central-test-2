@@ -255,19 +255,19 @@ public class AssetEntryServiceSoap {
 
 	public static com.liferay.portlet.asset.model.AssetEntrySoap updateEntry(
 		long groupId, java.lang.String className, long classPK,
-		long[] categoryIds, java.lang.String[] tagNames, boolean visible,
-		java.util.Date startDate, java.util.Date endDate,
-		java.util.Date publishDate, java.util.Date expirationDate,
-		java.lang.String mimeType, java.lang.String title,
-		java.lang.String description, java.lang.String summary,
-		java.lang.String url, int height, int width,
+		java.lang.String classUuid, long[] categoryIds,
+		java.lang.String[] tagNames, boolean visible, java.util.Date startDate,
+		java.util.Date endDate, java.util.Date publishDate,
+		java.util.Date expirationDate, java.lang.String mimeType,
+		java.lang.String title, java.lang.String description,
+		java.lang.String summary, java.lang.String url, int height, int width,
 		java.lang.Integer priority, boolean sync) throws RemoteException {
 		try {
 			com.liferay.portlet.asset.model.AssetEntry returnValue = AssetEntryServiceUtil.updateEntry(groupId,
-					className, classPK, categoryIds, tagNames, visible,
-					startDate, endDate, publishDate, expirationDate, mimeType,
-					title, description, summary, url, height, width, priority,
-					sync);
+					className, classPK, classUuid, categoryIds, tagNames,
+					visible, startDate, endDate, publishDate, expirationDate,
+					mimeType, title, description, summary, url, height, width,
+					priority, sync);
 
 			return com.liferay.portlet.asset.model.AssetEntrySoap.toSoapModel(returnValue);
 		}

@@ -188,6 +188,13 @@ public class AssetEntryLocalServiceWrapper implements AssetEntryLocalService {
 		return _assetEntryLocalService.getEntry(entryId);
 	}
 
+	public com.liferay.portlet.asset.model.AssetEntry getEntry(long groupId,
+		java.lang.String classUuid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _assetEntryLocalService.getEntry(groupId, classUuid);
+	}
+
 	public com.liferay.portlet.asset.model.AssetEntry getEntry(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -281,8 +288,8 @@ public class AssetEntryLocalServiceWrapper implements AssetEntryLocalService {
 
 	public com.liferay.portlet.asset.model.AssetEntry updateEntry(long userId,
 		long groupId, java.lang.String className, long classPK,
-		long[] categoryIds, java.lang.String[] tagNames, boolean visible,
-		java.util.Date startDate, java.util.Date endDate,
+		java.lang.String uuid, long[] categoryIds, java.lang.String[] tagNames,
+		boolean visible, java.util.Date startDate, java.util.Date endDate,
 		java.util.Date publishDate, java.util.Date expirationDate,
 		java.lang.String mimeType, java.lang.String title,
 		java.lang.String description, java.lang.String summary,
@@ -291,7 +298,7 @@ public class AssetEntryLocalServiceWrapper implements AssetEntryLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _assetEntryLocalService.updateEntry(userId, groupId, className,
-			classPK, categoryIds, tagNames, visible, startDate, endDate,
+			classPK, uuid, categoryIds, tagNames, visible, startDate, endDate,
 			publishDate, expirationDate, mimeType, title, description, summary,
 			url, height, width, priority, sync);
 	}

@@ -191,6 +191,13 @@ public class AssetEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetEntry getEntry(
+		long groupId, java.lang.String classUuid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getEntry(groupId, classUuid);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetEntry getEntry(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -284,8 +291,8 @@ public class AssetEntryLocalServiceUtil {
 
 	public static com.liferay.portlet.asset.model.AssetEntry updateEntry(
 		long userId, long groupId, java.lang.String className, long classPK,
-		long[] categoryIds, java.lang.String[] tagNames, boolean visible,
-		java.util.Date startDate, java.util.Date endDate,
+		java.lang.String uuid, long[] categoryIds, java.lang.String[] tagNames,
+		boolean visible, java.util.Date startDate, java.util.Date endDate,
 		java.util.Date publishDate, java.util.Date expirationDate,
 		java.lang.String mimeType, java.lang.String title,
 		java.lang.String description, java.lang.String summary,
@@ -294,7 +301,7 @@ public class AssetEntryLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateEntry(userId, groupId, className, classPK,
+				   .updateEntry(userId, groupId, className, classPK, uuid,
 			categoryIds, tagNames, visible, startDate, endDate, publishDate,
 			expirationDate, mimeType, title, description, summary, url, height,
 			width, priority, sync);

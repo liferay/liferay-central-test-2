@@ -116,12 +116,12 @@ public interface AssetEntryService {
 
 	public com.liferay.portlet.asset.model.AssetEntry updateEntry(
 		long groupId, java.lang.String className, long classPK,
-		long[] categoryIds, java.lang.String[] tagNames, boolean visible,
-		java.util.Date startDate, java.util.Date endDate,
-		java.util.Date publishDate, java.util.Date expirationDate,
-		java.lang.String mimeType, java.lang.String title,
-		java.lang.String description, java.lang.String summary,
-		java.lang.String url, int height, int width,
+		java.lang.String classUuid, long[] categoryIds,
+		java.lang.String[] tagNames, boolean visible, java.util.Date startDate,
+		java.util.Date endDate, java.util.Date publishDate,
+		java.util.Date expirationDate, java.lang.String mimeType,
+		java.lang.String title, java.lang.String description,
+		java.lang.String summary, java.lang.String url, int height, int width,
 		java.lang.Integer priority, boolean sync)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

@@ -129,6 +129,14 @@ public class AssetEntryWrapper implements AssetEntry {
 		_assetEntry.setClassPK(classPK);
 	}
 
+	public java.lang.String getClassUuid() {
+		return _assetEntry.getClassUuid();
+	}
+
+	public void setClassUuid(java.lang.String classUuid) {
+		_assetEntry.setClassUuid(classUuid);
+	}
+
 	public boolean getVisible() {
 		return _assetEntry.getVisible();
 	}

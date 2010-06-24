@@ -201,6 +201,26 @@ public class AssetEntryUtil {
 			orderByComparator);
 	}
 
+	public static com.liferay.portlet.asset.model.AssetEntry findByG_CU(
+		long groupId, java.lang.String classUuid)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.asset.NoSuchEntryException {
+		return getPersistence().findByG_CU(groupId, classUuid);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetEntry fetchByG_CU(
+		long groupId, java.lang.String classUuid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByG_CU(groupId, classUuid);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetEntry fetchByG_CU(
+		long groupId, java.lang.String classUuid, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByG_CU(groupId, classUuid, retrieveFromCache);
+	}
+
 	public static com.liferay.portlet.asset.model.AssetEntry findByC_C(
 		long classNameId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -244,6 +264,12 @@ public class AssetEntryUtil {
 		getPersistence().removeByCompanyId(companyId);
 	}
 
+	public static void removeByG_CU(long groupId, java.lang.String classUuid)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.asset.NoSuchEntryException {
+		getPersistence().removeByG_CU(groupId, classUuid);
+	}
+
 	public static void removeByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchEntryException {
@@ -258,6 +284,11 @@ public class AssetEntryUtil {
 	public static int countByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByCompanyId(companyId);
+	}
+
+	public static int countByG_CU(long groupId, java.lang.String classUuid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByG_CU(groupId, classUuid);
 	}
 
 	public static int countByC_C(long classNameId, long classPK)

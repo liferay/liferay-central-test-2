@@ -88,6 +88,19 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchEntryException;
 
+	public com.liferay.portlet.asset.model.AssetEntry findByG_CU(long groupId,
+		java.lang.String classUuid)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.asset.NoSuchEntryException;
+
+	public com.liferay.portlet.asset.model.AssetEntry fetchByG_CU(
+		long groupId, java.lang.String classUuid)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.asset.model.AssetEntry fetchByG_CU(
+		long groupId, java.lang.String classUuid, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public com.liferay.portlet.asset.model.AssetEntry findByC_C(
 		long classNameId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -116,6 +129,10 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	public void removeByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public void removeByG_CU(long groupId, java.lang.String classUuid)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.asset.NoSuchEntryException;
+
 	public void removeByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchEntryException;
@@ -124,6 +141,9 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByCompanyId(long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByG_CU(long groupId, java.lang.String classUuid)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByC_C(long classNameId, long classPK)

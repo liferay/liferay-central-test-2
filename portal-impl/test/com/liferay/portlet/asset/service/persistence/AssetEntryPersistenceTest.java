@@ -75,6 +75,7 @@ public class AssetEntryPersistenceTest extends BasePersistenceTestCase {
 		newAssetEntry.setModifiedDate(nextDate());
 		newAssetEntry.setClassNameId(nextLong());
 		newAssetEntry.setClassPK(nextLong());
+		newAssetEntry.setClassUuid(randomString());
 		newAssetEntry.setVisible(randomBoolean());
 		newAssetEntry.setStartDate(nextDate());
 		newAssetEntry.setEndDate(nextDate());
@@ -109,6 +110,8 @@ public class AssetEntryPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingAssetEntry.getClassNameId(),
 			newAssetEntry.getClassNameId());
 		assertEquals(existingAssetEntry.getClassPK(), newAssetEntry.getClassPK());
+		assertEquals(existingAssetEntry.getClassUuid(),
+			newAssetEntry.getClassUuid());
 		assertEquals(existingAssetEntry.getVisible(), newAssetEntry.getVisible());
 		assertEquals(Time.getShortTimestamp(existingAssetEntry.getStartDate()),
 			Time.getShortTimestamp(newAssetEntry.getStartDate()));
@@ -213,6 +216,7 @@ public class AssetEntryPersistenceTest extends BasePersistenceTestCase {
 		assetEntry.setModifiedDate(nextDate());
 		assetEntry.setClassNameId(nextLong());
 		assetEntry.setClassPK(nextLong());
+		assetEntry.setClassUuid(randomString());
 		assetEntry.setVisible(randomBoolean());
 		assetEntry.setStartDate(nextDate());
 		assetEntry.setEndDate(nextDate());

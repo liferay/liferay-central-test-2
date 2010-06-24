@@ -626,12 +626,12 @@ public class AssetEntryServiceHttp {
 
 	public static com.liferay.portlet.asset.model.AssetEntry updateEntry(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String className,
-		long classPK, long[] categoryIds, java.lang.String[] tagNames,
-		boolean visible, java.util.Date startDate, java.util.Date endDate,
-		java.util.Date publishDate, java.util.Date expirationDate,
-		java.lang.String mimeType, java.lang.String title,
-		java.lang.String description, java.lang.String summary,
-		java.lang.String url, int height, int width,
+		long classPK, java.lang.String classUuid, long[] categoryIds,
+		java.lang.String[] tagNames, boolean visible, java.util.Date startDate,
+		java.util.Date endDate, java.util.Date publishDate,
+		java.util.Date expirationDate, java.lang.String mimeType,
+		java.lang.String title, java.lang.String description,
+		java.lang.String summary, java.lang.String url, int height, int width,
 		java.lang.Integer priority, boolean sync)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -646,85 +646,91 @@ public class AssetEntryServiceHttp {
 
 			Object paramObj2 = new LongWrapper(classPK);
 
-			Object paramObj3 = categoryIds;
+			Object paramObj3 = classUuid;
+
+			if (classUuid == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = categoryIds;
 
 			if (categoryIds == null) {
-				paramObj3 = new NullWrapper("[J");
+				paramObj4 = new NullWrapper("[J");
 			}
 
-			Object paramObj4 = tagNames;
+			Object paramObj5 = tagNames;
 
 			if (tagNames == null) {
-				paramObj4 = new NullWrapper("[Ljava.lang.String;");
+				paramObj5 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj5 = new BooleanWrapper(visible);
+			Object paramObj6 = new BooleanWrapper(visible);
 
-			Object paramObj6 = startDate;
+			Object paramObj7 = startDate;
 
 			if (startDate == null) {
-				paramObj6 = new NullWrapper("java.util.Date");
-			}
-
-			Object paramObj7 = endDate;
-
-			if (endDate == null) {
 				paramObj7 = new NullWrapper("java.util.Date");
 			}
 
-			Object paramObj8 = publishDate;
+			Object paramObj8 = endDate;
 
-			if (publishDate == null) {
+			if (endDate == null) {
 				paramObj8 = new NullWrapper("java.util.Date");
 			}
 
-			Object paramObj9 = expirationDate;
+			Object paramObj9 = publishDate;
 
-			if (expirationDate == null) {
+			if (publishDate == null) {
 				paramObj9 = new NullWrapper("java.util.Date");
 			}
 
-			Object paramObj10 = mimeType;
+			Object paramObj10 = expirationDate;
 
-			if (mimeType == null) {
-				paramObj10 = new NullWrapper("java.lang.String");
+			if (expirationDate == null) {
+				paramObj10 = new NullWrapper("java.util.Date");
 			}
 
-			Object paramObj11 = title;
+			Object paramObj11 = mimeType;
 
-			if (title == null) {
+			if (mimeType == null) {
 				paramObj11 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj12 = description;
+			Object paramObj12 = title;
 
-			if (description == null) {
+			if (title == null) {
 				paramObj12 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj13 = summary;
+			Object paramObj13 = description;
 
-			if (summary == null) {
+			if (description == null) {
 				paramObj13 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj14 = url;
+			Object paramObj14 = summary;
 
-			if (url == null) {
+			if (summary == null) {
 				paramObj14 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj15 = new IntegerWrapper(height);
+			Object paramObj15 = url;
 
-			Object paramObj16 = new IntegerWrapper(width);
-
-			Object paramObj17 = priority;
-
-			if (priority == null) {
-				paramObj17 = new NullWrapper("java.lang.Integer");
+			if (url == null) {
+				paramObj15 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj18 = new BooleanWrapper(sync);
+			Object paramObj16 = new IntegerWrapper(height);
+
+			Object paramObj17 = new IntegerWrapper(width);
+
+			Object paramObj18 = priority;
+
+			if (priority == null) {
+				paramObj18 = new NullWrapper("java.lang.Integer");
+			}
+
+			Object paramObj19 = new BooleanWrapper(sync);
 
 			MethodWrapper methodWrapper = new MethodWrapper(AssetEntryServiceUtil.class.getName(),
 					"updateEntry",
@@ -733,7 +739,7 @@ public class AssetEntryServiceHttp {
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10, paramObj11, paramObj12, paramObj13,
 						paramObj14, paramObj15, paramObj16, paramObj17,
-						paramObj18
+						paramObj18, paramObj19
 					});
 
 			Object returnObj = null;
