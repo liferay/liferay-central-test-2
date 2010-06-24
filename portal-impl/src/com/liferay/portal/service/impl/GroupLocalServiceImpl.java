@@ -834,8 +834,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		assetEntryLocalService.updateEntry(
 			userId, companyGroup.getGroupId(), Group.class.getName(),
-			group.getGroupId(), assetCategoryIds, assetTagNames, false, null,
-			null, null, null, null, group.getDescriptiveName(),
+			group.getGroupId(), null, assetCategoryIds, assetTagNames, false,
+			null, null, null, null, null, group.getDescriptiveName(),
 			group.getDescription(), null, null, 0, 0, null, false);
 	}
 

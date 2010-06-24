@@ -696,16 +696,18 @@ public class DLFileEntryLocalServiceImpl
 		if (addDraftAssetEntry) {
 			assetEntryLocalService.updateEntry(
 				userId, fileEntry.getGroupId(), DLFileEntry.class.getName(),
-				fileVersion.getFileVersionId(), assetCategoryIds, assetTagNames,
-				false, null, null, null, null, mimeType, fileEntry.getTitle(),
-				fileEntry.getDescription(), null, null, 0, 0, null, false);
+				fileVersion.getFileVersionId(), fileEntry.getUuid(),
+				assetCategoryIds, assetTagNames, false, null, null, null, null,
+				mimeType, fileEntry.getTitle(), fileEntry.getDescription(),
+				null, null, 0, 0, null, false);
 		}
 		else {
 			assetEntryLocalService.updateEntry(
 				userId, fileEntry.getGroupId(), DLFileEntry.class.getName(),
-				fileEntry.getFileEntryId(), assetCategoryIds, assetTagNames,
-				true, null, null, null, null, mimeType, fileEntry.getTitle(),
-				fileEntry.getDescription(), null, null, 0, 0, null, false);
+				fileEntry.getFileEntryId(), fileEntry.getUuid(),
+				assetCategoryIds, assetTagNames, true, null, null, null, null,
+				mimeType, fileEntry.getTitle(), fileEntry.getDescription(),
+				null, null, 0, 0, null, false);
 
 			List<DLFileShortcut> fileShortcuts =
 				dlFileShortcutPersistence.findByG_TF_TN(
@@ -716,10 +718,10 @@ public class DLFileEntryLocalServiceImpl
 				assetEntryLocalService.updateEntry(
 					userId, fileShortcut.getGroupId(),
 					DLFileShortcut.class.getName(),
-					fileShortcut.getFileShortcutId(), assetCategoryIds,
-					assetTagNames, true, null, null, null, null, mimeType,
-					fileEntry.getTitle(), fileEntry.getDescription(), null,
-					null, 0, 0, null, false);
+					fileShortcut.getFileShortcutId(), fileShortcut.getUuid(),
+					assetCategoryIds, assetTagNames, true, null, null, null,
+					null, mimeType, fileEntry.getTitle(),
+					fileEntry.getDescription(), null, null, 0, 0, null, false);
 			}
 		}
 	}
@@ -1152,11 +1154,11 @@ public class DLFileEntryLocalServiceImpl
 						assetEntryLocalService.updateEntry(
 							userId, fileEntry.getGroupId(),
 							DLFileEntry.class.getName(),
-							fileEntry.getFileEntryId(), assetCategoryIds,
-							assetTagNames, true, null, null, null, null,
-							draftAssetEntry.getMimeType(), fileEntry.getTitle(),
-							fileEntry.getDescription(), null, null, 0, 0, null,
-							false);
+							fileEntry.getFileEntryId(), fileEntry.getUuid(),
+							assetCategoryIds, assetTagNames, true, null, null,
+							null, null, draftAssetEntry.getMimeType(),
+							fileEntry.getTitle(), fileEntry.getDescription(),
+							null, null, 0, 0, null, false);
 
 						assetEntryLocalService.deleteEntry(
 							draftAssetEntry.getEntryId());

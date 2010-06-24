@@ -1783,9 +1783,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		assetEntryLocalService.updateEntry(
 			userId, companyGroup.getGroupId(), User.class.getName(),
-			user.getUserId(), assetCategoryIds, assetTagNames, false, null,
-			null, null, null, null, user.getFullName(), null, null, null, 0, 0,
-			null, false);
+			user.getUserId(), user.getUuid(), assetCategoryIds, assetTagNames,
+			false, null, null, null, null, null, user.getFullName(), null, null,
+			null, 0, 0, null, false);
 	}
 
 	public User updateCreateDate(long userId, Date createDate)

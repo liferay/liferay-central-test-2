@@ -309,9 +309,10 @@ public class BookmarksEntryLocalServiceImpl
 
 		assetEntryLocalService.updateEntry(
 			userId, entry.getGroupId(), BookmarksEntry.class.getName(),
-			entry.getEntryId(), assetCategoryIds, assetTagNames, true, null,
-			null, null, null, ContentTypes.TEXT_PLAIN, entry.getName(),
-			entry.getComments(), null, entry.getUrl(), 0, 0, null, false);
+			entry.getEntryId(), entry.getUuid(), assetCategoryIds,
+			assetTagNames, true, null, null, null, null,
+			ContentTypes.TEXT_PLAIN, entry.getName(), entry.getComments(), null,
+			entry.getUrl(), 0, 0, null, false);
 	}
 
 	public BookmarksEntry updateEntry(

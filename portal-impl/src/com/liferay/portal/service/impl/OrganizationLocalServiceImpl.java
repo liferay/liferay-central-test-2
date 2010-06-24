@@ -645,9 +645,10 @@ public class OrganizationLocalServiceImpl
 
 		assetEntryLocalService.updateEntry(
 			userId, companyGroup.getGroupId(), Organization.class.getName(),
-			organization.getOrganizationId(), assetCategoryIds, assetTagNames,
-			false, null, null, null, null, null, organization.getName(),
-			StringPool.BLANK, null, null, 0, 0, null, false);
+			organization.getOrganizationId(), null, assetCategoryIds,
+			assetTagNames, false, null, null, null, null, null,
+			organization.getName(), StringPool.BLANK, null, null, 0, 0, null,
+			false);
 	}
 
 	public Organization updateOrganization(

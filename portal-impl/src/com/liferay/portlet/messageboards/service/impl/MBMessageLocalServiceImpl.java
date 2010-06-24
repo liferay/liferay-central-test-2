@@ -1221,9 +1221,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		assetEntryLocalService.updateEntry(
 			userId, message.getGroupId(), MBMessage.class.getName(),
-			message.getMessageId(), assetCategoryIds, assetTagNames, visible,
-			null, null, null, null, ContentTypes.TEXT_HTML,
-			message.getSubject(), null, null, null, 0, 0, null, false);
+			message.getMessageId(), message.getUuid(), assetCategoryIds,
+			assetTagNames, visible, null, null, null, null,
+			ContentTypes.TEXT_HTML, message.getSubject(), null, null, null, 0,
+			0, null, false);
 	}
 
 	public MBMessage updateDiscussionMessage(

@@ -465,10 +465,10 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 		assetEntryLocalService.updateEntry(
 			userId, image.getGroupId(), IGImage.class.getName(),
-			image.getImageId(), assetCategoryIds, assetTagNames, true, null,
-			null, null, null, contentType, image.getName(),
-			image.getDescription(), null, null, largeImage.getHeight(),
-			largeImage.getWidth(), null, false);
+			image.getImageId(), image.getUuid(), assetCategoryIds,
+			assetTagNames, true, null, null, null, null, contentType,
+			image.getName(), image.getDescription(), null, null,
+			largeImage.getHeight(), largeImage.getWidth(), null, false);
 	}
 
 	public IGImage updateImage(

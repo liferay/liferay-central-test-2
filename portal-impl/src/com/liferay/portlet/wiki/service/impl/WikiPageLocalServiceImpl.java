@@ -478,7 +478,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
 			page.getCompanyId(), page.getGroupId(),
 			WikiPage.class.getName(), page.getResourcePrimKey());
-		
+
 		// Cache
 
 		clearPageCache(page);
@@ -1036,16 +1036,18 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		if (addDraftAssetEntry) {
 			assetEntryLocalService.updateEntry(
 				userId, page.getGroupId(), WikiPage.class.getName(),
-				page.getPrimaryKey(), assetCategoryIds, assetTagNames, false,
-				null, null, null, null, ContentTypes.TEXT_HTML, page.getTitle(),
-				null, null, null, 0, 0, null, false);
+				page.getPrimaryKey(), page.getUuid(), assetCategoryIds,
+				assetTagNames, false, null, null, null, null,
+				ContentTypes.TEXT_HTML, page.getTitle(), null, null, null, 0, 0,
+				null, false);
 		}
 		else {
 			assetEntryLocalService.updateEntry(
 				userId, page.getGroupId(), WikiPage.class.getName(),
-				page.getResourcePrimKey(), assetCategoryIds, assetTagNames,
-				visible, null, null, null, null, ContentTypes.TEXT_HTML,
-				page.getTitle(), null, null, null, 0, 0, null, false);
+				page.getResourcePrimKey(), page.getUuid(), assetCategoryIds,
+				assetTagNames, visible, null, null, null, null,
+				ContentTypes.TEXT_HTML, page.getTitle(), null, null, null, 0, 0,
+				null, false);
 		}
 	}
 
@@ -1219,10 +1221,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 					assetEntryLocalService.updateEntry(
 						userId, page.getGroupId(), WikiPage.class.getName(),
-						page.getResourcePrimKey(), assetCategoryIds,
-						assetTagNames, true, null, null, null, null,
-						ContentTypes.TEXT_HTML, page.getTitle(), null, null,
-						null, 0, 0, null, false);
+						page.getResourcePrimKey(), page.getUuid(),
+						assetCategoryIds, assetTagNames, true, null, null, null,
+						null, ContentTypes.TEXT_HTML, page.getTitle(), null,
+						null, null, 0, 0, null, false);
 
 				}
 				catch (NoSuchEntryException nsee) {

@@ -1843,18 +1843,19 @@ public class JournalArticleLocalServiceImpl
 		if (addDraftAssetEntry) {
 			assetEntryLocalService.updateEntry(
 				userId, article.getGroupId(), JournalArticle.class.getName(),
-				article.getPrimaryKey(), assetCategoryIds, assetTagNames,
-				false, null, null, displayDate, expirationDate,
+				article.getPrimaryKey(), article.getUuid(), assetCategoryIds,
+				assetTagNames, false, null, null, displayDate, expirationDate,
 				ContentTypes.TEXT_HTML, article.getTitle(),
 				article.getDescription(), null, null, 0, 0, null, false);
 		}
 		else {
 			assetEntryLocalService.updateEntry(
 				userId, article.getGroupId(), JournalArticle.class.getName(),
-				article.getResourcePrimKey(), assetCategoryIds, assetTagNames,
-				visible, null, null, displayDate, expirationDate,
-				ContentTypes.TEXT_HTML, article.getTitle(),
-				article.getDescription(), null, null, 0, 0, null, false);
+				article.getResourcePrimKey(), article.getUuid(),
+				assetCategoryIds, assetTagNames, visible, null, null,
+				displayDate, expirationDate, ContentTypes.TEXT_HTML,
+				article.getTitle(), article.getDescription(), null, null, 0, 0,
+				null, false);
 		}
 	}
 
@@ -1935,9 +1936,9 @@ public class JournalArticleLocalServiceImpl
 						assetEntryLocalService.updateEntry(
 							userId, article.getGroupId(),
 							JournalArticle.class.getName(),
-							article.getResourcePrimKey(), assetCategoryIds,
-							assetTagNames, true, null, null, displayDate,
-							expirationDate, ContentTypes.TEXT_HTML,
+							article.getResourcePrimKey(), article.getUuid(),
+							assetCategoryIds, assetTagNames, true, null, null,
+							displayDate, expirationDate, ContentTypes.TEXT_HTML,
 							article.getTitle(), article.getDescription(), null,
 							null, 0, 0, null, false);
 
