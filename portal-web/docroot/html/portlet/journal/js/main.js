@@ -31,7 +31,7 @@ AUI().add(
 						'<label for="" class="journal-article-field-label"><span>{fieldLabel}</span></label>' +
 						'<div class="journal-article-component-container"></div>' +
 						'<div class="journal-article-required-message portlet-msg-error">{requiredFieldLanguage}</div>' +
-						'<div class="journal-article-buttons">' +
+						'<div class="journal-article-buttons {articleButtonsRowCSSClass}">' +
 							'<span class="aui-field aui-field-inline aui-field-text journal-article-variable-name">' +
 								'<span class="aui-field-content">' +
 									'<label for="{portletNamespace}{instanceId}variableName" class="aui-field-label">{variableNameLanguage}</label>' +
@@ -1450,7 +1450,7 @@ AUI().add(
 						30000
 					);
 
-					A.one('#selectTemplateBtn').focus();
+					instance.getById('selectTemplateBtn').focus();
 				}
 				else {
 					if (!cmd) {
@@ -2782,6 +2782,10 @@ AUI().add(
 						}
 					},
 
+					optionsEditable: {
+						value: true
+					},
+
 					parentStructureId: {
 						setter: function(v) {
 							var instance = this;
@@ -3015,7 +3019,9 @@ AUI().add(
 							}
 						}
 						else {
-							content = principalElement.val();
+							if (principalElement) {
+								content = principalElement.val();
+							}
 						}
 
 						instance.set('content', content);
@@ -3032,11 +3038,19 @@ AUI().add(
 							var requiredFieldLanguage = Liferay.Language.get('this-field-is-required');
 							var variableNameLanguage = Liferay.Language.get('variable-name');
 
+							var optionsEditable = instance.get('optionsEditable');
+
 							var editBtnTemplate = instance.getById('editBtnTemplate');
 							var editBtnTemplateHTML = '';
 
-							if (editBtnTemplate) {
+							if (editBtnTemplate && optionsEditable) {
 								editBtnTemplateHTML = editBtnTemplate.html();
+							}
+
+							var articleButtonsRowCSSClass = '';
+
+							if (!optionsEditable) {
+								articleButtonsRowCSSClass = 'aui-helper-hidden';
 							}
 
 							var repeatableBtnTemplate = instance.getById('repeatableBtnTemplate');
@@ -3054,6 +3068,7 @@ AUI().add(
 							htmlTemplate = A.substitute(
 								TPL_FIELD_CONTAINER,
 								{
+									articleButtonsRowCSSClass: articleButtonsRowCSSClass,
 									editBtnTemplateHTML: editBtnTemplateHTML,
 									fieldLabel: fieldLabel,
 									instanceId: randomInstanceId,
@@ -3341,6 +3356,8 @@ AUI().add(
 		registerFieldModel('MultiList', 'multi-list', 'MultiListField');
 		registerFieldModel('LinkToPage', 'link_to_layout', 'LinkToPageField');
 		registerFieldModel('SelectionBreak', 'selection_break', 'SelectionBreakField');
+
+		fieldModel.SelectionBreak.optionsEditable = false;
 
 		Liferay.Portlet.Journal = Journal;
 	},
