@@ -38,6 +38,11 @@ portletURL.setParameter("struts_action", "/workflow_definitions/view");
 	<liferay-util:param name="toolbarItem" value="add" />
 </liferay-util:include>
 
+<liferay-ui:header
+	backURL="<%= redirect %>"
+	title='<%= (workflowDefinition == null) ? "new-workflow-definition" : workflowDefinition.getName() %>'
+/>
+
 <portlet:actionURL var="editWorkflowDefinitionURL">
 	<portlet:param name="struts_action" value="/workflow_definitions/edit_workflow_definition" />
 	<portlet:param name="redirect" value="<%= redirect %>" />

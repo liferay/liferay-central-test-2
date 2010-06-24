@@ -18,6 +18,7 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
+String backURL = ParamUtil.getString(request, "backURL", redirect);
 
 LayoutSetPrototype layoutSetPrototype = (LayoutSetPrototype)request.getAttribute(WebKeys.LAYOUT_PROTOTYPE);
 
@@ -39,6 +40,11 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 <liferay-util:include page="/html/portlet/layout_set_prototypes/toolbar.jsp">
 	<liferay-util:param name="toolbarItem" value='<%= layoutSetPrototype.isNew() ? "add" : "view-all" %>' />
 </liferay-util:include>
+
+<liferay-ui:header
+	backURL="<%= backURL %>"
+	title='<%= (layoutSetPrototype.isNew()) ? "new-site-template" : layoutSetPrototype.getName() %>'
+/>
 
 <aui:form method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveLayoutSetPrototype();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />

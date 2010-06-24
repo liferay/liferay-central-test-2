@@ -167,19 +167,10 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 		PortletURL breadcrumbURL = PortletURLUtil.clone(portletURL, renderResponse);
 		%>
 
-		<c:if test="<%= !group.isLayoutPrototype() %>">
-			<c:choose>
-				<c:when test="<%= selLayout != null %>">
-					<liferay-ui:header
-						title="<%= selLayout.getName(locale) %>"
-					/>
-				</c:when>
-				<c:otherwise>
-					<liferay-ui:header
-						title='<%= LanguageUtil.get(pageContext, "manage-top-" + (privateLayout ? "private" : "public") + "-pages-for") + StringPool.SPACE + HtmlUtil.escape(rootNodeName) %>'
-					/>
-				</c:otherwise>
-			</c:choose>
+		<c:if test="<%= !group.isLayoutPrototype() && (selLayout != null) %>">
+			<liferay-ui:header
+				title="<%= selLayout.getName(locale) %>"
+			/>
 		</c:if>
 
 		<%
@@ -197,10 +188,6 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 			tabs3Names = StringUtil.replace(tabs3Names, "children,", StringPool.BLANK);
 		}
 
-		if (selLayout == null) {
-			tabs3Names = StringUtil.replace(tabs3Names, "page,", StringPool.BLANK);
-		}
-
 		if (!StringUtil.contains(tabs3Names, tabs3)) {
 			if (selLayout == null) {
 				tabs3 = "children";
@@ -215,11 +202,13 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 		tabs3PortletURL.setParameter("tabs4", "");
 		%>
 
-		<liferay-ui:tabs
-			names="<%= tabs3Names %>"
-			param="tabs3"
-			url='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>'
-		/>
+		<c:if test="<%= (selLayout != null) %>">
+			<liferay-ui:tabs
+				names="<%= tabs3Names %>"
+				param="tabs3"
+				url='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>'
+			/>
+		</c:if>
 
 		<liferay-ui:error exception="<%= LayoutHiddenException.class %>" message="your-first-page-must-not-be-hidden" />
 		<liferay-ui:error exception="<%= LayoutNameException.class %>" message="please-enter-a-valid-name" />

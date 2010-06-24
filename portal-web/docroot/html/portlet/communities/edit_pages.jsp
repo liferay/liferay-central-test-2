@@ -312,32 +312,11 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	<aui:input name="<%= PortletDataHandlerKeys.SELECTED_LAYOUTS %>" type="hidden" />
 
 	<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) || portletName.equals(PortletKeys.GROUP_PAGES) || portletName.equals(PortletKeys.MY_PAGES) %>">
-		<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) %>">
-			<div>
-				<liferay-ui:header
-					title='<%= LanguageUtil.get(pageContext, "edit-pages-for-community") + ": " + liveGroup.getDescriptiveName() %>'
-				/>
-			</div>
-
-			<br />
-		</c:if>
-
-		<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
-			<div>
-				<c:choose>
-					<c:when test="<%= liveGroup.isOrganization() %>">
-						<liferay-ui:header title='<%= LanguageUtil.get(pageContext, "edit-pages-for-" + (organization.isRoot() ? "organization" : "location" ))  + ": " +  HtmlUtil.escape(organization.getName()) %>' />
-					</c:when>
-					<c:when test="<%= liveGroup.isUser() %>">
-						<liferay-ui:header title='<%= LanguageUtil.get(pageContext, "edit-pages-for-user")  + ": " +  HtmlUtil.escape(selUser.getFullName()) %>' />
-					</c:when>
-					<c:when test="<%= liveGroup.isUserGroup() %>">
-						<liferay-ui:header title='<%= LanguageUtil.get(pageContext, "edit-pages-for-user-group")  + ": " +  HtmlUtil.escape(group.getDescriptiveName()) %>' />
-					</c:when>
-				</c:choose>
-			</div>
-
-			<br />
+		<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) %>">
+			<liferay-ui:header
+				backURL="<%= backURL %>"
+				title='<%= liveGroup.getDescriptiveName() %>'
+			/>
 		</c:if>
 
 		<%
@@ -363,7 +342,6 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 			param="tabs1"
 			value="<%= tabs1 %>"
 			url="<%= tabs1URL %>"
-			backURL="<%= PortalUtil.escapeRedirect(backURL) %>"
 		/>
 
 		<%
