@@ -18,6 +18,7 @@
 
 <%
 String googleAppsUsername = ParamUtil.getString(request, "settings--" + PropsKeys.GOOGLE_APPS_USERNAME + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.GOOGLE_APPS_USERNAME));
+
 String googleAppsPassword = ParamUtil.getString(request, "settings--" + PropsKeys.GOOGLE_APPS_PASSWORD + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.GOOGLE_APPS_PASSWORD));
 
 if (Validator.isNotNull(googleAppsPassword)) {

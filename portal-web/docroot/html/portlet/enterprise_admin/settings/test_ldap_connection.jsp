@@ -23,6 +23,7 @@ String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
 String baseProviderURL = ParamUtil.getString(request, "baseProviderURL");
 String principal = ParamUtil.getString(request, "principal");
+
 String credentials = ParamUtil.getString(request, "credentials");
 
 if (credentials.equals(Portal.TEMP_OBFUSCATION_VALUE)) {
