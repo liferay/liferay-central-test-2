@@ -90,7 +90,7 @@ public class RouteImpl implements Route {
 
 			String name = entry.getKey();
 			StringParser parser = entry.getValue();
-			String value = MapUtil.getString(parameters, name);
+			String value = MapUtil.getString(allParameters, name);
 
 			if (!parser.parse(value, allParameters)) {
 				return null;
@@ -108,6 +108,10 @@ public class RouteImpl implements Route {
 		for (String name : _defaultParameters.keySet()) {
 			// Virtual parameters will never be placed in the query string,
 			// so parameters is modified directly instead of allParameters.
+			parameters.remove(name);
+		}
+
+		for (String name : _generatedParameters.keySet()) {
 			parameters.remove(name);
 		}
 
