@@ -29,6 +29,10 @@ if (portletName.equals(PortletKeys.LAYOUT_MANAGEMENT) || portletName.equals(Port
 	portletDisplay.setURLBack(backURL);
 }
 
+if (portletName.equals(PortletKeys.LAYOUT_MANAGEMENT) && tabs1.equals("settings")) {
+	renderResponse.setTitle(LanguageUtil.get(pageContext, "settings"));
+}
+
 Group selGroup = (Group)request.getAttribute(WebKeys.GROUP);
 
 Group liveGroup = null;
@@ -265,7 +269,12 @@ if (!portletName.equals(PortletKeys.GROUP_PAGES)) {
 		PortalUtil.addPortletBreadcrumbEntry(request, group.getDescriptiveName(), null);
 	}
 
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "manage-pages"), currentURL);
+	if (portletName.equals(PortletKeys.LAYOUT_MANAGEMENT) && tabs1.equals("settings")) {
+		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "settings"), currentURL);
+	}
+	else {
+		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "manage-pages"), currentURL);
+	}
 }
 
 request.setAttribute("edit_pages.jsp-tab4", tabs4);
