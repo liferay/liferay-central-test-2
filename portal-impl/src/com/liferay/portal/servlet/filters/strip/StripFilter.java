@@ -181,11 +181,7 @@ public class StripFilter extends BasePortalFilter {
 			return;
 		}
 
-		String content = charBuffer.subSequence(0, length).toString();
-
-		int position = charBuffer.position();
-
-		charBuffer.position(position + length);
+		String content = _extractContent(charBuffer, length);
 
 		String minifiedContent = content;
 
@@ -297,11 +293,7 @@ public class StripFilter extends BasePortalFilter {
 			return;
 		}
 
-		String content = charBuffer.subSequence(0, length).toString();
-
-		int position = charBuffer.position();
-
-		charBuffer.position(position + length);
+		String content = _extractContent(charBuffer, length);
 
 		String minifiedContent = content;
 
@@ -344,8 +336,6 @@ public class StripFilter extends BasePortalFilter {
 	protected void processPre(CharBuffer oldCharBuffer, Writer writer)
 		throws IOException {
 
-		int position = oldCharBuffer.position();
-
 		int length = KMPSearch.search(
 			oldCharBuffer, _MARKER_PRE_OPEN.length + 1, _MARKER_PRE_CLOSE,
 			_MARKER_PRE_CLOSE_NEXTS);
@@ -362,9 +352,7 @@ public class StripFilter extends BasePortalFilter {
 
 		length += _MARKER_PRE_CLOSE.length();
 
-		String content = oldCharBuffer.subSequence(0, length).toString();
-
-		oldCharBuffer.position(position + length);
+		String content = _extractContent(oldCharBuffer, length);
 
 		writer.write(content);
 
@@ -373,8 +361,6 @@ public class StripFilter extends BasePortalFilter {
 
 	protected void processTextArea(CharBuffer oldCharBuffer, Writer writer)
 		throws IOException {
-
-		int position = oldCharBuffer.position();
 
 		int length = KMPSearch.search(
 			oldCharBuffer, _MARKER_TEXTAREA_OPEN.length + 1,
@@ -391,9 +377,7 @@ public class StripFilter extends BasePortalFilter {
 
 		length += _MARKER_TEXTAREA_CLOSE.length();
 
-		String content = oldCharBuffer.subSequence(0, length).toString();
-
-		oldCharBuffer.position(position + length);
+		String content = _extractContent(oldCharBuffer, length);
 
 		writer.write(content);
 
@@ -472,6 +456,19 @@ public class StripFilter extends BasePortalFilter {
 		}
 
 		writer.flush();
+	}
+
+	private String _extractContent(CharBuffer charBuffer, int length) {
+		CharBuffer copyCharBuffer = charBuffer.duplicate();
+
+		int position = copyCharBuffer.position();
+		int newPosition = position + length;
+
+		String content = copyCharBuffer.limit(newPosition).toString();
+
+		charBuffer.position(newPosition);
+
+		return content;
 	}
 
 	private static final String _CDATA_CLOSE = "/*]]>*/";
