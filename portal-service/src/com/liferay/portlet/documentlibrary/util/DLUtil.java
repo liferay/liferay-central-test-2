@@ -267,7 +267,9 @@ public class DLUtil {
 
 		_genericNames.put("pdf", "pdf");
 
+		_genericNames.put("key", "presentation");
 		_genericNames.put("odp", "presentation");
+		_genericNames.put("pps", "presentation");
 		_genericNames.put("ppt", "presentation");
 		_genericNames.put("pptx", "presentation");
 
