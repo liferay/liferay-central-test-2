@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.ratings.NoSuchStatsException;
 import com.liferay.portlet.ratings.model.RatingsStats;
@@ -95,37 +94,7 @@ public class RatingsStatsLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		List<RatingsStats> list =
-			ratingsStatsFinder.findByC_C(classNameId, classPKs);
-
-		List<RatingsStats> retval = ListUtil.copy(list);
-
-		int delta = classPKs.size() - list.size();
-
-		for (int i = 0; delta > 0 && i < classPKs.size(); i++) {
-			long classPK = classPKs.get(i);
-
-			boolean found = false;
-
-			for (RatingsStats stats : list) {
-				if (classPK == stats.getClassPK()) {
-					found = true;
-
-					break;
-				}
-			}
-
-			if (!found) {
-				RatingsStats stats =
-					ratingsStatsLocalService.addStats(classNameId, classPK);
-
-				retval.add(stats);
-
-				delta--;
-			}
-		}
-
-		return retval;
+		return ratingsStatsFinder.findByC_C(classNameId, classPKs);
 	}
 
 	public RatingsStats getStats(String className, long classPK)
