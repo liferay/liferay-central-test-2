@@ -23,7 +23,7 @@ MBMessage message = (MBMessage)request.getAttribute(WebKeys.MESSAGE_BOARDS_MESSA
 
 long messageId = message.getMessageId();
 
-long categoryId = BeanParamUtil.getLong(message, request, "mbCategoryId");
+long categoryId = MBUtil.getCategoryId(request, null);
 
 MBThread thread = message.getThread();
 

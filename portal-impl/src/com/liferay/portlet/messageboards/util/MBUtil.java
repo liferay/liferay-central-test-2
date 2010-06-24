@@ -229,6 +229,20 @@ public class MBUtil {
 		}
 	}
 
+	public static long getCategoryId(
+		HttpServletRequest request, MBCategory category) {
+
+		long categoryId = MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID;
+
+		if (category != null) {
+			categoryId = category.getCategoryId();
+		}
+
+		categoryId = ParamUtil.getLong(request, "mbCategoryId", categoryId);
+
+		return categoryId;
+	}
+
 	public static String getEmailFromAddress(PortletPreferences preferences) {
 		String emailFromAddress = PropsValues.MESSAGE_BOARDS_EMAIL_FROM_ADDRESS;
 
