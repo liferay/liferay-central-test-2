@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/workflow_tasks/init.jsp" %>
 
 <%
-String randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
+String randomId = StringPool.BLANK;
 
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
@@ -27,6 +27,8 @@ if (row != null) {
 	Object result = row.getObject();
 
 	workflowTask = (WorkflowTask)row.getParameter("workflowTask");
+
+	randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 }
 else {
 	workflowTask = (WorkflowTask)request.getAttribute(WebKeys.WORKFLOW_TASK);

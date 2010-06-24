@@ -43,7 +43,7 @@ html = StringUtil.replace(html, "portlet-document-library", "portlet-workflow-ta
 	font-weight: bold;
 }
 
-.portlet-workflow-tasks .task-author, .portlet-workflow-tasks .task-due-date, .portlet-workflow-tasks .task-type-0, .portlet-workflow-tasks .task-type-1, .portlet-workflow-tasks .task-type-2, .portlet-workflow-tasks .task-date, .portlet-workflow-tasks .task-status {
+.portlet-workflow-tasks .task-author, .portlet-workflow-tasks .task-due-date, .portlet-workflow-tasks .task-type-1, .portlet-workflow-tasks .task-type-2, .portlet-workflow-tasks .task-type-3, .portlet-workflow-tasks .task-date, .portlet-workflow-tasks .task-status {
 	background: url() no-repeat 0 50%;
 }
 
@@ -79,17 +79,16 @@ html = StringUtil.replace(html, "portlet-document-library", "portlet-workflow-ta
 	padding-left: 25px;
 }
 
-.portlet-workflow-tasks .task-type-0 {
-	background-image: url(<%= themeImagesPath %>/common/recent_changes.png);
-}
-
 .portlet-workflow-tasks .task-type-1 {
 	background-image: url(<%= themeImagesPath %>/common/assign.png);
 }
 
 .portlet-workflow-tasks .task-type-2 {
 	background-image: url(<%= themeImagesPath %>/common/time.png);
-	padding-left: 30px;
+}
+
+.portlet-workflow-tasks .task-type-3 {
+	background-image: url(<%= themeImagesPath %>/common/recent_changes.png);
 }
 
 .portlet-workflow-tasks .task-date {
