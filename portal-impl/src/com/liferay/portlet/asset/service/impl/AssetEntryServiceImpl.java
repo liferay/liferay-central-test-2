@@ -156,17 +156,18 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 	}
 
 	public AssetEntry updateEntry(
-			long groupId, String className, long classPK, long[] categoryIds,
-			String[] tagNames, boolean visible, Date startDate, Date endDate,
-			Date publishDate, Date expirationDate, String mimeType,
-			String title, String description, String summary, String url,
-			int height, int width, Integer priority, boolean sync)
+			long groupId, String className, long classPK, String classUuid,
+			long[] categoryIds, String[] tagNames, boolean visible,
+			Date startDate, Date endDate, Date publishDate, Date expirationDate,
+			String mimeType, String title, String description, String summary,
+			String url, int height, int width, Integer priority, boolean sync)
 		throws PortalException, SystemException {
 
 		return assetEntryLocalService.updateEntry(
-			getUserId(), groupId, className, classPK, categoryIds, tagNames,
-			visible, startDate, endDate, publishDate, expirationDate, mimeType,
-			title, description, summary, url, height, width, priority, sync);
+			getUserId(), groupId, className, classPK, classUuid, categoryIds,
+			tagNames, visible, startDate, endDate, publishDate, expirationDate,
+			mimeType, title, description, summary, url, height, width, priority,
+			sync);
 	}
 
 	protected String exportToRSS(

@@ -186,6 +186,12 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return assetEntryPersistence.findByPrimaryKey(entryId);
 	}
 
+	public AssetEntry getEntry(long groupId, String classUuid)
+		throws PortalException, SystemException {
+
+		return assetEntryPersistence.findByG_CU(groupId, classUuid);
+	}
+
 	public AssetEntry getEntry(String className, long classPK)
 		throws PortalException, SystemException {
 
@@ -438,14 +444,14 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return updateEntry(
-			userId, groupId, className, classPK, categoryIds, tagNames,
+			userId, groupId, className, classPK, null, categoryIds, tagNames,
 			true, null, null, null, null, null, null, null, null, null, 0, 0,
 			null, false);
 	}
 
 	public AssetEntry updateEntry(
 			long userId, long groupId, String className, long classPK,
-			long[] categoryIds, String[] tagNames, boolean visible,
+			String uuid, long[] categoryIds, String[] tagNames, boolean visible,
 			Date startDate, Date endDate, Date publishDate, Date expirationDate,
 			String mimeType, String title, String description, String summary,
 			String url, int height, int width, Integer priority, boolean sync)
