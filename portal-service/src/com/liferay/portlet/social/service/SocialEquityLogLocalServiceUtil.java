@@ -141,8 +141,29 @@ public class SocialEquityLogLocalServiceUtil {
 	}
 
 	public static void deactivateEquityLogs(long assetEntryId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deactivateEquityLogs(assetEntryId);
+	}
+
+	public static void incrementSocialEquityAssetEntry_IQ(long assetEntryId,
+		com.liferay.portlet.social.model.SocialEquityValue value)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().incrementSocialEquityAssetEntry_IQ(assetEntryId, value);
+	}
+
+	public static void incrementSocialEquityUser_CQ(java.lang.String id,
+		com.liferay.portlet.social.model.SocialEquityValue value)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().incrementSocialEquityUser_CQ(id, value);
+	}
+
+	public static void incrementSocialEquityUser_PQ(java.lang.String id,
+		com.liferay.portlet.social.model.SocialEquityValue value)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().incrementSocialEquityUser_PQ(id, value);
 	}
 
 	public static SocialEquityLogLocalService getService() {

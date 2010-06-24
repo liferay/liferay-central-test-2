@@ -94,12 +94,20 @@ public class SocialEquityUserWrapper implements SocialEquityUser {
 		_socialEquityUser.setUserUuid(userUuid);
 	}
 
-	public double getContributionEquity() {
-		return _socialEquityUser.getContributionEquity();
+	public double getContributionK() {
+		return _socialEquityUser.getContributionK();
 	}
 
-	public void setContributionEquity(double contributionEquity) {
-		_socialEquityUser.setContributionEquity(contributionEquity);
+	public void setContributionK(double contributionK) {
+		_socialEquityUser.setContributionK(contributionK);
+	}
+
+	public double getContributionB() {
+		return _socialEquityUser.getContributionB();
+	}
+
+	public void setContributionB(double contributionB) {
+		_socialEquityUser.setContributionB(contributionB);
 	}
 
 	public double getParticipationK() {
@@ -118,20 +126,12 @@ public class SocialEquityUserWrapper implements SocialEquityUser {
 		_socialEquityUser.setParticipationB(participationB);
 	}
 
-	public double getParticipationEquity() {
-		return _socialEquityUser.getParticipationEquity();
+	public int getRank() {
+		return _socialEquityUser.getRank();
 	}
 
-	public void setParticipationEquity(double participationEquity) {
-		_socialEquityUser.setParticipationEquity(participationEquity);
-	}
-
-	public double getPersonalEquity() {
-		return _socialEquityUser.getPersonalEquity();
-	}
-
-	public void setPersonalEquity(double personalEquity) {
-		_socialEquityUser.setPersonalEquity(personalEquity);
+	public void setRank(int rank) {
+		_socialEquityUser.setRank(rank);
 	}
 
 	public com.liferay.portlet.social.model.SocialEquityUser toEscapedModel() {

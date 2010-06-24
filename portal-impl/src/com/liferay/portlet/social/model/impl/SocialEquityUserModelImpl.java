@@ -62,13 +62,13 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser> {
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
-			{ "contributionEquity", new Integer(Types.DOUBLE) },
+			{ "contributionK", new Integer(Types.DOUBLE) },
+			{ "contributionB", new Integer(Types.DOUBLE) },
 			{ "participationK", new Integer(Types.DOUBLE) },
 			{ "participationB", new Integer(Types.DOUBLE) },
-			{ "participationEquity", new Integer(Types.DOUBLE) },
-			{ "personalEquity", new Integer(Types.DOUBLE) }
+			{ "rank", new Integer(Types.INTEGER) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table SocialEquityUser (equityUserId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,contributionEquity DOUBLE,participationK DOUBLE,participationB DOUBLE,participationEquity DOUBLE,personalEquity DOUBLE)";
+	public static final String TABLE_SQL_CREATE = "create table SocialEquityUser (equityUserId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,contributionK DOUBLE,contributionB DOUBLE,participationK DOUBLE,participationB DOUBLE,rank INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table SocialEquityUser";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -87,11 +87,11 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser> {
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
-		model.setContributionEquity(soapModel.getContributionEquity());
+		model.setContributionK(soapModel.getContributionK());
+		model.setContributionB(soapModel.getContributionB());
 		model.setParticipationK(soapModel.getParticipationK());
 		model.setParticipationB(soapModel.getParticipationB());
-		model.setParticipationEquity(soapModel.getParticipationEquity());
-		model.setPersonalEquity(soapModel.getPersonalEquity());
+		model.setRank(soapModel.getRank());
 
 		return model;
 	}
@@ -194,12 +194,20 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser> {
 		return _originalUserId;
 	}
 
-	public double getContributionEquity() {
-		return _contributionEquity;
+	public double getContributionK() {
+		return _contributionK;
 	}
 
-	public void setContributionEquity(double contributionEquity) {
-		_contributionEquity = contributionEquity;
+	public void setContributionK(double contributionK) {
+		_contributionK = contributionK;
+	}
+
+	public double getContributionB() {
+		return _contributionB;
+	}
+
+	public void setContributionB(double contributionB) {
+		_contributionB = contributionB;
 	}
 
 	public double getParticipationK() {
@@ -218,20 +226,12 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser> {
 		_participationB = participationB;
 	}
 
-	public double getParticipationEquity() {
-		return _participationEquity;
+	public int getRank() {
+		return _rank;
 	}
 
-	public void setParticipationEquity(double participationEquity) {
-		_participationEquity = participationEquity;
-	}
-
-	public double getPersonalEquity() {
-		return _personalEquity;
-	}
-
-	public void setPersonalEquity(double personalEquity) {
-		_personalEquity = personalEquity;
+	public void setRank(int rank) {
+		_rank = rank;
 	}
 
 	public SocialEquityUser toEscapedModel() {
@@ -265,11 +265,11 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser> {
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
-		clone.setContributionEquity(getContributionEquity());
+		clone.setContributionK(getContributionK());
+		clone.setContributionB(getContributionB());
 		clone.setParticipationK(getParticipationK());
 		clone.setParticipationB(getParticipationB());
-		clone.setParticipationEquity(getParticipationEquity());
-		clone.setPersonalEquity(getPersonalEquity());
+		clone.setRank(getRank());
 
 		return clone;
 	}
@@ -327,16 +327,16 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser> {
 		sb.append(getCompanyId());
 		sb.append(", userId=");
 		sb.append(getUserId());
-		sb.append(", contributionEquity=");
-		sb.append(getContributionEquity());
+		sb.append(", contributionK=");
+		sb.append(getContributionK());
+		sb.append(", contributionB=");
+		sb.append(getContributionB());
 		sb.append(", participationK=");
 		sb.append(getParticipationK());
 		sb.append(", participationB=");
 		sb.append(getParticipationB());
-		sb.append(", participationEquity=");
-		sb.append(getParticipationEquity());
-		sb.append(", personalEquity=");
-		sb.append(getPersonalEquity());
+		sb.append(", rank=");
+		sb.append(getRank());
 		sb.append("}");
 
 		return sb.toString();
@@ -366,8 +366,12 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser> {
 		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>contributionEquity</column-name><column-value><![CDATA[");
-		sb.append(getContributionEquity());
+			"<column><column-name>contributionK</column-name><column-value><![CDATA[");
+		sb.append(getContributionK());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>contributionB</column-name><column-value><![CDATA[");
+		sb.append(getContributionB());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>participationK</column-name><column-value><![CDATA[");
@@ -378,12 +382,8 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser> {
 		sb.append(getParticipationB());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>participationEquity</column-name><column-value><![CDATA[");
-		sb.append(getParticipationEquity());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>personalEquity</column-name><column-value><![CDATA[");
-		sb.append(getPersonalEquity());
+			"<column><column-name>rank</column-name><column-value><![CDATA[");
+		sb.append(getRank());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -401,10 +401,10 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser> {
 	private String _userUuid;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
-	private double _contributionEquity;
+	private double _contributionK;
+	private double _contributionB;
 	private double _participationK;
 	private double _participationB;
-	private double _participationEquity;
-	private double _personalEquity;
+	private int _rank;
 	private transient ExpandoBridge _expandoBridge;
 }

@@ -22,8 +22,12 @@ import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
+import com.liferay.portlet.social.model.SocialEquityAssetEntry;
+import com.liferay.portlet.social.model.SocialEquityValue;
+import com.liferay.portlet.social.service.persistence.SocialEquityAssetEntryUtil;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * <a href="AssetEntryImpl.java.html"><b><i>View Source</i></b></a>
@@ -44,6 +48,27 @@ public class AssetEntryImpl extends AssetEntryModelImpl implements AssetEntry {
 			ListUtil.toString(getCategories(), "categoryId"), 0L);
 	}
 
+	public double getSocialInformationEquity() {
+		if (_socialInformationEquity == null) {
+			try {
+				SocialEquityAssetEntry equityAssetEntry =
+					SocialEquityAssetEntryUtil.findByAssetEntryId(
+						getEntryId());
+
+				_socialInformationEquity =
+					new AtomicReference<Double>(
+						new SocialEquityValue(
+							equityAssetEntry.getInformationK(),
+							equityAssetEntry.getInformationB()).getValue());
+			}
+			catch (Exception se) {
+				return 0;
+			}
+		}
+
+		return _socialInformationEquity.get();
+	}
+
 	public String[] getTagNames() throws SystemException {
 		return StringUtil.split(ListUtil.toString(getTags(), "name"));
 	}
@@ -51,5 +76,23 @@ public class AssetEntryImpl extends AssetEntryModelImpl implements AssetEntry {
 	public List<AssetTag> getTags() throws SystemException {
 		return AssetTagLocalServiceUtil.getEntryTags(getEntryId());
 	}
+
+	public void updateSocialInformationEquity(double value) {
+		if (_socialInformationEquity != null) {
+			double currentValue = 0;
+
+			double newValue = 0;
+
+			do {
+				currentValue = _socialInformationEquity.get();
+
+				newValue = currentValue + value;
+
+			} while (!_socialInformationEquity.compareAndSet(
+				currentValue, newValue));
+		}
+	}
+
+	private AtomicReference<Double> _socialInformationEquity = null;
 
 }

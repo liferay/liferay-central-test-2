@@ -814,9 +814,6 @@
 			<basic name="active">
 				<column name="ACTIVE_" />
 			</basic>
-			<basic name="socialContributionEquity" />
-			<basic name="socialParticipationEquity" />
-			<basic name="socialPersonalEquity" />
 			<transient name="primaryKey" />
 			<transient name="userUuid" />
 		</attributes>
@@ -1119,7 +1116,6 @@
 			<basic name="width" />
 			<basic name="priority" />
 			<basic name="viewCount" />
-			<basic name="socialInformationEquity" />
 			<transient name="primaryKey" />
 			<transient name="userUuid" />
 		</attributes>
@@ -2311,7 +2307,6 @@
 			<basic name="assetEntryId" />
 			<basic name="informationK" />
 			<basic name="informationB" />
-			<basic name="informationEquity" />
 			<transient name="primaryKey" />
 			<transient name="userUuid" />
 		</attributes>
@@ -2372,11 +2367,11 @@
 			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="userId" />
-			<basic name="contributionEquity" />
+			<basic name="contributionK" />
+			<basic name="contributionB" />
 			<basic name="participationK" />
 			<basic name="participationB" />
-			<basic name="participationEquity" />
-			<basic name="personalEquity" />
+			<basic name="rank" />
 			<transient name="equityUserUuid" />
 			<transient name="primaryKey" />
 			<transient name="userUuid" />

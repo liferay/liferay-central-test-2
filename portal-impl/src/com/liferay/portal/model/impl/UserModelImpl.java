@@ -95,12 +95,9 @@ public class UserModelImpl extends BaseModelImpl<User> {
 			{ "lockout", new Integer(Types.BOOLEAN) },
 			{ "lockoutDate", new Integer(Types.TIMESTAMP) },
 			{ "agreedToTermsOfUse", new Integer(Types.BOOLEAN) },
-			{ "active_", new Integer(Types.BOOLEAN) },
-			{ "socialContributionEquity", new Integer(Types.DOUBLE) },
-			{ "socialParticipationEquity", new Integer(Types.DOUBLE) },
-			{ "socialPersonalEquity", new Integer(Types.DOUBLE) }
+			{ "active_", new Integer(Types.BOOLEAN) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table User_ (uuid_ VARCHAR(75) null,userId LONG not null primary key,companyId LONG,createDate DATE null,modifiedDate DATE null,defaultUser BOOLEAN,contactId LONG,password_ VARCHAR(75) null,passwordEncrypted BOOLEAN,passwordReset BOOLEAN,passwordModifiedDate DATE null,reminderQueryQuestion VARCHAR(75) null,reminderQueryAnswer VARCHAR(75) null,graceLoginCount INTEGER,screenName VARCHAR(75) null,emailAddress VARCHAR(75) null,facebookId LONG,openId VARCHAR(1024) null,portraitId LONG,languageId VARCHAR(75) null,timeZoneId VARCHAR(75) null,greeting VARCHAR(255) null,comments STRING null,firstName VARCHAR(75) null,middleName VARCHAR(75) null,lastName VARCHAR(75) null,jobTitle VARCHAR(100) null,loginDate DATE null,loginIP VARCHAR(75) null,lastLoginDate DATE null,lastLoginIP VARCHAR(75) null,lastFailedLoginDate DATE null,failedLoginAttempts INTEGER,lockout BOOLEAN,lockoutDate DATE null,agreedToTermsOfUse BOOLEAN,active_ BOOLEAN,socialContributionEquity DOUBLE,socialParticipationEquity DOUBLE,socialPersonalEquity DOUBLE)";
+	public static final String TABLE_SQL_CREATE = "create table User_ (uuid_ VARCHAR(75) null,userId LONG not null primary key,companyId LONG,createDate DATE null,modifiedDate DATE null,defaultUser BOOLEAN,contactId LONG,password_ VARCHAR(75) null,passwordEncrypted BOOLEAN,passwordReset BOOLEAN,passwordModifiedDate DATE null,reminderQueryQuestion VARCHAR(75) null,reminderQueryAnswer VARCHAR(75) null,graceLoginCount INTEGER,screenName VARCHAR(75) null,emailAddress VARCHAR(75) null,facebookId LONG,openId VARCHAR(1024) null,portraitId LONG,languageId VARCHAR(75) null,timeZoneId VARCHAR(75) null,greeting VARCHAR(255) null,comments STRING null,firstName VARCHAR(75) null,middleName VARCHAR(75) null,lastName VARCHAR(75) null,jobTitle VARCHAR(100) null,loginDate DATE null,loginIP VARCHAR(75) null,lastLoginDate DATE null,lastLoginIP VARCHAR(75) null,lastFailedLoginDate DATE null,failedLoginAttempts INTEGER,lockout BOOLEAN,lockoutDate DATE null,agreedToTermsOfUse BOOLEAN,active_ BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table User_";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -152,9 +149,6 @@ public class UserModelImpl extends BaseModelImpl<User> {
 		model.setLockoutDate(soapModel.getLockoutDate());
 		model.setAgreedToTermsOfUse(soapModel.getAgreedToTermsOfUse());
 		model.setActive(soapModel.getActive());
-		model.setSocialContributionEquity(soapModel.getSocialContributionEquity());
-		model.setSocialParticipationEquity(soapModel.getSocialParticipationEquity());
-		model.setSocialPersonalEquity(soapModel.getSocialPersonalEquity());
 
 		return model;
 	}
@@ -722,30 +716,6 @@ public class UserModelImpl extends BaseModelImpl<User> {
 		_active = active;
 	}
 
-	public double getSocialContributionEquity() {
-		return _socialContributionEquity;
-	}
-
-	public void setSocialContributionEquity(double socialContributionEquity) {
-		_socialContributionEquity = socialContributionEquity;
-	}
-
-	public double getSocialParticipationEquity() {
-		return _socialParticipationEquity;
-	}
-
-	public void setSocialParticipationEquity(double socialParticipationEquity) {
-		_socialParticipationEquity = socialParticipationEquity;
-	}
-
-	public double getSocialPersonalEquity() {
-		return _socialPersonalEquity;
-	}
-
-	public void setSocialPersonalEquity(double socialPersonalEquity) {
-		_socialPersonalEquity = socialPersonalEquity;
-	}
-
 	public User toEscapedModel() {
 		if (isEscapedModel()) {
 			return (User)this;
@@ -809,9 +779,6 @@ public class UserModelImpl extends BaseModelImpl<User> {
 		clone.setLockoutDate(getLockoutDate());
 		clone.setAgreedToTermsOfUse(getAgreedToTermsOfUse());
 		clone.setActive(getActive());
-		clone.setSocialContributionEquity(getSocialContributionEquity());
-		clone.setSocialParticipationEquity(getSocialParticipationEquity());
-		clone.setSocialPersonalEquity(getSocialPersonalEquity());
 
 		return clone;
 	}
@@ -859,7 +826,7 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(81);
+		StringBundler sb = new StringBundler(75);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -935,19 +902,13 @@ public class UserModelImpl extends BaseModelImpl<User> {
 		sb.append(getAgreedToTermsOfUse());
 		sb.append(", active=");
 		sb.append(getActive());
-		sb.append(", socialContributionEquity=");
-		sb.append(getSocialContributionEquity());
-		sb.append(", socialParticipationEquity=");
-		sb.append(getSocialParticipationEquity());
-		sb.append(", socialPersonalEquity=");
-		sb.append(getSocialPersonalEquity());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(124);
+		StringBundler sb = new StringBundler(115);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.User");
@@ -1101,18 +1062,6 @@ public class UserModelImpl extends BaseModelImpl<User> {
 			"<column><column-name>active</column-name><column-value><![CDATA[");
 		sb.append(getActive());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>socialContributionEquity</column-name><column-value><![CDATA[");
-		sb.append(getSocialContributionEquity());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>socialParticipationEquity</column-name><column-value><![CDATA[");
-		sb.append(getSocialParticipationEquity());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>socialPersonalEquity</column-name><column-value><![CDATA[");
-		sb.append(getSocialPersonalEquity());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1170,8 +1119,5 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	private Date _lockoutDate;
 	private boolean _agreedToTermsOfUse;
 	private boolean _active;
-	private double _socialContributionEquity;
-	private double _socialParticipationEquity;
-	private double _socialPersonalEquity;
 	private transient ExpandoBridge _expandoBridge;
 }

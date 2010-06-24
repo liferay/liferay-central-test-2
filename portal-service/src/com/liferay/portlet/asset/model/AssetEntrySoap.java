@@ -64,7 +64,6 @@ public class AssetEntrySoap implements Serializable {
 		soapModel.setWidth(model.getWidth());
 		soapModel.setPriority(model.getPriority());
 		soapModel.setViewCount(model.getViewCount());
-		soapModel.setSocialInformationEquity(model.getSocialInformationEquity());
 
 		return soapModel;
 	}
@@ -305,14 +304,6 @@ public class AssetEntrySoap implements Serializable {
 		_viewCount = viewCount;
 	}
 
-	public double getSocialInformationEquity() {
-		return _socialInformationEquity;
-	}
-
-	public void setSocialInformationEquity(double socialInformationEquity) {
-		_socialInformationEquity = socialInformationEquity;
-	}
-
 	private long _entryId;
 	private long _groupId;
 	private long _companyId;
@@ -336,5 +327,4 @@ public class AssetEntrySoap implements Serializable {
 	private int _width;
 	private double _priority;
 	private int _viewCount;
-	private double _socialInformationEquity;
 }
