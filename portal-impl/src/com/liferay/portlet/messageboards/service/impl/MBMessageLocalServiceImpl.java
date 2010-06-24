@@ -739,9 +739,15 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Workflow
 
+		String className = MBMessage.class.getName();
+
+		if (message.isDiscussion()) {
+			className = MBDiscussion.class.getName();
+		}
+
 		workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
 			message.getCompanyId(), message.getGroupId(),
-			MBMessage.class.getName(), message.getMessageId());
+			className, message.getMessageId());
 	}
 
 	public List<MBMessage> getCategoryMessages(

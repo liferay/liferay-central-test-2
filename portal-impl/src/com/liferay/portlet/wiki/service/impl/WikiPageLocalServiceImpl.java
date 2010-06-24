@@ -475,6 +475,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		wikiPagePersistence.removeByN_R(page.getNodeId(), page.getTitle());
 
+		workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
+			page.getCompanyId(), page.getGroupId(),
+			WikiPage.class.getName(), page.getResourcePrimKey());
+		
 		// Cache
 
 		clearPageCache(page);

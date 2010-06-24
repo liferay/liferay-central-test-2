@@ -30,6 +30,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.messageboards.SplitThreadException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
+import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
 import com.liferay.portlet.messageboards.model.MBMessageFlagConstants;
@@ -127,10 +128,15 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			mbMessagePersistence.remove(message);
 
 			// Workflow
+			String className = MBMessage.class.getName();
+
+			if (message.isDiscussion()) {
+				className = MBDiscussion.class.getName();
+			}
 
 			workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
 				message.getCompanyId(), message.getGroupId(),
-				MBMessage.class.getName(), message.getMessageId());
+				className, message.getMessageId());
 		}
 
 		// Category
