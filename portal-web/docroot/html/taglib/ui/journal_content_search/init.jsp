@@ -16,8 +16,6 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<portlet:defineObjects />
-
 <%
 namespace = "_" + PortletKeys.JOURNAL_CONTENT_SEARCH + "_";
 %>

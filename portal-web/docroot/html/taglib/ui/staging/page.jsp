@@ -20,8 +20,6 @@
 <%@ page import="com.liferay.portlet.tasks.model.TasksProposal" %>
 <%@ page import="com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil" %>
 
-<portlet:defineObjects />
-
 <c:if test="<%= themeDisplay.isShowStagingIcon() %>">
 
 	<%
@@ -87,9 +85,7 @@
 							<c:if test="<%= proposal == null %>">
 
 								<%
-								LiferayPortletURL proposePublicationURL = (LiferayPortletURL)renderResponse.createActionURL();
-
-								proposePublicationURL.setPortletId(PortletKeys.LAYOUT_MANAGEMENT);
+								PortletURL proposePublicationURL = new PortletURLImpl(request, PortletKeys.LAYOUT_MANAGEMENT, layout.getPlid(), PortletRequest.ACTION_PHASE);
 
 								proposePublicationURL.setWindowState(WindowState.MAXIMIZED);
 								proposePublicationURL.setPortletMode(PortletMode.VIEW);
@@ -184,10 +180,7 @@
 				<%
 				Layout stagedLayout = LayoutLocalServiceUtil.getLayout(stagingGroup.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId());
 
-				LiferayPortletURL viewProposalsURL = (LiferayPortletURL)renderResponse.createRenderURL();
-
-				viewProposalsURL.setPlid(stagedLayout.getPlid());
-				viewProposalsURL.setPortletId(PortletKeys.LAYOUT_MANAGEMENT);
+				PortletURL viewProposalsURL = new PortletURLImpl(request, PortletKeys.LAYOUT_MANAGEMENT, stagedLayout.getPlid(), PortletRequest.RENDER_PHASE);
 
 				viewProposalsURL.setWindowState(WindowState.MAXIMIZED);
 				viewProposalsURL.setPortletMode(PortletMode.VIEW);
