@@ -34,6 +34,17 @@ portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()));
 %>
 
+<liferay-ui:header
+	backURL="<%= redirect %>"
+	title="<%= HtmlUtil.escape(userGroup.getName()) %>"
+/>
+
+<liferay-ui:tabs
+	names="current,available"
+	param="tabs2"
+	url="<%= portletURL.toString() %>"
+/>
+
 <portlet:actionURL var="editAssignmentsURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group_assignments" />
 </portlet:actionURL>
@@ -44,18 +55,6 @@ portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()
 	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
 	<aui:input name="assignmentsRedirect" type="hidden" />
 	<aui:input name="userGroupId" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
-
-	<liferay-ui:header
-		backURL="<%= redirect %>"
-		title='<%= HtmlUtil.escape(userGroup.getName()) %>'
-	/>
-
-	<liferay-ui:tabs
-		names="current,available"
-		param="tabs2"
-		url="<%= portletURL.toString() %>"
-	/>
-
 	<aui:input name="addUserIds" type="hidden" />
 	<aui:input name="removeUserIds" type="hidden" />
 

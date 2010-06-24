@@ -27,6 +27,17 @@ int type = BeanParamUtil.getInteger(group, request, "type");
 String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 %>
 
+<c:if test="<%= !portletName.equals(PortletKeys.COMMUNITIES) %>">
+	<liferay-util:include page="/html/portlet/communities/toolbar.jsp">
+		<liferay-util:param name="toolbarItem" value='<%= (group == null) ? "add" : "view-all" %>' />
+	</liferay-util:include>
+</c:if>
+
+<liferay-ui:header
+	backURL="<%= redirect %>"
+	title='<%= (group == null) ? "new-community" : group.getDescriptiveName() %>'
+/>
+
 <portlet:actionURL var="editCommunityURL">
 	<portlet:param name="struts_action" value="/communities/edit_community" />
 </portlet:actionURL>
@@ -36,17 +47,6 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="friendlyURL" type="hidden" value="<%= friendlyURL %>" />
-
-	<c:if test="<%= !portletName.equals(PortletKeys.COMMUNITIES) %>">
-		<liferay-util:include page="/html/portlet/communities/toolbar.jsp">
-			<liferay-util:param name="toolbarItem" value='<%= (group == null) ? "add" : "view-all" %>' />
-		</liferay-util:include>
-	</c:if>
-
-	<liferay-ui:header
-		backURL="<%= redirect %>"
-		title='<%= (group == null) ? "new-community" : group.getDescriptiveName() %>'
-	/>
 
 	<liferay-ui:error exception="<%= DuplicateGroupException.class %>" message="please-enter-a-unique-name" />
 	<liferay-ui:error exception="<%= GroupNameException.class %>" message="please-enter-a-valid-name" />

@@ -24,6 +24,11 @@ Company company2 = (Company)request.getAttribute(WebKeys.SEL_COMPANY);
 long companyId = BeanParamUtil.getLong(company2, request, "companyId");
 %>
 
+<liferay-ui:header
+	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	title='<%= (company2 == null) ? "new-portal-instance" : company2.getName() %>'
+/>
+
 <portlet:actionURL var="editInstanceURL">
 	<portlet:param name="struts_action" value="/admin/edit_instance" />
 </portlet:actionURL>
@@ -32,11 +37,6 @@ long companyId = BeanParamUtil.getLong(company2, request, "companyId");
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="companyId" type="hidden" value="<%= companyId %>" />
-
-	<liferay-ui:header
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-		title='<%= (company2 == null) ? "new-portal-instance" : company2.getName() %>'
-	/>
 
 	<liferay-ui:error exception="<%= CompanyMxException.class %>" message="please-enter-a-valid-mail-domain" />
 	<liferay-ui:error exception="<%= CompanyVirtualHostException.class %>" message="please-enter-a-valid-virtual-host" />

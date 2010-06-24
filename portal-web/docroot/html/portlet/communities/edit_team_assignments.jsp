@@ -41,6 +41,17 @@ portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("teamId", String.valueOf(team.getTeamId()));
 %>
 
+<liferay-ui:header
+	backURL="<%= redirect %>"
+	title="<%= team.getName() %>"
+/>
+
+<liferay-ui:tabs
+	names="current,available"
+	param="tabs1"
+	url="<%= portletURL.toString() %>"
+/>
+
 <portlet:actionURL var="editAssignmentsURL">
 	<portlet:param name="struts_action" value="/communities/edit_team_assignments" />
 </portlet:actionURL>
@@ -50,18 +61,6 @@ portletURL.setParameter("teamId", String.valueOf(team.getTeamId()));
 	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
 	<aui:input name="assignmentsRedirect" type="hidden" />
 	<aui:input name="teamId" type="hidden" value="<%= String.valueOf(team.getTeamId()) %>" />
-
-	<liferay-ui:header
-		backURL="<%= redirect %>"
-		title="<%= team.getName() %>"
-	/>
-
-	<liferay-ui:tabs
-		names="current,available"
-		param="tabs1"
-		url="<%= portletURL.toString() %>"
-	/>
-
 	<aui:input name="addUserIds" type="hidden" />
 	<aui:input name="removeUserIds" type="hidden" />
 

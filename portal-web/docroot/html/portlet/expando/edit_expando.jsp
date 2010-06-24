@@ -52,6 +52,11 @@ portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("modelResource", modelResource);
 %>
 
+<liferay-ui:header
+	backURL="<%= redirect %>"
+	title='<%= modelResourceName + ": " + ((column == null) ? LanguageUtil.get(locale, "new-custom-field") : column.getName()) %>'
+/>
+
 <portlet:actionURL var="editExpandoURL">
 	<portlet:param name="struts_action" value="/expando/edit_expando" />
 </portlet:actionURL>
@@ -61,11 +66,6 @@ portletURL.setParameter("modelResource", modelResource);
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="columnId" type="hidden" value="<%= columnId %>" />
 	<aui:input name="modelResource" type="hidden" value="<%= modelResource %>" />
-
-	<liferay-ui:header
-		backURL="<%= redirect %>"
-		title='<%= modelResourceName + ": " + ((column == null) ? LanguageUtil.get(locale, "new-custom-field") : column.getName()) %>'
-	/>
 
 	<liferay-ui:error exception="<%= ColumnNameException.class %>" message="please-enter-a-valid-name" />
 	<liferay-ui:error exception="<%= ColumnTypeException.class %>" message="please-select-a-valid-type" />

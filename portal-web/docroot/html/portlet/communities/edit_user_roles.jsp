@@ -22,7 +22,6 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "current");
 String cur = ParamUtil.getString(request, "cur");
 
 String redirect = ParamUtil.getString(request, "redirect");
-
 String backURL = ParamUtil.getString(request, "backURL", redirect);
 
 Group group = (Group)request.getAttribute(WebKeys.GROUP);
@@ -81,17 +80,17 @@ request.setAttribute("edit_user_roles.jsp-organization", organization);
 request.setAttribute("edit_user_roles.jsp-portletURL", portletURL);
 %>
 
+<liferay-ui:header
+	backURL="<%= backURL %>"
+	title="<%= group.getDescriptiveName() %>"
+/>
+
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
 	<aui:input name="roleId" type="hidden" value="<%= roleId %>" />
-
-	<liferay-ui:header
-		backURL="<%= backURL %>"
-		title='<%= group.getDescriptiveName() %>'
-	/>
 
 	<c:choose>
 		<c:when test="<%= role == null %>">

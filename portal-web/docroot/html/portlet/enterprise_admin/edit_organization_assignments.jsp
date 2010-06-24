@@ -47,6 +47,25 @@ request.setAttribute("edit_organization_assignments.jsp-organization", organizat
 request.setAttribute("edit_organization_assignments.jsp-portletURL", portletURL);
 %>
 
+<liferay-ui:header
+	backURL="<%= redirect %>"
+	title="<%= HtmlUtil.escape(organization.getName()) %>"
+/>
+
+<%
+String tabs2Names = "users";
+
+if (PropsValues.ORGANIZATIONS_USER_GROUP_MEMBERSHIP_ENABLED) {
+	tabs2Names += ",user-groups";
+}
+%>
+
+<liferay-ui:tabs
+	names="<%= tabs2Names %>"
+	param="tabs2"
+	url="<%= portletURL.toString() %>"
+/>
+
 <portlet:actionURL var="editAssignmentsURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_organization_assignments" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
@@ -59,25 +78,6 @@ request.setAttribute("edit_organization_assignments.jsp-portletURL", portletURL)
 	<aui:input name="tabs3" type="hidden" value="<%= tabs3 %>" />
 	<aui:input name="assignmentsRedirect" type="hidden" />
 	<aui:input name="organizationId" type="hidden" value="<%= organization.getOrganizationId() %>" />
-
-	<liferay-ui:header
-		backURL="<%= redirect %>"
-		title='<%= HtmlUtil.escape(organization.getName()) %>'
-	/>
-
-	<%
-	String tabs2Names = "users";
-
-	if (PropsValues.ORGANIZATIONS_USER_GROUP_MEMBERSHIP_ENABLED) {
-		tabs2Names += ",user-groups";
-	}
-	%>
-
-	<liferay-ui:tabs
-		names="<%= tabs2Names %>"
-		param="tabs2"
-		url="<%= portletURL.toString() %>"
-	/>
 
 	<c:choose>
 		<c:when test='<%= tabs2.equals("users") %>'>

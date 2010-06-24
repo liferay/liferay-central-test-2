@@ -38,27 +38,27 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 pageContext.setAttribute("portletURL", portletURL);
 %>
 
+<div>
+	<c:choose>
+		<c:when test="<%= group.isOrganization() %>">
+			<liferay-ui:header
+				backURL="<%= backURL %>"
+				title="<%= group.getDescriptiveName() %>"
+			/>
+		</c:when>
+		<c:otherwise>
+			<liferay-ui:header
+				backURL="<%= backURL %>"
+				title="<%= group.getDescriptiveName() %>"
+			/>
+		</c:otherwise>
+	</c:choose>
+</div>
+
+<br />
+
 <aui:form action="<%= portletURL.toString() %>" method="get" name="fm">
 	<liferay-portlet:renderURLParams varImpl="portletURL" />
-
-	<div>
-		<c:choose>
-			<c:when test="<%= group.isOrganization() %>">
-				<liferay-ui:header
-					backURL="<%= backURL %>"
-					title="<%= group.getDescriptiveName() %>"
-				/>
-			</c:when>
-			<c:otherwise>
-				<liferay-ui:header
-					backURL="<%= backURL %>"
-					title="<%= group.getDescriptiveName() %>"
-				/>
-			</c:otherwise>
-		</c:choose>
-	</div>
-
-	<br />
 
 	<%
 	TeamSearch searchContainer = new TeamSearch(renderRequest, portletURL);

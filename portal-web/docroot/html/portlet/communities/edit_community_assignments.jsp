@@ -49,33 +49,33 @@ request.setAttribute("edit_community_assignments.jsp-selUser", selUser);
 request.setAttribute("edit_community_assignments.jsp-portletURL", portletURL);
 %>
 
+<c:choose>
+	<c:when test="<%= selUser == null %>">
+		<liferay-ui:header
+			backURL="<%= redirect %>"
+			title="<%= group.getDescriptiveName() %>"
+		/>
+
+		<liferay-ui:tabs
+			names="users,organizations,user-groups"
+			param="tabs1"
+			url="<%= portletURL.toString() %>"
+		/>
+	</c:when>
+	<c:otherwise>
+		<liferay-ui:header
+			backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+			title="roles"
+		/>
+	</c:otherwise>
+</c:choose>
+
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
 	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
 	<aui:input name="assignmentsRedirect" type="hidden" />
 	<aui:input name="groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
-
-	<c:choose>
-		<c:when test="<%= selUser == null %>">
-			<liferay-ui:header
-				backURL="<%= redirect %>"
-				title='<%= group.getDescriptiveName() %>'
-			/>
-
-			<liferay-ui:tabs
-				names="users,organizations,user-groups"
-				param="tabs1"
-				url="<%= portletURL.toString() %>"
-			/>
-		</c:when>
-		<c:otherwise>
-			<liferay-ui:header
-				backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-				title="roles"
-			/>
-		</c:otherwise>
-	</c:choose>
 
 	<c:choose>
 		<c:when test='<%= tabs1.equals("users") %>'>

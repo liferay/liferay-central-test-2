@@ -179,14 +179,14 @@ if (Validator.isNotNull(historyKey)) {
 	</liferay-util:include>
 </c:if>
 
-<%
-String taglibOnSubmit = renderResponse.getNamespace() + "saveUser('" + ((selUser == null) ? Constants.ADD : Constants.UPDATE) + "');";
-%>
-
 <liferay-ui:header
 	backURL="<%= backURL %>"
 	title='<%= (selUser == null) ? "new-user" : selUser.getFullName() %>'
 />
+
+<%
+String taglibOnSubmit = renderResponse.getNamespace() + "saveUser('" + ((selUser == null) ? Constants.ADD : Constants.UPDATE) + "');";
+%>
 
 <aui:form method="post" name="fm" onSubmit="<%= taglibOnSubmit %>">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />

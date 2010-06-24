@@ -53,14 +53,14 @@ if (Validator.isNotNull(historyKey)) {
 	<liferay-util:param name="toolbarItem" value='<%= (organization == null) ? "add" : "view-all" %>' />
 </liferay-util:include>
 
-<portlet:actionURL var="editOrganizationURL">
-	<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
-</portlet:actionURL>
-
 <liferay-ui:header
 	backURL="<%= backURL %>"
 	title='<%= (organization == null) ? "new-organization" : organization.getName() %>'
 />
+
+<portlet:actionURL var="editOrganizationURL">
+	<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
+</portlet:actionURL>
 
 <aui:form action="<%= editOrganizationURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveOrganization();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />

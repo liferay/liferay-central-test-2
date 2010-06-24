@@ -17,9 +17,9 @@
 <%@ include file="/html/portlet/directory/init.jsp" %>
 
 <%
-PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
-
 String viewUsersRedirect = ParamUtil.getString(request, "viewUsersRedirect");
+
+PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 
 if (Validator.isNotNull(viewUsersRedirect)) {
 	portletURL.setParameter("viewUsersRedirect", viewUsersRedirect);

@@ -31,7 +31,7 @@ portletURL.setParameter("modelResource", modelResource);
 
 <liferay-ui:header
 	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-	title='<%= modelResourceName %>'
+	title="<%= modelResourceName %>"
 />
 
 <%

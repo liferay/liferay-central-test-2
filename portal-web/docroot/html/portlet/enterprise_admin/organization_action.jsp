@@ -129,8 +129,8 @@ long organizationGroupId = organization.getGroup().getGroupId();
 
 	<portlet:renderURL var="viewUsersURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/view" />
-		<portlet:param name="viewUsersRedirect" value="<%= redirect %>" />
 		<portlet:param name="tabs1" value="users" />
+		<portlet:param name="viewUsersRedirect" value="<%= redirect %>" />
 		<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
 	</portlet:renderURL>
 
@@ -170,8 +170,8 @@ long organizationGroupId = organization.getGroup().getGroupId();
 
 		<portlet:renderURL var="viewSuborganizationsURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/view" />
-			<portlet:param name="viewOrganizationsRedirect" value="<%= redirect %>" />
 			<portlet:param name="tabs1" value="organizations" />
+			<portlet:param name="viewOrganizationsRedirect" value="<%= redirect %>" />
 			<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
 		</portlet:renderURL>
 

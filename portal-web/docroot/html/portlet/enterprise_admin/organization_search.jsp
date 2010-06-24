@@ -19,9 +19,9 @@
 <%
 themeDisplay.setIncludeServiceJs(true);
 
-OrganizationSearch searchContainer = (OrganizationSearch)request.getAttribute("liferay-ui:search:searchContainer");
-
 String viewOrganizationsRedirect = ParamUtil.getString(request, "viewOrganizationsRedirect");
+
+OrganizationSearch searchContainer = (OrganizationSearch)request.getAttribute("liferay-ui:search:searchContainer");
 
 OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContainer.getDisplayTerms();
 

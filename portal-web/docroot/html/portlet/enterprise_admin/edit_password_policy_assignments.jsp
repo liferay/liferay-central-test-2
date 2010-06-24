@@ -43,6 +43,17 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, tabs
 portletURL.setParameter("tabs3", tabs3);
 %>
 
+<liferay-ui:header
+	backURL="<%= redirect %>"
+	title="<%= HtmlUtil.escape(passwordPolicy.getName()) %>"
+/>
+
+<liferay-ui:tabs
+	names="users,organizations"
+	param="tabs2"
+	url="<%= portletURL.toString() %>"
+/>
+
 <portlet:actionURL var="editAssignmentsURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy_assignments" />
 </portlet:actionURL>
@@ -54,17 +65,6 @@ portletURL.setParameter("tabs3", tabs3);
 	<aui:input name="tabs3" type="hidden" value="<%= tabs3 %>" />
 	<aui:input name="assignmentsRedirect" type="hidden" />
 	<aui:input name="passwordPolicyId" type="hidden" value="<%= String.valueOf(passwordPolicy.getPasswordPolicyId()) %>" />
-
-	<liferay-ui:header
-		backURL="<%= redirect %>"
-		title='<%= HtmlUtil.escape(passwordPolicy.getName()) %>'
-	/>
-
-	<liferay-ui:tabs
-		names="users,organizations"
-		param="tabs2"
-		url="<%= portletURL.toString() %>"
-	/>
 
 	<c:choose>
 		<c:when test='<%= tabs2.equals("users") %>'>

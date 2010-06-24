@@ -17,10 +17,10 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
-
 String viewUsersRedirect = ParamUtil.getString(request, "viewUsersRedirect");
 String backURL = ParamUtil.getString(request, "backURL", viewUsersRedirect);
+
+PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 
 if (Validator.isNotNull(viewUsersRedirect)) {
 	portletURL.setParameter("viewUsersRedirect", viewUsersRedirect);
@@ -93,7 +93,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 
 		<liferay-ui:header
 			backURL="<%= backURL %>"
-			title='<%= HtmlUtil.escape(organization.getName()) %>'
+			title="<%= HtmlUtil.escape(organization.getName()) %>"
 		/>
 
 		<%
@@ -109,7 +109,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 
 		<liferay-ui:header
 			backURL="<%= backURL %>"
-			title='<%= HtmlUtil.escape(role.getTitle(locale)) %>'
+			title="<%= HtmlUtil.escape(role.getTitle(locale)) %>"
 		/>
 
 		<%
@@ -124,7 +124,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 
 		<liferay-ui:header
 			backURL="<%= backURL %>"
-			title='<%= HtmlUtil.escape(userGroup.getName()) %>'
+			title="<%= HtmlUtil.escape(userGroup.getName()) %>"
 		/>
 
 		<%

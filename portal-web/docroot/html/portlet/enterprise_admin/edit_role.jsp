@@ -46,8 +46,8 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 
 <c:if test="<%= role != null %>">
 	<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_tabs.jsp">
-		<liferay-util:param name="backURL" value="<%= backURL %>" />
 		<liferay-util:param name="tabs1" value="edit" />
+		<liferay-util:param name="backURL" value="<%= backURL %>" />
 	</liferay-util:include>
 </c:if>
 

@@ -81,7 +81,7 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 		<liferay-ui:header
 			backURL="<%= backURL %>"
-			title='<%= role.getTitle(locale) %>'
+			title="<%= role.getTitle(locale) %>"
 		/>
 
 		<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_tabs.jsp">

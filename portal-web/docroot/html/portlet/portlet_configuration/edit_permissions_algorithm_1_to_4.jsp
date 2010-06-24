@@ -140,6 +140,7 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 			tabs2Names = StringUtil.replace(tabs2Names, ",guest", StringPool.BLANK);
 		}
 		else if (modelResource.equals(Layout.class.getName())) {
+
 			// User layouts should not have community assignments
 
 			if (group.isUser()) {
