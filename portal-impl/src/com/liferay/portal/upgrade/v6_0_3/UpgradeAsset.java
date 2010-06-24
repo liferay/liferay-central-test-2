@@ -70,7 +70,7 @@ public class UpgradeAsset extends UpgradeProcess {
 		}
 	}
 
-	protected String[] getTableAndColumnName(String className)  {
+	protected String[] getTableAndColumnName(String className) {
 		String[] tableAndColumn = new String[3];
 
 		if (className.equals("com.liferay.portal.model.Group")) {
