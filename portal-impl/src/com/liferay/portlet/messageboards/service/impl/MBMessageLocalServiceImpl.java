@@ -416,15 +416,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Workflow
 
-		String className = MBMessage.class.getName();
-
-		if (message.isDiscussion()) {
-			className = MBDiscussion.class.getName();
-		}
-
 		WorkflowHandlerRegistryUtil.startWorkflowInstance(
-			user.getCompanyId(), groupId, userId, className,
-			message.getMessageId(), message, serviceContext);
+			user.getCompanyId(), groupId, userId,
+			message.getWorkflowClassName(), message.getMessageId(), message,
+			serviceContext);
 
 		// Testing roll back
 

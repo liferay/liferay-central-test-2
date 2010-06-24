@@ -59,6 +59,8 @@ public interface MBMessage extends MBMessageModel {
 
 	public java.lang.String getThreadAttachmentsDir();
 
+	public java.lang.String getWorkflowClassName();
+
 	public boolean isDiscussion();
 
 	public boolean isReply();

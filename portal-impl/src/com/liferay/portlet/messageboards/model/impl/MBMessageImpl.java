@@ -24,6 +24,7 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
+import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageConstants;
 import com.liferay.portlet.messageboards.model.MBThread;
@@ -107,6 +108,15 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 
 	public String getThreadAttachmentsDir() {
 		return "messageboards/" + getThreadId();
+	}
+
+	public String getWorkflowClassName() {
+		if (isDiscussion()) {
+			return MBDiscussion.class.getName();
+		}
+		else {
+			return MBMessage.class.getName();
+		}
 	}
 
 	public boolean isDiscussion() {

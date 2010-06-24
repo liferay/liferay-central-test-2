@@ -373,6 +373,10 @@ public class MBMessageWrapper implements MBMessage {
 		return _mbMessage.getThreadAttachmentsDir();
 	}
 
+	public java.lang.String getWorkflowClassName() {
+		return _mbMessage.getWorkflowClassName();
+	}
+
 	public boolean isDiscussion() {
 		return _mbMessage.isDiscussion();
 	}
