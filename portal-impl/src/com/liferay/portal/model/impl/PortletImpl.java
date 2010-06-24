@@ -148,7 +148,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		boolean showPortletInactive, boolean actionURLRedirect,
 		boolean restoreCurrentView, boolean maximizeEdit, boolean maximizeHelp,
 		boolean popUpPrint, boolean layoutCacheable, boolean instanceable,
-		boolean scopeable, String userPrincipalStrategy,
+		boolean remoteable, boolean scopeable, String userPrincipalStrategy,
 		boolean privateRequestAttributes, boolean privateSessionAttributes,
 		int renderWeight, boolean ajaxable, List<String> headerPortalCss,
 		List<String> headerPortletCss, List<String> headerPortalJavaScript,
@@ -217,6 +217,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_popUpPrint = popUpPrint;
 		_layoutCacheable = layoutCacheable;
 		_instanceable = instanceable;
+		_remoteable = remoteable;
 		_scopeable = scopeable;
 		_userPrincipalStrategy = userPrincipalStrategy;
 		_privateRequestAttributes = privateRequestAttributes;
@@ -1671,6 +1672,34 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
+	 * Returns true if the portlet supports remoting.
+	 *
+	 * @return true if the portlet supports remoting
+	 */
+	public boolean getRemoteable() {
+		return _remoteable;
+	}
+
+	/**
+	 * Returns true if the portlet supports remoting.
+	 *
+	 * @return true if the portlet supports remoting
+	 */
+	public boolean isRemoteable() {
+		return _remoteable;
+	}
+
+	/**
+	 * Set to true if the portlet supports remoting
+	 *
+	 * @param remoteable boolean value for whether or not the the portlet
+	 *		  supports remoting
+	 */
+	public void setRemoteable(boolean remoteable) {
+		_remoteable = remoteable;
+	}
+
+	/**
 	 * Returns true if the portlet supports scoping of data.
 	 *
 	 * @return true if the portlet supports scoping of data
@@ -2922,16 +2951,17 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			isShowPortletAccessDenied(), isShowPortletInactive(),
 			isActionURLRedirect(), isRestoreCurrentView(), isMaximizeEdit(),
 			isMaximizeHelp(), isPopUpPrint(), isLayoutCacheable(),
-			isInstanceable(), isScopeable(), getUserPrincipalStrategy(),
-			isPrivateRequestAttributes(), isPrivateSessionAttributes(),
-			getRenderWeight(), isAjaxable(), getHeaderPortalCss(),
-			getHeaderPortletCss(), getHeaderPortalJavaScript(),
-			getHeaderPortletJavaScript(), getFooterPortalCss(),
-			getFooterPortletCss(), getFooterPortalJavaScript(),
-			getFooterPortletJavaScript(), getCssClassWrapper(),
-			getFacebookIntegration(), isAddDefaultResource(), getRoles(),
-			getUnlinkedRoles(), getRoleMappers(), isSystem(), isActive(),
-			isInclude(), getInitParams(), getExpCache(), getPortletModes(),
+			isInstanceable(), isRemoteable(), isScopeable(),
+			getUserPrincipalStrategy(), isPrivateRequestAttributes(),
+			isPrivateSessionAttributes(), getRenderWeight(), isAjaxable(),
+			getHeaderPortalCss(), getHeaderPortletCss(),
+			getHeaderPortalJavaScript(), getHeaderPortletJavaScript(),
+			getFooterPortalCss(), getFooterPortletCss(),
+			getFooterPortalJavaScript(), getFooterPortletJavaScript(),
+			getCssClassWrapper(), getFacebookIntegration(),
+			isAddDefaultResource(), getRoles(), getUnlinkedRoles(),
+			getRoleMappers(), isSystem(), isActive(), isInclude(),
+			getInitParams(), getExpCache(), getPortletModes(),
 			getWindowStates(), getSupportedLocales(), getResourceBundle(),
 			getPortletInfo(), getPortletFilters(), getProcessingEvents(),
 			getPublishingEvents(), getPublicRenderParameters(),
@@ -3225,6 +3255,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * True if the portlet can be added multiple times to a layout.
 	 */
 	private boolean _instanceable;
+
+	/**
+	 * True if the portlet supports remoting.
+	 */
+	private boolean _remoteable;
 
 	/**
 	 * True if the portlet supports scoping of data.

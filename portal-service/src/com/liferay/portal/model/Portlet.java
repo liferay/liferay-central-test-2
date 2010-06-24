@@ -1073,6 +1073,28 @@ public interface Portlet extends PortletModel {
 	public void setInstanceable(boolean instanceable);
 
 	/**
+	* Returns true if the portlet supports remoting.
+	*
+	* @return true if the portlet supports remoting
+	*/
+	public boolean getRemoteable();
+
+	/**
+	* Returns true if the portlet supports remoting.
+	*
+	* @return true if the portlet supports remoting
+	*/
+	public boolean isRemoteable();
+
+	/**
+	* Set to true if the portlet supports remoting
+	*
+	* @param remoteable boolean value for whether or not the the portlet
+	supports remoting
+	*/
+	public void setRemoteable(boolean remoteable);
+
+	/**
 	* Returns true if the portlet supports scoping of data.
 	*
 	* @return true if the portlet supports scoping of data

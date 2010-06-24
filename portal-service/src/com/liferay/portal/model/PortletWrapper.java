@@ -690,6 +690,18 @@ public class PortletWrapper implements Portlet {
 		_portlet.setInstanceable(instanceable);
 	}
 
+	public boolean getRemoteable() {
+		return _portlet.getRemoteable();
+	}
+
+	public boolean isRemoteable() {
+		return _portlet.isRemoteable();
+	}
+
+	public void setRemoteable(boolean remoteable) {
+		_portlet.setRemoteable(remoteable);
+	}
+
 	public boolean getScopeable() {
 		return _portlet.getScopeable();
 	}
