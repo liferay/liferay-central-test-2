@@ -173,7 +173,9 @@ public class RouterImplTest extends BaseTestCase {
 		assertEquals(value, MapUtil.getString(parameters, name));
 	}
 
-	protected void assertUrlGeneratesParameters(String url, String queryString) {
+	protected void assertUrlGeneratesParameters(
+		String url, String queryString) {
+
 		Map<String, String[]> parameters = HttpUtil.parameterMapFromString(
 			queryString);
 
