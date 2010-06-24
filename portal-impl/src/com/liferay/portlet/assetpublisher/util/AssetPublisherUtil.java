@@ -354,11 +354,11 @@ public class AssetPublisherUtil {
 		while (itr.hasNext()) {
 			String assetEntryXml = itr.next();
 
-			Document doc = SAXReaderUtil.read(assetEntryXml);
+			Document document = SAXReaderUtil.read(assetEntryXml);
 
-			Element root = doc.getRootElement();
+			Element rootElement = document.getRootElement();
 
-			String assetEntryUuid = root.element("asset-entry-uuid").getText();
+			String assetEntryUuid = rootElement.elementText("asset-entry-uuid");
 
 			if (assetEntryUuids.contains(assetEntryUuid)) {
 				itr.remove();
@@ -386,14 +386,21 @@ public class AssetPublisherUtil {
 		String xml = null;
 
 		try {
-			Document doc = SAXReaderUtil.createDocument(StringPool.UTF8);
+			Document document = SAXReaderUtil.createDocument(StringPool.UTF8);
 
-			Element assetEntryEl = doc.addElement("asset-entry");
+			Element assetEntryElement = document.addElement("asset-entry");
 
-			assetEntryEl.addElement("asset-entry-type").addText(assetEntryType);
-			assetEntryEl.addElement("asset-entry-uuid").addText(assetEntryUuid);
+			Element assetEntryTypeElement = assetEntryElement.addElement(
+				"asset-entry-type");
 
-			xml = doc.formattedString(StringPool.BLANK);
+			assetEntryTypeElement.addText(assetEntryType);
+
+			Element assetEntryUuidElement = assetEntryElement.addElement(
+				"asset-entry-uuid");
+
+			assetEntryUuidElement.addText(assetEntryUuid);
+
+			xml = document.formattedString(StringPool.BLANK);
 		}
 		catch (IOException ioe) {
 			if (_log.isWarnEnabled()) {
@@ -415,7 +422,8 @@ public class AssetPublisherUtil {
 			WebKeys.THEME_DISPLAY);
 
 		String key =
-			AssetPublisherUtil.class + "_" + themeDisplay.getScopeGroupId();
+			AssetPublisherUtil.class + StringPool.UNDERLINE +
+				themeDisplay.getScopeGroupId();
 
 		Map<String, Long> recentFolderIds =
 			(Map<String, Long>)session.getAttribute(key);

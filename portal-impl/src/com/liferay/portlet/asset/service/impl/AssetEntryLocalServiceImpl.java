@@ -451,10 +451,11 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 	public AssetEntry updateEntry(
 			long userId, long groupId, String className, long classPK,
-			String uuid, long[] categoryIds, String[] tagNames, boolean visible,
-			Date startDate, Date endDate, Date publishDate, Date expirationDate,
-			String mimeType, String title, String description, String summary,
-			String url, int height, int width, Integer priority, boolean sync)
+			String classUuid, long[] categoryIds, String[] tagNames,
+			boolean visible, Date startDate, Date endDate, Date publishDate,
+			Date expirationDate, String mimeType, String title,
+			String description, String summary, String url, int height,
+			int width, Integer priority, boolean sync)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -481,6 +482,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			entry.setCreateDate(now);
 			entry.setClassNameId(classNameId);
 			entry.setClassPK(classPK);
+			entry.setClassUuid(classUuid);
 			entry.setVisible(visible);
 			entry.setPublishDate(publishDate);
 			entry.setExpirationDate(expirationDate);

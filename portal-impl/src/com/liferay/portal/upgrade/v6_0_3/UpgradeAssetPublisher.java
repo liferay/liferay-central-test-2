@@ -15,7 +15,6 @@
 package com.liferay.portal.upgrade.v6_0_3;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -34,115 +33,61 @@ import java.sql.ResultSet;
  *
  * @author Julio Camarero
  */
-public class UpgradeAssetPublisher extends UpgradeProcess {
+public class UpgradeAssetPublisher
+	extends com.liferay.portal.upgrade.v6_0_0.UpgradeAssetPublisher {
 
-	protected void deletePortletPreferences(long portletPreferencesId)
+	protected String[] getAssetEntryXmls(String[] assetEntryXmls)
 		throws Exception {
 
-		runSQL(
-			"delete from PortletPreferences where portletPreferencesId = " +
-				portletPreferencesId);
-	}
+		String[] newAssetEntryXmls = new String[assetEntryXmls.length];
 
-	protected void doUpgrade() throws Exception {
-		updatePortletPreferences();
-	}
+		for (int i = 0; i < assetEntryXmls.length; i++) {
+			String assetEntryXml = assetEntryXmls[i];
 
-	protected Object[] getLayout(long plid) throws Exception {
-		Object[] layout = null;
+			Document document = SAXReaderUtil.read(assetEntryXml);
 
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+			Element rootElement = document.getRootElement();
 
-		try {
-			con = DataAccess.getConnection();
+			Element assetEntryIdElement = rootElement.element(
+				"asset-entry-id");
 
-			ps = con.prepareStatement(_GET_LAYOUT);
+			long assetEntryId = GetterUtil.getLong(
+				assetEntryIdElement.getText());
 
-			ps.setLong(1, plid);
+			Connection con = null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
 
-			rs = ps.executeQuery();
+			try {
+				con = DataAccess.getConnection();
 
-			while (rs.next()) {
-				long companyId = rs.getLong("companyId");
+				ps = con.prepareStatement(
+					"select classUuid from AssetEntry where entryId = ?");
 
-				layout = new Object[] {companyId};
+				ps.setLong(1, assetEntryId);
+
+				rs = ps.executeQuery();
+
+				rs.next();
+
+				String classUuid = rs.getString("classUuid");
+
+				Element assetEntryUuidElement = rootElement.addElement(
+					"asset-entry-uuid");
+
+				assetEntryUuidElement.addText(classUuid);
+
+				rootElement.remove(assetEntryIdElement);
+
+				newAssetEntryXmls[i] = document.formattedString(
+					StringPool.BLANK);
+			}
+			finally {
+				DataAccess.cleanUp(con, ps, rs);
 			}
 		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
 
-		return layout;
-	}
-
-	protected void updatePortletPreferences() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"select portletPreferencesId, ownerId, ownerType, plid, " +
-					"portletId, preferences from PortletPreferences where " +
-						"portletId like '101_INSTANCE_%' ");
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long portletPreferencesId = rs.getLong("portletPreferencesId");
-				long ownerId = rs.getLong("ownerId");
-				int ownerType = rs.getInt("ownerType");
-				long plid = rs.getLong("plid");
-				String portletId = rs.getString("portletId");
-				String preferences = rs.getString("preferences");
-
-				Object[] layout = getLayout(plid);
-
-				if (layout != null) {
-					long companyId = (Long)layout[0];
-
-					String newPreferences = upgradePreferences(
-						companyId, ownerId, ownerType, plid, portletId,
-						preferences);
-
-					updatePortletPreferences(
-						portletPreferencesId, newPreferences);
-				}
-				else {
-					deletePortletPreferences(portletPreferencesId);
-				}
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected void updatePortletPreferences(
-			long portletPreferencesId, String preferences)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"update PortletPreferences set preferences = ? where " +
-					"portletPreferencesId = " + portletPreferencesId);
-
-			ps.setString(1, preferences);
-
-			ps.executeUpdate();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps);
-		}
+		return newAssetEntryXmls;
 	}
 
 	protected String upgradePreferences(
@@ -162,58 +107,12 @@ public class UpgradeAssetPublisher extends UpgradeProcess {
 			String[] assetEntryXmls = preferences.getValues(
 				"asset-entry-xml", new String[0]);
 
-			String[] newAssetEntryXmls = new String[assetEntryXmls.length];
-
-			for (int i = 0; i < assetEntryXmls.length; i++) {
-				String assetEntryXml = assetEntryXmls[i];
-
-				Document doc = SAXReaderUtil.read(assetEntryXml);
-
-				Element root = doc.getRootElement();
-
-				Element assetEntryIdElement = root.element("asset-entry-id");
-
-				long assetEntryId = GetterUtil.getLong(
-					assetEntryIdElement.getText());
-
-				Connection con = null;
-				PreparedStatement ps = null;
-				ResultSet rs = null;
-
-				try {
-					con = DataAccess.getConnection();
-
-					ps = con.prepareStatement(
-						"select * from AssetEntry where entryId = ?");
-
-					ps.setLong(1, assetEntryId);
-
-					rs = ps.executeQuery();
-
-					rs.next();
-
-					String classUuid = rs.getString("classUuid");
-
-					root.addElement("asset-entry-uuid").addText(classUuid);
-
-					root.remove(assetEntryIdElement);
-
-					newAssetEntryXmls[i] = doc.formattedString(
-						StringPool.BLANK);
-				}
-				finally {
-					DataAccess.cleanUp(con, ps, rs);
-				}
-			}
+			String[] newAssetEntryXmls = getAssetEntryXmls(assetEntryXmls);
 
 			preferences.setValues("asset-entry-xml", newAssetEntryXmls);
-
 		}
 
 		return PortletPreferencesSerializer.toXML(preferences);
 	}
-
-	private static final String _GET_LAYOUT =
-		"select * from Layout where plid = ?";
 
 }

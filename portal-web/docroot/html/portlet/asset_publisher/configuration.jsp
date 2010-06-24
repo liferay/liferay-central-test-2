@@ -240,9 +240,9 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 									sb.append(image.getSmallImageId());
 									sb.append("&t=");
 									sb.append(ImageServletTokenUtil.getToken(image.getSmallImageId()));
-									sb.append("\" title=\"");
+									sb.append("\" style=\"border-width: 1; \" title=\"");
 									sb.append(image.getDescription());
-									sb.append("\" style=\"border-width:1; \" />");
+									sb.append("\" />");
 
 									row.addText(sb.toString(), rowURL);
 								}

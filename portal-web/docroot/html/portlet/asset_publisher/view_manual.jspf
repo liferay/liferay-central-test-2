@@ -32,11 +32,11 @@ request.setAttribute("view.jsp-results", results);
 for (int assetEntryIndex = 0; assetEntryIndex < results.size(); assetEntryIndex++) {
 	String assetEntryXml = (String)results.get(assetEntryIndex);
 
-	Document doc = SAXReaderUtil.read(assetEntryXml);
+	Document document = SAXReaderUtil.read(assetEntryXml);
 
-	Element root = doc.getRootElement();
+	Element rootElement = document.getRootElement();
 
-	String assetEntryUuid = root.element("asset-entry-uuid").getText();
+	String assetEntryUuid = rootElement.elementText("asset-entry-uuid");
 
 	AssetEntry assetEntry = null;
 
