@@ -177,7 +177,6 @@
 <%@ page import="com.liferay.portlet.PortletResponseImpl" %>
 <%@ page import="com.liferay.portlet.PortletSetupUtil" %>
 <%@ page import="com.liferay.portlet.PortletURLFactoryUtil" %>
-<%@ page import="com.liferay.portlet.PortletURLImpl" %>
 <%@ page import="com.liferay.portlet.PortletURLUtil" %>
 <%@ page import="com.liferay.portlet.RenderParametersPool" %>
 <%@ page import="com.liferay.portlet.RenderRequestFactory" %>
