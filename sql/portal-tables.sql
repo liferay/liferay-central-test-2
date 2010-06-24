@@ -127,6 +127,7 @@ create table AssetEntry (
 	modifiedDate DATE null,
 	classNameId LONG,
 	classPK LONG,
+	classUuid VARCHAR(75) null,
 	visible BOOLEAN,
 	startDate DATE null,
 	endDate DATE null,

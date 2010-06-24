@@ -1094,6 +1094,7 @@
 			</basic>
 			<basic name="classNameId" />
 			<basic name="classPK" />
+			<basic name="classUuid" />
 			<basic name="visible" />
 			<basic name="startDate">
 				<temporal>TIMESTAMP</temporal>
