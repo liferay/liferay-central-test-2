@@ -324,7 +324,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) %>">
 			<liferay-ui:header
 				backURL="<%= backURL %>"
-				title='<%= liveGroup.getDescriptiveName() %>'
+				title="<%= liveGroup.getDescriptiveName() %>"
 			/>
 		</c:if>
 
