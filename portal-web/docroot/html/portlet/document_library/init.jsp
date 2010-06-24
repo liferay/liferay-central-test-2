@@ -177,7 +177,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 private static final String _getFileEntryImage(DLFileEntry fileEntry, ThemeDisplay themeDisplay) {
 	StringBundler sb = new StringBundler(5);
 
-	sb.append("<img style=\"text-align:left;border-width:0\" src=\"");
+	sb.append("<img style=\"border-width: 0; text-align: left;\" src=\"");
 	sb.append(themeDisplay.getPathThemeImages());
 	sb.append("/file_system/small/");
 	sb.append(DLUtil.getFileIcon(fileEntry.getTitle()));
