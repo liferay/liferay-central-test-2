@@ -65,6 +65,27 @@ public class StripFilter extends BasePortalFilter {
 		}
 	}
 
+	protected String extractContent(CharBuffer charBuffer, int length) {
+
+		// See LPS-10545
+
+		/*String content = charBuffer.subSequence(0, length).toString();
+
+		int position = charBuffer.position();
+
+		charBuffer.position(position + length);*/
+
+		CharBuffer duplicateCharBuffer = charBuffer.duplicate();
+
+		int position = duplicateCharBuffer.position() + length;
+
+		String content = duplicateCharBuffer.limit(position).toString();
+
+		charBuffer.position(position);
+
+		return content;
+	}
+
 	protected boolean hasMarker(CharBuffer charBuffer, char[] marker) {
 		int position = charBuffer.position();
 
@@ -181,7 +202,7 @@ public class StripFilter extends BasePortalFilter {
 			return;
 		}
 
-		String content = _extractContent(charBuffer, length);
+		String content = extractContent(charBuffer, length);
 
 		String minifiedContent = content;
 
@@ -293,7 +314,7 @@ public class StripFilter extends BasePortalFilter {
 			return;
 		}
 
-		String content = _extractContent(charBuffer, length);
+		String content = extractContent(charBuffer, length);
 
 		String minifiedContent = content;
 
@@ -352,7 +373,7 @@ public class StripFilter extends BasePortalFilter {
 
 		length += _MARKER_PRE_CLOSE.length();
 
-		String content = _extractContent(oldCharBuffer, length);
+		String content = extractContent(oldCharBuffer, length);
 
 		writer.write(content);
 
@@ -377,7 +398,7 @@ public class StripFilter extends BasePortalFilter {
 
 		length += _MARKER_TEXTAREA_CLOSE.length();
 
-		String content = _extractContent(oldCharBuffer, length);
+		String content = extractContent(oldCharBuffer, length);
 
 		writer.write(content);
 
@@ -456,19 +477,6 @@ public class StripFilter extends BasePortalFilter {
 		}
 
 		writer.flush();
-	}
-
-	private String _extractContent(CharBuffer charBuffer, int length) {
-		CharBuffer copyCharBuffer = charBuffer.duplicate();
-
-		int position = copyCharBuffer.position();
-		int newPosition = position + length;
-
-		String content = copyCharBuffer.limit(newPosition).toString();
-
-		charBuffer.position(newPosition);
-
-		return content;
 	}
 
 	private static final String _CDATA_CLOSE = "/*]]>*/";
