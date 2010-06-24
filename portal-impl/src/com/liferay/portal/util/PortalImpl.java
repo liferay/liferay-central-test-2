@@ -1511,7 +1511,9 @@ public class PortalImpl implements Portal {
 				}
 			}
 
-			if (Validator.isNotNull(virtualHost)) {
+			if (Validator.isNotNull(virtualHost) &&
+				!virtualHost.equalsIgnoreCase(_LOCALHOST)) {
+
 				virtualHost = getPortalURL(
 					virtualHost, themeDisplay.getServerPort(),
 					themeDisplay.isSecure());
