@@ -24,11 +24,11 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 WorkflowTask workflowTask = null;
 
 if (row != null) {
+	randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
+
 	Object result = row.getObject();
 
 	workflowTask = (WorkflowTask)row.getParameter("workflowTask");
-
-	randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 }
 else {
 	workflowTask = (WorkflowTask)request.getAttribute(WebKeys.WORKFLOW_TASK);
