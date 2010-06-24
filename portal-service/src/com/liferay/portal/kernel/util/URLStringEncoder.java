@@ -12,10 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.util;
-
-import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.StringEncoder;
+package com.liferay.portal.kernel.util;
 
 /**
  * <a href="URLStringEncoder.java.html"><b><i>View Source</i></b></a>

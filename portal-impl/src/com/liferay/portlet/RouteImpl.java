@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.util.InheritableMap;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringEncoder;
 import com.liferay.portal.kernel.util.StringParser;
-import com.liferay.portal.util.URLStringEncoder;
+import com.liferay.portal.kernel.util.URLStringEncoder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,8 +35,9 @@ import java.util.Map;
 public class RouteImpl implements Route {
 
 	public RouteImpl(String pattern) {
-		_parser = new StringParser(pattern);
-		_parser.setEncoder(_urlEncoder);
+		_stringParser = new StringParser(pattern);
+
+		_stringParser.setStringEncoder(_urlEncoder);
 	}
 
 	public void addDefaultParameter(String name, String value) {
@@ -44,8 +45,9 @@ public class RouteImpl implements Route {
 	}
 
 	public void addGeneratedParameter(String name, String pattern) {
-		StringParser parser = new StringParser(pattern);
-		_generatedParameters.put(name, parser);
+		StringParser stringParser = new StringParser(pattern);
+
+		_generatedParameters.put(name, stringParser);
 	}
 
 	public void addIgnoredParameter(String name) {
@@ -75,24 +77,25 @@ public class RouteImpl implements Route {
 	public String parametersToUrl(Map<String, String> parameters) {
 		InheritableMap<String, String> allParameters =
 			new InheritableMap<String, String>();
-		
+
 		allParameters.setParentMap(parameters);
 
-		// Virtual parameters may sometimes be checked by default parameters,
-		// so the order here is important.
+		// The order is important because virtual parameters may sometimes be
+		// checked by default parameters
 
 		for (Map.Entry<String, StringParser> entry :
 				_generatedParameters.entrySet()) {
 
 			String name = entry.getKey();
-			StringParser parser = entry.getValue();
+			StringParser stringParser = entry.getValue();
+
 			String value = MapUtil.getString(allParameters, name);
 
-			if (!parser.parse(value, allParameters)) {
+			if (!stringParser.parse(value, allParameters)) {
 				return null;
 			}
 		}
-		
+
 		for (Map.Entry<String, String> entry : _defaultParameters.entrySet()) {
 			String name = entry.getKey();
 			String value = entry.getValue();
@@ -102,15 +105,17 @@ public class RouteImpl implements Route {
 			}
 		}
 
-		String url = _parser.build(allParameters);
+		String url = _stringParser.build(allParameters);
 
 		if (url == null) {
 			return null;
 		}
 
 		for (String name : _generatedParameters.keySet()) {
+
 			// Virtual parameters will never be placed in the query string,
-			// so parameters is modified directly instead of allParameters.
+			// so parameters is modified directly instead of allParameters
+
 			parameters.remove(name);
 		}
 
@@ -125,30 +130,29 @@ public class RouteImpl implements Route {
 		return url;
 	}
 
-	public boolean urlToParameters(
-			String url, Map<String, String> parameters) {
-
-		if (!_parser.parse(url, parameters)) {
+	public boolean urlToParameters(String url, Map<String, String> parameters) {
+		if (!_stringParser.parse(url, parameters)) {
 			return false;
 		}
 
 		parameters.putAll(_defaultParameters);
 		parameters.putAll(_overriddenParameters);
 
-		// Generated parameters may be dependent on default parameters or
-		// overridden parameters, so the order here is important.
+		// The order is important because generated parameters may be dependent
+		// on default parameters or overridden parameters
 
 		for (Map.Entry<String, StringParser> entry :
 				_generatedParameters.entrySet()) {
 
 			String name = entry.getKey();
-			StringParser parser = entry.getValue();
+			StringParser stringParser = entry.getValue();
 
-			String value = parser.build(parameters);
+			String value = stringParser.build(parameters);
 
 			// Generated parameters are not guaranteed to be created. The format
 			// of the virtual parameters in the route pattern must match their
 			// format in the generated parameter.
+
 			if (value != null) {
 				parameters.put(name, value);
 			}
@@ -161,11 +165,11 @@ public class RouteImpl implements Route {
 
 	private Map<String, String> _defaultParameters =
 		new HashMap<String, String>();
+	private Map<String, StringParser> _generatedParameters =
+		new HashMap<String, StringParser>();
 	private List<String> _ignoredParameters = new ArrayList<String>();
 	private Map<String, String> _overriddenParameters =
 		new HashMap<String, String>();
-	private StringParser _parser;
-	private Map<String, StringParser> _generatedParameters =
-		new HashMap<String, StringParser>();
+	private StringParser _stringParser;
 
 }

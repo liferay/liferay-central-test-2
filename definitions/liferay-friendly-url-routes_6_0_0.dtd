@@ -15,7 +15,8 @@ friendly URL mapper routes.
 <!--
 The route element contains information on a single route.
 -->
-<!ELEMENT route (pattern, default-parameter*, generated-parameter*, ignored-parameter*, overridden-parameter*)>
+<!ELEMENT route (pattern, default-parameter*, generated-parameter*,
+ignored-parameter*, overridden-parameter*)>
 
 <!--
 The pattern element specifies the pattern of the mapped friendly URL.

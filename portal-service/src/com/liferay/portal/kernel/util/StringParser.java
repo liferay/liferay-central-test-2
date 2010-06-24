@@ -38,15 +38,18 @@ public class StringParser {
 		while (matcher.find()) {
 			String chunk = matcher.group();
 
-			StringParserFragment fragment = new StringParserFragment(chunk);
+			StringParserFragment stringParserFragment =
+				new StringParserFragment(chunk);
 
-			_fragments.add(fragment);
+			_stringParserFragments.add(stringParserFragment);
 
-			_builder = _builder.replace(
-				chunk, fragment.getToken());
+			_builder = _builder.replace(chunk, stringParserFragment.getToken());
 
 			regex = regex.replace(
-				escapeRegex(chunk), "(" + fragment.getPattern() + ")");
+				escapeRegex(chunk),
+				StringPool.OPEN_PARENTHESIS.concat(
+					stringParserFragment.getPattern().concat(
+						StringPool.CLOSE_PARENTHESIS)));
 		}
 
 		_pattern = Pattern.compile(regex);
@@ -55,26 +58,30 @@ public class StringParser {
 	public String build(Map<String, String> parameters) {
 		String s = _builder;
 
-		for (StringParserFragment fragment : _fragments) {
-			String value = parameters.get(fragment.getName());
+		for (StringParserFragment stringParserFragment :
+				_stringParserFragments) {
+
+			String value = parameters.get(stringParserFragment.getName());
 
 			if (value == null) {
 				return null;
 			}
 
-			if (_encoder != null) {
-				value = _encoder.encode(value);
+			if (_stringEncoder != null) {
+				value = _stringEncoder.encode(value);
 			}
 
-			if (!fragment.matches(value)) {
+			if (!stringParserFragment.matches(value)) {
 				return null;
 			}
 
-			s = s.replace(fragment.getToken(), value);
+			s = s.replace(stringParserFragment.getToken(), value);
 		}
 
-		for (StringParserFragment fragment : _fragments) {
-			parameters.remove(fragment.getName());
+		for (StringParserFragment stringParserFragment :
+				_stringParserFragments) {
+
+			parameters.remove(stringParserFragment.getName());
 		}
 
 		return s;
@@ -93,23 +100,24 @@ public class StringParser {
 			return false;
 		}
 
-		for (int i = 1; i <= _fragments.size(); i++) {
-			StringParserFragment fragment = _fragments.get(i - 1);
+		for (int i = 1; i <= _stringParserFragments.size(); i++) {
+			StringParserFragment stringParserFragment =
+				_stringParserFragments.get(i - 1);
 
 			String value = matcher.group(i);
 
-			if (_encoder != null) {
-				value = _encoder.decode(value);
+			if (_stringEncoder != null) {
+				value = _stringEncoder.decode(value);
 			}
 
-			parameters.put(fragment.getName(), value);
+			parameters.put(stringParserFragment.getName(), value);
 		}
 
 		return true;
 	}
 
-	public void setEncoder(StringEncoder encoder) {
-		_encoder = encoder;
+	public void setStringEncoder(StringEncoder stringEncoder) {
+		_stringEncoder = stringEncoder;
 	}
 
 	private static Pattern _escapeRegexPattern = Pattern.compile(
@@ -117,8 +125,8 @@ public class StringParser {
 	private static Pattern _fragmentPattern = Pattern.compile("\\{.+?\\}");
 
 	private String _builder;
-	private StringEncoder _encoder;
-	private List<StringParserFragment> _fragments =
+	private StringEncoder _stringEncoder;
+	private List<StringParserFragment> _stringParserFragments =
 		new ArrayList<StringParserFragment>();
 	private Pattern _pattern;
 

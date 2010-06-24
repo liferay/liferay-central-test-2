@@ -42,10 +42,10 @@ public class RouteImplTest extends BaseTestCase {
 			new HashMap<String, String>(parameters);
 
 		Route route = new RouteImpl("{action}/{id:\\d+}");
+
 		String url = route.parametersToUrl(parameters);
 
-		assertNull(
-			"The returned URL should be null", url);
+		assertNull(url);
 		assertEquals(originalParameters, parameters);
 	}
 

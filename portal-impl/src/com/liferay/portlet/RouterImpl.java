@@ -49,9 +49,7 @@ public class RouterImpl implements Router {
 		return null;
 	}
 
-	public boolean urlToParameters(
-			String url, Map<String, String> parameters) {
-
+	public boolean urlToParameters(String url, Map<String, String> parameters) {
 		for (Route route : _routes) {
 			if (route.urlToParameters(url, parameters)) {
 				return true;

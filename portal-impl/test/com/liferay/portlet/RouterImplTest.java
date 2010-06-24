@@ -102,81 +102,78 @@ public class RouterImplTest extends BaseTestCase {
 	}
 
 	public void testGeneratedParameters() {
-		assertEqualsUrlToParameters(
+		assertUrlGeneratesParameters(
 			"instance/1b7c/recent",
 			"p_p_id=15_INSTANCE_1b7c&topLink=recent");
-		assertEqualsParametersToUrl("instance/1b7c/recent");
+		assertUrlRegenerates("instance/1b7c/recent");
 	}
 
 	public void testPriority() {
-		assertEqualsParametersToUrl("GET/boxes/index", "GET/boxes");
+		assertUrlRegeneratesUrl("GET/boxes/index", "GET/boxes");
 	}
 
 	public void testReproduction() {
-		assertEqualsParametersToUrl("GET/boxes/16");
-		assertEqualsParametersToUrl("GET/boxes/25.xml");
-		assertEqualsParametersToUrl("POST/boxes/8");
-		assertEqualsParametersToUrl("POST/boxes/34.xml");
-		assertEqualsParametersToUrl("GET/boxes/new");
-		assertEqualsParametersToUrl("GET/boxes/8/export");
-		assertEqualsParametersToUrl("GET/boxes");
-		assertEqualsParametersToUrl("GET/boxes.xml");
-		assertEqualsParametersToUrl("POST/boxes");
-		assertEqualsParametersToUrl("POST/boxes.xml");
+		assertUrlRegenerates("GET/boxes/16");
+		assertUrlRegenerates("GET/boxes/25.xml");
+		assertUrlRegenerates("POST/boxes/8");
+		assertUrlRegenerates("POST/boxes/34.xml");
+		assertUrlRegenerates("GET/boxes/new");
+		assertUrlRegenerates("GET/boxes/8/export");
+		assertUrlRegenerates("GET/boxes");
+		assertUrlRegenerates("GET/boxes.xml");
+		assertUrlRegenerates("POST/boxes");
+		assertUrlRegenerates("POST/boxes.xml");
 	}
 
 	public void testUrlDecoding() {
-		assertParameterEquals("controller", "open boxes", "POST/open%20boxes");
+		assertParameterInUrlEquals(
+			"controller", "open boxes", "POST/open%20boxes");
 	}
 
 	public void testUrlToParameters() {
-		assertEqualsUrlToParameters(
+		assertUrlGeneratesParameters(
 			"GET/boxes/16",
 			"id=16&action=view&method=GET&format=html&controller=boxes");
-		assertEqualsUrlToParameters(
+		assertUrlGeneratesParameters(
 			"GET/boxes/25.xml",
 			"id=25&action=view&method=GET&controller=boxes&format=xml");
-		assertEqualsUrlToParameters(
+		assertUrlGeneratesParameters(
 			"POST/boxes/8",
 			"id=8&action=update&method=POST&format=html&controller=boxes");
-		assertEqualsUrlToParameters(
+		assertUrlGeneratesParameters(
 			"POST/boxes/34.xml",
 			"id=34&action=update&method=POST&controller=boxes&format=xml");
-		assertEqualsUrlToParameters(
+		assertUrlGeneratesParameters(
 			"GET/boxes/new",
 			"action=new&method=GET&format=html&controller=boxes");
-		assertEqualsUrlToParameters(
+		assertUrlGeneratesParameters(
 			"GET/boxes/8/export",
 			"id=8&action=export&method=GET&format=html&controller=boxes");
-		assertEqualsUrlToParameters(
+		assertUrlGeneratesParameters(
 			"GET/boxes",
 			"action=index&method=GET&format=html&controller=boxes");
-		assertEqualsUrlToParameters(
+		assertUrlGeneratesParameters(
 			"GET/boxes.xml",
 			"action=index&method=GET&controller=boxes&format=xml");
-		assertEqualsUrlToParameters(
+		assertUrlGeneratesParameters(
 			"POST/boxes",
 			"action=create&method=POST&format=html&controller=boxes");
-		assertEqualsUrlToParameters(
+		assertUrlGeneratesParameters(
 			"POST/boxes.xml",
 			"action=create&method=POST&controller=boxes&format=xml");
 	}
 
-	protected void assertEqualsParametersToUrl(String url) {
-		assertEqualsParametersToUrl(url, url);
-	}
+	protected void assertParameterInUrlEquals(
+		String name, String value, String url) {
 
-	protected void assertEqualsParametersToUrl(String url, String expectedUrl) {
 		Map<String, String> parameters = new HashMap<String, String>();
 
 		_routerImpl.urlToParameters(url, parameters);
 
-		String generatedUrl = _routerImpl.parametersToUrl(parameters);
-
-		assertEquals(expectedUrl, generatedUrl);
+		assertEquals(value, MapUtil.getString(parameters, name));
 	}
 
-	protected void assertEqualsUrlToParameters(String url, String queryString) {
+	protected void assertUrlGeneratesParameters(String url, String queryString) {
 		Map<String, String[]> parameters = HttpUtil.parameterMapFromString(
 			queryString);
 
@@ -187,12 +184,18 @@ public class RouterImplTest extends BaseTestCase {
 		assertEquals(parameters, generatedParameters);
 	}
 
-	protected void assertParameterEquals(String name, String value, String url) {
+	protected void assertUrlRegenerates(String url) {
+		assertUrlRegeneratesUrl(url, url);
+	}
+
+	protected void assertUrlRegeneratesUrl(String url, String expectedUrl) {
 		Map<String, String> parameters = new HashMap<String, String>();
 
 		_routerImpl.urlToParameters(url, parameters);
 
-		assertEquals(value, MapUtil.getString(parameters, name));
+		String generatedUrl = _routerImpl.parametersToUrl(parameters);
+
+		assertEquals(expectedUrl, generatedUrl);
 	}
 
 	private RouterImpl _routerImpl;

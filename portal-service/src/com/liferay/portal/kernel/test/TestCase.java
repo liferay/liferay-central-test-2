@@ -34,10 +34,12 @@ public class TestCase extends junit.framework.TestCase {
 	protected void assertEquals(
 		Map<String, ?> expected, Map<String, ?> actual) {
 
-		assertEquals("The maps are different sizes", expected.size(), actual.size());
+		assertEquals(
+			"The maps are different sizes", expected.size(), actual.size());
 
 		for (String name : expected.keySet()) {
-			assertEquals("The values for key '" + name + "' are different",
+			assertEquals(
+				"The values for key '" + name + "' are different",
 				MapUtil.getString(expected, name),
 				MapUtil.getString(actual, name));
 		}
