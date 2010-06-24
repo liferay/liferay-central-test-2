@@ -26,6 +26,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.service.permission.MBDiscussionPermission;
 import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
 
 import javax.portlet.PortletURL;
@@ -98,15 +99,33 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 	public boolean hasEditPermission(PermissionChecker permissionChecker)
 		throws PortalException, SystemException {
 
-		return MBMessagePermission.contains(
-			permissionChecker, _message, ActionKeys.UPDATE);
+		if (_message.isDiscussion()) {
+			return MBDiscussionPermission.contains(
+				permissionChecker, _message.getCompanyId(),
+				_message.getGroupId(), _message.getClassName(),
+				_message.getClassPK(), _message.getMessageId(),
+				_message.getUserId(), ActionKeys.UPDATE);
+		}
+		else {
+			return MBMessagePermission.contains(
+				permissionChecker, _message, ActionKeys.UPDATE);
+		}
 	}
 
 	public boolean hasViewPermission(PermissionChecker permissionChecker)
 		throws PortalException, SystemException {
 
-		return MBMessagePermission.contains(
-			permissionChecker, _message, ActionKeys.VIEW);
+		if (_message.isDiscussion()) {
+			return MBDiscussionPermission.contains(
+				permissionChecker, _message.getCompanyId(),
+				_message.getGroupId(), _message.getClassName(),
+				_message.getClassPK(), _message.getMessageId(),
+				_message.getUserId(), ActionKeys.VIEW);
+		}
+		else {
+			return MBMessagePermission.contains(
+				permissionChecker, _message, ActionKeys.VIEW);
+		}
 	}
 
 	public boolean isPrintable() {

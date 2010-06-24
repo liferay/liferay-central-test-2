@@ -16,6 +16,7 @@ package com.liferay.portlet.messageboards.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.workflow.permission.WorkflowPermissionUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
@@ -68,15 +69,25 @@ public class MBDiscussionPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
+		MBMessage message = MBMessageLocalServiceUtil.getMessage(
+			messageId);
+
+		if (message.isPending()) {
+			Boolean hasPermission = WorkflowPermissionUtil.hasPermission(
+				permissionChecker, message.getGroupId(),
+				MBDiscussion.class.getName(), message.getMessageId(), actionId);
+
+			if (hasPermission != null) {
+				return hasPermission.booleanValue();
+			}
+		}
+
 		if (!contains(
 				permissionChecker, companyId, groupId, className, classPK,
 				ownerId, actionId)) {
 
 			return false;
 		}
-
-		MBMessage message = MBMessageLocalServiceUtil.getMessage(
-			messageId);
 
 		MBDiscussion discussion =
 			MBDiscussionLocalServiceUtil.getThreadDiscussion(

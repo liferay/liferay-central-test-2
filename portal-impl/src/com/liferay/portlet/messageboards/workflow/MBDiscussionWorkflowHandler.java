@@ -15,7 +15,10 @@
 package com.liferay.portlet.messageboards.workflow;
 
 import com.liferay.portal.security.permission.ResourceActionsUtil;
+import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
+import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
+import com.liferay.portlet.messageboards.model.MBMessage;
 
 import java.util.Locale;
 
@@ -30,6 +33,11 @@ public class MBDiscussionWorkflowHandler extends MBMessageWorkflowHandler {
 
 	public String getClassName() {
 		return CLASS_NAME;
+	}
+
+	public AssetRendererFactory getAssetRendererFactory() {
+		return AssetRendererFactoryRegistryUtil.
+			getAssetRendererFactoryByClassName(MBMessage.class.getName());
 	}
 
 	public String getType(Locale locale) {
