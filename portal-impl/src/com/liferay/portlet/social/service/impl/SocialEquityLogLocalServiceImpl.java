@@ -120,7 +120,7 @@ public class SocialEquityLogLocalServiceImpl
 	}
 
 	//TODO: This should run on one node only!
-	//Called by CheckEquityLogMessageListener via MessageBus from 
+	//Called by CheckEquityLogMessageListener via MessageBus from
 	//MainServlet in initSocialEquityLogScheduler()
 	public void checkEquityLogs() throws SystemException {
 		int validity = getEquityDate();
@@ -502,7 +502,6 @@ public class SocialEquityLogLocalServiceImpl
 			_setter.flush();
 		}
 
-		@Override
 		public void processRow(ResultSet rs) throws SQLException {
 			_setter.add(rs.getLong(1), rs.getLong(2));
 		}
@@ -538,12 +537,10 @@ public class SocialEquityLogLocalServiceImpl
 			}
 		}
 
-		@Override
 		public int getBatchSize() {
 			return _sqlParams.size();
 		}
 
-		@Override
 		public void setValues(PreparedStatement ps, int index)
 			throws SQLException {
 

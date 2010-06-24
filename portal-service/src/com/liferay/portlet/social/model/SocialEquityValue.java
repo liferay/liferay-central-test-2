@@ -17,7 +17,6 @@ package com.liferay.portlet.social.model;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.concurrent.TimeUnit;
 
 /**
  * <a href="SocialEquityValue.java.html"><b><i>View Source</i></b>
@@ -63,9 +62,13 @@ public class SocialEquityValue {
 
 		calendar.setTime(date);
 
-		return (int)TimeUnit.MILLISECONDS.toDays(
-			calendar.getTimeInMillis() - _socialEquityBaseDate);
+		long C2 = 1000 * 1000;
 
+		long C6 = C2 * 1000 * 60 * 60 * 24;
+
+		long d = calendar.getTimeInMillis() - _socialEquityBaseDate;
+
+		return (int)(d/(C6/C2));
 	}
 
 	private double _b = 0;
