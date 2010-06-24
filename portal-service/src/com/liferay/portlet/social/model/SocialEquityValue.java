@@ -62,13 +62,11 @@ public class SocialEquityValue {
 
 		calendar.setTime(date);
 
-		long C2 = 1000 * 1000;
-
-		long C6 = C2 * 1000 * 60 * 60 * 24;
+		long C = 1000 * 60 * 60 * 24;
 
 		long d = calendar.getTimeInMillis() - _socialEquityBaseDate;
 
-		return (int)(d/(C6/C2));
+		return (int)(d/C);
 	}
 
 	private double _b = 0;
