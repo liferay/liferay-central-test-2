@@ -15,7 +15,7 @@ friendly URL mapper routes.
 <!--
 The route element contains information on a single route.
 -->
-<!ELEMENT route (pattern, default-parameter*, ignored-parameter*, overridden-parameter*)>
+<!ELEMENT route (pattern, default-parameter*, generated-parameter*, ignored-parameter*, overridden-parameter*)>
 
 <!--
 The pattern element specifies the pattern of the mapped friendly URL.
@@ -32,6 +32,21 @@ in the route pattern.
 The name attribute specifies the name of the default URL parameter.
 -->
 <!ATTLIST default-parameter
+	name CDATA #REQUIRED
+>
+
+<!--
+The generated-parameter element specifies the pattern of a parameter that will
+be generated from other parameters when a URL is recognized. When a URL is
+built, these virtual parameters will be parsed from the generated parameter and
+made available in the route pattern for constructing the URL.
+-->
+<!ELEMENT generated-parameter (#PCDATA)>
+
+<!--
+The name attribute specifies the name of the generated parameter.
+-->
+<!ATTLIST generated-parameter
 	name CDATA #REQUIRED
 >
 

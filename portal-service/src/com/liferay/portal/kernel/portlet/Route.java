@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.portlet;
 
+import com.liferay.portal.kernel.util.StringParser;
+
 import java.util.List;
 import java.util.Map;
 
@@ -27,18 +29,22 @@ public interface Route {
 
 	public void addDefaultParameter(String name, String value);
 
+	public void addGeneratedParameter(String name, String pattern);
+
 	public void addIgnoredParameter(String name);
 
 	public void addOverriddenParameter(String name, String value);
 
 	public Map<String, String> getDefaultParameters();
 
+	public Map<String, StringParser> getGeneratedParameters();
+
 	public List<String> getIgnoredParameters();
 
 	public Map<String, String> getOverriddenParameters();
 
-	public String parametersToUrl(Map<String, ?> parameters);
+	public String parametersToUrl(Map<String, String> parameters);
 
-	public Map<String, String> urlToParameters(String url);
+	public boolean urlToParameters(String url, Map<String, String> parameters);
 
 }

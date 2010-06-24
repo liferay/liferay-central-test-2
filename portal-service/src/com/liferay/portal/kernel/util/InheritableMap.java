@@ -33,6 +33,11 @@ public class InheritableMap<K, V> extends HashMap<K, V> {
 		super(map);
 	}
 
+	public void clear() {
+		super.clear();
+		_parentMap = null;
+	}
+
 	public boolean containsKey(Object key) {
 		if (_parentMap != null && _parentMap.containsKey(key)) {
 		 	return true;
@@ -64,6 +69,17 @@ public class InheritableMap<K, V> extends HashMap<K, V> {
 
 	public Map<K, V> getParentMap() {
 		return _parentMap;
+	}
+
+	public V remove(Object key) {
+		if (super.containsKey(key)) {
+			return super.remove(key);
+		}
+		else if (_parentMap != null) {
+			return _parentMap.remove(key);
+		}
+
+		return null;
 	}
 
 	public void setParentMap(Map<? extends K, ? extends V> parentMap) {

@@ -14,6 +14,10 @@
 
 package com.liferay.portal.kernel.test;
 
+import com.liferay.portal.kernel.util.MapUtil;
+
+import java.util.Map;
+
 /**
  * <a href="TestCase.java.html"><b><i>View Source</i></b></a>
  *
@@ -25,6 +29,18 @@ public class TestCase extends junit.framework.TestCase {
 		throws Exception {
 
 		assertEquals(expected, actual, 0);
+	}
+
+	protected void assertEquals(
+		Map<String, ?> expected, Map<String, ?> actual) {
+
+		assertEquals("The maps are different sizes", expected.size(), actual.size());
+
+		for (String name : expected.keySet()) {
+			assertEquals("The values for key '" + name + "' are different",
+				MapUtil.getString(expected, name),
+				MapUtil.getString(actual, name));
+		}
 	}
 
 	protected void assertLessThan(double expected, double actual)

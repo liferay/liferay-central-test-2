@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.util.BaseTestCase;
 import com.liferay.portal.util.InitUtil;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -37,7 +38,11 @@ public class RouterImplTest extends BaseTestCase {
 	public void setUp() {
 		_routerImpl = new RouterImpl();
 
-		Route route = _routerImpl.addRoute("GET/{controller}");
+		Route route = _routerImpl.addRoute("instance/{instanceId}/{topLink}");
+
+		route.addGeneratedParameter("p_p_id", "15_INSTANCE_{instanceId}");
+
+		route = _routerImpl.addRoute("GET/{controller}");
 
 		route.addDefaultParameter("action", "index");
 		route.addDefaultParameter("format", "html");
@@ -96,6 +101,13 @@ public class RouterImplTest extends BaseTestCase {
 		route = _routerImpl.addRoute("{method}/{controller}/{action}.{format}");
 	}
 
+	public void testGeneratedParameters() {
+		assertEqualsUrlToParameters(
+			"instance/1b7c/recent",
+			"p_p_id=15_INSTANCE_1b7c&topLink=recent");
+		assertEqualsParametersToUrl("instance/1b7c/recent");
+	}
+
 	public void testPriority() {
 		assertEqualsParametersToUrl("GET/boxes/index", "GET/boxes");
 	}
@@ -111,6 +123,10 @@ public class RouterImplTest extends BaseTestCase {
 		assertEqualsParametersToUrl("GET/boxes.xml");
 		assertEqualsParametersToUrl("POST/boxes");
 		assertEqualsParametersToUrl("POST/boxes.xml");
+	}
+
+	public void testUrlDecoding() {
+		assertParameterEquals("controller", "open boxes", "POST/open%20boxes");
 	}
 
 	public void testUrlToParameters() {
@@ -146,24 +162,14 @@ public class RouterImplTest extends BaseTestCase {
 			"action=create&method=POST&controller=boxes&format=xml");
 	}
 
-	protected void assertEquals(
-		Map<String, ?> expected, Map<String, ?> actual) {
-
-		assertEquals(expected.size(), actual.size());
-
-		for (String name : expected.keySet()) {
-			assertEquals(
-				MapUtil.getString(expected, name),
-				MapUtil.getString(actual, name));
-		}
-	}
-
 	protected void assertEqualsParametersToUrl(String url) {
 		assertEqualsParametersToUrl(url, url);
 	}
 
 	protected void assertEqualsParametersToUrl(String url, String expectedUrl) {
-		Map<String, String> parameters = _routerImpl.urlToParameters(url);
+		Map<String, String> parameters = new HashMap<String, String>();
+
+		_routerImpl.urlToParameters(url, parameters);
 
 		String generatedUrl = _routerImpl.parametersToUrl(parameters);
 
@@ -174,10 +180,19 @@ public class RouterImplTest extends BaseTestCase {
 		Map<String, String[]> parameters = HttpUtil.parameterMapFromString(
 			queryString);
 
-		Map<String, String> generatedParameters = _routerImpl.urlToParameters(
-			url);
+		Map<String, String> generatedParameters = new HashMap<String, String>();
+
+		_routerImpl.urlToParameters(url, generatedParameters);
 
 		assertEquals(parameters, generatedParameters);
+	}
+
+	protected void assertParameterEquals(String name, String value, String url) {
+		Map<String, String> parameters = new HashMap<String, String>();
+
+		_routerImpl.urlToParameters(url, parameters);
+
+		assertEquals(value, MapUtil.getString(parameters, name));
 	}
 
 	private RouterImpl _routerImpl;

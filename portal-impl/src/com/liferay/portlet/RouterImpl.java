@@ -37,7 +37,7 @@ public class RouterImpl implements Router {
 		return route;
 	}
 
-	public String parametersToUrl(Map<String, ?> parameters) {
+	public String parametersToUrl(Map<String, String> parameters) {
 		for (Route route : _routes) {
 			String url = route.parametersToUrl(parameters);
 
@@ -49,16 +49,16 @@ public class RouterImpl implements Router {
 		return null;
 	}
 
-	public Map<String, String> urlToParameters(String url) {
-		for (Route route : _routes) {
-			Map<String, String> parameters = route.urlToParameters(url);
+	public boolean urlToParameters(
+			String url, Map<String, String> parameters) {
 
-			if (parameters != null) {
-				return parameters;
+		for (Route route : _routes) {
+			if (route.urlToParameters(url, parameters)) {
+				return true;
 			}
 		}
 
-		return null;
+		return false;
 	}
 
 	private List<Route> _routes = new ArrayList<Route>();

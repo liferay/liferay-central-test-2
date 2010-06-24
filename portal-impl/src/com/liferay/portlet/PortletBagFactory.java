@@ -508,6 +508,15 @@ public class PortletBagFactory {
 				route.addDefaultParameter(name, value);
 			}
 
+			for (Element generatedParameterElement :
+					routeElement.elements("generated-parameter")) {
+
+				String name = generatedParameterElement.attributeValue("name");
+				String value = generatedParameterElement.getText();
+
+				route.addGeneratedParameter(name, value);
+			}
+
 			for (Element ignoredParameterElement :
 					routeElement.elements("ignored-parameter")) {
 

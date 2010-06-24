@@ -15,15 +15,16 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.portlet.Route;
-import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.InheritableMap;
 import com.liferay.portal.kernel.util.MapUtil;
+import com.liferay.portal.kernel.util.StringEncoder;
+import com.liferay.portal.kernel.util.StringParser;
+import com.liferay.portal.util.URLStringEncoder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * <a href="RouteImpl.java.html"><b><i>View Source</i></b></a>
@@ -34,31 +35,17 @@ import java.util.regex.Pattern;
 public class RouteImpl implements Route {
 
 	public RouteImpl(String pattern) {
-		_urlPattern = pattern;
-
-		String regex = escapeRegex(pattern);
-
-		Matcher matcher = _fragmentPattern.matcher(pattern);
-
-		while (matcher.find()) {
-			String fragment = matcher.group();
-
-			RoutePart routePart = new RoutePart(fragment);
-
-			_routeParts.add(routePart);
-
-			_urlPattern = _urlPattern.replace(
-				fragment, routePart.getFragmentName());
-
-			regex = regex.replace(
-				escapeRegex(fragment), "(" + routePart.getPattern() + ")");
-		}
-
-		_regexPattern = Pattern.compile(regex);
+		_parser = new StringParser(pattern);
+		_parser.setEncoder(_urlEncoder);
 	}
 
 	public void addDefaultParameter(String name, String value) {
 		_defaultParameters.put(name, value);
+	}
+
+	public void addGeneratedParameter(String name, String pattern) {
+		StringParser parser = new StringParser(pattern);
+		_generatedParameters.put(name, parser);
 	}
 
 	public void addIgnoredParameter(String name) {
@@ -73,6 +60,10 @@ public class RouteImpl implements Route {
 		return _defaultParameters;
 	}
 
+	public Map<String, StringParser> getGeneratedParameters() {
+		return _generatedParameters;
+	}
+
 	public List<String> getIgnoredParameters() {
 		return _ignoredParameters;
 	}
@@ -81,47 +72,42 @@ public class RouteImpl implements Route {
 		return _overriddenParameters;
 	}
 
-	public String parametersToUrl(Map<String, ?> parameters) {
-		List<String> names = new ArrayList<String>();
+	public String parametersToUrl(Map<String, String> parameters) {
+		for (Map.Entry<String, String> entry : _defaultParameters.entrySet()) {
+			String name = entry.getKey();
+			String value = entry.getValue();
 
-		if (!_defaultParameters.isEmpty()) {
-			for (Map.Entry<String, String> entry :
-					_defaultParameters.entrySet()) {
-
-				String name = entry.getKey();
-				String value = entry.getValue();
-
-				if (!value.equals(MapUtil.getString(parameters, name))) {
-					return null;
-				}
-
-				names.add(name);
+			if (!value.equals(MapUtil.getString(parameters, name))) {
+				return null;
 			}
 		}
 
-		String url = _urlPattern;
+		InheritableMap<String, String> allParameters =
+			new InheritableMap<String, String>();
 
-		for (RoutePart routePart : _routeParts) {
-			String name = routePart.getName();
+		for (Map.Entry<String, StringParser> entry :
+				_generatedParameters.entrySet()) {
 
+			String name = entry.getKey();
+			StringParser parser = entry.getValue();
 			String value = MapUtil.getString(parameters, name);
 
-			if (value == null) {
+			if (!parser.parse(value, allParameters)) {
 				return null;
 			}
-
-			value = HttpUtil.encodeURL(value);
-
-			if (!routePart.matches(value)) {
-				return null;
-			}
-
-			names.add(name);
-
-			url = url.replace(routePart.getFragmentName(), value);
 		}
 
-		for (String name : names) {
+		allParameters.setParentMap(parameters);
+
+		String url = _parser.build(allParameters);
+
+		if (url == null) {
+			return null;
+		}
+
+		for (String name : _defaultParameters.keySet()) {
+			// Virtual parameters will never be placed in the query string,
+			// so parameters is modified directly instead of allParameters.
 			parameters.remove(name);
 		}
 
@@ -132,48 +118,44 @@ public class RouteImpl implements Route {
 		return url;
 	}
 
-	public Map<String, String> urlToParameters(String url) {
-		Matcher matcher = _regexPattern.matcher(url);
+	public boolean urlToParameters(
+			String url, Map<String, String> parameters) {
 
-		if (!matcher.matches()) {
-			return null;
+		if (!_parser.parse(url, parameters)) {
+			return false;
 		}
 
-		Map<String, String> parameters = new HashMap<String, String>(
-			_defaultParameters);
+		for (Map.Entry<String, StringParser> entry :
+				_generatedParameters.entrySet()) {
 
-		for (int i = 1; i <= _routeParts.size(); i++) {
-			RoutePart routePart = _routeParts.get(i - 1);
+			String name = entry.getKey();
+			StringParser parser = entry.getValue();
 
-			String value = matcher.group(i);
+			String value = parser.build(parameters);
 
-			value = HttpUtil.decodeURL(value);
-
-			parameters.put(routePart.getName(), value);
+			// Generated parameters are not guaranteed to be created. The format
+			// of the virtual parameters in the route pattern must match their
+			// format in the generated parameter.
+			if (value != null) {
+				parameters.put(name, value);
+			}
 		}
 
+		parameters.putAll(_defaultParameters);
 		parameters.putAll(_overriddenParameters);
 
-		return parameters;
+		return true;
 	}
 
-	protected String escapeRegex(String s) {
-		Matcher matcher = _escapeRegexPattern.matcher(s);
-
-		return matcher.replaceAll("\\\\$0");
-	}
-
-	private static Pattern _escapeRegexPattern = Pattern.compile(
-		"[\\{\\}\\(\\)\\[\\]\\*\\+\\?\\$\\^\\.\\#\\\\]");
-	private static Pattern _fragmentPattern = Pattern.compile("\\{.+?\\}");
+	private static StringEncoder _urlEncoder = new URLStringEncoder();
 
 	private Map<String, String> _defaultParameters =
 		new HashMap<String, String>();
 	private List<String> _ignoredParameters = new ArrayList<String>();
 	private Map<String, String> _overriddenParameters =
 		new HashMap<String, String>();
-	private Pattern _regexPattern;
-	private List<RoutePart> _routeParts = new ArrayList<RoutePart>();
-	private String _urlPattern;
+	private StringParser _parser;
+	private Map<String, StringParser> _generatedParameters =
+		new HashMap<String, StringParser>();
 
 }

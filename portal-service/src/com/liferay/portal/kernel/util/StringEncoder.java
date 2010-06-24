@@ -12,22 +12,17 @@
  * details.
  */
 
-package com.liferay.portal.kernel.portlet;
-
-import java.util.Map;
+package com.liferay.portal.kernel.util;
 
 /**
- * <a href="Router.java.html"><b><i>View Source</i></b></a>
+ * <a href="StringEncoder.java.html"><b><i>View Source</i></b></a>
  *
  * @author Connor McKay
- * @author Brian Wing Shun Chan
  */
-public interface Router {
+public interface StringEncoder {
 
-	public Route addRoute(String pattern);
+	public String decode(String s);
 
-	public String parametersToUrl(Map<String, String> parameters);
-
-	public boolean urlToParameters(String url, Map<String, String> parameters);
+	public String encode(String s);
 
 }
