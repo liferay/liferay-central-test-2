@@ -133,7 +133,7 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 							</div>
 
 							<%
-							List<Long> deletedAssets = new ArrayList<Long>();
+							List<String> deletedAssets = new ArrayList<String>();
 
 							List<String> headerNames = new ArrayList<String>();
 
@@ -176,17 +176,17 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 								}
 
 								String assetEntryClassName = root.element("asset-entry-type").getText();
-								long assetEntryId = GetterUtil.getLong(root.element("asset-entry-id").getText());
+								String assetEntryUuid = root.element("asset-entry-uuid").getText();
 
 								AssetEntry assetEntry = null;
 
 								try {
-									assetEntry = AssetEntryLocalServiceUtil.getEntry(assetEntryId);
+									assetEntry = AssetEntryLocalServiceUtil.getEntry(scopeGroupId, assetEntryUuid);
 
 									assetEntry = assetEntry.toEscapedModel();
 								}
 								catch (NoSuchEntryException nsee) {
-									deletedAssets.add(assetEntryId);
+									deletedAssets.add(assetEntryUuid);
 
 									continue;
 								}
@@ -200,7 +200,7 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 								rowURL.setParameter("backURL", redirect);
 								rowURL.setParameter("portletResource", portletResource);
 								rowURL.setParameter("typeSelection", assetEntryClassName);
-								rowURL.setParameter("assetEntryId", String.valueOf(assetEntryId));
+								rowURL.setParameter("assetEntryId", String.valueOf(assetEntry.getEntryId()));
 								rowURL.setParameter("assetEntryOrder", String.valueOf(assetEntryOrder));
 
 								// Type
@@ -234,7 +234,7 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 
 									sb.append("<img alt=\"");
 									sb.append(image.getName());
-									sb.append("\" border=\"1\" src=\"");
+									sb.append("\" src=\"");
 									sb.append(themeDisplay.getPathImage());
 									sb.append("/image_gallery?img_id=");
 									sb.append(image.getSmallImageId());
@@ -242,7 +242,7 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 									sb.append(ImageServletTokenUtil.getToken(image.getSmallImageId()));
 									sb.append("\" title=\"");
 									sb.append(image.getDescription());
-									sb.append("\" />");
+									sb.append("\" style=\"border-width:1; \" />");
 
 									row.addText(sb.toString(), rowURL);
 								}
@@ -561,11 +561,9 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />selectAsset(assetEntryId, assetParentId, assetTitle, assetEntryOrder) {
+	function <portlet:namespace />selectAsset(assetEntryId, assetEntryOrder) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'add-selection';
 		document.<portlet:namespace />fm.<portlet:namespace />assetEntryId.value = assetEntryId;
-		document.<portlet:namespace />fm.<portlet:namespace />assetParentId.value = assetParentId;
-		document.<portlet:namespace />fm.<portlet:namespace />assetTitle.value = assetTitle;
 		document.<portlet:namespace />fm.<portlet:namespace />assetEntryOrder.value = assetEntryOrder;
 
 		submitForm(document.<portlet:namespace />fm);

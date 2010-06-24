@@ -93,10 +93,6 @@ portletURL.setParameter("typeSelection", typeSelection);
 			sb.append("selectAsset('");
 			sb.append(entry.getEntryId());
 			sb.append("', '");
-			sb.append(entry.getEntryId());
-			sb.append("', '");
-			sb.append(UnicodeFormatter.toString(entry.getTitle()));
-			sb.append("', '");
 			sb.append(assetEntryOrder);
 			sb.append("');");
 

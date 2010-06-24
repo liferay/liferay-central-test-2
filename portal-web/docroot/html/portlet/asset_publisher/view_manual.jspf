@@ -36,12 +36,12 @@ for (int assetEntryIndex = 0; assetEntryIndex < results.size(); assetEntryIndex+
 
 	Element root = doc.getRootElement();
 
-	long assetEntryId = GetterUtil.getLong(root.element("asset-entry-id").getText());
+	String assetEntryUuid = root.element("asset-entry-uuid").getText();
 
 	AssetEntry assetEntry = null;
 
 	try {
-		assetEntry = AssetEntryLocalServiceUtil.getEntry(assetEntryId);
+		assetEntry = AssetEntryLocalServiceUtil.getEntry(scopeGroupId, assetEntryUuid);
 	}
 	catch (NoSuchEntryException nsee) {
 		continue;

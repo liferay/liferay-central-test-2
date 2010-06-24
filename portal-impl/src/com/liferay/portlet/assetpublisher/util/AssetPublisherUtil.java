@@ -33,7 +33,10 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.asset.model.AssetRenderer;
+import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.asset.service.persistence.AssetEntryQuery;
@@ -109,10 +112,21 @@ public class AssetPublisherUtil {
 			PortletPreferences preferences)
 		throws Exception {
 
+		AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(
+			assetEntryId);
+
+		AssetRendererFactory assetRendererFactory =
+			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
+				assetEntry.getClassName());
+
+		AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(
+			assetEntry.getClassPK());
+
 		String[] assetEntryXmls = preferences.getValues(
 			"asset-entry-xml", new String[0]);
 
-		String assetEntryXml = _getAssetEntryXml(assetEntryType, assetEntryId);
+		String assetEntryXml = _getAssetEntryXml(
+			assetEntryType, assetRenderer.getUuid());
 
 		if (assetEntryOrder > -1) {
 			assetEntryXmls[assetEntryOrder] = assetEntryXml;
@@ -323,10 +337,10 @@ public class AssetPublisherUtil {
 	}
 
 	public static void removeAndStoreSelection(
-			List<Long> assetEntryIds, PortletPreferences preferences)
+			List<String> assetEntryUuids, PortletPreferences preferences)
 		throws Exception {
 
-		if (assetEntryIds.size() == 0) {
+		if (assetEntryUuids.size() == 0) {
 			return;
 		}
 
@@ -344,10 +358,9 @@ public class AssetPublisherUtil {
 
 			Element root = doc.getRootElement();
 
-			long assetEntryId = GetterUtil.getLong(
-				root.element("asset-entry-id").getText());
+			String assetEntryUuid = root.element("asset-entry-uuid").getText();
 
-			if (assetEntryIds.contains(assetEntryId)) {
+			if (assetEntryUuids.contains(assetEntryUuid)) {
 				itr.remove();
 			}
 		}
@@ -368,7 +381,7 @@ public class AssetPublisherUtil {
 	}
 
 	private static String _getAssetEntryXml(
-		String assetEntryType, long assetEntryId) {
+		String assetEntryType, String assetEntryUuid) {
 
 		String xml = null;
 
@@ -378,8 +391,7 @@ public class AssetPublisherUtil {
 			Element assetEntryEl = doc.addElement("asset-entry");
 
 			assetEntryEl.addElement("asset-entry-type").addText(assetEntryType);
-			assetEntryEl.addElement("asset-entry-id").addText(
-				String.valueOf(assetEntryId));
+			assetEntryEl.addElement("asset-entry-uuid").addText(assetEntryUuid);
 
 			xml = doc.formattedString(StringPool.BLANK);
 		}
