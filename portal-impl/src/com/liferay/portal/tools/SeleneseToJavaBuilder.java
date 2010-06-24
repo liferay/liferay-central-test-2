@@ -539,7 +539,7 @@ public class SeleneseToJavaBuilder {
 					 param1.equals("selectFrame") ||
 					 param1.equals("selectPopUp") ||
 					 param1.equals("selectWindow") ||
-					 param1.equals("uncheck")) {
+					 param1.equals("setTimeout") || param1.equals("uncheck")) {
 
 				sb.append("selenium.");
 				sb.append(param1);
