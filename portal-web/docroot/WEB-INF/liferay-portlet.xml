@@ -824,7 +824,6 @@
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>10.0</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
-		<remoteable>true</remoteable>
 		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>

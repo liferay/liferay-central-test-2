@@ -529,7 +529,7 @@ value is false.
 
 <!--
 Set the remoteable value to true if the portlet can be used remotely like in
-wsrp. If set to false, the portlet will not be available remotely. The default
+WSRP. If set to false, the portlet will not be available remotely. The default
 value is false.
 -->
 <!ELEMENT remoteable (#PCDATA)>
