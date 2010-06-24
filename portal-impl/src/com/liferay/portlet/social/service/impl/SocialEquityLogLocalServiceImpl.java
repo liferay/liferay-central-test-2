@@ -19,7 +19,6 @@ import com.liferay.ibm.icu.util.GregorianCalendar;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PropsValues;
@@ -119,9 +118,6 @@ public class SocialEquityLogLocalServiceImpl
 		addEquityLogs(userId, assetEntry.getEntryId(), actionId);
 	}
 
-	//TODO: This should run on one node only!
-	//Called by CheckEquityLogMessageListener via MessageBus from
-	//MainServlet in initSocialEquityLogScheduler()
 	public void checkEquityLogs() throws SystemException {
 		int validity = getEquityDate();
 
@@ -174,14 +170,13 @@ public class SocialEquityLogLocalServiceImpl
 				equityAssetEntry.getUserId());
 
 			if (!user.isDefaultUser()) {
-				SocialEquityValue socialEquity =
-					new SocialEquityValue(
-						-equityAssetEntry.getInformationK(),
-						-equityAssetEntry.getInformationB());
+				SocialEquityValue socialEquityValue = new SocialEquityValue(
+					-equityAssetEntry.getInformationK(),
+					-equityAssetEntry.getInformationB());
 
 				incrementSocialEquityUser_CQ(
-					equityAssetEntry.getGroupId() + StringPool.POUND +
-					user.getUserId(), socialEquity);
+					equityAssetEntry.getGroupId(), user.getUserId(),
+					socialEquityValue);
 			}
 		}
 		catch (NoSuchUserException nsue) {
@@ -200,13 +195,13 @@ public class SocialEquityLogLocalServiceImpl
 	}
 
 	public void incrementSocialEquityAssetEntry_IQ(
-			long assetEntryId, SocialEquityValue value)
+			long assetEntryId, SocialEquityValue socialEquityValue)
 		throws SystemException {
 
 		AssetEntry assetEntry = assetEntryPersistence.fetchByPrimaryKey(
 			assetEntryId);
 
-		assetEntry.updateSocialInformationEquity(value.getValue());
+		assetEntry.updateSocialInformationEquity(socialEquityValue.getValue());
 
 		int count = socialEquityAssetEntryPersistence.countByAssetEntryId(
 			assetEntryId);
@@ -226,74 +221,60 @@ public class SocialEquityLogLocalServiceImpl
 			},
 			new String[] {
 				String.valueOf(assetEntryId),
-				String.valueOf(value.getB()),
-				String.valueOf(value.getK())
+				String.valueOf(socialEquityValue.getB()),
+				String.valueOf(socialEquityValue.getK())
 			});
 
 		runSQL(sql);
 	}
 
 	public void incrementSocialEquityUser_CQ(
-			String id, SocialEquityValue value)
+			long groupId, long userId, SocialEquityValue socialEquityValue)
 		throws PortalException, SystemException {
-
-			long groupId = Long.valueOf(
-				StringUtil.extractFirst(id, StringPool.POUND));
-
-			long userId = Long.valueOf(
-				StringUtil.extractLast(id, StringPool.POUND));
-
-			User user = userLocalService.getUser(userId);
-
-			int count = socialEquityUserPersistence.countByG_U(
-				groupId, userId);
-
-			if (count == 0) {
-				addSocialEquityUser(groupId, user);
-			}
-
-			user.updateSocialContributionEquity(value.getValue());
-
-			String sql = CustomSQLUtil.get(_UPDATE_SOCIAL_EQUITY_USER_CQ);
-
-			sql = StringUtil.replace(
-				sql,
-				new String[] {
-					"[$GROUP_ID$]",
-					"[$USER_ID$]",
-					"[$CONTRIBUTION_B$]",
-					"[$CONTRIBUTION_K$]"
-				},
-				new String[] {
-					String.valueOf(groupId),
-					String.valueOf(userId),
-					String.valueOf(value.getB()),
-					String.valueOf(value.getK())
-				});
-
-			runSQL(sql);
-	}
-
-	public void incrementSocialEquityUser_PQ(
-		String id, SocialEquityValue value)
-		throws PortalException, SystemException {
-
-		long groupId = Long.valueOf(
-				StringUtil.extractFirst(id, StringPool.POUND));
-
-		long userId = Long.valueOf(
-			StringUtil.extractLast(id, StringPool.POUND));
 
 		User user = userLocalService.getUser(userId);
 
-		int count = socialEquityUserPersistence.countByG_U(
-			groupId, userId);
+		int count = socialEquityUserPersistence.countByG_U(groupId, userId);
 
 		if (count == 0) {
 			addSocialEquityUser(groupId, user);
 		}
 
-		user.updateSocialParticipationEquity(value.getValue());
+		user.updateSocialContributionEquity(socialEquityValue.getValue());
+
+		String sql = CustomSQLUtil.get(_UPDATE_SOCIAL_EQUITY_USER_CQ);
+
+		sql = StringUtil.replace(
+			sql,
+			new String[] {
+				"[$CONTRIBUTION_B$]",
+				"[$CONTRIBUTION_K$]",
+				"[$GROUP_ID$]",
+				"[$USER_ID$]"
+			},
+			new String[] {
+				String.valueOf(socialEquityValue.getB()),
+				String.valueOf(socialEquityValue.getK()),
+				String.valueOf(groupId),
+				String.valueOf(userId)
+			});
+
+		runSQL(sql);
+	}
+
+	public void incrementSocialEquityUser_PQ(
+			long groupId, long userId, SocialEquityValue socialEquityValue)
+		throws PortalException, SystemException {
+
+		User user = userLocalService.getUser(userId);
+
+		int count = socialEquityUserPersistence.countByG_U(groupId, userId);
+
+		if (count == 0) {
+			addSocialEquityUser(groupId, user);
+		}
+
+		user.updateSocialParticipationEquity(socialEquityValue.getValue());
 
 		String sql = CustomSQLUtil.get(_UPDATE_SOCIAL_EQUITY_USER_PQ);
 
@@ -307,8 +288,8 @@ public class SocialEquityLogLocalServiceImpl
 			},
 			new String[] {
 				String.valueOf(groupId),
-				String.valueOf(value.getB()),
-				String.valueOf(value.getK()),
+				String.valueOf(socialEquityValue.getB()),
+				String.valueOf(socialEquityValue.getK()),
 				String.valueOf(userId)
 			});
 
@@ -330,26 +311,23 @@ public class SocialEquityLogLocalServiceImpl
 		SocialEquityValue socialEquity = new SocialEquityValue(k, b);
 
 		if (equitySetting.getType() ==
-			SocialEquitySettingConstants.TYPE_INFORMATION) {
+				SocialEquitySettingConstants.TYPE_INFORMATION) {
 
-			getSocialEquityLogLocalService().incrementSocialEquityAssetEntry_IQ(
+			socialEquityLogLocalService.incrementSocialEquityAssetEntry_IQ(
 				assetEntry.getEntryId(), socialEquity);
 
 			if ((assetEntryUser != null) && !assetEntryUser.isDefaultUser()) {
-				getSocialEquityLogLocalService().incrementSocialEquityUser_CQ(
-					assetEntry.getGroupId() + StringPool.POUND +
-						assetEntryUser.getUserId(),
+				socialEquityLogLocalService.incrementSocialEquityUser_CQ(
+					assetEntry.getGroupId(), assetEntryUser.getUserId(),
 					socialEquity);
 			}
 		}
 		else if (equitySetting.getType() ==
-			SocialEquitySettingConstants.TYPE_PARTICIPATION) {
+					SocialEquitySettingConstants.TYPE_PARTICIPATION) {
 
 			if (!user.isDefaultUser()) {
-				getSocialEquityLogLocalService().incrementSocialEquityUser_PQ(
-					assetEntry.getGroupId() + StringPool.POUND +
-						user.getUserId(),
-					socialEquity);
+				socialEquityLogLocalService.incrementSocialEquityUser_PQ(
+					assetEntry.getGroupId(), user.getUserId(), socialEquity);
 			}
 		}
 
@@ -467,93 +445,22 @@ public class SocialEquityLogLocalServiceImpl
 		runSQL(sql);
 	}
 
-	protected void updateRanks() throws SystemException {
-		try {
-			DataSource dataSource = socialEquityLogPersistence.getDataSource();
+	protected void updateRanks() {
+		DataSource dataSource = socialEquityLogPersistence.getDataSource();
 
-			JdbcTemplate jdbc = new JdbcTemplate(dataSource);
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
-			UpdateRanksCallbackHandler handler =
-				new UpdateRanksCallbackHandler(jdbc);
+		UpdateRanksHandler updateRanksHandler = new UpdateRanksHandler(
+			jdbcTemplate);
 
-			String sql = CustomSQLUtil.get(_ITERATE_OVER_SOCIAL_EQUITY_USER);
+		String sql = CustomSQLUtil.get(_FIND_SOCIAL_EQUITY_USER_BY_RANK);
 
-			sql = StringUtil.replace(
-				sql, "[$ACTION_DATE$]", String.valueOf(getEquityDate()));
+		sql = StringUtil.replace(
+			sql, "[$ACTION_DATE$]", String.valueOf(getEquityDate()));
 
-			jdbc.query(sql, handler);
+		jdbcTemplate.query(sql, updateRanksHandler);
 
-			handler.flush();
-
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-
-	}
-
-	private class UpdateRanksCallbackHandler implements RowCallbackHandler {
-
-		public UpdateRanksCallbackHandler(JdbcTemplate jdbcTemplate) {
-			_setter = new UpdateRanksPreparedStatementSetter(jdbcTemplate);
-		}
-
-		public void flush() {
-			_setter.flush();
-		}
-
-		public void processRow(ResultSet rs) throws SQLException {
-			_setter.add(rs.getLong(1), rs.getLong(2));
-		}
-
-		private UpdateRanksPreparedStatementSetter _setter = null;
-
-	}
-
-	private class UpdateRanksPreparedStatementSetter
-		implements BatchPreparedStatementSetter {
-
-		public UpdateRanksPreparedStatementSetter(JdbcTemplate jdbcTemplate) {
-			_jdbc = jdbcTemplate;
-		}
-
-		public void add(long id, long rank) {
-			_sqlParams.add(new Long[] {id, rank});
-
-			if (_sqlParams.size() >= 100) {
-				flush();
-			}
-		}
-
-		public void flush() {
-			try {
-				_jdbc.batchUpdate(_sql, this);
-			}
-			catch (DataAccessException dae) {
-				throw dae;
-			}
-			finally {
-				_sqlParams.clear();
-			}
-		}
-
-		public int getBatchSize() {
-			return _sqlParams.size();
-		}
-
-		public void setValues(PreparedStatement ps, int index)
-			throws SQLException {
-
-			ps.setLong(1, _sqlParams.get(index)[1]);
-			ps.setLong(2, _sqlParams.get(index)[0]);
-			ps.setLong(3, _sqlParams.get(index)[1]);
-
-		}
-
-		private JdbcTemplate _jdbc = null;
-		private String _sql= CustomSQLUtil.get(_UPDATE_SOCIAL_EQUITY_USER_RANK);
-		private List<Long[]> _sqlParams = new ArrayList<Long[]>();
-
+		updateRanksHandler.flush();
 	}
 
 	private static final String _ADD_SOCIAL_EQUITY_ASSET_ENTRY =
@@ -584,9 +491,9 @@ public class SocialEquityLogLocalServiceImpl
 		SocialEquityLogLocalServiceImpl.class.getName() +
 			".checkSocialEquityUser_PQ";
 
-	private static final String _ITERATE_OVER_SOCIAL_EQUITY_USER =
+	private static final String _FIND_SOCIAL_EQUITY_USER_BY_RANK =
 		SocialEquityLogLocalServiceImpl.class.getName() +
-			".iterateOverSocialEquityUser";
+			".findSocialEquityUserByRank";
 
 	private static final String _UPDATE_SOCIAL_EQUITY_ASSET_ENTRY_IQ =
 		SocialEquityLogLocalServiceImpl.class.getName() +
@@ -603,5 +510,76 @@ public class SocialEquityLogLocalServiceImpl
 	private static final String _UPDATE_SOCIAL_EQUITY_USER_RANK =
 		SocialEquityLogLocalServiceImpl.class.getName() +
 			".updateSocialEquityUserRank";
+
+	private class UpdateRanksHandler implements RowCallbackHandler {
+
+		public UpdateRanksHandler(JdbcTemplate jdbcTemplate) {
+			_updateRanksSetter = new UpdateRanksSetter(jdbcTemplate);
+		}
+
+		public void flush() {
+			_updateRanksSetter.flush();
+		}
+
+		public void processRow(ResultSet rs) throws SQLException {
+			long equityUserId = rs.getLong(1);
+			long rank = rs.getLong(2);
+
+			_updateRanksSetter.add(equityUserId, rank);
+		}
+
+		private UpdateRanksSetter _updateRanksSetter;
+
+	}
+
+	private class UpdateRanksSetter implements BatchPreparedStatementSetter {
+
+		public UpdateRanksSetter(JdbcTemplate jdbcTemplate) {
+			_jdbcTemplate = jdbcTemplate;
+		}
+
+		public void add(long equityUserId, long rank) {
+			_sqlParams.add(new Long[] {equityUserId, rank});
+
+			if (_sqlParams.size() >= 100) {
+				flush();
+			}
+		}
+
+		public int getBatchSize() {
+			return _sqlParams.size();
+		}
+
+		public void flush() {
+			try {
+				_jdbcTemplate.batchUpdate(_sql, this);
+			}
+			catch (DataAccessException dae) {
+				throw dae;
+			}
+			finally {
+				_sqlParams.clear();
+			}
+		}
+
+		public void setValues(PreparedStatement ps, int index)
+			throws SQLException {
+
+			Long[] sqlParams = _sqlParams.get(index);
+
+			long equityUserId = sqlParams[0];
+			long rank = sqlParams[1];
+
+			ps.setLong(1, rank);
+			ps.setLong(2, equityUserId);
+			ps.setLong(3, rank);
+		}
+
+		private JdbcTemplate _jdbcTemplate;
+		private String _sql = CustomSQLUtil.get(
+			_UPDATE_SOCIAL_EQUITY_USER_RANK);
+		private List<Long[]> _sqlParams = new ArrayList<Long[]>();
+
+	}
 
 }

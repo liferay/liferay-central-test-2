@@ -38,50 +38,51 @@ public class SocialEquityUserLocalServiceImpl
 	public SocialEquityValue getContributionEquity(long userId)
 		throws SystemException {
 
-		ProjectionList projections = ProjectionFactoryUtil.projectionList();
+		ProjectionList projectionList = ProjectionFactoryUtil.projectionList();
 
-		projections.add(ProjectionFactoryUtil.sum("contributionK"));
-		projections.add(ProjectionFactoryUtil.sum("contributionB"));
+		projectionList.add(ProjectionFactoryUtil.sum("contributionK"));
+		projectionList.add(ProjectionFactoryUtil.sum("contributionB"));
 
-		return _getSocialEquityAggregate(userId, projections);
+		return getSocialEquityValue(userId, projectionList);
 	}
 
 	public SocialEquityValue getParticipationEquity(long userId)
 		throws SystemException {
 
-		ProjectionList projections = ProjectionFactoryUtil.projectionList();
+		ProjectionList projectionList = ProjectionFactoryUtil.projectionList();
 
-		projections.add(ProjectionFactoryUtil.sum("participationK"));
-		projections.add(ProjectionFactoryUtil.sum("participationB"));
+		projectionList.add(ProjectionFactoryUtil.sum("participationK"));
+		projectionList.add(ProjectionFactoryUtil.sum("participationB"));
 
-		return _getSocialEquityAggregate(userId, projections);
+		return getSocialEquityValue(userId, projectionList);
 	}
 
-	private SocialEquityValue _getSocialEquityAggregate(
-			long userId, ProjectionList projections)
+	protected SocialEquityValue getSocialEquityValue(
+			long userId, ProjectionList projectionList)
 		throws SystemException {
 
-		DynamicQuery query = DynamicQueryFactoryUtil.forClass(
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
 			SocialEquityUser.class);
 
-		query.setProjection(projections);
+		dynamicQuery.setProjection(projectionList);
 
-		query.add(RestrictionsFactoryUtil.eq("userId", userId));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("userId", userId));
 
-		List<?> result = dynamicQuery(query);
+		List<?> results = dynamicQuery(dynamicQuery);
 
-		Object[] values = (Object[])result.get(0);
+		Object[] values = (Object[])results.get(0);
 
-		SocialEquityValue socialEquity = null;
+		SocialEquityValue socialEquityValue = null;
 
 		if (values[0] != null) {
-			socialEquity = new SocialEquityValue(
+			socialEquityValue = new SocialEquityValue(
 				(Double)values[0], (Double)values[1]);
-		} else {
-			socialEquity = new SocialEquityValue(0, 0);
+		}
+		else {
+			socialEquityValue = new SocialEquityValue(0, 0);
 		}
 
-		return socialEquity;
+		return socialEquityValue;
 	}
 
 }

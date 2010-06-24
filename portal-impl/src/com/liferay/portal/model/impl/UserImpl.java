@@ -380,12 +380,12 @@ public class UserImpl extends UserModelImpl implements User {
 	public double getSocialContributionEquity() {
 		if (_socialContributionEquity == null) {
 			try {
-				SocialEquityValue contributionEquity =
+				SocialEquityValue socialEquityValue =
 					SocialEquityUserLocalServiceUtil.getContributionEquity(
 						getUserId());
 
-				_socialContributionEquity =
-					new AtomicReference<Double>(contributionEquity.getValue());
+				_socialContributionEquity = new AtomicReference<Double>(
+					socialEquityValue.getValue());
 			}
 			catch (SystemException se) {
 				return 0;
@@ -398,12 +398,12 @@ public class UserImpl extends UserModelImpl implements User {
 	public double getSocialParticipationEquity() {
 		if (_socialParticipationEquity == null) {
 			try {
-				SocialEquityValue participationEquity =
+				SocialEquityValue socialEquityValue =
 					SocialEquityUserLocalServiceUtil.getParticipationEquity(
 						getUserId());
 
-				_socialParticipationEquity =
-					new AtomicReference<Double>(participationEquity.getValue());
+				_socialParticipationEquity = new AtomicReference<Double>(
+					socialEquityValue.getValue());
 			}
 			catch (SystemException se) {
 				return 0;
@@ -585,32 +585,30 @@ public class UserImpl extends UserModelImpl implements User {
 	public void updateSocialContributionEquity(double value) {
 		if (_socialContributionEquity != null) {
 			double currentValue = 0;
-
 			double newValue = 0;
 
 			do {
 				currentValue = _socialContributionEquity.get();
 
 				newValue = currentValue + value;
-
-			} while (!_socialContributionEquity.compareAndSet(
-				currentValue, newValue));
+			}
+			while (!_socialContributionEquity.compareAndSet(
+						currentValue, newValue));
 		}
 	}
 
 	public void updateSocialParticipationEquity(double value) {
 		if (_socialParticipationEquity != null) {
 			double currentValue = 0;
-
 			double newValue = 0;
 
 			do {
 				currentValue = _socialParticipationEquity.get();
 
 				newValue = currentValue + value;
-
-			} while (!_socialParticipationEquity.compareAndSet(
-				currentValue, newValue));
+			}
+			while (!_socialParticipationEquity.compareAndSet(
+						currentValue, newValue));
 		}
 	}
 

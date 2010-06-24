@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.asset.model.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -55,13 +56,17 @@ public class AssetEntryImpl extends AssetEntryModelImpl implements AssetEntry {
 					SocialEquityAssetEntryUtil.findByAssetEntryId(
 						getEntryId());
 
-				_socialInformationEquity =
-					new AtomicReference<Double>(
-						new SocialEquityValue(
-							equityAssetEntry.getInformationK(),
-							equityAssetEntry.getInformationB()).getValue());
+				SocialEquityValue socialEquityValue = new SocialEquityValue(
+					equityAssetEntry.getInformationK(),
+					equityAssetEntry.getInformationB());
+
+				_socialInformationEquity = new AtomicReference<Double>(
+					socialEquityValue.getValue());
 			}
-			catch (Exception se) {
+			catch (PortalException pe) {
+				return 0;
+			}
+			catch (SystemException se) {
 				return 0;
 			}
 		}
@@ -80,7 +85,6 @@ public class AssetEntryImpl extends AssetEntryModelImpl implements AssetEntry {
 	public void updateSocialInformationEquity(double value) {
 		if (_socialInformationEquity != null) {
 			double currentValue = 0;
-
 			double newValue = 0;
 
 			do {
@@ -88,8 +92,9 @@ public class AssetEntryImpl extends AssetEntryModelImpl implements AssetEntry {
 
 				newValue = currentValue + value;
 
-			} while (!_socialInformationEquity.compareAndSet(
-				currentValue, newValue));
+			}
+			while (!_socialInformationEquity.compareAndSet(
+						currentValue, newValue));
 		}
 	}
 

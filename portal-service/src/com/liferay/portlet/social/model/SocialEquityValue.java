@@ -14,13 +14,14 @@
 
 package com.liferay.portlet.social.model;
 
+import com.liferay.portal.kernel.util.Time;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
- * <a href="SocialEquityValue.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="SocialEquityValue.java.html"><b><i>View Source</i></b></a>
  *
  * @author Zsolt Berentey
  */
@@ -31,9 +32,9 @@ public class SocialEquityValue {
 		_b = b;
 	}
 
-	public void add(SocialEquityValue value) {
-		_k = _k + value._k;
-		_b = _b + value._b;
+	public void add(SocialEquityValue socialEquityValue) {
+		_k = _k + socialEquityValue._k;
+		_b = _b + socialEquityValue._b;
 	}
 
 	public double getB() {
@@ -52,27 +53,25 @@ public class SocialEquityValue {
 		return _k * equityDate + _b;
 	}
 
-	public void subtract(SocialEquityValue value) {
-		_k = _k - value._k;
-		_b = _b - value._b;
+	public void subtract(SocialEquityValue socialEquityValue) {
+		_k = _k - socialEquityValue._k;
+		_b = _b - socialEquityValue._b;
 	}
 
 	protected int getEquityDate(Date date) {
-		GregorianCalendar calendar = new GregorianCalendar();
+		Calendar calendar = new GregorianCalendar();
 
 		calendar.setTime(date);
 
-		long C = 1000 * 60 * 60 * 24;
+		long d = calendar.getTimeInMillis() - _BASE_TIME;
 
-		long d = calendar.getTimeInMillis() - _socialEquityBaseDate;
-
-		return (int)(d/C);
+		return (int)(d / Time.DAY);
 	}
+
+	private static final long _BASE_TIME =
+		new GregorianCalendar(2010, Calendar.JANUARY, 1).getTimeInMillis();
 
 	private double _b = 0;
 	private double _k = 0;
-
-	private static long _socialEquityBaseDate =
-		new GregorianCalendar(2010, Calendar.JANUARY, 1).getTimeInMillis();
 
 }

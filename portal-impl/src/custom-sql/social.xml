@@ -91,9 +91,9 @@
 						FROM
 							SocialEquityLog
 						WHERE
+							(type_ = [$TYPE_INFORMATION$]) AND
 							(validity <= [$VALIDITY$]) AND
-							(active_ = [$TRUE$]) AND
-							(type_ = [$TYPE_INFORMATION$])
+							(active_ = [$TRUE$])
 					)
 		]]>
 	</sql>
@@ -212,11 +212,13 @@
 					)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.iterateOverSocialEquityUser">
+	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.findSocialEquityUserByRank">
 		<![CDATA[
 			SELECT
-				equityUserId, 
-				RANK() OVER (PARTITION BY groupId ORDER BY ([$ACTION_DATE$] * (contributionK + participationK) + contributionB + participationB) DESC)
+				equityUserId,
+				RANK() OVER (
+					PARTITION BY groupId ORDER BY ([$ACTION_DATE$] * (contributionK + participationK) + contributionB + participationB) DESC
+				)
 			FROM
 				SocialEquityUser
 		]]>
@@ -229,7 +231,7 @@
 				rank = ?
 			WHERE
 				(equityUserId = ?) AND
-				(rank != ?) 
+				(rank != ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.social.service.persistence.SocialActivityFinder.countByGroupId">
@@ -531,7 +533,7 @@
 		<![CDATA[
 			SELECT
 				*
-			FROM 
+			FROM
 			(
 				SELECT
 					SocialActivity.activityId AS activityId, SocialActivity.createDate AS createDate

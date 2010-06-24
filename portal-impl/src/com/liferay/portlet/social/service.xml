@@ -237,11 +237,11 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="Rank" return-type="Collection">
-			<finder-column name="rank" />
-		</finder>
 		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
+		</finder>
+		<finder name="Rank" return-type="Collection">
+			<finder-column name="rank" />
 		</finder>
 		<finder name="G_U" return-type="SocialEquityUser" unique="true">
 			<finder-column name="groupId" />
