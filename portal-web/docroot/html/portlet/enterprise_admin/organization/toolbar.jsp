@@ -18,7 +18,6 @@
 
 <%
 String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
-String backURL = ParamUtil.getString(request, "backURL");
 %>
 
 <div class="lfr-portlet-toolbar">
@@ -45,11 +44,5 @@ String backURL = ParamUtil.getString(request, "backURL");
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="modelResource" value="<%= Organization.class.getName() %>" />
 		</liferay-portlet:renderURL>
-	</c:if>
-
-	<c:if test="<%= Validator.isNotNull(backURL) %>">
-		<span class="lfr-toolbar-button back-button">
-			<a href="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(backURL)) %>">&laquo; <liferay-ui:message key="back" /></a>
-		</span>
 	</c:if>
 </div>
