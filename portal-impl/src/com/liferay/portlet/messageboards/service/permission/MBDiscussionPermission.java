@@ -75,7 +75,8 @@ public class MBDiscussionPermission {
 		if (message.isPending()) {
 			Boolean hasPermission = WorkflowPermissionUtil.hasPermission(
 				permissionChecker, message.getGroupId(),
-				MBDiscussion.class.getName(), message.getMessageId(), actionId);
+				message.getWorkflowClassName(), message.getMessageId(),
+				actionId);
 
 			if (hasPermission != null) {
 				return hasPermission.booleanValue();
