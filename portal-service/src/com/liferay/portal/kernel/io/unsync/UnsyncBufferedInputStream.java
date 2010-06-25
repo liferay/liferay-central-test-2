@@ -107,7 +107,8 @@ public class UnsyncBufferedInputStream extends UnsyncFilterInputStream {
 
 				int leftSize = length - read;
 
-				System.arraycopy(buffer, index, byteArray, read, leftSize);
+				System.arraycopy(
+					buffer, index, byteArray, offset + read, leftSize);
 
 				index += leftSize;
 
@@ -139,7 +140,7 @@ public class UnsyncBufferedInputStream extends UnsyncFilterInputStream {
 				// Copy all in-memory data, continue reading
 
 				System.arraycopy(
-					buffer, index, byteArray, read, available);
+					buffer, index, byteArray, offset + read, available);
 
 				index += available;
 				read += available;
