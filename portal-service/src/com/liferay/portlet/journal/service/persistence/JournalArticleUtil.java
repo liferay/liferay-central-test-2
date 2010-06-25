@@ -216,6 +216,58 @@ public class JournalArticleUtil {
 		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
 	}
 
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByResourcePrimKey(
+		long resourcePrimKey)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByResourcePrimKey(resourcePrimKey);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByResourcePrimKey(
+		long resourcePrimKey, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByResourcePrimKey(resourcePrimKey, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByResourcePrimKey(
+		long resourcePrimKey, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByResourcePrimKey(resourcePrimKey, start, end,
+			orderByComparator);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle findByResourcePrimKey_First(
+		long resourcePrimKey,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .findByResourcePrimKey_First(resourcePrimKey,
+			orderByComparator);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle findByResourcePrimKey_Last(
+		long resourcePrimKey,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .findByResourcePrimKey_Last(resourcePrimKey,
+			orderByComparator);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle[] findByResourcePrimKey_PrevAndNext(
+		long id, long resourcePrimKey,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .findByResourcePrimKey_PrevAndNext(id, resourcePrimKey,
+			orderByComparator);
+	}
+
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByGroupId(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -326,58 +378,6 @@ public class JournalArticleUtil {
 			com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence()
 				   .findByCompanyId_PrevAndNext(id, companyId, orderByComparator);
-	}
-
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByResourcePrimKey(
-		long resourcePrimKey)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByResourcePrimKey(resourcePrimKey);
-	}
-
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByResourcePrimKey(
-		long resourcePrimKey, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .findByResourcePrimKey(resourcePrimKey, start, end);
-	}
-
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByResourcePrimKey(
-		long resourcePrimKey, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .findByResourcePrimKey(resourcePrimKey, start, end,
-			orderByComparator);
-	}
-
-	public static com.liferay.portlet.journal.model.JournalArticle findByResourcePrimKey_First(
-		long resourcePrimKey,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.journal.NoSuchArticleException {
-		return getPersistence()
-				   .findByResourcePrimKey_First(resourcePrimKey,
-			orderByComparator);
-	}
-
-	public static com.liferay.portlet.journal.model.JournalArticle findByResourcePrimKey_Last(
-		long resourcePrimKey,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.journal.NoSuchArticleException {
-		return getPersistence()
-				   .findByResourcePrimKey_Last(resourcePrimKey,
-			orderByComparator);
-	}
-
-	public static com.liferay.portlet.journal.model.JournalArticle[] findByResourcePrimKey_PrevAndNext(
-		long id, long resourcePrimKey,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.journal.NoSuchArticleException {
-		return getPersistence()
-				   .findByResourcePrimKey_PrevAndNext(id, resourcePrimKey,
-			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findBySmallImageId(
@@ -1074,6 +1074,11 @@ public class JournalArticleUtil {
 		getPersistence().removeByUUID_G(uuid, groupId);
 	}
 
+	public static void removeByResourcePrimKey(long resourcePrimKey)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByResourcePrimKey(resourcePrimKey);
+	}
+
 	public static void removeByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByGroupId(groupId);
@@ -1082,11 +1087,6 @@ public class JournalArticleUtil {
 	public static void removeByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByCompanyId(companyId);
-	}
-
-	public static void removeByResourcePrimKey(long resourcePrimKey)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByResourcePrimKey(resourcePrimKey);
 	}
 
 	public static void removeBySmallImageId(long smallImageId)
@@ -1161,6 +1161,11 @@ public class JournalArticleUtil {
 		return getPersistence().countByUUID_G(uuid, groupId);
 	}
 
+	public static int countByResourcePrimKey(long resourcePrimKey)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByResourcePrimKey(resourcePrimKey);
+	}
+
 	public static int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByGroupId(groupId);
@@ -1174,11 +1179,6 @@ public class JournalArticleUtil {
 	public static int countByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByCompanyId(companyId);
-	}
-
-	public static int countByResourcePrimKey(long resourcePrimKey)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByResourcePrimKey(resourcePrimKey);
 	}
 
 	public static int countBySmallImageId(long smallImageId)

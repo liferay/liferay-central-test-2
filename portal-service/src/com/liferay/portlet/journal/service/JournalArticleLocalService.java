@@ -433,7 +433,7 @@ public interface JournalArticleLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.journal.model.JournalArticle getLatestArticle(
-		long resourcePrimKey, int status, boolean approvedPreferred)
+		long resourcePrimKey, int status, boolean preferApproved)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

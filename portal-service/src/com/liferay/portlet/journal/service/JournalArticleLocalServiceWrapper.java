@@ -565,11 +565,11 @@ public class JournalArticleLocalServiceWrapper
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle getLatestArticle(
-		long resourcePrimKey, int status, boolean approvedPreferred)
+		long resourcePrimKey, int status, boolean preferApproved)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleLocalService.getLatestArticle(resourcePrimKey,
-			status, approvedPreferred);
+			status, preferApproved);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle getLatestArticle(
