@@ -14,17 +14,13 @@
 
 package com.liferay.portal.kernel.cluster;
 
-import java.io.Serializable;
-
 /**
- * <a href="Address.java.html"><b><i>View Source</i></b></a>
+ * <a href="ClusterEventListener.java.html"><b><i>View Source</i></b></a>
  *
- * @author Shuyang Zhou
+ * @author Tina Tian
  */
-public interface Address extends Serializable {
+public interface ClusterEventListener {
 
-	public String getDescription();
-
-	public Object getRealAddress();
+	public void processClusterEvent(ClusterEvent clusterEvent);
 
 }

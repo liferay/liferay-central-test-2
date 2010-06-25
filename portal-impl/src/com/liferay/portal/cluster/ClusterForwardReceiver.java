@@ -22,7 +22,6 @@ import java.util.List;
 
 import org.jgroups.Address;
 import org.jgroups.Message;
-import org.jgroups.ReceiverAdapter;
 import org.jgroups.View;
 
 /**
@@ -30,7 +29,7 @@ import org.jgroups.View;
  *
  * @author Shuyang Zhou
  */
-public class ClusterForwardReceiver extends ReceiverAdapter {
+public class ClusterForwardReceiver extends BaseReceiver {
 
 	public ClusterForwardReceiver(
 		List<Address> localTransportAddresses,

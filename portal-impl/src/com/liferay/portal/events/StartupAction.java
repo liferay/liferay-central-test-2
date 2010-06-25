@@ -15,6 +15,7 @@
 package com.liferay.portal.events;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.cluster.ClusterExecutorUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil;
@@ -156,6 +157,9 @@ public class StartupAction extends SimpleAction {
 		// Liferay JspFactory
 
 		JspFactorySwapper.swap();
+
+		// Cluster Executor
+		ClusterExecutorUtil.initialize();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(StartupAction.class);

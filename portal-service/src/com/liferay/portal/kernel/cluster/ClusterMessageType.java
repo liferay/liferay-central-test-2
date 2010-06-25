@@ -14,31 +14,14 @@
 
 package com.liferay.portal.kernel.cluster;
 
-import java.io.Serializable;
-
 /**
- * <a href="ClusterResponse.java.html"><b><i>View Source</i></b></a>
+ * <a href="ClusterMessageType.java.html"><b><i>View Source</i></b></a>
  *
  * @author Tina Tian
  */
-public interface ClusterResponse extends Serializable {
-
-	public Exception getException();
-
-	public Object getResult();
-
-	public String getUuid();
-
-	public boolean hasException();
-
-	public boolean isMulticast();
-
-	public void setException(Exception exception);
-
-	public void setMulticast(boolean multicast);
-
-	public void setResult(Object result);
-
-	public void setUuid(String uuid);
+public enum ClusterMessageType {
+	EXECUTE,
+	NOTIFY,
+	UPDATE
 
 }

@@ -14,11 +14,9 @@
 
 package com.liferay.portal.kernel.cluster;
 
-import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.exception.SystemException;
 
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Future;
 
 /**
  * <a href="ClusterExecutor.java.html"><b><i>View Source</i></b></a>
@@ -27,18 +25,27 @@ import java.util.concurrent.Future;
  */
 public interface ClusterExecutor {
 
-	public Map<Address, Future<?>> executeMulticastCall(
-		MethodWrapper methodWrapper);
+	public void addClusterEventListener(
+		ClusterEventListener clusterEventListener);
 
-	public Future<?> executeUnicastCall(
-		Address address, MethodWrapper methodWrapper);
+	public void destroy();
 
-	public List<Address> getControlAddresses();
+	public ClusterNodeResponses execute(ClusterRequest clusterRequest)
+		throws SystemException;
 
-	public Address getLocalControlAddress();
+	public List<ClusterEventListener> getClusterEventListeners();
+
+	public List<ClusterNode> getClusterNodes();
+
+	public ClusterNode getLocalClusterNode() throws SystemException;
+
+	public void initialize();
+
+	public boolean isClusterNodeAlive(String clusterNodeId);
 
 	public boolean isEnabled();
 
-	public boolean isShortcutLocalMethod();
+	public void removeClusterEventListener(
+		ClusterEventListener clusterEventListener);
 
 }

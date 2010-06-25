@@ -49,7 +49,7 @@ import org.jgroups.View;
 public abstract class ClusterBase {
 
 	public void afterPropertiesSet() {
-		if (!PropsValues.CLUSTER_LINK_ENABLED) {
+		if (!isEnabled()) {
 			return;
 		}
 
@@ -85,7 +85,11 @@ public abstract class ClusterBase {
 			initChannels();
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			if (_log.isErrorEnabled()) {
+				_log.error("Unale to initialize channels", e);
+			}
+
+			throw new IllegalStateException(e);
 		}
 	}
 

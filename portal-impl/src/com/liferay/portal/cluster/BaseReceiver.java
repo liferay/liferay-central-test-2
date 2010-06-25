@@ -12,19 +12,38 @@
  * details.
  */
 
-package com.liferay.portal.kernel.cluster;
+package com.liferay.portal.cluster;
 
-import java.io.Serializable;
+import org.jgroups.Address;
+import org.jgroups.Message;
+import org.jgroups.Receiver;
+import org.jgroups.View;
 
 /**
- * <a href="Address.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseReceiver.java.html"><b><i>View Source</i>
+ * </b></a>
  *
- * @author Shuyang Zhou
+ * @author Tina Tian
  */
-public interface Address extends Serializable {
+public class BaseReceiver implements Receiver {
 
-	public String getDescription();
+	public void block() {
+	}
 
-	public Object getRealAddress();
+	public byte[] getState() {
+		return null;
+	}
+
+	public void receive(Message msg) {
+	}
+
+	public void setState(byte[] newState) {
+	}
+
+	public void suspect(Address adrs) {
+	}
+
+	public void viewAccepted(View view) {
+	}
 
 }

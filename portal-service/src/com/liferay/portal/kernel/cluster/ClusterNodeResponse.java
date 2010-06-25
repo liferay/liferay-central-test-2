@@ -12,20 +12,29 @@
  * details.
  */
 
-package com.liferay.portal.cluster;
+package com.liferay.portal.kernel.cluster;
 
-import com.liferay.portal.kernel.cluster.ClusterResponse;
 import com.liferay.portal.kernel.util.StringBundler;
 
+import java.io.Serializable;
+
 /**
- * <a href="ClusterResponseImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ClusterNodeResponse.java.html"><b><i>View Source</i></b></a>
  *
  * @author Tina Tian
  */
-public class ClusterResponseImpl implements ClusterResponse {
+public class ClusterNodeResponse implements Serializable {
+
+	public ClusterNode getClusterNode() {
+		return _clusterNode;
+	}
 
 	public Exception getException() {
 		return _exception;
+	}
+
+	public ClusterMessageType getMessageType() {
+		return _messageType;
 	}
 
 	public Object getResult() {
@@ -44,8 +53,16 @@ public class ClusterResponseImpl implements ClusterResponse {
 		return _multicast;
 	}
 
+	public void setClusterNode(ClusterNode clusterNode) {
+		_clusterNode = clusterNode;
+	}
+
 	public void setException(Exception exception) {
 		_exception = exception;
+	}
+
+	public void setMessageType(ClusterMessageType type) {
+		_messageType = type;
 	}
 
 	public void setMulticast(boolean multicast) {
@@ -63,20 +80,39 @@ public class ClusterResponseImpl implements ClusterResponse {
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 
-		sb.append("{exception=");
-		sb.append(_exception);
+		sb.append("{uuid=");
+		sb.append(_uuid);
+		sb.append(", message type=");
+		sb.append(_messageType);
 		sb.append(", multicast=");
 		sb.append(_multicast);
-		sb.append(", result=");
-		sb.append(_result);
-		sb.append(", uuid=");
-		sb.append(_uuid);
+
+		if ((_messageType != null) &&
+			(_messageType.equals(ClusterMessageType.NOTIFY) ||
+			_messageType.equals(ClusterMessageType.UPDATE))) {
+
+			sb.append(", clusterNode=");
+			sb.append(_clusterNode);
+		}
+		else {
+			if (hasException()) {
+				sb.append(", exception=");
+				sb.append(_exception);
+			}
+			else {
+				sb.append(", result=");
+				sb.append(_result);
+			}
+		}
+
 		sb.append("}");
 
 		return sb.toString();
 	}
 
+	private ClusterNode _clusterNode;
 	private Exception _exception;
+	private ClusterMessageType _messageType;
 	private boolean _multicast;
 	private Object _result;
 	private String _uuid;

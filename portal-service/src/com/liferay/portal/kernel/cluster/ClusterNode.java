@@ -1,0 +1,103 @@
+/**
+ * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
+package com.liferay.portal.kernel.cluster;
+
+import com.liferay.portal.kernel.util.StringBundler;
+
+import java.io.Serializable;
+
+import java.net.InetAddress;
+
+/**
+ * <a href="ClusterNode.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Tina Tian
+ */
+public class ClusterNode implements Serializable {
+
+	public ClusterNode(String clusterNodeId) {
+		_clusterNodeId = clusterNodeId;
+	}
+
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+
+		ClusterNode clusterNode = null;
+
+		try{
+			clusterNode = (ClusterNode)obj;
+			return _clusterNodeId.equals(clusterNode._clusterNodeId);
+		}
+		catch (ClassCastException cce) {
+			return false;
+		}
+	}
+
+	public String getClusterNodeId() {
+		return _clusterNodeId;
+	}
+
+	public String getHostName() {
+		return _hostName;
+	}
+
+	public InetAddress getInetAddress() {
+		return _inetAddress;
+	}
+
+	public int getPort() {
+		return _port;
+	}
+
+	public int hashCode() {
+		return _clusterNodeId.hashCode();
+	}
+
+	public void setHostName(String hostName) {
+		_hostName = hostName;
+	}
+
+	public void setInetAddress(InetAddress inetAddress) {
+		_inetAddress = inetAddress;
+	}
+
+	public void setPort(int port) {
+		_port = port;
+	}
+
+	public String toString() {
+		StringBundler sb = new StringBundler(9);
+
+		sb.append("{Id=");
+		sb.append(_clusterNodeId);
+		sb.append(", hostName=");
+		sb.append(_hostName);
+		sb.append(", ipAddress=");
+		sb.append(_inetAddress);
+		sb.append(", port=");
+		sb.append(_port);
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	private String _clusterNodeId;
+	private String _hostName;
+	private InetAddress _inetAddress;
+	private int _port;
+
+}

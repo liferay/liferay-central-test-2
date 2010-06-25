@@ -14,19 +14,39 @@
 
 package com.liferay.portal.cluster;
 
+import com.liferay.portal.kernel.cluster.Address;
+import com.liferay.portal.kernel.cluster.ClusterNodeResponse;
+import com.liferay.portal.kernel.cluster.ClusterNodeResponses;
+
+import java.util.Set;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
- * <a href="FutureResult.java.html"><b><i>View Source</i></b></a>
+ * <a href="FutureClusterResponses.java.html"><b><i>View Source</i></b></a>
  *
  * @author Tina Tian
  */
-public class FutureResult<V> implements Future<V> {
+public class FutureClusterResponses implements Future<ClusterNodeResponses> {
+
+	public FutureClusterResponses(int numResults) {
+		_countDownLatch = new CountDownLatch(numResults);
+
+		_clusterNodeResponses = new ClusterNodeResponses();
+	}
+
+	public void addClusterResponse(ClusterNodeResponse nodeResponse) {
+		_clusterNodeResponses.addClusterResponse(nodeResponse);
+
+		_countDownLatch.countDown();
+	}
+
+	public void addExpectedReplyAddress(Address address) {
+		_expectedReplyAddress.add(address);
+	}
 
 	public boolean cancel(boolean mayInterruptIfRunning) {
 		if (_cancelled || isDone()) {
@@ -38,41 +58,37 @@ public class FutureResult<V> implements Future<V> {
 		return true;
 	}
 
-	public V get() throws InterruptedException, ExecutionException {
+	public boolean expectsReply(Address address) {
+		return _expectedReplyAddress.contains(address);
+	}
+
+	public ClusterNodeResponses get() throws InterruptedException {
 		if (_cancelled) {
 			throw new CancellationException();
 		}
 
 		_countDownLatch.await();
 
-		if (_exception != null) {
-			throw new ExecutionException(_exception);
-		}
-
-		return _result;
+		return _clusterNodeResponses;
 	}
 
-	public V get(long timeout, TimeUnit unit)
-		throws ExecutionException, InterruptedException, TimeoutException {
+	public ClusterNodeResponses get(long timeout, TimeUnit unit)
+		throws InterruptedException, TimeoutException {
 
 		if (_cancelled) {
 			throw new CancellationException();
 		}
 
 		if (_countDownLatch.await(timeout, unit)) {
-			if (_exception != null) {
-				throw new ExecutionException(_exception);
-			}
-
-			return _result;
+			return _clusterNodeResponses;
 		}
 		else {
 			throw new TimeoutException();
 		}
 	}
 
-	public boolean hasException() {
-		return _exception != null;
+	public ClusterNodeResponses getPartialResults() {
+		return _clusterNodeResponses;
 	}
 
 	public boolean isCancelled() {
@@ -87,19 +103,9 @@ public class FutureResult<V> implements Future<V> {
 		return false;
 	}
 
-	public void setException(Exception exception) {
-		_exception = exception;
-		_countDownLatch.countDown();
-	}
-
-	public void setResult(V result) {
-		_result = result;
-		_countDownLatch.countDown();
-	}
-
 	private boolean _cancelled;
-	private CountDownLatch _countDownLatch = new CountDownLatch(1);
-	private Exception _exception;
-	private V _result;
+	private CountDownLatch _countDownLatch;
+	private ClusterNodeResponses _clusterNodeResponses;
+	private Set<Address> _expectedReplyAddress;
 
 }
