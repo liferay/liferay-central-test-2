@@ -19,7 +19,9 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionList;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.social.model.SocialEquityUser;
 import com.liferay.portlet.social.model.SocialEquityValue;
 import com.liferay.portlet.social.service.base.SocialEquityUserLocalServiceBaseImpl;
@@ -55,6 +57,20 @@ public class SocialEquityUserLocalServiceImpl
 		projectionList.add(ProjectionFactoryUtil.sum("participationB"));
 
 		return getSocialEquityValue(userId, projectionList);
+	}
+
+	public int getRankedSocialEquityUsersCount(long groupId)
+		throws SystemException {
+
+		return socialEquityUserPersistence.countByGroupIdForRanking(groupId);
+	}
+
+	public List<SocialEquityUser> getRankedSocialEquityUsers(
+			long groupId, int start, int end, OrderByComparator obc)
+		throws PortalException, SystemException {
+
+		return socialEquityUserPersistence.findByGroupIdForRanking(
+			groupId, start, end, obc);
 	}
 
 	protected SocialEquityValue getSocialEquityValue(

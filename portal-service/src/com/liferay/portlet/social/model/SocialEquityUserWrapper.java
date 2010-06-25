@@ -196,6 +196,14 @@ public class SocialEquityUserWrapper implements SocialEquityUser {
 		return _socialEquityUser.toXmlString();
 	}
 
+	public double getContributionEquity() {
+		return _socialEquityUser.getContributionEquity();
+	}
+
+	public double getParticipationEquity() {
+		return _socialEquityUser.getParticipationEquity();
+	}
+
 	public SocialEquityUser getWrappedSocialEquityUser() {
 		return _socialEquityUser;
 	}

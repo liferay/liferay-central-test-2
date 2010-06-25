@@ -81,6 +81,19 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 			SocialEquityUserModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByGroupId",
 			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_GROUPIDFORRANKING = new FinderPath(SocialEquityUserModelImpl.ENTITY_CACHE_ENABLED,
+			SocialEquityUserModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByGroupIdForRanking",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPIDFORRANKING = new FinderPath(SocialEquityUserModelImpl.ENTITY_CACHE_ENABLED,
+			SocialEquityUserModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByGroupIdForRanking",
+			new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_USERID = new FinderPath(SocialEquityUserModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityUserModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByUserId",
@@ -560,6 +573,264 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		query.append(_SQL_SELECT_SOCIALEQUITYUSER_WHERE);
 
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(socialEquityUser);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<SocialEquityUser> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	public List<SocialEquityUser> findByGroupIdForRanking(long groupId)
+		throws SystemException {
+		return findByGroupIdForRanking(groupId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<SocialEquityUser> findByGroupIdForRanking(long groupId,
+		int start, int end) throws SystemException {
+		return findByGroupIdForRanking(groupId, start, end, null);
+	}
+
+	public List<SocialEquityUser> findByGroupIdForRanking(long groupId,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId),
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<SocialEquityUser> list = (List<SocialEquityUser>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPIDFORRANKING,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = null;
+
+				if (orderByComparator != null) {
+					query = new StringBundler(3 +
+							(orderByComparator.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(2);
+				}
+
+				query.append(_SQL_SELECT_SOCIALEQUITYUSER_WHERE);
+
+				query.append(_FINDER_COLUMN_GROUPIDFORRANKING_GROUPID_2);
+
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				list = (List<SocialEquityUser>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SocialEquityUser>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPIDFORRANKING,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public SocialEquityUser findByGroupIdForRanking_First(long groupId,
+		OrderByComparator orderByComparator)
+		throws NoSuchEquityUserException, SystemException {
+		List<SocialEquityUser> list = findByGroupIdForRanking(groupId, 0, 1,
+				orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEquityUserException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public SocialEquityUser findByGroupIdForRanking_Last(long groupId,
+		OrderByComparator orderByComparator)
+		throws NoSuchEquityUserException, SystemException {
+		int count = countByGroupIdForRanking(groupId);
+
+		List<SocialEquityUser> list = findByGroupIdForRanking(groupId,
+				count - 1, count, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEquityUserException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public SocialEquityUser[] findByGroupIdForRanking_PrevAndNext(
+		long equityUserId, long groupId, OrderByComparator orderByComparator)
+		throws NoSuchEquityUserException, SystemException {
+		SocialEquityUser socialEquityUser = findByPrimaryKey(equityUserId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SocialEquityUser[] array = new SocialEquityUserImpl[3];
+
+			array[0] = getByGroupIdForRanking_PrevAndNext(session,
+					socialEquityUser, groupId, orderByComparator, true);
+
+			array[1] = socialEquityUser;
+
+			array[2] = getByGroupIdForRanking_PrevAndNext(session,
+					socialEquityUser, groupId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected SocialEquityUser getByGroupIdForRanking_PrevAndNext(
+		Session session, SocialEquityUser socialEquityUser, long groupId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_SOCIALEQUITYUSER_WHERE);
+
+		query.append(_FINDER_COLUMN_GROUPIDFORRANKING_GROUPID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByFields = orderByComparator.getOrderByFields();
@@ -1349,6 +1620,14 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		}
 	}
 
+	public void removeByGroupIdForRanking(long groupId)
+		throws SystemException {
+		for (SocialEquityUser socialEquityUser : findByGroupIdForRanking(
+				groupId)) {
+			remove(socialEquityUser);
+		}
+	}
+
 	public void removeByUserId(long userId) throws SystemException {
 		for (SocialEquityUser socialEquityUser : findByUserId(userId)) {
 			remove(socialEquityUser);
@@ -1411,6 +1690,52 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 				}
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByGroupIdForRanking(long groupId) throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(groupId) };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPIDFORRANKING,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(2);
+
+				query.append(_SQL_COUNT_SOCIALEQUITYUSER_WHERE);
+
+				query.append(_FINDER_COLUMN_GROUPIDFORRANKING_GROUPID_2);
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPIDFORRANKING,
 					finderArgs, count);
 
 				closeSession(session);
@@ -1643,6 +1968,7 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 	private static final String _SQL_COUNT_SOCIALEQUITYUSER = "SELECT COUNT(socialEquityUser) FROM SocialEquityUser socialEquityUser";
 	private static final String _SQL_COUNT_SOCIALEQUITYUSER_WHERE = "SELECT COUNT(socialEquityUser) FROM SocialEquityUser socialEquityUser WHERE ";
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "socialEquityUser.groupId = ?";
+	private static final String _FINDER_COLUMN_GROUPIDFORRANKING_GROUPID_2 = "socialEquityUser.groupId = ? AND socialEquityUser.rank > 0";
 	private static final String _FINDER_COLUMN_USERID_USERID_2 = "socialEquityUser.userId = ?";
 	private static final String _FINDER_COLUMN_RANK_RANK_2 = "socialEquityUser.rank = ?";
 	private static final String _FINDER_COLUMN_G_U_GROUPID_2 = "socialEquityUser.groupId = ? AND ";

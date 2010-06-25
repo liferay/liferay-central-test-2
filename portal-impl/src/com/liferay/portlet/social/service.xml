@@ -237,6 +237,9 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
+		<finder name="GroupIdForRanking" return-type="Collection" where="rank > 0">
+			<finder-column name="groupId" />
+		</finder>
 		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
 		</finder>

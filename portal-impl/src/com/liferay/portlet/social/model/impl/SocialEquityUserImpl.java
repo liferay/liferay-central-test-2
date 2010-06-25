@@ -15,6 +15,7 @@
 package com.liferay.portlet.social.model.impl;
 
 import com.liferay.portlet.social.model.SocialEquityUser;
+import com.liferay.portlet.social.model.SocialEquityValue;
 
 /**
  * <a href="SocialEquityUserImpl.java.html"><b><i>View Source</i></b></a>
@@ -25,6 +26,16 @@ public class SocialEquityUserImpl
 	extends SocialEquityUserModelImpl implements SocialEquityUser {
 
 	public SocialEquityUserImpl() {
+	}
+
+	public double getContributionEquity() {
+		return new SocialEquityValue(
+			getContributionK(), getContributionB()).getValue();
+	}
+
+	public double getParticipationEquity() {
+		return new SocialEquityValue(
+			getParticipationK(), getParticipationB()).getValue();
 	}
 
 }

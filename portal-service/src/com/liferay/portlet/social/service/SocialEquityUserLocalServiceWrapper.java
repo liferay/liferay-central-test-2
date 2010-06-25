@@ -134,6 +134,20 @@ public class SocialEquityUserLocalServiceWrapper
 		return _socialEquityUserLocalService.getParticipationEquity(userId);
 	}
 
+	public int getRankedSocialEquityUsersCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _socialEquityUserLocalService.getRankedSocialEquityUsersCount(groupId);
+	}
+
+	public java.util.List<com.liferay.portlet.social.model.SocialEquityUser> getRankedSocialEquityUsers(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _socialEquityUserLocalService.getRankedSocialEquityUsers(groupId,
+			start, end, obc);
+	}
+
 	public SocialEquityUserLocalService getWrappedSocialEquityUserLocalService() {
 		return _socialEquityUserLocalService;
 	}
