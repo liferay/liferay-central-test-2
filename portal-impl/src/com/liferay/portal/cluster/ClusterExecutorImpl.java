@@ -448,7 +448,7 @@ public class ClusterExecutorImpl
 		}
 
 		for (NetworkInterface networkInterface : interfaces) {
-			if (networkInterface.isLoopback()) {
+			if (isLoopback(networkInterface)) {
 				continue;
 			}
 
@@ -493,6 +493,22 @@ public class ClusterExecutorImpl
 		catch (Exception ex) {
 			_log.error(ex, ex);
 		}
+	}
+	
+	protected boolean isLoopback(NetworkInterface networkInterface) {
+
+		Enumeration<InetAddress> inetAddresses =
+			networkInterface.getInetAddresses();
+
+		while (inetAddresses.hasMoreElements()) {
+			InetAddress inetAddress = inetAddresses.nextElement();
+
+			if (inetAddress.isLoopbackAddress()) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	protected ClusterNodeResponse runLocalMethod(MethodWrapper methodWrapper)
