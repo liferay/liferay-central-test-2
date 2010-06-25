@@ -108,6 +108,9 @@ public interface Portal {
 	 */
 	public void addPageTitle(String title, HttpServletRequest request);
 
+	public void addPortalPortEventListener(
+		PortalPortEventListener portalPortEventListener);
+
 	public void addPortletBreadcrumbEntry(
 		HttpServletRequest request, String title, String url);
 
@@ -572,6 +575,9 @@ public interface Portal {
 	public boolean isSystemRole(String roleName);
 
 	public boolean isUpdateAvailable() throws SystemException;
+
+	public void removePortalPortEventListener(
+		PortalPortEventListener portalPortEventListener);
 
 	public String renderPage(
 			ServletContext servletContext, HttpServletRequest request,

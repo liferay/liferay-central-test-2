@@ -109,6 +109,12 @@ public class PortalUtil {
 		getPortal().addPageTitle(title, request);
 	}
 
+	public static void addPortalPortEventListener(
+		PortalPortEventListener portalPortEventListener) {
+
+		getPortal().addPortalPortEventListener(portalPortEventListener);
+	}
+
 	public static void addPortletBreadcrumbEntry(
 		HttpServletRequest request, String title, String url) {
 

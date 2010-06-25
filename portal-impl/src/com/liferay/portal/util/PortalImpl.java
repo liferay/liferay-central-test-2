@@ -185,6 +185,7 @@ import java.util.Set;
 import java.util.TimeZone;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -522,6 +523,14 @@ public class PortalImpl implements Portal {
 
 		request.setAttribute(WebKeys.PAGE_TITLE, title);
 	}
+
+	public void addPortalPortEventListener(
+		PortalPortEventListener portalPortEventListener) {
+
+		if (!_portalPortEventListeners.contains(portalPortEventListener)) {
+			_portalPortEventListeners.add(portalPortEventListener);
+		}
+	}	
 
 	public void addPortletBreadcrumbEntry(
 		HttpServletRequest request, String title, String url) {
@@ -3563,6 +3572,13 @@ public class PortalImpl implements Portal {
 		return PluginPackageUtil.isUpdateAvailable();
 	}
 
+	public void removePortalPortEventListener(
+		PortalPortEventListener portalPortEventListener) {
+
+		_portalPortEventListeners.remove(portalPortEventListener);
+
+	}
+
 	public String renderPage(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response, String path)
@@ -3867,6 +3883,8 @@ public class PortalImpl implements Portal {
 			finally {
 				_portalPortLock.unlock();
 			}
+
+			notifyPortalPortEventListeners(_portalPort);
 		}
 	}
 
@@ -4229,6 +4247,14 @@ public class PortalImpl implements Portal {
 		}
 	}
 
+	protected void notifyPortalPortEventListeners(int portalPort) {
+		for (PortalPortEventListener portalPortEventListener :
+				_portalPortEventListeners) {
+
+			portalPortEventListener.portalPortConfigured(portalPort);
+		}
+	}
+
 	private long _getPlidFromPortletId(
 			long groupId, boolean privateLayout, String portletId)
 		throws PortalException, SystemException {
@@ -4473,6 +4499,8 @@ public class PortalImpl implements Portal {
 		new ConcurrentHashMap<String, Long>();
 	private String _portalLibDir;
 	private volatile int _portalPort = -1;
+	private List<PortalPortEventListener> _portalPortEventListeners =
+		new CopyOnWriteArrayList<PortalPortEventListener>();
 	private Lock _portalPortLock = new ReentrantLock();
 	private String _portalWebDir;
 	private Set<String> _portletAddDefaultResourceCheckWhitelist;
