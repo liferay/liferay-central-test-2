@@ -90,6 +90,29 @@ public class ClusterExecutorImpl
 		return;
 	}
 
+	public void configured(int port) {
+		if (!isEnabled()) {
+			return;
+		}
+
+		try {
+			ClusterNode clusterNode = getLocalClusterNode();
+			clusterNode.setPort(port);
+
+			ClusterRequest clusterRequest =
+				ClusterRequest.createClusterRequest(
+					ClusterMessageType.UPDATE, clusterNode);
+
+			_controlChannel.send(null, null, clusterRequest);
+
+		}
+		catch (Exception e) {
+			if (_log.isErrorEnabled()) {
+				_log.error("Unable to determine configure node port", e);
+			}
+		}
+	}	
+
 	public void destroy() {
 		if (!isEnabled()) {
 			return;
@@ -204,6 +227,8 @@ public class ClusterExecutorImpl
 		}
 
 		try {
+			PortalUtil.addPortalPortEventListener(this);
+
 			ClusterNode clusterNode = getLocalClusterNode();
 
 			ClusterRequest clusterRequest =
@@ -230,29 +255,6 @@ public class ClusterExecutorImpl
 
 	public boolean isEnabled() {
 		return PropsValues.CLUSTER_LINK_ENABLED;
-	}
-
-	public void portalPortConfigured(int port) {
-		if (!isEnabled()) {
-			return;
-		}
-
-		try {
-			ClusterNode clusterNode = getLocalClusterNode();
-			clusterNode.setPort(port);
-
-			ClusterRequest clusterRequest =
-				ClusterRequest.createClusterRequest(
-					ClusterMessageType.UPDATE, clusterNode);
-
-			_controlChannel.send(null, null, clusterRequest);
-
-		}
-		catch (Exception e) {
-			if (_log.isErrorEnabled()) {
-				_log.error("Unable to determine configure node port", e);
-			}
-		}
 	}
 
 	public void removeClusterEventListener(
