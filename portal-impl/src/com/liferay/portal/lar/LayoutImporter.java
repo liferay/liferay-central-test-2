@@ -700,8 +700,8 @@ public class LayoutImporter {
 			}
 		}
 		else {
-			exsistingLayout = LayoutUtil.fetchByG_P_F(
-				groupId, privateLayout, friendlyURL);
+			exsistingLayout = LayoutUtil.fetchByUUID_G(
+				layout.getUuid(), groupId);
 
 			if (exsistingLayout == null) {
 				layoutId = LayoutLocalServiceUtil.getNextLayoutId(
@@ -729,6 +729,7 @@ public class LayoutImporter {
 
 			importedLayout = LayoutUtil.create(plid);
 
+			importedLayout.setUuid(layout.getUuid());
 			importedLayout.setGroupId(groupId);
 			importedLayout.setPrivateLayout(privateLayout);
 			importedLayout.setLayoutId(layoutId);
