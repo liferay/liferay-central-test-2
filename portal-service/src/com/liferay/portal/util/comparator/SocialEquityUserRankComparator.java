@@ -40,10 +40,17 @@ public class SocialEquityUserRankComparator extends OrderByComparator {
 	}
 
 	public int compare(Object obj1, Object obj2) {
-		SocialEquityUser user1 = (SocialEquityUser)obj1;
-		SocialEquityUser user2 = (SocialEquityUser)obj2;
+		SocialEquityUser socialEquityUser1 = (SocialEquityUser)obj1;
+		SocialEquityUser socialEquityUser2 = (SocialEquityUser)obj2;
 
-		int value = new Integer(user1.getRank()).compareTo(user2.getRank());
+		int value = 0;
+
+		if (socialEquityUser1.getRank() > socialEquityUser2.getRank()) {
+			value = 1;
+		}
+		else if (socialEquityUser1.getRank() < socialEquityUser2.getRank()) {
+			value = -1;
+		}
 
 		if (_ascending) {
 			return value;

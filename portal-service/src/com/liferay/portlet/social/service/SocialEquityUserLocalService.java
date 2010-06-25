@@ -116,13 +116,12 @@ public interface SocialEquityUserLocalService {
 		long userId) throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getRankedSocialEquityUsersCount(long groupId)
+	public java.util.List<com.liferay.portlet.social.model.SocialEquityUser> getRankedSocialEquityUsers(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.social.model.SocialEquityUser> getRankedSocialEquityUsers(
-		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+	public int getRankedSocialEquityUsersCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

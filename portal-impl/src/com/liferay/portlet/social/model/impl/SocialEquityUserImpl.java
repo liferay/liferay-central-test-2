@@ -29,13 +29,17 @@ public class SocialEquityUserImpl
 	}
 
 	public double getContributionEquity() {
-		return new SocialEquityValue(
-			getContributionK(), getContributionB()).getValue();
+		SocialEquityValue socialEquityValue = new SocialEquityValue(
+			getContributionK(), getContributionB());
+
+		return socialEquityValue.getValue();
 	}
 
 	public double getParticipationEquity() {
-		return new SocialEquityValue(
-			getParticipationK(), getParticipationB()).getValue();
+		SocialEquityValue socialEquityValue = new SocialEquityValue(
+			getParticipationK(), getParticipationB());
+
+		return socialEquityValue.getValue();
 	}
 
 }

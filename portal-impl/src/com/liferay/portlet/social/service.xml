@@ -237,7 +237,7 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="GroupIdForRanking" return-type="Collection" where="rank > 0">
+		<finder name="GroupRanked" return-type="Collection" where="rank > 0">
 			<finder-column name="groupId" />
 		</finder>
 		<finder name="UserId" return-type="Collection">
@@ -249,6 +249,10 @@
 		<finder name="G_U" return-type="SocialEquityUser" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
+		</finder>
+		<finder name="G_R" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="rank" />
 		</finder>
 	</entity>
 	<entity name="SocialRelation" uuid="true" local-service="true" remote-service="false">

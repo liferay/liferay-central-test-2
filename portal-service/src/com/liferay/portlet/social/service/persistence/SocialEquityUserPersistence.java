@@ -91,32 +91,32 @@ public interface SocialEquityUserPersistence extends BasePersistence<SocialEquit
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquityUserException;
 
-	public java.util.List<com.liferay.portlet.social.model.SocialEquityUser> findByGroupIdForRanking(
+	public java.util.List<com.liferay.portlet.social.model.SocialEquityUser> findByGroupRanked(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.social.model.SocialEquityUser> findByGroupIdForRanking(
+	public java.util.List<com.liferay.portlet.social.model.SocialEquityUser> findByGroupRanked(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.social.model.SocialEquityUser> findByGroupIdForRanking(
+	public java.util.List<com.liferay.portlet.social.model.SocialEquityUser> findByGroupRanked(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.social.model.SocialEquityUser findByGroupIdForRanking_First(
+	public com.liferay.portlet.social.model.SocialEquityUser findByGroupRanked_First(
 		long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquityUserException;
 
-	public com.liferay.portlet.social.model.SocialEquityUser findByGroupIdForRanking_Last(
+	public com.liferay.portlet.social.model.SocialEquityUser findByGroupRanked_Last(
 		long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquityUserException;
 
-	public com.liferay.portlet.social.model.SocialEquityUser[] findByGroupIdForRanking_PrevAndNext(
+	public com.liferay.portlet.social.model.SocialEquityUser[] findByGroupRanked_PrevAndNext(
 		long equityUserId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -195,6 +195,37 @@ public interface SocialEquityUserPersistence extends BasePersistence<SocialEquit
 		long groupId, long userId, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public java.util.List<com.liferay.portlet.social.model.SocialEquityUser> findByG_R(
+		long groupId, int rank)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialEquityUser> findByG_R(
+		long groupId, int rank, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialEquityUser> findByG_R(
+		long groupId, int rank, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.social.model.SocialEquityUser findByG_R_First(
+		long groupId, int rank,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquityUserException;
+
+	public com.liferay.portlet.social.model.SocialEquityUser findByG_R_Last(
+		long groupId, int rank,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquityUserException;
+
+	public com.liferay.portlet.social.model.SocialEquityUser[] findByG_R_PrevAndNext(
+		long equityUserId, long groupId, int rank,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquityUserException;
+
 	public java.util.List<com.liferay.portlet.social.model.SocialEquityUser> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -210,7 +241,7 @@ public interface SocialEquityUserPersistence extends BasePersistence<SocialEquit
 	public void removeByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void removeByGroupIdForRanking(long groupId)
+	public void removeByGroupRanked(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByUserId(long userId)
@@ -223,13 +254,16 @@ public interface SocialEquityUserPersistence extends BasePersistence<SocialEquit
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquityUserException;
 
+	public void removeByG_R(long groupId, int rank)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByGroupIdForRanking(long groupId)
+	public int countByGroupRanked(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByUserId(long userId)
@@ -239,6 +273,9 @@ public interface SocialEquityUserPersistence extends BasePersistence<SocialEquit
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByG_U(long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByG_R(long groupId, int rank)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()
