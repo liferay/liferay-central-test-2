@@ -29,10 +29,10 @@
 <%@ page import="com.liferay.portlet.messageboards.util.comparator.MessageCreateDateComparator" %>
 <%@ page import="com.liferay.portlet.ratings.model.RatingsEntry" %>
 <%@ page import="com.liferay.portlet.ratings.model.RatingsStats" %>
-<%@ page import="com.liferay.portlet.ratings.model.impl.RatingsEntryImpl" %>
-<%@ page import="com.liferay.portlet.ratings.model.impl.RatingsStatsImpl" %>
 <%@ page import="com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.ratings.service.persistence.RatingsEntryUtil" %>
+<%@ page import="com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil" %>
 
 <portlet:defineObjects />
 
@@ -518,7 +518,7 @@ private RatingsEntry getRatingsEntry(List<RatingsEntry> ratingEntries, long clas
 		}
 	}
 
-	return new RatingsEntryImpl();
+	return RatingsEntryUtil.create(0);
 }
 
 private RatingsStats getRatingsStats(List<RatingsStats> ratingsStatsList, long classPK) {
@@ -528,6 +528,6 @@ private RatingsStats getRatingsStats(List<RatingsStats> ratingsStatsList, long c
 		}
 	}
 
-	return new RatingsStatsImpl();
+	return RatingsStatsUtil.create(0);
 }
 %>
