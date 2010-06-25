@@ -25,20 +25,26 @@ import com.liferay.portal.kernel.util.Validator;
 public class ChainableMethodAdviceInjector {
 
 	public void afterPropertiesSet() {
-		if (Validator.isNull(_newChainableMethodAdvice)) {
-			throw new IllegalArgumentException(
-				"New ChainableMethodAdvice is null");
-		}
+		if (_injectCondition) {
+			if (Validator.isNull(_newChainableMethodAdvice)) {
+				throw new IllegalArgumentException(
+					"New ChainableMethodAdvice is null");
+			}
 
-		if (Validator.isNull(_parentChainableMethodAdvice)) {
-			throw new IllegalArgumentException(
-				"Parent ChainableMethodAdvice is null");
-		}
+			if (Validator.isNull(_parentChainableMethodAdvice)) {
+				throw new IllegalArgumentException(
+					"Parent ChainableMethodAdvice is null");
+			}
 
-		_newChainableMethodAdvice.nextMethodInterceptor =
-			_parentChainableMethodAdvice.nextMethodInterceptor;
-		_parentChainableMethodAdvice.nextMethodInterceptor =
-			_newChainableMethodAdvice;
+			_newChainableMethodAdvice.nextMethodInterceptor =
+				_parentChainableMethodAdvice.nextMethodInterceptor;
+			_parentChainableMethodAdvice.nextMethodInterceptor =
+				_newChainableMethodAdvice;
+		}
+	}
+
+	public void setInjectCondition(boolean injectCondition) {
+		_injectCondition = injectCondition;
 	}
 
 	public void setNewChainableMethodAdvice(
@@ -50,6 +56,8 @@ public class ChainableMethodAdviceInjector {
 		ChainableMethodAdvice parentChainableMethodAdvice) {
 		_parentChainableMethodAdvice = parentChainableMethodAdvice;
 	}
+
+	private boolean _injectCondition;
 
 	private ChainableMethodAdvice _newChainableMethodAdvice;
 
