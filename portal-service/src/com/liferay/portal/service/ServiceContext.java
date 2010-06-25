@@ -155,6 +155,10 @@ public class ServiceContext implements Serializable {
 		return _userId;
 	}
 
+	public String getUuid() {
+		return _uuid;
+	}
+
 	public int getWorkflowAction() {
 		return _workflowAction;
 	}
@@ -273,6 +277,10 @@ public class ServiceContext implements Serializable {
 		_userId = userId;
 	}
 
+	public void setUuid(String uuid) {
+		_uuid = uuid;
+	}
+
 	public void setWorkflowAction(int workflowAction) {
 		_workflowAction = workflowAction;
 	}
@@ -300,5 +308,6 @@ public class ServiceContext implements Serializable {
 	private long _plid;
 	private int _workflowAction = WorkflowConstants.ACTION_PUBLISH;
 	private long _userId;
+	private String _uuid;
 
 }
