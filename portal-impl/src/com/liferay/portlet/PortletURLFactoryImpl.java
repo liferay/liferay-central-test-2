@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
+import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -59,6 +60,9 @@ public class PortletURLFactoryImpl implements PortletURLFactory {
 		LiferayPortletRequest liferayPortletRequest =
 			(LiferayPortletRequest)request.getAttribute(
 				JavaConstants.JAVAX_PORTLET_REQUEST);
+		LiferayPortletResponse liferayPortletResponse =
+			(LiferayPortletResponse)request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 		if (liferayPortletRequest == null) {
 			return new PortletURLImpl(request, portletName, plid, lifecycle);
@@ -122,7 +126,7 @@ public class PortletURLFactoryImpl implements PortletURLFactory {
 					});
 
 				liferayPortletURL = (PortletURLImpl)constructor.newInstance(
-					new Object[] {this, plid, lifecycle});
+					new Object[] {liferayPortletResponse, plid, lifecycle});
 			}
 			catch (Exception e) {
 				_log.error(e, e);
