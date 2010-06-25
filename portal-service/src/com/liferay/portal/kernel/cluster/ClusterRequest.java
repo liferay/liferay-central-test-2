@@ -33,76 +33,78 @@ import java.util.concurrent.TimeUnit;
  */
 public class ClusterRequest implements Serializable {
 
+	public static ClusterRequest createClusterRequest(
+		ClusterMessageType clusterMessageType,
+		ClusterNode originatingClusterNode) {
+
+		ClusterRequest clusterRequest = new ClusterRequest();
+
+		clusterRequest.setClusterMessageType(clusterMessageType);
+		clusterRequest.setMulticast(true);
+		clusterRequest.setOriginatingClusterNode(originatingClusterNode);
+		clusterRequest.setUuid(PortalUUIDUtil.generate());
+
+		return clusterRequest;
+	}
+
 	public static ClusterRequest createMulticastRequest(
 		MethodWrapper methodWrapper) {
 
-		ClusterRequest request = new ClusterRequest();
+		ClusterRequest clusterRequest = new ClusterRequest();
 
-		request.setUuid(PortalUUIDUtil.generate());
-		request.setMethodWrapper(methodWrapper);
-		request.setMessageType(ClusterMessageType.EXECUTE);
-		request.setMulticast(true);
+		clusterRequest.setClusterMessageType(ClusterMessageType.EXECUTE);
+		clusterRequest.setMethodWrapper(methodWrapper);
+		clusterRequest.setMulticast(true);
+		clusterRequest.setUuid(PortalUUIDUtil.generate());
 
-		return request;
+		return clusterRequest;
 	}
 
 	public static ClusterRequest createMulticastRequest(
 		MethodWrapper methodWrapper, long timeOut) {
 
-		ClusterRequest request = new ClusterRequest();
+		ClusterRequest clusterRequest = new ClusterRequest();
 
-		request.setUuid(PortalUUIDUtil.generate());
-		request.setMethodWrapper(methodWrapper);
-		request.setMessageType(ClusterMessageType.EXECUTE);
-		request.setTimeOut(timeOut);
-		request.setMulticast(true);
+		clusterRequest.setClusterMessageType(ClusterMessageType.EXECUTE);
+		clusterRequest.setMethodWrapper(methodWrapper);
+		clusterRequest.setMulticast(true);
+		clusterRequest.setTimeOut(timeOut);
+		clusterRequest.setUuid(PortalUUIDUtil.generate());
 
-		return request;
-	}
-
-	public static ClusterRequest createUnicastRequest(
-		MethodWrapper methodWrapper, String... targetClusterNodeIds) {
-
-		ClusterRequest request = new ClusterRequest();
-
-		request.setUuid(PortalUUIDUtil.generate());
-		request.setMethodWrapper(methodWrapper);
-		request.setMessageType(ClusterMessageType.EXECUTE);
-		request.addTargetClusterNodes(targetClusterNodeIds);
-		request.setMulticast(false);
-
-		return request;
+		return clusterRequest;
 	}
 
 	public static ClusterRequest createUnicastRequest(
 		MethodWrapper methodWrapper, long timeOut,
 		String... targetClusterNodeIds) {
 
-		ClusterRequest request = new ClusterRequest();
+		ClusterRequest clusterRequest = new ClusterRequest();
 
-		request.setUuid(PortalUUIDUtil.generate());
-		request.setMethodWrapper(methodWrapper);
-		request.setMessageType(ClusterMessageType.EXECUTE);
-		request.setTimeOut(timeOut);
-		request.addTargetClusterNodes(targetClusterNodeIds);
-		request.setMulticast(false);
+		clusterRequest.addTargetClusterNodeIds(targetClusterNodeIds);
+		clusterRequest.setClusterMessageType(ClusterMessageType.EXECUTE);
+		clusterRequest.setMethodWrapper(methodWrapper);
+		clusterRequest.setMulticast(false);
+		clusterRequest.setTimeOut(timeOut);
+		clusterRequest.setUuid(PortalUUIDUtil.generate());
 
-		return request;
+		return clusterRequest;
 	}
 
-	public static ClusterRequest createClusterRequest(
-		ClusterMessageType type, ClusterNode originatingClusterNode) {
+	public static ClusterRequest createUnicastRequest(
+		MethodWrapper methodWrapper, String... targetClusterNodeIds) {
 
-		ClusterRequest request = new ClusterRequest();
-		request.setUuid(PortalUUIDUtil.generate());
-		request.setOriginatingClusterNode(originatingClusterNode);
-		request.setMessageType(type);
-		request.setMulticast(true);
+		ClusterRequest clusterRequest = new ClusterRequest();
 
-		return request;
+		clusterRequest.addTargetClusterNodeIds(targetClusterNodeIds);
+		clusterRequest.setClusterMessageType(ClusterMessageType.EXECUTE);
+		clusterRequest.setMethodWrapper(methodWrapper);
+		clusterRequest.setMulticast(false);
+		clusterRequest.setUuid(PortalUUIDUtil.generate());
+
+		return clusterRequest;
 	}
 
-	public void addTargetClusterNodes(String... targetClusterNodeIds) {
+	public void addTargetClusterNodeIds(String... targetClusterNodeIds) {
 		if (_targetClusterNodeIds == null) {
 			_targetClusterNodeIds = new HashSet<String>();
 		}
@@ -110,16 +112,16 @@ public class ClusterRequest implements Serializable {
 		_targetClusterNodeIds.addAll(Arrays.asList(targetClusterNodeIds));
 	}
 
-	public ClusterNode getOriginatingClusterNode() {
-		return _originatingClusterNode;
-	}
-
-	public ClusterMessageType getMessageType() {
-		return _messageType;
+	public ClusterMessageType getClusterMessageType() {
+		return _clusterMessageType;
 	}
 
 	public MethodWrapper getMethodWrapper() {
 		return _methodWrapper;
+	}
+
+	public ClusterNode getOriginatingClusterNode() {
+		return _originatingClusterNode;
 	}
 
 	public Collection<String> getTargetClusterNodeIds() {
@@ -142,12 +144,8 @@ public class ClusterRequest implements Serializable {
 		return _multicast;
 	}
 
-	public void setOriginatingClusterNode(ClusterNode originatingClusterNode) {
-		_originatingClusterNode = originatingClusterNode;
-	}
-
-	public void setMessageType(ClusterMessageType type) {
-		_messageType = type;
+	public void setClusterMessageType(ClusterMessageType clusterMessageType) {
+		_clusterMessageType = clusterMessageType;
 	}
 
 	public void setMethodWrapper(MethodWrapper methodWrapper) {
@@ -156,6 +154,10 @@ public class ClusterRequest implements Serializable {
 
 	public void setMulticast(boolean multicast) {
 		_multicast = multicast;
+	}
+
+	public void setOriginatingClusterNode(ClusterNode originatingClusterNode) {
+		_originatingClusterNode = originatingClusterNode;
 	}
 
 	public void setTimeOut(long timeOut) {
@@ -173,21 +175,21 @@ public class ClusterRequest implements Serializable {
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 
-		sb.append("{uuid=");
-		sb.append(_uuid);
-		sb.append(", message type=");
-		sb.append(_messageType);
+		sb.append("{clusterMessageType=");
+		sb.append(_clusterMessageType);
 		sb.append(", multicast=");
 		sb.append(_multicast);
+		sb.append(", uuid=");
+		sb.append(_uuid);
 
-		if (_messageType.equals(ClusterMessageType.NOTIFY) ||
-			_messageType.equals(ClusterMessageType.UPDATE)) {
+		if (_clusterMessageType.equals(ClusterMessageType.NOTIFY) ||
+			_clusterMessageType.equals(ClusterMessageType.UPDATE)) {
 
-			sb.append(", clusterNode=");
+			sb.append(", originatingClusterNode=");
 			sb.append(_originatingClusterNode);
 		}
 		else {
-			sb.append(", methodWrapper =");
+			sb.append(", methodWrapper=");
 			sb.append(_methodWrapper);
 		}
 
@@ -199,13 +201,13 @@ public class ClusterRequest implements Serializable {
 	private ClusterRequest() {
 	}
 
-	private ClusterNode _originatingClusterNode;
-	private ClusterMessageType _messageType;
+	private ClusterMessageType _clusterMessageType;
 	private MethodWrapper _methodWrapper;
 	private boolean _multicast;
+	private ClusterNode _originatingClusterNode;
+	private Set<String> _targetClusterNodeIds;
 	private long _timeOut;
 	private TimeUnit _timeUnit = TimeUnit.MILLISECONDS;
 	private String _uuid;
 
-	private Set<String> _targetClusterNodeIds;
 }

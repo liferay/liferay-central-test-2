@@ -26,22 +26,22 @@ import java.util.List;
  */
 public class ClusterEvent implements Serializable {
 
-	public static ClusterEvent join(ClusterNode... clusterNodes) {
-		return new ClusterEvent(
-			ClusterEventType.JOIN, Arrays.asList(clusterNodes));
-	}
-
 	public static ClusterEvent depart(ClusterNode... clusterNodes) {
 		return new ClusterEvent(
 			ClusterEventType.DEPART, Arrays.asList(clusterNodes));
 	}
 
-	public static ClusterEvent join(List<ClusterNode> clusterNodes) {
-		return new ClusterEvent(ClusterEventType.JOIN, clusterNodes);
-	}
-
 	public static ClusterEvent depart(List<ClusterNode> clusterNodes) {
 		return new ClusterEvent(ClusterEventType.DEPART, clusterNodes);
+	}
+
+	public static ClusterEvent join(ClusterNode... clusterNodes) {
+		return new ClusterEvent(
+			ClusterEventType.JOIN, Arrays.asList(clusterNodes));
+	}
+
+	public static ClusterEvent join(List<ClusterNode> clusterNodes) {
+		return new ClusterEvent(ClusterEventType.JOIN, clusterNodes);
 	}
 
 	public ClusterEvent(ClusterEventType clusterEventType) {
@@ -50,6 +50,7 @@ public class ClusterEvent implements Serializable {
 
 	public ClusterEvent(
 		ClusterEventType clusterEventType, List<ClusterNode> clusterNodes) {
+
 		_clusterEventType = clusterEventType;
 		_clusterNodes = clusterNodes;
 	}
@@ -68,4 +69,5 @@ public class ClusterEvent implements Serializable {
 
 	private ClusterEventType _clusterEventType;
 	private List<ClusterNode> _clusterNodes;
+
 }

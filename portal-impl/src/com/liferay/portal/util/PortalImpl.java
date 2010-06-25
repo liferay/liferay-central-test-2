@@ -4249,7 +4249,7 @@ public class PortalImpl implements Portal {
 		for (PortalPortEventListener portalPortEventListener :
 				_portalPortEventListeners) {
 
-			portalPortEventListener.configured(portalPort);
+			portalPortEventListener.portalPortConfigured(portalPort);
 		}
 	}
 

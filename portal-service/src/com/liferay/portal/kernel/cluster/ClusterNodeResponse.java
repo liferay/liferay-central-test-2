@@ -25,16 +25,16 @@ import java.io.Serializable;
  */
 public class ClusterNodeResponse implements Serializable {
 
+	public ClusterMessageType getClusterMessageType() {
+		return _clusterMessageType;
+	}
+
 	public ClusterNode getClusterNode() {
 		return _clusterNode;
 	}
 
 	public Exception getException() {
 		return _exception;
-	}
-
-	public ClusterMessageType getMessageType() {
-		return _messageType;
 	}
 
 	public Object getResult() {
@@ -46,11 +46,20 @@ public class ClusterNodeResponse implements Serializable {
 	}
 
 	public boolean hasException() {
-		return _exception != null;
+		if (_exception != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public boolean isMulticast() {
 		return _multicast;
+	}
+
+	public void setClusterMessageType(ClusterMessageType clusterMessageType) {
+		_clusterMessageType = clusterMessageType;
 	}
 
 	public void setClusterNode(ClusterNode clusterNode) {
@@ -59,10 +68,6 @@ public class ClusterNodeResponse implements Serializable {
 
 	public void setException(Exception exception) {
 		_exception = exception;
-	}
-
-	public void setMessageType(ClusterMessageType type) {
-		_messageType = type;
 	}
 
 	public void setMulticast(boolean multicast) {
@@ -80,16 +85,15 @@ public class ClusterNodeResponse implements Serializable {
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 
-		sb.append("{uuid=");
-		sb.append(_uuid);
-		sb.append(", message type=");
-		sb.append(_messageType);
+		sb.append("{clusterMessageType=");
+		sb.append(_clusterMessageType);
 		sb.append(", multicast=");
 		sb.append(_multicast);
+		sb.append(", uuid=");
+		sb.append(_uuid);
 
-		if ((_messageType != null) &&
-			(_messageType.equals(ClusterMessageType.NOTIFY) ||
-			_messageType.equals(ClusterMessageType.UPDATE))) {
+		if (_clusterMessageType.equals(ClusterMessageType.NOTIFY) ||
+			_clusterMessageType.equals(ClusterMessageType.UPDATE)) {
 
 			sb.append(", clusterNode=");
 			sb.append(_clusterNode);
@@ -110,9 +114,9 @@ public class ClusterNodeResponse implements Serializable {
 		return sb.toString();
 	}
 
+	private ClusterMessageType _clusterMessageType;
 	private ClusterNode _clusterNode;
 	private Exception _exception;
-	private ClusterMessageType _messageType;
 	private boolean _multicast;
 	private Object _result;
 	private String _uuid;

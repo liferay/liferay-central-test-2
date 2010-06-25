@@ -25,27 +25,25 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
  * <a href="DebuggingClusterEventListenerImpl.java.html"><b><i>View Source</i>
  * </b></a>
  *
- * This is used for testing purposes only
- *
  * @author Tina Tian
  */
 public class DebuggingClusterEventListenerImpl implements ClusterEventListener {
 
 	public void processClusterEvent(ClusterEvent clusterEvent) {
-		if (_log.isInfoEnabled()) {
-			if (clusterEvent.getClusterEventType().equals(ClusterEventType.JOIN)) {
-				_log.info("---JOIN----");
-			}
-			else {
-				_log.info("-----Depart!----");
-			}
+		if (!_log.isInfoEnabled()) {
+			return;
+		}
 
-			for (ClusterNode clusterNode: clusterEvent.getClusterNodes()) {
-				_log.info("-----clusterNode: ");
-				_log.info(clusterNode);
-			}
+		ClusterEventType clusterEventType = clusterEvent.getClusterEventType();
+
+		_log.info("Cluster event " + clusterEventType);
+
+		for (ClusterNode clusterNode : clusterEvent.getClusterNodes()) {
+			_log.info("Cluster node " + clusterNode);
 		}
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(DebuggingClusterEventListenerImpl.class);
+	private static final Log _log = LogFactoryUtil.getLog(
+		DebuggingClusterEventListenerImpl.class);
+
 }

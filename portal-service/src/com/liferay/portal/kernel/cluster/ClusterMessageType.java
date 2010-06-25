@@ -20,8 +20,7 @@ package com.liferay.portal.kernel.cluster;
  * @author Tina Tian
  */
 public enum ClusterMessageType {
-	EXECUTE,
-	NOTIFY,
-	UPDATE
+
+	EXECUTE, NOTIFY, UPDATE
 
 }

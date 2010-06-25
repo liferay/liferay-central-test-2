@@ -158,7 +158,8 @@ public class StartupAction extends SimpleAction {
 
 		JspFactorySwapper.swap();
 
-		// Cluster Executor
+		// Cluster executor
+
 		ClusterExecutorUtil.initialize();
 	}
 

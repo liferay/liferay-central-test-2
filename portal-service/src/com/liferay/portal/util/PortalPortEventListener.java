@@ -21,6 +21,6 @@ package com.liferay.portal.util;
  */
 public interface PortalPortEventListener {
 
-	public void configured(int port);
+	public void portalPortConfigured(int port);
 
 }

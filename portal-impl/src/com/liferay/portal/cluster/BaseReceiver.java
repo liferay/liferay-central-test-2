@@ -20,8 +20,7 @@ import org.jgroups.Receiver;
 import org.jgroups.View;
 
 /**
- * <a href="BaseReceiver.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="BaseReceiver.java.html"><b><i>View Source</i></b></a>
  *
  * @author Tina Tian
  */
@@ -34,13 +33,13 @@ public class BaseReceiver implements Receiver {
 		return null;
 	}
 
-	public void receive(Message msg) {
+	public void receive(Message message) {
 	}
 
-	public void setState(byte[] newState) {
+	public void setState(byte[] state) {
 	}
 
-	public void suspect(Address adrs) {
+	public void suspect(Address address) {
 	}
 
 	public void viewAccepted(View view) {

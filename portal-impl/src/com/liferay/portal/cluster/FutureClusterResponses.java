@@ -32,14 +32,15 @@ import java.util.concurrent.TimeoutException;
  */
 public class FutureClusterResponses implements Future<ClusterNodeResponses> {
 
-	public FutureClusterResponses(int numResults) {
-		_countDownLatch = new CountDownLatch(numResults);
-
+	public FutureClusterResponses(int count) {
+		_countDownLatch = new CountDownLatch(count);
 		_clusterNodeResponses = new ClusterNodeResponses();
 	}
 
-	public void addClusterResponse(ClusterNodeResponse nodeResponse) {
-		_clusterNodeResponses.addClusterResponse(nodeResponse);
+	public void addClusterNodeResponse(
+		ClusterNodeResponse clusterNodeResponse) {
+
+		_clusterNodeResponses.addClusterResponse(clusterNodeResponse);
 
 		_countDownLatch.countDown();
 	}
@@ -72,14 +73,14 @@ public class FutureClusterResponses implements Future<ClusterNodeResponses> {
 		return _clusterNodeResponses;
 	}
 
-	public ClusterNodeResponses get(long timeout, TimeUnit unit)
+	public ClusterNodeResponses get(long timeout, TimeUnit timeUnit)
 		throws InterruptedException, TimeoutException {
 
 		if (_cancelled) {
 			throw new CancellationException();
 		}
 
-		if (_countDownLatch.await(timeout, unit)) {
+		if (_countDownLatch.await(timeout, timeUnit)) {
 			return _clusterNodeResponses;
 		}
 		else {
@@ -99,13 +100,14 @@ public class FutureClusterResponses implements Future<ClusterNodeResponses> {
 		if ((_countDownLatch.getCount() == 0) || _cancelled) {
 			return true;
 		}
-
-		return false;
+		else {
+			return false;
+		}
 	}
 
 	private boolean _cancelled;
-	private CountDownLatch _countDownLatch;
 	private ClusterNodeResponses _clusterNodeResponses;
+	private CountDownLatch _countDownLatch;
 	private Set<Address> _expectedReplyAddress;
 
 }

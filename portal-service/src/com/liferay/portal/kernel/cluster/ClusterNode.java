@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.cluster;
 
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
@@ -32,19 +33,21 @@ public class ClusterNode implements Serializable {
 	}
 
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ClusterNode)) {
 			return false;
 		}
 
-		ClusterNode clusterNode = null;
+		ClusterNode clusterNode = (ClusterNode)obj;
 
-		try{
-			clusterNode = (ClusterNode)obj;
-			return _clusterNodeId.equals(clusterNode._clusterNodeId);
+		if (Validator.equals(_clusterNodeId, clusterNode._clusterNodeId)) {
+			return true;
 		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+
+		return false;
 	}
 
 	public String getClusterNodeId() {
@@ -82,11 +85,11 @@ public class ClusterNode implements Serializable {
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 
-		sb.append("{Id=");
+		sb.append("{clusterNodeId=");
 		sb.append(_clusterNodeId);
 		sb.append(", hostName=");
 		sb.append(_hostName);
-		sb.append(", ipAddress=");
+		sb.append(", inetAddress=");
 		sb.append(_inetAddress);
 		sb.append(", port=");
 		sb.append(_port);

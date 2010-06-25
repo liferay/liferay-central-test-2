@@ -20,5 +20,7 @@ package com.liferay.portal.kernel.cluster;
  * @author Tina Tian
  */
 public enum ClusterEventType {
+
 	DEPART, JOIN
+
 }

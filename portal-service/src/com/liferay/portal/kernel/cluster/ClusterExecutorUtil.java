@@ -78,6 +78,18 @@ public class ClusterExecutorUtil {
 		return _clusterExecutor.getLocalClusterNode();
 	}
 
+	public static void initialize() {
+		if ((_clusterExecutor == null) || !_clusterExecutor.isEnabled()) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("ClusterExecutorUtil has not been initialized");
+			}
+
+			return;
+		}
+
+		_clusterExecutor.initialize();
+	}
+
 	public static boolean isClusterNodeAlive(String clusterNodeId) {
 		if ((_clusterExecutor == null) || !_clusterExecutor .isEnabled()) {
 			if (_log.isWarnEnabled()) {
@@ -102,18 +114,6 @@ public class ClusterExecutorUtil {
 		return true;
 	}
 
-	public static void initialize() {
-		if ((_clusterExecutor == null) || !_clusterExecutor.isEnabled()) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("ClusterExecutorUtil has not been initialized");
-			}
-
-			return;
-		}
-
-		_clusterExecutor.initialize();
-	}
-
 	public static void removeClusterEventListener(
 		ClusterEventListener clusterEventListener) {
 
@@ -132,8 +132,8 @@ public class ClusterExecutorUtil {
 		_clusterExecutor = clusterExecutor;
 	}
 
-	private static ClusterExecutor _clusterExecutor;
-
 	private static Log _log = LogFactoryUtil.getLog(ClusterExecutorUtil.class);
+
+	private static ClusterExecutor _clusterExecutor;
 
 }
