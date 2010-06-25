@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
@@ -113,6 +114,11 @@ public class VerifyUUID extends VerifyProcess {
 			JournalTemplateLocalServiceUtil.class.getName(),
 			"JournalTemplate",
 			"id_"
+		},
+		new String[] {
+			LayoutLocalServiceUtil.class.getName(),
+			"Layout",
+			"plid"
 		},
 		new String[] {
 			WikiPageResourceLocalServiceUtil.class.getName(),
