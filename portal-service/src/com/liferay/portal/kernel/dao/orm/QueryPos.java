@@ -218,12 +218,15 @@ public class QueryPos {
 	}
 
 	public void add(Object obj) {
-		Class<?> classObj = obj.getClass();
-
 		if (obj == null) {
 			_addNull();
+
+			return;
 		}
-		else if (classObj == Boolean.class) {
+
+		Class<?> classObj = obj.getClass();
+
+		if (classObj == Boolean.class) {
 			add(((Boolean)obj).booleanValue());
 		}
 		else if (classObj == Date.class) {
