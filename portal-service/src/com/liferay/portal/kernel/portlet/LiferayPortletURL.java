@@ -19,8 +19,12 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
 
+import javax.portlet.PortletMode;
+import javax.portlet.PortletModeException;
 import javax.portlet.PortletURL;
 import javax.portlet.ResourceURL;
+import javax.portlet.WindowState;
+import javax.portlet.WindowStateException;
 
 /**
  * <a href="LiferayPortletURL.java.html"><b><i>View Source</i></b></a>
@@ -82,6 +86,14 @@ public interface LiferayPortletURL
 
 	public void setPortletId(String portletId);
 
+	public void setPortletMode(
+			PortletMode portletMode, boolean checkPortletMode)
+		throws PortletModeException;
+
 	public void setRefererPlid(long refererPlid);
+
+	public void setWindowState(
+			WindowState windowState, boolean checkWindowState)
+		throws WindowStateException;
 
 }

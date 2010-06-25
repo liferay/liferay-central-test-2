@@ -422,7 +422,7 @@ else {
 		urlEdit.setWindowState(WindowState.NORMAL);
 	}
 
-	urlEdit.setPortletMode(PortletMode.EDIT);
+	urlEdit.setPortletMode(PortletMode.EDIT, false);
 }
 
 urlEdit.setEscapeXml(false);
@@ -445,7 +445,7 @@ else {
 		urlEditDefaults.setWindowState(WindowState.NORMAL);
 	}
 
-	urlEditDefaults.setPortletMode(LiferayPortletMode.EDIT_DEFAULTS);
+	urlEditDefaults.setPortletMode(LiferayPortletMode.EDIT_DEFAULTS, false);
 }
 
 urlEditDefaults.setEscapeXml(false);
@@ -468,7 +468,7 @@ else {
 		urlEditGuest.setWindowState(WindowState.NORMAL);
 	}
 
-	urlEditGuest.setPortletMode(LiferayPortletMode.EDIT_GUEST);
+	urlEditGuest.setPortletMode(LiferayPortletMode.EDIT_GUEST, false);
 }
 
 urlEditGuest.setEscapeXml(false);
@@ -506,7 +506,7 @@ else {
 		urlHelp.setWindowState(WindowState.NORMAL);
 	}
 
-	urlHelp.setPortletMode(PortletMode.HELP);
+	urlHelp.setPortletMode(PortletMode.HELP, false);
 }
 
 urlHelp.setEscapeXml(false);
@@ -588,7 +588,7 @@ else {
 		urlPrint.setWindowState(WindowState.NORMAL);
 	}
 
-	urlPrint.setPortletMode(LiferayPortletMode.PRINT);
+	urlPrint.setPortletMode(LiferayPortletMode.PRINT, false);
 }
 
 urlPrint.setEscapeXml(false);

@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -90,6 +91,8 @@ public class PortletURLImpl implements LiferayPortletURL {
 		String lifecycle) {
 
 		_request = request;
+		_portletRequest = (PortletRequest)request.getAttribute(
+			JavaConstants.JAVAX_PORTLET_REQUEST);
 		_portletId = portletId;
 		_plid = plid;
 		_lifecycle = lifecycle;
@@ -112,14 +115,12 @@ public class PortletURLImpl implements LiferayPortletURL {
 	}
 
 	public PortletURLImpl(
-		PortletRequestImpl portletRequestImpl, String portletId, long plid,
+		PortletRequest portletRequest, String portletId, long plid,
 		String lifecycle) {
 
 		this(
-			portletRequestImpl.getHttpServletRequest(), portletId, plid,
+			PortalUtil.getHttpServletRequest(portletRequest), portletId, plid,
 			lifecycle);
-
-		_portletRequest = portletRequestImpl;
 	}
 
 	public void addParameterIncludedInPath(String name) {
@@ -547,7 +548,14 @@ public class PortletURLImpl implements LiferayPortletURL {
 	public void setPortletMode(PortletMode portletMode)
 		throws PortletModeException {
 
-		if (_portletRequest != null) {
+		setPortletMode(portletMode, true);
+	}
+
+	public void setPortletMode(
+			PortletMode portletMode, boolean checkPortletMode)
+		throws PortletModeException {
+
+		if (checkPortletMode && (_portletRequest != null)) {
 			if (!getPortlet().hasPortletMode(
 					_portletRequest.getResponseContentType(), portletMode)) {
 
@@ -594,7 +602,14 @@ public class PortletURLImpl implements LiferayPortletURL {
 	public void setWindowState(WindowState windowState)
 		throws WindowStateException {
 
-		if (_portletRequest != null) {
+		setWindowState(windowState, true);
+	}
+
+	public void setWindowState(
+			WindowState windowState, boolean checkWindowState)
+		throws WindowStateException {
+
+		if (checkWindowState && (_portletRequest != null)) {
 			if (!_portletRequest.isWindowStateAllowed(windowState)) {
 				throw new WindowStateException(
 					windowState.toString(), windowState);
