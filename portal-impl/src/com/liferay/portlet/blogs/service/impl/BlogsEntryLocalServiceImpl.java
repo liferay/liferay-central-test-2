@@ -41,6 +41,7 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portal.util.Portal;
@@ -608,6 +609,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				BlogsEntry.class.getName(), entryId, true);
 
 			// Social
+
+			socialEquityLogLocalService.addEquityLogs(
+				userId, BlogsEntry.class.getName(), entryId,
+				ActionKeys.ADD_ENTRY);
 
 			socialActivityLocalService.addUniqueActivity(
 				entry.getUserId(), entry.getGroupId(),
