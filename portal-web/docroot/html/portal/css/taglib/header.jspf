@@ -15,9 +15,18 @@
 %>
 
 .taglib-header .header-title {
-	border-bottom: 1px solid #AAA;
+	margin: 0.1em;
 }
 
-.taglib-header .header-back-to {
+.taglib-header .header-back-to a {
 	float: right;
+	font-weight: bold;
+	padding: 1em 0.2em;
+	text-decoration: none;
+}
+
+.taglib-header {
+	border-bottom: 1px solid #C8C9CA;
+	margin-bottom: 1em;
+	color: #555;
 }
