@@ -88,6 +88,7 @@ public class ClusterInvokeReceiver extends ReceiverAdapter {
 				MethodWrapper methodWrapper = (MethodWrapper)payload;
 
 				try {
+					ClusterInvokeThreadLocal.setClusterInvoke(true);
 					Object returnValue = MethodInvoker.invoke(methodWrapper);
 
 					if (returnValue instanceof Serializable) {
@@ -101,6 +102,9 @@ public class ClusterInvokeReceiver extends ReceiverAdapter {
 				}
 				catch (Exception e) {
 					clusterResponse.setException(e);
+				}
+				finally {
+					ClusterInvokeThreadLocal.setClusterInvoke(false);
 				}
 			}
 			else {
