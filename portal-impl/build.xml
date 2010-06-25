@@ -319,18 +319,6 @@
 		</java>
 	</target>
 
-	<target name="build-reverendfun" if="release.info">
-		<java
-			classname="com.liferay.portlet.reverendfun.tools.ReverendFunBuilder"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true"
-		>
-			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
-		</java>
-	</target>
-
 	<target name="build-selenium">
 		<ant dir="../portal-web" target="build-selenium" />
 	</target>

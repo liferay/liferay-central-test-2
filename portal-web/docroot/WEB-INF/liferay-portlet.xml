@@ -33,16 +33,6 @@
 		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
-		<portlet-name>6</portlet-name>
-		<icon>/html/icons/default.png</icon>
-		<struts-path>reverend_fun</struts-path>
-		<remoteable>true</remoteable>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>50</render-weight>
-		<css-class-wrapper>portlet-reverend-fun</css-class-wrapper>
-	</portlet>
-	<portlet>
 		<portlet-name>8</portlet-name>
 		<icon>/html/icons/calendar.png</icon>
 		<struts-path>calendar</struts-path>

@@ -751,7 +751,6 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djonas.felix.configuration.file="%JONAS_ROOT
 		<ant dir="sql" target="build-db" inheritAll="false" />
 		<ant dir="sql" target="rebuild-hypersonic" inheritAll="false" />
 
-		<ant dir="portal-impl" target="build-reverendfun" inheritAll="false" />
 		<ant dir="portal-impl" target="build-themes" inheritAll="false" />
 
 		<antcall target="jar" />
