@@ -185,7 +185,6 @@ import java.util.Set;
 import java.util.TimeZone;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -530,7 +529,7 @@ public class PortalImpl implements Portal {
 		if (!_portalPortEventListeners.contains(portalPortEventListener)) {
 			_portalPortEventListeners.add(portalPortEventListener);
 		}
-	}	
+	}
 
 	public void addPortletBreadcrumbEntry(
 		HttpServletRequest request, String title, String url) {
@@ -3576,7 +3575,6 @@ public class PortalImpl implements Portal {
 		PortalPortEventListener portalPortEventListener) {
 
 		_portalPortEventListeners.remove(portalPortEventListener);
-
 	}
 
 	public String renderPage(
@@ -4251,7 +4249,7 @@ public class PortalImpl implements Portal {
 		for (PortalPortEventListener portalPortEventListener :
 				_portalPortEventListeners) {
 
-			portalPortEventListener.portalPortConfigured(portalPort);
+			portalPortEventListener.configured(portalPort);
 		}
 	}
 
@@ -4500,7 +4498,7 @@ public class PortalImpl implements Portal {
 	private String _portalLibDir;
 	private volatile int _portalPort = -1;
 	private List<PortalPortEventListener> _portalPortEventListeners =
-		new CopyOnWriteArrayList<PortalPortEventListener>();
+		new ArrayList<PortalPortEventListener>();
 	private Lock _portalPortLock = new ReentrantLock();
 	private String _portalWebDir;
 	private Set<String> _portletAddDefaultResourceCheckWhitelist;

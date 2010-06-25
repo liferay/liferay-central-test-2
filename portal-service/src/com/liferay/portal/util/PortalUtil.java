@@ -1090,6 +1090,12 @@ public class PortalUtil {
 		return getPortal().isUpdateAvailable();
 	}
 
+	public void removePortalPortEventListener(
+		PortalPortEventListener portalPortEventListener) {
+
+		getPortal().removePortalPortEventListener(portalPortEventListener);
+	}
+
 	public static String renderPage(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response, String path, boolean writeOutput)
