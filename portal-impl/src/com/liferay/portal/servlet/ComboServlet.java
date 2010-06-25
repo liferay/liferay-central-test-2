@@ -125,7 +125,7 @@ public class ComboServlet extends HttpServlet {
 		return null;
 	}
 
-	private byte[] getFileContent(String path, String minifierType)
+	protected byte[] getFileContent(String path, String minifierType)
 		throws IOException {
 
 		String fileContentKey = path.concat(StringPool.QUESTION).concat(
@@ -152,7 +152,7 @@ public class ComboServlet extends HttpServlet {
 			}
  		}
 
-		if (fileContentBag == null) {
+		if (file == null) {
 			fileContentBag = _EMPTY_FILE_CONTENT_BAG;
 		}
 		else {
