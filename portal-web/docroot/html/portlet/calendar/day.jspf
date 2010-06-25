@@ -140,6 +140,10 @@ if (!partDayResults.isEmpty()) {
 
 		Date startDate = event.getStartDate();
 
+		if (event.isTimeZoneSensitive()) {
+				startDate = Time.getDate(event.getStartDate(), timeZone);
+		}
+
 		int startDateScore = (startDate.getHours() * 60) + startDate.getMinutes();
 
 		for (int j = 0; j < sortedResults.size(); j++) {
@@ -148,6 +152,10 @@ if (!partDayResults.isEmpty()) {
 			CalEvent curEvent = (CalEvent)curEvents.get(curEvents.size() - 1);
 
 			Date curStartDate = curEvent.getStartDate();
+
+			if (curEvent.isTimeZoneSensitive()) {
+				curStartDate = Time.getDate(curEvent.getStartDate(), timeZone);
+			}
 
 			int curStartDateScore = (curStartDate.getHours() * 60) + curStartDate.getMinutes() + (curEvent.getDurationHour() * 60) + curEvent.getDurationMinute();
 
