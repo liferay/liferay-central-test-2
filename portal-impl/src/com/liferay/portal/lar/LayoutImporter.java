@@ -734,9 +734,11 @@ public class LayoutImporter {
 			importedLayout.setPrivateLayout(privateLayout);
 			importedLayout.setLayoutId(layoutId);
 
-			long iconImageId = CounterLocalServiceUtil.increment();
+			if (layout.isIconImage()) {
+				long iconImageId = CounterLocalServiceUtil.increment();
 
-			importedLayout.setIconImageId(iconImageId);
+				importedLayout.setIconImageId(iconImageId);
+			}
 		}
 		else {
 			importedLayout = existingLayout;
