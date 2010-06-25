@@ -993,9 +993,9 @@ public class ServiceBuilder {
 
 					System.out.println("Building " + entity.getName());
 
-					if (true ||
+					if (true) {/* ||
 						entity.getName().equals("EmailAddress") ||
-						entity.getName().equals("User")) {
+						entity.getName().equals("User")) {*/
 
 						if (entity.hasColumns()) {
 							_createHbm(entity);
