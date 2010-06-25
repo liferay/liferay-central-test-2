@@ -884,11 +884,9 @@ public class ServiceBuilder {
 
 						String finderColName =
 							finderColEl.attributeValue("name");
-
 						boolean finderColCaseSensitive = GetterUtil.getBoolean(
 							finderColEl.attributeValue("case-sensitive"),
 							true);
-
 						String finderColComparator = GetterUtil.getString(
 							finderColEl.attributeValue("comparator"), "=");
 
