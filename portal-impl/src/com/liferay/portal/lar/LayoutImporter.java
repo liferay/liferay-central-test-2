@@ -666,7 +666,7 @@ public class LayoutImporter {
 
 		Layout layout = (Layout)context.getZipEntryAsObject(path);
 
-		Layout exsistingLayout = null;
+		Layout existingLayout = null;
 		Layout importedLayout = null;
 
 		String friendlyURL = layout.getFriendlyURL();
@@ -688,22 +688,22 @@ public class LayoutImporter {
 
 			for (Layout curLayout : previousLayouts) {
 				if (curLayout.getName(locale).equals(localizedName)) {
-					exsistingLayout = curLayout;
+					existingLayout = curLayout;
 
 					break;
 				}
 			}
 
-			if (exsistingLayout == null) {
+			if (existingLayout == null) {
 				layoutId = LayoutLocalServiceUtil.getNextLayoutId(
 					groupId, privateLayout);
 			}
 		}
 		else {
-			exsistingLayout = LayoutUtil.fetchByUUID_G(
+			existingLayout = LayoutUtil.fetchByUUID_G(
 				layout.getUuid(), groupId);
 
-			if (exsistingLayout == null) {
+			if (existingLayout == null) {
 				layoutId = LayoutLocalServiceUtil.getNextLayoutId(
 					groupId, privateLayout);
 			}
@@ -724,7 +724,7 @@ public class LayoutImporter {
 			}
 		}
 
-		if (exsistingLayout == null) {
+		if (existingLayout == null) {
 			long plid = CounterLocalServiceUtil.increment();
 
 			importedLayout = LayoutUtil.create(plid);
@@ -739,7 +739,7 @@ public class LayoutImporter {
 			importedLayout.setIconImageId(iconImageId);
 		}
 		else {
-			importedLayout = exsistingLayout;
+			importedLayout = existingLayout;
 		}
 
 		newLayoutsMap.put(oldLayoutId, importedLayout);
