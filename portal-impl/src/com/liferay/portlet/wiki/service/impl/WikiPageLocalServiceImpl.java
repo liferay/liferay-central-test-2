@@ -1239,23 +1239,20 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			// Social
 
 			int activity = WikiActivityKeys.ADD_PAGE;
+			String actionId = ActionKeys.ADD_PAGE;
 
 			if (page.getVersion() > 1.1) {
 				activity = WikiActivityKeys.UPDATE_PAGE;
-
-				socialEquityLogLocalService.addEquityLogs(
-					userId, WikiPage.class.getName(), page.getResourcePrimKey(),
-					ActionKeys.UPDATE);
-			}
-			else {
-				socialEquityLogLocalService.addEquityLogs(
-					userId, WikiPage.class.getName(), page.getResourcePrimKey(),
-					ActionKeys.ADD_PAGE);
+				actionId = ActionKeys.UPDATE;
 			}
 
 			socialActivityLocalService.addActivity(
 				userId, page.getGroupId(), WikiPage.class.getName(),
 				page.getResourcePrimKey(), activity, StringPool.BLANK, 0);
+
+			socialEquityLogLocalService.addEquityLogs(
+				userId, WikiPage.class.getName(), page.getResourcePrimKey(),
+				actionId);
 
 			// Subscriptions
 
