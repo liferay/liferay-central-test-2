@@ -523,11 +523,21 @@ public class SocialEquityLogLocalServiceImpl
 
 		public void processRow(ResultSet rs) throws SQLException {
 			long equityUserId = rs.getLong(1);
-			long rank = rs.getLong(2);
+			long groupId = rs.getLong(2);
 
-			_updateRanksSetter.add(equityUserId, rank);
+			if (groupId == _groupId) {
+				_rank++;
+			}
+			else {
+				_groupId = groupId;
+				_rank = 1;
+			}
+
+			_updateRanksSetter.add(equityUserId, _rank);
 		}
 
+		private long _groupId;
+		private long _rank;
 		private UpdateRanksSetter _updateRanksSetter;
 
 	}
