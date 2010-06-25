@@ -15,6 +15,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 
 import java.util.Map;
@@ -62,6 +63,14 @@ public class ResourceRequestImpl
 		InvokerPortlet invokerPortlet, PortletContext portletContext,
 		WindowState windowState, PortletMode portletMode,
 		PortletPreferences preferences, long plid) {
+
+		if (Validator.isNull(windowState.toString())) {
+			windowState = WindowState.NORMAL;
+		}
+
+		if (Validator.isNull(portletMode.toString())) {
+			portletMode = PortletMode.VIEW;
+		}
 
 		super.init(
 			request, portlet, invokerPortlet, portletContext, windowState,
