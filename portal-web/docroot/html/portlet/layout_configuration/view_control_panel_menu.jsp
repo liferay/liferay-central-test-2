@@ -222,7 +222,18 @@
 					%>
 
 							<li class="<%= ppid.equals(portlet.getPortletId()) ? "selected-portlet" : "" %>">
-								<a href="<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= portlet.getRootPortletId() %>" />"><liferay-portlet:icon-portlet portlet="<%= portlet %>" /><%= PortalUtil.getPortletTitle(portlet, application, locale) %></a>
+								<a href="<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= portlet.getRootPortletId() %>" />">
+
+								<c:choose>
+									<c:when test="<%= Validator.isNull(portlet.getIcon()) %>">
+										<liferay-ui:icon src='<%= themeDisplay.getPathContext() + "/html/icons/default.png" %>' />
+									</c:when>
+									<c:otherwise>
+										<liferay-portlet:icon-portlet portlet="<%= portlet %>" />
+									</c:otherwise>
+								</c:choose>
+
+								<%= PortalUtil.getPortletTitle(portlet, application, locale) %></a>
 							</li>
 
 					<%
