@@ -81,7 +81,7 @@ public class LayoutSetPrototypeLocalServiceImpl
 		ServiceContext serviceContext = new ServiceContext();
 
 		layoutLocalService.addLayout(
-			userId, group.getGroupId(), true,
+			null, userId, group.getGroupId(), true,
 			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, "home", null, null,
 			LayoutConstants.TYPE_PORTLET, false, "/home", serviceContext);
 

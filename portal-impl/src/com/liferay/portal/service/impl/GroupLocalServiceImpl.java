@@ -996,7 +996,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		ServiceContext serviceContext = new ServiceContext();
 
 		layoutLocalService.addLayout(
-			defaultUserId, group.getGroupId(), true,
+			null, defaultUserId, group.getGroupId(), true,
 			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
 			PropsValues.CONTROL_PANEL_LAYOUT_NAME, StringPool.BLANK,
 			StringPool.BLANK, LayoutConstants.TYPE_CONTROL_PANEL, false,
@@ -1014,7 +1014,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		ServiceContext serviceContext = new ServiceContext();
 
 		Layout layout = layoutLocalService.addLayout(
-			defaultUserId, group.getGroupId(), false,
+			null, defaultUserId, group.getGroupId(), false,
 			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
 			PropsValues.DEFAULT_GUEST_PUBLIC_LAYOUT_NAME, StringPool.BLANK,
 			StringPool.BLANK, LayoutConstants.TYPE_PORTLET, false, friendlyURL,
