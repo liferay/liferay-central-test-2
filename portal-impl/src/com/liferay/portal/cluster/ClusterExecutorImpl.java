@@ -89,7 +89,8 @@ public class ClusterExecutorImpl
 			_controlChannel.send(null, null, clusterRequest);
 		}
 		catch (ChannelException ce) {
-			_log.error("Unable to send unicast message " + clusterRequest, ce);
+			_log.error("Unable to send multicast message " + clusterRequest,
+				ce);
 		}
 
 		return results;
