@@ -84,7 +84,7 @@ if (Validator.isNotNull(historyKey)) {
 					<aui:button onClick='<%= renderResponse.getNamespace() + "saveCompany();" %>' value="save" />
 
 					<%
-					PortletURL portletURL = renderResponse.createRenderURL();
+					PortletURL portletURL = new PortletURLImpl(request, PortletKeys.ENTERPRISE_ADMIN_SETTINGS, plid, PortletRequest.RENDER_PHASE);
 					%>
 
 					<aui:button onClick="<%= portletURL.toString() %>" type="cancel" />

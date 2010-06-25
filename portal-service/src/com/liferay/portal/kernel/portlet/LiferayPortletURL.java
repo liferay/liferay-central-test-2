@@ -19,12 +19,8 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
 
-import javax.portlet.PortletMode;
-import javax.portlet.PortletModeException;
 import javax.portlet.PortletURL;
 import javax.portlet.ResourceURL;
-import javax.portlet.WindowState;
-import javax.portlet.WindowStateException;
 
 /**
  * <a href="LiferayPortletURL.java.html"><b><i>View Source</i></b></a>
@@ -39,8 +35,6 @@ public interface LiferayPortletURL
 	public String getLifecycle();
 
 	public String getParameter(String name);
-
-	public Set<String> getParametersIncludedInPath();
 
 	public String getPortletId();
 
@@ -60,10 +54,15 @@ public interface LiferayPortletURL
 
 	public boolean isSecure();
 
-	public void setAnchor(boolean anchor);
+	public void setLifecycle(String lifecycle);
 
-	public void setCopyCurrentPublicRenderParameters(
-		boolean copyCurrentPublicRenderParameters);
+	public void setParameter(String name, String value, boolean append);
+
+	public void setParameter(String name, String[] values, boolean append);
+
+	public Set<String> getParametersIncludedInPath();
+
+	public void setAnchor(boolean anchor);
 
 	public void setCopyCurrentRenderParameters(
 		boolean copyCurrentRenderParameters);
@@ -76,24 +75,8 @@ public interface LiferayPortletURL
 
 	public void setEscapeXml(boolean escapeXml);
 
-	public void setLifecycle(String lifecycle);
-
-	public void setParameter(String name, String value, boolean append);
-
-	public void setParameter(String name, String[] values, boolean append);
-
 	public void setPlid(long plid);
 
 	public void setPortletId(String portletId);
-
-	public void setPortletMode(
-			PortletMode portletMode, boolean checkPortletMode)
-		throws PortletModeException;
-
-	public void setRefererPlid(long refererPlid);
-
-	public void setWindowState(
-			WindowState windowState, boolean checkWindowState)
-		throws WindowStateException;
 
 }

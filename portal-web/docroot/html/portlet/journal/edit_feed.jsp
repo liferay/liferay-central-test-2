@@ -83,14 +83,12 @@ double feedVersion = BeanParamUtil.getDouble(feed, request, "feedVersion", RSSUt
 String orderByCol = BeanParamUtil.getString(feed, request, "orderByCol");
 String orderByType = BeanParamUtil.getString(feed, request, "orderByType");
 
-LiferayPortletURL feedURL = null;
+ResourceURL feedURL = null;
 
 if (feed != null) {
 	long targetLayoutPlid = PortalUtil.getPlidFromFriendlyURL(feed.getCompanyId(), feed.getTargetLayoutFriendlyUrl());
 
-	feedURL = (LiferayPortletURL)renderResponse.createResourceURL();
-
-	feedURL.setPlid(targetLayoutPlid);
+	feedURL = new PortletURLImpl(request, PortletKeys.JOURNAL, targetLayoutPlid, PortletRequest.RESOURCE_PHASE);
 
 	feedURL.setCacheability(ResourceURL.FULL);
 

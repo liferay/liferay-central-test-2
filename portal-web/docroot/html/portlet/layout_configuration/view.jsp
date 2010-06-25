@@ -87,7 +87,7 @@
 
 						long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(controlPanelGroup.getGroupId(), true);
 
-						LiferayPortletURL pluginsURL = PortletURLFactoryUtil.create(request, PortletKeys.PLUGIN_INSTALLER, controlPanelPlid, PortletRequest.RENDER_PHASE);
+						PortletURLImpl pluginsURL = new PortletURLImpl(request, PortletKeys.PLUGIN_INSTALLER, controlPanelPlid, PortletRequest.RENDER_PHASE);
 
 						pluginsURL.setPortletMode(PortletMode.VIEW);
 						pluginsURL.setRefererPlid(plid);

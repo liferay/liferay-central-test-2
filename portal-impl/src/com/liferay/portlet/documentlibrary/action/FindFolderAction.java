@@ -22,7 +22,7 @@ import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.PortletURLFactoryUtil;
+import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 
@@ -58,7 +58,7 @@ public class FindFolderAction extends Action {
 
 			plid = getPlid(plid, groupId, folderId);
 
-			PortletURL portletURL = PortletURLFactoryUtil.create(
+			PortletURL portletURL = new PortletURLImpl(
 				request, PortletKeys.DOCUMENT_LIBRARY, plid,
 				PortletRequest.RENDER_PHASE);
 

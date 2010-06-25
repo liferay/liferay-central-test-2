@@ -23,7 +23,7 @@ Group group = themeDisplay.getScopeGroup();
 
 String keywords = ParamUtil.getString(request, namespace + "keywords");
 
-PortletURL portletURL = PortletURLFactoryUtil.create(request, PortletKeys.SEARCH, plid, PortletRequest.RENDER_PHASE);
+PortletURL portletURL = new PortletURLImpl(request, PortletKeys.SEARCH, plid, PortletRequest.RENDER_PHASE);
 
 portletURL.setWindowState(WindowState.MAXIMIZED);
 portletURL.setPortletMode(PortletMode.VIEW);

@@ -25,7 +25,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletURLFactoryUtil;
+import com.liferay.portlet.PortletURLImpl;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
@@ -79,7 +79,7 @@ public class LoginAction extends Action {
 		}
 
 		if (Validator.isNull(redirect)) {
-			PortletURL portletURL = PortletURLFactoryUtil.create(
+			PortletURL portletURL = new PortletURLImpl(
 				request, PortletKeys.LOGIN, themeDisplay.getPlid(),
 				PortletRequest.RENDER_PHASE);
 

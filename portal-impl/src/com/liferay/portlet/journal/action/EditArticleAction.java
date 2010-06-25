@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.journal.action;
 
-import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
@@ -38,8 +37,9 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portlet.PortletURLFactoryUtil;
+import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.journal.ArticleContentException;
@@ -319,26 +319,23 @@ public class EditArticleAction extends PortletAction {
 		String originalRedirect = ParamUtil.getString(
 			actionRequest, "originalRedirect");
 
-		LiferayPortletURL liferayPortletURL = PortletURLFactoryUtil.create(
-			actionRequest, portletConfig.getPortletName(),
+		PortletURLImpl portletURL = new PortletURLImpl(
+			(ActionRequestImpl)actionRequest, portletConfig.getPortletName(),
 			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
-		liferayPortletURL.setWindowState(WindowState.MAXIMIZED);
+		portletURL.setWindowState(WindowState.MAXIMIZED);
 
-		liferayPortletURL.setParameter(
-			"struts_action", "/journal/edit_article");
-		liferayPortletURL.setParameter(Constants.CMD, Constants.UPDATE, false);
-		liferayPortletURL.setParameter("redirect", redirect, false);
-		liferayPortletURL.setParameter(
-			"originalRedirect", originalRedirect, false);
-		liferayPortletURL.setParameter(
+		portletURL.setParameter("struts_action", "/journal/edit_article");
+		portletURL.setParameter(Constants.CMD, Constants.UPDATE, false);
+		portletURL.setParameter("redirect", redirect, false);
+		portletURL.setParameter("originalRedirect", originalRedirect, false);
+		portletURL.setParameter(
 			"groupId", String.valueOf(article.getGroupId()), false);
-		liferayPortletURL.setParameter(
-			"articleId", article.getArticleId(), false);
-		liferayPortletURL.setParameter(
+		portletURL.setParameter("articleId", article.getArticleId(), false);
+		portletURL.setParameter(
 			"version", String.valueOf(article.getVersion()), false);
 
-		return liferayPortletURL.toString();
+		return portletURL.toString();
 	}
 
 	protected void removeArticlesLocale(ActionRequest actionRequest)

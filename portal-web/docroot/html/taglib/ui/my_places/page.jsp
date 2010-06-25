@@ -32,7 +32,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 	<ul class="taglib-my-places">
 
 		<%
-		PortletURL portletURL = PortletURLFactoryUtil.create(request, PortletKeys.MY_PLACES, plid, PortletRequest.ACTION_PHASE);
+		PortletURL portletURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid, PortletRequest.ACTION_PHASE);
 
 		portletURL.setWindowState(WindowState.NORMAL);
 		portletURL.setPortletMode(PortletMode.VIEW);
@@ -57,7 +57,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 				organization = OrganizationLocalServiceUtil.getOrganization(myPlace.getClassPK());
 
 				if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.MANAGE_LAYOUTS)) {
-					PortletURL addPageURL = PortletURLFactoryUtil.create(request, PortletKeys.MY_PLACES, plid, PortletRequest.ACTION_PHASE);
+					PortletURL addPageURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid, PortletRequest.ACTION_PHASE);
 
 					addPageURL.setWindowState(WindowState.NORMAL);
 					addPageURL.setPortletMode(PortletMode.VIEW);
@@ -76,7 +76,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 			}
 			else if (regularCommunity) {
 				if (GroupPermissionUtil.contains(permissionChecker, myPlace.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
-					PortletURL addPageURL = PortletURLFactoryUtil.create(request, PortletKeys.MY_PLACES, plid, PortletRequest.ACTION_PHASE);
+					PortletURL addPageURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid, PortletRequest.ACTION_PHASE);
 
 					addPageURL.setWindowState(WindowState.NORMAL);
 					addPageURL.setPortletMode(PortletMode.VIEW);
@@ -94,7 +94,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 				}
 			}
 			else if (userCommunity) {
-				PortletURL publicAddPageURL = PortletURLFactoryUtil.create(request, PortletKeys.MY_ACCOUNT, plid, PortletRequest.RENDER_PHASE);
+				PortletURL publicAddPageURL = new PortletURLImpl(request, PortletKeys.MY_ACCOUNT, plid, PortletRequest.RENDER_PHASE);
 
 				publicAddPageURL.setWindowState(WindowState.MAXIMIZED);
 				publicAddPageURL.setPortletMode(PortletMode.VIEW);
@@ -108,7 +108,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 
 				long privateAddPagePlid = myPlace.getDefaultPrivatePlid();
 
-				PortletURL privateAddPageURL = PortletURLFactoryUtil.create(request, PortletKeys.MY_ACCOUNT, plid, PortletRequest.RENDER_PHASE);
+				PortletURL privateAddPageURL = new PortletURLImpl(request, PortletKeys.MY_ACCOUNT, plid, PortletRequest.RENDER_PHASE);
 
 				privateAddPageURL.setWindowState(WindowState.MAXIMIZED);
 				privateAddPageURL.setPortletMode(PortletMode.VIEW);

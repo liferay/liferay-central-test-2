@@ -42,9 +42,7 @@ String selResourceDescription = modelResourceDescription;
 String selResourceName = modelResourceName;
 
 if (Validator.isNull(modelResource)) {
-	LiferayPortletURL portletURL = (LiferayPortletURL)renderResponse.createRenderURL();
-
-	portletURL.setPortletId(portletResource);
+	PortletURL portletURL = new PortletURLImpl(request, portletResource, plid, PortletRequest.RENDER_PHASE);
 
 	portletURL.setWindowState(WindowState.NORMAL);
 	portletURL.setPortletMode(PortletMode.VIEW);

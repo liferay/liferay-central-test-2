@@ -34,7 +34,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletURLFactoryUtil;
+import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.login.util.LoginUtil;
 
 import javax.portlet.PortletRequest;
@@ -80,7 +80,7 @@ public class UpdatePasswordAction extends Action {
 		try {
 			updatePassword(request, response, themeDisplay, ticket);
 
-			PortletURL portletURL = PortletURLFactoryUtil.create(
+			PortletURL portletURL = new PortletURLImpl(
 				request, PortletKeys.LOGIN, themeDisplay.getPlid(),
 				PortletRequest.RENDER_PHASE);
 

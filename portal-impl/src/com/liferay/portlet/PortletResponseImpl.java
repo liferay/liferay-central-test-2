@@ -14,6 +14,8 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -21,28 +23,40 @@ import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletApp;
+import com.liferay.portal.model.PortletURLListener;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
 import java.io.Writer;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.portlet.MimeResponse;
+import javax.portlet.PortletException;
+import javax.portlet.PortletModeException;
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
+import javax.portlet.PortletURLGenerationListener;
 import javax.portlet.ResourceURL;
+import javax.portlet.WindowStateException;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -237,8 +251,129 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 	public LiferayPortletURL createLiferayPortletURL(
 		long plid, String portletName, String lifecycle) {
 
-		return PortletURLFactoryUtil.create(
-			_portletRequestImpl, portletName, plid, lifecycle);
+		try {
+			Layout layout = (Layout)_portletRequestImpl.getAttribute(
+				WebKeys.LAYOUT);
+
+			PortletPreferences portletSetup =
+				PortletPreferencesFactoryUtil.getLayoutPortletSetup(
+					layout, _portletName);
+
+			long layoutId = GetterUtil.getLong(portletSetup.getValue(
+				"portlet-setup-link-to-layout-id", null));
+
+			if (layoutId > 0) {
+				try {
+					Layout linkedLayout = LayoutLocalServiceUtil.getLayout(
+						layout.getGroupId(), layout.isPrivateLayout(),
+						layoutId);
+
+					plid = linkedLayout.getPlid();
+				}
+				catch (PortalException pe) {
+				}
+			}
+			else {
+
+				// Backwards compatibility
+
+				plid = GetterUtil.getLong(portletSetup.getValue(
+					"portlet-setup-link-to-plid", String.valueOf(plid)));
+			}
+		}
+		catch (SystemException e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
+		}
+
+		if (plid == LayoutConstants.DEFAULT_PLID) {
+			plid = _plid;
+		}
+
+		PortletURLImpl portletURLImpl = null;
+
+		Portlet portlet = getPortlet();
+
+		String portletURLClass = portlet.getPortletURLClass();
+
+		if (portlet.getPortletId().equals(portletName) &&
+			Validator.isNotNull(portletURLClass)) {
+
+			try {
+				Class<?> portletURLClassObj = Class.forName(portletURLClass);
+
+				Constructor<?> constructor = portletURLClassObj.getConstructor(
+					new Class[] {
+						com.liferay.portlet.PortletResponseImpl.class,
+						long.class, String.class
+					});
+
+				portletURLImpl = (PortletURLImpl)constructor.newInstance(
+					new Object[] {this, plid, lifecycle});
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (portletURLImpl == null) {
+			portletURLImpl = new PortletURLImpl(
+				_portletRequestImpl, portletName, plid, lifecycle);
+		}
+
+		PortletApp portletApp = portlet.getPortletApp();
+
+		Set<PortletURLListener> portletURLListeners =
+			portletApp.getPortletURLListeners();
+
+		for (PortletURLListener portletURLListener : portletURLListeners) {
+			try {
+				PortletURLGenerationListener portletURLGenerationListener =
+					PortletURLListenerFactory.create(portletURLListener);
+
+				if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
+					portletURLGenerationListener.filterActionURL(
+						portletURLImpl);
+				}
+				else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
+					portletURLGenerationListener.filterRenderURL(
+						portletURLImpl);
+				}
+				else if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+					portletURLGenerationListener.filterResourceURL(
+						portletURLImpl);
+				}
+			}
+			catch (PortletException pe) {
+				_log.error(pe, pe);
+			}
+		}
+
+		try {
+			portletURLImpl.setWindowState(_portletRequestImpl.getWindowState());
+		}
+		catch (WindowStateException wse) {
+			_log.error(wse.getMessage());
+		}
+
+		try {
+			portletURLImpl.setPortletMode(_portletRequestImpl.getPortletMode());
+		}
+		catch (PortletModeException pme) {
+			_log.error(pme.getMessage());
+		}
+
+		if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
+			portletURLImpl.setCopyCurrentPublicRenderParameters(true);
+		}
+
+		if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+			portletURLImpl.setCopyCurrentPublicRenderParameters(true);
+			portletURLImpl.setCopyCurrentRenderParameters(true);
+		}
+
+		return portletURLImpl;
 	}
 
 	public LiferayPortletURL createLiferayPortletURL(String lifecycle) {

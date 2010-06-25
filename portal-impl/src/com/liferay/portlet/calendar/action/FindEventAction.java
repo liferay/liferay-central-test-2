@@ -23,7 +23,7 @@ import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.PortletURLFactoryUtil;
+import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 
@@ -59,7 +59,7 @@ public class FindEventAction extends Action {
 
 			plid = getPlid(plid, eventId);
 
-			PortletURL portletURL = PortletURLFactoryUtil.create(
+			PortletURL portletURL = new PortletURLImpl(
 				request, PortletKeys.CALENDAR, plid,
 				PortletRequest.RENDER_PHASE);
 

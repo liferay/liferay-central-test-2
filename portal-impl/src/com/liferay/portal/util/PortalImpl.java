@@ -137,7 +137,7 @@ import com.liferay.portlet.PortletPreferencesWrapper;
 import com.liferay.portlet.PortletQNameUtil;
 import com.liferay.portlet.PortletRequestImpl;
 import com.liferay.portlet.PortletResponseImpl;
-import com.liferay.portlet.PortletURLFactoryUtil;
+import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.portlet.UserAttributes;
@@ -3159,7 +3159,7 @@ public class PortalImpl implements Portal {
 			if (request != null) {
 				Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
 
-				PortletURL portletURL = PortletURLFactoryUtil.create(
+				PortletURL portletURL = new PortletURLImpl(
 					request, PortletKeys.DIRECTORY, layout.getPlid(),
 					PortletRequest.RENDER_PHASE);
 

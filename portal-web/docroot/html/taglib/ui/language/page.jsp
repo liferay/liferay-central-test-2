@@ -24,16 +24,16 @@ String formName = (String)request.getAttribute("liferay-ui:language:formName");
 String formAction = (String)request.getAttribute("liferay-ui:language:formAction");
 
 if (Validator.isNull(formAction)) {
-	LiferayPortletURL liferayPortletURL = PortletURLFactoryUtil.create(request, PortletKeys.LANGUAGE, plid, PortletRequest.ACTION_PHASE);
+	PortletURLImpl portletURLImpl = new PortletURLImpl(request, PortletKeys.LANGUAGE, plid, PortletRequest.ACTION_PHASE);
 
-	liferayPortletURL.setWindowState(WindowState.NORMAL);
-	liferayPortletURL.setPortletMode(PortletMode.VIEW);
-	liferayPortletURL.setAnchor(false);
+	portletURLImpl.setWindowState(WindowState.NORMAL);
+	portletURLImpl.setPortletMode(PortletMode.VIEW);
+	portletURLImpl.setAnchor(false);
 
-	liferayPortletURL.setParameter("struts_action", "/language/view");
-	//liferayPortletURL.setParameter("redirect", currentURL);
+	portletURLImpl.setParameter("struts_action", "/language/view");
+	//portletURLImpl.setParameter("redirect", currentURL);
 
-	formAction = liferayPortletURL.toString();
+	formAction = portletURLImpl.toString();
 }
 
 String name = (String)request.getAttribute("liferay-ui:language:name");

@@ -16,14 +16,10 @@
 
 <%@ include file="/html/common/init.jsp" %>
 
-<portlet:defineObjects />
-
 <%
 long groupId = ParamUtil.getLong(request, "groupId");
 
-LiferayPortletURL searchURL = (LiferayPortletURL)renderResponse.createRenderURL();
-
-searchURL.setPortletId(PortletKeys.SEARCH);
+PortletURLImpl searchURL = new PortletURLImpl(request, PortletKeys.SEARCH, themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
 searchURL.setEscapeXml(true);
 

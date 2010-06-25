@@ -172,9 +172,7 @@ if (layout.isTypeControlPanel()) {
 										<c:if test="<%= proposal == null %>">
 
 											<%
-											LiferayPortletURL proposePublicationURL = (LiferayPortletURL)renderResponse.createActionURL();
-
-											proposePublicationURL.setPortletId(PortletKeys.LAYOUT_MANAGEMENT);
+											PortletURL proposePublicationURL = new PortletURLImpl(request, PortletKeys.LAYOUT_MANAGEMENT, layout.getPlid(), PortletRequest.ACTION_PHASE);
 
 											proposePublicationURL.setPortletMode(PortletMode.VIEW);
 

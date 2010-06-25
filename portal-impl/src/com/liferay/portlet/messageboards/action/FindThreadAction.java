@@ -17,7 +17,7 @@ package com.liferay.portlet.messageboards.action;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.PortletURLFactoryUtil;
+import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 
@@ -52,7 +52,7 @@ public class FindThreadAction extends Action {
 
 			MBThread thread = MBThreadLocalServiceUtil.getThread(threadId);
 
-			PortletURL portletURL = PortletURLFactoryUtil.create(
+			PortletURL portletURL = new PortletURLImpl(
 				request, PortletKeys.MESSAGE_BOARDS, plid,
 				PortletRequest.RENDER_PHASE);
 

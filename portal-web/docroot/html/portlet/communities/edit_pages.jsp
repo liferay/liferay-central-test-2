@@ -250,9 +250,7 @@ if (portletName.equals(PortletKeys.LAYOUT_MANAGEMENT) || portletName.equals(Port
 
 portletURL.setParameter("groupId", String.valueOf(liveGroupId));
 
-LiferayPortletURL viewPagesURL = (LiferayPortletURL)renderResponse.createActionURL();
-
-viewPagesURL.setPortletId(PortletKeys.MY_PLACES);
+PortletURL viewPagesURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid, PortletRequest.ACTION_PHASE);
 
 viewPagesURL.setWindowState(WindowState.NORMAL);
 viewPagesURL.setPortletMode(PortletMode.VIEW);

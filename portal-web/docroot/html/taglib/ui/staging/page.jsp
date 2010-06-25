@@ -85,7 +85,7 @@
 							<c:if test="<%= proposal == null %>">
 
 								<%
-								PortletURL proposePublicationURL = PortletURLFactoryUtil.create(request, PortletKeys.LAYOUT_MANAGEMENT, layout.getPlid(), PortletRequest.ACTION_PHASE);
+								PortletURL proposePublicationURL = new PortletURLImpl(request, PortletKeys.LAYOUT_MANAGEMENT, layout.getPlid(), PortletRequest.ACTION_PHASE);
 
 								proposePublicationURL.setWindowState(WindowState.MAXIMIZED);
 								proposePublicationURL.setPortletMode(PortletMode.VIEW);
@@ -180,7 +180,7 @@
 				<%
 				Layout stagedLayout = LayoutLocalServiceUtil.getLayout(stagingGroup.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId());
 
-				PortletURL viewProposalsURL = PortletURLFactoryUtil.create(request, PortletKeys.LAYOUT_MANAGEMENT, stagedLayout.getPlid(), PortletRequest.RENDER_PHASE);
+				PortletURL viewProposalsURL = new PortletURLImpl(request, PortletKeys.LAYOUT_MANAGEMENT, stagedLayout.getPlid(), PortletRequest.RENDER_PHASE);
 
 				viewProposalsURL.setWindowState(WindowState.MAXIMIZED);
 				viewProposalsURL.setPortletMode(PortletMode.VIEW);
