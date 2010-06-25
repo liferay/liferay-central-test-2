@@ -56,6 +56,7 @@ import java.util.List;
 public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	public static final String TABLE_NAME = "Layout";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "uuid_", new Integer(Types.VARCHAR) },
 			{ "plid", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
@@ -80,7 +81,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 			{ "layoutPrototypeId", new Integer(Types.BIGINT) },
 			{ "dlFolderId", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Layout (plid LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,layoutId LONG,parentLayoutId LONG,name STRING null,title STRING null,description STRING null,type_ VARCHAR(75) null,typeSettings TEXT null,hidden_ BOOLEAN,friendlyURL VARCHAR(255) null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,priority INTEGER,layoutPrototypeId LONG,dlFolderId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table Layout (uuid_ VARCHAR(75) null,plid LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,layoutId LONG,parentLayoutId LONG,name STRING null,title STRING null,description STRING null,type_ VARCHAR(75) null,typeSettings TEXT null,hidden_ BOOLEAN,friendlyURL VARCHAR(255) null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,priority INTEGER,layoutPrototypeId LONG,dlFolderId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table Layout";
 	public static final String ORDER_BY_JPQL = " ORDER BY layout.parentLayoutId ASC, layout.priority ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Layout.parentLayoutId ASC, Layout.priority ASC";
@@ -97,6 +98,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	public static Layout toModel(LayoutSoap soapModel) {
 		Layout model = new LayoutImpl();
 
+		model.setUuid(soapModel.getUuid());
 		model.setPlid(soapModel.getPlid());
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
@@ -150,6 +152,27 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_plid);
+	}
+
+	public String getUuid() {
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
+
+		if (_originalUuid == null) {
+			_originalUuid = uuid;
+		}
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	public long getPlid() {
@@ -487,6 +510,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	public Object clone() {
 		LayoutImpl clone = new LayoutImpl();
 
+		clone.setUuid(getUuid());
 		clone.setPlid(getPlid());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
@@ -577,9 +601,11 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(47);
+		StringBundler sb = new StringBundler(49);
 
-		sb.append("{plid=");
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", plid=");
 		sb.append(getPlid());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
@@ -631,12 +657,16 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(73);
+		StringBundler sb = new StringBundler(76);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.Layout");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append(getUuid());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>plid</column-name><column-value><![CDATA[");
 		sb.append(getPlid());
@@ -735,6 +765,8 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 		return sb.toString();
 	}
 
+	private String _uuid;
+	private String _originalUuid;
 	private long _plid;
 	private long _groupId;
 	private long _originalGroupId;

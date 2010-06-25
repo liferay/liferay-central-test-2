@@ -65,6 +65,7 @@ public class LayoutPersistenceTest extends BasePersistenceTestCase {
 
 		Layout newLayout = _persistence.create(pk);
 
+		newLayout.setUuid(randomString());
 		newLayout.setGroupId(nextLong());
 		newLayout.setCompanyId(nextLong());
 		newLayout.setPrivateLayout(randomBoolean());
@@ -92,6 +93,7 @@ public class LayoutPersistenceTest extends BasePersistenceTestCase {
 
 		Layout existingLayout = _persistence.findByPrimaryKey(newLayout.getPrimaryKey());
 
+		assertEquals(existingLayout.getUuid(), newLayout.getUuid());
 		assertEquals(existingLayout.getPlid(), newLayout.getPlid());
 		assertEquals(existingLayout.getGroupId(), newLayout.getGroupId());
 		assertEquals(existingLayout.getCompanyId(), newLayout.getCompanyId());
@@ -193,6 +195,7 @@ public class LayoutPersistenceTest extends BasePersistenceTestCase {
 
 		Layout layout = _persistence.create(pk);
 
+		layout.setUuid(randomString());
 		layout.setGroupId(nextLong());
 		layout.setCompanyId(nextLong());
 		layout.setPrivateLayout(randomBoolean());

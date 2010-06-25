@@ -45,6 +45,11 @@ public interface LayoutModel extends BaseModel<Layout> {
 
 	public void setPrimaryKey(long pk);
 
+	@AutoEscape
+	public String getUuid();
+
+	public void setUuid(String uuid);
+
 	public long getPlid();
 
 	public void setPlid(long plid);

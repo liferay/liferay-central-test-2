@@ -40,6 +40,7 @@ public class LayoutSoap implements Serializable {
 	public static LayoutSoap toSoapModel(Layout model) {
 		LayoutSoap soapModel = new LayoutSoap();
 
+		soapModel.setUuid(model.getUuid());
 		soapModel.setPlid(model.getPlid());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -113,6 +114,14 @@ public class LayoutSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setPlid(pk);
+	}
+
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
 	}
 
 	public long getPlid() {
@@ -311,6 +320,7 @@ public class LayoutSoap implements Serializable {
 		_dlFolderId = dlFolderId;
 	}
 
+	private String _uuid;
 	private long _plid;
 	private long _groupId;
 	private long _companyId;

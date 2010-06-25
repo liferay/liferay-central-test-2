@@ -52,6 +52,50 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	public com.liferay.portal.model.Layout fetchByPrimaryKey(long plid)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public java.util.List<com.liferay.portal.model.Layout> findByUuid(
+		java.lang.String uuid)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Layout> findByUuid(
+		java.lang.String uuid, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Layout> findByUuid(
+		java.lang.String uuid, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.Layout findByUuid_First(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchLayoutException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.Layout findByUuid_Last(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchLayoutException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.Layout[] findByUuid_PrevAndNext(long plid,
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchLayoutException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.Layout findByUUID_G(java.lang.String uuid,
+		long groupId)
+		throws com.liferay.portal.NoSuchLayoutException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.Layout fetchByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.Layout fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portal.model.Layout> findByGroupId(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -267,6 +311,13 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public void removeByUuid(java.lang.String uuid)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void removeByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.NoSuchLayoutException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public void removeByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -302,6 +353,12 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByUuid(java.lang.String uuid)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByGroupId(long groupId)

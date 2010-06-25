@@ -44,6 +44,14 @@ public class LayoutWrapper implements Layout {
 		_layout.setPrimaryKey(pk);
 	}
 
+	public java.lang.String getUuid() {
+		return _layout.getUuid();
+	}
+
+	public void setUuid(java.lang.String uuid) {
+		_layout.setUuid(uuid);
+	}
+
 	public long getPlid() {
 		return _layout.getPlid();
 	}

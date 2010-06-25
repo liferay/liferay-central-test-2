@@ -41,6 +41,7 @@ public class LayoutJSONSerializer {
 	public static JSONObject toJSONObject(Layout model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
+		jsonObj.put("uuid", model.getUuid());
 		jsonObj.put("plid", model.getPlid());
 		jsonObj.put("groupId", model.getGroupId());
 		jsonObj.put("companyId", model.getCompanyId());

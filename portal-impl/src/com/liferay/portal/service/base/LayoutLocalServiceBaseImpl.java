@@ -256,6 +256,11 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService {
 		return layoutPersistence.findByPrimaryKey(plid);
 	}
 
+	public Layout getLayoutByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException, SystemException {
+		return layoutPersistence.findByUUID_G(uuid, groupId);
+	}
+
 	public List<Layout> getLayouts(int start, int end)
 		throws SystemException {
 		return layoutPersistence.findAll(start, end);

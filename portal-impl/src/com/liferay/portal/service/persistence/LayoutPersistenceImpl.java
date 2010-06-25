@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.LayoutImpl;
@@ -72,6 +73,26 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	public static final String FINDER_CLASS_NAME_ENTITY = LayoutImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(LayoutModelImpl.ENTITY_CACHE_ENABLED,
+			LayoutModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByUuid",
+			new String[] {
+				String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(LayoutModelImpl.ENTITY_CACHE_ENABLED,
+			LayoutModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByUuid", new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_UUID_G = new FinderPath(LayoutModelImpl.ENTITY_CACHE_ENABLED,
+			LayoutModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
+			"fetchByUUID_G",
+			new String[] { String.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID_G = new FinderPath(LayoutModelImpl.ENTITY_CACHE_ENABLED,
+			LayoutModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByUUID_G",
+			new String[] { String.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(LayoutModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByGroupId",
@@ -194,6 +215,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		EntityCacheUtil.putResult(LayoutModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutImpl.class, layout.getPrimaryKey(), layout);
 
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] { layout.getUuid(), new Long(layout.getGroupId()) },
+			layout);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DLFOLDERID,
 			new Object[] { new Long(layout.getDlFolderId()) }, layout);
 
@@ -237,6 +262,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		EntityCacheUtil.removeResult(LayoutModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutImpl.class, layout.getPrimaryKey());
 
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] { layout.getUuid(), new Long(layout.getGroupId()) });
+
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_DLFOLDERID,
 			new Object[] { new Long(layout.getDlFolderId()) });
 
@@ -264,6 +292,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 		layout.setNew(true);
 		layout.setPrimaryKey(plid);
+
+		String uuid = PortalUUIDUtil.generate();
+
+		layout.setUuid(uuid);
 
 		return layout;
 	}
@@ -336,6 +368,12 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 		LayoutModelImpl layoutModelImpl = (LayoutModelImpl)layout;
 
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] {
+				layoutModelImpl.getOriginalUuid(),
+				new Long(layoutModelImpl.getOriginalGroupId())
+			});
+
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_DLFOLDERID,
 			new Object[] { new Long(layoutModelImpl.getOriginalDlFolderId()) });
 
@@ -371,6 +409,12 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 		LayoutModelImpl layoutModelImpl = (LayoutModelImpl)layout;
 
+		if (Validator.isNull(layout.getUuid())) {
+			String uuid = PortalUUIDUtil.generate();
+
+			layout.setUuid(uuid);
+		}
+
 		Session session = null;
 
 		try {
@@ -391,6 +435,26 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 		EntityCacheUtil.putResult(LayoutModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutImpl.class, layout.getPrimaryKey(), layout);
+
+		if (!isNew &&
+				(!Validator.equals(layout.getUuid(),
+					layoutModelImpl.getOriginalUuid()) ||
+				(layout.getGroupId() != layoutModelImpl.getOriginalGroupId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+				new Object[] {
+					layoutModelImpl.getOriginalUuid(),
+					new Long(layoutModelImpl.getOriginalGroupId())
+				});
+		}
+
+		if (isNew ||
+				(!Validator.equals(layout.getUuid(),
+					layoutModelImpl.getOriginalUuid()) ||
+				(layout.getGroupId() != layoutModelImpl.getOriginalGroupId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+				new Object[] { layout.getUuid(), new Long(layout.getGroupId()) },
+				layout);
+		}
 
 		if (!isNew &&
 				(layout.getDlFolderId() != layoutModelImpl.getOriginalDlFolderId())) {
@@ -481,6 +545,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		layoutImpl.setNew(layout.isNew());
 		layoutImpl.setPrimaryKey(layout.getPrimaryKey());
 
+		layoutImpl.setUuid(layout.getUuid());
 		layoutImpl.setPlid(layout.getPlid());
 		layoutImpl.setGroupId(layout.getGroupId());
 		layoutImpl.setCompanyId(layout.getCompanyId());
@@ -559,6 +624,417 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 
 		return layout;
+	}
+
+	public List<Layout> findByUuid(String uuid) throws SystemException {
+		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	public List<Layout> findByUuid(String uuid, int start, int end)
+		throws SystemException {
+		return findByUuid(uuid, start, end, null);
+	}
+
+	public List<Layout> findByUuid(String uuid, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				uuid,
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<Layout> list = (List<Layout>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = null;
+
+				if (orderByComparator != null) {
+					query = new StringBundler(3 +
+							(orderByComparator.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
+
+				query.append(_SQL_SELECT_LAYOUT_WHERE);
+
+				if (uuid == null) {
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
+				}
+				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
+					}
+				}
+
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
+				}
+
+				else {
+					query.append(LayoutModelImpl.ORDER_BY_JPQL);
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (uuid != null) {
+					qPos.add(uuid);
+				}
+
+				list = (List<Layout>)QueryUtil.list(q, getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<Layout>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
+					list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public Layout findByUuid_First(String uuid,
+		OrderByComparator orderByComparator)
+		throws NoSuchLayoutException, SystemException {
+		List<Layout> list = findByUuid(uuid, 0, 1, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("uuid=");
+			msg.append(uuid);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchLayoutException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public Layout findByUuid_Last(String uuid,
+		OrderByComparator orderByComparator)
+		throws NoSuchLayoutException, SystemException {
+		int count = countByUuid(uuid);
+
+		List<Layout> list = findByUuid(uuid, count - 1, count, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("uuid=");
+			msg.append(uuid);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchLayoutException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public Layout[] findByUuid_PrevAndNext(long plid, String uuid,
+		OrderByComparator orderByComparator)
+		throws NoSuchLayoutException, SystemException {
+		Layout layout = findByPrimaryKey(plid);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Layout[] array = new LayoutImpl[3];
+
+			array[0] = getByUuid_PrevAndNext(session, layout, uuid,
+					orderByComparator, true);
+
+			array[1] = layout;
+
+			array[2] = getByUuid_PrevAndNext(session, layout, uuid,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Layout getByUuid_PrevAndNext(Session session, Layout layout,
+		String uuid, OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_LAYOUT_WHERE);
+
+		if (uuid == null) {
+			query.append(_FINDER_COLUMN_UUID_UUID_1);
+		}
+		else {
+			if (uuid.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_UUID_UUID_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_UUID_UUID_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		else {
+			query.append(LayoutModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (uuid != null) {
+			qPos.add(uuid);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(layout);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Layout> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	public Layout findByUUID_G(String uuid, long groupId)
+		throws NoSuchLayoutException, SystemException {
+		Layout layout = fetchByUUID_G(uuid, groupId);
+
+		if (layout == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("uuid=");
+			msg.append(uuid);
+
+			msg.append(", groupId=");
+			msg.append(groupId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchLayoutException(msg.toString());
+		}
+
+		return layout;
+	}
+
+	public Layout fetchByUUID_G(String uuid, long groupId)
+		throws SystemException {
+		return fetchByUUID_G(uuid, groupId, true);
+	}
+
+	public Layout fetchByUUID_G(String uuid, long groupId,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(4);
+
+				query.append(_SQL_SELECT_LAYOUT_WHERE);
+
+				if (uuid == null) {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
+				}
+				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
+					}
+				}
+
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
+
+				query.append(LayoutModelImpl.ORDER_BY_JPQL);
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (uuid != null) {
+					qPos.add(uuid);
+				}
+
+				qPos.add(groupId);
+
+				List<Layout> list = q.list();
+
+				result = list;
+
+				Layout layout = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+						finderArgs, list);
+				}
+				else {
+					layout = list.get(0);
+
+					cacheResult(layout);
+
+					if ((layout.getUuid() == null) ||
+							!layout.getUuid().equals(uuid) ||
+							(layout.getGroupId() != groupId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+							finderArgs, layout);
+					}
+				}
+
+				return layout;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+						finderArgs, new ArrayList<Layout>());
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (Layout)result;
+			}
+		}
 	}
 
 	public List<Layout> findByGroupId(long groupId) throws SystemException {
@@ -2531,6 +3007,19 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return list;
 	}
 
+	public void removeByUuid(String uuid) throws SystemException {
+		for (Layout layout : findByUuid(uuid)) {
+			remove(layout);
+		}
+	}
+
+	public void removeByUUID_G(String uuid, long groupId)
+		throws NoSuchLayoutException, SystemException {
+		Layout layout = findByUUID_G(uuid, groupId);
+
+		remove(layout);
+	}
+
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (Layout layout : findByGroupId(groupId)) {
 			remove(layout);
@@ -2596,6 +3085,127 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		for (Layout layout : findAll()) {
 			remove(layout);
 		}
+	}
+
+	public int countByUuid(String uuid) throws SystemException {
+		Object[] finderArgs = new Object[] { uuid };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(2);
+
+				query.append(_SQL_COUNT_LAYOUT_WHERE);
+
+				if (uuid == null) {
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
+				}
+				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
+					}
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (uuid != null) {
+					qPos.add(uuid);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByUUID_G(String uuid, long groupId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID_G,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(3);
+
+				query.append(_SQL_COUNT_LAYOUT_WHERE);
+
+				if (uuid == null) {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
+				}
+				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
+					}
+				}
+
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (uuid != null) {
+					qPos.add(uuid);
+				}
+
+				qPos.add(groupId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
@@ -3271,6 +3881,13 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	private static final String _SQL_SELECT_LAYOUT_WHERE = "SELECT layout FROM Layout layout WHERE ";
 	private static final String _SQL_COUNT_LAYOUT = "SELECT COUNT(layout) FROM Layout layout";
 	private static final String _SQL_COUNT_LAYOUT_WHERE = "SELECT COUNT(layout) FROM Layout layout WHERE ";
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "layout.uuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "layout.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(layout.uuid IS NULL OR layout.uuid = ?)";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "layout.uuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "layout.uuid = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(layout.uuid IS NULL OR layout.uuid = ?) AND ";
+	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "layout.groupId = ?";
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "layout.groupId = ?";
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "layout.companyId = ?";
 	private static final String _FINDER_COLUMN_DLFOLDERID_DLFOLDERID_2 = "layout.dlFolderId = ?";

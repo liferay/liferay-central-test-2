@@ -145,6 +145,69 @@ public class LayoutUtil {
 		return getPersistence().fetchByPrimaryKey(plid);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Layout> findByUuid(
+		java.lang.String uuid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByUuid(uuid);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Layout> findByUuid(
+		java.lang.String uuid, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByUuid(uuid, start, end);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Layout> findByUuid(
+		java.lang.String uuid, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByUuid(uuid, start, end, orderByComparator);
+	}
+
+	public static com.liferay.portal.model.Layout findByUuid_First(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchLayoutException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByUuid_First(uuid, orderByComparator);
+	}
+
+	public static com.liferay.portal.model.Layout findByUuid_Last(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchLayoutException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByUuid_Last(uuid, orderByComparator);
+	}
+
+	public static com.liferay.portal.model.Layout[] findByUuid_PrevAndNext(
+		long plid, java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchLayoutException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByUuid_PrevAndNext(plid, uuid, orderByComparator);
+	}
+
+	public static com.liferay.portal.model.Layout findByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.NoSuchLayoutException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByUUID_G(uuid, groupId);
+	}
+
+	public static com.liferay.portal.model.Layout fetchByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId);
+	}
+
+	public static com.liferay.portal.model.Layout fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
+	}
+
 	public static java.util.List<com.liferay.portal.model.Layout> findByGroupId(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -495,6 +558,17 @@ public class LayoutUtil {
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
+	public static void removeByUuid(java.lang.String uuid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByUuid(uuid);
+	}
+
+	public static void removeByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.NoSuchLayoutException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByUUID_G(uuid, groupId);
+	}
+
 	public static void removeByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByGroupId(groupId);
@@ -551,6 +625,16 @@ public class LayoutUtil {
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
+	}
+
+	public static int countByUuid(java.lang.String uuid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByUuid(uuid);
+	}
+
+	public static int countByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByUUID_G(uuid, groupId);
 	}
 
 	public static int countByGroupId(long groupId)

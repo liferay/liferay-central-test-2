@@ -286,6 +286,8 @@ create unique index IX_7162C27C on Layout (groupId, privateLayout, layoutId);
 create index IX_6DE88B06 on Layout (groupId, privateLayout, parentLayoutId);
 create index IX_1A1B61D2 on Layout (groupId, privateLayout, type_);
 create index IX_23922F7D on Layout (iconImageId);
+create index IX_D0822724 on Layout (uuid_);
+create unique index IX_CED31606 on Layout (uuid_, groupId);
 
 create index IX_30616AAA on LayoutPrototype (companyId);
 create index IX_557A639F on LayoutPrototype (companyId, active_);
