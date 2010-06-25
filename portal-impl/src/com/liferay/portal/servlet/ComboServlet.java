@@ -141,10 +141,9 @@ public class ComboServlet extends HttpServlet {
 
 		File file = getFile(path);
 
-		long lastModified = file.lastModified();
-
 		if ((fileContentBag != null) && PropsValues.COMBO_CHECK_TIMESTAMP) {
-			if (lastModified == fileContentBag._lastModified) {
+			if ((file != null) &&
+				(file.lastModified() == fileContentBag._lastModified)) {
 				return fileContentBag._fileContent;
 			}
 			else {
@@ -168,7 +167,8 @@ public class ComboServlet extends HttpServlet {
 			}
 
 			fileContentBag = new FileContentBag(
-				stringFileContent.getBytes(StringPool.UTF8), lastModified);
+				stringFileContent.getBytes(StringPool.UTF8),
+				file.lastModified());
 		}
 
 		FileContentBag oldFileContentBag = _fileContents.putIfAbsent(
