@@ -14,6 +14,7 @@
 
 package com.liferay.portal.upgrade.v6_0_3;
 
+import com.liferay.portal.dao.orm.common.SQLTransformer;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -344,6 +345,8 @@ public class UpgradePermission extends UpgradeProcess {
 			sb.append("ResourceAction.bitwiseValue % 2 = 1");
 
 			String sql = sb.toString();
+
+			sql = SQLTransformer.transform(sql);
 
 			ps = con.prepareStatement(sql);
 
