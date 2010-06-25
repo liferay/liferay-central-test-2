@@ -30,6 +30,9 @@ public interface ClusterExecutor {
 	public Map<Address, Future<?>> executeMulticastCall(
 		MethodWrapper methodWrapper);
 
+	public Map<Address, Future<?>> executeMulticastCall(
+		MethodWrapper methodWrapper, boolean skipLocal);
+
 	public Future<?> executeUnicastCall(
 		Address address, MethodWrapper methodWrapper);
 

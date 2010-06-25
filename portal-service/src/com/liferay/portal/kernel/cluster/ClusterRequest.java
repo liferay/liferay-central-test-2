@@ -29,9 +29,13 @@ public interface ClusterRequest extends Serializable {
 
 	public boolean isMulticast();
 
+	public boolean isSkipLocal();
+
 	public void setMulticast(boolean multicast);
 
 	public void setPayload(Object payload);
+
+	public void setSkipLocal(boolean skipLocal);
 
 	public void setUuid(String uuid);
 

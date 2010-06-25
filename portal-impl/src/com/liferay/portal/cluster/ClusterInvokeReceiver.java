@@ -67,13 +67,16 @@ public class ClusterInvokeReceiver extends ReceiverAdapter {
 
 		if (localAddress.equals(sourceAddress) &&
 			ClusterExecutorUtil.isShortcutLocalMethod()) {
-
 			return;
 		}
 
 		if (obj instanceof ClusterRequest) {
 			ClusterRequest clusterRequest = (ClusterRequest)obj;
 
+			if (localAddress.equals(sourceAddress) &&
+				clusterRequest.isSkipLocal()) {
+				return;
+			}
 			ClusterResponse clusterResponse = new ClusterResponseImpl();
 
 			clusterResponse.setMulticast(clusterRequest.isMulticast());
