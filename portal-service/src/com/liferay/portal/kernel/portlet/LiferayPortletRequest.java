@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.portlet;
 
+import com.liferay.portal.model.Portlet;
+
 import java.util.Map;
 
 import javax.portlet.PortletRequest;
@@ -28,6 +30,10 @@ import javax.servlet.http.HttpServletRequest;
 public interface LiferayPortletRequest extends PortletRequest {
 
 	public HttpServletRequest getHttpServletRequest();
+
+	public long getPlid();
+
+	public Portlet getPortlet();
 
 	public Map<String, String[]> getRenderParameters();
 

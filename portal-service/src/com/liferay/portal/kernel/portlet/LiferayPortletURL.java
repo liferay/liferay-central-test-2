@@ -36,6 +36,8 @@ public interface LiferayPortletURL
 
 	public String getParameter(String name);
 
+	public Set<String> getParametersIncludedInPath();
+
 	public String getPortletId();
 
 	public Map<String, String> getReservedParameterMap();
@@ -54,15 +56,10 @@ public interface LiferayPortletURL
 
 	public boolean isSecure();
 
-	public void setLifecycle(String lifecycle);
-
-	public void setParameter(String name, String value, boolean append);
-
-	public void setParameter(String name, String[] values, boolean append);
-
-	public Set<String> getParametersIncludedInPath();
-
 	public void setAnchor(boolean anchor);
+
+	public void setCopyCurrentPublicRenderParameters(
+		boolean copyCurrentPublicRenderParameters);
 
 	public void setCopyCurrentRenderParameters(
 		boolean copyCurrentRenderParameters);
@@ -74,6 +71,12 @@ public interface LiferayPortletURL
 	public void setEncrypt(boolean encrypt);
 
 	public void setEscapeXml(boolean escapeXml);
+
+	public void setLifecycle(String lifecycle);
+
+	public void setParameter(String name, String value, boolean append);
+
+	public void setParameter(String name, String[] values, boolean append);
 
 	public void setPlid(long plid);
 
