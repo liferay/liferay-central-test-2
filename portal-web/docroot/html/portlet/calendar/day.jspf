@@ -141,7 +141,7 @@ if (!partDayResults.isEmpty()) {
 		Date startDate = event.getStartDate();
 
 		if (event.isTimeZoneSensitive()) {
-				startDate = Time.getDate(event.getStartDate(), timeZone);
+			startDate = Time.getDate(event.getStartDate(), timeZone);
 		}
 
 		int startDateScore = (startDate.getHours() * 60) + startDate.getMinutes();
