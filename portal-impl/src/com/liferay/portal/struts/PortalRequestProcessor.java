@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.struts.LastPath;
@@ -58,7 +59,7 @@ import com.liferay.portlet.InvokerPortlet;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletInstanceFactoryUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.RenderRequestFactory;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.RenderResponseFactory;
@@ -319,7 +320,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				request.getQueryString());
 		}
 
-		PortletURLImpl portletURL = new PortletURLImpl(
+		LiferayPortletURL liferayPortletURL = PortletURLFactoryUtil.create(
 			request, portletId, plid, PortletRequest.RENDER_PHASE);
 
 		Iterator<Map.Entry<String, String[]>> itr =
@@ -333,11 +334,12 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			if (key.startsWith(namespace)) {
 				key = key.substring(namespace.length());
 
-				portletURL.setParameter(key, entry.getValue());
+				liferayPortletURL.setParameter(key, entry.getValue());
 			}
 		}
 
-		String portletFriendlyURL = friendlyURLMapper.buildPath(portletURL);
+		String portletFriendlyURL = friendlyURLMapper.buildPath(
+			liferayPortletURL);
 
 		if (portletFriendlyURL != null) {
 			return layoutFriendlyURL.concat(portletFriendlyURL);

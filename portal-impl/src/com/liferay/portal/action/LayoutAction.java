@@ -84,7 +84,7 @@ import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletQName;
 import com.liferay.portlet.PortletQNameUtil;
 import com.liferay.portlet.PortletRequestImpl;
-import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.PublicRenderParametersPool;
 import com.liferay.portlet.RenderParametersPool;
 import com.liferay.portlet.RenderRequestImpl;
@@ -896,7 +896,7 @@ public class LayoutAction extends Action {
 
 		Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
 
-		PortletURL portletURL = new PortletURLImpl(
+		PortletURL portletURL = PortletURLFactoryUtil.create(
 			actionRequestImpl, actionRequestImpl.getPortletName(),
 			layout.getPlid(), PortletRequest.RENDER_PHASE);
 

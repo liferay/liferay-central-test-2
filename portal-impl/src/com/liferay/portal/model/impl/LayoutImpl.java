@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -54,7 +55,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.PortletURLFactoryUtil;
 
 import java.io.IOException;
 
@@ -726,31 +727,33 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 				String portletId =
 					StringUtil.split(layoutTypePortlet.getStateMax())[0];
 
-				PortletURLImpl portletURLImpl = new PortletURLImpl(
-					request, portletId, getPlid(), PortletRequest.ACTION_PHASE);
+				LiferayPortletURL liferayPortletURL =
+					PortletURLFactoryUtil.create(
+						request, portletId, getPlid(),
+						PortletRequest.ACTION_PHASE);
 
 				try {
-					portletURLImpl.setWindowState(WindowState.NORMAL);
-					portletURLImpl.setPortletMode(PortletMode.VIEW);
+					liferayPortletURL.setWindowState(WindowState.NORMAL);
+					liferayPortletURL.setPortletMode(PortletMode.VIEW);
 				}
 				catch (PortletException pe) {
 					throw new SystemException(pe);
 				}
 
-				portletURLImpl.setAnchor(false);
+				liferayPortletURL.setAnchor(false);
 
 				if (PropsValues.LAYOUT_DEFAULT_P_L_RESET &&
 					!resetRenderParameters) {
 
-					portletURLImpl.setParameter("p_l_reset", "0");
+					liferayPortletURL.setParameter("p_l_reset", "0");
 				}
 				else if (!PropsValues.LAYOUT_DEFAULT_P_L_RESET &&
 						 resetRenderParameters) {
 
-					portletURLImpl.setParameter("p_l_reset", "1");
+					liferayPortletURL.setParameter("p_l_reset", "1");
 				}
 
-				return portletURLImpl.toString();
+				return liferayPortletURL.toString();
 			}
 		}
 

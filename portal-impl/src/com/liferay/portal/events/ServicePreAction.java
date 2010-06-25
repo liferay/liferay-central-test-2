@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
@@ -93,7 +94,7 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.PortletURLFactoryUtil;
 
 import java.io.File;
 
@@ -1546,7 +1547,7 @@ public class ServicePreAction extends Action {
 
 		themeDisplay.setURLControlPanel(urlControlPanel);
 
-		PortletURL createAccountURL = new PortletURLImpl(
+		PortletURL createAccountURL = PortletURLFactoryUtil.create(
 			request, PortletKeys.LOGIN, plid, PortletRequest.ACTION_PHASE);
 
 		createAccountURL.setWindowState(WindowState.MAXIMIZED);
@@ -1613,7 +1614,7 @@ public class ServicePreAction extends Action {
 			if (hasManageLayoutsPermission) {
 				themeDisplay.setShowPageSettingsIcon(true);
 
-				PortletURL pageSettingsURL = new PortletURLImpl(
+				PortletURL pageSettingsURL = PortletURLFactoryUtil.create(
 					request, PortletKeys.LAYOUT_MANAGEMENT, plid,
 					PortletRequest.RENDER_PHASE);
 
@@ -1670,7 +1671,7 @@ public class ServicePreAction extends Action {
 				}
 
 				if (hasPublishStagingPermission) {
-					PortletURL publishToLiveURL = new PortletURLImpl(
+					PortletURL publishToLiveURL = PortletURLFactoryUtil.create(
 						request, PortletKeys.LAYOUT_MANAGEMENT, plid,
 						PortletRequest.RENDER_PHASE);
 
@@ -1710,7 +1711,7 @@ public class ServicePreAction extends Action {
 			long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(
 				controlPanelGroup.getGroupId(), true);
 
-			PortletURLImpl myAccountURL = new PortletURLImpl(
+			LiferayPortletURL myAccountURL = PortletURLFactoryUtil.create(
 				request, PortletKeys.MY_ACCOUNT, controlPanelPlid,
 				PortletRequest.RENDER_PHASE);
 
@@ -1758,7 +1759,7 @@ public class ServicePreAction extends Action {
 
 		themeDisplay.setURLSignOut(mainPath.concat("/portal/logout"));
 
-		PortletURL updateManagerURL = new PortletURLImpl(
+		PortletURL updateManagerURL = PortletURLFactoryUtil.create(
 			request, PortletKeys.UPDATE_MANAGER, plid,
 			PortletRequest.RENDER_PHASE);
 

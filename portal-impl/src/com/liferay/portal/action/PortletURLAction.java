@@ -15,6 +15,7 @@
 package com.liferay.portal.action;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.PortletModeFactory;
 import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -22,7 +23,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.util.Iterator;
@@ -89,66 +90,68 @@ public class PortletURLAction extends Action {
 		boolean secure = ParamUtil.getBoolean(request, "secure");
 		String windowState = ParamUtil.getString(request, "windowState");
 
-		PortletURLImpl portletURL = new PortletURLImpl(
+		LiferayPortletURL liferayPortletURL = PortletURLFactoryUtil.create(
 			request, portletId, themeDisplay.getPlid(), lifecycle);
 
 		if (Validator.isNotNull(cacheability)) {
-			portletURL.setCacheability(cacheability);
+			liferayPortletURL.setCacheability(cacheability);
 		}
 
-		portletURL.setCopyCurrentRenderParameters(copyCurrentRenderParameters);
+		liferayPortletURL.setCopyCurrentRenderParameters(
+			copyCurrentRenderParameters);
 
 		if (doAsUserId > 0) {
-			portletURL.setDoAsUserId(doAsUserId);
+			liferayPortletURL.setDoAsUserId(doAsUserId);
 		}
 
 		if (Validator.isNotNull(doAsUserLanguageId)) {
-			portletURL.setDoAsUserLanguageId(doAsUserLanguageId);
+			liferayPortletURL.setDoAsUserLanguageId(doAsUserLanguageId);
 		}
 
-		portletURL.setEncrypt(encrypt);
-		portletURL.setEscapeXml(escapeXml);
+		liferayPortletURL.setEncrypt(encrypt);
+		liferayPortletURL.setEscapeXml(escapeXml);
 
 		if (lifecycle.equals(PortletRequest.ACTION_PHASE) &&
 			Validator.isNotNull(name)) {
 
-			portletURL.setParameter(ActionRequest.ACTION_NAME, name);
+			liferayPortletURL.setParameter(ActionRequest.ACTION_NAME, name);
 		}
 
-		portletURL.setPortletId(portletId);
+		liferayPortletURL.setPortletId(portletId);
 
 		if (portletConfiguration) {
 			String portletResource = ParamUtil.getString(
 				request, "portletResource");
 			String previewWidth = ParamUtil.getString(request, "previewWidth");
 
-			portletURL.setParameter(
+			liferayPortletURL.setParameter(
 				"struts_action", "/portlet_configuration/edit_configuration");
-			portletURL.setParameter("returnToFullPageURL", returnToFullPageURL);
-			portletURL.setParameter("portletResource", portletResource);
-			portletURL.setParameter("previewWidth", previewWidth);
+			liferayPortletURL.setParameter(
+				"returnToFullPageURL", returnToFullPageURL);
+			liferayPortletURL.setParameter("portletResource", portletResource);
+			liferayPortletURL.setParameter("previewWidth", previewWidth);
 		}
 
 		if (Validator.isNotNull(portletMode)) {
-			portletURL.setPortletMode(
+			liferayPortletURL.setPortletMode(
 				PortletModeFactory.getPortletMode(portletMode));
 		}
 
 		if (Validator.isNotNull(resourceId)) {
-			portletURL.setResourceID(resourceId);
+			liferayPortletURL.setResourceID(resourceId);
 		}
 
 		if (!themeDisplay.isStateMaximized()) {
 			if (Validator.isNotNull(returnToFullPageURL)) {
-				portletURL.setParameter(
+				liferayPortletURL.setParameter(
 					"returnToFullPageURL", returnToFullPageURL);
 			}
 		}
 
-		portletURL.setSecure(secure);
+		liferayPortletURL.setSecure(secure);
 
 		if (Validator.isNotNull(windowState)) {
-			portletURL.setWindowState(
+			liferayPortletURL.setWindowState(
 				WindowStateFactory.getWindowState(windowState));
 		}
 
@@ -167,11 +170,11 @@ public class PortletURLAction extends Action {
 
 				String paramValue = parameterMap.get(paramName);
 
-				portletURL.setParameter(paramName, paramValue);
+				liferayPortletURL.setParameter(paramName, paramValue);
 			}
 		}
 
-		return portletURL.toString();
+		return liferayPortletURL.toString();
 	}
 
 }
