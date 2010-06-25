@@ -24,6 +24,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Scope_LoginTest extends BaseTestCase {
 	public void testScope_Login() throws Exception {
+		selenium.setTimeout("180000");
 		selenium.open("/web/guest/home/");
 		selenium.type("_58_login", RuntimeVariables.replace("scope@liferay.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));

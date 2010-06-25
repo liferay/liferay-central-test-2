@@ -24,8 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class LoginBakerTest extends BaseTestCase {
 	public void testLoginBaker() throws Exception {
+		selenium.setTimeout("180000");
 		selenium.open("/web/guest/home");
-		Thread.sleep(30000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

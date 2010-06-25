@@ -29,6 +29,7 @@ public class RememberMeLoginTest extends BaseTestCase {
 		while (label >= 1) {
 			switch (label) {
 			case 1:
+				selenium.setTimeout("180000");
 				selenium.open("/web/guest/home/");
 
 				boolean NotSignedOut = selenium.isElementPresent(

@@ -24,6 +24,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_LoginTest extends BaseTestCase {
 	public void testCA_Login() throws Exception {
+		selenium.setTimeout("180000");
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {

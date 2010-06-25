@@ -24,8 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class LoginLegacy51xTest extends BaseTestCase {
 	public void testLoginLegacy51x() throws Exception {
+		selenium.setTimeout("180000");
 		selenium.open("/web/guest/home");
-		Thread.sleep(30000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
