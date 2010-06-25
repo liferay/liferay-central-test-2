@@ -1234,7 +1234,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public JournalArticle getLatestArticle(
-			long resourcePrimKey, int status, boolean approvedPreferred)
+			long resourcePrimKey, int status, boolean preferApproved)
 		throws PortalException, SystemException {
 
 		List<JournalArticle> articles = null;
@@ -1242,7 +1242,7 @@ public class JournalArticleLocalServiceImpl
 		OrderByComparator orderByComparator = new ArticleVersionComparator();
 
 		if (status == WorkflowConstants.STATUS_ANY) {
-			if (approvedPreferred) {
+			if (preferApproved) {
 				articles = journalArticlePersistence.findByR_ST(
 					resourcePrimKey, WorkflowConstants.STATUS_APPROVED, 0, 1,
 					orderByComparator);
