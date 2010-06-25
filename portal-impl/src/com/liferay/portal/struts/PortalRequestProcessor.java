@@ -16,7 +16,6 @@ package com.liferay.portal.struts;
 
 import com.liferay.portal.LayoutPermissionException;
 import com.liferay.portal.PortletActiveException;
-import com.liferay.portal.RequiredRoleException;
 import com.liferay.portal.UserActiveException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -674,25 +673,6 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			(ActionMapping)moduleConfig.findActionConfig(path);
 
 		path = mapping.getPath();
-
-		// Authenticated users must have at least one role
-
-		if (user != null) {
-			try {
-
-				// FIX ME
-
-				if (false) {
-					SessionErrors.add(
-						request, RequiredRoleException.class.getName());
-
-					return _PATH_PORTAL_ERROR;
-				}
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
 
 		// Define the portlet objects
 
