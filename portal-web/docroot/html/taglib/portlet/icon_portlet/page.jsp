@@ -25,7 +25,13 @@ String src = null;
 
 if (portlet != null) {
 	message = PortalUtil.getPortletTitle(portlet, application, locale);
-	src = portlet.getContextPath() + portlet.getIcon();
+
+	if (portlet.getIcon() != null) {
+		src = portlet.getContextPath() + portlet.getIcon();
+	}
+	else {
+		src = portletDisplay.getURLPortlet();
+	}
 }
 else {
 	showPortletIcon = portletDisplay.isShowPortletIcon();
