@@ -144,6 +144,7 @@ public class ComboServlet extends HttpServlet {
 		if ((fileContentBag != null) && PropsValues.COMBO_CHECK_TIMESTAMP) {
 			if ((file != null) &&
 				(file.lastModified() == fileContentBag._lastModified)) {
+
 				return fileContentBag._fileContent;
 			}
 			else {
