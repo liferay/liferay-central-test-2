@@ -76,7 +76,8 @@ public class JournalArticleWorkflowHandler extends BaseWorkflowHandler {
 			"serviceContext");
 
 		JournalArticle article =
-			JournalArticleLocalServiceUtil.getLatestArticle(resourcePrimKey);
+			JournalArticleLocalServiceUtil.getLatestArticle(
+				resourcePrimKey, WorkflowConstants.STATUS_ANY, false);
 
 		return JournalArticleLocalServiceUtil.updateStatus(
 			userId, article, status, null, serviceContext);

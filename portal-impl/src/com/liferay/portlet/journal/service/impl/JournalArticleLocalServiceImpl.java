@@ -1197,8 +1197,8 @@ public class JournalArticleLocalServiceImpl
 	public JournalArticle getDisplayArticle(long groupId, String articleId)
 		throws PortalException, SystemException {
 
-		List<JournalArticle> articles = journalArticlePersistence.findByG_A(
-			groupId, articleId);
+		List<JournalArticle> articles = journalArticlePersistence.findByG_A_ST(
+			groupId, articleId, WorkflowConstants.STATUS_APPROVED);
 
 		if (articles.size() == 0) {
 			throw new NoSuchArticleException();
@@ -1230,25 +1230,27 @@ public class JournalArticleLocalServiceImpl
 	public JournalArticle getLatestArticle(long resourcePrimKey, int status)
 		throws PortalException, SystemException {
 
+		return getLatestArticle(resourcePrimKey, status, true);
+	}
+
+	public JournalArticle getLatestArticle(
+			long resourcePrimKey, int status, boolean approvedPreferred)
+		throws PortalException, SystemException {
+
 		List<JournalArticle> articles = null;
 
 		OrderByComparator orderByComparator = new ArticleVersionComparator();
 
 		if (status == WorkflowConstants.STATUS_ANY) {
-			articles = journalArticlePersistence.findByR_ST(
-				resourcePrimKey, WorkflowConstants.STATUS_APPROVED, 0, 1,
-				orderByComparator);
-
-			if (articles.size() == 0) {
+			if (approvedPreferred) {
 				articles = journalArticlePersistence.findByR_ST(
-					resourcePrimKey, WorkflowConstants.STATUS_PENDING, 0, 1,
+					resourcePrimKey, WorkflowConstants.STATUS_APPROVED, 0, 1,
 					orderByComparator);
 			}
 
-			if (articles.size() == 0) {
-				articles = journalArticlePersistence.findByR_ST(
-					resourcePrimKey, WorkflowConstants.STATUS_DRAFT, 0, 1,
-					orderByComparator);
+			if ((articles == null) || (articles.size() == 0)) {
+				articles = journalArticlePersistence.findByResourcePrimKey(
+					resourcePrimKey, 0, 1, orderByComparator);
 			}
 		}
 		else {
