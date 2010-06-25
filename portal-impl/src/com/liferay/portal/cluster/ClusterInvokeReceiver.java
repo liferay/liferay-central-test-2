@@ -67,16 +67,13 @@ public class ClusterInvokeReceiver extends ReceiverAdapter {
 
 		if (localAddress.equals(sourceAddress) &&
 			ClusterExecutorUtil.isShortcutLocalMethod()) {
+
 			return;
 		}
 
 		if (obj instanceof ClusterRequest) {
 			ClusterRequest clusterRequest = (ClusterRequest)obj;
 
-			if (localAddress.equals(sourceAddress) &&
-				clusterRequest.isSkipLocal()) {
-				return;
-			}
 			ClusterResponse clusterResponse = new ClusterResponseImpl();
 
 			clusterResponse.setMulticast(clusterRequest.isMulticast());
@@ -88,7 +85,6 @@ public class ClusterInvokeReceiver extends ReceiverAdapter {
 				MethodWrapper methodWrapper = (MethodWrapper)payload;
 
 				try {
-					ClusterInvokeThreadLocal.setClusterInvoke(true);
 					Object returnValue = MethodInvoker.invoke(methodWrapper);
 
 					if (returnValue instanceof Serializable) {
@@ -102,9 +98,6 @@ public class ClusterInvokeReceiver extends ReceiverAdapter {
 				}
 				catch (Exception e) {
 					clusterResponse.setException(e);
-				}
-				finally {
-					ClusterInvokeThreadLocal.setClusterInvoke(false);
 				}
 			}
 			else {

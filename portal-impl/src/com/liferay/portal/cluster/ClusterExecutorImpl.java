@@ -59,11 +59,6 @@ public class ClusterExecutorImpl
 	public Map<Address, Future<?>> executeMulticastCall(
 		MethodWrapper methodWrapper) {
 
-		return executeMulticastCall(methodWrapper, false);
-	}
-
-	public Map<Address, Future<?>> executeMulticastCall(
-		MethodWrapper methodWrapper, boolean skipLocal) {
 		if (!PropsValues.CLUSTER_LINK_ENABLED) {
 			return null;
 		}
@@ -72,7 +67,6 @@ public class ClusterExecutorImpl
 
 		clusterRequest.setMulticast(true);
 		clusterRequest.setPayload(methodWrapper);
-		clusterRequest.setSkipLocal(skipLocal);
 		clusterRequest.setUuid(PortalUUIDUtil.generate());
 
 		Map<Address, Future<?>> results = new HashMap<Address, Future<?>>();
@@ -82,10 +76,7 @@ public class ClusterExecutorImpl
 
 		for (Address address : addresses) {
 			if (_shortcutLocalMethod && address.equals(localControlAddress)) {
-
-				if (!skipLocal) {
-					results.put(address, runLocalMethod(methodWrapper));
-				}
+				results.put(address, runLocalMethod(methodWrapper));
 			}
 			else {
 				results.put(address, new FutureResult<Object>());

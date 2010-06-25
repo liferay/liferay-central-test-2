@@ -36,10 +36,6 @@ public class ClusterRequestImpl implements ClusterRequest {
 		return _multicast;
 	}
 
-	public boolean isSkipLocal() {
-		return _skipLocal;
-	}
-
 	public void setMulticast(boolean multicast) {
 		_multicast = multicast;
 	}
@@ -48,23 +44,17 @@ public class ClusterRequestImpl implements ClusterRequest {
 		_payload = payload;
 	}
 
-	public void setSkipLocal(boolean skipLocal) {
-		_skipLocal = skipLocal;
-	}
-
 	public void setUuid(String uuid) {
 		_uuid = uuid;
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("{multicast=");
 		sb.append(_multicast);
 		sb.append(", payload=");
 		sb.append(_payload);
-		sb.append(", skipLocal=");
-		sb.append(_skipLocal);
 		sb.append(", uuid=");
 		sb.append(_uuid);
 		sb.append("}");
@@ -74,7 +64,6 @@ public class ClusterRequestImpl implements ClusterRequest {
 
 	private boolean _multicast;
 	private Object _payload;
-	private boolean _skipLocal;
 	private String _uuid;
 
 }

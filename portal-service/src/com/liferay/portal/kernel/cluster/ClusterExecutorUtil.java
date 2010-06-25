@@ -45,20 +45,6 @@ public class ClusterExecutorUtil {
 		return _clusterExecutor.executeMulticastCall(methodWrapper);
 	}
 
-	public static Map<Address, Future<?>> executeMulticastCall(
-		MethodWrapper methodWrapper, boolean skipLocal) {
-
-		if ((_clusterExecutor == null) || !_clusterExecutor.isEnabled()) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("ClusterExecutorUtil has not been initialized");
-			}
-
-			return null;
-		}
-
-		return _clusterExecutor.executeMulticastCall(methodWrapper, skipLocal);
-	}
-
 	public static Future<?> executeUnicastCall(
 		Address address, MethodWrapper methodWrapper) {
 
