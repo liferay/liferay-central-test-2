@@ -176,6 +176,37 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleException;
 
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByResourcePrimKey(
+		long resourcePrimKey)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByResourcePrimKey(
+		long resourcePrimKey, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByResourcePrimKey(
+		long resourcePrimKey, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.journal.model.JournalArticle findByResourcePrimKey_First(
+		long resourcePrimKey,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException;
+
+	public com.liferay.portlet.journal.model.JournalArticle findByResourcePrimKey_Last(
+		long resourcePrimKey,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException;
+
+	public com.liferay.portlet.journal.model.JournalArticle[] findByResourcePrimKey_PrevAndNext(
+		long id, long resourcePrimKey,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException;
+
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findBySmallImageId(
 		long smallImageId)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -620,6 +651,9 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	public void removeByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public void removeByResourcePrimKey(long resourcePrimKey)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void removeBySmallImageId(long smallImageId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -671,6 +705,9 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByCompanyId(long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByResourcePrimKey(long resourcePrimKey)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countBySmallImageId(long smallImageId)
