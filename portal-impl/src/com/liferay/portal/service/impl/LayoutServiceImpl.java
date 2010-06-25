@@ -65,7 +65,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
 		return layoutLocalService.addLayout(
-			getUserId(), groupId, privateLayout, parentLayoutId, localeNamesMap,
+			null, getUserId(), groupId, privateLayout, parentLayoutId, localeNamesMap,
 			localeTitlesMap, description, type, hidden, friendlyURL,
 			serviceContext);
 	}

@@ -103,7 +103,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	public Layout addLayout(
-			long userId, long groupId, boolean privateLayout,
+			String uuid, long userId, long groupId, boolean privateLayout,
 			long parentLayoutId, Map<Locale, String> localeNamesMap,
 			Map<Locale, String> localeTitlesMap, String description,
 			String type, boolean hidden, String friendlyURL, long dlFolderId,
@@ -129,6 +129,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		Layout layout = layoutPersistence.create(plid);
 
+		layout.setUuid(uuid);
 		layout.setGroupId(groupId);
 		layout.setCompanyId(user.getCompanyId());
 		layout.setPrivateLayout(privateLayout);
@@ -181,7 +182,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	public Layout addLayout(
-			long userId, long groupId, boolean privateLayout,
+			String uuid, long userId, long groupId, boolean privateLayout,
 			long parentLayoutId, Map<Locale, String> localeNamesMap,
 			Map<Locale, String> localeTitlesMap, String description,
 			String type, boolean hidden, String friendlyURL,
@@ -189,13 +190,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return addLayout(
-			userId, groupId, privateLayout, parentLayoutId, localeNamesMap,
+			uuid, userId, groupId, privateLayout, parentLayoutId, localeNamesMap,
 			localeTitlesMap, description, type, hidden, friendlyURL,
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, serviceContext);
 	}
 
 	public Layout addLayout(
-			long userId, long groupId, boolean privateLayout,
+			String uuid, long userId, long groupId, boolean privateLayout,
 			long parentLayoutId, String name, String title, String description,
 			String type, boolean hidden, String friendlyURL, long dlFolderId,
 			ServiceContext serviceContext)
@@ -208,13 +209,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		localeNamesMap.put(defaultLocale, name);
 
 		return addLayout(
-			userId, groupId, privateLayout, parentLayoutId, localeNamesMap,
+			uuid, userId, groupId, privateLayout, parentLayoutId, localeNamesMap,
 			null, description, type, hidden, friendlyURL, dlFolderId,
 			serviceContext);
 	}
 
 	public Layout addLayout(
-			long userId, long groupId, boolean privateLayout,
+			String uuid, long userId, long groupId, boolean privateLayout,
 			long parentLayoutId, String name, String title, String description,
 			String type, boolean hidden, String friendlyURL,
 			ServiceContext serviceContext)
@@ -227,7 +228,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		localeNamesMap.put(defaultLocale, name);
 
 		return addLayout(
-			userId, groupId, privateLayout, parentLayoutId, localeNamesMap,
+			uuid, userId, groupId, privateLayout, parentLayoutId, localeNamesMap,
 			new HashMap<Locale, String>(), description, type, hidden,
 			friendlyURL, serviceContext);
 	}
