@@ -64,7 +64,9 @@ public class PortletURLFactoryImpl implements PortletURLFactory {
 			(LiferayPortletResponse)request.getAttribute(
 				JavaConstants.JAVAX_PORTLET_RESPONSE);
 
-		if (liferayPortletRequest == null) {
+		if ((liferayPortletRequest == null) ||
+			(liferayPortletResponse == null)) {
+
 			return new PortletURLImpl(request, portletName, plid, lifecycle);
 		}
 
