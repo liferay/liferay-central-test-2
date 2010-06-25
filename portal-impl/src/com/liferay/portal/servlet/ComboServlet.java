@@ -152,7 +152,7 @@ public class ComboServlet extends HttpServlet {
 			}
  		}
 
-		if (file == null) {
+		if (fileContentBag == null) {
 			fileContentBag = _EMPTY_FILE_CONTENT_BAG;
 		}
 		else {
