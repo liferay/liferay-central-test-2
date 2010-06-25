@@ -1529,7 +1529,7 @@
     </portlet>
     <portlet>
 		<portlet-name>157</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/workflow_instances.png</icon>
 		<struts-path>workflow_instances</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
@@ -1544,7 +1544,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>158</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/my_workflow_instances.png</icon>
 		<struts-path>my_workflow_instances</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>my</control-panel-entry-category>
