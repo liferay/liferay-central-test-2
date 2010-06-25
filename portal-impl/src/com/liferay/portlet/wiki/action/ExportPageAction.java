@@ -30,7 +30,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
@@ -77,7 +77,7 @@ public class ExportPageAction extends PortletAction {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
-			PortletURL viewPageURL = new PortletURLImpl(
+			PortletURL viewPageURL = PortletURLFactoryUtil.create(
 				(ActionRequestImpl)actionRequest,
 				portletConfig.getPortletName(), themeDisplay.getPlid(),
 				PortletRequest.RENDER_PHASE);
@@ -88,7 +88,7 @@ public class ExportPageAction extends PortletAction {
 			viewPageURL.setParameter("nodeName", nodeName);
 			viewPageURL.setParameter("title", title);
 
-			PortletURL editPageURL = new PortletURLImpl(
+			PortletURL editPageURL = PortletURLFactoryUtil.create(
 				(ActionRequestImpl)actionRequest,
 				portletConfig.getPortletName(), themeDisplay.getPlid(),
 				PortletRequest.RENDER_PHASE);

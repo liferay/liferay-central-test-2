@@ -26,7 +26,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import com.liferay.util.RSSUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -112,13 +112,13 @@ public class RSSAction extends PortletAction {
 		String displayStyle = ParamUtil.getString(
 			request, "displayStyle", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
 
-		PortletURL feedURL = new PortletURLImpl(
+		PortletURL feedURL = PortletURLFactoryUtil.create(
 			request, PortletKeys.WIKI, layout.getPlid(),
 			PortletRequest.RENDER_PHASE);
 
 		feedURL.setParameter("nodeId", String.valueOf(nodeId));
 
-		PortletURL entryURL = new PortletURLImpl(
+		PortletURL entryURL = PortletURLFactoryUtil.create(
 			request, PortletKeys.WIKI, layout.getPlid(),
 			PortletRequest.RENDER_PHASE);
 

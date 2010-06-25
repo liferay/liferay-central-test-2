@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.wiki.action;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -27,8 +28,7 @@ import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.wiki.DuplicatePageException;
 import com.liferay.portlet.wiki.NoSuchNodeException;
@@ -249,21 +249,22 @@ public class EditPageAction extends PortletAction {
 		String originalRedirect = ParamUtil.getString(
 			actionRequest, "originalRedirect");
 
-		PortletURLImpl portletURL = new PortletURLImpl(
-			(ActionRequestImpl)actionRequest, portletConfig.getPortletName(),
+		LiferayPortletURL liferayPortletURL = PortletURLFactoryUtil.create(
+			actionRequest, portletConfig.getPortletName(),
 			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
-		portletURL.setParameter("struts_action", "/wiki/edit_page");
-		portletURL.setParameter(Constants.CMD, Constants.UPDATE, false);
-		portletURL.setParameter("redirect", redirect, false);
-		portletURL.setParameter("originalRedirect", originalRedirect, false);
-		portletURL.setParameter(
+		liferayPortletURL.setParameter("struts_action", "/wiki/edit_page");
+		liferayPortletURL.setParameter(Constants.CMD, Constants.UPDATE, false);
+		liferayPortletURL.setParameter("redirect", redirect, false);
+		liferayPortletURL.setParameter(
+			"originalRedirect", originalRedirect, false);
+		liferayPortletURL.setParameter(
 			"groupId", String.valueOf(layout.getGroupId()), false);
-		portletURL.setParameter(
+		liferayPortletURL.setParameter(
 			"nodeId", String.valueOf(page.getNodeId()), false);
-		portletURL.setParameter("title", page.getTitle(), false);
+		liferayPortletURL.setParameter("title", page.getTitle(), false);
 
-		return portletURL.toString();
+		return liferayPortletURL.toString();
 	}
 
 	protected void revertPage(ActionRequest actionRequest) throws Exception {

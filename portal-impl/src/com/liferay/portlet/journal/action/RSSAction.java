@@ -38,7 +38,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletRequestImpl;
-import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleDisplay;
 import com.liferay.portlet.journal.model.JournalFeed;
@@ -210,7 +210,7 @@ public class RSSAction extends PortletAction {
 				portletId = feed.getTargetPortletId();
 			}
 
-			PortletURL entryURL = new PortletURLImpl(
+			PortletURL entryURL = PortletURLFactoryUtil.create(
 				(PortletRequestImpl)resourceRequest, portletId, plid,
 				PortletRequest.RENDER_PHASE);
 

@@ -17,7 +17,7 @@ package com.liferay.portlet.messageboards.action;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.PortletURLFactoryUtil;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
@@ -47,7 +47,7 @@ public class FindRecentPostsAction extends Action {
 		try {
 			long plid = ParamUtil.getLong(request, "p_l_id");
 
-			PortletURL portletURL = new PortletURLImpl(
+			PortletURL portletURL = PortletURLFactoryUtil.create(
 				request, PortletKeys.MESSAGE_BOARDS, plid,
 				PortletRequest.RENDER_PHASE);
 

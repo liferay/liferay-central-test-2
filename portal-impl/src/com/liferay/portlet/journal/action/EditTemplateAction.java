@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.journal.action;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
@@ -27,8 +28,7 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.journal.DuplicateTemplateIdException;
 import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.RequiredTemplateException;
@@ -190,21 +190,24 @@ public class EditTemplateAction extends PortletAction {
 		String originalRedirect = ParamUtil.getString(
 			actionRequest, "originalRedirect");
 
-		PortletURLImpl portletURL = new PortletURLImpl(
-			(ActionRequestImpl)actionRequest, portletConfig.getPortletName(),
+		LiferayPortletURL liferayPortletURL = PortletURLFactoryUtil.create(
+			actionRequest, portletConfig.getPortletName(),
 			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
-		portletURL.setWindowState(WindowState.MAXIMIZED);
+		liferayPortletURL.setWindowState(WindowState.MAXIMIZED);
 
-		portletURL.setParameter("struts_action", "/journal/edit_template");
-		portletURL.setParameter(Constants.CMD, Constants.UPDATE, false);
-		portletURL.setParameter("redirect", redirect, false);
-		portletURL.setParameter("originalRedirect", originalRedirect, false);
-		portletURL.setParameter(
+		liferayPortletURL.setParameter(
+			"struts_action", "/journal/edit_template");
+		liferayPortletURL.setParameter(Constants.CMD, Constants.UPDATE, false);
+		liferayPortletURL.setParameter("redirect", redirect, false);
+		liferayPortletURL.setParameter(
+			"originalRedirect", originalRedirect, false);
+		liferayPortletURL.setParameter(
 			"groupId", String.valueOf(template.getGroupId()), false);
-		portletURL.setParameter("templateId", template.getTemplateId(), false);
+		liferayPortletURL.setParameter(
+			"templateId", template.getTemplateId(), false);
 
-		return portletURL.toString();
+		return liferayPortletURL.toString();
 	}
 
 	protected JournalTemplate updateTemplate(ActionRequest actionRequest)
