@@ -199,6 +199,7 @@
 		<field name="size" type="int" />
 	</model>
 	<model name="com.liferay.portal.model.Layout">
+		<field name="uuid" type="String" />
 		<field name="plid" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />

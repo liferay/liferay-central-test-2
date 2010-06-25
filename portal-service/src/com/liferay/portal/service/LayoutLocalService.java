@@ -109,8 +109,8 @@ public interface LayoutLocalService {
 		com.liferay.portal.model.Layout layout, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.model.Layout addLayout(java.lang.String uuid,
-		long userId, long groupId, boolean privateLayout, long parentLayoutId,
+	public com.liferay.portal.model.Layout addLayout(long userId, long groupId,
+		boolean privateLayout, long parentLayoutId,
 		java.util.Map<java.util.Locale, java.lang.String> localeNamesMap,
 		java.util.Map<java.util.Locale, java.lang.String> localeTitlesMap,
 		java.lang.String description, java.lang.String type, boolean hidden,
@@ -119,8 +119,8 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.model.Layout addLayout(java.lang.String uuid,
-		long userId, long groupId, boolean privateLayout, long parentLayoutId,
+	public com.liferay.portal.model.Layout addLayout(long userId, long groupId,
+		boolean privateLayout, long parentLayoutId,
 		java.util.Map<java.util.Locale, java.lang.String> localeNamesMap,
 		java.util.Map<java.util.Locale, java.lang.String> localeTitlesMap,
 		java.lang.String description, java.lang.String type, boolean hidden,
@@ -129,20 +129,19 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.model.Layout addLayout(java.lang.String uuid,
-		long userId, long groupId, boolean privateLayout, long parentLayoutId,
-		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String type, boolean hidden,
-		java.lang.String friendlyURL, long dlFolderId,
+	public com.liferay.portal.model.Layout addLayout(long userId, long groupId,
+		boolean privateLayout, long parentLayoutId, java.lang.String name,
+		java.lang.String title, java.lang.String description,
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL,
+		long dlFolderId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.model.Layout addLayout(java.lang.String uuid,
-		long userId, long groupId, boolean privateLayout, long parentLayoutId,
-		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String type, boolean hidden,
-		java.lang.String friendlyURL,
+	public com.liferay.portal.model.Layout addLayout(long userId, long groupId,
+		boolean privateLayout, long parentLayoutId, java.lang.String name,
+		java.lang.String title, java.lang.String description,
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
