@@ -164,18 +164,9 @@ public class VerifyJournal extends VerifyProcess {
 
 		boolean checkNewLine = false;
 
-		List<JournalArticle> articles = null;
-
-		if (NUM_OF_ARTICLES <= 0) {
-			checkNewLine = true;
-
-			articles = JournalArticleLocalServiceUtil.getArticles(
-				DEFAULT_GROUP_ID);
-		}
-		else {
-			articles = JournalArticleLocalServiceUtil.getArticles(
+		List<JournalArticle> articles =
+			JournalArticleLocalServiceUtil.getArticles(
 				DEFAULT_GROUP_ID, 0, NUM_OF_ARTICLES);
-		}
 
 		for (JournalArticle article : articles) {
 			String content = article.getContent();

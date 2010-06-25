@@ -48,7 +48,6 @@ import java.util.Properties;
 
 import javax.imageio.ImageIO;
 
-import javax.media.jai.JAI;
 import javax.media.jai.LookupTableJAI;
 import javax.media.jai.PlanarImage;
 import javax.media.jai.RasterFactory;
@@ -352,12 +351,11 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 
 		tiledImage.setData(raster);
 
-		if (false) {
-			JAI.create("filestore", tiledImage, "test.png", "PNG");
+		/*javax.media.jai.JAI.create(
+			"filestore", tiledImage, "test.png", "PNG");
 
-			printImage(renderedImage);
-			printImage(tiledImage);
-		}
+		printImage(renderedImage);
+		printImage(tiledImage);}*/
 
 		return tiledImage;
 	}
