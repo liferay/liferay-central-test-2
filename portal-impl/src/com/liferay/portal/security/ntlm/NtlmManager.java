@@ -14,14 +14,14 @@
 
 package com.liferay.portal.security.ntlm;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import jcifs.ntlmssp.NtlmFlags;
 import jcifs.ntlmssp.Type1Message;
@@ -34,6 +34,7 @@ import jcifs.util.Encdec;
  * <a href="NtlmManager.java.html"><b><i>View Source</i></b></a>
  *
  * @author Marcellus Tavares
+ * @author Michael C. Han
  */
 public class NtlmManager {
 
@@ -47,38 +48,32 @@ public class NtlmManager {
 	}
 
 	public NtlmUserAccount authenticate(
-		byte[] material, byte[] serverChallenge) {
+			byte[] material, byte[] serverChallenge)
+		throws IOException, NoSuchAlgorithmException, NtlmLogonException {
 
-		try {
-			Type3Message type3Message = new Type3Message(material);
+		Type3Message type3Message = new Type3Message(material);
 
-			if (type3Message.getFlag(
-					_NTLMSSP_NEGOTIATE_EXTENDED_SESSION_SECURITY) &&
-				(type3Message.getNTResponse().length == 24)) {
+		if (type3Message.getFlag(
+				_NTLMSSP_NEGOTIATE_EXTENDED_SESSION_SECURITY) &&
+			(type3Message.getNTResponse().length == 24)) {
 
-				MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+			MessageDigest messageDigest = MessageDigest.getInstance("MD5");
 
-				byte[] bytes = new byte[16];
+			byte[] bytes = new byte[16];
 
-				System.arraycopy(serverChallenge, 0, bytes, 0, 8);
-				System.arraycopy(type3Message.getLMResponse(), 0, bytes, 8, 8);
+			System.arraycopy(serverChallenge, 0, bytes, 0, 8);
+			System.arraycopy(type3Message.getLMResponse(), 0, bytes, 8, 8);
 
-				messageDigest.update(bytes);
+			messageDigest.update(bytes);
 
-				serverChallenge = messageDigest.digest();
-			}
-
-			 return _netlogon.logon(
-				 type3Message.getDomain(), type3Message.getUser(),
-				 type3Message.getWorkstation(),
-				 serverChallenge, type3Message.getNTResponse(),
-				 type3Message.getLMResponse());
+			serverChallenge = messageDigest.digest();
 		}
-		catch (Exception e) {
-			_log.error(e, e);
 
-			return null;
-		}
+		return _netlogon.logon(
+			 type3Message.getDomain(), type3Message.getUser(),
+			 type3Message.getWorkstation(),
+			 serverChallenge, type3Message.getNTResponse(),
+			 type3Message.getLMResponse());
 	}
 
 	public String getDomain() {
@@ -101,29 +96,24 @@ public class NtlmManager {
 		return _ntlmServiceAccount.getPassword();
 	}
 
-	public byte[] negotiate(byte[] material, byte[] serverChallenge) {
-		try {
-			Type1Message type1Message = new Type1Message(material);
+	public byte[] negotiate(byte[] material, byte[] serverChallenge)
+		throws IOException {
 
-			Type2Message type2Message = new Type2Message(
-				type1Message.getFlags(), serverChallenge, _domain);
+		Type1Message type1Message = new Type1Message(material);
 
-			if (type2Message.getFlag(
-					_NTLMSSP_NEGOTIATE_EXTENDED_SESSION_SECURITY)) {
+		Type2Message type2Message = new Type2Message(
+			type1Message.getFlags(), serverChallenge, _domain);
 
-				type2Message.setFlag(NtlmFlags.NTLMSSP_NEGOTIATE_LM_KEY, false);
-				type2Message.setFlag(
-					NtlmFlags.NTLMSSP_NEGOTIATE_TARGET_INFO, true);
-				type2Message.setTargetInformation(getTargetInformation());
-			}
+		if (type2Message.getFlag(
+				_NTLMSSP_NEGOTIATE_EXTENDED_SESSION_SECURITY)) {
 
-			return type2Message.toByteArray();
+			type2Message.setFlag(NtlmFlags.NTLMSSP_NEGOTIATE_LM_KEY, false);
+			type2Message.setFlag(
+				NtlmFlags.NTLMSSP_NEGOTIATE_TARGET_INFO, true);
+			type2Message.setTargetInformation(getTargetInformation());
 		}
-		catch (Exception e) {
-			_log.error(e, e);
 
-			return null;
-		}
+		return type2Message.toByteArray();
 	}
 
 	public void setConfiguration(
@@ -135,6 +125,8 @@ public class NtlmManager {
 		_domainControllerName = domainControllerName;
 		_ntlmServiceAccount = new NtlmServiceAccount(
 			serviceAccount, servicePassword);
+
+		_netlogon = new Netlogon();
 
 		_netlogon.setConfiguration(
 			domainController, domainControllerName, _ntlmServiceAccount);
@@ -171,12 +163,10 @@ public class NtlmManager {
 	private static final int _NTLMSSP_NEGOTIATE_EXTENDED_SESSION_SECURITY =
 		0x00080000;
 
-	private static Log _log = LogFactoryUtil.getLog(NtlmManager.class);
-
 	private String _domain;
 	private String _domainController;
 	private String _domainControllerName;
-	private Netlogon _netlogon = new Netlogon();
+	private Netlogon _netlogon;
 	private NtlmServiceAccount _ntlmServiceAccount;
 
 }

@@ -14,6 +14,8 @@
 
 package com.liferay.portal.servlet.filters.sso.ntlm;
 
+import com.liferay.portal.kernel.cache.PortalCache;
+import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -58,6 +60,7 @@ import jcifs.util.Base64;
  * @author Brian Wing Shun Chan
  * @author Wesley Gong
  * @author Marcellus Tavares
+ * @author Michael C. Han
  */
 public class NtlmFilter extends BasePortalFilter {
 
@@ -188,11 +191,28 @@ public class NtlmFilter extends BasePortalFilter {
 					return;
 				}
 				else {
-					byte[] serverChallenge = _serverChallenges.get(
+					byte[] serverChallenge = (byte[])_serverChallenges.get(
 						request.getRemoteAddr());
 
-					NtlmUserAccount ntlmUserAccount = ntlmManager.authenticate(
-						src, serverChallenge);
+					if (serverChallenge == null) {
+						return;
+					}
+
+					NtlmUserAccount ntlmUserAccount = null;
+
+					try {
+						ntlmUserAccount = ntlmManager.authenticate(
+							src, serverChallenge);
+					}
+					catch (Exception e) {
+						if (_log.isErrorEnabled()) {
+							_log.error(
+								"Unable to perform NTLM authentication", e);
+						}
+					}
+					finally {
+						_serverChallenges.remove(request.getRemoteAddr());
+					}
 
 					if (ntlmUserAccount == null) {
 						return;
@@ -203,8 +223,6 @@ public class NtlmFilter extends BasePortalFilter {
 							"NTLM remote user " +
 								ntlmUserAccount.getUserName());
 					}
-
-					_serverChallenges.remove(request.getRemoteAddr());
 
 					request.setAttribute(
 						WebKeys.NTLM_REMOTE_USER,
@@ -242,12 +260,13 @@ public class NtlmFilter extends BasePortalFilter {
 		processFilter(NtlmPostFilter.class, request, response, filterChain);
 	}
 
+	private static final String _CACHE_NAME = "NtlmServerChallenge";
 	private static Log _log = LogFactoryUtil.getLog(NtlmFilter.class);
 
 	private Map<Long, NtlmManager> _ntlmManagers =
 		new ConcurrentHashMap<Long, NtlmManager>();
 	private SecureRandom _secureRandom = new SecureRandom();
-	private Map<String, byte[]> _serverChallenges =
-		new ConcurrentHashMap<String, byte[]>();
+	private PortalCache _serverChallenges = SingleVMPoolUtil.getCache(
+		_CACHE_NAME);
 
 }
