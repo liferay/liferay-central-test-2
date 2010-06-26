@@ -30,6 +30,15 @@
 					<project name="portal-test-${test.ant.script.command}" basedir="../../." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 						<import file="../../build-test.xml" />
 
+						<target name="run-${test.ant.script.command}-glassfish-v3-mysql">
+							<antcall target="prepare-mysql" />
+
+							<ant antfile="build-test-glassfish.xml" target="run-selenium-glassfish">
+								<property name="${test.ant.script.plugins.type}.plugins.includes" value="${test.ant.script.plugins}" />
+								<property name="test.name" value="${test.ant.script.suite}" />
+							</ant>
+						</target>
+
 						<target name="run-${test.ant.script.command}-jboss-mysql">
 							<antcall target="prepare-mysql" />
 
@@ -115,6 +124,14 @@
 
 					<project name="portal-test-${test.ant.script.command}" basedir="../../." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 						<import file="../../build-test.xml" />
+
+						<target name="run-${test.ant.script.command}-glassfish-v3-mysql">
+							<antcall target="prepare-mysql" />
+
+							<ant antfile="build-test-glassfish.xml" target="run-selenium-glassfish">
+								<property name="test.name" value="${test.ant.script.suite}" />
+							</ant>
+						</target>
 
 						<target name="run-${test.ant.script.command}-jboss-mysql">
 							<antcall target="prepare-mysql" />
@@ -1049,6 +1066,11 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="smoke-test" />
+			<param name="test.ant.script.suite" value="SmokeTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="staging-asset-publisher" />
 			<param name="test.ant.script.suite" value="StagingAssetPublisherTestSuite" />
 		</antcall>
@@ -1710,12 +1732,12 @@ file.
 
 			<sequential>
 				<waitfor>
-					<http url="http://localhost:8080" />
+					<http url="http://localhost:8080/web/guest" />
 				</waitfor>
 
 				<if>
 					<or>
-						<equals arg1="${simple.server.dir}" arg2="${app.server.parent.dir}/glassfish-3.0.0" />
+						<equals arg1="${simple.server.start.executable.arg.line}" arg2="start-domain -v" />
 						<isset property="portlet.plugins.includes" />
 						<isset property="theme.plugins.includes" />
 						<isset property="webs.plugins.includes" />
