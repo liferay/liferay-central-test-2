@@ -120,7 +120,7 @@ public class WikiPageServiceUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
-		java.lang.String title, boolean head)
+		java.lang.String title, java.lang.Boolean head)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getPage(nodeId, title, head);

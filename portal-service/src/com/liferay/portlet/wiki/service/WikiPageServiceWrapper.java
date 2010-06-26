@@ -117,7 +117,7 @@ public class WikiPageServiceWrapper implements WikiPageService {
 	}
 
 	public com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
-		java.lang.String title, boolean head)
+		java.lang.String title, java.lang.Boolean head)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _wikiPageService.getPage(nodeId, title, head);

@@ -599,7 +599,7 @@ public class WikiPageServiceHttp {
 
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(
 		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title,
-		boolean head)
+		java.lang.Boolean head)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -611,7 +611,11 @@ public class WikiPageServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = new BooleanWrapper(head);
+			Object paramObj2 = head;
+
+			if (head == null) {
+				paramObj2 = new NullWrapper("java.lang.Boolean");
+			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(WikiPageServiceUtil.class.getName(),
 					"getPage", new Object[] { paramObj0, paramObj1, paramObj2 });

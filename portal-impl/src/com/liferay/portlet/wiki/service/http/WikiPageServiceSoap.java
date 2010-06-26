@@ -227,7 +227,7 @@ public class WikiPageServiceSoap {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPageSoap getPage(
-		long nodeId, java.lang.String title, boolean head)
+		long nodeId, java.lang.String title, java.lang.Boolean head)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.getPage(nodeId,

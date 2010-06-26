@@ -299,6 +299,13 @@ public class WikiPageLocalServiceUtil {
 		return getService().getPage(resourcePrimKey);
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiPage getPage(
+		long resourcePrimKey, java.lang.Boolean head)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getPage(resourcePrimKey, head);
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
 		java.lang.String title)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -307,7 +314,7 @@ public class WikiPageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
-		java.lang.String title, boolean head)
+		java.lang.String title, java.lang.Boolean head)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getPage(nodeId, title, head);
