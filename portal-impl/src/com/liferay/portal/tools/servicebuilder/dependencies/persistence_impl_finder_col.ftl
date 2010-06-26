@@ -1,6 +1,4 @@
 <#list finderColsList as finderCol>
-	<#assign finderColConjunction = "">
-
 	<#if !finderCol.isPrimitiveType()>
 		if (${finderCol.name} == null) {
 			query.append(_FINDER_COLUMN_${finder.name?upper_case}_${finderCol.name?upper_case}_1);
