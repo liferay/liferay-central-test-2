@@ -345,24 +345,24 @@ if (Validator.isNull(redirect)) {
 					</aui:field-wrapper>
 				</c:if>
 
+				<%
+				boolean pending = false;
+
+				if (wikiPage != null) {
+					pending = wikiPage.isPending();
+				}
+				%>
+
+				<c:if test="<%= pending %>">
+					<div class="portlet-msg-info">
+						<liferay-ui:message key="there-is-a-publication-workflow-in-process" />
+					</div>
+				</c:if>
+
 				<aui:button-row>
 					<aui:button type="submit" />
 
-					<%
-					boolean pending = false;
-
-					if (wikiPage != null) {
-						pending = wikiPage.isPending();
-					}
-					%>
-
 					<aui:button disabled="<%= pending %>" name="publishButton" onClick='<%= renderResponse.getNamespace() + "publishPage();" %>' type="button" value="publish" />
-
-					<c:if test="<%= pending %>">
-						<liferay-ui:icon-help
-							message="there-is-a-publication-workflow-in-process"
-						/>
-					</c:if>
 
 					<aui:button name="previewButton" onClick='<%= renderResponse.getNamespace() + "previewPage();" %>' type="button" value="preview" />
 

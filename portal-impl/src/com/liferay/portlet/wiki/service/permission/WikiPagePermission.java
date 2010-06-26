@@ -16,6 +16,7 @@ package com.liferay.portlet.wiki.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.workflow.permission.WorkflowPermissionUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -64,7 +65,8 @@ public class WikiPagePermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		WikiPage page = WikiPageLocalServiceUtil.getPage(resourcePrimKey);
+		WikiPage page = WikiPageLocalServiceUtil.getPage(
+			resourcePrimKey, (Boolean)null);
 
 		return contains(permissionChecker, page, actionId);
 	}
@@ -75,7 +77,8 @@ public class WikiPagePermission {
 		throws PortalException, SystemException {
 
 		try {
-			WikiPage page = WikiPageLocalServiceUtil.getPage(nodeId, title);
+			WikiPage page = WikiPageLocalServiceUtil.getPage(
+				nodeId, title, null);
 
 			return contains(permissionChecker, page, actionId);
 		}
@@ -87,6 +90,16 @@ public class WikiPagePermission {
 
 	public static boolean contains(
 		PermissionChecker permissionChecker, WikiPage page, String actionId) {
+
+		if (page.isPending()) {
+			Boolean hasPermission = WorkflowPermissionUtil.hasPermission(
+				permissionChecker, page.getGroupId(), WikiPage.class.getName(),
+				page.getResourcePrimKey(), actionId);
+
+			if (hasPermission != null) {
+				return hasPermission.booleanValue();
+			}
+		}
 
 		if (permissionChecker.hasOwnerPermission(
 				page.getCompanyId(), WikiPage.class.getName(), page.getPageId(),

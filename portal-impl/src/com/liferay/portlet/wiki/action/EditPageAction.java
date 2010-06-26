@@ -39,7 +39,6 @@ import com.liferay.portlet.wiki.PageVersionException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.WikiPageConstants;
-import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -197,10 +196,8 @@ public class EditPageAction extends PortletAction {
 
 		if (Validator.isNotNull(title)) {
 			try {
-				if ((version == 0) &&
-					WikiPageLocalServiceUtil.hasDraftPage(nodeId, title)) {
-
-					page = WikiPageServiceUtil.getDraftPage(nodeId, title);
+				if (version == 0) {
+					page = WikiPageServiceUtil.getPage(nodeId, title, null);
 				}
 				else {
 					page = WikiPageServiceUtil.getPage(nodeId, title, version);
