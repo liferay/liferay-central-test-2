@@ -771,29 +771,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 						QueryPos qPos = QueryPos.getInstance(q);
 
-						<#list finderColsList as finderCol>
-							<#if !finderCol.isPrimitiveType()>
-								if (${finderCol.name} != null) {
-							</#if>
-
-							qPos.add(
-
-							<#if finderCol.type == "Date">
-								CalendarUtil.getTimestamp(
-							</#if>
-
-							${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")}
-
-							<#if finderCol.type == "Date">
-								)
-							</#if>
-
-							);
-
-							<#if !finderCol.isPrimitiveType()>
-								}
-							</#if>
-						</#list>
+						<#include "persistence_impl_finder_qpos.ftl">
 
 						list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end);
 					}
@@ -1039,30 +1017,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				<#list finderColsList as finderCol>
-					<#if !finderCol.isPrimitiveType()>
-						if (${finderCol.name} != null) {
-					</#if>
-
-					qPos.add(
-
-					<#if finderCol.type == "Date">
-						CalendarUtil.getTimestamp(
-					</#if>
-
-					${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")}
-
-					<#if finderCol.type == "Date">
-						)
-					</#if>
-
-					);
-
-					<#if !finderCol.isPrimitiveType()>
-						}
-					</#if>
-
-				</#list>
+				<#include "persistence_impl_finder_qpos.ftl">
 
 				if (orderByComparator != null) {
 					Object[] values = orderByComparator.getOrderByValues(${entity.varName});
@@ -1172,29 +1127,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 						QueryPos qPos = QueryPos.getInstance(q);
 
-						<#list finderColsList as finderCol>
-							<#if !finderCol.isPrimitiveType()>
-								if (${finderCol.name} != null) {
-							</#if>
-
-							qPos.add(
-
-							<#if finderCol.type == "Date">
-								CalendarUtil.getTimestamp(
-							</#if>
-
-							${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")}
-
-							<#if finderCol.type == "Date">
-								)
-							</#if>
-
-							);
-
-							<#if !finderCol.isPrimitiveType()>
-								}
-							</#if>
-						</#list>
+						<#include "persistence_impl_finder_qpos.ftl">
 
 						return (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end);
 					}
@@ -1321,29 +1254,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 						QueryPos qPos = QueryPos.getInstance(q);
 
-						<#list finderColsList as finderCol>
-							<#if !finderCol.isPrimitiveType()>
-								if (${finderCol.name} != null) {
-							</#if>
-
-							qPos.add(
-
-							<#if finderCol.type == "Date">
-								CalendarUtil.getTimestamp(
-							</#if>
-
-							${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")}
-
-							<#if finderCol.type == "Date">
-								)
-							</#if>
-
-							);
-
-							<#if !finderCol.isPrimitiveType()>
-								}
-							</#if>
-						</#list>
+						<#include "persistence_impl_finder_qpos.ftl">
 
 						List<${entity.name}> list = q.list();
 
@@ -1577,29 +1488,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					QueryPos qPos = QueryPos.getInstance(q);
 
-					<#list finderColsList as finderCol>
-						<#if !finderCol.isPrimitiveType()>
-							if (${finderCol.name} != null) {
-						</#if>
-
-						qPos.add(
-
-						<#if finderCol.type == "Date">
-							CalendarUtil.getTimestamp(
-						</#if>
-
-						${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")}
-
-						<#if finderCol.type == "Date">
-							)
-						</#if>
-
-						);
-
-						<#if !finderCol.isPrimitiveType()>
-							}
-						</#if>
-					</#list>
+					<#include "persistence_impl_finder_qpos.ftl">
 
 					count = (Long)q.uniqueResult();
 				}
@@ -1665,29 +1554,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					QueryPos qPos = QueryPos.getInstance(q);
 
-					<#list finderColsList as finderCol>
-						<#if !finderCol.isPrimitiveType()>
-							if (${finderCol.name} != null) {
-						</#if>
-
-						qPos.add(
-
-						<#if finderCol.type == "Date">
-							CalendarUtil.getTimestamp(
-						</#if>
-
-						${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")}
-
-						<#if finderCol.type == "Date">
-							)
-						</#if>
-
-						);
-
-						<#if !finderCol.isPrimitiveType()>
-							}
-						</#if>
-					</#list>
+					<#include "persistence_impl_finder_qpos.ftl">
 
 					Long count = (Long)q.uniqueResult();
 
