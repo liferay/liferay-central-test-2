@@ -42,7 +42,7 @@ public class CalEventAssetRendererFactory extends BaseAssetRendererFactory {
 
 	public static final String TYPE = "event";
 
-	public AssetRenderer getAssetRenderer(long classPK)
+	public AssetRenderer getAssetRenderer(long classPK, int type)
 		throws PortalException, SystemException {
 
 		CalEvent event = CalEventLocalServiceUtil.getEvent(classPK);

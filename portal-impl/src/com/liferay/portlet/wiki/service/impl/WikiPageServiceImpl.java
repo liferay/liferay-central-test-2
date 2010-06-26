@@ -213,7 +213,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		return wikiPageLocalService.getPage(nodeId, title);
 	}
 
-	public WikiPage getPage(long nodeId, String title, boolean head)
+	public WikiPage getPage(long nodeId, String title, Boolean head)
 		throws PortalException, SystemException {
 
 		WikiPagePermission.check(

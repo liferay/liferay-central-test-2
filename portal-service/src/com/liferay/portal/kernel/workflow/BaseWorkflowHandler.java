@@ -42,6 +42,7 @@ import javax.portlet.RenderResponse;
  * @author Marcellus Tavares
  * @author Juan Fernández
  * @author Julio Camarero
+ * @author Jorge Ferrer
  */
 public abstract class BaseWorkflowHandler implements WorkflowHandler {
 
@@ -51,7 +52,8 @@ public abstract class BaseWorkflowHandler implements WorkflowHandler {
 		AssetRendererFactory assetRendererFactory = getAssetRendererFactory();
 
 		if (assetRendererFactory != null) {
-			return assetRendererFactory.getAssetRenderer(classPK);
+			return assetRendererFactory.getAssetRenderer(
+				classPK, AssetRendererFactory.TYPE_LATEST);
 		}
 		else {
 			return null;

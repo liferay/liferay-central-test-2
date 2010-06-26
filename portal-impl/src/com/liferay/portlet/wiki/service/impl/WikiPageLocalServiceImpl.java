@@ -684,11 +684,17 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	public WikiPage getPage(long resourcePrimKey)
 		throws PortalException, SystemException {
 
+		return getPage(resourcePrimKey, Boolean.TRUE);
+	}
+
+	public WikiPage getPage(long resourcePrimKey, Boolean head)
+		throws PortalException, SystemException {
+
 		WikiPageResource wikiPageResource =
 			wikiPageResourceLocalService.getPageResource(resourcePrimKey);
 
 		return getPage(
-			wikiPageResource.getNodeId(), wikiPageResource.getTitle());
+			wikiPageResource.getNodeId(), wikiPageResource.getTitle(), head);
 	}
 
 	public WikiPage getPage(long nodeId, String title)
@@ -705,11 +711,18 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 	}
 
-	public WikiPage getPage(long nodeId, String title, boolean head)
+	public WikiPage getPage(long nodeId, String title, Boolean head)
 		throws PortalException, SystemException {
 
-		List<WikiPage> pages = wikiPagePersistence.findByN_T_H(
-			nodeId, title, head, 0, 1);
+		List<WikiPage> pages;
+
+		if (head == null) {
+			pages = wikiPagePersistence.findByN_T(nodeId, title, 0, 1);
+		}
+		else {
+			pages = wikiPagePersistence.findByN_T_H(
+				nodeId, title, head, 0, 1);
+		}
 
 		if (!pages.isEmpty()) {
 			return pages.get(0);

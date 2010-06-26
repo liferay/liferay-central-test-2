@@ -43,7 +43,7 @@ public class IGImageAssetRendererFactory extends BaseAssetRendererFactory {
 
 	public static final String TYPE = "image";
 
-	public AssetRenderer getAssetRenderer(long classPK)
+	public AssetRenderer getAssetRenderer(long classPK, int type)
 		throws PortalException, SystemException {
 
 		IGImage image = IGImageLocalServiceUtil.getImage(classPK);

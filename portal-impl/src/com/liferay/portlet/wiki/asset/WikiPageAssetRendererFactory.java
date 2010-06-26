@@ -22,7 +22,9 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.BaseAssetRendererFactory;
 import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.portlet.wiki.model.WikiPageResource;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
+import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil;
 
 import javax.portlet.PortletURL;
 
@@ -39,10 +41,22 @@ public class WikiPageAssetRendererFactory extends BaseAssetRendererFactory {
 
 	public static final String TYPE = "wiki";
 
-	public AssetRenderer getAssetRenderer(long classPK)
+	public AssetRenderer getAssetRenderer(long classPK, int type)
 		throws PortalException, SystemException {
 
-		WikiPage page = WikiPageLocalServiceUtil.getPage(classPK);
+		WikiPage page;
+
+		if (type == TYPE_LATEST_APPROVED) {
+			page = WikiPageLocalServiceUtil.getPage(classPK);
+		}
+		else {
+			WikiPageResource wikiPageResource =
+				WikiPageResourceLocalServiceUtil.getPageResource(classPK);
+
+			page = WikiPageLocalServiceUtil.getPage(
+				wikiPageResource.getNodeId(), wikiPageResource.getTitle(),
+				null);
+		}
 
 		return new WikiPageAssetRenderer(page);
 	}

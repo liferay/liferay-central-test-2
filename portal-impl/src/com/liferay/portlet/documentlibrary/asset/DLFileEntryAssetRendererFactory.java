@@ -44,7 +44,7 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 
 	public static final String TYPE = "document";
 
-	public AssetRenderer getAssetRenderer(long classPK)
+	public AssetRenderer getAssetRenderer(long classPK, int type)
 		throws PortalException, SystemException {
 
 		DLFileEntry entry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);

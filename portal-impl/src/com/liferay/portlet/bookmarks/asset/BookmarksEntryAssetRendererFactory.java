@@ -45,7 +45,7 @@ public class BookmarksEntryAssetRendererFactory
 
 	public static final String TYPE = "bookmark";
 
-	public AssetRenderer getAssetRenderer(long classPK)
+	public AssetRenderer getAssetRenderer(long classPK, int type)
 		throws PortalException, SystemException {
 
 		BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);

@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
@@ -47,15 +48,22 @@ public class JournalArticleAssetRendererFactory
 
 	public static final String TYPE = "content";
 
-	public AssetRenderer getAssetRenderer(long classPK)
+	public AssetRenderer getAssetRenderer(long classPK, int type)
 		throws PortalException, SystemException {
 
 		JournalArticleResource articleResource =
 			JournalArticleResourceLocalServiceUtil.getArticleResource(classPK);
 
+		int status = WorkflowConstants.STATUS_ANY;
+
+		if (type == TYPE_LATEST_APPROVED) {
+			status = WorkflowConstants.STATUS_APPROVED;
+		}
+
 		JournalArticle article =
-			JournalArticleLocalServiceUtil.getArticle(
-				articleResource.getGroupId(), articleResource.getArticleId());
+			JournalArticleLocalServiceUtil.getLatestArticle(
+				articleResource.getGroupId(), articleResource.getArticleId(),
+				status);
 
 		return new JournalArticleAssetRenderer(article);
 	}

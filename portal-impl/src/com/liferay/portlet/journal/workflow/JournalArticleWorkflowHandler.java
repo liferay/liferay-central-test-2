@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portlet.asset.model.AssetRenderer;
-import com.liferay.portlet.journal.asset.JournalArticleAssetRenderer;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
@@ -44,15 +42,6 @@ import java.util.Map;
 public class JournalArticleWorkflowHandler extends BaseWorkflowHandler {
 
 	public static final String CLASS_NAME = JournalArticle.class.getName();
-
-	public AssetRenderer getAssetRenderer(long classPK)
-		throws PortalException, SystemException {
-
-		JournalArticle article =
-			JournalArticleLocalServiceUtil.getLatestArticle(classPK);
-
-		return new JournalArticleAssetRenderer(article);
-	}
 
 	public String getClassName() {
 		return CLASS_NAME;

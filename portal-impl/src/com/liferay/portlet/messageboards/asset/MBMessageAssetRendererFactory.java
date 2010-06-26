@@ -39,7 +39,7 @@ public class MBMessageAssetRendererFactory extends BaseAssetRendererFactory {
 
 	public static final String TYPE = "message";
 
-	public AssetRenderer getAssetRenderer(long classPK)
+	public AssetRenderer getAssetRenderer(long classPK, int type)
 		throws PortalException, SystemException {
 
 		MBMessage message = MBMessageLocalServiceUtil.getMessage(classPK);

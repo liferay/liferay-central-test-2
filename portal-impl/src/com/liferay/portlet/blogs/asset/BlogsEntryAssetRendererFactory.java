@@ -44,7 +44,7 @@ public class BlogsEntryAssetRendererFactory extends BaseAssetRendererFactory {
 
 	public static final String TYPE = "blog";
 
-	public AssetRenderer getAssetRenderer(long classPK)
+	public AssetRenderer getAssetRenderer(long classPK, int type)
 		throws PortalException, SystemException {
 
 		BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);

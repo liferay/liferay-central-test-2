@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portlet.asset.model.AssetRenderer;
-import com.liferay.portlet.wiki.asset.WikiPageAssetRenderer;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
@@ -41,14 +39,6 @@ import java.util.Map;
 public class WikiPageWorkflowHandler extends BaseWorkflowHandler {
 
 	public static final String CLASS_NAME = WikiPage.class.getName();
-
-	public AssetRenderer getAssetRenderer(long classPK)
-		throws PortalException, SystemException {
-
-		WikiPage page = WikiPageLocalServiceUtil.getPage(classPK);
-
-		return new WikiPageAssetRenderer(page);
-	}
 
 	public String getClassName() {
 		return CLASS_NAME;

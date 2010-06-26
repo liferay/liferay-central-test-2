@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portlet.asset.model.AssetRenderer;
-import com.liferay.portlet.blogs.asset.BlogsEntryAssetRenderer;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 
@@ -40,14 +38,6 @@ import java.util.Map;
 public class BlogsEntryWorkflowHandler extends BaseWorkflowHandler {
 
 	public static final String CLASS_NAME = BlogsEntry.class.getName();
-
-	public AssetRenderer getAssetRenderer(long classPK)
-		throws PortalException, SystemException {
-
-		BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
-
-		return new BlogsEntryAssetRenderer(entry);
-	}
 
 	public String getClassName() {
 		return CLASS_NAME;

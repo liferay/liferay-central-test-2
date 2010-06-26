@@ -54,7 +54,7 @@ try {
 		className = PortalUtil.getClassName(assetEntry.getClassNameId());
 		classPK = assetEntry.getClassPK();
 
-		assetRenderer = assetRendererFactory.getAssetRenderer(classPK);
+		assetRenderer = assetRendererFactory.getAssetRenderer(classPK, AssetRendererFactory.TYPE_LATEST_APPROVED);
 	}
 
 	String title = assetEntry.getTitle();

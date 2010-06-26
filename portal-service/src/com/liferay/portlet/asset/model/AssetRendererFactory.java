@@ -30,7 +30,14 @@ import javax.portlet.PortletURL;
  */
 public interface AssetRendererFactory {
 
+	public static int TYPE_LATEST = 0;
+
+	public static int TYPE_LATEST_APPROVED = 1;
+
 	public AssetRenderer getAssetRenderer(long classPK)
+		throws PortalException, SystemException;
+
+	public AssetRenderer getAssetRenderer(long classPK, int type)
 		throws PortalException, SystemException;
 
 	public AssetRenderer getAssetRenderer(long groupId, String urlTitle)

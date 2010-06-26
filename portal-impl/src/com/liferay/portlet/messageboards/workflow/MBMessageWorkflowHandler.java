@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portlet.asset.model.AssetRenderer;
-import com.liferay.portlet.messageboards.asset.MBMessageAssetRenderer;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 
@@ -42,14 +40,6 @@ import java.util.Map;
 public class MBMessageWorkflowHandler extends BaseWorkflowHandler {
 
 	public static final String CLASS_NAME = MBMessage.class.getName();
-
-	public AssetRenderer getAssetRenderer(long classPK)
-		throws PortalException, SystemException {
-
-		MBMessage message = MBMessageLocalServiceUtil.getMessage(classPK);
-
-		return new MBMessageAssetRenderer(message);
-	}
 
 	public String getClassName() {
 		return CLASS_NAME;

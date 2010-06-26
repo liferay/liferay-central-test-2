@@ -39,6 +39,12 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 		return null;
 	}
 
+	public AssetRenderer getAssetRenderer(long classPK)
+		throws PortalException, SystemException {
+
+		return getAssetRenderer(classPK, TYPE_LATEST_APPROVED);
+	}
+
 	public long getClassNameId() {
 		return _classNameId;
 	}
