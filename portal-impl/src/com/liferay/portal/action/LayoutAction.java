@@ -700,6 +700,13 @@ public class LayoutAction extends Action {
 		WindowState windowState = WindowStateFactory.getWindowState(
 			ParamUtil.getString(request, "p_p_state"));
 
+		if (layout.isTypeControlPanel() &&
+			((windowState == null) || windowState.equals(WindowState.NORMAL) ||
+			 (Validator.isNull(windowState.toString())))) {
+
+			windowState = WindowState.MAXIMIZED;
+		}
+
 		PortletMode portletMode = PortletModeFactory.getPortletMode(
 			ParamUtil.getString(request, "p_p_mode"));
 
