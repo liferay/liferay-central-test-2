@@ -522,9 +522,9 @@ public class SocialEquityLogLocalServiceImpl
 		}
 
 		public void processRow(ResultSet rs) throws SQLException {
-			long equityUserId = rs.getLong(1);
-			long groupId = rs.getLong(2);
-			double equityValue = rs.getDouble(3);
+			long equityUserId = rs.getLong("equityUserId");
+			long groupId = rs.getLong("groupId");
+			double equityValue = rs.getDouble("equityValue");
 
 			if (groupId == _groupId) {
 				if (equityValue == _equityValue) {
