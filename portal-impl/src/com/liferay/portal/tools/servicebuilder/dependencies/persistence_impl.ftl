@@ -767,7 +767,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 						query.append(_SQL_SELECT_${entity.alias?upper_case}_WHERE);
 
-						<#include "persistence_impl_finder_col.ftl">
+						<#include "persistence_impl_finder_cols.ftl">
 
 						if (orderByComparator != null) {
 							appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
@@ -982,7 +982,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 				query.append(_SQL_SELECT_${entity.alias?upper_case}_WHERE);
 
-				<#include "persistence_impl_finder_col.ftl">
+				<#include "persistence_impl_finder_cols.ftl">
 
 				if (orderByComparator != null) {
 					String[] orderByFields = orderByComparator.getOrderByFields();
@@ -1166,7 +1166,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 						query.append(_FILTER_SQL_SELECT_${entity.alias?upper_case}_WHERE);
 
-						<#include "persistence_impl_finder_col.ftl">
+						<#include "persistence_impl_finder_cols.ftl">
 
 						if (orderByComparator != null) {
 							appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
@@ -1335,7 +1335,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 						query.append(_SQL_SELECT_${entity.alias?upper_case}_WHERE);
 
-						<#include "persistence_impl_finder_col.ftl">
+						<#include "persistence_impl_finder_cols.ftl">
 
 						<#if entity.getOrder()??>
 							query.append(${entity.name}ModelImpl.ORDER_BY_JPQL);
@@ -1607,7 +1607,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					query.append(_SQL_COUNT_${entity.alias?upper_case}_WHERE);
 
-					<#include "persistence_impl_finder_col.ftl">
+					<#include "persistence_impl_finder_cols.ftl">
 
 					String sql = query.toString();
 
@@ -1693,7 +1693,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					query.append(_FILTER_SQL_COUNT_${entity.alias?upper_case}_WHERE);
 
-					<#include "persistence_impl_finder_col.ftl">
+					<#include "persistence_impl_finder_cols.ftl">
 
 					String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_${entity.PKVarName?upper_case}, _FILTER_COLUMN_USERID, groupId);
 
@@ -2722,7 +2722,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 			<#if finderCol_has_next>
 				<#assign finderColConjunction = " AND ">
-			<#elseif finder.where?? && !validator.isNull(finder.getWhere())>
+			<#elseif finder.where?? && validator.isNotNull(finder.getWhere())>
 				<#assign finderColConjunction = " AND " + finder.where>
 			</#if>
 
