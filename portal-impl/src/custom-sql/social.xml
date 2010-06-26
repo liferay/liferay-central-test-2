@@ -215,11 +215,11 @@
 	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.findSocialEquityUserByRank">
 		<![CDATA[
 			SELECT
-				equityUserId, groupId
+				equityUserId, groupId, ([$ACTION_DATE$] * (contributionK + participationK) + contributionB + participationB) as score
 			FROM
 				SocialEquityUser
 			ORDER BY
-				groupId, ([$ACTION_DATE$] * (contributionK + participationK) + contributionB + participationB) DESC
+				groupId, score DESC
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.updateSocialEquityUserRank">
