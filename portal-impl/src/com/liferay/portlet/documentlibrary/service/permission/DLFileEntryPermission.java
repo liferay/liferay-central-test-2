@@ -16,15 +16,19 @@ package com.liferay.portlet.documentlibrary.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.workflow.permission.WorkflowPermissionUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.portlet.wiki.model.WikiPage;
 
 /**
  * <a href="DLFileEntryPermission.java.html"><b><i>View Source</i></b></a>
@@ -68,6 +72,22 @@ public class DLFileEntryPermission {
 			PermissionChecker permissionChecker, DLFileEntry fileEntry,
 			String actionId)
 		throws PortalException, SystemException {
+
+		DLFileVersion latestFileVersion =
+			DLFileVersionLocalServiceUtil.getLatestFileVersion(
+				fileEntry.getGroupId(), fileEntry.getFolderId(),
+				fileEntry.getName());
+
+		if (latestFileVersion.isPending()) {
+			Boolean hasPermission = WorkflowPermissionUtil.hasPermission(
+				permissionChecker, fileEntry.getGroupId(),
+				DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
+				actionId);
+
+			if (hasPermission != null) {
+				return hasPermission.booleanValue();
+			}
+		}
 
 		if (PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
 			if (fileEntry.getFolderId() !=
