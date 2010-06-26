@@ -269,18 +269,20 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		return mbCategoryPersistence.findByGroupId(groupId);
 	}
 
-	public List<MBCategory> getCategories(long groupId, long parentCategoryId)
-		throws SystemException {
-
-		return mbCategoryPersistence.findByG_P(groupId, parentCategoryId);
-	}
-
 	public List<MBCategory> getCategories(
 			long groupId, long parentCategoryId, int start, int end)
 		throws SystemException {
 
 		return mbCategoryPersistence.findByG_P(
 			groupId, parentCategoryId, start, end);
+	}
+
+	public List<MBCategory> getCategories(
+			long groupId, long[] parentCategoryIds, int start, int end)
+		throws SystemException {
+
+		return mbCategoryPersistence.findByG_P(
+			groupId, parentCategoryIds, start, end);
 	}
 
 	public int getCategoriesCount(long groupId) throws SystemException {
@@ -291,6 +293,12 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		throws SystemException {
 
 		return mbCategoryPersistence.countByG_P(groupId, parentCategoryId);
+	}
+
+	public int getCategoriesCount(long groupId, long[] parentCategoryIds)
+		throws SystemException {
+
+		return mbCategoryPersistence.countByG_P(groupId, parentCategoryIds);
 	}
 
 	public MBCategory getCategory(long categoryId)

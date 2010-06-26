@@ -81,11 +81,26 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 			groupId, parentCategoryId, start, end);
 	}
 
+	public List<MBCategory> getCategories(
+			long groupId, long[] parentCategoryIds, int start, int end)
+		throws SystemException {
+
+		return mbCategoryPersistence.filterFindByG_P(
+			groupId, parentCategoryIds, start, end);
+	}
+
 	public int getCategoriesCount(long groupId, long parentCategoryId)
 		throws SystemException {
 
 		return mbCategoryPersistence.filterCountByG_P(
 			groupId, parentCategoryId);
+	}
+
+	public int getCategoriesCount(long groupId, long[] parentCategoryIds)
+		throws SystemException {
+
+		return mbCategoryPersistence.filterCountByG_P(
+			groupId, parentCategoryIds);
 	}
 
 	public List<Long> getSubcategoryIds(
