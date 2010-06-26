@@ -396,7 +396,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	public List<MBThread> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
+				groupId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -660,7 +660,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	public List<MBThread> findByG_C(long groupId, long categoryId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(categoryId),
+				groupId, categoryId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -939,7 +939,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	public List<MBThread> findByG_S(long groupId, int status, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Integer(status),
+				groupId, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1218,7 +1218,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(categoryId), new Double(priority),
+				categoryId, priority,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1498,9 +1498,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		Date lastPostDate, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(categoryId),
-				
-				lastPostDate,
+				groupId, categoryId, lastPostDate,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1808,7 +1806,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(categoryId), new Integer(status),
+				groupId, categoryId, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2208,7 +2206,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object[] finderArgs = new Object[] { groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
@@ -2255,9 +2253,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 	public int countByG_C(long groupId, long categoryId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(categoryId)
-			};
+		Object[] finderArgs = new Object[] { groupId, categoryId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_C,
 				finderArgs, this);
@@ -2307,9 +2303,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	public int countByG_S(long groupId, int status) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Integer(status)
-			};
+		Object[] finderArgs = new Object[] { groupId, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_S,
 				finderArgs, this);
@@ -2360,9 +2354,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 	public int countByC_P(long categoryId, double priority)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(categoryId), new Double(priority)
-			};
+		Object[] finderArgs = new Object[] { categoryId, priority };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_P,
 				finderArgs, this);
@@ -2413,11 +2405,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 	public int countByG_C_L(long groupId, long categoryId, Date lastPostDate)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(categoryId),
-				
-				lastPostDate
-			};
+		Object[] finderArgs = new Object[] { groupId, categoryId, lastPostDate };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_C_L,
 				finderArgs, this);
@@ -2479,9 +2467,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 	public int countByG_C_S(long groupId, long categoryId, int status)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(categoryId), new Integer(status)
-			};
+		Object[] finderArgs = new Object[] { groupId, categoryId, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_C_S,
 				finderArgs, this);

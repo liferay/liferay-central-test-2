@@ -382,7 +382,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	public List<MBBan> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
+				groupId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -634,7 +634,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	public List<MBBan> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId),
+				userId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -888,7 +888,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	public List<MBBan> findByBanUserId(long banUserId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(banUserId),
+				banUserId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1162,9 +1162,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 
 	public MBBan fetchByG_B(long groupId, long banUserId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(banUserId)
-			};
+		Object[] finderArgs = new Object[] { groupId, banUserId };
 
 		Object result = null;
 
@@ -1349,7 +1347,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object[] finderArgs = new Object[] { groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
@@ -1395,7 +1393,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId) };
+		Object[] finderArgs = new Object[] { userId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
 				finderArgs, this);
@@ -1441,7 +1439,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	}
 
 	public int countByBanUserId(long banUserId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(banUserId) };
+		Object[] finderArgs = new Object[] { banUserId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_BANUSERID,
 				finderArgs, this);
@@ -1488,9 +1486,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 
 	public int countByG_B(long groupId, long banUserId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(banUserId)
-			};
+		Object[] finderArgs = new Object[] { groupId, banUserId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_B,
 				finderArgs, this);

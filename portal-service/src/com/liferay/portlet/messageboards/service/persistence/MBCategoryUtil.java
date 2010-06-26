@@ -380,6 +380,27 @@ public class MBCategoryUtil {
 			parentCategoryId, orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByG_P(
+		long groupId, long[] parentCategoryIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByG_P(groupId, parentCategoryIds);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByG_P(
+		long groupId, long[] parentCategoryIds, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByG_P(groupId, parentCategoryIds, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByG_P(
+		long groupId, long[] parentCategoryIds, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByG_P(groupId, parentCategoryIds, start, end,
+			orderByComparator);
+	}
+
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByG_P(
 		long groupId, long parentCategoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -399,6 +420,28 @@ public class MBCategoryUtil {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .filterFindByG_P(groupId, parentCategoryId, start, end,
+			orderByComparator);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByG_P(
+		long groupId, long[] parentCategoryIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_P(groupId, parentCategoryIds);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByG_P(
+		long groupId, long[] parentCategoryIds, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_P(groupId, parentCategoryIds, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByG_P(
+		long groupId, long[] parentCategoryIds, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_P(groupId, parentCategoryIds, start, end,
 			orderByComparator);
 	}
 
@@ -481,9 +524,19 @@ public class MBCategoryUtil {
 		return getPersistence().countByG_P(groupId, parentCategoryId);
 	}
 
+	public static int countByG_P(long groupId, long[] parentCategoryIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByG_P(groupId, parentCategoryIds);
+	}
+
 	public static int filterCountByG_P(long groupId, long parentCategoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().filterCountByG_P(groupId, parentCategoryId);
+	}
+
+	public static int filterCountByG_P(long groupId, long[] parentCategoryIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByG_P(groupId, parentCategoryIds);
 	}
 
 	public static int countAll()

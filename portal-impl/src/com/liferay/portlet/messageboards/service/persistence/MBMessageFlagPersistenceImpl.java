@@ -452,7 +452,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	public List<MBMessageFlag> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId),
+				userId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -708,7 +708,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	public List<MBMessageFlag> findByThreadId(long threadId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(threadId),
+				threadId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -965,7 +965,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	public List<MBMessageFlag> findByMessageId(long messageId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(messageId),
+				messageId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1222,7 +1222,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	public List<MBMessageFlag> findByT_F(long threadId, int flag, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(threadId), new Integer(flag),
+				threadId, flag,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1493,7 +1493,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	public List<MBMessageFlag> findByM_F(long messageId, int flag, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(messageId), new Integer(flag),
+				messageId, flag,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1765,7 +1765,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 		int flag, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(threadId), new Integer(flag),
+				userId, threadId, flag,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2074,9 +2074,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 	public MBMessageFlag fetchByU_M_F(long userId, long messageId, int flag,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(messageId), new Integer(flag)
-			};
+		Object[] finderArgs = new Object[] { userId, messageId, flag };
 
 		Object result = null;
 
@@ -2286,7 +2284,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId) };
+		Object[] finderArgs = new Object[] { userId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
 				finderArgs, this);
@@ -2332,7 +2330,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	}
 
 	public int countByThreadId(long threadId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(threadId) };
+		Object[] finderArgs = new Object[] { threadId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_THREADID,
 				finderArgs, this);
@@ -2378,7 +2376,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	}
 
 	public int countByMessageId(long messageId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(messageId) };
+		Object[] finderArgs = new Object[] { messageId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_MESSAGEID,
 				finderArgs, this);
@@ -2424,7 +2422,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	}
 
 	public int countByT_F(long threadId, int flag) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(threadId), new Integer(flag) };
+		Object[] finderArgs = new Object[] { threadId, flag };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_T_F,
 				finderArgs, this);
@@ -2474,9 +2472,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	}
 
 	public int countByM_F(long messageId, int flag) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(messageId), new Integer(flag)
-			};
+		Object[] finderArgs = new Object[] { messageId, flag };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_M_F,
 				finderArgs, this);
@@ -2527,9 +2523,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 	public int countByU_T_F(long userId, long threadId, int flag)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(threadId), new Integer(flag)
-			};
+		Object[] finderArgs = new Object[] { userId, threadId, flag };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_T_F,
 				finderArgs, this);
@@ -2584,9 +2578,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 	public int countByU_M_F(long userId, long messageId, int flag)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(messageId), new Integer(flag)
-			};
+		Object[] finderArgs = new Object[] { userId, messageId, flag };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_M_F,
 				finderArgs, this);

@@ -733,7 +733,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 	public MBCategory fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object[] finderArgs = new Object[] { uuid, groupId };
 
 		Object result = null;
 
@@ -840,7 +840,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	public List<MBCategory> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
+				groupId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1171,7 +1171,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	public List<MBCategory> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
+				companyId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1437,7 +1437,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(parentCategoryId),
+				groupId, parentCategoryId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1702,6 +1702,112 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		}
 	}
 
+	public List<MBCategory> findByG_P(long groupId, long[] parentCategoryIds)
+		throws SystemException {
+		return findByG_P(groupId, parentCategoryIds, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<MBCategory> findByG_P(long groupId, long[] parentCategoryIds,
+		int start, int end) throws SystemException {
+		return findByG_P(groupId, parentCategoryIds, start, end, null);
+	}
+
+	public List<MBCategory> findByG_P(long groupId, long[] parentCategoryIds,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				groupId, StringUtil.merge(parentCategoryIds),
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<MBCategory> list = (List<MBCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_P,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler();
+
+				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
+
+				boolean conjunctionable = false;
+
+				if (conjunctionable) {
+					query.append(WHERE_AND);
+				}
+
+				query.append(_FINDER_COLUMN_G_P_GROUPID_5);
+
+				conjunctionable = true;
+
+				if (parentCategoryIds.length > 0) {
+					if (conjunctionable) {
+						query.append(WHERE_AND);
+					}
+
+					query.append(StringPool.OPEN_PARENTHESIS);
+
+					for (int i = 0; i < parentCategoryIds.length; i++) {
+						query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_5);
+
+						if ((i + 1) < parentCategoryIds.length) {
+							query.append(WHERE_OR);
+						}
+					}
+
+					query.append(StringPool.CLOSE_PARENTHESIS);
+
+					conjunctionable = true;
+				}
+
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
+				}
+
+				else {
+					query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(parentCategoryIds);
+
+				list = (List<MBCategory>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBCategory>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_P, finderArgs,
+					list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
 	public List<MBCategory> filterFindByG_P(long groupId, long parentCategoryId)
 		throws SystemException {
 		return filterFindByG_P(groupId, parentCategoryId, QueryUtil.ALL_POS,
@@ -1764,6 +1870,97 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			qPos.add(groupId);
 
 			qPos.add(parentCategoryId);
+
+			return (List<MBCategory>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<MBCategory> filterFindByG_P(long groupId,
+		long[] parentCategoryIds) throws SystemException {
+		return filterFindByG_P(groupId, parentCategoryIds, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<MBCategory> filterFindByG_P(long groupId,
+		long[] parentCategoryIds, int start, int end) throws SystemException {
+		return filterFindByG_P(groupId, parentCategoryIds, start, end, null);
+	}
+
+	public List<MBCategory> filterFindByG_P(long groupId,
+		long[] parentCategoryIds, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByG_P(groupId, parentCategoryIds, start, end,
+				orderByComparator);
+		}
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler();
+
+			query.append(_FILTER_SQL_SELECT_MBCATEGORY_WHERE);
+
+			boolean conjunctionable = false;
+
+			if (conjunctionable) {
+				query.append(WHERE_AND);
+			}
+
+			query.append(_FINDER_COLUMN_G_P_GROUPID_5);
+
+			conjunctionable = true;
+
+			if (parentCategoryIds.length > 0) {
+				if (conjunctionable) {
+					query.append(WHERE_AND);
+				}
+
+				query.append(StringPool.OPEN_PARENTHESIS);
+
+				for (int i = 0; i < parentCategoryIds.length; i++) {
+					query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_5);
+
+					if ((i + 1) < parentCategoryIds.length) {
+						query.append(WHERE_OR);
+					}
+				}
+
+				query.append(StringPool.CLOSE_PARENTHESIS);
+
+				conjunctionable = true;
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					MBCategory.class.getName(), _FILTER_COLUMN_CATEGORYID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_FILTER_ENTITY_ALIAS, MBCategoryImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(parentCategoryIds);
 
 			return (List<MBCategory>)QueryUtil.list(q, getDialect(), start, end);
 		}
@@ -1948,7 +2145,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object[] finderArgs = new Object[] { uuid, groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID_G,
 				finderArgs, this);
@@ -2010,7 +2207,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object[] finderArgs = new Object[] { groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
@@ -2097,7 +2294,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
 				finderArgs, this);
@@ -2144,9 +2341,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 	public int countByG_P(long groupId, long parentCategoryId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(parentCategoryId)
-			};
+		Object[] finderArgs = new Object[] { groupId, parentCategoryId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P,
 				finderArgs, this);
@@ -2174,6 +2369,85 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				qPos.add(groupId);
 
 				qPos.add(parentCategoryId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_P, finderArgs,
+					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByG_P(long groupId, long[] parentCategoryIds)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				groupId, StringUtil.merge(parentCategoryIds)
+			};
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler();
+
+				query.append(_SQL_COUNT_MBCATEGORY_WHERE);
+
+				boolean conjunctionable = false;
+
+				if (conjunctionable) {
+					query.append(WHERE_AND);
+				}
+
+				query.append(_FINDER_COLUMN_G_P_GROUPID_5);
+
+				conjunctionable = true;
+
+				if (parentCategoryIds.length > 0) {
+					if (conjunctionable) {
+						query.append(WHERE_AND);
+					}
+
+					query.append(StringPool.OPEN_PARENTHESIS);
+
+					for (int i = 0; i < parentCategoryIds.length; i++) {
+						query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_5);
+
+						if ((i + 1) < parentCategoryIds.length) {
+							query.append(WHERE_OR);
+						}
+					}
+
+					query.append(StringPool.CLOSE_PARENTHESIS);
+
+					conjunctionable = true;
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(parentCategoryIds);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -2228,6 +2502,78 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			qPos.add(groupId);
 
 			qPos.add(parentCategoryId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int filterCountByG_P(long groupId, long[] parentCategoryIds)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return countByG_P(groupId, parentCategoryIds);
+		}
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler();
+
+			query.append(_FILTER_SQL_COUNT_MBCATEGORY_WHERE);
+
+			boolean conjunctionable = false;
+
+			if (conjunctionable) {
+				query.append(WHERE_AND);
+			}
+
+			query.append(_FINDER_COLUMN_G_P_GROUPID_5);
+
+			conjunctionable = true;
+
+			if (parentCategoryIds.length > 0) {
+				if (conjunctionable) {
+					query.append(WHERE_AND);
+				}
+
+				query.append(StringPool.OPEN_PARENTHESIS);
+
+				for (int i = 0; i < parentCategoryIds.length; i++) {
+					query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_5);
+
+					if ((i + 1) < parentCategoryIds.length) {
+						query.append(WHERE_OR);
+					}
+				}
+
+				query.append(StringPool.CLOSE_PARENTHESIS);
+
+				conjunctionable = true;
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					MBCategory.class.getName(), _FILTER_COLUMN_CATEGORYID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(parentCategoryIds);
 
 			Long count = (Long)q.uniqueResult();
 
@@ -2339,7 +2685,22 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "mbCategory.groupId = ?";
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "mbCategory.companyId = ?";
 	private static final String _FINDER_COLUMN_G_P_GROUPID_2 = "mbCategory.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_GROUPID_5 = "(" +
+		_removeConjunction(_FINDER_COLUMN_G_P_GROUPID_2) + ")";
 	private static final String _FINDER_COLUMN_G_P_PARENTCATEGORYID_2 = "mbCategory.parentCategoryId = ?";
+	private static final String _FINDER_COLUMN_G_P_PARENTCATEGORYID_5 = "(" +
+		_removeConjunction(_FINDER_COLUMN_G_P_PARENTCATEGORYID_2) + ")";
+
+	private static String _removeConjunction(String sql) {
+		int pos = sql.indexOf(" AND ");
+
+		if (pos != -1) {
+			sql = sql.substring(0, pos);
+		}
+
+		return sql;
+	}
+
 	private static final String _FILTER_SQL_SELECT_MBCATEGORY_WHERE = "SELECT DISTINCT {mbCategory.*} FROM MBCategory mbCategory WHERE ";
 	private static final String _FILTER_SQL_COUNT_MBCATEGORY_WHERE = "SELECT COUNT(DISTINCT mbCategory.categoryId) AS COUNT_VALUE FROM MBCategory mbCategory WHERE ";
 	private static final String _FILTER_COLUMN_CATEGORYID = "mbCategory.categoryId";

@@ -210,6 +210,19 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchCategoryException;
 
+	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByG_P(
+		long groupId, long[] parentCategoryIds)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByG_P(
+		long groupId, long[] parentCategoryIds, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByG_P(
+		long groupId, long[] parentCategoryIds, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByG_P(
 		long groupId, long parentCategoryId)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -220,6 +233,19 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByG_P(
 		long groupId, long parentCategoryId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByG_P(
+		long groupId, long[] parentCategoryIds)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByG_P(
+		long groupId, long[] parentCategoryIds, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByG_P(
+		long groupId, long[] parentCategoryIds, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -272,7 +298,13 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	public int countByG_P(long groupId, long parentCategoryId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int countByG_P(long groupId, long[] parentCategoryIds)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int filterCountByG_P(long groupId, long parentCategoryId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByG_P(long groupId, long[] parentCategoryIds)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()

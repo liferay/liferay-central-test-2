@@ -76,9 +76,21 @@ public class MBCategoryServiceWrapper implements MBCategoryService {
 			start, end);
 	}
 
+	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getCategories(
+		long groupId, long[] parentCategoryIds, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _mbCategoryService.getCategories(groupId, parentCategoryIds,
+			start, end);
+	}
+
 	public int getCategoriesCount(long groupId, long parentCategoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbCategoryService.getCategoriesCount(groupId, parentCategoryId);
+	}
+
+	public int getCategoriesCount(long groupId, long[] parentCategoryIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _mbCategoryService.getCategoriesCount(groupId, parentCategoryIds);
 	}
 
 	public java.util.List<java.lang.Long> getSubcategoryIds(

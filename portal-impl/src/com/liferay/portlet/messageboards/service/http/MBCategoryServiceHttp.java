@@ -312,6 +312,49 @@ public class MBCategoryServiceHttp {
 		}
 	}
 
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getCategories(
+		HttpPrincipal httpPrincipal, long groupId, long[] parentCategoryIds,
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = parentCategoryIds;
+
+			if (parentCategoryIds == null) {
+				paramObj1 = new NullWrapper("[J");
+			}
+
+			Object paramObj2 = new IntegerWrapper(start);
+
+			Object paramObj3 = new IntegerWrapper(end);
+
+			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
+					"getCategories",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.portlet.messageboards.model.MBCategory>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static int getCategoriesCount(HttpPrincipal httpPrincipal,
 		long groupId, long parentCategoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -319,6 +362,43 @@ public class MBCategoryServiceHttp {
 			Object paramObj0 = new LongWrapper(groupId);
 
 			Object paramObj1 = new LongWrapper(parentCategoryId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
+					"getCategoriesCount", new Object[] { paramObj0, paramObj1 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static int getCategoriesCount(HttpPrincipal httpPrincipal,
+		long groupId, long[] parentCategoryIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = parentCategoryIds;
+
+			if (parentCategoryIds == null) {
+				paramObj1 = new NullWrapper("[J");
+			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
 					"getCategoriesCount", new Object[] { paramObj0, paramObj1 });
