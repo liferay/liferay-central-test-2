@@ -889,6 +889,10 @@ public class ServiceBuilder {
 							true);
 						String finderColComparator = GetterUtil.getString(
 							finderColEl.attributeValue("comparator"), "=");
+						String finderColArrayableOperator =
+							GetterUtil.getString(
+								finderColEl.attributeValue(
+								"arrayable-operator"));
 
 						EntityColumn col = Entity.getColumn(
 							finderColName, columnList);
@@ -903,6 +907,7 @@ public class ServiceBuilder {
 
 						col.setCaseSensitive(finderColCaseSensitive);
 						col.setComparator(finderColComparator);
+						col.setArrayableOperator(finderColArrayableOperator);
 
 						finderColsList.add(col);
 					}

@@ -1037,6 +1037,137 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				}
 			}
 
+			<#if finder.hasArrayableOperator()>
+				public List<${entity.name}> findBy${finder.name}(
+
+				<#list finderColsList as finderCol>
+					<#if finderCol.hasArrayableOperator()>
+						${finderCol.type}[] ${finderCol.names}
+					<#else>
+						${finderCol.type} ${finderCol.name}
+					</#if>
+
+					<#if finderCol_has_next>
+						,
+					</#if>
+				</#list>
+
+				) throws SystemException {
+					return findBy${finder.name}(
+
+					<#list finderColsList as finderCol>
+						<#if finderCol.hasArrayableOperator()>
+							${finderCol.names},
+						<#else>
+							${finderCol.name},
+						</#if>
+					</#list>
+
+					QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+				}
+
+				public List<${entity.name}> findBy${finder.name}(
+
+				<#list finderColsList as finderCol>
+					<#if finderCol.hasArrayableOperator()>
+						${finderCol.type}[] ${finderCol.names},
+					<#else>
+						${finderCol.type} ${finderCol.name},
+					</#if>
+				</#list>
+
+				int start, int end) throws SystemException {
+					return findBy${finder.name}(
+
+					<#list finderColsList as finderCol>
+						<#if finderCol.hasArrayableOperator()>
+							${finderCol.names},
+						<#else>
+							${finderCol.name},
+						</#if>
+					</#list>
+
+					start, end, null);
+				}
+
+				public List<${entity.name}> findBy${finder.name}(
+
+				<#list finderColsList as finderCol>
+					<#if finderCol.hasArrayableOperator()>
+						${finderCol.type}[] ${finderCol.names},
+					<#else>
+						${finderCol.type} ${finderCol.name},
+					</#if>
+				</#list>
+
+				int start, int end, OrderByComparator orderByComparator) throws SystemException {
+
+					Object[] finderArgs = new Object[] {
+						<#list finderColsList as finderCol>
+							<#if finderCol.hasArrayableOperator()>
+								StringUtil.merge(${finderCol.names}),
+							<#else>
+								${finderCol.name},
+							</#if>
+						</#list>
+
+						String.valueOf(start), String.valueOf(end), String.valueOf(orderByComparator)
+					};
+
+					List<${entity.name}> list = (List<${entity.name}>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_${finder.name?upper_case}, finderArgs, this);
+
+					if (list == null) {
+						Session session = null;
+
+						try {
+							session = openSession();
+
+							StringBundler query = new StringBundler();
+
+							query.append(_SQL_SELECT_${entity.alias?upper_case}_WHERE);
+
+							<#include "persistence_impl_finder_arrayable_cols.ftl">
+
+							if (orderByComparator != null) {
+								appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
+							}
+
+							<#if entity.getOrder()??>
+								else {
+									query.append(${entity.name}ModelImpl.ORDER_BY_JPQL);
+								}
+							</#if>
+
+							String sql = query.toString();
+
+							Query q = session.createQuery(sql);
+
+							QueryPos qPos = QueryPos.getInstance(q);
+
+							<#include "persistence_impl_finder_arrayable_qpos.ftl">
+
+							list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end);
+						}
+						catch (Exception e) {
+							throw processException(e);
+						}
+						finally {
+							if (list == null) {
+								list = new ArrayList<${entity.name}>();
+							}
+
+							cacheResult(list);
+
+							FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_${finder.name?upper_case}, finderArgs, list);
+
+							closeSession(session);
+						}
+					}
+
+					return list;
+				}
+			</#if>
+
 			<#if entity.isPermissionCheckEnabled(finder)>
 				public List<${entity.name}> filterFindBy${finder.name}(
 
@@ -1138,6 +1269,126 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						closeSession(session);
 					}
 				}
+
+				<#if finder.hasArrayableOperator()>
+					public List<${entity.name}> filterFindBy${finder.name}(
+
+					<#list finderColsList as finderCol>
+						<#if finderCol.hasArrayableOperator()>
+							${finderCol.type}[] ${finderCol.names}
+						<#else>
+							${finderCol.type} ${finderCol.name}
+						</#if>
+
+						<#if finderCol_has_next>
+							,
+						</#if>
+					</#list>
+
+					) throws SystemException {
+						return filterFindBy${finder.name}(
+
+						<#list finderColsList as finderCol>
+							<#if finderCol.hasArrayableOperator()>
+								${finderCol.names},
+							<#else>
+								${finderCol.name},
+							</#if>
+						</#list>
+
+						QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+					}
+
+					public List<${entity.name}> filterFindBy${finder.name}(
+
+					<#list finderColsList as finderCol>
+						<#if finderCol.hasArrayableOperator()>
+							${finderCol.type}[] ${finderCol.names},
+						<#else>
+							${finderCol.type} ${finderCol.name},
+						</#if>
+					</#list>
+
+					int start, int end) throws SystemException {
+						return filterFindBy${finder.name}(
+
+						<#list finderColsList as finderCol>
+							<#if finderCol.hasArrayableOperator()>
+								${finderCol.names},
+							<#else>
+								${finderCol.name},
+							</#if>
+						</#list>
+
+						start, end, null);
+					}
+
+					public List<${entity.name}> filterFindBy${finder.name}(
+
+					<#list finderColsList as finderCol>
+						<#if finderCol.hasArrayableOperator()>
+							${finderCol.type}[] ${finderCol.names},
+						<#else>
+							${finderCol.type} ${finderCol.name},
+						</#if>
+					</#list>
+
+					int start, int end, OrderByComparator orderByComparator) throws SystemException {
+						if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+							return findBy${finder.name}(
+
+							<#list finderColsList as finderCol>
+								<#if finderCol.hasArrayableOperator()>
+									${finderCol.names},
+								<#else>
+									${finderCol.name},
+								</#if>
+							</#list>
+
+							start, end, orderByComparator);
+						}
+
+						Session session = null;
+
+						try {
+							session = openSession();
+
+							StringBundler query = new StringBundler();
+
+							query.append(_FILTER_SQL_SELECT_${entity.alias?upper_case}_WHERE);
+
+							<#include "persistence_impl_finder_arrayable_cols.ftl">
+
+							if (orderByComparator != null) {
+								appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
+							}
+
+							<#if entity.getOrder()??>
+								else {
+									query.append(${entity.name}ModelImpl.ORDER_BY_JPQL);
+								}
+							</#if>
+
+							String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_${entity.PKVarName?upper_case}, _FILTER_COLUMN_USERID, groupId);
+
+							SQLQuery q = session.createSQLQuery(sql);
+
+							q.addEntity(_FILTER_ENTITY_ALIAS, ${entity.name}Impl.class);
+
+							QueryPos qPos = QueryPos.getInstance(q);
+
+							<#include "persistence_impl_finder_arrayable_qpos.ftl">
+
+							return (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end);
+						}
+						catch (Exception e) {
+							throw processException(e);
+						}
+						finally {
+							closeSession(session);
+						}
+					}
+				</#if>
 			</#if>
 		<#else>
 			public ${entity.name} findBy${finder.name}(
@@ -1509,6 +1760,78 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			return count.intValue();
 		}
 
+		<#if finder.hasArrayableOperator()>
+			public int countBy${finder.name}(
+
+			<#list finderColsList as finderCol>
+				<#if finderCol.hasArrayableOperator()>
+					${finderCol.type}[] ${finderCol.names}
+				<#else>
+					${finderCol.type} ${finderCol.name}
+				</#if>
+
+				<#if finderCol_has_next>
+					,
+				</#if>
+			</#list>
+
+			) throws SystemException {
+				Object[] finderArgs = new Object[] {
+					<#list finderColsList as finderCol>
+						<#if finderCol.hasArrayableOperator()>
+							StringUtil.merge(${finderCol.names})
+						<#else>
+							${finderCol.name}
+						</#if>
+
+						<#if finderCol_has_next>
+							,
+						</#if>
+					</#list>
+				};
+
+				Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_${finder.name?upper_case}, finderArgs, this);
+
+				if (count == null) {
+					Session session = null;
+
+					try {
+						session = openSession();
+
+						StringBundler query = new StringBundler();
+
+						query.append(_SQL_COUNT_${entity.alias?upper_case}_WHERE);
+
+						<#include "persistence_impl_finder_arrayable_cols.ftl">
+
+						String sql = query.toString();
+
+						Query q = session.createQuery(sql);
+
+						QueryPos qPos = QueryPos.getInstance(q);
+
+						<#include "persistence_impl_finder_arrayable_qpos.ftl">
+
+						count = (Long)q.uniqueResult();
+					}
+					catch (Exception e) {
+						throw processException(e);
+					}
+					finally {
+						if (count == null) {
+							count = Long.valueOf(0);
+						}
+
+						FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_${finder.name?upper_case}, finderArgs, count);
+
+						closeSession(session);
+					}
+				}
+
+				return count.intValue();
+			}
+		</#if>
+
 		<#if entity.isPermissionCheckEnabled(finder)>
 			public int filterCountBy${finder.name}(
 
@@ -1567,6 +1890,74 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					closeSession(session);
 				}
 			}
+
+			<#if finder.hasArrayableOperator()>
+				public int filterCountBy${finder.name}(
+
+				<#list finderColsList as finderCol>
+					<#if finderCol.hasArrayableOperator()>
+						${finderCol.type}[] ${finderCol.names}
+					<#else>
+						${finderCol.type} ${finderCol.name}
+					</#if>
+
+					<#if finderCol_has_next>
+						,
+					</#if>
+				</#list>
+
+				) throws SystemException {
+					if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+						return countBy${finder.name}(
+
+						<#list finderColsList as finderCol>
+							<#if finderCol.hasArrayableOperator()>
+								${finderCol.names}
+							<#else>
+								${finderCol.name}
+							</#if>
+
+							<#if finderCol_has_next>
+								,
+							</#if>
+						</#list>
+
+						);
+					}
+
+					Session session = null;
+
+					try {
+						session = openSession();
+
+						StringBundler query = new StringBundler();
+
+						query.append(_FILTER_SQL_COUNT_${entity.alias?upper_case}_WHERE);
+
+						<#include "persistence_impl_finder_arrayable_cols.ftl">
+
+						String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_${entity.PKVarName?upper_case}, _FILTER_COLUMN_USERID, groupId);
+
+						SQLQuery q = session.createSQLQuery(sql);
+
+						q.addScalar(COUNT_COLUMN_NAME, com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+						QueryPos qPos = QueryPos.getInstance(q);
+
+						<#include "persistence_impl_finder_arrayable_qpos.ftl">
+
+						Long count = (Long)q.uniqueResult();
+
+						return count.intValue();
+					}
+					catch (Exception e) {
+						throw processException(e);
+					}
+					finally {
+						closeSession(session);
+					}
+				}
+			</#if>
 		</#if>
 	</#list>
 
@@ -2532,8 +2923,32 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			<#if finderCol.type == "String">
 				private static final String _FINDER_COLUMN_${finder.name?upper_case}_${finderCol.name?upper_case}_3 = "(${entity.alias}<#if entity.hasCompoundPK() && finderCol.isPrimary()>.id</#if>.${finderCol.name} IS NULL OR ${finderColExpression})${finderColConjunction}";
 			</#if>
+
+			<#if finder.hasArrayableOperator()>
+				<#if !finderCol.isPrimitiveType()>
+					private static final String _FINDER_COLUMN_${finder.name?upper_case}_${finderCol.name?upper_case}_4 = "(" + _removeConjunction(_FINDER_COLUMN_${finder.name?upper_case}_${finderCol.name?upper_case}_1) + ")";
+				</#if>
+
+				private static final String _FINDER_COLUMN_${finder.name?upper_case}_${finderCol.name?upper_case}_5 = "(" + _removeConjunction(_FINDER_COLUMN_${finder.name?upper_case}_${finderCol.name?upper_case}_2) + ")";
+
+				<#if finderCol.type == "String">
+					private static final String _FINDER_COLUMN_${finder.name?upper_case}_${finderCol.name?upper_case}_6 = "(" + _removeConjunction(_FINDER_COLUMN_${finder.name?upper_case}_${finderCol.name?upper_case}_3) + ")";
+				</#if>
+			</#if>
 		</#list>
 	</#list>
+
+	<#if entity.hasArrayableOperator()>
+		private static String _removeConjunction(String sql) {
+			int pos = sql.indexOf(" AND ");
+
+			if (pos != -1) {
+				sql = sql.substring(0, pos);
+			}
+
+			return sql;
+		}
+	</#if>
 
 	<#if entity.isPermissionCheckEnabled()>
 		private static final String _FILTER_SQL_SELECT_${entity.alias?upper_case}_WHERE = "SELECT DISTINCT {${entity.alias}.*} FROM ${entity.name} ${entity.alias} WHERE ";

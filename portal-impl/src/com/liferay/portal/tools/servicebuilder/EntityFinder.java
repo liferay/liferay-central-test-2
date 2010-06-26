@@ -14,6 +14,8 @@
 
 package com.liferay.portal.tools.servicebuilder;
 
+import com.liferay.util.TextFormatter;
+
 import java.util.List;
 
 /**
@@ -43,12 +45,26 @@ public class EntityFinder {
 		return _name;
 	}
 
+	public String getNames() {
+		return TextFormatter.formatPlural(new String(_name));
+	}
+
 	public String getReturnType() {
 		return _returnType;
 	}
 
 	public String getWhere() {
 		return _where;
+	}
+
+	public boolean hasArrayableOperator() {
+		for (EntityColumn column : _columns) {
+			if (column.hasArrayableOperator()) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public boolean hasColumn(String name) {

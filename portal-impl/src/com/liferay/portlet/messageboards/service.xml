@@ -85,7 +85,7 @@
 		</finder>
 		<finder name="G_P" return-type="Collection">
 			<finder-column name="groupId" />
-			<finder-column name="parentCategoryId" />
+			<finder-column name="parentCategoryId" arrayable-operator="OR" />
 		</finder>
 
 		<!-- References -->

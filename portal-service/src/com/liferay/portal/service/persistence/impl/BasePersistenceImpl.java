@@ -343,6 +343,8 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 
 	protected static final String WHERE_GREATER_THAN_HAS_NEXT = " >= ? AND ";
 
+	protected static final String WHERE_OR = " OR ";
+
 	protected ModelListener<T>[] listeners = new ModelListener[0];
 
 	private static Log _log = LogFactoryUtil.getLog(BasePersistenceImpl.class);

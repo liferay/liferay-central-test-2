@@ -28,14 +28,15 @@ public class EntityColumn implements Cloneable {
 	public EntityColumn(String name) {
 		this(
 			name, null, null, false, null, null, null, true, true, null, null,
-			null, true, false);
+			null, null, true, false);
 	}
 
 	public EntityColumn(
 		String name, String dbName, String type, boolean primary,
 		String ejbName, String mappingKey, String mappingTable,
 		boolean caseSensitive, boolean orderByAscending, String comparator,
-		String idType, String idParam, boolean convertNull, boolean localized) {
+		String arrayableOperator, String idType, String idParam,
+		boolean convertNull, boolean localized) {
 
 		_name = name;
 		_dbName = dbName;
@@ -48,6 +49,7 @@ public class EntityColumn implements Cloneable {
 		_caseSensitive = caseSensitive;
 		_orderByAscending = orderByAscending;
 		_comparator = comparator;
+		_arrayableOperator = arrayableOperator;
 		_idType = idType;
 		_idParam = idParam;
 		_convertNull = convertNull;
@@ -61,15 +63,15 @@ public class EntityColumn implements Cloneable {
 
 		this(
 			name, dbName, type, primary, ejbName, mappingKey, mappingTable,
-			true, true, null, idType, idParam, convertNull, localized);
+			true, true, null, null, idType, idParam, convertNull, localized);
 	}
 
 	public Object clone() {
 		return new EntityColumn(
 			getName(), getDBName(), getType(), isPrimary(), getEJBName(),
 			getMappingKey(), getMappingTable(), isCaseSensitive(),
-			isOrderByAscending(), getComparator(), getIdType(), getIdParam(),
-			isConvertNull(), isLocalized());
+			isOrderByAscending(), getComparator(), getArrayableOperator(),
+			getIdType(), getIdParam(), isConvertNull(), isLocalized());
 	}
 
 	public boolean equals(Object obj) {
@@ -83,6 +85,10 @@ public class EntityColumn implements Cloneable {
 		else {
 			return false;
 		}
+	}
+
+	public String getArrayableOperator() {
+		return _arrayableOperator;
 	}
 
 	public String getComparator() {
@@ -141,8 +147,26 @@ public class EntityColumn implements Cloneable {
 		return _name.substring(0, _name.length() - 2) + "Uuid";
 	}
 
+	public boolean hasArrayableOperator() {
+		if (Validator.isNotNull(_arrayableOperator)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public int hashCode() {
 		return _name.hashCode();
+	}
+
+	public boolean isArrayableAndOperator() {
+		if (_arrayableOperator.equals("AND")) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public boolean isCaseSensitive() {
@@ -222,6 +246,10 @@ public class EntityColumn implements Cloneable {
 		}
 	}
 
+	public void setArrayableOperator(String arrayableOperator) {
+		_arrayableOperator = arrayableOperator.toUpperCase();
+	}
+
 	public void setCaseSensitive(boolean caseSensitive) {
 		_caseSensitive = caseSensitive;
 	}
@@ -258,6 +286,7 @@ public class EntityColumn implements Cloneable {
 		_orderByAscending = orderByAscending;
 	}
 
+	private String _arrayableOperator;
 	private boolean _caseSensitive;
 	private String _comparator;
 	private boolean _convertNull;

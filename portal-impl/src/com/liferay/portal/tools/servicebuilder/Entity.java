@@ -312,6 +312,16 @@ public class Entity {
 		return TextFormatter.formatPlural(new String(getVarName()));
 	}
 
+	public boolean hasArrayableOperator() {
+		for (EntityFinder finder : _finderList) {
+			if (finder.hasArrayableOperator()) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public boolean hasColumn(String name) {
 		return hasColumn(name, _columnList);
 	}
