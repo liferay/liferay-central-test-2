@@ -728,21 +728,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			int start, int end, OrderByComparator orderByComparator) throws SystemException {
 				Object[] finderArgs = new Object[] {
 					<#list finderColsList as finderCol>
-						<#if finderCol.isPrimitiveType()>
-							<#if finderCol.type == "boolean">
-								Boolean.valueOf(
-							<#else>
-								new ${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(
-							</#if>
-						</#if>
-
-						${finderCol.name}
-
-						<#if finderCol.isPrimitiveType()>
-							)
-						</#if>
-
-						,
+						${finderCol.name},
 					</#list>
 
 					String.valueOf(start), String.valueOf(end), String.valueOf(orderByComparator)
@@ -1299,19 +1285,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			boolean retrieveFromCache) throws SystemException {
 				Object[] finderArgs = new Object[] {
 					<#list finderColsList as finderCol>
-						<#if finderCol.isPrimitiveType()>
-							<#if finderCol.type == "boolean">
-								Boolean.valueOf(
-							<#else>
-								new ${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(
-							</#if>
-						</#if>
-
 						${finderCol.name}
-
-						<#if finderCol.isPrimitiveType()>
-							)
-						</#if>
 
 						<#if finderCol_has_next>
 							,
@@ -1575,19 +1549,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		) throws SystemException {
 			Object[] finderArgs = new Object[] {
 				<#list finderColsList as finderCol>
-					<#if finderCol.isPrimitiveType()>
-						<#if finderCol.type == "boolean">
-							Boolean.valueOf(
-						<#else>
-							new ${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(
-						</#if>
-					</#if>
-
 					${finderCol.name}
-
-					<#if finderCol.isPrimitiveType()>
-						)
-					</#if>
 
 					<#if finderCol_has_next>
 						,
@@ -1813,21 +1775,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 			public List<${tempEntity.packagePath}.model.${tempEntity.name}> get${tempEntity.names}(${entity.PKClassName} pk, int start, int end, OrderByComparator orderByComparator) throws SystemException {
 				Object[] finderArgs = new Object[] {
-					<#if entity.hasPrimitivePK()>
-						<#if entity.PKClassName == "boolean">
-							Boolean.valueOf(
-						<#else>
-							new ${serviceBuilder.getPrimitiveObj(entity.getPKClassName())}(
-						</#if>
-					</#if>
-
-					pk
-
-					<#if entity.hasPrimitivePK()>
-						)
-					</#if>
-
-					, String.valueOf(start), String.valueOf(end), String.valueOf(orderByComparator)
+					pk, String.valueOf(start), String.valueOf(end), String.valueOf(orderByComparator)
 				};
 
 				List<${tempEntity.packagePath}.model.${tempEntity.name}> list = (List<${tempEntity.packagePath}.model.${tempEntity.name}>)FinderCacheUtil.getResult(FINDER_PATH_GET_${tempEntity.names?upper_case}, finderArgs, this);
@@ -1907,21 +1855,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				});
 
 			public int get${tempEntity.names}Size(${entity.PKClassName} pk) throws SystemException {
-				Object[] finderArgs = new Object[] {
-					<#if entity.hasPrimitivePK()>
-						<#if entity.PKClassName == "boolean">
-							Boolean.valueOf(
-						<#else>
-							new ${serviceBuilder.getPrimitiveObj(entity.getPKClassName())}(
-						</#if>
-					</#if>
-
-					pk
-
-					<#if entity.hasPrimitivePK()>
-						)
-					</#if>
-				};
+				Object[] finderArgs = new Object[] {pk};
 
 				Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_GET_${tempEntity.names?upper_case}_SIZE, finderArgs, this);
 
@@ -1993,35 +1927,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				});
 
 			public boolean contains${tempEntity.name}(${entity.PKClassName} pk, ${tempEntity.PKClassName} ${tempEntity.varName}PK) throws SystemException {
-				Object[] finderArgs = new Object[] {
-					<#if entity.hasPrimitivePK()>
-						<#if entity.PKClassName == "boolean">
-							Boolean.valueOf(
-						<#else>
-							new ${serviceBuilder.getPrimitiveObj(entity.getPKClassName())}(
-						</#if>
-					</#if>
-
-					pk
-
-					<#if entity.hasPrimitivePK()>
-						)
-					</#if>,
-
-					<#if tempEntity.hasPrimitivePK()>
-						<#if entity.PKClassName == "boolean">
-							Boolean.valueOf(
-						<#else>
-							new ${serviceBuilder.getPrimitiveObj(tempEntity.getPKClassName())}(
-						</#if>
-					</#if>
-
-					${tempEntity.varName}PK
-
-					<#if tempEntity.hasPrimitivePK()>
-						)
-					</#if>
-				};
+				Object[] finderArgs = new Object[] {pk, ${tempEntity.varName}PK};
 
 				Boolean value = (Boolean)FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_${tempEntity.name?upper_case}, finderArgs, this);
 
