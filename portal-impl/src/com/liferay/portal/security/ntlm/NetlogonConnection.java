@@ -43,7 +43,6 @@ import jcifs.util.MD4;
 public class NetlogonConnection {
 
 	public NetlogonAuthenticator computeNetlogonAuthenticator() {
-
 		int timestamp = (int)System.currentTimeMillis();
 
 		int input = Encdec.dec_uint32le(_clientCredential, 0) + timestamp;
@@ -57,10 +56,8 @@ public class NetlogonConnection {
 	}
 
 	public void connect(
-			String domainController,
-			String domainControllerName,
-			NtlmServiceAccount ntlmServiceAccount,
-			SecureRandom secureRandom)
+			String domainController, String domainControllerName,
+			NtlmServiceAccount ntlmServiceAccount, SecureRandom secureRandom)
 		throws IOException, NtlmLogonException, NoSuchAlgorithmException {
 
 		NtlmPasswordAuthentication ntlmPasswordAuthentication =
@@ -68,15 +65,14 @@ public class NetlogonConnection {
 				null, ntlmServiceAccount.getAccount(),
 				ntlmServiceAccount.getPassword());
 
-		String endpoint =
-			"ncacn_np:" + domainController + "[\\PIPE\\NETLOGON]";
+		String endpoint = "ncacn_np:" + domainController + "[\\PIPE\\NETLOGON]";
 
-		DcerpcHandle handle = DcerpcHandle.getHandle(
+		DcerpcHandle dcerpcHandle = DcerpcHandle.getHandle(
 			endpoint, ntlmPasswordAuthentication);
 
-		setHandle(handle);
+		setDcerpcHandle(dcerpcHandle);
 
-		handle.bind();
+		dcerpcHandle.bind();
 
 		byte[] clientChallenge = new byte[8];
 
@@ -87,7 +83,7 @@ public class NetlogonConnection {
 				domainControllerName, ntlmServiceAccount.getComputerName(),
 				clientChallenge, new byte[8]);
 
-		handle.sendrecv(netrServerReqChallenge);
+		dcerpcHandle.sendrecv(netrServerReqChallenge);
 
 		MD4 md4 = new MD4();
 
@@ -106,14 +102,14 @@ public class NetlogonConnection {
 				ntlmServiceAccount.getComputerName(), clientCredential,
 				new byte[8], 0xFFFFFFFF);
 
-		handle.sendrecv(netrServerAuthenticate3);
+		dcerpcHandle.sendrecv(netrServerAuthenticate3);
 
 		byte[] serverCredential = computeNetlogonCredential(
 			netrServerReqChallenge.getServerChallenge(), sessionKey);
 
 		if (!Arrays.equals(
-			serverCredential,
-			netrServerAuthenticate3.getServerCredential())) {
+				serverCredential,
+				netrServerAuthenticate3.getServerCredential())) {
 
 			throw new NtlmLogonException("Session key negotiation failed");
 		}
@@ -123,8 +119,8 @@ public class NetlogonConnection {
 	}
 
 	public void disconnect() throws IOException {
-		if (_handle != null) {
-			_handle.close();
+		if (_dcerpcHandle != null) {
+			_dcerpcHandle.close();
 		}
 	}
 
@@ -132,16 +128,16 @@ public class NetlogonConnection {
 		return _clientCredential;
 	}
 
-	public DcerpcHandle getHandle() {
-		return _handle;
+	public DcerpcHandle getDcerpcHandle() {
+		return _dcerpcHandle;
 	}
 
 	public byte[] getSessionKey() {
 		return _sessionKey;
 	}
 
-	public void setHandle(DcerpcHandle handle) {
-		_handle = handle;
+	public void setDcerpcHandle(DcerpcHandle dcerpcHandle) {
+		_dcerpcHandle = dcerpcHandle;
 	}
 
 	protected byte[] computeNetlogonCredential(
@@ -185,6 +181,7 @@ public class NetlogonConnection {
 	}
 
 	private byte[] _clientCredential;
+	private DcerpcHandle _dcerpcHandle;
 	private byte[] _sessionKey;
-	private DcerpcHandle _handle;
+
 }

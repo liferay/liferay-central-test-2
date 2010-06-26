@@ -260,13 +260,12 @@ public class NtlmFilter extends BasePortalFilter {
 		processFilter(NtlmPostFilter.class, request, response, filterChain);
 	}
 
-	private static final String _CACHE_NAME = "NtlmServerChallenge";
 	private static Log _log = LogFactoryUtil.getLog(NtlmFilter.class);
 
 	private Map<Long, NtlmManager> _ntlmManagers =
 		new ConcurrentHashMap<Long, NtlmManager>();
 	private SecureRandom _secureRandom = new SecureRandom();
 	private PortalCache _serverChallenges = SingleVMPoolUtil.getCache(
-		_CACHE_NAME);
+		NtlmFilter.class.getName());
 
 }

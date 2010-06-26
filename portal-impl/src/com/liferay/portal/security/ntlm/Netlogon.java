@@ -72,9 +72,9 @@ public class Netlogon {
 				netlogonAuthenticator, new NetlogonAuthenticator(), 2,
 				netlogonNetworkInfo, 2, new NetlogonValidationSamInfo(), 0);
 
-			DcerpcHandle handle = netlogonConnection.getHandle();
+			DcerpcHandle dcerpcHandle = netlogonConnection.getDcerpcHandle();
 
-			handle.sendrecv(netrLogonSamLogon);
+			dcerpcHandle.sendrecv(netrLogonSamLogon);
 
 			if (netrLogonSamLogon.getStatus() == 0) {
 				NetlogonValidationSamInfo netlogonValidationSamInfo =
@@ -87,18 +87,19 @@ public class Netlogon {
 			}
 			else {
 				throw new NtlmLogonException(
-					"Unable to authenticate due to status: " +
-					netrLogonSamLogon.getStatus());
+					"Unable to authenticate due to status " +
+						netrLogonSamLogon.getStatus());
 			}
 		}
 		catch (NoSuchAlgorithmException e) {
 			throw new NtlmLogonException(
-				"Unable to authenticate due to invalid encryption algorithm", e);
+				"Unable to authenticate due to invalid encryption algorithm",
+				e);
 		}
 		catch (IOException e) {
 			throw new NtlmLogonException(
-				"Unable to authenticate due to communication " +
-				"failure with server",
+				"Unable to authenticate due to communication failure with " +
+					"server",
 				e);
 		}
 		finally {
@@ -106,7 +107,7 @@ public class Netlogon {
 				netlogonConnection.disconnect();
 			}
 			catch (Exception e) {
-				_log.error("Unable to disconnect netlogon connection", e);
+				_log.error("Unable to disconnect Netlogon connection", e);
 			}
 		}
 	}

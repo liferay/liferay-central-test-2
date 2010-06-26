@@ -14,17 +14,29 @@
 
 package com.liferay.portal.security.ntlm;
 
+import com.liferay.portal.kernel.exception.SystemException;
+
 /**
  * <a href="NtlmLogonException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
-public class NtlmLogonException extends Exception {
-	public NtlmLogonException(String message) {
-		super(message);
+public class NtlmLogonException extends SystemException {
+
+	public NtlmLogonException() {
+		super();
 	}
 
-	public NtlmLogonException(String message, Throwable cause) {
-		super(message, cause);
+	public NtlmLogonException(String msg) {
+		super(msg);
 	}
+
+	public NtlmLogonException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public NtlmLogonException(Throwable cause) {
+		super(cause);
+	}
+
 }

@@ -71,9 +71,8 @@ public class NtlmManager {
 
 		return _netlogon.logon(
 			 type3Message.getDomain(), type3Message.getUser(),
-			 type3Message.getWorkstation(),
-			 serverChallenge, type3Message.getNTResponse(),
-			 type3Message.getLMResponse());
+			 type3Message.getWorkstation(), serverChallenge,
+			 type3Message.getNTResponse(), type3Message.getLMResponse());
 	}
 
 	public String getDomain() {
@@ -108,8 +107,7 @@ public class NtlmManager {
 				_NTLMSSP_NEGOTIATE_EXTENDED_SESSION_SECURITY)) {
 
 			type2Message.setFlag(NtlmFlags.NTLMSSP_NEGOTIATE_LM_KEY, false);
-			type2Message.setFlag(
-				NtlmFlags.NTLMSSP_NEGOTIATE_TARGET_INFO, true);
+			type2Message.setFlag(NtlmFlags.NTLMSSP_NEGOTIATE_TARGET_INFO, true);
 			type2Message.setTargetInformation(getTargetInformation());
 		}
 
