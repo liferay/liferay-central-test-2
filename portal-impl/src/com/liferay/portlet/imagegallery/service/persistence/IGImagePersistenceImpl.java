@@ -863,7 +863,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 	public IGImage fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object[] finderArgs = new Object[] { uuid, groupId };
 
 		Object result = null;
 
@@ -969,7 +969,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	public List<IGImage> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
+				groupId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1316,7 +1316,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 	public IGImage fetchBySmallImageId(long smallImageId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(smallImageId) };
+		Object[] finderArgs = new Object[] { smallImageId };
 
 		Object result = null;
 
@@ -1423,7 +1423,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 	public IGImage fetchByLargeImageId(long largeImageId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(largeImageId) };
+		Object[] finderArgs = new Object[] { largeImageId };
 
 		Object result = null;
 
@@ -1530,7 +1530,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 	public IGImage fetchByCustom1ImageId(long custom1ImageId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(custom1ImageId) };
+		Object[] finderArgs = new Object[] { custom1ImageId };
 
 		Object result = null;
 
@@ -1637,7 +1637,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 	public IGImage fetchByCustom2ImageId(long custom2ImageId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(custom2ImageId) };
+		Object[] finderArgs = new Object[] { custom2ImageId };
 
 		Object result = null;
 
@@ -1727,7 +1727,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	public List<IGImage> findByG_U(long groupId, long userId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(userId),
+				groupId, userId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2075,7 +2075,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	public List<IGImage> findByG_F(long groupId, long folderId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(folderId),
+				groupId, folderId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2426,9 +2426,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(folderId),
-				
-				name,
+				groupId, folderId, name,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -3027,7 +3025,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object[] finderArgs = new Object[] { uuid, groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID_G,
 				finderArgs, this);
@@ -3089,7 +3087,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object[] finderArgs = new Object[] { groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
@@ -3176,7 +3174,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	public int countBySmallImageId(long smallImageId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(smallImageId) };
+		Object[] finderArgs = new Object[] { smallImageId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_SMALLIMAGEID,
 				finderArgs, this);
@@ -3222,7 +3220,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	public int countByLargeImageId(long largeImageId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(largeImageId) };
+		Object[] finderArgs = new Object[] { largeImageId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_LARGEIMAGEID,
 				finderArgs, this);
@@ -3269,7 +3267,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 	public int countByCustom1ImageId(long custom1ImageId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(custom1ImageId) };
+		Object[] finderArgs = new Object[] { custom1ImageId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CUSTOM1IMAGEID,
 				finderArgs, this);
@@ -3316,7 +3314,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 	public int countByCustom2ImageId(long custom2ImageId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(custom2ImageId) };
+		Object[] finderArgs = new Object[] { custom2ImageId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CUSTOM2IMAGEID,
 				finderArgs, this);
@@ -3362,7 +3360,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	public int countByG_U(long groupId, long userId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
+		Object[] finderArgs = new Object[] { groupId, userId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_U,
 				finderArgs, this);
@@ -3459,7 +3457,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 	public int countByG_F(long groupId, long folderId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), new Long(folderId) };
+		Object[] finderArgs = new Object[] { groupId, folderId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_F,
 				finderArgs, this);
@@ -3556,11 +3554,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 	public int countByG_F_N(long groupId, long folderId, String name)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(folderId),
-				
-				name
-			};
+		Object[] finderArgs = new Object[] { groupId, folderId, name };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_F_N,
 				finderArgs, this);

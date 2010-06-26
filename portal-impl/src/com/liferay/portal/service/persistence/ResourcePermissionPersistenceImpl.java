@@ -462,7 +462,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	public List<ResourcePermission> findByRoleId(long roleId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(roleId),
+				roleId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -721,7 +721,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(roleId), new Integer(scope),
+				roleId, scope,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -994,9 +994,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		int scope, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
-				
-				name, new Integer(scope),
+				companyId, name, scope,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1308,11 +1306,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		int scope, String primKey, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
-				
-				name, new Integer(scope),
-				
-				primKey,
+				companyId, name, scope, primKey,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1694,11 +1688,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		int scope, String primKey, long roleId, boolean retrieveFromCache)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
-				
-				name, new Integer(scope),
-				
-				primKey, new Long(roleId)
+				companyId, name, scope, primKey, roleId
 			};
 
 		Object result = null;
@@ -1938,7 +1928,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	}
 
 	public int countByRoleId(long roleId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(roleId) };
+		Object[] finderArgs = new Object[] { roleId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ROLEID,
 				finderArgs, this);
@@ -1984,7 +1974,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	}
 
 	public int countByR_S(long roleId, int scope) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(roleId), new Integer(scope) };
+		Object[] finderArgs = new Object[] { roleId, scope };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_R_S,
 				finderArgs, this);
@@ -2035,11 +2025,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 	public int countByC_N_S(long companyId, String name, int scope)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId),
-				
-				name, new Integer(scope)
-			};
+		Object[] finderArgs = new Object[] { companyId, name, scope };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_N_S,
 				finderArgs, this);
@@ -2106,13 +2092,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 	public int countByC_N_S_P(long companyId, String name, int scope,
 		String primKey) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId),
-				
-				name, new Integer(scope),
-				
-				primKey
-			};
+		Object[] finderArgs = new Object[] { companyId, name, scope, primKey };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_N_S_P,
 				finderArgs, this);
@@ -2196,11 +2176,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	public int countByC_N_S_P_R(long companyId, String name, int scope,
 		String primKey, long roleId) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
-				
-				name, new Integer(scope),
-				
-				primKey, new Long(roleId)
+				companyId, name, scope, primKey, roleId
 			};
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_N_S_P_R,

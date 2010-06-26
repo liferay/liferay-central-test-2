@@ -372,9 +372,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 
 	public WebDAVProps fetchByC_C(long classNameId, long classPK,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(classNameId), new Long(classPK)
-			};
+		Object[] finderArgs = new Object[] { classNameId, classPK };
 
 		Object result = null;
 
@@ -543,9 +541,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 
 	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(classNameId), new Long(classPK)
-			};
+		Object[] finderArgs = new Object[] { classNameId, classPK };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C,
 				finderArgs, this);

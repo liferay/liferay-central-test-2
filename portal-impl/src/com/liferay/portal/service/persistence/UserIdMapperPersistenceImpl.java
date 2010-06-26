@@ -426,7 +426,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	public List<UserIdMapper> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId),
+				userId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -702,7 +702,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 
 	public UserIdMapper fetchByU_T(long userId, String type,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId), type };
+		Object[] finderArgs = new Object[] { userId, type };
 
 		Object result = null;
 
@@ -1036,7 +1036,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId) };
+		Object[] finderArgs = new Object[] { userId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
 				finderArgs, this);
@@ -1082,7 +1082,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	public int countByU_T(long userId, String type) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId), type };
+		Object[] finderArgs = new Object[] { userId, type };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_T,
 				finderArgs, this);

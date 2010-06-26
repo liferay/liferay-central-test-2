@@ -384,7 +384,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	public List<ShoppingCart> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
+				groupId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -639,7 +639,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	public List<ShoppingCart> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId),
+				userId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -915,7 +915,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 
 	public ShoppingCart fetchByG_U(long groupId, long userId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
+		Object[] finderArgs = new Object[] { groupId, userId };
 
 		Object result = null;
 
@@ -1095,7 +1095,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object[] finderArgs = new Object[] { groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
@@ -1141,7 +1141,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId) };
+		Object[] finderArgs = new Object[] { userId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
 				finderArgs, this);
@@ -1187,7 +1187,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	}
 
 	public int countByG_U(long groupId, long userId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
+		Object[] finderArgs = new Object[] { groupId, userId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_U,
 				finderArgs, this);

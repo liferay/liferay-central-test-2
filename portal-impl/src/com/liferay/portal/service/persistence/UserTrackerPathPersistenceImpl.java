@@ -316,7 +316,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userTrackerId),
+				userTrackerId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -651,7 +651,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 
 	public int countByUserTrackerId(long userTrackerId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userTrackerId) };
+		Object[] finderArgs = new Object[] { userTrackerId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERTRACKERID,
 				finderArgs, this);

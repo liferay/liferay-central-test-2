@@ -969,7 +969,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 	public JournalArticle fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object[] finderArgs = new Object[] { uuid, groupId };
 
 		Object result = null;
 
@@ -1078,7 +1078,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(resourcePrimKey),
+				resourcePrimKey,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1342,7 +1342,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	public List<JournalArticle> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
+				groupId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1675,7 +1675,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	public List<JournalArticle> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
+				companyId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1941,7 +1941,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(smallImageId),
+				smallImageId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2207,7 +2207,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(resourcePrimKey), new Integer(status),
+				resourcePrimKey, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2487,9 +2487,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				articleId,
+				groupId, articleId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2878,9 +2876,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				structureId,
+				groupId, structureId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -3269,9 +3265,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				templateId,
+				groupId, templateId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -3660,9 +3654,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				urlTitle,
+				groupId, urlTitle,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -4050,7 +4042,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	public List<JournalArticle> findByG_ST(long groupId, int status, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Integer(status),
+				groupId, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -4403,7 +4395,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Integer(status),
+				companyId, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -4705,11 +4697,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 	public JournalArticle fetchByG_A_V(long groupId, String articleId,
 		double version, boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				articleId, new Double(version)
-			};
+		Object[] finderArgs = new Object[] { groupId, articleId, version };
 
 		Object result = null;
 
@@ -4823,9 +4811,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				articleId, new Integer(status),
+				groupId, articleId, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -5234,9 +5220,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				urlTitle, new Integer(status),
+				groupId, urlTitle, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -5883,7 +5867,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object[] finderArgs = new Object[] { uuid, groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID_G,
 				finderArgs, this);
@@ -5946,7 +5930,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 	public int countByResourcePrimKey(long resourcePrimKey)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(resourcePrimKey) };
+		Object[] finderArgs = new Object[] { resourcePrimKey };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_RESOURCEPRIMKEY,
 				finderArgs, this);
@@ -5992,7 +5976,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object[] finderArgs = new Object[] { groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
@@ -6079,7 +6063,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
 				finderArgs, this);
@@ -6125,7 +6109,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	}
 
 	public int countBySmallImageId(long smallImageId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(smallImageId) };
+		Object[] finderArgs = new Object[] { smallImageId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_SMALLIMAGEID,
 				finderArgs, this);
@@ -6172,9 +6156,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 	public int countByR_ST(long resourcePrimKey, int status)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(resourcePrimKey), new Integer(status)
-			};
+		Object[] finderArgs = new Object[] { resourcePrimKey, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_R_ST,
 				finderArgs, this);
@@ -6225,7 +6207,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 	public int countByG_A(long groupId, String articleId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), articleId };
+		Object[] finderArgs = new Object[] { groupId, articleId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_A,
 				finderArgs, this);
@@ -6346,7 +6328,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 	public int countByG_S(long groupId, String structureId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), structureId };
+		Object[] finderArgs = new Object[] { groupId, structureId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_S,
 				finderArgs, this);
@@ -6467,7 +6449,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 	public int countByG_T(long groupId, String templateId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), templateId };
+		Object[] finderArgs = new Object[] { groupId, templateId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_T,
 				finderArgs, this);
@@ -6588,7 +6570,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 	public int countByG_UT(long groupId, String urlTitle)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), urlTitle };
+		Object[] finderArgs = new Object[] { groupId, urlTitle };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_UT,
 				finderArgs, this);
@@ -6708,9 +6690,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	}
 
 	public int countByG_ST(long groupId, int status) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Integer(status)
-			};
+		Object[] finderArgs = new Object[] { groupId, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_ST,
 				finderArgs, this);
@@ -6807,9 +6787,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 	public int countByC_ST(long companyId, int status)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Integer(status)
-			};
+		Object[] finderArgs = new Object[] { companyId, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_ST,
 				finderArgs, this);
@@ -6860,11 +6838,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 	public int countByG_A_V(long groupId, String articleId, double version)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				articleId, new Double(version)
-			};
+		Object[] finderArgs = new Object[] { groupId, articleId, version };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_A_V,
 				finderArgs, this);
@@ -6993,11 +6967,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 	public int countByG_A_ST(long groupId, String articleId, int status)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				articleId, new Integer(status)
-			};
+		Object[] finderArgs = new Object[] { groupId, articleId, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_A_ST,
 				finderArgs, this);
@@ -7126,11 +7096,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 	public int countByG_UT_ST(long groupId, String urlTitle, int status)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				urlTitle, new Integer(status)
-			};
+		Object[] finderArgs = new Object[] { groupId, urlTitle, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_UT_ST,
 				finderArgs, this);

@@ -357,7 +357,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	public List<Resource> findByCodeId(long codeId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(codeId),
+				codeId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -633,7 +633,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 
 	public Resource fetchByC_P(long codeId, String primKey,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(codeId), primKey };
+		Object[] finderArgs = new Object[] { codeId, primKey };
 
 		Object result = null;
 
@@ -819,7 +819,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	}
 
 	public int countByCodeId(long codeId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(codeId) };
+		Object[] finderArgs = new Object[] { codeId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CODEID,
 				finderArgs, this);
@@ -866,7 +866,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 
 	public int countByC_P(long codeId, String primKey)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(codeId), primKey };
+		Object[] finderArgs = new Object[] { codeId, primKey };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_P,
 				finderArgs, this);

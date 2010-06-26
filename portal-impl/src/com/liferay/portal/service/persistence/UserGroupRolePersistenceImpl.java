@@ -364,7 +364,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 	public List<UserGroupRole> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId),
+				userId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -620,7 +620,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 	public List<UserGroupRole> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
+				groupId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -877,7 +877,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 	public List<UserGroupRole> findByRoleId(long roleId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(roleId),
+				roleId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1134,7 +1134,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 	public List<UserGroupRole> findByU_G(long userId, long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(groupId),
+				userId, groupId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1406,7 +1406,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 	public List<UserGroupRole> findByG_R(long groupId, long roleId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(roleId),
+				groupId, roleId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1778,7 +1778,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId) };
+		Object[] finderArgs = new Object[] { userId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
 				finderArgs, this);
@@ -1824,7 +1824,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object[] finderArgs = new Object[] { groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
@@ -1870,7 +1870,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 	}
 
 	public int countByRoleId(long roleId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(roleId) };
+		Object[] finderArgs = new Object[] { roleId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ROLEID,
 				finderArgs, this);
@@ -1916,7 +1916,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 	}
 
 	public int countByU_G(long userId, long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId), new Long(groupId) };
+		Object[] finderArgs = new Object[] { userId, groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_G,
 				finderArgs, this);
@@ -1966,7 +1966,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 	}
 
 	public int countByG_R(long groupId, long roleId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), new Long(roleId) };
+		Object[] finderArgs = new Object[] { groupId, roleId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_R,
 				finderArgs, this);

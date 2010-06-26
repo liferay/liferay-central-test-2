@@ -1050,7 +1050,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 	public WikiPage fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object[] finderArgs = new Object[] { uuid, groupId };
 
 		Object result = null;
 
@@ -1156,7 +1156,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	public List<WikiPage> findByNodeId(long nodeId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(nodeId),
+				nodeId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1707,7 +1707,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(resourcePrimKey), new Long(nodeId),
+				resourcePrimKey, nodeId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1986,9 +1986,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	public List<WikiPage> findByN_T(long nodeId, String title, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(nodeId),
-				
-				title,
+				nodeId, title,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2290,7 +2288,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	public List<WikiPage> findByN_H(long nodeId, boolean head, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(nodeId), Boolean.valueOf(head),
+				nodeId, head,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2568,9 +2566,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	public List<WikiPage> findByN_P(long nodeId, String parentTitle, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(nodeId),
-				
-				parentTitle,
+				nodeId, parentTitle,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2874,9 +2870,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(nodeId),
-				
-				redirectTitle,
+				nodeId, redirectTitle,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -3179,7 +3173,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	public List<WikiPage> findByN_S(long nodeId, int status, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(nodeId), new Integer(status),
+				nodeId, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -3480,9 +3474,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 	public WikiPage fetchByR_N_V(long resourcePrimKey, long nodeId,
 		double version, boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(resourcePrimKey), new Long(nodeId), new Double(version)
-			};
+		Object[] finderArgs = new Object[] { resourcePrimKey, nodeId, version };
 
 		Object result = null;
 
@@ -3583,7 +3575,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(resourcePrimKey), new Long(nodeId), new Integer(status),
+				resourcePrimKey, nodeId, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -3878,7 +3870,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(nodeId), new Integer(status),
+				userId, nodeId, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -4194,11 +4186,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 	public WikiPage fetchByN_T_V(long nodeId, String title, double version,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(nodeId),
-				
-				title, new Double(version)
-			};
+		Object[] finderArgs = new Object[] { nodeId, title, version };
 
 		Object result = null;
 
@@ -4312,9 +4300,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(nodeId),
-				
-				title, Boolean.valueOf(head),
+				nodeId, title, head,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -4632,9 +4618,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(nodeId),
-				
-				title, new Integer(status),
+				nodeId, title, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -4952,9 +4936,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		String parentTitle, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(nodeId), Boolean.valueOf(head),
-				
-				parentTitle,
+				nodeId, head, parentTitle,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -5272,7 +5254,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(nodeId), Boolean.valueOf(head), new Integer(status),
+				nodeId, head, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -5567,9 +5549,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		String parentTitle, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(nodeId), Boolean.valueOf(head),
-				
-				parentTitle, new Integer(status),
+				nodeId, head, parentTitle, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -6156,7 +6136,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object[] finderArgs = new Object[] { uuid, groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID_G,
 				finderArgs, this);
@@ -6218,7 +6198,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public int countByNodeId(long nodeId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(nodeId) };
+		Object[] finderArgs = new Object[] { nodeId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_NODEID,
 				finderArgs, this);
@@ -6323,9 +6303,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 	public int countByR_N(long resourcePrimKey, long nodeId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(resourcePrimKey), new Long(nodeId)
-			};
+		Object[] finderArgs = new Object[] { resourcePrimKey, nodeId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_R_N,
 				finderArgs, this);
@@ -6375,7 +6353,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public int countByN_T(long nodeId, String title) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(nodeId), title };
+		Object[] finderArgs = new Object[] { nodeId, title };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_N_T,
 				finderArgs, this);
@@ -6437,9 +6415,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public int countByN_H(long nodeId, boolean head) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(nodeId), Boolean.valueOf(head)
-			};
+		Object[] finderArgs = new Object[] { nodeId, head };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_N_H,
 				finderArgs, this);
@@ -6490,7 +6466,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 	public int countByN_P(long nodeId, String parentTitle)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(nodeId), parentTitle };
+		Object[] finderArgs = new Object[] { nodeId, parentTitle };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_N_P,
 				finderArgs, this);
@@ -6553,7 +6529,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 	public int countByN_R(long nodeId, String redirectTitle)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(nodeId), redirectTitle };
+		Object[] finderArgs = new Object[] { nodeId, redirectTitle };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_N_R,
 				finderArgs, this);
@@ -6615,7 +6591,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public int countByN_S(long nodeId, int status) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(nodeId), new Integer(status) };
+		Object[] finderArgs = new Object[] { nodeId, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_N_S,
 				finderArgs, this);
@@ -6666,9 +6642,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 	public int countByR_N_V(long resourcePrimKey, long nodeId, double version)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(resourcePrimKey), new Long(nodeId), new Double(version)
-			};
+		Object[] finderArgs = new Object[] { resourcePrimKey, nodeId, version };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_R_N_V,
 				finderArgs, this);
@@ -6723,9 +6697,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 	public int countByR_N_S(long resourcePrimKey, long nodeId, int status)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(resourcePrimKey), new Long(nodeId), new Integer(status)
-			};
+		Object[] finderArgs = new Object[] { resourcePrimKey, nodeId, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_R_N_S,
 				finderArgs, this);
@@ -6780,9 +6752,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 	public int countByU_N_S(long userId, long nodeId, int status)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(nodeId), new Integer(status)
-			};
+		Object[] finderArgs = new Object[] { userId, nodeId, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_N_S,
 				finderArgs, this);
@@ -6837,11 +6807,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 	public int countByN_T_V(long nodeId, String title, double version)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(nodeId),
-				
-				title, new Double(version)
-			};
+		Object[] finderArgs = new Object[] { nodeId, title, version };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_N_T_V,
 				finderArgs, this);
@@ -6908,11 +6874,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 	public int countByN_T_H(long nodeId, String title, boolean head)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(nodeId),
-				
-				title, Boolean.valueOf(head)
-			};
+		Object[] finderArgs = new Object[] { nodeId, title, head };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_N_T_H,
 				finderArgs, this);
@@ -6979,11 +6941,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 	public int countByN_T_S(long nodeId, String title, int status)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(nodeId),
-				
-				title, new Integer(status)
-			};
+		Object[] finderArgs = new Object[] { nodeId, title, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_N_T_S,
 				finderArgs, this);
@@ -7050,11 +7008,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 	public int countByN_H_P(long nodeId, boolean head, String parentTitle)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(nodeId), Boolean.valueOf(head),
-				
-				parentTitle
-			};
+		Object[] finderArgs = new Object[] { nodeId, head, parentTitle };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_N_H_P,
 				finderArgs, this);
@@ -7121,9 +7075,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 	public int countByN_H_S(long nodeId, boolean head, int status)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(nodeId), Boolean.valueOf(head), new Integer(status)
-			};
+		Object[] finderArgs = new Object[] { nodeId, head, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_N_H_S,
 				finderArgs, this);
@@ -7178,11 +7130,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 	public int countByN_H_P_S(long nodeId, boolean head, String parentTitle,
 		int status) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(nodeId), Boolean.valueOf(head),
-				
-				parentTitle, new Integer(status)
-			};
+		Object[] finderArgs = new Object[] { nodeId, head, parentTitle, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_N_H_P_S,
 				finderArgs, this);

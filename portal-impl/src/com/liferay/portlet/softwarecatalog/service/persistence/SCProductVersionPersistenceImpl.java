@@ -391,7 +391,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(productEntryId),
+				productEntryId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -863,7 +863,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 
 	public int countByProductEntryId(long productEntryId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(productEntryId) };
+		Object[] finderArgs = new Object[] { productEntryId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_PRODUCTENTRYID,
 				finderArgs, this);
@@ -1024,7 +1024,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 		long pk, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(start), String.valueOf(end),
+				pk, String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
@@ -1085,7 +1085,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 			"getSCFrameworkVersionsSize", new String[] { Long.class.getName() });
 
 	public int getSCFrameworkVersionsSize(long pk) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(pk) };
+		Object[] finderArgs = new Object[] { pk };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_GET_SCFRAMEWORKVERSIONS_SIZE,
 				finderArgs, this);
@@ -1133,11 +1133,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 
 	public boolean containsSCFrameworkVersion(long pk, long scFrameworkVersionPK)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(pk),
-				
-				new Long(scFrameworkVersionPK)
-			};
+		Object[] finderArgs = new Object[] { pk, scFrameworkVersionPK };
 
 		Boolean value = (Boolean)FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_SCFRAMEWORKVERSION,
 				finderArgs, this);

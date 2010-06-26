@@ -372,7 +372,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	public List<SCFrameworkVersion> findByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
+				groupId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -708,7 +708,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	public List<SCFrameworkVersion> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
+				companyId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -975,7 +975,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(active),
+				groupId, active,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1415,7 +1415,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object[] finderArgs = new Object[] { groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
@@ -1503,7 +1503,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
 				finderArgs, this);
@@ -1550,9 +1550,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 
 	public int countByG_A(long groupId, boolean active)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(active)
-			};
+		Object[] finderArgs = new Object[] { groupId, active };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_A,
 				finderArgs, this);
@@ -1705,7 +1703,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 		long pk, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(start), String.valueOf(end),
+				pk, String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
@@ -1766,7 +1764,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			"getSCProductVersionsSize", new String[] { Long.class.getName() });
 
 	public int getSCProductVersionsSize(long pk) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(pk) };
+		Object[] finderArgs = new Object[] { pk };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_GET_SCPRODUCTVERSIONS_SIZE,
 				finderArgs, this);
@@ -1814,11 +1812,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 
 	public boolean containsSCProductVersion(long pk, long scProductVersionPK)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(pk),
-				
-				new Long(scProductVersionPK)
-			};
+		Object[] finderArgs = new Object[] { pk, scProductVersionPK };
 
 		Boolean value = (Boolean)FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_SCPRODUCTVERSION,
 				finderArgs, this);

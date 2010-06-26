@@ -433,7 +433,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	public List<TasksReview> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId),
+				userId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -697,7 +697,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	public List<TasksReview> findByProposalId(long proposalId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(proposalId),
+				proposalId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -982,9 +982,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 	public TasksReview fetchByU_P(long userId, long proposalId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(proposalId)
-			};
+		Object[] finderArgs = new Object[] { userId, proposalId };
 
 		Object result = null;
 
@@ -1079,7 +1077,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	public List<TasksReview> findByP_S(long proposalId, int stage, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(proposalId), new Integer(stage),
+				proposalId, stage,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1359,8 +1357,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		boolean completed, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(proposalId), new Integer(stage),
-				Boolean.valueOf(completed),
+				proposalId, stage, completed,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1657,8 +1654,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		boolean completed, boolean rejected, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(proposalId), new Integer(stage),
-				Boolean.valueOf(completed), Boolean.valueOf(rejected),
+				proposalId, stage, completed, rejected,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2077,7 +2073,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId) };
+		Object[] finderArgs = new Object[] { userId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
 				finderArgs, this);
@@ -2123,7 +2119,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	}
 
 	public int countByProposalId(long proposalId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(proposalId) };
+		Object[] finderArgs = new Object[] { proposalId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_PROPOSALID,
 				finderArgs, this);
@@ -2170,9 +2166,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 	public int countByU_P(long userId, long proposalId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(proposalId)
-			};
+		Object[] finderArgs = new Object[] { userId, proposalId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_P,
 				finderArgs, this);
@@ -2222,9 +2216,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	}
 
 	public int countByP_S(long proposalId, int stage) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(proposalId), new Integer(stage)
-			};
+		Object[] finderArgs = new Object[] { proposalId, stage };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_P_S,
 				finderArgs, this);
@@ -2275,10 +2267,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 	public int countByP_S_C(long proposalId, int stage, boolean completed)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(proposalId), new Integer(stage),
-				Boolean.valueOf(completed)
-			};
+		Object[] finderArgs = new Object[] { proposalId, stage, completed };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_P_S_C,
 				finderArgs, this);
@@ -2334,8 +2323,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	public int countByP_S_C_R(long proposalId, int stage, boolean completed,
 		boolean rejected) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(proposalId), new Integer(stage),
-				Boolean.valueOf(completed), Boolean.valueOf(rejected)
+				proposalId, stage, completed, rejected
 			};
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_P_S_C_R,

@@ -421,7 +421,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	public List<DLFileRank> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId),
+				userId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -685,7 +685,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	public List<DLFileRank> findByG_U(long groupId, long userId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(userId),
+				groupId, userId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -964,9 +964,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	public List<DLFileRank> findByF_N(long folderId, String name, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(folderId),
-				
-				name,
+				folderId, name,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1296,11 +1294,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	public DLFileRank fetchByC_U_F_N(long companyId, long userId,
 		long folderId, String name, boolean retrieveFromCache)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(userId), new Long(folderId),
-				
-				name
-			};
+		Object[] finderArgs = new Object[] { companyId, userId, folderId, name };
 
 		Object result = null;
 
@@ -1513,7 +1507,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId) };
+		Object[] finderArgs = new Object[] { userId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
 				finderArgs, this);
@@ -1559,7 +1553,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	}
 
 	public int countByG_U(long groupId, long userId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
+		Object[] finderArgs = new Object[] { groupId, userId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_U,
 				finderArgs, this);
@@ -1609,7 +1603,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	}
 
 	public int countByF_N(long folderId, String name) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(folderId), name };
+		Object[] finderArgs = new Object[] { folderId, name };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_F_N,
 				finderArgs, this);
@@ -1672,11 +1666,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 
 	public int countByC_U_F_N(long companyId, long userId, long folderId,
 		String name) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(userId), new Long(folderId),
-				
-				name
-			};
+		Object[] finderArgs = new Object[] { companyId, userId, folderId, name };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_U_F_N,
 				finderArgs, this);

@@ -370,7 +370,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userGroupId),
+				userGroupId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -627,7 +627,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	public List<UserGroupGroupRole> findByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
+				groupId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -884,7 +884,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	public List<UserGroupGroupRole> findByRoleId(long roleId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(roleId),
+				roleId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1143,7 +1143,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userGroupId), new Long(groupId),
+				userGroupId, groupId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1416,7 +1416,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(roleId),
+				groupId, roleId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1790,7 +1790,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	}
 
 	public int countByUserGroupId(long userGroupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userGroupId) };
+		Object[] finderArgs = new Object[] { userGroupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERGROUPID,
 				finderArgs, this);
@@ -1836,7 +1836,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object[] finderArgs = new Object[] { groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
@@ -1882,7 +1882,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	}
 
 	public int countByRoleId(long roleId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(roleId) };
+		Object[] finderArgs = new Object[] { roleId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ROLEID,
 				finderArgs, this);
@@ -1929,9 +1929,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 	public int countByU_G(long userGroupId, long groupId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(userGroupId), new Long(groupId)
-			};
+		Object[] finderArgs = new Object[] { userGroupId, groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_G,
 				finderArgs, this);
@@ -1981,7 +1979,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	}
 
 	public int countByG_R(long groupId, long roleId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), new Long(roleId) };
+		Object[] finderArgs = new Object[] { groupId, roleId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_R,
 				finderArgs, this);

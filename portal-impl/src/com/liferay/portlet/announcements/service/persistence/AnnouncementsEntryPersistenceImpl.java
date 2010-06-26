@@ -678,7 +678,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 	public List<AnnouncementsEntry> findByUserId(long userId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId),
+				userId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -944,7 +944,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(classNameId), new Long(classPK),
+				classNameId, classPK,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1224,7 +1224,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		boolean alert, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(classNameId), new Long(classPK), Boolean.valueOf(alert),
+				classNameId, classPK, alert,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1672,7 +1672,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId) };
+		Object[] finderArgs = new Object[] { userId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
 				finderArgs, this);
@@ -1719,9 +1719,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 
 	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(classNameId), new Long(classPK)
-			};
+		Object[] finderArgs = new Object[] { classNameId, classPK };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C,
 				finderArgs, this);
@@ -1772,9 +1770,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 
 	public int countByC_C_A(long classNameId, long classPK, boolean alert)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(classNameId), new Long(classPK), Boolean.valueOf(alert)
-			};
+		Object[] finderArgs = new Object[] { classNameId, classPK, alert };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C_A,
 				finderArgs, this);

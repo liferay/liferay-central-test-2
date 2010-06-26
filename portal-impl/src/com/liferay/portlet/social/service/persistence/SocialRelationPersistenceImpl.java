@@ -767,7 +767,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	public List<SocialRelation> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
+				companyId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1023,7 +1023,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	public List<SocialRelation> findByUserId1(long userId1, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId1),
+				userId1,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1279,7 +1279,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	public List<SocialRelation> findByUserId2(long userId2, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId2),
+				userId2,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1534,7 +1534,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	public List<SocialRelation> findByType(int type, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Integer(type),
+				type,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1790,7 +1790,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	public List<SocialRelation> findByC_T(long companyId, int type, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Integer(type),
+				companyId, type,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2061,7 +2061,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	public List<SocialRelation> findByU1_T(long userId1, int type, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId1), new Integer(type),
+				userId1, type,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2332,7 +2332,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	public List<SocialRelation> findByU2_T(long userId2, int type, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId2), new Integer(type),
+				userId2, type,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2626,9 +2626,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 	public SocialRelation fetchByU1_U2_T(long userId1, long userId2, int type,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(userId1), new Long(userId2), new Integer(type)
-			};
+		Object[] finderArgs = new Object[] { userId1, userId2, type };
 
 		Object result = null;
 
@@ -2907,7 +2905,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
 				finderArgs, this);
@@ -2953,7 +2951,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	}
 
 	public int countByUserId1(long userId1) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId1) };
+		Object[] finderArgs = new Object[] { userId1 };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID1,
 				finderArgs, this);
@@ -2999,7 +2997,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	}
 
 	public int countByUserId2(long userId2) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId2) };
+		Object[] finderArgs = new Object[] { userId2 };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID2,
 				finderArgs, this);
@@ -3045,7 +3043,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	}
 
 	public int countByType(int type) throws SystemException {
-		Object[] finderArgs = new Object[] { new Integer(type) };
+		Object[] finderArgs = new Object[] { type };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_TYPE,
 				finderArgs, this);
@@ -3091,9 +3089,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	}
 
 	public int countByC_T(long companyId, int type) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Integer(type)
-			};
+		Object[] finderArgs = new Object[] { companyId, type };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_T,
 				finderArgs, this);
@@ -3143,7 +3139,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	}
 
 	public int countByU1_T(long userId1, int type) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId1), new Integer(type) };
+		Object[] finderArgs = new Object[] { userId1, type };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U1_T,
 				finderArgs, this);
@@ -3193,7 +3189,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	}
 
 	public int countByU2_T(long userId2, int type) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId2), new Integer(type) };
+		Object[] finderArgs = new Object[] { userId2, type };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U2_T,
 				finderArgs, this);
@@ -3244,9 +3240,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 	public int countByU1_U2_T(long userId1, long userId2, int type)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(userId1), new Long(userId2), new Integer(type)
-			};
+		Object[] finderArgs = new Object[] { userId1, userId2, type };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U1_U2_T,
 				finderArgs, this);

@@ -400,7 +400,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	public List<Permission> findByResourceId(long resourceId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(resourceId),
+				resourceId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -677,7 +677,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 	public Permission fetchByA_R(String actionId, long resourceId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { actionId, new Long(resourceId) };
+		Object[] finderArgs = new Object[] { actionId, resourceId };
 
 		Object result = null;
 
@@ -864,7 +864,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	public int countByResourceId(long resourceId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(resourceId) };
+		Object[] finderArgs = new Object[] { resourceId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_RESOURCEID,
 				finderArgs, this);
@@ -911,7 +911,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 	public int countByA_R(String actionId, long resourceId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { actionId, new Long(resourceId) };
+		Object[] finderArgs = new Object[] { actionId, resourceId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_A_R,
 				finderArgs, this);
@@ -1028,7 +1028,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(start), String.valueOf(end),
+				pk, String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
@@ -1089,7 +1089,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			"getGroupsSize", new String[] { Long.class.getName() });
 
 	public int getGroupsSize(long pk) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(pk) };
+		Object[] finderArgs = new Object[] { pk };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_GET_GROUPS_SIZE,
 				finderArgs, this);
@@ -1137,7 +1137,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 	public boolean containsGroup(long pk, long groupPK)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(pk), new Long(groupPK) };
+		Object[] finderArgs = new Object[] { pk, groupPK };
 
 		Boolean value = (Boolean)FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_GROUP,
 				finderArgs, this);
@@ -1362,7 +1362,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	public List<com.liferay.portal.model.Role> getRoles(long pk, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(start), String.valueOf(end),
+				pk, String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
@@ -1423,7 +1423,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			"getRolesSize", new String[] { Long.class.getName() });
 
 	public int getRolesSize(long pk) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(pk) };
+		Object[] finderArgs = new Object[] { pk };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_GET_ROLES_SIZE,
 				finderArgs, this);
@@ -1470,7 +1470,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsRole(long pk, long rolePK) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(pk), new Long(rolePK) };
+		Object[] finderArgs = new Object[] { pk, rolePK };
 
 		Boolean value = (Boolean)FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_ROLE,
 				finderArgs, this);
@@ -1694,7 +1694,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(start), String.valueOf(end),
+				pk, String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
@@ -1755,7 +1755,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			"getUsersSize", new String[] { Long.class.getName() });
 
 	public int getUsersSize(long pk) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(pk) };
+		Object[] finderArgs = new Object[] { pk };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_GET_USERS_SIZE,
 				finderArgs, this);
@@ -1802,7 +1802,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsUser(long pk, long userPK) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(pk), new Long(userPK) };
+		Object[] finderArgs = new Object[] { pk, userPK };
 
 		Boolean value = (Boolean)FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_USER,
 				finderArgs, this);

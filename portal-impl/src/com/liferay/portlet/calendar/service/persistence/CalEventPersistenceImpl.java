@@ -765,7 +765,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 	public CalEvent fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object[] finderArgs = new Object[] { uuid, groupId };
 
 		Object result = null;
 
@@ -873,7 +873,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	public List<CalEvent> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
+				companyId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1135,7 +1135,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	public List<CalEvent> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
+				groupId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1466,7 +1466,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	public List<CalEvent> findByRemindBy(int remindBy, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Integer(remindBy),
+				remindBy,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1730,9 +1730,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	public List<CalEvent> findByG_T(long groupId, String type, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				type,
+				groupId, type,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2117,7 +2115,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	public List<CalEvent> findByG_R(long groupId, boolean repeating, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(repeating),
+				groupId, repeating,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2639,7 +2637,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object[] finderArgs = new Object[] { uuid, groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID_G,
 				finderArgs, this);
@@ -2701,7 +2699,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
 				finderArgs, this);
@@ -2747,7 +2745,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object[] finderArgs = new Object[] { groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
@@ -2834,7 +2832,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	public int countByRemindBy(int remindBy) throws SystemException {
-		Object[] finderArgs = new Object[] { new Integer(remindBy) };
+		Object[] finderArgs = new Object[] { remindBy };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_REMINDBY,
 				finderArgs, this);
@@ -2880,7 +2878,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	public int countByG_T(long groupId, String type) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), type };
+		Object[] finderArgs = new Object[] { groupId, type };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_T,
 				finderArgs, this);
@@ -3001,9 +2999,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 	public int countByG_R(long groupId, boolean repeating)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(repeating)
-			};
+		Object[] finderArgs = new Object[] { groupId, repeating };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_R,
 				finderArgs, this);

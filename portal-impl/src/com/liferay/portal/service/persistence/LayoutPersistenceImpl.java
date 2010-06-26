@@ -943,7 +943,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 	public Layout fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object[] finderArgs = new Object[] { uuid, groupId };
 
 		Object result = null;
 
@@ -1049,7 +1049,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	public List<Layout> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
+				groupId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1311,7 +1311,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	public List<Layout> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
+				companyId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1589,7 +1589,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 	public Layout fetchByDLFolderId(long dlFolderId, boolean retrieveFromCache)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(dlFolderId) };
+		Object[] finderArgs = new Object[] { dlFolderId };
 
 		Object result = null;
 
@@ -1696,7 +1696,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 	public Layout fetchByIconImageId(long iconImageId, boolean retrieveFromCache)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(iconImageId) };
+		Object[] finderArgs = new Object[] { iconImageId };
 
 		Object result = null;
 
@@ -1787,7 +1787,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(privateLayout),
+				groupId, privateLayout,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2088,10 +2088,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 	public Layout fetchByG_P_L(long groupId, boolean privateLayout,
 		long layoutId, boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(privateLayout),
-				new Long(layoutId)
-			};
+		Object[] finderArgs = new Object[] { groupId, privateLayout, layoutId };
 
 		Object result = null;
 
@@ -2193,8 +2190,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		long parentLayoutId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(privateLayout),
-				new Long(parentLayoutId),
+				groupId, privateLayout, parentLayoutId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2511,11 +2507,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	public Layout fetchByG_P_F(long groupId, boolean privateLayout,
 		String friendlyURL, boolean retrieveFromCache)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(privateLayout),
-				
-				friendlyURL
-			};
+		Object[] finderArgs = new Object[] { groupId, privateLayout, friendlyURL };
 
 		Object result = null;
 
@@ -2629,9 +2621,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		String type, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(privateLayout),
-				
-				type,
+				groupId, privateLayout, type,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -3147,7 +3137,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object[] finderArgs = new Object[] { uuid, groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID_G,
 				finderArgs, this);
@@ -3209,7 +3199,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object[] finderArgs = new Object[] { groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
@@ -3255,7 +3245,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
 				finderArgs, this);
@@ -3301,7 +3291,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	}
 
 	public int countByDLFolderId(long dlFolderId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(dlFolderId) };
+		Object[] finderArgs = new Object[] { dlFolderId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_DLFOLDERID,
 				finderArgs, this);
@@ -3347,7 +3337,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	}
 
 	public int countByIconImageId(long iconImageId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(iconImageId) };
+		Object[] finderArgs = new Object[] { iconImageId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ICONIMAGEID,
 				finderArgs, this);
@@ -3394,9 +3384,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 	public int countByG_P(long groupId, boolean privateLayout)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(privateLayout)
-			};
+		Object[] finderArgs = new Object[] { groupId, privateLayout };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P,
 				finderArgs, this);
@@ -3447,10 +3435,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 	public int countByG_P_L(long groupId, boolean privateLayout, long layoutId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(privateLayout),
-				new Long(layoutId)
-			};
+		Object[] finderArgs = new Object[] { groupId, privateLayout, layoutId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P_L,
 				finderArgs, this);
@@ -3506,8 +3491,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	public int countByG_P_P(long groupId, boolean privateLayout,
 		long parentLayoutId) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(privateLayout),
-				new Long(parentLayoutId)
+				groupId, privateLayout, parentLayoutId
 			};
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P_P,
@@ -3563,11 +3547,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 	public int countByG_P_F(long groupId, boolean privateLayout,
 		String friendlyURL) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(privateLayout),
-				
-				friendlyURL
-			};
+		Object[] finderArgs = new Object[] { groupId, privateLayout, friendlyURL };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P_F,
 				finderArgs, this);
@@ -3634,11 +3614,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 	public int countByG_P_T(long groupId, boolean privateLayout, String type)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(privateLayout),
-				
-				type
-			};
+		Object[] finderArgs = new Object[] { groupId, privateLayout, type };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P_T,
 				finderArgs, this);

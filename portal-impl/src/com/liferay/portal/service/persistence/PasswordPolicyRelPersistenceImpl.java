@@ -427,7 +427,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 		long passwordPolicyId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(passwordPolicyId),
+				passwordPolicyId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -707,9 +707,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 
 	public PasswordPolicyRel fetchByC_C(long classNameId, long classPK,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(classNameId), new Long(classPK)
-			};
+		Object[] finderArgs = new Object[] { classNameId, classPK };
 
 		Object result = null;
 
@@ -829,8 +827,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 		long classNameId, long classPK, boolean retrieveFromCache)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(passwordPolicyId), new Long(classNameId),
-				new Long(classPK)
+				passwordPolicyId, classNameId, classPK
 			};
 
 		Object result = null;
@@ -1021,7 +1018,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 
 	public int countByPasswordPolicyId(long passwordPolicyId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(passwordPolicyId) };
+		Object[] finderArgs = new Object[] { passwordPolicyId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_PASSWORDPOLICYID,
 				finderArgs, this);
@@ -1068,9 +1065,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 
 	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(classNameId), new Long(classPK)
-			};
+		Object[] finderArgs = new Object[] { classNameId, classPK };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C,
 				finderArgs, this);
@@ -1122,8 +1117,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 	public int countByP_C_C(long passwordPolicyId, long classNameId,
 		long classPK) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(passwordPolicyId), new Long(classNameId),
-				new Long(classPK)
+				passwordPolicyId, classNameId, classPK
 			};
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_P_C_C,

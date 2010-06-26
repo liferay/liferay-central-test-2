@@ -382,7 +382,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	public List<JournalArticleResource> findByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
+				groupId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -660,7 +660,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 
 	public JournalArticleResource fetchByG_A(long groupId, String articleId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), articleId };
+		Object[] finderArgs = new Object[] { groupId, articleId };
 
 		Object result = null;
 
@@ -850,7 +850,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object[] finderArgs = new Object[] { groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
@@ -897,7 +897,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 
 	public int countByG_A(long groupId, String articleId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), articleId };
+		Object[] finderArgs = new Object[] { groupId, articleId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_A,
 				finderArgs, this);

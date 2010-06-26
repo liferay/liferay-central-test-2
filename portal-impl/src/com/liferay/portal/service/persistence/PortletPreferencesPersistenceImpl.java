@@ -428,7 +428,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	public List<PortletPreferences> findByPlid(long plid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(plid),
+				plid,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -686,9 +686,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(plid),
-				
-				portletId,
+				plid, portletId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -985,7 +983,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 		long plid, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(ownerId), new Integer(ownerType), new Long(plid),
+				ownerId, ownerType, plid,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1300,11 +1298,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	public PortletPreferences fetchByO_O_P_P(long ownerId, int ownerType,
 		long plid, String portletId, boolean retrieveFromCache)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(ownerId), new Integer(ownerType), new Long(plid),
-				
-				portletId
-			};
+		Object[] finderArgs = new Object[] { ownerId, ownerType, plid, portletId };
 
 		Object result = null;
 
@@ -1518,7 +1512,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	}
 
 	public int countByPlid(long plid) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(plid) };
+		Object[] finderArgs = new Object[] { plid };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_PLID,
 				finderArgs, this);
@@ -1565,7 +1559,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 	public int countByP_P(long plid, String portletId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(plid), portletId };
+		Object[] finderArgs = new Object[] { plid, portletId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_P_P,
 				finderArgs, this);
@@ -1628,9 +1622,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 	public int countByO_O_P(long ownerId, int ownerType, long plid)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(ownerId), new Integer(ownerType), new Long(plid)
-			};
+		Object[] finderArgs = new Object[] { ownerId, ownerType, plid };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_O_O_P,
 				finderArgs, this);
@@ -1685,11 +1677,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 	public int countByO_O_P_P(long ownerId, int ownerType, long plid,
 		String portletId) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(ownerId), new Integer(ownerType), new Long(plid),
-				
-				portletId
-			};
+		Object[] finderArgs = new Object[] { ownerId, ownerType, plid, portletId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_O_O_P_P,
 				finderArgs, this);

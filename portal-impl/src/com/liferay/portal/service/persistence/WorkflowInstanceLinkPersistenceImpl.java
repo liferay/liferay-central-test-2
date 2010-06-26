@@ -331,8 +331,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 		long companyId, long classNameId, long classPK, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(companyId), new Long(classNameId),
-				new Long(classPK),
+				groupId, companyId, classNameId, classPK,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -723,8 +722,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	public int countByG_C_C_C(long groupId, long companyId, long classNameId,
 		long classPK) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(companyId), new Long(classNameId),
-				new Long(classPK)
+				groupId, companyId, classNameId, classPK
 			};
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_C_C_C,

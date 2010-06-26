@@ -687,7 +687,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 
 	public ServiceComponent fetchByBNS_BNU(String buildNamespace,
 		long buildNumber, boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { buildNamespace, new Long(buildNumber) };
+		Object[] finderArgs = new Object[] { buildNamespace, buildNumber };
 
 		Object result = null;
 
@@ -940,7 +940,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 
 	public int countByBNS_BNU(String buildNamespace, long buildNumber)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { buildNamespace, new Long(buildNumber) };
+		Object[] finderArgs = new Object[] { buildNamespace, buildNumber };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_BNS_BNU,
 				finderArgs, this);

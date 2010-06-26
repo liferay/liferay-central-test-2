@@ -376,9 +376,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 
 	public RatingsStats fetchByC_C(long classNameId, long classPK,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(classNameId), new Long(classPK)
-			};
+		Object[] finderArgs = new Object[] { classNameId, classPK };
 
 		Object result = null;
 
@@ -547,9 +545,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 
 	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(classNameId), new Long(classPK)
-			};
+		Object[] finderArgs = new Object[] { classNameId, classPK };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C,
 				finderArgs, this);

@@ -415,7 +415,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
+				companyId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -682,7 +682,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(categoryId),
+				categoryId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -949,9 +949,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
-				
-				key,
+				companyId, key,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1276,7 +1274,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 
 	public AssetCategoryProperty fetchByCA_K(long categoryId, String key,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(categoryId), key };
+		Object[] finderArgs = new Object[] { categoryId, key };
 
 		Object result = null;
 
@@ -1481,7 +1479,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
 				finderArgs, this);
@@ -1527,7 +1525,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	}
 
 	public int countByCategoryId(long categoryId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(categoryId) };
+		Object[] finderArgs = new Object[] { categoryId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CATEGORYID,
 				finderArgs, this);
@@ -1573,7 +1571,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	}
 
 	public int countByC_K(long companyId, String key) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId), key };
+		Object[] finderArgs = new Object[] { companyId, key };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_K,
 				finderArgs, this);
@@ -1636,7 +1634,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 
 	public int countByCA_K(long categoryId, String key)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(categoryId), key };
+		Object[] finderArgs = new Object[] { categoryId, key };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CA_K,
 				finderArgs, this);

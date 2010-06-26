@@ -383,7 +383,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	public List<AnnouncementsDelivery> findByUserId(long userId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId),
+				userId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -660,7 +660,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 
 	public AnnouncementsDelivery fetchByU_T(long userId, String type,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId), type };
+		Object[] finderArgs = new Object[] { userId, type };
 
 		Object result = null;
 
@@ -847,7 +847,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId) };
+		Object[] finderArgs = new Object[] { userId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
 				finderArgs, this);
@@ -893,7 +893,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	}
 
 	public int countByU_T(long userId, String type) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId), type };
+		Object[] finderArgs = new Object[] { userId, type };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_T,
 				finderArgs, this);

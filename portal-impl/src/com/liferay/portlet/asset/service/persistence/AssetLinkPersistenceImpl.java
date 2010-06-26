@@ -383,7 +383,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	public List<AssetLink> findByE1(long entryId1, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(entryId1),
+				entryId1,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -645,7 +645,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	public List<AssetLink> findByE2(long entryId2, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(entryId2),
+				entryId2,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -909,7 +909,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	public List<AssetLink> findByE_E(long entryId1, long entryId2, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(entryId1), new Long(entryId2),
+				entryId1, entryId2,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1188,7 +1188,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	public List<AssetLink> findByE1_T(long entryId1, int type, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(entryId1), new Integer(type),
+				entryId1, type,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1467,7 +1467,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	public List<AssetLink> findByE2_T(long entryId2, int type, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(entryId2), new Integer(type),
+				entryId2, type,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1747,7 +1747,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(entryId1), new Long(entryId2), new Integer(type),
+				entryId1, entryId2, type,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2146,7 +2146,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public int countByE1(long entryId1) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(entryId1) };
+		Object[] finderArgs = new Object[] { entryId1 };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_E1,
 				finderArgs, this);
@@ -2192,7 +2192,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public int countByE2(long entryId2) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(entryId2) };
+		Object[] finderArgs = new Object[] { entryId2 };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_E2,
 				finderArgs, this);
@@ -2239,9 +2239,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 	public int countByE_E(long entryId1, long entryId2)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(entryId1), new Long(entryId2)
-			};
+		Object[] finderArgs = new Object[] { entryId1, entryId2 };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_E_E,
 				finderArgs, this);
@@ -2291,7 +2289,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public int countByE1_T(long entryId1, int type) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(entryId1), new Integer(type) };
+		Object[] finderArgs = new Object[] { entryId1, type };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_E1_T,
 				finderArgs, this);
@@ -2341,7 +2339,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public int countByE2_T(long entryId2, int type) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(entryId2), new Integer(type) };
+		Object[] finderArgs = new Object[] { entryId2, type };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_E2_T,
 				finderArgs, this);
@@ -2392,9 +2390,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 	public int countByE_E_T(long entryId1, long entryId2, int type)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(entryId1), new Long(entryId2), new Integer(type)
-			};
+		Object[] finderArgs = new Object[] { entryId1, entryId2, type };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_E_E_T,
 				finderArgs, this);

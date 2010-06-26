@@ -368,7 +368,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	public List<Phone> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
+				companyId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -628,7 +628,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	public List<Phone> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId),
+				userId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -890,7 +890,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	public List<Phone> findByC_C(long companyId, long classNameId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(classNameId),
+				companyId, classNameId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1169,7 +1169,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 		long classPK, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(classNameId), new Long(classPK),
+				companyId, classNameId, classPK,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1464,8 +1464,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 		long classPK, boolean primary, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(classNameId), new Long(classPK),
-				Boolean.valueOf(primary),
+				companyId, classNameId, classPK, primary,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1873,7 +1872,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
 				finderArgs, this);
@@ -1919,7 +1918,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId) };
+		Object[] finderArgs = new Object[] { userId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
 				finderArgs, this);
@@ -1966,9 +1965,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 	public int countByC_C(long companyId, long classNameId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(classNameId)
-			};
+		Object[] finderArgs = new Object[] { companyId, classNameId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C,
 				finderArgs, this);
@@ -2019,9 +2016,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 	public int countByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(classNameId), new Long(classPK)
-			};
+		Object[] finderArgs = new Object[] { companyId, classNameId, classPK };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C_C,
 				finderArgs, this);
@@ -2077,8 +2072,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	public int countByC_C_C_P(long companyId, long classNameId, long classPK,
 		boolean primary) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(classNameId), new Long(classPK),
-				Boolean.valueOf(primary)
+				companyId, classNameId, classPK, primary
 			};
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C_C_P,

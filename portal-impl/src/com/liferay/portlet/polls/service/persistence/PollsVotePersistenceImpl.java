@@ -377,7 +377,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 	public List<PollsVote> findByQuestionId(long questionId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(questionId),
+				questionId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -634,7 +634,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 	public List<PollsVote> findByChoiceId(long choiceId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(choiceId),
+				choiceId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -910,9 +910,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 	public PollsVote fetchByQ_U(long questionId, long userId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(questionId), new Long(userId)
-			};
+		Object[] finderArgs = new Object[] { questionId, userId };
 
 		Object result = null;
 
@@ -1092,7 +1090,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 	}
 
 	public int countByQuestionId(long questionId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(questionId) };
+		Object[] finderArgs = new Object[] { questionId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_QUESTIONID,
 				finderArgs, this);
@@ -1138,7 +1136,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 	}
 
 	public int countByChoiceId(long choiceId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(choiceId) };
+		Object[] finderArgs = new Object[] { choiceId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CHOICEID,
 				finderArgs, this);
@@ -1185,9 +1183,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 	public int countByQ_U(long questionId, long userId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(questionId), new Long(userId)
-			};
+		Object[] finderArgs = new Object[] { questionId, userId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_Q_U,
 				finderArgs, this);

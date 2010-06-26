@@ -478,7 +478,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 	public List<AssetEntry> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
+				companyId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -755,7 +755,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 	public AssetEntry fetchByG_CU(long groupId, String classUuid,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), classUuid };
+		Object[] finderArgs = new Object[] { groupId, classUuid };
 
 		Object result = null;
 
@@ -881,9 +881,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 	public AssetEntry fetchByC_C(long classNameId, long classPK,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(classNameId), new Long(classPK)
-			};
+		Object[] finderArgs = new Object[] { classNameId, classPK };
 
 		Object result = null;
 
@@ -1064,7 +1062,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
 				finderArgs, this);
@@ -1111,7 +1109,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 	public int countByG_CU(long groupId, String classUuid)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), classUuid };
+		Object[] finderArgs = new Object[] { groupId, classUuid };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_CU,
 				finderArgs, this);
@@ -1174,9 +1172,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(classNameId), new Long(classPK)
-			};
+		Object[] finderArgs = new Object[] { classNameId, classPK };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C,
 				finderArgs, this);
@@ -1282,7 +1278,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		long pk, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(start), String.valueOf(end),
+				pk, String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
@@ -1343,7 +1339,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			"getAssetCategoriesSize", new String[] { Long.class.getName() });
 
 	public int getAssetCategoriesSize(long pk) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(pk) };
+		Object[] finderArgs = new Object[] { pk };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_GET_ASSETCATEGORIES_SIZE,
 				finderArgs, this);
@@ -1391,11 +1387,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 	public boolean containsAssetCategory(long pk, long assetCategoryPK)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(pk),
-				
-				new Long(assetCategoryPK)
-			};
+		Object[] finderArgs = new Object[] { pk, assetCategoryPK };
 
 		Boolean value = (Boolean)FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_ASSETCATEGORY,
 				finderArgs, this);
@@ -1631,7 +1623,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		long pk, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(start), String.valueOf(end),
+				pk, String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
@@ -1692,7 +1684,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			"getAssetTagsSize", new String[] { Long.class.getName() });
 
 	public int getAssetTagsSize(long pk) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(pk) };
+		Object[] finderArgs = new Object[] { pk };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_GET_ASSETTAGS_SIZE,
 				finderArgs, this);
@@ -1740,7 +1732,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 	public boolean containsAssetTag(long pk, long assetTagPK)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(pk), new Long(assetTagPK) };
+		Object[] finderArgs = new Object[] { pk, assetTagPK };
 
 		Boolean value = (Boolean)FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_ASSETTAG,
 				finderArgs, this);

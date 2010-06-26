@@ -381,7 +381,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	public List<AssetTagStats> findByTagId(long tagId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(tagId),
+				tagId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -645,7 +645,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	public List<AssetTagStats> findByClassNameId(long classNameId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(classNameId),
+				classNameId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -930,9 +930,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 
 	public AssetTagStats fetchByT_C(long tagId, long classNameId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(tagId), new Long(classNameId)
-			};
+		Object[] finderArgs = new Object[] { tagId, classNameId };
 
 		Object result = null;
 
@@ -1114,7 +1112,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	}
 
 	public int countByTagId(long tagId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(tagId) };
+		Object[] finderArgs = new Object[] { tagId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_TAGID,
 				finderArgs, this);
@@ -1160,7 +1158,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	}
 
 	public int countByClassNameId(long classNameId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(classNameId) };
+		Object[] finderArgs = new Object[] { classNameId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CLASSNAMEID,
 				finderArgs, this);
@@ -1207,9 +1205,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 
 	public int countByT_C(long tagId, long classNameId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(tagId), new Long(classNameId)
-			};
+		Object[] finderArgs = new Object[] { tagId, classNameId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_T_C,
 				finderArgs, this);

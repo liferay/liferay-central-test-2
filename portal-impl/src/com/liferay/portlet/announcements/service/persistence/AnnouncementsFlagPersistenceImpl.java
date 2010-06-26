@@ -384,7 +384,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	public List<AnnouncementsFlag> findByEntryId(long entryId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(entryId),
+				entryId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -673,9 +673,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 
 	public AnnouncementsFlag fetchByU_E_V(long userId, long entryId, int value,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(entryId), new Integer(value)
-			};
+		Object[] finderArgs = new Object[] { userId, entryId, value };
 
 		Object result = null;
 
@@ -856,7 +854,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	}
 
 	public int countByEntryId(long entryId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(entryId) };
+		Object[] finderArgs = new Object[] { entryId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ENTRYID,
 				finderArgs, this);
@@ -903,9 +901,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 
 	public int countByU_E_V(long userId, long entryId, int value)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(entryId), new Integer(value)
-			};
+		Object[] finderArgs = new Object[] { userId, entryId, value };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_E_V,
 				finderArgs, this);

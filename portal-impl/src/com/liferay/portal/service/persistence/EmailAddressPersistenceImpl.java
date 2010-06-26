@@ -375,7 +375,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	public List<EmailAddress> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
+				companyId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -639,7 +639,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	public List<EmailAddress> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId),
+				userId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -904,7 +904,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(classNameId),
+				companyId, classNameId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1184,7 +1184,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		long classPK, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(classNameId), new Long(classPK),
+				companyId, classNameId, classPK,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1481,8 +1481,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		long classPK, boolean primary, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(classNameId), new Long(classPK),
-				Boolean.valueOf(primary),
+				companyId, classNameId, classPK, primary,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1896,7 +1895,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
 				finderArgs, this);
@@ -1942,7 +1941,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId) };
+		Object[] finderArgs = new Object[] { userId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
 				finderArgs, this);
@@ -1989,9 +1988,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 	public int countByC_C(long companyId, long classNameId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(classNameId)
-			};
+		Object[] finderArgs = new Object[] { companyId, classNameId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C,
 				finderArgs, this);
@@ -2042,9 +2039,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 	public int countByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(classNameId), new Long(classPK)
-			};
+		Object[] finderArgs = new Object[] { companyId, classNameId, classPK };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C_C,
 				finderArgs, this);
@@ -2100,8 +2095,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	public int countByC_C_C_P(long companyId, long classNameId, long classPK,
 		boolean primary) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(classNameId), new Long(classPK),
-				Boolean.valueOf(primary)
+				companyId, classNameId, classPK, primary
 			};
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C_C_P,

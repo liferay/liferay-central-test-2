@@ -760,7 +760,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 	public DLFileShortcut fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object[] finderArgs = new Object[] { uuid, groupId };
 
 		Object result = null;
 
@@ -867,7 +867,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(folderId),
+				groupId, folderId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1209,7 +1209,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(folderId), new Integer(status),
+				groupId, folderId, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1571,9 +1571,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		String toName, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(toFolderId),
-				
-				toName,
+				groupId, toFolderId, toName,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1974,9 +1972,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		String toName, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(toFolderId),
-				
-				toName, new Integer(status),
+				groupId, toFolderId, toName, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2566,7 +2562,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object[] finderArgs = new Object[] { uuid, groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID_G,
 				finderArgs, this);
@@ -2629,7 +2625,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 	public int countByG_F(long groupId, long folderId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), new Long(folderId) };
+		Object[] finderArgs = new Object[] { groupId, folderId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_F,
 				finderArgs, this);
@@ -2727,9 +2723,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 	public int countByG_F_S(long groupId, long folderId, int status)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(folderId), new Integer(status)
-			};
+		Object[] finderArgs = new Object[] { groupId, folderId, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_F_S,
 				finderArgs, this);
@@ -2835,11 +2829,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 	public int countByG_TF_TN(long groupId, long toFolderId, String toName)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(toFolderId),
-				
-				toName
-			};
+		Object[] finderArgs = new Object[] { groupId, toFolderId, toName };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_TF_TN,
 				finderArgs, this);
@@ -2969,11 +2959,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 	public int countByG_TF_TN_S(long groupId, long toFolderId, String toName,
 		int status) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(toFolderId),
-				
-				toName, new Integer(status)
-			};
+		Object[] finderArgs = new Object[] { groupId, toFolderId, toName, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_TF_TN_S,
 				finderArgs, this);

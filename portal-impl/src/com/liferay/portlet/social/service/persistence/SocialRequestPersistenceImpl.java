@@ -871,7 +871,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 	public SocialRequest fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object[] finderArgs = new Object[] { uuid, groupId };
 
 		Object result = null;
 
@@ -979,7 +979,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	public List<SocialRequest> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
+				companyId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1243,7 +1243,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	public List<SocialRequest> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId),
+				userId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1508,7 +1508,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(receiverUserId),
+				receiverUserId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1773,7 +1773,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	public List<SocialRequest> findByU_S(long userId, int status, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId), new Integer(status),
+				userId, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2053,7 +2053,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(receiverUserId), new Integer(status),
+				receiverUserId, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2366,8 +2366,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		long classPK, int type, long receiverUserId, boolean retrieveFromCache)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(classNameId), new Long(classPK),
-				new Integer(type), new Long(receiverUserId)
+				userId, classNameId, classPK, type, receiverUserId
 			};
 
 		Object result = null;
@@ -2481,8 +2480,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		long classPK, int type, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(classNameId), new Long(classPK),
-				new Integer(type), new Integer(status),
+				userId, classNameId, classPK, type, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2810,8 +2808,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		int type, long receiverUserId, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(classNameId), new Long(classPK), new Integer(type),
-				new Long(receiverUserId), new Integer(status),
+				classNameId, classPK, type, receiverUserId, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -3336,7 +3333,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object[] finderArgs = new Object[] { uuid, groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID_G,
 				finderArgs, this);
@@ -3398,7 +3395,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
 				finderArgs, this);
@@ -3444,7 +3441,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId) };
+		Object[] finderArgs = new Object[] { userId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
 				finderArgs, this);
@@ -3491,7 +3488,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 	public int countByReceiverUserId(long receiverUserId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(receiverUserId) };
+		Object[] finderArgs = new Object[] { receiverUserId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_RECEIVERUSERID,
 				finderArgs, this);
@@ -3537,7 +3534,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public int countByU_S(long userId, int status) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId), new Integer(status) };
+		Object[] finderArgs = new Object[] { userId, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_S,
 				finderArgs, this);
@@ -3588,9 +3585,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 	public int countByR_S(long receiverUserId, int status)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(receiverUserId), new Integer(status)
-			};
+		Object[] finderArgs = new Object[] { receiverUserId, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_R_S,
 				finderArgs, this);
@@ -3642,8 +3637,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	public int countByU_C_C_T_R(long userId, long classNameId, long classPK,
 		int type, long receiverUserId) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(classNameId), new Long(classPK),
-				new Integer(type), new Long(receiverUserId)
+				userId, classNameId, classPK, type, receiverUserId
 			};
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_C_C_T_R,
@@ -3708,8 +3702,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	public int countByU_C_C_T_S(long userId, long classNameId, long classPK,
 		int type, int status) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(classNameId), new Long(classPK),
-				new Integer(type), new Integer(status)
+				userId, classNameId, classPK, type, status
 			};
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_C_C_T_S,
@@ -3774,8 +3767,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	public int countByC_C_T_R_S(long classNameId, long classPK, int type,
 		long receiverUserId, int status) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(classNameId), new Long(classPK), new Integer(type),
-				new Long(receiverUserId), new Integer(status)
+				classNameId, classPK, type, receiverUserId, status
 			};
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C_T_R_S,

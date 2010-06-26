@@ -988,7 +988,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 	public BlogsEntry fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object[] finderArgs = new Object[] { uuid, groupId };
 
 		Object result = null;
 
@@ -1095,7 +1095,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	public List<BlogsEntry> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
+				groupId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1426,7 +1426,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	public List<BlogsEntry> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
+				companyId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1691,7 +1691,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	public List<BlogsEntry> findByC_U(long companyId, long userId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(userId),
+				companyId, userId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1971,9 +1971,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
-				
-				displayDate,
+				companyId, displayDate,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2266,7 +2264,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	public List<BlogsEntry> findByC_S(long companyId, int status, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Integer(status),
+				companyId, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2565,7 +2563,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 	public BlogsEntry fetchByG_UT(long groupId, String urlTitle,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), urlTitle };
+		Object[] finderArgs = new Object[] { groupId, urlTitle };
 
 		Object result = null;
 
@@ -2674,9 +2672,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				displayDate,
+				groupId, displayDate,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -3048,7 +3044,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	public List<BlogsEntry> findByG_S(long groupId, int status, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Integer(status),
+				groupId, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -3400,7 +3396,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(userId), new Integer(status),
+				companyId, userId, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -3694,9 +3690,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
-				
-				displayDate, new Integer(status),
+				companyId, displayDate, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -4004,9 +3998,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		Date displayDate, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(userId),
-				
-				displayDate,
+				groupId, userId, displayDate,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -4398,7 +4390,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(userId), new Integer(status),
+				groupId, userId, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -4769,9 +4761,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				displayDate, new Integer(status),
+				groupId, displayDate, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -5165,9 +5155,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		Date displayDate, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(userId),
-				
-				displayDate, new Integer(status),
+				groupId, userId, displayDate, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -5815,7 +5803,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object[] finderArgs = new Object[] { uuid, groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID_G,
 				finderArgs, this);
@@ -5877,7 +5865,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object[] finderArgs = new Object[] { groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
@@ -5964,7 +5952,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
 				finderArgs, this);
@@ -6011,7 +5999,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 	public int countByC_U(long companyId, long userId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId), new Long(userId) };
+		Object[] finderArgs = new Object[] { companyId, userId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_U,
 				finderArgs, this);
@@ -6062,7 +6050,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 	public int countByC_D(long companyId, Date displayDate)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId), displayDate };
+		Object[] finderArgs = new Object[] { companyId, displayDate };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_D,
 				finderArgs, this);
@@ -6119,9 +6107,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	}
 
 	public int countByC_S(long companyId, int status) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Integer(status)
-			};
+		Object[] finderArgs = new Object[] { companyId, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_S,
 				finderArgs, this);
@@ -6172,7 +6158,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 	public int countByG_UT(long groupId, String urlTitle)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), urlTitle };
+		Object[] finderArgs = new Object[] { groupId, urlTitle };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_UT,
 				finderArgs, this);
@@ -6293,7 +6279,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 	public int countByG_D(long groupId, Date displayDate)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), displayDate };
+		Object[] finderArgs = new Object[] { groupId, displayDate };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_D,
 				finderArgs, this);
@@ -6403,9 +6389,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	}
 
 	public int countByG_S(long groupId, int status) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Integer(status)
-			};
+		Object[] finderArgs = new Object[] { groupId, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_S,
 				finderArgs, this);
@@ -6502,9 +6486,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 	public int countByC_U_S(long companyId, long userId, int status)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(userId), new Integer(status)
-			};
+		Object[] finderArgs = new Object[] { companyId, userId, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_U_S,
 				finderArgs, this);
@@ -6559,11 +6541,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 	public int countByC_D_S(long companyId, Date displayDate, int status)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId),
-				
-				displayDate, new Integer(status)
-			};
+		Object[] finderArgs = new Object[] { companyId, displayDate, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_D_S,
 				finderArgs, this);
@@ -6625,11 +6603,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 	public int countByG_U_D(long groupId, long userId, Date displayDate)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(userId),
-				
-				displayDate
-			};
+		Object[] finderArgs = new Object[] { groupId, userId, displayDate };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_U_D,
 				finderArgs, this);
@@ -6748,9 +6722,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 	public int countByG_U_S(long groupId, long userId, int status)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(userId), new Integer(status)
-			};
+		Object[] finderArgs = new Object[] { groupId, userId, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_U_S,
 				finderArgs, this);
@@ -6855,11 +6827,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 	public int countByG_D_S(long groupId, Date displayDate, int status)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				displayDate, new Integer(status)
-			};
+		Object[] finderArgs = new Object[] { groupId, displayDate, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_D_S,
 				finderArgs, this);
@@ -6978,11 +6946,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 	public int countByG_U_D_S(long groupId, long userId, Date displayDate,
 		int status) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(userId),
-				
-				displayDate, new Integer(status)
-			};
+		Object[] finderArgs = new Object[] { groupId, userId, displayDate, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_U_D_S,
 				finderArgs, this);

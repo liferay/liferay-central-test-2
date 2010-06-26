@@ -396,7 +396,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 	public List<PluginSetting> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
+				companyId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -677,13 +677,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 
 	public PluginSetting fetchByC_I_T(long companyId, String pluginId,
 		String pluginType, boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId),
-				
-				pluginId,
-				
-				pluginType
-			};
+		Object[] finderArgs = new Object[] { companyId, pluginId, pluginType };
 
 		Object result = null;
 
@@ -889,7 +883,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
 				finderArgs, this);
@@ -936,13 +930,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 
 	public int countByC_I_T(long companyId, String pluginId, String pluginType)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId),
-				
-				pluginId,
-				
-				pluginType
-			};
+		Object[] finderArgs = new Object[] { companyId, pluginId, pluginType };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_I_T,
 				finderArgs, this);

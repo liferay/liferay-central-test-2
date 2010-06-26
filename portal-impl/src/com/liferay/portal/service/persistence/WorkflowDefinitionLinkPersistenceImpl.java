@@ -409,7 +409,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
+				companyId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -700,9 +700,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 
 	public WorkflowDefinitionLink fetchByG_C_C(long groupId, long companyId,
 		long classNameId, boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(companyId), new Long(classNameId)
-			};
+		Object[] finderArgs = new Object[] { groupId, companyId, classNameId };
 
 		Object result = null;
 
@@ -808,9 +806,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
-				
-				workflowDefinitionName, new Integer(workflowDefinitionVersion),
+				companyId, workflowDefinitionName, workflowDefinitionVersion,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1228,7 +1224,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
 				finderArgs, this);
@@ -1275,9 +1271,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 
 	public int countByG_C_C(long groupId, long companyId, long classNameId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(companyId), new Long(classNameId)
-			};
+		Object[] finderArgs = new Object[] { groupId, companyId, classNameId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_C_C,
 				finderArgs, this);
@@ -1333,9 +1327,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	public int countByC_W_W(long companyId, String workflowDefinitionName,
 		int workflowDefinitionVersion) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
-				
-				workflowDefinitionName, new Integer(workflowDefinitionVersion)
+				companyId, workflowDefinitionName, workflowDefinitionVersion
 			};
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_W_W,

@@ -333,7 +333,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	public List<AssetTag> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
+				groupId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -737,7 +737,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object[] finderArgs = new Object[] { groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
@@ -880,7 +880,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		long pk, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(start), String.valueOf(end),
+				pk, String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
@@ -941,7 +941,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 			"getAssetEntriesSize", new String[] { Long.class.getName() });
 
 	public int getAssetEntriesSize(long pk) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(pk) };
+		Object[] finderArgs = new Object[] { pk };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_GET_ASSETENTRIES_SIZE,
 				finderArgs, this);
@@ -989,7 +989,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 
 	public boolean containsAssetEntry(long pk, long assetEntryPK)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(pk), new Long(assetEntryPK) };
+		Object[] finderArgs = new Object[] { pk, assetEntryPK };
 
 		Boolean value = (Boolean)FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_ASSETENTRY,
 				finderArgs, this);

@@ -332,7 +332,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	public List<Region> findByCountryId(long countryId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(countryId),
+				countryId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -592,7 +592,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	public List<Region> findByActive(boolean active, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				Boolean.valueOf(active),
+				active,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -854,7 +854,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	public List<Region> findByC_A(long countryId, boolean active, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(countryId), Boolean.valueOf(active),
+				countryId, active,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1217,7 +1217,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	}
 
 	public int countByCountryId(long countryId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(countryId) };
+		Object[] finderArgs = new Object[] { countryId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COUNTRYID,
 				finderArgs, this);
@@ -1263,7 +1263,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	}
 
 	public int countByActive(boolean active) throws SystemException {
-		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
+		Object[] finderArgs = new Object[] { active };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ACTIVE,
 				finderArgs, this);
@@ -1310,9 +1310,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 	public int countByC_A(long countryId, boolean active)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(countryId), Boolean.valueOf(active)
-			};
+		Object[] finderArgs = new Object[] { countryId, active };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_A,
 				finderArgs, this);

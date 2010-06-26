@@ -797,7 +797,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 	public JournalStructure fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object[] finderArgs = new Object[] { uuid, groupId };
 
 		Object result = null;
 
@@ -904,7 +904,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	public List<JournalStructure> findByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
+				groupId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1547,7 +1547,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 	public JournalStructure fetchByG_S(long groupId, String structureId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), structureId };
+		Object[] finderArgs = new Object[] { groupId, structureId };
 
 		Object result = null;
 
@@ -1657,9 +1657,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		String parentStructureId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				parentStructureId,
+				groupId, parentStructureId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2217,7 +2215,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object[] finderArgs = new Object[] { uuid, groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID_G,
 				finderArgs, this);
@@ -2279,7 +2277,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object[] finderArgs = new Object[] { groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
@@ -2425,7 +2423,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 	public int countByG_S(long groupId, String structureId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), structureId };
+		Object[] finderArgs = new Object[] { groupId, structureId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_S,
 				finderArgs, this);
@@ -2546,7 +2544,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 	public int countByG_P(long groupId, String parentStructureId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), parentStructureId };
+		Object[] finderArgs = new Object[] { groupId, parentStructureId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P,
 				finderArgs, this);

@@ -288,19 +288,19 @@ public class AssetEntryLocalServiceWrapper implements AssetEntryLocalService {
 
 	public com.liferay.portlet.asset.model.AssetEntry updateEntry(long userId,
 		long groupId, java.lang.String className, long classPK,
-		java.lang.String uuid, long[] categoryIds, java.lang.String[] tagNames,
-		boolean visible, java.util.Date startDate, java.util.Date endDate,
-		java.util.Date publishDate, java.util.Date expirationDate,
-		java.lang.String mimeType, java.lang.String title,
-		java.lang.String description, java.lang.String summary,
-		java.lang.String url, int height, int width,
+		java.lang.String classUuid, long[] categoryIds,
+		java.lang.String[] tagNames, boolean visible, java.util.Date startDate,
+		java.util.Date endDate, java.util.Date publishDate,
+		java.util.Date expirationDate, java.lang.String mimeType,
+		java.lang.String title, java.lang.String description,
+		java.lang.String summary, java.lang.String url, int height, int width,
 		java.lang.Integer priority, boolean sync)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _assetEntryLocalService.updateEntry(userId, groupId, className,
-			classPK, uuid, categoryIds, tagNames, visible, startDate, endDate,
-			publishDate, expirationDate, mimeType, title, description, summary,
-			url, height, width, priority, sync);
+			classPK, classUuid, categoryIds, tagNames, visible, startDate,
+			endDate, publishDate, expirationDate, mimeType, title, description,
+			summary, url, height, width, priority, sync);
 	}
 
 	public com.liferay.portlet.asset.model.AssetEntry updateVisible(

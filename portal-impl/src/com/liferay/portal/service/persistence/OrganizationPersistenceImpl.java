@@ -447,7 +447,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	public List<Organization> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
+				companyId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -712,7 +712,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	public List<Organization> findByLocations(long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
+				companyId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -979,7 +979,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		long parentOrganizationId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(parentOrganizationId),
+				companyId, parentOrganizationId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1279,7 +1279,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 	public Organization fetchByC_N(long companyId, String name,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId), name };
+		Object[] finderArgs = new Object[] { companyId, name };
 
 		Object result = null;
 
@@ -1482,7 +1482,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
 				finderArgs, this);
@@ -1528,7 +1528,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	}
 
 	public int countByLocations(long companyId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_LOCATIONS,
 				finderArgs, this);
@@ -1575,9 +1575,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 	public int countByC_P(long companyId, long parentOrganizationId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(parentOrganizationId)
-			};
+		Object[] finderArgs = new Object[] { companyId, parentOrganizationId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_P,
 				finderArgs, this);
@@ -1628,7 +1626,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 	public int countByC_N(long companyId, String name)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId), name };
+		Object[] finderArgs = new Object[] { companyId, name };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_N,
 				finderArgs, this);
@@ -1744,7 +1742,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(start), String.valueOf(end),
+				pk, String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
@@ -1805,7 +1803,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			"getGroupsSize", new String[] { Long.class.getName() });
 
 	public int getGroupsSize(long pk) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(pk) };
+		Object[] finderArgs = new Object[] { pk };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_GET_GROUPS_SIZE,
 				finderArgs, this);
@@ -1853,7 +1851,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 	public boolean containsGroup(long pk, long groupPK)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(pk), new Long(groupPK) };
+		Object[] finderArgs = new Object[] { pk, groupPK };
 
 		Boolean value = (Boolean)FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_GROUP,
 				finderArgs, this);
@@ -2077,7 +2075,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(start), String.valueOf(end),
+				pk, String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
@@ -2138,7 +2136,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			"getUsersSize", new String[] { Long.class.getName() });
 
 	public int getUsersSize(long pk) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(pk) };
+		Object[] finderArgs = new Object[] { pk };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_GET_USERS_SIZE,
 				finderArgs, this);
@@ -2185,7 +2183,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsUser(long pk, long userPK) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(pk), new Long(userPK) };
+		Object[] finderArgs = new Object[] { pk, userPK };
 
 		Boolean value = (Boolean)FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_USER,
 				finderArgs, this);

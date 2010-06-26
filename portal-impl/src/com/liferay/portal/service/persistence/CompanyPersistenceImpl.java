@@ -801,7 +801,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 
 	public Company fetchByLogoId(long logoId, boolean retrieveFromCache)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(logoId) };
+		Object[] finderArgs = new Object[] { logoId };
 
 		Object result = null;
 
@@ -887,7 +887,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	public List<Company> findBySystem(boolean system, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				Boolean.valueOf(system),
+				system,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1416,7 +1416,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	}
 
 	public int countByLogoId(long logoId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(logoId) };
+		Object[] finderArgs = new Object[] { logoId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_LOGOID,
 				finderArgs, this);
@@ -1462,7 +1462,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	}
 
 	public int countBySystem(boolean system) throws SystemException {
-		Object[] finderArgs = new Object[] { Boolean.valueOf(system) };
+		Object[] finderArgs = new Object[] { system };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_SYSTEM,
 				finderArgs, this);

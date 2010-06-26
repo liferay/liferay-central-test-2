@@ -530,7 +530,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 	public ShoppingItem fetchBySmallImageId(long smallImageId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(smallImageId) };
+		Object[] finderArgs = new Object[] { smallImageId };
 
 		Object result = null;
 
@@ -637,7 +637,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 	public ShoppingItem fetchByMediumImageId(long mediumImageId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(mediumImageId) };
+		Object[] finderArgs = new Object[] { mediumImageId };
 
 		Object result = null;
 
@@ -744,7 +744,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 	public ShoppingItem fetchByLargeImageId(long largeImageId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(largeImageId) };
+		Object[] finderArgs = new Object[] { largeImageId };
 
 		Object result = null;
 
@@ -835,7 +835,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(categoryId),
+				groupId, categoryId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1207,7 +1207,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 	public ShoppingItem fetchByC_S(long companyId, String sku,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId), sku };
+		Object[] finderArgs = new Object[] { companyId, sku };
 
 		Object result = null;
 
@@ -1418,7 +1418,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 	}
 
 	public int countBySmallImageId(long smallImageId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(smallImageId) };
+		Object[] finderArgs = new Object[] { smallImageId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_SMALLIMAGEID,
 				finderArgs, this);
@@ -1465,7 +1465,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 	public int countByMediumImageId(long mediumImageId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(mediumImageId) };
+		Object[] finderArgs = new Object[] { mediumImageId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_MEDIUMIMAGEID,
 				finderArgs, this);
@@ -1511,7 +1511,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 	}
 
 	public int countByLargeImageId(long largeImageId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(largeImageId) };
+		Object[] finderArgs = new Object[] { largeImageId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_LARGEIMAGEID,
 				finderArgs, this);
@@ -1558,9 +1558,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 	public int countByG_C(long groupId, long categoryId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(categoryId)
-			};
+		Object[] finderArgs = new Object[] { groupId, categoryId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_C,
 				finderArgs, this);
@@ -1656,7 +1654,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 	}
 
 	public int countByC_S(long companyId, String sku) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId), sku };
+		Object[] finderArgs = new Object[] { companyId, sku };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_S,
 				finderArgs, this);
@@ -1774,7 +1772,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 		long pk, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(start), String.valueOf(end),
+				pk, String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
@@ -1835,7 +1833,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			"getShoppingItemPricesSize", new String[] { Long.class.getName() });
 
 	public int getShoppingItemPricesSize(long pk) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(pk) };
+		Object[] finderArgs = new Object[] { pk };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_GET_SHOPPINGITEMPRICES_SIZE,
 				finderArgs, this);
@@ -1883,11 +1881,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 	public boolean containsShoppingItemPrice(long pk, long shoppingItemPricePK)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(pk),
-				
-				new Long(shoppingItemPricePK)
-			};
+		Object[] finderArgs = new Object[] { pk, shoppingItemPricePK };
 
 		Boolean value = (Boolean)FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_SHOPPINGITEMPRICE,
 				finderArgs, this);

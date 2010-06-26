@@ -366,7 +366,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	public List<Portlet> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
+				companyId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -641,7 +641,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 
 	public Portlet fetchByC_P(long companyId, String portletId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId), portletId };
+		Object[] finderArgs = new Object[] { companyId, portletId };
 
 		Object result = null;
 
@@ -827,7 +827,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
 				finderArgs, this);
@@ -874,7 +874,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 
 	public int countByC_P(long companyId, String portletId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId), portletId };
+		Object[] finderArgs = new Object[] { companyId, portletId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_P,
 				finderArgs, this);

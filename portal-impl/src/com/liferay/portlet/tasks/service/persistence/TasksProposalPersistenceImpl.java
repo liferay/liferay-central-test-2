@@ -402,7 +402,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	public List<TasksProposal> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
+				groupId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -735,7 +735,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	public List<TasksProposal> findByG_U(long groupId, long userId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(userId),
+				groupId, userId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1107,7 +1107,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 	public TasksProposal fetchByC_C(long classNameId, String classPK,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(classNameId), classPK };
+		Object[] finderArgs = new Object[] { classNameId, classPK };
 
 		Object result = null;
 
@@ -1303,7 +1303,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object[] finderArgs = new Object[] { groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
@@ -1390,7 +1390,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	}
 
 	public int countByG_U(long groupId, long userId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
+		Object[] finderArgs = new Object[] { groupId, userId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_U,
 				finderArgs, this);
@@ -1487,7 +1487,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 	public int countByC_C(long classNameId, String classPK)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(classNameId), classPK };
+		Object[] finderArgs = new Object[] { classNameId, classPK };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C,
 				finderArgs, this);

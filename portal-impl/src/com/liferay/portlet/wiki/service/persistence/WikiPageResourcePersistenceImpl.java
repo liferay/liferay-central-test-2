@@ -690,7 +690,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 
 	public WikiPageResource fetchByN_T(long nodeId, String title,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(nodeId), title };
+		Object[] finderArgs = new Object[] { nodeId, title };
 
 		Object result = null;
 
@@ -935,7 +935,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 	}
 
 	public int countByN_T(long nodeId, String title) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(nodeId), title };
+		Object[] finderArgs = new Object[] { nodeId, title };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_N_T,
 				finderArgs, this);

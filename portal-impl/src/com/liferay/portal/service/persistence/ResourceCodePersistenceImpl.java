@@ -392,7 +392,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	public List<ResourceCode> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
+				companyId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -950,11 +950,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 
 	public ResourceCode fetchByC_N_S(long companyId, String name, int scope,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId),
-				
-				name, new Integer(scope)
-			};
+		Object[] finderArgs = new Object[] { companyId, name, scope };
 
 		Object result = null;
 
@@ -1152,7 +1148,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
 				finderArgs, this);
@@ -1257,11 +1253,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 
 	public int countByC_N_S(long companyId, String name, int scope)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId),
-				
-				name, new Integer(scope)
-			};
+		Object[] finderArgs = new Object[] { companyId, name, scope };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_N_S,
 				finderArgs, this);

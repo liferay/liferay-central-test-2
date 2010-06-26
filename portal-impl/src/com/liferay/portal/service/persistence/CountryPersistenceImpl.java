@@ -758,7 +758,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 	public List<Country> findByActive(boolean active, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				Boolean.valueOf(active),
+				active,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1288,7 +1288,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 	}
 
 	public int countByActive(boolean active) throws SystemException {
-		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
+		Object[] finderArgs = new Object[] { active };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ACTIVE,
 				finderArgs, this);

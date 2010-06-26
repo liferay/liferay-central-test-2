@@ -471,7 +471,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	public List<JournalArticleImage> findByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
+				groupId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -729,7 +729,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				Boolean.valueOf(tempImage),
+				tempImage,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -989,9 +989,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		String articleId, double version, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				articleId, new Double(version),
+				groupId, articleId, version,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1340,15 +1338,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		String articleId, double version, String elInstanceId, String elName,
 		String languageId, boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				articleId, new Double(version),
-				
-				elInstanceId,
-				
-				elName,
-				
-				languageId
+				groupId, articleId, version, elInstanceId, elName, languageId
 			};
 
 		Object result = null;
@@ -1614,7 +1604,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object[] finderArgs = new Object[] { groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
@@ -1660,7 +1650,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	}
 
 	public int countByTempImage(boolean tempImage) throws SystemException {
-		Object[] finderArgs = new Object[] { Boolean.valueOf(tempImage) };
+		Object[] finderArgs = new Object[] { tempImage };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_TEMPIMAGE,
 				finderArgs, this);
@@ -1707,11 +1697,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 	public int countByG_A_V(long groupId, String articleId, double version)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				articleId, new Double(version)
-			};
+		Object[] finderArgs = new Object[] { groupId, articleId, version };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_A_V,
 				finderArgs, this);
@@ -1780,15 +1766,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		double version, String elInstanceId, String elName, String languageId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				articleId, new Double(version),
-				
-				elInstanceId,
-				
-				elName,
-				
-				languageId
+				groupId, articleId, version, elInstanceId, elName, languageId
 			};
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_A_V_E_E_L,

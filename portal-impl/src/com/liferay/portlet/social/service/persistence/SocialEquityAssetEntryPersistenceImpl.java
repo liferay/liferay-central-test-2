@@ -373,7 +373,7 @@ public class SocialEquityAssetEntryPersistenceImpl extends BasePersistenceImpl<S
 
 	public SocialEquityAssetEntry fetchByAssetEntryId(long assetEntryId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(assetEntryId) };
+		Object[] finderArgs = new Object[] { assetEntryId };
 
 		Object result = null;
 
@@ -536,7 +536,7 @@ public class SocialEquityAssetEntryPersistenceImpl extends BasePersistenceImpl<S
 	}
 
 	public int countByAssetEntryId(long assetEntryId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(assetEntryId) };
+		Object[] finderArgs = new Object[] { assetEntryId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ASSETENTRYID,
 				finderArgs, this);

@@ -419,7 +419,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(classNameId),
+				groupId, classNameId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -691,9 +691,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		long classNameId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				portletId, new Long(classNameId),
+				groupId, portletId, classNameId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1032,13 +1030,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	public PortletItem fetchByG_N_P_C(long groupId, String name,
 		String portletId, long classNameId, boolean retrieveFromCache)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				name,
-				
-				portletId, new Long(classNameId)
-			};
+		Object[] finderArgs = new Object[] { groupId, name, portletId, classNameId };
 
 		Object result = null;
 
@@ -1259,9 +1251,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 	public int countByG_C(long groupId, long classNameId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(classNameId)
-			};
+		Object[] finderArgs = new Object[] { groupId, classNameId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_C,
 				finderArgs, this);
@@ -1312,11 +1302,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 	public int countByG_P_C(long groupId, String portletId, long classNameId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				portletId, new Long(classNameId)
-			};
+		Object[] finderArgs = new Object[] { groupId, portletId, classNameId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P_C,
 				finderArgs, this);
@@ -1383,13 +1369,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 	public int countByG_N_P_C(long groupId, String name, String portletId,
 		long classNameId) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				name,
-				
-				portletId, new Long(classNameId)
-			};
+		Object[] finderArgs = new Object[] { groupId, name, portletId, classNameId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_N_P_C,
 				finderArgs, this);

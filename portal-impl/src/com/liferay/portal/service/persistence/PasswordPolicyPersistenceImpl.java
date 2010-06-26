@@ -457,9 +457,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 
 	public PasswordPolicy fetchByC_DP(long companyId, boolean defaultPolicy,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), Boolean.valueOf(defaultPolicy)
-			};
+		Object[] finderArgs = new Object[] { companyId, defaultPolicy };
 
 		Object result = null;
 
@@ -572,7 +570,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 
 	public PasswordPolicy fetchByC_N(long companyId, String name,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId), name };
+		Object[] finderArgs = new Object[] { companyId, name };
 
 		Object result = null;
 
@@ -761,9 +759,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 
 	public int countByC_DP(long companyId, boolean defaultPolicy)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), Boolean.valueOf(defaultPolicy)
-			};
+		Object[] finderArgs = new Object[] { companyId, defaultPolicy };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_DP,
 				finderArgs, this);
@@ -814,7 +810,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 
 	public int countByC_N(long companyId, String name)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId), name };
+		Object[] finderArgs = new Object[] { companyId, name };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_N,
 				finderArgs, this);

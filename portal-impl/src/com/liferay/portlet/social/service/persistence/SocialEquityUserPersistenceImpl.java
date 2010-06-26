@@ -427,7 +427,7 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 	public List<SocialEquityUser> findByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
+				groupId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -684,7 +684,7 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 	public List<SocialEquityUser> findByGroupRanked(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
+				groupId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -940,7 +940,7 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 	public List<SocialEquityUser> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId),
+				userId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1196,7 +1196,7 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 	public List<SocialEquityUser> findByRank(int rank, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Integer(rank),
+				rank,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1472,7 +1472,7 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 
 	public SocialEquityUser fetchByG_U(long groupId, long userId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
+		Object[] finderArgs = new Object[] { groupId, userId };
 
 		Object result = null;
 
@@ -1565,7 +1565,7 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 	public List<SocialEquityUser> findByG_R(long groupId, int rank, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Integer(rank),
+				groupId, rank,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1941,7 +1941,7 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object[] finderArgs = new Object[] { groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
@@ -1987,7 +1987,7 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 	}
 
 	public int countByGroupRanked(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object[] finderArgs = new Object[] { groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPRANKED,
 				finderArgs, this);
@@ -2033,7 +2033,7 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId) };
+		Object[] finderArgs = new Object[] { userId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
 				finderArgs, this);
@@ -2079,7 +2079,7 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 	}
 
 	public int countByRank(int rank) throws SystemException {
-		Object[] finderArgs = new Object[] { new Integer(rank) };
+		Object[] finderArgs = new Object[] { rank };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_RANK,
 				finderArgs, this);
@@ -2125,7 +2125,7 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 	}
 
 	public int countByG_U(long groupId, long userId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
+		Object[] finderArgs = new Object[] { groupId, userId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_U,
 				finderArgs, this);
@@ -2175,7 +2175,7 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 	}
 
 	public int countByG_R(long groupId, int rank) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), new Integer(rank) };
+		Object[] finderArgs = new Object[] { groupId, rank };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_R,
 				finderArgs, this);

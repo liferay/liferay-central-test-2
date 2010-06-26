@@ -348,7 +348,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	public List<MembershipRequest> findByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
+				groupId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -613,7 +613,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	public List<MembershipRequest> findByUserId(long userId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId),
+				userId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -880,7 +880,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Integer(statusId),
+				groupId, statusId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1246,7 +1246,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object[] finderArgs = new Object[] { groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
@@ -1292,7 +1292,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId) };
+		Object[] finderArgs = new Object[] { userId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
 				finderArgs, this);
@@ -1338,9 +1338,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	}
 
 	public int countByG_S(long groupId, int statusId) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Integer(statusId)
-			};
+		Object[] finderArgs = new Object[] { groupId, statusId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_S,
 				finderArgs, this);

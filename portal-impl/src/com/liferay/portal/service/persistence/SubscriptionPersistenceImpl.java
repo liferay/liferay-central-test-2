@@ -415,7 +415,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	public List<Subscription> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId),
+				userId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -672,7 +672,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(classNameId),
+				userId, classNameId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -944,7 +944,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		long classPK, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(classNameId), new Long(classPK),
+				companyId, classNameId, classPK,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1260,8 +1260,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		long classNameId, long classPK, boolean retrieveFromCache)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(userId), new Long(classNameId),
-				new Long(classPK)
+				companyId, userId, classNameId, classPK
 			};
 
 		Object result = null;
@@ -1462,7 +1461,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId) };
+		Object[] finderArgs = new Object[] { userId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
 				finderArgs, this);
@@ -1509,9 +1508,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 	public int countByU_C(long userId, long classNameId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(classNameId)
-			};
+		Object[] finderArgs = new Object[] { userId, classNameId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_C,
 				finderArgs, this);
@@ -1562,9 +1559,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 	public int countByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(classNameId), new Long(classPK)
-			};
+		Object[] finderArgs = new Object[] { companyId, classNameId, classPK };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C_C,
 				finderArgs, this);
@@ -1620,8 +1615,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	public int countByC_U_C_C(long companyId, long userId, long classNameId,
 		long classPK) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(userId), new Long(classNameId),
-				new Long(classPK)
+				companyId, userId, classNameId, classPK
 			};
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_U_C_C,

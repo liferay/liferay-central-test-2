@@ -535,7 +535,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	public List<SocialActivity> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
+				groupId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -800,7 +800,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	public List<SocialActivity> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
+				companyId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1064,7 +1064,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	public List<SocialActivity> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId),
+				userId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1345,7 +1345,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 	public SocialActivity fetchByMirrorActivityId(long mirrorActivityId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(mirrorActivityId) };
+		Object[] finderArgs = new Object[] { mirrorActivityId };
 
 		Object result = null;
 
@@ -1435,7 +1435,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	public List<SocialActivity> findByClassNameId(long classNameId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(classNameId),
+				classNameId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1701,7 +1701,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(receiverUserId),
+				receiverUserId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1967,7 +1967,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(classNameId), new Long(classPK),
+				classNameId, classPK,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2249,8 +2249,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		long classNameId, long classPK, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(mirrorActivityId), new Long(classNameId),
-				new Long(classPK),
+				mirrorActivityId, classNameId, classPK,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2588,9 +2587,8 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		long receiverUserId, boolean retrieveFromCache)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(userId), new Long(createDate),
-				new Long(classNameId), new Long(classPK), new Integer(type),
-				new Long(receiverUserId)
+				groupId, userId, createDate, classNameId, classPK, type,
+				receiverUserId
 			};
 
 		Object result = null;
@@ -2842,7 +2840,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object[] finderArgs = new Object[] { groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
@@ -2888,7 +2886,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
 				finderArgs, this);
@@ -2934,7 +2932,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId) };
+		Object[] finderArgs = new Object[] { userId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
 				finderArgs, this);
@@ -2981,7 +2979,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 	public int countByMirrorActivityId(long mirrorActivityId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(mirrorActivityId) };
+		Object[] finderArgs = new Object[] { mirrorActivityId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_MIRRORACTIVITYID,
 				finderArgs, this);
@@ -3027,7 +3025,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public int countByClassNameId(long classNameId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(classNameId) };
+		Object[] finderArgs = new Object[] { classNameId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CLASSNAMEID,
 				finderArgs, this);
@@ -3074,7 +3072,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 	public int countByReceiverUserId(long receiverUserId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(receiverUserId) };
+		Object[] finderArgs = new Object[] { receiverUserId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_RECEIVERUSERID,
 				finderArgs, this);
@@ -3121,9 +3119,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(classNameId), new Long(classPK)
-			};
+		Object[] finderArgs = new Object[] { classNameId, classPK };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C,
 				finderArgs, this);
@@ -3175,8 +3171,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	public int countByM_C_C(long mirrorActivityId, long classNameId,
 		long classPK) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(mirrorActivityId), new Long(classNameId),
-				new Long(classPK)
+				mirrorActivityId, classNameId, classPK
 			};
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_M_C_C,
@@ -3234,9 +3229,8 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		long createDate, long classNameId, long classPK, int type,
 		long receiverUserId) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(userId), new Long(createDate),
-				new Long(classNameId), new Long(classPK), new Integer(type),
-				new Long(receiverUserId)
+				groupId, userId, createDate, classNameId, classPK, type,
+				receiverUserId
 			};
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_U_CD_C_C_T_R,

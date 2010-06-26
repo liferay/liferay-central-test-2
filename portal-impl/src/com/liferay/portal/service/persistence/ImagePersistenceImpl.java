@@ -306,7 +306,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 	public List<Image> findBySize(int size, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Integer(size),
+				size,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -638,7 +638,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 	}
 
 	public int countBySize(int size) throws SystemException {
-		Object[] finderArgs = new Object[] { new Integer(size) };
+		Object[] finderArgs = new Object[] { size };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_SIZE,
 				finderArgs, this);

@@ -410,7 +410,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 	public List<AssetTagProperty> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
+				companyId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -674,7 +674,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 	public List<AssetTagProperty> findByTagId(long tagId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(tagId),
+				tagId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -939,9 +939,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
-				
-				key,
+				companyId, key,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1264,7 +1262,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 
 	public AssetTagProperty fetchByT_K(long tagId, String key,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(tagId), key };
+		Object[] finderArgs = new Object[] { tagId, key };
 
 		Object result = null;
 
@@ -1466,7 +1464,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
 				finderArgs, this);
@@ -1512,7 +1510,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 	}
 
 	public int countByTagId(long tagId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(tagId) };
+		Object[] finderArgs = new Object[] { tagId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_TAGID,
 				finderArgs, this);
@@ -1558,7 +1556,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 	}
 
 	public int countByC_K(long companyId, String key) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId), key };
+		Object[] finderArgs = new Object[] { companyId, key };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_K,
 				finderArgs, this);
@@ -1620,7 +1618,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 	}
 
 	public int countByT_K(long tagId, String key) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(tagId), key };
+		Object[] finderArgs = new Object[] { tagId, key };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_T_K,
 				finderArgs, this);

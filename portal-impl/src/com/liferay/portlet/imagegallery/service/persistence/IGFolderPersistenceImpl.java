@@ -791,7 +791,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 	public IGFolder fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object[] finderArgs = new Object[] { uuid, groupId };
 
 		Object result = null;
 
@@ -897,7 +897,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	public List<IGFolder> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
+				groupId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1228,7 +1228,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	public List<IGFolder> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
+				companyId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1493,7 +1493,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(parentFolderId),
+				groupId, parentFolderId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1868,11 +1868,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 	public IGFolder fetchByG_P_N(long groupId, long parentFolderId,
 		String name, boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(parentFolderId),
-				
-				name
-			};
+		Object[] finderArgs = new Object[] { groupId, parentFolderId, name };
 
 		Object result = null;
 
@@ -2150,7 +2146,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object[] finderArgs = new Object[] { uuid, groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID_G,
 				finderArgs, this);
@@ -2212,7 +2208,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object[] finderArgs = new Object[] { groupId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
@@ -2299,7 +2295,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
 				finderArgs, this);
@@ -2346,9 +2342,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 	public int countByG_P(long groupId, long parentFolderId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(parentFolderId)
-			};
+		Object[] finderArgs = new Object[] { groupId, parentFolderId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P,
 				finderArgs, this);
@@ -2445,11 +2439,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 	public int countByG_P_N(long groupId, long parentFolderId, String name)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(parentFolderId),
-				
-				name
-			};
+		Object[] finderArgs = new Object[] { groupId, parentFolderId, name };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P_N,
 				finderArgs, this);

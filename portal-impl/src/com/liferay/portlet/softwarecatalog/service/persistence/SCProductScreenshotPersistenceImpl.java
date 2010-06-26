@@ -448,7 +448,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(productEntryId),
+				productEntryId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -733,7 +733,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 
 	public SCProductScreenshot fetchByThumbnailId(long thumbnailId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(thumbnailId) };
+		Object[] finderArgs = new Object[] { thumbnailId };
 
 		Object result = null;
 
@@ -840,7 +840,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 
 	public SCProductScreenshot fetchByFullImageId(long fullImageId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(fullImageId) };
+		Object[] finderArgs = new Object[] { fullImageId };
 
 		Object result = null;
 
@@ -951,9 +951,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 
 	public SCProductScreenshot fetchByP_P(long productEntryId, int priority,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(productEntryId), new Integer(priority)
-			};
+		Object[] finderArgs = new Object[] { productEntryId, priority };
 
 		Object result = null;
 
@@ -1147,7 +1145,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 
 	public int countByProductEntryId(long productEntryId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(productEntryId) };
+		Object[] finderArgs = new Object[] { productEntryId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_PRODUCTENTRYID,
 				finderArgs, this);
@@ -1193,7 +1191,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	}
 
 	public int countByThumbnailId(long thumbnailId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(thumbnailId) };
+		Object[] finderArgs = new Object[] { thumbnailId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_THUMBNAILID,
 				finderArgs, this);
@@ -1239,7 +1237,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	}
 
 	public int countByFullImageId(long fullImageId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(fullImageId) };
+		Object[] finderArgs = new Object[] { fullImageId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_FULLIMAGEID,
 				finderArgs, this);
@@ -1286,9 +1284,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 
 	public int countByP_P(long productEntryId, int priority)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(productEntryId), new Integer(priority)
-			};
+		Object[] finderArgs = new Object[] { productEntryId, priority };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_P_P,
 				finderArgs, this);

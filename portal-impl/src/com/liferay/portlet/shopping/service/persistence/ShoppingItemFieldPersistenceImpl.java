@@ -319,7 +319,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 	public List<ShoppingItemField> findByItemId(long itemId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(itemId),
+				itemId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -658,7 +658,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 	}
 
 	public int countByItemId(long itemId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(itemId) };
+		Object[] finderArgs = new Object[] { itemId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ITEMID,
 				finderArgs, this);

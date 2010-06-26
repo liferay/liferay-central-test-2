@@ -348,8 +348,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		boolean active, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(assetEntryId), new Integer(type),
-				Boolean.valueOf(active),
+				assetEntryId, type, active,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -639,9 +638,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		long assetEntryId, String actionId, boolean active, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(assetEntryId),
-				
-				actionId, Boolean.valueOf(active),
+				userId, assetEntryId, actionId, active,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1054,10 +1051,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 	public int countByAEI_T_A(long assetEntryId, int type, boolean active)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(assetEntryId), new Integer(type),
-				Boolean.valueOf(active)
-			};
+		Object[] finderArgs = new Object[] { assetEntryId, type, active };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_AEI_T_A,
 				finderArgs, this);
@@ -1113,9 +1107,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	public int countByU_AEI_A_A(long userId, long assetEntryId,
 		String actionId, boolean active) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(assetEntryId),
-				
-				actionId, Boolean.valueOf(active)
+				userId, assetEntryId, actionId, active
 			};
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_AEI_A_A,

@@ -785,7 +785,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		boolean privateLayout, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(privateLayout),
+				groupId, privateLayout,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1058,9 +1058,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				articleId,
+				groupId, articleId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1357,8 +1355,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		boolean privateLayout, long layoutId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(privateLayout),
-				new Long(layoutId),
+				groupId, privateLayout, layoutId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1649,9 +1646,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		boolean privateLayout, String articleId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(privateLayout),
-				
-				articleId,
+				groupId, privateLayout, articleId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1968,10 +1963,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		boolean privateLayout, long layoutId, String portletId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(privateLayout),
-				new Long(layoutId),
-				
-				portletId,
+				groupId, privateLayout, layoutId, portletId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2335,12 +2327,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		boolean privateLayout, long layoutId, String portletId,
 		String articleId, boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(privateLayout),
-				new Long(layoutId),
-				
-				portletId,
-				
-				articleId
+				groupId, privateLayout, layoutId, portletId, articleId
 			};
 
 		Object result = null;
@@ -2660,9 +2647,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 	public int countByG_P(long groupId, boolean privateLayout)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(privateLayout)
-			};
+		Object[] finderArgs = new Object[] { groupId, privateLayout };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P,
 				finderArgs, this);
@@ -2713,7 +2698,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 	public int countByG_A(long groupId, String articleId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), articleId };
+		Object[] finderArgs = new Object[] { groupId, articleId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_A,
 				finderArgs, this);
@@ -2776,10 +2761,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 	public int countByG_P_L(long groupId, boolean privateLayout, long layoutId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(privateLayout),
-				new Long(layoutId)
-			};
+		Object[] finderArgs = new Object[] { groupId, privateLayout, layoutId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P_L,
 				finderArgs, this);
@@ -2834,11 +2816,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 	public int countByG_P_A(long groupId, boolean privateLayout,
 		String articleId) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(privateLayout),
-				
-				articleId
-			};
+		Object[] finderArgs = new Object[] { groupId, privateLayout, articleId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P_A,
 				finderArgs, this);
@@ -2906,10 +2884,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	public int countByG_P_L_P(long groupId, boolean privateLayout,
 		long layoutId, String portletId) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(privateLayout),
-				new Long(layoutId),
-				
-				portletId
+				groupId, privateLayout, layoutId, portletId
 			};
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P_L_P,
@@ -2983,12 +2958,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		long layoutId, String portletId, String articleId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(privateLayout),
-				new Long(layoutId),
-				
-				portletId,
-				
-				articleId
+				groupId, privateLayout, layoutId, portletId, articleId
 			};
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P_L_P_A,

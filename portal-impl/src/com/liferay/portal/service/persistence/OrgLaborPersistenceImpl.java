@@ -320,7 +320,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	public List<OrgLabor> findByOrganizationId(long organizationId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(organizationId),
+				organizationId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -660,7 +660,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 
 	public int countByOrganizationId(long organizationId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(organizationId) };
+		Object[] finderArgs = new Object[] { organizationId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ORGANIZATIONID,
 				finderArgs, this);

@@ -519,7 +519,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	public List<ExpandoValue> findByTableId(long tableId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(tableId),
+				tableId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -783,7 +783,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	public List<ExpandoValue> findByColumnId(long columnId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(columnId),
+				columnId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1046,7 +1046,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	public List<ExpandoValue> findByRowId(long rowId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(rowId),
+				rowId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1310,7 +1310,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	public List<ExpandoValue> findByT_C(long tableId, long columnId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(tableId), new Long(columnId),
+				tableId, columnId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1590,7 +1590,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(tableId), new Long(classPK),
+				tableId, classPK,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1869,7 +1869,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	public List<ExpandoValue> findByT_R(long tableId, long rowId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(tableId), new Long(rowId),
+				tableId, rowId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2168,7 +2168,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 	public ExpandoValue fetchByC_R(long columnId, long rowId,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(columnId), new Long(rowId) };
+		Object[] finderArgs = new Object[] { columnId, rowId };
 
 		Object result = null;
 
@@ -2264,7 +2264,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(classNameId), new Long(classPK),
+				classNameId, classPK,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -2566,9 +2566,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 	public ExpandoValue fetchByT_C_C(long tableId, long columnId, long classPK,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(tableId), new Long(columnId), new Long(classPK)
-			};
+		Object[] finderArgs = new Object[] { tableId, columnId, classPK };
 
 		Object result = null;
 
@@ -2669,9 +2667,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		String data, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(tableId), new Long(columnId),
-				
-				data,
+				tableId, columnId, data,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -3122,7 +3118,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public int countByTableId(long tableId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(tableId) };
+		Object[] finderArgs = new Object[] { tableId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_TABLEID,
 				finderArgs, this);
@@ -3168,7 +3164,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public int countByColumnId(long columnId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(columnId) };
+		Object[] finderArgs = new Object[] { columnId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COLUMNID,
 				finderArgs, this);
@@ -3214,7 +3210,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public int countByRowId(long rowId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(rowId) };
+		Object[] finderArgs = new Object[] { rowId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ROWID,
 				finderArgs, this);
@@ -3261,7 +3257,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 	public int countByT_C(long tableId, long columnId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(tableId), new Long(columnId) };
+		Object[] finderArgs = new Object[] { tableId, columnId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_T_C,
 				finderArgs, this);
@@ -3312,7 +3308,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 	public int countByT_CPK(long tableId, long classPK)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(tableId), new Long(classPK) };
+		Object[] finderArgs = new Object[] { tableId, classPK };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_T_CPK,
 				finderArgs, this);
@@ -3362,7 +3358,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public int countByT_R(long tableId, long rowId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(tableId), new Long(rowId) };
+		Object[] finderArgs = new Object[] { tableId, rowId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_T_R,
 				finderArgs, this);
@@ -3412,7 +3408,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public int countByC_R(long columnId, long rowId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(columnId), new Long(rowId) };
+		Object[] finderArgs = new Object[] { columnId, rowId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_R,
 				finderArgs, this);
@@ -3463,9 +3459,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(classNameId), new Long(classPK)
-			};
+		Object[] finderArgs = new Object[] { classNameId, classPK };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C,
 				finderArgs, this);
@@ -3516,9 +3510,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 	public int countByT_C_C(long tableId, long columnId, long classPK)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(tableId), new Long(columnId), new Long(classPK)
-			};
+		Object[] finderArgs = new Object[] { tableId, columnId, classPK };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_T_C_C,
 				finderArgs, this);
@@ -3573,11 +3565,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 	public int countByT_C_D(long tableId, long columnId, String data)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(tableId), new Long(columnId),
-				
-				data
-			};
+		Object[] finderArgs = new Object[] { tableId, columnId, data };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_T_C_D,
 				finderArgs, this);
