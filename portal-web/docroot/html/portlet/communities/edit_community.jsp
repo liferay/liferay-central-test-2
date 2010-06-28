@@ -61,7 +61,14 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 			</aui:field-wrapper>
 		</c:if>
 
-		<aui:input name="name" />
+		<c:choose>
+			<c:when test="<%= group.getName().equals(GroupConstants.GUEST) %>">
+				<aui:input name="name" type="hidden" />
+			</c:when>
+			<c:otherwise>
+				<aui:input name="name" />
+			</c:otherwise>
+		</c:choose>
 
 		<aui:input name="description" />
 
