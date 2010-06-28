@@ -145,19 +145,21 @@ long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getC
 
 				AssetRenderer assetRenderer =  workflowHandler.getAssetRenderer(classPK);
 				AssetRendererFactory assetRendererFactory =  workflowHandler.getAssetRendererFactory();
+				AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(assetRendererFactory.getClassName(), assetRenderer.getClassPK());
 
 				PortletURL editPortletURL = workflowHandler.getURLEdit(classPK, (LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
 
-				String viewPortletURL = workflowHandler.getURLViewInContext(classPK, (LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, null);
+				PortletURL viewFullContentURL = renderResponse.createRenderURL();
 
-				viewPortletURL = HttpUtil.setParameter(viewPortletURL, "redirect", currentURL);
+				viewFullContentURL.setParameter("struts_action", "/workflow_tasks/view_content");
+				viewFullContentURL.setParameter("assetEntryId", String.valueOf(assetEntry.getEntryId()));
+				viewFullContentURL.setParameter("type", assetRendererFactory.getType());
+				viewFullContentURL.setParameter("redirect", currentURL);
 				%>
 
 				<div class="task-content-actions">
 					<liferay-ui:icon-list>
-						<c:if test="<%= (viewPortletURL != null) && assetRenderer.hasViewPermission(permissionChecker) %>">
-							<liferay-ui:icon image="view" url="<%= viewPortletURL %>" />
-						</c:if>
+						<liferay-ui:icon image="view" method="get" url="<%= viewFullContentURL.toString() %>" />
 
 						<c:if test="<%= editPortletURL != null %>">
 
@@ -170,7 +172,7 @@ long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getC
 
 							<c:choose>
 								<c:when test="<%= assetRenderer.hasEditPermission(permissionChecker) %>">
-									<liferay-ui:icon image="edit" url="<%= editPortletURL.toString() %>" />
+									<liferay-ui:icon image="edit" method="get" url="<%= editPortletURL.toString() %>" />
 								</c:when>
 								<c:otherwise>
 									<liferay-ui:icon-help message="please-assign-the-task-to-yourself-to-be-able-to-edit-the-content" />
