@@ -734,15 +734,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Workflow
 
-		String className = MBMessage.class.getName();
-
-		if (message.isDiscussion()) {
-			className = MBDiscussion.class.getName();
-		}
-
 		workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
 			message.getCompanyId(), message.getGroupId(),
-			className, message.getMessageId());
+			message.getWorkflowClassName(), message.getMessageId());
 	}
 
 	public List<MBMessage> getCategoryMessages(
@@ -1204,12 +1198,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String[] assetTagNames)
 		throws PortalException, SystemException {
 
-		String className = MBMessage.class.getName();
-
-		if (message.isDiscussion()) {
-			className = MBDiscussion.class.getName();
-		}
-
 		boolean visible = false;
 
 		if (message.getStatus() == WorkflowConstants.STATUS_APPROVED) {
@@ -1217,10 +1205,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 
 		assetEntryLocalService.updateEntry(
-			userId, message.getGroupId(), className, message.getMessageId(),
-			message.getUuid(), assetCategoryIds, assetTagNames, visible, null,
-			null, null, null, ContentTypes.TEXT_HTML, message.getSubject(),
-			null, null, null, 0, 0, null, false);
+			userId, message.getGroupId(), message.getWorkflowClassName(),
+			message.getMessageId(), message.getUuid(), assetCategoryIds,
+			assetTagNames, visible, null, null, null, null,
+			ContentTypes.TEXT_HTML, message.getSubject(), null, null, null, 0,
+			0, null, false);
 	}
 
 	public MBMessage updateDiscussionMessage(

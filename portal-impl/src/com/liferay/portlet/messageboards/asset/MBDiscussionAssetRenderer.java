@@ -33,6 +33,8 @@ public class MBDiscussionAssetRenderer extends MBMessageAssetRenderer {
 
 	public MBDiscussionAssetRenderer(MBMessage message) {
 		super(message);
+
+		_message = message;
 	}
 
 	public PortletURL getURLEdit(
@@ -76,5 +78,7 @@ public class MBDiscussionAssetRenderer extends MBMessageAssetRenderer {
 			return null;
 		}
 	}
+
+	private MBMessage _message;
 
 }

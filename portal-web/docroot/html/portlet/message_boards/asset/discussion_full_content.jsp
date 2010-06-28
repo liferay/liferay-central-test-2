@@ -20,7 +20,11 @@
 String randomNamespace = PortalUtil.generateRandomKey(request, "discussion_full_content") + StringPool.UNDERLINE;
 
 MBMessage message = (MBMessage)request.getAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE);
-MBMessage rootMessage = MBMessageLocalServiceUtil.getMessage(message.getThread().getRootMessageId());
+
+MBThread thread = message.getThread();
+
+MBMessage rootMessage = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
+MBMessage parentMessage = MBMessageLocalServiceUtil.getMessage(message.getParentMessageId());
 %>
 
 <table class="lfr-grid lfr-table">
@@ -61,12 +65,7 @@ MBMessage rootMessage = MBMessageLocalServiceUtil.getMessage(message.getThread()
 </tr>
 </table>
 
-<%
-MBMessage parentMessage = MBMessageLocalServiceUtil.getMessage(message.getParentMessageId());
-%>
-
-<c:if test="<%= (parentMessage != null) && (!parentMessage.isRoot()) %>">
-
+<c:if test="<%= (parentMessage != null) && !parentMessage.isRoot() %>">
 	<h3><liferay-ui:message key="replying-to" />:</h3>
 
 	<%

@@ -73,7 +73,6 @@ if (Validator.isNull(redirect)) {
 		</c:if>
 
 		<aui:input name="body" type="textarea" style="height: <%= ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" />
-
 	</aui:fieldset>
 
 	<c:if test="<%= curParentMessage != null %>">
