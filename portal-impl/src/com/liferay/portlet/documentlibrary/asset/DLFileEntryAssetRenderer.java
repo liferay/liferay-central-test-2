@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -116,8 +115,9 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 				WebKeys.THEME_DISPLAY);
 
 		return themeDisplay.getPathMain() +
-			"/document_library/find_file_entry?p_l_id=" + themeDisplay.getPlid() +
-				"&fileEntryId=" + _entry.getFileEntryId();
+			"/document_library/find_file_entry?p_l_id=" +
+				themeDisplay.getPlid() + "&fileEntryId=" +
+					_entry.getFileEntryId();
 	}
 
 	public long getUserId() {
