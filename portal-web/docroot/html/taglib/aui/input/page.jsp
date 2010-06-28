@@ -226,10 +226,11 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 			valueString = BeanParamUtil.getString(bean, request, name, StringPool.BLANK);
 
 			String fieldParam = (String)dynamicAttributes.get("fieldParam");
-			String httpValue = request.getParameter(fieldParam);
 
-			if (Validator.isNotNull(httpValue)) {
-				valueString = httpValue;
+			String fieldParamValue = request.getParameter(fieldParam);
+
+			if (Validator.isNotNull(fieldParamValue)) {
+				valueString = fieldParamValue;
 			}
 		}
 
