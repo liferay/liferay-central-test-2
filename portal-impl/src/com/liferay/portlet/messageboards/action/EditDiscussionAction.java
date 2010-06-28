@@ -35,8 +35,11 @@ import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
@@ -94,6 +97,31 @@ public class EditDiscussionAction extends PortletAction {
 				throw e;
 			}
 		}
+	}
+
+	public ActionForward render(
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			RenderRequest renderRequest, RenderResponse renderResponse)
+		throws Exception {
+
+		try {
+			ActionUtil.getMessage(renderRequest);
+		}
+		catch (Exception e) {
+			if (e instanceof NoSuchMessageException ||
+				e instanceof PrincipalException) {
+
+				SessionErrors.add(renderRequest, e.getClass().getName());
+
+				return mapping.findForward("portlet.message_boards.error");
+			}
+			else {
+				throw e;
+			}
+		}
+
+		return mapping.findForward(getForward(
+			renderRequest, "portlet.message_boards.edit_discussion"));
 	}
 
 	protected void deleteMessage(ActionRequest actionRequest) throws Exception {

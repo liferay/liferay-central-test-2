@@ -159,7 +159,9 @@ long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getC
 
 				<div class="task-content-actions">
 					<liferay-ui:icon-list>
-						<liferay-ui:icon image="view" method="get" url="<%= viewFullContentURL.toString() %>" />
+						<c:if test="<%= assetRenderer.hasViewPermission(permissionChecker) %>">
+							<liferay-ui:icon image="view" method="get" url="<%= viewFullContentURL.toString() %>" />
+						</c:if>
 
 						<c:if test="<%= editPortletURL != null %>">
 

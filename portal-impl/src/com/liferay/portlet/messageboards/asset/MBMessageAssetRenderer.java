@@ -154,6 +154,6 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 		return themeDisplay.getPathThemeImages() + "/common/conversation.png";
 	}
 
-	private MBMessage _message;
+	protected MBMessage _message;
 
 }

@@ -1204,8 +1204,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String[] assetTagNames)
 		throws PortalException, SystemException {
 
+		String className = MBMessage.class.getName();
+
 		if (message.isDiscussion()) {
-			return;
+			className = MBDiscussion.class.getName();
 		}
 
 		boolean visible = false;
@@ -1215,11 +1217,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 
 		assetEntryLocalService.updateEntry(
-			userId, message.getGroupId(), MBMessage.class.getName(),
-			message.getMessageId(), message.getUuid(), assetCategoryIds,
-			assetTagNames, visible, null, null, null, null,
-			ContentTypes.TEXT_HTML, message.getSubject(), null, null, null, 0,
-			0, null, false);
+			userId, message.getGroupId(), className, message.getMessageId(),
+			message.getUuid(), assetCategoryIds, assetTagNames, visible, null,
+			null, null, null, ContentTypes.TEXT_HTML, message.getSubject(),
+			null, null, null, 0, 0, null, false);
 	}
 
 	public MBMessage updateDiscussionMessage(
@@ -1228,7 +1229,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(subject)) {
-			subject = "N/A";
+			subject = body.substring(0, Math.min(body.length(), 50)) + "...";
 		}
 
 		List<ObjectValuePair<String, byte[]>> files =
