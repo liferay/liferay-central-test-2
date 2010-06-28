@@ -25,31 +25,17 @@ import javax.portlet.PortletContext;
 import javax.servlet.ServletContext;
 
 /**
- * <a href="PortletConfigFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletConfigFactoryImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class PortletConfigFactory {
+public class PortletConfigFactoryImpl implements PortletConfigFactory {
 
-	public static PortletConfig create(
-		Portlet portlet, ServletContext servletContext) {
-
-		return _instance._create(portlet, servletContext);
-	}
-
-	public static void destroy(Portlet portlet) {
-		_instance._destroy(portlet);
-	}
-
-	public static PortletConfig update(Portlet portlet) {
-		return _instance._update(portlet);
-	}
-
-	private PortletConfigFactory() {
+	public PortletConfigFactoryImpl() {
 		_pool = new ConcurrentHashMap<String, Map<String, PortletConfig>>();
 	}
 
-	private PortletConfig _create(
+	public PortletConfig create(
 		Portlet portlet, ServletContext servletContext) {
 
 		Map<String, PortletConfig> portletConfigs =
@@ -76,11 +62,11 @@ public class PortletConfigFactory {
 		return portletConfig;
 	}
 
-	private void _destroy(Portlet portlet) {
+	public void destroy(Portlet portlet) {
 		_pool.remove(portlet.getRootPortletId());
 	}
 
-	private PortletConfig _update(Portlet portlet) {
+	public PortletConfig update(Portlet portlet) {
 		Map<String, PortletConfig> portletConfigs =
 			_pool.get(portlet.getRootPortletId());
 
@@ -95,8 +81,6 @@ public class PortletConfigFactory {
 
 		return portletConfig;
 	}
-
-	private static PortletConfigFactory _instance = new PortletConfigFactory();
 
 	private Map<String, Map<String, PortletConfig>> _pool;
 

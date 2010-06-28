@@ -77,7 +77,7 @@ import com.liferay.portlet.EventResponseFactory;
 import com.liferay.portlet.EventResponseImpl;
 import com.liferay.portlet.InvokerPortlet;
 import com.liferay.portlet.InvokerPortletImpl;
-import com.liferay.portlet.PortletConfigFactory;
+import com.liferay.portlet.PortletConfigFactoryUtil;
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletInstanceFactoryUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -386,7 +386,7 @@ public class LayoutAction extends Action {
 		InvokerPortlet invokerPortlet = PortletInstanceFactoryUtil.create(
 			portlet, servletContext);
 
-		PortletConfig portletConfig = PortletConfigFactory.create(
+		PortletConfig portletConfig = PortletConfigFactoryUtil.create(
 			portlet, servletContext);
 		PortletContext portletContext = portletConfig.getPortletContext();
 
@@ -693,7 +693,7 @@ public class LayoutAction extends Action {
 				LanguageUtil.getLanguageId(request));
 		}
 
-		PortletConfig portletConfig = PortletConfigFactory.create(
+		PortletConfig portletConfig = PortletConfigFactoryUtil.create(
 			portlet, servletContext);
 		PortletContext portletContext = portletConfig.getPortletContext();
 

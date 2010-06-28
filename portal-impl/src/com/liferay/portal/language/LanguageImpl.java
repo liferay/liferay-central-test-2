@@ -39,7 +39,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletConfigFactory;
+import com.liferay.portlet.PortletConfigFactoryUtil;
 
 import java.text.MessageFormat;
 
@@ -635,7 +635,7 @@ public class LanguageImpl implements Language {
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			companyId, portletResource);
 
-		PortletConfig portletConfig = PortletConfigFactory.create(
+		PortletConfig portletConfig = PortletConfigFactoryUtil.create(
 			portlet, pageContext.getServletContext());
 
 		ResourceBundle resourceBundle = portletConfig.getResourceBundle(

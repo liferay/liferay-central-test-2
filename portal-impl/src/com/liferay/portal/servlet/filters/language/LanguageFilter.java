@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
-import com.liferay.portlet.PortletConfigFactory;
+import com.liferay.portlet.PortletConfigFactoryUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.util.List;
@@ -69,7 +69,7 @@ public class LanguageFilter extends BasePortalFilter {
 			return;
 		}
 
-		_portletConfig = PortletConfigFactory.create(
+		_portletConfig = PortletConfigFactoryUtil.create(
 			portlets.get(0), filterConfig.getServletContext());
 	}
 

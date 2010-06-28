@@ -84,7 +84,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletBagFactory;
-import com.liferay.portlet.PortletConfigFactory;
+import com.liferay.portlet.PortletConfigFactoryUtil;
 import com.liferay.portlet.PortletFilterFactory;
 import com.liferay.portlet.PortletInstanceFactoryUtil;
 import com.liferay.portlet.PortletURLListenerFactory;
@@ -804,7 +804,7 @@ public class MainServlet extends ActionServlet {
 
 		PortletApp portletApp = portlet.getPortletApp();
 
-		PortletConfig portletConfig = PortletConfigFactory.create(
+		PortletConfig portletConfig = PortletConfigFactoryUtil.create(
 			portlet, servletContext);
 
 		PortletContext portletContext = portletConfig.getPortletContext();

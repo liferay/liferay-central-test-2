@@ -27,7 +27,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.util.comparator.PortletCategoryComparator;
 import com.liferay.portal.util.comparator.PortletTitleComparator;
-import com.liferay.portlet.PortletConfigFactory;
+import com.liferay.portlet.PortletConfigFactoryUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -182,7 +182,7 @@ public class PortletLister {
 				if (portletApp.isWARFile() &&
 					Validator.isNull(externalPortletCategory)) {
 
-					PortletConfig portletConfig = PortletConfigFactory.create(
+					PortletConfig portletConfig = PortletConfigFactoryUtil.create(
 						portlet, _servletContext);
 
 					ResourceBundle resourceBundle =

@@ -128,7 +128,7 @@ import com.liferay.portal.util.comparator.PortletControlPanelWeightComparator;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.ControlPanelEntry;
 import com.liferay.portlet.DefaultControlPanelEntryFactory;
-import com.liferay.portlet.PortletConfigFactory;
+import com.liferay.portlet.PortletConfigFactoryUtil;
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletContextImpl;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -2260,7 +2260,7 @@ public class PortalImpl implements Portal {
 	public String getPortletDescription(
 		Portlet portlet, ServletContext servletContext, Locale locale) {
 
-		PortletConfig portletConfig = PortletConfigFactory.create(
+		PortletConfig portletConfig = PortletConfigFactoryUtil.create(
 			portlet, servletContext);
 
 		ResourceBundle resourceBundle = portletConfig.getResourceBundle(locale);
@@ -2480,7 +2480,7 @@ public class PortalImpl implements Portal {
 	public String getPortletTitle(
 		Portlet portlet, ServletContext servletContext, Locale locale) {
 
-		PortletConfig portletConfig = PortletConfigFactory.create(
+		PortletConfig portletConfig = PortletConfigFactoryUtil.create(
 			portlet, servletContext);
 
 		ResourceBundle resourceBundle = portletConfig.getResourceBundle(locale);
@@ -2712,7 +2712,7 @@ public class PortalImpl implements Portal {
 	public ServletContext getServletContext(
 		Portlet portlet, ServletContext servletContext) {
 
-		PortletConfig portletConfig = PortletConfigFactory.create(
+		PortletConfig portletConfig = PortletConfigFactoryUtil.create(
 			portlet, servletContext);
 
 		PortletContextImpl portletContextImpl =

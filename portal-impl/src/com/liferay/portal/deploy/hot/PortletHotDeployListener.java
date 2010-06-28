@@ -59,7 +59,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.xmlrpc.XmlRpcServlet;
 import com.liferay.portlet.CustomUserAttributes;
 import com.liferay.portlet.PortletBagFactory;
-import com.liferay.portlet.PortletConfigFactory;
+import com.liferay.portlet.PortletConfigFactoryUtil;
 import com.liferay.portlet.PortletContextBag;
 import com.liferay.portlet.PortletContextBagPool;
 import com.liferay.portlet.PortletFilterFactory;
@@ -479,7 +479,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			ServletContext servletContext, ClassLoader portletClassLoader)
 		throws Exception {
 
-		PortletConfig portletConfig = PortletConfigFactory.create(
+		PortletConfig portletConfig = PortletConfigFactoryUtil.create(
 			portlet, servletContext);
 
 		PortletContext portletContext = portletConfig.getPortletContext();

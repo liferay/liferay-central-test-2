@@ -115,7 +115,7 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 				PortletBag portletBag = PortletBagPool.get(
 					portlet.getRootPortletId());
 
-				PortletConfig portletConfig = PortletConfigFactory.create(
+				PortletConfig portletConfig = PortletConfigFactoryUtil.create(
 					portlet, servletContext);
 
 				rootInvokerPortletInstance = init(
@@ -132,7 +132,7 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 					rootInvokerPortletInstance.getPortletInstance();
 
 				PortletConfig portletConfig =
-					PortletConfigFactory.create(portlet, servletContext);
+					PortletConfigFactoryUtil.create(portlet, servletContext);
 
 				PortletContext portletContext =
 					portletConfig.getPortletContext();
@@ -173,7 +173,7 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 	public void destroy(Portlet portlet) {
 		clear(portlet);
 
-		PortletConfigFactory.destroy(portlet);
+		PortletConfigFactoryUtil.destroy(portlet);
 		PortletContextFactory.destroy(portlet);
 
 		PortletLocalServiceUtil.destroyPortlet(portlet);
@@ -183,10 +183,6 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 		InvokerPortlet internalInvokerPortletPrototype) {
 
 		_internalInvokerPortletPrototype = internalInvokerPortletPrototype;
-	}
-
-	public void updatePortletConfig(Portlet portlet) {
-		PortletConfigFactory.update(portlet);
 	}
 
 	protected InvokerPortlet init(

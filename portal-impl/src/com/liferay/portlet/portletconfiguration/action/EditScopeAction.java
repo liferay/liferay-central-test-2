@@ -30,7 +30,7 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletConfigFactory;
+import com.liferay.portlet.PortletConfigFactoryUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.portletconfiguration.util.PortletConfigurationUtil;
 
@@ -121,7 +121,7 @@ public class EditScopeAction extends EditConfigurationAction {
 			ServletContext servletContext =
 				(ServletContext)portletRequest.getAttribute(WebKeys.CTX);
 
-			PortletConfig portletConfig = PortletConfigFactory.create(
+			PortletConfig portletConfig = PortletConfigFactoryUtil.create(
 				portlet, servletContext);
 
 			ResourceBundle resourceBundle = portletConfig.getResourceBundle(

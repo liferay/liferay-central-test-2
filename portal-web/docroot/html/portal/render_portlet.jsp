@@ -78,7 +78,7 @@ PortletPreferencesIds portletPreferencesIds = PortletPreferencesFactoryUtil.getP
 
 PortletPreferences portletPreferences = PortletPreferencesLocalServiceUtil.getPreferences(portletPreferencesIds);
 
-PortletConfig portletConfig = PortletConfigFactory.create(portlet, application);
+PortletConfig portletConfig = PortletConfigFactoryUtil.create(portlet, application);
 PortletContext portletCtx = portletConfig.getPortletContext();
 
 WindowState windowState = WindowState.NORMAL;
