@@ -84,7 +84,7 @@ decimalFormat.setMinimumFractionDigits(2);
 
 <c:choose>
 	<c:when test="<%= windowState.equals(WindowState.NORMAL) %>">
-		<table border="1" cellpadding="3" cellspacing="0" width="100%">
+		<table style="width: 100%; border-collapse: separate; border-spacing: 1px;">
 		<tr class="portlet-section-header results-header">
 			<td>
 				<strong><liferay-ui:message key="currency" /></strong>
