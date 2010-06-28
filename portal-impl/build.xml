@@ -230,11 +230,11 @@
 		</antcall>
 
 		<antcall target="build-lang-native2ascii">
-			<param name="lang.code" value="in_ID" />
+			<param name="lang.code" value="hu" />
 		</antcall>
 
 		<antcall target="build-lang-native2ascii">
-			<param name="lang.code" value="hu" />
+			<param name="lang.code" value="in_ID" />
 		</antcall>
 
 		<antcall target="build-lang-native2ascii">
