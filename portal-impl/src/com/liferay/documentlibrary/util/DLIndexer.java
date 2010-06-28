@@ -113,7 +113,7 @@ public class DLIndexer extends BaseIndexer {
 				_log.debug(
 					"Not indexing document " + companyId + " " + portletId +
 						" " + scopeGroupId + " " + repositoryId + " " +
-							fileName + " " + fileEntry.getFileEntryId());
+							fileName + " " + fileEntryId);
 			}
 
 			return null;
