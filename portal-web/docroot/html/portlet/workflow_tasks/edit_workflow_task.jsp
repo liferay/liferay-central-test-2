@@ -331,3 +331,7 @@ long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getC
 		<liferay-util:include page="/html/portlet/workflow_tasks/workflow_task_action.jsp" />
 	</aui:column>
 </aui:layout>
+
+<%
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, workflowTask.getName()), currentURL);
+%>

@@ -250,3 +250,7 @@ long classPK = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.
 		<liferay-util:include page="/html/portlet/workflow_instances/workflow_instance_action.jsp" />
 	</aui:column>
 </aui:layout>
+
+<%
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, workflowInstance.getWorkflowDefinitionName()), currentURL);
+%>

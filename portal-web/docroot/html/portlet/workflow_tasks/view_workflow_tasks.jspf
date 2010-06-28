@@ -87,6 +87,8 @@ catch (Exception e) {
 
 <%
 }
+
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, tabs1), currentURL);
 %>
 
 <%!

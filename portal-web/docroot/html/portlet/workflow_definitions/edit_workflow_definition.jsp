@@ -77,3 +77,7 @@ portletURL.setParameter("struts_action", "/workflow_definitions/view");
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>
+
+<%
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, (workflowDefinition == null) ? "new-workflow-definition" : workflowDefinition.getName()), currentURL);
+%>

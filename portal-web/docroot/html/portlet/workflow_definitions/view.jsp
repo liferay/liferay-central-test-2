@@ -47,3 +47,7 @@
 		</div>
 	</c:otherwise>
 </c:choose>
+
+<%
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, tabs1), currentURL);
+%>
