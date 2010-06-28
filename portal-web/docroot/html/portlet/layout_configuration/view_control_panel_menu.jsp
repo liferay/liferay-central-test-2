@@ -25,9 +25,10 @@
 
 		<%
 		String ppid = GetterUtil.getString((String)request.getAttribute("control_panel.jsp-ppid"), layoutTypePortlet.getStateMaxPortletId());
+		String category = PortalUtil.getControlPanelCategory(ppid, themeDisplay);
 
-		for (String category : PortletCategoryKeys.ALL) {
-			List<Portlet> portlets = PortalUtil.getControlPanelPortlets(category, themeDisplay);
+		for (String curCategory : PortletCategoryKeys.ALL) {
+			List<Portlet> portlets = PortalUtil.getControlPanelPortlets(curCategory, themeDisplay);
 
 			if (portlets.isEmpty()) {
 				continue;
@@ -40,10 +41,10 @@
 
 			String title = null;
 
-			if (category.equals(PortletCategoryKeys.MY)) {
+			if (curCategory.equals(PortletCategoryKeys.MY)) {
 				title = HtmlUtil.escape(StringUtil.shorten(user.getFullName(), 25));
 			}
-			else if (category.equals(PortletCategoryKeys.CONTENT)) {
+			else if (curCategory.equals(PortletCategoryKeys.CONTENT)) {
 				Layout scopeLayout = null;
 
 				curGroup = themeDisplay.getScopeGroup();
@@ -66,7 +67,9 @@
 					curGroupName = curGroup.getDescriptiveName();
 				}
 
-				PortalUtil.addPortletBreadcrumbEntry(request, curGroupName, null);
+				if (category.equals(PortletCategoryKeys.CONTENT)) {
+					PortalUtil.addPortletBreadcrumbEntry(request, curGroupName, null);
+				}
 
 				if (scopeLayout == null) {
 					curGroupLabel = LanguageUtil.get(pageContext, "default");
@@ -74,7 +77,9 @@
 				else {
 					curGroupLabel = scopeLayout.getName(locale);
 
-					PortalUtil.addPortletBreadcrumbEntry(request, curGroupLabel, null);
+					if (category.equals(PortletCategoryKeys.CONTENT)) {
+						PortalUtil.addPortletBreadcrumbEntry(request, curGroupLabel, null);
+					}
 				}
 
 				List<Layout> curGroupLayouts = new ArrayList<Layout>();
@@ -90,15 +95,15 @@
 
 				title = "<a href=\"javascript:;\" class=\"lfr-floating-trigger lfr-group-selector\">" + HtmlUtil.escape(StringUtil.shorten(curGroupName, 25)) + "</a>";
 			}
-			else if (category.equals(PortletCategoryKeys.PORTAL) && (CompanyLocalServiceUtil.getCompaniesCount(false) > 1)) {
+			else if (curCategory.equals(PortletCategoryKeys.PORTAL) && (CompanyLocalServiceUtil.getCompaniesCount(false) > 1)) {
 				title = HtmlUtil.escape(company.getName());
 			}
 			else {
-				title = LanguageUtil.get(pageContext, "category." + category);
+				title = LanguageUtil.get(pageContext, "category." + curCategory);
 			}
 		%>
 
-			<c:if test="<%= category.equals(PortletCategoryKeys.CONTENT) %>">
+			<c:if test="<%= curCategory.equals(PortletCategoryKeys.CONTENT) %>">
 				<liferay-ui:panel-floating-container id="groupSelectorPanel" paging="<%= true %>" trigger=".lfr-group-selector">
 
 					<%
@@ -207,8 +212,8 @@
 				</c:if>
 			</c:if>
 
-			<liferay-ui:panel collapsible="<%= true %>" cssClass="lfr-component panel-page-category" extended="<%= true %>" id='<%= "panel-manage-" + category %>' persistState="<%= true %>" title="<%= title %>">
-				<c:if test="<%= !scopeLayouts.isEmpty() && category.equals(PortletCategoryKeys.CONTENT) %>">
+			<liferay-ui:panel collapsible="<%= true %>" cssClass="lfr-component panel-page-category" extended="<%= true %>" id='<%= "panel-manage-" + curCategory %>' persistState="<%= true %>" title="<%= title %>">
+				<c:if test="<%= !scopeLayouts.isEmpty() && curCategory.equals(PortletCategoryKeys.CONTENT) %>">
 					<span class="nobr lfr-title-scope-selector">
 						<liferay-ui:message key="scope" /> <a href="javascript:;" class="lfr-scope-selector"><%= curGroupLabel %></a>
 					</span>
