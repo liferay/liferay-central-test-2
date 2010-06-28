@@ -219,9 +219,9 @@
 					<c:when test="<%= themeDisplay.isThemeJsFastLoad() %>">
 						return {
 							replaceStr: function(match, fragment, string) {
-								return fragment + 'm=/';
+								return fragment + 'm=' + (match.split('/html/js')[1] || '');
 							},
-							searchExp: '(\\?|&)/'
+							searchExp: '(\\?|&)/([^&]+)'
 						};
 					</c:when>
 					<c:otherwise>

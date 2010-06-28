@@ -61,7 +61,7 @@ public class ComboServlet extends HttpServlet {
 		byte[][] bytesArray = new byte[length][];
 
 		for (String modulePath : modulePaths) {
-			bytesArray[--length] = getFileContent(modulePath, minifierType);
+			bytesArray[--length] = getFileContent(_JAVASCRIPT_DIR + modulePath, minifierType);
 		}
 
 		String contentType = ContentTypes.TEXT_JAVASCRIPT;
