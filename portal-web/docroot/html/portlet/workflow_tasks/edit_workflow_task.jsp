@@ -143,8 +143,8 @@ long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getC
 				<%
 				WorkflowHandler workflowHandler = WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
 
-				AssetRenderer assetRenderer =  workflowHandler.getAssetRenderer(classPK);
-				AssetRendererFactory assetRendererFactory =  workflowHandler.getAssetRendererFactory();
+				AssetRenderer assetRenderer = workflowHandler.getAssetRenderer(classPK);
+				AssetRendererFactory assetRendererFactory = workflowHandler.getAssetRendererFactory();
 				AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(assetRendererFactory.getClassName(), assetRenderer.getClassPK());
 
 				PortletURL editPortletURL = workflowHandler.getURLEdit(classPK, (LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
@@ -152,9 +152,9 @@ long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getC
 				PortletURL viewFullContentURL = renderResponse.createRenderURL();
 
 				viewFullContentURL.setParameter("struts_action", "/workflow_tasks/view_content");
+				viewFullContentURL.setParameter("redirect", currentURL);
 				viewFullContentURL.setParameter("assetEntryId", String.valueOf(assetEntry.getEntryId()));
 				viewFullContentURL.setParameter("type", assetRendererFactory.getType());
-				viewFullContentURL.setParameter("redirect", currentURL);
 				%>
 
 				<div class="task-content-actions">
