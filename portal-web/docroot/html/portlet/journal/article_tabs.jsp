@@ -65,9 +65,9 @@ if (article != null) {
 		/>
 	</c:when>
 	<c:otherwise>
-		<liferay-ui:tabs
-			names="new-web-content"
+		<liferay-ui:header
 			backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+			title="new-web-content"
 		/>
 	</c:otherwise>
 </c:choose>
