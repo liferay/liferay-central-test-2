@@ -702,12 +702,18 @@ public class DLFileEntryLocalServiceImpl
 				null, null, 0, 0, null, false);
 		}
 		else {
+			boolean visible = true;
+
+			if ((fileVersion != null) && !fileVersion.isApproved()) {
+				visible = false;
+			}
+
 			assetEntryLocalService.updateEntry(
 				userId, fileEntry.getGroupId(), DLFileEntry.class.getName(),
 				fileEntry.getFileEntryId(), fileEntry.getUuid(),
-				assetCategoryIds, assetTagNames, true, null, null, null, null,
-				mimeType, fileEntry.getTitle(), fileEntry.getDescription(),
-				null, null, 0, 0, null, false);
+				assetCategoryIds, assetTagNames, visible, null, null, null,
+				null, mimeType, fileEntry.getTitle(),
+				fileEntry.getDescription(), null, null, 0, 0, null, false);
 
 			List<DLFileShortcut> fileShortcuts =
 				dlFileShortcutPersistence.findByG_TF_TN(
