@@ -194,13 +194,9 @@
 		String alloyBaseURL = themeDisplay.getPathJavaScript() + "/aui/";
 		String alloyFileURL = alloyBaseURL + "{file}";
 
-		String alloyFilter = "raw";
-
 		String alloyURL = alloyFileURL + "?t=" + javaScriptLastModified;
 
 		if (themeDisplay.isThemeJsFastLoad()) {
-			alloyFilter = "min";
-
 			alloyURL = PortalUtil.getStaticResourceURL(request, alloyFileURL, javaScriptLastModified);
 		}
 		%>
@@ -219,7 +215,19 @@
 				return '<%= alloyURL %>'.replace('{file}', file);
 			},
 			getFilter: function() {
-				return '<%= alloyFilter %>';
+				<c:choose>
+					<c:when test="<%= themeDisplay.isThemeJsFastLoad() %>">
+						return {
+						    replaceStr: function(match, fragment, string) {
+								return fragment + 'm=/';
+						    },
+							searchExp: '(\\?|&)/'
+						};
+					</c:when>
+					<c:otherwise>
+						return 'raw';
+					</c:otherwise>
+				</c:choose>
 			}
 		};
 

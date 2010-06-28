@@ -47,9 +47,9 @@ public class ComboServlet extends HttpServlet {
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException {
 
-		Map<String, String[]> parameterMap = request.getParameterMap();
+		String[] modules = request.getParameterValues("m");
 
-		if (parameterMap.size() == 0) {
+		if (modules.length == 0) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 
 			return;
@@ -57,12 +57,12 @@ public class ComboServlet extends HttpServlet {
 
 		String minifierType = ParamUtil.getString(request, "minifierType");
 
-		int size = parameterMap.size();
+		int length = modules.length;
 
-		byte[][] bytesArray = new byte[size][];
+		byte[][] bytesArray = new byte[length][];
 
-		for (String modulePath : parameterMap.keySet()) {
-			bytesArray[--size] = getFileContent(modulePath, minifierType);
+		for (String modulePath : modules) {
+			bytesArray[--length] = getFileContent(modulePath, minifierType);
 		}
 
 		String contentType = ContentTypes.TEXT_JAVASCRIPT;
