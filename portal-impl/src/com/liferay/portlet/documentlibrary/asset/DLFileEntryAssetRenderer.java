@@ -116,9 +116,8 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 				WebKeys.THEME_DISPLAY);
 
 		return themeDisplay.getPathMain() +
-			"/document_library/get_file?p_l_id=" + themeDisplay.getPlid() +
-				"&folderId=" + _entry.getFolderId() + "&title=" +
-					HttpUtil.encodeURL(_entry.getTitle());
+			"/document_library/find_file_entry?p_l_id=" + themeDisplay.getPlid() +
+				"&fileEntryId=" + _entry.getFileEntryId();
 	}
 
 	public long getUserId() {
