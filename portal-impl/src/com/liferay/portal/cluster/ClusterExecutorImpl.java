@@ -54,6 +54,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.Lock;
@@ -482,8 +483,11 @@ public class ClusterExecutorImpl
 	}
 
 	protected void initChannels() {
-		String controlProperty =
-			PropsUtil.get(PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_CONTROL);
+		Properties controlProperties = PropsUtil.getProperties(
+			PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_CONTROL, false);
+
+		String controlProperty = controlProperties.getProperty(
+			PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_CONTROL);
 
 		ClusterRequestReceiver clusterInvokeReceiver =
 			new ClusterRequestReceiver(this);
