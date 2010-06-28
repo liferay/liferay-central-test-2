@@ -113,7 +113,7 @@ public class DLIndexer extends BaseIndexer {
 				_log.debug(
 					"Not indexing document " + companyId + " " + portletId +
 						" " + scopeGroupId + " " + repositoryId + " " +
-							fileName + " " + fileEntryId);
+							fileName + " " + fileEntry.getFileEntryId());
 			}
 
 			return null;
@@ -145,7 +145,7 @@ public class DLIndexer extends BaseIndexer {
 			_log.debug(
 				"Indexing document " + companyId + " " + portletId + " " +
 					scopeGroupId + " " + repositoryId + " " + fileName + " " +
-						fileEntryId);
+						fileEntry.getFileEntryId());
 		}
 
 		boolean indexContent = true;
@@ -178,7 +178,8 @@ public class DLIndexer extends BaseIndexer {
 				_log.debug(
 					"Document " + companyId + " " + portletId + " " +
 						scopeGroupId + " " + repositoryId + " " + fileName +
-							" " + fileEntryId + " does not have any content");
+							" " + fileEntry.getFileEntryId() + " does not " +
+								"have any content");
 			}
 
 			return null;
@@ -217,10 +218,10 @@ public class DLIndexer extends BaseIndexer {
 		document.addKeyword("path", fileName);
 		document.addKeyword(
 			Field.ENTRY_CLASS_NAME, DLFileEntry.class.getName());
-		document.addKeyword(Field.ENTRY_CLASS_PK, fileEntryId);
+		document.addKeyword(Field.ENTRY_CLASS_PK, fileEntry.getFileEntryId());
 
 		ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
-			companyId, DLFileEntry.class.getName(), fileEntryId);
+			companyId, DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
@@ -228,7 +229,7 @@ public class DLIndexer extends BaseIndexer {
 			_log.debug(
 				"Document " + companyId + " " + portletId + " " +
 					scopeGroupId + " " + repositoryId + " " + fileName + " " +
-						fileEntryId + " indexed successfully");
+						fileEntry.getFileEntryId() + " indexed successfully");
 		}
 
 		return document;
