@@ -20,11 +20,8 @@ import com.liferay.portal.kernel.workflow.permission.WorkflowPermissionUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.MBDiscussionLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 
 import java.util.List;
@@ -83,26 +80,9 @@ public class MBDiscussionPermission {
 			}
 		}
 
-		if (!contains(
-				permissionChecker, companyId, groupId, className, classPK,
-				ownerId, actionId)) {
-
-			return false;
-		}
-
-		MBDiscussion discussion =
-			MBDiscussionLocalServiceUtil.getThreadDiscussion(
-				message.getThreadId());
-
-		long classNameId = PortalUtil.getClassNameId(className);
-
-		if ((discussion.getClassNameId() == classNameId) &&
-			(discussion.getClassPK() == classPK)) {
-
-			return true;
-		}
-
-		return false;
+		return contains(
+			permissionChecker, companyId, groupId, className, classPK,
+			ownerId, actionId);
 	}
 
 	public static boolean contains(
