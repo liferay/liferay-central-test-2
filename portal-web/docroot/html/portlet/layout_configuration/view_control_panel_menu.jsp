@@ -25,6 +25,7 @@
 
 		<%
 		String ppid = GetterUtil.getString((String)request.getAttribute("control_panel.jsp-ppid"), layoutTypePortlet.getStateMaxPortletId());
+
 		String category = PortalUtil.getControlPanelCategory(ppid, themeDisplay);
 
 		for (String curCategory : PortletCategoryKeys.ALL) {
