@@ -61,7 +61,7 @@ public class DLUtil {
 
 		DLFolder folder = fileEntry.getFolder();
 
-		if(Validator.isNotNull(folder.getFolderId())) {
+		if (Validator.isNotNull(folder.getFolderId())) {
 			addPortletBreadcrumbEntries(folder, request, renderResponse);
 		}
 
@@ -84,7 +84,7 @@ public class DLUtil {
 
 		DLFolder folder = fileShortcut.getFolder();
 
-		if(Validator.isNotNull(folder.getFolderId())) {
+		if (Validator.isNotNull(folder.getFolderId())) {
 			addPortletBreadcrumbEntries(folder, request, renderResponse);
 		}
 
@@ -107,7 +107,7 @@ public class DLUtil {
 		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
 
-			if(Validator.isNotNull(folder.getFolderId())) {
+			if (Validator.isNotNull(folder.getFolderId())) {
 				addPortletBreadcrumbEntries(folder, request, renderResponse);
 			}
 		}
@@ -160,7 +160,7 @@ public class DLUtil {
 		portletURL.setParameter(
 			"folderId", String.valueOf(folder.getFolderId()));
 
-		if(Validator.isNotNull(folder.getFolderId())){
+		if (Validator.isNotNull(folder.getFolderId())){
 			PortalUtil.addPortletBreadcrumbEntry(
 				request, folder.getName(), portletURL.toString());
 		}

@@ -53,7 +53,10 @@ public class BookmarksUtil {
 
 		BookmarksFolder folder = entry.getFolder();
 
-		addPortletBreadcrumbEntries(folder, request, renderResponse);
+		if (folder.getFolderId() !=
+				BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			addPortletBreadcrumbEntries(folder, request, renderResponse);
+		}
 
 		PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -123,8 +126,11 @@ public class BookmarksUtil {
 		portletURL.setParameter(
 			"folderId", String.valueOf(folder.getFolderId()));
 
-		PortalUtil.addPortletBreadcrumbEntry(
-			request, folder.getName(), portletURL.toString());
+		if (folder.getFolderId()
+				!= BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			PortalUtil.addPortletBreadcrumbEntry(
+				request, folder.getName(), portletURL.toString());
+		}
 	}
 
 	public static OrderByComparator getEntriesOrderByComparator(
