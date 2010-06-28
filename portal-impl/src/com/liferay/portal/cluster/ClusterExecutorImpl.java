@@ -310,7 +310,6 @@ public class ClusterExecutorImpl
 			clusterRequest.getUuid(), futureClusterResponses);
 
 		for (Address address : addresses) {
-
 			if (_shortcutLocalMethod && address.equals(localControlAddress)) {
 				ClusterNodeResponse clusterNodeResponse = runLocalMethod(
 					clusterRequest.getMethodWrapper());
