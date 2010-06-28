@@ -458,8 +458,6 @@ public class JournalArticleFinderImpl
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_G_A_V_T_D_C_T_S_T_D_S_R);
 
-			String groupBy = "articleId";
-
 			if (groupId <= 0) {
 				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
 			}
@@ -467,12 +465,14 @@ public class JournalArticleFinderImpl
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "articleId", StringPool.LIKE, false, articleIds);
 
+			String groupBy = "articleId";
+
 			if (version == null) {
 				sql = StringUtil.replace(
 					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
 			}
 			else if (version <= 0) {
-				StringBundler sb = new StringBundler("articleId");
+				StringBundler sb = new StringBundler(groupBy);
 
 				for (String field : orderByComparator.getOrderByFields()) {
 					if (field.equals("articleId") || field.equals("version")) {
@@ -487,8 +487,7 @@ public class JournalArticleFinderImpl
 
 				sb.append(", MAX(version) as version");
 
-				sql = StringUtil.replace(
-					sql, "id_ AS id", sb.toString());
+				sql = StringUtil.replace(sql, "id_ AS id", sb.toString());
 
 				sql = StringUtil.replace(
 					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
