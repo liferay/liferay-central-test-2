@@ -33,6 +33,7 @@
 
 .portlet-column-content {
 	padding: 5px;
+	zoom: 1;
 }
 
 .portlet-column-content-only,
