@@ -18,6 +18,8 @@ import com.liferay.portal.kernel.cluster.Address;
 import com.liferay.portal.kernel.cluster.ClusterNodeResponse;
 import com.liferay.portal.kernel.cluster.ClusterNodeResponses;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.CountDownLatch;
@@ -32,9 +34,10 @@ import java.util.concurrent.TimeoutException;
  */
 public class FutureClusterResponses implements Future<ClusterNodeResponses> {
 
-	public FutureClusterResponses(int count) {
-		_countDownLatch = new CountDownLatch(count);
+	public FutureClusterResponses(List<Address> addresses) {
+		_countDownLatch = new CountDownLatch(addresses.size());
 		_clusterNodeResponses = new ClusterNodeResponses();
+		_expectedReplyAddress = new HashSet<Address>(addresses);
 	}
 
 	public void addClusterNodeResponse(

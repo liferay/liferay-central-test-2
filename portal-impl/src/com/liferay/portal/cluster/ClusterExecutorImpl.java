@@ -300,13 +300,12 @@ public class ClusterExecutorImpl
 		Address localControlAddress = getLocalControlAddress();
 
 		FutureClusterResponses futureClusterResponses =
-			new FutureClusterResponses(addresses.size());
+			new FutureClusterResponses(addresses);
 
 		_executionResultMap.put(
 			clusterRequest.getUuid(), futureClusterResponses);
 
 		for (Address address : addresses) {
-			futureClusterResponses.addExpectedReplyAddress(address);
 
 			if (_shortcutLocalMethod && address.equals(localControlAddress)) {
 				ClusterNodeResponse clusterNodeResponse = runLocalMethod(
