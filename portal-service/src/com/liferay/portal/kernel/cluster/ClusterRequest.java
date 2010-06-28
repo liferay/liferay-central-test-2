@@ -50,6 +50,7 @@ public class ClusterRequest implements Serializable {
 
 	public static ClusterRequest createMulticastRequest(
 		MethodWrapper methodWrapper) {
+
 		return createMulticastRequest(methodWrapper, false);
 	}
 
@@ -202,6 +203,8 @@ public class ClusterRequest implements Serializable {
 		sb.append(_clusterMessageType);
 		sb.append(", multicast=");
 		sb.append(_multicast);
+		sb.append(", skipLocal=");
+		sb.append(_skipLocal);
 		sb.append(", uuid=");
 		sb.append(_uuid);
 

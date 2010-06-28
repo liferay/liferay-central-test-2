@@ -33,9 +33,9 @@
 		<property name="injectCondition">
 			<util:constant static-field="com.liferay.portal.util.PropsValues.CLUSTER_LINK_ENABLED" />
 		</property>
-		<property name="parentChainableMethodAdvice" ref="serviceAdvice" />
 		<property name="newChainableMethodAdvice">
-			<bean class="com.liferay.portal.cluster.aop.ClusterAdvice"/>
+			<bean class="com.liferay.portal.cluster.ClusterableAdvice" />
 		</property>
+		<property name="parentChainableMethodAdvice" ref="serviceAdvice" />
 	</bean>
 </beans>

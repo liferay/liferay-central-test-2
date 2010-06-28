@@ -12,12 +12,11 @@
  * details.
  */
 
-package com.liferay.portal.cluster.aop;
+package com.liferay.portal.cluster;
 
-import com.liferay.portal.cluster.ClusterInvokeThreadLocal;
-import com.liferay.portal.kernel.annotation.Cluster;
 import com.liferay.portal.kernel.cluster.ClusterExecutorUtil;
 import com.liferay.portal.kernel.cluster.ClusterRequest;
+import com.liferay.portal.kernel.cluster.Clusterable;
 import com.liferay.portal.kernel.util.MethodTargetClassKey;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.spring.aop.AnnotationChainableMethodAdvice;
@@ -28,57 +27,66 @@ import java.lang.reflect.Method;
 import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * <a href="ClusterAdvice.java.html"><b><i>View Source</i></b></a>
+ * <a href="ClusterableAdvice.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
  */
-public class ClusterAdvice extends AnnotationChainableMethodAdvice<Cluster> {
+public class ClusterableAdvice
+	extends AnnotationChainableMethodAdvice<Clusterable> {
 
 	public void afterReturning(MethodInvocation methodInvocation, Object result)
 		throws Throwable {
-		if (ClusterInvokeThreadLocal.isClusterInvoke()) {
+
+		if (ClusterInvokeThreadLocal.isEnabled()) {
 			return;
 		}
 
 		MethodTargetClassKey methodTargetClassKey = buildMethodTargetClassKey(
 			methodInvocation);
 
-		Cluster cluster = findAnnotation(methodTargetClassKey);
+		Clusterable clusterable = findAnnotation(methodTargetClassKey);
 
-		if (cluster == _nullCluster) {
+		if (clusterable == _nullClusterable) {
 			return;
 		}
 
 		Method method = methodTargetClassKey.getMethod();
+
 		Method utilClassMethod = _getUtilClassMethod(method);
 
-		MethodWrapper methodWrapper = new MethodWrapper(utilClassMethod,
-			methodInvocation.getArguments());
+		MethodWrapper methodWrapper = new MethodWrapper(
+			utilClassMethod, methodInvocation.getArguments());
 
 		ClusterRequest clusterRequest = ClusterRequest.createMulticastRequest(
 			methodWrapper, true);
+
 		ClusterExecutorUtil.execute(clusterRequest);
 	}
 
-	public Cluster getNullAnnotation() {
-		return _nullCluster;
+	public Clusterable getNullAnnotation() {
+		return _nullClusterable;
 	}
 
 	private Method _getUtilClassMethod(Method method) throws Exception {
-		String utilClassName =
-			method.getDeclaringClass().getName().concat("Util");
-		Class<?> utilClass = Thread.currentThread().getContextClassLoader().
-			loadClass(utilClassName);
+		Thread currentThread = Thread.currentThread();
 
-		return utilClass.getMethod(method.getName(),
-			method.getParameterTypes());
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		Class<?> declaringClass = method.getDeclaringClass();
+
+		String utilClassName = declaringClass.getName().concat("Util");
+
+		Class<?> utilClass = contextClassLoader.loadClass(utilClassName);
+
+		return utilClass.getMethod(
+			method.getName(), method.getParameterTypes());
 	}
 
-	private static Cluster _nullCluster =
-		new Cluster() {
+	private static Clusterable _nullClusterable =
+		new Clusterable() {
 
 			public Class<? extends Annotation> annotationType() {
-				return Cluster.class;
+				return Clusterable.class;
 			}
 
 		};

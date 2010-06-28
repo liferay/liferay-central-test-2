@@ -14,7 +14,7 @@
 
 package com.liferay.portal.cluster;
 
-import com.liferay.portal.kernel.util.InitialThreadLocal;
+import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 
 /**
  * <a href="ClusterInvokeThreadLocal.java.html"><b><i>View Source</i></b></a>
@@ -23,16 +23,16 @@ import com.liferay.portal.kernel.util.InitialThreadLocal;
  */
 public class ClusterInvokeThreadLocal {
 
-	public static boolean isClusterInvoke() {
-		return _clusterInvoke.get();
+	public static boolean isEnabled() {
+		return _enabled.get();
 	}
 
-	public static void setClusterInvoke(boolean clusterInvoke) {
-		_clusterInvoke.set(clusterInvoke);
+	public static void setEnabled(boolean enabled) {
+		_enabled.set(enabled);
 	}
 
-	private static ThreadLocal<Boolean> _clusterInvoke =
-		new InitialThreadLocal<Boolean>(
-			ClusterInvokeThreadLocal.class.getName(), Boolean.FALSE);
+	private static ThreadLocal<Boolean> _enabled =
+		new AutoResetThreadLocal<Boolean>(
+			ClusterInvokeThreadLocal.class + "._enabled", true);
 
 }

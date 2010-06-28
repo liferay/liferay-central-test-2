@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.annotation;
+package com.liferay.portal.kernel.cluster;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -21,12 +21,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * <a href="Cluster.java.html"><b><i>View Source</i></b></a>
+ * <a href="Clusterable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface Cluster {
+public @interface Clusterable {
 }

@@ -34,6 +34,11 @@ import org.aopalliance.intercept.MethodInvocation;
 public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
 	extends ChainableMethodAdvice {
 
+	public AnnotationChainableMethodAdvice() {
+		_nullAnnotation = getNullAnnotation();
+		_annotationType = _nullAnnotation.annotationType();
+	}
+
 	public abstract T getNullAnnotation();
 
 	protected MethodTargetClassKey buildMethodTargetClassKey(
@@ -53,10 +58,10 @@ public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
 	}
 
 	protected T findAnnotation(MethodTargetClassKey methodTargetClassKey){
-		Annotation[] annotationArray = annotations.get(methodTargetClassKey);
+		Annotation[] annotations = _annotations.get(methodTargetClassKey);
 
-		if (annotationArray != null) {
-			return getAnnotation(annotationArray);
+		if (annotations != null) {
+			return getAnnotation(annotations);
 		}
 
 		Method method = methodTargetClassKey.getMethod();
@@ -64,38 +69,37 @@ public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
 		Method targetMethod = methodTargetClassKey.getTargetMethod();
 
 		if (targetMethod != null) {
-			annotationArray = targetMethod.getAnnotations();
+			annotations = targetMethod.getAnnotations();
 		}
 
-		if (annotationArray == null || annotationArray.length == 0) {
-			annotationArray = method.getAnnotations();
+		if ((annotations == null) || (annotations.length == 0)) {
+			annotations = method.getAnnotations();
 		}
 
-		if (annotationArray == null || annotationArray.length == 0) {
-			annotationArray = emptyAnnotations;
+		if ((annotations == null) || (annotations.length == 0)) {
+			annotations = _emptyAnnotations;
 		}
 
-		annotations.put(methodTargetClassKey, annotationArray);
+		_annotations.put(methodTargetClassKey, annotations);
 
-		return getAnnotation(annotationArray);
+		return getAnnotation(annotations);
 	}
 
-	protected T getAnnotation(Annotation[] annotationArray) {
-		for(Annotation annotation : annotationArray) {
-			if (annotation.annotationType() == annotationType) {
-				return (T) annotation;
+	protected T getAnnotation(Annotation[] annotations) {
+		for(Annotation annotation : annotations) {
+			if (annotation.annotationType() == _annotationType) {
+				return (T)annotation;
 			}
 		}
-		return nullAnnotation;
+
+		return _nullAnnotation;
 	}
 
-	protected static Map<MethodTargetClassKey, Annotation[]> annotations =
+	private static Map<MethodTargetClassKey, Annotation[]> _annotations =
 		new ConcurrentHashMap<MethodTargetClassKey, Annotation[]>();
+	private static Annotation[] _emptyAnnotations = new Annotation[0];
 
-	protected static Annotation[] emptyAnnotations = new Annotation[0];
-
-	protected T nullAnnotation = getNullAnnotation();
-	protected Class<? extends Annotation> annotationType =
-		nullAnnotation.annotationType();
+	private Class<? extends Annotation> _annotationType;
+	private T _nullAnnotation;
 
 }
