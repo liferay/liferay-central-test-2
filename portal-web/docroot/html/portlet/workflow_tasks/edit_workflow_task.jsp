@@ -302,7 +302,7 @@ long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getC
 					formName="fm1"
 					ratingsEnabled="<%= false %>"
 					redirect="<%= currentURL %>"
-					subject="<%= workflowTask.getName() %>"
+					subject="<%= LanguageUtil.get(pageContext, workflowTask.getName()) %>"
 					userId="<%= user.getUserId() %>"
 				/>
 			</liferay-ui:panel>
@@ -318,7 +318,7 @@ long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getC
 			/>
 
 			<div class="task-name">
-				<%= workflowTask.getName() %>
+				<%= LanguageUtil.get(pageContext, workflowTask.getName()) %>
 			</div>
 		</div>
 
