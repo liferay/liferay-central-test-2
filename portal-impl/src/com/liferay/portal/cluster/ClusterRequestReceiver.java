@@ -189,6 +189,7 @@ public class ClusterRequestReceiver extends BaseReceiver {
 
 			if (methodWrapper != null) {
 				try {
+					ClusterInvokeThreadLocal.setClusterInvoke(true);
 					Object returnValue = MethodInvoker.invoke(methodWrapper);
 
 					if (returnValue instanceof Serializable) {
@@ -202,6 +203,9 @@ public class ClusterRequestReceiver extends BaseReceiver {
 				}
 				catch (Exception e) {
 					clusterNodeResponse.setException(e);
+				}
+				finally {
+					ClusterInvokeThreadLocal.setClusterInvoke(false);
 				}
 			}
 			else {
