@@ -209,42 +209,16 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 				backURL = PortalUtil.getLayoutURL(refererLayout, themeDisplay);
 			}
 			else {
-				List<Group> myPlaces = user.getMyPlaces(1);
+				refererGroupDescriptiveName = themeDisplay.getAccount().getName();
+				backURL = themeDisplay.getURLHome();
+			}
 
-				if (myPlaces.isEmpty()) {
-					refererGroupDescriptiveName = themeDisplay.getAccount().getName();
-					backURL = themeDisplay.getURLHome();
-				}
-				else {
-					Group myPlace = myPlaces.get(0);
+			if (Validator.isNotNull(themeDisplay.getDoAsUserId())) {
+				backURL = HttpUtil.addParameter(backURL, "doAsUserId", themeDisplay.getDoAsUserId());
+			}
 
-					refererGroupDescriptiveName = myPlace.getDescriptiveName();
-
-					PortletURL portletURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid, PortletRequest.ACTION_PHASE);
-
-					portletURL.setWindowState(WindowState.NORMAL);
-					portletURL.setPortletMode(PortletMode.VIEW);
-
-					portletURL.setParameter("struts_action", "/my_places/view");
-					portletURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
-
-					if (myPlace.getPublicLayoutsPageCount() > 0) {
-						portletURL.setParameter("privateLayout", "0");
-					}
-					else {
-						portletURL.setParameter("privateLayout", "1");
-					}
-
-					backURL = portletURL.toString();
-				}
-
-				if (Validator.isNotNull(themeDisplay.getDoAsUserId())) {
-					backURL = HttpUtil.addParameter(backURL, "doAsUserId", themeDisplay.getDoAsUserId());
-				}
-
-				if (Validator.isNotNull(themeDisplay.getDoAsUserLanguageId())) {
-					backURL = HttpUtil.addParameter(backURL, "doAsUserLanguageId", themeDisplay.getDoAsUserLanguageId());
-				}
+			if (Validator.isNotNull(themeDisplay.getDoAsUserLanguageId())) {
+				backURL = HttpUtil.addParameter(backURL, "doAsUserLanguageId", themeDisplay.getDoAsUserLanguageId());
 			}
 			%>
 
