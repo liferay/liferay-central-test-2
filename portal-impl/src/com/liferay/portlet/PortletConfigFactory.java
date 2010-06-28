@@ -41,6 +41,10 @@ public class PortletConfigFactory {
 		_instance._destroy(portlet);
 	}
 
+	public static PortletConfig update(Portlet portlet) {
+		return _instance._update(portlet);
+	}
+
 	private PortletConfigFactory() {
 		_pool = new ConcurrentHashMap<String, Map<String, PortletConfig>>();
 	}
@@ -74,6 +78,22 @@ public class PortletConfigFactory {
 
 	private void _destroy(Portlet portlet) {
 		_pool.remove(portlet.getRootPortletId());
+	}
+
+	private PortletConfig _update(Portlet portlet) {
+		Map<String, PortletConfig> portletConfigs =
+			_pool.get(portlet.getRootPortletId());
+
+		PortletConfig portletConfig = portletConfigs.get(
+			portlet.getPortletId());
+
+		PortletContext portletContext = portletConfig.getPortletContext();
+
+		portletConfig = new PortletConfigImpl(portlet, portletContext);
+
+		portletConfigs.put(portlet.getPortletId(), portletConfig);
+
+		return portletConfig;
 	}
 
 	private static PortletConfigFactory _instance = new PortletConfigFactory();

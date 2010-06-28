@@ -58,6 +58,10 @@ public class PortletInstanceFactoryUtil {
 		_portletInstanceFactory = portletInstanceFactory;
 	}
 
+	public static void updatePortletConfig(Portlet portlet) {
+		getPortletInstanceFactory().updatePortletConfig(portlet);
+	}
+
 	private static PortletInstanceFactory _portletInstanceFactory;
 
 }

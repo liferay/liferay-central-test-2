@@ -34,4 +34,6 @@ public interface PortletInstanceFactory {
 
 	public void destroy(Portlet portlet);
 
+	public void updatePortletConfig(Portlet portlet);
+
 }

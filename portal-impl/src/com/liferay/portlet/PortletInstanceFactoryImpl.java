@@ -185,6 +185,10 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 		_internalInvokerPortletPrototype = internalInvokerPortletPrototype;
 	}
 
+	public void updatePortletConfig(Portlet portlet) {
+		PortletConfigFactory.update(portlet);
+	}
+
 	protected InvokerPortlet init(
 			Portlet portlet, PortletConfig portletConfig,
 			javax.portlet.Portlet portletInstance)
