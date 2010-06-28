@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -60,7 +61,9 @@ public class DLUtil {
 
 		DLFolder folder = fileEntry.getFolder();
 
-		addPortletBreadcrumbEntries(folder, request, renderResponse);
+		if(Validator.isNotNull(folder.getFolderId())) {
+			addPortletBreadcrumbEntries(folder, request, renderResponse);
+		}
 
 		PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -81,7 +84,9 @@ public class DLUtil {
 
 		DLFolder folder = fileShortcut.getFolder();
 
-		addPortletBreadcrumbEntries(folder, request, renderResponse);
+		if(Validator.isNotNull(folder.getFolderId())) {
+			addPortletBreadcrumbEntries(folder, request, renderResponse);
+		}
 
 		PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -102,7 +107,9 @@ public class DLUtil {
 		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
 
-			addPortletBreadcrumbEntries(folder, request, renderResponse);
+			if(Validator.isNotNull(folder.getFolderId())) {
+				addPortletBreadcrumbEntries(folder, request, renderResponse);
+			}
 		}
 	}
 
@@ -153,8 +160,10 @@ public class DLUtil {
 		portletURL.setParameter(
 			"folderId", String.valueOf(folder.getFolderId()));
 
-		PortalUtil.addPortletBreadcrumbEntry(
-			request, folder.getName(), portletURL.toString());
+		if(Validator.isNotNull(folder.getFolderId())){
+			PortalUtil.addPortletBreadcrumbEntry(
+				request, folder.getName(), portletURL.toString());
+		}
 	}
 
 	public static int compareVersions(String version1, String version2) {
