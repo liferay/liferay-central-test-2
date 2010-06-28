@@ -259,7 +259,7 @@ viewPagesURL.setParameter("struts_action", "/my_places/view");
 viewPagesURL.setParameter("groupId", String.valueOf(groupId));
 viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
-if (!portletName.equals(PortletKeys.GROUP_PAGES)) {
+if (!portletName.equals(PortletKeys.GROUP_PAGES) && !portletName.equals(PortletKeys.MY_PAGES)) {
 	if (organization != null) {
 		EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
 	}
