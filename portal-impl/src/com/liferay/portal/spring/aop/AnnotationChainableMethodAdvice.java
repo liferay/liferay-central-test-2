@@ -34,8 +34,6 @@ import org.aopalliance.intercept.MethodInvocation;
 public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
 	extends ChainableMethodAdvice {
 
-	public abstract Class<T> getAnnotationClass();
-
 	public abstract T getNullAnnotation();
 
 	protected MethodTargetClassKey buildMethodTargetClassKey(
@@ -55,36 +53,49 @@ public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
 	}
 
 	protected T findAnnotation(MethodTargetClassKey methodTargetClassKey){
-		T annotation = annotations.get(methodTargetClassKey);
+		Annotation[] annotationArray = annotations.get(methodTargetClassKey);
 
-		if (annotation != null) {
-			return annotation;
+		if (annotationArray != null) {
+			return getAnnotation(annotationArray);
 		}
 
 		Method method = methodTargetClassKey.getMethod();
 
 		Method targetMethod = methodTargetClassKey.getTargetMethod();
 
-		Class<T> annotationClass = getAnnotationClass();
-
 		if (targetMethod != null) {
-			annotation = targetMethod.getAnnotation(annotationClass);
+			annotationArray = targetMethod.getAnnotations();
 		}
 
-		if (annotation == null) {
-			annotation = method.getAnnotation(annotationClass);
+		if (annotationArray == null || annotationArray.length == 0) {
+			annotationArray = method.getAnnotations();
 		}
 
-		if (annotation == null) {
-			annotation = getNullAnnotation();
+		if (annotationArray == null || annotationArray.length == 0) {
+			annotationArray = emptyAnnotations;
 		}
 
-		annotations.put(methodTargetClassKey, annotation);
+		annotations.put(methodTargetClassKey, annotationArray);
 
-		return annotation;
+		return getAnnotation(annotationArray);
 	}
 
-	protected Map<MethodTargetClassKey, T> annotations =
-		new ConcurrentHashMap<MethodTargetClassKey, T>();
+	protected T getAnnotation(Annotation[] annotationArray) {
+		for(Annotation annotation : annotationArray) {
+			if (annotation.annotationType() == annotationType) {
+				return (T) annotation;
+			}
+		}
+		return nullAnnotation;
+	}
+
+	protected static Map<MethodTargetClassKey, Annotation[]> annotations =
+		new ConcurrentHashMap<MethodTargetClassKey, Annotation[]>();
+
+	protected static Annotation[] emptyAnnotations = new Annotation[0];
+
+	protected T nullAnnotation = getNullAnnotation();
+	protected Class<? extends Annotation> annotationType =
+		nullAnnotation.annotationType();
 
 }

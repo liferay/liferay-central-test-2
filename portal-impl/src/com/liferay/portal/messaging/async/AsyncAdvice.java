@@ -57,8 +57,6 @@ public class AsyncAdvice extends AnnotationChainableMethodAdvice<Async> {
 						" does not return void");
 			}
 
-			annotations.put(methodTargetClassKey, _nullAsync);
-
 			return null;
 		}
 
@@ -93,10 +91,6 @@ public class AsyncAdvice extends AnnotationChainableMethodAdvice<Async> {
 			});
 
 		return nullResult;
-	}
-
-	public Class<Async> getAnnotationClass() {
-		return Async.class;
 	}
 
 	public String getDefaultDestinationName() {

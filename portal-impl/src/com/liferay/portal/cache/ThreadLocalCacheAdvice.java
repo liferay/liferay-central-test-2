@@ -90,10 +90,6 @@ public class ThreadLocalCacheAdvice
 		return value;
 	}
 
-	public Class<ThreadLocalCachable> getAnnotationClass() {
-		return ThreadLocalCachable.class;
-	}
-
 	public ThreadLocalCachable getNullAnnotation() {
 		return _nullThreadLocalCacheable;
 	}

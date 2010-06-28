@@ -60,10 +60,6 @@ public class ClusterAdvice extends AnnotationChainableMethodAdvice<Cluster> {
 		ClusterExecutorUtil.execute(clusterRequest);
 	}
 
-	public Class<Cluster> getAnnotationClass() {
-		return Cluster.class;
-	}
-
 	public Cluster getNullAnnotation() {
 		return _nullCluster;
 	}
