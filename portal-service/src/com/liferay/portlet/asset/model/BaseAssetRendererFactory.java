@@ -32,17 +32,17 @@ import javax.portlet.PortletURL;
  */
 public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 
+	public AssetRenderer getAssetRenderer(long classPK)
+		throws PortalException, SystemException {
+
+		return getAssetRenderer(classPK, TYPE_LATEST_APPROVED);
+	}
+
 	@SuppressWarnings("unused")
 	public AssetRenderer getAssetRenderer(long groupId, String urlTitle)
 		throws PortalException, SystemException {
 
 		return null;
-	}
-
-	public AssetRenderer getAssetRenderer(long classPK)
-		throws PortalException, SystemException {
-
-		return getAssetRenderer(classPK, TYPE_LATEST_APPROVED);
 	}
 
 	public long getClassNameId() {
@@ -78,7 +78,7 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 	public void setPortletId(String portletId) {
 		_portletId = portletId;
 	}
-
+	
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/page.png";
 	}

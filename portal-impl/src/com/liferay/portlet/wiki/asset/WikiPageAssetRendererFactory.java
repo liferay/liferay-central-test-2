@@ -44,7 +44,7 @@ public class WikiPageAssetRendererFactory extends BaseAssetRendererFactory {
 	public AssetRenderer getAssetRenderer(long classPK, int type)
 		throws PortalException, SystemException {
 
-		WikiPage page;
+		WikiPage page = null;
 
 		if (type == TYPE_LATEST_APPROVED) {
 			page = WikiPageLocalServiceUtil.getPage(classPK);
