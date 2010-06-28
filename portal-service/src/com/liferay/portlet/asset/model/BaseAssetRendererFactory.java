@@ -78,7 +78,7 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 	public void setPortletId(String portletId) {
 		_portletId = portletId;
 	}
-	
+
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/page.png";
 	}
