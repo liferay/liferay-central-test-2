@@ -47,6 +47,15 @@ html = StringUtil.replace(html, "portlet-document-library", "portlet-workflow-ta
 	margin-top: 0;
 }
 
+.portlet-workflow-tasks #workflowTasksPanelContainer {
+	border-width: 0;
+}
+
+.portlet-workflow-tasks #myTasksPanel, .portlet-workflow-tasks #myRolesTasksPanel {
+	clear: both;
+	margin-bottom: 1.5em;
+}
+
 .portlet-workflow-tasks .task-activity {
 	padding: 5px 5px 5px 25px;
 }
