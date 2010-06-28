@@ -40,6 +40,11 @@
 				<%@ include file="/html/portlet/workflow_definitions/view_definitions.jspf" %>
 			</c:otherwise>
 		</c:choose>
+
+		<%
+		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, tabs1), currentURL);
+		%>
+
 	</c:when>
 	<c:otherwise>
 		<div class="portlet-msg-info">
@@ -47,7 +52,3 @@
 		</div>
 	</c:otherwise>
 </c:choose>
-
-<%
-PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, tabs1), currentURL);
-%>
