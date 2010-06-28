@@ -458,7 +458,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>48</portlet-name>
-		<icon>/html/icons/iframe.png</icon>
+		<icon>/html/icons/default.png</icon>
 		<struts-path>iframe</struts-path>
 		<configuration-action-class>com.liferay.portlet.iframe.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
