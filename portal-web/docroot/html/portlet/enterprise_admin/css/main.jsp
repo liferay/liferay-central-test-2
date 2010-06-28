@@ -140,6 +140,7 @@
 	color: #FFF;
 	display: block;
 	margin: 0 0 0 11px;
+	overflow: hidden;
 	padding: 2px 10px;
 	text-decoration: none;
 }
