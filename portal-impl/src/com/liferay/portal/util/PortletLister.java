@@ -182,8 +182,9 @@ public class PortletLister {
 				if (portletApp.isWARFile() &&
 					Validator.isNull(externalPortletCategory)) {
 
-					PortletConfig portletConfig = PortletConfigFactoryUtil.create(
-						portlet, _servletContext);
+					PortletConfig portletConfig =
+						PortletConfigFactoryUtil.create(
+							portlet, _servletContext);
 
 					ResourceBundle resourceBundle =
 						portletConfig.getResourceBundle(_user.getLocale());
