@@ -42,6 +42,7 @@ public class ClusterRequest implements Serializable {
 		clusterRequest.setClusterMessageType(clusterMessageType);
 		clusterRequest.setMulticast(true);
 		clusterRequest.setOriginatingClusterNode(originatingClusterNode);
+		clusterRequest.setSkipLocal(false);
 		clusterRequest.setUuid(PortalUUIDUtil.generate());
 
 		return clusterRequest;
@@ -49,12 +50,18 @@ public class ClusterRequest implements Serializable {
 
 	public static ClusterRequest createMulticastRequest(
 		MethodWrapper methodWrapper) {
+		return createMulticastRequest(methodWrapper, false);
+	}
+
+	public static ClusterRequest createMulticastRequest(
+		MethodWrapper methodWrapper, boolean skipLocal) {
 
 		ClusterRequest clusterRequest = new ClusterRequest();
 
 		clusterRequest.setClusterMessageType(ClusterMessageType.EXECUTE);
 		clusterRequest.setMethodWrapper(methodWrapper);
 		clusterRequest.setMulticast(true);
+		clusterRequest.setSkipLocal(skipLocal);
 		clusterRequest.setUuid(PortalUUIDUtil.generate());
 
 		return clusterRequest;
@@ -62,12 +69,18 @@ public class ClusterRequest implements Serializable {
 
 	public static ClusterRequest createMulticastRequest(
 		MethodWrapper methodWrapper, long timeOut) {
+		return createMulticastRequest(methodWrapper, timeOut, false);
+	}
+
+	public static ClusterRequest createMulticastRequest(
+		MethodWrapper methodWrapper, long timeOut, boolean skipLocal) {
 
 		ClusterRequest clusterRequest = new ClusterRequest();
 
 		clusterRequest.setClusterMessageType(ClusterMessageType.EXECUTE);
 		clusterRequest.setMethodWrapper(methodWrapper);
 		clusterRequest.setMulticast(true);
+		clusterRequest.setSkipLocal(skipLocal);
 		clusterRequest.setTimeOut(timeOut);
 		clusterRequest.setUuid(PortalUUIDUtil.generate());
 
@@ -84,6 +97,7 @@ public class ClusterRequest implements Serializable {
 		clusterRequest.setClusterMessageType(ClusterMessageType.EXECUTE);
 		clusterRequest.setMethodWrapper(methodWrapper);
 		clusterRequest.setMulticast(false);
+		clusterRequest.setSkipLocal(false);
 		clusterRequest.setTimeOut(timeOut);
 		clusterRequest.setUuid(PortalUUIDUtil.generate());
 
@@ -99,6 +113,7 @@ public class ClusterRequest implements Serializable {
 		clusterRequest.setClusterMessageType(ClusterMessageType.EXECUTE);
 		clusterRequest.setMethodWrapper(methodWrapper);
 		clusterRequest.setMulticast(false);
+		clusterRequest.setSkipLocal(false);
 		clusterRequest.setUuid(PortalUUIDUtil.generate());
 
 		return clusterRequest;
@@ -144,6 +159,10 @@ public class ClusterRequest implements Serializable {
 		return _multicast;
 	}
 
+	public boolean isSkipLocal() {
+		return _skipLocal;
+	}
+
 	public void setClusterMessageType(ClusterMessageType clusterMessageType) {
 		_clusterMessageType = clusterMessageType;
 	}
@@ -158,6 +177,10 @@ public class ClusterRequest implements Serializable {
 
 	public void setOriginatingClusterNode(ClusterNode originatingClusterNode) {
 		_originatingClusterNode = originatingClusterNode;
+	}
+
+	public void setSkipLocal(boolean skipLocal) {
+		_skipLocal = skipLocal;
 	}
 
 	public void setTimeOut(long timeOut) {
@@ -205,6 +228,7 @@ public class ClusterRequest implements Serializable {
 	private MethodWrapper _methodWrapper;
 	private boolean _multicast;
 	private ClusterNode _originatingClusterNode;
+	private boolean _skipLocal;
 	private Set<String> _targetClusterNodeIds;
 	private long _timeOut;
 	private TimeUnit _timeUnit = TimeUnit.MILLISECONDS;

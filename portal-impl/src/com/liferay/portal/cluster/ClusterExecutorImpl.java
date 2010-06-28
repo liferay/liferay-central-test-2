@@ -299,6 +299,10 @@ public class ClusterExecutorImpl
 
 		Address localControlAddress = getLocalControlAddress();
 
+		if (clusterRequest.isSkipLocal()) {
+			addresses.remove(localControlAddress);
+		}
+
 		FutureClusterResponses futureClusterResponses =
 			new FutureClusterResponses(addresses);
 

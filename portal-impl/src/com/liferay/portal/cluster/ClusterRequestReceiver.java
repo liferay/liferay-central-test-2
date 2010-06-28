@@ -278,6 +278,10 @@ public class ClusterRequestReceiver extends BaseReceiver {
 		if (message instanceof ClusterRequest) {
 			ClusterRequest clusterRequest = (ClusterRequest)message;
 
+			if (clusterRequest.isSkipLocal()) {
+				return true;
+			}
+
 			ClusterMessageType clusterMessageType =
 				clusterRequest.getClusterMessageType();
 
