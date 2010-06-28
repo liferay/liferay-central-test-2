@@ -151,3 +151,8 @@ request.setAttribute("edit_community_assignments.jsp-portletURL", portletURL);
 		['liferay-util-list-fields']
 	);
 </aui:script>
+
+<%
+PortalUtil.addPortletBreadcrumbEntry(request, HtmlUtil.escape(group.getDescriptiveName()), null);
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "assign-members"), currentURL);
+%>
