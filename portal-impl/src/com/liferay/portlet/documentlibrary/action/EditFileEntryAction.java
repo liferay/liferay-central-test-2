@@ -319,17 +319,6 @@ public class EditFileEntryAction extends PortletAction {
 
 			// Update file entry
 
-			DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-				groupId, folderId, name);
-
-			if (WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(
-					themeDisplay.getCompanyId(), groupId,
-					DLFileEntry.class.getName(), fileEntry.getFileEntryId())) {
-
-				serviceContext.setWorkflowAction(
-					WorkflowConstants.ACTION_SAVE_DRAFT);
-			}
-
 			DLFileEntryServiceUtil.updateFileEntry(
 				groupId, folderId, newFolderId, name, sourceFileName, title,
 				description, versionDescription, majorVersion, extraSettings,
