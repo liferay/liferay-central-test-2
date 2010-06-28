@@ -27,7 +27,6 @@ import com.liferay.util.servlet.ServletResponseUtil;
 import java.io.File;
 import java.io.IOException;
 
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -47,9 +46,9 @@ public class ComboServlet extends HttpServlet {
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException {
 
-		String[] modules = request.getParameterValues("m");
+		String[] modulePaths = request.getParameterValues("m");
 
-		if (modules.length == 0) {
+		if (modulePaths.length == 0) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 
 			return;
@@ -57,11 +56,11 @@ public class ComboServlet extends HttpServlet {
 
 		String minifierType = ParamUtil.getString(request, "minifierType");
 
-		int length = modules.length;
+		int length = modulePaths.length;
 
 		byte[][] bytesArray = new byte[length][];
 
-		for (String modulePath : modules) {
+		for (String modulePath : modulePaths) {
 			bytesArray[--length] = getFileContent(modulePath, minifierType);
 		}
 
