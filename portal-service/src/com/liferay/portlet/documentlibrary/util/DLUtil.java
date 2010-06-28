@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -61,7 +60,9 @@ public class DLUtil {
 
 		DLFolder folder = fileEntry.getFolder();
 
-		if (Validator.isNotNull(folder.getFolderId())) {
+		if (folder.getFolderId() !=
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+
 			addPortletBreadcrumbEntries(folder, request, renderResponse);
 		}
 
@@ -84,7 +85,9 @@ public class DLUtil {
 
 		DLFolder folder = fileShortcut.getFolder();
 
-		if (Validator.isNotNull(folder.getFolderId())) {
+		if (folder.getFolderId() !=
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+
 			addPortletBreadcrumbEntries(folder, request, renderResponse);
 		}
 
@@ -107,7 +110,9 @@ public class DLUtil {
 		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
 
-			if (Validator.isNotNull(folder.getFolderId())) {
+			if (folder.getFolderId() !=
+					DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+
 				addPortletBreadcrumbEntries(folder, request, renderResponse);
 			}
 		}
@@ -160,7 +165,9 @@ public class DLUtil {
 		portletURL.setParameter(
 			"folderId", String.valueOf(folder.getFolderId()));
 
-		if (Validator.isNotNull(folder.getFolderId())){
+		if (folder.getFolderId() !=
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+
 			PortalUtil.addPortletBreadcrumbEntry(
 				request, folder.getName(), portletURL.toString());
 		}

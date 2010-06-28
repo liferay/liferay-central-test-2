@@ -55,6 +55,7 @@ public class BookmarksUtil {
 
 		if (folder.getFolderId() !=
 				BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+
 			addPortletBreadcrumbEntries(folder, request, renderResponse);
 		}
 
@@ -126,8 +127,9 @@ public class BookmarksUtil {
 		portletURL.setParameter(
 			"folderId", String.valueOf(folder.getFolderId()));
 
-		if (folder.getFolderId()
-				!= BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+		if (folder.getFolderId() !=
+				BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+
 			PortalUtil.addPortletBreadcrumbEntry(
 				request, folder.getName(), portletURL.toString());
 		}
