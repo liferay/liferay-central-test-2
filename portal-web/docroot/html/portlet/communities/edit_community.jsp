@@ -62,7 +62,7 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 		</c:if>
 
 		<c:choose>
-			<c:when test="<%= group.getName().equals(GroupConstants.GUEST) %>">
+			<c:when test="<%= Validator.isNotNull(group) && group.getName().equals(GroupConstants.GUEST) %>">
 				<aui:input name="name" type="hidden" />
 			</c:when>
 			<c:otherwise>
