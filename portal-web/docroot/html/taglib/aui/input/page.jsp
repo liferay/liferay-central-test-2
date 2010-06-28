@@ -224,7 +224,7 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 		}
 		else {
 			if (type.equals("text") || type.equals("textarea")) {
-				valueString = ParamUtil.get(request, name, StringPool.BLANK);
+				valueString = ParamUtil.getString(request, name);
 			}
 		}
 
