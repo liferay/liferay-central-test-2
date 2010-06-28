@@ -619,6 +619,7 @@ public class ClusterExecutorImpl
 		clusterNodeResponse.setClusterNode(localClusterNode);
 
 		try {
+			ClusterInvokeThreadLocal.setClusterInvoke(true);
 			Object returnValue = MethodInvoker.invoke(methodWrapper);
 
 			if (returnValue instanceof Serializable) {
@@ -631,6 +632,9 @@ public class ClusterExecutorImpl
 		}
 		catch (Exception e) {
 			clusterNodeResponse.setException(e);
+		}
+		finally {
+			ClusterInvokeThreadLocal.setClusterInvoke(false);
 		}
 
 		return clusterNodeResponse;
