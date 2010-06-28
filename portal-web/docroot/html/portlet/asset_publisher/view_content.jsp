@@ -17,8 +17,6 @@
 <%@ include file="/html/portlet/asset_publisher/init.jsp" %>
 
 <%
-String redirect = ParamUtil.getString(request, "redirect");
-
 long assetEntryId = ParamUtil.getLong(request, "assetEntryId");
 String type = ParamUtil.getString(request, "type");
 long groupId = ParamUtil.getLong(request, "groupId", scopeGroupId);
@@ -76,12 +74,6 @@ try {
 	request.setAttribute("view.jsp-show", new Boolean(show));
 	request.setAttribute("view.jsp-print", new Boolean(print));
 %>
-
-	<c:if test="<%= !print %>">
-		<div class="asset-back-to">
-			&laquo; <a href="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"><liferay-ui:message key="back" /></a>
-		</div>
-	</c:if>
 
 	<div>
 		<liferay-util:include page="/html/portlet/asset_publisher/display/full_content.jsp" />

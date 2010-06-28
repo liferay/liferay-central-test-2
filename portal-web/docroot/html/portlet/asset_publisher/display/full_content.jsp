@@ -17,6 +17,8 @@
 <%@ include file="/html/portlet/asset_publisher/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 List results = (List)request.getAttribute("view.jsp-results");
 
 int assetEntryIndex = ((Integer)request.getAttribute("view.jsp-assetEntryIndex")).intValue();
@@ -34,6 +36,13 @@ request.setAttribute("view.jsp-showIconLabel", true);
 %>
 
 <c:if test="<%= assetRenderer.hasViewPermission(permissionChecker) %>">
+	<c:if test="<%= showAssetTitle %>">
+		<liferay-ui:header
+			backURL="<%= print ? null : redirect %>"
+			title="<%= title %>"
+		/>
+	</c:if>
+
 	<div class="asset-full-content <%= showAssetTitle ? "show-asset-title" : "no-title" %>">
 		<c:if test="<%= !print %>">
 			<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
@@ -106,10 +115,6 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 		viewFullContent = HttpUtil.setParameter(viewFullContent, "redirect", currentURL);
 		%>
-
-		<c:if test="<%= showAssetTitle %>">
-			<h3 class="asset-title"><img alt="" src="<%= assetRendererFactory.getIconPath(renderRequest) %>" /> <%= title %></h3>
-		</c:if>
 
 		<div class="asset-content">
 

@@ -35,6 +35,18 @@ html = StringUtil.replace(html, "portlet-document-library", "portlet-workflow-ta
 	font-weight: bold;
 }
 
+.portlet-workflow-tasks .asset-title .asset-actions img {
+	margin-left: 5px;
+}
+
+.portlet-workflow-tasks .asset-actions {
+	float: right;
+	font-size: 11px;
+	font-weight: normal;
+	margin-bottom: 3px;
+	margin-top: 0;
+}
+
 .portlet-workflow-tasks .task-activity {
 	padding: 5px 5px 5px 25px;
 }
