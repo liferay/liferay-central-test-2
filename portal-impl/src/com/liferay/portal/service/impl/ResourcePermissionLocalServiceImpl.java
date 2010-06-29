@@ -307,8 +307,12 @@ public class ResourcePermissionLocalServiceImpl
 			resourcePermissionPersistence.fetchByC_N_S_P_R(
 				companyId, name, scope, primKey, roleId);
 
+		long oldActionIds = 0;
+
 		if (resourcePermission == null) {
-			if (operator == ResourcePermissionConstants.OPERATOR_REMOVE) {
+			if ((operator == ResourcePermissionConstants.OPERATOR_REMOVE) ||
+				(actionIds.length == 0)) {
+
 				return;
 			}
 
@@ -323,6 +327,9 @@ public class ResourcePermissionLocalServiceImpl
 			resourcePermission.setScope(scope);
 			resourcePermission.setPrimKey(primKey);
 			resourcePermission.setRoleId(roleId);
+		}
+		else {
+			oldActionIds = resourcePermission.getActionIds();
 		}
 
 		long actionIdsLong = resourcePermission.getActionIds();
@@ -346,9 +353,18 @@ public class ResourcePermissionLocalServiceImpl
 			}
 		}
 
-		resourcePermission.setActionIds(actionIdsLong);
+		if (oldActionIds == actionIdsLong) {
+			return;
+		}
 
-		resourcePermissionPersistence.update(resourcePermission, false);
+		if (actionIdsLong == 0) {
+			resourcePermissionPersistence.remove(resourcePermission);
+		}
+		else {
+			resourcePermission.setActionIds(actionIdsLong);
+
+			resourcePermissionPersistence.update(resourcePermission, false);
+		}
 
 		PermissionCacheUtil.clearCache();
 
