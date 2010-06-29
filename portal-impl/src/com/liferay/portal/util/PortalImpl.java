@@ -222,6 +222,7 @@ import org.apache.struts.Globals;
  * @author Raymond Augé
  * @author Eduardo Lundgren
  * @author Wesley Gong
+ * @author Daeyoung Song
  */
 public class PortalImpl implements Portal {
 
@@ -586,6 +587,8 @@ public class PortalImpl implements Portal {
 				themeDisplay.getCompanyId(), layout.getGroupId(), 0,
 				rootPortletId, portletPrimaryKey, true, true, true);
 		}
+
+		addBaseModelResource(themeDisplay, layout, portlet);
 	}
 
 	public void clearRequestParameters(RenderRequest renderRequest) {
@@ -4113,6 +4116,47 @@ public class PortalImpl implements Portal {
 		request.setAttribute(WebKeys.WINDOW_STATE, windowState);
 
 		return windowState;
+	}
+
+	protected void addBaseModelResource(
+			ThemeDisplay themeDisplay, Layout layout, Portlet portlet)
+		throws PortalException, SystemException {
+
+		String rootPortletId = portlet.getRootPortletId();
+
+		String baseModelResource = ResourceActionsUtil.
+			getPortletBaseModelResource(rootPortletId);
+
+		if(baseModelResource == null) {
+			return;
+		}
+
+		String primaryKey = String.valueOf(layout.getGroupId());
+
+		try {
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+				int count =
+					ResourcePermissionLocalServiceUtil.
+						getResourcePermissionsCount(
+							themeDisplay.getCompanyId(), baseModelResource,
+							ResourceConstants.SCOPE_INDIVIDUAL,
+							primaryKey);
+
+				if (count == 0) {
+					throw new NoSuchResourceException();
+				}
+			}
+			else if (!portlet.isUndeployedPortlet()) {
+				ResourceLocalServiceUtil.getResource(
+					themeDisplay.getCompanyId(), baseModelResource,
+					ResourceConstants.SCOPE_INDIVIDUAL, primaryKey);
+			}
+		}
+		catch (NoSuchResourceException nsre) {
+			ResourceLocalServiceUtil.addResources(
+				themeDisplay.getCompanyId(), layout.getGroupId(), 0,
+				baseModelResource, primaryKey, false, true, true);
+		}
 	}
 
 	protected List<Portlet> filterControlPanelPortlets(
