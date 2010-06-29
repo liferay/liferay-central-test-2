@@ -541,14 +541,15 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 					category.getUuid(), context.getScopeGroupId());
 
 				if (existingCategory == null) {
+					serviceContext.setUuid(category.getUuid());
+
 					importedCategory = MBCategoryLocalServiceUtil.addCategory(
-						category.getUuid(), userId, parentCategoryId,
-						category.getName(), category.getDescription(),
-						emailAddress, inProtocol, inServerName, inServerPort,
-						inUseSSL, inUserName, inPassword, inReadInterval,
-						outEmailAddress, outCustom, outServerName,
-						outServerPort, outUseSSL, outUserName, outPassword,
-						mailingListActive, serviceContext);
+						userId, parentCategoryId, category.getName(),
+						category.getDescription(), emailAddress, inProtocol,
+						inServerName, inServerPort, inUseSSL, inUserName,
+						inPassword, inReadInterval, outEmailAddress, outCustom,
+						outServerName, outServerPort, outUseSSL, outUserName,
+						outPassword, mailingListActive, serviceContext);
 				}
 				else {
 					importedCategory =
@@ -708,10 +709,11 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 					message.getUuid(), context.getScopeGroupId());
 
 				if (existingMessage == null) {
+					serviceContext.setUuid(message.getUuid());
+
 					importedMessage = MBMessageLocalServiceUtil.addMessage(
-						message.getUuid(), userId, userName,
-						context.getScopeGroupId(), categoryId, threadId,
-						parentMessageId, message.getSubject(),
+						userId, userName, context.getScopeGroupId(), categoryId,
+						threadId, parentMessageId, message.getSubject(),
 						message.getBody(), files, message.getAnonymous(),
 						message.getPriority(), message.getAllowPingbacks(),
 						serviceContext);
