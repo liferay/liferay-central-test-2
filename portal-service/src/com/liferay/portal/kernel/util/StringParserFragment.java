@@ -52,14 +52,15 @@ public class StringParserFragment {
 		if (Validator.isNull(_name)) {
 			throw new IllegalArgumentException("Name is null");
 		}
-		
-		if (_name.substring(0,1).equals(StringPool.PERCENT)) {
-			_raw = true;
+
+		if (_name.startsWith(StringPool.PERCENT)) {
 			_name = _name.substring(1);
-			
+
 			if (Validator.isNull(_name)) {
 				throw new IllegalArgumentException("Name is null");
 			}
+
+			_raw = true;
 		}
 
 		_token = StringPool.OPEN_CURLY_BRACE.concat(_name).concat(
@@ -77,7 +78,7 @@ public class StringParserFragment {
 	public String getToken() {
 		return _token;
 	}
-	
+
 	public boolean isRaw() {
 		return _raw;
 	}
@@ -92,7 +93,7 @@ public class StringParserFragment {
 
 	private String _name;
 	private Pattern _pattern;
-	private boolean _raw = false;
+	private boolean _raw;
 	private String _token;
 
 }
