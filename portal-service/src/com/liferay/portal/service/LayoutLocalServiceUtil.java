@@ -294,6 +294,13 @@ public class LayoutLocalServiceUtil {
 		return getService().getLayout(groupId, privateLayout, layoutId);
 	}
 
+	public static com.liferay.portal.model.Layout getLayout(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getLayout(uuid, groupId);
+	}
+
 	public static com.liferay.portal.model.Layout getLayoutByIconImageId(
 		long iconImageId)
 		throws com.liferay.portal.kernel.exception.PortalException,
