@@ -121,6 +121,19 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException;
 
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_C(
+		long groupId, long[] categoryIds)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_C(
+		long groupId, long[] categoryIds, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_C(
+		long groupId, long[] categoryIds, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_NotC(
 		long groupId, long categoryId)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -278,6 +291,19 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException;
 
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_C_S(
+		long groupId, long[] categoryIds, int status)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_C_S(
+		long groupId, long[] categoryIds, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_C_S(
+		long groupId, long[] categoryIds, int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_NotC_S(
 		long groupId, long categoryId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -355,6 +381,9 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 	public int countByG_C(long groupId, long categoryId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int countByG_C(long groupId, long[] categoryIds)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByG_NotC(long groupId, long categoryId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -369,6 +398,9 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByG_C_S(long groupId, long categoryId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByG_C_S(long groupId, long[] categoryIds, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByG_NotC_S(long groupId, long categoryId, int status)

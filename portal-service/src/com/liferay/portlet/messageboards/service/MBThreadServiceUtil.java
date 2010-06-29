@@ -43,6 +43,25 @@ public class MBThreadServiceUtil {
 		getService().deleteThread(threadId);
 	}
 
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> getGroupThreads(
+		long groupId, long userId, int status, boolean subscribed,
+		boolean includeAnonymous, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getGroupThreads(groupId, userId, status, subscribed,
+			includeAnonymous, start, end);
+	}
+
+	public static int getGroupThreadsCount(long groupId, long userId,
+		int status, boolean subscribed, boolean includeAnonymous)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getGroupThreadsCount(groupId, userId, status, subscribed,
+			includeAnonymous);
+	}
+
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> getThreads(
 		long groupId, long categoryId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

@@ -798,6 +798,8 @@ Liferay.Service.registerClass(
 	Liferay.Service.MB, "MBThread",
 	{
 		deleteThread: true,
+		getGroupThreads: true,
+		getGroupThreadsCount: true,
 		getThreads: true,
 		getThreadsCount: true,
 		lockThread: true,

@@ -21,6 +21,7 @@ import com.liferay.portal.model.Lock;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.messageboards.LockedThreadException;
+import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBThreadModelImpl;
@@ -28,6 +29,8 @@ import com.liferay.portlet.messageboards.service.base.MBThreadServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission;
 import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -58,6 +61,99 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 		}
 
 		mbThreadLocalService.deleteThread(threadId);
+	}
+
+	public List<MBThread> getGroupThreads(
+			long groupId, long userId, int status, boolean subscribed,
+			boolean includeAnonymous, int start, int end)
+		throws PortalException, SystemException {
+
+		long[] categoryIds = mbCategoryService.getCategoryIds(
+			groupId, MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
+
+		if (categoryIds.length == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
+		if (userId <= 0) {
+			if (status == WorkflowConstants.STATUS_ANY) {
+				return mbThreadPersistence.findByG_C(
+					groupId, categoryIds, start, end);
+			}
+			else {
+				return mbThreadPersistence.findByG_C_S(
+					groupId, categoryIds, status, start, end);
+			}
+		}
+		else {
+			if (subscribed) {
+				return mbThreadFinder.findByS_G_U_S(
+					groupId, userId, status, start, end);
+			}
+			else {
+				List<Long> threadIds = null;
+
+				if (includeAnonymous) {
+					threadIds = mbMessageFinder.findByG_U_S(
+						groupId, userId, status, start, end);
+				}
+				else {
+					threadIds = mbMessageFinder.findByG_U_A_S(
+						groupId, userId, false, status, start, end);
+				}
+
+				List<MBThread> threads = new ArrayList<MBThread>(
+					threadIds.size());
+
+				for (long threadId : threadIds) {
+					MBThread thread = mbThreadPersistence.findByPrimaryKey(
+						threadId);
+
+					threads.add(thread);
+				}
+
+				return threads;
+			}
+		}
+	}
+
+	public int getGroupThreadsCount(
+			long groupId, long userId, int status, boolean subscribed,
+			boolean includeAnonymous)
+		throws PortalException, SystemException {
+
+		long[] categoryIds = mbCategoryService.getCategoryIds(
+			groupId, MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
+
+		if (categoryIds.length == 0) {
+			return 0;
+		}
+
+		if (userId <= 0) {
+			if (status == WorkflowConstants.STATUS_ANY) {
+				return mbThreadPersistence.countByG_C(
+					groupId, categoryIds);
+			}
+			else {
+				return mbThreadPersistence.countByG_C_S(
+					groupId, categoryIds, status);
+			}
+		}
+		else {
+			if (subscribed) {
+				return mbThreadFinder.countByS_G_U_S(groupId, userId, status);
+			}
+			else {
+				if (includeAnonymous) {
+					return mbMessageFinder.countByG_U_S(
+						groupId, userId, status);
+				}
+				else {
+					return mbMessageFinder.countByG_U_A_S(
+						groupId, userId, false, status);
+				}
+			}
+		}
 	}
 
 	public List<MBThread> getThreads(
