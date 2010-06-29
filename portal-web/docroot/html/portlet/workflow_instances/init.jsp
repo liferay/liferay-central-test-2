@@ -24,6 +24,8 @@
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowInstanceManagerUtil" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowLog" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowLogManagerUtil" %>
+<%@ page import="com.liferay.portal.kernel.workflow.WorkflowTask" %>
+<%@ page import="com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil" %>
 <%@ page import="com.liferay.portal.kernel.workflow.comparator.WorkflowComparatorFactoryUtil" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetEntry" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetRenderer" %>
@@ -33,4 +35,14 @@
 <%
 Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
+%>
+
+<%!
+private boolean _isWorkflowTaskAssignedToUser(WorkflowTask workflowTask, User user) {
+	if (workflowTask.getAssigneeUserId() == user.getUserId()) {
+		return true;
+	}
+
+	return false;
+}
 %>

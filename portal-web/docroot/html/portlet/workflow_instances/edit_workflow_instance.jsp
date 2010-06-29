@@ -126,6 +126,74 @@ long classPK = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.
 				</c:choose>
 			</liferay-ui:panel>
 
+			<liferay-ui:panel defaultState="open" title='<%= LanguageUtil.get(pageContext, "tasks") %>'>
+
+				<%
+				PortletURL portletURL = renderResponse.createRenderURL();
+				%>
+
+				<liferay-ui:search-container
+					searchContainer='<%= new SearchContainer(renderRequest, portletURL, null, "there-are-no-tasks") %>'
+				>
+					<liferay-ui:search-container-results
+						results="<%= WorkflowTaskManagerUtil.getWorkflowTasksByWorkflowInstance(company.getCompanyId(), workflowInstance.getWorkflowInstanceId(), null, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null) %>"
+					/>
+
+					<liferay-ui:search-container-row
+						className="com.liferay.portal.kernel.workflow.WorkflowTask"
+						modelVar="workflowTask"
+						stringKey="<%= true %>"
+					>
+						<liferay-ui:search-container-row-parameter
+							name="workflowTask"
+							value="<%= workflowTask %>"
+						/>
+
+						<liferay-ui:search-container-column-text
+							buffer="buffer"
+							name="task"
+						>
+
+							<%
+							buffer.append("<span class=\"task-name\" id=\"");
+							buffer.append(workflowTask.getWorkflowTaskId());
+							buffer.append("\">");
+							buffer.append(LanguageUtil.get(pageContext, workflowTask.getName()));
+							buffer.append("</span>");
+							%>
+
+						</liferay-ui:search-container-column-text>
+
+						<liferay-ui:search-container-column-text
+							buffer="buffer"
+							name="due-date"
+						>
+
+							<%
+							if (workflowTask.getDueDate() == null) {
+								buffer.append(LanguageUtil.get(pageContext, "never"));
+							}
+							else {
+								buffer.append(dateFormatDateTime.format(workflowTask.getDueDate()));
+							}
+							%>
+
+						</liferay-ui:search-container-column-text>
+
+						<liferay-ui:search-container-column-text
+							name="completed"
+							value='<%= workflowTask.isCompleted() ? LanguageUtil.get(pageContext, "yes") : LanguageUtil.get(pageContext, "no") %>'
+						/>
+
+						<liferay-ui:search-container-column-jsp
+							align="right"
+							path="/html/portlet/workflow_instances/workflow_task_action.jsp"
+						/>
+					</liferay-ui:search-container-row>
+					<liferay-ui:search-iterator />
+				</liferay-ui:search-container>
+			</liferay-ui:panel>
+
 			<liferay-ui:panel defaultState="closed" title='<%= LanguageUtil.get(pageContext, "activities") %>'>
 
 				<%
