@@ -103,31 +103,31 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByG_U",
 			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_G_E = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_G_NOTE = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
 			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByG_E",
+			FINDER_CLASS_NAME_LIST, "findByG_NotE",
 			new String[] {
 				Long.class.getName(), Integer.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_E = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_NOTE = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
 			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByG_E",
+			FINDER_CLASS_NAME_LIST, "countByG_NotE",
 			new String[] { Long.class.getName(), Integer.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_C_E = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_C_NOTE = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
 			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByC_E",
+			FINDER_CLASS_NAME_LIST, "findByC_NotE",
 			new String[] {
 				Long.class.getName(), Integer.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_C_E = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_NOTE = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
 			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByC_E",
+			FINDER_CLASS_NAME_LIST, "countByC_NotE",
 			new String[] { Long.class.getName(), Integer.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
 			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
@@ -1042,18 +1042,18 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		}
 	}
 
-	public List<BlogsStatsUser> findByG_E(long groupId, int entryCount)
+	public List<BlogsStatsUser> findByG_NotE(long groupId, int entryCount)
 		throws SystemException {
-		return findByG_E(groupId, entryCount, QueryUtil.ALL_POS,
+		return findByG_NotE(groupId, entryCount, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
-	public List<BlogsStatsUser> findByG_E(long groupId, int entryCount,
+	public List<BlogsStatsUser> findByG_NotE(long groupId, int entryCount,
 		int start, int end) throws SystemException {
-		return findByG_E(groupId, entryCount, start, end, null);
+		return findByG_NotE(groupId, entryCount, start, end, null);
 	}
 
-	public List<BlogsStatsUser> findByG_E(long groupId, int entryCount,
+	public List<BlogsStatsUser> findByG_NotE(long groupId, int entryCount,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1063,7 +1063,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 				String.valueOf(orderByComparator)
 			};
 
-		List<BlogsStatsUser> list = (List<BlogsStatsUser>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_E,
+		List<BlogsStatsUser> list = (List<BlogsStatsUser>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_NOTE,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1084,9 +1084,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 				query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
-				query.append(_FINDER_COLUMN_G_E_GROUPID_2);
+				query.append(_FINDER_COLUMN_G_NOTE_GROUPID_2);
 
-				query.append(_FINDER_COLUMN_G_E_ENTRYCOUNT_2);
+				query.append(_FINDER_COLUMN_G_NOTE_ENTRYCOUNT_2);
 
 				if (orderByComparator != null) {
 					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -1120,8 +1120,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_E, finderArgs,
-					list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_NOTE,
+					finderArgs, list);
 
 				closeSession(session);
 			}
@@ -1130,10 +1130,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		return list;
 	}
 
-	public BlogsStatsUser findByG_E_First(long groupId, int entryCount,
+	public BlogsStatsUser findByG_NotE_First(long groupId, int entryCount,
 		OrderByComparator orderByComparator)
 		throws NoSuchStatsUserException, SystemException {
-		List<BlogsStatsUser> list = findByG_E(groupId, entryCount, 0, 1,
+		List<BlogsStatsUser> list = findByG_NotE(groupId, entryCount, 0, 1,
 				orderByComparator);
 
 		if (list.isEmpty()) {
@@ -1156,13 +1156,13 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		}
 	}
 
-	public BlogsStatsUser findByG_E_Last(long groupId, int entryCount,
+	public BlogsStatsUser findByG_NotE_Last(long groupId, int entryCount,
 		OrderByComparator orderByComparator)
 		throws NoSuchStatsUserException, SystemException {
-		int count = countByG_E(groupId, entryCount);
+		int count = countByG_NotE(groupId, entryCount);
 
-		List<BlogsStatsUser> list = findByG_E(groupId, entryCount, count - 1,
-				count, orderByComparator);
+		List<BlogsStatsUser> list = findByG_NotE(groupId, entryCount,
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1184,7 +1184,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		}
 	}
 
-	public BlogsStatsUser[] findByG_E_PrevAndNext(long statsUserId,
+	public BlogsStatsUser[] findByG_NotE_PrevAndNext(long statsUserId,
 		long groupId, int entryCount, OrderByComparator orderByComparator)
 		throws NoSuchStatsUserException, SystemException {
 		BlogsStatsUser blogsStatsUser = findByPrimaryKey(statsUserId);
@@ -1196,13 +1196,13 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 			BlogsStatsUser[] array = new BlogsStatsUserImpl[3];
 
-			array[0] = getByG_E_PrevAndNext(session, blogsStatsUser, groupId,
-					entryCount, orderByComparator, true);
+			array[0] = getByG_NotE_PrevAndNext(session, blogsStatsUser,
+					groupId, entryCount, orderByComparator, true);
 
 			array[1] = blogsStatsUser;
 
-			array[2] = getByG_E_PrevAndNext(session, blogsStatsUser, groupId,
-					entryCount, orderByComparator, false);
+			array[2] = getByG_NotE_PrevAndNext(session, blogsStatsUser,
+					groupId, entryCount, orderByComparator, false);
 
 			return array;
 		}
@@ -1214,7 +1214,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		}
 	}
 
-	protected BlogsStatsUser getByG_E_PrevAndNext(Session session,
+	protected BlogsStatsUser getByG_NotE_PrevAndNext(Session session,
 		BlogsStatsUser blogsStatsUser, long groupId, int entryCount,
 		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
@@ -1229,9 +1229,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 		query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
-		query.append(_FINDER_COLUMN_G_E_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_NOTE_GROUPID_2);
 
-		query.append(_FINDER_COLUMN_G_E_ENTRYCOUNT_2);
+		query.append(_FINDER_COLUMN_G_NOTE_ENTRYCOUNT_2);
 
 		if (orderByComparator != null) {
 			String[] orderByFields = orderByComparator.getOrderByFields();
@@ -1322,18 +1322,18 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		}
 	}
 
-	public List<BlogsStatsUser> findByC_E(long companyId, int entryCount)
+	public List<BlogsStatsUser> findByC_NotE(long companyId, int entryCount)
 		throws SystemException {
-		return findByC_E(companyId, entryCount, QueryUtil.ALL_POS,
+		return findByC_NotE(companyId, entryCount, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
-	public List<BlogsStatsUser> findByC_E(long companyId, int entryCount,
+	public List<BlogsStatsUser> findByC_NotE(long companyId, int entryCount,
 		int start, int end) throws SystemException {
-		return findByC_E(companyId, entryCount, start, end, null);
+		return findByC_NotE(companyId, entryCount, start, end, null);
 	}
 
-	public List<BlogsStatsUser> findByC_E(long companyId, int entryCount,
+	public List<BlogsStatsUser> findByC_NotE(long companyId, int entryCount,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1343,7 +1343,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 				String.valueOf(orderByComparator)
 			};
 
-		List<BlogsStatsUser> list = (List<BlogsStatsUser>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_E,
+		List<BlogsStatsUser> list = (List<BlogsStatsUser>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_NOTE,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1364,9 +1364,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 				query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
-				query.append(_FINDER_COLUMN_C_E_COMPANYID_2);
+				query.append(_FINDER_COLUMN_C_NOTE_COMPANYID_2);
 
-				query.append(_FINDER_COLUMN_C_E_ENTRYCOUNT_2);
+				query.append(_FINDER_COLUMN_C_NOTE_ENTRYCOUNT_2);
 
 				if (orderByComparator != null) {
 					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -1400,8 +1400,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_E, finderArgs,
-					list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_NOTE,
+					finderArgs, list);
 
 				closeSession(session);
 			}
@@ -1410,10 +1410,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		return list;
 	}
 
-	public BlogsStatsUser findByC_E_First(long companyId, int entryCount,
+	public BlogsStatsUser findByC_NotE_First(long companyId, int entryCount,
 		OrderByComparator orderByComparator)
 		throws NoSuchStatsUserException, SystemException {
-		List<BlogsStatsUser> list = findByC_E(companyId, entryCount, 0, 1,
+		List<BlogsStatsUser> list = findByC_NotE(companyId, entryCount, 0, 1,
 				orderByComparator);
 
 		if (list.isEmpty()) {
@@ -1436,13 +1436,13 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		}
 	}
 
-	public BlogsStatsUser findByC_E_Last(long companyId, int entryCount,
+	public BlogsStatsUser findByC_NotE_Last(long companyId, int entryCount,
 		OrderByComparator orderByComparator)
 		throws NoSuchStatsUserException, SystemException {
-		int count = countByC_E(companyId, entryCount);
+		int count = countByC_NotE(companyId, entryCount);
 
-		List<BlogsStatsUser> list = findByC_E(companyId, entryCount, count - 1,
-				count, orderByComparator);
+		List<BlogsStatsUser> list = findByC_NotE(companyId, entryCount,
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1464,7 +1464,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		}
 	}
 
-	public BlogsStatsUser[] findByC_E_PrevAndNext(long statsUserId,
+	public BlogsStatsUser[] findByC_NotE_PrevAndNext(long statsUserId,
 		long companyId, int entryCount, OrderByComparator orderByComparator)
 		throws NoSuchStatsUserException, SystemException {
 		BlogsStatsUser blogsStatsUser = findByPrimaryKey(statsUserId);
@@ -1476,13 +1476,13 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 			BlogsStatsUser[] array = new BlogsStatsUserImpl[3];
 
-			array[0] = getByC_E_PrevAndNext(session, blogsStatsUser, companyId,
-					entryCount, orderByComparator, true);
+			array[0] = getByC_NotE_PrevAndNext(session, blogsStatsUser,
+					companyId, entryCount, orderByComparator, true);
 
 			array[1] = blogsStatsUser;
 
-			array[2] = getByC_E_PrevAndNext(session, blogsStatsUser, companyId,
-					entryCount, orderByComparator, false);
+			array[2] = getByC_NotE_PrevAndNext(session, blogsStatsUser,
+					companyId, entryCount, orderByComparator, false);
 
 			return array;
 		}
@@ -1494,7 +1494,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		}
 	}
 
-	protected BlogsStatsUser getByC_E_PrevAndNext(Session session,
+	protected BlogsStatsUser getByC_NotE_PrevAndNext(Session session,
 		BlogsStatsUser blogsStatsUser, long companyId, int entryCount,
 		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
@@ -1509,9 +1509,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 		query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
-		query.append(_FINDER_COLUMN_C_E_COMPANYID_2);
+		query.append(_FINDER_COLUMN_C_NOTE_COMPANYID_2);
 
-		query.append(_FINDER_COLUMN_C_E_ENTRYCOUNT_2);
+		query.append(_FINDER_COLUMN_C_NOTE_ENTRYCOUNT_2);
 
 		if (orderByComparator != null) {
 			String[] orderByFields = orderByComparator.getOrderByFields();
@@ -1696,16 +1696,16 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		remove(blogsStatsUser);
 	}
 
-	public void removeByG_E(long groupId, int entryCount)
+	public void removeByG_NotE(long groupId, int entryCount)
 		throws SystemException {
-		for (BlogsStatsUser blogsStatsUser : findByG_E(groupId, entryCount)) {
+		for (BlogsStatsUser blogsStatsUser : findByG_NotE(groupId, entryCount)) {
 			remove(blogsStatsUser);
 		}
 	}
 
-	public void removeByC_E(long companyId, int entryCount)
+	public void removeByC_NotE(long companyId, int entryCount)
 		throws SystemException {
-		for (BlogsStatsUser blogsStatsUser : findByC_E(companyId, entryCount)) {
+		for (BlogsStatsUser blogsStatsUser : findByC_NotE(companyId, entryCount)) {
 			remove(blogsStatsUser);
 		}
 	}
@@ -1858,11 +1858,11 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		return count.intValue();
 	}
 
-	public int countByG_E(long groupId, int entryCount)
+	public int countByG_NotE(long groupId, int entryCount)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, entryCount };
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_E,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_NOTE,
 				finderArgs, this);
 
 		if (count == null) {
@@ -1875,9 +1875,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 				query.append(_SQL_COUNT_BLOGSSTATSUSER_WHERE);
 
-				query.append(_FINDER_COLUMN_G_E_GROUPID_2);
+				query.append(_FINDER_COLUMN_G_NOTE_GROUPID_2);
 
-				query.append(_FINDER_COLUMN_G_E_ENTRYCOUNT_2);
+				query.append(_FINDER_COLUMN_G_NOTE_ENTRYCOUNT_2);
 
 				String sql = query.toString();
 
@@ -1899,8 +1899,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_E, finderArgs,
-					count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_NOTE,
+					finderArgs, count);
 
 				closeSession(session);
 			}
@@ -1909,11 +1909,11 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		return count.intValue();
 	}
 
-	public int countByC_E(long companyId, int entryCount)
+	public int countByC_NotE(long companyId, int entryCount)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, entryCount };
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_E,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_NOTE,
 				finderArgs, this);
 
 		if (count == null) {
@@ -1926,9 +1926,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 				query.append(_SQL_COUNT_BLOGSSTATSUSER_WHERE);
 
-				query.append(_FINDER_COLUMN_C_E_COMPANYID_2);
+				query.append(_FINDER_COLUMN_C_NOTE_COMPANYID_2);
 
-				query.append(_FINDER_COLUMN_C_E_ENTRYCOUNT_2);
+				query.append(_FINDER_COLUMN_C_NOTE_ENTRYCOUNT_2);
 
 				String sql = query.toString();
 
@@ -1950,8 +1950,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_E, finderArgs,
-					count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_NOTE,
+					finderArgs, count);
 
 				closeSession(session);
 			}
@@ -2034,10 +2034,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	private static final String _FINDER_COLUMN_USERID_USERID_2 = "blogsStatsUser.userId = ?";
 	private static final String _FINDER_COLUMN_G_U_GROUPID_2 = "blogsStatsUser.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_U_USERID_2 = "blogsStatsUser.userId = ?";
-	private static final String _FINDER_COLUMN_G_E_GROUPID_2 = "blogsStatsUser.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_E_ENTRYCOUNT_2 = "blogsStatsUser.entryCount != ?";
-	private static final String _FINDER_COLUMN_C_E_COMPANYID_2 = "blogsStatsUser.companyId = ? AND ";
-	private static final String _FINDER_COLUMN_C_E_ENTRYCOUNT_2 = "blogsStatsUser.entryCount != ?";
+	private static final String _FINDER_COLUMN_G_NOTE_GROUPID_2 = "blogsStatsUser.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_NOTE_ENTRYCOUNT_2 = "blogsStatsUser.entryCount != ?";
+	private static final String _FINDER_COLUMN_C_NOTE_COMPANYID_2 = "blogsStatsUser.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_NOTE_ENTRYCOUNT_2 = "blogsStatsUser.entryCount != ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "blogsStatsUser.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No BlogsStatsUser exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No BlogsStatsUser exists with the key {";

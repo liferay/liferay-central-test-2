@@ -428,7 +428,7 @@
 
 		<!-- Finder methods -->
 
-		<finder name="Size" return-type="Collection">
+		<finder name="LtSize" return-type="Collection">
 			<finder-column name="size" comparator="&lt;" />
 		</finder>
 
@@ -671,7 +671,7 @@
 
 		<!-- Finder methods -->
 
-		<finder name="ExpirationDate" return-type="Collection">
+		<finder name="LtExpirationDate" return-type="Collection">
 			<finder-column name="expirationDate" comparator="&lt;" />
 		</finder>
 		<finder name="C_K" return-type="Lock">

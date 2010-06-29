@@ -66,18 +66,18 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 	public static final String FINDER_CLASS_NAME_ENTITY = ImageImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
-	public static final FinderPath FINDER_PATH_FIND_BY_SIZE = new FinderPath(ImageModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_LTSIZE = new FinderPath(ImageModelImpl.ENTITY_CACHE_ENABLED,
 			ImageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findBySize",
+			"findByLtSize",
 			new String[] {
 				Integer.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_SIZE = new FinderPath(ImageModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_LTSIZE = new FinderPath(ImageModelImpl.ENTITY_CACHE_ENABLED,
 			ImageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countBySize", new String[] { Integer.class.getName() });
+			"countByLtSize", new String[] { Integer.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(ImageModelImpl.ENTITY_CACHE_ENABLED,
 			ImageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findAll", new String[0]);
@@ -294,16 +294,16 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		return image;
 	}
 
-	public List<Image> findBySize(int size) throws SystemException {
-		return findBySize(size, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<Image> findByLtSize(int size) throws SystemException {
+		return findByLtSize(size, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<Image> findBySize(int size, int start, int end)
+	public List<Image> findByLtSize(int size, int start, int end)
 		throws SystemException {
-		return findBySize(size, start, end, null);
+		return findByLtSize(size, start, end, null);
 	}
 
-	public List<Image> findBySize(int size, int start, int end,
+	public List<Image> findByLtSize(int size, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				size,
@@ -312,7 +312,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Image> list = (List<Image>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_SIZE,
+		List<Image> list = (List<Image>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_LTSIZE,
 				finderArgs, this);
 
 		if (list == null) {
@@ -333,7 +333,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 
 				query.append(_SQL_SELECT_IMAGE_WHERE);
 
-				query.append(_FINDER_COLUMN_SIZE_SIZE_2);
+				query.append(_FINDER_COLUMN_LTSIZE_SIZE_2);
 
 				if (orderByComparator != null) {
 					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -364,8 +364,8 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_SIZE, finderArgs,
-					list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_LTSIZE,
+					finderArgs, list);
 
 				closeSession(session);
 			}
@@ -374,9 +374,10 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		return list;
 	}
 
-	public Image findBySize_First(int size, OrderByComparator orderByComparator)
+	public Image findByLtSize_First(int size,
+		OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
-		List<Image> list = findBySize(size, 0, 1, orderByComparator);
+		List<Image> list = findByLtSize(size, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -395,11 +396,12 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		}
 	}
 
-	public Image findBySize_Last(int size, OrderByComparator orderByComparator)
+	public Image findByLtSize_Last(int size, OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
-		int count = countBySize(size);
+		int count = countByLtSize(size);
 
-		List<Image> list = findBySize(size, count - 1, count, orderByComparator);
+		List<Image> list = findByLtSize(size, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -418,7 +420,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		}
 	}
 
-	public Image[] findBySize_PrevAndNext(long imageId, int size,
+	public Image[] findByLtSize_PrevAndNext(long imageId, int size,
 		OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
 		Image image = findByPrimaryKey(imageId);
@@ -430,12 +432,12 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 
 			Image[] array = new ImageImpl[3];
 
-			array[0] = getBySize_PrevAndNext(session, image, size,
+			array[0] = getByLtSize_PrevAndNext(session, image, size,
 					orderByComparator, true);
 
 			array[1] = image;
 
-			array[2] = getBySize_PrevAndNext(session, image, size,
+			array[2] = getByLtSize_PrevAndNext(session, image, size,
 					orderByComparator, false);
 
 			return array;
@@ -448,7 +450,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		}
 	}
 
-	protected Image getBySize_PrevAndNext(Session session, Image image,
+	protected Image getByLtSize_PrevAndNext(Session session, Image image,
 		int size, OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -462,7 +464,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 
 		query.append(_SQL_SELECT_IMAGE_WHERE);
 
-		query.append(_FINDER_COLUMN_SIZE_SIZE_2);
+		query.append(_FINDER_COLUMN_LTSIZE_SIZE_2);
 
 		if (orderByComparator != null) {
 			String[] orderByFields = orderByComparator.getOrderByFields();
@@ -625,8 +627,8 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		return list;
 	}
 
-	public void removeBySize(int size) throws SystemException {
-		for (Image image : findBySize(size)) {
+	public void removeByLtSize(int size) throws SystemException {
+		for (Image image : findByLtSize(size)) {
 			remove(image);
 		}
 	}
@@ -637,10 +639,10 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		}
 	}
 
-	public int countBySize(int size) throws SystemException {
+	public int countByLtSize(int size) throws SystemException {
 		Object[] finderArgs = new Object[] { size };
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_SIZE,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_LTSIZE,
 				finderArgs, this);
 
 		if (count == null) {
@@ -653,7 +655,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 
 				query.append(_SQL_COUNT_IMAGE_WHERE);
 
-				query.append(_FINDER_COLUMN_SIZE_SIZE_2);
+				query.append(_FINDER_COLUMN_LTSIZE_SIZE_2);
 
 				String sql = query.toString();
 
@@ -673,7 +675,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_SIZE,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_LTSIZE,
 					finderArgs, count);
 
 				closeSession(session);
@@ -851,7 +853,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 	private static final String _SQL_SELECT_IMAGE_WHERE = "SELECT image FROM Image image WHERE ";
 	private static final String _SQL_COUNT_IMAGE = "SELECT COUNT(image) FROM Image image";
 	private static final String _SQL_COUNT_IMAGE_WHERE = "SELECT COUNT(image) FROM Image image WHERE ";
-	private static final String _FINDER_COLUMN_SIZE_SIZE_2 = "image.size < ?";
+	private static final String _FINDER_COLUMN_LTSIZE_SIZE_2 = "image.size < ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "image.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Image exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Image exists with the key {";

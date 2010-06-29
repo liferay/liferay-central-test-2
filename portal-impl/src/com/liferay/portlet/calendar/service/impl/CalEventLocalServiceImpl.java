@@ -298,7 +298,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	}
 
 	public void checkEvents() throws PortalException, SystemException {
-		Iterator<CalEvent> itr = calEventPersistence.findByRemindBy(
+		Iterator<CalEvent> itr = calEventPersistence.findByNotRemindBy(
 			CalEventConstants.REMIND_BY_NONE).iterator();
 
 		while (itr.hasNext()) {

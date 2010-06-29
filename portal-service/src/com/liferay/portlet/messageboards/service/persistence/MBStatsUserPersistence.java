@@ -134,32 +134,32 @@ public interface MBStatsUserPersistence extends BasePersistence<MBStatsUser> {
 		long groupId, long userId, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByG_M(
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByG_NotM(
 		long groupId, int messageCount)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByG_M(
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByG_NotM(
 		long groupId, int messageCount, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByG_M(
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByG_NotM(
 		long groupId, int messageCount, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.messageboards.model.MBStatsUser findByG_M_First(
+	public com.liferay.portlet.messageboards.model.MBStatsUser findByG_NotM_First(
 		long groupId, int messageCount,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchStatsUserException;
 
-	public com.liferay.portlet.messageboards.model.MBStatsUser findByG_M_Last(
+	public com.liferay.portlet.messageboards.model.MBStatsUser findByG_NotM_Last(
 		long groupId, int messageCount,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchStatsUserException;
 
-	public com.liferay.portlet.messageboards.model.MBStatsUser[] findByG_M_PrevAndNext(
+	public com.liferay.portlet.messageboards.model.MBStatsUser[] findByG_NotM_PrevAndNext(
 		long statsUserId, long groupId, int messageCount,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -187,7 +187,7 @@ public interface MBStatsUserPersistence extends BasePersistence<MBStatsUser> {
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchStatsUserException;
 
-	public void removeByG_M(long groupId, int messageCount)
+	public void removeByG_NotM(long groupId, int messageCount)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeAll()
@@ -202,7 +202,7 @@ public interface MBStatsUserPersistence extends BasePersistence<MBStatsUser> {
 	public int countByG_U(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByG_M(long groupId, int messageCount)
+	public int countByG_NotM(long groupId, int messageCount)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()

@@ -176,32 +176,32 @@ public interface CalEventPersistence extends BasePersistence<CalEvent> {
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByRemindBy(
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByNotRemindBy(
 		int remindBy)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByRemindBy(
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByNotRemindBy(
 		int remindBy, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByRemindBy(
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByNotRemindBy(
 		int remindBy, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.calendar.model.CalEvent findByRemindBy_First(
+	public com.liferay.portlet.calendar.model.CalEvent findByNotRemindBy_First(
 		int remindBy,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
-	public com.liferay.portlet.calendar.model.CalEvent findByRemindBy_Last(
+	public com.liferay.portlet.calendar.model.CalEvent findByNotRemindBy_Last(
 		int remindBy,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
-	public com.liferay.portlet.calendar.model.CalEvent[] findByRemindBy_PrevAndNext(
+	public com.liferay.portlet.calendar.model.CalEvent[] findByNotRemindBy_PrevAndNext(
 		long eventId, int remindBy,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -320,7 +320,7 @@ public interface CalEventPersistence extends BasePersistence<CalEvent> {
 	public void removeByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void removeByRemindBy(int remindBy)
+	public void removeByNotRemindBy(int remindBy)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByG_T(long groupId, java.lang.String type)
@@ -347,7 +347,7 @@ public interface CalEventPersistence extends BasePersistence<CalEvent> {
 	public int filterCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByRemindBy(int remindBy)
+	public int countByNotRemindBy(int remindBy)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByG_T(long groupId, java.lang.String type)

@@ -145,45 +145,45 @@ public class ImageUtil {
 		return getPersistence().fetchByPrimaryKey(imageId);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Image> findBySize(
+	public static java.util.List<com.liferay.portal.model.Image> findByLtSize(
 		int size) throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findBySize(size);
+		return getPersistence().findByLtSize(size);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Image> findBySize(
+	public static java.util.List<com.liferay.portal.model.Image> findByLtSize(
 		int size, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findBySize(size, start, end);
+		return getPersistence().findByLtSize(size, start, end);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Image> findBySize(
+	public static java.util.List<com.liferay.portal.model.Image> findByLtSize(
 		int size, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findBySize(size, start, end, orderByComparator);
+		return getPersistence().findByLtSize(size, start, end, orderByComparator);
 	}
 
-	public static com.liferay.portal.model.Image findBySize_First(int size,
+	public static com.liferay.portal.model.Image findByLtSize_First(int size,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchImageException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findBySize_First(size, orderByComparator);
+		return getPersistence().findByLtSize_First(size, orderByComparator);
 	}
 
-	public static com.liferay.portal.model.Image findBySize_Last(int size,
+	public static com.liferay.portal.model.Image findByLtSize_Last(int size,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchImageException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findBySize_Last(size, orderByComparator);
+		return getPersistence().findByLtSize_Last(size, orderByComparator);
 	}
 
-	public static com.liferay.portal.model.Image[] findBySize_PrevAndNext(
+	public static com.liferay.portal.model.Image[] findByLtSize_PrevAndNext(
 		long imageId, int size,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchImageException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findBySize_PrevAndNext(imageId, size, orderByComparator);
+				   .findByLtSize_PrevAndNext(imageId, size, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Image> findAll()
@@ -204,9 +204,9 @@ public class ImageUtil {
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
-	public static void removeBySize(int size)
+	public static void removeByLtSize(int size)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeBySize(size);
+		getPersistence().removeByLtSize(size);
 	}
 
 	public static void removeAll()
@@ -214,9 +214,9 @@ public class ImageUtil {
 		getPersistence().removeAll();
 	}
 
-	public static int countBySize(int size)
+	public static int countByLtSize(int size)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countBySize(size);
+		return getPersistence().countByLtSize(size);
 	}
 
 	public static int countAll()

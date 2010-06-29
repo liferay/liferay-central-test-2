@@ -292,11 +292,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		throws SystemException {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
-			return blogsEntryPersistence.findByC_D(
+			return blogsEntryPersistence.findByC_LtD(
 				companyId, new Date(), start, end);
 		}
 		else {
-			return blogsEntryPersistence.findByC_D_S(
+			return blogsEntryPersistence.findByC_LtD_S(
 				companyId, new Date(), status, start, end);
 		}
 	}
@@ -307,11 +307,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		throws SystemException {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
-			return blogsEntryPersistence.findByC_D(
+			return blogsEntryPersistence.findByC_LtD(
 				companyId, new Date(), start, end, obc);
 		}
 		else {
-			return blogsEntryPersistence.findByC_D_S(
+			return blogsEntryPersistence.findByC_LtD_S(
 				companyId, new Date(), status, start, end, obc);
 		}
 	}
@@ -320,11 +320,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		throws SystemException {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
-			return blogsEntryPersistence.countByC_D(
+			return blogsEntryPersistence.countByC_LtD(
 				companyId, new Date());
 		}
 		else {
-			return blogsEntryPersistence.countByC_D_S(
+			return blogsEntryPersistence.countByC_LtD_S(
 				companyId, new Date(), status);
 		}
 	}
@@ -357,11 +357,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		throws SystemException {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
-			return blogsEntryPersistence.findByG_D(
+			return blogsEntryPersistence.findByG_LtD(
 				groupId, new Date(), start, end);
 		}
 		else {
-			return blogsEntryPersistence.findByG_D_S(
+			return blogsEntryPersistence.findByG_LtD_S(
 				groupId, new Date(), status, start, end);
 		}
 	}
@@ -371,11 +371,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		throws SystemException {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
-			return blogsEntryPersistence.findByG_D(
+			return blogsEntryPersistence.findByG_LtD(
 				groupId, new Date(), start, end, obc);
 		}
 		else {
-			return blogsEntryPersistence.findByG_D_S(
+			return blogsEntryPersistence.findByG_LtD_S(
 				groupId, new Date(), status, start, end, obc);
 		}
 	}
@@ -384,10 +384,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		throws SystemException {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
-			return blogsEntryPersistence.countByG_D(groupId, new Date());
+			return blogsEntryPersistence.countByG_LtD(groupId, new Date());
 		}
 		else {
-			return blogsEntryPersistence.countByG_D_S(
+			return blogsEntryPersistence.countByG_LtD_S(
 				groupId, new Date(), status);
 		}
 	}
@@ -405,11 +405,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		throws SystemException {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
-			return blogsEntryPersistence.findByG_U_D(
+			return blogsEntryPersistence.findByG_U_LtD(
 				groupId, userId, new Date(), start, end);
 		}
 		else {
-			return blogsEntryPersistence.findByG_U_D_S(
+			return blogsEntryPersistence.findByG_U_LtD_S(
 				groupId, userId, new Date(), status, start, end);
 		}
 	}
@@ -420,11 +420,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		throws SystemException {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
-			return blogsEntryPersistence.findByG_U_D(
+			return blogsEntryPersistence.findByG_U_LtD(
 				groupId, userId, new Date(), start, end, obc);
 		}
 		else {
-			return blogsEntryPersistence.findByG_U_D_S(
+			return blogsEntryPersistence.findByG_U_LtD_S(
 				groupId, userId, new Date(), status, start, end, obc);
 		}
 	}
@@ -433,11 +433,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		throws SystemException {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
-			return blogsEntryPersistence.countByG_U_D(
+			return blogsEntryPersistence.countByG_U_LtD(
 				groupId, userId, new Date());
 		}
 		else {
-			return blogsEntryPersistence.countByG_U_D_S(
+			return blogsEntryPersistence.countByG_U_LtD_S(
 				groupId, userId, new Date(), status);
 		}
 	}

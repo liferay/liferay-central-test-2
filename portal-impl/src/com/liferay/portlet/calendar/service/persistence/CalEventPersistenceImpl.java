@@ -123,18 +123,18 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
 			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByGroupId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_REMINDBY = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_NOTREMINDBY = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
 			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByRemindBy",
+			"findByNotRemindBy",
 			new String[] {
 				Integer.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_REMINDBY = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_NOTREMINDBY = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
 			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByRemindBy", new String[] { Integer.class.getName() });
+			"countByNotRemindBy", new String[] { Integer.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_G_T = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
 			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByG_T",
@@ -1452,18 +1452,18 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 	}
 
-	public List<CalEvent> findByRemindBy(int remindBy)
+	public List<CalEvent> findByNotRemindBy(int remindBy)
 		throws SystemException {
-		return findByRemindBy(remindBy, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			null);
+		return findByNotRemindBy(remindBy, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
-	public List<CalEvent> findByRemindBy(int remindBy, int start, int end)
+	public List<CalEvent> findByNotRemindBy(int remindBy, int start, int end)
 		throws SystemException {
-		return findByRemindBy(remindBy, start, end, null);
+		return findByNotRemindBy(remindBy, start, end, null);
 	}
 
-	public List<CalEvent> findByRemindBy(int remindBy, int start, int end,
+	public List<CalEvent> findByNotRemindBy(int remindBy, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				remindBy,
@@ -1472,7 +1472,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				String.valueOf(orderByComparator)
 			};
 
-		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_REMINDBY,
+		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_NOTREMINDBY,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1493,7 +1493,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
-				query.append(_FINDER_COLUMN_REMINDBY_REMINDBY_2);
+				query.append(_FINDER_COLUMN_NOTREMINDBY_REMINDBY_2);
 
 				if (orderByComparator != null) {
 					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -1525,7 +1525,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_REMINDBY,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_NOTREMINDBY,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1535,34 +1535,10 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		return list;
 	}
 
-	public CalEvent findByRemindBy_First(int remindBy,
+	public CalEvent findByNotRemindBy_First(int remindBy,
 		OrderByComparator orderByComparator)
 		throws NoSuchEventException, SystemException {
-		List<CalEvent> list = findByRemindBy(remindBy, 0, 1, orderByComparator);
-
-		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(4);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("remindBy=");
-			msg.append(remindBy);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchEventException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public CalEvent findByRemindBy_Last(int remindBy,
-		OrderByComparator orderByComparator)
-		throws NoSuchEventException, SystemException {
-		int count = countByRemindBy(remindBy);
-
-		List<CalEvent> list = findByRemindBy(remindBy, count - 1, count,
+		List<CalEvent> list = findByNotRemindBy(remindBy, 0, 1,
 				orderByComparator);
 
 		if (list.isEmpty()) {
@@ -1582,7 +1558,32 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 	}
 
-	public CalEvent[] findByRemindBy_PrevAndNext(long eventId, int remindBy,
+	public CalEvent findByNotRemindBy_Last(int remindBy,
+		OrderByComparator orderByComparator)
+		throws NoSuchEventException, SystemException {
+		int count = countByNotRemindBy(remindBy);
+
+		List<CalEvent> list = findByNotRemindBy(remindBy, count - 1, count,
+				orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("remindBy=");
+			msg.append(remindBy);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEventException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public CalEvent[] findByNotRemindBy_PrevAndNext(long eventId, int remindBy,
 		OrderByComparator orderByComparator)
 		throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByPrimaryKey(eventId);
@@ -1594,13 +1595,13 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			CalEvent[] array = new CalEventImpl[3];
 
-			array[0] = getByRemindBy_PrevAndNext(session, calEvent, remindBy,
-					orderByComparator, true);
+			array[0] = getByNotRemindBy_PrevAndNext(session, calEvent,
+					remindBy, orderByComparator, true);
 
 			array[1] = calEvent;
 
-			array[2] = getByRemindBy_PrevAndNext(session, calEvent, remindBy,
-					orderByComparator, false);
+			array[2] = getByNotRemindBy_PrevAndNext(session, calEvent,
+					remindBy, orderByComparator, false);
 
 			return array;
 		}
@@ -1612,7 +1613,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 	}
 
-	protected CalEvent getByRemindBy_PrevAndNext(Session session,
+	protected CalEvent getByNotRemindBy_PrevAndNext(Session session,
 		CalEvent calEvent, int remindBy, OrderByComparator orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
@@ -1627,7 +1628,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 		query.append(_SQL_SELECT_CALEVENT_WHERE);
 
-		query.append(_FINDER_COLUMN_REMINDBY_REMINDBY_2);
+		query.append(_FINDER_COLUMN_NOTREMINDBY_REMINDBY_2);
 
 		if (orderByComparator != null) {
 			String[] orderByFields = orderByComparator.getOrderByFields();
@@ -2551,8 +2552,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 	}
 
-	public void removeByRemindBy(int remindBy) throws SystemException {
-		for (CalEvent calEvent : findByRemindBy(remindBy)) {
+	public void removeByNotRemindBy(int remindBy) throws SystemException {
+		for (CalEvent calEvent : findByNotRemindBy(remindBy)) {
 			remove(calEvent);
 		}
 	}
@@ -2831,10 +2832,10 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 	}
 
-	public int countByRemindBy(int remindBy) throws SystemException {
+	public int countByNotRemindBy(int remindBy) throws SystemException {
 		Object[] finderArgs = new Object[] { remindBy };
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_REMINDBY,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_NOTREMINDBY,
 				finderArgs, this);
 
 		if (count == null) {
@@ -2847,7 +2848,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				query.append(_SQL_COUNT_CALEVENT_WHERE);
 
-				query.append(_FINDER_COLUMN_REMINDBY_REMINDBY_2);
+				query.append(_FINDER_COLUMN_NOTREMINDBY_REMINDBY_2);
 
 				String sql = query.toString();
 
@@ -2867,7 +2868,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_REMINDBY,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_NOTREMINDBY,
 					finderArgs, count);
 
 				closeSession(session);
@@ -3183,7 +3184,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "calEvent.groupId = ?";
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "calEvent.companyId = ?";
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "calEvent.groupId = ?";
-	private static final String _FINDER_COLUMN_REMINDBY_REMINDBY_2 = "calEvent.remindBy != ?";
+	private static final String _FINDER_COLUMN_NOTREMINDBY_REMINDBY_2 = "calEvent.remindBy != ?";
 	private static final String _FINDER_COLUMN_G_T_GROUPID_2 = "calEvent.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_T_TYPE_1 = "calEvent.type IS NULL";
 	private static final String _FINDER_COLUMN_G_T_TYPE_2 = "calEvent.type = ?";

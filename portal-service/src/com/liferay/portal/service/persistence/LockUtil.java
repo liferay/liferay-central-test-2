@@ -189,52 +189,55 @@ public class LockUtil {
 				   .findByUuid_PrevAndNext(lockId, uuid, orderByComparator);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Lock> findByExpirationDate(
+	public static java.util.List<com.liferay.portal.model.Lock> findByLtExpirationDate(
 		java.util.Date expirationDate)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByExpirationDate(expirationDate);
+		return getPersistence().findByLtExpirationDate(expirationDate);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Lock> findByExpirationDate(
+	public static java.util.List<com.liferay.portal.model.Lock> findByLtExpirationDate(
 		java.util.Date expirationDate, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByExpirationDate(expirationDate, start, end);
+		return getPersistence()
+				   .findByLtExpirationDate(expirationDate, start, end);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Lock> findByExpirationDate(
+	public static java.util.List<com.liferay.portal.model.Lock> findByLtExpirationDate(
 		java.util.Date expirationDate, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByExpirationDate(expirationDate, start, end,
+				   .findByLtExpirationDate(expirationDate, start, end,
 			orderByComparator);
 	}
 
-	public static com.liferay.portal.model.Lock findByExpirationDate_First(
+	public static com.liferay.portal.model.Lock findByLtExpirationDate_First(
 		java.util.Date expirationDate,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLockException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByExpirationDate_First(expirationDate, orderByComparator);
+				   .findByLtExpirationDate_First(expirationDate,
+			orderByComparator);
 	}
 
-	public static com.liferay.portal.model.Lock findByExpirationDate_Last(
+	public static com.liferay.portal.model.Lock findByLtExpirationDate_Last(
 		java.util.Date expirationDate,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLockException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByExpirationDate_Last(expirationDate, orderByComparator);
+				   .findByLtExpirationDate_Last(expirationDate,
+			orderByComparator);
 	}
 
-	public static com.liferay.portal.model.Lock[] findByExpirationDate_PrevAndNext(
+	public static com.liferay.portal.model.Lock[] findByLtExpirationDate_PrevAndNext(
 		long lockId, java.util.Date expirationDate,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLockException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByExpirationDate_PrevAndNext(lockId, expirationDate,
+				   .findByLtExpirationDate_PrevAndNext(lockId, expirationDate,
 			orderByComparator);
 	}
 
@@ -281,9 +284,9 @@ public class LockUtil {
 		getPersistence().removeByUuid(uuid);
 	}
 
-	public static void removeByExpirationDate(java.util.Date expirationDate)
+	public static void removeByLtExpirationDate(java.util.Date expirationDate)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByExpirationDate(expirationDate);
+		getPersistence().removeByLtExpirationDate(expirationDate);
 	}
 
 	public static void removeByC_K(java.lang.String className,
@@ -303,9 +306,9 @@ public class LockUtil {
 		return getPersistence().countByUuid(uuid);
 	}
 
-	public static int countByExpirationDate(java.util.Date expirationDate)
+	public static int countByLtExpirationDate(java.util.Date expirationDate)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByExpirationDate(expirationDate);
+		return getPersistence().countByLtExpirationDate(expirationDate);
 	}
 
 	public static int countByC_K(java.lang.String className,

@@ -52,29 +52,29 @@ public interface ImagePersistence extends BasePersistence<Image> {
 	public com.liferay.portal.model.Image fetchByPrimaryKey(long imageId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Image> findBySize(int size)
+	public java.util.List<com.liferay.portal.model.Image> findByLtSize(int size)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Image> findBySize(int size,
-		int start, int end)
+	public java.util.List<com.liferay.portal.model.Image> findByLtSize(
+		int size, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Image> findBySize(int size,
-		int start, int end,
+	public java.util.List<com.liferay.portal.model.Image> findByLtSize(
+		int size, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.model.Image findBySize_First(int size,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.NoSuchImageException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public com.liferay.portal.model.Image findBySize_Last(int size,
+	public com.liferay.portal.model.Image findByLtSize_First(int size,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchImageException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.model.Image[] findBySize_PrevAndNext(
+	public com.liferay.portal.model.Image findByLtSize_Last(int size,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchImageException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.Image[] findByLtSize_PrevAndNext(
 		long imageId, int size,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchImageException,
@@ -91,13 +91,13 @@ public interface ImagePersistence extends BasePersistence<Image> {
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void removeBySize(int size)
+	public void removeByLtSize(int size)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countBySize(int size)
+	public int countByLtSize(int size)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()

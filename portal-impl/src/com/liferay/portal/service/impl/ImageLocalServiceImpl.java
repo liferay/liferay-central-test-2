@@ -251,7 +251,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 	}
 
 	public List<Image> getImagesBySize(int size) throws SystemException {
-		return imagePersistence.findBySize(size);
+		return imagePersistence.findByLtSize(size);
 	}
 
 	public boolean isNullOrDefaultSpacer(byte[] bytes) {

@@ -390,7 +390,7 @@
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
 		</finder>
-		<finder name="G_M" return-type="Collection">
+		<finder name="G_NotM" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="messageCount" comparator="!=" />
 		</finder>

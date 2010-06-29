@@ -264,53 +264,53 @@ public class MBStatsUserUtil {
 		return getPersistence().fetchByG_U(groupId, userId, retrieveFromCache);
 	}
 
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByG_M(
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByG_NotM(
 		long groupId, int messageCount)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByG_M(groupId, messageCount);
+		return getPersistence().findByG_NotM(groupId, messageCount);
 	}
 
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByG_M(
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByG_NotM(
 		long groupId, int messageCount, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByG_M(groupId, messageCount, start, end);
+		return getPersistence().findByG_NotM(groupId, messageCount, start, end);
 	}
 
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByG_M(
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByG_NotM(
 		long groupId, int messageCount, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByG_M(groupId, messageCount, start, end,
+				   .findByG_NotM(groupId, messageCount, start, end,
 			orderByComparator);
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBStatsUser findByG_M_First(
+	public static com.liferay.portlet.messageboards.model.MBStatsUser findByG_NotM_First(
 		long groupId, int messageCount,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchStatsUserException {
 		return getPersistence()
-				   .findByG_M_First(groupId, messageCount, orderByComparator);
+				   .findByG_NotM_First(groupId, messageCount, orderByComparator);
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBStatsUser findByG_M_Last(
+	public static com.liferay.portlet.messageboards.model.MBStatsUser findByG_NotM_Last(
 		long groupId, int messageCount,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchStatsUserException {
 		return getPersistence()
-				   .findByG_M_Last(groupId, messageCount, orderByComparator);
+				   .findByG_NotM_Last(groupId, messageCount, orderByComparator);
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBStatsUser[] findByG_M_PrevAndNext(
+	public static com.liferay.portlet.messageboards.model.MBStatsUser[] findByG_NotM_PrevAndNext(
 		long statsUserId, long groupId, int messageCount,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchStatsUserException {
 		return getPersistence()
-				   .findByG_M_PrevAndNext(statsUserId, groupId, messageCount,
-			orderByComparator);
+				   .findByG_NotM_PrevAndNext(statsUserId, groupId,
+			messageCount, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findAll()
@@ -347,9 +347,9 @@ public class MBStatsUserUtil {
 		getPersistence().removeByG_U(groupId, userId);
 	}
 
-	public static void removeByG_M(long groupId, int messageCount)
+	public static void removeByG_NotM(long groupId, int messageCount)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByG_M(groupId, messageCount);
+		getPersistence().removeByG_NotM(groupId, messageCount);
 	}
 
 	public static void removeAll()
@@ -372,9 +372,9 @@ public class MBStatsUserUtil {
 		return getPersistence().countByG_U(groupId, userId);
 	}
 
-	public static int countByG_M(long groupId, int messageCount)
+	public static int countByG_NotM(long groupId, int messageCount)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByG_M(groupId, messageCount);
+		return getPersistence().countByG_NotM(groupId, messageCount);
 	}
 
 	public static int countAll()

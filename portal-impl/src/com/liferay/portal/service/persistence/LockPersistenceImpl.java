@@ -80,18 +80,18 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(LockModelImpl.ENTITY_CACHE_ENABLED,
 			LockModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByUuid", new String[] { String.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_EXPIRATIONDATE = new FinderPath(LockModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_LTEXPIRATIONDATE = new FinderPath(LockModelImpl.ENTITY_CACHE_ENABLED,
 			LockModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByExpirationDate",
+			"findByLtExpirationDate",
 			new String[] {
 				Date.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_EXPIRATIONDATE = new FinderPath(LockModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_LTEXPIRATIONDATE = new FinderPath(LockModelImpl.ENTITY_CACHE_ENABLED,
 			LockModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByExpirationDate", new String[] { Date.class.getName() });
+			"countByLtExpirationDate", new String[] { Date.class.getName() });
 	public static final FinderPath FINDER_PATH_FETCH_BY_C_K = new FinderPath(LockModelImpl.ENTITY_CACHE_ENABLED,
 			LockModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
 			"fetchByC_K",
@@ -642,18 +642,18 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		}
 	}
 
-	public List<Lock> findByExpirationDate(Date expirationDate)
+	public List<Lock> findByLtExpirationDate(Date expirationDate)
 		throws SystemException {
-		return findByExpirationDate(expirationDate, QueryUtil.ALL_POS,
+		return findByLtExpirationDate(expirationDate, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
-	public List<Lock> findByExpirationDate(Date expirationDate, int start,
+	public List<Lock> findByLtExpirationDate(Date expirationDate, int start,
 		int end) throws SystemException {
-		return findByExpirationDate(expirationDate, start, end, null);
+		return findByLtExpirationDate(expirationDate, start, end, null);
 	}
 
-	public List<Lock> findByExpirationDate(Date expirationDate, int start,
+	public List<Lock> findByLtExpirationDate(Date expirationDate, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				expirationDate,
@@ -662,7 +662,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Lock> list = (List<Lock>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_EXPIRATIONDATE,
+		List<Lock> list = (List<Lock>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_LTEXPIRATIONDATE,
 				finderArgs, this);
 
 		if (list == null) {
@@ -684,10 +684,10 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				query.append(_SQL_SELECT_LOCK_WHERE);
 
 				if (expirationDate == null) {
-					query.append(_FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_1);
+					query.append(_FINDER_COLUMN_LTEXPIRATIONDATE_EXPIRATIONDATE_1);
 				}
 				else {
-					query.append(_FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_2);
+					query.append(_FINDER_COLUMN_LTEXPIRATIONDATE_EXPIRATIONDATE_2);
 				}
 
 				if (orderByComparator != null) {
@@ -717,7 +717,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_EXPIRATIONDATE,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_LTEXPIRATIONDATE,
 					finderArgs, list);
 
 				closeSession(session);
@@ -727,10 +727,10 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		return list;
 	}
 
-	public Lock findByExpirationDate_First(Date expirationDate,
+	public Lock findByLtExpirationDate_First(Date expirationDate,
 		OrderByComparator orderByComparator)
 		throws NoSuchLockException, SystemException {
-		List<Lock> list = findByExpirationDate(expirationDate, 0, 1,
+		List<Lock> list = findByLtExpirationDate(expirationDate, 0, 1,
 				orderByComparator);
 
 		if (list.isEmpty()) {
@@ -750,12 +750,12 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		}
 	}
 
-	public Lock findByExpirationDate_Last(Date expirationDate,
+	public Lock findByLtExpirationDate_Last(Date expirationDate,
 		OrderByComparator orderByComparator)
 		throws NoSuchLockException, SystemException {
-		int count = countByExpirationDate(expirationDate);
+		int count = countByLtExpirationDate(expirationDate);
 
-		List<Lock> list = findByExpirationDate(expirationDate, count - 1,
+		List<Lock> list = findByLtExpirationDate(expirationDate, count - 1,
 				count, orderByComparator);
 
 		if (list.isEmpty()) {
@@ -775,7 +775,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		}
 	}
 
-	public Lock[] findByExpirationDate_PrevAndNext(long lockId,
+	public Lock[] findByLtExpirationDate_PrevAndNext(long lockId,
 		Date expirationDate, OrderByComparator orderByComparator)
 		throws NoSuchLockException, SystemException {
 		Lock lock = findByPrimaryKey(lockId);
@@ -787,12 +787,12 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 
 			Lock[] array = new LockImpl[3];
 
-			array[0] = getByExpirationDate_PrevAndNext(session, lock,
+			array[0] = getByLtExpirationDate_PrevAndNext(session, lock,
 					expirationDate, orderByComparator, true);
 
 			array[1] = lock;
 
-			array[2] = getByExpirationDate_PrevAndNext(session, lock,
+			array[2] = getByLtExpirationDate_PrevAndNext(session, lock,
 					expirationDate, orderByComparator, false);
 
 			return array;
@@ -805,8 +805,8 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		}
 	}
 
-	protected Lock getByExpirationDate_PrevAndNext(Session session, Lock lock,
-		Date expirationDate, OrderByComparator orderByComparator,
+	protected Lock getByLtExpirationDate_PrevAndNext(Session session,
+		Lock lock, Date expirationDate, OrderByComparator orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
 
@@ -821,10 +821,10 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		query.append(_SQL_SELECT_LOCK_WHERE);
 
 		if (expirationDate == null) {
-			query.append(_FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_1);
+			query.append(_FINDER_COLUMN_LTEXPIRATIONDATE_EXPIRATIONDATE_1);
 		}
 		else {
-			query.append(_FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_2);
+			query.append(_FINDER_COLUMN_LTEXPIRATIONDATE_EXPIRATIONDATE_2);
 		}
 
 		if (orderByComparator != null) {
@@ -1131,9 +1131,9 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		}
 	}
 
-	public void removeByExpirationDate(Date expirationDate)
+	public void removeByLtExpirationDate(Date expirationDate)
 		throws SystemException {
-		for (Lock lock : findByExpirationDate(expirationDate)) {
+		for (Lock lock : findByLtExpirationDate(expirationDate)) {
 			remove(lock);
 		}
 	}
@@ -1209,11 +1209,11 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		return count.intValue();
 	}
 
-	public int countByExpirationDate(Date expirationDate)
+	public int countByLtExpirationDate(Date expirationDate)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { expirationDate };
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_EXPIRATIONDATE,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_LTEXPIRATIONDATE,
 				finderArgs, this);
 
 		if (count == null) {
@@ -1227,10 +1227,10 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				query.append(_SQL_COUNT_LOCK_WHERE);
 
 				if (expirationDate == null) {
-					query.append(_FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_1);
+					query.append(_FINDER_COLUMN_LTEXPIRATIONDATE_EXPIRATIONDATE_1);
 				}
 				else {
-					query.append(_FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_2);
+					query.append(_FINDER_COLUMN_LTEXPIRATIONDATE_EXPIRATIONDATE_2);
 				}
 
 				String sql = query.toString();
@@ -1253,7 +1253,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_EXPIRATIONDATE,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_LTEXPIRATIONDATE,
 					finderArgs, count);
 
 				closeSession(session);
@@ -1507,8 +1507,10 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	private static final String _FINDER_COLUMN_UUID_UUID_1 = "lock.uuid IS NULL";
 	private static final String _FINDER_COLUMN_UUID_UUID_2 = "lock.uuid = ?";
 	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(lock.uuid IS NULL OR lock.uuid = ?)";
-	private static final String _FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_1 = "lock.expirationDate < NULL";
-	private static final String _FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_2 = "lock.expirationDate < ?";
+	private static final String _FINDER_COLUMN_LTEXPIRATIONDATE_EXPIRATIONDATE_1 =
+		"lock.expirationDate < NULL";
+	private static final String _FINDER_COLUMN_LTEXPIRATIONDATE_EXPIRATIONDATE_2 =
+		"lock.expirationDate < ?";
 	private static final String _FINDER_COLUMN_C_K_CLASSNAME_1 = "lock.className IS NULL AND ";
 	private static final String _FINDER_COLUMN_C_K_CLASSNAME_2 = "lock.className = ? AND ";
 	private static final String _FINDER_COLUMN_C_K_CLASSNAME_3 = "(lock.className IS NULL OR lock.className = ?) AND ";

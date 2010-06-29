@@ -34,7 +34,7 @@ import java.util.List;
 public class LockLocalServiceImpl extends LockLocalServiceBaseImpl {
 
 	public void clear() throws SystemException {
-		lockPersistence.removeByExpirationDate(new Date());
+		lockPersistence.removeByLtExpirationDate(new Date());
 	}
 
 	public Lock getLock(String className, long key)

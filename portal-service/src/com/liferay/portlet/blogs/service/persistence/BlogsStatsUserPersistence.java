@@ -134,63 +134,63 @@ public interface BlogsStatsUserPersistence extends BasePersistence<BlogsStatsUse
 		long groupId, long userId, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByG_E(
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByG_NotE(
 		long groupId, int entryCount)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByG_E(
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByG_NotE(
 		long groupId, int entryCount, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByG_E(
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByG_NotE(
 		long groupId, int entryCount, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.blogs.model.BlogsStatsUser findByG_E_First(
+	public com.liferay.portlet.blogs.model.BlogsStatsUser findByG_NotE_First(
 		long groupId, int entryCount,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
-	public com.liferay.portlet.blogs.model.BlogsStatsUser findByG_E_Last(
+	public com.liferay.portlet.blogs.model.BlogsStatsUser findByG_NotE_Last(
 		long groupId, int entryCount,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
-	public com.liferay.portlet.blogs.model.BlogsStatsUser[] findByG_E_PrevAndNext(
+	public com.liferay.portlet.blogs.model.BlogsStatsUser[] findByG_NotE_PrevAndNext(
 		long statsUserId, long groupId, int entryCount,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
-	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByC_E(
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByC_NotE(
 		long companyId, int entryCount)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByC_E(
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByC_NotE(
 		long companyId, int entryCount, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByC_E(
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByC_NotE(
 		long companyId, int entryCount, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.blogs.model.BlogsStatsUser findByC_E_First(
+	public com.liferay.portlet.blogs.model.BlogsStatsUser findByC_NotE_First(
 		long companyId, int entryCount,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
-	public com.liferay.portlet.blogs.model.BlogsStatsUser findByC_E_Last(
+	public com.liferay.portlet.blogs.model.BlogsStatsUser findByC_NotE_Last(
 		long companyId, int entryCount,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
-	public com.liferay.portlet.blogs.model.BlogsStatsUser[] findByC_E_PrevAndNext(
+	public com.liferay.portlet.blogs.model.BlogsStatsUser[] findByC_NotE_PrevAndNext(
 		long statsUserId, long companyId, int entryCount,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -218,10 +218,10 @@ public interface BlogsStatsUserPersistence extends BasePersistence<BlogsStatsUse
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
-	public void removeByG_E(long groupId, int entryCount)
+	public void removeByG_NotE(long groupId, int entryCount)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void removeByC_E(long companyId, int entryCount)
+	public void removeByC_NotE(long companyId, int entryCount)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeAll()
@@ -236,10 +236,10 @@ public interface BlogsStatsUserPersistence extends BasePersistence<BlogsStatsUse
 	public int countByG_U(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByG_E(long groupId, int entryCount)
+	public int countByG_NotE(long groupId, int entryCount)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByC_E(long companyId, int entryCount)
+	public int countByC_NotE(long companyId, int entryCount)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()

@@ -329,49 +329,51 @@ public class CalEventUtil {
 				   .filterFindByGroupId(groupId, start, end, orderByComparator);
 	}
 
-	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByRemindBy(
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByNotRemindBy(
 		int remindBy)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByRemindBy(remindBy);
+		return getPersistence().findByNotRemindBy(remindBy);
 	}
 
-	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByRemindBy(
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByNotRemindBy(
 		int remindBy, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByRemindBy(remindBy, start, end);
+		return getPersistence().findByNotRemindBy(remindBy, start, end);
 	}
 
-	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByRemindBy(
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByNotRemindBy(
 		int remindBy, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByRemindBy(remindBy, start, end, orderByComparator);
+				   .findByNotRemindBy(remindBy, start, end, orderByComparator);
 	}
 
-	public static com.liferay.portlet.calendar.model.CalEvent findByRemindBy_First(
+	public static com.liferay.portlet.calendar.model.CalEvent findByNotRemindBy_First(
 		int remindBy,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException {
-		return getPersistence().findByRemindBy_First(remindBy, orderByComparator);
+		return getPersistence()
+				   .findByNotRemindBy_First(remindBy, orderByComparator);
 	}
 
-	public static com.liferay.portlet.calendar.model.CalEvent findByRemindBy_Last(
+	public static com.liferay.portlet.calendar.model.CalEvent findByNotRemindBy_Last(
 		int remindBy,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException {
-		return getPersistence().findByRemindBy_Last(remindBy, orderByComparator);
+		return getPersistence()
+				   .findByNotRemindBy_Last(remindBy, orderByComparator);
 	}
 
-	public static com.liferay.portlet.calendar.model.CalEvent[] findByRemindBy_PrevAndNext(
+	public static com.liferay.portlet.calendar.model.CalEvent[] findByNotRemindBy_PrevAndNext(
 		long eventId, int remindBy,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException {
 		return getPersistence()
-				   .findByRemindBy_PrevAndNext(eventId, remindBy,
+				   .findByNotRemindBy_PrevAndNext(eventId, remindBy,
 			orderByComparator);
 	}
 
@@ -549,9 +551,9 @@ public class CalEventUtil {
 		getPersistence().removeByGroupId(groupId);
 	}
 
-	public static void removeByRemindBy(int remindBy)
+	public static void removeByNotRemindBy(int remindBy)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByRemindBy(remindBy);
+		getPersistence().removeByNotRemindBy(remindBy);
 	}
 
 	public static void removeByG_T(long groupId, java.lang.String type)
@@ -594,9 +596,9 @@ public class CalEventUtil {
 		return getPersistence().filterCountByGroupId(groupId);
 	}
 
-	public static int countByRemindBy(int remindBy)
+	public static int countByNotRemindBy(int remindBy)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByRemindBy(remindBy);
+		return getPersistence().countByNotRemindBy(remindBy);
 	}
 
 	public static int countByG_T(long groupId, java.lang.String type)
