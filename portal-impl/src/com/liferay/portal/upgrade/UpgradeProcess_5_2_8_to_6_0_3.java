@@ -27,6 +27,8 @@ import com.liferay.portal.upgrade.v6_0_0.UpgradePortletId;
 import com.liferay.portal.upgrade.v6_0_0.UpgradeShopping;
 import com.liferay.portal.upgrade.v6_0_2.UpgradeNestedPortlets;
 import com.liferay.portal.upgrade.v6_0_3.UpgradePermission;
+import com.liferay.portal.upgrade.v6_0_3.UpgradePortletPreferences;
+import com.liferay.portal.upgrade.v6_0_3.UpgradeSitemap;
 
 /**
  * <a href="UpgradeProcess_5_2_8_to_6_0_3.java.html"><b><i>View Source</i></b>
@@ -58,7 +60,10 @@ public class UpgradeProcess_5_2_8_to_6_0_3 extends UpgradeProcess {
 
 		upgrade(com.liferay.portal.upgrade.v6_0_3.UpgradeAsset.class);
 		upgrade(com.liferay.portal.upgrade.v6_0_3.UpgradeAssetPublisher.class);
+		upgrade(com.liferay.portal.upgrade.v6_0_3.UpgradeDocumentLibrary.class);
 		upgrade(UpgradePermission.class);
+		upgrade(UpgradePortletPreferences.class);
+		upgrade(UpgradeSitemap.class);
 	}
 
 }
