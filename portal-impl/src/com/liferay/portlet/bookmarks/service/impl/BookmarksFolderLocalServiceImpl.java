@@ -139,6 +139,15 @@ public class BookmarksFolderLocalServiceImpl
 	public void deleteFolder(BookmarksFolder folder)
 		throws PortalException, SystemException {
 
+		// Folders
+
+		List<BookmarksFolder> folders = bookmarksFolderPersistence.findByG_P(
+			folder.getGroupId(), folder.getFolderId());
+
+		for (BookmarksFolder curFolder : folders) {
+			deleteFolder(curFolder);
+		}
+
 		// Folder
 
 		bookmarksFolderPersistence.remove(folder);
@@ -153,15 +162,6 @@ public class BookmarksFolderLocalServiceImpl
 
 		bookmarksEntryLocalService.deleteEntries(
 			folder.getGroupId(), folder.getFolderId());
-
-		// Folders
-
-		List<BookmarksFolder> folders = bookmarksFolderPersistence.findByG_P(
-			folder.getGroupId(), folder.getFolderId());
-
-		for (BookmarksFolder curFolder : folders) {
-			deleteFolder(curFolder);
-		}
 
 		// Expando
 

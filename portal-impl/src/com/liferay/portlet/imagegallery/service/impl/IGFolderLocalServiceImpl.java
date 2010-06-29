@@ -136,6 +136,15 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 	public void deleteFolder(IGFolder folder)
 		throws PortalException, SystemException {
 
+		// Folders
+
+		List<IGFolder> folders = igFolderPersistence.findByG_P(
+			folder.getGroupId(), folder.getFolderId());
+
+		for (IGFolder curFolder : folders) {
+			deleteFolder(curFolder);
+		}
+
 		// Folder
 
 		igFolderPersistence.remove(folder);
@@ -145,15 +154,6 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		resourceLocalService.deleteResource(
 			folder.getCompanyId(), IGFolder.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL, folder.getFolderId());
-
-		// Folders
-
-		List<IGFolder> folders = igFolderPersistence.findByG_P(
-			folder.getGroupId(), folder.getFolderId());
-
-		for (IGFolder curFolder : folders) {
-			deleteFolder(curFolder);
-		}
 
 		// Images
 

@@ -203,6 +203,15 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	public void deleteFolder(DLFolder folder)
 		throws PortalException, SystemException {
 
+		// Folders
+
+		List<DLFolder> folders = dlFolderPersistence.findByG_P(
+			folder.getGroupId(), folder.getFolderId());
+
+		for (DLFolder curFolder : folders) {
+			deleteFolder(curFolder);
+		}
+
 		// Folder
 
 		dlFolderPersistence.remove(folder);
@@ -222,15 +231,6 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		dlFileEntryLocalService.deleteFileEntries(
 			folder.getGroupId(), folder.getFolderId());
-
-		// Folders
-
-		List<DLFolder> folders = dlFolderPersistence.findByG_P(
-			folder.getGroupId(), folder.getFolderId());
-
-		for (DLFolder curFolder : folders) {
-			deleteFolder(curFolder);
-		}
 
 		// Expando
 
