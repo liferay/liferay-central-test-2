@@ -2115,7 +2115,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>151</portlet-name>
-		<display-name>Workflow Definitions</display-name>
+		<display-name>Workflow</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
