@@ -19,11 +19,11 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, 5, portletURL, null, null);
 
-int total = SocialEquityUserLocalServiceUtil.getRankedSocialEquityUsersCount(group.getGroupId());
+int total = SocialEquityUserLocalServiceUtil.getRankedSocialEquityUsersCount(scopeGroupId);
 
 searchContainer.setTotal(total);
 
-List<SocialEquityUser> results = SocialEquityUserLocalServiceUtil.getRankedSocialEquityUsers(group.getGroupId(), searchContainer.getStart(), searchContainer.getEnd(), new SocialEquityUserRankComparator(true));
+List<SocialEquityUser> results = SocialEquityUserLocalServiceUtil.getRankedSocialEquityUsers(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd(), new SocialEquityUserRankComparator(true));
 
 searchContainer.setResults(results);
 
@@ -36,7 +36,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// User display
 
-	row.addJSP("/html/portlet/topusers/user_display.jsp", application, request, response);
+	row.addJSP("/html/portlet/top_users/user_display.jsp", application, request, response);
 
 	// Add result row
 
@@ -45,7 +45,7 @@ for (int i = 0; i < results.size(); i++) {
 %>
 
 <div>
-	<%= LanguageUtil.format(pageContext, "top-valued-users-out-of-x", String.valueOf(total)) %>
+	<%= LanguageUtil.format(pageContext, "top-users-out-of-x", String.valueOf(total)) %>
 </div>
 
 <c:if test="<%= total > 0 %>">
@@ -63,7 +63,7 @@ for (int i = 0; i < results.size(); i++) {
 <aui:script use="aui-io-plugin">
 	var searchTopUsers = A.one('#<portlet:namespace />searchTopUsers');
 
-	if (searchFriends) {
+	if (searchTopUsers) {
 		var parent = searchTopUsers.get('parentNode');
 
 		parent.plug(

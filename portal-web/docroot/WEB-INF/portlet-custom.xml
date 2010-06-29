@@ -2263,21 +2263,17 @@
 	</portlet>
 	<portlet>
 	<portlet-name>159</portlet-name>
-		<display-name>TopUsers</display-name>
+		<display-name>Top Users</display-name>
 		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/html/portlet/topusers/view.jsp</value>
+			<value>/html/portlet/top_users/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 		</supports>
-		<portlet-info>
-			<title>Top Valued Users</title>
-			<short-title>Top Valued Users</short-title>
-			<keywords>Top Valued Users</keywords>
-		</portlet-info>
+		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<security-role-ref>
 			<role-name>guest</role-name>
 		</security-role-ref>

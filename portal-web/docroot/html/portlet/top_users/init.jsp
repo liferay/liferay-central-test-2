@@ -16,13 +16,6 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portal.service.GroupLocalServiceUtil" %>
-<%@ page import="com.liferay.portal.util.comparator.SocialEquityUserRankComparator" %>
 <%@ page import="com.liferay.portlet.social.model.SocialEquityUser" %>
 <%@ page import="com.liferay.portlet.social.service.SocialEquityUserLocalServiceUtil" %>
-
-<%
-boolean socialEquityEnabled = PropsValues.SOCIAL_EQUITY_EQUITY_LOG_ENABLED;
-
-Group group = GroupLocalServiceUtil.getGroup(scopeGroupId);
-%>
+<%@ page import="com.liferay.portlet.social.util.comparator.SocialEquityUserRankComparator" %>

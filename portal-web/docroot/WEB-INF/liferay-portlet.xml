@@ -1568,8 +1568,8 @@
 		<use-default-template>true</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<header-portlet-css>/html/portlet/topusers/css/main.css</header-portlet-css>
-		<css-class-wrapper>portlet-topusers</css-class-wrapper>
+		<header-portlet-css>/html/portlet/top_users/css/main.css</header-portlet-css>
+		<css-class-wrapper>portlet-top-users</css-class-wrapper>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>

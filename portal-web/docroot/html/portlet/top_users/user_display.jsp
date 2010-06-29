@@ -14,27 +14,23 @@
  */
 %>
 
-<%@ include file="/html/portlet/topusers/init.jsp" %>
+<%@ include file="/html/portlet/top_users/init.jsp" %>
 
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 SocialEquityUser socialEquityUser = (SocialEquityUser)row.getObject();
-
-//User refUser = UserLocalServiceUtil.getUser(socialEquityUser.getUserId());
 %>
 
 <liferay-ui:user-display
 	userId="<%= socialEquityUser.getUserId() %>"
 	userName=""
 >
-<c:if test="<%= userDisplay != null %>">
-	<br />
-	<liferay-ui:message key="social-rank" />:&nbsp;<%= socialEquityUser.getRank() %>
-	<br />
-	<liferay-ui:message key="social-contribution-score" />:&nbsp;<%= (int)socialEquityUser.getContributionEquity() %>
-	<br />
-	<liferay-ui:message key="social-participation-score" />:&nbsp;<%= (int)socialEquityUser.getParticipationEquity() %>
+	<c:if test="<%= userDisplay != null %>">
+		<liferay-ui:message key="rank" />: <%= socialEquityUser.getRank() %><br />
 
-</c:if>
+		<liferay-ui:message key="contribution-score" />: <%= Math.round(socialEquityUser.getContributionEquity()) %><br />
+
+		<liferay-ui:message key="participation-score" />: <%= Math.round(socialEquityUser.getParticipationEquity()) %>
+	</c:if>
 </liferay-ui:user-display>

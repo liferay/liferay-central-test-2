@@ -14,15 +14,15 @@
  */
 %>
 
-<%@ include file="/html/portlet/topusers/init.jsp" %>
+<%@ include file="/html/portlet/top_users/init.jsp" %>
 
 <c:choose>
-	<c:when test="<%= !socialEquityEnabled %>">
+	<c:when test="<%= !PropsValues.SOCIAL_EQUITY_EQUITY_LOG_ENABLED %>">
 		<div class="portlet-msg-error">
-			<liferay-ui:message key="this-application-will-only-function-when-social-equity-is-turned-on" />
+			<liferay-ui:message key="social-equity-is-not-enabled" />
 		</div>
 	</c:when>
 	<c:otherwise>
-		<%@ include file="/html/portlet/topusers/view_top_users.jspf" %>
+		<%@ include file="/html/portlet/top_users/view_top_users.jspf" %>
 	</c:otherwise>
 </c:choose>
