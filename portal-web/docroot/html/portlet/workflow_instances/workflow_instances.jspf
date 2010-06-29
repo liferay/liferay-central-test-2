@@ -89,8 +89,8 @@
 
 		<liferay-ui:search-container-column-text
 			buffer="buffer"
-			name="status"
 			href="<%= rowURL %>"
+			name="status"
 		>
 
 			<%
