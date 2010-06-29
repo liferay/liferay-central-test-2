@@ -555,9 +555,37 @@ public class PortalImpl implements Portal {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		addDefaultResources(themeDisplay, portlet, true);
+		Layout layout = themeDisplay.getLayout();
 
-		addDefaultResources(themeDisplay, portlet, false);
+		String rootPortletId = portlet.getRootPortletId();
+
+		String portletPrimaryKey = PortletPermissionUtil.getPrimaryKey(
+			layout.getPlid(), portlet.getPortletId());
+
+		try {
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+				int count =
+					ResourcePermissionLocalServiceUtil.
+						getResourcePermissionsCount(
+							themeDisplay.getCompanyId(), rootPortletId,
+							ResourceConstants.SCOPE_INDIVIDUAL,
+							portletPrimaryKey);
+
+				if (count == 0) {
+					throw new NoSuchResourceException();
+				}
+			}
+			else if (!portlet.isUndeployedPortlet()) {
+				ResourceLocalServiceUtil.getResource(
+					themeDisplay.getCompanyId(), rootPortletId,
+					ResourceConstants.SCOPE_INDIVIDUAL, portletPrimaryKey);
+			}
+		}
+		catch (NoSuchResourceException nsre) {
+			ResourceLocalServiceUtil.addResources(
+				themeDisplay.getCompanyId(), layout.getGroupId(), 0,
+				rootPortletId, portletPrimaryKey, true, true, true);
+		}
 	}
 
 	public void clearRequestParameters(RenderRequest renderRequest) {
@@ -4087,60 +4115,6 @@ public class PortalImpl implements Portal {
 		return windowState;
 	}
 
-	protected void addDefaultResources(
-			ThemeDisplay themeDisplay, Portlet portlet, boolean portletActions)
-		throws PortalException, SystemException {
-
-		Layout layout = themeDisplay.getLayout();
-
-		String rootPortletId =  portlet.getRootPortletId();
-
-		String name = null;
-
-		String primaryKey = null;
-
-		if (portletActions) {
-			name = rootPortletId;
-
-			primaryKey = PortletPermissionUtil.getPrimaryKey(
-				layout.getPlid(), portlet.getPortletId());
-		}
-		else {
-			name = getDefaultModelName(rootPortletId);
-
-			primaryKey = String.valueOf(layout.getGroupId());
-		}
-
-		if (Validator.isNull(name)) {
-			return;
-		}
-
-		try {
-			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-				int count =
-					ResourcePermissionLocalServiceUtil.
-						getResourcePermissionsCount(
-							themeDisplay.getCompanyId(), name,
-							ResourceConstants.SCOPE_INDIVIDUAL,
-							primaryKey);
-
-				if (count == 0) {
-					throw new NoSuchResourceException();
-				}
-			}
-			else if (!portlet.isUndeployedPortlet()) {
-				ResourceLocalServiceUtil.getResource(
-					themeDisplay.getCompanyId(), name,
-					ResourceConstants.SCOPE_INDIVIDUAL, primaryKey);
-			}
-		}
-		catch (NoSuchResourceException nsre) {
-			ResourceLocalServiceUtil.addResources(
-				themeDisplay.getCompanyId(), layout.getGroupId(), 0, name,
-				primaryKey, portletActions, true, true);
-		}
-	}
-
 	protected List<Portlet> filterControlPanelPortlets(
 		Set<Portlet> portlets, String category, ThemeDisplay themeDisplay) {
 
@@ -4187,31 +4161,6 @@ public class PortalImpl implements Portal {
 		}
 
 		return filteredPortlets;
-	}
-
-	protected String getDefaultModelName(String portletName) {
-		String defaultModelName = _defaultModelNames.get(portletName);
-
-		if (Validator.isNotNull(defaultModelName)) {
-			return defaultModelName;
-		}
-
-		List<String> modelNames = ResourceActionsUtil.getPortletModelResources(
-			portletName);
-
-		if (modelNames.isEmpty()) {
-			return null;
-		}
-
-		for (String modelName : modelNames) {
-			if (!modelName.contains(".model.")) {
-				_defaultModelNames.put(portletName, modelName);
-
-				return modelName;
-			}
-		}
-
-		return null;
 	}
 
 	protected long getDoAsUserId(
@@ -4537,8 +4486,6 @@ public class PortalImpl implements Portal {
 	private String _computerName;
 	private String[] _customSqlClassNameIds;
 	private String[] _customSqlClassNames;
-	private Map<String, String> _defaultModelNames =
-		new ConcurrentHashMap<String, String>();
 	private String _globalLibDir;
 	private String _pathContext;
 	private String _pathFriendlyURLPrivateGroup;
