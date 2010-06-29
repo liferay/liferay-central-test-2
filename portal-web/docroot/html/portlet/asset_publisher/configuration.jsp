@@ -219,7 +219,7 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 									sb.append("<img alt=\"\" class=\"dl-file-icon\" src=\"");
 									sb.append(themeDisplay.getPathThemeImages());
 									sb.append("/file_system/small/");
-									sb.append(DLUtil.getFileIcon(assetEntry.getTitle()));
+									sb.append(fileEntry.getIcon());
 									sb.append(".png\" />");
 									sb.append(assetEntry.getTitle());
 

@@ -147,7 +147,7 @@ if (folder != null) {
 		sb.append("<img align=\"left\" border=\"0\" src=\"");
 		sb.append(themeDisplay.getPathThemeImages());
 		sb.append("/file_system/small/");
-		sb.append(DLUtil.getFileIcon(fileEntry.getTitle()));
+		sb.append(fileEntry.getIcon());
 		sb.append(".png\">");
 		sb.append(fileEntry.getTitle());
 

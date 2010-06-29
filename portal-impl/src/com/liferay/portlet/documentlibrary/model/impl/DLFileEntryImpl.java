@@ -108,6 +108,10 @@ public class DLFileEntryImpl
 		return folder;
 	}
 
+	public String getIcon() {
+		return DLUtil.getFileIcon(getTitle());
+	}
+
 	public Lock getLock() {
 		try {
 			String lockId = DLUtil.getLockId(

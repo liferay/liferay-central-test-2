@@ -276,6 +276,10 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		return _dlFileEntry.getFolder();
 	}
 
+	public java.lang.String getIcon() {
+		return _dlFileEntry.getIcon();
+	}
+
 	public com.liferay.portal.model.Lock getLock() {
 		return _dlFileEntry.getLock();
 	}
