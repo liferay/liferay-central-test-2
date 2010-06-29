@@ -259,26 +259,18 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 				PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 					layout, _portletName);
 
-			long layoutId = GetterUtil.getLong(portletSetup.getValue(
-				"portlet-setup-link-to-layout-id", null));
+			String layoutUuid = GetterUtil.getString(portletSetup.getValue(
+				"portlet-setup-link-to-layout-uuid", null));
 
-			if (layoutId > 0) {
+			if (Validator.isNotNull(layoutUuid)) {
 				try {
 					Layout linkedLayout = LayoutLocalServiceUtil.getLayout(
-						layout.getGroupId(), layout.isPrivateLayout(),
-						layoutId);
+						layoutUuid, layout.getGroupId());
 
 					plid = linkedLayout.getPlid();
 				}
 				catch (PortalException pe) {
 				}
-			}
-			else {
-
-				// Backwards compatibility
-
-				plid = GetterUtil.getLong(portletSetup.getValue(
-					"portlet-setup-link-to-plid", String.valueOf(plid)));
 			}
 		}
 		catch (SystemException e) {

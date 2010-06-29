@@ -97,12 +97,12 @@ public class PortletSetupUtil {
 			portletSetup.getValue("portlet-setup-use-custom-title", null));
 		boolean showBorders = GetterUtil.getBoolean(
 			portletSetup.getValue("portlet-setup-show-borders", null), true);
-		long linkToLayoutId = GetterUtil.getLong(
-			portletSetup.getValue("portlet-setup-link-to-layout-id", null));
+		String layoutUuid = GetterUtil.getString(
+			portletSetup.getValue("portlet-setup-link-to-layout-uuid", null));
 
 		portletData.put("useCustomTitle", useCustomTitle);
 		portletData.put("showBorders", showBorders);
-		portletData.put("portletLinksTarget", linkToLayoutId);
+		portletData.put("portletLinksTarget", layoutUuid);
 
 		return jsonObj;
 	}

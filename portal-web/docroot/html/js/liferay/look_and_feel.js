@@ -1181,7 +1181,7 @@ AUI().add(
 				portletLinksTarget.on(
 					'change',
 					function(event) {
-						portletData.portletLinksTarget = instance._getSafeInteger(event.currentTarget.val());
+						portletData.portletLinksTarget = event.currentTarget.val();
 					}
 				);
 			},

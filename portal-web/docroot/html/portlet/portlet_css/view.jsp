@@ -59,7 +59,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 						<aui:option label="current-page" />
 
 						<%
-						long linkToLayoutId = 0;
+						String linkToLayoutUuid = StringPool.BLANK;
 
 						LayoutLister layoutLister = new LayoutLister();
 
@@ -102,7 +102,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 							if (linkableLayout != null) {
 						%>
 
-								<aui:option label="<%= name %>" selected="<%= (linkableLayout.getLayoutId() == linkToLayoutId) %>" value="<%= linkableLayout.getLayoutId() %>" />
+								<aui:option label="<%= name %>" selected="<%= linkableLayout.getUuid().equals(linkToLayoutUuid) %>" value="<%= linkableLayout.getUuid() %>" />
 
 						<%
 							}
