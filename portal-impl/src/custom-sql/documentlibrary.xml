@@ -76,7 +76,7 @@
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.findF_ByG_F_S">
 		<![CDATA[
 			SELECT
-				DISTINCT folderId AS modelFolderId, name AS name, name AS title, 0 AS fileShortcutId, 1 AS modelFolder
+				DISTINCT folderId AS modelFolderId, DLFolder.name AS name, DLFolder.name AS title, 0 AS fileShortcutId, 1 AS modelFolder
 			FROM
 				DLFolder
 			WHERE
