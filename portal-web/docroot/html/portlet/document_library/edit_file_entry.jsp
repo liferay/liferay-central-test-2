@@ -33,13 +33,8 @@ long fileEntryId = BeanParamUtil.getLong(fileEntry, request, "fileEntryId");
 
 long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 String name = BeanParamUtil.getString(fileEntry, request, "name");
+String extension = BeanParamUtil.getString(fileEntry, request, "extension");
 String title = BeanParamUtil.getString(fileEntry, request, "title");
-
-String extension = StringPool.BLANK;
-
-if (fileEntry != null) {
-	extension = fileEntry.getExtension();
-}
 
 String assetTagNames = ParamUtil.getString(request, "assetTagNames");
 

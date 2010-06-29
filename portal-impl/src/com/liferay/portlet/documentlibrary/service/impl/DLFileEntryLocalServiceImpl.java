@@ -141,11 +141,11 @@ public class DLFileEntryLocalServiceImpl
 		User user = userPersistence.findByPrimaryKey(userId);
 		folderId = getFolderId(user.getCompanyId(), folderId);
 
+		String extension = FileUtil.getExtension(name);
+
 		if (Validator.isNull(title)) {
 			title = name;
 		}
-
-		String extension = FileUtil.getExtension(name);
 
 		name = String.valueOf(
 			counterLocalService.increment(DLFileEntry.class.getName()));

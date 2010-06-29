@@ -32,9 +32,8 @@ fileEntry = fileEntry.toEscapedModel();
 long fileEntryId = fileEntry.getFileEntryId();
 long folderId = fileEntry.getFolderId();
 String name = fileEntry.getName();
-String title = fileEntry.getTitle();
-
 String extension = fileEntry.getExtension();
+String title = fileEntry.getTitle();
 
 String[] conversions = new String[0];
 

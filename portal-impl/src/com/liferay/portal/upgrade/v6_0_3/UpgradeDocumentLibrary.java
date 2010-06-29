@@ -17,7 +17,6 @@ package com.liferay.portal.upgrade.v6_0_3;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,36 +28,6 @@ import java.sql.ResultSet;
  * @author Sergio González
  */
 public class UpgradeDocumentLibrary extends UpgradeProcess {
-
-	protected void addFileExtension(
-			String uuid_, long groupId, String extension)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			StringBundler sb = new StringBundler(5);
-
-			sb.append("update DLFileEntry set extension = ? ");
-			sb.append("where uuid_ = ? and groupId = ?");
-
-			String sql = sb.toString();
-
-			ps = con.prepareStatement(sql);
-
-			ps.setString(1, extension);
-			ps.setString(2, uuid_);
-			ps.setLong(3, groupId);
-
-			ps.executeUpdate();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps);
-		}
-	}
 
 	protected void doUpgrade() throws Exception {
 		Connection con = null;
@@ -80,7 +49,10 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 				String extension = FileUtil.getExtension(title);
 
-				addFileExtension(uuid_, groupId, extension);
+				runSQL(
+					"update DLFileEntry set extension = '" + extension +
+						"' where uuid_ = '" + uuid_ + "' and groupId = " +
+							groupId);
 			}
 		}
 		finally {
