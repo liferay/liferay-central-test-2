@@ -16,5 +16,5 @@
 }
 
 .portlet-top-users .taglib-search-iterator-page-iterator-bottom .search-pages .page-links .previous {
-	border: none;
+	border-width: 0;
 }
