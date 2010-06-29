@@ -23,14 +23,12 @@ Group group = themeDisplay.getScopeGroup();
 
 String keywords = ParamUtil.getString(request, namespace + "keywords");
 
-LiferayPortletURL portletURL = null;
+PortletURL portletURL = null;
 
-if ((portletResponse != null) && (portletResponse instanceof RenderResponse)) {
-	RenderResponse renderResponse = (RenderResponse)portletResponse;
+if (portletResponse != null) {
+	LiferayPortletResponse liferayPortletResponse = (LiferayPortletResponse)portletResponse;
 
-	portletURL = (LiferayPortletURL)renderResponse.createRenderURL();
-
-	portletURL.setPortletId(PortletKeys.SEARCH);
+	portletURL = liferayPortletResponse.createLiferayPortletURL(PortletKeys.SEARCH, PortletRequest.RENDER_PHASE);
 }
 else {
 	portletURL = new PortletURLImpl(request, PortletKeys.SEARCH, plid, PortletRequest.RENDER_PHASE);

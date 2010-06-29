@@ -24,26 +24,25 @@ String formName = (String)request.getAttribute("liferay-ui:language:formName");
 String formAction = (String)request.getAttribute("liferay-ui:language:formAction");
 
 if (Validator.isNull(formAction)) {
-	LiferayPortletURL portletURL = null;
+	LiferayPortletURL liferayPortletURL = null;
 
-	if ((portletResponse != null) && (portletResponse instanceof RenderResponse)) {
-		RenderResponse renderResponse = (RenderResponse)portletResponse;
+	if (portletResponse != null) {
+		LiferayPortletResponse liferayPortletResponse = (LiferayPortletResponse)portletResponse;
 
-		portletURL = (LiferayPortletURL)renderResponse.createActionURL();
-		portletURL.setPortletId(PortletKeys.LANGUAGE);
+		liferayPortletURL = liferayPortletResponse.createLiferayPortletURL(PortletKeys.LANGUAGE, PortletRequest.ACTION_PHASE);
 	}
 	else {
-		portletURL = new PortletURLImpl(request, PortletKeys.LANGUAGE, plid, PortletRequest.ACTION_PHASE);
+		liferayPortletURL = new PortletURLImpl(request, PortletKeys.LANGUAGE, plid, PortletRequest.ACTION_PHASE);
 	}
 
-	portletURL.setWindowState(WindowState.NORMAL);
-	portletURL.setPortletMode(PortletMode.VIEW);
-	portletURL.setAnchor(false);
+	liferayPortletURL.setWindowState(WindowState.NORMAL);
+	liferayPortletURL.setPortletMode(PortletMode.VIEW);
+	liferayPortletURL.setAnchor(false);
 
-	portletURL.setParameter("struts_action", "/language/view");
-	//portletURL.setParameter("redirect", currentURL);
+	liferayPortletURL.setParameter("struts_action", "/language/view");
+	//liferayPortletURL.setParameter("redirect", currentURL);
 
-	formAction = portletURL.toString();
+	formAction = liferayPortletURL.toString();
 }
 
 String name = (String)request.getAttribute("liferay-ui:language:name");
