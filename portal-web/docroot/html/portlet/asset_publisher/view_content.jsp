@@ -52,7 +52,15 @@ try {
 		className = PortalUtil.getClassName(assetEntry.getClassNameId());
 		classPK = assetEntry.getClassPK();
 
-		assetRenderer = assetRendererFactory.getAssetRenderer(classPK, AssetRendererFactory.TYPE_LATEST_APPROVED);
+		int rendererType = AssetRendererFactory.TYPE_LATEST_APPROVED;
+
+		if (portletName.equals(PortletKeys.MY_WORKFLOW_INSTANCES) || portletName.equals(PortletKeys.MY_WORKFLOW_TASKS) ||
+			portletName.equals(PortletKeys.WORKFLOW_INSTANCES) || portletName.equals(PortletKeys.WORKFLOW_TASKS)) {
+
+			rendererType = AssetRendererFactory.TYPE_LATEST;
+		}
+
+		assetRenderer = assetRendererFactory.getAssetRenderer(classPK, rendererType);
 	}
 
 	String title = assetEntry.getTitle();
