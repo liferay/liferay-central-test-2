@@ -2118,8 +2118,6 @@
 			<forward name="portlet.workflow_definition_links.error" path="portlet.workflow_definitions.error" />
 		</action>
 
-		<action path="/workflow_definitions/view" forward="portlet.workflow_definitions.view" />
-
 		<action path="/workflow_definitions/edit_workflow_instance" type="com.liferay.portlet.workflowinstances.action.EditWorkflowInstanceAction">
 			<forward name="portlet.workflow_instances.edit_workflow_instance" path="portlet.workflow_instances.edit_workflow_instance" />
 			<forward name="portlet.workflow_instances.error" path="portlet.workflow_instances.error" />
@@ -2129,8 +2127,10 @@
 			<forward name="portlet.message_boards.error" path="portlet.workflow_instances.error" />
 		</action>
 
+		<action path="/workflow_definitions/view" forward="portlet.workflow_definitions.view" />
+
 		<action path="/workflow_definitions/view_content" forward="portlet.asset_publisher.view_content" />
-		
+
 		<!-- Workflow Definition Links -->
 
 		<action path="/workflow_definition_links/edit_workflow_definition_link" type="com.liferay.portlet.workflowdefinitionlinks.action.EditWorkflowDefinitionLinkAction">
