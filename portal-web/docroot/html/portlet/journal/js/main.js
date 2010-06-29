@@ -360,7 +360,8 @@ AUI().add(
 							updateContentTimer.cancel();
 						}
 					}
-					catch(e) {}
+					catch(e) {
+					}
 				},
 				null,
 				true
