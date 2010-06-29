@@ -70,6 +70,7 @@ import javax.servlet.jsp.PageContext;
  * <a href="ResourceActionsUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Daeyoung Song
  */
 public class ResourceActionsUtil {
 
@@ -251,6 +252,19 @@ public class ResourceActionsUtil {
 		String name) {
 
 		return _instance._getModelResourceOwnerDefaultActions(name);
+	}
+
+	public static String getPortletBaseModelResource(String portletName) {
+		List<String> modelNames = ResourceActionsUtil.getPortletModelResources(
+			portletName);
+
+		for (String modelName : modelNames) {
+			if (!modelName.contains(".model.")) {
+				return modelName;
+			}
+		}
+
+		return null;
 	}
 
 	public static List<String> getPortletModelResources(String portletName) {
