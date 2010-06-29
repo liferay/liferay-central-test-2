@@ -42,14 +42,6 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 %>
 
 <%!
-private boolean _isWorkflowTaskAssignedToUser(WorkflowTask workflowTask, User user) {
-	if (workflowTask.getAssigneeUserId() == user.getUserId()) {
-		return true;
-	}
-
-	return false;
-}
-
 private boolean _hasOtherAssignees(long[] pooledActorsIds, WorkflowTask workflowTask, User user) {
 	if (pooledActorsIds.length == 0) {
 		return false;
@@ -66,4 +58,11 @@ private boolean _hasOtherAssignees(long[] pooledActorsIds, WorkflowTask workflow
 	return true;
 }
 
+private boolean isAssignedToUser(WorkflowTask workflowTask, User user) {
+	if (workflowTask.getAssigneeUserId() == user.getUserId()) {
+		return true;
+	}
+
+	return false;
+}
 %>

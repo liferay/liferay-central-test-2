@@ -44,7 +44,7 @@ if (workflowTask.getDueDate() != null) {
 %>
 
 <liferay-ui:icon-menu showExpanded="<%= (row == null) %>" showWhenSingleIcon="<%= (row == null) %>">
-	<c:if test="<%= !workflowTask.isCompleted() && _isWorkflowTaskAssignedToUser(workflowTask, user) %>">
+	<c:if test="<%= !workflowTask.isCompleted() && isAssignedToUser(workflowTask, user) %>">
 
 		<%
 		List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(company.getCompanyId(), user.getUserId(), workflowTask.getWorkflowTaskId());
@@ -83,7 +83,7 @@ if (workflowTask.getDueDate() != null) {
 
 	</c:if>
 
-	<c:if test="<%= !workflowTask.isCompleted() && !_isWorkflowTaskAssignedToUser(workflowTask, user) %>">
+	<c:if test="<%= !workflowTask.isCompleted() && !isAssignedToUser(workflowTask, user) %>">
 		<portlet:actionURL var="assignToMeURL">
 			<portlet:param name="struts_action" value="/workflow_tasks/edit_workflow_task" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ASSIGN %>" />
