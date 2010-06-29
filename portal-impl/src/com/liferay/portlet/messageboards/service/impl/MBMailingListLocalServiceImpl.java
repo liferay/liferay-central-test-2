@@ -51,13 +51,13 @@ public class MBMailingListLocalServiceImpl
 	extends MBMailingListLocalServiceBaseImpl {
 
 	public MBMailingList addMailingList(
-			String uuid, long userId, long groupId, long categoryId,
-			String emailAddress, String inProtocol, String inServerName,
-			int inServerPort, boolean inUseSSL, String inUserName,
-			String inPassword, int inReadInterval, String outEmailAddress,
-			boolean outCustom, String outServerName, int outServerPort,
-			boolean outUseSSL, String outUserName, String outPassword,
-			boolean active, ServiceContext serviceContext)
+			long userId, long groupId, long categoryId, String emailAddress,
+			String inProtocol, String inServerName, int inServerPort,
+			boolean inUseSSL, String inUserName, String inPassword,
+			int inReadInterval, String outEmailAddress, boolean outCustom,
+			String outServerName, int outServerPort, boolean outUseSSL,
+			String outUserName, String outPassword, boolean active,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Mailing list
@@ -74,7 +74,7 @@ public class MBMailingListLocalServiceImpl
 		MBMailingList mailingList = mbMailingListPersistence.create(
 			mailingListId);
 
-		mailingList.setUuid(uuid);
+		mailingList.setUuid(serviceContext.getUuid());
 		mailingList.setGroupId(groupId);
 		mailingList.setCompanyId(user.getCompanyId());
 		mailingList.setUserId(user.getUserId());

@@ -55,25 +55,6 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			boolean mailingListActive, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return addCategory(
-			null, userId, parentCategoryId, name, description, emailAddress,
-			inProtocol, inServerName, inServerPort, inUseSSL, inUserName,
-			inPassword, inReadInterval, outEmailAddress, outCustom,
-			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
-			mailingListActive, serviceContext);
-	}
-
-	public MBCategory addCategory(
-			String uuid, long userId, long parentCategoryId,
-			String name, String description, String emailAddress,
-			String inProtocol, String inServerName, int inServerPort,
-			boolean inUseSSL, String inUserName, String inPassword,
-			int inReadInterval, String outEmailAddress, boolean outCustom,
-			String outServerName, int outServerPort, boolean outUseSSL,
-			String outUserName, String outPassword, boolean mailingListActive,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
 		// Category
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -87,7 +68,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		MBCategory category = mbCategoryPersistence.create(categoryId);
 
-		category.setUuid(uuid);
+		category.setUuid(serviceContext.getUuid());
 		category.setGroupId(groupId);
 		category.setCompanyId(user.getCompanyId());
 		category.setUserId(user.getUserId());
@@ -118,10 +99,10 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		// Mailing list
 
 		mbMailingListLocalService.addMailingList(
-			null, userId, groupId, category.getCategoryId(), emailAddress,
-			inProtocol, inServerName, inServerPort, inUseSSL, inUserName,
-			inPassword, inReadInterval, outEmailAddress, outCustom,
-			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
+			userId, groupId, category.getCategoryId(), emailAddress, inProtocol,
+			inServerName, inServerPort, inUseSSL, inUserName, inPassword,
+			inReadInterval, outEmailAddress, outCustom, outServerName,
+			outServerPort, outUseSSL, outUserName, outPassword,
 			mailingListActive, serviceContext);
 
 		// Expando
@@ -447,7 +428,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		}
 		else {
 			mbMailingListLocalService.addMailingList(
-				null, category.getUserId(), category.getGroupId(),
+				category.getUserId(), category.getGroupId(),
 				category.getCategoryId(), emailAddress, inProtocol,
 				inServerName, inServerPort, inUseSSL, inUserName, inPassword,
 				inReadInterval, outEmailAddress, outCustom, outServerName,

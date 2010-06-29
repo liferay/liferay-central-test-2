@@ -133,7 +133,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		try {
 			return addDiscussionMessage(
-				null, userId, userName, groupId, className, classPK, threadId,
+				userId, userName, groupId, className, classPK, threadId,
 				parentMessageId, subject, body, serviceContext);
 		}
 		finally {
@@ -142,9 +142,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public MBMessage addDiscussionMessage(
-			String uuid, long userId, String userName, long groupId,
-			String className, long classPK, long threadId, long parentMessageId,
-			String subject, String body, ServiceContext serviceContext)
+			long userId, String userName, long groupId, String className,
+			long classPK, long threadId, long parentMessageId, String subject,
+			String body, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Message
@@ -167,9 +167,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		serviceContext.setAttribute("classPK", String.valueOf(classPK));
 
 		MBMessage message = addMessage(
-			uuid, userId, userName, groupId, categoryId, threadId,
-			parentMessageId, subject, body, files, anonymous, priority,
-			allowPingbacks, serviceContext);
+			userId, userName, groupId, categoryId, threadId, parentMessageId,
+			subject, body, files, anonymous, priority, allowPingbacks,
+			serviceContext);
 
 		// Discussion
 
@@ -200,29 +200,14 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		long parentMessageId = 0;
 
 		return addMessage(
-			null, userId, userName, groupId, categoryId, threadId,
-			parentMessageId, subject, body, files, anonymous, priority,
-			allowPingbacks, serviceContext);
+			userId, userName, groupId, categoryId, threadId, parentMessageId,
+			subject, body, files, anonymous, priority, allowPingbacks,
+			serviceContext);
 	}
 
 	public MBMessage addMessage(
 			long userId, String userName, long groupId, long categoryId,
 			long threadId, long parentMessageId, String subject, String body,
-			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, boolean allowPingbacks,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addMessage(
-			null, userId, userName, groupId, categoryId, threadId,
-			parentMessageId, subject, body, files, anonymous, priority,
-			allowPingbacks, serviceContext);
-	}
-
-	public MBMessage addMessage(
-			String uuid, long userId, String userName, long groupId,
-			long categoryId, long threadId, long parentMessageId,
-			String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
 			double priority, boolean allowPingbacks,
 			ServiceContext serviceContext)
@@ -258,7 +243,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MBMessage message = mbMessagePersistence.create(messageId);
 
-		message.setUuid(uuid);
+		message.setUuid(serviceContext.getUuid());
 		message.setGroupId(groupId);
 		message.setCompanyId(user.getCompanyId());
 		message.setUserId(user.getUserId());
@@ -859,7 +844,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				//String body = subject;
 
 				message = addDiscussionMessage(
-					null, userId, null, groupId, className, classPK, 0,
+					userId, null, groupId, className, classPK, 0,
 					MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID, subject,
 					subject, new ServiceContext());
 			}

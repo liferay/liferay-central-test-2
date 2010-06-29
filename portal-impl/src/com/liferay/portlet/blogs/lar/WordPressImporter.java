@@ -40,6 +40,7 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
+import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 
 import java.text.DateFormat;
@@ -160,6 +161,8 @@ public class WordPressImporter {
 			BlogsEntry entry, Element commentEl)
 		throws PortalException, SystemException {
 
+		MBThread thread = messageDisplay.getThread();
+
 		long commentId = GetterUtil.getLong(
 			commentEl.elementTextTrim(
 				SAXReaderUtil.createQName("comment_id", _NS_WP)));
@@ -195,10 +198,10 @@ public class WordPressImporter {
 		serviceContext.setAddGuestPermissions(true);
 
 		MBMessage message = MBMessageLocalServiceUtil.addDiscussionMessage(
-			null, defaultUser.getUserId(), commentAuthor, context.getGroupId(),
+			defaultUser.getUserId(), commentAuthor, context.getGroupId(),
 			BlogsEntry.class.getName(), entry.getEntryId(),
-			messageDisplay.getThread().getThreadId(), commentParentId, null,
-			commentContent, serviceContext);
+			thread.getThreadId(), commentParentId, null, commentContent,
+			serviceContext);
 
 		messageIdMap.put(commentId, message.getMessageId());
 	}

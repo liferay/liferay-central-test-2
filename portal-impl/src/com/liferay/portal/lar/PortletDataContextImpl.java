@@ -706,10 +706,11 @@ public class PortletDataContextImpl implements PortletDataContext {
 						message.getUuid(), groupId);
 
 					if (existingMessage == null) {
+						serviceContext.setUuid(message.getUuid());
+
 						importedMessage =
 							MBMessageLocalServiceUtil.addDiscussionMessage(
-								message.getUuid(), userId,
-								message.getUserName(), groupId,
+								userId, message.getUserName(), groupId,
 								classObj.getName(), newClassPK, threadId,
 								parentMessageId, message.getSubject(),
 								message.getBody(), serviceContext);
@@ -725,7 +726,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 				else {
 					importedMessage =
 						MBMessageLocalServiceUtil.addDiscussionMessage(
-							null, userId, message.getUserName(), groupId,
+							userId, message.getUserName(), groupId,
 							classObj.getName(), newClassPK, threadId,
 							parentMessageId, message.getSubject(),
 							message.getBody(), serviceContext);

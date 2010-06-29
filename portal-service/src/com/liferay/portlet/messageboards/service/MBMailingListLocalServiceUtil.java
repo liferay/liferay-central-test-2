@@ -129,7 +129,7 @@ public class MBMailingListLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMailingList addMailingList(
-		java.lang.String uuid, long userId, long groupId, long categoryId,
+		long userId, long groupId, long categoryId,
 		java.lang.String emailAddress, java.lang.String inProtocol,
 		java.lang.String inServerName, int inServerPort, boolean inUseSSL,
 		java.lang.String inUserName, java.lang.String inPassword,
@@ -141,9 +141,9 @@ public class MBMailingListLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addMailingList(uuid, userId, groupId, categoryId,
-			emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
-			inUserName, inPassword, inReadInterval, outEmailAddress, outCustom,
+				   .addMailingList(userId, groupId, categoryId, emailAddress,
+			inProtocol, inServerName, inServerPort, inUseSSL, inUserName,
+			inPassword, inReadInterval, outEmailAddress, outCustom,
 			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
 			active, serviceContext);
 	}

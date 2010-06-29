@@ -114,7 +114,7 @@ public interface MBMailingListLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMailingList addMailingList(
-		java.lang.String uuid, long userId, long groupId, long categoryId,
+		long userId, long groupId, long categoryId,
 		java.lang.String emailAddress, java.lang.String inProtocol,
 		java.lang.String inServerName, int inServerPort, boolean inUseSSL,
 		java.lang.String inUserName, java.lang.String inPassword,

@@ -83,7 +83,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			permissionClassPK, user.getUserId(), ActionKeys.ADD_DISCUSSION);
 
 		return mbMessageLocalService.addDiscussionMessage(
-			null, user.getUserId(), null, groupId, className, classPK, threadId,
+			user.getUserId(), null, groupId, className, classPK, threadId,
 			parentMessageId, subject, body, serviceContext);
 	}
 
