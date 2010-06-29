@@ -74,6 +74,7 @@ public class MBMessageJSONSerializer {
 		jsonObj.put("classPK", model.getClassPK());
 		jsonObj.put("categoryId", model.getCategoryId());
 		jsonObj.put("threadId", model.getThreadId());
+		jsonObj.put("rootMessageId", model.getRootMessageId());
 		jsonObj.put("parentMessageId", model.getParentMessageId());
 		jsonObj.put("subject", model.getSubject());
 		jsonObj.put("body", model.getBody());

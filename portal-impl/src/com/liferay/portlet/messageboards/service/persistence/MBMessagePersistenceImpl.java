@@ -570,6 +570,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		mbMessageImpl.setClassPK(mbMessage.getClassPK());
 		mbMessageImpl.setCategoryId(mbMessage.getCategoryId());
 		mbMessageImpl.setThreadId(mbMessage.getThreadId());
+		mbMessageImpl.setRootMessageId(mbMessage.getRootMessageId());
 		mbMessageImpl.setParentMessageId(mbMessage.getParentMessageId());
 		mbMessageImpl.setSubject(mbMessage.getSubject());
 		mbMessageImpl.setBody(mbMessage.getBody());

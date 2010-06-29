@@ -46,7 +46,6 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -196,14 +195,8 @@ public class MBIndexer extends BaseIndexer {
 		document.addKeyword(Field.ENTRY_CLASS_NAME, MBMessage.class.getName());
 		document.addKeyword(Field.ENTRY_CLASS_PK, messageId);
 
-		try {
-			MBThread thread = MBThreadLocalServiceUtil.getMBThread(threadId);
-
-			document.addKeyword(
-				Field.ROOT_ENTRY_CLASS_PK, thread.getRootMessageId());
-		}
-		catch (Exception e) {
-		}
+		document.addKeyword(
+			Field.ROOT_ENTRY_CLASS_PK, message.getRootMessageId());
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 

@@ -74,6 +74,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 			{ "classPK", new Integer(Types.BIGINT) },
 			{ "categoryId", new Integer(Types.BIGINT) },
 			{ "threadId", new Integer(Types.BIGINT) },
+			{ "rootMessageId", new Integer(Types.BIGINT) },
 			{ "parentMessageId", new Integer(Types.BIGINT) },
 			{ "subject", new Integer(Types.VARCHAR) },
 			{ "body", new Integer(Types.CLOB) },
@@ -86,7 +87,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 			{ "statusByUserName", new Integer(Types.VARCHAR) },
 			{ "statusDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table MBMessage (uuid_ VARCHAR(75) null,messageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,categoryId LONG,threadId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,attachments BOOLEAN,anonymous BOOLEAN,priority DOUBLE,allowPingbacks BOOLEAN,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table MBMessage (uuid_ VARCHAR(75) null,messageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,categoryId LONG,threadId LONG,rootMessageId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,attachments BOOLEAN,anonymous BOOLEAN,priority DOUBLE,allowPingbacks BOOLEAN,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table MBMessage";
 	public static final String ORDER_BY_JPQL = " ORDER BY mbMessage.createDate ASC, mbMessage.messageId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY MBMessage.createDate ASC, MBMessage.messageId ASC";
@@ -115,6 +116,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 		model.setClassPK(soapModel.getClassPK());
 		model.setCategoryId(soapModel.getCategoryId());
 		model.setThreadId(soapModel.getThreadId());
+		model.setRootMessageId(soapModel.getRootMessageId());
 		model.setParentMessageId(soapModel.getParentMessageId());
 		model.setSubject(soapModel.getSubject());
 		model.setBody(soapModel.getBody());
@@ -296,6 +298,14 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 
 	public void setThreadId(long threadId) {
 		_threadId = threadId;
+	}
+
+	public long getRootMessageId() {
+		return _rootMessageId;
+	}
+
+	public void setRootMessageId(long rootMessageId) {
+		_rootMessageId = rootMessageId;
 	}
 
 	public long getParentMessageId() {
@@ -496,6 +506,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 		clone.setClassPK(getClassPK());
 		clone.setCategoryId(getCategoryId());
 		clone.setThreadId(getThreadId());
+		clone.setRootMessageId(getRootMessageId());
 		clone.setParentMessageId(getParentMessageId());
 		clone.setSubject(getSubject());
 		clone.setBody(getBody());
@@ -566,7 +577,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(47);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -592,6 +603,8 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 		sb.append(getCategoryId());
 		sb.append(", threadId=");
 		sb.append(getThreadId());
+		sb.append(", rootMessageId=");
+		sb.append(getRootMessageId());
 		sb.append(", parentMessageId=");
 		sb.append(getParentMessageId());
 		sb.append(", subject=");
@@ -620,7 +633,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(73);
+		StringBundler sb = new StringBundler(76);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.messageboards.model.MBMessage");
@@ -673,6 +686,10 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 		sb.append(
 			"<column><column-name>threadId</column-name><column-value><![CDATA[");
 		sb.append(getThreadId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>rootMessageId</column-name><column-value><![CDATA[");
+		sb.append(getRootMessageId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>parentMessageId</column-name><column-value><![CDATA[");
@@ -740,6 +757,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	private long _classPK;
 	private long _categoryId;
 	private long _threadId;
+	private long _rootMessageId;
 	private long _parentMessageId;
 	private String _subject;
 	private String _body;

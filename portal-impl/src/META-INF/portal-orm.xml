@@ -1893,6 +1893,7 @@
 			<basic name="classPK" />
 			<basic name="categoryId" />
 			<basic name="threadId" />
+			<basic name="rootMessageId" />
 			<basic name="parentMessageId" />
 			<basic name="subject" />
 			<basic name="body" />

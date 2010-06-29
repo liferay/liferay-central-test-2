@@ -105,6 +105,10 @@ public interface MBMessageModel extends BaseModel<MBMessage> {
 
 	public void setThreadId(long threadId);
 
+	public long getRootMessageId();
+
+	public void setRootMessageId(long rootMessageId);
+
 	public long getParentMessageId();
 
 	public void setParentMessageId(long parentMessageId);

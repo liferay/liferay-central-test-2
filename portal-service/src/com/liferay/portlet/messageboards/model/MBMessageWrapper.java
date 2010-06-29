@@ -153,6 +153,14 @@ public class MBMessageWrapper implements MBMessage {
 		_mbMessage.setThreadId(threadId);
 	}
 
+	public long getRootMessageId() {
+		return _mbMessage.getRootMessageId();
+	}
+
+	public void setRootMessageId(long rootMessageId) {
+		_mbMessage.setRootMessageId(rootMessageId);
+	}
+
 	public long getParentMessageId() {
 		return _mbMessage.getParentMessageId();
 	}

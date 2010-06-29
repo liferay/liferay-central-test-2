@@ -865,6 +865,7 @@ create table MBMessage (
 	classPK LONG,
 	categoryId LONG,
 	threadId LONG,
+	rootMessageId LONG,
 	parentMessageId LONG,
 	subject VARCHAR(75) null,
 	body TEXT null,

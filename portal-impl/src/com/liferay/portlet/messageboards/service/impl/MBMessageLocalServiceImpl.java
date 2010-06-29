@@ -301,6 +301,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		message.setCategoryId(categoryId);
 		message.setThreadId(threadId);
+		message.setRootMessageId(thread.getRootMessageId());
 		message.setParentMessageId(parentMessageId);
 		message.setSubject(subject);
 		message.setBody(body);
@@ -620,6 +621,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 					childMessage.setParentMessageId(
 						MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID);
+					childMessage.setRootMessageId(childMessage.getMessageId());
 
 					mbMessagePersistence.update(childMessage, false);
 

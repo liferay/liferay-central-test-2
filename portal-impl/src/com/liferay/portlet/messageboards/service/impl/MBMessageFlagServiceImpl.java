@@ -21,7 +21,6 @@ import com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
 import com.liferay.portlet.messageboards.model.MBMessageFlagConstants;
-import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.base.MBMessageFlagServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
 
@@ -43,11 +42,8 @@ public class MBMessageFlagServiceImpl extends MBMessageFlagServiceBaseImpl {
 			return;
 		}
 
-		MBThread thread = mbThreadPersistence.findByPrimaryKey(
-			message.getThreadId());
-
 		MBMessage rootMessage = mbMessagePersistence.findByPrimaryKey(
-			thread.getRootMessageId());
+			message.getRootMessageId());
 
 		MBMessagePermission.check(
 			getPermissionChecker(), rootMessage.getMessageId(),
@@ -97,11 +93,8 @@ public class MBMessageFlagServiceImpl extends MBMessageFlagServiceBaseImpl {
 			return;
 		}
 
-		MBThread thread = mbThreadPersistence.findByPrimaryKey(
-			message.getThreadId());
-
 		MBMessage rootMessage = mbMessagePersistence.findByPrimaryKey(
-			thread.getRootMessageId());
+			message.getRootMessageId());
 
 		MBMessagePermission.check(
 			getPermissionChecker(), rootMessage.getMessageId(),

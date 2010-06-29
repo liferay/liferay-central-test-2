@@ -78,6 +78,7 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		newMBMessage.setClassPK(nextLong());
 		newMBMessage.setCategoryId(nextLong());
 		newMBMessage.setThreadId(nextLong());
+		newMBMessage.setRootMessageId(nextLong());
 		newMBMessage.setParentMessageId(nextLong());
 		newMBMessage.setSubject(randomString());
 		newMBMessage.setBody(randomString());
@@ -112,6 +113,8 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingMBMessage.getCategoryId(),
 			newMBMessage.getCategoryId());
 		assertEquals(existingMBMessage.getThreadId(), newMBMessage.getThreadId());
+		assertEquals(existingMBMessage.getRootMessageId(),
+			newMBMessage.getRootMessageId());
 		assertEquals(existingMBMessage.getParentMessageId(),
 			newMBMessage.getParentMessageId());
 		assertEquals(existingMBMessage.getSubject(), newMBMessage.getSubject());
@@ -214,6 +217,7 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		mbMessage.setClassPK(nextLong());
 		mbMessage.setCategoryId(nextLong());
 		mbMessage.setThreadId(nextLong());
+		mbMessage.setRootMessageId(nextLong());
 		mbMessage.setParentMessageId(nextLong());
 		mbMessage.setSubject(randomString());
 		mbMessage.setBody(randomString());

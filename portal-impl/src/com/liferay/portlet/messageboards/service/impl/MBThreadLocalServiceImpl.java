@@ -491,6 +491,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		// Update message
 
 		message.setThreadId(thread.getThreadId());
+		message.setRootMessageId(thread.getRootMessageId());
 		message.setParentMessageId(0);
 		message.setAttachmentsDir(null);
 
@@ -647,6 +648,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 			message.setCategoryId(parentMessage.getCategoryId());
 			message.setThreadId(parentMessage.getThreadId());
+			message.setRootMessageId(parentMessage.getRootMessageId());
 			message.setAttachmentsDir(null);
 
 			mbMessagePersistence.update(message, false);
