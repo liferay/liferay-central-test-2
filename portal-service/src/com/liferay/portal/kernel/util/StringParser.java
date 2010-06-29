@@ -106,7 +106,7 @@ public class StringParser {
 
 			String value = matcher.group(i);
 
-			if (_stringEncoder != null) {
+			if (_stringEncoder != null && !stringParserFragment.isRaw()) {
 				value = _stringEncoder.decode(value);
 			}
 
