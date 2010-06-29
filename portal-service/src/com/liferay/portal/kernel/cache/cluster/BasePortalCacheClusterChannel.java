@@ -28,7 +28,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * @author Shuyang Zhou
  */
 public abstract class BasePortalCacheClusterChannel
-	extends Thread implements PortalCacheClusterChannel, Runnable {
+	implements PortalCacheClusterChannel, Runnable {
 
 	public BasePortalCacheClusterChannel() {
 		_dispatchThread = new Thread(
