@@ -114,9 +114,8 @@ public interface WikiNodeLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.wiki.model.WikiNode addNode(
-		java.lang.String uuid, long userId, java.lang.String name,
-		java.lang.String description,
+	public com.liferay.portlet.wiki.model.WikiNode addNode(long userId,
+		java.lang.String name, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

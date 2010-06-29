@@ -124,9 +124,11 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 
 			if (existingNode == null) {
+				serviceContext.setUuid(node.getUuid());
+
 				importedNode = WikiNodeLocalServiceUtil.addNode(
-					node.getUuid(), userId, node.getName(),
-					node.getDescription(), serviceContext);
+					userId, node.getName(), node.getDescription(),
+					serviceContext);
 			}
 			else {
 				importedNode = WikiNodeLocalServiceUtil.updateNode(
@@ -147,8 +149,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 
 			importedNode = WikiNodeLocalServiceUtil.addNode(
-				null, userId, node.getName(), node.getDescription(),
-				serviceContext);
+				userId, node.getName(), node.getDescription(), serviceContext);
 		}
 
 		Map<Long, Long> nodePKs =
@@ -219,12 +220,13 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 
 			if (existingPage == null) {
+				serviceContext.setUuid(page.getUuid());
+
 				importedPage = WikiPageLocalServiceUtil.addPage(
-					page.getUuid(), userId, nodeId, page.getTitle(),
-					page.getVersion(), page.getContent(), page.getSummary(),
-					true, page.getFormat(), page.getHead(),
-					page.getParentTitle(), page.getRedirectTitle(),
-					serviceContext);
+					userId, nodeId, page.getTitle(), page.getVersion(),
+					page.getContent(), page.getSummary(), true,
+					page.getFormat(), page.getHead(), page.getParentTitle(),
+					page.getRedirectTitle(), serviceContext);
 			}
 			else {
 				importedPage = WikiPageLocalServiceUtil.updatePage(
@@ -236,10 +238,10 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 		else {
 			importedPage = WikiPageLocalServiceUtil.addPage(
-				null, userId, nodeId, page.getTitle(), page.getVersion(),
-				page.getContent(), page.getSummary(), true,
-				page.getFormat(), page.getHead(), page.getParentTitle(),
-				page.getRedirectTitle(), serviceContext);
+				userId, nodeId, page.getTitle(), page.getVersion(),
+				page.getContent(), page.getSummary(), true, page.getFormat(),
+				page.getHead(), page.getParentTitle(), page.getRedirectTitle(),
+				serviceContext);
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "attachments") &&

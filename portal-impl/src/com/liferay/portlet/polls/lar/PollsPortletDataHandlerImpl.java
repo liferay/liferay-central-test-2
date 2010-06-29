@@ -203,9 +203,13 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 				choice.getUuid(), context.getScopeGroupId());
 
 			if (existingChoice == null) {
+				ServiceContext serviceContext = new ServiceContext();
+
+				serviceContext.setUuid(choice.getUuid());
+
 				importedChoice = PollsChoiceLocalServiceUtil.addChoice(
-					choice.getUuid(), questionId, choice.getName(),
-					choice.getDescription());
+					questionId, choice.getName(), choice.getDescription(),
+					serviceContext);
 			}
 			else {
 				importedChoice = PollsChoiceLocalServiceUtil.updateChoice(
@@ -215,7 +219,8 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 		else {
 			importedChoice = PollsChoiceLocalServiceUtil.addChoice(
-				null, questionId, choice.getName(), choice.getDescription());
+				questionId, choice.getName(), choice.getDescription(),
+				new ServiceContext());
 		}
 
 		Map<Long, Long> choicePKs =
@@ -275,8 +280,10 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 				question.getUuid(), context.getScopeGroupId());
 
 			if (existingQuestion == null) {
+				serviceContext.setUuid(question.getUuid());
+
 				importedQuestion = PollsQuestionLocalServiceUtil.addQuestion(
-					question.getUuid(), userId, question.getTitleMap(),
+					userId, question.getTitleMap(),
 					question.getDescriptionMap(), expirationMonth,
 					expirationDay, expirationYear, expirationHour,
 					expirationMinute, neverExpire, null, serviceContext);
@@ -292,10 +299,9 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 		else {
 			importedQuestion = PollsQuestionLocalServiceUtil.addQuestion(
-				null, userId, question.getTitleMap(),
-				question.getDescriptionMap(), expirationMonth, expirationDay,
-				expirationYear, expirationHour, expirationMinute, neverExpire,
-				null, serviceContext);
+				userId, question.getTitleMap(), question.getDescriptionMap(),
+				expirationMonth, expirationDay, expirationYear, expirationHour,
+				expirationMinute, neverExpire, null, serviceContext);
 		}
 
 		Map<Long, Long> questionPKs =

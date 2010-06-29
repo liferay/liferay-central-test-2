@@ -114,7 +114,7 @@ public interface PollsQuestionLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
-		java.lang.String uuid, long userId,
+		long userId,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,

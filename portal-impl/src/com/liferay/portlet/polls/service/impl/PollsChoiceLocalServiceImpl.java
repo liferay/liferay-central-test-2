@@ -17,6 +17,7 @@ package com.liferay.portlet.polls.service.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.polls.QuestionChoiceException;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.service.base.PollsChoiceLocalServiceBaseImpl;
@@ -32,7 +33,8 @@ public class PollsChoiceLocalServiceImpl
 	extends PollsChoiceLocalServiceBaseImpl {
 
 	public PollsChoice addChoice(
-			String uuid, long questionId, String name, String description)
+			long questionId, String name, String description,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		validate(name, description);
@@ -43,7 +45,7 @@ public class PollsChoiceLocalServiceImpl
 
 		PollsChoice choice = pollsChoicePersistence.create(choiceId);
 
-		choice.setUuid(uuid);
+		choice.setUuid(serviceContext.getUuid());
 		choice.setQuestionId(questionId);
 		choice.setName(name);
 		choice.setDescription(description);

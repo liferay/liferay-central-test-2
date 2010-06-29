@@ -132,7 +132,7 @@ public class PollsQuestionLocalServiceWrapper
 	}
 
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
-		java.lang.String uuid, long userId,
+		long userId,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
@@ -141,7 +141,7 @@ public class PollsQuestionLocalServiceWrapper
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _pollsQuestionLocalService.addQuestion(uuid, userId, titleMap,
+		return _pollsQuestionLocalService.addQuestion(userId, titleMap,
 			descriptionMap, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
 			neverExpire, choices, serviceContext);

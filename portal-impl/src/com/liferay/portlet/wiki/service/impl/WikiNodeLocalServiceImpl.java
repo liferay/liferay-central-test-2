@@ -61,11 +61,11 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		String nodeName = PropsUtil.get(PropsKeys.WIKI_INITIAL_NODE_NAME);
 
 		return addNode(
-			null, userId, nodeName, StringPool.BLANK, serviceContext);
+			userId, nodeName, StringPool.BLANK, serviceContext);
 	}
 
 	public WikiNode addNode(
-			String uuid, long userId, String name, String description,
+			long userId, String name, String description,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -81,7 +81,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 		WikiNode node = wikiNodePersistence.create(nodeId);
 
-		node.setUuid(uuid);
+		node.setUuid(serviceContext.getUuid());
 		node.setGroupId(groupId);
 		node.setCompanyId(user.getCompanyId());
 		node.setUserId(user.getUserId());

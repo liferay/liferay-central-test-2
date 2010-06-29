@@ -134,17 +134,16 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 			summary, minorEdit, serviceContext);
 	}
 
-	public com.liferay.portlet.wiki.model.WikiPage addPage(
-		java.lang.String uuid, long userId, long nodeId,
-		java.lang.String title, double version, java.lang.String content,
-		java.lang.String summary, boolean minorEdit, java.lang.String format,
-		boolean head, java.lang.String parentTitle,
+	public com.liferay.portlet.wiki.model.WikiPage addPage(long userId,
+		long nodeId, java.lang.String title, double version,
+		java.lang.String content, java.lang.String summary, boolean minorEdit,
+		java.lang.String format, boolean head, java.lang.String parentTitle,
 		java.lang.String redirectTitle,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _wikiPageLocalService.addPage(uuid, userId, nodeId, title,
-			version, content, summary, minorEdit, format, head, parentTitle,
+		return _wikiPageLocalService.addPage(userId, nodeId, title, version,
+			content, summary, minorEdit, format, head, parentTitle,
 			redirectTitle, serviceContext);
 	}
 

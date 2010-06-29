@@ -115,7 +115,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			String summary, boolean minorEdit, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		String uuid = null;
 		double version = WikiPageConstants.DEFAULT_VERSION;
 		String format = WikiPageConstants.DEFAULT_FORMAT;
 		boolean head = false;
@@ -123,12 +122,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String redirectTitle = null;
 
 		return addPage(
-			uuid, userId, nodeId, title, version, content, summary, minorEdit,
-			format, head, parentTitle, redirectTitle, serviceContext);
+			userId, nodeId, title, version, content, summary, minorEdit, format,
+			head, parentTitle, redirectTitle, serviceContext);
 	}
 
 	public WikiPage addPage(
-			String uuid, long userId, long nodeId, String title, double version,
+			long userId, long nodeId, String title, double version,
 			String content, String summary, boolean minorEdit, String format,
 			boolean head, String parentTitle, String redirectTitle,
 			ServiceContext serviceContext)
@@ -150,7 +149,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		WikiPage page = wikiPagePersistence.create(pageId);
 
-		page.setUuid(uuid);
+		page.setUuid(serviceContext.getUuid());
 		page.setResourcePrimKey(resourcePrimKey);
 		page.setGroupId(node.getGroupId());
 		page.setCompanyId(user.getCompanyId());
@@ -952,7 +951,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Create stub page at the old location
 
-		String uuid = null;
 		double version = WikiPageConstants.DEFAULT_VERSION;
 		String summary = WikiPageConstants.MOVED + " to " + title;
 		String format = page.getFormat();
@@ -964,8 +962,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				StringPool.DOUBLE_CLOSE_BRACKET;
 
 		addPage(
-			uuid, userId, nodeId, title, version, content, summary, false,
-			format, head, parentTitle, redirectTitle, serviceContext);
+			userId, nodeId, title, version, content, summary, false, format,
+			head, parentTitle, redirectTitle, serviceContext);
 
 		// Move redirects to point to the page with the new title
 
@@ -1087,7 +1085,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 		catch (NoSuchPageException nspe) {
 			return addPage(
-				null, userId, nodeId, title, WikiPageConstants.DEFAULT_VERSION,
+				userId, nodeId, title, WikiPageConstants.DEFAULT_VERSION,
 				content, summary, minorEdit, format, true, parentTitle,
 				redirectTitle, serviceContext);
 		}

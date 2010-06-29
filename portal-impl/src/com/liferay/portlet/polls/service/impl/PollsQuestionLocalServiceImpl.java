@@ -46,7 +46,7 @@ public class PollsQuestionLocalServiceImpl
 	extends PollsQuestionLocalServiceBaseImpl {
 
 	public PollsQuestion addQuestion(
-			String uuid, long userId, Map<Locale, String> titleMap,
+			long userId, Map<Locale, String> titleMap,
 			Map<Locale, String> descriptionMap, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
@@ -76,7 +76,7 @@ public class PollsQuestionLocalServiceImpl
 
 		PollsQuestion question = pollsQuestionPersistence.create(questionId);
 
-		question.setUuid(uuid);
+		question.setUuid(serviceContext.getUuid());
 		question.setGroupId(groupId);
 		question.setCompanyId(user.getCompanyId());
 		question.setUserId(user.getUserId());
@@ -109,8 +109,8 @@ public class PollsQuestionLocalServiceImpl
 		if (choices != null) {
 			for (PollsChoice choice : choices) {
 				pollsChoiceLocalService.addChoice(
-					null, questionId, choice.getName(),
-					choice.getDescription());
+					questionId, choice.getName(), choice.getDescription(),
+					new ServiceContext());
 			}
 		}
 
@@ -279,7 +279,8 @@ public class PollsQuestionLocalServiceImpl
 
 				if (choice == null) {
 					pollsChoiceLocalService.addChoice(
-						null, questionId, choiceName, choiceDescription);
+						questionId, choiceName, choiceDescription,
+						new ServiceContext());
 				}
 				else {
 					pollsChoiceLocalService.updateChoice(
