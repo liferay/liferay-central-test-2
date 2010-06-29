@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.upgrade.v6_0_3.UpgradeAsset;
 import com.liferay.portal.upgrade.v6_0_3.UpgradeAssetPublisher;
+import com.liferay.portal.upgrade.v6_0_3.UpgradeDocumentLibrary;
 import com.liferay.portal.upgrade.v6_0_3.UpgradePermission;
 import com.liferay.portal.upgrade.v6_0_3.UpgradeSchema;
 import com.liferay.portal.upgrade.v6_0_3.UpgradeSitemap;
@@ -37,8 +38,9 @@ public class UpgradeProcess_6_0_3 extends UpgradeProcess {
 		upgrade(UpgradeSchema.class);
 		upgrade(UpgradeAsset.class);
 		upgrade(UpgradeAssetPublisher.class);
-		upgrade(UpgradeSitemap.class);
+		upgrade(UpgradeDocumentLibrary.class);
 		upgrade(UpgradePermission.class);
+		upgrade(UpgradeSitemap.class);		
 	}
 
 }

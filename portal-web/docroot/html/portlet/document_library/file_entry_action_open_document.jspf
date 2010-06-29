@@ -49,7 +49,7 @@
 
 	String officeDoc = null;
 
-	String curExtension = FileUtil.getExtension(fileEntry.getTitle());
+	String curExtension = fileEntry.getExtension();
 
 	if (portletDisplay.isWebDAVEnabled() && BrowserSnifferUtil.isIe(request)) {
 		if (curExtension.equalsIgnoreCase("doc") ||

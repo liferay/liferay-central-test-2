@@ -17,7 +17,6 @@ package com.liferay.portlet.documentlibrary.util;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -203,8 +202,8 @@ public class DLUtil {
 		return 0;
 	}
 
-	public static String getFileIcon(String title) {
-		return _instance._getFileIcon(title);
+	public static String getFileIcon(String extension) {
+		return _instance._getFileIcon(extension);
 	}
 
 	public static String getGenericName(String extension) {
@@ -303,9 +302,7 @@ public class DLUtil {
 		_genericNames.put("wmv", "video");
 	}
 
-	private String _getFileIcon(String title) {
-		String extension = FileUtil.getExtension(title);
-
+	private String _getFileIcon(String extension) {
 		if (!_fileIcons.contains(extension)) {
 			extension = _DEFAULT_FILE_ICON;
 		}

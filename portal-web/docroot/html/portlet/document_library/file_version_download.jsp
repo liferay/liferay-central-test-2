@@ -31,6 +31,6 @@ Boolean hasLock = (Boolean)objArray[5];
 <liferay-ui:icon
 	image='<%= "../file_system/small/" + fileEntry.getIcon() %>'
 	label="<%= true %>"
-	message="<%= FileUtil.getExtension(fileEntry.getTitle()).toUpperCase() %>"
+	message="<%= fileEntry.getExtension().toUpperCase() %>"
 	url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) + "?version=" + fileVersion.getVersion() %>'
 />

@@ -27,6 +27,7 @@
 
 		<column name="folderId" type="long" />
 		<column name="name" type="String" />
+		<column name="extension" type="String" />
 		<column name="title" type="String" />
 		<column name="description" type="String" />
 		<column name="version" type="String" />

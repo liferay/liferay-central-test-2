@@ -58,11 +58,7 @@ else if (toFolderId > 0) {
 
 toFileEntry = toFileEntry.toEscapedModel();
 
-String extension = null;
-
-if (Validator.isNotNull(toFileEntry.getName())) {
-	extension = FileUtil.getExtension(toFileEntry.getTitle());
-}
+String extension = toFileEntry.getExtension();
 
 String[] conversions = new String[0];
 

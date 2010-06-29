@@ -109,7 +109,7 @@ public class DLFileEntryImpl
 	}
 
 	public String getIcon() {
-		return DLUtil.getFileIcon(getTitle());
+		return DLUtil.getFileIcon(getExtension());
 	}
 
 	public Lock getLock() {

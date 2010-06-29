@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -144,6 +145,8 @@ public class DLFileEntryLocalServiceImpl
 			title = name;
 		}
 
+		String extension = FileUtil.getExtension(name);
+
 		name = String.valueOf(
 			counterLocalService.increment(DLFileEntry.class.getName()));
 
@@ -166,6 +169,7 @@ public class DLFileEntryLocalServiceImpl
 		fileEntry.setModifiedDate(serviceContext.getModifiedDate(now));
 		fileEntry.setFolderId(folderId);
 		fileEntry.setName(name);
+		fileEntry.setExtension(extension);
 		fileEntry.setTitle(title);
 		fileEntry.setDescription(description);
 		fileEntry.setVersion(DLFileEntryConstants.DEFAULT_VERSION);
@@ -1338,7 +1342,7 @@ public class DLFileEntryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		if (Validator.isNotNull(sourceFileName)) {
-			dlLocalService.validate(title, sourceFileName, is);
+			dlLocalService.validate(sourceFileName, sourceFileName, is);
 		}
 
 		if (folderId != newFolderId) {

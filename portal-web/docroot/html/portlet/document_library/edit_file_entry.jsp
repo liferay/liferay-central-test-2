@@ -37,8 +37,8 @@ String title = BeanParamUtil.getString(fileEntry, request, "title");
 
 String extension = StringPool.BLANK;
 
-if (Validator.isNotNull(title)) {
-	extension = FileUtil.getExtension(title);
+if (fileEntry != null) {
+	extension = fileEntry.getExtension();
 }
 
 String assetTagNames = ParamUtil.getString(request, "assetTagNames");

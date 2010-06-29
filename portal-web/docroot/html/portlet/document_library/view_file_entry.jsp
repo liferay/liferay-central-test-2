@@ -34,11 +34,7 @@ long folderId = fileEntry.getFolderId();
 String name = fileEntry.getName();
 String title = fileEntry.getTitle();
 
-String extension = StringPool.BLANK;
-
-if (Validator.isNotNull(title)) {
-	extension = FileUtil.getExtension(title);
-}
+String extension = fileEntry.getExtension();
 
 String[] conversions = new String[0];
 
