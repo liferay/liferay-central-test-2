@@ -246,6 +246,55 @@ public class MBThreadUtil {
 			orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_NotC(
+		long groupId, long categoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByG_NotC(groupId, categoryId);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_NotC(
+		long groupId, long categoryId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByG_NotC(groupId, categoryId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_NotC(
+		long groupId, long categoryId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByG_NotC(groupId, categoryId, start, end,
+			orderByComparator);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBThread findByG_NotC_First(
+		long groupId, long categoryId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException {
+		return getPersistence()
+				   .findByG_NotC_First(groupId, categoryId, orderByComparator);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBThread findByG_NotC_Last(
+		long groupId, long categoryId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException {
+		return getPersistence()
+				   .findByG_NotC_Last(groupId, categoryId, orderByComparator);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBThread[] findByG_NotC_PrevAndNext(
+		long threadId, long groupId, long categoryId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException {
+		return getPersistence()
+				   .findByG_NotC_PrevAndNext(threadId, groupId, categoryId,
+			orderByComparator);
+	}
+
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_S(
 		long groupId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -449,6 +498,58 @@ public class MBThreadUtil {
 			status, orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_NotC_S(
+		long groupId, long categoryId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByG_NotC_S(groupId, categoryId, status);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_NotC_S(
+		long groupId, long categoryId, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByG_NotC_S(groupId, categoryId, status, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_NotC_S(
+		long groupId, long categoryId, int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByG_NotC_S(groupId, categoryId, status, start, end,
+			orderByComparator);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBThread findByG_NotC_S_First(
+		long groupId, long categoryId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException {
+		return getPersistence()
+				   .findByG_NotC_S_First(groupId, categoryId, status,
+			orderByComparator);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBThread findByG_NotC_S_Last(
+		long groupId, long categoryId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException {
+		return getPersistence()
+				   .findByG_NotC_S_Last(groupId, categoryId, status,
+			orderByComparator);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBThread[] findByG_NotC_S_PrevAndNext(
+		long threadId, long groupId, long categoryId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException {
+		return getPersistence()
+				   .findByG_NotC_S_PrevAndNext(threadId, groupId, categoryId,
+			status, orderByComparator);
+	}
+
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
@@ -477,6 +578,11 @@ public class MBThreadUtil {
 		getPersistence().removeByG_C(groupId, categoryId);
 	}
 
+	public static void removeByG_NotC(long groupId, long categoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByG_NotC(groupId, categoryId);
+	}
+
 	public static void removeByG_S(long groupId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByG_S(groupId, status);
@@ -498,6 +604,11 @@ public class MBThreadUtil {
 		getPersistence().removeByG_C_S(groupId, categoryId, status);
 	}
 
+	public static void removeByG_NotC_S(long groupId, long categoryId,
+		int status) throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByG_NotC_S(groupId, categoryId, status);
+	}
+
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
@@ -511,6 +622,11 @@ public class MBThreadUtil {
 	public static int countByG_C(long groupId, long categoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_C(groupId, categoryId);
+	}
+
+	public static int countByG_NotC(long groupId, long categoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByG_NotC(groupId, categoryId);
 	}
 
 	public static int countByG_S(long groupId, int status)
@@ -532,6 +648,11 @@ public class MBThreadUtil {
 	public static int countByG_C_S(long groupId, long categoryId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_C_S(groupId, categoryId, status);
+	}
+
+	public static int countByG_NotC_S(long groupId, long categoryId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByG_NotC_S(groupId, categoryId, status);
 	}
 
 	public static int countAll()
