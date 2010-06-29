@@ -21,7 +21,7 @@ List<WorkflowInstance> resultsInstances = null;
 
 int totalInstances = 0;
 
-if (portletName.equals(PortletKeys.WORKFLOW_INSTANCES)) {
+if (portletName.equals(PortletKeys.WORKFLOW_DEFINITIONS) || portletName.equals(PortletKeys.WORKFLOW_INSTANCES)) {
 	if (completedInstances) {
 		searchContainer.setEmptyResultsMessage("there-are-no-completed-instances");
 	}

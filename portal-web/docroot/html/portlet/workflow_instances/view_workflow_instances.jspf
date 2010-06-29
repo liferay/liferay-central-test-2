@@ -15,15 +15,17 @@
 %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "pending");
+String tabs2 = ParamUtil.getString(request, "tabs2", "pending");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("tabs1", tabs1);
+portletURL.setParameter("tabs1", "publication-requests");
+portletURL.setParameter("tabs2", tabs2);
 %>
 
 <liferay-ui:tabs
 	names="pending,completed"
+	param="tabs2"
 	portletURL="<%= portletURL %>"
 />
 
@@ -31,7 +33,7 @@ portletURL.setParameter("tabs1", tabs1);
 try {
 	boolean completedInstances = true;
 
-	if (tabs1.equals("pending")) {
+	if (tabs2.equals("pending")) {
 		completedInstances = false;
 	}
 %>
@@ -53,7 +55,7 @@ catch (Exception e) {
 <%
 }
 
-PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, tabs1), currentURL);
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, tabs2), currentURL);
 %>
 
 <%!
