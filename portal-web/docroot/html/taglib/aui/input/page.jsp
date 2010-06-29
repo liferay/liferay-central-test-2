@@ -222,9 +222,15 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 		if (value != null) {
 			valueString = value.toString();
 		}
-		else {
-			if (type.equals("text") || type.equals("textarea")) {
-				valueString = ParamUtil.getString(request, name);
+		else if (type.equals("hidden") || type.equals("text") || type.equals("textarea")) {
+			valueString = BeanParamUtil.getString(bean, request, name, StringPool.BLANK, false);
+
+			String fieldParam = (String)dynamicAttributes.get("fieldParam");
+
+			String fieldParamValue = request.getParameter(fieldParam);
+
+			if (Validator.isNotNull(fieldParamValue)) {
+				valueString = fieldParamValue;
 			}
 		}
 

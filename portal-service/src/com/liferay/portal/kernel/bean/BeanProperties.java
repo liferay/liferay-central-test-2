@@ -66,6 +66,11 @@ public interface BeanProperties {
 
 	public String getString(Object bean, String param, String defaultValue);
 
+	public String getString(Object bean, String param, boolean logErrors);
+
+	public String getString(
+		Object bean, String param, String defaultValue, boolean logErrors);
+
 	public void setProperties(Object bean, HttpServletRequest request);
 
 	public void setProperty(Object bean, String param, Object value);
