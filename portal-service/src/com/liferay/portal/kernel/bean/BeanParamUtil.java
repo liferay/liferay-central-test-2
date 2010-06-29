@@ -59,6 +59,40 @@ public class BeanParamUtil {
 		return ParamUtil.get(portletRequest, param, defaultValue);
 	}
 
+	public static boolean getBooleanSilent(
+		Object bean, HttpServletRequest request, String param) {
+
+		return getBooleanSilent(
+			bean, request, param, GetterUtil.DEFAULT_BOOLEAN);
+	}
+
+	public static boolean getBooleanSilent(
+		Object bean, HttpServletRequest request, String param,
+		boolean defaultValue) {
+
+		defaultValue = BeanPropertiesUtil.getBooleanSilent(
+			bean, param, defaultValue);
+
+		return ParamUtil.get(request, param, defaultValue);
+	}
+
+	public static boolean getBooleanSilent(
+		Object bean, PortletRequest portletRequest, String param) {
+
+		return getBooleanSilent(
+			bean, portletRequest, param, GetterUtil.DEFAULT_BOOLEAN);
+	}
+
+	public static boolean getBooleanSilent(
+		Object bean, PortletRequest portletRequest, String param,
+		boolean defaultValue) {
+
+		defaultValue = BeanPropertiesUtil.getBooleanSilent(
+			bean, param, defaultValue);
+
+		return ParamUtil.get(portletRequest, param, defaultValue);
+	}
+
 	public static double getDouble(
 		Object bean, HttpServletRequest request, String param) {
 
@@ -86,6 +120,39 @@ public class BeanParamUtil {
 		double defaultValue) {
 
 		defaultValue = BeanPropertiesUtil.getDouble(bean, param, defaultValue);
+
+		return ParamUtil.get(portletRequest, param, defaultValue);
+	}
+
+	public static double getDoubleSilent(
+		Object bean, HttpServletRequest request, String param) {
+
+		return getDoubleSilent(bean, request, param, GetterUtil.DEFAULT_DOUBLE);
+	}
+
+	public static double getDoubleSilent(
+		Object bean, HttpServletRequest request, String param,
+		double defaultValue) {
+
+		defaultValue = BeanPropertiesUtil.getDoubleSilent(
+			bean, param, defaultValue);
+
+		return ParamUtil.get(request, param, defaultValue);
+	}
+
+	public static double getDoubleSilent(
+		Object bean, PortletRequest portletRequest, String param) {
+
+		return getDoubleSilent(
+			bean, portletRequest, param, GetterUtil.DEFAULT_DOUBLE);
+	}
+
+	public static double getDoubleSilent(
+		Object bean, PortletRequest portletRequest, String param,
+		double defaultValue) {
+
+		defaultValue = BeanPropertiesUtil.getDoubleSilent(
+			bean, param, defaultValue);
 
 		return ParamUtil.get(portletRequest, param, defaultValue);
 	}
@@ -121,6 +188,40 @@ public class BeanParamUtil {
 		return ParamUtil.get(portletRequest, param, defaultValue);
 	}
 
+	public static int getIntegerSilent(
+		Object bean, HttpServletRequest request, String param) {
+
+		return getIntegerSilent(
+			bean, request, param, GetterUtil.DEFAULT_INTEGER);
+	}
+
+	public static int getIntegerSilent(
+		Object bean, HttpServletRequest request, String param,
+		int defaultValue) {
+
+		defaultValue = BeanPropertiesUtil.getIntegerSilent(
+			bean, param, defaultValue);
+
+		return ParamUtil.get(request, param, defaultValue);
+	}
+
+	public static int getIntegerSilent(
+		Object bean, PortletRequest portletRequest, String param) {
+
+		return getIntegerSilent(
+			bean, portletRequest, param, GetterUtil.DEFAULT_INTEGER);
+	}
+
+	public static int getIntegerSilent(
+		Object bean, PortletRequest portletRequest, String param,
+		int defaultValue) {
+
+		defaultValue = BeanPropertiesUtil.getIntegerSilent(
+			bean, param, defaultValue);
+
+		return ParamUtil.get(portletRequest, param, defaultValue);
+	}
+
 	public static long getLong(
 		Object bean, HttpServletRequest request, String param) {
 
@@ -134,7 +235,6 @@ public class BeanParamUtil {
 		defaultValue = BeanPropertiesUtil.getLong(bean, param, defaultValue);
 
 		return ParamUtil.get(request, param, defaultValue);
-
 	}
 
 	public static long getLong(
@@ -150,7 +250,39 @@ public class BeanParamUtil {
 		defaultValue = BeanPropertiesUtil.getLong(bean, param, defaultValue);
 
 		return ParamUtil.get(portletRequest, param, defaultValue);
+	}
 
+	public static long getLongSilent(
+		Object bean, HttpServletRequest request, String param) {
+
+		return getLongSilent(bean, request, param, GetterUtil.DEFAULT_LONG);
+	}
+
+	public static long getLongSilent(
+		Object bean, HttpServletRequest request, String param,
+		long defaultValue) {
+
+		defaultValue = BeanPropertiesUtil.getLongSilent(
+			bean, param, defaultValue);
+
+		return ParamUtil.get(request, param, defaultValue);
+	}
+
+	public static long getLongSilent(
+		Object bean, PortletRequest portletRequest, String param) {
+
+		return getLongSilent(
+			bean, portletRequest, param, GetterUtil.DEFAULT_LONG);
+	}
+
+	public static long getLongSilent(
+		Object bean, PortletRequest portletRequest, String param,
+		long defaultValue) {
+
+		defaultValue = BeanPropertiesUtil.getLongSilent(
+			bean, param, defaultValue);
+
+		return ParamUtil.get(portletRequest, param, defaultValue);
 	}
 
 	public static String getString(
@@ -166,7 +298,6 @@ public class BeanParamUtil {
 		defaultValue = BeanPropertiesUtil.getString(bean, param, defaultValue);
 
 		return ParamUtil.get(request, param, defaultValue);
-
 	}
 
 	public static String getString(
@@ -183,7 +314,39 @@ public class BeanParamUtil {
 		defaultValue = BeanPropertiesUtil.getString(bean, param, defaultValue);
 
 		return ParamUtil.get(portletRequest, param, defaultValue);
+	}
 
+	public static String getStringSilent(
+		Object bean, HttpServletRequest request, String param) {
+
+		return getStringSilent(bean, request, param, GetterUtil.DEFAULT_STRING);
+	}
+
+	public static String getStringSilent(
+		Object bean, HttpServletRequest request, String param,
+		String defaultValue) {
+
+		defaultValue = BeanPropertiesUtil.getStringSilent(
+			bean, param, defaultValue);
+
+		return ParamUtil.get(request, param, defaultValue);
+	}
+
+	public static String getStringSilent(
+		Object bean, PortletRequest portletRequest, String param) {
+
+		return getStringSilent(
+			bean, portletRequest, param, GetterUtil.DEFAULT_STRING);
+	}
+
+	public static String getStringSilent(
+		Object bean, PortletRequest portletRequest, String param,
+		String defaultValue) {
+
+		defaultValue = BeanPropertiesUtil.getStringSilent(
+			bean, param, defaultValue);
+
+		return ParamUtil.get(portletRequest, param, defaultValue);
 	}
 
 }

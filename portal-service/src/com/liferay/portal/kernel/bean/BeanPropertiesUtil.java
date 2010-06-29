@@ -53,6 +53,16 @@ public class BeanPropertiesUtil {
 		return getBeanProperties().getBoolean(bean, param, defaultValue);
 	}
 
+	public static boolean getBooleanSilent(Object bean, String param) {
+		return getBeanProperties().getBooleanSilent(bean, param);
+	}
+
+	public static boolean getBooleanSilent(
+		Object bean, String param, boolean defaultValue) {
+
+		return getBeanProperties().getBooleanSilent(bean, param, defaultValue);
+	}
+
 	public static byte getByte(Object bean, String param) {
 		return getBeanProperties().getByte(bean, param);
 	}
@@ -61,6 +71,16 @@ public class BeanPropertiesUtil {
 		Object bean, String param, byte defaultValue) {
 
 		return getBeanProperties().getByte(bean, param, defaultValue);
+	}
+
+	public static byte getByteSilent(Object bean, String param) {
+		return getBeanProperties().getByteSilent(bean, param);
+	}
+
+	public static byte getByteSilent(
+		Object bean, String param, byte defaultValue) {
+
+		return getBeanProperties().getByteSilent(bean, param, defaultValue);
 	}
 
 	public static double getDouble(Object bean, String param) {
@@ -73,6 +93,16 @@ public class BeanPropertiesUtil {
 		return getBeanProperties().getDouble(bean, param, defaultValue);
 	}
 
+	public static double getDoubleSilent(Object bean, String param) {
+		return getBeanProperties().getDoubleSilent(bean, param);
+	}
+
+	public static double getDoubleSilent(
+		Object bean, String param, double defaultValue) {
+
+		return getBeanProperties().getDoubleSilent(bean, param, defaultValue);
+	}
+
 	public static float getFloat(Object bean, String param) {
 		return getBeanProperties().getFloat(bean, param);
 	}
@@ -81,6 +111,16 @@ public class BeanPropertiesUtil {
 		Object bean, String param, float defaultValue) {
 
 		return getBeanProperties().getFloat(bean, param, defaultValue);
+	}
+
+	public static float getFloatSilent(Object bean, String param) {
+		return getBeanProperties().getFloatSilent(bean, param);
+	}
+
+	public static float getFloatSilent(
+		Object bean, String param, float defaultValue) {
+
+		return getBeanProperties().getFloatSilent(bean, param, defaultValue);
 	}
 
 	public static int getInteger(Object bean, String param) {
@@ -93,6 +133,16 @@ public class BeanPropertiesUtil {
 		return getBeanProperties().getInteger(bean, param, defaultValue);
 	}
 
+	public static int getIntegerSilent(Object bean, String param) {
+		return getBeanProperties().getIntegerSilent(bean, param);
+	}
+
+	public static int getIntegerSilent(
+		Object bean, String param, int defaultValue) {
+
+		return getBeanProperties().getIntegerSilent(bean, param, defaultValue);
+	}
+
 	public static long getLong(Object bean, String param) {
 		return getBeanProperties().getLong(bean, param);
 	}
@@ -101,6 +151,16 @@ public class BeanPropertiesUtil {
 		Object bean, String param, long defaultValue) {
 
 		return getBeanProperties().getLong(bean, param, defaultValue);
+	}
+
+	public static long getLongSilent(Object bean, String param) {
+		return getBeanProperties().getLongSilent(bean, param);
+	}
+
+	public static long getLongSilent(
+		Object bean, String param, long defaultValue) {
+
+		return getBeanProperties().getLongSilent(bean, param, defaultValue);
 	}
 
 	public static Object getObject(Object bean, String param) {
@@ -113,6 +173,16 @@ public class BeanPropertiesUtil {
 		return getBeanProperties().getObject(bean, param, defaultValue);
 	}
 
+	public static Object getObjectSilent(Object bean, String param) {
+		return getBeanProperties().getObjectSilent(bean, param);
+	}
+
+	public static Object getObjectSilent(
+		Object bean, String param, Object defaultValue) {
+
+		return getBeanProperties().getObjectSilent(bean, param, defaultValue);
+	}
+
 	public static short getShort(Object bean, String param) {
 		return getBeanProperties().getShort(bean, param);
 	}
@@ -123,6 +193,16 @@ public class BeanPropertiesUtil {
 		return getBeanProperties().getShort(bean, param, defaultValue);
 	}
 
+	public static short getShortSilent(Object bean, String param) {
+		return getBeanProperties().getShortSilent(bean, param);
+	}
+
+	public static short getShortSilent(
+		Object bean, String param, short defaultValue) {
+
+		return getBeanProperties().getShortSilent(bean, param, defaultValue);
+	}
+
 	public static String getString(Object bean, String param) {
 		return getBeanProperties().getString(bean, param);
 	}
@@ -131,6 +211,16 @@ public class BeanPropertiesUtil {
 		Object bean, String param, String defaultValue) {
 
 		return getBeanProperties().getString(bean, param, defaultValue);
+	}
+
+	public static String getStringSilent(Object bean, String param) {
+		return getBeanProperties().getStringSilent(bean, param);
+	}
+
+	public static String getStringSilent(
+		Object bean, String param, String defaultValue) {
+
+		return getBeanProperties().getStringSilent(bean, param, defaultValue);
 	}
 
 	public static void setProperties(Object bean, HttpServletRequest request) {

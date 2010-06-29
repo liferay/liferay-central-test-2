@@ -92,6 +92,33 @@ public class BeanPropertiesImpl implements BeanProperties {
 		}
 	}
 
+	public boolean getBooleanSilent(Object bean, String param) {
+		return getBooleanSilent(bean, param, GetterUtil.DEFAULT_BOOLEAN);
+	}
+
+	public boolean getBooleanSilent(
+		Object bean, String param, boolean defaultValue) {
+
+		Boolean beanValue = null;
+
+		if (bean != null) {
+			try {
+				Object value = BeanUtil.getProperty(bean, param);
+
+				beanValue = ReflectUtil.castType(value, Boolean.class);
+			}
+			catch (Exception e) {
+			}
+		}
+
+		if (beanValue == null) {
+			return defaultValue;
+		}
+		else {
+			return beanValue.booleanValue();
+		}
+	}
+
 	public byte getByte(Object bean, String param) {
 		return getByte(bean, param, GetterUtil.DEFAULT_BYTE);
 	}
@@ -107,6 +134,31 @@ public class BeanPropertiesImpl implements BeanProperties {
 			}
 			catch (Exception e) {
 				_log.error(e, e);
+			}
+		}
+
+		if (beanValue == null) {
+			return defaultValue;
+		}
+		else {
+			return beanValue.byteValue();
+		}
+	}
+
+	public byte getByteSilent(Object bean, String param) {
+		return getByteSilent(bean, param, GetterUtil.DEFAULT_BYTE);
+	}
+
+	public byte getByteSilent(Object bean, String param, byte defaultValue) {
+		Byte beanValue = null;
+
+		if (bean != null) {
+			try {
+				Object value = BeanUtil.getProperty(bean, param);
+
+				beanValue = ReflectUtil.castType(value, Byte.class);
+			}
+			catch (Exception e) {
 			}
 		}
 
@@ -144,6 +196,33 @@ public class BeanPropertiesImpl implements BeanProperties {
 		}
 	}
 
+	public double getDoubleSilent(Object bean, String param) {
+		return getDoubleSilent(bean, param, GetterUtil.DEFAULT_DOUBLE);
+	}
+
+	public double getDoubleSilent(
+		Object bean, String param, double defaultValue) {
+
+		Double beanValue = null;
+
+		if (bean != null) {
+			try {
+				Object value = BeanUtil.getProperty(bean, param);
+
+				beanValue = ReflectUtil.castType(value, Double.class);
+			}
+			catch (Exception e) {
+			}
+		}
+
+		if (beanValue == null) {
+			return defaultValue;
+		}
+		else {
+			return beanValue.doubleValue();
+		}
+	}
+
 	public float getFloat(Object bean, String param) {
 		return getFloat(bean, param, GetterUtil.DEFAULT_FLOAT);
 	}
@@ -159,6 +238,31 @@ public class BeanPropertiesImpl implements BeanProperties {
 			}
 			catch (Exception e) {
 				_log.error(e, e);
+			}
+		}
+
+		if (beanValue == null) {
+			return defaultValue;
+		}
+		else {
+			return beanValue.floatValue();
+		}
+	}
+
+	public float getFloatSilent(Object bean, String param) {
+		return getFloatSilent(bean, param, GetterUtil.DEFAULT_FLOAT);
+	}
+
+	public float getFloatSilent(Object bean, String param, float defaultValue) {
+		Float beanValue = null;
+
+		if (bean != null) {
+			try {
+				Object value = BeanUtil.getProperty(bean, param);
+
+				beanValue = ReflectUtil.castType(value, Float.class);
+			}
+			catch (Exception e) {
 			}
 		}
 
@@ -196,6 +300,31 @@ public class BeanPropertiesImpl implements BeanProperties {
 		}
 	}
 
+	public int getIntegerSilent(Object bean, String param) {
+		return getIntegerSilent(bean, param, GetterUtil.DEFAULT_INTEGER);
+	}
+
+	public int getIntegerSilent(Object bean, String param, int defaultValue) {
+		Integer beanValue = null;
+
+		if (bean != null) {
+			try {
+				Object value = BeanUtil.getProperty(bean, param);
+
+				beanValue = ReflectUtil.castType(value, Integer.class);
+			}
+			catch (Exception e) {
+			}
+		}
+
+		if (beanValue == null) {
+			return defaultValue;
+		}
+		else {
+			return beanValue.intValue();
+		}
+	}
+
 	public long getLong(Object bean, String param) {
 		return getLong(bean, param, GetterUtil.DEFAULT_LONG);
 	}
@@ -222,6 +351,31 @@ public class BeanPropertiesImpl implements BeanProperties {
 		}
 	}
 
+	public long getLongSilent(Object bean, String param) {
+		return getLongSilent(bean, param, GetterUtil.DEFAULT_LONG);
+	}
+
+	public long getLongSilent(Object bean, String param, long defaultValue) {
+		Long beanValue = null;
+
+		if (bean != null) {
+			try {
+				Object value = BeanUtil.getProperty(bean, param);
+
+				beanValue = ReflectUtil.castType(value, Long.class);
+			}
+			catch (Exception e) {
+			}
+		}
+
+		if (beanValue == null) {
+			return defaultValue;
+		}
+		else {
+			return beanValue.longValue();
+		}
+	}
+
 	public Object getObject(Object bean, String param) {
 		return getObject(bean, param, null);
 	}
@@ -235,6 +389,31 @@ public class BeanPropertiesImpl implements BeanProperties {
 			}
 			catch (Exception e) {
 				_log.error(e, e);
+			}
+		}
+
+		if (beanValue == null) {
+			return defaultValue;
+		}
+		else {
+			return beanValue;
+		}
+	}
+
+	public Object getObjectSilent(Object bean, String param) {
+		return getObjectSilent(bean, param, null);
+	}
+
+	public Object getObjectSilent(
+		Object bean, String param, Object defaultValue) {
+
+		Object beanValue = null;
+
+		if (bean != null) {
+			try {
+				beanValue = BeanUtil.getProperty(bean, param);
+			}
+			catch (Exception e) {
 			}
 		}
 
@@ -272,6 +451,31 @@ public class BeanPropertiesImpl implements BeanProperties {
 		}
 	}
 
+	public short getShortSilent(Object bean, String param) {
+		return getShortSilent(bean, param, GetterUtil.DEFAULT_SHORT);
+	}
+
+	public short getShortSilent(Object bean, String param, short defaultValue) {
+		Short beanValue = null;
+
+		if (bean != null) {
+			try {
+				Object value = BeanUtil.getProperty(bean, param);
+
+				beanValue = ReflectUtil.castType(value, Short.class);
+			}
+			catch (Exception e) {
+			}
+		}
+
+		if (beanValue == null) {
+			return defaultValue;
+		}
+		else {
+			return beanValue.shortValue();
+		}
+	}
+
 	public String getString(Object bean, String param) {
 		return getString(bean, param, GetterUtil.DEFAULT_STRING);
 	}
@@ -287,6 +491,33 @@ public class BeanPropertiesImpl implements BeanProperties {
 			}
 			catch (Exception e) {
 				_log.error(e, e);
+			}
+		}
+
+		if (beanValue == null) {
+			return defaultValue;
+		}
+		else {
+			return beanValue;
+		}
+	}
+
+	public String getStringSilent(Object bean, String param) {
+		return getStringSilent(bean, param, GetterUtil.DEFAULT_STRING);
+	}
+
+	public String getStringSilent(
+		Object bean, String param, String defaultValue) {
+
+		String beanValue = null;
+
+		if (bean != null) {
+			try {
+				Object value = BeanUtil.getProperty(bean, param);
+
+				beanValue = ReflectUtil.castType(value, String.class);
+			}
+			catch (Exception e) {
 			}
 		}
 
