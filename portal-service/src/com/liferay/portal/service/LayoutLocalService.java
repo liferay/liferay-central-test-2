@@ -225,12 +225,6 @@ public interface LayoutLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.model.Layout getLayout(java.lang.String uuid,
-		long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Layout getLayoutByIconImageId(
 		long iconImageId)
 		throws com.liferay.portal.kernel.exception.PortalException,

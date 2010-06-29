@@ -283,13 +283,6 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService {
 		return _layoutLocalService.getLayout(groupId, privateLayout, layoutId);
 	}
 
-	public com.liferay.portal.model.Layout getLayout(java.lang.String uuid,
-		long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layoutLocalService.getLayout(uuid, groupId);
-	}
-
 	public com.liferay.portal.model.Layout getLayoutByIconImageId(
 		long iconImageId)
 		throws com.liferay.portal.kernel.exception.PortalException,
