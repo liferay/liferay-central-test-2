@@ -44,8 +44,8 @@ import java.util.List;
 public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 	public IGFolder addFolder(
-			String uuid, long userId, long parentFolderId, String name,
-			String description, ServiceContext serviceContext)
+			long userId, long parentFolderId, String name, String description,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -59,7 +59,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 		IGFolder folder = igFolderPersistence.create(folderId);
 
-		folder.setUuid(uuid);
+		folder.setUuid(serviceContext.getUuid());
 		folder.setGroupId(groupId);
 		folder.setCompanyId(user.getCompanyId());
 		folder.setUserId(user.getUserId());

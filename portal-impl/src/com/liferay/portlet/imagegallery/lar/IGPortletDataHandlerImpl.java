@@ -176,10 +176,12 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 					String name = getFolderName(
 						context.getCompanyId(), context.getScopeGroupId(),
 						parentFolderId, folder.getName(), 2);
+					
+					serviceContext.setUuid(folder.getUuid());
 
 					importedFolder = IGFolderLocalServiceUtil.addFolder(
-						folder.getUuid(), userId, parentFolderId, name,
-						folder.getDescription(), serviceContext);
+						userId, parentFolderId, name, folder.getDescription(),
+						serviceContext);
 				}
 				else {
 					importedFolder = IGFolderLocalServiceUtil.updateFolder(
@@ -194,7 +196,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 					parentFolderId, folder.getName(), 2);
 
 				importedFolder = IGFolderLocalServiceUtil.addFolder(
-					null, userId, parentFolderId, name, folder.getDescription(),
+					userId, parentFolderId, name, folder.getDescription(),
 					serviceContext);
 			}
 
@@ -301,10 +303,12 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 					image.getUuid(), groupId);
 
 				if (existingImage == null) {
+					serviceContext.setUuid(image.getUuid());
+
 					importedImage = IGImageLocalServiceUtil.addImage(
-						image.getUuid(), userId, groupId, folderId,
-						image.getName(), image.getDescription(), imageFile,
-						image.getImageType(), serviceContext);
+						userId, groupId, folderId, image.getName(),
+						image.getDescription(), imageFile, image.getImageType(),
+						serviceContext);
 				}
 				else {
 					importedImage = IGImageLocalServiceUtil.updateImage(
@@ -318,9 +322,8 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				try {
 					importedImage = IGImageLocalServiceUtil.addImage(
-						null, userId, groupId, folderId, name,
-						image.getDescription(), imageFile, image.getImageType(),
-						serviceContext);
+						userId, groupId, folderId, name, image.getDescription(),
+						imageFile, image.getImageType(), serviceContext);
 				}
 				catch (DuplicateImageNameException dine) {
 					String[] nameParts = name.split("\\.", 2);
@@ -332,9 +335,8 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 					}
 
 					importedImage = IGImageLocalServiceUtil.addImage(
-						null, userId, groupId, folderId, name,
-						image.getDescription(), imageFile, image.getImageType(),
-						serviceContext);
+						userId, groupId, folderId, name, image.getDescription(),
+						imageFile, image.getImageType(), serviceContext);
 				}
 			}
 

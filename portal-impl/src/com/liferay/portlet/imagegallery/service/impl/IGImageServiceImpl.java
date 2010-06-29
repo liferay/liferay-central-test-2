@@ -46,7 +46,7 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_IMAGE);
 
 		return igImageLocalService.addImage(
-			null, getUserId(), groupId, folderId, name, description, file,
+			getUserId(), groupId, folderId, name, description, file,
 			contentType, serviceContext);
 	}
 

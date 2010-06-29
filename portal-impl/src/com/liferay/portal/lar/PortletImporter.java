@@ -454,10 +454,11 @@ public class PortletImporter {
 				parentCategoryId, category.getName(), vocabularyId);
 
 			if (existingCategory == null) {
+				serviceContext.setUuid(category.getUuid());
+
 				importedCategory = AssetCategoryLocalServiceUtil.addCategory(
-					category.getUuid(), userId, parentCategoryId,
-					category.getTitleMap(), vocabularyId, properties,
-					serviceContext);
+					userId, parentCategoryId, category.getTitleMap(),
+					vocabularyId, properties, serviceContext);
 			}
 			else {
 				importedCategory = AssetCategoryLocalServiceUtil.updateCategory(
@@ -502,8 +503,10 @@ public class PortletImporter {
 			groupId, vocabulary.getName());
 
 		if (existingVocabulary == null) {
+			serviceContext.setUuid(vocabulary.getUuid());
+
 			importedVocabulary = AssetVocabularyLocalServiceUtil.addVocabulary(
-				vocabulary.getUuid(), userId, vocabulary.getTitleMap(),
+				userId, vocabulary.getTitleMap(),
 				vocabulary.getDescriptionMap(), vocabulary.getSettings(),
 				serviceContext);
 		}

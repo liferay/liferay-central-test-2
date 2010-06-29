@@ -47,7 +47,7 @@ public class AssetVocabularyLocalServiceImpl
 	extends AssetVocabularyLocalServiceBaseImpl {
 
 	public AssetVocabulary addVocabulary(
-			String uuid, long userId, Map<Locale, String> titleMap,
+			long userId, Map<Locale, String> titleMap,
 			Map<Locale, String> descriptionMap, String settings,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -71,7 +71,7 @@ public class AssetVocabularyLocalServiceImpl
 		AssetVocabulary vocabulary = assetVocabularyPersistence.create(
 			vocabularyId);
 
-		vocabulary.setUuid(uuid);
+		vocabulary.setUuid(serviceContext.getUuid());
 		vocabulary.setGroupId(groupId);
 		vocabulary.setCompanyId(user.getCompanyId());
 		vocabulary.setUserId(user.getUserId());
@@ -196,7 +196,7 @@ public class AssetVocabularyLocalServiceImpl
 
 			AssetVocabulary vocabulary =
 				assetVocabularyLocalService.addVocabulary(
-					null, defaultUserId, titleMap, null, StringPool.BLANK,
+					defaultUserId, titleMap, null, StringPool.BLANK,
 					serviceContext);
 
 			vocabularies = ListUtil.copy(vocabularies);

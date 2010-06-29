@@ -113,26 +113,25 @@ public interface IGImageLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
-		java.lang.String uuid, long userId, long groupId, long folderId,
-		java.lang.String name, java.lang.String description, java.io.File file,
+		long userId, long groupId, long folderId, java.lang.String name,
+		java.lang.String description, java.io.File file,
 		java.lang.String contentType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
-		java.lang.String uuid, long userId, long groupId, long folderId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String fileName, byte[] bytes, java.lang.String contentType,
+		long userId, long groupId, long folderId, java.lang.String name,
+		java.lang.String description, java.lang.String fileName, byte[] bytes,
+		java.lang.String contentType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
-		java.lang.String uuid, long userId, long groupId, long folderId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String fileName, java.io.InputStream is,
-		java.lang.String contentType,
+		long userId, long groupId, long folderId, java.lang.String name,
+		java.lang.String description, java.lang.String fileName,
+		java.io.InputStream is, java.lang.String contentType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

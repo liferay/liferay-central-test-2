@@ -65,7 +65,7 @@ import java.util.List;
 public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 	public IGImage addImage(
-			String uuid, long userId, long groupId, long folderId, String name,
+			long userId, long groupId, long folderId, String name,
 			String description, File file, String contentType,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -75,7 +75,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			byte[] bytes = FileUtil.getBytes(file);
 
 			return addImage(
-				uuid, userId, groupId, folderId, name, description, fileName,
+				userId, groupId, folderId, name, description, fileName,
 				bytes, contentType, serviceContext);
 		}
 		catch (IOException ioe) {
@@ -84,7 +84,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public IGImage addImage(
-			String uuid, long userId, long groupId, long folderId, String name,
+			long userId, long groupId, long folderId, String name,
 			String description, String fileName, byte[] bytes,
 			String contentType, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -118,7 +118,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			IGImage image = igImagePersistence.create(imageId);
 
-			image.setUuid(uuid);
+			image.setUuid(serviceContext.getUuid());
 			image.setGroupId(groupId);
 			image.setCompanyId(user.getCompanyId());
 			image.setUserId(user.getUserId());
@@ -190,7 +190,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public IGImage addImage(
-			String uuid, long userId, long groupId, long folderId, String name,
+			long userId, long groupId, long folderId, String name,
 			String description, String fileName, InputStream is,
 			String contentType, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -199,8 +199,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			byte[] bytes = FileUtil.getBytes(is);
 
 			return addImage(
-				uuid, userId, groupId, folderId, name, description, fileName,
-				bytes, contentType, serviceContext);
+				userId, groupId, folderId, name, description, fileName, bytes,
+				contentType, serviceContext);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);

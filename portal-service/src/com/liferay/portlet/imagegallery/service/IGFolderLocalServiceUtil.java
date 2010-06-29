@@ -128,13 +128,13 @@ public class IGFolderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder addFolder(
-		java.lang.String uuid, long userId, long parentFolderId,
-		java.lang.String name, java.lang.String description,
+		long userId, long parentFolderId, java.lang.String name,
+		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addFolder(uuid, userId, parentFolderId, name, description,
+				   .addFolder(userId, parentFolderId, name, description,
 			serviceContext);
 	}
 

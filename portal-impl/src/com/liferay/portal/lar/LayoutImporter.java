@@ -583,10 +583,12 @@ public class LayoutImporter {
 
 					titleMap.put(LocaleUtil.getDefault(), vocabularyName);
 
+					serviceContext.setUuid(vocabularyUuid);
+
 					assetVocabulary =
 						AssetVocabularyLocalServiceUtil.addVocabulary(
-							vocabularyUuid, context.getUserId(userUuid),
-							titleMap, null, StringPool.BLANK, serviceContext);
+							context.getUserId(userUuid), titleMap, null,
+							StringPool.BLANK, serviceContext);
 				}
 				else {
 					assetVocabulary =
@@ -604,7 +606,7 @@ public class LayoutImporter {
 				titleMap.put(LocaleUtil.getDefault(), vocabularyName);
 
 				assetVocabulary = AssetVocabularyLocalServiceUtil.addVocabulary(
-					null, context.getUserId(userUuid), titleMap, null,
+					context.getUserId(userUuid), titleMap, null,
 					StringPool.BLANK, serviceContext);
 			}
 		}

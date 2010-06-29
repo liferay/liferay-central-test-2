@@ -132,15 +132,14 @@ public class AssetCategoryLocalServiceWrapper
 	}
 
 	public com.liferay.portlet.asset.model.AssetCategory addCategory(
-		java.lang.String uuid, long userId, long parentCategoryId,
+		long userId, long parentCategoryId,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		long vocabularyId, java.lang.String[] categoryProperties,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _assetCategoryLocalService.addCategory(uuid, userId,
-			parentCategoryId, titleMap, vocabularyId, categoryProperties,
-			serviceContext);
+		return _assetCategoryLocalService.addCategory(userId, parentCategoryId,
+			titleMap, vocabularyId, categoryProperties, serviceContext);
 	}
 
 	public void addCategoryResources(

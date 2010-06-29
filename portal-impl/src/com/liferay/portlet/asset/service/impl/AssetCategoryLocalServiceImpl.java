@@ -55,9 +55,9 @@ public class AssetCategoryLocalServiceImpl
 	extends AssetCategoryLocalServiceBaseImpl {
 
 	public AssetCategory addCategory(
-			String uuid, long userId, long parentCategoryId,
-			Map<Locale, String> titleMap, long vocabularyId,
-			String[] categoryProperties, ServiceContext serviceContext)
+			long userId, long parentCategoryId, Map<Locale, String> titleMap,
+			long vocabularyId, String[] categoryProperties,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Category
@@ -84,7 +84,7 @@ public class AssetCategoryLocalServiceImpl
 
 		AssetCategory category = assetCategoryPersistence.create(categoryId);
 
-		category.setUuid(uuid);
+		category.setUuid(serviceContext.getUuid());
 		category.setGroupId(groupId);
 		category.setCompanyId(user.getCompanyId());
 		category.setUserId(user.getUserId());

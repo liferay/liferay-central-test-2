@@ -127,37 +127,36 @@ public class IGImageLocalServiceWrapper implements IGImageLocalService {
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
-		java.lang.String uuid, long userId, long groupId, long folderId,
-		java.lang.String name, java.lang.String description, java.io.File file,
+		long userId, long groupId, long folderId, java.lang.String name,
+		java.lang.String description, java.io.File file,
 		java.lang.String contentType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _igImageLocalService.addImage(uuid, userId, groupId, folderId,
-			name, description, file, contentType, serviceContext);
+		return _igImageLocalService.addImage(userId, groupId, folderId, name,
+			description, file, contentType, serviceContext);
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
-		java.lang.String uuid, long userId, long groupId, long folderId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String fileName, byte[] bytes, java.lang.String contentType,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _igImageLocalService.addImage(uuid, userId, groupId, folderId,
-			name, description, fileName, bytes, contentType, serviceContext);
-	}
-
-	public com.liferay.portlet.imagegallery.model.IGImage addImage(
-		java.lang.String uuid, long userId, long groupId, long folderId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String fileName, java.io.InputStream is,
+		long userId, long groupId, long folderId, java.lang.String name,
+		java.lang.String description, java.lang.String fileName, byte[] bytes,
 		java.lang.String contentType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _igImageLocalService.addImage(uuid, userId, groupId, folderId,
-			name, description, fileName, is, contentType, serviceContext);
+		return _igImageLocalService.addImage(userId, groupId, folderId, name,
+			description, fileName, bytes, contentType, serviceContext);
+	}
+
+	public com.liferay.portlet.imagegallery.model.IGImage addImage(
+		long userId, long groupId, long folderId, java.lang.String name,
+		java.lang.String description, java.lang.String fileName,
+		java.io.InputStream is, java.lang.String contentType,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _igImageLocalService.addImage(userId, groupId, folderId, name,
+			description, fileName, is, contentType, serviceContext);
 	}
 
 	public void addImageResources(

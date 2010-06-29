@@ -53,7 +53,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 			parentCategoryId, ActionKeys.ADD_CATEGORY);
 
 		return assetCategoryLocalService.addCategory(
-			null, getUserId(), parentCategoryId, titleMap, vocabularyId,
+			getUserId(), parentCategoryId, titleMap, vocabularyId,
 			categoryProperties, serviceContext);
 	}
 

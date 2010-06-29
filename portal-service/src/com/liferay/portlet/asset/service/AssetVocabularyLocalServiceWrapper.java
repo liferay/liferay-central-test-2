@@ -133,15 +133,15 @@ public class AssetVocabularyLocalServiceWrapper
 	}
 
 	public com.liferay.portlet.asset.model.AssetVocabulary addVocabulary(
-		java.lang.String uuid, long userId,
+		long userId,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String settings,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _assetVocabularyLocalService.addVocabulary(uuid, userId,
-			titleMap, descriptionMap, settings, serviceContext);
+		return _assetVocabularyLocalService.addVocabulary(userId, titleMap,
+			descriptionMap, settings, serviceContext);
 	}
 
 	public void addVocabularyResources(
