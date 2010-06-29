@@ -22,6 +22,9 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Group;
@@ -37,6 +40,7 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -55,32 +59,53 @@ public class MBCategoryFinderImpl
 		MBCategoryFinder.class.getName() + ".findByS_G_U";
 
 	public int countByS_G_U(long groupId, long userId) throws SystemException {
-		return doCountByS_G_U(groupId, userId, false);
+		return doCountByS_G_U(groupId, userId, null, false);
 	}
 
 	public int filterCountByS_G_U(long groupId, long userId)
 		throws SystemException {
 
-		return doCountByS_G_U(groupId, userId, true);
+		return doCountByS_G_U(groupId, userId, null, true);
+	}
+
+	public int filterCountByS_G_U(
+			long groupId, long userId, long[] parentCategoryId)
+		throws SystemException {
+
+		return doCountByS_G_U(groupId, userId, parentCategoryId, true);
 	}
 
 	public List<MBCategory> filterFindByS_G_U(
 			long groupId, long userId, int start, int end)
 		throws SystemException {
 
-		return doFindByS_G_U(groupId, userId, start, end, true);
+		return doFindByS_G_U(groupId, userId, null, start, end, true);
+	}
+
+	public List<MBCategory> filterFindByS_G_U(
+			long groupId, long userId, long[] parentCategoryId, int start,
+			int end)
+		throws SystemException {
+
+		return doFindByS_G_U(
+			groupId, userId, parentCategoryId, start, end, true);
 	}
 
 	public List<MBCategory> findByS_G_U(
 			long groupId, long userId, int start, int end)
 		throws SystemException {
 
-		return doFindByS_G_U(groupId, userId, start, end, false);
+		return doFindByS_G_U(groupId, userId, null, start, end, false);
 	}
 
 	protected int doCountByS_G_U(
-			long groupId, long userId, boolean inlineSQLHelper)
+			long groupId, long userId, long[] parentCategoryIds,
+			boolean inlineSQLHelper)
 		throws SystemException {
+
+		if ((parentCategoryIds != null) && (parentCategoryIds.length == 0)) {
+			return 0;
+		}
 
 		Session session = null;
 
@@ -88,6 +113,22 @@ public class MBCategoryFinderImpl
 			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_S_G_U);
+
+			if (parentCategoryIds == null) {
+				sql = StringUtil.replace(
+					sql, "(MBCategory.parentCategoryId = ?) AND",
+					StringPool.BLANK);
+			}
+			else {
+				StringBundler sb = new StringBundler(2);
+
+				sb.append("MBCategory.parentCategoryId = ");
+				sb.append(StringUtil.merge(
+					parentCategoryIds, " OR MBCategory.parentCategoryId = "));
+
+				sql = StringUtil.replace(
+					sql, "MBCategory.parentCategoryId = ?", sb.toString());
+			}
 
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
@@ -140,9 +181,13 @@ public class MBCategoryFinderImpl
 	}
 
 	protected List<MBCategory> doFindByS_G_U(
-			long groupId, long userId, int start, int end,
-			boolean inlineSQLHelper)
+			long groupId, long userId, long[] parentCategoryIds, int start,
+			int end, boolean inlineSQLHelper)
 		throws SystemException {
+
+		if ((parentCategoryIds != null) && (parentCategoryIds.length == 0)) {
+			return new ArrayList<MBCategory>();
+		}
 
 		Session session = null;
 
@@ -150,6 +195,22 @@ public class MBCategoryFinderImpl
 			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_S_G_U);
+
+			if (parentCategoryIds == null) {
+				sql = StringUtil.replace(
+					sql, "(MBCategory.parentCategoryId = ?) AND",
+					StringPool.BLANK);
+			}
+			else {
+				StringBundler sb = new StringBundler(2);
+
+				sb.append("MBCategory.parentCategoryId = ");
+				sb.append(StringUtil.merge(
+					parentCategoryIds, " OR MBCategory.parentCategoryId = "));
+
+				sql = StringUtil.replace(
+					sql, "MBCategory.parentCategoryId = ?", sb.toString());
+			}
 
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(

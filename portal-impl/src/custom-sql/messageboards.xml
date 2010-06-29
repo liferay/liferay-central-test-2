@@ -13,6 +13,7 @@
 					(Subscription.classPK = MBCategory.categoryId)
 			WHERE
 				(MBCategory.groupId = ?) AND
+				(MBCategory.parentCategoryId = ?) AND
 				(Subscription.userId = ?)
 		]]>
 	</sql>
@@ -28,6 +29,7 @@
 					(Subscription.classPK = MBCategory.categoryId)
 			WHERE
 				(MBCategory.groupId = ?) AND
+				(MBCategory.parentCategoryId = ?) AND
 				(Subscription.userId = ?)
 			ORDER BY
 				MBCategory.lastPostDate DESC
@@ -51,7 +53,7 @@
 			FROM
 				MBMessage
 			WHERE
-			    (categoryId != -1) AND
+				(categoryId != -1) AND
 				(groupId = ?) AND
 				(userId = ?)
 				[$STATUS$]
@@ -64,7 +66,7 @@
 			FROM
 				MBMessage
 			WHERE
-			    (categoryId != -1) AND
+				(categoryId != -1) AND
 				(groupId = ?) AND
 				(userId = ?) AND
 				(anonymous = ?)
@@ -95,7 +97,7 @@
 			FROM
 				MBMessage
 			WHERE
-			    (categoryId != -1) AND
+				(categoryId != -1) AND
 				(groupId = ?) AND
 				(userId = ?)
 				[$STATUS$]
@@ -113,7 +115,7 @@
 			FROM
 				MBMessage
 			WHERE
-			    (categoryId != -1) AND
+				(categoryId != -1) AND
 				(groupId = ?) AND
 				(userId = ?) AND
 				(anonymous = ?)
@@ -165,7 +167,7 @@
 					(Subscription.classNameId = ?) AND
 					(Subscription.classPK = MBThread.threadId)
 			WHERE
-			    (MBThread.categoryId != -1) AND
+				(MBThread.categoryId != -1) AND
 				(MBThread.groupId = ?)
 				[$STATUS$] AND
 				(Subscription.userId = ?)
@@ -217,7 +219,7 @@
 					(Subscription.classNameId = ?) AND
 					(Subscription.classPK = MBThread.threadId)
 			WHERE
-			    (MBThread.categoryId != -1) AND
+				(MBThread.categoryId != -1) AND
 				(MBThread.groupId = ?)
 				[$STATUS$] AND
 				(Subscription.userId = ?)

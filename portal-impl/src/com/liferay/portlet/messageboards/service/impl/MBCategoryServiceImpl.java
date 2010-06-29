@@ -16,12 +16,15 @@ package com.liferay.portlet.messageboards.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.service.base.MBCategoryServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -73,6 +76,19 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 		return category;
 	}
 
+	public long[] getCategoryIds(long groupId, long categoryId)
+		throws PortalException, SystemException {
+
+		List<Long> categoryIds = new ArrayList<Long>();
+
+		categoryIds.add(categoryId);
+
+		getSubcategoryIds(categoryIds, groupId, categoryId);
+
+		return ArrayUtil.toArray(
+			categoryIds.toArray(new Long[categoryIds.size()]));
+	}
+
 	public List<MBCategory> getCategories(
 			long groupId, long parentCategoryId, int start, int end)
 		throws SystemException {
@@ -122,15 +138,23 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 
 	public List<MBCategory> getSubscribedCategories(
 			long groupId, long userId, int start, int end)
-		throws SystemException {
+		throws PortalException, SystemException {
 
-		return mbCategoryFinder.filterFindByS_G_U(groupId, userId, start, end);
+		long[] categoryIds = getCategoryIds(
+			groupId, MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
+
+		return mbCategoryFinder.filterFindByS_G_U(
+			groupId, userId, categoryIds, start, end);
 	}
 
 	public int getSubscribedCategoriesCount(long groupId, long userId)
-		throws SystemException {
+		throws PortalException, SystemException {
 
-		return mbCategoryFinder.filterCountByS_G_U(groupId, userId);
+		long[] categoryIds = getCategoryIds(
+			groupId, MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
+
+		return mbCategoryFinder.filterCountByS_G_U(
+			groupId, userId, categoryIds);
 	}
 
 	public void subscribeCategory(long groupId, long categoryId)

@@ -754,6 +754,7 @@ Liferay.Service.registerClass(
 		addCategory: true,
 		deleteCategory: true,
 		getCategory: true,
+		getCategoryIds: true,
 		getCategories: true,
 		getCategoriesCount: true,
 		getSubcategoryIds: true,
