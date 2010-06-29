@@ -34,7 +34,7 @@ List layoutList = layoutView.getList();
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
 	<aui:fieldset>
-		<aui:select label="root-layout" name="rootLayoutId">
+		<aui:select label="root-layout" name="rootLayoutUuid">
 			<aui:option value="" />
 
 			<%
@@ -59,18 +59,18 @@ List layoutList = layoutView.getList();
 					name = "-&nbsp;" + name;
 				}
 
-				Layout rootLayout = null;
+				Layout curRootLayout = null;
 
 				try {
-					rootLayout = LayoutLocalServiceUtil.getLayout(objId);
+					curRootLayout = LayoutLocalServiceUtil.getLayout(objId);
 				}
 				catch (Exception e) {
 				}
 
-				if (rootLayout != null) {
+				if (curRootLayout != null) {
 			%>
 
-				<aui:option label="<%= name %>" selected="<%= rootLayoutId == rootLayout.getLayoutId() %>" value="<%= rootLayout.getLayoutId() %>" />
+				<aui:option label="<%= name %>" selected="<%= curRootLayout.getUuid().equals(rootLayoutUuid) %>" value="<%= curRootLayout.getUuid() %>" />
 
 			<%
 				}

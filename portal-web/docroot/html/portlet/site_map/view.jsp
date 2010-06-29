@@ -21,7 +21,7 @@ List<Layout> rootLayouts = LayoutLocalServiceUtil.getLayouts(layout.getGroupId()
 
 StringBundler sb = new StringBundler();
 
-_buildSiteMap(layout, rootLayouts, rootLayoutId, includeRootInTree, displayDepth, showCurrentPage, useHtmlTitle, showHiddenPages, 1, themeDisplay, sb);
+_buildSiteMap(layout, rootLayouts, rootLayout, includeRootInTree, displayDepth, showCurrentPage, useHtmlTitle, showHiddenPages, 1, themeDisplay, sb);
 %>
 
 <%= sb.toString() %>
@@ -54,19 +54,17 @@ private void _buildLayoutView(Layout layout, String cssClass, boolean useHtmlTit
 	sb.append("</a>");
 }
 
-private void _buildSiteMap(Layout layout, List<Layout> layouts, long rootLayoutId, boolean includeRootInTree, int displayDepth, boolean showCurrentPage, boolean useHtmlTitle, boolean showHiddenPages, int curDepth, ThemeDisplay themeDisplay, StringBundler sb) throws Exception {
+private void _buildSiteMap(Layout layout, List<Layout> layouts, Layout rootLayout, boolean includeRootInTree, int displayDepth, boolean showCurrentPage, boolean useHtmlTitle, boolean showHiddenPages, int curDepth, ThemeDisplay themeDisplay, StringBundler sb) throws Exception {
 	if (layouts.isEmpty()) {
 		return;
 	}
 
 	PermissionChecker permissionChecker = themeDisplay.getPermissionChecker();
-	boolean showRoot = (rootLayoutId > 0) && (curDepth == 1) && includeRootInTree;
+	boolean showRoot = (rootLayout != null) && (curDepth == 1) && includeRootInTree;
 
 	sb.append("<ul>");
 
 	if (showRoot) {
-		Layout rootLayout = LayoutLocalServiceUtil.getLayout(layout.getGroupId(), layout.isPrivateLayout(), rootLayoutId);
-
 		String cssClass = "root";
 
 		sb.append("<li>");
@@ -95,7 +93,7 @@ private void _buildSiteMap(Layout layout, List<Layout> layouts, long rootLayoutI
 			_buildLayoutView(curLayout, cssClass, useHtmlTitle, themeDisplay, sb);
 
 			if ((displayDepth == 0) || (displayDepth > curDepth)) {
-				_buildSiteMap(layout, curLayout.getChildren(), rootLayoutId, includeRootInTree, displayDepth, showCurrentPage, useHtmlTitle, showHiddenPages, curDepth + 1, themeDisplay, sb);
+				_buildSiteMap(layout, curLayout.getChildren(), rootLayout, includeRootInTree, displayDepth, showCurrentPage, useHtmlTitle, showHiddenPages, curDepth + 1, themeDisplay, sb);
 			}
 
 			sb.append("</li>");

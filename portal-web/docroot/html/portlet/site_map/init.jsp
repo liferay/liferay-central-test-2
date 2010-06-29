@@ -16,6 +16,7 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
+<%@ page import="com.liferay.portal.service.persistence.LayoutUtil" %>
 <%@ page import="com.liferay.portal.util.LayoutLister" %>
 <%@ page import="com.liferay.portal.util.LayoutView" %>
 
@@ -28,14 +29,23 @@ if (Validator.isNotNull(portletResource)) {
 	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-long rootLayoutId = GetterUtil.getLong(preferences.getValue("root-layout-id", StringPool.BLANK));
+String rootLayoutUuid = GetterUtil.getString(preferences.getValue("root-layout-uuid", StringPool.BLANK));
 int displayDepth = GetterUtil.getInteger(preferences.getValue("display-depth", StringPool.BLANK));
 boolean includeRootInTree = GetterUtil.getBoolean(preferences.getValue("include-root-in-tree", StringPool.BLANK));
 boolean showCurrentPage = GetterUtil.getBoolean(preferences.getValue("show-current-page", StringPool.BLANK));
 boolean useHtmlTitle = GetterUtil.getBoolean(preferences.getValue("use-html-title", StringPool.BLANK));
 boolean showHiddenPages = GetterUtil.getBoolean(preferences.getValue("show-hidden-pages", StringPool.BLANK));
 
-if (rootLayoutId == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
+long rootLayoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
+Layout rootLayout = null;
+
+if (Validator.isNotNull(rootLayoutUuid)) {
 	includeRootInTree = false;
+
+	rootLayout = LayoutUtil.findByUUID_G(rootLayoutUuid, scopeGroupId);
+
+	if (rootLayout != null) {
+		rootLayoutId = rootLayout.getLayoutId();
+	}
 }
 %>
