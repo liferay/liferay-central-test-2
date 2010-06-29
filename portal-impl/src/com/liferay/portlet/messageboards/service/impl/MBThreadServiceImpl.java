@@ -120,7 +120,7 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 	public int getGroupThreadsCount(
 			long groupId, long userId, int status, boolean subscribed,
 			boolean includeAnonymous)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long[] categoryIds = mbCategoryService.getCategoryIds(
 			groupId, MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);

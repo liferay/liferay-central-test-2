@@ -61,8 +61,7 @@ public interface MBThreadService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getGroupThreadsCount(long groupId, long userId, int status,
 		boolean subscribed, boolean includeAnonymous)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> getThreads(

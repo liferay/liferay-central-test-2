@@ -53,8 +53,7 @@ public class MBThreadServiceWrapper implements MBThreadService {
 
 	public int getGroupThreadsCount(long groupId, long userId, int status,
 		boolean subscribed, boolean includeAnonymous)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbThreadService.getGroupThreadsCount(groupId, userId, status,
 			subscribed, includeAnonymous);
 	}

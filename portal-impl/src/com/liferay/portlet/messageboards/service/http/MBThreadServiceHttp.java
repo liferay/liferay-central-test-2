@@ -151,8 +151,7 @@ public class MBThreadServiceHttp {
 	public static int getGroupThreadsCount(HttpPrincipal httpPrincipal,
 		long groupId, long userId, int status, boolean subscribed,
 		boolean includeAnonymous)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
 
@@ -176,10 +175,6 @@ public class MBThreadServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
 					throw (com.liferay.portal.kernel.exception.SystemException)e;
 				}
