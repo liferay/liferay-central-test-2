@@ -557,35 +557,7 @@ public class PortalImpl implements Portal {
 
 		Layout layout = themeDisplay.getLayout();
 
-		String rootPortletId = portlet.getRootPortletId();
-
-		String portletPrimaryKey = PortletPermissionUtil.getPrimaryKey(
-			layout.getPlid(), portlet.getPortletId());
-
-		try {
-			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-				int count =
-					ResourcePermissionLocalServiceUtil.
-						getResourcePermissionsCount(
-							themeDisplay.getCompanyId(), rootPortletId,
-							ResourceConstants.SCOPE_INDIVIDUAL,
-							portletPrimaryKey);
-
-				if (count == 0) {
-					throw new NoSuchResourceException();
-				}
-			}
-			else if (!portlet.isUndeployedPortlet()) {
-				ResourceLocalServiceUtil.getResource(
-					themeDisplay.getCompanyId(), rootPortletId,
-					ResourceConstants.SCOPE_INDIVIDUAL, portletPrimaryKey);
-			}
-		}
-		catch (NoSuchResourceException nsre) {
-			ResourceLocalServiceUtil.addResources(
-				themeDisplay.getCompanyId(), layout.getGroupId(), 0,
-				rootPortletId, portletPrimaryKey, true, true, true);
-		}
+		addPortletDefaultResource(themeDisplay, layout, portlet);
 	}
 
 	public void clearRequestParameters(RenderRequest renderRequest) {
@@ -4113,6 +4085,41 @@ public class PortalImpl implements Portal {
 		request.setAttribute(WebKeys.WINDOW_STATE, windowState);
 
 		return windowState;
+	}
+
+	protected void addPortletDefaultResource(
+			ThemeDisplay themeDisplay, Layout layout, Portlet portlet)
+		throws PortalException, SystemException {
+
+		String rootPortletId = portlet.getRootPortletId();
+
+		String portletPrimaryKey = PortletPermissionUtil.getPrimaryKey(
+			layout.getPlid(), portlet.getPortletId());
+
+		try {
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+				int count =
+					ResourcePermissionLocalServiceUtil.
+						getResourcePermissionsCount(
+							themeDisplay.getCompanyId(), rootPortletId,
+							ResourceConstants.SCOPE_INDIVIDUAL,
+							portletPrimaryKey);
+
+				if (count == 0) {
+					throw new NoSuchResourceException();
+				}
+			}
+			else if (!portlet.isUndeployedPortlet()) {
+				ResourceLocalServiceUtil.getResource(
+					themeDisplay.getCompanyId(), rootPortletId,
+					ResourceConstants.SCOPE_INDIVIDUAL, portletPrimaryKey);
+			}
+		}
+		catch (NoSuchResourceException nsre) {
+			ResourceLocalServiceUtil.addResources(
+				themeDisplay.getCompanyId(), layout.getGroupId(), 0,
+				rootPortletId, portletPrimaryKey, true, true, true);
+		}
 	}
 
 	protected List<Portlet> filterControlPanelPortlets(
