@@ -42,7 +42,7 @@ long rootLayoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
 if (Validator.isNotNull(rootLayoutUuid)) {
 	includeRootInTree = false;
 
-	rootLayout = LayoutLocalServiceUtil.getLayout(rootLayoutUuid, scopeGroupId);
+	rootLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(rootLayoutUuid, scopeGroupId);
 
 	if (rootLayout != null) {
 		rootLayoutId = rootLayout.getLayoutId();
