@@ -34,7 +34,7 @@ public class EhCacheProvider extends CacheProviderWrapper {
 	public static CacheManager getCacheManager() throws SystemException {
 		try {
 			Class<?> clazz = Class.forName(
-				"net.sf.ehcache.hibernate.EhCacheProvider");
+				"net.sf.ehcache.hibernate.AbstractEhcacheProvider");
 
 			Field field = clazz.getDeclaredField("manager");
 
