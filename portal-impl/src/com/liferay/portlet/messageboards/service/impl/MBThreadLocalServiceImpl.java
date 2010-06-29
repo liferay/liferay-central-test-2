@@ -184,11 +184,14 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		throws SystemException {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
-			return mbThreadPersistence.findByG_NotC(groupId, -1, start, end);
+			return mbThreadPersistence.findByG_NotC(
+				groupId, MBCategoryConstants.DISCUSSION_CATEGORY_ID, start,
+				end);
 		}
 		else {
 			return mbThreadPersistence.findByG_NotC_S(
-				groupId, -1, status, start, end);
+				groupId, MBCategoryConstants.DISCUSSION_CATEGORY_ID, status,
+				start, end);
 		}
 	}
 
@@ -216,11 +219,13 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		if (userId <= 0) {
 			if (status == WorkflowConstants.STATUS_ANY) {
 				return mbThreadPersistence.findByG_NotC(
-					groupId, -1, start, end);
+					groupId, MBCategoryConstants.DISCUSSION_CATEGORY_ID, start,
+					end);
 			}
 			else {
 				return mbThreadPersistence.findByG_NotC_S(
-					groupId, -1, status, start, end);
+					groupId, MBCategoryConstants.DISCUSSION_CATEGORY_ID, status,
+					start, end);
 			}
 		}
 		else {
@@ -259,10 +264,12 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		throws SystemException {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
-			return mbThreadPersistence.countByG_NotC(groupId, -1);
+			return mbThreadPersistence.countByG_NotC(
+				groupId, MBCategoryConstants.DISCUSSION_CATEGORY_ID);
 		}
 		else {
-			return mbThreadPersistence.countByG_NotC_S(groupId, -1, status);
+			return mbThreadPersistence.countByG_NotC_S(
+				groupId, MBCategoryConstants.DISCUSSION_CATEGORY_ID, status);
 		}
 	}
 
@@ -286,10 +293,13 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		if (userId <= 0) {
 			if (status == WorkflowConstants.STATUS_ANY) {
-				return mbThreadPersistence.countByG_NotC(groupId, -1);
+				return mbThreadPersistence.countByG_NotC(
+					groupId, MBCategoryConstants.DISCUSSION_CATEGORY_ID);
 			}
 			else {
-				return mbThreadPersistence.countByG_NotC_S(groupId, -1, status);
+				return mbThreadPersistence.countByG_NotC_S(
+					groupId, MBCategoryConstants.DISCUSSION_CATEGORY_ID,
+					status);
 			}
 		}
 		else {
