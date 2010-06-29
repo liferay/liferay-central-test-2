@@ -256,15 +256,6 @@ body #banner .logo a {
 	zoom: 1;
 }
 
-body.lfr-has-sidebar {
-	padding-left: 0;
-}
-
-.lfr-has-sidebar #main-content {
-	padding-left: 220px;
-	width: auto;
-}
-
 /* ---------- Footer ---------- */
 
 #footer {

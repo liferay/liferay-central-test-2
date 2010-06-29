@@ -95,7 +95,3 @@
 .ie6 .lfr-content-category.visible {
 	height: 1%;
 }
-
-.lfr-has-sidebar {
-	padding-left: 270px;
-}

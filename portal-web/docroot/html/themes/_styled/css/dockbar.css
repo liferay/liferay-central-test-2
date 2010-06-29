@@ -130,6 +130,10 @@ html > .lfr-dockbar-pinned {
 	left: 10px !important;
 }
 
+.lfr-has-sidebar #main-content {
+	padding-left: 220px;
+}
+
 .manage-layouts {
 	left: 60px !important;
 }
