@@ -36,6 +36,10 @@ public class PortletBagPool {
 		return _instance._remove(portletId);
 	}
 
+	public static void reset() {
+		_instance = new PortletBagPool(); 
+	}
+
 	private PortletBagPool() {
 		_portletBagPool = new ConcurrentHashMap<String, PortletBag>();
 	}
