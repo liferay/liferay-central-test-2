@@ -32,6 +32,44 @@ import java.sql.ResultSet;
 public class UpgradeSitemap
 	extends com.liferay.portal.upgrade.v5_1_0.UpgradeSitemap {
 
+	protected String getLayoutUuid(long plid, long layoutId) throws Exception {
+		Object[] layout = getLayout(plid);
+
+		if (layout == null) {
+			return null;
+		}
+
+		String uuid = null;
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(_GET_LAYOUT_UUID);
+
+			long groupId = (Long)layout[0];
+			boolean privateLayout = (Boolean)layout[2];
+
+			ps.setLong(1, groupId);
+			ps.setBoolean(2, privateLayout);
+			ps.setLong(3, layoutId);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				uuid = rs.getString("uuid_");
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return uuid;
+	}
+
 	protected String upgradePreferences(
 			long companyId, long ownerId, int ownerType, long plid,
 			String portletId, String xml)
@@ -48,8 +86,7 @@ public class UpgradeSitemap
 			String uuid = getLayoutUuid(plid, rootLayoutId);
 
 			if (uuid != null) {
-				preferences.setValue(
-					"root-layout-uuid", uuid);
+				preferences.setValue("root-layout-uuid", uuid);
 			}
 
 			preferences.reset("root-layout-id");
@@ -58,51 +95,8 @@ public class UpgradeSitemap
 		return PortletPreferencesSerializer.toXML(preferences);
 	}
 
-	protected String getLayoutUuid(long plid, long layoutId) throws Exception {
-		String uuid = null;
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(_GET_LAYOUT);
-
-			ps.setLong(1, plid);
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long groupId = rs.getLong("groupId");
-				boolean privateLayout = rs.getBoolean("privateLayout");
-
-				ps = con.prepareStatement(_GET_UUID);
-
-				ps.setLong(1, groupId);
-				ps.setLong(2, layoutId);
-				ps.setBoolean(3, privateLayout);
-
-				rs = ps.executeQuery();
-
-				rs.next();
-
-				uuid = rs.getString("uuid_");
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-
-		return uuid;
-	}
-
-	private static final String _GET_LAYOUT =
-		"select * from Layout where plid = ?";
-
-	private static final String _GET_UUID =
-		"select uuid_ from Layout where groupId = ? AND layoutId = ? " +
-			"AND privateLayout = ?";
+	private static final String _GET_LAYOUT_UUID =
+		"select uuid_ from Layout where groupId = ? AND privateLayout = ? " +
+			"AND layoutId = ?";
 
 }

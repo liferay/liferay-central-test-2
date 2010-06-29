@@ -35,8 +35,9 @@ boolean showCurrentPage = GetterUtil.getBoolean(preferences.getValue("show-curre
 boolean useHtmlTitle = GetterUtil.getBoolean(preferences.getValue("use-html-title", StringPool.BLANK));
 boolean showHiddenPages = GetterUtil.getBoolean(preferences.getValue("show-hidden-pages", StringPool.BLANK));
 
-long rootLayoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
 Layout rootLayout = null;
+
+long rootLayoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
 
 if (Validator.isNotNull(rootLayoutUuid)) {
 	includeRootInTree = false;

@@ -42,7 +42,7 @@ public class UpgradeProcess_6_0_3 extends UpgradeProcess {
 		upgrade(UpgradeDocumentLibrary.class);
 		upgrade(UpgradePermission.class);
 		upgrade(UpgradePortletPreferences.class);
-		upgrade(UpgradeSitemap.class);		
+		upgrade(UpgradeSitemap.class);
 	}
 
 }

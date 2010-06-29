@@ -67,7 +67,7 @@ public class UpgradeSitemap extends UpgradeProcess {
 				Object[] layout = getLayout(plid);
 
 				if (layout != null) {
-					long companyId = (Long)layout[0];
+					long companyId = (Long)layout[1];
 
 					String newPreferences = upgradePreferences(
 						companyId, ownerId, ownerType, plid, portletId,
@@ -103,10 +103,13 @@ public class UpgradeSitemap extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
+				long groupId = rs.getLong("groupId");
 				long companyId = rs.getLong("companyId");
+				boolean privateLayout = rs.getBoolean("privateLayout");
 				long layoutId = rs.getLong("layoutId");
 
-				layout = new Object[] {companyId, layoutId};
+				layout = new Object[] {
+					groupId, companyId, privateLayout, layoutId};
 			}
 		}
 		finally {
@@ -155,7 +158,7 @@ public class UpgradeSitemap extends UpgradeProcess {
 			Object[] layout = getLayout(rootPlid);
 
 			if (layout != null) {
-				long layoutId = (Long)layout[1];
+				long layoutId = (Long)layout[3];
 
 				preferences.setValue(
 					"root-layout-id", String.valueOf(layoutId));
