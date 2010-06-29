@@ -38,7 +38,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 %>
 
 <%!
-private boolean _isWorkflowTaskAssignedToUser(WorkflowTask workflowTask, User user) {
+private boolean _isAssignedToUser(WorkflowTask workflowTask, User user) {
 	if (workflowTask.getAssigneeUserId() == user.getUserId()) {
 		return true;
 	}

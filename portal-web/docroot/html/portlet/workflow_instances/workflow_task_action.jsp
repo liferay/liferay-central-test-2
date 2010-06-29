@@ -23,7 +23,7 @@ WorkflowTask workflowTask = (WorkflowTask)row.getObject();
 %>
 
 <liferay-ui:icon-menu>
-	<c:if test="<%= !workflowTask.isCompleted() && _isWorkflowTaskAssignedToUser(workflowTask, user) %>">
+	<c:if test="<%= !workflowTask.isCompleted() && _isAssignedToUser(workflowTask, user) %>">
 		<%
 		List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(company.getCompanyId(), user.getUserId(), workflowTask.getWorkflowTaskId());
 

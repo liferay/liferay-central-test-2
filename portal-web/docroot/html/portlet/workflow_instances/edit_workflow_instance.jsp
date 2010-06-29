@@ -133,7 +133,8 @@ long classPK = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.
 				%>
 
 				<liferay-ui:search-container
-					searchContainer='<%= new SearchContainer(renderRequest, portletURL, null, "there-are-no-tasks") %>'
+					emptyResultsMessage="there-are-no-tasks"
+					iteratorURL="<%= portletURL %>"
 				>
 					<liferay-ui:search-container-results
 						results="<%= WorkflowTaskManagerUtil.getWorkflowTasksByWorkflowInstance(company.getCompanyId(), workflowInstance.getWorkflowInstanceId(), null, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null) %>"
