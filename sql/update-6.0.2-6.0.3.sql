@@ -6,7 +6,7 @@ alter table MBMessage add rootMessageId LONG;
 
 COMMIT_TRANSACTION;
 
-update MBMessage m set m.rootMessageId = (select rootMessageId from MBThread where m.threadId);
+update MBMessage set rootMessageId = (select rootMessageId from MBThread where MBThread.threadId = MBMessage.threadId);
 
 alter table Layout add uuid_ VARCHAR(75) null;
 
