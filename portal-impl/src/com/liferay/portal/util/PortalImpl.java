@@ -557,7 +557,9 @@ public class PortalImpl implements Portal {
 
 		Layout layout = themeDisplay.getLayout();
 
-		addPortletDefaultResource(themeDisplay, layout, portlet);
+		addDefaultResource(themeDisplay, layout, portlet, true);
+
+		addDefaultResource(themeDisplay, layout, portlet, false);
 	}
 
 	public void clearRequestParameters(RenderRequest renderRequest) {
@@ -4087,8 +4089,9 @@ public class PortalImpl implements Portal {
 		return windowState;
 	}
 
-	protected void addPortletDefaultResource(
-			ThemeDisplay themeDisplay, Layout layout, Portlet portlet)
+	protected void addDefaultResource(
+			ThemeDisplay themeDisplay, Layout layout, Portlet portlet,
+			boolean portletActions)
 		throws PortalException, SystemException {
 
 		String rootPortletId = portlet.getRootPortletId();
@@ -4096,14 +4099,33 @@ public class PortalImpl implements Portal {
 		String portletPrimaryKey = PortletPermissionUtil.getPrimaryKey(
 			layout.getPlid(), portlet.getPortletId());
 
+		String name = null;
+
+		String primaryKey = null;
+
+		if (portletActions) {
+			name = rootPortletId;
+
+			primaryKey = portletPrimaryKey;
+		}
+		else {
+			name = ResourceActionsUtil.getPortletBaseResource(rootPortletId);
+
+			primaryKey = String.valueOf(layout.getGroupId());
+		}
+
+		if (Validator.isNull(name)) {
+			return;
+		}
+
 		try {
 			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 				int count =
 					ResourcePermissionLocalServiceUtil.
 						getResourcePermissionsCount(
-							themeDisplay.getCompanyId(), rootPortletId,
+							themeDisplay.getCompanyId(), name,
 							ResourceConstants.SCOPE_INDIVIDUAL,
-							portletPrimaryKey);
+							primaryKey);
 
 				if (count == 0) {
 					throw new NoSuchResourceException();
@@ -4111,14 +4133,14 @@ public class PortalImpl implements Portal {
 			}
 			else if (!portlet.isUndeployedPortlet()) {
 				ResourceLocalServiceUtil.getResource(
-					themeDisplay.getCompanyId(), rootPortletId,
-					ResourceConstants.SCOPE_INDIVIDUAL, portletPrimaryKey);
+					themeDisplay.getCompanyId(), name,
+					ResourceConstants.SCOPE_INDIVIDUAL, primaryKey);
 			}
 		}
 		catch (NoSuchResourceException nsre) {
 			ResourceLocalServiceUtil.addResources(
-				themeDisplay.getCompanyId(), layout.getGroupId(), 0,
-				rootPortletId, portletPrimaryKey, true, true, true);
+				themeDisplay.getCompanyId(), layout.getGroupId(), 0, name,
+				primaryKey, portletActions, true, true);
 		}
 	}
 
