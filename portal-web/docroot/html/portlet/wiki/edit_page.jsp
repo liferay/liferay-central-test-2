@@ -76,9 +76,9 @@ else if ((wikiPage == null) && editTitle) {
 
 if (Validator.isNotNull(title)) {
 	try {
-		WikiPageLocalServiceUtil.validateTitle(title);
-
 		editable = true;
+
+		WikiPageLocalServiceUtil.validateTitle(title);
 	}
 	catch (PortalException pe) {
 	}
