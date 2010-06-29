@@ -80,7 +80,7 @@ long classPK = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.
 
 				<div class="instance-content-actions">
 					<liferay-ui:icon-list>
-						<c:if test="<%= assetRenderer.hasEditPermission(permissionChecker) %>">
+						<c:if test="<%= assetRenderer.hasViewPermission(permissionChecker) %>">
 							<liferay-ui:icon image="view" method="get" url="<%= viewFullContentURL.toString() %>" />
 						</c:if>
 
