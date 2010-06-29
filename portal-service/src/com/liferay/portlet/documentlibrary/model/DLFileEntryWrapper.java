@@ -158,6 +158,14 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		_dlFileEntry.setName(name);
 	}
 
+	public java.lang.String getExtension() {
+		return _dlFileEntry.getExtension();
+	}
+
+	public void setExtension(java.lang.String extension) {
+		_dlFileEntry.setExtension(extension);
+	}
+
 	public java.lang.String getTitle() {
 		return _dlFileEntry.getTitle();
 	}

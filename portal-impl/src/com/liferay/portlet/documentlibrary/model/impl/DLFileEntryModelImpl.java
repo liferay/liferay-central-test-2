@@ -72,6 +72,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "folderId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
+			{ "extension", new Integer(Types.VARCHAR) },
 			{ "title", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "version", new Integer(Types.VARCHAR) },
@@ -79,7 +80,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 			{ "readCount", new Integer(Types.INTEGER) },
 			{ "extraSettings", new Integer(Types.CLOB) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFileEntry (uuid_ VARCHAR(75) null,fileEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,title VARCHAR(255) null,description STRING null,version VARCHAR(75) null,size_ LONG,readCount INTEGER,extraSettings TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileEntry (uuid_ VARCHAR(75) null,fileEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,extension VARCHAR(75) null,title VARCHAR(255) null,description STRING null,version VARCHAR(75) null,size_ LONG,readCount INTEGER,extraSettings TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY dlFileEntry.folderId ASC, dlFileEntry.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY DLFileEntry.folderId ASC, DLFileEntry.name ASC";
@@ -108,6 +109,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setFolderId(soapModel.getFolderId());
 		model.setName(soapModel.getName());
+		model.setExtension(soapModel.getExtension());
 		model.setTitle(soapModel.getTitle());
 		model.setDescription(soapModel.getDescription());
 		model.setVersion(soapModel.getVersion());
@@ -315,6 +317,19 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 		return GetterUtil.getString(_originalName);
 	}
 
+	public String getExtension() {
+		if (_extension == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _extension;
+		}
+	}
+
+	public void setExtension(String extension) {
+		_extension = extension;
+	}
+
 	public String getTitle() {
 		if (_title == null) {
 			return StringPool.BLANK;
@@ -430,6 +445,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 		clone.setModifiedDate(getModifiedDate());
 		clone.setFolderId(getFolderId());
 		clone.setName(getName());
+		clone.setExtension(getExtension());
 		clone.setTitle(getTitle());
 		clone.setDescription(getDescription());
 		clone.setVersion(getVersion());
@@ -495,7 +511,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(39);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -521,6 +537,8 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 		sb.append(getFolderId());
 		sb.append(", name=");
 		sb.append(getName());
+		sb.append(", extension=");
+		sb.append(getExtension());
 		sb.append(", title=");
 		sb.append(getTitle());
 		sb.append(", description=");
@@ -539,7 +557,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(58);
+		StringBundler sb = new StringBundler(61);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.documentlibrary.model.DLFileEntry");
@@ -594,6 +612,10 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>extension</column-name><column-value><![CDATA[");
+		sb.append(getExtension());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>title</column-name><column-value><![CDATA[");
 		sb.append(getTitle());
 		sb.append("]]></column-value></column>");
@@ -643,6 +665,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	private boolean _setOriginalFolderId;
 	private String _name;
 	private String _originalName;
+	private String _extension;
 	private String _title;
 	private String _originalTitle;
 	private String _description;

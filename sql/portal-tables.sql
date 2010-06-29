@@ -385,6 +385,7 @@ create table DLFileEntry (
 	modifiedDate DATE null,
 	folderId LONG,
 	name VARCHAR(255) null,
+	extension VARCHAR(75) null,
 	title VARCHAR(255) null,
 	description STRING null,
 	version VARCHAR(75) null,

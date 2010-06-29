@@ -110,6 +110,11 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry> {
 	public void setName(String name);
 
 	@AutoEscape
+	public String getExtension();
+
+	public void setExtension(String extension);
+
+	@AutoEscape
 	public String getTitle();
 
 	public void setTitle(String title);

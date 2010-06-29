@@ -74,6 +74,7 @@ public class DLFileEntryJSONSerializer {
 		jsonObj.put("modifiedDate", modifiedDateJSON);
 		jsonObj.put("folderId", model.getFolderId());
 		jsonObj.put("name", model.getName());
+		jsonObj.put("extension", model.getExtension());
 		jsonObj.put("title", model.getTitle());
 		jsonObj.put("description", model.getDescription());
 		jsonObj.put("version", model.getVersion());

@@ -78,6 +78,7 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 		newDLFileEntry.setModifiedDate(nextDate());
 		newDLFileEntry.setFolderId(nextLong());
 		newDLFileEntry.setName(randomString());
+		newDLFileEntry.setExtension(randomString());
 		newDLFileEntry.setTitle(randomString());
 		newDLFileEntry.setDescription(randomString());
 		newDLFileEntry.setVersion(randomString());
@@ -111,6 +112,8 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingDLFileEntry.getFolderId(),
 			newDLFileEntry.getFolderId());
 		assertEquals(existingDLFileEntry.getName(), newDLFileEntry.getName());
+		assertEquals(existingDLFileEntry.getExtension(),
+			newDLFileEntry.getExtension());
 		assertEquals(existingDLFileEntry.getTitle(), newDLFileEntry.getTitle());
 		assertEquals(existingDLFileEntry.getDescription(),
 			newDLFileEntry.getDescription());
@@ -205,6 +208,7 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 		dlFileEntry.setModifiedDate(nextDate());
 		dlFileEntry.setFolderId(nextLong());
 		dlFileEntry.setName(randomString());
+		dlFileEntry.setExtension(randomString());
 		dlFileEntry.setTitle(randomString());
 		dlFileEntry.setDescription(randomString());
 		dlFileEntry.setVersion(randomString());
