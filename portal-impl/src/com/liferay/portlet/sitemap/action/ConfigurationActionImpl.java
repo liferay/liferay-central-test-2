@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.model.LayoutConstants;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import javax.portlet.ActionRequest;
@@ -46,7 +46,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			return;
 		}
 
-		long rootLayoutId = ParamUtil.getLong(actionRequest, "rootLayoutId");
+		String rootLayoutUuid = ParamUtil.getString(
+			actionRequest, "rootLayoutUuid");
 		String displayDepth = ParamUtil.getString(
 			actionRequest, "displayDepth");
 		boolean includeRootInTree = ParamUtil.getBoolean(
@@ -58,7 +59,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		boolean showHiddenPages = ParamUtil.getBoolean(
 			actionRequest, "showHiddenPages");
 
-		if (rootLayoutId == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
+		if (Validator.isNull(rootLayoutUuid)) {
 			includeRootInTree = false;
 		}
 
@@ -69,7 +70,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, portletResource);
 
-		preferences.setValue("root-layout-id", String.valueOf(rootLayoutId));
+		preferences.setValue("root-layout-uuid", rootLayoutUuid);
 		preferences.setValue("display-depth", displayDepth);
 		preferences.setValue(
 			"include-root-in-tree", String.valueOf(includeRootInTree));
