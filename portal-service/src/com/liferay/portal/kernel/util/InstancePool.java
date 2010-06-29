@@ -43,6 +43,10 @@ public class InstancePool {
 		_instance._put(className, obj);
 	}
 
+	public static void reset() {
+		_instance = new InstancePool();
+	}
+
 	private InstancePool() {
 		_classPool = new HashMap<String, Object>();
 	}

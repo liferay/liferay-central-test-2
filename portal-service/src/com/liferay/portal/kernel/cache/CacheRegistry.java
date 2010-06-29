@@ -75,6 +75,11 @@ public class CacheRegistry {
 		}
 	}
 
+	public static void reset() {
+		_active = true;
+        _items.clear();
+    }
+
 	public static void setActive(boolean active) {
 		_active = active;
 

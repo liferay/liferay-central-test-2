@@ -47,6 +47,10 @@ public class HotDeployUtil {
 		_instance._registerListener(listener);
 	}
 
+	public static void reset() {
+        _instance = new HotDeployUtil();
+    }
+	
 	public static void unregisterListener(HotDeployListener listener) {
 		_instance._unregisterListener(listener);
 	}
