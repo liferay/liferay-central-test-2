@@ -86,8 +86,7 @@ body.portlet {
 	margin-right: 20px;
 }
 
-.ie6 .portlet-borderless-bar .portlet-actions,
-.ie7 .portlet-borderless-bar .portlet-actions {
+.ie6 .portlet-borderless-bar .portlet-actions, .ie7 .portlet-borderless-bar .portlet-actions {
 	margin-right: 0;
 	margin-left: 20px;
 }
@@ -142,8 +141,7 @@ body.portlet {
 	text-transform: uppercase;
 }
 
-.ie6 .portlet-title-default,
-.ie7 .portlet-title-default {
+.ie6 .portlet-title-default, .ie7 .portlet-title-default {
 	float: left;
 }
 
