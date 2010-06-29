@@ -242,7 +242,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		while (true) {
 			currentLocation = content.lastIndexOf(
-				"/document_library/get_file?", beginPos);
+				"/c/document_library/get_file?", beginPos);
 
 			if (currentLocation == -1) {
 				currentLocation = content.lastIndexOf("/documents/", beginPos);
