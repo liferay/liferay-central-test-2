@@ -22,40 +22,32 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  * @author Brian Wing Shun Chan
  */
 public class MBCategoryFinderUtil {
-	public static int countByS_G_U(long groupId, long userId)
+	public static int countByS_G_U_P(long groupId, long userId,
+		long[] parentCategoryIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().countByS_G_U(groupId, userId);
+		return getFinder().countByS_G_U_P(groupId, userId, parentCategoryIds);
 	}
 
-	public static int filterCountByS_G_U(long groupId, long userId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().filterCountByS_G_U(groupId, userId);
-	}
-
-	public static int filterCountByS_G_U(long groupId, long userId,
-		long[] parentCategoryId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().filterCountByS_G_U(groupId, userId, parentCategoryId);
-	}
-
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByS_G_U(
-		long groupId, long userId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().filterFindByS_G_U(groupId, userId, start, end);
-	}
-
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByS_G_U(
-		long groupId, long userId, long[] parentCategoryId, int start, int end)
+	public static int filterCountByS_G_U_P(long groupId, long userId,
+		long[] parentCategoryIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
-				   .filterFindByS_G_U(groupId, userId, parentCategoryId, start,
-			end);
+				   .filterCountByS_G_U_P(groupId, userId, parentCategoryIds);
 	}
 
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByS_G_U(
-		long groupId, long userId, int start, int end)
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByS_G_U_P(
+		long groupId, long userId, long[] parentCategoryIds, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().findByS_G_U(groupId, userId, start, end);
+		return getFinder()
+				   .filterFindByS_G_U_P(groupId, userId, parentCategoryIds,
+			start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByS_G_U_P(
+		long groupId, long userId, long[] parentCategoryIds, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .findByS_G_U_P(groupId, userId, parentCategoryIds, start, end);
 	}
 
 	public static MBCategoryFinder getFinder() {

@@ -25,6 +25,7 @@ import com.liferay.portlet.messageboards.service.base.MBCategoryServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -65,30 +66,6 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 		mbCategoryLocalService.deleteCategory(categoryId);
 	}
 
-	public MBCategory getCategory(long categoryId)
-		throws PortalException, SystemException {
-
-		MBCategory category = mbCategoryLocalService.getCategory(categoryId);
-
-		MBCategoryPermission.check(
-			getPermissionChecker(), category, ActionKeys.VIEW);
-
-		return category;
-	}
-
-	public long[] getCategoryIds(long groupId, long categoryId)
-		throws PortalException, SystemException {
-
-		List<Long> categoryIds = new ArrayList<Long>();
-
-		categoryIds.add(categoryId);
-
-		getSubcategoryIds(categoryIds, groupId, categoryId);
-
-		return ArrayUtil.toArray(
-			categoryIds.toArray(new Long[categoryIds.size()]));
-	}
-
 	public List<MBCategory> getCategories(
 			long groupId, long parentCategoryId, int start, int end)
 		throws SystemException {
@@ -119,6 +96,30 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 			groupId, parentCategoryIds);
 	}
 
+	public MBCategory getCategory(long categoryId)
+		throws PortalException, SystemException {
+
+		MBCategory category = mbCategoryLocalService.getCategory(categoryId);
+
+		MBCategoryPermission.check(
+			getPermissionChecker(), category, ActionKeys.VIEW);
+
+		return category;
+	}
+
+	public long[] getCategoryIds(long groupId, long categoryId)
+		throws SystemException {
+
+		List<Long> categoryIds = new ArrayList<Long>();
+
+		categoryIds.add(categoryId);
+
+		getSubcategoryIds(categoryIds, groupId, categoryId);
+
+		return ArrayUtil.toArray(
+			categoryIds.toArray(new Long[categoryIds.size()]));
+	}
+
 	public List<Long> getSubcategoryIds(
 			List<Long> categoryIds, long groupId, long categoryId)
 		throws SystemException {
@@ -138,23 +139,33 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 
 	public List<MBCategory> getSubscribedCategories(
 			long groupId, long userId, int start, int end)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long[] categoryIds = getCategoryIds(
 			groupId, MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 
-		return mbCategoryFinder.filterFindByS_G_U(
-			groupId, userId, categoryIds, start, end);
+		if (categoryIds.length == 0) {
+			return Collections.EMPTY_LIST;
+		}
+		else {
+			return mbCategoryFinder.filterFindByS_G_U_P(
+				groupId, userId, categoryIds, start, end);
+		}
 	}
 
 	public int getSubscribedCategoriesCount(long groupId, long userId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long[] categoryIds = getCategoryIds(
 			groupId, MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 
-		return mbCategoryFinder.filterCountByS_G_U(
-			groupId, userId, categoryIds);
+		if (categoryIds.length == 0) {
+			return 0;
+		}
+		else {
+			return mbCategoryFinder.filterCountByS_G_U_P(
+				groupId, userId, categoryIds);
+		}
 	}
 
 	public void subscribeCategory(long groupId, long categoryId)

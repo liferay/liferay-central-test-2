@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
@@ -40,7 +39,6 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -52,82 +50,70 @@ import java.util.List;
 public class MBCategoryFinderImpl
 	extends BasePersistenceImpl<MBCategory> implements MBCategoryFinder {
 
-	public static String COUNT_BY_S_G_U =
-		MBCategoryFinder.class.getName() + ".countByS_G_U";
+	public static String COUNT_BY_S_G_U_P =
+		MBCategoryFinder.class.getName() + ".countByS_G_U_P";
 
-	public static String FIND_BY_S_G_U =
-		MBCategoryFinder.class.getName() + ".findByS_G_U";
+	public static String FIND_BY_S_G_U_P =
+		MBCategoryFinder.class.getName() + ".findByS_G_U_P";
 
-	public int countByS_G_U(long groupId, long userId) throws SystemException {
-		return doCountByS_G_U(groupId, userId, null, false);
-	}
-
-	public int filterCountByS_G_U(long groupId, long userId)
+	public int countByS_G_U_P(
+			long groupId, long userId, long[] parentCategoryIds)
 		throws SystemException {
 
-		return doCountByS_G_U(groupId, userId, null, true);
+		return doCountByS_G_U_P(groupId, userId, parentCategoryIds, false);
 	}
 
-	public int filterCountByS_G_U(
-			long groupId, long userId, long[] parentCategoryId)
+	public int filterCountByS_G_U_P(
+			long groupId, long userId, long[] parentCategoryIds)
 		throws SystemException {
 
-		return doCountByS_G_U(groupId, userId, parentCategoryId, true);
+		return doCountByS_G_U_P(groupId, userId, parentCategoryIds, true);
 	}
 
-	public List<MBCategory> filterFindByS_G_U(
-			long groupId, long userId, int start, int end)
-		throws SystemException {
-
-		return doFindByS_G_U(groupId, userId, null, start, end, true);
-	}
-
-	public List<MBCategory> filterFindByS_G_U(
-			long groupId, long userId, long[] parentCategoryId, int start,
+	public List<MBCategory> filterFindByS_G_U_P(
+			long groupId, long userId, long[] parentCategoryIds, int start,
 			int end)
 		throws SystemException {
 
-		return doFindByS_G_U(
-			groupId, userId, parentCategoryId, start, end, true);
+		return doFindByS_G_U_P(
+			groupId, userId, parentCategoryIds, start, end, true);
 	}
 
-	public List<MBCategory> findByS_G_U(
-			long groupId, long userId, int start, int end)
+	public List<MBCategory> findByS_G_U_P(
+			long groupId, long userId, long[] parentCategoryIds, int start,
+		int end)
 		throws SystemException {
 
-		return doFindByS_G_U(groupId, userId, null, start, end, false);
+		return doFindByS_G_U_P(
+			groupId, userId, parentCategoryIds, start, end, false);
 	}
 
-	protected int doCountByS_G_U(
+	protected int doCountByS_G_U_P(
 			long groupId, long userId, long[] parentCategoryIds,
 			boolean inlineSQLHelper)
 		throws SystemException {
-
-		if ((parentCategoryIds != null) && (parentCategoryIds.length == 0)) {
-			return 0;
-		}
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_S_G_U);
+			String sql = CustomSQLUtil.get(COUNT_BY_S_G_U_P);
 
-			if (parentCategoryIds == null) {
+			if ((parentCategoryIds == null) ||
+				(parentCategoryIds.length == 0)) {
+
 				sql = StringUtil.replace(
 					sql, "(MBCategory.parentCategoryId = ?) AND",
 					StringPool.BLANK);
 			}
 			else {
-				StringBundler sb = new StringBundler(2);
-
-				sb.append("MBCategory.parentCategoryId = ");
-				sb.append(StringUtil.merge(
-					parentCategoryIds, " OR MBCategory.parentCategoryId = "));
-
 				sql = StringUtil.replace(
-					sql, "MBCategory.parentCategoryId = ?", sb.toString());
+					sql, "MBCategory.parentCategoryId = ?",
+					"MBCategory.parentCategoryId = " +
+						StringUtil.merge(
+							parentCategoryIds,
+							" OR MBCategory.parentCategoryId = "));
 			}
 
 			if (inlineSQLHelper) {
@@ -180,36 +166,32 @@ public class MBCategoryFinderImpl
 		}
 	}
 
-	protected List<MBCategory> doFindByS_G_U(
+	protected List<MBCategory> doFindByS_G_U_P(
 			long groupId, long userId, long[] parentCategoryIds, int start,
 			int end, boolean inlineSQLHelper)
 		throws SystemException {
-
-		if ((parentCategoryIds != null) && (parentCategoryIds.length == 0)) {
-			return new ArrayList<MBCategory>();
-		}
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_S_G_U);
+			String sql = CustomSQLUtil.get(FIND_BY_S_G_U_P);
 
-			if (parentCategoryIds == null) {
+			if ((parentCategoryIds == null) ||
+				(parentCategoryIds.length == 0)) {
+
 				sql = StringUtil.replace(
 					sql, "(MBCategory.parentCategoryId = ?) AND",
 					StringPool.BLANK);
 			}
 			else {
-				StringBundler sb = new StringBundler(2);
-
-				sb.append("MBCategory.parentCategoryId = ");
-				sb.append(StringUtil.merge(
-					parentCategoryIds, " OR MBCategory.parentCategoryId = "));
-
 				sql = StringUtil.replace(
-					sql, "MBCategory.parentCategoryId = ?", sb.toString());
+					sql, "MBCategory.parentCategoryId = ?",
+					"MBCategory.parentCategoryId = " +
+						StringUtil.merge(
+							parentCategoryIds,
+							" OR MBCategory.parentCategoryId = "));
 			}
 
 			if (inlineSQLHelper) {

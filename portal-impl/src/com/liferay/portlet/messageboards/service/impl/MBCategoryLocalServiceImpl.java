@@ -336,13 +336,14 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			long groupId, long userId, int start, int end)
 		throws SystemException {
 
-		return mbCategoryFinder.findByS_G_U(groupId, userId, start, end);
+		return mbCategoryFinder.findByS_G_U_P(
+			groupId, userId, null, start, end);
 	}
 
 	public int getSubscribedCategoriesCount(long groupId, long userId)
 		throws SystemException {
 
-		return mbCategoryFinder.countByS_G_U(groupId, userId);
+		return mbCategoryFinder.countByS_G_U_P(groupId, userId, null);
 	}
 
 	public void subscribeCategory(long userId, long groupId, long categoryId)

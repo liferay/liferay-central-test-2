@@ -20,25 +20,19 @@ package com.liferay.portlet.messageboards.service.persistence;
  * @author Brian Wing Shun Chan
  */
 public interface MBCategoryFinder {
-	public int countByS_G_U(long groupId, long userId)
+	public int countByS_G_U_P(long groupId, long userId,
+		long[] parentCategoryIds)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int filterCountByS_G_U(long groupId, long userId)
+	public int filterCountByS_G_U_P(long groupId, long userId,
+		long[] parentCategoryIds)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int filterCountByS_G_U(long groupId, long userId,
-		long[] parentCategoryId)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByS_G_U_P(
+		long groupId, long userId, long[] parentCategoryIds, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByS_G_U(
-		long groupId, long userId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByS_G_U(
-		long groupId, long userId, long[] parentCategoryId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByS_G_U(
-		long groupId, long userId, int start, int end)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByS_G_U_P(
+		long groupId, long userId, long[] parentCategoryIds, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

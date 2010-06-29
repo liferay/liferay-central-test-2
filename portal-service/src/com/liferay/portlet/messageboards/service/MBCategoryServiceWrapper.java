@@ -62,19 +62,6 @@ public class MBCategoryServiceWrapper implements MBCategoryService {
 		_mbCategoryService.deleteCategory(groupId, categoryId);
 	}
 
-	public com.liferay.portlet.messageboards.model.MBCategory getCategory(
-		long categoryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _mbCategoryService.getCategory(categoryId);
-	}
-
-	public long[] getCategoryIds(long groupId, long categoryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _mbCategoryService.getCategoryIds(groupId, categoryId);
-	}
-
 	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getCategories(
 		long groupId, long parentCategoryId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -99,6 +86,18 @@ public class MBCategoryServiceWrapper implements MBCategoryService {
 		return _mbCategoryService.getCategoriesCount(groupId, parentCategoryIds);
 	}
 
+	public com.liferay.portlet.messageboards.model.MBCategory getCategory(
+		long categoryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _mbCategoryService.getCategory(categoryId);
+	}
+
+	public long[] getCategoryIds(long groupId, long categoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _mbCategoryService.getCategoryIds(groupId, categoryId);
+	}
+
 	public java.util.List<java.lang.Long> getSubcategoryIds(
 		java.util.List<java.lang.Long> categoryIds, long groupId,
 		long categoryId)
@@ -109,15 +108,13 @@ public class MBCategoryServiceWrapper implements MBCategoryService {
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getSubscribedCategories(
 		long groupId, long userId, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbCategoryService.getSubscribedCategories(groupId, userId,
 			start, end);
 	}
 
 	public int getSubscribedCategoriesCount(long groupId, long userId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbCategoryService.getSubscribedCategoriesCount(groupId, userId);
 	}
 
