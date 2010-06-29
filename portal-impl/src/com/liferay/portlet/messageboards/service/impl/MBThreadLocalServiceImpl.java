@@ -184,10 +184,11 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		throws SystemException {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
-			return mbThreadPersistence.findByGroupId(groupId, start, end);
+			return mbThreadPersistence.findByG_NotC(groupId, -1, start, end);
 		}
 		else {
-			return mbThreadPersistence.findByG_S(groupId, status, start, end);
+			return mbThreadPersistence.findByG_NotC_S(
+				groupId, -1, status, start, end);
 		}
 	}
 
@@ -214,11 +215,12 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		if (userId <= 0) {
 			if (status == WorkflowConstants.STATUS_ANY) {
-				return mbThreadPersistence.findByGroupId(groupId, start, end);
+				return mbThreadPersistence.findByG_NotC(
+					groupId, -1, start, end);
 			}
 			else {
-				return mbThreadPersistence.findByG_S(
-					groupId, status, start, end);
+				return mbThreadPersistence.findByG_NotC_S(
+					groupId, -1, status, start, end);
 			}
 		}
 		else {
@@ -257,10 +259,10 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		throws SystemException {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
-			return mbThreadPersistence.countByGroupId(groupId);
+			return mbThreadPersistence.countByG_NotC(groupId, -1);
 		}
 		else {
-			return mbThreadPersistence.countByG_S(groupId, status);
+			return mbThreadPersistence.countByG_NotC_S(groupId, -1, status);
 		}
 	}
 
@@ -284,10 +286,10 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		if (userId <= 0) {
 			if (status == WorkflowConstants.STATUS_ANY) {
-				return mbThreadPersistence.countByGroupId(groupId);
+				return mbThreadPersistence.countByG_NotC(groupId, -1);
 			}
 			else {
-				return mbThreadPersistence.countByG_S(groupId, status);
+				return mbThreadPersistence.countByG_NotC_S(groupId, -1, status);
 			}
 		}
 		else {
