@@ -133,19 +133,6 @@ public class BeanPropertiesUtil {
 		return getBeanProperties().getString(bean, param, defaultValue);
 	}
 
-	public static String getString(
-		Object bean, String param, boolean logErrors) {
-
-		return getBeanProperties().getString(bean, param, logErrors);
-	}
-
-	public static String getString(
-		Object bean, String param, String defaultValue, boolean logErrors) {
-
-		return getBeanProperties().getString(
-			bean, param, defaultValue, logErrors);
-	}
-
 	public static void setProperties(Object bean, HttpServletRequest request) {
 		getBeanProperties().setProperties(bean, request);
 	}

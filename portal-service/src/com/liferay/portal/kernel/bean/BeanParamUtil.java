@@ -163,23 +163,7 @@ public class BeanParamUtil {
 		Object bean, HttpServletRequest request, String param,
 		String defaultValue) {
 
-		return getString(bean, request, param, defaultValue, true);
-	}
-
-	public static String getString(
-		Object bean, HttpServletRequest request, String param,
-		boolean logErrors) {
-
-		return getString(
-			bean, request, param, GetterUtil.DEFAULT_STRING, logErrors);
-	}
-
-	public static String getString(
-		Object bean, HttpServletRequest request, String param,
-		String defaultValue, boolean logErrors) {
-
-		defaultValue = BeanPropertiesUtil.getString(
-			bean, param, defaultValue, logErrors);
+		defaultValue = BeanPropertiesUtil.getString(bean, param, defaultValue);
 
 		return ParamUtil.get(request, param, defaultValue);
 
@@ -196,23 +180,7 @@ public class BeanParamUtil {
 		Object bean, PortletRequest portletRequest, String param,
 		String defaultValue) {
 
-		return getString(bean, portletRequest, param, defaultValue, true);
-	}
-
-	public static String getString(
-		Object bean, PortletRequest portletRequest, String param,
-		boolean logErrors) {
-
-		return getString(
-			bean, portletRequest, param, GetterUtil.DEFAULT_STRING, logErrors);
-	}
-
-	public static String getString(
-		Object bean, PortletRequest portletRequest, String param,
-		String defaultValue, boolean logErrors) {
-
-		defaultValue = BeanPropertiesUtil.getString(
-				bean, param, defaultValue, logErrors);
+		defaultValue = BeanPropertiesUtil.getString(bean, param, defaultValue);
 
 		return ParamUtil.get(portletRequest, param, defaultValue);
 

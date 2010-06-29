@@ -277,16 +277,6 @@ public class BeanPropertiesImpl implements BeanProperties {
 	}
 
 	public String getString(Object bean, String param, String defaultValue) {
-		return getString(bean, param, defaultValue, true);
-	}
-
-	public String getString(Object bean, String param, boolean logErrors) {
-		return getString(bean, param, GetterUtil.DEFAULT_STRING, logErrors);
-	}
-
-	public String getString(
-		Object bean, String param, String defaultValue, boolean logErrors) {
-
 		String beanValue = null;
 
 		if (bean != null) {
@@ -296,9 +286,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 				beanValue = ReflectUtil.castType(value, String.class);
 			}
 			catch (Exception e) {
-				if (logErrors) {
-					_log.error(e, e);
-				}
+				_log.error(e, e);
 			}
 		}
 
