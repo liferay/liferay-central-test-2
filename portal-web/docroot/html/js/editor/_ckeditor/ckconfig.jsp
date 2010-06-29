@@ -51,8 +51,6 @@ CKEDITOR.config.contentsCss = '<%= HtmlUtil.escape(cssPath) %>/main.css';
 
 CKEDITOR.config.entities = false;
 
-CKEDITOR.config.entities_latin = false;
-
 CKEDITOR.config.resize_enabled = false;
 
 CKEDITOR.config.height = 265;
