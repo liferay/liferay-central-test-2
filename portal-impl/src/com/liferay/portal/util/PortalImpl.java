@@ -558,7 +558,6 @@ public class PortalImpl implements Portal {
 		Layout layout = themeDisplay.getLayout();
 
 		addDefaultResource(themeDisplay, layout, portlet, true);
-
 		addDefaultResource(themeDisplay, layout, portlet, false);
 	}
 
@@ -4100,17 +4099,14 @@ public class PortalImpl implements Portal {
 			layout.getPlid(), portlet.getPortletId());
 
 		String name = null;
-
 		String primaryKey = null;
 
 		if (portletActions) {
 			name = rootPortletId;
-
 			primaryKey = portletPrimaryKey;
 		}
 		else {
 			name = ResourceActionsUtil.getPortletBaseResource(rootPortletId);
-
 			primaryKey = String.valueOf(layout.getGroupId());
 		}
 
