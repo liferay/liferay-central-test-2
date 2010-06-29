@@ -16,7 +16,6 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portal.service.persistence.LayoutUtil" %>
 <%@ page import="com.liferay.portal.util.LayoutLister" %>
 <%@ page import="com.liferay.portal.util.LayoutView" %>
 
@@ -42,7 +41,7 @@ Layout rootLayout = null;
 if (Validator.isNotNull(rootLayoutUuid)) {
 	includeRootInTree = false;
 
-	rootLayout = LayoutUtil.findByUUID_G(rootLayoutUuid, scopeGroupId);
+	rootLayout = LayoutLocalServiceUtil.getLayout(rootLayoutUuid, scopeGroupId);
 
 	if (rootLayout != null) {
 		rootLayoutId = rootLayout.getLayoutId();
