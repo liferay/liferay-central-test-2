@@ -81,7 +81,7 @@ long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getC
 
 						&nbsp;
 
-						<c:if test="<%= (pooledActorsIds.length > 0) && !workflowTask.isCompleted() %>">
+						<c:if test="<%= _hasOtherAssignees(pooledActorsIds, workflowTask, user) %>">
 							<%= StringPool.DASH %>
 
 							<portlet:actionURL var="assignURL">

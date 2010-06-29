@@ -49,4 +49,21 @@ private boolean _isWorkflowTaskAssignedToUser(WorkflowTask workflowTask, User us
 
 	return false;
 }
+
+private boolean _hasOtherAssignees(long[] pooledActorsIds, WorkflowTask workflowTask, User user) {
+	if (pooledActorsIds.length == 0) {
+		return false;
+	}
+
+	if (workflowTask.isCompleted()) {
+		return false;
+	}
+
+	if ((pooledActorsIds.length == 1) && (pooledActorsIds[0] == user.getUserId())) {
+		return false;
+	}
+
+	return true;
+}
+
 %>

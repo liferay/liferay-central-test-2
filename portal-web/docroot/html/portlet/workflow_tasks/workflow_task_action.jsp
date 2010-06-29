@@ -137,11 +137,14 @@ if (workflowTask.getDueDate() != null) {
 </liferay-ui:icon-menu>
 
 <div class="aui-helper-hidden" id="<%= randomId %>updateAsignee">
-	<c:if test="<%= (pooledActorsIds.length > 0) && !workflowTask.isCompleted() %>">
+	<c:if test="<%= _hasOtherAssignees(pooledActorsIds, workflowTask, user) %>">
 		<aui:select label="assign-to" name="assigneeUserId">
 
 			<%
 			for (long pooledActorId : pooledActorsIds) {
+				if (pooledActorId == user.getUserId()) {
+					continue;
+				}
 			%>
 
 				<aui:option label="<%= HtmlUtil.escape(PortalUtil.getUserName(pooledActorId, StringPool.BLANK)) %>" selected="<%= workflowTask.getAssigneeUserId() == pooledActorId %>" value="<%= String.valueOf(pooledActorId) %>" />
