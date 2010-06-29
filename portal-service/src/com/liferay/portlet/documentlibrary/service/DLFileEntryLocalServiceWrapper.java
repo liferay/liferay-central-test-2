@@ -130,42 +130,41 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		java.lang.String uuid, long userId, long groupId, long folderId,
-		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String versionDescription,
-		java.lang.String extraSettings, byte[] bytes,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		long userId, long groupId, long folderId, java.lang.String name,
+		java.lang.String title, java.lang.String description,
+		java.lang.String versionDescription, java.lang.String extraSettings,
+		byte[] bytes, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlFileEntryLocalService.addFileEntry(uuid, userId, groupId,
-			folderId, name, title, description, versionDescription,
-			extraSettings, bytes, serviceContext);
+		return _dlFileEntryLocalService.addFileEntry(userId, groupId, folderId,
+			name, title, description, versionDescription, extraSettings, bytes,
+			serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		java.lang.String uuid, long userId, long groupId, long folderId,
-		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String versionDescription,
-		java.lang.String extraSettings, java.io.File file,
+		long userId, long groupId, long folderId, java.lang.String name,
+		java.lang.String title, java.lang.String description,
+		java.lang.String versionDescription, java.lang.String extraSettings,
+		java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlFileEntryLocalService.addFileEntry(uuid, userId, groupId,
-			folderId, name, title, description, versionDescription,
-			extraSettings, file, serviceContext);
+		return _dlFileEntryLocalService.addFileEntry(userId, groupId, folderId,
+			name, title, description, versionDescription, extraSettings, file,
+			serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		java.lang.String uuid, long userId, long groupId, long folderId,
-		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String versionDescription,
-		java.lang.String extraSettings, java.io.InputStream is, long size,
+		long userId, long groupId, long folderId, java.lang.String name,
+		java.lang.String title, java.lang.String description,
+		java.lang.String versionDescription, java.lang.String extraSettings,
+		java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlFileEntryLocalService.addFileEntry(uuid, userId, groupId,
-			folderId, name, title, description, versionDescription,
-			extraSettings, is, size, serviceContext);
+		return _dlFileEntryLocalService.addFileEntry(userId, groupId, folderId,
+			name, title, description, versionDescription, extraSettings, is,
+			size, serviceContext);
 	}
 
 	public void addFileEntryResources(

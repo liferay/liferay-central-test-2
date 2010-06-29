@@ -88,9 +88,9 @@ public class DLFileEntryLocalServiceImpl
 	extends DLFileEntryLocalServiceBaseImpl {
 
 	public DLFileEntry addFileEntry(
-			String uuid, long userId, long groupId, long folderId, String name,
-			String title, String description, String versionDescription,
-			String extraSettings, byte[] bytes, ServiceContext serviceContext)
+			long userId, long groupId, long folderId, String name, String title,
+			String description, String versionDescription, String extraSettings,
+			byte[] bytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		if (bytes == null) {
@@ -100,15 +100,15 @@ public class DLFileEntryLocalServiceImpl
 		InputStream is = new UnsyncByteArrayInputStream(bytes);
 
 		return addFileEntry(
-			uuid, userId, groupId, folderId, name, title, description,
+			userId, groupId, folderId, name, title, description,
 			versionDescription, extraSettings, is, bytes.length,
 			serviceContext);
 	}
 
 	public DLFileEntry addFileEntry(
-			String uuid, long userId, long groupId, long folderId, String name,
-			String title, String description, String versionDescription,
-			String extraSettings, File file, ServiceContext serviceContext)
+			long userId, long groupId, long folderId, String name, String title,
+			String description, String versionDescription, String extraSettings,
+			File file, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		if (file == null) {
@@ -120,7 +120,7 @@ public class DLFileEntryLocalServiceImpl
 				new FileInputStream(file));
 
 			return addFileEntry(
-				uuid, userId, groupId, folderId, name, title, description,
+				userId, groupId, folderId, name, title, description,
 				versionDescription, extraSettings, is, file.length(),
 				serviceContext);
 		}
@@ -130,10 +130,9 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public DLFileEntry addFileEntry(
-			String uuid, long userId, long groupId, long folderId, String name,
-			String title, String description, String versionDescription,
-			String extraSettings, InputStream is, long size,
-			ServiceContext serviceContext)
+			long userId, long groupId, long folderId, String name, String title,
+			String description, String versionDescription, String extraSettings,
+			InputStream is, long size, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// File entry
@@ -156,7 +155,7 @@ public class DLFileEntryLocalServiceImpl
 
 		DLFileEntry fileEntry = dlFileEntryPersistence.create(fileEntryId);
 
-		fileEntry.setUuid(uuid);
+		fileEntry.setUuid(serviceContext.getUuid());
 		fileEntry.setGroupId(groupId);
 		fileEntry.setCompanyId(user.getCompanyId());
 		fileEntry.setUserId(user.getUserId());
@@ -306,7 +305,7 @@ public class DLFileEntryLocalServiceImpl
 		}
 		catch (NoSuchFileEntryException nsfee) {
 			return addFileEntry(
-				null, userId, groupId, folderId, name, title, description,
+				userId, groupId, folderId, name, title, description,
 				versionDescription, extraSettings, file, serviceContext);
 		}
 	}

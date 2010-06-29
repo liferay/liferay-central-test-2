@@ -114,28 +114,27 @@ public interface DLFileEntryLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		java.lang.String uuid, long userId, long groupId, long folderId,
-		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String versionDescription,
-		java.lang.String extraSettings, byte[] bytes,
+		long userId, long groupId, long folderId, java.lang.String name,
+		java.lang.String title, java.lang.String description,
+		java.lang.String versionDescription, java.lang.String extraSettings,
+		byte[] bytes, com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
+		long userId, long groupId, long folderId, java.lang.String name,
+		java.lang.String title, java.lang.String description,
+		java.lang.String versionDescription, java.lang.String extraSettings,
+		java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		java.lang.String uuid, long userId, long groupId, long folderId,
-		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String versionDescription,
-		java.lang.String extraSettings, java.io.File file,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		java.lang.String uuid, long userId, long groupId, long folderId,
-		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String versionDescription,
-		java.lang.String extraSettings, java.io.InputStream is, long size,
+		long userId, long groupId, long folderId, java.lang.String name,
+		java.lang.String title, java.lang.String description,
+		java.lang.String versionDescription, java.lang.String extraSettings,
+		java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

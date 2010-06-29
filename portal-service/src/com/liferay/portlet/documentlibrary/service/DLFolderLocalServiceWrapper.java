@@ -129,13 +129,13 @@ public class DLFolderLocalServiceWrapper implements DLFolderLocalService {
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
-		java.lang.String uuid, long userId, long groupId, long parentFolderId,
-		java.lang.String name, java.lang.String description,
+		long userId, long groupId, long parentFolderId, java.lang.String name,
+		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlFolderLocalService.addFolder(uuid, userId, groupId,
-			parentFolderId, name, description, serviceContext);
+		return _dlFolderLocalService.addFolder(userId, groupId, parentFolderId,
+			name, description, serviceContext);
 	}
 
 	public void addFolderResources(

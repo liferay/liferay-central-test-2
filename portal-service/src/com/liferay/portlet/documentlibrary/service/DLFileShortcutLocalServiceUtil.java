@@ -129,14 +129,14 @@ public class DLFileShortcutLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
-		java.lang.String uuid, long userId, long groupId, long folderId,
-		long toFolderId, java.lang.String toName,
+		long userId, long groupId, long folderId, long toFolderId,
+		java.lang.String toName,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addFileShortcut(uuid, userId, groupId, folderId,
-			toFolderId, toName, serviceContext);
+				   .addFileShortcut(userId, groupId, folderId, toFolderId,
+			toName, serviceContext);
 	}
 
 	public static void addFileShortcutResources(

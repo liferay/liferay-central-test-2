@@ -41,8 +41,8 @@ public class DLFileShortcutLocalServiceImpl
 	extends DLFileShortcutLocalServiceBaseImpl {
 
 	public DLFileShortcut addFileShortcut(
-			String uuid, long userId, long groupId, long folderId,
-			long toFolderId, String toName, ServiceContext serviceContext)
+			long userId, long groupId, long folderId, long toFolderId,
+			String toName, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// File shortcut
@@ -58,7 +58,7 @@ public class DLFileShortcutLocalServiceImpl
 		DLFileShortcut fileShortcut = dlFileShortcutPersistence.create(
 			fileShortcutId);
 
-		fileShortcut.setUuid(uuid);
+		fileShortcut.setUuid(serviceContext.getUuid());
 		fileShortcut.setGroupId(groupId);
 		fileShortcut.setCompanyId(user.getCompanyId());
 		fileShortcut.setUserId(user.getUserId());

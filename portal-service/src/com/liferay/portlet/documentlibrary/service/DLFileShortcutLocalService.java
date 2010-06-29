@@ -114,8 +114,8 @@ public interface DLFileShortcutLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
-		java.lang.String uuid, long userId, long groupId, long folderId,
-		long toFolderId, java.lang.String toName,
+		long userId, long groupId, long folderId, long toFolderId,
+		java.lang.String toName,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

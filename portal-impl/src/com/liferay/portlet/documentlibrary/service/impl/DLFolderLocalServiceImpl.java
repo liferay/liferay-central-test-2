@@ -53,8 +53,8 @@ import java.util.List;
 public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 	public DLFolder addFolder(
-			String uuid, long userId, long groupId, long parentFolderId,
-			String name, String description, ServiceContext serviceContext)
+			long userId, long groupId, long parentFolderId, String name,
+			String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Folder
@@ -69,7 +69,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		DLFolder folder = dlFolderPersistence.create(folderId);
 
-		folder.setUuid(uuid);
+		folder.setUuid(serviceContext.getUuid());
 		folder.setGroupId(groupId);
 		folder.setCompanyId(user.getCompanyId());
 		folder.setUserId(user.getUserId());
