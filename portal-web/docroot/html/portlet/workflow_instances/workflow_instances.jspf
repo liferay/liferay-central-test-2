@@ -94,7 +94,7 @@
 		>
 
 			<%
-			buffer.append(LanguageUtil.get(pageContext, workflowInstance.getState()));				
+			buffer.append(LanguageUtil.get(pageContext, workflowInstance.getState()));
 			%>
 
 		</liferay-ui:search-container-column-text>

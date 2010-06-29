@@ -130,18 +130,6 @@
 
 		<liferay-ui:search-container-column-text
 			buffer="buffer"
-			name="status"
-			href="<%= rowURL %>"
-		>
-
-			<%
-			buffer.append(LanguageUtil.get(pageContext, workflowInstance.getState()));
-			%>
-
-		</liferay-ui:search-container-column-text>
-
-		<liferay-ui:search-container-column-text
-			buffer="buffer"
 			name="last-activity-date"
 			href="<%= rowURL %>"
 		>
