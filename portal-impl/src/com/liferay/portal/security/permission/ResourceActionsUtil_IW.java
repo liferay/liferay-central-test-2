@@ -100,6 +100,10 @@ public class ResourceActionsUtil_IW {
 		return ResourceActionsUtil.getModelResourceOwnerDefaultActions(name);
 	}
 
+	public java.lang.String getPortletBaseResource(java.lang.String portletName) {
+		return ResourceActionsUtil.getPortletBaseResource(portletName);
+	}
+
 	public java.util.List<java.lang.String> getPortletModelResources(
 		java.lang.String portletName) {
 		return ResourceActionsUtil.getPortletModelResources(portletName);

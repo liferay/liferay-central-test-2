@@ -254,17 +254,8 @@ public class ResourceActionsUtil {
 		return _instance._getModelResourceOwnerDefaultActions(name);
 	}
 
-	public static String getPortletBaseModelResource(String portletName) {
-		List<String> modelNames = ResourceActionsUtil.getPortletModelResources(
-			portletName);
-
-		for (String modelName : modelNames) {
-			if (!modelName.contains(".model.")) {
-				return modelName;
-			}
-		}
-
-		return null;
+	public static String getPortletBaseResource(String portletName) {
+		return _instance._getPortletBaseResource(portletName);
 	}
 
 	public static List<String> getPortletModelResources(String portletName) {
@@ -615,14 +606,25 @@ public class ResourceActionsUtil {
 		}
 	}
 
+	private String _getPortletBaseResource(String portletName) {
+		List<String> modelNames = _getPortletModelResources(portletName);
+
+		for (String modelName : modelNames) {
+			if (!modelName.contains(".model.")) {
+				return modelName;
+			}
+		}
+
+		return null;
+	}
+
 	private List<String> _getPortletMimeTypeActions(String name) {
 		List<String> actions = new UniqueList<String>();
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(name);
 
 		if (portlet != null) {
-			Map<String, Set<String>> portletModes =
-				portlet.getPortletModes();
+			Map<String, Set<String>> portletModes = portlet.getPortletModes();
 
 			Set<String> mimeTypePortletModes = portletModes.get(
 				ContentTypes.TEXT_HTML);
