@@ -144,23 +144,6 @@ public class JournalTemplateLocalServiceUtil {
 			cacheable, smallImage, smallImageURL, smallFile, serviceContext);
 	}
 
-	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
-		java.lang.String uuid, long userId, long groupId,
-		java.lang.String templateId, boolean autoTemplateId,
-		java.lang.String structureId, java.lang.String name,
-		java.lang.String description, java.lang.String xsl, boolean formatXsl,
-		java.lang.String langType, boolean cacheable, boolean smallImage,
-		java.lang.String smallImageURL, java.io.File smallFile,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .addTemplate(uuid, userId, groupId, templateId,
-			autoTemplateId, structureId, name, description, xsl, formatXsl,
-			langType, cacheable, smallImage, smallImageURL, smallFile,
-			serviceContext);
-	}
-
 	public static void addTemplateResources(long groupId,
 		java.lang.String templateId, boolean addCommunityPermissions,
 		boolean addGuestPermissions)

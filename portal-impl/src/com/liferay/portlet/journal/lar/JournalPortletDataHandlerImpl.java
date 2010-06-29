@@ -1076,9 +1076,11 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				article.getUuid(), groupId);
 
 			if (existingArticle == null) {
+				serviceContext.setUuid(article.getUuid());
+
 				importedArticle = JournalArticleLocalServiceUtil.addArticle(
-					article.getUuid(), userId, groupId, articleId,
-					autoArticleId, article.getVersion(), article.getTitle(),
+					userId, groupId, articleId, autoArticleId,
+					article.getVersion(), article.getTitle(),
 					article.getDescription(), article.getContent(),
 					article.getType(), parentStructureId, parentTemplateId,
 					displayDateMonth, displayDateDay, displayDateYear,
@@ -1265,12 +1267,14 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				feed.getUuid(), groupId);
 
 			if (existingFeed == null) {
+				serviceContext.setUuid(feed.getUuid());
+
 				existingFeed = JournalFeedLocalServiceUtil.addFeed(
-					feed.getUuid(), userId, groupId, feedId, autoFeedId,
-					feed.getName(), feed.getDescription(), feed.getType(),
-					parentStructureId, parentTemplateId, parentRenderTemplateId,
-					feed.getDelta(), feed.getOrderByCol(),
-					feed.getOrderByType(), feed.getTargetLayoutFriendlyUrl(),
+					userId, groupId, feedId, autoFeedId, feed.getName(),
+					feed.getDescription(), feed.getType(), parentStructureId,
+					parentTemplateId, parentRenderTemplateId, feed.getDelta(),
+					feed.getOrderByCol(), feed.getOrderByType(),
+					feed.getTargetLayoutFriendlyUrl(),
 					feed.getTargetPortletId(), feed.getContentField(),
 					feed.getFeedType(), feed.getFeedVersion(),
 					serviceContext);
@@ -1414,12 +1418,14 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				structure.getUuid(), groupId);
 
 			if (existingStructure == null) {
+				serviceContext.setUuid(structure.getUuid());
+
 				existingStructure =
 					JournalStructureLocalServiceUtil.addStructure(
-						structure.getUuid(), userId, groupId, structureId,
-						autoStructureId, structure.getParentStructureId(),
-						structure.getName(), structure.getDescription(),
-						structure.getXsd(), serviceContext);
+						userId, groupId, structureId, autoStructureId,
+						structure.getParentStructureId(), structure.getName(),
+						structure.getDescription(), structure.getXsd(),
+						serviceContext);
 			}
 			else {
 				existingStructure =
@@ -1552,9 +1558,11 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				template.getUuid(), groupId);
 
 			if (existingTemplate == null) {
+				serviceContext.setUuid(template.getUuid());
+
 				existingTemplate = JournalTemplateLocalServiceUtil.addTemplate(
-					template.getUuid(), userId, groupId, templateId,
-					autoTemplateId, parentStructureId, template.getName(),
+					userId, groupId, templateId, autoTemplateId,
+					parentStructureId, template.getName(),
 					template.getDescription(), template.getXsl(), formatXsl,
 					template.getLangType(), template.getCacheable(),
 					template.isSmallImage(), template.getSmallImageURL(),

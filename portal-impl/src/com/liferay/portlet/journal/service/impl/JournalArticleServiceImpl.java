@@ -20,6 +20,7 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.model.JournalArticleConstants;
 import com.liferay.portlet.journal.service.base.JournalArticleServiceBaseImpl;
 import com.liferay.portlet.journal.service.permission.JournalArticlePermission;
 import com.liferay.portlet.journal.service.permission.JournalPermission;
@@ -55,7 +56,8 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			getPermissionChecker(), groupId, ActionKeys.ADD_ARTICLE);
 
 		return journalArticleLocalService.addArticle(
-			getUserId(), groupId, articleId, autoArticleId, title, description,
+			getUserId(), groupId, articleId, autoArticleId,
+			JournalArticleConstants.DEFAULT_VERSION, title, description,
 			content, type, structureId, templateId, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
@@ -82,7 +84,8 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			getPermissionChecker(), groupId, ActionKeys.ADD_ARTICLE);
 
 		return journalArticleLocalService.addArticle(
-			getUserId(), groupId, articleId, autoArticleId, title, description,
+			getUserId(), groupId, articleId, autoArticleId,
+			JournalArticleConstants.DEFAULT_VERSION, title, description,
 			content, type, structureId, templateId, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,

@@ -60,17 +60,6 @@ public class JournalStructureLocalServiceImpl
 
 	public JournalStructure addStructure(
 			long userId, long groupId, String structureId,
-			boolean autoStructureId, String parentStructureId, String name,
-			String description, String xsd, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addStructure(
-			null, userId, groupId, structureId, autoStructureId,
-			parentStructureId, name, description, xsd, serviceContext);
-	}
-
-	public JournalStructure addStructure(
-			String uuid, long userId, long groupId, String structureId,
 			boolean autoStructureId, String parentStructureId,
 			String name, String description, String xsd,
 			ServiceContext serviceContext)
@@ -101,7 +90,7 @@ public class JournalStructureLocalServiceImpl
 
 		JournalStructure structure = journalStructurePersistence.create(id);
 
-		structure.setUuid(uuid);
+		structure.setUuid(serviceContext.getUuid());
 		structure.setGroupId(groupId);
 		structure.setCompanyId(user.getCompanyId());
 		structure.setUserId(user.getUserId());

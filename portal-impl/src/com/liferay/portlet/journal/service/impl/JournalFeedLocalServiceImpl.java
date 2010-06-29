@@ -61,23 +61,6 @@ public class JournalFeedLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return addFeed(
-			null, userId, groupId, feedId, autoFeedId, name, description, type,
-			structureId, templateId, rendererTemplateId, delta, orderByCol,
-			orderByType, targetLayoutFriendlyUrl, targetPortletId, contentField,
-			feedType, feedVersion, serviceContext);
-	}
-
-	public JournalFeed addFeed(
-			String uuid, long userId, long groupId, String feedId,
-			boolean autoFeedId, String name, String description,
-			String type, String structureId, String templateId,
-			String rendererTemplateId, int delta, String orderByCol,
-			String orderByType, String targetLayoutFriendlyUrl,
-			String targetPortletId, String contentField, String feedType,
-			double feedVersion, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
 		// Feed
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -96,7 +79,7 @@ public class JournalFeedLocalServiceImpl
 
 		JournalFeed feed = journalFeedPersistence.create(id);
 
-		feed.setUuid(uuid);
+		feed.setUuid(serviceContext.getUuid());
 		feed.setGroupId(groupId);
 		feed.setCompanyId(user.getCompanyId());
 		feed.setUserId(user.getUserId());

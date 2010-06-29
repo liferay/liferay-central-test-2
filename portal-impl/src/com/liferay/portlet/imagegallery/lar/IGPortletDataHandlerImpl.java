@@ -176,7 +176,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 					String name = getFolderName(
 						context.getCompanyId(), context.getScopeGroupId(),
 						parentFolderId, folder.getName(), 2);
-					
+
 					serviceContext.setUuid(folder.getUuid());
 
 					importedFolder = IGFolderLocalServiceUtil.addFolder(

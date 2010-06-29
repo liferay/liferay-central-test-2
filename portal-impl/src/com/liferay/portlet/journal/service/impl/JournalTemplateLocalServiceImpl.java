@@ -69,20 +69,6 @@ public class JournalTemplateLocalServiceImpl
 			File smallFile, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return addTemplate(
-			null, userId, groupId, templateId, autoTemplateId, structureId,
-			name, description, xsl, formatXsl, langType, cacheable, smallImage,
-			smallImageURL, smallFile, serviceContext);
-	}
-
-	public JournalTemplate addTemplate(
-			String uuid, long userId, long groupId, String templateId,
-			boolean autoTemplateId, String structureId, String name,
-			String description, String xsl, boolean formatXsl, String langType,
-			boolean cacheable, boolean smallImage, String smallImageURL,
-			File smallFile, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
 		// Template
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -123,7 +109,7 @@ public class JournalTemplateLocalServiceImpl
 
 		JournalTemplate template = journalTemplatePersistence.create(id);
 
-		template.setUuid(uuid);
+		template.setUuid(serviceContext.getUuid());
 		template.setGroupId(groupId);
 		template.setCompanyId(user.getCompanyId());
 		template.setUserId(user.getUserId());

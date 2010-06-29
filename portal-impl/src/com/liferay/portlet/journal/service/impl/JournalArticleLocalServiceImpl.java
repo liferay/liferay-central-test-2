@@ -135,63 +135,6 @@ public class JournalArticleLocalServiceImpl
 			String articleURL, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return addArticle(
-			null, userId, groupId, articleId, autoArticleId, version, title,
-			description, content, type, structureId, templateId,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
-			reviewDateHour, reviewDateMinute, neverReview, indexable,
-			smallImage, smallImageURL, smallFile, images, articleURL,
-			serviceContext);
-	}
-
-	public JournalArticle addArticle(
-			long userId, long groupId, String articleId, boolean autoArticleId,
-			String title, String description, String content, String type,
-			String structureId, String templateId, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
-			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
-			boolean neverReview, boolean indexable, boolean smallImage,
-			String smallImageURL, File smallFile, Map<String, byte[]> images,
-			String articleURL, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		double version = JournalArticleConstants.DEFAULT_VERSION;
-
-		return addArticle(
-			userId, groupId, articleId, autoArticleId, version, title,
-			description, content, type, structureId, templateId,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
-			reviewDateHour, reviewDateMinute, neverReview, indexable,
-			smallImage, smallImageURL, smallFile, images, articleURL,
-			serviceContext);
-	}
-
-	public JournalArticle addArticle(
-			String uuid, long userId, long groupId, String articleId,
-			boolean autoArticleId, double version, String title,
-			String description, String content, String type, String structureId,
-			String templateId, int displayDateMonth, int displayDateDay,
-			int displayDateYear, int displayDateHour, int displayDateMinute,
-			int expirationDateMonth, int expirationDateDay,
-			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
-			int reviewDateDay, int reviewDateYear, int reviewDateHour,
-			int reviewDateMinute, boolean neverReview, boolean indexable,
-			boolean smallImage, String smallImageURL, File smallFile,
-			Map<String, byte[]> images, String articleURL,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
 		// Article
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -250,7 +193,7 @@ public class JournalArticleLocalServiceImpl
 		content = format(
 			groupId, articleId, version, false, content, structureId, images);
 
-		article.setUuid(uuid);
+		article.setUuid(serviceContext.getUuid());
 		article.setResourcePrimKey(resourcePrimKey);
 		article.setGroupId(groupId);
 		article.setCompanyId(user.getCompanyId());

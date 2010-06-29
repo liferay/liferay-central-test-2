@@ -141,20 +141,6 @@ public class JournalStructureLocalServiceUtil {
 			parentStructureId, name, description, xsd, serviceContext);
 	}
 
-	public static com.liferay.portlet.journal.model.JournalStructure addStructure(
-		java.lang.String uuid, long userId, long groupId,
-		java.lang.String structureId, boolean autoStructureId,
-		java.lang.String parentStructureId, java.lang.String name,
-		java.lang.String description, java.lang.String xsd,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .addStructure(uuid, userId, groupId, structureId,
-			autoStructureId, parentStructureId, name, description, xsd,
-			serviceContext);
-	}
-
 	public static void addStructureResources(long groupId,
 		java.lang.String structureId, boolean addCommunityPermissions,
 		boolean addGuestPermissions)

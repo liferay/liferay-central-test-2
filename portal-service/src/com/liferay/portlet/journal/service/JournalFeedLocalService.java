@@ -124,20 +124,6 @@ public interface JournalFeedLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.journal.model.JournalFeed addFeed(
-		java.lang.String uuid, long userId, long groupId,
-		java.lang.String feedId, boolean autoFeedId, java.lang.String name,
-		java.lang.String description, java.lang.String type,
-		java.lang.String structureId, java.lang.String templateId,
-		java.lang.String rendererTemplateId, int delta,
-		java.lang.String orderByCol, java.lang.String orderByType,
-		java.lang.String targetLayoutFriendlyUrl,
-		java.lang.String targetPortletId, java.lang.String contentField,
-		java.lang.String feedType, double feedVersion,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
 	public void addFeedResources(long feedId, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
