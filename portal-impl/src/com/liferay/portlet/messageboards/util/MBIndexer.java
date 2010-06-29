@@ -194,7 +194,6 @@ public class MBIndexer extends BaseIndexer {
 		document.addKeyword("threadId", threadId);
 		document.addKeyword(Field.ENTRY_CLASS_NAME, MBMessage.class.getName());
 		document.addKeyword(Field.ENTRY_CLASS_PK, messageId);
-
 		document.addKeyword(
 			Field.ROOT_ENTRY_CLASS_PK, message.getRootMessageId());
 
