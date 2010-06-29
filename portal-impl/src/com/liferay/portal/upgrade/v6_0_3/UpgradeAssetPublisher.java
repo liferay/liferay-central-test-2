@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.upgrade.BaseUpgradePortletPreferences;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
 
@@ -33,8 +34,7 @@ import java.sql.ResultSet;
  *
  * @author Julio Camarero
  */
-public class UpgradeAssetPublisher
-	extends com.liferay.portal.upgrade.v6_0_0.UpgradeAssetPublisher {
+public class UpgradeAssetPublisher extends BaseUpgradePortletPreferences {
 
 	protected String[] getAssetEntryXmls(String[] assetEntryXmls)
 		throws Exception {
@@ -88,6 +88,10 @@ public class UpgradeAssetPublisher
 		}
 
 		return newAssetEntryXmls;
+	}
+
+	protected String getUpdatePortletPreferencesWhereClause() {
+		return "portletId like '101_INSTANCE_%'";
 	}
 
 	protected String upgradePreferences(

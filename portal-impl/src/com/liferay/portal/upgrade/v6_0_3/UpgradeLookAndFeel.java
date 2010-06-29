@@ -15,20 +15,19 @@
 package com.liferay.portal.upgrade.v6_0_3;
 
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.upgrade.BaseUpgradePortletPreferences;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
 
 /**
- * <a href="UpgradeSitemap.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeLookAndFeel.java.html"><b><i>View Source</i></b></a>
  *
  * @author Julio Camarero
  */
-public class UpgradeSitemap extends BaseUpgradePortletPreferences {
+public class UpgradeLookAndFeel extends BaseUpgradePortletPreferences {
 
 	protected String getUpdatePortletPreferencesWhereClause() {
-		return "portletId like '85_%'";
+		return "preferences like '%portlet-setup-link-to-%'";
 	}
 
 	protected String upgradePreferences(
@@ -40,17 +39,23 @@ public class UpgradeSitemap extends BaseUpgradePortletPreferences {
 			PortletPreferencesSerializer.fromXML(
 				companyId, ownerId, ownerType, plid, portletId, xml);
 
-		long rootLayoutId = GetterUtil.getLong(
-			preferences.getValue("root-layout-id", StringPool.BLANK));
+		long linkToLayoutId = GetterUtil.getLong(
+			preferences.getValue("portlet-setup-link-to-layout-id", null));
 
-		if (rootLayoutId > 0) {
-			String uuid = getLayoutUuid(plid, rootLayoutId);
+		if (linkToLayoutId <= 0) {
+			linkToLayoutId = GetterUtil.getLong(
+				preferences.getValue("portlet-setup-link-to-plid", null));
+		}
+
+		if (linkToLayoutId > 0) {
+			String uuid = getLayoutUuid(plid, linkToLayoutId);
 
 			if (uuid != null) {
-				preferences.setValue("root-layout-uuid", uuid);
+				preferences.setValue("portlet-setup-link-to-layout-uuid", uuid);
 			}
 
-			preferences.reset("root-layout-id");
+			preferences.reset("portlet-setup-link-to-layout-id");
+			preferences.reset("portlet-setup-link-to-plid");
 		}
 
 		return PortletPreferencesSerializer.toXML(preferences);

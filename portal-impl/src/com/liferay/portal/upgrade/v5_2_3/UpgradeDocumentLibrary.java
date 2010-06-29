@@ -14,23 +14,18 @@
 
 package com.liferay.portal.upgrade.v5_2_3;
 
-import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.upgrade.BaseUpgradePortletPreferences;
 import com.liferay.portal.upgrade.v5_2_3.util.DLFileEntryTable;
 import com.liferay.portal.upgrade.v5_2_3.util.DLFileRankTable;
 import com.liferay.portal.upgrade.v5_2_3.util.DLFileShortcutTable;
 import com.liferay.portal.upgrade.v5_2_3.util.DLFileVersionTable;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 /**
  * <a href="UpgradeDocumentLibrary.java.html"><b><i>View Source</i></b></a>
@@ -39,15 +34,7 @@ import java.sql.ResultSet;
  * @author Brian Wing Shun Chan
  * @author Douglas Wong
  */
-public class UpgradeDocumentLibrary extends UpgradeProcess {
-
-	protected void deletePortletPreferences(long portletPreferencesId)
-		throws Exception {
-
-		runSQL(
-			"delete from PortletPreferences where portletPreferencesId = " +
-				portletPreferencesId);
-	}
+public class UpgradeDocumentLibrary extends BaseUpgradePortletPreferences {
 
 	protected void doUpgrade() throws Exception {
 		try {
@@ -121,33 +108,9 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		updatePortletPreferences();
 	}
 
-	protected Object[] getLayout(long plid) throws Exception {
-		Object[] layout = null;
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(_GET_LAYOUT);
-
-			ps.setLong(1, plid);
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long companyId = rs.getLong("companyId");
-
-				layout = new Object[] {companyId};
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-
-		return layout;
+	protected String getUpdatePortletPreferencesWhereClause() {
+		return "portletId = '20' and preferences like " +
+			"'%<name>fileEntryColumns</name><value></value>%'";
 	}
 
 	protected void updateGroupId() throws Exception {
@@ -181,75 +144,6 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		runSQL(sb.toString());
 	}
 
-	protected void updatePortletPreferences() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"select portletPreferencesId, ownerId, ownerType, plid, " +
-					"portletId, preferences from PortletPreferences where " +
-						"portletId = '20' and preferences like " +
-							"'%<name>fileEntryColumns</name><value></value>%'");
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long portletPreferencesId = rs.getLong("portletPreferencesId");
-				long ownerId = rs.getLong("ownerId");
-				int ownerType = rs.getInt("ownerType");
-				long plid = rs.getLong("plid");
-				String portletId = rs.getString("portletId");
-				String preferences = rs.getString("preferences");
-
-				Object[] layout = getLayout(plid);
-
-				if (layout != null) {
-					long companyId = (Long)layout[0];
-
-					String newPreferences = upgradePreferences(
-						companyId, ownerId, ownerType, plid, portletId,
-						preferences);
-
-					updatePortletPreferences(
-						portletPreferencesId, newPreferences);
-				}
-				else {
-					deletePortletPreferences(portletPreferencesId);
-				}
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected void updatePortletPreferences(
-			long portletPreferencesId, String preferences)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"update PortletPreferences set preferences = ? where " +
-					"portletPreferencesId = " + portletPreferencesId);
-
-			ps.setString(1, preferences);
-
-			ps.executeUpdate();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps);
-		}
-	}
-
 	protected String upgradePreferences(
 			long companyId, long ownerId, int ownerType, long plid,
 			String portletId, String xml)
@@ -268,8 +162,5 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		return PortletPreferencesSerializer.toXML(preferences);
 	}
-
-	private static final String _GET_LAYOUT =
-		"select * from Layout where plid = ?";
 
 }
