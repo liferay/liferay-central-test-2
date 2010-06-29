@@ -124,13 +124,13 @@ import net.fortuna.ical4j.model.property.Version;
 public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 	public CalEvent addEvent(
-			String uuid, long userId, String title, String description,
-			int startDateMonth, int startDateDay, int startDateYear,
-			int startDateHour, int startDateMinute, int endDateMonth,
-			int endDateDay, int endDateYear, int durationHour,
-			int durationMinute, boolean allDay, boolean timeZoneSensitive,
-			String type, boolean repeating, TZSRecurrence recurrence,
-			int remindBy, int firstReminder, int secondReminder,
+			long userId, String title, String description, int startDateMonth,
+			int startDateDay, int startDateYear, int startDateHour,
+			int startDateMinute, int endDateMonth, int endDateDay,
+			int endDateYear, int durationHour, int durationMinute,
+			boolean allDay, boolean timeZoneSensitive, String type,
+			boolean repeating, TZSRecurrence recurrence, int remindBy,
+			int firstReminder, int secondReminder,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -189,7 +189,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		CalEvent event = calEventPersistence.create(eventId);
 
-		event.setUuid(uuid);
+		event.setUuid(serviceContext.getUuid());
 		event.setGroupId(groupId);
 		event.setCompanyId(user.getCompanyId());
 		event.setUserId(user.getUserId());
@@ -1045,7 +1045,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		serviceContext.setScopeGroupId(groupId);
 
 		addEvent(
-			null, userId, title, description, startDate.get(Calendar.MONTH),
+			userId, title, description, startDate.get(Calendar.MONTH),
 			startDate.get(Calendar.DAY_OF_MONTH), startDate.get(Calendar.YEAR),
 			startDate.get(Calendar.HOUR_OF_DAY),
 			startDate.get(Calendar.MINUTE), endDate.get(Calendar.MONTH),

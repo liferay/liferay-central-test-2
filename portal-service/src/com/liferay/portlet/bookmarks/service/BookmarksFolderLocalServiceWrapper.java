@@ -133,13 +133,13 @@ public class BookmarksFolderLocalServiceWrapper
 	}
 
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
-		java.lang.String uuid, long userId, long parentFolderId,
-		java.lang.String name, java.lang.String description,
+		long userId, long parentFolderId, java.lang.String name,
+		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _bookmarksFolderLocalService.addFolder(uuid, userId,
-			parentFolderId, name, description, serviceContext);
+		return _bookmarksFolderLocalService.addFolder(userId, parentFolderId,
+			name, description, serviceContext);
 	}
 
 	public void addFolderResources(

@@ -83,9 +83,9 @@ import net.htmlparser.jericho.StartTag;
 public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	public BlogsEntry addEntry(
-			String uuid, long userId, String title, String content,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, boolean allowPingbacks,
+			long userId, String title, String content, int displayDateMonth,
+			int displayDateDay, int displayDateYear, int displayDateHour,
+			int displayDateMinute, boolean allowPingbacks,
 			boolean allowTrackbacks, String[] trackbacks,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -108,7 +108,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		BlogsEntry entry = blogsEntryPersistence.create(entryId);
 
-		entry.setUuid(uuid);
+		entry.setUuid(serviceContext.getUuid());
 		entry.setGroupId(groupId);
 		entry.setCompanyId(user.getCompanyId());
 		entry.setUserId(user.getUserId());

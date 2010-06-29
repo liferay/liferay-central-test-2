@@ -248,16 +248,18 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 				event.getUuid(), context.getScopeGroupId());
 
 			if (existingEvent == null) {
+				serviceContext.setUuid(event.getUuid());
+
 				importedEvent = CalEventLocalServiceUtil.addEvent(
-					event.getUuid(), userId, event.getTitle(),
-					event.getDescription(), startDateMonth, startDateDay,
-					startDateYear, startDateHour, startDateMinute, endDateMonth,
-					endDateDay, endDateYear, event.getDurationHour(),
-					event.getDurationMinute(), event.getAllDay(),
-					event.getTimeZoneSensitive(), event.getType(),
-					event.getRepeating(), event.getRecurrenceObj(),
-					event.getRemindBy(), event.getFirstReminder(),
-					event.getSecondReminder(), serviceContext);
+					userId, event.getTitle(), event.getDescription(),
+					startDateMonth, startDateDay, startDateYear, startDateHour,
+					startDateMinute, endDateMonth, endDateDay, endDateYear,
+					event.getDurationHour(), event.getDurationMinute(),
+					event.getAllDay(), event.getTimeZoneSensitive(),
+					event.getType(), event.getRepeating(),
+					event.getRecurrenceObj(), event.getRemindBy(),
+					event.getFirstReminder(), event.getSecondReminder(),
+					serviceContext);
 			}
 			else {
 				importedEvent = CalEventLocalServiceUtil.updateEvent(
@@ -274,7 +276,7 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 		else {
 			importedEvent = CalEventLocalServiceUtil.addEvent(
-				null, userId, event.getTitle(), event.getDescription(),
+				userId, event.getTitle(), event.getDescription(),
 				startDateMonth, startDateDay, startDateYear, startDateHour,
 				startDateMinute, endDateMonth, endDateDay, endDateYear,
 				event.getDurationHour(), event.getDurationMinute(),

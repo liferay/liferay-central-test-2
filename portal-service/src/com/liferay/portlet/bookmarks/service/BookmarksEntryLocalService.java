@@ -114,8 +114,8 @@ public interface BookmarksEntryLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
-		java.lang.String uuid, long userId, long groupId, long folderId,
-		java.lang.String name, java.lang.String url, java.lang.String comments,
+		long userId, long groupId, long folderId, java.lang.String name,
+		java.lang.String url, java.lang.String comments,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

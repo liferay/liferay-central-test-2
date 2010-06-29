@@ -49,7 +49,7 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 			ActionKeys.ADD_EVENT);
 
 		return calEventLocalService.addEvent(
-			null, getUserId(), title, description, startDateMonth, startDateDay,
+			getUserId(), title, description, startDateMonth, startDateDay,
 			startDateYear, startDateHour, startDateMinute, endDateMonth,
 			endDateDay, endDateYear, durationHour, durationMinute, allDay,
 			timeZoneSensitive, type, repeating, recurrence, remindBy,

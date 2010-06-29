@@ -292,7 +292,7 @@ public class WordPressImporter {
 
 		try {
 			entry = BlogsEntryLocalServiceUtil.addEntry(
-				null, userId, title, content, displayDateMonth, displayDateDay,
+				userId, title, content, displayDateMonth, displayDateDay,
 				displayDateYear, displayDateHour, displayDateMinute,
 				allowPingbacks, allowTrackbacks, null, serviceContext);
 		}

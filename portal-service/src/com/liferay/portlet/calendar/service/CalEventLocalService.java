@@ -111,13 +111,13 @@ public interface CalEventLocalService {
 		com.liferay.portlet.calendar.model.CalEvent calEvent, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.calendar.model.CalEvent addEvent(
-		java.lang.String uuid, long userId, java.lang.String title,
-		java.lang.String description, int startDateMonth, int startDateDay,
-		int startDateYear, int startDateHour, int startDateMinute,
-		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
-		int durationMinute, boolean allDay, boolean timeZoneSensitive,
-		java.lang.String type, boolean repeating,
+	public com.liferay.portlet.calendar.model.CalEvent addEvent(long userId,
+		java.lang.String title, java.lang.String description,
+		int startDateMonth, int startDateDay, int startDateYear,
+		int startDateHour, int startDateMinute, int endDateMonth,
+		int endDateDay, int endDateYear, int durationHour, int durationMinute,
+		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
+		boolean repeating,
 		com.liferay.portal.kernel.cal.TZSRecurrence recurrence, int remindBy,
 		int firstReminder, int secondReminder,
 		com.liferay.portal.service.ServiceContext serviceContext)

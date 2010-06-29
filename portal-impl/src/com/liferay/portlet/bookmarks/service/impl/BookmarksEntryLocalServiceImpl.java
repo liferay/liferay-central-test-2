@@ -46,8 +46,8 @@ public class BookmarksEntryLocalServiceImpl
 	extends BookmarksEntryLocalServiceBaseImpl {
 
 	public BookmarksEntry addEntry(
-			String uuid, long userId, long groupId, long folderId, String name,
-			String url, String comments, ServiceContext serviceContext)
+			long userId, long groupId, long folderId, String name, String url,
+			String comments, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -66,7 +66,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		BookmarksEntry entry = bookmarksEntryPersistence.create(entryId);
 
-		entry.setUuid(uuid);
+		entry.setUuid(serviceContext.getUuid());
 		entry.setGroupId(groupId);
 		entry.setCompanyId(user.getCompanyId());
 		entry.setUserId(user.getUserId());

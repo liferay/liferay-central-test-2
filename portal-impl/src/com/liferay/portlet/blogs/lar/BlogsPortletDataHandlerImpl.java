@@ -247,12 +247,13 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 				entry.getUuid(), context.getScopeGroupId());
 
 			if (existingEntry == null) {
+				serviceContext.setUuid(entry.getUuid());
+
 				importedEntry = BlogsEntryLocalServiceUtil.addEntry(
-					entry.getUuid(), userId, entry.getTitle(),
-					entry.getContent(), displayDateMonth, displayDateDay,
-					displayDateYear, displayDateHour, displayDateMinute,
-					allowPingbacks, allowTrackbacks, trackbacks,
-					serviceContext);
+					userId, entry.getTitle(), entry.getContent(),
+					displayDateMonth, displayDateDay, displayDateYear,
+					displayDateHour, displayDateMinute, allowPingbacks,
+					allowTrackbacks, trackbacks, serviceContext);
 			}
 			else {
 				importedEntry = BlogsEntryLocalServiceUtil.updateEntry(
@@ -265,10 +266,10 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 		else {
 			importedEntry = BlogsEntryLocalServiceUtil.addEntry(
-				null, userId, entry.getTitle(), entry.getContent(),
-				displayDateMonth, displayDateDay, displayDateYear,
-				displayDateHour, displayDateMinute, allowPingbacks,
-				allowTrackbacks, trackbacks, serviceContext);
+				userId, entry.getTitle(), entry.getContent(), displayDateMonth,
+				displayDateDay, displayDateYear, displayDateHour,
+				displayDateMinute, allowPingbacks, allowTrackbacks, trackbacks,
+				serviceContext);
 		}
 
 		context.importPermissions(

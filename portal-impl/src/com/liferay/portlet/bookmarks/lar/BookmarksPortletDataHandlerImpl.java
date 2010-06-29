@@ -354,10 +354,12 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 				entry.getUuid(), context.getScopeGroupId());
 
 			if (existingEntry == null) {
+				serviceContext.setUuid(entry.getUuid());
+
 				importedEntry = BookmarksEntryLocalServiceUtil.addEntry(
-					entry.getUuid(), userId, context.getScopeGroupId(),
-					folderId, entry.getName(), entry.getUrl(),
-					entry.getComments(), serviceContext);
+					userId, context.getScopeGroupId(), folderId,
+					entry.getName(), entry.getUrl(), entry.getComments(),
+					serviceContext);
 			}
 			else {
 				importedEntry = BookmarksEntryLocalServiceUtil.updateEntry(
@@ -368,9 +370,8 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 		else {
 			importedEntry = BookmarksEntryLocalServiceUtil.addEntry(
-				null, userId, context.getScopeGroupId(), folderId,
-				entry.getName(), entry.getUrl(), entry.getComments(),
-				serviceContext);
+				userId, context.getScopeGroupId(), folderId, entry.getName(),
+				entry.getUrl(), entry.getComments(), serviceContext);
 		}
 
 		context.importPermissions(
@@ -428,8 +429,10 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 				folder.getUuid(), context.getScopeGroupId());
 
 			if (existingFolder == null) {
+				serviceContext.setUuid(folder.getUuid());
+
 				importedFolder = BookmarksFolderLocalServiceUtil.addFolder(
-					folder.getUuid(), userId, parentFolderId, folder.getName(),
+					userId, parentFolderId, folder.getName(),
 					folder.getDescription(), serviceContext);
 			}
 			else {
@@ -441,7 +444,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 		else {
 			importedFolder = BookmarksFolderLocalServiceUtil.addFolder(
-				null, userId, parentFolderId, folder.getName(),
+				userId, parentFolderId, folder.getName(),
 				folder.getDescription(), serviceContext);
 		}
 

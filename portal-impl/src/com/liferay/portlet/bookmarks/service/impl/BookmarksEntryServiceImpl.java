@@ -39,7 +39,7 @@ public class BookmarksEntryServiceImpl extends BookmarksEntryServiceBaseImpl {
 			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_ENTRY);
 
 		return bookmarksEntryLocalService.addEntry(
-			null, getUserId(), groupId, folderId, name, url, comments,
+			getUserId(), groupId, folderId, name, url, comments,
 			serviceContext);
 	}
 

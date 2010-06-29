@@ -43,8 +43,8 @@ public class BookmarksFolderLocalServiceImpl
 	extends BookmarksFolderLocalServiceBaseImpl {
 
 	public BookmarksFolder addFolder(
-			String uuid, long userId, long parentFolderId, String name,
-			String description, ServiceContext serviceContext)
+			long userId, long parentFolderId, String name, String description,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Folder
@@ -60,7 +60,7 @@ public class BookmarksFolderLocalServiceImpl
 
 		BookmarksFolder folder = bookmarksFolderPersistence.create(folderId);
 
-		folder.setUuid(uuid);
+		folder.setUuid(serviceContext.getUuid());
 		folder.setGroupId(groupId);
 		folder.setCompanyId(user.getCompanyId());
 		folder.setUserId(user.getUserId());

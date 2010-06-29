@@ -39,8 +39,7 @@ public class BookmarksFolderServiceImpl extends BookmarksFolderServiceBaseImpl {
 			parentFolderId, ActionKeys.ADD_FOLDER);
 
 		return bookmarksFolderLocalService.addFolder(
-			null, getUserId(), parentFolderId, name, description,
-			serviceContext);
+			getUserId(), parentFolderId, name, description, serviceContext);
 	}
 
 	public void deleteFolder(long folderId)

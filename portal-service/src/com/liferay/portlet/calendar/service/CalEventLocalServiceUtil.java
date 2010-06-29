@@ -128,19 +128,19 @@ public class CalEventLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent addEvent(
-		java.lang.String uuid, long userId, java.lang.String title,
-		java.lang.String description, int startDateMonth, int startDateDay,
-		int startDateYear, int startDateHour, int startDateMinute,
-		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
-		int durationMinute, boolean allDay, boolean timeZoneSensitive,
-		java.lang.String type, boolean repeating,
+		long userId, java.lang.String title, java.lang.String description,
+		int startDateMonth, int startDateDay, int startDateYear,
+		int startDateHour, int startDateMinute, int endDateMonth,
+		int endDateDay, int endDateYear, int durationHour, int durationMinute,
+		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
+		boolean repeating,
 		com.liferay.portal.kernel.cal.TZSRecurrence recurrence, int remindBy,
 		int firstReminder, int secondReminder,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addEvent(uuid, userId, title, description, startDateMonth,
+				   .addEvent(userId, title, description, startDateMonth,
 			startDateDay, startDateYear, startDateHour, startDateMinute,
 			endDateMonth, endDateDay, endDateYear, durationHour,
 			durationMinute, allDay, timeZoneSensitive, type, repeating,
