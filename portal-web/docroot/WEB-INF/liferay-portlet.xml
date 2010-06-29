@@ -733,7 +733,6 @@
 		<icon>/html/icons/site_map.png</icon>
 		<struts-path>site_map</struts-path>
 		<configuration-action-class>com.liferay.portlet.sitemap.action.ConfigurationActionImpl</configuration-action-class>
-		<portlet-data-handler-class>com.liferay.portlet.sitemap.lar.SitemapPortletDataHandlerImpl</portlet-data-handler-class>
 		<use-default-template>false</use-default-template>
 		<layout-cacheable>true</layout-cacheable>
 		<instanceable>true</instanceable>
