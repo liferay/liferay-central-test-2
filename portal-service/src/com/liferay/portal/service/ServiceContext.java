@@ -156,7 +156,11 @@ public class ServiceContext implements Serializable {
 	}
 
 	public String getUuid() {
-		return _uuid;
+		String uuid = _uuid;
+
+		_uuid = null;
+
+		return uuid;
 	}
 
 	public int getWorkflowAction() {
