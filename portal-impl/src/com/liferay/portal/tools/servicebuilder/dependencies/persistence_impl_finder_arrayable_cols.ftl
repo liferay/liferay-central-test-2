@@ -2,7 +2,7 @@ boolean conjunctionable = false;
 
 <#list finderColsList as finderCol>
 	<#if finderCol.hasArrayableOperator()>
-		if (${finderCol.names}.length > 0) {
+		if ((${finderCol.names} == null) || (${finderCol.names}.length > 0)) {
 			if (conjunctionable) {
 				query.append(WHERE_AND);
 			}

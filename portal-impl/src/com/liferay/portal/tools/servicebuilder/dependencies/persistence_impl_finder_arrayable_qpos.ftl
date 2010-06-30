@@ -1,6 +1,8 @@
 <#list finderColsList as finderCol>
 	<#if finderCol.hasArrayableOperator()>
-		qPos.add(${finderCol.names});
+		if (${finderCol.names} != null) {
+			qPos.add(${finderCol.names});
+		}
 	<#else>
 		<#if !finderCol.isPrimitiveType()>
 			if (${finderCol.name} != null) {
