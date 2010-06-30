@@ -16,112 +16,82 @@
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
+<%@ page import="com.liferay.portal.kernel.util.Validator" %>
+<%@ page import="javax.portlet.PortletURL" %>
+
 <portlet:defineObjects/>
 
 <%
-String src = (String)request.getAttribute("appUrl");
+String appURL = (String)request.getParameter("appURL");
+if (Validator.isNull(appURL)) {
+	appURL = request.getContextPath();
+}
+
+String defaultHeight = (String)renderRequest.getAttribute("wai.connector.iframe.height.default");
 %>
 
-<script type="text/javascript">
-	function <portlet:namespace />init() {
-		if (document.location.hash != '#') {
-			document.getElementById('<portlet:namespace />ac_iframe').src = '<%= request.getContextPath() %>/' + document.location.hash.substring(1);
-		}
-	}
-
-	function <portlet:namespace />maximizeIframe(iframe) {
-		var winHeight = 0;
-
-		if (typeof(window.innerWidth) == 'number') {
-
-			// Non-IE
-
-			winHeight = window.innerHeight;
-		}
-		else if ((document.documentElement) &&
-				 (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
-
-			// IE 6+
-
-			winHeight = document.documentElement.clientHeight;
-		}
-		else if ((document.body) &&
-				 (document.body.clientWidth || document.body.clientHeight)) {
-
-			// IE 4 compatible
-
-			winHeight = document.body.clientHeight;
-		}
-
-		// The value 139 here is derived (tab_height * num_tab_levels) +
-		// height_of_banner + bottom_spacer. 139 just happend to work in
-		// this instance in IE and Firefox at the time.
-
-		iframe.height = (winHeight - 139);
-	}
-
-	function <portlet:namespace />monitorIframeUrl() {
-		var iframeDocument = document.getElementById('<portlet:namespace />ac_iframe').contentWindow.document;
-
-		var url
-
-		try {
-			url = iframeDocument.location;
-		}
-		catch (error) {
-			return true;
-		}
-
-		var appUrl = url.pathname;
-
-		console.log("monitoring: " + url);
-
-		if (appUrl.indexOf('<%= request.getContextPath() %>') != -1) {
-			appUrl = appUrl.substring('<%= request.getContextPath() %>'.length + 1);
-
-			if (iframeDocument.location.search != '?') {
-				appUrl += iframeDocument.location.search;
-			}
-
-			if ((appUrl == '') || (appUrl == '/')) {
-				if (document.location.hash.length != 0) {
-					document.location.hash = '/';
-				}
-			}
-			else {
-				document.location.hash = appUrl;
-			}
-		}
-
-		return true;
-	}
-
-	function <portlet:namespace />resizeIframe() {
-		var iframe = document.getElementById('<portlet:namespace />ac_iframe');
-
-		var iframeHeight;
-
-		try {
-			iframeHeight = iframe.contentWindow.document.body.scrollHeight;
-		}
-		catch (error) {
-			<portlet:namespace />maximizeIframe(iframe);
-
-			return true;
-		}
-
-		var extraHeight = <%= renderRequest.getAttribute("wai.connector.iframe.height.extra") %>;
-
-		document.getElementById('<portlet:namespace />ac_iframe').height = iframeHeight + extraHeight;
-
-		return true;
-	}
-</script>
-
-<div id="<portlet:namespace />ac_iframe_div">
-	<iframe frameborder="0" height="100%" id="<portlet:namespace />ac_iframe" src="<%= src %>" width="100%" onLoad="<portlet:namespace />monitorIframeUrl(); <portlet:namespace />resizeIframe();"></iframe>
+<div id="<portlet:namespace />iframe_div">
+	<iframe id="<portlet:namespace />iframe" frameborder="0" height="<%= defaultHeight %>" width="100%" src="<%= appURL %>"></iframe>
 </div>
+<div id="<portlet:namespace />bookmark_div"><a href="#">Permanent link</a></div>
+<script>
+AUI().use('aui-base', function(A) {
+	var iframe = A.one('#<portlet:namespace />iframe');
 
-<script type="text/javascript">
-	<portlet:namespace />init();
+	var getURL = function() {
+		var location = iframe.get('contentWindow.document.location');
+		if (location) {
+			return location.pathname + location.search;
+		}
+		return null;
+	};
+
+	var bookmarkLink = A.one('#<portlet:namespace />bookmark_div a');
+
+	var getHeight = function() {
+		var body = iframe.get('contentWindow.document.body');
+
+		if (body) {
+			var max = 0;
+
+			// The scrollHeight of the body does not always account for every
+			// element. One solution is to manually check the position of the
+			// bottom edge of every div.
+			body.all('div').each(function(div) {
+				var height = div.getY() + div.get('scrollHeight');
+				if (height > max) {
+					max = height;
+				}
+			});
+
+			var scrollHeight = body.get('scrollHeight');
+
+			if (scrollHeight > max) {
+				return scrollHeight;
+			} else {
+				return max;
+			}
+		} else {
+			return <%= defaultHeight %>;
+		}
+	}
+
+	var resizeIframe = function() {
+		iframe.set('height', getHeight());
+	};
+
+<%
+PortletURL portletURL = renderResponse.createRenderURL();
+portletURL.setParameter("appURL", "");
+%>
+
+	var updateIframe = function() {
+		bookmarkLink.set('href', '<%= portletURL.toString() %>' + escape(getURL()));
+		resizeIframe();
+	};
+
+	iframe.on('load', updateIframe);
+
+	updateIframe();
+});
 </script>

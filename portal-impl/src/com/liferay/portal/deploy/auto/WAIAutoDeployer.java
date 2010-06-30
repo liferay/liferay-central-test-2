@@ -56,7 +56,6 @@ public class WAIAutoDeployer extends PortletAutoDeployer {
 
 		filterMap.put("portlet_name", displayName);
 		filterMap.put("portlet_title", portletName);
-		filterMap.put("restore_current_view", "false");
 
 		if (pluginPackage != null) {
 			Properties settings = pluginPackage.getDeploymentSettings();
@@ -70,7 +69,19 @@ public class WAIAutoDeployer extends PortletAutoDeployer {
 				"friendly_url_mapper_class",
 				settings.getProperty(
 					"wai.friendly.url.mapper",
-					"com.liferay.util.bridges.wai.WAIFriendlyURLMapper"));
+					"com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper"));
+
+			filterMap.put(
+				"friendly_url_mapping",
+				settings.getProperty(
+					"wai.friendly.url.mapping",
+					"waiapp"));
+
+			filterMap.put(
+				"friendly_url_routes",
+				settings.getProperty(
+					"wai.friendly.url.routes",
+					"com/liferay/util/bridges/wai/wai-friendly-url-routes.xml"));
 		}
 		else {
 			filterMap.put(
@@ -78,7 +89,15 @@ public class WAIAutoDeployer extends PortletAutoDeployer {
 
 			filterMap.put(
 				"friendly_url_mapper_class",
-				"com.liferay.util.bridges.wai.WAIFriendlyURLMapper");
+				"com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper");
+
+			filterMap.put(
+				"friendly_url_mapping",
+				"waiapp");
+
+			filterMap.put(
+				"friendly_url_routes",
+				"com/liferay/util/bridges/wai/wai-friendly-url-routes.xml");
 		}
 
 		_setInitParams(filterMap, pluginPackage);
@@ -89,8 +108,6 @@ public class WAIAutoDeployer extends PortletAutoDeployer {
 			"liferay-portlet.xml", srcFile + "/WEB-INF", filterMap);
 		copyDependencyXml(
 			"portlet.xml", srcFile + "/WEB-INF", filterMap);
-		copyDependencyXml(
-			"normal_window_state.jsp", srcFile + "/WEB-INF/jsp/liferay/wai");
 		copyDependencyXml("iframe.jsp", srcFile + "/WEB-INF/jsp/liferay/wai");
 
 	}
@@ -117,11 +134,11 @@ public class WAIAutoDeployer extends PortletAutoDeployer {
 	}
 
 	private static String[] _INIT_PARAM_NAMES = new String[] {
-		"wai.connector", "wai.connector.iframe.height.extra"
+		"wai.connector.iframe.height.default"
 	};
 
 	private static String[] _INIT_PARAM_DEFAULT_VALUES = new String[] {
-		"iframe", "40"
+		"500"
 	};
 
 }
