@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -15,7 +15,7 @@
 package com.liferay.portal.monitoring.statistics.service;
 
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.monitoring.MonitoringException;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.monitoring.statistics.DataSampleProcessor;
 
 import java.util.Map;
@@ -95,21 +95,25 @@ public class ServerStatistics
 		return -1;
 	}
 
-	public void processDataSample(ServiceRequestDataSample dataSample)
-		throws MonitoringException {
+	public void processDataSample(
+		ServiceRequestDataSample serviceRequestDataSample) {
 
-		String className = dataSample.getMethodKey().getClassName();
+		MethodKey methodKey = serviceRequestDataSample.getMethodKey();
+
+		String className = methodKey.getClassName();
 
 		ServiceStatistics serviceStatistics = _serviceStatistics.get(className);
+
 		if (serviceStatistics == null) {
 			serviceStatistics = new ServiceStatistics(className);
 
 			_serviceStatistics.put(className, serviceStatistics);
 		}
 
-		serviceStatistics.processDataSample(dataSample);
+		serviceStatistics.processDataSample(serviceRequestDataSample);
 	}
 
 	private Map<String, ServiceStatistics> _serviceStatistics =
 		new ConcurrentHashMap<String, ServiceStatistics>();
+
 }

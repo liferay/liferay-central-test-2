@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -28,15 +28,15 @@ import org.aopalliance.intercept.MethodInvocation;
  * @author Michael C. Han
  */
 public class ServiceRequestDataSample extends BaseDataSample {
-	public ServiceRequestDataSample(MethodInvocation methodInvocation) {
 
+	public ServiceRequestDataSample(MethodInvocation methodInvocation) {
 		setNamespace(MonitorNames.SERVICE);
 
 		Method method = methodInvocation.getMethod();
 
 		String className = method.getDeclaringClass().getName();
 		String methodName = method.getName();
-		Class[] parameterTypes = method.getParameterTypes();
+		Class<?>[] parameterTypes = method.getParameterTypes();
 
 		_methodKey = new MethodKey(className, methodName, parameterTypes);
 
@@ -48,4 +48,5 @@ public class ServiceRequestDataSample extends BaseDataSample {
 	}
 
 	private MethodKey _methodKey;
+
 }

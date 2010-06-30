@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -40,8 +40,8 @@ public class ServiceMonitorAdvice extends ChainableMethodAdvice {
 		return _instance;
 	}
 
-	public void addMonitoredClass(String monitoredClass) {
-		_monitoredClasses.add(monitoredClass);
+	public void addMonitoredClass(String className) {
+		_monitoredClasses.add(className);
 	}
 
 	public void addMonitoredMethod(
@@ -54,42 +54,9 @@ public class ServiceMonitorAdvice extends ChainableMethodAdvice {
 
 			_monitoredMethods.add(methodKey);
 		}
-		catch (ClassNotFoundException e) {
-			throw new SystemException("Unable to add method", e);
+		catch (ClassNotFoundException cnfe) {
+			throw new SystemException("Unable to add method", cnfe);
 		}
-	}
-
-	public Set<String> getMonitoredClasses() {
-		return _monitoredClasses;
-	}
-
-	public String getMonitoringDestinationName() {
-		return _monitoringDestinationName;
-	}
-
-	public Set<MethodKey> getMonitoredMethods() {
-		return _monitoredMethods;
-	}
-
-	public Object before(MethodInvocation methodInvocation)
-		throws Throwable {
-
-		if (!_active) {
-			return null;
-		}
-
-		if (!_permissiveMode && (!isMonitored(methodInvocation))) {
-			return null;
-		}
-
-		ServiceRequestDataSample serviceRequestDataSample =
-			new ServiceRequestDataSample(methodInvocation);
-
-		serviceRequestDataSample.prepare();
-
-		_serviceRequestDataSampleThreadLocal.set(serviceRequestDataSample);
-
-		return null;
 	}
 
 	public void afterReturning(MethodInvocation methodInvocation, Object result)
@@ -115,8 +82,26 @@ public class ServiceMonitorAdvice extends ChainableMethodAdvice {
 		}
 	}
 
-	public void duringFinally(MethodInvocation methodInvocation) {
+	public Object before(MethodInvocation methodInvocation) throws Throwable {
+		if (!_active) {
+			return null;
+		}
 
+		if (!_permissiveMode && !isMonitored(methodInvocation)) {
+			return null;
+		}
+
+		ServiceRequestDataSample serviceRequestDataSample =
+			new ServiceRequestDataSample(methodInvocation);
+
+		serviceRequestDataSample.prepare();
+
+		_serviceRequestDataSampleThreadLocal.set(serviceRequestDataSample);
+
+		return null;
+	}
+
+	public void duringFinally(MethodInvocation methodInvocation) {
 		ServiceRequestDataSample serviceRequestDataSample =
 			_serviceRequestDataSampleThreadLocal.get();
 
@@ -128,6 +113,18 @@ public class ServiceMonitorAdvice extends ChainableMethodAdvice {
 			MessageBusUtil.sendMessage(
 				_monitoringDestinationName, serviceRequestDataSample);
 		}
+	}
+
+	public Set<String> getMonitoredClasses() {
+		return _monitoredClasses;
+	}
+
+	public Set<MethodKey> getMonitoredMethods() {
+		return _monitoredMethods;
+	}
+
+	public String getMonitoringDestinationName() {
+		return _monitoringDestinationName;
 	}
 
 	public boolean isActive() {
@@ -146,12 +143,12 @@ public class ServiceMonitorAdvice extends ChainableMethodAdvice {
 		_monitoredClasses = monitoredClasses;
 	}
 
-	public void setMonitoringDestinationName(String monitoringDestinationName) {
-		_monitoringDestinationName = monitoringDestinationName;
-	}
-
 	public void setMonitoredMethods(Set<MethodKey> monitoredMethods) {
 		_monitoredMethods = monitoredMethods;
+	}
+
+	public void setMonitoringDestinationName(String monitoringDestinationName) {
+		_monitoringDestinationName = monitoringDestinationName;
 	}
 
 	public void setPermissiveMode(boolean permissiveMode) {
@@ -161,16 +158,19 @@ public class ServiceMonitorAdvice extends ChainableMethodAdvice {
 	protected boolean isMonitored(MethodInvocation methodInvocation) {
 		Method method = methodInvocation.getMethod();
 
-		String className = method.getDeclaringClass().getName();
+		Class<?> declaringClass = method.getDeclaringClass();
+
+		String className = declaringClass.getName();
 
 		if (_monitoredClasses.contains(className)) {
 			return true;
 		}
 
 		String methodName = method.getName();
-		Class[] types = method.getParameterTypes();
+		Class<?>[] parameterTypes = method.getParameterTypes();
 
-		MethodKey methodKey = new MethodKey(className, methodName, types);
+		MethodKey methodKey = new MethodKey(
+			className, methodName, parameterTypes);
 
 		if (_monitoredMethods.contains(methodKey)) {
 			return true;
@@ -180,15 +180,17 @@ public class ServiceMonitorAdvice extends ChainableMethodAdvice {
 	}
 
 	private static ServiceMonitorAdvice _instance = new ServiceMonitorAdvice();
+
 	private static ThreadLocal<ServiceRequestDataSample>
 		_serviceRequestDataSampleThreadLocal =
 			new AutoResetThreadLocal<ServiceRequestDataSample>(
 				ServiceRequestDataSample.class +
-				"._serviceRequestDataSampleThreadLocal");
+					"._serviceRequestDataSampleThreadLocal");
 
-	private String _monitoringDestinationName;
+	private boolean _active;
 	private Set<String> _monitoredClasses = new HashSet<String>();
 	private Set<MethodKey> _monitoredMethods = new HashSet<MethodKey>();
-	private boolean _active;
+	private String _monitoringDestinationName;
 	private boolean _permissiveMode;
+
 }

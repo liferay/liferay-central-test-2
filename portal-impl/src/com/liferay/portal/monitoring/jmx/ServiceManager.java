@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -27,28 +27,9 @@ import java.util.Set;
  * @author Michael C. Han
  */
 public class ServiceManager implements ServiceManagerMBean {
-	public Set<String> getMonitoredClasses() {
-		return _serviceMonitorAdvice.getMonitoredClasses();
-	}
 
-	public Set<MethodKey> getMonitoredMethods() {
-		return _serviceMonitorAdvice.getMonitoredMethods();
-	}
-
-	public boolean isActive() {
-		return _serviceMonitorAdvice.isActive();
-	}
-
-	public boolean isPermissiveMode() {
-		return _serviceMonitorAdvice.isPermissiveMode();
-	}
-
-	public void setActive(boolean active) {
-		_serviceMonitorAdvice.setActive(active);
-	}
-
-	public void addMonitoredClass(String monitoredClass) {
-		_serviceMonitorAdvice.addMonitoredClass(monitoredClass);
+	public void addMonitoredClass(String className) {
+		_serviceMonitorAdvice.addMonitoredClass(className);
 	}
 
 	public void addMonitoredMethod(
@@ -83,12 +64,32 @@ public class ServiceManager implements ServiceManagerMBean {
 			className, methodName, parameterTypes);
 	}
 
+	public Set<String> getMonitoredClasses() {
+		return _serviceMonitorAdvice.getMonitoredClasses();
+	}
+
+	public Set<MethodKey> getMonitoredMethods() {
+		return _serviceMonitorAdvice.getMonitoredMethods();
+	}
+
 	public long getRequestCount(
 			String className, String methodName, String[] parameterTypes)
 		throws SystemException {
 
 		return _serverStatistics.getRequestCount(
 			className, methodName, parameterTypes);
+	}
+
+	public boolean isActive() {
+		return _serviceMonitorAdvice.isActive();
+	}
+
+	public boolean isPermissiveMode() {
+		return _serviceMonitorAdvice.isPermissiveMode();
+	}
+
+	public void setActive(boolean active) {
+		_serviceMonitorAdvice.setActive(active);
 	}
 
 	public void setPermissiveMode(boolean permissiveMode) {
@@ -99,8 +100,8 @@ public class ServiceManager implements ServiceManagerMBean {
 		_serverStatistics = serverStatistics;
 	}
 
+	private ServerStatistics _serverStatistics;
 	private ServiceMonitorAdvice _serviceMonitorAdvice =
 		ServiceMonitorAdvice.getInstance();
 
-	private ServerStatistics _serverStatistics;
 }

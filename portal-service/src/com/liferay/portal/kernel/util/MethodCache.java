@@ -93,7 +93,7 @@ public class MethodCache {
 		if (method == null) {
 			String className = methodKey.getClassName();
 			String methodName = methodKey.getMethodName();
-			Class<?>[] types = methodKey.getTypes();
+			Class<?>[] parameterTypes = methodKey.getParameterTypes();
 
 			Class<?> classObj = classesMap.get(className);
 
@@ -108,7 +108,7 @@ public class MethodCache {
 				classesMap.put(className, classObj);
 			}
 
-			method = classObj.getMethod(methodName, types);
+			method = classObj.getMethod(methodName, parameterTypes);
 
 			methodsMap.put(methodKey, method);
 		}

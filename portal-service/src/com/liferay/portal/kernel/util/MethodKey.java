@@ -28,34 +28,35 @@ import java.util.Map;
 public class MethodKey implements Serializable {
 
 	public static MethodKey create(
-			String className, String methodName, String[] types)
+			String className, String methodName, String[] parameterTypeNames)
 		throws ClassNotFoundException {
 
-		Class[] parameterTypes = new Class[types.length];
+		Class<?>[] parameterTypes = new Class[parameterTypeNames.length];
 
-		int counter = 0;
-		for (String type : types) {
-			parameterTypes[counter] = Class.forName(type);
+		for (int i = 0; i < parameterTypeNames.length; i++) {
+			String parameterTypeName = parameterTypeNames[i];
 
-			counter++;
+			parameterTypes[i] = Class.forName(parameterTypeName);
 		}
 
 		return new MethodKey(className, methodName, parameterTypes);
 	}
 
-	public MethodKey(String className, String methodName, Class<?>[] types) {
-		this(null, null, className, methodName, types);
+	public MethodKey(
+		String className, String methodName, Class<?>[] parameterTypes) {
+
+		this(null, null, className, methodName, parameterTypes);
 	}
 
 	public MethodKey(
 		Map<String, Class<?>> classesMap, Map<MethodKey, Method> methodsMap,
-		String className, String methodName, Class<?>[] types) {
+		String className, String methodName, Class<?>[] parameterTypes) {
 
 		_classesMap = classesMap;
 		_methodsMap = methodsMap;
 		_className = className;
 		_methodName = methodName;
-		_types = types;
+		_parameterTypes = parameterTypes;
 	}
 
 	public Map<String, Class<?>> getClassesMap() {
@@ -74,8 +75,8 @@ public class MethodKey implements Serializable {
 		return _methodName;
 	}
 
-	public Class<?>[] getTypes() {
-		return _types;
+	public Class<?>[] getParameterTypes() {
+		return _parameterTypes;
 	}
 
 	public boolean equals(Object obj) {
@@ -108,11 +109,11 @@ public class MethodKey implements Serializable {
 			sb.append(_className);
 			sb.append(_methodName);
 
-			if ((_types != null) && (_types.length > 0)) {
+			if ((_parameterTypes != null) && (_parameterTypes.length > 0)) {
 				sb.append(StringPool.DASH);
 
-				for (Class<?> type : _types) {
-					sb.append(type.getName());
+				for (Class<?> parameterType : _parameterTypes) {
+					sb.append(parameterType.getName());
 				}
 			}
 
@@ -126,7 +127,7 @@ public class MethodKey implements Serializable {
 	private Map<MethodKey, Method> _methodsMap;
 	private String _className;
 	private String _methodName;
-	private Class<?>[] _types;
+	private Class<?>[] _parameterTypes;
 	private String _toString;
 
 }

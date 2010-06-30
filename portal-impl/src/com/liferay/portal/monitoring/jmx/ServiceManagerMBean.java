@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -25,37 +25,39 @@ import java.util.Set;
  * @author Michael C. Han
  */
 public interface ServiceManagerMBean {
-	Set<String> getMonitoredClasses();
 
-	Set<MethodKey> getMonitoredMethods();
+	public void addMonitoredClass(String className);
 
-	boolean isActive();
-
-	boolean isPermissiveMode();
-
-	void setActive(boolean active);
-
-	void addMonitoredClass(String monitoredClass);
-
-	void addMonitoredMethod(
+	public void addMonitoredMethod(
 			String className, String methodName, String[] parameterTypes)
 		throws SystemException;
 
-	long getErrorCount(
+	public long getErrorCount(
 			String className, String methodName, String[] parameterTypes)
 		throws SystemException;
 
-	long getMaxTime(
+	public long getMaxTime(
 			String className, String methodName, String[] parameterTypes)
 		throws SystemException;
 
-	long getMinTime(
+	public long getMinTime(
 			String className, String methodName, String[] parameterTypes)
 		throws SystemException;
 
-	long getRequestCount(
+	public Set<String> getMonitoredClasses();
+
+	public Set<MethodKey> getMonitoredMethods();
+
+	public long getRequestCount(
 			String className, String methodName, String[] parameterTypes)
 		throws SystemException;
 
-	void setPermissiveMode(boolean permissiveMode);
+	public boolean isActive();
+
+	public boolean isPermissiveMode();
+
+	public void setActive(boolean active);
+
+	public void setPermissiveMode(boolean permissiveMode);
+
 }

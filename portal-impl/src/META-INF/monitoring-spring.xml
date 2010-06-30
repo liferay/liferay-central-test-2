@@ -13,7 +13,7 @@
 	<bean id="portletStatistics" class="com.liferay.portal.monitoring.statistics.portlet.ServerStatistics">
 		<property name="companyLocalService" ref="com.liferay.portal.service.CompanyLocalService" />
 	</bean>
-	<bean id="serviceStatistics" class="com.liferay.portal.monitoring.statistics.service.ServerStatistics"/>
+	<bean id="serviceStatistics" class="com.liferay.portal.monitoring.statistics.service.ServerStatistics" />
 	<bean id="com.liferay.portal.monitoring.MonitoringService" class="com.liferay.portal.monitoring.DefaultMonitoringService">
 		<property name="dataSampleProcessors">
 			<map>

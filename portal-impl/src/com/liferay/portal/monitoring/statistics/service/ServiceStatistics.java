@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -16,7 +16,6 @@ package com.liferay.portal.monitoring.statistics.service;
 
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.MethodKey;
-import com.liferay.portal.monitoring.MonitoringException;
 import com.liferay.portal.monitoring.RequestStatus;
 import com.liferay.portal.monitoring.statistics.DataSampleProcessor;
 import com.liferay.portal.monitoring.statistics.RequestStatistics;
@@ -141,10 +140,10 @@ public class ServiceStatistics
 		return -1;
 	}
 
-	public void processDataSample(ServiceRequestDataSample dataSample)
-		throws MonitoringException {
+	public void processDataSample(
+		ServiceRequestDataSample serviceRequestDataSample) {
 
-		MethodKey methodKey = dataSample.getMethodKey();
+		MethodKey methodKey = serviceRequestDataSample.getMethodKey();
 
 		RequestStatistics requestStatistics = _methodRequestStatistics.get(
 			methodKey);
@@ -155,19 +154,23 @@ public class ServiceStatistics
 			_methodRequestStatistics.put(methodKey, requestStatistics);
 		}
 
-		if (dataSample.getRequestStatus() == RequestStatus.ERROR) {
+		RequestStatus requestStatus =
+			serviceRequestDataSample.getRequestStatus();
+
+		if (requestStatus == RequestStatus.ERROR) {
 			requestStatistics.incrementError();
 		}
-		else if (dataSample.getRequestStatus() == RequestStatus.TIMEOUT) {
+		else if (requestStatus == RequestStatus.TIMEOUT) {
 			requestStatistics.incrementTimeout();
 		}
-		else if (dataSample.getRequestStatus() == RequestStatus.SUCCESS) {
+		else if (requestStatus == RequestStatus.SUCCESS) {
 			requestStatistics.incrementSuccessDuration(
-				dataSample.getDuration());
+				serviceRequestDataSample.getDuration());
 		}
 	}
 
 	private String _className;
 	private Map<MethodKey, RequestStatistics> _methodRequestStatistics =
 		new ConcurrentHashMap<MethodKey, RequestStatistics>();
+
 }
