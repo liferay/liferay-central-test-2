@@ -159,6 +159,7 @@ public class ClusterRequestReceiver extends BaseReceiver {
 		try {
 			ClusterNode localClusterNode =
 				_clusterExecutorImpl.getLocalClusterNode();
+
 			clusterNodeResponse.setClusterNode(localClusterNode);
 		}
 		catch (Exception e) {
