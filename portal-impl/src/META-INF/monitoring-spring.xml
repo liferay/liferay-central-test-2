@@ -13,6 +13,7 @@
 	<bean id="portletStatistics" class="com.liferay.portal.monitoring.statistics.portlet.ServerStatistics">
 		<property name="companyLocalService" ref="com.liferay.portal.service.CompanyLocalService" />
 	</bean>
+	<bean id="serviceStatistics" class="com.liferay.portal.monitoring.statistics.service.ServerStatistics"/>
 	<bean id="com.liferay.portal.monitoring.MonitoringService" class="com.liferay.portal.monitoring.DefaultMonitoringService">
 		<property name="dataSampleProcessors">
 			<map>
@@ -26,12 +27,18 @@
 						<ref bean="portletStatistics" />
 					</list>
 				</entry>
+				<entry key="com.liferay.monitoring.Service">
+					<list>
+						<ref bean="serviceStatistics" />
+					</list>
+				</entry>
 			</map>
 		</property>
 		<property name="levels">
 			<map>
 				<entry key="com.liferay.monitoring.Portal" value="HIGH" />
 				<entry key="com.liferay.monitoring.Portlet" value="HIGH" />
+				<entry key="com.liferay.monitoring.Service" value="HIGH" />
 			</map>
 		</property>
 	</bean>
@@ -84,6 +91,9 @@
 		</property>
 		<property name="serverStatistics" ref="portletStatistics" />
 	</bean>
+	<bean id="com.liferay.portal.monitoring.jmx.ServiceManager" class="com.liferay.portal.monitoring.jmx.ServiceManager">
+		<property name="serverStatistics" ref="serviceStatistics" />
+	</bean>
 	<bean id="monitoringMBeanExporter" class="org.springframework.jmx.export.MBeanExporter">
 		<property name="beans">
 			<map>
@@ -96,6 +106,7 @@
 				<entry key="com.liferay.portal:classification=portlet,name=EventRequestPortletContainerManager" value-ref="com.liferay.portal.monitoring.jmx.EventRequestPortletContainerManager" />
 				<entry key="com.liferay.portal:classification=portlet,name=RenderRequestPortletContainerManager" value-ref="com.liferay.portal.monitoring.jmx.RenderRequestPortletContainerManager" />
 				<entry key="com.liferay.portal:classification=portlet,name=ResourceRequestPortletContainerManager" value-ref="com.liferay.portal.monitoring.jmx.ResourceRequestPortletContainerManager" />
+				<entry key="com.liferay.portal:classification=service,name=ServiceManager" value-ref="com.liferay.portal.monitoring.jmx.ServiceManager" />
 			</map>
 		</property>
 		<property name="server" ref="mBeanServer" />

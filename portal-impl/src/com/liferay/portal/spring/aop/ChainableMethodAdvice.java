@@ -38,6 +38,9 @@ public abstract class ChainableMethodAdvice implements MethodInterceptor {
 		return null;
 	}
 
+	public void duringFinally(MethodInvocation methodInvocation) {
+	}	
+
 	public final Object invoke(MethodInvocation methodInvocation)
 		throws Throwable {
 
@@ -66,6 +69,9 @@ public abstract class ChainableMethodAdvice implements MethodInterceptor {
 			afterThrowing(methodInvocation, throwable);
 
 			throw throwable;
+		}
+		finally {
+			duringFinally(methodInvocation);
 		}
 
 		return returnValue;
