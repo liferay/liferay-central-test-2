@@ -48,8 +48,8 @@ public class MBThreadFinderImpl
 	public static String COUNT_BY_G_C_S =
 		MBThreadFinder.class.getName() + ".countByG_C_S";
 
-	public static String COUNT_BY_S_G_C_U_S =
-		MBThreadFinder.class.getName() + ".countByS_G_C_U_S";
+	public static String COUNT_BY_S_G_U_C_S =
+		MBThreadFinder.class.getName() + ".countByS_G_U_C_S";
 
 	public static String FIND_BY_G_C =
 		MBThreadFinder.class.getName() + ".findByG_C";
@@ -57,8 +57,8 @@ public class MBThreadFinderImpl
 	public static String FIND_BY_G_C_S =
 		MBThreadFinder.class.getName() + ".findByG_C_S";
 
-	public static String FIND_BY_S_G_C_U_S =
-		MBThreadFinder.class.getName() + ".findByS_G_C_U_S";
+	public static String FIND_BY_S_G_U_C_S =
+		MBThreadFinder.class.getName() + ".findByS_G_U_C_S";
 
 	public int countByG_C_S(long groupId, long categoryId, int status)
 		throws SystemException {
@@ -66,11 +66,11 @@ public class MBThreadFinderImpl
 		return doCountByG_C_S(groupId, categoryId, status, false);
 	}
 
-	public int countByS_G_C_U_S(
-			long groupId, long[] categoryIds, long userId, int status)
+	public int countByS_G_U_C_S(
+			long groupId, long userId, long[] categoryIds, int status)
 		throws SystemException {
 
-		return doCountByS_G_C_U_S(groupId, categoryIds, userId, status, false);
+		return doCountByS_G_U_C_S(groupId, userId, categoryIds, status, false);
 	}
 
 	public int filterCountByG_C(long groupId, long categoryId)
@@ -126,11 +126,11 @@ public class MBThreadFinderImpl
 		return doCountByG_C_S(groupId, categoryId, status, true);
 	}
 
-	public int filterCountByS_G_C_U_S(
-			long groupId, long[] categoryIds, long userId, int status)
+	public int filterCountByS_G_U_C_S(
+			long groupId, long userId, long[] categoryIds, int status)
 		throws SystemException {
 
-		return doCountByS_G_C_U_S(groupId, categoryIds, userId, status, true);
+		return doCountByS_G_U_C_S(groupId, userId, categoryIds, status, true);
 	}
 
 	public List<MBThread> filterFindByG_C(
@@ -178,13 +178,13 @@ public class MBThreadFinderImpl
 		return doFindByG_C_S(groupId, categoryId, status, start, end, true);
 	}
 
-	public List<MBThread> filterFindByS_G_C_U_S(
-			long groupId, long[] categoryIds, long userId, int status,
+	public List<MBThread> filterFindByS_G_U_C_S(
+			long groupId, long userId, long[] categoryIds, int status,
 			int start, int end)
 		throws SystemException {
 
-		return doFindByS_G_C_U_S(
-			groupId, categoryIds, userId, status, start, end, true);
+		return doFindByS_G_U_C_S(
+			groupId, userId, categoryIds, status, start, end, true);
 	}
 
 	public List<MBThread> findByG_C_S(
@@ -194,13 +194,13 @@ public class MBThreadFinderImpl
 		return doFindByG_C_S(groupId, categoryId, status, start, end, false);
 	}
 
-	public List<MBThread> findByS_G_C_U_S(
-			long groupId, long[] categoryIds, long userId, int status,
+	public List<MBThread> findByS_G_U_C_S(
+			long groupId, long userId, long[] categoryIds, int status,
 			int start, int end)
 		throws SystemException {
 
-		return doFindByS_G_C_U_S(
-			groupId, categoryIds, userId, status, start, end, false);
+		return doFindByS_G_U_C_S(
+			groupId, userId, categoryIds, status, start, end, false);
 	}
 
 	protected int doCountByG_C_S(
@@ -258,8 +258,8 @@ public class MBThreadFinderImpl
 		}
 	}
 
-	protected int doCountByS_G_C_U_S(
-			long groupId, long[] categoryIds, long userId, int status,
+	protected int doCountByS_G_U_C_S(
+			long groupId, long userId, long[] categoryIds, int status,
 			boolean inlineSQLHelper)
 		throws SystemException {
 
@@ -268,7 +268,7 @@ public class MBThreadFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_S_G_C_U_S);
+			String sql = CustomSQLUtil.get(COUNT_BY_S_G_U_C_S);
 
 			if ((categoryIds == null) || (categoryIds.length == 0)) {
 				sql = StringUtil.replace(
@@ -373,8 +373,8 @@ public class MBThreadFinderImpl
 		}
 	}
 
-	protected List<MBThread> doFindByS_G_C_U_S(
-			long groupId, long[] categoryIds, long userId, int status,
+	protected List<MBThread> doFindByS_G_U_C_S(
+			long groupId, long userId, long[] categoryIds, int status,
 			int start, int end, boolean inlineSQLHelper)
 		throws SystemException {
 
@@ -383,7 +383,7 @@ public class MBThreadFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_S_G_C_U_S);
+			String sql = CustomSQLUtil.get(FIND_BY_S_G_U_C_S);
 
 			if ((categoryIds == null) || (categoryIds.length == 0)) {
 				sql = StringUtil.replace(

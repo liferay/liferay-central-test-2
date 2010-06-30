@@ -84,12 +84,12 @@ public class MBThreadServiceSoap {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThreadSoap[] getGroupThreads(
-		long groupId, long userId, int status, int start, int end)
-		throws RemoteException {
+		long groupId, long userId, int status, boolean subscribed,
+		boolean includeAnonymous, int start, int end) throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.messageboards.model.MBThread> returnValue =
 				MBThreadServiceUtil.getGroupThreads(groupId, userId, status,
-					start, end);
+					subscribed, includeAnonymous, start, end);
 
 			return com.liferay.portlet.messageboards.model.MBThreadSoap.toSoapModels(returnValue);
 		}
@@ -118,12 +118,12 @@ public class MBThreadServiceSoap {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThreadSoap[] getGroupThreads(
-		long groupId, long userId, int status, boolean subscribed,
-		boolean includeAnonymous, int start, int end) throws RemoteException {
+		long groupId, long userId, int status, int start, int end)
+		throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.messageboards.model.MBThread> returnValue =
 				MBThreadServiceUtil.getGroupThreads(groupId, userId, status,
-					subscribed, includeAnonymous, start, end);
+					start, end);
 
 			return com.liferay.portlet.messageboards.model.MBThreadSoap.toSoapModels(returnValue);
 		}

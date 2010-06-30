@@ -23,36 +23,36 @@ public interface MBMessageFinder {
 	public int countByC_T(java.util.Date createDate, long threadId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByG_C_U_S(long groupId, long[] categoryIds, long userId,
+	public int countByG_U_C_S(long groupId, long userId, long[] categoryIds,
 		int status) throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByG_C_U_A_S(long groupId, long[] categoryIds, long userId,
+	public int countByG_U_C_A_S(long groupId, long userId, long[] categoryIds,
 		boolean anonymous, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int filterCountByG_C_U_S(long groupId, long[] categoryIds,
-		long userId, int status)
+	public int filterCountByG_U_C_S(long groupId, long userId,
+		long[] categoryIds, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int filterCountByG_C_U_A_S(long groupId, long[] categoryIds,
-		long userId, boolean anonymous, int status)
+	public int filterCountByG_U_C_A_S(long groupId, long userId,
+		long[] categoryIds, boolean anonymous, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<java.lang.Long> filterFindByG_C_U_S(long groupId,
-		long[] categoryIds, long userId, int status, int start, int end)
+	public java.util.List<java.lang.Long> filterFindByG_U_C_S(long groupId,
+		long userId, long[] categoryIds, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<java.lang.Long> filterFindByG_C_U_A_S(long groupId,
-		long[] categoryIds, long userId, boolean anonymous, int status,
+	public java.util.List<java.lang.Long> filterFindByG_U_C_A_S(long groupId,
+		long userId, long[] categoryIds, boolean anonymous, int status,
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<java.lang.Long> findByG_C_U_S(long groupId,
-		long[] categoryIds, long userId, int status, int start, int end)
+	public java.util.List<java.lang.Long> findByG_U_C_S(long groupId,
+		long userId, long[] categoryIds, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<java.lang.Long> findByG_C_U_A_S(long groupId,
-		long[] categoryIds, long userId, boolean anonymous, int status,
+	public java.util.List<java.lang.Long> findByG_U_C_A_S(long groupId,
+		long userId, long[] categoryIds, boolean anonymous, int status,
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

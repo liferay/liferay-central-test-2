@@ -150,83 +150,6 @@ public class MBMessageServiceHttp {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		HttpPrincipal httpPrincipal, long groupId, long categoryId,
-		java.lang.String subject, java.lang.String body,
-		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<java.lang.String, byte[]>> files,
-		boolean anonymous, double priority, boolean allowPingbacks,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(categoryId);
-
-			Object paramObj2 = subject;
-
-			if (subject == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = body;
-
-			if (body == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = files;
-
-			if (files == null) {
-				paramObj4 = new NullWrapper("java.util.List");
-			}
-
-			Object paramObj5 = new BooleanWrapper(anonymous);
-
-			Object paramObj6 = new DoubleWrapper(priority);
-
-			Object paramObj7 = new BooleanWrapper(allowPingbacks);
-
-			Object paramObj8 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj8 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"addMessage",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8
-					});
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (com.liferay.portlet.messageboards.model.MBMessage)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		HttpPrincipal httpPrincipal, long groupId, long categoryId,
 		long threadId, long parentMessageId, java.lang.String subject,
 		java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<java.lang.String, byte[]>> files,
@@ -280,6 +203,83 @@ public class MBMessageServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.portlet.messageboards.model.MBMessage)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		HttpPrincipal httpPrincipal, long groupId, long categoryId,
+		java.lang.String subject, java.lang.String body,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<java.lang.String, byte[]>> files,
+		boolean anonymous, double priority, boolean allowPingbacks,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(categoryId);
+
+			Object paramObj2 = subject;
+
+			if (subject == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = body;
+
+			if (body == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = files;
+
+			if (files == null) {
+				paramObj4 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj5 = new BooleanWrapper(anonymous);
+
+			Object paramObj6 = new DoubleWrapper(priority);
+
+			Object paramObj7 = new BooleanWrapper(allowPingbacks);
+
+			Object paramObj8 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj8 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
+					"addMessage",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8
 					});
 
 			Object returnObj = null;

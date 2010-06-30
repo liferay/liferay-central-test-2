@@ -88,36 +88,6 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	}
 
 	public MBMessage addMessage(
-			long groupId, long categoryId, String subject, String body,
-			List<ObjectValuePair<String, byte[]>> files,
-			boolean anonymous, double priority, boolean allowPingbacks,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		MBCategoryPermission.check(
-			getPermissionChecker(), groupId, categoryId,
-			ActionKeys.ADD_MESSAGE);
-
-		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), groupId, categoryId,
-				ActionKeys.ADD_FILE)) {
-
-			files.clear();
-		}
-
-		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), groupId, categoryId,
-				ActionKeys.UPDATE_THREAD_PRIORITY)) {
-
-			priority = MBThreadConstants.PRIORITY_NOT_GIVEN;
-		}
-
-		return mbMessageLocalService.addMessage(
-			getGuestOrUserId(), null, groupId, categoryId, subject, body, files,
-			anonymous, priority, allowPingbacks, serviceContext);
-	}
-
-	public MBMessage addMessage(
 			long groupId, long categoryId, long threadId, long parentMessageId,
 			String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
@@ -151,6 +121,36 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			getGuestOrUserId(), null, groupId, categoryId, threadId,
 			parentMessageId, subject, body, files, anonymous, priority,
 			allowPingbacks, serviceContext);
+	}
+
+	public MBMessage addMessage(
+			long groupId, long categoryId, String subject, String body,
+			List<ObjectValuePair<String, byte[]>> files,
+			boolean anonymous, double priority, boolean allowPingbacks,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		MBCategoryPermission.check(
+			getPermissionChecker(), groupId, categoryId,
+			ActionKeys.ADD_MESSAGE);
+
+		if (!MBCategoryPermission.contains(
+				getPermissionChecker(), groupId, categoryId,
+				ActionKeys.ADD_FILE)) {
+
+			files.clear();
+		}
+
+		if (!MBCategoryPermission.contains(
+				getPermissionChecker(), groupId, categoryId,
+				ActionKeys.UPDATE_THREAD_PRIORITY)) {
+
+			priority = MBThreadConstants.PRIORITY_NOT_GIVEN;
+		}
+
+		return mbMessageLocalService.addMessage(
+			getGuestOrUserId(), null, groupId, categoryId, subject, body, files,
+			anonymous, priority, allowPingbacks, serviceContext);
 	}
 
 	public void deleteDiscussionMessage(

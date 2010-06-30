@@ -97,7 +97,7 @@ public class MBThreadServiceHttp {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> getGroupThreads(
 		HttpPrincipal httpPrincipal, long groupId, long userId, int status,
-		int start, int end)
+		boolean subscribed, boolean includeAnonymous, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -107,14 +107,19 @@ public class MBThreadServiceHttp {
 
 			Object paramObj2 = new IntegerWrapper(status);
 
-			Object paramObj3 = new IntegerWrapper(start);
+			Object paramObj3 = new BooleanWrapper(subscribed);
 
-			Object paramObj4 = new IntegerWrapper(end);
+			Object paramObj4 = new BooleanWrapper(includeAnonymous);
+
+			Object paramObj5 = new IntegerWrapper(start);
+
+			Object paramObj6 = new IntegerWrapper(end);
 
 			MethodWrapper methodWrapper = new MethodWrapper(MBThreadServiceUtil.class.getName(),
 					"getGroupThreads",
 					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6
 					});
 
 			Object returnObj = null;
@@ -196,7 +201,7 @@ public class MBThreadServiceHttp {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> getGroupThreads(
 		HttpPrincipal httpPrincipal, long groupId, long userId, int status,
-		boolean subscribed, boolean includeAnonymous, int start, int end)
+		int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -206,19 +211,14 @@ public class MBThreadServiceHttp {
 
 			Object paramObj2 = new IntegerWrapper(status);
 
-			Object paramObj3 = new BooleanWrapper(subscribed);
+			Object paramObj3 = new IntegerWrapper(start);
 
-			Object paramObj4 = new BooleanWrapper(includeAnonymous);
-
-			Object paramObj5 = new IntegerWrapper(start);
-
-			Object paramObj6 = new IntegerWrapper(end);
+			Object paramObj4 = new IntegerWrapper(end);
 
 			MethodWrapper methodWrapper = new MethodWrapper(MBThreadServiceUtil.class.getName(),
 					"getGroupThreads",
 					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
 					});
 
 			Object returnObj = null;
@@ -249,8 +249,7 @@ public class MBThreadServiceHttp {
 
 	public static int getGroupThreadsCount(HttpPrincipal httpPrincipal,
 		long groupId, long userId, int status)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
 
@@ -268,10 +267,6 @@ public class MBThreadServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
 					throw (com.liferay.portal.kernel.exception.SystemException)e;
 				}

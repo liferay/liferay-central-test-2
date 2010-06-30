@@ -129,15 +129,6 @@ public interface MBMessageLocalService {
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		long userId, java.lang.String userName, long groupId, long categoryId,
-		java.lang.String subject, java.lang.String body,
-		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<java.lang.String, byte[]>> files,
-		boolean anonymous, double priority, boolean allowPingbacks,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		long userId, java.lang.String userName, long groupId, long categoryId,
 		long threadId, long parentMessageId, java.lang.String subject,
 		java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<java.lang.String, byte[]>> files,
@@ -146,13 +137,16 @@ public interface MBMessageLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void addMessageResources(long messageId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		long userId, java.lang.String userName, long groupId, long categoryId,
+		java.lang.String subject, java.lang.String body,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<java.lang.String, byte[]>> files,
+		boolean anonymous, double priority, boolean allowPingbacks,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void addMessageResources(
-		com.liferay.portlet.messageboards.model.MBMessage message,
+	public void addMessageResources(long messageId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -160,6 +154,12 @@ public interface MBMessageLocalService {
 	public void addMessageResources(long messageId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void addMessageResources(
+		com.liferay.portlet.messageboards.model.MBMessage message,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -283,11 +283,6 @@ public interface MBMessageLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getMessages(
-		java.lang.String className, long classPK, int status)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
 		long messageId, int status, java.lang.String threadView,
 		boolean includePrevAndNext)
@@ -300,6 +295,11 @@ public interface MBMessageLocalService {
 		java.lang.String threadView, boolean includePrevAndNext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getMessages(
+		java.lang.String className, long classPK, int status)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getNoAssetMessages()
@@ -370,12 +370,12 @@ public interface MBMessageLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void updateUserName(long userId, java.lang.String userName)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	public com.liferay.portlet.messageboards.model.MBMessage updateStatus(
 		long userId, long messageId, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
+
+	public void updateUserName(long userId, java.lang.String userName)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

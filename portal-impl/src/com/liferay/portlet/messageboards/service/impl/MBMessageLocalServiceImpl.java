@@ -190,23 +190,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 	public MBMessage addMessage(
 			long userId, String userName, long groupId, long categoryId,
-			String subject, String body,
-			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, boolean allowPingbacks,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		long threadId = 0;
-		long parentMessageId = 0;
-
-		return addMessage(
-			userId, userName, groupId, categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, allowPingbacks,
-			serviceContext);
-	}
-
-	public MBMessage addMessage(
-			long userId, String userName, long groupId, long categoryId,
 			long threadId, long parentMessageId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
 			double priority, boolean allowPingbacks,
@@ -416,6 +399,23 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return message;
 	}
 
+	public MBMessage addMessage(
+			long userId, String userName, long groupId, long categoryId,
+			String subject, String body,
+			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
+			double priority, boolean allowPingbacks,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		long threadId = 0;
+		long parentMessageId = 0;
+
+		return addMessage(
+			userId, userName, groupId, categoryId, threadId, parentMessageId,
+			subject, body, files, anonymous, priority, allowPingbacks,
+			serviceContext);
+	}
+
 	public void addMessageResources(
 			long messageId, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
@@ -428,6 +428,16 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public void addMessageResources(
+			long messageId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
+
+		addMessageResources(message, communityPermissions, guestPermissions);
+	}
+
+	public void addMessageResources(
 			MBMessage message, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -436,16 +446,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			message.getCompanyId(), message.getGroupId(), message.getUserId(),
 			MBMessage.class.getName(), message.getMessageId(),
 			false, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void addMessageResources(
-			long messageId, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
-
-		addMessageResources(message, communityPermissions, guestPermissions);
 	}
 
 	public void addMessageResources(
@@ -1002,21 +1002,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return mbMessagePersistence.findByPrimaryKey(messageId);
 	}
 
-	public List<MBMessage> getMessages(
-			String className, long classPK, int status)
-		throws SystemException {
-
-		long classNameId = PortalUtil.getClassNameId(className);
-
-		if (status == WorkflowConstants.STATUS_ANY) {
-			return mbMessagePersistence.findByC_C(classNameId, classPK);
-		}
-		else {
-			return mbMessagePersistence.findByC_C_S(
-				classNameId, classPK, status);
-		}
-	}
-
 	public MBMessageDisplay getMessageDisplay(
 			long messageId, int status, String threadView,
 			boolean includePrevAndNext)
@@ -1087,6 +1072,21 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return new MBMessageDisplayImpl(
 			message, parentMessage, category, thread,
 			previousThread, nextThread, status, threadView);
+	}
+
+	public List<MBMessage> getMessages(
+			String className, long classPK, int status)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		if (status == WorkflowConstants.STATUS_ANY) {
+			return mbMessagePersistence.findByC_C(classNameId, classPK);
+		}
+		else {
+			return mbMessagePersistence.findByC_C_S(
+				classNameId, classPK, status);
+		}
 	}
 
 	public List<MBMessage> getNoAssetMessages() throws SystemException {
@@ -1352,18 +1352,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return message;
 	}
 
-	public void updateUserName(long userId, String userName)
-		throws SystemException {
-
-		List<MBMessage> messages = mbMessagePersistence.findByUserId(userId);
-
-		for (MBMessage message : messages) {
-			message.setUserName(userName);
-
-			mbMessagePersistence.update(message, false);
-		}
-	}
-
 	public MBMessage updateStatus(
 			long userId, long messageId, int status,
 			ServiceContext serviceContext)
@@ -1551,6 +1539,18 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 
 		return message;
+	}
+
+	public void updateUserName(long userId, String userName)
+		throws SystemException {
+
+		List<MBMessage> messages = mbMessagePersistence.findByUserId(userId);
+
+		for (MBMessage message : messages) {
+			message.setUserName(userName);
+
+			mbMessagePersistence.update(message, false);
+		}
 	}
 
 	protected void deleteDiscussionSocialActivities(

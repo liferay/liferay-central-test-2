@@ -27,66 +27,66 @@ public class MBMessageFinderUtil {
 		return getFinder().countByC_T(createDate, threadId);
 	}
 
-	public static int countByG_C_U_S(long groupId, long[] categoryIds,
-		long userId, int status)
+	public static int countByG_U_C_S(long groupId, long userId,
+		long[] categoryIds, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().countByG_C_U_S(groupId, categoryIds, userId, status);
+		return getFinder().countByG_U_C_S(groupId, userId, categoryIds, status);
 	}
 
-	public static int countByG_C_U_A_S(long groupId, long[] categoryIds,
-		long userId, boolean anonymous, int status)
+	public static int countByG_U_C_A_S(long groupId, long userId,
+		long[] categoryIds, boolean anonymous, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
-				   .countByG_C_U_A_S(groupId, categoryIds, userId, anonymous,
+				   .countByG_U_C_A_S(groupId, userId, categoryIds, anonymous,
 			status);
 	}
 
-	public static int filterCountByG_C_U_S(long groupId, long[] categoryIds,
-		long userId, int status)
+	public static int filterCountByG_U_C_S(long groupId, long userId,
+		long[] categoryIds, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
-				   .filterCountByG_C_U_S(groupId, categoryIds, userId, status);
+				   .filterCountByG_U_C_S(groupId, userId, categoryIds, status);
 	}
 
-	public static int filterCountByG_C_U_A_S(long groupId, long[] categoryIds,
-		long userId, boolean anonymous, int status)
+	public static int filterCountByG_U_C_A_S(long groupId, long userId,
+		long[] categoryIds, boolean anonymous, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
-				   .filterCountByG_C_U_A_S(groupId, categoryIds, userId,
+				   .filterCountByG_U_C_A_S(groupId, userId, categoryIds,
 			anonymous, status);
 	}
 
-	public static java.util.List<java.lang.Long> filterFindByG_C_U_S(
-		long groupId, long[] categoryIds, long userId, int status, int start,
+	public static java.util.List<java.lang.Long> filterFindByG_U_C_S(
+		long groupId, long userId, long[] categoryIds, int status, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
-				   .filterFindByG_C_U_S(groupId, categoryIds, userId, status,
+				   .filterFindByG_U_C_S(groupId, userId, categoryIds, status,
 			start, end);
 	}
 
-	public static java.util.List<java.lang.Long> filterFindByG_C_U_A_S(
-		long groupId, long[] categoryIds, long userId, boolean anonymous,
+	public static java.util.List<java.lang.Long> filterFindByG_U_C_A_S(
+		long groupId, long userId, long[] categoryIds, boolean anonymous,
 		int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
-				   .filterFindByG_C_U_A_S(groupId, categoryIds, userId,
+				   .filterFindByG_U_C_A_S(groupId, userId, categoryIds,
 			anonymous, status, start, end);
 	}
 
-	public static java.util.List<java.lang.Long> findByG_C_U_S(long groupId,
-		long[] categoryIds, long userId, int status, int start, int end)
+	public static java.util.List<java.lang.Long> findByG_U_C_S(long groupId,
+		long userId, long[] categoryIds, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
-				   .findByG_C_U_S(groupId, categoryIds, userId, status, start,
+				   .findByG_U_C_S(groupId, userId, categoryIds, status, start,
 			end);
 	}
 
-	public static java.util.List<java.lang.Long> findByG_C_U_A_S(long groupId,
-		long[] categoryIds, long userId, boolean anonymous, int status,
+	public static java.util.List<java.lang.Long> findByG_U_C_A_S(long groupId,
+		long userId, long[] categoryIds, boolean anonymous, int status,
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
-				   .findByG_C_U_A_S(groupId, categoryIds, userId, anonymous,
+				   .findByG_U_C_A_S(groupId, userId, categoryIds, anonymous,
 			status, start, end);
 	}
 

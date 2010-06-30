@@ -47,20 +47,20 @@ public class MBMessageFinderImpl
 	public static String COUNT_BY_C_T =
 		MBMessageFinder.class.getName() + ".countByC_T";
 
-	public static String COUNT_BY_G_C_U_S =
-		MBMessageFinder.class.getName() + ".countByG_C_U_S";
+	public static String COUNT_BY_G_U_C_S =
+		MBMessageFinder.class.getName() + ".countByG_U_C_S";
 
-	public static String COUNT_BY_G_C_U_A_S =
-		MBMessageFinder.class.getName() + ".countByG_C_U_A_S";
+	public static String COUNT_BY_G_U_C_A_S =
+		MBMessageFinder.class.getName() + ".countByG_U_C_A_S";
 
 	public static String FIND_BY_NO_ASSETS =
 		MBMessageFinder.class.getName() + ".findByNoAssets";
 
-	public static String FIND_BY_G_C_U_S =
-		MBMessageFinder.class.getName() + ".findByG_C_U_S";
+	public static String FIND_BY_G_U_C_S =
+		MBMessageFinder.class.getName() + ".findByG_U_C_S";
 
-	public static String FIND_BY_G_C_U_A_S =
-		MBMessageFinder.class.getName() + ".findByG_C_U_A_S";
+	public static String FIND_BY_G_U_C_A_S =
+		MBMessageFinder.class.getName() + ".findByG_U_C_A_S";
 
 	public int countByC_T(Date createDate, long threadId)
 		throws SystemException {
@@ -103,72 +103,72 @@ public class MBMessageFinderImpl
 		}
 	}
 
-	public int countByG_C_U_S(
-			long groupId, long[] categoryIds, long userId, int status)
+	public int countByG_U_C_S(
+			long groupId, long userId, long[] categoryIds, int status)
 		throws SystemException {
 
-		return doCountByG_C_U_S(groupId, categoryIds, userId, status, false);
+		return doCountByG_U_C_S(groupId, userId, categoryIds, status, false);
 	}
 
-	public int countByG_C_U_A_S(
-			long groupId, long[] categoryIds, long userId, boolean anonymous,
+	public int countByG_U_C_A_S(
+			long groupId, long userId, long[] categoryIds, boolean anonymous,
 			int status)
 		throws SystemException {
 
-		return doCountByG_C_U_A_S(
-			groupId, categoryIds, userId, anonymous, status, false);
+		return doCountByG_U_C_A_S(
+			groupId, userId, categoryIds, anonymous, status, false);
 	}
 
-	public int filterCountByG_C_U_S(
-			long groupId, long[] categoryIds, long userId, int status)
+	public int filterCountByG_U_C_S(
+			long groupId, long userId, long[] categoryIds, int status)
 		throws SystemException {
 
-		return doCountByG_C_U_S(groupId, categoryIds, userId, status, true);
+		return doCountByG_U_C_S(groupId, userId, categoryIds, status, true);
 	}
 
-	public int filterCountByG_C_U_A_S(
-			long groupId, long[] categoryIds, long userId, boolean anonymous,
+	public int filterCountByG_U_C_A_S(
+			long groupId, long userId, long[] categoryIds, boolean anonymous,
 			int status)
 		throws SystemException {
 
-		return doCountByG_C_U_A_S(
-			groupId, categoryIds, userId, anonymous, status, true);
+		return doCountByG_U_C_A_S(
+			groupId, userId, categoryIds, anonymous, status, true);
 	}
 
-	public List<Long> filterFindByG_C_U_S(
-			long groupId, long[] categoryIds, long userId, int status,
+	public List<Long> filterFindByG_U_C_S(
+			long groupId, long userId, long[] categoryIds, int status,
 			int start, int end)
 		throws SystemException {
 
-		return doFindByG_C_U_S(
-			groupId, categoryIds, userId, status, start, end, true);
+		return doFindByG_U_C_S(
+			groupId, userId, categoryIds, status, start, end, true);
 	}
 
-	public List<Long> filterFindByG_C_U_A_S(
-			long groupId, long[] categoryIds, long userId, boolean anonymous,
+	public List<Long> filterFindByG_U_C_A_S(
+			long groupId, long userId, long[] categoryIds, boolean anonymous,
 			int status, int start, int end)
 		throws SystemException {
 
-		return doFindByG_C_U_A_S(
-			groupId, categoryIds, userId, anonymous, status, start, end, true);
+		return doFindByG_U_C_A_S(
+			groupId, userId, categoryIds, anonymous, status, start, end, true);
 	}
 
-	public List<Long> findByG_C_U_S(
-			long groupId, long[] categoryIds, long userId, int status,
+	public List<Long> findByG_U_C_S(
+			long groupId, long userId, long[] categoryIds, int status,
 			int start, int end)
 		throws SystemException {
 
-		return doFindByG_C_U_S(
-			groupId, categoryIds, userId, status, start, end, false);
+		return doFindByG_U_C_S(
+			groupId, userId, categoryIds, status, start, end, false);
 	}
 
-	public List<Long> findByG_C_U_A_S(
-			long groupId, long[] categoryIds, long userId, boolean anonymous,
+	public List<Long> findByG_U_C_A_S(
+			long groupId, long userId, long[] categoryIds, boolean anonymous,
 			int status, int start, int end)
 		throws SystemException {
 
-		return doFindByG_C_U_A_S(
-			groupId, categoryIds, userId, anonymous, status, start, end, false);
+		return doFindByG_U_C_A_S(
+			groupId, userId, categoryIds, anonymous, status, start, end, false);
 	}
 
 	public List<MBMessage> findByNoAssets() throws SystemException {
@@ -193,8 +193,8 @@ public class MBMessageFinderImpl
 		}
 	}
 
-	protected int doCountByG_C_U_A_S(
-			long groupId, long[] categoryIds, long userId, boolean anonymous,
+	protected int doCountByG_U_C_A_S(
+			long groupId, long userId, long[] categoryIds, boolean anonymous,
 			int status, boolean inlineSQLHelper)
 		throws SystemException {
 
@@ -203,32 +203,32 @@ public class MBMessageFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_G_C_U_A_S);
+			String sql = CustomSQLUtil.get(COUNT_BY_G_U_C_A_S);
 
 			if ((categoryIds == null) ||
 				(categoryIds.length == 0)) {
 
 				sql = StringUtil.replace(
-					sql, "(A.categoryId = ?) AND",
+					sql, "(currentMessage.categoryId = ?) AND",
 					StringPool.BLANK);
 			}
 			else {
 				sql = StringUtil.replace(
-					sql, "A.categoryId = ?",
-					"A.categoryId = " +
+					sql, "currentMessage.categoryId = ?",
+					"currentMessage.categoryId = " +
 						StringUtil.merge(
-							categoryIds,
-							" OR A.categoryId = "));
+							categoryIds, " OR currentMessage.categoryId = "));
 			}
 
 			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = CustomSQLUtil.appendCriteria(sql, "AND (A.status = ?)");
+				sql = CustomSQLUtil.appendCriteria(
+					sql, "AND (currentMessage.status = ?)");
 			}
 
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
-					sql, MBMessage.class.getName(), "B.messageId", "B.userId",
-					groupId);
+					sql, MBMessage.class.getName(), "rootMessage.messageId",
+					"rootMessage.userId", groupId);
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -265,8 +265,8 @@ public class MBMessageFinderImpl
 		}
 	}
 
-	protected int doCountByG_C_U_S(
-			long groupId, long[] categoryIds, long userId, int status,
+	protected int doCountByG_U_C_S(
+			long groupId, long userId, long[] categoryIds, int status,
 			boolean inlineSQLHelper)
 		throws SystemException {
 
@@ -275,32 +275,32 @@ public class MBMessageFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_G_C_U_S);
+			String sql = CustomSQLUtil.get(COUNT_BY_G_U_C_S);
 
 			if ((categoryIds == null) ||
 				(categoryIds.length == 0)) {
 
 				sql = StringUtil.replace(
-					sql, "(A.categoryId = ?) AND",
+					sql, "(currentMessage.categoryId = ?) AND",
 					StringPool.BLANK);
 			}
 			else {
 				sql = StringUtil.replace(
-					sql, "A.categoryId = ?",
-					"A.categoryId = " +
+					sql, "currentMessage.categoryId = ?",
+					"currentMessage.categoryId = " +
 						StringUtil.merge(
-							categoryIds,
-							" OR A.categoryId = "));
+							categoryIds, " OR currentMessage.categoryId = "));
 			}
 
 			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = CustomSQLUtil.appendCriteria(sql, "AND (A.status = ?)");
+				sql = CustomSQLUtil.appendCriteria(
+					sql, "AND (currentMessage.status = ?)");
 			}
 
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
-					sql, MBMessage.class.getName(), "B.messageId", "B.userId",
-					groupId);
+					sql, MBMessage.class.getName(), "rootMessage.messageId",
+					"rootMessage.userId", groupId);
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -336,8 +336,8 @@ public class MBMessageFinderImpl
 		}
 	}
 
-	protected List<Long> doFindByG_C_U_A_S(
-			long groupId, long[] categoryIds, long userId, boolean anonymous,
+	protected List<Long> doFindByG_U_C_A_S(
+			long groupId, long userId, long[] categoryIds, boolean anonymous,
 			int status, int start, int end, boolean inlineSQLHelper)
 		throws SystemException {
 
@@ -346,32 +346,32 @@ public class MBMessageFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_G_C_U_A_S);
+			String sql = CustomSQLUtil.get(FIND_BY_G_U_C_A_S);
 
 			if ((categoryIds == null) ||
 				(categoryIds.length == 0)) {
 
 				sql = StringUtil.replace(
-					sql, "(A.categoryId = ?) AND",
+					sql, "(currentMessage.categoryId = ?) AND",
 					StringPool.BLANK);
 			}
 			else {
 				sql = StringUtil.replace(
-					sql, "A.categoryId = ?",
-					"A.categoryId = " +
+					sql, "currentMessage.categoryId = ?",
+					"currentMessage.categoryId = " +
 						StringUtil.merge(
-							categoryIds,
-							" OR A.categoryId = "));
+							categoryIds, " OR currentMessage.categoryId = "));
 			}
 
 			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = CustomSQLUtil.appendCriteria(sql, "AND (A.status = ?)");
+				sql = CustomSQLUtil.appendCriteria(
+					sql, "AND (currentMessage.status = ?)");
 			}
 
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
-					sql, MBMessage.class.getName(), "B.messageId", "B.userId",
-					groupId);
+					sql, MBMessage.class.getName(), "rootMessage.messageId",
+					"rootMessage.userId", groupId);
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -398,8 +398,8 @@ public class MBMessageFinderImpl
 		}
 	}
 
-	protected List<Long> doFindByG_C_U_S(
-			long groupId, long[] categoryIds, long userId, int status,
+	protected List<Long> doFindByG_U_C_S(
+			long groupId, long userId, long[] categoryIds, int status,
 			int start, int end, boolean inlineSQLHelper)
 		throws SystemException {
 
@@ -408,32 +408,32 @@ public class MBMessageFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_G_C_U_S);
+			String sql = CustomSQLUtil.get(FIND_BY_G_U_C_S);
 
 			if ((categoryIds == null) ||
 				(categoryIds.length == 0)) {
 
 				sql = StringUtil.replace(
-					sql, "(A.categoryId = ?) AND",
+					sql, "(currentMessage.categoryId = ?) AND",
 					StringPool.BLANK);
 			}
 			else {
 				sql = StringUtil.replace(
-					sql, "A.categoryId = ?",
-					"A.categoryId = " +
+					sql, "currentMessage.categoryId = ?",
+					"currentMessage.categoryId = " +
 						StringUtil.merge(
-							categoryIds,
-							" OR A.categoryId = "));
+							categoryIds, " OR currentMessage.categoryId = "));
 			}
 
 			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = CustomSQLUtil.appendCriteria(sql, "AND (A.status = ?)");
+				sql = CustomSQLUtil.appendCriteria(
+					sql, "AND (currentMessage.status = ?)");
 			}
 
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
-					sql, MBMessage.class.getName(), "B.messageId", "B.userId",
-					groupId);
+					sql, MBMessage.class.getName(), "rootMessage.messageId",
+					"rootMessage.userId", groupId);
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
