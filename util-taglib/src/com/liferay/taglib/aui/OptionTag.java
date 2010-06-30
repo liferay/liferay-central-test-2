@@ -66,7 +66,7 @@ public class OptionTag extends IncludeTag {
 	protected void setAttributes(HttpServletRequest request) {
 		String value = _value;
 
-		if (Validator.isNull(value)) {
+		if (value == null) {
 			value = _label;
 		}
 
