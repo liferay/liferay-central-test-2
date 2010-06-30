@@ -342,30 +342,8 @@ AUI().add(
 			instance._attachEditContainerEvents();
 			instance._attachDelegatedEvents();
 
+			instance._updateOriginalContent();
 			instance._updateOriginalStructureXSD();
-
-			// LPS-10721
-
-			var originalContent = instance.getById('originalContent');
-
-			var updateContentTimer = A.later(
-				250,
-				instance,
-				function() {
-					try {
-						if (!originalContent.val()) {
-							instance._updateOriginalContent();
-						}
-						else {
-							updateContentTimer.cancel();
-						}
-					}
-					catch(e) {
-					}
-				},
-				null,
-				true
-			);
 		};
 
 		Journal.prototype = {
