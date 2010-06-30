@@ -314,6 +314,9 @@ public class ClusterExecutorImpl
 				ClusterNodeResponse clusterNodeResponse = runLocalMethod(
 					clusterRequest.getMethodWrapper());
 
+				clusterNodeResponse.setMulticast(isMulticast);
+				clusterNodeResponse.setUuid(clusterRequest.getUuid());
+
 				futureClusterResponses.addClusterNodeResponse(
 					clusterNodeResponse);
 			}
@@ -616,6 +619,15 @@ public class ClusterExecutorImpl
 		ClusterNode localClusterNode = getLocalClusterNode();
 
 		clusterNodeResponse.setClusterNode(localClusterNode);
+		clusterNodeResponse.setClusterMessageType(ClusterMessageType.EXECUTE);
+
+		if (methodWrapper == null) {
+			clusterNodeResponse.setException(
+				new ClusterException(
+					"Payload is not of type " +
+						MethodWrapper.class.getName()));
+			return clusterNodeResponse;
+		}
 
 		try {
 			Object returnValue = MethodInvoker.invoke(methodWrapper);
