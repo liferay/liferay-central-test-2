@@ -1073,8 +1073,7 @@
 			<finder-column name="pluginType" />
 		</finder>
 	</entity>
-	<entity name="Portal" local-service="true" remote-service="true">
-	</entity>
+	<entity name="Portal" local-service="true" remote-service="true" />
 	<entity name="Portlet" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
