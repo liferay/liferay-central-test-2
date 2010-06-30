@@ -56,6 +56,7 @@ public class UserServiceSoapTest extends BaseServiceSoapTestCase {
 		String screenName = StringPool.BLANK;;
 		String emailAddress =
 			"UserServiceSoapTest." + nextLong() + "@liferay.com";
+		long facebookId = 0;
 		String openId = StringPool.BLANK;
 		String locale = LocaleUtil.getDefault().toString();
 		String firstName = "UserServiceSoapTest";
@@ -78,10 +79,10 @@ public class UserServiceSoapTest extends BaseServiceSoapTestCase {
 		return getUserServiceSoap().addUser(
 			TestPropsValues.COMPANY_ID, autoPassword,
 			password1, password2, autoScreenName, screenName, emailAddress,
-			openId, locale, firstName, middleName, lastName, prefixId, suffixId,
-			male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-			groupIds, organizationIds, roleIds, userGroupIds, sendMail,
-			serviceContext);
+			facebookId, openId, locale, firstName, middleName, lastName,
+			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
+			jobTitle, groupIds, organizationIds, roleIds, userGroupIds,
+			sendMail, serviceContext);
 	}
 
 	protected UserServiceSoap getUserServiceSoap() throws Exception {
