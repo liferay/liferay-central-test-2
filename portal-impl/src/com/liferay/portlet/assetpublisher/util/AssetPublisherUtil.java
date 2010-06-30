@@ -74,12 +74,19 @@ public class AssetPublisherUtil {
 			return;
 		}
 
-		AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(
-			className, classPK);
-
 		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, referringPortletResource);
+
+		String selectionStyle = preferences.getValue(
+			"selection-style", "dynamic");
+
+		if (selectionStyle.equals("dynamic")) {
+			return;
+		}
+
+		AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(
+			className, classPK);
 
 		addSelection(
 			className, assetEntry.getEntryId(), assetEntryOrder, preferences);
