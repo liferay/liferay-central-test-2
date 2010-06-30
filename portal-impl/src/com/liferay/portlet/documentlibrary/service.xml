@@ -58,6 +58,11 @@
 			<finder-column name="groupId" />
 			<finder-column name="folderId" arrayable-operator="OR" />
 		</finder>
+		<finder name="G_U_F" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
+			<finder-column name="folderId" arrayable-operator="OR" />
+		</finder>
 		<finder name="G_F_N" return-type="DLFileEntry" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="folderId" />
@@ -67,11 +72,6 @@
 			<finder-column name="groupId" />
 			<finder-column name="folderId" />
 			<finder-column name="title" />
-		</finder>
-		<finder name="G_U_F" return-type="Collection">
-			<finder-column name="groupId" />
-			<finder-column name="userId" />
-			<finder-column name="folderId" arrayable-operator="OR" />
 		</finder>
 
 		<!-- References -->
