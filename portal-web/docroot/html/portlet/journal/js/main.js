@@ -53,7 +53,7 @@ AUI().add(
 			'<div class="forbidden-action"></div>' +
 		'</div>';
 
-		var TPL_IFRAME = '<iframe frameborder="0" height="250" id="{name}" name="{name}" scrolling="no" src="{url}" width="500"></iframe>';
+		var TPL_IFRAME = '<iframe frameborder="0" height="450" id="{name}" name="{name}" scrolling="no" src="{url}" width="500"></iframe>';
 
 		var TPL_INSTRUCTIONS_CONTAINER = '<div class="journal-article-instructions-container journal-article-instructions-message portlet-msg-info"></div>';
 
