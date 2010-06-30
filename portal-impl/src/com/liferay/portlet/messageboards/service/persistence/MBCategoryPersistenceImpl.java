@@ -1746,7 +1746,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 				conjunctionable = true;
 
-				if (parentCategoryIds.length > 0) {
+				if ((parentCategoryIds == null) ||
+						(parentCategoryIds.length > 0)) {
 					if (conjunctionable) {
 						query.append(WHERE_AND);
 					}
@@ -1783,7 +1784,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 				qPos.add(groupId);
 
-				qPos.add(parentCategoryIds);
+				if (parentCategoryIds != null) {
+					qPos.add(parentCategoryIds);
+				}
 
 				list = (List<MBCategory>)QueryUtil.list(q, getDialect(), start,
 						end);
@@ -1919,7 +1922,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 			conjunctionable = true;
 
-			if (parentCategoryIds.length > 0) {
+			if ((parentCategoryIds == null) || (parentCategoryIds.length > 0)) {
 				if (conjunctionable) {
 					query.append(WHERE_AND);
 				}
@@ -1960,7 +1963,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 			qPos.add(groupId);
 
-			qPos.add(parentCategoryIds);
+			if (parentCategoryIds != null) {
+				qPos.add(parentCategoryIds);
+			}
 
 			return (List<MBCategory>)QueryUtil.list(q, getDialect(), start, end);
 		}
@@ -2419,7 +2424,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 				conjunctionable = true;
 
-				if (parentCategoryIds.length > 0) {
+				if ((parentCategoryIds == null) ||
+						(parentCategoryIds.length > 0)) {
 					if (conjunctionable) {
 						query.append(WHERE_AND);
 					}
@@ -2447,7 +2453,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 				qPos.add(groupId);
 
-				qPos.add(parentCategoryIds);
+				if (parentCategoryIds != null) {
+					qPos.add(parentCategoryIds);
+				}
 
 				count = (Long)q.uniqueResult();
 			}
@@ -2540,7 +2548,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 			conjunctionable = true;
 
-			if (parentCategoryIds.length > 0) {
+			if ((parentCategoryIds == null) || (parentCategoryIds.length > 0)) {
 				if (conjunctionable) {
 					query.append(WHERE_AND);
 				}
@@ -2573,7 +2581,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 			qPos.add(groupId);
 
-			qPos.add(parentCategoryIds);
+			if (parentCategoryIds != null) {
+				qPos.add(parentCategoryIds);
+			}
 
 			Long count = (Long)q.uniqueResult();
 

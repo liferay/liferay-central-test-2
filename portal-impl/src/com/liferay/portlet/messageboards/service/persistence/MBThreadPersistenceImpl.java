@@ -999,7 +999,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				conjunctionable = true;
 
-				if (categoryIds.length > 0) {
+				if ((categoryIds == null) || (categoryIds.length > 0)) {
 					if (conjunctionable) {
 						query.append(WHERE_AND);
 					}
@@ -1036,7 +1036,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				qPos.add(groupId);
 
-				qPos.add(categoryIds);
+				if (categoryIds != null) {
+					qPos.add(categoryIds);
+				}
 
 				list = (List<MBThread>)QueryUtil.list(q, getDialect(), start,
 						end);
@@ -2545,7 +2547,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				conjunctionable = true;
 
-				if (categoryIds.length > 0) {
+				if ((categoryIds == null) || (categoryIds.length > 0)) {
 					if (conjunctionable) {
 						query.append(WHERE_AND);
 					}
@@ -2590,7 +2592,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				qPos.add(groupId);
 
-				qPos.add(categoryIds);
+				if (categoryIds != null) {
+					qPos.add(categoryIds);
+				}
 
 				qPos.add(status);
 
@@ -3171,7 +3175,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				conjunctionable = true;
 
-				if (categoryIds.length > 0) {
+				if ((categoryIds == null) || (categoryIds.length > 0)) {
 					if (conjunctionable) {
 						query.append(WHERE_AND);
 					}
@@ -3199,7 +3203,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				qPos.add(groupId);
 
-				qPos.add(categoryIds);
+				if (categoryIds != null) {
+					qPos.add(categoryIds);
+				}
 
 				count = (Long)q.uniqueResult();
 			}
@@ -3519,7 +3525,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				conjunctionable = true;
 
-				if (categoryIds.length > 0) {
+				if ((categoryIds == null) || (categoryIds.length > 0)) {
 					if (conjunctionable) {
 						query.append(WHERE_AND);
 					}
@@ -3555,7 +3561,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				qPos.add(groupId);
 
-				qPos.add(categoryIds);
+				if (categoryIds != null) {
+					qPos.add(categoryIds);
+				}
 
 				qPos.add(status);
 
