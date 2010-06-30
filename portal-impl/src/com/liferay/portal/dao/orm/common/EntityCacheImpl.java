@@ -14,8 +14,8 @@
 
 package com.liferay.portal.dao.orm.common;
 
-import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.CacheRegistryItem;
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.cache.MultiVMPool;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.cache.key.CacheKeyGenerator;
@@ -48,7 +48,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 	public static final String CACHE_NAME = EntityCache.class.getName();
 
 	public void afterPropertiesSet() {
-		CacheRegistry.register(this);
+		CacheRegistryUtil.register(this);
 	}
 
 	public void clearCache() {
@@ -84,7 +84,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		Serializable primaryKeyObj, SessionFactory sessionFactory) {
 
 		if (!PropsValues.VALUE_OBJECT_ENTITY_CACHE_ENABLED ||
-			!entityCacheEnabled || !CacheRegistry.isActive()) {
+			!entityCacheEnabled || !CacheRegistryUtil.isActive()) {
 
 			return null;
 		}
@@ -137,7 +137,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		Serializable primaryKeyObj, SessionFactory sessionFactory) {
 
 		if (!PropsValues.VALUE_OBJECT_ENTITY_CACHE_ENABLED ||
-			!entityCacheEnabled || !CacheRegistry.isActive()) {
+			!entityCacheEnabled || !CacheRegistryUtil.isActive()) {
 
 			Session session = null;
 
@@ -215,7 +215,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		Serializable primaryKeyObj, Object result) {
 
 		if (!PropsValues.VALUE_OBJECT_ENTITY_CACHE_ENABLED ||
-			!entityCacheEnabled || !CacheRegistry.isActive() ||
+			!entityCacheEnabled || !CacheRegistryUtil.isActive() ||
 			(result == null)) {
 
 			return;
@@ -244,7 +244,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		Serializable primaryKeyObj) {
 
 		if (!PropsValues.VALUE_OBJECT_ENTITY_CACHE_ENABLED ||
-			!entityCacheEnabled || !CacheRegistry.isActive()) {
+			!entityCacheEnabled || !CacheRegistryUtil.isActive()) {
 
 			return;
 		}

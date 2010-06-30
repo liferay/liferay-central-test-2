@@ -19,7 +19,7 @@ import ${packagePath}.model.impl.${entity.name}ModelImpl;
 
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
-import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
@@ -198,7 +198,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	}
 
 	public void clearCache() {
-		CacheRegistry.clear(${entity.name}Impl.class.getName());
+		CacheRegistryUtil.clear(${entity.name}Impl.class.getName());
 		EntityCacheUtil.clearCache(${entity.name}Impl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
@@ -2391,7 +2391,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			if (force || (countOrphanTreeNodes(${scopeColumn.name}) > 0)) {
 				rebuildTree(${scopeColumn.name}, 0, 1);
 
-				CacheRegistry.clear(${entity.name}Impl.class.getName());
+				CacheRegistryUtil.clear(${entity.name}Impl.class.getName());
 				EntityCacheUtil.clearCache(${entity.name}Impl.class.getName());
 				FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 				FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
@@ -2437,7 +2437,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				expandTreeLeft${pkColumn.methodName}.expand(${scopeColumn.name}, lastRight${pkColumn.methodName});
 				expandTreeRight${pkColumn.methodName}.expand(${scopeColumn.name}, lastRight${pkColumn.methodName});
 
-				CacheRegistry.clear(${entity.name}Impl.class.getName());
+				CacheRegistryUtil.clear(${entity.name}Impl.class.getName());
 				EntityCacheUtil.clearCache(${entity.name}Impl.class.getName());
 				FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 				FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
@@ -2535,7 +2535,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			shrinkTreeLeft${pkColumn.methodName}.shrink(${scopeColumn.name}, right${pkColumn.methodName}, delta);
 			shrinkTreeRight${pkColumn.methodName}.shrink(${scopeColumn.name}, right${pkColumn.methodName}, delta);
 
-			CacheRegistry.clear(${entity.name}Impl.class.getName());
+			CacheRegistryUtil.clear(${entity.name}Impl.class.getName());
 			EntityCacheUtil.clearCache(${entity.name}Impl.class.getName());
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

@@ -15,8 +15,8 @@
 package com.liferay.portal.dao.orm.common;
 
 import com.liferay.portal.kernel.cache.CacheKVP;
-import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.CacheRegistryItem;
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.cache.MultiVMPool;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
@@ -48,7 +48,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 	public static final String CACHE_NAME = FinderCache.class.getName();
 
 	public void afterPropertiesSet() {
-		CacheRegistry.register(this);
+		CacheRegistryUtil.register(this);
 	}
 
 	public void clearCache() {
@@ -83,7 +83,8 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 		FinderPath finderPath, Object[] args, SessionFactory sessionFactory) {
 
 		if (!PropsValues.VALUE_OBJECT_FINDER_CACHE_ENABLED ||
-			!finderPath.isFinderCacheEnabled() || !CacheRegistry.isActive()) {
+			!finderPath.isFinderCacheEnabled() ||
+			!CacheRegistryUtil.isActive()) {
 
 			return null;
 		}
@@ -131,7 +132,8 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 
 	public void putResult(FinderPath finderPath, Object[] args, Object result) {
 		if (!PropsValues.VALUE_OBJECT_FINDER_CACHE_ENABLED ||
-			!finderPath.isFinderCacheEnabled() || !CacheRegistry.isActive() ||
+			!finderPath.isFinderCacheEnabled() ||
+			!CacheRegistryUtil.isActive() ||
 			(result == null)) {
 
 			return;
@@ -157,7 +159,8 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 
 	public void removeResult(FinderPath finderPath, Object[] args) {
 		if (!PropsValues.VALUE_OBJECT_FINDER_CACHE_ENABLED ||
-			!finderPath.isFinderCacheEnabled() || !CacheRegistry.isActive()) {
+			!finderPath.isFinderCacheEnabled() ||
+			!CacheRegistryUtil.isActive()) {
 
 			return;
 		}

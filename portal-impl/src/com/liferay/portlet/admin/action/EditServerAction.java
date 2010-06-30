@@ -16,7 +16,7 @@ package com.liferay.portlet.admin.action;
 
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.convert.ConvertProcess;
-import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
@@ -165,7 +165,7 @@ public class EditServerAction extends PortletAction {
 	}
 
 	protected void cacheDb() throws Exception {
-		CacheRegistry.clear();
+		CacheRegistryUtil.clear();
 	}
 
 	protected void cacheMulti() throws Exception {

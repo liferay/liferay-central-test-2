@@ -15,7 +15,7 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.events.StartupHelperUtil;
-import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
@@ -75,7 +75,7 @@ public class DBUpgrader {
 			_log.debug("Disable cache registry");
 		}
 
-		CacheRegistry.setActive(false);
+		CacheRegistryUtil.setActive(false);
 
 		// Upgrade
 
@@ -179,7 +179,7 @@ public class DBUpgrader {
 
 		// Enable database caching after verify
 
-		CacheRegistry.setActive(true);
+		CacheRegistryUtil.setActive(true);
 	}
 
 	private static void _deleteTempImages() throws Exception {

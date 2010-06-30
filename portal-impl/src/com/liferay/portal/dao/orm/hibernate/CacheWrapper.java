@@ -14,8 +14,8 @@
 
 package com.liferay.portal.dao.orm.hibernate;
 
-import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.CacheRegistryItem;
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -40,7 +40,7 @@ public class CacheWrapper implements Cache, CacheRegistryItem {
 			_log.debug("Creating cache for " + _registryName);
 		}
 
-		CacheRegistry.register(this);
+		CacheRegistryUtil.register(this);
 	}
 
 	public void clear() throws CacheException {
@@ -88,7 +88,7 @@ public class CacheWrapper implements Cache, CacheRegistryItem {
 	}
 
 	public void put(Object key, Object value) throws CacheException {
-		if (CacheRegistry.isActive()) {
+		if (CacheRegistryUtil.isActive()) {
 			_cache.put(key, value);
 		}
 	}
@@ -110,7 +110,7 @@ public class CacheWrapper implements Cache, CacheRegistryItem {
 	}
 
 	public void update(Object key, Object value) throws CacheException {
-		if (CacheRegistry.isActive()) {
+		if (CacheRegistryUtil.isActive()) {
 			_cache.update(key, value);
 		}
 	}

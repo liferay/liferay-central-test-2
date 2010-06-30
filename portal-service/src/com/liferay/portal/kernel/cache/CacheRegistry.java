@@ -14,87 +14,23 @@
 
 package com.liferay.portal.kernel.cache;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 /**
  * <a href="CacheRegistry.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class CacheRegistry {
+public interface CacheRegistry {
 
-	public static void clear() {
-		for (Map.Entry<String, CacheRegistryItem> entry : _items.entrySet()) {
-			CacheRegistryItem item = entry.getValue();
+	public void clear();
 
-			if (_log.isDebugEnabled()) {
-				_log.debug("Invalidating " + item.getRegistryName());
-			}
+	public void clear(String name);
 
-			item.invalidate();
-		}
-	}
+	public boolean isActive();
 
-	public static void clear(String name) {
-		CacheRegistryItem item = _items.get(name);
+	public void register(CacheRegistryItem cacheRegistryItem);
 
-		if (item != null) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Invalidating " + name);
-			}
+	public void setActive(boolean active);
 
-			item.invalidate();
-		}
-		else {
-			_log.error("No cache registry found with name " + name);
-		}
-	}
-
-	public static boolean isActive() {
-		return _active;
-	}
-
-	public static void register(CacheRegistryItem item) {
-		String name = item.getRegistryName();
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Registering " + name);
-		}
-
-		if (_items.containsKey(name)) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Not registering duplicate " + name);
-			}
-		}
-		else {
-			_items.put(name, item);
-		}
-	}
-
-	public static void setActive(boolean active) {
-		_active = active;
-
-		if (!active) {
-			clear();
-		}
-	}
-
-	public static void unregister(String name) {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Unregistering " + name);
-		}
-
-		_items.remove(name);
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(CacheRegistry.class);
-
-	private static boolean _active = true;
-	private static Map<String, CacheRegistryItem> _items =
-		new ConcurrentHashMap<String, CacheRegistryItem>();
+	public void unregister(String name);
 
 }
