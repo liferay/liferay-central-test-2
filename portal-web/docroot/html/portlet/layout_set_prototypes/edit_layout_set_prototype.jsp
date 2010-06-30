@@ -77,7 +77,6 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 					url="<%= viewURL %>"
 				/>
 
-				(<liferay-ui:message key="new-window" />)
 			</aui:field-wrapper>
 		</c:if>
 
