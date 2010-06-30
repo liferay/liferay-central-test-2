@@ -213,10 +213,8 @@
 }
 
 .tag-cloud .tag-asset-count {
-	left: -999px;
+	clip: rect(0 0 0 0);
 	position: absolute;
-	top: -990px;
-	z-index: 99999;
 }
 
 .tag-cloud .tag-popularity-1 {

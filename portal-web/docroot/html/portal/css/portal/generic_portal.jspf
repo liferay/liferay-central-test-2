@@ -62,9 +62,8 @@ td.lfr-middle {
 }
 
 .lfr-js-required {
+	clip: rect(0 0 0 0);
 	position: absolute;
-	left: -9999em;
-	top: -9999em;
 }
 
 .js .lfr-js-required {
