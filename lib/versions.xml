@@ -1095,7 +1095,7 @@
 	</library>
 	<library>
 		<file-name>portal/cglib.jar</file-name>
-		<version>2.1.3</version>
+		<version>2.2</version>
 		<project-name>Code Generation Library</project-name>
 		<project-url>http://cglib.sourceforge.net</project-url>
 		<licenses>
@@ -1441,7 +1441,7 @@
 	</library>
 	<library>
 		<file-name>portal/ehcache.jar</file-name>
-		<version>2.0.0</version>
+		<version>2.1.0</version>
 		<project-name>Ehcache</project-name>
 		<project-url>http://ehcache.sourceforge.net</project-url>
 		<licenses>
@@ -1789,7 +1789,7 @@
 	</library>
 	<library>
 		<file-name>portal/jdom.jar</file-name>
-		<version>1.0</version>
+		<version>1.1.1</version>
 		<project-name>JDOM</project-name>
 		<project-url>http://www.jdom.org</project-url>
 		<licenses>
@@ -2422,7 +2422,7 @@
 	</library>
 	<library>
 		<file-name>portal/slf4j-api.jar</file-name>
-		<version>1.5.10</version>
+		<version>1.5.11</version>
 		<project-name>SLF4J</project-name>
 		<project-url>http://www.slf4j.org</project-url>
 		<licenses>
@@ -2434,7 +2434,7 @@
 	</library>
 	<library>
 		<file-name>portal/slf4j-log4j12.jar</file-name>
-		<version>1.5.10</version>
+		<version>1.5.11</version>
 		<project-name>SLF4J</project-name>
 		<project-url>http://www.slf4j.org</project-url>
 		<licenses>
