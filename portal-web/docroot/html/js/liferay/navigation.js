@@ -5,7 +5,7 @@ AUI().add(
 
 		var TPL_DELETE_BUTTON = '<span class="delete-tab aui-helper-hidden">X</span>';
 
-		var TPL_LIST_ITEM = '<li></li>';
+		var TPL_LIST_ITEM = '<li class="add-page"></li>';
 
 		var TPL_TAB_LINK = '<a href="{url}"><span>{pageTitle}</span></a>';
 
