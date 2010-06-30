@@ -89,8 +89,7 @@ if (hidePortletWhenEmpty) {
 					contentBox: treeEl.one('.lfr-asset-category-list'),
 					type: 'normal'
 				}
-			)
-			.render();
+			).render();
 		}
 	);
 </aui:script>

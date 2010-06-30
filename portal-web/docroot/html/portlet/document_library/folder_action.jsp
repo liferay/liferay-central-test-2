@@ -205,8 +205,7 @@ if (row == null) {
 					title: '<liferay-ui:message key="access-from-desktop" />',
 					width: 500
 				}
-			)
-			.render();
+			).render();
 
 			event.preventDefault();
 		},

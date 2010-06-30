@@ -17,8 +17,7 @@ Liferay.provide(
 				title: Liferay.Language.get('layout'),
 				width: 700
 			}
-		)
-		.render();
+		).render();
 
 		dialog.plug(
 			A.Plugin.IO,
