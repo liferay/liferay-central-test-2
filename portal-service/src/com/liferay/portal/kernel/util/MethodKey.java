@@ -27,22 +27,6 @@ import java.util.Map;
  */
 public class MethodKey implements Serializable {
 
-	public static MethodKey create(
-			String className, String methodName, String[] types)
-		throws ClassNotFoundException {
-
-		Class[] parameterTypes = new Class[types.length];
-
-		int counter = 0;
-		for (String type : types) {
-			parameterTypes[counter] = Class.forName(type);
-
-			counter++;
-		}
-
-		return new MethodKey(className, methodName, parameterTypes);
-	}
-
 	public MethodKey(String className, String methodName, Class<?>[] types) {
 		this(null, null, className, methodName, types);
 	}

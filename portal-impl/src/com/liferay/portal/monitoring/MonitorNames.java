@@ -26,6 +26,4 @@ public interface MonitorNames {
 
 	public static final String PORTLET = "com.liferay.monitoring.Portlet";
 
-	public static final String SERVICE = "com.liferay.monitoring.Service";
-
 }
