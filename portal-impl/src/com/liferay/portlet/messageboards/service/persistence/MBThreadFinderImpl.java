@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -209,11 +207,8 @@ public class MBThreadFinderImpl
 			String sql = CustomSQLUtil.get(COUNT_BY_G_C_S);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = StringUtil.replace(
-					sql, "[$STATUS$]", "AND (MBThread.status = ?)");
-			}
-			else {
-				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
+				sql = CustomSQLUtil.appendCriteria(
+					sql, "AND (MBThread.status = ?) ");
 			}
 
 			if (inlineSQLHelper) {
@@ -267,11 +262,8 @@ public class MBThreadFinderImpl
 			String sql = CustomSQLUtil.get(COUNT_BY_S_G_U_S);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = StringUtil.replace(
-					sql, "[$STATUS$]", "AND (MBThread.status = ?)");
-			}
-			else {
-				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
+				sql = CustomSQLUtil.appendCriteria(
+					sql, "AND (MBThread.status = ?) ");
 			}
 
 			if (inlineSQLHelper) {
@@ -328,11 +320,8 @@ public class MBThreadFinderImpl
 			String sql = CustomSQLUtil.get(FIND_BY_G_C_S);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = StringUtil.replace(
-					sql, "[$STATUS$]", "AND (MBThread.status = ?)");
-			}
-			else {
-				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
+				sql = CustomSQLUtil.appendCriteria(
+					sql, "AND (MBThread.status = ?) ");
 			}
 
 			if (inlineSQLHelper) {
@@ -377,11 +366,8 @@ public class MBThreadFinderImpl
 			String sql = CustomSQLUtil.get(FIND_BY_S_G_U_S);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = StringUtil.replace(
-					sql, "[$STATUS$]", "AND (MBThread.status = ?)");
-			}
-			else {
-				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
+				sql = CustomSQLUtil.appendCriteria(
+					sql, "AND (MBThread.status = ?) ");
 			}
 
 			if (inlineSQLHelper) {

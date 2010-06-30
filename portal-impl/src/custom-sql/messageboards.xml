@@ -56,7 +56,6 @@
 				(groupId = ?) AND
 				(userId = ?) AND
 				(categoryId != -1)
-				[$STATUS$]
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.countByG_U_A_S">
@@ -70,7 +69,6 @@
 				(userId = ?) AND
 				(categoryId != -1) AND
 				(anonymous = ?)
-				[$STATUS$]
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByNoAssets">
@@ -100,7 +98,6 @@
 				(groupId = ?) AND
 				(userId = ?) AND
 				(categoryId != -1)
-				[$STATUS$]
 			GROUP BY
 				threadId
 			ORDER BY
@@ -119,7 +116,6 @@
 				(userId = ?) AND
 				(categoryId != -1) AND
 				(anonymous = ?)
-				[$STATUS$]
 			GROUP BY
 				threadId
 			ORDER BY
@@ -153,7 +149,6 @@
 			WHERE
 				(MBThread.groupId = ?) AND
 				(MBThread.categoryId = ?)
-				[$STATUS$]
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByS_G_U_S">
@@ -168,8 +163,7 @@
 					(Subscription.classPK = MBThread.threadId)
 			WHERE
 				(MBThread.groupId = ?) AND
-				(MBThread.categoryId != -1)
-				[$STATUS$] AND
+				(MBThread.categoryId != -1) AND
 				(Subscription.userId = ?)
 		]]>
 	</sql>
@@ -202,7 +196,6 @@
 			WHERE
 				(MBThread.groupId = ?) AND
 				(MBThread.categoryId = ?)
-				[$STATUS$]
 			ORDER BY
 				MBThread.priority DESC,
 				MBThread.lastPostDate DESC
@@ -220,8 +213,7 @@
 					(Subscription.classPK = MBThread.threadId)
 			WHERE
 				(MBThread.groupId = ?) AND
-				(MBThread.categoryId != -1)
-				[$STATUS$] AND
+				(MBThread.categoryId != -1) AND
 				(Subscription.userId = ?)
 			ORDER BY
 				MBThread.priority DESC,

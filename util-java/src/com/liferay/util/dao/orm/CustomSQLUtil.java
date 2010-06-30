@@ -23,8 +23,13 @@ import com.liferay.portal.kernel.util.OrderByComparator;
  *
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
+ * @author Raymond Augé
  */
 public class CustomSQLUtil {
+
+	public static String appendCriteria(String sql, String criteria) {
+		return _instance._customSQL.appendCriteria(sql, criteria);
+	}
 
 	public static String get(String id) {
 		return _instance._customSQL.get(id);

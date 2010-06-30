@@ -82,11 +82,8 @@ public class BlogsEntryFinderImpl
 			String sql = CustomSQLUtil.get(COUNT_BY_ORGANIZATION_IDS);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = StringUtil.replace(
-					sql, "[$STATUS$]", "AND (BlogsEntry.status = ?)");
-			}
-			else {
-				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
+				sql = CustomSQLUtil.appendCriteria(
+					sql, "AND (BlogsEntry.status = ?) ");
 			}
 
 			sql = StringUtil.replace(
@@ -143,11 +140,8 @@ public class BlogsEntryFinderImpl
 			String sql = CustomSQLUtil.get(FIND_BY_GROUP_IDS);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = StringUtil.replace(
-					sql, "[$STATUS$]", "AND (BlogsEntry.status = ?)");
-			}
-			else {
-				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
+				sql = CustomSQLUtil.appendCriteria(
+					sql, "AND (BlogsEntry.status = ?) ");
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -203,11 +197,8 @@ public class BlogsEntryFinderImpl
 			String sql = CustomSQLUtil.get(FIND_BY_ORGANIZATION_IDS);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = StringUtil.replace(
-					sql, "[$STATUS$]", "AND (BlogsEntry.status = ?)");
-			}
-			else {
-				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
+				sql = CustomSQLUtil.appendCriteria(
+					sql, "AND (BlogsEntry.status = ?) ");
 			}
 
 			sql = StringUtil.replace(

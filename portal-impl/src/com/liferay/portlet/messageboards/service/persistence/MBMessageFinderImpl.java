@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.CalendarUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -113,10 +111,7 @@ public class MBMessageFinderImpl
 			String sql = CustomSQLUtil.get(COUNT_BY_G_U_S);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = StringUtil.replace(sql, "[$STATUS$]", "AND (status = ?)");
-			}
-			else {
-				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
+				sql = CustomSQLUtil.appendCriteria(sql, "AND (status = ?) ");
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -164,10 +159,7 @@ public class MBMessageFinderImpl
 			String sql = CustomSQLUtil.get(COUNT_BY_G_U_A_S);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = StringUtil.replace(sql, "[$STATUS$]", "AND (status = ?)");
-			}
-			else {
-				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
+				sql = CustomSQLUtil.appendCriteria(sql, "AND (status = ?) ");
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -238,10 +230,7 @@ public class MBMessageFinderImpl
 			String sql = CustomSQLUtil.get(FIND_BY_G_U_S);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = StringUtil.replace(sql, "[$STATUS$]", "AND (status = ?)");
-			}
-			else {
-				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
+				sql = CustomSQLUtil.appendCriteria(sql, "AND (status = ?) ");
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -280,10 +269,7 @@ public class MBMessageFinderImpl
 			String sql = CustomSQLUtil.get(FIND_BY_G_U_A_S);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = StringUtil.replace(sql, "[$STATUS$]", "AND (status = ?)");
-			}
-			else {
-				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
+				sql = CustomSQLUtil.appendCriteria(sql, "AND (status = ?) ");
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);

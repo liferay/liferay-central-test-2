@@ -48,6 +48,7 @@ import java.util.concurrent.atomic.AtomicReference;
  *
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
+ * @author Raymond Augé
  */
 public class CustomSQL {
 
@@ -180,13 +181,35 @@ public class CustomSQL {
 
 			String[] configs = getConfigs();
 
-			for (int i = 0; i < configs.length; i++) {
-				read(classLoader, configs[i]);
+			for (String _config : configs) {
+				read(classLoader, _config);
 			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
+	}
+
+	public String appendCriteria(String sql, String criteria) {
+		if (criteria == null) {
+			return sql;
+		}
+
+		int pos = sql.indexOf(_GROUP_BY_CLAUSE);
+
+		if (pos != -1) {
+			return sql.substring(0, pos + 1).concat(criteria).concat(
+				sql.substring(pos + 1));
+		}
+
+		pos = sql.indexOf(_ORDER_BY_CLAUSE);
+
+		if (pos != -1) {
+			return sql.substring(0, pos + 1).concat(criteria).concat(
+				sql.substring(pos + 1));
+		}
+
+		return sql.concat(criteria);
 	}
 
 	public String get(String id) {
