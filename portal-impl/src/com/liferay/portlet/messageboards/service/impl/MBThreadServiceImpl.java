@@ -65,15 +65,6 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 
 	public List<MBThread> getGroupThreads(
 			long groupId, long userId, int status, boolean subscribed,
-			int start, int end)
-		throws PortalException, SystemException {
-
-		return getGroupThreads(
-			groupId, userId, status, subscribed, true, start, end);
-	}
-
-	public List<MBThread> getGroupThreads(
-			long groupId, long userId, int status, boolean subscribed,
 			boolean includeAnonymous, int start, int end)
 		throws PortalException, SystemException {
 
@@ -126,9 +117,18 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 		}
 	}
 
+	public List<MBThread> getGroupThreads(
+			long groupId, long userId, int status, boolean subscribed,
+			int start, int end)
+		throws PortalException, SystemException {
+
+		return getGroupThreads(
+			groupId, userId, status, subscribed, true, start, end);
+	}
+
 	public int getGroupThreadsCount(
 			long groupId, long userId, int status, boolean subscribed)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return getGroupThreadsCount(groupId, userId, status, subscribed, true);
 	}
