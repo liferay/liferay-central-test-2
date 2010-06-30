@@ -21,15 +21,15 @@
 				<liferay-ui:message key="your-request-processed-successfully" />
 			</div>
 
-			<aui:input cssClass="save-structure-name lfr-input-text-container" label="structure-name" name="saveStructureStructureName" size="50" type="text" />
+			<aui:input cssClass="save-structure-name lfr-input-text-container" label="structure-name" name="saveStructureStructureName" silent="<%= true %>" size="50" type="text" />
 
-			<aui:input cssClass="save-structure-description" cols="80" label="description" name="saveStructureStructureDescription" rows="6" type="textarea" />
+			<aui:input cssClass="save-structure-description" cols="80" label="description" name="saveStructureStructureDescription" silent="<%= true %>" rows="6" type="textarea" />
 
 			<aui:a href="#" id="showStructureIdContainer"><liferay-ui:message key="change-structure-id" /> &raquo;</aui:a>
 
 			<div class="journal-structureid-field aui-helper-hidden" id="<portlet:namespace />structureIdContainer">
 				<aui:field-wrapper label="structure-id">
-					<aui:input cssClas="lfr-input-text-container" label="" name="saveStructureStructureId" type="text" />
+					<aui:input cssClas="lfr-input-text-container" label="" name="saveStructureStructureId" silent="<%= true %>" type="text" />
 					<aui:input label="" name="saveStructureAutogenerateId" type="checkbox" value="<%= true %>" />
 				</aui:field-wrapper>
 			</div>
@@ -61,7 +61,7 @@
 				<aui:option label="selection-break" value="selection_break" />
 			</aui:select>
 
-			<aui:input name="fieldLabel" type="text" />
+			<aui:input name="fieldLabel" silent="<%= true %>" type="text" />
 
 			<aui:select label="index-type" name="indexType">
 				<aui:option label="not-searchable" />
@@ -69,10 +69,10 @@
 				<aui:option label="searchable-text" value="text" />
 			</aui:select>
 
-			<aui:input name="predefinedValue" type="text" />
+			<aui:input name="predefinedValue" silent="<%= true %>" type="text" />
 
 			<fieldset class="user-instructions">
-				<aui:input label="instructions-for-the-user" name="instructions" type="textarea" />
+				<aui:input label="instructions-for-the-user" name="instructions" silent="<%= true %>" type="textarea" />
 
 				<aui:input name="displayAsTooltip" type="checkbox" value="<%= true %>" />
 			</fieldset>
@@ -97,23 +97,23 @@
 <div class="journal-fieldmodel-container" id="journalFieldModelContainer">
 	<aui:fieldset>
 		<div dataType="text">
-			<aui:input cssClass="lfr-input-text-container" label="" name="text" size="55" type="text" />
+			<aui:input cssClass="lfr-input-text-container" label="" name="text" silent="<%= true %>" size="55" type="text" />
 		</div>
 
 		<div dataType="text_area">
-			<aui:input cssClass="lfr-input-text-container" label="" name="textArea" size="55" type="text" />
+			<aui:input cssClass="lfr-input-text-container" label="" name="textArea" silent="<%= true %>" size="55" type="text" />
 		</div>
 
 		<div dataType="text_box">
-			<aui:input cols="60" cssClass="lfr-textarea-container" label="" name="textBox" rows="10" size="55" type="textarea" />
+			<aui:input cols="60" cssClass="lfr-textarea-container" label="" name="textBox" rows="10" silent="<%= true %>" size="55" type="textarea" />
 		</div>
 
 		<div dataType="image">
-			<aui:input cssClass="journal-image-field lfr-input-text-container flexible" label="" name="text"  size="40" type="file" />
+			<aui:input cssClass="journal-image-field lfr-input-text-container flexible" label="" name="text" silent="<%= true %>" size="40" type="file" />
 		</div>
 
 		<div dataType="image_gallery">
-			<aui:input cssClass="lfr-input-text-container" inlineField="<%= true %>" label="" name="text" size="55" type="text" />
+			<aui:input cssClass="lfr-input-text-container" inlineField="<%= true %>" label="" name="text" silent="<%= true %>" size="55" type="text" />
 
 			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectIGURL">
 				<portlet:param name="struts_action" value="/journal/select_image_gallery" />
@@ -124,7 +124,7 @@
 		</div>
 
 		<div dataType="document_library">
-			<aui:input cssClass="lfr-input-text-container" inlineField="<%= true %>" label="" name="text" size="55" type="text" />
+			<aui:input cssClass="lfr-input-text-container" inlineField="<%= true %>" label="" name="text" silent="<%= true %>" size="55" type="text" />
 
 			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectDLURL">
 				<portlet:param name="struts_action" value="/journal/select_document_library" />

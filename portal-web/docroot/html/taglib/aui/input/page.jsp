@@ -37,6 +37,7 @@ Class<?> model = (Class<?>)request.getAttribute("aui:input:model");
 String name = GetterUtil.getString((String)request.getAttribute("aui:input:name"));
 String onClick = GetterUtil.getString((String)request.getAttribute("aui:input:onClick"));
 String prefix = GetterUtil.getString((String)request.getAttribute("aui:input:prefix"));
+boolean silent = GetterUtil.getBoolean((String)request.getAttribute("aui:input:silent"));
 String suffix = GetterUtil.getString((String)request.getAttribute("aui:input:suffix"));
 String title = GetterUtil.getString((String)request.getAttribute("aui:input:title"));
 String type = GetterUtil.getString((String)request.getAttribute("aui:input:type"));
@@ -222,9 +223,20 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 		if (value != null) {
 			valueString = value.toString();
 		}
-		else {
-			if (type.equals("text") || type.equals("textarea")) {
-				valueString = ParamUtil.getString(request, name);
+		else if (type.equals("hidden") || type.equals("text") || type.equals("textarea")) {
+			if (silent) {
+				valueString = BeanParamUtil.getStringSilent(bean, request, name);
+			}
+			else {
+				valueString = BeanParamUtil.getString(bean, request, name);
+			}
+
+			String fieldParam = (String)dynamicAttributes.get("fieldParam");
+
+			String fieldParamValue = request.getParameter(fieldParam);
+
+			if (Validator.isNotNull(fieldParamValue)) {
+				valueString = fieldParamValue;
 			}
 		}
 

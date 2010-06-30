@@ -98,6 +98,10 @@ public class InputTag extends IncludeTag {
 		_prefix = prefix;
 	}
 
+	public void setSilent(boolean silent) {
+		_silent = silent;
+	}
+
 	public void setSuffix(String suffix) {
 		_suffix = suffix;
 	}
@@ -132,6 +136,7 @@ public class InputTag extends IncludeTag {
 		_name = null;
 		_onClick = null;
 		_prefix = null;
+		_silent = false;
 		_suffix = null;
 		_title = null;
 		_type = null;
@@ -204,6 +209,7 @@ public class InputTag extends IncludeTag {
 		request.setAttribute("aui:input:name", _name);
 		request.setAttribute("aui:input:onClick", _onClick);
 		request.setAttribute("aui:input:prefix", _prefix);
+		request.setAttribute("aui:input:silent", String.valueOf(_silent));
 		request.setAttribute("aui:input:suffix", _suffix);
 		request.setAttribute("aui:input:title", _title);
 		request.setAttribute("aui:input:type", _type);
@@ -231,6 +237,7 @@ public class InputTag extends IncludeTag {
 	private String _name;
 	private String _onClick;
 	private String _prefix;
+	private boolean _silent;
 	private String _suffix;
 	private String _title;
 	private String _type;
