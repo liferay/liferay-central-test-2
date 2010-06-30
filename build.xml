@@ -26,6 +26,8 @@
 		<ant dir="portal-web" target="clean" inheritAll="false" />
 		<ant dir="tunnel-web" target="clean" inheritAll="false" />
 
+		<delete dir="${doc.dir}" />
+
 		<delete>
 			<fileset dir="." includes="*.ear,*.jar,*.war,*.zip" />
 		</delete>
@@ -682,6 +684,12 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djonas.felix.configuration.file="%JONAS_ROOT
 		<ant antfile="build-dist.xml" target="dist" inheritAll="false" />
 	</target>
 
+	<target name="doc">
+		<antcall target="javadoc" />
+		<antcall target="dtddoc" />
+		<ant dir="util-taglib" target="taglibdoc" inheritAll="false" />
+	</target>
+
 	<target name="dtddoc">
 		<taskdef classname="DTDDoc.DTDDocTask" classpathref="lib.classpath" name="DTDDoc" />
 
@@ -689,11 +697,14 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djonas.felix.configuration.file="%JONAS_ROOT
 			<replace regex="\." replacement="_" />
 		</antelope:stringutil>-->
 
+		<property name="doc.dtd.dir" value="${doc.dir}/definitions" />
+
 		<DTDDoc
-			destDir="api/definitions"
+			destDir="${doc.dtd.dir}"
+			docTitle = "Liferay ${lp.version} Definitions"
 			showFixmeTags="false"
 			showHiddenTags="false"
-			sourceDir="definitions"
+			sourceDir="${definitions.dir}"
 		>
 			<include name="liferay-*${lp.version.dtd}.dtd" />
 		</DTDDoc>
@@ -714,29 +725,42 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djonas.felix.configuration.file="%JONAS_ROOT
 		<ant dir="support-tomcat" target="jar" inheritAll="false" />
 	</target>
 
-	<target name="java2html">
-		<delete dir="api" />
-
-		<ant dir="portal-service" target="java2html" inheritAll="false" />
-
-		<ant dir="util-bridges" target="java2html" inheritAll="false" />
-		<ant dir="util-java" target="java2html" inheritAll="false" />
-		<ant dir="util-taglib" target="java2html" inheritAll="false" />
-
-		<ant dir="portal-impl" target="java2html" inheritAll="false" />
-
-		<ant dir="portal-client" target="java2html" inheritAll="false" />
+	<target name="jar-doc">
+		<jar
+			basedir="${doc.dir}"
+			jarfile="${jar.file}-doc.jar"
+		/>
 	</target>
 
 	<target name="javadoc">
-		<ant dir="portal-service" target="javadoc" inheritAll="false" />
+		<property name="doc.java.dir" value="${doc.dir}/javadocs" />
+		<mkdir dir="${doc.java.dir}" />
 
-		<ant dir="util-bridges" target="javadoc" inheritAll="false" />
-		<ant dir="util-java" target="javadoc" inheritAll="false" />
-		<ant dir="util-taglib" target="javadoc" inheritAll="false" />
-		<ant dir="util-taglib" target="taglibdoc" inheritAll="false" />
+		<javadoc
+			breakiterator="yes"
+			classpathref="project.classpath"
+			destdir="${doc.java.dir}"
+			doctitle="Liferay ${lp.version} API Documentation"
+			header="&lt;b&gt;Liferay ${lp.version}&lt;/b&gt;"
+			linksource="yes"
+			maxmemory="1024m"
+			noqualifier="java.*"
+			stylesheetfile="${project.dir}/tools/javadoc.css"
+			useexternalfile="yes"
+			windowtitle="Liferay ${lp.version} API"
+		>
 
-		<ant dir="portal-impl" target="javadoc" inheritAll="false" />
+			<link href="http://docs.liferay.com/portlet-api/2.0/javadocs" />
+			<link href="http://java.sun.com/javase/6/docs/api" />
+
+			<tag name="generated" />
+
+			<packageset dir="portal-impl/src" />
+			<packageset dir="portal-service/src" />
+			<packageset dir="util-bridges/src" />
+			<packageset dir="util-java/src" />
+			<packageset dir="util-taglib/src" />
+		</javadoc>
 	</target>
 
 	<target name="prepare-generated-files">

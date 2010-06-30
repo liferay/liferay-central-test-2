@@ -33,4 +33,27 @@
 			<fileset dir="classes/META-INF" includes="*.tld" />
 		</copy>
 	</target>
+
+	<target name="taglibdoc">
+		<property name="doc.taglib.dir" value="${doc.dir}/taglibs"></property>
+		<mkdir dir="${doc.taglib.dir}" />
+
+		<java
+			classname="com.sun.tlddoc.TLDDoc"
+			classpathref="project.classpath"
+			failonerror="true"
+			fork="true"
+			maxmemory="512m"
+		>
+			<arg line="-d ${doc.taglib.dir}" />
+			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-aui.tld" />
+			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-faces.tld" />
+			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-portlet-ext.tld" />
+			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-portlet.tld" />
+			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-security.tld" />
+			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-theme.tld" />
+			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-ui.tld" />
+			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-util.tld" />
+		</java>
+	</target>
 </project>

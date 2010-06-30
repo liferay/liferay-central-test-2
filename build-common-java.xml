@@ -21,10 +21,7 @@
 		<delete dir="test-classes" />
 		<delete dir="test-results" />
 		<delete file="${jar.file}.jar" failonerror="false" />
-		<delete file="${jar.file}-javadoc.jar" failonerror="false" />
 		<delete file="${jar.file}-sources.jar" failonerror="false" />
-		<delete dir="${java2html.dir}" />
-		<delete dir="${javadoc.dir}" />
 	</target>
 
 	<target name="compile">
@@ -76,85 +73,10 @@
 		/>
 	</target>
 
-	<target name="jar-javadoc">
-		<jar
-			basedir="${javadoc.dir}"
-			jarfile="${jar.file}-javadoc.jar"
-		/>
-	</target>
-
 	<target name="jar-sources">
 		<jar
 			basedir="src"
 			jarfile="${jar.file}-sources.jar"
 		/>
-	</target>
-
-	<target name="java2html">
-		<java
-			classname="j2h"
-			classpathref="project.classpath"
-			fork="true"
-		>
-			<arg line="-d ${java2html.dir} -js src -m 4" />
-		</java>
-
-		<replace dir="${java2html.dir}">
-			<replacefilter
-				token="stylesheet.css"
-				value="java2html.css"
-			/>
-		</replace>
-
-		<move file="${java2html.dir}/stylesheet.css" tofile="${java2html.dir}/java2html.css" />
-
-		<antcall target="javadoc" />
-
-		<replace dir="${java2html.dir}">
-			<include name="**/package-summary.html" />
-			<replacefilter
-				token="/\"
-				value="/"
-			/>
-		</replace>
-	</target>
-
-	<target name="javadoc">
-		<mkdir dir="${javadoc.dir}" />
-
-		<javadoc
-			breakiterator="yes"
-			classpathref="project.classpath"
-			destdir="${javadoc.dir}"
-			maxmemory="768m"
-			packagenames="*.*"
-			sourcepath="src"
-			stylesheetfile="${project.dir}/tools/javadoc.css"
-			useexternalfile="yes"
-		>
-			<arg line="-quiet -tag generated" />
-		</javadoc>
-	</target>
-
-	<target name="taglibdoc">
-		<mkdir dir="${javadoc.dir}/../taglibs" />
-
-		<java
-			classname="com.sun.tlddoc.TLDDoc"
-			classpathref="project.classpath"
-			failonerror="true"
-			fork="true"
-			maxmemory="512m"
-		>
-			<arg line="-d ${javadoc.dir}/../taglibs" />
-			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-aui.tld" />
-			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-faces.tld" />
-			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-portlet-ext.tld" />
-			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-portlet.tld" />
-			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-security.tld" />
-			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-theme.tld" />
-			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-ui.tld" />
-			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-util.tld" />
-		</java>
 	</target>
 </project>

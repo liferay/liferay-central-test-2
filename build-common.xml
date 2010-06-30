@@ -69,8 +69,7 @@
 	<taskdef classpathref="lib.classpath" resource="ise/antelope/tasks/antlib.xml" uri="antlib:ise.antelope.tasks" />
 	<taskdef classpathref="lib.classpath" resource="com/orangevolt/tools/ant/taskdefs.properties" />
 
-	<property name="java2html.dir" value="${project.dir}/api/${ant.project.name}" />
-	<property name="javadoc.dir" value="${project.dir}/api/${ant.project.name}" />
+	<property name="doc.dir" value="${project.dir}/api" />
 
 	<propertycopy name="app.server.version" from="app.server.${app.server.type}.version" silent="true" />
 	<propertycopy name="app.server.dir" from="app.server.${app.server.type}.dir" />
