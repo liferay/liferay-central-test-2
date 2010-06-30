@@ -156,6 +156,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 
 	);
 
+	<#if entity.hasRemoteService()>
 	public static ${entity.name} toModel(${entity.name}Soap soapModel) {
 		${entity.name} model = new ${entity.name}Impl();
 
@@ -175,6 +176,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 
 		return models;
 	}
+	</#if>
 
 	<#list entity.columnList as column>
 		<#if column.mappingTable??>
