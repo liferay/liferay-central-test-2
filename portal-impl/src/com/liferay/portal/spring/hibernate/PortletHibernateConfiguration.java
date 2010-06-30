@@ -16,15 +16,25 @@ package com.liferay.portal.spring.hibernate;
 
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
 
+import java.util.Properties;
+import java.util.Set;
+
+import org.hibernate.cfg.Configuration;
+
 /**
  * <a href="PortletHibernateConfiguration.java.html"><b><i>View Source</i></b>
  * </a>
  *
  * @author Brian Wing Shun Chan
  * @author Ganesh Ram
+ * @author Marcellus Tavares
  */
 public class PortletHibernateConfiguration
 	extends PortalHibernateConfiguration {
+
+	public void setHibernateProperties(Properties hibernateProperties) {
+		_hibernateProperties = hibernateProperties;
+	}
 
 	protected ClassLoader getConfigurationClassLoader() {
 		return PortletClassLoaderUtil.getClassLoader();
@@ -33,5 +43,25 @@ public class PortletHibernateConfiguration
 	protected String[] getConfigurationResources() {
 		return new String[] {"META-INF/portlet-hbm.xml"};
 	}
+
+	protected Configuration newConfiguration() {
+		Configuration configuration = super.newConfiguration();
+
+		if (_hibernateProperties != null) {
+			Set<String> propertyNames =
+				_hibernateProperties.stringPropertyNames();
+
+			for (String propertyName : propertyNames) {
+				String propertyValue =
+					_hibernateProperties.getProperty(propertyName);
+
+				configuration.setProperty(propertyName, propertyValue);
+			}
+		}
+
+		return configuration;
+	}
+
+	private Properties _hibernateProperties;
 
 }
