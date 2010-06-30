@@ -110,12 +110,6 @@ public class ClusterExecutorImpl
 
 		try {
 			futureClusterResponses = doExecuteClusterRequest(clusterRequest);
-
-			long timeout = clusterRequest.getTimeOut();
-
-			if (timeout <= 0) {
-				timeout = _defaultTimeOut;
-			}
 		}
 		finally {
 			_executionResultMap.remove(clusterRequest.getUuid());
@@ -249,10 +243,6 @@ public class ClusterExecutorImpl
 
 			addClusterEventListener(clusterEventListener);
 		}
-	}
-
-	public void setDefaultTimeOut(long defaultTimeOut) {
-		_defaultTimeOut = defaultTimeOut;
 	}
 
 	public void setShortcutLocalMethod(boolean shortcutLocalMethod) {
@@ -645,7 +635,6 @@ public class ClusterExecutorImpl
 	private Map<String, Address> _clusterNodeIdMap =
 		new HashMap<String, Address>();
 	private JChannel _controlChannel;
-	private long _defaultTimeOut = 100;
 	private Map<String, FutureClusterResponses> _executionResultMap =
 		new ConcurrentHashMap<String, FutureClusterResponses>();
 	private String _localClusterNodeId;

@@ -15,7 +15,6 @@
 				<ref bean="com.liferay.portal.kernel.cluster.ClusterEventListener" />
 			</list>
 		</property>
-		<property name="defaultTimeOut" value="1000" />
 		<property name="shortcutLocalMethod" value="true" />
 	</bean>
 	<bean id="com.liferay.portal.kernel.cluster.ClusterExecutorUtil" class="com.liferay.portal.kernel.cluster.ClusterExecutorUtil">
