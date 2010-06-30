@@ -17,8 +17,8 @@ package com.liferay.portal.kernel.cluster;
 import java.io.Serializable;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <a href="ClusterNodeResponses.java.html"><b><i>View Source</i></b></a>
@@ -44,6 +44,6 @@ public class ClusterNodeResponses implements Serializable {
 	}
 
 	private Map<ClusterNode, ClusterNodeResponse> _clusterResponses =
-		new HashMap<ClusterNode, ClusterNodeResponse>();
+		new ConcurrentHashMap<ClusterNode, ClusterNodeResponse>();
 
 }
