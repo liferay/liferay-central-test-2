@@ -156,7 +156,7 @@ portletURL.setParameter("name", name);
 	<liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="please-enter-a-valid-folder" />
 
 	<liferay-ui:error exception="<%= SourceFileNameException.class %>">
-		<liferay-ui:message key="the-source-file-does-not-have-the-same-extension-as-the-original-file" />
+		<liferay-ui:message key="document-extensions-does-not-match" />
 	</liferay-ui:error>
 
 	<liferay-ui:error exception="<%= FileSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />

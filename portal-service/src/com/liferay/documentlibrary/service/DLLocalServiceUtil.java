@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 
 import java.io.File;
 import java.io.InputStream;
@@ -102,15 +101,17 @@ public class DLLocalServiceUtil {
 	}
 
 	public static void updateFile(
-			long companyId, String portletId, DLFileEntry fileEntry,
-			boolean validateFileExtension, String versionNumber,
-			String sourceFileName, ServiceContext serviceContext,
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, boolean validateFileExtension,
+			String versionNumber, String sourceFileName, long fileEntryId,
+			String properties, Date modifiedDate, ServiceContext serviceContext,
 			InputStream is)
 		throws PortalException, SystemException {
 
 		getService().updateFile(
-			companyId, portletId, fileEntry, validateFileExtension,
-			versionNumber, sourceFileName, serviceContext, is);
+			companyId, portletId, groupId, repositoryId, fileName,
+			validateFileExtension, versionNumber, sourceFileName, fileEntryId,
+			properties, modifiedDate, serviceContext, is);
 	}
 
 	public static void validate(
@@ -135,11 +136,10 @@ public class DLLocalServiceUtil {
 	}
 
 	public static void validate(
-			DLFileEntry fileEntry, String sourceFileName,
-			boolean validateExtension, InputStream is)
+			String fileName, String sourceFileName, InputStream is)
 		throws PortalException, SystemException {
 
-		getService().validate(fileEntry, sourceFileName, validateExtension, is);
+		getService().validate(fileName, sourceFileName, is);
 	}
 
 	public void setService(DLLocalService service) {

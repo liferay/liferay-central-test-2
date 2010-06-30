@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 
 import java.io.File;
 import java.io.InputStream;
@@ -66,9 +65,10 @@ public interface DLLocalService {
 		throws SystemException;
 
 	public void updateFile(
-			long companyId, String portletId, DLFileEntry fileEntry,
-			boolean validateFileExtension, String versionNumber,
-			String sourceFileName, ServiceContext serviceContext,
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, boolean validateFileExtension,
+			String versionNumber, String sourceFileName, long fileEntryId,
+			String properties, Date modifiedDate, ServiceContext serviceContext,
 			InputStream is)
 		throws PortalException, SystemException;
 
@@ -84,13 +84,7 @@ public interface DLLocalService {
 			String fileName, boolean validateFileExtension, InputStream is)
 		throws PortalException, SystemException;
 
-	public void validate(
-			DLFileEntry fileEntry, String sourceFileName)
-		throws PortalException, SystemException;
-
-	public void validate(
-			DLFileEntry fileEntry, String sourceFileName,
-			boolean validateExtension, InputStream is)
+	public void validate(String fileName, String sourceFileName, InputStream is)
 		throws PortalException, SystemException;
 
 }

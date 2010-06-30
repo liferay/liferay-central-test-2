@@ -184,20 +184,16 @@ public class DLLocalServiceImpl implements DLLocalService {
 	}
 
 	public void updateFile(
-			long companyId, String portletId, DLFileEntry fileEntry,
-			boolean validateFileExtension, String versionNumber,
-			String sourceFileName, ServiceContext serviceContext,
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, boolean validateFileExtension,
+			String versionNumber, String sourceFileName, long fileEntryId,
+			String properties, Date modifiedDate, ServiceContext serviceContext,
 			InputStream is)
 		throws PortalException, SystemException {
 
-		long groupId = fileEntry.getGroupId();
-		long repositoryId = fileEntry.getRepositoryId();
-		long fileEntryId = fileEntry.getFileEntryId();
-		String properties = fileEntry.getLuceneProperties();
-		Date modifiedDate = fileEntry.getModifiedDate();
-		String fileName = fileEntry.getName();
-
-		validate(fileEntry, sourceFileName, validateFileExtension, is);
+		if (validateFileExtension) {
+			validate(fileName, sourceFileName, is);
+		}
 
 		hook.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
@@ -302,27 +298,17 @@ public class DLLocalServiceImpl implements DLLocalService {
 		}
 	}
 
-	public void validate(
-			DLFileEntry fileEntry, String sourceFileName)
+	public void validate(String fileName, String sourceFileName, InputStream is)
 		throws PortalException, SystemException {
 
-		String extension = fileEntry.getExtension();
-		String sourceExtension = FileUtil.getExtension(sourceFileName);
+		String fileNameExtension = FileUtil.getExtension(fileName);
+		String sourceFileNameExtension = FileUtil.getExtension(sourceFileName);
 
-		if (!extension.equals(sourceExtension)) {
+		validate(fileName, true);
+
+		if (!fileNameExtension.equalsIgnoreCase(sourceFileNameExtension)) {
 			throw new SourceFileNameException(sourceFileName);
 		}
-	}
-
-	public void validate(
-			DLFileEntry fileEntry, String sourceFileName,
-			boolean validateExtension, InputStream is)
-		throws PortalException, SystemException {
-
-		String fileName = fileEntry.getName();
-
-		validate(fileEntry, sourceFileName);
-		validate(fileName, validateExtension);
 
 		try {
 			if ((PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0) &&
