@@ -22,8 +22,8 @@ import com.liferay.portal.kernel.cluster.ClusterExecutor;
 import com.liferay.portal.kernel.cluster.ClusterMessageType;
 import com.liferay.portal.kernel.cluster.ClusterNode;
 import com.liferay.portal.kernel.cluster.ClusterNodeResponse;
-import com.liferay.portal.kernel.cluster.ClusterNodeResponses;
 import com.liferay.portal.kernel.cluster.ClusterRequest;
+import com.liferay.portal.kernel.cluster.FutureClusterResponses;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -99,14 +99,13 @@ public class ClusterExecutorImpl
 		_controlChannel.close();
 	}
 
-	public ClusterNodeResponses execute(ClusterRequest clusterRequest)
+	public FutureClusterResponses execute(ClusterRequest clusterRequest)
 		throws SystemException {
 
 		if (!isEnabled()) {
-			return ClusterNodeResponses.EMPTY_CLUSTER_NODE_RESPONSES;
+			return null;
 		}
 
-		ClusterNodeResponses clusterNodeResponses = null;
 		FutureClusterResponses clusterResults = null;
 
 		try {
@@ -117,25 +116,12 @@ public class ClusterExecutorImpl
 			if (timeout <= 0) {
 				timeout = _defaultTimeOut;
 			}
-
-			clusterNodeResponses = clusterResults.get(
-				timeout, clusterRequest.getTimeUnit());
-		}
-		catch (Exception e) {
-			if (clusterResults != null) {
-				clusterNodeResponses = clusterResults.getPartialResults();
-			}
-			else {
-				throw new SystemException(
-					"Unable to execute clustered request " + clusterRequest,
-					e);
-			}
 		}
 		finally {
 			_executionResultMap.remove(clusterRequest.getUuid());
 		}
 
-		return clusterNodeResponses;
+		return clusterResults;
 	}
 
 	public List<ClusterEventListener> getClusterEventListeners() {

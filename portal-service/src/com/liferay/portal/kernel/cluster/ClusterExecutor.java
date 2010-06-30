@@ -30,7 +30,7 @@ public interface ClusterExecutor {
 
 	public void destroy();
 
-	public ClusterNodeResponses execute(ClusterRequest clusterRequest)
+	public FutureClusterResponses execute(ClusterRequest clusterRequest)
 		throws SystemException;
 
 	public List<ClusterEventListener> getClusterEventListeners();

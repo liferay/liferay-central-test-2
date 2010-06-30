@@ -12,11 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.cluster;
-
-import com.liferay.portal.kernel.cluster.Address;
-import com.liferay.portal.kernel.cluster.ClusterNodeResponse;
-import com.liferay.portal.kernel.cluster.ClusterNodeResponses;
+package com.liferay.portal.kernel.cluster;
 
 import java.util.HashSet;
 import java.util.List;
