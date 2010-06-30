@@ -208,7 +208,7 @@ public class MBThreadFinderImpl
 
 			if (status != WorkflowConstants.STATUS_ANY) {
 				sql = CustomSQLUtil.appendCriteria(
-					sql, "AND (MBThread.status = ?) ");
+					sql, "AND (MBThread.status = ?)");
 			}
 
 			if (inlineSQLHelper) {
@@ -263,7 +263,7 @@ public class MBThreadFinderImpl
 
 			if (status != WorkflowConstants.STATUS_ANY) {
 				sql = CustomSQLUtil.appendCriteria(
-					sql, "AND (MBThread.status = ?) ");
+					sql, "AND (MBThread.status = ?)");
 			}
 
 			if (inlineSQLHelper) {
@@ -321,7 +321,7 @@ public class MBThreadFinderImpl
 
 			if (status != WorkflowConstants.STATUS_ANY) {
 				sql = CustomSQLUtil.appendCriteria(
-					sql, "AND (MBThread.status = ?) ");
+					sql, "AND (MBThread.status = ?)");
 			}
 
 			if (inlineSQLHelper) {
@@ -367,7 +367,7 @@ public class MBThreadFinderImpl
 
 			if (status != WorkflowConstants.STATUS_ANY) {
 				sql = CustomSQLUtil.appendCriteria(
-					sql, "AND (MBThread.status = ?) ");
+					sql, "AND (MBThread.status = ?)");
 			}
 
 			if (inlineSQLHelper) {

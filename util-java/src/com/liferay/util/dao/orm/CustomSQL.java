@@ -195,6 +195,14 @@ public class CustomSQL {
 			return sql;
 		}
 
+		if (!criteria.startsWith(StringPool.SPACE)) {
+			criteria = StringPool.SPACE.concat(criteria);
+		}
+
+		if (!criteria.endsWith(StringPool.SPACE)) {
+			criteria = criteria.concat(StringPool.SPACE);
+		}
+
 		int pos = sql.indexOf(_GROUP_BY_CLAUSE);
 
 		if (pos != -1) {

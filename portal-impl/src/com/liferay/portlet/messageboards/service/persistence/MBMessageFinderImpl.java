@@ -111,7 +111,7 @@ public class MBMessageFinderImpl
 			String sql = CustomSQLUtil.get(COUNT_BY_G_U_S);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = CustomSQLUtil.appendCriteria(sql, "AND (status = ?) ");
+				sql = CustomSQLUtil.appendCriteria(sql, "AND (status = ?)");
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -159,7 +159,7 @@ public class MBMessageFinderImpl
 			String sql = CustomSQLUtil.get(COUNT_BY_G_U_A_S);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = CustomSQLUtil.appendCriteria(sql, "AND (status = ?) ");
+				sql = CustomSQLUtil.appendCriteria(sql, "AND (status = ?)");
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -230,7 +230,7 @@ public class MBMessageFinderImpl
 			String sql = CustomSQLUtil.get(FIND_BY_G_U_S);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = CustomSQLUtil.appendCriteria(sql, "AND (status = ?) ");
+				sql = CustomSQLUtil.appendCriteria(sql, "AND (status = ?)");
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -269,7 +269,7 @@ public class MBMessageFinderImpl
 			String sql = CustomSQLUtil.get(FIND_BY_G_U_A_S);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = CustomSQLUtil.appendCriteria(sql, "AND (status = ?) ");
+				sql = CustomSQLUtil.appendCriteria(sql, "AND (status = ?)");
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);

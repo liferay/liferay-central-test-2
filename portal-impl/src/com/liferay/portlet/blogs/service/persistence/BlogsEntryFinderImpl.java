@@ -83,7 +83,7 @@ public class BlogsEntryFinderImpl
 
 			if (status != WorkflowConstants.STATUS_ANY) {
 				sql = CustomSQLUtil.appendCriteria(
-					sql, "AND (BlogsEntry.status = ?) ");
+					sql, "AND (BlogsEntry.status = ?)");
 			}
 
 			sql = StringUtil.replace(
@@ -141,7 +141,7 @@ public class BlogsEntryFinderImpl
 
 			if (status != WorkflowConstants.STATUS_ANY) {
 				sql = CustomSQLUtil.appendCriteria(
-					sql, "AND (BlogsEntry.status = ?) ");
+					sql, "AND (BlogsEntry.status = ?)");
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -198,7 +198,7 @@ public class BlogsEntryFinderImpl
 
 			if (status != WorkflowConstants.STATUS_ANY) {
 				sql = CustomSQLUtil.appendCriteria(
-					sql, "AND (BlogsEntry.status = ?) ");
+					sql, "AND (BlogsEntry.status = ?)");
 			}
 
 			sql = StringUtil.replace(
