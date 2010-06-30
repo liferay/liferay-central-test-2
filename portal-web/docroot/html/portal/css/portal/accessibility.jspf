@@ -29,8 +29,8 @@ img.avatar {
 }
 
 label.hidden-label {
-	float: left;
-	font-size: 0;
+	clip: rect(0 0 0 0);
+	position: absolute;
 }
 
 td.stretch {
