@@ -18,6 +18,9 @@ import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.BeanLocator;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.cache.ThreadLocalCacheManager;
+import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
+import com.liferay.portal.kernel.portlet.PortletBagPool;
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.util.InitUtil;
 
@@ -62,6 +65,10 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 
 	public void contextDestroyed(ServletContextEvent event) {
 		super.contextDestroyed(event);
+
+		HotDeployUtil.reset();
+		InstancePool.reset();
+		PortletBagPool.reset();
 
 		ThreadLocalCacheManager.destroy();
 	}
