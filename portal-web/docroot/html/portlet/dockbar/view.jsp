@@ -253,11 +253,11 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 
 		<li class="user-avatar <%= themeDisplay.isImpersonated() ? "impersonating-user has-submenu" : "" %>" id="<portlet:namespace />userAvatar">
 			<span class="user-links <%= themeDisplay.isImpersonated() ? "menu-button": "" %>">
-				<aui:a href="<%= themeDisplay.getURLMyAccount().toString() %>">
+				<aui:a cssClass="user-portrait" href="<%= themeDisplay.getURLMyAccount().toString() %>">
 					<img alt="<%= HtmlUtil.escape(user.getFullName()) %>" src="<%= HtmlUtil.escape(themeDisplay.getPathImage() + "/user_" + (user.isFemale() ? "female" : "male") + "_portrait?img_id=" + user.getPortraitId() + "&t=" + ImageServletTokenUtil.getToken(user.getPortraitId())) %>" />
 				</aui:a>
 
-				<aui:a href="<%= themeDisplay.getURLMyAccount().toString() %>"><%= HtmlUtil.escape(user.getFullName()) %></aui:a>
+				<aui:a cssClass="user-fullname" href="<%= themeDisplay.getURLMyAccount().toString() %>"><%= HtmlUtil.escape(user.getFullName()) %></aui:a>
 
 				<c:if test="<%= themeDisplay.isShowSignOutIcon() %>">
 					<span class="sign-out">(<aui:a href="<%= themeDisplay.getURLSignOut() %>" label="sign-out" />)</span>
