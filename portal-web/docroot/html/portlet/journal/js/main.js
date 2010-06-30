@@ -342,7 +342,6 @@ AUI().add(
 			instance._attachEditContainerEvents();
 			instance._attachDelegatedEvents();
 
-			instance._updateOriginalContent();
 			instance._updateOriginalStructureXSD();
 		};
 
@@ -395,10 +394,7 @@ AUI().add(
 			articleChanged: function() {
 				var instance = this;
 
-				var form = instance.getPrincipalForm();
-				var content = instance.getByName(form, 'originalContent').val();
-
-				return (content != encodeURIComponent(instance.getArticleContentXML()));
+				return window[instance.portletNamespace + 'contentChangedFlag'];
 			},
 
 			buildHTMLEditor: function(fieldInstance) {
@@ -2207,12 +2203,16 @@ AUI().add(
 				var repeatableButtons = instance.getRepeatableButtons();
 				var defaultLanguageIdSelect = instance.getById('defaultLanguageIdSelect');
 				var downloadArticleContentBtn = instance.getById('downloadArticleContentBtn');
+				var fieldsContainer = instance.getById('journalArticleContainer');
 				var languageIdSelect = instance.getById('languageIdSelect');
 				var previewArticleBtn = instance.getById('previewArticleBtn');
 				var publishBtn = instance.getById('publishBtn');
 				var saveArticleBtn = instance.getById('saveArticleBtn');
 
+				var containerInputs = fieldsContainer.all('.journal-article-component-container .aui-field-input');
+
 				closeButtons.detach('click');
+				containerInputs.detach('change');
 				defaultLanguageIdSelect.detach('change');
 				editButtons.detach('click');
 				languageIdSelect.detach('change');
@@ -2381,6 +2381,13 @@ AUI().add(
 						else {
 							instance.enableEditMode();
 						}
+					}
+				);
+
+				containerInputs.on(
+					'change',
+					function() {
+						window[instance.portletNamespace + 'contentChanged']();
 					}
 				);
 			},
@@ -2649,17 +2656,6 @@ AUI().add(
 				}
 
 				return errorText;
-			},
-
-			_updateOriginalContent: function() {
-				var instance = this;
-
-				var form = instance.getPrincipalForm();
-
-				var originalContent = encodeURIComponent(instance.getArticleContentXML());
-				var originalContentInput = instance.getByName(form, 'originalContent');
-
-				originalContentInput.val(originalContent);
 			},
 
 			_updateOriginalStructureXSD: function() {
