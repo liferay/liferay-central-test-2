@@ -20,6 +20,8 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -46,8 +48,8 @@ public class MBThreadFinderImpl
 	public static String COUNT_BY_G_C_S =
 		MBThreadFinder.class.getName() + ".countByG_C_S";
 
-	public static String COUNT_BY_S_G_U_S =
-		MBThreadFinder.class.getName() + ".countByS_G_U_S";
+	public static String COUNT_BY_S_G_C_U_S =
+		MBThreadFinder.class.getName() + ".countByS_G_C_U_S";
 
 	public static String FIND_BY_G_C =
 		MBThreadFinder.class.getName() + ".findByG_C";
@@ -55,8 +57,8 @@ public class MBThreadFinderImpl
 	public static String FIND_BY_G_C_S =
 		MBThreadFinder.class.getName() + ".findByG_C_S";
 
-	public static String FIND_BY_S_G_U_S =
-		MBThreadFinder.class.getName() + ".findByS_G_U_S";
+	public static String FIND_BY_S_G_C_U_S =
+		MBThreadFinder.class.getName() + ".findByS_G_C_U_S";
 
 	public int countByG_C_S(long groupId, long categoryId, int status)
 		throws SystemException {
@@ -64,10 +66,11 @@ public class MBThreadFinderImpl
 		return doCountByG_C_S(groupId, categoryId, status, false);
 	}
 
-	public int countByS_G_U_S(long groupId, long userId, int status)
+	public int countByS_G_C_U_S(
+			long groupId, long[] categoryIds, long userId, int status)
 		throws SystemException {
 
-		return doCountByS_G_U_S(groupId, userId, status, false);
+		return doCountByS_G_C_U_S(groupId, categoryIds, userId, status, false);
 	}
 
 	public int filterCountByG_C(long groupId, long categoryId)
@@ -123,10 +126,11 @@ public class MBThreadFinderImpl
 		return doCountByG_C_S(groupId, categoryId, status, true);
 	}
 
-	public int filterCountByS_G_U_S(long groupId, long userId, int status)
+	public int filterCountByS_G_C_U_S(
+			long groupId, long[] categoryIds, long userId, int status)
 		throws SystemException {
 
-		return doCountByS_G_U_S(groupId, userId, status, true);
+		return doCountByS_G_C_U_S(groupId, categoryIds, userId, status, true);
 	}
 
 	public List<MBThread> filterFindByG_C(
@@ -174,11 +178,13 @@ public class MBThreadFinderImpl
 		return doFindByG_C_S(groupId, categoryId, status, start, end, true);
 	}
 
-	public List<MBThread> filterFindByS_G_U_S(
-			long groupId, long userId, int status, int start, int end)
+	public List<MBThread> filterFindByS_G_C_U_S(
+			long groupId, long[] categoryIds, long userId, int status,
+			int start, int end)
 		throws SystemException {
 
-		return doFindByS_G_U_S(groupId, userId, status, start, end, true);
+		return doFindByS_G_C_U_S(
+			groupId, categoryIds, userId, status, start, end, true);
 	}
 
 	public List<MBThread> findByG_C_S(
@@ -188,11 +194,13 @@ public class MBThreadFinderImpl
 		return doFindByG_C_S(groupId, categoryId, status, start, end, false);
 	}
 
-	public List<MBThread> findByS_G_U_S(
-			long groupId, long userId, int status, int start, int end)
+	public List<MBThread> findByS_G_C_U_S(
+			long groupId, long[] categoryIds, long userId, int status,
+			int start, int end)
 		throws SystemException {
 
-		return doFindByS_G_U_S(groupId, userId, status, start, end, false);
+		return doFindByS_G_C_U_S(
+			groupId, categoryIds, userId, status, start, end, false);
 	}
 
 	protected int doCountByG_C_S(
@@ -250,8 +258,9 @@ public class MBThreadFinderImpl
 		}
 	}
 
-	protected int doCountByS_G_U_S(
-			long groupId, long userId, int status, boolean inlineSQLHelper)
+	protected int doCountByS_G_C_U_S(
+			long groupId, long[] categoryIds, long userId, int status,
+			boolean inlineSQLHelper)
 		throws SystemException {
 
 		Session session = null;
@@ -259,7 +268,23 @@ public class MBThreadFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_S_G_U_S);
+			String sql = CustomSQLUtil.get(COUNT_BY_S_G_C_U_S);
+
+			if ((categoryIds == null) ||
+				(categoryIds.length == 0)) {
+
+				sql = StringUtil.replace(
+					sql, "(MBThread.categoryId = ?) AND",
+					StringPool.BLANK);
+			}
+			else {
+				sql = StringUtil.replace(
+					sql, "MBThread.categoryId = ?",
+					"MBThread.categoryId = " +
+						StringUtil.merge(
+							categoryIds,
+							" OR MBThread.categoryId = "));
+			}
 
 			if (status != WorkflowConstants.STATUS_ANY) {
 				sql = CustomSQLUtil.appendCriteria(
@@ -280,12 +305,11 @@ public class MBThreadFinderImpl
 
 			qPos.add(PortalUtil.getClassNameId(MBThread.class.getName()));
 			qPos.add(groupId);
+			qPos.add(userId);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
 				qPos.add(status);
 			}
-
-			qPos.add(userId);
 
 			Iterator<Long> itr = q.list().iterator();
 
@@ -353,9 +377,9 @@ public class MBThreadFinderImpl
 		}
 	}
 
-	protected List<MBThread> doFindByS_G_U_S(
-			long groupId, long userId, int status, int start, int end,
-			boolean inlineSQLHelper)
+	protected List<MBThread> doFindByS_G_C_U_S(
+			long groupId, long[] categoryIds, long userId, int status,
+			int start, int end, boolean inlineSQLHelper)
 		throws SystemException {
 
 		Session session = null;
@@ -363,7 +387,23 @@ public class MBThreadFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_S_G_U_S);
+			String sql = CustomSQLUtil.get(FIND_BY_S_G_C_U_S);
+
+			if ((categoryIds == null) ||
+				(categoryIds.length == 0)) {
+
+				sql = StringUtil.replace(
+					sql, "(MBThread.categoryId = ?) AND",
+					StringPool.BLANK);
+			}
+			else {
+				sql = StringUtil.replace(
+					sql, "MBThread.categoryId = ?",
+					"MBThread.categoryId = " +
+						StringUtil.merge(
+							categoryIds,
+							" OR MBThread.categoryId = "));
+			}
 
 			if (status != WorkflowConstants.STATUS_ANY) {
 				sql = CustomSQLUtil.appendCriteria(
@@ -384,12 +424,11 @@ public class MBThreadFinderImpl
 
 			qPos.add(PortalUtil.getClassNameId(MBThread.class.getName()));
 			qPos.add(groupId);
+			qPos.add(userId);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
 				qPos.add(status);
 			}
-
-			qPos.add(userId);
 
 			return (List<MBThread>)QueryUtil.list(q, getDialect(), start, end);
 		}

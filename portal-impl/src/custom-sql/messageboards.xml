@@ -151,19 +151,22 @@
 				(MBThread.categoryId = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByS_G_U_S">
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByS_G_C_U_S">
 		<![CDATA[
 			SELECT
 				COUNT(DISTINCT MBThread.threadId) AS COUNT_VALUE
 			FROM
 				MBThread
 			INNER JOIN
+				MBMessage ON
+					(MBMessage.messageId = MBThread.rootMessageId)
+			INNER JOIN
 				Subscription ON
 					(Subscription.classNameId = ?) AND
 					(Subscription.classPK = MBThread.threadId)
 			WHERE
 				(MBThread.groupId = ?) AND
-				(MBThread.categoryId != -1) AND
+				(MBThread.categoryId = ?) AND
 				(Subscription.userId = ?)
 		]]>
 	</sql>
@@ -201,19 +204,22 @@
 				MBThread.lastPostDate DESC
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.findByS_G_U_S">
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.findByS_G_C_U_S">
 		<![CDATA[
 			SELECT
 				DISTINCT {MBThread.*}
 			FROM
 				MBThread
 			INNER JOIN
+				MBMessage ON
+					(MBMessage.messageId = MBThread.rootMessageId)
+			INNER JOIN
 				Subscription ON
 					(Subscription.classNameId = ?) AND
 					(Subscription.classPK = MBThread.threadId)
 			WHERE
 				(MBThread.groupId = ?) AND
-				(MBThread.categoryId != -1) AND
+				(MBThread.categoryId = ?) AND
 				(Subscription.userId = ?)
 			ORDER BY
 				MBThread.priority DESC,

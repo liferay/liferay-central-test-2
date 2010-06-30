@@ -65,6 +65,15 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 
 	public List<MBThread> getGroupThreads(
 			long groupId, long userId, int status, boolean subscribed,
+			int start, int end)
+		throws PortalException, SystemException {
+
+		return getGroupThreads(
+			groupId, userId, status, subscribed, true, start, end);
+	}
+
+	public List<MBThread> getGroupThreads(
+			long groupId, long userId, int status, boolean subscribed,
 			boolean includeAnonymous, int start, int end)
 		throws PortalException, SystemException {
 
@@ -87,8 +96,8 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 		}
 		else {
 			if (subscribed) {
-				return mbThreadFinder.findByS_G_U_S(
-					groupId, userId, status, start, end);
+				return mbThreadFinder.filterFindByS_G_C_U_S(
+					groupId, categoryIds, userId, status, start, end);
 			}
 			else {
 				List<Long> threadIds = null;
@@ -118,6 +127,13 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 	}
 
 	public int getGroupThreadsCount(
+			long groupId, long userId, int status, boolean subscribed)
+		throws PortalException, SystemException {
+
+		return getGroupThreadsCount(groupId, userId, status, subscribed, true);
+	}
+
+	public int getGroupThreadsCount(
 			long groupId, long userId, int status, boolean subscribed,
 			boolean includeAnonymous)
 		throws SystemException {
@@ -141,7 +157,8 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 		}
 		else {
 			if (subscribed) {
-				return mbThreadFinder.countByS_G_U_S(groupId, userId, status);
+				return mbThreadFinder.filterCountByS_G_C_U_S(
+					groupId, categoryIds, userId, status);
 			}
 			else {
 				if (includeAnonymous) {

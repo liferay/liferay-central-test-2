@@ -230,8 +230,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		}
 		else {
 			if (subscribed) {
-				return mbThreadFinder.findByS_G_U_S(
-					groupId, userId, status, start, end);
+				return mbThreadFinder.findByS_G_C_U_S(
+					groupId, null, userId, status, start, end);
 			}
 			else {
 				List<Long> threadIds = null;
@@ -304,7 +304,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		}
 		else {
 			if (subscribed) {
-				return mbThreadFinder.countByS_G_U_S(groupId, userId, status);
+				return mbThreadFinder.countByS_G_C_U_S(
+					groupId, null, userId, status);
 			}
 			else {
 				if (includeAnonymous) {
