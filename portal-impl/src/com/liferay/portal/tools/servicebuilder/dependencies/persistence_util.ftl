@@ -35,7 +35,7 @@ public class ${entity.name}Util {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(${entity.name})
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(${entity.name} ${entity.varName}) {
 		getPersistence().clearCache(${entity.varName});
