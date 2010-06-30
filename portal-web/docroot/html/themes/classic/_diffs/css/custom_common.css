@@ -85,11 +85,7 @@
 
 /* ---------- Hidden Accessible ---------- */
 
-#skip-to-content,
-#banner h2,
-#banner h3,
-#navigation h1,
-.site-breadcrumbs h1 {
+#skip-to-content, #banner h2, #banner h3, #navigation h1, .site-breadcrumbs h1 {
 	clip: rect(0 0 0 0);
 	position: absolute;
 }
