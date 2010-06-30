@@ -14,13 +14,24 @@
 
 package com.liferay.portal.kernel.portlet;
 
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.Portlet;
+import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portlet.PortletConfigFactoryUtil;
+
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
+
+import javax.servlet.ServletContext;
 
 /**
  * <a href="BaseConfigurationAction.java.html"><b><i>View Source</i></b></a>
@@ -48,6 +59,27 @@ public class BaseConfigurationAction
 			PortletConfig portletConfig, ResourceRequest resourceRequest,
 			ResourceResponse resourceResponse)
 		throws Exception {
+	}
+
+	protected PortletConfig getSelPortletConfig(PortletRequest portletRequest)
+		throws SystemException {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		String portletResource = ParamUtil.getString(
+			portletRequest, "portletResource");
+
+		Portlet selPortlet = PortletLocalServiceUtil.getPortletById(
+			themeDisplay.getCompanyId(), portletResource);
+
+		ServletContext servletContext =
+			(ServletContext)portletRequest.getAttribute(WebKeys.CTX);
+
+		PortletConfig selPortletConfig = PortletConfigFactoryUtil.create(
+			selPortlet, servletContext);
+
+		return selPortletConfig;
 	}
 
 }
