@@ -272,6 +272,19 @@ public interface IGImagePersistence extends BasePersistence<IGImage> {
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByG_F(
+		long groupId, long[] folderIds)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByG_F(
+		long groupId, long[] folderIds, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByG_F(
+		long groupId, long[] folderIds, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> filterFindByG_F(
 		long groupId, long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -282,6 +295,19 @@ public interface IGImagePersistence extends BasePersistence<IGImage> {
 
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> filterFindByG_F(
 		long groupId, long folderId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> filterFindByG_F(
+		long groupId, long[] folderIds)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> filterFindByG_F(
+		long groupId, long[] folderIds, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> filterFindByG_F(
+		long groupId, long[] folderIds, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -412,7 +438,13 @@ public interface IGImagePersistence extends BasePersistence<IGImage> {
 	public int countByG_F(long groupId, long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int countByG_F(long groupId, long[] folderIds)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int filterCountByG_F(long groupId, long folderId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByG_F(long groupId, long[] folderIds)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByG_F_N(long groupId, long folderId, java.lang.String name)

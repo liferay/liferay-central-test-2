@@ -17,18 +17,13 @@ package com.liferay.portlet.imagegallery.service.persistence;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
-import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.imagegallery.NoSuchImageException;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -40,61 +35,11 @@ import java.util.List;
 public class IGImageFinderImpl
 	extends BasePersistenceImpl<IGImage> implements IGImageFinder {
 
-	public static String COUNT_BY_G_F =
-		IGImageFinder.class.getName() + ".countByG_F";
-
 	public static String FIND_BY_ANY_IMAGE_ID =
 		IGImageFinder.class.getName() + ".findByAnyImageId";
 
 	public static String FIND_BY_NO_ASSETS =
 		IGImageFinder.class.getName() + ".findByNoAssets";
-
-	public int countByG_F(long groupId, List<Long> folderIds)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_BY_G_F);
-
-			sql = StringUtil.replace(
-				sql, "[$FOLDER_ID$]", getFolderIds(folderIds));
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			for (int i = 0; i < folderIds.size(); i++) {
-				Long folderId = folderIds.get(i);
-
-				qPos.add(folderId);
-			}
-
-			Iterator<Long> itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
 
 	public IGImage fetchByAnyImageId(long imageId) throws SystemException {
 		Session session = null;
@@ -166,24 +111,6 @@ public class IGImageFinderImpl
 		finally {
 			closeSession(session);
 		}
-	}
-
-	protected String getFolderIds(List<Long> folderIds) {
-		if (folderIds.isEmpty()) {
-			return StringPool.BLANK;
-		}
-
-		StringBundler sb = new StringBundler(folderIds.size() * 2 - 1);
-
-		for (int i = 0; i < folderIds.size(); i++) {
-			sb.append("folderId = ? ");
-
-			if ((i + 1) != folderIds.size()) {
-				sb.append("OR ");
-			}
-		}
-
-		return sb.toString();
 	}
 
 }

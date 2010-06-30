@@ -2339,6 +2339,112 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	public List<IGImage> findByG_F(long groupId, long[] folderIds)
+		throws SystemException {
+		return findByG_F(groupId, folderIds, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<IGImage> findByG_F(long groupId, long[] folderIds, int start,
+		int end) throws SystemException {
+		return findByG_F(groupId, folderIds, start, end, null);
+	}
+
+	public List<IGImage> findByG_F(long groupId, long[] folderIds, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				groupId, StringUtil.merge(folderIds),
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_F,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler();
+
+				query.append(_SQL_SELECT_IGIMAGE_WHERE);
+
+				boolean conjunctionable = false;
+
+				if (conjunctionable) {
+					query.append(WHERE_AND);
+				}
+
+				query.append(_FINDER_COLUMN_G_F_GROUPID_5);
+
+				conjunctionable = true;
+
+				if ((folderIds == null) || (folderIds.length > 0)) {
+					if (conjunctionable) {
+						query.append(WHERE_AND);
+					}
+
+					query.append(StringPool.OPEN_PARENTHESIS);
+
+					for (int i = 0; i < folderIds.length; i++) {
+						query.append(_FINDER_COLUMN_G_F_FOLDERID_5);
+
+						if ((i + 1) < folderIds.length) {
+							query.append(WHERE_OR);
+						}
+					}
+
+					query.append(StringPool.CLOSE_PARENTHESIS);
+
+					conjunctionable = true;
+				}
+
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
+				}
+
+				else {
+					query.append(IGImageModelImpl.ORDER_BY_JPQL);
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (folderIds != null) {
+					qPos.add(folderIds);
+				}
+
+				list = (List<IGImage>)QueryUtil.list(q, getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<IGImage>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_F, finderArgs,
+					list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
 	public List<IGImage> filterFindByG_F(long groupId, long folderId)
 		throws SystemException {
 		return filterFindByG_F(groupId, folderId, QueryUtil.ALL_POS,
@@ -2400,6 +2506,98 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			qPos.add(groupId);
 
 			qPos.add(folderId);
+
+			return (List<IGImage>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<IGImage> filterFindByG_F(long groupId, long[] folderIds)
+		throws SystemException {
+		return filterFindByG_F(groupId, folderIds, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<IGImage> filterFindByG_F(long groupId, long[] folderIds,
+		int start, int end) throws SystemException {
+		return filterFindByG_F(groupId, folderIds, start, end, null);
+	}
+
+	public List<IGImage> filterFindByG_F(long groupId, long[] folderIds,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByG_F(groupId, folderIds, start, end, orderByComparator);
+		}
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler();
+
+			query.append(_FILTER_SQL_SELECT_IGIMAGE_WHERE);
+
+			boolean conjunctionable = false;
+
+			if (conjunctionable) {
+				query.append(WHERE_AND);
+			}
+
+			query.append(_FINDER_COLUMN_G_F_GROUPID_5);
+
+			conjunctionable = true;
+
+			if ((folderIds == null) || (folderIds.length > 0)) {
+				if (conjunctionable) {
+					query.append(WHERE_AND);
+				}
+
+				query.append(StringPool.OPEN_PARENTHESIS);
+
+				for (int i = 0; i < folderIds.length; i++) {
+					query.append(_FINDER_COLUMN_G_F_FOLDERID_5);
+
+					if ((i + 1) < folderIds.length) {
+						query.append(WHERE_OR);
+					}
+				}
+
+				query.append(StringPool.CLOSE_PARENTHESIS);
+
+				conjunctionable = true;
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(IGImageModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					IGImage.class.getName(), _FILTER_COLUMN_PK,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_FILTER_ENTITY_ALIAS, IGImageImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			if (folderIds != null) {
+				qPos.add(folderIds);
+			}
 
 			return (List<IGImage>)QueryUtil.list(q, getDialect(), start, end);
 		}
@@ -3506,6 +3704,85 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return count.intValue();
 	}
 
+	public int countByG_F(long groupId, long[] folderIds)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { groupId, StringUtil.merge(folderIds) };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_F,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler();
+
+				query.append(_SQL_COUNT_IGIMAGE_WHERE);
+
+				boolean conjunctionable = false;
+
+				if (conjunctionable) {
+					query.append(WHERE_AND);
+				}
+
+				query.append(_FINDER_COLUMN_G_F_GROUPID_5);
+
+				conjunctionable = true;
+
+				if ((folderIds == null) || (folderIds.length > 0)) {
+					if (conjunctionable) {
+						query.append(WHERE_AND);
+					}
+
+					query.append(StringPool.OPEN_PARENTHESIS);
+
+					for (int i = 0; i < folderIds.length; i++) {
+						query.append(_FINDER_COLUMN_G_F_FOLDERID_5);
+
+						if ((i + 1) < folderIds.length) {
+							query.append(WHERE_OR);
+						}
+					}
+
+					query.append(StringPool.CLOSE_PARENTHESIS);
+
+					conjunctionable = true;
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (folderIds != null) {
+					qPos.add(folderIds);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_F, finderArgs,
+					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
 	public int filterCountByG_F(long groupId, long folderId)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -3539,6 +3816,80 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			qPos.add(groupId);
 
 			qPos.add(folderId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int filterCountByG_F(long groupId, long[] folderIds)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return countByG_F(groupId, folderIds);
+		}
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler();
+
+			query.append(_FILTER_SQL_COUNT_IGIMAGE_WHERE);
+
+			boolean conjunctionable = false;
+
+			if (conjunctionable) {
+				query.append(WHERE_AND);
+			}
+
+			query.append(_FINDER_COLUMN_G_F_GROUPID_5);
+
+			conjunctionable = true;
+
+			if ((folderIds == null) || (folderIds.length > 0)) {
+				if (conjunctionable) {
+					query.append(WHERE_AND);
+				}
+
+				query.append(StringPool.OPEN_PARENTHESIS);
+
+				for (int i = 0; i < folderIds.length; i++) {
+					query.append(_FINDER_COLUMN_G_F_FOLDERID_5);
+
+					if ((i + 1) < folderIds.length) {
+						query.append(WHERE_OR);
+					}
+				}
+
+				query.append(StringPool.CLOSE_PARENTHESIS);
+
+				conjunctionable = true;
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					IGImage.class.getName(), _FILTER_COLUMN_PK,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			if (folderIds != null) {
+				qPos.add(folderIds);
+			}
 
 			Long count = (Long)q.uniqueResult();
 
@@ -3776,12 +4127,27 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	private static final String _FINDER_COLUMN_G_U_GROUPID_2 = "igImage.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_U_USERID_2 = "igImage.userId = ?";
 	private static final String _FINDER_COLUMN_G_F_GROUPID_2 = "igImage.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_GROUPID_5 = "(" +
+		_removeConjunction(_FINDER_COLUMN_G_F_GROUPID_2) + ")";
 	private static final String _FINDER_COLUMN_G_F_FOLDERID_2 = "igImage.folderId = ?";
+	private static final String _FINDER_COLUMN_G_F_FOLDERID_5 = "(" +
+		_removeConjunction(_FINDER_COLUMN_G_F_FOLDERID_2) + ")";
 	private static final String _FINDER_COLUMN_G_F_N_GROUPID_2 = "igImage.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_F_N_FOLDERID_2 = "igImage.folderId = ? AND ";
 	private static final String _FINDER_COLUMN_G_F_N_NAME_1 = "igImage.name IS NULL";
 	private static final String _FINDER_COLUMN_G_F_N_NAME_2 = "igImage.name = ?";
 	private static final String _FINDER_COLUMN_G_F_N_NAME_3 = "(igImage.name IS NULL OR igImage.name = ?)";
+
+	private static String _removeConjunction(String sql) {
+		int pos = sql.indexOf(" AND ");
+
+		if (pos != -1) {
+			sql = sql.substring(0, pos);
+		}
+
+		return sql;
+	}
+
 	private static final String _FILTER_SQL_SELECT_IGIMAGE_WHERE = "SELECT DISTINCT {igImage.*} FROM IGImage igImage WHERE ";
 	private static final String _FILTER_SQL_COUNT_IGIMAGE_WHERE = "SELECT COUNT(DISTINCT igImage.imageId) AS COUNT_VALUE FROM IGImage igImage WHERE ";
 	private static final String _FILTER_COLUMN_PK = "igImage.imageId";

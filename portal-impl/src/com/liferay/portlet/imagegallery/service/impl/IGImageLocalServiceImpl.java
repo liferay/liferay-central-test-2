@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.image.ImageProcessor;
 import com.liferay.portal.kernel.image.ImageProcessorUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
@@ -312,7 +313,9 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	public int getFoldersImagesCount(long groupId, List<Long> folderIds)
 		throws SystemException {
 
-		return igImageFinder.countByG_F(groupId, folderIds);
+		return igImagePersistence.countByG_F(
+			groupId,
+			ArrayUtil.toArray(folderIds.toArray(new Long[folderIds.size()])));
 	}
 
 	public List<IGImage> getGroupImages(long groupId, int start, int end)

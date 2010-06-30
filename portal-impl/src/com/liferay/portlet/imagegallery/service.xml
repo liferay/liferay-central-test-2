@@ -114,7 +114,7 @@
 		</finder>
 		<finder name="G_F" return-type="Collection">
 			<finder-column name="groupId" />
-			<finder-column name="folderId" />
+			<finder-column name="folderId" arrayable-operator="OR" />
 		</finder>
 		<finder name="G_F_N" return-type="Collection">
 			<finder-column name="groupId" />

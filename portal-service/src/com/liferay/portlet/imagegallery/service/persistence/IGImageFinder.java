@@ -20,9 +20,6 @@ package com.liferay.portlet.imagegallery.service.persistence;
  * @author Brian Wing Shun Chan
  */
 public interface IGImageFinder {
-	public int countByG_F(long groupId, java.util.List<java.lang.Long> folderIds)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	public com.liferay.portlet.imagegallery.model.IGImage fetchByAnyImageId(
 		long imageId)
 		throws com.liferay.portal.kernel.exception.SystemException;
