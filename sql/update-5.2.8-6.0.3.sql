@@ -398,6 +398,10 @@ update MBMessage set rootMessageId = (select rootMessageId from MBThread where M
 
 alter table PasswordPolicy add minSymbols INTEGER;
 
+alter table SocialEquityUser add contributionB DOUBLE;
+alter table SocialEquityUser add contributionK DOUBLE;
+alter table SocialEquityUser add rank INTEGER;
+
 alter table User_ add facebookId LONG;
 
 alter table WikiPageResource add uuid_ VARCHAR(75) null;
