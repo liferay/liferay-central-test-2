@@ -76,7 +76,6 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 					target="_blank"
 					url="<%= viewURL %>"
 				/>
-
 			</aui:field-wrapper>
 		</c:if>
 	</aui:fieldset>
