@@ -76,7 +76,9 @@ else {
 			<portlet:param name="workflowInstanceId" value="<%= StringUtil.valueOf(workflowInstance.getWorkflowInstanceId()) %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon-delete
+		<liferay-ui:icon
+			image="undo"
+			message="withdraw-request"
 			url="<%= deleteURL %>"
 		/>
 	</c:if>
