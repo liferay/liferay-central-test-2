@@ -22,7 +22,7 @@
 							) OR
 							(
 								(ResourcePermission.scope = 4) AND
-								(ResourcePermission.primKey = [$CLASS_PK_FIELD$])
+								(ResourcePermission.primKey = '[$CLASS_PK_FIELD$]')
 							)
 						)
 					)
