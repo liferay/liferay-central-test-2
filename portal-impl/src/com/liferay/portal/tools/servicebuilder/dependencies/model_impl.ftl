@@ -157,25 +157,25 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 	);
 
 	<#if entity.hasRemoteService()>
-	public static ${entity.name} toModel(${entity.name}Soap soapModel) {
-		${entity.name} model = new ${entity.name}Impl();
+		public static ${entity.name} toModel(${entity.name}Soap soapModel) {
+			${entity.name} model = new ${entity.name}Impl();
 
-		<#list entity.regularColList as column>
-			model.set${column.methodName}(soapModel.get${column.methodName}());
-		</#list>
+			<#list entity.regularColList as column>
+				model.set${column.methodName}(soapModel.get${column.methodName}());
+			</#list>
 
-		return model;
-	}
-
-	public static List<${entity.name}> toModels(${entity.name}Soap[] soapModels) {
-		List<${entity.name}> models = new ArrayList<${entity.name}>(soapModels.length);
-
-		for (${entity.name}Soap soapModel : soapModels) {
-			models.add(toModel(soapModel));
+			return model;
 		}
 
-		return models;
-	}
+		public static List<${entity.name}> toModels(${entity.name}Soap[] soapModels) {
+			List<${entity.name}> models = new ArrayList<${entity.name}>(soapModels.length);
+
+			for (${entity.name}Soap soapModel : soapModels) {
+				models.add(toModel(soapModel));
+			}
+
+			return models;
+		}
 	</#if>
 
 	<#list entity.columnList as column>
