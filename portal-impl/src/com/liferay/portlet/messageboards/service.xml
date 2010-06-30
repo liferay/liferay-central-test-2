@@ -192,7 +192,7 @@
 		<column name="classPK" type="long" />
 		<column name="categoryId" type="long" />
 		<column name="threadId" type="long" />
-		<column name="rootMessageId" type="long" />
+		<column name="rootMessageId" type="long" filter-primary="true" />
 		<column name="parentMessageId" type="long" />
 		<column name="subject" type="String" />
 		<column name="body" type="String" />

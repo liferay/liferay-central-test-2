@@ -1250,7 +1250,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 							}
 						</#if>
 
-						String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_${entity.PKVarName?upper_case}, _FILTER_COLUMN_USERID, groupId);
+						String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID, groupId);
 
 						SQLQuery q = session.createSQLQuery(sql);
 
@@ -1369,7 +1369,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 								}
 							</#if>
 
-							String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_${entity.PKVarName?upper_case}, _FILTER_COLUMN_USERID, groupId);
+							String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID, groupId);
 
 							SQLQuery q = session.createSQLQuery(sql);
 
@@ -1869,7 +1869,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					<#include "persistence_impl_finder_cols.ftl">
 
-					String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_${entity.PKVarName?upper_case}, _FILTER_COLUMN_USERID, groupId);
+					String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID, groupId);
 
 					SQLQuery q = session.createSQLQuery(sql);
 
@@ -1936,7 +1936,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 						<#include "persistence_impl_finder_arrayable_cols.ftl">
 
-						String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_${entity.PKVarName?upper_case}, _FILTER_COLUMN_USERID, groupId);
+						String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID, groupId);
 
 						SQLQuery q = session.createSQLQuery(sql);
 
@@ -2955,7 +2955,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 		private static final String _FILTER_SQL_COUNT_${entity.alias?upper_case}_WHERE = "SELECT COUNT(DISTINCT ${entity.alias}.${entity.PKVarName}) AS COUNT_VALUE FROM ${entity.name} ${entity.alias} WHERE ";
 
-		private static final String _FILTER_COLUMN_${entity.PKVarName?upper_case} = "${entity.alias}.${entity.PKVarName}";
+		private static final String _FILTER_COLUMN_PK = "${entity.alias}.${entity.filterPKColumn.name}";
 
 		private static final String _FILTER_COLUMN_USERID = "${entity.alias}.userId";
 

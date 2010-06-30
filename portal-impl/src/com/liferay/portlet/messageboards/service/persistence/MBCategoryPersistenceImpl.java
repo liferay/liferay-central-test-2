@@ -1136,7 +1136,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBCategory.class.getName(), _FILTER_COLUMN_CATEGORYID,
+					MBCategory.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -1861,7 +1861,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBCategory.class.getName(), _FILTER_COLUMN_CATEGORYID,
+					MBCategory.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -1952,7 +1952,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBCategory.class.getName(), _FILTER_COLUMN_CATEGORYID,
+					MBCategory.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -2274,7 +2274,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBCategory.class.getName(), _FILTER_COLUMN_CATEGORYID,
+					MBCategory.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -2497,7 +2497,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_2);
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBCategory.class.getName(), _FILTER_COLUMN_CATEGORYID,
+					MBCategory.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -2569,7 +2569,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBCategory.class.getName(), _FILTER_COLUMN_CATEGORYID,
+					MBCategory.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -2713,7 +2713,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 	private static final String _FILTER_SQL_SELECT_MBCATEGORY_WHERE = "SELECT DISTINCT {mbCategory.*} FROM MBCategory mbCategory WHERE ";
 	private static final String _FILTER_SQL_COUNT_MBCATEGORY_WHERE = "SELECT COUNT(DISTINCT mbCategory.categoryId) AS COUNT_VALUE FROM MBCategory mbCategory WHERE ";
-	private static final String _FILTER_COLUMN_CATEGORYID = "mbCategory.categoryId";
+	private static final String _FILTER_COLUMN_PK = "mbCategory.categoryId";
 	private static final String _FILTER_COLUMN_USERID = "mbCategory.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "mbCategory";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "mbCategory.";

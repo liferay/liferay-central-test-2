@@ -149,9 +149,7 @@ public class Entity {
 	}
 
 	public EntityColumn getColumnByMappingTable(String mappingTable) {
-		for (int i = 0; i < _columnList.size(); i++) {
-			EntityColumn col = _columnList.get(i);
-
+		for (EntityColumn col : _columnList) {
 			if ((col.getMappingTable() != null) &&
 				col.getMappingTable().equals(mappingTable)) {
 
@@ -168,6 +166,16 @@ public class Entity {
 
 	public String getDataSource() {
 		return _dataSource;
+	}
+
+	public EntityColumn getFilterPKColumn() {
+		for (EntityColumn col : _columnList) {
+			if (col.isFilterPrimary()) {
+				return col;
+			}
+		}
+
+		return _getPKColumn();
 	}
 
 	public String getFinderClass() {

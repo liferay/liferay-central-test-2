@@ -1364,7 +1364,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					MBMessage.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -2769,7 +2769,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					MBMessage.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -3120,7 +3120,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					MBMessage.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -3470,7 +3470,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					MBMessage.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -5235,7 +5235,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					MBMessage.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -5606,7 +5606,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					MBMessage.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -5977,7 +5977,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					MBMessage.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -6664,7 +6664,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					MBMessage.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -7090,7 +7090,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					MBMessage.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -7368,7 +7368,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					MBMessage.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -7465,7 +7465,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					MBMessage.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -7561,7 +7561,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			query.append(_FINDER_COLUMN_G_S_STATUS_2);
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					MBMessage.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -7916,7 +7916,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			query.append(_FINDER_COLUMN_G_U_S_STATUS_2);
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					MBMessage.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -8021,7 +8021,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			query.append(_FINDER_COLUMN_G_C_T_THREADID_2);
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					MBMessage.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -8126,7 +8126,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			query.append(_FINDER_COLUMN_G_C_S_STATUS_2);
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					MBMessage.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -8292,7 +8292,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			query.append(_FINDER_COLUMN_G_C_T_S_STATUS_2);
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					MBMessage.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -8474,7 +8474,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	private static final String _FINDER_COLUMN_G_C_T_S_STATUS_2 = "mbMessage.status = ?";
 	private static final String _FILTER_SQL_SELECT_MBMESSAGE_WHERE = "SELECT DISTINCT {mbMessage.*} FROM MBMessage mbMessage WHERE ";
 	private static final String _FILTER_SQL_COUNT_MBMESSAGE_WHERE = "SELECT COUNT(DISTINCT mbMessage.messageId) AS COUNT_VALUE FROM MBMessage mbMessage WHERE ";
-	private static final String _FILTER_COLUMN_MESSAGEID = "mbMessage.messageId";
+	private static final String _FILTER_COLUMN_PK = "mbMessage.rootMessageId";
 	private static final String _FILTER_COLUMN_USERID = "mbMessage.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "mbMessage";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "mbMessage.";

@@ -683,7 +683,9 @@ public class ServiceBuilder {
 
 					String columnType = column.attributeValue("type");
 					boolean primary = GetterUtil.getBoolean(
-						column.attributeValue("primary"), false);
+						column.attributeValue("primary"));
+					boolean filterPrimary = GetterUtil.getBoolean(
+						column.attributeValue("filter-primary"));
 					String collectionEntity = column.attributeValue("entity");
 					String mappingKey = column.attributeValue("mapping-key");
 
@@ -711,8 +713,8 @@ public class ServiceBuilder {
 
 					EntityColumn col = new EntityColumn(
 						columnName, columnDBName, columnType, primary,
-						collectionEntity, mappingKey, mappingTable, idType,
-						idParam, convertNull, localized);
+						filterPrimary, collectionEntity, mappingKey,
+						mappingTable, idType, idParam, convertNull, localized);
 
 					if (primary) {
 						pkList.add(col);
