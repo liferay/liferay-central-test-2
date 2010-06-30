@@ -17,7 +17,7 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
-import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
@@ -237,7 +237,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	public void clearCache() {
-		CacheRegistry.clear(GroupImpl.class.getName());
+		CacheRegistryUtil.clear(GroupImpl.class.getName());
 		EntityCacheUtil.clearCache(GroupImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

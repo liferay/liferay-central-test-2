@@ -16,7 +16,7 @@ package com.liferay.portlet.expando.service.persistence;
 
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
-import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -230,7 +230,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public void clearCache() {
-		CacheRegistry.clear(ExpandoValueImpl.class.getName());
+		CacheRegistryUtil.clear(ExpandoValueImpl.class.getName());
 		EntityCacheUtil.clearCache(ExpandoValueImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

@@ -17,7 +17,7 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchOrganizationException;
 import com.liferay.portal.kernel.annotation.BeanReference;
-import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
@@ -152,7 +152,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	}
 
 	public void clearCache() {
-		CacheRegistry.clear(OrganizationImpl.class.getName());
+		CacheRegistryUtil.clear(OrganizationImpl.class.getName());
 		EntityCacheUtil.clearCache(OrganizationImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
@@ -2390,7 +2390,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		if (force || (countOrphanTreeNodes(companyId) > 0)) {
 			rebuildTree(companyId, 0, 1);
 
-			CacheRegistry.clear(OrganizationImpl.class.getName());
+			CacheRegistryUtil.clear(OrganizationImpl.class.getName());
 			EntityCacheUtil.clearCache(OrganizationImpl.class.getName());
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
@@ -2443,7 +2443,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			expandTreeRightOrganizationId.expand(companyId,
 				lastRightOrganizationId);
 
-			CacheRegistry.clear(OrganizationImpl.class.getName());
+			CacheRegistryUtil.clear(OrganizationImpl.class.getName());
 			EntityCacheUtil.clearCache(OrganizationImpl.class.getName());
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
@@ -2551,7 +2551,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		shrinkTreeRightOrganizationId.shrink(companyId, rightOrganizationId,
 			delta);
 
-		CacheRegistry.clear(OrganizationImpl.class.getName());
+		CacheRegistryUtil.clear(OrganizationImpl.class.getName());
 		EntityCacheUtil.clearCache(OrganizationImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

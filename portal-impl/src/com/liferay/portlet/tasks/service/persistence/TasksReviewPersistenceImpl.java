@@ -16,7 +16,7 @@ package com.liferay.portlet.tasks.service.persistence;
 
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
-import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -177,7 +177,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	}
 
 	public void clearCache() {
-		CacheRegistry.clear(TasksReviewImpl.class.getName());
+		CacheRegistryUtil.clear(TasksReviewImpl.class.getName());
 		EntityCacheUtil.clearCache(TasksReviewImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

@@ -17,7 +17,7 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchPermissionException;
 import com.liferay.portal.kernel.annotation.BeanReference;
-import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
@@ -121,7 +121,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	public void clearCache() {
-		CacheRegistry.clear(PermissionImpl.class.getName());
+		CacheRegistryUtil.clear(PermissionImpl.class.getName());
 		EntityCacheUtil.clearCache(PermissionImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

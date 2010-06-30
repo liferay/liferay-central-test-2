@@ -16,7 +16,7 @@ package com.liferay.portlet.wiki.service.persistence;
 
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
-import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -123,7 +123,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 	}
 
 	public void clearCache() {
-		CacheRegistry.clear(WikiPageResourceImpl.class.getName());
+		CacheRegistryUtil.clear(WikiPageResourceImpl.class.getName());
 		EntityCacheUtil.clearCache(WikiPageResourceImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

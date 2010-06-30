@@ -21,7 +21,7 @@ import com.liferay.counter.model.impl.CounterModelImpl;
 
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
-import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -89,7 +89,7 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 	}
 
 	public void clearCache() {
-		CacheRegistry.clear(CounterImpl.class.getName());
+		CacheRegistryUtil.clear(CounterImpl.class.getName());
 		EntityCacheUtil.clearCache(CounterImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

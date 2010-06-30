@@ -16,7 +16,7 @@ package com.liferay.portlet.polls.service.persistence;
 
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
-import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -132,7 +132,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 	}
 
 	public void clearCache() {
-		CacheRegistry.clear(PollsChoiceImpl.class.getName());
+		CacheRegistryUtil.clear(PollsChoiceImpl.class.getName());
 		EntityCacheUtil.clearCache(PollsChoiceImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

@@ -17,7 +17,7 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchLayoutSetPrototypeException;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
-import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -115,7 +115,7 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	}
 
 	public void clearCache() {
-		CacheRegistry.clear(LayoutSetPrototypeImpl.class.getName());
+		CacheRegistryUtil.clear(LayoutSetPrototypeImpl.class.getName());
 		EntityCacheUtil.clearCache(LayoutSetPrototypeImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

@@ -16,7 +16,7 @@ package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
-import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -148,7 +148,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 	}
 
 	public void clearCache() {
-		CacheRegistry.clear(JournalFeedImpl.class.getName());
+		CacheRegistryUtil.clear(JournalFeedImpl.class.getName());
 		EntityCacheUtil.clearCache(JournalFeedImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

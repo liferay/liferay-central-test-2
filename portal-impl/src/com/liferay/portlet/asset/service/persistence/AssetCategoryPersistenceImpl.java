@@ -16,7 +16,7 @@ package com.liferay.portlet.asset.service.persistence;
 
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
-import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
@@ -229,7 +229,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	}
 
 	public void clearCache() {
-		CacheRegistry.clear(AssetCategoryImpl.class.getName());
+		CacheRegistryUtil.clear(AssetCategoryImpl.class.getName());
 		EntityCacheUtil.clearCache(AssetCategoryImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
@@ -3928,7 +3928,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		if (force || (countOrphanTreeNodes(groupId) > 0)) {
 			rebuildTree(groupId, 0, 1);
 
-			CacheRegistry.clear(AssetCategoryImpl.class.getName());
+			CacheRegistryUtil.clear(AssetCategoryImpl.class.getName());
 			EntityCacheUtil.clearCache(AssetCategoryImpl.class.getName());
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
@@ -3978,7 +3978,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			expandTreeLeftCategoryId.expand(groupId, lastRightCategoryId);
 			expandTreeRightCategoryId.expand(groupId, lastRightCategoryId);
 
-			CacheRegistry.clear(AssetCategoryImpl.class.getName());
+			CacheRegistryUtil.clear(AssetCategoryImpl.class.getName());
 			EntityCacheUtil.clearCache(AssetCategoryImpl.class.getName());
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
@@ -4082,7 +4082,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		shrinkTreeLeftCategoryId.shrink(groupId, rightCategoryId, delta);
 		shrinkTreeRightCategoryId.shrink(groupId, rightCategoryId, delta);
 
-		CacheRegistry.clear(AssetCategoryImpl.class.getName());
+		CacheRegistryUtil.clear(AssetCategoryImpl.class.getName());
 		EntityCacheUtil.clearCache(AssetCategoryImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

@@ -16,7 +16,7 @@ package com.liferay.portlet.imagegallery.service.persistence;
 
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
-import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -182,7 +182,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	public void clearCache() {
-		CacheRegistry.clear(IGFolderImpl.class.getName());
+		CacheRegistryUtil.clear(IGFolderImpl.class.getName());
 		EntityCacheUtil.clearCache(IGFolderImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

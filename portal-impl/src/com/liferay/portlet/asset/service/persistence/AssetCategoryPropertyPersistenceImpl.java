@@ -16,7 +16,7 @@ package com.liferay.portlet.asset.service.persistence;
 
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
-import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -148,7 +148,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	}
 
 	public void clearCache() {
-		CacheRegistry.clear(AssetCategoryPropertyImpl.class.getName());
+		CacheRegistryUtil.clear(AssetCategoryPropertyImpl.class.getName());
 		EntityCacheUtil.clearCache(AssetCategoryPropertyImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

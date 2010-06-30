@@ -17,7 +17,7 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchTicketException;
 import com.liferay.portal.kernel.annotation.BeanReference;
-import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -97,7 +97,7 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	}
 
 	public void clearCache() {
-		CacheRegistry.clear(TicketImpl.class.getName());
+		CacheRegistryUtil.clear(TicketImpl.class.getName());
 		EntityCacheUtil.clearCache(TicketImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

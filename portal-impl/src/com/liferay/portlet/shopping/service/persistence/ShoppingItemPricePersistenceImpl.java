@@ -16,7 +16,7 @@ package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
-import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -106,7 +106,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 	}
 
 	public void clearCache() {
-		CacheRegistry.clear(ShoppingItemPriceImpl.class.getName());
+		CacheRegistryUtil.clear(ShoppingItemPriceImpl.class.getName());
 		EntityCacheUtil.clearCache(ShoppingItemPriceImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
