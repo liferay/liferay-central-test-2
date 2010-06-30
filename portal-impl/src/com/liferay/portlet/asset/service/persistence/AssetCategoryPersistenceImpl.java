@@ -1275,7 +1275,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					AssetCategory.class.getName(), _FILTER_COLUMN_CATEGORYID,
+					AssetCategory.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -3183,7 +3183,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					AssetCategory.class.getName(), _FILTER_COLUMN_CATEGORYID,
+					AssetCategory.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -4445,7 +4445,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	private static final String _FINDER_COLUMN_P_N_V_VOCABULARYID_2 = "assetCategory.vocabularyId = ?";
 	private static final String _FILTER_SQL_SELECT_ASSETCATEGORY_WHERE = "SELECT DISTINCT {assetCategory.*} FROM AssetCategory assetCategory WHERE ";
 	private static final String _FILTER_SQL_COUNT_ASSETCATEGORY_WHERE = "SELECT COUNT(DISTINCT assetCategory.categoryId) AS COUNT_VALUE FROM AssetCategory assetCategory WHERE ";
-	private static final String _FILTER_COLUMN_CATEGORYID = "assetCategory.categoryId";
+	private static final String _FILTER_COLUMN_PK = "assetCategory.categoryId";
 	private static final String _FILTER_COLUMN_USERID = "assetCategory.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "assetCategory";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "assetCategory.";

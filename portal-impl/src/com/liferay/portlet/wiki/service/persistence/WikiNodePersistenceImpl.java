@@ -1156,7 +1156,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					WikiNode.class.getName(), _FILTER_COLUMN_NODEID,
+					WikiNode.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -1865,7 +1865,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					WikiNode.class.getName(), _FILTER_COLUMN_NODEID,
+					WikiNode.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -2027,7 +2027,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					WikiNode.class.getName(), _FILTER_COLUMN_NODEID,
+					WikiNode.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -2144,7 +2144,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	private static final String _FINDER_COLUMN_G_N_NAME_3 = "(wikiNode.name IS NULL OR wikiNode.name = ?)";
 	private static final String _FILTER_SQL_SELECT_WIKINODE_WHERE = "SELECT DISTINCT {wikiNode.*} FROM WikiNode wikiNode WHERE ";
 	private static final String _FILTER_SQL_COUNT_WIKINODE_WHERE = "SELECT COUNT(DISTINCT wikiNode.nodeId) AS COUNT_VALUE FROM WikiNode wikiNode WHERE ";
-	private static final String _FILTER_COLUMN_NODEID = "wikiNode.nodeId";
+	private static final String _FILTER_COLUMN_PK = "wikiNode.nodeId";
 	private static final String _FILTER_COLUMN_USERID = "wikiNode.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "wikiNode";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "wikiNode.";

@@ -636,8 +636,8 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					ShoppingCategory.class.getName(),
-					_FILTER_COLUMN_CATEGORYID, _FILTER_COLUMN_USERID, groupId);
+					ShoppingCategory.class.getName(), _FILTER_COLUMN_PK,
+					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -988,8 +988,8 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					ShoppingCategory.class.getName(),
-					_FILTER_COLUMN_CATEGORYID, _FILTER_COLUMN_USERID, groupId);
+					ShoppingCategory.class.getName(), _FILTER_COLUMN_PK,
+					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -1170,8 +1170,8 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					ShoppingCategory.class.getName(),
-					_FILTER_COLUMN_CATEGORYID, _FILTER_COLUMN_USERID, groupId);
+					ShoppingCategory.class.getName(), _FILTER_COLUMN_PK,
+					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -1265,8 +1265,8 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 			query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_2);
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					ShoppingCategory.class.getName(),
-					_FILTER_COLUMN_CATEGORYID, _FILTER_COLUMN_USERID, groupId);
+					ShoppingCategory.class.getName(), _FILTER_COLUMN_PK,
+					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -1376,7 +1376,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 	private static final String _FINDER_COLUMN_G_P_PARENTCATEGORYID_2 = "shoppingCategory.parentCategoryId = ?";
 	private static final String _FILTER_SQL_SELECT_SHOPPINGCATEGORY_WHERE = "SELECT DISTINCT {shoppingCategory.*} FROM ShoppingCategory shoppingCategory WHERE ";
 	private static final String _FILTER_SQL_COUNT_SHOPPINGCATEGORY_WHERE = "SELECT COUNT(DISTINCT shoppingCategory.categoryId) AS COUNT_VALUE FROM ShoppingCategory shoppingCategory WHERE ";
-	private static final String _FILTER_COLUMN_CATEGORYID = "shoppingCategory.categoryId";
+	private static final String _FILTER_COLUMN_PK = "shoppingCategory.categoryId";
 	private static final String _FILTER_COLUMN_USERID = "shoppingCategory.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "shoppingCategory";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "shoppingCategory.";

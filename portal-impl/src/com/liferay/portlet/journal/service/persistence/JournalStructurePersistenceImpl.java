@@ -1201,7 +1201,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					JournalStructure.class.getName(), _FILTER_COLUMN_ID,
+					JournalStructure.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -2007,7 +2007,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					JournalStructure.class.getName(), _FILTER_COLUMN_ID,
+					JournalStructure.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -2339,7 +2339,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					JournalStructure.class.getName(), _FILTER_COLUMN_ID,
+					JournalStructure.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -2514,7 +2514,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					JournalStructure.class.getName(), _FILTER_COLUMN_ID,
+					JournalStructure.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -2635,7 +2635,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					JournalStructure.class.getName(), _FILTER_COLUMN_ID,
+					JournalStructure.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -2766,7 +2766,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	private static final String _FINDER_COLUMN_G_P_PARENTSTRUCTUREID_3 = "(journalStructure.parentStructureId IS NULL OR journalStructure.parentStructureId = ?)";
 	private static final String _FILTER_SQL_SELECT_JOURNALSTRUCTURE_WHERE = "SELECT DISTINCT {journalStructure.*} FROM JournalStructure journalStructure WHERE ";
 	private static final String _FILTER_SQL_COUNT_JOURNALSTRUCTURE_WHERE = "SELECT COUNT(DISTINCT journalStructure.id) AS COUNT_VALUE FROM JournalStructure journalStructure WHERE ";
-	private static final String _FILTER_COLUMN_ID = "journalStructure.id";
+	private static final String _FILTER_COLUMN_PK = "journalStructure.id";
 	private static final String _FILTER_COLUMN_USERID = "journalStructure.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "journalStructure";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "journalStructure.";

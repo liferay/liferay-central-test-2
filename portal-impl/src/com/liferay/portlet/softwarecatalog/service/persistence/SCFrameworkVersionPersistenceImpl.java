@@ -671,9 +671,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					SCFrameworkVersion.class.getName(),
-					_FILTER_COLUMN_FRAMEWORKVERSIONID, _FILTER_COLUMN_USERID,
-					groupId);
+					SCFrameworkVersion.class.getName(), _FILTER_COLUMN_PK,
+					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -1289,9 +1288,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					SCFrameworkVersion.class.getName(),
-					_FILTER_COLUMN_FRAMEWORKVERSIONID, _FILTER_COLUMN_USERID,
-					groupId);
+					SCFrameworkVersion.class.getName(), _FILTER_COLUMN_PK,
+					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -1477,9 +1475,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					SCFrameworkVersion.class.getName(),
-					_FILTER_COLUMN_FRAMEWORKVERSIONID, _FILTER_COLUMN_USERID,
-					groupId);
+					SCFrameworkVersion.class.getName(), _FILTER_COLUMN_PK,
+					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -1619,9 +1616,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			query.append(_FINDER_COLUMN_G_A_ACTIVE_2);
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					SCFrameworkVersion.class.getName(),
-					_FILTER_COLUMN_FRAMEWORKVERSIONID, _FILTER_COLUMN_USERID,
-					groupId);
+					SCFrameworkVersion.class.getName(), _FILTER_COLUMN_PK,
+					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -2274,7 +2270,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	private static final String _FINDER_COLUMN_G_A_ACTIVE_2 = "scFrameworkVersion.active = ?";
 	private static final String _FILTER_SQL_SELECT_SCFRAMEWORKVERSION_WHERE = "SELECT DISTINCT {scFrameworkVersion.*} FROM SCFrameworkVersion scFrameworkVersion WHERE ";
 	private static final String _FILTER_SQL_COUNT_SCFRAMEWORKVERSION_WHERE = "SELECT COUNT(DISTINCT scFrameworkVersion.frameworkVersionId) AS COUNT_VALUE FROM SCFrameworkVersion scFrameworkVersion WHERE ";
-	private static final String _FILTER_COLUMN_FRAMEWORKVERSIONID = "scFrameworkVersion.frameworkVersionId";
+	private static final String _FILTER_COLUMN_PK = "scFrameworkVersion.frameworkVersionId";
 	private static final String _FILTER_COLUMN_USERID = "scFrameworkVersion.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "scFrameworkVersion";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "scFrameworkVersion.";

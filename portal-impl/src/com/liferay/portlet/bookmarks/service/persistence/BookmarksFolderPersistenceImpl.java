@@ -1144,7 +1144,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					BookmarksFolder.class.getName(), _FILTER_COLUMN_FOLDERID,
+					BookmarksFolder.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -1761,7 +1761,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					BookmarksFolder.class.getName(), _FILTER_COLUMN_FOLDERID,
+					BookmarksFolder.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -2082,7 +2082,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					BookmarksFolder.class.getName(), _FILTER_COLUMN_FOLDERID,
+					BookmarksFolder.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -2223,7 +2223,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					BookmarksFolder.class.getName(), _FILTER_COLUMN_FOLDERID,
+					BookmarksFolder.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -2334,7 +2334,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 	private static final String _FINDER_COLUMN_G_P_PARENTFOLDERID_2 = "bookmarksFolder.parentFolderId = ?";
 	private static final String _FILTER_SQL_SELECT_BOOKMARKSFOLDER_WHERE = "SELECT DISTINCT {bookmarksFolder.*} FROM BookmarksFolder bookmarksFolder WHERE ";
 	private static final String _FILTER_SQL_COUNT_BOOKMARKSFOLDER_WHERE = "SELECT COUNT(DISTINCT bookmarksFolder.folderId) AS COUNT_VALUE FROM BookmarksFolder bookmarksFolder WHERE ";
-	private static final String _FILTER_COLUMN_FOLDERID = "bookmarksFolder.folderId";
+	private static final String _FILTER_COLUMN_PK = "bookmarksFolder.folderId";
 	private static final String _FILTER_COLUMN_USERID = "bookmarksFolder.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "bookmarksFolder";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "bookmarksFolder.";

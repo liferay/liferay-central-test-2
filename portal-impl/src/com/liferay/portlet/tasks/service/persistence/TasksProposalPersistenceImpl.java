@@ -699,7 +699,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					TasksProposal.class.getName(), _FILTER_COLUMN_PROPOSALID,
+					TasksProposal.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -1049,7 +1049,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					TasksProposal.class.getName(), _FILTER_COLUMN_PROPOSALID,
+					TasksProposal.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -1365,7 +1365,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					TasksProposal.class.getName(), _FILTER_COLUMN_PROPOSALID,
+					TasksProposal.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -1459,7 +1459,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 			query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					TasksProposal.class.getName(), _FILTER_COLUMN_PROPOSALID,
+					TasksProposal.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -1629,7 +1629,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	private static final String _FINDER_COLUMN_C_C_CLASSPK_3 = "(tasksProposal.classPK IS NULL OR tasksProposal.classPK = ?)";
 	private static final String _FILTER_SQL_SELECT_TASKSPROPOSAL_WHERE = "SELECT DISTINCT {tasksProposal.*} FROM TasksProposal tasksProposal WHERE ";
 	private static final String _FILTER_SQL_COUNT_TASKSPROPOSAL_WHERE = "SELECT COUNT(DISTINCT tasksProposal.proposalId) AS COUNT_VALUE FROM TasksProposal tasksProposal WHERE ";
-	private static final String _FILTER_COLUMN_PROPOSALID = "tasksProposal.proposalId";
+	private static final String _FILTER_COLUMN_PK = "tasksProposal.proposalId";
 	private static final String _FILTER_COLUMN_USERID = "tasksProposal.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "tasksProposal";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "tasksProposal.";

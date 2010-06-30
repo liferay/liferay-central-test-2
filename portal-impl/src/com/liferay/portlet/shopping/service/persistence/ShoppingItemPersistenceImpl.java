@@ -1149,7 +1149,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					ShoppingItem.class.getName(), _FILTER_COLUMN_ITEMID,
+					ShoppingItem.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -1627,7 +1627,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					ShoppingItem.class.getName(), _FILTER_COLUMN_ITEMID,
+					ShoppingItem.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -2013,7 +2013,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 	private static final String _FINDER_COLUMN_C_S_SKU_3 = "(shoppingItem.sku IS NULL OR shoppingItem.sku = ?)";
 	private static final String _FILTER_SQL_SELECT_SHOPPINGITEM_WHERE = "SELECT DISTINCT {shoppingItem.*} FROM ShoppingItem shoppingItem WHERE ";
 	private static final String _FILTER_SQL_COUNT_SHOPPINGITEM_WHERE = "SELECT COUNT(DISTINCT shoppingItem.itemId) AS COUNT_VALUE FROM ShoppingItem shoppingItem WHERE ";
-	private static final String _FILTER_COLUMN_ITEMID = "shoppingItem.itemId";
+	private static final String _FILTER_COLUMN_PK = "shoppingItem.itemId";
 	private static final String _FILTER_COLUMN_USERID = "shoppingItem.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "shoppingItem";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "shoppingItem.";

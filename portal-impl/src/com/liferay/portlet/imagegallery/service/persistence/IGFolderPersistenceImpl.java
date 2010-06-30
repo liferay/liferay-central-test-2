@@ -1193,7 +1193,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					IGFolder.class.getName(), _FILTER_COLUMN_FOLDERID,
+					IGFolder.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -1808,7 +1808,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					IGFolder.class.getName(), _FILTER_COLUMN_FOLDERID,
+					IGFolder.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -2270,7 +2270,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					IGFolder.class.getName(), _FILTER_COLUMN_FOLDERID,
+					IGFolder.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -2411,7 +2411,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					IGFolder.class.getName(), _FILTER_COLUMN_FOLDERID,
+					IGFolder.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -2536,7 +2536,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					IGFolder.class.getName(), _FILTER_COLUMN_FOLDERID,
+					IGFolder.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -2660,7 +2660,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	private static final String _FINDER_COLUMN_G_P_N_NAME_3 = "(igFolder.name IS NULL OR igFolder.name = ?)";
 	private static final String _FILTER_SQL_SELECT_IGFOLDER_WHERE = "SELECT DISTINCT {igFolder.*} FROM IGFolder igFolder WHERE ";
 	private static final String _FILTER_SQL_COUNT_IGFOLDER_WHERE = "SELECT COUNT(DISTINCT igFolder.folderId) AS COUNT_VALUE FROM IGFolder igFolder WHERE ";
-	private static final String _FILTER_COLUMN_FOLDERID = "igFolder.folderId";
+	private static final String _FILTER_COLUMN_PK = "igFolder.folderId";
 	private static final String _FILTER_COLUMN_USERID = "igFolder.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "igFolder";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "igFolder.";

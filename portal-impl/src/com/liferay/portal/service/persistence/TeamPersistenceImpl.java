@@ -667,7 +667,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					Team.class.getName(), _FILTER_COLUMN_TEAMID,
+					Team.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -971,7 +971,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					Team.class.getName(), _FILTER_COLUMN_TEAMID,
+					Team.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -1087,7 +1087,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 			}
 
 			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					Team.class.getName(), _FILTER_COLUMN_TEAMID,
+					Team.class.getName(), _FILTER_COLUMN_PK,
 					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -1796,7 +1796,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	private static final String _FINDER_COLUMN_G_N_NAME_3 = "(team.name IS NULL OR team.name = ?)";
 	private static final String _FILTER_SQL_SELECT_TEAM_WHERE = "SELECT DISTINCT {team.*} FROM Team team WHERE ";
 	private static final String _FILTER_SQL_COUNT_TEAM_WHERE = "SELECT COUNT(DISTINCT team.teamId) AS COUNT_VALUE FROM Team team WHERE ";
-	private static final String _FILTER_COLUMN_TEAMID = "team.teamId";
+	private static final String _FILTER_COLUMN_PK = "team.teamId";
 	private static final String _FILTER_COLUMN_USERID = "team.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "team";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "team.";
