@@ -68,15 +68,17 @@ for (int i = 0; i < results.size(); i++) {
 		rowURL.setParameter("moduleId", pluginPackage.getModuleId());
 	}
 
+	String title = PortalUtil.getPortletTitle(portlet, application, locale);
+
 	rowURL.setParameter("pluginId", portlet.getPortletId());
 	rowURL.setParameter("pluginType", Plugin.TYPE_PORTLET);
+	rowURL.setParameter("title", title);
 
 	// Name and description
 
 	StringBundler sb = new StringBundler();
 
 	String displayName = portlet.getDisplayName();
-	String title = PortalUtil.getPortletTitle(portlet, application, locale);
 
 	if (showEditPluginHREF) {
 		sb.append("<a href=\"");

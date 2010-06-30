@@ -22,6 +22,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 String moduleId = ParamUtil.getString(request, "moduleId");
 String pluginId = ParamUtil.getString(request, "pluginId");
 String pluginType = ParamUtil.getString(request, "pluginType");
+String title = ParamUtil.getString(request, "title", pluginType);
 
 PluginSetting pluginSetting = PluginSettingLocalServiceUtil.getPluginSetting(company.getCompanyId(), pluginId, pluginType);
 
@@ -49,7 +50,7 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 
 	<liferay-ui:header
 		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-		title="plugin"
+		title="<%= title %>"
 	/>
 
 	<aui:fieldset>
