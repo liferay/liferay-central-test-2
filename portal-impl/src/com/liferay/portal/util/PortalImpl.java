@@ -2603,13 +2603,13 @@ public class PortalImpl implements Portal {
 						PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 							layout, portletId);
 
-					long scopeLayoutId = GetterUtil.getLong(
-						portletSetup.getValue("lfr-scope-layout-id", null));
+					String scopeLayoutUuid = GetterUtil.getString(
+						portletSetup.getValue("lfr-scope-layout-uuid", null));
 
-					if (scopeLayoutId > 0) {
-						Layout scopeLayout = LayoutLocalServiceUtil.getLayout(
-							layout.getGroupId(), layout.isPrivateLayout(),
-							scopeLayoutId);
+					if (Validator.isNotNull(scopeLayoutUuid)) {
+						Layout scopeLayout =
+							LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
+								scopeLayoutUuid, layout.getGroupId());
 
 						return scopeLayout.getScopeGroup().getGroupId();
 					}

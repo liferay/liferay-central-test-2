@@ -157,7 +157,7 @@ public interface PortletDataContext extends Serializable {
 
 	public long getScopeGroupId();
 
-	public long getScopeLayoutId();
+	public String getScopeLayoutUuid();
 
 	public long getSourceGroupId();
 
@@ -241,7 +241,7 @@ public interface PortletDataContext extends Serializable {
 
 	public void setScopeGroupId(long scopeGroupId);
 
-	public void setScopeLayoutId(long scopeLayoutId);
+	public void setScopeLayoutUuid(String scopeLayoutUuid);
 
 	public void setSourceGroupId(long sourceGroupId);
 

@@ -552,8 +552,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _scopeGroupId;
 	}
 
-	public long getScopeLayoutId() {
-		return _scopeLayoutId;
+	public String getScopeLayoutUuid() {
+		return _scopeLayoutUuid;
 	}
 
 	public long getSourceGroupId() {
@@ -922,8 +922,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_scopeGroupId = scopeGroupId;
 	}
 
-	public void setScopeLayoutId(long scopeLayoutId) {
-		_scopeLayoutId = scopeLayoutId;
+	public void setScopeLayoutUuid(String scopeLayoutUuid) {
+		_scopeLayoutUuid = scopeLayoutUuid;
 	}
 
 	public void setSourceGroupId(long sourceGroupId) {
@@ -1066,7 +1066,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private Map<String, List<RatingsEntry>> _ratingsEntriesMap =
 		new HashMap<String, List<RatingsEntry>>();
 	private long _scopeGroupId;
-	private long _scopeLayoutId;
+	private String _scopeLayoutUuid;
 	private long _sourceGroupId;
 	private Date _startDate;
 	private UserIdStrategy _userIdStrategy;

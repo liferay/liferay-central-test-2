@@ -146,19 +146,20 @@ public class EditScopeAction extends EditConfigurationAction {
 			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 				layout, portlet.getPortletId());
 
-		long scopeLayoutId = ParamUtil.getLong(actionRequest, "scopeLayoutId");
-		long oldScopeLayoutId = GetterUtil.getLong(
-			preferences.getValue("lfr-scope-layout-id", null));
+		String scopeLayoutUuid = ParamUtil.getString(
+			actionRequest, "scopeLayoutUuid");
+		String oldScopeLayoutUuid = GetterUtil.getString(
+			preferences.getValue("lfr-scope-layout-uuid", null));
 		String title = getPortletTitle(actionRequest, portlet, preferences);
 		String newTitle = title;
 
 		// Remove old scope suffix from the title if present
 
-		if (oldScopeLayoutId > 0) {
+		if (Validator.isNotNull(oldScopeLayoutUuid)) {
 			try {
-				Layout oldScopeLayout = LayoutLocalServiceUtil.getLayout(
-					layout.getGroupId(), layout.isPrivateLayout(),
-					oldScopeLayoutId);
+				Layout oldScopeLayout =
+					LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
+						oldScopeLayoutUuid, layout.getGroupId());
 
 				StringBundler sb = new StringBundler(4);
 
@@ -180,9 +181,10 @@ public class EditScopeAction extends EditConfigurationAction {
 
 		// Add new scope suffix to the title
 
-		if (scopeLayoutId > 0) {
-			Layout scopeLayout = LayoutLocalServiceUtil.getLayout(
-				layout.getGroupId(), layout.isPrivateLayout(), scopeLayoutId);
+		if (Validator.isNotNull(scopeLayoutUuid)) {
+			Layout scopeLayout =
+				LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
+					scopeLayoutUuid, layout.getGroupId());
 
 			if (!scopeLayout.hasScopeGroup()) {
 				String name = String.valueOf(scopeLayout.getPlid());
@@ -204,7 +206,7 @@ public class EditScopeAction extends EditConfigurationAction {
 		}
 
 		preferences.setValue(
-			"lfr-scope-layout-id", String.valueOf(scopeLayoutId));
+			"lfr-scope-layout-uuid", scopeLayoutUuid);
 
 		if (!newTitle.equals(title)) {
 			preferences.setValue(

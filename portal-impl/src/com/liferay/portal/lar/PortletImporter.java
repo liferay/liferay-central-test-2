@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowThreadLocal;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
@@ -592,17 +593,19 @@ public class PortletImporter {
 
 		long groupId = context.getGroupId();
 
-		long scopeLayoutId = context.getScopeLayoutId();
+		String scopeLayoutUuid = context.getScopeLayoutUuid();
 
-		if (scopeLayoutId == 0) {
-			scopeLayoutId = GetterUtil.getLong(
-				portletDataRefEl.getParent().attributeValue("scope-layout-id"));
+		if (Validator.isNull(scopeLayoutUuid)) {
+			scopeLayoutUuid = GetterUtil.getString(
+				portletDataRefEl.getParent().attributeValue(
+					"scope-layout-uuid"));
 		}
 
-		if (scopeLayoutId > 0) {
+		if (Validator.isNotNull(scopeLayoutUuid)) {
 			try {
-				Layout scopeLayout = LayoutLocalServiceUtil.getLayout(
-					groupId, context.isPrivateLayout(), scopeLayoutId);
+				Layout scopeLayout =
+					LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
+						scopeLayoutUuid, groupId);
 
 				Group scopeGroup = null;
 
@@ -668,7 +671,7 @@ public class PortletImporter {
 
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
 		long plid = 0;
-		long scopeLayoutId = 0;
+		String scopeLayoutUuid = StringPool.BLANK;
 
 		if (layout != null) {
 			plid = layout.getPlid();
@@ -678,10 +681,10 @@ public class PortletImporter {
 					PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 						layout, portletId);
 
-				scopeLayoutId = GetterUtil.getLong(
-					jxPreferences.getValue("lfr-scope-layout-id", null));
+				scopeLayoutUuid = GetterUtil.getString(
+					jxPreferences.getValue("lfr-scope-layout-uuid", null));
 
-				context.setScopeLayoutId(scopeLayoutId);
+				context.setScopeLayoutUuid(scopeLayoutUuid);
 			}
 		}
 
@@ -779,7 +782,7 @@ public class PortletImporter {
 
 			try {
 				jxPreferences.setValue(
-					"lfr-scope-layout-id", String.valueOf(scopeLayoutId));
+					"lfr-scope-layout-uuid", scopeLayoutUuid);
 
 				jxPreferences.store();
 			}
@@ -787,7 +790,7 @@ public class PortletImporter {
 				throw new PortalException(e);
 			}
 			finally {
-				context.setScopeLayoutId(scopeLayoutId);
+				context.setScopeLayoutUuid(scopeLayoutUuid);
 			}
 		}
 	}

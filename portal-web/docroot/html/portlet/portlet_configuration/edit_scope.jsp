@@ -24,7 +24,7 @@ String portletResource = ParamUtil.getString(request, "portletResource");
 
 PortletPreferences preferences = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, portletResource);
 
-long scopeLayoutId = GetterUtil.getLong(preferences.getValue("lfr-scope-layout-id", null));
+String scopeLayoutUuid = GetterUtil.getString(preferences.getValue("lfr-scope-layout-uuid", null));
 
 Group group = layout.getGroup();
 %>
@@ -44,9 +44,9 @@ Group group = layout.getGroup();
 	<aui:input name="portletResource" type="hidden" value="<%= portletResource %>" />
 
 	<aui:fieldset>
-		<aui:select label="scope" name="scopeLayoutId">
-			<aui:option label="default" selected="<%= scopeLayoutId == 0 %>" value="0" />
-			<aui:option label='<%= LanguageUtil.get(pageContext,"current-page") + " (" + HtmlUtil.escape(layout.getName(locale)) + ")" %>' selected="<%= scopeLayoutId == layout.getLayoutId() %>" value="<%= layout.getLayoutId() %>" />
+		<aui:select label="scope" name="scopeLayoutUuid">
+			<aui:option label="default" selected="<%= Validator.isNull(scopeLayoutUuid) %>" value="" />
+			<aui:option label='<%= LanguageUtil.get(pageContext,"current-page") + " (" + HtmlUtil.escape(layout.getName(locale)) + ")" %>' selected="<%= scopeLayoutUuid.equals(layout.getUuid()) %>" value="<%= layout.getUuid() %>" />
 
 			<%
 			for (Layout curLayout : LayoutLocalServiceUtil.getLayouts(layout.getGroupId(), layout.isPrivateLayout())) {
@@ -57,7 +57,7 @@ Group group = layout.getGroup();
 				if (curLayout.hasScopeGroup()) {
 			%>
 
-					<aui:option label="<%= HtmlUtil.escape(curLayout.getName(locale)) %>" selected="<%= scopeLayoutId == curLayout.getLayoutId() %>" value="<%= curLayout.getLayoutId() %>" />
+					<aui:option label="<%= HtmlUtil.escape(curLayout.getName(locale)) %>" selected="<%= scopeLayoutUuid.equals(curLayout.getUuid()) %>" value="<%= curLayout.getUuid() %>" />
 
 			<%
 				}

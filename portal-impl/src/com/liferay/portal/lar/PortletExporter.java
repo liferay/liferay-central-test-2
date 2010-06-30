@@ -188,10 +188,10 @@ public class PortletExporter {
 			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 				layout, portletId);
 
-		long scopeLayoutId = GetterUtil.getLong(
-			jxPreferences.getValue("lfr-scope-layout-id", null));
+		String scopeLayoutUuid = GetterUtil.getString(
+			jxPreferences.getValue("lfr-scope-layout-uuid", null));
 
-		if (scopeLayoutId != 0) {
+		if (Validator.isNotNull(scopeLayoutUuid)) {
 			Group scopeGroup = layout.getScopeGroup();
 
 			if (scopeGroup != null) {
@@ -208,7 +208,7 @@ public class PortletExporter {
 
 		context.setPlid(plid);
 		context.setOldPlid(plid);
-		context.setScopeLayoutId(scopeLayoutId);
+		context.setScopeLayoutUuid(scopeLayoutUuid);
 
 		// Build compatibility
 
@@ -546,7 +546,7 @@ public class PortletExporter {
 			"root-portlet-id", PortletConstants.getRootPortletId(portletId));
 		portletEl.addAttribute("old-plid", String.valueOf(layout.getPlid()));
 		portletEl.addAttribute(
-			"scope-layout-id", String.valueOf(context.getScopeLayoutId()));
+			"scope-layout-uuid", context.getScopeLayoutUuid());
 
 		// Data
 
@@ -557,7 +557,7 @@ public class PortletExporter {
 		if (exportPortletData) {
 			if (!portlet.isPreferencesUniquePerLayout()) {
 				String dataKey =
-					portletId + StringPool.AT + context.getScopeLayoutId();
+					portletId + StringPool.AT + context.getScopeLayoutUuid();
 
 				if (!context.hasNotUniquePerLayout(dataKey)) {
 					context.putNotUniquePerLayout(dataKey);
