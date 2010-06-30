@@ -83,7 +83,8 @@ public interface WorkflowTaskManager {
 		throws WorkflowException;
 
 	public int getWorkflowTaskCountByWorkflowInstance(
-			long companyId, long workflowInstanceId, Boolean completed)
+			long companyId, long userId, long workflowInstanceId,
+			Boolean completed)
 		throws WorkflowException;
 
 	public List<WorkflowTask> getWorkflowTasks(
@@ -97,9 +98,9 @@ public interface WorkflowTaskManager {
 		throws WorkflowException;
 
 	public List<WorkflowTask> getWorkflowTasksBySubmittingUser(
-		long companyId, long userId, Boolean completed, int start, int end,
-		OrderByComparator orderByComparator)
-	throws WorkflowException;
+			long companyId, long userId, Boolean completed, int start, int end,
+			OrderByComparator orderByComparator)
+		throws WorkflowException;
 
 	public List<WorkflowTask> getWorkflowTasksByUser(
 			long companyId, long userId, Boolean completed, int start, int end,
@@ -112,8 +113,9 @@ public interface WorkflowTaskManager {
 		throws WorkflowException;
 
 	public List<WorkflowTask> getWorkflowTasksByWorkflowInstance(
-			long companyId, long workflowInstanceId, Boolean completed,
-			int start, int end, OrderByComparator orderByComparator)
+			long companyId, long userId, long workflowInstanceId,
+			Boolean completed, int start, int end,
+			OrderByComparator orderByComparator)
 		throws WorkflowException;
 
 	public List<WorkflowTask> search(

@@ -107,7 +107,7 @@ public class WorkflowPermissionImpl implements WorkflowPermission {
 
 		List<WorkflowTask> workflowTasks =
 			WorkflowTaskManagerUtil.getWorkflowTasksByWorkflowInstance(
-				permissionChecker.getCompanyId(),
+				permissionChecker.getCompanyId(), 0,
 				workflowInstance.getWorkflowInstanceId(), Boolean.FALSE, 0, 100,
 				null);
 
