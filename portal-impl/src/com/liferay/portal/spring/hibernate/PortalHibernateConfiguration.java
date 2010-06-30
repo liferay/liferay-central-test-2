@@ -28,6 +28,9 @@ import com.liferay.portal.util.PropsValues;
 
 import java.io.InputStream;
 
+import java.util.Map;
+import java.util.Properties;
+
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 
@@ -38,6 +41,7 @@ import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
  * </a>
  *
  * @author Brian Wing Shun Chan
+ * @author Marcellus Tavares
  */
 public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 
@@ -92,6 +96,19 @@ public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 		}
 		catch (Exception e1) {
 			_log.error(e1, e1);
+		}
+
+		Properties hibernateProperties = getHibernateProperties();
+
+		if (hibernateProperties != null) {
+			for (Map.Entry<Object, Object> entry :
+					hibernateProperties.entrySet()) {
+
+				String key = (String)entry.getKey();
+				String value = (String)entry.getValue();
+
+				configuration.setProperty(key, value);
+			}
 		}
 
 		return configuration;
