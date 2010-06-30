@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -263,7 +264,7 @@ public class LayoutExporter {
 					new Object[] {
 						portletId, firstLayout.getPlid(),
 						firstLayout.getScopeGroup().getGroupId(),
-						firstLayout.getLayoutId()
+						firstLayout.getUuid()
 					}
 				);
 			}
@@ -275,7 +276,8 @@ public class LayoutExporter {
 					portletIds.put(
 						key,
 						new Object[] {
-							portletId, firstLayout.getPlid(), groupId, 0L
+							portletId, firstLayout.getPlid(), groupId,
+							StringPool.BLANK
 						}
 					);
 				}
@@ -314,14 +316,14 @@ public class LayoutExporter {
 			String portletId = (String)portletIdsEntry.getValue()[0];
 			long plid = (Long)portletIdsEntry.getValue()[1];
 			long scopeGroupId = (Long)portletIdsEntry.getValue()[2];
-			long scopeLayoutId = (Long)portletIdsEntry.getValue()[3];
+			String scopeLayoutUuid = (String)portletIdsEntry.getValue()[3];
 
 			Layout layout = LayoutUtil.findByPrimaryKey(plid);
 
 			context.setPlid(layout.getPlid());
 			context.setOldPlid(layout.getPlid());
 			context.setScopeGroupId(scopeGroupId);
-			context.setScopeLayoutId(scopeLayoutId);
+			context.setScopeLayoutUuid(scopeLayoutUuid);
 
 			boolean[] exportPortletControls = getExportPortletControls(
 				companyId, portletId, context, parameterMap);
@@ -494,12 +496,13 @@ public class LayoutExporter {
 					PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 						layout, portletId);
 
-				long scopeLayoutId = GetterUtil.getLong(
-					jxPreferences.getValue("lfr-scope-layout-id", null));
+				String scopeLayoutUuid = GetterUtil.getString(
+					jxPreferences.getValue("lfr-scope-layout-uuid", null));
 
-				if (scopeLayoutId != 0) {
-					Layout scopeLayout = LayoutLocalServiceUtil.getLayout(
-						scopeGroupId, layout.isPrivateLayout(), scopeLayoutId);
+				if (Validator.isNotNull(scopeLayoutUuid)) {
+					Layout scopeLayout =
+						LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
+							scopeLayoutUuid, scopeGroupId);
 
 					Group scopeGroup = scopeLayout.getScopeGroup();
 
@@ -515,7 +518,7 @@ public class LayoutExporter {
 					key,
 					new Object[] {
 						portletId, layout.getPlid(), scopeGroupId,
-						scopeLayoutId
+						scopeLayoutUuid
 					}
 				);
 			}
