@@ -602,8 +602,7 @@ public class PortletImporter {
 		if (scopeLayoutId > 0) {
 			try {
 				Layout scopeLayout = LayoutLocalServiceUtil.getLayout(
-					context.getGroupId(), context.isPrivateLayout(),
-					scopeLayoutId);
+					groupId, context.isPrivateLayout(), scopeLayoutId);
 
 				Group scopeGroup = null;
 
@@ -618,7 +617,7 @@ public class PortletImporter {
 						scopeLayout.getPlid(), name, null, 0, null, true, null);
 				}
 
-				context.setGroupId(scopeGroup.getGroupId());
+				context.setScopeGroupId(scopeGroup.getGroupId());
 			}
 			catch (PortalException pe) {
 			}
@@ -647,7 +646,7 @@ public class PortletImporter {
 			throw new SystemException(e);
 		}
 		finally {
-			context.setGroupId(groupId);
+			context.setScopeGroupId(groupId);
 
 			SocialActivityThreadLocal.setEnabled(true);
 			WorkflowThreadLocal.setEnabled(true);
