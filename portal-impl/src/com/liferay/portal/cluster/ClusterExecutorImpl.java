@@ -624,8 +624,8 @@ public class ClusterExecutorImpl
 		if (methodWrapper == null) {
 			clusterNodeResponse.setException(
 				new ClusterException(
-					"Payload is not of type " +
-						MethodWrapper.class.getName()));
+					"Payload is not of type " + MethodWrapper.class.getName()));
+
 			return clusterNodeResponse;
 		}
 
