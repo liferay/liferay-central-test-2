@@ -43,7 +43,7 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 	<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 
 	<script type="text/javascript">
-		function initCkArea(){
+		function initCkArea() {
 			var textArea = document.getElementById("CKEditor1");
 			var ckEditor = CKEDITOR.instances.CKEditor1;
 
@@ -51,6 +51,17 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 
 			CKEDITOR.config.toolbar = '<%= TextFormatter.format(HtmlUtil.escape(toolbarSet), TextFormatter.M) %>';
 			CKEDITOR.config.customConfig = '<%= request.getContextPath() %>/html/js/editor/ckeditor/ckconfig.jsp?p_l_id=<%= plid %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>';
+
+			setInterval(
+				function() {
+					try {
+						onChangeCallback();
+					}
+					catch(e) {
+					}
+				},
+				300
+			);
 		}
 
 		function getCkData() {
@@ -69,6 +80,26 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 
 		function getText() {
 			return getCkData();
+		}
+
+		function onChangeCallback() {
+
+			<%
+			if (Validator.isNotNull(onChangeMethod)) {
+			%>
+				var ckEditor = CKEDITOR.instances.CKEditor1;
+				var dirty = ckEditor.checkDirty();
+
+				if (dirty) {
+					parent.<%= HtmlUtil.escape(onChangeMethod) %>(getText());
+
+					ckEditor.resetDirty();
+				}
+
+			<%
+			}
+			%>
+
 		}
 	</script>
 </head>

@@ -111,6 +111,17 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 						500);
 				}
 			}
+
+			setInterval(
+				function() {
+					try {
+						onChangeCallback();
+					}
+					catch(e) {
+					}
+				},
+				300
+			);
 		}
 
 		function setHTML(value) {
