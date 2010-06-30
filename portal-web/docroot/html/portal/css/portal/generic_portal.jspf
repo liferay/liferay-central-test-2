@@ -67,9 +67,8 @@ td.lfr-middle {
 }
 
 .js .lfr-js-required {
-	left: 0;
+	clip: auto;
 	position: static;
-	top: 0;
 }
 
 .popup-alert-notice, .popup-alert-warning {
