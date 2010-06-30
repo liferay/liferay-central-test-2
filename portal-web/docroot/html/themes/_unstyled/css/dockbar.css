@@ -46,6 +46,9 @@ html > .lfr-dockbar-pinned {
 .lfr-dockbar-pinned .pin-dockbar img {
 }
 
+.dockbar .user-portrait {
+}
+
 .dockbar .user-avatar img {
 }
 
@@ -72,10 +75,13 @@ html > .lfr-dockbar-pinned {
 .aui-underlay .portal-add-content .portlet-dd-placeholder {
 }
 
-.add-application .aui-widget-bd {
+.add-application .aui-widget-bd, .dockbar-messages .aui-widget-bd {
 }
 
 .add-application {
+}
+
+.lfr-has-sidebar #main-content {
 }
 
 .manage-layouts {
