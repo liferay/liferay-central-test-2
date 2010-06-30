@@ -88,6 +88,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
+ * @author Eduardo Lundgren
  */
 public class EditArticleAction extends PortletAction {
 
@@ -316,6 +317,8 @@ public class EditArticleAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		String languageId = ParamUtil.getString(actionRequest, "languageId");
+
 		String originalRedirect = ParamUtil.getString(
 			actionRequest, "originalRedirect");
 
@@ -334,6 +337,7 @@ public class EditArticleAction extends PortletAction {
 		portletURL.setParameter("articleId", article.getArticleId(), false);
 		portletURL.setParameter(
 			"version", String.valueOf(article.getVersion()), false);
+		portletURL.setParameter("languageId", languageId, false);
 
 		return portletURL.toString();
 	}

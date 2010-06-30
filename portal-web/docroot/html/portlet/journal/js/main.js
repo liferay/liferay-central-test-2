@@ -474,6 +474,8 @@ AUI().add(
 				var lastLanguageIdInput = instance.getByName(form, 'lastLanguageId');
 				var redirectInput = instance.getByName(form, 'redirect');
 
+				cmdInput.val('');
+
 				if (instance.articleChanged()) {
 					if (confirm(Liferay.Language.get('would-you-like-to-save-the-changes-made-to-this-language'))) {
 						cmdInput.val('update');
