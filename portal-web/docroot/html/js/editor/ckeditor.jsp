@@ -87,6 +87,7 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 			<%
 			if (Validator.isNotNull(onChangeMethod)) {
 			%>
+
 				var ckEditor = CKEDITOR.instances.CKEditor1;
 				var dirty = ckEditor.checkDirty();
 
