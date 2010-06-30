@@ -2404,20 +2404,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createModelSoap(Entity entity) throws Exception {
-		Map<String, Object> context = _getContext();
-
-		context.put("entity", entity);
-
-		// Content
-
-		String content = _processTemplate(_tplModelSoap, context);
-
-		// Write file
-
-		File modelFile = new File(
-			_serviceOutputPath + "/model/" + entity.getName() + "Soap.java");
-
-		writeFile(modelFile, content, _author);
+		File modelFile;
 
 		if (!_serviceOutputPath.equals(_outputPath)) {
 			modelFile = new File(
@@ -2425,6 +2412,30 @@ public class ServiceBuilder {
 
 			if (modelFile.exists()) {
 				System.out.println("Relocating " + modelFile);
+
+				modelFile.delete();
+			}
+		}
+
+		modelFile = new File(
+			_serviceOutputPath + "/model/" + entity.getName() + "Soap.java");
+
+		if (entity.hasRemoteService()) {
+			Map<String, Object> context = _getContext();
+
+			context.put("entity", entity);
+
+			// Content
+
+			String content = _processTemplate(_tplModelSoap, context);
+
+			// Write file
+
+			writeFile(modelFile, content, _author);
+		}
+		else {
+			if (modelFile.exists()) {
+				System.out.println("Removing " + modelFile);
 
 				modelFile.delete();
 			}
