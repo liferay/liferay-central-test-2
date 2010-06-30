@@ -117,12 +117,14 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 								</li>
 							</c:if>
 
-							<c:if test="<%= themeDisplay.isShowLayoutTemplatesIcon() %>">
-								<li class="page-layout">
-									<a href="javascript:;" id="pageTemplate">
-										<liferay-ui:message key="page-layout" />
-									</a>
-								</li>
+							<c:if test="<%= !themeDisplay.isStateMaximized() %>">
+								<c:if test="<%= themeDisplay.isShowLayoutTemplatesIcon() %>">
+									<li class="page-layout">
+										<a href="javascript:;" id="pageTemplate">
+											<liferay-ui:message key="page-layout" />
+										</a>
+									</li>
+								</c:if>
 							</c:if>
 
 							<c:if test="<%= themeDisplay.isShowPageSettingsIcon() && !group.isLayoutPrototype() %>">
