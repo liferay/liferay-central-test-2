@@ -313,7 +313,9 @@ public class ShardAdvice {
 			shardParams.put("virtualHost", virtualHost);
 		}
 
-		shardName = ShardUtil.getShardSelector().getShardName(
+		ShardSelector shardSelector = ShardUtil.getShardSelector();
+
+		shardName = shardSelector.getShardName(
 			ShardUtil.COMPANY_SCOPE, shardName, shardParams);
 
 		return shardName;
