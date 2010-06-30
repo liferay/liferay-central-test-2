@@ -106,10 +106,10 @@ public class ClusterExecutorImpl
 			return null;
 		}
 
-		FutureClusterResponses clusterResults = null;
+		FutureClusterResponses futureClusterResponses = null;
 
 		try {
-			clusterResults = doExecuteClusterRequest(clusterRequest);
+			futureClusterResponses = doExecuteClusterRequest(clusterRequest);
 
 			long timeout = clusterRequest.getTimeOut();
 
@@ -121,7 +121,7 @@ public class ClusterExecutorImpl
 			_executionResultMap.remove(clusterRequest.getUuid());
 		}
 
-		return clusterResults;
+		return futureClusterResponses;
 	}
 
 	public List<ClusterEventListener> getClusterEventListeners() {
