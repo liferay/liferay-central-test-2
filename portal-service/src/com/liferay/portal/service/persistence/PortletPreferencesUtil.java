@@ -45,7 +45,7 @@ public class PortletPreferencesUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(PortletPreferences)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(PortletPreferences portletPreferences) {
 		getPersistence().clearCache(portletPreferences);

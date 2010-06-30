@@ -45,7 +45,7 @@ public class ImageUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(Image)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(Image image) {
 		getPersistence().clearCache(image);

@@ -46,7 +46,7 @@ public class MBMessageUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(MBMessage)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(MBMessage mbMessage) {
 		getPersistence().clearCache(mbMessage);

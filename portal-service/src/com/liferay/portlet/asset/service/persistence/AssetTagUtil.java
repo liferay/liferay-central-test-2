@@ -46,7 +46,7 @@ public class AssetTagUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(AssetTag)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(AssetTag assetTag) {
 		getPersistence().clearCache(assetTag);

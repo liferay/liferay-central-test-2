@@ -45,7 +45,7 @@ public class UserGroupUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(UserGroup)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(UserGroup userGroup) {
 		getPersistence().clearCache(userGroup);

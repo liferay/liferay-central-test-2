@@ -46,7 +46,7 @@ public class ShoppingCouponUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(ShoppingCoupon)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(ShoppingCoupon shoppingCoupon) {
 		getPersistence().clearCache(shoppingCoupon);

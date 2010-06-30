@@ -45,7 +45,7 @@ public class BrowserTrackerUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(BrowserTracker)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(BrowserTracker browserTracker) {
 		getPersistence().clearCache(browserTracker);

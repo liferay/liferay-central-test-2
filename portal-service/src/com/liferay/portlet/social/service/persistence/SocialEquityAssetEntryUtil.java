@@ -46,7 +46,7 @@ public class SocialEquityAssetEntryUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(SocialEquityAssetEntry)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(SocialEquityAssetEntry socialEquityAssetEntry) {
 		getPersistence().clearCache(socialEquityAssetEntry);

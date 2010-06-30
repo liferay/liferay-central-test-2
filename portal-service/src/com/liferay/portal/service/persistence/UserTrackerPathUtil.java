@@ -45,7 +45,7 @@ public class UserTrackerPathUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(UserTrackerPath)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(UserTrackerPath userTrackerPath) {
 		getPersistence().clearCache(userTrackerPath);

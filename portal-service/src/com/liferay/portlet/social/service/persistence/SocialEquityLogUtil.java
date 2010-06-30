@@ -46,7 +46,7 @@ public class SocialEquityLogUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(SocialEquityLog)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(SocialEquityLog socialEquityLog) {
 		getPersistence().clearCache(socialEquityLog);

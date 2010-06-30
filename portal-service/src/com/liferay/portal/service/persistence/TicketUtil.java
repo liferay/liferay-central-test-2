@@ -45,7 +45,7 @@ public class TicketUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(Ticket)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(Ticket ticket) {
 		getPersistence().clearCache(ticket);

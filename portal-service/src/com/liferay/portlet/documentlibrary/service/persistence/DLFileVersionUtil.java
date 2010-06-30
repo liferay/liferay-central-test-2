@@ -46,7 +46,7 @@ public class DLFileVersionUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(DLFileVersion)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(DLFileVersion dlFileVersion) {
 		getPersistence().clearCache(dlFileVersion);

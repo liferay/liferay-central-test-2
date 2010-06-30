@@ -45,7 +45,7 @@ public class PortletItemUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(PortletItem)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(PortletItem portletItem) {
 		getPersistence().clearCache(portletItem);

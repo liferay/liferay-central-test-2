@@ -46,7 +46,7 @@ public class WikiPageResourceUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(WikiPageResource)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(WikiPageResource wikiPageResource) {
 		getPersistence().clearCache(wikiPageResource);

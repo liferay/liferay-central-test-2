@@ -46,7 +46,7 @@ public class SCProductEntryUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(SCProductEntry)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(SCProductEntry scProductEntry) {
 		getPersistence().clearCache(scProductEntry);

@@ -46,7 +46,7 @@ public class SCProductVersionUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(SCProductVersion)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(SCProductVersion scProductVersion) {
 		getPersistence().clearCache(scProductVersion);

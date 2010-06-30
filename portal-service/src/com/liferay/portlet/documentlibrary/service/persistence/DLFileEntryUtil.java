@@ -46,7 +46,7 @@ public class DLFileEntryUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(DLFileEntry)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(DLFileEntry dlFileEntry) {
 		getPersistence().clearCache(dlFileEntry);

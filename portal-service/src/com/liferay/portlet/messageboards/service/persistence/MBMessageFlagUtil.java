@@ -46,7 +46,7 @@ public class MBMessageFlagUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(MBMessageFlag)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(MBMessageFlag mbMessageFlag) {
 		getPersistence().clearCache(mbMessageFlag);

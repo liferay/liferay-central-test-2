@@ -46,7 +46,7 @@ public class TasksReviewUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(TasksReview)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(TasksReview tasksReview) {
 		getPersistence().clearCache(tasksReview);

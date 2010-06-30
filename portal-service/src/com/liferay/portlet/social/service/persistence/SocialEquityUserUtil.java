@@ -46,7 +46,7 @@ public class SocialEquityUserUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(SocialEquityUser)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(SocialEquityUser socialEquityUser) {
 		getPersistence().clearCache(socialEquityUser);

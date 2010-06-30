@@ -46,7 +46,7 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(SCProductScreenshot)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(SCProductScreenshot scProductScreenshot) {
 		getPersistence().clearCache(scProductScreenshot);

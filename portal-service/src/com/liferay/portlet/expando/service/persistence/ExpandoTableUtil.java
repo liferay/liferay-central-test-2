@@ -46,7 +46,7 @@ public class ExpandoTableUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(ExpandoTable)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(ExpandoTable expandoTable) {
 		getPersistence().clearCache(expandoTable);

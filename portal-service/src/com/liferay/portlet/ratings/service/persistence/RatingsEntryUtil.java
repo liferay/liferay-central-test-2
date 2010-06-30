@@ -46,7 +46,7 @@ public class RatingsEntryUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(RatingsEntry)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(RatingsEntry ratingsEntry) {
 		getPersistence().clearCache(ratingsEntry);

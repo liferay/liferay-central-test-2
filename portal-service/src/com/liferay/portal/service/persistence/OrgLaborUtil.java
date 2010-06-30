@@ -45,7 +45,7 @@ public class OrgLaborUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(OrgLabor)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(OrgLabor orgLabor) {
 		getPersistence().clearCache(orgLabor);

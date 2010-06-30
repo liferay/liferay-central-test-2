@@ -46,7 +46,7 @@ public class ExpandoColumnUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(ExpandoColumn)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(ExpandoColumn expandoColumn) {
 		getPersistence().clearCache(expandoColumn);

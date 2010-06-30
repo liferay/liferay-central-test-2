@@ -46,7 +46,7 @@ public class BlogsEntryUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(BlogsEntry)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(BlogsEntry blogsEntry) {
 		getPersistence().clearCache(blogsEntry);

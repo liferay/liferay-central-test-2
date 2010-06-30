@@ -46,7 +46,7 @@ public class AssetLinkUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(AssetLink)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(AssetLink assetLink) {
 		getPersistence().clearCache(assetLink);

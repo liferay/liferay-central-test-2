@@ -46,7 +46,7 @@ public class MBDiscussionUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(MBDiscussion)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(MBDiscussion mbDiscussion) {
 		getPersistence().clearCache(mbDiscussion);

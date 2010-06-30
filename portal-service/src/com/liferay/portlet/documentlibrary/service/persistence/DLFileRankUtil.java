@@ -46,7 +46,7 @@ public class DLFileRankUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(DLFileRank)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(DLFileRank dlFileRank) {
 		getPersistence().clearCache(dlFileRank);

@@ -45,7 +45,7 @@ public class ResourceActionUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(ResourceAction)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(ResourceAction resourceAction) {
 		getPersistence().clearCache(resourceAction);

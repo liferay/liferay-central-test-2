@@ -46,7 +46,7 @@ public class MBMailingListUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(MBMailingList)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(MBMailingList mbMailingList) {
 		getPersistence().clearCache(mbMailingList);

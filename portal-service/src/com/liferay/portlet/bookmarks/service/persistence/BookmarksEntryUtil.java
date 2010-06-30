@@ -46,7 +46,7 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(BookmarksEntry)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(BookmarksEntry bookmarksEntry) {
 		getPersistence().clearCache(bookmarksEntry);

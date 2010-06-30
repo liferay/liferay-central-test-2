@@ -45,7 +45,7 @@ public class UserIdMapperUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(UserIdMapper)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(UserIdMapper userIdMapper) {
 		getPersistence().clearCache(userIdMapper);

@@ -46,7 +46,7 @@ public class ExpandoValueUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(ExpandoValue)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(ExpandoValue expandoValue) {
 		getPersistence().clearCache(expandoValue);

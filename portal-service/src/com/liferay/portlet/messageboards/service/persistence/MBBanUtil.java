@@ -46,7 +46,7 @@ public class MBBanUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(MBBan)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(MBBan mbBan) {
 		getPersistence().clearCache(mbBan);

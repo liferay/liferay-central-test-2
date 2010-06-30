@@ -46,7 +46,7 @@ public class AssetVocabularyUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(AssetVocabulary)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(AssetVocabulary assetVocabulary) {
 		getPersistence().clearCache(assetVocabulary);

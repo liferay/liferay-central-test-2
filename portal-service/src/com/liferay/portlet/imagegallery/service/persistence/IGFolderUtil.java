@@ -46,7 +46,7 @@ public class IGFolderUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(IGFolder)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(IGFolder igFolder) {
 		getPersistence().clearCache(igFolder);

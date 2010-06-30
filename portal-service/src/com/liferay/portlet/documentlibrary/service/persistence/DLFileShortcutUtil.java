@@ -46,7 +46,7 @@ public class DLFileShortcutUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(DLFileShortcut)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(DLFileShortcut dlFileShortcut) {
 		getPersistence().clearCache(dlFileShortcut);

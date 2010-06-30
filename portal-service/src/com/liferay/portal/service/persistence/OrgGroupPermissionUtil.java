@@ -45,7 +45,7 @@ public class OrgGroupPermissionUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(OrgGroupPermission)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(OrgGroupPermission orgGroupPermission) {
 		getPersistence().clearCache(orgGroupPermission);

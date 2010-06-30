@@ -45,7 +45,7 @@ public class SubscriptionUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(Subscription)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(Subscription subscription) {
 		getPersistence().clearCache(subscription);

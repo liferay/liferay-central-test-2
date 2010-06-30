@@ -46,7 +46,7 @@ public class JournalStructureUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(JournalStructure)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(JournalStructure journalStructure) {
 		getPersistence().clearCache(journalStructure);

@@ -46,7 +46,7 @@ public class SCFrameworkVersionUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(SCFrameworkVersion)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(SCFrameworkVersion scFrameworkVersion) {
 		getPersistence().clearCache(scFrameworkVersion);

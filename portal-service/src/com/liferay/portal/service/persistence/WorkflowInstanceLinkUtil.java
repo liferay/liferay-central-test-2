@@ -45,7 +45,7 @@ public class WorkflowInstanceLinkUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(WorkflowInstanceLink)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(WorkflowInstanceLink workflowInstanceLink) {
 		getPersistence().clearCache(workflowInstanceLink);

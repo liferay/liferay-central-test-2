@@ -46,7 +46,7 @@ public class MBThreadUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(MBThread)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(MBThread mbThread) {
 		getPersistence().clearCache(mbThread);

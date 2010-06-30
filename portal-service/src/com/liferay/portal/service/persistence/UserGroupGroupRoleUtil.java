@@ -45,7 +45,7 @@ public class UserGroupGroupRoleUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(UserGroupGroupRole)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(UserGroupGroupRole userGroupGroupRole) {
 		getPersistence().clearCache(userGroupGroupRole);

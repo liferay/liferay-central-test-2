@@ -45,7 +45,7 @@ public class LayoutPrototypeUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(LayoutPrototype)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(LayoutPrototype layoutPrototype) {
 		getPersistence().clearCache(layoutPrototype);

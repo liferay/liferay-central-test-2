@@ -46,7 +46,7 @@ public class TasksProposalUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(TasksProposal)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(TasksProposal tasksProposal) {
 		getPersistence().clearCache(tasksProposal);

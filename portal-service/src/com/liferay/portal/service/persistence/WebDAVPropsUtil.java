@@ -45,7 +45,7 @@ public class WebDAVPropsUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(WebDAVProps)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(WebDAVProps webDAVProps) {
 		getPersistence().clearCache(webDAVProps);

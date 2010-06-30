@@ -46,7 +46,7 @@ public class ExpandoRowUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(ExpandoRow)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(ExpandoRow expandoRow) {
 		getPersistence().clearCache(expandoRow);

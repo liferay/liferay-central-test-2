@@ -46,7 +46,7 @@ public class AnnouncementsFlagUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(AnnouncementsFlag)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(AnnouncementsFlag announcementsFlag) {
 		getPersistence().clearCache(announcementsFlag);

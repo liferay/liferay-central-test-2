@@ -46,7 +46,7 @@ public class DLFolderUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(DLFolder)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(DLFolder dlFolder) {
 		getPersistence().clearCache(dlFolder);

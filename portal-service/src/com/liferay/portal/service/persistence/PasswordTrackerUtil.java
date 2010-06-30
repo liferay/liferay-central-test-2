@@ -45,7 +45,7 @@ public class PasswordTrackerUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(PasswordTracker)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(PasswordTracker passwordTracker) {
 		getPersistence().clearCache(passwordTracker);

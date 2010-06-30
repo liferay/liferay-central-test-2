@@ -45,7 +45,7 @@ public class ResourceCodeUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(ResourceCode)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(ResourceCode resourceCode) {
 		getPersistence().clearCache(resourceCode);

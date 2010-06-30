@@ -46,7 +46,7 @@ public class WikiNodeUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(WikiNode)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(WikiNode wikiNode) {
 		getPersistence().clearCache(wikiNode);

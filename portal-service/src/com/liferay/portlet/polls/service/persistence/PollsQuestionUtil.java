@@ -46,7 +46,7 @@ public class PollsQuestionUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(PollsQuestion)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(PollsQuestion pollsQuestion) {
 		getPersistence().clearCache(pollsQuestion);

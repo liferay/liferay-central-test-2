@@ -45,7 +45,7 @@ public class PluginSettingUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(PluginSetting)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(PluginSetting pluginSetting) {
 		getPersistence().clearCache(pluginSetting);

@@ -45,7 +45,7 @@ public class MembershipRequestUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(MembershipRequest)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(MembershipRequest membershipRequest) {
 		getPersistence().clearCache(membershipRequest);

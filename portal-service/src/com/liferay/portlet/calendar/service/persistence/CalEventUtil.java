@@ -46,7 +46,7 @@ public class CalEventUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(CalEvent)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(CalEvent calEvent) {
 		getPersistence().clearCache(calEvent);

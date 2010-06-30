@@ -45,7 +45,7 @@ public class LayoutSetUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(LayoutSet)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(LayoutSet layoutSet) {
 		getPersistence().clearCache(layoutSet);

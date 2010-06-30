@@ -46,7 +46,7 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(AssetCategory)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(AssetCategory assetCategory) {
 		getPersistence().clearCache(assetCategory);

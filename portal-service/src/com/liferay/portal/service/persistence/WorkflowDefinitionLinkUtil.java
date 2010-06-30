@@ -45,7 +45,7 @@ public class WorkflowDefinitionLinkUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(WorkflowDefinitionLink)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(WorkflowDefinitionLink workflowDefinitionLink) {
 		getPersistence().clearCache(workflowDefinitionLink);

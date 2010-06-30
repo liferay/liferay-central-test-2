@@ -45,7 +45,7 @@ public class OrgGroupRoleUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(OrgGroupRole)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(OrgGroupRole orgGroupRole) {
 		getPersistence().clearCache(orgGroupRole);

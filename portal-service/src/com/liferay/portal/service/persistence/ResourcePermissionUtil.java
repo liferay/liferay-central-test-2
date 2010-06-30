@@ -45,7 +45,7 @@ public class ResourcePermissionUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(ResourcePermission)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(ResourcePermission resourcePermission) {
 		getPersistence().clearCache(resourcePermission);

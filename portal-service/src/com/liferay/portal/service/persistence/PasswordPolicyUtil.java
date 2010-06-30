@@ -45,7 +45,7 @@ public class PasswordPolicyUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(PasswordPolicy)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(PasswordPolicy passwordPolicy) {
 		getPersistence().clearCache(passwordPolicy);

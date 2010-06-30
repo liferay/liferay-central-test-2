@@ -46,7 +46,7 @@ public class SocialRequestUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(SocialRequest)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(SocialRequest socialRequest) {
 		getPersistence().clearCache(socialRequest);

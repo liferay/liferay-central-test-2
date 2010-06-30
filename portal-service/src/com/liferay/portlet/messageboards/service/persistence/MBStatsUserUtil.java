@@ -46,7 +46,7 @@ public class MBStatsUserUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(MBStatsUser)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(MBStatsUser mbStatsUser) {
 		getPersistence().clearCache(mbStatsUser);

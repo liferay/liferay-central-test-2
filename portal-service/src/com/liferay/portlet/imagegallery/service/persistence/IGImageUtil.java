@@ -46,7 +46,7 @@ public class IGImageUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(IGImage)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(IGImage igImage) {
 		getPersistence().clearCache(igImage);

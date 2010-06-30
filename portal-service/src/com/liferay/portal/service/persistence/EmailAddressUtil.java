@@ -45,7 +45,7 @@ public class EmailAddressUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(EmailAddress)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(EmailAddress emailAddress) {
 		getPersistence().clearCache(emailAddress);

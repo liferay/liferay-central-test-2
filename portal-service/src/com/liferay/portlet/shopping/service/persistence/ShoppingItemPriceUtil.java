@@ -46,7 +46,7 @@ public class ShoppingItemPriceUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(ShoppingItemPrice)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(ShoppingItemPrice shoppingItemPrice) {
 		getPersistence().clearCache(shoppingItemPrice);

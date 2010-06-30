@@ -46,7 +46,7 @@ public class MBCategoryUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(MBCategory)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(MBCategory mbCategory) {
 		getPersistence().clearCache(mbCategory);

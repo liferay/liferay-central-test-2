@@ -46,7 +46,7 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(AnnouncementsEntry)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(AnnouncementsEntry announcementsEntry) {
 		getPersistence().clearCache(announcementsEntry);

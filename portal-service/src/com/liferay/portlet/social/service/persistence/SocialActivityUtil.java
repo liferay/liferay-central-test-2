@@ -46,7 +46,7 @@ public class SocialActivityUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(SocialActivity)
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
 	public static void clearCache(SocialActivity socialActivity) {
 		getPersistence().clearCache(socialActivity);
