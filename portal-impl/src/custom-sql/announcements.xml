@@ -3,8 +3,8 @@
 <custom-sql>
 	<sql id="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder.countByHidden">
 		<![CDATA[
-			SELECT DISTINCT
-				COUNT(*) AS COUNT_VALUE
+			SELECT
+				DISTINCT COUNT(*) AS COUNT_VALUE
 			FROM
 				AnnouncementsEntry
 			LEFT JOIN
@@ -21,8 +21,8 @@
 	</sql>
 	<sql id="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder.countByNotHidden">
 		<![CDATA[
-			SELECT DISTINCT
-				COUNT(*) AS COUNT_VALUE
+			SELECT
+				DISTINCT COUNT(*) AS COUNT_VALUE
 			FROM
 				AnnouncementsEntry
 			WHERE
@@ -32,8 +32,8 @@
 				(AnnouncementsEntry.alert = ?) AND
 				(AnnouncementsEntry.entryId NOT IN
 					(
-						SELECT DISTINCT
-							AnnouncementsFlag.entryId
+						SELECT
+							DISTINCT AnnouncementsFlag.entryId
 						FROM
 							AnnouncementsFlag
 						WHERE
@@ -57,8 +57,8 @@
 	</sql>
 	<sql id="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder.findByHidden">
 		<![CDATA[
-			SELECT DISTINCT
-				{AnnouncementsEntry.*}
+			SELECT
+				DISTINCT {AnnouncementsEntry.*}
 			FROM
 				AnnouncementsEntry
 			LEFT JOIN
@@ -78,8 +78,8 @@
 	</sql>
 	<sql id="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder.findByNotHidden">
 		<![CDATA[
-			SELECT DISTINCT
-				{AnnouncementsEntry.*}
+			SELECT
+				DISTINCT {AnnouncementsEntry.*}
 			FROM
 				AnnouncementsEntry
 			WHERE
@@ -89,8 +89,8 @@
 				(AnnouncementsEntry.alert = ?) AND
 				(AnnouncementsEntry.entryId NOT IN
 					(
-						SELECT DISTINCT
-							AnnouncementsFlag.entryId
+						SELECT
+							DISTINCT AnnouncementsFlag.entryId
 						FROM
 							AnnouncementsFlag
 						WHERE
