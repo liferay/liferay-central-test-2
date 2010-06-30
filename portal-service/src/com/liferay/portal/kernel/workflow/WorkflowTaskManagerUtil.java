@@ -126,11 +126,12 @@ public class WorkflowTaskManagerUtil {
 	}
 
 	public static int getWorkflowTaskCountByWorkflowInstance(
-			long companyId, long workflowInstanceId, Boolean completed)
+			long companyId, long userId, long workflowInstanceId,
+			Boolean completed)
 		throws WorkflowException {
 
 		return _workflowTaskManager.getWorkflowTaskCountByWorkflowInstance(
-			companyId, workflowInstanceId, completed);
+			companyId, userId, workflowInstanceId, completed);
 	}
 
 	public static WorkflowTaskManager getWorkflowTaskManager() {
@@ -183,12 +184,13 @@ public class WorkflowTaskManagerUtil {
 	}
 
 	public static List<WorkflowTask> getWorkflowTasksByWorkflowInstance(
-			long companyId, long workflowInstanceId, Boolean completed,
-			int start, int end, OrderByComparator orderByComparator)
+			long companyId, long userId, long workflowInstanceId,
+			Boolean completed, int start, int end,
+			OrderByComparator orderByComparator)
 		throws WorkflowException {
 
 		return _workflowTaskManager.getWorkflowTasksByWorkflowInstance(
-			companyId, workflowInstanceId, completed, start, end,
+			companyId, userId, workflowInstanceId, completed, start, end,
 			orderByComparator);
 	}
 
