@@ -132,6 +132,7 @@ create index IX_93CF8193 on DLFileEntry (groupId, folderId);
 create unique index IX_5391712 on DLFileEntry (groupId, folderId, name);
 create unique index IX_ED5CA615 on DLFileEntry (groupId, folderId, title);
 create index IX_43261870 on DLFileEntry (groupId, userId);
+create index IX_D20C434D on DLFileEntry (groupId, userId, folderId);
 create index IX_64F0FE40 on DLFileEntry (uuid_);
 create unique index IX_BC2E7E6A on DLFileEntry (uuid_, groupId);
 

@@ -36,6 +36,7 @@ import com.liferay.portlet.documentlibrary.util.comparator.FileEntryModifiedDate
 
 import java.io.File;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -249,24 +250,37 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			OrderByComparator obc)
 		throws SystemException {
 
-		if (userId <= 0) {
-			return dlFileEntryPersistence.filterFindByGroupId(
-				groupId, start, end, obc);
+		long[] folderIds = dlFolderService.getFolderIds(
+			groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
+		if (folderIds.length == 0) {
+			return Collections.EMPTY_LIST;
+		}
+		else if (userId <= 0) {
+			return dlFileEntryPersistence.filterFindByG_F(
+				groupId, folderIds, start, end, obc);
 		}
 		else {
-			return dlFileEntryPersistence.filterFindByG_U(
-				groupId, userId, start, end, obc);
+			return dlFileEntryPersistence.filterFindByG_U_F(
+				groupId, userId, folderIds, start, end, obc);
 		}
 	}
 
 	public int getGroupFileEntriesCount(long groupId, long userId)
 		throws SystemException {
 
-		if (userId <= 0) {
-			return dlFileEntryPersistence.filterCountByGroupId(groupId);
+		long[] folderIds = dlFolderService.getFolderIds(
+			groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
+		if (folderIds.length == 0) {
+			return 0;
+		}
+		else if (userId <= 0) {
+			return dlFileEntryPersistence.filterCountByG_F(groupId, folderIds);
 		}
 		else {
-			return dlFileEntryPersistence.filterCountByG_U(groupId, userId);
+			return dlFileEntryPersistence.filterCountByG_U_F(
+				groupId, userId, folderIds);
 		}
 	}
 

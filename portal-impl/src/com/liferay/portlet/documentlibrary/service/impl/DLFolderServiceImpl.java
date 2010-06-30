@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Lock;
@@ -190,6 +191,19 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		return folder.getFolderId();
 	}
 
+	public long[] getFolderIds(long groupId, long folderId)
+		throws SystemException {
+
+		List<Long> folderIds = new ArrayList<Long>();
+
+		folderIds.add(folderId);
+
+		getSubfolderIds(folderIds, groupId, folderId);
+
+		return ArrayUtil.toArray(
+			folderIds.toArray(new Long[folderIds.size()]));
+	}
+
 	public List<DLFolder> getFolders(long groupId, long parentFolderId)
 		throws SystemException {
 
@@ -258,7 +272,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 	public void getSubfolderIds(
 			List<Long> folderIds, long groupId, long folderId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<DLFolder> folders = dlFolderPersistence.filterFindByG_P(
 			groupId, folderId);

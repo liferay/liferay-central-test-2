@@ -208,6 +208,21 @@ public class DLFolderServiceSoap {
 		}
 	}
 
+	public static long[] getFolderIds(long groupId, long folderId)
+		throws RemoteException {
+		try {
+			long[] returnValue = DLFolderServiceUtil.getFolderIds(groupId,
+					folderId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap[] getFolders(
 		long groupId, long parentFolderId) throws RemoteException {
 		try {
