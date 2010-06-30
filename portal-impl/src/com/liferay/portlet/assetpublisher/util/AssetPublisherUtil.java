@@ -127,7 +127,7 @@ public class AssetPublisherUtil {
 				assetEntry.getClassName());
 
 		AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(
-			assetEntry.getClassPK(), AssetRendererFactory.TYPE_LATEST_APPROVED);
+			assetEntry.getClassPK(), AssetRendererFactory.TYPE_LATEST);
 
 		String[] assetEntryXmls = preferences.getValues(
 			"asset-entry-xml", new String[0]);
