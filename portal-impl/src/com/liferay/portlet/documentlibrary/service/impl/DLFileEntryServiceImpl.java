@@ -313,6 +313,42 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			false, expirationTime);
 	}
 
+	public DLFileEntry moveFileEntry(
+			long groupId, long folderId, long newFolderId, String name,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		DLFileEntryPermission.check(
+			getPermissionChecker(), groupId, folderId, name, ActionKeys.UPDATE);
+
+		boolean hasLock = hasFileEntryLock(groupId, folderId, name);
+
+		if (!hasLock) {
+
+			// Lock
+
+			lockFileEntry(groupId, folderId, name);
+		}
+
+		DLFileEntry fileEntry = null;
+
+		try {
+			fileEntry = dlFileEntryLocalService.moveFileEntry(
+				getUserId(), groupId, folderId, newFolderId, name,
+				serviceContext);
+		}
+		finally {
+			if (!hasLock) {
+
+				// Unlock
+
+				unlockFileEntry(groupId, folderId, name);
+			}
+		}
+
+		return fileEntry;
+	}
+
 	public Lock refreshFileEntryLock(String lockUuid, long expirationTime)
 		throws PortalException, SystemException {
 
@@ -356,10 +392,10 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	}
 
 	public DLFileEntry updateFileEntry(
-			long groupId, long folderId, long newFolderId, String name,
-			String sourceFileName, String title, String description,
-			String versionDescription, boolean majorVersion,
-			String extraSettings, byte[] bytes, ServiceContext serviceContext)
+			long groupId, long folderId, String name, String sourceFileName,
+			String title, String description, String versionDescription,
+			boolean majorVersion, String extraSettings, byte[] bytes,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFileEntryPermission.check(
@@ -378,9 +414,9 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 		try {
 			fileEntry = dlFileEntryLocalService.updateFileEntry(
-				getUserId(), groupId, folderId, newFolderId, name,
-				sourceFileName, title, description, versionDescription,
-				majorVersion, extraSettings, bytes, serviceContext);
+				getUserId(), groupId, folderId, name, sourceFileName, title,
+				description, versionDescription, majorVersion, extraSettings,
+				bytes, serviceContext);
 		}
 		finally {
 			if (!hasLock) {
@@ -395,10 +431,10 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	}
 
 	public DLFileEntry updateFileEntry(
-			long groupId, long folderId, long newFolderId, String name,
-			String sourceFileName, String title, String description,
-			String versionDescription, boolean majorVersion,
-			String extraSettings, File file, ServiceContext serviceContext)
+			long groupId, long folderId, String name, String sourceFileName,
+			String title, String description, String versionDescription,
+			boolean majorVersion, String extraSettings, File file,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFileEntryPermission.check(
@@ -417,9 +453,9 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 		try {
 			fileEntry = dlFileEntryLocalService.updateFileEntry(
-				getUserId(), groupId, folderId, newFolderId, name,
-				sourceFileName, title, description, versionDescription,
-				majorVersion, extraSettings, file, serviceContext);
+				getUserId(), groupId, folderId, name, sourceFileName, title,
+				description, versionDescription, majorVersion, extraSettings,
+				file, serviceContext);
 		}
 		finally {
 			if (!hasLock) {

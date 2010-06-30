@@ -385,6 +385,17 @@ public class DLFileEntryLocalServiceUtil {
 		return getService().getNoAssetFileEntries();
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry moveFileEntry(
+		long userId, long groupId, long folderId, long newFolderId,
+		java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .moveFileEntry(userId, groupId, folderId, newFolderId, name,
+			serviceContext);
+	}
+
 	public static void updateAsset(long userId,
 		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
 		com.liferay.portlet.documentlibrary.model.DLFileVersion fileVersion,
@@ -397,47 +408,46 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		long userId, long groupId, long folderId, long newFolderId,
-		java.lang.String name, java.lang.String sourceFileName,
-		java.lang.String title, java.lang.String description,
-		java.lang.String versionDescription, boolean majorVersion,
-		java.lang.String extraSettings, byte[] bytes,
+		long userId, long groupId, long folderId, java.lang.String name,
+		java.lang.String sourceFileName, java.lang.String title,
+		java.lang.String description, java.lang.String versionDescription,
+		boolean majorVersion, java.lang.String extraSettings, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateFileEntry(userId, groupId, folderId, newFolderId,
-			name, sourceFileName, title, description, versionDescription,
+				   .updateFileEntry(userId, groupId, folderId, name,
+			sourceFileName, title, description, versionDescription,
 			majorVersion, extraSettings, bytes, serviceContext);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		long userId, long groupId, long folderId, long newFolderId,
-		java.lang.String name, java.lang.String sourceFileName,
-		java.lang.String title, java.lang.String description,
-		java.lang.String versionDescription, boolean majorVersion,
-		java.lang.String extraSettings, java.io.File file,
+		long userId, long groupId, long folderId, java.lang.String name,
+		java.lang.String sourceFileName, java.lang.String title,
+		java.lang.String description, java.lang.String versionDescription,
+		boolean majorVersion, java.lang.String extraSettings,
+		java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateFileEntry(userId, groupId, folderId, newFolderId,
-			name, sourceFileName, title, description, versionDescription,
+				   .updateFileEntry(userId, groupId, folderId, name,
+			sourceFileName, title, description, versionDescription,
 			majorVersion, extraSettings, file, serviceContext);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		long userId, long groupId, long folderId, long newFolderId,
-		java.lang.String name, java.lang.String sourceFileName,
-		java.lang.String title, java.lang.String description,
-		java.lang.String versionDescription, boolean majorVersion,
-		java.lang.String extraSettings, java.io.InputStream is, long size,
+		long userId, long groupId, long folderId, java.lang.String name,
+		java.lang.String sourceFileName, java.lang.String title,
+		java.lang.String description, java.lang.String versionDescription,
+		boolean majorVersion, java.lang.String extraSettings,
+		java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateFileEntry(userId, groupId, folderId, newFolderId,
-			name, sourceFileName, title, description, versionDescription,
+				   .updateFileEntry(userId, groupId, folderId, name,
+			sourceFileName, title, description, versionDescription,
 			majorVersion, extraSettings, is, size, serviceContext);
 	}
 

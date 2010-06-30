@@ -183,6 +183,15 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService {
 			owner, expirationTime);
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry moveFileEntry(
+		long groupId, long folderId, long newFolderId, java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntryService.moveFileEntry(groupId, folderId,
+			newFolderId, name, serviceContext);
+	}
+
 	public com.liferay.portal.model.Lock refreshFileEntryLock(
 		java.lang.String lockUuid, long expirationTime)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -204,21 +213,20 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService {
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		long groupId, long folderId, long newFolderId, java.lang.String name,
+		long groupId, long folderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
 		java.lang.String description, java.lang.String versionDescription,
 		boolean majorVersion, java.lang.String extraSettings, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlFileEntryService.updateFileEntry(groupId, folderId,
-			newFolderId, name, sourceFileName, title, description,
-			versionDescription, majorVersion, extraSettings, bytes,
-			serviceContext);
+		return _dlFileEntryService.updateFileEntry(groupId, folderId, name,
+			sourceFileName, title, description, versionDescription,
+			majorVersion, extraSettings, bytes, serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		long groupId, long folderId, long newFolderId, java.lang.String name,
+		long groupId, long folderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
 		java.lang.String description, java.lang.String versionDescription,
 		boolean majorVersion, java.lang.String extraSettings,
@@ -226,10 +234,9 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService {
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlFileEntryService.updateFileEntry(groupId, folderId,
-			newFolderId, name, sourceFileName, title, description,
-			versionDescription, majorVersion, extraSettings, file,
-			serviceContext);
+		return _dlFileEntryService.updateFileEntry(groupId, folderId, name,
+			sourceFileName, title, description, versionDescription,
+			majorVersion, extraSettings, file, serviceContext);
 	}
 
 	public boolean verifyFileEntryLock(long groupId, long folderId,

@@ -987,6 +987,64 @@ public class DLFileEntryServiceHttp {
 		}
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry moveFileEntry(
+		HttpPrincipal httpPrincipal, long groupId, long folderId,
+		long newFolderId, java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(folderId);
+
+			Object paramObj2 = new LongWrapper(newFolderId);
+
+			Object paramObj3 = name;
+
+			if (name == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj4 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(DLFileEntryServiceUtil.class.getName(),
+					"moveFileEntry",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.portlet.documentlibrary.model.DLFileEntry)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.portal.model.Lock refreshFileEntryLock(
 		HttpPrincipal httpPrincipal, java.lang.String lockUuid,
 		long expirationTime)
@@ -1117,10 +1175,10 @@ public class DLFileEntryServiceHttp {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		HttpPrincipal httpPrincipal, long groupId, long folderId,
-		long newFolderId, java.lang.String name,
-		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String versionDescription,
-		boolean majorVersion, java.lang.String extraSettings, byte[] bytes,
+		java.lang.String name, java.lang.String sourceFileName,
+		java.lang.String title, java.lang.String description,
+		java.lang.String versionDescription, boolean majorVersion,
+		java.lang.String extraSettings, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -1129,56 +1187,54 @@ public class DLFileEntryServiceHttp {
 
 			Object paramObj1 = new LongWrapper(folderId);
 
-			Object paramObj2 = new LongWrapper(newFolderId);
-
-			Object paramObj3 = name;
+			Object paramObj2 = name;
 
 			if (name == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = sourceFileName;
+
+			if (sourceFileName == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = sourceFileName;
+			Object paramObj4 = title;
 
-			if (sourceFileName == null) {
+			if (title == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = title;
+			Object paramObj5 = description;
 
-			if (title == null) {
+			if (description == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = description;
+			Object paramObj6 = versionDescription;
 
-			if (description == null) {
+			if (versionDescription == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = versionDescription;
+			Object paramObj7 = new BooleanWrapper(majorVersion);
 
-			if (versionDescription == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = new BooleanWrapper(majorVersion);
-
-			Object paramObj9 = extraSettings;
+			Object paramObj8 = extraSettings;
 
 			if (extraSettings == null) {
-				paramObj9 = new NullWrapper("java.lang.String");
+				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj10 = bytes;
+			Object paramObj9 = bytes;
 
 			if (bytes == null) {
-				paramObj10 = new NullWrapper("[B");
+				paramObj9 = new NullWrapper("[B");
 			}
 
-			Object paramObj11 = serviceContext;
+			Object paramObj10 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj11 = new NullWrapper(
+				paramObj10 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -1187,7 +1243,7 @@ public class DLFileEntryServiceHttp {
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11
+						paramObj10
 					});
 
 			Object returnObj = null;
@@ -1218,11 +1274,10 @@ public class DLFileEntryServiceHttp {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		HttpPrincipal httpPrincipal, long groupId, long folderId,
-		long newFolderId, java.lang.String name,
-		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String versionDescription,
-		boolean majorVersion, java.lang.String extraSettings,
-		java.io.File file,
+		java.lang.String name, java.lang.String sourceFileName,
+		java.lang.String title, java.lang.String description,
+		java.lang.String versionDescription, boolean majorVersion,
+		java.lang.String extraSettings, java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -1231,56 +1286,54 @@ public class DLFileEntryServiceHttp {
 
 			Object paramObj1 = new LongWrapper(folderId);
 
-			Object paramObj2 = new LongWrapper(newFolderId);
-
-			Object paramObj3 = name;
+			Object paramObj2 = name;
 
 			if (name == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = sourceFileName;
+
+			if (sourceFileName == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = sourceFileName;
+			Object paramObj4 = title;
 
-			if (sourceFileName == null) {
+			if (title == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = title;
+			Object paramObj5 = description;
 
-			if (title == null) {
+			if (description == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = description;
+			Object paramObj6 = versionDescription;
 
-			if (description == null) {
+			if (versionDescription == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = versionDescription;
+			Object paramObj7 = new BooleanWrapper(majorVersion);
 
-			if (versionDescription == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = new BooleanWrapper(majorVersion);
-
-			Object paramObj9 = extraSettings;
+			Object paramObj8 = extraSettings;
 
 			if (extraSettings == null) {
-				paramObj9 = new NullWrapper("java.lang.String");
+				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj10 = file;
+			Object paramObj9 = file;
 
 			if (file == null) {
-				paramObj10 = new NullWrapper("java.io.File");
+				paramObj9 = new NullWrapper("java.io.File");
 			}
 
-			Object paramObj11 = serviceContext;
+			Object paramObj10 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj11 = new NullWrapper(
+				paramObj10 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -1289,7 +1342,7 @@ public class DLFileEntryServiceHttp {
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11
+						paramObj10
 					});
 
 			Object returnObj = null;

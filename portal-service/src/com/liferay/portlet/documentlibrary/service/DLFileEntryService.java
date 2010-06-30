@@ -158,6 +158,12 @@ public interface DLFileEntryService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry moveFileEntry(
+		long groupId, long folderId, long newFolderId, java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public com.liferay.portal.model.Lock refreshFileEntryLock(
 		java.lang.String lockUuid, long expirationTime)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -173,7 +179,7 @@ public interface DLFileEntryService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		long groupId, long folderId, long newFolderId, java.lang.String name,
+		long groupId, long folderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
 		java.lang.String description, java.lang.String versionDescription,
 		boolean majorVersion, java.lang.String extraSettings, byte[] bytes,
@@ -182,7 +188,7 @@ public interface DLFileEntryService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		long groupId, long folderId, long newFolderId, java.lang.String name,
+		long groupId, long folderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
 		java.lang.String description, java.lang.String versionDescription,
 		boolean majorVersion, java.lang.String extraSettings,
