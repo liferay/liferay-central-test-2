@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
@@ -240,7 +241,9 @@ public class BookmarksEntryLocalServiceImpl
 	public int getFoldersEntriesCount(long groupId, List<Long> folderIds)
 		throws SystemException {
 
-		return bookmarksEntryFinder.countByG_F(groupId, folderIds);
+		return bookmarksEntryPersistence.countByG_F(
+			groupId,
+			ArrayUtil.toArray(folderIds.toArray(new Long[folderIds.size()])));
 	}
 
 	public List<BookmarksEntry> getGroupEntries(

@@ -14,20 +14,14 @@
 
 package com.liferay.portlet.bookmarks.service.persistence;
 
-import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
-import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -39,58 +33,8 @@ public class BookmarksEntryFinderImpl
 	extends BasePersistenceImpl<BookmarksEntry>
 	implements BookmarksEntryFinder {
 
-	public static String COUNT_BY_G_F =
-		BookmarksEntryFinder.class.getName() + ".countByG_F";
-
 	public static String FIND_BY_NO_ASSETS =
 		BookmarksEntryFinder.class.getName() + ".findByNoAssets";
-
-	public int countByG_F(long groupId, List<Long> folderIds)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_BY_G_F);
-
-			sql = StringUtil.replace(
-				sql, "[$FOLDER_ID$]", getFolderIds(folderIds));
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			for (int i = 0; i < folderIds.size(); i++) {
-				Long folderId = folderIds.get(i);
-
-				qPos.add(folderId);
-			}
-
-			Iterator<Long> itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
 
 	public List<BookmarksEntry> findByNoAssets() throws SystemException {
 		Session session = null;
@@ -112,24 +56,6 @@ public class BookmarksEntryFinderImpl
 		finally {
 			closeSession(session);
 		}
-	}
-
-	protected String getFolderIds(List<Long> folderIds) {
-		if (folderIds.isEmpty()) {
-			return StringPool.BLANK;
-		}
-
-		StringBundler sb = new StringBundler(folderIds.size() * 2 - 1);
-
-		for (int i = 0; i < folderIds.size(); i++) {
-			sb.append("folderId = ? ");
-
-			if ((i + 1) != folderIds.size()) {
-				sb.append("OR ");
-			}
-		}
-
-		return sb.toString();
 	}
 
 }
