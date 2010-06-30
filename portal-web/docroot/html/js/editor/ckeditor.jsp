@@ -52,15 +52,20 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 			CKEDITOR.config.toolbar = '<%= TextFormatter.format(HtmlUtil.escape(toolbarSet), TextFormatter.M) %>';
 			CKEDITOR.config.customConfig = '<%= request.getContextPath() %>/html/js/editor/ckeditor/ckconfig.jsp?p_l_id=<%= plid %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>';
 
-			setInterval(
+			ckEditor.on(
+				'instanceReady',
 				function() {
-					try {
-						onChangeCallback();
-					}
-					catch(e) {
-					}
-				},
-				300
+					setInterval(
+						function() {
+							try {
+								onChangeCallback();
+							}
+							catch(e) {
+							}
+						},
+						300
+					);
+				}
 			);
 		}
 
