@@ -45,12 +45,12 @@ public class CacheRegistryUtil {
 		getCacheRegistry().setActive(active);
 	}
 
-	public static void unregister(String name) {
-		getCacheRegistry().unregister(name);
+	public static void setCacheRegistry(CacheRegistry cacheRegistry) {
+		_cacheRegistry = cacheRegistry;
 	}
 
-	public void setCacheRegistry(CacheRegistry cacheRegistry) {
-		_cacheRegistry = cacheRegistry;
+	public static void unregister(String name) {
+		getCacheRegistry().unregister(name);
 	}
 
 	private static CacheRegistry _cacheRegistry;

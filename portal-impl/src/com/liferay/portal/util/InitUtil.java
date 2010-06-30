@@ -14,8 +14,10 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.cache.CacheRegistryImpl;
 import com.liferay.portal.configuration.ConfigurationFactoryImpl;
 import com.liferay.portal.dao.db.DBFactoryImpl;
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -100,6 +102,10 @@ public class InitUtil {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		// Cache registry
+
+		CacheRegistryUtil.setCacheRegistry(new CacheRegistryImpl());
 
 		// Configuration factory
 
