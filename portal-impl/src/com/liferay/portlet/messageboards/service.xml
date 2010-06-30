@@ -288,7 +288,6 @@
 			<finder-column name="status" />
 		</finder>
 
-
 		<!-- References -->
 
 		<reference package-path="com.liferay.documentlibrary" entity="DL" />
