@@ -97,6 +97,21 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 				/>
 			</c:if>
 
+			<c:if test="<%= showActions && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
+				<portlet:renderURL var="moveURL">
+					<portlet:param name="struts_action" value="/document_library/move_file_entry" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="folderId" value="<%= String.valueOf(fileEntry.getFolderId()) %>" />
+					<portlet:param name="name" value="<%= HtmlUtil.unescape(fileEntry.getName()) %>" />
+				</portlet:renderURL>
+
+				<liferay-ui:icon
+					image="submit"
+					message="move"
+					url="<%= moveURL %>"
+				/>
+			</c:if>
+
 			<c:if test="<%= showActions %>">
 				<%@ include file="/html/portlet/document_library/file_entry_action_lock.jspf" %>
 			</c:if>

@@ -217,13 +217,8 @@ public class EditFileEntryAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DLFileEntry.class.getName(), actionRequest);
 
-		DLFileEntry fileEntry = DLFileEntryServiceUtil.getFileEntry(
-			groupId, folderId, name);
-
-		DLFileEntryServiceUtil.updateFileEntry(
-			groupId, folderId, newFolderId, name, null, fileEntry.getTitle(),
-			fileEntry.getDescription(), null, false,
-			fileEntry.getExtraSettings(), (File)null, serviceContext);
+		DLFileEntryServiceUtil.moveFileEntry(
+			groupId, folderId, newFolderId, name, serviceContext);
 	}
 
 	protected void revertFileEntry(ActionRequest actionRequest)
@@ -275,7 +270,6 @@ public class EditFileEntryAction extends PortletAction {
 
 		long groupId = themeDisplay.getScopeGroupId();
 		long folderId = ParamUtil.getLong(uploadRequest, "folderId");
-		long newFolderId = ParamUtil.getLong(uploadRequest, "newFolderId");
 		String name = ParamUtil.getString(uploadRequest, "name");
 		String sourceFileName = uploadRequest.getFileName("file");
 
@@ -306,7 +300,7 @@ public class EditFileEntryAction extends PortletAction {
 			// Add file entry
 
 			DLFileEntry fileEntry = DLFileEntryServiceUtil.addFileEntry(
-				groupId, newFolderId, sourceFileName, title, description,
+				groupId, folderId, sourceFileName, title, description,
 				versionDescription, extraSettings, file, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
@@ -318,9 +312,9 @@ public class EditFileEntryAction extends PortletAction {
 			// Update file entry
 
 			DLFileEntryServiceUtil.updateFileEntry(
-				groupId, folderId, newFolderId, name, sourceFileName, title,
-				description, versionDescription, majorVersion, extraSettings,
-				file, serviceContext);
+				groupId, folderId, name, sourceFileName, title, description,
+				versionDescription, majorVersion, extraSettings, file,
+				serviceContext);
 		}
 
 		AssetPublisherUtil.addRecentFolderId(

@@ -94,7 +94,7 @@ public class ServiceMonitorAdvice extends ChainableMethodAdvice {
 
 	public void afterReturning(MethodInvocation methodInvocation, Object result)
 		throws Throwable {
-		
+
 		ServiceRequestDataSample serviceRequestDataSample =
 			_serviceRequestDataSampleThreadLocal.get();
 
@@ -185,7 +185,6 @@ public class ServiceMonitorAdvice extends ChainableMethodAdvice {
 			new AutoResetThreadLocal<ServiceRequestDataSample>(
 				ServiceRequestDataSample.class +
 				"._serviceRequestDataSampleThreadLocal");
-
 
 	private String _monitoringDestinationName;
 	private Set<String> _monitoredClasses = new HashSet<String>();

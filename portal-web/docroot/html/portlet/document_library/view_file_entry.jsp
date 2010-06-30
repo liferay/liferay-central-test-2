@@ -127,19 +127,21 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 <c:if test="<%= isLocked %>">
 	<c:choose>
 		<c:when test="<%= hasLock %>">
-			<c:choose>
-				<c:when test="<%= lock.isNeverExpires() %>">
-					<liferay-ui:message key="you-now-have-an-indefinite-lock-on-this-document" />
-				</c:when>
-				<c:otherwise>
+			<div class="portlet-msg-success">
+				<c:choose>
+					<c:when test="<%= lock.isNeverExpires() %>">
+						<liferay-ui:message key="you-now-have-an-indefinite-lock-on-this-document" />
+					</c:when>
+					<c:otherwise>
 
-					<%
-					String lockExpirationTime = LanguageUtil.getTimeDescription(pageContext, DLFileEntryImpl.LOCK_EXPIRATION_TIME).toLowerCase();
-					%>
+						<%
+						String lockExpirationTime = LanguageUtil.getTimeDescription(pageContext, DLFileEntryImpl.LOCK_EXPIRATION_TIME).toLowerCase();
+						%>
 
-					<%= LanguageUtil.format(pageContext, "you-now-have-a-lock-on-this-document", lockExpirationTime, false) %>
-				</c:otherwise>
-			</c:choose>
+						<%= LanguageUtil.format(pageContext, "you-now-have-a-lock-on-this-document", lockExpirationTime, false) %>
+					</c:otherwise>
+				</c:choose>
+			</div>
 		</c:when>
 		<c:otherwise>
 			<div class="portlet-msg-error">

@@ -122,7 +122,7 @@ portletURL.setParameter("name", name);
 				fallbackContainer: '#<portlet:namespace />fallback',
 				maxFileSize: <%= PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) %> / 1024,
 				namespace: '<portlet:namespace />',
-				uploadFile: '<liferay-portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" doAsUserId="<%= user.getUserId() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="newFolderId" value="<%= String.valueOf(folderId) %>" /></liferay-portlet:actionURL><liferay-ui:input-permissions-params modelName="<%= DLFileEntry.class.getName() %>" />'
+				uploadFile: '<liferay-portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" doAsUserId="<%= user.getUserId() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></liferay-portlet:actionURL><liferay-ui:input-permissions-params modelName="<%= DLFileEntry.class.getName() %>" />'
 			}
 		);
 	</aui:script>
@@ -138,7 +138,6 @@ portletURL.setParameter("name", name);
 	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 	<aui:input name="uploadProgressId" type="hidden" value="<%= uploadProgressId %>" />
 	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
-	<aui:input name="newFolderId" type="hidden" value="<%= folderId %>" />
 	<aui:input name="name" type="hidden" value="<%= name %>" />
 
 	<liferay-ui:header
@@ -179,44 +178,53 @@ portletURL.setParameter("name", name);
 			</c:if>
 		</aui:field-wrapper>
 
-		<c:if test="<%= (fileEntry != null) || (folderId <= 0) %>">
-			<aui:field-wrapper label="folder">
+		<%
+		String folderName = StringPool.BLANK;
 
-				<%
-				String folderName = StringPool.BLANK;
+		if (folderId > 0) {
+			folder = DLFolderLocalServiceUtil.getFolder(folderId);
 
-				if (folderId > 0) {
-					folder = DLFolderLocalServiceUtil.getFolder(folderId);
+			folder = folder.toEscapedModel();
 
-					folder = folder.toEscapedModel();
+			folderId = folder.getFolderId();
+			folderName = folder.getName();
+		}
+		else {
+			folderName = LanguageUtil.get(pageContext, "document-home");
+		}
 
-					folderId = folder.getFolderId();
-					folderName = folder.getName();
-				}
+		%>
 
-				%>
+		<portlet:renderURL var="viewFolderURL">
+			<portlet:param name="struts_action" value="/document_library/view" />
+			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
+		</portlet:renderURL>
 
-				<portlet:renderURL var="viewFolderURL">
-					<portlet:param name="struts_action" value="/document_library/view" />
-					<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
-				</portlet:renderURL>
+		<c:choose>
+			<c:when test="<%= (folderId <= 0) %>">
+				<aui:field-wrapper label="folder">
+					<aui:a href="<%= viewFolderURL %>" id="folderName"><%= folderName %></aui:a>
 
-				<aui:a href="<%= viewFolderURL %>" id="folderName"><%= folderName %></aui:a>
+					<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectFolderURL">
+						<portlet:param name="struts_action" value="/document_library/select_folder" />
+						<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
+					</portlet:renderURL>
 
-				<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectFolderURL">
-					<portlet:param name="struts_action" value="/document_library/select_folder" />
-					<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
-				</portlet:renderURL>
+					<%
+					String taglibOpenFolderWindow = "var folderWindow = window.open('" + selectFolderURL + "','folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();";
+					%>
 
-				<%
-				String taglibOpenFolderWindow = "var folderWindow = window.open('" + selectFolderURL + "','folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();";
-				%>
+					<aui:button onClick='<%= taglibOpenFolderWindow %>' value="select" />
 
-				<aui:button onClick='<%= taglibOpenFolderWindow %>' value="select" />
-
-				<aui:button name="removeFolderButton" onClick='<%= renderResponse.getNamespace() + "removeFolder();" %>' value="remove" />
-			</aui:field-wrapper>
-		</c:if>
+					<aui:button name="removeFolderButton" onClick='<%= renderResponse.getNamespace() + "removeFolder();" %>' value="remove" />
+				</aui:field-wrapper>
+			</c:when>
+			<c:otherwise>
+				<aui:field-wrapper label="folder">
+					<aui:a href="<%= viewFolderURL %>"><%= folderName %></aui:a>
+				</aui:field-wrapper>
+			</c:otherwise>
+		</c:choose>
 
 		<aui:input name="file" type="file" />
 
@@ -277,7 +285,7 @@ portletURL.setParameter("name", name);
 		</c:if>
 
 		<aui:button-row>
-			<aui:button disabled="<%= isLocked && !hasLock %>" type="submit" value="save" />
+			<aui:button disabled="<%= isLocked && !hasLock %>" type="submit" value="publish" />
 
 			<c:if test="<%= (fileEntry != null) && ((isLocked && hasLock) || !isLocked) %>">
 				<c:choose>
@@ -311,7 +319,7 @@ portletURL.setParameter("name", name);
 	}
 
 	function <portlet:namespace />removeFolder() {
-		document.<portlet:namespace />fm.<portlet:namespace />newFolderId.value = "<%= rootFolderId %>";
+		document.<portlet:namespace />fm.<portlet:namespace />folderId.value = "<%= rootFolderId %>";
 
 		var nameEl = document.getElementById("<portlet:namespace />folderName");
 
@@ -327,7 +335,7 @@ portletURL.setParameter("name", name);
 	}
 
 	function <portlet:namespace />selectFolder(folderId, folderName) {
-		document.<portlet:namespace />fm.<portlet:namespace />newFolderId.value = folderId;
+		document.<portlet:namespace />fm.<portlet:namespace />folderId.value = folderId;
 
 		var nameEl = document.getElementById("<portlet:namespace />folderName");
 

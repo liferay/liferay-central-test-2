@@ -380,11 +380,16 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 					importedFileEntry =
 						DLFileEntryLocalServiceUtil.updateFileEntry(
 							userId, groupId, existingFileEntry.getFolderId(),
-							folderId, existingFileEntry.getName(),
-							fileEntry.getTitle(), fileEntry.getTitle(),
-							fileEntry.getDescription(), null, true,
-							fileEntry.getExtraSettings(), is,
+							existingFileEntry.getName(), fileEntry.getTitle(),
+							fileEntry.getTitle(), fileEntry.getDescription(),
+							null, true, fileEntry.getExtraSettings(), is,
 							fileEntry.getSize(), serviceContext);
+
+					importedFileEntry =
+						DLFileEntryLocalServiceUtil.moveFileEntry(
+							userId, groupId, existingFileEntry.getFolderId(),
+							folderId, existingFileEntry.getName(),
+							serviceContext);
 				}
 				else {
 					DLFileVersion latestFileVersion =

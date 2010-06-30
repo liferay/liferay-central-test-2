@@ -303,9 +303,8 @@ public class DLFileEntryLocalServiceImpl
 			dlFileEntryPersistence.findByG_F_T(groupId, folderId, title);
 
 			return updateFileEntry(
-				userId, groupId, folderId, folderId, name, sourceName, title,
-				description, versionDescription, false, extraSettings, file,
-				serviceContext);
+				userId, groupId, folderId, name, sourceName, title, description,
+				versionDescription, false, extraSettings, file, serviceContext);
 		}
 		catch (NoSuchFileEntryException nsfee) {
 			return addFileEntry(
@@ -673,6 +672,169 @@ public class DLFileEntryLocalServiceImpl
 		return dlFileEntryFinder.findByNoAssets();
 	}
 
+	public DLFileEntry moveFileEntry(
+			long userId, long groupId, long folderId, long newFolderId,
+			String name, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		Date now = new Date();
+
+		DLFileEntry fileEntry = dlFileEntryPersistence.findByG_F_N(
+			groupId, folderId, name);
+
+		long oldFileEntryId = fileEntry.getFileEntryId();
+
+		if (dlLocalService.hasFile(
+				user.getCompanyId(),
+				DLFileEntryImpl.getRepositoryId(groupId, newFolderId),
+				name, StringPool.BLANK)) {
+
+			throw new DuplicateFileException(name);
+		}
+
+		long newFileEntryId = counterLocalService.increment();
+
+		DLFileEntry newFileEntry = dlFileEntryPersistence.create(
+			newFileEntryId);
+
+		newFileEntry.setGroupId(fileEntry.getGroupId());
+		newFileEntry.setCompanyId(fileEntry.getCompanyId());
+		newFileEntry.setUserId(fileEntry.getUserId());
+		newFileEntry.setUserName(fileEntry.getUserName());
+		newFileEntry.setVersionUserId(fileEntry.getVersionUserId());
+		newFileEntry.setVersionUserName(fileEntry.getVersionUserName());
+		newFileEntry.setCreateDate(fileEntry.getCreateDate());
+		newFileEntry.setModifiedDate(fileEntry.getModifiedDate());
+		newFileEntry.setFolderId(newFolderId);
+		newFileEntry.setName(name);
+		newFileEntry.setTitle(fileEntry.getTitle());
+		newFileEntry.setDescription(fileEntry.getDescription());
+		newFileEntry.setVersion(fileEntry.getVersion());
+		newFileEntry.setSize(fileEntry.getSize());
+		newFileEntry.setReadCount(fileEntry.getReadCount());
+		newFileEntry.setExtraSettings(fileEntry.getExtraSettings());
+
+		dlFileEntryPersistence.update(newFileEntry, false);
+
+		dlFileEntryPersistence.remove(fileEntry);
+
+		workflowInstanceLinkLocalService.updateClassPK(
+			fileEntry.getCompanyId(), fileEntry.getGroupId(),
+			DLFileEntry.class.getName(), oldFileEntryId, newFileEntryId);
+
+		List<DLFileVersion> fileVersions =
+			dlFileVersionPersistence.findByG_F_N(
+				groupId, folderId, name);
+
+		for (DLFileVersion fileVersion : fileVersions) {
+			long newFileVersionId = counterLocalService.increment();
+
+			DLFileVersion newFileVersion = dlFileVersionPersistence.create(
+				newFileVersionId);
+
+			newFileVersion.setGroupId(fileVersion.getGroupId());
+			newFileVersion.setCompanyId(fileVersion.getCompanyId());
+			newFileVersion.setUserId(fileVersion.getUserId());
+			newFileVersion.setUserName(fileVersion.getUserName());
+			newFileVersion.setCreateDate(fileVersion.getCreateDate());
+			newFileVersion.setFolderId(newFolderId);
+			newFileVersion.setName(name);
+			newFileVersion.setVersion(fileVersion.getVersion());
+			newFileVersion.setSize(fileVersion.getSize());
+			newFileVersion.setStatus(fileVersion.getStatus());
+			newFileVersion.setStatusByUserId(userId);
+			newFileVersion.setStatusByUserName(user.getFullName());
+			newFileVersion.setStatusDate(
+				serviceContext.getModifiedDate(now));
+
+			dlFileVersionPersistence.update(newFileVersion, false);
+
+			dlFileVersionPersistence.remove(fileVersion);
+		}
+
+		dlFileShortcutLocalService.updateFileShortcuts(
+			groupId, folderId, name, newFolderId, name);
+
+		// Resources
+
+		Resource resource = resourceLocalService.getResource(
+			fileEntry.getCompanyId(), DLFileEntry.class.getName(),
+			ResourceConstants.SCOPE_INDIVIDUAL,
+			String.valueOf(fileEntry.getFileEntryId()));
+
+		resource.setPrimKey(String.valueOf(newFileEntryId));
+
+		resourcePersistence.update(resource, false);
+
+		// Asset
+
+		assetEntryLocalService.deleteEntry(
+			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+
+		List<DLFileShortcut> fileShortcuts =
+			dlFileShortcutPersistence.findByG_TF_TN(
+				groupId, folderId, name);
+
+		for (DLFileShortcut fileShortcut : fileShortcuts) {
+			assetEntryLocalService.deleteEntry(
+				DLFileShortcut.class.getName(),
+				fileShortcut.getFileShortcutId());
+		}
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+
+		// Ratings
+
+		RatingsStats stats = ratingsStatsLocalService.getStats(
+			DLFileEntry.class.getName(), oldFileEntryId);
+
+		stats.setClassPK(newFileEntryId);
+
+		ratingsStatsPersistence.update(stats, false);
+
+		long classNameId = PortalUtil.getClassNameId(
+			DLFileEntry.class.getName());
+
+		List<RatingsEntry> entries = ratingsEntryPersistence.findByC_C(
+			classNameId, oldFileEntryId);
+
+		for (RatingsEntry entry : entries) {
+			entry.setClassPK(newFileEntryId);
+
+			ratingsEntryPersistence.update(entry, false);
+		}
+
+		// Message boards
+
+		MBDiscussion discussion = mbDiscussionPersistence.fetchByC_C(
+			classNameId, oldFileEntryId);
+
+		if (discussion != null) {
+			discussion.setClassPK(newFileEntryId);
+
+			mbDiscussionPersistence.update(discussion, false);
+		}
+
+		// Social
+
+		socialActivityLocalService.deleteActivities(
+			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+
+		// File
+
+		dlService.updateFile(
+			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
+			newFileEntry.getGroupId(), fileEntry.getRepositoryId(),
+			newFileEntry.getRepositoryId(), name, newFileEntryId);
+
+		return newFileEntry;
+	}
+
 	public void updateAsset(
 			long userId, DLFileEntry fileEntry, DLFileVersion fileVersion,
 			long[] assetCategoryIds, String[] assetTagNames)
@@ -736,9 +898,9 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public DLFileEntry updateFileEntry(
-			long userId, long groupId, long folderId, long newFolderId,
-			String name, String sourceFileName, String title,
-			String description, String versionDescription, boolean majorVersion,
+			long userId, long groupId, long folderId, String name,
+			String sourceFileName, String title, String description,
+			String versionDescription, boolean majorVersion,
 			String extraSettings, byte[] bytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -751,15 +913,15 @@ public class DLFileEntryLocalServiceImpl
 		}
 
 		return updateFileEntry(
-			userId, groupId, folderId, newFolderId, name, sourceFileName, title,
-			description, versionDescription, majorVersion, extraSettings, is,
-			size, serviceContext);
+			userId, groupId, folderId, name, sourceFileName, title, description,
+			versionDescription, majorVersion, extraSettings, is, size,
+			serviceContext);
 	}
 
 	public DLFileEntry updateFileEntry(
-			long userId, long groupId, long folderId, long newFolderId,
-			String name, String sourceFileName, String title,
-			String description, String versionDescription, boolean majorVersion,
+			long userId, long groupId, long folderId, String name,
+			String sourceFileName, String title, String description,
+			String versionDescription, boolean majorVersion,
 			String extraSettings, File file, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -773,9 +935,9 @@ public class DLFileEntryLocalServiceImpl
 			}
 
 			return updateFileEntry(
-				userId, groupId, folderId, newFolderId, name, sourceFileName,
-				title, description, versionDescription, majorVersion,
-				extraSettings, is, size, serviceContext);
+				userId, groupId, folderId, name, sourceFileName, title,
+				description, versionDescription, majorVersion, extraSettings,
+				is, size, serviceContext);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new NoSuchFileException();
@@ -783,9 +945,9 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public DLFileEntry updateFileEntry(
-			long userId, long groupId, long folderId, long newFolderId,
-			String name, String sourceFileName, String title,
-			String description, String versionDescription, boolean majorVersion,
+			long userId, long groupId, long folderId, String name,
+			String sourceFileName, String title, String description,
+			String versionDescription, boolean majorVersion,
 			String extraSettings, InputStream is, long size,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -808,167 +970,12 @@ public class DLFileEntryLocalServiceImpl
 			groupId, folderId, name);
 
 		validate(
-			groupId, folderId, newFolderId, name, title, sourceFileName, is);
+			groupId, folderId, name, title, sourceFileName, is);
 
 		fileEntry.setTitle(title);
 		fileEntry.setDescription(description);
 		fileEntry.setExtraSettings(extraSettings);
 		fileEntry.setExpandoBridgeAttributes(serviceContext);
-
-		// Move file entry
-
-		if (folderId != newFolderId) {
-			long oldFileEntryId = fileEntry.getFileEntryId();
-
-			if (dlLocalService.hasFile(
-					user.getCompanyId(),
-					DLFileEntryImpl.getRepositoryId(groupId, newFolderId),
-					name, StringPool.BLANK)) {
-
-				throw new DuplicateFileException(name);
-			}
-
-			long newFileEntryId = counterLocalService.increment();
-
-			DLFileEntry newFileEntry = dlFileEntryPersistence.create(
-				newFileEntryId);
-
-			newFileEntry.setGroupId(fileEntry.getGroupId());
-			newFileEntry.setCompanyId(fileEntry.getCompanyId());
-			newFileEntry.setUserId(fileEntry.getUserId());
-			newFileEntry.setUserName(fileEntry.getUserName());
-			newFileEntry.setVersionUserId(fileEntry.getVersionUserId());
-			newFileEntry.setVersionUserName(fileEntry.getVersionUserName());
-			newFileEntry.setCreateDate(fileEntry.getCreateDate());
-			newFileEntry.setModifiedDate(fileEntry.getModifiedDate());
-			newFileEntry.setFolderId(newFolderId);
-			newFileEntry.setName(name);
-			newFileEntry.setTitle(fileEntry.getTitle());
-			newFileEntry.setDescription(fileEntry.getDescription());
-			newFileEntry.setVersion(fileEntry.getVersion());
-			newFileEntry.setSize(fileEntry.getSize());
-			newFileEntry.setReadCount(fileEntry.getReadCount());
-			newFileEntry.setExtraSettings(extraSettings);
-
-			dlFileEntryPersistence.update(newFileEntry, false);
-
-			dlFileEntryPersistence.remove(fileEntry);
-
-			workflowInstanceLinkLocalService.updateClassPK(
-				fileEntry.getCompanyId(), fileEntry.getGroupId(),
-				DLFileEntry.class.getName(), oldFileEntryId, newFileEntryId);
-
-			List<DLFileVersion> fileVersions =
-				dlFileVersionPersistence.findByG_F_N(
-					groupId, folderId, name);
-
-			for (DLFileVersion fileVersion : fileVersions) {
-				long newFileVersionId = counterLocalService.increment();
-
-				DLFileVersion newFileVersion = dlFileVersionPersistence.create(
-					newFileVersionId);
-
-				newFileVersion.setGroupId(fileVersion.getGroupId());
-				newFileVersion.setCompanyId(fileVersion.getCompanyId());
-				newFileVersion.setUserId(fileVersion.getUserId());
-				newFileVersion.setUserName(fileVersion.getUserName());
-				newFileVersion.setCreateDate(fileVersion.getCreateDate());
-				newFileVersion.setFolderId(newFolderId);
-				newFileVersion.setName(name);
-				newFileVersion.setVersion(fileVersion.getVersion());
-				newFileVersion.setSize(fileVersion.getSize());
-				newFileVersion.setStatus(fileVersion.getStatus());
-				newFileVersion.setStatusByUserId(userId);
-				newFileVersion.setStatusByUserName(user.getFullName());
-				newFileVersion.setStatusDate(
-					serviceContext.getModifiedDate(now));
-
-				dlFileVersionPersistence.update(newFileVersion, false);
-
-				dlFileVersionPersistence.remove(fileVersion);
-			}
-
-			dlFileShortcutLocalService.updateFileShortcuts(
-				groupId, folderId, name, newFolderId, name);
-
-			// Resources
-
-			Resource resource = resourceLocalService.getResource(
-				fileEntry.getCompanyId(), DLFileEntry.class.getName(),
-				ResourceConstants.SCOPE_INDIVIDUAL,
-				String.valueOf(fileEntry.getFileEntryId()));
-
-			resource.setPrimKey(String.valueOf(newFileEntryId));
-
-			resourcePersistence.update(resource, false);
-
-			// Asset
-
-			assetEntryLocalService.deleteEntry(
-				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-
-			List<DLFileShortcut> fileShortcuts =
-				dlFileShortcutPersistence.findByG_TF_TN(
-					groupId, folderId, name);
-
-			for (DLFileShortcut fileShortcut : fileShortcuts) {
-				assetEntryLocalService.deleteEntry(
-					DLFileShortcut.class.getName(),
-					fileShortcut.getFileShortcutId());
-			}
-
-			// Expando
-
-			expandoValueLocalService.deleteValues(
-				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-
-			// Ratings
-
-			RatingsStats stats = ratingsStatsLocalService.getStats(
-				DLFileEntry.class.getName(), oldFileEntryId);
-
-			stats.setClassPK(newFileEntryId);
-
-			ratingsStatsPersistence.update(stats, false);
-
-			long classNameId = PortalUtil.getClassNameId(
-				DLFileEntry.class.getName());
-
-			List<RatingsEntry> entries = ratingsEntryPersistence.findByC_C(
-				classNameId, oldFileEntryId);
-
-			for (RatingsEntry entry : entries) {
-				entry.setClassPK(newFileEntryId);
-
-				ratingsEntryPersistence.update(entry, false);
-			}
-
-			// Message boards
-
-			MBDiscussion discussion = mbDiscussionPersistence.fetchByC_C(
-				classNameId, oldFileEntryId);
-
-			if (discussion != null) {
-				discussion.setClassPK(newFileEntryId);
-
-				mbDiscussionPersistence.update(discussion, false);
-			}
-
-			// Social
-
-			socialActivityLocalService.deleteActivities(
-				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-
-			// File
-
-			dlService.updateFile(
-				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-				newFileEntry.getGroupId(), fileEntry.getRepositoryId(),
-				newFileEntry.getRepositoryId(), name, newFileEntryId);
-
-			folderId = newFolderId;
-			fileEntry = newFileEntry;
-		}
 
 		// File version
 
@@ -1337,16 +1344,12 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	protected void validate(
-			long groupId, long folderId, long newFolderId, String name,
-			String title, String sourceFileName, InputStream is)
+			long groupId, long folderId, String name, String title,
+			String sourceFileName, InputStream is)
 		throws PortalException, SystemException {
 
 		if (Validator.isNotNull(sourceFileName)) {
 			dlLocalService.validate(sourceFileName, sourceFileName, is);
-		}
-
-		if (folderId != newFolderId) {
-			folderId = newFolderId;
 		}
 
 		validate(groupId, folderId, name, title);

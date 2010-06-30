@@ -267,9 +267,14 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			serviceContext.setAssetTagNames(assetTagNames);
 
 			fileEntry = DLFileEntryServiceUtil.updateFileEntry(
-				groupId, folderId, newParentFolderId, name, newName, newName,
-				description, versionDescription, false, extraSettings, bytes,
+				groupId, folderId, name, newName, newName, description,
+				versionDescription, false, extraSettings, bytes,
 				serviceContext);
+
+			if (folderId != newParentFolderId) {
+				fileEntry = DLFileEntryServiceUtil.moveFileEntry(
+					groupId, folderId, newParentFolderId, name, serviceContext);
+			}
 
 			Tree documentTree = getFileEntryTree(
 				fileEntry, newParentFolderPath);
@@ -326,8 +331,8 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			serviceContext.setAssetTagNames(assetTagNames);
 
 			DLFileEntryServiceUtil.updateFileEntry(
-				groupId, parentFolderId, parentFolderId, name, title, title,
-				description, versionDescription, false, extraSettings,
+				groupId, parentFolderId, name, title, title, description,
+				versionDescription, false, extraSettings,
 				sharepointRequest.getBytes(), serviceContext);
 		}
 		catch (NoSuchFileEntryException nsfee) {
