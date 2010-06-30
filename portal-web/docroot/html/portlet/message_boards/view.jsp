@@ -248,7 +248,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 			headerNames.add("last-post");
 			headerNames.add(StringPool.BLANK);
 
-			SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+			SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-threads-in-this-category");
 
 			int total = MBThreadServiceUtil.getThreadsCount(scopeGroupId, categoryId, WorkflowConstants.STATUS_APPROVED);
 

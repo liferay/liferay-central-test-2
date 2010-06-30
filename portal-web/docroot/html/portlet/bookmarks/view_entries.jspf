@@ -34,6 +34,7 @@ OrderByComparator orderByComparator = BookmarksUtil.getEntriesOrderByComparator(
 	curParam="cur2"
 	delta="<%= entriesPerPage %>"
 	deltaConfigurable="<%= false %>"
+	emptyResultsMessage="there-are-no-bookmarks-in-this-folder"
 	headerNames="<%= StringUtil.merge(entryColumns) %>"
 	iteratorURL="<%= portletURL %>"
 	orderByCol="<%= orderByCol %>"
