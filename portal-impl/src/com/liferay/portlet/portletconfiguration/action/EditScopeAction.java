@@ -205,8 +205,7 @@ public class EditScopeAction extends EditConfigurationAction {
 			newTitle = sb.toString();
 		}
 
-		preferences.setValue(
-			"lfr-scope-layout-uuid", scopeLayoutUuid);
+		preferences.setValue("lfr-scope-layout-uuid", scopeLayoutUuid);
 
 		if (!newTitle.equals(title)) {
 			preferences.setValue(
