@@ -156,6 +156,15 @@ public class ClusterRequestReceiver extends BaseReceiver {
 
 		ClusterNodeResponse clusterNodeResponse = new ClusterNodeResponse();
 
+		try {
+			ClusterNode localClusterNode =
+				_clusterExecutorImpl.getLocalClusterNode();
+			clusterNodeResponse.setClusterNode(localClusterNode);
+		}
+		catch (Exception e) {
+			clusterNodeResponse.setException(e);
+		}
+
 		if (clusterMessageType.equals(ClusterMessageType.NOTIFY) ||
 			clusterMessageType.equals(ClusterMessageType.UPDATE)) {
 
@@ -167,7 +176,6 @@ public class ClusterRequestReceiver extends BaseReceiver {
 					new AddressImpl(sourceAddress), originatingClusterNode);
 
 				clusterNodeResponse.setClusterMessageType(clusterMessageType);
-				clusterNodeResponse.setClusterNode(originatingClusterNode);
 			}
 			else {
 				if (_log.isWarnEnabled()) {
