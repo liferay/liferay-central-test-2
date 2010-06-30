@@ -40,7 +40,7 @@ public class ClusterExecutorUtil {
 		_clusterExecutor.destroy();
 	}
 
-	public static ClusterNodeResponses execute(ClusterRequest clusterRequest)
+	public static FutureClusterResponses execute(ClusterRequest clusterRequest)
 		throws SystemException {
 
 		if ((_clusterExecutor == null) || !_clusterExecutor.isEnabled()) {
@@ -48,7 +48,7 @@ public class ClusterExecutorUtil {
 				_log.warn("ClusterExecutorUtil has not been initialized");
 			}
 
-			return ClusterNodeResponses.EMPTY_CLUSTER_NODE_RESPONSES;
+			return null;
 		}
 
 		return _clusterExecutor.execute(clusterRequest);
