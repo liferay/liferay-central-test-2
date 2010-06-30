@@ -79,6 +79,7 @@
 
 	<target name="test-db-postgresql-5.1.0-smoke-test">
 		<antcall target="prepare-db-postgresql-common">
+			<param name="custom.properties" value="permissions.user.check.algorithm=5" />
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="sql.version" value="5.1.0" />
 		</antcall>
@@ -120,6 +121,7 @@
 
 	<target name="test-db-postgresql-5.1.1-smoke-test">
 		<antcall target="prepare-db-postgresql-common">
+			<param name="custom.properties" value="permissions.user.check.algorithm=5" />
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="sql.version" value="5.1.1" />
 		</antcall>
@@ -161,6 +163,7 @@
 
 	<target name="test-db-postgresql-5.1.2-smoke-test">
 		<antcall target="prepare-db-postgresql-common">
+			<param name="custom.properties" value="permissions.user.check.algorithm=5" />
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="sql.version" value="5.1.2" />
 		</antcall>
@@ -200,6 +203,7 @@
 
 	<target name="test-db-postgresql-5.2.0-smoke-test">
 		<antcall target="prepare-db-postgresql-common">
+			<param name="custom.properties" value="permissions.user.check.algorithm=5" />
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="sql.version" value="5.2.0" />
 		</antcall>
@@ -242,6 +246,7 @@
 
 	<target name="test-db-postgresql-5.2.1-smoke-test">
 		<antcall target="prepare-db-postgresql-common">
+			<param name="custom.properties" value="permissions.user.check.algorithm=5" />
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="sql.version" value="5.2.1" />
 		</antcall>
@@ -284,6 +289,7 @@
 
 	<target name="test-db-postgresql-5.2.2-smoke-test">
 		<antcall target="prepare-db-postgresql-common">
+			<param name="custom.properties" value="permissions.user.check.algorithm=5" />
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="sql.version" value="5.2.2" />
 		</antcall>
@@ -323,6 +329,7 @@
 
 	<target name="test-db-postgresql-5.2.3-smoke-test">
 		<antcall target="prepare-db-postgresql-common">
+			<param name="custom.properties" value="permissions.user.check.algorithm=5" />
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="sql.version" value="5.2.3" />
 		</antcall>
@@ -366,6 +373,7 @@
 
 	<target name="test-db-postgresql-5.2.7-smoke-test">
 		<antcall target="prepare-db-postgresql-common">
+			<param name="custom.properties" value="permissions.user.check.algorithm=5" />
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="sql.version" value="5.2.7" />
 		</antcall>
