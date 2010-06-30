@@ -377,13 +377,12 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 							fileEntry.getSize(), serviceContext);
 				}
 				else if (!isDuplicateFileEntry(fileEntry, existingFileEntry)) {
-					importedFileEntry =
-						DLFileEntryLocalServiceUtil.updateFileEntry(
-							userId, groupId, existingFileEntry.getFolderId(),
-							existingFileEntry.getName(), fileEntry.getTitle(),
-							fileEntry.getTitle(), fileEntry.getDescription(),
-							null, true, fileEntry.getExtraSettings(), is,
-							fileEntry.getSize(), serviceContext);
+					DLFileEntryLocalServiceUtil.updateFileEntry(
+						userId, groupId, existingFileEntry.getFolderId(),
+						existingFileEntry.getName(), fileEntry.getTitle(),
+						fileEntry.getTitle(), fileEntry.getDescription(), null,
+						true, fileEntry.getExtraSettings(), is,
+						fileEntry.getSize(), serviceContext);
 
 					importedFileEntry =
 						DLFileEntryLocalServiceUtil.moveFileEntry(

@@ -688,8 +688,8 @@ public class DLFileEntryLocalServiceImpl
 
 		if (dlLocalService.hasFile(
 				user.getCompanyId(),
-				DLFileEntryImpl.getRepositoryId(groupId, newFolderId),
-				name, StringPool.BLANK)) {
+				DLFileEntryImpl.getRepositoryId(groupId, newFolderId), name,
+				StringPool.BLANK)) {
 
 			throw new DuplicateFileException(name);
 		}
@@ -724,9 +724,8 @@ public class DLFileEntryLocalServiceImpl
 			fileEntry.getCompanyId(), fileEntry.getGroupId(),
 			DLFileEntry.class.getName(), oldFileEntryId, newFileEntryId);
 
-		List<DLFileVersion> fileVersions =
-			dlFileVersionPersistence.findByG_F_N(
-				groupId, folderId, name);
+		List<DLFileVersion> fileVersions = dlFileVersionPersistence.findByG_F_N(
+			groupId, folderId, name);
 
 		for (DLFileVersion fileVersion : fileVersions) {
 			long newFileVersionId = counterLocalService.increment();
@@ -746,8 +745,7 @@ public class DLFileEntryLocalServiceImpl
 			newFileVersion.setStatus(fileVersion.getStatus());
 			newFileVersion.setStatusByUserId(userId);
 			newFileVersion.setStatusByUserName(user.getFullName());
-			newFileVersion.setStatusDate(
-				serviceContext.getModifiedDate(now));
+			newFileVersion.setStatusDate(serviceContext.getModifiedDate(now));
 
 			dlFileVersionPersistence.update(newFileVersion, false);
 
@@ -1344,18 +1342,6 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	protected void validate(
-			long groupId, long folderId, String name, String title,
-			String sourceFileName, InputStream is)
-		throws PortalException, SystemException {
-
-		if (Validator.isNotNull(sourceFileName)) {
-			dlLocalService.validate(sourceFileName, sourceFileName, is);
-		}
-
-		validate(groupId, folderId, name, title);
-	}
-
-	protected void validate(
 			long groupId, long folderId, String title, InputStream is)
 		throws PortalException, SystemException {
 
@@ -1386,6 +1372,18 @@ public class DLFileEntryLocalServiceImpl
 		}
 		catch (NoSuchFileEntryException nsfee) {
 		}
+	}
+
+	protected void validate(
+			long groupId, long folderId, String name, String title,
+			String sourceFileName, InputStream is)
+		throws PortalException, SystemException {
+
+		if (Validator.isNotNull(sourceFileName)) {
+			dlLocalService.validate(sourceFileName, sourceFileName, is);
+		}
+
+		validate(groupId, folderId, name, title);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
