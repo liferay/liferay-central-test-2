@@ -153,6 +153,28 @@ public class MBMessageFinderImpl
 			groupId, userId, categoryIds, anonymous, status, start, end, true);
 	}
 
+	public List<MBMessage> findByNoAssets() throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_NO_ASSETS);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("MBMessage", MBMessageImpl.class);
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<Long> findByG_U_C_S(
 			long groupId, long userId, long[] categoryIds, int status,
 			int start, int end)
@@ -171,19 +193,68 @@ public class MBMessageFinderImpl
 			groupId, userId, categoryIds, anonymous, status, start, end, false);
 	}
 
-	public List<MBMessage> findByNoAssets() throws SystemException {
+	protected int doCountByG_U_C_S(
+			long groupId, long userId, long[] categoryIds, int status,
+			boolean inlineSQLHelper)
+		throws SystemException {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_NO_ASSETS);
+			String sql = CustomSQLUtil.get(COUNT_BY_G_U_C_S);
+
+			if ((categoryIds == null) ||
+				(categoryIds.length == 0)) {
+
+				sql = StringUtil.replace(
+					sql, "(currentMessage.categoryId = ?) AND",
+					StringPool.BLANK);
+			}
+			else {
+				sql = StringUtil.replace(
+					sql, "currentMessage.categoryId = ?",
+					"currentMessage.categoryId = " +
+						StringUtil.merge(
+							categoryIds, " OR currentMessage.categoryId = "));
+			}
+
+			if (status != WorkflowConstants.STATUS_ANY) {
+				sql = CustomSQLUtil.appendCriteria(
+					sql, "AND (currentMessage.status = ?)");
+			}
+
+			if (inlineSQLHelper) {
+				sql = InlineSQLHelperUtil.replacePermissionCheck(
+					sql, MBMessage.class.getName(), "rootMessage.messageId",
+					"rootMessage.userId", groupId);
+			}
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("MBMessage", MBMessageImpl.class);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
-			return q.list();
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(userId);
+
+			if (status != WorkflowConstants.STATUS_ANY) {
+				qPos.add(status);
+			}
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -265,9 +336,9 @@ public class MBMessageFinderImpl
 		}
 	}
 
-	protected int doCountByG_U_C_S(
+	protected List<Long> doFindByG_U_C_S(
 			long groupId, long userId, long[] categoryIds, int status,
-			boolean inlineSQLHelper)
+			int start, int end, boolean inlineSQLHelper)
 		throws SystemException {
 
 		Session session = null;
@@ -275,7 +346,7 @@ public class MBMessageFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_G_U_C_S);
+			String sql = CustomSQLUtil.get(FIND_BY_G_U_C_S);
 
 			if ((categoryIds == null) ||
 				(categoryIds.length == 0)) {
@@ -305,7 +376,7 @@ public class MBMessageFinderImpl
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+			q.addScalar("threadId", Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -316,17 +387,7 @@ public class MBMessageFinderImpl
 				qPos.add(status);
 			}
 
-			Iterator<Long> itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
+			return (List<Long>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -383,67 +444,6 @@ public class MBMessageFinderImpl
 			qPos.add(groupId);
 			qPos.add(userId);
 			qPos.add(anonymous);
-
-			if (status != WorkflowConstants.STATUS_ANY) {
-				qPos.add(status);
-			}
-
-			return (List<Long>)QueryUtil.list(q, getDialect(), start, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected List<Long> doFindByG_U_C_S(
-			long groupId, long userId, long[] categoryIds, int status,
-			int start, int end, boolean inlineSQLHelper)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_G_U_C_S);
-
-			if ((categoryIds == null) ||
-				(categoryIds.length == 0)) {
-
-				sql = StringUtil.replace(
-					sql, "(currentMessage.categoryId = ?) AND",
-					StringPool.BLANK);
-			}
-			else {
-				sql = StringUtil.replace(
-					sql, "currentMessage.categoryId = ?",
-					"currentMessage.categoryId = " +
-						StringUtil.merge(
-							categoryIds, " OR currentMessage.categoryId = "));
-			}
-
-			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = CustomSQLUtil.appendCriteria(
-					sql, "AND (currentMessage.status = ?)");
-			}
-
-			if (inlineSQLHelper) {
-				sql = InlineSQLHelperUtil.replacePermissionCheck(
-					sql, MBMessage.class.getName(), "rootMessage.messageId",
-					"rootMessage.userId", groupId);
-			}
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar("threadId", Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-			qPos.add(userId);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
 				qPos.add(status);

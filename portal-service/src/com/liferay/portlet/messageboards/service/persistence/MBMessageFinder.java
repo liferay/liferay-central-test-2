@@ -47,6 +47,9 @@ public interface MBMessageFinder {
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByNoAssets()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<java.lang.Long> findByG_U_C_S(long groupId,
 		long userId, long[] categoryIds, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -54,8 +57,5 @@ public interface MBMessageFinder {
 	public java.util.List<java.lang.Long> findByG_U_C_A_S(long groupId,
 		long userId, long[] categoryIds, boolean anonymous, int status,
 		int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByNoAssets()
 		throws com.liferay.portal.kernel.exception.SystemException;
 }
