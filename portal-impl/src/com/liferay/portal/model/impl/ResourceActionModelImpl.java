@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ResourceAction;
-import com.liferay.portal.model.ResourceActionSoap;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -30,9 +29,6 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <a href="ResourceActionModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -74,28 +70,6 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction> {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.ResourceAction"),
 			true);
-
-	public static ResourceAction toModel(ResourceActionSoap soapModel) {
-		ResourceAction model = new ResourceActionImpl();
-
-		model.setResourceActionId(soapModel.getResourceActionId());
-		model.setName(soapModel.getName());
-		model.setActionId(soapModel.getActionId());
-		model.setBitwiseValue(soapModel.getBitwiseValue());
-
-		return model;
-	}
-
-	public static List<ResourceAction> toModels(ResourceActionSoap[] soapModels) {
-		List<ResourceAction> models = new ArrayList<ResourceAction>(soapModels.length);
-
-		for (ResourceActionSoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.ResourceAction"));
 

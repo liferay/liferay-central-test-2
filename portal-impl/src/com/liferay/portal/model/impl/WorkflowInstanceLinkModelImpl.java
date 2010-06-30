@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.WorkflowInstanceLink;
-import com.liferay.portal.model.WorkflowInstanceLinkSoap;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
@@ -34,9 +33,7 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * <a href="WorkflowInstanceLinkModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -84,36 +81,6 @@ public class WorkflowInstanceLinkModelImpl extends BaseModelImpl<WorkflowInstanc
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.WorkflowInstanceLink"),
 			true);
-
-	public static WorkflowInstanceLink toModel(
-		WorkflowInstanceLinkSoap soapModel) {
-		WorkflowInstanceLink model = new WorkflowInstanceLinkImpl();
-
-		model.setWorkflowInstanceLinkId(soapModel.getWorkflowInstanceLinkId());
-		model.setGroupId(soapModel.getGroupId());
-		model.setCompanyId(soapModel.getCompanyId());
-		model.setUserId(soapModel.getUserId());
-		model.setUserName(soapModel.getUserName());
-		model.setCreateDate(soapModel.getCreateDate());
-		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setClassNameId(soapModel.getClassNameId());
-		model.setClassPK(soapModel.getClassPK());
-		model.setWorkflowInstanceId(soapModel.getWorkflowInstanceId());
-
-		return model;
-	}
-
-	public static List<WorkflowInstanceLink> toModels(
-		WorkflowInstanceLinkSoap[] soapModels) {
-		List<WorkflowInstanceLink> models = new ArrayList<WorkflowInstanceLink>(soapModels.length);
-
-		for (WorkflowInstanceLinkSoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.WorkflowInstanceLink"));
 

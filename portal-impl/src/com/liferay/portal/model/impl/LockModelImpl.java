@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Lock;
-import com.liferay.portal.model.LockSoap;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
@@ -33,9 +32,7 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * <a href="LockModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -82,35 +79,6 @@ public class LockModelImpl extends BaseModelImpl<Lock> {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Lock"),
 			true);
-
-	public static Lock toModel(LockSoap soapModel) {
-		Lock model = new LockImpl();
-
-		model.setUuid(soapModel.getUuid());
-		model.setLockId(soapModel.getLockId());
-		model.setCompanyId(soapModel.getCompanyId());
-		model.setUserId(soapModel.getUserId());
-		model.setUserName(soapModel.getUserName());
-		model.setCreateDate(soapModel.getCreateDate());
-		model.setClassName(soapModel.getClassName());
-		model.setKey(soapModel.getKey());
-		model.setOwner(soapModel.getOwner());
-		model.setInheritable(soapModel.getInheritable());
-		model.setExpirationDate(soapModel.getExpirationDate());
-
-		return model;
-	}
-
-	public static List<Lock> toModels(LockSoap[] soapModels) {
-		List<Lock> models = new ArrayList<Lock>(soapModels.length);
-
-		for (LockSoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Lock"));
 

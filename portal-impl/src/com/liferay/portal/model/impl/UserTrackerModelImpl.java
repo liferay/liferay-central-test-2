@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.UserTracker;
-import com.liferay.portal.model.UserTrackerSoap;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
@@ -33,9 +32,7 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * <a href="UserTrackerModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -79,32 +76,6 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.UserTracker"),
 			true);
-
-	public static UserTracker toModel(UserTrackerSoap soapModel) {
-		UserTracker model = new UserTrackerImpl();
-
-		model.setUserTrackerId(soapModel.getUserTrackerId());
-		model.setCompanyId(soapModel.getCompanyId());
-		model.setUserId(soapModel.getUserId());
-		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setSessionId(soapModel.getSessionId());
-		model.setRemoteAddr(soapModel.getRemoteAddr());
-		model.setRemoteHost(soapModel.getRemoteHost());
-		model.setUserAgent(soapModel.getUserAgent());
-
-		return model;
-	}
-
-	public static List<UserTracker> toModels(UserTrackerSoap[] soapModels) {
-		List<UserTracker> models = new ArrayList<UserTracker>(soapModels.length);
-
-		for (UserTrackerSoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.UserTracker"));
 

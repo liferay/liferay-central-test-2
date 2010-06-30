@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Release;
-import com.liferay.portal.model.ReleaseSoap;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -31,9 +30,7 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * <a href="ReleaseModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -77,32 +74,6 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Release"),
 			true);
-
-	public static Release toModel(ReleaseSoap soapModel) {
-		Release model = new ReleaseImpl();
-
-		model.setReleaseId(soapModel.getReleaseId());
-		model.setCreateDate(soapModel.getCreateDate());
-		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setServletContextName(soapModel.getServletContextName());
-		model.setBuildNumber(soapModel.getBuildNumber());
-		model.setBuildDate(soapModel.getBuildDate());
-		model.setVerified(soapModel.getVerified());
-		model.setTestString(soapModel.getTestString());
-
-		return model;
-	}
-
-	public static List<Release> toModels(ReleaseSoap[] soapModels) {
-		List<Release> models = new ArrayList<Release>(soapModels.length);
-
-		for (ReleaseSoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Release"));
 

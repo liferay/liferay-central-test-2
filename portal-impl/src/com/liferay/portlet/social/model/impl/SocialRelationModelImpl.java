@@ -24,16 +24,12 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.social.model.SocialRelation;
-import com.liferay.portlet.social.model.SocialRelationSoap;
 
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <a href="SocialRelationModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -76,31 +72,6 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.social.model.SocialRelation"),
 			true);
-
-	public static SocialRelation toModel(SocialRelationSoap soapModel) {
-		SocialRelation model = new SocialRelationImpl();
-
-		model.setUuid(soapModel.getUuid());
-		model.setRelationId(soapModel.getRelationId());
-		model.setCompanyId(soapModel.getCompanyId());
-		model.setCreateDate(soapModel.getCreateDate());
-		model.setUserId1(soapModel.getUserId1());
-		model.setUserId2(soapModel.getUserId2());
-		model.setType(soapModel.getType());
-
-		return model;
-	}
-
-	public static List<SocialRelation> toModels(SocialRelationSoap[] soapModels) {
-		List<SocialRelation> models = new ArrayList<SocialRelation>(soapModels.length);
-
-		for (SocialRelationSoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.social.model.SocialRelation"));
 

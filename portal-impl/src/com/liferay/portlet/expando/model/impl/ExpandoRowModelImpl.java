@@ -20,16 +20,12 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
 import com.liferay.portlet.expando.model.ExpandoRow;
-import com.liferay.portlet.expando.model.ExpandoRowSoap;
 
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <a href="ExpandoRowModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -69,28 +65,6 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow> {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.expando.model.ExpandoRow"),
 			true);
-
-	public static ExpandoRow toModel(ExpandoRowSoap soapModel) {
-		ExpandoRow model = new ExpandoRowImpl();
-
-		model.setRowId(soapModel.getRowId());
-		model.setCompanyId(soapModel.getCompanyId());
-		model.setTableId(soapModel.getTableId());
-		model.setClassPK(soapModel.getClassPK());
-
-		return model;
-	}
-
-	public static List<ExpandoRow> toModels(ExpandoRowSoap[] soapModels) {
-		List<ExpandoRow> models = new ArrayList<ExpandoRow>(soapModels.length);
-
-		for (ExpandoRowSoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.expando.model.ExpandoRow"));
 

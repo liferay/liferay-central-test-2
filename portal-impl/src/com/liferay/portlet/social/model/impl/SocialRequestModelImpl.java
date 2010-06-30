@@ -26,16 +26,12 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.social.model.SocialRequest;
-import com.liferay.portlet.social.model.SocialRequestSoap;
 
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <a href="SocialRequestModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -86,37 +82,6 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.social.model.SocialRequest"),
 			true);
-
-	public static SocialRequest toModel(SocialRequestSoap soapModel) {
-		SocialRequest model = new SocialRequestImpl();
-
-		model.setUuid(soapModel.getUuid());
-		model.setRequestId(soapModel.getRequestId());
-		model.setGroupId(soapModel.getGroupId());
-		model.setCompanyId(soapModel.getCompanyId());
-		model.setUserId(soapModel.getUserId());
-		model.setCreateDate(soapModel.getCreateDate());
-		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setClassNameId(soapModel.getClassNameId());
-		model.setClassPK(soapModel.getClassPK());
-		model.setType(soapModel.getType());
-		model.setExtraData(soapModel.getExtraData());
-		model.setReceiverUserId(soapModel.getReceiverUserId());
-		model.setStatus(soapModel.getStatus());
-
-		return model;
-	}
-
-	public static List<SocialRequest> toModels(SocialRequestSoap[] soapModels) {
-		List<SocialRequest> models = new ArrayList<SocialRequest>(soapModels.length);
-
-		for (SocialRequestSoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.social.model.SocialRequest"));
 

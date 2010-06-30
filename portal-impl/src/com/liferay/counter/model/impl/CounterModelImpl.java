@@ -15,7 +15,6 @@
 package com.liferay.counter.model.impl;
 
 import com.liferay.counter.model.Counter;
-import com.liferay.counter.model.CounterSoap;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -28,9 +27,6 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <a href="CounterModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -68,26 +64,6 @@ public class CounterModelImpl extends BaseModelImpl<Counter> {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.counter.model.Counter"),
 			false);
-
-	public static Counter toModel(CounterSoap soapModel) {
-		Counter model = new CounterImpl();
-
-		model.setName(soapModel.getName());
-		model.setCurrentId(soapModel.getCurrentId());
-
-		return model;
-	}
-
-	public static List<Counter> toModels(CounterSoap[] soapModels) {
-		List<Counter> models = new ArrayList<Counter>(soapModels.length);
-
-		for (CounterSoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.counter.model.Counter"));
 

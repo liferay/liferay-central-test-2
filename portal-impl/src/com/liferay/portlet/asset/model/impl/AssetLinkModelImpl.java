@@ -24,7 +24,6 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.asset.model.AssetLink;
-import com.liferay.portlet.asset.model.AssetLinkSoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
@@ -34,9 +33,7 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * <a href="AssetLinkModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -83,33 +80,6 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink> {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.asset.model.AssetLink"),
 			true);
-
-	public static AssetLink toModel(AssetLinkSoap soapModel) {
-		AssetLink model = new AssetLinkImpl();
-
-		model.setLinkId(soapModel.getLinkId());
-		model.setCompanyId(soapModel.getCompanyId());
-		model.setUserId(soapModel.getUserId());
-		model.setUserName(soapModel.getUserName());
-		model.setCreateDate(soapModel.getCreateDate());
-		model.setEntryId1(soapModel.getEntryId1());
-		model.setEntryId2(soapModel.getEntryId2());
-		model.setType(soapModel.getType());
-		model.setWeight(soapModel.getWeight());
-
-		return model;
-	}
-
-	public static List<AssetLink> toModels(AssetLinkSoap[] soapModels) {
-		List<AssetLink> models = new ArrayList<AssetLink>(soapModels.length);
-
-		for (AssetLinkSoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.asset.model.AssetLink"));
 

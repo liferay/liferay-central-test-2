@@ -26,16 +26,12 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.social.model.SocialActivity;
-import com.liferay.portlet.social.model.SocialActivitySoap;
 
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <a href="SocialActivityModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -84,35 +80,6 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.social.model.SocialActivity"),
 			true);
-
-	public static SocialActivity toModel(SocialActivitySoap soapModel) {
-		SocialActivity model = new SocialActivityImpl();
-
-		model.setActivityId(soapModel.getActivityId());
-		model.setGroupId(soapModel.getGroupId());
-		model.setCompanyId(soapModel.getCompanyId());
-		model.setUserId(soapModel.getUserId());
-		model.setCreateDate(soapModel.getCreateDate());
-		model.setMirrorActivityId(soapModel.getMirrorActivityId());
-		model.setClassNameId(soapModel.getClassNameId());
-		model.setClassPK(soapModel.getClassPK());
-		model.setType(soapModel.getType());
-		model.setExtraData(soapModel.getExtraData());
-		model.setReceiverUserId(soapModel.getReceiverUserId());
-
-		return model;
-	}
-
-	public static List<SocialActivity> toModels(SocialActivitySoap[] soapModels) {
-		List<SocialActivity> models = new ArrayList<SocialActivity>(soapModels.length);
-
-		for (SocialActivitySoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.social.model.SocialActivity"));
 

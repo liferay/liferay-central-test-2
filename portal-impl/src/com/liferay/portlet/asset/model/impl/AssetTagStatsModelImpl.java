@@ -23,7 +23,6 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.asset.model.AssetTagStats;
-import com.liferay.portlet.asset.model.AssetTagStatsSoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
@@ -32,9 +31,6 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <a href="AssetTagStatsModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -76,28 +72,6 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats> {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.asset.model.AssetTagStats"),
 			true);
-
-	public static AssetTagStats toModel(AssetTagStatsSoap soapModel) {
-		AssetTagStats model = new AssetTagStatsImpl();
-
-		model.setTagStatsId(soapModel.getTagStatsId());
-		model.setTagId(soapModel.getTagId());
-		model.setClassNameId(soapModel.getClassNameId());
-		model.setAssetCount(soapModel.getAssetCount());
-
-		return model;
-	}
-
-	public static List<AssetTagStats> toModels(AssetTagStatsSoap[] soapModels) {
-		List<AssetTagStats> models = new ArrayList<AssetTagStats>(soapModels.length);
-
-		for (AssetTagStatsSoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.asset.model.AssetTagStats"));
 

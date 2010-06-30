@@ -26,7 +26,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.messageboards.model.MBMailingList;
-import com.liferay.portlet.messageboards.model.MBMailingListSoap;
 
 import java.io.Serializable;
 
@@ -34,9 +33,7 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * <a href="MBMailingListModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -97,49 +94,6 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.messageboards.model.MBMailingList"),
 			true);
-
-	public static MBMailingList toModel(MBMailingListSoap soapModel) {
-		MBMailingList model = new MBMailingListImpl();
-
-		model.setUuid(soapModel.getUuid());
-		model.setMailingListId(soapModel.getMailingListId());
-		model.setGroupId(soapModel.getGroupId());
-		model.setCompanyId(soapModel.getCompanyId());
-		model.setUserId(soapModel.getUserId());
-		model.setUserName(soapModel.getUserName());
-		model.setCreateDate(soapModel.getCreateDate());
-		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setCategoryId(soapModel.getCategoryId());
-		model.setEmailAddress(soapModel.getEmailAddress());
-		model.setInProtocol(soapModel.getInProtocol());
-		model.setInServerName(soapModel.getInServerName());
-		model.setInServerPort(soapModel.getInServerPort());
-		model.setInUseSSL(soapModel.getInUseSSL());
-		model.setInUserName(soapModel.getInUserName());
-		model.setInPassword(soapModel.getInPassword());
-		model.setInReadInterval(soapModel.getInReadInterval());
-		model.setOutEmailAddress(soapModel.getOutEmailAddress());
-		model.setOutCustom(soapModel.getOutCustom());
-		model.setOutServerName(soapModel.getOutServerName());
-		model.setOutServerPort(soapModel.getOutServerPort());
-		model.setOutUseSSL(soapModel.getOutUseSSL());
-		model.setOutUserName(soapModel.getOutUserName());
-		model.setOutPassword(soapModel.getOutPassword());
-		model.setActive(soapModel.getActive());
-
-		return model;
-	}
-
-	public static List<MBMailingList> toModels(MBMailingListSoap[] soapModels) {
-		List<MBMailingList> models = new ArrayList<MBMailingList>(soapModels.length);
-
-		for (MBMailingListSoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBMailingList"));
 

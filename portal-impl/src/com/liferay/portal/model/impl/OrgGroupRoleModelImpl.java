@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.OrgGroupRole;
-import com.liferay.portal.model.OrgGroupRoleSoap;
 import com.liferay.portal.service.persistence.OrgGroupRolePK;
 
 import java.io.Serializable;
@@ -26,9 +25,6 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <a href="OrgGroupRoleModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -67,27 +63,6 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole> {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.OrgGroupRole"),
 			true);
-
-	public static OrgGroupRole toModel(OrgGroupRoleSoap soapModel) {
-		OrgGroupRole model = new OrgGroupRoleImpl();
-
-		model.setOrganizationId(soapModel.getOrganizationId());
-		model.setGroupId(soapModel.getGroupId());
-		model.setRoleId(soapModel.getRoleId());
-
-		return model;
-	}
-
-	public static List<OrgGroupRole> toModels(OrgGroupRoleSoap[] soapModels) {
-		List<OrgGroupRole> models = new ArrayList<OrgGroupRole>(soapModels.length);
-
-		for (OrgGroupRoleSoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.OrgGroupRole"));
 

@@ -23,16 +23,12 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
-import com.liferay.portlet.shopping.model.ShoppingItemPriceSoap;
 
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <a href="ShoppingItemPriceModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -80,35 +76,6 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.shopping.model.ShoppingItemPrice"),
 			true);
-
-	public static ShoppingItemPrice toModel(ShoppingItemPriceSoap soapModel) {
-		ShoppingItemPrice model = new ShoppingItemPriceImpl();
-
-		model.setItemPriceId(soapModel.getItemPriceId());
-		model.setItemId(soapModel.getItemId());
-		model.setMinQuantity(soapModel.getMinQuantity());
-		model.setMaxQuantity(soapModel.getMaxQuantity());
-		model.setPrice(soapModel.getPrice());
-		model.setDiscount(soapModel.getDiscount());
-		model.setTaxable(soapModel.getTaxable());
-		model.setShipping(soapModel.getShipping());
-		model.setUseShippingFormula(soapModel.getUseShippingFormula());
-		model.setStatus(soapModel.getStatus());
-
-		return model;
-	}
-
-	public static List<ShoppingItemPrice> toModels(
-		ShoppingItemPriceSoap[] soapModels) {
-		List<ShoppingItemPrice> models = new ArrayList<ShoppingItemPrice>(soapModels.length);
-
-		for (ShoppingItemPriceSoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingItemPrice"));
 

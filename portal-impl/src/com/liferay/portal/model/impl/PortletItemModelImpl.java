@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PortletItem;
-import com.liferay.portal.model.PortletItemSoap;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
@@ -33,9 +32,7 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * <a href="PortletItemModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -81,34 +78,6 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.PortletItem"),
 			true);
-
-	public static PortletItem toModel(PortletItemSoap soapModel) {
-		PortletItem model = new PortletItemImpl();
-
-		model.setPortletItemId(soapModel.getPortletItemId());
-		model.setGroupId(soapModel.getGroupId());
-		model.setCompanyId(soapModel.getCompanyId());
-		model.setUserId(soapModel.getUserId());
-		model.setUserName(soapModel.getUserName());
-		model.setCreateDate(soapModel.getCreateDate());
-		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setName(soapModel.getName());
-		model.setPortletId(soapModel.getPortletId());
-		model.setClassNameId(soapModel.getClassNameId());
-
-		return model;
-	}
-
-	public static List<PortletItem> toModels(PortletItemSoap[] soapModels) {
-		List<PortletItem> models = new ArrayList<PortletItem>(soapModels.length);
-
-		for (PortletItemSoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.PortletItem"));
 

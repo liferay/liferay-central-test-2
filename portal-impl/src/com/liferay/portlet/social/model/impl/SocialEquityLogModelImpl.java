@@ -26,16 +26,12 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.social.model.SocialEquityLog;
-import com.liferay.portlet.social.model.SocialEquityLogSoap;
 
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <a href="SocialEquityLogModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -82,36 +78,6 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog> {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.social.model.SocialEquityLog"),
 			true);
-
-	public static SocialEquityLog toModel(SocialEquityLogSoap soapModel) {
-		SocialEquityLog model = new SocialEquityLogImpl();
-
-		model.setEquityLogId(soapModel.getEquityLogId());
-		model.setGroupId(soapModel.getGroupId());
-		model.setCompanyId(soapModel.getCompanyId());
-		model.setUserId(soapModel.getUserId());
-		model.setAssetEntryId(soapModel.getAssetEntryId());
-		model.setActionId(soapModel.getActionId());
-		model.setActionDate(soapModel.getActionDate());
-		model.setType(soapModel.getType());
-		model.setValue(soapModel.getValue());
-		model.setValidity(soapModel.getValidity());
-		model.setActive(soapModel.getActive());
-
-		return model;
-	}
-
-	public static List<SocialEquityLog> toModels(
-		SocialEquityLogSoap[] soapModels) {
-		List<SocialEquityLog> models = new ArrayList<SocialEquityLog>(soapModels.length);
-
-		for (SocialEquityLogSoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.social.model.SocialEquityLog"));
 

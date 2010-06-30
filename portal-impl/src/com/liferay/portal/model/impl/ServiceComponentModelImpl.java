@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ServiceComponent;
-import com.liferay.portal.model.ServiceComponentSoap;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -30,9 +29,6 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <a href="ServiceComponentModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -75,30 +71,6 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent> {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.ServiceComponent"),
 			true);
-
-	public static ServiceComponent toModel(ServiceComponentSoap soapModel) {
-		ServiceComponent model = new ServiceComponentImpl();
-
-		model.setServiceComponentId(soapModel.getServiceComponentId());
-		model.setBuildNamespace(soapModel.getBuildNamespace());
-		model.setBuildNumber(soapModel.getBuildNumber());
-		model.setBuildDate(soapModel.getBuildDate());
-		model.setData(soapModel.getData());
-
-		return model;
-	}
-
-	public static List<ServiceComponent> toModels(
-		ServiceComponentSoap[] soapModels) {
-		List<ServiceComponent> models = new ArrayList<ServiceComponent>(soapModels.length);
-
-		for (ServiceComponentSoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.ServiceComponent"));
 

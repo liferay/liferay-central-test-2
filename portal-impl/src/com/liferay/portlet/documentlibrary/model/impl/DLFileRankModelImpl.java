@@ -25,7 +25,6 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
-import com.liferay.portlet.documentlibrary.model.DLFileRankSoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
@@ -35,9 +34,7 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * <a href="DLFileRankModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -82,31 +79,6 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.documentlibrary.model.DLFileRank"),
 			true);
-
-	public static DLFileRank toModel(DLFileRankSoap soapModel) {
-		DLFileRank model = new DLFileRankImpl();
-
-		model.setFileRankId(soapModel.getFileRankId());
-		model.setGroupId(soapModel.getGroupId());
-		model.setCompanyId(soapModel.getCompanyId());
-		model.setUserId(soapModel.getUserId());
-		model.setCreateDate(soapModel.getCreateDate());
-		model.setFolderId(soapModel.getFolderId());
-		model.setName(soapModel.getName());
-
-		return model;
-	}
-
-	public static List<DLFileRank> toModels(DLFileRankSoap[] soapModels) {
-		List<DLFileRank> models = new ArrayList<DLFileRank>(soapModels.length);
-
-		for (DLFileRankSoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.documentlibrary.model.DLFileRank"));
 

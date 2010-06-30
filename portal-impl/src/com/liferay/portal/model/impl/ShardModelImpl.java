@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Shard;
-import com.liferay.portal.model.ShardSoap;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
@@ -31,9 +30,6 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <a href="ShardModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -73,28 +69,6 @@ public class ShardModelImpl extends BaseModelImpl<Shard> {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Shard"),
 			true);
-
-	public static Shard toModel(ShardSoap soapModel) {
-		Shard model = new ShardImpl();
-
-		model.setShardId(soapModel.getShardId());
-		model.setClassNameId(soapModel.getClassNameId());
-		model.setClassPK(soapModel.getClassPK());
-		model.setName(soapModel.getName());
-
-		return model;
-	}
-
-	public static List<Shard> toModels(ShardSoap[] soapModels) {
-		List<Shard> models = new ArrayList<Shard>(soapModels.length);
-
-		for (ShardSoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Shard"));
 

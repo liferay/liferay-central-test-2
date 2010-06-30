@@ -24,16 +24,12 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.wiki.model.WikiPageResource;
-import com.liferay.portlet.wiki.model.WikiPageResourceSoap;
 
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <a href="WikiPageResourceModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -73,29 +69,6 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource> {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.wiki.model.WikiPageResource"),
 			true);
-
-	public static WikiPageResource toModel(WikiPageResourceSoap soapModel) {
-		WikiPageResource model = new WikiPageResourceImpl();
-
-		model.setUuid(soapModel.getUuid());
-		model.setResourcePrimKey(soapModel.getResourcePrimKey());
-		model.setNodeId(soapModel.getNodeId());
-		model.setTitle(soapModel.getTitle());
-
-		return model;
-	}
-
-	public static List<WikiPageResource> toModels(
-		WikiPageResourceSoap[] soapModels) {
-		List<WikiPageResource> models = new ArrayList<WikiPageResource>(soapModels.length);
-
-		for (WikiPageResourceSoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.wiki.model.WikiPageResource"));
 

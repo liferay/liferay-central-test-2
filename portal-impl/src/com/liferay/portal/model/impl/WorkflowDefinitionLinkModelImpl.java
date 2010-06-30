@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.WorkflowDefinitionLink;
-import com.liferay.portal.model.WorkflowDefinitionLinkSoap;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
@@ -33,9 +32,7 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * <a href="WorkflowDefinitionLinkModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -83,36 +80,6 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.WorkflowDefinitionLink"),
 			true);
-
-	public static WorkflowDefinitionLink toModel(
-		WorkflowDefinitionLinkSoap soapModel) {
-		WorkflowDefinitionLink model = new WorkflowDefinitionLinkImpl();
-
-		model.setWorkflowDefinitionLinkId(soapModel.getWorkflowDefinitionLinkId());
-		model.setGroupId(soapModel.getGroupId());
-		model.setCompanyId(soapModel.getCompanyId());
-		model.setUserId(soapModel.getUserId());
-		model.setUserName(soapModel.getUserName());
-		model.setCreateDate(soapModel.getCreateDate());
-		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setClassNameId(soapModel.getClassNameId());
-		model.setWorkflowDefinitionName(soapModel.getWorkflowDefinitionName());
-		model.setWorkflowDefinitionVersion(soapModel.getWorkflowDefinitionVersion());
-
-		return model;
-	}
-
-	public static List<WorkflowDefinitionLink> toModels(
-		WorkflowDefinitionLinkSoap[] soapModels) {
-		List<WorkflowDefinitionLink> models = new ArrayList<WorkflowDefinitionLink>(soapModels.length);
-
-		for (WorkflowDefinitionLinkSoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.WorkflowDefinitionLink"));
 

@@ -25,7 +25,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.social.model.SocialEquityHistory;
-import com.liferay.portlet.social.model.SocialEquityHistorySoap;
 
 import java.io.Serializable;
 
@@ -33,9 +32,7 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * <a href="SocialEquityHistoryModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -77,31 +74,6 @@ public class SocialEquityHistoryModelImpl extends BaseModelImpl<SocialEquityHist
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.social.model.SocialEquityHistory"),
 			true);
-
-	public static SocialEquityHistory toModel(SocialEquityHistorySoap soapModel) {
-		SocialEquityHistory model = new SocialEquityHistoryImpl();
-
-		model.setEquityHistoryId(soapModel.getEquityHistoryId());
-		model.setGroupId(soapModel.getGroupId());
-		model.setCompanyId(soapModel.getCompanyId());
-		model.setUserId(soapModel.getUserId());
-		model.setCreateDate(soapModel.getCreateDate());
-		model.setPersonalEquity(soapModel.getPersonalEquity());
-
-		return model;
-	}
-
-	public static List<SocialEquityHistory> toModels(
-		SocialEquityHistorySoap[] soapModels) {
-		List<SocialEquityHistory> models = new ArrayList<SocialEquityHistory>(soapModels.length);
-
-		for (SocialEquityHistorySoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.social.model.SocialEquityHistory"));
 

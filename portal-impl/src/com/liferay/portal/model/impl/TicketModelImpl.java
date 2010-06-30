@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Ticket;
-import com.liferay.portal.model.TicketSoap;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
@@ -32,9 +31,7 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * <a href="TicketModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -79,31 +76,6 @@ public class TicketModelImpl extends BaseModelImpl<Ticket> {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Ticket"),
 			true);
-
-	public static Ticket toModel(TicketSoap soapModel) {
-		Ticket model = new TicketImpl();
-
-		model.setTicketId(soapModel.getTicketId());
-		model.setCompanyId(soapModel.getCompanyId());
-		model.setCreateDate(soapModel.getCreateDate());
-		model.setClassNameId(soapModel.getClassNameId());
-		model.setClassPK(soapModel.getClassPK());
-		model.setKey(soapModel.getKey());
-		model.setExpirationDate(soapModel.getExpirationDate());
-
-		return model;
-	}
-
-	public static List<Ticket> toModels(TicketSoap[] soapModels) {
-		List<Ticket> models = new ArrayList<Ticket>(soapModels.length);
-
-		for (TicketSoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Ticket"));
 

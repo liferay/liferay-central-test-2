@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.BrowserTracker;
-import com.liferay.portal.model.BrowserTrackerSoap;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
@@ -31,9 +30,6 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <a href="BrowserTrackerModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -72,27 +68,6 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker> {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.BrowserTracker"),
 			true);
-
-	public static BrowserTracker toModel(BrowserTrackerSoap soapModel) {
-		BrowserTracker model = new BrowserTrackerImpl();
-
-		model.setBrowserTrackerId(soapModel.getBrowserTrackerId());
-		model.setUserId(soapModel.getUserId());
-		model.setBrowserKey(soapModel.getBrowserKey());
-
-		return model;
-	}
-
-	public static List<BrowserTracker> toModels(BrowserTrackerSoap[] soapModels) {
-		List<BrowserTracker> models = new ArrayList<BrowserTracker>(soapModels.length);
-
-		for (BrowserTrackerSoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.BrowserTracker"));
 

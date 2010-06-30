@@ -29,7 +29,6 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.polls.model.PollsChoice;
-import com.liferay.portlet.polls.model.PollsChoiceSoap;
 
 import java.io.Serializable;
 
@@ -37,8 +36,6 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -83,29 +80,6 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice> {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.polls.model.PollsChoice"),
 			true);
-
-	public static PollsChoice toModel(PollsChoiceSoap soapModel) {
-		PollsChoice model = new PollsChoiceImpl();
-
-		model.setUuid(soapModel.getUuid());
-		model.setChoiceId(soapModel.getChoiceId());
-		model.setQuestionId(soapModel.getQuestionId());
-		model.setName(soapModel.getName());
-		model.setDescription(soapModel.getDescription());
-
-		return model;
-	}
-
-	public static List<PollsChoice> toModels(PollsChoiceSoap[] soapModels) {
-		List<PollsChoice> models = new ArrayList<PollsChoice>(soapModels.length);
-
-		for (PollsChoiceSoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.polls.model.PollsChoice"));
 
