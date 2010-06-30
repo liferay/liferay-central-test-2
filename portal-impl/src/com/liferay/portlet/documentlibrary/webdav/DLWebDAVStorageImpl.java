@@ -603,7 +603,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 					serviceContext);
 			}
 
-
 			return status;
 		}
 		catch (PrincipalException pe) {
