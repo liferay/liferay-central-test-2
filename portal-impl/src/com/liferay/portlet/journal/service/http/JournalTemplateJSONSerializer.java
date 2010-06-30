@@ -32,12 +32,7 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * <p>
- * This class is used by {@link JournalTemplateServiceJSON} to translate objects.
- * </p>
- *
  * @author    Brian Wing Shun Chan
- * @see       com.liferay.portlet.journal.service.http.JournalTemplateServiceJSON
  * @generated
  */
 public class JournalTemplateJSONSerializer {

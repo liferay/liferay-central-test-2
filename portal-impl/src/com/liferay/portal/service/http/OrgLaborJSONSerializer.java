@@ -29,12 +29,7 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * <p>
- * This class is used by {@link OrgLaborServiceJSON} to translate objects.
- * </p>
- *
  * @author    Brian Wing Shun Chan
- * @see       com.liferay.portal.service.http.OrgLaborServiceJSON
  * @generated
  */
 public class OrgLaborJSONSerializer {

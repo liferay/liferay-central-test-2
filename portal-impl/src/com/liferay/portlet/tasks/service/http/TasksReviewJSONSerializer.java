@@ -32,12 +32,7 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * <p>
- * This class is used by {@link TasksReviewServiceJSON} to translate objects.
- * </p>
- *
  * @author    Brian Wing Shun Chan
- * @see       com.liferay.portlet.tasks.service.http.TasksReviewServiceJSON
  * @generated
  */
 public class TasksReviewJSONSerializer {

@@ -31,12 +31,7 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * <p>
- * This class is used by {@link AccountServiceJSON} to translate objects.
- * </p>
- *
  * @author    Brian Wing Shun Chan
- * @see       com.liferay.portal.service.http.AccountServiceJSON
  * @generated
  */
 public class AccountJSONSerializer {

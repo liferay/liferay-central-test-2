@@ -32,12 +32,7 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * <p>
- * This class is used by {@link RatingsEntryServiceJSON} to translate objects.
- * </p>
- *
  * @author    Brian Wing Shun Chan
- * @see       com.liferay.portlet.ratings.service.http.RatingsEntryServiceJSON
  * @generated
  */
 public class RatingsEntryJSONSerializer {

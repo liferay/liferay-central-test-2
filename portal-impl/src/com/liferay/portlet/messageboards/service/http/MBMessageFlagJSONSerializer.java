@@ -32,12 +32,7 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * <p>
- * This class is used by {@link MBMessageFlagServiceJSON} to translate objects.
- * </p>
- *
  * @author    Brian Wing Shun Chan
- * @see       com.liferay.portlet.messageboards.service.http.MBMessageFlagServiceJSON
  * @generated
  */
 public class MBMessageFlagJSONSerializer {

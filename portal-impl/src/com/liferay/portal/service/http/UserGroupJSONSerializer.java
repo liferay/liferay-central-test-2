@@ -29,12 +29,7 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * <p>
- * This class is used by {@link UserGroupServiceJSON} to translate objects.
- * </p>
- *
  * @author    Brian Wing Shun Chan
- * @see       com.liferay.portal.service.http.UserGroupServiceJSON
  * @generated
  */
 public class UserGroupJSONSerializer {

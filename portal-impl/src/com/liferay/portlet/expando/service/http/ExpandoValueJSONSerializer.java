@@ -30,12 +30,7 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * <p>
- * This class is used by {@link ExpandoValueServiceJSON} to translate objects.
- * </p>
- *
  * @author    Brian Wing Shun Chan
- * @see       com.liferay.portlet.expando.service.http.ExpandoValueServiceJSON
  * @generated
  */
 public class ExpandoValueJSONSerializer {

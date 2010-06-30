@@ -29,12 +29,7 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * <p>
- * This class is used by {@link LayoutPrototypeServiceJSON} to translate objects.
- * </p>
- *
  * @author    Brian Wing Shun Chan
- * @see       com.liferay.portal.service.http.LayoutPrototypeServiceJSON
  * @generated
  */
 public class LayoutPrototypeJSONSerializer {
