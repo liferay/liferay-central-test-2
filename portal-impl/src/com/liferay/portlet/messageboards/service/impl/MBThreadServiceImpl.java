@@ -64,6 +64,22 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 	}
 
 	public List<MBThread> getGroupThreads(
+			long groupId, long userId, int status, int start, int end)
+		throws PortalException, SystemException {
+
+		return getGroupThreads(groupId, userId, status, false, start, end);
+	}
+
+	public List<MBThread> getGroupThreads(
+			long groupId, long userId, int status, boolean subscribed,
+			int start, int end)
+		throws PortalException, SystemException {
+
+		return getGroupThreads(
+			groupId, userId, status, subscribed, true, start, end);
+	}
+
+	public List<MBThread> getGroupThreads(
 			long groupId, long userId, int status, boolean subscribed,
 			boolean includeAnonymous, int start, int end)
 		throws PortalException, SystemException {
@@ -94,12 +110,13 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 				List<Long> threadIds = null;
 
 				if (includeAnonymous) {
-					threadIds = mbMessageFinder.findByG_U_S(
-						groupId, userId, status, start, end);
+					threadIds = mbMessageFinder.filterFindByG_C_U_S(
+						groupId, categoryIds, userId, status, start, end);
 				}
 				else {
-					threadIds = mbMessageFinder.findByG_U_A_S(
-						groupId, userId, false, status, start, end);
+					threadIds = mbMessageFinder.filterFindByG_C_U_A_S(
+						groupId, categoryIds, userId, false, status, start,
+						end);
 				}
 
 				List<MBThread> threads = new ArrayList<MBThread>(
@@ -117,13 +134,10 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 		}
 	}
 
-	public List<MBThread> getGroupThreads(
-			long groupId, long userId, int status, boolean subscribed,
-			int start, int end)
+	public int getGroupThreadsCount(long groupId, long userId, int status)
 		throws PortalException, SystemException {
 
-		return getGroupThreads(
-			groupId, userId, status, subscribed, true, start, end);
+		return getGroupThreadsCount(groupId, userId, status, false);
 	}
 
 	public int getGroupThreadsCount(
@@ -162,12 +176,12 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 			}
 			else {
 				if (includeAnonymous) {
-					return mbMessageFinder.countByG_U_S(
-						groupId, userId, status);
+					return mbMessageFinder.filterCountByG_C_U_S(
+						groupId, categoryIds, userId, status);
 				}
 				else {
-					return mbMessageFinder.countByG_U_A_S(
-						groupId, userId, false, status);
+					return mbMessageFinder.filterCountByG_C_U_A_S(
+						groupId, categoryIds, userId, false, status);
 				}
 			}
 		}

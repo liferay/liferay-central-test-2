@@ -237,12 +237,12 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 				List<Long> threadIds = null;
 
 				if (includeAnonymous) {
-					threadIds = mbMessageFinder.findByG_U_S(
-						groupId, userId, status, start, end);
+					threadIds = mbMessageFinder.findByG_C_U_S(
+						groupId, null, userId, status, start, end);
 				}
 				else {
-					threadIds = mbMessageFinder.findByG_U_A_S(
-						groupId, userId, false, status, start, end);
+					threadIds = mbMessageFinder.findByG_C_U_A_S(
+						groupId, null, userId, false, status, start, end);
 				}
 
 				List<MBThread> threads = new ArrayList<MBThread>(
@@ -309,12 +309,12 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			}
 			else {
 				if (includeAnonymous) {
-					return mbMessageFinder.countByG_U_S(
-						groupId, userId, status);
+					return mbMessageFinder.countByG_C_U_S(
+						groupId, null, userId, status);
 				}
 				else {
-					return mbMessageFinder.countByG_U_A_S(
-						groupId, userId, false, status);
+					return mbMessageFinder.countByG_C_U_A_S(
+						groupId, null, userId, false, status);
 				}
 			}
 		}

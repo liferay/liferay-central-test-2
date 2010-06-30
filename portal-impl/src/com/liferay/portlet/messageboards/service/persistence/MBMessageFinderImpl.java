@@ -21,7 +21,10 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.CalendarUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
@@ -44,20 +47,20 @@ public class MBMessageFinderImpl
 	public static String COUNT_BY_C_T =
 		MBMessageFinder.class.getName() + ".countByC_T";
 
-	public static String COUNT_BY_G_U_S =
-		MBMessageFinder.class.getName() + ".countByG_U_S";
+	public static String COUNT_BY_G_C_U_S =
+		MBMessageFinder.class.getName() + ".countByG_C_U_S";
 
-	public static String COUNT_BY_G_U_A_S =
-		MBMessageFinder.class.getName() + ".countByG_U_A_S";
+	public static String COUNT_BY_G_C_U_A_S =
+		MBMessageFinder.class.getName() + ".countByG_C_U_A_S";
 
 	public static String FIND_BY_NO_ASSETS =
 		MBMessageFinder.class.getName() + ".findByNoAssets";
 
-	public static String FIND_BY_G_U_S =
-		MBMessageFinder.class.getName() + ".findByG_U_S";
+	public static String FIND_BY_G_C_U_S =
+		MBMessageFinder.class.getName() + ".findByG_C_U_S";
 
-	public static String FIND_BY_G_U_A_S =
-		MBMessageFinder.class.getName() + ".findByG_U_A_S";
+	public static String FIND_BY_G_C_U_A_S =
+		MBMessageFinder.class.getName() + ".findByG_C_U_A_S";
 
 	public int countByC_T(Date createDate, long threadId)
 		throws SystemException {
@@ -100,100 +103,72 @@ public class MBMessageFinderImpl
 		}
 	}
 
-	public int countByG_U_S(long groupId, long userId, int status)
+	public int countByG_C_U_S(
+			long groupId, long[] categoryIds, long userId, int status)
 		throws SystemException {
 
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_BY_G_U_S);
-
-			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = CustomSQLUtil.appendCriteria(sql, "AND (status = ?)");
-			}
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-			qPos.add(userId);
-
-			if (status != WorkflowConstants.STATUS_ANY) {
-				qPos.add(status);
-			}
-
-			Iterator<Long> itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
+		return doCountByG_C_U_S(groupId, categoryIds, userId, status, false);
 	}
 
-	public int countByG_U_A_S(
-			long groupId, long userId, boolean anonymous, int status)
+	public int countByG_C_U_A_S(
+			long groupId, long[] categoryIds, long userId, boolean anonymous,
+			int status)
 		throws SystemException {
 
-		Session session = null;
+		return doCountByG_C_U_A_S(
+			groupId, categoryIds, userId, anonymous, status, false);
+	}
 
-		try {
-			session = openSession();
+	public int filterCountByG_C_U_S(
+			long groupId, long[] categoryIds, long userId, int status)
+		throws SystemException {
 
-			String sql = CustomSQLUtil.get(COUNT_BY_G_U_A_S);
+		return doCountByG_C_U_S(groupId, categoryIds, userId, status, true);
+	}
 
-			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = CustomSQLUtil.appendCriteria(sql, "AND (status = ?)");
-			}
+	public int filterCountByG_C_U_A_S(
+			long groupId, long[] categoryIds, long userId, boolean anonymous,
+			int status)
+		throws SystemException {
 
-			SQLQuery q = session.createSQLQuery(sql);
+		return doCountByG_C_U_A_S(
+			groupId, categoryIds, userId, anonymous, status, true);
+	}
 
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+	public List<Long> filterFindByG_C_U_S(
+			long groupId, long[] categoryIds, long userId, int status,
+			int start, int end)
+		throws SystemException {
 
-			QueryPos qPos = QueryPos.getInstance(q);
+		return doFindByG_C_U_S(
+			groupId, categoryIds, userId, status, start, end, true);
+	}
 
-			qPos.add(groupId);
-			qPos.add(userId);
-			qPos.add(anonymous);
+	public List<Long> filterFindByG_C_U_A_S(
+			long groupId, long[] categoryIds, long userId, boolean anonymous,
+			int status, int start, int end)
+		throws SystemException {
 
-			if (status != WorkflowConstants.STATUS_ANY) {
-				qPos.add(status);
-			}
+		return doFindByG_C_U_A_S(
+			groupId, categoryIds, userId, anonymous, status, start, end, true);
+	}
 
-			Iterator<Long> itr = q.list().iterator();
+	public List<Long> findByG_C_U_S(
+			long groupId, long[] categoryIds, long userId, int status,
+			int start, int end)
+		throws SystemException {
 
-			if (itr.hasNext()) {
-				Long count = itr.next();
+		return doFindByG_C_U_S(
+			groupId, categoryIds, userId, status, start, end, false);
+	}
 
-				if (count != null) {
-					return count.intValue();
-				}
-			}
+	public List<Long> findByG_C_U_A_S(
+			long groupId, long[] categoryIds, long userId, boolean anonymous,
+			int status, int start, int end)
+		throws SystemException {
 
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
+		return doFindByG_C_U_A_S(
+			groupId, categoryIds, userId, anonymous, status, start, end, false);
 	}
 
 	public List<MBMessage> findByNoAssets() throws SystemException {
@@ -218,8 +193,9 @@ public class MBMessageFinderImpl
 		}
 	}
 
-	public List<Long> findByG_U_S(
-			long groupId, long userId, int status, int start, int end)
+	protected int doCountByG_C_U_A_S(
+			long groupId, long[] categoryIds, long userId, boolean anonymous,
+			int status, boolean inlineSQLHelper)
 		throws SystemException {
 
 		Session session = null;
@@ -227,10 +203,175 @@ public class MBMessageFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_G_U_S);
+			String sql = CustomSQLUtil.get(COUNT_BY_G_C_U_A_S);
+
+			if ((categoryIds == null) ||
+				(categoryIds.length == 0)) {
+
+				sql = StringUtil.replace(
+					sql, "(A.categoryId = ?) AND",
+					StringPool.BLANK);
+			}
+			else {
+				sql = StringUtil.replace(
+					sql, "A.categoryId = ?",
+					"A.categoryId = " +
+						StringUtil.merge(
+							categoryIds,
+							" OR A.categoryId = "));
+			}
 
 			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = CustomSQLUtil.appendCriteria(sql, "AND (status = ?)");
+				sql = CustomSQLUtil.appendCriteria(sql, "AND (A.status = ?)");
+			}
+
+			if (inlineSQLHelper) {
+				sql = InlineSQLHelperUtil.replacePermissionCheck(
+					sql, MBMessage.class.getName(), "B.messageId", "B.userId",
+					groupId);
+			}
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(userId);
+			qPos.add(anonymous);
+
+			if (status != WorkflowConstants.STATUS_ANY) {
+				qPos.add(status);
+			}
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected int doCountByG_C_U_S(
+			long groupId, long[] categoryIds, long userId, int status,
+			boolean inlineSQLHelper)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_G_C_U_S);
+
+			if ((categoryIds == null) ||
+				(categoryIds.length == 0)) {
+
+				sql = StringUtil.replace(
+					sql, "(A.categoryId = ?) AND",
+					StringPool.BLANK);
+			}
+			else {
+				sql = StringUtil.replace(
+					sql, "A.categoryId = ?",
+					"A.categoryId = " +
+						StringUtil.merge(
+							categoryIds,
+							" OR A.categoryId = "));
+			}
+
+			if (status != WorkflowConstants.STATUS_ANY) {
+				sql = CustomSQLUtil.appendCriteria(sql, "AND (A.status = ?)");
+			}
+
+			if (inlineSQLHelper) {
+				sql = InlineSQLHelperUtil.replacePermissionCheck(
+					sql, MBMessage.class.getName(), "B.messageId", "B.userId",
+					groupId);
+			}
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(userId);
+
+			if (status != WorkflowConstants.STATUS_ANY) {
+				qPos.add(status);
+			}
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected List<Long> doFindByG_C_U_A_S(
+			long groupId, long[] categoryIds, long userId, boolean anonymous,
+			int status, int start, int end, boolean inlineSQLHelper)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_G_C_U_A_S);
+
+			if ((categoryIds == null) ||
+				(categoryIds.length == 0)) {
+
+				sql = StringUtil.replace(
+					sql, "(A.categoryId = ?) AND",
+					StringPool.BLANK);
+			}
+			else {
+				sql = StringUtil.replace(
+					sql, "A.categoryId = ?",
+					"A.categoryId = " +
+						StringUtil.merge(
+							categoryIds,
+							" OR A.categoryId = "));
+			}
+
+			if (status != WorkflowConstants.STATUS_ANY) {
+				sql = CustomSQLUtil.appendCriteria(sql, "AND (A.status = ?)");
+			}
+
+			if (inlineSQLHelper) {
+				sql = InlineSQLHelperUtil.replacePermissionCheck(
+					sql, MBMessage.class.getName(), "B.messageId", "B.userId",
+					groupId);
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -241,6 +382,7 @@ public class MBMessageFinderImpl
 
 			qPos.add(groupId);
 			qPos.add(userId);
+			qPos.add(anonymous);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
 				qPos.add(status);
@@ -256,9 +398,9 @@ public class MBMessageFinderImpl
 		}
 	}
 
-	public List<Long> findByG_U_A_S(
-			long groupId, long userId, boolean anonymous, int status,
-			int start, int end)
+	protected List<Long> doFindByG_C_U_S(
+			long groupId, long[] categoryIds, long userId, int status,
+			int start, int end, boolean inlineSQLHelper)
 		throws SystemException {
 
 		Session session = null;
@@ -266,10 +408,32 @@ public class MBMessageFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_G_U_A_S);
+			String sql = CustomSQLUtil.get(FIND_BY_G_C_U_S);
+
+			if ((categoryIds == null) ||
+				(categoryIds.length == 0)) {
+
+				sql = StringUtil.replace(
+					sql, "(A.categoryId = ?) AND",
+					StringPool.BLANK);
+			}
+			else {
+				sql = StringUtil.replace(
+					sql, "A.categoryId = ?",
+					"A.categoryId = " +
+						StringUtil.merge(
+							categoryIds,
+							" OR A.categoryId = "));
+			}
 
 			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = CustomSQLUtil.appendCriteria(sql, "AND (status = ?)");
+				sql = CustomSQLUtil.appendCriteria(sql, "AND (A.status = ?)");
+			}
+
+			if (inlineSQLHelper) {
+				sql = InlineSQLHelperUtil.replacePermissionCheck(
+					sql, MBMessage.class.getName(), "B.messageId", "B.userId",
+					groupId);
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -280,7 +444,6 @@ public class MBMessageFinderImpl
 
 			qPos.add(groupId);
 			qPos.add(userId);
-			qPos.add(anonymous);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
 				qPos.add(status);

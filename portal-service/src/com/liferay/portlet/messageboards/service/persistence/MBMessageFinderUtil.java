@@ -27,33 +27,72 @@ public class MBMessageFinderUtil {
 		return getFinder().countByC_T(createDate, threadId);
 	}
 
-	public static int countByG_U_S(long groupId, long userId, int status)
+	public static int countByG_C_U_S(long groupId, long[] categoryIds,
+		long userId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().countByG_U_S(groupId, userId, status);
+		return getFinder().countByG_C_U_S(groupId, categoryIds, userId, status);
 	}
 
-	public static int countByG_U_A_S(long groupId, long userId,
-		boolean anonymous, int status)
+	public static int countByG_C_U_A_S(long groupId, long[] categoryIds,
+		long userId, boolean anonymous, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().countByG_U_A_S(groupId, userId, anonymous, status);
+		return getFinder()
+				   .countByG_C_U_A_S(groupId, categoryIds, userId, anonymous,
+			status);
+	}
+
+	public static int filterCountByG_C_U_S(long groupId, long[] categoryIds,
+		long userId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .filterCountByG_C_U_S(groupId, categoryIds, userId, status);
+	}
+
+	public static int filterCountByG_C_U_A_S(long groupId, long[] categoryIds,
+		long userId, boolean anonymous, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .filterCountByG_C_U_A_S(groupId, categoryIds, userId,
+			anonymous, status);
+	}
+
+	public static java.util.List<java.lang.Long> filterFindByG_C_U_S(
+		long groupId, long[] categoryIds, long userId, int status, int start,
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .filterFindByG_C_U_S(groupId, categoryIds, userId, status,
+			start, end);
+	}
+
+	public static java.util.List<java.lang.Long> filterFindByG_C_U_A_S(
+		long groupId, long[] categoryIds, long userId, boolean anonymous,
+		int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .filterFindByG_C_U_A_S(groupId, categoryIds, userId,
+			anonymous, status, start, end);
+	}
+
+	public static java.util.List<java.lang.Long> findByG_C_U_S(long groupId,
+		long[] categoryIds, long userId, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .findByG_C_U_S(groupId, categoryIds, userId, status, start,
+			end);
+	}
+
+	public static java.util.List<java.lang.Long> findByG_C_U_A_S(long groupId,
+		long[] categoryIds, long userId, boolean anonymous, int status,
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .findByG_C_U_A_S(groupId, categoryIds, userId, anonymous,
+			status, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByNoAssets()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByNoAssets();
-	}
-
-	public static java.util.List<java.lang.Long> findByG_U_S(long groupId,
-		long userId, int status, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().findByG_U_S(groupId, userId, status, start, end);
-	}
-
-	public static java.util.List<java.lang.Long> findByG_U_A_S(long groupId,
-		long userId, boolean anonymous, int status, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder()
-				   .findByG_U_A_S(groupId, userId, anonymous, status, start, end);
 	}
 
 	public static MBMessageFinder getFinder() {

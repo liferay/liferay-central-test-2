@@ -84,12 +84,12 @@ public class MBThreadServiceSoap {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThreadSoap[] getGroupThreads(
-		long groupId, long userId, int status, boolean subscribed,
-		boolean includeAnonymous, int start, int end) throws RemoteException {
+		long groupId, long userId, int status, int start, int end)
+		throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.messageboards.model.MBThread> returnValue =
 				MBThreadServiceUtil.getGroupThreads(groupId, userId, status,
-					subscribed, includeAnonymous, start, end);
+					start, end);
 
 			return com.liferay.portlet.messageboards.model.MBThreadSoap.toSoapModels(returnValue);
 		}
@@ -109,6 +109,38 @@ public class MBThreadServiceSoap {
 					subscribed, start, end);
 
 			return com.liferay.portlet.messageboards.model.MBThreadSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBThreadSoap[] getGroupThreads(
+		long groupId, long userId, int status, boolean subscribed,
+		boolean includeAnonymous, int start, int end) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.messageboards.model.MBThread> returnValue =
+				MBThreadServiceUtil.getGroupThreads(groupId, userId, status,
+					subscribed, includeAnonymous, start, end);
+
+			return com.liferay.portlet.messageboards.model.MBThreadSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getGroupThreadsCount(long groupId, long userId, int status)
+		throws RemoteException {
+		try {
+			int returnValue = MBThreadServiceUtil.getGroupThreadsCount(groupId,
+					userId, status);
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
