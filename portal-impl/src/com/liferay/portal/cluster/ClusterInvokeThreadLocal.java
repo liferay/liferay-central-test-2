@@ -33,6 +33,6 @@ public class ClusterInvokeThreadLocal {
 
 	private static ThreadLocal<Boolean> _enabled =
 		new AutoResetThreadLocal<Boolean>(
-			ClusterInvokeThreadLocal.class + "._enabled", false);
+			ClusterInvokeThreadLocal.class + "._enabled", true);
 
 }

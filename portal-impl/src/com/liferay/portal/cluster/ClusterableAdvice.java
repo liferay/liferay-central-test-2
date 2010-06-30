@@ -37,7 +37,7 @@ public class ClusterableAdvice
 	public void afterReturning(MethodInvocation methodInvocation, Object result)
 		throws Throwable {
 
-		if (ClusterInvokeThreadLocal.isEnabled()) {
+		if (!ClusterInvokeThreadLocal.isEnabled()) {
 			return;
 		}
 

@@ -199,7 +199,7 @@ public class ClusterRequestReceiver extends BaseReceiver {
 
 			if (methodWrapper != null) {
 				try {
-					ClusterInvokeThreadLocal.setEnabled(true);
+					ClusterInvokeThreadLocal.setEnabled(false);
 
 					Object returnValue = MethodInvoker.invoke(methodWrapper);
 
@@ -216,7 +216,7 @@ public class ClusterRequestReceiver extends BaseReceiver {
 					clusterNodeResponse.setException(e);
 				}
 				finally {
-					ClusterInvokeThreadLocal.setEnabled(false);
+					ClusterInvokeThreadLocal.setEnabled(true);
 				}
 			}
 			else {
