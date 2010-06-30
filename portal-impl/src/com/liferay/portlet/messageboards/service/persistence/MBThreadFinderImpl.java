@@ -270,20 +270,16 @@ public class MBThreadFinderImpl
 
 			String sql = CustomSQLUtil.get(COUNT_BY_S_G_C_U_S);
 
-			if ((categoryIds == null) ||
-				(categoryIds.length == 0)) {
-
+			if ((categoryIds == null) || (categoryIds.length == 0)) {
 				sql = StringUtil.replace(
-					sql, "(MBThread.categoryId = ?) AND",
-					StringPool.BLANK);
+					sql, "(MBThread.categoryId = ?) AND", StringPool.BLANK);
 			}
 			else {
 				sql = StringUtil.replace(
 					sql, "MBThread.categoryId = ?",
 					"MBThread.categoryId = " +
 						StringUtil.merge(
-							categoryIds,
-							" OR MBThread.categoryId = "));
+							categoryIds, " OR MBThread.categoryId = "));
 			}
 
 			if (status != WorkflowConstants.STATUS_ANY) {
@@ -389,20 +385,16 @@ public class MBThreadFinderImpl
 
 			String sql = CustomSQLUtil.get(FIND_BY_S_G_C_U_S);
 
-			if ((categoryIds == null) ||
-				(categoryIds.length == 0)) {
-
+			if ((categoryIds == null) || (categoryIds.length == 0)) {
 				sql = StringUtil.replace(
-					sql, "(MBThread.categoryId = ?) AND",
-					StringPool.BLANK);
+					sql, "(MBThread.categoryId = ?) AND", StringPool.BLANK);
 			}
 			else {
 				sql = StringUtil.replace(
 					sql, "MBThread.categoryId = ?",
 					"MBThread.categoryId = " +
 						StringUtil.merge(
-							categoryIds,
-							" OR MBThread.categoryId = "));
+							categoryIds, " OR MBThread.categoryId = "));
 			}
 
 			if (status != WorkflowConstants.STATUS_ANY) {
