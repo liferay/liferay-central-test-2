@@ -27,8 +27,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.InputStream;
-import java.util.Properties;
-import java.util.Set;
 
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
@@ -47,10 +45,6 @@ public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 		Converter<String> hibernateConfigurationConverter) {
 
 		_hibernateConfigurationConverter = hibernateConfigurationConverter;
-	}
-
-	public void setHibernateProperties(Properties hibernateProperties) {
-		_hibernateProperties = hibernateProperties;
 	}
 
 	protected String determineDialect() {
@@ -94,18 +88,6 @@ public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 
 			if (db.getType().equals(DB.TYPE_HYPERSONIC)) {
 				//configuration.setProperty("hibernate.jdbc.batch_size", "0");
-			}
-
-			if (_hibernateProperties != null) {
-				Set<String> propertyNames =
-					_hibernateProperties.stringPropertyNames();
-
-				for (String propertyName : propertyNames) {
-					String propertyValue =
-						_hibernateProperties.getProperty(propertyName);
-
-					configuration.setProperty(propertyName, propertyValue);
-				}
 			}
 		}
 		catch (Exception e1) {
@@ -163,6 +145,5 @@ public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 		PortalHibernateConfiguration.class);
 
 	private Converter<String> _hibernateConfigurationConverter;
-	private Properties _hibernateProperties;
 
 }
