@@ -14,12 +14,10 @@
 
 package com.liferay.portal.kernel.cluster;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.test.TestCase;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
@@ -31,116 +29,127 @@ import java.util.concurrent.TimeoutException;
 public class FutureClusterResponsesTest extends TestCase {
 
 	public void testMultipleResponseFailure() {
-
 		List<Address> addresses = new ArrayList<Address>();
 
 		addresses.add(new MockAddress("1.2.3.4"));
 		addresses.add(new MockAddress("1.2.3.5"));
 		addresses.add(new MockAddress("1.2.3.6"));
 
-		FutureClusterResponses responses = new FutureClusterResponses(
+		FutureClusterResponses clusterNodeResponses = new FutureClusterResponses(
 			"someUuid", addresses, new MockClusterExecutor());
 
-		ClusterNodeResponse clusterNodeResponse = new ClusterNodeResponse();
-		clusterNodeResponse.setClusterNode(new ClusterNode("1.2.3.4"));
-		responses.addClusterNodeResponse(clusterNodeResponse);
-
-
 		ClusterNodeResponse clusterNodeResponse1 = new ClusterNodeResponse();
-		clusterNodeResponse1.setClusterNode(new ClusterNode("1.2.3.5"));
-		responses.addClusterNodeResponse(clusterNodeResponse1);
+
+		clusterNodeResponse1.setClusterNode(new ClusterNode("1.2.3.4"));
+
+		clusterNodeResponses.addClusterNodeResponse(clusterNodeResponse1);
+
+		ClusterNodeResponse clusterNodeResponse2 = new ClusterNodeResponse();
+
+		clusterNodeResponse2.setClusterNode(new ClusterNode("1.2.3.5"));
+
+		clusterNodeResponses.addClusterNodeResponse(clusterNodeResponse2);
 
 		try {
-			responses.get(500, TimeUnit.MILLISECONDS);
+			clusterNodeResponses.get(500, TimeUnit.MILLISECONDS);
+
 			fail("Should have failed");
 		}
-		catch (InterruptedException e) {
-			fail("Getting interrupted");
+		catch (InterruptedException ie) {
+			fail("Interrupted");
 		}
-		catch (TimeoutException e) {
+		catch (TimeoutException te) {
 		}
 	}
 
 	public void testMultipleResponseSuccess() {
-
 		List<Address> addresses = new ArrayList<Address>();
 
 		addresses.add(new MockAddress("1.2.3.4"));
 		addresses.add(new MockAddress("1.2.3.5"));
 		addresses.add(new MockAddress("1.2.3.6"));
 
-		FutureClusterResponses responses = new FutureClusterResponses(
+		FutureClusterResponses clusterNodeResponses = new FutureClusterResponses(
 			"someUuid", addresses, new MockClusterExecutor());
 
-		ClusterNodeResponse clusterNodeResponse = new ClusterNodeResponse();
-		clusterNodeResponse.setClusterNode(new ClusterNode("1.2.3.4"));
-		responses.addClusterNodeResponse(clusterNodeResponse);
-
-
 		ClusterNodeResponse clusterNodeResponse1 = new ClusterNodeResponse();
-		clusterNodeResponse1.setClusterNode(new ClusterNode("1.2.3.5"));
-		responses.addClusterNodeResponse(clusterNodeResponse1);
+
+		clusterNodeResponse1.setClusterNode(new ClusterNode("1.2.3.4"));
+
+		clusterNodeResponses.addClusterNodeResponse(clusterNodeResponse1);
 
 		ClusterNodeResponse clusterNodeResponse2 = new ClusterNodeResponse();
-		clusterNodeResponse2.setClusterNode(new ClusterNode("1.2.3.6"));
-		responses.addClusterNodeResponse(clusterNodeResponse2);
+
+		clusterNodeResponse2.setClusterNode(new ClusterNode("1.2.3.5"));
+
+		clusterNodeResponses.addClusterNodeResponse(clusterNodeResponse2);
+
+		ClusterNodeResponse clusterNodeResponse3 = new ClusterNodeResponse();
+
+		clusterNodeResponse3.setClusterNode(new ClusterNode("1.2.3.6"));
+
+		clusterNodeResponses.addClusterNodeResponse(clusterNodeResponse3);
 
 		try {
-			responses.get(500, TimeUnit.MILLISECONDS);
+			clusterNodeResponses.get(500, TimeUnit.MILLISECONDS);
 		}
-		catch (InterruptedException e) {
-			fail("Getting interrupted");
+		catch (InterruptedException ie) {
+			fail("Interrupted");
 		}
-		catch (TimeoutException e) {
-			fail("Should not have timed out");
+		catch (TimeoutException te) {
+			fail("Timed out");
 		}
 	}
 
 	public void testSingleResponseFailure() {
-
 		List<Address> addresses = new ArrayList<Address>();
 
 		addresses.add(new MockAddress("1.2.3.4"));
 
-		FutureClusterResponses responses = new FutureClusterResponses(
-			"someUuid", addresses, new MockClusterExecutor());
+		FutureClusterResponses futureClusterResponses =
+			new FutureClusterResponses(
+				"someUuid", addresses, new MockClusterExecutor());
 
 		try {
-			responses.get(500, TimeUnit.MILLISECONDS);
+			futureClusterResponses.get(500, TimeUnit.MILLISECONDS);
+
 			fail("Should have failed");
 		}
-		catch (InterruptedException e) {
-			fail("Getting interrupted");
+		catch (InterruptedException ie) {
+			fail("Interrupted");
 		}
-		catch (TimeoutException e) {
+		catch (TimeoutException te) {
 		}
 	}
 
 	public void testSingleResponseSuccess() {
-
 		List<Address> addresses = new ArrayList<Address>();
 
 		addresses.add(new MockAddress("1.2.3.4"));
 
-		FutureClusterResponses responses = new FutureClusterResponses(
-			"someUuid", addresses, new MockClusterExecutor());
+		FutureClusterResponses futureClusterResponses =
+			new FutureClusterResponses(
+				"someUuid", addresses, new MockClusterExecutor());
 
 		ClusterNodeResponse clusterNodeResponse = new ClusterNodeResponse();
+
 		clusterNodeResponse.setClusterNode(new ClusterNode("test"));
-		responses.addClusterNodeResponse(clusterNodeResponse);
+
+		futureClusterResponses.addClusterNodeResponse(clusterNodeResponse);
 
 		try {
-			responses.get(500, TimeUnit.MILLISECONDS);
+			futureClusterResponses.get(500, TimeUnit.MILLISECONDS);
 		}
-		catch (InterruptedException e) {
-			fail("Getting interrupted");
+		catch (InterruptedException ie) {
+			fail("Interrupted");
 		}
-		catch (TimeoutException e) {
-			fail("Should not have timed out");
+		catch (TimeoutException te) {
+			fail("Timed out");
 		}
 	}
 
 	private class MockAddress implements Address {
+
 		public MockAddress(String address) {
 			_address = address;
 		}
@@ -154,64 +163,58 @@ public class FutureClusterResponsesTest extends TestCase {
 		}
 
 		private String _address;
+
 	}
 
 	private class MockClusterExecutor implements ClusterExecutor {
+
 		public void addClusterEventListener(
 			ClusterEventListener clusterEventListener) {
-			throw new UnsupportedOperationException();
 
+			throw new UnsupportedOperationException();
 		}
 
 		public void destroy() {
 			throw new UnsupportedOperationException();
-
 		}
 
-		public FutureClusterResponses execute(ClusterRequest clusterRequest)
-			throws SystemException {
+		public FutureClusterResponses execute(ClusterRequest clusterRequest) {
 			throw new UnsupportedOperationException();
-
 		}
 
 		public List<ClusterEventListener> getClusterEventListeners() {
 			throw new UnsupportedOperationException();
-
 		}
 
 		public List<ClusterNode> getClusterNodes() {
 			throw new UnsupportedOperationException();
-
 		}
 
-		public ClusterNode getLocalClusterNode() throws SystemException {
+		public ClusterNode getLocalClusterNode() {
 			throw new UnsupportedOperationException();
-
 		}
 
 		public void initialize() {
 			throw new UnsupportedOperationException();
-
 		}
 
 		public boolean isClusterNodeAlive(String clusterNodeId) {
 			throw new UnsupportedOperationException();
-
 		}
 
 		public boolean isEnabled() {
 			throw new UnsupportedOperationException();
-
 		}
 
 		public void removeClusterEventListener(
 			ClusterEventListener clusterEventListener) {
-			throw new UnsupportedOperationException();
 
+			throw new UnsupportedOperationException();
 		}
 
 		public void requestComplete(String uuid) {
-			//nothing to do
 		}
+
 	}
+
 }
