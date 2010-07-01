@@ -15,6 +15,7 @@
 package com.liferay.portlet.portletconfiguration.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
@@ -67,7 +68,12 @@ public class EditPublicRenderParametersAction extends EditConfigurationAction {
 		updatePreferences(actionRequest, portlet);
 
 		if (SessionErrors.isEmpty(actionRequest)) {
-			sendRedirect(actionRequest, actionResponse);
+			SessionMessages.add(
+				actionRequest,
+				portletConfig.getPortletName() + ".doConfigure");
+
+			actionResponse.sendRedirect(
+				ParamUtil.getString(actionRequest, "redirect"));
 		}
 	}
 

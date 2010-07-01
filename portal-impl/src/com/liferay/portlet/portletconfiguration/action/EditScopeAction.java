@@ -16,6 +16,7 @@ package com.liferay.portlet.portletconfiguration.action;
 
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -79,8 +80,15 @@ public class EditScopeAction extends EditConfigurationAction {
 
 		if (cmd.equals(Constants.SAVE)) {
 			updateScope(actionRequest, portlet);
+		}
 
-			sendRedirect(actionRequest, actionResponse);
+		if (SessionErrors.isEmpty(actionRequest)) {
+			SessionMessages.add(
+				actionRequest,
+				portletConfig.getPortletName() + ".doConfigure");
+
+			actionResponse.sendRedirect(
+				ParamUtil.getString(actionRequest, "redirect"));
 		}
 	}
 

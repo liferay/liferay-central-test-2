@@ -15,6 +15,7 @@
 package com.liferay.portlet.portletconfiguration.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
@@ -87,7 +88,14 @@ public class EditSharingAction extends EditConfigurationAction {
 
 		preferences.store();
 
-		sendRedirect(actionRequest, actionResponse);
+		if (SessionErrors.isEmpty(actionRequest)) {
+			SessionMessages.add(
+				actionRequest,
+				portletConfig.getPortletName() + ".doConfigure");
+
+			actionResponse.sendRedirect(
+					ParamUtil.getString(actionRequest, "redirect"));
+		}
 	}
 
 	public ActionForward render(
