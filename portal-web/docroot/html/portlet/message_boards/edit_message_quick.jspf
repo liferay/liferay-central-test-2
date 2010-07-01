@@ -91,7 +91,16 @@ boolean quote = ParamUtil.getBoolean(request, "quote");
 	</aui:fieldset>
 
 	<aui:button-row>
-		<aui:button name="saveButton" type="submit" value="publish" />
+
+		<%
+		String publishButtonLabel = "publish";
+
+		if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, MBMessage.class.getName())) {
+			publishButtonLabel = "submit-for-publication";
+		}
+		%>
+
+		<aui:button name="publishButton" type="submit" value="publish" />
 
 		<%
 		String taglibCancelReply = renderResponse.getNamespace() + "addQuickReply('cancel', '');";
