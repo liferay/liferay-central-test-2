@@ -221,6 +221,7 @@
 
 		<antcall target="run-versioned-upgrade-test">
 			<param name="deploy.versioned.plugins" value="true" />
+			<param name="ee.deploy.dir" value="liferay-portal-5.2.1/deploy" />
 			<param name="file.name" value="liferay-portal-tomcat-6.0-5.2.1.zip" />
 			<param name="legacy.theme.ids" value="classic,controlpanel" />
 			<param name="license.type" value="ce" />
@@ -264,6 +265,7 @@
 
 		<antcall target="run-versioned-upgrade-test">
 			<param name="deploy.versioned.plugins" value="true" />
+			<param name="ee.deploy.dir" value="liferay-portal-5.2.2/deploy" />
 			<param name="file.name" value="liferay-portal-tomcat-6.0-5.2.2.zip" />
 			<param name="legacy.theme.ids" value="classic,controlpanel" />
 			<param name="license.type" value="ce" />

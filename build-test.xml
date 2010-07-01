@@ -1693,36 +1693,37 @@ file.
 			<then>
 				<ant antfile="build-test-plugins.xml" target="deploy-versioned-simple-server-plugins" />
 			</then>
-		</if>
-
-		<if>
-			<isset property="portlet.plugins.includes" />
-			<then>
-				<ant antfile="build-test-plugins.xml" target="deploy-simple-server-plugins">
-					<property name="plugin.types" value="portlets" />
-					<property name="plugins.includes" value="${portlet.plugins.includes}" />
-				</ant>
-			</then>
-		</if>
-
-		<if>
-			<isset property="theme.plugins.includes" />
-			<then>
-				<ant antfile="build-test-plugins.xml" target="deploy-simple-server-plugins">
-					<property name="plugin.types" value="themes" />
-					<property name="plugins.includes" value="${theme.plugins.includes}" />
-				</ant>
-			</then>
-		</if>
-
-		<if>
-			<isset property="webs.plugins.includes" />
-			<then>
-				<ant antfile="build-test-plugins.xml" target="deploy-simple-server-plugins">
-					<property name="plugin.types" value="webs" />
-					<property name="plugins.includes" value="${webs.plugins.includes}" />
-				</ant>
-			</then>
+			<else>
+				<if>
+					<isset property="portlet.plugins.includes" />
+					<then>
+						<ant antfile="build-test-plugins.xml" target="deploy-simple-server-plugins">
+							<property name="plugin.types" value="portlets" />
+							<property name="plugins.includes" value="${portlet.plugins.includes}" />
+						</ant>
+					</then>
+				</if>
+				
+				<if>
+					<isset property="theme.plugins.includes" />
+					<then>
+						<ant antfile="build-test-plugins.xml" target="deploy-simple-server-plugins">
+							<property name="plugin.types" value="themes" />
+							<property name="plugins.includes" value="${theme.plugins.includes}" />
+						</ant>
+					</then>
+				</if>
+				
+				<if>
+					<isset property="webs.plugins.includes" />
+					<then>
+						<ant antfile="build-test-plugins.xml" target="deploy-simple-server-plugins">
+							<property name="plugin.types" value="webs" />
+							<property name="plugins.includes" value="${webs.plugins.includes}" />
+						</ant>
+					</then>
+				</if>
+			</else>
 		</if>
 
 		<parallel>
