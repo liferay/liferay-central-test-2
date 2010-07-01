@@ -17,7 +17,7 @@
 <%@ include file="/html/taglib/ui/header/init.jsp" %>
 
 <%
-if (!backURL.equals("javascript:history.go(-1);")) {
+if (Validator.isNotNull(backURL) && !backURL.equals("javascript:history.go(-1);")) {
 	backURL = HtmlUtil.escape(HtmlUtil.escapeHREF(PortalUtil.escapeRedirect(backURL)));
 }
 %>
