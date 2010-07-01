@@ -52,7 +52,7 @@
 				String friendlyURL = null;
 
 				try {
-					Layout liveLayout = LayoutLocalServiceUtil.getLayout(liveGroup.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId());
+					Layout liveLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(layout.getUuid(), liveGroup.getGroupId());
 
 					friendlyURL = PortalUtil.getLayoutFriendlyURL(liveLayout, themeDisplay);
 				}
@@ -158,7 +158,7 @@
 				String friendlyURL = null;
 
 				try {
-					Layout stagedLayout = LayoutLocalServiceUtil.getLayout(stagingGroup.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId());
+					Layout stagedLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(layout.getUuid(), stagingGroup.getGroupId());
 
 					friendlyURL = PortalUtil.getLayoutFriendlyURL(stagedLayout, themeDisplay);
 				}
