@@ -25,7 +25,7 @@ String languageId = LanguageUtil.getLanguageId(request);
 int articlePage = ParamUtil.getInteger(request, "page", 1);
 String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
 
-JournalArticleDisplay articleDisplay;
+JournalArticleDisplay articleDisplay = null;
 
 if (article.isApproved()) {
 	articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), templateId, null, languageId, themeDisplay, articlePage, xmlRequest);
