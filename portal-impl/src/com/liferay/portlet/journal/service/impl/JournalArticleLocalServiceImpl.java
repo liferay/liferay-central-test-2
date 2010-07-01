@@ -1836,10 +1836,15 @@ public class JournalArticleLocalServiceImpl
 		article.setStatusByUserName(user.getFullName());
 		article.setStatusDate(serviceContext.getModifiedDate(now));
 
-		if ((article.getExpirationDate() != null) &&
+		if ((status == WorkflowConstants.STATUS_APPROVED) &&
+			(article.getExpirationDate() != null) &&
 			(article.getExpirationDate().before(now))) {
 
 			article.setExpirationDate(null);
+		}
+
+		if (status == WorkflowConstants.STATUS_EXPIRED) {
+			article.setExpirationDate(now);
 		}
 
 		journalArticlePersistence.update(article, false);
@@ -1912,10 +1917,8 @@ public class JournalArticleLocalServiceImpl
 
 				indexer.reindex(article);
 			}
-			else {
-				if (article.isApproved()) {
-					updatePreviousApprovedArticle(article);
-				}
+			else if (oldStatus == WorkflowConstants.STATUS_APPROVED) {
+				updatePreviousApprovedArticle(article);
 			}
 		}
 
