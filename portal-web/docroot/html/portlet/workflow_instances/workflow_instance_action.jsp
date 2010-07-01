@@ -78,7 +78,7 @@ else {
 
 		<liferay-ui:icon
 			image="undo"
-			message="withdraw-request"
+			message="withdraw-submission"
 			url="<%= deleteURL %>"
 		/>
 	</c:if>
