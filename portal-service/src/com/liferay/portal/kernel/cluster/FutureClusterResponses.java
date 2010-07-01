@@ -30,10 +30,15 @@ import java.util.concurrent.TimeoutException;
  */
 public class FutureClusterResponses implements Future<ClusterNodeResponses> {
 
-	public FutureClusterResponses(List<Address> addresses) {
+	public FutureClusterResponses(
+		String requestUuid, List<Address> addresses,
+		ClusterExecutor clusterExecutor) {
+
 		_countDownLatch = new CountDownLatch(addresses.size());
+		_clusterExecutor = clusterExecutor;
 		_clusterNodeResponses = new ClusterNodeResponses();
 		_expectedReplyAddress = new HashSet<Address>(addresses);
+		_requestUuid = requestUuid;
 	}
 
 	public void addClusterNodeResponse(
@@ -42,6 +47,10 @@ public class FutureClusterResponses implements Future<ClusterNodeResponses> {
 		_clusterNodeResponses.addClusterResponse(clusterNodeResponse);
 
 		_countDownLatch.countDown();
+
+		if (isDone()) {
+			completeRequest();
+		}
 	}
 
 	public void addExpectedReplyAddress(Address address) {
@@ -55,7 +64,13 @@ public class FutureClusterResponses implements Future<ClusterNodeResponses> {
 
 		_cancelled = true;
 
+		completeRequest();
+
 		return true;
+	}
+
+	public void completeRequest() {
+		_clusterExecutor.requestComplete(_requestUuid);
 	}
 
 	public boolean expectsReply(Address address) {
@@ -63,27 +78,37 @@ public class FutureClusterResponses implements Future<ClusterNodeResponses> {
 	}
 
 	public ClusterNodeResponses get() throws InterruptedException {
-		if (_cancelled) {
-			throw new CancellationException();
+		try {
+			if (_cancelled) {
+				throw new CancellationException();
+			}
+
+			_countDownLatch.await();
+
+			return _clusterNodeResponses;
 		}
-
-		_countDownLatch.await();
-
-		return _clusterNodeResponses;
+		finally {
+			completeRequest();
+		}
 	}
 
 	public ClusterNodeResponses get(long timeout, TimeUnit timeUnit)
 		throws InterruptedException, TimeoutException {
 
-		if (_cancelled) {
-			throw new CancellationException();
-		}
+		try {
+			if (_cancelled) {
+				throw new CancellationException();
+			}
 
-		if (_countDownLatch.await(timeout, timeUnit)) {
-			return _clusterNodeResponses;
+			if (_countDownLatch.await(timeout, timeUnit)) {
+				return _clusterNodeResponses;
+			}
+			else {
+				throw new TimeoutException();
+			}
 		}
-		else {
-			throw new TimeoutException();
+		finally {
+			completeRequest();
 		}
 	}
 
@@ -105,8 +130,10 @@ public class FutureClusterResponses implements Future<ClusterNodeResponses> {
 	}
 
 	private boolean _cancelled;
+	private ClusterExecutor _clusterExecutor;
 	private ClusterNodeResponses _clusterNodeResponses;
 	private CountDownLatch _countDownLatch;
 	private Set<Address> _expectedReplyAddress;
+	private String _requestUuid;
 
 }

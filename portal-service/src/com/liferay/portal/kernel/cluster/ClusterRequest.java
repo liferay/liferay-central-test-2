@@ -156,6 +156,10 @@ public class ClusterRequest implements Serializable {
 		return _uuid;
 	}
 
+	public boolean isFireAndForget() {
+		return _fireAndForget;
+	}
+
 	public boolean isMulticast() {
 		return _multicast;
 	}
@@ -166,6 +170,10 @@ public class ClusterRequest implements Serializable {
 
 	public void setClusterMessageType(ClusterMessageType clusterMessageType) {
 		_clusterMessageType = clusterMessageType;
+	}
+
+	public void setFireAndForget(boolean fireAndForget) {
+		_fireAndForget = fireAndForget;
 	}
 
 	public void setMethodWrapper(MethodWrapper methodWrapper) {
@@ -228,6 +236,7 @@ public class ClusterRequest implements Serializable {
 	}
 
 	private ClusterMessageType _clusterMessageType;
+	private boolean _fireAndForget;
 	private MethodWrapper _methodWrapper;
 	private boolean _multicast;
 	private ClusterNode _originatingClusterNode;

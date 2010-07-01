@@ -275,6 +275,14 @@ public class ClusterRequestReceiver extends BaseReceiver {
 		FutureClusterResponses futureClusterResponses =
 			_clusterExecutorImpl.getExecutionResults(uuid);
 
+		if (futureClusterResponses == null) {
+			if (_log.isInfoEnabled()) {
+				_log.info("Unable to find response container for: " + uuid);
+			}
+			
+			return;
+		}
+		
 		Address address = new AddressImpl(sourceAddress);
 
 		if (futureClusterResponses.expectsReply(address)) {
@@ -282,7 +290,7 @@ public class ClusterRequestReceiver extends BaseReceiver {
 		}
 		else {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unknow UUID " + uuid + " from " + sourceAddress);
+				_log.warn("Unknown UUID " + uuid + " from " + sourceAddress);
 			}
 		}
 	}

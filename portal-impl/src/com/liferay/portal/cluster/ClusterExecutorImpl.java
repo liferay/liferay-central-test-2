@@ -114,14 +114,8 @@ public class ClusterExecutorImpl
 			return null;
 		}
 
-		FutureClusterResponses futureClusterResponses = null;
-
-		try {
-			futureClusterResponses = doExecuteClusterRequest(clusterRequest);
-		}
-		finally {
-			_executionResultMap.remove(clusterRequest.getUuid());
-		}
+		FutureClusterResponses futureClusterResponses = doExecuteClusterRequest(
+			clusterRequest);
 
 		return futureClusterResponses;
 	}
@@ -243,6 +237,10 @@ public class ClusterExecutorImpl
 		_clusterEventListeners.remove(clusterEventListener);
 	}
 
+	public void requestComplete(String uuid) {
+		_executionResultMap.remove(uuid);
+	}
+
 	public void setClusterEventListener(
 		List<ClusterEventListener> clusterEventListeners) {
 
@@ -288,10 +286,13 @@ public class ClusterExecutorImpl
 		}
 
 		FutureClusterResponses futureClusterResponses =
-			new FutureClusterResponses(addresses);
+			new FutureClusterResponses(
+				clusterRequest.getUuid(), addresses, this);
 
-		_executionResultMap.put(
-			clusterRequest.getUuid(), futureClusterResponses);
+		if (!clusterRequest.isFireAndForget()) {
+			_executionResultMap.put(
+				clusterRequest.getUuid(), futureClusterResponses);
+		}
 
 		for (Address address : addresses) {
 			if (_shortcutLocalMethod && address.equals(localControlAddress)) {

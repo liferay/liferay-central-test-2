@@ -48,4 +48,6 @@ public interface ClusterExecutor {
 	public void removeClusterEventListener(
 		ClusterEventListener clusterEventListener);
 
+	public void requestComplete(String uuid);
+
 }
