@@ -40,6 +40,9 @@ public class SQLTransformer {
 		if (db.getType().equals(DB.TYPE_MYSQL)) {
 			_vendorMySQL = true;
 		}
+		else if (db.getType().equals(DB.TYPE_POSTGRESQL)) {
+			_vendorPostgreSQL = true;
+		}
 		else if (db.getType().equals(DB.TYPE_SQLSERVER)) {
 			_vendorSQLServer = true;
 		}
@@ -91,6 +94,17 @@ public class SQLTransformer {
 		return matcher.replaceAll("$1 % $2");
 	}
 
+	private String _replaceCast(String sql) {
+		Matcher matcher = _castPattern.matcher(sql);
+
+		if (_vendorPostgreSQL) {
+			return matcher.replaceAll("cast($1 as text)");
+		}
+		else {
+			return matcher.replaceAll("$1");			
+		}
+	}
+
 	private String _transform(String sql) {
 		if (sql == null) {
 			return sql;
@@ -108,6 +122,8 @@ public class SQLTransformer {
 		else if (_vendorSQLServer) {
 			newSQL = _replaceMod(newSQL);
 		}
+
+		newSQL = _replaceCast(newSQL);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Original SQL " + sql);
@@ -128,7 +144,11 @@ public class SQLTransformer {
 	private static Pattern _modPattern = Pattern.compile(
 		"mod\\((.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
 
+	private static Pattern _castPattern = Pattern.compile(
+		"cast\\((.+?)\\)", Pattern.CASE_INSENSITIVE);
+
 	private boolean _vendorMySQL;
+	private boolean _vendorPostgreSQL;
 	private boolean _vendorSQLServer;
 
 }
