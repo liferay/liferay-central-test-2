@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/image_gallery/init.jsp" %>
 
 <%
-String topLink = ParamUtil.getString(request, "topLink", "image-home");
+String topLink = ParamUtil.getString(request, "topLink", "images-home");
 
 IGFolder folder = (IGFolder)request.getAttribute(WebKeys.IMAGE_GALLERY_FOLDER);
 
@@ -116,13 +116,13 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 		%>
 
 	</c:when>
-	<c:when test='<%= topLink.equals("image-home") %>'>
+	<c:when test='<%= topLink.equals("images-home") %>'>
 		<aui:layout>
 			<c:if test="<%= folder != null %>">
 
 				<%
 				long parentFolderId = defaultFolderId;
-				String parentFolderName = LanguageUtil.get(pageContext, "image-home");
+				String parentFolderName = LanguageUtil.get(pageContext, "images-home");
 
 				if (!folder.isRoot()) {
 					IGFolder parentFolder = folder.getParentFolder();
@@ -208,11 +208,11 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 					<liferay-ui:icon
 						cssClass="folder-avatar"
 						image='<%= "../file_system/large/" + (((foldersCount + imagesCount) > 0) ? "folder_full_image" : "folder_empty") %>'
-						message='<%= (folder != null) ? folder.getName() : LanguageUtil.get(pageContext, "image-home") %>'
+						message='<%= (folder != null) ? folder.getName() : LanguageUtil.get(pageContext, "images-home") %>'
 					/>
 
 					<div class="folder-name">
-						<h4><%= (folder != null) ? folder.getName() : LanguageUtil.get(pageContext, "image-home") %></h4>
+						<h4><%= (folder != null) ? folder.getName() : LanguageUtil.get(pageContext, "images-home") %></h4>
 					</div>
 				</div>
 

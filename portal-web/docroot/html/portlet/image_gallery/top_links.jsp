@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/image_gallery/init.jsp" %>
 
 <%
-String topLink = ParamUtil.getString(request, "topLink", "image-home");
+String topLink = ParamUtil.getString(request, "topLink", "images-home");
 
 long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folderId"));
 
@@ -36,15 +36,15 @@ portletURL.setParameter("tag", StringPool.BLANK);
 		<div class="top-links-navigation">
 
 			<%
-			portletURL.setParameter("topLink", "image-home");
+			portletURL.setParameter("topLink", "images-home");
 			%>
 
 			<liferay-ui:icon
 				cssClass="top-link"
 				image="../aui/home"
 				label="<%= true %>"
-				message="image-home"
-				url='<%= (topLink.equals("image-home") && folderId == 0 && viewFolder && !useAssetEntryQuery) ? StringPool.BLANK : portletURL.toString() %>'
+				message="images-home"
+				url='<%= (topLink.equals("images-home") && folderId == 0 && viewFolder && !useAssetEntryQuery) ? StringPool.BLANK : portletURL.toString() %>'
 			/>
 
 			<%

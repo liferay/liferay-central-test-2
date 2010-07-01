@@ -91,7 +91,7 @@ public class IGUtil {
 			portletURL.setParameter("struts_action", strutsAction);
 
 			PortalUtil.addPortletBreadcrumbEntry(
-				request, themeDisplay.translate("image-home"),
+				request, themeDisplay.translate("images-home"),
 				portletURL.toString());
 		}
 		else {

@@ -20,7 +20,7 @@
 DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
 long folderId = BeanParamUtil.getLong(folder, request, "folderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-String folderName = LanguageUtil.get(pageContext, "document-home");
+String folderName = LanguageUtil.get(pageContext, "documents-home");
 
 if (folder != null) {
 	folderName = folder.getName();
@@ -31,7 +31,7 @@ if (folder != null) {
 
 <aui:form method="post" name="fm">
 	<liferay-ui:header
-		title="document-home"
+		title="documents-home"
 	/>
 
 	<liferay-ui:breadcrumb showGuestGroup="<%= false %>" showParentGroups="<%= false %>" showLayout="<%= false %>" />

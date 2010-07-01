@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
-String topLink = ParamUtil.getString(request, "topLink", "document-home");
+String topLink = ParamUtil.getString(request, "topLink", "documents-home");
 
 DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
@@ -102,13 +102,13 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 		%>
 
 	</c:when>
-	<c:when test='<%= topLink.equals("document-home") %>'>
+	<c:when test='<%= topLink.equals("documents-home") %>'>
 		<aui:layout>
 			<c:if test="<%= folder != null %>">
 
 				<%
 				long parentFolderId = defaultFolderId;
-				String parentFolderName = LanguageUtil.get(pageContext, "document-home");
+				String parentFolderName = LanguageUtil.get(pageContext, "documents-home");
 
 				if (!folder.isRoot()) {
 					DLFolder parentFolder = folder.getParentFolder();
@@ -215,11 +215,11 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 						<liferay-ui:icon
 							cssClass="folder-avatar"
 							image='<%= "../file_system/large/" + (((foldersCount + fileEntriesCount) > 0) ? "folder_full_document" : "folder_empty") %>'
-							message='<%= (folder != null) ? folder.getName() : LanguageUtil.get(pageContext, "document-home") %>'
+							message='<%= (folder != null) ? folder.getName() : LanguageUtil.get(pageContext, "documents-home") %>'
 						/>
 
 						<div class="folder-name">
-							<h4><%= (folder != null) ? folder.getName() : LanguageUtil.get(pageContext, "document-home") %></h4>
+							<h4><%= (folder != null) ? folder.getName() : LanguageUtil.get(pageContext, "documents-home") %></h4>
 						</div>
 					</div>
 

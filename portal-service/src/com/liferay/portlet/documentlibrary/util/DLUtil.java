@@ -142,7 +142,7 @@ public class DLUtil {
 			portletURL.setParameter("groupId", String.valueOf(groupId));
 
 			PortalUtil.addPortletBreadcrumbEntry(
-				request, themeDisplay.translate("document-home"),
+				request, themeDisplay.translate("documents-home"),
 				portletURL.toString());
 		}
 		else {

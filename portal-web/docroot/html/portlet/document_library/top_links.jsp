@@ -20,7 +20,7 @@
 	<c:when test="<%= showTabs && portletName.equals(PortletKeys.DOCUMENT_LIBRARY) %>">
 
 		<%
-		String topLink = ParamUtil.getString(request, "topLink", "document-home");
+		String topLink = ParamUtil.getString(request, "topLink", "documents-home");
 
 		long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folderId"));
 
@@ -39,15 +39,15 @@
 				<div class="top-links-navigation">
 
 					<%
-					portletURL.setParameter("topLink", "document-home");
+					portletURL.setParameter("topLink", "documents-home");
 					%>
 
 					<liferay-ui:icon
 						cssClass="top-link"
 						image="../aui/home"
 						label="<%= true %>"
-						message="document-home"
-						url='<%= (topLink.equals("document-home") && folderId == 0 && viewFolder && !useAssetEntryQuery) ? StringPool.BLANK : portletURL.toString() %>'
+						message="documents-home"
+						url='<%= (topLink.equals("documents-home") && folderId == 0 && viewFolder && !useAssetEntryQuery) ? StringPool.BLANK : portletURL.toString() %>'
 					/>
 
 
@@ -147,7 +147,7 @@
 	</c:when>
 	<c:when test="<%= showTabs && showSubfolders %>">
 		<liferay-ui:header
-			title="document-home"
+			title="documents-home"
 		/>
 	</c:when>
 </c:choose>

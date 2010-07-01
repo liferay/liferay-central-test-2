@@ -190,7 +190,7 @@ portletURL.setParameter("name", name);
 			folderName = folder.getName();
 		}
 		else {
-			folderName = LanguageUtil.get(pageContext, "document-home");
+			folderName = LanguageUtil.get(pageContext, "documents-home");
 		}
 
 		%>
