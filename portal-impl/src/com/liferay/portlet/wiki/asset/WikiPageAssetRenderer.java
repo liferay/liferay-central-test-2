@@ -25,6 +25,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.portlet.wiki.model.WikiPageConstants;
 import com.liferay.portlet.wiki.service.permission.WikiPagePermission;
 
 import javax.portlet.PortletURL;
@@ -43,7 +44,12 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public long getClassPK() {
-		return _page.getPageId();
+		if (_page.getVersion() != WikiPageConstants.DEFAULT_VERSION) {
+			return _page.getResourcePrimKey();
+		}
+		else {
+			return _page.getPageId();
+		}
 	}
 
 	public String getDiscussionPath() {
