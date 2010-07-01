@@ -408,7 +408,7 @@ public class BBCodeUtil {
 			}
 
 			sb.append("<a href='");
-			sb.append(url);
+			sb.append(HtmlUtil.escapeHREF(url));
 			sb.append("'>");
 			sb.append(tag.getElement());
 			sb.append("</a>");

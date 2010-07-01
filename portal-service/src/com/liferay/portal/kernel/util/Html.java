@@ -32,6 +32,8 @@ public interface Html {
 
 	public String escapeCSS(String css);
 
+	public String escapeHREF(String href);
+
 	public String escapeJS(String js);
 
 	public String escapeURL(String url);

@@ -153,6 +153,26 @@ public class HtmlImpl implements Html {
 		return escape(css, ESCAPE_MODE_CSS);
 	}
 
+	public String escapeHREF(String href) {
+		if (href == null) {
+			return null;
+		}
+
+		if (href.length() == 0) {
+			return StringPool.BLANK;
+		}
+
+		if (href.indexOf(StringPool.COLON) == 10) {
+			String protocol = href.substring(0, 10).toLowerCase();
+
+			if (protocol.equals("javascript")) {
+				return StringUtil.replaceFirst(href, StringPool.COLON, "%3a");
+			}
+		}
+
+		return href;
+	}
+
 	public String escapeJS(String js) {
 		return escape(js, ESCAPE_MODE_JS);
 	}

@@ -20,8 +20,8 @@
 	<c:if test="<%= Validator.isNotNull(backURL) %>">
 
 		<%
-		if (!backURL.startsWith("javascript:")) {
-			backURL = HtmlUtil.escape(PortalUtil.escapeRedirect(backURL));
+		if (!backURL.equals("javascript:history.go(-1);")) {
+			backURL = HtmlUtil.escape(HtmlUtil.escapeHREF(PortalUtil.escapeRedirect(backURL)));
 		}
 		%>
 

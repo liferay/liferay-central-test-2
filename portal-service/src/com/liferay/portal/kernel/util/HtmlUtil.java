@@ -40,6 +40,10 @@ public class HtmlUtil {
 		return getHtml().escapeCSS(css);
 	}
 
+	public static String escapeHREF(String href) {
+		return getHtml().escapeHREF(href);
+	}
+
 	public static String escapeJS(String js) {
 		return getHtml().escapeJS(js);
 	}
