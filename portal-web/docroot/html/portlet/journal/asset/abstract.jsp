@@ -25,7 +25,14 @@ JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.
 
 String languageId = LanguageUtil.getLanguageId(request);
 
-JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), null, null, languageId, themeDisplay);
+JournalArticleDisplay articleDisplay = null;
+
+if (article.isApproved()) {
+	articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), null, null, languageId, themeDisplay);
+}
+else {
+	articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), article.getVersion(), null, null, languageId, themeDisplay);
+}
 %>
 
 <c:if test="<%= articleDisplay.isSmallImage() %>">
