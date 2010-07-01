@@ -23,6 +23,23 @@ WorkflowTask workflowTask = (WorkflowTask)row.getObject();
 %>
 
 <liferay-ui:icon-menu>
+	<c:if test="<%= portletName.equals(PortletKeys.WORKFLOW_DEFINITIONS) && !workflowTask.isCompleted() && !_isAssignedToUser(workflowTask, user) %>">
+		<portlet:actionURL var="assignToMeURL">
+			<portlet:param name="struts_action" value="/workflow_instances/edit_workflow_instance_task" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ASSIGN %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="workflowTaskId" value="<%= String.valueOf(workflowTask.getWorkflowTaskId()) %>" />
+			<portlet:param name="assigneeUserId" value="<%= String.valueOf(user.getUserId()) %>" />
+		</portlet:actionURL>
+
+		<liferay-ui:icon
+			image="assign"
+			message="assign-to-me"
+			method="get"
+			url="<%= assignToMeURL %>"
+		/>
+	</c:if>
+
 	<c:if test="<%= !workflowTask.isCompleted() && _isAssignedToUser(workflowTask, user) %>">
 		<%
 		List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(company.getCompanyId(), user.getUserId(), workflowTask.getWorkflowTaskId());

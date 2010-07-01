@@ -123,74 +123,87 @@ viewFullContentURL.setParameter("type", assetRendererFactory.getType());
 				</c:choose>
 			</liferay-ui:panel>
 
-			<liferay-ui:panel defaultState="open" title='<%= LanguageUtil.get(pageContext, "tasks") %>'>
+			<%
+			List<WorkflowTask> workflowTasks = null;
 
-				<%
-				PortletURL portletURL = renderResponse.createRenderURL();
-				%>
+			if (portletName.equals(PortletKeys.WORKFLOW_DEFINITIONS)) {
+				workflowTasks = WorkflowTaskManagerUtil.getWorkflowTasksByWorkflowInstance(company.getCompanyId(), null, workflowInstance.getWorkflowInstanceId(), null, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+			}
+			else {
+				workflowTasks = WorkflowTaskManagerUtil.getWorkflowTasksByWorkflowInstance(company.getCompanyId(), user.getUserId(), workflowInstance.getWorkflowInstanceId(), null, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+			}
+			%>
 
-				<liferay-ui:search-container
-					emptyResultsMessage="there-are-no-tasks"
-					iteratorURL="<%= portletURL %>"
-				>
-					<liferay-ui:search-container-results
-						results="<%= WorkflowTaskManagerUtil.getWorkflowTasksByWorkflowInstance(company.getCompanyId(), null, workflowInstance.getWorkflowInstanceId(), null, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null) %>"
-					/>
+			<c:if test="<%= !workflowTasks.isEmpty() %>">
+				<liferay-ui:panel defaultState="open" title='<%= LanguageUtil.get(pageContext, "tasks") %>'>
 
-					<liferay-ui:search-container-row
-						className="com.liferay.portal.kernel.workflow.WorkflowTask"
-						modelVar="workflowTask"
-						stringKey="<%= true %>"
+					<%
+					PortletURL portletURL = renderResponse.createRenderURL();
+					%>
+
+					<liferay-ui:search-container
+						emptyResultsMessage="there-are-no-tasks"
+						iteratorURL="<%= portletURL %>"
 					>
-						<liferay-ui:search-container-row-parameter
-							name="workflowTask"
-							value="<%= workflowTask %>"
+						<liferay-ui:search-container-results
+							results="<%= workflowTasks %>"
 						/>
 
-						<liferay-ui:search-container-column-text
-							buffer="buffer"
-							name="task"
+						<liferay-ui:search-container-row
+							className="com.liferay.portal.kernel.workflow.WorkflowTask"
+							modelVar="workflowTask"
+							stringKey="<%= true %>"
 						>
+							<liferay-ui:search-container-row-parameter
+								name="workflowTask"
+								value="<%= workflowTask %>"
+							/>
 
-							<%
-							buffer.append("<span class=\"task-name\" id=\"");
-							buffer.append(workflowTask.getWorkflowTaskId());
-							buffer.append("\">");
-							buffer.append(LanguageUtil.get(pageContext, workflowTask.getName()));
-							buffer.append("</span>");
-							%>
+							<liferay-ui:search-container-column-text
+								buffer="buffer"
+								name="task"
+							>
 
-						</liferay-ui:search-container-column-text>
+								<%
+								buffer.append("<span class=\"task-name\" id=\"");
+								buffer.append(workflowTask.getWorkflowTaskId());
+								buffer.append("\">");
+								buffer.append(LanguageUtil.get(pageContext, workflowTask.getName()));
+								buffer.append("</span>");
+								%>
 
-						<liferay-ui:search-container-column-text
-							buffer="buffer"
-							name="due-date"
-						>
+							</liferay-ui:search-container-column-text>
 
-							<%
-							if (workflowTask.getDueDate() == null) {
-								buffer.append(LanguageUtil.get(pageContext, "never"));
-							}
-							else {
-								buffer.append(dateFormatDateTime.format(workflowTask.getDueDate()));
-							}
-							%>
+							<liferay-ui:search-container-column-text
+								buffer="buffer"
+								name="due-date"
+							>
 
-						</liferay-ui:search-container-column-text>
+								<%
+								if (workflowTask.getDueDate() == null) {
+									buffer.append(LanguageUtil.get(pageContext, "never"));
+								}
+								else {
+									buffer.append(dateFormatDateTime.format(workflowTask.getDueDate()));
+								}
+								%>
 
-						<liferay-ui:search-container-column-text
-							name="completed"
-							value='<%= workflowTask.isCompleted() ? LanguageUtil.get(pageContext, "yes") : LanguageUtil.get(pageContext, "no") %>'
-						/>
+							</liferay-ui:search-container-column-text>
 
-						<liferay-ui:search-container-column-jsp
-							align="right"
-							path="/html/portlet/workflow_instances/workflow_task_action.jsp"
-						/>
-					</liferay-ui:search-container-row>
-					<liferay-ui:search-iterator />
-				</liferay-ui:search-container>
-			</liferay-ui:panel>
+							<liferay-ui:search-container-column-text
+								name="completed"
+								value='<%= workflowTask.isCompleted() ? LanguageUtil.get(pageContext, "yes") : LanguageUtil.get(pageContext, "no") %>'
+							/>
+
+							<liferay-ui:search-container-column-jsp
+								align="right"
+								path="/html/portlet/workflow_instances/workflow_task_action.jsp"
+							/>
+						</liferay-ui:search-container-row>
+						<liferay-ui:search-iterator />
+					</liferay-ui:search-container>
+				</liferay-ui:panel>
+			</c:if>
 
 			<liferay-ui:panel defaultState="closed" title='<%= LanguageUtil.get(pageContext, "activities") %>'>
 
