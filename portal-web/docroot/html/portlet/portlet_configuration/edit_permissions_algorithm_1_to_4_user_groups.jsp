@@ -19,7 +19,7 @@
 <%
 String tabs3 = (String)request.getAttribute("edit_permissions_algorithm_1_to_4.jsp-tabs3");
 
-String portletResource = (String)request.getAttribute("edit_permissions_algorithm_1_to_4.jsp-portletResource");
+portletResource = (String)request.getAttribute("edit_permissions_algorithm_1_to_4.jsp-portletResource");
 String modelResource = (String)request.getAttribute("edit_permissions_algorithm_1_to_4.jsp-modelResource");
 Resource resource = (Resource)request.getAttribute("edit_permissions_algorithm_1_to_4.jsp-resource");
 

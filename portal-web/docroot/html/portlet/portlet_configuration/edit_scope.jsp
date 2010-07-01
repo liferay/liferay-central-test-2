@@ -20,8 +20,6 @@
 String redirect = ParamUtil.getString(request, "redirect");
 String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL");
 
-String portletResource = ParamUtil.getString(request, "portletResource");
-
 PortletPreferences preferences = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, portletResource);
 
 String scopeLayoutUuid = GetterUtil.getString(preferences.getValue("lfr-scope-layout-uuid", null));

@@ -22,8 +22,6 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "any-website");
 String redirect = ParamUtil.getString(request, "redirect");
 String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL");
 
-String portletResource = ParamUtil.getString(request, "portletResource");
-
 Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
 
 PortletPreferences preferences = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, portletResource);

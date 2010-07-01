@@ -22,8 +22,6 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "regular-roles");
 String redirect = ParamUtil.getString(request, "redirect");
 String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL");
 
-String portletResource = ParamUtil.getString(request, "portletResource");
-
 String modelResource = ParamUtil.getString(request, "modelResource");
 String modelResourceDescription = ParamUtil.getString(request, "modelResourceDescription");
 String modelResourceName = ResourceActionsUtil.getModelResource(pageContext, modelResource);

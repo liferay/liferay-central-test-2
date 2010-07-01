@@ -20,13 +20,9 @@
 String redirect = ParamUtil.getString(request, "redirect");
 String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL");
 
-String portletResource = ParamUtil.getString(request, "portletResource");
-
 PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, portletResource);
 
-Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
-
-Set allPortletModes = portlet.getAllPortletModes();
+Set allPortletModes = selPortlet.getAllPortletModes();
 %>
 
 <liferay-util:include page="/html/portlet/portlet_configuration/tabs1.jsp">
@@ -49,7 +45,7 @@ Set allPortletModes = portlet.getAllPortletModes();
 		String curPortletMode = (String)itr.next();
 
 		String mobileDevicesParam = "portlet-setup-supported-clients-mobile-devices-" + curPortletMode;
-		boolean mobileDevicesDefault = portlet.hasPortletMode(ContentTypes.XHTML_MP, PortletModeFactory.getPortletMode(curPortletMode));
+		boolean mobileDevicesDefault = selPortlet.hasPortletMode(ContentTypes.XHTML_MP, PortletModeFactory.getPortletMode(curPortletMode));
 
 		boolean mobileDevices = GetterUtil.getBoolean(portletSetup.getValue(mobileDevicesParam, String.valueOf(mobileDevicesDefault)));
 	%>

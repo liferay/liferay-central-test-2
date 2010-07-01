@@ -22,10 +22,6 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "export");
 String redirect = ParamUtil.getString(request, "redirect");
 String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL");
 
-String portletResource = ParamUtil.getString(request, "portletResource");
-
-Portlet selPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
-
 String selPortletPrimaryKey = PortletPermissionUtil.getPrimaryKey(layout.getPlid(), selPortlet.getPortletId());
 
 String path = (String)request.getAttribute(WebKeys.CONFIGURATION_ACTION_PATH);

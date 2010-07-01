@@ -57,4 +57,8 @@
 
 <%
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
+
+String portletResource = ParamUtil.getString(request, "portletResource");
+
+Portlet selPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
 %>

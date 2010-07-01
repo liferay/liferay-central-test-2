@@ -20,10 +20,6 @@
 String redirect = ParamUtil.getString(request, "redirect");
 String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL");
 
-String portletResource = ParamUtil.getString(request, "portletResource");
-
-Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
-
 // Configuration
 
 PortletURL configurationURL = renderResponse.createRenderURL();
@@ -83,13 +79,13 @@ int pos = 0;
 
 String tabs1Names = StringPool.BLANK;
 
-if (Validator.isNotNull(portlet.getConfigurationActionClass())) {
+if (Validator.isNotNull(selPortlet.getConfigurationActionClass())) {
 	tabs1Names += ",setup";
 
 	request.setAttribute("liferay-ui:tabs:url" + pos++, configurationURL.toString());
 }
 
-if (portlet.hasMultipleMimeTypes()) {
+if (selPortlet.hasMultipleMimeTypes()) {
 	tabs1Names += ",supported-clients";
 
 	request.setAttribute("liferay-ui:tabs:url" + pos++, supportedClientsURL.toString());
@@ -99,7 +95,7 @@ tabs1Names += ",permissions";
 
 request.setAttribute("liferay-ui:tabs:url" + pos++, permissionsURL.toString());
 
-if (!portlet.getPublicRenderParameters().isEmpty()) {
+if (!selPortlet.getPublicRenderParameters().isEmpty()) {
 	tabs1Names += ",communication";
 
 	request.setAttribute("liferay-ui:tabs:url" + pos++, publicRenderParametersURL.toString());
@@ -109,7 +105,7 @@ tabs1Names += ",sharing";
 
 request.setAttribute("liferay-ui:tabs:url" + pos++, sharingURL.toString());
 
-if (portlet.isScopeable()) {
+if (selPortlet.isScopeable()) {
 	tabs1Names += ",scope";
 
 	request.setAttribute("liferay-ui:tabs:url" + pos++, scopeURL.toString());
