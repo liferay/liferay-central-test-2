@@ -259,7 +259,7 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 			for (int i = 0; i < results.size(); i++) {
 				DLFileVersion fileVersion = (DLFileVersion)results.get(i);
 
-				ResultRow row = new ResultRow(new Object[] {toFileEntry, fileVersion, conversions, isLocked, hasLock}, fileVersion.getFileVersionId(), i);
+				ResultRow row = new ResultRow(new Object[] {toFileEntry, fileVersion, results.size(), conversions, isLocked, hasLock}, fileVersion.getFileVersionId(), i);
 
 				StringBundler sb = new StringBundler(6);
 
