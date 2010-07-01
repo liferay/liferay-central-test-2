@@ -126,7 +126,7 @@ public class WorkflowTaskManagerUtil {
 	}
 
 	public static int getWorkflowTaskCountByWorkflowInstance(
-			long companyId, long userId, long workflowInstanceId,
+			long companyId, Long userId, long workflowInstanceId,
 			Boolean completed)
 		throws WorkflowException {
 
@@ -184,7 +184,7 @@ public class WorkflowTaskManagerUtil {
 	}
 
 	public static List<WorkflowTask> getWorkflowTasksByWorkflowInstance(
-			long companyId, long userId, long workflowInstanceId,
+			long companyId, Long userId, long workflowInstanceId,
 			Boolean completed, int start, int end,
 			OrderByComparator orderByComparator)
 		throws WorkflowException {

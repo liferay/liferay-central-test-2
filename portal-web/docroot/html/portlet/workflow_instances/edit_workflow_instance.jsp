@@ -137,7 +137,7 @@ long classPK = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.
 					iteratorURL="<%= portletURL %>"
 				>
 					<liferay-ui:search-container-results
-						results="<%= WorkflowTaskManagerUtil.getWorkflowTasksByWorkflowInstance(company.getCompanyId(), 0, workflowInstance.getWorkflowInstanceId(), null, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null) %>"
+						results="<%= WorkflowTaskManagerUtil.getWorkflowTasksByWorkflowInstance(company.getCompanyId(), null, workflowInstance.getWorkflowInstanceId(), null, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null) %>"
 					/>
 
 					<liferay-ui:search-container-row
