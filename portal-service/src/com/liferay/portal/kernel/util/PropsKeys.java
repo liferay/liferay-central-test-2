@@ -541,6 +541,8 @@ public interface PropsKeys {
 
 	public static final String FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS = "field.enable.com.liferay.portal.model.Organization.status";
 
+	public static final String FINALIZE_SERVICE_THREAD_ENABLE = "finalize.service.thread.enable";
+	
 	public static final String FLAGS_EMAIL_BODY = "flags.email.body";
 
 	public static final String FLAGS_EMAIL_FROM_ADDRESS = "flags.email.from.address";
