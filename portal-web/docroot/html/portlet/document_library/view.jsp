@@ -137,7 +137,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 							<div class="folder-description">
 								<%= folder.getDescription() %>
 							</div>
-						</c:if>	
+						</c:if>
 
 						<div class="folder-metadata">
 							<div class="folder-date">
