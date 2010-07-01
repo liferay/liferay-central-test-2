@@ -87,8 +87,9 @@ public class EditScopeAction extends EditConfigurationAction {
 				actionRequest,
 				portletConfig.getPortletName() + ".doConfigure");
 
-			actionResponse.sendRedirect(
-				ParamUtil.getString(actionRequest, "redirect"));
+			String redirect = ParamUtil.getString(actionRequest, "redirect");
+
+			actionResponse.sendRedirect(redirect);
 		}
 	}
 
