@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.cluster;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.test.TestCase;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class FutureClusterResponsesTest extends TestCase {
 		addresses.add(new MockAddress("1.2.3.6"));
 
 		FutureClusterResponses responses = new FutureClusterResponses(
-			addresses);
+			"someUuid", addresses, new MockClusterExecutor());
 
 		ClusterNodeResponse clusterNodeResponse = new ClusterNodeResponse();
 		clusterNodeResponse.setClusterNode(new ClusterNode("1.2.3.4"));
@@ -69,7 +70,7 @@ public class FutureClusterResponsesTest extends TestCase {
 		addresses.add(new MockAddress("1.2.3.6"));
 
 		FutureClusterResponses responses = new FutureClusterResponses(
-			addresses);
+			"someUuid", addresses, new MockClusterExecutor());
 
 		ClusterNodeResponse clusterNodeResponse = new ClusterNodeResponse();
 		clusterNodeResponse.setClusterNode(new ClusterNode("1.2.3.4"));
@@ -102,7 +103,7 @@ public class FutureClusterResponsesTest extends TestCase {
 		addresses.add(new MockAddress("1.2.3.4"));
 
 		FutureClusterResponses responses = new FutureClusterResponses(
-			addresses);
+			"someUuid", addresses, new MockClusterExecutor());
 
 		try {
 			responses.get(500, TimeUnit.MILLISECONDS);
@@ -122,7 +123,7 @@ public class FutureClusterResponsesTest extends TestCase {
 		addresses.add(new MockAddress("1.2.3.4"));
 
 		FutureClusterResponses responses = new FutureClusterResponses(
-			addresses);
+			"someUuid", addresses, new MockClusterExecutor());
 
 		ClusterNodeResponse clusterNodeResponse = new ClusterNodeResponse();
 		clusterNodeResponse.setClusterNode(new ClusterNode("test"));
@@ -153,5 +154,64 @@ public class FutureClusterResponsesTest extends TestCase {
 		}
 
 		private String _address;
+	}
+
+	private class MockClusterExecutor implements ClusterExecutor {
+		public void addClusterEventListener(
+			ClusterEventListener clusterEventListener) {
+			throw new UnsupportedOperationException();
+
+		}
+
+		public void destroy() {
+			throw new UnsupportedOperationException();
+
+		}
+
+		public FutureClusterResponses execute(ClusterRequest clusterRequest)
+			throws SystemException {
+			throw new UnsupportedOperationException();
+
+		}
+
+		public List<ClusterEventListener> getClusterEventListeners() {
+			throw new UnsupportedOperationException();
+
+		}
+
+		public List<ClusterNode> getClusterNodes() {
+			throw new UnsupportedOperationException();
+
+		}
+
+		public ClusterNode getLocalClusterNode() throws SystemException {
+			throw new UnsupportedOperationException();
+
+		}
+
+		public void initialize() {
+			throw new UnsupportedOperationException();
+
+		}
+
+		public boolean isClusterNodeAlive(String clusterNodeId) {
+			throw new UnsupportedOperationException();
+
+		}
+
+		public boolean isEnabled() {
+			throw new UnsupportedOperationException();
+
+		}
+
+		public void removeClusterEventListener(
+			ClusterEventListener clusterEventListener) {
+			throw new UnsupportedOperationException();
+
+		}
+
+		public void requestComplete(String uuid) {
+			//nothing to do
+		}
 	}
 }
