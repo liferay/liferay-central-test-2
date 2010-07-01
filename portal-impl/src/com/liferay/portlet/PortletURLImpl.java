@@ -685,7 +685,7 @@ public class PortletURLImpl implements LiferayPortletURL {
 
 		if (portlet.getPortletId().equals(_portletId) ||
 			!_portlet.isAddDefaultResource() ||
-			portlet.getPortletId().equals(PortletKeys.LAYOUT_CONFIGURATION)) {
+			portlet.getPortletId().equals(PortletKeys.CONTROL_PANEL_MENU)) {
 
 			return;
 		}

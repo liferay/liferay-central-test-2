@@ -440,6 +440,10 @@
 
 		<action path="/communities/view_teams" forward="portlet.communities.view_teams" />
 
+		<!-- Control Panel Menu -->
+
+		<action path="/control_panel_menu/view" forward="portlet.control_panel_menu.view" />
+
 		<!-- CSZ Search -->
 
 		<action path="/csz_search/view" forward="portlet.csz_search.view" />

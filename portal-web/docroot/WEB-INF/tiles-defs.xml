@@ -341,6 +341,16 @@
 		<put name="portlet_content" value="/portlet/communities/view_teams.jsp" />
 	</definition>
 
+	<!-- Control Panel Menu -->
+
+	<definition name="portlet.control_panel_menu" extends="portlet">
+		<put name="portlet_decorate" value="false" />
+	</definition>
+
+	<definition name="portlet.control_panel_menu.view" extends="portlet.control_panel_menu">
+		<put name="portlet_content" value="/portlet/control_panel_menu/view.jsp" />
+	</definition>
+
 	<!-- CSZ Search -->
 
 	<definition name="portlet.csz_search" extends="portlet" />

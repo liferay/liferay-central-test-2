@@ -123,7 +123,7 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 		<div id="content-wrapper">
 			<aui:layout cssClass="<%= panelCategory %>">
 				<aui:column columnWidth="<%= 25 %>" cssClass="panel-page-menu" first="<%= true %>">
-					<liferay-portlet:runtime portletName="87" />
+					<liferay-portlet:runtime portletName="160" />
 				</aui:column>
 
 				<aui:column columnWidth="<%= 75 %>" cssClass="<%= panelBodyCssClass %>" last="<%= true %>">

@@ -16,95 +16,90 @@
 
 <%@ include file="/html/portlet/layout_configuration/init.jsp" %>
 
-<c:choose>
-	<c:when test="<%= themeDisplay.isSignedIn() && (layout != null) && (layout.isTypePortlet() || layout.isTypePanel()) %>">
+<c:if test="<%= themeDisplay.isSignedIn() && (layout != null) && (layout.isTypePortlet() || layout.isTypePanel()) %>">
 
-		<%
-		PortletURL refererURL = renderResponse.createActionURL();
+	<%
+	PortletURL refererURL = renderResponse.createActionURL();
 
-		refererURL.setParameter("updateLayout", "true");
-		%>
+	refererURL.setParameter("updateLayout", "true");
+	%>
 
-		<div id="portal_add_content">
-			<div class="portal-add-content">
-				<aui:form action='<%= themeDisplay.getPathMain() + "/portal/update_layout?p_l_id=" + plid %>' method="post" name="fm" useNamespace="<%= false %>">
-					<aui:input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>" />
-					<aui:input name="<%= Constants.CMD %>" type="hidden" value="template" />
-					<aui:input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= refererURL.toString() %>" />
-					<aui:input name="refresh" type="hidden" value="<%= true %>" />
+	<div id="portal_add_content">
+		<div class="portal-add-content">
+			<aui:form action='<%= themeDisplay.getPathMain() + "/portal/update_layout?p_l_id=" + plid %>' method="post" name="fm" useNamespace="<%= false %>">
+				<aui:input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>" />
+				<aui:input name="<%= Constants.CMD %>" type="hidden" value="template" />
+				<aui:input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= refererURL.toString() %>" />
+				<aui:input name="refresh" type="hidden" value="<%= true %>" />
 
-					<c:if test="<%= layout.isTypePortlet() %>">
-						<div class="portal-add-content-search">
-							<span id="portal_add_content_title"><liferay-ui:message key="search-applications-searches-as-you-type" /></span>
+				<c:if test="<%= layout.isTypePortlet() %>">
+					<div class="portal-add-content-search">
+						<span id="portal_add_content_title"><liferay-ui:message key="search-applications-searches-as-you-type" /></span>
 
-							<aui:input cssClass="lfr-auto-focus" id="layout_configuration_content" label="" name="layout_configuration_content" onKeyPress="if (event.keyCode == 13) { return false; }" />
-						</div>
-					</c:if>
+						<aui:input cssClass="lfr-auto-focus" id="layout_configuration_content" label="" name="layout_configuration_content" onKeyPress="if (event.keyCode == 13) { return false; }" />
+					</div>
+				</c:if>
 
-					<%
-					Set panelSelectedPortlets = SetUtil.fromArray(StringUtil.split(layout.getTypeSettingsProperties().getProperty("panelSelectedPortlets")));
+				<%
+				Set panelSelectedPortlets = SetUtil.fromArray(StringUtil.split(layout.getTypeSettingsProperties().getProperty("panelSelectedPortlets")));
 
-					PortletCategory portletCategory = (PortletCategory)WebAppPool.get(String.valueOf(company.getCompanyId()), WebKeys.PORTLET_CATEGORY);
+				PortletCategory portletCategory = (PortletCategory)WebAppPool.get(String.valueOf(company.getCompanyId()), WebKeys.PORTLET_CATEGORY);
 
-					portletCategory = _getRelevantPortletCategory(portletCategory, panelSelectedPortlets, layoutTypePortlet, layout, user);
+				portletCategory = _getRelevantPortletCategory(portletCategory, panelSelectedPortlets, layoutTypePortlet, layout, user);
 
-					List categories = ListUtil.fromCollection(portletCategory.getCategories());
+				List categories = ListUtil.fromCollection(portletCategory.getCategories());
 
-					categories = ListUtil.sort(categories, new PortletCategoryComparator(locale));
+				categories = ListUtil.sort(categories, new PortletCategoryComparator(locale));
 
-					int portletCategoryIndex = 0;
+				int portletCategoryIndex = 0;
 
-					Iterator itr = categories.iterator();
+				Iterator itr = categories.iterator();
 
-					while (itr.hasNext()) {
-						PortletCategory curPortletCategory = (PortletCategory)itr.next();
+				while (itr.hasNext()) {
+					PortletCategory curPortletCategory = (PortletCategory)itr.next();
 
-						if (curPortletCategory.isHidden()) {
-							continue;
-						}
-
-						request.setAttribute(WebKeys.PORTLET_CATEGORY, curPortletCategory);
-						request.setAttribute(WebKeys.PORTLET_CATEGORY_INDEX, String.valueOf(portletCategoryIndex));
-					%>
-
-						<liferay-util:include page="/html/portlet/layout_configuration/view_category.jsp" />
-
-					<%
-						portletCategoryIndex++;
+					if (curPortletCategory.isHidden()) {
+						continue;
 					}
+
+					request.setAttribute(WebKeys.PORTLET_CATEGORY, curPortletCategory);
+					request.setAttribute(WebKeys.PORTLET_CATEGORY_INDEX, String.valueOf(portletCategoryIndex));
+				%>
+
+					<liferay-util:include page="/html/portlet/layout_configuration/view_category.jsp" />
+
+				<%
+					portletCategoryIndex++;
+				}
+				%>
+
+				<c:if test="<%= layout.isTypePortlet() %>">
+					<div class="portlet-msg-info">
+						<liferay-ui:message key="to-add-a-portlet-to-the-page-just-drag-it" />
+					</div>
+				</c:if>
+
+				<c:if test="<%= permissionChecker.isOmniadmin() %>">
+
+					<%
+					Group controlPanelGroup = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupConstants.CONTROL_PANEL);
+
+					long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(controlPanelGroup.getGroupId(), true);
+
+					PortletURLImpl pluginsURL = new PortletURLImpl(request, PortletKeys.PLUGIN_INSTALLER, controlPanelPlid, PortletRequest.RENDER_PHASE);
+
+					pluginsURL.setPortletMode(PortletMode.VIEW);
+					pluginsURL.setRefererPlid(plid);
 					%>
 
-					<c:if test="<%= layout.isTypePortlet() %>">
-						<div class="portlet-msg-info">
-							<liferay-ui:message key="to-add-a-portlet-to-the-page-just-drag-it" />
-						</div>
-					</c:if>
-
-					<c:if test="<%= permissionChecker.isOmniadmin() %>">
-
-						<%
-						Group controlPanelGroup = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupConstants.CONTROL_PANEL);
-
-						long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(controlPanelGroup.getGroupId(), true);
-
-						PortletURLImpl pluginsURL = new PortletURLImpl(request, PortletKeys.PLUGIN_INSTALLER, controlPanelPlid, PortletRequest.RENDER_PHASE);
-
-						pluginsURL.setPortletMode(PortletMode.VIEW);
-						pluginsURL.setRefererPlid(plid);
-						%>
-
-						<p class="lfr-install-more">
-							<aui:a href="<%= pluginsURL.toString() %>" label="install-more-applications" />
-						</p>
-					</c:if>
-				</aui:form>
-			</div>
+					<p class="lfr-install-more">
+						<aui:a href="<%= pluginsURL.toString() %>" label="install-more-applications" />
+					</p>
+				</c:if>
+			</aui:form>
 		</div>
-	</c:when>
-	<c:when test="<%= themeDisplay.isSignedIn() && (layout != null) && (layout.isTypeControlPanel()) %>">
-		<liferay-util:include page="/html/portlet/layout_configuration/view_control_panel_menu.jsp" />
-	</c:when>
-</c:choose>
+	</div>
+</c:if>
 
 <c:if test="<%= !themeDisplay.isSignedIn() %>">
 	<liferay-ui:message key="please-sign-in-to-continue" />
