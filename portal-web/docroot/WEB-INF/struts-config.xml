@@ -2136,6 +2136,10 @@
 			<forward name="portlet.message_boards.error" path="portlet.workflow_instances.error" />
 		</action>
 
+		<action path="/workflow_definitions/edit_workflow_instance_task" type="com.liferay.portlet.workflowtasks.action.EditWorkflowTaskAction">
+			<forward name="portlet.workflow_tasks.error" path="portlet.workflow_instances.error" />
+		</action>
+
 		<action path="/workflow_definitions/view" forward="portlet.workflow_definitions.view" />
 
 		<action path="/workflow_definitions/view_content" forward="portlet.asset_publisher.view_content" />
