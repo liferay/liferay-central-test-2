@@ -37,7 +37,11 @@ JournalArticle article = (JournalArticle)row.getObject();
 		sb.append(article.getVersion());
 		%>
 
-		<liferay-ui:icon image="view" target="_blank" url="<%= sb.toString() %>" />
+		<liferay-ui:icon
+			image="view"
+			target="_blank"
+			url="<%= sb.toString() %>"
+		/>
 
 		<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ARTICLE) %>">
 			<portlet:renderURL var="copyURL">
@@ -48,7 +52,9 @@ JournalArticle article = (JournalArticle)row.getObject();
 				<portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
 			</portlet:renderURL>
 
-			<liferay-ui:icon image="copy" url="<%= copyURL.toString() %>"
+			<liferay-ui:icon
+				image="copy"
+				url="<%= copyURL.toString() %>"
 			/>
 		</c:if>
 	</c:if>
