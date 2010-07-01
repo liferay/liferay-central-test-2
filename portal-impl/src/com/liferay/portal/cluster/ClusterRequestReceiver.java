@@ -279,10 +279,10 @@ public class ClusterRequestReceiver extends BaseReceiver {
 			if (_log.isInfoEnabled()) {
 				_log.info("Unable to find response container for: " + uuid);
 			}
-			
+
 			return;
 		}
-		
+
 		Address address = new AddressImpl(sourceAddress);
 
 		if (futureClusterResponses.expectsReply(address)) {

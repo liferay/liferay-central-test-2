@@ -114,10 +114,7 @@ public class ClusterExecutorImpl
 			return null;
 		}
 
-		FutureClusterResponses futureClusterResponses = doExecuteClusterRequest(
-			clusterRequest);
-
-		return futureClusterResponses;
+		return doExecuteClusterRequest(clusterRequest);
 	}
 
 	public List<ClusterEventListener> getClusterEventListeners() {
@@ -281,32 +278,43 @@ public class ClusterExecutorImpl
 
 		Address localControlAddress = getLocalControlAddress();
 
-		if (clusterRequest.isSkipLocal()) {
-			addresses.remove(localControlAddress);
-		}
-
 		FutureClusterResponses futureClusterResponses =
-			new FutureClusterResponses(
-				clusterRequest.getUuid(), addresses, this);
+			new FutureClusterResponses(clusterRequest.getUuid(), addresses,
+				this);
 
 		if (!clusterRequest.isFireAndForget()) {
 			_executionResultMap.put(
 				clusterRequest.getUuid(), futureClusterResponses);
 		}
 
-		for (Address address : addresses) {
-			if (_shortcutLocalMethod && address.equals(localControlAddress)) {
-				ClusterNodeResponse clusterNodeResponse = runLocalMethod(
-					clusterRequest.getMethodWrapper());
+		if (clusterRequest.isSkipLocal()) {
+			addresses.remove(localControlAddress);
+		}
+		else if (_shortcutLocalMethod) {
+			ClusterNodeResponse clusterNodeResponse = runLocalMethod(
+				clusterRequest.getMethodWrapper());
 
-				clusterNodeResponse.setMulticast(isMulticast);
-				clusterNodeResponse.setUuid(clusterRequest.getUuid());
+			clusterNodeResponse.setMulticast(isMulticast);
+			clusterNodeResponse.setUuid(clusterRequest.getUuid());
 
-				futureClusterResponses.addClusterNodeResponse(
-					clusterNodeResponse);
+			futureClusterResponses.addClusterNodeResponse(
+				clusterNodeResponse);
+		}
+
+		if (isMulticast) {
+			try {
+				_controlChannel.send(null, null, clusterRequest);
 			}
+			catch (ChannelException ce) {
+				_log.error(
+					"Unable to send multicast message " + clusterRequest, ce);
 
-			if (!isMulticast) {
+				throw new SystemException("Unable to send multicast request",
+					ce);
+			}
+		}
+		else {
+			for (Address address : addresses) {
 				org.jgroups.Address jGroupsAddress =
 					(org.jgroups.Address)address.getRealAddress();
 
@@ -317,21 +325,9 @@ public class ClusterExecutorImpl
 					_log.error(
 						"Unable to send unicast message " + clusterRequest, ce);
 
-					throw new SystemException(
-						"Unable to send unicast request", ce);
+					throw new SystemException("Unable to send unicast request",
+						ce);
 				}
-			}
-		}
-
-		if (isMulticast) {
-			try {
-				_controlChannel.send(null, null, clusterRequest);
-			}
-			catch (ChannelException ce) {
-				_log.error(
-					"Unable to send unicast message " + clusterRequest, ce);
-
-				throw new SystemException("Unable to send cluster request", ce);
 			}
 		}
 
