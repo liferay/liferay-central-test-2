@@ -97,16 +97,16 @@
 	<bean id="monitoringMBeanExporter" class="org.springframework.jmx.export.MBeanExporter">
 		<property name="beans">
 			<map>
-				<entry key="com.liferay.portal:classification=instrumentation,name=DataSampleThreadLocalManager" value-ref="com.liferay.portal.monitoring.jmx.DataSampleThreadLocalManager" />
-				<entry key="com.liferay.portal:classification=instrumentation,name=MonitoringFilterManager" value-ref="com.liferay.portal.servlet.filters.monitoring.jmx.MonitoringFilterManager" />
-				<entry key="com.liferay.portal:classification=instrumentation,name=MonitoringPortletManager" value-ref="com.liferay.portlet.MonitoringPortletManager" />
-				<entry key="com.liferay.portal:classification=monitoring_service,name=MonitoringServiceManager" value-ref="com.liferay.portal.monitoring.jmx.MonitoringServiceManager" />
-				<entry key="com.liferay.portal:classification=portal,name=PortalRequestManager" value-ref="com.liferay.portal.monitoring.jmx.PortalRequestManager" />
-				<entry key="com.liferay.portal:classification=portlet,name=ActionRequestPortletContainerManager" value-ref="com.liferay.portal.monitoring.jmx.ActionRequestPortletContainerManager" />
-				<entry key="com.liferay.portal:classification=portlet,name=EventRequestPortletContainerManager" value-ref="com.liferay.portal.monitoring.jmx.EventRequestPortletContainerManager" />
-				<entry key="com.liferay.portal:classification=portlet,name=RenderRequestPortletContainerManager" value-ref="com.liferay.portal.monitoring.jmx.RenderRequestPortletContainerManager" />
-				<entry key="com.liferay.portal:classification=portlet,name=ResourceRequestPortletContainerManager" value-ref="com.liferay.portal.monitoring.jmx.ResourceRequestPortletContainerManager" />
-				<entry key="com.liferay.portal:classification=service,name=ServiceManager" value-ref="com.liferay.portal.monitoring.jmx.ServiceManager" />
+				<entry key="com.liferay.portal.monitoring:classification=instrumentation,name=DataSampleThreadLocalManager" value-ref="com.liferay.portal.monitoring.jmx.DataSampleThreadLocalManager" />
+				<entry key="com.liferay.portal.monitoring:classification=instrumentation,name=MonitoringFilterManager" value-ref="com.liferay.portal.servlet.filters.monitoring.jmx.MonitoringFilterManager" />
+				<entry key="com.liferay.portal.monitoring:classification=instrumentation,name=MonitoringPortletManager" value-ref="com.liferay.portlet.MonitoringPortletManager" />
+				<entry key="com.liferay.portal.monitoring:classification=monitoring_service,name=MonitoringServiceManager" value-ref="com.liferay.portal.monitoring.jmx.MonitoringServiceManager" />
+				<entry key="com.liferay.portal.monitoring:classification=portal_statistic,name=PortalRequestManager" value-ref="com.liferay.portal.monitoring.jmx.PortalRequestManager" />
+				<entry key="com.liferay.portal.monitoring:classification=portlet_statistic,name=ActionRequestPortletContainerManager" value-ref="com.liferay.portal.monitoring.jmx.ActionRequestPortletContainerManager" />
+				<entry key="com.liferay.portal.monitoring:classification=portlet_statistic,name=EventRequestPortletContainerManager" value-ref="com.liferay.portal.monitoring.jmx.EventRequestPortletContainerManager" />
+				<entry key="com.liferay.portal.monitoring:classification=portlet_statistic,name=RenderRequestPortletContainerManager" value-ref="com.liferay.portal.monitoring.jmx.RenderRequestPortletContainerManager" />
+				<entry key="com.liferay.portal.monitoring:classification=portlet_statistic,name=ResourceRequestPortletContainerManager" value-ref="com.liferay.portal.monitoring.jmx.ResourceRequestPortletContainerManager" />
+				<entry key="com.liferay.portal.monitoring:classification=instrumentation,name=ServiceManager" value-ref="com.liferay.portal.monitoring.jmx.ServiceManager" />
 			</map>
 		</property>
 		<property name="server" ref="mBeanServer" />
