@@ -23,11 +23,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
- * <a href="FutureClusterResponseTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="FutureClusterResponsesTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
-public class FutureClusterResponseTest extends TestCase {
+public class FutureClusterResponsesTest extends TestCase {
 
 	public void testMultipleResponseFailure() {
 
