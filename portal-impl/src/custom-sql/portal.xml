@@ -22,7 +22,7 @@
 							) OR
 							(
 								(ResourcePermission.scope = 4) AND
-								(ResourcePermission.primKey = cast([$CLASS_PK_FIELD$]))
+								(ResourcePermission.primKey = CAST_TEXT([$CLASS_PK_FIELD$]))
 							)
 						)
 					)
@@ -210,7 +210,7 @@
 		<![CDATA[
 			INNER JOIN
 				Resource_ ON
-					(Resource_.primKey = Group_.groupId)
+					(Resource_.primKey = CAST_TEXT(Group_.groupId))
 			INNER JOIN
 				ResourceCode ON
 					(ResourceCode.codeId = Resource_.codeId)
@@ -232,7 +232,7 @@
 		<![CDATA[
 			INNER JOIN
 				ResourcePermission ON
-					(ResourcePermission.primKey = Group_.groupId)
+					(ResourcePermission.primKey = CAST_TEXT(Group_.groupId))
 			INNER JOIN
 				ResourceAction ON
 					(ResourceAction.name = ResourcePermission.name)

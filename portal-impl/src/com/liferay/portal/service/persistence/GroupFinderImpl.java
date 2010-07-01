@@ -15,8 +15,6 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchGroupException;
-import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
@@ -577,14 +575,6 @@ public class GroupFinderImpl
 			}
 			else {
 				join = CustomSQLUtil.get(JOIN_BY_ROLE_PERMISSIONS);
-			}
-
-			DB db = DBFactoryUtil.getDB();
-
-			if (db.getType().equals(DB.TYPE_POSTGRESQL)) {
-				join = StringUtil.replace(
-					join, ".primKey = Group_.groupId",
-					".primKey = CAST(Group_.groupId AS CHAR(255))");
 			}
 		}
 		else if (key.equals("userGroupRole")) {

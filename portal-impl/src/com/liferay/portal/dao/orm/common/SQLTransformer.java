@@ -88,21 +88,21 @@ public class SQLTransformer {
 		return sql;
 	}
 
+	private String _replaceCastText(String sql) {
+		Matcher matcher = _castTextPattern.matcher(sql);
+
+		if (_vendorPostgreSQL) {
+			return matcher.replaceAll("CAST($1 AS TEXT)");
+		}
+		else {
+			return matcher.replaceAll("$1");
+		}
+	}
+
 	private String _replaceMod(String sql) {
 		Matcher matcher = _modPattern.matcher(sql);
 
 		return matcher.replaceAll("$1 % $2");
-	}
-
-	private String _replaceCast(String sql) {
-		Matcher matcher = _castPattern.matcher(sql);
-
-		if (_vendorPostgreSQL) {
-			return matcher.replaceAll("cast($1 as text)");
-		}
-		else {
-			return matcher.replaceAll("$1");			
-		}
 	}
 
 	private String _transform(String sql) {
@@ -123,7 +123,7 @@ public class SQLTransformer {
 			newSQL = _replaceMod(newSQL);
 		}
 
-		newSQL = _replaceCast(newSQL);
+		newSQL = _replaceCastText(newSQL);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Original SQL " + sql);
@@ -141,11 +141,10 @@ public class SQLTransformer {
 
 	private static SQLTransformer _instance = new SQLTransformer();
 
+	private static Pattern _castTextPattern = Pattern.compile(
+		"CAST_TEXT\\((.+?)\\)", Pattern.CASE_INSENSITIVE);
 	private static Pattern _modPattern = Pattern.compile(
-		"mod\\((.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
-
-	private static Pattern _castPattern = Pattern.compile(
-		"cast\\((.+?)\\)", Pattern.CASE_INSENSITIVE);
+		"MOD\\((.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
 
 	private boolean _vendorMySQL;
 	private boolean _vendorPostgreSQL;
