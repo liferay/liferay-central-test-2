@@ -444,10 +444,6 @@
 
 		<action path="/control_panel_menu/view" forward="portlet.control_panel_menu.view" />
 
-		<!-- CSZ Search -->
-
-		<action path="/csz_search/view" forward="portlet.csz_search.view" />
-
 		<!-- Currency Converter -->
 
 		<action path="/currency_converter/edit" type="com.liferay.portlet.currencyconverter.action.EditPreferencesAction">

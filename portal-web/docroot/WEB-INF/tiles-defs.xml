@@ -351,14 +351,6 @@
 		<put name="portlet_content" value="/portlet/control_panel_menu/view.jsp" />
 	</definition>
 
-	<!-- CSZ Search -->
-
-	<definition name="portlet.csz_search" extends="portlet" />
-
-	<definition name="portlet.csz_search.view" extends="portlet.csz_search">
-		<put name="portlet_content" value="/portlet/csz_search/view.jsp" />
-	</definition>
-
 	<!-- Currency Converter -->
 
 	<definition name="portlet.currency_converter" extends="portlet" />
