@@ -98,15 +98,17 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 	<aui:input name="toFolderId" type="hidden" value="<%= toFolderId %>" />
 	<aui:input name="toName" type="hidden" value="<%= toName %>" />
 
-	<c:if test="<%= fileShortcut != null %>">
-		<h3 class="file-entry-title"><%= LanguageUtil.format(pageContext, "shortcut-to-x", fileShortcut.getToTitle()) %></h3>
-	</c:if>
+	<liferay-ui:header
+		backURL="<%= redirect %>"
+		title='<%= (fileShortcut != null)? LanguageUtil.format(pageContext, "shortcut-to-x", fileShortcut.getToTitle()) : "new-file-shortcut" %>' />
 
 	<liferay-ui:error exception="<%= FileShortcutPermissionException.class %>" message="you-do-not-have-permission-to-create-a-shortcut-to-the-selected-document" />
 	<liferay-ui:error exception="<%= NoSuchFileEntryException.class %>" message="the-document-could-not-be-found" />
 
 	<aui:fieldset>
-		<liferay-ui:message key="you-can-create-a-shortcut-to-any-document-that-you-have-read-access-for" />
+		<div class="portlet-msg-info">
+			<liferay-ui:message key="you-can-create-a-shortcut-to-any-document-that-you-have-read-access-for" />
+		</div>
 
 		<aui:field-wrapper label="community">
 

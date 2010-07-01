@@ -16,13 +16,6 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-document-library h3.file-entry-title, .portlet-document-library h3.folder-title {
-	border-bottom: 1px solid #000;
-	font-size: 14px;
-	font-weight: 700;
-	margin-top: 0;
-}
-
 .portlet-document-library .file-entry-column-first .file-entry-column-content {
 	margin-right: 4em;
 }

@@ -94,6 +94,26 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 
 <liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
 
+<%
+DLFolder folder = fileShortcut.getFolder();
+
+String parentFolderName = LanguageUtil.get(pageContext, "document-home");
+
+if (Validator.isNotNull(folder.getName())) {
+	parentFolderName = folder.getName();
+}
+%>
+
+<portlet:renderURL var="backURL">
+	<portlet:param name="struts_action" value="/document_library/view" />
+	<portlet:param name="folderId" value="<%= String.valueOf(folder.getFolderId()) %>" />
+</portlet:renderURL>
+
+<liferay-ui:header
+	backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", parentFolderName) %>'
+	backURL="<%= backURL.toString() %>"
+	title='<%= LanguageUtil.format(pageContext, "shortcut-to-x", toFileEntry.getTitle()) %>' />
+
 <aui:layout>
 	<aui:column columnWidth="<%= 75 %>" cssClass="file-entry-column file-entry-column-first" first="<%= true %>">
 
@@ -104,8 +124,6 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 			versionText = LanguageUtil.get(pageContext, "not-approved");
 		}
 		%>
-
-		<h3 class="file-entry-title"><%= LanguageUtil.format(pageContext, "shortcut-to-x", toFileEntry.getTitle() + " (" + versionText + ")") %></h3>
 
 		<div class="file-entry-categories">
 			<liferay-ui:asset-categories-summary
