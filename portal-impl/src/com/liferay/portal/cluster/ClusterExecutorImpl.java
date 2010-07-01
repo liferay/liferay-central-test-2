@@ -71,6 +71,14 @@ import org.jgroups.JChannel;
 public class ClusterExecutorImpl
 	extends ClusterBase implements ClusterExecutor, PortalPortEventListener {
 
+	public void afterPropertiesSet() {
+		super.afterPropertiesSet();
+
+		if (PropsValues.CLUSTER_EXECUTOR_DEBUG_ENABLE) {
+			addClusterEventListener(new DebuggingClusterEventListenerImpl());
+		}
+	}
+
 	public ClusterExecutorImpl() {
 		_readWriteLock = new ReentrantReadWriteLock();
 		_readLock = _readWriteLock.readLock();
