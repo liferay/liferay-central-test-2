@@ -95,6 +95,10 @@ import javax.servlet.ServletContext;
 public class PortletBagFactory {
 
 	public PortletBag create(Portlet portlet) throws Exception {
+		return create(portlet, false);
+	}
+
+	public PortletBag create(Portlet portlet, boolean lazy) throws Exception {
 		PortletApp portletApp = portlet.getPortletApp();
 
 		if (!portletApp.isWARFile() && _warFile) {
@@ -285,11 +289,13 @@ public class PortletBagFactory {
 
 		PortletBagPool.put(portlet.getPortletId(), portletBag);
 
-		try {
-			PortletInstanceFactoryUtil.create(portlet, _servletContext);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
+		if (!lazy) {
+			try {
+				PortletInstanceFactoryUtil.create(portlet, _servletContext);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
 		}
 
 		return portletBag;

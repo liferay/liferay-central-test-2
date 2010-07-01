@@ -69,12 +69,7 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 		PortletApp portletApp = portlet.getPortletApp();
 
 		if (portletApp.isWARFile()) {
-			PortletBag portletBag = PortletBagPool.get(
-				portlet.getRootPortletId());
-
-			if (portletBag != null) {
-				portletBag.setPortletInstance(null);
-			}
+			PortletBagPool.remove(portlet.getRootPortletId());
 		}
 	}
 
@@ -114,6 +109,25 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 			if (rootInvokerPortletInstance == null) {
 				PortletBag portletBag = PortletBagPool.get(
 					portlet.getRootPortletId());
+
+				if (portletBag == null) {
+					PortletBagFactory portletBagFactory =
+						new PortletBagFactory();
+
+					portletBagFactory.setClassLoader(
+						getClass().getClassLoader());
+					portletBagFactory.setServletContext(servletContext);
+					portletBagFactory.setWARFile(false);
+
+					try {
+						portletBag = portletBagFactory.create(portlet, true);
+					}
+					catch (Exception e) {
+						throw new PortletException(e);
+					}
+
+					PortletBagPool.put(portlet.getRootPortletId(), portletBag);
+				}
 
 				PortletConfig portletConfig = PortletConfigFactoryUtil.create(
 					portlet, servletContext);
