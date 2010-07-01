@@ -191,7 +191,7 @@ public class CustomSQL {
 	}
 
 	public String appendCriteria(String sql, String criteria) {
-		if (criteria == null) {
+		if (Validator.isNull(criteria)) {
 			return sql;
 		}
 
