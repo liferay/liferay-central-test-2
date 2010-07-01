@@ -134,14 +134,14 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 					<br />
 
 					<%
-					String publishButtonLabel = "reply";
+					String postReplyButtonLabel = "reply";
 
 					if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, MBDiscussion.class.getName())) {
-						publishButtonLabel = "submit-for-publication";
+						postReplyButtonLabel = "submit-for-publication";
 					}
 					%>
 
-					<input disabled="disabled" id="<%= randomNamespace %>postReplyButton<%= i %>" type="button" value="<%= publishButtonLabel %>" onClick="<%= randomNamespace %>postReply(<%= i %>);" />
+					<input disabled="disabled" id="<%= randomNamespace %>postReplyButton<%= i %>" type="button" value="<%= postReplyButtonLabel %>" onClick="<%= randomNamespace %>postReply(<%= i %>);" />
 
 					<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.getElementById('<%= randomNamespace %>postReplyForm<%= i %>').style.display = 'none'; void('');" />
 				</td>

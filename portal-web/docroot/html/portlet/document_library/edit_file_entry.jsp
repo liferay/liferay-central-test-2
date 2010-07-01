@@ -294,7 +294,7 @@ portletURL.setParameter("name", name);
 			}
 			%>
 
-			<aui:button disabled="<%= isLocked && !hasLock %>" type="submit" value="<%= publishButtonLabel %>" />
+			<aui:button disabled="<%= isLocked && !hasLock %>" name="publishButton" type="submit" value="<%= publishButtonLabel %>" />
 
 			<c:if test="<%= (fileEntry != null) && ((isLocked && hasLock) || !isLocked) %>">
 				<c:choose>

@@ -617,9 +617,9 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				%>
 
 				<c:if test="<%= hasSavePermission %>">
-					<aui:button name="saveArticleBtn" value="<%= saveButtonLabel %>" />
+					<aui:button name="saveButton" value="<%= saveButtonLabel %>" />
 
-					<aui:button disabled="<%= pending %>" name="publishBtn" value="<%= publishButtonLabel %>" />
+					<aui:button disabled="<%= pending %>" name="publishButton" value="<%= publishButtonLabel %>" />
 				</c:if>
 
 				<c:if test="<%= Validator.isNotNull(structureId) %>">

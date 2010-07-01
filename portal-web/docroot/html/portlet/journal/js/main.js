@@ -2208,8 +2208,8 @@ AUI().add(
 				var fieldsContainer = instance.getById('journalArticleContainer');
 				var languageIdSelect = instance.getById('languageIdSelect');
 				var previewArticleBtn = instance.getById('previewArticleBtn');
-				var publishBtn = instance.getById('publishBtn');
-				var saveArticleBtn = instance.getById('saveArticleBtn');
+				var publishButton = instance.getById('publishButton');
+				var saveButton = instance.getById('saveButton');
 
 				var containerInputs = fieldsContainer.all('.journal-article-component-container .aui-field-input');
 
@@ -2220,12 +2220,12 @@ AUI().add(
 				languageIdSelect.detach('change');
 				repeatableButtons.detach('click');
 
-				if (publishBtn) {
-					publishBtn.detach('click');
+				if (publishButton) {
+					publishButton.detach('click');
 				}
 
-				if (saveArticleBtn) {
-					saveArticleBtn.detach('click');
+				if (saveButton) {
+					saveButton.detach('click');
 				}
 
 				editButtons.on(
@@ -2255,8 +2255,8 @@ AUI().add(
 					}
 				);
 
-				if (saveArticleBtn) {
-					saveArticleBtn.on(
+				if (saveButton) {
+					saveButton.on(
 						'click',
 						function() {
 							instance.saveArticle();
@@ -2264,8 +2264,8 @@ AUI().add(
 					);
 				}
 
-				if (publishBtn) {
-					publishBtn.on(
+				if (publishButton) {
+					publishButton.on(
 						'click',
 						function() {
 							instance.saveArticle('publish');

@@ -382,7 +382,7 @@ if (Validator.isNull(redirect)) {
 					}
 					%>
 
-					<aui:button type="submit" value="<%= saveButtonLabel %>" />
+					<aui:button name="saveButton" type="submit" value="<%= saveButtonLabel %>" />
 
 					<aui:button disabled="<%= pending %>" name="publishButton" onClick='<%= renderResponse.getNamespace() + "publishPage();" %>' type="button" value="<%= publishButtonLabel %>" />
 

@@ -360,9 +360,9 @@ if (Validator.isNull(redirect)) {
 			</div>
 		</c:if>
 
-		<aui:button name="saveDraftButton" onClick='<%= renderResponse.getNamespace() + "saveMessage(true);" %>' type="button" value="<%= saveButtonLabel %>" />
+		<aui:button name="saveButton" onClick='<%= renderResponse.getNamespace() + "saveMessage(true);" %>' type="button" value="<%= saveButtonLabel %>" />
 
-		<aui:button disabled="<%= pending %>" name="saveButton" type="submit" value="<%= publishButtonLabel %>" />
+		<aui:button disabled="<%= pending %>" name="publishButton" type="submit" value="<%= publishButtonLabel %>" />
 
 		<c:if test="<%= MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_FILE) %>">
 

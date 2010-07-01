@@ -161,9 +161,9 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 				</div>
 			</c:if>
 
-			<aui:button name="saveDraftButton" onClick='<%= renderResponse.getNamespace() + "saveEntry(true);" %>' type="button" value="<%= saveButtonLabel %>" />
+			<aui:button name="saveButton" onClick='<%= renderResponse.getNamespace() + "saveEntry(true);" %>' type="button" value="<%= saveButtonLabel %>" />
 
-			<aui:button disabled="<%= pending %>" name="saveButton" type="submit" value="<%= publishButtonLabel %>" />
+			<aui:button disabled="<%= pending %>" name="publishButton" type="submit" value="<%= publishButtonLabel %>" />
 
 			<aui:button name="cancelButton" onClick="<%= redirect %>" type="cancel" />
 		</aui:button-row>
@@ -203,7 +203,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 			var title = document.<portlet:namespace />fm.<portlet:namespace />title.value;
 			var content = window.<portlet:namespace />editor.getHTML();
 
-			var saveButton = A.one('#<portlet:namespace />saveButton');
+			var publishButton = A.one('#<portlet:namespace />publishButton');
 			var cancelButton = A.one('#<portlet:namespace />cancelButton');
 
 			var saveStatus = A.one('#<portlet:namespace />saveStatus');
@@ -253,8 +253,8 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 								}
 							},
 							start: function() {
-								if (saveButton) {
-									saveButton.attr('disabled', true);
+								if (publishButton) {
+									publishButton.attr('disabled', true);
 								}
 
 								if (saveStatus) {
@@ -270,8 +270,8 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 								document.<portlet:namespace />fm.<portlet:namespace />entryId.value = message.entryId;
 								document.<portlet:namespace />fm.<portlet:namespace />redirect.value = message.redirect;
 
-								if (saveButton) {
-									saveButton.attr('disabled', false);
+								if (publishButton) {
+									publishButton.attr('disabled', false);
 								}
 
 								var tabs1BackButton = A.one('#<portlet:namespace />tabs1TabsBack');
