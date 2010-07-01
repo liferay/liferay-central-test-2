@@ -35,8 +35,9 @@ public class FutureClusterResponsesTest extends TestCase {
 		addresses.add(new MockAddress("1.2.3.5"));
 		addresses.add(new MockAddress("1.2.3.6"));
 
-		FutureClusterResponses clusterNodeResponses = new FutureClusterResponses(
-			"someUuid", addresses, new MockClusterExecutor());
+		FutureClusterResponses clusterNodeResponses =
+			new FutureClusterResponses(
+				"someUuid", addresses, new MockClusterExecutor());
 
 		ClusterNodeResponse clusterNodeResponse1 = new ClusterNodeResponse();
 
@@ -69,8 +70,9 @@ public class FutureClusterResponsesTest extends TestCase {
 		addresses.add(new MockAddress("1.2.3.5"));
 		addresses.add(new MockAddress("1.2.3.6"));
 
-		FutureClusterResponses clusterNodeResponses = new FutureClusterResponses(
-			"someUuid", addresses, new MockClusterExecutor());
+		FutureClusterResponses clusterNodeResponses =
+			new FutureClusterResponses(
+				"someUuid", addresses, new MockClusterExecutor());
 
 		ClusterNodeResponse clusterNodeResponse1 = new ClusterNodeResponse();
 
