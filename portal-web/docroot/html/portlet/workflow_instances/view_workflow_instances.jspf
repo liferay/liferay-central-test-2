@@ -19,7 +19,7 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "pending");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("tabs1", "publication-requests");
+portletURL.setParameter("tabs1", "submissions");
 portletURL.setParameter("tabs2", tabs2);
 %>
 

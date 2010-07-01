@@ -28,7 +28,7 @@
 		%>
 
 		<liferay-ui:tabs
-			names="definitions,default-configuration,publication-requests"
+			names="definitions,default-configuration,submissions"
 			portletURL="<%= portletURL %>"
 		/>
 
@@ -36,7 +36,7 @@
 			<c:when test='<%= tabs1.equals("default-configuration") %>'>
 				  <liferay-util:include page="/html/portlet/workflow_definition_links/view.jsp" />
 			</c:when>
-			<c:when test='<%= tabs1.equals("publication-requests") %>'>
+			<c:when test='<%= tabs1.equals("submissions") %>'>
 				<liferay-util:include page="/html/portlet/workflow_instances/view.jsp" />
 			</c:when>
 			<c:otherwise>
