@@ -22,7 +22,7 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 Object[] objects = (Object[])row.getObject();
 
 PortletItem portletItem = (PortletItem)objects[0];
-String portletResource = (String)objects[1];
+portletResource = (String)objects[1];
 %>
 
 <liferay-ui:icon-menu>
