@@ -41,6 +41,7 @@ import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLFolderService;
@@ -185,15 +186,15 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, boolean validateFileExtension,
-			String versionNumber, String sourceFileName, long fileEntryId,
-			String properties, Date modifiedDate, ServiceContext serviceContext,
-			InputStream is)
+			String fileName, String fileNameExtension,
+			boolean validateFileExtension, String versionNumber,
+			String sourceFileName, long fileEntryId, String properties,
+			Date modifiedDate, ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException {
 
-		if (validateFileExtension) {
-			validate(fileName, sourceFileName, is);
-		}
+		validate(
+			fileName, fileNameExtension, sourceFileName, validateFileExtension,
+			is);
 
 		hook.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
@@ -298,17 +299,15 @@ public class DLLocalServiceImpl implements DLLocalService {
 		}
 	}
 
-	public void validate(String fileName, String sourceFileName, InputStream is)
+	public void validate(
+			String fileName, String fileNameExtension, String sourceFileName,
+			boolean validateFileExtension, InputStream is)
 		throws PortalException, SystemException {
 
-		String fileNameExtension = FileUtil.getExtension(fileName);
 		String sourceFileNameExtension = FileUtil.getExtension(sourceFileName);
 
-		validate(fileName, true);
-
-		if (!fileNameExtension.equalsIgnoreCase(sourceFileNameExtension)) {
-			throw new SourceFileNameException(sourceFileName);
-		}
+		validateExtension(fileNameExtension, sourceFileNameExtension);
+		validate(fileName, validateFileExtension);
 
 		try {
 			if ((PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0) &&
@@ -321,6 +320,19 @@ public class DLLocalServiceImpl implements DLLocalService {
 		}
 		catch (IOException ioe) {
 			throw new FileSizeException(ioe.getMessage());
+		}
+	}
+
+	protected void validateExtension(
+			String fileNameExtension, String sourceFileNameExtension)
+		throws PortalException, SystemException {
+
+		if (!PropsValues.DL_FILE_EXTENSIONS_CHECK_STRICT) {
+			return;
+		}
+
+		if (!fileNameExtension.equals(sourceFileNameExtension)) {
+			throw new SourceFileNameException(sourceFileNameExtension);
 		}
 	}
 

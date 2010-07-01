@@ -968,7 +968,8 @@ public class DLFileEntryLocalServiceImpl
 			groupId, folderId, name);
 
 		validate(
-			groupId, folderId, name, title, sourceFileName, is);
+			groupId, folderId, name, fileEntry.getExtension(), title,
+			sourceFileName, is);
 
 		fileEntry.setTitle(title);
 		fileEntry.setDescription(description);
@@ -1092,9 +1093,9 @@ public class DLFileEntryLocalServiceImpl
 			dlLocalService.updateFile(
 				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 				fileEntry.getGroupId(), fileEntry.getRepositoryId(), name,
-				false, version, sourceFileName, fileEntry.getFileEntryId(),
-				fileEntry.getLuceneProperties(), fileEntry.getModifiedDate(),
-				serviceContext, is);
+				fileEntry.getExtension(), false, version, sourceFileName,
+				fileEntry.getFileEntryId(),	fileEntry.getLuceneProperties(),
+				fileEntry.getModifiedDate(), serviceContext, is);
 		}
 
 		// Workflow
@@ -1375,12 +1376,13 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	protected void validate(
-			long groupId, long folderId, String name, String title,
-			String sourceFileName, InputStream is)
+			long groupId, long folderId, String name, String extension,
+			String title, String sourceFileName, InputStream is)
 		throws PortalException, SystemException {
 
 		if (Validator.isNotNull(sourceFileName)) {
-			dlLocalService.validate(sourceFileName, sourceFileName, is);
+			dlLocalService.validate(
+				sourceFileName, extension, sourceFileName, true, is);
 		}
 
 		validate(groupId, folderId, name, title);

@@ -471,6 +471,8 @@ public interface PropsKeys {
 
 	public static final String DL_FILE_EXTENSIONS = "dl.file.extensions";
 
+	public static final String DL_FILE_EXTENSIONS_CHECK_STRICT = "dl.file.extensions.check.strict";
+
 	public static final String DL_FILE_ICONS = "dl.file.icons";
 
 	public static final String DL_FILE_INDEXING_MAX_SIZE = "dl.file.indexing.max.size";

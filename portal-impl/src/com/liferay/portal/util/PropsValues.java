@@ -370,6 +370,8 @@ public class PropsValues {
 
 	public static final String[] DL_FILE_EXTENSIONS = PropsUtil.getArray(PropsKeys.DL_FILE_EXTENSIONS);
 
+	public static final boolean DL_FILE_EXTENSIONS_CHECK_STRICT = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DL_FILE_EXTENSIONS_CHECK_STRICT));
+
 	public static final long DL_FILE_INDEXING_MAX_SIZE = GetterUtil.getLong(PropsUtil.get(PropsKeys.DL_FILE_INDEXING_MAX_SIZE));
 
 	public static final long DL_FILE_MAX_SIZE = GetterUtil.getLong(PropsUtil.get(PropsKeys.DL_FILE_MAX_SIZE));
