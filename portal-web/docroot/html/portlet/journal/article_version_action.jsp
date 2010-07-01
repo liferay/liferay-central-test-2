@@ -37,11 +37,7 @@ JournalArticle article = (JournalArticle)row.getObject();
 		sb.append(article.getVersion());
 		%>
 
-		<liferay-ui:icon
-			image="view"
-			target="_blank"
-			url="<%= sb.toString() %>"
-		/>
+		<liferay-ui:icon image="view" target="_blank" url="<%= sb.toString() %>" />
 
 		<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ARTICLE) %>">
 			<portlet:renderURL var="copyURL">
@@ -52,11 +48,22 @@ JournalArticle article = (JournalArticle)row.getObject();
 				<portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
 			</portlet:renderURL>
 
-			<liferay-ui:icon
-				image="copy"
-				url="<%= copyURL.toString() %>"
+			<liferay-ui:icon image="copy" url="<%= copyURL.toString() %>"
 			/>
 		</c:if>
+	</c:if>
+
+	<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.EXPIRE) && (article.getStatus() == WorkflowConstants.STATUS_APPROVED) %>">
+		<portlet:actionURL var="expireURL">
+			<portlet:param name="struts_action" value="/journal/edit_article" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.EXPIRE %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" />
+			<portlet:param name="expireArticleIds" value="<%= article.getArticleId() + EditArticleAction.VERSION_SEPARATOR + article.getVersion() %>" />
+		</portlet:actionURL>
+
+		<liferay-ui:icon image="time" message="expire" url="<%= expireURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.DELETE) %>">
@@ -68,8 +75,7 @@ JournalArticle article = (JournalArticle)row.getObject();
 			<portlet:param name="deleteArticleIds" value="<%= article.getArticleId() + EditArticleAction.VERSION_SEPARATOR + article.getVersion() %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon-delete
-			url="<%= deleteURL %>"
+		<liferay-ui:icon-delete url="<%= deleteURL %>"
 		/>
 	</c:if>
 </liferay-ui:icon-menu>
