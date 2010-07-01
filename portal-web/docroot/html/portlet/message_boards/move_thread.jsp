@@ -44,7 +44,7 @@ boolean quote = false;
 
 	<liferay-ui:header
 		title="message"
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		backURL="<%= redirect %>"
 	/>
 
 	<liferay-ui:error exception="<%= MessageBodyException.class %>" message="please-enter-a-valid-message" />

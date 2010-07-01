@@ -49,7 +49,7 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 	<aui:input name="pluginType" type="hidden" value="<%= pluginType %>" />
 
 	<liferay-ui:header
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		backURL="<%= redirect %>"
 		title="<%= title %>"
 	/>
 

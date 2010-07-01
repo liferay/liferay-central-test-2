@@ -94,7 +94,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 	<aui:input name="priceId" type="hidden" />
 
 	<liferay-ui:header
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		backURL="<%= redirect %>"
 		title="item"
 	/>
 

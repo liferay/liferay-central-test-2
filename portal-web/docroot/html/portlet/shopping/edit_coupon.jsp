@@ -64,7 +64,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 	<aui:input name="couponId" type="hidden" value="<%= couponId %>" />
 
 	<liferay-ui:header
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		backURL="<%= redirect %>"
 		title="coupon"
 	/>
 

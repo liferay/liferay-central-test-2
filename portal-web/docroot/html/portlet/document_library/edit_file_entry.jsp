@@ -141,7 +141,7 @@ portletURL.setParameter("name", name);
 	<aui:input name="name" type="hidden" value="<%= name %>" />
 
 	<liferay-ui:header
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		backURL="<%= redirect %>"
 		title='<%= (fileEntry != null) ? fileEntry.getTitle() : "new-document" %>'
 	/>
 

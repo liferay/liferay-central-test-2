@@ -98,7 +98,7 @@ portletURL.setParameter("name", name);
 	<aui:input name="name" type="hidden" value="<%= name %>" />
 
 	<liferay-ui:header
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		backURL="<%= redirect %>"
 		title='<%= LanguageUtil.get(pageContext, "move") + StringPool.SPACE + fileEntry.getTitle() %>'
 	/>
 
@@ -131,7 +131,7 @@ portletURL.setParameter("name", name);
 		</portlet:renderURL>
 
 		<aui:field-wrapper label="current-folder">
-			<liferay-ui:icon image="folder" label="true" message="<%= folderName %>" url="<%= viewFolderURL %>" /> 
+			<liferay-ui:icon image="folder" label="true" message="<%= folderName %>" url="<%= viewFolderURL %>" />
 		</aui:field-wrapper>
 
 		<aui:field-wrapper label="new-folder">

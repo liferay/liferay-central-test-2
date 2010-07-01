@@ -52,7 +52,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 	<aui:input name="searchFolderIds" type="hidden" value="<%= searchFolderIds %>" />
 
 	<liferay-ui:header
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		backURL="<%= redirect %>"
 		title="search"
 	/>
 

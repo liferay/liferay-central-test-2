@@ -35,7 +35,7 @@ String newTemplateId = ParamUtil.getString(request, "newTemplateId");
 	<aui:input name="oldTemplateId" type="hidden" value="<%= oldTemplateId %>" />
 
 	<liferay-ui:header
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		backURL="<%= redirect %>"
 		title="template"
 	/>
 

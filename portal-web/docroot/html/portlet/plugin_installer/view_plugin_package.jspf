@@ -23,7 +23,7 @@ PluginPackage pluginPackage = PluginPackageUtil.getPluginPackageByModuleId(modul
 <aui:input type="hidden" name="deploymentContext" value="<%= pluginPackage.getContext() %>" />
 
 <liferay-ui:header
-	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	backURL="<%= redirect %>"
 	title="<%= pluginPackage.getName() %>"
 />
 

@@ -56,7 +56,7 @@ int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", product
 <input name="<portlet:namespace />screenshotsCount" type="hidden" value="<%= screenshotsCount %>" />
 
 <liferay-ui:header
-	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	backURL="<%= redirect %>"
 	title='<%= (productEntry != null) ? productEntry.getName() : "new-product" %>'
 />
 

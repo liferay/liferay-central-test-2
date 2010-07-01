@@ -38,7 +38,7 @@ userTracker = userTracker.toEscapedModel();
 	<aui:input name="sessionId" type="hidden" value="<%= sessionId %>" />
 
 	<liferay-ui:header
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		backURL="<%= redirect %>"
 		title="live-session"
 	/>
 

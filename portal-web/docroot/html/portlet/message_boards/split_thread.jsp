@@ -46,7 +46,7 @@ boolean quote = false;
 	<aui:input name="mbCategoryId" type="hidden" value="<%= categoryId %>" />
 
 	<liferay-ui:header
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		backURL="<%= redirect %>"
 		title="message"
 	/>
 

@@ -30,7 +30,7 @@ long licenseId = BeanParamUtil.getLong(license, request, "licenseId");
 <input name="<portlet:namespace />licenseId" type="hidden" value="<%= licenseId %>" />
 
 <liferay-ui:header
-	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	backURL="<%= redirect %>"
 	title='<%= (license != null) ? license.getName() : "new-license" %>'
 />
 

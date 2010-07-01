@@ -47,7 +47,7 @@ if (Validator.isNull(redirect)) {
 %>
 
 <liferay-ui:header
-	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	backURL="<%= redirect %>"
 	title='<%= (message != null) ? message.getSubject() : "new-message" %>'
 />
 

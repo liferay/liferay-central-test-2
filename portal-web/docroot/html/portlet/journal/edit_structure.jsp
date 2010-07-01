@@ -92,7 +92,7 @@ int tabIndex = 1;
 	<aui:input name="saveAndContinue" type="hidden" />
 
 	<liferay-ui:header
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		backURL="<%= redirect %>"
 		title='<%= (structure != null) ? structure.getName() : "new-structure" %>'
 	/>
 

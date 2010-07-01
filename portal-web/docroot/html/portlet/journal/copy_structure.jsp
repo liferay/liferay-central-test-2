@@ -35,7 +35,7 @@ String newStructureId = ParamUtil.getString(request, "newStructureId");
 	<aui:input name="oldStructureId" type="hidden" value="<%= oldStructureId %>" />
 
 	<liferay-ui:header
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		backURL="<%= redirect %>"
 		title="structure"
 	/>
 

@@ -45,7 +45,7 @@ request.setAttribute("view_event.jsp-event", event);
 %>
 
 <liferay-ui:header
-	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	backURL="<%= redirect %>"
 	title='<%= event.getTitle() %>'
 />
 

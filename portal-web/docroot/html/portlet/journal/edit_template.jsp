@@ -94,7 +94,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	<aui:input name="saveAndContinue" type="hidden" />
 
 	<liferay-ui:header
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		backURL="<%= redirect %>"
 		title='<%= (template != null) ? template.getName() : "new-template" %>'
 	/>
 

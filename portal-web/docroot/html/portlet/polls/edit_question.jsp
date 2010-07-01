@@ -74,7 +74,7 @@ if (choiceName > 0) {
 	<aui:input name="choiceName" type="hidden" value="" />
 
 	<liferay-ui:header
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		backURL="<%= redirect %>"
 		title='<%= (question != null) ? question.getTitle(locale) : "new-question" %>'
 	/>
 

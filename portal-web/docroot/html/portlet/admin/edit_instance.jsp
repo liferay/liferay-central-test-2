@@ -25,7 +25,7 @@ long companyId = BeanParamUtil.getLong(company2, request, "companyId");
 %>
 
 <liferay-ui:header
-	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	backURL="<%= redirect %>"
 	title='<%= (company2 == null) ? "new-portal-instance" : company2.getName() %>'
 />
 

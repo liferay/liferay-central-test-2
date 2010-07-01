@@ -53,7 +53,7 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 
 	<aui:fieldset>
  		<liferay-ui:header
-			backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+			backURL="<%= redirect %>"
 			title="<%= question.getTitle(locale) %>"
 		/>
 

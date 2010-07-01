@@ -43,5 +43,5 @@ String backURL = ParamUtil.getString(request, "backURL");
 	names="<%= tabs1Names %>"
 	tabsValues="<%= tabs1Values %>"
 	url="<%= tabs1URL.toString() %>"
-	backURL="<%= PortalUtil.escapeRedirect(backURL) %>"
+	backURL="<%= backURL %>"
 />

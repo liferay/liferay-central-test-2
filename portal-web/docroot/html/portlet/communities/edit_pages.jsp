@@ -406,7 +406,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 						names="<%= tabs2Names %>"
 						param="tabs2"
 						url="<%= portletURL.toString() %>"
-						backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+						backURL="<%= redirect %>"
 					/>
 				</c:when>
 				<c:otherwise>

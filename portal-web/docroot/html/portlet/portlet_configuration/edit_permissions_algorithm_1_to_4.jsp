@@ -179,7 +179,7 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 					names="<%= tabs2Names %>"
 					param="tabs2"
 					url="<%= portletURL.toString() %>"
-					backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+					backURL="<%= redirect %>"
 				/>
 			</c:otherwise>
 		</c:choose>

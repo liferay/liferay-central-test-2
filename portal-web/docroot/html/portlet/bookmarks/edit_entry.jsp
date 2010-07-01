@@ -44,7 +44,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
 
 	<liferay-ui:header
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		backURL="<%= redirect %>"
 		title='<%= (entry != null) ? entry.getName() : "new-bookmark" %>'
 	/>
 

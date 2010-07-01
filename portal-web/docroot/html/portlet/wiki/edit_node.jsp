@@ -34,7 +34,7 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 	<aui:input name="nodeId" type="hidden" value="<%= nodeId %>" />
 
 	<liferay-ui:header
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		backURL="<%= redirect %>"
 		title='<%= (node != null) ? node.getName() : "new-wiki-node" %>'
 	/>
 

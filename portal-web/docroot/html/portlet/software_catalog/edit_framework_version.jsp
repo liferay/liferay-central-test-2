@@ -30,7 +30,7 @@ long frameworkVersionId = BeanParamUtil.getLong(frameworkVersion, request, "fram
 <input name="<portlet:namespace />frameworkVersionId" type="hidden" value="<%= frameworkVersionId %>" />
 
 <liferay-ui:header
-	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	backURL="<%= redirect %>"
 	title='<%= (frameworkVersion != null) ? frameworkVersion.getName() : "new-framework-version" %>'
 />
 
