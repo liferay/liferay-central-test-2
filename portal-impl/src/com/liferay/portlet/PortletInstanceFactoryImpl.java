@@ -28,7 +28,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletException;
-import javax.portlet.UnavailableException;
 
 import javax.servlet.ServletContext;
 
@@ -113,23 +112,14 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 				portlet.getRootPortletId());
 
 			if (rootInvokerPortletInstance == null) {
+				PortletBag portletBag = PortletBagPool.get(
+					portlet.getRootPortletId());
+
 				PortletConfig portletConfig = PortletConfigFactoryUtil.create(
 					portlet, servletContext);
 
-				PortletApp portletApp = portlet.getPortletApp();
-
-				if (portletApp.isWARFile()) {
-					PortletBag portletBag = PortletBagPool.get(
-						portlet.getRootPortletId());
-
-					rootInvokerPortletInstance = init(
-						portlet, portletConfig,
-						portletBag.getPortletInstance());
-				}
-				else {
-					rootInvokerPortletInstance = init(
-						portlet, portletConfig, null);
-				}
+				rootInvokerPortletInstance = init(
+					portlet, portletConfig, portletBag.getPortletInstance());
 
 				portletInstances.put(
 					portlet.getRootPortletId(), rootInvokerPortletInstance);
@@ -200,31 +190,12 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 			javax.portlet.Portlet portletInstance)
 		throws PortletException {
 
-		InvokerPortlet invokerPortlet = null;
+		PortletContext portletContext = portletConfig.getPortletContext();
 
-		try {
-			if (portletInstance == null) {
-				portletInstance =
-					(javax.portlet.Portlet)Class.forName(
-						portlet.getPortletClass()).newInstance();
-			}
+		InvokerPortlet invokerPortlet = _internalInvokerPortletPrototype.create(
+			portlet, portletInstance, portletContext);
 
-			PortletContext portletContext = portletConfig.getPortletContext();
-
-			invokerPortlet = _internalInvokerPortletPrototype.create(
-				portlet, portletInstance, portletContext);
-
-			invokerPortlet.init(portletConfig);
-		}
-		catch (ClassNotFoundException cnofe) {
-			throw new UnavailableException(cnofe.getMessage());
-		}
-		catch (InstantiationException ie) {
-			throw new UnavailableException(ie.getMessage());
-		}
-		catch (IllegalAccessException iae) {
-			throw new UnavailableException(iae.getMessage());
-		}
+		invokerPortlet.init(portletConfig);
 
 		return invokerPortlet;
 	}
