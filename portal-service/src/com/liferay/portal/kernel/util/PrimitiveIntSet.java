@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -23,6 +23,7 @@ import java.util.Set;
  * @author Michael C. Han
  */
 public class PrimitiveIntSet {
+
 	public PrimitiveIntSet() {
 		_elements = new HashSet<Integer>();
 	}
@@ -31,14 +32,14 @@ public class PrimitiveIntSet {
 		_elements = new HashSet<Integer>(capacity);
 	}
 
+	public void add(int value) {
+		_elements.add(value);
+	}
+
 	public void addAll(int[] values) {
 		for (int value : values) {
 			_elements.add(value);
 		}
-	}
-
-	public void add(int value) {
-		_elements.add(value);
 	}
 
 	public int[] getArray() {
@@ -60,4 +61,5 @@ public class PrimitiveIntSet {
 	}
 
 	private Set<Integer> _elements;
+
 }

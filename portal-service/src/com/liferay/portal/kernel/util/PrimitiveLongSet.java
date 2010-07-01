@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -23,6 +23,7 @@ import java.util.Set;
  * @author Michael C. Han
  */
 public class PrimitiveLongSet {
+
 	public PrimitiveLongSet() {
 		_elements = new HashSet<Long>();
 	}
@@ -31,14 +32,14 @@ public class PrimitiveLongSet {
 		_elements = new HashSet<Long>(capacity);
 	}
 
+	public void add(long value) {
+		_elements.add(value);
+	}
+
 	public void addAll(long[] values) {
 		for (long value : values) {
 			_elements.add(value);
 		}
-	}
-
-	public void add(long value) {
-		_elements.add(value);
 	}
 
 	public long[] getArray() {
@@ -60,4 +61,5 @@ public class PrimitiveLongSet {
 	}
 
 	private Set<Long> _elements;
+
 }
