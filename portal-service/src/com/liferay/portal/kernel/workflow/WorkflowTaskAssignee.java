@@ -14,9 +14,6 @@
 
 package com.liferay.portal.kernel.workflow;
 
-import com.liferay.portal.model.Role;
-import com.liferay.portal.model.User;
-
 import java.io.Serializable;
 
 /**
@@ -25,14 +22,6 @@ import java.io.Serializable;
  * @author Michael C. Han
  */
 public class WorkflowTaskAssignee implements Serializable {
-
-	public static final WorkflowTaskAssignee ROLE(long roleId) {
-		return new WorkflowTaskAssignee(Role.class.getName(), roleId);
-	}
-
-	public static final WorkflowTaskAssignee USER(long userId) {
-		return new WorkflowTaskAssignee(User.class.getName(), userId);
-	}
 
 	public WorkflowTaskAssignee(
 		String assigneeClassName, long assigneeClassPK) {
