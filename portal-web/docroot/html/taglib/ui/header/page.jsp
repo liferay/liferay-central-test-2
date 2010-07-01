@@ -16,15 +16,14 @@
 
 <%@ include file="/html/taglib/ui/header/init.jsp" %>
 
+<%
+if (!backURL.equals("javascript:history.go(-1);")) {
+	backURL = HtmlUtil.escape(HtmlUtil.escapeHREF(PortalUtil.escapeRedirect(backURL)));
+}
+%>
+
 <div class="taglib-header <%= (cssClass != null) ? cssClass : "" %>">
 	<c:if test="<%= Validator.isNotNull(backURL) %>">
-
-		<%
-		if (!backURL.equals("javascript:history.go(-1);")) {
-			backURL = HtmlUtil.escape(HtmlUtil.escapeHREF(PortalUtil.escapeRedirect(backURL)));
-		}
-		%>
-
 		<span class="header-back-to">
 			<a href="<%= backURL %>" id="<%= namespace %>TabsBack"><%= Validator.isNotNull(backLabel) ? backLabel : "&laquo;" + LanguageUtil.get(pageContext, "back") %></a>
 		</span>

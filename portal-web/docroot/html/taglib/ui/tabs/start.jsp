@@ -73,6 +73,10 @@ if (url != null) {
 String backLabel = (String)request.getAttribute("liferay-ui:tabs:backLabel");
 String backURL = (String)request.getAttribute("liferay-ui:tabs:backURL");
 
+if (!backURL.equals("javascript:history.go(-1);")) {
+	backURL = HtmlUtil.escape(HtmlUtil.escapeHREF(PortalUtil.escapeRedirect(backURL)));
+}
+
 // Refresh
 
 boolean refresh = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:tabs:refresh"));
@@ -211,13 +215,6 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 	%>
 
 	<c:if test="<%= Validator.isNotNull(backURL) %>">
-
-		<%
-		if (!backURL.equals("javascript:history.go(-1);")) {
-			backURL = HtmlUtil.escape(HtmlUtil.escapeHREF(PortalUtil.escapeRedirect(backURL)));
-		}
-		%>
-
 		<c:choose>
 			<c:when test="<%= themeDisplay.isFacebook() %>">
 				<fb:tab_item
