@@ -62,3 +62,20 @@ String portletResource = ParamUtil.getString(request, "portletResource");
 
 Portlet selPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
 %>
+
+<c:if test='<%= themeDisplay.isStatePopUp() && SessionMessages.contains(renderRequest, portletName + ".doConfigure") %>'>
+	<aui:script use="aui-base">
+		if (window.parent) {
+			<c:choose>
+				<c:when test="<%= !selPortlet.isAjaxable() %>">
+					window.parent.location.reload();
+				</c:when>
+				<c:otherwise>
+					var curPortletBoundaryId = '#p_p_id_<%= portletResource %>_';
+
+					window.parent.Liferay.Portlet.refresh(curPortletBoundaryId);
+				</c:otherwise>
+			</c:choose>
+		}
+	</aui:script>
+</c:if>

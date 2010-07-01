@@ -48,20 +48,3 @@ String path = (String)request.getAttribute(WebKeys.CONFIGURATION_ACTION_PATH);
 <c:if test="<%= Validator.isNotNull(portletResource) && Validator.isNotNull(path) %>">
 	<liferay-util:include page="<%= path %>" portletId="<%= portletResource %>" />
 </c:if>
-
-<c:if test='<%= themeDisplay.isStatePopUp() && SessionMessages.contains(renderRequest, portletName + ".doConfigure") %>'>
-	<aui:script use="aui-base">
-		if (window.parent) {
-			<c:choose>
-				<c:when test="<%= !selPortlet.isAjaxable() %>">
-					window.parent.location.reload();
-				</c:when>
-				<c:otherwise>
-					var curPortletBoundaryId = '#p_p_id_<%= portletResource %>_';
-
-					window.parent.Liferay.Portlet.refresh(curPortletBoundaryId);
-				</c:otherwise>
-			</c:choose>
-		}
-	</aui:script>
-</c:if>
