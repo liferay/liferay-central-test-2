@@ -77,15 +77,6 @@ public class PortletFilterFactory {
 				portletFilterModel, portletContext);
 
 			if (portletApp.isWARFile()) {
-				PortletContextBag portletContextBag = PortletContextBagPool.get(
-					portletApp.getServletContextName());
-
-				Map<String, PortletFilter> curPortletFilters =
-					portletContextBag.getPortletFilters();
-
-				portletFilter = curPortletFilters.get(
-					portletFilterModel.getFilterName());
-
 				portletFilter = _init(
 					portletFilterModel, filterConfig, portletFilter);
 			}
