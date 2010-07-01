@@ -74,7 +74,7 @@ public class ClusterExecutorImpl
 	public void afterPropertiesSet() {
 		super.afterPropertiesSet();
 
-		if (PropsValues.CLUSTER_EXECUTOR_DEBUG_ENABLE) {
+		if (PropsValues.CLUSTER_EXECUTOR_DEBUG_ENABLED) {
 			addClusterEventListener(new DebuggingClusterEventListenerImpl());
 		}
 	}
