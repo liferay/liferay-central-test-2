@@ -277,7 +277,7 @@ public class ClusterRequestReceiver extends BaseReceiver {
 
 		if (futureClusterResponses == null) {
 			if (_log.isInfoEnabled()) {
-				_log.info("Unable to find response container for: " + uuid);
+				_log.info("Unable to find response container for " + uuid);
 			}
 
 			return;
@@ -290,7 +290,7 @@ public class ClusterRequestReceiver extends BaseReceiver {
 		}
 		else {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unknown UUID " + uuid + " from " + sourceAddress);
+				_log.warn("Unknown uuid " + uuid + " from " + sourceAddress);
 			}
 		}
 	}

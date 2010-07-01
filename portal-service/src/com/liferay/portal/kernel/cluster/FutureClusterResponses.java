@@ -34,9 +34,9 @@ public class FutureClusterResponses implements Future<ClusterNodeResponses> {
 		String requestUuid, List<Address> addresses,
 		ClusterExecutor clusterExecutor) {
 
-		_countDownLatch = new CountDownLatch(addresses.size());
 		_clusterExecutor = clusterExecutor;
 		_clusterNodeResponses = new ClusterNodeResponses();
+		_countDownLatch = new CountDownLatch(addresses.size());
 		_expectedReplyAddress = new HashSet<Address>(addresses);
 		_requestUuid = requestUuid;
 	}

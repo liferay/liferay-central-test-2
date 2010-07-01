@@ -279,8 +279,8 @@ public class ClusterExecutorImpl
 		Address localControlAddress = getLocalControlAddress();
 
 		FutureClusterResponses futureClusterResponses =
-			new FutureClusterResponses(clusterRequest.getUuid(), addresses,
-				this);
+			new FutureClusterResponses(
+				clusterRequest.getUuid(), addresses, this);
 
 		if (!clusterRequest.isFireAndForget()) {
 			_executionResultMap.put(
@@ -311,8 +311,8 @@ public class ClusterExecutorImpl
 				_log.error(
 					"Unable to send multicast message " + clusterRequest, ce);
 
-				throw new SystemException("Unable to send multicast request",
-					ce);
+				throw new SystemException(
+					"Unable to send multicast request", ce);
 			}
 		}
 		else {
@@ -327,8 +327,8 @@ public class ClusterExecutorImpl
 					_log.error(
 						"Unable to send unicast message " + clusterRequest, ce);
 
-					throw new SystemException("Unable to send unicast request",
-						ce);
+					throw new SystemException(
+						"Unable to send unicast request", ce);
 				}
 			}
 		}
