@@ -299,6 +299,8 @@ public class ClusterExecutorImpl
 
 			futureClusterResponses.addClusterNodeResponse(
 				clusterNodeResponse);
+
+			addresses.remove(localControlAddress);
 		}
 
 		if (isMulticast) {
