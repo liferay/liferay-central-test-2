@@ -56,11 +56,11 @@
 <%@ page import="com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil" %>
 
 <%
-Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
-
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 Portlet selPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
+
+Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>
 
 <c:if test='<%= themeDisplay.isStatePopUp() && SessionMessages.contains(renderRequest, portletName + ".doConfigure") %>'>
