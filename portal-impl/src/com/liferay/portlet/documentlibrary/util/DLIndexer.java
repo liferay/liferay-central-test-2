@@ -15,20 +15,27 @@
 package com.liferay.portlet.documentlibrary.util;
 
 import com.liferay.documentlibrary.model.FileModel;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
@@ -37,7 +44,9 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -97,6 +106,58 @@ public class DLIndexer extends BaseIndexer {
 		portletURL.setParameter("name", fileName);
 
 		return new Summary(title, content, portletURL);
+	}
+
+	public Hits search(SearchContext searchContext) throws SearchException {
+		int end = searchContext.getEnd();
+		int start = searchContext.getStart();
+
+		searchContext.setEnd(QueryUtil.ALL_POS);
+		searchContext.setStart(QueryUtil.ALL_POS);
+
+		Hits hits = super.search(searchContext);
+
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
+		List<Document> docs = new ArrayList<Document>();
+		List<Float> scores = new ArrayList<Float>();
+
+		for (int i = 0; i < hits.getLength(); i++) {
+			Document doc = hits.doc(i);
+
+			Long fileEntryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
+
+			try {
+				if (DLFileEntryPermission.contains(
+						permissionChecker, fileEntryId, ActionKeys.VIEW)) {
+
+					docs.add(hits.doc(i));
+					scores.add(hits.score(i));
+				}
+			}
+			catch (Exception e) {
+			}
+		}
+
+		int length = docs.size();
+
+		hits.setLength(length);
+
+		if (end > length) {
+			end = length;
+		}
+
+		docs = docs.subList(start, end);
+
+		hits.setDocs(docs.toArray(new Document[docs.size()]));
+		hits.setScores(scores.toArray(new Float[docs.size()]));
+
+		hits.setSearchTime(
+			(float)(System.currentTimeMillis() - hits.getStart()) /
+				Time.SECOND);
+
+		return hits;
 	}
 
 	protected void doDelete(Object obj) throws Exception {
