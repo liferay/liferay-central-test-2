@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.cluster.FutureClusterResponses;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.memory.FinalizeAction;
+import com.liferay.portal.kernel.memory.FinalizeService;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
@@ -41,6 +43,8 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
+
+import java.lang.ref.Reference;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -234,10 +238,6 @@ public class ClusterExecutorImpl
 		_clusterEventListeners.remove(clusterEventListener);
 	}
 
-	public void requestComplete(String uuid) {
-		_executionResultMap.remove(uuid);
-	}
-
 	public void setClusterEventListener(
 		List<ClusterEventListener> clusterEventListeners) {
 
@@ -279,12 +279,16 @@ public class ClusterExecutorImpl
 		Address localControlAddress = getLocalControlAddress();
 
 		FutureClusterResponses futureClusterResponses =
-			new FutureClusterResponses(
-				clusterRequest.getUuid(), addresses, this);
+			new FutureClusterResponses(addresses);
+
+		String uuid = clusterRequest.getUuid();
+
+		Reference<FutureClusterResponses> reference =
+			FinalizeService.register(futureClusterResponses,
+			new RemoveResultKeyFinalizeAction(uuid));
 
 		if (!clusterRequest.isFireAndForget()) {
-			_executionResultMap.put(
-				clusterRequest.getUuid(), futureClusterResponses);
+			_executionResultMap.put(uuid, reference);
 		}
 
 		if (clusterRequest.isSkipLocal()) {
@@ -389,7 +393,14 @@ public class ClusterExecutorImpl
 	}
 
 	protected FutureClusterResponses getExecutionResults(String uuid) {
-		return _executionResultMap.get(uuid);
+		Reference<FutureClusterResponses> reference =
+			_executionResultMap.get(uuid);
+		if (reference != null) {
+			return reference.get();
+		}
+		else {
+			return null;
+		}
 	}
 
 	protected InetAddress getHostInetAddress(String autoDetectAddress)
@@ -630,6 +641,20 @@ public class ClusterExecutorImpl
 		return clusterNodeResponse;
 	}
 
+	private class RemoveResultKeyFinalizeAction implements FinalizeAction {
+
+		public RemoveResultKeyFinalizeAction(String uuid) {
+			_uuid = uuid;
+		}
+
+		public void doFinalize() {
+			_executionResultMap.remove(_uuid);
+		}
+
+		private String _uuid;
+
+	}
+
 	private static final String _DEFAULT_CLUSTER_NAME =
 		"LIFERAY-CONTROL-CHANNEL";
 
@@ -642,8 +667,8 @@ public class ClusterExecutorImpl
 	private Map<String, Address> _clusterNodeIdMap =
 		new HashMap<String, Address>();
 	private JChannel _controlChannel;
-	private Map<String, FutureClusterResponses> _executionResultMap =
-		new ConcurrentHashMap<String, FutureClusterResponses>();
+	private Map<String, Reference<FutureClusterResponses>> _executionResultMap =
+		new ConcurrentHashMap<String, Reference<FutureClusterResponses>>();
 	private String _localClusterNodeId;
 	private final Lock _readLock;
 	private final ReentrantReadWriteLock _readWriteLock;

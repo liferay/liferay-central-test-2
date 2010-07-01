@@ -36,8 +36,7 @@ public class FutureClusterResponsesTest extends TestCase {
 		addresses.add(new MockAddress("1.2.3.6"));
 
 		FutureClusterResponses clusterNodeResponses =
-			new FutureClusterResponses(
-				"someUuid", addresses, new MockClusterExecutor());
+			new FutureClusterResponses(addresses);
 
 		ClusterNodeResponse clusterNodeResponse1 = new ClusterNodeResponse();
 
@@ -71,8 +70,7 @@ public class FutureClusterResponsesTest extends TestCase {
 		addresses.add(new MockAddress("1.2.3.6"));
 
 		FutureClusterResponses clusterNodeResponses =
-			new FutureClusterResponses(
-				"someUuid", addresses, new MockClusterExecutor());
+			new FutureClusterResponses(addresses);
 
 		ClusterNodeResponse clusterNodeResponse1 = new ClusterNodeResponse();
 
@@ -109,8 +107,7 @@ public class FutureClusterResponsesTest extends TestCase {
 		addresses.add(new MockAddress("1.2.3.4"));
 
 		FutureClusterResponses futureClusterResponses =
-			new FutureClusterResponses(
-				"someUuid", addresses, new MockClusterExecutor());
+			new FutureClusterResponses(addresses);
 
 		try {
 			futureClusterResponses.get(500, TimeUnit.MILLISECONDS);
@@ -130,8 +127,7 @@ public class FutureClusterResponsesTest extends TestCase {
 		addresses.add(new MockAddress("1.2.3.4"));
 
 		FutureClusterResponses futureClusterResponses =
-			new FutureClusterResponses(
-				"someUuid", addresses, new MockClusterExecutor());
+			new FutureClusterResponses(addresses);
 
 		ClusterNodeResponse clusterNodeResponse = new ClusterNodeResponse();
 
@@ -165,57 +161,6 @@ public class FutureClusterResponsesTest extends TestCase {
 		}
 
 		private String _address;
-
-	}
-
-	private class MockClusterExecutor implements ClusterExecutor {
-
-		public void addClusterEventListener(
-			ClusterEventListener clusterEventListener) {
-
-			throw new UnsupportedOperationException();
-		}
-
-		public void destroy() {
-			throw new UnsupportedOperationException();
-		}
-
-		public FutureClusterResponses execute(ClusterRequest clusterRequest) {
-			throw new UnsupportedOperationException();
-		}
-
-		public List<ClusterEventListener> getClusterEventListeners() {
-			throw new UnsupportedOperationException();
-		}
-
-		public List<ClusterNode> getClusterNodes() {
-			throw new UnsupportedOperationException();
-		}
-
-		public ClusterNode getLocalClusterNode() {
-			throw new UnsupportedOperationException();
-		}
-
-		public void initialize() {
-			throw new UnsupportedOperationException();
-		}
-
-		public boolean isClusterNodeAlive(String clusterNodeId) {
-			throw new UnsupportedOperationException();
-		}
-
-		public boolean isEnabled() {
-			throw new UnsupportedOperationException();
-		}
-
-		public void removeClusterEventListener(
-			ClusterEventListener clusterEventListener) {
-
-			throw new UnsupportedOperationException();
-		}
-
-		public void requestComplete(String uuid) {
-		}
 
 	}
 
