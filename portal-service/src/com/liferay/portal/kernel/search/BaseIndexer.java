@@ -15,12 +15,21 @@
 package com.liferay.portal.kernel.search;
 
 import com.liferay.portal.NoSuchModelException;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetCategoryServiceUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="BaseIndexer.java.html"><b><i>View Source</i></b></a>
@@ -124,11 +133,27 @@ public abstract class BaseIndexer implements Indexer {
 			BooleanQuery fullQuery = createFullQuery(
 				contextQuery, searchContext);
 
-			return SearchEngineUtil.search(
+			PermissionChecker permissionChecker =
+				PermissionThreadLocal.getPermissionChecker();
+
+			int start = searchContext.getStart();
+			int end = searchContext.getEnd();
+
+			if (isFilterSearch() && (permissionChecker != null)) {
+				start = QueryUtil.ALL_POS;
+				end = QueryUtil.ALL_POS;
+			}
+
+			Hits hits = SearchEngineUtil.search(
 				searchContext.getCompanyId(), searchContext.getGroupIds(),
 				searchContext.getUserId(), className, fullQuery,
-				searchContext.getSorts(), searchContext.getStart(),
-				searchContext.getEnd());
+				searchContext.getSorts(), start, end);
+
+			if (isFilterSearch() && (permissionChecker != null)) {
+				hits = filterSearch(hits, permissionChecker, searchContext);
+			}
+
+			return hits;
 		}
 		catch (SearchException se) {
 			throw se;
@@ -463,6 +488,54 @@ public abstract class BaseIndexer implements Indexer {
 
 	protected abstract void doReindex(String[] ids) throws Exception;
 
+	protected Hits filterSearch(
+		Hits hits, PermissionChecker permissionChecker,
+		SearchContext searchContext) {
+
+		List<Document> docs = new ArrayList<Document>();
+		List<Float> scores = new ArrayList<Float>();
+
+		for (int i = 0; i < hits.getLength(); i++) {
+			Document doc = hits.doc(i);
+
+			long entryClassPK = GetterUtil.getLong(
+				doc.get(Field.ENTRY_CLASS_PK));
+
+			try {
+				if (hasPermission(
+						permissionChecker, entryClassPK, ActionKeys.VIEW)) {
+
+					docs.add(hits.doc(i));
+					scores.add(hits.score(i));
+				}
+			}
+			catch (Exception e) {
+			}
+		}
+
+		int length = docs.size();
+
+		hits.setLength(length);
+
+		int start = searchContext.getStart();
+		int end = searchContext.getEnd();
+
+		if (end > length) {
+			end = length;
+		}
+
+		docs = docs.subList(start, end);
+
+		hits.setDocs(docs.toArray(new Document[docs.size()]));
+		hits.setScores(scores.toArray(new Float[docs.size()]));
+
+		hits.setSearchTime(
+			(float)(System.currentTimeMillis() - hits.getStart()) /
+				Time.SECOND);
+
+		return hits;
+	}
+
 	protected String getClassName(SearchContext searchContext) {
 		String[] classNames = getClassNames();
 
@@ -493,6 +566,18 @@ public abstract class BaseIndexer implements Indexer {
 
 	protected abstract String getPortletId(SearchContext searchContext);
 
+	protected boolean hasPermission(
+			PermissionChecker permissionChecker, long entryClassPK,
+			String actionId)
+		throws Exception {
+
+		return true;
+	}
+
+	protected boolean isFilterSearch() {
+		return _FILTER_SEARCH;
+	}
+
 	protected void postProcessContextQuery(
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
@@ -507,6 +592,8 @@ public abstract class BaseIndexer implements Indexer {
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
 	}
+
+	private static final boolean _FILTER_SEARCH = false;
 
 	private static final String[] _KEYWORDS_FIELDS = {
 		Field.ASSET_TAG_NAMES, Field.COMMENTS, Field.CONTENT, Field.DESCRIPTION,

@@ -27,18 +27,15 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -96,58 +93,6 @@ public class MBIndexer extends BaseIndexer {
 		portletURL.setParameter("messageId", messageId);
 
 		return new Summary(title, content, portletURL);
-	}
-
-	public Hits search(SearchContext searchContext) throws SearchException {
-		int end = searchContext.getEnd();
-		int start = searchContext.getStart();
-
-		searchContext.setEnd(QueryUtil.ALL_POS);
-		searchContext.setStart(QueryUtil.ALL_POS);
-
-		Hits hits = super.search(searchContext);
-
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
-		List<Document> docs = new ArrayList<Document>();
-		List<Float> scores = new ArrayList<Float>();
-
-		for (int i = 0; i < hits.getLength(); i++) {
-			Document doc = hits.doc(i);
-
-			Long messageId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
-
-			try {
-				if (MBMessagePermission.contains(
-						permissionChecker, messageId, ActionKeys.VIEW)) {
-
-					docs.add(hits.doc(i));
-					scores.add(hits.score(i));
-				}
-			}
-			catch (Exception e) {
-			}
-		}
-
-		int length = docs.size();
-
-		hits.setLength(length);
-
-		if (end > length) {
-			end = length;
-		}
-
-		docs = docs.subList(start, end);
-
-		hits.setDocs(docs.toArray(new Document[docs.size()]));
-		hits.setScores(scores.toArray(new Float[docs.size()]));
-
-		hits.setSearchTime(
-			(float)(System.currentTimeMillis() - hits.getStart()) /
-				Time.SECOND);
-
-		return hits;
 	}
 
 	protected void doDelete(Object obj) throws Exception {
@@ -304,6 +249,19 @@ public class MBIndexer extends BaseIndexer {
 		return PORTLET_ID;
 	}
 
+	protected boolean hasPermission(
+			PermissionChecker permissionChecker, long entryClassPK,
+			String actionId)
+		throws Exception {
+
+		return MBMessagePermission.contains(
+			permissionChecker, entryClassPK, ActionKeys.VIEW);
+	}
+
+	protected boolean isFilterSearch() {
+		return _FILTER_SEARCH;
+	}
+
 	protected void postProcessContextQuery(
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
@@ -434,6 +392,8 @@ public class MBIndexer extends BaseIndexer {
 			}
 		}
 	}
+
+	private static final boolean _FILTER_SEARCH = true;
 
 	private static Log _log = LogFactoryUtil.getLog(MBIndexer.class);
 
