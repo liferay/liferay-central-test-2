@@ -101,7 +101,7 @@ if (workflowTask.getDueDate() != null) {
 		/>
 	</c:if>
 
-	<c:if test="<%= (pooledActorsIds.length > 0) && !workflowTask.isCompleted() %>">
+	<c:if test="<%= _hasOtherAssignees(pooledActorsIds, workflowTask, user) %>">
 		<portlet:actionURL var="assignURL">
 			<portlet:param name="struts_action" value="/workflow_tasks/edit_workflow_task" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ASSIGN %>" />
