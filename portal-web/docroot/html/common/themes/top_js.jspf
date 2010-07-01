@@ -219,7 +219,9 @@
 					<c:when test="<%= themeDisplay.isThemeJsFastLoad() %>">
 						return {
 							replaceStr: function(match, fragment, string) {
-								return fragment + 'm=' + (match.split('/html/js')[1] || '');
+								var prefix = '<%= themeDisplay.getPathContext() %>/html/js';
+
+								return fragment + 'p=' + prefix + '&m=' + (match.split(prefix)[1] || '');
 							},
 							searchExp: '(\\?|&)/([^&]+)'
 						};

@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.MinifierUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.servlet.ServletResponseUtil;
 
@@ -46,6 +47,8 @@ public class ComboServlet extends HttpServlet {
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException {
 
+		String contextPath = PortalUtil.getPathContext();
+
 		String[] modulePaths = request.getParameterValues("m");
 
 		if (modulePaths.length == 0) {
@@ -54,6 +57,7 @@ public class ComboServlet extends HttpServlet {
 			return;
 		}
 
+		String p = ParamUtil.getString(request, "p");
 		String minifierType = ParamUtil.getString(request, "minifierType");
 
 		int length = modulePaths.length;
@@ -61,8 +65,10 @@ public class ComboServlet extends HttpServlet {
 		byte[][] bytesArray = new byte[length][];
 
 		for (String modulePath : modulePaths) {
-			bytesArray[--length] = getFileContent(
-				_JAVASCRIPT_DIR + modulePath, minifierType);
+			modulePath = StringUtil.replaceFirst(
+				p.concat(modulePath), contextPath, StringPool.BLANK);
+
+			bytesArray[--length] = getFileContent(modulePath, minifierType);
 		}
 
 		String contentType = ContentTypes.TEXT_JAVASCRIPT;
