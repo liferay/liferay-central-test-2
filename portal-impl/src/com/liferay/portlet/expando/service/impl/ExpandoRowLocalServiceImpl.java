@@ -16,6 +16,7 @@ package com.liferay.portlet.expando.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoRow;
 import com.liferay.portlet.expando.model.ExpandoTable;
@@ -29,6 +30,7 @@ import java.util.List;
  * <a href="ExpandoRowLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Wesley Gong
  */
 public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 
@@ -201,6 +203,18 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 		return getRows(companyId, classNameId, tableName, start, end);
 	}
 
+	/**
+	 * @deprecated {@link #getRows(long, String, String, int, int)}
+	 */
+	public List<ExpandoRow> getRows(
+			String className, String tableName, int start, int end)
+		throws SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return getRows(companyId, className, tableName, start, end);
+	}
+
 	public int getRowsCount(long tableId) throws SystemException {
 		return expandoRowPersistence.countByTableId(tableId);
 	}
@@ -224,6 +238,17 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		return getRowsCount(companyId, classNameId, tableName);
+	}
+
+	/**
+	 * @deprecated {@link #getRowsCount(long, String, String)}
+	 */
+	public int getRowsCount(String className, String tableName)
+		throws SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return getRowsCount(companyId, className, tableName);
 	}
 
 }

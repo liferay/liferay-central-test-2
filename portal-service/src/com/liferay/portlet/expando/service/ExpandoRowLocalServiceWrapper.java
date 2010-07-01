@@ -231,6 +231,15 @@ public class ExpandoRowLocalServiceWrapper implements ExpandoRowLocalService {
 			start, end);
 	}
 
+	/**
+	* @deprecated {@link #getRows(long, String, String, int, int)}
+	*/
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getRows(
+		java.lang.String className, java.lang.String tableName, int start,
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
+		return _expandoRowLocalService.getRows(className, tableName, start, end);
+	}
+
 	public int getRowsCount(long tableId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _expandoRowLocalService.getRowsCount(tableId);
@@ -248,6 +257,15 @@ public class ExpandoRowLocalServiceWrapper implements ExpandoRowLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _expandoRowLocalService.getRowsCount(companyId, className,
 			tableName);
+	}
+
+	/**
+	* @deprecated {@link #getRowsCount(long, String, String)}
+	*/
+	public int getRowsCount(java.lang.String className,
+		java.lang.String tableName)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _expandoRowLocalService.getRowsCount(className, tableName);
 	}
 
 	public ExpandoRowLocalService getWrappedExpandoRowLocalService() {

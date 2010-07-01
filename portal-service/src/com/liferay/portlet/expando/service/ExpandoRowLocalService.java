@@ -186,6 +186,14 @@ public interface ExpandoRowLocalService {
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* @deprecated {@link #getRows(long, String, String, int, int)}
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getRows(
+		java.lang.String className, java.lang.String tableName, int start,
+		int end) throws com.liferay.portal.kernel.exception.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getRowsCount(long tableId)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -197,6 +205,14 @@ public interface ExpandoRowLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getRowsCount(long companyId, java.lang.String className,
+		java.lang.String tableName)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @deprecated {@link #getRowsCount(long, String, String)}
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getRowsCount(java.lang.String className,
 		java.lang.String tableName)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }
