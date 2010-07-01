@@ -44,10 +44,8 @@ AssetRenderer assetRenderer = workflowHandler.getAssetRenderer(classPK);
 AssetRendererFactory assetRendererFactory = workflowHandler.getAssetRendererFactory();
 AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(assetRendererFactory.getClassName(), assetRenderer.getClassPK());
 
-String assetEntryTitle = StringPool.BLANK;
-assetEntryTitle = assetEntry.getTitle();
-
 PortletURL editPortletURL = workflowHandler.getURLEdit(classPK, (LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
+
 PortletURL viewFullContentURL = renderResponse.createRenderURL();
 
 viewFullContentURL.setParameter("struts_action", "/workflow_tasks/view_content");
@@ -62,7 +60,7 @@ viewFullContentURL.setParameter("type", assetRendererFactory.getType());
 
 <liferay-ui:header
 	backURL="<%= backURL.toString() %>"
-	title='<%= LanguageUtil.get(pageContext, workflowTask.getName()) + ": " + assetEntryTitle %>'
+	title='<%= LanguageUtil.get(pageContext, workflowTask.getName()) + ": " + assetEntry.getTitle() %>'
 />
 
 <aui:layout>
@@ -334,5 +332,5 @@ viewFullContentURL.setParameter("type", assetRendererFactory.getType());
 </aui:layout>
 
 <%
-PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, workflowTask.getName()) + ": " + assetEntryTitle, currentURL);
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, workflowTask.getName()) + ": " + assetEntry.getTitle(), currentURL);
 %>
