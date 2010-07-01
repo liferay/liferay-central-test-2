@@ -26,31 +26,45 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * <a href="FinalizeService.java.html"><b><i>View Source</i></b></a>
+ * <a href="FinalizeManager.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
  */
-public class FinalizeService {
+public class FinalizeManager {
+
+	public static final boolean THREAD_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.FINALIZE_MANAGER_THREAD_ENABLED));
 
 	public static <T> Reference<T> register(
 		T realReference, FinalizeAction finalizeAction) {
-		Reference<T> reference = new WeakReference<T>(realReference,
-			_referenceQueue);
+
+		Reference<T> reference = new WeakReference<T>(
+			realReference, _referenceQueue);
+
 		_referenceActionMap.put(reference, finalizeAction);
-		if (!THREAD_ENABLE) {
-			pollingCleanup();
+
+		if (!THREAD_ENABLED) {
+			_pollingCleanup();
 		}
+
 		return reference;
 	}
 
-	private static void pollingCleanup() {
+	private static void _pollingCleanup() {
 		Reference<? extends Object> reference = null;
+
 		while ((reference = _referenceQueue.poll()) != null) {
-			FinalizeAction finalizeAction =
-				_referenceActionMap.remove(reference);
-			finalizeAction.doFinalize();
+			FinalizeAction finalizeAction = _referenceActionMap.remove(
+				reference);
+
+			finalizeAction.finalize();
 		}
 	}
+
+	private static Map<Reference<?>, FinalizeAction> _referenceActionMap =
+		new ConcurrentHashMap<Reference<?>, FinalizeAction>();
+	private static ReferenceQueue<Object> _referenceQueue =
+		new ReferenceQueue<Object>();
 
 	private static class FinalizeThread extends Thread {
 
@@ -63,30 +77,24 @@ public class FinalizeService {
 				try {
 					Reference<? extends Object> reference =
 						_referenceQueue.remove();
+
 					FinalizeAction finalizeAction =
 						_referenceActionMap.remove(reference);
-					finalizeAction.doFinalize();
-				} catch (InterruptedException ex) {
-					// ignore
+
+					finalizeAction.finalize();
+				}
+				catch (InterruptedException ie) {
 				}
 			}
 		}
 	}
 
-	public static final boolean THREAD_ENABLE = GetterUtil.getBoolean(
-		PropsUtil.get(PropsKeys.FINALIZE_SERVICE_THREAD_ENABLE));
-
-	private static Map<Reference<?>, FinalizeAction> _referenceActionMap =
-		new ConcurrentHashMap<Reference<?>, FinalizeAction>();
-
-	private static ReferenceQueue<Object> _referenceQueue =
-		new ReferenceQueue<Object>();
-
 	static {
-		if (THREAD_ENABLE) {
+		if (THREAD_ENABLED) {
 			Thread thread = new FinalizeThread("Finalize Thread");
 
 			thread.setDaemon(true);
+
 			thread.start();
 		}
 	}

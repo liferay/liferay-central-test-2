@@ -18,74 +18,82 @@ import com.liferay.portal.kernel.test.TestCase;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
 /**
- * <a href="FinalizeServiceTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="FinalizeManagerTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
  */
-public class FinalizeServiceTest extends TestCase {
+public class FinalizeManagerTest extends TestCase {
 
 	public void testRegister() throws InterruptedException {
 		PortalClassLoaderUtil.setClassLoader(
 			Thread.currentThread().getContextClassLoader());
 
-		if (FinalizeService.THREAD_ENABLE) {
+		if (FinalizeManager.THREAD_ENABLED) {
 			registerWithThread();
 		}
 		else {
 			registerWithoutThread();
 		}
+
 		PortalClassLoaderUtil.setClassLoader(null);
 	}
 
-	private void registerWithThread() throws InterruptedException {
-
+	protected void registerWithoutThread() throws InterruptedException {
 		Object testObject = new Object();
+
 		MarkFinalizeAction markFinalizeAction = new MarkFinalizeAction();
 
-		FinalizeService.register(testObject, markFinalizeAction);
+		FinalizeManager.register(testObject, markFinalizeAction);
+
 		assertFalse(markFinalizeAction.isMarked());
 
 		testObject = null;
 
-		// Wait for gc 100ms
 		long startTime = System.currentTimeMillis();
+
 		while ((System.currentTimeMillis() - startTime) < 100) {
 			System.gc();
 			Thread.sleep(1);
+
 			if (markFinalizeAction.isMarked()) {
 				break;
 			}
 		}
+
+		FinalizeManager.register(new Object(), markFinalizeAction);
 
 		assertTrue(markFinalizeAction.isMarked());
 	}
 
-	private void registerWithoutThread() throws InterruptedException {
+	protected void registerWithThread() throws InterruptedException {
 		Object testObject = new Object();
+
 		MarkFinalizeAction markFinalizeAction = new MarkFinalizeAction();
 
-		FinalizeService.register(testObject, markFinalizeAction);
+		FinalizeManager.register(testObject, markFinalizeAction);
+
 		assertFalse(markFinalizeAction.isMarked());
 
 		testObject = null;
 
-		// Wait for gc 100ms
 		long startTime = System.currentTimeMillis();
+
 		while ((System.currentTimeMillis() - startTime) < 100) {
 			System.gc();
+
 			Thread.sleep(1);
+
 			if (markFinalizeAction.isMarked()) {
 				break;
 			}
 		}
 
-		FinalizeService.register(new Object(), markFinalizeAction);
 		assertTrue(markFinalizeAction.isMarked());
 	}
 
 	private class MarkFinalizeAction implements FinalizeAction {
 
-		public void doFinalize() {
+		public void finalize() {
 			_marked = true;
 		}
 
