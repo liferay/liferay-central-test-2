@@ -131,7 +131,12 @@ portletURL.setParameter("name", name);
 		</portlet:renderURL>
 
 		<aui:field-wrapper label="current-folder">
-			<liferay-ui:icon image="folder" label="true" message="<%= folderName %>" url="<%= viewFolderURL %>" />
+			<liferay-ui:icon
+				image="folder"
+				label="true"
+				message="<%= folderName %>"
+				url="<%= viewFolderURL %>"
+			/>
 		</aui:field-wrapper>
 
 		<aui:field-wrapper label="new-folder">

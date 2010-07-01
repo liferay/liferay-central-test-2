@@ -24,7 +24,12 @@ DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRA
 %>
 
 <div class="asset-resource-info">
-	<liferay-ui:icon image='<%= "../file_system/small/" + fileEntry.getExtension() %>' label="<%= true %>" message="<%= fileEntry.getTitle() %>" url="<%= assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, StringPool.BLANK) %>" />
+	<liferay-ui:icon
+		image='<%= "../file_system/small/" + fileEntry.getExtension() %>'
+		label="<%= true %>"
+		message="<%= fileEntry.getTitle() %>"
+		url="<%= assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, StringPool.BLANK) %>"
+	/>
 </div>
 
 <p class="asset-description"><%= StringUtil.shorten(fileEntry.getDescription(), abstractLength) %></p>

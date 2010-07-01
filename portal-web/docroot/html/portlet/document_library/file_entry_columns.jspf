@@ -60,7 +60,11 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 				href="<%= rowHREF %>"
 				name="<%= fileEntryColumn %>"
 			>
-				<liferay-ui:icon image='<%= "../file_system/small/" + fileEntry.getExtension() %>' label="<%= true %>" message="<%= fileEntry.getTitle() %>" />
+				<liferay-ui:icon
+					image='<%= "../file_system/small/" + fileEntry.getExtension() %>'
+					label="<%= true %>"
+					message="<%= fileEntry.getTitle() %>"
+				/>
 
 				<c:if test="<%= Validator.isNotNull(fileEntry.getDescription()) %>">
 					<div class="file-entry-list-description">
