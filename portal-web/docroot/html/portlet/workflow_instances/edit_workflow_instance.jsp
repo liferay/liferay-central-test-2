@@ -27,6 +27,23 @@ long companyId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstant
 long groupId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_GROUP_ID));
 String className = (String)workflowContext.get(WorkflowConstants.CONTEXT_ENTRY_CLASS_NAME);
 long classPK = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_ENTRY_CLASS_PK));
+
+WorkflowHandler workflowHandler = WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
+
+AssetRenderer assetRenderer = workflowHandler.getAssetRenderer(classPK);
+AssetRendererFactory assetRendererFactory = workflowHandler.getAssetRendererFactory();
+AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(assetRendererFactory.getClassName(), assetRenderer.getClassPK());
+
+String assetEntryTitle = StringPool.BLANK;
+assetEntryTitle = assetEntry.getTitle();
+
+PortletURL editPortletURL = workflowHandler.getURLEdit(classPK, (LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
+PortletURL viewFullContentURL = renderResponse.createRenderURL();
+
+viewFullContentURL.setParameter("struts_action", "/workflow_tasks/view_content");
+viewFullContentURL.setParameter("redirect", currentURL);
+viewFullContentURL.setParameter("assetEntryId", String.valueOf(assetEntry.getEntryId()));
+viewFullContentURL.setParameter("type", assetRendererFactory.getType());
 %>
 
 <portlet:renderURL var="backURL">
@@ -35,7 +52,7 @@ long classPK = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.
 
 <liferay-ui:header
 	backURL="<%= backURL.toString() %>"
-	title='<%= workflowInstance.getWorkflowDefinitionName() %>'
+	title='<%= LanguageUtil.get(pageContext, workflowInstance.getWorkflowDefinitionName()) + ": " + assetEntryTitle %>'
 />
 
 <aui:layout>
@@ -60,24 +77,6 @@ long classPK = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.
 
 		<liferay-ui:panel-container cssClass="instance-panel-container" id="preview" extended="<%= true %>">
 			<liferay-ui:panel defaultState="open" title='<%= LanguageUtil.get(pageContext, "preview") %>'>
-
-				<%
-				WorkflowHandler workflowHandler = WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
-
-				AssetRenderer assetRenderer = workflowHandler.getAssetRenderer(classPK);
-				AssetRendererFactory assetRendererFactory = workflowHandler.getAssetRendererFactory();
-				AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(assetRendererFactory.getClassName(), assetRenderer.getClassPK());
-
-				PortletURL editPortletURL = workflowHandler.getURLEdit(classPK, (LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
-
-				PortletURL viewFullContentURL = renderResponse.createRenderURL();
-
-				viewFullContentURL.setParameter("struts_action", "/workflow_tasks/view_content");
-				viewFullContentURL.setParameter("redirect", currentURL);
-				viewFullContentURL.setParameter("assetEntryId", String.valueOf(assetEntry.getEntryId()));
-				viewFullContentURL.setParameter("type", assetRendererFactory.getType());
-				%>
-
 				<div class="instance-content-actions">
 					<liferay-ui:icon-list>
 						<c:if test="<%= assetRenderer.hasViewPermission(permissionChecker) %>">
@@ -325,5 +324,5 @@ long classPK = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.
 </aui:layout>
 
 <%
-PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, workflowInstance.getWorkflowDefinitionName()), currentURL);
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, workflowInstance.getWorkflowDefinitionName()) + ": " + assetEntryTitle, currentURL);
 %>
