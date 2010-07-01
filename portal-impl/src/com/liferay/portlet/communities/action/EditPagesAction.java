@@ -509,6 +509,26 @@ public class EditPagesAction extends PortletAction {
 
 				ActionUtil.copyPreferences(
 					actionRequest, layout, layoutPrototypeLayout);
+
+				if (Validator.isNotNull(layoutPrototypeLayout.getThemeId())) {
+					LayoutServiceUtil.updateLookAndFeel(
+						layout.getGroupId(), layout.isPrivateLayout(),
+						layout.getLayoutId(),
+						layoutPrototypeLayout.getThemeId(),
+						layoutPrototypeLayout.getColorSchemeId(),
+						layoutPrototypeLayout.getCss(),	false);
+				}
+
+				if (Validator.isNotNull(
+						layoutPrototypeLayout.getWapThemeId())) {
+
+					LayoutServiceUtil.updateLookAndFeel(
+						layout.getGroupId(), layout.isPrivateLayout(),
+						layout.getLayoutId(),
+						layoutPrototypeLayout.getWapThemeId(),
+						layoutPrototypeLayout.getWapColorSchemeId(),
+						layoutPrototypeLayout.getCss(),	true);
+				}
 			}
 			else {
 				LayoutServiceUtil.addLayout(
