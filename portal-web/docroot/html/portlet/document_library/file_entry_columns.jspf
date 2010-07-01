@@ -57,21 +57,16 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 		</c:when>
 		<c:when test='<%= fileEntryColumn.equals("name") %>'>
 			<liferay-ui:search-container-column-text
-				buffer="buffer"
 				href="<%= rowHREF %>"
 				name="<%= fileEntryColumn %>"
 			>
+				<liferay-ui:icon image='<%= "../file_system/small/" + fileEntry.getExtension() %>' label="<%= true %>" message="<%= fileEntry.getTitle() %>" />
 
-				<%
-				buffer.append(_getFileEntryImage(fileEntry, themeDisplay));
-				buffer.append(fileEntry.getTitle());
-
-				if (Validator.isNotNull(fileEntry.getDescription())) {
-					buffer.append("<br />");
-					buffer.append(fileEntry.getDescription());
-				}
-				%>
-
+				<c:if test="<%= Validator.isNotNull(fileEntry.getDescription()) %>">
+					<div class="file-entry-list-description">
+						<%= fileEntry.getDescription() %>
+					</div>
+				</c:if>
 			</liferay-ui:search-container-column-text>
 		</c:when>
 		<c:when test='<%= fileEntryColumn.equals("size") %>'>

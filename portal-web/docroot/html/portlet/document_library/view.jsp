@@ -133,9 +133,11 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 			<aui:column columnWidth="<%= showFolderMenu ? 75 : 100 %>" cssClass="folder-column folder-column-first" first="<%= true %>">
 				<liferay-ui:panel-container extended="<%= false %>" id="documentLibraryPanelContainer" persistState="<%= true %>">
 					<c:if test="<%= folder != null %>">
-						<div class="folder-description">
-							<%= folder.getDescription() %>
-						</div>
+						<c:if test="<%= Validator.isNotNull(folder.getDescription()) %>">
+							<div class="folder-description">
+								<%= folder.getDescription() %>
+							</div>
+						</c:if>	
 
 						<div class="folder-metadata">
 							<div class="folder-date">

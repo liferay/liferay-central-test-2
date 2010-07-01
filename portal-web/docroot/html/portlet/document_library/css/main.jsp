@@ -69,7 +69,9 @@
 }
 
 .portlet-document-library .file-entry-description, .portlet-document-library .folder-description {
-	margin: 0 auto 2em;
+	color: #444;
+	font-style: italic;
+	margin: 0.5em auto 2em;
 }
 
 .portlet-document-library .file-entry-download, .portlet-document-library .folder-icon {
@@ -115,6 +117,11 @@
 	color: #7D7D7D;
 }
 
+.portlet-document-library .file-entry-list-description {
+	font-style:italic;
+	margin-left:10px;
+}
+
 .portlet-document-library .folder-avatar img {
 	margin: 0 auto;
 	padding-right: 2em;
@@ -136,6 +143,7 @@
 
 .portlet-document-library .folder-metadata {
 	clear: both;
+	margin-bottom: 2em;
 }
 
 .portlet-document-library .folder-search {

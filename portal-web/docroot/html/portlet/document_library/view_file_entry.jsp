@@ -168,9 +168,11 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			/>
 		</div>
 
-		<div class="file-entry-description">
-			<%= fileEntry.getDescription() %>
-		</div>
+		<c:if test="<%= Validator.isNotNull(fileEntry.getDescription()) %>">
+			<div class="file-entry-description">
+				<%= fileEntry.getDescription() %>
+			</div>
+		</c:if>
 
 		<liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
 			<liferay-ui:custom-attribute-list
