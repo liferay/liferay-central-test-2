@@ -247,7 +247,8 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 	<c:when test='<%= topLink.equals("my-documents") || topLink.equals("recent-documents") %>'>
 		<aui:layout>
 			<liferay-ui:header
-				title="<%= topLink %>" />
+				title="<%= topLink %>"
+			/>
 
 			<liferay-ui:search-container
 				delta="<%= fileEntriesPerPage %>"

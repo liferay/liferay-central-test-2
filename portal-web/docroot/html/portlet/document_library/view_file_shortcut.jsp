@@ -112,7 +112,8 @@ if (Validator.isNotNull(folder.getName())) {
 <liferay-ui:header
 	backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", parentFolderName) %>'
 	backURL="<%= backURL.toString() %>"
-	title='<%= LanguageUtil.format(pageContext, "shortcut-to-x", toFileEntry.getTitle()) %>' />
+	title='<%= LanguageUtil.format(pageContext, "shortcut-to-x", toFileEntry.getTitle()) %>'
+/>
 
 <aui:layout>
 	<aui:column columnWidth="<%= 75 %>" cssClass="file-entry-column file-entry-column-first" first="<%= true %>">
