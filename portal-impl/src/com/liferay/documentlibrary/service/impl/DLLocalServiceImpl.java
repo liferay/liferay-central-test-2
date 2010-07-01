@@ -186,15 +186,14 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String fileNameExtension,
+			String fileName, String fileExtension,
 			boolean validateFileExtension, String versionNumber,
 			String sourceFileName, long fileEntryId, String properties,
 			Date modifiedDate, ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException {
 
 		validate(
-			fileName, fileNameExtension, sourceFileName, validateFileExtension,
-			is);
+			fileName, fileExtension, sourceFileName, validateFileExtension, is);
 
 		hook.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
@@ -300,13 +299,18 @@ public class DLLocalServiceImpl implements DLLocalService {
 	}
 
 	public void validate(
-			String fileName, String fileNameExtension, String sourceFileName,
+			String fileName, String fileExtension, String sourceFileName,
 			boolean validateFileExtension, InputStream is)
 		throws PortalException, SystemException {
 
-		String sourceFileNameExtension = FileUtil.getExtension(sourceFileName);
+		String sourceFileExtension = FileUtil.getExtension(sourceFileName);
 
-		validateExtension(fileNameExtension, sourceFileNameExtension);
+		if (PropsValues.DL_FILE_EXTENSIONS_STRICT_CHECK &&
+			!fileExtension.equals(sourceFileExtension)) {
+
+			throw new SourceFileNameException(sourceFileExtension);
+		}
+
 		validate(fileName, validateFileExtension);
 
 		try {
@@ -320,19 +324,6 @@ public class DLLocalServiceImpl implements DLLocalService {
 		}
 		catch (IOException ioe) {
 			throw new FileSizeException(ioe.getMessage());
-		}
-	}
-
-	protected void validateExtension(
-			String fileNameExtension, String sourceFileNameExtension)
-		throws PortalException, SystemException {
-
-		if (!PropsValues.DL_FILE_EXTENSIONS_CHECK_STRICT) {
-			return;
-		}
-
-		if (!fileNameExtension.equals(sourceFileNameExtension)) {
-			throw new SourceFileNameException(sourceFileNameExtension);
 		}
 	}
 

@@ -66,7 +66,7 @@ public interface DLLocalService {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String fileNameExtension,
+			String fileName, String fileExtension,
 			boolean validateFileExtension, String versionNumber,
 			String sourceFileName, long fileEntryId, String properties,
 			Date modifiedDate, ServiceContext serviceContext, InputStream is)
@@ -85,7 +85,7 @@ public interface DLLocalService {
 		throws PortalException, SystemException;
 
 	public void validate(
-			String fileName, String fileNameExtension, String sourceFileName,
+			String fileName, String fileExtension, String sourceFileName,
 			boolean validateFileExtension, InputStream is)
 		throws PortalException, SystemException;
 

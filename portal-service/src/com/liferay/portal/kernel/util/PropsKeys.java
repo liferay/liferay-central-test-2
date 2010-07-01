@@ -284,7 +284,7 @@ public interface PropsKeys {
 	public static final String CDN_HOST_HTTPS = "cdn.host.https";
 
 	public static final String CLUSTER_EXECUTOR_DEBUG_ENABLED = "cluster.executor.debug.enabled";
-	
+
 	public static final String CLUSTER_LINK_AUTODETECT_ADDRESS = "cluster.link.autodetect.address";
 
 	public static final String CLUSTER_LINK_CHANNEL_PROPERTIES_CONTROL = "cluster.link.channel.properties.control";
@@ -471,7 +471,7 @@ public interface PropsKeys {
 
 	public static final String DL_FILE_EXTENSIONS = "dl.file.extensions";
 
-	public static final String DL_FILE_EXTENSIONS_CHECK_STRICT = "dl.file.extensions.check.strict";
+	public static final String DL_FILE_EXTENSIONS_STRICT_CHECK = "dl.file.extensions.strict.check";
 
 	public static final String DL_FILE_ICONS = "dl.file.icons";
 
@@ -544,7 +544,7 @@ public interface PropsKeys {
 	public static final String FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS = "field.enable.com.liferay.portal.model.Organization.status";
 
 	public static final String FINALIZE_MANAGER_THREAD_ENABLED = "finalize.manager.thread.enabled";
-	
+
 	public static final String FLAGS_EMAIL_BODY = "flags.email.body";
 
 	public static final String FLAGS_EMAIL_FROM_ADDRESS = "flags.email.from.address";

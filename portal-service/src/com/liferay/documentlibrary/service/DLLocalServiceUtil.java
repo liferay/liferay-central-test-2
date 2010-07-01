@@ -102,7 +102,7 @@ public class DLLocalServiceUtil {
 
 	public static void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String fileNameExtension,
+			String fileName, String fileExtension,
 			boolean validateFileExtension, String versionNumber,
 			String sourceFileName, long fileEntryId, String properties,
 			Date modifiedDate, ServiceContext serviceContext, InputStream is)
@@ -110,9 +110,8 @@ public class DLLocalServiceUtil {
 
 		getService().updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
-			fileNameExtension, validateFileExtension, versionNumber,
-			sourceFileName, fileEntryId, properties, modifiedDate,
-			serviceContext, is);
+			fileExtension, validateFileExtension, versionNumber, sourceFileName,
+			fileEntryId, properties, modifiedDate, serviceContext, is);
 	}
 
 	public static void validate(
@@ -137,13 +136,12 @@ public class DLLocalServiceUtil {
 	}
 
 	public static void validate(
-			String fileName, String fileNameExtension, String sourceFileName,
+			String fileName, String fileExtension, String sourceFileName,
 			boolean validateFileExtension, InputStream is)
 		throws PortalException, SystemException {
 
 		getService().validate(
-			fileName, fileNameExtension, sourceFileName, validateFileExtension,
-			is);
+			fileName, fileExtension, sourceFileName, validateFileExtension, is);
 	}
 
 	public void setService(DLLocalService service) {
