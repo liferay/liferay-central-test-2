@@ -178,7 +178,7 @@
 			<li class="page-settings">
 
 				<%
-				Layout stagedLayout = LayoutLocalServiceUtil.getLayout(stagingGroup.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId());
+				Layout stagedLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(layout.getUuid(), stagingGroup.getGroupId());
 
 				PortletURL viewProposalsURL = new PortletURLImpl(request, PortletKeys.LAYOUT_MANAGEMENT, stagedLayout.getPlid(), PortletRequest.RENDER_PHASE);
 
