@@ -20,6 +20,10 @@ import com.liferay.portal.kernel.cluster.ClusterEventType;
 import com.liferay.portal.kernel.cluster.ClusterNode;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
+
+import java.util.List;
 
 /**
  * <a href="DebuggingClusterEventListenerImpl.java.html"><b><i>View Source</i>
@@ -36,11 +40,23 @@ public class DebuggingClusterEventListenerImpl implements ClusterEventListener {
 
 		ClusterEventType clusterEventType = clusterEvent.getClusterEventType();
 
-		_log.info("Cluster event " + clusterEventType);
+		List<ClusterNode> clusterNodes = clusterEvent.getClusterNodes();
 
-		for (ClusterNode clusterNode : clusterEvent.getClusterNodes()) {
-			_log.info("Cluster node " + clusterNode);
+		StringBundler sb = new StringBundler(clusterNodes.size() * 3 + 3);
+
+		sb.append("Cluster event ");
+		sb.append(clusterEventType);
+		sb.append(StringPool.NEW_LINE);
+
+		for (ClusterNode clusterNode : clusterNodes) {
+			sb.append("Cluster node ");
+			sb.append(clusterNode);
+			sb.append(StringPool.NEW_LINE);
 		}
+
+		sb.setIndex(sb.index() - 1);
+
+		_log.info(sb.toString());
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
