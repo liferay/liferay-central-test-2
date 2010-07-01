@@ -285,7 +285,16 @@ portletURL.setParameter("name", name);
 		</c:if>
 
 		<aui:button-row>
-			<aui:button disabled="<%= isLocked && !hasLock %>" type="submit" value="publish" />
+
+			<%
+			String publishButtonLabel = "publish";
+
+			if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, DLFileEntry.class.getName())) {
+				publishButtonLabel = "submit-for-publication";
+			}
+			%>
+
+			<aui:button disabled="<%= isLocked && !hasLock %>" type="submit" value="<%= publishButtonLabel %>" />
 
 			<c:if test="<%= (fileEntry != null) && ((isLocked && hasLock) || !isLocked) %>">
 				<c:choose>

@@ -141,9 +141,19 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 		</c:if>
 
 		<aui:button-row>
-			<c:if test="<%= (entry == null) || !entry.isApproved() %>">
-				<aui:button name="saveDraftButton" onClick='<%= renderResponse.getNamespace() + "saveEntry(true);" %>' type="button" value='<%= ((entry != null) && entry.isPending()) ? "save" : "save-draft" %>' />
-			</c:if>
+
+			<%
+			String saveButtonLabel = "save";
+			String publishButtonLabel = "publish";
+
+			if ((entry == null) || entry.isDraft() || entry.isApproved()) {
+				saveButtonLabel = "save-as-draft";
+			}
+
+			if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, BlogsEntry.class.getName())) {
+				publishButtonLabel = "submit-for-publication";
+			}
+			%>
 
 			<c:if test="<%= (entry != null) && entry.isApproved() && WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(entry.getCompanyId(), entry.getGroupId(), BlogsEntry.class.getName()) %>">
 				<div class="portlet-msg-info">
@@ -151,7 +161,9 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 				</div>
 			</c:if>
 
-			<aui:button disabled="<%= pending %>" name="saveButton" type="submit" value="publish" />
+			<aui:button name="saveDraftButton" onClick='<%= renderResponse.getNamespace() + "saveEntry(true);" %>' type="button" value="<%= saveButtonLabel %>" />
+
+			<aui:button disabled="<%= pending %>" name="saveButton" type="submit" value="<%= publishButtonLabel %>" />
 
 			<aui:button name="cancelButton" onClick="<%= redirect %>" type="cancel" />
 		</aui:button-row>

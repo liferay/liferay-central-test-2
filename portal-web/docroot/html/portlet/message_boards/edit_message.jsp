@@ -340,9 +340,19 @@ if (Validator.isNull(redirect)) {
 	</c:if>
 
 	<aui:button-row>
-		<c:if test="<%= (message == null) || !message.isApproved() %>">
-			<aui:button name="saveDraftButton" onClick='<%= renderResponse.getNamespace() + "saveMessage(true);" %>' type="button" value='<%= ((message != null) && message.isPending()) ? "save" : "save-draft" %>' />
-		</c:if>
+
+		<%
+		String saveButtonLabel = "save";
+		String publishButtonLabel = "publish";
+
+		if ((message == null) || message.isDraft() || message.isApproved()) {
+			saveButtonLabel = "save-as-draft";
+		}
+
+		if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, MBMessage.class.getName())) {
+			publishButtonLabel = "submit-for-publication";
+		}
+		%>
 
 		<c:if test="<%= (message != null) && message.isApproved() && WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(message.getCompanyId(), message.getGroupId(), MBMessage.class.getName()) %>">
 			<div class="portlet-msg-info">
@@ -350,7 +360,9 @@ if (Validator.isNull(redirect)) {
 			</div>
 		</c:if>
 
-		<aui:button disabled="<%= pending %>" name="saveButton" type="submit" value="publish" />
+		<aui:button name="saveDraftButton" onClick='<%= renderResponse.getNamespace() + "saveMessage(true);" %>' type="button" value="<%= saveButtonLabel %>" />
+
+		<aui:button disabled="<%= pending %>" name="saveButton" type="submit" value="<%= publishButtonLabel %>" />
 
 		<c:if test="<%= MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_FILE) %>">
 

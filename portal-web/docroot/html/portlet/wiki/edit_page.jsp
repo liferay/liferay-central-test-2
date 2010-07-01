@@ -346,9 +346,11 @@ if (Validator.isNull(redirect)) {
 				</c:if>
 
 				<%
+				boolean approved = false;
 				boolean pending = false;
 
 				if (wikiPage != null) {
+					approved = wikiPage.isApproved();
 					pending = wikiPage.isPending();
 				}
 				%>
@@ -359,10 +361,30 @@ if (Validator.isNull(redirect)) {
 					</div>
 				</c:if>
 
-				<aui:button-row>
-					<aui:button type="submit" />
+				<c:if test="<%= approved %>">
+					<div class="portlet-msg-info">
+						<liferay-ui:message key="a-new-version-will-be-created-automatically-if-this-content-is-modified" />
+					</div>
+				</c:if>
 
-					<aui:button disabled="<%= pending %>" name="publishButton" onClick='<%= renderResponse.getNamespace() + "publishPage();" %>' type="button" value="publish" />
+				<aui:button-row>
+
+					<%
+					String saveButtonLabel = "save";
+					String publishButtonLabel = "publish";
+
+					if ((wikiPage == null) || wikiPage.isDraft() || wikiPage.isApproved()) {
+						saveButtonLabel = "save-as-draft";
+					}
+
+					if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, WikiPage.class.getName())) {
+						publishButtonLabel = "submit-for-publication";
+					}
+					%>
+
+					<aui:button type="submit" value="<%= saveButtonLabel %>" />
+
+					<aui:button disabled="<%= pending %>" name="publishButton" onClick='<%= renderResponse.getNamespace() + "publishPage();" %>' type="button" value="<%= publishButtonLabel %>" />
 
 					<aui:button name="previewButton" onClick='<%= renderResponse.getNamespace() + "previewPage();" %>' type="button" value="preview" />
 

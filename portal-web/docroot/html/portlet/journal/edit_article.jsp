@@ -571,9 +571,11 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			<br />
 
 			<%
+			boolean approved = false;
 			boolean pending = false;
 
 			if (article != null) {
+				approved = article.isApproved();
 				pending = article.isPending();
 			}
 			%>
@@ -581,6 +583,12 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			<c:if test="<%= pending %>">
 				<div class="portlet-msg-info">
 					<liferay-ui:message key="there-is-a-publication-workflow-in-process" />
+				</div>
+			</c:if>
+
+			<c:if test="<%= approved %>">
+				<div class="portlet-msg-info">
+					<liferay-ui:message key="a-new-version-will-be-created-automatically-if-this-content-is-modified" />
 				</div>
 			</c:if>
 
@@ -595,12 +603,23 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				else {
 					hasSavePermission = JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ARTICLE);
 				}
+
+				String saveButtonLabel = "save";
+				String publishButtonLabel = "publish";
+
+				if ((article == null) || article.isDraft() || article.isApproved()) {
+					saveButtonLabel = "save-as-draft";
+				}
+
+				if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, JournalArticle.class.getName())) {
+					publishButtonLabel = "submit-for-publication";
+				}
 				%>
 
 				<c:if test="<%= hasSavePermission %>">
-					<aui:button name="saveArticleBtn" value="save" />
+					<aui:button name="saveArticleBtn" value="<%= saveButtonLabel %>" />
 
-					<aui:button disabled="<%= pending %>" name="publishBtn" value="publish" />
+					<aui:button disabled="<%= pending %>" name="publishBtn" value="<%= publishButtonLabel %>" />
 				</c:if>
 
 				<c:if test="<%= Validator.isNotNull(structureId) %>">
