@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.memory.FinalizeAction;
-import com.liferay.portal.kernel.memory.FinalizeService;
+import com.liferay.portal.kernel.memory.FinalizeManager;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
@@ -283,9 +283,8 @@ public class ClusterExecutorImpl
 
 		String uuid = clusterRequest.getUuid();
 
-		Reference<FutureClusterResponses> reference =
-			FinalizeService.register(futureClusterResponses,
-			new RemoveResultKeyFinalizeAction(uuid));
+		Reference<FutureClusterResponses> reference = FinalizeManager.register(
+			futureClusterResponses, new RemoveResultKeyFinalizeAction(uuid));
 
 		if (!clusterRequest.isFireAndForget()) {
 			_executionResultMap.put(uuid, reference);
@@ -393,8 +392,9 @@ public class ClusterExecutorImpl
 	}
 
 	protected FutureClusterResponses getExecutionResults(String uuid) {
-		Reference<FutureClusterResponses> reference =
-			_executionResultMap.get(uuid);
+		Reference<FutureClusterResponses> reference = _executionResultMap.get(
+			uuid);
+
 		if (reference != null) {
 			return reference.get();
 		}
@@ -641,20 +641,6 @@ public class ClusterExecutorImpl
 		return clusterNodeResponse;
 	}
 
-	private class RemoveResultKeyFinalizeAction implements FinalizeAction {
-
-		public RemoveResultKeyFinalizeAction(String uuid) {
-			_uuid = uuid;
-		}
-
-		public void doFinalize() {
-			_executionResultMap.remove(_uuid);
-		}
-
-		private String _uuid;
-
-	}
-
 	private static final String _DEFAULT_CLUSTER_NAME =
 		"LIFERAY-CONTROL-CHANNEL";
 
@@ -674,5 +660,19 @@ public class ClusterExecutorImpl
 	private final ReentrantReadWriteLock _readWriteLock;
 	private boolean _shortcutLocalMethod;
 	private final Lock _writeLock;
+
+	private class RemoveResultKeyFinalizeAction implements FinalizeAction {
+
+		public RemoveResultKeyFinalizeAction(String uuid) {
+			_uuid = uuid;
+		}
+
+		public void finalize() {
+			_executionResultMap.remove(_uuid);
+		}
+
+		private String _uuid;
+
+	}
 
 }
