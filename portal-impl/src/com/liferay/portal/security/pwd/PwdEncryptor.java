@@ -65,65 +65,68 @@ public class PwdEncryptor {
 		"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789./"
 			.toCharArray();
 
-	public static String encrypt(String clearTextPwd)
+	public static String encrypt(String clearTextPassword)
 		throws PwdEncryptorException {
 
-		return encrypt(PASSWORDS_ENCRYPTION_ALGORITHM, clearTextPwd, null);
-	}
-
-	public static String encrypt(String clearTextPwd, String currentEncPwd)
-		throws PwdEncryptorException {
-
-		return encrypt(
-			PASSWORDS_ENCRYPTION_ALGORITHM, clearTextPwd, currentEncPwd);
+		return encrypt(PASSWORDS_ENCRYPTION_ALGORITHM, clearTextPassword, null);
 	}
 
 	public static String encrypt(
-			String algorithm, String clearTextPwd, String currentEncPwd)
+			String clearTextPassword, String currentEncryptedPassword)
+		throws PwdEncryptorException {
+
+		return encrypt(
+			PASSWORDS_ENCRYPTION_ALGORITHM, clearTextPassword,
+			currentEncryptedPassword);
+	}
+
+	public static String encrypt(
+			String algorithm, String clearTextPassword,
+			String currentEncryptedPassword)
 		throws PwdEncryptorException {
 
 		if (algorithm.equals(TYPE_CRYPT)) {
-			byte[] saltBytes = _getSaltFromCrypt(currentEncPwd);
+			byte[] saltBytes = _getSaltFromCrypt(currentEncryptedPassword);
 
-			return encodePassword(algorithm, clearTextPwd, saltBytes);
+			return encodePassword(algorithm, clearTextPassword, saltBytes);
 		}
 		else if (algorithm.equals(TYPE_NONE)) {
-			return clearTextPwd;
+			return clearTextPassword;
 		}
 		else if (algorithm.equals(TYPE_SSHA)) {
-			byte[] saltBytes = _getSaltFromSSHA(currentEncPwd);
+			byte[] saltBytes = _getSaltFromSSHA(currentEncryptedPassword);
 
-			return encodePassword(algorithm, clearTextPwd, saltBytes);
+			return encodePassword(algorithm, clearTextPassword, saltBytes);
 		}
 		else {
-			return encodePassword(algorithm, clearTextPwd, null);
+			return encodePassword(algorithm, clearTextPassword, null);
 		}
 	}
 
 	protected static String encodePassword(
-			String algorithm, String clearTextPwd, byte[] saltBytes)
+			String algorithm, String clearTextPassword, byte[] saltBytes)
 		throws PwdEncryptorException {
 
 		try {
 			if (algorithm.equals(TYPE_CRYPT)) {
 				return Crypt.crypt(
-					saltBytes, clearTextPwd.getBytes(Digester.ENCODING));
+					saltBytes, clearTextPassword.getBytes(Digester.ENCODING));
 			}
 			else if (algorithm.equals(TYPE_SSHA)) {
-				byte[] clearTextPwdBytes =
-					clearTextPwd.getBytes(Digester.ENCODING);
+				byte[] clearTextPasswordBytes =
+					clearTextPassword.getBytes(Digester.ENCODING);
 
 				// Create a byte array of salt bytes appeneded to password bytes
 
 				byte[] pwdPlusSalt =
-					new byte[clearTextPwdBytes.length + saltBytes.length];
+					new byte[clearTextPasswordBytes.length + saltBytes.length];
 
 				System.arraycopy(
-					clearTextPwdBytes, 0, pwdPlusSalt, 0,
-					clearTextPwdBytes.length);
+					clearTextPasswordBytes, 0, pwdPlusSalt, 0,
+					clearTextPasswordBytes.length);
 
 				System.arraycopy(
-					saltBytes, 0, pwdPlusSalt, clearTextPwdBytes.length,
+					saltBytes, 0, pwdPlusSalt, clearTextPasswordBytes.length,
 					saltBytes.length);
 
 				// Digest byte array
@@ -150,7 +153,7 @@ public class PwdEncryptor {
 				return Base64.encode(digestPlusSalt);
 			}
 			else {
-				return DigesterUtil.digest(algorithm, clearTextPwd);
+				return DigesterUtil.digest(algorithm, clearTextPassword);
 			}
 		}
 		catch (NoSuchAlgorithmException nsae) {
