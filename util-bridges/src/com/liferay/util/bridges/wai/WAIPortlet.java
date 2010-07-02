@@ -17,22 +17,22 @@ package com.liferay.util.bridges.wai;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortlet;
-import com.liferay.portal.kernel.servlet.PortletServlet;
+import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.portlet.PortletContext;
 import javax.portlet.PortletException;
+import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 /**
  * <a href="WAIPortlet.java.html"><b><i>View Source</i></b></a>
- *
+ * 
  * @author Jorge Ferrer
  * @author Connor McKay
  */
@@ -42,34 +42,32 @@ public class WAIPortlet extends LiferayPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws PortletException {
 
-		HttpServletRequest request =
-			(HttpServletRequest)renderRequest.getAttribute(
-				PortletServlet.PORTLET_SERVLET_REQUEST);
-		HttpServletResponse response =
-			(HttpServletResponse)renderRequest.getAttribute(
-				PortletServlet.PORTLET_SERVLET_RESPONSE);
+		Map<String, String[]> params = new HashMap<String, String[]>(
+			renderRequest.getParameterMap());
 
-		forward(request, response, _JSP_IFRAME);
-	}
+		String appURL = ParamUtil.getString(
+			renderRequest, _APP_URL, renderRequest.getContextPath());
 
-	protected void forward(
-			HttpServletRequest request, HttpServletResponse response,
-			String path)
-		throws PortletException {
+		params.remove(_APP_URL);
 
-		RequestDispatcher requestDispatcher =
-			request.getRequestDispatcher(path);
+		appURL = appURL.concat(HttpUtil.parameterMapToString(params));
+
+		renderRequest.setAttribute(_APP_URL, appURL);
+
+		PortletContext portletContext = getPortletContext();
+
+		PortletRequestDispatcher portletRequestDispatcher =
+			portletContext.getRequestDispatcher(_JSP_IFRAME);
 
 		try {
-			requestDispatcher.forward(request, response);
+			portletRequestDispatcher.include(renderRequest, renderResponse);
 		}
 		catch (IOException ioe) {
 			_log.error(ioe, ioe);
 		}
-		catch (ServletException se) {
-			throw new PortletException(se);
-		}
 	}
+
+	private static final String _APP_URL = "appURL";
 
 	private static final String _JSP_DIR = "/WEB-INF/jsp/liferay/wai";
 

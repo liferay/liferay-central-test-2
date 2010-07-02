@@ -28,7 +28,7 @@
 <%
 String defaultHeight = GetterUtil.getString(portletConfig.getInitParameter("wai.connector.iframe.height.default"), "500");
 
-String appURL = ParamUtil.getString(request, "appURL", request.getContextPath());
+String appURL = (String)request.getAttribute("appURL");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
