@@ -67,7 +67,7 @@ public class StringParser {
 				return null;
 			}
 
-			if (_stringEncoder != null) {
+			if (_stringEncoder != null && !stringParserFragment.isRaw()) {
 				value = _stringEncoder.encode(value);
 			}
 
