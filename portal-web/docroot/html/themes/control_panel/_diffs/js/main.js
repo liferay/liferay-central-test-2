@@ -11,7 +11,9 @@ AUI().use(
 		if (portletInformationEl && portletInformationIcon) {
 			var portletId = portletInformationEl.attr('data-portlet-id');
 			var visible = (portletInformationEl.attr('data-visible-panel') == "true");
+
 			var sessionData = {};
+
 			var sessionKey = 'show-portlet-description-' + portletId;
 
 			if (themeDisplay.isImpersonated()) {
