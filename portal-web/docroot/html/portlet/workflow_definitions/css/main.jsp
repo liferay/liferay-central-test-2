@@ -16,14 +16,80 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-<%@ page import="com.liferay.portal.kernel.util.StringUtil" %>
+.asset-column-details .asset-title .asset-actions img {
+	margin-left: 5px;
+}
 
-<liferay-util:buffer var="html">
-	<liferay-util:include page="/html/portlet/workflow_instances/css/main.jsp" />
-</liferay-util:buffer>
+.asset-column-details .asset-actions {
+	float: right;
+	font-size: 11px;
+	font-weight: normal;
+	margin-bottom: 3px;
+	margin-top: 0;
+}
 
-<%
-html = StringUtil.replace(html, "portlet-workflow-instances", "portlet-workflow-definitions");
-%>
+.asset-column-details .task-activity {
+	padding: 5px 5px 5px 25px;
+}
 
-<%= html %>
+.asset-column-details .task-activity-date {
+	font-weight: bold;
+}
+
+.asset-column-details .asset-assigned, .asset-column-details .asset-due-date, .asset-column-details .task-type-1, .asset-column-details .task-type-2, .asset-column-details .task-type-3, .asset-column-details .asset-date, .asset-column-details .asset-status {
+	background: url() no-repeat 0 50%;
+}
+
+.asset-column-details .asset-assigned {
+	background-image: url(<%= themeImagesPath %>/common/assign.png);
+	margin-right: 10px;
+	padding-left: 25px;
+	padding-right: 10px;
+}
+
+.asset-column-details h3.task-content-title {
+	margin-top: 0;
+	border-bottom: 1px solid #ddd;
+}
+
+.asset-column-details .task-panel-container .lfr-panel-content {
+	padding: 0.7em;
+}
+
+.asset-column-details .task-content-actions {
+	float: right;
+}
+
+.asset-column-details .asset-date {
+	background: url(<%= themeImagesPath %>/common/date.png) no-repeat 0 50%;
+}
+
+.asset-column-details .asset-due-date {
+	background-image: url(<%= themeImagesPath %>/common/time.png);
+	padding-left: 25px;
+}
+
+.asset-column-details .task-type-1 {
+	background-image: url(<%= themeImagesPath %>/common/assign.png);
+}
+
+.asset-column-details .task-type-2 {
+	background-image: url(<%= themeImagesPath %>/common/time.png);
+}
+
+.asset-column-details .task-type-3 {
+	background-image: url(<%= themeImagesPath %>/common/recent_changes.png);
+}
+
+.asset-column-details .asset-date {
+	margin-right: 10px;
+	overflow: auto;
+	padding-left: 25px;
+	padding-right: 10px;
+}
+
+.asset-column-details .asset-status {
+	background-image: url(<%= themeImagesPath %>/common/recent_changes.png);
+	padding-left: 25px;
+	padding-right: 10px;
+}

@@ -75,12 +75,12 @@ if (assetEntry != null) {
 />
 
 <aui:layout>
-	<aui:column columnWidth="<%= 75 %>" cssClass="task-column task-column-first" first="<%= true %>">
+	<aui:column columnWidth="<%= 75 %>" cssClass="asset-column asset-column-details" first="<%= true %>">
 		<liferay-ui:error exception="<%= WorkflowTaskDueDateException.class %>" message="please-enter-a-valid-due-date" />
 
 		<aui:layout>
 			<aui:column columnWidth="60">
-				<div class="task-author">
+				<div class="asset-assigned">
 					<aui:field-wrapper label="assigned-to">
 						<c:choose>
 							<c:when test="<%= workflowTask.isAssignedToSingleUser() %>">
@@ -122,7 +122,7 @@ if (assetEntry != null) {
 					</aui:field-wrapper>
 				</div>
 
-				<div class="task-status">
+				<div class="asset-status">
 					<aui:field-wrapper label="state">
 						<%= LanguageUtil.get(pageContext, WorkflowInstanceLinkLocalServiceUtil.getState(companyId, groupId, className, classPK)) %>
 					</aui:field-wrapper>
@@ -130,13 +130,13 @@ if (assetEntry != null) {
 			</aui:column>
 
 			<aui:column>
-				<div class="task-date">
+				<div class="asset-date">
 					<aui:field-wrapper label="create-date">
 						<%= dateFormatDateTime.format(workflowTask.getCreateDate()) %>
 					</aui:field-wrapper>
 				</div>
 
-				<div class="task-due-date">
+				<div class="asset-due-date">
 					<aui:field-wrapper label="due-date">
 						<%= (workflowTask.getDueDate() == null) ? LanguageUtil.get(pageContext, "never") : dateFormatDateTime.format(workflowTask.getDueDate()) %>
 
@@ -156,15 +156,14 @@ if (assetEntry != null) {
 		</aui:layout>
 
 		<c:if test="<%= Validator.isNotNull(workflowTask.getDescription()) %>">
-			<div class="task-field">
+			<div class="asset-field">
 				<aui:field-wrapper label="description">
 					<%= workflowTask.getDescription() %>
 				</aui:field-wrapper>
 			</div>
 		</c:if>
 
-		<liferay-ui:panel-container cssClass="task-panel-container" id="preview" extended="<%= true %>">
-
+		<liferay-ui:panel-container cssClass="task-panel-container" extended="<%= true %>">
 			<c:if test="<%= assetRenderer != null %>">
 				<liferay-ui:panel defaultState="open" title='<%= LanguageUtil.get(pageContext, "preview") %>'>
 					<div class="task-content-actions">
@@ -324,10 +323,10 @@ if (assetEntry != null) {
 		</liferay-ui:panel-container>
 	</aui:column>
 
-	<aui:column columnWidth="<%= 25 %>" cssClass="detail-column detail-column-last" last="<%= true %>">
-		<div class="task-download">
+	<aui:column columnWidth="<%= 25 %>" cssClass="asset-column asset-column-actions" last="<%= true %>">
+		<div class="asset-summary">
 			<liferay-ui:icon
-				cssClass="task-avatar"
+				cssClass="asset-avatar"
 				image='../file_system/large/task'
 				message="download"
 			/>

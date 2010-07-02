@@ -65,10 +65,10 @@ if (assetEntry != null) {
 />
 
 <aui:layout>
-	<aui:column columnWidth="<%= 75 %>" cssClass="instance-column instance-column-first" first="<%= true %>">
+	<aui:column columnWidth="<%= 75 %>" cssClass="asset-column asset-column-details" first="<%= true %>">
 		<aui:layout>
 			<aui:column columnWidth="60">
-				<div class="instance-status">
+				<div class="asset-status">
 					<aui:field-wrapper label="state">
 						<%= LanguageUtil.get(pageContext, workflowInstance.getState()) %>
 					</aui:field-wrapper>
@@ -76,7 +76,7 @@ if (assetEntry != null) {
 			</aui:column>
 
 			<aui:column>
-				<div class="instance-date">
+				<div class="asset-date">
 					<aui:field-wrapper label="end-date">
 						<%= (workflowInstance.getEndDate() == null) ? LanguageUtil.get(pageContext, "never") : dateFormatDateTime.format(workflowInstance.getEndDate()) %>
 					</aui:field-wrapper>
@@ -84,11 +84,11 @@ if (assetEntry != null) {
 			</aui:column>
 		</aui:layout>
 
-		<liferay-ui:panel-container cssClass="instance-panel-container" id="preview" extended="<%= true %>">
+		<liferay-ui:panel-container cssClass="task-panel-container" id="preview" extended="<%= true %>">
 
 			<c:if test="<%= assetRenderer != null %>">
 				<liferay-ui:panel defaultState="open" title='<%= LanguageUtil.get(pageContext, "preview") %>'>
-					<div class="instance-content-actions">
+					<div class="task-content-actions">
 						<liferay-ui:icon-list>
 							<c:if test="<%= assetRenderer.hasViewPermission(permissionChecker) %>">
 								<liferay-ui:icon image="view" method="get" url="<%= viewFullContentURL.toString() %>" />
@@ -115,7 +115,7 @@ if (assetEntry != null) {
 						</liferay-ui:icon-list>
 					</div>
 
-					<h3 class="instance-content-title">
+					<h3 class="task-content-title">
 						<img src="<%= workflowHandler.getIconPath((LiferayPortletRequest)renderRequest) %>" alt="" /> <%= workflowHandler.getTitle(classPK) %>
 					</h3>
 
@@ -246,8 +246,8 @@ if (assetEntry != null) {
 					}
 				%>
 
-					<div class="instance-activity instance-type-<%= workflowLog.getType() %>">
-						<div class="instance-activity-date">
+					<div class="task-activity task-type-<%= workflowLog.getType() %>">
+						<div class="task-activity-date">
 							<%= dateFormatDateTime.format(workflowLog.getCreateDate()) %>
 						</div>
 
@@ -327,15 +327,15 @@ if (assetEntry != null) {
 		</liferay-ui:panel-container>
 	</aui:column>
 
-	<aui:column columnWidth="<%= 25 %>" cssClass="detail-column detail-column-last" last="<%= true %>">
-		<div class="instance-download">
+	<aui:column columnWidth="<%= 25 %>" cssClass="asset-column asset-column-actions" last="<%= true %>">
+		<div class="asset-summary">
 			<liferay-ui:icon
-				cssClass="instance-avatar"
+				cssClass="asset-avatar"
 				image='../file_system/large/task'
 				message="download"
 			/>
 
-			<div class="instance-name">
+			<div class="asset-name">
 				<%= workflowInstance.getWorkflowDefinitionName() %>
 			</div>
 		</div>
