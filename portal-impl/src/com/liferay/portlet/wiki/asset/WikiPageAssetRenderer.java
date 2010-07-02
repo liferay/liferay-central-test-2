@@ -45,10 +45,10 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 
 	public long getClassPK() {
 		if (_page.getVersion() != WikiPageConstants.DEFAULT_VERSION) {
-			return _page.getResourcePrimKey();
+			return _page.getPageId();
 		}
 		else {
-			return _page.getPageId();
+			return _page.getResourcePrimKey();
 		}
 	}
 
