@@ -62,7 +62,7 @@ public class PanelTag extends BaseBodyTagSupport {
 		}
 
  		request.setAttribute("liferay-ui:panel:id", _id);
- 		request.setAttribute("liferay-ui:panel:parent-id", parentId);
+ 		request.setAttribute("liferay-ui:panel:parentId", parentId);
  		request.setAttribute("liferay-ui:panel:title", _title);
 		request.setAttribute(
 			"liferay-ui:panel:collapsible", String.valueOf(_collapsible));

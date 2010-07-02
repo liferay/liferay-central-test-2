@@ -22,7 +22,7 @@ String cssClass = (String)request.getAttribute("liferay-ui:panel:cssClass");
 String defaultState = (String)request.getAttribute("liferay-ui:panel:defaultState");
 boolean extended = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel:extended"));
 String id = (String)request.getAttribute("liferay-ui:panel:id");
-String parentId = (String)request.getAttribute("liferay-ui:panel:parent-id");
+String parentId = (String)request.getAttribute("liferay-ui:panel:parentId");
 boolean persistState = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel:persistState"));
 String title = (String)request.getAttribute("liferay-ui:panel:title");
 
