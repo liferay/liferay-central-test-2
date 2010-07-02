@@ -33,6 +33,7 @@ import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.login.util.LoginUtil;
@@ -179,7 +180,7 @@ public class UpdatePasswordAction extends Action {
 
 			LoginUtil.login(request, response, login, password1, false, null);
 		}
-		else {
+		else if (PropsValues.SESSION_STORE_PASSWORD) {
 			HttpSession session = request.getSession();
 
 			session.setAttribute(WebKeys.USER_PASSWORD, password1);

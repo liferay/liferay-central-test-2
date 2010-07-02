@@ -49,6 +49,10 @@ public class IFrameUtil {
 
 		if (Validator.isNull(password) || password.equals("@password@")) {
 			password = PortalUtil.getUserPassword(portletRequest);
+
+			if (password == null) {
+				password = StringPool.BLANK;
+			}
 		}
 
 		return password;

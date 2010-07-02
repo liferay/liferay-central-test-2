@@ -17,7 +17,10 @@ package com.liferay.portlet.myaccount.action;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.pwd.PwdAuthenticator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.util.servlet.DynamicServletRequest;
@@ -81,9 +84,27 @@ public class EditUserAction
 			String requestPassword = ParamUtil.getString(
 				actionRequest, "password0");
 
-			String sessionPassword = PortalUtil.getUserPassword(actionRequest);
+			Company company = PortalUtil.getCompany(actionRequest);
+			String authType = company.getAuthType();
 
-			if (!requestPassword.equals(sessionPassword)) {
+			User user = PortalUtil.getSelectedUser(actionRequest);
+
+			String login = null;
+
+			if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
+				login = user.getEmailAddress();
+			}
+			if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
+				login = String.valueOf(user.getUserId());
+			}
+			if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
+				login = user.getScreenName();
+			}
+
+			boolean validPassword = PwdAuthenticator.authenticate(
+				login, requestPassword, user.getPassword()); 
+
+			if (!validPassword) {
 				throw new UserPasswordException(
 					UserPasswordException.PASSWORD_INVALID);
 			}

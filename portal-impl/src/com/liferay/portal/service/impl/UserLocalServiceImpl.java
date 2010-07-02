@@ -57,7 +57,6 @@ import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -97,6 +96,7 @@ import com.liferay.portal.security.auth.ScreenNameValidator;
 import com.liferay.portal.security.auth.ScreenNameValidatorFactory;
 import com.liferay.portal.security.ldap.LDAPSettingsUtil;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
+import com.liferay.portal.security.pwd.PwdAuthenticator;
 import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.security.pwd.PwdToolkitUtil;
 import com.liferay.portal.service.ServiceContext;
@@ -104,7 +104,6 @@ import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.base.UserLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 import com.liferay.portlet.imagegallery.ImageSizeException;
@@ -116,10 +115,6 @@ import java.awt.image.RenderedImage;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -2513,40 +2508,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		if (authResult == Authenticator.SUCCESS) {
 			if (PropsValues.AUTH_PIPELINE_ENABLE_LIFERAY_CHECK) {
-				String encPassword = PwdEncryptor.encrypt(
-					password, user.getPassword());
 
-				if (user.getPassword().equals(encPassword)) {
+				boolean authenticated = PwdAuthenticator.authenticate(
+					login, password, user.getPassword());
+
+				if (authenticated) {
 					authResult = Authenticator.SUCCESS;
-				}
-				else if (GetterUtil.getBoolean(PropsUtil.get(
-							PropsKeys.AUTH_MAC_ALLOW))) {
-
-					try {
-						MessageDigest digester = MessageDigest.getInstance(
-							PropsUtil.get(PropsKeys.AUTH_MAC_ALGORITHM));
-
-						digester.update(login.getBytes("UTF8"));
-
-						String shardKey =
-							PropsUtil.get(PropsKeys.AUTH_MAC_SHARED_KEY);
-
-						encPassword = Base64.encode(
-							digester.digest(shardKey.getBytes("UTF8")));
-
-						if (password.equals(encPassword)) {
-							authResult = Authenticator.SUCCESS;
-						}
-						else {
-							authResult = Authenticator.FAILURE;
-						}
-					}
-					catch (NoSuchAlgorithmException nsae) {
-						throw new SystemException(nsae);
-					}
-					catch (UnsupportedEncodingException uee) {
-						throw new SystemException(uee);
-					}
 				}
 				else {
 					authResult = Authenticator.FAILURE;
@@ -2924,7 +2891,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// test@test.com -> test@liferay.com
 
-		if (!user.hasCompanyMx() && user.hasCompanyMx(emailAddress)) {
+		if (!user.hasCompanyMx() && user.hasCompanyMx(emailAddress) &&
+			Validator.isNotNull(password)) {
 			mailService.addUser(
 				user.getCompanyId(), userId, password, firstName, middleName,
 				lastName, emailAddress);

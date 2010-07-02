@@ -134,7 +134,9 @@ public class AutoLoginFilter extends BasePortalFilter {
 					session.setAttribute(
 						"j_password", PwdEncryptor.encrypt(jPassword));
 
-					session.setAttribute(WebKeys.USER_PASSWORD, jPassword);
+					if (PropsValues.SESSION_STORE_PASSWORD) {
+						session.setAttribute(WebKeys.USER_PASSWORD, jPassword);
+					}
 				}
 
 				if (PropsValues.PORTAL_JAAS_ENABLE) {

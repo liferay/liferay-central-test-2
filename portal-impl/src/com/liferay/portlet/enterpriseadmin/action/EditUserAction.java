@@ -66,6 +66,7 @@ import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.InvokerPortletImpl;
 import com.liferay.portlet.admin.util.AdminUtil;
@@ -614,7 +615,9 @@ public class EditUserAction extends PortletAction {
 
 			// Password
 
-			if (Validator.isNotNull(newPassword1)) {
+			if (Validator.isNotNull(newPassword1) &&
+				(PropsValues.SESSION_STORE_PASSWORD)) {
+
 				portletSession.setAttribute(
 					WebKeys.USER_PASSWORD, newPassword1,
 					PortletSession.APPLICATION_SCOPE);

@@ -49,6 +49,10 @@ public class AdminUtil {
 			password = StringPool.BLANK;
 		}
 
+		if (password == null) {
+			password = StringPool.BLANK;
+		}
+
 		return password;
 	}
 

@@ -229,7 +229,9 @@ public class LoginUtil {
 			session.setAttribute("j_password", user.getPassword());
 			session.setAttribute("j_remoteuser", userIdString);
 
-			session.setAttribute(WebKeys.USER_PASSWORD, password);
+			if ((PropsValues.SESSION_STORE_PASSWORD)) {
+				session.setAttribute(WebKeys.USER_PASSWORD, password);
+			}
 
 			Cookie companyIdCookie = new Cookie(
 				CookieKeys.COMPANY_ID, String.valueOf(company.getCompanyId()));

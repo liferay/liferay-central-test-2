@@ -1004,6 +1004,8 @@ public class PropsValues {
 
 	public static final String[] SHARED_SESSION_ATTRIBUTES_EXCLUSIONS = PropsUtil.getArray(PropsKeys.SESSION_SHARED_ATTRIBUTES_EXCLUSIONS);
 
+	public static final boolean SESSION_STORE_PASSWORD = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.SESSION_STORE_PASSWORD));
+
 	public static final boolean SHOPPING_ORDER_COMMENTS_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.SHOPPING_ORDER_COMMENTS_ENABLED));
 
 	public static final boolean SITEMINDER_AUTH_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.SITEMINDER_AUTH_ENABLED));
