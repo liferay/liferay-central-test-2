@@ -48,7 +48,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 	public DLFileEntry addFileEntry(
 			long groupId, long folderId, String name, String title,
-			String description, String changelog, String extraSettings,
+			String description, String changeLog, String extraSettings,
 			byte[] bytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -56,13 +56,13 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_DOCUMENT);
 
 		return dlFileEntryLocalService.addFileEntry(
-			getUserId(), groupId, folderId, name, title, description,
-			changelog, extraSettings, bytes, serviceContext);
+			getUserId(), groupId, folderId, name, title, description, changeLog,
+			extraSettings, bytes, serviceContext);
 	}
 
 	public DLFileEntry addFileEntry(
 			long groupId, long folderId, String name, String title,
-			String description, String changelog, String extraSettings,
+			String description, String changeLog, String extraSettings,
 			File file, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -70,8 +70,8 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_DOCUMENT);
 
 		return dlFileEntryLocalService.addFileEntry(
-			getUserId(), groupId, folderId, name, title, description,
-			changelog, extraSettings, file, serviceContext);
+			getUserId(), groupId, folderId, name, title, description, changeLog,
+			extraSettings, file, serviceContext);
 	}
 
 	public void deleteFileEntry(long groupId, long folderId, String name)
@@ -407,7 +407,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 	public DLFileEntry updateFileEntry(
 			long groupId, long folderId, String name, String sourceFileName,
-			String title, String description, String changelog,
+			String title, String description, String changeLog,
 			boolean majorVersion, String extraSettings, byte[] bytes,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -429,8 +429,8 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		try {
 			fileEntry = dlFileEntryLocalService.updateFileEntry(
 				getUserId(), groupId, folderId, name, sourceFileName, title,
-				description, changelog, majorVersion, extraSettings,
-				bytes, serviceContext);
+				description, changeLog, majorVersion, extraSettings, bytes,
+				serviceContext);
 		}
 		finally {
 			if (!hasLock) {
@@ -446,7 +446,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 	public DLFileEntry updateFileEntry(
 			long groupId, long folderId, String name, String sourceFileName,
-			String title, String description, String changelog,
+			String title, String description, String changeLog,
 			boolean majorVersion, String extraSettings, File file,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -468,8 +468,8 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		try {
 			fileEntry = dlFileEntryLocalService.updateFileEntry(
 				getUserId(), groupId, folderId, name, sourceFileName, title,
-				description, changelog, majorVersion, extraSettings,
-				file, serviceContext);
+				description, changeLog, majorVersion, extraSettings, file,
+				serviceContext);
 		}
 		finally {
 			if (!hasLock) {

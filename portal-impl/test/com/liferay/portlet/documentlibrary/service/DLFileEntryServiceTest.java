@@ -123,7 +123,7 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 
 		String fileName = "Title.txt";
 		String description = StringPool.BLANK;
-		String changelog = StringPool.BLANK;
+		String changeLog = StringPool.BLANK;
 		String extraSettings = StringPool.BLANK;
 
 		String content = "Content: Enterprise. Open Source. For Life.";
@@ -136,7 +136,7 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 		serviceContext.setAddGuestPermissions(true);
 
 		_fileEntry = DLFileEntryServiceUtil.addFileEntry(
-			groupId, folderId, fileName, fileName, description, changelog,
+			groupId, folderId, fileName, fileName, description, changeLog,
 			extraSettings, bytes, serviceContext);
 	}
 

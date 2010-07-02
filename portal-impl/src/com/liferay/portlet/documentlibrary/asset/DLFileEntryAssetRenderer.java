@@ -43,18 +43,22 @@ import javax.portlet.RenderResponse;
  */
 public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 
-	public DLFileEntryAssetRenderer(DLFileEntry entry, DLFileVersion version) {
-		_entry = entry;
-		_version = version;
+	public DLFileEntryAssetRenderer(
+		DLFileEntry fileEntry, DLFileVersion fileVersion) {
+
+		_fileEntry = fileEntry;
+		_fileVersion = fileVersion;
 	}
 
 	public long getClassPK() {
-		if (!_version.isApproved() &&
-			(_version.getVersion() != DLFileEntryConstants.DEFAULT_VERSION)) {
-			return _version.getFileVersionId();
+		if (!_fileVersion.isApproved() &&
+			(_fileVersion.getVersion() !=
+				DLFileEntryConstants.DEFAULT_VERSION)) {
+
+			return _fileVersion.getFileVersionId();
 		}
 		else {
-			return _entry.getFileEntryId();
+			return _fileEntry.getFileEntryId();
 		}
 	}
 
@@ -68,15 +72,15 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public long getGroupId() {
-		return _entry.getGroupId();
+		return _fileEntry.getGroupId();
 	}
 
 	public String getSummary() {
-		return HtmlUtil.stripHtml(_entry.getDescription());
+		return HtmlUtil.stripHtml(_fileEntry.getDescription());
 	}
 
 	public String getTitle() {
-		return _entry.getTitle();
+		return _fileEntry.getTitle();
 	}
 
 	public PortletURL getURLEdit(
@@ -89,9 +93,9 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 		editPortletURL.setParameter(
 			"struts_action", "/document_library/edit_file_entry");
 		editPortletURL.setParameter(
-			"folderId", String.valueOf(_entry.getFolderId()));
+			"folderId", String.valueOf(_fileEntry.getFolderId()));
 		editPortletURL.setParameter(
-			"name", String.valueOf(_entry.getName()));
+			"name", String.valueOf(_fileEntry.getName()));
 
 		return editPortletURL;
 	}
@@ -105,11 +109,11 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 		exportPortletURL.setParameter(
 			"struts_action", "/asset_publisher/get_file");
 		exportPortletURL.setParameter(
-			"groupId", String.valueOf(_entry.getGroupId()));
+			"groupId", String.valueOf(_fileEntry.getGroupId()));
 		exportPortletURL.setParameter(
-			"folderId", String.valueOf(_entry.getFolderId()));
+			"folderId", String.valueOf(_fileEntry.getFolderId()));
 		exportPortletURL.setParameter(
-			"title", String.valueOf(_entry.getTitle()));
+			"title", String.valueOf(_fileEntry.getTitle()));
 
 		return exportPortletURL;
 	}
@@ -126,29 +130,29 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 		return themeDisplay.getPathMain() +
 			"/document_library/find_file_entry?p_l_id=" +
 				themeDisplay.getPlid() + "&fileEntryId=" +
-					_entry.getFileEntryId();
+					_fileEntry.getFileEntryId();
 	}
 
 	public long getUserId() {
-		return _entry.getUserId();
+		return _fileEntry.getUserId();
 	}
 
 	public String getUuid() {
-		return _entry.getUuid();
+		return _fileEntry.getUuid();
 	}
 
 	public boolean hasEditPermission(PermissionChecker permissionChecker)
 		throws PortalException, SystemException {
 
 		return DLFileEntryPermission.contains(
-			permissionChecker, _entry, ActionKeys.UPDATE);
+			permissionChecker, _fileEntry, ActionKeys.UPDATE);
 	}
 
 	public boolean hasViewPermission(PermissionChecker permissionChecker)
 		throws PortalException, SystemException {
 
 		return DLFileEntryPermission.contains(
-			permissionChecker, _entry, ActionKeys.VIEW);
+			permissionChecker, _fileEntry, ActionKeys.VIEW);
 	}
 
 	public boolean isConvertible() {
@@ -168,9 +172,9 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 			template.equals(TEMPLATE_FULL_CONTENT)) {
 
 			renderRequest.setAttribute(
-				WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY, _entry);
+				WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY, _fileEntry);
 			renderRequest.setAttribute(
-				WebKeys.DOCUMENT_LIBRARY_FILE_VERSION, _version);
+				WebKeys.DOCUMENT_LIBRARY_FILE_VERSION, _fileVersion);
 
 			return "/html/portlet/document_library/asset/" + template + ".jsp";
 		}
@@ -183,7 +187,7 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 		return themeDisplay.getPathThemeImages() + "/common/clip.png";
 	}
 
-	private DLFileEntry _entry;
-	private DLFileVersion _version;
+	private DLFileEntry _fileEntry;
+	private DLFileVersion _fileVersion;
 
 }

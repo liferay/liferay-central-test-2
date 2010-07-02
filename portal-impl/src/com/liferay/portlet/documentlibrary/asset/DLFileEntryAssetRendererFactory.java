@@ -50,24 +50,25 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 	public AssetRenderer getAssetRenderer(long classPK, int type)
 		throws PortalException, SystemException {
 
-		DLFileEntry entry = null;
-		DLFileVersion version = null;
+		DLFileEntry fileEntry = null;
+		DLFileVersion fileVersion = null;
 
 		try {
-			entry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
+			fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
+
 			if (type == TYPE_LATEST) {
-				version = entry.getLatestFileVersion();
+				fileVersion = fileEntry.getLatestFileVersion();
 			}
 			else {
-				version = entry.getFileVersion();
+				fileVersion = fileEntry.getFileVersion();
 			}
 		}
 		catch (NoSuchFileEntryException nsfee) {
-			version = DLFileVersionLocalServiceUtil.getFileVersion(classPK);
-			entry = version.getFileEntry();
+			fileVersion = DLFileVersionLocalServiceUtil.getFileVersion(classPK);
+			fileEntry = fileVersion.getFileEntry();
 		}
 
-		return new DLFileEntryAssetRenderer(entry, version);
+		return new DLFileEntryAssetRenderer(fileEntry, fileVersion);
 	}
 
 	public String getClassName() {

@@ -90,7 +90,7 @@ public class DLFileEntryLocalServiceImpl
 
 	public DLFileEntry addFileEntry(
 			long userId, long groupId, long folderId, String name, String title,
-			String description, String changelog, String extraSettings,
+			String description, String changeLog, String extraSettings,
 			byte[] bytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -102,12 +102,12 @@ public class DLFileEntryLocalServiceImpl
 
 		return addFileEntry(
 			userId, groupId, folderId, name, title, description,
-			changelog, extraSettings, is, bytes.length, serviceContext);
+			changeLog, extraSettings, is, bytes.length, serviceContext);
 	}
 
 	public DLFileEntry addFileEntry(
 			long userId, long groupId, long folderId, String name, String title,
-			String description, String changelog, String extraSettings,
+			String description, String changeLog, String extraSettings,
 			File file, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -121,7 +121,7 @@ public class DLFileEntryLocalServiceImpl
 
 			return addFileEntry(
 				userId, groupId, folderId, name, title, description,
-				changelog, extraSettings, is, file.length(), serviceContext);
+				changeLog, extraSettings, is, file.length(), serviceContext);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new FileSizeException();
@@ -130,7 +130,7 @@ public class DLFileEntryLocalServiceImpl
 
 	public DLFileEntry addFileEntry(
 			long userId, long groupId, long folderId, String name, String title,
-			String description, String changelog, String extraSettings,
+			String description, String changeLog, String extraSettings,
 			InputStream is, long size, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -170,10 +170,10 @@ public class DLFileEntryLocalServiceImpl
 		fileEntry.setExtension(extension);
 		fileEntry.setTitle(title);
 		fileEntry.setDescription(description);
+		fileEntry.setExtraSettings(extraSettings);
 		fileEntry.setVersion(DLFileEntryConstants.DEFAULT_VERSION);
 		fileEntry.setSize(size);
 		fileEntry.setReadCount(DLFileEntryConstants.DEFAULT_READ_COUNT);
-		fileEntry.setExtraSettings(extraSettings);
 
 		dlFileEntryPersistence.update(fileEntry, false);
 
@@ -196,7 +196,7 @@ public class DLFileEntryLocalServiceImpl
 
 		DLFileVersion fileVersion = addFileVersion(
 			user, fileEntry, serviceContext.getModifiedDate(now),
-			extension, title, description, extraSettings, null,
+			extension, title, description, null, extraSettings,
 			DLFileEntryConstants.DEFAULT_VERSION, size,
 			WorkflowConstants.STATUS_DRAFT, serviceContext);
 
@@ -293,7 +293,7 @@ public class DLFileEntryLocalServiceImpl
 	public DLFileEntry addOrOverwriteFileEntry(
 			long userId, long groupId, long folderId, String name,
 			String sourceName, String title, String description,
-			String changelog, String extraSettings, File file,
+			String changeLog, String extraSettings, File file,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -302,11 +302,11 @@ public class DLFileEntryLocalServiceImpl
 
 			return updateFileEntry(
 				userId, groupId, folderId, name, sourceName, title, description,
-				changelog, false, extraSettings, file, serviceContext);
+				changeLog, false, extraSettings, file, serviceContext);
 		}
 		catch (NoSuchFileEntryException nsfee) {
 			return addFileEntry(
-				userId, groupId, folderId, name, title, description, changelog,
+				userId, groupId, folderId, name, title, description, changeLog,
 				extraSettings, file, serviceContext);
 		}
 	}
@@ -709,10 +709,10 @@ public class DLFileEntryLocalServiceImpl
 		newFileEntry.setName(name);
 		newFileEntry.setTitle(fileEntry.getTitle());
 		newFileEntry.setDescription(fileEntry.getDescription());
+		newFileEntry.setExtraSettings(fileEntry.getExtraSettings());
 		newFileEntry.setVersion(fileEntry.getVersion());
 		newFileEntry.setSize(fileEntry.getSize());
 		newFileEntry.setReadCount(fileEntry.getReadCount());
-		newFileEntry.setExtraSettings(fileEntry.getExtraSettings());
 
 		dlFileEntryPersistence.update(newFileEntry, false);
 
@@ -896,8 +896,8 @@ public class DLFileEntryLocalServiceImpl
 	public DLFileEntry updateFileEntry(
 			long userId, long groupId, long folderId, String name,
 			String sourceFileName, String title, String description,
-			String changelog, boolean majorVersion,
-			String extraSettings, byte[] bytes, ServiceContext serviceContext)
+			String changeLog, boolean majorVersion, String extraSettings,
+			byte[] bytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		InputStream is = null;
@@ -910,14 +910,13 @@ public class DLFileEntryLocalServiceImpl
 
 		return updateFileEntry(
 			userId, groupId, folderId, name, sourceFileName, title, description,
-			changelog, majorVersion, extraSettings, is, size,
-			serviceContext);
+			changeLog, majorVersion, extraSettings, is, size, serviceContext);
 	}
 
 	public DLFileEntry updateFileEntry(
 			long userId, long groupId, long folderId, String name,
 			String sourceFileName, String title, String description,
-			String changelog, boolean majorVersion, String extraSettings,
+			String changeLog, boolean majorVersion, String extraSettings,
 			File file, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -932,7 +931,7 @@ public class DLFileEntryLocalServiceImpl
 
 			return updateFileEntry(
 				userId, groupId, folderId, name, sourceFileName, title,
-				description, changelog, majorVersion, extraSettings, is, size,
+				description, changeLog, majorVersion, extraSettings, is, size,
 				serviceContext);
 		}
 		catch (FileNotFoundException fnfe) {
@@ -943,9 +942,8 @@ public class DLFileEntryLocalServiceImpl
 	public DLFileEntry updateFileEntry(
 			long userId, long groupId, long folderId, String name,
 			String sourceFileName, String title, String description,
-			String changelog, boolean majorVersion, String extraSettings,
-			InputStream is, long size,
-			ServiceContext serviceContext)
+			String changeLog, boolean majorVersion, String extraSettings,
+			InputStream is, long size, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// File entry
@@ -996,16 +994,15 @@ public class DLFileEntryLocalServiceImpl
 				version = latestFileVersion.getVersion();
 
 				updateFileVersion(
-					user, latestFileVersion,
-					serviceContext.getModifiedDate(now), sourceFileName,
-					extension, title, description, extraSettings, changelog,
-					version, size, latestFileVersion.getStatus(),
-					serviceContext);
+					user, latestFileVersion, sourceFileName, extension, title,
+					description, changeLog, extraSettings, version, size,
+					latestFileVersion.getStatus(),
+					serviceContext.getModifiedDate(now), serviceContext);
 			}
 			else {
 				fileVersion = addFileVersion(
 					user, fileEntry, serviceContext.getModifiedDate(now),
-					extension, title, description, extraSettings, changelog,
+					extension, title, description, changeLog, extraSettings,
 					version, size, WorkflowConstants.STATUS_DRAFT,
 					serviceContext);
 			}
@@ -1017,7 +1014,7 @@ public class DLFileEntryLocalServiceImpl
 		catch (NoSuchFileVersionException nsfve) {
 			fileVersion = addFileVersion(
 				user, fileEntry, serviceContext.getModifiedDate(now),
-				extension, title, description, extraSettings, changelog,
+				extension, title, description, changeLog, extraSettings,
 				version, size, WorkflowConstants.STATUS_DRAFT, serviceContext);
 		}
 
@@ -1136,7 +1133,8 @@ public class DLFileEntryLocalServiceImpl
 
 				fileEntry.setTitle(latestFileVersion.getTitle());
 				fileEntry.setDescription(latestFileVersion.getDescription());
-				fileEntry.setExtraSettings(latestFileVersion.getExtraSettings());
+				fileEntry.setExtraSettings(
+					latestFileVersion.getExtraSettings());
 				fileEntry.setVersion(latestFileVersion.getVersion());
 				fileEntry.setVersionUserId(latestFileVersion.getUserId());
 				fileEntry.setVersionUserName(latestFileVersion.getUserName());
@@ -1244,10 +1242,10 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	protected DLFileVersion addFileVersion(
-		User user, DLFileEntry fileEntry, Date modifiedDate,
-		String extension, String title, String description,
-		String extraSettings, String changelog, String version, long size,
-		int status, ServiceContext serviceContext)
+			User user, DLFileEntry fileEntry, Date modifiedDate,
+			String extension, String title, String description,
+			String changeLog, String extraSettings, String version, long size,
+			int status, ServiceContext serviceContext)
 		throws SystemException {
 
 		long fileVersionId = counterLocalService.increment();
@@ -1274,8 +1272,8 @@ public class DLFileEntryLocalServiceImpl
 		fileVersion.setExtension(extension);
 		fileVersion.setTitle(title);
 		fileVersion.setDescription(description);
+		fileVersion.setChangeLog(changeLog);
 		fileVersion.setExtraSettings(extraSettings);
-		fileVersion.setChangelog(changelog);
 		fileVersion.setVersion(version);
 		fileVersion.setSize(size);
 		fileVersion.setStatus(status);
@@ -1332,11 +1330,10 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	protected void updateFileVersion(
-			User user, DLFileVersion fileVersion, Date statusDate,
-			String sourceFileName, String extension, String title,
-			String description, String extraSettings, String changelog,
-			String version, long size, int status,
-			ServiceContext serviceContext)
+			User user, DLFileVersion fileVersion, String sourceFileName,
+			String extension, String title, String description,
+			String changeLog, String extraSettings, String version, long size,
+			int status, Date statusDate, ServiceContext serviceContext)
 		throws SystemException {
 
 		if (Validator.isNotNull(sourceFileName)) {
@@ -1345,8 +1342,8 @@ public class DLFileEntryLocalServiceImpl
 
 		fileVersion.setTitle(title);
 		fileVersion.setDescription(description);
+		fileVersion.setChangeLog(changeLog);
 		fileVersion.setExtraSettings(extraSettings);
-		fileVersion.setChangelog(changelog);
 		fileVersion.setVersion(version);
 		fileVersion.setSize(size);
 		fileVersion.setStatus(status);

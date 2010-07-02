@@ -31,4 +31,6 @@ Image smallImage = ImageLocalServiceUtil.getImage(image.getSmallImageId());
 	</aui:a>
 </c:if>
 
-<p class="asset-description"><%= StringUtil.shorten(image.getDescription(), abstractLength) %></p>
+<p class="asset-description">
+	<%= StringUtil.shorten(image.getDescription(), abstractLength) %>
+</p>

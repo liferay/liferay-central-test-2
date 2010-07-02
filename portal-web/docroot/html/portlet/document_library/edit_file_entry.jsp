@@ -1,5 +1,3 @@
-<%@ page
-		import="com.liferay.portlet.documentlibrary.model.DLFileEntryConstants" %>
 <%
 /**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
@@ -47,25 +45,31 @@ if (PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.O
 }
 
 DLFolder folder = null;
+
+if (fileEntry != null) {
+	folder = fileEntry.getFolder();
+}
+
 DLFileVersion fileVersion = null;
+
+if (fileEntry != null) {
+	fileVersion = fileEntry.getLatestFileVersion();
+}
+
 long assetClassPK = 0;
+
+if ((fileVersion != null) && !fileVersion.isApproved() && (fileVersion.getVersion() != DLFileEntryConstants.DEFAULT_VERSION)) {
+	assetClassPK = fileVersion.getFileVersionId();
+}
+else {
+	assetClassPK = fileEntry.getFileEntryId();
+}
 
 Lock lock = null;
 Boolean isLocked = Boolean.FALSE;
 Boolean hasLock = Boolean.FALSE;
 
 if (fileEntry != null) {
-	folder = fileEntry.getFolder();
-
-	fileVersion = fileEntry.getLatestFileVersion();
-
-	if (!fileVersion.isApproved() && (fileVersion.getVersion() != DLFileEntryConstants.DEFAULT_VERSION)) {
-		assetClassPK = fileVersion.getFileVersionId();
-	}
-	else {
-		assetClassPK = fileEntry.getFileEntryId();
-	}
-
 	try {
 		lock = LockLocalServiceUtil.getLock(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getGroupId(), fileEntry.getFolderId(), fileEntry.getName()));
 
@@ -178,7 +182,7 @@ portletURL.setParameter("name", name);
 	<aui:model-context bean="<%= fileVersion %>" model="<%= DLFileVersion.class %>" />
 
 	<c:if test="<%= (fileVersion != null) && (!fileVersion.isNew()) %>">
-		<aui:workflow-status status="<%= fileVersion.getStatus() %>" version="<%= Double.parseDouble(fileVersion.getVersion()) %>" />
+		<aui:workflow-status status="<%= fileVersion.getStatus() %>" version="<%= fileVersion.getVersion() %>" />
 	</c:if>
 
 	<aui:fieldset>

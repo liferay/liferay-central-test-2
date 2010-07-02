@@ -42,6 +42,7 @@ if (PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.O
 }
 
 DLFolder folder = fileEntry.getFolder();
+DLFileVersion fileVersion = fileEntry.getFileVersion();
 
 Lock lock = null;
 Boolean isLocked = Boolean.FALSE;
@@ -151,42 +152,32 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	</c:choose>
 </c:if>
 
-<%
-DLFileVersion fileVersion = null;
-
-if (fileEntry != null) {
-	fileVersion = DLFileVersionLocalServiceUtil.getFileVersion(fileEntry.getGroupId(), fileEntry.getFolderId(), fileEntry.getName(), fileEntry.getVersion());
-}
-%>
-
 <aui:layout>
 	<aui:column columnWidth="<%= 75 %>" cssClass="lfr-asset-column lfr-asset-column-details" first="<%= true %>">
-		<c:if test="<%= fileVersion != null %>">
-			<aui:model-context bean="<%= fileVersion %>" model="<%= DLFileVersion.class %>" />
+		<aui:model-context bean="<%= fileVersion %>" model="<%= DLFileVersion.class %>" />
 
-			<aui:workflow-status status="<%= fileVersion.getStatus() %>" version="<%= Double.parseDouble(fileVersion.getVersion()) %>" />
+		<aui:workflow-status status="<%= fileVersion.getStatus() %>" version="<%= Double.parseDouble(fileVersion.getVersion()) %>" />
 
-			<div class="lfr-asset-metadata">
-				<div class="lfr-asset-icon lfr-asset-author">
-					<%= LanguageUtil.format(pageContext, "last-updated-by-x", HtmlUtil.escape(PortalUtil.getUserName(fileEntry.getUserId(), fileEntry.getUserName()))) %>
-				</div>
-
-				<div class="lfr-asset-icon lfr-asset-date">
-					<%= dateFormatDateTime.format(fileEntry.getModifiedDate()) %>
-				</div>
-
-				<c:if test="<%= PropsValues.DL_FILE_ENTRY_READ_COUNT_ENABLED %>">
-					<div class="lfr-asset-icon lfr-asset-downloads last">
-
-						<%
-						int readCount = fileEntry.getReadCount();
-						%>
-
-						<%= readCount %> <liferay-ui:message key='<%= (readCount == 1) ? "download" : "downloads" %>' />
-					</div>
-				</c:if>
+		<div class="lfr-asset-metadata">
+			<div class="lfr-asset-icon lfr-asset-author">
+				<%= LanguageUtil.format(pageContext, "last-updated-by-x", HtmlUtil.escape(PortalUtil.getUserName(fileEntry.getUserId(), fileEntry.getUserName()))) %>
 			</div>
-		</c:if>
+
+			<div class="lfr-asset-icon lfr-asset-date">
+				<%= dateFormatDateTime.format(fileEntry.getModifiedDate()) %>
+			</div>
+
+			<c:if test="<%= PropsValues.DL_FILE_ENTRY_READ_COUNT_ENABLED %>">
+				<div class="lfr-asset-icon lfr-asset-downloads last">
+
+					<%
+					int readCount = fileEntry.getReadCount();
+					%>
+
+					<%= readCount %> <liferay-ui:message key='<%= (readCount == 1) ? "download" : "downloads" %>' />
+				</div>
+			</c:if>
+		</div>
 
 		<div class="lfr-asset-categories">
 			<liferay-ui:asset-categories-summary

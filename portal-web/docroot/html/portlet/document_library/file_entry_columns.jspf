@@ -67,7 +67,9 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 				/>
 
 				<c:if test="<%= fileEntry.getFileVersion().isPending() %>">
-					<div class="workflow-status-pending">(<liferay-ui:message key="pending" />)</div>
+					<div class="workflow-status-pending">
+						(<liferay-ui:message key="pending" />)
+					</div>
 				</c:if>
 
 				<c:if test="<%= Validator.isNotNull(fileEntry.getDescription()) %>">

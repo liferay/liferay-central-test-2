@@ -275,8 +275,8 @@ public class EditFileEntryAction extends PortletAction {
 
 		String title = ParamUtil.getString(uploadRequest, "title");
 		String description = ParamUtil.getString(uploadRequest, "description");
-		String changelog = ParamUtil.getString(
-			uploadRequest, "changelog");
+		String changeLog = ParamUtil.getString(
+			uploadRequest, "changeLog");
 		boolean majorVersion = ParamUtil.getBoolean(
 			uploadRequest, "majorVersion");
 
@@ -301,7 +301,7 @@ public class EditFileEntryAction extends PortletAction {
 
 			DLFileEntry fileEntry = DLFileEntryServiceUtil.addFileEntry(
 				groupId, folderId, sourceFileName, title, description,
-				changelog, extraSettings, file, serviceContext);
+				changeLog, extraSettings, file, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, DLFileEntry.class.getName(),
@@ -313,7 +313,7 @@ public class EditFileEntryAction extends PortletAction {
 
 			DLFileEntryServiceUtil.updateFileEntry(
 				groupId, folderId, name, sourceFileName, title, description,
-				changelog, majorVersion, extraSettings, file,
+				changeLog, majorVersion, extraSettings, file,
 				serviceContext);
 		}
 

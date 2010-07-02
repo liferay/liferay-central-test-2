@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.documentlibrary.model.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -83,11 +85,18 @@ public class DLFileEntryImpl
 				_extraSettingsProperties.load(super.getExtraSettings());
 			}
 			catch (IOException ioe) {
-				_log.error(ioe);
+				_log.error(ioe, ioe);
 			}
 		}
 
 		return _extraSettingsProperties;
+	}
+
+	public DLFileVersion getFileVersion()
+		throws PortalException, SystemException {
+
+		return DLFileVersionLocalServiceUtil.getFileVersion(
+			getGroupId(), getFolderId(), getName(), getVersion());
 	}
 
 	public DLFolder getFolder() {
@@ -100,7 +109,7 @@ public class DLFileEntryImpl
 			catch (Exception e) {
 				folder = new DLFolderImpl();
 
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 		else {
@@ -114,28 +123,11 @@ public class DLFileEntryImpl
 		return DLUtil.getFileIcon(getExtension());
 	}
 
-	public DLFileVersion getFileVersion() {
-		try {
-			return DLFileVersionLocalServiceUtil.getFileVersion(
-				getGroupId(), getFolderId(), getName(), getVersion());
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
+	public DLFileVersion getLatestFileVersion()
+		throws PortalException, SystemException {
 
-		return null;
-	}
-
-	public DLFileVersion getLatestFileVersion() {
-		try {
-			return DLFileVersionLocalServiceUtil.getLatestFileVersion(
-				getGroupId(), getFolderId(), getName());
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
-
-		return null;
+		return DLFileVersionLocalServiceUtil.getLatestFileVersion(
+			getGroupId(), getFolderId(), getName());
 	}
 
 	public Lock getLock() {

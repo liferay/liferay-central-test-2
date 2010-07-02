@@ -85,7 +85,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			String name = fileName;
 			String title = fileName;
 			String description = StringPool.BLANK;
-			String changelog = StringPool.BLANK;
+			String changeLog = StringPool.BLANK;
 			String extraSettings = StringPool.BLANK;
 
 			ServiceContext serviceContext = new ServiceContext();
@@ -95,7 +95,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 
 			DLFileEntryServiceUtil.addFileEntry(
 				group.getGroupId(), folderId, name, title, description,
-				changelog, extraSettings, file, serviceContext);
+				changeLog, extraSettings, file, serviceContext);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);

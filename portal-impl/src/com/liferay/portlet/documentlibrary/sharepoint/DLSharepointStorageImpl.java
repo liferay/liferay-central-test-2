@@ -251,7 +251,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			long folderId = fileEntry.getFolderId();
 			String name = fileEntry.getName();
 			String description = fileEntry.getDescription();
-			String changelog = StringPool.BLANK;
+			String changeLog = StringPool.BLANK;
 			String extraSettings = fileEntry.getExtraSettings();
 
 			InputStream is = DLFileEntryLocalServiceUtil.getFileAsStream(
@@ -268,8 +268,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 
 			fileEntry = DLFileEntryServiceUtil.updateFileEntry(
 				groupId, folderId, name, newName, newName, description,
-				changelog, false, extraSettings, bytes,
-				serviceContext);
+				changeLog, false, extraSettings, bytes, serviceContext);
 
 			if (folderId != newParentFolderId) {
 				fileEntry = DLFileEntryServiceUtil.moveFileEntry(
@@ -310,7 +309,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		String name = getResourceName(documentPath);
 		String title = name;
 		String description = StringPool.BLANK;
-		String changelog = StringPool.BLANK;
+		String changeLog = StringPool.BLANK;
 		String extraSettings = StringPool.BLANK;
 
 		ServiceContext serviceContext = new ServiceContext();
@@ -332,8 +331,8 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 
 			DLFileEntryServiceUtil.updateFileEntry(
 				groupId, parentFolderId, name, title, title, description,
-				changelog, false, extraSettings,
-				sharepointRequest.getBytes(), serviceContext);
+				changeLog, false, extraSettings, sharepointRequest.getBytes(),
+				serviceContext);
 		}
 		catch (NoSuchFileEntryException nsfee) {
 			File file = FileUtil.createTempFile(FileUtil.getExtension(name));
@@ -341,8 +340,8 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			FileUtil.write(file, sharepointRequest.getBytes());
 
 			DLFileEntryServiceUtil.addFileEntry(
-				groupId, parentFolderId, name, title, description,
-				changelog, extraSettings, file, serviceContext);
+				groupId, parentFolderId, name, title, description, changeLog,
+				extraSettings, file, serviceContext);
 		}
 	}
 

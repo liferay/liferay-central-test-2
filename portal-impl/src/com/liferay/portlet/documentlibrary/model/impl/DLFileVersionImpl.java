@@ -14,8 +14,8 @@
 
 package com.liferay.portlet.documentlibrary.model.impl;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
@@ -43,23 +43,14 @@ public class DLFileVersionImpl
 		return _expandoBridge;
 	}
 
-	public DLFileEntry getFileEntry() {
-		try {
-			return DLFileEntryLocalServiceUtil.getFileEntry(
-				getGroupId(), getFolderId(), getName());
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
-
-		return null;
+	public DLFileEntry getFileEntry() throws PortalException, SystemException {
+		return DLFileEntryLocalServiceUtil.getFileEntry(
+			getGroupId(), getFolderId(), getName());
 	}
 
 	public String getIcon() {
 		return DLUtil.getFileIcon(getExtension());
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(DLFileVersionImpl.class);
 
 	private ExpandoBridge _expandoBridge;
 
