@@ -32,10 +32,17 @@ WorkflowHandler workflowHandler = WorkflowHandlerRegistryUtil.getWorkflowHandler
 
 AssetRenderer assetRenderer = workflowHandler.getAssetRenderer(classPK);
 AssetRendererFactory assetRendererFactory = workflowHandler.getAssetRendererFactory();
+
 AssetEntry assetEntry = null;
 
 if (assetRenderer != null) {
 	assetEntry = AssetEntryLocalServiceUtil.getEntry(assetRendererFactory.getClassName(), assetRenderer.getClassPK());
+}
+
+String headerTitle = LanguageUtil.get(pageContext, workflowInstance.getWorkflowDefinitionName());
+
+if (assetEntry != null) {
+	headerTitle = headerTitle.concat(StringPool.COLON + StringPool.SPACE + assetEntry.getTitle());
 }
 
 PortletURL editPortletURL = workflowHandler.getURLEdit(classPK, (LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
@@ -46,12 +53,8 @@ viewFullContentURL.setParameter("struts_action", "/workflow_tasks/view_content")
 viewFullContentURL.setParameter("redirect", currentURL);
 viewFullContentURL.setParameter("type", assetRendererFactory.getType());
 
-String headerTitle = LanguageUtil.get(pageContext, workflowInstance.getWorkflowDefinitionName());
-
 if (assetEntry != null) {
 	viewFullContentURL.setParameter("assetEntryId", String.valueOf(assetEntry.getEntryId()));
-
-	headerTitle = headerTitle.concat(StringPool.COLON + StringPool.SPACE + assetEntry.getTitle());
 }
 %>
 
@@ -61,7 +64,7 @@ if (assetEntry != null) {
 
 <liferay-ui:header
 	backURL="<%= backURL.toString() %>"
-	title='<%= headerTitle %>'
+	title="<%= headerTitle %>"
 />
 
 <aui:layout>
