@@ -26,7 +26,7 @@ String parentId = (String)request.getAttribute("liferay-ui:panel:parentId");
 boolean persistState = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel:persistState"));
 String title = (String)request.getAttribute("liferay-ui:panel:title");
 
-IntegerWrapper panelCount = (IntegerWrapper)request.getAttribute("liferay-ui:panel-container:panel-count-" + parentId);
+IntegerWrapper panelCount = (IntegerWrapper)request.getAttribute("liferay-ui:panel-container:panelCount" + parentId);
 
 if (panelCount != null) {
 	panelCount.increment();
