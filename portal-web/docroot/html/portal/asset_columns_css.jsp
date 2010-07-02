@@ -122,7 +122,7 @@
 	margin-bottom: 1.5em;
 }
 
-.asset-panels .lfr-panel, .asset-column-details .lfr-panel.lfr-extended {
+.asset-panels .lfr-panel.lfr-extended, .asset-column-details .lfr-panel.lfr-extended {
 	margin-bottom: 0;
 	border: 1px solid #CCC;
 }
