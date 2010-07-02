@@ -63,11 +63,11 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 		},
 
 		extractLayoutId: function(node) {
-			return node.get('id').match(/\d+/g)[0];
+			return node.get('id').match(/layoutId_(\d+)/)[1];
 		},
 
 		extractPlid: function(node) {
-			return node.get('id').match(/\d+/g)[1];
+			return node.get('id').match(/plid_(\d+)/)[1];
 		},
 
 		formatJSONResults: function(json) {

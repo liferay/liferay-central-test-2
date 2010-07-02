@@ -70,6 +70,8 @@ if (!localPublishing) {
 	treeKey = "remoteLayoutsTree";
 }
 
+treeKey = treeKey + selGroupId;
+
 long selPlid = ParamUtil.getLong(request, "selPlid", LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
 Layout selLayout = null;
