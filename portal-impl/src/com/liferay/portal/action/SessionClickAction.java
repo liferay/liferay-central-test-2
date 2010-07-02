@@ -49,7 +49,7 @@ public class SessionClickAction extends Action {
 				if (!name.equals("doAsUserId")) {
 					String value = ParamUtil.getString(request, name);
 
-					SessionClicks.put(request, name, value);	
+					SessionClicks.put(request, name, value);
 				}
 			}
 
