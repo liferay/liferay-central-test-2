@@ -16,6 +16,14 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-workflow-definitions .icon {
-	padding-left: 25px;
-}
+<%@ page import="com.liferay.portal.kernel.util.StringUtil" %>
+
+<liferay-util:buffer var="html">
+	<liferay-util:include page="/html/portlet/workflow_instances/css/main.jsp" />
+</liferay-util:buffer>
+
+<%
+html = StringUtil.replace(html, "portlet-workflow-instances", "portlet-workflow-definitions");
+%>
+
+<%= html %>
