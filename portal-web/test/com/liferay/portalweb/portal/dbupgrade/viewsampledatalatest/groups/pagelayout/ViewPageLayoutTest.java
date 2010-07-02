@@ -55,6 +55,7 @@ public class ViewPageLayoutTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Page Layout Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		assertTrue(selenium.isElementPresent(
 				"//div[@id='column-1' and @class='aui-w50 portlet-column portlet-column-first yui3-dd-drop']"));
 		assertTrue(selenium.isElementPresent(

@@ -46,7 +46,7 @@ public class ViewShortcutTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_29_name",
 			RuntimeVariables.replace("Document Library Shortcut Community"));
-		selenium.clickAt("//span/span[2]/span/input",
+		selenium.clickAt("//form/span/span[2]/span/input",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Open", RuntimeVariables.replace("Open"));
@@ -74,8 +74,9 @@ public class ViewShortcutTest extends BaseTestCase {
 		selenium.clickAt("//tr[4]/td[1]/a[2]/strong",
 			RuntimeVariables.replace("Test2 Folder2"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace(
-				"Test1 Document1.txt\nThis is test1 document1."),
-			selenium.getText("//td[1]/a"));
+		assertEquals(RuntimeVariables.replace("Test1 Document1.txt"),
+			selenium.getText("//a/span/span"));
+		assertEquals(RuntimeVariables.replace("This is test1 document1."),
+			selenium.getText("//a/div"));
 	}
 }

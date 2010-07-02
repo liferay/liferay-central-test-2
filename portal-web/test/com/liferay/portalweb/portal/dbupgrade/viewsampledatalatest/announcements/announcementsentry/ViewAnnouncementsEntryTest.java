@@ -53,7 +53,7 @@ public class ViewAnnouncementsEntryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//td[1]/a", RuntimeVariables.replace("Open"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Testing"),
+		assertEquals(RuntimeVariables.replace("Announcements Entry Name"),
 			selenium.getText("//div/h3/a"));
 	}
 }

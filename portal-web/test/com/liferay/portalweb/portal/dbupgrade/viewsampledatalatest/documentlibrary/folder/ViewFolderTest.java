@@ -46,7 +46,7 @@ public class ViewFolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_29_name",
 			RuntimeVariables.replace("Document Library Folder Community"));
-		selenium.clickAt("//span/span[2]/span/input",
+		selenium.clickAt("//form/span/span[2]/span/input",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Open", RuntimeVariables.replace("Open"));

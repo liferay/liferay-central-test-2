@@ -53,6 +53,7 @@ public class ViewOrganizationTest extends BaseTestCase {
 				selenium.clickAt("link=Organizations",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
 
 				boolean basicVisible = selenium.isVisible("link=\u00ab Basic");
 
@@ -71,6 +72,7 @@ public class ViewOrganizationTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
 				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -98,9 +100,26 @@ public class ViewOrganizationTest extends BaseTestCase {
 				assertEquals(RuntimeVariables.replace("joebloggs"),
 					selenium.getText(
 						"//tr[@class='portlet-section-body results-row last']/td[3]"));
-				selenium.clickAt("_126_tabs2TabsBack",
-					RuntimeVariables.replace(""));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("_126_TabsBack")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.clickAt("_126_TabsBack", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
 				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {

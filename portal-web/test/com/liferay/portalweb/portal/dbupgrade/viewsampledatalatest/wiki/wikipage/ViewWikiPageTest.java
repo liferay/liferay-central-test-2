@@ -73,6 +73,6 @@ public class ViewWikiPageTest extends BaseTestCase {
 		selenium.clickAt("link=Wiki Page Test", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Front Page Text"),
-			selenium.getText("//div[2]/div/div/div[4]/div"));
+			selenium.getText("//div/div/div/div[3]/div"));
 	}
 }

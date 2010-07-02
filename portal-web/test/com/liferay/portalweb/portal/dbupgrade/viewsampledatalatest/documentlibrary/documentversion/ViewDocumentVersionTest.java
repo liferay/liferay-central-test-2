@@ -47,7 +47,7 @@ public class ViewDocumentVersionTest extends BaseTestCase {
 		selenium.type("_29_name",
 			RuntimeVariables.replace(
 				"Document Library Document Version Community"));
-		selenium.clickAt("//span/span[2]/span/input",
+		selenium.clickAt("//form/span/span[2]/span/input",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Open", RuntimeVariables.replace("Open"));
@@ -75,8 +75,24 @@ public class ViewDocumentVersionTest extends BaseTestCase {
 		selenium.clickAt("//a[2]/strong",
 			RuntimeVariables.replace("Test1 Folder1"));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//td[5]/ul/li/strong/a", RuntimeVariables.replace(""));
-		selenium.clickAt("link=View", RuntimeVariables.replace("View"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//a/span/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("//a/span/span", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -104,8 +120,7 @@ public class ViewDocumentVersionTest extends BaseTestCase {
 
 			try {
 				if (RuntimeVariables.replace("1.1")
-										.equals(selenium.getText(
-								"//tr[2]/td[2]"))) {
+										.equals(selenium.getText("//td[2]/a"))) {
 					break;
 				}
 			}
@@ -116,7 +131,7 @@ public class ViewDocumentVersionTest extends BaseTestCase {
 		}
 
 		assertEquals(RuntimeVariables.replace("1.1"),
-			selenium.getText("//tr[2]/td[2]"));
+			selenium.getText("//td[2]/a"));
 		assertEquals(RuntimeVariables.replace("1.0"),
 			selenium.getText("//tr[4]/td[2]/a"));
 	}

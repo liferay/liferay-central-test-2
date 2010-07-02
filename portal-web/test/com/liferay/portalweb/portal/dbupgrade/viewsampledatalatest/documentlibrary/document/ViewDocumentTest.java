@@ -46,7 +46,7 @@ public class ViewDocumentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_29_name",
 			RuntimeVariables.replace("Document Library Document Community"));
-		selenium.clickAt("//span/span[2]/span/input",
+		selenium.clickAt("//form/span/span[2]/span/input",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Open", RuntimeVariables.replace("Open"));
@@ -81,9 +81,7 @@ public class ViewDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace(
-							"Test1 Document1.txt\nThis is test1 document1.")
-										.equals(selenium.getText("//td[1]/a"))) {
+				if (selenium.isElementPresent("//a/span/span")) {
 					break;
 				}
 			}
@@ -93,8 +91,45 @@ public class ViewDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertEquals(RuntimeVariables.replace(
-				"Test1 Document1.txt\nThis is test1 document1."),
-			selenium.getText("//td[1]/a"));
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Test1 Document1.txt")
+										.equals(selenium.getText(
+								"//a/span/span"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("Test1 Document1.txt"),
+			selenium.getText("//a/span/span"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("This is test1 document1.")
+										.equals(selenium.getText("//a/div"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("This is test1 document1."),
+			selenium.getText("//a/div"));
 	}
 }
