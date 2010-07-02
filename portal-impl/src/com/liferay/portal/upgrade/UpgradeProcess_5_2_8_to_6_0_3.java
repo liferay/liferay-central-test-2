@@ -26,8 +26,10 @@ import com.liferay.portal.upgrade.v6_0_0.UpgradePolls;
 import com.liferay.portal.upgrade.v6_0_0.UpgradePortletId;
 import com.liferay.portal.upgrade.v6_0_0.UpgradeShopping;
 import com.liferay.portal.upgrade.v6_0_2.UpgradeNestedPortlets;
+import com.liferay.portal.upgrade.v6_0_3.UpgradeDLFileVersion;
 import com.liferay.portal.upgrade.v6_0_3.UpgradeLookAndFeel;
 import com.liferay.portal.upgrade.v6_0_3.UpgradePermission;
+import com.liferay.portal.upgrade.v6_0_3.UpgradeScopes;
 import com.liferay.portal.upgrade.v6_0_3.UpgradeSitemap;
 
 /**
@@ -61,8 +63,11 @@ public class UpgradeProcess_5_2_8_to_6_0_3 extends UpgradeProcess {
 		upgrade(com.liferay.portal.upgrade.v6_0_3.UpgradeAsset.class);
 		upgrade(com.liferay.portal.upgrade.v6_0_3.UpgradeAssetPublisher.class);
 		upgrade(com.liferay.portal.upgrade.v6_0_3.UpgradeDocumentLibrary.class);
+		upgrade(UpgradeDLFileVersion.class);
+		upgrade(com.liferay.portal.upgrade.v6_0_3.UpgradeExpando.class);
 		upgrade(UpgradeLookAndFeel.class);
 		upgrade(UpgradePermission.class);
+		upgrade(UpgradeScopes.class);
 		upgrade(UpgradeSitemap.class);
 	}
 
