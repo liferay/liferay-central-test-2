@@ -118,7 +118,39 @@ public class ClusterExecutorImpl
 			return null;
 		}
 
-		return doExecuteClusterRequest(clusterRequest);
+		List<Address> addresses = prepareAddresses(clusterRequest);
+
+		FutureClusterResponses futureClusterResponses =
+			new FutureClusterResponses(addresses);
+
+		if (!clusterRequest.isFireAndForget()) {
+			String uuid = clusterRequest.getUuid();
+
+			Reference<FutureClusterResponses> reference =
+				FinalizeManager.register(futureClusterResponses,
+					new RemoveResultKeyFinalizeAction(uuid));
+			_executionResultMap.put(uuid, reference);
+		}
+
+		if (!clusterRequest.isSkipLocal() && _shortcutLocalMethod) {
+			ClusterNodeResponse clusterNodeResponse = runLocalMethod(
+				clusterRequest.getMethodWrapper());
+
+			clusterNodeResponse.setMulticast(clusterRequest.isMulticast());
+			clusterNodeResponse.setUuid(clusterRequest.getUuid());
+
+			futureClusterResponses.addClusterNodeResponse(
+				clusterNodeResponse);
+		}
+
+		if (clusterRequest.isMulticast()) {
+			sendMulticasrRequest(clusterRequest);
+		}
+		else {
+			sendUnicastRequest(clusterRequest, addresses);
+		}
+
+		return futureClusterResponses;
 	}
 
 	public List<ClusterEventListener> getClusterEventListeners() {
@@ -232,30 +264,7 @@ public class ClusterExecutorImpl
 		}
 	}
 
-	public void removeClusterEventListener(
-		ClusterEventListener clusterEventListener) {
-
-		_clusterEventListeners.remove(clusterEventListener);
-	}
-
-	public void setClusterEventListener(
-		List<ClusterEventListener> clusterEventListeners) {
-
-		for (ClusterEventListener clusterEventListener :
-				clusterEventListeners) {
-
-			addClusterEventListener(clusterEventListener);
-		}
-	}
-
-	public void setShortcutLocalMethod(boolean shortcutLocalMethod) {
-		_shortcutLocalMethod = shortcutLocalMethod;
-	}
-
-	protected FutureClusterResponses doExecuteClusterRequest(
-			ClusterRequest clusterRequest)
-		throws SystemException {
-
+	protected List<Address> prepareAddresses(ClusterRequest clusterRequest) {
 		boolean isMulticast = clusterRequest.isMulticast();
 
 		List<Address> addresses = null;
@@ -278,65 +287,65 @@ public class ClusterExecutorImpl
 
 		Address localControlAddress = getLocalControlAddress();
 
-		FutureClusterResponses futureClusterResponses =
-			new FutureClusterResponses(addresses);
-
-		String uuid = clusterRequest.getUuid();
-
-		Reference<FutureClusterResponses> reference = FinalizeManager.register(
-			futureClusterResponses, new RemoveResultKeyFinalizeAction(uuid));
-
-		if (!clusterRequest.isFireAndForget()) {
-			_executionResultMap.put(uuid, reference);
-		}
-
-		if (clusterRequest.isSkipLocal()) {
-			addresses.remove(localControlAddress);
-		}
-		else if (_shortcutLocalMethod) {
-			ClusterNodeResponse clusterNodeResponse = runLocalMethod(
-				clusterRequest.getMethodWrapper());
-
-			clusterNodeResponse.setMulticast(isMulticast);
-			clusterNodeResponse.setUuid(clusterRequest.getUuid());
-
-			futureClusterResponses.addClusterNodeResponse(
-				clusterNodeResponse);
-
+		if (clusterRequest.isSkipLocal() || _shortcutLocalMethod) {
 			addresses.remove(localControlAddress);
 		}
 
-		if (isMulticast) {
+		return addresses;
+	}
+
+	public void removeClusterEventListener(
+		ClusterEventListener clusterEventListener) {
+
+		_clusterEventListeners.remove(clusterEventListener);
+	}
+
+	protected void sendMulticasrRequest(ClusterRequest clusterRequest)
+		throws SystemException {
+		try {
+			_controlChannel.send(null, null, clusterRequest);
+		}
+		catch (ChannelException ce) {
+			_log.error(
+				"Unable to send multicast message " + clusterRequest, ce);
+
+			throw new SystemException(
+				"Unable to send multicast request", ce);
+		}
+	}
+
+	protected void sendUnicastRequest(
+			ClusterRequest clusterRequest, List<Address> addresses)
+		throws SystemException {
+		for (Address address : addresses) {
+			org.jgroups.Address jGroupsAddress =
+				(org.jgroups.Address)address.getRealAddress();
+
 			try {
-				_controlChannel.send(null, null, clusterRequest);
+				_controlChannel.send(jGroupsAddress, null, clusterRequest);
 			}
 			catch (ChannelException ce) {
 				_log.error(
-					"Unable to send multicast message " + clusterRequest, ce);
+					"Unable to send unicast message " + clusterRequest, ce);
 
 				throw new SystemException(
-					"Unable to send multicast request", ce);
+					"Unable to send unicast request", ce);
 			}
 		}
-		else {
-			for (Address address : addresses) {
-				org.jgroups.Address jGroupsAddress =
-					(org.jgroups.Address)address.getRealAddress();
+	}
 
-				try {
-					_controlChannel.send(jGroupsAddress, null, clusterRequest);
-				}
-				catch (ChannelException ce) {
-					_log.error(
-						"Unable to send unicast message " + clusterRequest, ce);
+	public void setClusterEventListener(
+		List<ClusterEventListener> clusterEventListeners) {
 
-					throw new SystemException(
-						"Unable to send unicast request", ce);
-				}
-			}
+		for (ClusterEventListener clusterEventListener :
+				clusterEventListeners) {
+
+			addClusterEventListener(clusterEventListener);
 		}
+	}
 
-		return futureClusterResponses;
+	public void setShortcutLocalMethod(boolean shortcutLocalMethod) {
+		_shortcutLocalMethod = shortcutLocalMethod;
 	}
 
 	protected void fireClusterEvent(ClusterEvent clusterEvent) {
