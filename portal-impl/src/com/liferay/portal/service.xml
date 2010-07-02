@@ -1672,7 +1672,7 @@
 			<finder-column name="companyId" />
 			<finder-column name="active" />
 		</finder>
-		<finder name="C_FID" return-type="User" unique="true">
+		<finder name="C_FID" return-type="User">
 			<finder-column name="companyId" />
 			<finder-column name="facebookId" />
 		</finder>
