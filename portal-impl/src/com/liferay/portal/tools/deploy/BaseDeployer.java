@@ -238,7 +238,7 @@ public class BaseDeployer {
 		File file = new File(DeployUtil.getResourcePath(fileName));
 
 		CopyTask.copyFile(
-		    file, new File(targetDir), filterMap, overwrite, true);
+			file, new File(targetDir), filterMap, overwrite, true);
 	}
 
 	protected void copyJars(File srcFile, PluginPackage pluginPackage)
