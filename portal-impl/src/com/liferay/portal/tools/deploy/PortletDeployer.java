@@ -496,8 +496,8 @@ public class PortletDeployer extends BaseDeployer {
 			renderKitFactoryEl.addText(LIFERAY_RENDER_KIT_FACTORY);
 		}
 		else if (_myFacesPortlet && (facesContextFactoryEl == null)) {
-			facesContextFactoryEl =
-				factoryEl.addElement("faces-context-factory");
+			facesContextFactoryEl = factoryEl.addElement(
+				"faces-context-factory");
 
 			facesContextFactoryEl.addText(MYFACES_CONTEXT_FACTORY);
 		}
