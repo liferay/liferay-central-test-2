@@ -1337,9 +1337,9 @@
 
 		<action path="/login/facebook_connect" type="com.liferay.portlet.login.action.FacebookConnectAction" />
 
-		<action path="/login/facebook_connect_oauth" type="com.liferay.portlet.login.action.FacebookConnectAction" />
+		<action path="/login/facebook_connect_add_user" forward="portlet.login.facebook_add_user" />
 
-		<action path="/login/facebook_connect_add_user" forward="portlet.login.facebook.add_user" />
+		<action path="/login/facebook_connect_oauth" type="com.liferay.portlet.login.action.FacebookConnectAction" />
 
 		<action path="/login/forgot_password" type="com.liferay.portlet.login.action.ForgotPasswordAction">
 			<forward name="portlet.login.forgot_password" path="portlet.login.forgot_password" />

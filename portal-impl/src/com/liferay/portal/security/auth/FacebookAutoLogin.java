@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.FacebookConnectUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
@@ -41,14 +42,18 @@ public class FacebookAutoLogin implements AutoLogin {
 		String[] credentials = null;
 
 		try {
+			long companyId = PortalUtil.getCompanyId(request);
+
+			if (!FacebookConnectUtil.isEnabled(companyId)) {
+				return credentials;
+			}
+
 			HttpSession session = request.getSession();
 
-			String emailAddress =  (String)session.getAttribute(
+			String emailAddress = (String)session.getAttribute(
 				WebKeys.FACEBOOK_USER_EMAIL_ADDRESS);
 
 			User user = null;
-
-			long companyId = PortalUtil.getCompanyId(request);
 
 			if (Validator.isNotNull(emailAddress)) {
 				session.removeAttribute(WebKeys.FACEBOOK_USER_EMAIL_ADDRESS);
@@ -61,16 +66,17 @@ public class FacebookAutoLogin implements AutoLogin {
 				}
 			}
 			else {
-				long facebookId = GetterUtil.getLong((
-					String) session.getAttribute(WebKeys.FACEBOOK_USER_ID));
+				long facebookId = GetterUtil.getLong(
+					(String)session.getAttribute(WebKeys.FACEBOOK_USER_ID));
 
 				if (facebookId > 0) {
 					session.removeAttribute(WebKeys.FACEBOOK_USER_ID);
+
 					user = UserLocalServiceUtil.getUserByFacebookId(
 						companyId, facebookId);
 				}
 				else {
-					return null;
+					return credentials;
 				}
 			}
 

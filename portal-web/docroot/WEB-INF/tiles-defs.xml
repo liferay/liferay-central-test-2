@@ -811,7 +811,7 @@
 		<put name="portlet_content" value="/portlet/login/create_account.jsp" />
 	</definition>
 
-	<definition name="portlet.login.facebook.add_user" extends="portlet.login">
+	<definition name="portlet.login.facebook_add_user" extends="portlet.login">
 		<put name="portlet_content" value="/portlet/login/facebook_add_user.jsp" />
 	</definition>
 

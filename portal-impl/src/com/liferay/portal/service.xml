@@ -1664,6 +1664,10 @@
 			<finder-column name="companyId" />
 			<finder-column name="emailAddress" />
 		</finder>
+		<finder name="C_FID" return-type="User">
+			<finder-column name="companyId" />
+			<finder-column name="facebookId" />
+		</finder>
 		<finder name="C_O" return-type="User">
 			<finder-column name="companyId" />
 			<finder-column name="openId" />
@@ -1671,10 +1675,6 @@
 		<finder name="C_A" return-type="Collection">
 			<finder-column name="companyId" />
 			<finder-column name="active" />
-		</finder>
-		<finder name="C_FID" return-type="User">
-			<finder-column name="companyId" />
-			<finder-column name="facebookId" />
 		</finder>
 
 		<!-- References -->
