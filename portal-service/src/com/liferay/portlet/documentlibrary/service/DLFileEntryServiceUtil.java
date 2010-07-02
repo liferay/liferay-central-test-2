@@ -40,26 +40,26 @@ public class DLFileEntryServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		long groupId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
-		java.lang.String versionDescription, java.lang.String extraSettings,
+		java.lang.String changelog, java.lang.String extraSettings,
 		byte[] bytes, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .addFileEntry(groupId, folderId, name, title, description,
-			versionDescription, extraSettings, bytes, serviceContext);
+			changelog, extraSettings, bytes, serviceContext);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		long groupId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
-		java.lang.String versionDescription, java.lang.String extraSettings,
+		java.lang.String changelog, java.lang.String extraSettings,
 		java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .addFileEntry(groupId, folderId, name, title, description,
-			versionDescription, extraSettings, file, serviceContext);
+			changelog, extraSettings, file, serviceContext);
 	}
 
 	public static void deleteFileEntry(long groupId, long folderId,
@@ -215,21 +215,21 @@ public class DLFileEntryServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		long groupId, long folderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String versionDescription,
+		java.lang.String description, java.lang.String changelog,
 		boolean majorVersion, java.lang.String extraSettings, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateFileEntry(groupId, folderId, name, sourceFileName,
-			title, description, versionDescription, majorVersion,
-			extraSettings, bytes, serviceContext);
+			title, description, changelog, majorVersion, extraSettings, bytes,
+			serviceContext);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		long groupId, long folderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String versionDescription,
+		java.lang.String description, java.lang.String changelog,
 		boolean majorVersion, java.lang.String extraSettings,
 		java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -237,8 +237,8 @@ public class DLFileEntryServiceUtil {
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateFileEntry(groupId, folderId, name, sourceFileName,
-			title, description, versionDescription, majorVersion,
-			extraSettings, file, serviceContext);
+			title, description, changelog, majorVersion, extraSettings, file,
+			serviceContext);
 	}
 
 	public static boolean verifyFileEntryLock(long groupId, long folderId,

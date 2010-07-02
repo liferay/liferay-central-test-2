@@ -49,7 +49,11 @@ public class DLFileVersionSoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setFolderId(model.getFolderId());
 		soapModel.setName(model.getName());
+		soapModel.setExtension(model.getExtension());
+		soapModel.setTitle(model.getTitle());
 		soapModel.setDescription(model.getDescription());
+		soapModel.setExtraSettings(model.getExtraSettings());
+		soapModel.setChangelog(model.getChangelog());
 		soapModel.setVersion(model.getVersion());
 		soapModel.setSize(model.getSize());
 		soapModel.setStatus(model.getStatus());
@@ -172,12 +176,44 @@ public class DLFileVersionSoap implements Serializable {
 		_name = name;
 	}
 
+	public String getExtension() {
+		return _extension;
+	}
+
+	public void setExtension(String extension) {
+		_extension = extension;
+	}
+
+	public String getTitle() {
+		return _title;
+	}
+
+	public void setTitle(String title) {
+		_title = title;
+	}
+
 	public String getDescription() {
 		return _description;
 	}
 
 	public void setDescription(String description) {
 		_description = description;
+	}
+
+	public String getExtraSettings() {
+		return _extraSettings;
+	}
+
+	public void setExtraSettings(String extraSettings) {
+		_extraSettings = extraSettings;
+	}
+
+	public String getChangelog() {
+		return _changelog;
+	}
+
+	public void setChangelog(String changelog) {
+		_changelog = changelog;
 	}
 
 	public String getVersion() {
@@ -236,7 +272,11 @@ public class DLFileVersionSoap implements Serializable {
 	private Date _createDate;
 	private long _folderId;
 	private String _name;
+	private String _extension;
+	private String _title;
 	private String _description;
+	private String _extraSettings;
+	private String _changelog;
 	private String _version;
 	private long _size;
 	private int _status;

@@ -67,7 +67,7 @@ public class DLFileEntryServiceHttp {
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		HttpPrincipal httpPrincipal, long groupId, long folderId,
 		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String versionDescription,
+		java.lang.String description, java.lang.String changelog,
 		java.lang.String extraSettings, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -95,9 +95,9 @@ public class DLFileEntryServiceHttp {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = versionDescription;
+			Object paramObj5 = changelog;
 
-			if (versionDescription == null) {
+			if (changelog == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
@@ -156,7 +156,7 @@ public class DLFileEntryServiceHttp {
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		HttpPrincipal httpPrincipal, long groupId, long folderId,
 		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String versionDescription,
+		java.lang.String description, java.lang.String changelog,
 		java.lang.String extraSettings, java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -184,9 +184,9 @@ public class DLFileEntryServiceHttp {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = versionDescription;
+			Object paramObj5 = changelog;
 
-			if (versionDescription == null) {
+			if (changelog == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
@@ -1177,7 +1177,7 @@ public class DLFileEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, long folderId,
 		java.lang.String name, java.lang.String sourceFileName,
 		java.lang.String title, java.lang.String description,
-		java.lang.String versionDescription, boolean majorVersion,
+		java.lang.String changelog, boolean majorVersion,
 		java.lang.String extraSettings, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -1211,9 +1211,9 @@ public class DLFileEntryServiceHttp {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = versionDescription;
+			Object paramObj6 = changelog;
 
-			if (versionDescription == null) {
+			if (changelog == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
@@ -1276,7 +1276,7 @@ public class DLFileEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, long folderId,
 		java.lang.String name, java.lang.String sourceFileName,
 		java.lang.String title, java.lang.String description,
-		java.lang.String versionDescription, boolean majorVersion,
+		java.lang.String changelog, boolean majorVersion,
 		java.lang.String extraSettings, java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -1310,9 +1310,9 @@ public class DLFileEntryServiceHttp {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = versionDescription;
+			Object paramObj6 = changelog;
 
-			if (versionDescription == null) {
+			if (changelog == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 

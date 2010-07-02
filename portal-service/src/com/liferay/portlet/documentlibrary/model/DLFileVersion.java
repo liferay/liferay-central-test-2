@@ -40,4 +40,9 @@ package com.liferay.portlet.documentlibrary.model;
  * @generated
  */
 public interface DLFileVersion extends DLFileVersionModel {
+	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge();
+
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry();
+
+	public java.lang.String getIcon();
 }

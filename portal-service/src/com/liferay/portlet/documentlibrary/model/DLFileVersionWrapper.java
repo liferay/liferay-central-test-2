@@ -117,12 +117,44 @@ public class DLFileVersionWrapper implements DLFileVersion {
 		_dlFileVersion.setName(name);
 	}
 
+	public java.lang.String getExtension() {
+		return _dlFileVersion.getExtension();
+	}
+
+	public void setExtension(java.lang.String extension) {
+		_dlFileVersion.setExtension(extension);
+	}
+
+	public java.lang.String getTitle() {
+		return _dlFileVersion.getTitle();
+	}
+
+	public void setTitle(java.lang.String title) {
+		_dlFileVersion.setTitle(title);
+	}
+
 	public java.lang.String getDescription() {
 		return _dlFileVersion.getDescription();
 	}
 
 	public void setDescription(java.lang.String description) {
 		_dlFileVersion.setDescription(description);
+	}
+
+	public java.lang.String getExtraSettings() {
+		return _dlFileVersion.getExtraSettings();
+	}
+
+	public void setExtraSettings(java.lang.String extraSettings) {
+		_dlFileVersion.setExtraSettings(extraSettings);
+	}
+
+	public java.lang.String getChangelog() {
+		return _dlFileVersion.getChangelog();
+	}
+
+	public void setChangelog(java.lang.String changelog) {
+		_dlFileVersion.setChangelog(changelog);
 	}
 
 	public java.lang.String getVersion() {
@@ -258,6 +290,14 @@ public class DLFileVersionWrapper implements DLFileVersion {
 
 	public java.lang.String toXmlString() {
 		return _dlFileVersion.toXmlString();
+	}
+
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry() {
+		return _dlFileVersion.getFileEntry();
+	}
+
+	public java.lang.String getIcon() {
+		return _dlFileVersion.getIcon();
 	}
 
 	public DLFileVersion getWrappedDLFileVersion() {

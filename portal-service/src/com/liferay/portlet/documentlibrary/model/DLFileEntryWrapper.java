@@ -288,6 +288,14 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		return _dlFileEntry.getIcon();
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion getFileVersion() {
+		return _dlFileEntry.getFileVersion();
+	}
+
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion getLatestFileVersion() {
+		return _dlFileEntry.getLatestFileVersion();
+	}
+
 	public com.liferay.portal.model.Lock getLock() {
 		return _dlFileEntry.getLock();
 	}

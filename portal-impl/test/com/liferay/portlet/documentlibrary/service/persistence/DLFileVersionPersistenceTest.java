@@ -75,7 +75,11 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 		newDLFileVersion.setCreateDate(nextDate());
 		newDLFileVersion.setFolderId(nextLong());
 		newDLFileVersion.setName(randomString());
+		newDLFileVersion.setExtension(randomString());
+		newDLFileVersion.setTitle(randomString());
 		newDLFileVersion.setDescription(randomString());
+		newDLFileVersion.setExtraSettings(randomString());
+		newDLFileVersion.setChangelog(randomString());
 		newDLFileVersion.setVersion(randomString());
 		newDLFileVersion.setSize(nextLong());
 		newDLFileVersion.setStatus(nextInt());
@@ -103,8 +107,16 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingDLFileVersion.getFolderId(),
 			newDLFileVersion.getFolderId());
 		assertEquals(existingDLFileVersion.getName(), newDLFileVersion.getName());
+		assertEquals(existingDLFileVersion.getExtension(),
+			newDLFileVersion.getExtension());
+		assertEquals(existingDLFileVersion.getTitle(),
+			newDLFileVersion.getTitle());
 		assertEquals(existingDLFileVersion.getDescription(),
 			newDLFileVersion.getDescription());
+		assertEquals(existingDLFileVersion.getExtraSettings(),
+			newDLFileVersion.getExtraSettings());
+		assertEquals(existingDLFileVersion.getChangelog(),
+			newDLFileVersion.getChangelog());
 		assertEquals(existingDLFileVersion.getVersion(),
 			newDLFileVersion.getVersion());
 		assertEquals(existingDLFileVersion.getSize(), newDLFileVersion.getSize());
@@ -197,7 +209,11 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 		dlFileVersion.setCreateDate(nextDate());
 		dlFileVersion.setFolderId(nextLong());
 		dlFileVersion.setName(randomString());
+		dlFileVersion.setExtension(randomString());
+		dlFileVersion.setTitle(randomString());
 		dlFileVersion.setDescription(randomString());
+		dlFileVersion.setExtraSettings(randomString());
+		dlFileVersion.setChangelog(randomString());
 		dlFileVersion.setVersion(randomString());
 		dlFileVersion.setSize(nextLong());
 		dlFileVersion.setStatus(nextInt());

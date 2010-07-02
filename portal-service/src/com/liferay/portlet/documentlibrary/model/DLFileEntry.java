@@ -48,6 +48,10 @@ public interface DLFileEntry extends DLFileEntryModel {
 
 	public java.lang.String getIcon();
 
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion getFileVersion();
+
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion getLatestFileVersion();
+
 	public com.liferay.portal.model.Lock getLock();
 
 	public java.lang.String getLuceneProperties();

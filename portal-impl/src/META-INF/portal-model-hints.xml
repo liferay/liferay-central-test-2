@@ -1109,9 +1109,13 @@
 		<field name="name" type="String">
 			<hint name="max-length">255</hint>
 		</field>
+		<field name="extension" type="String" />
+		<field name="title" type="String" />
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
+		<field name="extraSettings" type="String" />
+		<field name="changelog" type="String" />
 		<field name="version" type="String" />
 		<field name="size" type="long" />
 		<field name="status" type="int" />

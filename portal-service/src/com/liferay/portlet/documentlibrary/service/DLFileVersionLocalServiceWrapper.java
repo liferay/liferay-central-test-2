@@ -124,6 +124,13 @@ public class DLFileVersionLocalServiceWrapper
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion getFileVersion(
+		long fileVersionId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileVersionLocalService.getFileVersion(fileVersionId);
+	}
+
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion getFileVersion(
 		long groupId, long folderId, java.lang.String name,
 		java.lang.String version)
 		throws com.liferay.portal.kernel.exception.PortalException,
