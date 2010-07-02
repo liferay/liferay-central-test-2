@@ -49,6 +49,13 @@ public class WAIAutoDeployer extends PortletAutoDeployer {
 
 		super.copyXmls(srcFile, displayName, pluginPackage);
 
+        // The default context.xml file for Tomcat causes portlets to be run
+        // from the temp directory, which prevents some applications from saving
+        // their settings. There is no way to prevent this file from being
+        // copied, so it must be deleted afterwards.
+        File contextFile = new File(srcFile + "/META-INF/context.xml");
+        contextFile.delete();
+
 		String portletName = displayName;
 
 		if (pluginPackage != null) {
@@ -119,7 +126,7 @@ public class WAIAutoDeployer extends PortletAutoDeployer {
 			String value = null;
 
 			if (pluginPackage != null) {
-				pluginPackage.getDeploymentSettings().getProperty(name);
+				value = pluginPackage.getDeploymentSettings().getProperty(name);
 			}
 
 			if (Validator.isNull(value)) {
