@@ -3053,6 +3053,7 @@ public class PortalImpl implements Portal {
 		boolean alwaysAllowDoAsUser = false;
 
 		if (path.equals("/portal/fckeditor") ||
+			path.equals("/portal/session_click") ||
 			strutsAction.equals("/document_library/edit_file_entry") ||
 			strutsAction.equals("/image_gallery/edit_image") ||
 			strutsAction.equals("/wiki/edit_page_attachment") ||

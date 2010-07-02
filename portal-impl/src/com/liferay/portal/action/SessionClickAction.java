@@ -46,9 +46,11 @@ public class SessionClickAction extends Action {
 			while (enu.hasMoreElements()) {
 				String name = enu.nextElement();
 
-				String value = ParamUtil.getString(request, name);
+				if (!name.equals("doAsUserId")) {
+					String value = ParamUtil.getString(request, name);
 
-				SessionClicks.put(request, name, value);
+					SessionClicks.put(request, name, value);	
+				}
 			}
 
 			return null;
