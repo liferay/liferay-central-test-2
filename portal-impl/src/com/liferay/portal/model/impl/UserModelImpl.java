@@ -469,6 +469,16 @@ public class UserModelImpl extends BaseModelImpl<User> {
 
 	public void setFacebookId(long facebookId) {
 		_facebookId = facebookId;
+
+		if (!_setOriginalFacebookId) {
+			_setOriginalFacebookId = true;
+
+			_originalFacebookId = facebookId;
+		}
+	}
+
+	public long getOriginalFacebookId() {
+		return _originalFacebookId;
 	}
 
 	public String getOpenId() {
@@ -1096,6 +1106,8 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	private String _emailAddress;
 	private String _originalEmailAddress;
 	private long _facebookId;
+	private long _originalFacebookId;
+	private boolean _setOriginalFacebookId;
 	private String _openId;
 	private String _originalOpenId;
 	private long _portraitId;

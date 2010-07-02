@@ -484,6 +484,13 @@ public class UserLocalServiceUtil {
 		return getService().getUserByEmailAddress(companyId, emailAddress);
 	}
 
+	public static com.liferay.portal.model.User getUserByFacebookId(
+		long companyId, long facebookId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getUserByFacebookId(companyId, facebookId);
+	}
+
 	public static com.liferay.portal.model.User getUserById(long userId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

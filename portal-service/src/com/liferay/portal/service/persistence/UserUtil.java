@@ -467,6 +467,26 @@ public class UserUtil {
 			orderByComparator);
 	}
 
+	public static com.liferay.portal.model.User findByC_FID(long companyId,
+		long facebookId)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByC_FID(companyId, facebookId);
+	}
+
+	public static com.liferay.portal.model.User fetchByC_FID(long companyId,
+		long facebookId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByC_FID(companyId, facebookId);
+	}
+
+	public static com.liferay.portal.model.User fetchByC_FID(long companyId,
+		long facebookId, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByC_FID(companyId, facebookId, retrieveFromCache);
+	}
+
 	public static java.util.List<com.liferay.portal.model.User> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
@@ -548,6 +568,12 @@ public class UserUtil {
 		getPersistence().removeByC_A(companyId, active);
 	}
 
+	public static void removeByC_FID(long companyId, long facebookId)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByC_FID(companyId, facebookId);
+	}
+
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
@@ -606,6 +632,11 @@ public class UserUtil {
 	public static int countByC_A(long companyId, boolean active)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByC_A(companyId, active);
+	}
+
+	public static int countByC_FID(long companyId, long facebookId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByC_FID(companyId, facebookId);
 	}
 
 	public static int countAll()
