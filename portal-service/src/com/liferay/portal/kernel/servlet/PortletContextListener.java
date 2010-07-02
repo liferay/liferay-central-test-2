@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.servlet;
 
+import com.liferay.portal.kernel.classloading.ClassLoaderRegistry;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -53,6 +54,8 @@ public class PortletContextListener
 
 		HotDeployUtil.fireUndeployEvent(
 			new HotDeployEvent(servletContext, contextClassLoader));
+
+		ClassLoaderRegistry.unregister(servletContext.getContextPath());
 
 		try {
 			if (!_bindLiferayPool) {
@@ -97,6 +100,8 @@ public class PortletContextListener
 
 		_portletClassLoader = currentThread.getContextClassLoader();
 
+		ClassLoaderRegistry.register(_portletClassLoader,
+			_servletContext.getContextPath());
 		PortalInitableUtil.init(this);
 	}
 

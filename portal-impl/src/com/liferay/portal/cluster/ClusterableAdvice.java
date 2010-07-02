@@ -14,6 +14,7 @@
 
 package com.liferay.portal.cluster;
 
+import com.liferay.portal.kernel.classloading.ClassLoaderRegistry;
 import com.liferay.portal.kernel.cluster.ClusterExecutorUtil;
 import com.liferay.portal.kernel.cluster.ClusterRequest;
 import com.liferay.portal.kernel.cluster.Clusterable;
@@ -59,6 +60,11 @@ public class ClusterableAdvice
 
 		ClusterRequest clusterRequest = ClusterRequest.createMulticastRequest(
 			methodWrapper, true);
+
+		ClassLoader classLoader =
+			Thread.currentThread().getContextClassLoader();
+		clusterRequest.setInvokeClassLoaderId(
+			ClassLoaderRegistry.lookupId(classLoader));
 
 		ClusterExecutorUtil.execute(clusterRequest);
 	}
