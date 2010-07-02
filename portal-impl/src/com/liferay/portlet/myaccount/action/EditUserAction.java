@@ -103,7 +103,7 @@ public class EditUserAction
 			}
 
 			boolean validPassword = PwdAuthenticator.authenticate(
-				login, requestPassword, user.getPassword()); 
+				login, requestPassword, user.getPassword());
 
 			if (!validPassword) {
 				throw new UserPasswordException(
