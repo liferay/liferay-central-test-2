@@ -91,7 +91,9 @@ String keywords = ParamUtil.getString(request, "keywords");
 		SearchContext searchContext = SearchContextFactory.getInstance(request);
 
 		searchContext.setCategoryIds(categoryIdsArray);
+		searchContext.setEnd(searchContainer.getEnd());
 		searchContext.setKeywords(keywords);
+		searchContext.setStart(searchContainer.getStart());
 
 		Hits results = indexer.search(searchContext);
 
