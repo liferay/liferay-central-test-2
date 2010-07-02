@@ -2508,7 +2508,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		if (authResult == Authenticator.SUCCESS) {
 			if (PropsValues.AUTH_PIPELINE_ENABLE_LIFERAY_CHECK) {
-
 				boolean authenticated = PwdAuthenticator.authenticate(
 					login, password, user.getPassword());
 

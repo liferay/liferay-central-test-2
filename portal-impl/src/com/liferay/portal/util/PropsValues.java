@@ -978,6 +978,8 @@ public class PropsValues {
 
 	public static String[] SESSION_PHISHING_PROTECTED_ATTRIBUTES = PropsUtil.getArray(PropsKeys.SESSION_PHISHING_PROTECTED_ATTRIBUTES);
 
+	public static final boolean SESSION_STORE_PASSWORD = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.SESSION_STORE_PASSWORD));
+
 	public static final boolean SESSION_TEST_COOKIE_SUPPORT = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.SESSION_TEST_COOKIE_SUPPORT));
 
 	public static int SESSION_TIMEOUT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SESSION_TIMEOUT));
@@ -1003,8 +1005,6 @@ public class PropsValues {
 	public static final String[] SHARED_SESSION_ATTRIBUTES = PropsUtil.getArray(PropsKeys.SESSION_SHARED_ATTRIBUTES);
 
 	public static final String[] SHARED_SESSION_ATTRIBUTES_EXCLUDES = PropsUtil.getArray(PropsKeys.SESSION_SHARED_ATTRIBUTES_EXCLUDES);
-
-	public static final boolean SESSION_STORE_PASSWORD = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.SESSION_STORE_PASSWORD));
 
 	public static final boolean SHOPPING_ORDER_COMMENTS_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.SHOPPING_ORDER_COMMENTS_ENABLED));
 

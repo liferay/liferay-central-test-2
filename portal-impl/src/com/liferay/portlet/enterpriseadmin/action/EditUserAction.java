@@ -615,8 +615,8 @@ public class EditUserAction extends PortletAction {
 
 			// Password
 
-			if (Validator.isNotNull(newPassword1) &&
-				(PropsValues.SESSION_STORE_PASSWORD)) {
+			if (PropsValues.SESSION_STORE_PASSWORD &&
+				Validator.isNotNull(newPassword1)) {
 
 				portletSession.setAttribute(
 					WebKeys.USER_PASSWORD, newPassword1,

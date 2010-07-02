@@ -229,7 +229,7 @@ public class LoginUtil {
 			session.setAttribute("j_password", user.getPassword());
 			session.setAttribute("j_remoteuser", userIdString);
 
-			if ((PropsValues.SESSION_STORE_PASSWORD)) {
+			if (PropsValues.SESSION_STORE_PASSWORD) {
 				session.setAttribute(WebKeys.USER_PASSWORD, password);
 			}
 

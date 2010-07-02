@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.UnsupportedEncodingException;
@@ -31,32 +32,33 @@ import java.security.NoSuchAlgorithmException;
  * @author Michael C. Han
  */
 public class PwdAuthenticator {
-	public static boolean authenticate(
-			String login, String clearTextPassword, String encryptedPassword)
-		throws PwdEncryptorException, SystemException {
-		
-		String encryptedPasswordToValidate = PwdEncryptor.encrypt(
-			clearTextPassword, encryptedPassword);
 
-		if (encryptedPassword.equals(encryptedPasswordToValidate)) {
+	public static boolean authenticate(
+			String login, String clearTextPassword,
+			String currentEncryptedPassword)
+		throws PwdEncryptorException, SystemException {
+
+		String encryptedPassword = PwdEncryptor.encrypt(
+			clearTextPassword, currentEncryptedPassword);
+
+		if (currentEncryptedPassword.equals(encryptedPassword)) {
 			return true;
 		}
 		else if (GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.AUTH_MAC_ALLOW))) {
+					PropsUtil.get(PropsKeys.AUTH_MAC_ALLOW))) {
 
 			try {
 				MessageDigest digester = MessageDigest.getInstance(
 					PropsUtil.get(PropsKeys.AUTH_MAC_ALGORITHM));
 
-				digester.update(login.getBytes("UTF8"));
+				digester.update(login.getBytes(StringPool.UTF8));
 
-				String shardKey =
-					PropsUtil.get(PropsKeys.AUTH_MAC_SHARED_KEY);
+				String shardKey = PropsUtil.get(PropsKeys.AUTH_MAC_SHARED_KEY);
 
-				encryptedPasswordToValidate = Base64.encode(
-					digester.digest(shardKey.getBytes("UTF8")));
+				encryptedPassword = Base64.encode(
+					digester.digest(shardKey.getBytes(StringPool.UTF8)));
 
-				if (encryptedPassword.equals(encryptedPasswordToValidate)) {
+				if (currentEncryptedPassword.equals(encryptedPassword)) {
 					return true;
 				}
 				else {
@@ -70,6 +72,8 @@ public class PwdAuthenticator {
 				throw new SystemException(uee);
 			}
 		}
+
 		return false;
 	}
+
 }

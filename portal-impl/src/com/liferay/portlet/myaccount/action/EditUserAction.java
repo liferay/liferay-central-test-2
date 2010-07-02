@@ -85,6 +85,7 @@ public class EditUserAction
 				actionRequest, "password0");
 
 			Company company = PortalUtil.getCompany(actionRequest);
+
 			String authType = company.getAuthType();
 
 			User user = PortalUtil.getSelectedUser(actionRequest);
