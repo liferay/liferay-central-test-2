@@ -61,6 +61,21 @@ public class SharedSessionUtil {
 						continue;
 					}
 
+					boolean bypassSharing = false;
+
+					for (String shareException :
+							PropsValues.SHARED_SESSION_ATTRIBUTES_EXCLUSIONS) {
+
+						if (shareException.equals(name)) {
+							bypassSharing = true;
+							break;
+						}
+					}
+
+					if (bypassSharing) {
+						continue;
+					}
+					
 					if (_log.isDebugEnabled()) {
 						_log.debug("Sharing " + name);
 					}

@@ -66,11 +66,21 @@ public class SharedSessionAttributeListener
 		String name = event.getName();
 
 		for (String sharedName : PropsValues.SHARED_SESSION_ATTRIBUTES) {
-			if (name.startsWith(sharedName)) {
-				cache.setAttribute(name, event.getValue());
-
-				return;
+			if (!name.startsWith(sharedName)) {
+				continue;
 			}
+			
+			for (String shareException :
+					PropsValues.SHARED_SESSION_ATTRIBUTES_EXCLUSIONS) {
+				
+				if (shareException.equals(name)) {
+					return;
+				}
+			}
+
+			cache.setAttribute(name, event.getValue());
+
+			return;
 		}
 	}
 
