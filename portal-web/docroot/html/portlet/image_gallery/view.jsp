@@ -257,7 +257,9 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 		%>
 
 		<aui:layout>
-			<h3 class="folder-title"><liferay-ui:message key="<%= topLink %>" /></h3>
+			<liferay-ui:header
+				title="<%= topLink %>"
+			/>
 
 			<%
 			List scores = null;
