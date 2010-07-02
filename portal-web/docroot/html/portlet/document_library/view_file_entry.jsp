@@ -160,23 +160,23 @@ if (fileEntry != null) {
 %>
 
 <aui:layout>
-	<aui:column columnWidth="<%= 75 %>" cssClass="asset-column asset-column-details" first="<%= true %>">
+	<aui:column columnWidth="<%= 75 %>" cssClass="lfr-asset-column lfr-asset-column-details" first="<%= true %>">
 		<c:if test="<%= fileVersion != null %>">
 			<aui:model-context bean="<%= fileVersion %>" model="<%= DLFileVersion.class %>" />
 
 			<aui:workflow-status status="<%= fileVersion.getStatus() %>" version="<%= Double.parseDouble(fileVersion.getVersion()) %>" />
 
-			<div class="asset-metadata">
-				<div class="asset-icon asset-author">
+			<div class="lfr-asset-metadata">
+				<div class="lfr-asset-icon lfr-asset-author">
 					<%= LanguageUtil.format(pageContext, "last-updated-by-x", HtmlUtil.escape(PortalUtil.getUserName(fileEntry.getUserId(), fileEntry.getUserName()))) %>
 				</div>
 
-				<div class="asset-icon asset-date">
+				<div class="lfr-asset-icon lfr-asset-date">
 					<%= dateFormatDateTime.format(fileEntry.getModifiedDate()) %>
 				</div>
 
 				<c:if test="<%= PropsValues.DL_FILE_ENTRY_READ_COUNT_ENABLED %>">
-					<div class="asset-icon asset-downloads last">
+					<div class="lfr-asset-icon lfr-asset-downloads last">
 
 						<%
 						int readCount = fileEntry.getReadCount();
@@ -188,14 +188,14 @@ if (fileEntry != null) {
 			</div>
 		</c:if>
 
-		<div class="asset-categories">
+		<div class="lfr-asset-categories">
 			<liferay-ui:asset-categories-summary
 				className="<%= DLFileVersion.class.getName() %>"
 				classPK="<%= fileVersion.getFileVersionId() %>"
 			/>
 		</div>
 
-		<div class="asset-tags">
+		<div class="lfr-asset-tags">
 			<liferay-ui:asset-tags-summary
 				className="<%= DLFileVersion.class.getName() %>"
 				classPK="<%= fileVersion.getFileVersionId() %>"
@@ -204,7 +204,7 @@ if (fileEntry != null) {
 		</div>
 
 		<c:if test="<%= Validator.isNotNull(fileEntry.getDescription()) %>">
-			<div class="asset-description">
+			<div class="lfr-asset-description">
 				<%= fileEntry.getDescription() %>
 			</div>
 		</c:if>
@@ -218,14 +218,14 @@ if (fileEntry != null) {
 			/>
 		</liferay-ui:custom-attributes-available>
 
-		<div class="asset-ratings">
+		<div class="lfr-asset-ratings">
 			<liferay-ui:ratings
 				className="<%= DLFileEntry.class.getName() %>"
 				classPK="<%= fileEntryId %>"
 			/>
 		</div>
 
-		<div class="asset-field">
+		<div class="lfr-asset-field">
 			<label><liferay-ui:message key="url" /></label>
 
 			<liferay-ui:input-resource
@@ -234,7 +234,7 @@ if (fileEntry != null) {
 		</div>
 
 		<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
-			<div class="asset-field">
+			<div class="lfr-asset-field">
 
 				<%
 				String webDavHelpMessage = null;
@@ -254,27 +254,27 @@ if (fileEntry != null) {
 		</c:if>
 	</aui:column>
 
-	<aui:column columnWidth="<%= 25 %>" cssClass="asset-column asset-column-actions" last="<%= true %>">
+	<aui:column columnWidth="<%= 25 %>" cssClass="lfr-asset-column lfr-asset-column-actions" last="<%= true %>">
 		<c:if test="<%= isLocked %>">
 			<img alt="" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/large/overlay_lock.png">
 		</c:if>
 
-		<div class="asset-summary">
+		<div class="lfr-asset-summary">
 			<liferay-ui:icon
-				cssClass="asset-avatar"
+				cssClass="lfr-asset-avatar"
 				image='<%= "../file_system/large/" + DLUtil.getGenericName(extension) %>'
 				message="download"
 				url="<%= fileUrl %>"
 			/>
 
-			<div class="asset-name">
+			<div class="lfr-asset-name">
 				<a href="<%= fileUrl %>">
 					<%= title %>
 				</a>
 			</div>
 
 			<c:if test="<%= conversions.length > 0 %>">
-				<div class="asset-field asset-conversions">
+				<div class="lfr-asset-field lfr-asset-conversions">
 					<label><liferay-ui:message key="other-available-formats" /></label>
 
 					<%
@@ -305,7 +305,7 @@ if (fileEntry != null) {
 	</aui:column>
 </aui:layout>
 
-<div class="asset-panels">
+<div class="lfr-asset-panels">
 	<liferay-ui:panel-container extended="<%= false %>" persistState="<%= true %>">
 		<liferay-ui:panel collapsible="<%= true %>" cssClass="version-history" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "version-history") %>'>
 

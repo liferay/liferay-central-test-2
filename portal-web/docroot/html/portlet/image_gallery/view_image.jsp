@@ -78,15 +78,15 @@ if (portletDisplay.isWebDAVEnabled()) {
 </c:if>
 
 <aui:layout>
-	<aui:column columnWidth="<%= 75 %>" cssClass="asset-column asset-column-details" first="<%= true %>">
-		<div class="asset-categories">
+	<aui:column columnWidth="<%= 75 %>" cssClass="lfr-asset-column lfr-asset-column-details" first="<%= true %>">
+		<div class="lfr-asset-categories">
 			<liferay-ui:asset-categories-summary
 				className="<%= IGImage.class.getName() %>"
 				classPK="<%= image.getImageId() %>"
 			/>
 		</div>
 
-		<div class="asset-tags">
+		<div class="lfr-asset-tags">
 			<liferay-ui:asset-tags-summary
 				className="<%= IGImage.class.getName() %>"
 				classPK="<%= image.getImageId() %>"
@@ -94,7 +94,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 			/>
 		</div>
 
-		<div class="asset-description">
+		<div class="lfr-asset-description">
 			<%= image.getDescription() %>
 		</div>
 
@@ -107,19 +107,19 @@ if (portletDisplay.isWebDAVEnabled()) {
 			/>
 		</liferay-ui:custom-attributes-available>
 
-		<div class="asset-metadata">
-			<div class="asset-icon asset-author">
+		<div class="lfr-asset-metadata">
+			<div class="lfr-asset-icon lfr-asset-author">
 				<%= LanguageUtil.format(pageContext, "last-updated-by-x", HtmlUtil.escape(PortalUtil.getUserName(image.getUserId(), themeDisplay.getScopeGroupName()))) %>
 			</div>
 
-			<div class="asset-icon asset-date last">
+			<div class="lfr-asset-icon lfr-asset-date last">
 				<%= dateFormatDate.format(image.getModifiedDate()) %>
 			</div>
 		</div>
 
-		<aui:layout cssClass="asset-attributes">
+		<aui:layout cssClass="lfr-asset-attributes">
 			<aui:column columnWidth="<%= 15 %>">
-				<div class="asset-field">
+				<div class="lfr-asset-field">
 					<label><liferay-ui:message key="height" /></label>
 
 					<%= largeImage.getHeight() %>
@@ -127,7 +127,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 			</aui:column>
 
 			<aui:column columnWidth="<%= 15 %>">
-				<div class="asset-field">
+				<div class="lfr-asset-field">
 					<label><liferay-ui:message key="width" /></label>
 
 					<%= largeImage.getWidth() %>
@@ -135,7 +135,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 			</aui:column>
 
 			<aui:column columnWidth="<%= 15 %>">
-				<div class="asset-field">
+				<div class="lfr-asset-field">
 					<label><liferay-ui:message key="size" /></label>
 
 					<%= TextFormatter.formatKB(largeImage.getSize(), locale) %>k
@@ -143,14 +143,14 @@ if (portletDisplay.isWebDAVEnabled()) {
 			</aui:column>
 		</aui:layout>
 
-		<div class="asset-ratings">
+		<div class="lfr-asset-ratings">
 			<liferay-ui:ratings
 				className="<%= IGImage.class.getName() %>"
 				classPK="<%= image.getImageId() %>"
 			/>
 		</div>
 
-		<div class="asset-field">
+		<div class="lfr-asset-field">
 			<label><liferay-ui:message key="url" /></label>
 
 			<liferay-ui:input-resource
@@ -159,7 +159,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 		</div>
 
 		<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
-			<div class="asset-field">
+			<div class="lfr-asset-field">
 
 				<%
 				String webDavHelpMessage = null;
@@ -179,13 +179,13 @@ if (portletDisplay.isWebDAVEnabled()) {
 		</c:if>
 	</aui:column>
 
-	<aui:column columnWidth="<%= 25 %>" cssClass="asset-column asset-column-actions" last="<%= true %>">
-		<div class="asset-summary">
+	<aui:column columnWidth="<%= 25 %>" cssClass="lfr-asset-column lfr-asset-column-actions" last="<%= true %>">
+		<div class="lfr-asset-summary">
 			<a href="javascript:<%= imageUrl %>">
-				<img alt="<%= image.getDescription() %>" class="asset-avatar" src='<%= themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getSmallImageId() + "&t=" + ImageServletTokenUtil.getToken(image.getSmallImageId()) %>' />
+				<img alt="<%= image.getDescription() %>" class="lfr-asset-avatar" src='<%= themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getSmallImageId() + "&t=" + ImageServletTokenUtil.getToken(image.getSmallImageId()) %>' />
 			</a>
 
-			<div class="asset-name">
+			<div class="lfr-asset-name">
 				<a href="javascript:<%= imageUrl %>">
 					<%= image.getNameWithExtension() %>
 				</a>

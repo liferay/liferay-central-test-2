@@ -16,7 +16,7 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-bookmarks .asset-url {
+.portlet-bookmarks .lfr-asset-url {
 	margin: 1em 0 0.3em;
 }
 
