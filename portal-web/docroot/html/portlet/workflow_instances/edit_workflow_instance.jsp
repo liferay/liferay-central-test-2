@@ -51,7 +51,7 @@ String headerTitle = LanguageUtil.get(pageContext, workflowInstance.getWorkflowD
 if (assetEntry != null) {
 	viewFullContentURL.setParameter("assetEntryId", String.valueOf(assetEntry.getEntryId()));
 
-	headerTitle = StringPool.COLON + StringPool.SPACE + assetEntry.getTitle();
+	headerTitle = headerTitle.concat(StringPool.COLON + StringPool.SPACE + assetEntry.getTitle());
 }
 %>
 
