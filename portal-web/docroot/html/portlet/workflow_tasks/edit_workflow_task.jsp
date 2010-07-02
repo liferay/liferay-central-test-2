@@ -42,7 +42,11 @@ WorkflowHandler workflowHandler = WorkflowHandlerRegistryUtil.getWorkflowHandler
 
 AssetRenderer assetRenderer = workflowHandler.getAssetRenderer(classPK);
 AssetRendererFactory assetRendererFactory = workflowHandler.getAssetRendererFactory();
-AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(assetRendererFactory.getClassName(), assetRenderer.getClassPK());
+AssetEntry assetEntry = null;
+
+if (assetRenderer != null) {
+	assetEntry = AssetEntryLocalServiceUtil.getEntry(assetRendererFactory.getClassName(), assetRenderer.getClassPK());
+}
 
 PortletURL editPortletURL = workflowHandler.getURLEdit(classPK, (LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
 
@@ -50,8 +54,15 @@ PortletURL viewFullContentURL = renderResponse.createRenderURL();
 
 viewFullContentURL.setParameter("struts_action", "/workflow_tasks/view_content");
 viewFullContentURL.setParameter("redirect", currentURL);
-viewFullContentURL.setParameter("assetEntryId", String.valueOf(assetEntry.getEntryId()));
 viewFullContentURL.setParameter("type", assetRendererFactory.getType());
+
+String headerTitle = LanguageUtil.get(pageContext, workflowInstance.getWorkflowDefinitionName());
+
+if (assetEntry != null) {
+	viewFullContentURL.setParameter("assetEntryId", String.valueOf(assetEntry.getEntryId()));
+
+	headerTitle = StringPool.COLON + StringPool.SPACE + assetEntry.getTitle();
+}
 %>
 
 <portlet:renderURL var="backURL">
@@ -60,7 +71,7 @@ viewFullContentURL.setParameter("type", assetRendererFactory.getType());
 
 <liferay-ui:header
 	backURL="<%= backURL.toString() %>"
-	title='<%= LanguageUtil.get(pageContext, workflowTask.getName()) + ": " + assetEntry.getTitle() %>'
+	title='<%= headerTitle %>'
 />
 
 <aui:layout>
@@ -153,54 +164,57 @@ viewFullContentURL.setParameter("type", assetRendererFactory.getType());
 		</c:if>
 
 		<liferay-ui:panel-container cssClass="task-panel-container" id="preview" extended="<%= true %>">
-			<liferay-ui:panel defaultState="open" title='<%= LanguageUtil.get(pageContext, "preview") %>'>
-				<div class="task-content-actions">
-					<liferay-ui:icon-list>
-						<c:if test="<%= assetRenderer.hasViewPermission(permissionChecker) %>">
-							<liferay-ui:icon image="view" method="get" url="<%= viewFullContentURL.toString() %>" />
-						</c:if>
 
-						<c:if test="<%= editPortletURL != null %>">
+			<c:if test="<%= assetRenderer != null %>">
+				<liferay-ui:panel defaultState="open" title='<%= LanguageUtil.get(pageContext, "preview") %>'>
+					<div class="task-content-actions">
+						<liferay-ui:icon-list>
+							<c:if test="<%= assetRenderer.hasViewPermission(permissionChecker) %>">
+								<liferay-ui:icon image="view" method="get" url="<%= viewFullContentURL.toString() %>" />
+							</c:if>
 
-							<%
-							editPortletURL.setWindowState(WindowState.MAXIMIZED);
-							editPortletURL.setPortletMode(PortletMode.VIEW);
+							<c:if test="<%= editPortletURL != null %>">
 
-							editPortletURL.setParameter("redirect", currentURL);
-							%>
+								<%
+								editPortletURL.setWindowState(WindowState.MAXIMIZED);
+								editPortletURL.setPortletMode(PortletMode.VIEW);
 
-							<c:choose>
-								<c:when test="<%= assetRenderer.hasEditPermission(permissionChecker) %>">
-									<liferay-ui:icon image="edit" method="get" url="<%= editPortletURL.toString() %>" />
-								</c:when>
-								<c:otherwise>
-									<liferay-ui:icon-help message="please-assign-the-task-to-yourself-to-be-able-to-edit-the-content" />
-								</c:otherwise>
-							</c:choose>
-						</c:if>
-					</liferay-ui:icon-list>
-				</div>
+								editPortletURL.setParameter("redirect", currentURL);
+								%>
 
-				<h3 class="task-content-title">
-					<img src="<%= workflowHandler.getIconPath((LiferayPortletRequest)renderRequest) %>" alt="" /> <%= workflowHandler.getTitle(classPK) %>
-				</h3>
+								<c:choose>
+									<c:when test="<%= assetRenderer.hasEditPermission(permissionChecker) %>">
+										<liferay-ui:icon image="edit" method="get" url="<%= editPortletURL.toString() %>" />
+									</c:when>
+									<c:otherwise>
+										<liferay-ui:icon-help message="please-assign-the-task-to-yourself-to-be-able-to-edit-the-content" />
+									</c:otherwise>
+								</c:choose>
+							</c:if>
+						</liferay-ui:icon-list>
+					</div>
 
-				<%
-				String path = workflowHandler.render(classPK, renderRequest, renderResponse, AssetRenderer.TEMPLATE_ABSTRACT);
+					<h3 class="task-content-title">
+						<img src="<%= workflowHandler.getIconPath((LiferayPortletRequest)renderRequest) %>" alt="" /> <%= workflowHandler.getTitle(classPK) %>
+					</h3>
 
-				request.setAttribute(WebKeys.ASSET_RENDERER, assetRenderer);
-				request.setAttribute(WebKeys.ASSET_PUBLISHER_ABSTRACT_LENGTH, 200);
-				%>
+					<%
+					String path = workflowHandler.render(classPK, renderRequest, renderResponse, AssetRenderer.TEMPLATE_ABSTRACT);
 
-				<c:choose>
-					<c:when test="<%= path == null %>">
-						<%= workflowHandler.getSummary(classPK) %>
-					</c:when>
-					<c:otherwise>
-						<liferay-util:include page="<%= path %>" portletId="<%= assetRendererFactory.getPortletId() %>" />
-					</c:otherwise>
-				</c:choose>
-			</liferay-ui:panel>
+					request.setAttribute(WebKeys.ASSET_RENDERER, assetRenderer);
+					request.setAttribute(WebKeys.ASSET_PUBLISHER_ABSTRACT_LENGTH, 200);
+					%>
+
+					<c:choose>
+						<c:when test="<%= path == null %>">
+							<%= workflowHandler.getSummary(classPK) %>
+						</c:when>
+						<c:otherwise>
+							<liferay-util:include page="<%= path %>" portletId="<%= assetRendererFactory.getPortletId() %>" />
+						</c:otherwise>
+					</c:choose>
+				</liferay-ui:panel>
+			</c:if>
 
 			<liferay-ui:panel defaultState="closed" title='<%= LanguageUtil.get(pageContext, "activities") %>'>
 
@@ -332,5 +346,5 @@ viewFullContentURL.setParameter("type", assetRendererFactory.getType());
 </aui:layout>
 
 <%
-PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, workflowTask.getName()) + ": " + assetEntry.getTitle(), currentURL);
+PortalUtil.addPortletBreadcrumbEntry(request, headerTitle, currentURL);
 %>
