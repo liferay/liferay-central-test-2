@@ -138,7 +138,7 @@ public class PanelFloatingContainerTag extends BaseBodyTagSupport {
 		}
 	}
 
-	protected String getId() {
+	public String getId() {
 		return _id;
 	}
 
