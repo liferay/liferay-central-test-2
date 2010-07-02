@@ -14,6 +14,10 @@ AUI().use(
 			var sessionData = {};
 			var sessionKey = 'show-portlet-description-' + portletId;
 
+			if (themeDisplay.isImpersonated()) {
+				sessionData.doAsUserId = themeDisplay.getDoAsUserIdEncoded();	
+			}
+
 			sessionData[sessionKey] = false;
 
 			portletInformationEl.show();

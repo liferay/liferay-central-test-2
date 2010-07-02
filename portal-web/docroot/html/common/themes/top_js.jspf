@@ -134,6 +134,9 @@
 				getParentGroupId: function() {
 					return "<%= themeDisplay.getParentGroupId() %>";
 				},
+				isImpersonated: function() {
+					return <%= themeDisplay.isImpersonated() %>;
+				},
 				isSignedIn: function() {
 					return <%= themeDisplay.isSignedIn() %>;
 				},
