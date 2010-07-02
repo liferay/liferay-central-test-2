@@ -15,7 +15,9 @@
 package com.liferay.portal.upgrade.v6_0_3;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.upgrade.BaseUpgradePortletPreferences;
+import com.liferay.portal.verify.VerifyUUID;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
 
@@ -25,6 +27,18 @@ import com.liferay.portlet.PortletPreferencesSerializer;
  * @author Julio Camarero
  */
 public class UpgradeScopes extends BaseUpgradePortletPreferences {
+
+	protected void doUpgrade() throws Exception {
+
+		// UUID
+
+		VerifyUUID.verifyModel(
+			LayoutLocalServiceUtil.class.getName(), "Layout", "plid");
+
+		// PortletPreferences
+
+		updatePortletPreferences();
+	}
 
 	protected String getUpdatePortletPreferencesWhereClause() {
 		return "preferences like '%lfr-scope-layout-id%'";
