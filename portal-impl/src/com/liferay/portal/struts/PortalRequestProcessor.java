@@ -515,11 +515,13 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				_log.error(e, e);
 			}
 
+			String queryRequest = request.getQueryString();
+
 			if ((Validator.isNull(fullPath)) &&
-				(Validator.isNotNull(request.getQueryString()))) {
+				(Validator.isNotNull(queryRequest))) {
 
 				fullPath = path.concat(StringPool.QUESTION).concat(
-					request.getQueryString());
+					queryRequest);
 			}
 			else {
 				fullPath = path;
