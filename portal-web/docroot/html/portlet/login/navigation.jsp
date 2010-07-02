@@ -27,7 +27,7 @@ if (!strutsAction.equals("/login/create_account") && company.isStrangers()) {
 
 boolean showFacebookConnectIcon = false;
 
-if (!strutsAction.equals("/login/facebook_connect") && FacebookConnectUtil.isEnabled(company.getCompanyId())) {
+if (!strutsAction.startsWith("/login/facebook_connect") && FacebookConnectUtil.isEnabled(company.getCompanyId())) {
 	showFacebookConnectIcon = true;
 }
 
@@ -62,8 +62,13 @@ if (Validator.isNotNull(strutsAction) && !strutsAction.equals("/login/login")) {
 			</c:if>
 
 			<c:if test="<%= showFacebookConnectIcon %>">
+				<portlet:renderURL var="facebookRedirectURL">
+					<portlet:param name="struts_action" value="/login/facebook_connect_add_user" />
+				</portlet:renderURL>
+
 				<portlet:actionURL var="facebookConnectURL">
 					<portlet:param name="struts_action" value="/login/facebook_connect" />
+					<portlet:param name="redirect" value="<%= facebookRedirectURL %>" />
 				</portlet:actionURL>
 
 				<liferay-ui:icon

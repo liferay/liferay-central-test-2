@@ -84,6 +84,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String FACEBOOK_USER_EMAIL_ADDRESS = "FACEBOOK_USER_EMAIL_ADDRESS";
 
+	public static final String FACEBOOK_USER_ID = "FACEBOOK_USER_ID";
+
 	public static final String FORM_NAME = "FORM_NAME";
 
 	public static final String FORM_NAVIGATOR_SECTION_SHOW = "FORM_NAVIGATOR_SECTION_SHOW_";

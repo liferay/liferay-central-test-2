@@ -14,8 +14,10 @@
 
 package com.liferay.portal.security.auth;
 
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -44,16 +46,33 @@ public class FacebookAutoLogin implements AutoLogin {
 			String emailAddress =  (String)session.getAttribute(
 				WebKeys.FACEBOOK_USER_EMAIL_ADDRESS);
 
-			if (Validator.isNull(emailAddress)) {
-				return null;
-			}
-
-			session.removeAttribute(WebKeys.FACEBOOK_USER_EMAIL_ADDRESS);
+			User user = null;
 
 			long companyId = PortalUtil.getCompanyId(request);
 
-			User user = UserLocalServiceUtil.getUserByEmailAddress(
-				companyId, emailAddress);
+			if (Validator.isNotNull(emailAddress)) {
+				session.removeAttribute(WebKeys.FACEBOOK_USER_EMAIL_ADDRESS);
+
+				try {
+					user = UserLocalServiceUtil.getUserByEmailAddress(
+						companyId, emailAddress);
+				}
+				catch (NoSuchUserException nsue) {
+				}
+			}
+			else {
+				long facebookId = GetterUtil.getLong((
+					String) session.getAttribute(WebKeys.FACEBOOK_USER_ID));
+
+				if (facebookId > 0) {
+					session.removeAttribute(WebKeys.FACEBOOK_USER_ID);
+					user = UserLocalServiceUtil.getUserByFacebookId(
+						companyId, facebookId);
+				}
+				else {
+					return null;
+				}
+			}
 
 			credentials = new String[3];
 

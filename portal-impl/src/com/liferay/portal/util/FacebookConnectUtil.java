@@ -14,7 +14,11 @@
 
 package com.liferay.portal.util;
 
+import javax.portlet.PortletRequest;
+import javax.servlet.http.HttpServletRequest;
+
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.util.PropsKeys;
 
 /**
@@ -23,6 +27,16 @@ import com.liferay.portal.kernel.util.PropsKeys;
  * @author Wilson Man
  */
 public class FacebookConnectUtil {
+
+	public static String getAccessToken(PortletRequest portletRequest)
+		throws SystemException {
+
+		HttpServletRequest request = PortalUtil.getOriginalServletRequest(
+			((LiferayPortletRequest) portletRequest).getHttpServletRequest());
+
+		return (String) request.getSession().getAttribute(
+			WebKeys.FACEBOOK_ACCESS_TOKEN);
+	}
 
 	public static String getAccessTokenURL(long companyId)
 		throws SystemException {
@@ -70,4 +84,14 @@ public class FacebookConnectUtil {
 			PropsValues.FACEBOOK_CONNECT_AUTH_ENABLED);
 	}
 
+	public static void setFacebookEmailInSession(
+			PortletRequest portletRequest, String email)
+		throws SystemException {
+
+		HttpServletRequest request = PortalUtil.getOriginalServletRequest(
+			((LiferayPortletRequest) portletRequest).getHttpServletRequest());
+
+		request.getSession().setAttribute(
+			WebKeys.FACEBOOK_USER_EMAIL_ADDRESS, email);
+	}
 }

@@ -811,6 +811,10 @@
 		<put name="portlet_content" value="/portlet/login/create_account.jsp" />
 	</definition>
 
+	<definition name="portlet.login.facebook.add_user" extends="portlet.login">
+		<put name="portlet_content" value="/portlet/login/facebook_add_user.jsp" />
+	</definition>
+
 	<definition name="portlet.login.forgot_password" extends="portlet.login">
 		<put name="portlet_content" value="/portlet/login/forgot_password.jsp" />
 	</definition>

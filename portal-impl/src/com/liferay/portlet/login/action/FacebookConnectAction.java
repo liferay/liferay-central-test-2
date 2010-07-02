@@ -14,21 +14,35 @@
 
 package com.liferay.portlet.login.action;
 
+import java.util.Calendar;
+import java.util.Locale;
+
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.FacebookConnectUtil;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletURLFactoryUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletMode;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletURL;
+import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -59,17 +73,24 @@ public class FacebookConnectAction extends PortletAction {
 			return;
 		}
 
-		String redirect = HttpUtil.addParameter(
-			FacebookConnectUtil.getAuthURL(companyId), "client_id",
-			FacebookConnectUtil.getAppId(companyId));
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		redirect = HttpUtil.addParameter(
-			redirect, "redirect_uri",
-			FacebookConnectUtil.getRedirectURL(companyId));
+		if (cmd.equals(Constants.ADD)) {
+			processAddUser(actionRequest, actionResponse);
+		}
+		else {
+			String redirect = HttpUtil.addParameter(
+				FacebookConnectUtil.getAuthURL(companyId), "client_id",
+				FacebookConnectUtil.getAppId(companyId));
 
-		redirect = HttpUtil.addParameter(redirect, "scope", "email");
+			redirect = HttpUtil.addParameter(
+				redirect, "redirect_uri",
+				FacebookConnectUtil.getRedirectURL(companyId));
 
-		actionResponse.sendRedirect(redirect);
+			redirect = HttpUtil.addParameter(redirect, "scope", "email");
+
+			actionResponse.sendRedirect(redirect);
+		}
 	}
 
 	public ActionForward strutsExecute(
@@ -86,18 +107,15 @@ public class FacebookConnectAction extends PortletAction {
 
 		String token = getAccessToken(companyId, code);
 
+		HttpSession session = request.getSession();
+
 		if (Validator.isNotNull(token)) {
-			String emailAddress = getEmailAddress(companyId, token);
+			session.setAttribute(WebKeys.FACEBOOK_ACCESS_TOKEN, token);
 
-			if (Validator.isNotNull(emailAddress)) {
-				HttpSession session = request.getSession();
-
-				session.setAttribute(
-					WebKeys.FACEBOOK_USER_EMAIL_ADDRESS, emailAddress);
-			}
+			getFacebookCredentials(session, companyId, token);
 		}
 
-		response.sendRedirect(themeDisplay.getPathContext());
+		response.sendRedirect(getRedirect(request, themeDisplay));
 
 		return null;
 	}
@@ -141,7 +159,8 @@ public class FacebookConnectAction extends PortletAction {
 		return null;
 	}
 
-	protected String getEmailAddress(long companyId, String token)
+	protected void getFacebookCredentials(
+			HttpSession session, long companyId, String token)
 		throws Exception {
 
 		String url = HttpUtil.addParameter(
@@ -160,11 +179,105 @@ public class FacebookConnectAction extends PortletAction {
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(content);
 
 			if (jsonObject.getBoolean("verified")) {
-				return jsonObject.getString("email");
+				String email = jsonObject.getString("email");
+
+				if (Validator.isNotNull(email)) {
+					try {
+						UserLocalServiceUtil.getUserByEmailAddress(
+							companyId, email);
+
+						session.setAttribute(
+							WebKeys.FACEBOOK_USER_EMAIL_ADDRESS, email);
+					}
+					catch (NoSuchUserException nsue) {
+						session.removeAttribute(
+							WebKeys.FACEBOOK_USER_EMAIL_ADDRESS);
+					}
+				}
+				else {
+					session.removeAttribute(
+						WebKeys.FACEBOOK_USER_EMAIL_ADDRESS);
+
+					String facebookId = jsonObject.getString("id");
+
+					if (Validator.isNotNull(facebookId)) {
+						session.setAttribute(
+							WebKeys.FACEBOOK_USER_ID, facebookId);
+					}
+				}
 			}
 		}
+	}
 
-		return null;
+	protected String getRedirect(
+			HttpServletRequest request, ThemeDisplay themeDisplay)
+		throws Exception {
+
+		HttpSession session = request.getSession();
+
+		if (session.getAttribute(WebKeys.FACEBOOK_ACCESS_TOKEN) != null &&
+			session.getAttribute(WebKeys.FACEBOOK_USER_EMAIL_ADDRESS) != null) {
+
+			return themeDisplay.getPathContext();
+		}
+		else {
+			PortletURL portletURL = PortletURLFactoryUtil.create(
+				request, PortletKeys.LOGIN, themeDisplay.getLayout().getPlid(),
+				PortletRequest.RENDER_PHASE);
+
+			portletURL.setWindowState(WindowState.MAXIMIZED);
+			portletURL.setPortletMode(PortletMode.VIEW);
+			portletURL.setParameter("struts_action", "/login/facebook_connect_add_user");
+
+			return portletURL.toString();
+		}
+	}
+
+	protected void processAddUser(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws Exception {
+
+		String token = FacebookConnectUtil.getAccessToken(actionRequest);
+
+		long companyId = PortalUtil.getCompanyId(actionRequest);
+
+		String url = HttpUtil.addParameter(
+			FacebookConnectUtil.getGraphURL(companyId) + "/me", "access_token",
+			token);
+
+		url = HttpUtil.addParameter(url, "fields",
+			"email,first_name,last_name,birthday,gender,verified");
+
+		Http.Options options = new Http.Options();
+
+		options.setLocation(url);
+
+		String content = HttpUtil.URLtoString(options);
+
+		if (Validator.isNotNull(content)) {
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(content);
+
+			if (jsonObject.getBoolean("verified")) {
+				String email = jsonObject.getString("email");
+				String firstName = jsonObject.getString("first_name");
+				String lastName = jsonObject.getString("last_name");
+				String gender = jsonObject.getString("gender");
+				long facebookId = jsonObject.getLong("id");
+
+				UserLocalServiceUtil.addUser(
+					0l, companyId, true, null, null, true, null, email,
+					facebookId, StringPool.BLANK, Locale.getDefault(),
+					firstName, StringPool.BLANK, lastName, 0, 0,
+					gender.equals("male"), Calendar.JANUARY, 1, 1970,
+					StringPool.BLANK, null, null, null, null, true,
+					new ServiceContext());
+
+				FacebookConnectUtil.setFacebookEmailInSession(
+					actionRequest, email);
+
+				actionResponse.sendRedirect("/");
+			}
+		}
 	}
 
 }
