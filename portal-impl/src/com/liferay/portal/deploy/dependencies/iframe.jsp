@@ -17,9 +17,13 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <%@ page import="com.liferay.portal.kernel.util.GetterUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.HttpUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.StringPool" %>
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
+
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Map" %>
 
 <%@ page import="javax.portlet.PortletURL" %>
 
@@ -28,7 +32,13 @@
 <%
 String defaultHeight = GetterUtil.getString(portletConfig.getInitParameter("wai.connector.iframe.height.default"), "500");
 
-String appURL = (String)request.getAttribute("appURL");
+Map<String, String[]> parameterMap = new HashMap<String, String[]>(renderRequest.getParameterMap());
+
+String appURL = ParamUtil.getString(request, "appURL", renderRequest.getContextPath());
+
+parameterMap.remove("appURL");
+
+appURL = appURL.concat(HttpUtil.parameterMapToString(parameterMap));
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
