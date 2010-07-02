@@ -65,7 +65,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	</c:if>
 
 	<c:if test="<%= entry != null %>">
-		<aui:workflow-status id="<%= entry.getEntryId() %>" status="<%= entry.getStatus() %>" />
+		<aui:workflow-status id="<%= String.valueOf(entry.getEntryId()) %>" status="<%= entry.getStatus() %>" />
 	</c:if>
 
 	<aui:fieldset>
