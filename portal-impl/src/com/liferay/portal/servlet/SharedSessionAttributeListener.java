@@ -61,7 +61,7 @@ public class SharedSessionAttributeListener
 			return;
 		}
 
-		SharedSessionAttributeCache cache =
+		SharedSessionAttributeCache sharedSessionAttributeCache =
 			SharedSessionAttributeCache.getInstance(session);
 
 		String name = event.getName();
@@ -77,7 +77,7 @@ public class SharedSessionAttributeListener
 				continue;
 			}
 
-			cache.setAttribute(name, event.getValue());
+			sharedSessionAttributeCache.setAttribute(name, event.getValue());
 
 			return;
 		}
@@ -94,10 +94,10 @@ public class SharedSessionAttributeListener
 			return;
 		}
 
-		SharedSessionAttributeCache cache =
+		SharedSessionAttributeCache sharedSessionAttributeCache =
 			SharedSessionAttributeCache.getInstance(session);
 
-		cache.removeAttribute(event.getName());
+		sharedSessionAttributeCache.removeAttribute(event.getName());
 	}
 
 	public void attributeReplaced(HttpSessionBindingEvent event) {
@@ -111,11 +111,12 @@ public class SharedSessionAttributeListener
 			return;
 		}
 
-		SharedSessionAttributeCache cache =
+		SharedSessionAttributeCache sharedSessionAttributeCache =
 			SharedSessionAttributeCache.getInstance(session);
 
-		if (cache.contains(event.getName())) {
-			cache.setAttribute(event.getName(), event.getValue());
+		if (sharedSessionAttributeCache.contains(event.getName())) {
+			sharedSessionAttributeCache.setAttribute(
+				event.getName(), event.getValue());
 		}
 	}
 
