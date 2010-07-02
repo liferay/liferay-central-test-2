@@ -233,10 +233,12 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 
 			String fieldParam = (String)dynamicAttributes.get("fieldParam");
 
-			String fieldParamValue = request.getParameter(fieldParam);
+			if (Validator.isNotNull(fieldParam)) {
+				String fieldParamValue = request.getParameter(fieldParam);
 
-			if (Validator.isNotNull(fieldParamValue)) {
-				valueString = fieldParamValue;
+				if (Validator.isNotNull(fieldParamValue)) {
+					valueString = fieldParamValue;
+				}
 			}
 		}
 
