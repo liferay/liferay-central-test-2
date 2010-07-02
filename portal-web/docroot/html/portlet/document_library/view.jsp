@@ -130,25 +130,25 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 				/>
 			</c:if>
 
-			<aui:column columnWidth="<%= showFolderMenu ? 75 : 100 %>" cssClass="folder-column folder-column-first" first="<%= true %>">
-				<liferay-ui:panel-container extended="<%= false %>" id="documentLibraryPanelContainer" persistState="<%= true %>">
+			<aui:column columnWidth="<%= showFolderMenu ? 75 : 100 %>" cssClass="asset-column asset-column-details" first="<%= true %>">
+				<liferay-ui:panel-container extended="<%= false %>" persistState="<%= true %>">
 					<c:if test="<%= folder != null %>">
 						<c:if test="<%= Validator.isNotNull(folder.getDescription()) %>">
-							<div class="folder-description">
+							<div class="asset-description">
 								<%= folder.getDescription() %>
 							</div>
 						</c:if>
 
-						<div class="folder-metadata">
-							<div class="folder-date">
+						<div class="asset-metadata">
+							<div class="asset-icon asset-date">
 								<%= LanguageUtil.format(pageContext, "last-updated-x", dateFormatDateTime.format(folder.getModifiedDate())) %>
 							</div>
 
-							<div class="folder-subfolders">
+							<div class="asset-icon asset-subfolders">
 								<%= foldersCount %> <liferay-ui:message key='<%= (foldersCount == 1) ? "subfolder" : "subfolders" %>' />
 							</div>
 
-							<div class="folder-file-entries">
+							<div class="asset-icon asset-items last">
 								<%= fileEntriesCount %> <liferay-ui:message key='<%= (fileEntriesCount == 1) ? "document" : "documents" %>' />
 							</div>
 						</div>
@@ -164,7 +164,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 					</c:if>
 
 					<c:if test="<%= foldersCount > 0 %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="subFoldersPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, (folder != null) ? "subfolders" : "folders") %>'>
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, (folder != null) ? "subfolders" : "folders") %>'>
 							<liferay-ui:search-container
 								curParam="cur1"
 								delta="<%= foldersPerPage %>"
@@ -198,7 +198,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 
 					<c:choose>
 						<c:when test="<%= showTabs %>">
-							<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="documentsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "documents") %>'>
+							<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "documents") %>'>
 								<%@ include file="/html/portlet/document_library/view_file_entries.jspf" %>
 							</liferay-ui:panel>
 						</c:when>
@@ -210,15 +210,15 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 			</aui:column>
 
 			<c:if test="<%= showFolderMenu %>">
-				<aui:column columnWidth="<%= 25 %>" cssClass="detail-column detail-column-last" last="<%= true %>">
-					<div class="folder-icon">
+				<aui:column columnWidth="<%= 25 %>" cssClass="asset-column asset-column-actions" last="<%= true %>">
+					<div class="asset-summary">
 						<liferay-ui:icon
-							cssClass="folder-avatar"
+							cssClass="asset-avatar"
 							image='<%= "../file_system/large/" + (((foldersCount + fileEntriesCount) > 0) ? "folder_full_document" : "folder_empty") %>'
 							message='<%= (folder != null) ? folder.getName() : LanguageUtil.get(pageContext, "documents-home") %>'
 						/>
 
-						<div class="folder-name">
+						<div class="asset-name">
 							<h4><%= (folder != null) ? folder.getName() : LanguageUtil.get(pageContext, "documents-home") %></h4>
 						</div>
 					</div>

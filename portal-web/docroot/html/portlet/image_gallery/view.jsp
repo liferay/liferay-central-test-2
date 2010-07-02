@@ -144,23 +144,23 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 				/>
 			</c:if>
 
-			<aui:column columnWidth="<%= 75 %>" cssClass="folder-column folder-column-first" first="<%= true %>">
+			<aui:column columnWidth="<%= 75 %>" cssClass="asset-column asset-column-details" first="<%= true %>">
 				<liferay-ui:panel-container extended="<%= false %>" id="imageGalleryPanelContainer" persistState="<%= true %>">
 					<c:if test="<%= folder != null %>">
-						<div class="folder-description">
+						<div class="asset-description">
 							<%= folder.getDescription() %>
 						</div>
 
-						<div class="folder-metadata">
-							<div class="folder-date">
+						<div class="asset-metadata">
+							<div class="asset-icon asset-date">
 								<%= LanguageUtil.format(pageContext, "last-updated-x", dateFormatDate.format(folder.getModifiedDate())) %>
 							</div>
 
-							<div class="folder-subfolders">
+							<div class="asset-icon asset-subfolders">
 								<%= foldersCount %> <liferay-ui:message key='<%= (foldersCount == 1) ? "subfolder" : "subfolders" %>' />
 							</div>
 
-							<div class="folder-images">
+							<div class="asset-icon asset-items last">
 								<%= imagesCount %> <liferay-ui:message key='<%= (imagesCount == 1) ? "image" : "images" %>' />
 							</div>
 						</div>
@@ -203,15 +203,15 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 				</liferay-ui:panel-container>
 			</aui:column>
 
-			<aui:column columnWidth="<%= 25 %>" cssClass="detail-column detail-column-last" last="<%= true %>">
-				<div class="folder-icon">
+			<aui:column columnWidth="<%= 25 %>" cssClass="asset-column asset-column-actions" last="<%= true %>">
+				<div class="asset-summary">
 					<liferay-ui:icon
-						cssClass="folder-avatar"
+						cssClass="asset-avatar"
 						image='<%= "../file_system/large/" + (((foldersCount + imagesCount) > 0) ? "folder_full_image" : "folder_empty") %>'
 						message='<%= (folder != null) ? folder.getName() : LanguageUtil.get(pageContext, "images-home") %>'
 					/>
 
-					<div class="folder-name">
+					<div class="asset-name">
 						<h4><%= (folder != null) ? folder.getName() : LanguageUtil.get(pageContext, "images-home") %></h4>
 					</div>
 				</div>

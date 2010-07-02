@@ -152,15 +152,15 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 </c:if>
 
 <aui:layout>
-	<aui:column columnWidth="<%= 75 %>" cssClass="file-entry-column file-entry-column-first" first="<%= true %>">
-		<div class="file-entry-categories">
+	<aui:column columnWidth="<%= 75 %>" cssClass="asset-column asset-column-details" first="<%= true %>">
+		<div class="asset-categories">
 			<liferay-ui:asset-categories-summary
 				className="<%= DLFileEntry.class.getName() %>"
 				classPK="<%= fileEntryId %>"
 			/>
 		</div>
 
-		<div class="file-entry-tags">
+		<div class="asset-tags">
 			<liferay-ui:asset-tags-summary
 				className="<%= DLFileEntry.class.getName() %>"
 				classPK="<%= fileEntryId %>"
@@ -169,7 +169,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 		</div>
 
 		<c:if test="<%= Validator.isNotNull(fileEntry.getDescription()) %>">
-			<div class="file-entry-description">
+			<div class="asset-description">
 				<%= fileEntry.getDescription() %>
 			</div>
 		</c:if>
@@ -183,33 +183,35 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			/>
 		</liferay-ui:custom-attributes-available>
 
-		<div class="file-entry-author">
-			<%= LanguageUtil.format(pageContext, "last-updated-by-x", HtmlUtil.escape(PortalUtil.getUserName(fileEntry.getUserId(), fileEntry.getUserName()))) %>
-		</div>
-
-		<div class="file-entry-date">
-			<%= dateFormatDateTime.format(fileEntry.getModifiedDate()) %>
-		</div>
-
-		<c:if test="<%= PropsValues.DL_FILE_ENTRY_READ_COUNT_ENABLED %>">
-			<div class="file-entry-downloads">
-
-				<%
-				int readCount = fileEntry.getReadCount();
-				%>
-
-				<%= readCount %> <liferay-ui:message key='<%= (readCount == 1) ? "download" : "downloads" %>' />
+		<div class="asset-metadata">
+			<div class="asset-icon asset-author">
+				<%= LanguageUtil.format(pageContext, "last-updated-by-x", HtmlUtil.escape(PortalUtil.getUserName(fileEntry.getUserId(), fileEntry.getUserName()))) %>
 			</div>
-		</c:if>
 
-		<div class="file-entry-ratings">
+			<div class="asset-icon asset-date">
+				<%= dateFormatDateTime.format(fileEntry.getModifiedDate()) %>
+			</div>
+
+			<c:if test="<%= PropsValues.DL_FILE_ENTRY_READ_COUNT_ENABLED %>">
+				<div class="asset-icon asset-downloads last">
+
+					<%
+					int readCount = fileEntry.getReadCount();
+					%>
+
+					<%= readCount %> <liferay-ui:message key='<%= (readCount == 1) ? "download" : "downloads" %>' />
+				</div>
+			</c:if>
+		</div>
+
+		<div class="asset-ratings">
 			<liferay-ui:ratings
 				className="<%= DLFileEntry.class.getName() %>"
 				classPK="<%= fileEntryId %>"
 			/>
 		</div>
 
-		<div class="file-entry-field">
+		<div class="asset-field">
 			<label><liferay-ui:message key="url" /></label>
 
 			<liferay-ui:input-resource
@@ -218,7 +220,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 		</div>
 
 		<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
-			<div class="file-entry-field">
+			<div class="asset-field">
 
 				<%
 				String webDavHelpMessage = null;
@@ -238,27 +240,27 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 		</c:if>
 	</aui:column>
 
-	<aui:column columnWidth="<%= 25 %>" cssClass="detail-column detail-column-last" last="<%= true %>">
+	<aui:column columnWidth="<%= 25 %>" cssClass="asset-column asset-column-actions" last="<%= true %>">
 		<c:if test="<%= isLocked %>">
 			<img alt="" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/large/overlay_lock.png">
 		</c:if>
 
-		<div class="file-entry-download">
+		<div class="asset-summary">
 			<liferay-ui:icon
-				cssClass="file-entry-avatar"
+				cssClass="asset-avatar"
 				image='<%= "../file_system/large/" + DLUtil.getGenericName(extension) %>'
 				message="download"
 				url="<%= fileUrl %>"
 			/>
 
-			<div class="file-entry-name">
+			<div class="asset-name">
 				<a href="<%= fileUrl %>">
 					<%= title %>
 				</a>
 			</div>
 
 			<c:if test="<%= conversions.length > 0 %>">
-				<div class="file-entry-field file-entry-conversions">
+				<div class="asset-field asset-conversions">
 					<label><liferay-ui:message key="other-available-formats" /></label>
 
 					<%
@@ -289,8 +291,8 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	</aui:column>
 </aui:layout>
 
-<div class="file-entry-panels">
-	<liferay-ui:panel-container extended="<%= false %>" id="documentPanelContainer" persistState="<%= true %>">
+<div class="asset-panels">
+	<liferay-ui:panel-container extended="<%= false %>" persistState="<%= true %>">
 		<liferay-ui:panel collapsible="<%= true %>" cssClass="version-history" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "version-history") %>'>
 
 			<%

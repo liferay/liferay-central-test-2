@@ -52,15 +52,15 @@ request.setAttribute("view_entry.jsp-entry", entry);
 </c:if>
 
 <aui:layout>
-	<aui:column columnWidth="<%= 75 %>" cssClass="entry-column entry-column-first" first="<%= true %>">
-		<div class="entry-categories">
+	<aui:column columnWidth="<%= 75 %>" cssClass="asset-column asset-column-details" first="<%= true %>">
+		<div class="asset-categories">
 			<liferay-ui:asset-categories-summary
 				className="<%= BookmarksEntry.class.getName() %>"
 				classPK="<%= entryId %>"
 			/>
 		</div>
 
-		<div class="entry-tags">
+		<div class="asset-tags">
 			<liferay-ui:asset-tags-summary
 				className="<%= BookmarksEntry.class.getName() %>"
 				classPK="<%= entryId %>"
@@ -68,11 +68,11 @@ request.setAttribute("view_entry.jsp-entry", entry);
 			/>
 		</div>
 
-		<div class="entry-url">
+		<div class="asset-url">
 			<a href="<%= themeDisplay.getPathMain() %>/bookmarks/open_entry?entryId=<%= entry.getEntryId() %>"><%= entry.getUrl() %></a>
 		</div>
 
-		<div class="entry-description">
+		<div class="asset-description">
 			<%= entry.getComments() %>
 		</div>
 
@@ -85,19 +85,21 @@ request.setAttribute("view_entry.jsp-entry", entry);
 			/>
 		</liferay-ui:custom-attributes-available>
 
-		<div class="entry-author">
-			<%= LanguageUtil.format(pageContext, "created-by-x", HtmlUtil.escape(PortalUtil.getUserName(entry.getUserId(), themeDisplay.getScopeGroupName()))) %>
+		<div class="asset-metadata">
+			<div class="asset-icon asset-author">
+				<%= LanguageUtil.format(pageContext, "created-by-x", HtmlUtil.escape(PortalUtil.getUserName(entry.getUserId(), themeDisplay.getScopeGroupName()))) %>
+			</div>
+
+			<div class="asset-icon asset-date">
+				<%= dateFormatDate.format(entry.getCreateDate()) %>
+			</div>
+
+			<div class="asset-icon asset-downloads last">
+				<%= entry.getVisits() %> <liferay-ui:message key="visits" />
+			</div>
 		</div>
 
-		<div class="entry-date">
-			<%= dateFormatDate.format(entry.getCreateDate()) %>
-		</div>
-
-		<div class="entry-downloads">
-			<%= entry.getVisits() %> <liferay-ui:message key="visits" />
-		</div>
-
-		<div class="entry-ratings">
+		<div class="asset-ratings">
 			<liferay-ui:ratings
 				className="<%= BookmarksEntry.class.getName() %>"
 				classPK="<%= entryId %>"
@@ -105,16 +107,16 @@ request.setAttribute("view_entry.jsp-entry", entry);
 		</div>
 	</aui:column>
 
-	<aui:column columnWidth="<%= 25 %>" cssClass="detail-column detail-column-last" last="<%= true %>">
-		<div class="entry-download">
+	<aui:column columnWidth="<%= 25 %>" cssClass="asset-column asset-column-actions" last="<%= true %>">
+		<div class="asset-summary">
 			<liferay-ui:icon
-				cssClass="entry-avatar"
+				cssClass="asset-avatar"
 				image="../file_system/large/bookmark"
 				message="download"
 				url="<%= entry.getUrl() %>"
 			/>
 
-			<div class="entry-name">
+			<div class="asset-name">
 				<a href="<%= entry.getUrl() %>">
 					<%= entry.getName() %>
 				</a>
