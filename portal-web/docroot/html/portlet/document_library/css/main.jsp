@@ -17,8 +17,8 @@
 <%@ include file="/html/portlet/css_init.jsp" %>
 
 .portlet-document-library .file-entry-list-description {
-	font-style:italic;
-	margin-left:10px;
+	font-style: italic;
+	margin-left: 10px;
 }
 
 .portlet-document-library .file-entry-tags {
