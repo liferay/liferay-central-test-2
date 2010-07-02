@@ -49,6 +49,7 @@
 <%@ page import="com.liferay.portlet.documentlibrary.NoSuchFileEntryException" %>
 <%@ page import="com.liferay.portlet.documentlibrary.NoSuchFolderException" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntry" %>
+<%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntryConstants" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFileShortcut" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFileVersion" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFolder" %>
