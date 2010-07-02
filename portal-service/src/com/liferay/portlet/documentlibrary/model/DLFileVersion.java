@@ -42,7 +42,9 @@ package com.liferay.portlet.documentlibrary.model;
 public interface DLFileVersion extends DLFileVersionModel {
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge();
 
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry();
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public java.lang.String getIcon();
 }

@@ -525,10 +525,10 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 		dlFileEntryImpl.setExtension(dlFileEntry.getExtension());
 		dlFileEntryImpl.setTitle(dlFileEntry.getTitle());
 		dlFileEntryImpl.setDescription(dlFileEntry.getDescription());
+		dlFileEntryImpl.setExtraSettings(dlFileEntry.getExtraSettings());
 		dlFileEntryImpl.setVersion(dlFileEntry.getVersion());
 		dlFileEntryImpl.setSize(dlFileEntry.getSize());
 		dlFileEntryImpl.setReadCount(dlFileEntry.getReadCount());
-		dlFileEntryImpl.setExtraSettings(dlFileEntry.getExtraSettings());
 
 		return dlFileEntryImpl;
 	}

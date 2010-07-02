@@ -182,6 +182,14 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		_dlFileEntry.setDescription(description);
 	}
 
+	public java.lang.String getExtraSettings() {
+		return _dlFileEntry.getExtraSettings();
+	}
+
+	public void setExtraSettings(java.lang.String extraSettings) {
+		_dlFileEntry.setExtraSettings(extraSettings);
+	}
+
 	public java.lang.String getVersion() {
 		return _dlFileEntry.getVersion();
 	}
@@ -204,14 +212,6 @@ public class DLFileEntryWrapper implements DLFileEntry {
 
 	public void setReadCount(int readCount) {
 		_dlFileEntry.setReadCount(readCount);
-	}
-
-	public java.lang.String getExtraSettings() {
-		return _dlFileEntry.getExtraSettings();
-	}
-
-	public void setExtraSettings(java.lang.String extraSettings) {
-		_dlFileEntry.setExtraSettings(extraSettings);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry toEscapedModel() {
@@ -280,6 +280,12 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		return _dlFileEntry.getExtraSettingsProperties();
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion getFileVersion()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntry.getFileVersion();
+	}
+
 	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder() {
 		return _dlFileEntry.getFolder();
 	}
@@ -288,11 +294,9 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		return _dlFileEntry.getIcon();
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileVersion getFileVersion() {
-		return _dlFileEntry.getFileVersion();
-	}
-
-	public com.liferay.portlet.documentlibrary.model.DLFileVersion getLatestFileVersion() {
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion getLatestFileVersion()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileEntry.getLatestFileVersion();
 	}
 

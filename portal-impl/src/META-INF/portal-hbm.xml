@@ -1181,10 +1181,10 @@
 		<property name="extension" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="extraSettings" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="version" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="size" column="size_" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="readCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="extraSettings" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl" table="DLFileRank">
 		<cache usage="read-write" />
@@ -1233,8 +1233,8 @@
 		<property name="extension" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="changeLog" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="extraSettings" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="changelog" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="version" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="size" column="size_" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />

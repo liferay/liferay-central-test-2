@@ -72,10 +72,10 @@ public class DLFileEntryJSONSerializer {
 		jsonObj.put("extension", model.getExtension());
 		jsonObj.put("title", model.getTitle());
 		jsonObj.put("description", model.getDescription());
+		jsonObj.put("extraSettings", model.getExtraSettings());
 		jsonObj.put("version", model.getVersion());
 		jsonObj.put("size", model.getSize());
 		jsonObj.put("readCount", model.getReadCount());
-		jsonObj.put("extraSettings", model.getExtraSettings());
 
 		return jsonObj;
 	}

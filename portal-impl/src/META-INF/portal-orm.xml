@@ -1384,12 +1384,12 @@
 			<basic name="extension" />
 			<basic name="title" />
 			<basic name="description" />
+			<basic name="extraSettings" />
 			<basic name="version" />
 			<basic name="size">
 				<column name="SIZE_" />
 			</basic>
 			<basic name="readCount" />
-			<basic name="extraSettings" />
 			<transient name="primaryKey" />
 			<transient name="userUuid" />
 			<transient name="versionUserUuid" />
@@ -1455,8 +1455,8 @@
 			<basic name="extension" />
 			<basic name="title" />
 			<basic name="description" />
+			<basic name="changeLog" />
 			<basic name="extraSettings" />
-			<basic name="changelog" />
 			<basic name="version" />
 			<basic name="size">
 				<column name="SIZE_" />

@@ -388,10 +388,10 @@ create table DLFileEntry (
 	extension VARCHAR(75) null,
 	title VARCHAR(255) null,
 	description STRING null,
+	extraSettings TEXT null,
 	version VARCHAR(75) null,
 	size_ LONG,
-	readCount INTEGER,
-	extraSettings TEXT null
+	readCount INTEGER
 );
 
 create table DLFileRank (
@@ -434,8 +434,8 @@ create table DLFileVersion (
 	extension VARCHAR(75) null,
 	title VARCHAR(75) null,
 	description STRING null,
+	changeLog VARCHAR(75) null,
 	extraSettings VARCHAR(75) null,
-	changelog VARCHAR(75) null,
 	version VARCHAR(75) null,
 	size_ LONG,
 	status INTEGER,

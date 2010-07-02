@@ -59,8 +59,8 @@ public class DLFileVersionJSONSerializer {
 		jsonObj.put("extension", model.getExtension());
 		jsonObj.put("title", model.getTitle());
 		jsonObj.put("description", model.getDescription());
+		jsonObj.put("changeLog", model.getChangeLog());
 		jsonObj.put("extraSettings", model.getExtraSettings());
-		jsonObj.put("changelog", model.getChangelog());
 		jsonObj.put("version", model.getVersion());
 		jsonObj.put("size", model.getSize());
 		jsonObj.put("status", model.getStatus());

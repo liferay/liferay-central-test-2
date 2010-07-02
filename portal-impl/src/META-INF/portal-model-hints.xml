@@ -1061,12 +1061,12 @@
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
-		<field name="version" type="String" />
-		<field name="size" type="long" />
-		<field name="readCount" type="int" />
 		<field name="extraSettings" type="String">
 			<hint-collection name="CLOB" />
 		</field>
+		<field name="version" type="String" />
+		<field name="size" type="long" />
+		<field name="readCount" type="int" />
 	</model>
 	<model name="com.liferay.portlet.documentlibrary.model.DLFileRank">
 		<field name="fileRankId" type="long" />
@@ -1114,8 +1114,8 @@
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
+		<field name="changeLog" type="String" />
 		<field name="extraSettings" type="String" />
-		<field name="changelog" type="String" />
 		<field name="version" type="String" />
 		<field name="size" type="long" />
 		<field name="status" type="int" />

@@ -116,7 +116,7 @@ public interface DLFileEntryLocalService {
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		long userId, long groupId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
-		java.lang.String changelog, java.lang.String extraSettings,
+		java.lang.String changeLog, java.lang.String extraSettings,
 		byte[] bytes, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -124,7 +124,7 @@ public interface DLFileEntryLocalService {
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		long userId, long groupId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
-		java.lang.String changelog, java.lang.String extraSettings,
+		java.lang.String changeLog, java.lang.String extraSettings,
 		java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -133,7 +133,7 @@ public interface DLFileEntryLocalService {
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		long userId, long groupId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
-		java.lang.String changelog, java.lang.String extraSettings,
+		java.lang.String changeLog, java.lang.String extraSettings,
 		java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -166,7 +166,7 @@ public interface DLFileEntryLocalService {
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addOrOverwriteFileEntry(
 		long userId, long groupId, long folderId, java.lang.String name,
 		java.lang.String sourceName, java.lang.String title,
-		java.lang.String description, java.lang.String changelog,
+		java.lang.String description, java.lang.String changeLog,
 		java.lang.String extraSettings, java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -317,7 +317,7 @@ public interface DLFileEntryLocalService {
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		long userId, long groupId, long folderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String changelog,
+		java.lang.String description, java.lang.String changeLog,
 		boolean majorVersion, java.lang.String extraSettings, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -326,7 +326,7 @@ public interface DLFileEntryLocalService {
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		long userId, long groupId, long folderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String changelog,
+		java.lang.String description, java.lang.String changeLog,
 		boolean majorVersion, java.lang.String extraSettings,
 		java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -336,7 +336,7 @@ public interface DLFileEntryLocalService {
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		long userId, long groupId, long folderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String changelog,
+		java.lang.String description, java.lang.String changeLog,
 		boolean majorVersion, java.lang.String extraSettings,
 		java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)

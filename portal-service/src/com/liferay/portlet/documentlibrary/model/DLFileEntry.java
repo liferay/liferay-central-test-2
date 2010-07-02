@@ -44,13 +44,17 @@ public interface DLFileEntry extends DLFileEntryModel {
 
 	public com.liferay.portal.kernel.util.UnicodeProperties getExtraSettingsProperties();
 
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion getFileVersion()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder();
 
 	public java.lang.String getIcon();
 
-	public com.liferay.portlet.documentlibrary.model.DLFileVersion getFileVersion();
-
-	public com.liferay.portlet.documentlibrary.model.DLFileVersion getLatestFileVersion();
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion getLatestFileVersion()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Lock getLock();
 

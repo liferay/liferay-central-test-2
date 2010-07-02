@@ -81,10 +81,10 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 		newDLFileEntry.setExtension(randomString());
 		newDLFileEntry.setTitle(randomString());
 		newDLFileEntry.setDescription(randomString());
+		newDLFileEntry.setExtraSettings(randomString());
 		newDLFileEntry.setVersion(randomString());
 		newDLFileEntry.setSize(nextLong());
 		newDLFileEntry.setReadCount(nextInt());
-		newDLFileEntry.setExtraSettings(randomString());
 
 		_persistence.update(newDLFileEntry, false);
 
@@ -117,13 +117,13 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingDLFileEntry.getTitle(), newDLFileEntry.getTitle());
 		assertEquals(existingDLFileEntry.getDescription(),
 			newDLFileEntry.getDescription());
+		assertEquals(existingDLFileEntry.getExtraSettings(),
+			newDLFileEntry.getExtraSettings());
 		assertEquals(existingDLFileEntry.getVersion(),
 			newDLFileEntry.getVersion());
 		assertEquals(existingDLFileEntry.getSize(), newDLFileEntry.getSize());
 		assertEquals(existingDLFileEntry.getReadCount(),
 			newDLFileEntry.getReadCount());
-		assertEquals(existingDLFileEntry.getExtraSettings(),
-			newDLFileEntry.getExtraSettings());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -211,10 +211,10 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 		dlFileEntry.setExtension(randomString());
 		dlFileEntry.setTitle(randomString());
 		dlFileEntry.setDescription(randomString());
+		dlFileEntry.setExtraSettings(randomString());
 		dlFileEntry.setVersion(randomString());
 		dlFileEntry.setSize(nextLong());
 		dlFileEntry.setReadCount(nextInt());
-		dlFileEntry.setExtraSettings(randomString());
 
 		_persistence.update(dlFileEntry, false);
 

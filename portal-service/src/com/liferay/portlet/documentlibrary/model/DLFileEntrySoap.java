@@ -56,10 +56,10 @@ public class DLFileEntrySoap implements Serializable {
 		soapModel.setExtension(model.getExtension());
 		soapModel.setTitle(model.getTitle());
 		soapModel.setDescription(model.getDescription());
+		soapModel.setExtraSettings(model.getExtraSettings());
 		soapModel.setVersion(model.getVersion());
 		soapModel.setSize(model.getSize());
 		soapModel.setReadCount(model.getReadCount());
-		soapModel.setExtraSettings(model.getExtraSettings());
 
 		return soapModel;
 	}
@@ -232,6 +232,14 @@ public class DLFileEntrySoap implements Serializable {
 		_description = description;
 	}
 
+	public String getExtraSettings() {
+		return _extraSettings;
+	}
+
+	public void setExtraSettings(String extraSettings) {
+		_extraSettings = extraSettings;
+	}
+
 	public String getVersion() {
 		return _version;
 	}
@@ -256,14 +264,6 @@ public class DLFileEntrySoap implements Serializable {
 		_readCount = readCount;
 	}
 
-	public String getExtraSettings() {
-		return _extraSettings;
-	}
-
-	public void setExtraSettings(String extraSettings) {
-		_extraSettings = extraSettings;
-	}
-
 	private String _uuid;
 	private long _fileEntryId;
 	private long _groupId;
@@ -279,8 +279,8 @@ public class DLFileEntrySoap implements Serializable {
 	private String _extension;
 	private String _title;
 	private String _description;
+	private String _extraSettings;
 	private String _version;
 	private long _size;
 	private int _readCount;
-	private String _extraSettings;
 }

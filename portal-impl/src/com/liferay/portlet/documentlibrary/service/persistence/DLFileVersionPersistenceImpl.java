@@ -360,8 +360,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		dlFileVersionImpl.setExtension(dlFileVersion.getExtension());
 		dlFileVersionImpl.setTitle(dlFileVersion.getTitle());
 		dlFileVersionImpl.setDescription(dlFileVersion.getDescription());
+		dlFileVersionImpl.setChangeLog(dlFileVersion.getChangeLog());
 		dlFileVersionImpl.setExtraSettings(dlFileVersion.getExtraSettings());
-		dlFileVersionImpl.setChangelog(dlFileVersion.getChangelog());
 		dlFileVersionImpl.setVersion(dlFileVersion.getVersion());
 		dlFileVersionImpl.setSize(dlFileVersion.getSize());
 		dlFileVersionImpl.setStatus(dlFileVersion.getStatus());

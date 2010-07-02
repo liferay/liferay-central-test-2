@@ -78,8 +78,8 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 		newDLFileVersion.setExtension(randomString());
 		newDLFileVersion.setTitle(randomString());
 		newDLFileVersion.setDescription(randomString());
+		newDLFileVersion.setChangeLog(randomString());
 		newDLFileVersion.setExtraSettings(randomString());
-		newDLFileVersion.setChangelog(randomString());
 		newDLFileVersion.setVersion(randomString());
 		newDLFileVersion.setSize(nextLong());
 		newDLFileVersion.setStatus(nextInt());
@@ -113,10 +113,10 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 			newDLFileVersion.getTitle());
 		assertEquals(existingDLFileVersion.getDescription(),
 			newDLFileVersion.getDescription());
+		assertEquals(existingDLFileVersion.getChangeLog(),
+			newDLFileVersion.getChangeLog());
 		assertEquals(existingDLFileVersion.getExtraSettings(),
 			newDLFileVersion.getExtraSettings());
-		assertEquals(existingDLFileVersion.getChangelog(),
-			newDLFileVersion.getChangelog());
 		assertEquals(existingDLFileVersion.getVersion(),
 			newDLFileVersion.getVersion());
 		assertEquals(existingDLFileVersion.getSize(), newDLFileVersion.getSize());
@@ -212,8 +212,8 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 		dlFileVersion.setExtension(randomString());
 		dlFileVersion.setTitle(randomString());
 		dlFileVersion.setDescription(randomString());
+		dlFileVersion.setChangeLog(randomString());
 		dlFileVersion.setExtraSettings(randomString());
-		dlFileVersion.setChangelog(randomString());
 		dlFileVersion.setVersion(randomString());
 		dlFileVersion.setSize(nextLong());
 		dlFileVersion.setStatus(nextInt());

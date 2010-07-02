@@ -125,6 +125,11 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry> {
 	public void setDescription(String description);
 
 	@AutoEscape
+	public String getExtraSettings();
+
+	public void setExtraSettings(String extraSettings);
+
+	@AutoEscape
 	public String getVersion();
 
 	public void setVersion(String version);
@@ -136,11 +141,6 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry> {
 	public int getReadCount();
 
 	public void setReadCount(int readCount);
-
-	@AutoEscape
-	public String getExtraSettings();
-
-	public void setExtraSettings(String extraSettings);
 
 	public DLFileEntry toEscapedModel();
 

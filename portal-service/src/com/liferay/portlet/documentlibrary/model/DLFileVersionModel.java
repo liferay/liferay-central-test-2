@@ -103,14 +103,14 @@ public interface DLFileVersionModel extends BaseModel<DLFileVersion> {
 	public void setDescription(String description);
 
 	@AutoEscape
+	public String getChangeLog();
+
+	public void setChangeLog(String changeLog);
+
+	@AutoEscape
 	public String getExtraSettings();
 
 	public void setExtraSettings(String extraSettings);
-
-	@AutoEscape
-	public String getChangelog();
-
-	public void setChangelog(String changelog);
 
 	@AutoEscape
 	public String getVersion();

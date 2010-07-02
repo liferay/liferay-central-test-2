@@ -73,8 +73,8 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 			{ "extension", new Integer(Types.VARCHAR) },
 			{ "title", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
+			{ "changeLog", new Integer(Types.VARCHAR) },
 			{ "extraSettings", new Integer(Types.VARCHAR) },
-			{ "changelog", new Integer(Types.VARCHAR) },
 			{ "version", new Integer(Types.VARCHAR) },
 			{ "size_", new Integer(Types.BIGINT) },
 			{ "status", new Integer(Types.INTEGER) },
@@ -82,7 +82,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 			{ "statusByUserName", new Integer(Types.VARCHAR) },
 			{ "statusDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(255) null,extension VARCHAR(75) null,title VARCHAR(75) null,description STRING null,extraSettings VARCHAR(75) null,changelog VARCHAR(75) null,version VARCHAR(75) null,size_ LONG,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(255) null,extension VARCHAR(75) null,title VARCHAR(75) null,description STRING null,changeLog VARCHAR(75) null,extraSettings VARCHAR(75) null,version VARCHAR(75) null,size_ LONG,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileVersion";
 	public static final String ORDER_BY_JPQL = " ORDER BY dlFileVersion.folderId DESC, dlFileVersion.name DESC, dlFileVersion.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY DLFileVersion.folderId DESC, DLFileVersion.name DESC, DLFileVersion.createDate DESC";
@@ -110,8 +110,8 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 		model.setExtension(soapModel.getExtension());
 		model.setTitle(soapModel.getTitle());
 		model.setDescription(soapModel.getDescription());
+		model.setChangeLog(soapModel.getChangeLog());
 		model.setExtraSettings(soapModel.getExtraSettings());
-		model.setChangelog(soapModel.getChangelog());
 		model.setVersion(soapModel.getVersion());
 		model.setSize(soapModel.getSize());
 		model.setStatus(soapModel.getStatus());
@@ -299,6 +299,19 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 		_description = description;
 	}
 
+	public String getChangeLog() {
+		if (_changeLog == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _changeLog;
+		}
+	}
+
+	public void setChangeLog(String changeLog) {
+		_changeLog = changeLog;
+	}
+
 	public String getExtraSettings() {
 		if (_extraSettings == null) {
 			return StringPool.BLANK;
@@ -310,19 +323,6 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 
 	public void setExtraSettings(String extraSettings) {
 		_extraSettings = extraSettings;
-	}
-
-	public String getChangelog() {
-		if (_changelog == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _changelog;
-		}
-	}
-
-	public void setChangelog(String changelog) {
-		_changelog = changelog;
 	}
 
 	public String getVersion() {
@@ -474,8 +474,8 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 		clone.setExtension(getExtension());
 		clone.setTitle(getTitle());
 		clone.setDescription(getDescription());
+		clone.setChangeLog(getChangeLog());
 		clone.setExtraSettings(getExtraSettings());
-		clone.setChangelog(getChangelog());
 		clone.setVersion(getVersion());
 		clone.setSize(getSize());
 		clone.setStatus(getStatus());
@@ -578,10 +578,10 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 		sb.append(getTitle());
 		sb.append(", description=");
 		sb.append(getDescription());
+		sb.append(", changeLog=");
+		sb.append(getChangeLog());
 		sb.append(", extraSettings=");
 		sb.append(getExtraSettings());
-		sb.append(", changelog=");
-		sb.append(getChangelog());
 		sb.append(", version=");
 		sb.append(getVersion());
 		sb.append(", size=");
@@ -651,12 +651,12 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>extraSettings</column-name><column-value><![CDATA[");
-		sb.append(getExtraSettings());
+			"<column><column-name>changeLog</column-name><column-value><![CDATA[");
+		sb.append(getChangeLog());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>changelog</column-name><column-value><![CDATA[");
-		sb.append(getChangelog());
+			"<column><column-name>extraSettings</column-name><column-value><![CDATA[");
+		sb.append(getExtraSettings());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>version</column-name><column-value><![CDATA[");
@@ -705,8 +705,8 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	private String _extension;
 	private String _title;
 	private String _description;
+	private String _changeLog;
 	private String _extraSettings;
-	private String _changelog;
 	private String _version;
 	private String _originalVersion;
 	private long _size;
