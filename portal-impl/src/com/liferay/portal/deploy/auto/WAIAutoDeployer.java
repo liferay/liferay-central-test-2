@@ -17,6 +17,7 @@ package com.liferay.portal.deploy.auto;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.bridges.wai.WAIPortlet;
 
@@ -51,10 +52,10 @@ public class WAIAutoDeployer extends PortletAutoDeployer {
 
         // The default context.xml file for Tomcat causes portlets to be run
         // from the temp directory, which prevents some applications from saving
-        // their settings. There is no way to prevent this file from being
+        // their settings. There is no easy way to prevent this file from being
         // copied, so it must be deleted afterwards.
-        File contextFile = new File(srcFile + "/META-INF/context.xml");
-        contextFile.delete();
+
+		FileUtil.delete(srcFile + "/META-INF/context.xml");
 
 		String portletName = displayName;
 
@@ -68,26 +69,28 @@ public class WAIAutoDeployer extends PortletAutoDeployer {
 		filterMap.put("portlet_title", portletName);
 
 		if (pluginPackage != null) {
-			Properties settings = pluginPackage.getDeploymentSettings();
+			Properties deploymentSettings =
+				pluginPackage.getDeploymentSettings();
 
 			filterMap.put(
 				"portlet_class",
-				settings.getProperty(
+				deploymentSettings.getProperty(
 					"wai.portlet", WAIPortlet.class.getName()));
 
 			filterMap.put(
 				"friendly_url_mapper_class",
-				settings.getProperty(
+				deploymentSettings.getProperty(
 					"wai.friendly.url.mapper",
 					DefaultFriendlyURLMapper.class.getName()));
 
 			filterMap.put(
 				"friendly_url_mapping",
-				settings.getProperty("wai.friendly.url.mapping", "waiapp"));
+				deploymentSettings.getProperty(
+					"wai.friendly.url.mapping", "waiapp"));
 
 			filterMap.put(
 				"friendly_url_routes",
-				settings.getProperty(
+				deploymentSettings.getProperty(
 					"wai.friendly.url.routes",
 					"com/liferay/util/bridges/wai/" +
 						"wai-friendly-url-routes.xml"));
@@ -126,7 +129,10 @@ public class WAIAutoDeployer extends PortletAutoDeployer {
 			String value = null;
 
 			if (pluginPackage != null) {
-				value = pluginPackage.getDeploymentSettings().getProperty(name);
+				Properties deploymentSettings =
+					pluginPackage.getDeploymentSettings();
+
+				value = deploymentSettings.getProperty(name);
 			}
 
 			if (Validator.isNull(value)) {
