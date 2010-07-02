@@ -163,17 +163,18 @@ public abstract class ClusterBase {
 
 		SocketUtil.BindInfo bindInfo = SocketUtil.getBindInfo(host, port);
 
-		InetAddress inetAddress = bindInfo.getInetAddress();
+		bindInetAddress = bindInfo.getInetAddress();
 		NetworkInterface networkInterface = bindInfo.getNetworkInterface();
 
-		System.setProperty("jgroups.bind_addr", inetAddress.getHostAddress());
+		System.setProperty("jgroups.bind_addr",
+			bindInetAddress.getHostAddress());
 		System.setProperty(
 			"jgroups.bind_interface", networkInterface.getName());
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				"Setting JGroups outgoing IP address to " +
-					inetAddress.getHostAddress() + " and interface to " +
+					bindInetAddress.getHostAddress() + " and interface to " +
 						networkInterface.getName());
 		}
 	}
@@ -206,5 +207,7 @@ public abstract class ClusterBase {
 	private static Log _log = LogFactoryUtil.getLog(ClusterBase.class);
 
 	private static boolean _initialized;
+
+	protected InetAddress bindInetAddress;
 
 }

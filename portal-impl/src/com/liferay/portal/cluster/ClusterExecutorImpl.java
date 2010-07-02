@@ -29,14 +29,11 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.memory.FinalizeAction;
 import com.liferay.portal.kernel.memory.FinalizeManager;
-import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.InetAddressUtil;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
-import com.liferay.portal.kernel.util.SocketUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.util.PortalPortEventListener;
 import com.liferay.portal.util.PortalUtil;
@@ -46,23 +43,16 @@ import java.io.Serializable;
 
 import java.lang.ref.Reference;
 
-import java.net.Inet4Address;
 import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.jgroups.ChannelException;
 import org.jgroups.JChannel;
@@ -71,6 +61,7 @@ import org.jgroups.JChannel;
  * <a href="ClusterExecutorImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Tina Tian
+ * @author Shuyang Zhou
  */
 public class ClusterExecutorImpl
 	extends ClusterBase implements ClusterExecutor, PortalPortEventListener {
@@ -83,24 +74,13 @@ public class ClusterExecutorImpl
 		}
 	}
 
-	public ClusterExecutorImpl() {
-		_readWriteLock = new ReentrantReadWriteLock();
-		_readLock = _readWriteLock.readLock();
-		_writeLock = _readWriteLock.writeLock();
-	}
-
 	public void addClusterEventListener(
 		ClusterEventListener clusterEventListener) {
-
 		if (!isEnabled()) {
 			return;
 		}
 
-		if (!_clusterEventListeners.contains(clusterEventListener)) {
-			_clusterEventListeners.add(clusterEventListener);
-		}
-
-		return;
+		_clusterEventListeners.addIfAbsent(clusterEventListener);
 	}
 
 	public void destroy() {
@@ -154,6 +134,9 @@ public class ClusterExecutorImpl
 	}
 
 	public List<ClusterEventListener> getClusterEventListeners() {
+		if (!isEnabled()) {
+			return Collections.EMPTY_LIST;
+		}
 		return Collections.unmodifiableList(_clusterEventListeners);
 	}
 
@@ -161,17 +144,7 @@ public class ClusterExecutorImpl
 		if (!isEnabled()) {
 			return Collections.EMPTY_LIST;
 		}
-
-		_readLock.lock();
-
-		try {
-			Collection<ClusterNode> clusterNodes = _addressMap.values();
-
-			return new ArrayList<ClusterNode>(clusterNodes);
-		}
-		finally {
-			_readLock.unlock();
-		}
+		return new ArrayList<ClusterNode>(_addressMap.values());
 	}
 
 	public ClusterNode getLocalClusterNode() throws SystemException {
@@ -179,20 +152,21 @@ public class ClusterExecutorImpl
 			return null;
 		}
 
-		ClusterNode clusterNode = getClusterNode(getLocalControlAddress());
+		ClusterNode clusterNode = _addressMap.get(getLocalControlAddress());
 
 		if (clusterNode == null) {
 			_localClusterNodeId = PortalUUIDUtil.generate();
 
 			clusterNode = new ClusterNode(_localClusterNodeId);
 
-			String autodetectAddress =
-				PropsValues.CLUSTER_LINK_AUTODETECT_ADDRESS;
-
 			clusterNode.setPort(PortalUtil.getPortalPort());
 
 			try {
-				InetAddress inetAddress = getHostInetAddress(autodetectAddress);
+				InetAddress inetAddress = bindInetAddress;
+
+				if (inetAddress == null) {
+					inetAddress = InetAddressUtil.getLocalInetAddress();
+				}
 
 				clusterNode.setInetAddress(inetAddress);
 
@@ -235,7 +209,7 @@ public class ClusterExecutorImpl
 			return false;
 		}
 
-		return (getAddress(clusterNodeId) != null);
+		return _clusterNodeIdMap.containsKey(clusterNodeId);
 	}
 
 	public boolean isEnabled() {
@@ -270,7 +244,7 @@ public class ClusterExecutorImpl
 		List<Address> addresses = null;
 
 		if (isMulticast) {
-			addresses = getControlAddresses();
+			addresses = getAddresses(_controlChannel);
 		}
 		else {
 			Collection<String> clusterNodeIds =
@@ -279,7 +253,7 @@ public class ClusterExecutorImpl
 			addresses = new ArrayList<Address>(clusterNodeIds.size());
 
 			for (String clusterNodeId : clusterNodeIds) {
-				Address address = getAddress(clusterNodeId);
+				Address address = _clusterNodeIdMap.get(clusterNodeId);
 
 				addresses.add(address);
 			}
@@ -296,6 +270,9 @@ public class ClusterExecutorImpl
 
 	public void removeClusterEventListener(
 		ClusterEventListener clusterEventListener) {
+		if (!isEnabled()) {
+			return;
+		}
 
 		_clusterEventListeners.remove(clusterEventListener);
 	}
@@ -337,14 +314,18 @@ public class ClusterExecutorImpl
 	public void setClusterEventListener(
 		List<ClusterEventListener> clusterEventListeners) {
 
-		for (ClusterEventListener clusterEventListener :
-				clusterEventListeners) {
-
-			addClusterEventListener(clusterEventListener);
+		if (!isEnabled()) {
+			return;
 		}
+
+		_clusterEventListeners.addAllAbsent(clusterEventListeners);
 	}
 
 	public void setShortcutLocalMethod(boolean shortcutLocalMethod) {
+		if (!isEnabled()) {
+			return;
+		}
+
 		_shortcutLocalMethod = shortcutLocalMethod;
 	}
 
@@ -352,48 +333,6 @@ public class ClusterExecutorImpl
 		for (ClusterEventListener listener : _clusterEventListeners) {
 			listener.processClusterEvent(clusterEvent);
 		}
-	}
-
-	protected Address getAddress(String clusterNodeId) {
-		_readLock.lock();
-
-		Address address = null;
-
-		try {
-			if (_clusterNodeIdMap.containsKey(clusterNodeId)) {
-				address = _clusterNodeIdMap.get(clusterNodeId);
-			}
-		}
-		finally {
-			_readLock.unlock();
-		}
-
-		return address;
-	}
-
-	protected ClusterNode getClusterNode(Address address) {
-		_readLock.lock();
-
-		ClusterNode clusterNode = null;
-
-		try {
-			if (_addressMap.containsKey(address)) {
-				clusterNode = _addressMap.get(address);
-			}
-		}
-		finally {
-			_readLock.unlock();
-		}
-
-		return clusterNode;
-	}
-
-	protected List<Address> getControlAddresses() {
-		if (!isEnabled()) {
-			return Collections.EMPTY_LIST;
-		}
-
-		return getAddresses(_controlChannel);
 	}
 
 	protected JChannel getControlChannel() {
@@ -412,82 +351,8 @@ public class ClusterExecutorImpl
 		}
 	}
 
-	protected InetAddress getHostInetAddress(String autoDetectAddress)
-		throws Exception {
-
-		InetAddress inetAddress = null;
-
-		if (Validator.isNull(autoDetectAddress)) {
-			inetAddress = getLocalInetAddress();
-		}
-		else {
-			String host = autoDetectAddress;
-
-			int port = 80;
-
-			int index = autoDetectAddress.indexOf(StringPool.COLON);
-
-			if (index != -1) {
-				host = autoDetectAddress.substring(0, index);
-
-				port = GetterUtil.getInteger(
-					autoDetectAddress.substring(index + 1), port);
-			}
-
-			SocketUtil.BindInfo bindInfo = SocketUtil.getBindInfo(host, port);
-
-			inetAddress = bindInfo.getInetAddress();
-		}
-
-		return inetAddress;
-	}
-
 	protected Address getLocalControlAddress() {
 		return new AddressImpl(_controlChannel.getLocalAddress());
-	}
-
-	protected InetAddress getLocalInetAddress()
-		throws SocketException, SystemException {
-
-		List<NetworkInterface> networkInterfaces =
-			new ArrayList<NetworkInterface>();
-
-		Enumeration<NetworkInterface> enu1 =
-			NetworkInterface.getNetworkInterfaces();
-
-		while (enu1.hasMoreElements()) {
-			networkInterfaces.add(enu1.nextElement());
-		}
-
-		if (networkInterfaces.isEmpty()) {
-			throw new SystemException("No interface available");
-		}
-
-		for (NetworkInterface networkInterface : networkInterfaces) {
-			if (isLoopback(networkInterface)) {
-				continue;
-			}
-
-			Enumeration<InetAddress> enu2 = networkInterface.getInetAddresses();
-
-			List<InetAddress> inetAddresses = new ArrayList<InetAddress>();
-
-			while (enu2.hasMoreElements()) {
-				inetAddresses.add(enu2.nextElement());
-			}
-
-			if (inetAddresses.isEmpty()) {
-				continue;
-			}
-
-			for (InetAddress inetAddress : inetAddresses) {
-				if (inetAddress instanceof Inet4Address) {
-					return inetAddress;
-				}
-			}
-		}
-
-		throw new SystemException("No interface available");
 	}
 
 	protected void initChannels() {
@@ -512,61 +377,18 @@ public class ClusterExecutorImpl
 		}
 	}
 
-	protected boolean isLoopback(NetworkInterface networkInterface) {
-		Enumeration<InetAddress> enu = networkInterface.getInetAddresses();
-
-		while (enu.hasMoreElements()) {
-			InetAddress inetAddress = enu.nextElement();
-
-			if (inetAddress.isLoopbackAddress()) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	protected boolean isShortcutLocalMethod() {
 		return _shortcutLocalMethod;
 	}
 
 	protected void memberJoined(Address joinAddress, ClusterNode clusterNode) {
-		_writeLock.lock();
-
-		try {
-			boolean hasClusterNode = _clusterNodeIdMap.containsValue(
-				joinAddress);
-
-			boolean hasAddress = _addressMap.containsKey(joinAddress);
-
-			if (hasClusterNode && hasAddress) {
-				_addressMap.remove(joinAddress);
-
-				_addressMap.put(joinAddress, clusterNode);
-			}
-			else if (!hasClusterNode && !hasAddress) {
-				_addressMap.put(joinAddress, clusterNode);
-
-				String clusterNodeId = clusterNode.getClusterNodeId();
-
-				_clusterNodeIdMap.put(clusterNodeId, joinAddress);
-
-				if (getLocalControlAddress().equals(joinAddress)) {
-					return;
-				}
-
-				ClusterEvent clusterEvent = ClusterEvent.join(clusterNode);
-
-				fireClusterEvent(clusterEvent);
-			}
-			else {
-				_log.error(
-					"Unable to join address " + joinAddress +
-						" to cluster node " + clusterNode);
-			}
-		}
-		finally {
-			_writeLock.unlock();
+		_addressMap.put(joinAddress, clusterNode);
+		Address previousAddress = _clusterNodeIdMap.put(
+			clusterNode.getClusterNodeId(), joinAddress);
+		if ((previousAddress == null) &&
+			!getLocalControlAddress().equals(joinAddress)) {
+			ClusterEvent clusterEvent = ClusterEvent.join(clusterNode);
+			fireClusterEvent(clusterEvent);
 		}
 	}
 
@@ -574,34 +396,13 @@ public class ClusterExecutorImpl
 		List<ClusterNode> departingClusterNodes = new ArrayList<ClusterNode>();
 
 		for (Address departAddress : departAddresses) {
-			ClusterNode clusterNode = getClusterNode(departAddress);
+			ClusterNode departingClusterNode = _addressMap.remove(
+				departAddress);
+			if (departingClusterNode != null) {
+				departingClusterNodes.add(departingClusterNode);
 
-			if (clusterNode == null) {
-				continue;
-			}
-
-			departingClusterNodes.add(clusterNode);
-
-			_writeLock.lock();
-
-			try {
-				if (_clusterNodeIdMap.containsValue(departAddress)) {
-					String clusterNodeId = clusterNode.getClusterNodeId();
-
-					_clusterNodeIdMap.remove(clusterNodeId);
-
-					_addressMap.remove(departAddress);
-				}
-				else {
-					_log.error(
-						"Unable to remove address " + departAddress +
-							" from cluster node " + clusterNode);
-
-					continue;
-				}
-			}
-			finally {
-				_writeLock.unlock();
+				_clusterNodeIdMap.remove(
+					departingClusterNode.getClusterNodeId());
 			}
 		}
 
@@ -656,19 +457,16 @@ public class ClusterExecutorImpl
 	private static Log _log = LogFactoryUtil.getLog(ClusterExecutorImpl.class);
 
 	private Map<Address, ClusterNode> _addressMap =
-		new HashMap<Address, ClusterNode>();
-	private List<ClusterEventListener> _clusterEventListeners =
+		new ConcurrentHashMap<Address, ClusterNode>();
+	private CopyOnWriteArrayList<ClusterEventListener> _clusterEventListeners =
 		new CopyOnWriteArrayList<ClusterEventListener>();
 	private Map<String, Address> _clusterNodeIdMap =
-		new HashMap<String, Address>();
+		new ConcurrentHashMap<String, Address>();
 	private JChannel _controlChannel;
 	private Map<String, Reference<FutureClusterResponses>> _executionResultMap =
 		new ConcurrentHashMap<String, Reference<FutureClusterResponses>>();
 	private String _localClusterNodeId;
-	private final Lock _readLock;
-	private final ReentrantReadWriteLock _readWriteLock;
 	private boolean _shortcutLocalMethod;
-	private final Lock _writeLock;
 
 	private class RemoveResultKeyFinalizeAction implements FinalizeAction {
 
