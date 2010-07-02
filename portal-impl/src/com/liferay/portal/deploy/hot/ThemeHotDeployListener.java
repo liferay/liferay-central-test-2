@@ -93,7 +93,7 @@ public class ThemeHotDeployListener extends BaseHotDeployListener {
 		servletContext.setAttribute(
 			PortletServlet.PORTLET_CLASS_LOADER, portletClassLoader);
 
-		// Velocity
+		// Servlet context
 
 		ServletContextPool.put(servletContextName, servletContext);
 
