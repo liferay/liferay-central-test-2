@@ -40,6 +40,7 @@
 <%@ include file="/html/portal/css/portal/page_settings.jspf" %>
 <%@ include file="/html/portal/css/portal/notifications.jspf" %>
 <%@ include file="/html/portal/css/portal/asset_category_selector.jspf" %>
+<%@ include file="/html/portal/css/portal/asset_columns.jspf" %>
 <%@ include file="/html/portal/css/portal/tag_selector.jspf" %>
 <%@ include file="/html/portal/css/portal/generic_portlet.jspf" %>
 <%@ include file="/html/portal/css/portal/forms.jspf" %>
