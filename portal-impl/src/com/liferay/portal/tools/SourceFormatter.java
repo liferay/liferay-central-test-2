@@ -893,10 +893,6 @@ public class SourceFormatter {
 			}
 
 			StringBuilder sb = new StringBuilder();
-			StringBuilder sb2 = new StringBuilder();
-
-			sb2.append(
-				"\t\t\t<url-pattern>/c/portal/protected</url-pattern>\n");
 
 			for (String urlPattern : urlPatterns) {
 				sb.append("\t<servlet-mapping>\n");
@@ -904,10 +900,6 @@ public class SourceFormatter {
 				sb.append(
 					"\t\t<url-pattern>/" + urlPattern +"/*</url-pattern>\n");
 				sb.append("\t</servlet-mapping>\n");
-
-				sb2.append(
-					"\t\t\t<url-pattern>/" + urlPattern +
-						"/c/portal/protected</url-pattern>\n");
 			}
 
 			File file = new File(
@@ -938,11 +930,22 @@ public class SourceFormatter {
 			x = newContent.indexOf("<url-pattern>", x) - 3;
 
 			y = newContent.indexOf("<http-method>", x);
-			
+
 			y = newContent.lastIndexOf("</url-pattern>", y) + 15;
 
+			sb = new StringBuilder();
+
+			sb.append(
+				"\t\t\t<url-pattern>/c/portal/protected</url-pattern>\n");
+
+			for (String urlPattern : urlPatterns) {
+				sb.append(
+					"\t\t\t<url-pattern>/" + urlPattern +
+						"/c/portal/protected</url-pattern>\n");
+			}
+
 			newContent =
-				newContent.substring(0, x) + sb2.toString() +
+				newContent.substring(0, x) + sb.toString() +
 					newContent.substring(y);
 
 			if ((newContent != null) && !content.equals(newContent)) {
