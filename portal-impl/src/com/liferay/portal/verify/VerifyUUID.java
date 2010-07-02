@@ -38,13 +38,7 @@ import java.sql.ResultSet;
  */
 public class VerifyUUID extends VerifyProcess {
 
-	protected void doVerify() throws Exception {
-		for (String[] model : _MODELS) {
-			verifyModel(model[0], model[1], model[2]);
-		}
-	}
-
-	protected void verifyModel(
+	public static void verifyModel(
 			String serviceClassName, String modelName, String pkColumnName)
 		throws Exception {
 
@@ -72,7 +66,7 @@ public class VerifyUUID extends VerifyProcess {
 		}
 	}
 
-	protected void verifyModel(
+	public static void verifyModel(
 			String serviceClassName, String modelName, long pk)
 		throws Exception {
 
@@ -82,6 +76,12 @@ public class VerifyUUID extends VerifyProcess {
 
 		MethodInvoker.invoke(
 			new MethodWrapper(serviceClassName, "update" + modelName, obj));
+	}
+
+	protected void doVerify() throws Exception {
+		for (String[] model : _MODELS) {
+			verifyModel(model[0], model[1], model[2]);
+		}
 	}
 
 	private static final String[][] _MODELS = new String[][] {
