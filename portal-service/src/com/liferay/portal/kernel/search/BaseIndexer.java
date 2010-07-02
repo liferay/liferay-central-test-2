@@ -321,18 +321,13 @@ public abstract class BaseIndexer implements Indexer {
 					parentGroupId = group.getParentGroupId();
 				}
 
-				contextQuery.addRequiredTerm(Field.GROUP_ID, parentGroupId);
+				groupIdsQuery.addTerm(Field.GROUP_ID, parentGroupId);
 
 				groupIds[i] = parentGroupId;
 			}
 			catch (Exception e) {
 				continue;
 			}
-
-			TermQuery termQuery = TermQueryFactoryUtil.create(
-				Field.GROUP_ID, groupId);
-
-			groupIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
 		}
 
 		searchContext.setGroupIds(groupIds);
