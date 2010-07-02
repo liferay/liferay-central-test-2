@@ -53,6 +53,7 @@ import org.apache.tools.ant.DirectoryScanner;
  *
  * @author Brian Wing Shun Chan
  * @author Igor Spasic
+ * @author Wesley Gong
  */
 public class SourceFormatter {
 
@@ -892,6 +893,10 @@ public class SourceFormatter {
 			}
 
 			StringBuilder sb = new StringBuilder();
+			StringBuilder sb2 = new StringBuilder();
+
+			sb2.append(
+				"\t\t\t<url-pattern>/c/portal/protected</url-pattern>\n");
 
 			for (String urlPattern : urlPatterns) {
 				sb.append("\t<servlet-mapping>\n");
@@ -899,6 +904,10 @@ public class SourceFormatter {
 				sb.append(
 					"\t\t<url-pattern>/" + urlPattern +"/*</url-pattern>\n");
 				sb.append("\t</servlet-mapping>\n");
+
+				sb2.append(
+					"\t\t\t<url-pattern>/" + urlPattern +
+						"/c/portal/protected</url-pattern>\n");
 			}
 
 			File file = new File(
@@ -919,6 +928,22 @@ public class SourceFormatter {
 
 			String newContent =
 				content.substring(0, x) + sb.toString() + content.substring(y);
+
+			x = newContent.indexOf("<security-constraint>");
+
+			x = newContent.indexOf(
+				"<web-resource-name>/c/portal/protected</web-resource-name>",
+				x);
+
+			x = newContent.indexOf("<url-pattern>", x) - 3;
+
+			y = newContent.indexOf("<http-method>", x);
+			
+			y = newContent.lastIndexOf("</url-pattern>", y) + 15;
+
+			newContent =
+				newContent.substring(0, x) + sb2.toString() +
+					newContent.substring(y);
 
 			if ((newContent != null) && !content.equals(newContent)) {
 				_fileUtil.write(file, newContent);

@@ -1412,6 +1412,73 @@
 		<web-resource-collection>
 			<web-resource-name>/c/portal/protected</web-resource-name>
 			<url-pattern>/c/portal/protected</url-pattern>
+			<url-pattern>/ar/c/portal/protected</url-pattern>
+			<url-pattern>/ar_SA/c/portal/protected</url-pattern>
+			<url-pattern>/bg/c/portal/protected</url-pattern>
+			<url-pattern>/bg_BG/c/portal/protected</url-pattern>
+			<url-pattern>/ca/c/portal/protected</url-pattern>
+			<url-pattern>/ca_AD/c/portal/protected</url-pattern>
+			<url-pattern>/ca_ES/c/portal/protected</url-pattern>
+			<url-pattern>/cs/c/portal/protected</url-pattern>
+			<url-pattern>/cs_CZ/c/portal/protected</url-pattern>
+			<url-pattern>/de/c/portal/protected</url-pattern>
+			<url-pattern>/de_DE/c/portal/protected</url-pattern>
+			<url-pattern>/el/c/portal/protected</url-pattern>
+			<url-pattern>/el_GR/c/portal/protected</url-pattern>
+			<url-pattern>/en/c/portal/protected</url-pattern>
+			<url-pattern>/en_US/c/portal/protected</url-pattern>
+			<url-pattern>/es/c/portal/protected</url-pattern>
+			<url-pattern>/es_ES/c/portal/protected</url-pattern>
+			<url-pattern>/et/c/portal/protected</url-pattern>
+			<url-pattern>/et_EE/c/portal/protected</url-pattern>
+			<url-pattern>/eu/c/portal/protected</url-pattern>
+			<url-pattern>/eu_ES/c/portal/protected</url-pattern>
+			<url-pattern>/fa/c/portal/protected</url-pattern>
+			<url-pattern>/fa_IR/c/portal/protected</url-pattern>
+			<url-pattern>/fi/c/portal/protected</url-pattern>
+			<url-pattern>/fi_FI/c/portal/protected</url-pattern>
+			<url-pattern>/fr/c/portal/protected</url-pattern>
+			<url-pattern>/fr_FR/c/portal/protected</url-pattern>
+			<url-pattern>/gl/c/portal/protected</url-pattern>
+			<url-pattern>/gl_ES/c/portal/protected</url-pattern>
+			<url-pattern>/hi/c/portal/protected</url-pattern>
+			<url-pattern>/hi_IN/c/portal/protected</url-pattern>
+			<url-pattern>/hu/c/portal/protected</url-pattern>
+			<url-pattern>/hu_HU/c/portal/protected</url-pattern>
+			<url-pattern>/in/c/portal/protected</url-pattern>
+			<url-pattern>/in_ID/c/portal/protected</url-pattern>
+			<url-pattern>/it/c/portal/protected</url-pattern>
+			<url-pattern>/it_IT/c/portal/protected</url-pattern>
+			<url-pattern>/iw/c/portal/protected</url-pattern>
+			<url-pattern>/iw_IL/c/portal/protected</url-pattern>
+			<url-pattern>/ja/c/portal/protected</url-pattern>
+			<url-pattern>/ja_JP/c/portal/protected</url-pattern>
+			<url-pattern>/ko/c/portal/protected</url-pattern>
+			<url-pattern>/ko_KR/c/portal/protected</url-pattern>
+			<url-pattern>/nb/c/portal/protected</url-pattern>
+			<url-pattern>/nb_NO/c/portal/protected</url-pattern>
+			<url-pattern>/nl/c/portal/protected</url-pattern>
+			<url-pattern>/nl_NL/c/portal/protected</url-pattern>
+			<url-pattern>/pl/c/portal/protected</url-pattern>
+			<url-pattern>/pl_PL/c/portal/protected</url-pattern>
+			<url-pattern>/pt/c/portal/protected</url-pattern>
+			<url-pattern>/pt_BR/c/portal/protected</url-pattern>
+			<url-pattern>/pt_PT/c/portal/protected</url-pattern>
+			<url-pattern>/ru/c/portal/protected</url-pattern>
+			<url-pattern>/ru_RU/c/portal/protected</url-pattern>
+			<url-pattern>/sk/c/portal/protected</url-pattern>
+			<url-pattern>/sk_SK/c/portal/protected</url-pattern>
+			<url-pattern>/sv/c/portal/protected</url-pattern>
+			<url-pattern>/sv_SE/c/portal/protected</url-pattern>
+			<url-pattern>/tr/c/portal/protected</url-pattern>
+			<url-pattern>/tr_TR/c/portal/protected</url-pattern>
+			<url-pattern>/uk/c/portal/protected</url-pattern>
+			<url-pattern>/uk_UA/c/portal/protected</url-pattern>
+			<url-pattern>/vi/c/portal/protected</url-pattern>
+			<url-pattern>/vi_VN/c/portal/protected</url-pattern>
+			<url-pattern>/zh/c/portal/protected</url-pattern>
+			<url-pattern>/zh_CN/c/portal/protected</url-pattern>
+			<url-pattern>/zh_TW/c/portal/protected</url-pattern>
 			<http-method>GET</http-method>
 			<http-method>POST</http-method>
 		</web-resource-collection>
