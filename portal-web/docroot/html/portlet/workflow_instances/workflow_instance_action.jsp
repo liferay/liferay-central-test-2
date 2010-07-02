@@ -35,40 +35,6 @@ else {
 
 <liferay-ui:icon-menu showExpanded="<%= (row == null) %>" showWhenSingleIcon="<%= (row == null) %>">
 	<c:if test="<%= !workflowInstance.isComplete() %>">
-
-		<%
-		List<String> transitionNames = WorkflowInstanceManagerUtil.getNextTransitionNames(company.getCompanyId(), user.getUserId(), workflowInstance.getWorkflowInstanceId());
-
-		for (String transitionName : transitionNames) {
-			String message = "proceed";
-
-			if (Validator.isNotNull(transitionName)) {
-				message = transitionName;
-			}
-		%>
-
-			<portlet:actionURL var="editURL">
-				<portlet:param name="struts_action" value="/workflow_instances/edit_workflow_instance" />
-				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SIGNAL %>" />
-				<portlet:param name="redirect" value="<%= currentURL %>" />
-				<portlet:param name="workflowInstanceId" value="<%= StringUtil.valueOf(workflowInstance.getWorkflowInstanceId()) %>" />
-
-				<c:if test="<%= transitionName != null %>">
-					<portlet:param name="transitionName" value="<%= transitionName %>" />
-				</c:if>
-			</portlet:actionURL>
-
-			<liferay-ui:icon
-				image="../aui/shuffle"
-				message="<%= message %>"
-				method="get"
-				url="<%= editURL %>"
-			/>
-
-		<%
-		}
-		%>
-
 		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/workflow_instances/edit_workflow_instance" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
