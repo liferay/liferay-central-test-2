@@ -22,6 +22,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 IGImage image = (IGImage)request.getAttribute(WebKeys.IMAGE_GALLERY_IMAGE);
 
 IGFolder folder = image.getFolder();
+long folderId = image.getFolderId();
 Image largeImage = ImageLocalServiceUtil.getImage(image.getLargeImageId());
 
 String imageUrl = renderResponse.getNamespace() + "viewImage(" + largeImage.getImageId() + ", '" + ImageServletTokenUtil.getToken(largeImage.getImageId()) + "', '" + UnicodeFormatter.toString(image.getName()) + "', '" + UnicodeFormatter.toString(image.getDescription()) + "', " + largeImage.getWidth() + ", " + largeImage.getHeight() +")";
@@ -53,9 +54,31 @@ if (portletDisplay.isWebDAVEnabled()) {
 
 <liferay-util:include page="/html/portlet/image_gallery/top_links.jsp" />
 
+<c:if test="<%= folder != null %>">
+
+	<%
+	String parentFolderName = LanguageUtil.get(pageContext, "images-home");
+
+	if (Validator.isNotNull(folder.getName())) {
+		parentFolderName = folder.getName();
+	}
+	%>
+
+	<portlet:renderURL var="backURL">
+		<portlet:param name="struts_action" value="/image_gallery/view" />
+		<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
+	</portlet:renderURL>
+
+	<liferay-ui:header
+		backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", parentFolderName) %>'
+		backURL="<%= backURL.toString() %>"
+		title="<%= image.getName() %>"
+	/>
+
+</c:if>
+
 <aui:layout>
 	<aui:column columnWidth="<%= 75 %>" cssClass="image-column image-column-first" first="<%= true %>">
-		<h3 class="image-title"><%= image.getName() %></h3>
 
 		<div class="image-categories">
 			<liferay-ui:asset-categories-summary
