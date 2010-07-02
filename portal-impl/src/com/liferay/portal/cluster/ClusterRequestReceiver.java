@@ -14,7 +14,6 @@
 
 package com.liferay.portal.cluster;
 
-import com.liferay.portal.kernel.classloading.ClassLoaderRegistry;
 import com.liferay.portal.kernel.cluster.Address;
 import com.liferay.portal.kernel.cluster.ClusterException;
 import com.liferay.portal.kernel.cluster.ClusterMessageType;
@@ -26,7 +25,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
@@ -119,33 +117,6 @@ public class ClusterRequestReceiver extends BaseReceiver {
 		_clusterExecutorImpl.memberRemoved(departAddresses);
 	}
 
-	protected Object doInvoke(
-		MethodWrapper methodWrapper, String classLoaderId) throws Exception {
-
-		ClassLoader classLoader = null;
-		if (!Validator.isNull(classLoaderId)) {
-			classLoader = ClassLoaderRegistry.lookupClassLoader(classLoaderId);
-		}
-
-		if (classLoader == null) {
-			return MethodInvoker.invoke(methodWrapper);
-		}
-		else {
-			Thread currentThread = Thread.currentThread();
-			ClassLoader oldClassLoader = currentThread.getContextClassLoader();
-			try {
-				currentThread.setContextClassLoader(classLoader);
-				return MethodInvoker.invoke(methodWrapper);
-			}
-			catch(Exception e) {
-				throw e;
-			}
-			finally {
-				currentThread.setContextClassLoader(oldClassLoader);
-			}
-		}
-	}
-
 	protected List<Address> getDepartAddresses(View view) {
 		List<Address> departAddresses = new ArrayList<Address>();
 
@@ -230,8 +201,7 @@ public class ClusterRequestReceiver extends BaseReceiver {
 				try {
 					ClusterInvokeThreadLocal.setEnabled(false);
 
-					Object returnValue = doInvoke(methodWrapper,
-						clusterRequest.getInvokeClassLoaderId());
+					Object returnValue = MethodInvoker.invoke(methodWrapper);
 
 					if (returnValue instanceof Serializable) {
 						clusterNodeResponse.setResult(returnValue);
@@ -244,10 +214,6 @@ public class ClusterRequestReceiver extends BaseReceiver {
 				}
 				catch (Exception e) {
 					clusterNodeResponse.setException(e);
-					if (_log.isErrorEnabled()) {
-						_log.error("Failed to invoke method:" + methodWrapper,
-							e);
-					}
 				}
 				finally {
 					ClusterInvokeThreadLocal.setEnabled(true);

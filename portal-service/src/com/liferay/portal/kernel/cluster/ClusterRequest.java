@@ -132,10 +132,6 @@ public class ClusterRequest implements Serializable {
 		return _clusterMessageType;
 	}
 
-	public String getInvokeClassLoaderId() {
-		return _invokeClassLoaderId;
-	}
-
 	public MethodWrapper getMethodWrapper() {
 		return _methodWrapper;
 	}
@@ -178,10 +174,6 @@ public class ClusterRequest implements Serializable {
 
 	public void setFireAndForget(boolean fireAndForget) {
 		_fireAndForget = fireAndForget;
-	}
-
-	public void setInvokeClassLoaderId(String invokeClassLoaderId) {
-		_invokeClassLoaderId = invokeClassLoaderId;
 	}
 
 	public void setMethodWrapper(MethodWrapper methodWrapper) {
@@ -245,7 +237,6 @@ public class ClusterRequest implements Serializable {
 
 	private ClusterMessageType _clusterMessageType;
 	private boolean _fireAndForget;
-	private String _invokeClassLoaderId;
 	private MethodWrapper _methodWrapper;
 	private boolean _multicast;
 	private ClusterNode _originatingClusterNode;
