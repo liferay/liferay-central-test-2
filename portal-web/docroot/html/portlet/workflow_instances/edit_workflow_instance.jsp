@@ -135,7 +135,7 @@ if (assetEntry != null) {
 						</c:otherwise>
 					</c:choose>
 				</liferay-ui:panel>
-			</c:if>			
+			</c:if>
 
 			<%
 			List<WorkflowTask> workflowTasks = null;
