@@ -24,8 +24,10 @@ import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.service.LockLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
+import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 
@@ -110,6 +112,30 @@ public class DLFileEntryImpl
 
 	public String getIcon() {
 		return DLUtil.getFileIcon(getExtension());
+	}
+
+	public DLFileVersion getFileVersion() {
+		try {
+			return DLFileVersionLocalServiceUtil.getFileVersion(
+				getGroupId(), getFolderId(), getName(), getVersion());
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return null;
+	}
+
+	public DLFileVersion getLatestFileVersion() {
+		try {
+			return DLFileVersionLocalServiceUtil.getLatestFileVersion(
+				getGroupId(), getFolderId(), getName());
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return null;
 	}
 
 	public Lock getLock() {

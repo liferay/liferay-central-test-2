@@ -30,9 +30,16 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
+ * @author Jorge Ferrer
  */
 public class DLFileVersionLocalServiceImpl
 	extends DLFileVersionLocalServiceBaseImpl {
+
+	public DLFileVersion getFileVersion(long fileVersionId)
+		throws PortalException, SystemException {
+
+		return dlFileVersionPersistence.findByPrimaryKey(fileVersionId);
+	}
 
 	public DLFileVersion getFileVersion(
 			long groupId, long folderId, String name, String version)

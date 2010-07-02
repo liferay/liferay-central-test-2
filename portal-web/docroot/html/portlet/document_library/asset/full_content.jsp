@@ -18,20 +18,21 @@
 
 <%
 DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
+DLFileVersion fileVersion = (DLFileVersion)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_VERSION);
 %>
 
 <div class="asset-resource-info">
-	<aui:a href='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) %>'>
-		<img class="dl-file-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/small/<%= fileEntry.getIcon() %>.png" /><%= fileEntry.getTitle() %>" />
+	<aui:a href='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileVersion.getTitle())) %>'>
+		<img class="dl-file-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/small/<%= fileVersion.getIcon() %>.png" /><%= fileVersion.getTitle() %>
 	</aui:a>
 </div>
 
-<p class="asset-description"><%= fileEntry.getDescription() %></p>
+<p class="asset-description"><%= fileVersion.getDescription() %></p>
 
 <liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
 	<liferay-ui:custom-attribute-list
 		className="<%= DLFileEntry.class.getName() %>"
-		classPK="<%= (fileEntry != null) ? fileEntry.getFileEntryId() : 0 %>"
+		classPK="<%= (fileVersion != null) ? fileVersion.getFileVersionId() : 0 %>"
 		editable="<%= false %>"
 		label="<%= true %>"
 	/>

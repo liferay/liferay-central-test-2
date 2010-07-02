@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -305,7 +306,8 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 		String sourceFileExtension = FileUtil.getExtension(sourceFileName);
 
-		if (PropsValues.DL_FILE_EXTENSIONS_STRICT_CHECK &&
+		if (Validator.isNotNull(sourceFileName) &&
+			PropsValues.DL_FILE_EXTENSIONS_STRICT_CHECK &&
 			!fileExtension.equals(sourceFileExtension)) {
 
 			throw new SourceFileNameException(sourceFileExtension);
@@ -314,10 +316,10 @@ public class DLLocalServiceImpl implements DLLocalService {
 		validate(fileName, validateFileExtension);
 
 		try {
-			if ((PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0) &&
-				((is == null) ||
-				 (is.available() >
-					PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE)))) {
+			if ((is != null) &&
+				(PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0) &&
+				(is.available() >
+					PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE))) {
 
 				throw new FileSizeException(fileName);
 			}

@@ -21,15 +21,18 @@ int abstractLength = (Integer)request.getAttribute(WebKeys.ASSET_PUBLISHER_ABSTR
 AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute(WebKeys.ASSET_RENDERER);
 
 DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
+DLFileVersion fileVersion = (DLFileVersion)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_VERSION);
 %>
 
-<div class="asset-resource-info">
-	<liferay-ui:icon
-		image='<%= "../file_system/small/" + fileEntry.getExtension() %>'
-		label="<%= true %>"
-		message="<%= fileEntry.getTitle() %>"
-		url="<%= assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, StringPool.BLANK) %>"
-	/>
-</div>
+<c:if test="<%= fileVersion.isApproved() %>">
+	<div class="asset-resource-info">
+		<liferay-ui:icon
+			image='<%= "../file_system/small/" + fileEntry.getExtension() %>'
+			label="<%= true %>"
+			message="<%= fileEntry.getTitle() %>"
+			url="<%= assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, StringPool.BLANK) %>"
+		/>
+	</div>
+</c:if>
 
-<p class="asset-description"><%= StringUtil.shorten(fileEntry.getDescription(), abstractLength) %></p>
+<p class="asset-description"><%= StringUtil.shorten(fileVersion.getDescription(), abstractLength) %></p>

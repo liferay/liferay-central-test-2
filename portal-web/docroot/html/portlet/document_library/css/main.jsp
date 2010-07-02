@@ -21,6 +21,10 @@
 	margin-left:10px;
 }
 
+.portlet-document-library .file-entry-tags {
+	margin-top: 5px;
+}
+
 .portlet-document-library .folder-search {
 	float: right;
 	margin: 0 0 0.5em 0.5em;
@@ -43,4 +47,12 @@
 
 .portlet-document-library .taglib-webdav {
 	margin-top: 3em;
+}
+
+.portlet-document-library .taglib-workflow-status {
+	margin-bottom: 5px;
+}
+
+.portlet-document-library .workflow-status-pending, .portlet-document-library .workflow-status-pending a {
+	color: orange;
 }

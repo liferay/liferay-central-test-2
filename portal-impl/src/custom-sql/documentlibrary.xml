@@ -87,7 +87,7 @@
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.findFE_ByG_F_S">
 		<![CDATA[
 			SELECT
-				DISTINCT DLFileEntry.folderId AS modelFolderId, DLFileEntry.name AS name, title AS title, 0 AS fileShortcutId, 0 AS modelFolder
+				DISTINCT DLFileEntry.folderId AS modelFolderId, DLFileEntry.name AS name, DLFileEntry.title AS title, 0 AS fileShortcutId, 0 AS modelFolder
 			FROM
 				DLFileEntry
 			INNER JOIN

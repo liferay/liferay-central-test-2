@@ -163,7 +163,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			String name = WebDAVUtil.getResourceName(destinationArray);
 			String title = WebDAVUtil.getResourceName(destinationArray);
 			String description = fileEntry.getDescription();
-			String versionDescription = StringPool.BLANK;
+			String changelog = StringPool.BLANK;
 			String extraSettings = fileEntry.getExtraSettings();
 
 			file = FileUtil.createTempFile(
@@ -194,7 +194,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			DLFileEntryServiceUtil.addFileEntry(
 				groupId, parentFolderId, name, title, description,
-				versionDescription, extraSettings, file, serviceContext);
+				changelog, extraSettings, file, serviceContext);
 
 			return status;
 		}
@@ -358,7 +358,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 				String title = name;
 				String description = StringPool.BLANK;
-				String versionDescription = StringPool.BLANK;
+				String changelog = StringPool.BLANK;
 				String extraSettings = StringPool.BLANK;
 
 				File file = FileUtil.createTempFile(
@@ -374,7 +374,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 				DLFileEntry fileEntry = DLFileEntryServiceUtil.addFileEntry(
 					groupId, parentFolderId, name, title, description,
-					versionDescription, extraSettings, file, serviceContext);
+					changelog, extraSettings, file, serviceContext);
 
 				resource = toResource(webDavRequest, fileEntry, false);
 			}
@@ -537,7 +537,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			String sourceFileName = null;
 			String title = WebDAVUtil.getResourceName(destinationArray);
 			String description = fileEntry.getDescription();
-			String versionDescription = StringPool.BLANK;
+			String changelog = StringPool.BLANK;
 			String extraSettings = fileEntry.getExtraSettings();
 			byte[] bytes = null;
 
@@ -578,7 +578,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 					DLFileEntryServiceUtil.updateFileEntry(
 						groupId, parentFolderId, destFileEntry.getName(),
 						destFileEntry.getTitle(), destFileEntry.getTitle(),
-						destFileEntry.getDescription(), versionDescription,
+						destFileEntry.getDescription(), changelog,
 						false, destFileEntry.getExtraSettings(), bytes,
 						serviceContext);
 
@@ -594,7 +594,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			DLFileEntryServiceUtil.updateFileEntry(
 				fileEntry.getGroupId(), fileEntry.getFolderId(), name,
-				sourceFileName, title, description, versionDescription, false,
+				sourceFileName, title, description, changelog, false,
 				extraSettings, bytes, serviceContext);
 
 			if (fileEntry.getFolderId() != parentFolderId) {
@@ -636,7 +636,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			String name = WebDAVUtil.getResourceName(pathArray);
 			String title = name;
 			String description = StringPool.BLANK;
-			String versionDescription = StringPool.BLANK;
+			String changelog = StringPool.BLANK;
 			String extraSettings = StringPool.BLANK;
 
 			ServiceContext serviceContext = new ServiceContext();
@@ -673,7 +673,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 				DLFileEntryServiceUtil.updateFileEntry(
 					groupId, parentFolderId, name, title, title, description,
-					versionDescription, false, extraSettings, file,
+					changelog, false, extraSettings, file,
 					serviceContext);
 			}
 			catch (NoSuchFileEntryException nsfee) {
@@ -683,7 +683,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 				DLFileEntryServiceUtil.addFileEntry(
 					groupId, parentFolderId, name, title, description,
-					versionDescription, extraSettings, file, serviceContext);
+					changelog, extraSettings, file, serviceContext);
 			}
 
 			return HttpServletResponse.SC_CREATED;

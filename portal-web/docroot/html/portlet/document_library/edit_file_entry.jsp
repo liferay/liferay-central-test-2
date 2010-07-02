@@ -1,3 +1,5 @@
+<%@ page
+		import="com.liferay.portlet.documentlibrary.model.DLFileEntryConstants" %>
 <%
 /**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
@@ -45,6 +47,8 @@ if (PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.O
 }
 
 DLFolder folder = null;
+DLFileVersion fileVersion = null;
+long assetClassPK = 0;
 
 Lock lock = null;
 Boolean isLocked = Boolean.FALSE;
@@ -52,6 +56,15 @@ Boolean hasLock = Boolean.FALSE;
 
 if (fileEntry != null) {
 	folder = fileEntry.getFolder();
+
+	fileVersion = fileEntry.getLatestFileVersion();
+
+	if (!fileVersion.isApproved() && (fileVersion.getVersion() != DLFileEntryConstants.DEFAULT_VERSION)) {
+		assetClassPK = fileVersion.getFileVersionId();
+	}
+	else {
+		assetClassPK = fileEntry.getFileEntryId();
+	}
 
 	try {
 		lock = LockLocalServiceUtil.getLock(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getGroupId(), fileEntry.getFolderId(), fileEntry.getName()));
@@ -162,7 +175,11 @@ portletURL.setParameter("name", name);
 
 	<liferay-ui:asset-tags-error />
 
-	<aui:model-context bean="<%= fileEntry %>" model="<%= DLFileEntry.class %>" />
+	<aui:model-context bean="<%= fileVersion %>" model="<%= DLFileVersion.class %>" />
+
+	<c:if test="<%= (fileVersion != null) && (!fileVersion.isNew()) %>">
+		<aui:workflow-status status="<%= fileVersion.getStatus() %>" version="<%= Double.parseDouble(fileVersion.getVersion()) %>" />
+	</c:if>
 
 	<aui:fieldset>
 		<aui:field-wrapper>
@@ -235,32 +252,15 @@ portletURL.setParameter("name", name);
 		<liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
 			<liferay-ui:custom-attribute-list
 				className="<%= DLFileEntry.class.getName() %>"
-				classPK="<%= (fileEntry != null) ? fileEntry.getFileEntryId() : 0 %>"
+				classPK="<%= (fileVersion != null) ? fileVersion.getFileVersionId() : 0 %>"
 				editable="<%= true %>"
 				label="<%= true %>"
 			/>
 		</liferay-ui:custom-attributes-available>
 
-		<%
-		long classPK = 0;
+		<aui:input classPK="<%= assetClassPK %>" model="<%= DLFileEntry.class %>" name="categories" type="assetCategories" />
 
-		if (fileEntry != null) {
-			DLFileVersion latestFileVersion = DLFileVersionLocalServiceUtil.getLatestFileVersion(fileEntry.getGroupId(), fileEntry.getFolderId(), fileEntry.getName());
-
-			try {
-				AssetEntryLocalServiceUtil.getEntry(DLFileEntry.class.getName(), latestFileVersion.getPrimaryKey());
-
-				classPK = latestFileVersion.getPrimaryKey();
-			}
-			catch (NoSuchEntryException nsee) {
-				classPK = fileEntry.getFileEntryId();
-			}
-		}
-		%>
-
-		<aui:input classPK="<%= classPK %>" name="categories" type="assetCategories" />
-
-		<aui:input classPK="<%= classPK %>" name="tags" type="assetTags" />
+		<aui:input classPK="<%= assetClassPK %>" model="<%= DLFileEntry.class %>" name="tags" type="assetTags" />
 
 		<%
 		if (fileEntry == null) {
@@ -284,6 +284,20 @@ portletURL.setParameter("name", name);
 			</aui:field-wrapper>
 		</c:if>
 
+		<%
+		boolean pending = false;
+
+		if (fileVersion != null) {
+			pending = fileVersion.isPending();
+		}
+		%>
+
+		<c:if test="<%= pending %>">
+			<div class="portlet-msg-info">
+				<liferay-ui:message key="there-is-a-publication-workflow-in-process" />
+			</div>
+		</c:if>
+
 		<aui:button-row>
 
 			<%
@@ -291,6 +305,10 @@ portletURL.setParameter("name", name);
 
 			if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, DLFileEntry.class.getName())) {
 				publishButtonLabel = "submit-for-publication";
+			}
+
+			if (pending) {
+				publishButtonLabel = "save";
 			}
 			%>
 

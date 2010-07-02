@@ -27,7 +27,11 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
+import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
+
+import com.sun.java_cup.internal.version;
 
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
@@ -41,12 +45,19 @@ import javax.portlet.RenderResponse;
  */
 public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 
-	public DLFileEntryAssetRenderer(DLFileEntry entry) {
+	public DLFileEntryAssetRenderer(DLFileEntry entry, DLFileVersion version) {
 		_entry = entry;
+		_version = version;
 	}
 
 	public long getClassPK() {
-		return _entry.getFileEntryId();
+		if (!_version.isApproved() &&
+			(_version.getVersion() != DLFileEntryConstants.DEFAULT_VERSION)) {
+			return _version.getFileVersionId();
+		}
+		else {
+			return _entry.getFileEntryId();
+		}
 	}
 
 	public String getDiscussionPath() {
@@ -160,6 +171,8 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 
 			renderRequest.setAttribute(
 				WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY, _entry);
+			renderRequest.setAttribute(
+				WebKeys.DOCUMENT_LIBRARY_FILE_VERSION, _version);
 
 			return "/html/portlet/document_library/asset/" + template + ".jsp";
 		}
@@ -173,5 +186,6 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 	}
 
 	private DLFileEntry _entry;
+	private DLFileVersion _version;
 
 }

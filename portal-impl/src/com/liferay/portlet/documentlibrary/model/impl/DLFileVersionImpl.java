@@ -14,17 +14,53 @@
 
 package com.liferay.portlet.documentlibrary.model.impl;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.util.DLUtil;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 /**
  * <a href="DLFileVersionImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  */
 public class DLFileVersionImpl
 	extends DLFileVersionModelImpl implements DLFileVersion {
 
 	public DLFileVersionImpl() {
 	}
+
+	public ExpandoBridge getExpandoBridge() {
+		if (_expandoBridge == null) {
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
+				getCompanyId(), DLFileEntry.class.getName(), getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
+	public DLFileEntry getFileEntry() {
+		try {
+			return DLFileEntryLocalServiceUtil.getFileEntry(
+				getGroupId(), getFolderId(), getName());
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return null;
+	}
+
+	public String getIcon() {
+		return DLUtil.getFileIcon(getExtension());
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(DLFileVersionImpl.class);
+
+	private ExpandoBridge _expandoBridge;
 
 }

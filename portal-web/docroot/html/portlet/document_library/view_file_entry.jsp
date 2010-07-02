@@ -120,7 +120,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	<liferay-ui:header
 		backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", parentFolderName) %>'
 		backURL="<%= backURL.toString() %>"
-		title='<%= fileEntry.getTitle() + " (" + versionText + ")" %>'
+		title='<%= fileEntry.getTitle() %>'
 	/>
 </c:if>
 
@@ -151,19 +151,54 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	</c:choose>
 </c:if>
 
+<%
+DLFileVersion fileVersion = null;
+
+if (fileEntry != null) {
+	fileVersion = DLFileVersionLocalServiceUtil.getFileVersion(fileEntry.getGroupId(), fileEntry.getFolderId(), fileEntry.getName(), fileEntry.getVersion());
+}
+%>
+
 <aui:layout>
 	<aui:column columnWidth="<%= 75 %>" cssClass="asset-column asset-column-details" first="<%= true %>">
+		<c:if test="<%= fileVersion != null %>">
+			<aui:model-context bean="<%= fileVersion %>" model="<%= DLFileVersion.class %>" />
+
+			<aui:workflow-status status="<%= fileVersion.getStatus() %>" version="<%= Double.parseDouble(fileVersion.getVersion()) %>" />
+
+			<div class="asset-metadata">
+				<div class="asset-icon asset-author">
+					<%= LanguageUtil.format(pageContext, "last-updated-by-x", HtmlUtil.escape(PortalUtil.getUserName(fileEntry.getUserId(), fileEntry.getUserName()))) %>
+				</div>
+
+				<div class="asset-icon asset-date">
+					<%= dateFormatDateTime.format(fileEntry.getModifiedDate()) %>
+				</div>
+
+				<c:if test="<%= PropsValues.DL_FILE_ENTRY_READ_COUNT_ENABLED %>">
+					<div class="asset-icon asset-downloads last">
+
+						<%
+						int readCount = fileEntry.getReadCount();
+						%>
+
+						<%= readCount %> <liferay-ui:message key='<%= (readCount == 1) ? "download" : "downloads" %>' />
+					</div>
+				</c:if>
+			</div>
+		</c:if>
+
 		<div class="asset-categories">
 			<liferay-ui:asset-categories-summary
-				className="<%= DLFileEntry.class.getName() %>"
-				classPK="<%= fileEntryId %>"
+				className="<%= DLFileVersion.class.getName() %>"
+				classPK="<%= fileVersion.getFileVersionId() %>"
 			/>
 		</div>
 
 		<div class="asset-tags">
 			<liferay-ui:asset-tags-summary
-				className="<%= DLFileEntry.class.getName() %>"
-				classPK="<%= fileEntryId %>"
+				className="<%= DLFileVersion.class.getName() %>"
+				classPK="<%= fileVersion.getFileVersionId() %>"
 				message="tags"
 			/>
 		</div>
@@ -177,32 +212,11 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 		<liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
 			<liferay-ui:custom-attribute-list
 				className="<%= DLFileEntry.class.getName() %>"
-				classPK="<%= (fileEntry != null) ? fileEntry.getFileEntryId() : 0 %>"
+				classPK="<%= (fileVersion != null) ? fileVersion.getFileVersionId() : 0 %>"
 				editable="<%= false %>"
 				label="<%= true %>"
 			/>
 		</liferay-ui:custom-attributes-available>
-
-		<div class="asset-metadata">
-			<div class="asset-icon asset-author">
-				<%= LanguageUtil.format(pageContext, "last-updated-by-x", HtmlUtil.escape(PortalUtil.getUserName(fileEntry.getUserId(), fileEntry.getUserName()))) %>
-			</div>
-
-			<div class="asset-icon asset-date">
-				<%= dateFormatDateTime.format(fileEntry.getModifiedDate()) %>
-			</div>
-
-			<c:if test="<%= PropsValues.DL_FILE_ENTRY_READ_COUNT_ENABLED %>">
-				<div class="asset-icon asset-downloads last">
-
-					<%
-					int readCount = fileEntry.getReadCount();
-					%>
-
-					<%= readCount %> <liferay-ui:message key='<%= (readCount == 1) ? "download" : "downloads" %>' />
-				</div>
-			</c:if>
-		</div>
 
 		<div class="asset-ratings">
 			<liferay-ui:ratings
@@ -351,9 +365,9 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			List resultRows = searchContainer.getResultRows();
 
 			for (int i = 0; i < results.size(); i++) {
-				DLFileVersion fileVersion = (DLFileVersion)results.get(i);
+				DLFileVersion curFileVersion = (DLFileVersion)results.get(i);
 
-				ResultRow row = new ResultRow(new Object[] {fileEntry, fileVersion, results.size(), conversions, isLocked, hasLock}, String.valueOf(fileVersion.getVersion()), i);
+				ResultRow row = new ResultRow(new Object[] {fileEntry, curFileVersion, results.size(), conversions, isLocked, hasLock}, String.valueOf(curFileVersion.getVersion()), i);
 
 				StringBundler sb = new StringBundler(10);
 
@@ -366,20 +380,20 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 				sb.append(StringPool.SLASH);
 				sb.append(HttpUtil.encodeURL(HtmlUtil.unescape(title)));
 				sb.append("?version=");
-				sb.append(String.valueOf(fileVersion.getVersion()));
+				sb.append(String.valueOf(curFileVersion.getVersion()));
 
 				String rowHREF = sb.toString();
 
 				// Statistics
 
-				row.addText(String.valueOf(fileVersion.getVersion()), rowHREF);
-				row.addText(dateFormatDateTime.format(fileVersion.getCreateDate()), rowHREF);
-				row.addText(TextFormatter.formatKB(fileVersion.getSize(), locale) + "k", rowHREF);
+				row.addText(String.valueOf(curFileVersion.getVersion()), rowHREF);
+				row.addText(dateFormatDateTime.format(curFileVersion.getCreateDate()), rowHREF);
+				row.addText(TextFormatter.formatKB(curFileVersion.getSize(), locale) + "k", rowHREF);
 
 				// Status
 
 				if (showNonApprovedDocuments) {
-					row.addText(LanguageUtil.get(pageContext, WorkflowConstants.toLabel(fileVersion.getStatus())));
+					row.addText(LanguageUtil.get(pageContext, WorkflowConstants.toLabel(curFileVersion.getStatus())));
 				}
 
 				// Download
@@ -402,7 +416,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			}
 
 			if (comparableFileEntry && !results.isEmpty()) {
-				DLFileVersion fileVersion = (DLFileVersion)results.get(0);
+				DLFileVersion curFileVersion = (DLFileVersion)results.get(0);
 			%>
 
 				<portlet:actionURL var="compareVersionsURL">
@@ -415,7 +429,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 					<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
 					<aui:input name="name" type="hidden" value="<%= name %>" />
 					<aui:input name="title" type="hidden" value="<%= title %>" />
-					<aui:input name="sourceVersion" type="hidden" value="<%= fileVersion.getVersion() %>" />
+					<aui:input name="sourceVersion" type="hidden" value="<%= curFileVersion.getVersion() %>" />
 					<aui:input name="targetVersion" type="hidden" value="<%= fileEntry.getVersion() %>" />
 
 					<aui:button-row>

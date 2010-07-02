@@ -25,8 +25,11 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.BaseAssetRendererFactory;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
+import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLPermission;
 
 import javax.portlet.PortletURL;
@@ -47,9 +50,24 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 	public AssetRenderer getAssetRenderer(long classPK, int type)
 		throws PortalException, SystemException {
 
-		DLFileEntry entry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
+		DLFileEntry entry = null;
+		DLFileVersion version = null;
 
-		return new DLFileEntryAssetRenderer(entry);
+		try {
+			entry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
+			if (type == TYPE_LATEST) {
+				version = entry.getLatestFileVersion();
+			}
+			else {
+				version = entry.getFileVersion();
+			}
+		}
+		catch (NoSuchFileEntryException nsfee) {
+			version = DLFileVersionLocalServiceUtil.getFileVersion(classPK);
+			entry = version.getFileEntry();
+		}
+
+		return new DLFileEntryAssetRenderer(entry, version);
 	}
 
 	public String getClassName() {

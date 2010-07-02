@@ -2,11 +2,18 @@ alter table AssetEntry add classUuid VARCHAR(75) null;
 
 alter table DLFileEntry add extension VARCHAR(75) null;
 
+alter table DLFileVersion add extension VARCHAR(75) null;
+alter table DLFileVersion add title VARCHAR(255) null;
+alter table DLFileVersion add changelog STRING null;
+alter table DLFileVersion add extraSettings TEXT null;
+
+COMMIT_TRANSACTION;
+
+update DLFileVersion set changelog = description;
+
 alter table Layout add uuid_ VARCHAR(75) null;
 
 alter table MBMessage add rootMessageId LONG;
-
-COMMIT_TRANSACTION;
 
 update MBMessage set rootMessageId = (select rootMessageId from MBThread where MBThread.threadId = MBMessage.threadId);
 
