@@ -38,7 +38,31 @@ public class PanelTag extends BaseBodyTagSupport {
 			_id = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 		}
 
+		BaseBodyTagSupport parentTag =
+			(BaseBodyTagSupport)findAncestorWithClass(
+				this, BaseBodyTagSupport.class);
+
+		String parentId = StringPool.BLANK;
+
+		try {
+			PanelFloatingContainerTag panelFloatingContainerTag	=
+				(PanelFloatingContainerTag)parentTag;
+
+			parentId = panelFloatingContainerTag.getId();
+		}
+		catch (ClassCastException cce){
+			try {
+				PanelContainerTag panelContainerTag	=
+					(PanelContainerTag)parentTag;
+
+				parentId = panelContainerTag.getId();
+			}
+			catch (ClassCastException ccee) {
+			}
+		}
+
  		request.setAttribute("liferay-ui:panel:id", _id);
+ 		request.setAttribute("liferay-ui:panel:parent-id", parentId);
  		request.setAttribute("liferay-ui:panel:title", _title);
 		request.setAttribute(
 			"liferay-ui:panel:collapsible", String.valueOf(_collapsible));

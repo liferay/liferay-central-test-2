@@ -49,7 +49,8 @@ public class PanelContainerTag extends BaseBodyTagSupport {
 		request.setAttribute("liferay-ui:panel-container:extended", _extended);
 		request.setAttribute("liferay-ui:panel-container:cssClass", _cssClass);
 		request.setAttribute(
-			"liferay-ui:panel-container:panel-count", new IntegerWrapper());
+			"liferay-ui:panel-container:panel-count-" +
+				_id, new IntegerWrapper());
 
 		return EVAL_BODY_BUFFERED;
 	}
@@ -59,7 +60,7 @@ public class PanelContainerTag extends BaseBodyTagSupport {
 			(HttpServletRequest)pageContext.getRequest();
 
 		IntegerWrapper panelCount = (IntegerWrapper)request.getAttribute(
-			"liferay-ui:panel-container:panel-count");
+			"liferay-ui:panel-container:panel-count-" + _id);
 
 		if ((panelCount != null) && (panelCount.getValue() == 1)) {
 
@@ -78,9 +79,10 @@ public class PanelContainerTag extends BaseBodyTagSupport {
 				(HttpServletRequest)pageContext.getRequest();
 
 			IntegerWrapper panelCount = (IntegerWrapper)request.getAttribute(
-				"liferay-ui:panel-container:panel-count");
+				"liferay-ui:panel-container:panel-count-" + _id);
 
-			request.removeAttribute("liferay-ui:panel-container:panel-count");
+			request.removeAttribute(
+				"liferay-ui:panel-container:panel-count-" + _id);
 
 			if ((panelCount != null) && (panelCount.getValue() >= 1)) {
 				PortalIncludeUtil.include(pageContext, getStartPage());
@@ -103,6 +105,10 @@ public class PanelContainerTag extends BaseBodyTagSupport {
 		catch (Exception e) {
 			throw new JspException(e);
 		}
+	}
+
+	public String getId() {
+		return _id;
 	}
 
 	protected String getStartPage() {
