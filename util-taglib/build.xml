@@ -35,17 +35,18 @@
 	</target>
 
 	<target name="taglibdoc">
-		<property name="doc.taglib.dir" value="${doc.dir}/taglibs"></property>
-		<mkdir dir="${doc.taglib.dir}" />
+		<property name="doc.taglibs.dir" value="${doc.dir}/taglibs" />
+
+		<mkdir dir="${doc.taglibs.dir}" />
 
 		<java
 			classname="com.sun.tlddoc.TLDDoc"
 			classpathref="project.classpath"
 			failonerror="true"
 			fork="true"
-			maxmemory="512m"
+			maxmemory="256m"
 		>
-			<arg line="-d ${doc.taglib.dir}" />
+			<arg line="-d ${doc.taglibs.dir}" />
 			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-aui.tld" />
 			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-faces.tld" />
 			<arg value="${project.dir}/util-taglib/src/META-INF/liferay-portlet-ext.tld" />

@@ -685,8 +685,8 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djonas.felix.configuration.file="%JONAS_ROOT
 	</target>
 
 	<target name="doc">
-		<antcall target="javadoc" />
 		<antcall target="dtddoc" />
+		<antcall target="javadoc" />
 		<ant dir="util-taglib" target="taglibdoc" inheritAll="false" />
 	</target>
 
@@ -697,10 +697,10 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djonas.felix.configuration.file="%JONAS_ROOT
 			<replace regex="\." replacement="_" />
 		</antelope:stringutil>-->
 
-		<property name="doc.dtd.dir" value="${doc.dir}/definitions" />
+		<property name="doc.definitions.dir" value="${doc.dir}/definitions" />
 
 		<DTDDoc
-			destDir="${doc.dtd.dir}"
+			destDir="${doc.definitions.dir}"
 			docTitle = "Liferay ${lp.version} Definitions"
 			showFixmeTags="false"
 			showHiddenTags="false"
@@ -725,15 +725,9 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djonas.felix.configuration.file="%JONAS_ROOT
 		<ant dir="support-tomcat" target="jar" inheritAll="false" />
 	</target>
 
-	<target name="jar-doc">
-		<jar
-			basedir="${doc.dir}"
-			jarfile="${jar.file}-doc.jar"
-		/>
-	</target>
-
 	<target name="javadoc">
 		<property name="doc.java.dir" value="${doc.dir}/javadocs" />
+
 		<mkdir dir="${doc.java.dir}" />
 
 		<javadoc
@@ -749,17 +743,14 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djonas.felix.configuration.file="%JONAS_ROOT
 			useexternalfile="yes"
 			windowtitle="Liferay ${lp.version} API"
 		>
-
 			<link href="http://docs.liferay.com/portlet-api/2.0/javadocs" />
 			<link href="http://java.sun.com/javase/6/docs/api" />
-
-			<tag name="generated" />
-
 			<packageset dir="portal-impl/src" />
 			<packageset dir="portal-service/src" />
 			<packageset dir="util-bridges/src" />
 			<packageset dir="util-java/src" />
 			<packageset dir="util-taglib/src" />
+			<tag name="generated" />
 		</javadoc>
 	</target>
 
