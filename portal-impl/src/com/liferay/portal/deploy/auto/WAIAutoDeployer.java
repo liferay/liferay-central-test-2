@@ -16,7 +16,9 @@ package com.liferay.portal.deploy.auto;
 
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.util.bridges.wai.WAIPortlet;
 
 import java.io.File;
 
@@ -28,6 +30,7 @@ import java.util.Properties;
  * <a href="WAIAutoDeployer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ * @author Connor McKay
  */
 public class WAIAutoDeployer extends PortletAutoDeployer {
 
@@ -63,20 +66,17 @@ public class WAIAutoDeployer extends PortletAutoDeployer {
 			filterMap.put(
 				"portlet_class",
 				settings.getProperty(
-					"wai.portlet", "com.liferay.util.bridges.wai.WAIPortlet"));
+					"wai.portlet", WAIPortlet.class.getName()));
 
 			filterMap.put(
 				"friendly_url_mapper_class",
 				settings.getProperty(
 					"wai.friendly.url.mapper",
-					"com.liferay.portal.kernel.portlet." +
-						"DefaultFriendlyURLMapper"));
+					DefaultFriendlyURLMapper.class.getName()));
 
 			filterMap.put(
 				"friendly_url_mapping",
-				settings.getProperty(
-					"wai.friendly.url.mapping",
-					"waiapp"));
+				settings.getProperty("wai.friendly.url.mapping", "waiapp"));
 
 			filterMap.put(
 				"friendly_url_routes",
@@ -86,16 +86,13 @@ public class WAIAutoDeployer extends PortletAutoDeployer {
 						"wai-friendly-url-routes.xml"));
 		}
 		else {
-			filterMap.put(
-				"portlet_class", "com.liferay.util.bridges.wai.WAIPortlet");
+			filterMap.put("portlet_class", WAIPortlet.class.getName());
 
 			filterMap.put(
 				"friendly_url_mapper_class",
-				"com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper");
+				DefaultFriendlyURLMapper.class.getName());
 
-			filterMap.put(
-				"friendly_url_mapping",
-				"waiapp");
+			filterMap.put("friendly_url_mapping", "waiapp");
 
 			filterMap.put(
 				"friendly_url_routes",
@@ -111,7 +108,6 @@ public class WAIAutoDeployer extends PortletAutoDeployer {
 		copyDependencyXml(
 			"portlet.xml", srcFile + "/WEB-INF", filterMap);
 		copyDependencyXml("iframe.jsp", srcFile + "/WEB-INF/jsp/liferay/wai");
-
 	}
 
 	private void _setInitParams(

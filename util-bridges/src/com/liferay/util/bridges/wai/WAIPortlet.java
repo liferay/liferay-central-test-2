@@ -18,12 +18,9 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortlet;
 import com.liferay.portal.kernel.servlet.PortletServlet;
-import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.io.IOException;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -41,13 +38,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class WAIPortlet extends LiferayPortlet {
 
-	public void processAction(
-		ActionRequest actionRequest, ActionResponse actionResponse) {
-	}
-
 	public void render(
 			RenderRequest renderRequest, RenderResponse renderResponse)
-		throws IOException, PortletException {
+		throws PortletException {
 
 		HttpServletRequest request =
 			(HttpServletRequest)renderRequest.getAttribute(
@@ -55,14 +48,6 @@ public class WAIPortlet extends LiferayPortlet {
 		HttpServletResponse response =
 			(HttpServletResponse)renderRequest.getAttribute(
 				PortletServlet.PORTLET_SERVLET_RESPONSE);
-
-		String iframeDefaultHeight = GetterUtil.getString(
-			getPortletConfig().getInitParameter(
-				"wai.connector.iframe.height.default"),
-			"500");
-
-		renderRequest.setAttribute(
-			"wai.connector.iframe.height.default", iframeDefaultHeight);
 
 		forward(request, response, _JSP_IFRAME);
 	}
