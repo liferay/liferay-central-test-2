@@ -64,14 +64,14 @@
 		</antcall>
 
 		<antcall target="prepare-db-db2-common">
-			<param name="custom.properties" value="permissions.user.check.algorithm=5" />
+			<param name="custom.properties" value="permissions.user.check.algorithm=5${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="skip.rebuild-database" value="true" />
 			<param name="sql.version" value="5.1.0" />
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			<param name="custom.properties" value="permissions.user.check.algorithm=5" />
+			<param name="custom.properties" value="permissions.user.check.algorithm=5${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
 			<param name="portlet.plugins.includes" value="web-form-portlet" />
 			<param name="test.name" value="ViewSampleData510LatestTestSuite" />
 		</antcall>
@@ -106,14 +106,14 @@
 		</antcall>
 
 		<antcall target="prepare-db-db2-common">
-			<param name="custom.properties" value="permissions.user.check.algorithm=5" />
+			<param name="custom.properties" value="permissions.user.check.algorithm=5${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="skip.rebuild-database" value="true" />
 			<param name="sql.version" value="5.1.1" />
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			<param name="custom.properties" value="permissions.user.check.algorithm=5" />
+			<param name="custom.properties" value="permissions.user.check.algorithm=5${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
 			<param name="portlet.plugins.includes" value="web-form-portlet" />
 			<param name="test.name" value="ViewSampleData511LatestTestSuite" />
 		</antcall>
@@ -148,14 +148,14 @@
 		</antcall>
 
 		<antcall target="prepare-db-db2-common">
-			<param name="custom.properties" value="permissions.user.check.algorithm=5" />
+			<param name="custom.properties" value="permissions.user.check.algorithm=5${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="skip.rebuild-database" value="true" />
 			<param name="sql.version" value="5.1.2" />
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			<param name="custom.properties" value="permissions.user.check.algorithm=5" />
+			<param name="custom.properties" value="permissions.user.check.algorithm=5${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
 			<param name="portlet.plugins.includes" value="web-form-portlet" />
 			<param name="test.name" value="ViewSampleData512LatestTestSuite" />
 		</antcall>
@@ -189,14 +189,14 @@
 		</antcall>
 
 		<antcall target="prepare-db-db2-common">
-			<param name="custom.properties" value="permissions.user.check.algorithm=5" />
+			<param name="custom.properties" value="permissions.user.check.algorithm=5${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="skip.rebuild-database" value="true" />
 			<param name="sql.version" value="5.2.0" />
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			<param name="custom.properties" value="permissions.user.check.algorithm=5" />
+			<param name="custom.properties" value="permissions.user.check.algorithm=5${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
 			<param name="test.name" value="ViewSampleData520LatestTestSuite" />
 		</antcall>
 	</target>
@@ -232,14 +232,14 @@
 		</antcall>
 
 		<antcall target="prepare-db-db2-common">
-			<param name="custom.properties" value="permissions.user.check.algorithm=5" />
+			<param name="custom.properties" value="permissions.user.check.algorithm=5${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="skip.rebuild-database" value="true" />
 			<param name="sql.version" value="5.2.1" />
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			<param name="custom.properties" value="permissions.user.check.algorithm=5" />
+			<param name="custom.properties" value="permissions.user.check.algorithm=5${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
 			<param name="portlet.plugins.includes" value="web-form-portlet" />
 			<param name="test.name" value="ViewSampleData521LatestTestSuite" />
 		</antcall>
@@ -276,14 +276,14 @@
 		</antcall>
 
 		<antcall target="prepare-db-db2-common">
-			<param name="custom.properties" value="permissions.user.check.algorithm=5" />
+			<param name="custom.properties" value="permissions.user.check.algorithm=5${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="skip.rebuild-database" value="true" />
 			<param name="sql.version" value="5.2.2" />
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			<param name="custom.properties" value="permissions.user.check.algorithm=5" />
+			<param name="custom.properties" value="permissions.user.check.algorithm=5${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
 			<param name="portlet.plugins.includes" value="web-form-portlet" />
 			<param name="test.name" value="ViewSampleData522LatestTestSuite" />
 		</antcall>
@@ -317,14 +317,14 @@
 		</antcall>
 
 		<antcall target="prepare-db-db2-common">
-			<param name="custom.properties" value="permissions.user.check.algorithm=5" />
+			<param name="custom.properties" value="permissions.user.check.algorithm=5${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="skip.rebuild-database" value="true" />
 			<param name="sql.version" value="5.2.3" />
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			<param name="custom.properties" value="permissions.user.check.algorithm=5" />
+			<param name="custom.properties" value="permissions.user.check.algorithm=5${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
 			<param name="test.name" value="ViewSampleData523LatestTestSuite" />
 		</antcall>
 	</target>
@@ -367,7 +367,7 @@
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			<param name="custom.properties" value="upgrade.processes=com.liferay.portal.upgrade.UpgradeProcess_5_2_7_to_6_0_0${line.separator}com.liferay.portal.upgrade.UpgradeProcess_6_0_1${line.separator}permissions.user.check.algorithm=5" />
+			<param name="custom.properties" value="upgrade.processes=com.liferay.portal.upgrade.UpgradeProcess_5_2_7_to_6_0_0${line.separator}com.liferay.portal.upgrade.UpgradeProcess_6_0_1${line.separator}permissions.user.check.algorithm=5${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
 			<param name="portlet.plugins.includes" value="web-form-portlet" />
 			<param name="test.name" value="ViewSampleData527LatestTestSuite" />
 		</antcall>
