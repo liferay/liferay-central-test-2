@@ -40,10 +40,6 @@
 	padding: 0.7em;
 }
 
-.lfr-asset-column-details .lfr-asset-column-details-content {
-	margin-right: 4em;
-}
-
 .lfr-asset-column-details .lfr-asset-categories .lfr-asset-category {
 	color: #555;
 }
