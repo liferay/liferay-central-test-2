@@ -712,7 +712,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 	}
 }
 
-if ((layout.isTypePanel() || layout.isTypeControlPanel()) && !portletDisplay.getId().equals(PortletKeys.LAYOUT_CONFIGURATION)) {
+if ((layout.isTypePanel() || layout.isTypeControlPanel()) && !portletDisplay.getId().equals(PortletKeys.CONTROL_PANEL_MENU)) {
 	PortalUtil.setPageTitle(portletDisplay.getTitle(), request);
 }
 %>
