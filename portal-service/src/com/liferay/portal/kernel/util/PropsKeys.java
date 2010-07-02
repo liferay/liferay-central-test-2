@@ -1401,7 +1401,7 @@ public interface PropsKeys {
 
 	public static final String SESSION_SHARED_ATTRIBUTES = "session.shared.attributes";
 
-	public static final String SESSION_SHARED_ATTRIBUTES_EXCLUSIONS = "session.shared.attributes.exclusions";
+	public static final String SESSION_SHARED_ATTRIBUTES_EXCLUDES = "session.shared.attributes.excludes";
 
 	public static final String SESSION_STORE_PASSWORD = "session.store.password";
 

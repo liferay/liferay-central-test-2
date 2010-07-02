@@ -1002,7 +1002,7 @@ public class PropsValues {
 
 	public static final String[] SHARED_SESSION_ATTRIBUTES = PropsUtil.getArray(PropsKeys.SESSION_SHARED_ATTRIBUTES);
 
-	public static final String[] SHARED_SESSION_ATTRIBUTES_EXCLUSIONS = PropsUtil.getArray(PropsKeys.SESSION_SHARED_ATTRIBUTES_EXCLUSIONS);
+	public static final String[] SHARED_SESSION_ATTRIBUTES_EXCLUDES = PropsUtil.getArray(PropsKeys.SESSION_SHARED_ATTRIBUTES_EXCLUDES);
 
 	public static final boolean SESSION_STORE_PASSWORD = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.SESSION_STORE_PASSWORD));
 

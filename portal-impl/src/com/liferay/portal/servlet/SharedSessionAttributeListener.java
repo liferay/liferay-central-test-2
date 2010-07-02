@@ -15,6 +15,7 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.servlet.ServletVersionDetector;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ConcurrentHashSet;
 import com.liferay.portal.util.PropsValues;
 
@@ -65,17 +66,15 @@ public class SharedSessionAttributeListener
 
 		String name = event.getName();
 
+		if (ArrayUtil.contains(
+				PropsValues.SHARED_SESSION_ATTRIBUTES_EXCLUDES, name)) {
+
+			return;
+		}
+
 		for (String sharedName : PropsValues.SHARED_SESSION_ATTRIBUTES) {
 			if (!name.startsWith(sharedName)) {
 				continue;
-			}
-			
-			for (String shareException :
-					PropsValues.SHARED_SESSION_ATTRIBUTES_EXCLUSIONS) {
-				
-				if (shareException.equals(name)) {
-					return;
-				}
 			}
 
 			cache.setAttribute(name, event.getValue());

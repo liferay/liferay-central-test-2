@@ -17,6 +17,7 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.ServletVersionDetector;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.Enumeration;
@@ -54,6 +55,12 @@ public class SharedSessionUtil {
 					continue;
 				}
 
+				if (ArrayUtil.contains(
+						PropsValues.SHARED_SESSION_ATTRIBUTES_EXCLUDES, name)) {
+
+					continue;
+				}
+
 				for (String sharedName :
 						PropsValues.SHARED_SESSION_ATTRIBUTES) {
 
@@ -61,21 +68,6 @@ public class SharedSessionUtil {
 						continue;
 					}
 
-					boolean bypassSharing = false;
-
-					for (String shareException :
-							PropsValues.SHARED_SESSION_ATTRIBUTES_EXCLUSIONS) {
-
-						if (shareException.equals(name)) {
-							bypassSharing = true;
-							break;
-						}
-					}
-
-					if (bypassSharing) {
-						continue;
-					}
-					
 					if (_log.isDebugEnabled()) {
 						_log.debug("Sharing " + name);
 					}
