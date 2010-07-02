@@ -22,7 +22,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 IGImage image = (IGImage)request.getAttribute(WebKeys.IMAGE_GALLERY_IMAGE);
 
 IGFolder folder = image.getFolder();
-long folderId = image.getFolderId();
+
 Image largeImage = ImageLocalServiceUtil.getImage(image.getLargeImageId());
 
 String imageUrl = renderResponse.getNamespace() + "viewImage(" + largeImage.getImageId() + ", '" + ImageServletTokenUtil.getToken(largeImage.getImageId()) + "', '" + UnicodeFormatter.toString(image.getName()) + "', '" + UnicodeFormatter.toString(image.getDescription()) + "', " + largeImage.getWidth() + ", " + largeImage.getHeight() +")";
@@ -66,7 +66,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 
 	<portlet:renderURL var="backURL">
 		<portlet:param name="struts_action" value="/image_gallery/view" />
-		<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
+		<portlet:param name="folderId" value="<%= String.valueOf(folder.getFolderId()) %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:header
@@ -79,7 +79,6 @@ if (portletDisplay.isWebDAVEnabled()) {
 
 <aui:layout>
 	<aui:column columnWidth="<%= 75 %>" cssClass="asset-column asset-column-details" first="<%= true %>">
-
 		<div class="asset-categories">
 			<liferay-ui:asset-categories-summary
 				className="<%= IGImage.class.getName() %>"
