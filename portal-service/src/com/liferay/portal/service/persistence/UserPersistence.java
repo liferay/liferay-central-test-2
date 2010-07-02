@@ -214,6 +214,19 @@ public interface UserPersistence extends BasePersistence<User> {
 		java.lang.String emailAddress, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public com.liferay.portal.model.User findByC_FID(long companyId,
+		long facebookId)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.User fetchByC_FID(long companyId,
+		long facebookId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.User fetchByC_FID(long companyId,
+		long facebookId, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public com.liferay.portal.model.User findByC_O(long companyId,
 		java.lang.String openId)
 		throws com.liferay.portal.NoSuchUserException,
@@ -257,19 +270,6 @@ public interface UserPersistence extends BasePersistence<User> {
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException;
-
-	public com.liferay.portal.model.User findByC_FID(long companyId,
-		long facebookId)
-		throws com.liferay.portal.NoSuchUserException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public com.liferay.portal.model.User fetchByC_FID(long companyId,
-		long facebookId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public com.liferay.portal.model.User fetchByC_FID(long companyId,
-		long facebookId, boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -315,16 +315,16 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public void removeByC_FID(long companyId, long facebookId)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public void removeByC_O(long companyId, java.lang.String openId)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByC_A(long companyId, boolean active)
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public void removeByC_FID(long companyId, long facebookId)
-		throws com.liferay.portal.NoSuchUserException,
-			com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -356,13 +356,13 @@ public interface UserPersistence extends BasePersistence<User> {
 	public int countByC_EA(long companyId, java.lang.String emailAddress)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int countByC_FID(long companyId, long facebookId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByC_O(long companyId, java.lang.String openId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByC_A(long companyId, boolean active)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public int countByC_FID(long companyId, long facebookId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()

@@ -167,6 +167,14 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByC_EA",
 			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_FID = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
+			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
+			"fetchByC_FID",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_FID = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
+			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByC_FID",
+			new String[] { Long.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FETCH_BY_C_O = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
 			"fetchByC_O",
@@ -188,14 +196,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByC_A",
 			new String[] { Long.class.getName(), Boolean.class.getName() });
-	public static final FinderPath FINDER_PATH_FETCH_BY_C_FID = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
-			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
-			"fetchByC_FID",
-			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_COUNT_BY_C_FID = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
-			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByC_FID",
-			new String[] { Long.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findAll", new String[0]);
@@ -232,14 +232,14 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			new Object[] { new Long(user.getCompanyId()), user.getEmailAddress() },
 			user);
 
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_O,
-			new Object[] { new Long(user.getCompanyId()), user.getOpenId() },
-			user);
-
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_FID,
 			new Object[] {
 				new Long(user.getCompanyId()), new Long(user.getFacebookId())
 			}, user);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_O,
+			new Object[] { new Long(user.getCompanyId()), user.getOpenId() },
+			user);
 	}
 
 	public void cacheResult(List<User> users) {
@@ -285,13 +285,13 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_EA,
 			new Object[] { new Long(user.getCompanyId()), user.getEmailAddress() });
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_O,
-			new Object[] { new Long(user.getCompanyId()), user.getOpenId() });
-
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_FID,
 			new Object[] {
 				new Long(user.getCompanyId()), new Long(user.getFacebookId())
 			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_O,
+			new Object[] { new Long(user.getCompanyId()), user.getOpenId() });
 	}
 
 	public User create(long userId) {
@@ -466,17 +466,17 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			userModelImpl.getOriginalEmailAddress()
 			});
 
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_FID,
+			new Object[] {
+				new Long(userModelImpl.getOriginalCompanyId()),
+				new Long(userModelImpl.getOriginalFacebookId())
+			});
+
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_O,
 			new Object[] {
 				new Long(userModelImpl.getOriginalCompanyId()),
 				
 			userModelImpl.getOriginalOpenId()
-			});
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_FID,
-			new Object[] {
-				new Long(userModelImpl.getOriginalCompanyId()),
-				new Long(userModelImpl.getOriginalFacebookId())
 			});
 
 		EntityCacheUtil.removeResult(UserModelImpl.ENTITY_CACHE_ENABLED,
@@ -630,6 +630,26 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 		if (!isNew &&
 				((user.getCompanyId() != userModelImpl.getOriginalCompanyId()) ||
+				(user.getFacebookId() != userModelImpl.getOriginalFacebookId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_FID,
+				new Object[] {
+					new Long(userModelImpl.getOriginalCompanyId()),
+					new Long(userModelImpl.getOriginalFacebookId())
+				});
+		}
+
+		if (isNew ||
+				((user.getCompanyId() != userModelImpl.getOriginalCompanyId()) ||
+				(user.getFacebookId() != userModelImpl.getOriginalFacebookId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_FID,
+				new Object[] {
+					new Long(user.getCompanyId()),
+					new Long(user.getFacebookId())
+				}, user);
+		}
+
+		if (!isNew &&
+				((user.getCompanyId() != userModelImpl.getOriginalCompanyId()) ||
 				!Validator.equals(user.getOpenId(),
 					userModelImpl.getOriginalOpenId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_O,
@@ -647,26 +667,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_O,
 				new Object[] { new Long(user.getCompanyId()), user.getOpenId() },
 				user);
-		}
-
-		if (!isNew &&
-				((user.getCompanyId() != userModelImpl.getOriginalCompanyId()) ||
-				(user.getFacebookId() != userModelImpl.getOriginalFacebookId()))) {
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_FID,
-				new Object[] {
-					new Long(userModelImpl.getOriginalCompanyId()),
-					new Long(userModelImpl.getOriginalFacebookId())
-				});
-		}
-
-		if (isNew ||
-				((user.getCompanyId() != userModelImpl.getOriginalCompanyId()) ||
-				(user.getFacebookId() != userModelImpl.getOriginalFacebookId()))) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_FID,
-				new Object[] {
-					new Long(user.getCompanyId()),
-					new Long(user.getFacebookId())
-				}, user);
 		}
 
 		return user;
@@ -2269,6 +2269,119 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		}
 	}
 
+	public User findByC_FID(long companyId, long facebookId)
+		throws NoSuchUserException, SystemException {
+		User user = fetchByC_FID(companyId, facebookId);
+
+		if (user == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(", facebookId=");
+			msg.append(facebookId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchUserException(msg.toString());
+		}
+
+		return user;
+	}
+
+	public User fetchByC_FID(long companyId, long facebookId)
+		throws SystemException {
+		return fetchByC_FID(companyId, facebookId, true);
+	}
+
+	public User fetchByC_FID(long companyId, long facebookId,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { companyId, facebookId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_FID,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(3);
+
+				query.append(_SQL_SELECT_USER_WHERE);
+
+				query.append(_FINDER_COLUMN_C_FID_COMPANYID_2);
+
+				query.append(_FINDER_COLUMN_C_FID_FACEBOOKID_2);
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(facebookId);
+
+				List<User> list = q.list();
+
+				result = list;
+
+				User user = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_FID,
+						finderArgs, list);
+				}
+				else {
+					user = list.get(0);
+
+					cacheResult(user);
+
+					if ((user.getCompanyId() != companyId) ||
+							(user.getFacebookId() != facebookId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_FID,
+							finderArgs, user);
+					}
+				}
+
+				return user;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_FID,
+						finderArgs, new ArrayList<User>());
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (User)result;
+			}
+		}
+	}
+
 	public User findByC_O(long companyId, String openId)
 		throws NoSuchUserException, SystemException {
 		User user = fetchByC_O(companyId, openId);
@@ -2664,119 +2777,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		}
 	}
 
-	public User findByC_FID(long companyId, long facebookId)
-		throws NoSuchUserException, SystemException {
-		User user = fetchByC_FID(companyId, facebookId);
-
-		if (user == null) {
-			StringBundler msg = new StringBundler(6);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("companyId=");
-			msg.append(companyId);
-
-			msg.append(", facebookId=");
-			msg.append(facebookId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchUserException(msg.toString());
-		}
-
-		return user;
-	}
-
-	public User fetchByC_FID(long companyId, long facebookId)
-		throws SystemException {
-		return fetchByC_FID(companyId, facebookId, true);
-	}
-
-	public User fetchByC_FID(long companyId, long facebookId,
-		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { companyId, facebookId };
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_FID,
-					finderArgs, this);
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_USER_WHERE);
-
-				query.append(_FINDER_COLUMN_C_FID_COMPANYID_2);
-
-				query.append(_FINDER_COLUMN_C_FID_FACEBOOKID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				qPos.add(facebookId);
-
-				List<User> list = q.list();
-
-				result = list;
-
-				User user = null;
-
-				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_FID,
-						finderArgs, list);
-				}
-				else {
-					user = list.get(0);
-
-					cacheResult(user);
-
-					if ((user.getCompanyId() != companyId) ||
-							(user.getFacebookId() != facebookId)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_FID,
-							finderArgs, user);
-					}
-				}
-
-				return user;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_FID,
-						finderArgs, new ArrayList<User>());
-				}
-
-				closeSession(session);
-			}
-		}
-		else {
-			if (result instanceof List<?>) {
-				return null;
-			}
-			else {
-				return (User)result;
-			}
-		}
-	}
-
 	public List<User> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -2912,6 +2912,13 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		remove(user);
 	}
 
+	public void removeByC_FID(long companyId, long facebookId)
+		throws NoSuchUserException, SystemException {
+		User user = findByC_FID(companyId, facebookId);
+
+		remove(user);
+	}
+
 	public void removeByC_O(long companyId, String openId)
 		throws NoSuchUserException, SystemException {
 		User user = findByC_O(companyId, openId);
@@ -2924,13 +2931,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		for (User user : findByC_A(companyId, active)) {
 			remove(user);
 		}
-	}
-
-	public void removeByC_FID(long companyId, long facebookId)
-		throws NoSuchUserException, SystemException {
-		User user = findByC_FID(companyId, facebookId);
-
-		remove(user);
 	}
 
 	public void removeAll() throws SystemException {
@@ -3422,6 +3422,57 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		return count.intValue();
 	}
 
+	public int countByC_FID(long companyId, long facebookId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { companyId, facebookId };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_FID,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(3);
+
+				query.append(_SQL_COUNT_USER_WHERE);
+
+				query.append(_FINDER_COLUMN_C_FID_COMPANYID_2);
+
+				query.append(_FINDER_COLUMN_C_FID_FACEBOOKID_2);
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(facebookId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_FID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
 	public int countByC_O(long companyId, String openId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, openId };
@@ -3528,57 +3579,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_A, finderArgs,
 					count);
-
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	public int countByC_FID(long companyId, long facebookId)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { companyId, facebookId };
-
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_FID,
-				finderArgs, this);
-
-		if (count == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_COUNT_USER_WHERE);
-
-				query.append(_FINDER_COLUMN_C_FID_COMPANYID_2);
-
-				query.append(_FINDER_COLUMN_C_FID_FACEBOOKID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				qPos.add(facebookId);
-
-				count = (Long)q.uniqueResult();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (count == null) {
-					count = Long.valueOf(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_FID,
-					finderArgs, count);
 
 				closeSession(session);
 			}
@@ -6911,14 +6911,14 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	private static final String _FINDER_COLUMN_C_EA_EMAILADDRESS_1 = "user.emailAddress IS NULL";
 	private static final String _FINDER_COLUMN_C_EA_EMAILADDRESS_2 = "user.emailAddress = ?";
 	private static final String _FINDER_COLUMN_C_EA_EMAILADDRESS_3 = "(user.emailAddress IS NULL OR user.emailAddress = ?)";
+	private static final String _FINDER_COLUMN_C_FID_COMPANYID_2 = "user.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_FID_FACEBOOKID_2 = "user.facebookId = ?";
 	private static final String _FINDER_COLUMN_C_O_COMPANYID_2 = "user.companyId = ? AND ";
 	private static final String _FINDER_COLUMN_C_O_OPENID_1 = "user.openId IS NULL";
 	private static final String _FINDER_COLUMN_C_O_OPENID_2 = "user.openId = ?";
 	private static final String _FINDER_COLUMN_C_O_OPENID_3 = "(user.openId IS NULL OR user.openId = ?)";
 	private static final String _FINDER_COLUMN_C_A_COMPANYID_2 = "user.companyId = ? AND ";
 	private static final String _FINDER_COLUMN_C_A_ACTIVE_2 = "user.active = ?";
-	private static final String _FINDER_COLUMN_C_FID_COMPANYID_2 = "user.companyId = ? AND ";
-	private static final String _FINDER_COLUMN_C_FID_FACEBOOKID_2 = "user.facebookId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "user.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No User exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No User exists with the key {";

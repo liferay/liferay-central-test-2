@@ -400,6 +400,26 @@ public class UserUtil {
 				   .fetchByC_EA(companyId, emailAddress, retrieveFromCache);
 	}
 
+	public static com.liferay.portal.model.User findByC_FID(long companyId,
+		long facebookId)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByC_FID(companyId, facebookId);
+	}
+
+	public static com.liferay.portal.model.User fetchByC_FID(long companyId,
+		long facebookId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByC_FID(companyId, facebookId);
+	}
+
+	public static com.liferay.portal.model.User fetchByC_FID(long companyId,
+		long facebookId, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByC_FID(companyId, facebookId, retrieveFromCache);
+	}
+
 	public static com.liferay.portal.model.User findByC_O(long companyId,
 		java.lang.String openId)
 		throws com.liferay.portal.NoSuchUserException,
@@ -465,26 +485,6 @@ public class UserUtil {
 		return getPersistence()
 				   .findByC_A_PrevAndNext(userId, companyId, active,
 			orderByComparator);
-	}
-
-	public static com.liferay.portal.model.User findByC_FID(long companyId,
-		long facebookId)
-		throws com.liferay.portal.NoSuchUserException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByC_FID(companyId, facebookId);
-	}
-
-	public static com.liferay.portal.model.User fetchByC_FID(long companyId,
-		long facebookId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByC_FID(companyId, facebookId);
-	}
-
-	public static com.liferay.portal.model.User fetchByC_FID(long companyId,
-		long facebookId, boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .fetchByC_FID(companyId, facebookId, retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> findAll()
@@ -557,6 +557,12 @@ public class UserUtil {
 		getPersistence().removeByC_EA(companyId, emailAddress);
 	}
 
+	public static void removeByC_FID(long companyId, long facebookId)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByC_FID(companyId, facebookId);
+	}
+
 	public static void removeByC_O(long companyId, java.lang.String openId)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -566,12 +572,6 @@ public class UserUtil {
 	public static void removeByC_A(long companyId, boolean active)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByC_A(companyId, active);
-	}
-
-	public static void removeByC_FID(long companyId, long facebookId)
-		throws com.liferay.portal.NoSuchUserException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByC_FID(companyId, facebookId);
 	}
 
 	public static void removeAll()
@@ -624,6 +624,11 @@ public class UserUtil {
 		return getPersistence().countByC_EA(companyId, emailAddress);
 	}
 
+	public static int countByC_FID(long companyId, long facebookId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByC_FID(companyId, facebookId);
+	}
+
 	public static int countByC_O(long companyId, java.lang.String openId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByC_O(companyId, openId);
@@ -632,11 +637,6 @@ public class UserUtil {
 	public static int countByC_A(long companyId, boolean active)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByC_A(companyId, active);
-	}
-
-	public static int countByC_FID(long companyId, long facebookId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByC_FID(companyId, facebookId);
 	}
 
 	public static int countAll()
