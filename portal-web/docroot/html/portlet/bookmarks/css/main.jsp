@@ -16,21 +16,11 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-<%@ page import="com.liferay.portal.kernel.util.StringUtil" %>
-
-<liferay-util:buffer var="html">
-	<liferay-util:include page="/html/portlet/document_library/css/main.jsp" />
-</liferay-util:buffer>
-
-<%
-html = StringUtil.replace(html, "documentLibraryPanelContainer", "bookmarksPanelContainer");
-html = StringUtil.replace(html, "file-entries", "entries");
-html = StringUtil.replace(html, "file-entry", "entry");
-html = StringUtil.replace(html, "portlet-document-library", "portlet-bookmarks");
-%>
-
-<%= html %>
-
-.portlet-bookmarks .entry-url {
+.portlet-bookmarks .asset-url {
 	margin: 1em 0 0.3em;
+}
+
+.portlet-bookmarks .folder-search {
+	float: right;
+	margin: 0 0 0.5em 0.5em;
 }

@@ -16,24 +16,18 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-<%@ page import="com.liferay.portal.kernel.util.StringUtil" %>
-
-<liferay-util:buffer var="html">
-	<liferay-util:include page="/html/portlet/document_library/css/main.jsp" />
-</liferay-util:buffer>
-
-<%
-html = StringUtil.replace(html, "documentLibraryPanelContainer", "imageGalleryPanelContainer");
-html = StringUtil.replace(html, "file-entries", "images");
-html = StringUtil.replace(html, "file-entry", "image");
-html = StringUtil.replace(html, "portlet-document-library", "portlet-image-gallery");
-%>
-
-<%= html %>
-
 .lfr-image-gallery-actions {
 	font-size: 11px;
 	text-align: right;
+}
+
+.portlet-image-gallery .asset-attributes {
+	clear: both;
+}
+
+.portlet-image-gallery .folder-search {
+	float: right;
+	margin: 0 0 0.5em 0.5em;
 }
 
 .portlet-image-gallery .image-score {
@@ -55,15 +49,6 @@ html = StringUtil.replace(html, "portlet-document-library", "portlet-image-galle
 	border-color: #ccc;
 }
 
-.portlet-image-gallery .image-date {
-	border-width: 0;
-	float: none;
-}
-
-.portlet-image-gallery .image-download .image-name {
-	top: 0;
-}
-
-.portlet-image-gallery .image-title {
-	display: block;
+.portlet-image-gallery .taglib-webdav {
+	margin-top: 3em;
 }
