@@ -31,24 +31,27 @@ import java.util.Enumeration;
 public class InetAddressUtil {
 
 	public static InetAddress getLocalInetAddress() throws Exception {
-		Enumeration<NetworkInterface> enumeration =
+		Enumeration<NetworkInterface> enu1 =
 			NetworkInterface.getNetworkInterfaces();
 
-		while (enumeration.hasMoreElements()) {
-			NetworkInterface networkInterface = enumeration.nextElement();
+		while (enu1.hasMoreElements()) {
+			NetworkInterface networkInterface = enu1.nextElement();
 
-			Enumeration<InetAddress> enumeration2 =
+			Enumeration<InetAddress> enu2 =
 				networkInterface.getInetAddresses();
 
-			while (enumeration2.hasMoreElements()) {
-				InetAddress inetAddress = enumeration2.nextElement();
+			while (enu2.hasMoreElements()) {
+				InetAddress inetAddress = enu2.nextElement();
+
 				if (!inetAddress.isLoopbackAddress() &&
 					(inetAddress instanceof Inet4Address)) {
+
 					return inetAddress;
 				}
 			}
 		}
-		throw new SystemException("No Inetaddress available");
+
+		throw new SystemException("No local internet address");
 	}
 
 }

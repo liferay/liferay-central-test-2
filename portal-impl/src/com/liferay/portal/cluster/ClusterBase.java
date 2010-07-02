@@ -166,8 +166,8 @@ public abstract class ClusterBase {
 		bindInetAddress = bindInfo.getInetAddress();
 		NetworkInterface networkInterface = bindInfo.getNetworkInterface();
 
-		System.setProperty("jgroups.bind_addr",
-			bindInetAddress.getHostAddress());
+		System.setProperty(
+			"jgroups.bind_addr", bindInetAddress.getHostAddress());
 		System.setProperty(
 			"jgroups.bind_interface", networkInterface.getName());
 
