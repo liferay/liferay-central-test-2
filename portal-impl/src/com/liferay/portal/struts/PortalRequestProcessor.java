@@ -96,6 +96,7 @@ import org.apache.struts.tiles.TilesRequestProcessor;
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
+ * @author Wesley Gong
  */
 public class PortalRequestProcessor extends TilesRequestProcessor {
 
@@ -502,7 +503,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			(path.indexOf(_PATH_PORTAL_PROTECTED) == -1) &&
 			(!_trackerIgnorePaths.contains(path))) {
 
-			String fullPath = path;
+			String fullPath = null;
 
 			try {
 				if (PropsValues.SESSION_TRACKER_FRIENDLY_PATHS_ENABLED) {
@@ -514,9 +515,14 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				_log.error(e, e);
 			}
 
-			if (fullPath == null) {
+			if ((Validator.isNull(fullPath)) &&
+				(Validator.isNotNull(request.getQueryString()))) {
+
 				fullPath = path.concat(StringPool.QUESTION).concat(
 					request.getQueryString());
+			}
+			else {
+				fullPath = path;
 			}
 
 			UserTrackerPath userTrackerPath = UserTrackerPathUtil.create(0);
