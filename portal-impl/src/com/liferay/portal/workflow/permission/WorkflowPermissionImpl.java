@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowInstance;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManagerUtil;
-import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil;
 import com.liferay.portal.kernel.workflow.permission.WorkflowPermission;
 import com.liferay.portal.model.WorkflowInstanceLink;
@@ -27,8 +26,6 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.WorkflowDefinitionLinkLocalServiceUtil;
 import com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil;
-
-import java.util.List;
 
 /**
  * <a href="WorkflowPermissionImpl.java.html"><b><i>View Source</i></b></a>
@@ -105,13 +102,12 @@ public class WorkflowPermissionImpl implements WorkflowPermission {
 			WorkflowInstance workflowInstance)
 		throws WorkflowException {
 
-		List<WorkflowTask> workflowTasks =
-			WorkflowTaskManagerUtil.getWorkflowTasksByWorkflowInstance(
+		int numTasks =
+			WorkflowTaskManagerUtil.getWorkflowTaskCountByWorkflowInstance(
 				permissionChecker.getCompanyId(), permissionChecker.getUserId(),
-				workflowInstance.getWorkflowInstanceId(), Boolean.FALSE, 0, 100,
-				null);
+				workflowInstance.getWorkflowInstanceId(), Boolean.FALSE);
 
-		if (!workflowTasks.isEmpty()) {
+		if (numTasks > 0) {
 			return true;
 		}
 
