@@ -217,13 +217,15 @@ if (assetEntry != null) {
 					</c:choose>
 
 					<%
-					String metadataFields[] = new String[] {"author", "categories", "tags"};
 					String selectionStyle = "manual";
+
+					String[] metadataFields = new String[] {"author", "categories", "tags"};
 					%>
 
 					<h4>
 						<liferay-ui:message key="metadata" />
 					</h4>
+
 					<div class="asset-metadata">
 						<%@ include file="/html/portlet/asset_publisher/asset_metadata.jspf" %>
 					</div>
