@@ -126,12 +126,6 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 			<liferay-util:include page="<%= path %>" portletId="<%= assetRendererFactory.getPortletId() %>" />
 
-			<c:if test="<%= showContextLink && !print %>">
-				<div class="asset-more">
-					<a href="<%= assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, viewFullContentURL.toString()) %>"><liferay-ui:message key="<%= assetRenderer.getViewInContextMessage() %>" /> &raquo;</a>
-				</div>
-			</c:if>
-
 			<c:if test="<%= enableFlags %>">
 				<div class="asset-flag">
 					<liferay-ui:flags
@@ -149,6 +143,12 @@ request.setAttribute("view.jsp-showIconLabel", true);
 						className="<%= assetEntry.getClassName() %>"
 						classPK="<%= assetEntry.getClassPK() %>"
 					/>
+				</div>
+			</c:if>
+
+			<c:if test="<%= showContextLink && !print && assetEntry.isVisible() %>">
+				<div class="asset-more">
+					<a href="<%= assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, viewFullContentURL.toString()) %>"><liferay-ui:message key="<%= assetRenderer.getViewInContextMessage() %>" /> &raquo;</a>
 				</div>
 			</c:if>
 
