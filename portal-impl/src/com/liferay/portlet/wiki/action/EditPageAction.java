@@ -25,9 +25,10 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.struts.StrutsActionPortletURL;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
+import com.liferay.portlet.PortletResponseImpl;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.wiki.DuplicatePageException;
@@ -97,7 +98,7 @@ public class EditPageAction extends PortletAction {
 				if (page != null) {
 					if (workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT) {
 						redirect = getSaveAndContinueRedirect(
-							portletConfig, actionRequest, page, redirect);
+							actionRequest, actionResponse, page, redirect);
 					}
 					else if (redirect.endsWith("title=")) {
 						redirect += page.getTitle();
@@ -234,7 +235,7 @@ public class EditPageAction extends PortletAction {
 	}
 
 	protected String getSaveAndContinueRedirect(
-			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionRequest actionRequest, ActionResponse actionResponse,
 			WikiPage page, String redirect)
 		throws Exception {
 
@@ -246,9 +247,9 @@ public class EditPageAction extends PortletAction {
 		String originalRedirect = ParamUtil.getString(
 			actionRequest, "originalRedirect");
 
-		PortletURLImpl portletURL = new PortletURLImpl(
-			(ActionRequestImpl)actionRequest, portletConfig.getPortletName(),
-			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
+		PortletURLImpl portletURL = new StrutsActionPortletURL(
+			(PortletResponseImpl) actionResponse, themeDisplay.getPlid(),
+			PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter("struts_action", "/wiki/edit_page");
 		portletURL.setParameter(Constants.CMD, Constants.UPDATE, false);
