@@ -236,9 +236,12 @@ public class BaseDeployer {
 		throws Exception {
 
 		File file = new File(DeployUtil.getResourcePath(fileName));
+		File targetFile = new File(targetDir + "/" + fileName);
 
-		CopyTask.copyFile(
-			file, new File(targetDir), filterMap, overwrite, true);
+		if (!targetFile.exists()) {
+			CopyTask.copyFile(
+				file, new File(targetDir), filterMap, overwrite, true);
+		}
 	}
 
 	protected void copyJars(File srcFile, PluginPackage pluginPackage)
