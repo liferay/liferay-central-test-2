@@ -382,16 +382,18 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			mimeTypePortletModes.add(PortletMode.VIEW.toString().toLowerCase());
 
-			portlet.getPortletModes().put(
-				ContentTypes.TEXT_HTML, mimeTypePortletModes);
+			Map<String, Set<String>> portletModes = portlet.getPortletModes();
+
+			portletModes.put(ContentTypes.TEXT_HTML, mimeTypePortletModes);
 
 			Set<String> mimeTypeWindowStates = new HashSet<String>();
 
 			mimeTypeWindowStates.add(
 				WindowState.NORMAL.toString().toLowerCase());
 
-			portlet.getWindowStates().put(
-				ContentTypes.TEXT_HTML, mimeTypeWindowStates);
+			Map<String, Set<String>> windowStates = portlet.getWindowStates();
+
+			windowStates.put(ContentTypes.TEXT_HTML, mimeTypeWindowStates);
 
 			portlet.setPortletInfo(
 				new PortletInfo(portletId, portletId, portletId, portletId));
