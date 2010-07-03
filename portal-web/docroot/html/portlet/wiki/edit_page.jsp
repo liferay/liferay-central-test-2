@@ -329,7 +329,9 @@ if (Validator.isNull(redirect)) {
 
 				<aui:input classPK="<%= classPK %>" name="tags" type="assetTags" />
 
-				<aui:model-context bean="<%= new WikiPageImpl() %>" model="<%= WikiPage.class %>" />
+				<c:if test="<%= newPage || wikiPage.isApproved() %>">
+					<aui:model-context bean="<%= new WikiPageImpl() %>" model="<%= WikiPage.class %>" />
+				</c:if>
 
 				<aui:input name="summary" />
 
