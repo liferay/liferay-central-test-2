@@ -182,7 +182,7 @@ portletURL.setParameter("name", name);
 	<aui:model-context bean="<%= fileVersion %>" model="<%= DLFileVersion.class %>" />
 
 	<c:if test="<%= (fileVersion != null) && (!fileVersion.isNew()) %>">
-		<aui:workflow-status status="<%= fileVersion.getStatus() %>" version="<%= String.valueOf(fileVersion.getVersion()) %>" />
+		<aui:workflow-status status="<%= fileVersion.getStatus() %>" version="<%= GetterUtil.getDouble(fileVersion.getVersion()) %>" />
 	</c:if>
 
 	<aui:fieldset>
