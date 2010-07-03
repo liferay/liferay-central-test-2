@@ -46,12 +46,15 @@ public class WikiPageAssetRendererFactory extends BaseAssetRendererFactory {
 
 		WikiPage page = null;
 
+		long resourcePrimKey = classPK;
+
 		if (type == TYPE_LATEST_APPROVED) {
-			page = WikiPageLocalServiceUtil.getPage(classPK);
+			page = WikiPageLocalServiceUtil.getPage(resourcePrimKey);
 		}
 		else {
 			WikiPageResource wikiPageResource =
-				WikiPageResourceLocalServiceUtil.getPageResource(classPK);
+				WikiPageResourceLocalServiceUtil.getPageResource(
+					resourcePrimKey);
 
 			page = WikiPageLocalServiceUtil.getPage(
 				wikiPageResource.getNodeId(), wikiPageResource.getTitle(),

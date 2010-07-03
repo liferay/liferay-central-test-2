@@ -753,6 +753,15 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		WikiPage page = getPage(nodeId, title);
 
+		return getPageDisplay(
+			page, viewPageURL, editPageURL, attachmentURLPrefix);
+	}
+
+	public WikiPageDisplay getPageDisplay(
+			WikiPage page, PortletURL viewPageURL, PortletURL editPageURL,
+			String attachmentURLPrefix)
+		throws PortalException, SystemException {
+
 		String formattedContent = WikiUtil.convert(
 			page, viewPageURL, editPageURL, attachmentURLPrefix);
 
