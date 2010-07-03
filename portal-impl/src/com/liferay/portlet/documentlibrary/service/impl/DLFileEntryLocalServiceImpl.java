@@ -1393,8 +1393,10 @@ public class DLFileEntryLocalServiceImpl
 			String title, String sourceFileName, InputStream is)
 		throws PortalException, SystemException {
 
-		dlLocalService.validate(
-			sourceFileName, extension, sourceFileName, true, is);
+		if (Validator.isNotNull(sourceFileName)) {
+			dlLocalService.validate(
+				sourceFileName, extension, sourceFileName, true, is);
+		}
 
 		validate(groupId, folderId, name, title);
 	}
