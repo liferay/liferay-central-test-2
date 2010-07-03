@@ -462,7 +462,7 @@ if (Validator.isNull(redirect)) {
 </aui:script>
 
 <%
-if (wikiPage != null) {
+if (!newPage) {
 	PortalUtil.addPortletBreadcrumbEntry(request, wikiPage.getTitle(), viewPageURL.toString());
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
 }
