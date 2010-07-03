@@ -645,10 +645,12 @@ Liferay.provide(
 
 			iframe.on(
 				'load',
-				function(){
-					iframe.get('contentDocument.documentElement').setStyle('overflow', 'visible');
+				function(event) {
+					var iframeDoc = iframe.get('contentWindow.document');
 
-					var iframeBody = iframe.get('contentWindow.document.body');
+					iframeDoc.get('documentElement').setStyle('overflow', 'visible');
+
+					var iframeBody = iframeDoc.get('body');
 
 					iframeBody.addClass('configuration-popup');
 
