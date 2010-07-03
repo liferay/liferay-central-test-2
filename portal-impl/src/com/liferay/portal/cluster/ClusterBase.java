@@ -86,7 +86,7 @@ public abstract class ClusterBase {
 		}
 		catch (Exception e) {
 			if (_log.isErrorEnabled()) {
-				_log.error("Unale to initialize channels", e);
+				_log.error("Unable to initialize channels", e);
 			}
 
 			throw new IllegalStateException(e);
