@@ -515,11 +515,13 @@ public abstract class BaseIndexer implements Indexer {
 		int start = searchContext.getStart();
 		int end = searchContext.getEnd();
 
-		if (end > length) {
-			end = length;
-		}
+		if ((start != QueryUtil.ALL_POS) && (end != QueryUtil.ALL_POS)) {
+			if (end > length) {
+				end = length;
+			}
 
-		docs = docs.subList(start, end);
+			docs = docs.subList(start, end);
+		}
 
 		hits.setDocs(docs.toArray(new Document[docs.size()]));
 		hits.setScores(scores.toArray(new Float[docs.size()]));
