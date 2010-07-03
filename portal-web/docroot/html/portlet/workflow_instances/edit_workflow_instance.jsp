@@ -90,7 +90,7 @@ if (assetEntry != null) {
 		<liferay-ui:panel-container cssClass="task-panel-container" id="preview" extended="<%= true %>">
 
 			<c:if test="<%= assetRenderer != null %>">
-				<liferay-ui:panel defaultState="open" title='<%= LanguageUtil.get(pageContext, "preview") %>'>
+				<liferay-ui:panel defaultState="open" title='<%= LanguageUtil.format(pageContext, "preview-of-x", ResourceActionsUtil.getModelResource(locale, className)) %>'>
 					<div class="task-content-actions">
 						<liferay-ui:icon-list>
 							<c:if test="<%= assetRenderer.hasViewPermission(permissionChecker) %>">

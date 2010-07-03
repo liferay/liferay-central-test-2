@@ -93,3 +93,34 @@
 	padding-left: 25px;
 	padding-right: 10px;
 }
+
+.metadata-author {
+	background: url(<%= themeImagesPath %>/portlet/edit_guest.png) no-repeat 0 0;
+	float: left;
+	font-weight: bold;
+	margin-right: 10px;
+	padding-left: 25px;
+}
+
+.metadata-entry {
+	clear: both;
+	color: #999;
+	display: block;
+}
+
+.metadata-modified-date, .metadata-create-date, .metadata-publish-date, .metadata-expiration-date {
+	background: url(<%= themeImagesPath %>/common/date.png) no-repeat 0 0;
+	color: #999;
+	margin-bottom: 1em;
+	padding-left: 25px;
+}
+
+.metadata-priority {
+	background: url(<%= themeImagesPath %>/common/top.png) no-repeat 0 20%;
+	margin-right: 10px;
+	padding-left: 25px;
+}
+
+.metadata-view-count {
+	margin-right: 10px;
+}
