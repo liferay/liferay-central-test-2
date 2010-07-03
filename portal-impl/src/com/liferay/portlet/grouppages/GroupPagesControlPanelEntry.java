@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.grouppages;
 
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -40,8 +41,12 @@ public class GroupPagesControlPanelEntry extends BaseControlPanelEntry {
 				themeDisplay.getScopeGroupId(), ActionKeys.MANAGE_LAYOUTS);
 		}
 
-		if (visible && themeDisplay.getScopeGroup().isCompany()) {
-			visible = false;
+		if (visible) {
+			Group scopeGroup = themeDisplay.getScopeGroup();
+			
+			if (scopeGroup.isCompany()) {
+				visible = false;
+			}
 		}
 
 		return visible;
