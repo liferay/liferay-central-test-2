@@ -43,7 +43,7 @@ public class GroupPagesControlPanelEntry extends BaseControlPanelEntry {
 
 		if (visible) {
 			Group scopeGroup = themeDisplay.getScopeGroup();
-			
+
 			if (scopeGroup.isCompany()) {
 				visible = false;
 			}
