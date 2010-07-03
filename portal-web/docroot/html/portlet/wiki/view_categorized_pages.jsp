@@ -35,9 +35,9 @@ if (categoryId != 0) {
 
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
-<h1 class="page-title">
-	<%= LanguageUtil.format(pageContext, "pages-with-x-x", new String[] {vocabularyName, categoryName}) %>
-</h1>
+<liferay-ui:header
+	title='<%= LanguageUtil.format(pageContext, "pages-with-x-x", new String[] {vocabularyName, categoryName}) %>'
+/>
 
 <liferay-util:include page="/html/portlet/wiki/page_iterator.jsp">
 	<liferay-util:param name="type" value="categorized_pages" />

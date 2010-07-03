@@ -49,8 +49,6 @@ boolean createNewPage = true;
 		title="search"
 	/>
 
-	<h1 class="page-title"><liferay-ui:message key="search-results" /></h1>
-
 	<%
 	PortletURL addPageURL = renderResponse.createRenderURL();
 

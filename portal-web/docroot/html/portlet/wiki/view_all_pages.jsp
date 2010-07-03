@@ -18,7 +18,9 @@
 
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
-<h1 class="page-title"><liferay-ui:message key="all-pages" /></h1>
+<liferay-ui:header
+	title='<%= LanguageUtil.get(pageContext, "all-pages") %>'
+/>
 
 <liferay-util:include page="/html/portlet/wiki/page_iterator.jsp">
 	<liferay-util:param name="type" value="all_pages" />

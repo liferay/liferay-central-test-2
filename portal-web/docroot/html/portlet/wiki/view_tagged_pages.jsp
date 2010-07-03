@@ -37,9 +37,9 @@ catch (NoSuchTagPropertyException nstpe) {
 
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
-<h1 class="page-title">
-	<%= LanguageUtil.format(pageContext, title, tagName) %>
-</h1>
+<liferay-ui:header
+	title='<%= LanguageUtil.format(pageContext, title, tagName) %>'
+/>
 
 <c:if test="<%= Validator.isNotNull(description) %>">
 	<p class="tag-description">

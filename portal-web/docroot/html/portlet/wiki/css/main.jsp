@@ -71,7 +71,7 @@
 	color: #7d7d7d;
 }
 
-.portlet-wiki .portlet-body h1, .portlet-wiki .portlet-body h2, .portlet-wiki .portlet-body h3 {
+.portlet-wiki .portlet-body h1.page-title, .portlet-wiki .portlet-body h2, .portlet-wiki .portlet-body h3 {
 	border-bottom: 1px solid #aaa;
 	margin-bottom: 0.5em;
 	padding-bottom: 5px;
