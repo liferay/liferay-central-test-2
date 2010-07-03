@@ -61,7 +61,7 @@ long assetClassPK = 0;
 if ((fileVersion != null) && !fileVersion.isApproved() && (fileVersion.getVersion() != DLFileEntryConstants.DEFAULT_VERSION)) {
 	assetClassPK = fileVersion.getFileVersionId();
 }
-else {
+else if (fileEntry != null) {
 	assetClassPK = fileEntry.getFileEntryId();
 }
 
