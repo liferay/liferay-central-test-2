@@ -25,10 +25,19 @@ public class PortletClassLoaderUtil {
 		return _classLoader;
 	}
 
+	public static String getServletContextName() {
+		return _servletContextName;
+	}
+
 	public static void setClassLoader(ClassLoader classLoader) {
 		_classLoader = classLoader;
 	}
 
+	public static void setServletContextName(String servletContextName) {
+		_servletContextName = servletContextName;
+	}
+
 	private static ClassLoader _classLoader;
+	private static String _servletContextName;
 
 }

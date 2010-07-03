@@ -60,11 +60,17 @@ public class ClusterableAdvice
 		ClusterRequest clusterRequest = ClusterRequest.createMulticastRequest(
 			methodWrapper, true);
 
+		clusterRequest.setServletContextName(_servletContextName);
+
 		ClusterExecutorUtil.execute(clusterRequest);
 	}
 
 	public Clusterable getNullAnnotation() {
 		return _nullClusterable;
+	}
+
+	public void setServletContextName(String servletContextName) {
+		_servletContextName = servletContextName;
 	}
 
 	private Method _getUtilClassMethod(Method method) throws Exception {
@@ -90,5 +96,7 @@ public class ClusterableAdvice
 			}
 
 		};
+
+	private String _servletContextName;
 
 }

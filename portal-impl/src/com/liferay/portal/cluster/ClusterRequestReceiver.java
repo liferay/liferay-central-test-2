@@ -14,6 +14,7 @@
 
 package com.liferay.portal.cluster;
 
+import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.cluster.Address;
 import com.liferay.portal.kernel.cluster.ClusterException;
 import com.liferay.portal.kernel.cluster.ClusterMessageType;
@@ -55,7 +56,7 @@ public class ClusterRequestReceiver extends BaseReceiver {
 
 		Channel controlChannel = _clusterExecutorImpl.getControlChannel();
 
-		org.jgroups.Address localAddress = controlChannel.getLocalAddress();
+		org.jgroups.Address localAddress = controlChannel.getAddress();
 
 		Object obj = message.getObject();
 
@@ -115,6 +116,35 @@ public class ClusterRequestReceiver extends BaseReceiver {
 		}
 
 		_clusterExecutorImpl.memberRemoved(departAddresses);
+	}
+
+	protected Object invoke(
+			String servletContextName, MethodWrapper methodWrapper)
+		throws Exception {
+
+		if (servletContextName == null) {
+			return MethodInvoker.invoke(methodWrapper);
+		}
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			ClassLoader classLoader =
+				(ClassLoader)PortletBeanLocatorUtil.locate(
+					servletContextName, "portletClassLoader");
+
+			currentThread.setContextClassLoader(classLoader);
+
+			return MethodInvoker.invoke(methodWrapper);
+		}
+		catch(Exception e) {
+			throw e;
+		}
+		finally {
+			currentThread.setContextClassLoader(contextClassLoader);
+		}
 	}
 
 	protected List<Address> getDepartAddresses(View view) {
@@ -201,7 +231,8 @@ public class ClusterRequestReceiver extends BaseReceiver {
 				try {
 					ClusterInvokeThreadLocal.setEnabled(false);
 
-					Object returnValue = MethodInvoker.invoke(methodWrapper);
+					Object returnValue = invoke(
+						clusterRequest.getServletContextName(), methodWrapper);
 
 					if (returnValue instanceof Serializable) {
 						clusterNodeResponse.setResult(returnValue);
@@ -214,6 +245,8 @@ public class ClusterRequestReceiver extends BaseReceiver {
 				}
 				catch (Exception e) {
 					clusterNodeResponse.setException(e);
+
+					_log.error("Failed to invoke method " + methodWrapper, e);
 				}
 				finally {
 					ClusterInvokeThreadLocal.setEnabled(true);

@@ -140,6 +140,10 @@ public class ClusterRequest implements Serializable {
 		return _originatingClusterNode;
 	}
 
+	public String getServletContextName() {
+		return _servletContextName;
+	}
+
 	public Collection<String> getTargetClusterNodeIds() {
 		return _targetClusterNodeIds;
 	}
@@ -188,6 +192,10 @@ public class ClusterRequest implements Serializable {
 		_originatingClusterNode = originatingClusterNode;
 	}
 
+	public void setServletContextName(String servletContextName) {
+		_servletContextName = servletContextName;
+	}
+
 	public void setSkipLocal(boolean skipLocal) {
 		_skipLocal = skipLocal;
 	}
@@ -205,12 +213,14 @@ public class ClusterRequest implements Serializable {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{clusterMessageType=");
 		sb.append(_clusterMessageType);
 		sb.append(", multicast=");
 		sb.append(_multicast);
+		sb.append(", servletContextName=");
+		sb.append(_servletContextName);
 		sb.append(", skipLocal=");
 		sb.append(_skipLocal);
 		sb.append(", uuid=");
@@ -240,6 +250,7 @@ public class ClusterRequest implements Serializable {
 	private MethodWrapper _methodWrapper;
 	private boolean _multicast;
 	private ClusterNode _originatingClusterNode;
+	private String _servletContextName;
 	private boolean _skipLocal;
 	private Set<String> _targetClusterNodeIds;
 	private long _timeOut;

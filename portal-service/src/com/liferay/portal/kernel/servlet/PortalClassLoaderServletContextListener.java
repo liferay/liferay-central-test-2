@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PortalInitable;
 import com.liferay.portal.kernel.util.PortalInitableUtil;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -39,6 +40,7 @@ public abstract class PortalClassLoaderServletContextListener
 
 	public void contextDestroyed(ServletContextEvent event) {
 		PortletClassLoaderUtil.setClassLoader(_portletClassLoader);
+		PortletClassLoaderUtil.setServletContextName(_servletContextName);
 
 		Thread currentThread = Thread.currentThread();
 
@@ -58,6 +60,10 @@ public abstract class PortalClassLoaderServletContextListener
 	public void contextInitialized(ServletContextEvent event) {
 		_event = event;
 
+		ServletContext servletContext = event.getServletContext();
+
+		_servletContextName = servletContext.getServletContextName();
+
 		Thread currentThread = Thread.currentThread();
 
 		_portletClassLoader = currentThread.getContextClassLoader();
@@ -67,6 +73,7 @@ public abstract class PortalClassLoaderServletContextListener
 
 	public void portalInit() {
 		PortletClassLoaderUtil.setClassLoader(_portletClassLoader);
+		PortletClassLoaderUtil.setServletContextName(_servletContextName);
 
 		Thread currentThread = Thread.currentThread();
 
@@ -96,5 +103,6 @@ public abstract class PortalClassLoaderServletContextListener
 	private ServletContextEvent _event;
 	private ServletContextListener _servletContextListener;
 	private ClassLoader _portletClassLoader;
+	private String _servletContextName;
 
 }
