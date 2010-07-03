@@ -1285,9 +1285,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public User getUserByFacebookId(long companyId, long facebookId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
-		return userPersistence.findByC_FID(companyId, facebookId);
+		return userPersistence.fetchByC_FID(companyId, facebookId);
 	}
 
 	public User getUserById(long userId)

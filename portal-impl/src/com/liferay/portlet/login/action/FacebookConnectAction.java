@@ -205,7 +205,13 @@ public class FacebookConnectAction extends PortletAction {
 
 		session.setAttribute(WebKeys.FACEBOOK_USER_EMAIL_ADDRESS, emailAddress);
 
-		actionResponse.sendRedirect(themeDisplay.getPathContext());
+		String redirect = themeDisplay.getPathContext();
+
+		if (Validator.isNull(redirect)) {
+			redirect = StringPool.SLASH;
+		}
+
+		actionResponse.sendRedirect(redirect);
 	}
 
 	protected String getAccessToken(long companyId, String code)
@@ -247,6 +253,41 @@ public class FacebookConnectAction extends PortletAction {
 		return null;
 	}
 
+	protected void getFacebookCredentials(
+			HttpSession session, long companyId, String token)
+		throws Exception {
+
+		JSONObject jsonObject = FacebookConnectUtil.getGraphResourcesAsJSON(
+			companyId, "/me", token, "id,email,verified");
+
+		if (Validator.isNotNull(jsonObject) &&
+			jsonObject.getBoolean("verified")) {
+
+			String facebookId = jsonObject.getString("id");
+
+			if (Validator.isNotNull(facebookId)) {
+				session.setAttribute(
+					WebKeys.FACEBOOK_USER_ID, facebookId);
+			}
+
+			String email = jsonObject.getString("email");
+
+			if (Validator.isNotNull(email)) {
+				try {
+					UserLocalServiceUtil.getUserByEmailAddress(
+						companyId, email);
+
+					session.setAttribute(
+						WebKeys.FACEBOOK_USER_EMAIL_ADDRESS, email);
+				}
+				catch (NoSuchUserException nsue) {
+					session.removeAttribute(
+						WebKeys.FACEBOOK_USER_EMAIL_ADDRESS);
+				}
+			}
+		}
+	}
+
 	protected String getRedirect(
 			HttpServletRequest request, ThemeDisplay themeDisplay)
 		throws Exception {
@@ -282,7 +323,7 @@ public class FacebookConnectAction extends PortletAction {
 			FacebookConnectUtil.getGraphURL(companyId) + "/me", "access_token",
 			token);
 
-		url = HttpUtil.addParameter(url, "fields", "email,verified");
+		url = HttpUtil.addParameter(url, "fields", "id,email,verified");
 
 		Http.Options options = new Http.Options();
 
@@ -300,6 +341,12 @@ public class FacebookConnectAction extends PortletAction {
 			return;
 		}
 
+		String facebookUserId = jsonObject.getString("id");
+
+		if (Validator.isNotNull(facebookUserId)) {
+			session.setAttribute(WebKeys.FACEBOOK_USER_ID, facebookUserId);
+		}
+
 		String emailAddress = jsonObject.getString("email");
 
 		if (Validator.isNotNull(emailAddress)) {
@@ -312,15 +359,6 @@ public class FacebookConnectAction extends PortletAction {
 			}
 			catch (NoSuchUserException nsue) {
 				session.removeAttribute(WebKeys.FACEBOOK_USER_EMAIL_ADDRESS);
-			}
-		}
-		else {
-			session.removeAttribute(WebKeys.FACEBOOK_USER_EMAIL_ADDRESS);
-
-			String facebookUserId = jsonObject.getString("id");
-
-			if (Validator.isNotNull(facebookUserId)) {
-				session.setAttribute(WebKeys.FACEBOOK_USER_ID, facebookUserId);
 			}
 		}
 	}

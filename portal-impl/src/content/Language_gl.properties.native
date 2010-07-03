@@ -2611,6 +2611,7 @@ no-templates-were-found-that-matches-the-id=Non se atopou ningún modelo que coi
 no-templates-were-found=Non se atopou ningún modelo.
 no-theme-plugins-were-found=Non se atopou ningún plugin de temas de aparencia.
 no-user-groups-were-found=Non se atopou ningún grupo de usuarios.
+no-user-was-found-with-your-facebook-credentials-would-you-like-to-import-this-user-to-our-system=No user was found with your Facebook credentials. Would you like to import this user to our system? (Automatic Copy)
 no-users-were-found=Non se atopou ningún usuario.
 no-web-content-were-found=Non se atopou ningún contido web.
 no-web-plugins-were-found=Non se atopou ningún plugin de tipo 'web'.

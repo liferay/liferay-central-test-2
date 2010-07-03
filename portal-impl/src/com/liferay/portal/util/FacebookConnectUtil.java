@@ -14,8 +14,19 @@
 
 package com.liferay.portal.util;
 
+import javax.portlet.PortletRequest;
+import javax.servlet.http.HttpServletRequest;
+
 import com.liferay.portal.kernel.exception.SystemException;
+
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
+
+import com.liferay.portal.kernel.util.Http;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.Validator;
 
 /**
  * <a href="FacebookConnectUtil.java.html"><b><i>View Source</i></b></a>
@@ -54,6 +65,63 @@ public class FacebookConnectUtil {
 		return PrefsPropsUtil.getString(
 			companyId, PropsKeys.FACEBOOK_CONNECT_GRAPH_URL,
 			PropsValues.FACEBOOK_CONNECT_GRAPH_URL);
+	}
+
+	public static JSONObject getGraphResourcesAsJSON(
+		long companyId, String path, String accessToken, String fields) {
+
+		try {
+			return JSONFactoryUtil.createJSONObject(
+				getGraphResources(companyId, path, accessToken, fields));
+		}
+		catch (Exception e) {
+			return null;
+		}
+	}
+
+	public static String getGraphResources(
+			long companyId, String path, String accessToken, String fields) {
+
+			try {
+				String url = HttpUtil.addParameter(
+					getGraphURL(companyId) + path, "access_token",
+					accessToken);
+
+				if (Validator.isNotNull(fields)) {
+					url = HttpUtil.addParameter(url, "fields", fields);
+				}
+
+				Http.Options options = new Http.Options();
+
+				options.setLocation(url);
+
+				return HttpUtil.URLtoString(options);
+			}
+			catch (Exception e) {
+			}
+
+			return null;
+		}
+
+	public static String getProfileImageURL(PortletRequest portletRequest) {
+
+		HttpServletRequest request = PortalUtil.getOriginalServletRequest(
+			((LiferayPortletRequest) portletRequest).getHttpServletRequest());
+
+		String facebookId = (String) request.getSession().getAttribute(
+			WebKeys.FACEBOOK_USER_ID);
+		String token = (String) request.getSession().getAttribute(
+			WebKeys.FACEBOOK_ACCESS_TOKEN);
+
+		if (Validator.isNotNull(facebookId)) {
+			JSONObject jsonObject = getGraphResourcesAsJSON(
+				PortalUtil.getCompanyId(request), "/me",
+				token, "id,picture");
+
+			return jsonObject.getString("picture");
+		}
+
+		return null;
 	}
 
 	public static String getRedirectURL(long companyId)

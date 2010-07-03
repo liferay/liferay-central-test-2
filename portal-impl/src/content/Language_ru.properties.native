@@ -2611,6 +2611,7 @@ no-templates-were-found-that-matches-the-id=Не найдено шаблонов
 no-templates-were-found=Шаблоны не найдены.
 no-theme-plugins-were-found=Плагинов тем не найдено.
 no-user-groups-were-found=Групп пользователей не найдено.
+no-user-was-found-with-your-facebook-credentials-would-you-like-to-import-this-user-to-our-system=No user was found with your Facebook credentials. Would you like to import this user to our system? (Automatic Copy)
 no-users-were-found=Пользователи не найдены.
 no-web-content-were-found=No Web Content was found. (Automatic Copy)
 no-web-plugins-were-found=Web-плагинов не найдено.

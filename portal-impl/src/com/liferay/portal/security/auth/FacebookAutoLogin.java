@@ -70,7 +70,6 @@ public class FacebookAutoLogin implements AutoLogin {
 					(String)session.getAttribute(WebKeys.FACEBOOK_USER_ID));
 
 				if (facebookId > 0) {
-					session.removeAttribute(WebKeys.FACEBOOK_USER_ID);
 
 					user = UserLocalServiceUtil.getUserByFacebookId(
 						companyId, facebookId);
@@ -80,11 +79,14 @@ public class FacebookAutoLogin implements AutoLogin {
 				}
 			}
 
-			credentials = new String[3];
+			if (Validator.isNotNull(user)) {
 
-			credentials[0] = String.valueOf(user.getUserId());
-			credentials[1] = user.getPassword();
-			credentials[2] = Boolean.FALSE.toString();
+				credentials = new String[3];
+
+				credentials[0] = String.valueOf(user.getUserId());
+				credentials[1] = user.getPassword();
+				credentials[2] = Boolean.FALSE.toString();
+			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);

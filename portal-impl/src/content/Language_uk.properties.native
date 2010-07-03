@@ -2611,6 +2611,7 @@ no-templates-were-found-that-matches-the-id=По вказаних нижче ID 
 no-templates-were-found=Не знайдено жодного шаблону.
 no-theme-plugins-were-found=Не знайдено жодного програмного модуля для теми.
 no-user-groups-were-found=Не знайдено жодної групи користувачів.
+no-user-was-found-with-your-facebook-credentials-would-you-like-to-import-this-user-to-our-system=No user was found with your Facebook credentials. Would you like to import this user to our system? (Automatic Copy)
 no-users-were-found=Не знайдено жодного користувача.
 no-web-content-were-found=No Web Content was found. (Automatic Copy)
 no-web-plugins-were-found=Не знайдено жодного тенет-модуля.

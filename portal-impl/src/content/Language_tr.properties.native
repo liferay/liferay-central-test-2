@@ -2611,6 +2611,7 @@ no-templates-were-found-that-matches-the-id=Verilen ID ile eşleşen hiç şablo
 no-templates-were-found=Hiç şablon bulunamadı.
 no-theme-plugins-were-found=Hiç tema plugini bulunamadı.
 no-user-groups-were-found=Hiç kullanıcı grubu bulunamadı.
+no-user-was-found-with-your-facebook-credentials-would-you-like-to-import-this-user-to-our-system=No user was found with your Facebook credentials. Would you like to import this user to our system? (Automatic Copy)
 no-users-were-found=Hiç kullanıcı bulunamadı.
 no-web-content-were-found=Hiç web içeriği bulunamadı.
 no-web-plugins-were-found=Hiç web plugini bulunamadı.
