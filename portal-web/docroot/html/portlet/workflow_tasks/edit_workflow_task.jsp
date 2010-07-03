@@ -49,7 +49,7 @@ if (assetRenderer != null) {
 	assetEntry = AssetEntryLocalServiceUtil.getEntry(assetRendererFactory.getClassName(), assetRenderer.getClassPK());
 }
 
-String headerTitle = LanguageUtil.get(pageContext, workflowInstance.getWorkflowDefinitionName());
+String headerTitle = LanguageUtil.get(pageContext, workflowTask.getName());
 
 if (assetEntry != null) {
 	headerTitle = headerTitle.concat(StringPool.COLON + StringPool.SPACE + assetEntry.getTitle());
