@@ -199,6 +199,7 @@
 						<replace file="${app.server.glassfish.instance.dir}/config/domain.xml">
 							<replacetoken><![CDATA[<jvm-options>-Xmx512m</jvm-options>]]></replacetoken>
 							<replacevalue><![CDATA[<jvm-options>-Dfile.encoding=UTF8</jvm-options>
+	<jvm-options>-Djava.net.preferIPv4Stack=true</jvm-options>
 	<jvm-options>-Duser.timezone=GMT</jvm-options>
 	<jvm-options>-Xmx1024m</jvm-options>
 	<jvm-options>-XX:MaxPermSize=256m</jvm-options>]]></replacevalue>
@@ -264,7 +265,7 @@
 					<equals arg1="${run.conf.content.index}" arg2="-1" />
 					<then>
 						<echo file="${app.server.bin.dir}/run.conf" append="true">
-JAVA_OPTS="$JAVA_OPTS -Dfile.encoding=UTF-8 -Djboss.vfs.forceVfsJar=true -Dorg.jboss.logging.Log4jService.catchSystemOut=false -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m"</echo>
+JAVA_OPTS="$JAVA_OPTS -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true -Djboss.vfs.forceVfsJar=true -Dorg.jboss.logging.Log4jService.catchSystemOut=false -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m"</echo>
 					</then>
 				</if>
 
@@ -279,7 +280,7 @@ JAVA_OPTS="$JAVA_OPTS -Dfile.encoding=UTF-8 -Djboss.vfs.forceVfsJar=true -Dorg.j
 					<then>
 						<replace file="${app.server.bin.dir}/run.conf.bat">
 							<replacetoken><![CDATA[:JAVA_OPTS_SET]]></replacetoken>
-							<replacevalue><![CDATA[set "JAVA_OPTS=%JAVA_OPTS% -Dfile.encoding=UTF-8 -Djboss.vfs.forceVfsJar=true -Dorg.jboss.logging.Log4jService.catchSystemOut=false -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m"
+							<replacevalue><![CDATA[set "JAVA_OPTS=%JAVA_OPTS% -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true -Djboss.vfs.forceVfsJar=true -Dorg.jboss.logging.Log4jService.catchSystemOut=false -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m"
 
 :JAVA_OPTS_SET]]></replacevalue>
 						</replace>
@@ -378,7 +379,7 @@ $(jetty.home)/lib/liferay/*</echo>
 					<then>
 						<replace file="${app.server.bin.dir}/setenv">
 							<replacetoken><![CDATA[export JAVA_OPTS]]></replacetoken>
-							<replacevalue><![CDATA[JAVA_OPTS=-Dfile.encoding=UTF8 -Djonas.felix.configuration.file="$JONAS_ROOT/conf/felix-config.properties" -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m
+							<replacevalue><![CDATA[JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix.configuration.file="$JONAS_ROOT/conf/felix-config.properties" -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m
 export JAVA_OPTS]]></replacevalue>
 						</replace>
 					</then>
@@ -396,7 +397,7 @@ export JAVA_OPTS]]></replacevalue>
 						<replace file="${app.server.bin.dir}/setenv.bat">
 							<replacetoken><![CDATA[set JONAS_CLASSPATH=%JONAS_BASE%\conf;%JONAS_CLASSPATH%]]></replacetoken>
 							<replacevalue><![CDATA[set JONAS_CLASSPATH=%JONAS_BASE%\conf;%JONAS_CLASSPATH%
-set JAVA_OPTS=-Dfile.encoding=UTF8 -Djonas.felix.configuration.file="%JONAS_ROOT%/conf/felix-config.properties" -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m]]></replacevalue>
+set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix.configuration.file="%JONAS_ROOT%/conf/felix-config.properties" -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m]]></replacevalue>
 						</replace>
 					</then>
 				</if>
@@ -505,6 +506,7 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djonas.felix.configuration.file="%JONAS_ROOT
 						<replace file="${app.server.dir}/conf/resin.conf">
 							<replacetoken><![CDATA[<jvm-arg>-Xmx256m</jvm-arg>]]></replacetoken>
 							<replacevalue><![CDATA[<jvm-arg>-Dfile.encoding=UTF-8</jvm-arg>
+	<jvm-arg>-Djava.net.preferIPv4Stack=true</jvm-arg>
 	<jvm-arg>-Duser.timezone=GMT</jvm-arg>
 	<jvm-arg>-Xmx1024m</jvm-arg>
 	<jvm-arg>-XX:MaxPermSize=256m</jvm-arg>]]></replacevalue>
