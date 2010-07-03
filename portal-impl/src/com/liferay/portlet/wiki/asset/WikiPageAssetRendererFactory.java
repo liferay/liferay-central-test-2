@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.BaseAssetRendererFactory;
+import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.WikiPageResource;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
@@ -34,6 +35,7 @@ import javax.portlet.PortletURL;
  *
  * @author Julio Camarero
  * @author Juan Fernández
+ * @author Jorge Ferrer
  */
 public class WikiPageAssetRendererFactory extends BaseAssetRendererFactory {
 
@@ -46,19 +48,22 @@ public class WikiPageAssetRendererFactory extends BaseAssetRendererFactory {
 
 		WikiPage page = null;
 
-		long resourcePrimKey = classPK;
-
-		if (type == TYPE_LATEST_APPROVED) {
-			page = WikiPageLocalServiceUtil.getPage(resourcePrimKey);
+		try {
+			page = WikiPageLocalServiceUtil.getWikiPage(classPK);
 		}
-		else {
-			WikiPageResource wikiPageResource =
-				WikiPageResourceLocalServiceUtil.getPageResource(
-					resourcePrimKey);
+		catch (NoSuchPageException nspe) {
+			if (type == TYPE_LATEST_APPROVED) {
+				page = WikiPageLocalServiceUtil.getPage(classPK);
+			}
+			else {
+				WikiPageResource wikiPageResource =
+					WikiPageResourceLocalServiceUtil.getPageResource(
+						classPK);
 
-			page = WikiPageLocalServiceUtil.getPage(
-				wikiPageResource.getNodeId(), wikiPageResource.getTitle(),
-				null);
+				page = WikiPageLocalServiceUtil.getPage(
+					wikiPageResource.getNodeId(),
+					wikiPageResource.getTitle(), null);
+			}
 		}
 
 		return new WikiPageAssetRenderer(page);
