@@ -556,7 +556,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		if (userId > 0) {
 			return wikiPagePersistence.findByU_N_S(
-				nodeId, userId, WorkflowConstants.STATUS_DRAFT, start, end,
+				userId, nodeId, WorkflowConstants.STATUS_DRAFT, start, end,
 				new PageCreateDateComparator(false));
 		}
 		else {
@@ -571,7 +571,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		if (userId > 0) {
 			return wikiPagePersistence.countByU_N_S(
-				nodeId, userId, WorkflowConstants.STATUS_DRAFT);
+				userId, nodeId, WorkflowConstants.STATUS_DRAFT);
 		}
 		else {
 			return wikiPagePersistence.countByN_S(
