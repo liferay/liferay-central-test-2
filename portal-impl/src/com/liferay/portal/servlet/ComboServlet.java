@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.MinifierUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
@@ -51,7 +52,7 @@ public class ComboServlet extends HttpServlet {
 
 		String[] modulePaths = request.getParameterValues("m");
 
-		if (modulePaths.length == 0) {
+		if ((modulePaths == null) || (modulePaths.length == 0)) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 
 			return;
@@ -65,10 +66,19 @@ public class ComboServlet extends HttpServlet {
 		byte[][] bytesArray = new byte[length][];
 
 		for (String modulePath : modulePaths) {
-			modulePath = StringUtil.replaceFirst(
-				p.concat(modulePath), contextPath, StringPool.BLANK);
+			byte[] bytes = null;
 
-			bytesArray[--length] = getFileContent(modulePath, minifierType);
+			if (Validator.isNotNull(modulePath)) {
+				modulePath = StringUtil.replaceFirst(
+					p.concat(modulePath), contextPath, StringPool.BLANK);
+
+				bytes = getFileContent(modulePath, minifierType);
+			}
+			else {
+				bytes = StringPool.BLANK.getBytes();
+			}
+
+			bytesArray[--length] = bytes;
 		}
 
 		String contentType = ContentTypes.TEXT_JAVASCRIPT;
