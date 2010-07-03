@@ -248,7 +248,7 @@ public class EditPageAction extends PortletAction {
 			actionRequest, "originalRedirect");
 
 		PortletURLImpl portletURL = new StrutsActionPortletURL(
-			(PortletResponseImpl) actionResponse, themeDisplay.getPlid(),
+			(PortletResponseImpl)actionResponse, themeDisplay.getPlid(),
 			PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter("struts_action", "/wiki/edit_page");
