@@ -212,7 +212,7 @@
 				return <%= themeDisplay.isThemeJsFastLoad() %>;
 			},
 			getComboPath: function() {
-				return '<%= themeDisplay.getPathContext() %>/combo/?';
+				return '<%= themeDisplay.getPathContext() %>/combo/?p=<%= themeDisplay.getPathJavaScript() %>&';
 			},
 			getFilePath: function(file) {
 				return '<%= alloyURL %>'.replace('{file}', file);
@@ -222,9 +222,7 @@
 					<c:when test="<%= themeDisplay.isThemeJsFastLoad() %>">
 						return {
 							replaceStr: function(match, fragment, string) {
-								var prefix = '<%= themeDisplay.getPathContext() %>/html/js';
-
-								return fragment + 'p=' + prefix + '&m=' + (match.split(prefix)[1] || '');
+								return fragment + 'm=' + (match.split('<%= themeDisplay.getPathJavaScript() %>')[1] || '');
 							},
 							searchExp: '(\\?|&)/([^&]+)'
 						};
