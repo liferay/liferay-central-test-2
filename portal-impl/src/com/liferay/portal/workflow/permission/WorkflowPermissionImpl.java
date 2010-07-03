@@ -102,16 +102,17 @@ public class WorkflowPermissionImpl implements WorkflowPermission {
 			WorkflowInstance workflowInstance)
 		throws WorkflowException {
 
-		int numTasks =
+		int count =
 			WorkflowTaskManagerUtil.getWorkflowTaskCountByWorkflowInstance(
 				permissionChecker.getCompanyId(), permissionChecker.getUserId(),
 				workflowInstance.getWorkflowInstanceId(), Boolean.FALSE);
 
-		if (numTasks > 0) {
+		if (count > 0) {
 			return true;
 		}
-
-		return false;
+		else {
+			return false;
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
