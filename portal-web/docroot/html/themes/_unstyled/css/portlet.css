@@ -41,10 +41,16 @@ body.portlet {
 .portlet-borderless-container {
 }
 
+.ie6 .portlet-borderless-container {
+}
+
 .portlet-borderless-bar {
 }
 
 .portlet-borderless-bar .portlet-actions {
+}
+
+.ie6 .portlet-borderless-bar .portlet-actions, .ie7 .portlet-borderless-bar .portlet-actions {
 }
 
 .portlet-borderless-container:hover .portlet-borderless-bar {
@@ -74,10 +80,13 @@ body.portlet {
 .portlet-title-default {
 }
 
-.yui-dd-draggable .portlet-topper {
+.ie6 .portlet-title-default, .ie7 .portlet-title-default {
 }
 
-.yui-dd-draggable .portlet-title-default {
+.yui3-dd-draggable .portlet-topper {
+}
+
+.yui3-dd-draggable .portlet-title-default {
 }
 
 .portlet-borderless-bar .portlet-back a {
@@ -351,12 +360,6 @@ body.portlet {
 }
 
 .lfr-actions .lfr-trigger, .lfr-actions .lfr-trigger, .lfr-actions .lfr-trigger strong {
-}
-
-.lfr-actions .lfr-trigger strong a {
-}
-
-.lfr-actions.left .lfr-trigger strong a {
 }
 
 .lfr-actions .lfr-trigger li {

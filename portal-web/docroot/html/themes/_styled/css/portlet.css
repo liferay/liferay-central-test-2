@@ -64,7 +64,12 @@ body.portlet {
 /* ---------- Borderless portlet ---------- */
 
 .portlet-borderless-container {
+	min-height: 2.5em;
 	position: relative;
+}
+
+.ie6 .portlet-borderless-container {
+	height: 2.5em;
 }
 
 .portlet-borderless-bar {
