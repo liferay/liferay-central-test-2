@@ -195,13 +195,7 @@
 		long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/html/js/", true);
 
 		String alloyBaseURL = themeDisplay.getPathJavaScript() + "/aui/";
-		String alloyFileURL = alloyBaseURL + "{file}";
-
-		String alloyURL = alloyFileURL + "?t=" + javaScriptLastModified;
-
-		if (themeDisplay.isThemeJsFastLoad()) {
-			alloyURL = PortalUtil.getStaticResourceURL(request, alloyFileURL, javaScriptLastModified);
-		}
+		String alloyComboURL = PortalUtil.getStaticResourceURL(request, themeDisplay.getPathContext() + "/combo/", javaScriptLastModified);
 		%>
 
 		Liferay.AUI = {
@@ -212,10 +206,7 @@
 				return <%= themeDisplay.isThemeJsFastLoad() %>;
 			},
 			getComboPath: function() {
-				return '<%= themeDisplay.getPathContext() %>/combo/?p=<%= themeDisplay.getPathJavaScript() %>&';
-			},
-			getFilePath: function(file) {
-				return '<%= alloyURL %>'.replace('{file}', file);
+				return '<%= alloyComboURL %>&p=<%= themeDisplay.getPathJavaScript() %>&';
 			},
 			getFilter: function() {
 				<c:choose>
