@@ -40,6 +40,10 @@ public class GroupPagesControlPanelEntry extends BaseControlPanelEntry {
 				themeDisplay.getScopeGroupId(), ActionKeys.MANAGE_LAYOUTS);
 		}
 
+		if (visible && themeDisplay.getScopeGroup().isCompany()) {
+			visible = false;
+		}
+
 		return visible;
 	}
 
