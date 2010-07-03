@@ -25,6 +25,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.BaseAssetRendererFactory;
+import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleResource;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
@@ -51,19 +52,27 @@ public class JournalArticleAssetRendererFactory
 	public AssetRenderer getAssetRenderer(long classPK, int type)
 		throws PortalException, SystemException {
 
-		JournalArticleResource articleResource =
-			JournalArticleResourceLocalServiceUtil.getArticleResource(classPK);
+		JournalArticle article = null;
 
-		int status = WorkflowConstants.STATUS_ANY;
-
-		if (type == TYPE_LATEST_APPROVED) {
-			status = WorkflowConstants.STATUS_APPROVED;
+		try {
+			article = JournalArticleLocalServiceUtil.getArticle(classPK);
 		}
+		catch (NoSuchArticleException nsae) {
+			JournalArticleResource articleResource =
+				JournalArticleResourceLocalServiceUtil.getArticleResource(
+					classPK);
 
-		JournalArticle article =
-			JournalArticleLocalServiceUtil.getLatestArticle(
-				articleResource.getGroupId(), articleResource.getArticleId(),
-				status);
+			int status = WorkflowConstants.STATUS_ANY;
+
+			if (type == TYPE_LATEST_APPROVED) {
+				status = WorkflowConstants.STATUS_APPROVED;
+			}
+
+			article =
+				JournalArticleLocalServiceUtil.getLatestArticle(
+					articleResource.getGroupId(),
+					articleResource.getArticleId(), status);
+		}
 
 		return new JournalArticleAssetRenderer(article);
 	}

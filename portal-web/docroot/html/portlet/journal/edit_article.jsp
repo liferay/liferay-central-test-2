@@ -549,13 +549,16 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					long classPK = 0;
 
 					if (article != null) {
-						try {
-							AssetEntryLocalServiceUtil.getEntry(JournalArticle.class.getName(), article.getPrimaryKey());
+						classPK = article.getResourcePrimKey();
 
-							classPK = article.getPrimaryKey();
-						}
-						catch (NoSuchEntryException nsee) {
-							classPK = article.getResourcePrimKey();
+						if (!article.isApproved() && (article.getVersion() != JournalArticleConstants.DEFAULT_VERSION)) {
+							try {
+								AssetEntryLocalServiceUtil.getEntry(JournalArticle.class.getName(), article.getPrimaryKey());
+
+								classPK = article.getPrimaryKey();
+							}
+							catch (NoSuchEntryException nsee) {
+							}
 						}
 					}
 					%>

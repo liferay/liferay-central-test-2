@@ -27,6 +27,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.model.JournalArticleConstants;
 import com.liferay.portlet.journal.model.JournalArticleDisplay;
 import com.liferay.portlet.journal.service.permission.JournalArticlePermission;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
@@ -52,7 +53,15 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public long getClassPK() {
-		return _article.getResourcePrimKey();
+		if (!_article.isApproved() &&
+			(_article.getVersion() !=
+				JournalArticleConstants.DEFAULT_VERSION)) {
+
+			return _article.getPrimaryKey();
+		}
+		else {
+			return _article.getResourcePrimKey();
+		}
 	}
 
 	public String getDiscussionPath() {
