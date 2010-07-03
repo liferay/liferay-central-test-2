@@ -66,16 +66,13 @@ public class ComboServlet extends HttpServlet {
 		byte[][] bytesArray = new byte[length][];
 
 		for (String modulePath : modulePaths) {
-			byte[] bytes = null;
+			byte[] bytes = new byte[0];
 
 			if (Validator.isNotNull(modulePath)) {
 				modulePath = StringUtil.replaceFirst(
 					p.concat(modulePath), contextPath, StringPool.BLANK);
 
 				bytes = getFileContent(modulePath, minifierType);
-			}
-			else {
-				bytes = StringPool.BLANK.getBytes();
 			}
 
 			bytesArray[--length] = bytes;
