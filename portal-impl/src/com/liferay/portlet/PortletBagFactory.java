@@ -283,7 +283,7 @@ public class PortletBagFactory {
 			customAttributesDisplayInstances, workflowHandlerInstances,
 			preferencesValidatorInstance, resourceBundles);
 
-		PortletBagPool.put(portlet.getPortletId(), portletBag);
+		PortletBagPool.put(portlet.getRootPortletId(), portletBag);
 
 		try {
 			PortletInstanceFactoryUtil.create(portlet, _servletContext);

@@ -16,6 +16,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletConstants;
@@ -69,12 +70,7 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 		PortletApp portletApp = portlet.getPortletApp();
 
 		if (portletApp.isWARFile()) {
-			PortletBag portletBag = PortletBagPool.get(
-				portlet.getRootPortletId());
-
-			if (portletBag != null) {
-				portletBag.setPortletInstance(null);
-			}
+			PortletBagPool.remove(portlet.getRootPortletId());
 		}
 	}
 
@@ -114,6 +110,26 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 			if (rootInvokerPortletInstance == null) {
 				PortletBag portletBag = PortletBagPool.get(
 					portlet.getRootPortletId());
+
+				// Portlet bag should never be null unless the portlet has been
+				// undeployed
+
+				if (portletBag == null) {
+					PortletBagFactory portletBagFactory =
+						new PortletBagFactory();
+
+					portletBagFactory.setClassLoader(
+						PortalClassLoaderUtil.getClassLoader());
+					portletBagFactory.setServletContext(servletContext);
+					portletBagFactory.setWARFile(false);
+
+					try {
+						portletBag = portletBagFactory.create(portlet);
+					}
+					catch (Exception e) {
+						throw new PortletException(e);
+					}
+				}
 
 				PortletConfig portletConfig = PortletConfigFactoryUtil.create(
 					portlet, servletContext);
