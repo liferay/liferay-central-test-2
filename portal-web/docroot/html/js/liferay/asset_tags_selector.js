@@ -72,7 +72,7 @@ AUI().add(
 						valueFn: function() {
 							var instance = this;
 
-							return instance._searchEntries;
+							return instance._getTagsDataSource();
 						}
 					},
 					guid: {
@@ -238,6 +238,55 @@ AUI().add(
 						);
 					},
 
+					_getTagsDataSource: function() {
+						var instance = this;
+
+						var AssetTagSearch = Liferay.Service.Asset.AssetTag.search;
+
+						AssetTagSearch._serviceQueryCache = {};
+
+						var serviceQueryCache = AssetTagSearch._serviceQueryCache;
+
+						var dataSource = new Liferay.Service.DataSource(
+							{
+								on: {
+									request: function(event) {
+										var term = event.request;
+										var key = term;
+
+										if (term == '*') {
+											term = '';
+										}
+
+										var serviceQueryObj = serviceQueryCache[key];
+
+										if (!serviceQueryObj) {
+											serviceQueryObj = {
+												groupId: themeDisplay.getParentGroupId(),
+												name: '%' + term + '%',
+												properties: '',
+												begin: 0,
+												end: 20
+											};
+
+											serviceQueryCache[key] = serviceQueryObj;
+										}
+
+										event.request = serviceQueryObj;
+									}
+								},
+								source: AssetTagSearch
+							}
+						).plug(
+							A.Plugin.DataSourceCache,
+							{
+								max: 500
+							}
+						);
+
+						return dataSource;
+					},
+
 					_initSearch: function() {
 						var instance = this;
 
@@ -385,27 +434,6 @@ AUI().add(
 						instance.entryHolder.placeAfter(iconsBoundingBox);
 					},
 
-					_searchEntries: function(term) {
-						var instance = this;
-
-						var beginning = 0;
-						var end = 20;
-
-						if (term == '*') {
-							term = '';
-						}
-
-						return Liferay.Service.Asset.AssetTag.search(
-							{
-								groupId: themeDisplay.getParentGroupId(),
-								name: '%' + term + '%',
-								properties: '',
-								begin: beginning,
-								end: end
-							}
-						);
-					},
-
 					_showPopup: function(event) {
 						var instance = this;
 
@@ -539,6 +567,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-autocomplete', 'aui-dialog', 'aui-io-request', 'aui-live-search', 'aui-textboxlist', 'aui-form-textfield', 'substitute']
+		requires: ['aui-autocomplete', 'aui-dialog', 'aui-io-request', 'aui-live-search', 'aui-textboxlist', 'aui-form-textfield', 'datasource-cache', 'liferay-service-datasource', 'substitute']
 	}
 );
