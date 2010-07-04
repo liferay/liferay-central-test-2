@@ -177,6 +177,10 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 					</div>
 				</c:if>
 
+				<c:if test='<%= elType.equals("selection_break") %>'>
+					<div class="separator"></div>
+				</c:if>
+
 				<c:if test='<%= elType.equals("list") %>'>
 					<div class="journal-list-subfield">
 						<aui:select label="" name="list">

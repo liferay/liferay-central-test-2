@@ -74,10 +74,10 @@ AUI().add(
 			instance.timers = {};
 			instance.portletNamespace = portletNamespace;
 
-			var structureTreeId = instance._guid('#structureTree');
+			var structureTreeId = instance._getNamespacedId('#structureTree');
 			var structureTree = A.one(structureTreeId);
 
-			instance._helperId = instance._guid('journalArticleHelper', instance.portletNamespace, '');
+			instance._helperId = instance._getNamespacedId('journalArticleHelper', instance.portletNamespace, '');
 
 			var helperHTML = A.substitute(TPL_HELPER, [instance._helperId]);
 
@@ -154,7 +154,7 @@ AUI().add(
 				instance.nestedListEvents
 			);
 
-			var journalComponentListId = instance._guid('#journalComponentList');
+			var journalComponentListId = instance._getNamespacedId('#journalComponentList');
 			var componentFields = A.all(journalComponentListId + ' .component-group .journal-component');
 
 			instance.componentFieldsOptions = {
@@ -731,7 +731,7 @@ AUI().add(
 				var instance = this;
 
 				var buffer = [];
-				var structureTreeId = instance._guid('#structureTree');
+				var structureTreeId = instance._getNamespacedId('#structureTree');
 				var sourceRoots = A.all(structureTreeId + ' > li');
 				var hasStructure = instance.hasStructure();
 
@@ -803,7 +803,7 @@ AUI().add(
 				var instance = this;
 
 				return A.one(
-					instance._guid(id, namespace)
+					instance._getNamespacedId(id, namespace)
 				);
 			},
 
@@ -840,7 +840,7 @@ AUI().add(
 			getEditButtons: function() {
 				var instance = this;
 
-				var structureTreeId = instance._guid('#structureTree');
+				var structureTreeId = instance._getNamespacedId('#structureTree');
 
 				return A.all(structureTreeId + ' div.journal-article-buttons .edit-button .aui-button-input');
 			},
@@ -856,7 +856,7 @@ AUI().add(
 			getFields: function() {
 				var instance = this;
 
-				var structureTreeId = instance._guid('#structureTree');
+				var structureTreeId = instance._getNamespacedId('#structureTree');
 
 				return A.all(structureTreeId + ' li');
 			},
@@ -888,7 +888,7 @@ AUI().add(
 			getRepeatableButtons: function() {
 				var instance = this;
 
-				var structureTreeId = instance._guid('#structureTree');
+				var structureTreeId = instance._getNamespacedId('#structureTree');
 
 				return A.all(structureTreeId + ' div.journal-article-buttons .repeatable-button .aui-button-input');
 			},
@@ -896,7 +896,7 @@ AUI().add(
 			getRepeatedSiblings: function(fieldInstance) {
 				var instance = this;
 
-				var structureTreeId = instance._guid('#structureTree');
+				var structureTreeId = instance._getNamespacedId('#structureTree');
 				var selector = structureTreeId + ' li[dataName=' + fieldInstance.get('variableName') + '].repeated-field';
 
 				return A.all(selector);
@@ -1096,7 +1096,7 @@ AUI().add(
 				var instance = this;
 
 				var buffer = [];
-				var structureTreeId = instance._guid('#structureTree');
+				var structureTreeId = instance._getNamespacedId('#structureTree');
 				var sourceRoots = A.all(structureTreeId + ' > li.structure-field:not(.repeated-field)').filter(':not(.parent-structure-field)');
 
 				var root = instance._createDynamicNode('root');
@@ -1118,7 +1118,7 @@ AUI().add(
 			getTextAreaFields: function() {
 				var instance = this;
 
-				var structureTreeId = instance._guid('#structureTree');
+				var structureTreeId = instance._getNamespacedId('#structureTree');
 
 				return A.all(structureTreeId + ' li[dataType=text_area] div.journal-article-component-container');
 			},
@@ -1171,7 +1171,7 @@ AUI().add(
 			hideEditContainerMessage: function() {
 				var instance = this;
 
-				var selector = instance._guid('journalMessage');
+				var selector = instance._getNamespacedId('journalMessage');
 
 				A.one(selector).hide();
 			},
@@ -1671,7 +1671,7 @@ AUI().add(
 				var instance = this;
 
 				var canSubmit = true;
-				var structureTreeId = instance._guid('#structureTree');
+				var structureTreeId = instance._getNamespacedId('#structureTree');
 				var fields = A.all(structureTreeId + ' li');
 				var requiredFields = fields.filter('[dataRequired=true]');
 				var fieldsConatainer = A.all(structureTreeId + ' li .field-container');
@@ -1929,7 +1929,7 @@ AUI().add(
 			_attachDelegatedEvents: function() {
 				var instance = this;
 
-				var journalArticleContainerId = instance._guid('#journalArticleContainer');
+				var journalArticleContainerId = instance._getNamespacedId('#journalArticleContainer');
 
 				var addListItem = function(event) {
 					var icon = event.currentTarget;
@@ -2481,7 +2481,7 @@ AUI().add(
 				var fieldInstance = new Journal.StructureField(
 					options,
 					instance.portletNamespace
-				);
+				).render();
 
 				fieldInstance.get('fieldLabel');
 
@@ -2492,7 +2492,7 @@ AUI().add(
 				return s.replace(/\W+/g, ' ').replace(/^\W+|\W+$/g, '').replace(/ /g, '_');
 			},
 
-			_guid: function(id, namespace, prefix) {
+			_getNamespacedId: function(id, namespace, prefix) {
 				var instance = this;
 
 				if (!Lang.isString(namespace)) {
@@ -2781,6 +2781,7 @@ AUI().add(
 					},
 
 					optionsEditable: {
+						validator: Lang.isBoolean,
 						value: true
 					},
 
@@ -2863,7 +2864,7 @@ AUI().add(
 					}
 				},
 
-				EXTENDS: A.Base,
+				EXTENDS: A.Widget,
 
 				NAME: 'structurefield',
 
@@ -2876,6 +2877,8 @@ AUI().add(
 
 					StructureField.superclass.constructor.apply(this, arguments);
 				},
+
+				UI_ATTRS: ['optionsEditable'],
 
 				prototype: {
 					cloneableAttrs: [
@@ -3041,7 +3044,7 @@ AUI().add(
 							var editBtnTemplate = instance.getById('editBtnTemplate');
 							var editBtnTemplateHTML = '';
 
-							if (editBtnTemplate && optionsEditable) {
+							if (editBtnTemplate) {
 								editBtnTemplateHTML = editBtnTemplate.html();
 							}
 
@@ -3313,7 +3316,26 @@ AUI().add(
 						return value;
 					},
 
-					_guid: Journal.prototype._guid,
+					_uiSetOptionsEditable: function(val) {
+						var instance = this;
+
+						var source = instance.get('source');
+
+						if (source) {
+							var journalArticleButtons = source.one('.journal-article-buttons');
+
+							if (journalArticleButtons) {
+								if (val) {
+									journalArticleButtons.show();
+								}
+								else {
+									journalArticleButtons.hide();
+								}
+							}
+						}
+					},
+
+					_getNamespacedId: Journal.prototype._getNamespacedId,
 
 					getById: Journal.prototype.getById
 				}
@@ -3326,7 +3348,7 @@ AUI().add(
 
 		var fieldModel = Journal.FieldModel;
 
-		var registerFieldModel = function(namespace, type, variableName) {
+		var registerFieldModel = function(namespace, type, variableName, optionsEditable) {
 			var instance = this;
 
 			var typeEl = A.one('#journalFieldModelContainer div[dataType="'+ type +'"]');
@@ -3336,26 +3358,25 @@ AUI().add(
 			}
 
 			fieldModel[namespace] = {
-				fieldType: type,
-				variableName: variableName,
 				fieldLabel: variableName,
-				innerHTML: innerHTML
+				fieldType: type,
+				innerHTML: innerHTML,
+				optionsEditable: optionsEditable,
+				variableName: variableName
 			};
 		};
 
-		registerFieldModel('Text', 'text', 'TextField');
-		registerFieldModel('TextArea', 'text_area', 'TextAreaField');
-		registerFieldModel('TextBox', 'text_box', 'TextBoxField');
-		registerFieldModel('Image', 'image', 'ImageField');
-		registerFieldModel('ImageGallery', 'image_gallery', 'ImageGalleryField');
-		registerFieldModel('DocumentLibrary', 'document_library', 'DocumentLibraryField');
-		registerFieldModel('Boolean', 'boolean', 'BooleanField');
-		registerFieldModel('List', 'list', 'ListField');
-		registerFieldModel('MultiList', 'multi-list', 'MultiListField');
-		registerFieldModel('LinkToPage', 'link_to_layout', 'LinkToPageField');
-		registerFieldModel('SelectionBreak', 'selection_break', 'SelectionBreakField');
-
-		fieldModel.SelectionBreak.optionsEditable = false;
+		registerFieldModel('Text', 'text', 'TextField', true);
+		registerFieldModel('TextArea', 'text_area', 'TextAreaField', true);
+		registerFieldModel('TextBox', 'text_box', 'TextBoxField', true);
+		registerFieldModel('Image', 'image', 'ImageField', true);
+		registerFieldModel('ImageGallery', 'image_gallery', 'ImageGalleryField', true);
+		registerFieldModel('DocumentLibrary', 'document_library', 'DocumentLibraryField', true);
+		registerFieldModel('Boolean', 'boolean', 'BooleanField', true);
+		registerFieldModel('List', 'list', 'ListField', true);
+		registerFieldModel('MultiList', 'multi-list', 'MultiListField', true);
+		registerFieldModel('LinkToPage', 'link_to_layout', 'LinkToPageField', true);
+		registerFieldModel('SelectionBreak', 'selection_break', 'SelectionBreakField', false);
 
 		Liferay.Portlet.Journal = Journal;
 	},
