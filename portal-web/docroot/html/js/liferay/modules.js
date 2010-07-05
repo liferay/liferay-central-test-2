@@ -1,15 +1,15 @@
 ;(function(){
 	var COMBINE = Liferay.AUI.getCombine();
 
-	var COMBO_PATH = Liferay.AUI.getComboPath();
-
 	var GROUPS = AUI.defaults.groups;
 
-	var JAVASCRIPT_PATH = themeDisplay.getPathJavaScript();
+	var PATH_COMBO = Liferay.AUI.getComboPath();
 
-	var LIFERAY_PATH = JAVASCRIPT_PATH + '/liferay/';
+	var PATH_JAVASCRIPT = themeDisplay.getPathJavaScript();
 
-	var MISC_PATH = JAVASCRIPT_PATH + '/misc/';
+	var PATH_LIFERAY = PATH_JAVASCRIPT + '/liferay/';
+
+	var PATH_MISC = PATH_JAVASCRIPT + '/misc/';
 
 	var REGEX_DASH = /-/g;
 
@@ -55,10 +55,10 @@
 	};
 
 	GROUPS.liferay = {
-		base: LIFERAY_PATH,
-		root: LIFERAY_PATH,
+		base: PATH_LIFERAY,
+		root: PATH_LIFERAY,
 		combine: COMBINE,
-		comboBase: COMBO_PATH,
+		comboBase: PATH_COMBO,
 		modules: createLiferayModules(),
 		patterns: {
 			'liferay-': {
@@ -77,10 +77,10 @@
 	};
 
 	GROUPS.misc = {
-		base: MISC_PATH,
-		root: MISC_PATH,
+		base: PATH_MISC,
+		root: PATH_MISC,
 		combine: COMBINE,
-		comboBase: COMBO_PATH,
+		comboBase: PATH_COMBO,
 		modules: {
 			swfupload: {
 				path : 'swfupload/swfupload.js'
