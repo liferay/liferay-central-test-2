@@ -61,7 +61,7 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 				name="<%= fileEntryColumn %>"
 			>
 				<liferay-ui:icon
-					image='<%= "../file_system/small/" + fileEntry.getExtension() %>'
+					image='<%= "../file_system/small/" + fileEntry.getIcon() %>'
 					label="<%= true %>"
 					message="<%= fileEntry.getTitle() %>"
 				/>

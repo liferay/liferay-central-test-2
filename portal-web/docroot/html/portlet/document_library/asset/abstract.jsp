@@ -26,7 +26,7 @@ DLFileVersion fileVersion = (DLFileVersion)request.getAttribute(WebKeys.DOCUMENT
 <c:if test="<%= fileVersion.isApproved() %>">
 	<div class="asset-resource-info">
 		<liferay-ui:icon
-			image='<%= "../file_system/small/" + fileVersion.getExtension() %>'
+			image='<%= "../file_system/small/" + fileVersion.getIcon() %>'
 			label="<%= true %>"
 			message="<%= fileVersion.getTitle() %>"
 			url="<%= assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, StringPool.BLANK) %>"
