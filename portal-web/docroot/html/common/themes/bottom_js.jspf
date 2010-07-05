@@ -98,10 +98,6 @@ if (layout != null) {
 </c:if>
 
 <aui:script use="liferay-menu,liferay-notice,liferay-poller">
-	if (Liferay.Dock) {
-		Liferay.Dock.init();
-	}
-
 	new Liferay.Menu();
 
 	Liferay.Notice.prototype.setClosing();
