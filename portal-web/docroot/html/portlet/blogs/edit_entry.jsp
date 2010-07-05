@@ -319,7 +319,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	</c:if>
 </aui:script>
 
-<aui:script use="io,json">
+<aui:script use="aui-base">
 	var cancelButton = A.one('#<portlet:namespace />cancelButton');
 
 	if (cancelButton) {

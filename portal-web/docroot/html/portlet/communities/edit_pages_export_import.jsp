@@ -129,7 +129,7 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 	</c:choose>
 </aui:fieldset>
 
-<aui:script use="selector-css3">
+<aui:script use="aui-base,selector-css3">
 	var toggleHandlerControl = function(item, index, collection) {
 		var container = item.ancestor('.<portlet:namespace />handler-control').one('ul');
 
