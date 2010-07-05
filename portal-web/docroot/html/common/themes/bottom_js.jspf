@@ -16,17 +16,7 @@
 
 <%@ include file="/html/portal/layout/view/portlet_js.jspf" %>
 
-<aui:script use="aui-base">
-	Liferay.Util.addInputType();
-
-	Liferay.Portlet.ready(
-		function(portletId, node) {
-			Liferay.Util.addInputType(node);
-		}
-	);
-</aui:script>
-
-<aui:script>
+<aui:script position="inline">
 	Liferay.Util.addInputFocus();
 
 	<c:if test="<%= !themeDisplay.isStatePopUp() %>">
@@ -44,6 +34,16 @@
 			);
 		</c:if>
 	</c:if>
+</aui:script>
+
+<aui:script use="aui-base">
+	Liferay.Util.addInputType();
+
+	Liferay.Portlet.ready(
+		function(portletId, node) {
+			Liferay.Util.addInputType(node);
+		}
+	);
 </aui:script>
 
 <%
