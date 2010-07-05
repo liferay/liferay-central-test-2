@@ -171,8 +171,8 @@ public class ComboServlet extends HttpServlet {
 		else {
 			String stringFileContent = FileUtil.read(file);
 
-			if (!StringUtil.endsWith(path, _CSS_FILTER_SUFFIX) &&
-				!StringUtil.endsWith(path, _JAVASCRIPT_FILTER_SUFFIX)) {
+			if (!StringUtil.endsWith(path, _CSS_MINIFIED_SUFFIX) &&
+				!StringUtil.endsWith(path, _JAVASCRIPT_MINIFIED_SUFFIX)) {
 
 				if (minifierType.equals("css")) {
 					stringFileContent = MinifierUtil.minifyCss(
@@ -201,14 +201,14 @@ public class ComboServlet extends HttpServlet {
 
 	private static final String _CSS_EXTENSION = "css";
 
-	private static final String _CSS_FILTER_SUFFIX = "-min.css";
+	private static final String _CSS_MINIFIED_SUFFIX = "-min.css";
 
 	private static final FileContentBag _EMPTY_FILE_CONTENT_BAG =
 		new FileContentBag(new byte[0], 0);
 
-	private static final String _JAVASCRIPT_FILTER_SUFFIX = "-min.js";
-
 	private static final String _JAVASCRIPT_DIR = "html/js";
+
+	private static final String _JAVASCRIPT_MINIFIED_SUFFIX = "-min.js";
 
 	private ConcurrentMap<String, FileContentBag> _fileContents =
 		new ConcurrentHashMap<String, FileContentBag>();
