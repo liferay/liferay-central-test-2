@@ -70,23 +70,24 @@ public class FacebookAutoLogin implements AutoLogin {
 					(String)session.getAttribute(WebKeys.FACEBOOK_USER_ID));
 
 				if (facebookId > 0) {
-
-					user = UserLocalServiceUtil.getUserByFacebookId(
-						companyId, facebookId);
+					try {
+						user = UserLocalServiceUtil.getUserByFacebookId(
+							companyId, facebookId);
+					}
+					catch (NoSuchUserException nsue) {
+						return credentials;
+					}
 				}
 				else {
 					return credentials;
 				}
 			}
 
-			if (Validator.isNotNull(user)) {
+			credentials = new String[3];
 
-				credentials = new String[3];
-
-				credentials[0] = String.valueOf(user.getUserId());
-				credentials[1] = user.getPassword();
-				credentials[2] = Boolean.FALSE.toString();
-			}
+			credentials[0] = String.valueOf(user.getUserId());
+			credentials[1] = user.getPassword();
+			credentials[2] = Boolean.FALSE.toString();
 		}
 		catch (Exception e) {
 			_log.error(e, e);

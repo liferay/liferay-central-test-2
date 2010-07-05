@@ -478,7 +478,8 @@ public class UserLocalServiceWrapper implements UserLocalService {
 
 	public com.liferay.portal.model.User getUserByFacebookId(long companyId,
 		long facebookId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _userLocalService.getUserByFacebookId(companyId, facebookId);
 	}
 

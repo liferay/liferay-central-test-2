@@ -20,9 +20,9 @@
 String redirect = ParamUtil.getString(request, "redirect");
 %>
 
-<liferay-ui:message key="no-user-was-found-with-your-facebook-credentials-would-you-like-to-import-this-user-to-our-system" />
-
-<div>&nbsp;</div>
+<div>
+	<liferay-ui:message key="no-user-was-found-with-your-facebook-credentials.-would-you-like-to-import-this-user" />
+</div>
 
 <portlet:actionURL var="addUserURL">
 	<portlet:param name="saveLastPath" value="0" />

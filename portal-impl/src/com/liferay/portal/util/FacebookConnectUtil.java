@@ -14,19 +14,20 @@
 
 package com.liferay.portal.util;
 
-import javax.portlet.PortletRequest;
-import javax.servlet.http.HttpServletRequest;
-
 import com.liferay.portal.kernel.exception.SystemException;
-
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
-
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
+
+import javax.portlet.PortletRequest;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * <a href="FacebookConnectUtil.java.html"><b><i>View Source</i></b></a>
@@ -61,72 +62,67 @@ public class FacebookConnectUtil {
 			PropsValues.FACEBOOK_CONNECT_OAUTH_AUTH_URL);
 	}
 
+	public static JSONObject getGraphResources(
+		long companyId, String path, String accessToken, String fields) {
+
+		try {
+			String url = HttpUtil.addParameter(
+				getGraphURL(companyId) + path, "access_token", accessToken);
+
+			if (Validator.isNotNull(fields)) {
+				url = HttpUtil.addParameter(url, "fields", fields);
+			}
+
+			Http.Options options = new Http.Options();
+
+			options.setLocation(url);
+
+			String json = HttpUtil.URLtoString(options);
+
+			return JSONFactoryUtil.createJSONObject(json);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
+		}
+
+		return null;
+	}
+
 	public static String getGraphURL(long companyId) throws SystemException {
 		return PrefsPropsUtil.getString(
 			companyId, PropsKeys.FACEBOOK_CONNECT_GRAPH_URL,
 			PropsValues.FACEBOOK_CONNECT_GRAPH_URL);
 	}
 
-	public static JSONObject getGraphResourcesAsJSON(
-		long companyId, String path, String accessToken, String fields) {
-
-		try {
-			return JSONFactoryUtil.createJSONObject(
-				getGraphResources(companyId, path, accessToken, fields));
-		}
-		catch (Exception e) {
-			return null;
-		}
-	}
-
-	public static String getGraphResources(
-			long companyId, String path, String accessToken, String fields) {
-
-			try {
-				String url = HttpUtil.addParameter(
-					getGraphURL(companyId) + path, "access_token",
-					accessToken);
-
-				if (Validator.isNotNull(fields)) {
-					url = HttpUtil.addParameter(url, "fields", fields);
-				}
-
-				Http.Options options = new Http.Options();
-
-				options.setLocation(url);
-
-				return HttpUtil.URLtoString(options);
-			}
-			catch (Exception e) {
-			}
-
-			return null;
-		}
-
 	public static String getProfileImageURL(PortletRequest portletRequest) {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
 
-		HttpServletRequest request = PortalUtil.getOriginalServletRequest(
-			((LiferayPortletRequest) portletRequest).getHttpServletRequest());
+		request = PortalUtil.getOriginalServletRequest(request);
 
-		String facebookId = (String) request.getSession().getAttribute(
+		HttpSession session = request.getSession();
+
+		String facebookId = (String)session.getAttribute(
 			WebKeys.FACEBOOK_USER_ID);
-		String token = (String) request.getSession().getAttribute(
+
+		if (Validator.isNull(facebookId)) {
+			return null;
+		}
+
+		long companyId = PortalUtil.getCompanyId(request);
+
+		String token = (String)session.getAttribute(
 			WebKeys.FACEBOOK_ACCESS_TOKEN);
 
-		if (Validator.isNotNull(facebookId)) {
-			JSONObject jsonObject = getGraphResourcesAsJSON(
-				PortalUtil.getCompanyId(request), "/me",
-				token, "id,picture");
+		JSONObject jsonObject = getGraphResources(
+			companyId, "/me", token, "id,picture");
 
-			return jsonObject.getString("picture");
-		}
-
-		return null;
+		return jsonObject.getString("picture");
 	}
 
-	public static String getRedirectURL(long companyId)
-		throws SystemException {
-
+	public static String getRedirectURL(long companyId) throws SystemException {
 		return PrefsPropsUtil.getString(
 			companyId, PropsKeys.FACEBOOK_CONNECT_OAUTH_REDIRECT_URL,
 			PropsValues.FACEBOOK_CONNECT_OAUTH_REDIRECT_URL);
@@ -137,5 +133,7 @@ public class FacebookConnectUtil {
 			companyId, PropsKeys.FACEBOOK_CONNECT_AUTH_ENABLED,
 			PropsValues.FACEBOOK_CONNECT_AUTH_ENABLED);
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(FacebookConnectUtil.class);
 
 }

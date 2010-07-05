@@ -257,7 +257,7 @@ public class FacebookConnectAction extends PortletAction {
 			HttpSession session, long companyId, String token)
 		throws Exception {
 
-		JSONObject jsonObject = FacebookConnectUtil.getGraphResourcesAsJSON(
+		JSONObject jsonObject = FacebookConnectUtil.getGraphResources(
 			companyId, "/me", token, "id,email,verified");
 
 		if (Validator.isNotNull(jsonObject) &&
@@ -266,19 +266,18 @@ public class FacebookConnectAction extends PortletAction {
 			String facebookId = jsonObject.getString("id");
 
 			if (Validator.isNotNull(facebookId)) {
-				session.setAttribute(
-					WebKeys.FACEBOOK_USER_ID, facebookId);
+				session.setAttribute(WebKeys.FACEBOOK_USER_ID, facebookId);
 			}
 
-			String email = jsonObject.getString("email");
+			String emailAddress = jsonObject.getString("email");
 
-			if (Validator.isNotNull(email)) {
+			if (Validator.isNotNull(emailAddress)) {
 				try {
 					UserLocalServiceUtil.getUserByEmailAddress(
-						companyId, email);
+						companyId, emailAddress);
 
 					session.setAttribute(
-						WebKeys.FACEBOOK_USER_EMAIL_ADDRESS, email);
+						WebKeys.FACEBOOK_USER_EMAIL_ADDRESS, emailAddress);
 				}
 				catch (NoSuchUserException nsue) {
 					session.removeAttribute(
@@ -323,7 +322,7 @@ public class FacebookConnectAction extends PortletAction {
 			FacebookConnectUtil.getGraphURL(companyId) + "/me", "access_token",
 			token);
 
-		url = HttpUtil.addParameter(url, "fields", "id,email,verified");
+		url = HttpUtil.addParameter(url, "fields", "email,id,verified");
 
 		Http.Options options = new Http.Options();
 
@@ -341,10 +340,10 @@ public class FacebookConnectAction extends PortletAction {
 			return;
 		}
 
-		String facebookUserId = jsonObject.getString("id");
+		String facebookId = jsonObject.getString("id");
 
-		if (Validator.isNotNull(facebookUserId)) {
-			session.setAttribute(WebKeys.FACEBOOK_USER_ID, facebookUserId);
+		if (Validator.isNotNull(facebookId)) {
+			session.setAttribute(WebKeys.FACEBOOK_USER_ID, facebookId);
 		}
 
 		String emailAddress = jsonObject.getString("email");
