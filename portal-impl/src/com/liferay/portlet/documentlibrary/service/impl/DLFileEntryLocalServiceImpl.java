@@ -707,6 +707,7 @@ public class DLFileEntryLocalServiceImpl
 		newFileEntry.setModifiedDate(fileEntry.getModifiedDate());
 		newFileEntry.setFolderId(newFolderId);
 		newFileEntry.setName(name);
+		newFileEntry.setExtension(fileEntry.getExtension());
 		newFileEntry.setTitle(fileEntry.getTitle());
 		newFileEntry.setDescription(fileEntry.getDescription());
 		newFileEntry.setExtraSettings(fileEntry.getExtraSettings());
@@ -738,6 +739,11 @@ public class DLFileEntryLocalServiceImpl
 			newFileVersion.setCreateDate(fileVersion.getCreateDate());
 			newFileVersion.setFolderId(newFolderId);
 			newFileVersion.setName(name);
+			newFileVersion.setExtension(fileVersion.getExtension());
+			newFileVersion.setTitle(fileVersion.getTitle());
+			newFileVersion.setDescription(fileVersion.getDescription());
+			newFileVersion.setChangeLog(fileVersion.getChangeLog());
+			newFileVersion.setExtraSettings(fileVersion.getExtraSettings());
 			newFileVersion.setVersion(fileVersion.getVersion());
 			newFileVersion.setSize(fileVersion.getSize());
 			newFileVersion.setStatus(fileVersion.getStatus());
