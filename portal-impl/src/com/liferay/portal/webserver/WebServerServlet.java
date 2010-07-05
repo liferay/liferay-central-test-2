@@ -297,15 +297,15 @@ public class WebServerServlet extends HttpServlet {
 			}
 		}
 
-		InputStream is = DLFileEntryLocalServiceUtil.getFileAsStream(
-			user.getCompanyId(), user.getUserId(), groupId, folderId, name,
-			version);
-
 		DLFileVersion fileVersion =
 			DLFileVersionLocalServiceUtil.getFileVersion(
 				groupId, folderId, name, version);
 
 		fileName = fileVersion.getTitle();
+
+		InputStream is = DLFileEntryLocalServiceUtil.getFileAsStream(
+			user.getCompanyId(), user.getUserId(), groupId, folderId, name,
+			version);
 
 		boolean converted = false;
 
