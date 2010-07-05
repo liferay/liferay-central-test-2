@@ -3,19 +3,63 @@
 
 	var COMBO_PATH = Liferay.AUI.getComboPath();
 
+	var GROUPS = AUI.defaults.groups;
+
 	var JAVASCRIPT_PATH = themeDisplay.getPathJavaScript();
 
 	var LIFERAY_PATH = JAVASCRIPT_PATH + '/liferay/';
 
 	var MISC_PATH = JAVASCRIPT_PATH + '/misc/';
 
-	var GROUPS = AUI.defaults.groups;
+	var REGEX_DASH = /-/g;
+
+	var STR_UNDERSCORE = '_';
+
+	var createLiferayModules = function() {
+		var modules = {};
+
+		var moduleList = {
+			'asset-categories-selector': ['aui-tree','liferay-asset-tags-selector'],
+			'asset-tags-selector': ['aui-autocomplete', 'aui-dialog', 'aui-io-request', 'aui-live-search', 'aui-textboxlist', 'aui-form-textfield', 'datasource-cache', 'liferay-service-datasource', 'substitute'],
+			'auto-fields': ['aui-base','aui-data-set','aui-io-request','aui-parse-content','aui-sortable','base','liferay-undo-manager'],
+			'dockbar': ['aui-button-item','aui-io-plugin','aui-io-request','aui-overlay-context','aui-overlay-manager','node-focusmanager'],
+			'dynamic-select': ['aui-base'],
+			'hudcrumbs': ['aui-base','plugin'],
+			'input-move-boxes': ['aui-base','aui-toolbar'],
+			'layout': ['aui-io-request','aui-portal-layout','aui-resize','dd'],
+			'layout-configuration': ['aui-live-search','dd','liferay-layout'],
+			'look-and-feel': ['aui-color-picker','aui-dialog','aui-io-request','aui-tabs'],
+			'menu': ['aui-base','node-focusmanager','selector-css3'],
+			'navigation': ['aui-form-combobox','aui-io-request','aui-sortable','json-parse','node-event-simulate','overlay','selector-css3','substitute'],
+			'notice': ['aui-base'],
+			'panel': ['aui-base','aui-io-request'],
+			'panel-floating': ['aui-paginator','liferay-panel','selector-css3'],
+			'poller': ['aui-base','io','json'],
+			'portlet-url': ['aui-base','aui-io-request','querystring-stringify-simple'],
+			'search-container': ['aui-base','selector-css3'],
+			'session': ['aui-io','collection','cookie','liferay-notice','substitute'],
+			'service-datasource': ['aui-base', 'datasource-local'],
+			'undo-manager': ['aui-data-set','base','substitute'],
+			'upload': ['aui-base','aui-swf','collection','substitute','swfupload'],
+			'util-list-fields': ['aui-base']
+		};
+
+		for (var i in moduleList) {
+			modules['liferay-' + i] = {
+				path: i.replace(REGEX_DASH, STR_UNDERSCORE) + '.js',
+				requires: moduleList[i]
+			};
+		}
+
+		return modules;
+	};
 
 	GROUPS.liferay = {
 		base: LIFERAY_PATH,
 		root: LIFERAY_PATH,
 		combine: COMBINE,
 		comboBase: COMBO_PATH,
+		modules: createLiferayModules(),
 		patterns: {
 			'liferay-': {
 				configFn: function(config) {
@@ -24,7 +68,7 @@
 					var nameRE = new RegExp(config.name + '/liferay-([A-Za-z0-9-]+)-min(\.js)');
 
 					path = path.replace(nameRE, '$1$2');
-					path = path.replace(/-/g, '_');
+					path = path.replace(REGEX_DASH, STR_UNDERSCORE);
 
 					config.path = path;
 				}
