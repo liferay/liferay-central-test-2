@@ -159,8 +159,6 @@ if (workflowTask.getDueDate() != null) {
 
 <div class="aui-helper-hidden" id="<%= randomId %>updateAsigneeToMe">
 	<aui:input name="asigneeUserId" type="hidden" value="<%= user.getUserId() %>" />
-
-	<liferay-ui:message key="assign-to-me" />
 </div>
 
 <div class="aui-helper-hidden" id="<%= randomId %>updateDueDate">
@@ -172,7 +170,7 @@ if (workflowTask.getDueDate() != null) {
 </div>
 
 <aui:script use="aui-dialog">
-	var showPopup = function(url, content) {
+	var showPopup = function(url, content, title) {
 		var form = A.Node.create('<form />');
 
 		form.setAttribute('action', url);
@@ -209,7 +207,7 @@ if (workflowTask.getDueDate() != null) {
 				],
 				centered: true,
 				modal: true,
-				title: '<liferay-ui:message key="comments" />',
+				title: title,
 				width: 400
 			}
 		).render();
@@ -224,6 +222,7 @@ if (workflowTask.getDueDate() != null) {
 			event.preventDefault();
 
 			var content = null;
+			title = icon.text();
 
 			if (li.hasClass('task-due-date-link')) {
 				content = '#<%= randomId %>updateDueDate';
@@ -235,7 +234,7 @@ if (workflowTask.getDueDate() != null) {
 				content = '#<%= randomId %>updateAsignee';
 			}
 
-			showPopup(icon.attr('href'), A.one(content));
+			showPopup(icon.attr('href'), A.one(content), title);
 		}
 	);
 </aui:script>
