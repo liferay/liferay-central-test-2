@@ -16,11 +16,11 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.asset-column-details .asset-title .asset-actions img {
+.lfr-asset-column-details .lfr-asset-title .lfr-asset-actions img {
 	margin-left: 5px;
 }
 
-.asset-column-details .asset-actions {
+.lfr-asset-column-details .lfr-asset-actions {
 	float: right;
 	font-size: 11px;
 	font-weight: normal;
@@ -28,73 +28,84 @@
 	margin-top: 0;
 }
 
-.asset-column-details .task-activity {
+.lfr-asset-column-details .task-activity {
 	padding: 5px 5px 5px 25px;
 }
 
-.asset-column-details .task-activity-date {
+.lfr-asset-column-details .task-activity-date {
 	font-weight: bold;
 }
 
-.asset-column-details .asset-assigned, .asset-column-details .asset-due-date, .asset-column-details .task-type-1, .asset-column-details .task-type-2, .asset-column-details .task-type-3, .asset-column-details .asset-date, .asset-column-details .asset-status {
+.lfr-asset-column-details .lfr-asset-assigned, .lfr-asset-column-details .lfr-asset-due-date, .lfr-asset-column-details .task-type-1, .lfr-asset-column-details .task-type-2, .lfr-asset-column-details .task-type-3, .lfr-asset-column-details .lfr-asset-date, .lfr-asset-column-details .lfr-asset-status {
 	background: url() no-repeat 0 50%;
 }
 
-.asset-column-details .asset-assigned {
+.lfr-asset-column-details .lfr-asset-assigned {
 	background-image: url(<%= themeImagesPath %>/common/assign.png);
 	margin-right: 10px;
 	padding-left: 25px;
 	padding-right: 10px;
 }
 
-.asset-column-details h3.task-content-title {
+.lfr-asset-column-details h3.task-content-title {
 	margin-top: 0;
 	border-bottom: 1px solid #ddd;
 }
 
-.asset-column-details .task-panel-container .lfr-panel-content {
+.lfr-asset-column-details .task-panel-container .lfr-panel-content {
 	padding: 0.7em;
 }
 
-.asset-column-details .task-content-actions {
+.lfr-asset-column-details .task-content-actions {
 	float: right;
 }
 
-.asset-column-details .asset-date {
+.lfr-asset-column-details .lfr-asset-date {
 	background: url(<%= themeImagesPath %>/common/date.png) no-repeat 0 50%;
 }
 
-.asset-column-details .asset-due-date {
+.lfr-asset-column-details .lfr-asset-due-date {
 	background-image: url(<%= themeImagesPath %>/common/time.png);
 	padding-left: 25px;
 }
 
-.asset-column-details .task-type-1 {
+.lfr-asset-column-details .task-type-1 {
 	background-image: url(<%= themeImagesPath %>/common/assign.png);
 }
 
-.asset-column-details .task-type-2 {
+.lfr-asset-column-details .task-type-2 {
 	background-image: url(<%= themeImagesPath %>/common/time.png);
 }
 
-.asset-column-details .task-type-3 {
+.lfr-asset-column-details .task-type-3 {
 	background-image: url(<%= themeImagesPath %>/common/recent_changes.png);
 }
 
-.asset-column-details .asset-date {
+.lfr-asset-column-details .lfr-asset-date {
 	margin-right: 10px;
 	overflow: auto;
 	padding-left: 25px;
 	padding-right: 10px;
 }
 
-.asset-column-details .asset-status {
+.lfr-asset-column-details .lfr-asset-status {
 	background-image: url(<%= themeImagesPath %>/common/recent_changes.png);
 	padding-left: 25px;
 	padding-right: 10px;
 }
 
-.metadata-author {
+.lfr-asset-column-details .asset-metadata {
+	border-top: 1px solid #DDD;
+	background-color: #EFEFEF;
+	padding: 0.5em;
+	margin: 2em 0 0;
+}
+
+.lfr-asset-column-details .asset-metadata span {
+	display: inline;
+}
+
+.lfr-asset-column-details .metadata-author {
 	background: url(<%= themeImagesPath %>/portlet/edit_guest.png) no-repeat 0 0;
 	float: left;
 	font-weight: bold;
@@ -102,25 +113,36 @@
 	padding-left: 25px;
 }
 
-.metadata-entry {
+.lfr-asset-column-details .metadata-entry {
 	clear: both;
 	color: #999;
 	display: block;
 }
 
-.metadata-modified-date, .metadata-create-date, .metadata-publish-date, .metadata-expiration-date {
+.lfr-asset-column-details .metadata-modified-date, .lfr-asset-column-details .metadata-create-date, .lfr-asset-column-details .metadata-publish-date, .lfr-asset-column-details .metadata-expiration-date {
 	background: url(<%= themeImagesPath %>/common/date.png) no-repeat 0 0;
 	color: #999;
 	margin-bottom: 1em;
 	padding-left: 25px;
 }
 
-.metadata-priority {
+.lfr-asset-column-details .metadata-priority {
 	background: url(<%= themeImagesPath %>/common/top.png) no-repeat 0 20%;
 	margin-right: 10px;
 	padding-left: 25px;
 }
 
-.metadata-view-count {
+.lfr-asset-column-details .metadata-view-count {
 	margin-right: 10px;
+}
+
+.lfr-asset-column-details .vertical-separator {
+	border-right: 1px solid #CCC;
+	float: left;
+	margin: 0 10px;
+	padding: 7px 0;
+}
+
+#workflowTasksPanelContainer {
+	border-width: 0;
 }

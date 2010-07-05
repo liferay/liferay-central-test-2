@@ -68,10 +68,10 @@ if (assetEntry != null) {
 />
 
 <aui:layout>
-	<aui:column columnWidth="<%= 75 %>" cssClass="asset-column asset-column-details" first="<%= true %>">
+	<aui:column columnWidth="<%= 75 %>" cssClass="lfr-asset-column lfr-asset-column-details" first="<%= true %>">
 		<aui:layout>
 			<aui:column columnWidth="60">
-				<div class="asset-status">
+				<div class="lfr-asset-status">
 					<aui:field-wrapper label="state">
 						<%= LanguageUtil.get(pageContext, workflowInstance.getState()) %>
 					</aui:field-wrapper>
@@ -79,7 +79,7 @@ if (assetEntry != null) {
 			</aui:column>
 
 			<aui:column>
-				<div class="asset-date">
+				<div class="lfr-asset-date">
 					<aui:field-wrapper label="end-date">
 						<%= (workflowInstance.getEndDate() == null) ? LanguageUtil.get(pageContext, "never") : dateFormatDateTime.format(workflowInstance.getEndDate()) %>
 					</aui:field-wrapper>
@@ -330,15 +330,15 @@ if (assetEntry != null) {
 		</liferay-ui:panel-container>
 	</aui:column>
 
-	<aui:column columnWidth="<%= 25 %>" cssClass="asset-column asset-column-actions" last="<%= true %>">
-		<div class="asset-summary">
+	<aui:column columnWidth="<%= 25 %>" cssClass="lfr-asset-column lfr-asset-column-actions" last="<%= true %>">
+		<div class="lfr-asset-summary">
 			<liferay-ui:icon
-				cssClass="asset-avatar"
+				cssClass="lfr-asset-avatar"
 				image='../file_system/large/task'
 				message="download"
 			/>
 
-			<div class="asset-name">
+			<div class="lfr-asset-name">
 				<%= workflowInstance.getWorkflowDefinitionName() %>
 			</div>
 		</div>

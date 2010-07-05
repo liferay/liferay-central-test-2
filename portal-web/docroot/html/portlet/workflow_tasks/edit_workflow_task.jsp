@@ -78,12 +78,12 @@ if (assetEntry != null) {
 />
 
 <aui:layout>
-	<aui:column columnWidth="<%= 75 %>" cssClass="asset-column asset-column-details" first="<%= true %>">
+	<aui:column columnWidth="<%= 75 %>" cssClass="lfr-asset-column lfr-asset-column-details" first="<%= true %>">
 		<liferay-ui:error exception="<%= WorkflowTaskDueDateException.class %>" message="please-enter-a-valid-due-date" />
 
 		<aui:layout>
 			<aui:column columnWidth="60">
-				<div class="asset-assigned">
+				<div class="lfr-asset-assigned">
 					<aui:field-wrapper label="assigned-to">
 						<c:choose>
 							<c:when test="<%= workflowTask.isAssignedToSingleUser() %>">
@@ -125,7 +125,7 @@ if (assetEntry != null) {
 					</aui:field-wrapper>
 				</div>
 
-				<div class="asset-status">
+				<div class="lfr-asset-status">
 					<aui:field-wrapper label="state">
 						<%= LanguageUtil.get(pageContext, WorkflowInstanceLinkLocalServiceUtil.getState(companyId, groupId, className, classPK)) %>
 					</aui:field-wrapper>
@@ -133,13 +133,13 @@ if (assetEntry != null) {
 			</aui:column>
 
 			<aui:column>
-				<div class="asset-date">
+				<div class="lfr-asset-date">
 					<aui:field-wrapper label="create-date">
 						<%= dateFormatDateTime.format(workflowTask.getCreateDate()) %>
 					</aui:field-wrapper>
 				</div>
 
-				<div class="asset-due-date">
+				<div class="lfr-asset-due-date">
 					<aui:field-wrapper label="due-date">
 						<%= (workflowTask.getDueDate() == null) ? LanguageUtil.get(pageContext, "never") : dateFormatDateTime.format(workflowTask.getDueDate()) %>
 
@@ -159,7 +159,7 @@ if (assetEntry != null) {
 		</aui:layout>
 
 		<c:if test="<%= Validator.isNotNull(workflowTask.getDescription()) %>">
-			<div class="asset-field">
+			<div class="lfr-asset-field">
 				<aui:field-wrapper label="description">
 					<%= workflowTask.getDescription() %>
 				</aui:field-wrapper>
@@ -221,10 +221,6 @@ if (assetEntry != null) {
 
 					String[] metadataFields = new String[] {"author", "categories", "tags"};
 					%>
-
-					<h4>
-						<liferay-ui:message key="metadata" />
-					</h4>
 
 					<div class="asset-metadata">
 						<%@ include file="/html/portlet/asset_publisher/asset_metadata.jspf" %>
@@ -340,10 +336,10 @@ if (assetEntry != null) {
 		</liferay-ui:panel-container>
 	</aui:column>
 
-	<aui:column columnWidth="<%= 25 %>" cssClass="asset-column asset-column-actions" last="<%= true %>">
-		<div class="asset-summary">
+	<aui:column columnWidth="<%= 25 %>" cssClass="lfr-asset-column lfr-asset-column-actions" last="<%= true %>">
+		<div class="lfr-asset-summary">
 			<liferay-ui:icon
-				cssClass="asset-avatar"
+				cssClass="lfr-asset-avatar"
 				image='../file_system/large/task'
 				message="download"
 			/>
