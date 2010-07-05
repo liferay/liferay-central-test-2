@@ -29,10 +29,12 @@ PluginSetting pluginSetting = PluginSettingLocalServiceUtil.getPluginSetting(com
 boolean active = pluginSetting.isActive();
 String[] rolesArray = pluginSetting.getRolesArray();
 
+Portlet portlet = null;
+
 if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 	String portletId = pluginId;
 
-	Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletId);
+	portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletId);
 
 	active = portlet.isActive();
 	rolesArray = portlet.getRolesArray();
@@ -64,9 +66,84 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 
 		<aui:input disabled="<%= pluginId.equals(PortletKeys.ENTERPRISE_ADMIN) %>" inlineLabel="left" name="active" type="checkbox" value="<%= active %>" />
 
-		<c:if test="<%= !pluginType.equals(Plugin.TYPE_PORTLET) %>">
-			<aui:input cssClass="lfr-textarea-container" helpMessage="enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-plugin-to-a-page" name="roles" type="textarea" value='<%= StringUtil.merge(rolesArray, "\n") %>' />
-		</c:if>
+		<c:choose>
+			<c:when test="<%= pluginType.equals(Plugin.TYPE_PORTLET) %>">
+				<aui:field-wrapper label="permissions" helpMessage="edit-plugin-permissions-help">
+
+					<%
+					List curActions = ResourceActionsUtil.getResourceActions(portlet.getPortletId(), null);
+					List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), null, null, null, 0, maxNumberOfRolesChecked, new RoleRoleIdComparator(true));
+					int rolesCount = RoleLocalServiceUtil.searchCount(company.getCompanyId(), null, null, null);
+
+					List<Role> addToPageRoles;
+					List<Role> accessInControlPanelRoles;
+
+					if (curActions.contains(ActionKeys.ADD_TO_PAGE)) {
+						addToPageRoles = _filterRoles(roles, portlet.getPortletId(), ActionKeys.ADD_TO_PAGE);
+					}
+					else {
+						addToPageRoles = new ArrayList<Role>(0);
+					}
+
+					if (curActions.contains(ActionKeys.ACCESS_IN_CONTROL_PANEL)) {
+						accessInControlPanelRoles = _filterRoles(roles, portlet.getPortletId(), ActionKeys.ACCESS_IN_CONTROL_PANEL);
+					}
+					else {
+						accessInControlPanelRoles = new ArrayList<Role>(0);
+					}
+					%>
+
+					<c:if test="<%= rolesCount > maxNumberOfRolesChecked %>">
+						<div class="portlet-msg-alert">
+							<%= LanguageUtil.format(pageContext, "the-portal-has-more-roles-than-the-maximum-that-can-be-checked-x", maxNumberOfRolesChecked) %>
+						</div>
+					</c:if>
+
+					<c:if test="<%= !addToPageRoles.isEmpty() %>">
+						<liferay-ui:message key="the-users-with-the-following-roles-can-add-this-portlet-to-the-pages-they-manage" />:
+
+						<ul>
+
+							<%
+							for (Role curRole : addToPageRoles) {
+							%>
+
+									<li><%= curRole.getName() %></li>
+
+							<%
+							}
+							%>
+
+						</ul>
+					</c:if>
+
+					<c:if test="<%= !accessInControlPanelRoles.isEmpty() %>">
+						<liferay-ui:message key="the-users-with-the-following-roles-can-access-this-portlet-in-the-control-panel" />:
+
+						<ul>
+
+							<%
+							for (Role curRole : accessInControlPanelRoles) {
+							%>
+
+									<li><%= curRole.getName() %></li>
+
+							<%
+							}
+							%>
+
+						</ul>
+					</c:if>
+
+					<c:if test="<%= addToPageRoles.isEmpty() && accessInControlPanelRoles.isEmpty() %>">
+						<liferay-ui:message key="only-administrators-can-use-this-portlet" />
+					</c:if>
+				</aui:field-wrapper>
+			</c:when>
+			<c:otherwise>
+				<aui:input cssClass="lfr-textarea-container" helpMessage="enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-plugin-to-a-page" name="roles" type="textarea" value='<%= StringUtil.merge(rolesArray, "\n") %>' />
+			</c:otherwise>
+		</c:choose>
 	</aui:fieldset>
 
 	<aui:button-row>
@@ -75,3 +152,28 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
+
+<%!
+private List<Role> _filterRoles(List<Role> roles, String portletId, String actionId) throws Exception {
+	List<Role> filteredRoles = new ArrayList<Role>(0);
+	for (Role curRole : roles) {
+		if ((curRole.getType() == RoleConstants.TYPE_REGULAR) && _hasPermission(curRole, actionId, portletId, ResourceConstants.SCOPE_COMPANY) || _hasPermission(curRole, actionId, portletId, ResourceConstants.SCOPE_GROUP)) {
+			filteredRoles.add(curRole);
+		}
+		else if (_hasPermission(curRole, actionId, portletId, ResourceConstants.SCOPE_GROUP_TEMPLATE)) {
+			filteredRoles.add(curRole);
+		}
+	}
+
+	return filteredRoles;
+}
+
+private boolean _hasPermission(Role role, String actionId, String resourceName, Integer scope) throws Exception {
+	if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+		return ResourcePermissionLocalServiceUtil.hasScopeResourcePermission(role.getCompanyId(), resourceName, scope, role.getRoleId(), actionId);
+	}
+	else {
+		return PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), role.getCompanyId(), resourceName, scope, actionId);
+	}
+}
+%>
