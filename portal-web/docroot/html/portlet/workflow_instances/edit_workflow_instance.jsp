@@ -137,6 +137,16 @@ if (assetEntry != null) {
 							<liferay-util:include page="<%= path %>" portletId="<%= assetRendererFactory.getPortletId() %>" />
 						</c:otherwise>
 					</c:choose>
+
+					<%
+					String selectionStyle = "manual";
+
+					String[] metadataFields = new String[] {"author", "categories", "tags"};
+					%>
+
+					<div class="asset-metadata">
+						<%@ include file="/html/portlet/asset_publisher/asset_metadata.jspf" %>
+					</div>
 				</liferay-ui:panel>
 			</c:if>
 
