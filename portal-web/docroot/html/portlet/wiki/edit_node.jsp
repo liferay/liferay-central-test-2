@@ -43,14 +43,6 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 
 	<aui:model-context bean="<%= node %>" model="<%= WikiNode.class %>" />
 
-	<div class="breadcrumbs">
-		<portlet:renderURL var="viewNodesURL" />
-
-		<span class="first"><aui:a href="<%= viewNodesURL %>" label="nodes" /></span> &raquo;
-
-		<span class="last"><liferay-ui:message key='<%= ((node == null) ? Constants.ADD : Constants.UPDATE) + "-wiki" %>' /></span>
-	</div>
-
 	<aui:fieldset>
 		<aui:input name="name" />
 
@@ -82,3 +74,7 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 	</c:if>
 </aui:script>
+
+<%
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, ((node == null) ? Constants.ADD : Constants.UPDATE) + "-wiki"), currentURL);
+%>
