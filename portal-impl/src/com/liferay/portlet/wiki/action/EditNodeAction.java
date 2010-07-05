@@ -96,7 +96,11 @@ public class EditNodeAction extends PortletAction {
 		throws Exception {
 
 		try {
-			ActionUtil.getNode(renderRequest);
+			long nodeId = ParamUtil.getLong(renderRequest, "nodeId");
+
+			if (nodeId > 0) {
+				ActionUtil.getNode(renderRequest);
+			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchNodeException ||
