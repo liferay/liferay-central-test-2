@@ -107,10 +107,10 @@
 
 .lfr-asset-column-details .metadata-author {
 	background: url(<%= themeImagesPath %>/portlet/edit_guest.png) no-repeat 0 0;
-	float: left;
 	font-weight: bold;
 	margin-right: 10px;
 	padding-left: 25px;
+	padding-bottom: 5px;
 }
 
 .lfr-asset-column-details .metadata-entry {
@@ -138,9 +138,8 @@
 
 .lfr-asset-column-details .vertical-separator {
 	border-right: 1px solid #CCC;
-	float: left;
 	margin: 0 10px;
-	padding: 7px 0;
+	padding-top: 0.1em;
 }
 
 #workflowTasksPanelContainer {
