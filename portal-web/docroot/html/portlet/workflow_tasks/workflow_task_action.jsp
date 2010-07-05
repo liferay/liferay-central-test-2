@@ -222,7 +222,6 @@ if (workflowTask.getDueDate() != null) {
 			event.preventDefault();
 
 			var content = null;
-			title = icon.text();
 
 			if (li.hasClass('task-due-date-link')) {
 				content = '#<%= randomId %>updateDueDate';
@@ -233,6 +232,8 @@ if (workflowTask.getDueDate() != null) {
 			else if (li.hasClass('task-assign-link')) {
 				content = '#<%= randomId %>updateAsignee';
 			}
+
+			title = icon.text();
 
 			showPopup(icon.attr('href'), A.one(content), title);
 		}
