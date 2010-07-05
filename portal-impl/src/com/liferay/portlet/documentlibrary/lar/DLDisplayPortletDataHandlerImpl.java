@@ -16,7 +16,6 @@ package com.liferay.portlet.documentlibrary.lar;
 
 import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
-import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -43,80 +42,6 @@ import javax.portlet.PortletPreferences;
  */
 public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 
-	public PortletPreferences deleteData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
-		throws PortletDataException {
-
-		try {
-			preferences.setValue("rootFolderId", StringPool.BLANK);
-			preferences.setValue("showBreadcrumbs", StringPool.BLANK);
-			preferences.setValue("showFoldersSearch", StringPool.BLANK);
-			preferences.setValue("showSubfolders", StringPool.BLANK);
-			preferences.setValue("foldersPerPage", StringPool.BLANK);
-			preferences.setValue("folderColumns", StringPool.BLANK);
-			preferences.setValue("showFileEntriesSearch", StringPool.BLANK);
-			preferences.setValue("fileEntriesPerPage", StringPool.BLANK);
-			preferences.setValue("fileEntryColumns", StringPool.BLANK);
-			preferences.setValue("enable-comment-ratings", StringPool.BLANK);
-
-			return preferences;
-		}
-		catch (Exception e) {
-			throw new PortletDataException(e);
-		}
-	}
-
-	public String exportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
-		throws PortletDataException {
-
-		try {
-			context.addPermissions(
-				"com.liferay.portlet.documentlibrary",
-				context.getScopeGroupId());
-
-			long rootFolderId = GetterUtil.getLong(
-				preferences.getValue("rootFolderId", null));
-
-			Document doc = SAXReaderUtil.createDocument();
-
-			Element root = doc.addElement("documentlibrary-display-data");
-
-			Element foldersEl = root.addElement("folders");
-			Element fileEntriesEl = root.addElement("file-entries");
-			Element fileShortcutsEl = root.addElement("file-shortcuts");
-			Element fileRanksEl = root.addElement("file-ranks");
-
-			if (rootFolderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-				List<DLFolder> folders = DLFolderUtil.findByGroupId(
-					context.getScopeGroupId());
-
-				for (DLFolder folder : folders) {
-					DLPortletDataHandlerImpl.exportFolder(
-						context, foldersEl, fileEntriesEl, fileShortcutsEl,
-						fileRanksEl, folder);
-				}
-			}
-			else {
-				DLFolder folder = DLFolderUtil.findByPrimaryKey(rootFolderId);
-
-				root.addAttribute(
-					"root-folder-id", String.valueOf(folder.getFolderId()));
-
-				DLPortletDataHandlerImpl.exportFolder(
-					context, foldersEl, fileEntriesEl, fileShortcutsEl,
-					fileRanksEl, folder);
-			}
-
-			return doc.formattedString();
-		}
-		catch (Exception e) {
-			throw new PortletDataException(e);
-		}
-	}
-
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
 			_foldersAndDocuments, _shortcuts, _ranks, _comments, _ratings, _tags
@@ -129,74 +54,136 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		};
 	}
 
-	public PortletPreferences importData(
+	protected PortletPreferences doDeleteData(
+			PortletDataContext context, String portletId,
+			PortletPreferences preferences)
+		throws Exception {
+
+		preferences.setValue("rootFolderId", StringPool.BLANK);
+		preferences.setValue("showBreadcrumbs", StringPool.BLANK);
+		preferences.setValue("showFoldersSearch", StringPool.BLANK);
+		preferences.setValue("showSubfolders", StringPool.BLANK);
+		preferences.setValue("foldersPerPage", StringPool.BLANK);
+		preferences.setValue("folderColumns", StringPool.BLANK);
+		preferences.setValue("showFileEntriesSearch", StringPool.BLANK);
+		preferences.setValue("fileEntriesPerPage", StringPool.BLANK);
+		preferences.setValue("fileEntryColumns", StringPool.BLANK);
+		preferences.setValue("enable-comment-ratings", StringPool.BLANK);
+
+		return preferences;
+	}
+
+	protected String doExportData(
+			PortletDataContext context, String portletId,
+			PortletPreferences preferences)
+		throws Exception {
+
+		context.addPermissions(
+			"com.liferay.portlet.documentlibrary", context.getScopeGroupId());
+
+		long rootFolderId = GetterUtil.getLong(
+			preferences.getValue("rootFolderId", null));
+
+		Document document = SAXReaderUtil.createDocument();
+
+		Element rootElement = document.addElement(
+			"documentlibrary-display-data");
+
+		Element foldersElement = rootElement.addElement("folders");
+		Element fileEntriesElement = rootElement.addElement("file-entries");
+		Element fileShortcutsElement = rootElement.addElement("file-shortcuts");
+		Element fileRanksElement = rootElement.addElement("file-ranks");
+
+		if (rootFolderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			List<DLFolder> folders = DLFolderUtil.findByGroupId(
+				context.getScopeGroupId());
+
+			for (DLFolder folder : folders) {
+				DLPortletDataHandlerImpl.exportFolder(
+					context, foldersElement, fileEntriesElement,
+					fileShortcutsElement, fileRanksElement, folder);
+			}
+		}
+		else {
+			DLFolder folder = DLFolderUtil.findByPrimaryKey(rootFolderId);
+
+			rootElement.addAttribute(
+				"root-folder-id", String.valueOf(folder.getFolderId()));
+
+			DLPortletDataHandlerImpl.exportFolder(
+				context, foldersElement, fileEntriesElement,
+				fileShortcutsElement, fileRanksElement, folder);
+		}
+
+		return document.formattedString();
+	}
+
+	protected PortletPreferences doImportData(
 			PortletDataContext context, String portletId,
 			PortletPreferences preferences, String data)
-		throws PortletDataException {
+		throws Exception {
 
-		try {
-			context.importPermissions(
-				"com.liferay.portlet.documentlibrary",
-				context.getSourceGroupId(), context.getScopeGroupId());
+		context.importPermissions(
+			"com.liferay.portlet.documentlibrary",
+			context.getSourceGroupId(), context.getScopeGroupId());
 
-			Document doc = SAXReaderUtil.read(data);
+		Document document = SAXReaderUtil.read(data);
 
-			Element root = doc.getRootElement();
+		Element rootElement = document.getRootElement();
 
-			List<Element> folderEls = root.element("folders").elements(
-				"folder");
+		Element foldersElement = rootElement.element("folders");
 
-			for (Element folderEl : folderEls) {
-				DLPortletDataHandlerImpl.importFolder(context, folderEl);
-			}
+		List<Element> folderElements = foldersElement.elements("folder");
 
-			List<Element> fileEntryEls = root.element("file-entries").elements(
-				"file-entry");
-
-			for (Element fileEntryEl : fileEntryEls) {
-				DLPortletDataHandlerImpl.importFileEntry(context, fileEntryEl);
-			}
-
-			if (context.getBooleanParameter(_NAMESPACE, "shortcuts")) {
-				List<Element> fileShortcutEls = root.element(
-					"file-shortcuts").elements("file-shortcut");
-
-				for (Element fileShortcutEl : fileShortcutEls) {
-					DLPortletDataHandlerImpl.importFileShortcut(
-						context, fileShortcutEl);
-				}
-			}
-
-			if (context.getBooleanParameter(_NAMESPACE, "ranks")) {
-				List<Element> fileRankEls = root.element("file-ranks").elements(
-					"file-rank");
-
-				for (Element fileRankEl : fileRankEls) {
-					DLPortletDataHandlerImpl.importFileRank(
-						context, fileRankEl);
-				}
-			}
-
-			long rootFolderId = GetterUtil.getLong(
-				root.attributeValue("root-folder-id"));
-
-			if (Validator.isNotNull(rootFolderId)) {
-				Map<Long, Long> folderPKs =
-					(Map<Long, Long>)context.getNewPrimaryKeysMap(
-						DLFolder.class);
-
-				rootFolderId = MapUtil.getLong(
-					folderPKs, rootFolderId, rootFolderId);
-
-				preferences.setValue(
-					"rootFolderId", String.valueOf(rootFolderId));
-			}
-
-			return preferences;
+		for (Element folderElement : folderElements) {
+			DLPortletDataHandlerImpl.importFolder(context, folderElement);
 		}
-		catch (Exception e) {
-			throw new PortletDataException(e);
+
+		Element fileEntriesElement = rootElement.element("file-entries");
+
+		List<Element> fileEntryElements = fileEntriesElement.elements(
+			"file-entry");
+
+		for (Element fileEntryElement : fileEntryElements) {
+			DLPortletDataHandlerImpl.importFileEntry(context, fileEntryElement);
 		}
+
+		if (context.getBooleanParameter(_NAMESPACE, "shortcuts")) {
+			List<Element> fileShortcutElements = rootElement.element(
+				"file-shortcuts").elements("file-shortcut");
+
+			for (Element fileShortcutElement : fileShortcutElements) {
+				DLPortletDataHandlerImpl.importFileShortcut(
+					context, fileShortcutElement);
+			}
+		}
+
+		if (context.getBooleanParameter(_NAMESPACE, "ranks")) {
+			Element fileRanksElement = rootElement.element("file-ranks");
+
+			List<Element> fileRankElements = fileRanksElement.elements(
+				"file-rank");
+
+			for (Element fileRankElement : fileRankElements) {
+				DLPortletDataHandlerImpl.importFileRank(
+					context, fileRankElement);
+			}
+		}
+
+		long rootFolderId = GetterUtil.getLong(
+			rootElement.attributeValue("root-folder-id"));
+
+		if (Validator.isNotNull(rootFolderId)) {
+			Map<Long, Long> folderPKs =
+				(Map<Long, Long>)context.getNewPrimaryKeysMap(DLFolder.class);
+
+			rootFolderId = MapUtil.getLong(
+				folderPKs, rootFolderId, rootFolderId);
+
+			preferences.setValue("rootFolderId", String.valueOf(rootFolderId));
+		}
+
+		return preferences;
 	}
 
 	private static final String _NAMESPACE = "document_library";

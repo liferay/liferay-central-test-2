@@ -66,15 +66,13 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
-			_categoriesAndMessages, _attachments, _messageFlags, _ratings,
-			_tags, _userBans
+			_categoriesAndMessages, _messageFlags, _userBans, _ratings, _tags
 		};
 	}
 
 	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {
-			_categoriesAndMessages, _attachments, _messageFlags, _ratings,
-			_tags, _userBans
+			_categoriesAndMessages, _messageFlags, _userBans, _ratings, _tags
 		};
 	}
 
@@ -788,9 +786,6 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static Log _log = LogFactoryUtil.getLog(
 		MBPortletDataHandlerImpl.class);
-
-	private static PortletDataHandlerBoolean _attachments =
-		new PortletDataHandlerBoolean(_NAMESPACE, "attachments");
 
 	private static PortletDataHandlerBoolean _categoriesAndMessages =
 		new PortletDataHandlerBoolean(

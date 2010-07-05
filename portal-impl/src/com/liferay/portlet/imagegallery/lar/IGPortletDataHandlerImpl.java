@@ -253,7 +253,6 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws Exception {
 
 		long userId = context.getUserId(image.getUserUuid());
-		long groupId = context.getScopeGroupId();
 
 		Map<Long, Long> folderPKs =
 			(Map<Long, Long>)context.getNewPrimaryKeysMap(IGFolder.class);
@@ -318,21 +317,22 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		if (context.isDataStrategyMirror()) {
 			IGImage existingImage = IGImageUtil.fetchByUUID_G(
-				image.getUuid(), groupId);
+				image.getUuid(), context.getScopeGroupId());
 
 			if (existingImage == null) {
 				serviceContext.setUuid(image.getUuid());
 
 				importedImage = IGImageLocalServiceUtil.addImage(
-					userId, groupId, folderId, image.getName(),
-					image.getDescription(), imageFile, image.getImageType(),
-					serviceContext);
+					userId, context.getScopeGroupId(), folderId,
+					image.getName(), image.getDescription(), imageFile,
+					image.getImageType(), serviceContext);
 			}
 			else {
 				importedImage = IGImageLocalServiceUtil.updateImage(
-					userId, existingImage.getImageId(), groupId, folderId,
-					image.getName(), image.getDescription(), imageFile,
-					image.getImageType(), serviceContext);
+					userId, existingImage.getImageId(),
+					context.getScopeGroupId(), folderId, image.getName(),
+					image.getDescription(), imageFile, image.getImageType(),
+					serviceContext);
 			}
 		}
 		else {
@@ -340,8 +340,9 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			try {
 				importedImage = IGImageLocalServiceUtil.addImage(
-					userId, groupId, folderId, name, image.getDescription(),
-					imageFile, image.getImageType(), serviceContext);
+					userId, context.getScopeGroupId(), folderId, name,
+					image.getDescription(), imageFile, image.getImageType(),
+					serviceContext);
 			}
 			catch (DuplicateImageNameException dine) {
 				String[] nameParts = name.split("\\.", 2);
@@ -353,8 +354,9 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 				}
 
 				importedImage = IGImageLocalServiceUtil.addImage(
-					userId, groupId, folderId, name, image.getDescription(),
-					imageFile, image.getImageType(), serviceContext);
+					userId, context.getScopeGroupId(), folderId, name,
+					image.getDescription(), imageFile, image.getImageType(),
+					serviceContext);
 			}
 		}
 
