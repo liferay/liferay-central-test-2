@@ -974,7 +974,14 @@ public class DLFileEntryLocalServiceImpl
 
 		DLFileVersion fileVersion = null;
 
-		String extension = FileUtil.getExtension(sourceFileName);
+		String extension = null;
+
+		if (Validator.isNotNull(sourceFileName)) {
+			extension = FileUtil.getExtension(sourceFileName);
+		}
+		else {
+			extension = fileEntry.getExtension();
+		}
 
 		try {
 			DLFileVersion latestFileVersion =
