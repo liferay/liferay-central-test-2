@@ -16,7 +16,6 @@ package com.liferay.portlet.journal.lar;
 
 import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
-import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.log.Log;
@@ -80,117 +79,6 @@ import javax.portlet.PortletPreferences;
 public class JournalContentPortletDataHandlerImpl
 	extends BasePortletDataHandler {
 
-	public PortletPreferences deleteData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
-		throws PortletDataException {
-
-		try {
-			preferences.setValue("group-id", StringPool.BLANK);
-			preferences.setValue("article-id", StringPool.BLANK);
-
-			return preferences;
-		}
-		catch (Exception e) {
-			throw new PortletDataException(e);
-		}
-	}
-
-	public String exportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
-		throws PortletDataException {
-
-		try {
-			context.addPermissions(
-				"com.liferay.portlet.journal", context.getScopeGroupId());
-
-			String articleId = preferences.getValue("article-id", null);
-
-			if (articleId == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"No article id found in preferences of portlet " +
-							portletId);
-				}
-
-				return StringPool.BLANK;
-			}
-
-			long articleGroupId = GetterUtil.getLong(
-				preferences.getValue("group-id", StringPool.BLANK));
-
-			if (articleGroupId <= 0) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"No group id found in preferences of portlet " +
-							portletId);
-				}
-
-				return StringPool.BLANK;
-			}
-
-			JournalArticle article = null;
-
-			try {
-				article = JournalArticleLocalServiceUtil.getLatestArticle(
-					articleGroupId, articleId,
-					WorkflowConstants.STATUS_APPROVED);
-			}
-			catch (NoSuchArticleException nsae) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"No approved article found with group id " +
-							articleGroupId + " and article id " + articleId);
-				}
-			}
-
-			if (article == null) {
-				return StringPool.BLANK;
-			}
-
-			Document doc = SAXReaderUtil.createDocument();
-
-			Element root = doc.addElement("journal-content-data");
-
-			Element dlFoldersEl = root.addElement("dl-folders");
-			Element dlFilesEl = root.addElement("dl-file-entries");
-			Element dlFileRanksEl = root.addElement("dl-file-ranks");
-			Element igFoldersEl = root.addElement("ig-folders");
-			Element igImagesEl = root.addElement("ig-images");
-
-			JournalPortletDataHandlerImpl.exportArticle(
-				context, root, dlFoldersEl, dlFilesEl, dlFileRanksEl,
-				igFoldersEl, igImagesEl, article);
-
-			String structureId = article.getStructureId();
-
-			if (Validator.isNotNull(structureId)) {
-				JournalStructure structure = JournalStructureUtil.findByG_S(
-					article.getGroupId(), structureId);
-
-				JournalPortletDataHandlerImpl.exportStructure(
-					context, root, structure);
-			}
-
-			String templateId = article.getTemplateId();
-
-			if (Validator.isNotNull(templateId)) {
-				JournalTemplate template = JournalTemplateUtil.findByG_T(
-					article.getGroupId(), templateId);
-
-				JournalPortletDataHandlerImpl.exportTemplate(
-					context, root, dlFoldersEl, dlFilesEl, dlFileRanksEl,
-					igFoldersEl, igImagesEl, template);
-			}
-
-			return doc.formattedString();
-		}
-		catch (Exception e) {
-			throw new PortletDataException(e);
-		}
-	}
-
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
 			_selectedArticles, _embeddedAssets, _images, _comments, _ratings,
@@ -204,144 +92,235 @@ public class JournalContentPortletDataHandlerImpl
 		};
 	}
 
-	public PortletPreferences importData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences, String data)
-		throws PortletDataException {
-
-		try {
-			context.importPermissions(
-				"com.liferay.portlet.journal", context.getSourceGroupId(),
-				context.getScopeGroupId());
-
-			if (Validator.isNull(data)) {
-				return null;
-			}
-
-			Document doc = SAXReaderUtil.read(data);
-
-			Element root = doc.getRootElement();
-
-			Element dlFoldersEl = root.element("dl-folders");
-
-			List<Element> dlFolderEls = Collections.EMPTY_LIST;
-
-			if (dlFoldersEl != null) {
-				dlFolderEls = dlFoldersEl.elements("folder");
-			}
-
-			for (Element folderEl : dlFolderEls) {
-				DLPortletDataHandlerImpl.importFolder(context, folderEl);
-			}
-
-			Element dlFileEntriesEl = root.element("dl-file-entries");
-
-			List<Element> dlFileEntryEls = Collections.EMPTY_LIST;
-
-			if (dlFileEntriesEl != null) {
-				dlFileEntryEls = dlFileEntriesEl.elements("file-entry");
-			}
-
-			for (Element fileEntryEl : dlFileEntryEls) {
-				DLPortletDataHandlerImpl.importFileEntry(context, fileEntryEl);
-			}
-
-			Element dlFileRanksEl = root.element("dl-file-ranks");
-
-			List<Element> dlFileRankEls = Collections.EMPTY_LIST;
-
-			if (dlFileRanksEl != null) {
-				dlFileRankEls = dlFileRanksEl.elements("file-rank");
-			}
-
-			for (Element fileRankEl : dlFileRankEls) {
-				DLPortletDataHandlerImpl.importFileRank(context, fileRankEl);
-			}
-
-			Element igFoldersEl = root.element("ig-folders");
-
-			List<Element> igFolderEls = Collections.EMPTY_LIST;
-
-			if (igFoldersEl != null) {
-				igFolderEls = igFoldersEl.elements("folder");
-			}
-
-			for (Element folderEl : igFolderEls) {
-				IGPortletDataHandlerImpl.importFolder(context, folderEl);
-			}
-
-			Element igImagesEl = root.element("ig-images");
-
-			List<Element> igImageEls = Collections.EMPTY_LIST;
-
-			if (igImagesEl != null) {
-				igImageEls = igImagesEl.elements("image");
-			}
-
-			for (Element imageEl : igImageEls) {
-				IGPortletDataHandlerImpl.importImage(context, imageEl);
-			}
-
-			Element structureEl = root.element("structure");
-
-			if (structureEl != null) {
-				JournalPortletDataHandlerImpl.importStructure(
-					context, structureEl);
-			}
-
-			Element templateEl = root.element("template");
-
-			if (templateEl != null) {
-				JournalPortletDataHandlerImpl.importTemplate(
-					context, templateEl);
-			}
-
-			Element articleEl = root.element("article");
-
-			if (articleEl != null) {
-				JournalPortletDataHandlerImpl.importArticle(
-					context, articleEl);
-			}
-
-			String articleId = preferences.getValue(
-				"article-id", StringPool.BLANK);
-
-			if (Validator.isNotNull(articleId)) {
-				Map<String, String> articleIds =
-					(Map<String, String>)context.getNewPrimaryKeysMap(
-						JournalArticle.class);
-
-				articleId = MapUtil.getString(articleIds, articleId, articleId);
-
-				preferences.setValue(
-					"group-id", String.valueOf(context.getScopeGroupId()));
-				preferences.setValue("article-id", articleId);
-
-				Layout layout = LayoutLocalServiceUtil.getLayout(
-					context.getPlid());
-
-				JournalContentSearchLocalServiceUtil.updateContentSearch(
-					context.getScopeGroupId(), layout.isPrivateLayout(),
-					layout.getLayoutId(), portletId, articleId, true);
-			}
-
-			return preferences;
-		}
-		catch (Exception e) {
-			throw new PortletDataException(e);
-		}
-	}
-
 	public boolean isPublishToLiveByDefault() {
 		return 	_PUBLISH_TO_LIVE_BY_DEFAULT;
 	}
 
-	private static final boolean _PUBLISH_TO_LIVE_BY_DEFAULT = true;
+	protected PortletPreferences doDeleteData(
+			PortletDataContext context, String portletId,
+			PortletPreferences preferences)
+		throws Exception {
+
+		preferences.setValue("group-id", StringPool.BLANK);
+		preferences.setValue("article-id", StringPool.BLANK);
+
+		return preferences;
+	}
+
+	protected String doExportData(
+			PortletDataContext context, String portletId,
+			PortletPreferences preferences)
+		throws Exception {
+
+		context.addPermissions(
+			"com.liferay.portlet.journal", context.getScopeGroupId());
+
+		String articleId = preferences.getValue("article-id", null);
+
+		if (articleId == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"No article id found in preferences of portlet " +
+						portletId);
+			}
+
+			return StringPool.BLANK;
+		}
+
+		long articleGroupId = GetterUtil.getLong(
+			preferences.getValue("group-id", StringPool.BLANK));
+
+		if (articleGroupId <= 0) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"No group id found in preferences of portlet " + portletId);
+			}
+
+			return StringPool.BLANK;
+		}
+
+		JournalArticle article = null;
+
+		try {
+			article = JournalArticleLocalServiceUtil.getLatestArticle(
+				articleGroupId, articleId, WorkflowConstants.STATUS_APPROVED);
+		}
+		catch (NoSuchArticleException nsae) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"No approved article found with group id " +
+						articleGroupId + " and article id " + articleId);
+			}
+		}
+
+		if (article == null) {
+			return StringPool.BLANK;
+		}
+
+		Document document = SAXReaderUtil.createDocument();
+
+		Element rootElement = document.addElement("journal-content-data");
+
+		Element dlFoldersElement = rootElement.addElement("dl-folders");
+		Element dlFilesElement = rootElement.addElement("dl-file-entries");
+		Element dlFileRanksElement = rootElement.addElement("dl-file-ranks");
+		Element igFoldersElement = rootElement.addElement("ig-folders");
+		Element igImagesElement = rootElement.addElement("ig-images");
+
+		JournalPortletDataHandlerImpl.exportArticle(
+			context, rootElement, dlFoldersElement, dlFilesElement,
+			dlFileRanksElement, igFoldersElement, igImagesElement, article);
+
+		String structureId = article.getStructureId();
+
+		if (Validator.isNotNull(structureId)) {
+			JournalStructure structure = JournalStructureUtil.findByG_S(
+				article.getGroupId(), structureId);
+
+			JournalPortletDataHandlerImpl.exportStructure(
+				context, rootElement, structure);
+		}
+
+		String templateId = article.getTemplateId();
+
+		if (Validator.isNotNull(templateId)) {
+			JournalTemplate template = JournalTemplateUtil.findByG_T(
+				article.getGroupId(), templateId);
+
+			JournalPortletDataHandlerImpl.exportTemplate(
+				context, rootElement, dlFoldersElement, dlFilesElement,
+				dlFileRanksElement, igFoldersElement, igImagesElement,
+				template);
+		}
+
+		return document.formattedString();
+	}
+
+	protected PortletPreferences doImportData(
+			PortletDataContext context, String portletId,
+			PortletPreferences preferences, String data)
+		throws Exception {
+
+		context.importPermissions(
+			"com.liferay.portlet.journal", context.getSourceGroupId(),
+			context.getScopeGroupId());
+
+		if (Validator.isNull(data)) {
+			return null;
+		}
+
+		Document document = SAXReaderUtil.read(data);
+
+		Element rootElement = document.getRootElement();
+
+		Element dlFoldersElement = rootElement.element("dl-folders");
+
+		List<Element> dlFolderElements = Collections.EMPTY_LIST;
+
+		if (dlFoldersElement != null) {
+			dlFolderElements = dlFoldersElement.elements("folder");
+		}
+
+		for (Element folderElement : dlFolderElements) {
+			DLPortletDataHandlerImpl.importFolder(context, folderElement);
+		}
+
+		Element dlFileEntriesElement = rootElement.element("dl-file-entries");
+
+		List<Element> dlFileEntryElements = Collections.EMPTY_LIST;
+
+		if (dlFileEntriesElement != null) {
+			dlFileEntryElements = dlFileEntriesElement.elements("file-entry");
+		}
+
+		for (Element fileEntryElement : dlFileEntryElements) {
+			DLPortletDataHandlerImpl.importFileEntry(context, fileEntryElement);
+		}
+
+		Element dlFileRanksElement = rootElement.element("dl-file-ranks");
+
+		List<Element> dlFileRankElements = Collections.EMPTY_LIST;
+
+		if (dlFileRanksElement != null) {
+			dlFileRankElements = dlFileRanksElement.elements("file-rank");
+		}
+
+		for (Element fileRankElement : dlFileRankElements) {
+			DLPortletDataHandlerImpl.importFileRank(context, fileRankElement);
+		}
+
+		Element igFoldersElement = rootElement.element("ig-folders");
+
+		List<Element> igFolderElements = Collections.EMPTY_LIST;
+
+		if (igFoldersElement != null) {
+			igFolderElements = igFoldersElement.elements("folder");
+		}
+
+		for (Element folderElement : igFolderElements) {
+			IGPortletDataHandlerImpl.importFolder(context, folderElement);
+		}
+
+		Element igImagesElement = rootElement.element("ig-images");
+
+		List<Element> igImageElements = Collections.EMPTY_LIST;
+
+		if (igImagesElement != null) {
+			igImageElements = igImagesElement.elements("image");
+		}
+
+		for (Element imageElement : igImageElements) {
+			IGPortletDataHandlerImpl.importImage(context, imageElement);
+		}
+
+		Element structureElement = rootElement.element("structure");
+
+		if (structureElement != null) {
+			JournalPortletDataHandlerImpl.importStructure(
+				context, structureElement);
+		}
+
+		Element templateElement = rootElement.element("template");
+
+		if (templateElement != null) {
+			JournalPortletDataHandlerImpl.importTemplate(
+				context, templateElement);
+		}
+
+		Element articleElement = rootElement.element("article");
+
+		if (articleElement != null) {
+			JournalPortletDataHandlerImpl.importArticle(
+				context, articleElement);
+		}
+
+		String articleId = preferences.getValue("article-id", StringPool.BLANK);
+
+		if (Validator.isNotNull(articleId)) {
+			Map<String, String> articleIds =
+				(Map<String, String>)context.getNewPrimaryKeysMap(
+					JournalArticle.class);
+
+			articleId = MapUtil.getString(articleIds, articleId, articleId);
+
+			preferences.setValue(
+				"group-id", String.valueOf(context.getScopeGroupId()));
+			preferences.setValue("article-id", articleId);
+
+			Layout layout = LayoutLocalServiceUtil.getLayout(
+				context.getPlid());
+
+			JournalContentSearchLocalServiceUtil.updateContentSearch(
+				context.getScopeGroupId(), layout.isPrivateLayout(),
+				layout.getLayoutId(), portletId, articleId, true);
+		}
+
+		return preferences;
+	}
 
 	private static final String _NAMESPACE = "journal";
 
-	private static Log _log = LogFactoryUtil.getLog(
-		JournalContentPortletDataHandlerImpl.class);
+	private static final boolean _PUBLISH_TO_LIVE_BY_DEFAULT = true;
 
 	private static PortletDataHandlerBoolean _comments =
 		new PortletDataHandlerBoolean(_NAMESPACE, "comments");
@@ -351,6 +330,9 @@ public class JournalContentPortletDataHandlerImpl
 
 	private static PortletDataHandlerBoolean _images =
 		new PortletDataHandlerBoolean(_NAMESPACE, "images");
+
+	private static Log _log = LogFactoryUtil.getLog(
+		JournalContentPortletDataHandlerImpl.class);
 
 	private static PortletDataHandlerBoolean _ratings =
 		new PortletDataHandlerBoolean(_NAMESPACE, "ratings");

@@ -16,11 +16,8 @@ package com.liferay.portlet.journal.lar;
 
 import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
-import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.log.Log;
@@ -118,11 +115,12 @@ import javax.portlet.PortletPreferences;
  */
 public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
-	public static void exportArticle(
-			PortletDataContext context, Element articlesEl, Element dlFoldersEl,
-			Element dlFileEntriesEl, Element dlFileRanksEl, Element igFoldersEl,
-			Element igImagesEl, JournalArticle article)
-		throws PortalException, SystemException {
+	protected static void exportArticle(
+			PortletDataContext context, Element articlesElement,
+			Element dlFoldersElement, Element dlFileEntriesElement,
+			Element dlFileRanksElement, Element igFoldersElement,
+			Element igImagesElement, JournalArticle article)
+		throws Exception {
 
 		if (!context.isWithinDateRange(article.getModifiedDate())) {
 			return;
@@ -143,9 +141,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		article = (JournalArticle)article.clone();
 
-		Element articleEl = articlesEl.addElement("article");
+		Element articleElement = articlesElement.addElement("article");
 
-		articleEl.addAttribute("path", path);
+		articleElement.addAttribute("path", path);
 
 		Image smallImage = ImageUtil.fetchByPrimaryKey(
 			article.getSmallImageId());
@@ -153,7 +151,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (article.isSmallImage() && (smallImage != null)) {
 			String smallImagePath = getArticleSmallImagePath(context, article);
 
-			articleEl.addAttribute("small-image-path", smallImagePath);
+			articleElement.addAttribute("small-image-path", smallImagePath);
 
 			article.setSmallImageType(smallImage.getType());
 
@@ -163,7 +161,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (context.getBooleanParameter(_NAMESPACE, "images")) {
 			String imagePath = getArticleImagePath(context, article);
 
-			articleEl.addAttribute("image-path", imagePath);
+			articleElement.addAttribute("image-path", imagePath);
 
 			List<JournalArticleImage> articleImages =
 				JournalArticleImageUtil.findByG_A_V(
@@ -171,21 +169,24 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					article.getVersion());
 
 			for (JournalArticleImage articleImage : articleImages) {
+				Image image = null;
+
 				try {
-					Image image = ImageUtil.findByPrimaryKey(
+					image = ImageUtil.findByPrimaryKey(
 						articleImage.getArticleImageId());
-
-					String articleImagePath = getArticleImagePath(
-						context, article, articleImage, image);
-
-					if (!context.isPathNotProcessed(articleImagePath)) {
-						continue;
-					}
-
-					context.addZipEntry(articleImagePath, image.getTextObj());
 				}
 				catch (NoSuchImageException nsie) {
+					continue;
 				}
+
+				String articleImagePath = getArticleImagePath(
+					context, article, articleImage, image);
+
+				if (!context.isPathNotProcessed(articleImagePath)) {
+					continue;
+				}
+
+				context.addZipEntry(articleImagePath, image.getTextObj());
 			}
 		}
 
@@ -216,10 +217,11 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			String content = article.getContent();
 
 			content = exportDLFileEntries(
-				context, dlFoldersEl, dlFileEntriesEl, dlFileRanksEl, articleEl,
-				content);
+				context, dlFoldersElement, dlFileEntriesElement,
+				dlFileRanksElement, articleElement, content);
 			content = exportIGImages(
-				context, igFoldersEl, igImagesEl, articleEl, content);
+				context, igFoldersElement, igImagesElement, articleElement,
+				content);
 			content = exportLayoutFriendlyURLs(context, content);
 
 			article.setContent(content);
@@ -231,9 +233,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		context.addZipEntry(path, article);
 	}
 
-	public static String exportDLFileEntries(
-		PortletDataContext context, Element foldersEl, Element fileEntriesEl,
-		Element fileRanksEl, Element entityEl, String content) {
+	protected static String exportDLFileEntries(
+		PortletDataContext context, Element foldersElement,
+		Element fileEntriesElement, Element fileRanksElement,
+		Element entityElement, String content) {
 
 		StringBuilder sb = new StringBuilder(content);
 
@@ -361,12 +364,14 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				String path = DLPortletDataHandlerImpl.getFileEntryPath(
 					context, fileEntry);
 
-				Element dlReferenceEl = entityEl.addElement("dl-reference");
+				Element dlReferenceElement = entityElement.addElement(
+					"dl-reference");
 
-				dlReferenceEl.addAttribute("path", path);
+				dlReferenceElement.addAttribute("path", path);
 
 				DLPortletDataHandlerImpl.exportFileEntry(
-					context, foldersEl, fileEntriesEl, fileRanksEl, fileEntry);
+					context, foldersElement, fileEntriesElement,
+					fileRanksElement, fileEntry);
 
 				String dlReference = "[$dl-reference=" + path + "$]";
 
@@ -384,9 +389,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		return sb.toString();
 	}
 
-	public static void exportFeed(
-			PortletDataContext context, Element feedsEl, JournalFeed feed)
-		throws PortalException, SystemException {
+	protected static void exportFeed(
+			PortletDataContext context, Element feedsElement, JournalFeed feed)
+		throws Exception {
 
 		if (!context.isWithinDateRange(feed.getModifiedDate())) {
 			return;
@@ -398,9 +403,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
-		Element feedEl = feedsEl.addElement("feed");
+		Element feedElement = feedsElement.addElement("feed");
 
-		feedEl.addAttribute("path", path);
+		feedElement.addAttribute("path", path);
 
 		feed.setUserUuid(feed.getUserUuid());
 
@@ -409,9 +414,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		context.addZipEntry(path, feed);
 	}
 
-	public static String exportIGImages(
-		PortletDataContext context, Element foldersEl, Element imagesEl,
-		Element entityEl, String content) {
+	protected static String exportIGImages(
+		PortletDataContext context, Element foldersElement,
+		Element imagesElement, Element entityElement, String content) {
 
 		StringBuilder sb = new StringBuilder(content);
 
@@ -522,12 +527,13 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				String path = IGPortletDataHandlerImpl.getImagePath(
 					context, image);
 
-				Element igReferenceEl = entityEl.addElement("ig-reference");
+				Element igReferenceElement = entityElement.addElement(
+					"ig-reference");
 
-				igReferenceEl.addAttribute("path", path);
+				igReferenceElement.addAttribute("path", path);
 
 				IGPortletDataHandlerImpl.exportImage(
-					context, foldersEl, imagesEl, image);
+					context, foldersElement, imagesElement, image);
 
 				String igReference = "[$ig-reference=" + path + "$]";
 
@@ -545,7 +551,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		return sb.toString();
 	}
 
-	public static String exportLayoutFriendlyURLs(
+	protected static String exportLayoutFriendlyURLs(
 		PortletDataContext context, String content) {
 
 		Group group = null;
@@ -674,10 +680,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		return sb.toString();
 	}
 
-	public static void exportStructure(
-			PortletDataContext context, Element structuresEl,
+	protected static void exportStructure(
+			PortletDataContext context, Element structuresElement,
 			JournalStructure structure)
-		throws PortalException, SystemException {
+		throws Exception {
 
 		if (!context.isWithinDateRange(structure.getModifiedDate())) {
 			return;
@@ -689,9 +695,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
-		Element structureEl = structuresEl.addElement("structure");
+		Element structureElement = structuresElement.addElement("structure");
 
-		structureEl.addAttribute("path", path);
+		structureElement.addAttribute("path", path);
 
 		structure.setUserUuid(structure.getUserUuid());
 
@@ -700,11 +706,12 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		context.addZipEntry(path, structure);
 	}
 
-	public static void exportTemplate(
-			PortletDataContext context, Element templatesEl,
-			Element dlFoldersEl, Element dlFileEntriesEl, Element dlFileRanks,
-			Element igFoldersEl, Element igImagesEl, JournalTemplate template)
-		throws PortalException, SystemException {
+	protected static void exportTemplate(
+			PortletDataContext context, Element templatesElement,
+			Element dlFoldersElement, Element dlFileEntriesElement,
+			Element dlFileRanksElement, Element igFoldersElement,
+			Element igImagesElement, JournalTemplate template)
+		throws Exception {
 
 		if (!context.isWithinDateRange(template.getModifiedDate())) {
 			return;
@@ -721,15 +728,15 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		template = (JournalTemplate)template.clone();
 
-		Element templateEl = templatesEl.addElement("template");
+		Element templateElement = templatesElement.addElement("template");
 
-		templateEl.addAttribute("path", path);
+		templateElement.addAttribute("path", path);
 
 		if (template.isSmallImage()) {
 			String smallImagePath = getTemplateSmallImagePath(
 				context, template);
 
-			templateEl.addAttribute("small-image-path", smallImagePath);
+			templateElement.addAttribute("small-image-path", smallImagePath);
 
 			Image smallImage = ImageUtil.fetchByPrimaryKey(
 				template.getSmallImageId());
@@ -743,10 +750,11 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			String content = template.getXsl();
 
 			content = exportDLFileEntries(
-				context, dlFoldersEl, dlFileEntriesEl, dlFileRanks, templateEl,
-				content);
+				context, dlFoldersElement, dlFileEntriesElement,
+				dlFileRanksElement, templateElement, content);
 			content = exportIGImages(
-				context, igFoldersEl, igImagesEl, templateEl, content);
+				context, igFoldersElement, igImagesElement, templateElement,
+				content);
 			content = exportLayoutFriendlyURLs(context, content);
 
 			content = StringUtil.replace(
@@ -762,11 +770,139 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		context.addZipEntry(path, template);
 	}
 
-	public static void importArticle(
-			PortletDataContext context, Element articleEl)
+	protected static String getArticleImagePath(
+		PortletDataContext context, JournalArticle article) {
+
+		StringBundler sb = new StringBundler(6);
+
+		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
+		sb.append("/articles/");
+		sb.append(article.getUuid());
+		sb.append(StringPool.SLASH);
+		sb.append(article.getVersion());
+		sb.append(StringPool.SLASH);
+
+		return sb.toString();
+	}
+
+	protected static String getArticleImagePath(
+		PortletDataContext context, JournalArticle article,
+		JournalArticleImage articleImage, Image image) {
+
+		StringBundler sb = new StringBundler(13);
+
+		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
+		sb.append("/articles/");
+		sb.append(article.getUuid());
+		sb.append(StringPool.SLASH);
+		sb.append(article.getVersion());
+		sb.append(StringPool.SLASH);
+		sb.append(articleImage.getElInstanceId());
+		sb.append(StringPool.UNDERLINE);
+		sb.append(articleImage.getElName());
+
+		if (Validator.isNotNull(articleImage.getLanguageId())) {
+			sb.append(StringPool.UNDERLINE);
+			sb.append(articleImage.getLanguageId());
+		}
+
+		sb.append(StringPool.PERIOD);
+		sb.append(image.getType());
+
+		return sb.toString();
+	}
+
+	protected static String getArticlePath(
+		PortletDataContext context, JournalArticle article) {
+
+		StringBundler sb = new StringBundler(8);
+
+		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
+		sb.append("/articles/");
+		sb.append(article.getUuid());
+		sb.append(StringPool.SLASH);
+		sb.append(article.getVersion());
+		sb.append(StringPool.SLASH);
+		sb.append("article.xml");
+
+		return sb.toString();
+	}
+
+	protected static String getArticleSmallImagePath(
+			PortletDataContext context, JournalArticle article)
 		throws Exception {
 
-		String path = articleEl.attributeValue("path");
+		StringBundler sb = new StringBundler(6);
+
+		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
+		sb.append("/articles/");
+		sb.append(article.getUuid());
+		sb.append("/thumbnail");
+		sb.append(StringPool.PERIOD);
+		sb.append(article.getSmallImageType());
+
+		return sb.toString();
+	}
+
+	protected static String getFeedPath(
+		PortletDataContext context, JournalFeed feed) {
+
+		StringBundler sb = new StringBundler(4);
+
+		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
+		sb.append("/feeds/");
+		sb.append(feed.getUuid());
+		sb.append(".xml");
+
+		return sb.toString();
+	}
+
+	protected static String getStructurePath(
+		PortletDataContext context, JournalStructure structure) {
+
+		StringBundler sb = new StringBundler(4);
+
+		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
+		sb.append("/structures/");
+		sb.append(structure.getUuid());
+		sb.append(".xml");
+
+		return sb.toString();
+	}
+
+	protected static String getTemplatePath(
+		PortletDataContext context, JournalTemplate template) {
+
+		StringBundler sb = new StringBundler(4);
+
+		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
+		sb.append("/templates/");
+		sb.append(template.getUuid());
+		sb.append(".xml");
+
+		return sb.toString();
+	}
+
+	protected static String getTemplateSmallImagePath(
+			PortletDataContext context, JournalTemplate template)
+		throws Exception {
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
+		sb.append("/templates/thumbnail-");
+		sb.append(template.getUuid());
+		sb.append(StringPool.PERIOD);
+		sb.append(template.getSmallImageType());
+
+		return sb.toString();
+	}
+
+	protected static void importArticle(
+			PortletDataContext context, Element articleElement)
+		throws Exception {
+
+		String path = articleElement.attributeValue("path");
 
 		if (!context.isPathNotProcessed(path)) {
 			return;
@@ -779,14 +915,12 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		User user = UserLocalServiceUtil.getUser(userId);
 
-		long groupId = context.getScopeGroupId();
-
 		String articleId = article.getArticleId();
 		boolean autoArticleId = false;
 
 		if ((Validator.isNumber(articleId)) ||
 			(JournalArticleUtil.fetchByG_A_V(
-				groupId, articleId,
+				context.getScopeGroupId(), articleId,
 					JournalArticleConstants.DEFAULT_VERSION) != null)) {
 
 			autoArticleId = true;
@@ -809,10 +943,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		String content = article.getContent();
 
-		content = importDLFileEntries(context, articleEl, content);
-		content = importIGImages(context, articleEl, content);
+		content = importDLFileEntries(context, articleElement, content);
+		content = importIGImages(context, articleElement, content);
 
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
+		Group group = GroupLocalServiceUtil.getGroup(context.getScopeGroupId());
 
 		content = StringUtil.replace(
 			content, "@data_handler_group_friendly_url@",
@@ -977,7 +1111,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		File smallFile = null;
 
-		String smallImagePath = articleEl.attributeValue("small-image-path");
+		String smallImagePath = articleElement.attributeValue(
+			"small-image-path");
 
 		if (article.isSmallImage() && Validator.isNotNull(smallImagePath)) {
 			byte[] bytes = context.getZipEntryAsByteArray(smallImagePath);
@@ -992,7 +1127,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		Map<String, byte[]> images = new HashMap<String, byte[]>();
 
 		if (context.getBooleanParameter(_NAMESPACE, "images")) {
-			String imagePath = articleEl.attributeValue("image-path");
+			String imagePath = articleElement.attributeValue("image-path");
 
 			List<String> imageFiles = context.getZipFolderEntries(imagePath);
 
@@ -1062,7 +1197,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAssetTagNames(assetTagNames);
 		serviceContext.setCreateDate(article.getCreateDate());
 		serviceContext.setModifiedDate(article.getModifiedDate());
-		serviceContext.setScopeGroupId(groupId);
+		serviceContext.setScopeGroupId(context.getScopeGroupId());
 
 		if (article.getStatus() != WorkflowConstants.STATUS_APPROVED) {
 			serviceContext.setWorkflowAction(
@@ -1073,13 +1208,13 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		if (context.isDataStrategyMirror()) {
 			JournalArticle existingArticle = JournalArticleUtil.fetchByUUID_G(
-				article.getUuid(), groupId);
+				article.getUuid(), context.getScopeGroupId());
 
 			if (existingArticle == null) {
 				serviceContext.setUuid(article.getUuid());
 
 				importedArticle = JournalArticleLocalServiceUtil.addArticle(
-					userId, groupId, articleId, autoArticleId,
+					userId, context.getScopeGroupId(), articleId, autoArticleId,
 					article.getVersion(), article.getTitle(),
 					article.getDescription(), article.getContent(),
 					article.getType(), parentStructureId, parentTemplateId,
@@ -1110,17 +1245,18 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 		else {
 			importedArticle = JournalArticleLocalServiceUtil.addArticle(
-				userId, groupId, articleId, autoArticleId, article.getVersion(),
-				article.getTitle(), article.getDescription(),
-				article.getContent(), article.getType(), parentStructureId,
-				parentTemplateId, displayDateMonth, displayDateDay,
-				displayDateYear, displayDateHour, displayDateMinute,
-				expirationDateMonth, expirationDateDay, expirationDateYear,
-				expirationDateHour, expirationDateMinute, neverExpire,
-				reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-				reviewDateMinute, neverReview, article.isIndexable(),
-				article.isSmallImage(), article.getSmallImageURL(), smallFile,
-				images, articleURL, serviceContext);
+				userId, context.getScopeGroupId(), articleId, autoArticleId,
+				article.getVersion(), article.getTitle(),
+				article.getDescription(), article.getContent(),
+				article.getType(), parentStructureId, parentTemplateId,
+				displayDateMonth, displayDateDay, displayDateYear,
+				displayDateHour, displayDateMinute, expirationDateMonth,
+				expirationDateDay, expirationDateYear, expirationDateHour,
+				expirationDateMinute, neverExpire, reviewDateMonth,
+				reviewDateDay, reviewDateYear, reviewDateHour, reviewDateMinute,
+				neverReview, article.isIndexable(), article.isSmallImage(),
+				article.getSmallImageURL(), smallFile, images, articleURL,
+				serviceContext);
 		}
 
 		context.importPermissions(
@@ -1130,7 +1266,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
 			context.importComments(
 				JournalArticle.class, article.getResourcePrimKey(),
-				importedArticle.getResourcePrimKey(), groupId);
+				importedArticle.getResourcePrimKey(),
+				context.getScopeGroupId());
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
@@ -1151,17 +1288,18 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 	}
 
-	public static String importDLFileEntries(
-			PortletDataContext context, Element parentEl, String content)
-		throws SystemException {
+	protected static String importDLFileEntries(
+			PortletDataContext context, Element parentElement, String content)
+		throws Exception {
 
 		Map<Long, Long> fileEntryPKs =
 			(Map<Long, Long>)context.getNewPrimaryKeysMap(DLFileEntry.class);
 
-		List<Element> dlReferenceEls = parentEl.elements("dl-reference");
+		List<Element> dlReferenceElements = parentElement.elements(
+			"dl-reference");
 
-		for (Element dlReferenceEl : dlReferenceEls) {
-			String dlReferencePath = dlReferenceEl.attributeValue("path");
+		for (Element dlReferenceElement : dlReferenceElements) {
+			String dlReferencePath = dlReferenceElement.attributeValue("path");
 
 			DLFileEntry fileEntry = (DLFileEntry)context.getZipEntryAsObject(
 				dlReferencePath);
@@ -1198,11 +1336,11 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		return content;
 	}
 
-	public static void importFeed(
-			PortletDataContext context, Element feedEl)
+	protected static void importFeed(
+			PortletDataContext context, Element feedElement)
 		throws Exception {
 
-		String path = feedEl.attributeValue("path");
+		String path = feedElement.attributeValue("path");
 
 		if (!context.isPathNotProcessed(path)) {
 			return;
@@ -1211,13 +1349,13 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		JournalFeed feed = (JournalFeed)context.getZipEntryAsObject(path);
 
 		long userId = context.getUserId(feed.getUserUuid());
-		long groupId = context.getScopeGroupId();
 
 		String feedId = feed.getFeedId();
 		boolean autoFeedId = false;
 
 		if ((Validator.isNumber(feedId)) ||
-			(JournalFeedUtil.fetchByG_F(groupId, feedId) != null)) {
+			(JournalFeedUtil.fetchByG_F(
+				context.getScopeGroupId(), feedId) != null)) {
 
 			autoFeedId = true;
 		}
@@ -1264,17 +1402,17 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		if (context.isDataStrategyMirror()) {
 			existingFeed = JournalFeedUtil.fetchByUUID_G(
-				feed.getUuid(), groupId);
+				feed.getUuid(), context.getScopeGroupId());
 
 			if (existingFeed == null) {
 				serviceContext.setUuid(feed.getUuid());
 
 				existingFeed = JournalFeedLocalServiceUtil.addFeed(
-					userId, groupId, feedId, autoFeedId, feed.getName(),
-					feed.getDescription(), feed.getType(), parentStructureId,
-					parentTemplateId, parentRenderTemplateId, feed.getDelta(),
-					feed.getOrderByCol(), feed.getOrderByType(),
-					feed.getTargetLayoutFriendlyUrl(),
+					userId, context.getScopeGroupId(), feedId, autoFeedId,
+					feed.getName(), feed.getDescription(), feed.getType(),
+					parentStructureId, parentTemplateId, parentRenderTemplateId,
+					feed.getDelta(), feed.getOrderByCol(),
+					feed.getOrderByType(), feed.getTargetLayoutFriendlyUrl(),
 					feed.getTargetPortletId(), feed.getContentField(),
 					feed.getFeedType(), feed.getFeedVersion(),
 					serviceContext);
@@ -1292,10 +1430,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 		else {
 			existingFeed = JournalFeedLocalServiceUtil.addFeed(
-				userId, groupId, feedId, autoFeedId, feed.getName(),
-				feed.getDescription(), feed.getType(), parentStructureId,
-				parentTemplateId, parentRenderTemplateId, feed.getDelta(),
-				feed.getOrderByCol(), feed.getOrderByType(),
+				userId, context.getScopeGroupId(), feedId, autoFeedId,
+				feed.getName(), feed.getDescription(), feed.getType(),
+				parentStructureId, parentTemplateId, parentRenderTemplateId,
+				feed.getDelta(), feed.getOrderByCol(), feed.getOrderByType(),
 				feed.getTargetLayoutFriendlyUrl(), feed.getTargetPortletId(),
 				feed.getContentField(), feed.getFeedType(),
 				feed.getFeedVersion(), serviceContext);
@@ -1320,17 +1458,18 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 	}
 
-	public static String importIGImages(
-			PortletDataContext context, Element parentEl, String content)
-		throws SystemException {
+	protected static String importIGImages(
+			PortletDataContext context, Element parentElement, String content)
+		throws Exception {
 
 		Map<Long, Long> imagePKs =
 			(Map<Long, Long>)context.getNewPrimaryKeysMap(IGImage.class);
 
-		List<Element> igReferenceEls = parentEl.elements("ig-reference");
+		List<Element> igReferenceElements = parentElement.elements(
+			"ig-reference");
 
-		for (Element igReferenceEl : igReferenceEls) {
-			String igReferencePath = igReferenceEl.attributeValue("path");
+		for (Element igReferenceElement : igReferenceElements) {
+			String igReferencePath = igReferenceElement.attributeValue("path");
 
 			IGImage image = (IGImage)context.getZipEntryAsObject(
 				igReferencePath);
@@ -1366,10 +1505,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected static void importStructure(
-			PortletDataContext context,	Element structureEl)
+			PortletDataContext context,	Element structureElement)
 		throws Exception {
 
-		String path = structureEl.attributeValue("path");
+		String path = structureElement.attributeValue("path");
 
 		if (!context.isPathNotProcessed(path)) {
 			return;
@@ -1379,13 +1518,13 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			(JournalStructure)context.getZipEntryAsObject(path);
 
 		long userId = context.getUserId(structure.getUserUuid());
-		long groupId = context.getScopeGroupId();
 
 		String structureId = structure.getStructureId();
 		boolean autoStructureId = false;
 
 		if ((Validator.isNumber(structureId)) ||
-			(JournalStructureUtil.fetchByG_S(groupId, structureId) != null)) {
+			(JournalStructureUtil.fetchByG_S(
+				context.getScopeGroupId(), structureId) != null)) {
 
 			autoStructureId = true;
 		}
@@ -1415,17 +1554,17 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		if (context.isDataStrategyMirror()) {
 			existingStructure = JournalStructureUtil.fetchByUUID_G(
-				structure.getUuid(), groupId);
+				structure.getUuid(), context.getScopeGroupId());
 
 			if (existingStructure == null) {
 				serviceContext.setUuid(structure.getUuid());
 
 				existingStructure =
 					JournalStructureLocalServiceUtil.addStructure(
-						userId, groupId, structureId, autoStructureId,
-						structure.getParentStructureId(), structure.getName(),
-						structure.getDescription(), structure.getXsd(),
-						serviceContext);
+						userId, context.getScopeGroupId(), structureId,
+						autoStructureId, structure.getParentStructureId(),
+						structure.getName(), structure.getDescription(),
+						structure.getXsd(), serviceContext);
 			}
 			else {
 				existingStructure =
@@ -1439,7 +1578,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 		else {
 			existingStructure = JournalStructureLocalServiceUtil.addStructure(
-				userId, groupId, structureId, autoStructureId,
+				userId, context.getScopeGroupId(), structureId, autoStructureId,
 				structure.getParentStructureId(), structure.getName(),
 				structure.getDescription(), structure.getXsd(), serviceContext);
 		}
@@ -1465,10 +1604,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected static void importTemplate(
-			PortletDataContext context, Element templateEl)
+			PortletDataContext context, Element templateElement)
 		throws Exception {
 
-		String path = templateEl.attributeValue("path");
+		String path = templateElement.attributeValue("path");
 
 		if (!context.isPathNotProcessed(path)) {
 			return;
@@ -1478,13 +1617,13 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			path);
 
 		long userId = context.getUserId(template.getUserUuid());
-		long groupId = context.getScopeGroupId();
 
 		String templateId = template.getTemplateId();
 		boolean autoTemplateId = false;
 
 		if ((Validator.isNumber(templateId)) ||
-			(JournalTemplateUtil.fetchByG_T(groupId, templateId) != null)) {
+			(JournalTemplateUtil.fetchByG_T(
+				context.getScopeGroupId(), templateId) != null)) {
 
 			autoTemplateId = true;
 		}
@@ -1498,10 +1637,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		String xsl = template.getXsl();
 
-		xsl = importDLFileEntries(context, templateEl, xsl);
-		xsl = importIGImages(context, templateEl, xsl);
+		xsl = importDLFileEntries(context, templateElement, xsl);
+		xsl = importIGImages(context, templateElement, xsl);
 
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
+		Group group = GroupLocalServiceUtil.getGroup(context.getScopeGroupId());
 
 		xsl = StringUtil.replace(
 			xsl, "@data_handler_group_friendly_url@", group.getFriendlyURL());
@@ -1533,7 +1672,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		File smallFile = null;
 
-		String smallImagePath = templateEl.attributeValue("small-image-path");
+		String smallImagePath = templateElement.attributeValue(
+			"small-image-path");
 
 		if (template.isSmallImage() && Validator.isNotNull(smallImagePath)) {
 			if (smallImagePath.endsWith(StringPool.PERIOD)) {
@@ -1555,14 +1695,14 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		if (context.isDataStrategyMirror()) {
 			existingTemplate = JournalTemplateUtil.fetchByUUID_G(
-				template.getUuid(), groupId);
+				template.getUuid(), context.getScopeGroupId());
 
 			if (existingTemplate == null) {
 				serviceContext.setUuid(template.getUuid());
 
 				existingTemplate = JournalTemplateLocalServiceUtil.addTemplate(
-					userId, groupId, templateId, autoTemplateId,
-					parentStructureId, template.getName(),
+					userId, context.getScopeGroupId(), templateId,
+					autoTemplateId, parentStructureId, template.getName(),
 					template.getDescription(), template.getXsl(), formatXsl,
 					template.getLangType(), template.getCacheable(),
 					template.isSmallImage(), template.getSmallImageURL(),
@@ -1582,11 +1722,12 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 		else {
 			existingTemplate = JournalTemplateLocalServiceUtil.addTemplate(
-				userId, groupId, templateId, autoTemplateId, parentStructureId,
-				template.getName(), template.getDescription(),
-				template.getXsl(), formatXsl, template.getLangType(),
-				template.getCacheable(), template.isSmallImage(),
-				template.getSmallImageURL(), smallFile, serviceContext);
+				userId, context.getScopeGroupId(), templateId, autoTemplateId,
+				parentStructureId, template.getName(),
+				template.getDescription(), template.getXsl(), formatXsl,
+				template.getLangType(), template.getCacheable(),
+				template.isSmallImage(), template.getSmallImageURL(), smallFile,
+				serviceContext);
 		}
 
 		Map<String, String> templateIds =
@@ -1609,106 +1750,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 	}
 
-	public PortletPreferences deleteData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
-		throws PortletDataException {
-
-		try {
-			if (!context.addPrimaryKey(
-					JournalPortletDataHandlerImpl.class, "deleteData")) {
-
-				JournalArticleLocalServiceUtil.deleteArticles(
-					context.getScopeGroupId());
-
-				JournalTemplateLocalServiceUtil.deleteTemplates(
-					context.getScopeGroupId());
-
-				JournalStructureLocalServiceUtil.deleteStructures(
-					context.getScopeGroupId());
-			}
-
-			return preferences;
-		}
-		catch (Exception e) {
-			throw new PortletDataException(e);
-		}
-	}
-
-	public String exportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
-		throws PortletDataException {
-
-		try {
-			long groupId = context.getScopeGroupId();
-
-			context.addPermissions("com.liferay.portlet.journal", groupId);
-
-			Document doc = SAXReaderUtil.createDocument();
-
-			Element root = doc.addElement("journal-data");
-
-			root.addAttribute("group-id", String.valueOf(groupId));
-
-			Element structuresEl = root.addElement("structures");
-
-			List<JournalStructure> structures =
-				JournalStructureUtil.findByGroupId(groupId);
-
-			for (JournalStructure structure : structures) {
-				exportStructure(context, structuresEl, structure);
-			}
-
-			Element templatesEl = root.addElement("templates");
-			Element dlFoldersEl = root.addElement("dl-folders");
-			Element dlFilesEl = root.addElement("dl-file-entries");
-			Element dlFileRanksEl = root.addElement("dl-file-ranks");
-			Element igFoldersEl = root.addElement("ig-folders");
-			Element igImagesEl = root.addElement("ig-images");
-
-			List<JournalTemplate> templates = JournalTemplateUtil.findByGroupId(
-				groupId);
-
-			for (JournalTemplate template : templates) {
-				exportTemplate(
-					context, templatesEl, dlFoldersEl, dlFilesEl, dlFileRanksEl,
-					igFoldersEl, igImagesEl, template);
-			}
-
-			Element feedsEl = root.addElement("feeds");
-
-			List<JournalFeed> feeds = JournalFeedUtil.findByGroupId(groupId);
-
-			for (JournalFeed feed : feeds) {
-				if (context.isWithinDateRange(feed.getModifiedDate())) {
-					exportFeed(context, feedsEl, feed);
-				}
-			}
-
-			Element articlesEl = root.addElement("articles");
-
-			if (context.getBooleanParameter(_NAMESPACE, "articles")) {
-				List<JournalArticle> articles =
-					JournalArticleUtil.findByG_ST(
-						groupId, WorkflowConstants.STATUS_APPROVED,
-						QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-						new ArticleIDComparator(true));
-
-				for (JournalArticle article : articles) {
-					exportArticle(
-						context, articlesEl, dlFoldersEl, dlFilesEl,
-						dlFileRanksEl, igFoldersEl, igImagesEl, article);
-				}
-			}
-
-			return doc.formattedString();
-		}
-		catch (Exception e) {
-			throw new PortletDataException(e);
-		}
-	}
-
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
 			_articles, _structuresTemplatesAndFeeds, _embeddedAssets, _images,
@@ -1723,90 +1764,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		};
 	}
 
-	public PortletPreferences importData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences, String data)
-		throws PortletDataException {
-
-		try {
-			context.importPermissions(
-				"com.liferay.portlet.journal", context.getSourceGroupId(),
-				context.getScopeGroupId());
-
-			Document doc = SAXReaderUtil.read(data);
-
-			Element root = doc.getRootElement();
-
-			List<Element> folderEls = root.element("dl-folders").elements(
-				"folder");
-
-			for (Element dlFolderEl : folderEls) {
-				DLPortletDataHandlerImpl.importFolder(context, dlFolderEl);
-			}
-
-			List<Element> fileEntryEls = root.element(
-				"dl-file-entries").elements("file-entry");
-
-			for (Element fileEntryEl : fileEntryEls) {
-				DLPortletDataHandlerImpl.importFileEntry(context, fileEntryEl);
-			}
-
-			List<Element> fileRankEls = root.element("dl-file-ranks").elements(
-				"file-rank");
-
-			for (Element fileRankEl : fileRankEls) {
-				DLPortletDataHandlerImpl.importFileRank(context, fileRankEl);
-			}
-
-			folderEls = root.element("ig-folders").elements("folder");
-
-			for (Element folderEl : folderEls) {
-				IGPortletDataHandlerImpl.importFolder(context, folderEl);
-			}
-
-			List<Element> imageEls = root.element("ig-images").elements(
-				"image");
-
-			for (Element imageEl : imageEls) {
-				IGPortletDataHandlerImpl.importImage(context, imageEl);
-			}
-
-			List<Element> structureEls = root.element("structures").elements(
-				"structure");
-
-			for (Element structureEl : structureEls) {
-				importStructure(context, structureEl);
-			}
-
-			List<Element> templateEls = root.element("templates").elements(
-				"template");
-
-			for (Element templateEl : templateEls) {
-				importTemplate(context, templateEl);
-			}
-
-			List<Element> feedEls = root.element("feeds").elements("feed");
-
-			for (Element feedEl : feedEls) {
-				importFeed(context, feedEl);
-			}
-
-			if (context.getBooleanParameter(_NAMESPACE, "articles")) {
-				List<Element> articleEls = root.element("articles").elements(
-					"article");
-
-				for (Element articleEl : articleEls) {
-					importArticle(context, articleEl);
-				}
-			}
-
-			return preferences;
-		}
-		catch (Exception e) {
-			throw new PortletDataException(e);
-		}
-	}
-
 	public boolean isAlwaysExportable() {
 		return _ALWAYS_EXPORTABLE;
 	}
@@ -1815,132 +1772,190 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		return PropsValues.JOURNAL_PUBLISH_TO_LIVE_BY_DEFAULT;
 	}
 
-	protected static String getArticlePath(
-		PortletDataContext context, JournalArticle article) {
+	protected PortletPreferences doDeleteData(
+			PortletDataContext context, String portletId,
+			PortletPreferences preferences)
+		throws Exception {
 
-		StringBundler sb = new StringBundler(8);
+		if (!context.addPrimaryKey(
+				JournalPortletDataHandlerImpl.class, "deleteData")) {
 
-		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
-		sb.append("/articles/");
-		sb.append(article.getUuid());
-		sb.append(StringPool.SLASH);
-		sb.append(article.getVersion());
-		sb.append(StringPool.SLASH);
-		sb.append("article.xml");
+			JournalArticleLocalServiceUtil.deleteArticles(
+				context.getScopeGroupId());
 
-		return sb.toString();
-	}
+			JournalTemplateLocalServiceUtil.deleteTemplates(
+				context.getScopeGroupId());
 
-	protected static String getArticleImagePath(
-		PortletDataContext context, JournalArticle article) {
-
-		StringBundler sb = new StringBundler(6);
-
-		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
-		sb.append("/articles/");
-		sb.append(article.getUuid());
-		sb.append(StringPool.SLASH);
-		sb.append(article.getVersion());
-		sb.append(StringPool.SLASH);
-
-		return sb.toString();
-	}
-
-	protected static String getArticleImagePath(
-		PortletDataContext context, JournalArticle article,
-		JournalArticleImage articleImage, Image image) {
-
-		StringBundler sb = new StringBundler(13);
-
-		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
-		sb.append("/articles/");
-		sb.append(article.getUuid());
-		sb.append(StringPool.SLASH);
-		sb.append(article.getVersion());
-		sb.append(StringPool.SLASH);
-		sb.append(articleImage.getElInstanceId());
-		sb.append(StringPool.UNDERLINE);
-		sb.append(articleImage.getElName());
-
-		if (Validator.isNotNull(articleImage.getLanguageId())) {
-			sb.append(StringPool.UNDERLINE);
-			sb.append(articleImage.getLanguageId());
+			JournalStructureLocalServiceUtil.deleteStructures(
+				context.getScopeGroupId());
 		}
 
-		sb.append(StringPool.PERIOD);
-		sb.append(image.getType());
-
-		return sb.toString();
+		return preferences;
 	}
 
-	protected static String getArticleSmallImagePath(
-			PortletDataContext context, JournalArticle article)
-		throws PortalException, SystemException {
+	protected String doExportData(
+			PortletDataContext context, String portletId,
+			PortletPreferences preferences)
+		throws Exception {
 
-		StringBundler sb = new StringBundler(6);
+		context.addPermissions(
+			"com.liferay.portlet.journal", context.getScopeGroupId());
 
-		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
-		sb.append("/articles/");
-		sb.append(article.getUuid());
-		sb.append("/thumbnail");
-		sb.append(StringPool.PERIOD);
-		sb.append(article.getSmallImageType());
+		Document document = SAXReaderUtil.createDocument();
 
-		return sb.toString();
+		Element rootElement = document.addElement("journal-data");
+
+		rootElement.addAttribute(
+			"group-id", String.valueOf(context.getScopeGroupId()));
+
+		Element structuresElement = rootElement.addElement("structures");
+
+		List<JournalStructure> structures =
+			JournalStructureUtil.findByGroupId(context.getScopeGroupId());
+
+		for (JournalStructure structure : structures) {
+			exportStructure(context, structuresElement, structure);
+		}
+
+		Element templatesElement = rootElement.addElement("templates");
+		Element dlFoldersElement = rootElement.addElement("dl-folders");
+		Element dlFilesElement = rootElement.addElement("dl-file-entries");
+		Element dlFileRanksElement = rootElement.addElement("dl-file-ranks");
+		Element igFoldersElement = rootElement.addElement("ig-folders");
+		Element igImagesElement = rootElement.addElement("ig-images");
+
+		List<JournalTemplate> templates = JournalTemplateUtil.findByGroupId(
+			context.getScopeGroupId());
+
+		for (JournalTemplate template : templates) {
+			exportTemplate(
+				context, templatesElement, dlFoldersElement, dlFilesElement,
+				dlFileRanksElement, igFoldersElement, igImagesElement,
+				template);
+		}
+
+		Element feedsElement = rootElement.addElement("feeds");
+
+		List<JournalFeed> feeds = JournalFeedUtil.findByGroupId(
+			context.getScopeGroupId());
+
+		for (JournalFeed feed : feeds) {
+			if (context.isWithinDateRange(feed.getModifiedDate())) {
+				exportFeed(context, feedsElement, feed);
+			}
+		}
+
+		Element articlesElement = rootElement.addElement("articles");
+
+		if (context.getBooleanParameter(_NAMESPACE, "articles")) {
+			List<JournalArticle> articles = JournalArticleUtil.findByG_ST(
+				context.getScopeGroupId(), WorkflowConstants.STATUS_APPROVED,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+				new ArticleIDComparator(true));
+
+			for (JournalArticle article : articles) {
+				exportArticle(
+					context, articlesElement, dlFoldersElement, dlFilesElement,
+					dlFileRanksElement, igFoldersElement, igImagesElement,
+					article);
+			}
+		}
+
+		return document.formattedString();
 	}
 
-	protected static String getFeedPath(
-		PortletDataContext context, JournalFeed feed) {
+	protected PortletPreferences doImportData(
+			PortletDataContext context, String portletId,
+			PortletPreferences preferences, String data)
+		throws Exception {
 
-		StringBundler sb = new StringBundler(4);
+		context.importPermissions(
+			"com.liferay.portlet.journal", context.getSourceGroupId(),
+			context.getScopeGroupId());
 
-		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
-		sb.append("/feeds/");
-		sb.append(feed.getUuid());
-		sb.append(".xml");
+		Document document = SAXReaderUtil.read(data);
 
-		return sb.toString();
-	}
+		Element rootElement = document.getRootElement();
 
-	protected static String getTemplatePath(
-		PortletDataContext context, JournalTemplate template) {
+		Element dlFoldersElement = rootElement.element("dl-folders");
 
-		StringBundler sb = new StringBundler(4);
+		List<Element> dlFolderElements = dlFoldersElement.elements("folder");
 
-		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
-		sb.append("/templates/");
-		sb.append(template.getUuid());
-		sb.append(".xml");
+		for (Element dlFolderElement : dlFolderElements) {
+			DLPortletDataHandlerImpl.importFolder(context, dlFolderElement);
+		}
 
-		return sb.toString();
-	}
+		Element dlFileEntriesElement = rootElement.element("dl-file-entries");
 
-	protected static String getTemplateSmallImagePath(
-			PortletDataContext context, JournalTemplate template)
-		throws PortalException, SystemException {
+		List<Element> dlFileEntryElements = dlFileEntriesElement.elements(
+			"file-entry");
 
-		StringBundler sb = new StringBundler(5);
+		for (Element dlFileEntryElement : dlFileEntryElements) {
+			DLPortletDataHandlerImpl.importFileEntry(
+				context, dlFileEntryElement);
+		}
 
-		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
-		sb.append("/templates/thumbnail-");
-		sb.append(template.getUuid());
-		sb.append(StringPool.PERIOD);
-		sb.append(template.getSmallImageType());
+		Element dlFileRanksElement = rootElement.element("dl-file-ranks");
 
-		return sb.toString();
-	}
+		List<Element> dlFileRankElements = dlFileRanksElement.elements(
+			"file-rank");
 
-	protected static String getStructurePath(
-		PortletDataContext context, JournalStructure structure) {
+		for (Element dlFileRankElement : dlFileRankElements) {
+			DLPortletDataHandlerImpl.importFileRank(context, dlFileRankElement);
+		}
 
-		StringBundler sb = new StringBundler(4);
+		Element igFoldersElement = rootElement.element("ig-folders");
 
-		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
-		sb.append("/structures/");
-		sb.append(structure.getUuid());
-		sb.append(".xml");
+		List<Element> igFolderElements = igFoldersElement.elements("folder");
 
-		return sb.toString();
+		for (Element igFolderElement : igFolderElements) {
+			IGPortletDataHandlerImpl.importFolder(context, igFolderElement);
+		}
+
+		Element igImagesElement = rootElement.element("ig-images");
+
+		List<Element> igImageElements = igImagesElement.elements("image");
+
+		for (Element igImageElement : igImageElements) {
+			IGPortletDataHandlerImpl.importImage(context, igImageElement);
+		}
+
+		Element structuresElement = rootElement.element("structures");
+
+		List<Element> structureElements = structuresElement.elements(
+			"structure");
+
+		for (Element structureElement : structureElements) {
+			importStructure(context, structureElement);
+		}
+
+		Element templatesElement = rootElement.element("templates");
+
+		List<Element> templateElements = templatesElement.elements("template");
+
+		for (Element templateElement : templateElements) {
+			importTemplate(context, templateElement);
+		}
+
+		Element feedsElement = rootElement.element("feeds");
+
+		List<Element> feedElements = feedsElement.elements("feed");
+
+		for (Element feedElement : feedElements) {
+			importFeed(context, feedElement);
+		}
+
+		if (context.getBooleanParameter(_NAMESPACE, "articles")) {
+			Element articlesElement = rootElement.element("articles");
+
+			List<Element> articleElements = articlesElement.elements("article");
+
+			for (Element articleElement : articleElements) {
+				importArticle(context, articleElement);
+			}
+		}
+
+		return preferences;
 	}
 
 	private static final boolean _ALWAYS_EXPORTABLE = true;
