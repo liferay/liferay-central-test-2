@@ -300,7 +300,6 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portal/css/portal/asset_columns_css.jsp</header-portlet-css>
 		<header-portlet-css>/html/portlet/bookmarks/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-bookmarks</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
