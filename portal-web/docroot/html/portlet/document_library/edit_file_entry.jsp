@@ -123,6 +123,11 @@ portletURL.setParameter("name", name);
 	</c:choose>
 </c:if>
 
+<liferay-ui:header
+	backURL="<%= redirect %>"
+	title='<%= (fileEntry != null) ? fileEntry.getTitle() : "new-document" %>'
+/>
+
 <c:if test="<%= fileEntry == null %>">
 	<div class="lfr-dynamic-uploader">
 		<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
@@ -156,11 +161,6 @@ portletURL.setParameter("name", name);
 	<aui:input name="uploadProgressId" type="hidden" value="<%= uploadProgressId %>" />
 	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
 	<aui:input name="name" type="hidden" value="<%= name %>" />
-
-	<liferay-ui:header
-		backURL="<%= redirect %>"
-		title='<%= (fileEntry != null) ? fileEntry.getTitle() : "new-document" %>'
-	/>
 
 	<liferay-ui:error exception="<%= DuplicateFileException.class %>" message="please-enter-a-unique-document-name" />
 	<liferay-ui:error exception="<%= DuplicateFolderNameException.class %>" message="please-enter-a-unique-document-name" />
