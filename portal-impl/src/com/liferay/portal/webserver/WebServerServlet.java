@@ -301,6 +301,12 @@ public class WebServerServlet extends HttpServlet {
 			user.getCompanyId(), user.getUserId(), groupId, folderId, name,
 			version);
 
+		DLFileVersion fileVersion =
+			DLFileVersionLocalServiceUtil.getFileVersion(
+				groupId, folderId, name, version);
+
+		fileName = fileVersion.getTitle();
+
 		boolean converted = false;
 
 		if (Validator.isNotNull(targetExtension)) {
@@ -331,10 +337,6 @@ public class WebServerServlet extends HttpServlet {
 				contentLength = (int)dlFileEntry.getSize();
 			}
 			else {
-				DLFileVersion fileVersion =
-					DLFileVersionLocalServiceUtil.getFileVersion(
-						groupId, folderId, name, version);
-
 				contentLength = (int)fileVersion.getSize();
 			}
 		}
