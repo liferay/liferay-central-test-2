@@ -534,7 +534,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			long parentFolderId = getParentFolderId(
 				companyId, destinationArray);
 			String name = fileEntry.getName();
-			String sourceFileName = null;
+			String sourceFileName = WebDAVUtil.getResourceName(
+				destinationArray);
 			String title = WebDAVUtil.getResourceName(destinationArray);
 			String description = fileEntry.getDescription();
 			String changeLog = StringPool.BLANK;
