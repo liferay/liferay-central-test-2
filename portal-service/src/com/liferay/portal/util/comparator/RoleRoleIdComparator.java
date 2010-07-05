@@ -44,14 +44,11 @@ public class RoleRoleIdComparator extends OrderByComparator {
 
 		int value = 0;
 
-		if (role1.getRoleId() < role2.getRoleId()) {
-			value = -1;
-		}
-		else if (role1.getRoleId() == role2.getRoleId()) {
-			value = 0;
-		}
-		else {
+		if (role1.getRoleId() > role2.getRoleId()) {
 			value = 1;
+		}
+		else if (role1.getRoleId() < role2.getRoleId()) {
+			value = -1;
 		}
 
 		if (_ascending) {

@@ -72,24 +72,25 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 
 					<%
 					List curActions = ResourceActionsUtil.getResourceActions(portlet.getPortletId(), null);
+
 					List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), null, null, null, 0, maxNumberOfRolesChecked, new RoleRoleIdComparator(true));
 					int rolesCount = RoleLocalServiceUtil.searchCount(company.getCompanyId(), null, null, null);
 
-					List<Role> addToPageRoles;
-					List<Role> accessInControlPanelRoles;
+					List<Role> addToPageRoles = null;
+					List<Role> accessInControlPanelRoles = null;
 
 					if (curActions.contains(ActionKeys.ADD_TO_PAGE)) {
 						addToPageRoles = _filterRoles(roles, portlet.getPortletId(), ActionKeys.ADD_TO_PAGE);
 					}
 					else {
-						addToPageRoles = new ArrayList<Role>(0);
+						addToPageRoles = new ArrayList<Role>();
 					}
 
 					if (curActions.contains(ActionKeys.ACCESS_IN_CONTROL_PANEL)) {
 						accessInControlPanelRoles = _filterRoles(roles, portlet.getPortletId(), ActionKeys.ACCESS_IN_CONTROL_PANEL);
 					}
 					else {
-						accessInControlPanelRoles = new ArrayList<Role>(0);
+						accessInControlPanelRoles = new ArrayList<Role>();
 					}
 					%>
 
@@ -100,15 +101,15 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 					</c:if>
 
 					<c:if test="<%= !addToPageRoles.isEmpty() %>">
-						<liferay-ui:message key="the-users-with-the-following-roles-can-add-this-portlet-to-the-pages-they-manage" />:
+						<liferay-ui:message key="the-users-with-the-following-roles-can-add-this-portlet-to-the-pages-they-manage" />
 
 						<ul>
 
 							<%
-							for (Role curRole : addToPageRoles) {
+							for (Role role : addToPageRoles) {
 							%>
 
-									<li><%= curRole.getName() %></li>
+									<li><%= role.getName() %></li>
 
 							<%
 							}
@@ -118,15 +119,15 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 					</c:if>
 
 					<c:if test="<%= !accessInControlPanelRoles.isEmpty() %>">
-						<liferay-ui:message key="the-users-with-the-following-roles-can-access-this-portlet-in-the-control-panel" />:
+						<liferay-ui:message key="the-users-with-the-following-roles-can-access-this-portlet-in-the-control-panel" />
 
 						<ul>
 
 							<%
-							for (Role curRole : accessInControlPanelRoles) {
+							for (Role role : accessInControlPanelRoles) {
 							%>
 
-									<li><%= curRole.getName() %></li>
+									<li><%= role.getName() %></li>
 
 							<%
 							}
@@ -156,12 +157,13 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 <%!
 private List<Role> _filterRoles(List<Role> roles, String portletId, String actionId) throws Exception {
 	List<Role> filteredRoles = new ArrayList<Role>(0);
-	for (Role curRole : roles) {
-		if ((curRole.getType() == RoleConstants.TYPE_REGULAR) && _hasPermission(curRole, actionId, portletId, ResourceConstants.SCOPE_COMPANY) || _hasPermission(curRole, actionId, portletId, ResourceConstants.SCOPE_GROUP)) {
-			filteredRoles.add(curRole);
+
+	for (Role role : roles) {
+		if ((role.getType() == RoleConstants.TYPE_REGULAR) && _hasPermission(role, actionId, portletId, ResourceConstants.SCOPE_COMPANY) || _hasPermission(role, actionId, portletId, ResourceConstants.SCOPE_GROUP)) {
+			filteredRoles.add(role);
 		}
-		else if (_hasPermission(curRole, actionId, portletId, ResourceConstants.SCOPE_GROUP_TEMPLATE)) {
-			filteredRoles.add(curRole);
+		else if (_hasPermission(role, actionId, portletId, ResourceConstants.SCOPE_GROUP_TEMPLATE)) {
+			filteredRoles.add(role);
 		}
 	}
 
