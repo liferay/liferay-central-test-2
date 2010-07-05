@@ -460,8 +460,6 @@ public class LayoutExporter {
 
 		context.setPlid(layout.getPlid());
 
-		long scopeGroupId = context.getScopeGroupId();
-
 		if (layout.isIconImage()) {
 			Image image = ImageLocalServiceUtil.getImage(
 				layout.getIconImageId());
@@ -499,6 +497,8 @@ public class LayoutExporter {
 				String scopeLayoutUuid = GetterUtil.getString(
 					jxPreferences.getValue("lfr-scope-layout-uuid", null));
 
+				long scopeGroupId = context.getScopeGroupId();
+
 				if (Validator.isNotNull(scopeLayoutUuid)) {
 					Layout scopeLayout =
 						LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
@@ -532,7 +532,8 @@ public class LayoutExporter {
 					"linkToLayoutId", StringPool.BLANK));
 
 			Layout linkedToLayout = LayoutUtil.findByG_P_L(
-				scopeGroupId, layout.isPrivateLayout(), linkToLayoutId);
+				context.getScopeGroupId(), layout.isPrivateLayout(),
+				linkToLayoutId);
 
 			exportLayout(
 				context, layoutConfigurationPortlet, layoutCache, portletIds,
