@@ -59,7 +59,7 @@ boolean editable = false;
 if (wikiPage != null) {
 	attachments = wikiPage.getAttachmentsFiles();
 
-	if (wikiPage.isApproved() || (wikiPage.getUserId() == user.getUserId()) || permissionChecker.isCompanyAdmin() || permissionChecker.isCommunityAdmin(scopeGroupId)) {
+	if (WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE)) {
 		editable = true;
 	}
 }
