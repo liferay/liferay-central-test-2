@@ -663,7 +663,7 @@
 
 	<target name="compile-jonas">
 		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
-		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/repositories/maven2-internal/org/ow2/jonas/jonas-web-container-tomcat-6.0/5.1.1/jonas-web-container-tomcat-6.0-5.1.1-ipojo.jar;${app.server.dir}/repositories/maven2-internal/org/ow2/jonas/osgi/javaee-api/5.1.1/javaee-api-5.1.1.jar" />
+		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/repositories/maven2-internal/org/ow2/jonas/jonas-web-container-tomcat-6.0/5.1.2/jonas-web-container-tomcat-6.0-5.1.2-ipojo.jar;${app.server.dir}/repositories/maven2-internal/org/ow2/jonas/osgi/javaee-api/5.1.2/javaee-api-5.1.2.jar" />
 
 		<if>
 			<not>

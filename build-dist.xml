@@ -618,37 +618,37 @@ release was successful.</echo>
 
 		<unzip src="${app.server.parent.dir}/${app.server.jonas.zip.name}" dest="${app.server.parent.dir}">
 			<patternset
-				excludes="jonas-full-5.1.1/examples/**,jonas-full-5.1.1/tutorial/**"
+				excludes="jonas-full-5.1.2/examples/**,jonas-full-5.1.2/tutorial/**"
 			/>
 			<mapper
 				type="glob"
-				from="jonas-full-5.1.1/*"
-				to="jonas-5.1.1/*"
+				from="jonas-full-5.1.2/*"
+				to="jonas-5.1.2/*"
 			/>
 		</unzip>
 
 		<delete includeemptydirs="true" failonerror="false">
 			<fileset
-				dir="${app.server.parent.dir}/jonas-5.1.1/conf"
+				dir="${app.server.parent.dir}/jonas-5.1.2/conf"
 				includes="db2.properties,FirebirdSQL.properties,HSQL1.properties,jetty*.xml,InstantDB1.properties,InterBase1.properties,MailMimePartDS1.properties,MailSession1.properties,McKoi1.properties,MySQL.properties,Oracle1.properties,PostgreSQL1.properties,spy.properties,Sybase1.properties"
 			/>
 			<fileset
-				dir="${app.server.parent.dir}/jonas-5.1.1/deploy"
+				dir="${app.server.parent.dir}/jonas-5.1.2/deploy"
 				includes="ctxroot.xml,doc.xml,jonasAdmin.xml"
 			/>
 			<fileset
-				dir="${app.server.parent.dir}/jonas-5.1.1/repositories/maven2-internal"
+				dir="${app.server.parent.dir}/jonas-5.1.2/repositories/maven2-internal"
 				includes="org/mortbay/**,org/ow2/jonas/documentation/**,org/ow2/jonas/jonas-admin/**,org/ow2/jonas/jonas-ctxroot/**"
 			/>
 		</delete>
 
 		<replace
-			file="${app.server.parent.dir}/jonas-5.1.1/conf/jonas.properties"
+			file="${app.server.parent.dir}/jonas-5.1.2/conf/jonas.properties"
 			token="HSQL1"
 			value=""
 		/>
 
-		<replace file="${app.server.parent.dir}/jonas-5.1.1/conf/tomcat6-server.xml">
+		<replace file="${app.server.parent.dir}/jonas-5.1.2/conf/tomcat6-server.xml">
 			<replacefilter token="9000" value="8080" />
 			<replacefilter token="9009" value="8009" />
 			<replacefilter token="9043" value="8443" />
