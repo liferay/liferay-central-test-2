@@ -127,8 +127,6 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 				</aui:column>
 
 				<aui:column columnWidth="<%= 75 %>" cssClass="<%= panelBodyCssClass %>" last="<%= true %>">
-					<span id="mainContent"></span>
-
 					<%@ include file="/html/portal/layout/view/panel_content.jspf" %>
 				</aui:column>
 			</aui:layout>
