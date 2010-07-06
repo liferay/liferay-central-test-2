@@ -31,15 +31,18 @@ if (followRedirect && (redirectPage != null)) {
 }
 
 String title = wikiPage.getTitle();
+
 String parentTitle = StringPool.BLANK;
+
+if (wikiPage != null) {
+	parentTitle = wikiPage.getParentTitle();
+}
 
 List childPages = wikiPage.getChildPages();
 
 String[] attachments = new String[0];
 
 if (wikiPage != null) {
-	parentTitle = wikiPage.getParentTitle();
-
 	attachments = wikiPage.getAttachmentsFiles();
 }
 
@@ -58,6 +61,7 @@ if (Validator.isNotNull(parentTitle)) {
 	viewParentPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
 
 	viewParentPageURL.setParameter("title", parentTitle);
+
 	parentTitle = StringUtil.shorten(parentTitle, 20);
 }
 
