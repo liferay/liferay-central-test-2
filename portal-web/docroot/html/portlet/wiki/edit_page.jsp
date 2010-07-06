@@ -362,7 +362,7 @@ if (Validator.isNull(redirect)) {
 					</div>
 				</c:if>
 
-				<c:if test="<%= approved %>">
+				<c:if test="<%= !newPage && approved %>">
 					<div class="portlet-msg-info">
 						<liferay-ui:message key="a-new-version-will-be-created-automatically-if-this-content-is-modified" />
 					</div>
