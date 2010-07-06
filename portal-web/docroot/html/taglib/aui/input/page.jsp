@@ -65,7 +65,7 @@ if ((model != null) && Validator.isNull(type)) {
 
 	String fieldParam = (String)dynamicAttributes.get("fieldParam");
 
-	if (Validator.isNotNull(fieldParam)){
+	if (Validator.isNotNull(fieldParam)) {
 		forLabel = namespace + fieldParam;
 	}
 
