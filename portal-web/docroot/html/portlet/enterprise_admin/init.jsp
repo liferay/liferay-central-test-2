@@ -175,14 +175,6 @@ if (Validator.isNull(tabs1)) {
 	tabs1 = "users";
 }
 
-boolean showUnlinkUserGroupRoleIcon = true;
-boolean showUnlinkUserRoleIcon = true;
-
-if (portletName.equals(PortletKeys.MY_ACCOUNT)) {
-	showUnlinkUserGroupRoleIcon = false;
-	showUnlinkUserRoleIcon = false;
-}
-
 boolean filterManageableGroups = true;
 boolean filterManageableOrganizations = true;
 boolean filterManageableRoles = true;
