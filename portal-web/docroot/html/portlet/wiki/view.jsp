@@ -322,6 +322,19 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 	</c:if>
 </c:if>
 
+<aui:script use="aui-base">
+	var toc = A.one('.toc');
+
+	if (toc) {
+		var trigger = toc.one('a.toc-trigger');
+		var index = toc.one('.toc-index');
+
+		trigger.on('click', function(event) {
+			index.toggle();
+		});
+	}
+</aui:script>
+
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />searchFm.<portlet:namespace />keywords);

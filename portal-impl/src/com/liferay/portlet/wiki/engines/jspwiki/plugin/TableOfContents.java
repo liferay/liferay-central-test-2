@@ -64,18 +64,10 @@ public class TableOfContents extends com.ecyrd.jspwiki.plugin.TableOfContents {
 
 			sb.append(result.substring(0, x));
 			sb.append(StringPool.NBSP);
-			sb.append("<span style=\"cursor: pointer;\" ");
-			sb.append("onClick=\"Liferay.Util.toggleByIdSpan(this, '");
-			sb.append(id);
-			sb.append("'); self.focus();\">[");
-			sb.append("<span>-</span>");
-			sb.append("<span style=\"display: none;\">+</span>");
-			sb.append("]</span>\n");
+			sb.append("<a class=\"toc-trigger\" href=\"javascript:;\">[-]</a>");
 			sb.append("</h4>");
 
-			sb.append("<div id=\"");
-			sb.append(id);
-			sb.append("\">\n");
+			sb.append("<div class=\"toc-index\">\n");
 			sb.append(result.substring(y));
 			sb.append("</div>\n");
 
