@@ -39,6 +39,7 @@ String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 			extended_valid_elements : "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|usemap],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
 			file_browser_callback : "fileBrowserCallback",
 			init_instance_callback : "initInstanceCallback",
+			invalid_elements: "script",
 			onchange_callback : "onChangeCallback",
 			plugins : "preview,print,contextmenu",
 			theme_advanced_buttons1_add : "code,preview,print",
