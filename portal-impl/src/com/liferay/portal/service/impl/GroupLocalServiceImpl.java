@@ -1332,7 +1332,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if ((Validator.isNull(name)) || (Validator.isNumber(name)) ||
-			(name.indexOf(StringPool.COMMA) != -1) ||
 			(name.indexOf(StringPool.STAR) != -1)) {
 
 			throw new GroupNameException();
