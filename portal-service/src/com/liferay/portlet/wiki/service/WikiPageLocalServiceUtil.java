@@ -253,17 +253,6 @@ public class WikiPageLocalServiceUtil {
 		return getService().getDraftPage(nodeId, title);
 	}
 
-	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> getDraftPages(
-		long userId, long nodeId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getDraftPages(userId, nodeId, start, end);
-	}
-
-	public static int getDraftPagesCount(long userId, long nodeId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getDraftPagesCount(userId, nodeId);
-	}
-
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> getIncomingLinks(
 		long nodeId, java.lang.String title)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -392,6 +381,12 @@ public class WikiPageLocalServiceUtil {
 		return getService().getPages(nodeId, title, head, start, end);
 	}
 
+	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
+		long userId, long nodeId, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getPages(userId, nodeId, status, start, end);
+	}
+
 	public static int getPagesCount(long nodeId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getPagesCount(nodeId);
@@ -416,6 +411,11 @@ public class WikiPageLocalServiceUtil {
 	public static int getPagesCount(java.lang.String format)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getPagesCount(format);
+	}
+
+	public static int getPagesCount(long userId, long nodeId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getPagesCount(userId, nodeId, status);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> getRecentChanges(

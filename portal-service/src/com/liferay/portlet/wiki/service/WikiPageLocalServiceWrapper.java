@@ -244,17 +244,6 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 		return _wikiPageLocalService.getDraftPage(nodeId, title);
 	}
 
-	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getDraftPages(
-		long userId, long nodeId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _wikiPageLocalService.getDraftPages(userId, nodeId, start, end);
-	}
-
-	public int getDraftPagesCount(long userId, long nodeId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _wikiPageLocalService.getDraftPagesCount(userId, nodeId);
-	}
-
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getIncomingLinks(
 		long nodeId, java.lang.String title)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -380,6 +369,12 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 		return _wikiPageLocalService.getPages(nodeId, title, head, start, end);
 	}
 
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
+		long userId, long nodeId, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _wikiPageLocalService.getPages(userId, nodeId, status, start, end);
+	}
+
 	public int getPagesCount(long nodeId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _wikiPageLocalService.getPagesCount(nodeId);
@@ -403,6 +398,11 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 	public int getPagesCount(java.lang.String format)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _wikiPageLocalService.getPagesCount(format);
+	}
+
+	public int getPagesCount(long userId, long nodeId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _wikiPageLocalService.getPagesCount(userId, nodeId, status);
 	}
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getRecentChanges(
