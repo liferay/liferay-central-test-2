@@ -31,12 +31,15 @@ if (followRedirect && (redirectPage != null)) {
 }
 
 String title = wikiPage.getTitle();
+String parentTitle = StringPool.BLANK;
 
 List childPages = wikiPage.getChildPages();
 
 String[] attachments = new String[0];
 
 if (wikiPage != null) {
+	parentTitle = wikiPage.getParentTitle();
+
 	attachments = wikiPage.getAttachmentsFiles();
 }
 
@@ -48,6 +51,15 @@ PortletURL viewPageURL = renderResponse.createRenderURL();
 viewPageURL.setParameter("struts_action", "/wiki/view");
 viewPageURL.setParameter("nodeName", node.getName());
 viewPageURL.setParameter("title", title);
+
+PortletURL viewParentPageURL = null;
+
+if (Validator.isNotNull(parentTitle)) {
+	viewParentPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
+
+	viewParentPageURL.setParameter("title", parentTitle);
+	parentTitle = StringUtil.shorten(parentTitle, 20);
+}
 
 PortletURL addPageURL = renderResponse.createRenderURL();
 
@@ -118,44 +130,46 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
-<h1 class="page-title">
-	<c:if test="<%= !print %>">
-		<div class="page-actions">
-			<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
-				<c:if test="<%= followRedirect || (redirectPage == null) %>">
-					<liferay-ui:icon
-						image="edit"
-						label="<%= true %>"
-						url="<%= editPageURL.toString() %>"
-					/>
-				</c:if>
+<liferay-ui:header
+	backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", parentTitle) %>'
+	backURL="<%= (viewParentPageURL != null) ? viewParentPageURL.toString() : null %>"
+	title="<%= title %>"
+/>
+
+<c:if test="<%= !print %>">
+	<div class="page-actions top-actions">
+		<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
+			<c:if test="<%= followRedirect || (redirectPage == null) %>">
+				<liferay-ui:icon
+					image="edit"
+					label="<%= true %>"
+					url="<%= editPageURL.toString() %>"
+				/>
 			</c:if>
+		</c:if>
 
-			<%
-			PortletURL viewPageDetailsURL = PortletURLUtil.clone(viewPageURL, renderResponse);
+		<%
+		PortletURL viewPageDetailsURL = PortletURLUtil.clone(viewPageURL, renderResponse);
 
-			viewPageDetailsURL.setParameter("struts_action", "/wiki/view_page_details");
-			viewPageDetailsURL.setParameter("redirect", currentURL);
-			%>
+		viewPageDetailsURL.setParameter("struts_action", "/wiki/view_page_details");
+		viewPageDetailsURL.setParameter("redirect", currentURL);
+		%>
 
-			<liferay-ui:icon
-				image="history"
-				label="<%= true %>"
-				message="details"
-				method="get"
-				url="<%= viewPageDetailsURL.toString() %>"
-			/>
+		<liferay-ui:icon
+			image="history"
+			label="<%= true %>"
+			message="details"
+			method="get"
+			url="<%= viewPageDetailsURL.toString() %>"
+		/>
 
-			<liferay-ui:icon
-				image="print"
-				label="<%= true %>"
-				url='<%= "javascript:" + renderResponse.getNamespace() + "printPage();" %>'
-			/>
-		</div>
-	</c:if>
-
-	<%= title %>
-</h1>
+		<liferay-ui:icon
+			image="print"
+			label="<%= true %>"
+			url='<%= "javascript:" + renderResponse.getNamespace() + "printPage();" %>'
+		/>
+	</div>
+</c:if>
 
 <c:if test="<%= originalPage != null %>">
 
@@ -216,7 +230,7 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 		<div class="child-pages">
 			<h2><liferay-ui:message key="children-pages" /></h2>
 
-			<ul class="child-pages">
+			<ul>
 
 				<%
 				PortletURL curPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
@@ -278,12 +292,12 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 	</div>
 
 	<c:if test="<%= enablePageRatings %>">
-		<br />
-
-		<liferay-ui:ratings
-			className="<%= WikiPage.class.getName() %>"
-			classPK="<%= wikiPage.getResourcePrimKey() %>"
-		/>
+		<div class="page-ratings">
+			<liferay-ui:ratings
+				className="<%= WikiPage.class.getName() %>"
+				classPK="<%= wikiPage.getResourcePrimKey() %>"
+			/>
+		</div>
 	</c:if>
 
 	<c:if test="<%= enableComments %>">

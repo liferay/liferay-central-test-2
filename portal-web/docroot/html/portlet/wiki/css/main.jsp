@@ -30,7 +30,7 @@
 .portlet-wiki .toc {
 	border: 1px solid #aaa;
 	background-color: #f9f9f9;
-	padding: 10px;
+	padding: 0 1em;
 }
 
 .portlet-wiki .toc h4 {
@@ -64,32 +64,37 @@
 }
 
 .portlet-wiki .taglib-discussion {
-	margin-top: 18px;
+	margin: 1em;
 }
 
 .portlet-wiki .page-tags {
 	color: #7d7d7d;
 }
 
-.portlet-wiki .portlet-body h1.page-title, .portlet-wiki .portlet-body h2, .portlet-wiki .portlet-body h3 {
-	border-bottom: 1px solid #aaa;
-	margin-bottom: 0.5em;
-	padding-bottom: 5px;
+.portlet-wiki .portlet-body h2 {
+	border-bottom: 1px solid #999;
+	font-size: 1.5em;
+	font-weight: normal;
+	margin-bottom: 0.5em 0;
 }
 
-.portlet-wiki .portlet-body h1.page-title {
-	clear: both;
-	margin: 0 0 10px;
+.portlet-wiki .portlet-body h3 {
+	color: #222;
+	font-weight: bold;
+	font-size: 1.4em;
+	margin-bottom: 1em 0;
+}
+
+.portlet-wiki .portlet-body h4 {
+	color: #222;
+	font-size: 1.2em;
+	margin: 1em 0;
 }
 
 .portlet-wiki .portlet-body h1.page-title .return-to-page {
 	background: url(<%= themeImagesPath %>/wiki/return_to_page.png) no-repeat 0 50%;
 	padding-left: 20px;
 	text-decoration: none;
-}
-
-.portlet-wiki .portlet-body h3 {
-	border-bottom: 1px dotted #aaa;
 }
 
 .portlet-wiki .preview {
@@ -105,6 +110,18 @@
 .portlet-wiki .taglib-custom-attributes-list label {
 	display: block;
 	font-weight: bold;
+}
+
+.portlet-wiki .child-pages {
+	margin: 2em 0;
+}
+
+.portlet-wiki .child-pages h2 {
+	background-color: #DDD;
+	border-width: 0;
+	font-weight: normal;
+	margin: 0 0 0.5em;
+	padding: 0.2em;
 }
 
 .portlet-wiki .child-pages h3 {
@@ -230,17 +247,12 @@
 	color: #999;
 }
 
-.portlet-wiki .page-title .page-actions {
-	float: right;
+.portlet-wiki .page-actions.top-actions {
 	margin-top: 0;
+	text-align: right;
 }
 
-.portlet-wiki .page-title .page-actions {
-	font-size: 11px;
-	font-weight: normal;
-}
-
-.portlet-wiki .page-title .page-actions img {
+.portlet-wiki .page-actions.top-actions img {
 	margin-left: 5px;
 }
 
@@ -264,6 +276,10 @@
 	line-height: 1.2em;
 	margin: -1em 0 1.4em 0;
 	width: auto;
+}
+
+.portlet-wiki .page-ratings {
+	margin: 2em 0;
 }
 
 .portlet-wiki .page-redirect {
