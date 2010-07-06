@@ -111,22 +111,6 @@ import javax.portlet.WindowState;
 public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	public WikiPage addPage(
-			long userId, long nodeId, String title, String content,
-			String summary, boolean minorEdit, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		double version = WikiPageConstants.DEFAULT_VERSION;
-		String format = WikiPageConstants.DEFAULT_FORMAT;
-		boolean head = false;
-		String parentTitle = null;
-		String redirectTitle = null;
-
-		return addPage(
-			userId, nodeId, title, version, content, summary, minorEdit, format,
-			head, parentTitle, redirectTitle, serviceContext);
-	}
-
-	public WikiPage addPage(
 			long userId, long nodeId, String title, double version,
 			String content, String summary, boolean minorEdit, String format,
 			boolean head, String parentTitle, String redirectTitle,
@@ -223,6 +207,22 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		return page;
 	}
 
+	public WikiPage addPage(
+			long userId, long nodeId, String title, String content,
+			String summary, boolean minorEdit, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		double version = WikiPageConstants.DEFAULT_VERSION;
+		String format = WikiPageConstants.DEFAULT_FORMAT;
+		boolean head = false;
+		String parentTitle = null;
+		String redirectTitle = null;
+
+		return addPage(
+			userId, nodeId, title, version, content, summary, minorEdit, format,
+			head, parentTitle, redirectTitle, serviceContext);
+	}
+
 	public void addPageAttachment(
 			long companyId, String dirName, Date modifiedDate, String fileName,
 			InputStream inputStream)
@@ -299,6 +299,16 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	public void addPageResources(
+			long nodeId, String title, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		WikiPage page = getPage(nodeId, title);
+
+		addPageResources(page, communityPermissions, guestPermissions);
+	}
+
+	public void addPageResources(
 			WikiPage page, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -307,16 +317,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			page.getCompanyId(), page.getGroupId(),	page.getUserId(),
 			WikiPage.class.getName(), page.getResourcePrimKey(), false,
 			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void addPageResources(
-			long nodeId, String title, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		WikiPage page = getPage(nodeId, title);
-
-		addPageResources(page, communityPermissions, guestPermissions);
 	}
 
 	public void addPageResources(
@@ -742,33 +742,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			page.getFormat(), page.getHead(), page.getAttachmentsFiles());
 	}
 
-	public List<WikiPage> getPages(long nodeId, int start, int end)
-		throws SystemException {
-
-		return wikiPagePersistence.findByNodeId(
-			nodeId, start, end, new PageCreateDateComparator(false));
-	}
-
-	public List<WikiPage> getPages(String format) throws SystemException {
-		return wikiPagePersistence.findByFormat(format);
-	}
-
-	public List<WikiPage> getPages(
-			long nodeId, String title, int start, int end)
-		throws SystemException {
-
-		return wikiPagePersistence.findByN_T(
-			nodeId, title, start, end, new PageCreateDateComparator(false));
-	}
-
-	public List<WikiPage> getPages(
-			long nodeId, String title, int start, int end,
-			OrderByComparator obc)
-		throws SystemException {
-
-		return wikiPagePersistence.findByN_T(nodeId, title, start, end, obc);
-	}
-
 	public List<WikiPage> getPages(
 			long nodeId, boolean head, int start, int end)
 		throws SystemException {
@@ -778,20 +751,18 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			new PageCreateDateComparator(false));
 	}
 
+	public List<WikiPage> getPages(long nodeId, int start, int end)
+		throws SystemException {
+
+		return wikiPagePersistence.findByNodeId(
+			nodeId, start, end, new PageCreateDateComparator(false));
+	}
+
 	public List<WikiPage> getPages(
 			long resourcePrimKey, long nodeId, int status)
 		throws SystemException {
 
 		return wikiPagePersistence.findByR_N_S(resourcePrimKey, nodeId, status);
-	}
-
-	public List<WikiPage> getPages(
-			long nodeId, String title, boolean head, int start, int end)
-		throws SystemException {
-
-		return wikiPagePersistence.findByN_T_H(
-			nodeId, title, head, start, end,
-			new PageCreateDateComparator(false));
 	}
 
 	public List<WikiPage> getPages(
@@ -810,14 +781,37 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 	}
 
-	public int getPagesCount(long nodeId) throws SystemException {
-		return wikiPagePersistence.countByNodeId(nodeId);
-	}
-
-	public int getPagesCount(long nodeId, String title)
+	public List<WikiPage> getPages(
+			long nodeId, String title, boolean head, int start, int end)
 		throws SystemException {
 
-		return wikiPagePersistence.countByN_T(nodeId, title);
+		return wikiPagePersistence.findByN_T_H(
+			nodeId, title, head, start, end,
+			new PageCreateDateComparator(false));
+	}
+
+	public List<WikiPage> getPages(
+			long nodeId, String title, int start, int end)
+		throws SystemException {
+
+		return wikiPagePersistence.findByN_T(
+			nodeId, title, start, end, new PageCreateDateComparator(false));
+	}
+
+	public List<WikiPage> getPages(
+			long nodeId, String title, int start, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return wikiPagePersistence.findByN_T(nodeId, title, start, end, obc);
+	}
+
+	public List<WikiPage> getPages(String format) throws SystemException {
+		return wikiPagePersistence.findByFormat(format);
+	}
+
+	public int getPagesCount(long nodeId) throws SystemException {
+		return wikiPagePersistence.countByNodeId(nodeId);
 	}
 
 	public int getPagesCount(long nodeId, boolean head)
@@ -825,16 +819,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		return wikiPagePersistence.countByN_H_S(
 			nodeId, head, WorkflowConstants.STATUS_APPROVED);
-	}
-
-	public int getPagesCount(long nodeId, String title, boolean head)
-		throws SystemException {
-
-		return wikiPagePersistence.countByN_T_H(nodeId, title, head);
-	}
-
-	public int getPagesCount(String format) throws SystemException {
-		return wikiPagePersistence.countByFormat(format);
 	}
 
 	public int getPagesCount(long userId, long nodeId, int status)
@@ -846,6 +830,22 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		else {
 			return wikiPagePersistence.countByN_S(nodeId, status);
 		}
+	}
+
+	public int getPagesCount(long nodeId, String title)
+		throws SystemException {
+
+		return wikiPagePersistence.countByN_T(nodeId, title);
+	}
+
+	public int getPagesCount(long nodeId, String title, boolean head)
+		throws SystemException {
+
+		return wikiPagePersistence.countByN_T_H(nodeId, title, head);
+	}
+
+	public int getPagesCount(String format) throws SystemException {
+		return wikiPagePersistence.countByFormat(format);
 	}
 
 	public List<WikiPage> getRecentChanges(long nodeId, int start, int end)
@@ -879,14 +879,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		else {
 			return false;
 		}
-	}
-
-	public void movePage(
-			long userId, long nodeId, String title, String newTitle,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		movePage(userId, nodeId, title, newTitle, true, serviceContext);
 	}
 
 	public void movePage(
@@ -995,6 +987,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			new Object[] {page.getCompanyId(), page.getNodeId(), title});
 
 		indexer.reindex(page);
+	}
+
+	public void movePage(
+			long userId, long nodeId, String title, String newTitle,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		movePage(userId, nodeId, title, newTitle, true, serviceContext);
 	}
 
 	public WikiPage revertPage(

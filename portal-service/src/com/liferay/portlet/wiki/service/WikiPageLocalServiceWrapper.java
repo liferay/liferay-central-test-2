@@ -125,16 +125,6 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 	}
 
 	public com.liferay.portlet.wiki.model.WikiPage addPage(long userId,
-		long nodeId, java.lang.String title, java.lang.String content,
-		java.lang.String summary, boolean minorEdit,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _wikiPageLocalService.addPage(userId, nodeId, title, content,
-			summary, minorEdit, serviceContext);
-	}
-
-	public com.liferay.portlet.wiki.model.WikiPage addPage(long userId,
 		long nodeId, java.lang.String title, double version,
 		java.lang.String content, java.lang.String summary, boolean minorEdit,
 		java.lang.String format, boolean head, java.lang.String parentTitle,
@@ -145,6 +135,16 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 		return _wikiPageLocalService.addPage(userId, nodeId, title, version,
 			content, summary, minorEdit, format, head, parentTitle,
 			redirectTitle, serviceContext);
+	}
+
+	public com.liferay.portlet.wiki.model.WikiPage addPage(long userId,
+		long nodeId, java.lang.String title, java.lang.String content,
+		java.lang.String summary, boolean minorEdit,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _wikiPageLocalService.addPage(userId, nodeId, title, content,
+			summary, minorEdit, serviceContext);
 	}
 
 	public void addPageAttachment(long companyId, java.lang.String dirName,
@@ -171,14 +171,6 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 			addCommunityPermissions, addGuestPermissions);
 	}
 
-	public void addPageResources(com.liferay.portlet.wiki.model.WikiPage page,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_wikiPageLocalService.addPageResources(page, addCommunityPermissions,
-			addGuestPermissions);
-	}
-
 	public void addPageResources(long nodeId, java.lang.String title,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -186,6 +178,14 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 			com.liferay.portal.kernel.exception.SystemException {
 		_wikiPageLocalService.addPageResources(nodeId, title,
 			communityPermissions, guestPermissions);
+	}
+
+	public void addPageResources(com.liferay.portlet.wiki.model.WikiPage page,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_wikiPageLocalService.addPageResources(page, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public void addPageResources(com.liferay.portlet.wiki.model.WikiPage page,
@@ -327,15 +327,33 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 	}
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
+		long nodeId, boolean head, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _wikiPageLocalService.getPages(nodeId, head, start, end);
+	}
+
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
 		long nodeId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _wikiPageLocalService.getPages(nodeId, start, end);
 	}
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
-		java.lang.String format)
+		long resourcePrimKey, long nodeId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _wikiPageLocalService.getPages(format);
+		return _wikiPageLocalService.getPages(resourcePrimKey, nodeId, status);
+	}
+
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
+		long userId, long nodeId, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _wikiPageLocalService.getPages(userId, nodeId, status, start, end);
+	}
+
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
+		long nodeId, java.lang.String title, boolean head, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _wikiPageLocalService.getPages(nodeId, title, head, start, end);
 	}
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
@@ -352,27 +370,9 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 	}
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
-		long nodeId, boolean head, int start, int end)
+		java.lang.String format)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _wikiPageLocalService.getPages(nodeId, head, start, end);
-	}
-
-	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
-		long resourcePrimKey, long nodeId, int status)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _wikiPageLocalService.getPages(resourcePrimKey, nodeId, status);
-	}
-
-	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
-		long nodeId, java.lang.String title, boolean head, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _wikiPageLocalService.getPages(nodeId, title, head, start, end);
-	}
-
-	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
-		long userId, long nodeId, int status, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _wikiPageLocalService.getPages(userId, nodeId, status, start, end);
+		return _wikiPageLocalService.getPages(format);
 	}
 
 	public int getPagesCount(long nodeId)
@@ -380,14 +380,19 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 		return _wikiPageLocalService.getPagesCount(nodeId);
 	}
 
-	public int getPagesCount(long nodeId, java.lang.String title)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _wikiPageLocalService.getPagesCount(nodeId, title);
-	}
-
 	public int getPagesCount(long nodeId, boolean head)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _wikiPageLocalService.getPagesCount(nodeId, head);
+	}
+
+	public int getPagesCount(long userId, long nodeId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _wikiPageLocalService.getPagesCount(userId, nodeId, status);
+	}
+
+	public int getPagesCount(long nodeId, java.lang.String title)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _wikiPageLocalService.getPagesCount(nodeId, title);
 	}
 
 	public int getPagesCount(long nodeId, java.lang.String title, boolean head)
@@ -398,11 +403,6 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 	public int getPagesCount(java.lang.String format)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _wikiPageLocalService.getPagesCount(format);
-	}
-
-	public int getPagesCount(long userId, long nodeId, int status)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _wikiPageLocalService.getPagesCount(userId, nodeId, status);
 	}
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getRecentChanges(
@@ -422,20 +422,20 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 	}
 
 	public void movePage(long userId, long nodeId, java.lang.String title,
-		java.lang.String newTitle,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_wikiPageLocalService.movePage(userId, nodeId, title, newTitle,
-			serviceContext);
-	}
-
-	public void movePage(long userId, long nodeId, java.lang.String title,
 		java.lang.String newTitle, boolean strict,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_wikiPageLocalService.movePage(userId, nodeId, title, newTitle, strict,
+			serviceContext);
+	}
+
+	public void movePage(long userId, long nodeId, java.lang.String title,
+		java.lang.String newTitle,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_wikiPageLocalService.movePage(userId, nodeId, title, newTitle,
 			serviceContext);
 	}
 
