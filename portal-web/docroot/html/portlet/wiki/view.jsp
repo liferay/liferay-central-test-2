@@ -327,15 +327,18 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 </c:if>
 
 <aui:script use="aui-base">
-	var toc = A.one('.toc');
+	var toc = A.one('#p_p_id<portlet:namespace/> .toc');
 
 	if (toc) {
-		var trigger = toc.one('a.toc-trigger');
 		var index = toc.one('.toc-index');
+		var trigger = toc.one('a.toc-trigger');
 
-		trigger.on('click', function(event) {
-			index.toggle();
-		});
+		trigger.on(
+			'click',
+			function(event) {
+				index.toggle();
+			}
+		);
 	}
 </aui:script>
 
