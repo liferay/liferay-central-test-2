@@ -76,6 +76,10 @@ public class ResultRow {
 		return _bold;
 	}
 
+	public void setBold(boolean bold) {
+		_bold = bold;
+	}
+
 	public boolean isRestricted() {
 		return _restricted;
 	}

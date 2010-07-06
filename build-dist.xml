@@ -656,7 +656,7 @@ release was successful.</echo>
 	</target>
 
 	<target name="unzip-resin">
-		<delete dir="${app.server.parent.dir}/resin-3.1.9" />
+		<delete dir="${app.server.parent.dir}/resin-3.1.10" />
 
 		<if>
 			<not>
@@ -673,11 +673,11 @@ release was successful.</echo>
 
 		<unzip src="${app.server.parent.dir}/${app.server.resin.zip.name}" dest="${app.server.parent.dir}">
 			<patternset
-				excludes="resin-3.1.9/php/**,resin-3.1.9/webapps/**"
+				excludes="resin-3.1.10/php/**,resin-3.1.10/webapps/**"
 			/>
 		</unzip>
 
-		<mkdir dir="${app.server.parent.dir}/resin-3.1.9/webapps" />
+		<mkdir dir="${app.server.parent.dir}/resin-3.1.10/webapps" />
 	</target>
 
 	<target name="unzip-tomcat">
