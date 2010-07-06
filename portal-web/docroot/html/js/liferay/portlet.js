@@ -9,9 +9,6 @@ Liferay.Portlet = {
 		return (id in instance._staticPortlets);
 	},
 
-	refreshLayout: function(portletBound) {
-	},
-
 	_staticPortlets: {}
 };
 
