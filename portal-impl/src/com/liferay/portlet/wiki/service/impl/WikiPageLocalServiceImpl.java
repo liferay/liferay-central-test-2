@@ -550,35 +550,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	}
 
-	public List<WikiPage> getDraftPages(
-			long userId, long nodeId, int start, int end)
-		throws SystemException {
-
-		if (userId > 0) {
-			return wikiPagePersistence.findByU_N_S(
-				userId, nodeId, WorkflowConstants.STATUS_DRAFT, start, end,
-				new PageCreateDateComparator(false));
-		}
-		else {
-			return wikiPagePersistence.findByN_S(
-				nodeId, WorkflowConstants.STATUS_DRAFT, start, end,
-				new PageCreateDateComparator(false));
-		}
-	}
-
-	public int getDraftPagesCount(long userId, long nodeId)
-		throws SystemException {
-
-		if (userId > 0) {
-			return wikiPagePersistence.countByU_N_S(
-				userId, nodeId, WorkflowConstants.STATUS_DRAFT);
-		}
-		else {
-			return wikiPagePersistence.countByN_S(
-				nodeId, WorkflowConstants.STATUS_DRAFT);
-		}
-	}
-
 	public List<WikiPage> getIncomingLinks(long nodeId, String title)
 		throws PortalException, SystemException {
 
@@ -823,6 +794,22 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			new PageCreateDateComparator(false));
 	}
 
+	public List<WikiPage> getPages(
+			long userId, long nodeId, int status, int start, int end)
+		throws SystemException {
+
+		if (userId > 0) {
+			return wikiPagePersistence.findByU_N_S(
+				userId, nodeId, status, start, end,
+				new PageCreateDateComparator(false));
+		}
+		else {
+			return wikiPagePersistence.findByN_S(
+				nodeId, status, start, end,
+				new PageCreateDateComparator(false));
+		}
+	}
+
 	public int getPagesCount(long nodeId) throws SystemException {
 		return wikiPagePersistence.countByNodeId(nodeId);
 	}
@@ -848,6 +835,17 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	public int getPagesCount(String format) throws SystemException {
 		return wikiPagePersistence.countByFormat(format);
+	}
+
+	public int getPagesCount(long userId, long nodeId, int status)
+		throws SystemException {
+
+		if (userId > 0) {
+			return wikiPagePersistence.countByU_N_S(userId, nodeId, status);
+		}
+		else {
+			return wikiPagePersistence.countByN_S(nodeId, status);
+		}
 	}
 
 	public List<WikiPage> getRecentChanges(long nodeId, int start, int end)

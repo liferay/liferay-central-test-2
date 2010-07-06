@@ -18,8 +18,16 @@
 
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
-<h1 class="page-title"><liferay-ui:message key="draft-pages" /></h1>
+<liferay-ui:header
+	title="draft-pages"
+/>
 
 <liferay-util:include page="/html/portlet/wiki/page_iterator.jsp">
 	<liferay-util:param name="type" value="draft_pages" />
+</liferay-util:include>
+
+<h2><liferay-ui:message key="pending-approval" /></h2>
+
+<liferay-util:include page="/html/portlet/wiki/page_iterator.jsp">
+	<liferay-util:param name="type" value="pending_pages" />
 </liferay-util:include>

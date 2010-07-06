@@ -43,7 +43,7 @@ else if (type.equals("categorized_pages")) {
 
 	AssetUtil.addPortletBreadcrumbEntries(categoryId, request, PortletURLUtil.clone(portletURL, renderResponse));
 }
-else if (type.equals("draft_pages")) {
+else if (type.equals("draft_pages") && type.equals("pending_pages")) {
 	portletURL.setParameter("struts_action", "/wiki/view_draft_pages");
 
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "draft-pages"), portletURL.toString());
@@ -110,7 +110,7 @@ if (type.equals("history") || type.equals("recent_changes")) {
 	headerNames.add("summary");
 }
 
-if (type.equals("all_pages") || type.equals("categorized_pages") || type.equals("draft_pages") || type.equals("history") || type.equals("orphan_pages") || type.equals("recent_changes") || type.equals("tagged_pages")) {
+if (type.equals("all_pages") || type.equals("categorized_pages") || type.equals("draft_pages") || type.equals("history") || type.equals("orphan_pages") || type.equals("pending_pages") || type.equals("recent_changes") || type.equals("tagged_pages")) {
 	headerNames.add(StringPool.BLANK);
 }
 
@@ -127,6 +127,9 @@ else if (type.equals("incoming_links")) {
 }
 else if (type.equals("outgoing_links")) {
 	emptyResultsMessage = "this-page-has-no-links";
+}
+else if (type.equals("pending_pages")) {
+	emptyResultsMessage = "there-are-pages-submitted-by-you-pending-for-approval";
 }
 else if (type.equals("recent_changes")) {
 	emptyResultsMessage = "there-are-no-recent-changes";
@@ -164,15 +167,21 @@ else if (type.equals("categorized_pages") || type.equals("tagged_pages")) {
 		results.add(assetPage);
 	}
 }
-else if (type.equals("draft_pages")) {
+else if (type.equals("draft_pages") || type.equals("pending_pages")) {
 	long draftUserId = user.getUserId();
 
 	if (permissionChecker.isCompanyAdmin() || permissionChecker.isCommunityAdmin(scopeGroupId)) {
 		draftUserId = 0;
 	}
 
-	total = WikiPageLocalServiceUtil.getDraftPagesCount(draftUserId, node.getNodeId());
-	results = WikiPageLocalServiceUtil.getDraftPages(draftUserId, node.getNodeId(), searchContainer.getStart(), searchContainer.getEnd());
+	int status = WorkflowConstants.STATUS_DRAFT;
+
+	if (type.equals("pending_pages")) {
+		status = WorkflowConstants.STATUS_PENDING;
+	}
+
+	total = WikiPageLocalServiceUtil.getPagesCount(draftUserId, node.getNodeId(), status);
+	results = WikiPageLocalServiceUtil.getPages(draftUserId, node.getNodeId(), status, searchContainer.getStart(), searchContainer.getEnd());
 }
 else if (type.equals("orphan_pages")) {
 	List<WikiPage> orphans = WikiPageLocalServiceUtil.getOrphans(node.getNodeId());
