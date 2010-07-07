@@ -47,6 +47,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -56,6 +58,7 @@ import org.apache.tools.ant.DirectoryScanner;
  * <a href="JavadocFormatter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Connor McKay
  */
 public class JavadocFormatter {
 
@@ -90,7 +93,9 @@ public class JavadocFormatter {
 		ds.setBasedir(_basedir);
 		ds.setExcludes(
 			new String[] {
-				"**\\classes\\**", "**\\portal-client\\**"
+				"**\\classes\\**",
+				"**\\portal-client\\**",
+				"**\\tools\\liferay-doclet\\**"
 			});
 
 		List<String> includes = new ArrayList<String>();
@@ -131,14 +136,6 @@ public class JavadocFormatter {
 
 		if (comment.startsWith("Copyright (c) 2000-2010 Liferay, Inc.")) {
 			comment = StringPool.BLANK;
-		}
-
-		if (comment.startsWith(
-				"<a href=\"" + javaClass.getName() + ".java.html\">")) {
-
-			int pos = comment.indexOf("</a>");
-
-			comment = comment.substring(pos + 4).trim();
 		}
 
 		commentElement.addCDATA(comment);
@@ -387,9 +384,11 @@ public class JavadocFormatter {
 			value = value.substring(name.length());
 		}
 
+		value = _trimMultilineText(value);
+
 		Element commentElement = paramElement.addElement("comment");
 
-		commentElement.addCDATA(_getCDATA(value));
+		commentElement.addCDATA(value);
 	}
 
 	private void _addParamElements(
@@ -472,27 +471,18 @@ public class JavadocFormatter {
 			return StringPool.BLANK;
 		}
 
-		cdata = _trimMultilineText(cdata);
+		cdata = cdata.replaceAll(
+			"(?s)\\s*<(p|pre|[ou]l)>\\s*(.*?)\\s*</\\1>\\s*",
+			"\n\n<$1>\n$2\n</$1>\n\n");
 
-		cdata = StringUtil.replace(
-			cdata,
-			new String[] {
-				"\n", "<p>", "</p>", "<li>", "</li>"
-			},
-			new String[] {
-				" ", " \n<p>\n", "\n</p>\n", " \n<li>\n", "\n</li>\n"
-			});
+		cdata = cdata.replaceAll(
+			"(?s)\\s*<li>\\s*(.*?)\\s*</li>\\s*", "\n<li>\n$1\n</li>\n");
 
-		while (cdata.contains("\n ")) {
-			cdata = StringUtil.replace(cdata, "\n ", "\n");
-		}
+		cdata = StringUtil.replace(cdata, "</li>\n\n<li>", "</li>\n<li>");
 
-		while (cdata.contains("  ")) {
-			cdata = StringUtil.replace(cdata, "  ", " ");
-		}
+		cdata = cdata.replaceAll("\n\\s+\n", "\n\n");
 
-		cdata = StringUtil.replace(cdata, "</p>\n<p>", "</p>\n\n<p>");
-		cdata = StringUtil.replace(cdata, "</li>\n<li>", "</li>\n\n<li>");
+		cdata = cdata.replaceAll(" +", " ");
 
 		return cdata.trim();
 	}
@@ -566,19 +556,10 @@ public class JavadocFormatter {
 
 		sb.append("/**\n");
 
-		String viewSourceHREF =
-			" * <a href=\"" + javaClass.getName() +
-				".java.html\"><b><i>View Source</i></b></a>";
-
-		sb.append(ServiceBuilder.wrapViewSourceHREF(viewSourceHREF));
-		sb.append("\n");
-
 		String comment = rootElement.elementText("comment");
 
 		if (_initializeMissingJavadocs || Validator.isNotNull(comment)) {
-			sb.append(" *\n");
 			sb.append(_wrapText(comment, indent));
-			sb.append("\n");
 		}
 
 		String docletTags = _addDocletTags(
@@ -666,7 +647,6 @@ public class JavadocFormatter {
 
 		if (_initializeMissingJavadocs || Validator.isNotNull(comment)) {
 			sb.append(_wrapText(comment, indent));
-			sb.append("\n");
 		}
 
 		String docletTags = _addDocletTags(
@@ -728,7 +708,6 @@ public class JavadocFormatter {
 
 		if (_initializeMissingJavadocs || Validator.isNotNull(comment)) {
 			sb.append(_wrapText(comment, indent));
-			sb.append("\n");
 		}
 
 		String docletTags = _addDocletTags(
@@ -1019,19 +998,31 @@ public class JavadocFormatter {
 	private String _wrapText(String text, String indent) {
 		int indentLength = _getIndentLength(indent);
 
-		text = StringUtil.wrap(text, 80 - indentLength - 3, "\n");
+		// Do not wrap text inside <pre>
+		if (text.contains("<pre>")) {
+			Pattern p = Pattern.compile("(?<=^|</pre>).+?(?=$|<pre>)", Pattern.DOTALL);
+			Matcher m = p.matcher(text);
 
-		text = "\n" + text.trim();
+			StringBuffer sb = new StringBuffer();
+			while (m.find()) {
+				String wrapped = StringUtil.wrap(
+					m.group(), 80 - indentLength - 3, "\n");
+				m.appendReplacement(sb, wrapped);
+			}
 
-		text = StringUtil.replace(text, "\n", "\n" + indent + " * ");
+			m.appendTail(sb);
 
-		while (text.contains(" \n")) {
-			text = StringUtil.replace(text, " \n", "\n");
+			sb.append("\n");
+
+			text = sb.toString();
+		}
+		else {
+			text = StringUtil.wrap(text, 80 - indentLength - 3, "\n");
 		}
 
-		while (text.startsWith("\n")) {
-			text = text.substring(1, text.length());
-		}
+		text = text.replaceAll("(?m)^", indent + " * ");
+
+		text = text.replaceAll("(?m) +$", StringPool.BLANK);
 
 		return text;
 	}
