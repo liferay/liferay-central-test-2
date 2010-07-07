@@ -88,7 +88,7 @@ import javax.portlet.ActionRequest;
  */
 public class StagingImpl {
 
-	public static void copyFromLive(ActionRequest actionRequest)
+	public void copyFromLive(ActionRequest actionRequest)
 		throws Exception {
 
 		long stagingGroupId = ParamUtil.getLong(
@@ -105,7 +105,7 @@ public class StagingImpl {
 			actionRequest, liveGroupId, stagingGroupId, parameterMap, false);
 	}
 
-	public static void copyFromLive(
+	public void copyFromLive(
 			ActionRequest actionRequest, Portlet portlet)
 		throws Exception {
 
@@ -126,7 +126,7 @@ public class StagingImpl {
 			portlet.getPortletId());
 	}
 
-	public static void copyPortlet(
+	public void copyPortlet(
 			ActionRequest actionRequest, long sourceGroupId, long targetGroupId,
 			long sourcePlid, long targetPlid, String portletId)
 		throws Exception {
@@ -146,7 +146,7 @@ public class StagingImpl {
 		}
 	}
 
-	public static void copyRemoteLayouts(
+	public void copyRemoteLayouts(
 			long sourceGroupId, boolean privateLayout,
 			Map<Long, Boolean> layoutIdMap,
 			Map<String, String[]> exportParameterMap, String remoteAddress,
@@ -274,7 +274,7 @@ public class StagingImpl {
 			importParameterMap, bytes);
 	}
 
-	public static List<Layout> getMissingParents(
+	public List<Layout> getMissingParents(
 			Layout layout, long liveGroupId)
 		throws PortalException, SystemException {
 
@@ -305,14 +305,14 @@ public class StagingImpl {
 		return missingParents;
 	}
 
-	public static String getSchedulerGroupName(
+	public String getSchedulerGroupName(
 		String destinationName, long groupId) {
 
 		return destinationName.concat(StringPool.SLASH).concat(
 			String.valueOf(groupId));
 	}
 
-	public static Map<String, String[]> getStagingParameters() {
+	public Map<String, String[]> getStagingParameters() {
 		Map<String, String[]> parameterMap =
 			new LinkedHashMap<String, String[]>();
 
@@ -356,7 +356,7 @@ public class StagingImpl {
 		return parameterMap;
 	}
 
-	public static Map<String, String[]> getStagingParameters(
+	public Map<String, String[]> getStagingParameters(
 		ActionRequest actionRequest) {
 
 		Map<String, String[]> parameterMap =
@@ -440,7 +440,7 @@ public class StagingImpl {
 		return parameterMap;
 	}
 
-	public static void publishLayout(
+	public void publishLayout(
 			long plid, long liveGroupId, boolean includeChildren)
 		throws Exception {
 
@@ -477,7 +477,7 @@ public class StagingImpl {
 			layoutIds, parameterMap, null, null);
 	}
 
-	public static void publishLayouts(
+	public void publishLayouts(
 			long sourceGroupId, long targetGroupId, boolean privateLayout,
 			long[] layoutIds, Map<String, String[]> parameterMap,
 			Date startDate, Date endDate)
@@ -496,7 +496,7 @@ public class StagingImpl {
 		}
 	}
 
-	public static void publishLayouts(
+	public void publishLayouts(
 			long sourceGroupId, long targetGroupId, boolean privateLayout,
 			Map<Long, Boolean> layoutIdMap, Map<String, String[]> parameterMap,
 			Date startDate, Date endDate)
@@ -560,7 +560,7 @@ public class StagingImpl {
 			parameterMap, startDate, endDate);
 	}
 
-	public static void publishLayouts(
+	public void publishLayouts(
 			long sourceGroupId, long targetGroupId, boolean privateLayout,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws Exception {
@@ -570,7 +570,7 @@ public class StagingImpl {
 			parameterMap, startDate, endDate);
 	}
 
-	public static void publishToLive(ActionRequest actionRequest)
+	public void publishToLive(ActionRequest actionRequest)
 		throws Exception {
 
 		long stagingGroupId = ParamUtil.getLong(
@@ -587,7 +587,7 @@ public class StagingImpl {
 			actionRequest, stagingGroupId, liveGroupId, parameterMap, false);
 	}
 
-	public static void publishToLive(
+	public void publishToLive(
 			ActionRequest actionRequest, Portlet portlet)
 		throws Exception {
 
@@ -608,13 +608,13 @@ public class StagingImpl {
 			portlet.getPortletId());
 	}
 
-	public static void publishToRemote(ActionRequest actionRequest)
+	public void publishToRemote(ActionRequest actionRequest)
 		throws Exception {
 
 		_publishToRemote(actionRequest, false);
 	}
 
-	public static void scheduleCopyFromLive(ActionRequest actionRequest)
+	public void scheduleCopyFromLive(ActionRequest actionRequest)
 		throws Exception {
 
 		long stagingGroupId = ParamUtil.getLong(
@@ -631,7 +631,7 @@ public class StagingImpl {
 			actionRequest, liveGroupId, stagingGroupId, parameterMap, true);
 	}
 
-	public static void schedulePublishToLive(ActionRequest actionRequest)
+	public void schedulePublishToLive(ActionRequest actionRequest)
 		throws Exception {
 
 		long stagingGroupId = ParamUtil.getLong(
@@ -648,13 +648,13 @@ public class StagingImpl {
 			actionRequest, stagingGroupId, liveGroupId, parameterMap, true);
 	}
 
-	public static void schedulePublishToRemote(ActionRequest actionRequest)
+	public void schedulePublishToRemote(ActionRequest actionRequest)
 		throws Exception {
 
 		_publishToRemote(actionRequest, true);
 	}
 
-	public static void unscheduleCopyFromLive(ActionRequest actionRequest)
+	public void unscheduleCopyFromLive(ActionRequest actionRequest)
 		throws Exception {
 
 		long stagingGroupId = ParamUtil.getLong(
@@ -668,7 +668,7 @@ public class StagingImpl {
 			stagingGroupId, jobName, groupName);
 	}
 
-	public static void unschedulePublishToLive(ActionRequest actionRequest)
+	public void unschedulePublishToLive(ActionRequest actionRequest)
 		throws Exception {
 
 		long stagingGroupId = ParamUtil.getLong(
@@ -686,7 +686,7 @@ public class StagingImpl {
 			liveGroupId, jobName, groupName);
 	}
 
-	public static void unschedulePublishToRemote(ActionRequest actionRequest)
+	public void unschedulePublishToRemote(ActionRequest actionRequest)
 		throws Exception {
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
@@ -699,7 +699,7 @@ public class StagingImpl {
 			groupId, jobName, groupName);
 	}
 
-	public static void updateStaging(ActionRequest actionRequest)
+	public void updateStaging(ActionRequest actionRequest)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
@@ -755,7 +755,7 @@ public class StagingImpl {
 		}
 	}
 
-	private static void _addWeeklyDayPos(
+	private void _addWeeklyDayPos(
 		ActionRequest actionRequest, List<DayAndPosition> list, int day) {
 
 		if (ParamUtil.getBoolean(actionRequest, "weeklyDayPos" + day)) {
@@ -763,7 +763,7 @@ public class StagingImpl {
 		}
 	}
 
-	private static String _getCronText(
+	private String _getCronText(
 			ActionRequest actionRequest, Calendar startDate,
 			boolean timeZoneSensitive, int recurrenceType)
 		throws Exception {
@@ -900,7 +900,7 @@ public class StagingImpl {
 		return RecurrenceSerializer.toCronText(recurrence);
 	}
 
-	private static Calendar _getDate(
+	private Calendar _getDate(
 			ActionRequest actionRequest, String paramPrefix,
 			boolean timeZoneSensitive)
 		throws Exception {
@@ -949,7 +949,7 @@ public class StagingImpl {
 		return cal;
 	}
 
-	private static void _publishLayouts(
+	private void _publishLayouts(
 			ActionRequest actionRequest, long sourceGroupId, long targetGroupId,
 			Map<String, String[]> parameterMap, boolean schedule)
 		throws Exception {
@@ -1098,7 +1098,7 @@ public class StagingImpl {
 		}
 	}
 
-	private static void _publishToRemote(
+	private void _publishToRemote(
 			ActionRequest actionRequest, boolean schedule)
 		throws Exception {
 
