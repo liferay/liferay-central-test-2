@@ -134,10 +134,10 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 					<br />
 
 					<%
-					String postReplyButtonLabel = "reply";
+					String postReplyButtonLabel = LanguageUtil.get(pageContext, "reply");
 
 					if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, MBDiscussion.class.getName())) {
-						postReplyButtonLabel = "submit-for-publication";
+						postReplyButtonLabel = LanguageUtil.get(pageContext, "submit-for-publication");
 					}
 					%>
 
