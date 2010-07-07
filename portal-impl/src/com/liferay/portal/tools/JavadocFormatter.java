@@ -1000,7 +1000,9 @@ public class JavadocFormatter {
 
 		// Do not wrap text inside <pre>
 		if (text.contains("<pre>")) {
-			Pattern p = Pattern.compile("(?<=^|</pre>).+?(?=$|<pre>)", Pattern.DOTALL);
+			Pattern p = Pattern.compile(
+				"(?<=^|</pre>).+?(?=$|<pre>)", Pattern.DOTALL);
+
 			Matcher m = p.matcher(text);
 
 			StringBuffer sb = new StringBuffer();
