@@ -419,7 +419,15 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 									<br />
 
-									<input id="<%= randomNamespace %>editReplyButton<%= i %>" type="button" value="<liferay-ui:message key="update" />" onClick="<%= randomNamespace %>updateMessage(<%= i %>);" />
+									<%
+									String publishButtonLabel = LanguageUtil.get(pageContext, "publish");
+
+									if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, MBDiscussion.class.getName())) {
+										publishButtonLabel = LanguageUtil.get(pageContext, "submit-for-publication");
+									}
+									%>
+
+									<input id="<%= randomNamespace %>editReplyButton<%= i %>" onClick="<%= randomNamespace %>updateMessage(<%= i %>);" type="button" value="<liferay-ui:message key="<%= publishButtonLabel %>" />" />
 
 									<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.getElementById('<%= randomNamespace %>editForm<%= i %>').style.display = 'none'; void('');" />
 								</td>
