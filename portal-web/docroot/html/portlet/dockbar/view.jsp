@@ -63,7 +63,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 								<li class="last common-items">
 									<div class="aui-menugroup">
 										<div class="aui-menugroup-content">
-											<h4><liferay-ui:message key="applications" /></h4>
+											<span class="aui-menu-label"><liferay-ui:message key="applications" /></span>
 
 											<ul>
 

@@ -380,13 +380,11 @@
 	padding: 2px 0;
 }
 
-.aui-menugroup-content h4 {
+.aui-menugroup-content .aui-menu-label {
 	background: #D2D6DE;
-	border-width: 0;
 	color: #5B677D;
-	font-size: 1em;
+	display: block;
 	font-weight: bold;
-	margin: 0;
 	padding: 5px 3px;
 	text-shadow: 1px 1px #FFF;
 }
