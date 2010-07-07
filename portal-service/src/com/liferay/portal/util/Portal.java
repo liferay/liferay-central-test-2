@@ -576,6 +576,8 @@ public interface Portal {
 
 	public boolean isUpdateAvailable() throws SystemException;
 
+	public boolean isValidResourceId(String resourceId);
+
 	public void removePortalPortEventListener(
 		PortalPortEventListener portalPortEventListener);
 

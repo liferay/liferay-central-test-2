@@ -149,6 +149,10 @@ public class PortletAction extends Action {
 		String resourceId = resourceRequest.getResourceID();
 
 		if (Validator.isNotNull(resourceId)) {
+			if (!PortalUtil.isValidResourceId(resourceId)) {
+				return;
+			}
+
 			PortletContext portletContext = portletConfig.getPortletContext();
 
 			PortletRequestDispatcher portletRequestDispatcher =

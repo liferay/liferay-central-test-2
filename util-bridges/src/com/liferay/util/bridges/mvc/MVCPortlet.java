@@ -258,7 +258,8 @@ public class MVCPortlet extends LiferayPortlet {
 
 	protected void checkJSPPath(String path) throws PortletException {
 		if (!path.startsWith(jspPath) ||
-			path.contains(StringPool.DOUBLE_PERIOD)) {
+			path.contains(StringPool.DOUBLE_PERIOD) ||
+			!PortalUtil.isValidResourceId(path)) {
 
 			throw new PortletException(
 				"Path " + path + " is not accessible by this portlet");

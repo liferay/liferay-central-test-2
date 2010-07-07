@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.velocity.VelocityContext;
 import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.struts.StrutsUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.velocity.VelocityResourceListener;
 
 import java.io.IOException;
@@ -91,6 +92,12 @@ public class VelocityPortlet extends GenericPortlet {
 		throws PortletException, IOException {
 
 		if (Validator.isNull(_resourceTemplateId)) {
+			String resourceId = resourceRequest.getResourceID();
+
+			if (!PortalUtil.isValidResourceId(resourceId)) {
+				return;
+			}
+
 			super.serveResource(resourceRequest, resourceResponse);
 
 			return;

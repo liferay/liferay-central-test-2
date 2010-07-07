@@ -187,6 +187,8 @@ import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -3561,6 +3563,20 @@ public class PortalImpl implements Portal {
 		return PluginPackageUtil.isUpdateAvailable();
 	}
 
+	public boolean isValidResourceId(String resourceId) {
+		if (Validator.isNull(resourceId)) {
+			return true;
+		}
+
+		Matcher matcher = _bannedRresourceIdPattern.matcher(resourceId);
+
+		if (matcher.matches()) {
+			return false;
+		}
+
+		return true;
+	}
+
 	public void removePortalPortEventListener(
 		PortalPortEventListener portalPortEventListener) {
 
@@ -4522,6 +4538,8 @@ public class PortalImpl implements Portal {
 	private String[] _allSystemGroups;
 	private String[] _allSystemOrganizationRoles;
 	private String[] _allSystemRoles;
+	private Pattern _bannedRresourceIdPattern = Pattern.compile(
+		PropsUtil.get(PropsKeys.PORTLET_RESOURCE_ID_BANNED_PATHS_REGEXP));
 	private String _cdnHostHttp;
 	private String _cdnHostHttps;
 	private String _computerAddress;

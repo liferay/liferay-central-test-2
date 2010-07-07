@@ -1090,6 +1090,10 @@ public class PortalUtil {
 		return getPortal().isUpdateAvailable();
 	}
 
+	public static boolean isValidResourceId(String resourceId) {
+		return getPortal().isValidResourceId(resourceId);
+	}
+
 	public void removePortalPortEventListener(
 		PortalPortEventListener portalPortEventListener) {
 
