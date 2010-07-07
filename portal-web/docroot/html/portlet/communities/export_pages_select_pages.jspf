@@ -14,7 +14,7 @@
  */
 %>
 
-<aui:fieldset label="scope" style='<%= (proposalId > 0) ? "display: none;" : "" %>'>
+<aui:fieldset style='<%= (proposalId > 0) ? "display: none;" : "" %>'>
 	<c:choose>
 		<c:when test="<%= !publish %>">
 
@@ -48,49 +48,49 @@
 			</c:if>
 		</c:otherwise>
 	</c:choose>
+
+	<div class="<%= results.isEmpty() ? "aui-helper-hidden" : "" %>" id="<portlet:namespace />pane" style="border: 1px solid #CCC; padding: 5px;">
+		<c:choose>
+			<c:when test="<%= !publish %>">
+				<liferay-util:include page="/html/portlet/communities/tree_js.jsp">
+					<liferay-util:param name="selectableTree" value="1" />
+					<liferay-util:param name="treeId" value="<%= treeKey %>" />
+				</liferay-util:include>
+			</c:when>
+			<c:otherwise>
+
+				<%
+				int total = results.size();
+
+				List<String> headerNames = new ArrayList<String>();
+
+				headerNames.add("pages");
+				headerNames.add("type");
+
+				SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, total, portletURL, headerNames, null);
+
+				searchContainer.setTotal(total);
+				searchContainer.setResults(results);
+				searchContainer.setRowChecker(new ExportPageChecker(renderResponse, "left", "top", RowChecker.COLSPAN, "exportPagesFm", RowChecker.ALL_ROW_IDS, RowChecker.ROW_IDS));
+
+				List resultRows = searchContainer.getResultRows();
+
+				for (int i = 0; i < results.size(); i++) {
+					Layout curLayout = (Layout)results.get(i);
+
+					ResultRow row = new ResultRow(curLayout, curLayout.getPrimaryKey(), i);
+
+					row.addJSP("left", "top", 2, "/html/portlet/communities/export_page_options.jsp");
+
+					resultRows.add(row);
+				}
+				%>
+
+				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
+			</c:otherwise>
+		</c:choose>
+	</div>
 </aui:fieldset>
-
-<div class="<%= results.isEmpty() ? "aui-helper-hidden" : "" %>" id="<portlet:namespace />pane" style="border-color: #CCC; border-style: solid; border-width: 0px 1px 1px 1px; height: 380px; overflow: auto; padding: 5px;">
-	<c:choose>
-		<c:when test="<%= !publish %>">
-			<liferay-util:include page="/html/portlet/communities/tree_js.jsp">
-				<liferay-util:param name="selectableTree" value="1" />
-				<liferay-util:param name="treeId" value="<%= treeKey %>" />
-			</liferay-util:include>
-		</c:when>
-		<c:otherwise>
-
-			<%
-			int total = results.size();
-
-			List<String> headerNames = new ArrayList<String>();
-
-			headerNames.add("pages");
-			headerNames.add("type");
-
-			SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, total, portletURL, headerNames, null);
-
-			searchContainer.setTotal(total);
-			searchContainer.setResults(results);
-			searchContainer.setRowChecker(new ExportPageChecker(renderResponse, "left", "top", RowChecker.COLSPAN, "exportPagesFm", RowChecker.ALL_ROW_IDS, RowChecker.ROW_IDS));
-
-			List resultRows = searchContainer.getResultRows();
-
-			for (int i = 0; i < results.size(); i++) {
-				Layout curLayout = (Layout)results.get(i);
-
-				ResultRow row = new ResultRow(curLayout, curLayout.getPrimaryKey(), i);
-
-				row.addJSP("left", "top", 2, "/html/portlet/communities/export_page_options.jsp");
-
-				resultRows.add(row);
-			}
-			%>
-
-			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
-		</c:otherwise>
-	</c:choose>
-</div>
 
 <aui:script>
 	Liferay.provide(
