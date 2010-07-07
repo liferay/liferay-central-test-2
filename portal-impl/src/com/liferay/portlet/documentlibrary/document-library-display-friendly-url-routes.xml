@@ -4,15 +4,15 @@
 <routes>
 	<route>
 		<pattern>/{instanceId}/</pattern>
-		<default-parameter name="folderId">0</default-parameter>
-		<default-parameter name="struts_action">/document_library_display/view</default-parameter>
+		<implicit-parameter name="folderId">0</implicit-parameter>
+		<implicit-parameter name="struts_action">/document_library_display/view</implicit-parameter>
 	</route>
 	<route>
 		<pattern>/{instanceId}/view/{folderId:\d+}</pattern>
-		<default-parameter name="struts_action">/document_library_display/view</default-parameter>
+		<implicit-parameter name="struts_action">/document_library_display/view</implicit-parameter>
 	</route>
 	<route>
 		<pattern>/{instanceId}/view/{folderId:\d+}/{name}</pattern>
-		<default-parameter name="struts_action">/document_library_display/view_file_entry</default-parameter>
+		<implicit-parameter name="struts_action">/document_library_display/view_file_entry</implicit-parameter>
 	</route>
 </routes>

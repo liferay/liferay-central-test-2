@@ -44,59 +44,59 @@ public class RouterImplTest extends BaseTestCase {
 
 		route = _routerImpl.addRoute("GET/{controller}");
 
-		route.addDefaultParameter("action", "index");
-		route.addDefaultParameter("format", "html");
-		route.addDefaultParameter("method", "GET");
+		route.addImplicitParameter("action", "index");
+		route.addImplicitParameter("format", "html");
+		route.addImplicitParameter("method", "GET");
 
 		route = _routerImpl.addRoute("GET/{controller}.{format}");
 
-		route.addDefaultParameter("action", "index");
-		route.addDefaultParameter("method", "GET");
+		route.addImplicitParameter("action", "index");
+		route.addImplicitParameter("method", "GET");
 
 		route = _routerImpl.addRoute("POST/{controller}");
 
-		route.addDefaultParameter("action", "create");
-		route.addDefaultParameter("format", "html");
-		route.addDefaultParameter("method", "POST");
+		route.addImplicitParameter("action", "create");
+		route.addImplicitParameter("format", "html");
+		route.addImplicitParameter("method", "POST");
 
 		route = _routerImpl.addRoute("POST/{controller}.{format}");
 
-		route.addDefaultParameter("action", "create");
-		route.addDefaultParameter("method", "POST");
+		route.addImplicitParameter("action", "create");
+		route.addImplicitParameter("method", "POST");
 
 		route = _routerImpl.addRoute("GET/{controller}/{id:\\d+}");
 
-		route.addDefaultParameter("action", "view");
-		route.addDefaultParameter("format", "html");
-		route.addDefaultParameter("method", "GET");
+		route.addImplicitParameter("action", "view");
+		route.addImplicitParameter("format", "html");
+		route.addImplicitParameter("method", "GET");
 
 		route = _routerImpl.addRoute("GET/{controller}/{id:\\d+}.{format}");
 
-		route.addDefaultParameter("action", "view");
-		route.addDefaultParameter("method", "GET");
+		route.addImplicitParameter("action", "view");
+		route.addImplicitParameter("method", "GET");
 
 		route = _routerImpl.addRoute("POST/{controller}/{id:\\d+}");
 
-		route.addDefaultParameter("action", "update");
-		route.addDefaultParameter("format", "html");
-		route.addDefaultParameter("method", "POST");
+		route.addImplicitParameter("action", "update");
+		route.addImplicitParameter("format", "html");
+		route.addImplicitParameter("method", "POST");
 
 		route = _routerImpl.addRoute("POST/{controller}/{id:\\d+}.{format}");
 
-		route.addDefaultParameter("action", "update");
-		route.addDefaultParameter("method", "POST");
+		route.addImplicitParameter("action", "update");
+		route.addImplicitParameter("method", "POST");
 
 		route = _routerImpl.addRoute(
 			"{method}/{controller}/{id:\\d+}/{action}");
 
-		route.addDefaultParameter("format", "html");
+		route.addImplicitParameter("format", "html");
 
 		route = _routerImpl.addRoute(
 			"{method}/{controller}/{id:\\d+}/{action}.{format}");
 
 		route = _routerImpl.addRoute("{method}/{controller}/{action}");
 
-		route.addDefaultParameter("format", "html");
+		route.addImplicitParameter("format", "html");
 
 		route = _routerImpl.addRoute("{method}/{controller}/{action}.{format}");
 	}

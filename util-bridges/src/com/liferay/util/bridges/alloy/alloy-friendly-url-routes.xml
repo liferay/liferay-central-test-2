@@ -4,65 +4,65 @@
 <routes>
 	<route>
 		<pattern>GET/</pattern>
-		<default-parameter name="action">index</default-parameter>
-		<default-parameter name="controller">assets</default-parameter>
-		<default-parameter name="format">html</default-parameter>
-		<default-parameter name="method">GET</default-parameter>
+		<implicit-parameter name="action">index</implicit-parameter>
+		<implicit-parameter name="controller">assets</implicit-parameter>
+		<implicit-parameter name="format">html</implicit-parameter>
+		<implicit-parameter name="method">GET</implicit-parameter>
 	</route>
 	<route>
 		<pattern>GET/{controller}</pattern>
-		<default-parameter name="action">index</default-parameter>
-		<default-parameter name="format">html</default-parameter>
-		<default-parameter name="method">GET</default-parameter>
+		<implicit-parameter name="action">index</implicit-parameter>
+		<implicit-parameter name="format">html</implicit-parameter>
+		<implicit-parameter name="method">GET</implicit-parameter>
 	</route>
 	<route>
 		<pattern>GET/{controller}.{format}</pattern>
-		<default-parameter name="action">index</default-parameter>
-		<default-parameter name="method">GET</default-parameter>
+		<implicit-parameter name="action">index</implicit-parameter>
+		<implicit-parameter name="method">GET</implicit-parameter>
 	</route>
 	<route>
 		<pattern>POST/{controller}</pattern>
-		<default-parameter name="action">create</default-parameter>
-		<default-parameter name="format">html</default-parameter>
-		<default-parameter name="method">POST</default-parameter>
+		<implicit-parameter name="action">create</implicit-parameter>
+		<implicit-parameter name="format">html</implicit-parameter>
+		<implicit-parameter name="method">POST</implicit-parameter>
 	</route>
 	<route>
 		<pattern>POST/{controller}.{format}</pattern>
-		<default-parameter name="action">create</default-parameter>
-		<default-parameter name="method">POST</default-parameter>
+		<implicit-parameter name="action">create</implicit-parameter>
+		<implicit-parameter name="method">POST</implicit-parameter>
 	</route>
 	<route>
 		<pattern>GET/{controller}/{id:\d+}</pattern>
-		<default-parameter name="action">view</default-parameter>
-		<default-parameter name="format">html</default-parameter>
-		<default-parameter name="method">GET</default-parameter>
+		<implicit-parameter name="action">view</implicit-parameter>
+		<implicit-parameter name="format">html</implicit-parameter>
+		<implicit-parameter name="method">GET</implicit-parameter>
 	</route>
 	<route>
 		<pattern>GET/{controller}/{id:\d+}.{format}</pattern>
-		<default-parameter name="action">view</default-parameter>
-		<default-parameter name="method">GET</default-parameter>
+		<implicit-parameter name="action">view</implicit-parameter>
+		<implicit-parameter name="method">GET</implicit-parameter>
 	</route>
 	<route>
 		<pattern>POST/{controller}/{id:\d+}</pattern>
-		<default-parameter name="action">update</default-parameter>
-		<default-parameter name="format">html</default-parameter>
-		<default-parameter name="method">POST</default-parameter>
+		<implicit-parameter name="action">update</implicit-parameter>
+		<implicit-parameter name="format">html</implicit-parameter>
+		<implicit-parameter name="method">POST</implicit-parameter>
 	</route>
 	<route>
 		<pattern>POST/{controller}/{id:\d+}.{format}</pattern>
-		<default-parameter name="action">update</default-parameter>
-		<default-parameter name="method">POST</default-parameter>
+		<implicit-parameter name="action">update</implicit-parameter>
+		<implicit-parameter name="method">POST</implicit-parameter>
 	</route>
 	<route>
 		<pattern>{method}/{controller}/{id:\d+}/{action}</pattern>
-		<default-parameter name="format">html</default-parameter>
+		<implicit-parameter name="format">html</implicit-parameter>
 	</route>
 	<route>
 		<pattern>{method}/{controller}/{id:\d+}/{action}.{format}</pattern>
 	</route>
 	<route>
 		<pattern>{method}/{controller}/{action}</pattern>
-		<default-parameter name="format">html</default-parameter>
+		<implicit-parameter name="format">html</implicit-parameter>
 	</route>
 	<route>
 		<pattern>{method}/{controller}/{action}.{format}</pattern>

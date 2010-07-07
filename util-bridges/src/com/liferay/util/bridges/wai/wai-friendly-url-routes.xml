@@ -4,10 +4,10 @@
 <routes>
 	<route>
 		<pattern>/maximized{%appURL:.*}</pattern>
-		<default-parameter name="p_p_state">maximized</default-parameter>
+		<implicit-parameter name="p_p_state">maximized</implicit-parameter>
 	</route>
 	<route>
 		<pattern>{%appURL:.*}</pattern>
-		<default-parameter name="p_p_state">normal</default-parameter>
+		<implicit-parameter name="p_p_state">normal</implicit-parameter>
 	</route>
 </routes>

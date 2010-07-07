@@ -499,15 +499,6 @@ public class PortletBagFactory {
 
 			Route route = router.addRoute(pattern);
 
-			for (Element defaultParameterElement :
-					routeElement.elements("default-parameter")) {
-
-				String name = defaultParameterElement.attributeValue("name");
-				String value = defaultParameterElement.getText();
-
-				route.addDefaultParameter(name, value);
-			}
-
 			for (Element generatedParameterElement :
 					routeElement.elements("generated-parameter")) {
 
@@ -523,6 +514,15 @@ public class PortletBagFactory {
 				String name = ignoredParameterElement.attributeValue("name");
 
 				route.addIgnoredParameter(name);
+			}
+
+			for (Element implicitParameterElement :
+				routeElement.elements("implicit-parameter")) {
+
+				String name = implicitParameterElement.attributeValue("name");
+				String value = implicitParameterElement.getText();
+
+				route.addImplicitParameter(name, value);
 			}
 
 			for (Element overriddenParameterElement :

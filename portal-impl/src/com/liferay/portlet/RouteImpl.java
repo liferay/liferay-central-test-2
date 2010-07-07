@@ -40,10 +40,6 @@ public class RouteImpl implements Route {
 		_stringParser.setStringEncoder(_urlEncoder);
 	}
 
-	public void addDefaultParameter(String name, String value) {
-		_defaultParameters.put(name, value);
-	}
-
 	public void addGeneratedParameter(String name, String pattern) {
 		StringParser stringParser = new StringParser(pattern);
 
@@ -54,12 +50,12 @@ public class RouteImpl implements Route {
 		_ignoredParameters.add(name);
 	}
 
-	public void addOverriddenParameter(String name, String value) {
-		_overriddenParameters.put(name, value);
+	public void addImplicitParameter(String name, String value) {
+		_implicitParameters.put(name, value);
 	}
 
-	public Map<String, String> getDefaultParameters() {
-		return _defaultParameters;
+	public void addOverriddenParameter(String name, String value) {
+		_overriddenParameters.put(name, value);
 	}
 
 	public Map<String, StringParser> getGeneratedParameters() {
@@ -68,6 +64,10 @@ public class RouteImpl implements Route {
 
 	public List<String> getIgnoredParameters() {
 		return _ignoredParameters;
+	}
+
+	public Map<String, String> getImplicitParameters() {
+		return _implicitParameters;
 	}
 
 	public Map<String, String> getOverriddenParameters() {
@@ -81,7 +81,7 @@ public class RouteImpl implements Route {
 		allParameters.setParentMap(parameters);
 
 		// The order is important because virtual parameters may sometimes be
-		// checked by default parameters
+		// checked by implicit parameters
 
 		for (Map.Entry<String, StringParser> entry :
 				_generatedParameters.entrySet()) {
@@ -96,7 +96,7 @@ public class RouteImpl implements Route {
 			}
 		}
 
-		for (Map.Entry<String, String> entry : _defaultParameters.entrySet()) {
+		for (Map.Entry<String, String> entry : _implicitParameters.entrySet()) {
 			String name = entry.getKey();
 			String value = entry.getValue();
 
@@ -119,7 +119,7 @@ public class RouteImpl implements Route {
 			parameters.remove(name);
 		}
 
-		for (String name : _defaultParameters.keySet()) {
+		for (String name : _implicitParameters.keySet()) {
 			parameters.remove(name);
 		}
 
@@ -135,11 +135,11 @@ public class RouteImpl implements Route {
 			return false;
 		}
 
-		parameters.putAll(_defaultParameters);
+		parameters.putAll(_implicitParameters);
 		parameters.putAll(_overriddenParameters);
 
 		// The order is important because generated parameters may be dependent
-		// on default parameters or overridden parameters
+		// on implicit parameters or overridden parameters
 
 		for (Map.Entry<String, StringParser> entry :
 				_generatedParameters.entrySet()) {
@@ -163,11 +163,12 @@ public class RouteImpl implements Route {
 
 	private static StringEncoder _urlEncoder = new URLStringEncoder();
 
-	private Map<String, String> _defaultParameters =
-		new HashMap<String, String>();
 	private Map<String, StringParser> _generatedParameters =
 		new HashMap<String, StringParser>();
 	private List<String> _ignoredParameters = new ArrayList<String>();
+	private Map<String, String> _implicitParameters =
+	new HashMap<String, String>();
+
 	private Map<String, String> _overriddenParameters =
 		new HashMap<String, String>();
 	private StringParser _stringParser;
