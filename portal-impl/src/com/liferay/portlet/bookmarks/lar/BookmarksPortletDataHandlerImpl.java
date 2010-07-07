@@ -61,6 +61,10 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		};
 	}
 
+	public boolean isPublishToLiveByDefault() {
+		return _PUBLISH_TO_LIVE_BY_DEFAULT;
+	}
+
 	protected PortletPreferences doDeleteData(
 			PortletDataContext context, String portletId,
 			PortletPreferences preferences)
@@ -469,5 +473,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static PortletDataHandlerBoolean _tags =
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
+
+	private static final boolean _PUBLISH_TO_LIVE_BY_DEFAULT = true;
 
 }

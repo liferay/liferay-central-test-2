@@ -53,6 +53,10 @@ public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		return new PortletDataHandlerControl[] {_questions, _votes};
 	}
 
+	public boolean isPublishToLiveByDefault() {
+		return _PUBLISH_TO_LIVE_BY_DEFAULT;
+	}
+
 	protected PortletPreferences doDeleteData(
 			PortletDataContext context, String portletId,
 			PortletPreferences preferences)
@@ -203,5 +207,7 @@ public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static PortletDataHandlerBoolean _votes =
 		new PortletDataHandlerBoolean(_NAMESPACE, "votes");
+
+	private static final boolean _PUBLISH_TO_LIVE_BY_DEFAULT = true;
 
 }

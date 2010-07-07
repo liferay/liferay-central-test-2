@@ -186,6 +186,10 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		return preferences;
 	}
 
+	public boolean isPublishToLiveByDefault() {
+		return _PUBLISH_TO_LIVE_BY_DEFAULT;
+	}
+
 	private static final String _NAMESPACE = "document_library";
 
 	private static PortletDataHandlerBoolean _comments =
@@ -206,5 +210,7 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static PortletDataHandlerBoolean _tags =
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
+
+	private static final boolean _PUBLISH_TO_LIVE_BY_DEFAULT = true;
 
 }
