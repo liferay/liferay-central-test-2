@@ -62,6 +62,7 @@ import org.apache.commons.lang.time.StopWatch;
  * @author Charles May
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
+ * @author Wesley Gong
  */
 public class AdvancedPermissionChecker extends BasePermissionChecker {
 
@@ -156,20 +157,8 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 				group = GroupLocalServiceUtil.getGroup(groupId);
 			}
 
-			// If we are checking permissions on an object that belongs to a
-			// community, then it's only necessary to check the group that
-			// represents the community and not all the groups that the user
-			// belongs to. This is so because an object cannot belong to
-			// more than one community.
-
-			List<Group> userGroups = new ArrayList<Group>();
-			//List<Group> userGroups = UserUtil.getGroups(userId);
-
-			if ((group != null) && group.isCommunity() &&
-				GroupLocalServiceUtil.hasUserGroup(userId, groupId)) {
-
-				userGroups.add(group);
-			}
+			List<Group> userGroups =
+				GroupLocalServiceUtil.getUserGroups(userId);
 
 			List<Organization> userOrgs = getUserOrgs(userId);
 
