@@ -665,7 +665,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * portlet.
 	 *
 	 * @return the class loader resource path to the friendly URL routes of the
-	 * portlet
+	 *		   portlet
 	 */
 	public String getFriendlyURLRoutes() {
 		return _friendlyURLRoutes;
@@ -676,7 +676,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * portlet.
 	 *
 	 * @param friendlyURLRoutes the class loader resource path to the friendly
-	 * 		  URL routes of the portlet
+	 *		  URL routes of the portlet
 	 */
 	public void setFriendlyURLRoutes(String friendlyURLRoutes) {
 		_friendlyURLRoutes = friendlyURLRoutes;

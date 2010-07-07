@@ -24,7 +24,6 @@ import junit.framework.TestSuite;
  *
  * @author Brian Wing Shun Chan
  */
-
 public class AnnouncementsEntryTests extends BaseTests {
 
 	public static Test suite() {
