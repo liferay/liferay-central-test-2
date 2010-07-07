@@ -18,6 +18,7 @@ import com.liferay.portal.GroupFriendlyURLException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -33,6 +34,11 @@ import java.util.List;
 public class VerifyGroup extends VerifyProcess {
 
 	protected void doVerify() throws Exception {
+		doVerifyNullFriendlyURLGroups();
+		doVerifyStagedGroups();
+	}
+
+	protected void doVerifyNullFriendlyURLGroups() throws Exception {
 		List<Group> groups = GroupLocalServiceUtil.getNullFriendlyURLGroups();
 
 		for (Group group : groups) {
@@ -73,6 +79,25 @@ public class VerifyGroup extends VerifyProcess {
 
 					throw gfurle;
 				}
+			}
+		}
+	}
+
+	protected void doVerifyStagedGroups() throws Exception {
+		List<Group> groups = GroupLocalServiceUtil.getLiveGroups();
+
+		for (Group group : groups) {
+			if (group.hasStagingGroup()) {
+				UnicodeProperties typeSettings =
+					group.getTypeSettingsProperties();
+
+				typeSettings.setProperty(
+					"isStaged", String.valueOf(true));
+				typeSettings.setProperty(
+					"isStagedRemotely", String.valueOf(false));
+
+				GroupLocalServiceUtil.updateGroup(
+					group.getGroupId(), typeSettings.toString());
 			}
 		}
 	}

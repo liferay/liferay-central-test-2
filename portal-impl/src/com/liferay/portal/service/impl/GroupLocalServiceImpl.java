@@ -556,6 +556,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			companyId, classNameId, layoutSetPrototypeId);
 	}
 
+	public List<Group> getLiveGroups() throws SystemException {
+		return groupFinder.findByLiveGroups();
+	}
+
 	public List<Group> getNoLayoutsGroups(
 			String className, boolean privateLayout, int start, int end)
 		throws SystemException {

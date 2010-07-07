@@ -220,6 +220,11 @@ public class GroupLocalServiceWrapper implements GroupLocalService {
 			layoutSetPrototypeId);
 	}
 
+	public java.util.List<com.liferay.portal.model.Group> getLiveGroups()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _groupLocalService.getLiveGroups();
+	}
+
 	public java.util.List<com.liferay.portal.model.Group> getNoLayoutsGroups(
 		java.lang.String className, boolean privateLayout, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

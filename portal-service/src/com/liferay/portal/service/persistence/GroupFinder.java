@@ -28,6 +28,9 @@ public interface GroupFinder {
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public java.util.List<com.liferay.portal.model.Group> findByLiveGroups()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portal.model.Group> findByNoLayouts(
 		long classNameId, boolean privateLayout, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;

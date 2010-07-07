@@ -34,6 +34,11 @@ public class GroupFinderUtil {
 		return getFinder().countByC_N_D(companyId, name, description, params);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Group> findByLiveGroups()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().findByLiveGroups();
+	}
+
 	public static java.util.List<com.liferay.portal.model.Group> findByNoLayouts(
 		long classNameId, boolean privateLayout, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

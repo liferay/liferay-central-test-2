@@ -222,6 +222,11 @@ public class GroupLocalServiceUtil {
 				   .getLayoutSetPrototypeGroup(companyId, layoutSetPrototypeId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Group> getLiveGroups()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getLiveGroups();
+	}
+
 	public static java.util.List<com.liferay.portal.model.Group> getNoLayoutsGroups(
 		java.lang.String className, boolean privateLayout, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

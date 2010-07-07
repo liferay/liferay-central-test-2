@@ -54,6 +54,9 @@ public class GroupFinderImpl
 	public static String COUNT_BY_C_N_D =
 		GroupFinder.class.getName() + ".countByC_N_D";
 
+	public static String FIND_BY_LIVE_GROUPS =
+		GroupFinder.class.getName() + ".findByLiveGroups";
+
 	public static String FIND_BY_NO_LAYOUTS =
 		GroupFinder.class.getName() + ".findByNoLayouts";
 
@@ -197,6 +200,32 @@ public class GroupFinderImpl
 			}
 
 			return groupIds.size();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<Group> findByLiveGroups() throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			//String sql = CustomSQLUtil.get(FIND_BY_LIVE_GROUPS);
+
+			String sql = "SELECT {Group_.*} FROM Group_ WHERE Group_.groupId IN (SELECT Group_.liveGroupId from Group_)";
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("Group_", GroupImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -60,6 +60,18 @@
 				(Group_.type_ != 4)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.GroupFinder.findByLiveGroups">
+		<![CDATA[
+			SELECT
+				{Group_.*}
+			FROM
+				Group_
+			WHERE
+				Group_.groupId IN (
+					SELECT Group_.liveGroupId from Group_
+				)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.findByNullFriendlyURL">
 		<![CDATA[
 			SELECT
