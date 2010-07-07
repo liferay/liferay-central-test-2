@@ -29,7 +29,7 @@ publishToLiveURL.setParameter(Constants.CMD, "publish_to_live");
 
 PortletURL publishToRemoteURL = PortletURLUtil.clone(publishToLiveURL, renderResponse);
 
-publishToRemoteURL.setParameter(Constants.CMD, "publish_to_live");
+publishToRemoteURL.setParameter(Constants.CMD, "publish_to_remote");
 %>
 
 <liferay-ui:error exception="<%= RemoteExportException.class %>">
