@@ -15,6 +15,7 @@
 package com.liferay.portlet.communities.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -32,7 +33,6 @@ import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.communities.util.StagingUtil;
 import com.liferay.portlet.tasks.DuplicateReviewUserIdException;
 import com.liferay.portlet.tasks.NoSuchProposalException;
 import com.liferay.portlet.tasks.ProposalDueDateException;

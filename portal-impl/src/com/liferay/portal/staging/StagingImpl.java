@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.communities.util;
+package com.liferay.portal.staging;
 
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutException;
@@ -73,9 +73,9 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map.Entry;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.Map.Entry;
 
 import javax.portlet.ActionRequest;
 
@@ -86,7 +86,7 @@ import javax.portlet.ActionRequest;
  * @author Bruno Farache
  * @author Wesley Gong
  */
-public class StagingUtil {
+public class StagingImpl {
 
 	public static void copyFromLive(ActionRequest actionRequest)
 		throws Exception {
