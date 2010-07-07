@@ -39,6 +39,19 @@ UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribut
 		<liferay-ui:message key="<%= se.getMessage() %>" />
 	</liferay-ui:error>
 
+	<div class="portlet-msg-info">
+		<liferay-ui:message key="staging-type-help-1" />
+
+		<ul>
+			<li>
+				<liferay-ui:message key="staging-type-help-2" />
+			</li>
+			<li>
+				<liferay-ui:message key="staging-type-help-3" />
+			</li>
+		</ul>
+	</div>
+
 	<aui:select label="staging-type" name="stagingType">
 		<aui:option selected="<%= !liveGroup.isStaged() %>" value="<%= StagingConstants.TYPE_NOT_STAGED %>"><liferay-ui:message key="none" /></aui:option>
 		<aui:option selected="<%= liveGroup.isStaged() && !liveGroup.isStagedRemotely() %>" value="<%= StagingConstants.TYPE_LOCAL_STAGING %>"><liferay-ui:message key="local-live" /></aui:option>
