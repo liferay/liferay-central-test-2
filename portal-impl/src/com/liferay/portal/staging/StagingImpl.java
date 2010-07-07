@@ -77,7 +77,7 @@ import java.util.Map;
 import java.util.TimeZone;
 import java.util.Map.Entry;
 
-import javax.portlet.ActionRequest;
+import javax.portlet.PortletRequest;
 
 /**
  * <a href="StagingUtil.java.html"><b><i>View Source</i></b></a>
@@ -88,28 +88,28 @@ import javax.portlet.ActionRequest;
  */
 public class StagingImpl {
 
-	public void copyFromLive(ActionRequest actionRequest)
+	public void copyFromLive(PortletRequest portletRequest)
 		throws Exception {
 
 		long stagingGroupId = ParamUtil.getLong(
-			actionRequest, "stagingGroupId");
+			portletRequest, "stagingGroupId");
 
 		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
 
 		long liveGroupId = stagingGroup.getLiveGroupId();
 
 		Map<String, String[]> parameterMap = getStagingParameters(
-			actionRequest);
+			portletRequest);
 
 		_publishLayouts(
-			actionRequest, liveGroupId, stagingGroupId, parameterMap, false);
+			portletRequest, liveGroupId, stagingGroupId, parameterMap, false);
 	}
 
 	public void copyFromLive(
-			ActionRequest actionRequest, Portlet portlet)
+			PortletRequest portletRequest, Portlet portlet)
 		throws Exception {
 
-		long plid = ParamUtil.getLong(actionRequest, "plid");
+		long plid = ParamUtil.getLong(portletRequest, "plid");
 
 		Layout targetLayout = LayoutLocalServiceUtil.getLayout(plid);
 
@@ -121,18 +121,19 @@ public class StagingImpl {
 			targetLayout.getLayoutId());
 
 		copyPortlet(
-			actionRequest, liveGroup.getGroupId(), stagingGroup.getGroupId(),
+			portletRequest, liveGroup.getGroupId(), stagingGroup.getGroupId(),
 			sourceLayout.getPlid(), targetLayout.getPlid(),
 			portlet.getPortletId());
 	}
 
 	public void copyPortlet(
-			ActionRequest actionRequest, long sourceGroupId, long targetGroupId,
-			long sourcePlid, long targetPlid, String portletId)
+			PortletRequest portletRequest, long sourceGroupId,
+			long targetGroupId, long sourcePlid, long targetPlid,
+			String portletId)
 		throws Exception {
 
 		Map<String, String[]> parameterMap = getStagingParameters(
-			actionRequest);
+			portletRequest);
 
 		File file = LayoutLocalServiceUtil.exportPortletInfoAsFile(
 			sourcePlid, sourceGroupId, portletId, parameterMap, null, null);
@@ -357,11 +358,11 @@ public class StagingImpl {
 	}
 
 	public Map<String, String[]> getStagingParameters(
-		ActionRequest actionRequest) {
+		PortletRequest portletRequest) {
 
 		Map<String, String[]> parameterMap =
 			new LinkedHashMap<String, String[]>(
-				actionRequest.getParameterMap());
+				portletRequest.getParameterMap());
 
 		if (!parameterMap.containsKey(PortletDataHandlerKeys.DATA_STRATEGY)) {
 			parameterMap.put(
@@ -570,28 +571,28 @@ public class StagingImpl {
 			parameterMap, startDate, endDate);
 	}
 
-	public void publishToLive(ActionRequest actionRequest)
+	public void publishToLive(PortletRequest portletRequest)
 		throws Exception {
 
 		long stagingGroupId = ParamUtil.getLong(
-			actionRequest, "stagingGroupId");
+			portletRequest, "stagingGroupId");
 
 		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
 
 		long liveGroupId = stagingGroup.getLiveGroupId();
 
 		Map<String, String[]> parameterMap = getStagingParameters(
-			actionRequest);
+			portletRequest);
 
 		_publishLayouts(
-			actionRequest, stagingGroupId, liveGroupId, parameterMap, false);
+			portletRequest, stagingGroupId, liveGroupId, parameterMap, false);
 	}
 
 	public void publishToLive(
-			ActionRequest actionRequest, Portlet portlet)
+			PortletRequest portletRequest, Portlet portlet)
 		throws Exception {
 
-		long plid = ParamUtil.getLong(actionRequest, "plid");
+		long plid = ParamUtil.getLong(portletRequest, "plid");
 
 		Layout sourceLayout = LayoutLocalServiceUtil.getLayout(plid);
 
@@ -603,64 +604,64 @@ public class StagingImpl {
 			sourceLayout.getLayoutId());
 
 		copyPortlet(
-			actionRequest, stagingGroup.getGroupId(), liveGroup.getGroupId(),
+			portletRequest, stagingGroup.getGroupId(), liveGroup.getGroupId(),
 			sourceLayout.getPlid(), targetLayout.getPlid(),
 			portlet.getPortletId());
 	}
 
-	public void publishToRemote(ActionRequest actionRequest)
+	public void publishToRemote(PortletRequest portletRequest)
 		throws Exception {
 
-		_publishToRemote(actionRequest, false);
+		_publishToRemote(portletRequest, false);
 	}
 
-	public void scheduleCopyFromLive(ActionRequest actionRequest)
+	public void scheduleCopyFromLive(PortletRequest portletRequest)
 		throws Exception {
 
 		long stagingGroupId = ParamUtil.getLong(
-			actionRequest, "stagingGroupId");
+			portletRequest, "stagingGroupId");
 
 		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
 
 		long liveGroupId = stagingGroup.getLiveGroupId();
 
 		Map<String, String[]> parameterMap = getStagingParameters(
-			actionRequest);
+			portletRequest);
 
 		_publishLayouts(
-			actionRequest, liveGroupId, stagingGroupId, parameterMap, true);
+			portletRequest, liveGroupId, stagingGroupId, parameterMap, true);
 	}
 
-	public void schedulePublishToLive(ActionRequest actionRequest)
+	public void schedulePublishToLive(PortletRequest portletRequest)
 		throws Exception {
 
 		long stagingGroupId = ParamUtil.getLong(
-			actionRequest, "stagingGroupId");
+			portletRequest, "stagingGroupId");
 
 		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
 
 		long liveGroupId = stagingGroup.getLiveGroupId();
 
 		Map<String, String[]> parameterMap = getStagingParameters(
-			actionRequest);
+			portletRequest);
 
 		_publishLayouts(
-			actionRequest, stagingGroupId, liveGroupId, parameterMap, true);
+			portletRequest, stagingGroupId, liveGroupId, parameterMap, true);
 	}
 
-	public void schedulePublishToRemote(ActionRequest actionRequest)
+	public void schedulePublishToRemote(PortletRequest portletRequest)
 		throws Exception {
 
-		_publishToRemote(actionRequest, true);
+		_publishToRemote(portletRequest, true);
 	}
 
-	public void unscheduleCopyFromLive(ActionRequest actionRequest)
+	public void unscheduleCopyFromLive(PortletRequest portletRequest)
 		throws Exception {
 
 		long stagingGroupId = ParamUtil.getLong(
-			actionRequest, "stagingGroupId");
+			portletRequest, "stagingGroupId");
 
-		String jobName = ParamUtil.getString(actionRequest, "jobName");
+		String jobName = ParamUtil.getString(portletRequest, "jobName");
 		String groupName = getSchedulerGroupName(
 			DestinationNames.LAYOUTS_LOCAL_PUBLISHER, stagingGroupId);
 
@@ -668,17 +669,17 @@ public class StagingImpl {
 			stagingGroupId, jobName, groupName);
 	}
 
-	public void unschedulePublishToLive(ActionRequest actionRequest)
+	public void unschedulePublishToLive(PortletRequest portletRequest)
 		throws Exception {
 
 		long stagingGroupId = ParamUtil.getLong(
-			actionRequest, "stagingGroupId");
+			portletRequest, "stagingGroupId");
 
 		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
 
 		long liveGroupId = stagingGroup.getLiveGroupId();
 
-		String jobName = ParamUtil.getString(actionRequest, "jobName");
+		String jobName = ParamUtil.getString(portletRequest, "jobName");
 		String groupName = getSchedulerGroupName(
 			DestinationNames.LAYOUTS_LOCAL_PUBLISHER, liveGroupId);
 
@@ -686,12 +687,12 @@ public class StagingImpl {
 			liveGroupId, jobName, groupName);
 	}
 
-	public void unschedulePublishToRemote(ActionRequest actionRequest)
+	public void unschedulePublishToRemote(PortletRequest portletRequest)
 		throws Exception {
 
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+		long groupId = ParamUtil.getLong(portletRequest, "groupId");
 
-		String jobName = ParamUtil.getString(actionRequest, "jobName");
+		String jobName = ParamUtil.getString(portletRequest, "jobName");
 		String groupName = getSchedulerGroupName(
 			DestinationNames.LAYOUTS_REMOTE_PUBLISHER, groupId);
 
@@ -699,16 +700,16 @@ public class StagingImpl {
 			groupId, jobName, groupName);
 	}
 
-	public void updateStaging(ActionRequest actionRequest)
+	public void updateStaging(PortletRequest portletRequest)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
-		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
+		long liveGroupId = ParamUtil.getLong(portletRequest, "liveGroupId");
 
 		if (!GroupPermissionUtil.contains(
 				permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) {
@@ -717,10 +718,10 @@ public class StagingImpl {
 		}
 
 		long stagingGroupId = ParamUtil.getLong(
-			actionRequest, "stagingGroupId");
+			portletRequest, "stagingGroupId");
 
 		boolean stagingEnabled = ParamUtil.getBoolean(
-			actionRequest, "stagingEnabled");
+			portletRequest, "stagingEnabled");
 
 		if ((stagingGroupId > 0) && !stagingEnabled) {
 			GroupServiceUtil.deleteGroup(stagingGroupId);
@@ -756,15 +757,15 @@ public class StagingImpl {
 	}
 
 	private void _addWeeklyDayPos(
-		ActionRequest actionRequest, List<DayAndPosition> list, int day) {
+		PortletRequest portletRequest, List<DayAndPosition> list, int day) {
 
-		if (ParamUtil.getBoolean(actionRequest, "weeklyDayPos" + day)) {
+		if (ParamUtil.getBoolean(portletRequest, "weeklyDayPos" + day)) {
 			list.add(new DayAndPosition(day, 0));
 		}
 	}
 
 	private String _getCronText(
-			ActionRequest actionRequest, Calendar startDate,
+			PortletRequest portletRequest, Calendar startDate,
 			boolean timeZoneSensitive, int recurrenceType)
 		throws Exception {
 
@@ -785,11 +786,11 @@ public class StagingImpl {
 		recurrence.setWeekStart(Calendar.SUNDAY);
 
 		if (recurrenceType == Recurrence.DAILY) {
-			int dailyType = ParamUtil.getInteger(actionRequest, "dailyType");
+			int dailyType = ParamUtil.getInteger(portletRequest, "dailyType");
 
 			if (dailyType == 0) {
 				int dailyInterval = ParamUtil.getInteger(
-					actionRequest, "dailyInterval", 1);
+					portletRequest, "dailyInterval", 1);
 
 				recurrence.setInterval(dailyInterval);
 			}
@@ -806,19 +807,19 @@ public class StagingImpl {
 		}
 		else if (recurrenceType == Recurrence.WEEKLY) {
 			int weeklyInterval = ParamUtil.getInteger(
-				actionRequest, "weeklyInterval", 1);
+				portletRequest, "weeklyInterval", 1);
 
 			recurrence.setInterval(weeklyInterval);
 
 			List<DayAndPosition> dayPos = new ArrayList<DayAndPosition>();
 
-			_addWeeklyDayPos(actionRequest, dayPos, Calendar.SUNDAY);
-			_addWeeklyDayPos(actionRequest, dayPos, Calendar.MONDAY);
-			_addWeeklyDayPos(actionRequest, dayPos, Calendar.TUESDAY);
-			_addWeeklyDayPos(actionRequest, dayPos, Calendar.WEDNESDAY);
-			_addWeeklyDayPos(actionRequest, dayPos, Calendar.THURSDAY);
-			_addWeeklyDayPos(actionRequest, dayPos, Calendar.FRIDAY);
-			_addWeeklyDayPos(actionRequest, dayPos, Calendar.SATURDAY);
+			_addWeeklyDayPos(portletRequest, dayPos, Calendar.SUNDAY);
+			_addWeeklyDayPos(portletRequest, dayPos, Calendar.MONDAY);
+			_addWeeklyDayPos(portletRequest, dayPos, Calendar.TUESDAY);
+			_addWeeklyDayPos(portletRequest, dayPos, Calendar.WEDNESDAY);
+			_addWeeklyDayPos(portletRequest, dayPos, Calendar.THURSDAY);
+			_addWeeklyDayPos(portletRequest, dayPos, Calendar.FRIDAY);
+			_addWeeklyDayPos(portletRequest, dayPos, Calendar.SATURDAY);
 
 			if (dayPos.size() == 0) {
 				dayPos.add(new DayAndPosition(Calendar.MONDAY, 0));
@@ -828,24 +829,24 @@ public class StagingImpl {
 		}
 		else if (recurrenceType == Recurrence.MONTHLY) {
 			int monthlyType = ParamUtil.getInteger(
-				actionRequest, "monthlyType");
+				portletRequest, "monthlyType");
 
 			if (monthlyType == 0) {
 				int monthlyDay = ParamUtil.getInteger(
-					actionRequest, "monthlyDay0", 1);
+					portletRequest, "monthlyDay0", 1);
 
 				recurrence.setByMonthDay(new int[] {monthlyDay});
 
 				int monthlyInterval = ParamUtil.getInteger(
-					actionRequest, "monthlyInterval0", 1);
+					portletRequest, "monthlyInterval0", 1);
 
 				recurrence.setInterval(monthlyInterval);
 			}
 			else {
 				int monthlyPos = ParamUtil.getInteger(
-					actionRequest, "monthlyPos");
+					portletRequest, "monthlyPos");
 				int monthlyDay = ParamUtil.getInteger(
-					actionRequest, "monthlyDay1");
+					portletRequest, "monthlyDay1");
 
 				DayAndPosition[] dayPos = {
 					new DayAndPosition(monthlyDay, monthlyPos)};
@@ -853,35 +854,35 @@ public class StagingImpl {
 				recurrence.setByDay(dayPos);
 
 				int monthlyInterval = ParamUtil.getInteger(
-					actionRequest, "monthlyInterval1", 1);
+					portletRequest, "monthlyInterval1", 1);
 
 				recurrence.setInterval(monthlyInterval);
 			}
 		}
 		else if (recurrenceType == Recurrence.YEARLY) {
-			int yearlyType = ParamUtil.getInteger(actionRequest, "yearlyType");
+			int yearlyType = ParamUtil.getInteger(portletRequest, "yearlyType");
 
 			if (yearlyType == 0) {
 				int yearlyMonth = ParamUtil.getInteger(
-					actionRequest, "yearlyMonth0");
+					portletRequest, "yearlyMonth0");
 				int yearlyDay = ParamUtil.getInteger(
-					actionRequest, "yearlyDay0", 1);
+					portletRequest, "yearlyDay0", 1);
 
 				recurrence.setByMonth(new int[] {yearlyMonth});
 				recurrence.setByMonthDay(new int[] {yearlyDay});
 
 				int yearlyInterval = ParamUtil.getInteger(
-					actionRequest, "yearlyInterval0", 1);
+					portletRequest, "yearlyInterval0", 1);
 
 				recurrence.setInterval(yearlyInterval);
 			}
 			else {
 				int yearlyPos = ParamUtil.getInteger(
-					actionRequest, "yearlyPos");
+					portletRequest, "yearlyPos");
 				int yearlyDay = ParamUtil.getInteger(
-					actionRequest, "yearlyDay1");
+					portletRequest, "yearlyDay1");
 				int yearlyMonth = ParamUtil.getInteger(
-					actionRequest, "yearlyMonth1");
+					portletRequest, "yearlyMonth1");
 
 				DayAndPosition[] dayPos = {
 					new DayAndPosition(yearlyDay, yearlyPos)};
@@ -891,7 +892,7 @@ public class StagingImpl {
 				recurrence.setByMonth(new int[] {yearlyMonth});
 
 				int yearlyInterval = ParamUtil.getInteger(
-					actionRequest, "yearlyInterval1", 1);
+					portletRequest, "yearlyInterval1", 1);
 
 				recurrence.setInterval(yearlyInterval);
 			}
@@ -901,21 +902,21 @@ public class StagingImpl {
 	}
 
 	private Calendar _getDate(
-			ActionRequest actionRequest, String paramPrefix,
+			PortletRequest portletRequest, String paramPrefix,
 			boolean timeZoneSensitive)
 		throws Exception {
 
 		int dateMonth = ParamUtil.getInteger(
-			actionRequest, paramPrefix + "Month");
-		int dateDay = ParamUtil.getInteger(actionRequest, paramPrefix + "Day");
+			portletRequest, paramPrefix + "Month");
+		int dateDay = ParamUtil.getInteger(portletRequest, paramPrefix + "Day");
 		int dateYear = ParamUtil.getInteger(
-			actionRequest, paramPrefix + "Year");
+			portletRequest, paramPrefix + "Year");
 		int dateHour = ParamUtil.getInteger(
-			actionRequest, paramPrefix + "Hour");
+			portletRequest, paramPrefix + "Hour");
 		int dateMinute = ParamUtil.getInteger(
-			actionRequest, paramPrefix + "Minute");
+			portletRequest, paramPrefix + "Minute");
 		int dateAmPm = ParamUtil.getInteger(
-			actionRequest, paramPrefix + "AmPm");
+			portletRequest, paramPrefix + "AmPm");
 
 		if (dateAmPm == Calendar.PM) {
 			dateHour += 12;
@@ -926,7 +927,8 @@ public class StagingImpl {
 
 		if (timeZoneSensitive) {
 			ThemeDisplay themeDisplay =
-				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+				(ThemeDisplay)portletRequest.getAttribute(
+					WebKeys.THEME_DISPLAY);
 
 			locale = themeDisplay.getLocale();
 			timeZone = themeDisplay.getTimeZone();
@@ -950,14 +952,15 @@ public class StagingImpl {
 	}
 
 	private void _publishLayouts(
-			ActionRequest actionRequest, long sourceGroupId, long targetGroupId,
-			Map<String, String[]> parameterMap, boolean schedule)
+			PortletRequest portletRequest, long sourceGroupId,
+			long targetGroupId, Map<String, String[]> parameterMap,
+			boolean schedule)
 		throws Exception {
 
 		ThemeDisplay themeDisplay =
-			(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			(ThemeDisplay)portletRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
-		String tabs1 = ParamUtil.getString(actionRequest, "tabs1");
+		String tabs1 = ParamUtil.getString(portletRequest, "tabs1");
 
 		boolean privateLayout = true;
 
@@ -965,30 +968,30 @@ public class StagingImpl {
 			privateLayout = false;
 		}
 
-		String scope = ParamUtil.getString(actionRequest, "scope");
+		String scope = ParamUtil.getString(portletRequest, "scope");
 
 		Map<Long, Boolean> layoutIdMap = new LinkedHashMap<Long, Boolean>();
 
 		if (scope.equals("selected-pages")) {
-			long[] rowIds = ParamUtil.getLongValues(actionRequest, "rowIds");
+			long[] rowIds = ParamUtil.getLongValues(portletRequest, "rowIds");
 
 			for (long selPlid : rowIds) {
 				boolean includeChildren = ParamUtil.getBoolean(
-					actionRequest, "includeChildren_" + selPlid);
+					portletRequest, "includeChildren_" + selPlid);
 
 				layoutIdMap.put(selPlid, includeChildren);
 			}
 		}
 
-		String range = ParamUtil.getString(actionRequest, "range");
+		String range = ParamUtil.getString(portletRequest, "range");
 
 		Date startDate = null;
 		Date endDate = null;
 
 		if (range.equals("dateRange")) {
-			startDate = _getDate(actionRequest, "startDate", true).getTime();
+			startDate = _getDate(portletRequest, "startDate", true).getTime();
 
-			endDate = _getDate(actionRequest, "endDate", true).getTime();
+			endDate = _getDate(portletRequest, "endDate", true).getTime();
 		}
 		else if (range.equals("fromLastPublishDate")) {
 			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
@@ -1012,7 +1015,7 @@ public class StagingImpl {
 			}
 		}
 		else if (range.equals("last")) {
-			int rangeLast = ParamUtil.getInteger(actionRequest, "last");
+			int rangeLast = ParamUtil.getInteger(portletRequest, "last");
 
 			Date now = new Date();
 
@@ -1026,28 +1029,28 @@ public class StagingImpl {
 				DestinationNames.LAYOUTS_LOCAL_PUBLISHER, targetGroupId);
 
 			int recurrenceType = ParamUtil.getInteger(
-				actionRequest, "recurrenceType");
+				portletRequest, "recurrenceType");
 
 			Calendar startCal = _getDate(
-				actionRequest, "schedulerStartDate", true);
+				portletRequest, "schedulerStartDate", true);
 
 			String cronText = _getCronText(
-				actionRequest, startCal, true, recurrenceType);
+				portletRequest, startCal, true, recurrenceType);
 
 			Date schedulerEndDate = null;
 
 			int endDateType = ParamUtil.getInteger(
-				actionRequest, "endDateType");
+				portletRequest, "endDateType");
 
 			if (endDateType == 1) {
 				Calendar endCal = _getDate(
-					actionRequest, "schedulerEndDate", true);
+					portletRequest, "schedulerEndDate", true);
 
 				schedulerEndDate = endCal.getTime();
 			}
 
 			String description = ParamUtil.getString(
-				actionRequest, "description");
+				portletRequest, "description");
 
 			LayoutServiceUtil.schedulePublishToLive(
 				sourceGroupId, targetGroupId, privateLayout, layoutIdMap,
@@ -1099,15 +1102,15 @@ public class StagingImpl {
 	}
 
 	private void _publishToRemote(
-			ActionRequest actionRequest, boolean schedule)
+			PortletRequest portletRequest, boolean schedule)
 		throws Exception {
 
 		ThemeDisplay themeDisplay =
-			(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			(ThemeDisplay)portletRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
-		String tabs1 = ParamUtil.getString(actionRequest, "tabs1");
+		String tabs1 = ParamUtil.getString(portletRequest, "tabs1");
 
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+		long groupId = ParamUtil.getLong(portletRequest, "groupId");
 
 		boolean privateLayout = true;
 
@@ -1115,47 +1118,47 @@ public class StagingImpl {
 			privateLayout = false;
 		}
 
-		String scope = ParamUtil.getString(actionRequest, "scope");
+		String scope = ParamUtil.getString(portletRequest, "scope");
 
 		if (Validator.isNull(scope)) {
 			scope = "all-pages";
 		}
 
 		Map<Long, Boolean> layoutIdMap = null;
-		Map<String, String[]> parameterMap = actionRequest.getParameterMap();
+		Map<String, String[]> parameterMap = portletRequest.getParameterMap();
 
 		if (scope.equals("selected-pages")) {
 			layoutIdMap = new LinkedHashMap<Long, Boolean>();
 
-			long[] rowIds = ParamUtil.getLongValues(actionRequest, "rowIds");
+			long[] rowIds = ParamUtil.getLongValues(portletRequest, "rowIds");
 
 			for (long selPlid : rowIds) {
 				boolean includeChildren = ParamUtil.getBoolean(
-					actionRequest, "includeChildren_" + selPlid);
+					portletRequest, "includeChildren_" + selPlid);
 
 				layoutIdMap.put(selPlid, includeChildren);
 			}
 		}
 
 		String remoteAddress = ParamUtil.getString(
-			actionRequest, "remoteAddress");
-		int remotePort = ParamUtil.getInteger(actionRequest, "remotePort");
+			portletRequest, "remoteAddress");
+		int remotePort = ParamUtil.getInteger(portletRequest, "remotePort");
 		boolean secureConnection = ParamUtil.getBoolean(
-			actionRequest, "secureConnection");
+			portletRequest, "secureConnection");
 
-		long remoteGroupId = ParamUtil.getLong(actionRequest, "remoteGroupId");
+		long remoteGroupId = ParamUtil.getLong(portletRequest, "remoteGroupId");
 		boolean remotePrivateLayout = ParamUtil.getBoolean(
-			actionRequest, "remotePrivateLayout");
+			portletRequest, "remotePrivateLayout");
 
-		String range = ParamUtil.getString(actionRequest, "range");
+		String range = ParamUtil.getString(portletRequest, "range");
 
 		Date startDate = null;
 		Date endDate = null;
 
 		if (range.equals("dateRange")) {
-			startDate = _getDate(actionRequest, "startDate", true).getTime();
+			startDate = _getDate(portletRequest, "startDate", true).getTime();
 
-			endDate = _getDate(actionRequest, "endDate", true).getTime();
+			endDate = _getDate(portletRequest, "endDate", true).getTime();
 		}
 		else if (range.equals("fromLastPublishDate")) {
 			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
@@ -1179,7 +1182,7 @@ public class StagingImpl {
 			}
 		}
 		else if (range.equals("last")) {
-			int rangeLast = ParamUtil.getInteger(actionRequest, "last");
+			int rangeLast = ParamUtil.getInteger(portletRequest, "last");
 
 			Date now = new Date();
 
@@ -1193,32 +1196,32 @@ public class StagingImpl {
 				DestinationNames.LAYOUTS_REMOTE_PUBLISHER, groupId);
 
 			int recurrenceType = ParamUtil.getInteger(
-				actionRequest, "recurrenceType");
+				portletRequest, "recurrenceType");
 
 			Calendar startCal = _getDate(
-				actionRequest, "schedulerStartDate", true);
+				portletRequest, "schedulerStartDate", true);
 
 			String cronText = _getCronText(
-				actionRequest, startCal, true, recurrenceType);
+				portletRequest, startCal, true, recurrenceType);
 
 			Date schedulerEndDate = null;
 
 			int endDateType = ParamUtil.getInteger(
-				actionRequest, "endDateType");
+				portletRequest, "endDateType");
 
 			if (endDateType == 1) {
 				Calendar endCal = _getDate(
-					actionRequest, "schedulerEndDate", true);
+					portletRequest, "schedulerEndDate", true);
 
 				schedulerEndDate = endCal.getTime();
 			}
 
 			String description = ParamUtil.getString(
-				actionRequest, "description");
+				portletRequest, "description");
 
 			LayoutServiceUtil.schedulePublishToRemote(
 				groupId, privateLayout, layoutIdMap,
-				getStagingParameters(actionRequest), remoteAddress, remotePort,
+				getStagingParameters(portletRequest), remoteAddress, remotePort,
 				secureConnection, remoteGroupId, remotePrivateLayout, startDate,
 				endDate, groupName, cronText, startCal.getTime(),
 				schedulerEndDate, description);
@@ -1232,7 +1235,7 @@ public class StagingImpl {
 				copyRemoteLayouts(
 					groupId, privateLayout, layoutIdMap, parameterMap,
 					remoteAddress, remotePort, secureConnection, remoteGroupId,
-					remotePrivateLayout, getStagingParameters(actionRequest),
+					remotePrivateLayout, getStagingParameters(portletRequest),
 					startDate, endDate);
 			}
 			catch (Exception e) {
