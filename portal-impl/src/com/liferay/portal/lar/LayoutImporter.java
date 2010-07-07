@@ -637,13 +637,17 @@ public class LayoutImporter {
 
 		long oldLayoutId = layoutId;
 
+		String layoutUuid = GetterUtil.getString(
+			layoutElement.attributeValue("layout-uuid"));
+
 		boolean deleteLayout = GetterUtil.getBoolean(
 			layoutElement.attributeValue("delete"));
 
 		if (deleteLayout) {
 			try {
-				Layout layout = LayoutLocalServiceUtil.getLayout(
-					groupId, privateLayout, oldLayoutId);
+				Layout layout =
+					LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
+						layoutUuid, groupId);
 
 				if (layout != null) {
 					newLayoutsMap.put(oldLayoutId, layout);
@@ -653,8 +657,8 @@ public class LayoutImporter {
 			}
 			catch (NoSuchLayoutException nsle) {
 				_log.warn(
-					"Error deleting layout for {" + sourceGroupId + ", " +
-						privateLayout + ", " + oldLayoutId + "}");
+					"Error deleting layout for {" + layoutUuid + ", " +
+						groupId + "}");
 			}
 
 			return;
