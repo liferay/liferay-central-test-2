@@ -687,6 +687,26 @@ public class PortletExporter {
 			_log.debug("Exporting data for " + portletId);
 		}
 
+		StringBundler sb = new StringBundler(4);
+
+		sb.append(context.getPortletPath(portletId));
+		sb.append(StringPool.SLASH);
+
+		if (portlet.isPreferencesUniquePerLayout()) {
+			sb.append(layout.getPlid());
+		}
+		else {
+			sb.append(context.getScopeGroupId());
+		}
+
+		sb.append("/portlet-data.xml");
+
+		String path = sb.toString();
+
+		if (!context.isPathNotProcessed(path)) {
+			return;
+		}
+
 		String data = null;
 
 		long groupId = context.getGroupId();
@@ -714,22 +734,11 @@ public class PortletExporter {
 			return;
 		}
 
-		StringBundler sb = new StringBundler(4);
-
-		sb.append(context.getPortletPath(portletId));
-
-		if (portlet.isPreferencesUniquePerLayout()) {
-			sb.append(StringPool.SLASH);
-			sb.append(layout.getPlid());
-		}
-
-		sb.append("/portlet-data.xml");
-
 		Element portletDataEl = parentEl.addElement("portlet-data");
 
-		portletDataEl.addAttribute("path", sb.toString());
+		portletDataEl.addAttribute("path", path);
 
-		context.addZipEntry(sb.toString(), data);
+		context.addZipEntry(path, data);
 	}
 
 	protected void exportPortletPreference(
