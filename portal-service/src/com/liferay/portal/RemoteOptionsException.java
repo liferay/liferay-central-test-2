@@ -25,9 +25,9 @@ public class RemoteOptionsException extends PortalException {
 
 	public static final int REMOTE_ADDRESS = 1;
 
-	public static final int REMOTE_PORT = 2;
-
 	public static final int REMOTE_GROUP_ID = 3;
+
+	public static final int REMOTE_PORT = 2;
 
 	public RemoteOptionsException(int type) {
 		_type = type;
@@ -37,28 +37,28 @@ public class RemoteOptionsException extends PortalException {
 		return _remoteAddress;
 	}
 
-	public void setRemoteAddress(String remoteAddress) {
-		_remoteAddress = remoteAddress;
-	}
-
 	public long getRemoteGroupId() {
 		return _remoteGroupId;
-	}
-
-	public void setRemoteGroupId(long remoteGroupId) {
-		_remoteGroupId = remoteGroupId;
 	}
 
 	public int getRemotePort() {
 		return _remotePort;
 	}
 
-	public void setRemotePort(int remotePort) {
-		_remotePort = remotePort;
-	}
-
 	public int getType() {
 		return _type;
+	}
+	
+	public void setRemoteAddress(String remoteAddress) {
+		_remoteAddress = remoteAddress;
+	}
+	
+	public void setRemoteGroupId(long remoteGroupId) {
+		_remoteGroupId = remoteGroupId;
+	}
+	
+	public void setRemotePort(int remotePort) {
+		_remotePort = remotePort;
 	}
 
 	private String _remoteAddress;

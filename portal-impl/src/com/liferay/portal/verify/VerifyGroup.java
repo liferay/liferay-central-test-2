@@ -91,14 +91,16 @@ public class VerifyGroup extends VerifyProcess {
 				continue;
 			}
 
-			UnicodeProperties typeSettings = group.getTypeSettingsProperties();
+			UnicodeProperties typeSettingsProperties =
+				group.getTypeSettingsProperties();
 
-			typeSettings.setProperty("staged", Boolean.TRUE.toString());
-			typeSettings.setProperty(
+			typeSettingsProperties.setProperty(
+				"staged", Boolean.TRUE.toString());
+			typeSettingsProperties.setProperty(
 				"stagedRemotely", Boolean.FALSE.toString());
 
 			GroupLocalServiceUtil.updateGroup(
-				group.getGroupId(), typeSettings.toString());
+				group.getGroupId(), typeSettingsProperties.toString());
 		}
 	}
 
