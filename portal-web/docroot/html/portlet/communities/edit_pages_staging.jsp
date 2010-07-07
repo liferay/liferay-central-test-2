@@ -88,6 +88,10 @@ UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribut
 				</c:if>
 			</liferay-ui:error>
 
+			<div class="portlet-msg-info">
+				<liferay-ui:message key="remote-publish-help" />
+			</div>
+
 			<aui:input label="remote-host-ip" name="remoteAddress" size="20" type="text" value='<%= liveGroupTypeSettings.getProperty("remoteAddress") %>' />
 
 			<aui:input label="port" name="remotePort" size="10" type="text" value='<%= liveGroupTypeSettings.getProperty("remotePort") %>' />
@@ -103,6 +107,9 @@ UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribut
 
 		<aui:fieldset label="staged-portlets">
 			<div class="portlet-msg-alert">
+				<liferay-ui:message key="staged-portlets-alert" />
+			</div>
+			<div class="portlet-msg-info">
 				<liferay-ui:message key="staged-portlets-help" />
 			</div>
 
@@ -139,7 +146,7 @@ UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribut
 		<aui:fieldset label="advanced-options">
 
 			<aui:field-wrapper>
-				<aui:select inlineField="<%= true %>" inlineLabel="left" label="number-of-stages" name="workflowStages">
+				<aui:select inlineField="<%= true %>" inlineLabel="left" label="number-of-editorial-stages" name="workflowStages">
 
 					<aui:option selected="<%= (1 == workflowStages) %>" value="1">1</aui:option>
 
