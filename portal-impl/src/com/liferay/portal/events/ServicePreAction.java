@@ -1652,7 +1652,7 @@ public class ServicePreAction extends Action {
 
 			// LEP-4987
 
-			if (group.hasStagingGroup() || group.isStagingGroup()) {
+			if (group.isStaged() || group.isStagingGroup()) {
 				boolean hasApproveProposalPermission =
 					GroupPermissionUtil.contains(
 						permissionChecker, scopeGroupId,
