@@ -2574,6 +2574,22 @@ public class PortalImpl implements Portal {
 				catch (Exception e) {
 				}
 			}
+
+			if ((portletId != null) &&
+				(group.isStaged() || group.isStagingGroup())) {
+
+				Group liveGroup = group;
+
+				if (group.isStagingGroup()) {
+					liveGroup = group.getLiveGroup();
+				}
+
+				if (liveGroup.isStaged() &&
+					!liveGroup.isStagedPortlet(portletId)) {
+
+					scopeGroupId = liveGroup.getGroupId();
+				}
+			}
 		}
 
 		if (scopeGroupId <= 0) {
