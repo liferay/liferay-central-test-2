@@ -17,6 +17,7 @@ package com.liferay.portal.staging;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.RemoteExportException;
+import com.liferay.portal.RemoteOptionsException;
 import com.liferay.portal.kernel.cal.DayAndPosition;
 import com.liferay.portal.kernel.cal.Duration;
 import com.liferay.portal.kernel.cal.Recurrence;
@@ -29,6 +30,7 @@ import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageStatus;
 import com.liferay.portal.kernel.staging.Staging;
+import com.liferay.portal.kernel.staging.StagingConstants;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
@@ -61,27 +63,32 @@ import com.liferay.portal.service.http.GroupServiceHttp;
 import com.liferay.portal.service.http.LayoutServiceHttp;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.communities.messaging.LayoutsLocalPublisherRequest;
 import com.liferay.portlet.communities.messaging.LayoutsRemotePublisherRequest;
+import com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil;
 
 import java.io.File;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.TimeZone;
 import java.util.Map.Entry;
 
 import javax.portlet.PortletRequest;
 
 /**
- * <a href="StagingUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="StagingImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Raymond Augé
  * @author Bruno Farache
@@ -578,18 +585,25 @@ public class StagingImpl implements Staging {
 	public void publishToLive(PortletRequest portletRequest)
 		throws Exception {
 
-		long stagingGroupId = ParamUtil.getLong(
-			portletRequest, "stagingGroupId");
+		long groupId = ParamUtil.getLong(portletRequest, "groupId");
 
-		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
-
-		long liveGroupId = stagingGroup.getLiveGroupId();
+		Group liveGroup = GroupLocalServiceUtil.getGroup(groupId);
 
 		Map<String, String[]> parameterMap = getStagingParameters(
 			portletRequest);
 
-		_publishLayouts(
-			portletRequest, stagingGroupId, liveGroupId, parameterMap, false);
+		if (liveGroup.isStaged()) {
+			if (liveGroup.isStagedRemotely()) {
+				publishToRemote(portletRequest);
+			}
+			else {
+				Group stagingGroup = liveGroup.getStagingGroup();
+
+				_publishLayouts(
+					portletRequest, stagingGroup.getGroupId(), groupId,
+					parameterMap, false);
+			}
+		}
 	}
 
 	public void publishToLive(
@@ -721,26 +735,98 @@ public class StagingImpl implements Staging {
 			throw new PrincipalException();
 		}
 
-		long stagingGroupId = ParamUtil.getLong(
-			portletRequest, "stagingGroupId");
+		int stagingType = ParamUtil.getInteger(portletRequest, "stagingType");
 
-		boolean stagingEnabled = ParamUtil.getBoolean(
-			portletRequest, "stagingEnabled");
-
-		if ((stagingGroupId > 0) && !stagingEnabled) {
-			GroupServiceUtil.deleteGroup(stagingGroupId);
-
-			GroupServiceUtil.updateWorkflow(liveGroupId, false, 0, null);
+		if (stagingType == StagingConstants.TYPE_NOT_STAGED) {
+			_disableStaging(portletRequest, liveGroupId);
 		}
-		else if ((stagingGroupId == 0) && stagingEnabled) {
-			Group liveGroup = GroupServiceUtil.getGroup(liveGroupId);
+		else if (stagingType == StagingConstants.TYPE_LOCAL_STAGING) {
+			_enableLocalStaging(portletRequest, liveGroupId);
+		}
+		else if (stagingType == StagingConstants.TYPE_REMOTE_STAGING) {
+			_enableRemoteStaging(portletRequest, liveGroupId);
+		}
+	}
 
-			Group stagingGroup = GroupServiceUtil.addGroup(
-				liveGroup.getGroupId(),
+	private void _addWeeklyDayPos(
+		PortletRequest portletRequest, List<DayAndPosition> list, int day) {
+
+		if (ParamUtil.getBoolean(portletRequest, "weeklyDayPos" + day)) {
+			list.add(new DayAndPosition(day, 0));
+		}
+	}
+
+	protected void _disableStaging(
+			PortletRequest portletRequest, long liveGroupId)
+		throws Exception {
+
+		Group liveGroup = GroupLocalServiceUtil.getGroup(liveGroupId);
+
+		UnicodeProperties properties =
+			liveGroup.getTypeSettingsProperties();
+
+		properties.remove("isStaged");
+		properties.remove("isStagedRemotely");
+		properties.remove("remoteAddress");
+		properties.remove("remotePort");
+		properties.remove("secureConnection");
+		properties.remove("remoteGroupId");
+		properties.remove("workflowEnabled");
+		properties.remove("workflowStages");
+		properties.remove("workflowRoleNames");
+
+		Set<String> keys = new HashSet<String>();
+
+		for (String key : properties.keySet()) {
+			if (key.startsWith(StagingConstants.IS_STAGED_PORTLET)) {
+				keys.add(key);
+			}
+		}
+
+		for (String key : keys) {
+			properties.remove(key);
+		}
+
+		if (liveGroup.hasStagingGroup()) {
+			GroupLocalServiceUtil.deleteGroup(
+				liveGroup.getStagingGroup().getGroupId());
+
+			TasksProposalLocalServiceUtil.deleteProposals(
+				liveGroup.getGroupId());
+		}
+
+		GroupLocalServiceUtil.updateGroup(
+			liveGroup.getGroupId(), properties.toString());
+	}
+
+	protected void _enableLocalStaging(
+			PortletRequest portletRequest, long liveGroupId)
+		throws Exception {
+
+		Group liveGroup = GroupServiceUtil.getGroup(liveGroupId);
+
+		if (liveGroup.isStagedRemotely()) {
+			_disableStaging(portletRequest, liveGroupId);
+		}
+
+		UnicodeProperties properties = liveGroup.getTypeSettingsProperties();
+
+		properties.setProperty("isStaged", Boolean.TRUE.toString());
+		properties.setProperty("isStagedRemotely", String.valueOf(false));
+
+		_setCommonStagingOptions(portletRequest, properties);
+
+		if (!liveGroup.hasStagingGroup()) {
+			Group stagingGroup = GroupLocalServiceUtil.addGroup(
+				liveGroup.getCreatorUserId(), liveGroup.getClassName(),
+				liveGroup.getClassPK(), liveGroup.getGroupId(),
 				liveGroup.getDescriptiveName() + " (Staging)",
 				liveGroup.getDescription(), liveGroup.getType(),
 				liveGroup.getFriendlyURL().concat("-staging"),
 				liveGroup.isActive(), null);
+
+			GroupServiceUtil.updateGroup(
+				liveGroup.getGroupId(), properties.toString());
 
 			if (liveGroup.hasPrivateLayouts()) {
 				Map<String, String[]> parameterMap = getStagingParameters();
@@ -758,14 +844,47 @@ public class StagingImpl implements Staging {
 					parameterMap, null, null);
 			}
 		}
+		else {
+			GroupServiceUtil.updateGroup(
+				liveGroup.getGroupId(), properties.toString());
+		}
 	}
 
-	private void _addWeeklyDayPos(
-		PortletRequest portletRequest, List<DayAndPosition> list, int day) {
+	protected void _enableRemoteStaging(
+			PortletRequest portletRequest, long liveGroupId)
+		throws Exception {
 
-		if (ParamUtil.getBoolean(portletRequest, "weeklyDayPos" + day)) {
-			list.add(new DayAndPosition(day, 0));
+		Group liveGroup = GroupServiceUtil.getGroup(liveGroupId);
+
+		if (liveGroup.hasStagingGroup()) {
+			_disableStaging(portletRequest, liveGroupId);
 		}
+
+		UnicodeProperties properties = liveGroup.getTypeSettingsProperties();
+
+		String remoteAddress = ParamUtil.getString(
+			portletRequest, "remoteAddress");
+		int remotePort = ParamUtil.getInteger(portletRequest, "remotePort");
+		boolean secureConnection = ParamUtil.getBoolean(
+			portletRequest, "secureConnection");
+		long remoteGroupId = ParamUtil.getLong(portletRequest, "remoteGroupId");
+
+		_validate(remoteAddress, remotePort, remoteGroupId, secureConnection);
+
+		properties.setProperty("isStaged", Boolean.TRUE.toString());
+		properties.setProperty("isStagedRemotely", String.valueOf(true));
+
+		properties.setProperty("remoteAddress", remoteAddress);
+		properties.setProperty("remotePort", String.valueOf(remotePort));
+		properties.setProperty(
+			"secureConnection", String.valueOf(secureConnection));
+		properties.setProperty(
+			"remoteGroupId", String.valueOf(remoteGroupId));
+
+		_setCommonStagingOptions(portletRequest, properties);
+
+		GroupServiceUtil.updateGroup(
+			liveGroup.getGroupId(), properties.toString());
 	}
 
 	private String _getCronText(
@@ -931,8 +1050,7 @@ public class StagingImpl implements Staging {
 
 		if (timeZoneSensitive) {
 			ThemeDisplay themeDisplay =
-				(ThemeDisplay)portletRequest.getAttribute(
-					WebKeys.THEME_DISPLAY);
+				(ThemeDisplay)portletRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
 			locale = themeDisplay.getLocale();
 			timeZone = themeDisplay.getTimeZone();
@@ -955,10 +1073,44 @@ public class StagingImpl implements Staging {
 		return cal;
 	}
 
+	protected String _getWorkflowRoleNames(PortletRequest portletRequest) {
+		int workflowStages = ParamUtil.getInteger(
+			portletRequest, "workflowStages");
+
+		String workflowRoleNames;
+
+		if (workflowStages == 0) {
+			workflowRoleNames = StringPool.BLANK;
+		}
+		else {
+			StringBundler sb = new StringBundler(workflowStages * 2 - 1);
+
+			for (int i = 1; i <= (workflowStages - 1); i++) {
+				if (i > 1) {
+					sb.append(",");
+				}
+
+				String workflowRoleName = ParamUtil.getString(
+					portletRequest, "workflowRoleName_" + i);
+
+				sb.append(workflowRoleName);
+			}
+
+			String workflowRoleName = ParamUtil.getString(
+				portletRequest, "workflowRoleName_Last");
+
+			sb.append(",");
+			sb.append(workflowRoleName);
+
+			workflowRoleNames = sb.toString();
+		}
+
+		return workflowRoleNames;
+	}
+
 	private void _publishLayouts(
-			PortletRequest portletRequest, long sourceGroupId,
-			long targetGroupId, Map<String, String[]> parameterMap,
-			boolean schedule)
+			PortletRequest portletRequest, long sourceGroupId, long targetGroupId,
+			Map<String, String[]> parameterMap, boolean schedule)
 		throws Exception {
 
 		ThemeDisplay themeDisplay =
@@ -1144,15 +1296,32 @@ public class StagingImpl implements Staging {
 			}
 		}
 
-		String remoteAddress = ParamUtil.getString(
-			portletRequest, "remoteAddress");
-		int remotePort = ParamUtil.getInteger(portletRequest, "remotePort");
-		boolean secureConnection = ParamUtil.getBoolean(
-			portletRequest, "secureConnection");
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-		long remoteGroupId = ParamUtil.getLong(portletRequest, "remoteGroupId");
+		UnicodeProperties groupTypeSettingsProperties =
+			group.getTypeSettingsProperties();
+
+		String remoteAddress = ParamUtil.getString(
+			portletRequest, "remoteAddress",
+			groupTypeSettingsProperties.getProperty("remoteAddress"));
+		int remotePort = ParamUtil.getInteger(
+			portletRequest, "remotePort",
+			GetterUtil.getInteger(
+				groupTypeSettingsProperties.getProperty("remotePort")));
+		boolean secureConnection = ParamUtil.getBoolean(
+			portletRequest, "secureConnection",
+			GetterUtil.getBoolean(
+				groupTypeSettingsProperties.getProperty("secureConnection")));
+
+		long remoteGroupId = ParamUtil.getLong(
+			portletRequest, "remoteGroupId",
+			GetterUtil.getLong(
+				groupTypeSettingsProperties.getProperty("remoteGroupId")));
+
 		boolean remotePrivateLayout = ParamUtil.getBoolean(
 			portletRequest, "remotePrivateLayout");
+
+		_validate(remoteAddress, remotePort, remoteGroupId, secureConnection);
 
 		String range = ParamUtil.getString(portletRequest, "range");
 
@@ -1263,6 +1432,136 @@ public class StagingImpl implements Staging {
 					DestinationNames.MESSAGE_BUS_MESSAGE_STATUS, messageStatus);
 			}
 		}
+	}
+
+	protected void _setCommonStagingOptions(
+		PortletRequest portletRequest, UnicodeProperties properties) {
+
+		Enumeration<String> parameterNames = portletRequest.getParameterNames();
+
+		while (parameterNames.hasMoreElements()) {
+			String parameterName = parameterNames.nextElement();
+			boolean isStaged = MapUtil.getBoolean(
+				portletRequest.getParameterMap(), parameterName);
+
+			if (parameterName.startsWith(StagingConstants.IS_STAGED_PORTLET) &&
+				!parameterName.endsWith("Checkbox")) {
+
+				properties.setProperty(parameterName, String.valueOf(isStaged));
+			}
+		}
+
+		boolean workflowEnabled = false;
+
+		int workflowStages = ParamUtil.getInteger(
+			portletRequest, "workflowStages");
+
+		if (workflowStages > 1) {
+			workflowEnabled = true;
+		}
+
+		properties.setProperty(
+			"workflowEnabled", String.valueOf(workflowEnabled));
+
+		if (workflowEnabled) {
+			String workflowRoleNames = _getWorkflowRoleNames(portletRequest);
+
+			if (workflowStages < PropsValues.TASKS_DEFAULT_STAGES) {
+				workflowStages = PropsValues.TASKS_DEFAULT_STAGES;
+			}
+
+			if (Validator.isNull(workflowRoleNames)) {
+				workflowRoleNames = PropsValues.TASKS_DEFAULT_ROLE_NAMES;
+			}
+
+			properties.setProperty(
+				"workflowStages", String.valueOf(workflowStages));
+			properties.setProperty("workflowRoleNames", workflowRoleNames);
+		}
+	}
+
+	protected void _validate(
+			String remoteAddress, int remotePort, long remoteGroupId,
+			boolean secureConnection)
+		throws Exception {
+
+		RemoteOptionsException roe;
+
+		if (!Validator.isIPAddress(remoteAddress) &&
+			!Validator.isDomain(remoteAddress)) {
+
+			roe = new RemoteOptionsException(
+				RemoteOptionsException.REMOTE_ADDRESS);
+
+			roe.setRemoteAddress(remoteAddress);
+
+			throw roe;
+		}
+
+		if ((remotePort < 1) || (remotePort > 65535)) {
+			roe = new RemoteOptionsException(
+				RemoteOptionsException.REMOTE_PORT);
+
+			roe.setRemotePort(remotePort);
+
+			throw roe;
+		}
+
+		if (remoteGroupId <= 0) {
+			roe = new RemoteOptionsException(
+				RemoteOptionsException.REMOTE_GROUP_ID);
+
+			roe.setRemoteGroupId(remoteGroupId);
+
+			throw roe;
+		}
+
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
+		User user = UserLocalServiceUtil.getUser(permissionChecker.getUserId());
+
+		StringBundler sb = new StringBundler(4);
+
+		if (secureConnection) {
+			sb.append(Http.HTTPS_WITH_SLASH);
+		}
+		else {
+			sb.append(Http.HTTP_WITH_SLASH);
+		}
+
+		sb.append(remoteAddress);
+		sb.append(StringPool.COLON);
+		sb.append(remotePort);
+
+		String url = sb.toString();
+
+		HttpPrincipal httpPrincipal = new HttpPrincipal(
+			url, user.getEmailAddress(), user.getPassword(),
+			user.getPasswordEncrypted());
+
+		// Ping remote host and verify that the group exists
+
+		try {
+			GroupServiceHttp.getGroup(httpPrincipal, remoteGroupId);
+		}
+		catch (NoSuchGroupException nsge) {
+			RemoteExportException ree = new RemoteExportException(
+				RemoteExportException.NO_GROUP);
+
+			ree.setGroupId(remoteGroupId);
+
+			throw ree;
+		}
+		catch (SystemException se) {
+			RemoteExportException ree = new RemoteExportException(
+				RemoteExportException.BAD_CONNECTION);
+
+			ree.setURL(url);
+
+			throw ree;
+		}
+
 	}
 
 }
