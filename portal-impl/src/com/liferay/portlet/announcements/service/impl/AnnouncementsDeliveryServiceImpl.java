@@ -16,7 +16,9 @@ package com.liferay.portlet.announcements.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.permission.PortalPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 import com.liferay.portlet.announcements.service.base.AnnouncementsDeliveryServiceBaseImpl;
@@ -35,8 +37,13 @@ public class AnnouncementsDeliveryServiceImpl
 			boolean website)
 		throws PortalException, SystemException {
 
-		UserPermissionUtil.check(
-			getPermissionChecker(), userId, ActionKeys.UPDATE);
+		if (!PortalPermissionUtil.contains(
+				getPermissionChecker(), ActionKeys.ADD_USER) &&
+			!UserPermissionUtil.contains(
+				getPermissionChecker(), userId, ActionKeys.UPDATE)) {
+
+			throw new PrincipalException();
+		}
 
 		return announcementsDeliveryLocalService.updateDelivery(
 			userId, type, email, sms, website);
