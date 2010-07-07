@@ -96,9 +96,7 @@ import javax.portlet.PortletRequest;
  */
 public class StagingImpl implements Staging {
 
-	public void copyFromLive(PortletRequest portletRequest)
-		throws Exception {
-
+	public void copyFromLive(PortletRequest portletRequest) throws Exception {
 		long stagingGroupId = ParamUtil.getLong(
 			portletRequest, "stagingGroupId");
 
@@ -109,12 +107,11 @@ public class StagingImpl implements Staging {
 		Map<String, String[]> parameterMap = getStagingParameters(
 			portletRequest);
 
-		_publishLayouts(
+		publishLayouts(
 			portletRequest, liveGroupId, stagingGroupId, parameterMap, false);
 	}
 
-	public void copyFromLive(
-			PortletRequest portletRequest, Portlet portlet)
+	public void copyFromLive(PortletRequest portletRequest, Portlet portlet)
 		throws Exception {
 
 		long plid = ParamUtil.getLong(portletRequest, "plid");
@@ -582,9 +579,7 @@ public class StagingImpl implements Staging {
 			parameterMap, startDate, endDate);
 	}
 
-	public void publishToLive(PortletRequest portletRequest)
-		throws Exception {
-
+	public void publishToLive(PortletRequest portletRequest) throws Exception {
 		long groupId = ParamUtil.getLong(portletRequest, "groupId");
 
 		Group liveGroup = GroupLocalServiceUtil.getGroup(groupId);
@@ -599,15 +594,14 @@ public class StagingImpl implements Staging {
 			else {
 				Group stagingGroup = liveGroup.getStagingGroup();
 
-				_publishLayouts(
+				publishLayouts(
 					portletRequest, stagingGroup.getGroupId(), groupId,
 					parameterMap, false);
 			}
 		}
 	}
 
-	public void publishToLive(
-			PortletRequest portletRequest, Portlet portlet)
+	public void publishToLive(PortletRequest portletRequest, Portlet portlet)
 		throws Exception {
 
 		long plid = ParamUtil.getLong(portletRequest, "plid");
@@ -630,7 +624,7 @@ public class StagingImpl implements Staging {
 	public void publishToRemote(PortletRequest portletRequest)
 		throws Exception {
 
-		_publishToRemote(portletRequest, false);
+		publishToRemote(portletRequest, false);
 	}
 
 	public void scheduleCopyFromLive(PortletRequest portletRequest)
@@ -646,7 +640,7 @@ public class StagingImpl implements Staging {
 		Map<String, String[]> parameterMap = getStagingParameters(
 			portletRequest);
 
-		_publishLayouts(
+		publishLayouts(
 			portletRequest, liveGroupId, stagingGroupId, parameterMap, true);
 	}
 
@@ -663,14 +657,14 @@ public class StagingImpl implements Staging {
 		Map<String, String[]> parameterMap = getStagingParameters(
 			portletRequest);
 
-		_publishLayouts(
+		publishLayouts(
 			portletRequest, stagingGroupId, liveGroupId, parameterMap, true);
 	}
 
 	public void schedulePublishToRemote(PortletRequest portletRequest)
 		throws Exception {
 
-		_publishToRemote(portletRequest, true);
+		publishToRemote(portletRequest, true);
 	}
 
 	public void unscheduleCopyFromLive(PortletRequest portletRequest)
@@ -718,9 +712,7 @@ public class StagingImpl implements Staging {
 			groupId, jobName, groupName);
 	}
 
-	public void updateStaging(PortletRequest portletRequest)
-		throws Exception {
-
+	public void updateStaging(PortletRequest portletRequest) throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -738,17 +730,17 @@ public class StagingImpl implements Staging {
 		int stagingType = ParamUtil.getInteger(portletRequest, "stagingType");
 
 		if (stagingType == StagingConstants.TYPE_NOT_STAGED) {
-			_disableStaging(portletRequest, liveGroupId);
+			disableStaging(portletRequest, liveGroupId);
 		}
 		else if (stagingType == StagingConstants.TYPE_LOCAL_STAGING) {
-			_enableLocalStaging(portletRequest, liveGroupId);
+			enableLocalStaging(portletRequest, liveGroupId);
 		}
 		else if (stagingType == StagingConstants.TYPE_REMOTE_STAGING) {
-			_enableRemoteStaging(portletRequest, liveGroupId);
+			enableRemoteStaging(portletRequest, liveGroupId);
 		}
 	}
 
-	private void _addWeeklyDayPos(
+	protected void addWeeklyDayPos(
 		PortletRequest portletRequest, List<DayAndPosition> list, int day) {
 
 		if (ParamUtil.getBoolean(portletRequest, "weeklyDayPos" + day)) {
@@ -756,7 +748,7 @@ public class StagingImpl implements Staging {
 		}
 	}
 
-	protected void _disableStaging(
+	protected void disableStaging(
 			PortletRequest portletRequest, long liveGroupId)
 		throws Exception {
 
@@ -765,8 +757,8 @@ public class StagingImpl implements Staging {
 		UnicodeProperties properties =
 			liveGroup.getTypeSettingsProperties();
 
-		properties.remove("isStaged");
-		properties.remove("isStagedRemotely");
+		properties.remove("staged");
+		properties.remove("stagedRemotely");
 		properties.remove("remoteAddress");
 		properties.remove("remotePort");
 		properties.remove("secureConnection");
@@ -778,7 +770,7 @@ public class StagingImpl implements Staging {
 		Set<String> keys = new HashSet<String>();
 
 		for (String key : properties.keySet()) {
-			if (key.startsWith(StagingConstants.IS_STAGED_PORTLET)) {
+			if (key.startsWith(StagingConstants.STAGED_PORTLET)) {
 				keys.add(key);
 			}
 		}
@@ -799,22 +791,22 @@ public class StagingImpl implements Staging {
 			liveGroup.getGroupId(), properties.toString());
 	}
 
-	protected void _enableLocalStaging(
+	protected void enableLocalStaging(
 			PortletRequest portletRequest, long liveGroupId)
 		throws Exception {
 
 		Group liveGroup = GroupServiceUtil.getGroup(liveGroupId);
 
 		if (liveGroup.isStagedRemotely()) {
-			_disableStaging(portletRequest, liveGroupId);
+			disableStaging(portletRequest, liveGroupId);
 		}
 
 		UnicodeProperties properties = liveGroup.getTypeSettingsProperties();
 
-		properties.setProperty("isStaged", Boolean.TRUE.toString());
-		properties.setProperty("isStagedRemotely", String.valueOf(false));
+		properties.setProperty("staged", Boolean.TRUE.toString());
+		properties.setProperty("stagedRemotely", String.valueOf(false));
 
-		_setCommonStagingOptions(portletRequest, properties);
+		setCommonStagingOptions(portletRequest, properties);
 
 		if (!liveGroup.hasStagingGroup()) {
 			Group stagingGroup = GroupLocalServiceUtil.addGroup(
@@ -850,14 +842,14 @@ public class StagingImpl implements Staging {
 		}
 	}
 
-	protected void _enableRemoteStaging(
+	protected void enableRemoteStaging(
 			PortletRequest portletRequest, long liveGroupId)
 		throws Exception {
 
 		Group liveGroup = GroupServiceUtil.getGroup(liveGroupId);
 
 		if (liveGroup.hasStagingGroup()) {
-			_disableStaging(portletRequest, liveGroupId);
+			disableStaging(portletRequest, liveGroupId);
 		}
 
 		UnicodeProperties properties = liveGroup.getTypeSettingsProperties();
@@ -869,10 +861,10 @@ public class StagingImpl implements Staging {
 			portletRequest, "secureConnection");
 		long remoteGroupId = ParamUtil.getLong(portletRequest, "remoteGroupId");
 
-		_validate(remoteAddress, remotePort, remoteGroupId, secureConnection);
+		validate(remoteAddress, remotePort, remoteGroupId, secureConnection);
 
-		properties.setProperty("isStaged", Boolean.TRUE.toString());
-		properties.setProperty("isStagedRemotely", String.valueOf(true));
+		properties.setProperty("staged", Boolean.TRUE.toString());
+		properties.setProperty("stagedRemotely", String.valueOf(true));
 
 		properties.setProperty("remoteAddress", remoteAddress);
 		properties.setProperty("remotePort", String.valueOf(remotePort));
@@ -881,13 +873,13 @@ public class StagingImpl implements Staging {
 		properties.setProperty(
 			"remoteGroupId", String.valueOf(remoteGroupId));
 
-		_setCommonStagingOptions(portletRequest, properties);
+		setCommonStagingOptions(portletRequest, properties);
 
 		GroupServiceUtil.updateGroup(
 			liveGroup.getGroupId(), properties.toString());
 	}
 
-	private String _getCronText(
+	protected String getCronText(
 			PortletRequest portletRequest, Calendar startDate,
 			boolean timeZoneSensitive, int recurrenceType)
 		throws Exception {
@@ -936,13 +928,13 @@ public class StagingImpl implements Staging {
 
 			List<DayAndPosition> dayPos = new ArrayList<DayAndPosition>();
 
-			_addWeeklyDayPos(portletRequest, dayPos, Calendar.SUNDAY);
-			_addWeeklyDayPos(portletRequest, dayPos, Calendar.MONDAY);
-			_addWeeklyDayPos(portletRequest, dayPos, Calendar.TUESDAY);
-			_addWeeklyDayPos(portletRequest, dayPos, Calendar.WEDNESDAY);
-			_addWeeklyDayPos(portletRequest, dayPos, Calendar.THURSDAY);
-			_addWeeklyDayPos(portletRequest, dayPos, Calendar.FRIDAY);
-			_addWeeklyDayPos(portletRequest, dayPos, Calendar.SATURDAY);
+			addWeeklyDayPos(portletRequest, dayPos, Calendar.SUNDAY);
+			addWeeklyDayPos(portletRequest, dayPos, Calendar.MONDAY);
+			addWeeklyDayPos(portletRequest, dayPos, Calendar.TUESDAY);
+			addWeeklyDayPos(portletRequest, dayPos, Calendar.WEDNESDAY);
+			addWeeklyDayPos(portletRequest, dayPos, Calendar.THURSDAY);
+			addWeeklyDayPos(portletRequest, dayPos, Calendar.FRIDAY);
+			addWeeklyDayPos(portletRequest, dayPos, Calendar.SATURDAY);
 
 			if (dayPos.size() == 0) {
 				dayPos.add(new DayAndPosition(Calendar.MONDAY, 0));
@@ -1024,7 +1016,7 @@ public class StagingImpl implements Staging {
 		return RecurrenceSerializer.toCronText(recurrence);
 	}
 
-	private Calendar _getDate(
+	protected Calendar getDate(
 			PortletRequest portletRequest, String paramPrefix,
 			boolean timeZoneSensitive)
 		throws Exception {
@@ -1050,7 +1042,8 @@ public class StagingImpl implements Staging {
 
 		if (timeZoneSensitive) {
 			ThemeDisplay themeDisplay =
-				(ThemeDisplay)portletRequest.getAttribute(WebKeys.THEME_DISPLAY);
+				(ThemeDisplay)portletRequest.getAttribute(
+					WebKeys.THEME_DISPLAY);
 
 			locale = themeDisplay.getLocale();
 			timeZone = themeDisplay.getTimeZone();
@@ -1073,7 +1066,7 @@ public class StagingImpl implements Staging {
 		return cal;
 	}
 
-	protected String _getWorkflowRoleNames(PortletRequest portletRequest) {
+	protected String getWorkflowRoleNames(PortletRequest portletRequest) {
 		int workflowStages = ParamUtil.getInteger(
 			portletRequest, "workflowStages");
 
@@ -1108,9 +1101,10 @@ public class StagingImpl implements Staging {
 		return workflowRoleNames;
 	}
 
-	private void _publishLayouts(
-			PortletRequest portletRequest, long sourceGroupId, long targetGroupId,
-			Map<String, String[]> parameterMap, boolean schedule)
+	protected void publishLayouts(
+			PortletRequest portletRequest, long sourceGroupId,
+			long targetGroupId, Map<String, String[]> parameterMap,
+			boolean schedule)
 		throws Exception {
 
 		ThemeDisplay themeDisplay =
@@ -1145,9 +1139,9 @@ public class StagingImpl implements Staging {
 		Date endDate = null;
 
 		if (range.equals("dateRange")) {
-			startDate = _getDate(portletRequest, "startDate", true).getTime();
+			startDate = getDate(portletRequest, "startDate", true).getTime();
 
-			endDate = _getDate(portletRequest, "endDate", true).getTime();
+			endDate = getDate(portletRequest, "endDate", true).getTime();
 		}
 		else if (range.equals("fromLastPublishDate")) {
 			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
@@ -1187,10 +1181,10 @@ public class StagingImpl implements Staging {
 			int recurrenceType = ParamUtil.getInteger(
 				portletRequest, "recurrenceType");
 
-			Calendar startCal = _getDate(
+			Calendar startCal = getDate(
 				portletRequest, "schedulerStartDate", true);
 
-			String cronText = _getCronText(
+			String cronText = getCronText(
 				portletRequest, startCal, true, recurrenceType);
 
 			Date schedulerEndDate = null;
@@ -1199,7 +1193,7 @@ public class StagingImpl implements Staging {
 				portletRequest, "endDateType");
 
 			if (endDateType == 1) {
-				Calendar endCal = _getDate(
+				Calendar endCal = getDate(
 					portletRequest, "schedulerEndDate", true);
 
 				schedulerEndDate = endCal.getTime();
@@ -1257,7 +1251,7 @@ public class StagingImpl implements Staging {
 		}
 	}
 
-	private void _publishToRemote(
+	protected void publishToRemote(
 			PortletRequest portletRequest, boolean schedule)
 		throws Exception {
 
@@ -1321,7 +1315,7 @@ public class StagingImpl implements Staging {
 		boolean remotePrivateLayout = ParamUtil.getBoolean(
 			portletRequest, "remotePrivateLayout");
 
-		_validate(remoteAddress, remotePort, remoteGroupId, secureConnection);
+		validate(remoteAddress, remotePort, remoteGroupId, secureConnection);
 
 		String range = ParamUtil.getString(portletRequest, "range");
 
@@ -1329,9 +1323,9 @@ public class StagingImpl implements Staging {
 		Date endDate = null;
 
 		if (range.equals("dateRange")) {
-			startDate = _getDate(portletRequest, "startDate", true).getTime();
+			startDate = getDate(portletRequest, "startDate", true).getTime();
 
-			endDate = _getDate(portletRequest, "endDate", true).getTime();
+			endDate = getDate(portletRequest, "endDate", true).getTime();
 		}
 		else if (range.equals("fromLastPublishDate")) {
 			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
@@ -1371,10 +1365,10 @@ public class StagingImpl implements Staging {
 			int recurrenceType = ParamUtil.getInteger(
 				portletRequest, "recurrenceType");
 
-			Calendar startCal = _getDate(
+			Calendar startCal = getDate(
 				portletRequest, "schedulerStartDate", true);
 
-			String cronText = _getCronText(
+			String cronText = getCronText(
 				portletRequest, startCal, true, recurrenceType);
 
 			Date schedulerEndDate = null;
@@ -1383,7 +1377,7 @@ public class StagingImpl implements Staging {
 				portletRequest, "endDateType");
 
 			if (endDateType == 1) {
-				Calendar endCal = _getDate(
+				Calendar endCal = getDate(
 					portletRequest, "schedulerEndDate", true);
 
 				schedulerEndDate = endCal.getTime();
@@ -1434,7 +1428,7 @@ public class StagingImpl implements Staging {
 		}
 	}
 
-	protected void _setCommonStagingOptions(
+	protected void setCommonStagingOptions(
 		PortletRequest portletRequest, UnicodeProperties properties) {
 
 		Enumeration<String> parameterNames = portletRequest.getParameterNames();
@@ -1444,7 +1438,7 @@ public class StagingImpl implements Staging {
 			boolean isStaged = MapUtil.getBoolean(
 				portletRequest.getParameterMap(), parameterName);
 
-			if (parameterName.startsWith(StagingConstants.IS_STAGED_PORTLET) &&
+			if (parameterName.startsWith(StagingConstants.STAGED_PORTLET) &&
 				!parameterName.endsWith("Checkbox")) {
 
 				properties.setProperty(parameterName, String.valueOf(isStaged));
@@ -1464,7 +1458,7 @@ public class StagingImpl implements Staging {
 			"workflowEnabled", String.valueOf(workflowEnabled));
 
 		if (workflowEnabled) {
-			String workflowRoleNames = _getWorkflowRoleNames(portletRequest);
+			String workflowRoleNames = getWorkflowRoleNames(portletRequest);
 
 			if (workflowStages < PropsValues.TASKS_DEFAULT_STAGES) {
 				workflowStages = PropsValues.TASKS_DEFAULT_STAGES;
@@ -1480,7 +1474,7 @@ public class StagingImpl implements Staging {
 		}
 	}
 
-	protected void _validate(
+	protected void validate(
 			String remoteAddress, int remotePort, long remoteGroupId,
 			boolean secureConnection)
 		throws Exception {

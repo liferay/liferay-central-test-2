@@ -30,17 +30,17 @@ import javax.portlet.PortletRequest;
  */
 public class StagingUtil {
 
+	public static void copyFromLive(PortletRequest PortletRequest)
+		throws Exception {
+
+		getStaging().copyFromLive(PortletRequest);
+	}
+
 	public static void copyFromLive(
 			PortletRequest PortletRequest, Portlet portlet)
 		throws Exception {
 
 		getStaging().copyFromLive(PortletRequest, portlet);
-	}
-
-	public static void copyFromLive(PortletRequest PortletRequest)
-		throws Exception {
-
-		getStaging().copyFromLive(PortletRequest);
 	}
 
 	public static void copyPortlet(
@@ -81,6 +81,10 @@ public class StagingUtil {
 		String destinationName, long groupId) {
 
 		return getStaging().getSchedulerGroupName(destinationName, groupId);
+	}
+
+	public static Staging getStaging() {
+		return _staging;
 	}
 
 	public static Map<String, String[]> getStagingParameters() {
@@ -132,17 +136,17 @@ public class StagingUtil {
 			startDate, endDate);
 	}
 
+	public static void publishToLive(PortletRequest PortletRequest)
+		throws Exception {
+
+		getStaging().publishToLive(PortletRequest);
+	}
+
 	public static void publishToLive(
 			PortletRequest PortletRequest, Portlet portlet)
 		throws Exception {
 
 		getStaging().publishToLive(PortletRequest, portlet);
-	}
-
-	public static void publishToLive(PortletRequest PortletRequest)
-		throws Exception {
-
-		getStaging().publishToLive(PortletRequest);
 	}
 
 	public static void publishToRemote(PortletRequest PortletRequest)
@@ -191,10 +195,6 @@ public class StagingUtil {
 		throws Exception {
 
 		getStaging().updateStaging(PortletRequest);
-	}
-
-	public static Staging getStaging() {
-		return _staging;
 	}
 
 	public void setStaging(Staging staging) {

@@ -32,13 +32,13 @@ public interface Staging {
 
 	public void copyFromLive(PortletRequest PortletRequest) throws Exception;
 
-	public void copyFromLive(
-			PortletRequest PortletRequest, Portlet portlet)
+	public void copyFromLive(PortletRequest PortletRequest, Portlet portlet)
 		throws Exception;
 
 	public void copyPortlet(
-			PortletRequest PortletRequest, long sourceGroupId, long targetGroupId,
-			long sourcePlid, long targetPlid, String portletId)
+			PortletRequest PortletRequest, long sourceGroupId,
+			long targetGroupId, long sourcePlid, long targetPlid,
+			String portletId)
 		throws Exception;
 
 	public void copyRemoteLayouts(
@@ -82,14 +82,12 @@ public interface Staging {
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws Exception;
 
-	public void publishToLive(PortletRequest PortletRequest)
-		throws Exception;
+	public void publishToLive(PortletRequest PortletRequest) throws Exception;
 
 	public void publishToLive(PortletRequest PortletRequest, Portlet portlet)
 		throws Exception;
 
-	public void publishToRemote(PortletRequest PortletRequest)
-		throws Exception;
+	public void publishToRemote(PortletRequest PortletRequest) throws Exception;
 
 	public void scheduleCopyFromLive(PortletRequest PortletRequest)
 		throws Exception;
@@ -109,7 +107,6 @@ public interface Staging {
 	public void unschedulePublishToRemote(PortletRequest PortletRequest)
 		throws Exception;
 
-	public void updateStaging(PortletRequest PortletRequest)
-		throws Exception;
+	public void updateStaging(PortletRequest PortletRequest) throws Exception;
 
 }
