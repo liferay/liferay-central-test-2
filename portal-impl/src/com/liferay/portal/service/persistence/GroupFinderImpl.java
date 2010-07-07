@@ -215,9 +215,7 @@ public class GroupFinderImpl
 		try {
 			session = openSession();
 
-			//String sql = CustomSQLUtil.get(FIND_BY_LIVE_GROUPS);
-
-			String sql = "SELECT {Group_.*} FROM Group_ WHERE Group_.groupId IN (SELECT Group_.liveGroupId from Group_)";
+			String sql = CustomSQLUtil.get(FIND_BY_LIVE_GROUPS);
 
 			SQLQuery q = session.createSQLQuery(sql);
 

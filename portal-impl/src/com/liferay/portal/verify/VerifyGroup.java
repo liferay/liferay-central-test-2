@@ -34,11 +34,11 @@ import java.util.List;
 public class VerifyGroup extends VerifyProcess {
 
 	protected void doVerify() throws Exception {
-		doVerifyNullFriendlyURLGroups();
-		doVerifyStagedGroups();
+		verifyNullFriendlyURLGroups();
+		verifyStagedGroups();
 	}
 
-	protected void doVerifyNullFriendlyURLGroups() throws Exception {
+	protected void verifyNullFriendlyURLGroups() throws Exception {
 		List<Group> groups = GroupLocalServiceUtil.getNullFriendlyURLGroups();
 
 		for (Group group : groups) {
@@ -83,22 +83,22 @@ public class VerifyGroup extends VerifyProcess {
 		}
 	}
 
-	protected void doVerifyStagedGroups() throws Exception {
+	protected void verifyStagedGroups() throws Exception {
 		List<Group> groups = GroupLocalServiceUtil.getLiveGroups();
 
 		for (Group group : groups) {
-			if (group.hasStagingGroup()) {
-				UnicodeProperties typeSettings =
-					group.getTypeSettingsProperties();
-
-				typeSettings.setProperty(
-					"isStaged", String.valueOf(true));
-				typeSettings.setProperty(
-					"isStagedRemotely", String.valueOf(false));
-
-				GroupLocalServiceUtil.updateGroup(
-					group.getGroupId(), typeSettings.toString());
+			if (!group.hasStagingGroup()) {
+				continue;
 			}
+
+			UnicodeProperties typeSettings = group.getTypeSettingsProperties();
+
+			typeSettings.setProperty("isStaged", Boolean.TRUE.toString());
+			typeSettings.setProperty(
+				"isStagedRemotely", Boolean.FALSE.toString());
+
+			GroupLocalServiceUtil.updateGroup(
+				group.getGroupId(), typeSettings.toString());
 		}
 	}
 
