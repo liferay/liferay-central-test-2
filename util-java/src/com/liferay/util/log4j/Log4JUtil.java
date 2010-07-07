@@ -14,6 +14,8 @@
 
 package com.liferay.util.log4j;
 
+import com.liferay.portal.kernel.util.ServerDetector;
+
 import java.net.URL;
 
 import java.util.Enumeration;
@@ -42,7 +44,9 @@ public class Log4JUtil {
 			return;
 		}
 
-		DOMConfigurator.configure(url);
+		if (!ServerDetector.isJBoss()) {
+			DOMConfigurator.configure(url);
+		}
 
 		Set<String> currentLoggerNames = new HashSet<String>();
 
