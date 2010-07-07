@@ -95,6 +95,12 @@ public interface Group extends GroupModel {
 
 	public boolean isOrganization();
 
+	public boolean isStaged();
+
+	public boolean isStagedPortlet(java.lang.String portletId);
+
+	public boolean isStagedRemotely();
+
 	public boolean isStagingGroup();
 
 	public boolean isUser();

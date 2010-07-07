@@ -329,6 +329,18 @@ public class GroupWrapper implements Group {
 		return _group.isOrganization();
 	}
 
+	public boolean isStaged() {
+		return _group.isStaged();
+	}
+
+	public boolean isStagedPortlet(java.lang.String portletId) {
+		return _group.isStagedPortlet(portletId);
+	}
+
+	public boolean isStagedRemotely() {
+		return _group.isStagedRemotely();
+	}
+
 	public boolean isStagingGroup() {
 		return _group.isStagingGroup();
 	}

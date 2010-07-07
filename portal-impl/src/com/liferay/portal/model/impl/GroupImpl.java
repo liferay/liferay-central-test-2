@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.staging.StagingConstants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -347,6 +348,21 @@ public class GroupImpl extends GroupModelImpl implements Group {
 
 	public boolean isOrganization() {
 		return hasClassName(Organization.class);
+	}
+
+	public boolean isStaged() {
+		return GetterUtil.getBoolean(getTypeSettingsProperty("isStaged"));
+	}
+
+	public boolean isStagedPortlet(String portletId) {
+		return GetterUtil.getBoolean(
+			getTypeSettingsProperty(
+				StagingConstants.IS_STAGED_PORTLET.concat(portletId)), true);
+	}
+
+	public boolean isStagedRemotely() {
+		return GetterUtil.getBoolean(
+			getTypeSettingsProperty("isStagedRemotely"));
 	}
 
 	public boolean isStagingGroup() {
