@@ -199,6 +199,8 @@ public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static final String _NAMESPACE = "polls";
 
+	private static final boolean _PUBLISH_TO_LIVE_BY_DEFAULT = true;
+
 	private static Log _log = LogFactoryUtil.getLog(
 		PollsDisplayPortletDataHandlerImpl.class);
 
@@ -207,7 +209,5 @@ public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static PortletDataHandlerBoolean _votes =
 		new PortletDataHandlerBoolean(_NAMESPACE, "votes");
-
-	private static final boolean _PUBLISH_TO_LIVE_BY_DEFAULT = true;
 
 }
