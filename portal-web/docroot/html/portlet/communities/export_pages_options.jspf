@@ -219,6 +219,8 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 
 										boolean checked = portletDataHandler.isPublishToLiveByDefault();
 
+										boolean isStaged = GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(StagingConstants.IS_STAGED_PORTLET + curPortlet.getRootPortletId()), portletDataHandler.isPublishToLiveByDefault());
+
 										request.setAttribute("render_controls.jsp-controls", controls);
 										request.setAttribute("render_controls.jsp-portletDisabled", !checked);
 							%>
@@ -236,7 +238,9 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 													<aui:input disabled="<%= !checked %>" inlineLabel="right" label="setup "name="<%= PortletDataHandlerKeys.PORTLET_SETUP + StringPool.UNDERLINE + rootPortletId %>" type="checkbox" value="<%= true %>" />
 												</li>
 
-												<liferay-util:include page="/html/portlet/communities/render_controls.jsp" />
+												<c:if test="<%= isStaged %>">
+													<liferay-util:include page="/html/portlet/communities/render_controls.jsp" />
+												</c:if>
 											</ul>
 										</li>
 

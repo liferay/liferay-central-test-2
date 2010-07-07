@@ -18,16 +18,26 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-Group group = (Group)request.getAttribute(WebKeys.GROUP);
+Group liveGroup = (Group)request.getAttribute(WebKeys.GROUP);
+Group stagingGroup = null;
 
-Group stagingGroup = group.getStagingGroup();
+if (liveGroup.hasStagingGroup()) {
+	stagingGroup = liveGroup.getStagingGroup();
+}
+else if (liveGroup.isStagingGroup()) {
+	stagingGroup = liveGroup;
+	liveGroup = liveGroup.getLiveGroup();
+}
 
-long groupId = group.getGroupId();
+long liveGroupId = liveGroup.getGroupId();
+long stagingGroupId = 0;
 
-long stagingGroupId = stagingGroup.getGroupId();
+if (stagingGroup != null) {
+	stagingGroupId = stagingGroup.getGroupId();
+}
 
-int workflowStages = group.getWorkflowStages();
-String[] workflowRoleNames = StringUtil.split(group.getWorkflowRoleNames());
+int workflowStages = liveGroup.getWorkflowStages();
+String[] workflowRoleNames = StringUtil.split(liveGroup.getWorkflowRoleNames());
 
 TasksProposal proposal = (TasksProposal)request.getAttribute(WebKeys.TASKS_PROPOSAL);
 
@@ -56,7 +66,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/communities/edit_proposal");
 portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("groupId", String.valueOf(groupId));
+portletURL.setParameter("groupId", String.valueOf(liveGroupId));
 portletURL.setParameter("proposalId", String.valueOf(proposalId));
 %>
 
@@ -67,7 +77,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 <aui:form action="<%= editProposalURL %>" method="post" name="fm1" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveProposal();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
+	<aui:input name="groupId" type="hidden" value="<%= liveGroupId %>" />
 	<aui:input name="proposalId" type="hidden" value="<%= proposalId %>" />
 
 	<%
@@ -117,7 +127,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 		<aui:input formName="fm1" name="dueDate" value="<%= dueDate %>" />
 	</aui:fieldset>
 
-	<c:if test="<%= (review != null) && (review.getStage() == 1) && GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.ASSIGN_REVIEWER) %>">
+	<c:if test="<%= (review != null) && (review.getStage() == 1) && GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.ASSIGN_REVIEWER) %>">
 		<br />
 
 		<liferay-ui:toggle-area
@@ -180,14 +190,14 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 
 						LinkedHashMap userParams = new LinkedHashMap();
 
-						if (group.isOrganization()) {
-							userParams.put("usersOrgs", new Long(group.getClassPK()));
+						if (liveGroup.isOrganization()) {
+							userParams.put("usersOrgs", new Long(liveGroup.getClassPK()));
 						}
 						else {
-							userParams.put("usersGroups", new Long(groupId));
+							userParams.put("usersGroups", new Long(liveGroupId));
 						}
 
-						userParams.put("userGroupRole", new Long[] {new Long(groupId), new Long(role.getRoleId())});
+						userParams.put("userGroupRole", new Long[] {new Long(liveGroupId), new Long(role.getRoleId())});
 
 						List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
 
@@ -239,7 +249,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 
 	<br />
 
-	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.ASSIGN_REVIEWER) || GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.MANAGE_STAGING) || GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.PUBLISH_STAGING) || TasksProposalPermission.contains(permissionChecker, proposalId, ActionKeys.UPDATE) %>">
+	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.ASSIGN_REVIEWER) || GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING) || GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.PUBLISH_STAGING) || TasksProposalPermission.contains(permissionChecker, proposalId, ActionKeys.UPDATE) %>">
 		<aui:button type="submit" />
 	</c:if>
 
@@ -250,7 +260,8 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 	publishToLiveURL.setPortletMode(PortletMode.VIEW);
 
 	publishToLiveURL.setParameter("pagesRedirect", redirect);
-	publishToLiveURL.setParameter("groupId", String.valueOf(stagingGroupId));
+	publishToLiveURL.setParameter("groupId", String.valueOf(liveGroupId));
+	publishToLiveURL.setParameter("stagingGroupId", String.valueOf(stagingGroupId));
 	publishToLiveURL.setParameter("proposalId", String.valueOf(proposal.getProposalId()));
 
 	long proposedLayoutPlid = LayoutConstants.DEFAULT_PLID;
@@ -259,6 +270,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 
 	if (className.equals(Layout.class.getName())) {
 		publishToLiveURL.setParameter("struts_action", "/communities/export_pages");
+		publishToLiveURL.setParameter(Constants.CMD, "publish-to-live");
 
 		proposedLayoutPlid = GetterUtil.getLong(proposal.getClassPK());
 
@@ -269,6 +281,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 	}
 	else if (className.equals(Portlet.class.getName())) {
 		publishToLiveURL.setParameter("struts_action", "/communities/publish_portlet");
+		publishToLiveURL.setParameter(Constants.CMD, "publish-to-live");
 
 		proposedLayoutPlid = GetterUtil.getLong(classPK.substring(0, classPK.indexOf(PortletConstants.LAYOUT_SEPARATOR)));
 
@@ -282,7 +295,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 
 	<c:choose>
 		<c:when test="<%= review != null %>">
-			<c:if test="<%= ((review.getStage() == workflowStages) && GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.PUBLISH_STAGING)) || GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.MANAGE_STAGING) %>">
+			<c:if test="<%= ((review.getStage() == workflowStages) && GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.PUBLISH_STAGING)) || GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING) %>">
 
 				<%
 				String taglibPublishToLiveURL = "Liferay.LayoutExporter.publishToLive({title: '" + UnicodeLanguageUtil.get(pageContext, "publish-to-live") + "', url: '" + publishToLiveURL.toString() + "'});";
@@ -308,7 +321,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 				</c:otherwise>
 			</c:choose>
 		</c:when>
-		<c:when test="<%= (review == null) && GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.MANAGE_STAGING) %>">
+		<c:when test="<%= (review == null) && GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING) %>">
 
 			<%
 			String taglibPublishToLiveURL = "Liferay.LayoutExporter.publishToLive({title: '" + UnicodeLanguageUtil.get(pageContext, "publish-to-live") + "', url: '" + publishToLiveURL.toString() + "'});";

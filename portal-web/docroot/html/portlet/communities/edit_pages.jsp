@@ -285,6 +285,7 @@ request.setAttribute("edit_pages.jsp-liveGroupId", new Long(liveGroupId));
 request.setAttribute("edit_pages.jsp-selPlid", new Long(selPlid));
 request.setAttribute("edit_pages.jsp-privateLayout", new Boolean(privateLayout));
 request.setAttribute("edit_pages.jsp-groupTypeSettings", groupTypeSettings);
+request.setAttribute("edit_pages.jsp-liveGroupTypeSettings", liveGroupTypeSettings);
 request.setAttribute("edit_pages.jsp-selLayout", selLayout);
 
 request.setAttribute("edit_pages.jsp-rootNodeName", rootNodeName);
@@ -444,10 +445,6 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 </aui:form>
 
 <aui:script>
-	function <portlet:namespace />changeWorkflowStages() {
-		submitForm(document.<portlet:namespace />fm, '<%= currentURL %>');
-	}
-
 	function <portlet:namespace />deletePage() {
 		<c:choose>
 			<c:when test="<%= (selPlid == themeDisplay.getPlid()) || (selPlid == refererPlid) %>">
@@ -498,51 +495,10 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />saveWorkflowStages() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "workflow";
-		submitForm(document.<portlet:namespace />fm);
-	}
-
 	function <portlet:namespace />updateLogo() {
 		document.<portlet:namespace />fm.encoding = "multipart/form-data";
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "logo";
 		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />updateStaging() {
-		var checked = document.<portlet:namespace />fm.<portlet:namespace />stagingEnabled.checked;
-
-		var ok = true;
-
-		if (!checked) {
-			ok = confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-staging-public-and-private-pages") %>');
-		}
-
-		if (ok) {
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "staging";
-			submitForm(document.<portlet:namespace />fm);
-		}
-		else {
-			document.<portlet:namespace />fm.<portlet:namespace />stagingEnabled.checked = !checked;
-		}
-	}
-
-	function <portlet:namespace />updateWorkflow() {
-		var checked = document.<portlet:namespace />fm.<portlet:namespace />workflowEnabled.checked;
-
-		var ok = true;
-
-		if (!checked) {
-			ok = confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-deactivate-workflow") %>');
-		}
-
-		if (ok) {
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "workflow";
-			submitForm(document.<portlet:namespace />fm);
-		}
-		else {
-			document.<portlet:namespace />fm.<portlet:namespace />workflowEnabled.checked = !checked;
-		}
 	}
 
 	Liferay.provide(
@@ -606,6 +562,40 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 			}
 
 			submitForm(document.<portlet:namespace />fm);
+		},
+		['aui-base']
+	);
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />updateStaging',
+		function() {
+			var A = AUI();
+
+			var selectEl = A.one('#<portlet:namespace />stagingType');
+
+			var currentValue = null;
+
+			if (selectEl) {
+				currentValue = selectEl.val();
+			}
+
+			var ok = false;
+
+			if (0 == currentValue) {
+				ok = confirm('<%= UnicodeLanguageUtil.format(pageContext, "are-you-sure-you-want-to-deactivate-staging-for-x", liveGroup.getDescriptiveName()) %>');
+			}
+			else if (1 == currentValue) {
+				ok = confirm('<%= UnicodeLanguageUtil.format(pageContext, "are-you-sure-you-want-to-activate-local-staging-for-x", liveGroup.getDescriptiveName()) %>');
+			}
+			else if (2 == currentValue) {
+				ok = confirm('<%= UnicodeLanguageUtil.format(pageContext, "are-you-sure-you-want-to-activate-remote-staging-for-x", liveGroup.getDescriptiveName()) %>');
+			}
+
+			if (ok) {
+				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "staging";
+				submitForm(document.<portlet:namespace />fm);
+			}
 		},
 		['aui-base']
 	);

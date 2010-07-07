@@ -29,6 +29,8 @@
 		group = layout.getGroup();
 	}
 
+	String publishDialogTitle = "publish-to-live";
+
 	Group liveGroup = null;
 	Group stagingGroup = null;
 
@@ -36,50 +38,81 @@
 		liveGroup = group.getLiveGroup();
 		stagingGroup = group;
 	}
-	else {
-		liveGroup = group;
-		stagingGroup = group.getStagingGroup();
+	else if (group.isStaged()) {
+		if (group.isStagedRemotely()) {
+			liveGroup = group;
+			stagingGroup = null;
+
+			publishDialogTitle = "publish-to-remote-live";
+		}
+		else {
+			liveGroup = group;
+			stagingGroup = group.getStagingGroup();
+		}
 	}
 
 	boolean workflowEnabled = liveGroup.isWorkflowEnabled();
 	%>
 
 	<ul>
-		<c:choose>
-			<c:when test="<%= group.isStagingGroup() %>">
+		<c:if test="<%= liveGroup.isStaged() %>">
 
-				<%
-				String friendlyURL = null;
-
-				try {
-					Layout liveLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(layout.getUuid(), liveGroup.getGroupId());
-
-					friendlyURL = PortalUtil.getLayoutFriendlyURL(liveLayout, themeDisplay);
-				}
-				catch (Exception e) {
-				}
-				%>
-
-				<c:if test="<%= Validator.isNotNull(friendlyURL) %>">
-					<li class="page-settings">
-						<a href="<%= friendlyURL %>"><liferay-ui:message key="view-live-page" /></a>
-					</li>
-				</c:if>
-
-				<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, liveGroup.getGroupId(), ActionKeys.MANAGE_LAYOUTS) || GroupPermissionUtil.contains(permissionChecker, liveGroup.getGroupId(), ActionKeys.PUBLISH_STAGING) || LayoutPermissionUtil.contains(permissionChecker, layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(), ActionKeys.UPDATE) %>">
-
+			<c:choose>
+				<c:when test="<%= !liveGroup.isStagedRemotely() && group.isStagingGroup() %>">
 					<%
-					TasksProposal proposal = null;
+					String friendlyURL = null;
 
-					if (workflowEnabled) {
-						try {
-							proposal = TasksProposalLocalServiceUtil.getProposal(Layout.class.getName(), String.valueOf(layout.getPlid()));
-						}
-						catch (NoSuchProposalException nspe) {
-						}
+					try {
+						Layout liveLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(layout.getUuid(), liveGroup.getGroupId());
+
+						friendlyURL = PortalUtil.getLayoutFriendlyURL(liveLayout, themeDisplay);
+					}
+					catch (Exception e) {
 					}
 					%>
 
+					<c:if test="<%= Validator.isNotNull(friendlyURL) %>">
+						<li class="page-settings">
+							<a href="<%= friendlyURL %>"><liferay-ui:message key="view-live-page" /></a>
+						</li>
+					</c:if>
+				</c:when>
+				<c:when test="<%= !liveGroup.isStagedRemotely() && !group.isStagingGroup() %>">
+					<%
+					String friendlyURL = null;
+
+					try {
+						Layout stagedLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(layout.getUuid(), stagingGroup.getGroupId());
+
+						friendlyURL = PortalUtil.getLayoutFriendlyURL(stagedLayout, themeDisplay);
+					}
+					catch (Exception e) {
+					}
+					%>
+
+					<c:if test="<%= Validator.isNotNull(friendlyURL) %>">
+						<li class="page-settings">
+							<a href="<%= friendlyURL %>"><liferay-ui:message key="view-staged-page" /></a>
+						</li>
+					</c:if>
+				</c:when>
+			</c:choose>
+
+			<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, liveGroup.getGroupId(), ActionKeys.MANAGE_LAYOUTS) || GroupPermissionUtil.contains(permissionChecker, liveGroup.getGroupId(), ActionKeys.PUBLISH_STAGING) || LayoutPermissionUtil.contains(permissionChecker, layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(), ActionKeys.UPDATE) %>">
+
+				<%
+				TasksProposal proposal = null;
+
+				if (workflowEnabled) {
+					try {
+						proposal = TasksProposalLocalServiceUtil.getProposal(Layout.class.getName(), String.valueOf(layout.getPlid()));
+					}
+					catch (NoSuchProposalException nspe) {
+					}
+				}
+				%>
+
+				<c:if test="<%= liveGroup.isStagedRemotely() || group.isStagingGroup() %>">
 					<c:choose>
 						<c:when test="<%= workflowEnabled %>">
 							<c:if test="<%= proposal == null %>">
@@ -146,39 +179,23 @@
 						</c:when>
 						<c:when test="<%= themeDisplay.getURLPublishToLive() != null %>">
 							<li class="page-settings">
-								<a href="javascript:Liferay.LayoutExporter.publishToLive({title: '<%= UnicodeLanguageUtil.get(pageContext, "publish-to-live") %>', url: '<%= themeDisplay.getURLPublishToLive().toString() %>'});"><liferay-ui:message key="publish-to-live" /></a>
+								<a href="javascript:Liferay.LayoutExporter.publishToLive({title: '<%= UnicodeLanguageUtil.get(pageContext, publishDialogTitle) %>', url: '<%= themeDisplay.getURLPublishToLive().toString() %>'});"><liferay-ui:message key="<%= publishDialogTitle %>" /></a>
 							</li>
 						</c:when>
 					</c:choose>
 				</c:if>
-			</c:when>
-			<c:otherwise>
-
-				<%
-				String friendlyURL = null;
-
-				try {
-					Layout stagedLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(layout.getUuid(), stagingGroup.getGroupId());
-
-					friendlyURL = PortalUtil.getLayoutFriendlyURL(stagedLayout, themeDisplay);
-				}
-				catch (Exception e) {
-				}
-				%>
-
-				<c:if test="<%= Validator.isNotNull(friendlyURL) %>">
-					<li class="page-settings">
-						<a href="<%= friendlyURL %>"><liferay-ui:message key="view-staged-page" /></a>
-					</li>
-				</c:if>
-			</c:otherwise>
-		</c:choose>
+			</c:if>
+		</c:if>
 
 		<c:if test="<%= workflowEnabled %>">
 			<li class="page-settings">
 
 				<%
-				Layout stagedLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(layout.getUuid(), stagingGroup.getGroupId());
+				Layout stagedLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(layout.getUuid(), liveGroup.getGroupId());
+
+				if (stagingGroup != null) {
+					stagedLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(layout.getUuid(), stagingGroup.getGroupId());
+				}
 
 				PortletURL viewProposalsURL = new PortletURLImpl(request, PortletKeys.LAYOUT_MANAGEMENT, stagedLayout.getPlid(), PortletRequest.RENDER_PHASE);
 

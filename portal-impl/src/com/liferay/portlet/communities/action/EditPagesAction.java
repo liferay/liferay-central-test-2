@@ -24,8 +24,10 @@ import com.liferay.portal.LayoutTypeException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.RemoteExportException;
+import com.liferay.portal.RemoteOptionsException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.events.EventsProcessorUtil;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
@@ -36,7 +38,6 @@ import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -180,9 +181,6 @@ public class EditPagesAction extends PortletAction {
 			else if (cmd.equals("virtual_host")) {
 				updateVirtualHost(actionRequest);
 			}
-			else if (cmd.equals("workflow")) {
-				updateWorkflow(actionRequest);
-			}
 
 			String redirect = ParamUtil.getString(
 				actionRequest, "pagesRedirect");
@@ -218,14 +216,6 @@ public class EditPagesAction extends PortletAction {
 
 				setForward(actionRequest, "portlet.communities.error");
 			}
-			else if (e instanceof RemoteExportException) {
-				SessionErrors.add(actionRequest, e.getClass().getName(), e);
-
-				String redirect = ParamUtil.getString(
-					actionRequest, "pagesRedirect");
-
-				sendRedirect(actionRequest, actionResponse, redirect);
-			}
 			else if (e instanceof ImageTypeException ||
 					 e instanceof LayoutFriendlyURLException ||
 					 e instanceof LayoutHiddenException ||
@@ -244,6 +234,17 @@ public class EditPagesAction extends PortletAction {
 				else {
 					SessionErrors.add(actionRequest, e.getClass().getName(), e);
 				}
+			}
+			else if (e instanceof RemoteExportException ||
+					 e instanceof RemoteOptionsException ||
+					 e instanceof SystemException) {
+
+				SessionErrors.add(actionRequest, e.getClass().getName(), e);
+
+				String redirect = ParamUtil.getString(
+					actionRequest, "pagesRedirect");
+
+				sendRedirect(actionRequest, actionResponse, redirect);
 			}
 			else {
 				throw e;
@@ -773,42 +774,6 @@ public class EditPagesAction extends PortletAction {
 			GroupServiceUtil.updateFriendlyURL(
 				stagingGroup.getGroupId(), friendlyURL);
 		}
-	}
-
-	protected void updateWorkflow(ActionRequest actionRequest)
-		throws Exception {
-
-		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
-
-		boolean workflowEnabled = ParamUtil.getBoolean(
-			actionRequest, "workflowEnabled");
-		int workflowStages = ParamUtil.getInteger(
-			actionRequest, "workflowStages");
-
-		String workflowRoleNames;
-
-		if (workflowStages == 0) {
-			workflowRoleNames = StringPool.BLANK;
-		}
-		else {
-			StringBundler sb = new StringBundler(workflowStages * 2 - 1);
-
-			for (int i = 1; i <= workflowStages; i++) {
-				String workflowRoleName = ParamUtil.getString(
-					actionRequest, "workflowRoleName_" + i);
-
-				sb.append(workflowRoleName);
-
-				if ((i + 1) <= workflowStages) {
-					sb.append(",");
-				}
-			}
-
-			workflowRoleNames = sb.toString();
-		}
-
-		GroupServiceUtil.updateWorkflow(
-			liveGroupId, workflowEnabled, workflowStages, workflowRoleNames);
 	}
 
 }

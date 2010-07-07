@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
-String cmd = StringPool.BLANK;
+String cmd = ParamUtil.getString(request, "cmd");
 
 String tabs1 = ParamUtil.getString(request, "tabs1", "public-pages");
 
@@ -54,20 +54,19 @@ if (stagingGroup != null) {
 	stagingGroupId = stagingGroup.getGroupId();
 }
 
-String popupId = "copy-from-live";
 String treeKey = "liveLayoutsTree";
 
-if (selGroup.isStagingGroup()) {
-	popupId = "publish-to-live";
-	treeKey = "stageLayoutsTree";
-}
+boolean localPublishing = true;
 
-boolean localPublishing = ParamUtil.getBoolean(request, "localPublishing", true);
-
-if (!localPublishing) {
-	popupId = "publish-to-remote";
-	selGroup = liveGroup;
-	treeKey = "remoteLayoutsTree";
+if (liveGroup.isStaged()) {
+	if (!liveGroup.isStagedRemotely()) {
+		treeKey = "stageLayoutsTree";
+	}
+	else {
+		selGroup = liveGroup;
+		treeKey = "remoteLayoutsTree";
+		localPublishing = false;
+	}
 }
 
 treeKey = treeKey + selGroupId;
@@ -116,6 +115,7 @@ else {
 }
 
 UnicodeProperties groupTypeSettings = selGroup.getTypeSettingsProperties();
+UnicodeProperties liveGroupTypeSettings = liveGroup.getTypeSettingsProperties();
 
 Organization organization = null;
 User user2 = null;
@@ -161,7 +161,7 @@ else {
 		cmd = "copy_from_live";
 	}
 
-	if (!localPublishing) {
+	if (selGroup.isStaged() && selGroup.isStagedRemotely()) {
 		cmd = "publish_to_remote";
 	}
 
@@ -204,17 +204,66 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 	}
 </style>
 
-<aui:form action='<%= portletURL.toString() + "&etag=0" %>' method="post" name="exportPagesFm">
+<aui:form action='<%= portletURL.toString() + "&etag=0" %>' method="post" name="exportPagesFm" onSubmit='<%= "event.preventDefault();" + renderResponse.getNamespace() + "refreshDialog();" %>' >
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= cmd %>" />
 	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
-	<aui:input name="pagesRedirect" type="hidden" value="<%= pagesRedirect %>" />
+	<aui:input name="pagesRedirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
 
+	<liferay-ui:error exception="<%= RemoteExportException.class %>">
+
+		<%
+		RemoteExportException ree = (RemoteExportException)errorException;
+		%>
+
+		<c:if test="<%= ree.getType() == RemoteExportException.BAD_CONNECTION %>">
+			<%= LanguageUtil.format(pageContext, "there-was-a-bad-connection-with-the-remote-server-at-x", ree.getURL()) %>
+		</c:if>
+
+		<c:if test="<%= ree.getType() == RemoteExportException.NO_GROUP %>">
+			<%= LanguageUtil.format(pageContext, "no-group-exists-on-the-remote-server-with-group-id-x", ree.getGroupId()) %>
+		</c:if>
+
+		<c:if test="<%= ree.getType() == RemoteExportException.NO_LAYOUTS %>">
+			<liferay-ui:message key="there-are-no-layouts-in-the-exported-data" />
+		</c:if>
+	</liferay-ui:error>
+
+	<liferay-ui:error exception="<%= RemoteOptionsException.class %>">
+
+		<%
+		RemoteOptionsException roe = (RemoteOptionsException)errorException;
+		%>
+
+		<c:if test="<%= roe.getType() == RemoteOptionsException.REMOTE_ADDRESS %>">
+			<%= LanguageUtil.format(pageContext, "the-remote-address-x-is-not-valid", roe.getRemoteAddress()) %>
+		</c:if>
+
+		<c:if test="<%= roe.getType() == RemoteOptionsException.REMOTE_GROUP_ID %>">
+			<%= LanguageUtil.format(pageContext, "the-remote-group-id-x-is-not-valid", roe.getRemoteGroupId()) %>
+		</c:if>
+
+		<c:if test="<%= roe.getType() == RemoteOptionsException.REMOTE_PORT %>">
+			<%= LanguageUtil.format(pageContext, "the-remote-port-x-is-not-valid", roe.getRemotePort()) %>
+		</c:if>
+	</liferay-ui:error>
+
+	<liferay-ui:error exception="<%= SystemException.class %>">
+
+		<%
+		SystemException se = (SystemException)errorException;
+		%>
+
+		<liferay-ui:message key="<%= se.getMessage() %>" />
+	</liferay-ui:error>
+
+	<!--
 	<c:if test="<%= selGroup.hasStagingGroup() && !localPublishing %>">
 		<div class="portlet-msg-alert">
 			<liferay-ui:message key="the-staging-environment-is-activated-publish-to-remote-publishes-from-the-live-environment" />
 		</div>
 	</c:if>
+	-->
 
 	<%
 	String exportPagesTabsNames = "pages,options";
@@ -229,7 +278,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 
 	String actionKey = "copy";
 
-	if (selGroup.isStagingGroup() || popupId.equals("publish-to-remote")) {
+	if (liveGroup.isStaged()) {
 		actionKey = "publish";
 	}
 	%>
@@ -247,13 +296,14 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 			<%
 			PortletURL selectURL = renderResponse.createRenderURL();
 			selectURL.setParameter("struts_action", "/communities/export_pages");
+			selectURL.setParameter(Constants.CMD, cmd);
 			selectURL.setParameter("tabs1", tabs1);
 			selectURL.setParameter("pagesRedirect", pagesRedirect);
 			selectURL.setParameter("groupId", String.valueOf(selGroupId));
 			selectURL.setParameter("localPublishing", String.valueOf(localPublishing));
 			selectURL.setWindowState(LiferayWindowState.EXCLUSIVE);
 
-			String taglibOnClick = "AUI().DialogManager.refreshByChild('#" + popupId + "');";
+			String taglibOnClick = "AUI().DialogManager.refreshByChild('#" + renderResponse.getNamespace() + "exportPagesFm');";
 			%>
 
 			<c:choose>
@@ -265,11 +315,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 
 					<aui:button name="selectBtn" onClick="<%= taglibOnClick %>" value="select" />
 
-					<%
-					taglibOnClick = "if (confirm('" + UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-" + actionKey + "-these-pages") + "')) { submitForm(document." + renderResponse.getNamespace() + "exportPagesFm); }";
-					%>
-
-					<aui:button name="publishBtn" onClick="<%= taglibOnClick %>" style='<%= !results.isEmpty() ? "display: none;" : "" %>' value="<%= actionKey %>" />
+					<aui:button name="publishBtn" style='<%= !results.isEmpty() ? "display: none;" : "" %>' type="submit" value="<%= actionKey %>" />
 				</c:when>
 				<c:otherwise>
 					<c:if test="<%= selPlid <= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>">
@@ -281,18 +327,31 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 						<aui:button name="changeBtn" onClick="<%= taglibOnClick %>" value="change-selection" />
 					</c:if>
 
-					<%
-					taglibOnClick = "if (confirm('" + UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-" + actionKey + "-these-pages") + "')) { submitForm(document." + renderResponse.getNamespace() + "exportPagesFm); }";
-					%>
-
-					<aui:button name="publishBtn" value="<%= actionKey %>" onClick="<%= taglibOnClick %>" />
+					<aui:button name="publishBtn" type="submit" value="<%= actionKey %>" />
 				</c:otherwise>
 			</c:choose>
 
-			<aui:script use="aui-dialog">
-				var dialog = A.DialogManager.findByChild('#<%= popupId %>');
+			<aui:script use="aui-base,aui-dialog">
+				var dialog = A.DialogManager.findByChild('#<portlet:namespace />exportPagesFm');
 
 				dialog.io.set('uri', '<%= selectURL %>');
+
+				Liferay.provide(
+					window,
+					'<portlet:namespace />refreshDialog',
+					function(){
+						if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-" + actionKey + "-these-pages") %>')) {
+							dialog.io.set('uri', '<%= portletURL.toString() + "&etag=0" %>');
+							dialog.io.set('form', {id: '<portlet:namespace />exportPagesFm'});
+
+							dialog.io.after('success', function(event){
+								dialog.close();
+							});
+
+							dialog.io.start();
+						}
+					}
+				);
 			</aui:script>
 
 		</liferay-ui:section>

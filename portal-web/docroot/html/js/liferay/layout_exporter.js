@@ -139,7 +139,6 @@ Liferay.provide(
 
 		options = options || {};
 
-		var messageId = options.messageId;
 		var url = options.url;
 		var title = options.title;
 
@@ -147,7 +146,6 @@ Liferay.provide(
 			{
 				centered: true,
 				destroyOnClose: true,
-				id: messageId,
 				modal: true,
 				title: title,
 				width: 600

@@ -211,27 +211,30 @@
 									if (controls != null) {
 										String rootPortletId = curPortlet.getRootPortletId();
 
+										boolean checked = portletDataHandler.isPublishToLiveByDefault();
+
+										boolean isStaged = GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(StagingConstants.IS_STAGED_PORTLET + curPortlet.getRootPortletId()), portletDataHandler.isPublishToLiveByDefault());
+
 										request.setAttribute("render_controls.jsp-controls", controls);
 										request.setAttribute("render_controls.jsp-portletDisabled", !portletDataHandler.isPublishToLiveByDefault());
 							%>
 
 										<li class="tree-item">
-											<br />
-
-											<%= PortalUtil.getPortletTitle(curPortlet, application, locale) %>
-
-											<br />
-
-											<aui:input inlineLabel="right" label="setup" name='<%= PortletDataHandlerKeys.PORTLET_SETUP + "_" + rootPortletId %>' type="checkbox" value="<%= true %>" />
 
 											<%
-											String taglibToggleControls = renderResponse.getNamespace() + "toggleChildren(this, '" + renderResponse.getNamespace() + PortletDataHandlerKeys.PORTLET_DATA + "_" + rootPortletId + "Controls');";
+											String taglibOnChange = renderResponse.getNamespace() + "toggleChildren(this, '" + renderResponse.getNamespace() + PortletDataHandlerKeys.PORTLET_DATA + StringPool.UNDERLINE + rootPortletId + "Controls');";
 											%>
 
-											<aui:input inlineLabel="right" label="data" name='<%= PortletDataHandlerKeys.PORTLET_DATA + "_" + rootPortletId %>' onChange="<%= taglibToggleControls %>" type="checkbox" value="<%= true %>" />
+											<aui:input inlineLabel="right" label="<%= PortalUtil.getPortletTitle(curPortlet, application, locale) %>" name='<%= PortletDataHandlerKeys.PORTLET_DATA + StringPool.UNDERLINE + rootPortletId %>' onChange="<%= taglibOnChange %>" type="checkbox" value="<%= checked %>" />
 
-											<ul id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId + "Controls" %>">
-												<liferay-util:include page="/html/portlet/communities/render_controls.jsp" />
+											<ul id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>Controls">
+												<li class="<%= renderResponse.getNamespace() %>handler-control">
+													<aui:input disabled="<%= !checked %>" inlineLabel="right" label="setup "name="<%= PortletDataHandlerKeys.PORTLET_SETUP + StringPool.UNDERLINE + rootPortletId %>" type="checkbox" value="<%= true %>" />
+												</li>
+
+												<c:if test="<%= isStaged %>">
+													<liferay-util:include page="/html/portlet/communities/render_controls.jsp" />
+												</c:if>
 											</ul>
 										</li>
 
