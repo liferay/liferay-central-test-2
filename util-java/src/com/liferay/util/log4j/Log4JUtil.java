@@ -44,6 +44,8 @@ public class Log4JUtil {
 			return;
 		}
 
+		// See LPS-6029 and LPS-8865
+
 		if (!ServerDetector.isJBoss()) {
 			DOMConfigurator.configure(url);
 		}
