@@ -18,6 +18,8 @@ import java.io.Serializable;
 
 import java.lang.reflect.Method;
 
+import java.util.Arrays;
+
 /**
  * <a href="MethodWrapper.java.html"><b><i>View Source</i></b></a>
  *
@@ -78,6 +80,24 @@ public class MethodWrapper implements Serializable {
 		System.arraycopy(_arguments, 0, arguments, 0, _arguments.length);
 
 		return arguments;
+	}
+
+	public String toString() {
+		StringBundler sb = new StringBundler(9);
+
+		sb.append("{className=");
+		sb.append(_className);
+		sb.append(", methodName=");
+		sb.append(_methodName);
+		sb.append(", arguments=");
+		sb.append(Arrays.toString(_arguments));
+		if (_argumentClassNames != null) {
+			sb.append(", argumentClassNames=");
+			sb.append(Arrays.toString(_argumentClassNames));
+		}
+		sb.append("}");
+
+		return sb.toString();
 	}
 
 	private String _className;
