@@ -29,7 +29,8 @@
 		group = layout.getGroup();
 	}
 
-	String publishDialogTitle = "publish-to-live";
+	String publishNowDialogTitle = "publish-to-live-now";
+	String publishScheduleDialogTitle = "schedule-publication-to-live";
 
 	Group liveGroup = null;
 	Group stagingGroup = null;
@@ -43,7 +44,8 @@
 			liveGroup = group;
 			stagingGroup = null;
 
-			publishDialogTitle = "publish-to-remote-live";
+			publishNowDialogTitle = "publish-to-remote-live-now";
+			publishScheduleDialogTitle = "schedule-publication-to-remote-live";
 		}
 		else {
 			liveGroup = group;
@@ -178,8 +180,21 @@
 							</c:if>
 						</c:when>
 						<c:when test="<%= themeDisplay.getURLPublishToLive() != null %>">
+
+							<%
+							PortletURL publishToLiveURL = themeDisplay.getURLPublishToLive();
+							%>
+
 							<li class="page-settings">
-								<a href="javascript:Liferay.LayoutExporter.publishToLive({title: '<%= UnicodeLanguageUtil.get(pageContext, publishDialogTitle) %>', url: '<%= themeDisplay.getURLPublishToLive().toString() %>'});"><liferay-ui:message key="<%= publishDialogTitle %>" /></a>
+								<a href="javascript:Liferay.LayoutExporter.publishToLive({title: '<%= UnicodeLanguageUtil.get(pageContext, publishNowDialogTitle) %>', url: '<%= publishToLiveURL.toString() %>'});"><liferay-ui:message key="<%= publishNowDialogTitle %>" /></a>
+							</li>
+
+							<%
+							publishToLiveURL.setParameter("schedule", String.valueOf(true));
+							%>
+
+							<li class="page-settings">
+								<a href="javascript:Liferay.LayoutExporter.publishToLive({title: '<%= UnicodeLanguageUtil.get(pageContext, publishScheduleDialogTitle) %>', url: '<%= publishToLiveURL.toString() %>'});"><liferay-ui:message key="<%= publishScheduleDialogTitle %>" /></a>
 							</li>
 						</c:when>
 					</c:choose>

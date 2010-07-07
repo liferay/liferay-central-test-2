@@ -25,6 +25,8 @@ String pagesRedirect = ParamUtil.getString(request, "pagesRedirect");
 
 boolean publish = ParamUtil.getBoolean(request, "publish");
 
+boolean schedule = ParamUtil.getBoolean(request, "schedule");
+	
 Group selGroup = (Group)request.getAttribute(WebKeys.GROUP);
 
 Group liveGroup = null;
@@ -264,7 +266,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 		exportPagesTabsNames += ",remote-options";
 	}
 
-	if (proposalId <= 0) {
+	if (proposalId <= 0 && schedule) {
 		exportPagesTabsNames += ",scheduler";
 	}
 	%>
@@ -350,7 +352,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 			</liferay-ui:section>
 		</c:if>
 
-		<c:if test="<%= proposalId <= 0 %>">
+		<c:if test="<%= proposalId <= 0 && schedule %>">
 			<liferay-ui:section>
 				<%@ include file="/html/portlet/communities/export_pages_scheduler.jspf" %>
 			</liferay-ui:section>

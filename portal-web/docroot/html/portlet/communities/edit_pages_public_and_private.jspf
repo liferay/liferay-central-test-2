@@ -123,11 +123,23 @@ publishToRemoteURL.setParameter(Constants.CMD, "publish_to_remote");
 			</c:when>
 			<c:otherwise>
 				<c:if test="<%= !liveGroup.isStagedRemotely() %>">
-					<input type="button" value="<liferay-ui:message key="publish-to-live" />" onClick="Liferay.LayoutExporter.publishToLive({title: '<%= UnicodeLanguageUtil.get(pageContext, "publish-to-live") %>', url: '<%= publishToLiveURL %>'});" />
+					<input type="button" value="<liferay-ui:message key="publish-to-live-now" />" onClick="Liferay.LayoutExporter.publishToLive({title: '<%= UnicodeLanguageUtil.get(pageContext, "publish-to-live-now") %>', url: '<%= publishToLiveURL %>'});" />
+
+					<%
+					publishToLiveURL.setParameter("schedule", String.valueOf(true));
+					%>
+
+					<input type="button" value="<liferay-ui:message key="schedule-publication-to-live" />" onClick="Liferay.LayoutExporter.publishToLive({title: '<%= UnicodeLanguageUtil.get(pageContext, "schedule-publication-to-live") %>', url: '<%= publishToLiveURL %>'});" />
 				</c:if>
 
 				<c:if test="<%= liveGroup.isStagedRemotely() %>">
-					<input type="button" value="<liferay-ui:message key="publish-to-remote-live" />" onClick="Liferay.LayoutExporter.publishToLive({title: '<%= UnicodeLanguageUtil.get(pageContext, "publish-to-remote-live") %>', url: '<%= publishToRemoteURL %>'});" />
+					<input type="button" value="<liferay-ui:message key="publish-to-remote-live-now" />" onClick="Liferay.LayoutExporter.publishToLive({title: '<%= UnicodeLanguageUtil.get(pageContext, "publish-to-remote-live-now") %>', url: '<%= publishToRemoteURL %>'});" />
+
+					<%
+					publishToRemoteURL.setParameter("schedule", String.valueOf(true));
+					%>
+
+					<input type="button" value="<liferay-ui:message key="schedule-publication-to-remote-live" />" onClick="Liferay.LayoutExporter.publishToLive({title: '<%= UnicodeLanguageUtil.get(pageContext, "schedule-publication-to-remote-live") %>', url: '<%= publishToRemoteURL %>'});" />
 				</c:if>
 			</c:otherwise>
 		</c:choose>
