@@ -398,6 +398,13 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="plugins-kaleo" />
+			<param name="test.ant.script.suite" value="PluginsKaleoTestSuite" />
+			<param name="test.ant.script.plugins" value="kaleo-web" />
+			<param name="test.ant.script.plugins.type" value="webs" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-mail" />
 			<param name="test.ant.script.suite" value="PluginsMailTestSuite" />
 			<param name="test.ant.script.plugins" value="mail-portlet" />
@@ -1703,7 +1710,7 @@ file.
 						</ant>
 					</then>
 				</if>
-				
+
 				<if>
 					<isset property="theme.plugins.includes" />
 					<then>
@@ -1713,7 +1720,7 @@ file.
 						</ant>
 					</then>
 				</if>
-				
+
 				<if>
 					<isset property="webs.plugins.includes" />
 					<then>
