@@ -712,7 +712,7 @@ public class LayoutImporter {
 		}
 
 		if (_log.isDebugEnabled()) {
-			if (layout == null) {
+			if (existingLayout == null) {
 				_log.debug(
 					"Layout with {groupId=" + groupId + ",privateLayout=" +
 						privateLayout + ",layoutId=" + layoutId +
