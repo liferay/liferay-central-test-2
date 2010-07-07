@@ -399,8 +399,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 		<delete dir="${liferay.home}/data" />
 		<delete dir="${liferay.home}/deploy" />
 
-		<antcall target="java2html" />
-		<antcall target="dtddoc" />
+		<antcall target="doc" />
 
 		<delete dir="dist" />
 		<mkdir dir="dist" />
