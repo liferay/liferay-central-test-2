@@ -331,6 +331,9 @@ public class StagingImpl implements Staging {
 			PortletDataHandlerKeys.DELETE_PORTLET_DATA,
 			new String[] {Boolean.FALSE.toString()});
 		parameterMap.put(
+			PortletDataHandlerKeys.IGNORE_LAST_PUBLISH_DATE,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
 			PortletDataHandlerKeys.PERMISSIONS,
 			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(

@@ -145,6 +145,8 @@ public class LayoutExporter {
 
 		boolean exportCategories = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.CATEGORIES);
+		boolean ignoreLastPublishDate = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.IGNORE_LAST_PUBLISH_DATE);
 		boolean exportPermissions = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
 		boolean exportUserPermissions = MapUtil.getBoolean(
@@ -173,6 +175,11 @@ public class LayoutExporter {
 
 		if (endDate != null) {
 			lastPublishDate = endDate.getTime();
+		}
+
+		if (ignoreLastPublishDate) {
+			endDate = null;
+			startDate = null;
 		}
 
 		StopWatch stopWatch = null;
