@@ -219,9 +219,13 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	}
 
 	public void destroyPortlet(Portlet portlet) {
+		String portletId = portlet.getRootPortletId();
+
+		_friendlyURLMapperPortlets.remove(portletId);
+
 		Map<String, Portlet> portletsPool = _getPortletsPool();
 
-		portletsPool.remove(portlet.getRootPortletId());
+		portletsPool.remove(portletId);
 
 		PortletApp portletApp = portlet.getPortletApp();
 
@@ -233,15 +237,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	}
 
 	public void destroyRemotePortlet(Portlet portlet) {
-		Map<String, Portlet> portletsPool = _getPortletsPool();
-
-		portletsPool.remove(portlet.getRootPortletId());
-
-		PortletApp portletApp = portlet.getPortletApp();
-
-		_portletAppsPool.remove(portletApp.getServletContextName());
-
-		clearCache();
+		destroyPortlet(portlet);
 	}
 
 	public List<CustomAttributesDisplay> getCustomAttributesDisplays() {
