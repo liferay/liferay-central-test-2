@@ -111,7 +111,7 @@ request.setAttribute("view_event.jsp-event", event);
 
 				<c:choose>
 					<c:when test="<%= allDay %>">
-						<abbr class="duration" title="P1D">
+						<abbr class="duration" title="<liferay-ui:message key="all-day" />">
 							<liferay-ui:message key="all-day" />:
 						</abbr>
 					</c:when>
