@@ -672,7 +672,7 @@ public class PortletExporter {
 			PortletDataContext context, Portlet portlet, Layout layout,
 			javax.portlet.PortletPreferences jxPreferences,
 			Element parentEl)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		PortletDataHandler portletDataHandler =
 			portlet.getPortletDataHandlerInstance();
@@ -682,6 +682,25 @@ public class PortletExporter {
 		}
 
 		String portletId = portlet.getPortletId();
+
+		Group liveGroup = layout.getGroup();
+
+		if (liveGroup.isStagingGroup()) {
+			liveGroup = liveGroup.getLiveGroup();
+		}
+
+		boolean isStaged = liveGroup.isStagedPortlet(
+			portlet.getRootPortletId());
+
+		if (!isStaged) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Not exporting data for " + portletId +
+						" because it is configured not to be staged");
+			}
+
+			return;
+		}
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Exporting data for " + portletId);
