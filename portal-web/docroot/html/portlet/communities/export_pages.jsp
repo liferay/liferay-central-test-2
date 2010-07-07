@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
-String cmd = ParamUtil.getString(request, "cmd");
+String cmd = ParamUtil.getString(request, "cmd", "publish_to_live");
 
 String tabs1 = ParamUtil.getString(request, "tabs1", "public-pages");
 
@@ -57,8 +57,11 @@ if (stagingGroup != null) {
 String treeKey = "liveLayoutsTree";
 
 boolean localPublishing = true;
+String actionKey = "copy";
 
 if (liveGroup.isStaged()) {
+	actionKey = "publish";
+
 	if (!liveGroup.isStagedRemotely()) {
 		treeKey = "stageLayoutsTree";
 	}
@@ -67,6 +70,10 @@ if (liveGroup.isStaged()) {
 		treeKey = "remoteLayoutsTree";
 		localPublishing = false;
 	}
+}
+else if (cmd.equals("publish_to_remote")) {
+	actionKey = "publish";
+	localPublishing = false;
 }
 
 treeKey = treeKey + selGroupId;
@@ -154,13 +161,6 @@ if (proposalId > 0) {
 	portletURL.setParameter("proposalId", String.valueOf(proposalId));
 }
 else {
-	if (selGroup.isStagingGroup()) {
-		cmd = "publish_to_live";
-	}
-	else {
-		cmd = "copy_from_live";
-	}
-
 	if (selGroup.isStaged() && selGroup.isStagedRemotely()) {
 		cmd = "publish_to_remote";
 	}
@@ -257,14 +257,6 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 		<liferay-ui:message key="<%= se.getMessage() %>" />
 	</liferay-ui:error>
 
-	<!--
-	<c:if test="<%= selGroup.hasStagingGroup() && !localPublishing %>">
-		<div class="portlet-msg-alert">
-			<liferay-ui:message key="the-staging-environment-is-activated-publish-to-remote-publishes-from-the-live-environment" />
-		</div>
-	</c:if>
-	-->
-
 	<%
 	String exportPagesTabsNames = "pages,options";
 
@@ -274,12 +266,6 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 
 	if (proposalId <= 0) {
 		exportPagesTabsNames += ",scheduler";
-	}
-
-	String actionKey = "copy";
-
-	if (liveGroup.isStaged()) {
-		actionKey = "publish";
 	}
 	%>
 
@@ -300,7 +286,6 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 			selectURL.setParameter("tabs1", tabs1);
 			selectURL.setParameter("pagesRedirect", pagesRedirect);
 			selectURL.setParameter("groupId", String.valueOf(selGroupId));
-			selectURL.setParameter("localPublishing", String.valueOf(localPublishing));
 			selectURL.setWindowState(LiferayWindowState.EXCLUSIVE);
 
 			String taglibOnClick = "AUI().DialogManager.refreshByChild('#" + renderResponse.getNamespace() + "exportPagesFm');";

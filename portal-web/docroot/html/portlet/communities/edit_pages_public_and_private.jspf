@@ -25,11 +25,11 @@ publishToLiveURL.setParameter("tabs1", tabs1);
 publishToLiveURL.setParameter("pagesRedirect", portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid);
 publishToLiveURL.setParameter("groupId", String.valueOf(groupId));
 publishToLiveURL.setParameter("selPlid", String.valueOf(selPlid));
-publishToLiveURL.setParameter(Constants.CMD, "publish-to-live");
+publishToLiveURL.setParameter(Constants.CMD, "publish_to_live");
 
 PortletURL publishToRemoteURL = PortletURLUtil.clone(publishToLiveURL, renderResponse);
 
-publishToRemoteURL.setParameter(Constants.CMD, "publish-to-live");
+publishToRemoteURL.setParameter(Constants.CMD, "publish_to_live");
 %>
 
 <liferay-ui:error exception="<%= RemoteExportException.class %>">
@@ -136,7 +136,7 @@ publishToRemoteURL.setParameter(Constants.CMD, "publish-to-live");
 		<c:if test="<%= !liveGroup.isStagedRemotely() %>">
 			<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="importLayoutsURL">
 				<portlet:param name="struts_action" value="/communities/export_pages" />
-				<portlet:param name="<%= Constants.CMD %>" value="copy-from-live" />
+				<portlet:param name="<%= Constants.CMD %>" value="copy_from_live" />
 				<portlet:param name="tabs1" value="<%= tabs1 %>" />
 				<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
 				<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
@@ -152,6 +152,10 @@ publishToRemoteURL.setParameter(Constants.CMD, "publish-to-live");
 			<input type="button" value="<liferay-ui:message key="view-pages" />" onClick="var liveGroupWindow = window.open('<%= viewPagesURL %>'); void(''); liveGroupWindow.focus();" />
 
 			<c:if test="<%= !selGroup.isLayoutSetPrototype() && GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.PUBLISH_TO_REMOTE) %>">
+				<%
+				publishToRemoteURL.setParameter(Constants.CMD, "publish_to_remote");
+				%>
+
 				<input type="button" value="<liferay-ui:message key="publish-to-remote" />" onClick="Liferay.LayoutExporter.publishToLive({title: '<%= UnicodeLanguageUtil.get(pageContext, "publish-to-remote") %>', url: '<%= publishToRemoteURL %>'});" />
 			</c:if>
 
