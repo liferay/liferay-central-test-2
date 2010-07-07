@@ -34,7 +34,6 @@ import com.liferay.portal.model.PublicRenderParameter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -42,6 +41,7 @@ import java.util.Map;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.portlet.PortletContext;
 
@@ -67,7 +67,7 @@ public class PortletConfigImpl implements LiferayPortletConfig {
 		}
 
 		_portletContext = portletContext;
-		_resourceBundles = new HashMap<String, ResourceBundle>();
+		_resourceBundles = new ConcurrentHashMap<String, ResourceBundle>();
 	}
 
 	public Map<String, String[]> getContainerRuntimeOptions() {
