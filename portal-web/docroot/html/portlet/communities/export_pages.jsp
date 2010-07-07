@@ -24,7 +24,6 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "public-pages");
 String pagesRedirect = ParamUtil.getString(request, "pagesRedirect");
 
 boolean publish = ParamUtil.getBoolean(request, "publish");
-
 boolean schedule = ParamUtil.getBoolean(request, "schedule");
 
 Group selGroup = (Group)request.getAttribute(WebKeys.GROUP);
@@ -80,13 +79,13 @@ if (liveGroup.isStaged()) {
 
 treeKey = treeKey + selGroupId;
 
-String actionKey = "copy";
+String publishActionKey = "copy";
 
 if (liveGroup.isStaged()) {
-	actionKey = "publish";
+	publishActionKey = "publish";
 }
 else if (cmd.equals("publish_to_remote")) {
-	actionKey = "publish";
+	publishActionKey = "publish";
 }
 
 long selPlid = ParamUtil.getLong(request, "selPlid", LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
@@ -318,7 +317,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 
 					<aui:button name="selectBtn" onClick="<%= taglibOnClick %>" value="select" />
 
-					<aui:button name="publishBtn" style='<%= !results.isEmpty() ? "display: none;" : "" %>' type="submit" value="<%= actionKey %>" />
+					<aui:button name="publishBtn" style='<%= !results.isEmpty() ? "display: none;" : "" %>' type="submit" value="<%= publishActionKey %>" />
 				</c:when>
 				<c:otherwise>
 					<c:if test="<%= selPlid <= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>">
@@ -330,7 +329,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 						<aui:button name="changeBtn" onClick="<%= taglibOnClick %>" value="change-selection" />
 					</c:if>
 
-					<aui:button name="publishBtn" type="submit" value="<%= actionKey %>" />
+					<aui:button name="publishBtn" type="submit" value="<%= publishActionKey %>" />
 				</c:otherwise>
 			</c:choose>
 
@@ -343,7 +342,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 					window,
 					'<portlet:namespace />refreshDialog',
 					function(){
-						if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-" + actionKey + "-these-pages") %>')) {
+						if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-" + publishActionKey + "-these-pages") %>')) {
 							dialog.io.set('uri', '<%= portletURL.toString() + "&etag=0" %>');
 							dialog.io.set('form', {id: '<portlet:namespace />exportPagesFm'});
 
