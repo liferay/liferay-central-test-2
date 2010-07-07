@@ -89,12 +89,14 @@ public class MethodWrapper implements Serializable {
 		sb.append(_className);
 		sb.append(", methodName=");
 		sb.append(_methodName);
-		sb.append(", arguments=");
-		sb.append(Arrays.toString(_arguments));
+
 		if (_argumentClassNames != null) {
 			sb.append(", argumentClassNames=");
 			sb.append(Arrays.toString(_argumentClassNames));
 		}
+
+		sb.append(", arguments=");
+		sb.append(Arrays.toString(_arguments));
 		sb.append("}");
 
 		return sb.toString();
