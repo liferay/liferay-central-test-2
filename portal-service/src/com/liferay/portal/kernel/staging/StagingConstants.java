@@ -21,7 +21,7 @@ package com.liferay.portal.kernel.staging;
  */
 public class StagingConstants {
 
-	public static final String IS_STAGED_PORTLET = "is-staged-portlet_";
+	public static final String STAGED_PORTLET = "staged-portlet_";
 
 	public static final int TYPE_NOT_STAGED = 0;
 

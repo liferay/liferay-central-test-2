@@ -351,18 +351,18 @@ public class GroupImpl extends GroupModelImpl implements Group {
 	}
 
 	public boolean isStaged() {
-		return GetterUtil.getBoolean(getTypeSettingsProperty("isStaged"));
+		return GetterUtil.getBoolean(getTypeSettingsProperty("staged"));
 	}
 
 	public boolean isStagedPortlet(String portletId) {
 		return GetterUtil.getBoolean(
 			getTypeSettingsProperty(
-				StagingConstants.IS_STAGED_PORTLET.concat(portletId)), true);
+				StagingConstants.STAGED_PORTLET.concat(portletId)),
+			true);
 	}
 
 	public boolean isStagedRemotely() {
-		return GetterUtil.getBoolean(
-			getTypeSettingsProperty("isStagedRemotely"));
+		return GetterUtil.getBoolean(getTypeSettingsProperty("stagedRemotely"));
 	}
 
 	public boolean isStagingGroup() {

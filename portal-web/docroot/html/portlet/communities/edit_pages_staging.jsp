@@ -142,10 +142,10 @@ UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribut
 					continue;
 				}
 
-				boolean isStaged = GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(StagingConstants.IS_STAGED_PORTLET + curPortlet.getRootPortletId()), portletDataHandler.isPublishToLiveByDefault());
+				boolean isStaged = GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(StagingConstants.STAGED_PORTLET + curPortlet.getRootPortletId()), portletDataHandler.isPublishToLiveByDefault());
 			%>
 
-				<aui:input disabled="<%= portletDataHandler.isAlwaysExportable() %>" inlineLabel="right" label="<%= PortalUtil.getPortletTitle(curPortlet, application, locale) %>" name='<%= StagingConstants.IS_STAGED_PORTLET + curPortlet.getRootPortletId() %>' type="checkbox" value="<%= isStaged %>" />
+				<aui:input disabled="<%= portletDataHandler.isAlwaysExportable() %>" inlineLabel="right" label="<%= PortalUtil.getPortletTitle(curPortlet, application, locale) %>" name='<%= StagingConstants.STAGED_PORTLET + curPortlet.getRootPortletId() %>' type="checkbox" value="<%= isStaged %>" />
 
 			<%
 			}
