@@ -14,6 +14,47 @@
  */
 %>
 
+<%@ page import="com.liferay.portal.kernel.lar.PortletDataHandler" %>
+
+<%
+Group liveGroup = group;
+boolean inStaging = false;
+
+if (group.isControlPanel()) {
+	long doAsGroupId = ParamUtil.getLong(request, "doAsGroupId");
+
+	if (doAsGroupId > 0) {
+		try {
+			liveGroup = GroupLocalServiceUtil.getGroup(doAsGroupId);
+
+			if (liveGroup.isStagingGroup()) {
+				inStaging = true;
+				liveGroup = liveGroup.getLiveGroup();
+			}
+		}
+		catch (Exception e) {
+		}
+	}
+}
+else if (group.isStagingGroup()) {
+	inStaging = true;
+	liveGroup = group.getLiveGroup();
+}
+%>
+
+<c:if test="<%= liveGroup.isStaged() && !liveGroup.isStagedPortlet(portlet.getRootPortletId()) %>">
+	<c:if test="<%= !liveGroup.isStagedRemotely() && inStaging %>">
+		<div class="portlet-msg-alert">
+			<liferay-ui:message key="this-portlet-is-not-staged-local-alert" />
+		</div>
+	</c:if>
+	<c:if test="<%= liveGroup.isStagedRemotely() %>">
+		<div class="portlet-msg-alert">
+			<liferay-ui:message key="this-portlet-is-not-staged-remote-alert" />
+		</div>
+	</c:if>
+</c:if>
+
 <c:if test='<%= SessionMessages.contains(renderRequest, "request_processed") %>'>
 	<div class="portlet-msg-success">
 
