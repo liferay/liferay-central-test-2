@@ -632,13 +632,13 @@ public class LayoutImporter {
 		long groupId = context.getGroupId();
 		long sourceGroupId = context.getSourceGroupId();
 
+		String layoutUuid = GetterUtil.getString(
+			layoutElement.attributeValue("layout-uuid"));
+
 		long layoutId = GetterUtil.getInteger(
 			layoutElement.attributeValue("layout-id"));
 
 		long oldLayoutId = layoutId;
-
-		String layoutUuid = GetterUtil.getString(
-			layoutElement.attributeValue("layout-uuid"));
 
 		boolean deleteLayout = GetterUtil.getBoolean(
 			layoutElement.attributeValue("delete"));

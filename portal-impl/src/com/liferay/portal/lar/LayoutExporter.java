@@ -454,10 +454,9 @@ public class LayoutExporter {
 		Element layoutElement = layoutsElement.addElement("layout");
 
 		layoutElement.addAttribute(
-			"layout-id", String.valueOf(layout.getLayoutId()));
-
-		layoutElement.addAttribute(
 			"layout-uuid", layout.getUuid());
+		layoutElement.addAttribute(
+			"layout-id", String.valueOf(layout.getLayoutId()));
 
 		boolean deleteLayout = MapUtil.getBoolean(
 			context.getParameterMap(), "delete_" + layout.getPlid());
