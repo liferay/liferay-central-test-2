@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageStatus;
+import com.liferay.portal.kernel.staging.Staging;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
@@ -86,7 +87,7 @@ import javax.portlet.PortletRequest;
  * @author Bruno Farache
  * @author Wesley Gong
  */
-public class StagingImpl {
+public class StagingImpl implements Staging {
 
 	public void copyFromLive(PortletRequest portletRequest)
 		throws Exception {
