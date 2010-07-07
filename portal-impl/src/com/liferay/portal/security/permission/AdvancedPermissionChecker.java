@@ -157,8 +157,8 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 				group = GroupLocalServiceUtil.getGroup(groupId);
 			}
 
-			List<Group> userGroups =
-				GroupLocalServiceUtil.getUserGroups(userId);
+			List<Group> userGroups = GroupLocalServiceUtil.getUserGroups(
+				userId);
 
 			List<Organization> userOrgs = getUserOrgs(userId);
 
