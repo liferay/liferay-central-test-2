@@ -48,15 +48,15 @@ public class RemoteOptionsException extends PortalException {
 	public int getType() {
 		return _type;
 	}
-	
+
 	public void setRemoteAddress(String remoteAddress) {
 		_remoteAddress = remoteAddress;
 	}
-	
+
 	public void setRemoteGroupId(long remoteGroupId) {
 		_remoteGroupId = remoteGroupId;
 	}
-	
+
 	public void setRemotePort(int remotePort) {
 		_remotePort = remotePort;
 	}

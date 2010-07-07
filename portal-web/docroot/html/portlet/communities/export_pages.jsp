@@ -26,7 +26,7 @@ String pagesRedirect = ParamUtil.getString(request, "pagesRedirect");
 boolean publish = ParamUtil.getBoolean(request, "publish");
 
 boolean schedule = ParamUtil.getBoolean(request, "schedule");
-	
+
 Group selGroup = (Group)request.getAttribute(WebKeys.GROUP);
 
 Group liveGroup = null;
@@ -56,29 +56,38 @@ if (stagingGroup != null) {
 	stagingGroupId = stagingGroup.getGroupId();
 }
 
-String treeKey = "liveLayoutsTree";
-
 boolean localPublishing = true;
-String actionKey = "copy";
 
 if (liveGroup.isStaged()) {
-	actionKey = "publish";
-
-	if (!liveGroup.isStagedRemotely()) {
-		treeKey = "stageLayoutsTree";
-	}
-	else {
-		selGroup = liveGroup;
-		treeKey = "remoteLayoutsTree";
+	if (liveGroup.isStagedRemotely()) {
 		localPublishing = false;
 	}
 }
 else if (cmd.equals("publish_to_remote")) {
-	actionKey = "publish";
 	localPublishing = false;
 }
 
+String treeKey = "liveLayoutsTree";
+
+if (liveGroup.isStaged()) {
+	if (!liveGroup.isStagedRemotely()) {
+		treeKey = "stageLayoutsTree";
+	}
+	else {
+		treeKey = "remoteLayoutsTree";
+	}
+}
+
 treeKey = treeKey + selGroupId;
+
+String actionKey = "copy";
+
+if (liveGroup.isStaged()) {
+	actionKey = "publish";
+}
+else if (cmd.equals("publish_to_remote")) {
+	actionKey = "publish";
+}
 
 long selPlid = ParamUtil.getLong(request, "selPlid", LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
@@ -206,7 +215,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 	}
 </style>
 
-<aui:form action='<%= portletURL.toString() + "&etag=0" %>' method="post" name="exportPagesFm" onSubmit='<%= "event.preventDefault();" + renderResponse.getNamespace() + "refreshDialog();" %>' >
+<aui:form action='<%= portletURL.toString() + "&etag=0" %>' method="post" name="exportPagesFm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "refreshDialog();" %>' >
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= cmd %>" />
 	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
 	<aui:input name="pagesRedirect" type="hidden" value="<%= currentURL %>" />
@@ -219,11 +228,16 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 		%>
 
 		<c:if test="<%= ree.getType() == RemoteExportException.BAD_CONNECTION %>">
-			<%= LanguageUtil.format(pageContext, "there-was-a-bad-connection-with-the-remote-server-at-x", ree.getURL()) %>
+			<liferay-ui:message arguments="<%= ree.getURL() %>" key="there-was-a-bad-connection-with-the-remote-server-at-x" />
 		</c:if>
 
 		<c:if test="<%= ree.getType() == RemoteExportException.NO_GROUP %>">
-			<%= LanguageUtil.format(pageContext, "no-group-exists-on-the-remote-server-with-group-id-x", ree.getGroupId()) %>
+
+			<%
+			String groupType = LanguageUtil.get(pageContext, (liveGroup.isOrganization()? "organization" : "community"));
+			%>
+
+			<liferay-ui:message arguments="<%= new Object[] {groupType, ree.getGroupId()} %>" key="no-group-exists-on-the-remote-server-with-group-id-x" />
 		</c:if>
 
 		<c:if test="<%= ree.getType() == RemoteExportException.NO_LAYOUTS %>">
@@ -238,15 +252,15 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 		%>
 
 		<c:if test="<%= roe.getType() == RemoteOptionsException.REMOTE_ADDRESS %>">
-			<%= LanguageUtil.format(pageContext, "the-remote-address-x-is-not-valid", roe.getRemoteAddress()) %>
+			<liferay-ui:message arguments="<%= roe.getRemoteAddress() %>" key="the-remote-address-x-is-not-valid" />
 		</c:if>
 
 		<c:if test="<%= roe.getType() == RemoteOptionsException.REMOTE_GROUP_ID %>">
-			<%= LanguageUtil.format(pageContext, "the-remote-group-id-x-is-not-valid", roe.getRemoteGroupId()) %>
+			<liferay-ui:message arguments="<%= roe.getRemoteGroupId() %>" key="the-remote-group-id-x-is-not-valid" />
 		</c:if>
 
 		<c:if test="<%= roe.getType() == RemoteOptionsException.REMOTE_PORT %>">
-			<%= LanguageUtil.format(pageContext, "the-remote-port-x-is-not-valid", roe.getRemotePort()) %>
+			<liferay-ui:message arguments="<%= roe.getRemotePort() %>" key="the-remote-port-x-is-not-valid" />
 		</c:if>
 	</liferay-ui:error>
 
@@ -283,12 +297,14 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 
 			<%
 			PortletURL selectURL = renderResponse.createRenderURL();
+
+			selectURL.setWindowState(LiferayWindowState.EXCLUSIVE);
+
 			selectURL.setParameter("struts_action", "/communities/export_pages");
 			selectURL.setParameter(Constants.CMD, cmd);
 			selectURL.setParameter("tabs1", tabs1);
 			selectURL.setParameter("pagesRedirect", pagesRedirect);
 			selectURL.setParameter("groupId", String.valueOf(selGroupId));
-			selectURL.setWindowState(LiferayWindowState.EXCLUSIVE);
 
 			String taglibOnClick = "AUI().DialogManager.refreshByChild('#" + renderResponse.getNamespace() + "exportPagesFm');";
 			%>

@@ -599,5 +599,4 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		},
 		['aui-base']
 	);
-
 </aui:script>

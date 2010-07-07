@@ -213,7 +213,7 @@
 
 										boolean checked = portletDataHandler.isPublishToLiveByDefault();
 
-										boolean isStaged = GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(StagingConstants.STAGED_PORTLET + curPortlet.getRootPortletId()), portletDataHandler.isPublishToLiveByDefault());
+										boolean staged = GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(StagingConstants.STAGED_PORTLET + curPortlet.getRootPortletId()), portletDataHandler.isPublishToLiveByDefault());
 
 										request.setAttribute("render_controls.jsp-controls", controls);
 										request.setAttribute("render_controls.jsp-portletDisabled", !portletDataHandler.isPublishToLiveByDefault());
@@ -232,7 +232,7 @@
 													<aui:input disabled="<%= !checked %>" inlineLabel="right" label="setup "name="<%= PortletDataHandlerKeys.PORTLET_SETUP + StringPool.UNDERLINE + rootPortletId %>" type="checkbox" value="<%= true %>" />
 												</li>
 
-												<c:if test="<%= isStaged %>">
+												<c:if test="<%= staged %>">
 													<liferay-util:include page="/html/portlet/communities/render_controls.jsp" />
 												</c:if>
 											</ul>

@@ -30,6 +30,7 @@ else if (liveGroup.isStagingGroup()) {
 }
 
 long liveGroupId = liveGroup.getGroupId();
+
 long stagingGroupId = 0;
 
 if (stagingGroup != null) {

@@ -21,11 +21,11 @@ publishToLiveURL.setWindowState(LiferayWindowState.EXCLUSIVE);
 publishToLiveURL.setPortletMode(PortletMode.VIEW);
 
 publishToLiveURL.setParameter("struts_action", "/communities/export_pages");
+publishToLiveURL.setParameter(Constants.CMD, "publish_to_live");
 publishToLiveURL.setParameter("tabs1", tabs1);
 publishToLiveURL.setParameter("pagesRedirect", portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid);
 publishToLiveURL.setParameter("groupId", String.valueOf(groupId));
 publishToLiveURL.setParameter("selPlid", String.valueOf(selPlid));
-publishToLiveURL.setParameter(Constants.CMD, "publish_to_live");
 
 PortletURL publishToRemoteURL = PortletURLUtil.clone(publishToLiveURL, renderResponse);
 

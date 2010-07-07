@@ -20,16 +20,14 @@
 Group liveGroup = (Group)request.getAttribute("edit_pages.jsp-liveGroup");
 Group stagingGroup = (Group)request.getAttribute("edit_pages.jsp-stagingGroup");
 long liveGroupId = ((Long)request.getAttribute("edit_pages.jsp-liveGroupId")).longValue();
+UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribute("edit_pages.jsp-liveGroupTypeSettings");
 
 boolean workflowEnabled = ((Boolean)request.getAttribute("edit_pages.jsp-workflowEnabled")).booleanValue();
 int workflowStages = ((Integer)request.getAttribute("edit_pages.jsp-workflowStages")).intValue();
 String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-workflowRoleNames");
-
-UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribute("edit_pages.jsp-liveGroupTypeSettings");
 %>
 
 <c:if test="<%= GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING) %>">
-
 	<liferay-ui:error exception="<%= SystemException.class %>">
 
 		<%
@@ -59,7 +57,7 @@ UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribut
 	</aui:select>
 
 	<div class='<%= (liveGroup.isStaged() && liveGroup.isStagedRemotely() ? StringPool.BLANK : "aui-helper-hidden") %>' id="<portlet:namespace />remoteStagingOptions">
-		<br/>
+		<br />
 
 		<liferay-ui:error exception="<%= RemoteExportException.class %>">
 
@@ -68,20 +66,20 @@ UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribut
 			%>
 
 			<c:if test="<%= ree.getType() == RemoteExportException.BAD_CONNECTION %>">
-				<%= LanguageUtil.format(pageContext, "there-was-a-bad-connection-with-the-remote-server-at-x", ree.getURL()) %>
+				<liferay-ui:message arguments="<%= ree.getURL() %>" key="there-was-a-bad-connection-with-the-remote-server-at-x" />
 			</c:if>
 
 			<c:if test="<%= ree.getType() == RemoteExportException.NO_GROUP %>">
+
 				<%
 				String groupType = LanguageUtil.get(pageContext, (liveGroup.isOrganization()? "organization" : "community"));
 				%>
 
-				<%= LanguageUtil.format(pageContext, "no-group-exists-on-the-remote-server-with-group-id-x", new Object[] {groupType, ree.getGroupId()}) %>
+				<liferay-ui:message arguments="<%= new Object[] {groupType, ree.getGroupId()} %>" key="no-group-exists-on-the-remote-server-with-group-id-x" />
 			</c:if>
 		</liferay-ui:error>
 
 		<aui:fieldset label="remote-live-connection-settings">
-
 			<liferay-ui:error exception="<%= RemoteOptionsException.class %>">
 
 				<%
@@ -89,15 +87,15 @@ UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribut
 				%>
 
 				<c:if test="<%= roe.getType() == RemoteOptionsException.REMOTE_ADDRESS %>">
-					<%= LanguageUtil.format(pageContext, "the-remote-address-x-is-not-valid", roe.getRemoteAddress()) %>
+					<liferay-ui:message arguments="<%= roe.getRemoteAddress() %>" key="the-remote-address-x-is-not-valid" />
 				</c:if>
 
 				<c:if test="<%= roe.getType() == RemoteOptionsException.REMOTE_GROUP_ID %>">
-					<%= LanguageUtil.format(pageContext, "the-remote-group-id-x-is-not-valid", roe.getRemoteGroupId()) %>
+					<liferay-ui:message arguments="<%= roe.getRemoteGroupId() %>" key="the-remote-group-id-x-is-not-valid" />
 				</c:if>
 
 				<c:if test="<%= roe.getType() == RemoteOptionsException.REMOTE_PORT %>">
-					<%= LanguageUtil.format(pageContext, "the-remote-port-x-is-not-valid", roe.getRemotePort()) %>
+					<liferay-ui:message arguments="<%= roe.getRemotePort() %>" key="the-remote-port-x-is-not-valid" />
 				</c:if>
 			</liferay-ui:error>
 
@@ -116,12 +114,13 @@ UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribut
 	</div>
 
 	<div class='<%= (liveGroup.isStaged() ? StringPool.BLANK : "aui-helper-hidden") %>' id="<portlet:namespace />stagedPortlets">
-		<br/>
+		<br />
 
 		<aui:fieldset label="staged-portlets">
 			<div class="portlet-msg-alert">
 				<liferay-ui:message key="staged-portlets-alert" />
 			</div>
+
 			<div class="portlet-msg-info">
 				<liferay-ui:message key="staged-portlets-help" />
 			</div>
@@ -150,14 +149,14 @@ UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribut
 			<%
 			}
 			%>
+
 		</aui:fieldset>
 	</div>
 
-	<br/>
+	<br />
 
 	<div class='<%= (workflowEnabled ? StringPool.BLANK : "aui-helper-hidden") %>' id="<portlet:namespace />advancedOptions">
 		<aui:fieldset label="advanced-options">
-
 			<aui:field-wrapper>
 				<aui:select inlineField="<%= true %>" inlineLabel="left" label="number-of-editorial-stages" name="workflowStages">
 
@@ -177,7 +176,7 @@ UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribut
 			</aui:field-wrapper>
 
 			<div class='<%= ((workflowStages == 1) ? "aui-helper-hidden": StringPool.BLANK) %>' id="<portlet:namespace />workflowStage_0">
-				<br/>
+				<br />
 
 				<div class="portlet-msg-info">
 					<c:choose>
@@ -193,7 +192,7 @@ UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribut
 				<aui:field-wrapper>
 					<strong><%= LanguageUtil.get(pageContext, "creation-stage") %></strong> <liferay-ui:icon-help message="stage-1-role-help" />
 
-					<br/>
+					<br />
 
 					<%= LanguageUtil.get(pageContext, "content-creators") %>
 				</aui:field-wrapper>
@@ -358,5 +357,4 @@ UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribut
 		Liferay.Util.toggleSelectBoxReverse('<portlet:namespace />stagingType','<%= StagingConstants.TYPE_NOT_STAGED %>','<portlet:namespace />advancedOptions');
 		Liferay.Util.toggleSelectBox('<portlet:namespace />stagingType','<%= StagingConstants.TYPE_REMOTE_STAGING %>','<portlet:namespace />remoteStagingOptions');
 	</aui:script>
-
 </c:if>

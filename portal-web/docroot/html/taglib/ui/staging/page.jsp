@@ -58,9 +58,9 @@
 
 	<ul>
 		<c:if test="<%= liveGroup.isStaged() %>">
-
 			<c:choose>
 				<c:when test="<%= !liveGroup.isStagedRemotely() && group.isStagingGroup() %>">
+
 					<%
 					String friendlyURL = null;
 
@@ -80,6 +80,7 @@
 					</c:if>
 				</c:when>
 				<c:when test="<%= !liveGroup.isStagedRemotely() && !group.isStagingGroup() %>">
+
 					<%
 					String friendlyURL = null;
 

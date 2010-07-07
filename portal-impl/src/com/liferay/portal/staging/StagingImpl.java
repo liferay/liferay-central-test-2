@@ -80,10 +80,10 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map.Entry;
 import java.util.Map;
 import java.util.Set;
 import java.util.TimeZone;
-import java.util.Map.Entry;
 
 import javax.portlet.PortletRequest;
 
@@ -870,7 +870,8 @@ public class StagingImpl implements Staging {
 		typeSettingsProperties.setProperty("remoteAddress", remoteAddress);
 		typeSettingsProperties.setProperty(
 			"remoteGroupId", String.valueOf(remoteGroupId));
-		typeSettingsProperties.setProperty("remotePort", String.valueOf(remotePort));
+		typeSettingsProperties.setProperty(
+			"remotePort", String.valueOf(remotePort));
 		typeSettingsProperties.setProperty(
 			"secureConnection", String.valueOf(secureConnection));
 		typeSettingsProperties.setProperty("staged", Boolean.TRUE.toString());
