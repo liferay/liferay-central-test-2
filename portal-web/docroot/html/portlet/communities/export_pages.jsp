@@ -336,7 +336,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 				<c:if test="<%= schedule %>">
 					<aui:input label="event-information" name="description" type="text" />
 				</c:if>
-				
+
 				<liferay-ui:panel-container cssClass="export-pages-panel-container" extended="<%= true %>" persistState="<%= true %>">
 					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "pages") %>'>
 						<%@ include file="/html/portlet/communities/export_pages_select_pages.jspf" %>

@@ -39,7 +39,7 @@ Layout curLayout = (Layout)row.getObject();
 			<aui:a href="<%= taglibHref %>" style="text-decoration: none;" target="_self"><img align="absmiddle" border="0" id="_detail_<%= curLayout.getPlid() %>_toggle" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png" onmouseover="Liferay.Portal.ToolTip.show(this, '<%= UnicodeLanguageUtil.get(pageContext, "details") %>')" /> <%= curLayout.getName(locale) %></aui:a>
 		</c:when>
 		<c:otherwise>
-			<%= curLayout.getName(locale) %>	
+			<%= curLayout.getName(locale) %>
 		</c:otherwise>
 	</c:choose>
 </div>
