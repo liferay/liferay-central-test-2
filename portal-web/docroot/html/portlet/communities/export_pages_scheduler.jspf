@@ -52,14 +52,6 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 
 <br />
 
-<aui:button name="addButton" onClick='<%= renderResponse.getNamespace() + "schedulePublishEvent();" %>' value="add-event" />
-
-<br /><br />
-
-<aui:fieldset label="scheduled-events">
-	<div id="<portlet:namespace />scheduledPublishEventsDiv"></div>
-</aui:fieldset>
-
 <aui:script>
 	Liferay.provide(
 		window,

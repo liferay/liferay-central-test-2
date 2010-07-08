@@ -24,26 +24,6 @@ Liferay.provide(
 			if (pane) {
 				pane.hide();
 			}
-
-			if (!publish) {
-				var publishBtn = A.one('#' + namespace + 'publishBtn');
-				var selectBtn = A.one('#' + namespace + 'selectBtn');
-
-				if (publishBtn) {
-					publishBtn.show();
-				}
-
-				if (selectBtn) {
-					selectBtn.hide();
-				}
-			}
-			else {
-				var changeBtn = A.one('#' + namespace + 'changeBtn');
-
-				if (changeBtn) {
-					changeBtn.hide();
-				}
-			}
 		}
 	},
 	['aui-base']
@@ -124,7 +104,7 @@ Liferay.provide(
 				destroyOnClose: true,
 				modal: true,
 				title: title,
-				width: 300
+				width: 350
 			}
 		).render();
 	},
@@ -180,26 +160,6 @@ Liferay.provide(
 
 			if (pane) {
 				pane.show();
-			}
-
-			if (!publish) {
-				var publishBtn = A.one('#' + namespace + 'publishBtn');
-				var selectBtn = A.one('#' + namespace + 'selectBtn');
-
-				if (publishBtn) {
-					publishBtn.hide();
-				}
-
-				if (selectBtn) {
-					selectBtn.show();
-				}
-			}
-			else {
-				var changeBtn = A.one('#' + namespace + 'changeBtn');
-
-				if (changeBtn) {
-					changeBtn.show();
-				}
 			}
 		}
 	},

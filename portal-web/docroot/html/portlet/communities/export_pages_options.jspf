@@ -66,7 +66,7 @@ for (Portlet alwaysExportablePortlet : alwaysExportablePortlets) {
 portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(application, locale));
 %>
 
-<div style="border: 1px solid #CCC; height: 445px; overflow: auto;">
+<div>
 	<ul class="lfr-tree lfr-component">
 		<li class="tree-item" <%= (proposalId > 0) ? "style=\"display: none;\"" : "" %>>
 			<aui:input checked="<%= true %>" disabled="<%= true %>" inlineLabel="right" name="pages" type="checkbox" />

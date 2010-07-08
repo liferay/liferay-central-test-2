@@ -20,6 +20,8 @@
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 Layout curLayout = (Layout)row.getObject();
+
+long proposalId = ParamUtil.getLong(request, "proposalId");
 %>
 
 <div class="type" style="float: right; padding-right: 32px; text-align: center; width: 100px;">
@@ -27,20 +29,28 @@ Layout curLayout = (Layout)row.getObject();
 </div>
 
 <div class="layout">
+	<c:choose>
+		<c:when test="<%= proposalId <= 0 %>">
+			<%
+			String taglibHref = "javascript:Liferay.LayoutExporter.details({toggle: '#_detail_" + curLayout.getPlid() + "_toggle', detail: '#_detail_" + curLayout.getPlid() + "'});";
+			%>
 
-	<%
-	String taglibHref = "javascript:Liferay.LayoutExporter.details({toggle: '#_detail_" + curLayout.getPlid() + "_toggle', detail: '#_detail_" + curLayout.getPlid() + "'});";
-	%>
-
-	<aui:a href="<%= taglibHref %>" style="text-decoration: none;" target="_self"><img align="absmiddle" border="0" id="_detail_<%= curLayout.getPlid() %>_toggle" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png" onmouseover="Liferay.Portal.ToolTip.show(this, '<%= UnicodeLanguageUtil.get(pageContext, "details") %>')" /> <%= curLayout.getName(locale) %></aui:a>
+			<aui:a href="<%= taglibHref %>" style="text-decoration: none;" target="_self"><img align="absmiddle" border="0" id="_detail_<%= curLayout.getPlid() %>_toggle" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png" onmouseover="Liferay.Portal.ToolTip.show(this, '<%= UnicodeLanguageUtil.get(pageContext, "details") %>')" /> <%= curLayout.getName(locale) %></aui:a>
+		</c:when>
+		<c:otherwise>
+			<%= curLayout.getName(locale) %>	
+		</c:otherwise>
+	</c:choose>
 </div>
 
-<div class="aui-helper-hidden export-layout-detail" id="_detail_<%= curLayout.getPlid() %>" style="border-top: 1px solid #CCC; margin-top: 4px; padding-top: 4px; width: 95%;">
-	<aui:input checked="<%= true %>" disabled="<%= true%>" inlineLabel="left" label="include-ancestor-pages-if-necessary" name='<%= "includeAncestors_" + curLayout.getPlid() %>' type="checkbox" value="1" />
+<c:if test="<%= proposalId <= 0 %>">
+	<div class="aui-helper-hidden export-layout-detail" id="_detail_<%= curLayout.getPlid() %>" style="border-top: 1px solid #CCC; margin-top: 4px; padding-top: 4px; width: 95%;">
+		<aui:input checked="<%= true %>" disabled="<%= true%>" inlineLabel="left" label="include-ancestor-pages-if-necessary" name='<%= "includeAncestors_" + curLayout.getPlid() %>' type="checkbox" value="1" />
 
-	<aui:input inlineLabel="left" label="delete-live-page" name='<%= "delete_" + curLayout.getPlid() %>' type="checkbox" />
+		<aui:input inlineLabel="left" label="delete-live-page" name='<%= "delete_" + curLayout.getPlid() %>' type="checkbox" />
 
-	<c:if test="<%= !curLayout.getChildren().isEmpty() %>">
-		<aui:input label="include-all-descendent-pages" name='<%= "includeChildren_" + curLayout.getPlid() %>' type="checkbox" value="1" />
-	</c:if>
-</div>
+		<c:if test="<%= !curLayout.getChildren().isEmpty() %>">
+			<aui:input label="include-all-descendent-pages" name='<%= "includeChildren_" + curLayout.getPlid() %>' type="checkbox" value="1" />
+		</c:if>
+	</div>
+</c:if>

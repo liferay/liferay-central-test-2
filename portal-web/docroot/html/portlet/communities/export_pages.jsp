@@ -23,7 +23,7 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "public-pages");
 
 String pagesRedirect = ParamUtil.getString(request, "pagesRedirect");
 
-boolean publish = ParamUtil.getBoolean(request, "publish");
+boolean selectPages = ParamUtil.getBoolean(request, "selectPages");
 boolean schedule = ParamUtil.getBoolean(request, "schedule");
 
 Group selGroup = (Group)request.getAttribute(WebKeys.GROUP);
@@ -106,7 +106,6 @@ long[] selectedPlids = new long[0];
 
 if (selPlid > 0) {
 	selectedPlids = new long[] {selPlid};
-	publish = true;
 }
 else {
 	selectedPlids = GetterUtil.getLongValues(StringUtil.split(SessionTreeJSClicks.getOpenNodes(request, treeKey + "SelectedNode"), ","));
@@ -180,6 +179,16 @@ else {
 	portletURL.setParameter("private", String.valueOf(privateLayout));
 }
 
+PortletURL selectURL = renderResponse.createRenderURL();
+
+selectURL.setWindowState(LiferayWindowState.EXCLUSIVE);
+selectURL.setParameter("struts_action", "/communities/export_pages");
+selectURL.setParameter(Constants.CMD, cmd);
+selectURL.setParameter("pagesRedirect", pagesRedirect);
+selectURL.setParameter("groupId", String.valueOf(selGroupId));
+selectURL.setParameter("selectPages", String.valueOf(!selectPages));
+selectURL.setParameter("schedule", String.valueOf(schedule));
+
 request.setAttribute("edit_pages.jsp-groupId", new Long(selGroupId));
 request.setAttribute("edit_pages.jsp-selPlid", new Long(selPlid));
 request.setAttribute("edit_pages.jsp-privateLayout", new Boolean(privateLayout));
@@ -191,6 +200,8 @@ request.setAttribute("edit_pages.jsp-layoutList", layoutList);
 request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 
 response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
+
+String taglibUrl = "AUI().DialogManager.refreshByChild('#" + renderResponse.getNamespace() + "exportPagesFm');";
 %>
 
 <style type="text/css">
@@ -211,6 +222,22 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 
 	#<portlet:namespace />pane td.col-1 {
 		padding-top: 5px;
+	}
+
+	#<portlet:namespace />exportPagesFm .export-pages-panel-container {
+		margin: 1em 0;
+	}
+
+	#<portlet:namespace />exportPagesFm .export-pages-panel-container .lfr-panel-content{
+		padding: 1em;
+	}
+
+	#<portlet:namespace />exportPagesFm .selected-pages-option .aui-field-content {
+		display: inline;
+	}
+
+	#<portlet:namespace />pane {
+		border: 1px solid #CCC; padding: 5px;
 	}
 </style>
 
@@ -272,105 +299,85 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 		<liferay-ui:message key="<%= se.getMessage() %>" />
 	</liferay-ui:error>
 
-	<%
-	String exportPagesTabsNames = "pages,options";
+	<c:choose>
+		<c:when test="<%= selectPages %>">
+			<div id="<portlet:namespace />pane">
+				<liferay-util:include page="/html/portlet/communities/tree_js.jsp">
+					<liferay-util:param name="selectableTree" value="1" />
+					<liferay-util:param name="treeId" value="<%= treeKey %>" />
+				</liferay-util:include>
+			</div>
 
-	if (!localPublishing) {
-		exportPagesTabsNames += ",remote-options";
-	}
+			<aui:button-row>
+				<aui:button onClick="<%= taglibUrl %>" value="select" />
+			</aui:button-row>
+		</c:when>
+		<c:otherwise>
+			<c:if test="<%= schedule %>">
+				<aui:input label="event-information" name="description" type="text" />
+			</c:if>
 
-	if (proposalId <= 0 && schedule) {
-		exportPagesTabsNames += ",scheduler";
-	}
-	%>
+			<liferay-ui:panel-container cssClass="export-pages-panel-container" extended="<%= true %>" persistState="<%= true %>">
+				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "pages") %>'>
+					<%@ include file="/html/portlet/communities/export_pages_select_pages.jspf" %>
+				</liferay-ui:panel>
 
-	<liferay-ui:tabs
-		names="<%= exportPagesTabsNames %>"
-		param="exportPagesTabs"
-		refresh="<%= false %>"
-	>
-		<liferay-ui:section>
-			<%@ include file="/html/portlet/communities/export_pages_select_pages.jspf" %>
+				<liferay-ui:panel collapsible="<%= true %>" defaultState="closed" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "options") %>'>
+					<%@ include file="/html/portlet/communities/export_pages_options.jspf" %>
+				</liferay-ui:panel>
 
-			<br />
+				<c:if test="<%= !localPublishing %>">
+					<liferay-ui:panel collapsible="<%= true %>" defaultState="closed" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "remote-live-connection-settings") %>'>
+						<%@ include file="/html/portlet/communities/export_pages_remote_options.jspf" %>
+					</liferay-ui:panel>
+				</c:if>
 
-			<%
-			PortletURL selectURL = renderResponse.createRenderURL();
-
-			selectURL.setWindowState(LiferayWindowState.EXCLUSIVE);
-
-			selectURL.setParameter("struts_action", "/communities/export_pages");
-			selectURL.setParameter(Constants.CMD, cmd);
-			selectURL.setParameter("tabs1", tabs1);
-			selectURL.setParameter("pagesRedirect", pagesRedirect);
-			selectURL.setParameter("groupId", String.valueOf(selGroupId));
-
-			String taglibOnClick = "AUI().DialogManager.refreshByChild('#" + renderResponse.getNamespace() + "exportPagesFm');";
-			%>
+				<c:if test="<%= proposalId <= 0 && schedule %>">
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "schedule") %>'>
+						<%@ include file="/html/portlet/communities/export_pages_scheduler.jspf" %>
+					</liferay-ui:panel>
+				</c:if>
+			</liferay-ui:panel-container>
 
 			<c:choose>
-				<c:when test="<%= !publish %>">
+				<c:when test="<%= schedule %>">
+					<aui:button-row>
+						<aui:button name="addButton" onClick='<%= renderResponse.getNamespace() + "schedulePublishEvent();" %>' value="add-event" />
+					</aui:button-row>
 
-					<%
-					selectURL.setParameter("publish", String.valueOf(Boolean.TRUE));
-					%>
-
-					<aui:button name="selectBtn" onClick="<%= taglibOnClick %>" value="select" />
-
-					<aui:button name="publishBtn" style='<%= !results.isEmpty() ? "display: none;" : "" %>' type="submit" value="<%= publishActionKey %>" />
+					<aui:fieldset label="scheduled-events">
+						<div id="<portlet:namespace />scheduledPublishEventsDiv"></div>
+					</aui:fieldset>
 				</c:when>
 				<c:otherwise>
-					<c:if test="<%= selPlid <= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>">
-
-						<%
-						selectURL.setParameter("publish", String.valueOf(Boolean.FALSE));
-						%>
-
-						<aui:button name="changeBtn" onClick="<%= taglibOnClick %>" value="change-selection" />
-					</c:if>
-
-					<aui:button name="publishBtn" type="submit" value="<%= publishActionKey %>" />
+					<aui:button-row>
+						<aui:button disabled="<%= results.isEmpty() %>" name="publishBtn" type="submit" value="<%= publishActionKey %>" />
+					</aui:button-row>
 				</c:otherwise>
 			</c:choose>
-
-			<aui:script use="aui-base,aui-dialog">
-				var dialog = A.DialogManager.findByChild('#<portlet:namespace />exportPagesFm');
-
-				dialog.io.set('uri', '<%= selectURL %>');
-
-				Liferay.provide(
-					window,
-					'<portlet:namespace />refreshDialog',
-					function(){
-						if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-" + publishActionKey + "-these-pages") %>')) {
-							dialog.io.set('uri', '<%= portletURL.toString() + "&etag=0" %>');
-							dialog.io.set('form', {id: '<portlet:namespace />exportPagesFm'});
-
-							dialog.io.after('success', function(event){
-								dialog.close();
-							});
-
-							dialog.io.start();
-						}
-					}
-				);
-			</aui:script>
-
-		</liferay-ui:section>
-		<liferay-ui:section>
-			<%@ include file="/html/portlet/communities/export_pages_options.jspf" %>
-		</liferay-ui:section>
-
-		<c:if test="<%= !localPublishing %>">
-			<liferay-ui:section>
-				<%@ include file="/html/portlet/communities/export_pages_remote_options.jspf" %>
-			</liferay-ui:section>
-		</c:if>
-
-		<c:if test="<%= proposalId <= 0 && schedule %>">
-			<liferay-ui:section>
-				<%@ include file="/html/portlet/communities/export_pages_scheduler.jspf" %>
-			</liferay-ui:section>
-		</c:if>
-	</liferay-ui:tabs>
+		</c:otherwise>
+	</c:choose>
 </aui:form>
+
+<aui:script use="aui-base,aui-dialog">
+	var dialog = A.DialogManager.findByChild('#<portlet:namespace />exportPagesFm');
+
+	dialog.io.set('uri', '<%= selectURL %>');
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />refreshDialog',
+		function(){
+			if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-" + publishActionKey + "-these-pages") %>')) {
+				dialog.io.set('uri', '<%= portletURL.toString() + "&etag=0" %>');
+				dialog.io.set('form', {id: '<portlet:namespace />exportPagesFm'});
+
+				dialog.io.after('success', function(event){
+					dialog.close();
+				});
+
+				dialog.io.start();
+			}
+		}
+	);
+</aui:script>

@@ -14,147 +14,53 @@
  */
 %>
 
-<aui:fieldset style='<%= (proposalId > 0) ? "display: none;" : "" %>'>
-	<c:choose>
-		<c:when test="<%= !publish %>">
+<aui:fieldset cssClass='<%= (proposalId > 0) ? "aui-helper-hidden" : "" %>'>
 
-			<%
-			String taglibOnClick = renderResponse.getNamespace() + "showTabs(); Liferay.LayoutExporter.all({namespace: '" + renderResponse.getNamespace() + "', pane: '#" + renderResponse.getNamespace() + "pane', obj: this, publish: " + publish + "});";
-			%>
+	<%
+	String taglibOnClick = "Liferay.LayoutExporter.all({namespace: '" + renderResponse.getNamespace() + "', pane: '#" + renderResponse.getNamespace() + "pane', obj: this, publish: " + selectPages + "});";
+	%>
 
-			<aui:input checked="<%= results.isEmpty() %>" id="scope_all_pages" label="all-pages" name="scope" type="radio" value="all-pages" onClick="<%= taglibOnClick %>" />
+	<aui:input checked="<%= results.isEmpty() %>" id="scope_all_pages" label="all-pages" name="scope" type="radio" value="all-pages" onClick="<%= taglibOnClick %>" />
 
-			<%
-			taglibOnClick = renderResponse.getNamespace() + "hideTabs(); Liferay.LayoutExporter.selected({namespace: '" + renderResponse.getNamespace() + "', pane: '#" + renderResponse.getNamespace() + "pane', obj: this, publish: " + publish + "});";
-			%>
+	<%
+	taglibOnClick = "Liferay.LayoutExporter.selected({namespace: '" + renderResponse.getNamespace() + "', pane: '#" + renderResponse.getNamespace() + "pane', obj: this, publish: " + selectPages + "});";
+	%>
 
-			<aui:input checked="<%= !results.isEmpty() %>" id="scope_selected_pages" label="selected-pages" name="scope" type="radio" value="selected-pages" onClick="<%= taglibOnClick %>" />
-		</c:when>
-		<c:otherwise>
+	<div>
+		<aui:input checked="<%= !results.isEmpty() %>" cssClass="selected-pages-option" id="scope_selected_pages" label="selected-pages" name="scope" type="radio" value="selected-pages" onClick="<%= taglibOnClick %>" />
 
-			<%
-			String taglibOnClick = "Liferay.LayoutExporter.all({namespace: '" + renderResponse.getNamespace() + "', pane: '#" + renderResponse.getNamespace() + "pane', obj: this, publish: " + publish + "});";
-			%>
-
-			<aui:input checked="<%= results.isEmpty() %>" disabled="<%= selLayout != null %>" id="scope_all_pages" label="all-pages" name="scope" type="radio" value="all-pages" onClick="<%= taglibOnClick %>" />
-
-			<c:if test="<%= !results.isEmpty() %>">
-
-				<%
-				taglibOnClick = "Liferay.LayoutExporter.selected({namespace: '" + renderResponse.getNamespace() + "', pane: '#" + renderResponse.getNamespace() + "pane', obj: this, publish: " + publish + "});";
-				%>
-
-				<aui:input checked="<%= !results.isEmpty() %>" id="scope_selected_pages" label="selected-pages" name="scope" type="radio" value="selected-pages" onClick="<%= taglibOnClick %>" />
-			</c:if>
-		</c:otherwise>
-	</c:choose>
-
-	<div class="<%= results.isEmpty() ? "aui-helper-hidden" : "" %>" id="<portlet:namespace />pane" style="border: 1px solid #CCC; padding: 5px;">
-		<c:choose>
-			<c:when test="<%= !publish %>">
-				<liferay-util:include page="/html/portlet/communities/tree_js.jsp">
-					<liferay-util:param name="selectableTree" value="1" />
-					<liferay-util:param name="treeId" value="<%= treeKey %>" />
-				</liferay-util:include>
-			</c:when>
-			<c:otherwise>
-
-				<%
-				int total = results.size();
-
-				List<String> headerNames = new ArrayList<String>();
-
-				headerNames.add("pages");
-				headerNames.add("type");
-
-				SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, total, portletURL, headerNames, null);
-
-				searchContainer.setTotal(total);
-				searchContainer.setResults(results);
-				searchContainer.setRowChecker(new ExportPageChecker(renderResponse, "left", "top", RowChecker.COLSPAN, "exportPagesFm", RowChecker.ALL_ROW_IDS, RowChecker.ROW_IDS));
-
-				List resultRows = searchContainer.getResultRows();
-
-				for (int i = 0; i < results.size(); i++) {
-					Layout curLayout = (Layout)results.get(i);
-
-					ResultRow row = new ResultRow(curLayout, curLayout.getPrimaryKey(), i);
-
-					row.addJSP("left", "top", 2, "/html/portlet/communities/export_page_options.jsp");
-
-					resultRows.add(row);
-				}
-				%>
-
-				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
-			</c:otherwise>
-		</c:choose>
+		(<liferay-ui:icon message='<%= results.isEmpty() ? "select-pages" : "change-selection" %>' label="<%= true %>" image="pages" url='<%= "javascript:" + taglibUrl %>' />)
 	</div>
 </aui:fieldset>
 
-<aui:script>
-	Liferay.provide(
-		window,
-		'<portlet:namespace />hideTabs',
-		function() {
-			var A = AUI();
+<div id="<portlet:namespace />pane">
 
-			var optionsTab = A.one('#<portlet:namespace />exportPagesTabsoptionsTabsId');
-			var schedulerTab = A.one('#<portlet:namespace />exportPagesTabsschedulerTabsId');
-			var remoteOptionsTab = A.one('#<portlet:namespace />exportPagesTabsremote-optionsTabsId');
+	<%
+	int total = results.size();
 
-			if (optionsTab) {
-				optionsTab.hide();
-			}
+	List<String> headerNames = new ArrayList<String>();
 
-			if (schedulerTab) {
-				schedulerTab.hide();
-			}
+	headerNames.add("pages");
+	headerNames.add("type");
 
-			if (remoteOptionsTab) {
-				remoteOptionsTab.hide();
-			}
-		},
-		['aui-base']
-	);
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, total, portletURL, headerNames, "there-are-no-selected-pages");
 
-	Liferay.provide(
-		window,
-		'<portlet:namespace />showTabs',
-		function() {
-			var A = AUI();
+	searchContainer.setTotal(total);
+	searchContainer.setResults(results);
+	searchContainer.setRowChecker(new ExportPageChecker(renderResponse, "left", "top", RowChecker.COLSPAN, "exportPagesFm", RowChecker.ALL_ROW_IDS, RowChecker.ROW_IDS));
 
-			var optionsTab = A.one('#<portlet:namespace />exportPagesTabsoptionsTabsId');
-			var schedulerTab = A.one('#<portlet:namespace />exportPagesTabsschedulerTabsId');
-			var remoteOptionsTab = A.one('#<portlet:namespace />exportPagesTabsremote-optionsTabsId');
+	List resultRows = searchContainer.getResultRows();
 
-			if (optionsTab) {
-				optionsTab.show();
-			}
+	for (int i = 0; i < results.size(); i++) {
+		Layout curLayout = (Layout)results.get(i);
 
-			if (schedulerTab) {
-				schedulerTab.show();
-			}
+		ResultRow row = new ResultRow(curLayout, curLayout.getPrimaryKey(), i);
 
-			if (remoteOptionsTab) {
-				remoteOptionsTab.show();
-			}
-		},
-		['aui-base']
-	);
-</aui:script>
+		row.addJSP("left", "top", 2, "/html/portlet/communities/export_page_options.jsp");
 
-<aui:script use="aui-base">
-	var selectedPages = A.one('#<portlet:namespace />scope_selected_pages');
-
-	if (selectedPages && selectedPages.get('checked') && <%= !publish %>) {
-		<portlet:namespace />hideTabs();
+		resultRows.add(row);
 	}
-	else if (<%= !publish %>) {
-		var selectBtn = A.one('#<portlet:namespace />selectBtn');
+	%>
 
-		if (selectBtn) {
-			selectBtn.hide();
-		}
-	}
-</aui:script>
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
+</div>

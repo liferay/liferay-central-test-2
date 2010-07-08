@@ -14,11 +14,11 @@
  */
 %>
 
-<liferay-ui:message key="export-the-selected-data-to-the-community-of-a-remote-portal-or-to-another-community-in-the-same-portal" />
+<div class="portlet-msg-info">
+	<liferay-ui:message key="export-the-selected-data-to-the-community-of-a-remote-portal-or-to-another-community-in-the-same-portal" />
+</div>
 
-<br /><br />
-
-<aui:fieldset label="remote-options">
+<aui:fieldset>
 	<aui:input label="remote-host-ip" name="remoteAddress" size="20" type="text" value='<%= liveGroupTypeSettings.getProperty("remoteAddress") %>' />
 
 	<aui:input label="remote-port" name="remotePort" size="10" type="text" value='<%= liveGroupTypeSettings.getProperty("remotePort") %>' />
@@ -29,9 +29,9 @@
 </aui:fieldset>
 
 <aui:fieldset>
-	<aui:input inlineLabel="left" label="use-a-secure-network-connection" name="secureConnection" type="checkbox" value='<%= liveGroupTypeSettings.getProperty("secureConnection") %>' />
+	<aui:input label="use-a-secure-network-connection" name="secureConnection" type="checkbox" value='<%= liveGroupTypeSettings.getProperty("secureConnection") %>' />
 
-	<aui:input helpMessage="delete-missing-layouts-help" inlineLabel="left" label="delete-missing-layouts" name="<%= PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS %>" type="checkbox" />
+	<aui:input helpMessage="delete-missing-layouts-help" label="delete-missing-layouts" name="<%= PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS %>" type="checkbox" />
 
-	<aui:input helpMessage="delete-portlet-data-help" inlineLabel="left" label="delete-portlet-data-before-importing" name="<%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" type="checkbox" />
+	<aui:input helpMessage="delete-portlet-data-help" label="delete-portlet-data-before-importing" name="<%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" type="checkbox" />
 </aui:fieldset>

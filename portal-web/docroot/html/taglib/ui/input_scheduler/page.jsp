@@ -18,8 +18,7 @@
 
 <%@ page import="com.liferay.portlet.calendar.model.CalEvent" %>
 
-<aui:fieldset label="schedule-event">
-	<aui:input name="description" type="text" />
+<aui:fieldset>
 
 	<%
 	Calendar cal = CalendarFactoryUtil.getCalendar(timeZone, locale);
