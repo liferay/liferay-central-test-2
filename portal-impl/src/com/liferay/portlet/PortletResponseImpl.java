@@ -172,7 +172,7 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		if (_headers.containsKey("cookies")) {
 			Cookie[] cookies = (Cookie[])_headers.get("cookies");
 
-			cookies = appendCookie(cookies, cookie);
+			cookies = (Cookie[])ArrayUtil.append(cookies, cookie);
 
 			_headers.put("cookies", cookies);
 		}
@@ -651,16 +651,6 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 
 		request.setAttribute(
 			MimeResponse.MARKUP_HEAD_ELEMENT, markupHeadElements);
-	}
-
-	protected Cookie[] appendCookie(Cookie[] cookies, Cookie cookie) {
-		Cookie[] newArray = new Cookie[cookies.length + 1];
-
-		System.arraycopy(cookies, 0, newArray, 0, cookies.length);
-
-		newArray[newArray.length - 1] = cookie;
-
-		return newArray;
 	}
 
 	protected void init(
