@@ -1435,8 +1435,9 @@ public class StagingImpl implements Staging {
 	}
 
 	protected void setCommonStagingOptions(
-		PortletRequest portletRequest, Group liveGroup,
-		UnicodeProperties typeSettingsProperties) throws Exception {
+			PortletRequest portletRequest, Group liveGroup,
+			UnicodeProperties typeSettingsProperties)
+		throws Exception {
 
 		LayoutExporter.updateLastPublishDate(
 			liveGroup.getPrivateLayoutSet(), 0);
