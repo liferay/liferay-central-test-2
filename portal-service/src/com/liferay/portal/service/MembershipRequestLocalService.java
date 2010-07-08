@@ -31,7 +31,7 @@ import com.liferay.portal.kernel.exception.SystemException;
  * <p>
  * This interface defines the service. The default implementation is
  * {@link
- * com.liferay.portal.service.impl.MembershipRequestLocalServiceImpl}}.
+ * com.liferay.portal.service.impl.MembershipRequestLocalServiceImpl}.
  * Modify methods in that class and rerun ServiceBuilder to populate this class
  * and all other generated classes.
  * </p>

@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
  * <p>
  * This interface defines the service. The default implementation is
  * {@link
- * ${packagePath}.service.impl.${entity.name}${sessionTypeName}ServiceImpl}}.
+ * ${packagePath}.service.impl.${entity.name}${sessionTypeName}ServiceImpl}.
  * Modify methods in that class and rerun ServiceBuilder to populate this class
  * and all other generated classes.
  * </p>

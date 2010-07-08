@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.exception.SystemException;
  * <p>
  * This interface defines the service. The default implementation is
  * {@link
- * com.liferay.portlet.announcements.service.impl.AnnouncementsDeliveryServiceImpl}}.
+ * com.liferay.portlet.announcements.service.impl.AnnouncementsDeliveryServiceImpl}.
  * Modify methods in that class and rerun ServiceBuilder to populate this class
  * and all other generated classes.
  * </p>

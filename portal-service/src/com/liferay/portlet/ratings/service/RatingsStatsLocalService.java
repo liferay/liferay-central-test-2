@@ -31,7 +31,7 @@ import com.liferay.portal.kernel.exception.SystemException;
  * <p>
  * This interface defines the service. The default implementation is
  * {@link
- * com.liferay.portlet.ratings.service.impl.RatingsStatsLocalServiceImpl}}.
+ * com.liferay.portlet.ratings.service.impl.RatingsStatsLocalServiceImpl}.
  * Modify methods in that class and rerun ServiceBuilder to populate this class
  * and all other generated classes.
  * </p>

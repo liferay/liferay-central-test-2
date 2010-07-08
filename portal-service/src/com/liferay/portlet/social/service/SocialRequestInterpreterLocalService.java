@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.exception.SystemException;
  * <p>
  * This interface defines the service. The default implementation is
  * {@link
- * com.liferay.portlet.social.service.impl.SocialRequestInterpreterLocalServiceImpl}}.
+ * com.liferay.portlet.social.service.impl.SocialRequestInterpreterLocalServiceImpl}.
  * Modify methods in that class and rerun ServiceBuilder to populate this class
  * and all other generated classes.
  * </p>
