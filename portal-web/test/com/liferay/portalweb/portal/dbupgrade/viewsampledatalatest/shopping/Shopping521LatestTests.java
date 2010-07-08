@@ -28,7 +28,6 @@ import junit.framework.TestSuite;
  *
  * @author Brian Wing Shun Chan
  */
-
 public class Shopping521LatestTests extends BaseTests {
 
 	public static Test suite() {
