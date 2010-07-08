@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
@@ -26,7 +28,6 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.service.AssetCategoryServiceUtil;
 
 import java.util.ArrayList;
@@ -142,7 +143,7 @@ public abstract class BaseIndexer implements Indexer {
 
 			if (isFilterSearch() && (permissionChecker != null)) {
 				start = 0;
-				end = end + PropsValues.INDEX_FILTER_SEARCH_LIMIT;
+				end = end + INDEX_FILTER_SEARCH_LIMIT;
 			}
 
 			Hits hits = SearchEngineUtil.search(
@@ -590,6 +591,9 @@ public abstract class BaseIndexer implements Indexer {
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
 	}
+
+	public static final int INDEX_FILTER_SEARCH_LIMIT = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.INDEX_FILTER_SEARCH_LIMIT));
 
 	private static final boolean _FILTER_SEARCH = false;
 
