@@ -1544,9 +1544,9 @@ AUI().add(
 				var instance = this;
 
 				var journalMessage = A.one(selector);
-				var className = 'portlet-msg-' + (type || 'success');
+				var className = 'save-structure-message portlet-msg-' + (type || 'success');
 
-				journalMessage.removeClass().addClass(className);
+				journalMessage.attr('className', className);
 				journalMessage.show();
 
 				instance.editContainerContextPanel.refreshAlign();
