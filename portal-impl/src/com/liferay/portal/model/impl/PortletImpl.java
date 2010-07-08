@@ -2261,7 +2261,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			}
 
 			if (PortletPermissionUtil.contains(
-					permissionChecker, getPortletId(),
+					permissionChecker, getRootPortletId(),
 					ActionKeys.ADD_TO_PAGE)) {
 
 				return true;
