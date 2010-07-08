@@ -22,6 +22,8 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
+import com.liferay.util.Encryptor;
 import com.liferay.util.PwdGenerator;
 
 import java.util.HashMap;
@@ -54,7 +56,15 @@ public class SessionAuthToken implements AuthToken {
 		String sessionAuthenticationToken = getSessionAuthenticationToken(
 			request, _PORTAL);
 
-		if (!requestAuthenticationToken.equals(sessionAuthenticationToken)) {
+		String sharedSecret = Encryptor.digest(
+			PropsValues.AUTH_TOKEN_SHARED_SECRET);
+
+		String requestSharedSecret = ParamUtil.getString(
+			request, "p_auth_secret");
+
+		if (!requestAuthenticationToken.equals(sessionAuthenticationToken) &&
+			!requestSharedSecret.equals(sharedSecret)) {
+
 			throw new PrincipalException("Invalid authentication token");
 		}
 	}

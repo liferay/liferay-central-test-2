@@ -133,6 +133,8 @@ public interface PropsKeys {
 
 	public static final String AUTH_TOKEN_IMPL = "auth.token.impl";
 
+	public static final String AUTH_TOKEN_SHARED_SECRET = "auth.token.shared.secret";
+
 	public static final String AUTO_DEPLOY_BLACKLIST_THRESHOLD = "auto.deploy.blacklist.threshold";
 
 	public static final String AUTO_DEPLOY_CUSTOM_PORTLET_XML = "auto.deploy.custom.portlet.xml";
