@@ -621,7 +621,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 				String deleteButtonLabel = "delete-version";
 
-				if (article.isDraft()) {
+				if ((article != null) && article.isDraft()) {
 					deleteButtonLabel = "discard-draft";
 				}
 				%>
