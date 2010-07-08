@@ -500,6 +500,12 @@ public class ResourceActionsUtil {
 		}
 	}
 
+	private void _checkModelActions(List<String> actions) {
+		if (!actions.contains(ActionKeys.PERMISSIONS)) {
+			actions.add(ActionKeys.PERMISSIONS);
+		}
+	}
+
 	private void _checkPortletActions(List<String> actions) {
 		if (!actions.contains(ActionKeys.ACCESS_IN_CONTROL_PANEL) &&
 			!actions.contains(ActionKeys.ADD_TO_PAGE)) {
@@ -1012,7 +1018,10 @@ public class ResourceActionsUtil {
 			portletResources.add(portletName);
 		}
 
-		_readSupportsActions(modelResourceElement, _modelResourceActions, name);
+		List<String> supportsActions = _readSupportsActions(
+			modelResourceElement, _modelResourceActions, name);
+
+		_checkModelActions(supportsActions);
 
 		_readCommunityDefaultActions(
 			modelResourceElement, _modelResourceCommunityDefaultActions,  name);

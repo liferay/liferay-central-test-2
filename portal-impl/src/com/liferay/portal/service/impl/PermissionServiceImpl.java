@@ -28,6 +28,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerBag;
+import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.base.PermissionServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
@@ -384,11 +385,18 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 				permissionChecker, plid, portletId, ActionKeys.CONFIGURATION);
 		}
 		else if (!permissionChecker.hasPermission(
-					groupId, name, primKey, ActionKeys.PERMISSIONS) &&
-				 !permissionChecker.hasPermission(
-					groupId, name, primKey, ActionKeys.DEFINE_PERMISSIONS)) {
+					groupId, name, primKey, ActionKeys.PERMISSIONS)) {
 
-			throw new PrincipalException();
+			List<String> resourceActions =
+				ResourceActionsUtil.getResourceActions(name);
+
+			if (!resourceActions.contains(ActionKeys.DEFINE_PERMISSIONS) ||
+				!permissionChecker.hasPermission(
+						groupId, name, primKey,
+						ActionKeys.DEFINE_PERMISSIONS)) {
+
+				throw new PrincipalException();
+			}
 		}
 	}
 
