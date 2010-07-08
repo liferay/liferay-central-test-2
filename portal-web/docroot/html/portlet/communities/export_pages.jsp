@@ -332,7 +332,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 				</aui:fieldset>
 			</c:if>
 
-			<div id="<portlet:namespace />PublishOptions">
+			<div id="<portlet:namespace />publishOptions">
 				<c:if test="<%= schedule %>">
 					<aui:input label="event-information" name="description" type="text" />
 				</c:if>
@@ -404,7 +404,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 		var addEventButton = A.one('#<portlet:namespace />addButton');
 
 		var allEvents = A.one('#<portlet:namespace />exportPagesFm .published-events');
-		var publishOptions = A.one('#<portlet:namespace />PublishOptions');
+		var publishOptions = A.one('#<portlet:namespace />publishOptions');
 
 		toolbarViewButton.one('a').on(
 			'click', function(event) {
