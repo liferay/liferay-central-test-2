@@ -285,7 +285,7 @@ public class SourceFormatter {
 
 		directoryScanner.setBasedir(basedir);
 		directoryScanner.setIncludes(new String[] {"**\\b*.xml"});
-		directoryScanner.setExcludes(new String[] {"**\\tools\\tck\\**"});
+		directoryScanner.setExcludes(new String[] {"**\\tools\\**"});
 
 		List<String> fileNames = _sourceFormatterHelper.scanForFiles(
 			directoryScanner);
@@ -676,7 +676,7 @@ public class SourceFormatter {
 		directoryScanner.setExcludes(
 			new String[] {
 				"**\\portal\\aui\\**", "**\\bin\\**", "**\\null.jsp",
-				"**\\tmp\\**", "**\\tools\\tck\\**"
+				"**\\tmp\\**", "**\\tools\\**"
 			});
 		directoryScanner.setIncludes(
 			new String[] {"**\\*.jsp", "**\\*.jspf", "**\\*.vm"});
@@ -1072,7 +1072,7 @@ public class SourceFormatter {
 				"**\\portal-web\\classes\\**\\*.java",
 				"**\\portal-web\\test\\**\\*Test.java",
 				"**\\portlet\\**\\service\\**", "**\\tmp\\**",
-				"**\\tools\\ext_tmpl\\**",  "**\\tools\\tck\\**"
+				"**\\tools\\**"
 			});
 		directoryScanner.setIncludes(new String[] {"**\\*.java"});
 
