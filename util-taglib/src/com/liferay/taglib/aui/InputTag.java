@@ -54,6 +54,10 @@ public class InputTag extends IncludeTag {
 		_field = field;
 	}
 
+	public void setFieldParam(String fieldParam) {
+		_fieldParam = fieldParam;
+	}
+
 	public void setFirst(boolean first) {
 		_first = first;
 	}
@@ -121,6 +125,7 @@ public class InputTag extends IncludeTag {
 		_cssClass = null;
 		_disabled = false;
 		_field = null;
+		_fieldParam = null;
 		_first = false;
 		_helpMessage = null;
 		_id = null;
@@ -192,6 +197,7 @@ public class InputTag extends IncludeTag {
 		request.setAttribute(
 			"aui:input:dynamicAttributes", getDynamicAttributes());
 		request.setAttribute("aui:input:field", field);
+		request.setAttribute("aui:input:fieldParam", _fieldParam);
 		request.setAttribute("aui:input:first", String.valueOf(_first));
 		request.setAttribute("aui:input:helpMessage", _helpMessage);
 		request.setAttribute("aui:input:id", id);
@@ -220,6 +226,7 @@ public class InputTag extends IncludeTag {
 	private String _cssClass;
 	private boolean _disabled;
 	private String _field;
+	private String _fieldParam;
 	private boolean _first;
 	private String _helpMessage;
 	private String _id;

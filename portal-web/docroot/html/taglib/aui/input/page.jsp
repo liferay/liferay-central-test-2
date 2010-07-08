@@ -26,6 +26,7 @@ String cssClass = GetterUtil.getString((String)request.getAttribute("aui:input:c
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("aui:input:disabled"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:input:dynamicAttributes");
 String field = GetterUtil.getString((String)request.getAttribute("aui:input:field"));
+String fieldParam = GetterUtil.getString((String)request.getAttribute("aui:input:fieldParam"));
 boolean first = GetterUtil.getBoolean((String)request.getAttribute("aui:input:first"));
 String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:input:helpMessage"));
 String id = namespace + GetterUtil.getString((String)request.getAttribute("aui:input:id"));
@@ -62,8 +63,6 @@ String forLabel = id;
 
 if ((model != null) && Validator.isNull(type)) {
 	baseType = ModelHintsUtil.getType(model.getName(), field);
-
-	String fieldParam = (String)dynamicAttributes.get("fieldParam");
 
 	if (Validator.isNotNull(fieldParam)) {
 		forLabel = namespace + fieldParam;
@@ -151,7 +150,7 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 			defaultValue="<%= value %>"
 			disabled="<%= disabled %>"
 			field="<%= field %>"
-			fieldParam='<%= (String)dynamicAttributes.get("fieldParam") %>'
+			fieldParam='<%= fieldParam %>'
 			format='<%= (Format)dynamicAttributes.get("format") %>'
 			formName='<%= (String)dynamicAttributes.get("formName") %>'
 			model="<%= model %>"
@@ -224,8 +223,6 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 		}
 		else if (type.equals("hidden") || type.equals("text") || type.equals("textarea")) {
 			valueString = BeanParamUtil.getStringSilent(bean, request, name);
-
-			String fieldParam = (String)dynamicAttributes.get("fieldParam");
 
 			if (Validator.isNotNull(fieldParam)) {
 				String fieldParamValue = request.getParameter(fieldParam);
