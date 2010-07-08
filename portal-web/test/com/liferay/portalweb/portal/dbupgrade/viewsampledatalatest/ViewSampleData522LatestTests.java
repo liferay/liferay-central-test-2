@@ -25,6 +25,7 @@ import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.groups.Groups
 import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.login.LoginTests;
 import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.organizations.Organizations522LatestTests;
 import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.portletpermissions.PortletPermissions522LatestTests;
+import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.shopping.Shopping522LatestTests;
 import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.social.Social522LatestTests;
 import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.tags.Tags522LatestTests;
 import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.webcontent.WebContent522LatestTests;
@@ -54,6 +55,7 @@ public class ViewSampleData522LatestTests extends BaseTests {
 		testSuite.addTest(Groups522LatestTests.suite());
 		testSuite.addTest(Organizations522LatestTests.suite());
 		testSuite.addTest(PortletPermissions522LatestTests.suite());
+		testSuite.addTest(Shopping522LatestTests.suite());
 		testSuite.addTest(Social522LatestTests.suite());
 		testSuite.addTest(Tags522LatestTests.suite());
 		testSuite.addTest(WebContent522LatestTests.suite());

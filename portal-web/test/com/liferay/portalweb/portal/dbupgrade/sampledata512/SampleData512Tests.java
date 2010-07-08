@@ -24,6 +24,7 @@ import com.liferay.portalweb.portal.dbupgrade.sampledata512.expando.ExpandoTests
 import com.liferay.portalweb.portal.dbupgrade.sampledata512.groups.GroupsTests;
 import com.liferay.portalweb.portal.dbupgrade.sampledata512.organizations.OrganizationsTests;
 import com.liferay.portalweb.portal.dbupgrade.sampledata512.portletpermissions.PortletPermissionsTests;
+import com.liferay.portalweb.portal.dbupgrade.sampledata512.shopping.ShoppingTests;
 import com.liferay.portalweb.portal.dbupgrade.sampledata512.social.SocialTests;
 import com.liferay.portalweb.portal.dbupgrade.sampledata512.tags.TagsTests;
 import com.liferay.portalweb.portal.dbupgrade.sampledata512.webcontent.WebContentTests;
@@ -51,6 +52,7 @@ public class SampleData512Tests extends BaseTests {
 		testSuite.addTest(GroupsTests.suite());
 		testSuite.addTest(OrganizationsTests.suite());
 		testSuite.addTest(PortletPermissionsTests.suite());
+		testSuite.addTest(ShoppingTests.suite());
 		testSuite.addTest(TagsTests.suite());
 		testSuite.addTest(WebContentTests.suite());
 		testSuite.addTest(WikiTests.suite());
