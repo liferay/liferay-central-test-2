@@ -609,6 +609,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 				String saveButtonLabel = "save";
 				String publishButtonLabel = "publish";
+				String deleteButtonLabel = "delete-version";
 
 				if ((article == null) || article.isDraft() || article.isApproved()) {
 					saveButtonLabel = "save-as-draft";
@@ -616,6 +617,10 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 				if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, JournalArticle.class.getName())) {
 					publishButtonLabel = "submit-for-publication";
+				}
+
+				if (article.isDraft()) {
+					deleteButtonLabel = "discard-draft";
 				}
 				%>
 
@@ -638,7 +643,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				</c:if>
 
 				<c:if test="<%= (article != null) && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.DELETE) %>">
-					<aui:button onClick='<%= renderResponse.getNamespace() + "deleteArticle();" %>' value="delete" />
+					<aui:button onClick='<%= renderResponse.getNamespace() + "deleteArticle();" %>' value="<%= deleteButtonLabel %>" />
 				</c:if>
 
 				<aui:button onClick="<%= redirect %>" type="cancel" />
@@ -664,7 +669,17 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	}
 
 	function <portlet:namespace />deleteArticle() {
-		if (confirm("<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-deactivate-this") %>")) {
+
+		<c:choose>
+			<c:when test="<%= (article != null) && article.isDraft() %>">
+				var confirmMsg = "<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-discard-this-draft") %>";
+			</c:when>
+			<c:otherwise>
+				var confirmMsg = "<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-this-article-version") %>";	
+			</c:otherwise>
+		</c:choose>
+
+		if (confirm(confirmMsg)) {
 			document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
 			submitForm(document.<portlet:namespace />fm1);
 		}
