@@ -47,6 +47,11 @@ if (image != null) {
 }
 %>
 
+<liferay-ui:header
+	backURL="<%= redirect %>"
+	title='<%= image != null ? image.getName() : "new-image" %>'
+/>
+
 <c:if test="<%= image == null %>">
 	<div class="lfr-dynamic-uploader">
 		<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
@@ -84,11 +89,6 @@ if (image != null) {
 	<aui:input name="uploadProgressId" type="hidden" value="<%= uploadProgressId %>" />
 	<aui:input name="imageId" type="hidden" value="<%= imageId %>" />
 	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
-
-	<liferay-ui:header
-		backURL="<%= redirect %>"
-		title='<%= image != null ? image.getName() : "new-image" %>'
-	/>
 
 	<liferay-ui:error exception="<%= DuplicateImageNameException.class %>" message="please-enter-a-unique-image-name" />
 
