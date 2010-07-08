@@ -592,10 +592,10 @@ public abstract class BaseIndexer implements Indexer {
 		throws Exception {
 	}
 
+	private static final boolean _FILTER_SEARCH = false;
+
 	public static final int INDEX_FILTER_SEARCH_LIMIT = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.INDEX_FILTER_SEARCH_LIMIT));
-
-	private static final boolean _FILTER_SEARCH = false;
 
 	private static final String[] _KEYWORDS_FIELDS = {
 		Field.ASSET_TAG_NAMES, Field.COMMENTS, Field.CONTENT, Field.DESCRIPTION,

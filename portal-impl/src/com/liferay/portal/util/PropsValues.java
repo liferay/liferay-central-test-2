@@ -476,8 +476,6 @@ public class PropsValues {
 
 	public static final String IMAGE_HOOK_IMPL = PropsUtil.get(PropsKeys.IMAGE_HOOK_IMPL);
 
-	public static final int INDEX_FILTER_SEARCH_LIMIT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.INDEX_FILTER_SEARCH_LIMIT));
-
 	public static final int INDEX_ON_STARTUP_DELAY = GetterUtil.getInteger(PropsUtil.get(PropsKeys.INDEX_ON_STARTUP_DELAY));
 
 	public static final boolean INDEX_ON_UPGRADE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.INDEX_ON_UPGRADE));
