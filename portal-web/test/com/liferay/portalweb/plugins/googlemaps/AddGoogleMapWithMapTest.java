@@ -53,7 +53,7 @@ public class AddGoogleMapWithMapTest extends BaseTestCase {
 		selenium.type("_86_mapAddress",
 			RuntimeVariables.replace("17730 Antonio Ave, Cerritos, CA, 90703"));
 		selenium.type("_86_directionsAddress", RuntimeVariables.replace(""));
-		selenium.clickAt("//form/input[2]", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
