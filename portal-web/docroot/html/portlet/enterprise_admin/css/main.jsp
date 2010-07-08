@@ -345,6 +345,10 @@
 	width: 7px;
 }
 
+.portlet-enterprise-admin .permission-group {
+	margin: 10px 0 0 10px;
+}
+
 .portlet-enterprise-admin .permission-scopes .permission-scope-delete:hover span {
 	background-position: 0 100%;
 }

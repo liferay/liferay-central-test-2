@@ -101,39 +101,92 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 					</c:if>
 
 					<c:if test="<%= !addToPageRoles.isEmpty() %>">
-						<liferay-ui:message key="the-users-with-the-following-roles-can-add-this-portlet-to-the-pages-they-manage" />
+						<div class="permission-group">
+							<b><liferay-ui:message key="action.ADD_TO_PAGE" /></b>: <liferay-ui:message key="the-users-with-the-following-roles-can-add-this-portlet-to-the-pages-they-manage" />
 
-						<ul>
+							<liferay-ui:search-container >
+								<liferay-ui:search-container-results
+									results="<%= addToPageRoles %>"
+								/>
 
-							<%
-							for (Role role : addToPageRoles) {
-							%>
+								<liferay-ui:search-container-row
+									className="com.liferay.portal.model.Role"
+									keyProperty="name"
+									modelVar="role"
 
-									<li><%= role.getName() %></li>
+								>
+									<liferay-util:param name="className" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
+									<liferay-util:param name="classHoverName" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
 
-							<%
-							}
-							%>
+									<liferay-ui:search-container-column-text
+										name="name"
+										property="name"
+									/>
 
-						</ul>
+									<liferay-ui:search-container-column-text
+										align="right"
+										name=""
+									>
+										<liferay-portlet:renderURL portletName="<%= PortletKeys.ENTERPRISE_ADMIN_ROLES %>" var="editURL">
+											<liferay-portlet:param name="struts_action" value="/enterprise_admin_roles/edit_role_permissions" />
+											<liferay-portlet:param name="cmd" value="edit" />
+											<liferay-portlet:param name="tags1" value="roles" />
+											<liferay-portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
+											<liferay-portlet:param name="portletResource" value="<%= portlet.getPortletId() %>" />
+											<liferay-portlet:param name="showModelResources" value="0" />
+										</liferay-portlet:renderURL>
+
+										<liferay-ui:icon image="edit" label="true" message="change" url="<%= editURL %>" />
+									</liferay-ui:search-container-column-text>
+								</liferay-ui:search-container-row>
+
+								<liferay-ui:search-iterator type="more" />
+							</liferay-ui:search-container>
+						</div>
 					</c:if>
 
 					<c:if test="<%= !accessInControlPanelRoles.isEmpty() %>">
-						<liferay-ui:message key="the-users-with-the-following-roles-can-access-this-portlet-in-the-control-panel" />
+						<div class="permission-group">
+							<strong><liferay-ui:message key="action.ACCESS_IN_CONTROL_PANEL" /></strong>: <liferay-ui:message key="the-users-with-the-following-roles-can-access-this-portlet-in-the-control-panel" />
 
-						<ul>
+							<liferay-ui:search-container >
+								<liferay-ui:search-container-results
+									results="<%= accessInControlPanelRoles %>"
+								/>
 
-							<%
-							for (Role role : accessInControlPanelRoles) {
-							%>
+								<liferay-ui:search-container-row
+									className="com.liferay.portal.model.Role"
+									keyProperty="name"
+									modelVar="role"
+								>
+									<liferay-util:param name="className" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
+									<liferay-util:param name="classHoverName" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
 
-									<li><%= role.getName() %></li>
+									<liferay-ui:search-container-column-text
+										name="name"
+										property="name"
+									/>
 
-							<%
-							}
-							%>
+									<liferay-ui:search-container-column-text
+										align="right"
+										name=""
+									>
+										<liferay-portlet:renderURL portletName="<%= PortletKeys.ENTERPRISE_ADMIN_ROLES %>" var="editURL">
+											<liferay-portlet:param name="struts_action" value="/enterprise_admin_roles/edit_role_permissions" />
+											<liferay-portlet:param name="cmd" value="edit" />
+											<liferay-portlet:param name="tags1" value="roles" />
+											<liferay-portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
+											<liferay-portlet:param name="portletResource" value="<%= portlet.getPortletId() %>" />
+											<liferay-portlet:param name="showModelResources" value="0" />
+										</liferay-portlet:renderURL>
 
-						</ul>
+										<liferay-ui:icon image="edit" label="true" message="change" url="<%= editURL %>" />
+									</liferay-ui:search-container-column-text>
+								</liferay-ui:search-container-row>
+
+								<liferay-ui:search-iterator type="more" />
+							</liferay-ui:search-container>
+						</div>
 					</c:if>
 
 					<c:if test="<%= addToPageRoles.isEmpty() && accessInControlPanelRoles.isEmpty() %>">
