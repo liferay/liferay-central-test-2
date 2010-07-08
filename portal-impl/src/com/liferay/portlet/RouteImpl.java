@@ -167,8 +167,7 @@ public class RouteImpl implements Route {
 		new HashMap<String, StringParser>();
 	private List<String> _ignoredParameters = new ArrayList<String>();
 	private Map<String, String> _implicitParameters =
-	new HashMap<String, String>();
-
+		new HashMap<String, String>();
 	private Map<String, String> _overriddenParameters =
 		new HashMap<String, String>();
 	private StringParser _stringParser;
