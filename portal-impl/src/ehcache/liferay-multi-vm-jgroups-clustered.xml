@@ -1,0 +1,166 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd" name="liferay-multi-vm-jgroups-clustered" updateCheck="false">
+
+	<!--
+	Caches in this file can be clustered and are configured to be clustered.
+	-->
+
+	<diskStore path="ehcache.disk.store.dir/liferay-multi-vm" />
+	<cacheManagerPeerProviderFactory
+		class="com.liferay.portal.cache.ehcache.JGroupsCacheManagerPeerProviderFactory"
+		properties="portalPropertyKey=ehcache.multi.vm.config.location.peerProviderProperties"
+		propertySeparator=","
+	/>
+	<defaultCache
+		maxElementsInMemory="10000"
+		eternal="false"
+		timeToIdleSeconds="600"
+		overflowToDisk="false"
+	>
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator=","
+		/>
+		<bootstrapCacheLoaderFactory class="com.liferay.portal.cache.ehcache.JGroupsBootstrapCacheLoaderFactory" />
+	</defaultCache>
+	<cache
+		name="com.liferay.portal.kernel.dao.orm.EntityCache"
+		maxElementsInMemory="10000"
+		eternal="false"
+		timeToIdleSeconds="600"
+		overflowToDisk="false"
+	>
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator=","
+		/>
+		<bootstrapCacheLoaderFactory class="com.liferay.portal.cache.ehcache.JGroupsBootstrapCacheLoaderFactory" />
+	</cache>
+	<cache
+		name="com.liferay.portal.kernel.dao.orm.FinderCache"
+		maxElementsInMemory="10000"
+		eternal="false"
+		timeToIdleSeconds="600"
+		overflowToDisk="false"
+	>
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator=","
+		/>
+		<bootstrapCacheLoaderFactory class="com.liferay.portal.cache.ehcache.JGroupsBootstrapCacheLoaderFactory" />
+	</cache>
+	<cache
+		name="com.liferay.portal.security.permission.PermissionCacheUtil"
+		maxElementsInMemory="10000"
+		eternal="false"
+		timeToIdleSeconds="600"
+		overflowToDisk="false"
+	>
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator=","
+		/>
+		<bootstrapCacheLoaderFactory class="com.liferay.portal.cache.ehcache.JGroupsBootstrapCacheLoaderFactory" />
+	</cache>
+	<cache
+		name="com.liferay.portal.service.impl.PortletLocalServiceImpl"
+		maxElementsInMemory="0"
+		eternal="true"
+		timeToIdleSeconds="0"
+		overflowToDisk="false"
+	>
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator=","
+		/>
+		<bootstrapCacheLoaderFactory class="com.liferay.portal.cache.ehcache.JGroupsBootstrapCacheLoaderFactory" />
+	</cache>
+	<cache
+		name="com.liferay.portal.service.impl.PortletPreferencesLocalUtil"
+		maxElementsInMemory="10000"
+		eternal="false"
+		timeToIdleSeconds="600"
+		overflowToDisk="false"
+	>
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator=","
+		/>
+		<bootstrapCacheLoaderFactory class="com.liferay.portal.cache.ehcache.JGroupsBootstrapCacheLoaderFactory" />
+	</cache>
+	<cache
+		name="com.liferay.portal.servlet.filters.cache.CacheUtil"
+		maxElementsInMemory="1000"
+		eternal="false"
+		timeToLiveSeconds="3600"
+		overflowToDisk="false"
+	>
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator=","
+		/>
+		<bootstrapCacheLoaderFactory class="com.liferay.portal.cache.ehcache.JGroupsBootstrapCacheLoaderFactory" />
+	</cache>
+	<cache
+		name="com.liferay.portal.velocity.LiferayResourceCacheUtil"
+		maxElementsInMemory="10000"
+		eternal="false"
+		timeToIdleSeconds="3600"
+		overflowToDisk="false"
+	>
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator=","
+		/>
+		<bootstrapCacheLoaderFactory class="com.liferay.portal.cache.ehcache.JGroupsBootstrapCacheLoaderFactory" />
+	</cache>
+	<cache
+		name="com.liferay.portlet.calendar.service.impl.CalEventLocalUtil"
+		maxElementsInMemory="10000"
+		eternal="false"
+		timeToIdleSeconds="600"
+		overflowToDisk="false"
+	>
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator=","
+		/>
+		<bootstrapCacheLoaderFactory class="com.liferay.portal.cache.ehcache.JGroupsBootstrapCacheLoaderFactory" />
+	</cache>
+	<cache
+		name="com.liferay.portlet.journalcontent.util.JournalContent"
+		maxElementsInMemory="1000"
+		eternal="false"
+		timeToLiveSeconds="3600"
+		overflowToDisk="false"
+	>
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator=","
+		/>
+		<bootstrapCacheLoaderFactory class="com.liferay.portal.cache.ehcache.JGroupsBootstrapCacheLoaderFactory" />
+	</cache>
+	<cache
+		name="com.liferay.portlet.social.service.impl.SocialEquitySettingLocalServiceImpl"
+		maxElementsInMemory="10000"
+		eternal="false"
+		timeToIdleSeconds="600"
+		overflowToDisk="false"
+	>
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator=","
+		/>
+		<bootstrapCacheLoaderFactory class="com.liferay.portal.cache.ehcache.JGroupsBootstrapCacheLoaderFactory" />
+	</cache>
+</ehcache>
