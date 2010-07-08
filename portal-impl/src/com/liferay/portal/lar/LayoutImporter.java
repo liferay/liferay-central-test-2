@@ -630,7 +630,6 @@ public class LayoutImporter {
 		throws Exception {
 
 		long groupId = context.getGroupId();
-		long sourceGroupId = context.getSourceGroupId();
 
 		String layoutUuid = GetterUtil.getString(
 			layoutElement.attributeValue("layout-uuid"));
