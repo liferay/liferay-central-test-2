@@ -4539,7 +4539,7 @@ public class PortalImpl implements Portal {
 	private String[] _allSystemOrganizationRoles;
 	private String[] _allSystemRoles;
 	private Pattern _bannedRresourceIdPattern = Pattern.compile(
-		PropsUtil.get(PropsKeys.PORTLET_RESOURCE_ID_BANNED_PATHS_REGEXP));
+		PropsValues.PORTLET_RESOURCE_ID_BANNED_PATHS_REGEXP);
 	private String _cdnHostHttp;
 	private String _cdnHostHttps;
 	private String _computerAddress;
