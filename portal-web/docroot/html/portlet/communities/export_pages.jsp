@@ -314,47 +314,61 @@ String taglibUrl = "AUI().DialogManager.refreshByChild('#" + renderResponse.getN
 		</c:when>
 		<c:otherwise>
 			<c:if test="<%= schedule %>">
-				<aui:input label="event-information" name="description" type="text" />
+				<div class="lfr-portlet-toolbar">
+					<span class="lfr-toolbar-button view-button">
+						<aui:a href='javascript:;' label="view-all" />
+					</span>
+
+					<span class="lfr-toolbar-button add-button current">
+						<aui:a href='javascript:;' label="add" />
+					</span>
+				</div>
+
+				<aui:fieldset cssClass="published-events aui-helper-hidden" label="scheduled-events">
+					<div id="<portlet:namespace />scheduledPublishEventsDiv"></div>
+				</aui:fieldset>
 			</c:if>
 
-			<liferay-ui:panel-container cssClass="export-pages-panel-container" extended="<%= true %>" persistState="<%= true %>">
-				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "pages") %>'>
-					<%@ include file="/html/portlet/communities/export_pages_select_pages.jspf" %>
-				</liferay-ui:panel>
-
-				<liferay-ui:panel collapsible="<%= true %>" defaultState="closed" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "options") %>'>
-					<%@ include file="/html/portlet/communities/export_pages_options.jspf" %>
-				</liferay-ui:panel>
-
-				<c:if test="<%= !localPublishing %>">
-					<liferay-ui:panel collapsible="<%= true %>" defaultState="closed" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "remote-live-connection-settings") %>'>
-						<%@ include file="/html/portlet/communities/export_pages_remote_options.jspf" %>
-					</liferay-ui:panel>
+			<div id="<portlet:namespace />PublishOptions">
+				<c:if test="<%= schedule %>">
+					<aui:input label="event-information" name="description" type="text" />
 				</c:if>
-
-				<c:if test="<%= proposalId <= 0 && schedule %>">
-					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "schedule") %>'>
-						<%@ include file="/html/portlet/communities/export_pages_scheduler.jspf" %>
+				
+				<liferay-ui:panel-container cssClass="export-pages-panel-container" extended="<%= true %>" persistState="<%= true %>">
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "pages") %>'>
+						<%@ include file="/html/portlet/communities/export_pages_select_pages.jspf" %>
 					</liferay-ui:panel>
-				</c:if>
-			</liferay-ui:panel-container>
 
-			<c:choose>
-				<c:when test="<%= schedule %>">
-					<aui:button-row>
-						<aui:button name="addButton" onClick='<%= renderResponse.getNamespace() + "schedulePublishEvent();" %>' value="add-event" />
-					</aui:button-row>
+					<liferay-ui:panel collapsible="<%= true %>" defaultState="closed" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "options") %>'>
+						<%@ include file="/html/portlet/communities/export_pages_options.jspf" %>
+					</liferay-ui:panel>
 
-					<aui:fieldset label="scheduled-events">
-						<div id="<portlet:namespace />scheduledPublishEventsDiv"></div>
-					</aui:fieldset>
-				</c:when>
-				<c:otherwise>
-					<aui:button-row>
-						<aui:button disabled="<%= results.isEmpty() %>" name="publishBtn" type="submit" value="<%= publishActionKey %>" />
-					</aui:button-row>
-				</c:otherwise>
-			</c:choose>
+					<c:if test="<%= !localPublishing %>">
+						<liferay-ui:panel collapsible="<%= true %>" defaultState="closed" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "remote-live-connection-settings") %>'>
+							<%@ include file="/html/portlet/communities/export_pages_remote_options.jspf" %>
+						</liferay-ui:panel>
+					</c:if>
+
+					<c:if test="<%= proposalId <= 0 && schedule %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "schedule") %>'>
+							<%@ include file="/html/portlet/communities/export_pages_scheduler.jspf" %>
+						</liferay-ui:panel>
+					</c:if>
+				</liferay-ui:panel-container>
+
+				<c:choose>
+					<c:when test="<%= schedule %>">
+						<aui:button-row>
+							<aui:button name="addButton" value="add-event" />
+						</aui:button-row>
+					</c:when>
+					<c:otherwise>
+						<aui:button-row>
+							<aui:button disabled="<%= results.isEmpty() %>" name="publishBtn" type="submit" value="<%= publishActionKey %>" />
+						</aui:button-row>
+					</c:otherwise>
+				</c:choose>
+			</div>
 		</c:otherwise>
 	</c:choose>
 </aui:form>
@@ -380,4 +394,42 @@ String taglibUrl = "AUI().DialogManager.refreshByChild('#" + renderResponse.getN
 			}
 		}
 	);
+
+	<c:if test="<%= schedule %>">
+		var toolbarViewButton = A.one('#<portlet:namespace />exportPagesFm .view-button');
+		var toolbarAddButton = A.one('#<portlet:namespace />exportPagesFm .add-button');
+		var addEventButton = A.one('#<portlet:namespace />addButton');
+
+		var allEvents = A.one('#<portlet:namespace />exportPagesFm .published-events');
+		var publishOptions = A.one('#<portlet:namespace />PublishOptions');
+
+		toolbarViewButton.one('a').on(
+			'click', function(event) {
+				toolbarAddButton.removeClass('current');
+				toolbarViewButton.addClass('current');
+				allEvents.show();
+				publishOptions.hide();
+			}
+		);
+
+		addEventButton.on(
+			'click', function(event) {
+				<%= renderResponse.getNamespace() %>schedulePublishEvent();
+
+				toolbarViewButton.addClass('current');
+				toolbarAddButton.removeClass('current');
+				allEvents.show();
+				publishOptions.hide();
+			}
+		);
+
+		toolbarAddButton.one('a').on(
+			'click', function(event) {
+				toolbarViewButton.removeClass('current');
+				toolbarAddButton.addClass('current');
+				allEvents.hide();
+				publishOptions.show();
+			}
+		);
+	</c:if>
 </aui:script>
