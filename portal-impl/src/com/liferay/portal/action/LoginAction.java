@@ -26,6 +26,7 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.login.util.LoginUtil;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
@@ -54,10 +55,20 @@ public class LoginAction extends Action {
 			HttpServletResponse response)
 		throws Exception {
 
-		HttpSession session = request.getSession();
-
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
+
+		String login = ParamUtil.getString(request, "login");
+		String password = ParamUtil.getString(request, "password");
+		boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
+		String authType = ParamUtil.getString(request, "authType");
+
+		if (Validator.isNotNull(login) && Validator.isNotNull(password)) {
+			LoginUtil.login(
+				request, response, login, password, rememberMe, authType);
+		}
+
+		HttpSession session = request.getSession();
 
 		if (session.getAttribute("j_username") != null &&
 			session.getAttribute("j_password") != null) {
