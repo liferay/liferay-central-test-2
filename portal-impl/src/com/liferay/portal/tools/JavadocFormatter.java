@@ -93,9 +93,7 @@ public class JavadocFormatter {
 		ds.setBasedir(_basedir);
 		ds.setExcludes(
 			new String[] {
-				"**\\classes\\**",
-				"**\\portal-client\\**",
-				"**\\tools\\liferay-doclet\\**"
+				"**\\classes\\**", "**\\portal-client\\**", "**\\tools\\**"
 			});
 
 		List<String> includes = new ArrayList<String>();
@@ -474,14 +472,10 @@ public class JavadocFormatter {
 		cdata = cdata.replaceAll(
 			"(?s)\\s*<(p|pre|[ou]l)>\\s*(.*?)\\s*</\\1>\\s*",
 			"\n\n<$1>\n$2\n</$1>\n\n");
-
 		cdata = cdata.replaceAll(
 			"(?s)\\s*<li>\\s*(.*?)\\s*</li>\\s*", "\n<li>\n$1\n</li>\n");
-
 		cdata = StringUtil.replace(cdata, "</li>\n\n<li>", "</li>\n<li>");
-
 		cdata = cdata.replaceAll("\n\\s+\n", "\n\n");
-
 		cdata = cdata.replaceAll(" +", " ");
 
 		return cdata.trim();
@@ -999,20 +993,23 @@ public class JavadocFormatter {
 		int indentLength = _getIndentLength(indent);
 
 		// Do not wrap text inside <pre>
+
 		if (text.contains("<pre>")) {
-			Pattern p = Pattern.compile(
+			Pattern pattern = Pattern.compile(
 				"(?<=^|</pre>).+?(?=$|<pre>)", Pattern.DOTALL);
 
-			Matcher m = p.matcher(text);
+			Matcher matcher = pattern.matcher(text);
 
 			StringBuffer sb = new StringBuffer();
-			while (m.find()) {
+
+			while (matcher.find()) {
 				String wrapped = StringUtil.wrap(
-					m.group(), 80 - indentLength - 3, "\n");
-				m.appendReplacement(sb, wrapped);
+					matcher.group(), 80 - indentLength - 3, "\n");
+
+				matcher.appendReplacement(sb, wrapped);
 			}
 
-			m.appendTail(sb);
+			matcher.appendTail(sb);
 
 			sb.append("\n");
 
@@ -1023,7 +1020,6 @@ public class JavadocFormatter {
 		}
 
 		text = text.replaceAll("(?m)^", indent + " * ");
-
 		text = text.replaceAll("(?m) +$", StringPool.BLANK);
 
 		return text;
