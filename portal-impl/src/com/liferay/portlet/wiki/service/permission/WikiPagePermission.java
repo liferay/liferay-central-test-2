@@ -43,20 +43,20 @@ public class WikiPagePermission {
 
 	public static void check(
 			PermissionChecker permissionChecker, long nodeId, String title,
-			String actionId)
+			double version, String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, nodeId, title, actionId)) {
+		if (!contains(permissionChecker, nodeId, title, version, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
 	public static void check(
 			PermissionChecker permissionChecker, long nodeId, String title,
-			double version, String actionId)
+			String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, nodeId, title, version, actionId)) {
+		if (!contains(permissionChecker, nodeId, title, actionId)) {
 			throw new PrincipalException();
 		}
 	}
@@ -83,12 +83,12 @@ public class WikiPagePermission {
 
 	public static boolean contains(
 			PermissionChecker permissionChecker, long nodeId, String title,
-			String actionId)
+			double version, String actionId)
 		throws PortalException, SystemException {
 
 		try {
 			WikiPage page = WikiPageLocalServiceUtil.getPage(
-				nodeId, title, null);
+				nodeId, title, version);
 
 			return contains(permissionChecker, page, actionId);
 		}
@@ -100,12 +100,12 @@ public class WikiPagePermission {
 
 	public static boolean contains(
 			PermissionChecker permissionChecker, long nodeId, String title,
-			double version, String actionId)
+			String actionId)
 		throws PortalException, SystemException {
 
 		try {
 			WikiPage page = WikiPageLocalServiceUtil.getPage(
-				nodeId, title, version);
+				nodeId, title, null);
 
 			return contains(permissionChecker, page, actionId);
 		}
