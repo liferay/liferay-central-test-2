@@ -34,7 +34,7 @@ if (folder != null) {
 }
 %>
 
-<aui:form method="post" name="">
+<aui:form method="post" name="fm">
 	<liferay-ui:header
 		title="folders"
 	/>
