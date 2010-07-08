@@ -748,7 +748,8 @@ public class LayoutAction extends Action {
 				}
 
 				if (PropsValues.AUTH_TOKEN_CHECK_ENABLED &&
-					invokerPortlet.isCheckAuthToken()) {
+					invokerPortlet.isCheckAuthToken() &&
+					!ParamUtil.getBoolean(request, "wsrp")) {
 
 					AuthTokenUtil.check(request);
 				}
