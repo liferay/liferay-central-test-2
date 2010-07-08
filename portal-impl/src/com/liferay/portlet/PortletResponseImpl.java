@@ -172,7 +172,7 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		if (_headers.containsKey("cookies")) {
 			Cookie[] cookies = (Cookie[])_headers.get("cookies");
 
-			cookies = (Cookie[])ArrayUtil.append(cookies, cookie);
+			cookies = ArrayUtil.append(cookies, cookie);
 
 			_headers.put("cookies", cookies);
 		}
