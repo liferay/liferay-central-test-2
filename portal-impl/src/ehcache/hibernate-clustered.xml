@@ -22,11 +22,11 @@
 		overflowToDisk="false"
 	>
 		<cacheEventListenerFactory
-			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"
 			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
 			propertySeparator=","
 		/>
-		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
+		<bootstrapCacheLoaderFactory class="com.liferay.portal.cache.ehcache.LiferayBootstrapCacheLoaderFactory" />
 	</defaultCache>
 
 	<!--
@@ -44,9 +44,9 @@
 		overflowToDisk="false"
 	>
 		<cacheEventListenerFactory
-			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"
 		/>
-		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
+		<bootstrapCacheLoaderFactory class="com.liferay.portal.cache.ehcache.LiferayBootstrapCacheLoaderFactory" />
 	</cache>
 
 	<!--
@@ -62,10 +62,10 @@
 		overflowToDisk="false"
 	>
 		<cacheEventListenerFactory
-			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"
 			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
 			propertySeparator=","
 		/>
-		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
+		<bootstrapCacheLoaderFactory class="com.liferay.portal.cache.ehcache.LiferayBootstrapCacheLoaderFactory" />
 	</cache>
 </ehcache>
