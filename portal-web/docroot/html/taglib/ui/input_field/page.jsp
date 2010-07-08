@@ -26,7 +26,7 @@ String formName = (String)request.getAttribute("liferay-ui:input-field:formName"
 String model = (String)request.getAttribute("liferay-ui:input-field:model");
 Object bean = request.getAttribute("liferay-ui:input-field:bean");
 String field = (String)request.getAttribute("liferay-ui:input-field:field");
-String fieldParam = (String)request.getAttribute("liferay-ui:input-field:fieldParam");
+String fieldParam = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-field:fieldParam"));
 Object defaultValue = request.getAttribute("liferay-ui:input-field:defaultValue");
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-field:disabled"));
 Format format = (Format)request.getAttribute("liferay-ui:input-field:format");
@@ -51,7 +51,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 				}
 			}
 
-			if (fieldParam == null) {
+			if (Validator.isNull(fieldParam)) {
 				fieldParam = field;
 			}
 
@@ -73,7 +73,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 				timeFormatAmPm = false;
 			}
 
-			if (fieldParam == null) {
+			if (Validator.isNull(fieldParam)) {
 				fieldParam = field;
 			}
 
@@ -244,7 +244,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 
 			String value = null;
 
-			if (fieldParam == null) {
+			if (Validator.isNull(fieldParam)) {
 				fieldParam = field;
 			}
 
