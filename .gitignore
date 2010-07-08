@@ -163,6 +163,7 @@
 
 /tools/maven/*.asc
 
+/tools/liferay-doclet
 /tools/tck
 
 /tools/zip_tmpl/license
