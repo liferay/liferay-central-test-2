@@ -31,7 +31,7 @@ import java.util.Map;
  */
 public class MapUtil {
 
-	public static<K, V> void copy(
+	public static <K, V> void copy(
 		Map<K, V> master, Map<? super K, ? super V> copy) {
 
 		copy.clear();
@@ -124,19 +124,19 @@ public class MapUtil {
 		return defaultValue;
 	}
 
-	public static<K, V> void merge(
+	public static <K, V> void merge(
 		Map<K, V> master, Map<? super K, ? super V> copy) {
 
 		copy.putAll(master);
 	}
 
-	public static<T> LinkedHashMap<String, T> toLinkedHashMap(
+	public static <T> LinkedHashMap<String, T> toLinkedHashMap(
 		String[] params) {
 
 		return toLinkedHashMap(params, StringPool.COLON);
 	}
 
-	public static<T> LinkedHashMap<String, T> toLinkedHashMap(
+	public static <T> LinkedHashMap<String, T> toLinkedHashMap(
 		String[] params, String delimiter) {
 
 		LinkedHashMap<String, Object> map = new LinkedHashMap<String, Object>();
