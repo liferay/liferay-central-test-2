@@ -221,8 +221,6 @@ public class GroupFinderImpl
 
 			q.addEntity("Group_", GroupImpl.class);
 
-			QueryPos qPos = QueryPos.getInstance(q);
-
 			return q.list();
 		}
 		catch (Exception e) {
