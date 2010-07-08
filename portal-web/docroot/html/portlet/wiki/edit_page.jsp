@@ -389,6 +389,10 @@ if (Validator.isNull(redirect)) {
 
 					<aui:button name="previewButton" onClick='<%= renderResponse.getNamespace() + "previewPage();" %>' type="button" value="preview" />
 
+					<c:if test="<%= !newPage && wikiPage.isDraft() && WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.DELETE)%>">
+						<aui:button name="discardDraftButton" onClick='<%= renderResponse.getNamespace() + "discardDraftPage();" %>' type="button" value="discard-draft" />
+					</c:if>
+
 					<aui:button onClick="<%= redirect %>" type="cancel" />
 				</aui:button-row>
 			</aui:fieldset>
@@ -413,6 +417,12 @@ if (Validator.isNull(redirect)) {
 		if (window.<portlet:namespace />editor) {
 			document.<portlet:namespace />fm.<portlet:namespace />content.value = window.<portlet:namespace />editor.getHTML();
 		}
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />discardDraftPage() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
 
 		submitForm(document.<portlet:namespace />fm);
 	}

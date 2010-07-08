@@ -52,6 +52,16 @@ public class WikiPagePermission {
 	}
 
 	public static void check(
+			PermissionChecker permissionChecker, long nodeId, String title,
+			double version, String actionId)
+		throws PortalException, SystemException {
+
+		if (!contains(permissionChecker, nodeId, title, version, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
+	public static void check(
 			PermissionChecker permissionChecker, WikiPage page, String actionId)
 		throws PortalException {
 
@@ -89,6 +99,23 @@ public class WikiPagePermission {
 	}
 
 	public static boolean contains(
+			PermissionChecker permissionChecker, long nodeId, String title,
+			double version, String actionId)
+		throws PortalException, SystemException {
+
+		try {
+			WikiPage page = WikiPageLocalServiceUtil.getPage(
+				nodeId, title, version);
+
+			return contains(permissionChecker, page, actionId);
+		}
+		catch (NoSuchPageException nspe) {
+			return WikiNodePermission.contains(
+				permissionChecker, nodeId, ActionKeys.ADD_PAGE);
+		}
+	}
+
+	public static boolean contains(
 		PermissionChecker permissionChecker, WikiPage page, String actionId) {
 
 		if (page.isPending()) {
@@ -99,6 +126,12 @@ public class WikiPagePermission {
 			if (hasPermission != null) {
 				return hasPermission.booleanValue();
 			}
+		}
+
+		if (page.isDraft() && actionId.equals(ActionKeys.DELETE) &&
+			(page.getStatusByUserId() == permissionChecker.getUserId())) {
+
+			return true;
 		}
 
 		if (permissionChecker.hasOwnerPermission(

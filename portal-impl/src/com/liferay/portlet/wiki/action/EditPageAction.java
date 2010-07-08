@@ -173,8 +173,14 @@ public class EditPageAction extends PortletAction {
 	protected void deletePage(ActionRequest actionRequest) throws Exception {
 		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
 		String title = ParamUtil.getString(actionRequest, "title");
+		double version = ParamUtil.getDouble(actionRequest, "version");
 
-		WikiPageServiceUtil.deletePage(nodeId, title);
+		if (version > 0) {
+			WikiPageServiceUtil.deletePage(nodeId, title, version);
+		}
+		else {
+			WikiPageServiceUtil.deletePage(nodeId, title);
+		}
 	}
 
 	protected void getPage(RenderRequest renderRequest) throws Exception {

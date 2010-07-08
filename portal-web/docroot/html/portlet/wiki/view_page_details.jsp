@@ -336,7 +336,7 @@ int count = 0;
 					/>
 				</c:if>
 
-				<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.DELETE) && WikiNodePermission.contains(permissionChecker, wikiPage.getNodeId(), ActionKeys.ADD_PAGE) %>">
+				<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage.getNodeId(), wikiPage.getTitle(), ActionKeys.DELETE) && WikiNodePermission.contains(permissionChecker, wikiPage.getNodeId(), ActionKeys.ADD_PAGE) %>">
 
 					<%
 					PortletURL movePageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
@@ -353,7 +353,7 @@ int count = 0;
 					/>
 				</c:if>
 
-				<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.DELETE) %>">
+				<c:if test="<%= WikiPagePermission.contains(permissionChecker,  wikiPage.getNodeId(), wikiPage.getTitle(), ActionKeys.DELETE) %>">
 
 					<%
 					PortletURL frontPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);

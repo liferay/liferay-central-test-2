@@ -27,7 +27,7 @@ String fileName = (String)objArray[2];
 %>
 
 <liferay-ui:icon-menu>
-	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.DELETE) %>">
+	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage.getNodeId(), wikiPage.getTitle(), ActionKeys.DELETE) %>">
 		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/wiki/edit_page_attachment" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />

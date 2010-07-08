@@ -133,6 +133,15 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		wikiPageLocalService.deletePage(nodeId, title);
 	}
 
+	public void deletePage(long nodeId, String title, double version)
+		throws PortalException, SystemException {
+
+		WikiPagePermission.check(
+			getPermissionChecker(), nodeId, title, version, ActionKeys.DELETE);
+
+		wikiPageLocalService.deletePage(nodeId, title, version);
+	}
+
 	public void deletePageAttachment(long nodeId, String title, String fileName)
 		throws PortalException, SystemException {
 

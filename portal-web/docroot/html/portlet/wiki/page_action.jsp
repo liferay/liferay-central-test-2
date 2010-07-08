@@ -113,7 +113,7 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 		</c:choose>
 	</c:if>
 
-	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.DELETE) %>">
+	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage.getNodeId(), wikiPage.getTitle(), ActionKeys.DELETE) %>">
 		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/wiki/edit_page" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
@@ -123,5 +123,18 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 		</portlet:actionURL>
 
 		<liferay-ui:icon-delete url="<%= deleteURL %>" />
+	</c:if>
+
+	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.DELETE) %>">
+		<portlet:actionURL var="deleteURL">
+			<portlet:param name="struts_action" value="/wiki/edit_page" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="nodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />
+			<portlet:param name="title" value="<%= HtmlUtil.unescape(wikiPage.getTitle()) %>" />
+			<portlet:param name="version" value="<%= String.valueOf(wikiPage.getVersion()) %>" />
+		</portlet:actionURL>
+
+		<liferay-ui:icon image="delete" message="discard-draft" url="<%= deleteURL %>" />
 	</c:if>
 </liferay-ui:icon-menu>
