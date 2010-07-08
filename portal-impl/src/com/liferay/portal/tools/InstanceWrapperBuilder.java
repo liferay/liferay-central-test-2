@@ -28,6 +28,7 @@ import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaMethod;
 import com.thoughtworks.qdox.model.JavaParameter;
 import com.thoughtworks.qdox.model.Type;
+import com.thoughtworks.qdox.model.TypeVariable;
 
 import java.io.File;
 import java.io.IOException;
@@ -130,7 +131,15 @@ public class InstanceWrapperBuilder {
 				sb.append("\t */\n");
 			}
 
-			sb.append("public " + _getTypeGenericsName(javaMethod.getReturns()) + " " + methodName + "(");
+			sb.append("public ");
+
+			TypeVariable[] typeParameters = javaMethod.getTypeParameters();
+
+			if (typeParameters.length > 0) {
+				sb.append(" " + typeParameters[0].getGenericValue() + " ");
+			}
+
+			sb.append(_getTypeGenericsName(javaMethod.getReturns()) + " " + methodName + "(");
 
 			JavaParameter[] parameters = javaMethod.getParameters();
 
