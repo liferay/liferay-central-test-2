@@ -84,7 +84,7 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portal.cache.ehcache.RMICacheManagerPeerProviderFactory">
+	<category name="com.liferay.portal.cache.ehcache.LiferayCacheManagerPeerProviderFactory">
 		<priority value="INFO" />
 	</category>
 

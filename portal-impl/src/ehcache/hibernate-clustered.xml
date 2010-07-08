@@ -2,7 +2,7 @@
 	<diskStore path="ehcache.disk.store.dir/hibernate" />
 	<cacheManagerEventListenerFactory class="" properties="" />
 	<cacheManagerPeerProviderFactory
-		class="com.liferay.portal.cache.ehcache.RMICacheManagerPeerProviderFactory"
+		class="com.liferay.portal.cache.ehcache.LiferayCacheManagerPeerProviderFactory"
 		properties="portalPropertyKey=net.sf.ehcache.configurationResourceName.peerProviderProperties"
 		propertySeparator=","
 	/>
