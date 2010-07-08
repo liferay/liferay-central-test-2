@@ -212,6 +212,12 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 		_wikiPageLocalService.deletePage(nodeId, title);
 	}
 
+	public void deletePage(long nodeId, java.lang.String title, double version)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_wikiPageLocalService.deletePage(nodeId, title, version);
+	}
+
 	public void deletePage(com.liferay.portlet.wiki.model.WikiPage page)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

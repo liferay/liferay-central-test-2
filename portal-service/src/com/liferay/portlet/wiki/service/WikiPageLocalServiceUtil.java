@@ -221,6 +221,13 @@ public class WikiPageLocalServiceUtil {
 		getService().deletePage(nodeId, title);
 	}
 
+	public static void deletePage(long nodeId, java.lang.String title,
+		double version)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deletePage(nodeId, title, version);
+	}
+
 	public static void deletePage(com.liferay.portlet.wiki.model.WikiPage page)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

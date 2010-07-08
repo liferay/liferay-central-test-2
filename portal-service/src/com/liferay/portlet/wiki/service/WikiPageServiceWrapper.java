@@ -79,6 +79,12 @@ public class WikiPageServiceWrapper implements WikiPageService {
 		_wikiPageService.deletePage(nodeId, title);
 	}
 
+	public void deletePage(long nodeId, java.lang.String title, double version)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_wikiPageService.deletePage(nodeId, title, version);
+	}
+
 	public void deletePageAttachment(long nodeId, java.lang.String title,
 		java.lang.String fileName)
 		throws com.liferay.portal.kernel.exception.PortalException,

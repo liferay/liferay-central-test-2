@@ -77,6 +77,10 @@ public interface WikiPageService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public void deletePage(long nodeId, java.lang.String title, double version)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public void deletePageAttachment(long nodeId, java.lang.String title,
 		java.lang.String fileName)
 		throws com.liferay.portal.kernel.exception.PortalException,

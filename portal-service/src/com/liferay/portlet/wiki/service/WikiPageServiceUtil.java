@@ -81,6 +81,13 @@ public class WikiPageServiceUtil {
 		getService().deletePage(nodeId, title);
 	}
 
+	public static void deletePage(long nodeId, java.lang.String title,
+		double version)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deletePage(nodeId, title, version);
+	}
+
 	public static void deletePageAttachment(long nodeId,
 		java.lang.String title, java.lang.String fileName)
 		throws com.liferay.portal.kernel.exception.PortalException,
