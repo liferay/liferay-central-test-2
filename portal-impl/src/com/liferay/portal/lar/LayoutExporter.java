@@ -121,6 +121,26 @@ public class LayoutExporter {
 		return portlets;
 	}
 
+	public static void updateLastPublishDate(
+			LayoutSet layoutSet, long lastPublishDate)
+		throws Exception {
+
+		UnicodeProperties settingsProperties =
+			layoutSet.getSettingsProperties();
+
+		if (lastPublishDate <= 0) {
+			settingsProperties.remove("last-publish-date");
+		}
+		else {
+			settingsProperties.setProperty(
+				"last-publish-date", String.valueOf(lastPublishDate));
+		}
+
+		LayoutSetLocalServiceUtil.updateSettings(
+			layoutSet.getGroupId(), layoutSet.isPrivateLayout(),
+			settingsProperties.toString());
+	}
+
 	public byte[] exportLayouts(
 			long groupId, boolean privateLayout, long[] layoutIds,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
@@ -791,21 +811,6 @@ public class LayoutExporter {
 		sb.append(image.getType());
 
 		return sb.toString();
-	}
-
-	protected void updateLastPublishDate(
-			LayoutSet layoutSet, long lastPublishDate)
-		throws Exception {
-
-		UnicodeProperties settingsProperties =
-			layoutSet.getSettingsProperties();
-
-		settingsProperties.setProperty(
-			"last-publish-date", String.valueOf(lastPublishDate));
-
-		LayoutSetLocalServiceUtil.updateSettings(
-			layoutSet.getGroupId(), layoutSet.isPrivateLayout(),
-			settingsProperties.toString());
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutExporter.class);

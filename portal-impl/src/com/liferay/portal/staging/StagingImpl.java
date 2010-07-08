@@ -43,6 +43,7 @@ import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.lar.LayoutExporter;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
@@ -80,10 +81,10 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map.Entry;
 import java.util.Map;
 import java.util.Set;
 import java.util.TimeZone;
+import java.util.Map.Entry;
 
 import javax.portlet.PortletRequest;
 
@@ -809,7 +810,8 @@ public class StagingImpl implements Staging {
 		typeSettingsProperties.setProperty(
 			"stagedRemotely", String.valueOf(false));
 
-		setCommonStagingOptions(portletRequest, typeSettingsProperties);
+		setCommonStagingOptions(
+			portletRequest, liveGroup, typeSettingsProperties);
 
 		if (!liveGroup.hasStagingGroup()) {
 			Group stagingGroup = GroupLocalServiceUtil.addGroup(
@@ -878,7 +880,8 @@ public class StagingImpl implements Staging {
 		typeSettingsProperties.setProperty(
 			"stagedRemotely", Boolean.TRUE.toString());
 
-		setCommonStagingOptions(portletRequest, typeSettingsProperties);
+		setCommonStagingOptions(
+			portletRequest, liveGroup, typeSettingsProperties);
 
 		GroupServiceUtil.updateGroup(
 			liveGroup.getGroupId(), typeSettingsProperties.toString());
@@ -1432,8 +1435,13 @@ public class StagingImpl implements Staging {
 	}
 
 	protected void setCommonStagingOptions(
-		PortletRequest portletRequest,
-		UnicodeProperties typeSettingsProperties) {
+		PortletRequest portletRequest, Group liveGroup,
+		UnicodeProperties typeSettingsProperties) throws Exception {
+
+		LayoutExporter.updateLastPublishDate(
+			liveGroup.getPrivateLayoutSet(), 0);
+		LayoutExporter.updateLastPublishDate(
+			liveGroup.getPublicLayoutSet(), 0);
 
 		Enumeration<String> enu = portletRequest.getParameterNames();
 
