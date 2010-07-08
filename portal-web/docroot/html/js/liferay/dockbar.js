@@ -215,11 +215,10 @@ AUI().add(
 						);
 					}
 
-					var isStaging = body.hasClass('staging');
-					var isStagedRemotely = body.hasClass('remote-staging');
+					var isStaging = body.hasClass('staging') || body.hasClass('remote-staging');
 					var isLiveView = body.hasClass('live-view');
 
-					if (isStaging || isStagedRemotely || isLiveView) {
+					if (isStaging || isLiveView) {
 						instance.addMenu(
 							{
 								boundingBox: '#' + instance._namespace + 'stagingContainer',
