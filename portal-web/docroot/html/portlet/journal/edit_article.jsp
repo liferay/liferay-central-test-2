@@ -608,16 +608,18 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				}
 
 				String saveButtonLabel = "save";
-				String publishButtonLabel = "publish";
-				String deleteButtonLabel = "delete-version";
 
 				if ((article == null) || article.isDraft() || article.isApproved()) {
 					saveButtonLabel = "save-as-draft";
 				}
 
+				String publishButtonLabel = "publish";
+
 				if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, JournalArticle.class.getName())) {
 					publishButtonLabel = "submit-for-publication";
 				}
+
+				String deleteButtonLabel = "delete-version";
 
 				if (article.isDraft()) {
 					deleteButtonLabel = "discard-draft";
@@ -669,17 +671,16 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	}
 
 	function <portlet:namespace />deleteArticle() {
-
 		<c:choose>
 			<c:when test="<%= (article != null) && article.isDraft() %>">
-				var confirmMsg = "<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-discard-this-draft") %>";
+				var confirmationMessage = '<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-discard-this-draft") %>';
 			</c:when>
 			<c:otherwise>
-				var confirmMsg = "<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-this-article-version") %>";	
+				var confirmationMessage = '<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-this-article-version") %>';
 			</c:otherwise>
 		</c:choose>
 
-		if (confirm(confirmMsg)) {
+		if (confirm(confirmationMessage)) {
 			document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
 			submitForm(document.<portlet:namespace />fm1);
 		}

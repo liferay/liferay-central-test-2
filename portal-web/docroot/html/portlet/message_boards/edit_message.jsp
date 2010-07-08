@@ -343,11 +343,12 @@ if (Validator.isNull(redirect)) {
 
 		<%
 		String saveButtonLabel = "save";
-		String publishButtonLabel = "publish";
 
 		if ((message == null) || message.isDraft() || message.isApproved()) {
 			saveButtonLabel = "save-as-draft";
 		}
+
+		String publishButtonLabel = "publish";
 
 		if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, MBMessage.class.getName())) {
 			publishButtonLabel = "submit-for-publication";

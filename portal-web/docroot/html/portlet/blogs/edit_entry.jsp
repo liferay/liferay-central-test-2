@@ -144,11 +144,12 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 
 			<%
 			String saveButtonLabel = "save";
-			String publishButtonLabel = "publish";
 
 			if ((entry == null) || entry.isDraft() || entry.isApproved()) {
 				saveButtonLabel = "save-as-draft";
 			}
+
+			String publishButtonLabel = "publish";
 
 			if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, BlogsEntry.class.getName())) {
 				publishButtonLabel = "submit-for-publication";
