@@ -631,6 +631,8 @@ public interface PropsKeys {
 
 	public static final String IMAGE_HOOK_IMPL = "image.hook.impl";
 
+	public static final String INDEX_FILTER_SEARCH_LIMIT = "index.filter.search.limit";
+
 	public static final String INDEX_ON_STARTUP = "index.on.startup";
 
 	public static final String INDEX_ON_STARTUP_DELAY = "index.on.startup.delay";

@@ -26,6 +26,7 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.service.AssetCategoryServiceUtil;
 
 import java.util.ArrayList;
@@ -140,8 +141,8 @@ public abstract class BaseIndexer implements Indexer {
 			int end = searchContext.getEnd();
 
 			if (isFilterSearch() && (permissionChecker != null)) {
-				start = QueryUtil.ALL_POS;
-				end = QueryUtil.ALL_POS;
+				start = 0;
+				end = end + PropsValues.INDEX_FILTER_SEARCH_LIMIT;
 			}
 
 			Hits hits = SearchEngineUtil.search(
