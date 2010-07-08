@@ -632,7 +632,8 @@ public class SourceFormatter {
 			}
 
 			if ((excluded == null) && (line.length() > 80) &&
-				!line.startsWith("import ") && !line.startsWith("package ")) {
+				!line.startsWith("import ") && !line.startsWith("package ") &&
+				!line.matches("\\s*\\*.*")) {
 
 				if (fileName.endsWith("Table.java") &&
 					line.contains("String TABLE_SQL_CREATE = ")) {
