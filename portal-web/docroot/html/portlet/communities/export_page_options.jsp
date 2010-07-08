@@ -17,11 +17,11 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
+long proposalId = ParamUtil.getLong(request, "proposalId");
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 Layout curLayout = (Layout)row.getObject();
-
-long proposalId = ParamUtil.getLong(request, "proposalId");
 %>
 
 <div class="type" style="float: right; padding-right: 32px; text-align: center; width: 100px;">
@@ -31,6 +31,7 @@ long proposalId = ParamUtil.getLong(request, "proposalId");
 <div class="layout">
 	<c:choose>
 		<c:when test="<%= proposalId <= 0 %>">
+
 			<%
 			String taglibHref = "javascript:Liferay.LayoutExporter.details({toggle: '#_detail_" + curLayout.getPlid() + "_toggle', detail: '#_detail_" + curLayout.getPlid() + "'});";
 			%>

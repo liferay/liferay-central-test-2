@@ -200,8 +200,6 @@ request.setAttribute("edit_pages.jsp-layoutList", layoutList);
 request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 
 response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
-
-String taglibUrl = "AUI().DialogManager.refreshByChild('#" + renderResponse.getNamespace() + "exportPagesFm');";
 %>
 
 <style type="text/css">
@@ -309,7 +307,12 @@ String taglibUrl = "AUI().DialogManager.refreshByChild('#" + renderResponse.getN
 			</div>
 
 			<aui:button-row>
-				<aui:button onClick="<%= taglibUrl %>" value="select" />
+
+				<%
+				String taglibOnClick = "AUI().DialogManager.refreshByChild('#" + renderResponse.getNamespace() + "exportPagesFm');";
+				%>
+
+				<aui:button onClick="<%= taglibOnClick %>" value="select" />
 			</aui:button-row>
 		</c:when>
 		<c:otherwise>
