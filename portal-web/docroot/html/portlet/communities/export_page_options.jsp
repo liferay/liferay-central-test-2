@@ -38,37 +38,69 @@ Layout curLayout = (Layout)row.getObject();
 </div>
 
 <div class="aui-helper-hidden export-layout-detail" id="_detail_<%= curLayout.getPlid() %>" style="border-top: 1px solid #CCC; margin-top: 4px; padding-top: 4px; width: 95%;">
-	<c:if test="<%= !curLayout.getAncestors().isEmpty() %>">
-		<aui:input checked="<%= true %>" disabled="<%= true %>" label="include-ancestor-pages" name='<%= "includeAncestors_" + curLayout.getPlid() %>' type="checkbox" value="1" />
-	</c:if>
+	<aui:input label="delete-live-page" name='<%= "delete_" + curLayout.getPlid() %>' type="radio" value="<%= true %>" />
 
-	<aui:input label="delete-live-page" name='<%= "delete_" + curLayout.getPlid() %>' type="checkbox" />
+	<aui:input checked="<%= true %>" label="publish" name='<%= "delete_" + curLayout.getPlid() %>' type="radio" value="<%= false %>" />
 
-	<c:if test="<%= !curLayout.getChildren().isEmpty() %>">
-		<aui:input label="include-all-descendent-pages" name='<%= "includeChildren_" + curLayout.getPlid() %>' type="checkbox" value="1" />
-	</c:if>
+	<div id="<portlet:namespace />publishChangesOptions_<%= curLayout.getPlid() %>" style="margin-left: 2em;">
+		<c:if test="<%= !curLayout.getAncestors().isEmpty() %>">
+			<aui:input checked="<%= true %>" disabled="<%= true %>" label="include-ancestor-pages" name='<%= "includeAncestors_" + curLayout.getPlid() %>' type="checkbox" value="1" />
+		</c:if>
+
+		<c:if test="<%= !curLayout.getChildren().isEmpty() %>">
+			<aui:input label="include-all-descendent-pages" name='<%= "includeChildren_" + curLayout.getPlid() %>' type="checkbox" value="1" />
+		</c:if>
+	</div>
 </div>
 
 <aui:script use="aui-base">
+	var ancestorsMsg = A.one('#<portlet:namespace /><%= curLayout.getPlid() %>includeAncestor');
+	var childrenMsg = A.one('#<portlet:namespace /><%= curLayout.getPlid() %>includeChildren');
+	var deleteMsg = A.one('#<portlet:namespace /><%= curLayout.getPlid() %>deleteLivePage');
+	var publishOptions = A.one('#<portlet:namespace />publishChangesOptions_<%= curLayout.getPlid() %>');
+
+	var ancestorsCheckbox = A.one('#<portlet:namespace />includeAncestors_<%= curLayout.getPlid() %>Checkbox');
+	var childrenCheckbox = A.one('#<portlet:namespace />includeChildren_<%= curLayout.getPlid() %>Checkbox');
+
+	var radioButtons = A.all('#_detail_<%= curLayout.getPlid() %> input[type=radio]');
+
 	<c:if test="<%= !curLayout.getAncestors().isEmpty() %>">
-		A.one('#<portlet:namespace />includeAncestors_<%= curLayout.getPlid() %>Checkbox').on(
+		ancestorsCheckbox.on(
 			'change', function (event) {
-				A.one('#<portlet:namespace /><%= curLayout.getPlid() %>includeAncestor').toggle();
+				ancestorsMsg.toggle();
 			}
 		);
 	</c:if>
-
-	A.one('#<portlet:namespace />delete_<%= curLayout.getPlid() %>Checkbox').on(
-		'change', function (event) {
-			A.one('#<portlet:namespace /><%= curLayout.getPlid() %>deleteLivePage').toggle();
-		}
-	);
 
 	<c:if test="<%= !curLayout.getChildren().isEmpty() %>">
-		A.one('#<portlet:namespace />includeChildren_<%= curLayout.getPlid() %>Checkbox').on(
+		childrenCheckbox.on(
 			'change', function (event) {
-				A.one('#<portlet:namespace /><%= curLayout.getPlid() %>includeChildren').toggle();
+				childrenMsg.toggle();
 			}
 		);
 	</c:if>
+
+	radioButtons.on(
+		'change', function (event) {
+			deleteMsg.toggle();
+
+			if (event.currentTarget.get('value') == 'true') {
+				childrenMsg.hide();
+				ancestorsMsg.hide();
+			}
+			else {
+				if (ancestorsCheckbox && ancestorsCheckbox.get('checked')) {
+					ancestorsMsg.show();
+					console.log( ancestorsMsg);
+				}
+
+				if (childrenCheckbox && childrenCheckbox.get('checked')) {
+					childrenMsg.show();
+
+				}
+			}
+			
+			publishOptions.toggle();
+		}
+	);
 </aui:script>
