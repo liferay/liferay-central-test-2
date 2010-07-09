@@ -21,10 +21,10 @@ import com.liferay.portal.kernel.util.StringEncoder;
 import com.liferay.portal.kernel.util.StringParser;
 import com.liferay.portal.kernel.util.URLStringEncoder;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * <a href="RouteImpl.java.html"><b><i>View Source</i></b></a>
@@ -62,7 +62,7 @@ public class RouteImpl implements Route {
 		return _generatedParameters;
 	}
 
-	public List<String> getIgnoredParameters() {
+	public Set<String> getIgnoredParameters() {
 		return _ignoredParameters;
 	}
 
@@ -165,7 +165,7 @@ public class RouteImpl implements Route {
 
 	private Map<String, StringParser> _generatedParameters =
 		new HashMap<String, StringParser>();
-	private List<String> _ignoredParameters = new ArrayList<String>();
+	private Set<String> _ignoredParameters = new LinkedHashSet<String>();
 	private Map<String, String> _implicitParameters =
 		new HashMap<String, String>();
 	private Map<String, String> _overriddenParameters =
