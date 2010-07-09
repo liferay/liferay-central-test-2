@@ -21,6 +21,7 @@ Object bean = request.getAttribute("aui:select:bean");
 boolean changesContext = GetterUtil.getBoolean((String)request.getAttribute("aui:select:changesContext"));
 String cssClass = GetterUtil.getString((String)request.getAttribute("aui:select:cssClass"));
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("aui:select:disabled"));
+Map<String, Object> data = (Map<String, Object>)request.getAttribute("aui:select:data");
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:select:dynamicAttributes");
 boolean first = GetterUtil.getBoolean((String)request.getAttribute("aui:select:first"));
 String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:select:helpMessage"));
@@ -79,7 +80,7 @@ String inputCss = _buildCss(INPUT_PREFIX, "select", false, false, false, false, 
 		</c:if>
 
 		<span class='aui-field-element <%= Validator.isNotNull(label) && inlineLabel.equals("right") ? "aui-field-label-right" : StringPool.BLANK %>'>
-			<select class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" <%= multiple ? "multiple" : StringPool.BLANK %> name="<%= namespace + name %>" <%= Validator.isNotNull(title) ? "title=\"" + title + "\"" : StringPool.BLANK %> <%= _buildDynamicAttributes(dynamicAttributes) %>>
+			<select class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" <%= multiple ? "multiple" : StringPool.BLANK %> name="<%= namespace + name %>" <%= Validator.isNotNull(title) ? "title=\"" + title + "\"" : StringPool.BLANK %> <%= _buildData(data) %> <%= _buildDynamicAttributes(dynamicAttributes) %>>
 				<c:if test="<%= showEmptyOption %>">
 					<aui:option />
 				</c:if>

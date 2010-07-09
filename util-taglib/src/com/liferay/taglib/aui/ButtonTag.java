@@ -17,6 +17,8 @@ package com.liferay.taglib.aui;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -30,6 +32,10 @@ public class ButtonTag extends IncludeTag {
 
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
+	}
+
+	public void setData(Map<String,Object> data) {
+		_data = data;
 	}
 
 	public void setDisabled(boolean disabled) {
@@ -54,6 +60,7 @@ public class ButtonTag extends IncludeTag {
 
 	protected void cleanUp() {
 		_cssClass = null;
+		_data = null;
 		_disabled = false;
 		_name = null;
 		_onClick = null;
@@ -85,6 +92,7 @@ public class ButtonTag extends IncludeTag {
 		}
 
 		request.setAttribute("aui:button:cssClass", _cssClass);
+		request.setAttribute("aui:button:data", _data);
 		request.setAttribute("aui:button:disabled", String.valueOf(_disabled));
 		request.setAttribute(
 			"aui:button:dynamicAttributes", getDynamicAttributes());
@@ -99,6 +107,7 @@ public class ButtonTag extends IncludeTag {
 	private static final String _PAGE = "/html/taglib/aui/button/page.jsp";
 
 	private String _cssClass;
+	private Map<String, Object> _data;
 	private boolean _disabled;
 	private String _name;
 	private String _onClick;

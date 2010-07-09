@@ -18,6 +18,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 import com.liferay.util.TextFormatter;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -39,6 +41,10 @@ public class SelectTag extends IncludeTag {
 
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
+	}
+
+	public void setData(Map<String,Object> data) {
+		_data = data;
 	}
 
 	public void setDisabled(boolean disabled) {
@@ -109,6 +115,7 @@ public class SelectTag extends IncludeTag {
 		_bean = null;
 		_changesContext = false;
 		_cssClass = null;
+		_data = null;
 		_first = false;
 		_helpMessage = null;
 		_inlineField = false;
@@ -169,6 +176,7 @@ public class SelectTag extends IncludeTag {
 		request.setAttribute(
 			"aui:select:changesContext", String.valueOf(_changesContext));
 		request.setAttribute("aui:select:cssClass", _cssClass);
+		request.setAttribute("aui:select:data", _data);
 		request.setAttribute("aui:select:disabled", String.valueOf(_disabled));
 		request.setAttribute(
 			"aui:select:dynamicAttributes", getDynamicAttributes());
@@ -201,6 +209,7 @@ public class SelectTag extends IncludeTag {
 	private Object _bean;
 	private boolean _changesContext;
 	private String _cssClass;
+	private Map<String, Object> _data;
 	private boolean _disabled;
 	private boolean _first;
 	private String _helpMessage;

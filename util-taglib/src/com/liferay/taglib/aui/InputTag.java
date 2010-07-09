@@ -19,6 +19,8 @@ import com.liferay.taglib.util.IncludeTag;
 import com.liferay.util.PwdGenerator;
 import com.liferay.util.TextFormatter;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -48,6 +50,10 @@ public class InputTag extends IncludeTag {
 
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
+	}
+
+	public void setData(Map<String,Object> data) {
+		_data = data;
 	}
 
 	public void setDisabled(boolean disabled) {
@@ -128,6 +134,7 @@ public class InputTag extends IncludeTag {
 		_checked = false;
 		_classPK = 0;
 		_cssClass = null;
+		_data = null;
 		_disabled = false;
 		_field = null;
 		_fieldParam = null;
@@ -199,6 +206,7 @@ public class InputTag extends IncludeTag {
 		request.setAttribute("aui:input:checked", String.valueOf(_checked));
 		request.setAttribute("aui:input:classPK", String.valueOf(_classPK));
 		request.setAttribute("aui:input:cssClass", _cssClass);
+		request.setAttribute("aui:input:data", _data);
 		request.setAttribute("aui:input:disabled", String.valueOf(_disabled));
 		request.setAttribute(
 			"aui:input:dynamicAttributes", getDynamicAttributes());
@@ -231,6 +239,7 @@ public class InputTag extends IncludeTag {
 	private boolean _checked;
 	private long _classPK;
 	private String _cssClass;
+	private Map<String, Object> _data;
 	private boolean _disabled;
 	private String _field;
 	private String _fieldParam;

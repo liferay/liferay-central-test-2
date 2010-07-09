@@ -108,6 +108,27 @@ private static String _buildCss(String prefix, String baseTypeCss, boolean inlin
 	return sb.toString();
 }
 
+private static String _buildData(Map<String, Object> data) {
+	if ((data == null) || (data.isEmpty())) {
+		return StringPool.BLANK;
+	}
+
+	StringBundler sb = new StringBundler(data.size() * 5);
+
+	for (Map.Entry<String, Object> entry : data.entrySet()) {
+		String dataKey = entry.getKey();
+		String dataValue = String.valueOf(entry.getValue());
+
+		sb.append("data-");
+		sb.append(dataKey);
+		sb.append("=\"");
+		sb.append(dataValue);
+		sb.append("\" ");
+	}
+
+	return sb.toString();
+}
+
 private static String _buildDynamicAttributes(Map<String, Object> dynamicAttributes) {
 	if ((dynamicAttributes == null) || dynamicAttributes.isEmpty()) {
 		return StringPool.BLANK;
