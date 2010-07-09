@@ -101,7 +101,7 @@ Layout curLayout = (Layout)row.getObject();
 
 				}
 			}
-			
+
 			publishOptions.toggle();
 		}
 	);
