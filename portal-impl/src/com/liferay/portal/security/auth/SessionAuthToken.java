@@ -56,14 +56,15 @@ public class SessionAuthToken implements AuthToken {
 		String sessionAuthenticationToken = getSessionAuthenticationToken(
 			request, _PORTAL);
 
-		String sharedSecret = Encryptor.digest(
+		String propertiesAuthenticatonTokenSharedSecret = Encryptor.digest(
 			PropsValues.AUTH_TOKEN_SHARED_SECRET);
 
-		String requestSharedSecret = ParamUtil.getString(
+		String requestAuthenticatonTokenSharedSecret = ParamUtil.getString(
 			request, "p_auth_secret");
 
 		if (!requestAuthenticationToken.equals(sessionAuthenticationToken) &&
-			!requestSharedSecret.equals(sharedSecret)) {
+			!requestAuthenticatonTokenSharedSecret.equals(
+				propertiesAuthenticatonTokenSharedSecret)) {
 
 			throw new PrincipalException("Invalid authentication token");
 		}
