@@ -24,6 +24,14 @@ import com.liferay.portal.security.permission.PermissionChecker;
  */
 public class StagingPermissionUtil {
 
+	public static  Boolean hasPermission(
+		PermissionChecker permissionChecker, Group group, String className,
+		long classPK, String portletId, String actionId) {
+
+		return _stagingPermission.hasPermission(
+			permissionChecker, group, className, classPK, portletId, actionId);
+	}
+
 	public static Boolean hasPermission(
 		PermissionChecker permissionChecker, long groupId, String className,
 		long classPK, String portletId, String actionId) {
@@ -31,14 +39,6 @@ public class StagingPermissionUtil {
 		return _stagingPermission.hasPermission(
 			permissionChecker, groupId, className, classPK, portletId,
 			actionId);
-	}
-
-	public static  Boolean hasPermission(
-		PermissionChecker permissionChecker, Group group, String className,
-		long classPK, String portletId, String actionId) {
-
-		return _stagingPermission.hasPermission(
-			permissionChecker, group, className, classPK, portletId, actionId);
 	}
 
 	public void setStagingPermission(StagingPermission stagingPermission) {

@@ -25,11 +25,11 @@ import com.liferay.portal.security.permission.PermissionChecker;
 public interface StagingPermission {
 
 	public Boolean hasPermission(
-		PermissionChecker permissionChecker, long groupId, String className,
+		PermissionChecker permissionChecker, Group group, String className,
 		long classPK, String portletId, String actionId);
 
 	public Boolean hasPermission(
-			PermissionChecker permissionChecker, Group group, String className,
-			long classPK, String portletId, String actionId);
+		PermissionChecker permissionChecker, long groupId, String className,
+		long classPK, String portletId, String actionId);
 
 }

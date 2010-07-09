@@ -30,12 +30,10 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 public class StagingPermissionImpl implements StagingPermission {
 
 	public Boolean hasPermission(
-		PermissionChecker permissionChecker, long groupId, String className,
+		PermissionChecker permissionChecker, Group group, String className,
 		long classPK, String portletId, String actionId) {
 
 		try {
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
-
 			return doHasPermission(
 				permissionChecker, group, className, classPK, portletId,
 				actionId);
@@ -48,10 +46,12 @@ public class StagingPermissionImpl implements StagingPermission {
 	}
 
 	public Boolean hasPermission(
-		PermissionChecker permissionChecker, Group group, String className,
+		PermissionChecker permissionChecker, long groupId, String className,
 		long classPK, String portletId, String actionId) {
 
 		try {
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
 			return doHasPermission(
 				permissionChecker, group, className, classPK, portletId,
 				actionId);
