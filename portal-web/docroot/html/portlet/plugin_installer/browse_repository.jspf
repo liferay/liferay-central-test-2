@@ -61,7 +61,7 @@ try {
 		</aui:select>
 
 		<aui:select label="repository" name="searchRepositoryURL">
-			<aui:option label="all" />
+			<aui:option label="all" value="" />
 
 			<%
 			String[] repositoryURLs = PluginPackageUtil.getRepositoryURLs();
