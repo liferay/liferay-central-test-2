@@ -17,8 +17,6 @@ package com.liferay.taglib.portletext;
 import com.liferay.taglib.ui.IconTag;
 
 /**
- * <a href="IconRefreshTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  */
 public class IconRefreshTag extends IconTag {

@@ -17,8 +17,6 @@ package com.liferay.taglib.portlet;
 import javax.portlet.PortletRequest;
 
 /**
- * <a href="RenderURLTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class RenderURLTag extends ActionURLTag {

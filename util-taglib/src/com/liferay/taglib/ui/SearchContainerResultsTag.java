@@ -25,8 +25,6 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.TagSupport;
 
 /**
- * <a href="SearchContainerResultsTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class SearchContainerResultsTag extends TagSupport {

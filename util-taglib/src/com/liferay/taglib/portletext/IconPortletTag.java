@@ -20,8 +20,6 @@ import com.liferay.taglib.ui.IconTag;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="IconPortletTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class IconPortletTag extends IconTag {

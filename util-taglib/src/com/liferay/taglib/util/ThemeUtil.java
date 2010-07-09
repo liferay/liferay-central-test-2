@@ -49,8 +49,6 @@ import org.apache.struts.taglib.tiles.ComponentConstants;
 import org.apache.struts.tiles.ComponentContext;
 
 /**
- * <a href="ThemeUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Brian Myunghun Kim
  * @author Raymond Augé

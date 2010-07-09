@@ -23,9 +23,6 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 
 /**
- * <a href="SearchContainerColumnScoreTag.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Raymond Augé
  */
 public class SearchContainerColumnScoreTag extends SearchContainerColumnTag {

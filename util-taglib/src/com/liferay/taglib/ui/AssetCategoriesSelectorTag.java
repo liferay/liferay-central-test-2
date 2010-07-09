@@ -19,8 +19,6 @@ import com.liferay.taglib.util.IncludeTag;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="AssetCategoriesSelectorTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  */

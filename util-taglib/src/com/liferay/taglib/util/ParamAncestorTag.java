@@ -15,8 +15,6 @@
 package com.liferay.taglib.util;
 
 /**
- * <a href="ParamAncestorTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface ParamAncestorTag {

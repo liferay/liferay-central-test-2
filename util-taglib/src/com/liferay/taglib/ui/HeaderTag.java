@@ -19,8 +19,6 @@ import com.liferay.taglib.util.IncludeTag;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="HeaderTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Sergio González
  */
 public class HeaderTag extends IncludeTag {

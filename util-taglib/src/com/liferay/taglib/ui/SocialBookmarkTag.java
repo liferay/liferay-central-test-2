@@ -27,8 +27,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="SocialBookmarkTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author David Truong
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan

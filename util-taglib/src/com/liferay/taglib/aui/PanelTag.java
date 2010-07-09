@@ -24,8 +24,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="PanelTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Julio Camarero
  * @author Brian Wing Shun Chan
  */

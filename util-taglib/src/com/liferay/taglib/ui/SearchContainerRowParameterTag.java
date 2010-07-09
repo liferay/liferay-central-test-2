@@ -22,9 +22,6 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.TagSupport;
 
 /**
- * <a href="SearchContainerRowParameterTag.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class SearchContainerRowParameterTag extends TagSupport {

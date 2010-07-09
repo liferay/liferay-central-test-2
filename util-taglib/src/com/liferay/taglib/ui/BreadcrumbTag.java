@@ -25,8 +25,6 @@ import javax.portlet.PortletURL;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="BreadcrumbTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class BreadcrumbTag extends IncludeTag {

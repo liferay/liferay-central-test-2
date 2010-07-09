@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.util.WebKeys;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="HtmlTopTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class HtmlTopTag extends BaseBodyTagSupport {

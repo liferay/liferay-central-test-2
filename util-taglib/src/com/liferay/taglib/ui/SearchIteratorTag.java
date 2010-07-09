@@ -17,8 +17,6 @@ package com.liferay.taglib.ui;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="SearchIteratorTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class SearchIteratorTag extends SearchPaginatorTag {

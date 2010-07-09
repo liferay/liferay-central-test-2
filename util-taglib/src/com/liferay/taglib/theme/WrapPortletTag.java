@@ -31,8 +31,6 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
 /**
- * <a href="WrapPortletTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {

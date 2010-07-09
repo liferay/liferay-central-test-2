@@ -17,8 +17,6 @@ package com.liferay.taglib.portletext;
 import com.liferay.taglib.ui.IconTag;
 
 /**
- * <a href="IconHelpTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class IconHelpTag extends IconTag {

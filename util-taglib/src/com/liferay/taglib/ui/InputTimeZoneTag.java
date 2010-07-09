@@ -22,8 +22,6 @@ import java.util.TimeZone;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="InputTimeZoneTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class InputTimeZoneTag extends IncludeTag {

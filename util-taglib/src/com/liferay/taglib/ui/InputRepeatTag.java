@@ -20,8 +20,6 @@ import com.liferay.taglib.util.IncludeTag;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="InputRepeatTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  * @author Julio Camarero
  */

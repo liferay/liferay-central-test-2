@@ -23,8 +23,6 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="LanguageTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class LanguageTag extends IncludeTag {

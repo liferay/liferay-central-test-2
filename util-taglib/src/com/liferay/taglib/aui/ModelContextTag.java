@@ -19,8 +19,6 @@ import com.liferay.taglib.util.IncludeTag;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="ModelContextTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  */

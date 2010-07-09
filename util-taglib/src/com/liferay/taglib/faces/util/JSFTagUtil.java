@@ -22,8 +22,6 @@ import javax.faces.el.ValueBinding;
 import javax.faces.webapp.UIComponentTag;
 
 /**
- * <a href="JSFTagUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Neil Griffin
  */
 public class JSFTagUtil {

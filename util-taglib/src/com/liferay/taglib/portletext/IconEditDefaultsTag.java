@@ -17,8 +17,6 @@ package com.liferay.taglib.portletext;
 import com.liferay.taglib.ui.IconTag;
 
 /**
- * <a href="IconEditDefaultsTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class IconEditDefaultsTag extends IconTag {

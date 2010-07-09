@@ -22,8 +22,6 @@ import javax.portlet.PortletURL;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="FormTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Julio Camarero
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan

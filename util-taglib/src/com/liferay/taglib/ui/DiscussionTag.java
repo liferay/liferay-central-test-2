@@ -20,8 +20,6 @@ import com.liferay.taglib.util.IncludeTag;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="DiscussionTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Charles May
  */
 public class DiscussionTag extends IncludeTag {

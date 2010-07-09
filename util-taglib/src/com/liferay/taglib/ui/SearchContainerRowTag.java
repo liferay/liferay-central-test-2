@@ -35,8 +35,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.jsp.JspException;
 
 /**
- * <a href="SearchContainerRowTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {

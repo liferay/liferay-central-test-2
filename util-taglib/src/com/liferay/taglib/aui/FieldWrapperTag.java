@@ -20,8 +20,6 @@ import com.liferay.util.TextFormatter;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="FieldWrapperTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Julio Camarero
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan

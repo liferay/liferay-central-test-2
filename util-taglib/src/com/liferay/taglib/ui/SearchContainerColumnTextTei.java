@@ -21,9 +21,6 @@ import javax.servlet.jsp.tagext.TagExtraInfo;
 import javax.servlet.jsp.tagext.VariableInfo;
 
 /**
- * <a href="SearchContainerColumnTextTei.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Raymond Augé
  */
 public class SearchContainerColumnTextTei extends TagExtraInfo {

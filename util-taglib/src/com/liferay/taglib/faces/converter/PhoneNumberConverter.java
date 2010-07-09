@@ -27,8 +27,6 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 
 /**
- * <a href="PhoneNumberConverter.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * This class is a JSF converter that can be used to convert phone numbers.
  * Since phone numbers in the United States of America always have 10 digits,

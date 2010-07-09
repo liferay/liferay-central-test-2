@@ -17,8 +17,6 @@ package com.liferay.taglib.aui;
 import javax.servlet.jsp.tagext.TagSupport;
 
 /**
- * <a href="ToolTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Julio Camarero
  * @author Brian Wing Shun Chan
  */

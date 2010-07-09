@@ -32,9 +32,6 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.BodyContent;
 
 /**
- * <a href="SearchContainerColumnTextTag.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Raymond Augé
  */
 public class SearchContainerColumnTextTag extends SearchContainerColumnTag {

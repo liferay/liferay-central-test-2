@@ -17,8 +17,6 @@ package com.liferay.taglib.portletext;
 import com.liferay.taglib.ui.IconTag;
 
 /**
- * <a href="IconExportImportTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class IconExportImportTag extends IconTag {
