@@ -20,7 +20,6 @@ import com.ecyrd.jspwiki.plugin.PluginException;
 
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.PwdGenerator;
 
 import java.util.Map;
 
@@ -56,8 +55,6 @@ public class TableOfContents extends com.ecyrd.jspwiki.plugin.TableOfContents {
 		int y = x + "</h4>".length();
 
 		if ((x != -1) && (y != -1)) {
-			String id = "toc_" + PwdGenerator.getPassword();
-
 			StringBundler sb = new StringBundler(15);
 
 			sb.append(result.substring(0, x));
