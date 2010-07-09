@@ -2087,13 +2087,13 @@ AUI().add(
 						function(event) {
 							var button = event.currentTarget;
 							var input = button.ancestor('.journal-article-component-container').one('.aui-field-input');
-							var imageGalleryUrl = button.attr('data' + id + 'Url');
+							var selectUrl = button.attr('data-' + id + 'Url');
 
 							window[instance.portletNamespace + handlerName] = function(url) {
 								input.val(url);
 							};
 
-							instance.openPopupWindow(imageGalleryUrl, title);
+							instance.openPopupWindow(selectUrl, title);
 						},
 						buttonId
 					);

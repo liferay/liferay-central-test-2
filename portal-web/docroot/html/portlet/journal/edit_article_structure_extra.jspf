@@ -120,7 +120,7 @@
 				<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 			</portlet:renderURL>
 
-			<aui:button cssClass="journal-imagegallery-button" dataImagegalleryUrl="<%= selectIGURL %>" value="select" />
+			<aui:button cssClass="journal-imagegallery-button" data-ImagegalleryUrl="<%= selectIGURL %>" value="select" />
 		</div>
 
 		<div dataType="document_library">
@@ -131,7 +131,7 @@
 				<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 			</portlet:renderURL>
 
-			<aui:button cssClass="journal-documentlibrary-button" dataDocumentlibraryUrl="<%= selectDLURL %>" value="select" />
+			<aui:button cssClass="journal-documentlibrary-button" data-DocumentlibraryUrl="<%= selectDLURL %>" value="select" />
 		</div>
 
 		<div dataType="boolean">

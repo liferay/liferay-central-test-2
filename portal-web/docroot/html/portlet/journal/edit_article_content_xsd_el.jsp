@@ -157,7 +157,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 						<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 					</portlet:renderURL>
 
-					<aui:button cssClass="journal-imagegallery-button" dataImagegalleryUrl="<%= selectIGURL %>" value="select" />
+					<aui:button cssClass="journal-imagegallery-button" data-ImagegalleryUrl="<%= selectIGURL %>" value="select" />
 				</c:if>
 
 				<c:if test='<%= elType.equals("document_library") %>'>
@@ -168,7 +168,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 						<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 					</portlet:renderURL>
 
-					<aui:button cssClass="journal-documentlibrary-button" dataDocumentlibraryUrl="<%= selectDLURL %>" value="select" />
+					<aui:button cssClass="journal-documentlibrary-button" data-DocumentlibraryUrl="<%= selectDLURL %>" value="select" />
 				</c:if>
 
 				<c:if test='<%= elType.equals("boolean") %>'>
