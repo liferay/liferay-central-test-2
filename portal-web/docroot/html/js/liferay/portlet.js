@@ -357,7 +357,7 @@ Liferay.provide(
 			}
 		}
 	},
-	['aui-io-plugin']
+	['aui-io']
 );
 
 Liferay.provide(

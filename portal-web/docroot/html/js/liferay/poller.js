@@ -331,7 +331,7 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-base', 'io-base', 'json'],
+		requires: ['aui-base', 'io', 'json'],
 		use: []
 	}
 );

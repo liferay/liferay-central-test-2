@@ -670,7 +670,7 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-io-request', 'aui-portal-layout', 'aui-resize', 'dd-drag', 'dd-drop', 'dd-proxy', 'dd-scroll'],
+		requires: ['aui-io-request', 'aui-portal-layout', 'aui-resize', 'dd'],
 		use: []
 	}
 );

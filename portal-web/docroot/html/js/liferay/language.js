@@ -19,7 +19,7 @@ Liferay.Language = {
 			return value;
 		}
 
-		AUI().use('io-base').io(
+		AUI().use('aui-io').io(
 			url,
 			{
 				sync: true,

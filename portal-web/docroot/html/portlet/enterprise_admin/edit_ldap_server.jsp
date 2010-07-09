@@ -367,7 +367,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 				);
 			}
 		},
-		['aui-dialog', 'aui-io-plugin']
+		['aui-dialog', 'aui-io']
 	);
 
 	Liferay.provide(

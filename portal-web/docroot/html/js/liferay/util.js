@@ -785,7 +785,7 @@ Liferay.provide(
 			}
 		}
 	},
-	['aui-dialog', 'aui-io-plugin']
+	['aui-dialog', 'aui-io']
 );
 
 Liferay.provide(
@@ -1106,7 +1106,7 @@ Liferay.provide(
 			}
 		);
 	},
-	['aui-io-request']
+	['aui-io']
 );
 
 Liferay.provide(
@@ -1197,7 +1197,7 @@ Liferay.provide(
 			}
 		}
 	},
-	['aui-io-plugin']
+	['aui-io']
 );
 
 Liferay.provide(
@@ -1273,7 +1273,7 @@ Liferay.provide(
 			);
 		}
 	},
-	['aui-io-request']
+	['aui-io']
 );
 
 Liferay.provide(

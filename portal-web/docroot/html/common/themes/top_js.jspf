@@ -226,7 +226,6 @@
 		};
 
 		window.YUI_config = {
-			allowRollup: (Liferay.AUI.getCombine() == false),
 			comboBase: Liferay.AUI.getComboPath(),
 			fetchCSS: false,
 			filter: Liferay.AUI.getFilter(),
