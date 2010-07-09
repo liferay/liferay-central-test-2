@@ -318,7 +318,9 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 				</div>
 
 				<div class="aui-helper-hidden" id="<portlet:namespace />publishedEvents">
-					<liferay-ui:header title="scheduled-events" />
+					<liferay-ui:header
+						title="scheduled-events"
+					/>
 
 					<div id="<portlet:namespace />scheduledPublishEventsDiv"></div>
 				</div>
@@ -328,7 +330,9 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 
 			<div id="<portlet:namespace />publishOptions">
 				<c:if test="<%= schedule %>">
-					<liferay-ui:header title="new-event" />
+					<liferay-ui:header
+						title="new-event"
+					/>
 
 					<aui:input label="title" name="description" type="text" />
 				</c:if>
