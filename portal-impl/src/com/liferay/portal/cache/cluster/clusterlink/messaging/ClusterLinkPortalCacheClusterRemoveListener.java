@@ -28,9 +28,6 @@ import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 
 /**
- * <a href="ClusterLinkPortalCacheClusterRemoveListener.java.html"><b><i>View
- * Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class ClusterLinkPortalCacheClusterRemoveListener

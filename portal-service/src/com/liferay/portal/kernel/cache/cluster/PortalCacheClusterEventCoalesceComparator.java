@@ -17,9 +17,6 @@ package com.liferay.portal.kernel.cache.cluster;
 import java.util.Comparator;
 
 /**
- * <a href="PortalCacheClusterEventCoalesceComparator.java.html"><b><i>View
- * Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class PortalCacheClusterEventCoalesceComparator

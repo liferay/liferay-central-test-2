@@ -18,9 +18,6 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * <a href="UniformPortalCacheClusterChannelSelector.java.html"><b><i>View
- * Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class UniformPortalCacheClusterChannelSelector

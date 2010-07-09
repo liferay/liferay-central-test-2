@@ -21,9 +21,6 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="PluginsSampleJSF11MyfacesFaceletsTestSuite.java.html"><b><i>View
- * Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PluginsSampleJSF11MyfacesFaceletsTestSuite extends BaseTests {

@@ -18,9 +18,6 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="CA_RemoveGuestViewPortletPermissionsTest.java.html"><b><i>View
- * Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class CA_RemoveGuestViewPortletPermissionsTest extends BaseTestCase {

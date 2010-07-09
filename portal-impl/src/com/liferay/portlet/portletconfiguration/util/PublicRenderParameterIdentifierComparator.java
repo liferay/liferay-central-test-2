@@ -19,9 +19,6 @@ import com.liferay.portal.model.PublicRenderParameter;
 import java.util.Comparator;
 
 /**
- * <a href="PublicRenderParameterIdentifierComparator.java.html"><b><i>View
- * Source</i></b></a>
- *
  * @author Alberto Montero
  */
 public class PublicRenderParameterIdentifierComparator

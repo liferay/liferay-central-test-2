@@ -20,9 +20,6 @@ import net.sf.ehcache.event.CacheEventListener;
 import net.sf.ehcache.event.CacheEventListenerFactory;
 
 /**
- * <a href="EhcachePortalCacheClusterReplicatorFactory.java.html"><b><i>View
- * Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class EhcachePortalCacheClusterReplicatorFactory

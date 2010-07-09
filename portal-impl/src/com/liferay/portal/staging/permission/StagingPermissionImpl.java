@@ -23,8 +23,6 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 
 /**
- * <a href="StagingPermissionImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class StagingPermissionImpl implements StagingPermission {

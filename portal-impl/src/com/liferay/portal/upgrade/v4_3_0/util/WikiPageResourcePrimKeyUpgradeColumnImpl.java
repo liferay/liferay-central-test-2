@@ -17,9 +17,6 @@ package com.liferay.portal.upgrade.v4_3_0.util;
 import com.liferay.portal.kernel.upgrade.util.BaseUpgradeColumnImpl;
 
 /**
- * <a href="WikiPageResourcePrimKeyUpgradeColumnImpl.java.html"><b><i>View
- * Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class WikiPageResourcePrimKeyUpgradeColumnImpl

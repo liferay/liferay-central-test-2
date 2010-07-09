@@ -31,9 +31,6 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.util.ReflectionUtils;
 
 /**
- * <a href="BeanReferenceAnnotationBeanPostProcessor.java.html"><b><i>View
- * Source</i></b></a>
- *
  * @author Michael Young
  * @author Shuyang Zhou
  */

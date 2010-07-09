@@ -18,8 +18,6 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.security.permission.PermissionChecker;
 
 /**
- * <a href="StagingPermissionUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class StagingPermissionUtil {

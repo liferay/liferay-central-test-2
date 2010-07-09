@@ -20,9 +20,6 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="ChangeParentFrontPageChildPageToNoneTests.java.html"><b><i>View
- * Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ChangeParentFrontPageChildPageToNoneTests extends BaseTests {

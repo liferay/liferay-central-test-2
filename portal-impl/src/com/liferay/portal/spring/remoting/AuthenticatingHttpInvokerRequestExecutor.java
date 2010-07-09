@@ -28,9 +28,6 @@ import org.apache.commons.codec.binary.Base64;
 import org.springframework.remoting.httpinvoker.SimpleHttpInvokerRequestExecutor;
 
 /**
- * <a href="AuthenticatingHttpInvokerRequestExecutor.java.html"><b><i>View
- * Source</i></b></a>
- *
  * <p>
  * An HttpInvoker request executor for Spring Remoting that provides HTTP BASIC
  * authentication information for service invocations.

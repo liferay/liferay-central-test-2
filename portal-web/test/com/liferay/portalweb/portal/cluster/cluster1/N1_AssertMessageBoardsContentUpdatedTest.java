@@ -18,9 +18,6 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="N1_AssertMessageBoardsContentUpdatedTest.java.html"><b><i>View
- * Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class N1_AssertMessageBoardsContentUpdatedTest extends BaseTestCase {

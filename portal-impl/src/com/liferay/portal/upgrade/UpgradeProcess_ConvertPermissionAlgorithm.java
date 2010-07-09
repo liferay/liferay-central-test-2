@@ -20,9 +20,6 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 
 /**
- * <a href="UpgradeProcess_ConvertPermissionAlgorithm.java.html"><b><i>View
- * Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UpgradeProcess_ConvertPermissionAlgorithm extends UpgradeProcess {
