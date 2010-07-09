@@ -33,7 +33,7 @@ List<ToolTag> toolTags = (List<ToolTag>)request.getAttribute("aui:panel:toolTags
 			bodyContent: A.one('#<%= id %>bodyContent'),
 			collapsible: <%= collapsible %>,
 			contentBox: '#<%= id %>',
-			headerContent: '<%= label %>'
+			headerContent: '<liferay-ui:message key="<%= label %>" />'
 
 			<c:if test="<%= toolTags != null %>">
 				,tools: [
