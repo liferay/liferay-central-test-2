@@ -15,8 +15,6 @@
 package com.liferay.util.bridges.jsf.common;
 
 /**
- * <a href="ActionOutcomes.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * This class provides a set of string constants that describe typical outcomes
  * from JSF actions.

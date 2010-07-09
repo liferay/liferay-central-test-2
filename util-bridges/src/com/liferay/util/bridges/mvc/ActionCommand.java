@@ -19,8 +19,6 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 
 /**
- * <a href="ActionCommand.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public interface ActionCommand {

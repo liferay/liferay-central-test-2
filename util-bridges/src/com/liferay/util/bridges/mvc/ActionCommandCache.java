@@ -28,8 +28,6 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 
 /**
- * <a href="ActionCommandCache.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class ActionCommandCache {

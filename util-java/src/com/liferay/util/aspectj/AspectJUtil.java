@@ -22,8 +22,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 
 /**
- * <a href="AspectJUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class AspectJUtil {

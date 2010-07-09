@@ -15,8 +15,6 @@
 package com.liferay.util.servlet;
 
 /**
- * <a href="ProtectedPrincipal.java.html"><b><i>View Source</i></b></a>
- *
  * @author	   Brian Wing Shun Chan
  * @deprecated This class has been repackaged at
  *			   <code>com.liferay.portal.kernel.servlet</code>.

@@ -15,8 +15,6 @@
 package com.liferay.util.servlet;
 
 /**
- * <a href="UploadException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UploadException extends Exception {

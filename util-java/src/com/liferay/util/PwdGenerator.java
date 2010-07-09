@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 /**
- * <a href="PwdGenerator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Amos Fong
  */

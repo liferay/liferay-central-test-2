@@ -18,8 +18,6 @@ import com.liferay.ibm.icu.text.Transliterator;
 import com.liferay.portal.kernel.util.StringUtil;
 
 /**
- * <a href="Normalizer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class Normalizer {

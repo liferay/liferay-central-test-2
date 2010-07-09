@@ -51,8 +51,6 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
 /**
- * <a href="ScriptingPortlet.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  * @author Alberto Montero

@@ -19,8 +19,6 @@ import java.io.IOException;
 import javax.servlet.ServletInputStream;
 
 /**
- * <a href="ServletInputStreamWrapper.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ServletInputStreamWrapper extends ServletInputStream {

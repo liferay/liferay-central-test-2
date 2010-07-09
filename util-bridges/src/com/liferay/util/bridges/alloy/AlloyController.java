@@ -17,8 +17,6 @@ package com.liferay.util.bridges.alloy;
 import javax.servlet.jsp.PageContext;
 
 /**
- * <a href="AlloyController.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface AlloyController {

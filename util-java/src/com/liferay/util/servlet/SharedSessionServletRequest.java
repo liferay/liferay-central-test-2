@@ -23,8 +23,6 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpSession;
 
 /**
- * <a href="SharedSessionServletRequest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Brian Myunghun Kim
  */

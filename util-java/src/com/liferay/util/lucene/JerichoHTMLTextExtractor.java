@@ -25,8 +25,6 @@ import net.htmlparser.jericho.Source;
 import org.apache.jackrabbit.extractor.HTMLTextExtractor;
 
 /**
- * <a href="JerichoHTMLTextExtractor.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class JerichoHTMLTextExtractor extends HTMLTextExtractor {

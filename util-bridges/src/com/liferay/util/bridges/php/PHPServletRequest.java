@@ -30,8 +30,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 /**
- * <a href="PHPServletRequest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class PHPServletRequest extends HttpServletRequestWrapper {

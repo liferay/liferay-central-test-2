@@ -19,8 +19,6 @@ import com.liferay.util.bridges.scripting.ScriptingPortlet;
 import javax.portlet.RenderRequest;
 
 /**
- * <a href="PythonPortlet.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  * @author Alberto Montero
  * @author Brian Wing Shun Chan

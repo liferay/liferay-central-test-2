@@ -33,8 +33,6 @@ import org.codehaus.plexus.components.io.fileselectors.FileSelector;
 import org.codehaus.plexus.components.io.fileselectors.IncludeExcludeFileSelector;
 
 /**
- * <a href="ThemeMergeMojo.java.html"><b><i>View Source</i></b></a>
- *
  * @author Mika Koivisto
  * @goal   theme-merge
  * @phase  process-sources

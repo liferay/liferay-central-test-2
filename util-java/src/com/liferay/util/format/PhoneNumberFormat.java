@@ -15,8 +15,6 @@
 package com.liferay.util.format;
 
 /**
- * <a href="PhoneNumberFormat.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface PhoneNumberFormat {

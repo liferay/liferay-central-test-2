@@ -25,8 +25,6 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 
 /**
- * <a href="ServiceBuilderMojo.java.html"><b><i>View Source</i></b></a>
- *
  * Builds Liferay Service Builder services.
  *
  * @author Mika Koivisto

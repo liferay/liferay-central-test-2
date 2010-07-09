@@ -20,8 +20,6 @@ import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.UpToDate;
 
 /**
- * <a href="UpToDateTask.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UpToDateTask {

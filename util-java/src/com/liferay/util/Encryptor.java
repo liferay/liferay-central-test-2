@@ -31,8 +31,6 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 
 /**
- * <a href="Encryptor.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class Encryptor {

@@ -28,8 +28,6 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
 /**
- * <a href="XLSTextStripper.java.html"><b><i>View Source</i></b></a>
- *
  * @author Mirco Tamburini
  */
 public class XLSTextStripper {

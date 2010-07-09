@@ -27,8 +27,6 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.TransactionSystemException;
 
 /**
- * <a href="TransactionStatusClp.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * A class loader proxy implementation for a transaction status object created
  * by the transaction manager within the portal and serialized back and forth

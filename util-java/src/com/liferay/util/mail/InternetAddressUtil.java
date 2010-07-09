@@ -27,8 +27,6 @@ import javax.mail.internet.InternetAddress;
 import org.apache.commons.validator.EmailValidator;
 
 /**
- * <a href="InternetAddressUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class InternetAddressUtil {

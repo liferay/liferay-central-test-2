@@ -30,8 +30,6 @@ import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * <a href="SystemProperties.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Mirco Tamburini
  * @author Brett Randall

@@ -20,8 +20,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <a href="MulticastClientTool.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * A client that listens for multicast messages at a designated port. You may
  * use this to for potential multicast issues when tuning distributed caches.

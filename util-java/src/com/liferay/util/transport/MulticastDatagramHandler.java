@@ -28,8 +28,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="MulticastDatagramHandler.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  * @author Raymond Augé
  */

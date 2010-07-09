@@ -26,8 +26,6 @@ import java.util.Set;
 import javax.faces.context.FacesContext;
 
 /**
- * <a href="LanguageManagedBean.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * This class serves as a bridge between the JSF Expression Language (EL) and
  * Liferay's Language.properties resource bundle.

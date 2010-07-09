@@ -21,8 +21,6 @@ import javax.servlet.ServletContext;
 import org.apache.portals.bridges.struts.PortletServlet;
 
 /**
- * <a href="LiferayPortletServlet.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael Young
  */
 public class LiferayPortletServlet extends PortletServlet {

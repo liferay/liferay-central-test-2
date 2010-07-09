@@ -24,8 +24,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="MulticastTransport.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * The MulticastTransport will send strings across a specified multicast
  * address. It will also listen for messages and hand them to the appropriate

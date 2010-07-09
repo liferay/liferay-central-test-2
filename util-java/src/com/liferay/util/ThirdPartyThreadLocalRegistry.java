@@ -20,9 +20,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * <a href="ThirdPartyThreadLocalRegistry.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * <p>
  * See http://issues.liferay.com/browse/LPS-7864.
  * </p>

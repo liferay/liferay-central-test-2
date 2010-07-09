@@ -18,8 +18,6 @@ import net.fortuna.ical4j.model.ParameterList;
 import net.fortuna.ical4j.model.property.XProperty;
 
 /**
- * <a href="TimeZoneSensitive.java.html"><b><i>View Source</i></b></a>
- *
  * @author Samuel Kong
  */
 public class TimeZoneSensitive extends XProperty {

@@ -29,8 +29,6 @@ import javax.portlet.PortletMode;
 import javax.portlet.WindowState;
 
 /**
- * <a href="WAIFriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class WAIFriendlyURLMapper implements FriendlyURLMapper {

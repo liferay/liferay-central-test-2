@@ -17,8 +17,6 @@ package com.liferay.util.xml;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 
 /**
- * <a href="XMLSafeReader.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class XMLSafeReader extends UnsyncStringReader {

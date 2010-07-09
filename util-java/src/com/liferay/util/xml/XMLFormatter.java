@@ -31,8 +31,6 @@ import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
 /**
- * <a href="XMLFormatter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Alan Zimmerman
  */

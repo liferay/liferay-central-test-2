@@ -18,8 +18,6 @@ import java.io.IOException;
 import java.io.Writer;
 
 /**
- * <a href="WriterWrapper.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Myunghun Kim
  */
 public class WriterWrapper extends Writer {

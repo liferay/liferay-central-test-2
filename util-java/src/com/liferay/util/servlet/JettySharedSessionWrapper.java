@@ -21,8 +21,6 @@ import javax.servlet.http.HttpSession;
 import org.mortbay.jetty.servlet.AbstractSessionManager;
 
 /**
- * <a href="JettySharedSessionWrapper.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class JettySharedSessionWrapper

@@ -18,8 +18,6 @@ import org.apache.catalina.connector.Connector;
 import org.apache.catalina.connector.Request;
 
 /**
- * <a href="PortalConnector.java.html"><b><i>View Source</i></b></a>
- *
  * @author Minhchau Dang
  */
 public class PortalConnector extends Connector {

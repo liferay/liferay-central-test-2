@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
 /**
- * <a href="USAPhoneNumberFormat.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class USAPhoneNumberFormat implements PhoneNumberFormat {

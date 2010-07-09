@@ -23,8 +23,6 @@ import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 
 /**
- * <a href="LDAPUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Toma Bedolla
  * @author Michael Young
  * @author Brian Wing Shun Chan

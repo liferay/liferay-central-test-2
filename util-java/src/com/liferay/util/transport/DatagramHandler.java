@@ -17,8 +17,6 @@ package com.liferay.util.transport;
 import java.net.DatagramPacket;
 
 /**
- * <a href="DatagramHandler.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public interface DatagramHandler {

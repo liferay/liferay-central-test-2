@@ -27,8 +27,6 @@ import javax.mail.Part;
 import javax.mail.internet.InternetAddress;
 
 /**
- * <a href="JavaMailUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class JavaMailUtil {

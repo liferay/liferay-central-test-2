@@ -25,8 +25,6 @@ import java.util.Arrays;
 import org.apache.catalina.startup.HostConfig;
 
 /**
- * <a href="PortalHostConfig.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * Tomcat will always process XML descriptors first, then packaged WARs, and
  * then exploded WARs. However, Tomcat does not have a predictable load order

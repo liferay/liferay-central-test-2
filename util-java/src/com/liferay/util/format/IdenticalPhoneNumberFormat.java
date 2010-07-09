@@ -15,8 +15,6 @@
 package com.liferay.util.format;
 
 /**
- * <a href="IdenticalPhoneNumberFormat.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class IdenticalPhoneNumberFormat implements PhoneNumberFormat {

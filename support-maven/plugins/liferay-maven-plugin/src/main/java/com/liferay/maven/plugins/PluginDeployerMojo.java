@@ -21,8 +21,6 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 
 /**
- * <a href="PluginDeployerMojo.java.html"><b><i>View Source</i></b></a>
- *
  * @author Mika Koivisto
  * @author Thiago Moreira
  * @goal   deploy

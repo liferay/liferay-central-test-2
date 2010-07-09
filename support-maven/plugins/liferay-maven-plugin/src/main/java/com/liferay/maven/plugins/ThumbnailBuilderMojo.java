@@ -22,8 +22,6 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 
 /**
- * <a href="ThumbnailBuilderMojo.java.html"><b><i>View Source</i></b></a>
- *
  * @author Mika Koivisto
  * @goal   build-thumbnail
  * @phase  process-sources

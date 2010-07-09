@@ -23,8 +23,6 @@ import org.jabsorb.serializer.MarshallException;
 import org.jabsorb.serializer.UnmarshallException;
 
 /**
- * <a href="JSONFactoryUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class JSONFactoryUtil {

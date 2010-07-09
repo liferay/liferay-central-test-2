@@ -23,8 +23,6 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
- * <a href="ResourceBundleUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Neil Griffin
  */
 public class ResourceBundleUtil {

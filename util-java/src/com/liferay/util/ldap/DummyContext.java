@@ -26,8 +26,6 @@ import javax.naming.NamingException;
 import javax.naming.OperationNotSupportedException;
 
 /**
- * <a href="DummyContext.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class DummyContext implements Context {

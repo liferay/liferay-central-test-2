@@ -31,8 +31,6 @@ import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
 /**
- * <a href="XMLMergerRunner.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class XMLMergerRunner {

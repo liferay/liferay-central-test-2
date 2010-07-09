@@ -19,8 +19,6 @@ import com.liferay.util.xml.ElementIdentifier;
 import org.dom4j.Document;
 
 /**
- * <a href="StrutsConfigDescriptor.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class StrutsConfigDescriptor extends SimpleXMLDescriptor {

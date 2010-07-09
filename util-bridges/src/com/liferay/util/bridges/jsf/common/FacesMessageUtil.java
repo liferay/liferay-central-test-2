@@ -23,8 +23,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 /**
- * <a href="FacesMessageUtil.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * This class provides static convenience methods for creating FacesMessage
  * objects from locale-specific values in the Liferay portal.properties file,

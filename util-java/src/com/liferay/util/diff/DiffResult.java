@@ -21,8 +21,6 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * <a href="DiffResult.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * Represents a change between one or several lines. <code>changeType</code>
  * tells if the change happened in source or target. <code>lineNumber</code>

@@ -40,8 +40,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 /**
- * <a href="AlloyPortlet.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class AlloyPortlet extends GenericPortlet {

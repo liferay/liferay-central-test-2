@@ -44,8 +44,6 @@ import java.util.Properties;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * <a href="CustomSQL.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
  * @author Raymond Augé

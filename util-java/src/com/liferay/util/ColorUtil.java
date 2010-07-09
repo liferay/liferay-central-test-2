@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import java.awt.Color;
 
 /**
- * <a href="ColorUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Ming-Gih Lam
  * @author David Truong

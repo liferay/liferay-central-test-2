@@ -17,8 +17,6 @@ package com.liferay.support.tomcat.loader;
 import org.apache.catalina.loader.WebappClassLoader;
 
 /**
- * <a href="PortalClassLoader.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * See sample-struts-liferay-portlet.war. Add META-INF/context.xml to any WAR
  * and set the loaderClass attribute to reference this class. This will allow

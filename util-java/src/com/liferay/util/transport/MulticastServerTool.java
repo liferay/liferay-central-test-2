@@ -18,8 +18,6 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 
 /**
- * <a href="MulticastServerTool.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * A server that will send out heart beat messages until you kill it. This
  * enables you to try and debug multicast issues.

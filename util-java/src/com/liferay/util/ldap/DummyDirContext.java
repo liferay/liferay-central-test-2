@@ -25,8 +25,6 @@ import javax.naming.directory.SearchControls;
 import javax.naming.directory.SearchResult;
 
 /**
- * <a href="DummyDirContext.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class DummyDirContext extends DummyContext implements DirContext {

@@ -35,8 +35,6 @@ import org.springframework.transaction.TransactionSystemException;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 /**
- * <a href="TransactionManagerClp.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * A transaction manager class loader proxy delegating the method invocations to
  * the transaction manager in the portal implementation. The transaction manager

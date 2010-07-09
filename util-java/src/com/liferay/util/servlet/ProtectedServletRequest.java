@@ -17,8 +17,6 @@ package com.liferay.util.servlet;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="ProtectedServletRequest.java.html"><b><i>View Source</i></b></a>
- *
  * @author	   Brian Wing Shun Chan
  * @deprecated This class has been repackaged at
  *			   <code>com.liferay.portal.kernel.servlet</code>.

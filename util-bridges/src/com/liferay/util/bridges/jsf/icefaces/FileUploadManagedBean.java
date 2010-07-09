@@ -32,8 +32,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 /**
- * <a href="FileUploadManagedBean.java.html"><b><i>View Source</i></b></a>
- *
  * This class is a managed bean that is designed specifically to work with the
  * ICEfaces framework, by utilizing the <code><ice:inputFile/></code> component.
  *

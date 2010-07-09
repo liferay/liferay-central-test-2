@@ -22,8 +22,6 @@ import org.apache.catalina.connector.Connector;
 import org.apache.catalina.core.StandardService;
 
 /**
- * <a href="PortalStandardService.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * See http://issues.liferay.com/browse/LEP-4602.
  * </p>
