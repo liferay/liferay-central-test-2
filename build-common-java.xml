@@ -20,7 +20,9 @@
 		<delete dir="classes" />
 		<delete dir="test-classes" />
 		<delete dir="test-results" />
+		<delete dir="${doc.dir}/${ant.project.name}/javadocs" />
 		<delete file="${jar.file}.jar" failonerror="false" />
+		<delete file="${jar.file}-javadoc.jar" failonerror="false" />
 		<delete file="${jar.file}-sources.jar" failonerror="false" />
 	</target>
 
@@ -73,10 +75,34 @@
 		/>
 	</target>
 
+	<target name="jar-javadoc" depends="javadoc">
+		<jar
+			basedir="${doc.dir}/${ant.project.name}/javadocs"
+			jarfile="${jar.file}-javadoc.jar"
+		/>
+	</target>
+
 	<target name="jar-sources">
 		<jar
 			basedir="src"
 			jarfile="${jar.file}-sources.jar"
 		/>
+	</target>
+
+	<target name="javadoc">
+		<mkdir dir="${doc.dir}/${ant.project.name}/javadocs" />
+
+		<javadoc
+			breakiterator="yes"
+			classpathref="project.classpath"
+			destdir="${doc.dir}/${ant.project.name}/javadocs"
+			maxmemory="768m"
+			packagenames="*.*"
+			sourcepath="src"
+			stylesheetfile="${project.dir}/tools/javadoc.css"
+			useexternalfile="yes"
+		>
+			<arg line="-quiet -tag generated" />
+		</javadoc>
 	</target>
 </project>

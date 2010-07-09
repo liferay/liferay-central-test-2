@@ -263,17 +263,11 @@
 	</target>
 
 	<target name="jar-javadoc">
-		<ant dir="portal-client" target="javadoc" inheritAll="false" />
 		<ant dir="portal-client" target="jar-javadoc" inheritAll="false" />
-		<ant dir="portal-impl" target="javadoc" inheritAll="false" />
 		<ant dir="portal-impl" target="jar-javadoc" inheritAll="false" />
-		<ant dir="portal-service" target="javadoc" inheritAll="false" />
 		<ant dir="portal-service" target="jar-javadoc" inheritAll="false" />
-		<ant dir="util-bridges" target="javadoc" inheritAll="false" />
 		<ant dir="util-bridges" target="jar-javadoc" inheritAll="false" />
-		<ant dir="util-java" target="javadoc" inheritAll="false" />
 		<ant dir="util-java" target="jar-javadoc" inheritAll="false" />
-		<ant dir="util-taglib" target="javadoc" inheritAll="false" />
 		<ant dir="util-taglib" target="jar-javadoc" inheritAll="false" />
 	</target>
 
