@@ -84,6 +84,7 @@ public class AddVirtualHostingCommunityTest extends BaseTestCase {
 			RuntimeVariables.replace("Virtual Hosting Communit"));
 		selenium.type("_134_name",
 			RuntimeVariables.replace("Virtual Hosting Community"));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

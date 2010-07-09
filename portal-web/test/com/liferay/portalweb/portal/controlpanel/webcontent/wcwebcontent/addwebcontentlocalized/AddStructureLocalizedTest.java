@@ -56,6 +56,7 @@ public class AddStructureLocalizedTest extends BaseTestCase {
 		selenium.type("_15_description",
 			RuntimeVariables.replace("This is a test localized structure."));
 		selenium.clickAt("_15_editorButton", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

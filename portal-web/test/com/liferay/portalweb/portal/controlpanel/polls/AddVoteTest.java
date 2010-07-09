@@ -53,7 +53,7 @@ public class AddVoteTest extends BaseTestCase {
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div"));
 		assertEquals(RuntimeVariables.replace("Test Poll Question"),
-			selenium.getText("//span/span/span"));
+			selenium.getText("//div[1]/h1/span"));
 		assertEquals(RuntimeVariables.replace(
 				"This is a test poll description."),
 			selenium.getText("//fieldset/div/span"));

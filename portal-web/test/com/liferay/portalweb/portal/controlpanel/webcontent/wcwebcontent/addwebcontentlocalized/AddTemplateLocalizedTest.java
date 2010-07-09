@@ -103,6 +103,7 @@ public class AddTemplateLocalizedTest extends BaseTestCase {
 				selenium.type("_15_xsl",
 					RuntimeVariables.replace(
 						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\controlpanel\\webcontent\\wcwebcontent\\addwebcontentlocalized\\dependencies\\LocalizedTemplate.htm"));
+				Thread.sleep(5000);
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");

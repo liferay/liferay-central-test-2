@@ -106,6 +106,7 @@ public class AddWebContent2Test extends BaseTestCase {
 		selenium.type("//body",
 			RuntimeVariables.replace("Web2 Content2 Content2"));
 		selenium.selectFrame("relative=top");
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

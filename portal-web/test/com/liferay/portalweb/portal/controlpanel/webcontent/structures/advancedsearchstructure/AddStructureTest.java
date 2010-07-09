@@ -68,6 +68,7 @@ public class AddStructureTest extends BaseTestCase {
 			RuntimeVariables.replace("title"));
 		selenium.select("_15_structure_el0_type",
 			RuntimeVariables.replace("label=Text"));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(

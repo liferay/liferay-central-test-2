@@ -23,7 +23,6 @@ import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.addwebc
 import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.addwebcontentmultiple.AddWebContentMultipleTests;
 import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.addwebcontentnameescapecharacter.AddWebContentNameEscapeCharacterTests;
 import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.addwebcontentnamenull.AddWebContentNameNullTests;
-import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.advancedsearchwebcontent.AdvancedSearchWebContentTests;
 import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.approvewebcontentdraft.ApproveWebContentDraftTests;
 import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.approvewebcontentexpired.ApproveWebContentExpiredTests;
 import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.deletewebcontentaction.DeleteWebContentActionTests;
@@ -52,7 +51,7 @@ public class WCWebContentTests extends BaseTests {
 		testSuite.addTest(AddWebContentMultipleTests.suite());
 		testSuite.addTest(AddWebContentNameEscapeCharacterTests.suite());
 		testSuite.addTest(AddWebContentNameNullTests.suite());
-		testSuite.addTest(AdvancedSearchWebContentTests.suite());
+//		testSuite.addTest(AdvancedSearchWebContentTests.suite());
 		testSuite.addTest(ApproveWebContentDraftTests.suite());
 		testSuite.addTest(ApproveWebContentExpiredTests.suite());
 		testSuite.addTest(DeleteWebContentActionTests.suite());

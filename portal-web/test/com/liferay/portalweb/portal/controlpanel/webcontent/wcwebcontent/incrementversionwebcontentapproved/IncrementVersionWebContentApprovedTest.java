@@ -55,7 +55,8 @@ public class IncrementVersionWebContentApprovedTest extends BaseTestCase {
 			RuntimeVariables.replace("Web Content Name Approved"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-		selenium.clickAt("_15_saveArticleBtn", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save as Draft']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),

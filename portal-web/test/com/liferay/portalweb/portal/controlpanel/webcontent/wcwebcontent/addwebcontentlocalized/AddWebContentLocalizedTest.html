@@ -35,8 +35,8 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[2]/input[5]</td>
-	<td></td>
+	<td>//fieldset/div/div/span/span/input</td>
+	<td>Select Template</td>
 </tr>
 <tr>
 	<td>assertConfirmation</td>
@@ -79,9 +79,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=Test Localized Structure</td>
-	<td></td>
+	<td>assertPartialText</td>
+	<td>//fieldset/div/div/div/div/span</td>
+	<td>Test Localized Structure</td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
@@ -89,24 +89,154 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAt</td>
+	<td>_15_editStructureBtn</td>
+	<td>Edit</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//div[4]/span[2]/span/input</td>
+	<td>Edit Options</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div[4]/span[2]/span/input</td>
+	<td>Edit Options</td>
+</tr>
+<tr>
+	<td>assertNotChecked</td>
+	<td>_15_localizedCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>_15_localizedCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>_15_localizedCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>_15_save</td>
+	<td>Save</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>_15_journalMessage</td>
+	<td>Your request processed successfully.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>_15_journalMessage</td>
+	<td>Your request processed successfully.</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>_15_close</td>
+	<td>Close</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//li[2]/span[2]/div/div[4]/span[2]/span/input</td>
+	<td>Edit Options</td>
+</tr>
+<tr>
+	<td>assertNotChecked</td>
+	<td>_15_localizedCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>_15_localizedCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>_15_localizedCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>_15_save</td>
+	<td>Save</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>_15_journalMessage</td>
+	<td>Your request processed successfully.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>_15_journalMessage</td>
+	<td>Your request processed successfully.</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>_15_close</td>
+	<td>Close</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>_15_saveStructureBtn</td>
+	<td>Save</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>_15_saveStructureBtn</td>
+	<td>Save</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//div/button[1]</td>
+	<td>Save</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div/button[1]</td>
+	<td>Save</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>_15_saveStructureMessage</td>
+	<td>Your request processed successfully.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>_15_saveStructureMessage</td>
+	<td>Your request processed successfully.</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>closethick</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>_15_editStructureBtn</td>
+	<td>Stop Editing</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
-	<td>_15_structure_el0_content</td>
+	<td>page-name</td>
 	<td>Hello World Page Name</td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>//input[@type='checkbox']</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>_15_structure_el1_content</td>
+	<td>page-description</td>
 	<td>Hello World Page Description</td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>//tr[2]/td/table/tbody/tr/td/fieldset/table[2]/tbody/tr/td[1]/input</td>
-	<td></td>
 </tr>
 <tr>
 	<td>type</td>
@@ -114,17 +244,22 @@
 	<td>Hello World Localized Article</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value="Save and Continue"]</td>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>//input[@value="Save and Continue"]</td>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='Save as Draft']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
@@ -145,17 +280,22 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>_15_structure_el0_content</td>
+	<td>page-name</td>
 	<td>世界您好 Page Name</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>_15_structure_el1_content</td>
+	<td>page-description</td>
 	<td>世界您好 Page Description</td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAt</td>
-	<td>//input[@value="Save and Approve"]</td>
+	<td>//input[@value='Publish']</td>
 	<td></td>
 </tr>
 <tr>
@@ -166,6 +306,11 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Hello World Localized Article</td>
 	<td></td>
 </tr>
 <tr>

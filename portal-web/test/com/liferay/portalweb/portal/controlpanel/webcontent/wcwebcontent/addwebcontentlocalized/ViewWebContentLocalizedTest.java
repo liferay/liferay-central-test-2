@@ -48,19 +48,19 @@ public class ViewWebContentLocalizedTest extends BaseTestCase {
 			RuntimeVariables.replace("Hello World Localized Article"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
+		assertEquals("Hello World Page Name", selenium.getValue("page-name"));
+		assertEquals("Hello World Page Description",
+			selenium.getValue("page-description"));
 		selenium.select("_15_languageId",
 			RuntimeVariables.replace("label=Chinese (China)"));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		assertEquals("\u4e16\u754c\u60a8\u597d Page Name",
-			selenium.getValue("_15_structure_el0_content"));
+			selenium.getValue("page-name"));
 		assertEquals("\u4e16\u754c\u60a8\u597d Page Description",
-			selenium.getValue("_15_structure_el1_content"));
+			selenium.getValue("page-description"));
 		selenium.select("_15_languageId",
 			RuntimeVariables.replace("label=English (United States)"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals("Hello World Page Name",
-			selenium.getValue("_15_structure_el0_content"));
-		assertEquals("Hello World Page Description",
-			selenium.getValue("_15_structure_el1_content"));
 	}
 }

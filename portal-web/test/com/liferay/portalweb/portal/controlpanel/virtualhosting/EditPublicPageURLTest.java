@@ -49,6 +49,7 @@ public class EditPublicPageURLTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -78,6 +79,7 @@ public class EditPublicPageURLTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_134_publicVirtualHost",
 			RuntimeVariables.replace("www.able.com"));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

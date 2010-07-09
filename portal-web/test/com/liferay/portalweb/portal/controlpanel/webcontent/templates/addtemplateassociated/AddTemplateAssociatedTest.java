@@ -140,6 +140,7 @@ public class AddTemplateAssociatedTest extends BaseTestCase {
 				}
 
 				selenium.click("//input[@value='Update']");
+				Thread.sleep(5000);
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");

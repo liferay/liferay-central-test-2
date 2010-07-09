@@ -56,7 +56,7 @@ public class CA_MoveImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//span[3]/a/img")) {
+				if (selenium.isVisible("//img[@alt='Edit']")) {
 					break;
 				}
 			}
@@ -66,7 +66,7 @@ public class CA_MoveImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//span[3]/a/img"));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"Image Permissions Test Subfolder"),

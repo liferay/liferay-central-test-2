@@ -87,6 +87,8 @@ public class CancelStructurePopupTest extends BaseTestCase {
 
 		selenium.clickAt("//input[@value='Cancel']",
 			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[3]/span[3]/span/input",
+			RuntimeVariables.replace("Cancel"));
 		Thread.sleep(5000);
 		assertFalse(selenium.isElementPresent("_15_xsdContent"));
 	}

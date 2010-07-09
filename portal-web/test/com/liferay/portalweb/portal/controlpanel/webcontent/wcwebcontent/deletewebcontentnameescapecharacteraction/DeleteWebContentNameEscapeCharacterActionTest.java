@@ -50,6 +50,7 @@ public class DeleteWebContentNameEscapeCharacterActionTest extends BaseTestCase 
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("<!-- -->"),
 			selenium.getText("//td[3]/a"));
+		Thread.sleep(5000);
 		selenium.clickAt("//td[9]/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 

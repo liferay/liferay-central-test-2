@@ -140,6 +140,7 @@ public class AddWebContentTest extends BaseTestCase {
 			RuntimeVariables.replace("label=:00"));
 		selenium.type("_15_description",
 			RuntimeVariables.replace("Web Content Description"));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

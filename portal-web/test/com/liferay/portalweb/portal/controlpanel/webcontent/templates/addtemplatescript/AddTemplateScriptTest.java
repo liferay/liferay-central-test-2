@@ -58,6 +58,7 @@ public class AddTemplateScriptTest extends BaseTestCase {
 		selenium.type("_15_xsl",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\controlpanel\\webcontent\\templates\\addtemplatescript\\dependencies\\Template.htm"));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(

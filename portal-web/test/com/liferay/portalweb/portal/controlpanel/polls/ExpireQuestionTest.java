@@ -54,6 +54,7 @@ public class ExpireQuestionTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Cancel']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		selenium.clickAt("//td[5]/ul/li/strong/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
