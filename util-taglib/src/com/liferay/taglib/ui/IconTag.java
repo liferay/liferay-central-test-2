@@ -82,8 +82,8 @@ public class IconTag extends IncludeTag {
 
 	protected void cleanUp() {
 		_cssClass = null;
-		_image = null;
 		_id = null;
+		_image = null;
 		_imageHover = null;
 		_label = false;
 		_lang = null;
