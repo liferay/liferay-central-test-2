@@ -448,7 +448,7 @@ public class SourceFormatter {
 				_sourceFormatterHelper.printError(fileName, "(c): " + fileName);
 			}
 
-			if (newContent.indexOf(className + ".java.html") == -1) {
+			if (newContent.indexOf(className + ".java.html") != -1) {
 				_sourceFormatterHelper.printError(
 					fileName, "Java2HTML: " + fileName);
 			}
