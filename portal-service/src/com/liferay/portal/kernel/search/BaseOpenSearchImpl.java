@@ -144,19 +144,15 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 
 		// entryClassName
 
-		if (entryClassName != null) {
-			OpenSearchUtil.addElement(
-				entry, "entryClassName", OpenSearchUtil.LIFERAY_NAMESPACE,
-				entryClassName);
-		}
+		OpenSearchUtil.addElement(
+			entry, "entryClassName", OpenSearchUtil.LIFERAY_NAMESPACE,
+			entryClassName);
 
 		// entryClassPK
 
-		if (entryClassPK > 0) {
-			OpenSearchUtil.addElement(
-				entry, "entryClassPK", OpenSearchUtil.LIFERAY_NAMESPACE,
-				entryClassPK);
-		}
+		OpenSearchUtil.addElement(
+			entry, "entryClassPK", OpenSearchUtil.LIFERAY_NAMESPACE,
+			entryClassPK);
 
 		// title
 

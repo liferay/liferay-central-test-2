@@ -103,7 +103,9 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 				long resultGroupId = GetterUtil.getLong(
 					result.get(Field.GROUP_ID));
 
-				String entryClassName = result.get(Field.ENTRY_CLASS_NAME);
+				String entryClassName = GetterUtil.getString(
+					result.get(Field.ENTRY_CLASS_NAME));
+
 				long entryClassPK = GetterUtil.getLong(
 					result.get(Field.ENTRY_CLASS_PK));
 
