@@ -45,7 +45,6 @@ import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.PortletResourceBundles;
 import com.liferay.portlet.expando.model.ExpandoColumn;
@@ -469,10 +468,7 @@ public class ResourceActionsUtil {
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
 
-			String[] configs = StringUtil.split(
-				PropsUtil.get(PropsKeys.RESOURCE_ACTIONS_CONFIGS));
-
-			for (String config : configs) {
+			for (String config : PropsValues.RESOURCE_ACTIONS_CONFIGS) {
 				_read(null, classLoader, config);
 			}
 		}
