@@ -132,7 +132,12 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
+		// File entries
+
 		updateFileEntries();
+
+		// File versions
+
 		updateFileVersions();
 	}
 
