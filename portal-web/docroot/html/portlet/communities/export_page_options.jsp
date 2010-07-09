@@ -66,7 +66,8 @@ Layout curLayout = (Layout)row.getObject();
 
 	<c:if test="<%= !curLayout.getAncestors().isEmpty() %>">
 		ancestorsCheckbox.on(
-			'change', function (event) {
+			'change',
+			function(event) {
 				ancestorsMsg.toggle();
 			}
 		);
@@ -74,14 +75,16 @@ Layout curLayout = (Layout)row.getObject();
 
 	<c:if test="<%= !curLayout.getChildren().isEmpty() %>">
 		childrenCheckbox.on(
-			'change', function (event) {
+			'change',
+			function(event) {
 				childrenMsg.toggle();
 			}
 		);
 	</c:if>
 
 	radioButtons.on(
-		'change', function (event) {
+		'change',
+		function(event) {
 			deleteMsg.toggle();
 
 			if (event.currentTarget.get('value') == 'true') {
@@ -91,7 +94,6 @@ Layout curLayout = (Layout)row.getObject();
 			else {
 				if (ancestorsCheckbox && ancestorsCheckbox.get('checked')) {
 					ancestorsMsg.show();
-					console.log( ancestorsMsg);
 				}
 
 				if (childrenCheckbox && childrenCheckbox.get('checked')) {
