@@ -312,7 +312,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 				submitForm(document.<portlet:namespace />fm);
 			}
 		},
-		['aui-io']
+		['aui-io-request']
 	);
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">

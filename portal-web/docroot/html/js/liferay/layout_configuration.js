@@ -634,7 +634,7 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-live-search', 'dd', 'liferay-layout'],
+		requires: ['aui-live-search', 'dd-drag', 'dd-drop', 'dd-proxy', 'dd-scroll', 'liferay-layout'],
 		use: []
 	}
 );

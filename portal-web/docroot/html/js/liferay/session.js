@@ -278,6 +278,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-io', 'collection', 'cookie', 'liferay-notice', 'substitute']
+		requires: ['aui-io-request', 'collection', 'cookie', 'liferay-notice', 'substitute']
 	}
 );

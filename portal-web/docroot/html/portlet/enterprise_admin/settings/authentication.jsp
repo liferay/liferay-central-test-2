@@ -230,6 +230,6 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings--" + PropsK
 				);
 			}
 		},
-		['aui-dialog', 'aui-io']
+		['aui-dialog', 'aui-io-plugin']
 	);
 </aui:script>

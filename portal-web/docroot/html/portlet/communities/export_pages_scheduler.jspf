@@ -89,7 +89,7 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 
 			document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = oldCmd;
 		},
-		['aui-io']
+		['aui-io-request']
 	);
 
 	Liferay.provide(
@@ -125,7 +125,7 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 				document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = oldCmd;
 			}
 		},
-		['aui-io']
+		['aui-io-request']
 	);
 
 	Liferay.provide(
@@ -164,7 +164,7 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 				}
 			);
 		},
-		['aui-io']
+		['aui-io-request']
 	);
 
 	<portlet:namespace />updateScheduledPublishEventsDiv();

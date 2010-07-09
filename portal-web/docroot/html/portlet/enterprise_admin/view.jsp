@@ -281,7 +281,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 				}
 			);
 		},
-		['aui-io']
+		['aui-io-request']
 	);
 </aui:script>
 

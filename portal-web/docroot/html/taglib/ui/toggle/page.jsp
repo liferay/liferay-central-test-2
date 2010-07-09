@@ -107,6 +107,6 @@ String defaultMessage = (String)request.getAttribute("liferay-ui:toggle:defaultM
 				}
 			}
 		},
-		['aui-io']
+		['io-base']
 	);
 </aui:script>

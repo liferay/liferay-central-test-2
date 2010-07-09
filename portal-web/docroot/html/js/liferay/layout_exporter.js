@@ -139,7 +139,7 @@ Liferay.provide(
 			}
 		);
 	},
-	['aui-dialog', 'aui-io']
+	['aui-dialog', 'aui-io-plugin']
 );
 
 Liferay.provide(
