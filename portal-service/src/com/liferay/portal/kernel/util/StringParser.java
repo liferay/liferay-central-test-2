@@ -23,11 +23,83 @@ import java.util.regex.Pattern;
 /**
  * <a href="StringParser.java.html"><b><i>View Source</i></b></a>
  *
+ * Parses strings into parameter maps and vice versa.
+ *
  * @author Connor McKay
  * @author Brian Wing Shun Chan
+ * @see	   com.liferay.portal.kernel.portlet.Route
+ * @see	   Pattern
  */
 public class StringParser {
 
+	/**
+	 * Constructs a new string parser from the pattern.
+	 *
+	 * <p>
+	 * The pattern can be any string containing named fragments in brackets. The
+	 * following is a valid pattern for greeting:
+	 * </p>
+	 *
+	 * <pre>
+	 * <code>
+	 * Hi {name}! How are you?
+	 * </code>
+	 * </pre>
+	 *
+	 * <p>
+	 * This pattern would match the string "Hi Tom! How are you?". The format of
+	 * a fragment may optionally be specified by inserting a colon followed by a
+	 * regular expression after the fragment name. For instance,
+	 * <code>name</code> could be set to match only lower case letters with the
+	 * following:
+	 * </p>
+	 *
+	 * <pre>
+	 * <code>
+	 * Hi {name:[a-z]+}! How are you?
+	 * </code>
+	 * </pre>
+	 *
+	 * <p>
+	 * By default, a fragment will match anything except a forward slash or a
+	 * period.
+	 * </p>
+	 *
+	 * <p>
+	 * If a string parser is set to encode fragments using a
+	 * {@link StringEncoder}, an individual fragment can be specified as raw by
+	 * prefixing its name with a percent sign, as shown below:
+	 * </p>
+	 *
+	 * <pre>
+	 * <code>
+	 * /view_page/{%path:.*}
+	 * </code>
+	 * </pre>
+	 *
+	 * <p>
+	 * The format of the path fragment has also been specified to match anything
+	 * using the pattern ".*". This pattern could be used to parse the string:
+	 * </p>
+	 *
+	 * <pre>
+	 * <code>
+	 * /view_page/root/home/mysite/pages/index.htm
+	 * </code>
+	 * </pre>
+	 *
+	 * <p>
+	 * <code>path</code> would be set to "root/home/mysite/pages/index.htm",
+	 * even if {@link URLStringEncoder} had been set as the string encoder.
+	 * </p>
+	 *
+	 * <p>
+	 * <b>Do not include capturing subgroups in the pattern.</b>
+	 * </p>
+	 *
+	 *
+	 * @param pattern the pattern string
+	 */
 	public StringParser(String pattern) {
 		_builder = pattern;
 
@@ -55,6 +127,23 @@ public class StringParser {
 		_pattern = Pattern.compile(regex);
 	}
 
+	/**
+	 * Builds a string from the parameter map if this parser is appropriate.
+	 *
+	 * <p>
+	 * A parser is appropriate if each parameter matches the format of its
+	 * accompanying fragment.
+	 * </p>
+	 *
+	 * <p>
+	 * If this parser is appropriate, all the parameters used in the pattern
+	 * will be removed from the parameter map. If this parser is not
+	 * appropriate, the parameter map will not be modified.
+	 * </p>
+	 *
+	 * @param  parameters the parameter map to build the string from
+	 * @return the string, or null if this parser is not appropriate
+	 */
 	public String build(Map<String, String> parameters) {
 		String s = _builder;
 
@@ -93,6 +182,16 @@ public class StringParser {
 		return matcher.replaceAll("\\\\$0");
 	}
 
+	/**
+	 * Populates the parameter map with values parsed from the string if this
+	 * parser matches.
+	 *
+	 * @param  s the string to parse
+	 * @param  parameters the parameter map to populate if this parser matches
+	 *		   the string
+	 * @return <code>true</code> if this parser matches; <code>false</code>
+	 *		   otherwise
+	 */
 	public boolean parse(String s, Map<String, String> parameters) {
 		Matcher matcher = _pattern.matcher(s);
 
@@ -116,6 +215,18 @@ public class StringParser {
 		return true;
 	}
 
+	/**
+	 * Sets the string encoder to use for parsing or building a string.
+	 *
+	 * <p>
+	 * The string encoder will not be used for fragments marked as raw. A
+	 * fragment can be marked as raw by prefixing its name with a percent sign.
+	 * </p>
+	 *
+	 * @param stringEncoder the string encoder to use for parsing or building a
+	 *		  string
+	 * @see	  StringEncoder
+	 */
 	public void setStringEncoder(StringEncoder stringEncoder) {
 		_stringEncoder = stringEncoder;
 	}

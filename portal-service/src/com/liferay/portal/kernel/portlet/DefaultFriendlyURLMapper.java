@@ -33,7 +33,24 @@ import javax.portlet.WindowState;
 /**
  * <a href="DefaultFriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
  *
+ * The default friendly URL mapper to use with friendly URL routes.
+ *
+ * <p>
+ * In most cases, to add friendly URL mapping to a portlet, simply set this
+ * class as the friendly URL mapper in <code>liferay-portlet.xml</code>, and
+ * write a <code>friendly-url-routes.xml</code> file.
+ * </p>
+ *
+ * <p>
+ * If you do need to extend this class, use
+ * {@link com.liferay.util.bridges.alloy.AlloyFriendlyURLMapper} as a guide. The
+ * key methods to override are
+ * {@link #buildPath(LiferayPortletURL)} and
+ * {@link #populateParams(String, Map, Map)}.
+ * </p>
+ *
  * @author Connor McKay
+ * @see	   Router
  */
 public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 
@@ -53,10 +70,30 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 		defaultReservedParameters.put("p_p_mode", PortletMode.VIEW.toString());
 	}
 
+	/**
+	 * Adds a default ignored parameter.
+	 *
+	 * <p>
+	 * A default ignored parameter will always be hidden in friendly URLs.
+	 * </p>
+	 *
+	 * @param name the name of the parameter to hide
+	 */
 	public void addDefaultIgnoredParameter(String name) {
 		defaultIgnoredParameters.add(name);
 	}
 
+	/**
+	 * Adds a default reserved parameter.
+	 *
+	 * <p>
+	 * A default reserved parameter will be hidden in friendly URLs when it is
+	 * set to its default value.
+	 * </p>
+	 *
+	 * @param name the name of the parameter to hide
+	 * @param value the default value of the parameter
+	 */
 	public void addDefaultReservedParameter(String name, String value) {
 		defaultReservedParameters.put(name, value);
 	}
@@ -80,10 +117,22 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 		return friendlyURLPath;
 	}
 
+	/**
+	 * Gets the default ignored parameters.
+	 *
+	 * @return the ignored parameter names
+	 * @see	   #addDefaultIgnoredParameter(String)
+	 */
 	public Set<String> getDefaultIgnoredParameters() {
 		return defaultIgnoredParameters;
 	}
 
+	/**
+	 * Gets the default reserved parameters.
+	 *
+	 * @return the default reserved parameter names and values
+	 * @see	   #addDefaultReservedParameter(String, String)
+	 */
 	public Map<String, String> getDefaultReservedParameters() {
 		return defaultReservedParameters;
 	}
@@ -118,6 +167,20 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 		populateParams(parameterMap, namespace, routeParameters);
 	}
 
+	/**
+	 * Builds the parameter map to be used by the router by copying parameters
+	 * from the portlet URL.
+	 *
+	 * <p>
+	 * This method also populates the special virtual parameters
+	 * <code>p_p_id</code> and <code>instanceId</code> for instanceable
+	 * portlets.
+	 * </p>
+	 *
+	 * @param liferayPortletURL the portlet URL to copy parameters from
+	 * @param routeParameters the parameter map to populate for use by the
+	 *		  router
+	 */
 	protected void buildRouteParameters(
 		LiferayPortletURL liferayPortletURL,
 		Map<String, String> routeParameters) {
@@ -159,6 +222,16 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 		routeParameters.putAll(liferayPortletURL.getReservedParameterMap());
 	}
 
+	/**
+	 * Gets the portlet id, including the instance id if applicable, from the
+	 * parameter map.
+	 *
+	 * @param  routeParameters the parameter map to get the portlet id from. For
+	 *		   an instanceable portlet, this must contain either
+	 *		   <code>p_p_id</code> or <code>instanceId</code>.
+	 * @return the portlet id, including the instance id if applicable, or null
+	 *		   if it cannot be determined
+	 */
 	protected String getPortletId(Map<String, String> routeParameters) {
 		if (!isPortletInstanceable()) {
 			return getPortletId();
@@ -187,6 +260,17 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 		}
 	}
 
+	/**
+	 * Populates the parameter map using the parameters from the router and the
+	 * default reserved parameters.
+	 *
+	 * @param parameterMap the parameter map to populate. This should be the map
+	 *		  passed to {@link #populateParams(String, Map, Map)} by {@link
+	 *		  com.liferay.portal.util.PortalImpl}.
+	 * @param namespace the namespace to use for parameters added to
+	 *		  <code>parameterMap</code>
+	 * @param routeParameters the parameter map populated by the router
+	 */
 	protected void populateParams(
 		Map<String, String[]> parameterMap, String namespace,
 		Map<String, String> routeParameters) {
@@ -211,6 +295,22 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 		}
 	}
 
+	/**
+	 * Adds the parameters included in the path to the portlet URL.
+	 *
+	 * <p>
+	 * Portlet URLs track which parameters are included in the friendly URL
+	 * path. This method hides all the default ignored parameters, the
+	 * parameters included in the path by the router, and the reserved
+	 * parameters set to their defaults.
+	 * </p>
+	 *
+	 * @param liferayPortletURL the portlet URL to add the parameters included
+	 *		  in the path to
+	 * @param routeParameters the parameter map populated by the router
+	 * @see	  com.liferay.portlet.PortletURLImpl#addParameterIncludedInPath(
+	 *		  String)
+	 */
 	protected void addParametersIncludedInPath(
 		LiferayPortletURL liferayPortletURL,
 		Map<String, String> routeParameters) {

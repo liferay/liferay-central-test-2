@@ -16,19 +16,20 @@ package com.liferay.portal.kernel.portlet;
 
 import com.liferay.portal.kernel.util.StringParser;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * <a href="Route.java.html"><b><i>View Source</i></b></a>
  *
  * Represents a single friendly URL pattern and provides the ability to either
- * parse a URL path string or generate a URL from a parameter map.
+ * parse a friendly URL path or generate a friendly URL from a parameter map.
  *
  * @author Connor McKay
  * @author Brian Wing Shun Chan
  * @see	   Router
- * @see	   RouteImpl
+ * @see	   com.liferay.portlet.RouteImpl
+ * @see	   com.liferay.portal.kernel.util.StringParser
  */
 public interface Route {
 
@@ -75,12 +76,11 @@ public interface Route {
 	 * Adds an ignored parameter to this route.
 	 *
 	 * <p>
-	 * An ignored parameter is one that should never appear in the query string
-	 * regardless of its value. Ignored parameters have no effect on the parsing
-	 * of URLs.
+	 * An ignored parameter never appears in the query string regardless of its
+	 * value. Ignored parameters have no effect on the parsing of URLs.
 	 * </p>
 	 *
-	 * @param name the ignored parameter name
+	 * @param name the name of the ignored parameter
 	 */
 	public void addIgnoredParameter(String name);
 
@@ -155,33 +155,37 @@ public interface Route {
 	/**
 	 * Gets the generated parameters for this route.
 	 *
-	 * @return the map of generated parameters and their string parsers
+	 * @return the generated parameter names and string parsers
+	 * @see	   #addGeneratedParameter(String, String)
 	 */
 	public Map<String, StringParser> getGeneratedParameters();
 
 	/**
 	 * Gets the ignored parameters for this route.
 	 *
-	 * @return the list of ignored parameter names
+	 * @return the ignored parameter names
+	 * @see	   #addIgnoredParameter(String)
 	 */
-	public List<String> getIgnoredParameters();
+	public Set<String> getIgnoredParameters();
 
 	/**
 	 * Gets the implicit parameters for this route.
 	 *
-	 * @return the map of implicit parameters and their values
+	 * @return the implicit parameter names and values
+	 * @see	   #addImplicitParameter(String, String)
 	 */
 	public Map<String, String> getImplicitParameters();
 
 	/**
 	 * Gets the overridden parameters for this route.
 	 *
-	 * @return the map of overridden parameters and their values
+	 * @return the overridden parameter names and values
+	 * @see	   #addOverriddenParameter(String, String)
 	 */
 	public Map<String, String> getOverriddenParameters();
 
 	/**
-	 * Generates a URL from a parameter map if this route is appropriate.
+	 * Generates a URL from the parameter map if this route is appropriate.
 	 *
 	 * <p>
 	 * A route is appropriate if:
@@ -208,7 +212,7 @@ public interface Route {
 	public String parametersToUrl(Map<String, String> parameters);
 
 	/**
-	 * Populates <code>parameters</code> with values parsed from a URL if this
+	 * Populates the parameter map with values parsed from the URL if this
 	 * route matches.
 	 *
 	 * <p>

@@ -23,8 +23,18 @@ import java.util.Map;
 /**
  * <a href="BaseFriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
  *
+ * The base implementation of {@link FriendlyURLMapper}.
+ *
+ * <p>
+ * Typically not subclassed directly. {@link DefaultFriendlyURLMapper} and a
+ * <code>friendly-url-routes.xml</code> file will handle the needs of most
+ * portlets.
+ * </p>
+ *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
+ * @author Connor McKay
+ * @see	   DefaultFriendlyURLMapper
  */
 public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 
@@ -65,7 +75,7 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated use {@link #addParameter(Map, String, Object)} instead
 	 */
 	protected void addParam(
 		Map<String, String[]> parameterMap, String name, Object value) {
@@ -74,7 +84,7 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated use {@link #addParameter(String, Map, String, String)} instead
 	 */
 	protected void addParam(
 		Map<String, String[]> parameterMap, String name, String value) {
@@ -82,18 +92,55 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 		addParameter(parameterMap, name, value);
 	}
 
+	/**
+	 * Adds a default namespaced parameter of any type to the parameter map.
+	 *
+	 * <p>
+	 * <b>Do not use this method with an instanceable portlet, it will not
+	 * properly namespace parameter names.</b>
+	 * </p>
+	 *
+	 * @param parameterMap the parameter map to populate
+	 * @param name the name of the parameter
+	 * @param value the value of the parameter
+	 * @see	  #addParameter(Map, String, String)
+	 */
 	protected void addParameter(
 		Map<String, String[]> parameterMap, String name, Object value) {
 
 		addParameter(getNamespace(), parameterMap, name, String.valueOf(value));
 	}
 
+	/**
+	 * Adds a default namespaced string parameter to the parameter map.
+	 *
+	 * <p>
+	 * <b>Do not use this method with an instanceable portlet, it will not
+	 * properly namespace parameter names.</b>
+	 * </p>
+	 *
+	 * @param parameterMap the parameter map to populate
+	 * @param name the name of the parameter
+	 * @param value the value of the parameter
+	 * @see	  #getNamespace()
+	 */
 	protected void addParameter(
 		Map<String, String[]> parameterMap, String name, String value) {
 
 		addParameter(getNamespace(), parameterMap, name, value);
 	}
 
+	/**
+	 * Adds a namespaced parameter of any type to the parameter map.
+	 *
+	 * @param namespace the namespace for portlet parameters. For instanceable
+	 *		  portlets this must include the instance id.
+	 * @param parameterMap the parameter map to populate
+	 * @param name space the namespace for portlet parameters. For instanceable
+	 *		  portlets this must include the instance id.
+	 * @param value the value of the parameter
+	 * @see	  #addParameter(String, Map, String, String)
+	 */
 	protected void addParameter(
 		String namespace, Map<String, String[]> parameterMap, String name,
 		Object value) {
@@ -101,6 +148,18 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 		addParameter(namespace, parameterMap, name, String.valueOf(value));
 	}
 
+	/**
+	 * Adds a namespaced string parameter to the parameter map.
+	 *
+	 * @param namespace the namespace for portlet parameters. For instanceable
+	 *		  portlets this must include the instance id.
+	 * @param parameterMap the parameter map to populate
+	 * @param name space the namespace for portlet parameters. For instanceable
+	 *		  portlets this must include the instance id.
+	 * @param value the value of the parameter
+	 * @see	  PortalUtil#getPortletNamespace(String)
+	 * @see	  DefaultFriendlyURLMapper#getPortletId(Map)
+	 */
 	protected void addParameter(
 		String namespace, Map<String, String[]> parameterMap, String name,
 		String value) {
@@ -125,6 +184,17 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 		}
 	}
 
+	/**
+	 * Gets the default namespace.
+	 *
+	 * <p>
+	 * <b>Do not use this method with an instanceable portlet, it will not
+	 * include the instance id.</b>
+	 * </p>
+	 *
+	 * @return the default namespace, not including the instance id
+	 * @see	   PortalUtil#getPortletNamespace(String)
+	 */
 	protected String getNamespace() {
 		return PortalUtil.getPortletNamespace(getPortletId());
 	}
