@@ -134,14 +134,14 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 	<c:when test='<%= (model != null) && type.equals("assetCategories") %>'>
 		<liferay-ui:asset-categories-selector
 			className="<%= model.getName() %>"
-			classPK='<%= _getClassPK(bean, classPK) %>'
+			classPK="<%= _getClassPK(bean, classPK) %>"
 			contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
 		/>
 	</c:when>
 	<c:when test='<%= (model != null) && type.equals("assetTags") %>'>
 		<liferay-ui:asset-tags-selector
 			className="<%= model.getName() %>"
-			classPK='<%= _getClassPK(bean, classPK) %>'
+			classPK="<%= _getClassPK(bean, classPK) %>"
 			contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
 		/>
 	</c:when>
@@ -282,7 +282,7 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 
 <%!
 private long _getClassPK(Object bean, long classPK) {
-	if (classPK <= 0 && bean != null) {
+	if ((bean != null) && (classPK <= 0)) {
 		if (bean instanceof BaseModel) {
 			BaseModel baseModel = (BaseModel)bean;
 
