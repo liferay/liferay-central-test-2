@@ -225,7 +225,8 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 	}
 
 	#<portlet:namespace />pane {
-		border: 1px solid #CCC; padding: 5px;
+		border: 1px solid #CCC;
+		padding: 5px;
 	}
 </style>
 
@@ -376,63 +377,91 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 	</c:choose>
 </aui:form>
 
-<aui:script use="aui-base,aui-dialog">
-	var dialog = A.DialogManager.findByChild('#<portlet:namespace />exportPagesFm');
-
-	dialog.io.set('uri', '<%= selectURL %>');
-
+<aui:script>
 	Liferay.provide(
 		window,
 		'<portlet:namespace />refreshDialog',
-		function(){
+		function() {
+			var A = AUI();
+
 			if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-" + publishActionKey + "-these-pages") %>')) {
-				dialog.io.set('uri', '<%= portletURL.toString() + "&etag=0" %>');
-				dialog.io.set('form', {id: '<portlet:namespace />exportPagesFm'});
+				var dialog = A.DialogManager.findByChild('#<portlet:namespace />exportPagesFm');
 
-				dialog.io.after('success', function(event){
-					dialog.close();
-				});
+				if (dialog) {
+					dialog.io.set('uri', '<%= portletURL.toString() + "&etag=0" %>');
 
-				dialog.io.start();
+					dialog.io.set(
+						'form',
+						{
+							id: '<portlet:namespace />exportPagesFm'
+						}
+					);
+
+					dialog.io.detach('success');
+
+					dialog.io.after(
+						'success',
+						function(event){
+							dialog.close();
+						}
+					);
+
+					dialog.io.start();
+				}
 			}
-		}
+		},
+		['aui-dialog']
 	);
+</aui:script>
 
-	<c:if test="<%= schedule %>">
-		var toolbarViewButton = A.one('#<portlet:namespace />exportPagesFm .view-button');
-		var toolbarAddButton = A.one('#<portlet:namespace />exportPagesFm .add-button');
-		var addEventButton = A.one('#<portlet:namespace />addButton');
+<aui:script use="aui-base,aui-dialog">
+	var dialog = A.DialogManager.findByChild('#<portlet:namespace />exportPagesFm');
 
-		var allEvents = A.one('#<portlet:namespace />publishedEvents');
-		var publishOptions = A.one('#<portlet:namespace />publishOptions');
+	if (dialog) {
+		dialog.io.set('uri', '<%= selectURL %>');
 
-		toolbarViewButton.one('a').on(
-			'click', function(event) {
+		<c:if test="<%= schedule %>">
+			var toolbarViewButton = A.one('#<portlet:namespace />exportPagesFm .view-button');
+			var toolbarAddButton = A.one('#<portlet:namespace />exportPagesFm .add-button');
+			var addEventButton = A.one('#<portlet:namespace />addButton');
+
+			var allEvents = A.one('#<portlet:namespace />publishedEvents');
+			var publishOptions = A.one('#<portlet:namespace />publishOptions');
+
+			var viewEvents = function() {
 				toolbarAddButton.removeClass('current');
 				toolbarViewButton.addClass('current');
+
 				allEvents.show();
 				publishOptions.hide();
-			}
-		);
+			};
 
-		addEventButton.on(
-			'click', function(event) {
-				<portlet:namespace />schedulePublishEvent();
+			addEventButton.on(
+				'click',
+				function(event) {
+					<portlet:namespace />schedulePublishEvent();
 
-				toolbarViewButton.addClass('current');
-				toolbarAddButton.removeClass('current');
-				allEvents.show();
-				publishOptions.hide();
-			}
-		);
+					viewEvents();
+				}
+			);
 
-		toolbarAddButton.one('a').on(
-			'click', function(event) {
-				toolbarViewButton.removeClass('current');
-				toolbarAddButton.addClass('current');
-				allEvents.hide();
-				publishOptions.show();
-			}
-		);
-	</c:if>
+			toolbarAddButton.one('a').on(
+				'click',
+				function(event) {
+					toolbarAddButton.addClass('current');
+					toolbarViewButton.removeClass('current');
+
+					allEvents.hide();
+					publishOptions.show();
+				}
+			);
+
+			toolbarViewButton.one('a').on(
+				'click',
+				function(event) {
+					viewEvents();
+				}
+			);
+		</c:if>
+	}
 </aui:script>

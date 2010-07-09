@@ -98,7 +98,6 @@ Layout curLayout = (Layout)row.getObject();
 
 				if (childrenCheckbox && childrenCheckbox.get('checked')) {
 					childrenMsg.show();
-
 				}
 			}
 
