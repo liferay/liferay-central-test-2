@@ -20,6 +20,8 @@
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 WorkflowTask workflowTask = (WorkflowTask)row.getObject();
+
+String randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 %>
 
 <liferay-ui:icon-menu>
@@ -33,6 +35,7 @@ WorkflowTask workflowTask = (WorkflowTask)row.getObject();
 		</portlet:actionURL>
 
 		<liferay-ui:icon
+			cssClass='<%= "workflow-task-" + randomId + " task-assign-to-me-link" %>'
 			image="assign"
 			message="assign-to-me"
 			method="get"
@@ -65,6 +68,7 @@ WorkflowTask workflowTask = (WorkflowTask)row.getObject();
 			</portlet:actionURL>
 
 			<liferay-ui:icon
+				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
 				image="../aui/shuffle"
 				message="<%= message %>"
 				method="get"
@@ -77,3 +81,61 @@ WorkflowTask workflowTask = (WorkflowTask)row.getObject();
 
 	</c:if>
 </liferay-ui:icon-menu>
+
+<div class="aui-helper-hidden" id="<%= randomId %>updateComments">
+	<aui:input cols="55" name="comment" type="textarea" rows="10" />
+</div>
+
+<aui:script use="aui-dialog">
+	var showPopup = function(url, title) {
+		var form = A.Node.create('<form />');
+
+		form.setAttribute('action', url);
+		form.setAttribute('method', 'POST');
+
+		var comments = A.one('#<%= randomId %>updateComments');
+
+		if (comments) {
+			form.append(comments);
+			comments.show();
+		}
+
+		var dialog = new A.Dialog(
+			{
+				bodyContent: form,
+				buttons: [
+					{
+						handler: function() {
+							submitForm(form);
+						},
+						text: '<liferay-ui:message key="ok" />'
+					},
+					{
+						handler: function() {
+							this.close();
+						},
+						text: '<liferay-ui:message key="cancel" />'
+					}
+				],
+				centered: true,
+				modal: true,
+				title: title,
+				width: 400
+			}
+		).render();
+	};
+
+	A.all('.workflow-task-<%= randomId %> a').on(
+		'click',
+		function(event) {
+			var icon = event.currentTarget;
+			var li = icon.get('parentNode');
+
+			event.preventDefault();
+
+			title = icon.text();
+
+			showPopup(icon.attr('href'), title);
+		}
+	);
+</aui:script>
