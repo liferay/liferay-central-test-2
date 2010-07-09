@@ -196,11 +196,6 @@ public class ResourceActionsUtil_IW {
 	}
 
 	public void read(java.lang.String servletContextName,
-		java.io.InputStream inputStream) throws java.lang.Exception {
-		ResourceActionsUtil.read(servletContextName, inputStream);
-	}
-
-	public void read(java.lang.String servletContextName,
 		java.lang.ClassLoader classLoader, java.lang.String source)
 		throws java.lang.Exception {
 		ResourceActionsUtil.read(servletContextName, classLoader, source);

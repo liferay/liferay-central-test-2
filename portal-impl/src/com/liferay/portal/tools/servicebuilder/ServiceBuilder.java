@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -37,11 +36,9 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ModelHintsUtil;
-import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil_IW;
 import com.liferay.portal.tools.SourceFormatter;
 import com.liferay.portal.util.InitUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.TextFormatter;
 import com.liferay.util.xml.XMLFormatter;
@@ -67,11 +64,9 @@ import freemarker.template.TemplateModelException;
 import java.beans.Introspector;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -973,21 +968,6 @@ public class ServiceBuilder {
 			}
 
 			if (build) {
-				if (Validator.isNotNull(pluginName)) {
-					String[] configs = StringUtil.split(
-						PropsUtil.get(PropsKeys.RESOURCE_ACTIONS_CONFIGS));
-
-					for (String config : configs) {
-						File file = new File(implDir + "/" + config);
-
-						if (file.exists()) {
-							InputStream inputStream = new FileInputStream(file);
-
-							ResourceActionsUtil.read(pluginName, inputStream);
-						}
-					}
-				}
-
 				for (int x = 0; x < _ejbList.size(); x++) {
 					Entity entity = _ejbList.get(x);
 
