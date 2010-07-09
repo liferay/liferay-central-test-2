@@ -17,7 +17,7 @@ package com.liferay.portal.upgrade.v5_2_8_to_6_0_3.util;
 import java.sql.Types;
 
 /**
- * @author	  Douglas Wong
+ * @author	  Brian Wing Shun Chan
  * @generated
  */
 public class DLFileEntryTable {
@@ -46,7 +46,7 @@ public class DLFileEntryTable {
 		{"readCount", new Integer(Types.INTEGER)}
 	};
 
-	public static final String TABLE_SQL_CREATE = "create table DLFileEntry (uuid_ VARCHAR(75) null,fileEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,extension VARCHAR(75) null,title VARCHAR(255) null,description STRING null,version VARCHAR(75) null,size_ LONG,readCount INTEGER,extraSettings TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileEntry (uuid_ VARCHAR(75) null,fileEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,extension VARCHAR(75) null,title VARCHAR(255) null,description STRING null,extraSettings TEXT null,version VARCHAR(75) null,size_ LONG,readCount INTEGER)";
 
 	public static final String TABLE_SQL_DROP = "drop table DLFileEntry";
 

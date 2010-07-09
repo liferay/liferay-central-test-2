@@ -17,7 +17,7 @@ package com.liferay.portal.upgrade.v5_2_8_to_6_0_3.util;
 import java.sql.Types;
 
 /**
- * @author	  Douglas Wong
+ * @author	  Brian Wing Shun Chan
  * @generated
  */
 public class DLFileVersionTable {
