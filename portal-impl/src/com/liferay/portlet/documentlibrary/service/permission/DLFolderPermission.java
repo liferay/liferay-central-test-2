@@ -16,9 +16,11 @@ package com.liferay.portlet.documentlibrary.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.staging.permission.StagingPermissionUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
@@ -58,6 +60,14 @@ public class DLFolderPermission {
 
 		if (actionId.equals(ActionKeys.ADD_FOLDER)) {
 			actionId = ActionKeys.ADD_SUBFOLDER;
+		}
+
+		Boolean hasPermission = StagingPermissionUtil.hasPermission(
+			permissionChecker, folder.getGroupId(), DLFolder.class.getName(),
+			folder.getFolderId(), PortletKeys.DOCUMENT_LIBRARY, actionId);
+
+		if (hasPermission != null) {
+			return hasPermission.booleanValue();
 		}
 
 		long folderId = folder.getFolderId();

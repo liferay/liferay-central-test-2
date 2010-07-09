@@ -16,10 +16,12 @@ package com.liferay.portlet.documentlibrary.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.staging.permission.StagingPermissionUtil;
 import com.liferay.portal.kernel.workflow.permission.WorkflowPermissionUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
@@ -72,13 +74,22 @@ public class DLFileEntryPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
+		Boolean hasPermission = StagingPermissionUtil.hasPermission(
+			permissionChecker, fileEntry.getGroupId(),
+			DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
+			PortletKeys.DOCUMENT_LIBRARY, actionId);
+
+		if (hasPermission != null) {
+			return hasPermission.booleanValue();
+		}
+
 		DLFileVersion latestFileVersion =
 			DLFileVersionLocalServiceUtil.getLatestFileVersion(
 				fileEntry.getGroupId(), fileEntry.getFolderId(),
 				fileEntry.getName());
 
 		if (latestFileVersion.isPending()) {
-			Boolean hasPermission = WorkflowPermissionUtil.hasPermission(
+			hasPermission = WorkflowPermissionUtil.hasPermission(
 				permissionChecker, fileEntry.getGroupId(),
 				DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
 				actionId);

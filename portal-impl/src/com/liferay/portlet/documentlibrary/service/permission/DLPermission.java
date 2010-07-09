@@ -15,8 +15,10 @@
 package com.liferay.portlet.documentlibrary.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.staging.permission.StagingPermissionUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.util.PortletKeys;
 
 /**
  * <a href="DLPermission.java.html"><b><i>View Source</i></b></a>
@@ -37,8 +39,19 @@ public class DLPermission {
 	public static boolean contains(
 		PermissionChecker permissionChecker, long groupId, String actionId) {
 
+		Boolean hasPermission = StagingPermissionUtil.hasPermission(
+			permissionChecker, groupId, _CLASS_NAME, groupId,
+			PortletKeys.DOCUMENT_LIBRARY, actionId);
+
+		if (hasPermission != null) {
+			return hasPermission.booleanValue();
+		}
+
 		return permissionChecker.hasPermission(
-			groupId, "com.liferay.portlet.documentlibrary", groupId, actionId);
+			groupId, _CLASS_NAME, groupId, actionId);
 	}
+
+	private static final String _CLASS_NAME =
+		"com.liferay.portlet.documentlibrary";
 
 }
