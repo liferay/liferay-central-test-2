@@ -129,7 +129,7 @@ else if (type.equals("outgoing_links")) {
 	emptyResultsMessage = "this-page-has-no-links";
 }
 else if (type.equals("pending_pages")) {
-	emptyResultsMessage = "there-are-pages-submitted-by-you-pending-for-approval";
+	emptyResultsMessage = "there-are-pages-submitted-by-you-pending-approval";
 }
 else if (type.equals("recent_changes")) {
 	emptyResultsMessage = "there-are-no-recent-changes";
