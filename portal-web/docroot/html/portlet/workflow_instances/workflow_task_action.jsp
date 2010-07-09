@@ -17,11 +17,11 @@
 <%@ include file="/html/portlet/workflow_instances/init.jsp" %>
 
 <%
+String randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 WorkflowTask workflowTask = (WorkflowTask)row.getObject();
-
-String randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 %>
 
 <liferay-ui:icon-menu>
