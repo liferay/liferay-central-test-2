@@ -151,7 +151,9 @@
 
 	<target name="deploy-release-artifacts">
 		<antcall target="jar-javadoc" />
+
 		<antcall target="jar-sources" />
+
 		<antcall target="deploy-artifacts">
 			<param name="maven.repository.id" value="sonatype-staging" />
 			<param name="maven.url" value="http://oss.sonatype.org/service/local/staging/deploy/maven2" />
