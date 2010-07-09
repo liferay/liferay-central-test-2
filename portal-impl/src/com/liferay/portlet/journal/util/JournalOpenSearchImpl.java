@@ -17,6 +17,7 @@ package com.liferay.portlet.journal.util;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -86,7 +87,11 @@ public class JournalOpenSearchImpl extends HitsOpenSearchImpl {
 					contentSearch.getGroupId(), contentSearch.isPrivateLayout(),
 					contentSearch.getLayoutId());
 
-				return PortalUtil.getLayoutURL(hitLayout, themeDisplay);
+				String url = PortalUtil.getLayoutURL(hitLayout, themeDisplay);
+
+				url = HttpUtil.setParameter(url, "articleId", articleId);
+
+				return url;
 			}
 		}
 
@@ -119,7 +124,11 @@ public class JournalOpenSearchImpl extends HitsOpenSearchImpl {
 					layout.getGroupId(), layout.isPrivateLayout(),
 					hitLayoutId.longValue());
 
-				return PortalUtil.getLayoutURL(hitLayout, themeDisplay);
+				String url = PortalUtil.getLayoutURL(hitLayout, themeDisplay);
+
+				url = HttpUtil.setParameter(url, "articleId", articleId);
+
+				return url;
 			}
 		}
 
