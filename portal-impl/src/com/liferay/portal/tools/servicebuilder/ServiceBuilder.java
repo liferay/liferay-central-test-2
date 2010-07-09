@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ModelHintsUtil;
+import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil_IW;
 import com.liferay.portal.tools.SourceFormatter;
 import com.liferay.portal.util.InitUtil;
@@ -64,9 +65,11 @@ import freemarker.template.TemplateModelException;
 import java.beans.Introspector;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -898,6 +901,22 @@ public class ServiceBuilder {
 				List<Entity> referenceList = new ArrayList<Entity>();
 
 				if (build) {
+					if (Validator.isNotNull(pluginName)) {
+						for (String config :
+								PropsValues.RESOURCE_ACTIONS_CONFIGS) {
+
+							File file = new File(implDir + "/" + config);
+
+							if (file.exists()) {
+								InputStream inputStream = new FileInputStream(
+									file);
+
+								ResourceActionsUtil.read(
+									pluginName, inputStream);
+							}
+						}
+					}
+
 					List<Element> references = entityEl.elements("reference");
 
 					itr2 = references.iterator();
