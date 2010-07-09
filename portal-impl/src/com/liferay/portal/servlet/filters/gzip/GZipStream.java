@@ -14,12 +14,14 @@
 
 package com.liferay.portal.servlet.filters.gzip;
 
+import com.liferay.portal.kernel.io.WriterOutputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 
 import java.io.IOException;
+import java.io.OutputStream;
 
 import java.util.zip.GZIPOutputStream;
 
@@ -39,7 +41,6 @@ public class GZipStream extends ServletOutputStream {
 		super();
 
 		_response = response;
-		_outputStream = response.getOutputStream();
 		_unsyncByteArrayOutputStream = new UnsyncByteArrayOutputStream();
 		_gzipOutputStream = new GZIPOutputStream(_unsyncByteArrayOutputStream);
 	}
@@ -56,12 +57,12 @@ public class GZipStream extends ServletOutputStream {
 		_response.setContentLength(contentLength);
 		_response.addHeader(HttpHeaders.CONTENT_ENCODING, _GZIP);
 
-		_outputStream.write(
-			_unsyncByteArrayOutputStream.unsafeGetByteArray(), 0,
-			contentLength);
-
-		_outputStream.flush();
-		_outputStream.close();
+		try {
+			flushOutToOutputStream();
+		}
+		catch (IllegalStateException ise) {
+			flushOutToWriter();
+		}
 
 		_closed = true;
 	}
@@ -114,13 +115,33 @@ public class GZipStream extends ServletOutputStream {
 		_gzipOutputStream.write((byte)b);
 	}
 
+	private void flushOutToOutputStream() throws IOException {
+		OutputStream outputStream = _response.getOutputStream();
+		outputStream.write(
+			_unsyncByteArrayOutputStream.unsafeGetByteArray(), 0,
+			_unsyncByteArrayOutputStream.size());
+
+		outputStream.flush();
+		outputStream.close();
+	}
+
+	private void flushOutToWriter() throws IOException {
+		WriterOutputStream writerOutputStream = new WriterOutputStream(
+			_response.getWriter());
+		writerOutputStream.write(
+			_unsyncByteArrayOutputStream.unsafeGetByteArray(), 0,
+			_unsyncByteArrayOutputStream.size());
+
+		writerOutputStream.flush();
+		writerOutputStream.close();
+	}
+
 	private static final String _GZIP = "gzip";
 
 	private static Log _log = LogFactoryUtil.getLog(GZipStream.class);
 
 	private boolean _closed;
 	private GZIPOutputStream _gzipOutputStream;
-	private ServletOutputStream _outputStream;
 	private HttpServletResponse _response;
 	private UnsyncByteArrayOutputStream _unsyncByteArrayOutputStream;
 
