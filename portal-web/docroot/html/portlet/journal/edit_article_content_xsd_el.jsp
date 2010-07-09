@@ -157,7 +157,13 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 						<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 					</portlet:renderURL>
 
-					<aui:button cssClass="journal-imagegallery-button" data-ImagegalleryUrl="<%= selectIGURL %>" value="select" />
+					<%
+						Map<String,Object> data = new HashMap<String,Object>();
+
+						data.put("ImagegalleryUrl", selectIGURL);
+					%>
+
+					<aui:button cssClass="journal-imagegallery-button" data="<%= data %>" value="select" />
 				</c:if>
 
 				<c:if test='<%= elType.equals("document_library") %>'>
@@ -168,7 +174,13 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 						<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 					</portlet:renderURL>
 
-					<aui:button cssClass="journal-documentlibrary-button" data-DocumentlibraryUrl="<%= selectDLURL %>" value="select" />
+					<%
+						Map<String,Object> data = new HashMap<String,Object>();
+
+						data.put("DocumentlibraryUrl", selectDLURL);
+					%>
+
+					<aui:button cssClass="journal-documentlibrary-button" data="<%= data %>" value="select" />
 				</c:if>
 
 				<c:if test='<%= elType.equals("boolean") %>'>
