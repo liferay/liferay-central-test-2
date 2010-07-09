@@ -324,7 +324,7 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 			searchContainer.setTotal(total);
 		}
 		catch (Exception e) {
-			_log.error(portlet.getOpenSearchClass() + " " + e.getMessage());
+			_log.error("Error displaying content of type " + portlet.getOpenSearchClass() + ": " + e);
 		}
 	%>
 

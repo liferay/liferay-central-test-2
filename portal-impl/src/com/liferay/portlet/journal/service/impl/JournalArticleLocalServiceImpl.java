@@ -1144,7 +1144,10 @@ public class JournalArticleLocalServiceImpl
 			groupId, articleId, WorkflowConstants.STATUS_APPROVED);
 
 		if (articles.size() == 0) {
-			throw new NoSuchArticleException();
+			throw new NoSuchArticleException(
+				"No approved article for groupId=" + groupId + " and " +
+					"articleId=" + articleId);
+
 		}
 
 		Date now = new Date();
@@ -1202,7 +1205,8 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		if (articles.size() == 0) {
-			throw new NoSuchArticleException();
+			throw new NoSuchArticleException(
+				"No article for resourcePrimKey=" + resourcePrimKey);
 		}
 
 		return articles.get(0);
@@ -1233,7 +1237,9 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		if (articles.size() == 0) {
-			throw new NoSuchArticleException();
+			throw new NoSuchArticleException(
+				"No article for groupId=" + groupId + ", articleId=" +
+					articleId + " and status=" + status);
 		}
 
 		return articles.get(0);
@@ -1257,7 +1263,9 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		if (articles.size() == 0) {
-			throw new NoSuchArticleException();
+			throw new NoSuchArticleException(
+				"No article for groupId=" + groupId + ", urlTitle=" + urlTitle +
+					" and status=" + status);
 		}
 
 		return articles.get(0);
