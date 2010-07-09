@@ -29,7 +29,11 @@
 	<div>
 		<aui:input checked="<%= !results.isEmpty() %>" cssClass="selected-pages-option" id="scope_selected_pages" label="selected-pages" name="scope" type="radio" value="selected-pages" onClick="<%= taglibOnClick %>" />
 
-		(<liferay-ui:icon message='<%= results.isEmpty() ? "select-pages" : "change-selection" %>' label="<%= true %>" image="pages" url='<%= "javascript:" + taglibOnClick %>' />)
+		<%
+		String taglibUrl = "javascript:AUI().DialogManager.refreshByChild('#" + renderResponse.getNamespace() + "exportPagesFm');";
+		%>
+
+		(<liferay-ui:icon message='<%= results.isEmpty() ? "select-pages" : "change-selection" %>' label="<%= true %>" image="pages" url="<%= taglibUrl %>" />)
 	</div>
 </aui:fieldset>
 
