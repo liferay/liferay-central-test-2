@@ -16,11 +16,11 @@ package com.liferay.portal.upgrade;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.upgrade.v5_2_8_to_6_0_3.UpgradeDocumentLibrary;
 import com.liferay.portal.upgrade.v5_2_8_to_6_0_3.UpgradeSchema;
 import com.liferay.portal.upgrade.v6_0_0.UpgradeAsset;
 import com.liferay.portal.upgrade.v6_0_0.UpgradeAssetPublisher;
 import com.liferay.portal.upgrade.v6_0_0.UpgradeBlogs;
-import com.liferay.portal.upgrade.v6_0_0.UpgradeDocumentLibrary;
 import com.liferay.portal.upgrade.v6_0_0.UpgradeExpando;
 import com.liferay.portal.upgrade.v6_0_0.UpgradePolls;
 import com.liferay.portal.upgrade.v6_0_0.UpgradePortletId;
@@ -51,14 +51,11 @@ public class UpgradeProcess_5_2_8_to_6_0_3 extends UpgradeProcess {
 		upgrade(UpgradePortletId.class);
 		upgrade(UpgradeShopping.class);
 
-		upgrade(com.liferay.portal.upgrade.v6_0_1.UpgradeDocumentLibrary.class);
-
 		upgrade(com.liferay.portal.upgrade.v6_0_2.UpgradeExpando.class);
 		upgrade(UpgradeNestedPortlets.class);
 
 		upgrade(com.liferay.portal.upgrade.v6_0_3.UpgradeAsset.class);
 		upgrade(com.liferay.portal.upgrade.v6_0_3.UpgradeAssetPublisher.class);
-		upgrade(com.liferay.portal.upgrade.v6_0_3.UpgradeDocumentLibrary.class);
 		upgrade(UpgradeLookAndFeel.class);
 		upgrade(UpgradePermission.class);
 		upgrade(UpgradeScopes.class);

@@ -405,10 +405,6 @@ COMMIT_TRANSACTION;
 
 update MBMessage set rootMessageId = (select rootMessageId from MBThread where MBThread.threadId = MBMessage.threadId);
 
-alter table PasswordPolicy add minSymbols INTEGER;
-
-alter table SocialEquityUser add contributionB DOUBLE;
-alter table SocialEquityUser add contributionK DOUBLE;
 alter table SocialEquityUser add rank INTEGER;
 
 alter table User_ add facebookId LONG;
