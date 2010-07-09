@@ -18,8 +18,6 @@ import jcifs.dcerpc.DcerpcMessage;
 import jcifs.dcerpc.ndr.NdrBuffer;
 
 /**
- * <a href="NetrServerReqChallenge.java.html"><b><i>View Source</i></b></a>
- *
  * @author Marcellus Tavares
  */
 public class NetrServerReqChallenge extends DcerpcMessage {

@@ -34,8 +34,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <a href="OracleDB.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  * @author Sandeep Soni
  * @author Ganesh Ram

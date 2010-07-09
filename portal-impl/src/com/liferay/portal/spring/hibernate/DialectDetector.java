@@ -36,8 +36,6 @@ import org.hibernate.dialect.SybaseASE15Dialect;
 import org.hibernate.dialect.resolver.DialectFactory;
 
 /**
- * <a href="DialectDetector.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class DialectDetector {

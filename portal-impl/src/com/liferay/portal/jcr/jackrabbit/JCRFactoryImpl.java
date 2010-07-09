@@ -35,8 +35,6 @@ import javax.jcr.SimpleCredentials;
 import org.apache.jackrabbit.core.TransientRepository;
 
 /**
- * <a href="JCRFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael Young
  */
 public class JCRFactoryImpl implements JCRFactory {

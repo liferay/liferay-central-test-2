@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 
 /**
- * <a href="UpgradeClassName.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UpgradeClassName extends UpgradeProcess {

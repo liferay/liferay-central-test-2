@@ -27,9 +27,6 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="AssetCategoryPropertyLocalServiceImpl.java.html"><b><i>View Source
- * </i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  */

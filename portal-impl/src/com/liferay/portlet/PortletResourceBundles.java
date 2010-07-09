@@ -37,8 +37,6 @@ import javax.servlet.jsp.PageContext;
 import org.apache.struts.util.RequestUtils;
 
 /**
- * <a href="PortletResourceBundles.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PortletResourceBundles {

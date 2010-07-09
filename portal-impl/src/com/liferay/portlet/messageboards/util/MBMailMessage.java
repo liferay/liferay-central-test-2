@@ -23,8 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <a href="MBMailMessage.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class MBMailMessage {

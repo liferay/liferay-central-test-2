@@ -22,8 +22,6 @@ import com.liferay.portal.upgrade.v5_1_2.util.CalEventRecurrenceUpgradeColumnImp
 import com.liferay.portal.upgrade.v5_1_2.util.CalEventTable;
 
 /**
- * <a href="UpgradeCalendar.java.html"><b><i>View Source</i></b></a>
- *
  * @author	   Samuel Kong
  * @deprecated
  */

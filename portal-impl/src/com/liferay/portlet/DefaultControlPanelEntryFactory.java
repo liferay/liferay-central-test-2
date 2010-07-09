@@ -20,9 +20,6 @@ import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.util.PropsValues;
 
 /**
- * <a href="DefaultControlPanelEntryFactory.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class DefaultControlPanelEntryFactory {

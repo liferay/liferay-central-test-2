@@ -21,8 +21,6 @@ import com.liferay.portal.util.WebKeys;
 import javax.portlet.PortletRequest;
 
 /**
- * <a href="FeedSearchTerms.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class FeedSearchTerms extends FeedDisplayTerms {

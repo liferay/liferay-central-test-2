@@ -24,9 +24,6 @@ import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import javax.portlet.RenderResponse;
 
 /**
- * <a href="OrganizationPasswordPolicyChecker.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Scott Lee
  */
 public class OrganizationPasswordPolicyChecker extends RowChecker {

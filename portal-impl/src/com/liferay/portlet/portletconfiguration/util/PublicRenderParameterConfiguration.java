@@ -18,9 +18,6 @@ import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portlet.PortletQNameUtil;
 
 /**
- * <a href="PublicRenderParameterConfiguration.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Alberto Montero
  */
 public class PublicRenderParameterConfiguration {

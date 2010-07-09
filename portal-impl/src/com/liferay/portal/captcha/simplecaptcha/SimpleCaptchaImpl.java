@@ -45,8 +45,6 @@ import nl.captcha.text.producer.TextProducer;
 import nl.captcha.text.renderer.WordRenderer;
 
 /**
- * <a href="SimpleCaptchaImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class SimpleCaptchaImpl implements Captcha {

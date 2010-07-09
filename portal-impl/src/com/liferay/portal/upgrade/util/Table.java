@@ -57,8 +57,6 @@ import org.apache.commons.lang.time.StopWatch;
 import org.hibernate.usertype.UserType;
 
 /**
- * <a href="Table.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  * @author Brian Wing Shun Chan
  * @author Raymond Augé

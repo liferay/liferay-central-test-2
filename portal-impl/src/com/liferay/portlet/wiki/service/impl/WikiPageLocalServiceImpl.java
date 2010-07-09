@@ -96,8 +96,6 @@ import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
 /**
- * <a href="WikiPageLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  * @author Raymond Augé

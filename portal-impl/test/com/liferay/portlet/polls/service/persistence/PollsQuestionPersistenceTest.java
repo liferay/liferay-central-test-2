@@ -27,9 +27,6 @@ import com.liferay.portlet.polls.model.PollsQuestion;
 import java.util.List;
 
 /**
- * <a href="PollsQuestionPersistenceTest.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PollsQuestionPersistenceTest extends BasePersistenceTestCase {

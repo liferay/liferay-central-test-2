@@ -44,8 +44,6 @@ import net.htmlparser.jericho.Source;
 import net.htmlparser.jericho.StartTag;
 
 /**
- * <a href="LinkbackProducerUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class LinkbackProducerUtil {

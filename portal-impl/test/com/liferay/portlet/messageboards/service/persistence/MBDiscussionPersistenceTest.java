@@ -26,8 +26,6 @@ import com.liferay.portlet.messageboards.model.MBDiscussion;
 import java.util.List;
 
 /**
- * <a href="MBDiscussionPersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class MBDiscussionPersistenceTest extends BasePersistenceTestCase {

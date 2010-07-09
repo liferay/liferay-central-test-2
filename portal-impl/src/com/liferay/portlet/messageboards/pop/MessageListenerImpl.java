@@ -46,8 +46,6 @@ import javax.mail.Message;
 import org.apache.commons.lang.time.StopWatch;
 
 /**
- * <a href="MessageListenerImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  * @author Michael C. Han

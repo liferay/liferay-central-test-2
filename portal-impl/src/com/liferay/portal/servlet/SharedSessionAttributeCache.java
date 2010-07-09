@@ -22,8 +22,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.servlet.http.HttpSession;
 
 /**
- * <a href="SharedSessionAttributeCache.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class SharedSessionAttributeCache implements Serializable {

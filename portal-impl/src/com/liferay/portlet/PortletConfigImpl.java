@@ -48,8 +48,6 @@ import javax.portlet.PortletContext;
 import javax.xml.namespace.QName;
 
 /**
- * <a href="PortletConfigImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Eduardo Lundgren
  */

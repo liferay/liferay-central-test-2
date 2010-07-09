@@ -29,8 +29,6 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="GZipStream.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jayson Falkner
  * @author Brian Wing Shun Chan
  * @author Shuyang Zhou

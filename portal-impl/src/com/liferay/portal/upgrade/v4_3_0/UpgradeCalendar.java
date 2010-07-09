@@ -27,8 +27,6 @@ import com.liferay.portal.upgrade.v4_3_0.util.CalEventTable;
 import java.sql.Types;
 
 /**
- * <a href="UpgradeCalendar.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  * @author Brian Wing Shun Chan
  */

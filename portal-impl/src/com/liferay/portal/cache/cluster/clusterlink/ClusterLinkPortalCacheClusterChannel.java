@@ -21,9 +21,6 @@ import com.liferay.portal.kernel.cluster.Priority;
 import com.liferay.portal.kernel.messaging.Message;
 
 /**
- * <a href="ClusterLinkPortalCacheClusterChannel.java.html"><b><i>View Source
- * </i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class ClusterLinkPortalCacheClusterChannel

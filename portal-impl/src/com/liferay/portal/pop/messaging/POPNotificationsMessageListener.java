@@ -38,9 +38,6 @@ import javax.mail.Store;
 import javax.mail.internet.InternetAddress;
 
 /**
- * <a href="POPNotificationsMessageListener.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class POPNotificationsMessageListener

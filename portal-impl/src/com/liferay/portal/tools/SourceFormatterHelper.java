@@ -31,8 +31,6 @@ import java.util.Properties;
 import org.apache.tools.ant.DirectoryScanner;
 
 /**
- * <a href="SourceFormatterHelper.java.html"><b><i>View Source</i></b></a>
- *
  * @author Igor Spasic
  * @author Brian Wing Shun Chan
  */

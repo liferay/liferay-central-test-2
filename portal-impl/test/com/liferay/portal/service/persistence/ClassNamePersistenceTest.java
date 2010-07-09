@@ -25,8 +25,6 @@ import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 import java.util.List;
 
 /**
- * <a href="ClassNamePersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ClassNamePersistenceTest extends BasePersistenceTestCase {

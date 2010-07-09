@@ -22,9 +22,6 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 
 /**
- * <a href="ResourceCodeIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Alexander Chow
  * @author Brian Wing Shun Chan
  */

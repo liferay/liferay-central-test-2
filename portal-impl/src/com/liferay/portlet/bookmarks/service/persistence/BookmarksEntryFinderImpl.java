@@ -25,8 +25,6 @@ import com.liferay.util.dao.orm.CustomSQLUtil;
 import java.util.List;
 
 /**
- * <a href="BookmarksEntryFinderImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class BookmarksEntryFinderImpl

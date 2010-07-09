@@ -39,8 +39,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="EditUserGroupAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Charles May
  */
 public class EditUserGroupAction extends PortletAction {

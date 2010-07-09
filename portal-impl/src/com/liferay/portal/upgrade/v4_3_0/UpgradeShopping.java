@@ -37,8 +37,6 @@ import com.liferay.portal.upgrade.v4_3_0.util.ShoppingOrderTable;
 import java.sql.Types;
 
 /**
- * <a href="UpgradeShopping.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UpgradeShopping extends UpgradeProcess {

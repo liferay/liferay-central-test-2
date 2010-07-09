@@ -19,8 +19,6 @@ import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.impl.PasswordPolicyImpl;
 
 /**
- * <a href="PasswordPolicyToolkitTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Mika Koivisto
  */
 public class PasswordPolicyToolkitTest extends TestCase {

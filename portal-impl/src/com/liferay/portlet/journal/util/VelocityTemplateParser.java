@@ -49,8 +49,6 @@ import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.VelocityException;
 
 /**
- * <a href="VelocityTemplateParser.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  * @author Brian Wing Shun Chan
  * @author Raymond Augé

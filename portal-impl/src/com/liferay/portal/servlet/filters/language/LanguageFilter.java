@@ -44,8 +44,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="LanguageFilter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Eduardo Lundgren
  * @author Shuyang Zhou
  */

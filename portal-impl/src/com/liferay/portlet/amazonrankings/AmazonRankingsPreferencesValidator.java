@@ -25,9 +25,6 @@ import javax.portlet.PreferencesValidator;
 import javax.portlet.ValidatorException;
 
 /**
- * <a href="AmazonRankingsPreferencesValidator.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class AmazonRankingsPreferencesValidator

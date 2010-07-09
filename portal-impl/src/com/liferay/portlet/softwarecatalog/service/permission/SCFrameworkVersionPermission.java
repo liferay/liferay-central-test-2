@@ -22,9 +22,6 @@ import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceUtil;
 
 /**
- * <a href="SCFrameworkVersionPermission.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  */

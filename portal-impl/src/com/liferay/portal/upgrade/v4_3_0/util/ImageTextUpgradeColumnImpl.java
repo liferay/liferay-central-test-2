@@ -24,8 +24,6 @@ import com.liferay.portal.model.ImageConstants;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 
 /**
- * <a href="ImageTextUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ImageTextUpgradeColumnImpl extends BaseUpgradeColumnImpl {

@@ -15,8 +15,6 @@
 package com.liferay.portal.verify;
 
 /**
- * <a href="VerifyProcessSuite.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class VerifyProcessSuite extends VerifyProcess {

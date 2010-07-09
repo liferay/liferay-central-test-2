@@ -39,8 +39,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="WebContentAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class WebContentAction extends PortletAction {

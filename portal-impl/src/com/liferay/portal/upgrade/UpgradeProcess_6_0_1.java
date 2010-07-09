@@ -20,8 +20,6 @@ import com.liferay.portal.upgrade.v6_0_1.UpgradeDocumentLibrary;
 import com.liferay.portal.upgrade.v6_0_1.UpgradeSchema;
 
 /**
- * <a href="UpgradeProcess_6_0_1.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UpgradeProcess_6_0_1 extends UpgradeProcess {

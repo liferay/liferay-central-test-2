@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import javax.portlet.PortletRequest;
 
 /**
- * <a href="WorkflowTaskDisplayTerms.java.html"><b><i>View Source</i></b></a>
- *
  * @author Marcellus Tavares
  */
 public class WorkflowTaskDisplayTerms extends DisplayTerms {

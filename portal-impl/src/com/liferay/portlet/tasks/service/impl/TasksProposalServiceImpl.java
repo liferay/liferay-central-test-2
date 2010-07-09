@@ -28,8 +28,6 @@ import com.liferay.portlet.tasks.service.base.TasksProposalServiceBaseImpl;
 import com.liferay.portlet.tasks.service.permission.TasksProposalPermission;
 
 /**
- * <a href="TasksProposalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  * @author Brian Wing Shun Chan
  */

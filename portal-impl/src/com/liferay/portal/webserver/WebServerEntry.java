@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import java.util.Date;
 
 /**
- * <a href="WebServerEntry.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class WebServerEntry {

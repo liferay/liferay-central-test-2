@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.xmlrpc.Success;
 import com.liferay.portal.kernel.xmlrpc.XmlRpcException;
 
 /**
- * <a href="SuccessImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  * @author Brian Wing Shun Chan
  */

@@ -21,8 +21,6 @@ import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.service.ListTypeServiceUtil;
 
 /**
- * <a href="OrgLaborImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class OrgLaborImpl extends OrgLaborModelImpl implements OrgLabor {

@@ -28,9 +28,6 @@ import com.liferay.portal.util.PortalUtil;
 import java.util.Date;
 
 /**
- * <a href="WorkflowDefinitionLinkLocalServiceImpl.java.html"><b><i>View Source
- * </i></b></a>
- *
  * @author Jorge Ferrer
  * @author Bruno Farache
  * @author Brian Wing Shun Chan

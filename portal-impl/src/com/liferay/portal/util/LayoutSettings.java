@@ -25,8 +25,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <a href="LayoutSettings.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  */

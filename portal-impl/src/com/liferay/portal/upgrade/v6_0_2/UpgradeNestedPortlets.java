@@ -29,8 +29,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * <a href="UpgradeNestedPortlets.java.html"><b><i>View Source</i></b></a>
- *
  * @author Wesley Gong
  * @author Bijan Vakili
  * @author Douglas Wong

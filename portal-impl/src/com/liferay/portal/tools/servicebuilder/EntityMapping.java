@@ -15,8 +15,6 @@
 package com.liferay.portal.tools.servicebuilder;
 
 /**
- * <a href="EntityMapping.java.html"><b><i>View Source</i></b></a>
- *
  * @author Glenn Powell
  * @author Brian Wing Shun Chan
  */

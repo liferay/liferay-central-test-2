@@ -27,9 +27,6 @@ import com.liferay.portlet.asset.model.AssetCategory;
 import java.util.List;
 
 /**
- * <a href="AssetCategoryPersistenceTest.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class AssetCategoryPersistenceTest extends BasePersistenceTestCase {

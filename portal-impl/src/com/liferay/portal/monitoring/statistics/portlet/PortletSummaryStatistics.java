@@ -18,8 +18,6 @@ import com.liferay.portal.monitoring.MonitoringException;
 import com.liferay.portal.monitoring.statistics.SummaryStatistics;
 
 /**
- * <a href="PortletSummaryStatistics.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */

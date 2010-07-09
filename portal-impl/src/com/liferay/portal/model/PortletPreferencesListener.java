@@ -18,8 +18,6 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
 
 /**
- * <a href="PortletPreferencesListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  * @author Raymond Augé
  */

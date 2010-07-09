@@ -29,8 +29,6 @@ import java.util.Map;
 import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * <a href="AsyncAdvice.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  */

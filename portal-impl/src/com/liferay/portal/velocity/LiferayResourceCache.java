@@ -21,8 +21,6 @@ import org.apache.velocity.runtime.resource.Resource;
 import org.apache.velocity.runtime.resource.ResourceCache;
 
 /**
- * <a href="LiferayResourceCache.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class LiferayResourceCache implements ResourceCache {

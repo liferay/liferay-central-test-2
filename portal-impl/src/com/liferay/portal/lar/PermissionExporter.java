@@ -53,8 +53,6 @@ import java.util.Map;
 import org.apache.commons.lang.time.StopWatch;
 
 /**
- * <a href="PermissionExporter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Joel Kozikowski
  * @author Charles May

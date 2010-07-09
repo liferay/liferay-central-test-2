@@ -57,8 +57,6 @@ import java.util.Map;
 import javax.portlet.PortletPreferences;
 
 /**
- * <a href="MBPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  * @author Raymond Augé
  */

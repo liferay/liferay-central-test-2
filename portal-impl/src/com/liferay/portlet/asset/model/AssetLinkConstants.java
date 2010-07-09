@@ -15,8 +15,6 @@
 package com.liferay.portlet.asset.model;
 
 /**
- * <a href="AssetLinkConstants.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public interface AssetLinkConstants {

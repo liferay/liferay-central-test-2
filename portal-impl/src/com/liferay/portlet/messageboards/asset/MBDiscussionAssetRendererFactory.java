@@ -22,9 +22,6 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 
 /**
- * <a href="MBDiscussionAssetRendererFactory.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Jorge Ferrer
  */
 public class MBDiscussionAssetRendererFactory

@@ -32,8 +32,6 @@ import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.ContextLoaderListener;
 
 /**
- * <a href="PortalContextLoaderListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael Young
  * @author Shuyang Zhou
  */

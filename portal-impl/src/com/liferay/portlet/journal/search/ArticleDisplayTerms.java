@@ -25,8 +25,6 @@ import java.util.Date;
 import javax.portlet.PortletRequest;
 
 /**
- * <a href="ArticleDisplayTerms.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ArticleDisplayTerms extends DisplayTerms {

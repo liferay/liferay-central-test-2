@@ -46,8 +46,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="DocumentConversionUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  */
 public class DocumentConversionUtil {

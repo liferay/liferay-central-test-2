@@ -27,8 +27,6 @@ import com.liferay.portlet.calendar.model.CalEvent;
 import java.util.List;
 
 /**
- * <a href="CalEventPersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class CalEventPersistenceTest extends BasePersistenceTestCase {

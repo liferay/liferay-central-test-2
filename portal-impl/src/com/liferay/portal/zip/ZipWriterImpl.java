@@ -37,8 +37,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
- * <a href="ZipWriterImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class ZipWriterImpl implements ZipWriter {

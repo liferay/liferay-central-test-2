@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import javax.naming.InitialContext;
 
 /**
- * <a href="JndiObjectFactoryBean.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class JndiObjectFactoryBean

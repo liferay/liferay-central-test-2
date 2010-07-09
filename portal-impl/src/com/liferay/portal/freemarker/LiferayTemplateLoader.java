@@ -29,8 +29,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * <a href="LiferayTemplateLoader.java.html"><b><i>View Source</i></b></a>
- *
  * @author Mika Koivisto
  */
 public class LiferayTemplateLoader implements TemplateLoader {

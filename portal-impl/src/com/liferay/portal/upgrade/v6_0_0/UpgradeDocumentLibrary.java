@@ -38,8 +38,6 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 
 /**
- * <a href="UpgradeDocumentLibrary.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  * @author Alexander Chow
  */

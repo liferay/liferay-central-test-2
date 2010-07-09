@@ -22,8 +22,6 @@ import com.liferay.portlet.messageboards.model.MBDiscussion;
 import java.util.Locale;
 
 /**
- * <a href="MBDiscussionWorkflowHandler.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class MBDiscussionWorkflowHandler extends MBMessageWorkflowHandler {

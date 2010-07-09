@@ -19,9 +19,6 @@ import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.util.StringUtil;
 
 /**
- * <a href="JournalTemplateXSLUpgradeColumnImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class JournalTemplateXSLUpgradeColumnImpl extends BaseUpgradeColumnImpl {

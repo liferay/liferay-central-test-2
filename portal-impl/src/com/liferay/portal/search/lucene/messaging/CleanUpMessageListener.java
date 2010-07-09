@@ -22,8 +22,6 @@ import com.liferay.util.SystemProperties;
 import com.liferay.util.ant.DeleteTask;
 
 /**
- * <a href="CleanUpMessageListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class CleanUpMessageListener implements MessageListener {

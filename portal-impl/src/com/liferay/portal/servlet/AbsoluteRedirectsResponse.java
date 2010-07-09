@@ -26,8 +26,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
 /**
- * <a href="AbsoluteRedirectsResponse.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class AbsoluteRedirectsResponse extends HttpServletResponseWrapper {

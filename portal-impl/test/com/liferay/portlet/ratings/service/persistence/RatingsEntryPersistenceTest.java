@@ -27,8 +27,6 @@ import com.liferay.portlet.ratings.model.RatingsEntry;
 import java.util.List;
 
 /**
- * <a href="RatingsEntryPersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class RatingsEntryPersistenceTest extends BasePersistenceTestCase {

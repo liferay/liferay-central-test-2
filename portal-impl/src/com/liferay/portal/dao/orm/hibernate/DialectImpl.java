@@ -17,8 +17,6 @@ package com.liferay.portal.dao.orm.hibernate;
 import com.liferay.portal.kernel.dao.orm.Dialect;
 
 /**
- * <a href="DialectImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class DialectImpl implements Dialect {

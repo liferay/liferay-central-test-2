@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.servlet.filters.CacheResponseData;
 
 /**
- * <a href="CacheUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  * @author Michael Young
  */

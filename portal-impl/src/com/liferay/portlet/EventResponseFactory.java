@@ -20,8 +20,6 @@ import com.liferay.portal.model.User;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="EventResponseFactory.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class EventResponseFactory {

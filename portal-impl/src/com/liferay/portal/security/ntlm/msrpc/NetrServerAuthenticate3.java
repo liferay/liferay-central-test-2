@@ -18,8 +18,6 @@ import jcifs.dcerpc.DcerpcMessage;
 import jcifs.dcerpc.ndr.NdrBuffer;
 
 /**
- * <a href="NetrServerAuthenticate3.java.html"><b><i>View Source</i></b></a>
- *
  * @author Marcellus Tavares
  */
 public class NetrServerAuthenticate3 extends DcerpcMessage {

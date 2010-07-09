@@ -28,8 +28,6 @@ import com.liferay.portal.service.base.PortletServiceBaseImpl;
 import java.util.List;
 
 /**
- * <a href="PortletServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PortletServiceImpl extends PortletServiceBaseImpl {

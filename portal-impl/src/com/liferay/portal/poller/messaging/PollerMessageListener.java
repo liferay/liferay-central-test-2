@@ -27,8 +27,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.poller.PollerProcessorUtil;
 
 /**
- * <a href="PollerMessageListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class PollerMessageListener implements MessageListener {

@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.upgrade.v6_0_0.util.LayoutTable;
 
 /**
- * <a href="UpgradeLayout.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class UpgradeLayout extends UpgradeProcess {

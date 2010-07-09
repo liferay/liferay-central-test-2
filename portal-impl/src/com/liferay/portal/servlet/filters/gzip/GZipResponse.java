@@ -26,8 +26,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
 /**
- * <a href="GZipResponse.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jayson Falkner
  * @author Brian Wing Shun Chan
  */

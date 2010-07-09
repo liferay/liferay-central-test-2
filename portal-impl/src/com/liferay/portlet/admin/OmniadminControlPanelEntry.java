@@ -20,8 +20,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.BaseControlPanelEntry;
 
 /**
- * <a href="OmniadminControlPanelEntry.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class OmniadminControlPanelEntry extends BaseControlPanelEntry {

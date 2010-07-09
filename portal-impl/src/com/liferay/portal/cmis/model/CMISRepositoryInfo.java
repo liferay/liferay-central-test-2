@@ -21,8 +21,6 @@ import org.apache.abdera.model.Element;
 import org.apache.abdera.model.ElementWrapper;
 
 /**
- * <a href="CMISRepositoryInfo.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class CMISRepositoryInfo extends ElementWrapper {

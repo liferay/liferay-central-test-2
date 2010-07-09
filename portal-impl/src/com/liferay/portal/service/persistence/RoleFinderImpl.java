@@ -40,8 +40,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="RoleFinderImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class RoleFinderImpl

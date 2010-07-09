@@ -27,8 +27,6 @@ import org.apache.abdera.model.Service;
 import org.apache.abdera.model.Workspace;
 
 /**
- * <a href="CMISTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class CMISTest extends BaseCMISTestCase {

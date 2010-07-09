@@ -58,9 +58,6 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersisten
 import javax.sql.DataSource;
 
 /**
- * <a href="DLFileShortcutServiceBaseImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public abstract class DLFileShortcutServiceBaseImpl extends PrincipalBean

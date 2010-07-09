@@ -21,9 +21,6 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portlet.social.service.SocialEquityLogLocalServiceUtil;
 
 /**
- * <a href="CheckEquityLogMessageListener.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Zsolt Berentey
  * @author Brian Wing Shun Chan
  */

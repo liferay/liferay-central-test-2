@@ -37,9 +37,6 @@ import org.hibernate.cfg.Environment;
 import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
 
 /**
- * <a href="PortalHibernateConfiguration.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  * @author Marcellus Tavares
  */

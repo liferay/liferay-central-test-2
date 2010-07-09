@@ -34,8 +34,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="ReCaptchaImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Tagnaouti Boubker
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan

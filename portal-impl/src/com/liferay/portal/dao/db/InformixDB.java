@@ -25,8 +25,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import java.io.IOException;
 
 /**
- * <a href="InformixDB.java.html"><b><i>View Source</i></b></a>
- *
  * @author Neil Griffin
  * @author Sandeep Soni
  * @author Ganesh Ram

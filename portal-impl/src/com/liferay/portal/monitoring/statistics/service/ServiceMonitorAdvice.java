@@ -31,8 +31,6 @@ import java.util.Set;
 import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * <a href="ServiceMonitorAdvice.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class ServiceMonitorAdvice extends ChainableMethodAdvice {

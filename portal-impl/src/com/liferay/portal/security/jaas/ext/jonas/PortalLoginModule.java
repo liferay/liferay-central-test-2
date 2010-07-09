@@ -25,8 +25,6 @@ import java.lang.reflect.Method;
 import java.security.Principal;
 
 /**
- * <a href="PortalLoginModule.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PortalLoginModule extends BasicLoginModule {

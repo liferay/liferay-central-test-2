@@ -39,8 +39,6 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 /**
- * <a href="CompanyImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class CompanyImpl extends CompanyModelImpl implements Company {

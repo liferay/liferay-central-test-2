@@ -25,8 +25,6 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.SqlParameter;
 
 /**
- * <a href="MappingSqlQueryImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class MappingSqlQueryImpl<T>

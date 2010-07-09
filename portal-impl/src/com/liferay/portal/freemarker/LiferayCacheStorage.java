@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
 import freemarker.cache.ConcurrentCacheStorage;
 
 /**
- * <a href="LiferayCacheStorage.java.html"><b><i>View Source</i></b></a>
- *
  * @author Mika Koivisto
  */
 public class LiferayCacheStorage implements ConcurrentCacheStorage {

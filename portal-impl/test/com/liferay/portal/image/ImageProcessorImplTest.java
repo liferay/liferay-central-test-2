@@ -32,8 +32,6 @@ import java.util.Arrays;
 import javax.imageio.ImageIO;
 
 /**
- * <a href="ImageProcessorImplTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class ImageProcessorImplTest extends BaseTestCase {

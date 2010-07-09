@@ -57,8 +57,6 @@ import java.util.Set;
 import org.apache.commons.lang.time.StopWatch;
 
 /**
- * <a href="AdvancedPermissionChecker.java.html"><b><i>View Source</i></b></a>
- *
  * @author Charles May
  * @author Brian Wing Shun Chan
  * @author Raymond Augé

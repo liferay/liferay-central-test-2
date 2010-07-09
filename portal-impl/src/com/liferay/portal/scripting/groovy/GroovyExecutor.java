@@ -28,8 +28,6 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * <a href="GroovyExecutor.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alberto Montero
  * @author Brian Wing Shun Chan
  */

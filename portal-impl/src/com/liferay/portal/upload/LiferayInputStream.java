@@ -30,8 +30,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * <a href="LiferayInputStream.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Myunghun Kim
  * @author Brian Wing Shun Chan
  * @author Harry Mark

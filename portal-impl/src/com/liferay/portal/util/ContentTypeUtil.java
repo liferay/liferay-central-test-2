@@ -17,8 +17,6 @@ package com.liferay.portal.util;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 
 /**
- * <a href="ContentTypeUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author	   Alexander Chow
  * @deprecated {@link MimeTypesUtil}
  */

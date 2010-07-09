@@ -38,9 +38,6 @@ import java.util.List;
 import javax.portlet.PortletPreferences;
 
 /**
- * <a href="CalendarPortletDataHandlerImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Bruno Farache
  * @author Raymond Augé
  */

@@ -40,8 +40,6 @@ import javax.portlet.ReadOnlyException;
 import javax.portlet.ValidatorException;
 
 /**
- * <a href="PortletPreferencesImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PortletPreferencesImpl

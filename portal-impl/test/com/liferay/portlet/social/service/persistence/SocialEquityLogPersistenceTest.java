@@ -26,9 +26,6 @@ import com.liferay.portlet.social.model.SocialEquityLog;
 import java.util.List;
 
 /**
- * <a href="SocialEquityLogPersistenceTest.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class SocialEquityLogPersistenceTest extends BasePersistenceTestCase {

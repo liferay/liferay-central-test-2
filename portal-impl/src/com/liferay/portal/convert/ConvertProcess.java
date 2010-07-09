@@ -21,8 +21,6 @@ import com.liferay.portal.util.MaintenanceUtil;
 import org.apache.commons.lang.time.StopWatch;
 
 /**
- * <a href="ConvertProcess.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public abstract class ConvertProcess {

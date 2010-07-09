@@ -27,8 +27,6 @@ import java.util.List;
 import org.springframework.context.support.AbstractApplicationContext;
 
 /**
- * <a href="SpringUtil.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * In most cases, SpringUtil.setContext() would have been called by
  * com.liferay.portal.spring.context.PortalContextLoaderListener, configured in

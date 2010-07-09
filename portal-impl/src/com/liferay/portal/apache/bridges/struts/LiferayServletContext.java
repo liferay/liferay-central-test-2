@@ -29,8 +29,6 @@ import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
 
 /**
- * <a href="LiferayServletContext.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael Young
  */
 public class LiferayServletContext implements ServletContext {

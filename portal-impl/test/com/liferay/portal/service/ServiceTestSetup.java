@@ -21,8 +21,6 @@ import junit.extensions.TestSetup;
 import junit.framework.Test;
 
 /**
- * <a href="ServiceTestSetup.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ServiceTestSetup extends TestSetup {

@@ -65,8 +65,6 @@ import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * <a href="UserImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  * @author Wesley Gong

@@ -22,9 +22,6 @@ import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import java.sql.Types;
 
 /**
- * <a href="PollsChoiceIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PollsChoiceIdUpgradeColumnImpl extends PKUpgradeColumnImpl {

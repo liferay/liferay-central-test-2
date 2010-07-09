@@ -17,8 +17,6 @@ package com.liferay.portal.spring.util;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
 /**
- * <a href="FilterClassLoader.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class FilterClassLoader extends ClassLoader {

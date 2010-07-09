@@ -27,8 +27,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.TestPropsValues;
 
 /**
- * <a href="ResourceLocalServiceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ResourceLocalServiceTest extends BaseServiceTestCase {

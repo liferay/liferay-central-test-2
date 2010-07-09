@@ -47,8 +47,6 @@ import javax.xml.stream.XMLStreamWriter;
 import org.apache.commons.collections.map.ReferenceMap;
 
 /**
- * <a href="LocalizationImpl.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * This class is used to localize values stored in XML and is often used to add
  * localization behavior to value objects.

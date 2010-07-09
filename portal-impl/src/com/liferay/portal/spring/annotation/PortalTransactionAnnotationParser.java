@@ -35,9 +35,6 @@ import org.springframework.transaction.interceptor.RuleBasedTransactionAttribute
 import org.springframework.transaction.interceptor.TransactionAttribute;
 
 /**
- * <a href="PortalTransactionAnnotationParser.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author	   Michael Young
  * @author	   Shuyang Zhou
  * @deprecated

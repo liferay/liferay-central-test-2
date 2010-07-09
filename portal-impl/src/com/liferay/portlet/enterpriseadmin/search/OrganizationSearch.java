@@ -35,8 +35,6 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="OrganizationSearch.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class OrganizationSearch extends SearchContainer<Organization> {

@@ -30,9 +30,6 @@ import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="WikiPageAssetRendererFactory.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Julio Camarero
  * @author Juan Fernández
  * @author Jorge Ferrer

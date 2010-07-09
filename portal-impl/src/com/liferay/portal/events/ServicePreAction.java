@@ -118,8 +118,6 @@ import org.apache.commons.lang.time.StopWatch;
 import org.apache.struts.Globals;
 
 /**
- * <a href="ServicePreAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Felix Ventero
  */

@@ -26,9 +26,6 @@ import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 import java.util.List;
 
 /**
- * <a href="AnnouncementsDeliveryPersistenceTest.java.html"><b><i>View Source
- * </i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class AnnouncementsDeliveryPersistenceTest

@@ -25,8 +25,6 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="BrowserSnifferImpl.java.html"><b><i>View Source</i></b></a>
- *
  * See http://www.zytrax.com/tech/web/browser_ids.htm for examples.
  *
  * @author Eduardo Lundgren

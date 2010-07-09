@@ -34,8 +34,6 @@ import org.springframework.orm.hibernate3.HibernateTransactionManager;
 import org.springframework.transaction.support.AbstractPlatformTransactionManager;
 
 /**
- * <a href="TransactionManagerFactory.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class TransactionManagerFactory {

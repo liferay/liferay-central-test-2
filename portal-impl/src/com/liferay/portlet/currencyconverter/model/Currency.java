@@ -17,8 +17,6 @@ package com.liferay.portlet.currencyconverter.model;
 import java.io.Serializable;
 
 /**
- * <a href="Currency.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class Currency implements Serializable {

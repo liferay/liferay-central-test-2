@@ -22,8 +22,6 @@ import com.liferay.portal.upgrade.v6_0_0.util.JournalFeedTable;
 import com.liferay.portal.upgrade.v6_0_0.util.JournalTemplateTable;
 
 /**
- * <a href="UpgradeJournal.java.html"><b><i>View Source</i></b></a>
- *
  * @author Zsigmond Rab
  */
 public class UpgradeJournal extends UpgradeProcess {

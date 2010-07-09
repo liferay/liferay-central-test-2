@@ -22,8 +22,6 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.BaseControlPanelEntry;
 
 /**
- * <a href="MyPagesControlPanelEntry.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  * @author Amos Fong
  */

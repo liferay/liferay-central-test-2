@@ -20,8 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <a href="TreeView.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class TreeView implements Serializable {

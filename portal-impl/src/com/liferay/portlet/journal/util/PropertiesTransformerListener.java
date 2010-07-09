@@ -28,9 +28,6 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * <a href="PropertiesTransformerListener.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PropertiesTransformerListener extends TransformerListener {

@@ -17,8 +17,6 @@ package com.liferay.portal.cluster;
 import org.jgroups.Address;
 
 /**
- * <a href="AddressImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class AddressImpl implements com.liferay.portal.kernel.cluster.Address {

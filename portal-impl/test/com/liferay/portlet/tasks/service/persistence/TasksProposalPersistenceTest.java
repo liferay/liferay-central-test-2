@@ -27,9 +27,6 @@ import com.liferay.portlet.tasks.model.TasksProposal;
 import java.util.List;
 
 /**
- * <a href="TasksProposalPersistenceTest.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class TasksProposalPersistenceTest extends BasePersistenceTestCase {

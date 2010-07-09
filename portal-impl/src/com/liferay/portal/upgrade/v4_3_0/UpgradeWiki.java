@@ -31,8 +31,6 @@ import com.liferay.portal.upgrade.v4_3_0.util.WikiPageTable;
 import java.sql.Types;
 
 /**
- * <a href="UpgradeWiki.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UpgradeWiki extends UpgradeProcess {

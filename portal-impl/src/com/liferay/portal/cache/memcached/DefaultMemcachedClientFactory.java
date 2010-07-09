@@ -28,9 +28,6 @@ import net.spy.memcached.MemcachedClient;
 import net.spy.memcached.MemcachedClientIF;
 
 /**
- * <a href="DefaultMemcachedClientFactory.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Michael C. Han
  */
 public class DefaultMemcachedClientFactory implements MemcachedClientFactory {

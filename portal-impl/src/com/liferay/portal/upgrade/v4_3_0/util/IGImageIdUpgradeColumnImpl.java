@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.upgrade.util.ValueMapperFactoryUtil;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 
 /**
- * <a href="IGImageIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class IGImageIdUpgradeColumnImpl extends PKUpgradeColumnImpl {

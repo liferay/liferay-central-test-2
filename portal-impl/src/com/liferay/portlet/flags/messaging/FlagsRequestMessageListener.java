@@ -55,8 +55,6 @@ import java.util.Locale;
 import javax.mail.internet.InternetAddress;
 
 /**
- * <a href="FlagsRequestMessageListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Julio Camarero
  * @author Michael C. Han
  * @author Brian Wing Shun Chan

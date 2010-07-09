@@ -19,8 +19,6 @@ import java.io.Serializable;
 import org.apache.velocity.runtime.resource.util.StringResource;
 
 /**
- * <a href="SerializableStringResource.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class SerializableStringResource implements Serializable {

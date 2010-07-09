@@ -27,8 +27,6 @@ import com.liferay.portlet.messageboards.model.MBStatsUser;
 import java.util.List;
 
 /**
- * <a href="MBStatsUserPersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class MBStatsUserPersistenceTest extends BasePersistenceTestCase {

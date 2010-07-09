@@ -24,8 +24,6 @@ import com.liferay.yahoo.platform.yui.compressor.CssCompressor;
 import com.liferay.yahoo.platform.yui.compressor.JavaScriptCompressor;
 
 /**
- * <a href="MinifierUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class MinifierUtil {

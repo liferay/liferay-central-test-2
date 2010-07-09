@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.workflow.WorkflowLogManager;
 import java.util.List;
 
 /**
- * <a href="WorkflowLogManagerProxyBean.java.html"><b><i>View Source</i></b></a>
- *
  * @author Micha Kiener
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan

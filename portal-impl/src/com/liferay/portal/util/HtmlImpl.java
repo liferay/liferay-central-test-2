@@ -23,8 +23,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import net.htmlparser.jericho.Source;
 
 /**
- * <a href="HtmlImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Clarence Shen
  * @author Harry Mark

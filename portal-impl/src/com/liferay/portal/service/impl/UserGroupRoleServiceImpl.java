@@ -23,8 +23,6 @@ import com.liferay.portal.service.base.UserGroupRoleServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 
 /**
- * <a href="UserGroupRoleServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {

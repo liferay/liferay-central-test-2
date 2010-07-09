@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.dao.orm.ProjectionFactory;
 import com.liferay.portal.kernel.dao.orm.ProjectionList;
 
 /**
- * <a href="ProjectionFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Prashant Dighe
  * @author Brian Wing Shun Chan
  */

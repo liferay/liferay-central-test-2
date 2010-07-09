@@ -35,9 +35,6 @@ import com.liferay.portlet.announcements.service.base.AnnouncementsEntryServiceB
 import com.liferay.portlet.announcements.service.permission.AnnouncementsEntryPermission;
 
 /**
- * <a href="AnnouncementsEntryServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class AnnouncementsEntryServiceImpl

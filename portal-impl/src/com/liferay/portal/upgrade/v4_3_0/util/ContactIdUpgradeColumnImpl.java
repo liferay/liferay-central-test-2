@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.ValueMapper;
 
 /**
- * <a href="ContactIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  * @author Brian Wing Shun Chan
  */

@@ -36,9 +36,6 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 /**
- * <a href="PortletPreferencesSerializer.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  * @author Jon Steer
  * @author Zongliang Li

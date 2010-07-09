@@ -25,8 +25,6 @@ import com.liferay.portlet.imagegallery.model.IGFolderConstants;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 
 /**
- * <a href="IGFolderPermission.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class IGFolderPermission {

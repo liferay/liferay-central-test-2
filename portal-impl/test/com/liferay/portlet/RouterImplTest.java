@@ -24,8 +24,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <a href="RouterImplTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Connor McKay
  * @author Brian Wing Shun Chan
  */

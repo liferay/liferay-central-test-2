@@ -29,8 +29,6 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="WorkflowTaskSearch.java.html"><b><i>View Source</i></b></a>
- *
  * @author Marcellus Tavares
  */
 public class WorkflowTaskSearch extends SearchContainer<WorkflowTask> {

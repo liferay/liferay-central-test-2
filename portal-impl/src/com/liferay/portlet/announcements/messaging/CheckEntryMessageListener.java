@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceUtil;
 
 /**
- * <a href="CheckEntryMessageListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  * @author Tina Tian
  */

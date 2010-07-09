@@ -34,8 +34,6 @@ import javax.portlet.RenderResponse;
 import javax.portlet.WindowState;
 
 /**
- * <a href="IGImageAssetRenderer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Julio Camarero
  * @author Juan Fernández
  */

@@ -21,9 +21,6 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.service.base.ResourcePermissionServiceBaseImpl;
 
 /**
- * <a href="ResourcePermissionServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ResourcePermissionServiceImpl

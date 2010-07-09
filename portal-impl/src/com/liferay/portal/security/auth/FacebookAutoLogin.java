@@ -30,8 +30,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * <a href="FacebookAutoLogin.java.html"><b><i>View Source</i></b></a>
- *
  * @author Wilson Man
  */
 public class FacebookAutoLogin implements AutoLogin {

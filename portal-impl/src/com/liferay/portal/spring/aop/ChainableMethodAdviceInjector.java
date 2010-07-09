@@ -17,9 +17,6 @@ package com.liferay.portal.spring.aop;
 import com.liferay.portal.kernel.util.Validator;
 
 /**
- * <a href="ChainableMethodAdviceInjector.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Shuyang Zhou
  */
 public class ChainableMethodAdviceInjector {

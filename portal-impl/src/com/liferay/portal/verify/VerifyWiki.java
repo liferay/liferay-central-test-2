@@ -22,8 +22,6 @@ import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import java.util.List;
 
 /**
- * <a href="VerifyWiki.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class VerifyWiki extends VerifyProcess {

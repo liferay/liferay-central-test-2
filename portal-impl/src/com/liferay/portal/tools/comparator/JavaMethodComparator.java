@@ -19,8 +19,6 @@ import com.thoughtworks.qdox.model.JavaMethod;
 import java.util.Comparator;
 
 /**
- * <a href="JavaMethodComparator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class JavaMethodComparator implements Comparator<JavaMethod> {

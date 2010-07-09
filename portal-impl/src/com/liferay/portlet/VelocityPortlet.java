@@ -44,8 +44,6 @@ import org.apache.velocity.io.VelocityWriter;
 import org.apache.velocity.util.SimplePool;
 
 /**
- * <a href="VelocityPortlet.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Steven P. Goldsmith
  * @author Raymond Augé

@@ -22,8 +22,6 @@ import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 
 /**
- * <a href="ImageServletTokenImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ImageServletTokenImpl implements ImageServletToken {

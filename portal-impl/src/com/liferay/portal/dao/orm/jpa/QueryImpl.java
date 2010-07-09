@@ -37,8 +37,6 @@ import java.util.Map;
 import javax.persistence.FlushModeType;
 
 /**
- * <a href="QueryImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Prashant Dighe
  * @author Brian Wing Shun Chan
  */

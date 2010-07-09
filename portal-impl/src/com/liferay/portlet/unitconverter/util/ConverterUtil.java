@@ -17,8 +17,6 @@ package com.liferay.portlet.unitconverter.util;
 import com.liferay.portlet.unitconverter.model.Conversion;
 
 /**
- * <a href="ConverterUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author James Lefeu
  */
 public class ConverterUtil {

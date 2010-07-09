@@ -25,9 +25,6 @@ import com.liferay.portlet.documentlibrary.util.comparator.FileVersionVersionCom
 import java.util.List;
 
 /**
- * <a href="DLFileVersionLocalServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
  * @author Jorge Ferrer

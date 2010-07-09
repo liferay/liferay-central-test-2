@@ -62,9 +62,6 @@ import java.util.List;
 import javax.sql.DataSource;
 
 /**
- * <a href="ShoppingItemFieldLocalServiceBaseImpl.java.html"><b><i>View Source
- * </i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public abstract class ShoppingItemFieldLocalServiceBaseImpl

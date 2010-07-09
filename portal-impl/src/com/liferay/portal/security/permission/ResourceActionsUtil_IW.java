@@ -15,8 +15,6 @@
 package com.liferay.portal.security.permission;
 
 /**
- * <a href="ResourceActionsUtil_IW.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ResourceActionsUtil_IW {

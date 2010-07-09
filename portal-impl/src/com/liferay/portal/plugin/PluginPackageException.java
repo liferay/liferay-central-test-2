@@ -17,8 +17,6 @@ package com.liferay.portal.plugin;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
- * <a href="PluginPackageException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class PluginPackageException extends SystemException {

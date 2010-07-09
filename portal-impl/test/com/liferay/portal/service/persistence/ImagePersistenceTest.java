@@ -26,8 +26,6 @@ import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 import java.util.List;
 
 /**
- * <a href="ImagePersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ImagePersistenceTest extends BasePersistenceTestCase {

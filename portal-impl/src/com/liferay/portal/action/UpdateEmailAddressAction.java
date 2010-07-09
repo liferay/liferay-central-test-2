@@ -37,8 +37,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="UpdateEmailAddressAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Julio Camarero
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan

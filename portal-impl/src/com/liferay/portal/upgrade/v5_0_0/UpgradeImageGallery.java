@@ -25,8 +25,6 @@ import com.liferay.portal.upgrade.v5_0_0.util.IGImageNameColumnImpl;
 import com.liferay.portal.upgrade.v5_0_0.util.IGImageTable;
 
 /**
- * <a href="UpgradeImageGallery.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class UpgradeImageGallery extends UpgradeProcess {

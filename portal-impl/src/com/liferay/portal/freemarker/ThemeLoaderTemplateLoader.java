@@ -25,8 +25,6 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * <a href="ThemeLoaderTemplateLoader.java.html"><b><i>View Source</i></b></a>
- *
  * @author Mika Koivisto
  */
 public class ThemeLoaderTemplateLoader extends URLTemplateLoader {

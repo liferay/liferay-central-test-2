@@ -18,8 +18,6 @@ import javax.portlet.CacheControl;
 import javax.portlet.MimeResponse;
 
 /**
- * <a href="CacheControlImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Deepak Gothe
  */

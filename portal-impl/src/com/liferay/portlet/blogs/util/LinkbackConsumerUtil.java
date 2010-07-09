@@ -30,8 +30,6 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * <a href="LinkbackConsumerUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class LinkbackConsumerUtil {

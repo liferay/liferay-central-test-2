@@ -32,8 +32,6 @@ import java.sql.ResultSet;
 import java.sql.Types;
 
 /**
- * <a href="UpgradeOrganization.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  * @author Edward Shin
  */

@@ -36,8 +36,6 @@ import com.liferay.portal.util.InitUtil;
 import org.apache.commons.lang.time.StopWatch;
 
 /**
- * <a href="DBUpgrader.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */

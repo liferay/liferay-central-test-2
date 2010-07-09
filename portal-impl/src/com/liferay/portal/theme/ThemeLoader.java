@@ -33,8 +33,6 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 
 /**
- * <a href="ThemeLoader.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ThemeLoader {

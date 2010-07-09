@@ -17,9 +17,6 @@ package com.liferay.portlet.wiki.translators;
 import com.liferay.portal.util.BaseTestCase;
 
 /**
- * <a href="MediaWikiToCreoleTranslatorTest.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Jorge Ferrer
  */
 public class MediaWikiToCreoleTranslatorTest extends BaseTestCase {

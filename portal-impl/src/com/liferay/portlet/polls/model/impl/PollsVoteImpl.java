@@ -21,8 +21,6 @@ import com.liferay.portlet.polls.model.PollsVote;
 import com.liferay.portlet.polls.service.PollsChoiceLocalServiceUtil;
 
 /**
- * <a href="PollsVoteImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PollsVoteImpl extends PollsVoteModelImpl implements PollsVote {

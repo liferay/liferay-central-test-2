@@ -45,8 +45,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="EditWorkflowInstanceAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Marcellus Tavares
  */
 public class EditWorkflowInstanceAction extends PortletAction {

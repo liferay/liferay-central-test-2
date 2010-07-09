@@ -36,9 +36,6 @@ import org.springframework.transaction.interceptor.TransactionAttribute;
 import org.springframework.transaction.interceptor.TransactionAttributeSource;
 
 /**
- * <a href="AnnotationTransactionAttributeSource.java.html"><b><i>View Source
- * </i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class AnnotationTransactionAttributeSource

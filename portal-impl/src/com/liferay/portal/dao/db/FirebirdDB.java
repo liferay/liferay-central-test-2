@@ -23,8 +23,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import java.io.IOException;
 
 /**
- * <a href="FirebirdDB.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  * @author Sandeep Soni
  * @author Ganesh Ram

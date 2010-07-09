@@ -17,8 +17,6 @@ package com.liferay.portal.events;
 import com.liferay.portal.kernel.events.SimpleAction;
 
 /**
- * <a href="AppShutdownAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class AppShutdownAction extends SimpleAction {

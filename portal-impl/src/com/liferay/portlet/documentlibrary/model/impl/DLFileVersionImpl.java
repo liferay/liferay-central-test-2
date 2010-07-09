@@ -24,8 +24,6 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 /**
- * <a href="DLFileVersionImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class DLFileVersionImpl

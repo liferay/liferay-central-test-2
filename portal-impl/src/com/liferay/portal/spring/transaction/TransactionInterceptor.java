@@ -26,8 +26,6 @@ import org.springframework.transaction.interceptor.TransactionAttribute;
 import org.springframework.transaction.interceptor.TransactionAttributeSource;
 
 /**
- * <a href="TransactionInterceptor.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class TransactionInterceptor

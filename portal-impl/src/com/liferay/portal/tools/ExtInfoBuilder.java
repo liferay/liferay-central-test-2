@@ -29,8 +29,6 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
 /**
- * <a href="ExtInfoBuilder.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ExtInfoBuilder {

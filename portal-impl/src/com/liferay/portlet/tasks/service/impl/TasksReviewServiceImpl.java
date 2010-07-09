@@ -23,8 +23,6 @@ import com.liferay.portlet.tasks.model.TasksReview;
 import com.liferay.portlet.tasks.service.base.TasksReviewServiceBaseImpl;
 
 /**
- * <a href="TasksReviewServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  * @author Brian Wing Shun Chan
  */

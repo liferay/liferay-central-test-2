@@ -34,8 +34,6 @@ import org.jgroups.ChannelException;
 import org.jgroups.JChannel;
 
 /**
- * <a href="ClusterLinkImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class ClusterLinkImpl extends ClusterBase implements ClusterLink {

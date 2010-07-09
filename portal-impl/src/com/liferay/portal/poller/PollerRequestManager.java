@@ -26,8 +26,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <a href="PollerRequestManager.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class PollerRequestManager implements MessageListener {

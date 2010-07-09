@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.InitUtil;
 
 /**
- * <a href="XMLFormatter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class XMLFormatter {

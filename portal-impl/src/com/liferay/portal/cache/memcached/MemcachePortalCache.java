@@ -30,8 +30,6 @@ import java.util.concurrent.TimeUnit;
 import net.spy.memcached.MemcachedClientIF;
 
 /**
- * <a href="MemcachePortalCache.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class MemcachePortalCache extends BasePortalCache {

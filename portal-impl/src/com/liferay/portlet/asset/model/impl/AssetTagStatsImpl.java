@@ -17,8 +17,6 @@ package com.liferay.portlet.asset.model.impl;
 import com.liferay.portlet.asset.model.AssetTagStats;
 
 /**
- * <a href="AssetTagStatsImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class AssetTagStatsImpl

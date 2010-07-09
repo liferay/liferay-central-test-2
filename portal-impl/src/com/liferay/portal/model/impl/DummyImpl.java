@@ -20,8 +20,6 @@ import com.liferay.portal.model.Dummy;
 import java.io.Serializable;
 
 /**
- * <a href="DummyImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class DummyImpl extends BaseModelImpl<Dummy> implements Dummy {

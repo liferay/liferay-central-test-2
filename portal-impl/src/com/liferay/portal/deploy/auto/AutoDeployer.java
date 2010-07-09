@@ -17,8 +17,6 @@ package com.liferay.portal.deploy.auto;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 
 /**
- * <a href="AutoDeployer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Ivica Cardic
  * @author Brian Wing Shun Chan
  */

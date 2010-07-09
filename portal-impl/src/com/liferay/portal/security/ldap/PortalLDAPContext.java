@@ -25,8 +25,6 @@ import javax.naming.directory.Attributes;
 import javax.naming.directory.BasicAttributes;
 
 /**
- * <a href="PortalLDAPContext.java.html"><b><i>View Source</i></b></a>
- *
  * @author Edward Han
  */
 public class PortalLDAPContext extends DummyDirContext {

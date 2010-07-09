@@ -25,8 +25,6 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 
 /**
- * <a href="IGImageImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class IGImageImpl extends IGImageModelImpl implements IGImage {

@@ -39,8 +39,6 @@ import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.SortField;
 
 /**
- * <a href="LuceneIndexSearcherImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  */
 public class LuceneIndexSearcherImpl implements IndexSearcher {

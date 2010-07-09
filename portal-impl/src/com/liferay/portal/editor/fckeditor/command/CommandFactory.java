@@ -17,8 +17,6 @@ package com.liferay.portal.editor.fckeditor.command;
 import com.liferay.portal.kernel.util.InstancePool;
 
 /**
- * <a href="CommandFactory.java.html"><b><i>View Source</i></b></a>
- *
  * @author Ivica Cardic
  */
 public class CommandFactory {

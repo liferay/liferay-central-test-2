@@ -47,8 +47,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="WikiNodeLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Charles May
  * @author Raymond Augé

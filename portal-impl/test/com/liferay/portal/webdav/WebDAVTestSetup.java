@@ -28,8 +28,6 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 /**
- * <a href="WebDAVTestSetup.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class WebDAVTestSetup extends TestSetup {

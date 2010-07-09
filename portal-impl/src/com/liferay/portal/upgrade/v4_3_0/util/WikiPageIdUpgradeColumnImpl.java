@@ -21,8 +21,6 @@ import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil;
 
 /**
- * <a href="WikiPageIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class WikiPageIdUpgradeColumnImpl extends PKUpgradeColumnImpl {

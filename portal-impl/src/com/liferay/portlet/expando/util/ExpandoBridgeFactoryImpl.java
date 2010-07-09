@@ -18,8 +18,6 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 
 /**
- * <a href="ExpandoBridgeFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class ExpandoBridgeFactoryImpl implements ExpandoBridgeFactory {

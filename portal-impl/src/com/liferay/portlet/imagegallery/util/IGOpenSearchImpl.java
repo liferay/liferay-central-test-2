@@ -17,8 +17,6 @@ package com.liferay.portlet.imagegallery.util;
 import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
 
 /**
- * <a href="IGOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class IGOpenSearchImpl extends HitsOpenSearchImpl {

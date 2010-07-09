@@ -28,8 +28,6 @@ import org.hibernate.cache.Timestamper;
 import org.hibernate.util.StringHelper;
 
 /**
- * <a href="OSCacheProvider.java.html"><b><i>View Source</i></b></a>
- *
  * @author	   Mathias Bogaert
  * @author	   Brian Wing Shun Chan
  * @deprecated

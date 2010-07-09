@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import java.util.Map;
 
 /**
- * <a href="ShutdownHook.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ShutdownHook implements Runnable {

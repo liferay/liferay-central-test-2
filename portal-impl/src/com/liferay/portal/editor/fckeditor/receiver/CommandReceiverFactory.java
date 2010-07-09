@@ -20,8 +20,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <a href="CommandReceiverFactory.java.html"><b><i>View Source</i></b></a>
- *
  * @author Ivica Cardic
  * @author Michael C. Han
  */

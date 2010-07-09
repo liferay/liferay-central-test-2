@@ -40,9 +40,6 @@ import java.util.List;
 import java.util.concurrent.locks.Lock;
 
 /**
- * <a href="ResourcePermissionLocalServiceImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
  */

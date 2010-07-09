@@ -23,8 +23,6 @@ import com.liferay.portal.service.persistence.BasePersistence;
 import java.util.List;
 
 /**
- * <a href="CyrusVirtualPersistence.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface CyrusVirtualPersistence extends BasePersistence<Dummy> {

@@ -41,8 +41,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="ExportEventsAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael Young
  * @author Bruno Farache
  * @author Brian Wing Shun Chan

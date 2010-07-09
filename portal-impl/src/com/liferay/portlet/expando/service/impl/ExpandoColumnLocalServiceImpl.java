@@ -34,9 +34,6 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="ExpandoColumnLocalServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Raymond Augé
  * @author Brian Wing Shun Chan
  */

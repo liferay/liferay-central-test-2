@@ -27,8 +27,6 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * <a href="TokensTransformerListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class TokensTransformerListener extends TransformerListener {

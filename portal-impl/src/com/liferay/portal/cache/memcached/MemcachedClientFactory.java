@@ -17,8 +17,6 @@ package com.liferay.portal.cache.memcached;
 import net.spy.memcached.MemcachedClientIF;
 
 /**
- * <a href="MemcachedClientFactory.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public interface MemcachedClientFactory {

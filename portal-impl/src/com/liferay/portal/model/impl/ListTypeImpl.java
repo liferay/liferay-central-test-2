@@ -17,8 +17,6 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.model.ListType;
 
 /**
- * <a href="ListTypeImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ListTypeImpl extends ListTypeModelImpl implements ListType {

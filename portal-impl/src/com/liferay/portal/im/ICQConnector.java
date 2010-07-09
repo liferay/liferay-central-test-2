@@ -30,8 +30,6 @@ import java.util.Observer;
 import java.util.Vector;
 
 /**
- * <a href="ICQConnector.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Brett Randall
  */

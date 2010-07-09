@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import java.io.File;
 
 /**
- * <a href="ThemeExplodedTomcatDeployer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Olaf Fricke
  * @author Brian Wing Shun Chan
  */

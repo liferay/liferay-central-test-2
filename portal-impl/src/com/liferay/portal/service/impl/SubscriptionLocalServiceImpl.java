@@ -26,9 +26,6 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="SubscriptionLocalServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Charles May
  */
 public class SubscriptionLocalServiceImpl

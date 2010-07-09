@@ -23,8 +23,6 @@ import com.liferay.portal.util.PropsUtil;
 import java.lang.reflect.Method;
 
 /**
- * <a href="YMConnector.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Brett Randall
  * @author Bruno Farache

@@ -27,9 +27,6 @@ import com.liferay.portlet.journal.model.JournalTemplate;
 import java.util.List;
 
 /**
- * <a href="JournalTemplatePersistenceTest.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class JournalTemplatePersistenceTest extends BasePersistenceTestCase {

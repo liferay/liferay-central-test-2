@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.ScrollableResults;
 
 /**
- * <a href="ScrollableResultsImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ScrollableResultsImpl implements ScrollableResults {

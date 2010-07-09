@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
 /**
- * <a href="CheckArticleMessageListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
  * @author Tina Tian

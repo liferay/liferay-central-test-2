@@ -41,8 +41,6 @@ import org.jasig.cas.client.validation.Cas20ProxyTicketValidator;
 import org.jasig.cas.client.validation.TicketValidator;
 
 /**
- * <a href="CASFilter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael Young
  * @author Brian Wing Shun Chan
  * @author Raymond Augé

@@ -25,8 +25,6 @@ import com.liferay.util.PwdGenerator;
 import java.util.Map;
 
 /**
- * <a href="TableOfContents.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * This is a modification of JSPWiki's core TableOfContents plugin for use
  * within Liferay. This plugin modifies the original behavior by producing

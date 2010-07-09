@@ -37,8 +37,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="OrganizationFinderImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Amos Fong
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer

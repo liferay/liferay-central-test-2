@@ -39,8 +39,6 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
 /**
- * <a href="ActionUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class ActionUtil {

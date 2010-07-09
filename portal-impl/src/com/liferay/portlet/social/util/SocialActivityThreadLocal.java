@@ -17,8 +17,6 @@ package com.liferay.portlet.social.util;
 import com.liferay.portal.kernel.util.InitialThreadLocal;
 
 /**
- * <a href="SocialActivityThreadLocal.java.html"><b><i>View Source</i></b></a>
- *
  * @author Amos Fong
  */
 public class SocialActivityThreadLocal {

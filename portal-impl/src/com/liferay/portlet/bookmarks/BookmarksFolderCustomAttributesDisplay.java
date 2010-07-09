@@ -19,9 +19,6 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.expando.model.BaseCustomAttributesDisplay;
 
 /**
- * <a href="BookmarksFolderCustomAttributesDisplay.java.html"><b><i>View Source
- * </i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class BookmarksFolderCustomAttributesDisplay

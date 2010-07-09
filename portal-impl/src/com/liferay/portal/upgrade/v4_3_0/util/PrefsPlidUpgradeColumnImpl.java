@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.upgrade.util.ValueMapper;
 import com.liferay.portal.util.PortletKeys;
 
 /**
- * <a href="PrefsPlidUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PrefsPlidUpgradeColumnImpl extends BaseUpgradeColumnImpl {

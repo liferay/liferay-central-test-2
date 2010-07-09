@@ -21,8 +21,6 @@ import com.liferay.portal.model.Phone;
 import com.liferay.portal.service.ListTypeServiceUtil;
 
 /**
- * <a href="PhoneImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PhoneImpl extends PhoneModelImpl implements Phone {

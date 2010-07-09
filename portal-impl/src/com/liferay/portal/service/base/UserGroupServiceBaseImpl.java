@@ -178,8 +178,6 @@ import com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence;
 import javax.sql.DataSource;
 
 /**
- * <a href="UserGroupServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public abstract class UserGroupServiceBaseImpl extends PrincipalBean

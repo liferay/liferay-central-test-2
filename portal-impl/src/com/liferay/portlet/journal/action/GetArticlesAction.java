@@ -55,8 +55,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="GetArticlesAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  * @author Brian Wing Shun Chan
  */

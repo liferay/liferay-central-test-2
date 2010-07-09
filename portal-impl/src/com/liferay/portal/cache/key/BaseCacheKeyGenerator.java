@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.cache.key.CacheKeyGenerator;
 import com.liferay.portal.kernel.util.StringBundler;
 
 /**
- * <a href="BaseCacheKeyGenerator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public abstract class BaseCacheKeyGenerator implements CacheKeyGenerator {

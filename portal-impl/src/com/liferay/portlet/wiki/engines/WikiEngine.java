@@ -22,8 +22,6 @@ import java.util.Map;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="WikiEngine.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public interface WikiEngine {

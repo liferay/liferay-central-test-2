@@ -179,8 +179,6 @@ import com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence;
 import javax.sql.DataSource;
 
 /**
- * <a href="QuartzLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public abstract class QuartzLocalServiceBaseImpl implements QuartzLocalService {

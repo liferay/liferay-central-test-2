@@ -21,8 +21,6 @@ import com.liferay.portlet.softwarecatalog.util.comparator.ProductEntryNameCompa
 import com.liferay.portlet.softwarecatalog.util.comparator.ProductEntryTypeComparator;
 
 /**
- * <a href="SCUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class SCUtil {

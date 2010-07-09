@@ -27,8 +27,6 @@ import java.io.InputStream;
 import java.util.Date;
 
 /**
- * <a href="SafeFileNameHookWrapper.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class SafeFileNameHookWrapper implements Hook {

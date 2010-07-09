@@ -17,8 +17,6 @@ package com.liferay.portal.util;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="LayoutClone.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface LayoutClone {

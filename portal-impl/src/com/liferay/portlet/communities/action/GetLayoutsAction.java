@@ -31,8 +31,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="GetLayoutsAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Eduardo Lundgren
  */
 public class GetLayoutsAction extends JSONAction {

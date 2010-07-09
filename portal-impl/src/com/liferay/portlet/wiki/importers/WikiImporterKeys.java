@@ -15,8 +15,6 @@
 package com.liferay.portlet.wiki.importers;
 
 /**
- * <a href="WikiImporterKeys.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class WikiImporterKeys {

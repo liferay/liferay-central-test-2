@@ -33,8 +33,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * <a href="DB2DB.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  * @author Bruno Farache
  * @author Sandeep Soni

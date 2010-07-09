@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.upgrade.StagnantRowException;
 import com.liferay.portal.kernel.upgrade.util.BaseUpgradeColumnImpl;
 
 /**
- * <a href="ImageTypeUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ImageTypeUpgradeColumnImpl extends BaseUpgradeColumnImpl {

@@ -25,9 +25,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * <a href="AnnotationChainableMethodAdvice.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  */

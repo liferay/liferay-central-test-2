@@ -29,8 +29,6 @@ import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil;
 import com.liferay.portlet.wiki.service.permission.WikiPagePermission;
 
 /**
- * <a href="WikiActivityInterpreter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Samuel Kong
  * @author Ryan Park
  */

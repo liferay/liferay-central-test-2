@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.util.PropsValues;
 
 /**
- * <a href="AuthTokenImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Amos Fong
  */
 public class AuthTokenImpl extends AuthTokenWrapper {

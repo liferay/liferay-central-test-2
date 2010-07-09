@@ -27,8 +27,6 @@ import com.liferay.portlet.asset.model.AssetTag;
 import java.util.List;
 
 /**
- * <a href="AssetTagPersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class AssetTagPersistenceTest extends BasePersistenceTestCase {

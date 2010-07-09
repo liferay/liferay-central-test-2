@@ -38,8 +38,6 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
- * <a href="InstanceWrapperBuilder.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class InstanceWrapperBuilder {

@@ -26,8 +26,6 @@ import javax.portlet.PortletURLGenerationListener;
 import javax.portlet.UnavailableException;
 
 /**
- * <a href="PortletURLListenerFactory.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PortletURLListenerFactory {

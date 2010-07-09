@@ -27,9 +27,6 @@ import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import java.util.List;
 
 /**
- * <a href="DLFileShortcutPersistenceTest.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {

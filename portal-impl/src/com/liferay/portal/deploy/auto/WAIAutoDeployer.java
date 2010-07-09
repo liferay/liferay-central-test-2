@@ -28,8 +28,6 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * <a href="WAIAutoDeployer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  * @author Connor McKay
  */

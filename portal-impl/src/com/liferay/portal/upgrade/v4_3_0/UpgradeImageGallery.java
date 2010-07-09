@@ -32,8 +32,6 @@ import com.liferay.portal.upgrade.v4_3_0.util.IGSmallImageIdUpgradeColumnImpl;
 import java.sql.Types;
 
 /**
- * <a href="UpgradeImageGallery.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UpgradeImageGallery extends UpgradeProcess {

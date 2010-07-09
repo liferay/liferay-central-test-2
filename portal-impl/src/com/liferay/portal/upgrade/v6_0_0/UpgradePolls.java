@@ -21,8 +21,6 @@ import com.liferay.portal.upgrade.v6_0_0.util.PollsChoiceTable;
 import com.liferay.portal.upgrade.v6_0_0.util.PollsQuestionTable;
 
 /**
- * <a href="UpgradePolls.java.html"><b><i>View Source</i></b></a>
- *
  * @author Julio Camarero Puras
  */
 public class UpgradePolls extends UpgradeProcess {

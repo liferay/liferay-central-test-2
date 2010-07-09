@@ -15,9 +15,6 @@
 package com.liferay.portlet;
 
 /**
- * <a href="MonitoringPortletManagerMBean.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Michael C. Han
  */
 public interface MonitoringPortletManagerMBean {

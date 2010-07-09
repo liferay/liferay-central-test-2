@@ -33,9 +33,6 @@ import net.sf.ehcache.distribution.CacheManagerPeerProvider;
 import net.sf.ehcache.distribution.CacheManagerPeerProviderFactory;
 
 /**
- * <a href="LiferayCacheManagerPeerProviderFactory.java.html"><b><i>View Source
- * </i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class LiferayCacheManagerPeerProviderFactory

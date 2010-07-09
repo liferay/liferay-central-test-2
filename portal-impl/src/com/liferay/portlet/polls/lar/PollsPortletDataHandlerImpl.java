@@ -45,8 +45,6 @@ import java.util.Map;
 import javax.portlet.PortletPreferences;
 
 /**
- * <a href="PollsPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  * @author Marcellus Tavares
  */

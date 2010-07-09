@@ -43,8 +43,6 @@ import javax.xml.XMLConstants;
 import javax.xml.namespace.QName;
 
 /**
- * <a href="StateAwareResponseImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public abstract class StateAwareResponseImpl

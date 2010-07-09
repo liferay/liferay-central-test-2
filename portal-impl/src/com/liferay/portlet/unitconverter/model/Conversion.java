@@ -15,8 +15,6 @@
 package com.liferay.portlet.unitconverter.model;
 
 /**
- * <a href="Conversion.java.html"><b><i>View Source</i></b></a>
- *
  * @author James Lefeu
  */
 public class Conversion {

@@ -17,8 +17,6 @@ package com.liferay.portal.util;
 import com.liferay.util.bridges.jsf.sun.LiferayConfigureListener;
 
 /**
- * <a href="WebKeys.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Brian Myunghun Kim
  */

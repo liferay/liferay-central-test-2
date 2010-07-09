@@ -17,8 +17,6 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.model.Region;
 
 /**
- * <a href="RegionImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class RegionImpl extends RegionModelImpl implements Region {

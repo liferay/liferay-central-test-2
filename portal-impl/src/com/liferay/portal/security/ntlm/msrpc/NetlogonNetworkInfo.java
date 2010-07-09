@@ -18,8 +18,6 @@ import jcifs.dcerpc.ndr.NdrBuffer;
 import jcifs.dcerpc.ndr.NdrObject;
 
 /**
- * <a href="NetlogonNetworkInfo.java.html"><b><i>View Source</i></b></a>
- *
  * @author Marcellus Tavares
  */
 public class NetlogonNetworkInfo extends NdrObject {

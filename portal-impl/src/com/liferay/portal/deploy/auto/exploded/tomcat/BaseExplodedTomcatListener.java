@@ -30,8 +30,6 @@ import com.liferay.portal.util.PropsValues;
 import java.io.File;
 
 /**
- * <a href="BaseExplodedTomcatListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Olaf Fricke
  * @author Brian Wing Shun Chan
  */

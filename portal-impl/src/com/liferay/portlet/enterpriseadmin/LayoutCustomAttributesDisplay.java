@@ -19,9 +19,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.expando.model.BaseCustomAttributesDisplay;
 
 /**
- * <a href="LayoutCustomAttributesDisplay.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Jorge Ferrer
  */
 public class LayoutCustomAttributesDisplay extends BaseCustomAttributesDisplay {

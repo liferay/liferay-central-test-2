@@ -17,8 +17,6 @@ package com.liferay.portal.upgrade.v4_3_4.util;
 import java.sql.Types;
 
 /**
- * <a href="JournalArticleTable.java.html"><b><i>View Source</i></b></a>
- *
  * @author	  Brian Wing Shun Chan
  * @generated
  */

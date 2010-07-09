@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.model.Role;
 
 /**
- * <a href="RoleResponseElement.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  */
 public class RoleResponseElement implements ResponseElement {

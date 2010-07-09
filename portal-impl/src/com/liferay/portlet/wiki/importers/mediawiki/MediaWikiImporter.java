@@ -69,8 +69,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * <a href="MediaWikiImporter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alvaro del Castillo
  * @author Jorge Ferrer
  */

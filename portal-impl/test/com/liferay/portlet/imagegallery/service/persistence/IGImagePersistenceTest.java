@@ -27,8 +27,6 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import java.util.List;
 
 /**
- * <a href="IGImagePersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class IGImagePersistenceTest extends BasePersistenceTestCase {

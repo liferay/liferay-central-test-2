@@ -22,8 +22,6 @@ import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 
 /**
- * <a href="ExpandoColumnPermission.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class ExpandoColumnPermission {

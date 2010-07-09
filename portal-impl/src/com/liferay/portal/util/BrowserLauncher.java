@@ -22,8 +22,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * <a href="BrowserLauncher.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class BrowserLauncher implements Runnable {

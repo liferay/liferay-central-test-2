@@ -33,8 +33,6 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * <a href="JournalTemplateFinderImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
  * @author Prakash Reddy

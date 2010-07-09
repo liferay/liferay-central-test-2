@@ -20,8 +20,6 @@ import javax.naming.directory.Attributes;
 import javax.naming.ldap.LdapContext;
 
 /**
- * <a href="PortalLDAPImporterUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Edward Han
  * @author Michael C. Han
  * @author Brian Wing Shun Chan

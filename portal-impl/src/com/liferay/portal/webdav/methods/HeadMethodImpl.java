@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.webdav.WebDAVStorage;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="HeadMethodImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
  */

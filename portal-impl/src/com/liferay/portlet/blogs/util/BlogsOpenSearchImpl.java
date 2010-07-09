@@ -17,8 +17,6 @@ package com.liferay.portlet.blogs.util;
 import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
 
 /**
- * <a href="BlogsOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class BlogsOpenSearchImpl extends HitsOpenSearchImpl {

@@ -19,8 +19,6 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.util.PortalUtil;
 
 /**
- * <a href="UpgradeRole.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UpgradeRole extends UpgradeProcess {

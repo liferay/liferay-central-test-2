@@ -55,8 +55,6 @@ import com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence;
 import javax.sql.DataSource;
 
 /**
- * <a href="IGFolderServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public abstract class IGFolderServiceBaseImpl extends PrincipalBean

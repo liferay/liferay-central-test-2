@@ -27,8 +27,6 @@ import com.liferay.portlet.asset.model.AssetLink;
 import java.util.List;
 
 /**
- * <a href="AssetLinkPersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class AssetLinkPersistenceTest extends BasePersistenceTestCase {

@@ -31,8 +31,6 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * <a href="BlogsEntryWorkflowHandler.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class BlogsEntryWorkflowHandler extends BaseWorkflowHandler {

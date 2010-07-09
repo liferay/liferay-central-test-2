@@ -32,8 +32,6 @@ import java.util.Arrays;
 import java.util.Date;
 
 /**
- * <a href="PasswordPolicyToolkit.java.html"><b><i>View Source</i></b></a>
- *
  * @author Scott Lee
  * @author Mika Koivisto
  */

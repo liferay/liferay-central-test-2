@@ -23,9 +23,6 @@ import com.liferay.portlet.asset.model.AssetTagStats;
 import com.liferay.portlet.asset.service.base.AssetTagStatsLocalServiceBaseImpl;
 
 /**
- * <a href="AssetTagStatsLocalServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Jorge Ferrer
  */
 public class AssetTagStatsLocalServiceImpl

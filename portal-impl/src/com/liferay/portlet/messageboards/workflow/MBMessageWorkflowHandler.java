@@ -31,8 +31,6 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * <a href="MBMessageWorkflowHandler.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  * @author Jorge Ferrer
  * @author Julio Camarero

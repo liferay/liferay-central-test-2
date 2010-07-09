@@ -17,8 +17,6 @@ package com.liferay.portal.upgrade.v5_2_5_to_6_0_0.util;
 import java.sql.Types;
 
 /**
- * <a href="WikiPageResourceTable.java.html"><b><i>View Source</i></b></a>
- *
  * @author	  Brian Wing Shun Chan
  * @generated
  */

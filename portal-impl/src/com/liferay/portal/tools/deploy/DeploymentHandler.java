@@ -28,8 +28,6 @@ import javax.enterprise.deploy.spi.factories.DeploymentFactory;
 import javax.enterprise.deploy.spi.status.ProgressObject;
 
 /**
- * <a href="DeploymentHandler.java.html"><b><i>View Source</i></b></a>
- *
  * @author Sandeep Soni
  * @author Brian Wing Shun Chan
  */

@@ -17,8 +17,6 @@ package com.liferay.portlet.layoutconfiguration.util.velocity;
 import java.util.Map;
 
 /**
- * <a href="RuntimeLogic.java.html"><b><i>View Source</i></b></a>
- *
  * @author Ivica Cardic
  * @author Brian Wing Shun Chan
  */

@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 
 /**
- * <a href="LayoutPlidUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class LayoutPlidUpgradeColumnImpl extends PKUpgradeColumnImpl {

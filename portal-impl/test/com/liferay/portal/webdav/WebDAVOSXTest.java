@@ -27,8 +27,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="WebDAVOSXTest.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * Based on Microsoft Office 2008 for OS X.
  * </p>

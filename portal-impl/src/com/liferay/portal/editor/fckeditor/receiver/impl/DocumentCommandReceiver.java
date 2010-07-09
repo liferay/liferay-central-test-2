@@ -39,8 +39,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 /**
- * <a href="DocumentCommandReceiver.java.html"><b><i>View Source</i></b></a>
- *
  * @author Ivica Cardic
  */
 public class DocumentCommandReceiver extends BaseCommandReceiver {

@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import java.io.File;
 
 /**
- * <a href="HookExplodedTomcatDeployer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Gregory Amerson
  */
 public class HookExplodedTomcatDeployer

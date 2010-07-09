@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.security.ldap.PortalLDAPImporterUtil;
 
 /**
- * <a href="LDAPImportMessageListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class LDAPImportMessageListener implements MessageListener{

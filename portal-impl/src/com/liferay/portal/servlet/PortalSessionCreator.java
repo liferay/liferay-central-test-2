@@ -26,8 +26,6 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 
 /**
- * <a href="PortalSessionCreator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael Young
  */
 public class PortalSessionCreator implements PortalInitable {

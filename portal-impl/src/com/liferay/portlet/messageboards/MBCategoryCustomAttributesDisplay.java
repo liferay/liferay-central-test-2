@@ -19,9 +19,6 @@ import com.liferay.portlet.expando.model.BaseCustomAttributesDisplay;
 import com.liferay.portlet.messageboards.model.MBCategory;
 
 /**
- * <a href="MBCategoryCustomAttributesDisplay.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Jorge Ferrer
  */
 public class MBCategoryCustomAttributesDisplay

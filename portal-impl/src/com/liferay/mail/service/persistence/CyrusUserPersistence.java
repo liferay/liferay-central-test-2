@@ -21,8 +21,6 @@ import com.liferay.portal.model.Dummy;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 /**
- * <a href="CyrusUserPersistence.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface CyrusUserPersistence extends BasePersistence<Dummy> {

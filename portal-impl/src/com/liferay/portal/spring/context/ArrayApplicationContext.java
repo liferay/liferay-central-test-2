@@ -23,8 +23,6 @@ import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * <a href="ArrayApplicationContext.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ArrayApplicationContext extends ClassPathXmlApplicationContext {

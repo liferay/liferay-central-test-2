@@ -45,8 +45,6 @@ import javax.sql.DataSource;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="ShardAdvice.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael Young
  * @author Alexander Chow
  */

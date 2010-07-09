@@ -86,8 +86,6 @@ import org.apache.struts.taglib.tiles.ComponentConstants;
 import org.apache.struts.tiles.ComponentContext;
 
 /**
- * <a href="FreeMarkerVariables.java.html"><b><i>View Source</i></b></a>
- *
  * @author Mika Koivisto
  */
 public class FreeMarkerVariables {

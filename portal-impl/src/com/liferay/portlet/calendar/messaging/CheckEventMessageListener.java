@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 
 /**
- * <a href="CheckEventMessageListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Tina Tian
  */

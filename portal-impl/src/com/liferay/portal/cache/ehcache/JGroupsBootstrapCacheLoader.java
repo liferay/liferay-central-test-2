@@ -31,8 +31,6 @@ import net.sf.ehcache.distribution.jgroups.JGroupManager;
 import org.jgroups.Address;
 
 /**
- * <a href="JGroupsBootstrapCacheLoader.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * See http://issues.liferay.com/browse/LPS-11061.
  * </p>

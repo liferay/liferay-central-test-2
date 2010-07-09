@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 import com.liferay.portlet.translator.model.Translation;
 
 /**
- * <a href="TranslatorUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class TranslatorUtil {

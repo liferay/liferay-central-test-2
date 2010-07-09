@@ -22,8 +22,6 @@ import com.liferay.portal.upgrade.v5_0_0.UpgradeSchema;
 import com.liferay.portal.upgrade.v5_0_0.UpgradeSoftwareCatalog;
 
 /**
- * <a href="UpgradeProcess_5_0_0.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UpgradeProcess_5_0_0 extends UpgradeProcess {

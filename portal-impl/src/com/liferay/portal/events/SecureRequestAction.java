@@ -26,8 +26,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="SecureRequestAction.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * This action ensures that all requests are secure. Extend this and override
  * the <code>isRequiresSecure</code> method to programmatically decide when a

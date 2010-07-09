@@ -17,8 +17,6 @@ package com.liferay.portal.model;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
 
 /**
- * <a href="LayoutListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  * @author Raymond Augé
  */

@@ -23,8 +23,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * <a href="WorkflowHandlerRegistryImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  * @author Marcellus Tavares
  */

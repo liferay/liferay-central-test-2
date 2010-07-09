@@ -46,8 +46,6 @@ import java.util.Collection;
 import java.util.Date;
 
 /**
- * <a href="FileSystemHook.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Sten Martinez
  */

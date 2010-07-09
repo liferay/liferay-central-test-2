@@ -22,8 +22,6 @@ import com.liferay.portal.monitoring.statistics.RequestStatistics;
 import com.liferay.portal.service.CompanyLocalService;
 
 /**
- * <a href="CompanyStatistics.java.html"><b><i>View Source</i></b></a>
- *
  * @author Rajesh Thiagarajan
  * @author Michael C. Han
  * @author Brian Wing Shun Chan

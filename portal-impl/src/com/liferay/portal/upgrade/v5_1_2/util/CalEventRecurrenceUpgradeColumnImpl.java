@@ -30,9 +30,6 @@ import com.liferay.portal.kernel.util.Validator;
 import java.util.TimeZone;
 
 /**
- * <a href="CalEventRecurrenceUpgradeColumnImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author	   Samuel Kong
  * @deprecated
  */

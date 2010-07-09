@@ -27,8 +27,6 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * <a href="RouteImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Connor McKay
  * @author Brian Wing Shun Chan
  */

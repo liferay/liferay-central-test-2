@@ -40,8 +40,6 @@ import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.general.PieDataset;
 
 /**
- * <a href="ViewChartAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ViewChartAction extends Action {

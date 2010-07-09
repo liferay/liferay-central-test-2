@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.security.jaas.PortalRole;
 import com.liferay.portal.security.jaas.ext.BasicLoginModule;
 
 /**
- * <a href="PortalLoginModule.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PortalLoginModule extends BasicLoginModule {

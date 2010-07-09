@@ -27,8 +27,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="DoubleClickController.java.html"><b><i>View Source</i></b></a>
- *
  * @author Olaf Fricke
  * @author Brian Wing Shun Chan
  */

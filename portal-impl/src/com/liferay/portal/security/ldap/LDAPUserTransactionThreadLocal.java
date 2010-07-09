@@ -17,9 +17,6 @@ package com.liferay.portal.security.ldap;
 import com.liferay.portal.kernel.util.InitialThreadLocal;
 
 /**
- * <a href="LDAPUserTransactionThreadLocal.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Edward Han
  */
 public class LDAPUserTransactionThreadLocal {

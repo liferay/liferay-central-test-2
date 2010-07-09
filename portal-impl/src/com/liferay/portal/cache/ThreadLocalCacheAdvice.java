@@ -28,8 +28,6 @@ import java.lang.annotation.Annotation;
 import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * <a href="ThreadLocalCacheAdvice.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  */

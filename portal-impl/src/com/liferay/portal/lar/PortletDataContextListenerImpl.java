@@ -20,9 +20,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 /**
- * <a href="PortletDataContextListenerImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Raymond Augé
  */
 public class PortletDataContextListenerImpl

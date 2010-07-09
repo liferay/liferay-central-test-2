@@ -40,8 +40,6 @@ import java.util.List;
 import javax.activation.MimetypesFileTypeMap;
 
 /**
- * <a href="MimeTypesImpl.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * Additional MIME types should be added to META-INF/mime.types or magic.mime.
  * </p>

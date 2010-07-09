@@ -21,9 +21,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
 /**
- * <a href="DLFileEntryTitleUpgradeColumnImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Alexander Chow
  */
 public class DLFileEntryTitleUpgradeColumnImpl extends BaseUpgradeColumnImpl {

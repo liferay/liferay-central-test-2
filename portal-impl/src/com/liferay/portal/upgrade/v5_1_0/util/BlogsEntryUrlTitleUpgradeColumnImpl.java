@@ -24,9 +24,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * <a href="BlogsEntryUrlTitleUpgradeColumnImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class BlogsEntryUrlTitleUpgradeColumnImpl extends BaseUpgradeColumnImpl {

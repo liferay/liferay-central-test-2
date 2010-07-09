@@ -42,8 +42,6 @@ import java.io.InputStream;
 import java.util.List;
 
 /**
- * <a href="LayoutSetLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Julio Camarero
  * @author Ganesh Ram

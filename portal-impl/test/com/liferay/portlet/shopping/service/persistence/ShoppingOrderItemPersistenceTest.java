@@ -27,9 +27,6 @@ import com.liferay.portlet.shopping.model.ShoppingOrderItem;
 import java.util.List;
 
 /**
- * <a href="ShoppingOrderItemPersistenceTest.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ShoppingOrderItemPersistenceTest extends BasePersistenceTestCase {

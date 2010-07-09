@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.dao.orm.Property;
 import com.liferay.portal.kernel.dao.orm.PropertyFactory;
 
 /**
- * <a href="PropertyFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PropertyFactoryImpl implements PropertyFactory {

@@ -23,8 +23,6 @@ import javax.portlet.PortletContext;
 import javax.portlet.filter.FilterConfig;
 
 /**
- * <a href="FilterConfigFactory.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class FilterConfigFactory {

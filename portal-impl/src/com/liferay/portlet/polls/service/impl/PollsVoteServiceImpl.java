@@ -24,8 +24,6 @@ import com.liferay.portlet.polls.service.base.PollsVoteServiceBaseImpl;
 import com.liferay.portlet.polls.service.permission.PollsQuestionPermission;
 
 /**
- * <a href="PollsVoteServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PollsVoteServiceImpl extends PollsVoteServiceBaseImpl {

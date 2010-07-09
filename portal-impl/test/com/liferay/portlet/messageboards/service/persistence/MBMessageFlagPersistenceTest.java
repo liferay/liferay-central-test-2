@@ -27,9 +27,6 @@ import com.liferay.portlet.messageboards.model.MBMessageFlag;
 import java.util.List;
 
 /**
- * <a href="MBMessageFlagPersistenceTest.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class MBMessageFlagPersistenceTest extends BasePersistenceTestCase {

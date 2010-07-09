@@ -19,9 +19,6 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.expando.model.BaseCustomAttributesDisplay;
 
 /**
- * <a href="DLFolderCustomAttributesDisplay.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Jorge Ferrer
  */
 public class DLFolderCustomAttributesDisplay

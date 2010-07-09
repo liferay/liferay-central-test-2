@@ -25,9 +25,6 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * <a href="HibernateConfigurationConverter.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * <p>
  * See http://issues.liferay.com/browse/LPS-5363.
  * </p>

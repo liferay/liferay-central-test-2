@@ -22,8 +22,6 @@ import com.liferay.portal.monitoring.statistics.service.ServiceMonitorAdvice;
 import java.util.Set;
 
 /**
- * <a href="ServiceManager.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class ServiceManager implements ServiceManagerMBean {

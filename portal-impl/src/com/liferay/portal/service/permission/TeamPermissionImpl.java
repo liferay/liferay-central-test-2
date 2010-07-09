@@ -23,8 +23,6 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.TeamLocalServiceUtil;
 
 /**
- * <a href="TeamPermissionImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class TeamPermissionImpl implements TeamPermission {

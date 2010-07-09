@@ -34,8 +34,6 @@ import org.quartz.impl.jdbcjobstore.PostgreSQLDelegate;
 import org.quartz.impl.jdbcjobstore.StdJDBCDelegate;
 
 /**
- * <a href="PortalJobStore.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PortalJobStore extends JobStoreTX {

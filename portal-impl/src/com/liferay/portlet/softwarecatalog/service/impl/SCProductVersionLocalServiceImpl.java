@@ -43,9 +43,6 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 
 /**
- * <a href="SCProductVersionLocalServiceImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  */

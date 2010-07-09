@@ -22,9 +22,6 @@ import org.apache.velocity.runtime.resource.util.StringResource;
 import org.apache.velocity.runtime.resource.util.StringResourceRepository;
 
 /**
- * <a href="StringResourceRepositoryImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Raymond Augé
  */
 public class StringResourceRepositoryImpl implements StringResourceRepository {

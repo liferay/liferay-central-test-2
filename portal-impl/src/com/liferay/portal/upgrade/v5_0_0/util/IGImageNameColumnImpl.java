@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.util.Validator;
 
 /**
- * <a href="IGImageNameColumnImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class IGImageNameColumnImpl extends BaseUpgradeColumnImpl {

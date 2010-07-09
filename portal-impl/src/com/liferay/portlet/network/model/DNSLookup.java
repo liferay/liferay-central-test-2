@@ -17,8 +17,6 @@ package com.liferay.portlet.network.model;
 import java.io.Serializable;
 
 /**
- * <a href="DNSLookup.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class DNSLookup implements Serializable {

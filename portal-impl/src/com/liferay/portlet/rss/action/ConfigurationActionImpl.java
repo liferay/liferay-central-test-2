@@ -35,8 +35,6 @@ import javax.portlet.RenderResponse;
 import javax.portlet.ValidatorException;
 
 /**
- * <a href="ConfigurationActionImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ConfigurationActionImpl extends BaseConfigurationAction {

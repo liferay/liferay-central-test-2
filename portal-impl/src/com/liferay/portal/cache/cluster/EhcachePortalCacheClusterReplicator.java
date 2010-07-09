@@ -25,9 +25,6 @@ import net.sf.ehcache.Element;
 import net.sf.ehcache.distribution.CacheReplicator;
 
 /**
- * <a href="EhcachePortalCacheClusterReplicator.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Shuyang Zhou
  */
 public class EhcachePortalCacheClusterReplicator implements CacheReplicator {

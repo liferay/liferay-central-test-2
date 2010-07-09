@@ -38,9 +38,6 @@ import java.util.Map;
 import javax.portlet.PortletPreferences;
 
 /**
- * <a href="PollsDisplayPortletDataHandlerImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Marcellus Tavares
  */
 public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {

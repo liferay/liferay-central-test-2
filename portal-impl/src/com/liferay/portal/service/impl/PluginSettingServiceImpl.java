@@ -22,8 +22,6 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.base.PluginSettingServiceBaseImpl;
 
 /**
- * <a href="PluginSettingServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PluginSettingServiceImpl extends PluginSettingServiceBaseImpl {

@@ -27,8 +27,6 @@ import com.liferay.portlet.messageboards.model.MBCategory;
 import java.util.List;
 
 /**
- * <a href="MBCategoryPersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class MBCategoryPersistenceTest extends BasePersistenceTestCase {

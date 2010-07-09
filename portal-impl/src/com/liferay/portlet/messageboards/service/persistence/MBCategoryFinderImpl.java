@@ -43,8 +43,6 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * <a href="MBCategoryFinderImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class MBCategoryFinderImpl

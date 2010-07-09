@@ -33,8 +33,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 /**
- * <a href="UpgradeSocial.java.html"><b><i>View Source</i></b></a>
- *
  * @author Amos Fong
  * @author Brian Wing Shun Chan
  */

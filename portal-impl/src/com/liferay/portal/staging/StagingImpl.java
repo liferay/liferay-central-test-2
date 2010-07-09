@@ -89,8 +89,6 @@ import java.util.TimeZone;
 import javax.portlet.PortletRequest;
 
 /**
- * <a href="StagingImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  * @author Bruno Farache
  * @author Wesley Gong

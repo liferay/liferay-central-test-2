@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.search.TermQuery;
 import com.liferay.portal.kernel.search.TermQueryFactory;
 
 /**
- * <a href="TermQueryFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class TermQueryFactoryImpl implements TermQueryFactory {

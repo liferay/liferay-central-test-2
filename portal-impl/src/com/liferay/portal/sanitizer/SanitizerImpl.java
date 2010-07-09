@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.util.PropsValues;
 
 /**
- * <a href="SanitizerImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Zsolt Balogh
  * @author Brian Wing Shun Chan
  */

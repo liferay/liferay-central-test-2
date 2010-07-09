@@ -17,8 +17,6 @@ package com.liferay.portlet.social.model.impl;
 import com.liferay.portlet.social.model.SocialActivity;
 
 /**
- * <a href="SocialActivityImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class SocialActivityImpl

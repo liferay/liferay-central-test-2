@@ -19,9 +19,6 @@ import com.liferay.portlet.expando.model.BaseCustomAttributesDisplay;
 import com.liferay.portlet.wiki.model.WikiPage;
 
 /**
- * <a href="WikiPageCustomAttributesDisplay.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Jorge Ferrer
  */
 public class WikiPageCustomAttributesDisplay

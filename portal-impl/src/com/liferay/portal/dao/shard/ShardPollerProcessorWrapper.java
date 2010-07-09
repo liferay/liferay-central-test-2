@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.poller.PollerRequest;
 import com.liferay.portal.kernel.poller.PollerResponse;
 
 /**
- * <a href="ShardPollerProcessorWrapper.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class ShardPollerProcessorWrapper implements PollerProcessor {

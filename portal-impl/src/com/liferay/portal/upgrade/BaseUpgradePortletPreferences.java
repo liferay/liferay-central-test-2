@@ -22,9 +22,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 /**
- * <a href="BaseUpgradePortletPreferences.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  */

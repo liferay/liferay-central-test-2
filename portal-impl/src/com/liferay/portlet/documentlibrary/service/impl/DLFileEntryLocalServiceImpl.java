@@ -72,8 +72,6 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="DLFileEntryLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * For DLFileEntries, the naming convention for some of the variables is not
  * very informative, due to legacy code. Each DLFileEntry has a corresponding

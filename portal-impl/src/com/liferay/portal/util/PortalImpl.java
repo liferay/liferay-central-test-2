@@ -216,8 +216,6 @@ import javax.servlet.jsp.PageContext;
 import org.apache.struts.Globals;
 
 /**
- * <a href="PortalImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Brian Myunghun Kim
  * @author Jorge Ferrer

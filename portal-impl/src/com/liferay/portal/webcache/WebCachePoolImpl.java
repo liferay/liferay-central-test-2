@@ -24,8 +24,6 @@ import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portal.kernel.webcache.WebCachePool;
 
 /**
- * <a href="WebCachePoolImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class WebCachePoolImpl implements WebCachePool {

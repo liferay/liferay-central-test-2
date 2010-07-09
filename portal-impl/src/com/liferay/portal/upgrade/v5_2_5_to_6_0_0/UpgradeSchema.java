@@ -17,8 +17,6 @@ package com.liferay.portal.upgrade.v5_2_5_to_6_0_0;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 
 /**
- * <a href="UpgradeSchema.java.html"><b><i>View Source</i></b></a>
- *
  * @author Douglas Wong
  */
 public class UpgradeSchema extends UpgradeProcess {

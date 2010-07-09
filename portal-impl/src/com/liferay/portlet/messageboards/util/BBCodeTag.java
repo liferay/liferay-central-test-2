@@ -17,8 +17,6 @@ package com.liferay.portlet.messageboards.util;
 import com.liferay.portal.kernel.util.StringPool;
 
 /**
- * <a href="BBCodeTag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class BBCodeTag {

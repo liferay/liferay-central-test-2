@@ -32,9 +32,6 @@ import com.liferay.portlet.bookmarks.service.permission.BookmarksPermission;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="BookmarksEntryAssetRendererFactory.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Julio Camarero
  * @author Juan Fernández
  */

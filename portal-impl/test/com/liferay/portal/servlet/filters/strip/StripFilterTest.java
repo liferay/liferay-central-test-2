@@ -23,8 +23,6 @@ import java.io.StringWriter;
 import java.nio.CharBuffer;
 
 /**
- * <a href="StripFilterTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class StripFilterTest extends TestCase {

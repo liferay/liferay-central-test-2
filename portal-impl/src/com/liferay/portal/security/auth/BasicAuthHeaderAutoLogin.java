@@ -28,8 +28,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="BasicAuthHeaderAutoLogin.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * 1. Install Firefox. These instructions assume you have Firefox 2.0.0.1.
  * Previous version of Firefox have been tested and are known to work.

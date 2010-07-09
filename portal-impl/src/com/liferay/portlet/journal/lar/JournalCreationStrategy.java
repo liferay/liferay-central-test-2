@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portlet.journal.model.JournalArticle;
 
 /**
- * <a href="JournalCreationStrategy.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * An interface defining how newly created content should be added to the
  * Journal when imported from a LAR file. A class implementing this interface

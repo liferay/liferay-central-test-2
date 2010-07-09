@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 
 /**
- * <a href="ExpireBanMessageListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael Young
  * @author Tina Tian
  */

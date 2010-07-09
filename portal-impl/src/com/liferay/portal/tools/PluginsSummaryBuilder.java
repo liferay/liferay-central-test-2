@@ -35,8 +35,6 @@ import java.util.TreeSet;
 import org.apache.tools.ant.DirectoryScanner;
 
 /**
- * <a href="PluginsSummaryBuilder.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PluginsSummaryBuilder {

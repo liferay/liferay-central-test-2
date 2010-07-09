@@ -31,9 +31,6 @@ import org.springframework.orm.jpa.vendor.OpenJpaVendorAdapter;
 import org.springframework.orm.jpa.vendor.TopLinkJpaVendorAdapter;
 
 /**
- * <a href="LocalContainerEntityManagerFactoryBean.java.html"><b><i>View Source
- * </i></b></a>
- *
  * @author Prashant Dighe
  * @author Brian Wing Shun Chan
  */

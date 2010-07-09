@@ -23,8 +23,6 @@ import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 
 /**
- * <a href="AnnouncementsEntryImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Wesley Gong
  */

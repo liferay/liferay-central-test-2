@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.util.PropsValues;
 
 /**
- * <a href="FullNameGeneratorFactory.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class FullNameGeneratorFactory {

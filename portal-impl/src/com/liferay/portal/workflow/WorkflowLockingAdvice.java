@@ -23,8 +23,6 @@ import com.liferay.portal.service.LockLocalServiceUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="WorkflowLockingAdvice.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  */

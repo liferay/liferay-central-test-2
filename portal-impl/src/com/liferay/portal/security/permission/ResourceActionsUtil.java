@@ -67,8 +67,6 @@ import java.util.Set;
 import javax.servlet.jsp.PageContext;
 
 /**
- * <a href="ResourceActionsUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Daeyoung Song
  */

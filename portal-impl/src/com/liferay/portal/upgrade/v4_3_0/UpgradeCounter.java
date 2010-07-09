@@ -29,8 +29,6 @@ import java.sql.Types;
 import java.util.List;
 
 /**
- * <a href="UpgradeCounter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UpgradeCounter extends UpgradeProcess {

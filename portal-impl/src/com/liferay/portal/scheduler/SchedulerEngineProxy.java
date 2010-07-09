@@ -26,8 +26,6 @@ import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import java.util.List;
 
 /**
- * <a href="SchedulerEngineProxy.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  * @author Shuyang Zhou
  */

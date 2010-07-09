@@ -28,9 +28,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
- * <a href="CompanySharepointStorageImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Bruno Farache
  */
 public class CompanySharepointStorageImpl extends BaseSharepointStorageImpl {

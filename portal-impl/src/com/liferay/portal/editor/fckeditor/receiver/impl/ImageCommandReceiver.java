@@ -42,8 +42,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 /**
- * <a href="ImageCommandReceiver.java.html"><b><i>View Source</i></b></a>
- *
  * @author Ivica Cardic
  */
 public class ImageCommandReceiver extends BaseCommandReceiver {

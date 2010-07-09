@@ -23,9 +23,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import java.util.Map;
 
 /**
- * <a href="ViewCounterTransformerListener.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Raymond Augé
  */
 public class ViewCounterTransformerListener extends TransformerListener {

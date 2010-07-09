@@ -24,8 +24,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import java.io.IOException;
 
 /**
- * <a href="SybaseDB.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  * @author Bruno Farache
  * @author Sandeep Soni

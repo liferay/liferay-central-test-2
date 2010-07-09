@@ -29,9 +29,6 @@ import com.liferay.portal.upgrade.v6_0_0.UpgradeResourceAction;
 import com.liferay.portal.upgrade.v6_0_0.UpgradeShopping;
 
 /**
- * <a href="UpgradeProcess_5_2_7_to_6_0_0.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Douglas Wong
  */
 public class UpgradeProcess_5_2_7_to_6_0_0 extends UpgradeProcess {

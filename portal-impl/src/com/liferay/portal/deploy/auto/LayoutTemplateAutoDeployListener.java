@@ -22,9 +22,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import java.io.File;
 
 /**
- * <a href="LayoutTemplateAutoDeployListener.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Ivica Cardic
  * @author Brian Wing Shun Chan
  */

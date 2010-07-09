@@ -22,9 +22,6 @@ import java.io.Serializable;
 import java.util.Map;
 
 /**
- * <a href="WorkflowStatusManagerProxyBean.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Bruno Farache
  */
 public class WorkflowStatusManagerProxyBean

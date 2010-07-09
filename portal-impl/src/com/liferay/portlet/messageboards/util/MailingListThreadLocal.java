@@ -17,8 +17,6 @@ package com.liferay.portlet.messageboards.util;
 import com.liferay.portal.kernel.util.InitialThreadLocal;
 
 /**
- * <a href="MailingListThreadLocal.java.html"><b><i>View Source</i></b></a>
- *
  * @author Thiago Moreira
  */
 public class MailingListThreadLocal {

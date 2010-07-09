@@ -29,8 +29,6 @@ import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityFeedEntry;
 
 /**
- * <a href="DLActivityInterpreter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Ryan Park
  */
 public class DLActivityInterpreter extends BaseSocialActivityInterpreter {

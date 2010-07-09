@@ -43,8 +43,6 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 /**
- * <a href="LockMethodImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class LockMethodImpl implements Method {

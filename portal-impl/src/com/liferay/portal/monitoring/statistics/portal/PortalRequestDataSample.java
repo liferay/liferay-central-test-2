@@ -19,8 +19,6 @@ import com.liferay.portal.monitoring.MonitorNames;
 import com.liferay.portal.monitoring.statistics.BaseDataSample;
 
 /**
- * <a href="PortalRequestDataSample.java.html"><b><i>View Source</i></b></a>
- *
  * @author Rajesh Thiagarajan
  * @author Michael C. Han
  * @author Brian Wing Shun Chan

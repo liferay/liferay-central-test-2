@@ -28,9 +28,6 @@ import com.liferay.portlet.social.service.base.SocialEquityUserLocalServiceBaseI
 import java.util.List;
 
 /**
- * <a href="SocialEquityUserLocalServiceImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Zsolt Berentey
  */
 public class SocialEquityUserLocalServiceImpl

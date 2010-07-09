@@ -21,8 +21,6 @@ import com.liferay.portal.model.Team;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 
 /**
- * <a href="TeamImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class TeamImpl extends TeamModelImpl implements Team {

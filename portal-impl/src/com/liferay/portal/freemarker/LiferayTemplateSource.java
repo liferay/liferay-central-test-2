@@ -18,8 +18,6 @@ import java.io.IOException;
 import java.io.Reader;
 
 /**
- * <a href="LiferayTemplateSource.java.html"><b><i>View Source</i></b></a>
- *
  * @author Mika Koivisto
  */
 public class LiferayTemplateSource {

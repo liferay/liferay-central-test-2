@@ -17,8 +17,6 @@ package com.liferay.portal.cmis.model;
 import org.apache.abdera.util.AbstractExtensionFactory;
 
 /**
- * <a href="CMISExtensionFactory.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class CMISExtensionFactory extends AbstractExtensionFactory {

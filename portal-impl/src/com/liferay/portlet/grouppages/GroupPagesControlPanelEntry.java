@@ -23,8 +23,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.BaseControlPanelEntry;
 
 /**
- * <a href="GroupPagesControlPanelEntry.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class GroupPagesControlPanelEntry extends BaseControlPanelEntry {

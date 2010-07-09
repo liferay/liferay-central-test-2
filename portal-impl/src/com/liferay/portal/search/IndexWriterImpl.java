@@ -23,8 +23,6 @@ import com.liferay.portal.kernel.search.messaging.SearchRequest;
 import java.util.Collection;
 
 /**
- * <a href="IndexWriterImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  */
 public class IndexWriterImpl implements IndexWriter {

@@ -23,8 +23,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <a href="PortletStatistics.java.html"><b><i>View Source</i></b></a>
- *
  * @author Karthik Sudarshan
  * @author Michael C. Han
  * @author Brian Wing Shun Chan

@@ -33,9 +33,6 @@ import java.util.Date;
 import java.util.Map;
 
 /**
- * <a href="LayoutsLocalPublisherMessageListener.java.html"><b><i>View Source
- * </i></b></a>
- *
  * @author Bruno Farache
  */
 public class LayoutsLocalPublisherMessageListener extends BaseMessageListener {

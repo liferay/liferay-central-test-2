@@ -62,8 +62,6 @@ import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 import javax.sql.DataSource;
 
 /**
- * <a href="IGImageServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public abstract class IGImageServiceBaseImpl extends PrincipalBean

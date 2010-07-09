@@ -22,8 +22,6 @@ import java.util.Comparator;
 import java.util.Locale;
 
 /**
- * <a href="ActionComparator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ActionComparator implements Comparator<String>, Serializable {

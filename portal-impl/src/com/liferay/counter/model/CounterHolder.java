@@ -17,8 +17,6 @@ package com.liferay.counter.model;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * <a href="CounterHolder.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class CounterHolder {

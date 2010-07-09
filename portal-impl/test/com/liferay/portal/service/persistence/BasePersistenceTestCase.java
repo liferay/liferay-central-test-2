@@ -18,8 +18,6 @@ import com.liferay.portal.util.BaseTestCase;
 import com.liferay.portal.util.PropsValues;
 
 /**
- * <a href="BasePersistenceTestCase.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class BasePersistenceTestCase extends BaseTestCase {

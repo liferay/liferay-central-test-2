@@ -24,8 +24,6 @@ import java.util.Collection;
 import javax.servlet.http.HttpSession;
 
 /**
- * <a href="MaintenanceUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class MaintenanceUtil {

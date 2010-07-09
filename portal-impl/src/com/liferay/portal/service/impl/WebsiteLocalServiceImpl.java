@@ -29,8 +29,6 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * <a href="WebsiteLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {

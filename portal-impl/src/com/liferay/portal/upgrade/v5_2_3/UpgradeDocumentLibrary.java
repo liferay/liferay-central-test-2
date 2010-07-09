@@ -28,8 +28,6 @@ import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
 
 /**
- * <a href="UpgradeDocumentLibrary.java.html"><b><i>View Source</i></b></a>
- *
  * @author Samuel Kong
  * @author Brian Wing Shun Chan
  * @author Douglas Wong

@@ -25,8 +25,6 @@ import org.hibernate.cache.Cache;
 import org.hibernate.cache.CacheException;
 
 /**
- * <a href="CacheWrapper.java.html"><b><i>View Source</i></b></a>
- *
  * @author	   Brian Wing Shun Chan
  * @deprecated
  */

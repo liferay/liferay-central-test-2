@@ -18,9 +18,6 @@ import com.liferay.portal.kernel.upgrade.util.ValueMapper;
 import com.liferay.portal.kernel.upgrade.util.ValueMapperFactory;
 
 /**
- * <a href="DatabaseValueMapperFactoryImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class DatabaseValueMapperFactoryImpl implements ValueMapperFactory {

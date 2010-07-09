@@ -48,8 +48,6 @@ import org.dom4j.DocumentFactory;
 import org.dom4j.DocumentHelper;
 
 /**
- * <a href="SAXReaderImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class SAXReaderImpl implements SAXReader {

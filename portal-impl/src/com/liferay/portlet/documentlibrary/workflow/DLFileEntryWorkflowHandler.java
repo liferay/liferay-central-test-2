@@ -31,8 +31,6 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * <a href="DLFileEntryWorkflowHandler.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  * @author Jorge Ferrer
  */

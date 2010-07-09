@@ -25,8 +25,6 @@ import javax.portlet.PortletContext;
 import javax.servlet.ServletContext;
 
 /**
- * <a href="PortletConfigFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PortletConfigFactoryImpl implements PortletConfigFactory {

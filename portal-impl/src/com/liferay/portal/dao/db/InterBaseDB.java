@@ -17,8 +17,6 @@ package com.liferay.portal.dao.db;
 import com.liferay.portal.kernel.dao.db.DB;
 
 /**
- * <a href="InterBaseDB.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class InterBaseDB extends FirebirdDB {

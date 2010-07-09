@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 
 /**
- * <a href="DBUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author	   Alexander Chow
  * @author	   Ganesh Ram
  * @deprecated

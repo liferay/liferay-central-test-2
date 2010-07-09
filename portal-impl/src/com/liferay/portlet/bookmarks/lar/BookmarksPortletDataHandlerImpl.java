@@ -39,9 +39,6 @@ import java.util.Map;
 import javax.portlet.PortletPreferences;
 
 /**
- * <a href="BookmarksPortletDataHandlerImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Jorge Ferrer
  * @author Bruno Farache
  * @author Raymond Augé

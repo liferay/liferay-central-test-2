@@ -19,8 +19,6 @@ import com.liferay.portal.service.BaseServiceTestCase;
 import com.liferay.portal.service.PortalServiceUtil;
 
 /**
- * <a href="CounterLocalServiceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael Young
  */
 public class CounterLocalServiceTest extends BaseServiceTestCase {

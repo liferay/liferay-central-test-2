@@ -43,8 +43,6 @@ import java.util.List;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="CalIndexer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brett Swaim
  */
 public class CalIndexer extends BaseIndexer {

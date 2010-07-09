@@ -27,8 +27,6 @@ import java.lang.reflect.Method;
 import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * <a href="ClusterableAdvice.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class ClusterableAdvice

@@ -18,8 +18,6 @@ import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
 
 /**
- * <a href="VerifyOrganization.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class VerifyOrganization extends VerifyProcess {

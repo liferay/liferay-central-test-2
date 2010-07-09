@@ -29,8 +29,6 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * <a href="PollsQuestionServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Julio Camarero
  */

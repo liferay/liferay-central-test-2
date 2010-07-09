@@ -28,8 +28,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * <a href="JavaMD5CacheKeyGenerator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  * @author Shuyang Zhou
  */

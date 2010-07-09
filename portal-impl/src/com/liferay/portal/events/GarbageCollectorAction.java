@@ -23,8 +23,6 @@ import java.text.NumberFormat;
 import javax.servlet.http.HttpSession;
 
 /**
- * <a href="GarbageCollectorAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class GarbageCollectorAction extends SessionAction {

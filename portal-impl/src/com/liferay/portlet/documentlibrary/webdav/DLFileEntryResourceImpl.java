@@ -29,8 +29,6 @@ import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil
 import java.io.InputStream;
 
 /**
- * <a href="DLFileEntryResourceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class DLFileEntryResourceImpl extends BaseResourceImpl {

@@ -28,8 +28,6 @@ import com.liferay.portal.service.WorkflowDefinitionLinkLocalServiceUtil;
 import com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil;
 
 /**
- * <a href="WorkflowPermissionImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class WorkflowPermissionImpl implements WorkflowPermission {

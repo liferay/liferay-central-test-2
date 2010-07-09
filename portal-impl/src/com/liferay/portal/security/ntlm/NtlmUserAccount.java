@@ -17,8 +17,6 @@ package com.liferay.portal.security.ntlm;
 import java.io.Serializable;
 
 /**
- * <a href="NtlmUserAccount.java.html"><b><i>View Source</i></b></a>
- *
  * @author Marcellus Tavares
  */
 public class NtlmUserAccount implements Serializable {

@@ -40,8 +40,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="EditWorkflowTaskAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  * @author Marcellus Tavares
  * @author Brian Wing Shun Chan

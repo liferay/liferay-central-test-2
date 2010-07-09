@@ -31,8 +31,6 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * <a href="LayoutPrototypeServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  */

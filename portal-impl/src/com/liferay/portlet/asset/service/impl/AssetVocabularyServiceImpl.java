@@ -31,8 +31,6 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * <a href="AssetVocabularyServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alvaro del Castillo
  * @author Eduardo Lundgren
  * @author Jorge Ferrer

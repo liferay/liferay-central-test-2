@@ -24,8 +24,6 @@ import com.mchange.v2.c3p0.ConnectionCustomizer;
 import java.sql.Connection;
 
 /**
- * <a href="PortalConnectionCustomizer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PortalConnectionCustomizer implements ConnectionCustomizer {

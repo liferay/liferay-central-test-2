@@ -42,8 +42,6 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * <a href="ThemeImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ThemeImpl extends PluginBaseImpl implements Theme {

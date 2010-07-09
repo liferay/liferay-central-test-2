@@ -25,8 +25,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 /**
- * <a href="UpgradeAsset.java.html"><b><i>View Source</i></b></a>
- *
  * @author Julio Camarero
  */
 public class UpgradeAsset extends UpgradeProcess {

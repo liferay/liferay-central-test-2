@@ -19,8 +19,6 @@ import com.liferay.portal.webdav.methods.Method;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="WebDAVLitmusCopyMoveTest.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * Based on <a href="http://www.webdav.org/neon/litmus/">litmus</a> 0.12.1
  * "copymove" test.

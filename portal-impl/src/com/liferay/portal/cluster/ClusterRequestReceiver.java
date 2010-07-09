@@ -40,8 +40,6 @@ import org.jgroups.Message;
 import org.jgroups.View;
 
 /**
- * <a href="ClusterRequestReceiver.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  * @author Tina Tian
  */

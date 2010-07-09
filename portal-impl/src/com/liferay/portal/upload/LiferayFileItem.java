@@ -24,8 +24,6 @@ import java.io.File;
 import org.apache.commons.fileupload.disk.DiskFileItem;
 
 /**
- * <a href="LiferayFileItem.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Zongliang Li
  * @author Harry Mark

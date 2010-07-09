@@ -58,8 +58,6 @@ import org.jgroups.ChannelException;
 import org.jgroups.JChannel;
 
 /**
- * <a href="ClusterExecutorImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Tina Tian
  * @author Shuyang Zhou
  */

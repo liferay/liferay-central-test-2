@@ -23,9 +23,6 @@ import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.model.CompanyConstants;
 
 /**
- * <a href="MBMessageAttachmentsUpgradeColumnImpl.java.html"><b><i>View Source
- * </i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class MBMessageAttachmentsUpgradeColumnImpl

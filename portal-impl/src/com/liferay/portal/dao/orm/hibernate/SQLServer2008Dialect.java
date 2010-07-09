@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import org.hibernate.dialect.SQLServerDialect;
 
 /**
- * <a href="SQLServer2008Dialect.java.html"><b><i>View Source</i></b></a>
- *
  * @author Steven Cao
  */
 public class SQLServer2008Dialect extends SQLServerDialect {

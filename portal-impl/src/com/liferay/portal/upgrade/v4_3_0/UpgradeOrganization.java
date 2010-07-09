@@ -29,8 +29,6 @@ import com.liferay.portal.upgrade.v4_3_0.util.OrganizationTable;
 import com.liferay.portal.upgrade.v4_3_0.util.ValueMapperUtil;
 
 /**
- * <a href="UpgradeOrganization.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UpgradeOrganization extends UpgradeProcess {

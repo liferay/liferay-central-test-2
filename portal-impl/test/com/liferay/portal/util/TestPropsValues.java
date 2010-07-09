@@ -17,8 +17,6 @@ package com.liferay.portal.util;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 /**
- * <a href="TestPropsValues.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class TestPropsValues {

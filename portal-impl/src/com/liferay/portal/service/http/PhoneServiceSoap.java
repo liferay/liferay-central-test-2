@@ -21,8 +21,6 @@ import com.liferay.portal.service.PhoneServiceUtil;
 import java.rmi.RemoteException;
 
 /**
- * <a href="PhoneServiceSoap.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
  * overwritten the next time is generated.

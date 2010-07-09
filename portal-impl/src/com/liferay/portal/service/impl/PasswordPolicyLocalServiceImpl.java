@@ -36,9 +36,6 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="PasswordPolicyLocalServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Scott Lee
  */
 public class PasswordPolicyLocalServiceImpl

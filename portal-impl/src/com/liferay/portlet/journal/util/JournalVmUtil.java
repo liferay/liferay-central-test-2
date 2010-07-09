@@ -21,8 +21,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="JournalVmUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author	   Alexander Chow
  * @author	   Brian Wing Shun Chan
  * @author	   Raymond Augé

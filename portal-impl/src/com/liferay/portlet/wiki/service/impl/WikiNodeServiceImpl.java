@@ -28,8 +28,6 @@ import java.io.File;
 import java.util.Map;
 
 /**
- * <a href="WikiNodeServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Charles May
  */

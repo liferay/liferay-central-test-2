@@ -34,8 +34,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * <a href="SessionAuthToken.java.html"><b><i>View Source</i></b></a>
- *
  * @author Amos Fong
  */
 public class SessionAuthToken implements AuthToken {

@@ -23,8 +23,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * <a href="DLFolderNameColumnImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class DLFolderNameColumnImpl extends BaseUpgradeColumnImpl {

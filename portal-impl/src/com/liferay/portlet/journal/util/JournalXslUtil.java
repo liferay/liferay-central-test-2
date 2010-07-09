@@ -17,8 +17,6 @@ package com.liferay.portlet.journal.util;
 import java.util.Map;
 
 /**
- * <a href="JournalXslUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author	   Alexander Chow
  * @author	   Raymond Augé
  * @deprecated

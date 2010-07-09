@@ -24,8 +24,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import java.util.List;
 
 /**
- * <a href="CounterLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Edward Han
  */

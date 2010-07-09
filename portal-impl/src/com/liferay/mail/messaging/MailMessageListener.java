@@ -34,8 +34,6 @@ import java.util.List;
 import javax.mail.internet.InternetAddress;
 
 /**
- * <a href="MailMessageListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Wesley Gong
  */

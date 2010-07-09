@@ -48,8 +48,6 @@ import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionP
 import javax.sql.DataSource;
 
 /**
- * <a href="SCLicenseServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public abstract class SCLicenseServiceBaseImpl extends PrincipalBean

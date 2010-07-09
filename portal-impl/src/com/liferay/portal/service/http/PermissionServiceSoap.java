@@ -21,8 +21,6 @@ import com.liferay.portal.service.PermissionServiceUtil;
 import java.rmi.RemoteException;
 
 /**
- * <a href="PermissionServiceSoap.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
  * overwritten the next time is generated.

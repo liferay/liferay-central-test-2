@@ -23,8 +23,6 @@ import com.liferay.portal.upgrade.v5_1_0.util.BlogsEntryTable;
 import com.liferay.portal.upgrade.v5_1_0.util.BlogsEntryUrlTitleUpgradeColumnImpl;
 
 /**
- * <a href="UpgradeBlogs.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UpgradeBlogs extends UpgradeProcess {

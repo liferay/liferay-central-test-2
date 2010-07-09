@@ -43,8 +43,6 @@ import java.util.Set;
 import javax.servlet.ServletContext;
 
 /**
- * <a href="ExtHotDeployListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ExtHotDeployListener extends BaseHotDeployListener {

@@ -22,8 +22,6 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 /**
- * <a href="InlineSQLHelperImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class InlineSQLHelperImpl implements InlineSQLHelper {

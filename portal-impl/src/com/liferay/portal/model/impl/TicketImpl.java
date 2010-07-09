@@ -19,8 +19,6 @@ import com.liferay.portal.model.Ticket;
 import java.util.Date;
 
 /**
- * <a href="TicketImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class TicketImpl extends TicketModelImpl implements Ticket {

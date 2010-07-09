@@ -27,8 +27,6 @@ import com.liferay.portlet.imagegallery.model.IGFolder;
 import java.util.List;
 
 /**
- * <a href="IGFolderPersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class IGFolderPersistenceTest extends BasePersistenceTestCase {

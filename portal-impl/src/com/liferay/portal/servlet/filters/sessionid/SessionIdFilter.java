@@ -21,8 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="SessionIdFilter.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * http://forum.java.sun.com/thread.jspa?threadID=197150.
  * </p>

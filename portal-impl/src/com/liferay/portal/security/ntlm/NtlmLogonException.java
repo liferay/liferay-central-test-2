@@ -17,8 +17,6 @@ package com.liferay.portal.security.ntlm;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
- * <a href="NtlmLogonException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class NtlmLogonException extends SystemException {

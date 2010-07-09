@@ -21,8 +21,6 @@ import com.liferay.portal.upgrade.v5_2_5_to_6_0_0.util.WikiPageResourceTable;
 import com.liferay.portal.upgrade.v5_2_5_to_6_0_0.util.WikiPageTable;
 
 /**
- * <a href="UpgradeWiki.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UpgradeWiki extends UpgradeProcess {

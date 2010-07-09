@@ -18,8 +18,6 @@ import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingCategoryConstants;
 
 /**
- * <a href="ShoppingCategoryImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ShoppingCategoryImpl

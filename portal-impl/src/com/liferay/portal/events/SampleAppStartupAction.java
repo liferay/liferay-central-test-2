@@ -29,8 +29,6 @@ import java.util.Calendar;
 import java.util.Locale;
 
 /**
- * <a href="SampleAppStartupAction.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * This class can be used to populate an empty database programmatically. This
  * allows a developer to create sample data without relying on native SQL.

@@ -17,8 +17,6 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.model.WorkflowDefinitionLink;
 
 /**
- * <a href="WorkflowDefinitionLinkImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class WorkflowDefinitionLinkImpl

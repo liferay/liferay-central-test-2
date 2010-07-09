@@ -27,8 +27,6 @@ import java.net.URL;
 import javax.servlet.ServletContext;
 
 /**
- * <a href="ServletTemplateLoader.java.html"><b><i>View Source</i></b></a>
- *
  * @author Mika Koivisto
  */
 public class ServletTemplateLoader extends URLTemplateLoader {

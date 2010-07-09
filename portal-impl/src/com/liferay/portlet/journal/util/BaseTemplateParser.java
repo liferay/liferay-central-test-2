@@ -20,8 +20,6 @@ import com.liferay.portlet.journal.TransformException;
 import java.util.Map;
 
 /**
- * <a href="BaseTemplateParser.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public abstract class BaseTemplateParser implements TemplateParser {

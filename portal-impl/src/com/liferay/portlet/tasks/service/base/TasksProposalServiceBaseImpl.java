@@ -48,9 +48,6 @@ import com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence;
 import javax.sql.DataSource;
 
 /**
- * <a href="TasksProposalServiceBaseImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public abstract class TasksProposalServiceBaseImpl extends PrincipalBean

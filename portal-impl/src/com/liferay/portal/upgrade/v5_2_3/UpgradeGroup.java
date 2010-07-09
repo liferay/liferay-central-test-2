@@ -19,8 +19,6 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.util.PortalUtil;
 
 /**
- * <a href="UpgradeGroup.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UpgradeGroup extends UpgradeProcess {

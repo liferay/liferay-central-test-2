@@ -22,8 +22,6 @@ import com.liferay.portlet.shopping.model.ShoppingCartItem;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 
 /**
- * <a href="ShoppingCartItemImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ShoppingCartItemImpl implements ShoppingCartItem {

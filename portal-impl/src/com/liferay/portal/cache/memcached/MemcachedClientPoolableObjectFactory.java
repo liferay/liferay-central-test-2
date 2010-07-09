@@ -30,9 +30,6 @@ import net.spy.memcached.MemcachedClientIF;
 import org.apache.commons.pool.PoolableObjectFactory;
 
 /**
- * <a href="MemcachedClientPoolableObjectFactory.java.html"><b><i>View Source
- * </i></b></a>
- *
  * @author Michael C. Han
  */
 public class MemcachedClientPoolableObjectFactory

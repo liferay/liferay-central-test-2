@@ -52,8 +52,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="EditScopeAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jesper Weissglas
  * @author Jorge Ferrer
  */

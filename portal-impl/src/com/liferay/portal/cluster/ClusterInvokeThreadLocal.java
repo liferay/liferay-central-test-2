@@ -17,8 +17,6 @@ package com.liferay.portal.cluster;
 import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 
 /**
- * <a href="ClusterInvokeThreadLocal.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class ClusterInvokeThreadLocal {

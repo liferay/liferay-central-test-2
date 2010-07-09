@@ -21,8 +21,6 @@ import com.liferay.portal.util.FileImpl;
 import java.io.File;
 
 /**
- * <a href="CSSFormatter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class CSSFormatter {

@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.upgrade.util.ValueMapperWrapper;
 import com.liferay.util.PKParser;
 
 /**
- * <a href="MBMessageIdMapper.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class MBMessageIdMapper extends ValueMapperWrapper {

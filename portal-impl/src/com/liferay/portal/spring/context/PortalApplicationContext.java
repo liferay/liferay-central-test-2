@@ -28,8 +28,6 @@ import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
 /**
- * <a href="PortalApplicationContext.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * This web application context will first load bean definitions in the
  * contextConfigLocation parameter in web.xml. Then, the context will load bean

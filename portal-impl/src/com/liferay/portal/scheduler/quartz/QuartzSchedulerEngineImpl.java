@@ -47,8 +47,6 @@ import org.quartz.Trigger;
 import org.quartz.impl.StdSchedulerFactory;
 
 /**
- * <a href="QuartzSchedulerEngineImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  * @author Bruno Farache
  * @author Shuyang Zhou

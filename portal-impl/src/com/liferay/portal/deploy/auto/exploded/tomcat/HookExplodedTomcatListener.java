@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import java.io.File;
 
 /**
- * <a href="HookExplodedTomcatListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Gregory Amerson
  */
 public class HookExplodedTomcatListener extends BaseExplodedTomcatListener {

@@ -31,8 +31,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 /**
- * <a href="XSLErrorListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class XSLErrorListener implements ErrorListener {

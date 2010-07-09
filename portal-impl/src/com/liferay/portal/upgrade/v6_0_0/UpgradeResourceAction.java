@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.upgrade.v6_0_0.util.ResourceActionTable;
 
 /**
- * <a href="UpgradeResourceAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UpgradeResourceAction extends UpgradeProcess {

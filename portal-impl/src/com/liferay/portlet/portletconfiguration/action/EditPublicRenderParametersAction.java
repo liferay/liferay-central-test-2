@@ -41,9 +41,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="EditPublicRenderParametersAction.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Alberto Montero
  */
 public class EditPublicRenderParametersAction extends EditConfigurationAction {

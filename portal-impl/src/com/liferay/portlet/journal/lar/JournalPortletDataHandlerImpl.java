@@ -82,9 +82,6 @@ import java.util.Map;
 import javax.portlet.PortletPreferences;
 
 /**
- * <a href="JournalPortletDataHandlerImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * <p>
  * Provides the Journal portlet export and import functionality, which is to
  * clone all articles, structures, and templates associated with the layout's

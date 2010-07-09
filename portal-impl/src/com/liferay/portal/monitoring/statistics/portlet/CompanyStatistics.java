@@ -28,8 +28,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * <a href="CompanyStatistics.java.html"><b><i>View Source</i></b></a>
- *
  * @author Karthik Sudarshan
  * @author Michael C. Han
  * @author Brian Wing Shun Chan

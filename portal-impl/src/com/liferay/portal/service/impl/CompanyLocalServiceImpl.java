@@ -68,8 +68,6 @@ import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
 
 /**
- * <a href="CompanyLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Julio Camarero
  */

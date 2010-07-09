@@ -22,8 +22,6 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.AccountLocalServiceUtil;
 
 /**
- * <a href="AccountPermissionImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class AccountPermissionImpl implements AccountPermission {

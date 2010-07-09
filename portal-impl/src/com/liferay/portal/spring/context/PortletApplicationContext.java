@@ -31,8 +31,6 @@ import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
 /**
- * <a href="PortletApplicationContext.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * This web application context will first load bean definitions in the
  * portalContextConfigLocation parameter in web.xml. Then, the context will load

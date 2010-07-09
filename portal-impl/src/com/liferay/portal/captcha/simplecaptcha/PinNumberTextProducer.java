@@ -19,8 +19,6 @@ import com.liferay.util.PwdGenerator;
 import nl.captcha.text.producer.TextProducer;
 
 /**
- * <a href="PinNumberTextProducer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PinNumberTextProducer implements TextProducer {

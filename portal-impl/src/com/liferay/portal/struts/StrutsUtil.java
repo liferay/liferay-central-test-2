@@ -38,8 +38,6 @@ import javax.servlet.jsp.PageContext;
 import org.apache.struts.Globals;
 
 /**
- * <a href="StrutsUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class StrutsUtil {

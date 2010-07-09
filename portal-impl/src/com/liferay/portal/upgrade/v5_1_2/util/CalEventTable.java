@@ -17,8 +17,6 @@ package com.liferay.portal.upgrade.v5_1_2.util;
 import java.sql.Types;
 
 /**
- * <a href="CalEventTable.java.html"><b><i>View Source</i></b></a>
- *
  * @author	  Brian Wing Shun Chan
  * @generated
  */

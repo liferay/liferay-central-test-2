@@ -19,9 +19,6 @@ import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactory;
 
 /**
- * <a href="DefaultUpgradeTableFactoryImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class DefaultUpgradeTableFactoryImpl implements UpgradeTableFactory {

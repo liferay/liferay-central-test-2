@@ -20,8 +20,6 @@ import java.util.Collections;
 import java.util.Iterator;
 
 /**
- * <a href="DatabaseValueMapper.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  * @author Brian Wing Shun Chan
  */

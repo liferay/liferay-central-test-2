@@ -59,8 +59,6 @@ import javax.jcr.version.VersionIterator;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * <a href="JCRHook.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael Young
  * @author Brian Wing Shun Chan
  */

@@ -31,9 +31,6 @@ import com.liferay.portal.search.lucene.LuceneSearchEngineImpl;
 import com.liferay.portal.util.PropsValues;
 
 /**
- * <a href="SearchEngineDestinationEventListener.java.html"><b><i>View Source
- * </i></b></a>
- *
  * @author Michael C. Han
  */
 public class SearchEngineDestinationEventListener

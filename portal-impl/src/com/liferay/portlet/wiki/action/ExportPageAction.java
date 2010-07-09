@@ -54,8 +54,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="ExportPageAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  */
 public class ExportPageAction extends PortletAction {

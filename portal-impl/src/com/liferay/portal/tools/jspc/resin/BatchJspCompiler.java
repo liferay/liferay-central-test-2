@@ -26,8 +26,6 @@ import java.util.List;
 import org.apache.tools.ant.DirectoryScanner;
 
 /**
- * <a href="BatchJspCompiler.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class BatchJspCompiler {

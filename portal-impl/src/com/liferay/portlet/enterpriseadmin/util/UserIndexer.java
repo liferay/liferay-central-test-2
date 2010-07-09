@@ -53,8 +53,6 @@ import java.util.Set;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="UserIndexer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  * @author Zsigmond Rab
  */

@@ -26,8 +26,6 @@ import com.liferay.portlet.expando.model.ExpandoRow;
 import java.util.List;
 
 /**
- * <a href="ExpandoRowPersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ExpandoRowPersistenceTest extends BasePersistenceTestCase {

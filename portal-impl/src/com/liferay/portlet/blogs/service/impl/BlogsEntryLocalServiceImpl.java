@@ -73,8 +73,6 @@ import net.htmlparser.jericho.Source;
 import net.htmlparser.jericho.StartTag;
 
 /**
- * <a href="BlogsEntryLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Wilson S. Man
  * @author Raymond Augé

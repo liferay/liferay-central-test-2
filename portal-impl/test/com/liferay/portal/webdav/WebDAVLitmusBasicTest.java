@@ -25,8 +25,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="WebDAVLitmusBasicTest.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * Based on <a href="http://www.webdav.org/neon/litmus/">litmus</a> 0.12.1
  * "basic" test.

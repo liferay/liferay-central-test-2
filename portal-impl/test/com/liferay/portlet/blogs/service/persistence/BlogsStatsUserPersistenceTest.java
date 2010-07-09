@@ -27,9 +27,6 @@ import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import java.util.List;
 
 /**
- * <a href="BlogsStatsUserPersistenceTest.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class BlogsStatsUserPersistenceTest extends BasePersistenceTestCase {

@@ -38,8 +38,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="ComboServlet.java.html"><b><i>View Source</i></b></a>
- *
  * @author Eduardo Lundgren
  */
 public class ComboServlet extends HttpServlet {

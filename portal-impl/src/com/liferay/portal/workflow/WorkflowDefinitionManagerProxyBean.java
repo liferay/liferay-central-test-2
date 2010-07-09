@@ -24,9 +24,6 @@ import java.io.InputStream;
 import java.util.List;
 
 /**
- * <a href="WorkflowDefinitionManagerProxyBean.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Micha Kiener
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan

@@ -19,8 +19,6 @@ import com.liferay.portal.util.BaseTestCase;
 import java.net.URL;
 
 /**
- * <a href="BaseServiceTestCase.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael Young
  */
 public class BaseServiceTestCase extends BaseTestCase {

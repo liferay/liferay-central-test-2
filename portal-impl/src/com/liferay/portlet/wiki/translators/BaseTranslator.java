@@ -27,8 +27,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * <a href="BaseTranslator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public abstract class BaseTranslator {

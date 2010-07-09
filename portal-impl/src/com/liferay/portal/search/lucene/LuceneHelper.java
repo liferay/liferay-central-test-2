@@ -25,8 +25,6 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 
 /**
- * <a href="LuceneHelper.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  */
 public interface LuceneHelper {

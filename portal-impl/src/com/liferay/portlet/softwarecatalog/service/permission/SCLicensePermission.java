@@ -23,8 +23,6 @@ import com.liferay.portlet.softwarecatalog.model.SCLicense;
 import com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceUtil;
 
 /**
- * <a href="SCLicensePermission.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  */

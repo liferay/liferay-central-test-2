@@ -66,9 +66,6 @@ import com.liferay.portlet.asset.service.persistence.AssetVocabularyPersistence;
 import javax.sql.DataSource;
 
 /**
- * <a href="AssetVocabularyServiceBaseImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public abstract class AssetVocabularyServiceBaseImpl extends PrincipalBean

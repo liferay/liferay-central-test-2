@@ -43,8 +43,6 @@ import org.apache.abdera.protocol.client.ClientResponse;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
 
 /**
- * <a href="CMISUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class CMISUtil {

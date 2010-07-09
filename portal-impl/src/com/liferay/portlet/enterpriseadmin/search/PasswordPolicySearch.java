@@ -35,8 +35,6 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="PasswordPolicySearch.java.html"><b><i>View Source</i></b></a>
- *
  * @author Scott Lee
  */
 public class PasswordPolicySearch extends SearchContainer<PasswordPolicy> {

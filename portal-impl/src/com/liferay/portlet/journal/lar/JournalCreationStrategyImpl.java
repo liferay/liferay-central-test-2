@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portlet.journal.model.JournalArticle;
 
 /**
- * <a href="JournalCreationStrategyImpl.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * Provides the strategy for creating new content when new Journal content is
  * imported into a layout set from a LAR. The default strategy implemented by

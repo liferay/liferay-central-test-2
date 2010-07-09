@@ -46,8 +46,6 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="ImageLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Julio Camarero
  */

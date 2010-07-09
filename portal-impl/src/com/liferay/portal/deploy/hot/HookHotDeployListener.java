@@ -124,8 +124,6 @@ import org.springframework.aop.framework.AdvisedSupport;
 import org.springframework.aop.target.SingletonTargetSource;
 
 /**
- * <a href="HookHotDeployListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
  * @author Wesley Gong

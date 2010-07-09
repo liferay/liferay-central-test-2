@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.util.HashCode;
 import com.liferay.portal.kernel.util.HashCodeFactory;
 
 /**
- * <a href="HashCodeFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class HashCodeFactoryImpl implements HashCodeFactory {

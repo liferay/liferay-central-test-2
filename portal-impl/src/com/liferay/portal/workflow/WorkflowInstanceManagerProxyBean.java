@@ -25,9 +25,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="WorkflowInstanceManagerProxyBean.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Micha Kiener
  */
 public class WorkflowInstanceManagerProxyBean

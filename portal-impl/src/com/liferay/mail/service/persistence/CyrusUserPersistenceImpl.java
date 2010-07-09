@@ -23,8 +23,6 @@ import com.liferay.portal.model.Dummy;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 /**
- * <a href="CyrusUserPersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class CyrusUserPersistenceImpl

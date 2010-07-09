@@ -32,8 +32,6 @@ import jcifs.dcerpc.DcerpcHandle;
 import jcifs.dcerpc.UnicodeString;
 
 /**
- * <a href="Netlogon.java.html"><b><i>View Source</i></b></a>
- *
  * @author Marcellus Tavares
  * @author Michael C. Han
  */

@@ -33,8 +33,6 @@ import com.liferay.portal.util.WebKeys;
 import javax.portlet.PortletRequest;
 
 /**
- * <a href="IFrameUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Amos Fong
  */
 public class IFrameUtil {

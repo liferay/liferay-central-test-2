@@ -42,8 +42,6 @@ import org.jgroups.Receiver;
 import org.jgroups.View;
 
 /**
- * <a href="ClusterBase.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public abstract class ClusterBase {

@@ -31,8 +31,6 @@ import jcifs.ntlmssp.Type3Message;
 import jcifs.util.Encdec;
 
 /**
- * <a href="NtlmManager.java.html"><b><i>View Source</i></b></a>
- *
  * @author Marcellus Tavares
  * @author Michael C. Han
  */

@@ -17,8 +17,6 @@ package com.liferay.portlet.calendar.util;
 import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
 
 /**
- * <a href="CalendarOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brett Swaim
  */
 public class CalendarOpenSearchImpl extends HitsOpenSearchImpl {

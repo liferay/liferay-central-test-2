@@ -38,9 +38,6 @@ import java.util.Map;
 import java.util.concurrent.locks.Lock;
 
 /**
- * <a href="PortletPreferencesLocalServiceImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PortletPreferencesLocalServiceImpl

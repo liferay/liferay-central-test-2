@@ -30,8 +30,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * <a href="FacebookConnectUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Wilson Man
  */
 public class FacebookConnectUtil {

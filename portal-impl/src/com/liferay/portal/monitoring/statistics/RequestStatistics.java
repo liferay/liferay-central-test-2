@@ -15,8 +15,6 @@
 package com.liferay.portal.monitoring.statistics;
 
 /**
- * <a href="RequestStatistics.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */

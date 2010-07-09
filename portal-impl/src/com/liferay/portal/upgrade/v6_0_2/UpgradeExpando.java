@@ -30,8 +30,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 /**
- * <a href="UpgradeExpando.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class UpgradeExpando extends UpgradeProcess {

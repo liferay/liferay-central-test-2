@@ -32,8 +32,6 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * <a href="TasksReviewLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  * @author Brian Wing Shun Chan
  */

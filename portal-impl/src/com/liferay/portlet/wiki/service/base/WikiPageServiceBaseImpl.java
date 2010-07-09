@@ -85,8 +85,6 @@ import com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence;
 import javax.sql.DataSource;
 
 /**
- * <a href="WikiPageServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public abstract class WikiPageServiceBaseImpl extends PrincipalBean

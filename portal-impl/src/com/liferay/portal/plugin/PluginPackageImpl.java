@@ -34,8 +34,6 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * <a href="PluginPackageImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class PluginPackageImpl

@@ -25,8 +25,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 /**
- * <a href="UpgradeLayout.java.html"><b><i>View Source</i></b></a>
- *
  * @author Samuel Kong
  */
 public class UpgradeLayout extends UpgradeProcess {

@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.audit.AuditRouter;
 import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 
 /**
- * <a href="AuditRouterProxyBean.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class AuditRouterProxyBean extends BaseProxyBean implements AuditRouter {

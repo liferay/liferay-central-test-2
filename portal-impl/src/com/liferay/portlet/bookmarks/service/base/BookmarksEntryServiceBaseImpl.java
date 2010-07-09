@@ -52,9 +52,6 @@ import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import javax.sql.DataSource;
 
 /**
- * <a href="BookmarksEntryServiceBaseImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public abstract class BookmarksEntryServiceBaseImpl extends PrincipalBean

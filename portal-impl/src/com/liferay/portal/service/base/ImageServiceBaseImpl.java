@@ -183,8 +183,6 @@ import com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence;
 import javax.sql.DataSource;
 
 /**
- * <a href="ImageServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public abstract class ImageServiceBaseImpl extends PrincipalBean

@@ -21,8 +21,6 @@ import com.liferay.portal.upgrade.v6_0_2.UpgradeNestedPortlets;
 import com.liferay.portal.upgrade.v6_0_2.UpgradeSchema;
 
 /**
- * <a href="UpgradeProcess_6_0_2.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UpgradeProcess_6_0_2 extends UpgradeProcess {

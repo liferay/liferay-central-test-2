@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ListTypeTable;
 
 /**
- * <a href="UpgradeListType.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UpgradeListType extends UpgradeProcess {

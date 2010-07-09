@@ -27,8 +27,6 @@ import com.liferay.portal.util.PropsValues;
 import javax.portlet.PortletPreferences;
 
 /**
- * <a href="BlogsUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Thiago Moreira
  */

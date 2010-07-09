@@ -32,9 +32,6 @@ import com.liferay.portal.upgrade.v6_0_3.UpgradeScopes;
 import com.liferay.portal.upgrade.v6_0_3.UpgradeSitemap;
 
 /**
- * <a href="UpgradeProcess_5_2_8_to_6_0_3.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Douglas Wong
  */
 public class UpgradeProcess_5_2_8_to_6_0_3 extends UpgradeProcess {

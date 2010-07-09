@@ -21,8 +21,6 @@ import org.apache.lucene.index.Term;
 import org.apache.lucene.store.Directory;
 
 /**
- * <a href="IndexAccessor.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  */
 public interface IndexAccessor {

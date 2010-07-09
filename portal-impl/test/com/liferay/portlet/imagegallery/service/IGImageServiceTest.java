@@ -28,8 +28,6 @@ import com.liferay.portlet.imagegallery.model.IGFolderConstants;
 import java.io.File;
 
 /**
- * <a href="IGImageServiceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class IGImageServiceTest extends BaseServiceTestCase {

@@ -45,8 +45,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * <a href="VirtualHostFilter.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * This filter is used to provide virtual host functionality. However, this
  * filter is still required even if you do not use virtual hosting because it

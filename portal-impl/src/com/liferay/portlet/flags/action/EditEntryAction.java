@@ -32,8 +32,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="EditEntryAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Julio Camarero
  */
 public class EditEntryAction extends PortletAction {

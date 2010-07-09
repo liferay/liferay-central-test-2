@@ -25,8 +25,6 @@ import javax.portlet.ActionRequest;
 import javax.portlet.PortletSession;
 
 /**
- * <a href="ProgressInputStream.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class ProgressInputStream extends InputStream {

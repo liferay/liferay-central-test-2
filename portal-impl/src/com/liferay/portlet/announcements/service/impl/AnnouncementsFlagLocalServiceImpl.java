@@ -22,9 +22,6 @@ import com.liferay.portlet.announcements.service.base.AnnouncementsFlagLocalServ
 import java.util.Date;
 
 /**
- * <a href="AnnouncementsFlagLocalServiceImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Thiago Moreira
  * @author Raymond Augé
  */

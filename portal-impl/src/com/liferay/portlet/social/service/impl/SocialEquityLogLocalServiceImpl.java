@@ -49,9 +49,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 
 /**
- * <a href="SocialEquityLogLocalServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Zsolt Berentey
  * @author Brian Wing Shun Chan
  */

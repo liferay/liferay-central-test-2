@@ -24,9 +24,6 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
 
 /**
- * <a href="BaseBookmarksServiceTestCase.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class BaseBookmarksServiceTestCase extends BaseServiceTestCase {

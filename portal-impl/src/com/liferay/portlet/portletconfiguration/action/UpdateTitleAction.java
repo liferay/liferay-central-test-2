@@ -36,8 +36,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="UpdateTitleAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Ming-Gih Lam
  */
 public class UpdateTitleAction extends JSONAction {

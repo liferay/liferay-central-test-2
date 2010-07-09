@@ -23,8 +23,6 @@ import java.io.Serializable;
 import java.util.Map;
 
 /**
- * <a href="WorkflowStatusManagerImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  */
 public class WorkflowStatusManagerImpl implements WorkflowStatusManager {

@@ -35,8 +35,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * <a href="DeployUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class DeployUtil {

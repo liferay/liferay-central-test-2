@@ -17,8 +17,6 @@ package com.liferay.portlet.asset.model.impl;
 import com.liferay.portlet.asset.model.AssetLink;
 
 /**
- * <a href="AssetLinkImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class AssetLinkImpl extends AssetLinkModelImpl implements AssetLink {

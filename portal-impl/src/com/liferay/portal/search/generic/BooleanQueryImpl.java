@@ -25,8 +25,6 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * <a href="BooleanQueryImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class BooleanQueryImpl extends BaseBooleanQueryImpl {

@@ -58,8 +58,6 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * <a href="ServiceTestUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Michael Young
  * @author Alexander Chow

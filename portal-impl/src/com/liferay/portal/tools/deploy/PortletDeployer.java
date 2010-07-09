@@ -46,8 +46,6 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * <a href="PortletDeployer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Brian Myunghun Kim
  */

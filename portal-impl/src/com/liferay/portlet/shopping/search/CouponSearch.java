@@ -24,8 +24,6 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="CouponSearch.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class CouponSearch extends SearchContainer<ShoppingCoupon> {

@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.model.User;
 
 /**
- * <a href="MemberResponseElement.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  */
 public class MemberResponseElement implements ResponseElement {

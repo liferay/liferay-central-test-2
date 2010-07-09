@@ -19,8 +19,6 @@ import com.liferay.portal.service.LockLocalServiceUtil;
 import com.liferay.portlet.messageboards.model.MBThread;
 
 /**
- * <a href="MBThreadImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Mika Koivisto
  */

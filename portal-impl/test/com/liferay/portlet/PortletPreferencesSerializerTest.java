@@ -20,9 +20,6 @@ import com.liferay.portal.util.BaseTestCase;
 import java.util.Map;
 
 /**
- * <a href="PortletPreferencesSerializerTest.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  */

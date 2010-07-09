@@ -55,8 +55,6 @@ import java.util.Set;
 import javax.naming.NamingException;
 
 /**
- * <a href="BaseDB.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  * @author Ganesh Ram
  * @author Brian Wing Shun Chan

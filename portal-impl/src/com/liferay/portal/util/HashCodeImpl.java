@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.util.HashCode;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * <a href="HashCodeImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class HashCodeImpl implements HashCode {

@@ -32,8 +32,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 /**
- * <a href="ConfigurationActionImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Sergio González
  */
 public class ConfigurationActionImpl extends BaseConfigurationAction {

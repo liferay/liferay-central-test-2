@@ -23,8 +23,6 @@ import rath.msnm.MSNMessenger;
 import rath.msnm.UserStatus;
 
 /**
- * <a href="MSNConnector.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Brett Randall
  */

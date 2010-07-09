@@ -21,8 +21,6 @@ import com.liferay.portal.service.PluginSettingServiceUtil;
 import java.rmi.RemoteException;
 
 /**
- * <a href="PluginSettingServiceSoap.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
  * overwritten the next time is generated.

@@ -80,8 +80,6 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.lang.time.StopWatch;
 
 /**
- * <a href="PluginPackageUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  * @author Sandeep Soni

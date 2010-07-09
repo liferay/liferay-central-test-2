@@ -27,9 +27,6 @@ import com.liferay.portlet.shopping.model.ShoppingCategory;
 import java.util.List;
 
 /**
- * <a href="ShoppingCategoryPersistenceTest.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ShoppingCategoryPersistenceTest extends BasePersistenceTestCase {

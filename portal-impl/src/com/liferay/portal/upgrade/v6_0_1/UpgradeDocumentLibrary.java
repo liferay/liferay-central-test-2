@@ -21,8 +21,6 @@ import com.liferay.portal.upgrade.v6_0_1.util.DLFileEntryTable;
 import com.liferay.portal.upgrade.v6_0_1.util.DLFileVersionTable;
 
 /**
- * <a href="UpgradeDocumentLibrary.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UpgradeDocumentLibrary extends UpgradeProcess {

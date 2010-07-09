@@ -20,8 +20,6 @@ import org.jgroups.Receiver;
 import org.jgroups.View;
 
 /**
- * <a href="BaseReceiver.java.html"><b><i>View Source</i></b></a>
- *
  * @author Tina Tian
  */
 public class BaseReceiver implements Receiver {

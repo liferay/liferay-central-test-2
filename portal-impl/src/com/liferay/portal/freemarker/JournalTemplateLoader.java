@@ -31,8 +31,6 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 
 /**
- * <a href="JournalTemplateLoader.java.html"><b><i>View Source</i></b></a>
- *
  * @author Mika Koivisto
  */
 public class JournalTemplateLoader extends FreeMarkerTemplateLoader {

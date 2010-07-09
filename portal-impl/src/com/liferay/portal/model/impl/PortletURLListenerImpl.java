@@ -18,8 +18,6 @@ import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletURLListener;
 
 /**
- * <a href="PortletURLListenerImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PortletURLListenerImpl implements PortletURLListener {

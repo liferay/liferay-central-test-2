@@ -17,8 +17,6 @@ package com.liferay.portal.dao.orm.hibernate;
 import com.liferay.portal.kernel.util.StringBundler;
 
 /**
- * <a href="DB2Dialect.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shepherd Ching
  * @author Jian Cao
  */

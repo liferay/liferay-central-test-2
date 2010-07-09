@@ -30,8 +30,6 @@ import javax.portlet.PortletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="NamespaceServletRequest.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * This class ensures that portlet attributes and parameters are private to the
  * portlet.

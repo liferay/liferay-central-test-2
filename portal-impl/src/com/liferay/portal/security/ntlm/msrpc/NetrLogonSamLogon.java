@@ -19,8 +19,6 @@ import jcifs.dcerpc.ndr.NdrBuffer;
 import jcifs.dcerpc.ndr.NdrException;
 
 /**
- * <a href="NetrLogonSamLogon.java.html"><b><i>View Source</i></b></a>
- *
  * @author Marcellus Tavares
  */
 public class NetrLogonSamLogon extends DcerpcMessage {

@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.zip.ZipWriterFactory;
 import java.io.File;
 
 /**
- * <a href="ZipWriterFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class ZipWriterFactoryImpl implements ZipWriterFactory {

@@ -27,8 +27,6 @@ import com.liferay.portlet.wiki.model.WikiPage;
 import java.util.List;
 
 /**
- * <a href="WikiPagePersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class WikiPagePersistenceTest extends BasePersistenceTestCase {

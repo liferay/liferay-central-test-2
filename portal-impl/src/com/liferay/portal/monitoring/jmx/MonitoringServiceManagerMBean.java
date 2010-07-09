@@ -15,9 +15,6 @@
 package com.liferay.portal.monitoring.jmx;
 
 /**
- * <a href="MonitoringServiceManagerMBean.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */

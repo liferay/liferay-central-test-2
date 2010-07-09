@@ -19,9 +19,6 @@ import com.liferay.portlet.expando.model.BaseCustomAttributesDisplay;
 import com.liferay.portlet.journal.model.JournalArticle;
 
 /**
- * <a href="JournalArticleCustomAttributesDisplay.java.html"><b><i>View Source
- * </i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class JournalArticleCustomAttributesDisplay

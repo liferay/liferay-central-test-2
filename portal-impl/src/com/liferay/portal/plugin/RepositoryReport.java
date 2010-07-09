@@ -24,8 +24,6 @@ import java.util.Set;
 import java.util.TreeMap;
 
 /**
- * <a href="RepositoryReport.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class RepositoryReport {

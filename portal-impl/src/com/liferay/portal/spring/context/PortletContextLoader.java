@@ -20,8 +20,6 @@ import org.springframework.web.context.ConfigurableWebApplicationContext;
 import org.springframework.web.context.ContextLoader;
 
 /**
- * <a href="PortletContextLoader.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @see	   PortletApplicationContext
  * @see	   PortletContextLoaderListener

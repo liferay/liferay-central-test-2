@@ -27,8 +27,6 @@ import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
 import java.util.Date;
 
 /**
- * <a href="MBMessageFlagServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class MBMessageFlagServiceImpl extends MBMessageFlagServiceBaseImpl {

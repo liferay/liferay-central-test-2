@@ -15,8 +15,6 @@
 package com.liferay.portal.editor.fckeditor.exception;
 
 /**
- * <a href="FCKException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Ivica Cardic
  */
 public class FCKException extends RuntimeException {

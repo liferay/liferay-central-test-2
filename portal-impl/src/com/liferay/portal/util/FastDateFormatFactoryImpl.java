@@ -29,8 +29,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.commons.lang.time.FastDateFormat;
 
 /**
- * <a href="FastDateFormatFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class FastDateFormatFactoryImpl implements FastDateFormatFactory {

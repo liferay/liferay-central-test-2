@@ -56,8 +56,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * <a href="CacheFilter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  * @author Javier de Ros
  * @author Raymond Augé

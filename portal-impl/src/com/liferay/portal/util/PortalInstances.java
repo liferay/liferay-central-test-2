@@ -51,8 +51,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="PortalInstances.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Jose Oliver
  * @author Atul Patel

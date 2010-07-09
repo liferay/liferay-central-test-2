@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.dao.jdbc.RowMapper;
 import javax.sql.DataSource;
 
 /**
- * <a href="MappingSqlQueryFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class MappingSqlQueryFactoryImpl implements MappingSqlQueryFactory {

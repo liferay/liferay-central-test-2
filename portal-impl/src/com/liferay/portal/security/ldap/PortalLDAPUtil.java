@@ -49,8 +49,6 @@ import javax.naming.ldap.PagedResultsControl;
 import javax.naming.ldap.PagedResultsResponseControl;
 
 /**
- * <a href="PortalLDAPUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael Young
  * @author Brian Wing Shun Chan
  * @author Jerry Niu

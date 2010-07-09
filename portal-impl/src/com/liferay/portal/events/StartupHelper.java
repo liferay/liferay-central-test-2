@@ -28,8 +28,6 @@ import com.liferay.portal.verify.VerifyException;
 import com.liferay.portal.verify.VerifyProcessUtil;
 
 /**
- * <a href="StartupHelper.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
  * @author Raymond Augé

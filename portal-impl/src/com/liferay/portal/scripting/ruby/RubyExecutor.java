@@ -32,8 +32,6 @@ import org.jruby.internal.runtime.GlobalVariables;
 import org.jruby.javasupport.JavaEmbedUtils;
 
 /**
- * <a href="RubyExecutor.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alberto Montero
  */
 public class RubyExecutor implements ScriptingExecutor {

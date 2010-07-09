@@ -30,9 +30,6 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * <a href="AssetCategoryPropertyFinderImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  */

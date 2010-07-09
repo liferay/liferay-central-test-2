@@ -29,8 +29,6 @@ import com.liferay.portal.upgrade.v4_3_0.util.BookmarksFolderTable;
 import java.sql.Types;
 
 /**
- * <a href="UpgradeBookmarks.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  * @author Brian Wing Shun Chan
  */

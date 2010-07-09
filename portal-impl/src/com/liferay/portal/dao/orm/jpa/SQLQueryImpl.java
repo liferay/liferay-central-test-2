@@ -33,8 +33,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
 /**
- * <a href="SQLQueryImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Prashant Dighe
  * @author Brian Wing Shun Chan
  */

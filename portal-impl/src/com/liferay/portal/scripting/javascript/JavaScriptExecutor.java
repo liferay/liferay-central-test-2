@@ -27,8 +27,6 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * <a href="JavaScriptExecutor.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alberto Montero
  */
 public class JavaScriptExecutor implements ScriptingExecutor {

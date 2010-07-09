@@ -26,8 +26,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 
 /**
- * <a href="SessionFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Prashant Dighe
  * @author Brian Wing Shun Chan
  */

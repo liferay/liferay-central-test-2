@@ -22,8 +22,6 @@ import com.liferay.portlet.tasks.service.TasksProposalServiceUtil;
 import java.rmi.RemoteException;
 
 /**
- * <a href="TasksProposalServiceSoap.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
  * overwritten the next time is generated.

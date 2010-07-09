@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import java.io.File;
 
 /**
- * <a href="HookAutoDeployListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class HookAutoDeployListener extends BaseAutoDeployListener {

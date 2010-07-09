@@ -24,9 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <a href="CreateURLDirectoriesMethodImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Bruno Farache
  */
 public class CreateURLDirectoriesMethodImpl extends BaseMethodImpl {

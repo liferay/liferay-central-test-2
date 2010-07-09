@@ -25,8 +25,6 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * <a href="BeanShellExecutor.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class BeanShellExecutor implements ScriptingExecutor {

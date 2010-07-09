@@ -27,8 +27,6 @@ import com.liferay.portlet.wiki.model.WikiNode;
 import java.util.List;
 
 /**
- * <a href="WikiNodePersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class WikiNodePersistenceTest extends BasePersistenceTestCase {

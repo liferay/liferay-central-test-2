@@ -17,8 +17,6 @@ package com.liferay.portlet.messageboards.model.impl;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
 
 /**
- * <a href="MBStatsUserImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class MBStatsUserImpl

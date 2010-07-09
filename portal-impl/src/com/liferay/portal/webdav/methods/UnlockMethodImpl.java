@@ -27,8 +27,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="UnlockMethodImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class UnlockMethodImpl implements Method {

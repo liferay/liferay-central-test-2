@@ -25,8 +25,6 @@ import com.liferay.portal.util.PortalUtil;
 import java.util.Date;
 
 /**
- * <a href="WebDAVPropsLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class WebDAVPropsLocalServiceImpl

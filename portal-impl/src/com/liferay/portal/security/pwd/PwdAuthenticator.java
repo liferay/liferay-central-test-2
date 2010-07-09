@@ -28,8 +28,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * <a href="PwdAuthenticator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class PwdAuthenticator {

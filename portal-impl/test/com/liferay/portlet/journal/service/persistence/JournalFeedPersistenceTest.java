@@ -27,8 +27,6 @@ import com.liferay.portlet.journal.model.JournalFeed;
 import java.util.List;
 
 /**
- * <a href="JournalFeedPersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class JournalFeedPersistenceTest extends BasePersistenceTestCase {

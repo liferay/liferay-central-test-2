@@ -35,9 +35,6 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * <a href="SocialEquitySettingLocalServiceImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Zsolt Berentey
  * @author Brian Wing Shun Chan
  */

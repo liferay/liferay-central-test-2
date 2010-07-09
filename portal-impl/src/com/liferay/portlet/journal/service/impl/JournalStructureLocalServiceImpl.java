@@ -49,9 +49,6 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * <a href="JournalStructureLocalServiceImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
  */

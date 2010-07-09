@@ -17,8 +17,6 @@ package com.liferay.portal.upgrade.v4_4_0.util;
 import java.sql.Types;
 
 /**
- * <a href="DLFolderTable.java.html"><b><i>View Source</i></b></a>
- *
  * @author	  Brian Wing Shun Chan
  * @generated
  */

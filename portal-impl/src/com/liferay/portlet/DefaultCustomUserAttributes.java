@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.util.Randomizer;
 import java.util.Map;
 
 /**
- * <a href="DefaultCustomUserAttributes.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * A separate instance of this class is created every time
  * <code>renderRequest.getAttribute(PortletRequest.USER_INFO)</code> is called.

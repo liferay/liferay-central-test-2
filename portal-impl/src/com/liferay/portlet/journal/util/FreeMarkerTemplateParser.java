@@ -45,8 +45,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="FreeMarkerTemplateParser.java.html"><b><i>View Source</i></b></a>
- *
  * @author Mika Koivisto
  */
 public class FreeMarkerTemplateParser extends VelocityTemplateParser {

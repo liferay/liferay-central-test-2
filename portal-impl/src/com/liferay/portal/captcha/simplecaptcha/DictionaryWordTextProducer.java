@@ -19,8 +19,6 @@ import com.liferay.portlet.words.util.WordsUtil;
 import nl.captcha.text.producer.TextProducer;
 
 /**
- * <a href="DictionaryWordTextProducer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class DictionaryWordTextProducer implements TextProducer {

@@ -20,8 +20,6 @@ import com.liferay.portal.model.ClassName;
 import com.liferay.portal.service.base.ClassNameServiceBaseImpl;
 
 /**
- * <a href="ClassNameServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ClassNameServiceImpl extends ClassNameServiceBaseImpl {

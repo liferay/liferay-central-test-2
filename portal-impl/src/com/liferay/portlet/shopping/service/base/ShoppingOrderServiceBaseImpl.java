@@ -66,9 +66,6 @@ import com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence
 import javax.sql.DataSource;
 
 /**
- * <a href="ShoppingOrderServiceBaseImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public abstract class ShoppingOrderServiceBaseImpl extends PrincipalBean

@@ -22,8 +22,6 @@ import com.liferay.portlet.documentlibrary.service.base.DLFileVersionServiceBase
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 
 /**
- * <a href="DLFileVersionServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class DLFileVersionServiceImpl extends DLFileVersionServiceBaseImpl {

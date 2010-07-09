@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 
 /**
- * <a href="AssetVocabularyImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class AssetVocabularyImpl

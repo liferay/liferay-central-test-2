@@ -17,8 +17,6 @@ package com.liferay.counter.model.impl;
 import com.liferay.counter.model.Counter;
 
 /**
- * <a href="CounterImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class CounterImpl extends CounterModelImpl implements Counter {

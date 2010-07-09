@@ -27,8 +27,6 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import java.util.List;
 
 /**
- * <a href="DLFolderPersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class DLFolderPersistenceTest extends BasePersistenceTestCase {

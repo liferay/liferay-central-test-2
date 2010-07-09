@@ -24,8 +24,6 @@ import com.liferay.portal.security.ldap.LDAPSettingsUtil;
 import com.liferay.portal.util.PropsUtil;
 
 /**
- * <a href="PwdToolkitUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PwdToolkitUtil {

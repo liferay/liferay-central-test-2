@@ -37,8 +37,6 @@ import javax.servlet.http.HttpSessionEvent;
 import org.apache.struts.Globals;
 
 /**
- * <a href="PortalSessionDestroyer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael Young
  */
 public class PortalSessionDestroyer implements PortalInitable {

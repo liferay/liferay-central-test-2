@@ -29,8 +29,6 @@ import java.io.Serializable;
 import java.util.Locale;
 
 /**
- * <a href="ExpandoColumnImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  * @author Brian Wing Shun Chan
  */

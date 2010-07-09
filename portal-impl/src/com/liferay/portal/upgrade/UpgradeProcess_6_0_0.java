@@ -32,8 +32,6 @@ import com.liferay.portal.upgrade.v6_0_0.UpgradeSocial;
 import com.liferay.portal.upgrade.v6_0_0.UpgradeWiki;
 
 /**
- * <a href="UpgradeProcess_6_0_0.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class UpgradeProcess_6_0_0 extends UpgradeProcess {

@@ -22,8 +22,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="RouterImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Connor McKay
  * @author Brian Wing Shun Chan
  */

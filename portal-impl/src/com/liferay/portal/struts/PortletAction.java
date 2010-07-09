@@ -57,8 +57,6 @@ import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.util.MessageResources;
 
 /**
- * <a href="PortletAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PortletAction extends Action {

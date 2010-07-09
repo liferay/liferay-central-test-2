@@ -65,8 +65,6 @@ import com.liferay.portlet.flags.service.FlagsEntryService;
 import javax.sql.DataSource;
 
 /**
- * <a href="FlagsEntryServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public abstract class FlagsEntryServiceBaseImpl extends PrincipalBean

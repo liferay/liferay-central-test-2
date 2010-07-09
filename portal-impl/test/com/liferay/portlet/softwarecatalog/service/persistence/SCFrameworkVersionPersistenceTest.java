@@ -27,9 +27,6 @@ import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 import java.util.List;
 
 /**
- * <a href="SCFrameworkVersionPersistenceTest.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class SCFrameworkVersionPersistenceTest extends BasePersistenceTestCase {

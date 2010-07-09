@@ -26,8 +26,6 @@ import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 import java.util.List;
 
 /**
- * <a href="TeamPersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class TeamPersistenceTest extends BasePersistenceTestCase {

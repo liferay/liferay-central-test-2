@@ -32,8 +32,6 @@ import org.apache.abdera.model.Element;
 import org.apache.abdera.model.ExtensibleElementWrapper;
 
 /**
- * <a href="CMISObject.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class CMISObject extends ExtensibleElementWrapper {

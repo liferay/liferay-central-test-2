@@ -27,8 +27,6 @@ import com.liferay.portlet.documentlibrary.service.permission.DLFileShortcutPerm
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 
 /**
- * <a href="DLFileShortcutServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class DLFileShortcutServiceImpl extends DLFileShortcutServiceBaseImpl {

@@ -61,9 +61,6 @@ import com.liferay.portlet.journal.service.persistence.JournalTemplatePersistenc
 import javax.sql.DataSource;
 
 /**
- * <a href="JournalStructureServiceBaseImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public abstract class JournalStructureServiceBaseImpl extends PrincipalBean

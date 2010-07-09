@@ -26,8 +26,6 @@ import com.liferay.portal.util.Portal;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="FacebookUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class FacebookUtil {

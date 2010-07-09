@@ -23,8 +23,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <a href="PHPPortletAutoDeployer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class PHPPortletAutoDeployer extends PortletAutoDeployer {

@@ -18,8 +18,6 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.permission.PermissionChecker;
 
 /**
- * <a href="MyWorkflowControlPanelEntry.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class MyWorkflowControlPanelEntry extends WorkflowControlPanelEntry {

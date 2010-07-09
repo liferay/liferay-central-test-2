@@ -30,8 +30,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 /**
- * <a href="UpgradeAssetPublisher.java.html"><b><i>View Source</i></b></a>
- *
  * @author Julio Camarero
  */
 public class UpgradeAssetPublisher extends BaseUpgradePortletPreferences {

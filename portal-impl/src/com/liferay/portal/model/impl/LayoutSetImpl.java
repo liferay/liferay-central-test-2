@@ -29,8 +29,6 @@ import com.liferay.portal.service.ThemeLocalServiceUtil;
 import java.io.IOException;
 
 /**
- * <a href="LayoutSetImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  */

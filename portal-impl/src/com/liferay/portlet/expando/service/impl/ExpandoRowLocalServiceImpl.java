@@ -27,8 +27,6 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * <a href="ExpandoRowLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Wesley Gong
  */

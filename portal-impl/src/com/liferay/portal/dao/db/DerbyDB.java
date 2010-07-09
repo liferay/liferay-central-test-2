@@ -26,8 +26,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import java.io.IOException;
 
 /**
- * <a href="DerbyDB.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  * @author Sandeep Soni
  * @author Ganesh Ram

@@ -43,8 +43,6 @@ import java.util.List;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="PluginPackageIndexer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  * @author Bruno Farache

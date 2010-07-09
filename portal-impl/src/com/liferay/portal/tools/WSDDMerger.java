@@ -31,8 +31,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * <a href="WSDDMerger.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class WSDDMerger {

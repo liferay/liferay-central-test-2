@@ -23,8 +23,6 @@ import java.lang.reflect.Method;
 import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * <a href="ServiceRequestDataSample.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class ServiceRequestDataSample extends BaseDataSample {

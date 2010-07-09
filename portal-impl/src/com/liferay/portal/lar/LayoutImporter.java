@@ -88,8 +88,6 @@ import java.util.Set;
 import org.apache.commons.lang.time.StopWatch;
 
 /**
- * <a href="LayoutImporter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Joel Kozikowski
  * @author Charles May

@@ -22,8 +22,6 @@ import com.liferay.portal.util.FileImpl;
 import org.apache.tools.ant.DirectoryScanner;
 
 /**
- * <a href="UpgradeTableBuilder.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UpgradeTableBuilder {
@@ -175,10 +173,6 @@ public class UpgradeTableBuilder {
 		sb.append("import java.sql.Types;\n\n");
 
 		sb.append("/**\n");
-		sb.append(" * <a href=\"");
-		sb.append(className);
-		sb.append(".java.html\"><b><i>View Source</i></b></a>\n");
-		sb.append(" *\n");
 		sb.append(" * @author\t  ");
 		sb.append(author);
 		sb.append("\n");

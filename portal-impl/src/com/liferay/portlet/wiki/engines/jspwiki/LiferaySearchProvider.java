@@ -23,8 +23,6 @@ import java.util.Collections;
 import java.util.Properties;
 
 /**
- * <a href="LiferaySearchProvider.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class LiferaySearchProvider implements SearchProvider {

@@ -19,9 +19,6 @@ import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.expando.model.BaseCustomAttributesDisplay;
 
 /**
- * <a href="CalEventCustomAttributesDisplay.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Jorge Ferrer
  */
 public class CalEventCustomAttributesDisplay

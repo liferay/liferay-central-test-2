@@ -38,8 +38,6 @@ import javax.portlet.ReadOnlyException;
 import javax.portlet.ValidatorException;
 
 /**
- * <a href="ShoppingPreferences.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ShoppingPreferences {

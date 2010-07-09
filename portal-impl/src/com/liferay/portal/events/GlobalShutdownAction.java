@@ -45,8 +45,6 @@ import java.sql.Statement;
 import java.util.Timer;
 
 /**
- * <a href="GlobalShutdownAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class GlobalShutdownAction extends SimpleAction {

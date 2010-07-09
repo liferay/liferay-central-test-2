@@ -17,8 +17,6 @@ package com.liferay.portal.cmis;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * <a href="CMISException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class CMISException extends PortalException {

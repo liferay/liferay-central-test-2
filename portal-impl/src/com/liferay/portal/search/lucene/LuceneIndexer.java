@@ -31,8 +31,6 @@ import java.util.List;
 import org.apache.commons.lang.time.StopWatch;
 
 /**
- * <a href="LuceneIndexer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class LuceneIndexer implements Runnable {

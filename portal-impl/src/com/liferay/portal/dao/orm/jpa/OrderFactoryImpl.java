@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.dao.orm.Order;
 import com.liferay.portal.kernel.dao.orm.OrderFactory;
 
 /**
- * <a href="OrderFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Prashant Dighe
  * @author Brian Wing Shun Chan
  */

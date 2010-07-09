@@ -41,8 +41,6 @@ import org.springframework.beans.factory.config.AbstractFactoryBean;
 import uk.org.primrose.pool.datasource.GenericDataSourceFactory;
 
 /**
- * <a href="DataSourceFactoryBean.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class DataSourceFactoryBean extends AbstractFactoryBean<DataSource> {

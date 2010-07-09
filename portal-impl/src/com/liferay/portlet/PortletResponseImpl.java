@@ -76,8 +76,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * <a href="PortletResponseImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public abstract class PortletResponseImpl implements LiferayPortletResponse {

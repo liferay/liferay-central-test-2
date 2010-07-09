@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.calendar.model.CalEvent;
 
 /**
- * <a href="CalEventImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class CalEventImpl extends CalEventModelImpl implements CalEvent {

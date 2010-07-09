@@ -26,8 +26,6 @@ import com.liferay.portlet.expando.model.ExpandoValue;
 import java.util.List;
 
 /**
- * <a href="ExpandoValuePersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ExpandoValuePersistenceTest extends BasePersistenceTestCase {

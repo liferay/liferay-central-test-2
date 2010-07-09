@@ -31,8 +31,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 /**
- * <a href="BookmarksEntryAssetRenderer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Julio Camarero
  * @author Juan Fernández
  */

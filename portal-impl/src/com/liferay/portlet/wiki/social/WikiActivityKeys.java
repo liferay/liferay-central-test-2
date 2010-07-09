@@ -15,8 +15,6 @@
 package com.liferay.portlet.wiki.social;
 
 /**
- * <a href="WikiActivityKeys.java.html"><b><i>View Source</i></b></a>
- *
  * @author Samuel Kong
  */
 public class WikiActivityKeys {

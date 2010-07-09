@@ -21,8 +21,6 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PortletKeys;
 
 /**
- * <a href="DLPermission.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class DLPermission {

@@ -23,8 +23,6 @@ import java.util.Date;
 import java.util.Random;
 
 /**
- * <a href="BaseTestCase.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Ganesh Ram
  */

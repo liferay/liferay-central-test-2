@@ -23,8 +23,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 
 /**
- * <a href="ShardLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ShardLocalServiceImpl extends ShardLocalServiceBaseImpl {

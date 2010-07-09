@@ -20,9 +20,6 @@ import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.util.PropsValues;
 
 /**
- * <a href="JournalCreationStrategyFactory.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Joel Kozikowski
  */
 public class JournalCreationStrategyFactory {

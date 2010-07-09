@@ -27,9 +27,6 @@ import com.liferay.portlet.asset.model.AssetVocabulary;
 import java.util.List;
 
 /**
- * <a href="AssetVocabularyPersistenceTest.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class AssetVocabularyPersistenceTest extends BasePersistenceTestCase {

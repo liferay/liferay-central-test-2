@@ -35,8 +35,6 @@ import java.util.Set;
 import javax.mail.internet.InternetAddress;
 
 /**
- * <a href="BlogsMessageListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Thiago Moreira
  */
 public class BlogsMessageListener implements MessageListener {

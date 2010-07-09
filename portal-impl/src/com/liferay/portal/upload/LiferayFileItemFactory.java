@@ -20,8 +20,6 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 
 /**
- * <a href="LiferayFileItemFactory.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class LiferayFileItemFactory extends DiskFileItemFactory {

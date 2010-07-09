@@ -25,8 +25,6 @@ import com.liferay.portal.util.PortalUtil;
 import java.util.Date;
 
 /**
- * <a href="TicketLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Mika Koivisto
  */
 public class TicketLocalServiceImpl extends TicketLocalServiceBaseImpl {

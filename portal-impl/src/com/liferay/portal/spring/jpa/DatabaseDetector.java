@@ -32,8 +32,6 @@ import javax.sql.DataSource;
 import org.springframework.orm.jpa.vendor.Database;
 
 /**
- * <a href="DatabaseDetector.java.html"><b><i>View Source</i></b></a>
- *
  * @author Prashant Dighe
  * @author Brian Wing Shun Chan
  */

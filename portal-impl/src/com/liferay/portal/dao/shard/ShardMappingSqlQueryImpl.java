@@ -22,8 +22,6 @@ import java.util.List;
 import javax.sql.DataSource;
 
 /**
- * <a href="ShardMappingSqlQueryImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class ShardMappingSqlQueryImpl<T> extends MappingSqlQueryImpl<T> {

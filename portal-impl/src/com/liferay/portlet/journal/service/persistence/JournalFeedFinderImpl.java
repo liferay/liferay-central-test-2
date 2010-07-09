@@ -33,8 +33,6 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * <a href="JournalFeedFinderImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class JournalFeedFinderImpl

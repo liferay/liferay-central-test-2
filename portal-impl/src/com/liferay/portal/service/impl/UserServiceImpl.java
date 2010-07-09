@@ -54,8 +54,6 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * <a href="UserServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Brian Myunghun Kim
  * @author Scott Lee

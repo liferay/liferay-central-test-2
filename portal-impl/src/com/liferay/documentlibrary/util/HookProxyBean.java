@@ -23,8 +23,6 @@ import java.io.InputStream;
 import java.util.Date;
 
 /**
- * <a href="HookProxyBean.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class HookProxyBean extends BaseProxyBean implements Hook {

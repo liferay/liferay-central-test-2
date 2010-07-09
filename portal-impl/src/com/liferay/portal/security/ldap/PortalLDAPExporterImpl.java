@@ -33,8 +33,6 @@ import javax.naming.directory.ModificationItem;
 import javax.naming.ldap.LdapContext;
 
 /**
- * <a href="PortalLDAPExporterImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */

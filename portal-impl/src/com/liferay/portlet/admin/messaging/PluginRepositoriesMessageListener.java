@@ -21,9 +21,6 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.plugin.PluginPackageUtil;
 
 /**
- * <a href="PluginRepositoriesMessageListener.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Shuyang Zhou
  */
 public class PluginRepositoriesMessageListener implements MessageListener {

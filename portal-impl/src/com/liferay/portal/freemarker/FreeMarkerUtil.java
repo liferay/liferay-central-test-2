@@ -26,8 +26,6 @@ import freemarker.template.Template;
 import java.io.Writer;
 
 /**
- * <a href="FreeMarkerUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Tariq Dweik
  * @author Brian Wing Shun Chan
  */

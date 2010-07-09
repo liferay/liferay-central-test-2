@@ -22,8 +22,6 @@ import com.liferay.portlet.announcements.service.AnnouncementsFlagServiceUtil;
 import java.rmi.RemoteException;
 
 /**
- * <a href="AnnouncementsFlagServiceSoap.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
  * overwritten the next time is generated.

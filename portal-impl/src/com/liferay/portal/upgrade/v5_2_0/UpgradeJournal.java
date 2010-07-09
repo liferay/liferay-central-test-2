@@ -31,8 +31,6 @@ import java.sql.ResultSet;
 import java.util.Iterator;
 
 /**
- * <a href="UpgradeJournal.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UpgradeJournal extends UpgradeProcess {

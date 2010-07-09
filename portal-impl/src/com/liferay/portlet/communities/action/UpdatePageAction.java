@@ -49,8 +49,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="UpdatePageAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Ming-Gih Lam
  */
 public class UpdatePageAction extends JSONAction {

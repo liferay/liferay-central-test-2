@@ -23,8 +23,6 @@ import com.liferay.portal.upgrade.v4_3_4.util.JournalArticleContentUpgradeColumn
 import com.liferay.portal.upgrade.v4_3_4.util.JournalArticleTable;
 
 /**
- * <a href="UpgradeJournal.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class UpgradeJournal extends UpgradeProcess {

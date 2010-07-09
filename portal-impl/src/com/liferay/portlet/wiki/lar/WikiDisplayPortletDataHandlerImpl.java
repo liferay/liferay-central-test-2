@@ -40,9 +40,6 @@ import java.util.Map;
 import javax.portlet.PortletPreferences;
 
 /**
- * <a href="WikiDisplayPortletDataHandlerImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Marcellus Tavares
  */
 public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {

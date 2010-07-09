@@ -50,8 +50,6 @@ import java.util.List;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="JournalIndexer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Harry Mark
  * @author Bruno Farache

@@ -23,9 +23,6 @@ import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUti
 import java.sql.Types;
 
 /**
- * <a href="JournalArticlePKUpgradeColumnImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class JournalArticlePKUpgradeColumnImpl extends PKUpgradeColumnImpl {

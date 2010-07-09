@@ -27,9 +27,6 @@ import com.liferay.portlet.announcements.model.AnnouncementsFlag;
 import java.util.List;
 
 /**
- * <a href="AnnouncementsFlagPersistenceTest.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class AnnouncementsFlagPersistenceTest extends BasePersistenceTestCase {

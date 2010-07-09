@@ -23,8 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="CreateFolderCommand.java.html"><b><i>View Source</i></b></a>
- *
  * @author Ivica Cardic
  */
 public class CreateFolderCommand implements Command {

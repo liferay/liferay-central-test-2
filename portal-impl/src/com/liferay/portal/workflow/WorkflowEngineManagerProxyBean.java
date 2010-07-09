@@ -20,9 +20,6 @@ import com.liferay.portal.kernel.workflow.WorkflowEngineManager;
 import java.util.Map;
 
 /**
- * <a href="WorkflowEngineManagerProxyBean.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class WorkflowEngineManagerProxyBean

@@ -20,8 +20,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * <a href="FreeMarkerContextImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Mika Koivisto
  */
 public class FreeMarkerContextImpl implements FreeMarkerContext {

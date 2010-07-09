@@ -22,8 +22,6 @@ import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
 import java.rmi.RemoteException;
 
 /**
- * <a href="BookmarksFolderServiceSoap.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
  * overwritten the next time is generated.

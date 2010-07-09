@@ -26,9 +26,6 @@ import com.liferay.portlet.expando.model.ExpandoColumn;
 import java.util.List;
 
 /**
- * <a href="ExpandoColumnPersistenceTest.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ExpandoColumnPersistenceTest extends BasePersistenceTestCase {

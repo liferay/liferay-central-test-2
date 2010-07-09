@@ -18,9 +18,6 @@ import com.liferay.portal.kernel.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.kernel.util.FileUtil;
 
 /**
- * <a href="DLFileEntryNameUpgradeColumnImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Alexander Chow
  */
 public class DLFileEntryNameUpgradeColumnImpl extends BaseUpgradeColumnImpl {

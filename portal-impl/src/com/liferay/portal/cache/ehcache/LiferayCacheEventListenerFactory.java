@@ -25,9 +25,6 @@ import net.sf.ehcache.event.CacheEventListener;
 import net.sf.ehcache.event.CacheEventListenerFactory;
 
 /**
- * <a href="LiferayCacheEventListenerFactory.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class LiferayCacheEventListenerFactory

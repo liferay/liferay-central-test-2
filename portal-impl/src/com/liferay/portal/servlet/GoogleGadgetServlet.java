@@ -37,8 +37,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="GoogleGadgetServlet.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alberto Montero
  */
 public class GoogleGadgetServlet extends HttpServlet {

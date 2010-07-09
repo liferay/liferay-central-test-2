@@ -31,8 +31,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="JSONAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Ming-Gih Lam
  */
 public abstract class JSONAction extends Action {

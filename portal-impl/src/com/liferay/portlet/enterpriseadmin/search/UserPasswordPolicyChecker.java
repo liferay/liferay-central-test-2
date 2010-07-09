@@ -24,8 +24,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import javax.portlet.RenderResponse;
 
 /**
- * <a href="UserPasswordPolicyChecker.java.html"><b><i>View Source</i></b></a>
- *
  * @author Scott Lee
  */
 public class UserPasswordPolicyChecker extends RowChecker {

@@ -45,8 +45,6 @@ import org.apache.abdera.model.Entry;
 import org.apache.abdera.model.Link;
 
 /**
- * <a href="CMISHook.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class CMISHook extends BaseHook {

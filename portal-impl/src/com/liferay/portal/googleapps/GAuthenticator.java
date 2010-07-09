@@ -29,8 +29,6 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import java.util.Properties;
 
 /**
- * <a href="GAuthenticator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class GAuthenticator {

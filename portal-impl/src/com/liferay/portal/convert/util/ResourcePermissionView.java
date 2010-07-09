@@ -24,8 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <a href="ResourcePermissionView.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class ResourcePermissionView extends Table {

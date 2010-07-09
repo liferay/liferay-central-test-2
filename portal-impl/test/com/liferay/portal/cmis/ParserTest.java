@@ -28,8 +28,6 @@ import org.apache.abdera.model.Service;
 import org.apache.abdera.parser.Parser;
 
 /**
- * <a href="ParserTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class ParserTest extends BaseCMISTestCase {

@@ -22,8 +22,6 @@ import com.liferay.portal.monitoring.statistics.DataSample;
 import com.liferay.portal.monitoring.statistics.DataSampleProcessor;
 
 /**
- * <a href="MonitoringMessageListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */

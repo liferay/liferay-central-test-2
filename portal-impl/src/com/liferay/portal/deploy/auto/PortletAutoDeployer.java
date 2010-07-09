@@ -29,8 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <a href="PortletAutoDeployer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Ivica Cardic
  * @author Brian Wing Shun Chan
  */

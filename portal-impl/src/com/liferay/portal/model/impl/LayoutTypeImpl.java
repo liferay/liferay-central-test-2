@@ -19,8 +19,6 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutType;
 
 /**
- * <a href="LayoutTypeImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class LayoutTypeImpl implements LayoutType {

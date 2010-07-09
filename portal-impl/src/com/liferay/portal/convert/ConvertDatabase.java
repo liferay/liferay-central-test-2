@@ -45,8 +45,6 @@ import javax.sql.DataSource;
 import org.hibernate.dialect.Dialect;
 
 /**
- * <a href="ConvertDatabase.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class ConvertDatabase extends ConvertProcess {

@@ -29,8 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <a href="ExtAutoDeployer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ExtAutoDeployer extends ExtDeployer implements AutoDeployer {

@@ -17,8 +17,6 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.model.Country;
 
 /**
- * <a href="CountryImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class CountryImpl extends CountryModelImpl implements Country {

@@ -215,8 +215,6 @@ import com.liferay.portlet.social.service.persistence.SocialRequestPersistence;
 import javax.sql.DataSource;
 
 /**
- * <a href="UserServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public abstract class UserServiceBaseImpl extends PrincipalBean

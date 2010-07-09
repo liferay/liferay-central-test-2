@@ -26,8 +26,6 @@ import java.util.Calendar;
 import java.util.Locale;
 
 /**
- * <a href="UserServiceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UserServiceTest extends BaseServiceTestCase {

@@ -22,8 +22,6 @@ import javax.portlet.PortletContext;
 import javax.portlet.filter.FilterConfig;
 
 /**
- * <a href="FilterConfigImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class FilterConfigImpl implements FilterConfig {

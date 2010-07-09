@@ -24,8 +24,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * <a href="AuditFilter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class AuditFilter extends BasePortalFilter {

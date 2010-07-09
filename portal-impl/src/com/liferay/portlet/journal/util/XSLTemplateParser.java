@@ -37,8 +37,6 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 /**
- * <a href="XSLTemplateParser.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  * @author Raymond Augé
  */

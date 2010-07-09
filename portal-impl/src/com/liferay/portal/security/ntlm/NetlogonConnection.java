@@ -36,8 +36,6 @@ import jcifs.util.HMACT64;
 import jcifs.util.MD4;
 
 /**
- * <a href="NetlogonConnection.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class NetlogonConnection {

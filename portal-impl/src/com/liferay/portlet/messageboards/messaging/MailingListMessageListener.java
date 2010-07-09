@@ -46,8 +46,6 @@ import javax.mail.URLName;
 import javax.mail.internet.InternetAddress;
 
 /**
- * <a href="MailingListMessageListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Thiago Moreira
  */
 public class MailingListMessageListener implements MessageListener {

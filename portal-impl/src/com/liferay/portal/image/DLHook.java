@@ -33,8 +33,6 @@ import java.io.InputStream;
 import java.util.Date;
 
 /**
- * <a href="DLHook.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class DLHook extends BaseHook {

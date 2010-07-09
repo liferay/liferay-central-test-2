@@ -43,8 +43,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="UserGroupLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Charles May
  */
 public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {

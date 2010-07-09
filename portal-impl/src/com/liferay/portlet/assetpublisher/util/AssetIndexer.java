@@ -27,8 +27,6 @@ import com.liferay.portlet.asset.model.AssetEntry;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="AssetIndexer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Julio Camarero
  */

@@ -17,8 +17,6 @@ package com.liferay.counter.model;
 import com.liferay.portal.kernel.concurrent.CompeteLatch;
 
 /**
- * <a href="CounterRegister.java.html"><b><i>View Source</i></b></a>
- *
  * @author Harry Mark
  * @author Shuyang Zhou
  * @author Edward Han

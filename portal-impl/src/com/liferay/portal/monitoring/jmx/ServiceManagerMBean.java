@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.util.MethodKey;
 import java.util.Set;
 
 /**
- * <a href="ServiceManagerMBean.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public interface ServiceManagerMBean {

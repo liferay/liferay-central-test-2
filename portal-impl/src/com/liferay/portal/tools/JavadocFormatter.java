@@ -55,8 +55,6 @@ import java.util.regex.Pattern;
 import org.apache.tools.ant.DirectoryScanner;
 
 /**
- * <a href="JavadocFormatter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Connor McKay
  */

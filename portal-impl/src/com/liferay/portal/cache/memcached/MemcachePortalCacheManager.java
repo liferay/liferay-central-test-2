@@ -24,8 +24,6 @@ import java.util.concurrent.TimeUnit;
 import net.spy.memcached.MemcachedClientIF;
 
 /**
- * <a href="MemcachePortalCacheManager.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class MemcachePortalCacheManager implements PortalCacheManager {

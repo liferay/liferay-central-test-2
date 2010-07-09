@@ -26,9 +26,6 @@ import com.liferay.portlet.journal.model.JournalArticleImage;
 import java.util.List;
 
 /**
- * <a href="JournalArticleImagePersistenceTest.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class JournalArticleImagePersistenceTest extends BasePersistenceTestCase {

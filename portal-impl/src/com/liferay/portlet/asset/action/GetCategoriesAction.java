@@ -34,8 +34,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="GetCategoriesAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Eduardo Lundgren
  */
 public class GetCategoriesAction extends JSONAction {

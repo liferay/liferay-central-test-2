@@ -26,8 +26,6 @@ import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.service.ShoppingItemLocalServiceUtil;
 
 /**
- * <a href="ShoppingItemPermission.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ShoppingItemPermission {

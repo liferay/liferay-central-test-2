@@ -17,8 +17,6 @@ package com.liferay.portal.cmis.model;
 import javax.xml.namespace.QName;
 
 /**
- * <a href="CMISConstants_1_0_0.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class CMISConstants_1_0_0 extends CMISConstants {

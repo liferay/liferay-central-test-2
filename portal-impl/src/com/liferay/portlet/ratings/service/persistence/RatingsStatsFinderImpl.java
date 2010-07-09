@@ -27,8 +27,6 @@ import com.liferay.util.dao.orm.CustomSQLUtil;
 import java.util.List;
 
 /**
- * <a href="RatingsStatsFinderImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class RatingsStatsFinderImpl extends BasePersistenceImpl<RatingsStats>

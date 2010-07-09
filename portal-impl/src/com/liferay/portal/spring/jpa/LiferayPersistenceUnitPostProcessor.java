@@ -27,9 +27,6 @@ import org.springframework.orm.jpa.persistenceunit.MutablePersistenceUnitInfo;
 import org.springframework.orm.jpa.persistenceunit.PersistenceUnitPostProcessor;
 
 /**
- * <a href="LiferayPersistenceUnitPostProcessor.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Prashant Dighe
  * @author Brian Wing Shun Chan
  */

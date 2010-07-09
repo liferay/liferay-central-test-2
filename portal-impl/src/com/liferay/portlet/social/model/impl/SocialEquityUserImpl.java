@@ -18,8 +18,6 @@ import com.liferay.portlet.social.model.SocialEquityUser;
 import com.liferay.portlet.social.model.SocialEquityValue;
 
 /**
- * <a href="SocialEquityUserImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class SocialEquityUserImpl

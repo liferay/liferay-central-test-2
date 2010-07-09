@@ -25,8 +25,6 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * <a href="ThreadHits.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ThreadHits {

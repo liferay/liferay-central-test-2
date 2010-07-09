@@ -25,8 +25,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 /**
- * <a href="MBDiscussionAssetRenderer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class MBDiscussionAssetRenderer extends MBMessageAssetRenderer {

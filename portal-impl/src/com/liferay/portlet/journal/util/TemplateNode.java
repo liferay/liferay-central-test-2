@@ -30,8 +30,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="TemplateNode.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  * @author Raymond Augé
  */

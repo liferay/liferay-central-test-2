@@ -21,8 +21,6 @@ import com.liferay.portlet.flags.messaging.FlagsRequest;
 import com.liferay.portlet.flags.service.base.FlagsEntryServiceBaseImpl;
 
 /**
- * <a href="FlagsEntryServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Julio Camarero
  */
 public class FlagsEntryServiceImpl extends FlagsEntryServiceBaseImpl {

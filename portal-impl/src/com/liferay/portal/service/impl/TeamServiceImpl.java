@@ -23,8 +23,6 @@ import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.TeamPermissionUtil;
 
 /**
- * <a href="TeamServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class TeamServiceImpl extends TeamServiceBaseImpl {

@@ -17,8 +17,6 @@ package com.liferay.portal.messaging.async;
 import java.util.Map;
 
 /**
- * <a href="AsyncAdviceConfigurator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class AsyncAdviceConfigurator {

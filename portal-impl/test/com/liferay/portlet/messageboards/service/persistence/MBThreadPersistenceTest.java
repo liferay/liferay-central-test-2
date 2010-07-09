@@ -27,8 +27,6 @@ import com.liferay.portlet.messageboards.model.MBThread;
 import java.util.List;
 
 /**
- * <a href="MBThreadPersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class MBThreadPersistenceTest extends BasePersistenceTestCase {

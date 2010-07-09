@@ -26,9 +26,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import java.util.List;
 
 /**
- * <a href="DebuggingClusterEventListenerImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Tina Tian
  */
 public class DebuggingClusterEventListenerImpl implements ClusterEventListener {

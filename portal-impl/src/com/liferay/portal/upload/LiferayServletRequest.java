@@ -21,8 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 /**
- * <a href="LiferayServletRequest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Myunghun Kim
  * @author Brian Wing Shun Chan
  */

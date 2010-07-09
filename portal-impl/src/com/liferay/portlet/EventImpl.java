@@ -23,8 +23,6 @@ import javax.portlet.Event;
 import javax.xml.namespace.QName;
 
 /**
- * <a href="EventImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class EventImpl implements Event {

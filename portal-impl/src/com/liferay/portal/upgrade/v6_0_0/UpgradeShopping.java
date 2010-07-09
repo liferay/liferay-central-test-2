@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.upgrade.v6_0_0.util.ShoppingItemTable;
 
 /**
- * <a href="UpgradeShopping.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class UpgradeShopping extends UpgradeProcess {

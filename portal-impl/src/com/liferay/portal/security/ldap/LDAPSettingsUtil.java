@@ -30,8 +30,6 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * <a href="LDAPSettingsUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Edward Han
  * @author Michael C. Han
  * @author Brian Wing Shun Chan

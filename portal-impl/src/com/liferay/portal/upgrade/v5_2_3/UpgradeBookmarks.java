@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.upgrade.v5_2_3.util.BookmarksEntryTable;
 
 /**
- * <a href="UpgradeBookmarks.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UpgradeBookmarks extends UpgradeProcess {

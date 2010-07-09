@@ -22,8 +22,6 @@ import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 import java.util.List;
 
 /**
- * <a href="VerifyCalendar.java.html"><b><i>View Source</i></b></a>
- *
  * @author Juan Fernández
  */
 public class VerifyCalendar extends VerifyProcess {

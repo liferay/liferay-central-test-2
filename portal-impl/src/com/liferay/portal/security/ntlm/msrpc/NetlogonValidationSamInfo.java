@@ -20,8 +20,6 @@ import jcifs.dcerpc.ndr.NdrObject;
 import jcifs.dcerpc.rpc;
 
 /**
- * <a href="NetlogonValidationSamInfo.java.html"><b><i>View Source</i></b></a>
- *
  * @author Marcellus Tavares
  */
 public class NetlogonValidationSamInfo extends NdrObject {

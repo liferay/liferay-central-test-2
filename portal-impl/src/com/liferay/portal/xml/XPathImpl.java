@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.xml.XPath;
 import java.util.List;
 
 /**
- * <a href="XPathImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class XPathImpl implements XPath {

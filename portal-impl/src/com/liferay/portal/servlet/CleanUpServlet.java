@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.util.ThreadLocalRegistry;
 import javax.servlet.http.HttpServlet;
 
 /**
- * <a href="CleanUpServlet.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class CleanUpServlet extends HttpServlet {

@@ -40,8 +40,6 @@ import org.xml.sax.InputSource;
 import org.xml.sax.helpers.AttributesImpl;
 
 /**
- * <a href="DiffHtmlImpl.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * This class can compare two different versions of HTML code. It detects
  * changes to an entire HTML page such as removal or addition of characters or

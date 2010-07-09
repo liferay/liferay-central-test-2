@@ -25,8 +25,6 @@ import com.liferay.portlet.BaseControlPanelEntry;
 import java.util.List;
 
 /**
- * <a href="UsersControlPanelEntry.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class UsersControlPanelEntry extends BaseControlPanelEntry {

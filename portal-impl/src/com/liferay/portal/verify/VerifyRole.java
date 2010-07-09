@@ -21,8 +21,6 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
 
 /**
- * <a href="VerifyRole.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class VerifyRole extends VerifyProcess {

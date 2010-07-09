@@ -25,8 +25,6 @@ import java.io.InputStream;
 import java.util.Date;
 
 /**
- * <a href="HookProxyImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class HookProxyImpl implements Hook {

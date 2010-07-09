@@ -36,8 +36,6 @@ import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import java.util.List;
 
 /**
- * <a href="DLFileEntryServiceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class DLFileEntryServiceTest extends BaseServiceTestCase {

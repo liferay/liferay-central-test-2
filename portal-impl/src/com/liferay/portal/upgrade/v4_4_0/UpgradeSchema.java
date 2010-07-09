@@ -17,8 +17,6 @@ package com.liferay.portal.upgrade.v4_4_0;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 
 /**
- * <a href="UpgradeSchema.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UpgradeSchema extends UpgradeProcess {

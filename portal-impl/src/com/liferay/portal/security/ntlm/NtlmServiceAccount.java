@@ -17,8 +17,6 @@ package com.liferay.portal.security.ntlm;
 import com.liferay.portal.kernel.util.StringPool;
 
 /**
- * <a href="NtlmServiceAccount.java.html"><b><i>View Source</i></b></a>
- *
  * @author Marcellus Tavares
  */
 public class NtlmServiceAccount {

@@ -21,8 +21,6 @@ import com.liferay.portal.model.Image;
 import java.io.InputStream;
 
 /**
- * <a href="DatabaseHook.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class DatabaseHook extends BaseHook {

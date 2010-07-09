@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.googleapps.GNicknameManager;
 import com.liferay.portal.kernel.googleapps.GUserManager;
 
 /**
- * <a href="GoogleApps.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class GoogleApps {

@@ -85,8 +85,6 @@ import javax.portlet.PreferencesValidator;
 import javax.servlet.ServletContext;
 
 /**
- * <a href="PortletBagFactory.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Brian Myunghun Kim
  * @author Ivica Cardic

@@ -19,9 +19,6 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.expando.model.BaseCustomAttributesDisplay;
 
 /**
- * <a href="BlogsEntryCustomAttributesDisplay.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Jorge Ferrer
  */
 public class BlogsEntryCustomAttributesDisplay

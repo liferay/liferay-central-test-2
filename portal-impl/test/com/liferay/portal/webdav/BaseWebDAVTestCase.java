@@ -34,8 +34,6 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 /**
- * <a href="BaseWebDAVTestCase.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class BaseWebDAVTestCase extends TestCase {

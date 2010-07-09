@@ -22,8 +22,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <a href="RouteImplTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Connor McKay
  */
 public class RouteImplTest extends BaseTestCase {

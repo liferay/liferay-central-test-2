@@ -17,8 +17,6 @@ package com.liferay.portlet.wiki.util;
 import com.liferay.portal.kernel.util.InitialThreadLocal;
 
 /**
- * <a href="WikiCacheThreadLocal.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class WikiCacheThreadLocal {

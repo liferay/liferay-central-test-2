@@ -45,8 +45,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * <a href="SharepointFilter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  */
 public class SharepointFilter extends BasePortalFilter {

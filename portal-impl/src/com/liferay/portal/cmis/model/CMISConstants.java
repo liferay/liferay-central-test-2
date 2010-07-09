@@ -19,8 +19,6 @@ import com.liferay.portal.util.PropsValues;
 import javax.xml.namespace.QName;
 
 /**
- * <a href="CMISConstants.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public abstract class CMISConstants {

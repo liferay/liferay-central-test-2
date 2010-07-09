@@ -26,9 +26,6 @@ import com.liferay.portlet.ratings.service.base.RatingsStatsLocalServiceBaseImpl
 import java.util.List;
 
 /**
- * <a href="RatingsStatsLocalServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class RatingsStatsLocalServiceImpl

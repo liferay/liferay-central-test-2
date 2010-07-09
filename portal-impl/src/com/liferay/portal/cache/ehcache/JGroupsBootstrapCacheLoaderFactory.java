@@ -19,9 +19,6 @@ import java.util.Properties;
 import net.sf.ehcache.bootstrap.BootstrapCacheLoader;
 
 /**
- * <a href="JGroupsBootstrapCacheLoaderFactory.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * <p>
  * See http://issues.liferay.com/browse/LPS-11061.
  * </p>

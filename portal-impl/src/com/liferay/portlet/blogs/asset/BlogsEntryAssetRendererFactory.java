@@ -32,9 +32,6 @@ import com.liferay.portlet.blogs.service.permission.BlogsPermission;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="BlogsEntryAssetRendererFactory.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Jorge Ferrer
  * @author Juan Fernández
  */

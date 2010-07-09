@@ -17,8 +17,6 @@ package com.liferay.portal.dao.orm.jpa;
 import com.liferay.portal.kernel.dao.orm.Dialect;
 
 /**
- * <a href="DialectImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Prashant Dighe
  * @author Brian Wing Shun Chan
  */

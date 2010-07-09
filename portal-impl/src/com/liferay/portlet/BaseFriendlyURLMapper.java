@@ -15,8 +15,6 @@
 package com.liferay.portlet;
 
 /**
- * <a href="BaseFriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
- *
  * @author	   Jorge Ferrer
  * @author	   Brian Wing Shun Chan
  * @deprecated This class has been repackaged at

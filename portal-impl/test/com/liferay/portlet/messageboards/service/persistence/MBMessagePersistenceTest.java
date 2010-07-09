@@ -27,8 +27,6 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import java.util.List;
 
 /**
- * <a href="MBMessagePersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class MBMessagePersistenceTest extends BasePersistenceTestCase {

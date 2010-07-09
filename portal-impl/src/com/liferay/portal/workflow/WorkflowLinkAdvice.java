@@ -20,8 +20,6 @@ import com.liferay.portal.service.WorkflowDefinitionLinkLocalServiceUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="WorkflowLinkAdvice.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class WorkflowLinkAdvice {

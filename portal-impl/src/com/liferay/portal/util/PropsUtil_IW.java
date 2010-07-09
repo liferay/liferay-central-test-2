@@ -15,8 +15,6 @@
 package com.liferay.portal.util;
 
 /**
- * <a href="PropsUtil_IW.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PropsUtil_IW {

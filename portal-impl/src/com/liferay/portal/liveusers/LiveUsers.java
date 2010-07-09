@@ -38,8 +38,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * <a href="LiveUsers.java.html"><b><i>View Source</i></b></a>
- *
  * @author Charles May
  * @author Brian Wing Shun Chan
  */

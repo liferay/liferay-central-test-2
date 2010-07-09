@@ -62,8 +62,6 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * <a href="WikiPageServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  * @author Raymond Augé

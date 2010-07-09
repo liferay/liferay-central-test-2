@@ -31,8 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <a href="CompanyWebDAVStorageImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class CompanyWebDAVStorageImpl extends BaseWebDAVStorageImpl {

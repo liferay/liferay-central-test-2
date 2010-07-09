@@ -34,8 +34,6 @@ import java.net.URL;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="TunnelUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class TunnelUtil {

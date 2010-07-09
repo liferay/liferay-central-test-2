@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 
 /**
- * <a href="BooleanClauseFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  */
 public class BooleanClauseFactoryImpl implements BooleanClauseFactory {

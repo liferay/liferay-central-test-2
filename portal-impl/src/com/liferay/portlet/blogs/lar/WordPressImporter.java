@@ -53,8 +53,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="WordPressImporter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class WordPressImporter {

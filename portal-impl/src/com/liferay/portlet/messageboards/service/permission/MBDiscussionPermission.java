@@ -27,8 +27,6 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import java.util.List;
 
 /**
- * <a href="MBDiscussionPermission.java.html"><b><i>View Source</i></b></a>
- *
  * @author Charles May
  */
 public class MBDiscussionPermission {

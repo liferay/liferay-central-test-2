@@ -44,9 +44,6 @@ import com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPe
 import javax.sql.DataSource;
 
 /**
- * <a href="AnnouncementsFlagServiceBaseImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public abstract class AnnouncementsFlagServiceBaseImpl extends PrincipalBean

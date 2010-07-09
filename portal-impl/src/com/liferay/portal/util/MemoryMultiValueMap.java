@@ -25,8 +25,6 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * <a href="MemoryMultiValueMap.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class MemoryMultiValueMap<K extends Serializable, V extends Serializable>

@@ -29,8 +29,6 @@ import java.util.TreeSet;
 import javax.servlet.ServletContext;
 
 /**
- * <a href="ExtRegistry.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ExtRegistry {

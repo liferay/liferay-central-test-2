@@ -15,8 +15,6 @@
 package com.liferay.portal.util;
 
 /**
- * <a href="PropsKeys.java.html"><b><i>View Source</i></b></a>
- *
  * @author	   Brian Wing Shun Chan
  * @deprecated Use {@link com.liferay.portal.kernel.util.PropsKeys}.
  */

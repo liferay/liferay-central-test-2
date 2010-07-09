@@ -37,8 +37,6 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
 /**
- * <a href="MonitoringPortlet.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  * @author Karthik Sudarshan
  */

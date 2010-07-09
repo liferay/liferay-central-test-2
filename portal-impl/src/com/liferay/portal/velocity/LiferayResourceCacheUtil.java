@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.cache.PortalCache;
 import org.apache.velocity.runtime.resource.Resource;
 
 /**
- * <a href="LiferayResourceCacheUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class LiferayResourceCacheUtil {

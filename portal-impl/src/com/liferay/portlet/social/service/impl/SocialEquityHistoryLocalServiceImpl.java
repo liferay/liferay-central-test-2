@@ -17,9 +17,6 @@ package com.liferay.portlet.social.service.impl;
 import com.liferay.portlet.social.service.base.SocialEquityHistoryLocalServiceBaseImpl;
 
 /**
- * <a href="SocialEquityHistoryLocalServiceImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Zsolt Berentey
  * @author Brian Wing Shun Chan
  */

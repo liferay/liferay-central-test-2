@@ -131,8 +131,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.mail.internet.InternetAddress;
 
 /**
- * <a href="UserLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Scott Lee
  * @author Raymond Augé

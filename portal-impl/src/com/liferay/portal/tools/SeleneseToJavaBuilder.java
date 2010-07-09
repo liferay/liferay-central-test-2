@@ -33,8 +33,6 @@ import java.util.Set;
 import org.apache.tools.ant.DirectoryScanner;
 
 /**
- * <a href="SeleneseToJavaBuilder.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class SeleneseToJavaBuilder {

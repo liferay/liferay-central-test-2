@@ -29,8 +29,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 /**
- * <a href="UploadPortletRequestImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Harry Mark
  */

@@ -25,8 +25,6 @@ import com.liferay.portal.service.http.TunnelUtil;
 import com.liferay.portlet.flags.service.FlagsEntryServiceUtil;
 
 /**
- * <a href="FlagsEntryServiceHttp.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
  * overwritten the next time is generated.

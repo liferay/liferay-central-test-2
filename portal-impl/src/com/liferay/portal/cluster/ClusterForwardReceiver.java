@@ -25,8 +25,6 @@ import org.jgroups.Message;
 import org.jgroups.View;
 
 /**
- * <a href="ClusterForwardReceiver.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class ClusterForwardReceiver extends BaseReceiver {

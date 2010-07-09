@@ -23,8 +23,6 @@ import com.liferay.portal.service.base.OrgLaborLocalServiceBaseImpl;
 import java.util.List;
 
 /**
- * <a href="OrgLaborLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class OrgLaborLocalServiceImpl extends OrgLaborLocalServiceBaseImpl {

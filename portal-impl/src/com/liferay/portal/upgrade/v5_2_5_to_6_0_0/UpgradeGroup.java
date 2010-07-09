@@ -24,8 +24,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 /**
- * <a href="UpgradeGroup.java.html"><b><i>View Source</i></b></a>
- *
  * @author Wesley Gong
  */
 public class UpgradeGroup extends UpgradeProcess {

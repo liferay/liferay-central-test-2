@@ -22,8 +22,6 @@ import java.io.Serializable;
 import java.util.Map;
 
 /**
- * <a href="PortalLDAPExporterUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Edward Han
  * @author Michael C. Han
  * @author Brian Wing Shun Chan

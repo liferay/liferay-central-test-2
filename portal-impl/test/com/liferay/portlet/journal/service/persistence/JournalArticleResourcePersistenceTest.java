@@ -26,9 +26,6 @@ import com.liferay.portlet.journal.model.JournalArticleResource;
 import java.util.List;
 
 /**
- * <a href="JournalArticleResourcePersistenceTest.java.html"><b><i>View Source
- * </i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class JournalArticleResourcePersistenceTest

@@ -26,8 +26,6 @@ import com.liferay.portal.service.http.TunnelUtil;
 import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
 
 /**
- * <a href="IGFolderServiceHttp.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
  * overwritten the next time is generated.

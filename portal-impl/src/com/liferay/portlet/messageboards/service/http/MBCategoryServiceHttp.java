@@ -27,8 +27,6 @@ import com.liferay.portal.service.http.TunnelUtil;
 import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
 
 /**
- * <a href="MBCategoryServiceHttp.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
  * overwritten the next time is generated.

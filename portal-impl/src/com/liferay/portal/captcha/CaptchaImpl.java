@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.util.PropsValues;
 
 /**
- * <a href="CaptchaImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class CaptchaImpl extends CaptchaWrapper {

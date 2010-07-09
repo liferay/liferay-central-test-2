@@ -28,8 +28,6 @@ import com.liferay.portal.upgrade.v4_3_0.util.WebIdUtil;
 import com.liferay.portal.util.PortletKeys;
 
 /**
- * <a href="UpgradeCompany.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  * @author Brian Wing Shun Chan
  */

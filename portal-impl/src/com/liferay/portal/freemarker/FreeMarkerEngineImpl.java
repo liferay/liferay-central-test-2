@@ -35,8 +35,6 @@ import java.io.IOException;
 import java.io.Writer;
 
 /**
- * <a href="FreeMarkerEngineImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Mika Koivisto
  */
 public class FreeMarkerEngineImpl implements FreeMarkerEngine {

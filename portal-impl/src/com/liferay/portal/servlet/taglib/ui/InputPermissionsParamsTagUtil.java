@@ -40,9 +40,6 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
 /**
- * <a href="InputPermissionsParamsTagUtil.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Chan
  * @author Jorge Ferrer
  */

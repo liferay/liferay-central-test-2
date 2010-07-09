@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.upgrade.v5_0_0.util.SCProductVersionTable;
 
 /**
- * <a href="UpgradeSoftwareCatalog.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UpgradeSoftwareCatalog extends UpgradeProcess {

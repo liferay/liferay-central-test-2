@@ -19,9 +19,6 @@ import net.spy.memcached.MemcachedClientIF;
 import org.apache.commons.pool.ObjectPool;
 
 /**
- * <a href="PooledMemcachedClientFactory.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Michael C. Han
  */
 public class PooledMemcachedClientFactory implements MemcachedClientFactory {

@@ -24,9 +24,6 @@ import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 import com.liferay.portlet.announcements.service.base.AnnouncementsDeliveryServiceBaseImpl;
 
 /**
- * <a href="AnnouncementsDeliveryServiceImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class AnnouncementsDeliveryServiceImpl

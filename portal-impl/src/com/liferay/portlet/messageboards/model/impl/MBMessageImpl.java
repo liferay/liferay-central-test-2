@@ -33,8 +33,6 @@ import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.util.BBCodeUtil;
 
 /**
- * <a href="MBMessageImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {

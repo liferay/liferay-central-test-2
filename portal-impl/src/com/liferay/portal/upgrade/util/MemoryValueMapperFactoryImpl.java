@@ -18,9 +18,6 @@ import com.liferay.portal.kernel.upgrade.util.ValueMapper;
 import com.liferay.portal.kernel.upgrade.util.ValueMapperFactory;
 
 /**
- * <a href="MemoryValueMapperFactoryImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class MemoryValueMapperFactoryImpl implements ValueMapperFactory {

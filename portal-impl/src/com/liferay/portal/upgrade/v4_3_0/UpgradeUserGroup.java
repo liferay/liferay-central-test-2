@@ -23,8 +23,6 @@ import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.UserGroupTable;
 
 /**
- * <a href="UpgradeUserGroup.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UpgradeUserGroup extends UpgradeProcess {

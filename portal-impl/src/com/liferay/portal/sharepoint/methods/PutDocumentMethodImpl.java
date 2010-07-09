@@ -25,8 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <a href="PutDocumentMethodImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  */
 public class PutDocumentMethodImpl extends BaseMethodImpl {

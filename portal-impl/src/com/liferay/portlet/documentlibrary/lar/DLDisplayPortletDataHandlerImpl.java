@@ -35,9 +35,6 @@ import java.util.Map;
 import javax.portlet.PortletPreferences;
 
 /**
- * <a href="DLDisplayPortletDataHandlerImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Raymond Augé
  */
 public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {

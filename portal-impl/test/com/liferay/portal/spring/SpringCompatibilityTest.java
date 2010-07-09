@@ -21,8 +21,6 @@ import java.lang.reflect.Field;
 import org.springframework.aop.framework.AdvisedSupport;
 
 /**
- * <a href="SpringCompatibilityTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class SpringCompatibilityTest extends BaseTestCase {

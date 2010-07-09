@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.cache.key.CacheKeyGenerator;
 import com.liferay.portal.kernel.util.StringBundler;
 
 /**
- * <a href="HashCodeCacheKeyGenerator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  * @author Shuyang Zhou
  */

@@ -22,8 +22,6 @@ import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import java.util.List;
 
 /**
- * <a href="VerifyBlogs.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class VerifyBlogs extends VerifyProcess {

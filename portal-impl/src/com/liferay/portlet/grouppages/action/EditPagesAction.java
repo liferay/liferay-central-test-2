@@ -21,8 +21,6 @@ import com.liferay.portal.util.WebKeys;
 import javax.portlet.PortletRequest;
 
 /**
- * <a href="EditPagesAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class EditPagesAction

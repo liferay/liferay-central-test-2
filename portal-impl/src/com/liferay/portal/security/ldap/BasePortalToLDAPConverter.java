@@ -43,8 +43,6 @@ import javax.naming.directory.BasicAttributes;
 import org.apache.commons.beanutils.PropertyUtils;
 
 /**
- * <a href="BasePortalToLDAPConverter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */

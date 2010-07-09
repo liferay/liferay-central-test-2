@@ -24,8 +24,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import javax.portlet.RenderResponse;
 
 /**
- * <a href="UserTeamChecker.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UserTeamChecker extends RowChecker {

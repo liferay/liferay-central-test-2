@@ -25,8 +25,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import java.io.IOException;
 
 /**
- * <a href="IngresDB.java.html"><b><i>View Source</i></b></a>
- *
  * @author David Maier
  */
 public class IngresDB extends BaseDB {

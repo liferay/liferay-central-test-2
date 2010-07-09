@@ -36,8 +36,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 /**
- * <a href="LiferayStrutsRequestImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael Young
  * @author Deepak Gothe
  */

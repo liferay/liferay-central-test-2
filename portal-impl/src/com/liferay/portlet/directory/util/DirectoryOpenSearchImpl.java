@@ -23,8 +23,6 @@ import com.liferay.portlet.enterpriseadmin.util.UserIndexer;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="DirectoryOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class DirectoryOpenSearchImpl extends HitsOpenSearchImpl {

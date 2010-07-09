@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.deploy.sandbox.BaseSandboxDeployListener;
 import java.io.File;
 
 /**
- * <a href="ThemeSandboxDeployListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Igor Spasic
  * @author Brian Wing Shun Chan
  */

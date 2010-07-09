@@ -62,8 +62,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 /**
- * <a href="BaseCommandReceiver.java.html"><b><i>View Source</i></b></a>
- *
  * @author Ivica Cardic
  */
 public abstract class BaseCommandReceiver implements CommandReceiver {

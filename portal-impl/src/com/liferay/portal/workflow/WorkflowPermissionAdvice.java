@@ -21,8 +21,6 @@ import com.liferay.portal.security.permission.PermissionThreadLocal;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="WorkflowPermissionAdvice.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class WorkflowPermissionAdvice {

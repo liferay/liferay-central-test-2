@@ -22,8 +22,6 @@ import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 
 /**
- * <a href="AssetVocabularyPermission.java.html"><b><i>View Source</i></b></a>
- *
  * @author Eduardo Lundgren
  * @author JorgeFerrer
  */

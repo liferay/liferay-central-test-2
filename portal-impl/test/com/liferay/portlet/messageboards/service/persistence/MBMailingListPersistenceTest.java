@@ -27,9 +27,6 @@ import com.liferay.portlet.messageboards.model.MBMailingList;
 import java.util.List;
 
 /**
- * <a href="MBMailingListPersistenceTest.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class MBMailingListPersistenceTest extends BasePersistenceTestCase {

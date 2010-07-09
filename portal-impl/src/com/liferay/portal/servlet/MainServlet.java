@@ -118,8 +118,6 @@ import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.tiles.TilesUtilImpl;
 
 /**
- * <a href="MainServlet.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  * @author Brian Myunghun Kim

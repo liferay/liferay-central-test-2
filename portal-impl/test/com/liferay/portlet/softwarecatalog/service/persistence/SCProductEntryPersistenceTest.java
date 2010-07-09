@@ -27,9 +27,6 @@ import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import java.util.List;
 
 /**
- * <a href="SCProductEntryPersistenceTest.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class SCProductEntryPersistenceTest extends BasePersistenceTestCase {

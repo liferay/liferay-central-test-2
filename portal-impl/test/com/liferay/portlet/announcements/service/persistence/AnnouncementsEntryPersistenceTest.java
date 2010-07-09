@@ -27,9 +27,6 @@ import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 import java.util.List;
 
 /**
- * <a href="AnnouncementsEntryPersistenceTest.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class AnnouncementsEntryPersistenceTest extends BasePersistenceTestCase {
