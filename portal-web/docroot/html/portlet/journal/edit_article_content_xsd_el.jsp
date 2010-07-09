@@ -158,9 +158,9 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 					</portlet:renderURL>
 
 					<%
-						Map<String,Object> data = new HashMap<String,Object>();
+					Map<String,Object> data = new HashMap<String,Object>();
 
-						data.put("ImagegalleryUrl", selectIGURL);
+					data.put("ImagegalleryUrl", selectIGURL);
 					%>
 
 					<aui:button cssClass="journal-imagegallery-button" data="<%= data %>" value="select" />
@@ -175,9 +175,9 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 					</portlet:renderURL>
 
 					<%
-						Map<String,Object> data = new HashMap<String,Object>();
+					Map<String,Object> data = new HashMap<String,Object>();
 
-						data.put("DocumentlibraryUrl", selectDLURL);
+					data.put("DocumentlibraryUrl", selectDLURL);
 					%>
 
 					<aui:button cssClass="journal-documentlibrary-button" data="<%= data %>" value="select" />
