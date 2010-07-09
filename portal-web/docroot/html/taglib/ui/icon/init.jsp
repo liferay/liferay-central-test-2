@@ -17,7 +17,7 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
+String id = (String)request.getAttribute("liferay-ui:icon:id");
 
 IntegerWrapper iconListIconCount = (IntegerWrapper)request.getAttribute("liferay-ui:icon-list:icon-count");
 

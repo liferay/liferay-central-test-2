@@ -14,6 +14,9 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +30,10 @@ public class IconTag extends IncludeTag {
 
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
+	}
+
+	public void setId(String id) {
+		_id = id;
 	}
 
 	public void setImage(String image) {
@@ -76,6 +83,7 @@ public class IconTag extends IncludeTag {
 	protected void cleanUp() {
 		_cssClass = null;
 		_image = null;
+		_id = null;
 		_imageHover = null;
 		_label = false;
 		_lang = null;
@@ -97,7 +105,15 @@ public class IconTag extends IncludeTag {
 	}
 
 	protected void setAttributes(HttpServletRequest request) {
+		String id = _id;
+
+		if (Validator.isNull(id)) {
+			id = PortalUtil.generateRandomKey(
+				request, IconTag.class.getName());
+		}
+
 		request.setAttribute("liferay-ui:icon:cssClass", _cssClass);
+		request.setAttribute("liferay-ui:icon:id", id);
 		request.setAttribute("liferay-ui:icon:image", _image);
 		request.setAttribute("liferay-ui:icon:imageHover", _imageHover);
 		request.setAttribute("liferay-ui:icon:label", String.valueOf(_label));
@@ -117,6 +133,7 @@ public class IconTag extends IncludeTag {
 	private static final String _PAGE = "/html/taglib/ui/icon/page.jsp";
 
 	private String _cssClass;
+	private String _id;
 	private String _image;
 	private String _imageHover;
 	private boolean _label;

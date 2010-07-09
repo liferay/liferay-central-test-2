@@ -117,7 +117,7 @@ boolean urlIsNotNull = Validator.isNotNull(url);
 		<li <%= cssClassHtml %>>
 			<c:choose>
 				<c:when test="<%= urlIsNotNull %>">
-					<aui:a cssClass="taglib-icon" href="<%= url %>" id="<%= randomId %>" lang="<%= lang %>" target="<%= target %>">
+					<aui:a cssClass="taglib-icon" href="<%= url %>" id="<%= id %>" lang="<%= lang %>" target="<%= target %>">
 						<%= linkContent %>
 					</aui:a>
 				</c:when>
@@ -131,7 +131,7 @@ boolean urlIsNotNull = Validator.isNotNull(url);
 		<li <%= cssClassHtml %>>
 			<c:choose>
 				<c:when test="<%= urlIsNotNull %>">
-					<aui:a href="<%= url %>" id="<%= randomId %>" lang="<%= lang %>" target="<%= target %>">
+					<aui:a href="<%= url %>" id="<%= id %>" lang="<%= lang %>" target="<%= target %>">
 						<%= linkContent %>
 					</aui:a>
 				</c:when>
@@ -145,7 +145,7 @@ boolean urlIsNotNull = Validator.isNotNull(url);
 		<span <%= cssClassHtml %> >
 			<c:choose>
 				<c:when test="<%= urlIsNotNull %>">
-					<aui:a cssClass="taglib-icon" href="<%= url %>" id="<%= randomId %>" lang="<%= lang %>" target="<%= target %>">
+					<aui:a cssClass="taglib-icon" href="<%= url %>" id="<%= id %>" lang="<%= lang %>" target="<%= target %>">
 						<%= linkContent %>
 					</aui:a>
 				</c:when>
@@ -163,7 +163,7 @@ boolean forcePost = method.equals("post") && (url.startsWith(Http.HTTP_WITH_SLAS
 
 <c:if test="<%= Validator.isNotNull(srcHover) || forcePost %>">
 	<aui:script use="aui-base">
-		var icon = A.one('#<portlet:namespace/><%= randomId %>');
+		var icon = A.one('#<portlet:namespace/><%= id %>');
 
 		<c:if test="<%= Validator.isNotNull(srcHover) %>">
 			if (icon) {
