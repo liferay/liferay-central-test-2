@@ -758,7 +758,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 		long expirationTime = 0;
 
 		if (lock.getExpirationDate() != null) {
-			expirationTime = lock.getExpirationDate().getTime();
+			Date expirationDate = lock.getExpirationDate();
+
+			expirationTime = expirationDate.getTime();
 		}
 
 		LockLocalServiceUtil.lock(
