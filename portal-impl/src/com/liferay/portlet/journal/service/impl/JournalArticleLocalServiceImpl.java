@@ -1145,8 +1145,8 @@ public class JournalArticleLocalServiceImpl
 
 		if (articles.size() == 0) {
 			throw new NoSuchArticleException(
-				"No approved article for groupId=" + groupId + " and " +
-					"articleId=" + articleId);
+				"No approved JournalArticle with the key {groupId=" + groupId +
+					", " + "articleId=" + articleId + "}");
 
 		}
 
@@ -1206,7 +1206,8 @@ public class JournalArticleLocalServiceImpl
 
 		if (articles.size() == 0) {
 			throw new NoSuchArticleException(
-				"No article for resourcePrimKey=" + resourcePrimKey);
+				"No JournalArticle with the key {resourcePrimKey=" +
+					resourcePrimKey + "}");
 		}
 
 		return articles.get(0);
@@ -1238,8 +1239,8 @@ public class JournalArticleLocalServiceImpl
 
 		if (articles.size() == 0) {
 			throw new NoSuchArticleException(
-				"No article for groupId=" + groupId + ", articleId=" +
-					articleId + " and status=" + status);
+				"No JournalArticle with the key {groupId=" + groupId +
+					", articleId=" + articleId + ", status=" + status + "}");
 		}
 
 		return articles.get(0);
@@ -1264,8 +1265,8 @@ public class JournalArticleLocalServiceImpl
 
 		if (articles.size() == 0) {
 			throw new NoSuchArticleException(
-				"No article for groupId=" + groupId + ", urlTitle=" + urlTitle +
-					" and status=" + status);
+				"No JournalArticle with the key {groupId=" + groupId +
+					", urlTitle=" + urlTitle + ", status=" + status + "}");
 		}
 
 		return articles.get(0);
