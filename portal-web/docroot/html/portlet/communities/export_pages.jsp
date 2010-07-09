@@ -327,14 +327,20 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 					</span>
 				</div>
 
-				<aui:fieldset cssClass="published-events aui-helper-hidden" label="scheduled-events">
+				<div class="aui-helper-hidden" id="<portlet:namespace />publishedEvents">
+					<liferay-ui:header title="scheduled-events" />
+
 					<div id="<portlet:namespace />scheduledPublishEventsDiv"></div>
-				</aui:fieldset>
+				</div>
+
+
 			</c:if>
 
 			<div id="<portlet:namespace />publishOptions">
 				<c:if test="<%= schedule %>">
-					<aui:input label="event-information" name="description" type="text" />
+					<liferay-ui:header title="new-event" />
+
+					<aui:input label="title" name="description" type="text" />
 				</c:if>
 
 				<liferay-ui:panel-container cssClass="export-pages-panel-container" extended="<%= true %>" persistState="<%= true %>">
@@ -403,7 +409,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 		var toolbarAddButton = A.one('#<portlet:namespace />exportPagesFm .add-button');
 		var addEventButton = A.one('#<portlet:namespace />addButton');
 
-		var allEvents = A.one('#<portlet:namespace />exportPagesFm .published-events');
+		var allEvents = A.one('#<portlet:namespace />publishedEvents');
 		var publishOptions = A.one('#<portlet:namespace />publishOptions');
 
 		toolbarViewButton.one('a').on(
