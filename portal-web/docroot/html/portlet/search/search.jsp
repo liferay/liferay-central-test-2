@@ -227,8 +227,8 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 				StringBundler rowSB = new StringBundler();
 
 				if (portlet.getPortletId().equals(PortletKeys.JOURNAL)) {
-					String articleId = GetterUtil.getString(HttpUtil.getParameter(entryHref, "articleId", false));
 
+					String articleId = el.elementText(OpenSearchUtil.getQName(Field.ENTRY_CLASS_PK, OpenSearchUtil.LIFERAY_NAMESPACE));
 					JournalArticle article = JournalArticleLocalServiceUtil.getArticle(entryGroupId, articleId);
 
 					if (DateUtil.compareTo(article.getDisplayDate(), new Date()) > 0) {

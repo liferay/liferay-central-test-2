@@ -143,8 +143,8 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 				double score = results.score(i);
 
 				addSearchResult(
-					root, resultGroupId, title, url, modifedDate, content, tags,
-					ratings, score, format);
+					root, resultGroupId, entryClassName, entryClassPK, title,
+					url, modifedDate, content, tags, ratings, score, format);
 			}
 
 			if (_log.isDebugEnabled()) {
