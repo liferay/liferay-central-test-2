@@ -117,6 +117,7 @@ public class GZipStream extends ServletOutputStream {
 
 	private void flushOutToOutputStream() throws IOException {
 		OutputStream outputStream = _response.getOutputStream();
+
 		outputStream.write(
 			_unsyncByteArrayOutputStream.unsafeGetByteArray(), 0,
 			_unsyncByteArrayOutputStream.size());
@@ -128,6 +129,7 @@ public class GZipStream extends ServletOutputStream {
 	private void flushOutToWriter() throws IOException {
 		WriterOutputStream writerOutputStream = new WriterOutputStream(
 			_response.getWriter());
+
 		writerOutputStream.write(
 			_unsyncByteArrayOutputStream.unsafeGetByteArray(), 0,
 			_unsyncByteArrayOutputStream.size());
