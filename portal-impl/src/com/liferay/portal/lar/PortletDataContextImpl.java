@@ -755,9 +755,15 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 		long userId = getUserId(lock.getUserUuid());
 
+		long expirationTime = 0;
+
+		if (lock.getExpirationDate() != null) {
+			expirationTime = lock.getExpirationDate().getTime();
+		}
+
 		LockLocalServiceUtil.lock(
 			userId, classObj.getName(), newKey, lock.getOwner(),
-			lock.getInheritable(), lock.getExpirationDate().getTime());
+			lock.getInheritable(), expirationTime);
 	}
 
 	public void importPermissions(
