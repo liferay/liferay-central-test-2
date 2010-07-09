@@ -97,6 +97,7 @@ WorkflowTask workflowTask = (WorkflowTask)row.getObject();
 
 		if (comments) {
 			form.append(comments);
+
 			comments.show();
 		}
 
@@ -112,7 +113,7 @@ WorkflowTask workflowTask = (WorkflowTask)row.getObject();
 					},
 					{
 						handler: function() {
-							this.close();
+							dialog.close();
 						},
 						text: '<liferay-ui:message key="cancel" />'
 					}
@@ -128,12 +129,10 @@ WorkflowTask workflowTask = (WorkflowTask)row.getObject();
 	A.all('.workflow-task-<%= randomId %> a').on(
 		'click',
 		function(event) {
-			var icon = event.currentTarget;
-			var li = icon.get('parentNode');
-
 			event.preventDefault();
 
-			title = icon.text();
+			var icon = event.currentTarget;
+			var title = icon.text();
 
 			showPopup(icon.attr('href'), title);
 		}
