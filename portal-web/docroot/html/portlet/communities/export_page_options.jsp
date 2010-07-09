@@ -17,41 +17,58 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
-long proposalId = ParamUtil.getLong(request, "proposalId");
-
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 Layout curLayout = (Layout)row.getObject();
 %>
 
-<div class="type" style="float: right; padding-right: 32px; text-align: center; width: 100px;">
-	<%= LanguageUtil.get(pageContext, StringUtil.replace(curLayout.getType(), "_", "-")) %>
-</div>
-
 <div class="layout">
-	<c:choose>
-		<c:when test="<%= proposalId <= 0 %>">
 
-			<%
-			String taglibHref = "javascript:Liferay.LayoutExporter.details({toggle: '#_detail_" + curLayout.getPlid() + "_toggle', detail: '#_detail_" + curLayout.getPlid() + "'});";
-			%>
+	<%
+	String taglibHref = "javascript:Liferay.LayoutExporter.details({toggle: '#" + renderResponse.getNamespace() + "_detail_" + curLayout.getPlid() + "_toggle img', detail: '#_detail_" + curLayout.getPlid() + "'});";
+	%>
 
-			<aui:a href="<%= taglibHref %>" style="text-decoration: none;" target="_self"><img align="absmiddle" border="0" id="_detail_<%= curLayout.getPlid() %>_toggle" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png" onmouseover="Liferay.Portal.ToolTip.show(this, '<%= UnicodeLanguageUtil.get(pageContext, "details") %>')" /> <%= curLayout.getName(locale) %></aui:a>
-		</c:when>
-		<c:otherwise>
-			<%= curLayout.getName(locale) %>
-		</c:otherwise>
-	</c:choose>
+	<em class='<%= curLayout.getAncestors().isEmpty() ? "aui-helper-hidden" : StringPool.BLANK %>' id="<portlet:namespace /><%= curLayout.getPlid() %>includeAncestor"><liferay-ui:message key="include-ancestor-pages" /></em>
+
+	<em class="aui-helper-hidden" id="<portlet:namespace /><%= curLayout.getPlid() %>deleteLivePage"><liferay-ui:message key="delete-live-page" /></em>
+
+	<em class='<%= curLayout.getChildren().isEmpty() ? "aui-helper-hidden" : StringPool.BLANK %>' id="<portlet:namespace /><%= curLayout.getPlid() %>includeChildren"><liferay-ui:message key="include-all-descendent-pages" /></em>
+
+	<liferay-ui:icon cssClass="nobr" id='<%= "_detail_" + curLayout.getPlid() + "_toggle" %>' image="../arrows/01_plus" label="<%= true %>" message="change" target="_self"  toolTip="options" url="<%= taglibHref %>" />
 </div>
 
-<c:if test="<%= proposalId <= 0 %>">
-	<div class="aui-helper-hidden export-layout-detail" id="_detail_<%= curLayout.getPlid() %>" style="border-top: 1px solid #CCC; margin-top: 4px; padding-top: 4px; width: 95%;">
-		<aui:input checked="<%= true %>" disabled="<%= true%>" inlineLabel="left" label="include-ancestor-pages-if-necessary" name='<%= "includeAncestors_" + curLayout.getPlid() %>' type="checkbox" value="1" />
+<div class="aui-helper-hidden export-layout-detail" id="_detail_<%= curLayout.getPlid() %>" style="border-top: 1px solid #CCC; margin-top: 4px; padding-top: 4px; width: 95%;">
+	<c:if test="<%= !curLayout.getAncestors().isEmpty() %>">
+		<aui:input checked="<%= true %>" disabled="<%= true %>" label="include-ancestor-pages" name='<%= "includeAncestors_" + curLayout.getPlid() %>' type="checkbox" value="1" />
+	</c:if>
 
-		<aui:input inlineLabel="left" label="delete-live-page" name='<%= "delete_" + curLayout.getPlid() %>' type="checkbox" />
+	<aui:input label="delete-live-page" name='<%= "delete_" + curLayout.getPlid() %>' type="checkbox" />
 
-		<c:if test="<%= !curLayout.getChildren().isEmpty() %>">
-			<aui:input label="include-all-descendent-pages" name='<%= "includeChildren_" + curLayout.getPlid() %>' type="checkbox" value="1" />
-		</c:if>
-	</div>
-</c:if>
+	<c:if test="<%= !curLayout.getChildren().isEmpty() %>">
+		<aui:input label="include-all-descendent-pages" name='<%= "includeChildren_" + curLayout.getPlid() %>' type="checkbox" value="1" />
+	</c:if>
+</div>
+
+<aui:script use="aui-base">
+	<c:if test="<%= !curLayout.getAncestors().isEmpty() %>">
+		A.one('#<portlet:namespace />includeAncestors_<%= curLayout.getPlid() %>Checkbox').on(
+			'change', function (event) {
+				A.one('#<portlet:namespace /><%= curLayout.getPlid() %>includeAncestor').toggle();
+			}
+		);
+	</c:if>
+
+	A.one('#<portlet:namespace />delete_<%= curLayout.getPlid() %>Checkbox').on(
+		'change', function (event) {
+			A.one('#<portlet:namespace /><%= curLayout.getPlid() %>deleteLivePage').toggle();
+		}
+	);
+
+	<c:if test="<%= !curLayout.getChildren().isEmpty() %>">
+		A.one('#<portlet:namespace />includeChildren_<%= curLayout.getPlid() %>Checkbox').on(
+			'change', function (event) {
+				A.one('#<portlet:namespace /><%= curLayout.getPlid() %>includeChildren').toggle();
+			}
+		);
+	</c:if>
+</aui:script>

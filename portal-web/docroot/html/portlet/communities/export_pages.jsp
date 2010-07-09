@@ -203,19 +203,9 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 %>
 
 <style type="text/css">
-	#<portlet:namespace />pane th.col-1 {
-		width: 3%;
-	}
-
-	#<portlet:namespace />pane th.col-2 {
+	#<portlet:namespace />pane th.col-3 {
 		text-align: left;
 		width: 74%;
-	}
-
-	#<portlet:namespace />pane th.col-3 {
-		padding-right: 40px;
-		text-align: center;
-		width: 23%;
 	}
 
 	#<portlet:namespace />pane td.col-1 {
@@ -423,7 +413,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 
 		addEventButton.on(
 			'click', function(event) {
-				<%= renderResponse.getNamespace() %>schedulePublishEvent();
+				<portlet:namespace />schedulePublishEvent();
 
 				toolbarViewButton.addClass('current');
 				toolbarAddButton.removeClass('current');

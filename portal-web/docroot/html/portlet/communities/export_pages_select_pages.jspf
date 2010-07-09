@@ -45,6 +45,11 @@
 	List<String> headerNames = new ArrayList<String>();
 
 	headerNames.add("pages");
+
+	if (proposalId <= 0) {
+		headerNames.add("options");
+	}
+
 	headerNames.add("type");
 
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, total, portletURL, headerNames, "there-are-no-selected-pages");
@@ -60,7 +65,13 @@
 
 		ResultRow row = new ResultRow(curLayout, curLayout.getPrimaryKey(), i);
 
-		row.addJSP("left", "top", 2, "/html/portlet/communities/export_page_options.jsp");
+		row.addText("left", "top", curLayout.getName(locale));
+
+		if (proposalId <= 0) {
+			row.addJSP("left", "top", 1, "/html/portlet/communities/export_page_options.jsp");
+		}
+
+		row.addText("left", "top", LanguageUtil.get(pageContext, StringUtil.replace(curLayout.getType(), "_", "-")));
 
 		resultRows.add(row);
 	}
