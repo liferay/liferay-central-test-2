@@ -264,7 +264,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 							<aui:model-context bean="<%= message %>" model="<%= MBMessage.class %>" />
 
 							<div>
-								<aui:workflow-status status="<%= message.getStatus() %>" />
+								<aui:workflow-status model="<%= MBDiscussion.class %>" status="<%= message.getStatus() %>" />
 							</div>
 						</c:if>
 

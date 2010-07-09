@@ -1334,8 +1334,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		serviceContext.setAttribute("update", Boolean.TRUE.toString());
 
 		WorkflowHandlerRegistryUtil.startWorkflowInstance(
-			companyId, message.getGroupId(), userId, MBMessage.class.getName(),
-			message.getMessageId(), message, serviceContext);
+			companyId, message.getGroupId(), userId,
+			message.getWorkflowClassName(), message.getMessageId(), message,
+			serviceContext);
 
 		return message;
 	}
