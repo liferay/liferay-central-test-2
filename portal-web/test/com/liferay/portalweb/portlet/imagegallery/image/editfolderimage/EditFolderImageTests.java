@@ -20,8 +20,6 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="EditFolderImageTests.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class EditFolderImageTests extends BaseTests {

@@ -20,9 +20,6 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="ViewCategoryMessageRecentPostsTests.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ViewCategoryMessageRecentPostsTests extends BaseTests {

@@ -20,9 +20,6 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="AddUserPhoneNumberNumberInvalidTests.java.html"><b><i>View Source
- * </i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class AddUserPhoneNumberNumberInvalidTests extends BaseTests {

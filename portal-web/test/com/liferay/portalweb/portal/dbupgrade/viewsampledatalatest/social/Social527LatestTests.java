@@ -23,8 +23,6 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="Social527LatestTests.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class Social527LatestTests extends BaseTests {

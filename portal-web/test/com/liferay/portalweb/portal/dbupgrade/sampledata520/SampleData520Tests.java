@@ -33,8 +33,6 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="SampleData520Tests.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class SampleData520Tests extends BaseTests {

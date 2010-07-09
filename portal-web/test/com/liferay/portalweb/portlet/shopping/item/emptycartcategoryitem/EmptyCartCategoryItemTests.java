@@ -20,8 +20,6 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="EmptyCartCategoryItemTests.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class EmptyCartCategoryItemTests extends BaseTests {

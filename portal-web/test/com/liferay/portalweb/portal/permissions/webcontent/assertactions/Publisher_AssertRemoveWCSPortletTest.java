@@ -18,9 +18,6 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="Publisher_AssertRemoveWCSPortletTest.java.html"><b><i>View Source
- * </i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class Publisher_AssertRemoveWCSPortletTest extends BaseTestCase {

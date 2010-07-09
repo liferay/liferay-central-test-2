@@ -21,8 +21,6 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="Expando523LatestTests.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class Expando523LatestTests extends BaseTests {

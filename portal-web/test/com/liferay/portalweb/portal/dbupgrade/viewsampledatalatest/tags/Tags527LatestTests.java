@@ -21,8 +21,6 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="Tags527LatestTests.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class Tags527LatestTests extends BaseTests {

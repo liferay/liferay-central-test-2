@@ -24,8 +24,6 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="Shopping512LatestTests.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class Shopping512LatestTests extends BaseTests {

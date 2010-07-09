@@ -21,9 +21,6 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="PortalWebManagePagesTestSuite.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PortalWebManagePagesTestSuite extends BaseTests {

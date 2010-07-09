@@ -21,9 +21,6 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="AnnouncementsDelivery510LatestTests.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class AnnouncementsDelivery510LatestTests extends BaseTests {

@@ -17,8 +17,6 @@ package com.liferay.portalweb.portal.permissions.blogs.portlet;
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="Portlet_EndControlPanelTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class Portlet_EndControlPanelTest extends BaseTestCase {

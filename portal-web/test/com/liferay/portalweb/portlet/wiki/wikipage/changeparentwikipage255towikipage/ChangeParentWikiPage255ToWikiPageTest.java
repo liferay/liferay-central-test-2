@@ -18,9 +18,6 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="ChangeParentWikiPage255ToWikiPageTest.java.html"><b><i>View Source
- * </i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ChangeParentWikiPage255ToWikiPageTest extends BaseTestCase {

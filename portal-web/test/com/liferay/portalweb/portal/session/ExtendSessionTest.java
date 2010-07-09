@@ -17,8 +17,6 @@ package com.liferay.portalweb.portal.session;
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="ExtendSessionTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ExtendSessionTest extends BaseTestCase {

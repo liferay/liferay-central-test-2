@@ -18,8 +18,6 @@ import com.thoughtworks.selenium.CommandProcessor;
 import com.thoughtworks.selenium.DefaultSelenium;
 
 /**
- * <a href="LiferayDefaultSelenium.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class LiferayDefaultSelenium

@@ -17,8 +17,6 @@ package com.liferay.portalweb.portal.staging.webcontentdisplay;
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="EndControlPanelTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class EndControlPanelTest extends BaseTestCase {

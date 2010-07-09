@@ -17,9 +17,6 @@ package com.liferay.portalweb.portal.cluster.cluster1;
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="N1_AssertRefreshMBContentTest.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class N1_AssertRefreshMBContentTest extends BaseTestCase {

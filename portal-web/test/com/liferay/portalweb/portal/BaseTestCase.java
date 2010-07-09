@@ -19,8 +19,6 @@ import com.liferay.portalweb.portal.util.LiferaySeleneseTestCase;
 import com.liferay.portalweb.portal.util.SeleniumUtil;
 
 /**
- * <a href="BaseTestCase.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class BaseTestCase extends LiferaySeleneseTestCase {

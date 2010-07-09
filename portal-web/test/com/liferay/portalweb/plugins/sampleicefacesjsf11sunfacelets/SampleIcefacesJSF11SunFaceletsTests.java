@@ -20,9 +20,6 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="SampleIcefacesJSF11SunFaceletsTests.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class SampleIcefacesJSF11SunFaceletsTests extends BaseTests {

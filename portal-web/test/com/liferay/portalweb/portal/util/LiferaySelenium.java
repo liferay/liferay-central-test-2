@@ -17,8 +17,6 @@ package com.liferay.portalweb.portal.util;
 import com.thoughtworks.selenium.Selenium;
 
 /**
- * <a href="LiferaySelenium.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface LiferaySelenium extends Selenium {
