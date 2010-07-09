@@ -7,8 +7,17 @@
 
 	<taskdef classname="com.oopsconsultancy.xmltask.ant.XmlTask" classpathref="lib.classpath" name="xmltask" />
 
-	<property name="gpg.executable" value="gpg${file.suffix.exe}" />
-	<property name="maven.executable" value="mvn${file.suffix.bat}" />
+	<condition property="gpg.extension" value=".exe" else="">
+		<contains string="${os.name}" substring="Windows" casesensitive="false" />
+	</condition>
+
+	<property name="gpg.executable" value="gpg${gpg.extension}" />
+
+	<condition property="maven.extension" value=".bat" else="">
+		<contains string="${os.name}" substring="Windows" casesensitive="false" />
+	</condition>
+
+	<property name="maven.executable" value="mvn${maven.extension}" />
 
 	<target name="deploy-artifact">
 		<copy file="tools/maven/${artifact.id}.xml" tofile="tools/maven/${artifact.id}.pom">
