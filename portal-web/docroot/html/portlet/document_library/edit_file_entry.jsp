@@ -298,15 +298,15 @@ portletURL.setParameter("name", name);
 		}
 		%>
 
-		<c:if test="<%= pending %>">
-			<div class="portlet-msg-info">
-				<liferay-ui:message key="there-is-a-publication-workflow-in-process" />
-			</div>
-		</c:if>
-
 		<c:if test="<%= approved %>">
 			<div class="portlet-msg-info">
 				<liferay-ui:message key="a-new-version-will-be-created-automatically-if-this-content-is-modified" />
+			</div>
+		</c:if>
+
+		<c:if test="<%= pending %>">
+			<div class="portlet-msg-info">
+				<liferay-ui:message key="there-is-a-publication-workflow-in-process" />
 			</div>
 		</c:if>
 
