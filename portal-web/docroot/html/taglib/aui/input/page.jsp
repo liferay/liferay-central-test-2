@@ -22,6 +22,7 @@
 Object bean = (Object)request.getAttribute("aui:input:bean");
 boolean changesContext = GetterUtil.getBoolean((String)request.getAttribute("aui:input:changesContext"));
 boolean checked = GetterUtil.getBoolean((String)request.getAttribute("aui:input:checked"));
+long classPK = GetterUtil.getLong((String)request.getAttribute("aui:input:classPK"));
 String cssClass = GetterUtil.getString((String)request.getAttribute("aui:input:cssClass"));
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("aui:input:disabled"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:input:dynamicAttributes");
@@ -132,14 +133,14 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 	<c:when test='<%= (model != null) && type.equals("assetCategories") %>'>
 		<liferay-ui:asset-categories-selector
 			className="<%= model.getName() %>"
-			classPK="<%= _getClassPK(bean, dynamicAttributes) %>"
+			classPK='<%= _getClassPK(bean, classPK) %>'
 			contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
 		/>
 	</c:when>
 	<c:when test='<%= (model != null) && type.equals("assetTags") %>'>
 		<liferay-ui:asset-tags-selector
 			className="<%= model.getName() %>"
-			classPK="<%= _getClassPK(bean, dynamicAttributes) %>"
+			classPK='<%= _getClassPK(bean, classPK) %>'
 			contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
 		/>
 	</c:when>
@@ -279,13 +280,8 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 </c:if>
 
 <%!
-private long _getClassPK(Object bean, Map<String, Object> dynamicAttributes) {
-	long classPK = 0;
-
-	if (dynamicAttributes.get("classPK") != null) {
-		classPK = (Long)dynamicAttributes.get("classPK");
-	}
-	else if (bean != null) {
+private long _getClassPK(Object bean, long classPK) {
+	if (classPK <= 0 && bean != null) {
 		if (bean instanceof BaseModel) {
 			BaseModel baseModel = (BaseModel)bean;
 

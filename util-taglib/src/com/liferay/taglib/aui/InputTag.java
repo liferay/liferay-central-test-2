@@ -42,6 +42,10 @@ public class InputTag extends IncludeTag {
 		_checked = checked;
 	}
 
+	public void setClassPK(long classPK) {
+		_classPK = classPK;
+	}
+
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
 	}
@@ -122,6 +126,7 @@ public class InputTag extends IncludeTag {
 		_bean = null;
 		_changesContext = false;
 		_checked = false;
+		_classPK = 0;
 		_cssClass = null;
 		_disabled = false;
 		_field = null;
@@ -192,6 +197,7 @@ public class InputTag extends IncludeTag {
 		request.setAttribute(
 			"aui:input:changesContext", String.valueOf(_changesContext));
 		request.setAttribute("aui:input:checked", String.valueOf(_checked));
+		request.setAttribute("aui:input:classPK", String.valueOf(_classPK));
 		request.setAttribute("aui:input:cssClass", _cssClass);
 		request.setAttribute("aui:input:disabled", String.valueOf(_disabled));
 		request.setAttribute(
@@ -223,6 +229,7 @@ public class InputTag extends IncludeTag {
 	private Object _bean;
 	private boolean _changesContext;
 	private boolean _checked;
+	private long _classPK;
 	private String _cssClass;
 	private boolean _disabled;
 	private String _field;
