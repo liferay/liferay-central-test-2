@@ -154,6 +154,13 @@
 
 		<antcall target="jar-sources" />
 
+		<replace
+			dir="support-maven"
+			includes="**/pom.xml"
+			token="${lp.version}-SNAPSHOT"
+			value="${lp.version}"
+		/>
+
 		<antcall target="deploy-artifacts">
 			<param name="maven.repository.id" value="sonatype-staging" />
 			<param name="maven.url" value="http://oss.sonatype.org/service/local/staging/deploy/maven2" />
