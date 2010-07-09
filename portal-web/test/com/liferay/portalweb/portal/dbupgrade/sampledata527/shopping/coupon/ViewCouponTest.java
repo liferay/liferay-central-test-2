@@ -59,7 +59,7 @@ public class ViewCouponTest extends BaseTestCase {
 		assertEquals("Coupon Test", selenium.getValue("_34_name"));
 		assertEquals("This is a coupon test.",
 			selenium.getValue("_34_description"));
-		assertEquals("$0.00", selenium.getValue("_34_minOrder"));
+		assertEquals("0.00", selenium.getValue("_34_minOrder"));
 		assertEquals("0.50", selenium.getValue("_34_discount"));
 		assertEquals("Percentage", selenium.getSelectedLabel("_34_discountType"));
 	}
