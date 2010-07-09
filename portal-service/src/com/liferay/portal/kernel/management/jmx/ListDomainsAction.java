@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.management.jmx;
 import javax.management.MBeanServer;
 
 /**
- * <a href="ListDomainsAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class ListDomainsAction extends BaseJMXManageAction {

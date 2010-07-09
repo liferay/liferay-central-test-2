@@ -17,8 +17,6 @@ package com.liferay.portlet.blogs.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
- * <a href="BlogsStatsUserFinderUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class BlogsStatsUserFinderUtil {

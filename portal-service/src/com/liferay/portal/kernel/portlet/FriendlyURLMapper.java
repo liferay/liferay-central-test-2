@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.portlet;
 import java.util.Map;
 
 /**
- * <a href="FriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
- *
  * Provides custom URL mapping for a portlet.
  *
  * <p>

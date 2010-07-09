@@ -20,9 +20,6 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * <a href="GlobalDestinationEventListener.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Michael C. Han
  */
 public class GlobalDestinationEventListener

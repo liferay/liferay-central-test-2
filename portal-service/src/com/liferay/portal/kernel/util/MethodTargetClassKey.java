@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.util;
 import java.lang.reflect.Method;
 
 /**
- * <a href="MethodTargetClassKey.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  */

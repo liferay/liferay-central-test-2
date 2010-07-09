@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.util;
 import com.liferay.portal.kernel.test.TestCase;
 
 /**
- * <a href="PrimitiveLongListTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class PrimitiveLongListTest extends TestCase {

@@ -15,8 +15,6 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 /**
- * <a href="MBCategoryFinder.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface MBCategoryFinder {

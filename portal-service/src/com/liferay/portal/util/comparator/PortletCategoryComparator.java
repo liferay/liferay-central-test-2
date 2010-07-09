@@ -23,8 +23,6 @@ import java.util.Comparator;
 import java.util.Locale;
 
 /**
- * <a href="PortletCategoryComparator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PortletCategoryComparator

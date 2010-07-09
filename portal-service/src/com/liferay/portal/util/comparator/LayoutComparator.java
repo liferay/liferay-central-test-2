@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Layout;
 
 /**
- * <a href="LayoutComparator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class LayoutComparator extends OrderByComparator {

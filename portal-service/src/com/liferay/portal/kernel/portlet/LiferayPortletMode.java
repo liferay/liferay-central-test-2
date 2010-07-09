@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.portlet;
 import javax.portlet.PortletMode;
 
 /**
- * <a href="LiferayPortletMode.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class LiferayPortletMode extends PortletMode {

@@ -23,8 +23,6 @@ import java.net.NetworkInterface;
 import java.util.Enumeration;
 
 /**
- * <a href="InetAddressUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  * @author Shuyang Zhou
  */

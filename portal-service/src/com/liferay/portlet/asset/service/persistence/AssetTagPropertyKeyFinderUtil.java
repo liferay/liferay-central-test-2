@@ -17,9 +17,6 @@ package com.liferay.portlet.asset.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
- * <a href="AssetTagPropertyKeyFinderUtil.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class AssetTagPropertyKeyFinderUtil {

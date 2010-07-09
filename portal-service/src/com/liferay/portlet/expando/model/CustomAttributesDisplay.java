@@ -17,8 +17,6 @@ package com.liferay.portlet.expando.model;
 import com.liferay.portal.theme.ThemeDisplay;
 
 /**
- * <a href="CustomAttributesDisplay.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public interface CustomAttributesDisplay {

@@ -25,8 +25,6 @@ import javax.naming.Context;
 import javax.naming.NamingException;
 
 /**
- * <a href="JNDIUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Sandeep Soni
  */

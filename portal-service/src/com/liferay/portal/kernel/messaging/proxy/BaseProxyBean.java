@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMessageSender;
 
 /**
- * <a href="BaseProxyBean.java.html"><b><i>View Source</i></b></a>
- *
  * @author Micha Kiener
  * @author Michael C. Han
  * @author Brian Wing Shun Chan

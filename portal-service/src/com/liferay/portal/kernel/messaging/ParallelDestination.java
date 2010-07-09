@@ -20,8 +20,6 @@ import java.util.Set;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
- * <a href="ParallelDestination.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * Destination that delivers a message to a list of message listeners in
  * parallel.

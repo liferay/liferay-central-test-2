@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.xml;
 
 /**
- * <a href="Text.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface Text extends Node {

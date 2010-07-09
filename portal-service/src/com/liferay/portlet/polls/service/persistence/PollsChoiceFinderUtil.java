@@ -17,8 +17,6 @@ package com.liferay.portlet.polls.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
- * <a href="PollsChoiceFinderUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PollsChoiceFinderUtil {

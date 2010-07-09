@@ -17,9 +17,6 @@ package com.liferay.portlet;
 import com.liferay.portal.kernel.util.InitialThreadLocal;
 
 /**
- * <a href="PortletPreferencesThreadLocal.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PortletPreferencesThreadLocal {

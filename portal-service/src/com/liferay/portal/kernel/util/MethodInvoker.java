@@ -27,8 +27,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="MethodInvoker.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Harry Mark
  * @author Shuyang Zhou

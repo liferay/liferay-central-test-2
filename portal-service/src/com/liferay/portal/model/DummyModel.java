@@ -15,8 +15,6 @@
 package com.liferay.portal.model;
 
 /**
- * <a href="DummyModel.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface DummyModel extends BaseModel<Dummy> {

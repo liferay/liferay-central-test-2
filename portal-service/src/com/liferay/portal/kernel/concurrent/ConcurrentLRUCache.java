@@ -22,8 +22,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
- * <a href="ConcurrentLRUCache.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class ConcurrentLRUCache<K, V> {

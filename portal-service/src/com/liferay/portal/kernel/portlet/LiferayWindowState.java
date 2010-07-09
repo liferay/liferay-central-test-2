@@ -21,8 +21,6 @@ import javax.portlet.WindowState;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="LiferayWindowState.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Zsolt Balogh
  */

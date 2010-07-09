@@ -15,9 +15,6 @@
 package com.liferay.portal;
 
 /**
- * <a href="NoSuchBrowserTrackerException.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class NoSuchBrowserTrackerException extends NoSuchModelException {

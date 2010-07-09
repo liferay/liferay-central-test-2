@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.memory;
 
 /**
- * <a href="FinalizeAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public interface FinalizeAction {

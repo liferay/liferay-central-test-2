@@ -17,9 +17,6 @@ package com.liferay.portal.kernel.cache.cluster;
 import java.util.List;
 
 /**
- * <a href="PortalCacheClusterChannelSelector.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Shuyang Zhou
  */
 public interface PortalCacheClusterChannelSelector {

@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.audit;
 import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 
 /**
- * <a href="AuditRequestThreadLocal.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class AuditRequestThreadLocal {

@@ -27,8 +27,6 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
- * <a href="ClusterRequest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Tina Tian
  */
 public class ClusterRequest implements Serializable {

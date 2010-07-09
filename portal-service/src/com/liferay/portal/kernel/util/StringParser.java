@@ -21,8 +21,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * <a href="StringParser.java.html"><b><i>View Source</i></b></a>
- *
  * Parses strings into parameter maps and vice versa.
  *
  * @author Connor McKay

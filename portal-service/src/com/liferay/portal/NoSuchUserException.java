@@ -15,8 +15,6 @@
 package com.liferay.portal;
 
 /**
- * <a href="NoSuchUserException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class NoSuchUserException extends NoSuchModelException {

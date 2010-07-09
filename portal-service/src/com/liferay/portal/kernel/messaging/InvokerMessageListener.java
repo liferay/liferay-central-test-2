@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.messaging;
 
 /**
- * <a href="InvokerMessageListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class InvokerMessageListener implements MessageListener {

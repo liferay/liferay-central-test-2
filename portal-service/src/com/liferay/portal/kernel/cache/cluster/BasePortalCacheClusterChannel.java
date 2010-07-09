@@ -22,9 +22,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * <a href="BasePortalCacheClusterChannel.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Shuyang Zhou
  */
 public abstract class BasePortalCacheClusterChannel

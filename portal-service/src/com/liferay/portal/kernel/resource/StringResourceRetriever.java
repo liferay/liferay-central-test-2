@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import java.io.InputStream;
 
 /**
- * <a href="StringResourceRetriever.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class StringResourceRetriever implements ResourceRetriever {

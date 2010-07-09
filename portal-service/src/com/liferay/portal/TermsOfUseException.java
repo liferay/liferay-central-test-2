@@ -17,8 +17,6 @@ package com.liferay.portal;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * <a href="TermsOfUseException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Amos Fong
  */
 public class TermsOfUseException extends PortalException {

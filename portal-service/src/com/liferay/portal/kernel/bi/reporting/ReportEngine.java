@@ -19,8 +19,6 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 
 /**
- * <a href="ReportEngine.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public interface ReportEngine {

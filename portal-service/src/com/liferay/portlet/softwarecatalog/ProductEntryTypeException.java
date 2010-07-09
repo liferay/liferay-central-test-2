@@ -17,8 +17,6 @@ package com.liferay.portlet.softwarecatalog;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * <a href="ProductEntryTypeException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class ProductEntryTypeException extends PortalException {

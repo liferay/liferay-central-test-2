@@ -21,8 +21,6 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 /**
- * <a href="QueryPos.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
  */

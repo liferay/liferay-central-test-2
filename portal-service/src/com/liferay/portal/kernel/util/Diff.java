@@ -19,8 +19,6 @@ import java.io.Reader;
 import java.util.List;
 
 /**
- * <a href="Diff.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  * @see	   com.liferay.portal.kernel.util.DiffUtil
  */

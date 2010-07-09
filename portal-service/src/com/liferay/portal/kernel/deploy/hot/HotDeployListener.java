@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.deploy.hot;
 
 /**
- * <a href="HotDeployListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Ivica Cardic
  * @author Brian Wing Shun Chan
  */

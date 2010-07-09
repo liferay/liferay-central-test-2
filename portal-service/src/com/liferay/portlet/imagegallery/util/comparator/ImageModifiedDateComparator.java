@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.imagegallery.model.IGImage;
 
 /**
- * <a href="ImageModifiedDateComparator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ImageModifiedDateComparator extends OrderByComparator {

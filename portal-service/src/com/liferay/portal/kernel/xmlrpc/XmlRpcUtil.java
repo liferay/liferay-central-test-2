@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.xmlrpc;
 
 /**
- * <a href="XmlRpcUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class XmlRpcUtil {

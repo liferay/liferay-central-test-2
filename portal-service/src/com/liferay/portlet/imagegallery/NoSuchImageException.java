@@ -17,8 +17,6 @@ package com.liferay.portlet.imagegallery;
 import com.liferay.portal.NoSuchModelException;
 
 /**
- * <a href="NoSuchImageException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class NoSuchImageException extends NoSuchModelException {

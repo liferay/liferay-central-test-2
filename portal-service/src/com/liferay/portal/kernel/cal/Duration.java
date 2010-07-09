@@ -49,8 +49,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import java.io.Serializable;
 
 /**
- * <a href="Duration.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jonathan Lennox
  */
 public class Duration implements Cloneable, Serializable {

@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.deploy.sandbox;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * <a href="SandboxDeployException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Igor Spasic
  * @author Brian Wing Shun Chan
  */

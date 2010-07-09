@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.upgrade.util;
 
 /**
- * <a href="UpgradeTableFactory.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface UpgradeTableFactory {

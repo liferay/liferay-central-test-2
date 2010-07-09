@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.concurrent;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 
 /**
- * <a href="CompeteLatch.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * A synchronizer based on the JDK's AQS framework to simulate a single winner
  * competition. This synchronizer supports cyclical competition. In this

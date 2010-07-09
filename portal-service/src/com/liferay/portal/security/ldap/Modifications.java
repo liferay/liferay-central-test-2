@@ -24,8 +24,6 @@ import javax.naming.directory.DirContext;
 import javax.naming.directory.ModificationItem;
 
 /**
- * <a href="Modifications.java.html"><b><i>View Source</i></b></a>
- *
  * @author Amos Fong
  * @author Brian Wing Shun Chan
  */

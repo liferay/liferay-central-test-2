@@ -20,8 +20,6 @@ import com.liferay.portal.model.Team;
 import com.liferay.portal.security.permission.PermissionChecker;
 
 /**
- * <a href="TeamPermission.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface TeamPermission {

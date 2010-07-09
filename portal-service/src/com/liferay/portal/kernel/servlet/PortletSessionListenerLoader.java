@@ -19,9 +19,6 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.http.HttpSessionListener;
 
 /**
- * <a href="PortletSessionListenerLoader.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * <p>
  * See http://issues.liferay.com/browse/LEP-2299.
  * </p>

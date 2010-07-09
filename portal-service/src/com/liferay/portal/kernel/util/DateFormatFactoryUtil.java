@@ -20,8 +20,6 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 /**
- * <a href="DateFormatFactoryUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class DateFormatFactoryUtil {

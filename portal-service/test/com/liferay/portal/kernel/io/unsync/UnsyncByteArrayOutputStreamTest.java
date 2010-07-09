@@ -23,9 +23,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
 /**
- * <a href="UnsyncByteArrayOutputStreamTest.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Shuyang Zhou
  */
 public class UnsyncByteArrayOutputStreamTest extends TestCase {

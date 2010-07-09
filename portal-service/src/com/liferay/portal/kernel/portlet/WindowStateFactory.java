@@ -20,8 +20,6 @@ import java.util.Map;
 import javax.portlet.WindowState;
 
 /**
- * <a href="WindowStateFactory.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class WindowStateFactory {

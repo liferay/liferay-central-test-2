@@ -25,8 +25,6 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * <a href="PortletCategory.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PortletCategory implements Serializable {

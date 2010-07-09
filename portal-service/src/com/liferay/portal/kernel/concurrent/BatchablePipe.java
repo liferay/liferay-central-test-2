@@ -18,8 +18,6 @@ import java.util.concurrent.atomic.AtomicMarkableReference;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * <a href="BatchablePipe.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class BatchablePipe<K, V> {

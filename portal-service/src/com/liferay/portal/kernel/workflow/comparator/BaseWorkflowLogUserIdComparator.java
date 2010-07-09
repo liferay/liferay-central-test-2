@@ -18,9 +18,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.workflow.WorkflowLog;
 
 /**
- * <a href="BaseWorkflowLogUserIdComparator.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Michael C. Han
  */
 public abstract class BaseWorkflowLogUserIdComparator

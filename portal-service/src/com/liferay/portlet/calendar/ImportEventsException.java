@@ -17,8 +17,6 @@ package com.liferay.portlet.calendar;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * <a href="ImportEventsException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Juan Fernández
  */

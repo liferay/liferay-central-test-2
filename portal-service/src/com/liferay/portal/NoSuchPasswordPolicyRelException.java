@@ -15,9 +15,6 @@
 package com.liferay.portal;
 
 /**
- * <a href="NoSuchPasswordPolicyRelException.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Scott Lee
  */
 public class NoSuchPasswordPolicyRelException extends NoSuchModelException {

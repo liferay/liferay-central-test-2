@@ -34,8 +34,6 @@ import javax.portlet.ResourceResponse;
 import javax.servlet.ServletContext;
 
 /**
- * <a href="BaseConfigurationAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class BaseConfigurationAction

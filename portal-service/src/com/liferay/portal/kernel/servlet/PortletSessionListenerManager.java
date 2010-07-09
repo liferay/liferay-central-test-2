@@ -22,9 +22,6 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
 /**
- * <a href="PortletSessionListenerManager.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * <p>
  * See http://issues.liferay.com/browse/LEP-2299.
  * </p>

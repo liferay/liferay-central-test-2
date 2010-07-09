@@ -22,8 +22,6 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * <a href="MultiValueMap.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public abstract class MultiValueMap

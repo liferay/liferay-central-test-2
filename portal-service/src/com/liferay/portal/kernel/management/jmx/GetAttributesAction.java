@@ -24,8 +24,6 @@ import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
 /**
- * <a href="GetAttributesAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class GetAttributesAction extends BaseJMXManageAction {

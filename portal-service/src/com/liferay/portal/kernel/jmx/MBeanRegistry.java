@@ -29,8 +29,6 @@ import javax.management.ObjectInstance;
 import javax.management.ObjectName;
 
 /**
- * <a href="MBeanRegistry.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class MBeanRegistry {

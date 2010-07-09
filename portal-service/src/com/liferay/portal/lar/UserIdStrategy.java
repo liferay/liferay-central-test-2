@@ -15,8 +15,6 @@
 package com.liferay.portal.lar;
 
 /**
- * <a href="UserIdStrategy.java.html"><b><i>View Source</i></b></a>
- *
  * @author	   Bruno Farache
  * @deprecated This class has been repackaged at
  *			   <code>com.liferay.portal.kernel.lar</code>.

@@ -26,8 +26,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 /**
- * <a href="AssetRenderer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  * @author Juan Fernández
  */

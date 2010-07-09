@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.messaging;
 
 /**
- * <a href="DestinationStatistics.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */

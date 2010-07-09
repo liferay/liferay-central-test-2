@@ -22,8 +22,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import javax.management.MBeanServer;
 
 /**
- * <a href="BaseJMXManageAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public abstract class BaseJMXManageAction implements ManageAction {

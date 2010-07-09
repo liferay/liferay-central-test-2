@@ -32,8 +32,6 @@ import javax.portlet.ResourceResponse;
 import javax.portlet.filter.FilterChain;
 
 /**
- * <a href="PortletFilterUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael Young
  */
 public class PortletFilterUtil {

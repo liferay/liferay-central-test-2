@@ -22,9 +22,6 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 /**
- * <a href="ClusterForwardMessageListener.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Shuyang Zhou
  */
 public class ClusterForwardMessageListener implements ClusterMessageListener {

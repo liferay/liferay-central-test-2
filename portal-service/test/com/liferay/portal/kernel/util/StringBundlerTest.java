@@ -20,8 +20,6 @@ import java.io.IOException;
 import java.io.StringWriter;
 
 /**
- * <a href="StringBundlerTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class StringBundlerTest extends TestCase {

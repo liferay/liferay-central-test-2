@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
 import java.util.Map;
 
 /**
- * <a href="WorkflowEngineManager.java.html"><b><i>View Source</i></b></a>
- *
  * @author Micha Kiener
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan

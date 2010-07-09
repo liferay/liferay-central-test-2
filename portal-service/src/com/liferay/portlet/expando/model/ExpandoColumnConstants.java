@@ -15,8 +15,6 @@
 package com.liferay.portlet.expando.model;
 
 /**
- * <a href="ExpandoColumnConstants.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class ExpandoColumnConstants {

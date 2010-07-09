@@ -17,8 +17,6 @@ package com.liferay.portlet.wiki.model;
 import java.io.Serializable;
 
 /**
- * <a href="WikiPageDisplay.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public interface WikiPageDisplay extends Serializable {

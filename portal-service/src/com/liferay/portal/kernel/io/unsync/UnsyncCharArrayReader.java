@@ -20,8 +20,6 @@ import java.io.Reader;
 import java.nio.CharBuffer;
 
 /**
- * <a href="UnsyncCharArrayReader.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class UnsyncCharArrayReader extends Reader {

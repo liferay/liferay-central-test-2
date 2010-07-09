@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.lar;
 import javax.portlet.PortletPreferences;
 
 /**
- * <a href="BasePortletDataHandler.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public abstract class BasePortletDataHandler implements PortletDataHandler {

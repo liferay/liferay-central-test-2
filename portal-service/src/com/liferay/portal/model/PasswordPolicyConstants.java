@@ -15,8 +15,6 @@
 package com.liferay.portal.model;
 
 /**
- * <a href="PasswordPolicyConstants.java.html"><b><i>View Source</i></b></a>
- *
  * @author Scott Lee
  */
 public class PasswordPolicyConstants {

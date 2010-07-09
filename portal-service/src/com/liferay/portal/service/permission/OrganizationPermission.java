@@ -20,8 +20,6 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.security.permission.PermissionChecker;
 
 /**
- * <a href="OrganizationPermission.java.html"><b><i>View Source</i></b></a>
- *
  * @author Charles May
  */
 public interface OrganizationPermission {

@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.workflow;
 import java.io.Serializable;
 
 /**
- * <a href="WorkflowTaskAssignee.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class WorkflowTaskAssignee implements Serializable {

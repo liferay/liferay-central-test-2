@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.cache.cluster;
 
 /**
- * <a href="PortalCacheClusterException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class PortalCacheClusterException extends RuntimeException {

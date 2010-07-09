@@ -20,8 +20,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * <a href="MessagingProxy.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 @Documented

@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.scheduler;
 import java.util.Date;
 
 /**
- * <a href="Trigger.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public interface Trigger {

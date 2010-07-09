@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.util;
 
 /**
- * <a href="HashCode.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface HashCode {

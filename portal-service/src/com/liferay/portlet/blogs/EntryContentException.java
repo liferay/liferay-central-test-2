@@ -17,8 +17,6 @@ package com.liferay.portlet.blogs;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * <a href="EntryContentException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class EntryContentException extends PortalException {

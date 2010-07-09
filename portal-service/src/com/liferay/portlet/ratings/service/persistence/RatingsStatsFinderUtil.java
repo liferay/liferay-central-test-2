@@ -17,8 +17,6 @@ package com.liferay.portlet.ratings.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
- * <a href="RatingsStatsFinderUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class RatingsStatsFinderUtil {

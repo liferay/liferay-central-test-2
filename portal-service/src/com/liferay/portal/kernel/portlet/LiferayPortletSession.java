@@ -19,8 +19,6 @@ import javax.portlet.PortletSession;
 import javax.servlet.http.HttpSession;
 
 /**
- * <a href="LiferayPortletSession.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface LiferayPortletSession extends PortletSession {

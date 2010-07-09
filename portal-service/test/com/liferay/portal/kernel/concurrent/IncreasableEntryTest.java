@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.concurrent;
 import com.liferay.portal.kernel.test.TestCase;
 
 /**
- * <a href="IncreasableEntryTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class IncreasableEntryTest extends TestCase {

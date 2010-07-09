@@ -24,8 +24,6 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * <a href="DefaultMessageBus.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class DefaultMessageBus implements MessageBus {

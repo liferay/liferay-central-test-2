@@ -22,8 +22,6 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * <a href="ClusterLinkUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class ClusterLinkUtil {

@@ -24,8 +24,6 @@ import java.io.StringWriter;
 import java.io.Writer;
 
 /**
- * <a href="WriterOutputStreamTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class WriterOutputStreamTest extends TestCase {

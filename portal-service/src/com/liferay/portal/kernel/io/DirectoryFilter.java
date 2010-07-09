@@ -18,8 +18,6 @@ import java.io.File;
 import java.io.FileFilter;
 
 /**
- * <a href="DirectoryFilter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class DirectoryFilter implements FileFilter {

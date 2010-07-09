@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.test.TestCase;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
 /**
- * <a href="FinalizeManagerTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class FinalizeManagerTest extends TestCase {

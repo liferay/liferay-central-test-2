@@ -20,8 +20,6 @@ import java.io.OutputStream;
 import javax.servlet.ServletOutputStream;
 
 /**
- * <a href="PipingServletOutputStream.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class PipingServletOutputStream extends ServletOutputStream {

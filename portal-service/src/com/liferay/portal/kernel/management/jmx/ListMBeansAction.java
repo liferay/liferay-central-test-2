@@ -25,8 +25,6 @@ import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 
 /**
- * <a href="ListMBeansAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class ListMBeansAction extends BaseJMXManageAction {

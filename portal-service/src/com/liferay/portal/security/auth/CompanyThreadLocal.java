@@ -24,8 +24,6 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 
 /**
- * <a href="CompanyThreadLocal.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class CompanyThreadLocal {

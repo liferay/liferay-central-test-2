@@ -17,8 +17,6 @@ package com.liferay.portlet.imagegallery;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * <a href="ImageNameException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ImageNameException extends PortalException {

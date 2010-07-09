@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.lar;
 import javax.portlet.PortletPreferences;
 
 /**
- * <a href="PortletDataHandler.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * A <code>PortletDataHandler</code> is a special class capable of exporting and
  * importing portlet specific data to a Liferay Archive file (LAR) when a

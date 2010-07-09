@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import java.util.Collection;
 
 /**
- * <a href="SearchEngineUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  * @author Raymond Augé
  */

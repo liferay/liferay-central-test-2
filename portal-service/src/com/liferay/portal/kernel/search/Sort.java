@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import java.io.Serializable;
 
 /**
- * <a href="Sort.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  */
 public class Sort implements Serializable {

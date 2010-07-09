@@ -15,9 +15,6 @@
 package com.liferay.portal;
 
 /**
- * <a href="NoSuchWorkflowInstanceLinkException.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class NoSuchWorkflowInstanceLinkException extends NoSuchModelException {

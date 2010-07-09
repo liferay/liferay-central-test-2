@@ -15,8 +15,6 @@
 package com.liferay.portlet.ratings.service.persistence;
 
 /**
- * <a href="RatingsEntryFinder.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface RatingsEntryFinder {

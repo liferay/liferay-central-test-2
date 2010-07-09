@@ -26,8 +26,6 @@ import java.text.Format;
 import java.util.Date;
 
 /**
- * <a href="OpenSearchUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Charles May
  * @author Brian Wing Shun Chan
  */

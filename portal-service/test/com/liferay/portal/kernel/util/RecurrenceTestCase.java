@@ -22,8 +22,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
- * <a href="RecurrenceTestCase.java.html"><b><i>View Source</i></b></a>
- *
  * @author Douglas Wong
  */
 public abstract class RecurrenceTestCase extends TestCase {

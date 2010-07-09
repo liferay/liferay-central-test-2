@@ -17,8 +17,6 @@ package com.liferay.portlet.calendar;
 import com.liferay.portal.NoSuchModelException;
 
 /**
- * <a href="NoSuchEventException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class NoSuchEventException extends NoSuchModelException {

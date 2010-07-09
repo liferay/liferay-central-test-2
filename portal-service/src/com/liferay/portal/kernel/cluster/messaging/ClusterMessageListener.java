@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.cluster.messaging;
 import com.liferay.portal.kernel.messaging.Message;
 
 /**
- * <a href="ClusterMessageListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public interface ClusterMessageListener {

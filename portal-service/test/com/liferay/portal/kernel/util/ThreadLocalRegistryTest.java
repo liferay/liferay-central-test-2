@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.test.TestCase;
 import java.util.concurrent.CyclicBarrier;
 
 /**
- * <a href="ThreadLocalRegistryTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class ThreadLocalRegistryTest extends TestCase {

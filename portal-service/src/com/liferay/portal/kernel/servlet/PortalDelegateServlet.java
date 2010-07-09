@@ -21,8 +21,6 @@ import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServlet;
 
 /**
- * <a href="PortalDelegateServlet.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * See http://issues.liferay.com/browse/LEP-2297.
  * </p>

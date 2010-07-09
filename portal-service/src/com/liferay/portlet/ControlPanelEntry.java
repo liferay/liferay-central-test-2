@@ -19,8 +19,6 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
 
 /**
- * <a href="ControlPanelEntry.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public interface ControlPanelEntry {

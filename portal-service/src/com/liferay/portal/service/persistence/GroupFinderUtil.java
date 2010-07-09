@@ -17,8 +17,6 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
- * <a href="GroupFinderUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class GroupFinderUtil {

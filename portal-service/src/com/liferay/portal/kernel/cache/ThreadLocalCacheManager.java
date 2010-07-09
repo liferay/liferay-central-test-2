@@ -21,8 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <a href="ThreadLocalCacheManager.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class ThreadLocalCacheManager {

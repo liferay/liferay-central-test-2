@@ -15,8 +15,6 @@
 package com.liferay.portlet.calendar.service.persistence;
 
 /**
- * <a href="CalEventFinder.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface CalEventFinder {

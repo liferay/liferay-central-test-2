@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.io.unsync;
 import java.io.InputStream;
 
 /**
- * <a href="UnsyncByteArrayInputStream.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * See http://issues.liferay.com/browse/LPS-6648.
  * </p>

@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.dao.orm;
 
 /**
- * <a href="ProjectionList.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public interface ProjectionList extends Projection {

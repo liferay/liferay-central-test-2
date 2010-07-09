@@ -16,8 +16,6 @@ package com.liferay.portlet.imagegallery.model;
 
 
 /**
- * <a href="IGImageSoap.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
  * overwritten the next time is generated.

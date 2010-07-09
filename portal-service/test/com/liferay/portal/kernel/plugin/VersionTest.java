@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.plugin;
 import com.liferay.portal.kernel.test.TestCase;
 
 /**
- * <a href="VersionTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class VersionTest extends TestCase {

@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.util;
 import com.liferay.portal.kernel.test.TestCase;
 
 /**
- * <a href="GetterUtilTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class GetterUtilTest extends TestCase {

@@ -19,8 +19,6 @@ import java.io.File;
 import java.util.Comparator;
 
 /**
- * <a href="FileComparator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class FileComparator implements Comparator<File> {

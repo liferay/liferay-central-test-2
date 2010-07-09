@@ -15,8 +15,6 @@
 package com.liferay.portlet.asset.service.persistence;
 
 /**
- * <a href="AssetCategoryFinder.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface AssetCategoryFinder {

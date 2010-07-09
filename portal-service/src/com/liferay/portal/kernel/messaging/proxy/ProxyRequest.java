@@ -24,8 +24,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
- * <a href="ProxyRequest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Micha Kiener
  * @author Michael C. Han
  * @author Brian Wing Shun Chan

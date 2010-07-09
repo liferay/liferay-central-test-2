@@ -22,8 +22,6 @@ import java.io.Serializable;
 import java.util.Map;
 
 /**
- * <a href="WorkflowStatusManager.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  */
 @MessagingProxy(mode = ProxyMode.ASYNC)

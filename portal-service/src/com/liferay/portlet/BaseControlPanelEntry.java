@@ -24,8 +24,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletCategoryKeys;
 
 /**
- * <a href="BaseControlPanelEntry.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public abstract class BaseControlPanelEntry implements ControlPanelEntry {

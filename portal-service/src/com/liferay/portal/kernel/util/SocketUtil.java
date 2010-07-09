@@ -21,8 +21,6 @@ import java.net.NetworkInterface;
 import java.net.Socket;
 
 /**
- * <a href="SocketUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class SocketUtil {

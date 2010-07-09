@@ -15,9 +15,6 @@
 package com.liferay.portal.kernel.cache.cluster;
 
 /**
- * <a href="PortalCacheClusterChannelFactory.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Shuyang Zhou
  */
 public interface PortalCacheClusterChannelFactory {

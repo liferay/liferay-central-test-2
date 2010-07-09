@@ -18,9 +18,6 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.search.SearchEngine;
 
 /**
- * <a href="BaseSearchEngineMessageListener.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Michael C. Han
  */
 public abstract class BaseSearchEngineMessageListener

@@ -19,9 +19,6 @@ import java.io.IOException;
 import javax.servlet.ServletInputStream;
 
 /**
- * <a href="UnsyncByteArrayInputStreamWrapper.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UnsyncByteArrayInputStreamWrapper extends ServletInputStream {

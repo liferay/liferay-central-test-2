@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.lar;
 
 /**
- * <a href="PortletDataContextListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public interface PortletDataContextListener {

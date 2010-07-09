@@ -55,8 +55,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * <a href="Recurrence.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jonathan Lennox
  */
 public class Recurrence implements Serializable {

@@ -26,8 +26,6 @@ import java.io.InputStream;
 import java.util.Date;
 
 /**
- * <a href="DLLocalService.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 @Transactional(rollbackFor = {PortalException.class, SystemException.class})

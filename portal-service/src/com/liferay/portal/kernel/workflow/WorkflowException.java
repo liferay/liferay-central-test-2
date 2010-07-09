@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.workflow;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * <a href="WorkflowException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Micha Kiener
  * @author Brian Wing Shun Chan
  */

@@ -17,9 +17,6 @@ package com.liferay.portlet.social;
 import com.liferay.portal.NoSuchModelException;
 
 /**
- * <a href="NoSuchEquitySettingException.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class NoSuchEquitySettingException extends NoSuchModelException {

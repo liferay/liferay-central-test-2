@@ -17,8 +17,6 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.model.Country;
 
 /**
- * <a href="CountryPersistence.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
  * overwritten the next time is generated.

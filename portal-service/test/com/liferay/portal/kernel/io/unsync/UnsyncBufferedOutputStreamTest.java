@@ -22,9 +22,6 @@ import java.io.IOException;
 import java.util.Arrays;
 
 /**
- * <a href="UnsyncBufferedOutputStreamTest.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Shuyang Zhou
  */
 public class UnsyncBufferedOutputStreamTest extends TestCase {

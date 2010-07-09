@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import java.lang.reflect.Method;
 
 /**
- * <a href="InitialThreadLocal.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
  */

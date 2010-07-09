@@ -15,8 +15,6 @@
 package com.liferay.portal.security.ldap;
 
 /**
- * <a href="LDAPGroup.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class LDAPGroup {

@@ -24,8 +24,6 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * <a href="HotDeployUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Ivica Cardic
  * @author Brian Wing Shun Chan
  */

@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 /**
- * <a href="DefaultFullNameGenerator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class DefaultFullNameGenerator implements FullNameGenerator {

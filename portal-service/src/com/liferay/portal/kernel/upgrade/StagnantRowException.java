@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.upgrade;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * <a href="StagnantRowException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class StagnantRowException extends PortalException {

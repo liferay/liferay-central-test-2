@@ -15,8 +15,6 @@
 package com.liferay.portal;
 
 /**
- * <a href="NoSuchImageException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class NoSuchImageException extends NoSuchModelException {

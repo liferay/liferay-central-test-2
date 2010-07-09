@@ -15,8 +15,6 @@
 package com.liferay.portal.security.permission;
 
 /**
- * <a href="ActionKeys.java.html"><b><i>View Source</i></b></a>
- *
  * @author Charles May
  * @author Brian Wing Shun Chan
  */

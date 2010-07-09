@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.cluster;
 
 /**
- * <a href="ClusterMessageType.java.html"><b><i>View Source</i></b></a>
- *
  * @author Tina Tian
  */
 public enum ClusterMessageType {

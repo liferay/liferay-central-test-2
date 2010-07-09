@@ -15,9 +15,6 @@
 package com.liferay.portal.kernel.workflow;
 
 /**
- * <a href="WorkflowDefinitionFileException.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Marcellus Tavares
  */
 public class WorkflowDefinitionFileException extends WorkflowException {

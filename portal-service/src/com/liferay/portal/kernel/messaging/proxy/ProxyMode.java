@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.messaging.proxy;
 
 /**
- * <a href="ProxyMode.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public enum ProxyMode {

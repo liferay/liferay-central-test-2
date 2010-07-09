@@ -21,8 +21,6 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 
 /**
- * <a href="MethodWrapper.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class MethodWrapper implements Serializable {

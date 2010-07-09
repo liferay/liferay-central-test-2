@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import java.io.Serializable;
 
 /**
- * <a href="ClusterNodeResponse.java.html"><b><i>View Source</i></b></a>
- *
  * @author Tina Tian
  */
 public class ClusterNodeResponse implements Serializable {

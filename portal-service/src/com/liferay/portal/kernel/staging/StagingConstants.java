@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.staging;
 
 /**
- * <a href="StagingConstants.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class StagingConstants {

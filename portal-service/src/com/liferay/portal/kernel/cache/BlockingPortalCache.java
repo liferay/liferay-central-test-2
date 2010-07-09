@@ -23,8 +23,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * <a href="BlockingPortalCache.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class BlockingPortalCache implements PortalCache {

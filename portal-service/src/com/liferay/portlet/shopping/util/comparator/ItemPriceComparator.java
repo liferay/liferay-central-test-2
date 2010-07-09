@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 
 /**
- * <a href="ItemPriceComparator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ItemPriceComparator extends OrderByComparator {

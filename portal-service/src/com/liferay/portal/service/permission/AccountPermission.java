@@ -20,8 +20,6 @@ import com.liferay.portal.model.Account;
 import com.liferay.portal.security.permission.PermissionChecker;
 
 /**
- * <a href="AccountPermission.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface AccountPermission {

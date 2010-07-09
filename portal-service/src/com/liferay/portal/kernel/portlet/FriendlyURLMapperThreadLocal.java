@@ -17,9 +17,6 @@ package com.liferay.portal.kernel.portlet;
 import java.util.Map;
 
 /**
- * <a href="FriendlyURLMapperThreadLocal.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class FriendlyURLMapperThreadLocal {

@@ -26,8 +26,6 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * <a href="SandboxDeployDir.java.html"><b><i>View Source</i></b></a>
- *
  * @author Igor Spasic
  * @author Brian Wing Shun Chan
  */

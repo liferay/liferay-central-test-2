@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.xmlrpc;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * <a href="XmlRpcException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class XmlRpcException extends PortalException {

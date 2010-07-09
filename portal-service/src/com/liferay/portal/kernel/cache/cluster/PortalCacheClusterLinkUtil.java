@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 /**
- * <a href="PortalCacheClusterLinkUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class PortalCacheClusterLinkUtil {

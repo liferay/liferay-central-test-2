@@ -15,8 +15,6 @@
 package com.liferay.portlet.polls.service.persistence;
 
 /**
- * <a href="PollsChoiceFinder.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface PollsChoiceFinder {

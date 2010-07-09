@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.googleapps.GGroup;
 import java.util.Comparator;
 
 /**
- * <a href="GGroupNameComparator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class GGroupNameComparator implements Comparator<GGroup> {

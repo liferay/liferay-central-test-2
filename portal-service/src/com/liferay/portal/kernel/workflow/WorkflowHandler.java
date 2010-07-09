@@ -31,8 +31,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 /**
- * <a href="WorkflowHandler.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  * @author Macerllus Tavares
  * @author Juan Fernández

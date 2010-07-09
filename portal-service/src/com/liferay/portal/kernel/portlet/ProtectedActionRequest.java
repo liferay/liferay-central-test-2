@@ -22,8 +22,6 @@ import javax.portlet.ActionRequest;
 import javax.portlet.filter.ActionRequestWrapper;
 
 /**
- * <a href="ProtectedActionRequest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ProtectedActionRequest extends ActionRequestWrapper {

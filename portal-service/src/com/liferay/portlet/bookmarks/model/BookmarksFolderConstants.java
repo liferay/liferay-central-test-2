@@ -15,8 +15,6 @@
 package com.liferay.portlet.bookmarks.model;
 
 /**
- * <a href="BookmarksFolderConstants.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class BookmarksFolderConstants {

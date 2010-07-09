@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.scheduler.Trigger;
 import java.io.Serializable;
 
 /**
- * <a href="SchedulerRequest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  * @author Bruno Farache
  * @author Brian Wing Shun Chan

@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.freemarker;
 import java.io.Writer;
 
 /**
- * <a href="FreeMarkerEngine.java.html"><b><i>View Source</i></b></a>
- *
  * @author Mika Koivisto
  */
 public interface FreeMarkerEngine {

@@ -17,8 +17,6 @@ package com.liferay.portlet.messageboards;
 import com.liferay.portal.NoSuchModelException;
 
 /**
- * <a href="NoSuchCategoryException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class NoSuchCategoryException extends NoSuchModelException {

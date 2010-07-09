@@ -24,8 +24,6 @@ import com.liferay.portal.kernel.messaging.MessageBus;
 import java.util.Collection;
 
 /**
- * <a href="JMXMessageListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */

@@ -23,8 +23,6 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.Validator;
 
 /**
- * <a href="ProxyMessageListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Micha Kiener
  * @author Michael C. Han
  * @author Brian Wing Shun Chan

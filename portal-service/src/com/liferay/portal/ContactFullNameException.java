@@ -17,8 +17,6 @@ package com.liferay.portal;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * <a href="ContactFullNameException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Amos Fong
  */
 public class ContactFullNameException extends PortalException {

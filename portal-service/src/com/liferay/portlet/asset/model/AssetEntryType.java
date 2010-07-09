@@ -17,8 +17,6 @@ package com.liferay.portlet.asset.model;
 import java.io.Serializable;
 
 /**
- * <a href="AssetEntryType.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class AssetEntryType implements Serializable {

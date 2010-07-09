@@ -20,9 +20,6 @@ import java.io.OutputStream;
 import java.io.Serializable;
 
 /**
- * <a href="ByteArrayReportResultContainer.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Michael C. Han
  */
 public class ByteArrayReportResultContainer

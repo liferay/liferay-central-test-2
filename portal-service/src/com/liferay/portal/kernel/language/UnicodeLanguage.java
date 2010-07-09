@@ -21,8 +21,6 @@ import javax.portlet.PortletConfig;
 import javax.servlet.jsp.PageContext;
 
 /**
- * <a href="UnicodeLanguage.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface UnicodeLanguage {

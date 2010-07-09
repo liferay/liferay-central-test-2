@@ -20,8 +20,6 @@ import java.util.Set;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
- * <a href="SerialDestination.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * Destination that delivers a message to a list of message listeners one at a
  * time.

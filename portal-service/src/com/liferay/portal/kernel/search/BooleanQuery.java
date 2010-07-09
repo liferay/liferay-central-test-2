@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.search;
 import java.util.List;
 
 /**
- * <a href="BooleanQuery.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface BooleanQuery extends Query {

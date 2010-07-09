@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.management;
 
 /**
- * <a href="PortalManager.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public interface PortalManager {

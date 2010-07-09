@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.dao.jdbc;
 import javax.sql.DataSource;
 
 /**
- * <a href="SqlUpdateFactory.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface SqlUpdateFactory {

@@ -21,8 +21,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
- * <a href="SocialEquityValue.java.html"><b><i>View Source</i></b></a>
- *
  * @author Zsolt Berentey
  */
 public class SocialEquityValue {

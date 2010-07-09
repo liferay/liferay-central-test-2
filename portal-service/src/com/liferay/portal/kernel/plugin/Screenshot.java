@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.plugin;
 
 /**
- * <a href="Screenshot.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class Screenshot {

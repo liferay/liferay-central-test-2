@@ -20,9 +20,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectStreamClass;
 
 /**
- * <a href="ClassLoaderObjectInputStream.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ClassLoaderObjectInputStream extends ObjectInputStream {

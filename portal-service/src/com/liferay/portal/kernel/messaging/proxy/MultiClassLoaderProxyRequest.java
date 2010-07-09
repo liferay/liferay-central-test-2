@@ -21,9 +21,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
- * <a href="MultiClassLoaderProxyRequest.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Michael C. Han
  */
 public class MultiClassLoaderProxyRequest extends ProxyRequest {

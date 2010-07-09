@@ -27,8 +27,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="WorkflowHandlerRegistryUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  * @author Marcellus Tavares
  */

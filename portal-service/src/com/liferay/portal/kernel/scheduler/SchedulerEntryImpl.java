@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Time;
 
 /**
- * <a href="SchedulerEntryImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class SchedulerEntryImpl implements SchedulerEntry {

@@ -21,8 +21,6 @@ import java.util.Calendar;
 import java.util.TimeZone;
 
 /**
- * <a href="TZSRecurrence.java.html"><b><i>View Source</i></b></a>
- *
  * @author Samuel Kong
  */
 public class TZSRecurrence extends Recurrence {

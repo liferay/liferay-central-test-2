@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="AuthToken.java.html"><b><i>View Source</i></b></a>
- *
  * @author Amos Fong
  */
 public interface AuthToken {

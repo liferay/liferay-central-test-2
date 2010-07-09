@@ -23,8 +23,6 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 
 /**
- * <a href="ScriptingUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alberto Montero
  * @author Brian Wing Shun Chan
  */

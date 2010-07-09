@@ -20,8 +20,6 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * <a href="ClusterEvent.java.html"><b><i>View Source</i></b></a>
- *
  * @author Tina Tian
  */
 public class ClusterEvent implements Serializable {

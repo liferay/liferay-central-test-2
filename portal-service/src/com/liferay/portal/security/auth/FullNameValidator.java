@@ -15,8 +15,6 @@
 package com.liferay.portal.security.auth;
 
 /**
- * <a href="FullNameValidator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Amos Fong
  */
 public interface FullNameValidator {

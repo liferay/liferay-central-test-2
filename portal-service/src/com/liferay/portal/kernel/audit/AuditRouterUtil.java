@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.audit;
 
 /**
- * <a href="AuditRouterUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class AuditRouterUtil {

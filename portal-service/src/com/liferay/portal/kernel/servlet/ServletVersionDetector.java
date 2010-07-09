@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.servlet;
 import javax.servlet.ServletContext;
 
 /**
- * <a href="ServletVersionDetector.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  */

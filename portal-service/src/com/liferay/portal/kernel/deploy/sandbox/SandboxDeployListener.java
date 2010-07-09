@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.deploy.sandbox;
 import java.io.File;
 
 /**
- * <a href="SandboxDeployListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Igor Spasic
  * @author Brian Wing Shun Chan
  */

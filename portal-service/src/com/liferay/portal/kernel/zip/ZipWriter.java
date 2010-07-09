@@ -19,8 +19,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * <a href="ZipWriter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
  */

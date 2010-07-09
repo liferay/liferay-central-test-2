@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.workflow.comparator;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
 /**
- * <a href="WorkflowComparatorFactory.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public interface WorkflowComparatorFactory {

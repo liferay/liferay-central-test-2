@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.search;
 import java.util.Collection;
 
 /**
- * <a href="IndexWriter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  */
 public interface IndexWriter {

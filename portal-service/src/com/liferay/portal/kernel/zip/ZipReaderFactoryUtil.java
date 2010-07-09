@@ -19,8 +19,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * <a href="ZipReaderFactoryUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class ZipReaderFactoryUtil {

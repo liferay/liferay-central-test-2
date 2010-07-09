@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import java.io.Serializable;
 
 /**
- * <a href="UserGroupGroupRolePK.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UserGroupGroupRolePK implements Comparable<UserGroupGroupRolePK>,

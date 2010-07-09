@@ -15,8 +15,6 @@
 package com.liferay.portal.security.ldap;
 
 /**
- * <a href="GroupConverterKeys.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface GroupConverterKeys {

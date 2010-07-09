@@ -20,8 +20,6 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * <a href="Route.java.html"><b><i>View Source</i></b></a>
- *
  * Represents a single friendly URL pattern and provides the ability to either
  * parse a friendly URL path or generate a friendly URL from a parameter map.
  *

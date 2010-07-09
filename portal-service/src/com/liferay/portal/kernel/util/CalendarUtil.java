@@ -26,8 +26,6 @@ import java.util.TimeZone;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * <a href="CalendarUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class CalendarUtil {

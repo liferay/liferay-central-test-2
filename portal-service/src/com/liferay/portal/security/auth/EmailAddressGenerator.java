@@ -15,8 +15,6 @@
 package com.liferay.portal.security.auth;
 
 /**
- * <a href="EmailAddressGenerator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Wesley Gong
  */
 public interface EmailAddressGenerator {

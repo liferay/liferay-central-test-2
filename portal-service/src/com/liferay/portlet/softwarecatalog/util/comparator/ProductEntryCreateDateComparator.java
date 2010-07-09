@@ -19,9 +19,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 
 /**
- * <a href="ProductEntryCreateDateComparator.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ProductEntryCreateDateComparator extends OrderByComparator {

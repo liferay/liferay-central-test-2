@@ -18,9 +18,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.social.model.SocialEquityUser;
 
 /**
- * <a href="SocialEquityUserRankComparator.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Zsolt Berentey
  */
 public class SocialEquityUserRankComparator extends OrderByComparator {

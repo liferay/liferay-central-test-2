@@ -28,8 +28,6 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
 /**
- * <a href="DefaultScreenNameGenerator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
  * @author Juan Fernández

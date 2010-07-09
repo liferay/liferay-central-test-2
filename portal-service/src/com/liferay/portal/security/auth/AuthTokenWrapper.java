@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="AuthTokenWrapper.java.html"><b><i>View Source</i></b></a>
- *
  * @author Amos Fong
  */
 public class AuthTokenWrapper implements AuthToken {

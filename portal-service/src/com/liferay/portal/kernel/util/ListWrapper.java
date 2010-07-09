@@ -20,8 +20,6 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * <a href="ListWrapper.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ListWrapper<E> implements List<E> {

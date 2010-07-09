@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.messaging.MessageBusException;
 import com.liferay.portal.kernel.messaging.MessageListener;
 
 /**
- * <a href="SynchronousMessageListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class SynchronousMessageListener implements MessageListener {

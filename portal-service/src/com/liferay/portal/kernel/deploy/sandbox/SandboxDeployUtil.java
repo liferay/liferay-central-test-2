@@ -18,8 +18,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <a href="SandboxDeployUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Igor Spasic
  * @author Brian Wing Shun Chan
  */

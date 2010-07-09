@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.sanitizer;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * <a href="SanitizerException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Zsolt Balogh
  * @author Brian Wing Shun Chan
  */

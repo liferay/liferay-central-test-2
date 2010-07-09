@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.cache.cluster;
 
 /**
- * <a href="PortalCacheClusterEventType.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public enum PortalCacheClusterEventType {

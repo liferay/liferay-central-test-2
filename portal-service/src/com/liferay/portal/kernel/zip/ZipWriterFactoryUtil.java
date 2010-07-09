@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.zip;
 import java.io.File;
 
 /**
- * <a href="ZipWriterFactoryUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class ZipWriterFactoryUtil {

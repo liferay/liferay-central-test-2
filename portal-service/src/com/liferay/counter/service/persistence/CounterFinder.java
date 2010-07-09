@@ -15,8 +15,6 @@
 package com.liferay.counter.service.persistence;
 
 /**
- * <a href="CounterFinder.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface CounterFinder {

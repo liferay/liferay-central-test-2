@@ -22,8 +22,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="RulesEngine.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  * @author Vihang Pathak
  */

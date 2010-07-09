@@ -31,8 +31,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="NavItem.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class NavItem implements Serializable {

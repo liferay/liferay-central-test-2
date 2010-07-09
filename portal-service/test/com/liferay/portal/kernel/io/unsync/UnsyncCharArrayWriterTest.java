@@ -26,8 +26,6 @@ import java.nio.CharBuffer;
 import java.util.Arrays;
 
 /**
- * <a href="UnsyncCharArrayWriterTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class UnsyncCharArrayWriterTest extends TestCase {

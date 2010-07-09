@@ -24,8 +24,6 @@ import java.util.Map;
 import javax.portlet.PortletRequest;
 
 /**
- * <a href="StagingUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class StagingUtil {

@@ -20,8 +20,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * <a href="LockRegistry.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class LockRegistry {

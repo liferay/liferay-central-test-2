@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.util.MapUtil;
 import java.util.Map;
 
 /**
- * <a href="TestCase.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class TestCase extends junit.framework.TestCase {

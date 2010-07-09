@@ -17,9 +17,6 @@ package com.liferay.portal.kernel.bean;
 import java.lang.Object;
 
 /**
- * <a href="ContextClassLoaderBeanHandler.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author	   Brian Wing Shun Chan
  * @deprecated
  */

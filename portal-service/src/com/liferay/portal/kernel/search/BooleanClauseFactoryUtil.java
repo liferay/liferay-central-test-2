@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.search;
 
 /**
- * <a href="BooleanClauseFactoryUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  */
 public class BooleanClauseFactoryUtil {

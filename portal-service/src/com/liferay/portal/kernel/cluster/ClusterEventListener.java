@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.cluster;
 
 /**
- * <a href="ClusterEventListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Tina Tian
  */
 public interface ClusterEventListener {

@@ -19,8 +19,6 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * <a href="DocumentComparator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class DocumentComparator implements Comparator<Document> {

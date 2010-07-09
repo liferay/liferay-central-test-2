@@ -18,8 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <a href="PortalCacheClusterLink.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class PortalCacheClusterLink {

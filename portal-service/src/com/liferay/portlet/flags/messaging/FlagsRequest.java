@@ -19,8 +19,6 @@ import com.liferay.portal.service.ServiceContext;
 import java.io.Serializable;
 
 /**
- * <a href="FlagsRequest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */

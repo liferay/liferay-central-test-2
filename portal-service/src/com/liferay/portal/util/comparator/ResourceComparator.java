@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Resource;
 
 /**
- * <a href="ResourceComparator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class ResourceComparator extends OrderByComparator {

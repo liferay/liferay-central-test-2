@@ -25,8 +25,6 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.BodyContent;
 
 /**
- * <a href="BodyContentWrapper.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class BodyContentWrapper extends BodyContent {

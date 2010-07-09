@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.util.Validator;
 import java.util.Map;
 
 /**
- * <a href="PollerRequest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PollerRequest {

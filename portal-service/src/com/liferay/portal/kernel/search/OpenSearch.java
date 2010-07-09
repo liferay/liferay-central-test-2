@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.search;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="OpenSearch.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface OpenSearch {

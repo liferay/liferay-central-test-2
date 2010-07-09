@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 /**
- * <a href="ExpandoBridgeIndexer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public interface ExpandoBridgeIndexer {

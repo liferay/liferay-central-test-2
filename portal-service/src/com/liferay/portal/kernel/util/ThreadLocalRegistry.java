@@ -18,8 +18,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * <a href="ThreadLocalRegistry.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class ThreadLocalRegistry {

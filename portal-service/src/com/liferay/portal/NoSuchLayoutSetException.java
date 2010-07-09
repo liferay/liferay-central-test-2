@@ -15,8 +15,6 @@
 package com.liferay.portal;
 
 /**
- * <a href="NoSuchLayoutSetException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class NoSuchLayoutSetException extends NoSuchModelException {

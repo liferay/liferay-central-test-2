@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 
 /**
- * <a href="ListTypeConstants.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class ListTypeConstants {

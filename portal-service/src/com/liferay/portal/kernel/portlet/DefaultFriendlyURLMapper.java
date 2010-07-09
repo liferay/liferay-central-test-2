@@ -31,8 +31,6 @@ import javax.portlet.PortletMode;
 import javax.portlet.WindowState;
 
 /**
- * <a href="DefaultFriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
- *
  * The default friendly URL mapper to use with friendly URL routes.
  *
  * <p>

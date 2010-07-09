@@ -18,8 +18,6 @@ import java.util.Random;
 import java.util.concurrent.Callable;
 
 /**
- * <a href="DestinationRegistrationTask.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  */

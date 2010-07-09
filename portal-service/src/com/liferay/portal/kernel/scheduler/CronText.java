@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import java.util.Calendar;
 
 /**
- * <a href="CronText.java.html"><b><i>View Source</i></b></a>
- *
  * @author Thiago Moreira
  */
 public class CronText {

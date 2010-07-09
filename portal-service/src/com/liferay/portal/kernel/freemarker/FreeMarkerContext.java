@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.freemarker;
 
 /**
- * <a href="FreeMarkerContext.java.html"><b><i>View Source</i></b></a>
- *
  * @author Mika Koivisto
  */
 public interface FreeMarkerContext {

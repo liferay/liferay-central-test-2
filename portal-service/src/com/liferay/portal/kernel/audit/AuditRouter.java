@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
 import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
 
 /**
- * <a href="AuditRouter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 @MessagingProxy(mode = ProxyMode.ASYNC)

@@ -18,8 +18,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <a href="DeterminateKeyGenerator.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * See http://issues.liferay.com/browse/LPS-6872.
  * </p>

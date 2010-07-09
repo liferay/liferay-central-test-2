@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.upgrade.util;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
- * <a href="UpgradeColumn.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
  */

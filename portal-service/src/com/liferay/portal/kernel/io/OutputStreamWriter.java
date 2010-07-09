@@ -26,8 +26,6 @@ import java.nio.CharBuffer;
 import java.nio.charset.CharsetEncoder;
 
 /**
- * <a href="OutputStreamWriter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class OutputStreamWriter extends Writer {

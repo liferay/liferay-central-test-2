@@ -23,8 +23,6 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * <a href="Domain.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class Domain implements Serializable {

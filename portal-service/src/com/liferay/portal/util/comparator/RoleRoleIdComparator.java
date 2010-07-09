@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Role;
 
 /**
- * <a href="RoleRoleIdComparator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class RoleRoleIdComparator extends OrderByComparator {

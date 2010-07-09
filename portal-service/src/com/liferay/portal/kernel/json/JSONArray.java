@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.json;
 import java.io.Writer;
 
 /**
- * <a href="JSONArray.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface JSONArray {

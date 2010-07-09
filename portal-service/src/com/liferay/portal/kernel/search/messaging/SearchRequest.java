@@ -25,8 +25,6 @@ import java.util.Arrays;
 import java.util.Collection;
 
 /**
- * <a href="SearchRequest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  */
 public class SearchRequest implements Serializable {

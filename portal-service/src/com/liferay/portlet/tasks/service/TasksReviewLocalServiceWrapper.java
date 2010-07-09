@@ -16,8 +16,6 @@ package com.liferay.portlet.tasks.service;
 
 
 /**
- * <a href="TasksReviewLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
  * overwritten the next time is generated.

@@ -15,8 +15,6 @@
 package com.liferay.portal.security.permission;
 
 /**
- * <a href="InlineSQLHelper.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public interface InlineSQLHelper {

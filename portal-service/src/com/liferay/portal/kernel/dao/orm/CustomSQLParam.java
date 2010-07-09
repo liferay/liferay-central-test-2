@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.dao.orm;
 import com.liferay.portal.kernel.util.Validator;
 
 /**
- * <a href="CustomSQLParam.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class CustomSQLParam {

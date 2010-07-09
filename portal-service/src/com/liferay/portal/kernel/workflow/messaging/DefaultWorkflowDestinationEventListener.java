@@ -22,9 +22,6 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
 
 /**
- * <a href="DefaultWorkflowDestinationEventListener.java.html"><b><i>View Source
- * </i></b></a>
- *
  * @author Michael C. Han
  */
 public class DefaultWorkflowDestinationEventListener

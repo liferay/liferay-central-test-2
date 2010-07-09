@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.googleapps.GUser;
 import java.util.Comparator;
 
 /**
- * <a href="GUserFirstNameComparator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class GUserFirstNameComparator implements Comparator<GUser> {

@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.velocity;
 import java.io.Writer;
 
 /**
- * <a href="VelocityEngineUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class VelocityEngineUtil {

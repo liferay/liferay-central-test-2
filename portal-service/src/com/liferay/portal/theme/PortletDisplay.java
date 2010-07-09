@@ -28,8 +28,6 @@ import java.io.Writer;
 import javax.portlet.PortletPreferences;
 
 /**
- * <a href="PortletDisplay.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Eduardo Lundgren
  */

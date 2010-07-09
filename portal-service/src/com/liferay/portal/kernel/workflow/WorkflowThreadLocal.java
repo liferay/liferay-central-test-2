@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.workflow;
 import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 
 /**
- * <a href="WorkflowThreadLocal.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class WorkflowThreadLocal {

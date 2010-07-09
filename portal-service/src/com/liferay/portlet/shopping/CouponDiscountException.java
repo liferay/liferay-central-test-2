@@ -17,8 +17,6 @@ package com.liferay.portlet.shopping;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * <a href="CouponDiscountException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Huang Jie
  */
 public class CouponDiscountException extends PortalException {

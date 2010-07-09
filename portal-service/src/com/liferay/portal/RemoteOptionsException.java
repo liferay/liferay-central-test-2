@@ -17,8 +17,6 @@ package com.liferay.portal;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * <a href="RemoteOptionsException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class RemoteOptionsException extends PortalException {

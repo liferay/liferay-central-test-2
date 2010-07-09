@@ -22,8 +22,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <a href="CacheKeyGeneratorUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  * @author Shuyang Zhou
  */

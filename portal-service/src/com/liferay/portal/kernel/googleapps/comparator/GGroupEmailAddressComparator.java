@@ -19,9 +19,6 @@ import com.liferay.portal.kernel.googleapps.GGroup;
 import java.util.Comparator;
 
 /**
- * <a href="GGroupEmailAddressComparator.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class GGroupEmailAddressComparator implements Comparator<GGroup> {

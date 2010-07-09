@@ -18,8 +18,6 @@ import java.io.File;
 import java.io.InputStream;
 
 /**
- * <a href="MimeTypes.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  */

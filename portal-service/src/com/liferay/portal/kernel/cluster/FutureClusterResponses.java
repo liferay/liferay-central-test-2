@@ -24,8 +24,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
- * <a href="FutureClusterResponses.java.html"><b><i>View Source</i></b></a>
- *
  * @author Tina Tian
  */
 public class FutureClusterResponses implements Future<ClusterNodeResponses> {

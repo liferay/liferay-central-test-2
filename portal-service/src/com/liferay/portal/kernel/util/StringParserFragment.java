@@ -18,8 +18,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * <a href="StringParserFragment.java.html"><b><i>View Source</i></b></a>
- *
  * @author Connor McKay
  * @author Brian Wing Shun Chan
  */

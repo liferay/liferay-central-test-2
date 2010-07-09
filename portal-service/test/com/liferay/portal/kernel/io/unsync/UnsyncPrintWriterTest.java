@@ -26,8 +26,6 @@ import java.io.Writer;
 import java.lang.reflect.Field;
 
 /**
- * <a href="UnsyncPrintWriterTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class UnsyncPrintWriterTest extends TestCase {

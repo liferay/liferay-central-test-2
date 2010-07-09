@@ -15,8 +15,6 @@
 package com.liferay.portal;
 
 /**
- * <a href="NoSuchPortletItemException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class NoSuchPortletItemException extends NoSuchModelException {

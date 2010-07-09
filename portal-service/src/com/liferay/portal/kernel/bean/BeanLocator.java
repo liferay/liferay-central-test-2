@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.bean;
 
 /**
- * <a href="BeanLocator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface BeanLocator {

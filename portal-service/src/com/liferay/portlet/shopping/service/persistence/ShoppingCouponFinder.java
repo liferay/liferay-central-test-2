@@ -15,8 +15,6 @@
 package com.liferay.portlet.shopping.service.persistence;
 
 /**
- * <a href="ShoppingCouponFinder.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface ShoppingCouponFinder {

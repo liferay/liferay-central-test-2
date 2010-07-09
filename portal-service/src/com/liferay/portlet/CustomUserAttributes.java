@@ -17,8 +17,6 @@ package com.liferay.portlet;
 import java.util.Map;
 
 /**
- * <a href="CustomUserAttributes.java.html"><b><i>View Source</i></b></a>
- *
  * @author Marcellus Tavares
  */
 public interface CustomUserAttributes extends Cloneable {

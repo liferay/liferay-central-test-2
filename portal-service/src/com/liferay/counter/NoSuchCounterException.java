@@ -17,8 +17,6 @@ package com.liferay.counter;
 import com.liferay.portal.NoSuchModelException;
 
 /**
- * <a href="NoSuchCounterException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class NoSuchCounterException extends NoSuchModelException {

@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.configuration;
 import java.util.Properties;
 
 /**
- * <a href="Configuration.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface Configuration {

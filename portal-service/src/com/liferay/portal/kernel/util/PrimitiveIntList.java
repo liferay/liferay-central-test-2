@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.util;
 
 /**
- * <a href="PrimitiveIntList.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class PrimitiveIntList {

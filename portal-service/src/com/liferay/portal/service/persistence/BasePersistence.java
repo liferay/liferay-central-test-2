@@ -29,8 +29,6 @@ import java.util.List;
 import javax.sql.DataSource;
 
 /**
- * <a href="BasePersistence.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface BasePersistence<T extends BaseModel<T>> {

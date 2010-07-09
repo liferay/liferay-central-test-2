@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.mail;
 
 /**
- * <a href="SMTPAccount.java.html"><b><i>View Source</i></b></a>
- *
  * @author Thiago Moreira
  */
 public class SMTPAccount extends Account {

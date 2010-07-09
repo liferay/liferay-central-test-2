@@ -25,8 +25,6 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 
 /**
- * <a href="UnsyncCharArrayWriter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class UnsyncCharArrayWriter extends Writer {

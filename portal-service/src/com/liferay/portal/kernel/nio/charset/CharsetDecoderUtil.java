@@ -22,8 +22,6 @@ import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CodingErrorAction;
 
 /**
- * <a href="CharsetDecoderUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class CharsetDecoderUtil {

@@ -23,8 +23,6 @@ import java.io.Writer;
 import javax.servlet.jsp.JspWriter;
 
 /**
- * <a href="PipingJspWriter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class PipingJspWriter extends JspWriter {

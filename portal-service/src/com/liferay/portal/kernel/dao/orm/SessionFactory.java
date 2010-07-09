@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.dao.orm;
 import java.sql.Connection;
 
 /**
- * <a href="SessionFactory.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface SessionFactory {

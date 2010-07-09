@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Permission;
 
 /**
- * <a href="PermissionComparator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class PermissionComparator extends OrderByComparator {

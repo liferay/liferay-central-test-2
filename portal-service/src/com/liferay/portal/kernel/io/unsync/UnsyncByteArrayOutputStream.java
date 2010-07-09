@@ -19,8 +19,6 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 
 /**
- * <a href="UnsyncByteArrayOutputStream.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * See http://issues.liferay.com/browse/LPS-6648.
  * </p>

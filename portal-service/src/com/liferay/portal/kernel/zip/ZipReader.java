@@ -19,8 +19,6 @@ import java.io.InputStream;
 import java.util.List;
 
 /**
- * <a href="ZipReader.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  * @author Brian Wing Shun Chan
  * @author Raymond Augé

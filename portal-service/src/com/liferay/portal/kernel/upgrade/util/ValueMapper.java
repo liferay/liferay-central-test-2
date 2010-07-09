@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.upgrade.util;
 import java.util.Iterator;
 
 /**
- * <a href="ValueMapper.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  * @author Brian Wing Shun Chan
  */

@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.cluster;
 
 /**
- * <a href="ClusterEventType.java.html"><b><i>View Source</i></b></a>
- *
  * @author Tina Tian
  */
 public enum ClusterEventType {

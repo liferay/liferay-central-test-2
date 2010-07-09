@@ -22,8 +22,6 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 /**
- * <a href="ThemeContextListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Ivica Cardic
  * @author Brian Wing Shun Chan
  */

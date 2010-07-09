@@ -15,9 +15,6 @@
 package com.liferay.portal.kernel.scheduler.config;
 
 /**
- * <a href="DefaultSchedulingConfigurator.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Shuyang Zhou
  */
 public class DefaultSchedulingConfigurator

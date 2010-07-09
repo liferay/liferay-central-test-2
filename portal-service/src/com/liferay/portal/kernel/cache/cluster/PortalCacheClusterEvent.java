@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.util.Validator;
 import java.io.Serializable;
 
 /**
- * <a href="PortalCacheClusterEvent.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class PortalCacheClusterEvent implements Serializable {

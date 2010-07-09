@@ -25,8 +25,6 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * <a href="AggregateClassLoader.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Michael C. Han
  */

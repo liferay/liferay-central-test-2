@@ -26,8 +26,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <a href="SmartResultSet.java.html"><b><i>View Source</i></b></a>
- *
  * @author Minhchau Dang
  * @author Brian Wing Shun Chan
  */

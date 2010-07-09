@@ -21,8 +21,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <a href="BaseTrigger.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public abstract class BaseTrigger implements Serializable, Trigger {

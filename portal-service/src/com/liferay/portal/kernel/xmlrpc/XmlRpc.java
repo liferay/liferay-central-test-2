@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.xmlrpc;
 
 /**
- * <a href="XmlRpc.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  * @author Brian Wing Shun Chan
  */

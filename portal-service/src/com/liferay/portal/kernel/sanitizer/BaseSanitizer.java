@@ -22,8 +22,6 @@ import java.io.OutputStream;
 import java.util.Map;
 
 /**
- * <a href="BaseSanitizer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Zsolt Balogh
  * @author Brian Wing Shun Chan
  */

@@ -26,8 +26,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * <a href="FinalizeManager.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class FinalizeManager {

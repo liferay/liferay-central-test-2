@@ -18,8 +18,6 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.permission.PermissionChecker;
 
 /**
- * <a href="DefaultControlPanelEntry.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class DefaultControlPanelEntry extends BaseControlPanelEntry {

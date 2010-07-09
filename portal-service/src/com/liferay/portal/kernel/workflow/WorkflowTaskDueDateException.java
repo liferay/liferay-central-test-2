@@ -15,9 +15,6 @@
 package com.liferay.portal.kernel.workflow;
 
 /**
- * <a href="WorkflowTaskDueDateException.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class WorkflowTaskDueDateException extends WorkflowException {

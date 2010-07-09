@@ -19,8 +19,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <a href="DefaultWorkflowLog.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  * @author Marcellus Tavares

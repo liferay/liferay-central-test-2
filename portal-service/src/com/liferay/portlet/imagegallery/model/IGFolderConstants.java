@@ -15,8 +15,6 @@
 package com.liferay.portlet.imagegallery.model;
 
 /**
- * <a href="IGFolderConstants.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class IGFolderConstants {

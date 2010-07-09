@@ -15,8 +15,6 @@
 package com.liferay.portlet.messageboards.model;
 
 /**
- * <a href="MBThreadConstants.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class MBThreadConstants {

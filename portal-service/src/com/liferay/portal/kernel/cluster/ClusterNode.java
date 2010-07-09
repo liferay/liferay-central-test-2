@@ -22,8 +22,6 @@ import java.io.Serializable;
 import java.net.InetAddress;
 
 /**
- * <a href="ClusterNode.java.html"><b><i>View Source</i></b></a>
- *
  * @author Tina Tian
  */
 public class ClusterNode implements Serializable {

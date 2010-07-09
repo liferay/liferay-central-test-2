@@ -19,8 +19,6 @@ import java.io.Reader;
 import java.util.List;
 
 /**
- * <a href="DiffUtil.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * This class can compare two different versions of a text. Source refers to the
  * earliest version of the text and target refers to a modified version of

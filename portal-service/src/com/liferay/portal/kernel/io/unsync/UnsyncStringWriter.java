@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import java.io.Writer;
 
 /**
- * <a href="UnsyncStringWriter.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * See http://issues.liferay.com/browse/LPS-6648.
  * </p>

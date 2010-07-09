@@ -15,8 +15,6 @@
 package com.liferay.portal;
 
 /**
- * <a href="PortalException.java.html"><b><i>View Source</i></b></a>
- *
  * @author	   Brian Wing Shun Chan
  * @deprecated {@link com.liferay.portal.kernel.exception.PortalException}
  */

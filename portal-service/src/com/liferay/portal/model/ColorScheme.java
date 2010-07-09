@@ -19,8 +19,6 @@ import java.io.Serializable;
 import java.util.Properties;
 
 /**
- * <a href="ColorScheme.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface ColorScheme extends Comparable<ColorScheme>, Serializable {

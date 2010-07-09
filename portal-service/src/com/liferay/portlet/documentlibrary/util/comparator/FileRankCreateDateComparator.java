@@ -19,9 +19,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
 
 /**
- * <a href="FileRankCreateDateComparator.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class FileRankCreateDateComparator extends OrderByComparator {

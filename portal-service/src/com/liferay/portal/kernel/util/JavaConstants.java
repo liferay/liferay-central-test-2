@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.util;
 
 /**
- * <a href="JavaConstants.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Eduardo Lundgren
  */

@@ -21,8 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="Renderer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public interface Renderer {

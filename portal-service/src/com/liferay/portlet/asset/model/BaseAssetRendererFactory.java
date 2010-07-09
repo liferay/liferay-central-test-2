@@ -25,8 +25,6 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="BaseAssetRendererFactory.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  * @author Juan Fernández
  */

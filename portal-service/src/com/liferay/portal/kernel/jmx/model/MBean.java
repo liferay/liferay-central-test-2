@@ -32,8 +32,6 @@ import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 
 /**
- * <a href="MBean.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class MBean implements Serializable {

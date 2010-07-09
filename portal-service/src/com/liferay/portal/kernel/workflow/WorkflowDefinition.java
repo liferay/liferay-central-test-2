@@ -19,8 +19,6 @@ import java.io.InputStream;
 import java.util.Map;
 
 /**
- * <a href="WorkflowDefinition.java.html"><b><i>View Source</i></b></a>
- *
  * @author Micha Kiener
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan

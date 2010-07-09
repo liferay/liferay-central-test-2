@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.deploy.sandbox;
 
 /**
- * <a href="SandboxDeployScanner.java.html"><b><i>View Source</i></b></a>
- *
  * @author Igor Spasic
  * @author Brian Wing Shun Chan
  */

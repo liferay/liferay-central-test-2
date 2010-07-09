@@ -23,8 +23,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
 /**
- * <a href="HeaderCacheServletResponse.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class HeaderCacheServletResponse extends HttpServletResponseWrapper {

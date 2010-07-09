@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.workflow;
 import java.util.Date;
 
 /**
- * <a href="WorkflowLog.java.html"><b><i>View Source</i></b></a>
- *
  * @author Micha Kiener
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan

@@ -21,8 +21,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
- * <a href="IPDetector.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class IPDetector {

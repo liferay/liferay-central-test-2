@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.cache;
 
 /**
- * <a href="BasePortalCache.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public abstract class BasePortalCache implements PortalCache {

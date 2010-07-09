@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.workflow;
 import java.util.List;
 
 /**
- * <a href="WorkflowHandlerRegistry.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  * @author Marcellus Tavares
  */

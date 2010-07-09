@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.util;
 import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 
 /**
- * <a href="SimplePojoClp.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * A class loader proxy able to serialize simple POJOs between two class
  * loaders. It only works for simple POJOs following the Java Beans semantics.

@@ -15,9 +15,6 @@
 package com.liferay.portal;
 
 /**
- * <a href="NoSuchPluginSettingException.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class NoSuchPluginSettingException extends NoSuchModelException {

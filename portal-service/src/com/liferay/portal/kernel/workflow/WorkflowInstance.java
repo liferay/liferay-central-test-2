@@ -21,8 +21,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="WorkflowInstance.java.html"><b><i>View Source</i></b></a>
- *
  * @author Micha Kiener
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan

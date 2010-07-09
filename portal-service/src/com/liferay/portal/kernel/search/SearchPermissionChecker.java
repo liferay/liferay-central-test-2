@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.search;
 
 /**
- * <a href="SearchPermissionChecker.java.html"><b><i>View Source</i></b></a>
- *
  * @author Allen Chiang
  * @author Bruno Farache
  * @author Raymond Augé

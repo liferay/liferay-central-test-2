@@ -23,8 +23,6 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * <a href="PermissionCheckerBag.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface PermissionCheckerBag extends Serializable {

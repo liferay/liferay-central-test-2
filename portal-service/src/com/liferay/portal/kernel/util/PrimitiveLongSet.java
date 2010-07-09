@@ -18,8 +18,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * <a href="PrimitiveLongSet.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class PrimitiveLongSet {

@@ -26,8 +26,6 @@ import java.util.Properties;
 import javax.naming.directory.Attributes;
 
 /**
- * <a href="PortalToLDAPConverter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */

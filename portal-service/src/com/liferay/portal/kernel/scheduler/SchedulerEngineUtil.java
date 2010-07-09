@@ -27,8 +27,6 @@ import java.lang.reflect.Proxy;
 import java.util.List;
 
 /**
- * <a href="SchedulerEngineUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  * @author Shuyang Zhou
  */

@@ -22,8 +22,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="SchedulingConfigurator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public interface SchedulingConfigurator {

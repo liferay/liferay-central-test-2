@@ -15,8 +15,6 @@
 package com.liferay.portlet.journal.model;
 
 /**
- * <a href="JournalStructureConstants.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class JournalStructureConstants {

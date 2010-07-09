@@ -27,8 +27,6 @@ import javax.servlet.jsp.tagext.BodyContent;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
 /**
- * <a href="BaseBodyTagSupport.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class BaseBodyTagSupport extends BodyTagSupport {

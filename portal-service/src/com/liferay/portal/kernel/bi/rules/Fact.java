@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.bi.rules;
 import java.io.Serializable;
 
 /**
- * <a href="Fact.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class Fact<T> implements Serializable {

@@ -16,8 +16,6 @@ package com.liferay.counter.model;
 
 
 /**
- * <a href="Counter.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
  * overwritten the next time is generated.

@@ -19,9 +19,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 
 /**
- * <a href="SetPortletClassLoaderServlet.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class SetPortletClassLoaderServlet extends HttpServlet {

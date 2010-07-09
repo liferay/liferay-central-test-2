@@ -17,9 +17,6 @@ package com.liferay.portal.kernel.scheduler.config;
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
 
 /**
- * <a href="PluginSchedulingConfigurator.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Shuyang Zhou
  */
 public class PluginSchedulingConfigurator

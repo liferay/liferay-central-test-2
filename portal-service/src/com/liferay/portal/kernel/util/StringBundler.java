@@ -23,8 +23,6 @@ import java.io.Writer;
 import java.lang.reflect.Constructor;
 
 /**
- * <a href="StringBundler.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * See http://issues.liferay.com/browse/LPS-6072.
  * </p>

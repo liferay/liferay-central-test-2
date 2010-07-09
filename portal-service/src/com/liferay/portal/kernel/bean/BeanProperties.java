@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.bean;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="BeanProperties.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface BeanProperties {

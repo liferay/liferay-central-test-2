@@ -24,8 +24,6 @@ import java.io.IOException;
 import java.util.HashMap;
 
 /**
- * <a href="UnicodeProperties.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * This is a rewrite of java.util.Properties that is not synchronized and
  * natively supports non-ASCII encodings. It can also be configured to be

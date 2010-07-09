@@ -26,9 +26,6 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
 
 /**
- * <a href="ReportRequestMessageListener.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Michael C. Han
  */
 public class ReportRequestMessageListener implements MessageListener {

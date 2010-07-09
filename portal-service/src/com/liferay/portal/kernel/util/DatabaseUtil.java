@@ -24,8 +24,6 @@ import java.sql.SQLException;
 import javax.naming.NamingException;
 
 /**
- * <a href="DatabaseUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author	   Ganesh Ram
  * @author	   Brian Wing Shun Chan
  * @deprecated {@link DBFactoryUtil}

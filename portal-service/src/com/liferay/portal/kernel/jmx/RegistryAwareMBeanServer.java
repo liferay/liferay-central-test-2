@@ -41,8 +41,6 @@ import javax.management.ReflectionException;
 import javax.management.loading.ClassLoaderRepository;
 
 /**
- * <a href="RegistryAwareMBeanServer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class RegistryAwareMBeanServer implements MBeanServer {

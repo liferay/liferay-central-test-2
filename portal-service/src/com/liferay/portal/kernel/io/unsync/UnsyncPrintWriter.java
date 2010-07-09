@@ -32,8 +32,6 @@ import java.util.Formatter;
 import java.util.Locale;
 
 /**
- * <a href="UnsyncPrintWriter.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * See http://issues.liferay.com/browse/LPS-6648.
  * </p>

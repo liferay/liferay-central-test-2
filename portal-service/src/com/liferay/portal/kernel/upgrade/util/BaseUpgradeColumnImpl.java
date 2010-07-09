@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
- * <a href="BaseUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public abstract class BaseUpgradeColumnImpl implements UpgradeColumn {

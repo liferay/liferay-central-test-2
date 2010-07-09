@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import java.io.PrintWriter;
 
 /**
- * <a href="StackTraceUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class StackTraceUtil {

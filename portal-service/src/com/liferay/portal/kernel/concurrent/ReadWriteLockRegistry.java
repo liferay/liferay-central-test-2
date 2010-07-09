@@ -21,8 +21,6 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
- * <a href="ReadWriteLockRegistry.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * Registry for {@link ReadWriteLock} objects with {@link ReadWriteLockKey} as
  * keys. The behavior of acquiring and releasing locks is provided by a {@link

@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.io;
 import java.io.Writer;
 
 /**
- * <a href="DummyWriter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class DummyWriter extends Writer {

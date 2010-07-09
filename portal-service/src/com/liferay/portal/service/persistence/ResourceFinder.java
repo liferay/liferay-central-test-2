@@ -15,8 +15,6 @@
 package com.liferay.portal.service.persistence;
 
 /**
- * <a href="ResourceFinder.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface ResourceFinder {

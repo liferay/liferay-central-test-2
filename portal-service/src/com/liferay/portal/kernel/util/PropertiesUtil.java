@@ -29,8 +29,6 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * <a href="PropertiesUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PropertiesUtil {

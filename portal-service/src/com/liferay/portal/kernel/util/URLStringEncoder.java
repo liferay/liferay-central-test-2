@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.util;
 
 /**
- * <a href="URLStringEncoder.java.html"><b><i>View Source</i></b></a>
- *
  * @author Connor McKay
  */
 public class URLStringEncoder implements StringEncoder {

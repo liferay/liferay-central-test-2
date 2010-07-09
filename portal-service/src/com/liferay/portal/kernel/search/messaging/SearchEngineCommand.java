@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.search.messaging;
 
 /**
- * <a href="SearchEngineCommand.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public enum SearchEngineCommand {

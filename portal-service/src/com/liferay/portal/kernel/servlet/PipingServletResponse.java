@@ -30,8 +30,6 @@ import javax.servlet.http.HttpServletResponseWrapper;
 import javax.servlet.jsp.PageContext;
 
 /**
- * <a href="PipingServletResponse.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class PipingServletResponse extends HttpServletResponseWrapper {

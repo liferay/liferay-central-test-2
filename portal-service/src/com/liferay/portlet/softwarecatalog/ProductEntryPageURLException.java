@@ -17,9 +17,6 @@ package com.liferay.portlet.softwarecatalog;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * <a href="ProductEntryPageURLException.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ProductEntryPageURLException extends PortalException {

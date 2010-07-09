@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.util;
 import java.util.Locale;
 
 /**
- * <a href="LocaleThreadLocal.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class LocaleThreadLocal {

@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.messaging;
 
 /**
- * <a href="DestinationNames.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface DestinationNames {

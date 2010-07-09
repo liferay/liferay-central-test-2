@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.json;
 
 /**
- * <a href="JSONObjectWrapper.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class JSONObjectWrapper {

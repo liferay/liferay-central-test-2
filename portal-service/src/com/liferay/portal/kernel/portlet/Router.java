@@ -35,8 +35,6 @@ import java.util.Map;
  * fragments in it.
  * </p>
  *
- * <a href="Router.java.html"><b><i>View Source</i></b></a>
- *
  * @author Connor McKay
  * @author Brian Wing Shun Chan
  * @see	   Route

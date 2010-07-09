@@ -19,8 +19,6 @@ import java.util.Map;
 import java.util.TimeZone;
 
 /**
- * <a href="TimeZoneUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class TimeZoneUtil {

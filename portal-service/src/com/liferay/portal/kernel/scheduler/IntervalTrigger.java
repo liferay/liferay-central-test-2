@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import java.util.Date;
 
 /**
- * <a href="IntervalTrigger.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class IntervalTrigger extends BaseTrigger {

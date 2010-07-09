@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.dao.orm;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
 /**
- * <a href="OrderFactoryUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class OrderFactoryUtil {

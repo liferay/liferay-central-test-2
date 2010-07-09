@@ -24,8 +24,6 @@ import java.util.Properties;
 import java.util.Set;
 
 /**
- * <a href="PortletApp.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface PortletApp extends Serializable {

@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.messaging.proxy;
 import java.io.Serializable;
 
 /**
- * <a href="ProxyResponse.java.html"><b><i>View Source</i></b></a>
- *
  * @author Micha Kiener
  * @author Michael C. Han
  * @author Brian Wing Shun Chan

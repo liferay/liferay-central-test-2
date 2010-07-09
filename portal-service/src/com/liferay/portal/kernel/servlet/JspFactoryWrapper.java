@@ -28,8 +28,6 @@ import javax.servlet.jsp.JspFactory;
 import javax.servlet.jsp.PageContext;
 
 /**
- * <a href="JspFactoryWrapper.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class JspFactoryWrapper extends JspFactory {

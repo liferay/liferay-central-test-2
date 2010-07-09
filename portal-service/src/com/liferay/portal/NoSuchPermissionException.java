@@ -15,8 +15,6 @@
 package com.liferay.portal;
 
 /**
- * <a href="NoSuchPermissionException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class NoSuchPermissionException extends NoSuchModelException {

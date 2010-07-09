@@ -16,8 +16,6 @@ package com.liferay.portlet.asset.service;
 
 
 /**
- * <a href="AssetTagStatsLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
  * overwritten the next time is generated.

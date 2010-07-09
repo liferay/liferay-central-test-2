@@ -22,8 +22,6 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * <a href="UnmodifiableList.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * This is a read-only wrapper around any <code>java.util.List</code>. Query
  * operations will "read through" to the specified list. Attempts to modify the

@@ -18,8 +18,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * <a href="UnsyncBufferedInputStream.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * See http://issues.liferay.com/browse/LPS-6648.
  * </p>

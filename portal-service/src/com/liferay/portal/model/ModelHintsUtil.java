@@ -21,8 +21,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="ModelHintsUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ModelHintsUtil {

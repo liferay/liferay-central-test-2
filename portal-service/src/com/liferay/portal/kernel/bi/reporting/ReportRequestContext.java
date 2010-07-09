@@ -20,8 +20,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <a href="ReportRequestContext.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class ReportRequestContext implements Serializable {

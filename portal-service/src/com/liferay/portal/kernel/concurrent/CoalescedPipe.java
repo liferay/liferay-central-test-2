@@ -21,8 +21,6 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * <a href="CoalescedPipe.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class CoalescedPipe<E> {

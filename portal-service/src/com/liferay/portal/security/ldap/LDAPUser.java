@@ -26,8 +26,6 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * <a href="LDAPUser.java.html"><b><i>View Source</i></b></a>
- *
  * @author Edward Han
  * @author Brian Wing Shun Chan
  */

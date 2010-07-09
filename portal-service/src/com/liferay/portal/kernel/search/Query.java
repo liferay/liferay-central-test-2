@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.search;
 import java.io.Serializable;
 
 /**
- * <a href="Query.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface Query extends Serializable {

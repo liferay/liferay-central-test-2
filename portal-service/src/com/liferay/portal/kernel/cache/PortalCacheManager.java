@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.cache;
 
 /**
- * <a href="PortalCacheManager.java.html"><b><i>View Source</i></b></a>
- *
  * @author Joseph Shum
  */
 public interface PortalCacheManager {

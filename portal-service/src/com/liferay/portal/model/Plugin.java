@@ -17,8 +17,6 @@ package com.liferay.portal.model;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 
 /**
- * <a href="Plugin.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public interface Plugin {

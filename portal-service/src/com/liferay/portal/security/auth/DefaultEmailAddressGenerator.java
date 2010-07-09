@@ -19,9 +19,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.UserConstants;
 
 /**
- * <a href="DefaultEmailAddressGenerator.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Wesley Gong
  */
 public class DefaultEmailAddressGenerator implements EmailAddressGenerator {

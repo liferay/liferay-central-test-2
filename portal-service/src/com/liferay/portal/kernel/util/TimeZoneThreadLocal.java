@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.util;
 import java.util.TimeZone;
 
 /**
- * <a href="TimeZoneThreadLocal.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class TimeZoneThreadLocal {

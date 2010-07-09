@@ -17,8 +17,6 @@ package com.liferay.portal.security.permission;
 import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 
 /**
- * <a href="PermissionThreadLocal.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PermissionThreadLocal {

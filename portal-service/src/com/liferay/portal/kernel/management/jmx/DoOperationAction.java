@@ -20,8 +20,6 @@ import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
 /**
- * <a href="DoOperationAction.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class DoOperationAction extends BaseJMXManageAction {

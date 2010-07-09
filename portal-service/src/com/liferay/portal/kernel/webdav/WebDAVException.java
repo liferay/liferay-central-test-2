@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.webdav;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * <a href="WebDAVException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class WebDAVException extends PortalException {

@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.util;
 
 /**
- * <a href="StringEncoder.java.html"><b><i>View Source</i></b></a>
- *
  * @author Connor McKay
  */
 public interface StringEncoder {

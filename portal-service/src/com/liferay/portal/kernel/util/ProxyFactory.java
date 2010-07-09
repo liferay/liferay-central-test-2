@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.bean.ClassLoaderBeanHandler;
 import java.lang.reflect.Proxy;
 
 /**
- * <a href="ProxyFactory.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ProxyFactory {

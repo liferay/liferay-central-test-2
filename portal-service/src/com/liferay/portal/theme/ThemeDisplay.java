@@ -43,8 +43,6 @@ import java.util.TimeZone;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="ThemeDisplay.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ThemeDisplay implements Serializable {

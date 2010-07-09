@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.messaging;
 import java.util.Collection;
 
 /**
- * <a href="MessageBus.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public interface MessageBus {

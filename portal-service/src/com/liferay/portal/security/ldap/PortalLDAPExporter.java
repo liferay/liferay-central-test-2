@@ -22,8 +22,6 @@ import java.io.Serializable;
 import java.util.Map;
 
 /**
- * <a href="PortalLDAPExporter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public interface PortalLDAPExporter {

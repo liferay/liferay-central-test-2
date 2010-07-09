@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.wiki.model.WikiPage;
 
 /**
- * <a href="PageVersionComparator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  */
 public class PageVersionComparator extends OrderByComparator {

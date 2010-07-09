@@ -42,8 +42,6 @@ import javax.portlet.WindowState;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="BaseOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Charles May
  * @author Brian Wing Shun Chan
  */

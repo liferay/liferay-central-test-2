@@ -28,8 +28,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * <a href="ArrayUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ArrayUtil {

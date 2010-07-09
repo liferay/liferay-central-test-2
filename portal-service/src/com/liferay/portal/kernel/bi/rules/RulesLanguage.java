@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.bi.rules;
 
 /**
- * <a href="RulesLanguage.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public enum RulesLanguage {

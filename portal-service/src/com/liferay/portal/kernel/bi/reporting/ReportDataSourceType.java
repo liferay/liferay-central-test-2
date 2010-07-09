@@ -18,8 +18,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <a href="ReportDataSourceType.java.html"><b><i>View Source</i></b></a>
- *
  * @author Gavin Wan
  */
 public enum ReportDataSourceType {

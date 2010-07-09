@@ -25,8 +25,6 @@ import com.liferay.portlet.polls.model.PollsVote;
 import java.util.List;
 
 /**
- * <a href="PollsVoteUtil.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
  * overwritten the next time is generated.

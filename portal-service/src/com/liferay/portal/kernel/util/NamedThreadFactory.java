@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.util;
 import java.util.concurrent.ThreadFactory;
 
 /**
- * <a href="NamedThreadFactory.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class NamedThreadFactory implements ThreadFactory {

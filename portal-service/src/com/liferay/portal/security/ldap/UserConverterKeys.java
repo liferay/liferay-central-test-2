@@ -15,8 +15,6 @@
 package com.liferay.portal.security.ldap;
 
 /**
- * <a href="UserConverterKeys.java.html"><b><i>View Source</i></b></a>
- *
  * @author Edward Han
  */
 public interface UserConverterKeys {

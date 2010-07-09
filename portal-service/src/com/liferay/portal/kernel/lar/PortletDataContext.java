@@ -32,8 +32,6 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * <a href="PortletDataContext.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * Holds context information that is used during exporting and importing portlet
  * data.

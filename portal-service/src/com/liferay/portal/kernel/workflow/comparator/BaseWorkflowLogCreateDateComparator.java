@@ -20,9 +20,6 @@ import com.liferay.portal.kernel.workflow.WorkflowLog;
 import java.util.Date;
 
 /**
- * <a href="BaseWorkflowLogCreateDateComparator.java.html"><b><i>View Source</i>
- * </b></a>
- *
  * @author Michael C. Han
  */
 public abstract class BaseWorkflowLogCreateDateComparator

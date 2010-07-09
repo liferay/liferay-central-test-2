@@ -18,9 +18,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.workflow.WorkflowDefinition;
 
 /**
- * <a href="BaseWorkflowDefinitionNameComparator.java.html"><b><i>View Source
- * </i></b></a>
- *
  * @author Shuyang Zhou
  */
 public abstract class BaseWorkflowDefinitionNameComparator

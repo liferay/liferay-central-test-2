@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.cache.key;
 import com.liferay.portal.kernel.util.StringBundler;
 
 /**
- * <a href="CacheKeyGenerator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  * @author Shuyang Zhou
  */

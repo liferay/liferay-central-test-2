@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.util.ServerDetector;
 import javax.servlet.jsp.JspFactory;
 
 /**
- * <a href="JspFactorySwapper.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class JspFactorySwapper {

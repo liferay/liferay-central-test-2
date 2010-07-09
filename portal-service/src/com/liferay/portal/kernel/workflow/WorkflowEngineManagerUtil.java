@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import java.util.Map;
 
 /**
- * <a href="WorkflowEngineManagerUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class WorkflowEngineManagerUtil {

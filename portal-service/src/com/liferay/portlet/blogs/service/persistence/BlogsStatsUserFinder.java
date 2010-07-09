@@ -15,8 +15,6 @@
 package com.liferay.portlet.blogs.service.persistence;
 
 /**
- * <a href="BlogsStatsUserFinder.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface BlogsStatsUserFinder {

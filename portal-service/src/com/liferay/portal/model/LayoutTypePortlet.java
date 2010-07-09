@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import java.util.List;
 
 /**
- * <a href="LayoutTypePortlet.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface LayoutTypePortlet extends LayoutType {

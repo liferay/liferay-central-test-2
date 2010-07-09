@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.cluster;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * <a href="ClusterException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class ClusterException extends PortalException {

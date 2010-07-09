@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.search;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
  */

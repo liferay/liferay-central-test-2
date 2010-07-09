@@ -26,8 +26,6 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="BaseAssetRenderer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public abstract class BaseAssetRenderer implements AssetRenderer {

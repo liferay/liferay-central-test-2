@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Organization;
 
 /**
- * <a href="OrganizationTypeComparator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class OrganizationTypeComparator extends OrderByComparator {

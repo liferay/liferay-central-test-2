@@ -15,8 +15,6 @@
 package com.liferay.portal.model;
 
 /**
- * <a href="SubscriptionConstants.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class SubscriptionConstants {

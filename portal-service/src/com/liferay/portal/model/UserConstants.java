@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 
 /**
- * <a href="UserConstants.java.html"><b><i>View Source</i></b></a>
- *
  * @author Amos Fong
  */
 public class UserConstants {

@@ -17,8 +17,6 @@ package com.liferay.portlet.documentlibrary;
 import com.liferay.portal.NoSuchModelException;
 
 /**
- * <a href="NoSuchFileShortcutException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class NoSuchFileShortcutException extends NoSuchModelException {

@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.messaging;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender;
 
 /**
- * <a href="BridgingMessageListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class BridgingMessageListener implements MessageListener {

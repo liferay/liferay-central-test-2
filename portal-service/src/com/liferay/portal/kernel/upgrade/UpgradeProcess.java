@@ -27,8 +27,6 @@ import java.sql.SQLException;
 import javax.naming.NamingException;
 
 /**
- * <a href="UpgradeProcess.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
  */

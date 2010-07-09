@@ -15,8 +15,6 @@
 package com.liferay.portlet.shopping.model;
 
 /**
- * <a href="ShoppingCategoryConstants.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class ShoppingCategoryConstants {

@@ -15,8 +15,6 @@
 package com.liferay.portlet.messageboards.model;
 
 /**
- * <a href="MBMessageConstants.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class MBMessageConstants {

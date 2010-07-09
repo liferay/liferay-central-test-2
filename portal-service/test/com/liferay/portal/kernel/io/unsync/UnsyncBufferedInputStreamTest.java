@@ -20,9 +20,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 /**
- * <a href="UnsyncBufferedInputStreamTest.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Shuyang Zhou
  */
 public class UnsyncBufferedInputStreamTest extends TestCase {

@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import java.io.Serializable;
 
 /**
- * <a href="MessageStatus.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class MessageStatus implements Serializable {

@@ -19,9 +19,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
 
 /**
- * <a href="StatsUserLastPostDateComparator.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class StatsUserLastPostDateComparator extends OrderByComparator {

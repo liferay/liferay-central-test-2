@@ -15,8 +15,6 @@
 package com.liferay.portal.security.auth;
 
 /**
- * <a href="FullNameGenerator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public interface FullNameGenerator {

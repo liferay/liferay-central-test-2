@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.upgrade;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * <a href="UpgradeException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class UpgradeException extends PortalException {

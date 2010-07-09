@@ -21,8 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <a href="PortletBeanLocatorUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PortletBeanLocatorUtil {

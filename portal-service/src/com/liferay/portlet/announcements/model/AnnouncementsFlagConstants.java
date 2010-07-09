@@ -15,8 +15,6 @@
 package com.liferay.portlet.announcements.model;
 
 /**
- * <a href="AnnouncementsFlagConstants.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  */
 public class AnnouncementsFlagConstants {

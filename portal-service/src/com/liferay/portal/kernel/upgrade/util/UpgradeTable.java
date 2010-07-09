@@ -18,8 +18,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 /**
- * <a href="UpgradeTable.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alexander Chow
  * @author Brian Wing Shun Chan
  */

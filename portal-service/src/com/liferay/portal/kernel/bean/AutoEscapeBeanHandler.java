@@ -22,8 +22,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
- * <a href="AutoEscapeBeanHandler.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class AutoEscapeBeanHandler implements InvocationHandler {

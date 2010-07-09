@@ -17,8 +17,6 @@ package com.liferay.portlet.expando.util;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 /**
- * <a href="ExpandoBridgeFactory.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface ExpandoBridgeFactory {

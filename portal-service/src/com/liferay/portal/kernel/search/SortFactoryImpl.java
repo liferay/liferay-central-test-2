@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.search;
 
 /**
- * <a href="SortFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class SortFactoryImpl implements SortFactory {

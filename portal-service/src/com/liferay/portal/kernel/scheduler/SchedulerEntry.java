@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 import java.io.Serializable;
 
 /**
- * <a href="SchedulerEntry.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public interface SchedulerEntry extends Serializable {

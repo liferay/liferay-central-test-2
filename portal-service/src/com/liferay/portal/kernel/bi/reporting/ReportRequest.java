@@ -19,8 +19,6 @@ import java.io.Serializable;
 import java.util.Map;
 
 /**
- * <a href="ReportRequest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  * @author Gavin Wan
  */

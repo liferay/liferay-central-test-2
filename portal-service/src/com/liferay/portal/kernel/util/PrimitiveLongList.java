@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.util;
 
 /**
- * <a href="PrimitiveLongList.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class PrimitiveLongList {

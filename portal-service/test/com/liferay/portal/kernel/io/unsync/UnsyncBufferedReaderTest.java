@@ -22,8 +22,6 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 
 /**
- * <a href="UnsyncBufferedReaderTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class UnsyncBufferedReaderTest extends TestCase {

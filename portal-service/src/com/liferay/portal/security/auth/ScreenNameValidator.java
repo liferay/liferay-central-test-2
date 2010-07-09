@@ -15,8 +15,6 @@
 package com.liferay.portal.security.auth;
 
 /**
- * <a href="ScreenNameValidator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface ScreenNameValidator {

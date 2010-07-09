@@ -15,8 +15,6 @@
 package com.liferay.portlet.journal.service.persistence;
 
 /**
- * <a href="JournalStructureFinder.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface JournalStructureFinder {

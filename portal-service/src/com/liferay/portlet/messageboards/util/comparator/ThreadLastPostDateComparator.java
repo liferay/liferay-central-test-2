@@ -23,9 +23,6 @@ import com.liferay.portlet.messageboards.model.MBThread;
 import java.util.Date;
 
 /**
- * <a href="ThreadLastPostDateComparator.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ThreadLastPostDateComparator extends OrderByComparator {

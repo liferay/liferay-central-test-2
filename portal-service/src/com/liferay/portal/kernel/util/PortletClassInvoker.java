@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.servlet.PortletServlet;
 import javax.servlet.ServletContext;
 
 /**
- * <a href="PortletClassInvoker.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  */
 public class PortletClassInvoker {

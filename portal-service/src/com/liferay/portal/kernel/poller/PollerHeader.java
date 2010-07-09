@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.poller;
 import com.liferay.portal.kernel.util.StringBundler;
 
 /**
- * <a href="PollerHeader.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PollerHeader {

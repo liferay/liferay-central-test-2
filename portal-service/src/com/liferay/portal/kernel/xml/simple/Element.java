@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import java.util.LinkedList;
 
 /**
- * <a href="Element.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  */

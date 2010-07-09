@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.util.Validator;
 import java.util.concurrent.atomic.AtomicMarkableReference;
 
 /**
- * <a href="IncreasableEntry.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public abstract class IncreasableEntry<K, V> {

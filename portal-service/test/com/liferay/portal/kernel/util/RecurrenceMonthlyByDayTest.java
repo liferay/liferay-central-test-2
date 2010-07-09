@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.cal.Recurrence;
 import java.util.Calendar;
 
 /**
- * <a href="RecurrenceMonthlyByDayTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Douglas Wong
  */
 public class RecurrenceMonthlyByDayTest extends RecurrenceTestCase {

@@ -17,8 +17,6 @@ package com.liferay.portal.model;
 import java.io.Serializable;
 
 /**
- * <a href="PermissionDisplay.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  */

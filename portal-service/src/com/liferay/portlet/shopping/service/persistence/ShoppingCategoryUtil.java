@@ -25,8 +25,6 @@ import com.liferay.portlet.shopping.model.ShoppingCategory;
 import java.util.List;
 
 /**
- * <a href="ShoppingCategoryUtil.java.html"><b><i>View Source</i></b></a>
- *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
  * overwritten the next time is generated.

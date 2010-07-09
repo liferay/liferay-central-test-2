@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.googleapps;
 
 /**
- * <a href="GoogleAppsFactory.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface GoogleAppsFactory {

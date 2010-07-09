@@ -22,8 +22,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * <a href="ExecutingClassLoaders.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 @Documented

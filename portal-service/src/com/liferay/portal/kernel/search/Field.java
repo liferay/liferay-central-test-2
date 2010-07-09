@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.search;
 import java.io.Serializable;
 
 /**
- * <a href="Field.java.html"><b><i>View Source</i></b></a>
- *
  * @author Bruno Farache
  * @author Brian Wing Shun Chan
  * @author Allen Chiang

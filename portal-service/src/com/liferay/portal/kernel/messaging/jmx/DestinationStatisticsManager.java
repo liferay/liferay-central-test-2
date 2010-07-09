@@ -21,9 +21,6 @@ import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 
 /**
- * <a href="DestinationStatisticsManager.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */

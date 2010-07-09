@@ -18,8 +18,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * <a href="RowMapper.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface RowMapper<T> {

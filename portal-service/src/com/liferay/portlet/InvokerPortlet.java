@@ -22,8 +22,6 @@ import javax.portlet.PortletException;
 import javax.portlet.ResourceServingPortlet;
 
 /**
- * <a href="InvokerPortlet.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael Young
  */
 public interface InvokerPortlet

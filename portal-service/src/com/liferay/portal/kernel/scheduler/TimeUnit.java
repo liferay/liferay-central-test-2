@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.scheduler;
 
 /**
- * <a href="TimeUnit.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public enum TimeUnit {

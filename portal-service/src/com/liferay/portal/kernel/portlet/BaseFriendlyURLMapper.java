@@ -21,8 +21,6 @@ import com.liferay.portal.util.PortalUtil;
 import java.util.Map;
 
 /**
- * <a href="BaseFriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
- *
  * The base implementation of {@link FriendlyURLMapper}.
  *
  * <p>

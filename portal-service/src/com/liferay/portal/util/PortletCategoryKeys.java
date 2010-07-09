@@ -15,8 +15,6 @@
 package com.liferay.portal.util;
 
 /**
- * <a href="PortletCategoryKeys.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class PortletCategoryKeys {

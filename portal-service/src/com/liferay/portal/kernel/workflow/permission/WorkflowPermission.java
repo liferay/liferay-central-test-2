@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.workflow.permission;
 import com.liferay.portal.security.permission.PermissionChecker;
 
 /**
- * <a href="WorkflowPermission.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public interface WorkflowPermission {

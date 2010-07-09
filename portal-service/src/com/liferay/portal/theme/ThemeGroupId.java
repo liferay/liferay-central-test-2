@@ -15,8 +15,6 @@
 package com.liferay.portal.theme;
 
 /**
- * <a href="ThemeGroupId.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class ThemeGroupId extends ThemeCompanyId {

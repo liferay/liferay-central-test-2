@@ -17,8 +17,6 @@ package com.liferay.portal.service;
 import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 
 /**
- * <a href="ServiceContextThreadLocal.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class ServiceContextThreadLocal {

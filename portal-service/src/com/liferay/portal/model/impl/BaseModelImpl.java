@@ -19,8 +19,6 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 /**
- * <a href="BaseModelImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public abstract class BaseModelImpl<T> implements BaseModel<T> {

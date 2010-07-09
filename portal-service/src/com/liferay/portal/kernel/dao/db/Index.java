@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.dao.db;
 
 /**
- * <a href="Index.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class Index {

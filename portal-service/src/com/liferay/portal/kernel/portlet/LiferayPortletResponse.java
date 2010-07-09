@@ -23,8 +23,6 @@ import javax.portlet.ResourceURL;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="LiferayPortletResponse.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public interface LiferayPortletResponse extends PortletResponse {

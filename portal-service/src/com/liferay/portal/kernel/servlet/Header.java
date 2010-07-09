@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.servlet;
 import java.io.Serializable;
 
 /**
- * <a href="Header.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael Young
  */
 public class Header implements Serializable {

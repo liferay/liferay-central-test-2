@@ -18,9 +18,6 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 
 /**
- * <a href="LayoutPrototypePermissionUtil.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Jorge Ferrer
  */
 public class LayoutPrototypePermissionUtil {

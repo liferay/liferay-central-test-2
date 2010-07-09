@@ -19,8 +19,6 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * <a href="TranslatedList.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public abstract class TranslatedList<E, F> extends ListWrapper<E> {

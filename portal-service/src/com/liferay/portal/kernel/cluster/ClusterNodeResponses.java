@@ -21,8 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <a href="ClusterNodeResponses.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class ClusterNodeResponses implements Serializable {

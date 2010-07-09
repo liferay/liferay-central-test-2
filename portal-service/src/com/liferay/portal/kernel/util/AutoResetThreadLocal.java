@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.util;
 
 /**
- * <a href="AutoResetThreadLocal.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class AutoResetThreadLocal<T> extends InitialThreadLocal<T> {

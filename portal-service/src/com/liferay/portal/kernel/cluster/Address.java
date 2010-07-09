@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.cluster;
 import java.io.Serializable;
 
 /**
- * <a href="Address.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public interface Address extends Serializable {

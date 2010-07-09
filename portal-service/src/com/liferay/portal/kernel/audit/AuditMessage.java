@@ -27,8 +27,6 @@ import java.text.DateFormat;
 import java.util.Date;
 
 /**
- * <a href="AuditMessage.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  * @author Mika Koivisto
  * @author Bruno Farache

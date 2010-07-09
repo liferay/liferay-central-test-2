@@ -22,8 +22,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
- * <a href="FutureClusterResponsesTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class FutureClusterResponsesTest extends TestCase {

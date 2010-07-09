@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.plugin;
 import java.io.Serializable;
 
 /**
- * <a href="License.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 public class License implements Serializable {

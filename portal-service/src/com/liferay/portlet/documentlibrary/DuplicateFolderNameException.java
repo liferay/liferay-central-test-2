@@ -17,9 +17,6 @@ package com.liferay.portlet.documentlibrary;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * <a href="DuplicateFolderNameException.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class DuplicateFolderNameException extends PortalException {

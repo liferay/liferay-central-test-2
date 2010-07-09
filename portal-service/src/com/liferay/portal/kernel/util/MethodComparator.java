@@ -19,8 +19,6 @@ import java.lang.reflect.Method;
 import java.util.Comparator;
 
 /**
- * <a href="MethodComparator.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  */

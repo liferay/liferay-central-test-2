@@ -19,9 +19,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 
 /**
- * <a href="FileEntryModifiedDateComparator.java.html"><b><i>View Source</i></b>
- * </a>
- *
  * @author Brian Wing Shun Chan
  */
 public class FileEntryModifiedDateComparator extends OrderByComparator {

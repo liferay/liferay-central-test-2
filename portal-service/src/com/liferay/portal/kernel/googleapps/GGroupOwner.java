@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.googleapps;
 import com.liferay.portal.kernel.util.StringPool;
 
 /**
- * <a href="GGroupOwner.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class GGroupOwner {

@@ -17,8 +17,6 @@ package com.liferay.portlet.messageboards;
 import com.liferay.portal.NoSuchModelException;
 
 /**
- * <a href="NoSuchMessageFlagException.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class NoSuchMessageFlagException extends NoSuchModelException {

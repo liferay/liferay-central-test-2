@@ -17,8 +17,6 @@ package com.liferay.portal.model;
 import com.liferay.portal.ModelListenerException;
 
 /**
- * <a href="ModelListener.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
  */

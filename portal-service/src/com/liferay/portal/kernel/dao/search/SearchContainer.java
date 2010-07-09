@@ -27,8 +27,6 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="SearchContainer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class SearchContainer<R> {

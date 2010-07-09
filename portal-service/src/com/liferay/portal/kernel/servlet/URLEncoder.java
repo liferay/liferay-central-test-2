@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.servlet;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="URLEncoder.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public interface URLEncoder {

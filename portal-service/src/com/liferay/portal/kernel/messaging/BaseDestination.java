@@ -29,8 +29,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * <a href="BaseDestination.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public abstract class BaseDestination implements Destination {

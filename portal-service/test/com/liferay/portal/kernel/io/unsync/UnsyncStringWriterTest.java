@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.io.unsync;
 import com.liferay.portal.kernel.test.TestCase;
 
 /**
- * <a href="UnsyncStringWriterTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Shuyang Zhou
  */
 public class UnsyncStringWriterTest extends TestCase {
