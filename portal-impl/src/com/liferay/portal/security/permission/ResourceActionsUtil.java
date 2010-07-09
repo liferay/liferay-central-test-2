@@ -429,6 +429,12 @@ public class ResourceActionsUtil {
 		_instance._read(servletContextName, classLoader, source);
 	}
 
+	public static void read(String servletContextName, InputStream inputStream)
+		throws Exception {
+
+		_instance._read(servletContextName, inputStream);
+	}
+
 	private ResourceActionsUtil() {
 		_organizationModelResources = new HashSet<String>();
 
@@ -880,6 +886,14 @@ public class ResourceActionsUtil {
 			_read(servletContextName, classLoader, extFile);
 		}
 
+		_read(servletContextName, document);
+	}
+
+	private void _read(String servletContextName, Document document)
+		throws Exception {
+
+		Element rootElement = document.getRootElement();
+
 		if (PropsValues.RESOURCE_ACTIONS_READ_PORTLET_RESOURCES) {
 			for (Element portletResourceElement :
 					rootElement.elements("portlet-resource")) {
@@ -894,6 +908,14 @@ public class ResourceActionsUtil {
 
 			_readModelResource(servletContextName, modelResourceElement);
 		}
+	}
+
+	private void _read(String servletContextName, InputStream inputStream)
+		throws Exception {
+
+		Document document = SAXReaderUtil.read(inputStream);
+
+		_read(servletContextName, document);
 	}
 
 	private void _readActionKeys(Element parentElement, List<String> actions) {
