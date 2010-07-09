@@ -425,6 +425,12 @@ public class ResourceActionsUtil {
 		return _instance._isPortalModelResource(modelResource);
 	}
 
+	public static void read(String servletContextName, InputStream inputStream)
+		throws Exception {
+
+		_instance._read(servletContextName, inputStream);
+	}
+
 	public static void read(
 			String servletContextName, ClassLoader classLoader, String source)
 		throws Exception {
@@ -854,37 +860,12 @@ public class ResourceActionsUtil {
 		}
 	}
 
-	private void _read(
-			String servletContextName, ClassLoader classLoader, String source)
+	private void _read(String servletContextName, InputStream inputStream)
 		throws Exception {
-
-		InputStream inputStream = classLoader.getResourceAsStream(source);
-
-		if (inputStream == null) {
-			if (_log.isWarnEnabled() && !source.endsWith("-ext.xml")) {
-				_log.warn("Cannot load " + source);
-			}
-
-			return;
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Loading " + source);
-		}
 
 		Document document = SAXReaderUtil.read(inputStream);
 
 		Element rootElement = document.getRootElement();
-
-		for (Element resourceElement : rootElement.elements("resource")) {
-			String file = resourceElement.attributeValue("file").trim();
-
-			_read(servletContextName, classLoader, file);
-
-			String extFile = StringUtil.replace(file, ".xml", "-ext.xml");
-
-			_read(servletContextName, classLoader, extFile);
-		}
 
 		if (PropsValues.RESOURCE_ACTIONS_READ_PORTLET_RESOURCES) {
 			for (Element portletResourceElement :
@@ -899,6 +880,45 @@ public class ResourceActionsUtil {
 				rootElement.elements("model-resource")) {
 
 			_readModelResource(servletContextName, modelResourceElement);
+		}
+	}
+
+	private void _read(
+			String servletContextName, ClassLoader classLoader, String source)
+		throws Exception {
+
+		InputStream inputStream = classLoader.getResourceAsStream(source);
+
+		if (inputStream == null) {
+			return;
+		}
+
+		Document document = SAXReaderUtil.read(inputStream);
+
+		Element rootElement = document.getRootElement();
+
+		List<Element> resourceElements = rootElement.elements("resource");
+
+		for (Element resourceElement : resourceElements) {
+			String file = resourceElement.attributeValue("file").trim();
+
+			inputStream = classLoader.getResourceAsStream(file);
+
+			if (inputStream != null) {
+				_read(servletContextName, inputStream);
+			}
+
+			String extFile = StringUtil.replace(file, ".xml", "-ext.xml");
+
+			inputStream = classLoader.getResourceAsStream(extFile);
+
+			if (inputStream != null) {
+				_read(servletContextName, inputStream);
+			}
+		}
+
+		if (resourceElements.isEmpty()) {
+			_read(servletContextName, classLoader.getResourceAsStream(source));
 		}
 	}
 
