@@ -62,12 +62,12 @@ public class ServiceBuilderMojo extends AbstractMojo {
 
 		new ServiceBuilder(
 			serviceFileName, hbmFileName, ormFileName, modelHintsFileName,
-			springFileName, springBaseFileName, null, 
-			springDynamicDataSourceFileName, springHibernateFileName, 
-			springInfrastructureFileName, springShardDataSourceFileName, 
-			apiDir, implDir, jsonFileName, null, sqlDir, sqlFileName, 
-			sqlIndexesFileName, sqlIndexesPropertiesFileName, 
-			sqlSequencesFileName, autoNamespaceTables, beanLocatorUtil, 
+			springFileName, springBaseFileName, null,
+			springDynamicDataSourceFileName, springHibernateFileName,
+			springInfrastructureFileName, springShardDataSourceFileName,
+			apiDir, implDir, jsonFileName, null, sqlDir, sqlFileName,
+			sqlIndexesFileName, sqlIndexesPropertiesFileName,
+			sqlSequencesFileName, autoNamespaceTables, beanLocatorUtil,
 			propsUtil, pluginName, null);
 	}
 
