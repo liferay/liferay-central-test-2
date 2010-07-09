@@ -92,8 +92,6 @@ import java.util.regex.Pattern;
 import org.dom4j.DocumentException;
 
 /**
- * <a href="ServiceBuilder.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  * @author Charles May
  * @author Alexander Chow
@@ -256,27 +254,6 @@ public class ServiceBuilder {
 		}
 	}
 
-	public static final String wrapViewSourceHREF(String viewSourceHREF) {
-		if (viewSourceHREF.length() > 80) {
-			int x = viewSourceHREF.lastIndexOf("<", 80);
-			int y = viewSourceHREF.lastIndexOf(" ", 80);
-
-			int start = x;
-			int end = x;
-
-			if (x < y) {
-				start = y;
-				end = y + 1;
-			}
-
-			viewSourceHREF =
-				viewSourceHREF.substring(0, start) + "\n" +
-					wrapViewSourceHREF(" * " + viewSourceHREF.substring(end));
-		}
-
-		return viewSourceHREF;
-	}
-
 	public static void writeFile(File file, String content)
 		throws IOException {
 
@@ -347,16 +324,7 @@ public class ServiceBuilder {
 
 		Convention convention = Convention.getInstance();
 
-		String classMask = "/**\n";
-
-		String viewSourceHREF =
-			" * <a href=\"" + file.getName() +
-				".html\"><b><i>View Source</i></b></a>";
-
-		classMask += wrapViewSourceHREF(viewSourceHREF) + "\n";
-
-		classMask +=
-			" *\n" +
+		String classMask = "/**\n" +
 			" * @author $author$\n" +
 			"*/";
 

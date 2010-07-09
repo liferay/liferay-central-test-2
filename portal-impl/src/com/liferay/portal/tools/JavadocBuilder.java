@@ -49,8 +49,6 @@ import java.util.TreeMap;
 import org.apache.tools.ant.DirectoryScanner;
 
 /**
- * <a href="JavadocBuilder.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class JavadocBuilder {
@@ -372,10 +370,6 @@ public class JavadocBuilder {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("/**\n");
-		sb.append(" * <a href=\"");
-		sb.append(javaClass.getName());
-		sb.append(".java.html\"><b><i>View Source</i></b></a>\n");
-		sb.append(" *\n");
 		sb.append(" * ");
 		sb.append(_getCDATA(rootElement.elementText("comment")));
 		sb.append("\n");
