@@ -367,7 +367,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 					</c:when>
 					<c:otherwise>
 						<aui:button-row>
-							<aui:button disabled="<%= results.isEmpty() %>" name="publishBtn" type="submit" value="<%= publishActionKey %>" />
+							<aui:button name="publishBtn" type="submit" value="<%= publishActionKey %>" />
 						</aui:button-row>
 					</c:otherwise>
 				</c:choose>
