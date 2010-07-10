@@ -222,7 +222,7 @@ List updatablePackageIds = new ArrayList();
 								<%= LanguageUtil.format(pageContext, "list-of-plugins-was-last-refreshed-on-x", dateFormatDateTime.format(PluginPackageUtil.getLastUpdateDate())) %>
 							</c:if>
 
-							<aui:button onClick='<%= renderResponse.getNamespace() + "<portlet:namespace/>reloadRepositories();" %>' value="refresh" />
+							<aui:button onClick='<%= renderResponse.getNamespace() + "reloadRepositories();" %>' value="refresh" />
 
 							<liferay-util:include page="/html/portlet/plugin_installer/repository_report.jsp" />
 						</div>
