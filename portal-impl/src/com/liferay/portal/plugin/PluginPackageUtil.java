@@ -1163,7 +1163,7 @@ public class PluginPackageUtil {
 		searchContext.setKeywords(keywords);
 		searchContext.setStart(start);
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+		Indexer indexer = IndexerRegistryUtil.getIndexer(PluginPackage.class);
 
 		return indexer.search(searchContext);
 	}
