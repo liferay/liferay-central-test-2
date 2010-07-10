@@ -62,7 +62,7 @@ hasResults = hasResults || (total > 0);
 		function(entryId) {
 			var A = AUI();
 
-			var entry = A.one('#<portlet:namespace/>' + entryId);
+			var entry = A.one('#<portlet:namespace />' + entryId);
 
 			if (entry) {
 				var container = entry.get('parentNode');

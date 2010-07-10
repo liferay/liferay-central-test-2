@@ -23,7 +23,7 @@ boolean portletDisabled = (Boolean)request.getAttribute("render_controls.jsp-por
 for (int i = 0; i < controls.length; i++) {
 %>
 
-	<li class="<portlet:namespace/>handler-control">
+	<li class="<portlet:namespace />handler-control">
 		<c:choose>
 			<c:when test="<%= controls[i] instanceof PortletDataHandlerBoolean %>">
 
@@ -37,7 +37,7 @@ for (int i = 0; i < controls.length; i++) {
 				<aui:input disabled="<%= controls[i].isDisabled() || portletDisabled %>" inlineLabel="right" label="<%= controls[i].getControlName() %>" name="<%= control.getNamespacedControlName() %>" onChange="<%= taglibOnChange %>" type="checkbox" value="<%= control.getDefaultState() %>" />
 
 				<c:if test="<%= children != null %>">
-					<ul id="<portlet:namespace/><%= control.getNamespacedControlName() %>Controls">
+					<ul id="<portlet:namespace /><%= control.getNamespacedControlName() %>Controls">
 
 						<%
 						request.setAttribute("render_controls.jsp-controls", children);

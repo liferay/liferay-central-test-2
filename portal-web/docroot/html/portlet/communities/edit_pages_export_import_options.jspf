@@ -90,7 +90,7 @@
 
 						<aui:input inlineLabel="right" label="data" name="<%= PortletDataHandlerKeys.PORTLET_DATA %>" onChange="<%= taglibToggleDataControls %>" type="checkbox" value="<%= true %>" />
 
-						<ul id="<portlet:namespace/>portletDataControls">
+						<ul id="<portlet:namespace />portletDataControls">
 							<li class="tree-item">
 								<aui:field-wrapper label="range">
 									<ul>

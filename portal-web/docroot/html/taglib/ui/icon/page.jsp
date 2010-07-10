@@ -163,7 +163,7 @@ boolean forcePost = method.equals("post") && (url.startsWith(Http.HTTP_WITH_SLAS
 
 <c:if test="<%= Validator.isNotNull(srcHover) || forcePost %>">
 	<aui:script use="aui-base">
-		var icon = A.one('#<portlet:namespace/><%= id %>');
+		var icon = A.one('#<portlet:namespace /><%= id %>');
 
 		<c:if test="<%= Validator.isNotNull(srcHover) %>">
 			if (icon) {

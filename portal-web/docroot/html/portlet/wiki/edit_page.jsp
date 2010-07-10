@@ -431,7 +431,7 @@ if (Validator.isNull(redirect)) {
 	function <portlet:namespace />getSuggestionsContent() {
 		var content = '';
 
-		content += document.<portlet:namespace />fm.<portlet:namespace/>title.value + ' ';
+		content += document.<portlet:namespace />fm.<portlet:namespace />title.value + ' ';
 		content += document.<portlet:namespace />fm.<portlet:namespace />content.value;
 
 		return content;

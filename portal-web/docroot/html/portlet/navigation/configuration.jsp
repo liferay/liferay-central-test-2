@@ -70,7 +70,7 @@ String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSettin
 	</aui:fieldset>
 
 	<aui:fieldset>
-		<div id="<portlet:namespace/>customDisplayOptions">
+		<div id="<portlet:namespace />customDisplayOptions">
 			<aui:select label="header" name="headerType">
 				<aui:option label="none" selected='<%= headerType.equals("none") %>' />
 				<aui:option label="portlet-title" selected='<%= headerType.equals("portlet-title") %>' />
@@ -115,10 +115,10 @@ String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSettin
 </aui:form>
 
 <aui:script use="aui-base">
-	var select = A.one('#<portlet:namespace/>displayStyle');
+	var select = A.one('#<portlet:namespace />displayStyle');
 
 	var toggleCustomFields = function() {
-		var customDisplayStyle = A.one('#<portlet:namespace/>customDisplayStyle');
+		var customDisplayStyle = A.one('#<portlet:namespace />customDisplayStyle');
 		var displayStyle = select.val();
 
 		if (customDisplayStyle) {

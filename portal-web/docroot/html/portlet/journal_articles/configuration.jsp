@@ -104,7 +104,7 @@ if (Validator.isNotNull(structureId)) {
 					}
 					%>
 
-					<div id="<portlet:namespace/>structure">
+					<div id="<portlet:namespace />structure">
 						<%= structureName %>
 
 						<c:if test="<%= Validator.isNotNull (structureDescription) %>">
@@ -184,7 +184,7 @@ if (Validator.isNotNull(structureId)) {
 
 			document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = "";
 
-			A.one('#<portlet:namespace/>structure').html('<liferay-ui:message key="any" />');
+			A.one('#<portlet:namespace />structure').html('<liferay-ui:message key="any" />');
 		},
 		['aui-base']
 	);
@@ -197,7 +197,7 @@ if (Validator.isNotNull(structureId)) {
 
 			document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
 
-			A.one('#<portlet:namespace/>structure').html(structureId + ' <em>(' + name + ')</em>');
+			A.one('#<portlet:namespace />structure').html(structureId + ' <em>(' + name + ')</em>');
 		},
 		['aui-base']
 	);

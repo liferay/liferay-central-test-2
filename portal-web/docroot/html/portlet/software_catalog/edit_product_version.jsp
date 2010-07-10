@@ -100,7 +100,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 			<liferay-ui:message key="supported-framework-versions" />
 		</td>
 		<td>
-			<select multiple="true" name="<portlet:namespace/>frameworkVersions">
+			<select multiple="true" name="<portlet:namespace />frameworkVersions">
 
 				<%
 				Iterator itr = SCFrameworkVersionServiceUtil.getFrameworkVersions(scopeGroupId, true).iterator();
@@ -146,7 +146,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 			<liferay-ui:message key="test-direct-download-url" />
 		</td>
 		<td>
-			<select name="<portlet:namespace/>testDirectDownloadURL">
+			<select name="<portlet:namespace />testDirectDownloadURL">
 				<option <%= testDirectDownloadURL ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
 				<option <%= !testDirectDownloadURL ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
 			</select>
@@ -160,7 +160,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 		<c:choose>
 			<c:when test="<%= Validator.isNotNull(productEntry.getRepoArtifactId()) && Validator.isNotNull(productEntry.getRepoArtifactId()) %>">
 				<td>
-					<select name="<portlet:namespace/>repoStoreArtifact">
+					<select name="<portlet:namespace />repoStoreArtifact">
 						<option <%= ((productVersion != null) && productVersion.getRepoStoreArtifact()) ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
 						<option <%= ((productVersion != null) && !productVersion.getRepoStoreArtifact()) ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
 					</select>

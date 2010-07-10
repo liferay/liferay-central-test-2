@@ -249,7 +249,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			<input id="<portlet:namespace />keyword" name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" />
 
-			<select name="<portlet:namespace/>type">
+			<select name="<portlet:namespace />type">
 				<option value=""></option>
 
 				<%

@@ -96,7 +96,7 @@ boolean quote = false;
 	<aui:fieldset>
 		<aui:input disabled="<%= thread.isLocked() %>" helpMessage='<%= thread.isLocked() ? LanguageUtil.get(pageContext, "unlock-thread-to-add-an-explanation-post") : StringPool.BLANK %>' inlineLabel="left" label="add-explanation-post-to-the-source-thread" name="addExplanationPost" onClick='<%= renderResponse.getNamespace() + "toggleExplanationPost();" %>' type="checkbox" />
 
-		<div id="<portlet:namespace/>explanationPost" style="display: none;">
+		<div id="<portlet:namespace />explanationPost" style="display: none;">
 
 			<div class="portlet-msg-info">
 				<liferay-ui:message key="the-following-post-will-be-added-in-place-of-the-moved-message" />

@@ -52,7 +52,7 @@
 				</c:otherwise>
 			</c:choose>
 
-			<ul id="<portlet:namespace/>portletDataControls">
+			<ul id="<portlet:namespace />portletDataControls">
 
 				<%
 				try {

@@ -185,7 +185,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	function <portlet:namespace />getSuggestionsContent() {
 		var content = '';
 
-		content += document.<portlet:namespace />fm.<portlet:namespace/>title.value + ' ';
+		content += document.<portlet:namespace />fm.<portlet:namespace />title.value + ' ';
 		content += window.<portlet:namespace />editor.getHTML();
 
 		return content;

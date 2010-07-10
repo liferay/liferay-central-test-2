@@ -83,7 +83,7 @@ int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", product
 		<liferay-ui:message key="type" />
 	</td>
 	<td>
-		<select name="<portlet:namespace/>type">
+		<select name="<portlet:namespace />type">
 
 			<%
 			for (String supportedType : PluginPackageUtil.getSupportedTypes()) {
@@ -103,7 +103,7 @@ int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", product
 		<liferay-ui:message key="licenses" />
 	</td>
 	<td>
-		<select multiple="true" name="<portlet:namespace/>licenses">
+		<select multiple="true" name="<portlet:namespace />licenses">
 			<optgroup label="<liferay-ui:message key="recommended-licenses" />">
 
 				<%
