@@ -897,8 +897,11 @@
 	</portlet>
 	<portlet>
 		<portlet-name>104</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/update_manager.png</icon>
 		<struts-path>update_manager</struts-path>
+		<control-panel-entry-category>server</control-panel-entry-category>
+		<control-panel-entry-weight>4.0</control-panel-entry-weight>
+		<control-panel-entry-class>com.liferay.portlet.admin.OmniadminControlPanelEntry</control-panel-entry-class>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
