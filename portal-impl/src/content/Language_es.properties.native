@@ -4776,6 +4776,7 @@ x-cannot-be-unassociated-from-this-community=<em>{0}</em> no puede ser desasocia
 x-cannot-be-unassociated-from-this-location=<em>{0}</em> no puede ser desasociado desde esta localización.
 x-cannot-be-unassociated-from-this-organization=<em>{0}</em> no puede ser desasociado desde esta organización.
 x-changed-the-state-from-x-to-x={0} cambió el estado de {1} a {2}.
+x-completed-the-task-x={0} completed the task {1}. (Automatic Copy)
 x-convert-x-to-x=<span class="{0}">Convertir {1} a</span> {2}
 x-days={0} días
 x-disables-the-minimum-order-requirement={0} deshabilita la obligación de realizar un pedido mínimo.
