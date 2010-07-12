@@ -39,10 +39,10 @@ if (entry.getPriority() > 0) {
 	<h3 class="entry-title">
 		<c:choose>
 			<c:when test="<%= Validator.isNotNull(entry.getUrl()) %>">
-				<a class="entry-url" href="<%= entry.getUrl() %>"><%= entry.getTitle() %></a>
+				<a class="entry-url" href="<%= entry.getUrl() %>"><%= HtmlUtil.escape(entry.getTitle()) %></a>
 			</c:when>
 			<c:when test="<%= Validator.isNull(entry.getUrl()) %>">
-				<%= entry.getTitle() %>
+				<%= HtmlUtil.escape(entry.getTitle()) %>
 			</c:when>
 		</c:choose>
 
@@ -58,6 +58,6 @@ if (entry.getPriority() > 0) {
 	<p class="<%= readEntry ? "aui-helper-hidden" : "" %> entry-content entry-type-<%= entry.getType() %>">
 		<%@ include file="/html/portlet/announcements/entry_scope.jspf" %>
 
-		<%= entry.getContent() %>
+		<%= HtmlUtil.escape(entry.getContent()) %>
 	</p>
 </div>
