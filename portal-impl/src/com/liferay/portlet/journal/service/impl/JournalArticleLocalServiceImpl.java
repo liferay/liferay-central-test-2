@@ -1639,19 +1639,31 @@ public class JournalArticleLocalServiceImpl
 			groupId, title, content, type, structureId, templateId, smallImage,
 			smallImageURL, smallFile, smallBytes);
 
-		JournalArticle oldArticle = getLatestArticle(
-			groupId, articleId, WorkflowConstants.STATUS_ANY);
-
-		double oldVersion = oldArticle.getVersion();
-
-		if ((version > 0) && (version != oldVersion)) {
-			throw new ArticleVersionException();
-		}
+		JournalArticle oldArticle = null;
+		double oldVersion;
 
 		boolean incrementVersion = false;
 
-		if (oldArticle.isApproved() || oldArticle.isExpired()) {
-			incrementVersion = true;
+		boolean imported = GetterUtil.getBoolean(
+			serviceContext.getAttribute("imported"));
+
+		if (imported) {
+			oldArticle = getArticle(groupId, articleId, version);
+			oldVersion = version;
+		}
+		else {
+			oldArticle = getLatestArticle(
+				groupId, articleId, WorkflowConstants.STATUS_ANY);
+
+			oldVersion = oldArticle.getVersion();
+
+			if ((version > 0) && (version != oldVersion)) {
+				throw new ArticleVersionException();
+			}
+
+			if (oldArticle.isApproved() || oldArticle.isExpired()) {
+				incrementVersion = true;
+			}
 		}
 
 		JournalArticle article = null;
@@ -2048,11 +2060,11 @@ public class JournalArticleLocalServiceImpl
 
 		Element contentEl = contentDoc.getRootElement();
 
-		for (int i = 0; i < elPathNames.length; i++) {
+		for (String _elPathName : elPathNames) {
 			boolean foundEl = false;
 
 			for (Element tempEl : contentEl.elements()) {
-				if (elPathNames[i].equals(
+				if (_elPathName.equals(
 						tempEl.attributeValue("name", StringPool.BLANK))) {
 
 					contentEl = tempEl;
@@ -2891,10 +2903,10 @@ public class JournalArticleLocalServiceImpl
 			if (smallImageName != null) {
 				boolean validSmallImageExtension = false;
 
-				for (int i = 0; i < imageExtensions.length; i++) {
-					if (StringPool.STAR.equals(imageExtensions[i]) ||
+				for (String _imageExtension : imageExtensions) {
+					if (StringPool.STAR.equals(_imageExtension) ||
 						StringUtil.endsWith(
-							smallImageName, imageExtensions[i])) {
+							smallImageName, _imageExtension)) {
 
 						validSmallImageExtension = true;
 
