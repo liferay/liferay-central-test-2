@@ -321,6 +321,15 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			if (groupId > 0) {
 				group = GroupLocalServiceUtil.getGroup(groupId);
 
+				if (group.isLayout()) {
+					Layout layout = LayoutLocalServiceUtil.getLayout(
+						group.getClassPK());
+
+					groupId = layout.getGroupId();
+
+					group = GroupLocalServiceUtil.getGroup(groupId);
+				}
+
 				if (group.isStagingGroup()) {
 					if (primKey.equals(String.valueOf(groupId))) {
 						primKey = String.valueOf(group.getLiveGroupId());
@@ -328,12 +337,6 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 					groupId = group.getLiveGroupId();
 					group = group.getLiveGroup();
-				}
-				else if (group.isLayout()) {
-					Layout layout = LayoutLocalServiceUtil.getLayout(
-						group.getClassPK());
-
-					groupId = layout.getGroupId();
 				}
 			}
 		}
