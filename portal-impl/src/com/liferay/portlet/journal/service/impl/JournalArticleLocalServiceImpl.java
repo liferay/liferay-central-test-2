@@ -1640,7 +1640,7 @@ public class JournalArticleLocalServiceImpl
 			smallImageURL, smallFile, smallBytes);
 
 		JournalArticle oldArticle = null;
-		double oldVersion;
+		double oldVersion = 0;
 
 		boolean incrementVersion = false;
 
@@ -2905,8 +2905,7 @@ public class JournalArticleLocalServiceImpl
 
 				for (String _imageExtension : imageExtensions) {
 					if (StringPool.STAR.equals(_imageExtension) ||
-						StringUtil.endsWith(
-							smallImageName, _imageExtension)) {
+						StringUtil.endsWith(smallImageName, _imageExtension)) {
 
 						validSmallImageExtension = true;
 

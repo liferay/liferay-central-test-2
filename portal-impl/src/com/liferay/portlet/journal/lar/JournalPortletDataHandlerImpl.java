@@ -1192,10 +1192,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddGuestPermissions(addGuestPermissions);
 		serviceContext.setAssetCategoryIds(assetCategoryIds);
 		serviceContext.setAssetTagNames(assetTagNames);
+		serviceContext.setAttribute("imported", Boolean.TRUE.toString());
 		serviceContext.setCreateDate(article.getCreateDate());
 		serviceContext.setModifiedDate(article.getModifiedDate());
 		serviceContext.setScopeGroupId(context.getScopeGroupId());
-		serviceContext.setAttribute("imported", true);
 
 		if (article.getStatus() != WorkflowConstants.STATUS_APPROVED) {
 			serviceContext.setWorkflowAction(
