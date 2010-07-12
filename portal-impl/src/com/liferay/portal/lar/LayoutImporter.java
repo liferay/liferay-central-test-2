@@ -703,12 +703,31 @@ public class LayoutImporter {
 			}
 		}
 		else {
+			// The default behaviour of import mode is
+			// PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_ID
+
+			boolean retainLayoutId = false;
+
 			existingLayout = LayoutUtil.fetchByUUID_G(
 				layout.getUuid(), groupId);
 
 			if (existingLayout == null) {
-				layoutId = LayoutLocalServiceUtil.getNextLayoutId(
-					groupId, privateLayout);
+				existingLayout = LayoutUtil.fetchByG_P_F(
+					groupId, privateLayout, friendlyURL);
+
+				if (existingLayout == null) {
+					retainLayoutId = true;
+				}
+			}
+
+			if (existingLayout == null) {
+				if (retainLayoutId) {
+					layoutId = layout.getLayoutId();
+				}
+				else {
+					layoutId = LayoutLocalServiceUtil.getNextLayoutId(
+						groupId, privateLayout);
+				}
 			}
 		}
 
