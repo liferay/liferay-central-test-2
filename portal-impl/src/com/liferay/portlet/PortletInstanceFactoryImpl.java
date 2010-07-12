@@ -42,6 +42,10 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 	}
 
 	public void clear(Portlet portlet) {
+		clear(portlet, true);
+	}
+
+	public void clear(Portlet portlet, boolean resetRemotePortletBag) {
 		Map<String, InvokerPortlet> portletInstances = _pool.get(
 			portlet.getRootPortletId());
 
@@ -67,7 +71,7 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 
 		PortletApp portletApp = portlet.getPortletApp();
 
-		if (portletApp.isWARFile()) {
+		if (resetRemotePortletBag && portletApp.isWARFile()) {
 			PortletBagPool.remove(portlet.getRootPortletId());
 		}
 	}

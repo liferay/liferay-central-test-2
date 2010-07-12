@@ -27,6 +27,8 @@ public interface PortletInstanceFactory {
 
 	public void clear(Portlet portlet);
 
+	public void clear(Portlet portlet, boolean resetRemotePortletBag);
+
 	public InvokerPortlet create(Portlet portlet, ServletContext servletContext)
 		throws PortletException;
 

@@ -29,6 +29,10 @@ public class PortletInstanceFactoryUtil {
 		getPortletInstanceFactory().clear(portlet);
 	}
 
+	public static void clear(Portlet portlet, boolean resetRemotePortletBag) {
+		getPortletInstanceFactory().clear(portlet, resetRemotePortletBag);
+	}
+
 	public static InvokerPortlet create(
 			Portlet portlet, ServletContext servletContext)
 		throws PortletException {

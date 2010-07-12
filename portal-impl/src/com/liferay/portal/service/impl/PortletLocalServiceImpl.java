@@ -182,6 +182,11 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		portletsPool.put(portlet.getPortletId(), portlet);
 
+		PortletInstanceFactoryUtil.clear(portlet, false);
+
+		PortletConfigFactoryUtil.destroy(portlet);
+		PortletContextFactory.destroy(portlet);
+
 		clearCache();
 
 		PortletCategory newPortletCategory = new PortletCategory();
