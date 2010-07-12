@@ -261,6 +261,11 @@ if (assetEntry != null) {
 						</div>
 
 						<c:choose>
+							<c:when test="<%= (workflowLog.getType() == WorkflowLog.TASK_COMPLETION) %>">
+								<div>
+									<%= LanguageUtil.format(pageContext, "x-completed-the-task-x", new Object[] {HtmlUtil.escape(actorName), workflowLog.getState()}) %>
+								</div>
+							</c:when>
 							<c:when test="<%= workflowLog.getType() == WorkflowLog.TASK_UPDATE %>">
 								<div>
 									<%= LanguageUtil.format(pageContext, "x-updated-the-due-date", HtmlUtil.escape(actorName)) %>
@@ -269,11 +274,6 @@ if (assetEntry != null) {
 							<c:when test="<%= (workflowLog.getType() == WorkflowLog.TRANSITION) %>">
 								<div>
 									<%= LanguageUtil.format(pageContext, "x-changed-the-state-from-x-to-x", new Object[] {HtmlUtil.escape(actorName), workflowLog.getPreviousState(), workflowLog.getState()}) %>
-								</div>
-							</c:when>
-							<c:when test="<%= (workflowLog.getType() == WorkflowLog.TASK_COMPLETION) %>">
-								<div>
-									<%= LanguageUtil.format(pageContext, "x-completed-the-task-x", new Object[] {HtmlUtil.escape(actorName), workflowLog.getState()}) %>
 								</div>
 							</c:when>
 							<c:otherwise>
