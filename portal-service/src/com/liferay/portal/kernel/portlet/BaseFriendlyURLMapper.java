@@ -82,7 +82,8 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 	}
 
 	/**
-	 * @deprecated use {@link #addParameter(String, Map, String, String)} instead
+	 * @deprecated use {@link #addParameter(String, Map, String, String)}
+	 *			   instead
 	 */
 	protected void addParam(
 		Map<String, String[]> parameterMap, String name, String value) {

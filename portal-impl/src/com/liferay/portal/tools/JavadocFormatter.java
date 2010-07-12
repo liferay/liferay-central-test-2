@@ -562,9 +562,9 @@ public class JavadocFormatter {
 			indent);
 
 		if (docletTags.length() > 0) {
-			//if (_initializeMissingJavadocs || Validator.isNotNull(comment)) {
+			if (_initializeMissingJavadocs || Validator.isNotNull(comment)) {
 				sb.append(" *\n");
-			//}
+			}
 
 			sb.append(docletTags);
 		}
