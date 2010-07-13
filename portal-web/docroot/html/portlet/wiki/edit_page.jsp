@@ -77,6 +77,8 @@ else if ((wikiPage == null) && editTitle) {
 if (Validator.isNotNull(title)) {
 	try {
 		WikiPageLocalServiceUtil.validateTitle(title);
+
+		editable = true;
 	}
 	catch (PageTitleException pte) {
 		editTitle = true;
@@ -198,10 +200,12 @@ if (Validator.isNull(redirect)) {
 	<c:if test="<%= newPage %>">
 		<c:choose>
 			<c:when test="<%= editable %>">
-				<liferay-ui:header
-					backURL="<%= redirect %>"
-					title="new-wiki-page"
-				/>
+				<c:if test="<%= Validator.isNull(title) %>">
+					<liferay-ui:header
+						backURL="<%= redirect %>"
+						title="new-wiki-page"
+					/>
+				</c:if>
 
 				<div class="portlet-msg-info">
 					<liferay-ui:message key="this-page-does-not-exist-yet-use-the-form-below-to-create-it" />
