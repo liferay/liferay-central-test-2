@@ -265,7 +265,7 @@ if (assetEntry != null) {
 						</div>
 
 						<c:choose>
-							<c:when test="<%= (workflowLog.getType() == WorkflowLog.TASK_COMPLETION) %>">
+							<c:when test="<%= workflowLog.getType() == WorkflowLog.TASK_COMPLETION %>">
 								<div>
 									<%= LanguageUtil.format(pageContext, "x-completed-the-task-x", new Object[] {HtmlUtil.escape(actorName), workflowLog.getState()}) %>
 								</div>
