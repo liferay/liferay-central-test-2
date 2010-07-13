@@ -62,7 +62,7 @@ import java.util.Map;
  * @see       ${packagePath}.model.${entity.name}Model
  * @generated
  */
-public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
+public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> implements ${entity.name}Model {
 
 	public static final String TABLE_NAME = "${entity.table}";
 
