@@ -15,7 +15,6 @@
 package com.liferay.portal.kernel.io;
 
 import com.liferay.portal.kernel.test.TestCase;
-import com.liferay.portal.kernel.util.CharPool;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,11 +26,11 @@ import java.io.FileOutputStream;
 public class Base64InputStreamTest extends TestCase {
 
 	public void testAvailable() throws Exception {
-		File testFile = new File(_testFilePath);
+		File testFile = new File(_TEST_FILE_NAME);
+
 		FileOutputStream fileOutputStream = new FileOutputStream(testFile);
 
-		byte[] bytes = {CharPool.LOWER_CASE_A, CharPool.LOWER_CASE_B,
-			CharPool.LOWER_CASE_C, CharPool.LOWER_CASE_D};
+		byte[] bytes = {'a', 'b', 'c', 'd'};
 
 		fileOutputStream.write(bytes);
 
@@ -49,200 +48,50 @@ public class Base64InputStreamTest extends TestCase {
 		testFile.delete();
 	}
 
-	public void testRead_0args() throws Exception {
-		File testFile = new File(_testFilePath);
-		FileOutputStream fileOutputStream = new FileOutputStream(testFile);
-
-		byte[] bytes = {CharPool.LOWER_CASE_A, CharPool.LOWER_CASE_B,
-			CharPool.LOWER_CASE_C, CharPool.LOWER_CASE_D};
-
-		fileOutputStream.write(bytes);
-
-		fileOutputStream.close();
-
-		Base64InputStream base64InputStream = new Base64InputStream(
-			new FileInputStream(testFile));
-
-		int returnValue = base64InputStream.read();
-
-		assertEquals(105, returnValue);
-
-		base64InputStream.read();
-		base64InputStream.read();
-
-		returnValue = base64InputStream.read();
-
-		assertEquals(-1, returnValue);
-
-		base64InputStream.close();
-
-		testFile.delete();
-	}
-
-	public void testRead_3args() throws Exception {
-		File testFile = new File(_testFilePath);
-
-		byte[] buffer = new byte[5];
-		int offset = 0;
-		int length = 1;
-
-		FileOutputStream fileOutputStream = new FileOutputStream(testFile);
-
-		byte[] bytes = {CharPool.LOWER_CASE_A, CharPool.LOWER_CASE_B,
-			CharPool.LOWER_CASE_C, CharPool.LOWER_CASE_D, CharPool.LOWER_CASE_A,
-			CharPool.LOWER_CASE_B, CharPool.LOWER_CASE_C, CharPool.LOWER_CASE_D,
-			CharPool.LOWER_CASE_E, CharPool.LOWER_CASE_F, CharPool.LOWER_CASE_G,
-			CharPool.EQUAL};
-
-		fileOutputStream.write(bytes);
-
-		fileOutputStream.close();
-
-		Base64InputStream base64InputStream = new Base64InputStream(
-			new FileInputStream(testFile));
-
-		int returnValue = base64InputStream.read(buffer, offset, length);
-
-		assertEquals(1, returnValue);
-
-		length = 2;
-
-		returnValue = base64InputStream.read(buffer, offset, length);
-
-		assertEquals(2, returnValue);
-
-		length = 6;
-
-		returnValue = base64InputStream.read(buffer, offset, length);
-
-		assertEquals(5, returnValue);
-
-		length = 3;
-
-		returnValue = base64InputStream.read(buffer, offset, length);
-
-		assertEquals(-1, returnValue);
-
-		length = 1;
-
-		returnValue = base64InputStream.read(buffer, offset, length);
-
-		assertEquals(-1, returnValue);
-
-		length = 0;
-
-		returnValue = base64InputStream.read(buffer, offset, length);
-
-		assertEquals(-1, returnValue);
-
-		base64InputStream.close();
-
-		testFile.delete();
-	}
-
-	public void testSkip() throws Exception {
-		File testFile = new File(_testFilePath);
-		long skip = 4L;
-		FileOutputStream fileOutputStream = new FileOutputStream(testFile);
-
-		byte[] bytes = {CharPool.LOWER_CASE_A, CharPool.LOWER_CASE_B,
-			CharPool.LOWER_CASE_C, CharPool.LOWER_CASE_D};
-
-		fileOutputStream.write(bytes);
-
-		fileOutputStream.close();
-
-		Base64InputStream base64InputStream = new Base64InputStream(
-			new FileInputStream(testFile));
-
-		long expResult = 3L;
-
-		long returnValue = base64InputStream.skip(skip);
-
-		assertEquals(expResult, returnValue);
-
-		base64InputStream.close();
-
-		testFile.delete();
-	}
-
 	public void testDecode() {
 		try {
-			File testFile = new File(_testFilePath);
-
-			byte[] bytes = {CharPool.LOWER_CASE_A, CharPool.LOWER_CASE_B,
-			CharPool.LOWER_CASE_C, CharPool.LOWER_CASE_D};
-
-			byte[] outputBuffer = new byte[3];
+			File testFile = new File(_TEST_FILE_NAME);
 
 			FileOutputStream fileOutputStream = new FileOutputStream(testFile);
+
+			byte[] bytes = {'a', 'b', 'c', 'd'};
 
 			fileOutputStream.write(bytes);
 
 			fileOutputStream.close();
 
-			int position = 0;
-			int padNumber = 0;
 			Base64InputStream base64InputStream =
 				new Base64InputStream(new FileInputStream(testFile));
 
-			int returnValue = base64InputStream.decode(
-				bytes, outputBuffer, position, padNumber);
+			byte[] outputBuffer = new byte[3];
+			int position = 0;
 
-			int expResult = 3;
-
-			assertEquals(expResult, returnValue);
-
-			padNumber = 1;
-
-			returnValue = base64InputStream.decode(
-				bytes, outputBuffer, position, padNumber);
-
-			expResult = 2;
-
-			assertEquals(expResult, returnValue);
-
-			padNumber = 2;
-
-			returnValue = base64InputStream.decode(
-				bytes, outputBuffer, position, padNumber);
-
-			expResult = 1;
-
-			assertEquals(expResult, returnValue);
-
-			padNumber = 3;
-
-			returnValue = base64InputStream.decode(
-				bytes, outputBuffer, position, padNumber);
-
-			expResult = -1;
-
-			assertEquals(expResult, returnValue);
+			assertEquals(
+				3, base64InputStream.decode(bytes, outputBuffer, position, 0));
+			assertEquals(
+				2, base64InputStream.decode(bytes, outputBuffer, position, 1));
+			assertEquals(
+				1, base64InputStream.decode(bytes, outputBuffer, position, 2));
+			assertEquals(
+				-1, base64InputStream.decode(bytes, outputBuffer, position, 3));
 
 			base64InputStream.close();
 
 			testFile.delete();
 		}
-		catch (Exception ex) {
-			fail("Test decode failed.");
+		catch (Exception e) {
+			fail(e.getMessage());
 		}
 	}
 
 	public void testDecodeUnit() throws Exception {
-		File testFile = new File(_testFilePath);
-		byte[] outputBuffer = new byte[3];
-		int position = 0;
+		File testFile = new File(_TEST_FILE_NAME);
 
 		FileOutputStream fileOutputStream = new FileOutputStream(testFile);
 
-		byte[] bytes = {CharPool.LOWER_CASE_A, CharPool.LOWER_CASE_B,
-			CharPool.LOWER_CASE_C, CharPool.LOWER_CASE_D, CharPool.LOWER_CASE_E,
-			CharPool.LOWER_CASE_F, CharPool.LOWER_CASE_H, CharPool.EQUAL,
-			CharPool.LOWER_CASE_E, CharPool.LOWER_CASE_F, CharPool.EQUAL,
-			CharPool.EQUAL, CharPool.LOWER_CASE_E, CharPool.EQUAL,
-			CharPool.LOWER_CASE_E, CharPool.LOWER_CASE_F, CharPool.EQUAL,
-			CharPool.LOWER_CASE_A};
+		byte[] bytes = {
+			'a', 'b', 'c', 'd', 'e', 'f', 'h', '=', 'e', 'f', '=', '=', 'e',
+			'=', 'e', 'f', '=', 'a'};
 
 		fileOutputStream.write(bytes);
 
@@ -251,41 +100,15 @@ public class Base64InputStreamTest extends TestCase {
 		Base64InputStream base64InputStream = new Base64InputStream(
 			new FileInputStream(testFile));
 
-		int expResult = 3;
+		byte[] outputBuffer = new byte[3];
+		int position = 0;
 
-		int returnValue = base64InputStream.decodeUnit(outputBuffer, position);
-
-		assertEquals(expResult, returnValue);
-
-		expResult = 2;
-
-		returnValue = base64InputStream.decodeUnit(outputBuffer, position);
-
-		assertEquals(expResult, returnValue);
-
-		expResult = 1;
-
-		returnValue = base64InputStream.decodeUnit(outputBuffer, position);
-
-		assertEquals(expResult, returnValue);
-
-		expResult = -1;
-
-		returnValue = base64InputStream.decodeUnit(outputBuffer, position);
-
-		assertEquals(expResult, returnValue);
-
-		expResult = -1;
-
-		returnValue = base64InputStream.decodeUnit(outputBuffer, position);
-
-		assertEquals(expResult, returnValue);
-
-		expResult = -1;
-
-		returnValue = base64InputStream.decodeUnit(outputBuffer, position);
-
-		assertEquals(expResult, returnValue);
+		assertEquals(3, base64InputStream.decodeUnit(outputBuffer, position));
+		assertEquals(2, base64InputStream.decodeUnit(outputBuffer, position));
+		assertEquals(1, base64InputStream.decodeUnit(outputBuffer, position));
+		assertEquals(-1, base64InputStream.decodeUnit(outputBuffer, position));
+		assertEquals(-1, base64InputStream.decodeUnit(outputBuffer, position));
+		assertEquals(-1, base64InputStream.decodeUnit(outputBuffer, position));
 
 		base64InputStream.close();
 
@@ -294,98 +117,133 @@ public class Base64InputStreamTest extends TestCase {
 
 	public void testGetByte() {
 		try {
-			File testFile = new File(_testFilePath);
+			File testFile = new File(_TEST_FILE_NAME);
+
 			FileOutputStream fileOutputStream = new FileOutputStream(testFile);
 
-			fileOutputStream.write(CharPool.LOWER_CASE_A);
+			fileOutputStream.write('a');
 
 			fileOutputStream.close();
 
 			Base64InputStream base64InputStream = new Base64InputStream(
 				new FileInputStream(testFile));
 
-			char character = CharPool.UPPER_CASE_A;
-			int expResult = 0;
-
-			int returnValue = base64InputStream.getByte(character);
-
-			assertEquals(expResult, returnValue);
-
-			character = CharPool.EQUAL;
-			expResult = 0;
-
-			returnValue = base64InputStream.getByte(character);
-
-			assertEquals(expResult, returnValue);
-
-			character = CharPool.NEW_LINE;
-			expResult = -1;
-
-			returnValue = base64InputStream.getByte(character);
-
-			assertEquals(expResult, returnValue);
-
-			character = CharPool.PLUS;
-			expResult = 62;
-
-			returnValue = base64InputStream.getByte(character);
-
-			assertEquals(expResult, returnValue);
+			assertEquals(0, base64InputStream.getByte('A'));
+			assertEquals(0, base64InputStream.getByte('='));
+			assertEquals(-1, base64InputStream.getByte('\n'));
+			assertEquals(62, base64InputStream.getByte('+'));
 
 			testFile.delete();
 		}
-		catch (Exception ex) {
-			fail("Test getByte failed");
+		catch (Exception e) {
+			fail(e.getMessage());
 		}
 	}
 
 	public void testGetEncodedByte() throws Exception {
-		File testFile = new File(_testFilePath);
-
-		Base64InputStream base64InputStream;
 		try {
+			File testFile = new File(_TEST_FILE_NAME);
+
 			FileOutputStream fileOutputStream = new FileOutputStream(testFile);
 
-			fileOutputStream.write(CharPool.UPPER_CASE_A);
-			fileOutputStream.write(CharPool.EQUAL);
-			fileOutputStream.write(CharPool.UPPER_CASE_B);
-			fileOutputStream.write(CharPool.NEW_LINE);
+			fileOutputStream.write('A');
+			fileOutputStream.write('=');
+			fileOutputStream.write('B');
+			fileOutputStream.write('\n');
 
-			base64InputStream = new Base64InputStream(
+			Base64InputStream base64InputStream = new Base64InputStream(
 				new FileInputStream(testFile));
 
-			int expResult = 0;
-
-			int returnValue = base64InputStream.getEncodedByte();
-
-			assertEquals(expResult, returnValue);
-
-			expResult = -2;
-
-			returnValue = base64InputStream.getEncodedByte();
-
-			assertEquals(expResult, returnValue);
-
-			expResult = 1;
-
-			returnValue = base64InputStream.getEncodedByte();
-
-			assertEquals(expResult, returnValue);
-
-			expResult = -1;
-
-			returnValue = base64InputStream.getEncodedByte();
-
-			assertEquals(expResult, returnValue);
+			assertEquals(0, base64InputStream.getEncodedByte());
+			assertEquals(-2, base64InputStream.getEncodedByte());
+			assertEquals(1, base64InputStream.getEncodedByte());
+			assertEquals(-1, base64InputStream.getEncodedByte());
 
 			testFile.delete();
 		}
-		catch (Exception ex) {
-			fail("Test getEncodedByte failed.");
+		catch (Exception e) {
+			fail(e.getMessage());
 		}
 	}
 
-	private static String _testFilePath =
-		System.getProperty("user.dir") + File.separator + "test.txt";
+	public void testRead_0args() throws Exception {
+		File testFile = new File(_TEST_FILE_NAME);
+
+		FileOutputStream fileOutputStream = new FileOutputStream(testFile);
+
+		byte[] bytes = {'a', 'b', 'c', 'd'};
+
+		fileOutputStream.write(bytes);
+
+		fileOutputStream.close();
+
+		Base64InputStream base64InputStream = new Base64InputStream(
+			new FileInputStream(testFile));
+
+		assertEquals(105, base64InputStream.read());
+
+		base64InputStream.read();
+		base64InputStream.read();
+
+		assertEquals(-1, base64InputStream.read());
+
+		base64InputStream.close();
+
+		testFile.delete();
+	}
+
+	public void testRead_3args() throws Exception {
+		File testFile = new File(_TEST_FILE_NAME);
+
+		FileOutputStream fileOutputStream = new FileOutputStream(testFile);
+
+		byte[] bytes = {
+			'a', 'b', 'c', 'd', 'a', 'b', 'c', 'd', 'e', 'f', 'g', '='};
+
+		fileOutputStream.write(bytes);
+
+		fileOutputStream.close();
+
+		Base64InputStream base64InputStream = new Base64InputStream(
+			new FileInputStream(testFile));
+
+		byte[] buffer = new byte[5];
+		int offset = 0;
+
+		assertEquals(1, base64InputStream.read(buffer, offset, 1));
+		assertEquals(2, base64InputStream.read(buffer, offset, 2));
+		assertEquals(5, base64InputStream.read(buffer, offset, 6));
+		assertEquals(-1, base64InputStream.read(buffer, offset, 3));
+		assertEquals(-1, base64InputStream.read(buffer, offset, 1));
+		assertEquals(-1, base64InputStream.read(buffer, offset, 0));
+
+		base64InputStream.close();
+
+		testFile.delete();
+	}
+
+	public void testSkip() throws Exception {
+		File testFile = new File(_TEST_FILE_NAME);
+
+		FileOutputStream fileOutputStream = new FileOutputStream(testFile);
+
+		byte[] bytes = {'a', 'b', 'c', 'd'};
+
+		fileOutputStream.write(bytes);
+
+		fileOutputStream.close();
+
+		Base64InputStream base64InputStream = new Base64InputStream(
+			new FileInputStream(testFile));
+
+		assertEquals(3L, base64InputStream.skip(4L));
+
+		base64InputStream.close();
+
+		testFile.delete();
+	}
+
+	private static final String _TEST_FILE_NAME =
+		"Base64InputStreamTest.testFilename";
 
 }

@@ -28,7 +28,7 @@ public class Base64OutputStream extends OutputStream {
 		_outputStream = outputStream;
 		_unitBuffer = new byte[3];
 		_unitBufferIndex = 0;
-		_outPutBuffer = new byte[4];
+		_outputBuffer = new byte[4];
 	}
 
 	public void close() throws IOException {
@@ -52,16 +52,6 @@ public class Base64OutputStream extends OutputStream {
 
 	public void write(byte[] bytes) throws IOException {
 		write(bytes, 0, bytes.length);
-	}
-
-	public void write(int byteValue) throws IOException {
-		_unitBuffer[_unitBufferIndex++] = (byte)byteValue;
-
-		if (_unitBufferIndex == 3) {
-			encodeUnit(_unitBuffer[0], _unitBuffer[1], _unitBuffer[2]);
-
-			_unitBufferIndex = 0;
-		}
 	}
 
 	public void write(byte[] bytes, int offset, int length) throws IOException {
@@ -97,20 +87,30 @@ public class Base64OutputStream extends OutputStream {
 		}
 	}
 
+	public void write(int byteValue) throws IOException {
+		_unitBuffer[_unitBufferIndex++] = (byte)byteValue;
+
+		if (_unitBufferIndex == 3) {
+			encodeUnit(_unitBuffer[0], _unitBuffer[1], _unitBuffer[2]);
+
+			_unitBufferIndex = 0;
+		}
+	}
+
 	protected void encodeUnit(byte byteValue) throws IOException {
 		int intValue = byteValue & 0xff;
 
 		intValue <<= 4;
 
-		_outPutBuffer[3] = (byte)CharPool.EQUAL;
-		_outPutBuffer[2] = (byte)CharPool.EQUAL;
-		_outPutBuffer[1] = (byte)getChar(intValue & 0x3f);
+		_outputBuffer[3] = (byte)CharPool.EQUAL;
+		_outputBuffer[2] = (byte)CharPool.EQUAL;
+		_outputBuffer[1] = (byte)getChar(intValue & 0x3f);
 
 		intValue >>= 6;
 
-		_outPutBuffer[0] = (byte)getChar(intValue & 0x3f);
+		_outputBuffer[0] = (byte)getChar(intValue & 0x3f);
 
-		_outputStream.write(_outPutBuffer);
+		_outputStream.write(_outputBuffer);
 	}
 
 	protected void encodeUnit(byte byte1, byte byte2) throws IOException {
@@ -120,18 +120,18 @@ public class Base64OutputStream extends OutputStream {
 		intValue |= byte2 & 0xff;
 		intValue <<= 2;
 
-		_outPutBuffer[3] = (byte)CharPool.EQUAL;
-		_outPutBuffer[2] = (byte)getChar(intValue & 0x3f);
+		_outputBuffer[3] = (byte)CharPool.EQUAL;
+		_outputBuffer[2] = (byte)getChar(intValue & 0x3f);
 
 		intValue >>= 6;
 
-		_outPutBuffer[1] = (byte)getChar(intValue & 0x3f);
+		_outputBuffer[1] = (byte)getChar(intValue & 0x3f);
 
 		intValue >>= 6;
 
-		_outPutBuffer[0] = (byte)getChar(intValue & 0x3f);
+		_outputBuffer[0] = (byte)getChar(intValue & 0x3f);
 
-		_outputStream.write(_outPutBuffer);
+		_outputStream.write(_outputBuffer);
 	}
 
 	protected void encodeUnit(byte byte1, byte byte2, byte byte3)
@@ -144,21 +144,21 @@ public class Base64OutputStream extends OutputStream {
 		intVallue <<= 8;
 		intVallue |= byte3 & 0xff;
 
-		_outPutBuffer[3] = (byte)getChar(intVallue & 0x3f);
+		_outputBuffer[3] = (byte)getChar(intVallue & 0x3f);
 
 		intVallue >>= 6;
 
-		_outPutBuffer[2] = (byte)getChar(intVallue & 0x3f);
+		_outputBuffer[2] = (byte)getChar(intVallue & 0x3f);
 
 		intVallue >>= 6;
 
-		_outPutBuffer[1] = (byte)getChar(intVallue & 0x3f);
+		_outputBuffer[1] = (byte)getChar(intVallue & 0x3f);
 
 		intVallue >>= 6;
 
-		_outPutBuffer[0] = (byte)getChar(intVallue & 0x3f);
+		_outputBuffer[0] = (byte)getChar(intVallue & 0x3f);
 
-		_outputStream.write(_outPutBuffer);
+		_outputStream.write(_outputBuffer);
 	}
 
 	protected char getChar(int sixbit) {
@@ -178,11 +178,16 @@ public class Base64OutputStream extends OutputStream {
 			return CharPool.PLUS;
 		}
 
-		return sixbit != 63 ? CharPool.QUESTION : CharPool.SLASH;
+		if (sixbit != 63) {
+			return CharPool.QUESTION;
+		}
+		else {
+			return CharPool.SLASH;
+		}
 	}
 
+	private byte[] _outputBuffer;
 	private OutputStream _outputStream;
-	private byte[] _outPutBuffer;
 	private byte[] _unitBuffer;
 	private int _unitBufferIndex;
 

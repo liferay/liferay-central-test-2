@@ -52,13 +52,13 @@ public class Base64InputStream extends InputStream {
 	}
 
 	public int read(byte[] buffer, int offset, int length) throws IOException {
-		if (length <= 0 || offset < 0) {
+		if ((length <= 0) || (offset < 0)) {
 			return -1;
 		}
 
 		int initialLength = length;
 
-		while (_avaiableBytes > 0 && length > 0) {
+		while ((_avaiableBytes > 0) && (length > 0)) {
 			buffer[offset++] = _unitBuffer[_unitBufferIndex++];
 
 			_avaiableBytes--;
@@ -224,7 +224,9 @@ public class Base64InputStream extends InputStream {
 			return (character - 97) + 26;
 		}
 
-		if (character >= CharPool.NUMBER_0 && character <= CharPool.NUMBER_9) {
+		if ((character >= CharPool.NUMBER_0) &&
+			(character <= CharPool.NUMBER_9)) {
+
 			return (character - 48) + 52;
 		}
 
@@ -236,7 +238,12 @@ public class Base64InputStream extends InputStream {
 			return 63;
 		}
 
-		return character != CharPool.EQUAL ? -1 : 0;
+		if (character != CharPool.EQUAL) {
+			return -1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	protected int getEncodedByte() throws IOException {
