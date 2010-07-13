@@ -25,6 +25,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.ratings.model.RatingsStats;
+import com.liferay.portlet.ratings.model.RatingsStatsModel;
 
 import java.io.Serializable;
 
@@ -49,7 +50,8 @@ import java.sql.Types;
  * @see       com.liferay.portlet.ratings.model.RatingsStatsModel
  * @generated
  */
-public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats> {
+public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
+	implements RatingsStatsModel {
 	public static final String TABLE_NAME = "RatingsStats";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "statsId", new Integer(Types.BIGINT) },

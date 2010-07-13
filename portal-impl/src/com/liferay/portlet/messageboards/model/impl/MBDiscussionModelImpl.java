@@ -25,6 +25,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
+import com.liferay.portlet.messageboards.model.MBDiscussionModel;
 
 import java.io.Serializable;
 
@@ -49,7 +50,8 @@ import java.sql.Types;
  * @see       com.liferay.portlet.messageboards.model.MBDiscussionModel
  * @generated
  */
-public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion> {
+public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion>
+	implements MBDiscussionModel {
 	public static final String TABLE_NAME = "MBDiscussion";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "discussionId", new Integer(Types.BIGINT) },

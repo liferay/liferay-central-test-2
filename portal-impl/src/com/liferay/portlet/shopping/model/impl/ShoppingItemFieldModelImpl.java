@@ -24,6 +24,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.shopping.model.ShoppingItemField;
+import com.liferay.portlet.shopping.model.ShoppingItemFieldModel;
 
 import java.io.Serializable;
 
@@ -48,7 +49,8 @@ import java.sql.Types;
  * @see       com.liferay.portlet.shopping.model.ShoppingItemFieldModel
  * @generated
  */
-public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField> {
+public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField>
+	implements ShoppingItemFieldModel {
 	public static final String TABLE_NAME = "ShoppingItemField";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "itemFieldId", new Integer(Types.BIGINT) },

@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ListType;
+import com.liferay.portal.model.ListTypeModel;
 import com.liferay.portal.model.ListTypeSoap;
 
 import java.io.Serializable;
@@ -47,7 +48,8 @@ import java.util.List;
  * @see       com.liferay.portal.model.ListTypeModel
  * @generated
  */
-public class ListTypeModelImpl extends BaseModelImpl<ListType> {
+public class ListTypeModelImpl extends BaseModelImpl<ListType>
+	implements ListTypeModel {
 	public static final String TABLE_NAME = "ListType";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "listTypeId", new Integer(Types.INTEGER) },

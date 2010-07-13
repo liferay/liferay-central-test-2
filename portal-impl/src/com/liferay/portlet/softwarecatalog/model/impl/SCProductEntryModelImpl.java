@@ -27,6 +27,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
+import com.liferay.portlet.softwarecatalog.model.SCProductEntryModel;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntrySoap;
 
 import java.io.Serializable;
@@ -56,7 +57,8 @@ import java.util.List;
  * @see       com.liferay.portlet.softwarecatalog.model.SCProductEntryModel
  * @generated
  */
-public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
+public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
+	implements SCProductEntryModel {
 	public static final String TABLE_NAME = "SCProductEntry";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "productEntryId", new Integer(Types.BIGINT) },

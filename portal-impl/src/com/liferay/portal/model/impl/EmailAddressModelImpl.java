@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.EmailAddress;
+import com.liferay.portal.model.EmailAddressModel;
 import com.liferay.portal.model.EmailAddressSoap;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -55,7 +56,8 @@ import java.util.List;
  * @see       com.liferay.portal.model.EmailAddressModel
  * @generated
  */
-public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress> {
+public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
+	implements EmailAddressModel {
 	public static final String TABLE_NAME = "EmailAddress";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "emailAddressId", new Integer(Types.BIGINT) },

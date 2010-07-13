@@ -26,6 +26,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBCategoryModel;
 import com.liferay.portlet.messageboards.model.MBCategorySoap;
 
 import java.io.Serializable;
@@ -55,7 +56,8 @@ import java.util.List;
  * @see       com.liferay.portlet.messageboards.model.MBCategoryModel
  * @generated
  */
-public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {
+public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
+	implements MBCategoryModel {
 	public static final String TABLE_NAME = "MBCategory";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },

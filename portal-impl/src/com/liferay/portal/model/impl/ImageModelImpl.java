@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Image;
+import com.liferay.portal.model.ImageModel;
 import com.liferay.portal.model.ImageSoap;
 import com.liferay.portal.service.ServiceContext;
 
@@ -52,7 +53,7 @@ import java.util.List;
  * @see       com.liferay.portal.model.ImageModel
  * @generated
  */
-public class ImageModelImpl extends BaseModelImpl<Image> {
+public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 	public static final String TABLE_NAME = "Image";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "imageId", new Integer(Types.BIGINT) },

@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ServiceComponent;
+import com.liferay.portal.model.ServiceComponentModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -47,7 +48,8 @@ import java.sql.Types;
  * @see       com.liferay.portal.model.ServiceComponentModel
  * @generated
  */
-public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent> {
+public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
+	implements ServiceComponentModel {
 	public static final String TABLE_NAME = "ServiceComponent";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "serviceComponentId", new Integer(Types.BIGINT) },

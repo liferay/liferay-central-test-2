@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Subscription;
+import com.liferay.portal.model.SubscriptionModel;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
@@ -51,7 +52,8 @@ import java.util.Date;
  * @see       com.liferay.portal.model.SubscriptionModel
  * @generated
  */
-public class SubscriptionModelImpl extends BaseModelImpl<Subscription> {
+public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
+	implements SubscriptionModel {
 	public static final String TABLE_NAME = "Subscription";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "subscriptionId", new Integer(Types.BIGINT) },

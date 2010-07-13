@@ -26,6 +26,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.shopping.model.ShoppingCart;
+import com.liferay.portlet.shopping.model.ShoppingCartModel;
 
 import java.io.Serializable;
 
@@ -52,7 +53,8 @@ import java.util.Date;
  * @see       com.liferay.portlet.shopping.model.ShoppingCartModel
  * @generated
  */
-public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
+public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
+	implements ShoppingCartModel {
 	public static final String TABLE_NAME = "ShoppingCart";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "cartId", new Integer(Types.BIGINT) },

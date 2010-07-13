@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.OrgLabor;
+import com.liferay.portal.model.OrgLaborModel;
 import com.liferay.portal.model.OrgLaborSoap;
 import com.liferay.portal.service.ServiceContext;
 
@@ -50,7 +51,8 @@ import java.util.List;
  * @see       com.liferay.portal.model.OrgLaborModel
  * @generated
  */
-public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
+public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor>
+	implements OrgLaborModel {
 	public static final String TABLE_NAME = "OrgLabor";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "orgLaborId", new Integer(Types.BIGINT) },

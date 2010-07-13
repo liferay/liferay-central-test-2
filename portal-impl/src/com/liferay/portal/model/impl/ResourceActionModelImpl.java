@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ResourceAction;
+import com.liferay.portal.model.ResourceActionModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -47,7 +48,8 @@ import java.sql.Types;
  * @see       com.liferay.portal.model.ResourceActionModel
  * @generated
  */
-public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction> {
+public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
+	implements ResourceActionModel {
 	public static final String TABLE_NAME = "ResourceAction";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "resourceActionId", new Integer(Types.BIGINT) },

@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Country;
+import com.liferay.portal.model.CountryModel;
 import com.liferay.portal.model.CountrySoap;
 import com.liferay.portal.service.ServiceContext;
 
@@ -51,7 +52,8 @@ import java.util.List;
  * @see       com.liferay.portal.model.CountryModel
  * @generated
  */
-public class CountryModelImpl extends BaseModelImpl<Country> {
+public class CountryModelImpl extends BaseModelImpl<Country>
+	implements CountryModel {
 	public static final String TABLE_NAME = "Country";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "countryId", new Integer(Types.BIGINT) },

@@ -25,6 +25,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
+import com.liferay.portlet.messageboards.model.MBMessageFlagModel;
 import com.liferay.portlet.messageboards.model.MBMessageFlagSoap;
 
 import java.io.Serializable;
@@ -54,7 +55,8 @@ import java.util.List;
  * @see       com.liferay.portlet.messageboards.model.MBMessageFlagModel
  * @generated
  */
-public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
+public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
+	implements MBMessageFlagModel {
 	public static final String TABLE_NAME = "MBMessageFlag";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "messageFlagId", new Integer(Types.BIGINT) },

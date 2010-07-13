@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleModel;
 import com.liferay.portal.model.RoleSoap;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -59,7 +60,7 @@ import java.util.Map;
  * @see       com.liferay.portal.model.RoleModel
  * @generated
  */
-public class RoleModelImpl extends BaseModelImpl<Role> {
+public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 	public static final String TABLE_NAME = "Role_";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "roleId", new Integer(Types.BIGINT) },

@@ -29,6 +29,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.asset.model.AssetVocabulary;
+import com.liferay.portlet.asset.model.AssetVocabularyModel;
 import com.liferay.portlet.asset.model.AssetVocabularySoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -62,7 +63,8 @@ import java.util.Map;
  * @see       com.liferay.portlet.asset.model.AssetVocabularyModel
  * @generated
  */
-public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
+public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
+	implements AssetVocabularyModel {
 	public static final String TABLE_NAME = "AssetVocabulary";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },

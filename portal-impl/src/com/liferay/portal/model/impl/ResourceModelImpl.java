@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.ResourceModel;
 import com.liferay.portal.model.ResourceSoap;
 import com.liferay.portal.service.ServiceContext;
 
@@ -51,7 +52,8 @@ import java.util.List;
  * @see       com.liferay.portal.model.ResourceModel
  * @generated
  */
-public class ResourceModelImpl extends BaseModelImpl<Resource> {
+public class ResourceModelImpl extends BaseModelImpl<Resource>
+	implements ResourceModel {
 	public static final String TABLE_NAME = "Resource_";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "resourceId", new Integer(Types.BIGINT) },

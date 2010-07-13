@@ -28,6 +28,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBMessageModel;
 import com.liferay.portlet.messageboards.model.MBMessageSoap;
 
 import java.io.Serializable;
@@ -57,7 +58,8 @@ import java.util.List;
  * @see       com.liferay.portlet.messageboards.model.MBMessageModel
  * @generated
  */
-public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
+public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
+	implements MBMessageModel {
 	public static final String TABLE_NAME = "MBMessage";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },

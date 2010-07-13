@@ -26,6 +26,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.messageboards.model.MBMailingList;
+import com.liferay.portlet.messageboards.model.MBMailingListModel;
 
 import java.io.Serializable;
 
@@ -52,7 +53,8 @@ import java.util.Date;
  * @see       com.liferay.portlet.messageboards.model.MBMailingListModel
  * @generated
  */
-public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
+public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
+	implements MBMailingListModel {
 	public static final String TABLE_NAME = "MBMailingList";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },

@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Ticket;
+import com.liferay.portal.model.TicketModel;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
@@ -50,7 +51,8 @@ import java.util.Date;
  * @see       com.liferay.portal.model.TicketModel
  * @generated
  */
-public class TicketModelImpl extends BaseModelImpl<Ticket> {
+public class TicketModelImpl extends BaseModelImpl<Ticket>
+	implements TicketModel {
 	public static final String TABLE_NAME = "Ticket";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "ticketId", new Integer(Types.BIGINT) },

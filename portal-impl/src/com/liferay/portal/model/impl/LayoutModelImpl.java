@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutModel;
 import com.liferay.portal.model.LayoutSoap;
 import com.liferay.portal.service.ServiceContext;
 
@@ -51,7 +52,8 @@ import java.util.List;
  * @see       com.liferay.portal.model.LayoutModel
  * @generated
  */
-public class LayoutModelImpl extends BaseModelImpl<Layout> {
+public class LayoutModelImpl extends BaseModelImpl<Layout>
+	implements LayoutModel {
 	public static final String TABLE_NAME = "Layout";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },

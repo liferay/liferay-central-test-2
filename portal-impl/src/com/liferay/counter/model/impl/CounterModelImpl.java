@@ -15,6 +15,7 @@
 package com.liferay.counter.model.impl;
 
 import com.liferay.counter.model.Counter;
+import com.liferay.counter.model.CounterModel;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -45,7 +46,8 @@ import java.sql.Types;
  * @see       com.liferay.counter.model.CounterModel
  * @generated
  */
-public class CounterModelImpl extends BaseModelImpl<Counter> {
+public class CounterModelImpl extends BaseModelImpl<Counter>
+	implements CounterModel {
 	public static final String TABLE_NAME = "Counter";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "name", new Integer(Types.VARCHAR) },

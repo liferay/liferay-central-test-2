@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.UserGroupRole;
+import com.liferay.portal.model.UserGroupRoleModel;
 import com.liferay.portal.model.UserGroupRoleSoap;
 import com.liferay.portal.service.persistence.UserGroupRolePK;
 import com.liferay.portal.util.PortalUtil;
@@ -49,7 +50,8 @@ import java.util.List;
  * @see       com.liferay.portal.model.UserGroupRoleModel
  * @generated
  */
-public class UserGroupRoleModelImpl extends BaseModelImpl<UserGroupRole> {
+public class UserGroupRoleModelImpl extends BaseModelImpl<UserGroupRole>
+	implements UserGroupRoleModel {
 	public static final String TABLE_NAME = "UserGroupRole";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "userId", new Integer(Types.BIGINT) },

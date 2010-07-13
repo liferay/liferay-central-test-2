@@ -24,6 +24,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.announcements.model.AnnouncementsFlag;
+import com.liferay.portlet.announcements.model.AnnouncementsFlagModel;
 import com.liferay.portlet.announcements.model.AnnouncementsFlagSoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -55,7 +56,8 @@ import java.util.List;
  * @see       com.liferay.portlet.announcements.model.AnnouncementsFlagModel
  * @generated
  */
-public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag> {
+public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
+	implements AnnouncementsFlagModel {
 	public static final String TABLE_NAME = "AnnouncementsFlag";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "flagId", new Integer(Types.BIGINT) },

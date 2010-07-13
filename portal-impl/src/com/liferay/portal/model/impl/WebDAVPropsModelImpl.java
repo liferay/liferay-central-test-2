@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.WebDAVProps;
+import com.liferay.portal.model.WebDAVPropsModel;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
@@ -50,7 +51,8 @@ import java.util.Date;
  * @see       com.liferay.portal.model.WebDAVPropsModel
  * @generated
  */
-public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps> {
+public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
+	implements WebDAVPropsModel {
 	public static final String TABLE_NAME = "WebDAVProps";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "webDavPropsId", new Integer(Types.BIGINT) },

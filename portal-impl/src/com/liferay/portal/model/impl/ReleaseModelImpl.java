@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Release;
+import com.liferay.portal.model.ReleaseModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -49,7 +50,8 @@ import java.util.Date;
  * @see       com.liferay.portal.model.ReleaseModel
  * @generated
  */
-public class ReleaseModelImpl extends BaseModelImpl<Release> {
+public class ReleaseModelImpl extends BaseModelImpl<Release>
+	implements ReleaseModel {
 	public static final String TABLE_NAME = "Release_";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "releaseId", new Integer(Types.BIGINT) },

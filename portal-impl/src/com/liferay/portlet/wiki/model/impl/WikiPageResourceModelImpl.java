@@ -24,6 +24,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.wiki.model.WikiPageResource;
+import com.liferay.portlet.wiki.model.WikiPageResourceModel;
 
 import java.io.Serializable;
 
@@ -48,7 +49,8 @@ import java.sql.Types;
  * @see       com.liferay.portlet.wiki.model.WikiPageResourceModel
  * @generated
  */
-public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource> {
+public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
+	implements WikiPageResourceModel {
 	public static final String TABLE_NAME = "WikiPageResource";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },

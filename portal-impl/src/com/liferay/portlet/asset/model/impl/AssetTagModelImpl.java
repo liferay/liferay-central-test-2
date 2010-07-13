@@ -24,6 +24,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.asset.model.AssetTag;
+import com.liferay.portlet.asset.model.AssetTagModel;
 import com.liferay.portlet.asset.model.AssetTagSoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -55,7 +56,8 @@ import java.util.List;
  * @see       com.liferay.portlet.asset.model.AssetTagModel
  * @generated
  */
-public class AssetTagModelImpl extends BaseModelImpl<AssetTag> {
+public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
+	implements AssetTagModel {
 	public static final String TABLE_NAME = "AssetTag";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "tagId", new Integer(Types.BIGINT) },

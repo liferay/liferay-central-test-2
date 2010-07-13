@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.OrganizationModel;
 import com.liferay.portal.model.OrganizationSoap;
 import com.liferay.portal.service.ServiceContext;
 
@@ -51,7 +52,8 @@ import java.util.List;
  * @see       com.liferay.portal.model.OrganizationModel
  * @generated
  */
-public class OrganizationModelImpl extends BaseModelImpl<Organization> {
+public class OrganizationModelImpl extends BaseModelImpl<Organization>
+	implements OrganizationModel {
 	public static final String TABLE_NAME = "Organization_";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "organizationId", new Integer(Types.BIGINT) },

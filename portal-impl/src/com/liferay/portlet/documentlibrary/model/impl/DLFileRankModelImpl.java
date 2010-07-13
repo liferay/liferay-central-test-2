@@ -25,6 +25,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
+import com.liferay.portlet.documentlibrary.model.DLFileRankModel;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
@@ -53,7 +54,8 @@ import java.util.Date;
  * @see       com.liferay.portlet.documentlibrary.model.DLFileRankModel
  * @generated
  */
-public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
+public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
+	implements DLFileRankModel {
 	public static final String TABLE_NAME = "DLFileRank";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "fileRankId", new Integer(Types.BIGINT) },

@@ -24,6 +24,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.asset.model.AssetCategoryProperty;
+import com.liferay.portlet.asset.model.AssetCategoryPropertyModel;
 import com.liferay.portlet.asset.model.AssetCategoryPropertySoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -55,7 +56,8 @@ import java.util.List;
  * @see       com.liferay.portlet.asset.model.AssetCategoryPropertyModel
  * @generated
  */
-public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryProperty> {
+public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryProperty>
+	implements AssetCategoryPropertyModel {
 	public static final String TABLE_NAME = "AssetCategoryProperty";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "categoryPropertyId", new Integer(Types.BIGINT) },

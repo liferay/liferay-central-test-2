@@ -24,6 +24,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.journal.model.JournalContentSearch;
+import com.liferay.portlet.journal.model.JournalContentSearchModel;
 
 import java.io.Serializable;
 
@@ -48,7 +49,8 @@ import java.sql.Types;
  * @see       com.liferay.portlet.journal.model.JournalContentSearchModel
  * @generated
  */
-public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentSearch> {
+public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentSearch>
+	implements JournalContentSearchModel {
 	public static final String TABLE_NAME = "JournalContentSearch";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "contentSearchId", new Integer(Types.BIGINT) },

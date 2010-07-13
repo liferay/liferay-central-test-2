@@ -23,6 +23,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
+import com.liferay.portlet.shopping.model.ShoppingItemPriceModel;
 
 import java.io.Serializable;
 
@@ -47,7 +48,8 @@ import java.sql.Types;
  * @see       com.liferay.portlet.shopping.model.ShoppingItemPriceModel
  * @generated
  */
-public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice> {
+public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
+	implements ShoppingItemPriceModel {
 	public static final String TABLE_NAME = "ShoppingItemPrice";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "itemPriceId", new Integer(Types.BIGINT) },

@@ -27,6 +27,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
+import com.liferay.portlet.softwarecatalog.model.SCProductVersionModel;
 import com.liferay.portlet.softwarecatalog.model.SCProductVersionSoap;
 
 import java.io.Serializable;
@@ -56,7 +57,8 @@ import java.util.List;
  * @see       com.liferay.portlet.softwarecatalog.model.SCProductVersionModel
  * @generated
  */
-public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
+public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
+	implements SCProductVersionModel {
 	public static final String TABLE_NAME = "SCProductVersion";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "productVersionId", new Integer(Types.BIGINT) },

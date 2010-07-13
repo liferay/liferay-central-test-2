@@ -32,6 +32,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.polls.model.PollsQuestion;
+import com.liferay.portlet.polls.model.PollsQuestionModel;
 import com.liferay.portlet.polls.model.PollsQuestionSoap;
 
 import java.io.Serializable;
@@ -63,7 +64,8 @@ import java.util.Map;
  * @see       com.liferay.portlet.polls.model.PollsQuestionModel
  * @generated
  */
-public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
+public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
+	implements PollsQuestionModel {
 	public static final String TABLE_NAME = "PollsQuestion";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },

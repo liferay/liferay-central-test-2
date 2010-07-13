@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.ContactModel;
 import com.liferay.portal.model.ContactSoap;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -54,7 +55,8 @@ import java.util.List;
  * @see       com.liferay.portal.model.ContactModel
  * @generated
  */
-public class ContactModelImpl extends BaseModelImpl<Contact> {
+public class ContactModelImpl extends BaseModelImpl<Contact>
+	implements ContactModel {
 	public static final String TABLE_NAME = "Contact_";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "contactId", new Integer(Types.BIGINT) },

@@ -26,6 +26,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.messageboards.model.MBBan;
+import com.liferay.portlet.messageboards.model.MBBanModel;
 import com.liferay.portlet.messageboards.model.MBBanSoap;
 
 import java.io.Serializable;
@@ -55,7 +56,7 @@ import java.util.List;
  * @see       com.liferay.portlet.messageboards.model.MBBanModel
  * @generated
  */
-public class MBBanModelImpl extends BaseModelImpl<MBBan> {
+public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 	public static final String TABLE_NAME = "MBBan";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "banId", new Integer(Types.BIGINT) },

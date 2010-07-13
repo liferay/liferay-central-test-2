@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.BrowserTracker;
+import com.liferay.portal.model.BrowserTrackerModel;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
@@ -48,7 +49,8 @@ import java.sql.Types;
  * @see       com.liferay.portal.model.BrowserTrackerModel
  * @generated
  */
-public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker> {
+public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
+	implements BrowserTrackerModel {
 	public static final String TABLE_NAME = "BrowserTracker";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "browserTrackerId", new Integer(Types.BIGINT) },

@@ -27,6 +27,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.tasks.model.TasksProposal;
+import com.liferay.portlet.tasks.model.TasksProposalModel;
 import com.liferay.portlet.tasks.model.TasksProposalSoap;
 
 import java.io.Serializable;
@@ -56,7 +57,8 @@ import java.util.List;
  * @see       com.liferay.portlet.tasks.model.TasksProposalModel
  * @generated
  */
-public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal> {
+public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal>
+	implements TasksProposalModel {
 	public static final String TABLE_NAME = "TasksProposal";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "proposalId", new Integer(Types.BIGINT) },

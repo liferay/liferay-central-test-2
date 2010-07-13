@@ -26,6 +26,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.journal.model.JournalStructure;
+import com.liferay.portlet.journal.model.JournalStructureModel;
 import com.liferay.portlet.journal.model.JournalStructureSoap;
 
 import java.io.Serializable;
@@ -55,7 +56,8 @@ import java.util.List;
  * @see       com.liferay.portlet.journal.model.JournalStructureModel
  * @generated
  */
-public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
+public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
+	implements JournalStructureModel {
 	public static final String TABLE_NAME = "JournalStructure";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },

@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PasswordTracker;
+import com.liferay.portal.model.PasswordTrackerModel;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
@@ -52,7 +53,8 @@ import java.util.Date;
  * @see       com.liferay.portal.model.PasswordTrackerModel
  * @generated
  */
-public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker> {
+public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
+	implements PasswordTrackerModel {
 	public static final String TABLE_NAME = "PasswordTracker";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "passwordTrackerId", new Integer(Types.BIGINT) },

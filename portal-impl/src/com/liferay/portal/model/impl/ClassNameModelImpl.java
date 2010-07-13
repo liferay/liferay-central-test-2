@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ClassName;
+import com.liferay.portal.model.ClassNameModel;
 import com.liferay.portal.model.ClassNameSoap;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -52,7 +53,8 @@ import java.util.List;
  * @see       com.liferay.portal.model.ClassNameModel
  * @generated
  */
-public class ClassNameModelImpl extends BaseModelImpl<ClassName> {
+public class ClassNameModelImpl extends BaseModelImpl<ClassName>
+	implements ClassNameModel {
 	public static final String TABLE_NAME = "ClassName_";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "classNameId", new Integer(Types.BIGINT) },

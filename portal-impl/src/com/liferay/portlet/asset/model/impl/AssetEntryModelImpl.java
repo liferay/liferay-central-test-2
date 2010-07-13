@@ -24,6 +24,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.asset.model.AssetEntryModel;
 import com.liferay.portlet.asset.model.AssetEntrySoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -55,7 +56,8 @@ import java.util.List;
  * @see       com.liferay.portlet.asset.model.AssetEntryModel
  * @generated
  */
-public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
+public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
+	implements AssetEntryModel {
 	public static final String TABLE_NAME = "AssetEntry";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "entryId", new Integer(Types.BIGINT) },

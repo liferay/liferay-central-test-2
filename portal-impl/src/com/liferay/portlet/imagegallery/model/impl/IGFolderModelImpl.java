@@ -26,6 +26,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.imagegallery.model.IGFolder;
+import com.liferay.portlet.imagegallery.model.IGFolderModel;
 import com.liferay.portlet.imagegallery.model.IGFolderSoap;
 
 import java.io.Serializable;
@@ -55,7 +56,8 @@ import java.util.List;
  * @see       com.liferay.portlet.imagegallery.model.IGFolderModel
  * @generated
  */
-public class IGFolderModelImpl extends BaseModelImpl<IGFolder> {
+public class IGFolderModelImpl extends BaseModelImpl<IGFolder>
+	implements IGFolderModel {
 	public static final String TABLE_NAME = "IGFolder";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },

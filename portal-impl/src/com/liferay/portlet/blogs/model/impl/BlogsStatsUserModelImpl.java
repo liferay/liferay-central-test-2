@@ -23,6 +23,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
+import com.liferay.portlet.blogs.model.BlogsStatsUserModel;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
@@ -51,7 +52,8 @@ import java.util.Date;
  * @see       com.liferay.portlet.blogs.model.BlogsStatsUserModel
  * @generated
  */
-public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {
+public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
+	implements BlogsStatsUserModel {
 	public static final String TABLE_NAME = "BlogsStatsUser";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "statsUserId", new Integer(Types.BIGINT) },

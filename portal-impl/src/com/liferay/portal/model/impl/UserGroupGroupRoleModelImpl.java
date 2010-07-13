@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.UserGroupGroupRole;
+import com.liferay.portal.model.UserGroupGroupRoleModel;
 import com.liferay.portal.model.UserGroupGroupRoleSoap;
 import com.liferay.portal.service.persistence.UserGroupGroupRolePK;
 
@@ -47,7 +48,8 @@ import java.util.List;
  * @see       com.liferay.portal.model.UserGroupGroupRoleModel
  * @generated
  */
-public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRole> {
+public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRole>
+	implements UserGroupGroupRoleModel {
 	public static final String TABLE_NAME = "UserGroupGroupRole";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "userGroupId", new Integer(Types.BIGINT) },

@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.WorkflowDefinitionLink;
+import com.liferay.portal.model.WorkflowDefinitionLinkModel;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
@@ -51,7 +52,8 @@ import java.util.Date;
  * @see       com.liferay.portal.model.WorkflowDefinitionLinkModel
  * @generated
  */
-public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefinitionLink> {
+public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefinitionLink>
+	implements WorkflowDefinitionLinkModel {
 	public static final String TABLE_NAME = "WorkflowDefinitionLink";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "workflowDefinitionLinkId", new Integer(Types.BIGINT) },

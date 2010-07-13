@@ -22,6 +22,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoValue;
+import com.liferay.portlet.expando.model.ExpandoValueModel;
 import com.liferay.portlet.expando.model.ExpandoValueSoap;
 
 import java.io.Serializable;
@@ -50,7 +51,8 @@ import java.util.List;
  * @see       com.liferay.portlet.expando.model.ExpandoValueModel
  * @generated
  */
-public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue> {
+public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
+	implements ExpandoValueModel {
 	public static final String TABLE_NAME = "ExpandoValue";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "valueId", new Integer(Types.BIGINT) },

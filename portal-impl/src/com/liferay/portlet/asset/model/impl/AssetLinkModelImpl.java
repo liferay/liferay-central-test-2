@@ -24,6 +24,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.asset.model.AssetLink;
+import com.liferay.portlet.asset.model.AssetLinkModel;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
@@ -52,7 +53,8 @@ import java.util.Date;
  * @see       com.liferay.portlet.asset.model.AssetLinkModel
  * @generated
  */
-public class AssetLinkModelImpl extends BaseModelImpl<AssetLink> {
+public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
+	implements AssetLinkModel {
 	public static final String TABLE_NAME = "AssetLink";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "linkId", new Integer(Types.BIGINT) },

@@ -25,6 +25,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
+import com.liferay.portlet.messageboards.model.MBStatsUserModel;
 
 import java.io.Serializable;
 
@@ -51,7 +52,8 @@ import java.util.Date;
  * @see       com.liferay.portlet.messageboards.model.MBStatsUserModel
  * @generated
  */
-public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser> {
+public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
+	implements MBStatsUserModel {
 	public static final String TABLE_NAME = "MBStatsUser";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "statsUserId", new Integer(Types.BIGINT) },

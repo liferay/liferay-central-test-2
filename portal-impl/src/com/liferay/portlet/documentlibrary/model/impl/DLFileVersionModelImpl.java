@@ -26,6 +26,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
+import com.liferay.portlet.documentlibrary.model.DLFileVersionModel;
 import com.liferay.portlet.documentlibrary.model.DLFileVersionSoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -57,7 +58,8 @@ import java.util.List;
  * @see       com.liferay.portlet.documentlibrary.model.DLFileVersionModel
  * @generated
  */
-public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
+public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
+	implements DLFileVersionModel {
 	public static final String TABLE_NAME = "DLFileVersion";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "fileVersionId", new Integer(Types.BIGINT) },

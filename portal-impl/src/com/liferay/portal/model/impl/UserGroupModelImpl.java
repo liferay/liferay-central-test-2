@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.model.UserGroupModel;
 import com.liferay.portal.model.UserGroupSoap;
 import com.liferay.portal.service.ServiceContext;
 
@@ -51,7 +52,8 @@ import java.util.List;
  * @see       com.liferay.portal.model.UserGroupModel
  * @generated
  */
-public class UserGroupModelImpl extends BaseModelImpl<UserGroup> {
+public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
+	implements UserGroupModel {
 	public static final String TABLE_NAME = "UserGroup";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "userGroupId", new Integer(Types.BIGINT) },

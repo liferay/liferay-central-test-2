@@ -25,6 +25,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
+import com.liferay.portlet.documentlibrary.model.DLFileShortcutModel;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -56,7 +57,8 @@ import java.util.List;
  * @see       com.liferay.portlet.documentlibrary.model.DLFileShortcutModel
  * @generated
  */
-public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
+public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
+	implements DLFileShortcutModel {
 	public static final String TABLE_NAME = "DLFileShortcut";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },

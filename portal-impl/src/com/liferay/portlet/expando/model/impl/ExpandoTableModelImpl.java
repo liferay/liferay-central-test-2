@@ -22,6 +22,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoTable;
+import com.liferay.portlet.expando.model.ExpandoTableModel;
 
 import java.io.Serializable;
 
@@ -46,7 +47,8 @@ import java.sql.Types;
  * @see       com.liferay.portlet.expando.model.ExpandoTableModel
  * @generated
  */
-public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable> {
+public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
+	implements ExpandoTableModel {
 	public static final String TABLE_NAME = "ExpandoTable";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "tableId", new Integer(Types.BIGINT) },

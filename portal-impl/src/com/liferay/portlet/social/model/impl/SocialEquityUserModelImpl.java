@@ -25,6 +25,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.social.model.SocialEquityUser;
+import com.liferay.portlet.social.model.SocialEquityUserModel;
 
 import java.io.Serializable;
 
@@ -49,7 +50,8 @@ import java.sql.Types;
  * @see       com.liferay.portlet.social.model.SocialEquityUserModel
  * @generated
  */
-public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser> {
+public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser>
+	implements SocialEquityUserModel {
 	public static final String TABLE_NAME = "SocialEquityUser";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "equityUserId", new Integer(Types.BIGINT) },

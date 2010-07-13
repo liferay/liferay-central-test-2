@@ -27,6 +27,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.tasks.model.TasksReview;
+import com.liferay.portlet.tasks.model.TasksReviewModel;
 import com.liferay.portlet.tasks.model.TasksReviewSoap;
 
 import java.io.Serializable;
@@ -56,7 +57,8 @@ import java.util.List;
  * @see       com.liferay.portlet.tasks.model.TasksReviewModel
  * @generated
  */
-public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
+public class TasksReviewModelImpl extends BaseModelImpl<TasksReview>
+	implements TasksReviewModel {
 	public static final String TABLE_NAME = "TasksReview";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "reviewId", new Integer(Types.BIGINT) },

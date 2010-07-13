@@ -24,6 +24,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
+import com.liferay.portlet.announcements.model.AnnouncementsDeliveryModel;
 import com.liferay.portlet.announcements.model.AnnouncementsDeliverySoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -54,7 +55,8 @@ import java.util.List;
  * @see       com.liferay.portlet.announcements.model.AnnouncementsDeliveryModel
  * @generated
  */
-public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsDelivery> {
+public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsDelivery>
+	implements AnnouncementsDeliveryModel {
 	public static final String TABLE_NAME = "AnnouncementsDelivery";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "deliveryId", new Integer(Types.BIGINT) },

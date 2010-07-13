@@ -27,6 +27,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
+import com.liferay.portlet.shopping.model.ShoppingOrderModel;
 import com.liferay.portlet.shopping.model.ShoppingOrderSoap;
 
 import java.io.Serializable;
@@ -56,7 +57,8 @@ import java.util.List;
  * @see       com.liferay.portlet.shopping.model.ShoppingOrderModel
  * @generated
  */
-public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
+public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
+	implements ShoppingOrderModel {
 	public static final String TABLE_NAME = "ShoppingOrder";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "orderId", new Integer(Types.BIGINT) },

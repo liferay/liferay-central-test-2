@@ -28,6 +28,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portlet.messageboards.model.MBThreadModel;
 import com.liferay.portlet.messageboards.model.MBThreadSoap;
 
 import java.io.Serializable;
@@ -57,7 +58,8 @@ import java.util.List;
  * @see       com.liferay.portlet.messageboards.model.MBThreadModel
  * @generated
  */
-public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
+public class MBThreadModelImpl extends BaseModelImpl<MBThread>
+	implements MBThreadModel {
 	public static final String TABLE_NAME = "MBThread";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "threadId", new Integer(Types.BIGINT) },

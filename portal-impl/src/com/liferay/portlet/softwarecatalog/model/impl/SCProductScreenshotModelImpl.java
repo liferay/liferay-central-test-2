@@ -23,6 +23,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
+import com.liferay.portlet.softwarecatalog.model.SCProductScreenshotModel;
 
 import java.io.Serializable;
 
@@ -47,7 +48,8 @@ import java.sql.Types;
  * @see       com.liferay.portlet.softwarecatalog.model.SCProductScreenshotModel
  * @generated
  */
-public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreenshot> {
+public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreenshot>
+	implements SCProductScreenshotModel {
 	public static final String TABLE_NAME = "SCProductScreenshot";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "productScreenshotId", new Integer(Types.BIGINT) },

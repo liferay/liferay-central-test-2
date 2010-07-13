@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
 import com.liferay.portlet.expando.model.ExpandoColumn;
+import com.liferay.portlet.expando.model.ExpandoColumnModel;
 import com.liferay.portlet.expando.model.ExpandoColumnSoap;
 
 import java.io.Serializable;
@@ -49,7 +50,8 @@ import java.util.List;
  * @see       com.liferay.portlet.expando.model.ExpandoColumnModel
  * @generated
  */
-public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn> {
+public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
+	implements ExpandoColumnModel {
 	public static final String TABLE_NAME = "ExpandoColumn";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "columnId", new Integer(Types.BIGINT) },

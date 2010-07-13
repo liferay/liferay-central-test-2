@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PasswordPolicy;
+import com.liferay.portal.model.PasswordPolicyModel;
 import com.liferay.portal.model.PasswordPolicySoap;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -54,7 +55,8 @@ import java.util.List;
  * @see       com.liferay.portal.model.PasswordPolicyModel
  * @generated
  */
-public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
+public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy>
+	implements PasswordPolicyModel {
 	public static final String TABLE_NAME = "PasswordPolicy";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "passwordPolicyId", new Integer(Types.BIGINT) },

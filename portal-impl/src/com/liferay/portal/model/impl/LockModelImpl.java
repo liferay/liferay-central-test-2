@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Lock;
+import com.liferay.portal.model.LockModel;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
@@ -51,7 +52,7 @@ import java.util.Date;
  * @see       com.liferay.portal.model.LockModel
  * @generated
  */
-public class LockModelImpl extends BaseModelImpl<Lock> {
+public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 	public static final String TABLE_NAME = "Lock_";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },

@@ -26,6 +26,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.wiki.model.WikiNode;
+import com.liferay.portlet.wiki.model.WikiNodeModel;
 import com.liferay.portlet.wiki.model.WikiNodeSoap;
 
 import java.io.Serializable;
@@ -55,7 +56,8 @@ import java.util.List;
  * @see       com.liferay.portlet.wiki.model.WikiNodeModel
  * @generated
  */
-public class WikiNodeModelImpl extends BaseModelImpl<WikiNode> {
+public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
+	implements WikiNodeModel {
 	public static final String TABLE_NAME = "WikiNode";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },

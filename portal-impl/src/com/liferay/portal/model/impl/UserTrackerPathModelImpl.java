@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.UserTrackerPath;
+import com.liferay.portal.model.UserTrackerPathModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -49,7 +50,8 @@ import java.util.Date;
  * @see       com.liferay.portal.model.UserTrackerPathModel
  * @generated
  */
-public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath> {
+public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath>
+	implements UserTrackerPathModel {
 	public static final String TABLE_NAME = "UserTrackerPath";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "userTrackerPathId", new Integer(Types.BIGINT) },

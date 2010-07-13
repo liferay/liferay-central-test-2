@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.CompanyModel;
 import com.liferay.portal.model.CompanySoap;
 import com.liferay.portal.service.ServiceContext;
 
@@ -51,7 +52,8 @@ import java.util.List;
  * @see       com.liferay.portal.model.CompanyModel
  * @generated
  */
-public class CompanyModelImpl extends BaseModelImpl<Company> {
+public class CompanyModelImpl extends BaseModelImpl<Company>
+	implements CompanyModel {
 	public static final String TABLE_NAME = "Company";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "companyId", new Integer(Types.BIGINT) },

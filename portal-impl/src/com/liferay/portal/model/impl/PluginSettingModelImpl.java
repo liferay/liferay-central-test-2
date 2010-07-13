@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PluginSetting;
+import com.liferay.portal.model.PluginSettingModel;
 import com.liferay.portal.model.PluginSettingSoap;
 import com.liferay.portal.service.ServiceContext;
 
@@ -51,7 +52,8 @@ import java.util.List;
  * @see       com.liferay.portal.model.PluginSettingModel
  * @generated
  */
-public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {
+public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
+	implements PluginSettingModel {
 	public static final String TABLE_NAME = "PluginSetting";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "pluginSettingId", new Integer(Types.BIGINT) },

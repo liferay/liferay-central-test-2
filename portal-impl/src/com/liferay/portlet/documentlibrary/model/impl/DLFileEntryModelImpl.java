@@ -24,6 +24,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileEntryModel;
 import com.liferay.portlet.documentlibrary.model.DLFileEntrySoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -55,7 +56,8 @@ import java.util.List;
  * @see       com.liferay.portlet.documentlibrary.model.DLFileEntryModel
  * @generated
  */
-public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
+public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
+	implements DLFileEntryModel {
 	public static final String TABLE_NAME = "DLFileEntry";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },

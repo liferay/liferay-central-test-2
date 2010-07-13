@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.UserTracker;
+import com.liferay.portal.model.UserTrackerModel;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
@@ -51,7 +52,8 @@ import java.util.Date;
  * @see       com.liferay.portal.model.UserTrackerModel
  * @generated
  */
-public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
+public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
+	implements UserTrackerModel {
 	public static final String TABLE_NAME = "UserTracker";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "userTrackerId", new Integer(Types.BIGINT) },

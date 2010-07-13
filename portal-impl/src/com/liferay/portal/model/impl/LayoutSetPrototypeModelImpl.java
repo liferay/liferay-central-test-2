@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutSetPrototype;
+import com.liferay.portal.model.LayoutSetPrototypeModel;
 import com.liferay.portal.model.LayoutSetPrototypeSoap;
 import com.liferay.portal.service.ServiceContext;
 
@@ -58,7 +59,8 @@ import java.util.Map;
  * @see       com.liferay.portal.model.LayoutSetPrototypeModel
  * @generated
  */
-public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototype> {
+public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototype>
+	implements LayoutSetPrototypeModel {
 	public static final String TABLE_NAME = "LayoutSetPrototype";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "layoutSetPrototypeId", new Integer(Types.BIGINT) },

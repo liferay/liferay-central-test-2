@@ -26,6 +26,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.imagegallery.model.IGImage;
+import com.liferay.portlet.imagegallery.model.IGImageModel;
 import com.liferay.portlet.imagegallery.model.IGImageSoap;
 
 import java.io.Serializable;
@@ -55,7 +56,8 @@ import java.util.List;
  * @see       com.liferay.portlet.imagegallery.model.IGImageModel
  * @generated
  */
-public class IGImageModelImpl extends BaseModelImpl<IGImage> {
+public class IGImageModelImpl extends BaseModelImpl<IGImage>
+	implements IGImageModel {
 	public static final String TABLE_NAME = "IGImage";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },

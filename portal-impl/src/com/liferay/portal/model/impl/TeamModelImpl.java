@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Team;
+import com.liferay.portal.model.TeamModel;
 import com.liferay.portal.model.TeamSoap;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -54,7 +55,7 @@ import java.util.List;
  * @see       com.liferay.portal.model.TeamModel
  * @generated
  */
-public class TeamModelImpl extends BaseModelImpl<Team> {
+public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 	public static final String TABLE_NAME = "Team";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "teamId", new Integer(Types.BIGINT) },

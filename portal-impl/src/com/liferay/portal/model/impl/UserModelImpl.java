@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserModel;
 import com.liferay.portal.model.UserSoap;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -54,7 +55,7 @@ import java.util.List;
  * @see       com.liferay.portal.model.UserModel
  * @generated
  */
-public class UserModelImpl extends BaseModelImpl<User> {
+public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	public static final String TABLE_NAME = "User_";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },

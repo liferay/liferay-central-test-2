@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupModel;
 import com.liferay.portal.model.GroupSoap;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -53,7 +54,7 @@ import java.util.List;
  * @see       com.liferay.portal.model.GroupModel
  * @generated
  */
-public class GroupModelImpl extends BaseModelImpl<Group> {
+public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 	public static final String TABLE_NAME = "Group_";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "groupId", new Integer(Types.BIGINT) },

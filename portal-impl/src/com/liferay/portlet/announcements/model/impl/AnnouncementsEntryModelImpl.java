@@ -25,6 +25,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.announcements.model.AnnouncementsEntry;
+import com.liferay.portlet.announcements.model.AnnouncementsEntryModel;
 import com.liferay.portlet.announcements.model.AnnouncementsEntrySoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -56,7 +57,8 @@ import java.util.List;
  * @see       com.liferay.portlet.announcements.model.AnnouncementsEntryModel
  * @generated
  */
-public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntry> {
+public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntry>
+	implements AnnouncementsEntryModel {
 	public static final String TABLE_NAME = "AnnouncementsEntry";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },

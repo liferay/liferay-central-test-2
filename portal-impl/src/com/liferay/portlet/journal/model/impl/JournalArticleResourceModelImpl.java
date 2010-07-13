@@ -24,6 +24,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.journal.model.JournalArticleResource;
+import com.liferay.portlet.journal.model.JournalArticleResourceModel;
 
 import java.io.Serializable;
 
@@ -48,7 +49,8 @@ import java.sql.Types;
  * @see       com.liferay.portlet.journal.model.JournalArticleResourceModel
  * @generated
  */
-public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticleResource> {
+public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticleResource>
+	implements JournalArticleResourceModel {
 	public static final String TABLE_NAME = "JournalArticleResource";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "resourcePrimKey", new Integer(Types.BIGINT) },

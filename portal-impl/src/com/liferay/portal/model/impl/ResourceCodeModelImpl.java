@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ResourceCode;
+import com.liferay.portal.model.ResourceCodeModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -47,7 +48,8 @@ import java.sql.Types;
  * @see       com.liferay.portal.model.ResourceCodeModel
  * @generated
  */
-public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode> {
+public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode>
+	implements ResourceCodeModel {
 	public static final String TABLE_NAME = "ResourceCode";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "codeId", new Integer(Types.BIGINT) },

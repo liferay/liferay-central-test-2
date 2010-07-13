@@ -29,6 +29,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.asset.model.AssetCategory;
+import com.liferay.portlet.asset.model.AssetCategoryModel;
 import com.liferay.portlet.asset.model.AssetCategorySoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -62,7 +63,8 @@ import java.util.Map;
  * @see       com.liferay.portlet.asset.model.AssetCategoryModel
  * @generated
  */
-public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
+public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
+	implements AssetCategoryModel {
 	public static final String TABLE_NAME = "AssetCategory";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },

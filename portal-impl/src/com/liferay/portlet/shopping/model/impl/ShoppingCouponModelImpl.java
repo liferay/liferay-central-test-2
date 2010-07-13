@@ -27,6 +27,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
+import com.liferay.portlet.shopping.model.ShoppingCouponModel;
 import com.liferay.portlet.shopping.model.ShoppingCouponSoap;
 
 import java.io.Serializable;
@@ -56,7 +57,8 @@ import java.util.List;
  * @see       com.liferay.portlet.shopping.model.ShoppingCouponModel
  * @generated
  */
-public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
+public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
+	implements ShoppingCouponModel {
 	public static final String TABLE_NAME = "ShoppingCoupon";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "couponId", new Integer(Types.BIGINT) },

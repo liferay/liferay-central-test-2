@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Permission;
+import com.liferay.portal.model.PermissionModel;
 import com.liferay.portal.model.PermissionSoap;
 import com.liferay.portal.service.ServiceContext;
 
@@ -51,7 +52,8 @@ import java.util.List;
  * @see       com.liferay.portal.model.PermissionModel
  * @generated
  */
-public class PermissionModelImpl extends BaseModelImpl<Permission> {
+public class PermissionModelImpl extends BaseModelImpl<Permission>
+	implements PermissionModel {
 	public static final String TABLE_NAME = "Permission_";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "permissionId", new Integer(Types.BIGINT) },

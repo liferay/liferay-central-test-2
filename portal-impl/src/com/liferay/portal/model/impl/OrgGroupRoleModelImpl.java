@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.OrgGroupRole;
+import com.liferay.portal.model.OrgGroupRoleModel;
 import com.liferay.portal.service.persistence.OrgGroupRolePK;
 
 import java.io.Serializable;
@@ -43,7 +44,8 @@ import java.sql.Types;
  * @see       com.liferay.portal.model.OrgGroupRoleModel
  * @generated
  */
-public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole> {
+public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
+	implements OrgGroupRoleModel {
 	public static final String TABLE_NAME = "OrgGroupRole";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "organizationId", new Integer(Types.BIGINT) },

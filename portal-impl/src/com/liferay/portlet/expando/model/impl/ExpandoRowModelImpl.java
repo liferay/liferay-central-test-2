@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
 import com.liferay.portlet.expando.model.ExpandoRow;
+import com.liferay.portlet.expando.model.ExpandoRowModel;
 
 import java.io.Serializable;
 
@@ -44,7 +45,8 @@ import java.sql.Types;
  * @see       com.liferay.portlet.expando.model.ExpandoRowModel
  * @generated
  */
-public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow> {
+public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
+	implements ExpandoRowModel {
 	public static final String TABLE_NAME = "ExpandoRow";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "rowId_", new Integer(Types.BIGINT) },

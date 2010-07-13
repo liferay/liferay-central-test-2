@@ -24,6 +24,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
+import com.liferay.portlet.bookmarks.model.BookmarksFolderModel;
 import com.liferay.portlet.bookmarks.model.BookmarksFolderSoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -55,7 +56,8 @@ import java.util.List;
  * @see       com.liferay.portlet.bookmarks.model.BookmarksFolderModel
  * @generated
  */
-public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder> {
+public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
+	implements BookmarksFolderModel {
 	public static final String TABLE_NAME = "BookmarksFolder";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },

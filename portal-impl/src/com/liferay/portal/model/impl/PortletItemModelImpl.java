@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PortletItem;
+import com.liferay.portal.model.PortletItemModel;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
@@ -51,7 +52,8 @@ import java.util.Date;
  * @see       com.liferay.portal.model.PortletItemModel
  * @generated
  */
-public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {
+public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
+	implements PortletItemModel {
 	public static final String TABLE_NAME = "PortletItem";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "portletItemId", new Integer(Types.BIGINT) },

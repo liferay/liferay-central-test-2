@@ -26,6 +26,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.blogs.model.BlogsEntryModel;
 import com.liferay.portlet.blogs.model.BlogsEntrySoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -57,7 +58,8 @@ import java.util.List;
  * @see       com.liferay.portlet.blogs.model.BlogsEntryModel
  * @generated
  */
-public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
+public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
+	implements BlogsEntryModel {
 	public static final String TABLE_NAME = "BlogsEntry";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },

@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Region;
+import com.liferay.portal.model.RegionModel;
 import com.liferay.portal.model.RegionSoap;
 import com.liferay.portal.service.ServiceContext;
 
@@ -51,7 +52,8 @@ import java.util.List;
  * @see       com.liferay.portal.model.RegionModel
  * @generated
  */
-public class RegionModelImpl extends BaseModelImpl<Region> {
+public class RegionModelImpl extends BaseModelImpl<Region>
+	implements RegionModel {
 	public static final String TABLE_NAME = "Region";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "regionId", new Integer(Types.BIGINT) },

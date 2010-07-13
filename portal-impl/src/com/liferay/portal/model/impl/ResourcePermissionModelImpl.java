@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ResourcePermission;
+import com.liferay.portal.model.ResourcePermissionModel;
 import com.liferay.portal.model.ResourcePermissionSoap;
 import com.liferay.portal.service.ServiceContext;
 
@@ -51,7 +52,8 @@ import java.util.List;
  * @see       com.liferay.portal.model.ResourcePermissionModel
  * @generated
  */
-public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermission> {
+public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermission>
+	implements ResourcePermissionModel {
 	public static final String TABLE_NAME = "ResourcePermission";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "resourcePermissionId", new Integer(Types.BIGINT) },

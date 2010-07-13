@@ -23,6 +23,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.asset.model.AssetTagStats;
+import com.liferay.portlet.asset.model.AssetTagStatsModel;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
@@ -49,7 +50,8 @@ import java.sql.Types;
  * @see       com.liferay.portlet.asset.model.AssetTagStatsModel
  * @generated
  */
-public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats> {
+public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
+	implements AssetTagStatsModel {
 	public static final String TABLE_NAME = "AssetTagStats";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "tagStatsId", new Integer(Types.BIGINT) },

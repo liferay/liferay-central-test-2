@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PortletPreferences;
+import com.liferay.portal.model.PortletPreferencesModel;
 import com.liferay.portal.model.PortletPreferencesSoap;
 import com.liferay.portal.service.ServiceContext;
 
@@ -51,7 +52,8 @@ import java.util.List;
  * @see       com.liferay.portal.model.PortletPreferencesModel
  * @generated
  */
-public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreferences> {
+public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreferences>
+	implements PortletPreferencesModel {
 	public static final String TABLE_NAME = "PortletPreferences";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "portletPreferencesId", new Integer(Types.BIGINT) },

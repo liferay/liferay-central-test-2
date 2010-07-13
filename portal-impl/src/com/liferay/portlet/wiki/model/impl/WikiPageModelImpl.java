@@ -27,6 +27,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.portlet.wiki.model.WikiPageModel;
 import com.liferay.portlet.wiki.model.WikiPageSoap;
 
 import java.io.Serializable;
@@ -56,7 +57,8 @@ import java.util.List;
  * @see       com.liferay.portlet.wiki.model.WikiPageModel
  * @generated
  */
-public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
+public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
+	implements WikiPageModel {
 	public static final String TABLE_NAME = "WikiPage";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },

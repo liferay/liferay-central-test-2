@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Shard;
+import com.liferay.portal.model.ShardModel;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
@@ -48,7 +49,7 @@ import java.sql.Types;
  * @see       com.liferay.portal.model.ShardModel
  * @generated
  */
-public class ShardModelImpl extends BaseModelImpl<Shard> {
+public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 	public static final String TABLE_NAME = "Shard";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "shardId", new Integer(Types.BIGINT) },

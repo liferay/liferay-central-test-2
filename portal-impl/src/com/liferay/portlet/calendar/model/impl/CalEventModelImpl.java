@@ -25,6 +25,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.calendar.model.CalEvent;
+import com.liferay.portlet.calendar.model.CalEventModel;
 import com.liferay.portlet.calendar.model.CalEventSoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -56,7 +57,8 @@ import java.util.List;
  * @see       com.liferay.portlet.calendar.model.CalEventModel
  * @generated
  */
-public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
+public class CalEventModelImpl extends BaseModelImpl<CalEvent>
+	implements CalEventModel {
 	public static final String TABLE_NAME = "CalEvent";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },

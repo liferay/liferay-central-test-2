@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.MembershipRequest;
+import com.liferay.portal.model.MembershipRequestModel;
 import com.liferay.portal.model.MembershipRequestSoap;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -55,7 +56,8 @@ import java.util.List;
  * @see       com.liferay.portal.model.MembershipRequestModel
  * @generated
  */
-public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest> {
+public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
+	implements MembershipRequestModel {
 	public static final String TABLE_NAME = "MembershipRequest";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "membershipRequestId", new Integer(Types.BIGINT) },

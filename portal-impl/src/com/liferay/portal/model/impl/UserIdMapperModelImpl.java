@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.UserIdMapper;
+import com.liferay.portal.model.UserIdMapperModel;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
@@ -49,7 +50,8 @@ import java.sql.Types;
  * @see       com.liferay.portal.model.UserIdMapperModel
  * @generated
  */
-public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {
+public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
+	implements UserIdMapperModel {
 	public static final String TABLE_NAME = "UserIdMapper";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "userIdMapperId", new Integer(Types.BIGINT) },

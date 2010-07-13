@@ -29,6 +29,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.polls.model.PollsChoice;
+import com.liferay.portlet.polls.model.PollsChoiceModel;
 
 import java.io.Serializable;
 
@@ -56,7 +57,8 @@ import java.util.Map;
  * @see       com.liferay.portlet.polls.model.PollsChoiceModel
  * @generated
  */
-public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice> {
+public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
+	implements PollsChoiceModel {
 	public static final String TABLE_NAME = "PollsChoice";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },

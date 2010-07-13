@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.OrgGroupPermission;
+import com.liferay.portal.model.OrgGroupPermissionModel;
 import com.liferay.portal.service.persistence.OrgGroupPermissionPK;
 
 import java.io.Serializable;
@@ -43,7 +44,8 @@ import java.sql.Types;
  * @see       com.liferay.portal.model.OrgGroupPermissionModel
  * @generated
  */
-public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermission> {
+public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermission>
+	implements OrgGroupPermissionModel {
 	public static final String TABLE_NAME = "OrgGroupPermission";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "organizationId", new Integer(Types.BIGINT) },

@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Address;
+import com.liferay.portal.model.AddressModel;
 import com.liferay.portal.model.AddressSoap;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -55,7 +56,8 @@ import java.util.List;
  * @see       com.liferay.portal.model.AddressModel
  * @generated
  */
-public class AddressModelImpl extends BaseModelImpl<Address> {
+public class AddressModelImpl extends BaseModelImpl<Address>
+	implements AddressModel {
 	public static final String TABLE_NAME = "Address";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "addressId", new Integer(Types.BIGINT) },

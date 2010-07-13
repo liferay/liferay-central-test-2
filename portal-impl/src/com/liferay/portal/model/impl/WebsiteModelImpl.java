@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Website;
+import com.liferay.portal.model.WebsiteModel;
 import com.liferay.portal.model.WebsiteSoap;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -55,7 +56,8 @@ import java.util.List;
  * @see       com.liferay.portal.model.WebsiteModel
  * @generated
  */
-public class WebsiteModelImpl extends BaseModelImpl<Website> {
+public class WebsiteModelImpl extends BaseModelImpl<Website>
+	implements WebsiteModel {
 	public static final String TABLE_NAME = "Website";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "websiteId", new Integer(Types.BIGINT) },

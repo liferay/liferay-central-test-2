@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PasswordPolicyRel;
+import com.liferay.portal.model.PasswordPolicyRelModel;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
@@ -48,7 +49,8 @@ import java.sql.Types;
  * @see       com.liferay.portal.model.PasswordPolicyRelModel
  * @generated
  */
-public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel> {
+public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
+	implements PasswordPolicyRelModel {
 	public static final String TABLE_NAME = "PasswordPolicyRel";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "passwordPolicyRelId", new Integer(Types.BIGINT) },

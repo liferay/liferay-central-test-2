@@ -24,6 +24,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
+import com.liferay.portlet.softwarecatalog.model.SCLicenseModel;
 import com.liferay.portlet.softwarecatalog.model.SCLicenseSoap;
 
 import java.io.Serializable;
@@ -52,7 +53,8 @@ import java.util.List;
  * @see       com.liferay.portlet.softwarecatalog.model.SCLicenseModel
  * @generated
  */
-public class SCLicenseModelImpl extends BaseModelImpl<SCLicense> {
+public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
+	implements SCLicenseModel {
 	public static final String TABLE_NAME = "SCLicense";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "licenseId", new Integer(Types.BIGINT) },

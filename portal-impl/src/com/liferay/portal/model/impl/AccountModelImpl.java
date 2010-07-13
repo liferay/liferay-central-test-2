@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Account;
+import com.liferay.portal.model.AccountModel;
 import com.liferay.portal.model.AccountSoap;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -54,7 +55,8 @@ import java.util.List;
  * @see       com.liferay.portal.model.AccountModel
  * @generated
  */
-public class AccountModelImpl extends BaseModelImpl<Account> {
+public class AccountModelImpl extends BaseModelImpl<Account>
+	implements AccountModel {
 	public static final String TABLE_NAME = "Account_";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "accountId", new Integer(Types.BIGINT) },

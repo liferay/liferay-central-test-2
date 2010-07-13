@@ -24,6 +24,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.journal.model.JournalArticleImage;
+import com.liferay.portlet.journal.model.JournalArticleImageModel;
 
 import java.io.Serializable;
 
@@ -48,7 +49,8 @@ import java.sql.Types;
  * @see       com.liferay.portlet.journal.model.JournalArticleImageModel
  * @generated
  */
-public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleImage> {
+public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleImage>
+	implements JournalArticleImageModel {
 	public static final String TABLE_NAME = "JournalArticleImage";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "articleImageId", new Integer(Types.BIGINT) },

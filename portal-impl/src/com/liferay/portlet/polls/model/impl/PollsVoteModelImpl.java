@@ -25,6 +25,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.polls.model.PollsVote;
+import com.liferay.portlet.polls.model.PollsVoteModel;
 import com.liferay.portlet.polls.model.PollsVoteSoap;
 
 import java.io.Serializable;
@@ -54,7 +55,8 @@ import java.util.List;
  * @see       com.liferay.portlet.polls.model.PollsVoteModel
  * @generated
  */
-public class PollsVoteModelImpl extends BaseModelImpl<PollsVote> {
+public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
+	implements PollsVoteModel {
 	public static final String TABLE_NAME = "PollsVote";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "voteId", new Integer(Types.BIGINT) },
