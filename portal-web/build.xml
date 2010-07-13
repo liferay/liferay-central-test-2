@@ -431,19 +431,32 @@
 				<dirset dir="docroot/html/themes" excludes="_styled,_unstyled" includes="*" />
 			</path>
 			<sequential>
-				<java
-					classname="com.liferay.portal.tools.ThumbnailBuilder"
-					classpathref="project.classpath"
-					fork="true"
-					newenvironment="true"
-				>
-					<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-					<jvmarg value="-Dthumbnail.original.file=@{module.name}/_diffs/images/screenshot.png" />
-					<jvmarg value="-Dthumbnail.thumbnail.file=@{module.name}/_diffs/images/thumbnail.png" />
-					<jvmarg value="-Dthumbnail.height=120" />
-					<jvmarg value="-Dthumbnail.width=160" />
-					<jvmarg value="-Dthumbnail.overwrite=false" />
-				</java>
+				<for param="file">
+					<path>
+						<fileset
+							dir="@{module.name}/_diffs/images"
+							includes="**/screenshot.png"
+						/>
+					</path>
+					<sequential>
+						<propertyregex input="@{file}" override="yes" property="original.file" regexp="\Q${basedir}\\E" replace="" />
+						<propertyregex input="${original.file}" override="yes" property="thumbnail.file" regexp="screenshot\.png" replace="thumbnail\.png" />
+
+						<java
+							classname="com.liferay.portal.tools.ThumbnailBuilder"
+							classpathref="project.classpath"
+							fork="true"
+							newenvironment="true"
+						>
+							<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+							<jvmarg value="-Dthumbnail.original.file=${original.file}" />
+							<jvmarg value="-Dthumbnail.thumbnail.file=${thumbnail.file}" />
+							<jvmarg value="-Dthumbnail.height=120" />
+							<jvmarg value="-Dthumbnail.width=160" />
+							<jvmarg value="-Dthumbnail.overwrite=false" />
+						</java>
+					</sequential>
+				</for>
 
 				<copy todir="@{module.name}" overwrite="true">
 					<fileset
