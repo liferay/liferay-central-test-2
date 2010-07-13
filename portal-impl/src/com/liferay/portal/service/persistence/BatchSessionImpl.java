@@ -41,22 +41,24 @@ public class BatchSessionImpl implements BatchSession {
 			session.merge(model);
 		}
 		else {
-			boolean contains = false;
-
-			if (isEnabled()) {
-				Object obj = session.get(
-					model.getClass(), model.getPrimaryKeyObj());
-
-				if ((obj != null) && obj.equals(model)) {
-					contains = true;
-				}
-			}
-
 			if (model.isNew()) {
 				session.save(model);
 			}
-			else if (!contains && !session.contains(model)) {
-				session.saveOrUpdate(model);
+			else {
+				boolean contains = false;
+
+				if (isEnabled()) {
+					Object obj = session.get(
+						model.getClass(), model.getPrimaryKeyObj());
+
+					if ((obj != null) && obj.equals(model)) {
+						contains = true;
+					}
+				}
+
+				if (!contains && !session.contains(model)) {
+					session.saveOrUpdate(model);
+				}
 			}
 		}
 
