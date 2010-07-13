@@ -52,3 +52,7 @@
 .portlet-image-gallery .taglib-webdav {
 	margin-top: 3em;
 }
+
+.portlet-image-gallery .image-title {
+	display: block;
+}
