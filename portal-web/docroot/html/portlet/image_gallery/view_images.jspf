@@ -127,6 +127,10 @@
 </c:if>
 
 <aui:script use="aui-image-viewer-gallery">
+	var viewportRegion = A.getDoc().get('viewportRegion');
+	var maxHeight = (viewportRegion.height * 0.5);
+	var maxWidth = (viewportRegion.width * 0.5);
+
 	var imageGallery = new A.ImageGallery(
 		{
 			after: {
@@ -162,6 +166,8 @@
 			},
 			delay: 5000,
 			links: '#imageGalleryPanelContainer .image-thumbnail',
+			maxHeight: maxHeight,
+			maxWidth: maxWidth,
 			playingLabel: '(<liferay-ui:message key="playing" />)'
 		}
 	).render();
