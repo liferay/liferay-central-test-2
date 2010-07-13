@@ -24,7 +24,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Tina Tian
@@ -61,43 +60,6 @@ public class ClusterRequest implements Serializable {
 		clusterRequest.setMethodWrapper(methodWrapper);
 		clusterRequest.setMulticast(true);
 		clusterRequest.setSkipLocal(skipLocal);
-		clusterRequest.setUuid(PortalUUIDUtil.generate());
-
-		return clusterRequest;
-	}
-
-	public static ClusterRequest createMulticastRequest(
-		MethodWrapper methodWrapper, long timeOut) {
-		return createMulticastRequest(methodWrapper, timeOut, false);
-	}
-
-	public static ClusterRequest createMulticastRequest(
-		MethodWrapper methodWrapper, long timeOut, boolean skipLocal) {
-
-		ClusterRequest clusterRequest = new ClusterRequest();
-
-		clusterRequest.setClusterMessageType(ClusterMessageType.EXECUTE);
-		clusterRequest.setMethodWrapper(methodWrapper);
-		clusterRequest.setMulticast(true);
-		clusterRequest.setSkipLocal(skipLocal);
-		clusterRequest.setTimeOut(timeOut);
-		clusterRequest.setUuid(PortalUUIDUtil.generate());
-
-		return clusterRequest;
-	}
-
-	public static ClusterRequest createUnicastRequest(
-		MethodWrapper methodWrapper, long timeOut,
-		String... targetClusterNodeIds) {
-
-		ClusterRequest clusterRequest = new ClusterRequest();
-
-		clusterRequest.addTargetClusterNodeIds(targetClusterNodeIds);
-		clusterRequest.setClusterMessageType(ClusterMessageType.EXECUTE);
-		clusterRequest.setMethodWrapper(methodWrapper);
-		clusterRequest.setMulticast(false);
-		clusterRequest.setSkipLocal(false);
-		clusterRequest.setTimeOut(timeOut);
 		clusterRequest.setUuid(PortalUUIDUtil.generate());
 
 		return clusterRequest;
@@ -146,14 +108,6 @@ public class ClusterRequest implements Serializable {
 		return _targetClusterNodeIds;
 	}
 
-	public long getTimeOut() {
-		return _timeOut;
-	}
-
-	public TimeUnit getTimeUnit() {
-		return _timeUnit;
-	}
-
 	public String getUuid() {
 		return _uuid;
 	}
@@ -196,14 +150,6 @@ public class ClusterRequest implements Serializable {
 
 	public void setSkipLocal(boolean skipLocal) {
 		_skipLocal = skipLocal;
-	}
-
-	public void setTimeOut(long timeOut) {
-		_timeOut = timeOut;
-	}
-
-	public void setTimeUnit(TimeUnit timeUnit) {
-		_timeUnit = timeUnit;
 	}
 
 	public void setUuid(String uuid) {
@@ -251,8 +197,6 @@ public class ClusterRequest implements Serializable {
 	private String _servletContextName;
 	private boolean _skipLocal;
 	private Set<String> _targetClusterNodeIds;
-	private long _timeOut;
-	private TimeUnit _timeUnit = TimeUnit.MILLISECONDS;
 	private String _uuid;
 
 }
