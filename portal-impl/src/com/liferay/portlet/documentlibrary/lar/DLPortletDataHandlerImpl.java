@@ -256,16 +256,16 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		DLFileEntry importedFileEntry = null;
 
+		String nameWithExtension =
+			fileEntry.getName().concat(StringPool.PERIOD).concat(
+				fileEntry.getExtension());
+
 		if (context.isDataStrategyMirror()) {
 			DLFileEntry existingFileEntry = DLFileEntryUtil.fetchByUUID_G(
 				fileEntry.getUuid(), context.getScopeGroupId());
 
 			if (existingFileEntry == null) {
 				serviceContext.setUuid(fileEntry.getUuid());
-
-				String nameWithExtension =
-					fileEntry.getName().concat(StringPool.PERIOD).concat(
-						fileEntry.getExtension());
 
 				importedFileEntry =
 					DLFileEntryLocalServiceUtil.addFileEntry(
@@ -309,7 +309,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				importedFileEntry =
 					DLFileEntryLocalServiceUtil.addFileEntry(
 						userId, context.getScopeGroupId(), folderId,
-						fileEntry.getName(), title, fileEntry.getDescription(),
+						nameWithExtension, title, fileEntry.getDescription(),
 						null, fileEntry.getExtraSettings(), is,
 						fileEntry.getSize(), serviceContext);
 			}
@@ -325,7 +325,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				importedFileEntry =
 					DLFileEntryLocalServiceUtil.addFileEntry(
 						userId, context.getScopeGroupId(), folderId,
-						fileEntry.getName(), title, fileEntry.getDescription(),
+						nameWithExtension, title, fileEntry.getDescription(),
 						null, fileEntry.getExtraSettings(), is,
 						fileEntry.getSize(), serviceContext);
 			}
