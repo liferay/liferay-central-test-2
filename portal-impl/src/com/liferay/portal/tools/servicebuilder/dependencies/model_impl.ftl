@@ -13,6 +13,7 @@ package ${packagePath}.model.impl;
 </#if>
 
 import ${packagePath}.model.${entity.name};
+import ${packagePath}.model.${entity.name}Model;
 import ${packagePath}.model.${entity.name}Soap;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
