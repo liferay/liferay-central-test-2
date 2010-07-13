@@ -30,6 +30,7 @@ import com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -118,7 +119,8 @@ public class BlogsStatsUserFinderImpl
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar("statsUserId", Type.LONG);
+			q.addScalar("userId", Type.LONG);
+			q.addScalar("lastPostDate", Type.TIMESTAMP);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -129,16 +131,23 @@ public class BlogsStatsUserFinderImpl
 
 			List<BlogsStatsUser> statsUsers = new ArrayList<BlogsStatsUser>();
 
-			Iterator<Long> itr = (Iterator<Long>)QueryUtil.iterate(
+			Iterator<Object[]> itr = (Iterator<Object[]>)QueryUtil.iterate(
 				q, getDialect(), start, end);
 
 			while (itr.hasNext()) {
-				long statsUserId = itr.next();
+				Object[] array = itr.next();
 
-				BlogsStatsUser statsUser =
-					BlogsStatsUserUtil.findByPrimaryKey(statsUserId);
+				long userId = (Long)array[0];
+				Date lastPostDate = (Date)array[1];
 
-				statsUsers.add(statsUser);
+				List<BlogsStatsUser> curStatsUsers =
+					BlogsStatsUserUtil.findByU_L(userId, lastPostDate);
+
+				if (!curStatsUsers.isEmpty()) {
+					BlogsStatsUser statsUser = curStatsUsers.get(0);
+
+					statsUsers.add(statsUser);
+				}
 			}
 
 			return statsUsers;

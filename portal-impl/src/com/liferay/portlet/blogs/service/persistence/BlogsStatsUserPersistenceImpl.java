@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -49,6 +50,7 @@ import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -127,6 +129,19 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByC_NotE",
 			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_U_L = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByU_L",
+			new String[] {
+				Long.class.getName(), Date.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_U_L = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByU_L",
+			new String[] { Long.class.getName(), Date.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
 			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
@@ -1600,6 +1615,300 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		}
 	}
 
+	public List<BlogsStatsUser> findByU_L(long userId, Date lastPostDate)
+		throws SystemException {
+		return findByU_L(userId, lastPostDate, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<BlogsStatsUser> findByU_L(long userId, Date lastPostDate,
+		int start, int end) throws SystemException {
+		return findByU_L(userId, lastPostDate, start, end, null);
+	}
+
+	public List<BlogsStatsUser> findByU_L(long userId, Date lastPostDate,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				userId, lastPostDate,
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<BlogsStatsUser> list = (List<BlogsStatsUser>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_U_L,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = null;
+
+				if (orderByComparator != null) {
+					query = new StringBundler(4 +
+							(orderByComparator.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(4);
+				}
+
+				query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
+
+				query.append(_FINDER_COLUMN_U_L_USERID_2);
+
+				if (lastPostDate == null) {
+					query.append(_FINDER_COLUMN_U_L_LASTPOSTDATE_1);
+				}
+				else {
+					query.append(_FINDER_COLUMN_U_L_LASTPOSTDATE_2);
+				}
+
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
+				}
+
+				else {
+					query.append(BlogsStatsUserModelImpl.ORDER_BY_JPQL);
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				if (lastPostDate != null) {
+					qPos.add(CalendarUtil.getTimestamp(lastPostDate));
+				}
+
+				list = (List<BlogsStatsUser>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<BlogsStatsUser>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_L, finderArgs,
+					list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public BlogsStatsUser findByU_L_First(long userId, Date lastPostDate,
+		OrderByComparator orderByComparator)
+		throws NoSuchStatsUserException, SystemException {
+		List<BlogsStatsUser> list = findByU_L(userId, lastPostDate, 0, 1,
+				orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("userId=");
+			msg.append(userId);
+
+			msg.append(", lastPostDate=");
+			msg.append(lastPostDate);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchStatsUserException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public BlogsStatsUser findByU_L_Last(long userId, Date lastPostDate,
+		OrderByComparator orderByComparator)
+		throws NoSuchStatsUserException, SystemException {
+		int count = countByU_L(userId, lastPostDate);
+
+		List<BlogsStatsUser> list = findByU_L(userId, lastPostDate, count - 1,
+				count, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("userId=");
+			msg.append(userId);
+
+			msg.append(", lastPostDate=");
+			msg.append(lastPostDate);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchStatsUserException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public BlogsStatsUser[] findByU_L_PrevAndNext(long statsUserId,
+		long userId, Date lastPostDate, OrderByComparator orderByComparator)
+		throws NoSuchStatsUserException, SystemException {
+		BlogsStatsUser blogsStatsUser = findByPrimaryKey(statsUserId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			BlogsStatsUser[] array = new BlogsStatsUserImpl[3];
+
+			array[0] = getByU_L_PrevAndNext(session, blogsStatsUser, userId,
+					lastPostDate, orderByComparator, true);
+
+			array[1] = blogsStatsUser;
+
+			array[2] = getByU_L_PrevAndNext(session, blogsStatsUser, userId,
+					lastPostDate, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected BlogsStatsUser getByU_L_PrevAndNext(Session session,
+		BlogsStatsUser blogsStatsUser, long userId, Date lastPostDate,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
+
+		query.append(_FINDER_COLUMN_U_L_USERID_2);
+
+		if (lastPostDate == null) {
+			query.append(_FINDER_COLUMN_U_L_LASTPOSTDATE_1);
+		}
+		else {
+			query.append(_FINDER_COLUMN_U_L_LASTPOSTDATE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		else {
+			query.append(BlogsStatsUserModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(userId);
+
+		if (lastPostDate != null) {
+			qPos.add(CalendarUtil.getTimestamp(lastPostDate));
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(blogsStatsUser);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<BlogsStatsUser> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
 	public List<BlogsStatsUser> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1704,6 +2013,13 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	public void removeByC_NotE(long companyId, int entryCount)
 		throws SystemException {
 		for (BlogsStatsUser blogsStatsUser : findByC_NotE(companyId, entryCount)) {
+			remove(blogsStatsUser);
+		}
+	}
+
+	public void removeByU_L(long userId, Date lastPostDate)
+		throws SystemException {
+		for (BlogsStatsUser blogsStatsUser : findByU_L(userId, lastPostDate)) {
 			remove(blogsStatsUser);
 		}
 	}
@@ -1958,6 +2274,64 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		return count.intValue();
 	}
 
+	public int countByU_L(long userId, Date lastPostDate)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { userId, lastPostDate };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_L,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(3);
+
+				query.append(_SQL_COUNT_BLOGSSTATSUSER_WHERE);
+
+				query.append(_FINDER_COLUMN_U_L_USERID_2);
+
+				if (lastPostDate == null) {
+					query.append(_FINDER_COLUMN_U_L_LASTPOSTDATE_1);
+				}
+				else {
+					query.append(_FINDER_COLUMN_U_L_LASTPOSTDATE_2);
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				if (lastPostDate != null) {
+					qPos.add(CalendarUtil.getTimestamp(lastPostDate));
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_L, finderArgs,
+					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -2036,6 +2410,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	private static final String _FINDER_COLUMN_G_NOTE_ENTRYCOUNT_2 = "blogsStatsUser.entryCount != ?";
 	private static final String _FINDER_COLUMN_C_NOTE_COMPANYID_2 = "blogsStatsUser.companyId = ? AND ";
 	private static final String _FINDER_COLUMN_C_NOTE_ENTRYCOUNT_2 = "blogsStatsUser.entryCount != ?";
+	private static final String _FINDER_COLUMN_U_L_USERID_2 = "blogsStatsUser.userId = ? AND ";
+	private static final String _FINDER_COLUMN_U_L_LASTPOSTDATE_1 = "blogsStatsUser.lastPostDate IS NULL";
+	private static final String _FINDER_COLUMN_U_L_LASTPOSTDATE_2 = "blogsStatsUser.lastPostDate = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "blogsStatsUser.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No BlogsStatsUser exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No BlogsStatsUser exists with the key {";

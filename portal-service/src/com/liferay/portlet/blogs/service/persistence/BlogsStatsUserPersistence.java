@@ -194,6 +194,37 @@ public interface BlogsStatsUserPersistence extends BasePersistence<BlogsStatsUse
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByU_L(
+		long userId, java.util.Date lastPostDate)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByU_L(
+		long userId, java.util.Date lastPostDate, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByU_L(
+		long userId, java.util.Date lastPostDate, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.blogs.model.BlogsStatsUser findByU_L_First(
+		long userId, java.util.Date lastPostDate,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.blogs.NoSuchStatsUserException;
+
+	public com.liferay.portlet.blogs.model.BlogsStatsUser findByU_L_Last(
+		long userId, java.util.Date lastPostDate,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.blogs.NoSuchStatsUserException;
+
+	public com.liferay.portlet.blogs.model.BlogsStatsUser[] findByU_L_PrevAndNext(
+		long statsUserId, long userId, java.util.Date lastPostDate,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.blogs.NoSuchStatsUserException;
+
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -222,6 +253,9 @@ public interface BlogsStatsUserPersistence extends BasePersistence<BlogsStatsUse
 	public void removeByC_NotE(long companyId, int entryCount)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public void removeByU_L(long userId, java.util.Date lastPostDate)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -238,6 +272,9 @@ public interface BlogsStatsUserPersistence extends BasePersistence<BlogsStatsUse
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByC_NotE(long companyId, int entryCount)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByU_L(long userId, java.util.Date lastPostDate)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()

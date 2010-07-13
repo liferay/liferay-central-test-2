@@ -360,6 +360,55 @@ public class BlogsStatsUserUtil {
 			entryCount, orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByU_L(
+		long userId, java.util.Date lastPostDate)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByU_L(userId, lastPostDate);
+	}
+
+	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByU_L(
+		long userId, java.util.Date lastPostDate, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByU_L(userId, lastPostDate, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByU_L(
+		long userId, java.util.Date lastPostDate, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByU_L(userId, lastPostDate, start, end,
+			orderByComparator);
+	}
+
+	public static com.liferay.portlet.blogs.model.BlogsStatsUser findByU_L_First(
+		long userId, java.util.Date lastPostDate,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.blogs.NoSuchStatsUserException {
+		return getPersistence()
+				   .findByU_L_First(userId, lastPostDate, orderByComparator);
+	}
+
+	public static com.liferay.portlet.blogs.model.BlogsStatsUser findByU_L_Last(
+		long userId, java.util.Date lastPostDate,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.blogs.NoSuchStatsUserException {
+		return getPersistence()
+				   .findByU_L_Last(userId, lastPostDate, orderByComparator);
+	}
+
+	public static com.liferay.portlet.blogs.model.BlogsStatsUser[] findByU_L_PrevAndNext(
+		long statsUserId, long userId, java.util.Date lastPostDate,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.blogs.NoSuchStatsUserException {
+		return getPersistence()
+				   .findByU_L_PrevAndNext(statsUserId, userId, lastPostDate,
+			orderByComparator);
+	}
+
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
@@ -404,6 +453,11 @@ public class BlogsStatsUserUtil {
 		getPersistence().removeByC_NotE(companyId, entryCount);
 	}
 
+	public static void removeByU_L(long userId, java.util.Date lastPostDate)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByU_L(userId, lastPostDate);
+	}
+
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
@@ -432,6 +486,11 @@ public class BlogsStatsUserUtil {
 	public static int countByC_NotE(long companyId, int entryCount)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByC_NotE(companyId, entryCount);
+	}
+
+	public static int countByU_L(long userId, java.util.Date lastPostDate)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByU_L(userId, lastPostDate);
 	}
 
 	public static int countAll()

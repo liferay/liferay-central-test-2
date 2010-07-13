@@ -170,6 +170,10 @@
 			<finder-column name="companyId" />
 			<finder-column name="entryCount" comparator="!=" />
 		</finder>
+		<finder name="U_L" return-type="Collection">
+			<finder-column name="userId" />
+			<finder-column name="lastPostDate" />
+		</finder>
 
 		<!-- References -->
 
