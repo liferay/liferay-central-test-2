@@ -26,6 +26,20 @@ import java.util.List;
  */
 public class ClusterExecutorUtil {
 
+	public static void addClusterEventListener(
+		ClusterEventListener clusterEventListener) {
+
+		if ((_clusterExecutor == null) || !_clusterExecutor.isEnabled()) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("ClusterExecutorUtil has not been initialized");
+			}
+
+			return;
+		}
+
+		_clusterExecutor.addClusterEventListener(clusterEventListener);
+	}
+
 	public static void destroy() {
 		if ((_clusterExecutor == null) || !_clusterExecutor.isEnabled()) {
 			if (_log.isWarnEnabled()) {
