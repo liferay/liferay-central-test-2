@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.PropertiesUtil;
-import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.IOException;
@@ -78,10 +77,9 @@ public class HotDeployEvent {
 		InputStream is = _servletContext.getResourceAsStream(
 			"/WEB-INF/liferay-plugin-package.properties");
 
-		if (is == null) {
-			_dependentServletContextNames = new HashSet<String>();
-		}
-		else {
+		_dependentServletContextNames = new HashSet<String>();
+
+		if (is != null) {
 			String propertiesString = StringUtil.read(is);
 
 			is.close();
@@ -100,8 +98,9 @@ public class HotDeployEvent {
 						StringUtil.merge(requiredDeploymentContexts, ", "));
 			}
 
-			_dependentServletContextNames = SetUtil.fromArray(
-				requiredDeploymentContexts);
+			for (String context : requiredDeploymentContexts) {
+				_dependentServletContextNames.add(context.trim());
+			}
 		}
 	}
 
