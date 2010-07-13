@@ -27,4 +27,8 @@ public interface Digester {
 
 	public String digest(String algorithm, String text);
 
+	public byte[] digestRaw(String text);
+
+	public byte[] digestRaw(String algorithm, String text);
+
 }

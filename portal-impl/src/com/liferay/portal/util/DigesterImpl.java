@@ -36,6 +36,21 @@ public class DigesterImpl implements Digester {
 	}
 
 	public String digest(String algorithm, String text) {
+		byte[] bytes = digestRaw(algorithm, text);
+
+		if (_BASE_64) {
+			return Base64.encode(bytes);
+		}
+		else {
+			return new String(Hex.encodeHex(bytes));
+		}
+	}
+
+	public byte[] digestRaw(String text) {
+		return digestRaw(Digester.DIGEST_ALGORITHM, text);
+	}
+
+	public byte[] digestRaw(String algorithm, String text) {
 		MessageDigest messageDigest = null;
 
 		try{
@@ -50,14 +65,7 @@ public class DigesterImpl implements Digester {
 			_log.error(uee, uee);
 		}
 
-		byte[] bytes = messageDigest.digest();
-
-		if (_BASE_64) {
-			return Base64.encode(bytes);
-		}
-		else {
-			return new String(Hex.encodeHex(bytes));
-		}
+		return messageDigest.digest();
 	}
 
 	private static final boolean _BASE_64 =

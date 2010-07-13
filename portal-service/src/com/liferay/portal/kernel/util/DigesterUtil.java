@@ -27,6 +27,14 @@ public class DigesterUtil {
 		return getDigester().digest(algorithm, text);
 	}
 
+	public static byte[] digestRaw(String text) {
+		return getDigester().digestRaw(text);
+	}
+
+	public static byte[] digestRaw(String algorithm,String text) {
+		return getDigester().digestRaw(algorithm, text);
+	}
+
 	public static Digester getDigester() {
 		return _digester;
 	}
