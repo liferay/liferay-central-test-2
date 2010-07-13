@@ -1234,17 +1234,18 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			else {
 				importedArticle = JournalArticleLocalServiceUtil.updateArticle(
 					userId, existingArticle.getGroupId(),
-					existingArticle.getArticleId(), 0.0, article.getTitle(),
-					article.getDescription(), article.getContent(),
-					article.getType(), parentStructureId, parentTemplateId,
-					displayDateMonth, displayDateDay, displayDateYear,
-					displayDateHour, displayDateMinute, expirationDateMonth,
-					expirationDateDay, expirationDateYear, expirationDateHour,
-					expirationDateMinute, neverExpire, reviewDateMonth,
-					reviewDateDay, reviewDateYear, reviewDateHour,
-					reviewDateMinute, neverReview, article.isIndexable(),
-					article.isSmallImage(), article.getSmallImageURL(),
-					smallFile, images, articleURL, serviceContext);
+					existingArticle.getArticleId(), article.getVersion(),
+					article.getTitle(), article.getDescription(),
+					article.getContent(), article.getType(), parentStructureId,
+					parentTemplateId, displayDateMonth, displayDateDay,
+					displayDateYear, displayDateHour, displayDateMinute,
+					expirationDateMonth, expirationDateDay, expirationDateYear,
+					expirationDateHour, expirationDateMinute, neverExpire,
+					reviewDateMonth, reviewDateDay, reviewDateYear,
+					reviewDateHour, reviewDateMinute, neverReview,
+					article.isIndexable(), article.isSmallImage(),
+					article.getSmallImageURL(), smallFile, images, articleURL,
+					serviceContext);
 			}
 		}
 		else {
