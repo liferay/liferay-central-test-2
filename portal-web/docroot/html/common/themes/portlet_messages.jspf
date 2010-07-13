@@ -50,7 +50,7 @@ else if (group.isStagingGroup()) {
 				<liferay-ui:message key="this-portlet-is-not-staged-local-alert" />
 			</div>
 		</c:when>
-		<c:when test="<%= liveGroup.isStagedRemotely() %>">
+		<c:when test="<%= liveGroup.isStagedRemotely() && themeDisplay.isSignedIn() %>">
 			<div class="portlet-msg-alert">
 				<liferay-ui:message key="this-portlet-is-not-staged-remote-alert" />
 			</div>
