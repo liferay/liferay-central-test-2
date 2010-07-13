@@ -595,6 +595,11 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 					<replacevalue><![CDATA[redirectPort="8443" URIEncoding="UTF-8" />]]></replacevalue>
 				</replace>
 
+				<replace file="${app.server.dir}/conf/server.xml">
+					<replacetoken><![CDATA[xmlValidation="false" xmlNamespaceAware="false">]]></replacetoken>
+					<replacevalue><![CDATA[xmlValidation="false" xmlNamespaceAware="false" deployXML="false">]]></replacevalue>
+				</replace>
+
 				<if>
 					<and>
 						<available file="${env.JAVA_HOME}/jre/bin/java.exe" />
