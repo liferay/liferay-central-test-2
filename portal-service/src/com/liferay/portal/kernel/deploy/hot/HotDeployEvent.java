@@ -98,7 +98,9 @@ public class HotDeployEvent {
 						StringUtil.merge(requiredDeploymentContexts, ", "));
 			}
 
-			for (String requiredDeploymentContext : requiredDeploymentContexts) {
+			for (String requiredDeploymentContext :
+					requiredDeploymentContexts) {
+
 				_dependentServletContextNames.add(
 					requiredDeploymentContext.trim());
 			}
