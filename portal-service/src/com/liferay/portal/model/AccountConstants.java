@@ -17,7 +17,7 @@ package com.liferay.portal.model;
 /**
  * @author Alexander Chow
  */
-public class AccountContants {
+public class AccountConstants {
 
 	public static final long DEFAULT_PARENT_ACCOUNT_ID = 0;
 
