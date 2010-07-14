@@ -1125,8 +1125,6 @@ public class DLFileEntryLocalServiceImpl
 				fileEntry.getGroupId(), fileEntry.getFolderId(),
 				fileEntry.getName());
 
-		int oldStatus = latestFileVersion.getStatus();
-
 		latestFileVersion.setStatus(status);
 		latestFileVersion.setStatusByUserId(user.getUserId());
 		latestFileVersion.setStatusByUserName(user.getFullName());
