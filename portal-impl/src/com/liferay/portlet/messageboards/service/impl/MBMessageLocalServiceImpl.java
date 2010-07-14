@@ -1425,7 +1425,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 				if (category != null) {
 					category.setMessageCount(category.getMessageCount() + 1);
-					category.setLastPostDate(serviceContext.getModifiedDate(now));
+					category.setLastPostDate(
+						serviceContext.getModifiedDate(now));
 
 					mbCategoryPersistence.update(category, false);
 
@@ -1436,8 +1437,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					// Asset
 
 					assetEntryLocalService.updateVisible(
-						MBMessage.class.getName(), message.getMessageId(), true);
-
+						MBMessage.class.getName(), message.getMessageId(),
+						true);
 
 					// Social
 
@@ -1460,12 +1461,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 						}
 
 						socialActivityLocalService.addActivity(
-							userId, message.getGroupId(), MBMessage.class.getName(),
-							message.getMessageId(), activityType, StringPool.BLANK,
-							receiverUserId);
+							userId, message.getGroupId(),
+							MBMessage.class.getName(), message.getMessageId(),
+							activityType, StringPool.BLANK, receiverUserId);
 
 						socialEquityLogLocalService.addEquityLogs(
-							userId, MBMessage.class.getName(), messageId, actionId);
+							userId, MBMessage.class.getName(), messageId,
+							actionId);
 					}
 				}
 
