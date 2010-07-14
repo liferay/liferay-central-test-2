@@ -1181,20 +1181,22 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		String realName = name;
 
-		try {
-			Company company = companyLocalService.getCompany(companyId);
+		if (Validator.isNotNull(name)) {
+			try {
+				Company company = companyLocalService.getCompany(companyId);
 
-			String companyName = company.getAccount().getName();
+				String companyName = company.getAccount().getName();
 
-			name = StringUtil.replace(
-				name, StringPool.PERCENT, StringPool.BLANK);
+				name = StringUtil.replace(
+					name, StringPool.PERCENT, StringPool.BLANK);
 
-			if (companyName.indexOf(name) != -1) {
-				realName = StringPool.PERCENT + GroupConstants.GUEST +
-					StringPool.PERCENT;
+				if (companyName.indexOf(name) != -1) {
+					realName = StringPool.PERCENT + GroupConstants.GUEST +
+						StringPool.PERCENT;
+				}
 			}
-		}
-		catch(PortalException pe) {
+			catch(PortalException pe) {
+			}
 		}
 
 		return realName;
