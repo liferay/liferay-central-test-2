@@ -142,8 +142,8 @@ public class GroupFinderImpl
 	}
 
 	public int countByC_N_D(
-			long companyId, String name, String description,
-			LinkedHashMap<String, Object> params)
+			long companyId, String name, String realName,
+			String description, LinkedHashMap<String, Object> params)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -185,16 +185,19 @@ public class GroupFinderImpl
 			Set<Long> groupIds = new HashSet<Long>();
 
 			groupIds.addAll(
-				countByC_N_D(session, companyId, name, description, params1));
+				countByC_N_D(session, companyId, name, realName, description,
+					params1));
 
 			if (Validator.isNotNull(userId)) {
 				groupIds.addAll(
 					countByC_N_D(
-						session, companyId, name, description, params2));
+						session, companyId, name, realName, description,
+						params2));
 
 				groupIds.addAll(
 					countByC_N_D(
-						session, companyId, name, description, params3));
+						session, companyId, name, realName, description,
+						params3));
 			}
 
 			return groupIds.size();
@@ -353,7 +356,7 @@ public class GroupFinderImpl
 	}
 
 	public List<Group> findByC_N_D(
-			long companyId, String name, String description,
+			long companyId, String name, String realName, String description,
 			LinkedHashMap<String, Object> params, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
@@ -453,6 +456,7 @@ public class GroupFinderImpl
 			setJoin(qPos, params1);
 			qPos.add(companyId);
 			qPos.add(name);
+			qPos.add(realName);
 			qPos.add(name);
 			qPos.add(description);
 			qPos.add(description);
@@ -461,6 +465,7 @@ public class GroupFinderImpl
 				setJoin(qPos, params2);
 				qPos.add(companyId);
 				qPos.add(name);
+				qPos.add(realName);
 				qPos.add(name);
 				qPos.add(description);
 				qPos.add(description);
@@ -468,6 +473,7 @@ public class GroupFinderImpl
 				setJoin(qPos, params3);
 				qPos.add(companyId);
 				qPos.add(name);
+				qPos.add(realName);
 				qPos.add(name);
 				qPos.add(description);
 				qPos.add(description);
@@ -527,8 +533,8 @@ public class GroupFinderImpl
 	}
 
 	protected List<Long> countByC_N_D(
-		Session session, long companyId, String name, String description,
-		LinkedHashMap<String, Object> params) {
+		Session session, long companyId, String name, String realName,
+		String description, LinkedHashMap<String, Object> params) {
 
 		String sql = CustomSQLUtil.get(COUNT_BY_C_N_D);
 
@@ -544,6 +550,7 @@ public class GroupFinderImpl
 		setJoin(qPos, params);
 		qPos.add(companyId);
 		qPos.add(name);
+		qPos.add(realName);
 		qPos.add(name);
 		qPos.add(description);
 		qPos.add(description);

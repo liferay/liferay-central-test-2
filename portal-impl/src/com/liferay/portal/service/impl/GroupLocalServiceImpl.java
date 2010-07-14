@@ -783,8 +783,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			obc = new GroupNameComparator(true);
 		}
 
+		String realName = getRealName(companyId, name);
+
 		return groupFinder.findByC_N_D(
-			companyId, name, description, params, start, end, obc);
+			companyId, name, realName, description, params, start, end, obc);
 	}
 
 	@ThreadLocalCachable
@@ -793,7 +795,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			LinkedHashMap<String, Object> params)
 		throws SystemException {
 
-		return groupFinder.countByC_N_D(companyId, name, description, params);
+		String realName = getRealName(companyId, name);
+
+		return groupFinder.countByC_N_D(
+			companyId, name, realName, description, params);
 	}
 
 	public void setRoleGroups(long roleId, long[] groupIds)
@@ -1169,6 +1174,30 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		return friendlyURL;
+	}
+
+	protected String getRealName(long companyId, String name)
+		throws SystemException{
+
+		String realName = name;
+
+		try {
+			Company company = companyLocalService.getCompany(companyId);
+
+			String companyName = company.getAccount().getName();
+
+			name = StringUtil.replace(
+				name, StringPool.PERCENT, StringPool.BLANK);
+
+			if (companyName.indexOf(name) != -1) {
+				realName = StringPool.PERCENT + GroupConstants.GUEST +
+					StringPool.PERCENT;
+			}
+		}
+		catch(PortalException pe) {
+		}
+
+		return realName;
 	}
 
 	protected void initImportLARFile() {
