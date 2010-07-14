@@ -195,7 +195,7 @@ AUI().add(
 
 					instance.updateTextAreaVisibility('hidden');
 
-					instance.clonedSource = source.cloneNode(true);
+					instance.clonedSource = source.clone();
 
 					source.placeBefore(instance.clonedSource);
 
@@ -1391,7 +1391,7 @@ AUI().add(
 					return fieldInstance;
 				};
 
-				var newSource = source.cloneNode(true);
+				var newSource = source.clone();
 
 				source.placeAfter(newSource);
 

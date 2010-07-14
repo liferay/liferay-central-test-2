@@ -104,7 +104,7 @@ AUI().add(
 							var row = instance._table.one('.' + CSS_TEMPLATE);
 
 							if (row) {
-								row = row.cloneNode(true);
+								row = row.clone();
 
 								var cells = row.all('> td');
 

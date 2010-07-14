@@ -590,7 +590,7 @@ AUI().add(
 						var baseCategoryProperty = A.one('div.vocabulary-property-row');
 
 						if (baseCategoryProperty) {
-							var newCategoryProperty = baseCategoryProperty.cloneNode(true);
+							var newCategoryProperty = baseCategoryProperty.clone();
 
 							var propertyKeyNode = newCategoryProperty.one('.category-property-key');
 							var propertyValueNode = newCategoryProperty.one('.category-property-value');

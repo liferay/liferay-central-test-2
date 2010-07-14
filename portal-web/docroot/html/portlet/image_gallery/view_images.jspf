@@ -159,7 +159,7 @@
 						actions.empty();
 
 						actions.append(
-							action.cloneNode(true).show()
+							action.clone().show()
 						);
 					}
 				}

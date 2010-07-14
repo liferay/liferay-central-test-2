@@ -92,7 +92,7 @@ MBThread thread = messageDisplay.getThread();
 				}
 			);
 
-			var addAnswerFlagDiv = A.one('#<portlet:namespace />addAnswerFlagDiv').cloneNode(true);
+			var addAnswerFlagDiv = A.one('#<portlet:namespace />addAnswerFlagDiv').clone();
 
 			var html = addAnswerFlagDiv.html();
 
@@ -143,7 +143,7 @@ MBThread thread = messageDisplay.getThread();
 				}
 			);
 
-			var deleteAnswerFlagDiv = A.one('#<portlet:namespace />deleteAnswerFlagDiv').cloneNode(true);
+			var deleteAnswerFlagDiv = A.one('#<portlet:namespace />deleteAnswerFlagDiv').clone();
 
 			var html = deleteAnswerFlagDiv.html();
 

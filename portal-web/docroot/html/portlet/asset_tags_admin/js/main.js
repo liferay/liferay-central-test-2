@@ -246,7 +246,7 @@ AUI().add(
 						var baseProperty = A.one('div.tag-property-row');
 
 						if (baseProperty) {
-							var newProperty = baseProperty.cloneNode(true);
+							var newProperty = baseProperty.clone();
 
 							var propertyKeyNode = newProperty.one('.property-key');
 							var propertyValueNode = newProperty.one('.property-value');
@@ -315,7 +315,7 @@ AUI().add(
 						var clone = proxyNode.get('firstChild');
 
 						if (!clone) {
-							clone = node.cloneNode();
+							clone = node.clone().empty();
 
 							clone.addClass('portlet-tags-admin-helper');
 

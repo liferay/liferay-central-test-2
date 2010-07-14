@@ -507,7 +507,7 @@ AUI().add(
 					_getAppendNode: function() {
 						var instance = this;
 
-						instance.appendNode = DDM.activeDrag.get('node').cloneNode(true);
+						instance.appendNode = DDM.activeDrag.get('node').clone();
 
 						return instance.appendNode;
 					},

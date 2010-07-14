@@ -35,7 +35,7 @@ AUI().add(
 						var instance = this;
 
 						var breadcrumbs = instance.get('host');
-						var hudcrumbs = breadcrumbs.cloneNode(true);
+						var hudcrumbs = breadcrumbs.clone();
 						var region = breadcrumbs.get('region');
 
 						hudcrumbs.resetId();
