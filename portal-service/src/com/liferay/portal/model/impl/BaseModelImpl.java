@@ -30,8 +30,8 @@ public abstract class BaseModelImpl<T> implements BaseModel<T> {
 		return _new;
 	}
 
-	public boolean setNew(boolean n) {
-		return _new = n;
+	public void setNew(boolean n) {
+		_new = n;
 	}
 
 	public boolean isCachedModel() {

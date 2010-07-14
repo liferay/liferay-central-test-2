@@ -26,7 +26,7 @@ public interface BaseModel<T> extends Cloneable, Comparable<T>, Serializable {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 
