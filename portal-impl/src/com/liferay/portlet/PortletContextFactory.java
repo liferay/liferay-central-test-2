@@ -89,9 +89,6 @@ public class PortletContextFactory {
 
 			portletContext = new PortletContextImpl(portlet, servletContext);
 
-			ServletContextPool.put(
-				portletContext.getPortletContextName(), servletContext);
-
 			portletContexts.put(portlet.getPortletId(), portletContext);
 		}
 

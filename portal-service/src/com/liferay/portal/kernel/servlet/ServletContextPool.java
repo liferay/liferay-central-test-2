@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.ServletContext;
@@ -35,6 +36,10 @@ public class ServletContextPool {
 		return _instance._get(servletContextName);
 	}
 
+	public static Set<String> keySet() {
+		return _instance._keySet();
+	}
+
 	public static void put(
 		String servletContextName, ServletContext servletContext) {
 
@@ -46,11 +51,11 @@ public class ServletContextPool {
 	}
 
 	private ServletContextPool() {
-		_servletContextPool = new ConcurrentHashMap<String, ServletContext>();
+		_servletContexts = new ConcurrentHashMap<String, ServletContext>();
 	}
 
 	private boolean _containsKey(String servletContextName) {
-		boolean value = _servletContextPool.containsKey(servletContextName);
+		boolean value = _servletContexts.containsKey(servletContextName);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Contains key " + servletContextName + " " + value);
@@ -60,7 +65,7 @@ public class ServletContextPool {
 	}
 
 	private ServletContext _get(String servletContextName) {
-		ServletContext servletContext = _servletContextPool.get(
+		ServletContext servletContext = _servletContexts.get(
 			servletContextName);
 
 		if (_log.isDebugEnabled()) {
@@ -70,6 +75,10 @@ public class ServletContextPool {
 		return servletContext;
 	}
 
+	private Set<String> _keySet() {
+		return _servletContexts.keySet();
+	}
+
 	private void _put(
 		String servletContextName, ServletContext servletContext) {
 
@@ -77,11 +86,11 @@ public class ServletContextPool {
 			_log.debug("Put " + servletContextName + " " + servletContext);
 		}
 
-		_servletContextPool.put(servletContextName, servletContext);
+		_servletContexts.put(servletContextName, servletContext);
 	}
 
 	private ServletContext _remove(String servletContextName) {
-		ServletContext servletContext = _servletContextPool.remove(
+		ServletContext servletContext = _servletContexts.remove(
 			servletContextName);
 
 		if (_log.isDebugEnabled()) {
@@ -95,6 +104,6 @@ public class ServletContextPool {
 
 	private static ServletContextPool _instance = new ServletContextPool();
 
-	private Map<String, ServletContext> _servletContextPool;
+	private Map<String, ServletContext> _servletContexts;
 
 }

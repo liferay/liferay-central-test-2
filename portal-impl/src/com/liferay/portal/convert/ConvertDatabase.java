@@ -22,7 +22,9 @@ import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.servlet.PortletServlet;
+import com.liferay.portal.kernel.servlet.ServletContextPool;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Tuple;
@@ -39,6 +41,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+
+import javax.servlet.ServletContext;
 
 import javax.sql.DataSource;
 
@@ -93,7 +97,17 @@ public class ConvertDatabase extends ConvertProcess {
 				String implClassName = modelName.replaceFirst(
 					"(\\.model\\.)(\\p{Upper}.*)", "$1impl.$2Impl");
 
-				Class<?> implClass = InstancePool.get(implClassName).getClass();
+				if (_log.isDebugEnabled()) {
+					_log.debug("Loading class " + implClassName);
+				}
+
+				Class<?> implClass = getImplClass(implClassName);
+
+				if (implClass == null) {
+					_log.error("Unable to load class " + implClassName);
+
+					continue;
+				}
 
 				Field[] fields = implClass.getFields();
 
@@ -172,6 +186,33 @@ public class ConvertDatabase extends ConvertProcess {
 		dataSourceFactory.setPropertyPrefix(_JDBC_PREFIX);
 
 		return dataSourceFactory.createInstance();
+	}
+
+	public Class<?> getImplClass(String implClassName) throws Exception {
+		try {
+			ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
+
+			return classLoader.loadClass(implClassName);
+		}
+		catch (Exception e) {
+		}
+
+		for (String servletContextName : ServletContextPool.keySet()) {
+			try {
+				ServletContext servletContext = ServletContextPool.get(
+					servletContextName);
+
+				ClassLoader classLoader =
+					(ClassLoader)servletContext.getAttribute(
+						PortletServlet.PORTLET_CLASS_LOADER);
+
+				return classLoader.loadClass(implClassName);
+			}
+			catch (Exception e) {
+			}
+		}
+
+		return null;
 	}
 
 	protected Tuple getTableDetails(

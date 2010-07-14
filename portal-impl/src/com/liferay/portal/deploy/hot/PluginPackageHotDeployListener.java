@@ -23,6 +23,8 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.plugin.Version;
+import com.liferay.portal.kernel.servlet.PortletServlet;
+import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -207,6 +209,11 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 
 		ClassLoader portletClassLoader = event.getContextClassLoader();
 
+		servletContext.setAttribute(
+			PortletServlet.PORTLET_CLASS_LOADER, portletClassLoader);
+
+		ServletContextPool.put(servletContextName, servletContext);
+
 		initServiceComponent(servletContext, portletClassLoader);
 
 		registerClpMessageListeners(servletContext, portletClassLoader);
@@ -236,6 +243,8 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 		event.setPluginPackage(pluginPackage);
 
 		PluginPackageUtil.unregisterInstalledPluginPackage(pluginPackage);
+
+		ServletContextPool.remove(servletContextName);
 
 		destroyServiceComponent(servletContext, event.getContextClassLoader());
 
