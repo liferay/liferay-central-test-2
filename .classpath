@@ -92,6 +92,7 @@
 	<classpathentry kind="lib" path="lib/portal/asm-commons.jar"/>
 	<classpathentry kind="lib" path="lib/portal/asm-tree.jar"/>
 	<classpathentry kind="lib" path="lib/portal/asm-util.jar"/>
+	<classpathentry kind="lib" path="lib/portal/asm-xml.jar"/>
 	<classpathentry kind="lib" path="lib/portal/aspectj-rt.jar"/>
 	<classpathentry kind="lib" path="lib/portal/aspectj-weaver.jar"/>
 	<classpathentry kind="lib" path="lib/portal/axiom-api.jar"/>
