@@ -224,18 +224,6 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 			new ModelListener[listenersList.size()]);
 	}
 
-	/**
-	 * Add, update, or merge, the model. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating a model.
-	 *
-	 * @param  model the model to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *		   value is false. Setting merge to true is more expensive and
-	 *		   should only be true when model is transient. See LEP-5473 for a
-	 *		   detailed discussion of this method.
-	 * @return the model that was added, updated, or merged
-	 */
 	public T update(T model, boolean merge) throws SystemException {
 		boolean isNew = model.isNew();
 
@@ -311,12 +299,10 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		}
 	}
 
-	@SuppressWarnings("unused")
 	protected T removeImpl(T model) throws SystemException {
 		throw new UnsupportedOperationException();
 	}
 
-	@SuppressWarnings("unused")
 	protected T updateImpl(T model, boolean merge) throws SystemException {
 		throw new UnsupportedOperationException();
 	}
