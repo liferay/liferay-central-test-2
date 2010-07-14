@@ -44,6 +44,7 @@ import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBBanUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
@@ -84,6 +85,10 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			MBCategoryLocalServiceUtil.deleteCategories(
 				context.getScopeGroupId());
+
+			MBThreadLocalServiceUtil.deleteThreads(
+				context.getScopeGroupId(),
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 		}
 
 		return null;

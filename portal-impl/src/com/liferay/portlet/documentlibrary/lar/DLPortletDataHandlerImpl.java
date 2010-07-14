@@ -897,6 +897,10 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				DLPortletDataHandlerImpl.class, "deleteData")) {
 
 			DLFolderLocalServiceUtil.deleteFolders(context.getScopeGroupId());
+
+			DLFileEntryLocalServiceUtil.deleteFileEntries(
+				context.getScopeGroupId(),
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 		}
 
 		return null;

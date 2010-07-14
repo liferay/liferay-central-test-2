@@ -511,6 +511,10 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 				IGPortletDataHandlerImpl.class, "deleteData")) {
 
 			IGFolderLocalServiceUtil.deleteFolders(context.getScopeGroupId());
+
+			IGImageLocalServiceUtil.deleteImages(
+				context.getScopeGroupId(),
+				IGFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 		}
 
 		return null;
