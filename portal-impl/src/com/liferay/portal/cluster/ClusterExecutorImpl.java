@@ -114,6 +114,7 @@ public class ClusterExecutorImpl
 
 		if (!clusterRequest.isSkipLocal() && _shortcutLocalMethod &&
 			addresses.remove(getLocalControlAddress())) {
+
 			ClusterNodeResponse clusterNodeResponse = runLocalMethod(
 				clusterRequest.getMethodWrapper());
 
