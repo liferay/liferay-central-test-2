@@ -142,8 +142,8 @@ public class GroupFinderImpl
 	}
 
 	public int countByC_N_D(
-			long companyId, String name, String realName,
-			String description, LinkedHashMap<String, Object> params)
+			long companyId, String name, String realName, String description,
+			LinkedHashMap<String, Object> params)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -185,8 +185,8 @@ public class GroupFinderImpl
 			Set<Long> groupIds = new HashSet<Long>();
 
 			groupIds.addAll(
-				countByC_N_D(session, companyId, name, realName, description,
-					params1));
+				countByC_N_D(
+					session, companyId, name, realName, description, params1));
 
 			if (Validator.isNotNull(userId)) {
 				groupIds.addAll(
