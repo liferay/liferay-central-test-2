@@ -707,28 +707,17 @@ public class LayoutImporter {
 			// The default behaviour of import mode is
 			// PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_ID
 
-			boolean keepLayoutId = false;
-
 			existingLayout = LayoutUtil.fetchByUUID_G(
 				layout.getUuid(), groupId);
 
 			if (existingLayout == null) {
 				existingLayout = LayoutUtil.fetchByG_P_F(
 					groupId, privateLayout, friendlyURL);
-
-				if (existingLayout == null) {
-					keepLayoutId = true;
-				}
 			}
 
 			if (existingLayout == null) {
-				if (keepLayoutId) {
-					layoutId = layout.getLayoutId();
-				}
-				else {
-					layoutId = LayoutLocalServiceUtil.getNextLayoutId(
-						groupId, privateLayout);
-				}
+				layoutId = LayoutLocalServiceUtil.getNextLayoutId(
+					groupId, privateLayout);
 			}
 		}
 
