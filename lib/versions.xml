@@ -930,7 +930,7 @@
 	<library>
 		<file-name>portal/asm-analysis.jar</file-name>
 		<version>3.2</version>
-		<project-name>ASM Attrs</project-name>
+		<project-name>ASM</project-name>
 		<project-url>http://asm.objectweb.org</project-url>
 		<licenses>
 			<license>
@@ -941,7 +941,7 @@
 	<library>
 		<file-name>portal/asm-commons.jar</file-name>
 		<version>3.2</version>
-		<project-name>ASM Attrs</project-name>
+		<project-name>ASM</project-name>
 		<project-url>http://asm.objectweb.org</project-url>
 		<licenses>
 			<license>
@@ -952,7 +952,7 @@
 	<library>
 		<file-name>portal/asm-tree.jar</file-name>
 		<version>3.2</version>
-		<project-name>ASM Attrs</project-name>
+		<project-name>ASM</project-name>
 		<project-url>http://asm.objectweb.org</project-url>
 		<licenses>
 			<license>
@@ -963,7 +963,7 @@
 	<library>
 		<file-name>portal/asm-util.jar</file-name>
 		<version>3.2</version>
-		<project-name>ASM Attrs</project-name>
+		<project-name>ASM</project-name>
 		<project-url>http://asm.objectweb.org</project-url>
 		<licenses>
 			<license>
