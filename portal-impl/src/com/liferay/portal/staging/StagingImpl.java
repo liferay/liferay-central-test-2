@@ -81,10 +81,10 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map.Entry;
 import java.util.Map;
 import java.util.Set;
 import java.util.TimeZone;
+import java.util.Map.Entry;
 
 import javax.portlet.PortletRequest;
 
@@ -404,17 +404,9 @@ public class StagingImpl implements Staging {
 		if (!parameterMap.containsKey(
 				PortletDataHandlerKeys.PORTLET_DATA_ALL)) {
 
-			Boolean portletDataAll = Boolean.FALSE;
-
-			if (MapUtil.getBoolean(
-					parameterMap, PortletDataHandlerKeys.PORTLET_DATA)) {
-
-				portletDataAll = Boolean.TRUE;
-			}
-
 			parameterMap.put(
 				PortletDataHandlerKeys.PORTLET_DATA_ALL,
-				new String[] {portletDataAll.toString()});
+				new String[] {Boolean.FALSE.toString()});
 		}
 
 		if (!parameterMap.containsKey(PortletDataHandlerKeys.PORTLET_SETUP)) {
