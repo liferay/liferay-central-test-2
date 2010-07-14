@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -143,6 +144,15 @@ public class ExportPagesAction extends PortletAction {
 
 					startDate = cal.getTime();
 				}
+			}
+			else if (range.equals("last")) {
+				int rangeLast = ParamUtil.getInteger(actionRequest, "last");
+
+				Date now = new Date();
+
+				startDate = new Date(now.getTime() - (rangeLast * Time.HOUR));
+
+				endDate = now;
 			}
 
 			File file = LayoutServiceUtil.exportLayoutsAsFile(
