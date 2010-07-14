@@ -37,7 +37,8 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 public class MBBanServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBBan addBan(
 		long banUserId, com.liferay.portal.service.ServiceContext serviceContext)
-		throws java.lang.Exception {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().addBan(banUserId, serviceContext);
 	}
 

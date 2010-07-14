@@ -32,7 +32,7 @@ import com.liferay.portlet.messageboards.service.permission.MBPermission;
 public class MBBanServiceImpl extends MBBanServiceBaseImpl {
 
 	public MBBan addBan(long banUserId, ServiceContext serviceContext)
-		throws Exception {
+		throws PortalException, SystemException {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 
@@ -42,9 +42,17 @@ public class MBBanServiceImpl extends MBBanServiceBaseImpl {
 
 		User banUser = userLocalService.getUser(banUserId);
 
-		if (PortalUtil.isCommunityAdmin(
-				banUser, serviceContext.getScopeGroupId())) {
+		boolean communityAdmin = false;
 
+		try {
+			communityAdmin = PortalUtil.isCommunityAdmin(
+				banUser, serviceContext.getScopeGroupId());
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+
+		if (communityAdmin) {
 			throw new PrincipalException();
 		}
 
