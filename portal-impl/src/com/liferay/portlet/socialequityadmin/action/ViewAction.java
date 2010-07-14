@@ -15,6 +15,7 @@
 package com.liferay.portlet.socialequityadmin.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -23,6 +24,8 @@ import com.liferay.portlet.social.model.SocialEquityActionMapping;
 import com.liferay.portlet.social.model.SocialEquitySetting;
 import com.liferay.portlet.social.model.SocialEquitySettingConstants;
 import com.liferay.portlet.social.service.SocialEquitySettingLocalServiceUtil;
+
+import java.lang.reflect.Method;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -95,59 +98,43 @@ public class ViewAction extends PortletAction {
 		return mapping.findForward("portlet.social_equity_admin.view");
 	}
 
+	protected void updateModel(
+			ActionRequest actionRequest,
+			SocialEquityActionMapping equityActionMapping, String param)
+		throws Exception {
+
+		String className = equityActionMapping.getClassName();
+
+		int value = ParamUtil.getInteger(
+			actionRequest,
+			className + "." + equityActionMapping.getActionId() + "." + param,
+			-1);
+
+		if (value >= 0) {
+			String methodName = "set" + StringUtil.upperCaseFirstLetter(param);
+
+			Method method = equityActionMapping.getClass().getDeclaredMethod(
+				methodName, int.class);
+
+			method.invoke(equityActionMapping, new Object[] {value});
+		}
+	}
+
 	protected SocialEquityActionMapping getMergedEquityActionMapping(
 			ActionRequest actionRequest,
 			SocialEquityActionMapping equityActionMapping)
 		throws Exception {
 
-		SocialEquityActionMapping mergedEquityActionMapping =
-			equityActionMapping.clone();
+		SocialEquityActionMapping mergedMapping = equityActionMapping.clone();
 
-		String className = equityActionMapping.getClassName();
+		updateModel(actionRequest, mergedMapping, "informationDailyLimit");
+		updateModel(actionRequest, mergedMapping, "informationLifespan");
+		updateModel(actionRequest, mergedMapping, "informationValue");
+		updateModel(actionRequest, mergedMapping, "participationDailyLimit");
+		updateModel(actionRequest, mergedMapping, "participationLifespan");
+		updateModel(actionRequest, mergedMapping, "participationValue");
 
-		int informationLifespan = ParamUtil.getInteger(
-			actionRequest,
-			className + "." + mergedEquityActionMapping.getActionId() +
-				".informationLifespan",
-			-1);
-
-		if (informationLifespan >= 0) {
-			mergedEquityActionMapping.setInformationLifespan(
-				informationLifespan);
-		}
-
-		int informationValue = ParamUtil.getInteger(
-			actionRequest,
-			className + "." + mergedEquityActionMapping.getActionId() +
-				".informationValue",
-			-1);
-
-		if (informationValue >= 0) {
-			mergedEquityActionMapping.setInformationValue(informationValue);
-		}
-
-		int participationLifespan = ParamUtil.getInteger(
-			actionRequest,
-			className + "." + mergedEquityActionMapping.getActionId() +
-				".participationLifespan",
-			-1);
-
-		if (participationLifespan >= 0) {
-			mergedEquityActionMapping.setParticipationLifespan(
-				participationLifespan);
-		}
-
-		int participationValue = ParamUtil.getInteger(
-			actionRequest,
-			className + "." + mergedEquityActionMapping.getActionId() +
-				".participationValue",
-			-1);
-
-		if (participationValue >= 0) {
-			mergedEquityActionMapping.setParticipationValue(participationValue);
-		}
-
-		return mergedEquityActionMapping;
+		return mergedMapping;
 	}
 
 	protected SocialEquityActionMapping getMergedEquityActionMapping(
@@ -166,12 +153,16 @@ public class ViewAction extends PortletAction {
 			if (equitySetting.getType() ==
 					SocialEquitySettingConstants.TYPE_INFORMATION) {
 
+				mergedEquityActionMapping.setInformationDailyLimit(
+					equitySetting.getDailyLimit());
 				mergedEquityActionMapping.setInformationLifespan(
 					equitySetting.getValidity());
 				mergedEquityActionMapping.setInformationValue(
 					equitySetting.getValue());
 			}
 			else {
+				mergedEquityActionMapping.setParticipationDailyLimit(
+					equitySetting.getDailyLimit());
 				mergedEquityActionMapping.setParticipationLifespan(
 					equitySetting.getValidity());
 				mergedEquityActionMapping.setParticipationValue(

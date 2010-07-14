@@ -65,12 +65,20 @@ portletURL.setParameter("struts_action", "/social_equity_admin/view");
 					<aui:input label="" name='<%= className + "." + equityActionMapping.getActionId() + ".informationLifespan" %>' size="4" type="text" value="<%= equityActionMapping.getInformationLifespan() %>" />
 				</liferay-ui:search-container-column-text>
 
+				<liferay-ui:search-container-column-text name="daily-limit">
+					<aui:input label="" name='<%= className + "." + equityActionMapping.getActionId() + ".informationDailyLimit" %>' size="4" type="text" value="<%= equityActionMapping.getInformationDailyLimit() %>" />
+				</liferay-ui:search-container-column-text>
+
 				<liferay-ui:search-container-column-text name="participation-value">
 					<aui:input label="" name='<%= className + "." + equityActionMapping.getActionId() + ".participationValue" %>' size="4" type="text" value="<%= equityActionMapping.getParticipationValue() %>" />
 				</liferay-ui:search-container-column-text>
 
 				<liferay-ui:search-container-column-text name="participation-lifespan">
 					<aui:input label="" name='<%= className + "." + equityActionMapping.getActionId() + ".participationLifespan" %>' size="4" type="text" value="<%= equityActionMapping.getParticipationLifespan() %>" />
+				</liferay-ui:search-container-column-text>
+
+				<liferay-ui:search-container-column-text name="daily-limit">
+					<aui:input label="" name='<%= className + "." + equityActionMapping.getActionId() + ".participationDailyLimit" %>' size="4" type="text" value="<%= equityActionMapping.getParticipationDailyLimit() %>" />
 				</liferay-ui:search-container-column-text>
 			</liferay-ui:search-container-row>
 

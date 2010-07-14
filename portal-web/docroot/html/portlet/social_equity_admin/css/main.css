@@ -1,0 +1,22 @@
+.portlet-social-equity-admin .col-1 {
+	width: 15%;
+}
+
+.portlet-social-equity-admin .col-2, 
+.portlet-social-equity-admin .col-3, 
+.portlet-social-equity-admin .col-4, 
+.portlet-social-equity-admin .col-5, 
+.portlet-social-equity-admin .col-6,
+.portlet-social-equity-admin .col-7 {
+	text-align: center;
+	width: 14%;
+}
+
+.portlet-social-equity-admin td.col-2, 
+.portlet-social-equity-admin td.col-3, 
+.portlet-social-equity-admin td.col-4, 
+.portlet-social-equity-admin td.col-5, 
+.portlet-social-equity-admin td.col-6,
+.portlet-social-equity-admin td.col-7 {
+	text-align: center;
+}
