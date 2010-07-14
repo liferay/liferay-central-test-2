@@ -82,8 +82,8 @@ public class PermissionWrapper implements Permission {
 		return _permission.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _permission.setNew(n);
+	public void setNew(boolean n) {
+		_permission.setNew(n);
 	}
 
 	public boolean isCachedModel() {

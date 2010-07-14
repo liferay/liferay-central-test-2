@@ -244,8 +244,8 @@ public class BlogsEntryWrapper implements BlogsEntry {
 		return _blogsEntry.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _blogsEntry.setNew(n);
+	public void setNew(boolean n) {
+		_blogsEntry.setNew(n);
 	}
 
 	public boolean isCachedModel() {

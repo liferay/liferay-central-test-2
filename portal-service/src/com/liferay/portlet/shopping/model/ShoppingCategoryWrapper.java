@@ -139,8 +139,8 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 		return _shoppingCategory.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _shoppingCategory.setNew(n);
+	public void setNew(boolean n) {
+		_shoppingCategory.setNew(n);
 	}
 
 	public boolean isCachedModel() {

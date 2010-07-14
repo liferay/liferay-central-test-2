@@ -106,8 +106,8 @@ public class SCProductScreenshotWrapper implements SCProductScreenshot {
 		return _scProductScreenshot.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _scProductScreenshot.setNew(n);
+	public void setNew(boolean n) {
+		_scProductScreenshot.setNew(n);
 	}
 
 	public boolean isCachedModel() {

@@ -236,8 +236,8 @@ public class DLFileVersionWrapper implements DLFileVersion {
 		return _dlFileVersion.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _dlFileVersion.setNew(n);
+	public void setNew(boolean n) {
+		_dlFileVersion.setNew(n);
 	}
 
 	public boolean isCachedModel() {

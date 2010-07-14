@@ -220,8 +220,8 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		return _dlFileEntry.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _dlFileEntry.setNew(n);
+	public void setNew(boolean n) {
+		_dlFileEntry.setNew(n);
 	}
 
 	public boolean isCachedModel() {

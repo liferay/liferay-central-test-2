@@ -82,7 +82,7 @@ public interface CountryModel extends BaseModel<Country> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

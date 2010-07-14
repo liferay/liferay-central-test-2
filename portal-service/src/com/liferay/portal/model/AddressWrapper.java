@@ -215,8 +215,8 @@ public class AddressWrapper implements Address {
 		return _address.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _address.setNew(n);
+	public void setNew(boolean n) {
+		_address.setNew(n);
 	}
 
 	public boolean isCachedModel() {

@@ -143,8 +143,8 @@ public class PortletItemWrapper implements PortletItem {
 		return _portletItem.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _portletItem.setNew(n);
+	public void setNew(boolean n) {
+		_portletItem.setNew(n);
 	}
 
 	public boolean isCachedModel() {

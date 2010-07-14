@@ -110,8 +110,8 @@ public class SCLicenseWrapper implements SCLicense {
 		return _scLicense.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _scLicense.setNew(n);
+	public void setNew(boolean n) {
+		_scLicense.setNew(n);
 	}
 
 	public boolean isCachedModel() {

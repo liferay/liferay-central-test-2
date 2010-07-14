@@ -180,8 +180,8 @@ public class TasksReviewWrapper implements TasksReview {
 		return _tasksReview.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _tasksReview.setNew(n);
+	public void setNew(boolean n) {
+		_tasksReview.setNew(n);
 	}
 
 	public boolean isCachedModel() {

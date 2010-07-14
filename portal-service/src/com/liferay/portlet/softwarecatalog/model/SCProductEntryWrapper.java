@@ -187,8 +187,8 @@ public class SCProductEntryWrapper implements SCProductEntry {
 		return _scProductEntry.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _scProductEntry.setNew(n);
+	public void setNew(boolean n) {
+		_scProductEntry.setNew(n);
 	}
 
 	public boolean isCachedModel() {

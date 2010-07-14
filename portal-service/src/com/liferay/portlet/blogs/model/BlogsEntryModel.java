@@ -154,7 +154,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

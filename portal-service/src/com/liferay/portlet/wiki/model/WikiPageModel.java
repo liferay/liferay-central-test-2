@@ -172,7 +172,7 @@ public interface WikiPageModel extends BaseModel<WikiPage> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

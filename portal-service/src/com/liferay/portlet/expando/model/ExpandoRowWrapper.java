@@ -82,8 +82,8 @@ public class ExpandoRowWrapper implements ExpandoRow {
 		return _expandoRow.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _expandoRow.setNew(n);
+	public void setNew(boolean n) {
+		_expandoRow.setNew(n);
 	}
 
 	public boolean isCachedModel() {

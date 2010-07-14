@@ -86,8 +86,8 @@ public class MBDiscussionWrapper implements MBDiscussion {
 		return _mbDiscussion.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _mbDiscussion.setNew(n);
+	public void setNew(boolean n) {
+		_mbDiscussion.setNew(n);
 	}
 
 	public boolean isCachedModel() {

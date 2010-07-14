@@ -58,7 +58,7 @@ public interface ClassNameModel extends BaseModel<ClassName> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

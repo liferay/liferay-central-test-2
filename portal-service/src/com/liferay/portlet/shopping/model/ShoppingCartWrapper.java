@@ -151,8 +151,8 @@ public class ShoppingCartWrapper implements ShoppingCart {
 		return _shoppingCart.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _shoppingCart.setNew(n);
+	public void setNew(boolean n) {
+		_shoppingCart.setNew(n);
 	}
 
 	public boolean isCachedModel() {

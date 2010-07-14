@@ -140,8 +140,8 @@ public class SocialEquityUserWrapper implements SocialEquityUser {
 		return _socialEquityUser.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _socialEquityUser.setNew(n);
+	public void setNew(boolean n) {
+		_socialEquityUser.setNew(n);
 	}
 
 	public boolean isCachedModel() {

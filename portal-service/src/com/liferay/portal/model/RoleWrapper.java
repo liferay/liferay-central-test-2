@@ -156,8 +156,8 @@ public class RoleWrapper implements Role {
 		return _role.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _role.setNew(n);
+	public void setNew(boolean n) {
+		_role.setNew(n);
 	}
 
 	public boolean isCachedModel() {

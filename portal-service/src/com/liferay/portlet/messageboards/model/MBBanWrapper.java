@@ -132,8 +132,8 @@ public class MBBanWrapper implements MBBan {
 		return _mbBan.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _mbBan.setNew(n);
+	public void setNew(boolean n) {
+		_mbBan.setNew(n);
 	}
 
 	public boolean isCachedModel() {

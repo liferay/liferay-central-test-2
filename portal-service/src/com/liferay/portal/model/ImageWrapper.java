@@ -106,8 +106,8 @@ public class ImageWrapper implements Image {
 		return _image.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _image.setNew(n);
+	public void setNew(boolean n) {
+		_image.setNew(n);
 	}
 
 	public boolean isCachedModel() {

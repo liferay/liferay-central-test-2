@@ -186,8 +186,8 @@ public class OrgLaborWrapper implements OrgLabor {
 		return _orgLabor.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _orgLabor.setNew(n);
+	public void setNew(boolean n) {
+		_orgLabor.setNew(n);
 	}
 
 	public boolean isCachedModel() {

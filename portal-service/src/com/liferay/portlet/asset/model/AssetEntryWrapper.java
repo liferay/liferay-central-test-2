@@ -259,8 +259,8 @@ public class AssetEntryWrapper implements AssetEntry {
 		return _assetEntry.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _assetEntry.setNew(n);
+	public void setNew(boolean n) {
+		_assetEntry.setNew(n);
 	}
 
 	public boolean isCachedModel() {

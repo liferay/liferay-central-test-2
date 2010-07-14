@@ -207,8 +207,8 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 		return _shoppingCoupon.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _shoppingCoupon.setNew(n);
+	public void setNew(boolean n) {
+		_shoppingCoupon.setNew(n);
 	}
 
 	public boolean isCachedModel() {

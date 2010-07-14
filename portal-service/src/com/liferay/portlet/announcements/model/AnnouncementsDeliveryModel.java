@@ -88,7 +88,7 @@ public interface AnnouncementsDeliveryModel extends BaseModel<AnnouncementsDeliv
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

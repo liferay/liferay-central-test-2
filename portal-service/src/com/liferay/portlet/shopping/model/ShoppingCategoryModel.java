@@ -98,7 +98,7 @@ public interface ShoppingCategoryModel extends BaseModel<ShoppingCategory> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

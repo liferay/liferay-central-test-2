@@ -176,8 +176,8 @@ public class SocialRequestWrapper implements SocialRequest {
 		return _socialRequest.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _socialRequest.setNew(n);
+	public void setNew(boolean n) {
+		_socialRequest.setNew(n);
 	}
 
 	public boolean isCachedModel() {

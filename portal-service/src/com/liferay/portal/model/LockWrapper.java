@@ -151,8 +151,8 @@ public class LockWrapper implements Lock {
 		return _lock.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _lock.setNew(n);
+	public void setNew(boolean n) {
+		_lock.setNew(n);
 	}
 
 	public boolean isCachedModel() {

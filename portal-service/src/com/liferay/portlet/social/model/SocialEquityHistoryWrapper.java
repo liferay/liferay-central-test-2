@@ -107,8 +107,8 @@ public class SocialEquityHistoryWrapper implements SocialEquityHistory {
 		return _socialEquityHistory.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _socialEquityHistory.setNew(n);
+	public void setNew(boolean n) {
+		_socialEquityHistory.setNew(n);
 	}
 
 	public boolean isCachedModel() {

@@ -107,8 +107,8 @@ public class MBMessageFlagWrapper implements MBMessageFlag {
 		return _mbMessageFlag.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _mbMessageFlag.setNew(n);
+	public void setNew(boolean n) {
+		_mbMessageFlag.setNew(n);
 	}
 
 	public boolean isCachedModel() {

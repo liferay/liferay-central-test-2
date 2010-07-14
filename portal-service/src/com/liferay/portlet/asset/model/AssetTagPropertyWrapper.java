@@ -131,8 +131,8 @@ public class AssetTagPropertyWrapper implements AssetTagProperty {
 		return _assetTagProperty.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _assetTagProperty.setNew(n);
+	public void setNew(boolean n) {
+		_assetTagProperty.setNew(n);
 	}
 
 	public boolean isCachedModel() {

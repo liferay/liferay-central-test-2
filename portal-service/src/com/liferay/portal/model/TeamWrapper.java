@@ -131,8 +131,8 @@ public class TeamWrapper implements Team {
 		return _team.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _team.setNew(n);
+	public void setNew(boolean n) {
+		_team.setNew(n);
 	}
 
 	public boolean isCachedModel() {

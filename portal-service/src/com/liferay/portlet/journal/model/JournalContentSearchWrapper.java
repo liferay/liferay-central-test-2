@@ -111,8 +111,8 @@ public class JournalContentSearchWrapper implements JournalContentSearch {
 		return _journalContentSearch.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _journalContentSearch.setNew(n);
+	public void setNew(boolean n) {
+		_journalContentSearch.setNew(n);
 	}
 
 	public boolean isCachedModel() {

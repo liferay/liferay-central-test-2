@@ -80,7 +80,7 @@ public interface TicketModel extends BaseModel<Ticket> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

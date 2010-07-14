@@ -276,8 +276,8 @@ public class WikiPageWrapper implements WikiPage {
 		return _wikiPage.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _wikiPage.setNew(n);
+	public void setNew(boolean n) {
+		_wikiPage.setNew(n);
 	}
 
 	public boolean isCachedModel() {

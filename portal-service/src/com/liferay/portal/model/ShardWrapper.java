@@ -86,8 +86,8 @@ public class ShardWrapper implements Shard {
 		return _shard.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _shard.setNew(n);
+	public void setNew(boolean n) {
+		_shard.setNew(n);
 	}
 
 	public boolean isCachedModel() {

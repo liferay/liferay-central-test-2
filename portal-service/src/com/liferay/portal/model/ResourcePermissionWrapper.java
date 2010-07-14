@@ -106,8 +106,8 @@ public class ResourcePermissionWrapper implements ResourcePermission {
 		return _resourcePermission.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _resourcePermission.setNew(n);
+	public void setNew(boolean n) {
+		_resourcePermission.setNew(n);
 	}
 
 	public boolean isCachedModel() {

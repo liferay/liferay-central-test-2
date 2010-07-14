@@ -292,8 +292,8 @@ public class MBMessageWrapper implements MBMessage {
 		return _mbMessage.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _mbMessage.setNew(n);
+	public void setNew(boolean n) {
+		_mbMessage.setNew(n);
 	}
 
 	public boolean isCachedModel() {

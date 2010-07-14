@@ -167,8 +167,8 @@ public class TasksProposalWrapper implements TasksProposal {
 		return _tasksProposal.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _tasksProposal.setNew(n);
+	public void setNew(boolean n) {
+		_tasksProposal.setNew(n);
 	}
 
 	public boolean isCachedModel() {

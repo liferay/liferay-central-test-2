@@ -130,7 +130,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

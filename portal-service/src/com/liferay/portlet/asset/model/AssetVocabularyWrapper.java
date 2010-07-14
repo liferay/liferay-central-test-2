@@ -217,8 +217,8 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 		return _assetVocabulary.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _assetVocabulary.setNew(n);
+	public void setNew(boolean n) {
+		_assetVocabulary.setNew(n);
 	}
 
 	public boolean isCachedModel() {

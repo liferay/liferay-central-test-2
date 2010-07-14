@@ -122,8 +122,8 @@ public class PollsChoiceWrapper implements PollsChoice {
 		return _pollsChoice.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _pollsChoice.setNew(n);
+	public void setNew(boolean n) {
+		_pollsChoice.setNew(n);
 	}
 
 	public boolean isCachedModel() {

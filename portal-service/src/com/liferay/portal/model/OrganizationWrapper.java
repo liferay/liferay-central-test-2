@@ -150,8 +150,8 @@ public class OrganizationWrapper implements Organization {
 		return _organization.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _organization.setNew(n);
+	public void setNew(boolean n) {
+		_organization.setNew(n);
 	}
 
 	public boolean isCachedModel() {

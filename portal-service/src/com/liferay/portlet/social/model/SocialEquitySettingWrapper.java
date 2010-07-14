@@ -138,8 +138,8 @@ public class SocialEquitySettingWrapper implements SocialEquitySetting {
 		return _socialEquitySetting.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _socialEquitySetting.setNew(n);
+	public void setNew(boolean n) {
+		_socialEquitySetting.setNew(n);
 	}
 
 	public boolean isCachedModel() {

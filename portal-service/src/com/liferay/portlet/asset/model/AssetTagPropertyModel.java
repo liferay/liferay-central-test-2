@@ -94,7 +94,7 @@ public interface AssetTagPropertyModel extends BaseModel<AssetTagProperty> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

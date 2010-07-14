@@ -131,8 +131,8 @@ public class AssetLinkWrapper implements AssetLink {
 		return _assetLink.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _assetLink.setNew(n);
+	public void setNew(boolean n) {
+		_assetLink.setNew(n);
 	}
 
 	public boolean isCachedModel() {

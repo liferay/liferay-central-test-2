@@ -135,8 +135,8 @@ public class SubscriptionWrapper implements Subscription {
 		return _subscription.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _subscription.setNew(n);
+	public void setNew(boolean n) {
+		_subscription.setNew(n);
 	}
 
 	public boolean isCachedModel() {

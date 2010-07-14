@@ -99,8 +99,8 @@ public class AnnouncementsFlagWrapper implements AnnouncementsFlag {
 		return _announcementsFlag.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _announcementsFlag.setNew(n);
+	public void setNew(boolean n) {
+		_announcementsFlag.setNew(n);
 	}
 
 	public boolean isCachedModel() {

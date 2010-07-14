@@ -80,7 +80,7 @@ public interface SocialEquityAssetEntryModel extends BaseModel<SocialEquityAsset
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

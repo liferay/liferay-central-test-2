@@ -138,7 +138,7 @@ public interface AddressModel extends BaseModel<Address> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

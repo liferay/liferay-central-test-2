@@ -178,8 +178,8 @@ public class LayoutSetWrapper implements LayoutSet {
 		return _layoutSet.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _layoutSet.setNew(n);
+	public void setNew(boolean n) {
+		_layoutSet.setNew(n);
 	}
 
 	public boolean isCachedModel() {

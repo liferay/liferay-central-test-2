@@ -74,7 +74,7 @@ public interface PollsVoteModel extends BaseModel<PollsVote> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

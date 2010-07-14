@@ -131,7 +131,7 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

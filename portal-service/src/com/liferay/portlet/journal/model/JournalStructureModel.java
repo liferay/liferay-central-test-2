@@ -113,7 +113,7 @@ public interface JournalStructureModel extends BaseModel<JournalStructure> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

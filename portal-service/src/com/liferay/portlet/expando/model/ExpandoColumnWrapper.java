@@ -106,8 +106,8 @@ public class ExpandoColumnWrapper implements ExpandoColumn {
 		return _expandoColumn.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _expandoColumn.setNew(n);
+	public void setNew(boolean n) {
+		_expandoColumn.setNew(n);
 	}
 
 	public boolean isCachedModel() {

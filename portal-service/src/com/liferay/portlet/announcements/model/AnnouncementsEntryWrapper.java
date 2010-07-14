@@ -203,8 +203,8 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 		return _announcementsEntry.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _announcementsEntry.setNew(n);
+	public void setNew(boolean n) {
+		_announcementsEntry.setNew(n);
 	}
 
 	public boolean isCachedModel() {

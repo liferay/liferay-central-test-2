@@ -65,7 +65,7 @@ public interface ResourceActionModel extends BaseModel<ResourceAction> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

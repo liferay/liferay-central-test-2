@@ -106,8 +106,8 @@ public class SocialRelationWrapper implements SocialRelation {
 		return _socialRelation.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _socialRelation.setNew(n);
+	public void setNew(boolean n) {
+		_socialRelation.setNew(n);
 	}
 
 	public boolean isCachedModel() {

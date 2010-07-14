@@ -379,8 +379,8 @@ public class UserWrapper implements User {
 		return _user.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _user.setNew(n);
+	public void setNew(boolean n) {
+		_user.setNew(n);
 	}
 
 	public boolean isCachedModel() {

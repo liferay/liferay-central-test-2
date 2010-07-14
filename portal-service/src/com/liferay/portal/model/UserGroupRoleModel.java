@@ -64,7 +64,7 @@ public interface UserGroupRoleModel extends BaseModel<UserGroupRole> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

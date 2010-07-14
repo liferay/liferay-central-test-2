@@ -104,7 +104,7 @@ public interface SCFrameworkVersionModel extends BaseModel<SCFrameworkVersion> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

@@ -139,8 +139,8 @@ public class BookmarksFolderWrapper implements BookmarksFolder {
 		return _bookmarksFolder.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _bookmarksFolder.setNew(n);
+	public void setNew(boolean n) {
+		_bookmarksFolder.setNew(n);
 	}
 
 	public boolean isCachedModel() {

@@ -244,8 +244,8 @@ public class JournalFeedWrapper implements JournalFeed {
 		return _journalFeed.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _journalFeed.setNew(n);
+	public void setNew(boolean n) {
+		_journalFeed.setNew(n);
 	}
 
 	public boolean isCachedModel() {

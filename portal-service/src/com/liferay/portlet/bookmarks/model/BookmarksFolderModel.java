@@ -98,7 +98,7 @@ public interface BookmarksFolderModel extends BaseModel<BookmarksFolder> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

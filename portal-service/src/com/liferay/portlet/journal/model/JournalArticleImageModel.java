@@ -86,7 +86,7 @@ public interface JournalArticleImageModel extends BaseModel<JournalArticleImage>
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

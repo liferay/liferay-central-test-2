@@ -94,8 +94,8 @@ public class PortletWrapper implements Portlet {
 		return _portlet.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _portlet.setNew(n);
+	public void setNew(boolean n) {
+		_portlet.setNew(n);
 	}
 
 	public boolean isCachedModel() {

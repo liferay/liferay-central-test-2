@@ -188,8 +188,8 @@ public class MBThreadWrapper implements MBThread {
 		return _mbThread.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _mbThread.setNew(n);
+	public void setNew(boolean n) {
+		_mbThread.setNew(n);
 	}
 
 	public boolean isCachedModel() {

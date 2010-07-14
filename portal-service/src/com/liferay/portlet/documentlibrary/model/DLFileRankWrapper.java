@@ -115,8 +115,8 @@ public class DLFileRankWrapper implements DLFileRank {
 		return _dlFileRank.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _dlFileRank.setNew(n);
+	public void setNew(boolean n) {
+		_dlFileRank.setNew(n);
 	}
 
 	public boolean isCachedModel() {

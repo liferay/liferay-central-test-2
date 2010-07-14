@@ -275,8 +275,8 @@ public class MBMailingListWrapper implements MBMailingList {
 		return _mbMailingList.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _mbMailingList.setNew(n);
+	public void setNew(boolean n) {
+		_mbMailingList.setNew(n);
 	}
 
 	public boolean isCachedModel() {

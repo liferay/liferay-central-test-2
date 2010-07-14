@@ -86,8 +86,8 @@ public class ExpandoTableWrapper implements ExpandoTable {
 		return _expandoTable.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _expandoTable.setNew(n);
+	public void setNew(boolean n) {
+		_expandoTable.setNew(n);
 	}
 
 	public boolean isCachedModel() {

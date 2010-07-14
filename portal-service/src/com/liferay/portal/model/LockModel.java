@@ -105,7 +105,7 @@ public interface LockModel extends BaseModel<Lock> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

@@ -66,7 +66,7 @@ public interface UserTrackerPathModel extends BaseModel<UserTrackerPath> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

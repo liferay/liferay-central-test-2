@@ -367,8 +367,8 @@ public class ShoppingItemWrapper implements ShoppingItem {
 		return _shoppingItem.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _shoppingItem.setNew(n);
+	public void setNew(boolean n) {
+		_shoppingItem.setNew(n);
 	}
 
 	public boolean isCachedModel() {

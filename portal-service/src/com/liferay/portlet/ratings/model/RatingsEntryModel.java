@@ -94,7 +94,7 @@ public interface RatingsEntryModel extends BaseModel<RatingsEntry> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

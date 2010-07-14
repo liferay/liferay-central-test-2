@@ -86,8 +86,8 @@ public class PasswordPolicyRelWrapper implements PasswordPolicyRel {
 		return _passwordPolicyRel.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _passwordPolicyRel.setNew(n);
+	public void setNew(boolean n) {
+		_passwordPolicyRel.setNew(n);
 	}
 
 	public boolean isCachedModel() {

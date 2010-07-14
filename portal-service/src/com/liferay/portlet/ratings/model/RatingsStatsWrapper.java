@@ -102,8 +102,8 @@ public class RatingsStatsWrapper implements RatingsStats {
 		return _ratingsStats.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _ratingsStats.setNew(n);
+	public void setNew(boolean n) {
+		_ratingsStats.setNew(n);
 	}
 
 	public boolean isCachedModel() {

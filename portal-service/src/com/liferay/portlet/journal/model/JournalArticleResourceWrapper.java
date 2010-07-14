@@ -75,8 +75,8 @@ public class JournalArticleResourceWrapper implements JournalArticleResource {
 		return _journalArticleResource.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _journalArticleResource.setNew(n);
+	public void setNew(boolean n) {
+		_journalArticleResource.setNew(n);
 	}
 
 	public boolean isCachedModel() {

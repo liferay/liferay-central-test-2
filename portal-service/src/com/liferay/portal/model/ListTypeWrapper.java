@@ -74,8 +74,8 @@ public class ListTypeWrapper implements ListType {
 		return _listType.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _listType.setNew(n);
+	public void setNew(boolean n) {
+		_listType.setNew(n);
 	}
 
 	public boolean isCachedModel() {

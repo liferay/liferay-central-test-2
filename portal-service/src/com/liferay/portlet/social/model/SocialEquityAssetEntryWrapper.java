@@ -116,8 +116,8 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 		return _socialEquityAssetEntry.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _socialEquityAssetEntry.setNew(n);
+	public void setNew(boolean n) {
+		_socialEquityAssetEntry.setNew(n);
 	}
 
 	public boolean isCachedModel() {

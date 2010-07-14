@@ -90,7 +90,7 @@ public interface UserTrackerModel extends BaseModel<UserTracker> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

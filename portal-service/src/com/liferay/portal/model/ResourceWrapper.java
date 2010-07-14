@@ -74,8 +74,8 @@ public class ResourceWrapper implements Resource {
 		return _resource.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _resource.setNew(n);
+	public void setNew(boolean n) {
+		_resource.setNew(n);
 	}
 
 	public boolean isCachedModel() {

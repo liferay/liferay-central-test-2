@@ -113,7 +113,7 @@ public interface SocialRequestModel extends BaseModel<SocialRequest> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

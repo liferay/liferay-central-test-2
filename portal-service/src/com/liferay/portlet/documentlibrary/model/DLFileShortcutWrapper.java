@@ -204,8 +204,8 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 		return _dlFileShortcut.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _dlFileShortcut.setNew(n);
+	public void setNew(boolean n) {
+		_dlFileShortcut.setNew(n);
 	}
 
 	public boolean isCachedModel() {

@@ -133,7 +133,7 @@ public interface AnnouncementsEntryModel extends BaseModel<AnnouncementsEntry> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

@@ -71,7 +71,7 @@ public interface PortletModel extends BaseModel<Portlet> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

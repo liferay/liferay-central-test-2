@@ -134,8 +134,8 @@ public class CompanyWrapper implements Company {
 		return _company.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _company.setNew(n);
+	public void setNew(boolean n) {
+		_company.setNew(n);
 	}
 
 	public boolean isCachedModel() {

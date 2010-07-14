@@ -77,7 +77,7 @@ public interface ExpandoColumnModel extends BaseModel<ExpandoColumn> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

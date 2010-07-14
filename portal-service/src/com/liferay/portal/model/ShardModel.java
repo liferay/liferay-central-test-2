@@ -66,7 +66,7 @@ public interface ShardModel extends BaseModel<Shard> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

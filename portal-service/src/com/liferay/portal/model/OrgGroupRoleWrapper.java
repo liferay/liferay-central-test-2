@@ -75,8 +75,8 @@ public class OrgGroupRoleWrapper implements OrgGroupRole {
 		return _orgGroupRole.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _orgGroupRole.setNew(n);
+	public void setNew(boolean n) {
+		_orgGroupRole.setNew(n);
 	}
 
 	public boolean isCachedModel() {

@@ -128,8 +128,8 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 		return _announcementsDelivery.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _announcementsDelivery.setNew(n);
+	public void setNew(boolean n) {
+		_announcementsDelivery.setNew(n);
 	}
 
 	public boolean isCachedModel() {

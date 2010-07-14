@@ -254,8 +254,8 @@ public class LayoutWrapper implements Layout {
 		return _layout.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _layout.setNew(n);
+	public void setNew(boolean n) {
+		_layout.setNew(n);
 	}
 
 	public boolean isCachedModel() {

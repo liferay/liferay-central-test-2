@@ -171,8 +171,8 @@ public class MBCategoryWrapper implements MBCategory {
 		return _mbCategory.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _mbCategory.setNew(n);
+	public void setNew(boolean n) {
+		_mbCategory.setNew(n);
 	}
 
 	public boolean isCachedModel() {

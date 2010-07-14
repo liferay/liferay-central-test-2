@@ -70,8 +70,8 @@ public class ClassNameWrapper implements ClassName {
 		return _className.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _className.setNew(n);
+	public void setNew(boolean n) {
+		_className.setNew(n);
 	}
 
 	public boolean isCachedModel() {

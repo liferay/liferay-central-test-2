@@ -82,8 +82,8 @@ public class WikiPageResourceWrapper implements WikiPageResource {
 		return _wikiPageResource.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _wikiPageResource.setNew(n);
+	public void setNew(boolean n) {
+		_wikiPageResource.setNew(n);
 	}
 
 	public boolean isCachedModel() {

@@ -77,7 +77,7 @@ public interface SocialRelationModel extends BaseModel<SocialRelation> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

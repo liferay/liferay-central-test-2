@@ -99,8 +99,8 @@ public class PollsVoteWrapper implements PollsVote {
 		return _pollsVote.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _pollsVote.setNew(n);
+	public void setNew(boolean n) {
+		_pollsVote.setNew(n);
 	}
 
 	public boolean isCachedModel() {

@@ -139,8 +139,8 @@ public class IGFolderWrapper implements IGFolder {
 		return _igFolder.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _igFolder.setNew(n);
+	public void setNew(boolean n) {
+		_igFolder.setNew(n);
 	}
 
 	public boolean isCachedModel() {

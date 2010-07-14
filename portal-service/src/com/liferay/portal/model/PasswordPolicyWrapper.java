@@ -351,8 +351,8 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 		return _passwordPolicy.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _passwordPolicy.setNew(n);
+	public void setNew(boolean n) {
+		_passwordPolicy.setNew(n);
 	}
 
 	public boolean isCachedModel() {

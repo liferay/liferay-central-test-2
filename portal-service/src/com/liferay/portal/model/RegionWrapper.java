@@ -94,8 +94,8 @@ public class RegionWrapper implements Region {
 		return _region.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _region.setNew(n);
+	public void setNew(boolean n) {
+		_region.setNew(n);
 	}
 
 	public boolean isCachedModel() {

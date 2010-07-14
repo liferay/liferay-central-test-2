@@ -161,7 +161,7 @@ public interface LayoutModel extends BaseModel<Layout> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

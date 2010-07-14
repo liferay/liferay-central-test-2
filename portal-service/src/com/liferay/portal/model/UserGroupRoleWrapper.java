@@ -84,8 +84,8 @@ public class UserGroupRoleWrapper implements UserGroupRole {
 		return _userGroupRole.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _userGroupRole.setNew(n);
+	public void setNew(boolean n) {
+		_userGroupRole.setNew(n);
 	}
 
 	public boolean isCachedModel() {

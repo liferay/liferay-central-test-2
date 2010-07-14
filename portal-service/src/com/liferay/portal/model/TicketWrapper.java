@@ -110,8 +110,8 @@ public class TicketWrapper implements Ticket {
 		return _ticket.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _ticket.setNew(n);
+	public void setNew(boolean n) {
+		_ticket.setNew(n);
 	}
 
 	public boolean isCachedModel() {

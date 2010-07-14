@@ -324,8 +324,8 @@ public class JournalArticleWrapper implements JournalArticle {
 		return _journalArticle.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _journalArticle.setNew(n);
+	public void setNew(boolean n) {
+		_journalArticle.setNew(n);
 	}
 
 	public boolean isCachedModel() {

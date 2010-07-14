@@ -118,8 +118,8 @@ public class ReleaseWrapper implements Release {
 		return _release.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _release.setNew(n);
+	public void setNew(boolean n) {
+		_release.setNew(n);
 	}
 
 	public boolean isCachedModel() {

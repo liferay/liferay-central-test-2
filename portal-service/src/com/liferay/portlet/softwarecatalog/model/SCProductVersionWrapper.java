@@ -159,8 +159,8 @@ public class SCProductVersionWrapper implements SCProductVersion {
 		return _scProductVersion.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _scProductVersion.setNew(n);
+	public void setNew(boolean n) {
+		_scProductVersion.setNew(n);
 	}
 
 	public boolean isCachedModel() {

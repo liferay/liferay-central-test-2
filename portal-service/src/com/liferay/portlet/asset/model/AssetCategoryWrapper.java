@@ -201,8 +201,8 @@ public class AssetCategoryWrapper implements AssetCategory {
 		return _assetCategory.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _assetCategory.setNew(n);
+	public void setNew(boolean n) {
+		_assetCategory.setNew(n);
 	}
 
 	public boolean isCachedModel() {

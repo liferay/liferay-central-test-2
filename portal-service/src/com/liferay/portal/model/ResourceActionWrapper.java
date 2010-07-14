@@ -82,8 +82,8 @@ public class ResourceActionWrapper implements ResourceAction {
 		return _resourceAction.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _resourceAction.setNew(n);
+	public void setNew(boolean n) {
+		_resourceAction.setNew(n);
 	}
 
 	public boolean isCachedModel() {

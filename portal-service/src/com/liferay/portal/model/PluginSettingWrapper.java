@@ -102,8 +102,8 @@ public class PluginSettingWrapper implements PluginSetting {
 		return _pluginSetting.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _pluginSetting.setNew(n);
+	public void setNew(boolean n) {
+		_pluginSetting.setNew(n);
 	}
 
 	public boolean isCachedModel() {

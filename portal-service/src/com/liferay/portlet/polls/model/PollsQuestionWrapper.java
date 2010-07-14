@@ -217,8 +217,8 @@ public class PollsQuestionWrapper implements PollsQuestion {
 		return _pollsQuestion.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _pollsQuestion.setNew(n);
+	public void setNew(boolean n) {
+		_pollsQuestion.setNew(n);
 	}
 
 	public boolean isCachedModel() {

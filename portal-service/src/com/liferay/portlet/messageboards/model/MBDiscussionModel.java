@@ -65,7 +65,7 @@ public interface MBDiscussionModel extends BaseModel<MBDiscussion> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

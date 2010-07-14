@@ -82,8 +82,8 @@ public class UserTrackerPathWrapper implements UserTrackerPath {
 		return _userTrackerPath.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _userTrackerPath.setNew(n);
+	public void setNew(boolean n) {
+		_userTrackerPath.setNew(n);
 	}
 
 	public boolean isCachedModel() {

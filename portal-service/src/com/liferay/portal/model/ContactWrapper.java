@@ -303,8 +303,8 @@ public class ContactWrapper implements Contact {
 		return _contact.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _contact.setNew(n);
+	public void setNew(boolean n) {
+		_contact.setNew(n);
 	}
 
 	public boolean isCachedModel() {

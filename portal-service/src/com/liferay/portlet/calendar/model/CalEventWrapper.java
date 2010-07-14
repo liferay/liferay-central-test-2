@@ -247,8 +247,8 @@ public class CalEventWrapper implements CalEvent {
 		return _calEvent.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _calEvent.setNew(n);
+	public void setNew(boolean n) {
+		_calEvent.setNew(n);
 	}
 
 	public boolean isCachedModel() {

@@ -163,8 +163,8 @@ public class PhoneWrapper implements Phone {
 		return _phone.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _phone.setNew(n);
+	public void setNew(boolean n) {
+		_phone.setNew(n);
 	}
 
 	public boolean isCachedModel() {

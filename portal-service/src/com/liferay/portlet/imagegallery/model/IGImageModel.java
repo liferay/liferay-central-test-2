@@ -114,7 +114,7 @@ public interface IGImageModel extends BaseModel<IGImage> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

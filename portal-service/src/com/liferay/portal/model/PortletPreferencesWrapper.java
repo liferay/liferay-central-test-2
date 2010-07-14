@@ -98,8 +98,8 @@ public class PortletPreferencesWrapper implements PortletPreferences {
 		return _portletPreferences.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _portletPreferences.setNew(n);
+	public void setNew(boolean n) {
+		_portletPreferences.setNew(n);
 	}
 
 	public boolean isCachedModel() {

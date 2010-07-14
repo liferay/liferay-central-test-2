@@ -135,8 +135,8 @@ public class RatingsEntryWrapper implements RatingsEntry {
 		return _ratingsEntry.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _ratingsEntry.setNew(n);
+	public void setNew(boolean n) {
+		_ratingsEntry.setNew(n);
 	}
 
 	public boolean isCachedModel() {

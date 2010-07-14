@@ -110,8 +110,8 @@ public class CountryWrapper implements Country {
 		return _country.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _country.setNew(n);
+	public void setNew(boolean n) {
+		_country.setNew(n);
 	}
 
 	public boolean isCachedModel() {

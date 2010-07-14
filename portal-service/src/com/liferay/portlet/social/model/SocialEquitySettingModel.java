@@ -93,7 +93,7 @@ public interface SocialEquitySettingModel extends BaseModel<SocialEquitySetting>
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

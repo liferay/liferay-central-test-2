@@ -90,8 +90,8 @@ public class UserGroupWrapper implements UserGroup {
 		return _userGroup.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _userGroup.setNew(n);
+	public void setNew(boolean n) {
+		_userGroup.setNew(n);
 	}
 
 	public boolean isCachedModel() {

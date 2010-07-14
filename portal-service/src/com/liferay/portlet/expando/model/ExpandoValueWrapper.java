@@ -118,8 +118,8 @@ public class ExpandoValueWrapper implements ExpandoValue {
 		return _expandoValue.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _expandoValue.setNew(n);
+	public void setNew(boolean n) {
+		_expandoValue.setNew(n);
 	}
 
 	public boolean isCachedModel() {

@@ -75,8 +75,8 @@ public class OrgGroupPermissionWrapper implements OrgGroupPermission {
 		return _orgGroupPermission.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _orgGroupPermission.setNew(n);
+	public void setNew(boolean n) {
+		_orgGroupPermission.setNew(n);
 	}
 
 	public boolean isCachedModel() {

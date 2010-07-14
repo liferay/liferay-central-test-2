@@ -110,8 +110,8 @@ public class WebDAVPropsWrapper implements WebDAVProps {
 		return _webDAVProps.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _webDAVProps.setNew(n);
+	public void setNew(boolean n) {
+		_webDAVProps.setNew(n);
 	}
 
 	public boolean isCachedModel() {

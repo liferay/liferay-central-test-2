@@ -155,8 +155,8 @@ public class WebsiteWrapper implements Website {
 		return _website.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _website.setNew(n);
+	public void setNew(boolean n) {
+		_website.setNew(n);
 	}
 
 	public boolean isCachedModel() {

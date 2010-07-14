@@ -98,7 +98,7 @@ public interface IGFolderModel extends BaseModel<IGFolder> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

@@ -66,8 +66,8 @@ public class CounterWrapper implements Counter {
 		return _counter.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _counter.setNew(n);
+	public void setNew(boolean n) {
+		_counter.setNew(n);
 	}
 
 	public boolean isCachedModel() {

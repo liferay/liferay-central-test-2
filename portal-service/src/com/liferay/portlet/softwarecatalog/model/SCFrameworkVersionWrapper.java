@@ -151,8 +151,8 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 		return _scFrameworkVersion.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _scFrameworkVersion.setNew(n);
+	public void setNew(boolean n) {
+		_scFrameworkVersion.setNew(n);
 	}
 
 	public boolean isCachedModel() {

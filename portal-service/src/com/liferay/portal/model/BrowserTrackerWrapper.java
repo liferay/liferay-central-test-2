@@ -83,8 +83,8 @@ public class BrowserTrackerWrapper implements BrowserTracker {
 		return _browserTracker.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _browserTracker.setNew(n);
+	public void setNew(boolean n) {
+		_browserTracker.setNew(n);
 	}
 
 	public boolean isCachedModel() {

@@ -90,8 +90,8 @@ public class ShoppingItemFieldWrapper implements ShoppingItemField {
 		return _shoppingItemField.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _shoppingItemField.setNew(n);
+	public void setNew(boolean n) {
+		_shoppingItemField.setNew(n);
 	}
 
 	public boolean isCachedModel() {

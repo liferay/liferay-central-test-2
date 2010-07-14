@@ -111,7 +111,7 @@ public interface BookmarksEntryModel extends BaseModel<BookmarksEntry> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

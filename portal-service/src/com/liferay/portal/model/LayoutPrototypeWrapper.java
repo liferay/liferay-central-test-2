@@ -132,8 +132,8 @@ public class LayoutPrototypeWrapper implements LayoutPrototype {
 		return _layoutPrototype.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _layoutPrototype.setNew(n);
+	public void setNew(boolean n) {
+		_layoutPrototype.setNew(n);
 	}
 
 	public boolean isCachedModel() {

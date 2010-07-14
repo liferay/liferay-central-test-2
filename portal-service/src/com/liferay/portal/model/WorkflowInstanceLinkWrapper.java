@@ -144,8 +144,8 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 		return _workflowInstanceLink.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _workflowInstanceLink.setNew(n);
+	public void setNew(boolean n) {
+		_workflowInstanceLink.setNew(n);
 	}
 
 	public boolean isCachedModel() {

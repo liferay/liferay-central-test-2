@@ -151,8 +151,8 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 		return _socialEquityLog.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _socialEquityLog.setNew(n);
+	public void setNew(boolean n) {
+		_socialEquityLog.setNew(n);
 	}
 
 	public boolean isCachedModel() {

@@ -90,8 +90,8 @@ public class ServiceComponentWrapper implements ServiceComponent {
 		return _serviceComponent.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _serviceComponent.setNew(n);
+	public void setNew(boolean n) {
+		_serviceComponent.setNew(n);
 	}
 
 	public boolean isCachedModel() {

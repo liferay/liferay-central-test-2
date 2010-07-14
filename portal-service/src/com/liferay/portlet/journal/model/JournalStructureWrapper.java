@@ -163,8 +163,8 @@ public class JournalStructureWrapper implements JournalStructure {
 		return _journalStructure.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _journalStructure.setNew(n);
+	public void setNew(boolean n) {
+		_journalStructure.setNew(n);
 	}
 
 	public boolean isCachedModel() {

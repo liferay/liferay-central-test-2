@@ -99,8 +99,8 @@ public class UserIdMapperWrapper implements UserIdMapper {
 		return _userIdMapper.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _userIdMapper.setNew(n);
+	public void setNew(boolean n) {
+		_userIdMapper.setNew(n);
 	}
 
 	public boolean isCachedModel() {

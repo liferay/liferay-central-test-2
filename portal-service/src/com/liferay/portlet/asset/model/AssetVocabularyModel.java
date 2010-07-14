@@ -137,7 +137,7 @@ public interface AssetVocabularyModel extends BaseModel<AssetVocabulary> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

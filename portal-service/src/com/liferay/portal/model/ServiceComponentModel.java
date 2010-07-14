@@ -69,7 +69,7 @@ public interface ServiceComponentModel extends BaseModel<ServiceComponent> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

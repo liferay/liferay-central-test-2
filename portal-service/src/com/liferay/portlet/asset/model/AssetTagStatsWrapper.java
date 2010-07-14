@@ -86,8 +86,8 @@ public class AssetTagStatsWrapper implements AssetTagStats {
 		return _assetTagStats.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _assetTagStats.setNew(n);
+	public void setNew(boolean n) {
+		_assetTagStats.setNew(n);
 	}
 
 	public boolean isCachedModel() {

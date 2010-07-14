@@ -104,7 +104,7 @@ public interface SocialActivityModel extends BaseModel<SocialActivity> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

@@ -155,8 +155,8 @@ public class DLFolderWrapper implements DLFolder {
 		return _dlFolder.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _dlFolder.setNew(n);
+	public void setNew(boolean n) {
+		_dlFolder.setNew(n);
 	}
 
 	public boolean isCachedModel() {

@@ -154,7 +154,7 @@ public interface CalEventModel extends BaseModel<CalEvent> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

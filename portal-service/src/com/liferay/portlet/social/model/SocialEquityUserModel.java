@@ -92,7 +92,7 @@ public interface SocialEquityUserModel extends BaseModel<SocialEquityUser> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

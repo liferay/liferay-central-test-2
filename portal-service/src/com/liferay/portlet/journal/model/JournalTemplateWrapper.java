@@ -211,8 +211,8 @@ public class JournalTemplateWrapper implements JournalTemplate {
 		return _journalTemplate.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _journalTemplate.setNew(n);
+	public void setNew(boolean n) {
+		_journalTemplate.setNew(n);
 	}
 
 	public boolean isCachedModel() {

@@ -163,8 +163,8 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 		return _bookmarksEntry.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _bookmarksEntry.setNew(n);
+	public void setNew(boolean n) {
+		_bookmarksEntry.setNew(n);
 	}
 
 	public boolean isCachedModel() {

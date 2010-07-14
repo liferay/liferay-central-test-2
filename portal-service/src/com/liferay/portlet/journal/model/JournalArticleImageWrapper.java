@@ -118,8 +118,8 @@ public class JournalArticleImageWrapper implements JournalArticleImage {
 		return _journalArticleImage.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _journalArticleImage.setNew(n);
+	public void setNew(boolean n) {
+		_journalArticleImage.setNew(n);
 	}
 
 	public boolean isCachedModel() {

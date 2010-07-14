@@ -138,8 +138,8 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 		return _shoppingItemPrice.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _shoppingItemPrice.setNew(n);
+	public void setNew(boolean n) {
+		_shoppingItemPrice.setNew(n);
 	}
 
 	public boolean isCachedModel() {

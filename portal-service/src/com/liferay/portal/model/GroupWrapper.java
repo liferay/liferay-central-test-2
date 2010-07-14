@@ -171,8 +171,8 @@ public class GroupWrapper implements Group {
 		return _group.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _group.setNew(n);
+	public void setNew(boolean n) {
+		_group.setNew(n);
 	}
 
 	public boolean isCachedModel() {

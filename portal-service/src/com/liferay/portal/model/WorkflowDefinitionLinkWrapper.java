@@ -145,8 +145,8 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 		return _workflowDefinitionLink.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _workflowDefinitionLink.setNew(n);
+	public void setNew(boolean n) {
+		_workflowDefinitionLink.setNew(n);
 	}
 
 	public boolean isCachedModel() {

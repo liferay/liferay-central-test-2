@@ -103,7 +103,7 @@ public interface WikiNodeModel extends BaseModel<WikiNode> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

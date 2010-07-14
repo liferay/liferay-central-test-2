@@ -123,8 +123,8 @@ public class UserTrackerWrapper implements UserTracker {
 		return _userTracker.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _userTracker.setNew(n);
+	public void setNew(boolean n) {
+		_userTracker.setNew(n);
 	}
 
 	public boolean isCachedModel() {

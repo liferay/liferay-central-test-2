@@ -135,7 +135,7 @@ public interface PollsQuestionModel extends BaseModel<PollsQuestion> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

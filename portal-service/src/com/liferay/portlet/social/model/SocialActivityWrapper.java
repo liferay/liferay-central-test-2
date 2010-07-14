@@ -160,8 +160,8 @@ public class SocialActivityWrapper implements SocialActivity {
 		return _socialActivity.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _socialActivity.setNew(n);
+	public void setNew(boolean n) {
+		_socialActivity.setNew(n);
 	}
 
 	public boolean isCachedModel() {

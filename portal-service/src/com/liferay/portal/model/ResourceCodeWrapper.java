@@ -82,8 +82,8 @@ public class ResourceCodeWrapper implements ResourceCode {
 		return _resourceCode.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _resourceCode.setNew(n);
+	public void setNew(boolean n) {
+		_resourceCode.setNew(n);
 	}
 
 	public boolean isCachedModel() {

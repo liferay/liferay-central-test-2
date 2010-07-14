@@ -108,8 +108,8 @@ public class MBStatsUserWrapper implements MBStatsUser {
 		return _mbStatsUser.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _mbStatsUser.setNew(n);
+	public void setNew(boolean n) {
+		_mbStatsUser.setNew(n);
 	}
 
 	public boolean isCachedModel() {

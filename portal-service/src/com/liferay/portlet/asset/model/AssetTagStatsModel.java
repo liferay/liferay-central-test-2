@@ -65,7 +65,7 @@ public interface AssetTagStatsModel extends BaseModel<AssetTagStats> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

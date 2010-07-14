@@ -155,8 +155,8 @@ public class EmailAddressWrapper implements EmailAddress {
 		return _emailAddress.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _emailAddress.setNew(n);
+	public void setNew(boolean n) {
+		_emailAddress.setNew(n);
 	}
 
 	public boolean isCachedModel() {

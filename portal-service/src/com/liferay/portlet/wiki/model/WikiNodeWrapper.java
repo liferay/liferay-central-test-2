@@ -147,8 +147,8 @@ public class WikiNodeWrapper implements WikiNode {
 		return _wikiNode.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _wikiNode.setNew(n);
+	public void setNew(boolean n) {
+		_wikiNode.setNew(n);
 	}
 
 	public boolean isCachedModel() {

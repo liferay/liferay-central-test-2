@@ -57,7 +57,7 @@ public interface CounterModel extends BaseModel<Counter> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 

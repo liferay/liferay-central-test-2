@@ -140,8 +140,8 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 		return _blogsStatsUser.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _blogsStatsUser.setNew(n);
+	public void setNew(boolean n) {
+		_blogsStatsUser.setNew(n);
 	}
 
 	public boolean isCachedModel() {

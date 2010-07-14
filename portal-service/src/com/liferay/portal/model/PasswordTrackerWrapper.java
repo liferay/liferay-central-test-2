@@ -91,8 +91,8 @@ public class PasswordTrackerWrapper implements PasswordTracker {
 		return _passwordTracker.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _passwordTracker.setNew(n);
+	public void setNew(boolean n) {
+		_passwordTracker.setNew(n);
 	}
 
 	public boolean isCachedModel() {

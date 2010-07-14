@@ -171,8 +171,8 @@ public class IGImageWrapper implements IGImage {
 		return _igImage.isNew();
 	}
 
-	public boolean setNew(boolean n) {
-		return _igImage.setNew(n);
+	public void setNew(boolean n) {
+		_igImage.setNew(n);
 	}
 
 	public boolean isCachedModel() {

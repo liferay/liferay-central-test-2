@@ -114,7 +114,7 @@ public interface OrgLaborModel extends BaseModel<OrgLabor> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 
