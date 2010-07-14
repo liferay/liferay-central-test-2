@@ -918,7 +918,7 @@
 	</library>
 	<library>
 		<file-name>portal/asm.jar</file-name>
-		<version>3.0</version>
+		<version>3.2</version>
 		<project-name>ASM</project-name>
 		<project-url>http://asm.objectweb.org</project-url>
 		<licenses>
@@ -928,8 +928,41 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/asm-attrs.jar</file-name>
-		<version>3.0</version>
+		<file-name>portal/asm-analysis.jar</file-name>
+		<version>3.2</version>
+		<project-name>ASM Attrs</project-name>
+		<project-url>http://asm.objectweb.org</project-url>
+		<licenses>
+			<license>
+				<license-name>ASM License</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/asm-commons.jar</file-name>
+		<version>3.2</version>
+		<project-name>ASM Attrs</project-name>
+		<project-url>http://asm.objectweb.org</project-url>
+		<licenses>
+			<license>
+				<license-name>ASM License</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/asm-tree.jar</file-name>
+		<version>3.2</version>
+		<project-name>ASM Attrs</project-name>
+		<project-url>http://asm.objectweb.org</project-url>
+		<licenses>
+			<license>
+				<license-name>ASM License</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/asm-util.jar</file-name>
+		<version>3.2</version>
 		<project-name>ASM Attrs</project-name>
 		<project-url>http://asm.objectweb.org</project-url>
 		<licenses>
