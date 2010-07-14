@@ -112,7 +112,8 @@ public class ClusterExecutorImpl
 			_executionResultMap.put(uuid, reference);
 		}
 
-		if (!clusterRequest.isSkipLocal() && _shortcutLocalMethod) {
+		if (!clusterRequest.isSkipLocal() && _shortcutLocalMethod &&
+			addresses.remove(getLocalControlAddress())) {
 			ClusterNodeResponse clusterNodeResponse = runLocalMethod(
 				clusterRequest.getMethodWrapper());
 
@@ -376,12 +377,6 @@ public class ClusterExecutorImpl
 
 				addresses.add(address);
 			}
-		}
-
-		Address localControlAddress = getLocalControlAddress();
-
-		if (clusterRequest.isSkipLocal() || _shortcutLocalMethod) {
-			addresses.remove(localControlAddress);
 		}
 
 		return addresses;
