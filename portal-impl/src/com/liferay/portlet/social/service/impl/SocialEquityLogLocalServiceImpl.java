@@ -19,6 +19,7 @@ import com.liferay.ibm.icu.util.GregorianCalendar;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.messaging.async.Async;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PropsValues;
@@ -60,14 +61,6 @@ public class SocialEquityLogLocalServiceImpl
 		throws PortalException, SystemException {
 
 		if (!PropsValues.SOCIAL_EQUITY_EQUITY_LOG_ENABLED) {
-			return;
-		}
-
-		List<SocialEquityLog> equityLogs =
-			socialEquityLogPersistence.findByU_AEI_A_A(
-				userId, assetEntryId, actionId, true);
-
-		if (!equityLogs.isEmpty()) {
 			return;
 		}
 
@@ -293,10 +286,35 @@ public class SocialEquityLogLocalServiceImpl
 		runSQL(sql);
 	}
 
+	@Async
+	public void updateRanks() {
+		DataSource dataSource = socialEquityLogPersistence.getDataSource();
+
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+
+		UpdateRanksHandler updateRanksHandler = new UpdateRanksHandler(
+			jdbcTemplate);
+
+		String sql = CustomSQLUtil.get(_FIND_SOCIAL_EQUITY_USER_BY_RANK);
+
+		sql = StringUtil.replace(
+			sql, "[$ACTION_DATE$]", String.valueOf(getEquityDate()));
+
+		jdbcTemplate.query(sql, updateRanksHandler);
+
+		updateRanksHandler.flush();
+	}
+
 	protected void addEquityLog(
 			User user, AssetEntry assetEntry, User assetEntryUser,
 			SocialEquitySetting equitySetting)
 		throws PortalException, SystemException {
+
+		if (!checkActionRestrictions(
+			user.getUserId(), assetEntry.getEntryId(), equitySetting)) {
+
+			return;
+		}
 
 		int actionDate = getEquityDate();
 
@@ -411,6 +429,61 @@ public class SocialEquityLogLocalServiceImpl
 		return ((double)value / validity) * -1;
 	}
 
+	protected boolean checkActionRestrictions(
+			long userId, long assetEntryId, SocialEquitySetting equitySetting)
+		throws SystemException {
+
+		if (equitySetting.getDailyLimit() < 0) {
+			return false;
+		}
+
+		int count = 0;
+		int actionDate = getEquityDate();
+		String actionId = equitySetting.getActionId();
+		int actionType = equitySetting.getType();
+
+		// Duplicate
+
+		if (socialEquityLogPersistence.countByU_AEI_AD_AI_A_T(
+			userId, assetEntryId, actionDate, actionId, true, actionType) > 0) {
+			return false;
+		}
+
+		// Unique
+
+		if (equitySetting.isUniqueEntry()) {
+			if (actionType == SocialEquitySettingConstants.TYPE_INFORMATION) {
+				count = socialEquityLogPersistence.countByAEI_AI_A_T(
+					assetEntryId, actionId, true, actionType);
+			}
+			else {
+				count = socialEquityLogPersistence.countByU_AI_A_T(
+					userId, actionId, true, actionType);
+			}
+
+			if (count > 0) {
+				return false;
+			}
+		}
+
+		// Daily limit
+
+		if (equitySetting.getDailyLimit() == 0) {
+			return true;
+		}
+
+		if (actionType == SocialEquitySettingConstants.TYPE_INFORMATION) {
+			count = socialEquityLogPersistence.countByAEI_AD_AI_A_T(
+				assetEntryId, actionDate, actionId, true, actionType);
+		}
+		else {
+			count = socialEquityLogPersistence.countByU_AD_AI_A_T(
+				userId, actionDate, actionId, true, actionType);
+		}
+
+		return count < equitySetting.getDailyLimit();
+	}
+
 	protected int getEquityDate() {
 		return getEquityDate(new Date());
 	}
@@ -440,24 +513,6 @@ public class SocialEquityLogLocalServiceImpl
 			});
 
 		runSQL(sql);
-	}
-
-	protected void updateRanks() {
-		DataSource dataSource = socialEquityLogPersistence.getDataSource();
-
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-
-		UpdateRanksHandler updateRanksHandler = new UpdateRanksHandler(
-			jdbcTemplate);
-
-		String sql = CustomSQLUtil.get(_FIND_SOCIAL_EQUITY_USER_BY_RANK);
-
-		sql = StringUtil.replace(
-			sql, "[$ACTION_DATE$]", String.valueOf(getEquityDate()));
-
-		jdbcTemplate.query(sql, updateRanksHandler);
-
-		updateRanksHandler.flush();
 	}
 
 	private static final String _ADD_SOCIAL_EQUITY_ASSET_ENTRY =

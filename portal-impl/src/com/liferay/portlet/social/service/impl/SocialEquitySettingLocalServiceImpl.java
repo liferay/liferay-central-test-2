@@ -53,6 +53,7 @@ public class SocialEquitySettingLocalServiceImpl
 		return getEquitySettings(groupId, classNameId, actionId);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<SocialEquitySetting> getEquitySettings(
 			long groupId, long classNameId, String actionId)
 		throws SystemException {
@@ -191,7 +192,10 @@ public class SocialEquitySettingLocalServiceImpl
 		SocialEquitySetting equitySetting = new SocialEquitySettingImpl();
 
 		equitySetting.setActionId(actionId);
+		equitySetting.setDailyLimit(
+			equityActionMapping.getInformationDailyLimit());
 		equitySetting.setType(SocialEquitySettingConstants.TYPE_INFORMATION);
+		equitySetting.setUniqueEntry(equityActionMapping.isInformationUnique());
 		equitySetting.setValue(equityActionMapping.getInformationValue());
 		equitySetting.setValidity(equityActionMapping.getInformationLifespan());
 
@@ -204,7 +208,11 @@ public class SocialEquitySettingLocalServiceImpl
 		SocialEquitySetting equitySetting = new SocialEquitySettingImpl();
 
 		equitySetting.setActionId(actionId);
+		equitySetting.setDailyLimit(
+			equityActionMapping.getParticipationDailyLimit());
 		equitySetting.setType(SocialEquitySettingConstants.TYPE_PARTICIPATION);
+		equitySetting.setUniqueEntry(
+			equityActionMapping.isParticipationUnique());
 		equitySetting.setValue(equityActionMapping.getParticipationValue());
 		equitySetting.setValidity(
 			equityActionMapping.getParticipationLifespan());
@@ -230,15 +238,9 @@ public class SocialEquitySettingLocalServiceImpl
 				groupId, className, equityActionMapping.getActionId(),
 				SocialEquitySettingConstants.TYPE_INFORMATION);
 
-			if ((equityActionMapping.getInformationValue() !=
-					equitySetting.getValue()) ||
-				(equityActionMapping.getInformationLifespan() !=
-						equitySetting.getValidity())) {
+			if (!equityActionMapping.equals(equitySetting)) {
 
-				equitySetting.setValue(
-					equityActionMapping.getInformationValue());
-				equitySetting.setValidity(
-					equityActionMapping.getInformationLifespan());
+				equitySetting.update(equityActionMapping);
 
 				socialEquitySettingPersistence.update(equitySetting, false);
 			}
@@ -250,18 +252,12 @@ public class SocialEquitySettingLocalServiceImpl
 				SocialEquitySettingConstants.TYPE_PARTICIPATION)) {
 
 			SocialEquitySetting equitySetting = getEquitySetting(
-					groupId, className, equityActionMapping.getActionId(),
-					SocialEquitySettingConstants.TYPE_PARTICIPATION);
+				groupId, className, equityActionMapping.getActionId(),
+				SocialEquitySettingConstants.TYPE_PARTICIPATION);
 
-			if ((equityActionMapping.getParticipationValue() !=
-					equitySetting.getValue()) ||
-				(equityActionMapping.getParticipationLifespan() !=
-					equitySetting.getValidity())) {
+			if (!equityActionMapping.equals(equitySetting)) {
 
-				equitySetting.setValue(
-					equityActionMapping.getParticipationValue());
-				equitySetting.setValidity(
-					equityActionMapping.getParticipationLifespan());
+				equitySetting.update(equityActionMapping);
 
 				socialEquitySettingPersistence.update(equitySetting, false);
 			}

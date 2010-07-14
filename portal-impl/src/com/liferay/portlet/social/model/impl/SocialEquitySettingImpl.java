@@ -14,15 +14,33 @@
 
 package com.liferay.portlet.social.model.impl;
 
+import com.liferay.portlet.social.model.SocialEquityActionMapping;
 import com.liferay.portlet.social.model.SocialEquitySetting;
+import com.liferay.portlet.social.model.SocialEquitySettingConstants;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Zsolt Berentey
  */
 public class SocialEquitySettingImpl
 	extends SocialEquitySettingModelImpl implements SocialEquitySetting {
 
 	public SocialEquitySettingImpl() {
+	}
+
+	public void update(SocialEquityActionMapping equityActionMapping) {
+
+		if (getType() == SocialEquitySettingConstants.TYPE_INFORMATION) {
+			setDailyLimit(equityActionMapping.getInformationDailyLimit());
+			setUniqueEntry(equityActionMapping.isInformationUnique());
+			setValue(equityActionMapping.getInformationValue());
+			setValidity(equityActionMapping.getInformationLifespan());
+		}
+		else {
+			setDailyLimit(equityActionMapping.getParticipationDailyLimit());
+			setUniqueEntry(equityActionMapping.isParticipationUnique());
+			setValue(equityActionMapping.getParticipationValue());
+			setValidity(equityActionMapping.getParticipationLifespan());
+		}
 	}
 
 }
