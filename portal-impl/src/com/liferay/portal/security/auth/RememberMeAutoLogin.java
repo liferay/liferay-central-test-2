@@ -16,10 +16,12 @@ package com.liferay.portal.security.auth;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
@@ -72,27 +74,50 @@ public class RememberMeAutoLogin implements AutoLogin {
 				}
 			}
 
+			// LPS-11218
+
+			if (credentials != null) {
+				Company company = PortalUtil.getCompany(request);
+
+				User defaultUser = UserLocalServiceUtil.getDefaultUser(
+					company.getCompanyId());
+
+				long userId = GetterUtil.getLong(credentials[0]);
+
+				if (defaultUser.getUserId() == userId) {
+					credentials = null;
+
+					removeCookies(request, response);
+				}
+			}
+
 			return credentials;
 		}
 		catch (Exception e) {
 			_log.warn(e, e);
 
-			Cookie cookie = new Cookie(CookieKeys.ID, StringPool.BLANK);
-
-			cookie.setMaxAge(0);
-			cookie.setPath(StringPool.SLASH);
-
-			CookieKeys.addCookie(request, response, cookie);
-
-			cookie = new Cookie(CookieKeys.PASSWORD, StringPool.BLANK);
-
-			cookie.setMaxAge(0);
-			cookie.setPath(StringPool.SLASH);
-
-			CookieKeys.addCookie(request, response, cookie);
+			removeCookies(request, response);
 
 			throw new AutoLoginException(e);
 		}
+	}
+
+	protected void removeCookies(
+		HttpServletRequest request, HttpServletResponse response) {
+
+		Cookie cookie = new Cookie(CookieKeys.ID, StringPool.BLANK);
+
+		cookie.setMaxAge(0);
+		cookie.setPath(StringPool.SLASH);
+
+		CookieKeys.addCookie(request, response, cookie);
+
+		cookie = new Cookie(CookieKeys.PASSWORD, StringPool.BLANK);
+
+		cookie.setMaxAge(0);
+		cookie.setPath(StringPool.SLASH);
+
+		CookieKeys.addCookie(request, response, cookie);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(RememberMeAutoLogin.class);
