@@ -744,7 +744,7 @@ AUI().add(
 
 				newPanel.show();
 
-				newPanel.all('.lfr-colorpicker-img').remove();
+				newPanel.all('.lfr-colorpicker-img').remove(true);
 
 				instance._portletMsgResponse = A.one('#lfr-portlet-css-response');
 
@@ -1034,7 +1034,7 @@ AUI().add(
 							var customStyle = A.one('#lfr-custom-css-block-' + instance._curPortletWrapperId);
 
 							if (customStyle) {
-								customStyle.remove();
+								customStyle.remove(true);
 							}
 
 							instance._objData = defaultData;

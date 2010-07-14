@@ -9,6 +9,26 @@ Liferay.Portlet = {
 		return (id in instance._staticPortlets);
 	},
 
+	_defCloseFn: function(event) {
+		var instance = this;
+
+		var A = AUI();
+
+		event.portlet.remove(true);
+
+		A.io.request(
+			themeDisplay.getPathMain() + '/portal/update_layout',
+			{
+				data: {
+					cmd: 'delete',
+					doAsUserId: event.doAsUserId,
+					p_l_id: event.plid,
+					p_p_id: event.portletId
+				}
+			}
+		);
+	},
+
 	_staticPortlets: {}
 };
 
@@ -139,6 +159,7 @@ Liferay.provide(
 
 			placeHolder.hide();
 			placeHolder.placeAfter(portletBound);
+
 			placeHolder.remove();
 
 			instance.refreshLayout(portletBound);
@@ -208,47 +229,17 @@ Liferay.provide(
 
 		var A = AUI();
 
-		if (skipConfirm || confirm(Liferay.Language.get('are-you-sure-you-want-to-remove-this-component'))) {
+		portlet = A.one(portlet);
+
+		if (portlet && (skipConfirm || confirm(Liferay.Language.get('are-you-sure-you-want-to-remove-this-component')))) {
 			options = options || {};
 
-			var plid = options.plid || themeDisplay.getPlid();
-			var doAsUserId = options.doAsUserId || themeDisplay.getDoAsUserIdEncoded();
-			var currentPortlet = A.one(portlet);
+			options.plid = options.plid || themeDisplay.getPlid();
+			options.doAsUserId = options.doAsUserId || themeDisplay.getDoAsUserIdEncoded();
+			options.portlet = portlet;
+			options.portletId = portlet.portletId;
 
-			if (currentPortlet) {
-				var portletId = currentPortlet.portletId;
-				var column = currentPortlet.ancestor(Liferay.Layout.options.dropContainer);
-
-				Liferay.Layout.updateCurrentPortletInfo(currentPortlet);
-
-				currentPortlet.remove();
-
-				if (column) {
-					Liferay.Layout.syncEmptyColumnClassUI(column);
-				}
-
-				var url = themeDisplay.getPathMain() + '/portal/update_layout';
-
-				A.io.request(
-					url,
-					{
-						data: {
-							cmd: 'delete',
-							doAsUserId: doAsUserId,
-							p_l_id: plid,
-							p_p_id: portletId
-						}
-					}
-				);
-
-				Liferay.fire(
-					'closePortlet',
-					 {
-						plid: plid,
-						portletId: portletId
-					}
-				);
-			}
+			Liferay.fire('closePortlet', options);
 		}
 		else {
 			self.focus();
@@ -534,7 +525,7 @@ Liferay.provide(
 			var placeHolder = A.Node.create('<div class="loading-animation" id="p_load' + id + '" />');
 
 			portlet.placeBefore(placeHolder);
-			portlet.remove();
+			portlet.remove(true);
 
 			instance.addHTML(
 				{
@@ -683,6 +674,13 @@ Liferay.provide(
 		Liferay.PortletCSS.init(portletId);
 	},
 	['liferay-look-and-feel']
+);
+
+Liferay.publish(
+	'closePortlet',
+	{
+		defaultFn: Liferay.Portlet._defCloseFn
+	}
 );
 
 // Backwards compatability

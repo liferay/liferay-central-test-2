@@ -116,7 +116,7 @@ AUI().add(
 						'click',
 						function() {
 							notice.hide();
-							notice.remove();
+							notice.remove(true);
 							instance._body.removeClass('has-alerts');
 
 							if (instance._onClose) {

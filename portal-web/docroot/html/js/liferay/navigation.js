@@ -297,7 +297,7 @@ AUI().add(
 							field.resetValue();
 						}
 						else {
-							listItem.remove();
+							listItem.remove(true);
 						}
 
 						comboBox.destroy();
@@ -518,7 +518,7 @@ AUI().add(
 												}
 											);
 
-											tab.remove();
+											tab.remove(true);
 										}
 									}
 								}

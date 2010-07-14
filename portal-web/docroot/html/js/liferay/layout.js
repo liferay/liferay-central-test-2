@@ -162,6 +162,8 @@ AUI().add(
 				Layout.bindDragDropListeners();
 
 				Layout.updateEmptyColumnsInfo();
+
+				Liferay.on('closePortlet', Layout._onPortletClose);
 			},
 
 			bindDragDropListeners: function() {
@@ -432,6 +434,20 @@ AUI().add(
 						Layout.layoutHandler.addDropNode(item);
 					}
 				);
+			},
+
+			_onPortletClose: function(event) {
+				var portlet = event.portlet;
+				var portletId = portlet.portletId;
+				var column = portlet.ancestor(Layout.options.dropContainer);
+
+				Layout.updateCurrentPortletInfo(portlet);
+
+				DDM.getDrag(portlet).destroy();
+
+				if (column) {
+					Layout.syncEmptyColumnClassUI(column);
+				}
 			},
 
 			_onPortletDragEnd: function(event) {

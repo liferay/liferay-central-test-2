@@ -156,7 +156,7 @@ AUI().add(
 						var item = options.item;
 
 						item.placeAfter(placeHolder);
-						item.remove();
+						item.remove(true);
 
 						beforePortletLoaded = options.beforePortletLoaded;
 					}
