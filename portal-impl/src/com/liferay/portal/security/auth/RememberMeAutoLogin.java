@@ -72,27 +72,37 @@ public class RememberMeAutoLogin implements AutoLogin {
 				}
 			}
 
+			if ((credentials == null) || (credentials.length == 0)) {
+				removeCookies(request, response);
+			}
+
 			return credentials;
 		}
 		catch (Exception e) {
 			_log.warn(e, e);
 
-			Cookie cookie = new Cookie(CookieKeys.ID, StringPool.BLANK);
-
-			cookie.setMaxAge(0);
-			cookie.setPath(StringPool.SLASH);
-
-			CookieKeys.addCookie(request, response, cookie);
-
-			cookie = new Cookie(CookieKeys.PASSWORD, StringPool.BLANK);
-
-			cookie.setMaxAge(0);
-			cookie.setPath(StringPool.SLASH);
-
-			CookieKeys.addCookie(request, response, cookie);
+			removeCookies(request, response);
 
 			throw new AutoLoginException(e);
 		}
+	}
+
+	protected void removeCookies(
+		HttpServletRequest request, HttpServletResponse response) {
+
+		Cookie cookie = new Cookie(CookieKeys.ID, StringPool.BLANK);
+
+		cookie.setMaxAge(0);
+		cookie.setPath(StringPool.SLASH);
+
+		CookieKeys.addCookie(request, response, cookie);
+
+		cookie = new Cookie(CookieKeys.PASSWORD, StringPool.BLANK);
+
+		cookie.setMaxAge(0);
+		cookie.setPath(StringPool.SLASH);
+
+		CookieKeys.addCookie(request, response, cookie);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(RememberMeAutoLogin.class);
