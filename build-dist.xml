@@ -341,6 +341,28 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 			<arg value="util-java/util-java.jar" />
 			<arg value="util-taglib/util-taglib.jar" />
 		</java>
+
+		<java
+			classname="com.liferay.portal.tools.deploy.WebDeployer"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+
+			<!-- Required Arguments -->
+
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+			<jvmarg value="-Dliferay.lib.portal.dir=${deployer.app.server.lib.portal.dir}" />
+			<jvmarg value="-Ddeployer.base.dir=${lp.plugins.dir}/dist" />
+			<jvmarg value="-Ddeployer.dest.dir=${deployer.dest.dir}" />
+			<jvmarg value="-Ddeployer.app.server.type=${deployer.app.server.type}" />
+			<jvmarg value="-Ddeployer.unpack.war=true" />
+			<jvmarg value="-Ddeployer.file.pattern=*-web-*.war" />
+
+			<!-- Optional Arguments -->
+
+			<jvmarg value="-Ddeployer.tomcat.lib.dir=${app.server.tomcat.lib.global.dir}" />
+		</java>
 	</target>
 
 	<target name="dist">
