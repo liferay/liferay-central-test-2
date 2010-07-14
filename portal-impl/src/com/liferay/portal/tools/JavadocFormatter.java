@@ -440,6 +440,8 @@ public class JavadocFormatter {
 			value = value.substring(name.length());
 		}
 
+		value = _trimMultilineText(value);
+
 		Element commentElement = throwsElement.addElement("comment");
 
 		commentElement.addCDATA(_getCDATA(value));
