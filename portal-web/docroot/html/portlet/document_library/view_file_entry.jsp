@@ -44,6 +44,15 @@ if (PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.O
 DLFolder folder = fileEntry.getFolder();
 DLFileVersion fileVersion = fileEntry.getFileVersion();
 
+long assetClassPK = 0;
+
+if ((fileVersion != null) && !fileVersion.isApproved() && (fileVersion.getVersion() != DLFileEntryConstants.DEFAULT_VERSION)) {
+	assetClassPK = fileVersion.getFileVersionId();
+}
+else if (fileEntry != null) {
+	assetClassPK = fileEntry.getFileEntryId();
+}
+
 Lock lock = null;
 Boolean isLocked = Boolean.FALSE;
 Boolean hasLock = Boolean.FALSE;
@@ -181,15 +190,15 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 		<div class="lfr-asset-categories">
 			<liferay-ui:asset-categories-summary
-				className="<%= DLFileVersion.class.getName() %>"
-				classPK="<%= fileVersion.getFileVersionId() %>"
+				className="<%= DLFileEntry.class.getName() %>"
+				classPK="<%= assetClassPK %>"
 			/>
 		</div>
 
 		<div class="lfr-asset-tags">
 			<liferay-ui:asset-tags-summary
-				className="<%= DLFileVersion.class.getName() %>"
-				classPK="<%= fileVersion.getFileVersionId() %>"
+				className="<%= DLFileEntry.class.getName() %>"
+				classPK="<%= assetClassPK %>"
 				message="tags"
 			/>
 		</div>

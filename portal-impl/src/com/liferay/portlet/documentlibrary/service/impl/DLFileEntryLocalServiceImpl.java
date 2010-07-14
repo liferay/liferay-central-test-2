@@ -1158,15 +1158,14 @@ public class DLFileEntryLocalServiceImpl
 			// Asset
 
 			if (fileEntry.getVersion().equals(latestFileVersion.getVersion())) {
-				if ((oldStatus != WorkflowConstants.STATUS_APPROVED) &&
-					(latestFileVersion.getVersion() !=
+				if ((latestFileVersion.getVersion() !=
 						DLFileEntryConstants.DEFAULT_VERSION)) {
 
 					AssetEntry draftAssetEntry = null;
 
 					try {
 						draftAssetEntry = assetEntryLocalService.getEntry(
-							DLFileVersion.class.getName(),
+							DLFileEntry.class.getName(),
 							latestFileVersion.getPrimaryKey());
 
 						long[] assetCategoryIds =
