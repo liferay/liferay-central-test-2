@@ -117,7 +117,7 @@ public interface ${entity.name}Model extends BaseModel<${entity.name}> {
 
 	public boolean isNew();
 
-	public boolean setNew(boolean n);
+	public void setNew(boolean n);
 
 	public boolean isCachedModel();
 
