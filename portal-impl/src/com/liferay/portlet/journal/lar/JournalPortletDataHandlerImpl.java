@@ -682,10 +682,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			JournalStructure structure)
 		throws Exception {
 
-		if (!context.isWithinDateRange(structure.getModifiedDate())) {
-			return;
-		}
-
 		String path = getStructurePath(context, structure);
 
 		if (!context.isPathNotProcessed(path)) {
@@ -709,10 +705,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			Element dlFileRanksElement, Element igFoldersElement,
 			Element igImagesElement, JournalTemplate template)
 		throws Exception {
-
-		if (!context.isWithinDateRange(template.getModifiedDate())) {
-			return;
-		}
 
 		String path = getTemplatePath(context, template);
 
@@ -1819,7 +1811,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			JournalStructureUtil.findByGroupId(context.getScopeGroupId());
 
 		for (JournalStructure structure : structures) {
-			exportStructure(context, structuresElement, structure);
+			if (context.isWithinDateRange(structure.getModifiedDate())) {
+				exportStructure(context, structuresElement, structure);
+			}
 		}
 
 		Element templatesElement = rootElement.addElement("templates");
@@ -1833,10 +1827,12 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			context.getScopeGroupId());
 
 		for (JournalTemplate template : templates) {
-			exportTemplate(
-				context, templatesElement, dlFoldersElement, dlFilesElement,
-				dlFileRanksElement, igFoldersElement, igImagesElement,
-				template);
+			if (context.isWithinDateRange(template.getModifiedDate())) {
+				exportTemplate(
+					context, templatesElement, dlFoldersElement,
+					dlFilesElement, dlFileRanksElement, igFoldersElement,
+					igImagesElement, template);
+			}
 		}
 
 		Element feedsElement = rootElement.addElement("feeds");
