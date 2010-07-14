@@ -39,6 +39,7 @@ public class ClusterNodeResponse implements Serializable {
 		if (_exception != null) {
 			throw _exception;
 		}
+
 		return _result;
 	}
 
