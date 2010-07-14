@@ -25,6 +25,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.social.model.SocialEquityAssetEntry;
+import com.liferay.portlet.social.model.SocialEquityAssetEntryModel;
 
 import java.io.Serializable;
 
@@ -49,7 +50,8 @@ import java.sql.Types;
  * @see       com.liferay.portlet.social.model.SocialEquityAssetEntryModel
  * @generated
  */
-public class SocialEquityAssetEntryModelImpl extends BaseModelImpl<SocialEquityAssetEntry> {
+public class SocialEquityAssetEntryModelImpl extends BaseModelImpl<SocialEquityAssetEntry>
+	implements SocialEquityAssetEntryModel {
 	public static final String TABLE_NAME = "SocialEquityAssetEntry";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "equityAssetEntryId", new Integer(Types.BIGINT) },

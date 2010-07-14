@@ -28,18 +28,17 @@ public class SocialEquitySettingImpl
 	}
 
 	public void update(SocialEquityActionMapping equityActionMapping) {
-
 		if (getType() == SocialEquitySettingConstants.TYPE_INFORMATION) {
 			setDailyLimit(equityActionMapping.getInformationDailyLimit());
+			setLifespan(equityActionMapping.getInformationLifespan());
 			setUniqueEntry(equityActionMapping.isInformationUnique());
 			setValue(equityActionMapping.getInformationValue());
-			setLifespan(equityActionMapping.getInformationLifespan());
 		}
 		else {
 			setDailyLimit(equityActionMapping.getParticipationDailyLimit());
+			setLifespan(equityActionMapping.getParticipationLifespan());
 			setUniqueEntry(equityActionMapping.isParticipationUnique());
 			setValue(equityActionMapping.getParticipationValue());
-			setLifespan(equityActionMapping.getParticipationLifespan());
 		}
 	}
 

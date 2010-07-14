@@ -14,8 +14,8 @@
 
 package com.liferay.portlet.socialequityadmin.action;
 
+import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -24,8 +24,6 @@ import com.liferay.portlet.social.model.SocialEquityActionMapping;
 import com.liferay.portlet.social.model.SocialEquitySetting;
 import com.liferay.portlet.social.model.SocialEquitySettingConstants;
 import com.liferay.portlet.social.service.SocialEquitySettingLocalServiceUtil;
-
-import java.lang.reflect.Method;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -96,28 +94,6 @@ public class ViewAction extends PortletAction {
 			WebKeys.SOCIAL_EQUITY_ACTION_MAPPINGS_MAP, equityActionMappingsMap);
 
 		return mapping.findForward("portlet.social_equity_admin.view");
-	}
-
-	protected void updateModel(
-			ActionRequest actionRequest,
-			SocialEquityActionMapping equityActionMapping, String param)
-		throws Exception {
-
-		String className = equityActionMapping.getClassName();
-
-		int value = ParamUtil.getInteger(
-			actionRequest,
-			className + "." + equityActionMapping.getActionId() + "." + param,
-			-1);
-
-		if (value >= 0) {
-			String methodName = "set" + StringUtil.upperCaseFirstLetter(param);
-
-			Method method = equityActionMapping.getClass().getDeclaredMethod(
-				methodName, int.class);
-
-			method.invoke(equityActionMapping, new Object[] {value});
-		}
 	}
 
 	protected SocialEquityActionMapping getMergedEquityActionMapping(
@@ -216,6 +192,23 @@ public class ViewAction extends PortletAction {
 		}
 
 		return mergedEquityActionMappings;
+	}
+
+	protected void updateModel(
+			ActionRequest actionRequest,
+			SocialEquityActionMapping equityActionMapping, String param)
+		throws Exception {
+
+		String className = equityActionMapping.getClassName();
+
+		int value = ParamUtil.getInteger(
+			actionRequest,
+			className + "." + equityActionMapping.getActionId() + "." + param,
+			-1);
+
+		if (value >= 0) {
+			BeanPropertiesUtil.setProperty(equityActionMapping, param, value);
+		}
 	}
 
 }

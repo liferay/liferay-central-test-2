@@ -200,7 +200,7 @@ public class SocialEquityLogLocalServiceImpl
 		// Information Equity
 
 		List<SocialEquityLog> equityLogs =
-			socialEquityLogPersistence.findByAEI_AI_A_T(
+			socialEquityLogPersistence.findByAEI_AID_A_T(
 				assetEntryId, actionId, true,
 				SocialEquitySettingConstants.TYPE_INFORMATION);
 
@@ -226,7 +226,7 @@ public class SocialEquityLogLocalServiceImpl
 			assetEntry.getGroupId(), assetEntry.getUserId(), socialEquityValue);
 
 		// Participation Equity
-		equityLogs = socialEquityLogPersistence.findByU_AI_A_T(
+		equityLogs = socialEquityLogPersistence.findByU_AID_A_T(
 			userId, actionId, true,
 			SocialEquitySettingConstants.TYPE_PARTICIPATION);
 
@@ -523,28 +523,30 @@ public class SocialEquityLogLocalServiceImpl
 			return false;
 		}
 
-		int count = 0;
-		int actionDate = getEquityDate();
 		String actionId = equitySetting.getActionId();
-		int actionType = equitySetting.getType();
+		int actionDate = getEquityDate();
+		int type = equitySetting.getType();
 
 		// Duplicate
 
-		if (socialEquityLogPersistence.countByU_AEI_AD_AI_A_T(
-			userId, assetEntryId, actionDate, actionId, true, actionType) > 0) {
+		if (socialEquityLogPersistence.countByU_AEI_AID_AD_A_T(
+				userId, assetEntryId, actionId, actionDate, true, type) > 0) {
+
 			return false;
 		}
 
 		// Unique
 
 		if (equitySetting.isUniqueEntry()) {
-			if (actionType == SocialEquitySettingConstants.TYPE_INFORMATION) {
-				count = socialEquityLogPersistence.countByAEI_AI_A_T(
-					assetEntryId, actionId, true, actionType);
+			int count = 0;
+
+			if (type == SocialEquitySettingConstants.TYPE_INFORMATION) {
+				count = socialEquityLogPersistence.countByAEI_AID_A_T(
+					assetEntryId, actionId, true, type);
 			}
 			else {
-				count = socialEquityLogPersistence.countByU_AI_A_T(
-					userId, actionId, true, actionType);
+				count = socialEquityLogPersistence.countByU_AID_A_T(
+					userId, actionId, true, type);
 			}
 
 			if (count > 0) {
@@ -558,16 +560,23 @@ public class SocialEquityLogLocalServiceImpl
 			return true;
 		}
 
-		if (actionType == SocialEquitySettingConstants.TYPE_INFORMATION) {
-			count = socialEquityLogPersistence.countByAEI_AD_AI_A_T(
-				assetEntryId, actionDate, actionId, true, actionType);
+		int count = 0;
+
+		if (type == SocialEquitySettingConstants.TYPE_INFORMATION) {
+			count = socialEquityLogPersistence.countByAEI_AID_AD_A_T(
+				assetEntryId, actionId, actionDate, true, type);
 		}
 		else {
-			count = socialEquityLogPersistence.countByU_AD_AI_A_T(
-				userId, actionDate, actionId, true, actionType);
+			count = socialEquityLogPersistence.countByU_AID_AD_A_T(
+				userId, actionId, actionDate, true, type);
 		}
 
-		return count < equitySetting.getDailyLimit();
+		if (count < equitySetting.getDailyLimit()) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	protected int getEquityDate() {

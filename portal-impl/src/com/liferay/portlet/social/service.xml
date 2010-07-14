@@ -153,42 +153,42 @@
 
 		<!-- Finder methods -->
 
-		<finder name="AEI_AD_AI_A_T" return-type="Collection">
-			<finder-column name="assetEntryId" />
-			<finder-column name="actionDate" />
-			<finder-column name="actionId" />
-			<finder-column name="active" />
-			<finder-column name="type" />
-		</finder>
-		<finder name="AEI_AI_A_T" return-type="Collection">
-			<finder-column name="assetEntryId" />
-			<finder-column name="actionId" />
-			<finder-column name="active" />
-			<finder-column name="type" />
-		</finder>
 		<finder name="AEI_T_A" return-type="Collection">
 			<finder-column name="assetEntryId" />
 			<finder-column name="type" />
 			<finder-column name="active" />
 		</finder>
-		<finder name="U_AD_AI_A_T" return-type="Collection">
+		<finder name="U_AID_A_T" return-type="Collection">
 			<finder-column name="userId" />
+			<finder-column name="actionId" />
+			<finder-column name="active" />
+			<finder-column name="type" />
+		</finder>
+		<finder name="AEI_AID_A_T" return-type="Collection">
+			<finder-column name="assetEntryId" />
+			<finder-column name="actionId" />
+			<finder-column name="active" />
+			<finder-column name="type" />
+		</finder>
+		<finder name="U_AID_AD_A_T" return-type="Collection">
+			<finder-column name="userId" />
+			<finder-column name="actionId" />
 			<finder-column name="actionDate" />
-			<finder-column name="actionId" />
 			<finder-column name="active" />
 			<finder-column name="type" />
 		</finder>
-		<finder name="U_AI_A_T" return-type="Collection">
-			<finder-column name="userId" />
+		<finder name="AEI_AID_AD_A_T" return-type="Collection">
+			<finder-column name="assetEntryId" />
 			<finder-column name="actionId" />
+			<finder-column name="actionDate" />
 			<finder-column name="active" />
 			<finder-column name="type" />
 		</finder>
-		<finder name="U_AEI_AD_AI_A_T" return-type="SocialEquityLog" unique="true">
+		<finder name="U_AEI_AID_AD_A_T" return-type="SocialEquityLog" unique="true">
 			<finder-column name="userId" />
 			<finder-column name="assetEntryId" />
-			<finder-column name="actionDate" />
 			<finder-column name="actionId" />
+			<finder-column name="actionDate" />
 			<finder-column name="active" />
 			<finder-column name="type" />
 		</finder>

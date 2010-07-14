@@ -53,7 +53,6 @@ public class SocialEquitySettingLocalServiceImpl
 		return getEquitySettings(groupId, classNameId, actionId);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<SocialEquitySetting> getEquitySettings(
 			long groupId, long classNameId, String actionId)
 		throws SystemException {
@@ -194,10 +193,10 @@ public class SocialEquitySettingLocalServiceImpl
 		equitySetting.setActionId(actionId);
 		equitySetting.setDailyLimit(
 			equityActionMapping.getInformationDailyLimit());
+		equitySetting.setLifespan(equityActionMapping.getInformationLifespan());
 		equitySetting.setType(SocialEquitySettingConstants.TYPE_INFORMATION);
 		equitySetting.setUniqueEntry(equityActionMapping.isInformationUnique());
 		equitySetting.setValue(equityActionMapping.getInformationValue());
-		equitySetting.setLifespan(equityActionMapping.getInformationLifespan());
 
 		return equitySetting;
 	}
@@ -210,12 +209,12 @@ public class SocialEquitySettingLocalServiceImpl
 		equitySetting.setActionId(actionId);
 		equitySetting.setDailyLimit(
 			equityActionMapping.getParticipationDailyLimit());
+		equitySetting.setLifespan(
+			equityActionMapping.getParticipationLifespan());
 		equitySetting.setType(SocialEquitySettingConstants.TYPE_PARTICIPATION);
 		equitySetting.setUniqueEntry(
 			equityActionMapping.isParticipationUnique());
 		equitySetting.setValue(equityActionMapping.getParticipationValue());
-		equitySetting.setLifespan(
-			equityActionMapping.getParticipationLifespan());
 
 		return equitySetting;
 	}
@@ -239,7 +238,6 @@ public class SocialEquitySettingLocalServiceImpl
 				SocialEquitySettingConstants.TYPE_INFORMATION);
 
 			if (!equityActionMapping.equals(equitySetting)) {
-
 				equitySetting.update(equityActionMapping);
 
 				socialEquitySettingPersistence.update(equitySetting, false);
@@ -256,7 +254,6 @@ public class SocialEquitySettingLocalServiceImpl
 				SocialEquitySettingConstants.TYPE_PARTICIPATION);
 
 			if (!equityActionMapping.equals(equitySetting)) {
-
 				equitySetting.update(equityActionMapping);
 
 				socialEquitySettingPersistence.update(equitySetting, false);

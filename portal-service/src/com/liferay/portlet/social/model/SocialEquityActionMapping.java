@@ -20,50 +20,51 @@ import java.io.Serializable;
  * @author Brian Wing Shun Chan
  * @author Zsolt Berentey
  */
-@SuppressWarnings("serial")
 public class SocialEquityActionMapping implements Serializable {
 
 	public SocialEquityActionMapping clone() {
-		SocialEquityActionMapping newActionMapping =
+		SocialEquityActionMapping equityActionMapping =
 			new SocialEquityActionMapping();
 
-		newActionMapping.setActionId(_actionId);
-		newActionMapping.setClassName(_className);
-		newActionMapping.setInformationDailyLimit(_informationDailyLimit);
-		newActionMapping.setInformationLifespan(_informationLifespan);
-		newActionMapping.setInformationUnique(_informationUnique);
-		newActionMapping.setInformationValue(_informationValue);
-		newActionMapping.setParticipationDailyLimit(_participationDailyLimit);
-		newActionMapping.setParticipationLifespan(_participationLifespan);
-		newActionMapping.setParticipationUnique(_participationUnique);
-		newActionMapping.setParticipationValue(_participationValue);
+		equityActionMapping.setActionId(_actionId);
+		equityActionMapping.setClassName(_className);
+		equityActionMapping.setInformationDailyLimit(_informationDailyLimit);
+		equityActionMapping.setInformationLifespan(_informationLifespan);
+		equityActionMapping.setInformationUnique(_informationUnique);
+		equityActionMapping.setInformationValue(_informationValue);
+		equityActionMapping.setParticipationDailyLimit(
+			_participationDailyLimit);
+		equityActionMapping.setParticipationLifespan(_participationLifespan);
+		equityActionMapping.setParticipationUnique(_participationUnique);
+		equityActionMapping.setParticipationValue(_participationValue);
 
-		return newActionMapping;
-	}
-
-	public boolean equals(SocialEquitySetting equitySetting) {
-		return _equals(
-			equitySetting.getType(), equitySetting.getLifespan(),
-			equitySetting.getValue(), equitySetting.getDailyLimit(),
-			equitySetting.isUniqueEntry());
+		return equityActionMapping;
 	}
 
 	public boolean equals(
 		SocialEquityActionMapping equityActionMapping, int type) {
 
 		if (type == SocialEquitySettingConstants.TYPE_INFORMATION) {
-			return _equals(
-				type, equityActionMapping.getInformationLifespan(),
-				equityActionMapping.getInformationValue(),
+			return equals(
 				equityActionMapping.getInformationDailyLimit(),
-				equityActionMapping.isInformationUnique());
+				equityActionMapping.getInformationLifespan(), type,
+				equityActionMapping.isInformationUnique(),
+				equityActionMapping.getInformationValue());
 		}
+		else {
+			return equals(
+				equityActionMapping.getParticipationDailyLimit(),
+				equityActionMapping.getParticipationLifespan(), type,
+				equityActionMapping.isParticipationUnique(),
+				equityActionMapping.getParticipationValue());
+		}
+	}
 
-		return _equals(
-			type, equityActionMapping.getParticipationLifespan(),
-			equityActionMapping.getParticipationValue(),
-			equityActionMapping.getParticipationDailyLimit(),
-			equityActionMapping.isParticipationUnique());
+	public boolean equals(SocialEquitySetting equitySetting) {
+		return equals(
+			equitySetting.getDailyLimit(), equitySetting.getLifespan(),
+			equitySetting.getType(), equitySetting.isUniqueEntry(),
+			equitySetting.getValue());
 	}
 
 	public String getActionId() {
@@ -82,10 +83,6 @@ public class SocialEquityActionMapping implements Serializable {
 		return _informationLifespan;
 	}
 
-	public boolean isInformationUnique() {
-		return _informationUnique;
-	}
-
 	public int getInformationValue() {
 		return _informationValue;
 	}
@@ -98,12 +95,16 @@ public class SocialEquityActionMapping implements Serializable {
 		return _participationLifespan;
 	}
 
-	public boolean isParticipationUnique() {
-		return _participationUnique;
-	}
-
 	public int getParticipationValue() {
 		return _participationValue;
+	}
+
+	public boolean isInformationUnique() {
+		return _informationUnique;
+	}
+
+	public boolean isParticipationUnique() {
+		return _participationUnique;
 	}
 
 	public void setActionId(String actionId) {
@@ -146,8 +147,8 @@ public class SocialEquityActionMapping implements Serializable {
 		_participationValue = participationValue;
 	}
 
-	private boolean _equals(
-		int type, int lifeSpan, int value, int dailyLimit, boolean unique) {
+	protected boolean equals(
+		int dailyLimit, int lifeSpan, int type, boolean unique, int value) {
 
 		if (type == SocialEquitySettingConstants.TYPE_INFORMATION) {
 			if ((_informationDailyLimit != dailyLimit) ||

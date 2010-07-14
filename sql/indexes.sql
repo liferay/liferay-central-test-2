@@ -538,13 +538,12 @@ create index IX_3504B8BC on SocialActivity (userId);
 
 create unique index IX_22F6B5CB on SocialEquityAssetEntry (assetEntryId);
 
-create index IX_2E86F252 on SocialEquityLog (assetEntryId, actionDate, actionId, active_, type_);
+create index IX_DB6958D2 on SocialEquityLog (assetEntryId, actionId, actionDate, active_, type_);
 create index IX_FEB4055A on SocialEquityLog (assetEntryId, actionId, active_, type_);
 create index IX_E8DA181D on SocialEquityLog (assetEntryId, type_, active_);
-create index IX_54779AFB on SocialEquityLog (userId, actionDate, actionId, active_, type_);
+create index IX_15A017B on SocialEquityLog (userId, actionId, actionDate, active_, type_);
 create index IX_3525A383 on SocialEquityLog (userId, actionId, active_, type_);
-create unique index IX_A8D0898C on SocialEquityLog (userId, assetEntryId, actionDate, actionId, active_, type_);
-create index IX_60CD2F21 on SocialEquityLog (userId, assetEntryId, actionId, active_);
+create unique index IX_55B2F00C on SocialEquityLog (userId, assetEntryId, actionId, actionDate, active_, type_);
 
 create index IX_F3AAD60D on SocialEquitySetting (groupId, classNameId, actionId);
 create unique index IX_903C1B28 on SocialEquitySetting (groupId, classNameId, actionId, type_);
