@@ -17,7 +17,6 @@ package com.liferay.portlet.social.service.impl;
 import com.liferay.ibm.icu.util.Calendar;
 import com.liferay.ibm.icu.util.GregorianCalendar;
 import com.liferay.portal.NoSuchUserException;
-import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.messaging.async.Async;
@@ -44,8 +43,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
-
-import org.hibernate.exception.ConstraintViolationException;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
@@ -219,22 +216,7 @@ public class SocialEquityLogLocalServiceImpl
 
 			equityLog.setActive(false);
 
-			try {
-				socialEquityLogPersistence.update(equityLog, false);
-			}
-			catch (SystemException e) {
-				if (e.getCause() != null &&
-					e.getCause() instanceof ORMException) {
-
-					if (e.getCause().getCause() != null &&
-						e.getCause().getCause()
-							instanceof ConstraintViolationException) {
-
-						socialEquityLogPersistence.remove(
-							equityLog.getEquityLogId());
-					}
-				}
-			}
+			socialEquityLogPersistence.remove(equityLog);
 		}
 
 		socialEquityLogLocalService.incrementSocialEquityAssetEntry_IQ(
@@ -260,23 +242,7 @@ public class SocialEquityLogLocalServiceImpl
 
 			equityLog.setActive(false);
 
-			try {
-				socialEquityLogPersistence.update(equityLog, false);
-
-			}
-			catch (SystemException e) {
-				if (e.getCause() != null &&
-					e.getCause() instanceof ORMException) {
-
-					if (e.getCause().getCause() != null &&
-						e.getCause().getCause()
-							instanceof ConstraintViolationException) {
-
-						socialEquityLogPersistence.remove(
-							equityLog.getEquityLogId());
-					}
-				}
-			}
+			socialEquityLogPersistence.remove(equityLog);
 		}
 
 		socialEquityLogLocalService.incrementSocialEquityUser_PQ(
