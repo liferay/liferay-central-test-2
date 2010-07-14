@@ -26,10 +26,11 @@ public class GroupFinderUtil {
 	}
 
 	public static int countByC_N_D(long companyId, java.lang.String name,
-		java.lang.String description,
+		java.lang.String realName, java.lang.String description,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().countByC_N_D(companyId, name, description, params);
+		return getFinder()
+				   .countByC_N_D(companyId, name, realName, description, params);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Group> findByLiveGroups()
@@ -63,13 +64,14 @@ public class GroupFinderUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Group> findByC_N_D(
-		long companyId, java.lang.String name, java.lang.String description,
+		long companyId, java.lang.String name, java.lang.String realName,
+		java.lang.String description,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
-				   .findByC_N_D(companyId, name, description, params, start,
-			end, obc);
+				   .findByC_N_D(companyId, name, realName, description, params,
+			start, end, obc);
 	}
 
 	public static GroupFinder getFinder() {
