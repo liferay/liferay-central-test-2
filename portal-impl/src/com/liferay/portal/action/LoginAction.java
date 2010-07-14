@@ -68,8 +68,8 @@ public class LoginAction extends Action {
 
 		HttpSession session = request.getSession();
 
-		if (session.getAttribute("j_username") != null &&
-			session.getAttribute("j_password") != null) {
+		if ((session.getAttribute("j_username") != null) &&
+			(session.getAttribute("j_password") != null)) {
 
 			if (PropsValues.PORTAL_JAAS_ENABLE) {
 				return mapping.findForward("/portal/touch_protected.jsp");
