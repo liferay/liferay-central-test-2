@@ -197,7 +197,7 @@ public class SocialEquitySettingLocalServiceImpl
 		equitySetting.setType(SocialEquitySettingConstants.TYPE_INFORMATION);
 		equitySetting.setUniqueEntry(equityActionMapping.isInformationUnique());
 		equitySetting.setValue(equityActionMapping.getInformationValue());
-		equitySetting.setValidity(equityActionMapping.getInformationLifespan());
+		equitySetting.setLifespan(equityActionMapping.getInformationLifespan());
 
 		return equitySetting;
 	}
@@ -214,7 +214,7 @@ public class SocialEquitySettingLocalServiceImpl
 		equitySetting.setUniqueEntry(
 			equityActionMapping.isParticipationUnique());
 		equitySetting.setValue(equityActionMapping.getParticipationValue());
-		equitySetting.setValidity(
+		equitySetting.setLifespan(
 			equityActionMapping.getParticipationLifespan());
 
 		return equitySetting;

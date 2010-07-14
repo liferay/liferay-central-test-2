@@ -17,6 +17,7 @@ package com.liferay.portlet.social.service.impl;
 import com.liferay.ibm.icu.util.Calendar;
 import com.liferay.ibm.icu.util.GregorianCalendar;
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.messaging.async.Async;
@@ -43,6 +44,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
+
+import org.hibernate.exception.ConstraintViolationException;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
@@ -184,6 +187,123 @@ public class SocialEquityLogLocalServiceImpl
 		}
 	}
 
+	public void deactivateEquityLogs(
+			long userId, long assetEntryId, String actionId)
+		throws PortalException, SystemException {
+
+		if (!PropsValues.SOCIAL_EQUITY_EQUITY_LOG_ENABLED) {
+			return;
+		}
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		AssetEntry assetEntry = assetEntryPersistence.findByPrimaryKey(
+			assetEntryId);
+
+		// Information Equity
+
+		List<SocialEquityLog> equityLogs =
+			socialEquityLogPersistence.findByAEI_AI_A_T(
+				assetEntryId, actionId, true,
+				SocialEquitySettingConstants.TYPE_INFORMATION);
+
+		SocialEquityValue socialEquityValue = new SocialEquityValue(0,0);
+
+		for (SocialEquityLog equityLog : equityLogs) {
+			double k = calculateK(equityLog.getValue(),equityLog.getLifespan());
+			double b = calculateB(
+				equityLog.getActionDate(), equityLog.getValue(),
+				equityLog.getLifespan());
+
+			socialEquityValue.subtract(new SocialEquityValue(k,b));
+
+			equityLog.setActive(false);
+
+			try {
+				socialEquityLogPersistence.update(equityLog, false);
+			}
+			catch (SystemException e) {
+				if (e.getCause() != null &&
+					e.getCause() instanceof ORMException) {
+
+					if (e.getCause().getCause() != null &&
+						e.getCause().getCause()
+							instanceof ConstraintViolationException) {
+
+						socialEquityLogPersistence.remove(
+							equityLog.getEquityLogId());
+					}
+				}
+			}
+		}
+
+		socialEquityLogLocalService.incrementSocialEquityAssetEntry_IQ(
+			assetEntryId, socialEquityValue);
+
+		socialEquityLogLocalService.incrementSocialEquityUser_CQ(
+			assetEntry.getGroupId(), assetEntry.getUserId(), socialEquityValue);
+
+		// Participation Equity
+		equityLogs = socialEquityLogPersistence.findByU_AI_A_T(
+			userId, actionId, true,
+			SocialEquitySettingConstants.TYPE_PARTICIPATION);
+
+		socialEquityValue = new SocialEquityValue(0,0);
+
+		for (SocialEquityLog equityLog : equityLogs) {
+			double k = calculateK(equityLog.getValue(),equityLog.getLifespan());
+			double b = calculateB(
+				equityLog.getActionDate(), equityLog.getValue(),
+				equityLog.getLifespan());
+
+			socialEquityValue.subtract(new SocialEquityValue(k,b));
+
+			equityLog.setActive(false);
+
+			try {
+				socialEquityLogPersistence.update(equityLog, false);
+
+			}
+			catch (SystemException e) {
+				if (e.getCause() != null &&
+					e.getCause() instanceof ORMException) {
+
+					if (e.getCause().getCause() != null &&
+						e.getCause().getCause()
+							instanceof ConstraintViolationException) {
+
+						socialEquityLogPersistence.remove(
+							equityLog.getEquityLogId());
+					}
+				}
+			}
+		}
+
+		socialEquityLogLocalService.incrementSocialEquityUser_PQ(
+			user.getGroup().getGroupId(), userId, socialEquityValue);
+	}
+
+	public void deactivateEquityLogs(
+			long userId, String className, long classPK, String actionId)
+		throws PortalException, SystemException {
+
+		if (!PropsValues.SOCIAL_EQUITY_EQUITY_LOG_ENABLED) {
+			return;
+		}
+
+		AssetEntry assetEntry = null;
+
+		try {
+			assetEntry = assetEntryLocalService.getEntry(
+				className, classPK);
+		}
+		catch (NoSuchEntryException nsee) {
+			return;
+		}
+
+		deactivateEquityLogs(userId, assetEntry.getEntryId(), actionId);
+	}
+
 	public void incrementSocialEquityAssetEntry_IQ(
 			long assetEntryId, SocialEquityValue socialEquityValue)
 		throws SystemException {
@@ -319,9 +439,9 @@ public class SocialEquityLogLocalServiceImpl
 		int actionDate = getEquityDate();
 
 		double k = calculateK(
-			equitySetting.getValue(), equitySetting.getValidity());
+			equitySetting.getValue(), equitySetting.getLifespan());
 		double b = calculateB(
-			actionDate, equitySetting.getValue(), equitySetting.getValidity());
+			actionDate, equitySetting.getValue(), equitySetting.getLifespan());
 
 		SocialEquityValue socialEquity = new SocialEquityValue(k, b);
 
@@ -359,7 +479,7 @@ public class SocialEquityLogLocalServiceImpl
 		equityLog.setActionDate(actionDate);
 		equityLog.setType(equitySetting.getType());
 		equityLog.setValue(equitySetting.getValue());
-		equityLog.setValidity(actionDate + equitySetting.getValidity());
+		equityLog.setExpiration(actionDate + equitySetting.getLifespan());
 		equityLog.setActive(true);
 
 		socialEquityLogPersistence.update(equityLog, false);
@@ -413,20 +533,20 @@ public class SocialEquityLogLocalServiceImpl
 		runSQL(sql);
 	}
 
-	protected double calculateB(int actionDate, int value, int validity) {
-		return calculateK(value, validity) * (actionDate + validity) * -1;
+	protected double calculateB(int actionDate, int value, int lifespan) {
+		return calculateK(value, lifespan) * (actionDate + lifespan) * -1;
 	}
 
 	protected double calculateEquity(int actionDate, double k, double b) {
 		return k * actionDate + b;
 	}
 
-	protected double calculateK(int value, int validity) {
-		if (validity == 0) {
+	protected double calculateK(int value, int lifespan) {
+		if (lifespan == 0) {
 			return 0;
 		}
 
-		return ((double)value / validity) * -1;
+		return ((double)value / lifespan) * -1;
 	}
 
 	protected boolean checkActionRestrictions(
@@ -504,7 +624,7 @@ public class SocialEquityLogLocalServiceImpl
 			new String[] {
 				"[$TYPE_INFORMATION$]",
 				"[$TYPE_PARTICIPATION$]",
-				"[$VALIDITY$]"
+				"[$EXPIRATION$]"
 			},
 			new String[] {
 				String.valueOf(SocialEquitySettingConstants.TYPE_INFORMATION),

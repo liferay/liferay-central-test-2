@@ -33,13 +33,13 @@ public class SocialEquitySettingImpl
 			setDailyLimit(equityActionMapping.getInformationDailyLimit());
 			setUniqueEntry(equityActionMapping.isInformationUnique());
 			setValue(equityActionMapping.getInformationValue());
-			setValidity(equityActionMapping.getInformationLifespan());
+			setLifespan(equityActionMapping.getInformationLifespan());
 		}
 		else {
 			setDailyLimit(equityActionMapping.getParticipationDailyLimit());
 			setUniqueEntry(equityActionMapping.isParticipationUnique());
 			setValue(equityActionMapping.getParticipationValue());
-			setValidity(equityActionMapping.getParticipationLifespan());
+			setLifespan(equityActionMapping.getParticipationLifespan());
 		}
 	}
 

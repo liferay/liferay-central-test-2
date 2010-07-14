@@ -84,6 +84,10 @@ public interface SocialEquityLogModel extends BaseModel<SocialEquityLog> {
 
 	public void setActive(boolean active);
 
+	public int getExpiration();
+
+	public void setExpiration(int expiration);
+
 	public int getType();
 
 	public void setType(int type);
@@ -91,10 +95,6 @@ public interface SocialEquityLogModel extends BaseModel<SocialEquityLog> {
 	public int getValue();
 
 	public void setValue(int value);
-
-	public int getValidity();
-
-	public void setValidity(int validity);
 
 	public SocialEquityLog toEscapedModel();
 

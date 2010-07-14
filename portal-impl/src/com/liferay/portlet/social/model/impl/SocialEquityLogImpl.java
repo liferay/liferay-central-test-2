@@ -17,12 +17,16 @@ package com.liferay.portlet.social.model.impl;
 import com.liferay.portlet.social.model.SocialEquityLog;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Zsolt Berentey
  */
 public class SocialEquityLogImpl
 	extends SocialEquityLogModelImpl implements SocialEquityLog {
 
 	public SocialEquityLogImpl() {
+	}
+
+	public int getLifespan() {
+		return getExpiration() - getActionDate();
 	}
 
 }

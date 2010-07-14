@@ -2347,11 +2347,11 @@
 			<basic name="active">
 				<column name="ACTIVE_" />
 			</basic>
+			<basic name="expiration" />
 			<basic name="type">
 				<column name="TYPE_" />
 			</basic>
 			<basic name="value" />
-			<basic name="validity" />
 			<transient name="primaryKey" />
 			<transient name="userUuid" />
 		</attributes>
@@ -2364,12 +2364,12 @@
 			<basic name="classNameId" />
 			<basic name="actionId" />
 			<basic name="dailyLimit" />
+			<basic name="lifespan" />
 			<basic name="type">
 				<column name="TYPE_" />
 			</basic>
 			<basic name="uniqueEntry" />
 			<basic name="value" />
-			<basic name="validity" />
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

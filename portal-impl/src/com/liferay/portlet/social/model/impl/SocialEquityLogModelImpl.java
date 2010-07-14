@@ -26,7 +26,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.social.model.SocialEquityLog;
-import com.liferay.portlet.social.model.SocialEquityLogModel;
 
 import java.io.Serializable;
 
@@ -51,8 +50,7 @@ import java.sql.Types;
  * @see       com.liferay.portlet.social.model.SocialEquityLogModel
  * @generated
  */
-public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
-	implements SocialEquityLogModel {
+public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog> {
 	public static final String TABLE_NAME = "SocialEquityLog";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "equityLogId", new Integer(Types.BIGINT) },
@@ -63,11 +61,11 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 			{ "actionId", new Integer(Types.VARCHAR) },
 			{ "actionDate", new Integer(Types.INTEGER) },
 			{ "active_", new Integer(Types.BOOLEAN) },
+			{ "expiration", new Integer(Types.INTEGER) },
 			{ "type_", new Integer(Types.INTEGER) },
-			{ "value", new Integer(Types.INTEGER) },
-			{ "validity", new Integer(Types.INTEGER) }
+			{ "value", new Integer(Types.INTEGER) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table SocialEquityLog (equityLogId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,assetEntryId LONG,actionId VARCHAR(75) null,actionDate INTEGER,active_ BOOLEAN,type_ INTEGER,value INTEGER,validity INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table SocialEquityLog (equityLogId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,assetEntryId LONG,actionId VARCHAR(75) null,actionDate INTEGER,active_ BOOLEAN,expiration INTEGER,type_ INTEGER,value INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table SocialEquityLog";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -225,6 +223,14 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 		return _originalActive;
 	}
 
+	public int getExpiration() {
+		return _expiration;
+	}
+
+	public void setExpiration(int expiration) {
+		_expiration = expiration;
+	}
+
 	public int getType() {
 		return _type;
 	}
@@ -249,14 +255,6 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 
 	public void setValue(int value) {
 		_value = value;
-	}
-
-	public int getValidity() {
-		return _validity;
-	}
-
-	public void setValidity(int validity) {
-		_validity = validity;
 	}
 
 	public SocialEquityLog toEscapedModel() {
@@ -294,9 +292,9 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 		clone.setActionId(getActionId());
 		clone.setActionDate(getActionDate());
 		clone.setActive(getActive());
+		clone.setExpiration(getExpiration());
 		clone.setType(getType());
 		clone.setValue(getValue());
-		clone.setValidity(getValidity());
 
 		return clone;
 	}
@@ -362,12 +360,12 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 		sb.append(getActionDate());
 		sb.append(", active=");
 		sb.append(getActive());
+		sb.append(", expiration=");
+		sb.append(getExpiration());
 		sb.append(", type=");
 		sb.append(getType());
 		sb.append(", value=");
 		sb.append(getValue());
-		sb.append(", validity=");
-		sb.append(getValidity());
 		sb.append("}");
 
 		return sb.toString();
@@ -413,16 +411,16 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 		sb.append(getActive());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>expiration</column-name><column-value><![CDATA[");
+		sb.append(getExpiration());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>type</column-name><column-value><![CDATA[");
 		sb.append(getType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>value</column-name><column-value><![CDATA[");
 		sb.append(getValue());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>validity</column-name><column-value><![CDATA[");
-		sb.append(getValidity());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -448,10 +446,10 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 	private boolean _active;
 	private boolean _originalActive;
 	private boolean _setOriginalActive;
+	private int _expiration;
 	private int _type;
 	private int _originalType;
 	private boolean _setOriginalType;
 	private int _value;
-	private int _validity;
 	private transient ExpandoBridge _expandoBridge;
 }

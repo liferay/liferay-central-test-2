@@ -43,7 +43,7 @@ public class SocialEquityActionMapping implements Serializable {
 
 	public boolean equals(SocialEquitySetting equitySetting) {
 		return _equals(
-			equitySetting.getType(), equitySetting.getValidity(),
+			equitySetting.getType(), equitySetting.getLifespan(),
 			equitySetting.getValue(), equitySetting.getDailyLimit(),
 			equitySetting.isUniqueEntry());
 	}

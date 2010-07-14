@@ -71,6 +71,10 @@ public interface SocialEquitySettingModel extends BaseModel<SocialEquitySetting>
 
 	public void setDailyLimit(int dailyLimit);
 
+	public int getLifespan();
+
+	public void setLifespan(int lifespan);
+
 	public int getType();
 
 	public void setType(int type);
@@ -84,10 +88,6 @@ public interface SocialEquitySettingModel extends BaseModel<SocialEquitySetting>
 	public int getValue();
 
 	public void setValue(int value);
-
-	public int getValidity();
-
-	public void setValidity(int validity);
 
 	public SocialEquitySetting toEscapedModel();
 

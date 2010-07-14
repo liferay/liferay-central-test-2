@@ -156,7 +156,7 @@ public class ViewAction extends PortletAction {
 				mergedEquityActionMapping.setInformationDailyLimit(
 					equitySetting.getDailyLimit());
 				mergedEquityActionMapping.setInformationLifespan(
-					equitySetting.getValidity());
+					equitySetting.getLifespan());
 				mergedEquityActionMapping.setInformationValue(
 					equitySetting.getValue());
 			}
@@ -164,7 +164,7 @@ public class ViewAction extends PortletAction {
 				mergedEquityActionMapping.setParticipationDailyLimit(
 					equitySetting.getDailyLimit());
 				mergedEquityActionMapping.setParticipationLifespan(
-					equitySetting.getValidity());
+					equitySetting.getLifespan());
 				mergedEquityActionMapping.setParticipationValue(
 					equitySetting.getValue());
 			}

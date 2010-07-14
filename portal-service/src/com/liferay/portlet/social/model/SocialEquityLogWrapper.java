@@ -119,6 +119,14 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 		_socialEquityLog.setActive(active);
 	}
 
+	public int getExpiration() {
+		return _socialEquityLog.getExpiration();
+	}
+
+	public void setExpiration(int expiration) {
+		_socialEquityLog.setExpiration(expiration);
+	}
+
 	public int getType() {
 		return _socialEquityLog.getType();
 	}
@@ -133,14 +141,6 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 
 	public void setValue(int value) {
 		_socialEquityLog.setValue(value);
-	}
-
-	public int getValidity() {
-		return _socialEquityLog.getValidity();
-	}
-
-	public void setValidity(int validity) {
-		_socialEquityLog.setValidity(validity);
 	}
 
 	public com.liferay.portlet.social.model.SocialEquityLog toEscapedModel() {
@@ -203,6 +203,10 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 
 	public java.lang.String toXmlString() {
 		return _socialEquityLog.toXmlString();
+	}
+
+	public int getLifespan() {
+		return _socialEquityLog.getLifespan();
 	}
 
 	public SocialEquityLog getWrappedSocialEquityLog() {

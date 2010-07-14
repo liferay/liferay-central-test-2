@@ -1913,9 +1913,9 @@
 		<property name="actionId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="actionDate" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="active" column="active_" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="expiration" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="type" column="type_" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="value" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="validity" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 	<class name="com.liferay.portlet.social.model.impl.SocialEquitySettingImpl" table="SocialEquitySetting">
 		<cache usage="read-write" />
@@ -1927,10 +1927,10 @@
 		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="actionId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="dailyLimit" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="lifespan" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="type" column="type_" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="uniqueEntry" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="value" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="validity" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 	<class name="com.liferay.portlet.social.model.impl.SocialEquityUserImpl" table="SocialEquityUser">
 		<cache usage="read-write" />

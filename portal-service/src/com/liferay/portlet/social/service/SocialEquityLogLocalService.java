@@ -122,6 +122,16 @@ public interface SocialEquityLogLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public void deactivateEquityLogs(long userId, long assetEntryId,
+		java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void deactivateEquityLogs(long userId, java.lang.String className,
+		long classPK, java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public void incrementSocialEquityAssetEntry_IQ(long assetEntryId,
 		com.liferay.portlet.social.model.SocialEquityValue socialEquityValue)
 		throws com.liferay.portal.kernel.exception.SystemException;

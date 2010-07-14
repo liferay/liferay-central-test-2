@@ -25,7 +25,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.social.model.SocialEquityHistory;
-import com.liferay.portlet.social.model.SocialEquityHistoryModel;
 
 import java.io.Serializable;
 
@@ -52,8 +51,7 @@ import java.util.Date;
  * @see       com.liferay.portlet.social.model.SocialEquityHistoryModel
  * @generated
  */
-public class SocialEquityHistoryModelImpl extends BaseModelImpl<SocialEquityHistory>
-	implements SocialEquityHistoryModel {
+public class SocialEquityHistoryModelImpl extends BaseModelImpl<SocialEquityHistory> {
 	public static final String TABLE_NAME = "SocialEquityHistory";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "equityHistoryId", new Integer(Types.BIGINT) },

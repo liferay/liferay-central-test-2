@@ -94,6 +94,14 @@ public class SocialEquitySettingWrapper implements SocialEquitySetting {
 		_socialEquitySetting.setDailyLimit(dailyLimit);
 	}
 
+	public int getLifespan() {
+		return _socialEquitySetting.getLifespan();
+	}
+
+	public void setLifespan(int lifespan) {
+		_socialEquitySetting.setLifespan(lifespan);
+	}
+
 	public int getType() {
 		return _socialEquitySetting.getType();
 	}
@@ -120,14 +128,6 @@ public class SocialEquitySettingWrapper implements SocialEquitySetting {
 
 	public void setValue(int value) {
 		_socialEquitySetting.setValue(value);
-	}
-
-	public int getValidity() {
-		return _socialEquitySetting.getValidity();
-	}
-
-	public void setValidity(int validity) {
-		_socialEquitySetting.setValidity(validity);
 	}
 
 	public com.liferay.portlet.social.model.SocialEquitySetting toEscapedModel() {

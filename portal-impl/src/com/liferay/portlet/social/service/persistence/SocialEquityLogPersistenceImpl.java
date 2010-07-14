@@ -421,9 +421,9 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		socialEquityLogImpl.setActionId(socialEquityLog.getActionId());
 		socialEquityLogImpl.setActionDate(socialEquityLog.getActionDate());
 		socialEquityLogImpl.setActive(socialEquityLog.isActive());
+		socialEquityLogImpl.setExpiration(socialEquityLog.getExpiration());
 		socialEquityLogImpl.setType(socialEquityLog.getType());
 		socialEquityLogImpl.setValue(socialEquityLog.getValue());
-		socialEquityLogImpl.setValidity(socialEquityLog.getValidity());
 
 		return socialEquityLogImpl;
 	}

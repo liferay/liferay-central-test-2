@@ -38,4 +38,5 @@ package com.liferay.portlet.social.model;
  * @generated
  */
 public interface SocialEquityLog extends SocialEquityLogModel {
+	public int getLifespan();
 }

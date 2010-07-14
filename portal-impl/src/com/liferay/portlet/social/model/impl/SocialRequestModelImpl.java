@@ -26,7 +26,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.social.model.SocialRequest;
-import com.liferay.portlet.social.model.SocialRequestModel;
 
 import java.io.Serializable;
 
@@ -51,8 +50,7 @@ import java.sql.Types;
  * @see       com.liferay.portlet.social.model.SocialRequestModel
  * @generated
  */
-public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
-	implements SocialRequestModel {
+public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 	public static final String TABLE_NAME = "SocialRequest";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },

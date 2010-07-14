@@ -63,24 +63,24 @@
 					informationK -
 						(
 							SELECT
-								SUM(-value / (validity - actionDate))
+								SUM(-value / (expiration - actionDate))
 							FROM
 								SocialEquityLog
 							WHERE
 								(SocialEquityLog.assetEntryId = SocialEquityAssetEntry.assetEntryId) AND
-								(validity <= [$VALIDITY$]) AND
+								(expiration <= [$EXPIRATION$]) AND
 								(active_ = [$TRUE$])
 						),
 				informationB =
 					informationB -
 						(
 							SELECT
-								SUM(-(-value / (validity - actionDate)) * validity)
+								SUM(-(-value / (expiration - actionDate)) * expiration)
 							FROM
 								SocialEquityLog
 							WHERE
 								(SocialEquityLog.assetEntryId = SocialEquityAssetEntry.assetEntryId) AND
-								(validity <= [$VALIDITY$]) AND
+								(expiration <= [$EXPIRATION$]) AND
 								(active_ = [$TRUE$])
 						)
 			WHERE
@@ -92,7 +92,7 @@
 							SocialEquityLog
 						WHERE
 							(type_ = [$TYPE_INFORMATION$]) AND
-							(validity <= [$VALIDITY$]) AND
+							(expiration <= [$EXPIRATION$]) AND
 							(active_ = [$TRUE$])
 					)
 		]]>
@@ -104,7 +104,7 @@
 			SET
 				active_ = [$FALSE$]
 			WHERE
-				(validity <= [$VALIDITY$]) AND
+				(expiration <= [$EXPIRATION$]) AND
 				(active_ = [$TRUE$])
 		]]>
 	</sql>
@@ -159,7 +159,7 @@
 						FROM
 							SocialEquityLog
 						WHERE
-							(validity <= [$VALIDITY$]) AND
+							(expiration <= [$EXPIRATION$]) AND
 							(active_ = [$TRUE$]) AND
 							(type_ = [$TYPE_INFORMATION$])
 					)
@@ -174,28 +174,28 @@
 					participationK -
 						(
 							SELECT
-								SUM(-value / (validity - actionDate))
+								SUM(-value / (expiration - actionDate))
 							FROM
 								SocialEquityLog
 							WHERE
 								(SocialEquityLog.groupId = SocialEquityUser.groupId) AND
 								(SocialEquityLog.userId = SocialEquityUser.userId) AND
 								(type_ = [$TYPE_PARTICIPATION$]) AND
-								(validity <= [$VALIDITY$]) AND
+								(expiration <= [$EXPIRATION$]) AND
 								(active_ = [$TRUE$])
 						),
 				participationB =
 					participationB -
 						(
 							SELECT
-								SUM(-(-value / (validity - actionDate)) * validity)
+								SUM(-(-value / (expiration - actionDate)) * expiration)
 							FROM
 								SocialEquityLog
 							WHERE
 								(SocialEquityLog.groupId = SocialEquityUser.groupId) AND
 								(SocialEquityLog.userId = SocialEquityUser.userId) AND
 								(type_ = [$TYPE_PARTICIPATION$]) AND
-								(validity <= [$VALIDITY$]) AND
+								(expiration <= [$EXPIRATION$]) AND
 								(active_ = [$TRUE$])
 						)
 			WHERE
@@ -207,7 +207,7 @@
 							SocialEquityLog
 						WHERE
 							(type_ = [$TYPE_PARTICIPATION$]) AND
-							(validity <= [$VALIDITY$]) AND
+							(expiration <= [$EXPIRATION$]) AND
 							(active_ = [$TRUE$])
 					)
 		]]>

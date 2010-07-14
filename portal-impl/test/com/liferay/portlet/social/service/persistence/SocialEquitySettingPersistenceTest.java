@@ -69,10 +69,10 @@ public class SocialEquitySettingPersistenceTest extends BasePersistenceTestCase 
 		newSocialEquitySetting.setClassNameId(nextLong());
 		newSocialEquitySetting.setActionId(randomString());
 		newSocialEquitySetting.setDailyLimit(nextInt());
+		newSocialEquitySetting.setLifespan(nextInt());
 		newSocialEquitySetting.setType(nextInt());
 		newSocialEquitySetting.setUniqueEntry(randomBoolean());
 		newSocialEquitySetting.setValue(nextInt());
-		newSocialEquitySetting.setValidity(nextInt());
 
 		_persistence.update(newSocialEquitySetting, false);
 
@@ -90,14 +90,14 @@ public class SocialEquitySettingPersistenceTest extends BasePersistenceTestCase 
 			newSocialEquitySetting.getActionId());
 		assertEquals(existingSocialEquitySetting.getDailyLimit(),
 			newSocialEquitySetting.getDailyLimit());
+		assertEquals(existingSocialEquitySetting.getLifespan(),
+			newSocialEquitySetting.getLifespan());
 		assertEquals(existingSocialEquitySetting.getType(),
 			newSocialEquitySetting.getType());
 		assertEquals(existingSocialEquitySetting.getUniqueEntry(),
 			newSocialEquitySetting.getUniqueEntry());
 		assertEquals(existingSocialEquitySetting.getValue(),
 			newSocialEquitySetting.getValue());
-		assertEquals(existingSocialEquitySetting.getValidity(),
-			newSocialEquitySetting.getValidity());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -178,10 +178,10 @@ public class SocialEquitySettingPersistenceTest extends BasePersistenceTestCase 
 		socialEquitySetting.setClassNameId(nextLong());
 		socialEquitySetting.setActionId(randomString());
 		socialEquitySetting.setDailyLimit(nextInt());
+		socialEquitySetting.setLifespan(nextInt());
 		socialEquitySetting.setType(nextInt());
 		socialEquitySetting.setUniqueEntry(randomBoolean());
 		socialEquitySetting.setValue(nextInt());
-		socialEquitySetting.setValidity(nextInt());
 
 		_persistence.update(socialEquitySetting, false);
 

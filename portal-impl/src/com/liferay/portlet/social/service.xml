@@ -147,9 +147,9 @@
 		<column name="actionId" type="String" />
 		<column name="actionDate" type="int" />
 		<column name="active" type="boolean" />
+		<column name="expiration" type="int" />
 		<column name="type" type="int" />
 		<column name="value" type="int" />
-		<column name="validity" type="int" />
 
 		<!-- Finder methods -->
 
@@ -216,10 +216,10 @@
 		<column name="classNameId" type="long" />
 		<column name="actionId" type="String" />
 		<column name="dailyLimit" type="int" />
+		<column name="lifespan" type="int" />
 		<column name="type" type="int" />
 		<column name="uniqueEntry" type="boolean" />
 		<column name="value" type="int" />
-		<column name="validity" type="int" />
 
 		<!-- Finder methods -->
 
