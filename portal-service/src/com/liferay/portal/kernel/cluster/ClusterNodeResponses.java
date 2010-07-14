@@ -33,6 +33,10 @@ public class ClusterNodeResponses implements Serializable {
 			clusterNodeResponse.getClusterNode(), clusterNodeResponse);
 	}
 
+	public ClusterNodeResponse getClusterResponse(ClusterNode clusterNode) {
+		return _clusterResponses.get(clusterNode);
+	}
+
 	public Map<ClusterNode, ClusterNodeResponse> getClusterResponses() {
 		return Collections.unmodifiableMap(_clusterResponses);
 	}
