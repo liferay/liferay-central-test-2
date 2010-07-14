@@ -593,37 +593,39 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(BlogsEntry.class);
 
-		if ((oldStatus != WorkflowConstants.STATUS_APPROVED) &&
-			(status == WorkflowConstants.STATUS_APPROVED)) {
+		if (status == WorkflowConstants.STATUS_APPROVED) {
 
 			// Statistics
 
 			blogsStatsUserLocalService.updateStatsUser(
 				entry.getGroupId(), entry.getUserId(), entry.getDisplayDate());
 
-			// Asset
+			if (oldStatus != WorkflowConstants.STATUS_APPROVED) {
 
-			assetEntryLocalService.updateVisible(
-				BlogsEntry.class.getName(), entryId, true);
+				// Asset
 
-			// Social
+				assetEntryLocalService.updateVisible(
+					BlogsEntry.class.getName(), entryId, true);
 
-			socialActivityLocalService.addUniqueActivity(
-				entry.getUserId(), entry.getGroupId(),
-				BlogsEntry.class.getName(), entryId,
-				BlogsActivityKeys.ADD_ENTRY, StringPool.BLANK, 0);
+				// Social
 
-			socialEquityLogLocalService.addEquityLogs(
-				userId, BlogsEntry.class.getName(), entryId,
-				ActionKeys.ADD_ENTRY);
+				socialActivityLocalService.addUniqueActivity(
+					entry.getUserId(), entry.getGroupId(),
+					BlogsEntry.class.getName(), entryId,
+					BlogsActivityKeys.ADD_ENTRY, StringPool.BLANK, 0);
+
+				socialEquityLogLocalService.addEquityLogs(
+					userId, BlogsEntry.class.getName(), entryId,
+					ActionKeys.ADD_ENTRY);
+
+				// Subscriptions
+
+				notifySubscribers(entry, serviceContext);
+			}
 
 			// Indexer
 
 			indexer.reindex(entry);
-
-			// Subscriptions
-
-			notifySubscribers(entry, serviceContext);
 
 			// Ping
 

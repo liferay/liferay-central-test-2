@@ -1397,85 +1397,88 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(MBMessage.class);
 
-		if ((oldStatus != WorkflowConstants.STATUS_APPROVED) &&
-			(status == WorkflowConstants.STATUS_APPROVED)) {
+		if (status == WorkflowConstants.STATUS_APPROVED) {
+			if (oldStatus != WorkflowConstants.STATUS_APPROVED) {
 
-			// Thread
+				// Thread
 
-			if ((category != null) &&
-				(thread.getRootMessageId() == message.getMessageId())) {
+				if ((category != null) &&
+					(thread.getRootMessageId() == message.getMessageId())) {
 
-				category.setThreadCount(category.getThreadCount() + 1);
+					category.setThreadCount(category.getThreadCount() + 1);
 
-				mbCategoryPersistence.update(category, false);
-			}
-
-			thread.setMessageCount(thread.getMessageCount() + 1);
-
-			if (message.isAnonymous()) {
-				thread.setLastPostByUserId(0);
-			}
-			else {
-				thread.setLastPostByUserId(message.getUserId());
-			}
-
-			thread.setLastPostDate(serviceContext.getModifiedDate(now));
-
-			// Category
-
-			if (category != null) {
-				category.setMessageCount(category.getMessageCount() + 1);
-				category.setLastPostDate(serviceContext.getModifiedDate(now));
-
-				mbCategoryPersistence.update(category, false);
-
-			}
-
-			if (!message.isDiscussion()) {
-
-				// Asset
-
-				assetEntryLocalService.updateVisible(
-					MBMessage.class.getName(), message.getMessageId(), true);
-
-				// Indexer
-
-				indexer.reindex(message);
-
-				// Social
-
-				if (!message.isAnonymous() && !user.isDefaultUser()) {
-					int activityType = MBActivityKeys.ADD_MESSAGE;
-					long receiverUserId = 0;
-					String actionId = ActionKeys.ADD_MESSAGE;
-
-					MBMessage parentMessage =
-						mbMessagePersistence.fetchByPrimaryKey(
-							message.getParentMessageId());
-
-					if (parentMessage != null) {
-						activityType = MBActivityKeys.REPLY_MESSAGE;
-						receiverUserId = parentMessage.getUserId();
-
-						if (receiverUserId != userId) {
-							actionId = ActionKeys.REPLY_TO_MESSAGE;
-						}
-					}
-
-					socialActivityLocalService.addActivity(
-						userId, message.getGroupId(), MBMessage.class.getName(),
-						message.getMessageId(), activityType, StringPool.BLANK,
-						receiverUserId);
-
-					socialEquityLogLocalService.addEquityLogs(
-						userId, MBMessage.class.getName(), messageId, actionId);
+					mbCategoryPersistence.update(category, false);
 				}
 
+				thread.setMessageCount(thread.getMessageCount() + 1);
+
+				if (message.isAnonymous()) {
+					thread.setLastPostByUserId(0);
+				}
+				else {
+					thread.setLastPostByUserId(message.getUserId());
+				}
+
+				thread.setLastPostDate(serviceContext.getModifiedDate(now));
+
+				// Category
+
+				if (category != null) {
+					category.setMessageCount(category.getMessageCount() + 1);
+					category.setLastPostDate(serviceContext.getModifiedDate(now));
+
+					mbCategoryPersistence.update(category, false);
+
+				}
+
+				if (!message.isDiscussion()) {
+
+					// Asset
+
+					assetEntryLocalService.updateVisible(
+						MBMessage.class.getName(), message.getMessageId(), true);
+
+
+					// Social
+
+					if (!message.isAnonymous() && !user.isDefaultUser()) {
+						int activityType = MBActivityKeys.ADD_MESSAGE;
+						long receiverUserId = 0;
+						String actionId = ActionKeys.ADD_MESSAGE;
+
+						MBMessage parentMessage =
+							mbMessagePersistence.fetchByPrimaryKey(
+								message.getParentMessageId());
+
+						if (parentMessage != null) {
+							activityType = MBActivityKeys.REPLY_MESSAGE;
+							receiverUserId = parentMessage.getUserId();
+
+							if (receiverUserId != userId) {
+								actionId = ActionKeys.REPLY_TO_MESSAGE;
+							}
+						}
+
+						socialActivityLocalService.addActivity(
+							userId, message.getGroupId(), MBMessage.class.getName(),
+							message.getMessageId(), activityType, StringPool.BLANK,
+							receiverUserId);
+
+						socialEquityLogLocalService.addEquityLogs(
+							userId, MBMessage.class.getName(), messageId, actionId);
+					}
+				}
+
+				// Subscriptions
+
+				notifySubscribers(message, serviceContext);
 			}
 
-			// Subscriptions
+			// Indexer
 
-			notifySubscribers(message, serviceContext);
+			if (!message.isDiscussion()) {
+				indexer.reindex(message);
+			}
 
 			// Ping
 
