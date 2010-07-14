@@ -84,6 +84,10 @@
 					<c:otherwise>
 						<aui:input name="<%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT %>" type="hidden" value="<%= true %>" />
 
+						<c:if test="<%= !liveGroup.isStaged() %>">
+							<aui:input name="<%= PortletDataHandlerKeys.PORTLET_DATA_ALL %>" type="hidden" value="<%= true %>" />
+						</c:if>
+
 						<%
 						String taglibToggleDataControls = renderResponse.getNamespace() + "toggleChildren(this, '" + renderResponse.getNamespace() + "portletDataControls');";
 						%>
@@ -213,7 +217,11 @@
 
 										boolean checked = portletDataHandler.isPublishToLiveByDefault();
 
-										boolean staged = GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(StagingConstants.STAGED_PORTLET + curPortlet.getRootPortletId()), portletDataHandler.isPublishToLiveByDefault());
+										boolean showRenderControls = true;
+
+										if (!liveGroup.isStagedPortlet(curPortlet.getRootPortletId())) {
+											showRenderControls = false;
+										}
 
 										request.setAttribute("render_controls.jsp-controls", controls);
 										request.setAttribute("render_controls.jsp-portletDisabled", !portletDataHandler.isPublishToLiveByDefault());
@@ -232,7 +240,7 @@
 													<aui:input disabled="<%= !checked %>" inlineLabel="right" label="setup "name="<%= PortletDataHandlerKeys.PORTLET_SETUP + StringPool.UNDERLINE + rootPortletId %>" type="checkbox" value="<%= true %>" />
 												</li>
 
-												<c:if test="<%= staged %>">
+												<c:if test="<%= showRenderControls %>">
 													<liferay-util:include page="/html/portlet/communities/render_controls.jsp" />
 												</c:if>
 											</ul>

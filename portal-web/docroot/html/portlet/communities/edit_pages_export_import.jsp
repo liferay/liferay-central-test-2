@@ -21,6 +21,7 @@ String tabs4 = (String)request.getAttribute("edit_pages.jsp-tab4");
 
 String redirect = ParamUtil.getString(request, "redirect");
 
+Group liveGroup = (Group)request.getAttribute("edit_pages.jsp-liveGroup");
 long groupId = ((Long)request.getAttribute("edit_pages.jsp-groupId")).longValue();
 long liveGroupId = ((Long)request.getAttribute("edit_pages.jsp-liveGroupId")).longValue();
 boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
