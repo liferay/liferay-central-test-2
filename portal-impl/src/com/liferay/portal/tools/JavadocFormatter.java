@@ -478,6 +478,25 @@ public class JavadocFormatter {
 		cdata = cdata.replaceAll("\n\\s+\n", "\n\n");
 		cdata = cdata.replaceAll(" +", " ");
 
+		// Trim whitespace inside paragraph tags, or in the first paragraph
+
+		Pattern pattern = Pattern.compile(
+			"(^.*?(?=\n\n|$)+|(?<=<p>\n).*?(?=\n</p>))", Pattern.DOTALL);
+
+		Matcher matcher = pattern.matcher(cdata);
+
+		StringBuffer sb = new StringBuffer();
+
+		while (matcher.find()) {
+			String trimmed = _trimMultilineText(matcher.group());
+
+			matcher.appendReplacement(sb, trimmed);
+		}
+
+		matcher.appendTail(sb);
+
+		cdata = sb.toString();
+
 		return cdata.trim();
 	}
 
