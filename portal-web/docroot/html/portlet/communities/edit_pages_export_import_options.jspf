@@ -180,7 +180,7 @@
 												<aui:option label='<%= LanguageUtil.format(pageContext, "x-hours", "12") %>' value="12" />
 												<aui:option label='<%= LanguageUtil.format(pageContext, "x-hours", "24") %>' value="24" />
 												<aui:option label='<%= LanguageUtil.format(pageContext, "x-hours", "48") %>' value="48" />
-												<aui:option label='<%= LanguageUtil.format(pageContext, "x-days", "7") %>' value="7" />
+												<aui:option label='<%= LanguageUtil.format(pageContext, "x-days", "7") %>' value="168" />
 											</aui:select>
 										</li>
 									</ul>

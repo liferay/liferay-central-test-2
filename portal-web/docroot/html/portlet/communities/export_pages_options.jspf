@@ -195,7 +195,7 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 											<aui:option value="12"><%= LanguageUtil.format(pageContext, "x-hours", "12") %></aui:option>
 											<aui:option value="24"><%= LanguageUtil.format(pageContext, "x-hours", "24") %></aui:option>
 											<aui:option value="48"><%= LanguageUtil.format(pageContext, "x-hours", "48") %></aui:option>
-											<aui:option value="2487"><%= LanguageUtil.format(pageContext, "x-days", "7") %></aui:option>
+											<aui:option value="168"><%= LanguageUtil.format(pageContext, "x-days", "7") %></aui:option>
 										</aui:select>
 									</li>
 								</ul>
