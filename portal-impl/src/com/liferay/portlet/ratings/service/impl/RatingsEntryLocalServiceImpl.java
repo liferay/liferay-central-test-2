@@ -17,6 +17,7 @@ package com.liferay.portlet.ratings.service.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -30,6 +31,7 @@ import java.util.List;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Zsolt Berentey
  */
 public class RatingsEntryLocalServiceImpl
 	extends RatingsEntryLocalServiceBaseImpl {
@@ -70,6 +72,11 @@ public class RatingsEntryLocalServiceImpl
 		stats.setAverageScore(averageScore);
 
 		ratingsStatsPersistence.update(stats, false);
+
+		// Social
+
+		socialEquityLogLocalService.deactivateEquityLogs(
+			userId, className, classPK, ActionKeys.ADD_VOTE);
 	}
 
 	public List<RatingsEntry> getEntries(
@@ -197,6 +204,11 @@ public class RatingsEntryLocalServiceImpl
 
 			blogsStatsUserPersistence.update(blogsStatsUser, false);
 		}
+
+		// Social
+
+		socialEquityLogLocalService.addEquityLogs(
+			userId, className, classPK, ActionKeys.ADD_VOTE);
 
 		return entry;
 	}

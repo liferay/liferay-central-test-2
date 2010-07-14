@@ -39,6 +39,7 @@
 
 		<reference package-path="com.liferay.portlet.blogs" entity="BlogsEntry" />
 		<reference package-path="com.liferay.portlet.blogs" entity="BlogsStatsUser" />
+		<reference package-path="com.liferay.portlet.social" entity="SocialEquityLog" />
 	</entity>
 	<entity name="RatingsStats" local-service="true" remote-service="false">
 
