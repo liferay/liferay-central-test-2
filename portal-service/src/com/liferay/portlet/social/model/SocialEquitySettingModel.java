@@ -67,9 +67,19 @@ public interface SocialEquitySettingModel extends BaseModel<SocialEquitySetting>
 
 	public void setActionId(String actionId);
 
+	public int getDailyLimit();
+
+	public void setDailyLimit(int dailyLimit);
+
 	public int getType();
 
 	public void setType(int type);
+
+	public boolean getUniqueEntry();
+
+	public boolean isUniqueEntry();
+
+	public void setUniqueEntry(boolean uniqueEntry);
 
 	public int getValue();
 

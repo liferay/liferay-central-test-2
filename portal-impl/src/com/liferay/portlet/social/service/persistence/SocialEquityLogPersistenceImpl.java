@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
@@ -67,6 +68,42 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	public static final String FINDER_CLASS_NAME_ENTITY = SocialEquityLogImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_AEI_AD_AI_A_T = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
+			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByAEI_AD_AI_A_T",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				String.class.getName(), Boolean.class.getName(),
+				Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_AEI_AD_AI_A_T = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
+			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByAEI_AD_AI_A_T",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				String.class.getName(), Boolean.class.getName(),
+				Integer.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_AEI_AI_A_T = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
+			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByAEI_AI_A_T",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				Boolean.class.getName(), Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_AEI_AI_A_T = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
+			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByAEI_AI_A_T",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				Boolean.class.getName(), Integer.class.getName()
+			});
 	public static final FinderPath FINDER_PATH_FIND_BY_AEI_T_A = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByAEI_T_A",
@@ -84,22 +121,57 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 				Long.class.getName(), Integer.class.getName(),
 				Boolean.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_FIND_BY_U_AEI_A_A = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_U_AD_AI_A_T = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByU_AEI_A_A",
+			FINDER_CLASS_NAME_LIST, "findByU_AD_AI_A_T",
 			new String[] {
-				Long.class.getName(), Long.class.getName(),
+				Long.class.getName(), Integer.class.getName(),
 				String.class.getName(), Boolean.class.getName(),
+				Integer.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_U_AEI_A_A = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_U_AD_AI_A_T = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByU_AEI_A_A",
+			FINDER_CLASS_NAME_LIST, "countByU_AD_AI_A_T",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				String.class.getName(), Boolean.class.getName(),
+				Integer.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_U_AI_A_T = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
+			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByU_AI_A_T",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				Boolean.class.getName(), Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_U_AI_A_T = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
+			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByU_AI_A_T",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				Boolean.class.getName(), Integer.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FETCH_BY_U_AEI_AD_AI_A_T = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
+			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByU_AEI_AD_AI_A_T",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
-				String.class.getName(), Boolean.class.getName()
+				Integer.class.getName(), String.class.getName(),
+				Boolean.class.getName(), Integer.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_U_AEI_AD_AI_A_T = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
+			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByU_AEI_AD_AI_A_T",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName(), String.class.getName(),
+				Boolean.class.getName(), Integer.class.getName()
 			});
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
@@ -112,6 +184,17 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		EntityCacheUtil.putResult(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityLogImpl.class, socialEquityLog.getPrimaryKey(),
 			socialEquityLog);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_AEI_AD_AI_A_T,
+			new Object[] {
+				new Long(socialEquityLog.getUserId()),
+				new Long(socialEquityLog.getAssetEntryId()),
+				new Integer(socialEquityLog.getActionDate()),
+				
+			socialEquityLog.getActionId(),
+				Boolean.valueOf(socialEquityLog.getActive()),
+				new Integer(socialEquityLog.getType())
+			}, socialEquityLog);
 	}
 
 	public void cacheResult(List<SocialEquityLog> socialEquityLogs) {
@@ -135,6 +218,17 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	public void clearCache(SocialEquityLog socialEquityLog) {
 		EntityCacheUtil.removeResult(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityLogImpl.class, socialEquityLog.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_AEI_AD_AI_A_T,
+			new Object[] {
+				new Long(socialEquityLog.getUserId()),
+				new Long(socialEquityLog.getAssetEntryId()),
+				new Integer(socialEquityLog.getActionDate()),
+				
+			socialEquityLog.getActionId(),
+				Boolean.valueOf(socialEquityLog.getActive()),
+				new Integer(socialEquityLog.getType())
+			});
 	}
 
 	public SocialEquityLog create(long equityLogId) {
@@ -215,6 +309,19 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		SocialEquityLogModelImpl socialEquityLogModelImpl = (SocialEquityLogModelImpl)socialEquityLog;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_AEI_AD_AI_A_T,
+			new Object[] {
+				new Long(socialEquityLogModelImpl.getOriginalUserId()),
+				new Long(socialEquityLogModelImpl.getOriginalAssetEntryId()),
+				new Integer(socialEquityLogModelImpl.getOriginalActionDate()),
+				
+			socialEquityLogModelImpl.getOriginalActionId(),
+				Boolean.valueOf(socialEquityLogModelImpl.getOriginalActive()),
+				new Integer(socialEquityLogModelImpl.getOriginalType())
+			});
+
 		EntityCacheUtil.removeResult(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityLogImpl.class, socialEquityLog.getPrimaryKey());
 
@@ -225,6 +332,10 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		com.liferay.portlet.social.model.SocialEquityLog socialEquityLog,
 		boolean merge) throws SystemException {
 		socialEquityLog = toUnwrappedModel(socialEquityLog);
+
+		boolean isNew = socialEquityLog.isNew();
+
+		SocialEquityLogModelImpl socialEquityLogModelImpl = (SocialEquityLogModelImpl)socialEquityLog;
 
 		Session session = null;
 
@@ -248,6 +359,47 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			SocialEquityLogImpl.class, socialEquityLog.getPrimaryKey(),
 			socialEquityLog);
 
+		if (!isNew &&
+				((socialEquityLog.getUserId() != socialEquityLogModelImpl.getOriginalUserId()) ||
+				(socialEquityLog.getAssetEntryId() != socialEquityLogModelImpl.getOriginalAssetEntryId()) ||
+				(socialEquityLog.getActionDate() != socialEquityLogModelImpl.getOriginalActionDate()) ||
+				!Validator.equals(socialEquityLog.getActionId(),
+					socialEquityLogModelImpl.getOriginalActionId()) ||
+				(socialEquityLog.getActive() != socialEquityLogModelImpl.getOriginalActive()) ||
+				(socialEquityLog.getType() != socialEquityLogModelImpl.getOriginalType()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_AEI_AD_AI_A_T,
+				new Object[] {
+					new Long(socialEquityLogModelImpl.getOriginalUserId()),
+					new Long(socialEquityLogModelImpl.getOriginalAssetEntryId()),
+					new Integer(socialEquityLogModelImpl.getOriginalActionDate()),
+					
+				socialEquityLogModelImpl.getOriginalActionId(),
+					Boolean.valueOf(
+						socialEquityLogModelImpl.getOriginalActive()),
+					new Integer(socialEquityLogModelImpl.getOriginalType())
+				});
+		}
+
+		if (isNew ||
+				((socialEquityLog.getUserId() != socialEquityLogModelImpl.getOriginalUserId()) ||
+				(socialEquityLog.getAssetEntryId() != socialEquityLogModelImpl.getOriginalAssetEntryId()) ||
+				(socialEquityLog.getActionDate() != socialEquityLogModelImpl.getOriginalActionDate()) ||
+				!Validator.equals(socialEquityLog.getActionId(),
+					socialEquityLogModelImpl.getOriginalActionId()) ||
+				(socialEquityLog.getActive() != socialEquityLogModelImpl.getOriginalActive()) ||
+				(socialEquityLog.getType() != socialEquityLogModelImpl.getOriginalType()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_AEI_AD_AI_A_T,
+				new Object[] {
+					new Long(socialEquityLog.getUserId()),
+					new Long(socialEquityLog.getAssetEntryId()),
+					new Integer(socialEquityLog.getActionDate()),
+					
+				socialEquityLog.getActionId(),
+					Boolean.valueOf(socialEquityLog.getActive()),
+					new Integer(socialEquityLog.getType())
+				}, socialEquityLog);
+		}
+
 		return socialEquityLog;
 	}
 
@@ -268,10 +420,10 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		socialEquityLogImpl.setAssetEntryId(socialEquityLog.getAssetEntryId());
 		socialEquityLogImpl.setActionId(socialEquityLog.getActionId());
 		socialEquityLogImpl.setActionDate(socialEquityLog.getActionDate());
+		socialEquityLogImpl.setActive(socialEquityLog.isActive());
 		socialEquityLogImpl.setType(socialEquityLog.getType());
 		socialEquityLogImpl.setValue(socialEquityLog.getValue());
 		socialEquityLogImpl.setValidity(socialEquityLog.getValidity());
-		socialEquityLogImpl.setActive(socialEquityLog.isActive());
 
 		return socialEquityLogImpl;
 	}
@@ -329,6 +481,687 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		}
 
 		return socialEquityLog;
+	}
+
+	public List<SocialEquityLog> findByAEI_AD_AI_A_T(long assetEntryId,
+		int actionDate, String actionId, boolean active, int type)
+		throws SystemException {
+		return findByAEI_AD_AI_A_T(assetEntryId, actionDate, actionId, active,
+			type, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	public List<SocialEquityLog> findByAEI_AD_AI_A_T(long assetEntryId,
+		int actionDate, String actionId, boolean active, int type, int start,
+		int end) throws SystemException {
+		return findByAEI_AD_AI_A_T(assetEntryId, actionDate, actionId, active,
+			type, start, end, null);
+	}
+
+	public List<SocialEquityLog> findByAEI_AD_AI_A_T(long assetEntryId,
+		int actionDate, String actionId, boolean active, int type, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				assetEntryId, actionDate, actionId, active, type,
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<SocialEquityLog> list = (List<SocialEquityLog>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_AEI_AD_AI_A_T,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = null;
+
+				if (orderByComparator != null) {
+					query = new StringBundler(7 +
+							(orderByComparator.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(6);
+				}
+
+				query.append(_SQL_SELECT_SOCIALEQUITYLOG_WHERE);
+
+				query.append(_FINDER_COLUMN_AEI_AD_AI_A_T_ASSETENTRYID_2);
+
+				query.append(_FINDER_COLUMN_AEI_AD_AI_A_T_ACTIONDATE_2);
+
+				if (actionId == null) {
+					query.append(_FINDER_COLUMN_AEI_AD_AI_A_T_ACTIONID_1);
+				}
+				else {
+					if (actionId.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_AEI_AD_AI_A_T_ACTIONID_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_AEI_AD_AI_A_T_ACTIONID_2);
+					}
+				}
+
+				query.append(_FINDER_COLUMN_AEI_AD_AI_A_T_ACTIVE_2);
+
+				query.append(_FINDER_COLUMN_AEI_AD_AI_A_T_TYPE_2);
+
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(assetEntryId);
+
+				qPos.add(actionDate);
+
+				if (actionId != null) {
+					qPos.add(actionId);
+				}
+
+				qPos.add(active);
+
+				qPos.add(type);
+
+				list = (List<SocialEquityLog>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SocialEquityLog>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_AEI_AD_AI_A_T,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public SocialEquityLog findByAEI_AD_AI_A_T_First(long assetEntryId,
+		int actionDate, String actionId, boolean active, int type,
+		OrderByComparator orderByComparator)
+		throws NoSuchEquityLogException, SystemException {
+		List<SocialEquityLog> list = findByAEI_AD_AI_A_T(assetEntryId,
+				actionDate, actionId, active, type, 0, 1, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(12);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("assetEntryId=");
+			msg.append(assetEntryId);
+
+			msg.append(", actionDate=");
+			msg.append(actionDate);
+
+			msg.append(", actionId=");
+			msg.append(actionId);
+
+			msg.append(", active=");
+			msg.append(active);
+
+			msg.append(", type=");
+			msg.append(type);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEquityLogException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public SocialEquityLog findByAEI_AD_AI_A_T_Last(long assetEntryId,
+		int actionDate, String actionId, boolean active, int type,
+		OrderByComparator orderByComparator)
+		throws NoSuchEquityLogException, SystemException {
+		int count = countByAEI_AD_AI_A_T(assetEntryId, actionDate, actionId,
+				active, type);
+
+		List<SocialEquityLog> list = findByAEI_AD_AI_A_T(assetEntryId,
+				actionDate, actionId, active, type, count - 1, count,
+				orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(12);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("assetEntryId=");
+			msg.append(assetEntryId);
+
+			msg.append(", actionDate=");
+			msg.append(actionDate);
+
+			msg.append(", actionId=");
+			msg.append(actionId);
+
+			msg.append(", active=");
+			msg.append(active);
+
+			msg.append(", type=");
+			msg.append(type);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEquityLogException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public SocialEquityLog[] findByAEI_AD_AI_A_T_PrevAndNext(long equityLogId,
+		long assetEntryId, int actionDate, String actionId, boolean active,
+		int type, OrderByComparator orderByComparator)
+		throws NoSuchEquityLogException, SystemException {
+		SocialEquityLog socialEquityLog = findByPrimaryKey(equityLogId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SocialEquityLog[] array = new SocialEquityLogImpl[3];
+
+			array[0] = getByAEI_AD_AI_A_T_PrevAndNext(session, socialEquityLog,
+					assetEntryId, actionDate, actionId, active, type,
+					orderByComparator, true);
+
+			array[1] = socialEquityLog;
+
+			array[2] = getByAEI_AD_AI_A_T_PrevAndNext(session, socialEquityLog,
+					assetEntryId, actionDate, actionId, active, type,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected SocialEquityLog getByAEI_AD_AI_A_T_PrevAndNext(Session session,
+		SocialEquityLog socialEquityLog, long assetEntryId, int actionDate,
+		String actionId, boolean active, int type,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_SOCIALEQUITYLOG_WHERE);
+
+		query.append(_FINDER_COLUMN_AEI_AD_AI_A_T_ASSETENTRYID_2);
+
+		query.append(_FINDER_COLUMN_AEI_AD_AI_A_T_ACTIONDATE_2);
+
+		if (actionId == null) {
+			query.append(_FINDER_COLUMN_AEI_AD_AI_A_T_ACTIONID_1);
+		}
+		else {
+			if (actionId.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_AEI_AD_AI_A_T_ACTIONID_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_AEI_AD_AI_A_T_ACTIONID_2);
+			}
+		}
+
+		query.append(_FINDER_COLUMN_AEI_AD_AI_A_T_ACTIVE_2);
+
+		query.append(_FINDER_COLUMN_AEI_AD_AI_A_T_TYPE_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(assetEntryId);
+
+		qPos.add(actionDate);
+
+		if (actionId != null) {
+			qPos.add(actionId);
+		}
+
+		qPos.add(active);
+
+		qPos.add(type);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(socialEquityLog);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<SocialEquityLog> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	public List<SocialEquityLog> findByAEI_AI_A_T(long assetEntryId,
+		String actionId, boolean active, int type) throws SystemException {
+		return findByAEI_AI_A_T(assetEntryId, actionId, active, type,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	public List<SocialEquityLog> findByAEI_AI_A_T(long assetEntryId,
+		String actionId, boolean active, int type, int start, int end)
+		throws SystemException {
+		return findByAEI_AI_A_T(assetEntryId, actionId, active, type, start,
+			end, null);
+	}
+
+	public List<SocialEquityLog> findByAEI_AI_A_T(long assetEntryId,
+		String actionId, boolean active, int type, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				assetEntryId, actionId, active, type,
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<SocialEquityLog> list = (List<SocialEquityLog>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_AEI_AI_A_T,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = null;
+
+				if (orderByComparator != null) {
+					query = new StringBundler(6 +
+							(orderByComparator.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(5);
+				}
+
+				query.append(_SQL_SELECT_SOCIALEQUITYLOG_WHERE);
+
+				query.append(_FINDER_COLUMN_AEI_AI_A_T_ASSETENTRYID_2);
+
+				if (actionId == null) {
+					query.append(_FINDER_COLUMN_AEI_AI_A_T_ACTIONID_1);
+				}
+				else {
+					if (actionId.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_AEI_AI_A_T_ACTIONID_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_AEI_AI_A_T_ACTIONID_2);
+					}
+				}
+
+				query.append(_FINDER_COLUMN_AEI_AI_A_T_ACTIVE_2);
+
+				query.append(_FINDER_COLUMN_AEI_AI_A_T_TYPE_2);
+
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(assetEntryId);
+
+				if (actionId != null) {
+					qPos.add(actionId);
+				}
+
+				qPos.add(active);
+
+				qPos.add(type);
+
+				list = (List<SocialEquityLog>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SocialEquityLog>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_AEI_AI_A_T,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public SocialEquityLog findByAEI_AI_A_T_First(long assetEntryId,
+		String actionId, boolean active, int type,
+		OrderByComparator orderByComparator)
+		throws NoSuchEquityLogException, SystemException {
+		List<SocialEquityLog> list = findByAEI_AI_A_T(assetEntryId, actionId,
+				active, type, 0, 1, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(10);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("assetEntryId=");
+			msg.append(assetEntryId);
+
+			msg.append(", actionId=");
+			msg.append(actionId);
+
+			msg.append(", active=");
+			msg.append(active);
+
+			msg.append(", type=");
+			msg.append(type);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEquityLogException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public SocialEquityLog findByAEI_AI_A_T_Last(long assetEntryId,
+		String actionId, boolean active, int type,
+		OrderByComparator orderByComparator)
+		throws NoSuchEquityLogException, SystemException {
+		int count = countByAEI_AI_A_T(assetEntryId, actionId, active, type);
+
+		List<SocialEquityLog> list = findByAEI_AI_A_T(assetEntryId, actionId,
+				active, type, count - 1, count, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(10);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("assetEntryId=");
+			msg.append(assetEntryId);
+
+			msg.append(", actionId=");
+			msg.append(actionId);
+
+			msg.append(", active=");
+			msg.append(active);
+
+			msg.append(", type=");
+			msg.append(type);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEquityLogException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public SocialEquityLog[] findByAEI_AI_A_T_PrevAndNext(long equityLogId,
+		long assetEntryId, String actionId, boolean active, int type,
+		OrderByComparator orderByComparator)
+		throws NoSuchEquityLogException, SystemException {
+		SocialEquityLog socialEquityLog = findByPrimaryKey(equityLogId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SocialEquityLog[] array = new SocialEquityLogImpl[3];
+
+			array[0] = getByAEI_AI_A_T_PrevAndNext(session, socialEquityLog,
+					assetEntryId, actionId, active, type, orderByComparator,
+					true);
+
+			array[1] = socialEquityLog;
+
+			array[2] = getByAEI_AI_A_T_PrevAndNext(session, socialEquityLog,
+					assetEntryId, actionId, active, type, orderByComparator,
+					false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected SocialEquityLog getByAEI_AI_A_T_PrevAndNext(Session session,
+		SocialEquityLog socialEquityLog, long assetEntryId, String actionId,
+		boolean active, int type, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_SOCIALEQUITYLOG_WHERE);
+
+		query.append(_FINDER_COLUMN_AEI_AI_A_T_ASSETENTRYID_2);
+
+		if (actionId == null) {
+			query.append(_FINDER_COLUMN_AEI_AI_A_T_ACTIONID_1);
+		}
+		else {
+			if (actionId.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_AEI_AI_A_T_ACTIONID_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_AEI_AI_A_T_ACTIONID_2);
+			}
+		}
+
+		query.append(_FINDER_COLUMN_AEI_AI_A_T_ACTIVE_2);
+
+		query.append(_FINDER_COLUMN_AEI_AI_A_T_TYPE_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(assetEntryId);
+
+		if (actionId != null) {
+			qPos.add(actionId);
+		}
+
+		qPos.add(active);
+
+		qPos.add(type);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(socialEquityLog);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<SocialEquityLog> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
 	}
 
 	public List<SocialEquityLog> findByAEI_T_A(long assetEntryId, int type,
@@ -618,31 +1451,30 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		}
 	}
 
-	public List<SocialEquityLog> findByU_AEI_A_A(long userId,
-		long assetEntryId, String actionId, boolean active)
-		throws SystemException {
-		return findByU_AEI_A_A(userId, assetEntryId, actionId, active,
+	public List<SocialEquityLog> findByU_AD_AI_A_T(long userId, int actionDate,
+		String actionId, boolean active, int type) throws SystemException {
+		return findByU_AD_AI_A_T(userId, actionDate, actionId, active, type,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<SocialEquityLog> findByU_AEI_A_A(long userId,
-		long assetEntryId, String actionId, boolean active, int start, int end)
+	public List<SocialEquityLog> findByU_AD_AI_A_T(long userId, int actionDate,
+		String actionId, boolean active, int type, int start, int end)
 		throws SystemException {
-		return findByU_AEI_A_A(userId, assetEntryId, actionId, active, start,
-			end, null);
+		return findByU_AD_AI_A_T(userId, actionDate, actionId, active, type,
+			start, end, null);
 	}
 
-	public List<SocialEquityLog> findByU_AEI_A_A(long userId,
-		long assetEntryId, String actionId, boolean active, int start, int end,
+	public List<SocialEquityLog> findByU_AD_AI_A_T(long userId, int actionDate,
+		String actionId, boolean active, int type, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				userId, assetEntryId, actionId, active,
+				userId, actionDate, actionId, active, type,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
-		List<SocialEquityLog> list = (List<SocialEquityLog>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_U_AEI_A_A,
+		List<SocialEquityLog> list = (List<SocialEquityLog>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_U_AD_AI_A_T,
 				finderArgs, this);
 
 		if (list == null) {
@@ -654,32 +1486,34 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 				StringBundler query = null;
 
 				if (orderByComparator != null) {
-					query = new StringBundler(6 +
+					query = new StringBundler(7 +
 							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
-					query = new StringBundler(5);
+					query = new StringBundler(6);
 				}
 
 				query.append(_SQL_SELECT_SOCIALEQUITYLOG_WHERE);
 
-				query.append(_FINDER_COLUMN_U_AEI_A_A_USERID_2);
+				query.append(_FINDER_COLUMN_U_AD_AI_A_T_USERID_2);
 
-				query.append(_FINDER_COLUMN_U_AEI_A_A_ASSETENTRYID_2);
+				query.append(_FINDER_COLUMN_U_AD_AI_A_T_ACTIONDATE_2);
 
 				if (actionId == null) {
-					query.append(_FINDER_COLUMN_U_AEI_A_A_ACTIONID_1);
+					query.append(_FINDER_COLUMN_U_AD_AI_A_T_ACTIONID_1);
 				}
 				else {
 					if (actionId.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_U_AEI_A_A_ACTIONID_3);
+						query.append(_FINDER_COLUMN_U_AD_AI_A_T_ACTIONID_3);
 					}
 					else {
-						query.append(_FINDER_COLUMN_U_AEI_A_A_ACTIONID_2);
+						query.append(_FINDER_COLUMN_U_AD_AI_A_T_ACTIONID_2);
 					}
 				}
 
-				query.append(_FINDER_COLUMN_U_AEI_A_A_ACTIVE_2);
+				query.append(_FINDER_COLUMN_U_AD_AI_A_T_ACTIVE_2);
+
+				query.append(_FINDER_COLUMN_U_AD_AI_A_T_TYPE_2);
 
 				if (orderByComparator != null) {
 					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -694,13 +1528,15 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 				qPos.add(userId);
 
-				qPos.add(assetEntryId);
+				qPos.add(actionDate);
 
 				if (actionId != null) {
 					qPos.add(actionId);
 				}
 
 				qPos.add(active);
+
+				qPos.add(type);
 
 				list = (List<SocialEquityLog>)QueryUtil.list(q, getDialect(),
 						start, end);
@@ -715,7 +1551,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_AEI_A_A,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_AD_AI_A_T,
 					finderArgs, list);
 
 				closeSession(session);
@@ -725,29 +1561,32 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		return list;
 	}
 
-	public SocialEquityLog findByU_AEI_A_A_First(long userId,
-		long assetEntryId, String actionId, boolean active,
+	public SocialEquityLog findByU_AD_AI_A_T_First(long userId, int actionDate,
+		String actionId, boolean active, int type,
 		OrderByComparator orderByComparator)
 		throws NoSuchEquityLogException, SystemException {
-		List<SocialEquityLog> list = findByU_AEI_A_A(userId, assetEntryId,
-				actionId, active, 0, 1, orderByComparator);
+		List<SocialEquityLog> list = findByU_AD_AI_A_T(userId, actionDate,
+				actionId, active, type, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(10);
+			StringBundler msg = new StringBundler(12);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
 			msg.append("userId=");
 			msg.append(userId);
 
-			msg.append(", assetEntryId=");
-			msg.append(assetEntryId);
+			msg.append(", actionDate=");
+			msg.append(actionDate);
 
 			msg.append(", actionId=");
 			msg.append(actionId);
 
 			msg.append(", active=");
 			msg.append(active);
+
+			msg.append(", type=");
+			msg.append(type);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -758,30 +1597,35 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		}
 	}
 
-	public SocialEquityLog findByU_AEI_A_A_Last(long userId, long assetEntryId,
-		String actionId, boolean active, OrderByComparator orderByComparator)
+	public SocialEquityLog findByU_AD_AI_A_T_Last(long userId, int actionDate,
+		String actionId, boolean active, int type,
+		OrderByComparator orderByComparator)
 		throws NoSuchEquityLogException, SystemException {
-		int count = countByU_AEI_A_A(userId, assetEntryId, actionId, active);
+		int count = countByU_AD_AI_A_T(userId, actionDate, actionId, active,
+				type);
 
-		List<SocialEquityLog> list = findByU_AEI_A_A(userId, assetEntryId,
-				actionId, active, count - 1, count, orderByComparator);
+		List<SocialEquityLog> list = findByU_AD_AI_A_T(userId, actionDate,
+				actionId, active, type, count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(10);
+			StringBundler msg = new StringBundler(12);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
 			msg.append("userId=");
 			msg.append(userId);
 
-			msg.append(", assetEntryId=");
-			msg.append(assetEntryId);
+			msg.append(", actionDate=");
+			msg.append(actionDate);
 
 			msg.append(", actionId=");
 			msg.append(actionId);
 
 			msg.append(", active=");
 			msg.append(active);
+
+			msg.append(", type=");
+			msg.append(type);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -792,8 +1636,8 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		}
 	}
 
-	public SocialEquityLog[] findByU_AEI_A_A_PrevAndNext(long equityLogId,
-		long userId, long assetEntryId, String actionId, boolean active,
+	public SocialEquityLog[] findByU_AD_AI_A_T_PrevAndNext(long equityLogId,
+		long userId, int actionDate, String actionId, boolean active, int type,
 		OrderByComparator orderByComparator)
 		throws NoSuchEquityLogException, SystemException {
 		SocialEquityLog socialEquityLog = findByPrimaryKey(equityLogId);
@@ -805,15 +1649,15 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 			SocialEquityLog[] array = new SocialEquityLogImpl[3];
 
-			array[0] = getByU_AEI_A_A_PrevAndNext(session, socialEquityLog,
-					userId, assetEntryId, actionId, active, orderByComparator,
-					true);
+			array[0] = getByU_AD_AI_A_T_PrevAndNext(session, socialEquityLog,
+					userId, actionDate, actionId, active, type,
+					orderByComparator, true);
 
 			array[1] = socialEquityLog;
 
-			array[2] = getByU_AEI_A_A_PrevAndNext(session, socialEquityLog,
-					userId, assetEntryId, actionId, active, orderByComparator,
-					false);
+			array[2] = getByU_AD_AI_A_T_PrevAndNext(session, socialEquityLog,
+					userId, actionDate, actionId, active, type,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -825,10 +1669,10 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		}
 	}
 
-	protected SocialEquityLog getByU_AEI_A_A_PrevAndNext(Session session,
-		SocialEquityLog socialEquityLog, long userId, long assetEntryId,
-		String actionId, boolean active, OrderByComparator orderByComparator,
-		boolean previous) {
+	protected SocialEquityLog getByU_AD_AI_A_T_PrevAndNext(Session session,
+		SocialEquityLog socialEquityLog, long userId, int actionDate,
+		String actionId, boolean active, int type,
+		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
@@ -841,23 +1685,25 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 		query.append(_SQL_SELECT_SOCIALEQUITYLOG_WHERE);
 
-		query.append(_FINDER_COLUMN_U_AEI_A_A_USERID_2);
+		query.append(_FINDER_COLUMN_U_AD_AI_A_T_USERID_2);
 
-		query.append(_FINDER_COLUMN_U_AEI_A_A_ASSETENTRYID_2);
+		query.append(_FINDER_COLUMN_U_AD_AI_A_T_ACTIONDATE_2);
 
 		if (actionId == null) {
-			query.append(_FINDER_COLUMN_U_AEI_A_A_ACTIONID_1);
+			query.append(_FINDER_COLUMN_U_AD_AI_A_T_ACTIONID_1);
 		}
 		else {
 			if (actionId.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_U_AEI_A_A_ACTIONID_3);
+				query.append(_FINDER_COLUMN_U_AD_AI_A_T_ACTIONID_3);
 			}
 			else {
-				query.append(_FINDER_COLUMN_U_AEI_A_A_ACTIONID_2);
+				query.append(_FINDER_COLUMN_U_AD_AI_A_T_ACTIONID_2);
 			}
 		}
 
-		query.append(_FINDER_COLUMN_U_AEI_A_A_ACTIVE_2);
+		query.append(_FINDER_COLUMN_U_AD_AI_A_T_ACTIVE_2);
+
+		query.append(_FINDER_COLUMN_U_AD_AI_A_T_TYPE_2);
 
 		if (orderByComparator != null) {
 			String[] orderByFields = orderByComparator.getOrderByFields();
@@ -924,13 +1770,15 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 		qPos.add(userId);
 
-		qPos.add(assetEntryId);
+		qPos.add(actionDate);
 
 		if (actionId != null) {
 			qPos.add(actionId);
 		}
 
 		qPos.add(active);
+
+		qPos.add(type);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByValues(socialEquityLog);
@@ -947,6 +1795,497 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		}
 		else {
 			return null;
+		}
+	}
+
+	public List<SocialEquityLog> findByU_AI_A_T(long userId, String actionId,
+		boolean active, int type) throws SystemException {
+		return findByU_AI_A_T(userId, actionId, active, type,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	public List<SocialEquityLog> findByU_AI_A_T(long userId, String actionId,
+		boolean active, int type, int start, int end) throws SystemException {
+		return findByU_AI_A_T(userId, actionId, active, type, start, end, null);
+	}
+
+	public List<SocialEquityLog> findByU_AI_A_T(long userId, String actionId,
+		boolean active, int type, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				userId, actionId, active, type,
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<SocialEquityLog> list = (List<SocialEquityLog>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_U_AI_A_T,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = null;
+
+				if (orderByComparator != null) {
+					query = new StringBundler(6 +
+							(orderByComparator.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(5);
+				}
+
+				query.append(_SQL_SELECT_SOCIALEQUITYLOG_WHERE);
+
+				query.append(_FINDER_COLUMN_U_AI_A_T_USERID_2);
+
+				if (actionId == null) {
+					query.append(_FINDER_COLUMN_U_AI_A_T_ACTIONID_1);
+				}
+				else {
+					if (actionId.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_U_AI_A_T_ACTIONID_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_U_AI_A_T_ACTIONID_2);
+					}
+				}
+
+				query.append(_FINDER_COLUMN_U_AI_A_T_ACTIVE_2);
+
+				query.append(_FINDER_COLUMN_U_AI_A_T_TYPE_2);
+
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				if (actionId != null) {
+					qPos.add(actionId);
+				}
+
+				qPos.add(active);
+
+				qPos.add(type);
+
+				list = (List<SocialEquityLog>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SocialEquityLog>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_AI_A_T,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public SocialEquityLog findByU_AI_A_T_First(long userId, String actionId,
+		boolean active, int type, OrderByComparator orderByComparator)
+		throws NoSuchEquityLogException, SystemException {
+		List<SocialEquityLog> list = findByU_AI_A_T(userId, actionId, active,
+				type, 0, 1, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(10);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("userId=");
+			msg.append(userId);
+
+			msg.append(", actionId=");
+			msg.append(actionId);
+
+			msg.append(", active=");
+			msg.append(active);
+
+			msg.append(", type=");
+			msg.append(type);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEquityLogException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public SocialEquityLog findByU_AI_A_T_Last(long userId, String actionId,
+		boolean active, int type, OrderByComparator orderByComparator)
+		throws NoSuchEquityLogException, SystemException {
+		int count = countByU_AI_A_T(userId, actionId, active, type);
+
+		List<SocialEquityLog> list = findByU_AI_A_T(userId, actionId, active,
+				type, count - 1, count, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(10);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("userId=");
+			msg.append(userId);
+
+			msg.append(", actionId=");
+			msg.append(actionId);
+
+			msg.append(", active=");
+			msg.append(active);
+
+			msg.append(", type=");
+			msg.append(type);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEquityLogException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public SocialEquityLog[] findByU_AI_A_T_PrevAndNext(long equityLogId,
+		long userId, String actionId, boolean active, int type,
+		OrderByComparator orderByComparator)
+		throws NoSuchEquityLogException, SystemException {
+		SocialEquityLog socialEquityLog = findByPrimaryKey(equityLogId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SocialEquityLog[] array = new SocialEquityLogImpl[3];
+
+			array[0] = getByU_AI_A_T_PrevAndNext(session, socialEquityLog,
+					userId, actionId, active, type, orderByComparator, true);
+
+			array[1] = socialEquityLog;
+
+			array[2] = getByU_AI_A_T_PrevAndNext(session, socialEquityLog,
+					userId, actionId, active, type, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected SocialEquityLog getByU_AI_A_T_PrevAndNext(Session session,
+		SocialEquityLog socialEquityLog, long userId, String actionId,
+		boolean active, int type, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_SOCIALEQUITYLOG_WHERE);
+
+		query.append(_FINDER_COLUMN_U_AI_A_T_USERID_2);
+
+		if (actionId == null) {
+			query.append(_FINDER_COLUMN_U_AI_A_T_ACTIONID_1);
+		}
+		else {
+			if (actionId.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_U_AI_A_T_ACTIONID_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_U_AI_A_T_ACTIONID_2);
+			}
+		}
+
+		query.append(_FINDER_COLUMN_U_AI_A_T_ACTIVE_2);
+
+		query.append(_FINDER_COLUMN_U_AI_A_T_TYPE_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(userId);
+
+		if (actionId != null) {
+			qPos.add(actionId);
+		}
+
+		qPos.add(active);
+
+		qPos.add(type);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(socialEquityLog);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<SocialEquityLog> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	public SocialEquityLog findByU_AEI_AD_AI_A_T(long userId,
+		long assetEntryId, int actionDate, String actionId, boolean active,
+		int type) throws NoSuchEquityLogException, SystemException {
+		SocialEquityLog socialEquityLog = fetchByU_AEI_AD_AI_A_T(userId,
+				assetEntryId, actionDate, actionId, active, type);
+
+		if (socialEquityLog == null) {
+			StringBundler msg = new StringBundler(14);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("userId=");
+			msg.append(userId);
+
+			msg.append(", assetEntryId=");
+			msg.append(assetEntryId);
+
+			msg.append(", actionDate=");
+			msg.append(actionDate);
+
+			msg.append(", actionId=");
+			msg.append(actionId);
+
+			msg.append(", active=");
+			msg.append(active);
+
+			msg.append(", type=");
+			msg.append(type);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchEquityLogException(msg.toString());
+		}
+
+		return socialEquityLog;
+	}
+
+	public SocialEquityLog fetchByU_AEI_AD_AI_A_T(long userId,
+		long assetEntryId, int actionDate, String actionId, boolean active,
+		int type) throws SystemException {
+		return fetchByU_AEI_AD_AI_A_T(userId, assetEntryId, actionDate,
+			actionId, active, type, true);
+	}
+
+	public SocialEquityLog fetchByU_AEI_AD_AI_A_T(long userId,
+		long assetEntryId, int actionDate, String actionId, boolean active,
+		int type, boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				userId, assetEntryId, actionDate, actionId, active, type
+			};
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_AEI_AD_AI_A_T,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(7);
+
+				query.append(_SQL_SELECT_SOCIALEQUITYLOG_WHERE);
+
+				query.append(_FINDER_COLUMN_U_AEI_AD_AI_A_T_USERID_2);
+
+				query.append(_FINDER_COLUMN_U_AEI_AD_AI_A_T_ASSETENTRYID_2);
+
+				query.append(_FINDER_COLUMN_U_AEI_AD_AI_A_T_ACTIONDATE_2);
+
+				if (actionId == null) {
+					query.append(_FINDER_COLUMN_U_AEI_AD_AI_A_T_ACTIONID_1);
+				}
+				else {
+					if (actionId.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_U_AEI_AD_AI_A_T_ACTIONID_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_U_AEI_AD_AI_A_T_ACTIONID_2);
+					}
+				}
+
+				query.append(_FINDER_COLUMN_U_AEI_AD_AI_A_T_ACTIVE_2);
+
+				query.append(_FINDER_COLUMN_U_AEI_AD_AI_A_T_TYPE_2);
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				qPos.add(assetEntryId);
+
+				qPos.add(actionDate);
+
+				if (actionId != null) {
+					qPos.add(actionId);
+				}
+
+				qPos.add(active);
+
+				qPos.add(type);
+
+				List<SocialEquityLog> list = q.list();
+
+				result = list;
+
+				SocialEquityLog socialEquityLog = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_AEI_AD_AI_A_T,
+						finderArgs, list);
+				}
+				else {
+					socialEquityLog = list.get(0);
+
+					cacheResult(socialEquityLog);
+
+					if ((socialEquityLog.getUserId() != userId) ||
+							(socialEquityLog.getAssetEntryId() != assetEntryId) ||
+							(socialEquityLog.getActionDate() != actionDate) ||
+							(socialEquityLog.getActionId() == null) ||
+							!socialEquityLog.getActionId().equals(actionId) ||
+							(socialEquityLog.getActive() != active) ||
+							(socialEquityLog.getType() != type)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_AEI_AD_AI_A_T,
+							finderArgs, socialEquityLog);
+					}
+				}
+
+				return socialEquityLog;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_AEI_AD_AI_A_T,
+						finderArgs, new ArrayList<SocialEquityLog>());
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (SocialEquityLog)result;
+			}
 		}
 	}
 
@@ -1025,6 +2364,22 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		return list;
 	}
 
+	public void removeByAEI_AD_AI_A_T(long assetEntryId, int actionDate,
+		String actionId, boolean active, int type) throws SystemException {
+		for (SocialEquityLog socialEquityLog : findByAEI_AD_AI_A_T(
+				assetEntryId, actionDate, actionId, active, type)) {
+			remove(socialEquityLog);
+		}
+	}
+
+	public void removeByAEI_AI_A_T(long assetEntryId, String actionId,
+		boolean active, int type) throws SystemException {
+		for (SocialEquityLog socialEquityLog : findByAEI_AI_A_T(assetEntryId,
+				actionId, active, type)) {
+			remove(socialEquityLog);
+		}
+	}
+
 	public void removeByAEI_T_A(long assetEntryId, int type, boolean active)
 		throws SystemException {
 		for (SocialEquityLog socialEquityLog : findByAEI_T_A(assetEntryId,
@@ -1033,18 +2388,183 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		}
 	}
 
-	public void removeByU_AEI_A_A(long userId, long assetEntryId,
-		String actionId, boolean active) throws SystemException {
-		for (SocialEquityLog socialEquityLog : findByU_AEI_A_A(userId,
-				assetEntryId, actionId, active)) {
+	public void removeByU_AD_AI_A_T(long userId, int actionDate,
+		String actionId, boolean active, int type) throws SystemException {
+		for (SocialEquityLog socialEquityLog : findByU_AD_AI_A_T(userId,
+				actionDate, actionId, active, type)) {
 			remove(socialEquityLog);
 		}
+	}
+
+	public void removeByU_AI_A_T(long userId, String actionId, boolean active,
+		int type) throws SystemException {
+		for (SocialEquityLog socialEquityLog : findByU_AI_A_T(userId, actionId,
+				active, type)) {
+			remove(socialEquityLog);
+		}
+	}
+
+	public void removeByU_AEI_AD_AI_A_T(long userId, long assetEntryId,
+		int actionDate, String actionId, boolean active, int type)
+		throws NoSuchEquityLogException, SystemException {
+		SocialEquityLog socialEquityLog = findByU_AEI_AD_AI_A_T(userId,
+				assetEntryId, actionDate, actionId, active, type);
+
+		remove(socialEquityLog);
 	}
 
 	public void removeAll() throws SystemException {
 		for (SocialEquityLog socialEquityLog : findAll()) {
 			remove(socialEquityLog);
 		}
+	}
+
+	public int countByAEI_AD_AI_A_T(long assetEntryId, int actionDate,
+		String actionId, boolean active, int type) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				assetEntryId, actionDate, actionId, active, type
+			};
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_AEI_AD_AI_A_T,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(6);
+
+				query.append(_SQL_COUNT_SOCIALEQUITYLOG_WHERE);
+
+				query.append(_FINDER_COLUMN_AEI_AD_AI_A_T_ASSETENTRYID_2);
+
+				query.append(_FINDER_COLUMN_AEI_AD_AI_A_T_ACTIONDATE_2);
+
+				if (actionId == null) {
+					query.append(_FINDER_COLUMN_AEI_AD_AI_A_T_ACTIONID_1);
+				}
+				else {
+					if (actionId.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_AEI_AD_AI_A_T_ACTIONID_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_AEI_AD_AI_A_T_ACTIONID_2);
+					}
+				}
+
+				query.append(_FINDER_COLUMN_AEI_AD_AI_A_T_ACTIVE_2);
+
+				query.append(_FINDER_COLUMN_AEI_AD_AI_A_T_TYPE_2);
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(assetEntryId);
+
+				qPos.add(actionDate);
+
+				if (actionId != null) {
+					qPos.add(actionId);
+				}
+
+				qPos.add(active);
+
+				qPos.add(type);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_AEI_AD_AI_A_T,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByAEI_AI_A_T(long assetEntryId, String actionId,
+		boolean active, int type) throws SystemException {
+		Object[] finderArgs = new Object[] { assetEntryId, actionId, active, type };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_AEI_AI_A_T,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(5);
+
+				query.append(_SQL_COUNT_SOCIALEQUITYLOG_WHERE);
+
+				query.append(_FINDER_COLUMN_AEI_AI_A_T_ASSETENTRYID_2);
+
+				if (actionId == null) {
+					query.append(_FINDER_COLUMN_AEI_AI_A_T_ACTIONID_1);
+				}
+				else {
+					if (actionId.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_AEI_AI_A_T_ACTIONID_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_AEI_AI_A_T_ACTIONID_2);
+					}
+				}
+
+				query.append(_FINDER_COLUMN_AEI_AI_A_T_ACTIVE_2);
+
+				query.append(_FINDER_COLUMN_AEI_AI_A_T_TYPE_2);
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(assetEntryId);
+
+				if (actionId != null) {
+					qPos.add(actionId);
+				}
+
+				qPos.add(active);
+
+				qPos.add(type);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_AEI_AI_A_T,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
 	}
 
 	public int countByAEI_T_A(long assetEntryId, int type, boolean active)
@@ -1102,13 +2622,88 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		return count.intValue();
 	}
 
-	public int countByU_AEI_A_A(long userId, long assetEntryId,
-		String actionId, boolean active) throws SystemException {
+	public int countByU_AD_AI_A_T(long userId, int actionDate, String actionId,
+		boolean active, int type) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				userId, assetEntryId, actionId, active
+				userId, actionDate, actionId, active, type
 			};
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_AEI_A_A,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_AD_AI_A_T,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(6);
+
+				query.append(_SQL_COUNT_SOCIALEQUITYLOG_WHERE);
+
+				query.append(_FINDER_COLUMN_U_AD_AI_A_T_USERID_2);
+
+				query.append(_FINDER_COLUMN_U_AD_AI_A_T_ACTIONDATE_2);
+
+				if (actionId == null) {
+					query.append(_FINDER_COLUMN_U_AD_AI_A_T_ACTIONID_1);
+				}
+				else {
+					if (actionId.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_U_AD_AI_A_T_ACTIONID_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_U_AD_AI_A_T_ACTIONID_2);
+					}
+				}
+
+				query.append(_FINDER_COLUMN_U_AD_AI_A_T_ACTIVE_2);
+
+				query.append(_FINDER_COLUMN_U_AD_AI_A_T_TYPE_2);
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				qPos.add(actionDate);
+
+				if (actionId != null) {
+					qPos.add(actionId);
+				}
+
+				qPos.add(active);
+
+				qPos.add(type);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_AD_AI_A_T,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByU_AI_A_T(long userId, String actionId, boolean active,
+		int type) throws SystemException {
+		Object[] finderArgs = new Object[] { userId, actionId, active, type };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_AI_A_T,
 				finderArgs, this);
 
 		if (count == null) {
@@ -1121,23 +2716,23 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 				query.append(_SQL_COUNT_SOCIALEQUITYLOG_WHERE);
 
-				query.append(_FINDER_COLUMN_U_AEI_A_A_USERID_2);
-
-				query.append(_FINDER_COLUMN_U_AEI_A_A_ASSETENTRYID_2);
+				query.append(_FINDER_COLUMN_U_AI_A_T_USERID_2);
 
 				if (actionId == null) {
-					query.append(_FINDER_COLUMN_U_AEI_A_A_ACTIONID_1);
+					query.append(_FINDER_COLUMN_U_AI_A_T_ACTIONID_1);
 				}
 				else {
 					if (actionId.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_U_AEI_A_A_ACTIONID_3);
+						query.append(_FINDER_COLUMN_U_AI_A_T_ACTIONID_3);
 					}
 					else {
-						query.append(_FINDER_COLUMN_U_AEI_A_A_ACTIONID_2);
+						query.append(_FINDER_COLUMN_U_AI_A_T_ACTIONID_2);
 					}
 				}
 
-				query.append(_FINDER_COLUMN_U_AEI_A_A_ACTIVE_2);
+				query.append(_FINDER_COLUMN_U_AI_A_T_ACTIVE_2);
+
+				query.append(_FINDER_COLUMN_U_AI_A_T_TYPE_2);
 
 				String sql = query.toString();
 
@@ -1147,13 +2742,13 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 				qPos.add(userId);
 
-				qPos.add(assetEntryId);
-
 				if (actionId != null) {
 					qPos.add(actionId);
 				}
 
 				qPos.add(active);
+
+				qPos.add(type);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1165,7 +2760,89 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_AEI_A_A,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_AI_A_T,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByU_AEI_AD_AI_A_T(long userId, long assetEntryId,
+		int actionDate, String actionId, boolean active, int type)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				userId, assetEntryId, actionDate, actionId, active, type
+			};
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_AEI_AD_AI_A_T,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(7);
+
+				query.append(_SQL_COUNT_SOCIALEQUITYLOG_WHERE);
+
+				query.append(_FINDER_COLUMN_U_AEI_AD_AI_A_T_USERID_2);
+
+				query.append(_FINDER_COLUMN_U_AEI_AD_AI_A_T_ASSETENTRYID_2);
+
+				query.append(_FINDER_COLUMN_U_AEI_AD_AI_A_T_ACTIONDATE_2);
+
+				if (actionId == null) {
+					query.append(_FINDER_COLUMN_U_AEI_AD_AI_A_T_ACTIONID_1);
+				}
+				else {
+					if (actionId.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_U_AEI_AD_AI_A_T_ACTIONID_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_U_AEI_AD_AI_A_T_ACTIONID_2);
+					}
+				}
+
+				query.append(_FINDER_COLUMN_U_AEI_AD_AI_A_T_ACTIVE_2);
+
+				query.append(_FINDER_COLUMN_U_AEI_AD_AI_A_T_TYPE_2);
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				qPos.add(assetEntryId);
+
+				qPos.add(actionDate);
+
+				if (actionId != null) {
+					qPos.add(actionId);
+				}
+
+				qPos.add(active);
+
+				qPos.add(type);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_AEI_AD_AI_A_T,
 					finderArgs, count);
 
 				closeSession(session);
@@ -1257,15 +2934,43 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	private static final String _SQL_SELECT_SOCIALEQUITYLOG_WHERE = "SELECT socialEquityLog FROM SocialEquityLog socialEquityLog WHERE ";
 	private static final String _SQL_COUNT_SOCIALEQUITYLOG = "SELECT COUNT(socialEquityLog) FROM SocialEquityLog socialEquityLog";
 	private static final String _SQL_COUNT_SOCIALEQUITYLOG_WHERE = "SELECT COUNT(socialEquityLog) FROM SocialEquityLog socialEquityLog WHERE ";
+	private static final String _FINDER_COLUMN_AEI_AD_AI_A_T_ASSETENTRYID_2 = "socialEquityLog.assetEntryId = ? AND ";
+	private static final String _FINDER_COLUMN_AEI_AD_AI_A_T_ACTIONDATE_2 = "socialEquityLog.actionDate = ? AND ";
+	private static final String _FINDER_COLUMN_AEI_AD_AI_A_T_ACTIONID_1 = "socialEquityLog.actionId IS NULL AND ";
+	private static final String _FINDER_COLUMN_AEI_AD_AI_A_T_ACTIONID_2 = "socialEquityLog.actionId = ? AND ";
+	private static final String _FINDER_COLUMN_AEI_AD_AI_A_T_ACTIONID_3 = "(socialEquityLog.actionId IS NULL OR socialEquityLog.actionId = ?) AND ";
+	private static final String _FINDER_COLUMN_AEI_AD_AI_A_T_ACTIVE_2 = "socialEquityLog.active = ? AND ";
+	private static final String _FINDER_COLUMN_AEI_AD_AI_A_T_TYPE_2 = "socialEquityLog.type = ?";
+	private static final String _FINDER_COLUMN_AEI_AI_A_T_ASSETENTRYID_2 = "socialEquityLog.assetEntryId = ? AND ";
+	private static final String _FINDER_COLUMN_AEI_AI_A_T_ACTIONID_1 = "socialEquityLog.actionId IS NULL AND ";
+	private static final String _FINDER_COLUMN_AEI_AI_A_T_ACTIONID_2 = "socialEquityLog.actionId = ? AND ";
+	private static final String _FINDER_COLUMN_AEI_AI_A_T_ACTIONID_3 = "(socialEquityLog.actionId IS NULL OR socialEquityLog.actionId = ?) AND ";
+	private static final String _FINDER_COLUMN_AEI_AI_A_T_ACTIVE_2 = "socialEquityLog.active = ? AND ";
+	private static final String _FINDER_COLUMN_AEI_AI_A_T_TYPE_2 = "socialEquityLog.type = ?";
 	private static final String _FINDER_COLUMN_AEI_T_A_ASSETENTRYID_2 = "socialEquityLog.assetEntryId = ? AND ";
 	private static final String _FINDER_COLUMN_AEI_T_A_TYPE_2 = "socialEquityLog.type = ? AND ";
 	private static final String _FINDER_COLUMN_AEI_T_A_ACTIVE_2 = "socialEquityLog.active = ?";
-	private static final String _FINDER_COLUMN_U_AEI_A_A_USERID_2 = "socialEquityLog.userId = ? AND ";
-	private static final String _FINDER_COLUMN_U_AEI_A_A_ASSETENTRYID_2 = "socialEquityLog.assetEntryId = ? AND ";
-	private static final String _FINDER_COLUMN_U_AEI_A_A_ACTIONID_1 = "socialEquityLog.actionId IS NULL AND ";
-	private static final String _FINDER_COLUMN_U_AEI_A_A_ACTIONID_2 = "socialEquityLog.actionId = ? AND ";
-	private static final String _FINDER_COLUMN_U_AEI_A_A_ACTIONID_3 = "(socialEquityLog.actionId IS NULL OR socialEquityLog.actionId = ?) AND ";
-	private static final String _FINDER_COLUMN_U_AEI_A_A_ACTIVE_2 = "socialEquityLog.active = ?";
+	private static final String _FINDER_COLUMN_U_AD_AI_A_T_USERID_2 = "socialEquityLog.userId = ? AND ";
+	private static final String _FINDER_COLUMN_U_AD_AI_A_T_ACTIONDATE_2 = "socialEquityLog.actionDate = ? AND ";
+	private static final String _FINDER_COLUMN_U_AD_AI_A_T_ACTIONID_1 = "socialEquityLog.actionId IS NULL AND ";
+	private static final String _FINDER_COLUMN_U_AD_AI_A_T_ACTIONID_2 = "socialEquityLog.actionId = ? AND ";
+	private static final String _FINDER_COLUMN_U_AD_AI_A_T_ACTIONID_3 = "(socialEquityLog.actionId IS NULL OR socialEquityLog.actionId = ?) AND ";
+	private static final String _FINDER_COLUMN_U_AD_AI_A_T_ACTIVE_2 = "socialEquityLog.active = ? AND ";
+	private static final String _FINDER_COLUMN_U_AD_AI_A_T_TYPE_2 = "socialEquityLog.type = ?";
+	private static final String _FINDER_COLUMN_U_AI_A_T_USERID_2 = "socialEquityLog.userId = ? AND ";
+	private static final String _FINDER_COLUMN_U_AI_A_T_ACTIONID_1 = "socialEquityLog.actionId IS NULL AND ";
+	private static final String _FINDER_COLUMN_U_AI_A_T_ACTIONID_2 = "socialEquityLog.actionId = ? AND ";
+	private static final String _FINDER_COLUMN_U_AI_A_T_ACTIONID_3 = "(socialEquityLog.actionId IS NULL OR socialEquityLog.actionId = ?) AND ";
+	private static final String _FINDER_COLUMN_U_AI_A_T_ACTIVE_2 = "socialEquityLog.active = ? AND ";
+	private static final String _FINDER_COLUMN_U_AI_A_T_TYPE_2 = "socialEquityLog.type = ?";
+	private static final String _FINDER_COLUMN_U_AEI_AD_AI_A_T_USERID_2 = "socialEquityLog.userId = ? AND ";
+	private static final String _FINDER_COLUMN_U_AEI_AD_AI_A_T_ASSETENTRYID_2 = "socialEquityLog.assetEntryId = ? AND ";
+	private static final String _FINDER_COLUMN_U_AEI_AD_AI_A_T_ACTIONDATE_2 = "socialEquityLog.actionDate = ? AND ";
+	private static final String _FINDER_COLUMN_U_AEI_AD_AI_A_T_ACTIONID_1 = "socialEquityLog.actionId IS NULL AND ";
+	private static final String _FINDER_COLUMN_U_AEI_AD_AI_A_T_ACTIONID_2 = "socialEquityLog.actionId = ? AND ";
+	private static final String _FINDER_COLUMN_U_AEI_AD_AI_A_T_ACTIONID_3 = "(socialEquityLog.actionId IS NULL OR socialEquityLog.actionId = ?) AND ";
+	private static final String _FINDER_COLUMN_U_AEI_AD_AI_A_T_ACTIVE_2 = "socialEquityLog.active = ? AND ";
+	private static final String _FINDER_COLUMN_U_AEI_AD_AI_A_T_TYPE_2 = "socialEquityLog.type = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "socialEquityLog.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No SocialEquityLog exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No SocialEquityLog exists with the key {";

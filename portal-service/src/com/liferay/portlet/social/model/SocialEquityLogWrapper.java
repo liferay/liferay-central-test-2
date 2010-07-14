@@ -107,6 +107,18 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 		_socialEquityLog.setActionDate(actionDate);
 	}
 
+	public boolean getActive() {
+		return _socialEquityLog.getActive();
+	}
+
+	public boolean isActive() {
+		return _socialEquityLog.isActive();
+	}
+
+	public void setActive(boolean active) {
+		_socialEquityLog.setActive(active);
+	}
+
 	public int getType() {
 		return _socialEquityLog.getType();
 	}
@@ -129,18 +141,6 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 
 	public void setValidity(int validity) {
 		_socialEquityLog.setValidity(validity);
-	}
-
-	public boolean getActive() {
-		return _socialEquityLog.getActive();
-	}
-
-	public boolean isActive() {
-		return _socialEquityLog.isActive();
-	}
-
-	public void setActive(boolean active) {
-		_socialEquityLog.setActive(active);
 	}
 
 	public com.liferay.portlet.social.model.SocialEquityLog toEscapedModel() {

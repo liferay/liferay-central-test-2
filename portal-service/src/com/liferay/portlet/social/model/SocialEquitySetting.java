@@ -38,4 +38,6 @@ package com.liferay.portlet.social.model;
  * @generated
  */
 public interface SocialEquitySetting extends SocialEquitySettingModel {
+	public void update(
+		com.liferay.portlet.social.model.SocialEquityActionMapping equityActionMapping);
 }

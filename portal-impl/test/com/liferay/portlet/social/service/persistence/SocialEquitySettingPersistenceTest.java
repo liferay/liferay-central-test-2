@@ -68,7 +68,9 @@ public class SocialEquitySettingPersistenceTest extends BasePersistenceTestCase 
 		newSocialEquitySetting.setCompanyId(nextLong());
 		newSocialEquitySetting.setClassNameId(nextLong());
 		newSocialEquitySetting.setActionId(randomString());
+		newSocialEquitySetting.setDailyLimit(nextInt());
 		newSocialEquitySetting.setType(nextInt());
+		newSocialEquitySetting.setUniqueEntry(randomBoolean());
 		newSocialEquitySetting.setValue(nextInt());
 		newSocialEquitySetting.setValidity(nextInt());
 
@@ -86,8 +88,12 @@ public class SocialEquitySettingPersistenceTest extends BasePersistenceTestCase 
 			newSocialEquitySetting.getClassNameId());
 		assertEquals(existingSocialEquitySetting.getActionId(),
 			newSocialEquitySetting.getActionId());
+		assertEquals(existingSocialEquitySetting.getDailyLimit(),
+			newSocialEquitySetting.getDailyLimit());
 		assertEquals(existingSocialEquitySetting.getType(),
 			newSocialEquitySetting.getType());
+		assertEquals(existingSocialEquitySetting.getUniqueEntry(),
+			newSocialEquitySetting.getUniqueEntry());
 		assertEquals(existingSocialEquitySetting.getValue(),
 			newSocialEquitySetting.getValue());
 		assertEquals(existingSocialEquitySetting.getValidity(),
@@ -171,7 +177,9 @@ public class SocialEquitySettingPersistenceTest extends BasePersistenceTestCase 
 		socialEquitySetting.setCompanyId(nextLong());
 		socialEquitySetting.setClassNameId(nextLong());
 		socialEquitySetting.setActionId(randomString());
+		socialEquitySetting.setDailyLimit(nextInt());
 		socialEquitySetting.setType(nextInt());
+		socialEquitySetting.setUniqueEntry(randomBoolean());
 		socialEquitySetting.setValue(nextInt());
 		socialEquitySetting.setValidity(nextInt());
 

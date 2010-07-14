@@ -1515,10 +1515,10 @@ create table SocialEquityLog (
 	assetEntryId LONG,
 	actionId VARCHAR(75) null,
 	actionDate INTEGER,
+	active_ BOOLEAN,
 	type_ INTEGER,
 	value INTEGER,
-	validity INTEGER,
-	active_ BOOLEAN
+	validity INTEGER
 );
 
 create table SocialEquitySetting (
@@ -1527,7 +1527,9 @@ create table SocialEquitySetting (
 	companyId LONG,
 	classNameId LONG,
 	actionId VARCHAR(75) null,
+	dailyLimit INTEGER,
 	type_ INTEGER,
+	uniqueEntry BOOLEAN,
 	value INTEGER,
 	validity INTEGER
 );

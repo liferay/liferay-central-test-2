@@ -331,7 +331,9 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		socialEquitySettingImpl.setCompanyId(socialEquitySetting.getCompanyId());
 		socialEquitySettingImpl.setClassNameId(socialEquitySetting.getClassNameId());
 		socialEquitySettingImpl.setActionId(socialEquitySetting.getActionId());
+		socialEquitySettingImpl.setDailyLimit(socialEquitySetting.getDailyLimit());
 		socialEquitySettingImpl.setType(socialEquitySetting.getType());
+		socialEquitySettingImpl.setUniqueEntry(socialEquitySetting.isUniqueEntry());
 		socialEquitySettingImpl.setValue(socialEquitySetting.getValue());
 		socialEquitySettingImpl.setValidity(socialEquitySetting.getValidity());
 

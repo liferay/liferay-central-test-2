@@ -1812,10 +1812,10 @@
 		<field name="assetEntryId" type="long" />
 		<field name="actionId" type="String" />
 		<field name="actionDate" type="int" />
+		<field name="active" type="boolean" />
 		<field name="type" type="int" />
 		<field name="value" type="int" />
 		<field name="validity" type="int" />
-		<field name="active" type="boolean" />
 	</model>
 	<model name="com.liferay.portlet.social.model.SocialEquitySetting">
 		<field name="equitySettingId" type="long" />
@@ -1823,7 +1823,9 @@
 		<field name="companyId" type="long" />
 		<field name="classNameId" type="long" />
 		<field name="actionId" type="String" />
+		<field name="dailyLimit" type="int" />
 		<field name="type" type="int" />
+		<field name="uniqueEntry" type="boolean" />
 		<field name="value" type="int" />
 		<field name="validity" type="int" />
 	</model>

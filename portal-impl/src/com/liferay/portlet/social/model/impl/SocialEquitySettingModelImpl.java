@@ -59,11 +59,13 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "classNameId", new Integer(Types.BIGINT) },
 			{ "actionId", new Integer(Types.VARCHAR) },
+			{ "dailyLimit", new Integer(Types.INTEGER) },
 			{ "type_", new Integer(Types.INTEGER) },
+			{ "uniqueEntry", new Integer(Types.BOOLEAN) },
 			{ "value", new Integer(Types.INTEGER) },
 			{ "validity", new Integer(Types.INTEGER) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table SocialEquitySetting (equitySettingId LONG not null primary key,groupId LONG,companyId LONG,classNameId LONG,actionId VARCHAR(75) null,type_ INTEGER,value INTEGER,validity INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table SocialEquitySetting (equitySettingId LONG not null primary key,groupId LONG,companyId LONG,classNameId LONG,actionId VARCHAR(75) null,dailyLimit INTEGER,type_ INTEGER,uniqueEntry BOOLEAN,value INTEGER,validity INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table SocialEquitySetting";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -173,6 +175,14 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 		return GetterUtil.getString(_originalActionId);
 	}
 
+	public int getDailyLimit() {
+		return _dailyLimit;
+	}
+
+	public void setDailyLimit(int dailyLimit) {
+		_dailyLimit = dailyLimit;
+	}
+
 	public int getType() {
 		return _type;
 	}
@@ -189,6 +199,18 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 
 	public int getOriginalType() {
 		return _originalType;
+	}
+
+	public boolean getUniqueEntry() {
+		return _uniqueEntry;
+	}
+
+	public boolean isUniqueEntry() {
+		return _uniqueEntry;
+	}
+
+	public void setUniqueEntry(boolean uniqueEntry) {
+		_uniqueEntry = uniqueEntry;
 	}
 
 	public int getValue() {
@@ -239,7 +261,9 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 		clone.setCompanyId(getCompanyId());
 		clone.setClassNameId(getClassNameId());
 		clone.setActionId(getActionId());
+		clone.setDailyLimit(getDailyLimit());
 		clone.setType(getType());
+		clone.setUniqueEntry(getUniqueEntry());
 		clone.setValue(getValue());
 		clone.setValidity(getValidity());
 
@@ -289,7 +313,7 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{equitySettingId=");
 		sb.append(getEquitySettingId());
@@ -301,8 +325,12 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 		sb.append(getClassNameId());
 		sb.append(", actionId=");
 		sb.append(getActionId());
+		sb.append(", dailyLimit=");
+		sb.append(getDailyLimit());
 		sb.append(", type=");
 		sb.append(getType());
+		sb.append(", uniqueEntry=");
+		sb.append(getUniqueEntry());
 		sb.append(", value=");
 		sb.append(getValue());
 		sb.append(", validity=");
@@ -313,7 +341,7 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.social.model.SocialEquitySetting");
@@ -340,8 +368,16 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 		sb.append(getActionId());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>dailyLimit</column-name><column-value><![CDATA[");
+		sb.append(getDailyLimit());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>type</column-name><column-value><![CDATA[");
 		sb.append(getType());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>uniqueEntry</column-name><column-value><![CDATA[");
+		sb.append(getUniqueEntry());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>value</column-name><column-value><![CDATA[");
@@ -367,9 +403,11 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 	private boolean _setOriginalClassNameId;
 	private String _actionId;
 	private String _originalActionId;
+	private int _dailyLimit;
 	private int _type;
 	private int _originalType;
 	private boolean _setOriginalType;
+	private boolean _uniqueEntry;
 	private int _value;
 	private int _validity;
 	private transient ExpandoBridge _expandoBridge;

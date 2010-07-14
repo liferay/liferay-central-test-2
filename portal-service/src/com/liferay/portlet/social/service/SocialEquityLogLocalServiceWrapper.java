@@ -172,6 +172,10 @@ public class SocialEquityLogLocalServiceWrapper
 			userId, socialEquityValue);
 	}
 
+	public void updateRanks() {
+		_socialEquityLogLocalService.updateRanks();
+	}
+
 	public SocialEquityLogLocalService getWrappedSocialEquityLogLocalService() {
 		return _socialEquityLogLocalService;
 	}

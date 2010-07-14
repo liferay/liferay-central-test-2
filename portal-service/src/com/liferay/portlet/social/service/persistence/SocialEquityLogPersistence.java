@@ -58,6 +58,77 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 		long equityLogId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByAEI_AD_AI_A_T(
+		long assetEntryId, int actionDate, java.lang.String actionId,
+		boolean active, int type)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByAEI_AD_AI_A_T(
+		long assetEntryId, int actionDate, java.lang.String actionId,
+		boolean active, int type, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByAEI_AD_AI_A_T(
+		long assetEntryId, int actionDate, java.lang.String actionId,
+		boolean active, int type, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.social.model.SocialEquityLog findByAEI_AD_AI_A_T_First(
+		long assetEntryId, int actionDate, java.lang.String actionId,
+		boolean active, int type,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquityLogException;
+
+	public com.liferay.portlet.social.model.SocialEquityLog findByAEI_AD_AI_A_T_Last(
+		long assetEntryId, int actionDate, java.lang.String actionId,
+		boolean active, int type,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquityLogException;
+
+	public com.liferay.portlet.social.model.SocialEquityLog[] findByAEI_AD_AI_A_T_PrevAndNext(
+		long equityLogId, long assetEntryId, int actionDate,
+		java.lang.String actionId, boolean active, int type,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquityLogException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByAEI_AI_A_T(
+		long assetEntryId, java.lang.String actionId, boolean active, int type)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByAEI_AI_A_T(
+		long assetEntryId, java.lang.String actionId, boolean active, int type,
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByAEI_AI_A_T(
+		long assetEntryId, java.lang.String actionId, boolean active, int type,
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.social.model.SocialEquityLog findByAEI_AI_A_T_First(
+		long assetEntryId, java.lang.String actionId, boolean active, int type,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquityLogException;
+
+	public com.liferay.portlet.social.model.SocialEquityLog findByAEI_AI_A_T_Last(
+		long assetEntryId, java.lang.String actionId, boolean active, int type,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquityLogException;
+
+	public com.liferay.portlet.social.model.SocialEquityLog[] findByAEI_AI_A_T_PrevAndNext(
+		long equityLogId, long assetEntryId, java.lang.String actionId,
+		boolean active, int type,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquityLogException;
+
 	public java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByAEI_T_A(
 		long assetEntryId, int type, boolean active)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -89,42 +160,92 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquityLogException;
 
-	public java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByU_AEI_A_A(
-		long userId, long assetEntryId, java.lang.String actionId,
-		boolean active)
+	public java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByU_AD_AI_A_T(
+		long userId, int actionDate, java.lang.String actionId, boolean active,
+		int type) throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByU_AD_AI_A_T(
+		long userId, int actionDate, java.lang.String actionId, boolean active,
+		int type, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByU_AEI_A_A(
-		long userId, long assetEntryId, java.lang.String actionId,
-		boolean active, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByU_AEI_A_A(
-		long userId, long assetEntryId, java.lang.String actionId,
-		boolean active, int start, int end,
+	public java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByU_AD_AI_A_T(
+		long userId, int actionDate, java.lang.String actionId, boolean active,
+		int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.social.model.SocialEquityLog findByU_AEI_A_A_First(
-		long userId, long assetEntryId, java.lang.String actionId,
-		boolean active,
+	public com.liferay.portlet.social.model.SocialEquityLog findByU_AD_AI_A_T_First(
+		long userId, int actionDate, java.lang.String actionId, boolean active,
+		int type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquityLogException;
 
-	public com.liferay.portlet.social.model.SocialEquityLog findByU_AEI_A_A_Last(
-		long userId, long assetEntryId, java.lang.String actionId,
-		boolean active,
+	public com.liferay.portlet.social.model.SocialEquityLog findByU_AD_AI_A_T_Last(
+		long userId, int actionDate, java.lang.String actionId, boolean active,
+		int type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquityLogException;
 
-	public com.liferay.portlet.social.model.SocialEquityLog[] findByU_AEI_A_A_PrevAndNext(
-		long equityLogId, long userId, long assetEntryId,
-		java.lang.String actionId, boolean active,
+	public com.liferay.portlet.social.model.SocialEquityLog[] findByU_AD_AI_A_T_PrevAndNext(
+		long equityLogId, long userId, int actionDate,
+		java.lang.String actionId, boolean active, int type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquityLogException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByU_AI_A_T(
+		long userId, java.lang.String actionId, boolean active, int type)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByU_AI_A_T(
+		long userId, java.lang.String actionId, boolean active, int type,
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByU_AI_A_T(
+		long userId, java.lang.String actionId, boolean active, int type,
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.social.model.SocialEquityLog findByU_AI_A_T_First(
+		long userId, java.lang.String actionId, boolean active, int type,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquityLogException;
+
+	public com.liferay.portlet.social.model.SocialEquityLog findByU_AI_A_T_Last(
+		long userId, java.lang.String actionId, boolean active, int type,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquityLogException;
+
+	public com.liferay.portlet.social.model.SocialEquityLog[] findByU_AI_A_T_PrevAndNext(
+		long equityLogId, long userId, java.lang.String actionId,
+		boolean active, int type,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquityLogException;
+
+	public com.liferay.portlet.social.model.SocialEquityLog findByU_AEI_AD_AI_A_T(
+		long userId, long assetEntryId, int actionDate,
+		java.lang.String actionId, boolean active, int type)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquityLogException;
+
+	public com.liferay.portlet.social.model.SocialEquityLog fetchByU_AEI_AD_AI_A_T(
+		long userId, long assetEntryId, int actionDate,
+		java.lang.String actionId, boolean active, int type)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.social.model.SocialEquityLog fetchByU_AEI_AD_AI_A_T(
+		long userId, long assetEntryId, int actionDate,
+		java.lang.String actionId, boolean active, int type,
+		boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -138,21 +259,54 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public void removeByAEI_AD_AI_A_T(long assetEntryId, int actionDate,
+		java.lang.String actionId, boolean active, int type)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void removeByAEI_AI_A_T(long assetEntryId,
+		java.lang.String actionId, boolean active, int type)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void removeByAEI_T_A(long assetEntryId, int type, boolean active)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void removeByU_AEI_A_A(long userId, long assetEntryId,
-		java.lang.String actionId, boolean active)
+	public void removeByU_AD_AI_A_T(long userId, int actionDate,
+		java.lang.String actionId, boolean active, int type)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public void removeByU_AI_A_T(long userId, java.lang.String actionId,
+		boolean active, int type)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void removeByU_AEI_AD_AI_A_T(long userId, long assetEntryId,
+		int actionDate, java.lang.String actionId, boolean active, int type)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquityLogException;
+
 	public void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByAEI_AD_AI_A_T(long assetEntryId, int actionDate,
+		java.lang.String actionId, boolean active, int type)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByAEI_AI_A_T(long assetEntryId, java.lang.String actionId,
+		boolean active, int type)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByAEI_T_A(long assetEntryId, int type, boolean active)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByU_AEI_A_A(long userId, long assetEntryId,
-		java.lang.String actionId, boolean active)
+	public int countByU_AD_AI_A_T(long userId, int actionDate,
+		java.lang.String actionId, boolean active, int type)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByU_AI_A_T(long userId, java.lang.String actionId,
+		boolean active, int type)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByU_AEI_AD_AI_A_T(long userId, long assetEntryId,
+		int actionDate, java.lang.String actionId, boolean active, int type)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()

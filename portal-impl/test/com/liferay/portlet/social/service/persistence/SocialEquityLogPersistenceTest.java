@@ -70,10 +70,10 @@ public class SocialEquityLogPersistenceTest extends BasePersistenceTestCase {
 		newSocialEquityLog.setAssetEntryId(nextLong());
 		newSocialEquityLog.setActionId(randomString());
 		newSocialEquityLog.setActionDate(nextInt());
+		newSocialEquityLog.setActive(randomBoolean());
 		newSocialEquityLog.setType(nextInt());
 		newSocialEquityLog.setValue(nextInt());
 		newSocialEquityLog.setValidity(nextInt());
-		newSocialEquityLog.setActive(randomBoolean());
 
 		_persistence.update(newSocialEquityLog, false);
 
@@ -93,14 +93,14 @@ public class SocialEquityLogPersistenceTest extends BasePersistenceTestCase {
 			newSocialEquityLog.getActionId());
 		assertEquals(existingSocialEquityLog.getActionDate(),
 			newSocialEquityLog.getActionDate());
+		assertEquals(existingSocialEquityLog.getActive(),
+			newSocialEquityLog.getActive());
 		assertEquals(existingSocialEquityLog.getType(),
 			newSocialEquityLog.getType());
 		assertEquals(existingSocialEquityLog.getValue(),
 			newSocialEquityLog.getValue());
 		assertEquals(existingSocialEquityLog.getValidity(),
 			newSocialEquityLog.getValidity());
-		assertEquals(existingSocialEquityLog.getActive(),
-			newSocialEquityLog.getActive());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -180,10 +180,10 @@ public class SocialEquityLogPersistenceTest extends BasePersistenceTestCase {
 		socialEquityLog.setAssetEntryId(nextLong());
 		socialEquityLog.setActionId(randomString());
 		socialEquityLog.setActionDate(nextInt());
+		socialEquityLog.setActive(randomBoolean());
 		socialEquityLog.setType(nextInt());
 		socialEquityLog.setValue(nextInt());
 		socialEquityLog.setValidity(nextInt());
-		socialEquityLog.setActive(randomBoolean());
 
 		_persistence.update(socialEquityLog, false);
 

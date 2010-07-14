@@ -135,4 +135,6 @@ public interface SocialEquityLogLocalService {
 		com.liferay.portlet.social.model.SocialEquityValue socialEquityValue)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
+
+	public void updateRanks();
 }

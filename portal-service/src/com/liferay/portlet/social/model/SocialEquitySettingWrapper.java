@@ -86,12 +86,32 @@ public class SocialEquitySettingWrapper implements SocialEquitySetting {
 		_socialEquitySetting.setActionId(actionId);
 	}
 
+	public int getDailyLimit() {
+		return _socialEquitySetting.getDailyLimit();
+	}
+
+	public void setDailyLimit(int dailyLimit) {
+		_socialEquitySetting.setDailyLimit(dailyLimit);
+	}
+
 	public int getType() {
 		return _socialEquitySetting.getType();
 	}
 
 	public void setType(int type) {
 		_socialEquitySetting.setType(type);
+	}
+
+	public boolean getUniqueEntry() {
+		return _socialEquitySetting.getUniqueEntry();
+	}
+
+	public boolean isUniqueEntry() {
+		return _socialEquitySetting.isUniqueEntry();
+	}
+
+	public void setUniqueEntry(boolean uniqueEntry) {
+		_socialEquitySetting.setUniqueEntry(uniqueEntry);
 	}
 
 	public int getValue() {
@@ -170,6 +190,11 @@ public class SocialEquitySettingWrapper implements SocialEquitySetting {
 
 	public java.lang.String toXmlString() {
 		return _socialEquitySetting.toXmlString();
+	}
+
+	public void update(
+		com.liferay.portlet.social.model.SocialEquityActionMapping equityActionMapping) {
+		_socialEquitySetting.update(equityActionMapping);
 	}
 
 	public SocialEquitySetting getWrappedSocialEquitySetting() {

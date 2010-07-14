@@ -2344,14 +2344,14 @@
 			<basic name="assetEntryId" />
 			<basic name="actionId" />
 			<basic name="actionDate" />
+			<basic name="active">
+				<column name="ACTIVE_" />
+			</basic>
 			<basic name="type">
 				<column name="TYPE_" />
 			</basic>
 			<basic name="value" />
 			<basic name="validity" />
-			<basic name="active">
-				<column name="ACTIVE_" />
-			</basic>
 			<transient name="primaryKey" />
 			<transient name="userUuid" />
 		</attributes>
@@ -2363,9 +2363,11 @@
 			<basic name="companyId" />
 			<basic name="classNameId" />
 			<basic name="actionId" />
+			<basic name="dailyLimit" />
 			<basic name="type">
 				<column name="TYPE_" />
 			</basic>
+			<basic name="uniqueEntry" />
 			<basic name="value" />
 			<basic name="validity" />
 			<transient name="primaryKey" />

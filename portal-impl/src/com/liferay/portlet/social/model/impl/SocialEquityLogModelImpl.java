@@ -62,12 +62,12 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 			{ "assetEntryId", new Integer(Types.BIGINT) },
 			{ "actionId", new Integer(Types.VARCHAR) },
 			{ "actionDate", new Integer(Types.INTEGER) },
+			{ "active_", new Integer(Types.BOOLEAN) },
 			{ "type_", new Integer(Types.INTEGER) },
 			{ "value", new Integer(Types.INTEGER) },
-			{ "validity", new Integer(Types.INTEGER) },
-			{ "active_", new Integer(Types.BOOLEAN) }
+			{ "validity", new Integer(Types.INTEGER) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table SocialEquityLog (equityLogId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,assetEntryId LONG,actionId VARCHAR(75) null,actionDate INTEGER,type_ INTEGER,value INTEGER,validity INTEGER,active_ BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table SocialEquityLog (equityLogId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,assetEntryId LONG,actionId VARCHAR(75) null,actionDate INTEGER,active_ BOOLEAN,type_ INTEGER,value INTEGER,validity INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table SocialEquityLog";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -126,6 +126,12 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 
 	public void setUserId(long userId) {
 		_userId = userId;
+
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = userId;
+		}
 	}
 
 	public String getUserUuid() throws SystemException {
@@ -136,12 +142,26 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 		_userUuid = userUuid;
 	}
 
+	public long getOriginalUserId() {
+		return _originalUserId;
+	}
+
 	public long getAssetEntryId() {
 		return _assetEntryId;
 	}
 
 	public void setAssetEntryId(long assetEntryId) {
 		_assetEntryId = assetEntryId;
+
+		if (!_setOriginalAssetEntryId) {
+			_setOriginalAssetEntryId = true;
+
+			_originalAssetEntryId = assetEntryId;
+		}
+	}
+
+	public long getOriginalAssetEntryId() {
+		return _originalAssetEntryId;
 	}
 
 	public String getActionId() {
@@ -155,6 +175,14 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 
 	public void setActionId(String actionId) {
 		_actionId = actionId;
+
+		if (_originalActionId == null) {
+			_originalActionId = actionId;
+		}
+	}
+
+	public String getOriginalActionId() {
+		return GetterUtil.getString(_originalActionId);
 	}
 
 	public int getActionDate() {
@@ -163,6 +191,38 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 
 	public void setActionDate(int actionDate) {
 		_actionDate = actionDate;
+
+		if (!_setOriginalActionDate) {
+			_setOriginalActionDate = true;
+
+			_originalActionDate = actionDate;
+		}
+	}
+
+	public int getOriginalActionDate() {
+		return _originalActionDate;
+	}
+
+	public boolean getActive() {
+		return _active;
+	}
+
+	public boolean isActive() {
+		return _active;
+	}
+
+	public void setActive(boolean active) {
+		_active = active;
+
+		if (!_setOriginalActive) {
+			_setOriginalActive = true;
+
+			_originalActive = active;
+		}
+	}
+
+	public boolean getOriginalActive() {
+		return _originalActive;
 	}
 
 	public int getType() {
@@ -171,6 +231,16 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 
 	public void setType(int type) {
 		_type = type;
+
+		if (!_setOriginalType) {
+			_setOriginalType = true;
+
+			_originalType = type;
+		}
+	}
+
+	public int getOriginalType() {
+		return _originalType;
 	}
 
 	public int getValue() {
@@ -187,18 +257,6 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 
 	public void setValidity(int validity) {
 		_validity = validity;
-	}
-
-	public boolean getActive() {
-		return _active;
-	}
-
-	public boolean isActive() {
-		return _active;
-	}
-
-	public void setActive(boolean active) {
-		_active = active;
 	}
 
 	public SocialEquityLog toEscapedModel() {
@@ -235,10 +293,10 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 		clone.setAssetEntryId(getAssetEntryId());
 		clone.setActionId(getActionId());
 		clone.setActionDate(getActionDate());
+		clone.setActive(getActive());
 		clone.setType(getType());
 		clone.setValue(getValue());
 		clone.setValidity(getValidity());
-		clone.setActive(getActive());
 
 		return clone;
 	}
@@ -302,14 +360,14 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 		sb.append(getActionId());
 		sb.append(", actionDate=");
 		sb.append(getActionDate());
+		sb.append(", active=");
+		sb.append(getActive());
 		sb.append(", type=");
 		sb.append(getType());
 		sb.append(", value=");
 		sb.append(getValue());
 		sb.append(", validity=");
 		sb.append(getValidity());
-		sb.append(", active=");
-		sb.append(getActive());
 		sb.append("}");
 
 		return sb.toString();
@@ -351,6 +409,10 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 		sb.append(getActionDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>active</column-name><column-value><![CDATA[");
+		sb.append(getActive());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>type</column-name><column-value><![CDATA[");
 		sb.append(getType());
 		sb.append("]]></column-value></column>");
@@ -361,10 +423,6 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 		sb.append(
 			"<column><column-name>validity</column-name><column-value><![CDATA[");
 		sb.append(getValidity());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>active</column-name><column-value><![CDATA[");
-		sb.append(getActive());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -377,12 +435,23 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private long _assetEntryId;
+	private long _originalAssetEntryId;
+	private boolean _setOriginalAssetEntryId;
 	private String _actionId;
+	private String _originalActionId;
 	private int _actionDate;
+	private int _originalActionDate;
+	private boolean _setOriginalActionDate;
+	private boolean _active;
+	private boolean _originalActive;
+	private boolean _setOriginalActive;
 	private int _type;
+	private int _originalType;
+	private boolean _setOriginalType;
 	private int _value;
 	private int _validity;
-	private boolean _active;
 	private transient ExpandoBridge _expandoBridge;
 }
