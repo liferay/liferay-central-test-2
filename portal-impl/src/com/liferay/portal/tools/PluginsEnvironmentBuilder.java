@@ -127,6 +127,12 @@ public class PluginsEnvironmentBuilder {
 		String projectName = StringUtil.extractLast(
 			projectDirName, File.separator);
 
+		boolean isJavaProject = false;
+
+		if (FileUtil.exists(projectDirName + "/docroot/WEB-INF/src")) {
+			isJavaProject = true;
+		}
+
 		// .project
 
 		StringBundler sb = new StringBundler(17);
@@ -139,13 +145,21 @@ public class PluginsEnvironmentBuilder {
 		sb.append("\t<comment></comment>\n");
 		sb.append("\t<projects></projects>\n");
 		sb.append("\t<buildSpec>\n");
-		sb.append("\t\t<buildCommand>\n");
-		sb.append("\t\t\t<name>org.eclipse.jdt.core.javabuilder</name>\n");
-		sb.append("\t\t\t<arguments></arguments>\n");
-		sb.append("\t\t</buildCommand>\n");
+
+		if (isJavaProject) {
+			sb.append("\t\t<buildCommand>\n");
+			sb.append("\t\t\t<name>org.eclipse.jdt.core.javabuilder</name>\n");
+			sb.append("\t\t\t<arguments></arguments>\n");
+			sb.append("\t\t</buildCommand>\n");
+		}
+
 		sb.append("\t</buildSpec>\n");
 		sb.append("\t<natures>\n");
-		sb.append("\t\t<nature>org.eclipse.jdt.core.javanature</nature>\n");
+
+		if (isJavaProject) {
+			sb.append("\t\t<nature>org.eclipse.jdt.core.javanature</nature>\n");
+		}
+
 		sb.append("\t</natures>\n");
 		sb.append("</projectDescription>");
 
@@ -157,89 +171,94 @@ public class PluginsEnvironmentBuilder {
 
 		// .classpath
 
-		List<String> portalJars = ListUtil.toList(dependencyJars);
+		File classpathFile = null;
 
-		portalJars.add("commons-logging.jar");
-		portalJars.add("log4j.jar");
+		if (isJavaProject) {
+			List<String> portalJars = ListUtil.toList(dependencyJars);
 
-		portalJars = ListUtil.sort(portalJars);
+			portalJars.add("commons-logging.jar");
+			portalJars.add("log4j.jar");
 
-		String[] customJarsArray = libDir.list(new GlobFilenameFilter("*.jar"));
+			portalJars = ListUtil.sort(portalJars);
 
-		List<String> customJars = null;
+			String[] customJarsArray = libDir.list(
+				new GlobFilenameFilter("*.jar"));
 
-		if (customJarsArray != null) {
-			customJars = ListUtil.toList(customJarsArray);
+			List<String> customJars = null;
 
-			customJars = ListUtil.sort(customJars);
+			if (customJarsArray != null) {
+				customJars = ListUtil.toList(customJarsArray);
 
-			for (String jar : portalJars) {
-				customJars.remove(jar);
-			}
+				customJars = ListUtil.sort(customJars);
 
-			customJars.remove(projectName + "-service.jar");
-			customJars.remove("util-bridges.jar");
-			customJars.remove("util-java.jar");
-			customJars.remove("util-taglib.jar");
-		}
-		else {
-			customJars = new ArrayList<String>();
-		}
+				for (String jar : portalJars) {
+					customJars.remove(jar);
+				}
 
-		sb = new StringBundler();
-
-		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n");
-		sb.append("<classpath>\n");
-
-		if (FileUtil.exists(projectDirName + "/docroot/WEB-INF/service")) {
-			sb.append("\t<classpathentry excluding=\"**/.svn/**|.svn/\" ");
-			sb.append("kind=\"src\" path=\"docroot/WEB-INF/service\" />\n");
-		}
-
-		sb.append("\t<classpathentry excluding=\"**/.svn/**|.svn/\" ");
-		sb.append("kind=\"src\" path=\"docroot/WEB-INF/src\" />\n");
-		sb.append("\t<classpathentry kind=\"src\" path=\"/portal\" />\n");
-		sb.append("\t<classpathentry kind=\"con\" ");
-		sb.append("path=\"org.eclipse.jdt.launching.JRE_CONTAINER\" />\n");
-
-		if (FileUtil.exists(projectDirName + "/docroot/WEB-INF/test")) {
-			sb.append("\t<classpathentry excluding=\"**/.svn/**|.svn/\" ");
-			sb.append("kind=\"src\" path=\"docroot/WEB-INF/test\" />\n");
-		}
-
-		_addClasspathEntry(sb, "/portal/lib/development/activation.jar");
-		_addClasspathEntry(sb, "/portal/lib/development/annotations.jar");
-		_addClasspathEntry(sb, "/portal/lib/development/jsp-api.jar");
-		_addClasspathEntry(sb, "/portal/lib/development/mail.jar");
-		_addClasspathEntry(sb, "/portal/lib/development/servlet-api.jar");
-		_addClasspathEntry(sb, "/portal/lib/global/portlet.jar");
-
-		for (String jar : portalJars) {
-			_addClasspathEntry(sb, "/portal/lib/portal/" + jar);
-		}
-
-		_addClasspathEntry(sb, "/portal/portal-service/portal-service.jar");
-		_addClasspathEntry(sb, "/portal/util-bridges/util-bridges.jar");
-		_addClasspathEntry(sb, "/portal/util-java/util-java.jar");
-		_addClasspathEntry(sb, "/portal/util-taglib/util-taglib.jar");
-
-		for (String jar : customJars) {
-			if (libDirPath.contains("/tmp/WEB-INF/lib")) {
-				_addClasspathEntry(sb, "tmp/WEB-INF/lib/" + jar);
+				customJars.remove(projectName + "-service.jar");
+				customJars.remove("util-bridges.jar");
+				customJars.remove("util-java.jar");
+				customJars.remove("util-taglib.jar");
 			}
 			else {
-				_addClasspathEntry(sb, "docroot/WEB-INF/lib/" + jar);
+				customJars = new ArrayList<String>();
 			}
+
+			sb = new StringBundler();
+
+			sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n");
+			sb.append("<classpath>\n");
+
+			if (FileUtil.exists(projectDirName + "/docroot/WEB-INF/service")) {
+				sb.append("\t<classpathentry excluding=\"**/.svn/**|.svn/\" ");
+				sb.append("kind=\"src\" path=\"docroot/WEB-INF/service\" />\n");
+			}
+
+			sb.append("\t<classpathentry excluding=\"**/.svn/**|.svn/\" ");
+			sb.append("kind=\"src\" path=\"docroot/WEB-INF/src\" />\n");
+			sb.append("\t<classpathentry kind=\"src\" path=\"/portal\" />\n");
+			sb.append("\t<classpathentry kind=\"con\" ");
+			sb.append("path=\"org.eclipse.jdt.launching.JRE_CONTAINER\" />\n");
+
+			if (FileUtil.exists(projectDirName + "/docroot/WEB-INF/test")) {
+				sb.append("\t<classpathentry excluding=\"**/.svn/**|.svn/\" ");
+				sb.append("kind=\"src\" path=\"docroot/WEB-INF/test\" />\n");
+			}
+
+			_addClasspathEntry(sb, "/portal/lib/development/activation.jar");
+			_addClasspathEntry(sb, "/portal/lib/development/annotations.jar");
+			_addClasspathEntry(sb, "/portal/lib/development/jsp-api.jar");
+			_addClasspathEntry(sb, "/portal/lib/development/mail.jar");
+			_addClasspathEntry(sb, "/portal/lib/development/servlet-api.jar");
+			_addClasspathEntry(sb, "/portal/lib/global/portlet.jar");
+
+			for (String jar : portalJars) {
+				_addClasspathEntry(sb, "/portal/lib/portal/" + jar);
+			}
+
+			_addClasspathEntry(sb, "/portal/portal-service/portal-service.jar");
+			_addClasspathEntry(sb, "/portal/util-bridges/util-bridges.jar");
+			_addClasspathEntry(sb, "/portal/util-java/util-java.jar");
+			_addClasspathEntry(sb, "/portal/util-taglib/util-taglib.jar");
+
+			for (String jar : customJars) {
+				if (libDirPath.contains("/tmp/WEB-INF/lib")) {
+					_addClasspathEntry(sb, "tmp/WEB-INF/lib/" + jar);
+				}
+				else {
+					_addClasspathEntry(sb, "docroot/WEB-INF/lib/" + jar);
+				}
+			}
+
+			sb.append("\t<classpathentry kind=\"output\" path=\"bin\" />\n");
+			sb.append("</classpath>");
+
+			classpathFile = new File(projectDirName + "/.classpath");
+
+			System.out.println("Updating " + classpathFile);
+
+			FileUtil.write(classpathFile, sb.toString());
 		}
-
-		sb.append("\t<classpathentry kind=\"output\" path=\"bin\" />\n");
-		sb.append("</classpath>");
-
-		File classpathFile = new File(projectDirName + "/.classpath");
-
-		System.out.println("Updating " + classpathFile);
-
-		FileUtil.write(classpathFile, sb.toString());
 
 		// SVN
 
@@ -253,13 +272,15 @@ public class PluginsEnvironmentBuilder {
 				_exec(_SVN_ADD + projectFileName);
 			}
 
-			String classpathFileName = "\"" + classpathFile + "\"";
+			if (isJavaProject) {
+				String classpathFileName = "\"" + classpathFile + "\"";
 
-			try {
-				_exec(_SVN_INFO + classpathFileName);
-			}
-			catch (Exception e) {
-				_exec(_SVN_ADD + classpathFileName);
+				try {
+					_exec(_SVN_INFO + classpathFileName);
+				}
+				catch (Exception e) {
+					_exec(_SVN_ADD + classpathFileName);
+				}
 			}
 
 			File tempFile = File.createTempFile("svn-ignores-", null, null);
