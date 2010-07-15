@@ -362,6 +362,10 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 			<!-- Optional Arguments -->
 
 			<jvmarg value="-Ddeployer.tomcat.lib.dir=${app.server.tomcat.lib.global.dir}" />
+
+			<!-- Dependent Libraries -->
+
+			<arg value="util-java/util-java.jar" />
 		</java>
 	</target>
 
