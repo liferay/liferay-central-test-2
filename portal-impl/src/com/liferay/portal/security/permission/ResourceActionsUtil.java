@@ -1137,34 +1137,34 @@ public class ResourceActionsUtil {
 			return;
 		}
 
-		int informationValue = GetterUtil.getInteger(
-			socialEquityMappingElement.elementText("information-value"));
-		int informationLifespan = GetterUtil.getInteger(
-			socialEquityMappingElement.elementText("information-lifespan"));
 		int informationDailyLimit = GetterUtil.getInteger(
 			socialEquityMappingElement.elementText("information-daily-limit"));
-		int participationValue = GetterUtil.getInteger(
-			socialEquityMappingElement.elementText("participation-value"));
-		int participationLifespan = GetterUtil.getInteger(
-			socialEquityMappingElement.elementText("participation-lifespan"));
+		int informationLifespan = GetterUtil.getInteger(
+			socialEquityMappingElement.elementText("information-lifespan"));
+		int informationValue = GetterUtil.getInteger(
+			socialEquityMappingElement.elementText("information-value"));
 		int participationDailyLimit = GetterUtil.getInteger(
 			socialEquityMappingElement.elementText(
 				"participation-daily-limit"));
+		int participationLifespan = GetterUtil.getInteger(
+			socialEquityMappingElement.elementText("participation-lifespan"));
+		int participationValue = GetterUtil.getInteger(
+			socialEquityMappingElement.elementText("participation-value"));
 
 		SocialEquityActionMapping socialEquityActionMapping =
 			new SocialEquityActionMapping();
 
 		socialEquityActionMapping.setActionId(actionKey);
 		socialEquityActionMapping.setClassName(name);
-		socialEquityActionMapping.setInformationValue(informationValue);
-		socialEquityActionMapping.setInformationLifespan(informationLifespan);
 		socialEquityActionMapping.setInformationDailyLimit(
 			informationDailyLimit);
-		socialEquityActionMapping.setParticipationValue(participationValue);
-		socialEquityActionMapping.setParticipationLifespan(
-			participationLifespan);
+		socialEquityActionMapping.setInformationLifespan(informationLifespan);
+		socialEquityActionMapping.setInformationValue(informationValue);
 		socialEquityActionMapping.setParticipationDailyLimit(
 			participationDailyLimit);
+		socialEquityActionMapping.setParticipationLifespan(
+			participationLifespan);
+		socialEquityActionMapping.setParticipationValue(participationValue);
 
 		Map<String, SocialEquityActionMapping> socialEquityActionMappings =
 			_socialEquityActionMappings.get(name);
