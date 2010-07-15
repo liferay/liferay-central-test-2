@@ -57,8 +57,9 @@ public interface JournalCreationStrategy {
 	 * Gives the content creation strategy an opportunity to transform the
 	 * content before the new article is saved to the database. Possible use
 	 * cases include using Velocity to merge in community specific values into
-	 * the text. Returns the new content to assign to the article. If null is
-	 * returned, the article content will be added unchanged.
+	 * the text. Returns the new content to assign to the article. If
+	 * <code>null</code> is returned, the article content will be added
+	 * unchanged.
 	 *
 	 * @return the transformed content to save in the database or
 	 *		   ARTICLE_CONTENT_UNCHANGED if the content should be added
@@ -69,22 +70,22 @@ public interface JournalCreationStrategy {
 		throws Exception;
 
 	/**
-	 * Returns true if the default community permissions should be added when
-	 * the specified journalObj is created.
+	 * Returns <code>true</code> if the default community permissions should be
+	 * added when the specified journalObj is created.
 	 *
-	 * @return true if default community permissions should be added to the
-	 *		   specified journalObj
+	 * @return <code>true</code> if default community permissions should be
+	 *		   added to the specified journalObj
 	 */
 	public boolean addCommunityPermissions(
 			PortletDataContext context, Object journalObj)
 		throws Exception;
 
 	/**
-	 * Returns true if the default guest permissions should be added when the
-	 * specified journalObj is created.
+	 * Returns <code>true</code> if the default guest permissions should be
+	 * added when the specified journalObj is created.
 	 *
-	 * @return true if default guest permissions should be added to the
-	 *		   specified journalObj
+	 * @return <code>true</code> if default guest permissions should be added to
+	 *		   the specified journalObj
 	 */
 	public boolean addGuestPermissions(
 			PortletDataContext context, Object journalObj)

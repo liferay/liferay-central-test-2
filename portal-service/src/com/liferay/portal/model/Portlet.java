@@ -743,21 +743,21 @@ public interface Portlet extends PortletModel {
 	public void setPreferencesValidator(java.lang.String preferencesValidator);
 
 	/**
-	* Returns true if preferences are shared across the entire company.
+	* Returns <code>true</code> if preferences are shared across the entire company.
 	*
-	* @return true if preferences are shared across the entire company
+	* @return <code>true</code> if preferences are shared across the entire company
 	*/
 	public boolean getPreferencesCompanyWide();
 
 	/**
-	* Returns true if preferences are shared across the entire company.
+	* Returns <code>true</code> if preferences are shared across the entire company.
 	*
-	* @return true if preferences are shared across the entire company
+	* @return <code>true</code> if preferences are shared across the entire company
 	*/
 	public boolean isPreferencesCompanyWide();
 
 	/**
-	* Set to true if preferences are shared across the entire company.
+	* Set to <code>true</code> if preferences are shared across the entire company.
 	*
 	* @param preferencesCompanyWide boolean value for whether preferences are
 	shared across the entire company
@@ -765,21 +765,21 @@ public interface Portlet extends PortletModel {
 	public void setPreferencesCompanyWide(boolean preferencesCompanyWide);
 
 	/**
-	* Returns true if preferences are unique per layout.
+	* Returns <code>true</code> if preferences are unique per layout.
 	*
-	* @return true if preferences are unique per layout
+	* @return <code>true</code> if preferences are unique per layout
 	*/
 	public boolean getPreferencesUniquePerLayout();
 
 	/**
-	* Returns true if preferences are unique per layout.
+	* Returns <code>true</code> if preferences are unique per layout.
 	*
-	* @return true if preferences are unique per layout
+	* @return <code>true</code> if preferences are unique per layout
 	*/
 	public boolean isPreferencesUniquePerLayout();
 
 	/**
-	* Set to true if preferences are unique per layout.
+	* Set to <code>true</code> if preferences are unique per layout.
 	*
 	* @param preferencesUniquePerLayout boolean value for whether preferences
 	are unique per layout
@@ -788,29 +788,29 @@ public interface Portlet extends PortletModel {
 		boolean preferencesUniquePerLayout);
 
 	/**
-	* Returns true if preferences are owned by the group when the portlet is
+	* Returns <code>true</code> if preferences are owned by the group when the portlet is
 	shown in a group layout. Returns false if preferences are owned by the
 	user at all times.
 	*
-	* @return true if preferences are owned by the group when the portlet is
+	* @return <code>true</code> if preferences are owned by the group when the portlet is
 	shown in a group layout; false if preferences are owned by the
 	user at all times.
 	*/
 	public boolean getPreferencesOwnedByGroup();
 
 	/**
-	* Returns true if preferences are owned by the group when the portlet is
+	* Returns <code>true</code> if preferences are owned by the group when the portlet is
 	shown in a group layout. Returns false if preferences are owned by the
 	user at all times.
 	*
-	* @return true if preferences are owned by the group when the portlet is
+	* @return <code>true</code> if preferences are owned by the group when the portlet is
 	shown in a group layout; false if preferences are owned by the
 	user at all times.
 	*/
 	public boolean isPreferencesOwnedByGroup();
 
 	/**
-	* Set to true if preferences are owned by the group when the portlet is
+	* Set to <code>true</code> if preferences are owned by the group when the portlet is
 	shown in a group layout. Set to false if preferences are owned by the
 	user at all times.
 	*
@@ -821,21 +821,21 @@ public interface Portlet extends PortletModel {
 	public void setPreferencesOwnedByGroup(boolean preferencesOwnedByGroup);
 
 	/**
-	* Returns true if the portlet uses the default template.
+	* Returns <code>true</code> if the portlet uses the default template.
 	*
-	* @return true if the portlet uses the default template
+	* @return <code>true</code> if the portlet uses the default template
 	*/
 	public boolean getUseDefaultTemplate();
 
 	/**
-	* Returns true if the portlet uses the default template.
+	* Returns <code>true</code> if the portlet uses the default template.
 	*
-	* @return true if the portlet uses the default template
+	* @return <code>true</code> if the portlet uses the default template
 	*/
 	public boolean isUseDefaultTemplate();
 
 	/**
-	* Set to true if the portlet uses the default template.
+	* Set to <code>true</code> if the portlet uses the default template.
 	*
 	* @param useDefaultTemplate boolean value for whether the portlet uses the
 	default template
@@ -843,25 +843,25 @@ public interface Portlet extends PortletModel {
 	public void setUseDefaultTemplate(boolean useDefaultTemplate);
 
 	/**
-	* Returns true if users are shown that they do not have access to the
+	* Returns <code>true</code> if users are shown that they do not have access to the
 	portlet.
 	*
-	* @return true if users are shown that they do not have access to the
+	* @return <code>true</code> if users are shown that they do not have access to the
 	portlet
 	*/
 	public boolean getShowPortletAccessDenied();
 
 	/**
-	* Returns true if users are shown that they do not have access to the
+	* Returns <code>true</code> if users are shown that they do not have access to the
 	portlet.
 	*
-	* @return true if users are shown that they do not have access to the
+	* @return <code>true</code> if users are shown that they do not have access to the
 	portlet
 	*/
 	public boolean isShowPortletAccessDenied();
 
 	/**
-	* Set to true if users are shown that they do not have access to the
+	* Set to <code>true</code> if users are shown that they do not have access to the
 	portlet.
 	*
 	* @param showPortletAccessDenied boolean value for whether users are shown
@@ -870,21 +870,21 @@ public interface Portlet extends PortletModel {
 	public void setShowPortletAccessDenied(boolean showPortletAccessDenied);
 
 	/**
-	* Returns true if users are shown that the portlet is inactive.
+	* Returns <code>true</code> if users are shown that the portlet is inactive.
 	*
-	* @return true if users are shown that the portlet is inactive
+	* @return <code>true</code> if users are shown that the portlet is inactive
 	*/
 	public boolean getShowPortletInactive();
 
 	/**
-	* Returns true if users are shown that the portlet is inactive.
+	* Returns <code>true</code> if users are shown that the portlet is inactive.
 	*
-	* @return true if users are shown that the portlet is inactive
+	* @return <code>true</code> if users are shown that the portlet is inactive
 	*/
 	public boolean isShowPortletInactive();
 
 	/**
-	* Set to true if users are shown that the portlet is inactive.
+	* Set to <code>true</code> if users are shown that the portlet is inactive.
 	*
 	* @param showPortletInactive boolean value for whether users are shown that
 	the portlet is inactive
@@ -892,25 +892,25 @@ public interface Portlet extends PortletModel {
 	public void setShowPortletInactive(boolean showPortletInactive);
 
 	/**
-	* Returns true if an action URL for this portlet should cause an auto
+	* Returns <code>true</code> if an action URL for this portlet should cause an auto
 	redirect.
 	*
-	* @return true if an action URL for this portlet should cause an auto
+	* @return <code>true</code> if an action URL for this portlet should cause an auto
 	redirect
 	*/
 	public boolean getActionURLRedirect();
 
 	/**
-	* Returns true if an action URL for this portlet should cause an auto
+	* Returns <code>true</code> if an action URL for this portlet should cause an auto
 	redirect.
 	*
-	* @return true if an action URL for this portlet should cause an auto
+	* @return <code>true</code> if an action URL for this portlet should cause an auto
 	redirect
 	*/
 	public boolean isActionURLRedirect();
 
 	/**
-	* Set to true if an action URL for this portlet should cause an auto
+	* Set to <code>true</code> if an action URL for this portlet should cause an auto
 	redirect.
 	*
 	* @param actionURLRedirect boolean value for whether an action URL for this
@@ -919,25 +919,25 @@ public interface Portlet extends PortletModel {
 	public void setActionURLRedirect(boolean actionURLRedirect);
 
 	/**
-	* Returns true if the portlet restores to the current view from the
+	* Returns <code>true</code> if the portlet restores to the current view from the
 	maximized state.
 	*
-	* @return true if the portlet restores to the current view from the
+	* @return <code>true</code> if the portlet restores to the current view from the
 	maximized state
 	*/
 	public boolean getRestoreCurrentView();
 
 	/**
-	* Returns true if the portlet restores to the current view from the
+	* Returns <code>true</code> if the portlet restores to the current view from the
 	maximized state.
 	*
-	* @return true if the portlet restores to the current view from the
+	* @return <code>true</code> if the portlet restores to the current view from the
 	maximized state
 	*/
 	public boolean isRestoreCurrentView();
 
 	/**
-	* Set to true if the portlet restores to the current view from the
+	* Set to <code>true</code> if the portlet restores to the current view from the
 	maximized state.
 	*
 	* @param restoreCurrentView boolean value for whether the portlet restores
@@ -946,25 +946,25 @@ public interface Portlet extends PortletModel {
 	public void setRestoreCurrentView(boolean restoreCurrentView);
 
 	/**
-	* Returns true if the portlet goes into the maximized state when the user
+	* Returns <code>true</code> if the portlet goes into the maximized state when the user
 	goes into the edit mode.
 	*
-	* @return true if the portlet goes into the maximized state when the user
+	* @return <code>true</code> if the portlet goes into the maximized state when the user
 	goes into the edit mode
 	*/
 	public boolean getMaximizeEdit();
 
 	/**
-	* Returns true if the portlet goes into the maximized state when the user
+	* Returns <code>true</code> if the portlet goes into the maximized state when the user
 	goes into the edit mode.
 	*
-	* @return true if the portlet goes into the maximized state when the user
+	* @return <code>true</code> if the portlet goes into the maximized state when the user
 	goes into the edit mode
 	*/
 	public boolean isMaximizeEdit();
 
 	/**
-	* Set to true if the portlet goes into the maximized state when the user
+	* Set to <code>true</code> if the portlet goes into the maximized state when the user
 	goes into the edit mode.
 	*
 	* @param maximizeEdit boolean value for whether the portlet goes into the
@@ -973,25 +973,25 @@ public interface Portlet extends PortletModel {
 	public void setMaximizeEdit(boolean maximizeEdit);
 
 	/**
-	* Returns true if the portlet goes into the maximized state when the user
+	* Returns <code>true</code> if the portlet goes into the maximized state when the user
 	goes into the help mode.
 	*
-	* @return true if the portlet goes into the maximized state when the user
+	* @return <code>true</code> if the portlet goes into the maximized state when the user
 	goes into the help mode
 	*/
 	public boolean getMaximizeHelp();
 
 	/**
-	* Returns true if the portlet goes into the maximized state when the user
+	* Returns <code>true</code> if the portlet goes into the maximized state when the user
 	goes into the help mode.
 	*
-	* @return true if the portlet goes into the maximized state when the user
+	* @return <code>true</code> if the portlet goes into the maximized state when the user
 	goes into the help mode
 	*/
 	public boolean isMaximizeHelp();
 
 	/**
-	* Set to true if the portlet goes into the maximized state when the user
+	* Set to <code>true</code> if the portlet goes into the maximized state when the user
 	goes into the help mode.
 	*
 	* @param maximizeHelp boolean value for whether the portlet goes into the
@@ -1000,25 +1000,25 @@ public interface Portlet extends PortletModel {
 	public void setMaximizeHelp(boolean maximizeHelp);
 
 	/**
-	* Returns true if the portlet goes into the pop up state when the user goes
+	* Returns <code>true</code> if the portlet goes into the pop up state when the user goes
 	into the print mode.
 	*
-	* @return true if the portlet goes into the pop up state when the user goes
+	* @return <code>true</code> if the portlet goes into the pop up state when the user goes
 	into the print mode
 	*/
 	public boolean getPopUpPrint();
 
 	/**
-	* Returns true if the portlet goes into the pop up state when the user goes
+	* Returns <code>true</code> if the portlet goes into the pop up state when the user goes
 	into the print mode.
 	*
-	* @return true if the portlet goes into the pop up state when the user goes
+	* @return <code>true</code> if the portlet goes into the pop up state when the user goes
 	into the print mode
 	*/
 	public boolean isPopUpPrint();
 
 	/**
-	* Set to true if the portlet goes into the pop up state when the user goes
+	* Set to <code>true</code> if the portlet goes into the pop up state when the user goes
 	into the print mode.
 	*
 	* @param popUpPrint boolean value for whether the portlet goes into the pop
@@ -1027,21 +1027,21 @@ public interface Portlet extends PortletModel {
 	public void setPopUpPrint(boolean popUpPrint);
 
 	/**
-	* Returns true to allow the portlet to be cached within the layout.
+	* Returns <code>true</code> to allow the portlet to be cached within the layout.
 	*
-	* @return true if the portlet can be cached within the layout
+	* @return <code>true</code> if the portlet can be cached within the layout
 	*/
 	public boolean getLayoutCacheable();
 
 	/**
-	* Returns true to allow the portlet to be cached within the layout.
+	* Returns <code>true</code> to allow the portlet to be cached within the layout.
 	*
-	* @return true if the portlet can be cached within the layout
+	* @return <code>true</code> if the portlet can be cached within the layout
 	*/
 	public boolean isLayoutCacheable();
 
 	/**
-	* Set to true to allow the portlet to be cached within the layout.
+	* Set to <code>true</code> to allow the portlet to be cached within the layout.
 	*
 	* @param layoutCacheable boolean value for whether the portlet can be
 	cached within the layout
@@ -1049,21 +1049,21 @@ public interface Portlet extends PortletModel {
 	public void setLayoutCacheable(boolean layoutCacheable);
 
 	/**
-	* Returns true if the portlet can be added multiple times to a layout.
+	* Returns <code>true</code> if the portlet can be added multiple times to a layout.
 	*
-	* @return true if the portlet can be added multiple times to a layout
+	* @return <code>true</code> if the portlet can be added multiple times to a layout
 	*/
 	public boolean getInstanceable();
 
 	/**
-	* Returns true if the portlet can be added multiple times to a layout.
+	* Returns <code>true</code> if the portlet can be added multiple times to a layout.
 	*
-	* @return true if the portlet can be added multiple times to a layout
+	* @return <code>true</code> if the portlet can be added multiple times to a layout
 	*/
 	public boolean isInstanceable();
 
 	/**
-	* Set to true if the portlet can be added multiple times to a layout.
+	* Set to <code>true</code> if the portlet can be added multiple times to a layout.
 	*
 	* @param instanceable boolean value for whether the portlet can be added
 	multiple times to a layout
@@ -1071,21 +1071,21 @@ public interface Portlet extends PortletModel {
 	public void setInstanceable(boolean instanceable);
 
 	/**
-	* Returns true if the portlet supports remoting.
+	* Returns <code>true</code> if the portlet supports remoting.
 	*
-	* @return true if the portlet supports remoting
+	* @return <code>true</code> if the portlet supports remoting
 	*/
 	public boolean getRemoteable();
 
 	/**
-	* Returns true if the portlet supports remoting.
+	* Returns <code>true</code> if the portlet supports remoting.
 	*
-	* @return true if the portlet supports remoting
+	* @return <code>true</code> if the portlet supports remoting
 	*/
 	public boolean isRemoteable();
 
 	/**
-	* Set to true if the portlet supports remoting
+	* Set to <code>true</code> if the portlet supports remoting
 	*
 	* @param remoteable boolean value for whether or not the the portlet
 	supports remoting
@@ -1093,21 +1093,21 @@ public interface Portlet extends PortletModel {
 	public void setRemoteable(boolean remoteable);
 
 	/**
-	* Returns true if the portlet supports scoping of data.
+	* Returns <code>true</code> if the portlet supports scoping of data.
 	*
-	* @return true if the portlet supports scoping of data
+	* @return <code>true</code> if the portlet supports scoping of data
 	*/
 	public boolean getScopeable();
 
 	/**
-	* Returns true if the portlet supports scoping of data.
+	* Returns <code>true</code> if the portlet supports scoping of data.
 	*
-	* @return true if the portlet supports scoping of data
+	* @return <code>true</code> if the portlet supports scoping of data
 	*/
 	public boolean isScopeable();
 
 	/**
-	* Set to true if the portlet supports scoping of data.
+	* Set to <code>true</code> if the portlet supports scoping of data.
 	*
 	* @param scopeable boolean value for whether or not the the portlet
 	supports scoping of data
@@ -1129,25 +1129,25 @@ public interface Portlet extends PortletModel {
 	public void setUserPrincipalStrategy(java.lang.String userPrincipalStrategy);
 
 	/**
-	* Returns true if the portlet does not share request attributes with the
+	* Returns <code>true</code> if the portlet does not share request attributes with the
 	portal or portlets from another WAR.
 	*
-	* @return true if the portlet does not share request attributes with the
+	* @return <code>true</code> if the portlet does not share request attributes with the
 	portal or portlets from another WAR
 	*/
 	public boolean getPrivateRequestAttributes();
 
 	/**
-	* Returns true if the portlet does not share request attributes with the
+	* Returns <code>true</code> if the portlet does not share request attributes with the
 	portal or portlets from another WAR.
 	*
-	* @return true if the portlet does not share request attributes with the
+	* @return <code>true</code> if the portlet does not share request attributes with the
 	portal or portlets from another WAR
 	*/
 	public boolean isPrivateRequestAttributes();
 
 	/**
-	* Set to true if the portlet does not share request attributes with the
+	* Set to <code>true</code> if the portlet does not share request attributes with the
 	portal or portlets from another WAR.
 	*
 	* @param privateRequestAttributes boolean value for whether the portlet
@@ -1157,25 +1157,25 @@ public interface Portlet extends PortletModel {
 	public void setPrivateRequestAttributes(boolean privateRequestAttributes);
 
 	/**
-	* Returns true if the portlet does not share session attributes with the
+	* Returns <code>true</code> if the portlet does not share session attributes with the
 	portal.
 	*
-	* @return true if the portlet does not share session attributes with the
+	* @return <code>true</code> if the portlet does not share session attributes with the
 	portal
 	*/
 	public boolean getPrivateSessionAttributes();
 
 	/**
-	* Returns true if the portlet does not share session attributes with the
+	* Returns <code>true</code> if the portlet does not share session attributes with the
 	portal.
 	*
-	* @return true if the portlet does not share session attributes with the
+	* @return <code>true</code> if the portlet does not share session attributes with the
 	portal
 	*/
 	public boolean isPrivateSessionAttributes();
 
 	/**
-	* Set to true if the portlet does not share session attributes with the
+	* Set to <code>true</code> if the portlet does not share session attributes with the
 	portal.
 	*
 	* @param privateSessionAttributes boolean value for whether the portlet
@@ -1198,21 +1198,21 @@ public interface Portlet extends PortletModel {
 	public void setRenderWeight(int renderWeight);
 
 	/**
-	* Returns true if the portlet can be displayed via Ajax.
+	* Returns <code>true</code> if the portlet can be displayed via Ajax.
 	*
-	* @return true if the portlet can be displayed via Ajax
+	* @return <code>true</code> if the portlet can be displayed via Ajax
 	*/
 	public boolean getAjaxable();
 
 	/**
-	* Returns true if the portlet can be displayed via Ajax.
+	* Returns <code>true</code> if the portlet can be displayed via Ajax.
 	*
-	* @return true if the portlet can be displayed via Ajax
+	* @return <code>true</code> if the portlet can be displayed via Ajax
 	*/
 	public boolean isAjaxable();
 
 	/**
-	* Set to true if the portlet can be displayed via Ajax.
+	* Set to <code>true</code> if the portlet can be displayed via Ajax.
 	*
 	* @param ajaxable boolean value for whether the portlet can be displayed
 	via Ajax
@@ -1408,21 +1408,21 @@ public interface Portlet extends PortletModel {
 	public void setFacebookIntegration(java.lang.String facebookIntegration);
 
 	/**
-	* Returns true if default resources for the portlet are added to a page.
+	* Returns <code>true</code> if default resources for the portlet are added to a page.
 	*
-	* @return true if default resources for the portlet are added to a page
+	* @return <code>true</code> if default resources for the portlet are added to a page
 	*/
 	public boolean getAddDefaultResource();
 
 	/**
-	* Returns true if default resources for the portlet are added to a page.
+	* Returns <code>true</code> if default resources for the portlet are added to a page.
 	*
-	* @return true if default resources for the portlet are added to a page
+	* @return <code>true</code> if default resources for the portlet are added to a page
 	*/
 	public boolean isAddDefaultResource();
 
 	/**
-	* Set to true if default resources for the portlet are added to a page.
+	* Set to <code>true</code> if default resources for the portlet are added to a page.
 	*
 	* @param addDefaultResource boolean value for whether or not default
 	resources for the portlet are added to a page
@@ -1486,41 +1486,41 @@ public interface Portlet extends PortletModel {
 	public void linkRoles();
 
 	/**
-	* Returns true if the portlet has a role with the specified name.
+	* Returns <code>true</code> if the portlet has a role with the specified name.
 	*
-	* @return true if the portlet has a role with the specified name
+	* @return <code>true</code> if the portlet has a role with the specified name
 	*/
 	public boolean hasRoleWithName(java.lang.String roleName);
 
 	/**
-	* Returns true if the user has the permission to add the portlet to a
+	* Returns <code>true</code> if the user has the permission to add the portlet to a
 	layout.
 	*
-	* @return true if the user has the permission to add the portlet to a
+	* @return <code>true</code> if the user has the permission to add the portlet to a
 	layout
 	*/
 	public boolean hasAddPortletPermission(long userId);
 
 	/**
-	* Returns true if the portlet is a system portlet that a user cannot
+	* Returns <code>true</code> if the portlet is a system portlet that a user cannot
 	manually add to their page.
 	*
-	* @return true if the portlet is a system portlet that a user cannot
+	* @return <code>true</code> if the portlet is a system portlet that a user cannot
 	manually add to their page
 	*/
 	public boolean getSystem();
 
 	/**
-	* Returns true if the portlet is a system portlet that a user cannot
+	* Returns <code>true</code> if the portlet is a system portlet that a user cannot
 	manually add to their page.
 	*
-	* @return true if the portlet is a system portlet that a user cannot
+	* @return <code>true</code> if the portlet is a system portlet that a user cannot
 	manually add to their page
 	*/
 	public boolean isSystem();
 
 	/**
-	* Set to true if the portlet is a system portlet that a user cannot
+	* Set to <code>true</code> if the portlet is a system portlet that a user cannot
 	manually add to their page.
 	*
 	* @param system boolean value for whether the portlet is a system portlet
@@ -1529,25 +1529,25 @@ public interface Portlet extends PortletModel {
 	public void setSystem(boolean system);
 
 	/**
-	* Returns true to include the portlet and make it available to be made
+	* Returns <code>true</code> to include the portlet and make it available to be made
 	active.
 	*
-	* @return true to include the portlet and make it available to be made
+	* @return <code>true</code> to include the portlet and make it available to be made
 	active
 	*/
 	public boolean getInclude();
 
 	/**
-	* Returns true to include the portlet and make it available to be made
+	* Returns <code>true</code> to include the portlet and make it available to be made
 	active.
 	*
-	* @return true to include the portlet and make it available to be made
+	* @return <code>true</code> to include the portlet and make it available to be made
 	active
 	*/
 	public boolean isInclude();
 
 	/**
-	* Set to true to include the portlet and make it available to be made
+	* Set to <code>true</code> to include the portlet and make it available to be made
 	active.
 	*
 	* @param include boolean value for whether to include the portlet and make
@@ -1600,10 +1600,10 @@ public interface Portlet extends PortletModel {
 		java.util.Map<java.lang.String, java.util.Set<java.lang.String>> portletModes);
 
 	/**
-	* Returns true if the portlet supports the specified mime type and portlet
+	* Returns <code>true</code> if the portlet supports the specified mime type and portlet
 	mode.
 	*
-	* @return true if the portlet supports the specified mime type and portlet
+	* @return <code>true</code> if the portlet supports the specified mime type and portlet
 	mode
 	*/
 	public boolean hasPortletMode(java.lang.String mimeType,
@@ -1617,9 +1617,9 @@ public interface Portlet extends PortletModel {
 	public java.util.Set<java.lang.String> getAllPortletModes();
 
 	/**
-	* Returns true if the portlet supports more than one mime type.
+	* Returns <code>true</code> if the portlet supports more than one mime type.
 	*
-	* @return true if the portlet supports more than one mime type
+	* @return <code>true</code> if the portlet supports more than one mime type
 	*/
 	public boolean hasMultipleMimeTypes();
 
@@ -1639,10 +1639,10 @@ public interface Portlet extends PortletModel {
 		java.util.Map<java.lang.String, java.util.Set<java.lang.String>> windowStates);
 
 	/**
-	* Returns true if the portlet supports the specified mime type and window
+	* Returns <code>true</code> if the portlet supports the specified mime type and window
 	state.
 	*
-	* @return true if the portlet supports the specified mime type and window
+	* @return <code>true</code> if the portlet supports the specified mime type and window
 	state
 	*/
 	public boolean hasWindowState(java.lang.String mimeType,
@@ -1829,7 +1829,7 @@ public interface Portlet extends PortletModel {
 	public void setPortletApp(com.liferay.portal.model.PortletApp portletApp);
 
 	/**
-	* Returns true if the portlet is found in a WAR file.
+	* Returns <code>true</code> if the portlet is found in a WAR file.
 	*
 	* @param portletId the cloned instance portlet id
 	* @return a cloned instance of the portlet
@@ -1838,21 +1838,21 @@ public interface Portlet extends PortletModel {
 		java.lang.String portletId);
 
 	/**
-	* Returns true if the portlet is a static portlet that is cannot be moved.
+	* Returns <code>true</code> if the portlet is a static portlet that is cannot be moved.
 	*
-	* @return true if the portlet is a static portlet that is cannot be moved
+	* @return <code>true</code> if the portlet is a static portlet that is cannot be moved
 	*/
 	public boolean getStatic();
 
 	/**
-	* Returns true if the portlet is a static portlet that is cannot be moved.
+	* Returns <code>true</code> if the portlet is a static portlet that is cannot be moved.
 	*
-	* @return true if the portlet is a static portlet that is cannot be moved
+	* @return <code>true</code> if the portlet is a static portlet that is cannot be moved
 	*/
 	public boolean isStatic();
 
 	/**
-	* Set to true if the portlet is a static portlet that is cannot be moved.
+	* Set to <code>true</code> if the portlet is a static portlet that is cannot be moved.
 	*
 	* @param staticPortlet boolean value for whether the portlet is a static
 	portlet that cannot be moved
@@ -1860,25 +1860,25 @@ public interface Portlet extends PortletModel {
 	public void setStatic(boolean staticPortlet);
 
 	/**
-	* Returns true if the portlet is a static portlet at the start of a list of
+	* Returns <code>true</code> if the portlet is a static portlet at the start of a list of
 	portlets.
 	*
-	* @return true if the portlet is a static portlet at the start of a list of
+	* @return <code>true</code> if the portlet is a static portlet at the start of a list of
 	portlets
 	*/
 	public boolean getStaticStart();
 
 	/**
-	* Returns true if the portlet is a static portlet at the start of a list of
+	* Returns <code>true</code> if the portlet is a static portlet at the start of a list of
 	portlets.
 	*
-	* @return true if the portlet is a static portlet at the start of a list of
+	* @return <code>true</code> if the portlet is a static portlet at the start of a list of
 	portlets
 	*/
 	public boolean isStaticStart();
 
 	/**
-	* Set to true if the portlet is a static portlet at the start of a list of
+	* Set to <code>true</code> if the portlet is a static portlet at the start of a list of
 	portlets.
 	*
 	* @param staticPortletStart boolean value for whether the portlet is a
@@ -1887,39 +1887,39 @@ public interface Portlet extends PortletModel {
 	public void setStaticStart(boolean staticPortletStart);
 
 	/**
-	* Returns true if the portlet is a static portlet at the end of a list of
+	* Returns <code>true</code> if the portlet is a static portlet at the end of a list of
 	portlets.
 	*
-	* @return true if the portlet is a static portlet at the end of a list of
+	* @return <code>true</code> if the portlet is a static portlet at the end of a list of
 	portlets
 	*/
 	public boolean getStaticEnd();
 
 	/**
-	* Returns true if the portlet is a static portlet at the end of a list of
+	* Returns <code>true</code> if the portlet is a static portlet at the end of a list of
 	portlets.
 	*
-	* @return true if the portlet is a static portlet at the end of a list of
+	* @return <code>true</code> if the portlet is a static portlet at the end of a list of
 	portlets
 	*/
 	public boolean isStaticEnd();
 
 	/**
-	* Returns true if the portlet is an undeployed portlet.
+	* Returns <code>true</code> if the portlet is an undeployed portlet.
 	*
-	* @return true if the portlet is a placeholder of an undeployed portlet
+	* @return <code>true</code> if the portlet is a placeholder of an undeployed portlet
 	*/
 	public boolean getUndeployedPortlet();
 
 	/**
-	* Returns true if the portlet is an undeployed portlet.
+	* Returns <code>true</code> if the portlet is an undeployed portlet.
 	*
-	* @return true if the portlet is a placeholder of an undeployed portlet
+	* @return <code>true</code> if the portlet is a placeholder of an undeployed portlet
 	*/
 	public boolean isUndeployedPortlet();
 
 	/**
-	* Set to true if the portlet is an undeployed portlet.
+	* Set to <code>true</code> if the portlet is an undeployed portlet.
 	*
 	* @param undeployedPortlet boolean value for whether the portlet is an
 	undeployed portlet
@@ -1948,7 +1948,7 @@ public interface Portlet extends PortletModel {
 	* Checks whether this portlet is equal to the specified object.
 	*
 	* @param obj the object to compare this portlet against
-	* @return true if the portlet is equal to the specified object
+	* @return <code>true</code> if the portlet is equal to the specified object
 	*/
 	public boolean equals(java.lang.Object obj);
 }

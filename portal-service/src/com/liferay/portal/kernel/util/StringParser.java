@@ -64,8 +64,8 @@ public class StringParser {
 	 * </p>
 	 *
 	 * <p>
-	 * If a string parser is set to encode fragments using a
-	 * {@link StringEncoder}, an individual fragment can be specified as raw by
+	 * If a string parser is set to encode fragments using a {@link
+	 * StringEncoder}, an individual fragment can be specified as raw by
 	 * prefixing its name with a percent sign, as shown below:
 	 * </p>
 	 *
@@ -140,7 +140,8 @@ public class StringParser {
 	 * </p>
 	 *
 	 * @param  parameters the parameter map to build the string from
-	 * @return the string, or null if this parser is not appropriate
+	 * @return the string, or <code>null</code> if this parser is not
+	 *		   appropriate
 	 */
 	public String build(Map<String, String> parameters) {
 		String s = _builder;

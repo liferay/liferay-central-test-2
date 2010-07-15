@@ -76,9 +76,11 @@ public class PluginSettingImpl
 	}
 
 	/**
-	 * Returns true if the plugin has a role with the specified name.
+	 * Returns <code>true</code> if the plugin has a role with the specified
+	 * name.
 	 *
-	 * @return true if the plugin has a role with the specified name
+	 * @return <code>true</code> if the plugin has a role with the specified
+	 *		   name
 	 */
 	public boolean hasRoleWithName(String roleName) {
 		for (int i = 0; i < _rolesArray.length; i++) {
@@ -91,9 +93,9 @@ public class PluginSettingImpl
 	}
 
 	/**
-	 * Returns true if the user has permission to use this plugin
+	 * Returns <code>true</code> if the user has permission to use this plugin
 	 *
-	 * @return true if the user has permission to use this plugin
+	 * @return <code>true</code> if the user has permission to use this plugin
 	 */
 	public boolean hasPermission(long userId) {
 		try {

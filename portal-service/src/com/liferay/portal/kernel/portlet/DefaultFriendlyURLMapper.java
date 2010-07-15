@@ -40,11 +40,10 @@ import javax.portlet.WindowState;
  * </p>
  *
  * <p>
- * If you do need to extend this class, use
- * {@link com.liferay.util.bridges.alloy.AlloyFriendlyURLMapper} as a guide. The
- * key methods to override are
- * {@link #buildPath(LiferayPortletURL)} and
- * {@link #populateParams(String, Map, Map)}.
+ * If you do need to extend this class, use {@link
+ * com.liferay.util.bridges.alloy.AlloyFriendlyURLMapper} as a guide. The key
+ * methods to override are {@link #buildPath(LiferayPortletURL)} and {@link
+ * #populateParams(String, Map, Map)}.
  * </p>
  *
  * @author Connor McKay
@@ -227,8 +226,8 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 	 * @param  routeParameters the parameter map to get the portlet id from. For
 	 *		   an instanceable portlet, this must contain either
 	 *		   <code>p_p_id</code> or <code>instanceId</code>.
-	 * @return the portlet id, including the instance id if applicable, or null
-	 *		   if it cannot be determined
+	 * @return the portlet id, including the instance id if applicable, or
+	 *		   <code>null</code> if it cannot be determined
 	 */
 	protected String getPortletId(Map<String, String> routeParameters) {
 		if (!isPortletInstanceable()) {

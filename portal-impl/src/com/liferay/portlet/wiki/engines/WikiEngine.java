@@ -60,7 +60,7 @@ public interface WikiEngine {
 	/**
 	 * Validate the content of a wiki page for this engine.
 	 *
-	 * @return true if the content is valid
+	 * @return <code>true</code> if the content is valid
 	 */
 	public boolean validate(long nodeId, String content);
 

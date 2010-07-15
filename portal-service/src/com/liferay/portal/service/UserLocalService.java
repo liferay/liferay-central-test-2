@@ -449,9 +449,9 @@ public interface UserLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns true if the user has the role.
+	* Returns <code>true</code> if the user has the role.
 	*
-	* @return true if the user has the role
+	* @return <code>true</code> if the user has the role
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasRoleUser(long companyId, java.lang.String name,

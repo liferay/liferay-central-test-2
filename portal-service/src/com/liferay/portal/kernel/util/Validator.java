@@ -147,9 +147,9 @@ public class Validator {
 	}
 
 	/**
-	 * Returns true if c is a letter between a-z and A-Z.
+	 * Returns <code>true</code> if c is a letter between a-z and A-Z.
 	 *
-	 * @return true if c is a letter between a-z and A-Z
+	 * @return <code>true</code> if c is a letter between a-z and A-Z
 	 */
 	public static boolean isChar(char c) {
 		int x = c;
@@ -162,9 +162,11 @@ public class Validator {
 	}
 
 	/**
-	 * Returns true if s is a string of letters that are between a-z and A-Z.
+	 * Returns <code>true</code> if s is a string of letters that are between
+	 * a-z and A-Z.
 	 *
-	 * @return true if s is a string of letters that are between a-z and A-Z
+	 * @return <code>true</code> if s is a string of letters that are between
+	 *		   a-z and A-Z
 	 */
 	public static boolean isChar(String s) {
 		if (isNull(s)) {
@@ -185,9 +187,9 @@ public class Validator {
 	}
 
 	/**
-	 * Returns true if c is a digit between 0 and 9.
+	 * Returns <code>true</code> if c is a digit between 0 and 9.
 	 *
-	 * @return true if c is a digit between 0 and 9
+	 * @return <code>true</code> if c is a digit between 0 and 9
 	 */
 	public static boolean isDigit(char c) {
 		int x = c;
@@ -200,9 +202,11 @@ public class Validator {
 	}
 
 	/**
-	 * Returns true if s is a string of letters that are between 0 and 9.
+	 * Returns <code>true</code> if s is a string of letters that are between 0
+	 * and 9.
 	 *
-	 * @return true if s is a string of letters that are between 0 and 9
+	 * @return <code>true</code> if s is a string of letters that are between 0
+	 *		   and 9
 	 */
 	public static boolean isDigit(String s) {
 		if (isNull(s)) {

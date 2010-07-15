@@ -250,9 +250,9 @@ public class RoleLocalServiceWrapper implements RoleLocalService {
 	}
 
 	/**
-	* Returns true if the user has the regular role.
+	* Returns <code>true</code> if the user has the regular role.
 	*
-	* @return true if the user has the regular role
+	* @return <code>true</code> if the user has the regular role
 	*/
 	public boolean hasUserRole(long userId, long companyId,
 		java.lang.String name, boolean inherited)
@@ -262,9 +262,9 @@ public class RoleLocalServiceWrapper implements RoleLocalService {
 	}
 
 	/**
-	* Returns true if the user has any one of the specified regular roles.
+	* Returns <code>true</code> if the user has any one of the specified regular roles.
 	*
-	* @return true if the user has the regular role
+	* @return <code>true</code> if the user has the regular role
 	*/
 	public boolean hasUserRoles(long userId, long companyId,
 		java.lang.String[] names, boolean inherited)

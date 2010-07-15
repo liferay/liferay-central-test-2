@@ -61,16 +61,16 @@ public interface PluginSetting extends PluginSettingModel {
 	public void setRolesArray(java.lang.String[] rolesArray);
 
 	/**
-	* Returns true if the plugin has a role with the specified name.
+	* Returns <code>true</code> if the plugin has a role with the specified name.
 	*
-	* @return true if the plugin has a role with the specified name
+	* @return <code>true</code> if the plugin has a role with the specified name
 	*/
 	public boolean hasRoleWithName(java.lang.String roleName);
 
 	/**
-	* Returns true if the user has permission to use this plugin
+	* Returns <code>true</code> if the user has permission to use this plugin
 	*
-	* @return true if the user has permission to use this plugin
+	* @return <code>true</code> if the user has permission to use this plugin
 	*/
 	public boolean hasPermission(long userId);
 }

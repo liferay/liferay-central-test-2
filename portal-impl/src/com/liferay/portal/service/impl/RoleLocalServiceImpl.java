@@ -361,9 +361,9 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	}
 
 	/**
-	 * Returns true if the user has the regular role.
+	 * Returns <code>true</code> if the user has the regular role.
 	 *
-	 * @return true if the user has the regular role
+	 * @return <code>true</code> if the user has the regular role
 	 */
 	@ThreadLocalCachable
 	public boolean hasUserRole(
@@ -390,9 +390,10 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	}
 
 	/**
-	 * Returns true if the user has any one of the specified regular roles.
+	 * Returns <code>true</code> if the user has any one of the specified
+	 * regular roles.
 	 *
-	 * @return true if the user has the regular role
+	 * @return <code>true</code> if the user has the regular role
 	 */
 	public boolean hasUserRoles(
 			long userId, long companyId, String[] names, boolean inherited)

@@ -582,9 +582,9 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
-	* Returns true if the user has the role.
+	* Returns <code>true</code> if the user has the role.
 	*
-	* @return true if the user has the role
+	* @return <code>true</code> if the user has the role
 	*/
 	public static boolean hasRoleUser(long companyId, java.lang.String name,
 		long userId, boolean inherited)

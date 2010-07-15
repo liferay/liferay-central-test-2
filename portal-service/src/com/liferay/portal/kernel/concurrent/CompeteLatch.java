@@ -53,7 +53,7 @@ public class CompeteLatch {
 	 * No matter how many threads join this competition, only one thread can be
 	 * the winner thread.
 	 *
-	 * @return true if the current thread is the winner thread
+	 * @return <code>true</code> if the current thread is the winner thread
 	 */
 	public boolean compete() {
 		return _sync._tryInitAcquireShared();
@@ -69,18 +69,19 @@ public class CompeteLatch {
 	 * get out of a deadlock. If no one threads have locked the latch, then
 	 * calling this method has no effect. This method will return immediately.
 	 *
-	 * @return true if this call opens the latch, false if the latch is already
-	 *		   open
+	 * @return true if this call opens the latch, <code>false</code> if the
+	 *		   latch is already open
 	 */
 	public boolean done() {
 		return _sync.releaseShared(1);
 	}
 
 	/**
-	 * Returns true if the latch is locked. This method should not be used to
-	 * test the latch before joining a competition because it is not thread
-	 * safe. The only purpose for this method is to give external systems a way
-	 * to monitor the latch which is usually be used for deadlock detection.
+	 * Returns <code>true</code> if the latch is locked. This method should not
+	 * be used to test the latch before joining a competition because it is not
+	 * thread safe. The only purpose for this method is to give external systems
+	 * a way to monitor the latch which is usually be used for deadlock
+	 * detection.
 	 */
 	public boolean isLocked() {
 		return _sync._isLocked();

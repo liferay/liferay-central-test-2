@@ -223,57 +223,64 @@ public class CustomSQL {
 	}
 
 	/**
-	 * Returns true if Hibernate is connecting to a DB2 database.
+	 * Returns <code>true</code> if Hibernate is connecting to a DB2 database.
 	 *
-	 * @return true if Hibernate is connecting to a DB2 database
+	 * @return <code>true</code> if Hibernate is connecting to a DB2 database
 	 */
 	public boolean isVendorDB2() {
 		return _vendorDB2;
 	}
 
 	/**
-	 * Returns true if Hibernate is connecting to an Informix database.
+	 * Returns <code>true</code> if Hibernate is connecting to an Informix
+	 * database.
 	 *
-	 * @return true if Hibernate is connecting to an Informix database
+	 * @return <code>true</code> if Hibernate is connecting to an Informix
+	 *		   database
 	 */
 	public boolean isVendorInformix() {
 		return _vendorInformix;
 	}
 
 	/**
-	 * Returns true if Hibernate is connecting to a MySQL database.
+	 * Returns <code>true</code> if Hibernate is connecting to a MySQL database.
 	 *
-	 * @return true if Hibernate is connecting to a MySQL database
+	 * @return <code>true</code> if Hibernate is connecting to a MySQL database
 	 */
 	public boolean isVendorMySQL() {
 		return _vendorMySQL;
 	}
 
 	/**
-	 * Returns true if Hibernate is connecting to an Oracle database. Oracle has
-	 * a nasty bug where it treats '' as a NULL value. See
+	 * Returns <code>true</code> if Hibernate is connecting to an Oracle
+	 * database. Oracle has a nasty bug where it treats '' as a
+	 * <code>NULL</code> value. See
 	 * http://thedailywtf.com/forums/thread/26879.aspx for more information on
 	 * this nasty bug.
 	 *
-	 * @return true if Hibernate is connecting to an Oracle database
+	 * @return <code>true</code> if Hibernate is connecting to an Oracle
+	 *		   database
 	 */
 	public boolean isVendorOracle() {
 		return _vendorOracle;
 	}
 
 	/**
-	 * Returns true if Hibernate is connecting to a PostgreSQL database.
+	 * Returns <code>true</code> if Hibernate is connecting to a PostgreSQL
+	 * database.
 	 *
-	 * @return true if Hibernate is connecting to a PostgreSQL database
+	 * @return <code>true</code> if Hibernate is connecting to a PostgreSQL
+	 *		   database
 	 */
 	public boolean isVendorPostgreSQL() {
 		return _vendorPostgreSQL;
 	}
 
 	/**
-	 * Returns true if Hibernate is connecting to a Sybase database.
+	 * Returns <code>true</code> if Hibernate is connecting to a Sybase
+	 * database.
 	 *
-	 * @return true if Hibernate is connecting to a Sybase database
+	 * @return <code>true</code> if Hibernate is connecting to a Sybase database
 	 */
 	public boolean isVendorSybase() {
 		return _vendorSybase;
