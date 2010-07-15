@@ -283,5 +283,5 @@ if (column != null) {
 	PortalUtil.addPortletBreadcrumbEntry(request, column.getName(), null);
 }
 
-PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, (column == null ? Constants.ADD : Constants.UPDATE) + "-attribute"), currentURL);
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, ((column == null) ? "add-attribute" : "edit")), currentURL);
 %>

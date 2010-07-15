@@ -483,7 +483,7 @@ if (curParentMessage != null) {
 else if (message != null) {
 	MBUtil.addPortletBreadcrumbEntries(message, request, renderResponse);
 
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "update-message"), currentURL);
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
 }
 else {
 	MBUtil.addPortletBreadcrumbEntries(categoryId, request, renderResponse);

@@ -236,7 +236,7 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 if (category != null) {
 	MBUtil.addPortletBreadcrumbEntries(category, request, renderResponse);
 
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "update-category"), currentURL);
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
 }
 else {
 	if (parentCategoryId > 0) {

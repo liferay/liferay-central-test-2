@@ -155,5 +155,5 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 </aui:script>
 
 <%
-PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, (role == null ? "add-role" : "edit")), currentURL);
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, ((role == null) ? "add-role" : "edit")), currentURL);
 %>
