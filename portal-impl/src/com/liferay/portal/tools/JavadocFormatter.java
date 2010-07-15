@@ -887,7 +887,9 @@ public class JavadocFormatter {
 	}
 
 	private String _formatInlines(String text) {
+
 		// Wrap special constants in code tags
+
 		text = text.replaceAll(
 			"(?i)(?<!<code>)(null|false|true)", "<code>$1</code>");
 
