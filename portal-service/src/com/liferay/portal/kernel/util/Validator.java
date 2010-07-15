@@ -647,6 +647,6 @@ public class Validator {
 		"\\b");
 
 	private static Pattern _variableNamePattern = Pattern.compile(
-		"[_a-zA-Z]+[_a-zA-Z0-9 ]*");
+		"[_a-zA-Z]+[_a-zA-Z0-9]*");
 
 }
