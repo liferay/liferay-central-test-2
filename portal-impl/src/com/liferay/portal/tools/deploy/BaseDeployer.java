@@ -534,6 +534,37 @@ public class BaseDeployer {
 			}
 		}
 
+		// LPS-11268
+
+		Properties properties = getPluginPackageProperties(srcFile);
+
+		if (properties != null) {
+			String deployExcludes = properties.getProperty("deploy-excludes");
+
+			if (deployExcludes != null) {
+				excludes += deployExcludes.trim();
+
+				if (!excludes.endsWith(",")) {
+					excludes += ",";
+				}
+			}
+
+			deployExcludes = properties.getProperty(
+				"deploy-excludes-" + appServerType);
+
+			if (deployExcludes != null) {
+				excludes += deployExcludes.trim();
+
+				if (!excludes.endsWith(",")) {
+					excludes += ",";
+				}
+			}
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Excludes " + excludes);
+		}
+
 		if (!unpackWar || appServerType.equals(ServerDetector.WEBSPHERE_ID)) {
 			File tempDir = new File(
 				SystemProperties.get(SystemProperties.TMP_DIR) +
