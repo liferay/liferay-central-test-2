@@ -20,8 +20,8 @@ import java.util.Map;
  * Provides custom URL mapping for a portlet.
  *
  * <p>
- * Never implement this interface directly, subclass
- * {@link BaseFriendlyURLMapper} to ensure forward compatibility.
+ * Never implement this interface directly, subclass {@link
+ * BaseFriendlyURLMapper} to ensure forward compatibility.
  * </p>
  *
  * @author Brian Myunghun Kim
@@ -39,8 +39,8 @@ public interface FriendlyURLMapper {
 	 * @param  liferayPortletURL the portlet URL object to generate a friendly
 	 *		   URL for
 	 * @return the generated friendly URL, or <code>null</code> if one cannot be
-	 *		   built. Returning null will cause a normal portlet URL to be
-	 *		   generated.
+	 *		   built. Returning <code>null</code> will cause a normal portlet
+	 *		   URL to be generated.
 	 */
 	public String buildPath(LiferayPortletURL liferayPortletURL);
 
@@ -84,8 +84,8 @@ public interface FriendlyURLMapper {
 	 *
 	 * <p>
 	 * Typically, friendly URLs will include the separator &quot;/-/&quot;
-	 * before the friendly URL mapping. If this method returns false, a single
-	 * slash will be used instead.
+	 * before the friendly URL mapping. If this method returns
+	 * <code>false</code>, a single slash will be used instead.
 	 * </p>
 	 *
 	 * <p>
@@ -113,7 +113,8 @@ public interface FriendlyURLMapper {
 	 * should be included in the URL.
 	 * </p>
 	 *
-	 * @return true if the portlet is instanceable; false otherwise
+	 * @return <code>true</code> if the portlet is instanceable;
+	 *		   <code>false</code> otherwise
 	 */
 	public boolean isPortletInstanceable();
 
@@ -143,9 +144,9 @@ public interface FriendlyURLMapper {
 	 * Sets the friendly URL mapping for this portlet.
 	 *
 	 * <p>
-	 * This method is automatically called by
-	 * {@link com.liferay.portlet.PortletBagFactory} with the friendly URL
-	 * mapping defined in <code>liferay-portlet.xml</code>.
+	 * This method is automatically called by {@link
+	 * com.liferay.portlet.PortletBagFactory} with the friendly URL mapping
+	 * defined in <code>liferay-portlet.xml</code>.
 	 * </p>
 	 *
 	 * @param mapping the friendly URL mapping for this portlet
@@ -156,9 +157,9 @@ public interface FriendlyURLMapper {
 	 * Sets the id of this portlet.
 	 *
 	 * <p>
-	 * This method is automatically called by
-	 * {@link com.liferay.portlet.PortletBagFactory} with the portlet id defined
-	 * in <code>liferay-portlet.xml</code>.
+	 * This method is automatically called by {@link
+	 * com.liferay.portlet.PortletBagFactory} with the portlet id defined in
+	 * <code>liferay-portlet.xml</code>.
 	 * </p>
 	 *
 	 * @param portletId the id of this portlet.
@@ -176,9 +177,9 @@ public interface FriendlyURLMapper {
 	 * Sets the router for this friendly URL mapper.
 	 *
 	 * <p>
-	 * This method is automatically called by
-	 * {@link com.liferay.portlet.PortletBagFactory} with a router populated
-	 * with the routes defined in this portlet's <a
+	 * This method is automatically called by {@link
+	 * com.liferay.portlet.PortletBagFactory} with a router populated with the
+	 * routes defined in this portlet's <a
 	 * href="../definitions/liferay-friendly-url-routes_6_0_0.dtd.html"
 	 * >friendly-url-routes.xml</a> file. The location of this file is defined
 	 * in this portlet's <a
