@@ -6,11 +6,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 /**
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
  * This class is a wrapper for {@link ${entity.name}}.
  * </p>
  *

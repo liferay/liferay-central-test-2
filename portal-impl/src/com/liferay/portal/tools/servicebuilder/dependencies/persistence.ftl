@@ -11,11 +11,6 @@ import com.liferay.portal.service.persistence.BasePersistence;
 import java.util.Date;
 
 /**
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
  * @author    ${author}
  * @see       ${entity.name}PersistenceImpl
  * @see       ${entity.name}Util

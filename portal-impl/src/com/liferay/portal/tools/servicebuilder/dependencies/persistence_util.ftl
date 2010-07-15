@@ -13,11 +13,6 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
  * @author    ${author}
  * @see       ${entity.name}Persistence
  * @see       ${entity.name}PersistenceImpl

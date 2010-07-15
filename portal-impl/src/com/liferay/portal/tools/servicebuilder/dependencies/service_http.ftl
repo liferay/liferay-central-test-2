@@ -19,11 +19,6 @@ import com.liferay.portal.service.http.TunnelUtil;
 
 /**
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
  * This class provides a HTTP utility for the
  * {@link ${packagePath}.service.${entity.name}ServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.

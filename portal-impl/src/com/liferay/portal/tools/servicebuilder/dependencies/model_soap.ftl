@@ -12,11 +12,6 @@ import java.util.List;
 
 /**
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
  * This class is used by
  * {@link ${packagePath}.service.http.${entity.name}ServiceSoap}.
  * </p>
