@@ -73,7 +73,13 @@ AUI().add(
 
 						instance._renderFieldIndexes();
 
-						instance.rows = new A.DataSet();
+						instance.rows = new A.DataSet(
+							{
+								getKey: function(obj) {
+									return obj.get('boundingBox').get('id');
+								}
+							}
+						);
 
 						if (instance.get('sortable')){
 							instance._initSortable();
@@ -179,7 +185,35 @@ AUI().add(
 								dd: {
 									handles: [sortableHandle]
 								},
-								nodes: []
+								nodes: [],
+								on: {
+									'drag:end': function(event) {
+										var rowNodes = contentBox.all('.aui-autorow');
+
+										instance.rows.sort(
+											'asc',
+											function(a,b) {
+												var rowA = a.get('boundingBox');
+												var rowB = b.get('boundingBox');
+
+												return rowNodes.indexOf(rowA) - rowNodes.indexOf(rowB);
+											}
+										);
+									}
+								}
+							}
+						);
+
+						instance._undoManager.on(
+							'clearList',
+							function(event) {
+								instance.rows.each(
+									function(item, index, collection) {
+										if (!item.get('active')) {
+											A.DD.DDM.getDrag(item.get('boundingBox')).destroy();
+										}
+									}
+								);
 							}
 						);
 					},
@@ -187,7 +221,9 @@ AUI().add(
 					_onCloneRow: function(event) {
 						var instance = this;
 
-						instance.rows.add(event.row);
+						var index = instance.rows.indexOf(event.originalRow) + 1;
+
+						instance.rows.insert(index, event.row);
 
 						instance._guid++;
 					},
