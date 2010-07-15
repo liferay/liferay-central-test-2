@@ -20,7 +20,16 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * Enables HTML auto escaping of strings returned by annotated methods when a
+ * bean is wrapped with {@link
+ * com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+ *
+ * <p>
+ * For a usage example, see {@link com.liferay.portal.model.UserModel}.
+ * </p>
+ *
  * @author Shuyang Zhou
+ * @see	   com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)

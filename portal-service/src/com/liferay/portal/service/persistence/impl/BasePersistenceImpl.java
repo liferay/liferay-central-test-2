@@ -299,10 +299,33 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		}
 	}
 
+	/**
+	 * Removes the model instance from the database. {@link #update(BaseModel,
+	 * boolean)} depends on this method to implement the remove operation; it
+	 * only notifies the model listeners.
+	 *
+	 * @param  model the model instance to remove
+	 * @return the model instance that was removed
+	 * @throws SystemException if a system exception occurred
+	 */
 	protected T removeImpl(T model) throws SystemException {
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * Updates the model instance in the database or adds it if it does not yet
+	 * exist. {@link #remove(BaseModel)} depends on this method to implement the
+	 * update operation; it only notifies the model listeners.
+	 *
+	 * @param  model the model instance to update
+	 * @param  merge whether to merge the model instance with the current
+	 *		   session. See {@link
+	 *		   com.liferay.portal.service.persistence.BatchSession#update(
+	 *		   com.liferay.portal.kernel.dao.orm.Session, BaseModel, boolean)}
+	 *		   for an explanation.
+	 * @return the model instance that was updated
+	 * @throws SystemException if a system exception occurred
+	 */
 	protected T updateImpl(T model, boolean merge) throws SystemException {
 		throw new UnsupportedOperationException();
 	}
