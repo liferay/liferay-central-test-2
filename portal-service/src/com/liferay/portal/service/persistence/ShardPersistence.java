@@ -17,11 +17,6 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.model.Shard;
 
 /**
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
  * @author    Brian Wing Shun Chan
  * @see       ShardPersistenceImpl
  * @see       ShardUtil

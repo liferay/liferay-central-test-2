@@ -17,11 +17,6 @@ package com.liferay.portal.model;
 
 /**
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
  * This interface is a model that represents the PluginSetting table in the
  * database.
  * </p>
@@ -61,9 +56,11 @@ public interface PluginSetting extends PluginSettingModel {
 	public void setRolesArray(java.lang.String[] rolesArray);
 
 	/**
-	* Returns <code>true</code> if the plugin has a role with the specified name.
+	* Returns <code>true</code> if the plugin has a role with the specified
+	name.
 	*
-	* @return <code>true</code> if the plugin has a role with the specified name
+	* @return <code>true</code> if the plugin has a role with the specified
+	name
 	*/
 	public boolean hasRoleWithName(java.lang.String roleName);
 

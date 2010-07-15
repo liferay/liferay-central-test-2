@@ -18,11 +18,6 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
  * This class provides static methods for the
  * {@link RoleLocalService} bean. The static methods of
  * this class calls the same methods of the bean instance. It's convenient to be
@@ -266,7 +261,8 @@ public class RoleLocalServiceUtil {
 	}
 
 	/**
-	* Returns <code>true</code> if the user has any one of the specified regular roles.
+	* Returns <code>true</code> if the user has any one of the specified
+	regular roles.
 	*
 	* @return <code>true</code> if the user has the regular role
 	*/

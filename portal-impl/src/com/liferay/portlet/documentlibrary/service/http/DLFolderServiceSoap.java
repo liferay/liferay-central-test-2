@@ -24,11 +24,6 @@ import java.rmi.RemoteException;
 
 /**
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
  * This class provides a SOAP utility for the
  * {@link com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.

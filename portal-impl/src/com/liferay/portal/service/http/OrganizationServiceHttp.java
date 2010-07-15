@@ -26,11 +26,6 @@ import com.liferay.portal.service.OrganizationServiceUtil;
 
 /**
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
  * This class provides a HTTP utility for the
  * {@link com.liferay.portal.service.OrganizationServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.

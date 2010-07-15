@@ -17,11 +17,6 @@ package com.liferay.portlet.softwarecatalog.model;
 
 /**
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
  * This interface is a model that represents the SCProductVersion table in the
  * database.
  * </p>

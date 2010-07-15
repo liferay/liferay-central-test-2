@@ -21,11 +21,6 @@ import java.util.List;
 
 /**
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
  * This class is used by
  * {@link com.liferay.portal.service.http.LayoutServiceSoap}.
  * </p>

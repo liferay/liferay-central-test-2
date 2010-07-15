@@ -17,11 +17,6 @@ package com.liferay.portal.service;
 
 /**
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
  * This class is a wrapper for {@link RoleLocalService}.
  * </p>
  *
@@ -262,7 +257,8 @@ public class RoleLocalServiceWrapper implements RoleLocalService {
 	}
 
 	/**
-	* Returns <code>true</code> if the user has any one of the specified regular roles.
+	* Returns <code>true</code> if the user has any one of the specified
+	regular roles.
 	*
 	* @return <code>true</code> if the user has the regular role
 	*/

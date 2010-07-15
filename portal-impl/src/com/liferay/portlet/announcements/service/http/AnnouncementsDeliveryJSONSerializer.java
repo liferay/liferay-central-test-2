@@ -23,11 +23,6 @@ import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 import java.util.List;
 
 /**
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
  * @author    Brian Wing Shun Chan
  * @generated
  */

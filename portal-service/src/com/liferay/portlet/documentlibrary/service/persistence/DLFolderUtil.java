@@ -25,11 +25,6 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import java.util.List;
 
 /**
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
  * @author    Brian Wing Shun Chan
  * @see       DLFolderPersistence
  * @see       DLFolderPersistenceImpl

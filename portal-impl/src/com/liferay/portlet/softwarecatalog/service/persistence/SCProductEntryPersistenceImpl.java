@@ -65,11 +65,6 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
  * @author    Brian Wing Shun Chan
  * @see       SCProductEntryPersistence
  * @see       SCProductEntryUtil

@@ -41,11 +41,6 @@ import java.util.List;
 
 /**
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
  * This interface is a model that represents the RatingsEntry table in the
  * database.
  * </p>

@@ -22,11 +22,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
  * This interface defines the service. The default implementation is
  * {@link
  * com.liferay.portal.service.impl.RoleLocalServiceImpl}.
@@ -220,7 +215,8 @@ public interface RoleLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns <code>true</code> if the user has any one of the specified regular roles.
+	* Returns <code>true</code> if the user has any one of the specified
+	regular roles.
 	*
 	* @return <code>true</code> if the user has the regular role
 	*/

@@ -25,11 +25,6 @@ import com.liferay.portlet.expando.model.ExpandoColumn;
 import java.util.List;
 
 /**
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
  * @author    Brian Wing Shun Chan
  * @see       ExpandoColumnPersistence
  * @see       ExpandoColumnPersistenceImpl
