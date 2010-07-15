@@ -886,6 +886,14 @@ public class JavadocFormatter {
 			fileName, originalContent, javadocLessContent, document);
 	}
 
+	private String _formatInlines(String text) {
+		// Wrap special constants in code tags
+		text = text.replaceAll(
+			"(?i)(?<!<code>)(null|false|true)", "<code>$1</code>");
+
+		return text;
+	}
+
 	private int _getJavaClassLineNumber(JavaClass javaClass) {
 		int lineNumber = javaClass.getLineNumber();
 
@@ -1022,8 +1030,10 @@ public class JavadocFormatter {
 			StringBuffer sb = new StringBuffer();
 
 			while (matcher.find()) {
-				String wrapped = StringUtil.wrap(
-					matcher.group(), 80 - indentLength - 3, "\n");
+				String wrapped = _formatInlines(matcher.group());
+
+				wrapped = StringUtil.wrap(
+					wrapped, 80 - indentLength - 3, "\n");
 
 				matcher.appendReplacement(sb, wrapped);
 			}
@@ -1035,6 +1045,8 @@ public class JavadocFormatter {
 			text = sb.toString();
 		}
 		else {
+			text = _formatInlines(text);
+
 			text = StringUtil.wrap(text, 80 - indentLength - 3, "\n");
 		}
 
