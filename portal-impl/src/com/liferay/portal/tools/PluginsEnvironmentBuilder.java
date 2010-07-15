@@ -127,10 +127,10 @@ public class PluginsEnvironmentBuilder {
 		String projectName = StringUtil.extractLast(
 			projectDirName, File.separator);
 
-		boolean isJavaProject = false;
+		boolean javaProject = false;
 
 		if (FileUtil.exists(projectDirName + "/docroot/WEB-INF/src")) {
-			isJavaProject = true;
+			javaProject = true;
 		}
 
 		// .project
@@ -146,7 +146,7 @@ public class PluginsEnvironmentBuilder {
 		sb.append("\t<projects></projects>\n");
 		sb.append("\t<buildSpec>\n");
 
-		if (isJavaProject) {
+		if (javaProject) {
 			sb.append("\t\t<buildCommand>\n");
 			sb.append("\t\t\t<name>org.eclipse.jdt.core.javabuilder</name>\n");
 			sb.append("\t\t\t<arguments></arguments>\n");
@@ -156,7 +156,7 @@ public class PluginsEnvironmentBuilder {
 		sb.append("\t</buildSpec>\n");
 		sb.append("\t<natures>\n");
 
-		if (isJavaProject) {
+		if (javaProject) {
 			sb.append("\t\t<nature>org.eclipse.jdt.core.javanature</nature>\n");
 		}
 
@@ -173,7 +173,7 @@ public class PluginsEnvironmentBuilder {
 
 		File classpathFile = null;
 
-		if (isJavaProject) {
+		if (javaProject) {
 			List<String> portalJars = ListUtil.toList(dependencyJars);
 
 			portalJars.add("commons-logging.jar");
@@ -272,7 +272,7 @@ public class PluginsEnvironmentBuilder {
 				_exec(_SVN_ADD + projectFileName);
 			}
 
-			if (isJavaProject) {
+			if (javaProject) {
 				String classpathFileName = "\"" + classpathFile + "\"";
 
 				try {
