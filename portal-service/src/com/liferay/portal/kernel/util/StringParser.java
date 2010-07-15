@@ -175,6 +175,20 @@ public class StringParser {
 		return s;
 	}
 
+	/**
+	 * Escapes the special characters in the string so that they will have no
+	 * special meaning in a regular expression.
+	 *
+	 * <p>
+	 * This method differs from {@link Pattern#quote(String)} by escaping each
+	 * special character with a backslash, rather than enclosing the entire
+	 * string in special quote tags. This allows the escaped string to be
+	 * manipulated or have sections replaced with non-literal sequences.
+	 * </p>
+	 *
+	 * @param  s the string to escape
+	 * @return the escaped string
+	 */
 	public static String escapeRegex(String s) {
 		Matcher matcher = _escapeRegexPattern.matcher(s);
 
