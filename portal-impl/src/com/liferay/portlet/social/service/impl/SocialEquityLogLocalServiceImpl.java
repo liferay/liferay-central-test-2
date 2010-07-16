@@ -17,6 +17,7 @@ package com.liferay.portlet.social.service.impl;
 import com.liferay.ibm.icu.util.Calendar;
 import com.liferay.ibm.icu.util.GregorianCalendar;
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.cache.BufferedCounter;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.messaging.async.Async;
@@ -270,6 +271,8 @@ public class SocialEquityLogLocalServiceImpl
 		deactivateEquityLogs(userId, assetEntry.getEntryId(), actionId);
 	}
 
+	@BufferedCounter(
+		counterClass="com.liferay.portal.kernel.counter.SocialEquityCounter")
 	public void incrementSocialEquityAssetEntry_IQ(
 			long assetEntryId, SocialEquityValue socialEquityValue)
 		throws SystemException {
@@ -304,6 +307,8 @@ public class SocialEquityLogLocalServiceImpl
 		runSQL(sql);
 	}
 
+	@BufferedCounter(
+		counterClass="com.liferay.portal.kernel.counter.SocialEquityCounter")
 	public void incrementSocialEquityUser_CQ(
 			long groupId, long userId, SocialEquityValue socialEquityValue)
 		throws PortalException, SystemException {
@@ -338,6 +343,8 @@ public class SocialEquityLogLocalServiceImpl
 		runSQL(sql);
 	}
 
+	@BufferedCounter(
+		counterClass="com.liferay.portal.kernel.counter.SocialEquityCounter")
 	public void incrementSocialEquityUser_PQ(
 			long groupId, long userId, SocialEquityValue socialEquityValue)
 		throws PortalException, SystemException {
