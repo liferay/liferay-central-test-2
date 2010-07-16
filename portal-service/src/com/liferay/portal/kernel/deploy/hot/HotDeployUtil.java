@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -123,6 +124,8 @@ public class HotDeployUtil {
 		else {
 			if (!_dependentEvents.contains(event)) {
 				if (_log.isInfoEnabled()) {
+					Collections.sort(missingServletContextNames);
+
 					StringBuilder sb = new StringBuilder();
 
 					sb.append("Queue ");
