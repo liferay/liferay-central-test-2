@@ -509,7 +509,11 @@ public class JournalArticleFinderImpl
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
 			if ((version != null) && (version <= 0)) {
-				sql = CustomSQLUtil.replaceGroupBy(sql, groupBy);
+				sql = StringUtil.replace(
+					sql, "[$GROUP_BY_CLAUSE$]", "GROUP BY " + groupBy);
+			}
+			else {
+				sql = StringUtil.replace(sql, "[$GROUP_BY_CLAUSE$]", "");
 			}
 
 			sql = CustomSQLUtil.replaceOrderBy(sql, orderByComparator);
