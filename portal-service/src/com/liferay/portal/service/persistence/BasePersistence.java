@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.UserLocalServiceUtil;
 
 import java.io.Serializable;
 
@@ -245,7 +244,8 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	 * <p>
 	 * Typically not called directly, use local service update model methods
 	 * instead. For example, {@link
-	 * UserLocalServiceUtil#updateUser(com.liferay.portal.model.User)}.
+	 * com.liferay.portal.service.UserLocalServiceUtil#updateUser(
+	 * com.liferay.portal.model.User)}.
 	 * </p>
 	 *
 	 * @param  model the model instance to update
