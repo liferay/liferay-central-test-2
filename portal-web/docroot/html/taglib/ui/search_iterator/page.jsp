@@ -132,7 +132,7 @@ List<String> primaryKeys = new ArrayList<String>();
 
 					<c:if test="<%= orderKey != null %>">
 						<span class="result-column-name">
-							<a href="<%= url %>&<%= namespace %><%= searchContainer.getOrderByColParam() %>=<%= orderKey %>&<%= namespace %><%= searchContainer.getOrderByTypeParam() %>=<%= orderByType %>">
+							<a href="<%= url %>&<%= namespace %><%= searchContainer.getOrderByColParam() %>=<%= orderKey %>&<%= namespace %><%= searchContainer.getOrderByTypeParam() %>=<%= HtmlUtil.escapeURL(orderByType) %>">
 					</c:if>
 
 						<%
