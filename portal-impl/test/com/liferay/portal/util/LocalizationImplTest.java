@@ -39,8 +39,9 @@ public class LocalizationImplTest extends BaseTestCase {
 
 	public void setUp() {
 		_english = new Locale("en", "US");
-		_german = new Locale("de", "DE");
 		_englishId = LocaleUtil.toLanguageId(_english);
+
+		_german = new Locale("de", "DE");
 		_germanId = LocaleUtil.toLanguageId(_german);
 	}
 
@@ -67,24 +68,32 @@ public class LocalizationImplTest extends BaseTestCase {
 			preferences, "greeting", _germanId, _germanHello);
 
 		assertEquals(
-			_englishHello, LocalizationUtil.getPreferencesValue(preferences, "greeting", _englishId));
+			_englishHello,
+			LocalizationUtil.getPreferencesValue(
+				preferences, "greeting", _englishId));
 		assertEquals(
-			_germanHello, LocalizationUtil.getPreferencesValue(preferences, "greeting", _germanId));
+			_germanHello,
+			LocalizationUtil.getPreferencesValue(
+				preferences, "greeting", _germanId));
 	}
 
 	public void testSetLocalizedPreferencesValues() throws Exception {
-		final ActionRequest request = _context.mock(ActionRequest.class);
+		final ActionRequest request = _mockery.mock(ActionRequest.class);
 
-		_context.checking(new Expectations() {{
-			oneOf(request).getParameter("greeting_en_US");
-			will(returnValue(_englishHello));
+		Expectations expectations = new Expectations() {
+			{
+				oneOf(request).getParameter("greeting_en_US");
+				will(returnValue(_englishHello));
 
-			oneOf(request).getParameter("greeting_de_DE");
-			will(returnValue(_germanHello));
+				oneOf(request).getParameter("greeting_de_DE");
+				will(returnValue(_germanHello));
 
-			allowing(request).getParameter(with(aNonNull(String.class)));
-			will(returnValue(null));
-		}});
+				allowing(request).getParameter(with(aNonNull(String.class)));
+				will(returnValue(null));
+			}
+		};
+
+		_mockery.checking(expectations);
 
 		PortletPreferences preferences = new PortletPreferencesImpl();
 
@@ -92,17 +101,21 @@ public class LocalizationImplTest extends BaseTestCase {
 			request, preferences, "greeting");
 
 		assertEquals(
-			_englishHello, LocalizationUtil.getPreferencesValue(preferences, "greeting", _englishId));
+			_englishHello,
+			LocalizationUtil.getPreferencesValue(
+				preferences, "greeting", _englishId));
 		assertEquals(
-			_germanHello, LocalizationUtil.getPreferencesValue(preferences, "greeting", _germanId));
+			_germanHello,
+			LocalizationUtil.getPreferencesValue(
+				preferences, "greeting", _germanId));
 	}
 
-	private Mockery _context = new JUnit4Mockery();
 	private Locale _english;
 	private String _englishHello = "Hello World";
 	private String _englishId;
 	private Locale _german;
 	private String _germanHello = "Hallo Welt";
 	private String _germanId;
+	private Mockery _mockery = new JUnit4Mockery();
 
 }
