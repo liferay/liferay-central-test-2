@@ -22,9 +22,6 @@
 		<property name="nextMethodInterceptor" ref="threadLocalCacheAdvice" />
 	</bean>
 	<bean id="threadLocalCacheAdvice" class="com.liferay.portal.cache.ThreadLocalCacheAdvice">
-		<property name="nextMethodInterceptor" ref="bufferedCounterAdvice" />
-	</bean>
-	<bean id="bufferedCounterAdvice" class="com.liferay.portal.cache.BufferedCounterAdvice">
 		<property name="nextMethodInterceptor" ref="transactionAdvice" />
 	</bean>
 	<bean id="transactionAdvice" class="com.liferay.portal.spring.transaction.TransactionInterceptor">
