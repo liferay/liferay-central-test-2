@@ -64,6 +64,10 @@ AUI().add(
 							instance._active.menu = menu;
 							instance._active.trigger = trigger;
 
+							if (!menu.focusManager) {
+								instance._plugMenu(menu, trigger);
+							}
+
 							instance._positionActiveMenu();
 						}
 
@@ -98,6 +102,58 @@ AUI().add(
 					instance._active.trigger.removeClass('aui-state-active');
 					instance._active.trigger = null;
 				}
+			},
+
+			_plugMenu: function(menu, trigger) {
+				var instance = this;
+
+				menu.plug(
+					A.Plugin.NodeFocusManager,
+					{
+						circular: true,
+						descendants: 'a',
+						focusClass: 'aui-focus',
+						keys: {
+							next: 'down:40',
+							previous: 'down:38'
+						}
+					 }
+				);
+
+				var anchor = trigger.one('a');
+
+				menu.on(
+					'key',
+					function(event) {
+						instance._closeActiveMenu();
+
+						if (anchor) {
+							anchor.focus();
+						}
+					},
+					'down:27,9'
+				);
+
+				menu.delegate(
+					'mouseenter',
+					function (event) {
+						var focusManager = menu.focusManager;
+
+						if (focusManager.get('focused')) {
+							focusManager.focus(event.currentTarget.one('a'));
+						}
+					},
+					'li'
+				);
+
+				menu.setAttrs(
+					{
+						'aria-labelledby': (anchor && anchor.get('id')),
+						role: 'menu'
+					}
+				);
+
+				menu.all('a').set('role', 'menuitem');
 			},
 
 			_positionActiveMenu: function() {
@@ -179,60 +235,11 @@ AUI().add(
 						trigger: trigger
 					};
 
-					menu.plug(
-						A.Plugin.NodeFocusManager,
-						{
-							circular: true,
-							descendants: 'a',
-							focusClass: 'aui-focus',
-							keys: {
-								next: 'down:40',
-								previous: 'down:38'
-							}
-						 }
-					);
-
 					var firstItem = menu.one('a');
 
 					if (firstItem) {
 						firstItem.focus();
 					}
-
-					var anchor = trigger.one('a');
-
-					A.on(
-						'key',
-						function(event) {
-							instance._closeActiveMenu();
-
-							if (anchor) {
-								anchor.focus();
-							}
-						},
-						[menu],
-						'down:27,9'
-					);
-
-					menu.delegate(
-						'mouseenter',
-						function (event) {
-							var focusManager = menu.focusManager;
-
-							if (focusManager.get('focused')) {
-								focusManager.focus(event.currentTarget.one('a'));
-							}
-						},
-						'li'
-					);
-
-					menu.setAttrs(
-						{
-							'aria-labelledby': (anchor && anchor.get('id')),
-							role: 'menu'
-						}
-					);
-
-					menu.all('a').set('role', 'menuitem');
 				}
 			}
 		};
