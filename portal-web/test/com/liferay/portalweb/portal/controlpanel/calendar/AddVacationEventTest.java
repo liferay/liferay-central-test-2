@@ -87,6 +87,7 @@ public class AddVacationEventTest extends BaseTestCase {
 		selenium.clickAt("_8_timeZoneSensitiveCheckbox",
 			RuntimeVariables.replace(""));
 		selenium.select("_8_type", RuntimeVariables.replace("label=Vacation"));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("Link=Off to Yosemite!"));

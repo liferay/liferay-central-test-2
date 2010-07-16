@@ -73,6 +73,7 @@ public class AddCommunitiesPrivatePageTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -90,7 +91,8 @@ public class AddCommunitiesPrivatePageTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+				selenium.clickAt("//strong/a",
+					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -98,7 +100,8 @@ public class AddCommunitiesPrivatePageTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("link=Manage Pages")) {
+						if (selenium.isElementPresent(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
 							break;
 						}
 					}
@@ -108,13 +111,13 @@ public class AddCommunitiesPrivatePageTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("link=Manage Pages",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("link=Private Pages",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace("//li[2]/span/span/a"));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("link=Pages", RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//ul[2]/li[1]/span/span/a"));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {

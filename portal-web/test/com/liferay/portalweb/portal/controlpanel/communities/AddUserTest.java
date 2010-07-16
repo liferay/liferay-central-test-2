@@ -85,6 +85,7 @@ public class AddUserTest extends BaseTestCase {
 			RuntimeVariables.replace("community@community.com"));
 		selenium.type("_125_firstName", RuntimeVariables.replace("commun"));
 		selenium.type("_125_lastName", RuntimeVariables.replace("nity"));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}

@@ -44,9 +44,10 @@ public class AddSecondEntryCommentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=0 Comments", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/span/a",
+			RuntimeVariables.replace("0 Comments"));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Be the first.", RuntimeVariables.replace(""));
+		selenium.clickAt("//td/a", RuntimeVariables.replace("Be the first."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

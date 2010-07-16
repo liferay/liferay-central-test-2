@@ -44,9 +44,7 @@ public class AddRatingTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace(
-				"Average (0 Votes) The average rating is 0 stars out of 5."),
-			selenium.getText("//div[5]/div[2]/div/div"));
+		assertTrue(selenium.isPartialText("//div[5]/div[2]/div/div", "0 Votes"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -72,10 +70,7 @@ public class AddRatingTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace(
-							"Average (1 Vote) The average rating is 5 stars out of 5.")
-										.equals(selenium.getText(
-								"//div[5]/div[2]/div/div"))) {
+				if (selenium.isPartialText("//div[5]/div[2]/div/div", "1 Vote")) {
 					break;
 				}
 			}
@@ -85,8 +80,6 @@ public class AddRatingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertEquals(RuntimeVariables.replace(
-				"Average (1 Vote) The average rating is 5 stars out of 5."),
-			selenium.getText("//div[5]/div[2]/div/div"));
+		assertTrue(selenium.isPartialText("//div[5]/div[2]/div/div", "1 Vote"));
 	}
 }

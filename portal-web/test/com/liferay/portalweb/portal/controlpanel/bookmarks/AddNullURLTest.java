@@ -48,11 +48,12 @@ public class AddNullURLTest extends BaseTestCase {
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Add Bookmark"),
-			selenium.getText("//div[2]/div/div[2]/ul/li[5]/a"));
-		selenium.clickAt("//div[2]/div/div[2]/ul/li[5]/a",
+			selenium.getText("//div[3]/div/div[2]/ul/li[5]/a"));
+		selenium.clickAt("//div[3]/div/div[2]/ul/li[5]/a",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_28_name", RuntimeVariables.replace("Null Entry Test"));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

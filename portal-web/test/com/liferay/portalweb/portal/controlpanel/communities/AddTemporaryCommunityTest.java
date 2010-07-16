@@ -84,6 +84,7 @@ public class AddTemporaryCommunityTest extends BaseTestCase {
 		selenium.type("_134_description",
 			RuntimeVariables.replace(
 				"This is a second temporary Test Community!"));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

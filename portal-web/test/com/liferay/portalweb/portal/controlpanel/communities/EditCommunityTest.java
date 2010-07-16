@@ -66,6 +66,7 @@ public class EditCommunityTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Community 2"));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -125,6 +126,7 @@ public class EditCommunityTest extends BaseTestCase {
 		selenium.type("_134_description",
 			RuntimeVariables.replace(
 				"This is a second temporary Test Community! This community has been edited."));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

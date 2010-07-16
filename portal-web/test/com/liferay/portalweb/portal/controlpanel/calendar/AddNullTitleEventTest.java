@@ -82,6 +82,7 @@ public class AddNullTitleEventTest extends BaseTestCase {
 		}
 
 		selenium.type("_8_title", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

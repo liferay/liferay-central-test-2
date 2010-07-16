@@ -52,8 +52,9 @@ public class AddWeeklyRepeatingEventTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("link=Events", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
 				selenium.clickAt("//td[6]/ul/li/strong/a",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -198,6 +199,7 @@ public class AddWeeklyRepeatingEventTest extends BaseTestCase {
 					RuntimeVariables.replace("label=1"));
 				selenium.select("_8_endDateYear",
 					RuntimeVariables.replace("label=2011"));
+				Thread.sleep(5000);
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");

@@ -103,7 +103,7 @@ public class AddSecondEntryTest extends BaseTestCase {
 		selenium.type("//body",
 			RuntimeVariables.replace("This is a second test entry."));
 		selenium.selectFrame("relative=top");
-		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
+		selenium.clickAt("_33_publishButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),

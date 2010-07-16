@@ -52,8 +52,25 @@ public class MoveEntryTest extends BaseTestCase {
 			selenium.getText("//a/strong"));
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//tr[4]/td[5]/ul/li/strong/a",
-			RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//tr[4]/td[5]/ul/li/strong/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//tr[4]/td[5]/ul/li/strong/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -80,7 +97,7 @@ public class MoveEntryTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Select']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("folder");
+		selenium.selectPopUp("");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -123,6 +140,7 @@ public class MoveEntryTest extends BaseTestCase {
 
 		assertEquals(RuntimeVariables.replace("Test Folder"),
 			selenium.getText("_28_folderName"));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
@@ -150,6 +168,7 @@ public class MoveEntryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Bookmarks", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("Test Folder"),
 			selenium.getText("//a/strong"));
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));

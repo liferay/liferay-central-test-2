@@ -117,6 +117,7 @@ public class AddInvalidRepeatEventTest extends BaseTestCase {
 			RuntimeVariables.replace("label=February"));
 		selenium.select("_8_endDateDay", RuntimeVariables.replace("label=24"));
 		selenium.select("_8_endDateYear", RuntimeVariables.replace("label=2009"));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

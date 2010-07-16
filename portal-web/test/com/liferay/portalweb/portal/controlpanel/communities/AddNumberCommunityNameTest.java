@@ -83,6 +83,7 @@ public class AddNumberCommunityNameTest extends BaseTestCase {
 		selenium.type("_134_name", RuntimeVariables.replace("11111"));
 		selenium.type("_134_description",
 			RuntimeVariables.replace("This is a number community test."));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

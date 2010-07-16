@@ -73,6 +73,7 @@ public class AddCommunitiesPublicPageTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -90,7 +91,8 @@ public class AddCommunitiesPublicPageTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+				selenium.clickAt("//strong/a",
+					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -98,7 +100,8 @@ public class AddCommunitiesPublicPageTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("link=Manage Pages")) {
+						if (selenium.isElementPresent(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
 							break;
 						}
 					}
@@ -108,14 +111,13 @@ public class AddCommunitiesPublicPageTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("link=Manage Pages",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("link=Public Pages",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("link=Pages", RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
+				assertEquals(RuntimeVariables.replace("Public Pages"),
+					selenium.getText("//li[1]/span/span/a"));
+				assertEquals(RuntimeVariables.replace("Pages"),
+					selenium.getText("//ul[2]/li[1]/span/span/a"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -171,6 +173,7 @@ public class AddCommunitiesPublicPageTest extends BaseTestCase {
 				selenium.clickAt("//li/div/div[1]", RuntimeVariables.replace(""));
 
 			case 2:
+				selenium.click("//li/div/div[1]");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {

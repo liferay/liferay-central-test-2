@@ -68,8 +68,8 @@ public class EditSecondCommentTest extends BaseTestCase {
 			RuntimeVariables.replace("This is an edited second entry comment."));
 		selenium.keyPress("_33_editReplyBody1", RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_33_editReplyBody1", RuntimeVariables.replace("\\8"));
-		selenium.clickAt("//input[@value='Update']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//tr[2]/td/input[1]",
+			RuntimeVariables.replace("Publish"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isVisible("_33_editReplyBody1"));
 		assertTrue(selenium.isTextPresent(

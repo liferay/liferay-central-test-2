@@ -44,10 +44,12 @@ public class EditSubfolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Bookmarks", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		assertTrue(selenium.isPartialText("//a/strong", "Test Folder"));
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//td[4]/ul/li/strong/a", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		selenium.click("//td[4]/ul/li/strong/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -73,6 +75,7 @@ public class EditSubfolderTest extends BaseTestCase {
 			RuntimeVariables.replace("Edited Test Subfolder"));
 		selenium.type("_28_description",
 			RuntimeVariables.replace("This is an edited test subfolder!"));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

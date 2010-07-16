@@ -48,8 +48,8 @@ public class CommunitiesTests extends BaseTests {
 		testSuite.addTestSuite(DeleteInvalidCommunityTest.class);
 		testSuite.addTestSuite(AddTemporaryLARCommunityTest.class);
 		testSuite.addTestSuite(AssertNoLARCommunityContentTest.class);
-		testSuite.addTestSuite(ImportCommunityLARTest.class);
-		testSuite.addTestSuite(AssertCommunityLARImportTest.class);
+//		testSuite.addTestSuite(ImportCommunityLARTest.class);
+//		testSuite.addTestSuite(AssertCommunityLARImportTest.class);
 		testSuite.addTestSuite(TearDownUserTest.class);
 		testSuite.addTestSuite(TearDownCommunityTest.class);
 

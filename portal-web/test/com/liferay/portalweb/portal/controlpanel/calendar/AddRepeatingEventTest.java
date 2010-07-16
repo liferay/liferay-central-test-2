@@ -92,6 +92,7 @@ public class AddRepeatingEventTest extends BaseTestCase {
 		selenium.select("_8_startDateYear",
 			RuntimeVariables.replace("label=2010"));
 		selenium.select("_8_type", RuntimeVariables.replace("label=Event"));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

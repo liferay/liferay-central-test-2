@@ -86,6 +86,7 @@ public class AddInvalidDurationEventTest extends BaseTestCase {
 			RuntimeVariables.replace("label=:00"));
 		selenium.type("_8_title",
 			RuntimeVariables.replace("Invalid Duration Test Event"));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

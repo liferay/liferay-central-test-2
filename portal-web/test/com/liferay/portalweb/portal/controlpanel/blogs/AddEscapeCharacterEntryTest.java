@@ -120,7 +120,8 @@ public class AddEscapeCharacterEntryTest extends BaseTestCase {
 		selenium.type("//body",
 			RuntimeVariables.replace("This is an escape character test entry."));
 		selenium.selectFrame("relative=top");
-		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		selenium.clickAt("_33_publishButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

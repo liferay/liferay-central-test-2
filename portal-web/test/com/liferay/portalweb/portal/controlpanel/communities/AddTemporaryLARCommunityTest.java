@@ -81,6 +81,7 @@ public class AddTemporaryLARCommunityTest extends BaseTestCase {
 		}
 
 		selenium.type("_134_name", RuntimeVariables.replace("LAR Community"));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
