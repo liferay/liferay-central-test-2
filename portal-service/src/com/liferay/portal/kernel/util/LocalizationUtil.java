@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.json.JSONObject;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.portlet.ActionRequest;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
@@ -141,12 +140,12 @@ public class LocalizationUtil {
 	}
 
 	public static void setLocalizedPreferencesValues (
-			ActionRequest actionRequest, PortletPreferences preferences,
+			PortletRequest portletRequest, PortletPreferences preferences,
 			String parameter)
 		throws Exception {
 
 		getLocalization().setLocalizedPreferencesValues(
-			actionRequest, preferences, parameter);
+			portletRequest, preferences, parameter);
 	}
 
 	public static void setPreferencesValue(

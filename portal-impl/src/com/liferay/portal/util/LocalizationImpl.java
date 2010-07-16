@@ -33,7 +33,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.portlet.ActionRequest;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
@@ -47,26 +46,12 @@ import javax.xml.stream.XMLStreamWriter;
 import org.apache.commons.collections.map.ReferenceMap;
 
 /**
- * <p>
- * This class is used to localize values stored in XML and is often used to add
- * localization behavior to value objects.
- * </p>
- *
- * <p>
- * Caching of the localized values is done in this class rather than in the
- * value object since value objects get flushed from cache fairly quickly.
- * Though lookups performed on a key based on an XML file is slower than lookups
- * done at the value object level in general, the value object will get flushed
- * at a rate which works against the performance gain. The cache is a soft hash
- * map which prevents memory leaks within the system while enabling the cache to
- * live longer than in a weak hash map.
- * </p>
- *
  * @author Alexander Chow
  * @author Jorge Ferrer
  * @author Mauro Mariuzzo
  * @author Julio Camarero
  * @author Brian Wing Shun Chan
+ * @author Connor McKay
  */
 public class LocalizationImpl implements Localization {
 
@@ -121,14 +106,11 @@ public class LocalizationImpl implements Localization {
 		String systemDefaultLanguageId = LocaleUtil.toLanguageId(
 			LocaleUtil.getDefault());
 
-		String defaultValue = StringPool.BLANK;
-
 		if (!Validator.isXml(xml)) {
-			if (requestedLanguageId.equals(systemDefaultLanguageId)) {
+			if (useDefault ||
+				requestedLanguageId.equals(systemDefaultLanguageId)) {
+
 				value = xml;
-			}
-			else {
-				value = defaultValue;
 			}
 
 			_setCachedValue(xml, requestedLanguageId, useDefault, value);
@@ -170,6 +152,8 @@ public class LocalizationImpl implements Localization {
 			}
 
 			// Find specified language and/or default language
+
+			String defaultValue = StringPool.BLANK;
 
 			while (xmlStreamReader.hasNext()) {
 				int event = xmlStreamReader.next();
@@ -280,9 +264,6 @@ public class LocalizationImpl implements Localization {
 		return map;
 	}
 
-	/**
-	 * @deprecated Use <code>getLocalizationMap</code>.
-	 */
 	public Map<Locale, String> getLocalizedParameter(
 		PortletRequest portletRequest, String parameter) {
 
@@ -452,20 +433,18 @@ public class LocalizationImpl implements Localization {
 	}
 
 	public void setLocalizedPreferencesValues (
-			ActionRequest actionRequest, PortletPreferences preferences,
+			PortletRequest portletRequest, PortletPreferences preferences,
 			String parameter)
 		throws Exception {
 
-		Map<Locale, String> map = getLocalizedParameter(
-			actionRequest, parameter);
+		Map<Locale, String> map = getLocalizationMap(
+			portletRequest, parameter);
 
-		for (Locale locale : map.keySet()) {
-			String languageId = LocaleUtil.toLanguageId(locale);
+		for (Map.Entry<Locale, String> entry : map.entrySet()) {
+			String languageId = LocaleUtil.toLanguageId(entry.getKey());
+			String value = entry.getValue();
 
-			String key = parameter + StringPool.UNDERLINE + languageId;
-			String value = map.get(locale);
-
-			preferences.setValue(key, value);
+			setPreferencesValue(preferences, parameter, languageId, value);
 		}
 	}
 

@@ -21,8 +21,8 @@ import com.liferay.portlet.PortletPreferencesImpl;
 
 import java.util.Locale;
 
-import javax.portlet.ActionRequest;
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
@@ -78,7 +78,7 @@ public class LocalizationImplTest extends BaseTestCase {
 	}
 
 	public void testSetLocalizedPreferencesValues() throws Exception {
-		final ActionRequest request = _mockery.mock(ActionRequest.class);
+		final PortletRequest request = _mockery.mock(PortletRequest.class);
 
 		Expectations expectations = new Expectations() {
 			{
