@@ -182,7 +182,6 @@ AUI().add(
 					var portletOptions = {
 						beforePortletLoaded: beforePortletLoaded,
 						onComplete: function(portletBoundary) {
-							Liferay.Layout.syncDraggableClassUI();
 							Liferay.Layout.updatePortletDropZones(portletBoundary);
 
 							if (onComplete) {
@@ -207,6 +206,8 @@ AUI().add(
 					portletId,
 					function(item, index) {
 						item.addClass('lfr-portlet-used');
+
+						instance._lockDrag(item);
 					}
 				);
 			},
@@ -226,6 +227,8 @@ AUI().add(
 					portletId,
 					function(item, index) {
 						item.removeClass('lfr-portlet-used');
+
+						instance._unlockDrag(item);
 					}
 				);
 			},
@@ -286,6 +289,7 @@ AUI().add(
 				instance._portletItems = instance._dialogBody.all('div.lfr-portlet-item');
 
 				var portlets = instance._portletItems;
+				var usedPortlets = portlets.filter('.lfr-portlet-used');
 
 				instance._dialogBody.delegate(
 					'mousedown',
@@ -302,16 +306,7 @@ AUI().add(
 				var layoutOptions = Liferay.Layout.options;
 
 				var portletItemOptions = {
-					delegateConfig: {
-						container: '#portal_add_content',
-						dragConfig: {
-							clickPixelThresh: 0,
-							clickTimeThresh: 0
-						},
-						invalid: '.lfr-portlet-used',
-						target: false
-					},
-					dragNodes: '.lfr-portlet-item',
+					dragNodes: portlets,
 					dropContainer: function(dropNode) {
 						return dropNode.one(layoutOptions.dropContainer);
 					},
@@ -324,6 +319,12 @@ AUI().add(
 				else {
 					portletItem = new Liferay.Layout.PortletItem(portletItemOptions);
 				}
+
+				usedPortlets.each(
+					function(node, index) {
+						instance._lockDrag(node);
+					}
+				);
 
 				if (Liferay.Browser.isIe()) {
 					instance._dialogBody.delegate(
@@ -422,6 +423,16 @@ AUI().add(
 				);
 			},
 
+			_lockDrag: function(node) {
+				var instance = this;
+
+				var draggable = DDM.getDrag(node);
+
+				if (draggable) {
+					draggable.set('lock', true);
+				}
+			},
+
 			_onPortletClose: function(event) {
 				var instance = this;
 
@@ -436,6 +447,16 @@ AUI().add(
 						instance._enablePortletEntry(portletId);
 					}
 				}
+			},
+
+			_unlockDrag: function(node) {
+				var instance = this;
+
+				var draggable = DDM.getDrag(node);
+
+				if (draggable) {
+					draggable.set('lock', false);
+				}
 			}
 		};
 
@@ -445,6 +466,14 @@ AUI().add(
 			{
 
 				ATTRS: {
+					dd: {
+						value: {
+							clickPixelThresh: 0,
+							clickTimeThresh: 0,
+							target: false
+						}
+					},
+
 					lazyStart: {
 						value: true
 					},

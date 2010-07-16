@@ -65,7 +65,6 @@ if (layout != null) {
 				dropNodes: '.portlet-column',
 				emptyColumnClass: 'empty',
 				handles: ['.portlet-title', '.portlet-title-default'],
-				invalid: '.portlet-static',
 				nestedPortletId: '_<%= PortletKeys.NESTED_PORTLETS %>_INSTANCE',
 				portletBoundary: '.portlet-boundary'
 			};

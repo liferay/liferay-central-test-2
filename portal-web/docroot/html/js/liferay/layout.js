@@ -51,22 +51,19 @@ AUI().add(
 				Layout.PROXY_NODE.append(Layout.PORTLET_TOPPER);
 
 				Layout.DEFAULT_LAYOUT_OPTIONS = {
-					delegateConfig: {
-						dragConfig: {
-							clickPixelThresh: 0,
-							clickTimeThresh: 250,
-							plugins: [
-								{
-									cfg: {
-										horizontal: false,
-										scrollDelay: 30
-									},
-									fn: A.Plugin.DDWinScroll
-								}
-							]
-						},
+					dd: {
+						clickPixelThresh: 0,
+						clickTimeThresh: 250,
 						handles: options.handles,
-						invalid: options.invalid
+						plugins: [
+							{
+								cfg: {
+									horizontal: false,
+									scrollDelay: 30
+								},
+								fn: A.Plugin.DDWinScroll
+							}
+						]
 					},
 					dragNodes: options.dragNodes,
 					dropContainer: function(dropNode) {
@@ -109,7 +106,7 @@ AUI().add(
 									}
 								}
 
-								var isOverColumn = !activeDropNode.drop;
+								var isOverColumn = !activeDropNode.dd;
 
 								if (!Layout.OVER_NESTED_PORTLET && isOverColumn) {
 									var activeDropNodeId = activeDropNode.get('id');
@@ -174,6 +171,7 @@ AUI().add(
 
 				layoutHandler.on('drag:end', A.bind(Layout._onPortletDragEnd, Layout));
 				layoutHandler.on('drag:start', A.bind(Layout._onPortletDragStart, Layout));
+				layoutHandler.on('drag:mouseDown', A.bind(Layout._onPortletDragMouseDown, Layout));
 			},
 
 			getLastPortletNode: function(column) {
@@ -288,8 +286,6 @@ AUI().add(
 				);
 
 				Layout.layoutHandler = new Layout.ColumnLayout(columnLayoutDefaults);
-
-				Layout.syncDraggableClassUI();
 			},
 
 			initFreeFormLayoutHandler: function() {
@@ -307,15 +303,15 @@ AUI().add(
 								proxyNode.one('.portlet-topper').html(getTitle(nodeId));
 							}
 						},
-						delegateConfig: {
-							dragConfig: {
-								startCentered: false
-							}
+						dd: {
+							startCentered: false
 						},
 						lazyStart: false,
 						on: {}
 					}
 				);
+
+				freeformLayoutDefaults.dd.plugins = null;
 
 				Layout.layoutHandler = new Layout.FreeFormLayout(freeformLayoutDefaults);
 			},
@@ -334,7 +330,7 @@ AUI().add(
 				portlet = A.one(portlet);
 
 				if (portlet) {
-					layoutHandler.delegate.syncTargets();
+					layoutHandler.addDragTarget(portlet);
 
 					Liferay.Layout.updatePortletDropZones(portlet);
 				}
@@ -371,20 +367,6 @@ AUI().add(
 						data: data
 					}
 				);
-			},
-
-			syncDraggableClassUI: function() {
-				var options = Layout.options;
-
-				if (options.dragNodes) {
-					var dragNodes = A.all(options.dragNodes);
-
-					if (options.invalid) {
-						dragNodes = dragNodes.filter(':not(' + options.invalid + ')');
-					}
-
-					dragNodes.addClass('yui3-dd-draggable');
-				}
 			},
 
 			syncEmptyColumnClassUI: function(columnNode) {
@@ -461,6 +443,8 @@ AUI().add(
 
 				Layout.updateCurrentPortletInfo(portlet);
 
+				DDM.getDrag(portlet).destroy();
+
 				if (column) {
 					Layout.syncEmptyColumnClassUI(column);
 				}
@@ -474,6 +458,15 @@ AUI().add(
 				Layout.saveIndex(dragNode, columnNode);
 
 				Layout.syncEmptyColumnClassUI(columnNode);
+			},
+
+			_onPortletDragMouseDown: function(event) {
+				var drag = event.target;
+				var dragNode = drag.get('node');
+
+				if (dragNode.isStatic) {
+					drag.set('lock', true);
+				}
 			},
 
 			_onPortletDragStart: function(event) {
@@ -497,6 +490,20 @@ AUI().add(
 
 				prototype: {
 					dragItem: 0,
+
+					addDragTarget: function(node) {
+						var instance = this;
+
+						var delay = 30;
+						var dragDelay = (delay * instance.dragItem++);
+
+						setTimeout(
+							function() {
+								ColumnLayout.superclass.addDragTarget.apply(instance, [node]);
+							},
+							dragDelay
+						);
+					},
 
 					_positionNode: function(event) {
 						var instance = this;
