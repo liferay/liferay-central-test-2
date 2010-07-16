@@ -41,38 +41,39 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 <c:choose>
 	<c:when test="<%= PropsValues.FLAGS_GUEST_USERS_ENABLED || themeDisplay.isSignedIn() %>">
 		<aui:script use="aui-dialog">
-			var params = {
-				className: '<%= className %>',
-				classPK: '<%= classPK %>',
-				contentTitle: '<%= HtmlUtil.escape(contentTitle) %>',
-				contentURL: '<%= PortalUtil.getPortalURL(request) + currentURL %>',
-				reportedUserId: '<%= reportedUserId %>'
-			};
+			var icon = A.one('.<%= randomNamespace %>-webdav-action');
 
-			A.on(
-				'click',
-				function() {
-					var popup = new A.Dialog(
-						{
-							centered: true,
-							destroyOnClose: true,
-							draggable: true,
-							modal: true,
-							stack: true,
-							title: '<liferay-ui:message key="report-inappropriate-content" />',
-							width: 435
-						}
-					).render();
+			if (icon) {
+				icon.on(
+					'click',
+					function() {
+						var popup = new A.Dialog(
+							{
+								centered: true,
+								destroyOnClose: true,
+								draggable: true,
+								modal: true,
+								stack: true,
+								title: '<liferay-ui:message key="report-inappropriate-content" />',
+								width: 435
+							}
+						).render();
 
-					popup.plug(
-						A.Plugin.IO, {
-							data: params,
-							uri: '<liferay-portlet:renderURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:renderURL>'
-						}
-					);
-				},
-			'.<%= randomNamespace %>'
-			);
+						popup.plug(
+							A.Plugin.IO, {
+								data: {
+									className: '<%= className %>',
+									classPK: '<%= classPK %>',
+									contentTitle: '<%= HtmlUtil.escape(contentTitle) %>',
+									contentURL: '<%= PortalUtil.getPortalURL(request) + currentURL %>',
+									reportedUserId: '<%= reportedUserId %>'
+								},
+								uri: '<liferay-portlet:renderURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:renderURL>'
+							}
+						);
+					}
+				);
+			}
 		</aui:script>
 	</c:when>
 	<c:otherwise>
@@ -81,24 +82,27 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 		</div>
 
 		<aui:script use="aui-dialog">
-			A.on(
-				'click',
-				function(event) {
-					var popup = new A.Dialog(
-						{
-							bodyContent: A.one('#<%= randomNamespace %>signIn').html(),
-							centered: true,
-							destroyOnClose: true,
-							title: '<liferay-ui:message key="report-inappropriate-content" />',
-							modal: true,
-							width: 500
-						}
-					).render();
+			var icon = A.one('.<%= randomNamespace %>-webdav-action');
 
-					event.preventDefault();
-				},
-				'.<%= randomNamespace %>'
-			);
+			if (icon) {
+				icon.on(
+					'click',
+					function(event) {
+						var popup = new A.Dialog(
+							{
+								bodyContent: A.one('#<%= randomNamespace %>signIn').html(),
+								centered: true,
+								destroyOnClose: true,
+								title: '<liferay-ui:message key="report-inappropriate-content" />',
+								modal: true,
+								width: 500
+							}
+						).render();
+
+						event.preventDefault();
+					}
+				);
+			}
 		</aui:script>
 	</c:otherwise>
 </c:choose>

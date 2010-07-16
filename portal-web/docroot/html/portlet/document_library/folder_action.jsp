@@ -193,22 +193,25 @@ if (row == null) {
 </div>
 
 <aui:script use="aui-dialog">
-	A.on(
-		'click',
-		function(event) {
-			var popup = new A.Dialog(
-				{
-					bodyContent: A.one('#<%= randomNamespace %>webDav').html(),
-					centered: true,
-					destroyOnClose: true,
-					modal: true,
-					title: '<liferay-ui:message key="access-from-desktop" />',
-					width: 500
-				}
-			).render();
+	var webdavAction = A.one('.<%= randomNamespace %>-webdav-action');
 
-			event.preventDefault();
-		},
-		'.<%= randomNamespace %>-webdav-action'
-	);
+	if (webdavAction) {
+		webdavAction.on(
+			'click',
+			function(event) {
+				var popup = new A.Dialog(
+					{
+						bodyContent: A.one('#<%= randomNamespace %>webDav').html(),
+						centered: true,
+						destroyOnClose: true,
+						modal: true,
+						title: '<liferay-ui:message key="access-from-desktop" />',
+						width: 500
+					}
+				).render();
+
+				event.preventDefault();
+			}
+		);
+	}
 </aui:script>
