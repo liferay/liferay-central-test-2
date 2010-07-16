@@ -441,8 +441,10 @@ public class LocalizationImpl implements Localization {
 			portletRequest, parameter);
 
 		for (Map.Entry<Locale, String> entry : map.entrySet()) {
-			String languageId = LocaleUtil.toLanguageId(entry.getKey());
+			String key = entry.getKey();
 			String value = entry.getValue();
+
+			String languageId = LocaleUtil.toLanguageId(key);
 
 			setPreferencesValue(preferences, parameter, languageId, value);
 		}
