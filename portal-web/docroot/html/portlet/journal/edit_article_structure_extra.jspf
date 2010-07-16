@@ -255,6 +255,7 @@
 		<div id="repeatable-field-image-model">
 			<span class="repeatable-field-image">
 				<liferay-ui:icon cssClass="repeatable-field-add" image="add" />
+
 				<liferay-ui:icon cssClass="repeatable-field-delete" image="delete" />
 			</span>
 		</div>
