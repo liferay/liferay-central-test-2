@@ -543,7 +543,7 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 							tofile="${app.server.bin.dir}/setenv.bat"
 						>
 							<filterset>
-								<filter token="java.version" value="${java.version}" />
+								<filter token="java.version" value="${jdk.windows.version}" />
 							</filterset>
 						</copy>
 					</then>
@@ -602,14 +602,14 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 
 				<if>
 					<and>
-						<available file="${env.JAVA_HOME}/jre/bin/java.exe" />
+						<available file="${jdk.windows.home}/jre/bin/java.exe" />
 						<not>
-							<available file="${app.server.dir}/jre${java.version}/win" />
+							<available file="${app.server.dir}/jre${jdk.windows.version}/win" />
 						</not>
 					</and>
 					<then>
-						<copy todir="${app.server.dir}/jre${java.version}/win">
-							<fileset dir="${env.JAVA_HOME}/jre" />
+						<copy todir="${app.server.dir}/jre${jdk.windows.version}/win">
+							<fileset dir="${jdk.windows.home}/jre" />
 						</copy>
 					</then>
 				</if>
