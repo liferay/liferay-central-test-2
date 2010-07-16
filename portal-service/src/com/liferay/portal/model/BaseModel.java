@@ -87,16 +87,16 @@ public interface BaseModel<T> extends Cloneable, Comparable<T>, Serializable {
 	public void setEscapedModel(boolean escapedModel);
 
 	/**
-	 * Gets the primary key for this model instance.
+	 * Gets the primary key of this model instance.
 	 *
-	 * @return the primary key
+	 * @return the primary key of this model instance
 	 */
 	public Serializable getPrimaryKeyObj();
 
 	/**
 	 * Gets the expando bridge for this model instance.
 	 *
-	 * @return the expando bridge
+	 * @return the expando bridge for this model instance
 	 */
 	public ExpandoBridge getExpandoBridge();
 
@@ -114,7 +114,7 @@ public interface BaseModel<T> extends Cloneable, Comparable<T>, Serializable {
 	/**
 	 * Creates a shallow clone of this model instance.
 	 *
-	 * @return the clone
+	 * @return the shallow clone of this model instance
 	 */
 	public Object clone();
 
