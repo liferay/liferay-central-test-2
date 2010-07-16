@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.deploy.hot;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -75,7 +76,7 @@ public class HotDeployUtil {
 			return;
 		}
 
-		boolean hasDependencies = true;
+		List<String> missingServletContextNames = new ArrayList<String>();
 
 		Set<String> dependentServletContextNames =
 			event.getDependentServletContextNames();
@@ -86,13 +87,11 @@ public class HotDeployUtil {
 			if (!_deployedServletContextNames.contains(
 					dependentServletContextName)) {
 
-				hasDependencies = false;
-
-				break;
+				missingServletContextNames.add(dependentServletContextName);
 			}
 		}
 
-		if (hasDependencies) {
+		if (missingServletContextNames.isEmpty()) {
 			if (_dependentEvents.contains(event)) {
 				if (_log.isInfoEnabled()) {
 					_log.info(
@@ -124,10 +123,15 @@ public class HotDeployUtil {
 		else {
 			if (!_dependentEvents.contains(event)) {
 				if (_log.isInfoEnabled()) {
-					_log.info(
-						"Queue " + event.getServletContextName() +
-							" for deploy because its dependencies are not " +
-								"available");
+					StringBuilder sb = new StringBuilder();
+
+					sb.append("Queue ");
+					sb.append(event.getServletContextName());
+					sb.append(" for deploy because it is missing ");
+					sb.append(
+						StringUtil.merge(missingServletContextNames, ", "));
+
+					_log.info(sb.toString());
 				}
 
 				_dependentEvents.add(event);
