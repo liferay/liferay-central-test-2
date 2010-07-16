@@ -896,10 +896,10 @@ Liferay.provide(
 		var selectedIndex =  box.get('selectedIndex');
 
 		if (!value) {
-			box.all('option').item(selectedIndex).remove();
+			box.all('option').item(selectedIndex).remove(true);
 		}
 		else {
-			box.all('option[value=' + value + ']').item(selectedIndex).remove();
+			box.all('option[value=' + value + ']').item(selectedIndex).remove(true);
 		}
 	},
 	['aui-base']
@@ -1142,7 +1142,7 @@ Liferay.provide(
 
 		var boxObj = A.one(box);
 
-		boxObj.all('option').remove();
+		boxObj.all('option').remove(true);
 
 		A.each(
 			newBox,

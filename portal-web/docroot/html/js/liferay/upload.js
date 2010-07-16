@@ -127,7 +127,7 @@ AUI().add(
 				var uploadError = instance._fileList.all('.upload-error');
 
 				if (uploadError) {
-					uploadError.remove();
+					uploadError.remove(true);
 				}
 
 				if (stats.in_progress === 0) {
@@ -387,7 +387,7 @@ AUI().add(
 				var completeUploads = instance.getFileListUl().all('.upload-complete,.upload-error');
 
 				if (completeUploads) {
-					completeUploads.remove();
+					completeUploads.remove(true);
 				}
 
 				instance._clearUploadsButton.hide();

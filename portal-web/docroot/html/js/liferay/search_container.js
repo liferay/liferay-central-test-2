@@ -176,7 +176,7 @@ AUI().add(
 								obj = obj.ancestor('tr');
 							}
 
-							obj.remove();
+							obj.remove(true);
 						}
 					},
 
