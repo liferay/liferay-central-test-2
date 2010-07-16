@@ -1999,7 +1999,17 @@ AUI().add(
 
 						instance.repeatField(source);
 					},
-					'.repeatable-field-image'
+					'.repeatable-field-add'
+				);
+
+				container.delegate(
+					'click',
+					function(event) {
+						var source = instance.getSourceByNode(event.currentTarget);
+
+						instance.closeField(source);
+					},
+					'.repeatable-field-delete'
 				);
 
 				container.delegate(

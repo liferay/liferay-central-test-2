@@ -350,9 +350,8 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 
 			<c:if test="<%= elRepeatable %>">
 				<span class="repeatable-field-image">
-				<liferay-ui:icon
-					image="add"
-				/>
+					<liferay-ui:icon cssClass="repeatable-field-add" image="add" />
+					<liferay-ui:icon cssClass="repeatable-field-delete" image="delete" />
 				</span>
 			</c:if>
 		</div>
