@@ -25,15 +25,15 @@ public class ReleaseInfo {
 
 	static String name = "Liferay Portal Community Edition";
 
-	static String version = "6.0.3";
+	static String version = "6.0.4";
 
-	static String versionDisplayName = "6.0.3 CE";
+	static String versionDisplayName = "6.0.4 CE";
 
 	static String codeName = "Bunyan";
 
-	static String build = "6003";
+	static String build = "6004";
 
-	static String date = "July 15, 2010";
+	static String date = "July 17, 2010";
 
 	static String releaseInfoPrefix = System.getProperty(
 		"liferay.release.info.prefix" , StringPool.BLANK);
@@ -94,6 +94,8 @@ public class ReleaseInfo {
 	public static int RELEASE_6_0_2_BUILD_NUMBER = 6002;
 
 	public static int RELEASE_6_0_3_BUILD_NUMBER = 6003;
+
+	public static int RELEASE_6_0_3_BUILD_NUMBER = 6004;
 
 	public static final String getVersion() {
 		return version;
