@@ -26,13 +26,13 @@
 }
 
 .results-header .sort-column .result-column-name {
-	background: url(../images/arrows/06_up.png) no-repeat 100% 50%;
+	background: url(../images/arrows/05_up.png) no-repeat 100% 50%;
 	font-style: italic;
 	padding-right: 15px;
 }
 
 .results-header .sort-desc .result-column-name {
-	background-image: url(../images/arrows/06_down.png);
+	background-image: url(../images/arrows/05_down.png);
 }
 
 .results-row td {

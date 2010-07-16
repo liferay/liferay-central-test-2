@@ -105,14 +105,14 @@ List<String> primaryKeys = new ArrayList<String>();
 				if (orderCurrentHeader) {
 					cssClass = "sort-column";
 
+					cssClass += " sort-" + orderByType;
+
 					if (orderByType.equals("asc")) {
 						orderByType = "desc";
 					}
 					else {
 						orderByType = "asc";
 					}
-
-					cssClass += " sort-" + orderByType;
 				}
 			%>
 
