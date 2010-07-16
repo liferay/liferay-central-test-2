@@ -95,7 +95,7 @@ public class ReleaseInfo {
 
 	public static int RELEASE_6_0_3_BUILD_NUMBER = 6003;
 
-	public static int RELEASE_6_0_3_BUILD_NUMBER = 6004;
+	public static int RELEASE_6_0_4_BUILD_NUMBER = 6004;
 
 	public static final String getVersion() {
 		return version;
