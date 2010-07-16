@@ -21,6 +21,7 @@ import java.lang.management.ManagementFactory;
 
 import javax.management.MBeanServer;
 
+import org.jmock.Mockery;
 import org.jmock.integration.junit4.JUnit4Mockery;
 
 /**
@@ -29,14 +30,14 @@ import org.jmock.integration.junit4.JUnit4Mockery;
 public class DestinationStatisticsManagerTest extends TestCase {
 
 	public void setUp() throws Exception {
-		_jUnit4Mockery = new JUnit4Mockery();
 		_mBeanServer = ManagementFactory.getPlatformMBeanServer();
+		_mockery = new JUnit4Mockery();
 	}
 
 	public void testRegisterMBean() throws Exception {
 		_mBeanServer.registerMBean(
 			new DestinationStatisticsManager(
-				_jUnit4Mockery.mock(Destination.class)),
+				_mockery.mock(Destination.class)),
 			DestinationStatisticsManager.createObjectName("test"));
 
 		assertTrue(
@@ -44,7 +45,7 @@ public class DestinationStatisticsManagerTest extends TestCase {
 				DestinationStatisticsManager.createObjectName("test")));
 	}
 
-	private JUnit4Mockery _jUnit4Mockery;
 	private MBeanServer _mBeanServer;
+	private Mockery _mockery;
 
 }
