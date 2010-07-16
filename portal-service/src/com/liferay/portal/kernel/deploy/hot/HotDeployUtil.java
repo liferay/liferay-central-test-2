@@ -77,26 +77,25 @@ public class HotDeployUtil {
 			return;
 		}
 
-		List<String> missingServletContextNames = new ArrayList<String>();
-
-		Set<String> dependentServletContextNames =
-			event.getDependentServletContextNames();
+		boolean hasDependencies = true;
 
 		for (String dependentServletContextName :
-				dependentServletContextNames) {
+				event.getDependentServletContextNames()) {
 
 			if (!_deployedServletContextNames.contains(
 					dependentServletContextName)) {
 
-				missingServletContextNames.add(dependentServletContextName);
+				hasDependencies = false;
+
+				break;
 			}
 		}
 
-		if (missingServletContextNames.isEmpty()) {
+		if (hasDependencies) {
 			if (_dependentEvents.contains(event)) {
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"Deploy " + event.getServletContextName() +
+						"Deploying " + event.getServletContextName() +
 							" from queue");
 				}
 			}
@@ -124,20 +123,32 @@ public class HotDeployUtil {
 		else {
 			if (!_dependentEvents.contains(event)) {
 				if (_log.isInfoEnabled()) {
-					Collections.sort(missingServletContextNames);
-
 					StringBuilder sb = new StringBuilder();
 
-					sb.append("Queue ");
+					sb.append("Queueing ");
 					sb.append(event.getServletContextName());
 					sb.append(" for deploy because it is missing ");
-					sb.append(
-						StringUtil.merge(missingServletContextNames, ", "));
+					sb.append(_getRequiredServletContextNames(event));
 
 					_log.info(sb.toString());
 				}
 
 				_dependentEvents.add(event);
+			}
+			else {
+				if (_log.isInfoEnabled()) {
+					for (HotDeployEvent dependentEvent : _dependentEvents) {
+
+						StringBuilder sb = new StringBuilder();
+
+						sb.append(dependentEvent.getServletContextName());
+						sb.append(" is still in queue because it is missing ");
+						sb.append(
+							_getRequiredServletContextNames(dependentEvent));
+
+						_log.info(sb.toString());
+					}
+				}
 			}
 		}
 	}
@@ -177,6 +188,24 @@ public class HotDeployUtil {
 		}
 
 		_prematureEvents = null;
+	}
+
+	private String _getRequiredServletContextNames(HotDeployEvent event) {
+		List<String> requiredServletContextNames = new ArrayList<String>();
+
+		for (String dependentServletContextName :
+				event.getDependentServletContextNames()) {
+
+			if (!_deployedServletContextNames.contains(
+					dependentServletContextName)) {
+
+				requiredServletContextNames.add(dependentServletContextName);
+			}
+		}
+
+		Collections.sort(requiredServletContextNames);
+
+		return StringUtil.merge(requiredServletContextNames, ", ");
 	}
 
 	private void _registerListener(HotDeployListener listener) {
