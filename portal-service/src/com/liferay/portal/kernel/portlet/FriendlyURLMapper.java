@@ -105,7 +105,7 @@ public interface FriendlyURLMapper {
 	public boolean isCheckMappingWithPrefix();
 
 	/**
-	 * Tells whether this portlet is instanceable.
+	 * Determines if this portlet is instanceable.
 	 *
 	 * <p>
 	 * The value returned from this method has no effect on whether a portlet is
