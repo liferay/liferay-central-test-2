@@ -54,34 +54,43 @@ AUI().add(
 							).render();
 
 							instance._currentPopup.plug(
-								A.Plugin.IO,
-								{
-									after: {
-										success: function(event) {
-											var host = this.get('host');
-											var boundingBox = host.get('boundingBox');
+								[
+									{
+										fn: A.Plugin.IO,
+										cfg: {
+											after: {
+												success: function(event) {
+													var host = this.get('host');
+													var boundingBox = host.get('boundingBox');
 
-											var properties = boundingBox.one('#portlet-set-properties');
+													var properties = boundingBox.one('#portlet-set-properties');
 
-											if (properties) {
-												instance._newPanel = properties;
-												instance._loadContent();
-											}
+													if (properties) {
+														instance._newPanel = properties;
+														instance._loadContent();
+													}
+												}
+											},
+											autoLoad: false,
+											showLoading: false,
+											data: {
+												p_l_id: themeDisplay.getPlid(),
+												p_p_id: 113,
+												p_p_state: 'exclusive',
+												doAsUserId: themeDisplay.getDoAsUserIdEncoded()
+											},
+											uri: themeDisplay.getPathMain() + '/portal/render_portlet'
 										}
 									},
-									autoLoad: false,
-									data: {
-										p_l_id: themeDisplay.getPlid(),
-										p_p_id: 113,
-										p_p_state: 'exclusive',
-										doAsUserId: themeDisplay.getDoAsUserIdEncoded()
-									},
-									uri: themeDisplay.getPathMain() + '/portal/render_portlet'
-								}
+									{
+										fn: A.LoadingMask
+									}
+								]
 							);
 						}
 
 						instance._currentPopup.show();
+						instance._currentPopup.loadingmask.show();
 						instance._currentPopup.io.start();
 					}
 				}
@@ -744,6 +753,8 @@ AUI().add(
 
 				newPanel.show();
 
+				instance._currentPopup.loadingmask.refreshMask();
+
 				newPanel.all('.lfr-colorpicker-img').remove(true);
 
 				instance._portletMsgResponse = A.one('#lfr-portlet-css-response');
@@ -1041,6 +1052,8 @@ AUI().add(
 							instance._setDefaults();
 						}
 					);
+
+					instance._currentPopup.loadingmask.hide();
 				};
 
 				instance._objData = defaultData;
