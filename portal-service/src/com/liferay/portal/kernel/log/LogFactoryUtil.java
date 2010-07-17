@@ -13,29 +13,54 @@
  */
 
 package com.liferay.portal.kernel.log;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class LogFactoryUtil {
 
-	public static LogFactory getLogFactory() {
-		return _logFactory;
-	}
-
-	public static void setLogFactory(LogFactory logFactory) {
-		_logFactory.setLogFactory(logFactory);
-	}
-
 	public static Log getLog(Class<?> c) {
-		return getLogFactory().getLog(c);
+		return getLog(c.getName());
 	}
 
 	public static Log getLog(String name) {
-		return getLogFactory().getLog(name);
+		// The following concurrent collection retrieve has a side effect as
+		// memory fence read, this will invalidate all dirty cache data if there
+		// is any. So if LogWrapper swap happens-before this, the new Log will
+		// be visible for current Thread.
+		LogWrapper logWrapper = _logWrappers.get(name);
+
+		if (logWrapper == null) {
+			logWrapper = new LogWrapper(_logFactory.getLog(name));
+
+			LogWrapper previousLog = _logWrappers.putIfAbsent(name, logWrapper);
+			if (previousLog != null) {
+				logWrapper = previousLog;
+			}
+		}
+
+		return logWrapper;
 	}
 
-	private static LogFactoryWrapper _logFactory =
-		new LogFactoryWrapper(new Jdk14LogFactoryImpl());
+	public static void setLogFactory(LogFactory logFactory) {
+		for(Map.Entry<String, LogWrapper> entry : _logWrappers.entrySet()) {
+			String name = entry.getKey();
+			LogWrapper logWrapper = entry.getValue();
+			logWrapper.setLog(logFactory.getLog(name));
+		}
+		// The following volatile-write will flush out all cache data, all
+		// previous LogWrapper swap will be visible for any reading after any
+		// memory fence read, according to the happen-before rules.
+		_logFactory = logFactory;
+	}
+
+	private static volatile LogFactory _logFactory = new Jdk14LogFactoryImpl();
+
+	private static final ConcurrentMap<String, LogWrapper> _logWrappers =
+		new ConcurrentHashMap<String, LogWrapper>();
 
 }
