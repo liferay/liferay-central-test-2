@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.softwarecatalog.model;
 
-
 /**
  * <p>
  * This class is a wrapper for {@link SCLicense}.

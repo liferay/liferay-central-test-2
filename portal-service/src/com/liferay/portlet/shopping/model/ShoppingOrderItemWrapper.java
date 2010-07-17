@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.shopping.model;
 
-
 /**
  * <p>
  * This class is a wrapper for {@link ShoppingOrderItem}.

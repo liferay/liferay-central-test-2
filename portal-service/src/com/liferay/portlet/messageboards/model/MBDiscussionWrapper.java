@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.messageboards.model;
 
-
 /**
  * <p>
  * This class is a wrapper for {@link MBDiscussion}.

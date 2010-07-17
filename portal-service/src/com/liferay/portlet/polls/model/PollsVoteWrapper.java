@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.polls.model;
 
-
 /**
  * <p>
  * This class is a wrapper for {@link PollsVote}.

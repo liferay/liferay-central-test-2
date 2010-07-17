@@ -14,7 +14,6 @@
 
 package com.liferay.counter.model;
 
-
 /**
  * <p>
  * This class is a wrapper for {@link Counter}.

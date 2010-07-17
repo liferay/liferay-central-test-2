@@ -14,7 +14,6 @@
 
 package com.liferay.portal.service.http;
 
-
 /**
  * <p>
  * This class provides a SOAP utility for the

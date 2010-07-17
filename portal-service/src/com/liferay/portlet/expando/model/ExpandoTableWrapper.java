@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.expando.model;
 
-
 /**
  * <p>
  * This class is a wrapper for {@link ExpandoTable}.
