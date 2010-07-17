@@ -105,32 +105,28 @@ public class SourceFormatter {
 			String content, String packageDir, String className)
 		throws IOException {
 
-		int x = content.indexOf("import ");
+		Pattern pattern = Pattern.compile(
+			"(^import .*;\\s*)+", Pattern.MULTILINE);
+		Matcher matcher = pattern.matcher(content);
 
-		if (x == -1) {
+		if (!matcher.find()) {
 			return content;
 		}
 
-		int y = content.indexOf("{", x);
-
-		y = content.substring(0, y).lastIndexOf(";") + 1;
-
-		String imports = _formatImports(content.substring(x, y));
+		String imports = _formatImports(matcher.group());
 
 		content =
-			content.substring(0, x) + imports +
-				content.substring(y + 1, content.length());
+			content.substring(0, matcher.start()) + imports +
+				content.substring(matcher.end());
 
 		Set<String> classes = ClassUtil.getClasses(
 			new UnsyncStringReader(content), className);
 
-		x = content.indexOf("import ");
+		matcher = pattern.matcher(content);
 
-		y = content.indexOf("{", x);
+		matcher.find();
 
-		y = content.substring(0, y).lastIndexOf(";") + 1;
-
-		imports = content.substring(x, y);
+		imports = matcher.group();
 
 		StringBuilder sb = new StringBuilder();
 
@@ -166,8 +162,8 @@ public class SourceFormatter {
 		imports = _formatImports(sb.toString());
 
 		content =
-			content.substring(0, x) + imports +
-				content.substring(y + 1, content.length());
+			content.substring(0, matcher.start()) + imports +
+				content.substring(matcher.end());
 
 		return content;
 	}
@@ -203,7 +199,7 @@ public class SourceFormatter {
 
 		String persistenceTestSuiteFileName =
 			basedir + "/com/liferay/portal/service/persistence/" +
-				"PersistenceTestSuite.java"; 
+				"PersistenceTestSuite.java";
 
 		String persistenceTestSuiteContent = _fileUtil.read(
 			persistenceTestSuiteFileName);
@@ -453,7 +449,7 @@ public class SourceFormatter {
 					fileName, "Java2HTML: " + fileName);
 			}
 
-			if (newContent.contains(" * @author Raymond Aug") && 
+			if (newContent.contains(" * @author Raymond Aug") &&
 				!newContent.contains(" * @author Raymond Aug\u00e9")) {
 
 				newContent = newContent.replaceFirst(
