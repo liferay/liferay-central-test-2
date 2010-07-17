@@ -61,27 +61,25 @@ public interface BaseModel<T> extends Cloneable, Comparable<T>, Serializable {
 	public void setCachedModel(boolean cachedModel);
 
 	/**
-	 * Determines if this model instance has been wrapped with an HTML auto
-	 * escape handler.
+	 * Determines if this model instance is escaped.
 	 *
-	 * @return <code>true</code> if this model instance has been wrapped with an
-	 *		   HTML auto escape handler; <code>false</code> otherwise
+	 * @return <code>true</code> if this model instance is escaped;
+	 *		   <code>false</code> otherwise
 	 * @see	   #setEscapedModel(boolean)
 	 */
 	public boolean isEscapedModel();
 
 	/**
-	 * Sets whether this model instance has been wrapped with an HTML auto
-	 * escape handler.
+	 * Sets whether this model instance is escaped, meaning that all strings
+	 * returned from getter methods are HTML safe.
 	 *
 	 * <p>
-	 * A model instance can be wrapped with an HTML auto escape handler using
-	 * its <code>toEscapedModel</code> method. For example, {@link
-	 * com.liferay.portal.model.UserModel#toEscapedModel()}.
+	 * A model instance can be made escaped by wrapping it with an HTML auto
+	 * escape handler using its <code>toEscapedModel</code> method. For example,
+	 * {@link com.liferay.portal.model.UserModel#toEscapedModel()}.
 	 * </p>
 	 *
-	 * @param escapedModel whether this model instance has been wrapped with an
-	 *		  HTML auto escape handler
+	 * @param escapedModel whether this model instance is escaped
 	 * @see	  com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
 	 */
 	public void setEscapedModel(boolean escapedModel);

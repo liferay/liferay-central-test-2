@@ -41,6 +41,7 @@ public class EntityColumn implements Cloneable {
 		_type = type;
 		_primary = primary;
 		_filterPrimary = filterPrimary;
+		_humanName = TextFormatter.format(name, TextFormatter.H);
 		_methodName = TextFormatter.format(name, TextFormatter.G);
 		_ejbName = ejbName;
 		_mappingKey = mappingKey;
@@ -100,6 +101,14 @@ public class EntityColumn implements Cloneable {
 		return _dbName;
 	}
 
+	public String getHumanName() {
+		return _humanName;
+	}
+
+	public String getHumanNames() {
+		return TextFormatter.formatPlural(getHumanName());
+	}
+
 	public String getEJBName() {
 		return _ejbName;
 	}
@@ -125,7 +134,7 @@ public class EntityColumn implements Cloneable {
 	}
 
 	public String getMethodNames() {
-		return TextFormatter.formatPlural(new String(_methodName));
+		return TextFormatter.formatPlural(_methodName);
 	}
 
 	public String getMethodUserUuidName() {
@@ -137,7 +146,7 @@ public class EntityColumn implements Cloneable {
 	}
 
 	public String getNames() {
-		return TextFormatter.formatPlural(new String(_name));
+		return TextFormatter.formatPlural(_name);
 	}
 
 	public String getType() {
@@ -146,6 +155,10 @@ public class EntityColumn implements Cloneable {
 
 	public String getUserUuidName() {
 		return _name.substring(0, _name.length() - 2) + "Uuid";
+	}
+
+	public String getUserUuidHumanName() {
+		return TextFormatter.format(getUserUuidName(), TextFormatter.H);
 	}
 
 	public boolean hasArrayableOperator() {
@@ -299,6 +312,7 @@ public class EntityColumn implements Cloneable {
 	private String _ejbName;
 	private boolean _fetchFinderPath;
 	private boolean _filterPrimary;
+	private String _humanName;
 	private String _idParam;
 	private String _idType;
 	private boolean _localized;

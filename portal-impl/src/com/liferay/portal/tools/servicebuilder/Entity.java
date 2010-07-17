@@ -184,12 +184,20 @@ public class Entity {
 		return _finderList;
 	}
 
+	public String getHumanName() {
+		return TextFormatter.format(_name, TextFormatter.H);
+	}
+
+	public String getHumanNames() {
+		return TextFormatter.formatPlural(getHumanName());
+	}
+
 	public String getName() {
 		return _name;
 	}
 
 	public String getNames() {
-		return TextFormatter.formatPlural(new String(_name));
+		return TextFormatter.formatPlural(_name);
 	}
 
 	public EntityOrder getOrder() {
@@ -315,7 +323,7 @@ public class Entity {
 	}
 
 	public String getVarNames() {
-		return TextFormatter.formatPlural(new String(getVarName()));
+		return TextFormatter.formatPlural(getVarName());
 	}
 
 	public boolean hasArrayableOperator() {

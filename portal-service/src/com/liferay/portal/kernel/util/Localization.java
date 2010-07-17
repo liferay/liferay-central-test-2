@@ -71,8 +71,8 @@ public interface Localization {
 	public String getDefaultLocale(String xml);
 
 	/**
-	 * Gets the localized version of a string. Uses the default language if no
-	 * localization exists for the requested language.
+	 * Gets the localized string from the localizations XML. Uses the default
+	 * language if no localization exists for the requested language.
 	 *
 	 * @param  xml the localizations XML to get the localized string from
 	 * @param  requestedLanguageId the id of the language to get the
@@ -82,12 +82,15 @@ public interface Localization {
 	public String getLocalization(String xml, String requestedLanguageId);
 
 	/**
-	 * Gets the localized version of a string, optionally using the default
-	 * language if the no localization exists for the requested language.
+	 * Gets the localized string from the localizations XML, optionally using
+	 * the default language if the no localization exists for the requested
+	 * language.
 	 *
 	 * @param  xml the localizations XML to get the localized string from
 	 * @param  requestedLanguageId the id of the language to get the
 	 *		   localization for
+	 * @param  useDefault whether to use the default language if no localization
+	 *		   exists for the requested language
 	 * @return the localized string. If <code>useDefault</code> is
 	 *		   <code>false</code> and no localization exists for the requested
 	 *		   language, an empty string will be returned.
@@ -267,24 +270,23 @@ public interface Localization {
 		throws Exception;
 
 	/**
-	 * Updates the localized version of the string for the system default
-	 * language in the localizations XML. Stores the localized strings as
-	 * characters in the XML.
+	 * Updates the localized string for the system default language in the
+	 * localizations XML. Stores the localized strings as characters in the XML.
 	 *
 	 * @param  xml the localizations XML to update the localized string in
 	 * @param  key the name of the localized string, such as &quot;Title&quot;
-	 * @param  value the localized version of the string
+	 * @param  value the localized string
 	 * @return the updated localizations XML
 	 */
 	public String updateLocalization(String xml, String key, String value);
 
 	/**
-	 * Updates the localized version of the string for the language in the
-	 * localizations XML. Stores the localized strings as characters in the XML.
+	 * Updates the localized string for the language in the localizations XML.
+	 * Stores the localized strings as characters in the XML.
 	 *
 	 * @param  xml the localizations XML to update the localized string in
 	 * @param  key the name of the localized string, such as &quot;Title&quot;
-	 * @param  value the localized version of the string
+	 * @param  value the localized string
 	 * @param  requestedLanguageId the id of the language to update the
 	 *		   localization for
 	 * @return the updated localizations XML
@@ -293,13 +295,13 @@ public interface Localization {
 		String xml, String key, String value, String requestedLanguageId);
 
 	/**
-	 * Updates the localized version of the string for the language in the
-	 * localizations XML and changes the default language. Stores the localized
-	 * strings as characters in the XML.
+	 * Updates the localized string for the language in the localizations XML
+	 * and changes the default language. Stores the localized strings as
+	 * characters in the XML.
 	 *
 	 * @param  xml the localizations XML to update the localized string in
 	 * @param  key the name of the localized string, such as &quot;Title&quot;
-	 * @param  value the localized version of the string
+	 * @param  value the localized string
 	 * @param  requestedLanguageId the id of the language to update the
 	 *		   localization for
 	 * @param  defaultLanguageId the id of the default language
@@ -310,13 +312,13 @@ public interface Localization {
 		String defaultLanguageId);
 
 	/**
-	 * Updates the localized version of the string for the language in the
-	 * localizations XML and changes the default language, optionally storing
-	 * the localized strings as CDATA in the XML.
+	 * Updates the localized string for the language in the localizations XML
+	 * and changes the default language, optionally storing the localized
+	 * strings as CDATA in the XML.
 	 *
 	 * @param  xml the localizations XML to update the localized string in
 	 * @param  key the name of the localized string, such as &quot;Title&quot;
-	 * @param  value the localized version of the string
+	 * @param  value the localized string
 	 * @param  requestedLanguageId the id of the language to update the
 	 *		   localization for
 	 * @param  defaultLanguageId the id of the default language
