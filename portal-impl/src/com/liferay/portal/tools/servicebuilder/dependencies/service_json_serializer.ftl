@@ -6,7 +6,6 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.JSONUtil;
 
 import java.util.Date;
 import java.util.List;
