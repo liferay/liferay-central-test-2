@@ -42,7 +42,7 @@ public class WorkflowHandlerRegistryImpl implements WorkflowHandlerRegistry {
 	}
 
 	public void unregister(WorkflowHandler workflowHandler) {
-		_workflowHandlerMap.remove(workflowHandler);
+		_workflowHandlerMap.remove(workflowHandler.getClassName());
 	}
 
 	private Map<String, WorkflowHandler> _workflowHandlerMap =
