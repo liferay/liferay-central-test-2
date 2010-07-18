@@ -13,11 +13,9 @@
  */
 
 package com.liferay.portlet.social.model;
-
 import com.liferay.portal.kernel.util.Time;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
@@ -44,7 +42,7 @@ public class SocialEquityValue {
 	}
 
 	public double getValue() {
-		return getValue(getEquityDate(new Date()));
+		return getValue(getEquityDate());
 	}
 
 	public double getValue(int equityDate) {
@@ -56,12 +54,8 @@ public class SocialEquityValue {
 		_b = _b - socialEquityValue._b;
 	}
 
-	protected int getEquityDate(Date date) {
-		Calendar calendar = new GregorianCalendar();
-
-		calendar.setTime(date);
-
-		long d = calendar.getTimeInMillis() - _BASE_TIME;
+	protected int getEquityDate() {
+		long d = System.currentTimeMillis() - _BASE_TIME;
 
 		return (int)(d / Time.DAY);
 	}
@@ -69,7 +63,7 @@ public class SocialEquityValue {
 	private static final long _BASE_TIME =
 		new GregorianCalendar(2010, Calendar.JANUARY, 1).getTimeInMillis();
 
-	private double _b = 0;
-	private double _k = 0;
+	private double _b;
+	private double _k;
 
 }

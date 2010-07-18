@@ -25,6 +25,9 @@ public interface DestinationNames {
 
 	public static final String BLOGS = "liferay/blogs";
 
+	public static final String BUFFERED_INCREMENT =
+		"liferay/buffered_increment";
+
 	public static final String CONVERT_PROCESS = "liferay/convert_process";
 
 	public static final String DOCUMENT_LIBRARY_HOOK =

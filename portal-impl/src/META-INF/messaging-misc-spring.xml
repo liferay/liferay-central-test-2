@@ -16,6 +16,9 @@
 	<bean id="destination.blogs" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="name" value="liferay/blogs" />
 	</bean>
+	<bean id="destination.buffered_increment" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<property name="name" value="liferay/buffered_increment" />
+	</bean>
 	<bean id="destination.convert_process" class="com.liferay.portal.kernel.messaging.SerialDestination">
 		<property name="name" value="liferay/convert_process" />
 	</bean>
@@ -50,6 +53,7 @@
 	<!-- Listeners -->
 
 	<bean id="messageListener.async_service" class="com.liferay.portal.messaging.async.AsyncMessageListener" />
+	<bean id="messageListener.buffered_increment" class="com.liferay.portal.increment.BufferedIncrementMessageListener" />
 	<bean id="messageListener.blogs" class="com.liferay.portlet.blogs.messaging.BlogsMessageListener" />
 	<bean id="messageListener.convert_process" class="com.liferay.portal.convert.messaging.ConvertProcessMessageListener" />
 	<bean id="messageListener.flags" class="com.liferay.portlet.flags.messaging.FlagsRequestMessageListener" />
@@ -75,6 +79,7 @@
 			<list>
 				<ref bean="destination.async_service" />
 				<ref bean="destination.blogs" />
+				<ref bean="destination.buffered_increment" />
 				<ref bean="destination.convert_process" />
 				<ref bean="destination.flags" />
 				<ref bean="destination.journal" />
@@ -100,6 +105,11 @@
 				<entry key="liferay/blogs">
 					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
 						<ref bean="messageListener.blogs" />
+					</list>
+				</entry>
+				<entry key="liferay/buffered_increment">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="messageListener.buffered_increment" />
 					</list>
 				</entry>
 				<entry key="liferay/convert_process">
