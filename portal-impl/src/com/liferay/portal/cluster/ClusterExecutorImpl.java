@@ -480,7 +480,7 @@ public class ClusterExecutorImpl
 			_uuid = uuid;
 		}
 
-		public void finalize() {
+		public void doFinalize() {
 			_executionResultMap.remove(_uuid);
 		}
 

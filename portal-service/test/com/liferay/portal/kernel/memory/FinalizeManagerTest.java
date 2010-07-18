@@ -91,7 +91,7 @@ public class FinalizeManagerTest extends TestCase {
 
 	private class MarkFinalizeAction implements FinalizeAction {
 
-		public void finalize() {
+		public void doFinalize() {
 			_marked = true;
 		}
 

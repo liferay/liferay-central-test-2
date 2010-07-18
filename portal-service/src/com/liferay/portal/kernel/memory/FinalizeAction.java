@@ -19,6 +19,6 @@ package com.liferay.portal.kernel.memory;
  */
 public interface FinalizeAction {
 
-	public void finalize();
+	public void doFinalize();
 
 }

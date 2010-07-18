@@ -55,7 +55,7 @@ public class FinalizeManager {
 			FinalizeAction finalizeAction = _referenceActionMap.remove(
 				reference);
 
-			finalizeAction.finalize();
+			finalizeAction.doFinalize();
 		}
 	}
 
@@ -79,7 +79,7 @@ public class FinalizeManager {
 					FinalizeAction finalizeAction =
 						_referenceActionMap.remove(reference);
 
-					finalizeAction.finalize();
+					finalizeAction.doFinalize();
 				}
 				catch (InterruptedException ie) {
 				}
