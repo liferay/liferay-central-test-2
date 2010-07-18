@@ -85,11 +85,11 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 		}
 
 		if (Validator.isNull(className)) {
-			new IllegalArgumentException("className is null");
+			throw new IllegalArgumentException("className is null");
 		}
 
 		if (Validator.isNull(classPKField)) {
-			new IllegalArgumentException("classPKField is null");
+			throw new IllegalArgumentException("classPKField is null");
 		}
 
 		if (Validator.isNull(sql)) {
