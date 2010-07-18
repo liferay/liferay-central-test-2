@@ -279,7 +279,7 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 	}
 
 	public List<AssetTag> getTags() throws SystemException {
-		return getTags();
+		return assetTagPersistence.findAll();
 	}
 
 	public List<AssetTag> getTags(long classNameId, long classPK)

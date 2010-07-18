@@ -223,9 +223,10 @@ public class ShoppingCouponLocalServiceImpl
 			PwdGenerator.getPassword(PwdGenerator.KEY1 + PwdGenerator.KEY2, 8);
 
 		try {
-			shoppingCouponPersistence.findByCode(code);
+			ShoppingCoupon shoppingCoupon =
+				shoppingCouponPersistence.findByCode(code);
 
-			return getCode();
+			return shoppingCoupon.getCode();
 		}
 		catch (NoSuchCouponException nsce) {
 			return code;
