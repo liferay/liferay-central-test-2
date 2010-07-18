@@ -13,7 +13,6 @@
  */
 
 package com.liferay.portal.lar;
-
 import com.liferay.portal.LARFileException;
 import com.liferay.portal.LARTypeException;
 import com.liferay.portal.LayoutImportException;
@@ -911,8 +910,7 @@ public class PortletImporter {
 					}
 				}
 
-				context.addRatingsEntries(
-					className, new Long(classPK), ratingsEntries);
+				context.addRatingsEntries(className, classPK, ratingsEntries);
 			}
 		}
 		catch (Exception e) {
@@ -1001,8 +999,8 @@ public class PortletImporter {
 					}
 				}
 
-				context.addAssetCategories(
-					className, new Long(classPK), assetCategoryIds);
+				context.addAssetCategories(className, classPK,
+					assetCategoryIds);
 			}
 		}
 		catch (Exception e) {
@@ -1035,8 +1033,7 @@ public class PortletImporter {
 				String assetTagNames = GetterUtil.getString(
 					asset.attributeValue("tags"));
 
-				context.addAssetTags(
-					className, new Long(classPK),
+				context.addAssetTags(className, classPK,
 					StringUtil.split(assetTagNames));
 			}
 		}
