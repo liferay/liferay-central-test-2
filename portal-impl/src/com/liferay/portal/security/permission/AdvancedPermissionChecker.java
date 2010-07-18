@@ -258,7 +258,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		}
 
 		if (ownerId == defaultUserId) {
-			if (actionId == ActionKeys.VIEW) {
+			if (ActionKeys.VIEW.equals(actionId)) {
 				return true;
 			}
 			else {
