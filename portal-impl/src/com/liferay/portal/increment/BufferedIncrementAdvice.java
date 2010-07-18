@@ -16,19 +16,15 @@ package com.liferay.portal.increment;
 import com.liferay.portal.kernel.cache.key.CacheKeyGenerator;
 import com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil;
 import com.liferay.portal.kernel.concurrent.BatchablePipe;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.increment.BufferedIncrement;
 import com.liferay.portal.kernel.increment.Increment;
+import com.liferay.portal.kernel.increment.IncrementFactory;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.util.MethodTargetClassKey;
 import com.liferay.portal.spring.aop.AnnotationChainableMethodAdvice;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Constructor;
-
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.aopalliance.intercept.MethodInvocation;
 
@@ -63,8 +59,8 @@ public class BufferedIncrementAdvice
 		}
 		String batchKey = cacheKeyGenerator.finish();
 
-		Increment increment = _createIncrement(annotation.incrementClass(),
-			value);
+		Increment increment = IncrementFactory.createIncrement(
+			annotation.incrementClass(), value);
 
 		BufferedIncreasableEntry entry = new BufferedIncreasableEntry(
 			nextMethodInterceptor,
@@ -84,36 +80,11 @@ public class BufferedIncrementAdvice
 		return _nullBufferedIncrement;
 	}
 
-	private Increment<?> _createIncrement(
-			Class<? extends Increment> incrementClass, Object value)
-		throws SystemException {
-
-		Class<?> valueClass = value.getClass();
-		String key = incrementClass.getName().concat(valueClass.getName());
-		Constructor<? extends Increment> constructor =
-			_incrementConstructorMap.get(key);
-		try {
-			if (constructor == null) {
-				constructor = incrementClass.getConstructor(valueClass);
-				_incrementConstructorMap.put(key, constructor);
-			}
-			return constructor.newInstance(value);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-
-	}
-
 	private static BatchablePipe<String, BufferedIncreasableEntry>
 		_batchablePipe = new BatchablePipe<String, BufferedIncreasableEntry>();
 
 	private static String _cacheKeyGeneratorName =
 		BufferedIncrementAdvice.class.getName();
-
-	private static Map<String, Constructor<? extends Increment>>
-		_incrementConstructorMap =
-			new ConcurrentHashMap<String, Constructor<? extends Increment>>();
 
 	private static BufferedIncrement _nullBufferedIncrement =
 		new BufferedIncrement() {
