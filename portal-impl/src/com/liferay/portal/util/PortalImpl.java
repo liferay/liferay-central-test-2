@@ -185,8 +185,7 @@ import java.util.Set;
 import java.util.TimeZone;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -2117,7 +2116,7 @@ public class PortalImpl implements Portal {
 	}
 
 	public int getPortalPort() {
-		return _portalPort;
+		return _portalPort.get();
 	}
 
 	public Properties getPortalProperties() {
@@ -3875,19 +3874,11 @@ public class PortalImpl implements Portal {
 	 * Sets the port obtained on the first request to the portal.
 	 */
 	public void setPortalPort(HttpServletRequest request) {
-		if (_portalPort == -1) {
-			_portalPortLock.lock();
-
-			try {
-				if (_portalPort == -1) {
-					_portalPort = request.getServerPort();
-				}
+		if (_portalPort.get() == -1) {
+			int newPort = request.getServerPort();
+			if (_portalPort.compareAndSet(-1, newPort)) {
+				notifyPortalPortEventListeners(newPort);
 			}
-			finally {
-				_portalPortLock.unlock();
-			}
-
-			notifyPortalPortEventListeners(_portalPort);
 		}
 	}
 
@@ -4557,10 +4548,9 @@ public class PortalImpl implements Portal {
 	private Map<String, Long> _plidToPortletIdCache =
 		new ConcurrentHashMap<String, Long>();
 	private String _portalLibDir;
-	private volatile int _portalPort = -1;
+	private final AtomicInteger _portalPort = new AtomicInteger(-1);
 	private List<PortalPortEventListener> _portalPortEventListeners =
 		new ArrayList<PortalPortEventListener>();
-	private Lock _portalPortLock = new ReentrantLock();
 	private String _portalWebDir;
 	private Set<String> _portletAddDefaultResourceCheckWhitelist;
 	private Set<String> _portletAddDefaultResourceCheckWhitelistActions;
