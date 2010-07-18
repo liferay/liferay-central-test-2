@@ -13,7 +13,6 @@
  */
 
 package com.liferay.portal.kernel.util;
-
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.log.Log;
@@ -22,6 +21,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import java.io.IOException;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>
@@ -176,15 +176,14 @@ public class UnicodeProperties extends HashMap<String, String> {
 	public String toString() {
 		StringBuilder sb = new StringBuilder(_length);
 
-		for (String key : keySet()) {
-			String value = get(key);
-
+		for (Map.Entry<String, String> entry : entrySet()) {
+			String value = entry.getValue();
 			if (Validator.isNotNull(value)) {
 				if (_safe) {
 					value = _encode(value);
 				}
 
-				sb.append(key);
+				sb.append(entry.getKey());
 				sb.append(StringPool.EQUAL);
 				sb.append(value);
 				sb.append(StringPool.NEW_LINE);

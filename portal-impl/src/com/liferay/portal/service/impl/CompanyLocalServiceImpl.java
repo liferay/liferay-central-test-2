@@ -13,7 +13,6 @@
  */
 
 package com.liferay.portal.service.impl;
-
 import com.liferay.portal.AccountNameException;
 import com.liferay.portal.CompanyMxException;
 import com.liferay.portal.CompanyVirtualHostException;
@@ -63,6 +62,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
@@ -649,9 +649,9 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				}
 			}
 
-			for (String key : properties.keySet()) {
-				String value = properties.getProperty(key);
-
+			for (Map.Entry<String, String> entry : properties.entrySet()) {
+				String key = entry.getKey();
+				String value = entry.getValue();
 				if (!value.equals(Portal.TEMP_OBFUSCATION_VALUE)) {
 					preferences.setValue(key, value);
 				}

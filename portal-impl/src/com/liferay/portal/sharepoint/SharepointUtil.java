@@ -13,7 +13,6 @@
  */
 
 package com.liferay.portal.sharepoint;
-
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
@@ -136,11 +135,9 @@ public class SharepointUtil {
 	}
 
 	private String _getStorageClass(String token) {
-		if (_storageMap.containsValue(token)) {
-			for (String key : _storageMap.keySet()) {
-				if (_storageMap.get(key).equals(token)) {
-					return key;
-				}
+		for (Map.Entry<String, String> entry : _storageMap.entrySet()) {
+			if (entry.getValue().equals(token)) {
+				return entry.getKey();
 			}
 		}
 

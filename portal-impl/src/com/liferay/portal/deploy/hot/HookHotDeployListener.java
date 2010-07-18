@@ -13,7 +13,6 @@
  */
 
 package com.liferay.portal.deploy.hot;
-
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.bean.ClassLoaderBeanHandler;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
@@ -1041,10 +1040,8 @@ public class HookHotDeployListener
 
 		_eventsContainerMap.put(servletContextName, eventsContainer);
 
-		Iterator<Object> itr = portalProperties.keySet().iterator();
-
-		while (itr.hasNext()) {
-			String key = (String)itr.next();
+		for (Map.Entry<Object, Object> entry : portalProperties.entrySet()) {
+			String key = (String) entry.getKey();
 
 			if (!key.equals(APPLICATION_STARTUP_EVENTS) &&
 				!ArrayUtil.contains(_PROPS_KEYS_EVENTS, key) &&
@@ -1055,7 +1052,7 @@ public class HookHotDeployListener
 
 			String eventName = key;
 			String[] eventClassNames = StringUtil.split(
-				portalProperties.getProperty(key));
+				(String)entry.getValue());
 
 			for (String eventClassName : eventClassNames) {
 				Object obj = initEvent(
@@ -1133,10 +1130,8 @@ public class HookHotDeployListener
 		_modelListenersContainerMap.put(
 			servletContextName, modelListenersContainer);
 
-		Iterator<Object> itr = portalProperties.keySet().iterator();
-
-		while (itr.hasNext()) {
-			String key = (String)itr.next();
+		for (Map.Entry<Object, Object> entry : portalProperties.entrySet()) {
+			String key = (String) entry.getKey();
 
 			if (!key.startsWith(VALUE_OBJECT_LISTENER)) {
 				continue;
@@ -1145,7 +1140,7 @@ public class HookHotDeployListener
 			String modelName = key.substring(VALUE_OBJECT_LISTENER.length());
 
 			String[] modelListenerClassNames = StringUtil.split(
-				portalProperties.getProperty(key));
+				(String)entry.getValue());
 
 			for (String modelListenerClassName : modelListenerClassNames) {
 				ModelListener<BaseModel<?>> modelListener = initModelListener(

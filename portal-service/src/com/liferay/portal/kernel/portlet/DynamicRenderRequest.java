@@ -13,15 +13,14 @@
  */
 
 package com.liferay.portal.kernel.portlet;
-
 import com.liferay.portal.kernel.util.ArrayUtil;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.portlet.RenderRequest;
 import javax.portlet.filter.RenderRequestWrapper;
@@ -119,7 +118,7 @@ public class DynamicRenderRequest extends RenderRequestWrapper {
 	}
 
 	public Enumeration<String> getParameterNames() {
-		List<String> names = new ArrayList<String>();
+		Set<String> names = new HashSet<String>();
 
 		if (_inherit) {
 			Enumeration<String> enu = super.getParameterNames();
@@ -129,11 +128,7 @@ public class DynamicRenderRequest extends RenderRequestWrapper {
 			}
 		}
 
-		for (String s : _params.keySet()) {
-			if (!names.contains(s)) {
-				names.add(s);
-			}
-		}
+		names.addAll(_params.keySet());
 
 		return Collections.enumeration(names);
 	}

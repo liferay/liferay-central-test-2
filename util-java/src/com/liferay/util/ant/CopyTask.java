@@ -13,12 +13,10 @@
  */
 
 package com.liferay.util.ant;
-
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.File;
 
-import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.tools.ant.taskdefs.Copy;
@@ -115,13 +113,9 @@ public class CopyTask {
 		if (filterMap != null) {
 			FilterSet filterSet = copy.createFilterSet();
 
-			Iterator<String> itr = filterMap.keySet().iterator();
-
-			while (itr.hasNext()) {
-				String token = itr.next();
-
-				String replacement = filterMap.get(token);
-
+			for (Map.Entry<String, String> entry : filterMap.entrySet()) {
+				String token = entry.getKey();
+				String replacement = entry.getValue();
 				filterSet.addFilter(token, replacement);
 			}
 		}

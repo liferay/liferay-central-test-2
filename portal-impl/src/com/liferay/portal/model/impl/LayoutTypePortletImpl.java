@@ -13,7 +13,6 @@
  */
 
 package com.liferay.portal.model.impl;
-
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -52,6 +51,7 @@ import com.liferay.util.PwdGenerator;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Brian Wing Shun Chan
@@ -722,9 +722,10 @@ public class LayoutTypePortletImpl
 
 		UnicodeProperties newProps = new UnicodeProperties();
 
-		for (String key : props.keySet()) {
+		for (Map.Entry<String, String> entry : props.entrySet()) {
+			String key = entry.getKey();
 			if (!key.startsWith(portletId)) {
-				newProps.setProperty(key, props.getProperty(key));
+				newProps.setProperty(key, entry.getValue());
 			}
 		}
 
@@ -1173,9 +1174,10 @@ public class LayoutTypePortletImpl
 		if (portlet.getRootPortletId().equals(PortletKeys.NESTED_PORTLETS)) {
 			UnicodeProperties props = getTypeSettingsProperties();
 
-			for (String key : props.keySet()) {
+			for (Map.Entry<String, String> entry : props.entrySet()) {
+				String key = entry.getKey();
 				if (key.startsWith(portlet.getPortletId())) {
-					String portletIds = props.getProperty(key);
+					String portletIds = entry.getValue();
 
 					String[] portletIdsArray = StringUtil.split(portletIds);
 

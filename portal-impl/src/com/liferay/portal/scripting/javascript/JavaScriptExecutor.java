@@ -13,7 +13,6 @@
  */
 
 package com.liferay.portal.scripting.javascript;
-
 import com.liferay.mozilla.javascript.Context;
 import com.liferay.mozilla.javascript.Script;
 import com.liferay.mozilla.javascript.Scriptable;
@@ -55,10 +54,10 @@ public class JavaScriptExecutor implements ScriptingExecutor {
 
 			Scriptable scriptable = context.initStandardObjects();
 
-			for (String varName: inputObjects.keySet()) {
+			for (Map.Entry<String, Object> entry : inputObjects.entrySet()) {
 				ScriptableObject.putProperty(
-					scriptable, varName,
-					Context.javaToJS(inputObjects.get(varName), scriptable));
+					scriptable, entry.getKey(),
+					Context.javaToJS(entry.getValue(), scriptable));
 			}
 
 			if (allowedClasses != null) {

@@ -13,12 +13,10 @@
  */
 
 package com.liferay.portlet.wiki.translators;
-
 import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -77,10 +75,8 @@ public abstract class BaseTranslator {
 	}
 
 	protected String runRegexps(String content) {
-		for (String regexp : regexps.keySet()) {
-			String replacement = regexps.get(regexp);
-
-			content = runRegexp(content, regexp, replacement);
+		for (Map.Entry<String, String> entry : regexps.entrySet()) {
+			content = runRegexp(content, entry.getKey(), entry.getValue());
 		}
 
 		return content;
@@ -104,16 +100,9 @@ public abstract class BaseTranslator {
 	}
 
 	protected String unprotectNowikiText(String content) {
-		List<String> hashList = new ArrayList<String>(_protectedMap.keySet());
-
-		for (int i = hashList.size() - 1; i >= 0; i--) {
-			String hash = hashList.get(i);
-
-			String protectedMarkup = _protectedMap.get(hash);
-
-			content = content.replace(hash, protectedMarkup);
+		for (Map.Entry<String, String> enrty : _protectedMap.entrySet()) {
+			content = content.replace(enrty.getKey(), enrty.getValue());
 		}
-
 		return content;
 	}
 

@@ -13,7 +13,6 @@
  */
 
 package com.liferay.portlet;
-
 import com.liferay.portal.ccpp.PortalProfileFactory;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -58,7 +57,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
 import javax.ccpp.Profile;
 
@@ -630,10 +628,10 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 			}
 		}
 		else {
-			Set<String> names = renderParameters.keySet();
-
-			for (String name : names) {
-				String[] values = renderParameters.get(name);
+			for (Map.Entry<String, String[]> entry :
+				renderParameters.entrySet()) {
+				String name = entry.getKey();
+				String[] values = entry.getValue();
 
 				name = removePortletNamespace(
 					invokerPortlet, portletNamespace, name);

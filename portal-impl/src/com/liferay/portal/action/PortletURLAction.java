@@ -13,7 +13,6 @@
  */
 
 package com.liferay.portal.action;
-
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletModeFactory;
 import com.liferay.portal.kernel.portlet.WindowStateFactory;
@@ -25,7 +24,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.servlet.ServletResponseUtil;
 
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
@@ -158,14 +156,8 @@ public class PortletURLAction extends Action {
 				(Map<String, String>)JSONFactoryUtil.deserialize(
 					parameterMapString);
 
-			Iterator<String> itr = parameterMap.keySet().iterator();
-
-			while (itr.hasNext()) {
-				String paramName = itr.next();
-
-				String paramValue = parameterMap.get(paramName);
-
-				portletURL.setParameter(paramName, paramValue);
+			for (Map.Entry<String, String> entry : parameterMap.entrySet()) {
+				portletURL.setParameter(entry.getKey(), entry.getValue());
 			}
 		}
 

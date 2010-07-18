@@ -13,7 +13,6 @@
  */
 
 package com.liferay.util.servlet;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -75,9 +74,7 @@ public class SharedSessionWrapper implements HttpSession {
 				names = ListUtil.fromEnumeration(sessionAttributeNames);
 			}
 
-			for (String name : _sharedAttributes.keySet()) {
-				names.add(name);
-			}
+			names.addAll(_sharedAttributes.keySet());
 
 			return Collections.enumeration(names);
 		}

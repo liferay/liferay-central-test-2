@@ -13,7 +13,6 @@
  */
 
 package com.liferay.portal.webdav;
-
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -202,8 +201,8 @@ public class BaseWebDAVTestCase extends TestCase {
 			}
 		}
 
-		for (String header : headers.keySet()) {
-			request.addHeader(header, headers.get(header));
+		for (Map.Entry<String, String> entry : headers.entrySet()) {
+			request.addHeader(entry.getKey(), entry.getValue());
 		}
 
 		try {

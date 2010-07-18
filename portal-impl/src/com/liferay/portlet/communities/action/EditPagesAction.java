@@ -13,7 +13,6 @@
  */
 
 package com.liferay.portlet.communities.action;
-
 import com.liferay.portal.ImageTypeException;
 import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.LayoutHiddenException;
@@ -582,11 +581,8 @@ public class EditPagesAction extends PortletAction {
 					UnicodeProperties layoutTypeSettingsProperties =
 						layout.getTypeSettingsProperties();
 
-					for (String property: formTypeSettingsProperties.keySet()) {
-						layoutTypeSettingsProperties.setProperty(
-							property,
-							formTypeSettingsProperties.getProperty(property));
-					}
+					layoutTypeSettingsProperties.putAll(
+						formTypeSettingsProperties);
 
 					LayoutServiceUtil.updateLayout(
 						groupId, privateLayout, layoutId,

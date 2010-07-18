@@ -13,7 +13,6 @@
  */
 
 package com.liferay.portal.model;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -128,9 +127,9 @@ public class ModelHintsImpl implements ModelHints {
 		else {
 			List<Tuple> sanitizeTuples = new ArrayList<Tuple>();
 
-			for (String key : fields.keySet()) {
-				if (key.endsWith(_SANITIZE_SUFFIX)) {
-					Tuple sanitizeTuple = (Tuple)fields.get(key);
+			for (Map.Entry<String, Object> entry : fields.entrySet()) {
+				if (entry.getKey().endsWith(_SANITIZE_SUFFIX)) {
+					Tuple sanitizeTuple = (Tuple)entry.getValue();
 
 					sanitizeTuples.add(sanitizeTuple);
 				}

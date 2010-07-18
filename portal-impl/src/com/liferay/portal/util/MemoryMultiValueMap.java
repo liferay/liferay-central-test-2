@@ -13,7 +13,6 @@
  */
 
 package com.liferay.portal.util;
-
 import com.liferay.portal.kernel.util.MultiValueMap;
 
 import java.io.Serializable;
@@ -39,10 +38,8 @@ public class MemoryMultiValueMap<K extends Serializable, V extends Serializable>
 	}
 
 	public boolean containsValue(Object value) {
-		for (K key : keySet()) {
-			Set<V> values = getAll(key);
-
-			if (values.contains(value)) {
+		for (Map.Entry<K, Set<V>> entry : _map.entrySet()) {
+			if (entry.getValue().contains(value)) {
 				return true;
 			}
 		}

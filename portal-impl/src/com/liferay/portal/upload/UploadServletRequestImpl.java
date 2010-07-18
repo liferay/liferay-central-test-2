@@ -13,7 +13,6 @@
  */
 
 package com.liferay.portal.upload;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
@@ -24,13 +23,14 @@ import com.liferay.util.SystemProperties;
 import java.io.File;
 import java.io.IOException;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -193,21 +193,15 @@ public class UploadServletRequestImpl
 	}
 
 	public Enumeration<String> getParameterNames() {
-		List<String> parameterNames = new ArrayList<String>();
+		Set<String> parameterNames = new HashSet<String>();
 
 		Enumeration<String> enu = super.getParameterNames();
 
 		while (enu.hasMoreElements()) {
-			String name = enu.nextElement();
-
-			if (!_params.containsKey(name)) {
-				parameterNames.add(name);
-			}
+			parameterNames.add(enu.nextElement());
 		}
 
-		for (String name : _params.keySet()) {
-			parameterNames.add(name);
-		}
+		parameterNames.addAll(_params.keySet());
 
 		return Collections.enumeration(parameterNames);
 	}

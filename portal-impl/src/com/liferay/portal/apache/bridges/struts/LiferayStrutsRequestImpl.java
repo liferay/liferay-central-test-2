@@ -13,7 +13,6 @@
  */
 
 package com.liferay.portal.apache.bridges.struts;
-
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStreamWrapper;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -26,10 +25,9 @@ import java.io.InputStream;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
-import java.util.Vector;
+import java.util.Set;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -78,7 +76,7 @@ public class LiferayStrutsRequestImpl extends HttpServletRequestWrapper {
 	}
 
 	public Enumeration<String> getAttributeNames() {
-		List<String> attributeNames = new Vector<String>();
+		Set<String> attributeNames = new HashSet<String>();
 
 		Enumeration<String> enu = super.getAttributeNames();
 
@@ -90,13 +88,7 @@ public class LiferayStrutsRequestImpl extends HttpServletRequestWrapper {
 			}
 		}
 
-		Iterator<String> itr = _strutsAttributes.keySet().iterator();
-
-		while (itr.hasNext()) {
-			String name = itr.next();
-
-			attributeNames.add(name);
-		}
+		attributeNames.addAll(_strutsAttributes.keySet());
 
 		return Collections.enumeration(attributeNames);
 	}

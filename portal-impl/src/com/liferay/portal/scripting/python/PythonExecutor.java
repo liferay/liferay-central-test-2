@@ -13,7 +13,6 @@
  */
 
 package com.liferay.portal.scripting.python;
-
 import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
 import com.liferay.portal.kernel.scripting.ExecutionException;
 import com.liferay.portal.kernel.scripting.ScriptingException;
@@ -61,8 +60,8 @@ public class PythonExecutor implements ScriptingExecutor {
 		InteractiveInterpreter interactiveInterpreter =
 			new InteractiveInterpreter();
 
-		for (String varName: inputObjects.keySet()) {
-			interactiveInterpreter.set(varName, inputObjects.get(varName));
+		for (Map.Entry<String, Object> entry : inputObjects.entrySet()) {
+			interactiveInterpreter.set(entry.getKey(), entry.getValue());
 		}
 
 		interactiveInterpreter.exec(compiledScript);

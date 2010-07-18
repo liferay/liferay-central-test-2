@@ -13,7 +13,6 @@
  */
 
 package com.liferay.portlet.rss.action;
-
 import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
@@ -168,9 +167,9 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		int i = 0;
 
-		for (String url : subscriptions.keySet()) {
-			urls[i] = url;
-			titles[i] = subscriptions.get(url);
+		for (Map.Entry<String, String> entry : subscriptions.entrySet()) {
+			urls[i] = entry.getKey();
+			titles[i] = entry.getValue();
 
 			i++;
 		}

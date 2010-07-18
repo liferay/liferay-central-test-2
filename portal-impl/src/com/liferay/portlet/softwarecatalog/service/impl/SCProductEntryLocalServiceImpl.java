@@ -13,7 +13,6 @@
  */
 
 package com.liferay.portlet.softwarecatalog.service.impl;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.plugin.Version;
@@ -53,6 +52,7 @@ import com.liferay.util.xml.DocUtil;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -566,15 +566,11 @@ public class SCProductEntryLocalServiceImpl
 			return;
 		}
 
-		Iterator<Object> itr = repoSettings.keySet().iterator();
-
-		while (itr.hasNext()) {
-			String key = (String)itr.next();
-
+		for (Map.Entry<Object, Object> entry : repoSettings.entrySet()) {
 			Element settingEl = el.addElement("setting");
 
-			settingEl.addAttribute("name", key);
-			settingEl.addAttribute("value", repoSettings.getProperty(key));
+			settingEl.addAttribute("name", (String) entry.getKey());
+			settingEl.addAttribute("value", (String) entry.getValue());
 		}
 	}
 

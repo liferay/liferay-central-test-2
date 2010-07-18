@@ -13,7 +13,6 @@
  */
 
 package com.liferay.portlet.wiki.service.impl;
-
 import com.liferay.documentlibrary.DuplicateDirectoryException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.NoSuchFileException;
@@ -631,10 +630,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		Map<String, Boolean> links = WikiCacheUtil.getOutgoingLinks(page);
 
-		for (String curTitle : links.keySet()) {
-			Boolean exists = links.get(curTitle);
-
-			if (exists) {
+		for (Map.Entry<String, Boolean> entry : links.entrySet()) {
+			String curTitle = entry.getKey();
+			if (entry.getValue()) {
 				if (!pages.containsKey(curTitle)) {
 					pages.put(curTitle, getPage(nodeId, curTitle));
 				}

@@ -13,7 +13,6 @@
  */
 
 package com.liferay.portlet.admin.action;
-
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.convert.ConvertProcess;
 import com.liferay.portal.kernel.cache.CacheRegistryUtil;
@@ -348,8 +347,10 @@ public class EditServerAction extends PortletAction {
 		Map<Thread, StackTraceElement[]> stackTraces =
 			Thread.getAllStackTraces();
 
-		for (Thread thread : stackTraces.keySet()) {
-			StackTraceElement[] elements = stackTraces.get(thread);
+		for (Map.Entry<Thread, StackTraceElement[]> entry :
+			stackTraces.entrySet()) {
+			Thread thread = entry.getKey();
+			StackTraceElement[] elements = entry.getValue();
 
 			sb.append(StringPool.QUOTE);
 			sb.append(thread.getName());

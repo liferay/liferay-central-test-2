@@ -13,7 +13,6 @@
  */
 
 package com.liferay.portal.events;
-
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 
@@ -44,8 +43,11 @@ public class ShutdownHook implements Runnable {
 		Map<Thread, StackTraceElement[]> stackTraces =
 			Thread.getAllStackTraces();
 
-		for (Thread thread : stackTraces.keySet()) {
-			StackTraceElement[] elements = stackTraces.get(thread);
+		for (Map.Entry<Thread, StackTraceElement[]> entry :
+			stackTraces.entrySet()) {
+
+			Thread thread = entry.getKey();
+			StackTraceElement[] elements = entry.getValue();
 
 			sb.append("\"");
 			sb.append(thread.getName());
