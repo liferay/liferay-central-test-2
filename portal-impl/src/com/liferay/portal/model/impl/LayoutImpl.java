@@ -759,7 +759,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 				url, request.getSession().getId());
 		}
 
-		if (!resetMaxState && !resetMaxState) {
+		if (!resetMaxState) {
 			return url;
 		}
 
