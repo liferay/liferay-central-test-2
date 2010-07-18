@@ -44,7 +44,7 @@ public class EntityFinder {
 	}
 
 	public String getNames() {
-		return TextFormatter.formatPlural(new String(_name));
+		return TextFormatter.formatPlural(_name);
 	}
 
 	public String getReturnType() {

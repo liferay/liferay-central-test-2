@@ -60,7 +60,7 @@ public class BlogsEntryUrlTitleUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	protected String getUrlTitle(long entryId, String title) {
 		String urlTitle = BlogsUtil.getUrlTitle(entryId, title);
 
-		String newUrlTitle = new String(urlTitle);
+		String newUrlTitle = urlTitle;
 
 		for (int i = 1;; i++) {
 			if (!_urlTitles.contains(newUrlTitle)) {

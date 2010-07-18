@@ -2244,7 +2244,7 @@ public class ServiceBuilder {
 		}
 
 		String oldContent = FileUtil.read(jsonFile);
-		String newContent = new String(oldContent);
+		String newContent = oldContent;
 
 		int oldBegin = oldContent.indexOf(
 			"Liferay.Service.register(\"Liferay.Service." + _portletShortName);
@@ -2353,7 +2353,7 @@ public class ServiceBuilder {
 		}
 
 		String oldContent = FileUtil.read(xmlFile);
-		String newContent = new String(oldContent);
+		String newContent = oldContent;
 
 		int firstModel = newContent.indexOf(
 			"<model name=\"" + _packagePath + ".model.");
