@@ -36,6 +36,9 @@ public class BufferedIncrementMessageListener implements MessageListener {
 	}
 
 	protected void doReceive(Message message) throws Exception {
+		boolean isLazy =
+			PropsValues.SOCIAL_EQUITY_EQUITY_VALUE_BUFFERED_INCREMENT_LAZILY;
+
 		BatchablePipe<String, BufferedIncreasableEntry> pipe =
 			(BatchablePipe<String, BufferedIncreasableEntry>)
 				message.getPayload();
@@ -49,7 +52,7 @@ public class BufferedIncrementMessageListener implements MessageListener {
 				_log.error("Cannot write buffered increment value to the "
 					+ "database", t);
 			}
-			if (PropsValues.SOCIAL_EQUITY_EQUITY_VALUE_BUFFERED_INCREMENT_LAZILY) {
+			if (isLazy) {
 				return;
 			}
 		}

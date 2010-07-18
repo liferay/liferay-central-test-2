@@ -63,7 +63,7 @@ public class BufferedIncrementAdvice
 		}
 		String batchKey = cacheKeyGenerator.finish();
 
-		Increment increment = _createCounter(annotation.incrementClass(),
+		Increment increment = _createIncrement(annotation.incrementClass(),
 			value);
 
 		BufferedIncreasableEntry entry = new BufferedIncreasableEntry(
@@ -84,17 +84,17 @@ public class BufferedIncrementAdvice
 		return _nullBufferedIncrement;
 	}
 
-	private Increment<?> _createCounter(
-			Class<? extends Increment> counterClass, Object value)
+	private Increment<?> _createIncrement(
+			Class<? extends Increment> incrementClass, Object value)
 		throws SystemException {
 
 		Class<?> valueClass = value.getClass();
-		String key = counterClass.getName().concat(valueClass.getName());
+		String key = incrementClass.getName().concat(valueClass.getName());
 		Constructor<? extends Increment> constructor =
 			_incrementConstructorMap.get(key);
 		try {
 			if (constructor == null) {
-				constructor = counterClass.getConstructor(valueClass);
+				constructor = incrementClass.getConstructor(valueClass);
 				_incrementConstructorMap.put(key, constructor);
 			}
 			return constructor.newInstance(value);
