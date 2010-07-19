@@ -183,14 +183,14 @@ public class UpgradePermission extends UpgradeProcess {
 			sb.append("User_.userId = Users_Roles.userId and ");
 			sb.append("Users_Roles.roleId = ?) union all (select User_.* ");
 			sb.append("from User_, UserGroupRole where User_.userId = ");
-			sb.append("UserGroupRole.userId AND ugr.roleId = ?)");
+			sb.append("UserGroupRole.userId AND UserGroupRole.roleId = ?)");
 
 			String sql = sb.toString();
 
 			ps = con.prepareStatement(sql);
 
 			ps.setLong(1, roleId);
-			ps.setLong(1, roleId);
+			ps.setLong(2, roleId);
 
 			rs = ps.executeQuery();
 
