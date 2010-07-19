@@ -1,60 +1,68 @@
-<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd" name="liferay-multi-vm" updateCheck="false" dynamicConfig="false" monitoring="off">
+<ehcache
+	dynamicConfig="false"
+	monitoring="off"
+	name="liferay-multi-vm"
+	updateCheck="false"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd"
+>
 
 	<!--
 	Caches in this file can be clustered but are not configured to be clustered.
 	-->
+
 	<defaultCache
-		maxElementsInMemory="10000"
 		eternal="false"
-		timeToIdleSeconds="600"
+		maxElementsInMemory="10000"
 		overflowToDisk="false"
-	/>
-	<cache
-		name="com.liferay.portal.security.permission.PermissionCacheUtil"
-		maxElementsInMemory="10000"
-		eternal="false"
 		timeToIdleSeconds="600"
 	/>
 	<cache
-		name="com.liferay.portal.service.impl.PortletLocalServiceImpl"
-		maxElementsInMemory="0"
+		eternal="false"
+		maxElementsInMemory="10000"
+		name="com.liferay.portal.security.permission.PermissionCacheUtil"
+		timeToIdleSeconds="600"
+	/>
+	<cache
 		eternal="true"
+		maxElementsInMemory="0"
+		name="com.liferay.portal.service.impl.PortletLocalServiceImpl"
 		timeToIdleSeconds="0"
 	/>
 	<cache
-		name="com.liferay.portal.service.impl.PortletPreferencesLocalUtil"
-		maxElementsInMemory="10000"
 		eternal="false"
+		maxElementsInMemory="10000"
+		name="com.liferay.portal.service.impl.PortletPreferencesLocalUtil"
 		timeToIdleSeconds="600"
 	/>
 	<cache
-		name="com.liferay.portal.servlet.filters.cache.CacheUtil"
-		maxElementsInMemory="1000"
 		eternal="false"
+		maxElementsInMemory="1000"
+		name="com.liferay.portal.servlet.filters.cache.CacheUtil"
 		timeToLiveSeconds="3600"
 	/>
 	<cache
-		name="com.liferay.portal.velocity.LiferayResourceCacheUtil"
-		maxElementsInMemory="10000"
 		eternal="false"
+		maxElementsInMemory="10000"
+		name="com.liferay.portal.velocity.LiferayResourceCacheUtil"
 		timeToIdleSeconds="3600"
 	/>
 	<cache
-		name="com.liferay.portlet.calendar.service.impl.CalEventLocalUtil"
-		maxElementsInMemory="10000"
 		eternal="false"
+		maxElementsInMemory="10000"
+		name="com.liferay.portlet.calendar.service.impl.CalEventLocalUtil"
 		timeToIdleSeconds="600"
 	/>
 	<cache
-		name="com.liferay.portlet.journalcontent.util.JournalContent"
-		maxElementsInMemory="1000"
 		eternal="false"
+		maxElementsInMemory="1000"
+		name="com.liferay.portlet.journalcontent.util.JournalContent"
 		timeToLiveSeconds="3600"
 	/>
 	<cache
-		name="com.liferay.portlet.social.service.impl.SocialEquitySettingLocalServiceImpl"
-		maxElementsInMemory="10000"
 		eternal="false"
+		maxElementsInMemory="10000"
+		name="com.liferay.portlet.social.service.impl.SocialEquitySettingLocalServiceImpl"
 		timeToIdleSeconds="600"
 	/>
 </ehcache>

@@ -1,4 +1,11 @@
-<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd" name="hibernate-clustered" updateCheck="false" dynamicConfig="false" monitoring="off">
+<ehcache
+	dynamicConfig="false"
+	monitoring="off"
+	name="hibernate-clustered"
+	updateCheck="false"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd"
+>
 	<cacheManagerPeerProviderFactory
 		class="com.liferay.portal.cache.ehcache.LiferayCacheManagerPeerProviderFactory"
 		properties="portalPropertyKey=net.sf.ehcache.configurationResourceName.peerProviderProperties"
@@ -14,10 +21,10 @@
 	-->
 
 	<defaultCache
-		maxElementsInMemory="10000"
 		eternal="false"
-		timeToIdleSeconds="600"
+		maxElementsInMemory="10000"
 		overflowToDisk="false"
+		timeToIdleSeconds="600"
 	>
 		<cacheEventListenerFactory
 			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"
@@ -36,9 +43,9 @@
 	-->
 
 	<cache
-		name="org.hibernate.cache.UpdateTimestampsCache"
-		maxElementsInMemory="5000"
 		eternal="true"
+		maxElementsInMemory="5000"
+		name="org.hibernate.cache.UpdateTimestampsCache"
 	>
 		<cacheEventListenerFactory
 			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"
@@ -52,9 +59,9 @@
 	-->
 
 	<cache
-		name="com.liferay.portal.model.impl.UserImpl"
-		maxElementsInMemory="10000"
 		eternal="false"
+		maxElementsInMemory="10000"
+		name="com.liferay.portal.model.impl.UserImpl"
 		timeToIdleSeconds="600"
 	>
 		<cacheEventListenerFactory

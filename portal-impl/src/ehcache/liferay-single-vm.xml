@@ -1,4 +1,11 @@
-<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd" name="liferay-single-vm"  updateCheck="false" dynamicConfig="false" monitoring="off">
+<ehcache
+	dynamicConfig="false"
+	monitoring="off"
+	name="liferay-single-vm"
+	updateCheck="false"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd"
+>
 
 	<!--
 	Caches in this file are designed to be unique per VM and should not be
@@ -6,14 +13,14 @@
 	-->
 
 	<defaultCache
-		maxElementsInMemory="10000"
 		eternal="false"
-		timeToIdleSeconds="600"
+		maxElementsInMemory="10000"
 		overflowToDisk="false"
+		timeToIdleSeconds="600"
 	/>
 	<cache
-		name="com.liferay.portal.util.WebCachePool"
-		maxElementsInMemory="1000"
 		eternal="false"
+		maxElementsInMemory="1000"
+		name="com.liferay.portal.util.WebCachePool"
 	/>
 </ehcache>

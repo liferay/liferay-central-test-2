@@ -1,12 +1,20 @@
-<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd" name="hibernate" updateCheck="false" dynamicConfig="false" monitoring="off">
+<ehcache
+	dynamicConfig="false"
+	monitoring="off"
+	name="hibernate"
+	updateCheck="false"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd"
+>
+
 	<!--
 	Hibernate will use the defaultCache unless custom configurations are defined
 	below for individual domain objects, collection, queries, etc.
 	-->
 
 	<defaultCache
-		maxElementsInMemory="10000"
 		eternal="false"
+		maxElementsInMemory="10000"
 		timeToIdleSeconds="600"
 	/>
 
@@ -19,9 +27,9 @@
 	-->
 
 	<cache
-		name="org.hibernate.cache.UpdateTimestampsCache"
-		maxElementsInMemory="5000"
 		eternal="true"
+		maxElementsInMemory="5000"
+		name="org.hibernate.cache.UpdateTimestampsCache"
 	/>
 
 	<!--
@@ -30,9 +38,9 @@
 	-->
 
 	<cache
-		name="com.liferay.portal.model.impl.UserImpl"
-		maxElementsInMemory="10000"
 		eternal="false"
+		maxElementsInMemory="10000"
+		name="com.liferay.portal.model.impl.UserImpl"
 		timeToIdleSeconds="600"
 	/>
 </ehcache>
