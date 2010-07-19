@@ -153,12 +153,12 @@ public class EntityColumn implements Cloneable {
 		return _type;
 	}
 
-	public String getUserUuidName() {
-		return _name.substring(0, _name.length() - 2) + "Uuid";
-	}
-
 	public String getUserUuidHumanName() {
 		return TextFormatter.format(getUserUuidName(), TextFormatter.H);
+	}
+
+	public String getUserUuidName() {
+		return _name.substring(0, _name.length() - 2) + "Uuid";
 	}
 
 	public boolean hasArrayableOperator() {
