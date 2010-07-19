@@ -1000,8 +1000,8 @@ public class PortletImporter {
 					}
 				}
 
-				context.addAssetCategories(className, classPK,
-					assetCategoryIds);
+				context.addAssetCategories(
+					className, classPK, assetCategoryIds);
 			}
 		}
 		catch (Exception e) {
