@@ -13,6 +13,7 @@
  */
 
 package com.liferay.portal.events;
+
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 

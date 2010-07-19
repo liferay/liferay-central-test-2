@@ -13,6 +13,7 @@
  */
 
 package com.liferay.portal.increment;
+
 import com.liferay.portal.kernel.concurrent.IncreasableEntry;
 import com.liferay.portal.kernel.increment.Increment;
 

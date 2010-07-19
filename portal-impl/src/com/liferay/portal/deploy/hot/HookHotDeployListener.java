@@ -13,6 +13,7 @@
  */
 
 package com.liferay.portal.deploy.hot;
+
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.bean.ClassLoaderBeanHandler;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;

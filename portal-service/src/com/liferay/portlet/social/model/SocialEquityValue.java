@@ -13,6 +13,7 @@
  */
 
 package com.liferay.portlet.social.model;
+
 import com.liferay.portal.kernel.util.Time;
 
 import java.util.Calendar;

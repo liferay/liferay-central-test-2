@@ -13,6 +13,7 @@
  */
 
 package com.liferay.portlet.wiki.translators;
+
 import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;

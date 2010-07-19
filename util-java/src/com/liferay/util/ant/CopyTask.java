@@ -13,6 +13,7 @@
  */
 
 package com.liferay.util.ant;
+
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.File;

@@ -13,6 +13,7 @@
  */
 
 package com.liferay.portal.apache.bridges.struts;
+
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStreamWrapper;
 import com.liferay.portal.kernel.util.FileUtil;

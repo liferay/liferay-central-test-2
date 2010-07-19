@@ -13,6 +13,7 @@
  */
 
 package com.liferay.portal.kernel.increment;
+
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portlet.social.model.SocialEquityValue;
 

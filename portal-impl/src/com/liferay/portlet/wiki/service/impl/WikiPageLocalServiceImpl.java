@@ -13,6 +13,7 @@
  */
 
 package com.liferay.portlet.wiki.service.impl;
+
 import com.liferay.documentlibrary.DuplicateDirectoryException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.NoSuchFileException;

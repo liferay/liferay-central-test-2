@@ -13,6 +13,7 @@
  */
 
 package com.liferay.portal.sharepoint;
+
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;

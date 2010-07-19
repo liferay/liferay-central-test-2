@@ -13,6 +13,7 @@
  */
 
 package com.liferay.portal.increment;
+
 import com.liferay.portal.kernel.cache.key.CacheKeyGenerator;
 import com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil;
 import com.liferay.portal.kernel.concurrent.BatchablePipe;

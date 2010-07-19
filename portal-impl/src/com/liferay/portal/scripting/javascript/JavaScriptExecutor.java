@@ -13,6 +13,7 @@
  */
 
 package com.liferay.portal.scripting.javascript;
+
 import com.liferay.mozilla.javascript.Context;
 import com.liferay.mozilla.javascript.Script;
 import com.liferay.mozilla.javascript.Scriptable;

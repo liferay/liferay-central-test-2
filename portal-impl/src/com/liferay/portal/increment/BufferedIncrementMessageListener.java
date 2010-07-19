@@ -13,6 +13,7 @@
  */
 
 package com.liferay.portal.increment;
+
 import com.liferay.portal.kernel.concurrent.BatchablePipe;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;

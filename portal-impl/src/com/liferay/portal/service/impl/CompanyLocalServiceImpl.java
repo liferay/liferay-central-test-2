@@ -13,6 +13,7 @@
  */
 
 package com.liferay.portal.service.impl;
+
 import com.liferay.portal.AccountNameException;
 import com.liferay.portal.CompanyMxException;
 import com.liferay.portal.CompanyVirtualHostException;

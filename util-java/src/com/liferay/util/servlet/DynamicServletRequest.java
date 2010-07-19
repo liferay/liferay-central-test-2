@@ -13,6 +13,7 @@
  */
 
 package com.liferay.util.servlet;
+
 import com.liferay.portal.kernel.util.ArrayUtil;
 
 import java.util.Collections;

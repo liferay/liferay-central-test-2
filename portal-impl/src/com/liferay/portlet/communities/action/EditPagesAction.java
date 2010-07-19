@@ -13,6 +13,7 @@
  */
 
 package com.liferay.portlet.communities.action;
+
 import com.liferay.portal.ImageTypeException;
 import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.LayoutHiddenException;

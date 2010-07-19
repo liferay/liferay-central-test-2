@@ -13,6 +13,7 @@
  */
 
 package com.liferay.portlet.rss.action;
+
 import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;

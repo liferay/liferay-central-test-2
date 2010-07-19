@@ -13,6 +13,7 @@
  */
 
 package com.liferay.portlet;
+
 import com.liferay.portal.ccpp.PortalProfileFactory;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;

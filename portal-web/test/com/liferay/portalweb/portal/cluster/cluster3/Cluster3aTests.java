@@ -13,6 +13,7 @@
  */
 
 package com.liferay.portalweb.portal.cluster.cluster3;
+
 import com.liferay.portalweb.portal.BaseTests;
 import com.liferay.portalweb.portal.StopSeleniumTest;
 

@@ -13,6 +13,7 @@
  */
 
 package com.liferay.portal.webdav;
+
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;

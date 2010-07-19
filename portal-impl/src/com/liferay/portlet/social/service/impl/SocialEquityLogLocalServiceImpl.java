@@ -13,6 +13,7 @@
  */
 
 package com.liferay.portlet.social.service.impl;
+
 import com.liferay.ibm.icu.util.Calendar;
 import com.liferay.ibm.icu.util.GregorianCalendar;
 import com.liferay.portal.NoSuchUserException;
