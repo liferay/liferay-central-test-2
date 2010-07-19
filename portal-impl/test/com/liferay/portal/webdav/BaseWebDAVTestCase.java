@@ -39,11 +39,11 @@ import org.springframework.mock.web.MockHttpServletResponse;
 public class BaseWebDAVTestCase extends TestCase {
 
 	public static void assertBytes(byte[] expected, byte[] actual) {
-		if (expected == null && actual == null) {
+		if ((expected == null) && (actual == null)) {
 			return;
 		}
 
-		if (expected != null && expected.equals(actual)) {
+		if ((expected != null) && expected.equals(actual)) {
 			return;
 		}
 
@@ -203,7 +203,10 @@ public class BaseWebDAVTestCase extends TestCase {
 		}
 
 		for (Map.Entry<String, String> entry : headers.entrySet()) {
-			request.addHeader(entry.getKey(), entry.getValue());
+			String key = entry.getKey();
+			String value = entry.getValue();
+
+			request.addHeader(key, value);
 		}
 
 		try {

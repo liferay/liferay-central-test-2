@@ -179,6 +179,7 @@ public class UnicodeProperties extends HashMap<String, String> {
 
 		for (Map.Entry<String, String> entry : entrySet()) {
 			String value = entry.getValue();
+
 			if (Validator.isNotNull(value)) {
 				if (_safe) {
 					value = _encode(value);

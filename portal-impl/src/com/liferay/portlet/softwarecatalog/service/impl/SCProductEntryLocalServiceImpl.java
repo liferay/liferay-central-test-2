@@ -568,10 +568,13 @@ public class SCProductEntryLocalServiceImpl
 		}
 
 		for (Map.Entry<Object, Object> entry : repoSettings.entrySet()) {
+			String name = (String)entry.getKey();
+			String value = (String)entry.getValue();
+
 			Element settingEl = el.addElement("setting");
 
-			settingEl.addAttribute("name", (String) entry.getKey());
-			settingEl.addAttribute("value", (String) entry.getValue());
+			settingEl.addAttribute("name", name);
+			settingEl.addAttribute("value", value);
 		}
 	}
 

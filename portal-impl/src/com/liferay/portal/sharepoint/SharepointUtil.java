@@ -137,7 +137,9 @@ public class SharepointUtil {
 
 	private String _getStorageClass(String token) {
 		for (Map.Entry<String, String> entry : _storageMap.entrySet()) {
-			if (entry.getValue().equals(token)) {
+			String value = entry.getValue();
+
+			if (value.equals(token)) {
 				return entry.getKey();
 			}
 		}

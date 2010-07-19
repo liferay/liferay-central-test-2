@@ -62,7 +62,10 @@ public class PythonExecutor implements ScriptingExecutor {
 			new InteractiveInterpreter();
 
 		for (Map.Entry<String, Object> entry : inputObjects.entrySet()) {
-			interactiveInterpreter.set(entry.getKey(), entry.getValue());
+			String key = entry.getKey();
+			Object value = entry.getValue();
+
+			interactiveInterpreter.set(key, value);
 		}
 
 		interactiveInterpreter.exec(compiledScript);

@@ -349,7 +349,8 @@ public class EditServerAction extends PortletAction {
 			Thread.getAllStackTraces();
 
 		for (Map.Entry<Thread, StackTraceElement[]> entry :
-			stackTraces.entrySet()) {
+				stackTraces.entrySet()) {
+
 			Thread thread = entry.getKey();
 			StackTraceElement[] elements = entry.getValue();
 

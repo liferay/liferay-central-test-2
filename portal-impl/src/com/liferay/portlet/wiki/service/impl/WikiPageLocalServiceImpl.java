@@ -633,7 +633,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		for (Map.Entry<String, Boolean> entry : links.entrySet()) {
 			String curTitle = entry.getKey();
-			if (entry.getValue()) {
+			Boolean exists = entry.getValue();
+
+			if (exists) {
 				if (!pages.containsKey(curTitle)) {
 					pages.put(curTitle, getPage(nodeId, curTitle));
 				}

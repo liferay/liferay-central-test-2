@@ -117,6 +117,7 @@ public class CopyTask {
 			for (Map.Entry<String, String> entry : filterMap.entrySet()) {
 				String token = entry.getKey();
 				String replacement = entry.getValue();
+
 				filterSet.addFilter(token, replacement);
 			}
 		}

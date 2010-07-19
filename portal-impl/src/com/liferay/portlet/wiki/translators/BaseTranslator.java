@@ -77,7 +77,10 @@ public abstract class BaseTranslator {
 
 	protected String runRegexps(String content) {
 		for (Map.Entry<String, String> entry : regexps.entrySet()) {
-			content = runRegexp(content, entry.getKey(), entry.getValue());
+			String regexp = entry.getKey();
+			String replacement = entry.getValue();
+
+			content = runRegexp(content, regexp, replacement);
 		}
 
 		return content;
@@ -101,9 +104,13 @@ public abstract class BaseTranslator {
 	}
 
 	protected String unprotectNowikiText(String content) {
-		for (Map.Entry<String, String> enrty : _protectedMap.entrySet()) {
-			content = content.replace(enrty.getKey(), enrty.getValue());
+		for (Map.Entry<String, String> entry : _protectedMap.entrySet()) {
+			String hash = entry.getKey();
+			String protectedMarkup = entry.getValue();
+
+			content = content.replace(hash, protectedMarkup);
 		}
+
 		return content;
 	}
 

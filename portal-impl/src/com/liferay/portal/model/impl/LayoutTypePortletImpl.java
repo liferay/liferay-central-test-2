@@ -725,6 +725,7 @@ public class LayoutTypePortletImpl
 
 		for (Map.Entry<String, String> entry : props.entrySet()) {
 			String key = entry.getKey();
+
 			if (!key.startsWith(portletId)) {
 				newProps.setProperty(key, entry.getValue());
 			}
@@ -1177,6 +1178,7 @@ public class LayoutTypePortletImpl
 
 			for (Map.Entry<String, String> entry : props.entrySet()) {
 				String key = entry.getKey();
+
 				if (key.startsWith(portlet.getPortletId())) {
 					String portletIds = entry.getValue();
 

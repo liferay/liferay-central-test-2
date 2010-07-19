@@ -129,7 +129,9 @@ public class ModelHintsImpl implements ModelHints {
 			List<Tuple> sanitizeTuples = new ArrayList<Tuple>();
 
 			for (Map.Entry<String, Object> entry : fields.entrySet()) {
-				if (entry.getKey().endsWith(_SANITIZE_SUFFIX)) {
+				String key = entry.getKey();
+
+				if (key.endsWith(_SANITIZE_SUFFIX)) {
 					Tuple sanitizeTuple = (Tuple)entry.getValue();
 
 					sanitizeTuples.add(sanitizeTuple);

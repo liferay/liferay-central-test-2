@@ -40,7 +40,9 @@ public class MemoryMultiValueMap<K extends Serializable, V extends Serializable>
 
 	public boolean containsValue(Object value) {
 		for (Map.Entry<K, Set<V>> entry : _map.entrySet()) {
-			if (entry.getValue().contains(value)) {
+			Set<V> values = entry.getValue();
+
+			if (values.contains(value)) {
 				return true;
 			}
 		}

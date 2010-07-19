@@ -653,6 +653,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			for (Map.Entry<String, String> entry : properties.entrySet()) {
 				String key = entry.getKey();
 				String value = entry.getValue();
+
 				if (!value.equals(Portal.TEMP_OBFUSCATION_VALUE)) {
 					preferences.setValue(key, value);
 				}

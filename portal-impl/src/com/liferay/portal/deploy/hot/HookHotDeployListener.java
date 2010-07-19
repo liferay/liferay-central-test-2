@@ -1042,7 +1042,7 @@ public class HookHotDeployListener
 		_eventsContainerMap.put(servletContextName, eventsContainer);
 
 		for (Map.Entry<Object, Object> entry : portalProperties.entrySet()) {
-			String key = (String) entry.getKey();
+			String key = (String)entry.getKey();
 
 			if (!key.equals(APPLICATION_STARTUP_EVENTS) &&
 				!ArrayUtil.contains(_PROPS_KEYS_EVENTS, key) &&
@@ -1132,7 +1132,7 @@ public class HookHotDeployListener
 			servletContextName, modelListenersContainer);
 
 		for (Map.Entry<Object, Object> entry : portalProperties.entrySet()) {
-			String key = (String) entry.getKey();
+			String key = (String)entry.getKey();
 
 			if (!key.startsWith(VALUE_OBJECT_LISTENER)) {
 				continue;

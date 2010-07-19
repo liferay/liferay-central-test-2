@@ -56,9 +56,11 @@ public class JavaScriptExecutor implements ScriptingExecutor {
 			Scriptable scriptable = context.initStandardObjects();
 
 			for (Map.Entry<String, Object> entry : inputObjects.entrySet()) {
+				String key = entry.getKey();
+				Object value = entry.getValue();
+
 				ScriptableObject.putProperty(
-					scriptable, entry.getKey(),
-					Context.javaToJS(entry.getValue(), scriptable));
+					scriptable, key, Context.javaToJS(value, scriptable));
 			}
 
 			if (allowedClasses != null) {
