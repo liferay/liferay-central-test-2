@@ -113,8 +113,8 @@ public class LDAPAuth implements Authenticator {
 	}
 
 	protected LDAPAuthResult authenticate(
-			LdapContext ctx, long companyId, Attributes attrs, String userDN,
-			String password)
+			LdapContext ctx, long companyId, Attributes attributes,
+			String userDN, String password)
 		throws Exception {
 
 		LDAPAuthResult ldapAuthResult = new LDAPAuthResult();
@@ -171,7 +171,7 @@ public class LDAPAuth implements Authenticator {
 			}
 		}
 		else if (authMethod.equals(AUTH_METHOD_PASSWORD_COMPARE)) {
-			Attribute userPassword = attrs.get("userPassword");
+			Attribute userPassword = attributes.get("userPassword");
 
 			if (userPassword != null) {
 				String ldapPassword = new String((byte[])userPassword.get());
@@ -213,9 +213,10 @@ public class LDAPAuth implements Authenticator {
 
 		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
-		LdapContext ctx = PortalLDAPUtil.getContext(ldapServerId, companyId);
+		LdapContext ldapContext = PortalLDAPUtil.getContext(
+			ldapServerId, companyId);
 
-		if (ctx == null) {
+		if (ldapContext == null) {
 			return FAILURE;
 		}
 
@@ -229,11 +230,11 @@ public class LDAPAuth implements Authenticator {
 				ldapServerId, companyId, emailAddress, screenName,
 				String.valueOf(userId));
 
-			SearchControls cons = new SearchControls(
+			SearchControls searchControls = new SearchControls(
 				SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
 
-			NamingEnumeration<SearchResult> enu = ctx.search(
-				baseDN, filter, cons);
+			NamingEnumeration<SearchResult> enu = ldapContext.search(
+				baseDN, filter, searchControls);
 
 			if (enu.hasMoreElements()) {
 				if (_log.isDebugEnabled()) {
@@ -245,11 +246,11 @@ public class LDAPAuth implements Authenticator {
 				String fullUserDN = PortalLDAPUtil.getNameInNamespace(
 					ldapServerId, companyId, result);
 
-				Attributes attrs = PortalLDAPUtil.getUserAttributes(
-					ldapServerId, companyId, ctx, fullUserDN);
+				Attributes attributes = PortalLDAPUtil.getUserAttributes(
+					ldapServerId, companyId, ldapContext, fullUserDN);
 
 				LDAPAuthResult ldapAuthResult = authenticate(
-					ctx, companyId, attrs, fullUserDN, password);
+					ldapContext, companyId, attributes, fullUserDN, password);
 
 				// Process LDAP failure codes
 
@@ -277,7 +278,7 @@ public class LDAPAuth implements Authenticator {
 				// Get user or create from LDAP
 
 				User user = PortalLDAPImporterUtil.importLDAPUser(
-					ldapServerId, companyId, ctx, attrs, password);
+					ldapServerId, companyId, ldapContext, attributes, password);
 
 				// Process LDAP success codes
 
@@ -310,8 +311,8 @@ public class LDAPAuth implements Authenticator {
 			return FAILURE;
 		}
 		finally {
-			if (ctx != null) {
-				ctx.close();
+			if (ldapContext != null) {
+				ldapContext.close();
 			}
 		}
 

@@ -299,10 +299,10 @@ public class PortalLDAPUtil {
 			filter.append(screenName);
 			filter.append(StringPool.CLOSE_PARENTHESIS);
 
-			SearchControls cons = new SearchControls(
+			SearchControls searchControls = new SearchControls(
 				SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
 
-			enu = ldapContext.search(baseDN, filter.toString(), cons);
+			enu = ldapContext.search(baseDN, filter.toString(), searchControls);
 		}
 		catch (Exception e) {
 			throw e;
@@ -406,7 +406,7 @@ public class PortalLDAPUtil {
 
 		List<SearchResult> searchResults = new ArrayList<SearchResult>();
 
-		SearchControls cons = new SearchControls(
+		SearchControls searchControls = new SearchControls(
 			SearchControls.SUBTREE_SCOPE, maxResults, 0, attributeIds, false,
 			false);
 
@@ -431,7 +431,7 @@ public class PortalLDAPUtil {
 				}
 
 				NamingEnumeration<SearchResult> enu = ldapContext.search(
-					baseDN, filter, cons);
+					baseDN, filter, searchControls);
 
 				while (enu.hasMoreElements()) {
 					searchResults.add(enu.nextElement());
@@ -446,7 +446,7 @@ public class PortalLDAPUtil {
 			ldapContext.setRequestControls(null);
 
 			NamingEnumeration<SearchResult> enu = ldapContext.search(
-				baseDN, filter, cons);
+				baseDN, filter, searchControls);
 
 			while (enu.hasMoreElements()) {
 				searchResults.add(enu.nextElement());

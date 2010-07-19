@@ -143,7 +143,7 @@ public class CASAutoLogin implements AutoLogin {
 			String screenName)
 		throws Exception {
 
-		LdapContext ctx = null;
+		LdapContext ldapContext = null;
 
 		try {
 			String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
@@ -151,9 +151,9 @@ public class CASAutoLogin implements AutoLogin {
 			String baseDN = PrefsPropsUtil.getString(
 				companyId, PropsKeys.LDAP_BASE_DN + postfix);
 
-			ctx = PortalLDAPUtil.getContext(ldapServerId, companyId);
+			ldapContext = PortalLDAPUtil.getContext(ldapServerId, companyId);
 
-			if (ctx == null) {
+			if (ldapContext == null) {
 				throw new SystemException("Failed to bind to the LDAP server");
 			}
 
@@ -177,11 +177,11 @@ public class CASAutoLogin implements AutoLogin {
 				_log.debug("Search filter after transformation " + filter);
 			}
 
-			SearchControls cons = new SearchControls(
+			SearchControls searchControls = new SearchControls(
 				SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
 
-			NamingEnumeration<SearchResult> enu = ctx.search(
-				baseDN, filter, cons);
+			NamingEnumeration<SearchResult> enu = ldapContext.search(
+				baseDN, filter, searchControls);
 
 			if (enu.hasMoreElements()) {
 				if (_log.isDebugEnabled()) {
@@ -190,13 +190,14 @@ public class CASAutoLogin implements AutoLogin {
 
 				Binding binding = enu.nextElement();
 
-				Attributes attrs = PortalLDAPUtil.getUserAttributes(
-					ldapServerId, companyId, ctx,
+				Attributes attributes = PortalLDAPUtil.getUserAttributes(
+					ldapServerId, companyId, ldapContext,
 					PortalLDAPUtil.getNameInNamespace(
 						ldapServerId, companyId, binding));
 
 				return PortalLDAPImporterUtil.importLDAPUser(
-					ldapServerId, companyId, ctx, attrs, StringPool.BLANK);
+					ldapServerId, companyId, ldapContext, attributes,
+					StringPool.BLANK);
 			}
 			else {
 				return null;
@@ -215,8 +216,8 @@ public class CASAutoLogin implements AutoLogin {
 				"Problem accessing LDAP server " + e.getMessage());
 		}
 		finally {
-			if (ctx != null) {
-				ctx.close();
+			if (ldapContext != null) {
+				ldapContext.close();
 			}
 		}
 	}
