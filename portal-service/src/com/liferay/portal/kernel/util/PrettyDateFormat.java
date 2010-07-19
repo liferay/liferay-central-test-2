@@ -96,8 +96,8 @@ public class PrettyDateFormat extends DateFormat {
 		String dateString = source.substring(pos.getIndex());
 
 		if (dateString.startsWith(_todayString)) {
-			dateString = dateString.replaceFirst(_todayString,
-				dateFormatDate.format(today));
+			dateString = dateString.replaceFirst(
+				_todayString, dateFormatDate.format(today));
 		}
 		else if (dateString.startsWith(_yesterdayString)) {
 			Calendar cal = Calendar.getInstance(_timeZone, _locale);
