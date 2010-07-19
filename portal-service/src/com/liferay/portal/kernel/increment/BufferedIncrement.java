@@ -28,7 +28,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface BufferedIncrement {
 
-	Class<? extends Increment> incrementClass() default
-		SocialEquityIncrement.class;
+	Class<? extends Increment<?>> incrementClass();
 
 }

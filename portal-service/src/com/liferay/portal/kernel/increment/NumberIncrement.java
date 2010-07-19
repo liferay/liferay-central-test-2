@@ -24,11 +24,11 @@ public class NumberIncrement implements Increment<Number> {
 	}
 
 	public void decrease(Number delta) {
-		_value = _subtract(delta);
+		_value = subtract(delta);
 	}
 
 	public Increment<Number> decreaseForNew(Number delta) {
-		return new NumberIncrement(_subtract(delta));
+		return new NumberIncrement(subtract(delta));
 	}
 
 	public Number getValue() {
@@ -36,32 +36,32 @@ public class NumberIncrement implements Increment<Number> {
 	}
 
 	public void increase(Number delta) {
-		_value = _add(delta);
+		_value = add(delta);
 	}
 
 	public Increment<Number> increaseForNew(Number delta) {
-		return new NumberIncrement(_add(delta));
+		return new NumberIncrement(add(delta));
 	}
 
 	public void setValue(Number value) {
 		_value = value;
 	}
 
-	private Number _add(Number delta) {
-		if (delta instanceof Integer) {
-			return _addAsInteger(delta);
+	protected Number add(Number delta) {
+		if (delta instanceof Double) {
+			return addAsDouble(delta);
+		}
+		else if (delta instanceof Integer) {
+			return addAsInteger(delta);
 		}
 		else if (delta instanceof Long) {
-			return _addAsLong(delta);
-		}
-		else if (delta instanceof Double) {
-			return _addAsDouble(delta);
+			return addAsLong(delta);
 		}
 
 		return _value;
 	}
 
-	private Number _addAsDouble(Number delta) {
+	protected Number addAsDouble(Number delta) {
 		if (delta == null) {
 			return _value;
 		}
@@ -69,7 +69,7 @@ public class NumberIncrement implements Increment<Number> {
 		return _value.doubleValue() + delta.doubleValue();
 	}
 
-	private Number _addAsInteger(Number delta) {
+	protected Number addAsInteger(Number delta) {
 		if (delta == null) {
 			return _value;
 		}
@@ -77,7 +77,7 @@ public class NumberIncrement implements Increment<Number> {
 		return _value.intValue() + delta.intValue();
 	}
 
-	private Number _addAsLong(Number delta) {
+	protected Number addAsLong(Number delta) {
 		if (delta == null) {
 			return _value;
 		}
@@ -85,21 +85,21 @@ public class NumberIncrement implements Increment<Number> {
 		return _value.longValue() + delta.longValue();
 	}
 
-	private Number _subtract(Number delta) {
-		if (delta instanceof Integer) {
-			return _subtractAsInteger(delta);
+	protected Number subtract(Number delta) {
+		if (delta instanceof Double) {
+			return subtractAsDouble(delta);
+		}
+		else if (delta instanceof Integer) {
+			return subtractAsInteger(delta);
 		}
 		else if (delta instanceof Long) {
-			return _subtractAsLong(delta);
-		}
-		else if (delta instanceof Double) {
-			return _subtractAsDouble(delta);
+			return subtractAsLong(delta);
 		}
 
 		return _value;
 	}
 
-	private Number _subtractAsDouble(Number delta) {
+	protected Number subtractAsDouble(Number delta) {
 		if (delta == null) {
 			return _value;
 		}
@@ -107,7 +107,7 @@ public class NumberIncrement implements Increment<Number> {
 		return _value.doubleValue() - delta.doubleValue();
 	}
 
-	private Number _subtractAsInteger(Number delta) {
+	protected Number subtractAsInteger(Number delta) {
 		if (delta == null) {
 			return _value;
 		}
@@ -115,7 +115,7 @@ public class NumberIncrement implements Increment<Number> {
 		return _value.intValue() - delta.intValue();
 	}
 
-	private Number _subtractAsLong(Number delta) {
+	protected Number subtractAsLong(Number delta) {
 		if (delta == null) {
 			return _value;
 		}

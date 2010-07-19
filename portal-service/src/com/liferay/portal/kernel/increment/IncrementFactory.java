@@ -24,20 +24,26 @@ import java.lang.reflect.Constructor;
  */
 public class IncrementFactory {
 
+	@SuppressWarnings("unchecked")
 	public static Increment createIncrement(
-			Class<? extends Increment> counterClass, Object value)
+			Class<? extends Increment<?>> counterClass, Object value)
 		throws SystemException {
-		if (counterClass == NumberIncrement.class && value instanceof Number) {
-			return new NumberIncrement((Number) value);
+
+		if ((counterClass == NumberIncrement.class) &&
+			(value instanceof Number)) {
+
+			return new NumberIncrement((Number)value);
 		}
-		else if (counterClass == SocialEquityIncrement.class &&
-			value instanceof SocialEquityValue) {
-			return new SocialEquityIncrement((SocialEquityValue) value);
+		else if ((counterClass == SocialEquityIncrement.class) &&
+				 (value instanceof SocialEquityValue)) {
+
+			return new SocialEquityIncrement((SocialEquityValue)value);
 		}
 
 		try {
-			Constructor<? extends Increment> constructor =
+			Constructor<? extends Increment<?>> constructor =
 				counterClass.getConstructor(value.getClass());
+
 			return constructor.newInstance(value);
 		}
 		catch (Exception e) {

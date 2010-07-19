@@ -43,12 +43,14 @@ public class BufferedIncreasableEntry<K, T>
 	}
 
 	public void proceed() throws Throwable {
-		Object[] args = _methodInvocation.getArguments();
-		args[args.length - 1] = getValue().getValue();
+		Object[] arguments = _methodInvocation.getArguments();
+
+		arguments[arguments.length - 1] = getValue().getValue();
+
 		_nextInterceptor.invoke(_methodInvocation);
 	}
 
-	private final MethodInterceptor _nextInterceptor;
-	private final MethodInvocation _methodInvocation;
+	private MethodInvocation _methodInvocation;
+	private MethodInterceptor _nextInterceptor;
 
 }

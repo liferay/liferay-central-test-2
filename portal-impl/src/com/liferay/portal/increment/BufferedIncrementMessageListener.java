@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
-import com.liferay.portal.util.PropsValues;
 
 /**
  * @author Shuyang Zhou
@@ -36,25 +35,26 @@ public class BufferedIncrementMessageListener implements MessageListener {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	protected void doReceive(Message message) throws Exception {
-		boolean isLazy =
-			PropsValues.SOCIAL_EQUITY_EQUITY_VALUE_BUFFERED_INCREMENT_LAZILY;
-
-		BatchablePipe<String, BufferedIncreasableEntry> pipe =
+		BatchablePipe<String, BufferedIncreasableEntry> batchablePipe =
 			(BatchablePipe<String, BufferedIncreasableEntry>)
 				message.getPayload();
 
-		BufferedIncreasableEntry entry = null;
-		while ((entry = (BufferedIncreasableEntry) pipe.take()) != null) {
+		while (true) {
+			BufferedIncreasableEntry bufferedIncreasableEntry =
+				(BufferedIncreasableEntry)batchablePipe.take();
+
+			if (bufferedIncreasableEntry == null) {
+				break;
+			}
+
 			try {
-				entry.proceed();
+				bufferedIncreasableEntry.proceed();
 			}
 			catch (Throwable t) {
-				_log.error("Cannot write buffered increment value to the "
-					+ "database", t);
-			}
-			if (isLazy) {
-				return;
+				_log.error(
+					"Cannot write buffered increment value to the database", t);
 			}
 		}
 

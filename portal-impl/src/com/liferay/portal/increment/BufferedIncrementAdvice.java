@@ -36,43 +36,45 @@ import org.aopalliance.intercept.MethodInvocation;
 public class BufferedIncrementAdvice
 	extends AnnotationChainableMethodAdvice<BufferedIncrement> {
 
-	public Object before(final MethodInvocation methodInvocation)
-		throws Throwable {
-
+	@SuppressWarnings("unchecked")
+	public Object before(MethodInvocation methodInvocation) throws Throwable {
 		MethodTargetClassKey methodTargetClassKey = buildMethodTargetClassKey(
 			methodInvocation);
 
-		BufferedIncrement annotation = findAnnotation(methodTargetClassKey);
+		BufferedIncrement bufferedIncrement = findAnnotation(
+			methodTargetClassKey);
 
-		if (annotation == _nullBufferedIncrement) {
+		if (bufferedIncrement == _nullBufferedIncrement) {
 			return null;
 		}
 
-		Object[] args = methodInvocation.getArguments();
+		Object[] arguments = methodInvocation.getArguments();
 
-		Object value = args[args.length - 1];
+		Object value = arguments[arguments.length - 1];
 
 		CacheKeyGenerator cacheKeyGenerator =
-			CacheKeyGeneratorUtil.getCacheKeyGenerator(_cacheKeyGeneratorName);
+			CacheKeyGeneratorUtil.getCacheKeyGenerator(
+				BufferedIncrementAdvice.class.getName());
+
 		cacheKeyGenerator.append(methodTargetClassKey.toString());
-		for(int i = 0; i < args.length - 1; i++) {
-			cacheKeyGenerator.append(String.valueOf(args[i]));
+
+		for (int i = 0; i < arguments.length - 1; i++) {
+			cacheKeyGenerator.append(String.valueOf(arguments[i]));
 		}
+
 		String batchKey = cacheKeyGenerator.finish();
 
-		Increment increment = IncrementFactory.createIncrement(
-			annotation.incrementClass(), value);
+		Increment<?> increment = IncrementFactory.createIncrement(
+			bufferedIncrement.incrementClass(), value);
 
-		BufferedIncreasableEntry entry = new BufferedIncreasableEntry(
-			nextMethodInterceptor,
-			methodInvocation,
-			batchKey,
-			increment);
+		BufferedIncreasableEntry bufferedIncreasableEntry =
+			new BufferedIncreasableEntry(
+				nextMethodInterceptor, methodInvocation, batchKey, increment);
 
-		_batchablePipe.put(entry);
+		_batchablePipe.put(bufferedIncreasableEntry);
 
-		MessageBusUtil.sendMessage(DestinationNames.BUFFERED_INCREMENT,
-			_batchablePipe);
+		MessageBusUtil.sendMessage(
+			DestinationNames.BUFFERED_INCREMENT, _batchablePipe);
 
 		return nullResult;
 	}
@@ -81,11 +83,9 @@ public class BufferedIncrementAdvice
 		return _nullBufferedIncrement;
 	}
 
+	@SuppressWarnings("unchecked")
 	private static BatchablePipe<String, BufferedIncreasableEntry>
 		_batchablePipe = new BatchablePipe<String, BufferedIncreasableEntry>();
-
-	private static String _cacheKeyGeneratorName =
-		BufferedIncrementAdvice.class.getName();
 
 	private static BufferedIncrement _nullBufferedIncrement =
 		new BufferedIncrement() {
@@ -94,9 +94,10 @@ public class BufferedIncrementAdvice
 				return BufferedIncrement.class;
 			}
 
-			public Class<? extends Increment> incrementClass() {
+			public Class<? extends Increment<?>> incrementClass() {
 				return null;
 			}
+
 		};
 
 }

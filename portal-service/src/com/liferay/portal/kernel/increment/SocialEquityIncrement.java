@@ -51,12 +51,10 @@ public class SocialEquityIncrement implements Increment<SocialEquityValue> {
 	public Increment<SocialEquityValue> increaseForNew(
 		SocialEquityValue delta) {
 
-		return new SocialEquityIncrement(
-			new SocialEquityValue(
-				_value.getK() + delta.getK(),
-				_value.getB() + delta.getB()
-			)
-		);
+		SocialEquityValue value = new SocialEquityValue(
+			_value.getK() + delta.getK(), _value.getB() + delta.getB());
+
+		return new SocialEquityIncrement(value);
 	}
 
 	public void setValue(SocialEquityValue value) {
