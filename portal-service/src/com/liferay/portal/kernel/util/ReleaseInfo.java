@@ -33,7 +33,7 @@ public class ReleaseInfo {
 
 	static String build = "6004";
 
-	static String date = "July 17, 2010";
+	static String date = "July 20, 2010";
 
 	static String releaseInfoPrefix = System.getProperty(
 		"liferay.release.info.prefix" , StringPool.BLANK);
