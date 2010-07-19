@@ -3875,9 +3875,10 @@ public class PortalImpl implements Portal {
 	 */
 	public void setPortalPort(HttpServletRequest request) {
 		if (_portalPort.get() == -1) {
-			int newPort = request.getServerPort();
-			if (_portalPort.compareAndSet(-1, newPort)) {
-				notifyPortalPortEventListeners(newPort);
+			int portalPort = request.getServerPort();
+
+			if (_portalPort.compareAndSet(-1, portalPort)) {
+				notifyPortalPortEventListeners(portalPort);
 			}
 		}
 	}
