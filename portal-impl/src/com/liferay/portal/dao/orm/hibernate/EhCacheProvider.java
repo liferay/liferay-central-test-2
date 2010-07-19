@@ -18,8 +18,11 @@ import com.liferay.portal.kernel.exception.SystemException;
 
 import java.lang.reflect.Field;
 
+import java.util.Properties;
+
 import net.sf.ehcache.CacheManager;
 
+import org.hibernate.cache.CacheException;
 import org.hibernate.cache.CacheProvider;
 
 /**
@@ -56,6 +59,15 @@ public class EhCacheProvider extends CacheProviderWrapper {
 		super("net.sf.ehcache.hibernate.EhCacheProvider");
 
 		_cacheProvider = cacheProvider;
+	}
+
+	public void start(Properties properties) throws CacheException {
+		super.start(properties);
+		try {
+			getCacheManager().getTimer().cancel();
+		} catch (SystemException e) {
+			throw new CacheException(e);
+		}
 	}
 
 	private static CacheProvider _cacheProvider;

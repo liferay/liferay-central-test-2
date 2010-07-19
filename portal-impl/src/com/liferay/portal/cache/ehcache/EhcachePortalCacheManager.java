@@ -42,7 +42,7 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 		URL url = getClass().getResource(PropsUtil.get(_configPropertyKey));
 
 		_cacheManager = new CacheManager(url);
-
+		_cacheManager.getTimer().cancel();
 		if (PropsValues.EHCACHE_PORTAL_CACHE_MANAGER_JMX_ENABLED) {
 			_managementService = new ManagementService(
 				_cacheManager, _mBeanServer, _registerCacheManager,
