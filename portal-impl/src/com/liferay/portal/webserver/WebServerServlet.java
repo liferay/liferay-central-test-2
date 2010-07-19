@@ -301,6 +301,15 @@ public class WebServerServlet extends HttpServlet {
 
 		fileName = fileVersion.getTitle();
 
+		String extension = GetterUtil.getString(
+			FileUtil.getExtension(fileName));
+
+		if (Validator.isNull(extension) ||
+			!extension.equals(fileVersion.getExtension())) {
+
+			fileName += StringPool.PERIOD + fileVersion.getExtension();
+		}
+
 		InputStream is = DLFileEntryLocalServiceUtil.getFileAsStream(
 			user.getCompanyId(), user.getUserId(), groupId, folderId, name,
 			version);
