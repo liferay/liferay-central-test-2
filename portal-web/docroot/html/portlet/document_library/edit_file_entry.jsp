@@ -1,3 +1,4 @@
+<%@ page import="com.liferay.portal.kernel.upload.UploadPortletRequest" %>
 <%
 /**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
@@ -152,6 +153,7 @@ portletURL.setParameter("name", name);
 
 <portlet:actionURL var="editFileEntryURL">
 	<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
+	<portlet:param name="uploader" value="classic" />
 </portlet:actionURL>
 
 <aui:form action="<%= editFileEntryURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveFileEntry(false);" %>'>
