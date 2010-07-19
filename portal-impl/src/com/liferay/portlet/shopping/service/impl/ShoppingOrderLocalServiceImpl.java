@@ -727,10 +727,9 @@ public class ShoppingOrderLocalServiceImpl
 			PwdGenerator.KEY1 + PwdGenerator.KEY2, 12);
 
 		try {
-			ShoppingOrder shoppingOrder =
-				shoppingOrderPersistence.findByNumber(number);
+			shoppingOrderPersistence.findByNumber(number);
 
-			return shoppingOrder.getNumber();
+			return getNumber();
 		}
 		catch (NoSuchOrderException nsoe) {
 			return number;
