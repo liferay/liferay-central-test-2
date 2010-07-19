@@ -1,11 +1,8 @@
-<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd" name="liferay-multi-vm" updateCheck="false">
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd" name="liferay-multi-vm" updateCheck="false" dynamicConfig="false" monitoring="off">
 
 	<!--
 	Caches in this file can be clustered but are not configured to be clustered.
 	-->
-
-	<diskStore path="ehcache.disk.store.dir/liferay-multi-vm" />
-	<cacheManagerEventListenerFactory class="" properties="" />
 	<defaultCache
 		maxElementsInMemory="10000"
 		eternal="false"
@@ -17,55 +14,47 @@
 		maxElementsInMemory="10000"
 		eternal="false"
 		timeToIdleSeconds="600"
-		overflowToDisk="false"
 	/>
 	<cache
 		name="com.liferay.portal.service.impl.PortletLocalServiceImpl"
 		maxElementsInMemory="0"
 		eternal="true"
 		timeToIdleSeconds="0"
-		overflowToDisk="false"
 	/>
 	<cache
 		name="com.liferay.portal.service.impl.PortletPreferencesLocalUtil"
 		maxElementsInMemory="10000"
 		eternal="false"
 		timeToIdleSeconds="600"
-		overflowToDisk="false"
 	/>
 	<cache
 		name="com.liferay.portal.servlet.filters.cache.CacheUtil"
 		maxElementsInMemory="1000"
 		eternal="false"
 		timeToLiveSeconds="3600"
-		overflowToDisk="false"
 	/>
 	<cache
 		name="com.liferay.portal.velocity.LiferayResourceCacheUtil"
 		maxElementsInMemory="10000"
 		eternal="false"
 		timeToIdleSeconds="3600"
-		overflowToDisk="false"
 	/>
 	<cache
 		name="com.liferay.portlet.calendar.service.impl.CalEventLocalUtil"
 		maxElementsInMemory="10000"
 		eternal="false"
 		timeToIdleSeconds="600"
-		overflowToDisk="false"
 	/>
 	<cache
 		name="com.liferay.portlet.journalcontent.util.JournalContent"
 		maxElementsInMemory="1000"
 		eternal="false"
 		timeToLiveSeconds="3600"
-		overflowToDisk="false"
 	/>
 	<cache
 		name="com.liferay.portlet.social.service.impl.SocialEquitySettingLocalServiceImpl"
 		maxElementsInMemory="10000"
 		eternal="false"
 		timeToIdleSeconds="600"
-		overflowToDisk="false"
 	/>
 </ehcache>

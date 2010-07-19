@@ -1,11 +1,8 @@
-<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd" name="liferay-multi-vm-clustered" updateCheck="false">
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd" name="liferay-multi-vm-clustered" updateCheck="false" dynamicConfig="false" monitoring="off">
 
 	<!--
 	Caches in this file can be clustered and are configured to be clustered.
 	-->
-
-	<diskStore path="ehcache.disk.store.dir/liferay-multi-vm" />
-	<cacheManagerEventListenerFactory class="" properties="" />
 	<cacheManagerPeerProviderFactory
 		class="com.liferay.portal.cache.ehcache.LiferayCacheManagerPeerProviderFactory"
 		properties="portalPropertyKey=ehcache.multi.vm.config.location.peerProviderProperties"
@@ -32,7 +29,6 @@
 		maxElementsInMemory="10000"
 		eternal="false"
 		timeToIdleSeconds="600"
-		overflowToDisk="false"
 	>
 		<cacheEventListenerFactory
 			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"
@@ -46,7 +42,6 @@
 		maxElementsInMemory="10000"
 		eternal="false"
 		timeToIdleSeconds="600"
-		overflowToDisk="false"
 	>
 		<cacheEventListenerFactory
 			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"
@@ -60,7 +55,6 @@
 		maxElementsInMemory="10000"
 		eternal="false"
 		timeToIdleSeconds="600"
-		overflowToDisk="false"
 	>
 		<cacheEventListenerFactory
 			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"
@@ -74,7 +68,6 @@
 		maxElementsInMemory="0"
 		eternal="true"
 		timeToIdleSeconds="0"
-		overflowToDisk="false"
 	>
 		<cacheEventListenerFactory
 			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"
@@ -88,7 +81,6 @@
 		maxElementsInMemory="10000"
 		eternal="false"
 		timeToIdleSeconds="600"
-		overflowToDisk="false"
 	>
 		<cacheEventListenerFactory
 			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"
@@ -102,7 +94,6 @@
 		maxElementsInMemory="1000"
 		eternal="false"
 		timeToLiveSeconds="3600"
-		overflowToDisk="false"
 	>
 		<cacheEventListenerFactory
 			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"
@@ -116,7 +107,6 @@
 		maxElementsInMemory="10000"
 		eternal="false"
 		timeToIdleSeconds="3600"
-		overflowToDisk="false"
 	>
 		<cacheEventListenerFactory
 			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"
@@ -130,7 +120,6 @@
 		maxElementsInMemory="10000"
 		eternal="false"
 		timeToIdleSeconds="600"
-		overflowToDisk="false"
 	>
 		<cacheEventListenerFactory
 			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"
@@ -144,7 +133,6 @@
 		maxElementsInMemory="1000"
 		eternal="false"
 		timeToLiveSeconds="3600"
-		overflowToDisk="false"
 	>
 		<cacheEventListenerFactory
 			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"
@@ -158,7 +146,6 @@
 		maxElementsInMemory="10000"
 		eternal="false"
 		timeToIdleSeconds="600"
-		overflowToDisk="false"
 	>
 		<cacheEventListenerFactory
 			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"

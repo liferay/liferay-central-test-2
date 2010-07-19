@@ -1,7 +1,4 @@
-<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd" name="hibernate" updateCheck="false">
-	<diskStore path="ehcache.disk.store.dir/hibernate" />
-	<cacheManagerEventListenerFactory class="" properties="" />
-
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd" name="hibernate" updateCheck="false" dynamicConfig="false" monitoring="off">
 	<!--
 	Hibernate will use the defaultCache unless custom configurations are defined
 	below for individual domain objects, collection, queries, etc.
@@ -11,7 +8,6 @@
 		maxElementsInMemory="10000"
 		eternal="false"
 		timeToIdleSeconds="600"
-		overflowToDisk="false"
 	/>
 
 	<!--
@@ -26,7 +22,6 @@
 		name="org.hibernate.cache.UpdateTimestampsCache"
 		maxElementsInMemory="5000"
 		eternal="true"
-		overflowToDisk="false"
 	/>
 
 	<!--
@@ -39,6 +34,5 @@
 		maxElementsInMemory="10000"
 		eternal="false"
 		timeToIdleSeconds="600"
-		overflowToDisk="false"
 	/>
 </ehcache>
