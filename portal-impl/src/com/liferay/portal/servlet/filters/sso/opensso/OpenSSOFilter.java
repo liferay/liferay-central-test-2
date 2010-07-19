@@ -121,7 +121,9 @@ public class OpenSSOFilter extends BasePortalFilter {
 					OpenSSOFilter.class, request, response, filterChain);
 			}
 			else {
-				if (!loginUrl.contains("/portal/login")) {
+				if (!PropsValues.AUTH_FORWARD_BY_LAST_PATH ||
+					!loginUrl.contains("/portal/login")) {
+
 					response.sendRedirect(loginUrl);
 
 					return;
