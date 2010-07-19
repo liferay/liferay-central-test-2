@@ -12,23 +12,31 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.wsrp;
+package com.liferay.portalweb.plugins.wsrp.amazonrankings;
 
-import com.liferay.portalweb.plugins.wsrp.amazonrankings.AmazonRankingsTests;
+import com.liferay.portalweb.plugins.wsrp.amazonrankings.addconsumerar.AddConsumerARTests;
+import com.liferay.portalweb.plugins.wsrp.amazonrankings.addportletwsrpar.AddPortletWSRPARTests;
+import com.liferay.portalweb.plugins.wsrp.amazonrankings.addproducerar.AddProducerARTests;
+import com.liferay.portalweb.plugins.wsrp.amazonrankings.manageportletconsumerar.ManagePortletConsumerARTests;
 import com.liferay.portalweb.portal.BaseTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
+ * <a href="AmazonRankingsTests.java.html"><b><i>View Source</i></b></a>
+ *
  * @author Brian Wing Shun Chan
  */
-public class WSRPTests extends BaseTests {
+public class AmazonRankingsTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(AmazonRankingsTests.suite());
+		testSuite.addTest(AddConsumerARTests.suite());
+		testSuite.addTest(AddPortletWSRPARTests.suite());
+		testSuite.addTest(AddProducerARTests.suite());
+		testSuite.addTest(ManagePortletConsumerARTests.suite());
 
 		return testSuite;
 	}

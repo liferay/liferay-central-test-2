@@ -12,23 +12,25 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.wsrp;
+package com.liferay.portalweb.plugins.wsrp.amazonrankings.addproducerar;
 
-import com.liferay.portalweb.plugins.wsrp.amazonrankings.AmazonRankingsTests;
 import com.liferay.portalweb.portal.BaseTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
+ * <a href="AddProducerARTests.java.html"><b><i>View Source</i></b></a>
+ *
  * @author Brian Wing Shun Chan
  */
-public class WSRPTests extends BaseTests {
+public class AddProducerARTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(AmazonRankingsTests.suite());
+		testSuite.addTestSuite(AddProducerARTest.class);
+		testSuite.addTestSuite(TearDownProducerTest.class);
 
 		return testSuite;
 	}
