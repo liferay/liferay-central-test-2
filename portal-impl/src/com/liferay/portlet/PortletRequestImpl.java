@@ -630,7 +630,8 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		}
 		else {
 			for (Map.Entry<String, String[]> entry :
-				renderParameters.entrySet()) {
+					renderParameters.entrySet()) {
+
 				String name = entry.getKey();
 				String[] values = entry.getValue();
 

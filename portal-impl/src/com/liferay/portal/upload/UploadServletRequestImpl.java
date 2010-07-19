@@ -27,8 +27,8 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -194,12 +194,16 @@ public class UploadServletRequestImpl
 	}
 
 	public Enumeration<String> getParameterNames() {
-		Set<String> parameterNames = new HashSet<String>();
+		Set<String> parameterNames = new LinkedHashSet<String>();
 
 		Enumeration<String> enu = super.getParameterNames();
 
 		while (enu.hasMoreElements()) {
-			parameterNames.add(enu.nextElement());
+			String name = enu.nextElement();
+
+			if (!_params.containsKey(name)) {
+				parameterNames.add(name);
+			}
 		}
 
 		parameterNames.addAll(_params.keySet());

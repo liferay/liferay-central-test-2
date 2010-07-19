@@ -26,9 +26,9 @@ import java.io.InputStream;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.Vector;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -77,7 +77,7 @@ public class LiferayStrutsRequestImpl extends HttpServletRequestWrapper {
 	}
 
 	public Enumeration<String> getAttributeNames() {
-		Set<String> attributeNames = new HashSet<String>();
+		List<String> attributeNames = new Vector<String>();
 
 		Enumeration<String> enu = super.getAttributeNames();
 

@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -123,7 +123,7 @@ public class DynamicServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public Enumeration<String> getParameterNames() {
-		Set<String> names = new HashSet<String>();
+		Set<String> names = new LinkedHashSet<String>();
 
 		if (_inherit) {
 			Enumeration<String> enu = super.getParameterNames();
