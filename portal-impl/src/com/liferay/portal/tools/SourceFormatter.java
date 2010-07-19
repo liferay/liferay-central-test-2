@@ -107,6 +107,7 @@ public class SourceFormatter {
 
 		Pattern pattern = Pattern.compile(
 			"(^[ \t]*import\\s+.*;\n+)+", Pattern.MULTILINE);
+
 		Matcher matcher = pattern.matcher(content);
 
 		if (!matcher.find()) {
@@ -166,6 +167,7 @@ public class SourceFormatter {
 				content.substring(matcher.end());
 
 		// Ensure a blank line exists between the package and the first import
+
 		content = content.replaceFirst(
 			"(?m)^[ \t]*(package .*;)\\s*^[ \t]*import", "$1\n\nimport");
 
