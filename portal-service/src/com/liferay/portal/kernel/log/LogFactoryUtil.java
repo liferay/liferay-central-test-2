@@ -29,18 +29,22 @@ public class LogFactoryUtil {
 	}
 
 	public static Log getLog(String name) {
-		// The following concurrent collection retrieve has a side effect as
-		// memory fence read, this will invalidate all dirty cache data if there
-		// is any. So if LogWrapper swap happens-before this, the new Log will
-		// be visible for current Thread.
+
+		// The following concurrent collection retrieve has the side effect of a
+		// memory fence read. This will invalidate all dirty cache data if there
+		// are any. If the LogWrapper swap happens before this, the new Log will
+		// be visible to the current Thread.
+
 		LogWrapper logWrapper = _logWrappers.get(name);
 
 		if (logWrapper == null) {
 			logWrapper = new LogWrapper(_logFactory.getLog(name));
 
-			LogWrapper previousLog = _logWrappers.putIfAbsent(name, logWrapper);
-			if (previousLog != null) {
-				logWrapper = previousLog;
+			LogWrapper previousLogWrapper = _logWrappers.putIfAbsent(
+				name, logWrapper);
+
+			if (previousLogWrapper != null) {
+				logWrapper = previousLogWrapper;
 			}
 		}
 
@@ -48,19 +52,22 @@ public class LogFactoryUtil {
 	}
 
 	public static void setLogFactory(LogFactory logFactory) {
-		for(Map.Entry<String, LogWrapper> entry : _logWrappers.entrySet()) {
+		for (Map.Entry<String, LogWrapper> entry : _logWrappers.entrySet()) {
 			String name = entry.getKey();
+
 			LogWrapper logWrapper = entry.getValue();
+
 			logWrapper.setLog(logFactory.getLog(name));
 		}
-		// The following volatile-write will flush out all cache data, all
-		// previous LogWrapper swap will be visible for any reading after any
-		// memory fence read, according to the happen-before rules.
+
+		// The following volatile write will flush out all cache data. All
+		// previously swapped LogWrappers will be visible for any reads after a
+		// memory fence read according to the happens-before rules.
+
 		_logFactory = logFactory;
 	}
 
 	private static volatile LogFactory _logFactory = new Jdk14LogFactoryImpl();
-
 	private static final ConcurrentMap<String, LogWrapper> _logWrappers =
 		new ConcurrentHashMap<String, LogWrapper>();
 
