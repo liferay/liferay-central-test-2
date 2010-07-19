@@ -46,23 +46,6 @@ public class AddSubcategoryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("//input[@value='Add Subcategory']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -83,12 +66,11 @@ public class AddSubcategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_19_name",
-			RuntimeVariables.replace("T\u00e9st Subcat\u00e9gor"));
 		selenium.type("_19_name",
 			RuntimeVariables.replace("T\u00e9st Subcat\u00e9gory"));
 		selenium.type("_19_description",
 			RuntimeVariables.replace("This is a t\u00e9st subcat\u00e9gory!"));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("T\u00e9st Subcat\u00e9gory"));

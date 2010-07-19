@@ -66,6 +66,7 @@ public class AddMoveCategoryTest extends BaseTestCase {
 
 		selenium.typeKeys("_19_name", RuntimeVariables.replace("Sujr"));
 		selenium.type("_19_name", RuntimeVariables.replace("Sujr"));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

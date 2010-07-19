@@ -44,6 +44,7 @@ public class AddThirdReplyMessageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Message Boards", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
@@ -93,6 +94,7 @@ public class AddThirdReplyMessageTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a third repl message."));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("This is a third reply message."));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

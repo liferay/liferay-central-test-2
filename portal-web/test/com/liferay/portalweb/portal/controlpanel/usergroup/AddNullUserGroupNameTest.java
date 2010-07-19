@@ -83,6 +83,7 @@ public class AddNullUserGroupNameTest extends BaseTestCase {
 		selenium.type("_127_name", RuntimeVariables.replace(""));
 		selenium.type("_127_description",
 			RuntimeVariables.replace("This is a null user group test."));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

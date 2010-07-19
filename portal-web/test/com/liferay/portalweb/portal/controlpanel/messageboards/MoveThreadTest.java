@@ -54,6 +54,7 @@ public class MoveThreadTest extends BaseTestCase {
 				selenium.clickAt("//tr[4]/td[1]/a[1]/strong",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
 				selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("//a/strong", RuntimeVariables.replace(""));

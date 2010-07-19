@@ -87,6 +87,7 @@ public class AddCategoryTest extends BaseTestCase {
 			RuntimeVariables.replace("T\u00e9st Cat\u00e9gory"));
 		selenium.type("_19_description",
 			RuntimeVariables.replace("This is a t\u00e9st cat\u00e9gory!"));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("T\u00e9st Cat\u00e9gory"));

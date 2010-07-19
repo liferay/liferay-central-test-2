@@ -94,6 +94,7 @@ public class AddUser2Test extends BaseTestCase {
 		selenium.select("_125_birthdayYear",
 			RuntimeVariables.replace("label=1984"));
 		selenium.select("_125_male", RuntimeVariables.replace("label=Female"));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

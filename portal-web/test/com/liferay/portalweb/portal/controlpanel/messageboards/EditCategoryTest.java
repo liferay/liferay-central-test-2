@@ -73,6 +73,7 @@ public class EditCategoryTest extends BaseTestCase {
 		selenium.type("_19_description",
 			RuntimeVariables.replace(
 				"This is a t\u00e9st cat\u00e9gory edited!"));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("T\u00e9st Cat\u00e9gory Edit\u00e9d"));

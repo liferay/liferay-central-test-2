@@ -70,6 +70,7 @@ public class AddNullEntryTest extends BaseTestCase {
 			RuntimeVariables.replace("Null Test Entr"));
 		selenium.type("_19_subject", RuntimeVariables.replace("Null Test Entry"));
 		selenium.type("_19_textArea", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
