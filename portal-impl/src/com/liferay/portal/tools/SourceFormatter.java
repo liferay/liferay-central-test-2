@@ -106,7 +106,7 @@ public class SourceFormatter {
 		throws IOException {
 
 		Pattern pattern = Pattern.compile(
-			"(^\\s*import\\s+.*;\n+)+", Pattern.MULTILINE);
+			"(^[ \t]*import\\s+.*;\n+)+", Pattern.MULTILINE);
 		Matcher matcher = pattern.matcher(content);
 
 		if (!matcher.find()) {
