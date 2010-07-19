@@ -165,6 +165,10 @@ public class SourceFormatter {
 			content.substring(0, matcher.start()) + imports +
 				content.substring(matcher.end());
 
+		// Ensure a blank line exists between the package and the first import
+		content = content.replaceFirst(
+			"(?m)^[ \t]*(package .*;)\\s*^[ \t]*import", "$1\n\nimport");
+
 		return content;
 	}
 
