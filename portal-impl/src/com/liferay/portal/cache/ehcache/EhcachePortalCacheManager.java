@@ -30,6 +30,7 @@ import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Ehcache;
 import net.sf.ehcache.ObjectExistsException;
 import net.sf.ehcache.management.ManagementService;
+import net.sf.ehcache.util.FailSafeTimer;
 
 /**
  * @author Joseph Shum
@@ -42,7 +43,11 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 		URL url = getClass().getResource(PropsUtil.get(_configPropertyKey));
 
 		_cacheManager = new CacheManager(url);
-		_cacheManager.getTimer().cancel();
+
+		FailSafeTimer failSafeTimer = _cacheManager.getTimer();
+
+		failSafeTimer.cancel();
+
 		if (PropsValues.EHCACHE_PORTAL_CACHE_MANAGER_JMX_ENABLED) {
 			_managementService = new ManagementService(
 				_cacheManager, _mBeanServer, _registerCacheManager,

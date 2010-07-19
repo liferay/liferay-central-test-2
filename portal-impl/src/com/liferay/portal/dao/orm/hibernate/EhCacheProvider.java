@@ -21,6 +21,7 @@ import java.lang.reflect.Field;
 import java.util.Properties;
 
 import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.util.FailSafeTimer;
 
 import org.hibernate.cache.CacheException;
 import org.hibernate.cache.CacheProvider;
@@ -63,10 +64,16 @@ public class EhCacheProvider extends CacheProviderWrapper {
 
 	public void start(Properties properties) throws CacheException {
 		super.start(properties);
+
 		try {
-			getCacheManager().getTimer().cancel();
-		} catch (SystemException e) {
-			throw new CacheException(e);
+			CacheManager cacheManager = getCacheManager();
+
+			FailSafeTimer failSafeTimer = cacheManager.getTimer();
+
+			failSafeTimer.cancel();
+		}
+		catch (SystemException se) {
+			throw new CacheException(se);
 		}
 	}
 
