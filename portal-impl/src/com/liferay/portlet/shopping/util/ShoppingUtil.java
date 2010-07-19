@@ -216,7 +216,7 @@ public class ShoppingUtil {
 
 				if (((categoryIdsSet.size() > 0) &&
 					 (categoryIdsSet.contains(
-						Long.toString(item.getCategoryId())))) ||
+						String.valueOf(item.getCategoryId())))) ||
 					((skusSet.size() > 0) &&
 					 (skusSet.contains(item.getSku())))) {
 
