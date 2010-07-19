@@ -474,8 +474,6 @@ public class ClusterExecutorImpl
 
 	private class RemoveResultKeyFinalizeAction implements FinalizeAction {
 
-		private String _uuid;
-
 		public RemoveResultKeyFinalizeAction(String uuid) {
 			_uuid = uuid;
 		}
@@ -483,6 +481,8 @@ public class ClusterExecutorImpl
 		public void doFinalize() {
 			_executionResultMap.remove(_uuid);
 		}
+
+		private String _uuid;
 
 	}
 
