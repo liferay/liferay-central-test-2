@@ -52,9 +52,9 @@ public class ExtInfoBuilder {
 		ds.setBasedir(basedir);
 		ds.setExcludes(
 			new String[] {
-				"ext-impl/ext-impl.jar", "ext-impl/src/**",
-				"ext-service/ext-service.jar", "ext-service/src/**",
-				"ext-util-bridges/ext-util-bridges.jar",
+				".svn/**", "**/.svn/**", "ext-impl/ext-impl.jar",
+				"ext-impl/src/**", "ext-service/ext-service.jar",
+				"ext-service/src/**", "ext-util-bridges/ext-util-bridges.jar",
 				"ext-util-bridges/src/**",
 				"ext-util-java/ext-util-java.jar",
 				"ext-util-java/src/**",
