@@ -3756,7 +3756,12 @@ public class PortalImpl implements Portal {
 			}
 		}
 		else if ((e instanceof PortalException) && _log.isInfoEnabled()) {
-			_log.info(e, e);
+			if (e instanceof NoSuchLayoutException) {
+				_log.info(e.getMessage());
+			}
+			else {
+				_log.info(e, e);
+			}
 		}
 		else if ((e instanceof SystemException) && _log.isWarnEnabled()) {
 			_log.warn(e, e);
