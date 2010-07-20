@@ -1,0 +1,179 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AddTemplateAssociatedTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">AddTemplateAssociatedTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Web Content</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Templates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='Add Template']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_15_newTemplateId</td>
+	<td>TemplateIDAssociated</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_15_name</td>
+	<td>Web Content Template Name Associated</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_15_description</td>
+	<td>Web Content Template Description Associated</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//input[@value='Select']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>structure</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>name=structure</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('link=STRUCTUREID'))</td>
+	<td>templatePresentA</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${templatePresentA}</td>
+	<td>TemplatePresentA</td>
+</tr>
+<tr>
+	<td>close</td>
+	<td>name=structure</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>TemplatePresentA</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('link=STRUCTUREID'))</td>
+	<td>templatePresentB</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${templatePresentB}</td>
+	<td>TemplateNotPresentB</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=STRUCTUREID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>TemplateNotPresentB</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>_15_structureName</td>
+	<td>Web Content Structure Name</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>_15_editorButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>_15_xslContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_15_xslContent</td>
+	<td><h1>$title.getData()</h1><br /><br /><a href="$ltp.getUrl()">See Page</a></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//input[@value='Update']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Update']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//section/div/div/div/div</td>
+	<td>Your request processed successfully.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[4]/td[2]/a</td>
+	<td>TEMPLATEIDASSOCIATED</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[4]/td[3]/a</td>
+	<td>Web Content Template Name Associated<br /> Web Content Template Description Associated</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
