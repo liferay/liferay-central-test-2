@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.controlpanel.organizations.organizationervice;
+package com.liferay.portalweb.portal.controlpanel.organizations.organizationservice;
 
 import com.liferay.portalweb.portal.BaseTests;
 import com.liferay.portalweb.portal.controlpanel.organizations.organizationservice.addorganizationservice.AddOrganizationServiceTests;

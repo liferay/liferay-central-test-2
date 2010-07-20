@@ -20,7 +20,7 @@ import com.liferay.portalweb.portal.controlpanel.bookmarks.BookmarksTests;
 import com.liferay.portalweb.portal.controlpanel.calendar.CalendarTests;
 import com.liferay.portalweb.portal.controlpanel.communities.CommunitiesTests;
 import com.liferay.portalweb.portal.controlpanel.messageboards.MessageBoardsTests;
-import com.liferay.portalweb.portal.controlpanel.organization.OrganizationTests;
+import com.liferay.portalweb.portal.controlpanel.organizations.organization.OrganizationTests;
 import com.liferay.portalweb.portal.controlpanel.pagetemplates.PageTemplatesTests;
 import com.liferay.portalweb.portal.controlpanel.passwordpolicies.PasswordPoliciesTests;
 import com.liferay.portalweb.portal.controlpanel.polls.PollsTests;

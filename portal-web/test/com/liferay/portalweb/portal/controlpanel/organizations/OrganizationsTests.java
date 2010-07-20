@@ -19,9 +19,9 @@ import com.liferay.portalweb.portal.controlpanel.organizations.organization.Orga
 import com.liferay.portalweb.portal.controlpanel.organizations.organizationadditionalemailaddress.OrganizationAdditionalEmailAddressTests;
 import com.liferay.portalweb.portal.controlpanel.organizations.organizationaddress.OrganizationAddressTests;
 import com.liferay.portalweb.portal.controlpanel.organizations.organizationcomment.OrganizationCommentTests;
-import com.liferay.portalweb.portal.controlpanel.organizations.organizationervice.OrganizationServiceTests;
 import com.liferay.portalweb.portal.controlpanel.organizations.organizationpage.OrganizationPageTests;
 import com.liferay.portalweb.portal.controlpanel.organizations.organizationphonenumber.OrganizationPhoneNumberTests;
+import com.liferay.portalweb.portal.controlpanel.organizations.organizationservice.OrganizationServiceTests;
 import com.liferay.portalweb.portal.controlpanel.organizations.organizationwebsite.OrganizationWebsiteTests;
 
 import junit.framework.Test;
