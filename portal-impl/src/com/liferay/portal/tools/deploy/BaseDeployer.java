@@ -1354,18 +1354,18 @@ public class BaseDeployer {
 
 		Element artifactIdEl = moduleIdEl.element("artifactId");
 
-		String artifactIdText = GetterUtil.getString(artifactIdEl.getText());
+		artifactIdEl.setText(displayName);
 
-		if (!artifactIdText.equals(displayName)) {
-			artifactIdEl.setText(displayName);
+		Element versionEl = moduleIdEl.element("version");
 
-			String content = doc.formattedString();
+		versionEl.setText(pluginPackage.getVersion());
 
-			FileUtil.write(geronimoWebXml, content);
+		String content = doc.formattedString();
 
-			if (_log.isInfoEnabled()) {
-				_log.info("Modifying Geronimo " + geronimoWebXml);
-			}
+		FileUtil.write(geronimoWebXml, content);
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Modifying Geronimo " + geronimoWebXml);
 		}
 	}
 
