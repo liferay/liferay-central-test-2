@@ -16,7 +16,6 @@ package com.liferay.portalweb.portal.controlpanel.organizations;
 
 import com.liferay.portalweb.portal.BaseTests;
 import com.liferay.portalweb.portal.controlpanel.organizations.organization.OrganizationTests;
-import com.liferay.portalweb.portal.controlpanel.organizations.organizationadditionalemailaddress.OrganizationAdditionalEmailAddressTests;
 import com.liferay.portalweb.portal.controlpanel.organizations.organizationaddress.OrganizationAddressTests;
 import com.liferay.portalweb.portal.controlpanel.organizations.organizationcomment.OrganizationCommentTests;
 import com.liferay.portalweb.portal.controlpanel.organizations.organizationpage.OrganizationPageTests;
@@ -37,7 +36,6 @@ public class OrganizationsTests extends BaseTests {
 
 		testSuite.addTest(OrganizationTests.suite());
 		testSuite.addTest(OrganizationCommentTests.suite());
-		testSuite.addTest(OrganizationAdditionalEmailAddressTests.suite());
 		testSuite.addTest(OrganizationAddressTests.suite());
 		testSuite.addTest(OrganizationPageTests.suite());
 		testSuite.addTest(OrganizationPhoneNumberTests.suite());
