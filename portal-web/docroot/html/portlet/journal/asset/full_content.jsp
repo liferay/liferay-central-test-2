@@ -20,6 +20,8 @@
 JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_ARTICLE);
 JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(article.getResourcePrimKey());
 
+AssetRendererFactory assetRendererFactory = (AssetRendererFactory)request.getAttribute(WebKeys.ASSET_RENDERER_FACTORY);
+
 String templateId = (String)request.getAttribute(WebKeys.JOURNAL_TEMPLATE_ID);
 String languageId = LanguageUtil.getLanguageId(request);
 int articlePage = ParamUtil.getInteger(request, "page", 1);
@@ -53,6 +55,7 @@ else {
 	PortletURL articlePageURL = renderResponse.createRenderURL();
 
 	articlePageURL.setParameter("struts_action", "/asset_publisher/view_content");
+	articlePageURL.setParameter("type", assetRendererFactory.getType());
 	articlePageURL.setParameter("redirect", pageRedirect);
 	articlePageURL.setParameter("urlTitle", articleDisplay.getUrlTitle());
 	articlePageURL.setParameter("cur", String.valueOf(cur));

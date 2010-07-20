@@ -121,6 +121,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			<%
 			String path = assetRenderer.render(renderRequest, renderResponse, AssetRenderer.TEMPLATE_FULL_CONTENT);
 
+			request.setAttribute(WebKeys.ASSET_RENDERER_FACTORY, assetRendererFactory);
 			request.setAttribute(WebKeys.ASSET_RENDERER, assetRenderer);
 			%>
 

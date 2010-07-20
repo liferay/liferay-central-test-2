@@ -25,6 +25,7 @@
 <%@ page import="com.liferay.portal.util.LayoutView" %>
 <%@ page import="com.liferay.portlet.asset.NoSuchEntryException" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetRenderer" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetRendererFactory" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.util.DLUtil" %>
 <%@ page import="com.liferay.portlet.journal.ArticleContentException" %>
