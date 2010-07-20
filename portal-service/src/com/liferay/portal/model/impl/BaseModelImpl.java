@@ -20,7 +20,7 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 
 /**
  * The base implementation for all model classes.
- * 
+ *
  * @author Brian Wing Shun Chan
  */
 public abstract class BaseModelImpl<T> implements BaseModel<T> {
