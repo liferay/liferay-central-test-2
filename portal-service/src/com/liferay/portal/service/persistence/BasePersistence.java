@@ -76,7 +76,7 @@ public interface BasePersistence<T extends BaseModel<T>> {
 		throws SystemException;
 
 	/**
-	 * Finds an instance of this model by its primary key, or return
+	 * Finds the model instance with the primary key or returns
 	 * <code>null</code> if it could not be found.
 	 *
 	 * @param  primaryKey the primary key of the model instance to find
@@ -88,8 +88,8 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	public T fetchByPrimaryKey(Serializable primaryKey) throws SystemException;
 
 	/**
-	 * Finds an instance of this model by its primary key, or throw an exception
-	 * if it could not be found.
+	 * Finds the model instance with the primary key or throws a {@link
+	 * NoSuchModelException} if it could not be found.
 	 *
 	 * @param  primaryKey the primary key of the model instance to find
 	 * @return the model instance
@@ -146,8 +146,13 @@ public interface BasePersistence<T extends BaseModel<T>> {
 		throws SystemException;
 
 	/**
-	 * Finds an ordered range of all the instances of this model that match the
-	 * dynamic query.
+	 * Performs a dynamic query on the database and returns an ordered range of
+	 * the matching rows.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end -
+	 * start</code> instances.
+	 * </p>
 	 *
 	 * <p>
 	 * <code>start</code> and <code>end</code> are not primary keys, they are
@@ -200,8 +205,8 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	public void registerListener(ModelListener<T> listener);
 
 	/**
-	 * Removes the model instance identified by the primary key from the
-	 * database, and notifies the appropriate model listeners.
+	 * Removes the model instance with the primary key from the database and
+	 * notifies the appropriate model listeners.
 	 *
 	 * @param  primaryKey the primary key of the model instance to remove
 	 * @return the model instance that was removed
