@@ -979,6 +979,7 @@ body=Text zprávy
 bold=Tučné
 book-and-chapter=Kniha a kapitoly
 book=Kniha
+bookmark=Bookmark (Automatic Copy)
 bookmarks-home=Základní přehled záložek
 bookmarks-listing=Výpis záložek
 bookmarks-with-tag-x=Záložky označené štítkem <em>{0}</em>.
