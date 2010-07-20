@@ -412,10 +412,11 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
 			for (SearchResult searchResult : searchResults) {
 				try {
-					Attributes userAttributes = PortalLDAPUtil.getUserAttributes(
-						ldapServerId, companyId, ldapContext,
-						PortalLDAPUtil.getNameInNamespace(
-							ldapServerId, companyId, searchResult));
+					Attributes userAttributes =
+						PortalLDAPUtil.getUserAttributes(
+							ldapServerId, companyId, ldapContext,
+							PortalLDAPUtil.getNameInNamespace(
+								ldapServerId, companyId, searchResult));
 
 					User user = importUser(
 						companyId, userAttributes, userMappings,
@@ -423,8 +424,8 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 						contactExpandoMappings, StringPool.BLANK);
 
 					importGroups(
-						ldapServerId, companyId, ldapContext, userAttributes, user,
-						userMappings, groupMappings);
+						ldapServerId, companyId, ldapContext, userAttributes,
+						user, userMappings, groupMappings);
 				}
 				catch (Exception e) {
 					_log.error("Unable to import user " + searchResult, e);
