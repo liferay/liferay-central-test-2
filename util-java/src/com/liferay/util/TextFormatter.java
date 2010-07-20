@@ -145,11 +145,12 @@ public class TextFormatter {
 	}
 
 	public static String formatKB(double size, Locale locale) {
-		NumberFormat nf = NumberFormat.getInstance(locale);
-		nf.setMaximumFractionDigits(1);
-		nf.setMinimumFractionDigits(1);
+		NumberFormat numberFormat = NumberFormat.getInstance(locale);
 
-		return nf.format(size / 1024.0);
+		numberFormat.setMaximumFractionDigits(1);
+		numberFormat.setMinimumFractionDigits(1);
+
+		return numberFormat.format(size / 1024.0);
 	}
 
 	public static String formatKB(int size, Locale locale) {
