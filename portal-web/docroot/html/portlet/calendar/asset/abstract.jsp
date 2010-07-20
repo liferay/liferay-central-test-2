@@ -17,8 +17,9 @@
 <%@ include file="/html/portlet/calendar/init.jsp" %>
 
 <%
-CalEvent event = (CalEvent)request.getAttribute(WebKeys.CALENDAR_EVENT);
 int abstractLength = (Integer)request.getAttribute(WebKeys.ASSET_PUBLISHER_ABSTRACT_LENGTH);
+
+CalEvent event = (CalEvent)request.getAttribute(WebKeys.CALENDAR_EVENT);
 %>
 
 <%= StringUtil.shorten(event.getDescription(), abstractLength) %><br />
