@@ -38,7 +38,7 @@ public class JGroupsCacheManagerPeerProviderFactory
 		CacheManager cacheManager, Properties properties) {
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("CREATING JGOUPS PEER PROVIDER");
+			_log.debug("Creating JGroups peer provider");
 		}
 
 		String clusterName = properties.getProperty("clusterName");

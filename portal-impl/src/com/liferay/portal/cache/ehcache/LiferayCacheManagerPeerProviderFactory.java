@@ -74,39 +74,23 @@ public class LiferayCacheManagerPeerProviderFactory
 					portalPropertiesString);
 		}
 
+		portalPropertiesString = StringUtil.replace(
+			portalPropertiesString, StringPool.COMMA, StringPool.NEW_LINE);
+
 		Properties portalProperties = null;
 
-		if (portalPropertiesString.startsWith("peerDiscovery")) {
-			portalPropertiesString = StringUtil.replace(
-				portalPropertiesString, StringPool.COMMA, StringPool.NEW_LINE);
-
-			try {
-				portalProperties = PropertiesUtil.load(
-					portalPropertiesString);
-			}
-			catch (IOException ioe) {
-				_log.error(ioe, ioe);
-
-				throw new RuntimeException(ioe.getMessage());
-			}
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(PropertiesUtil.list(portalProperties));
-			}
+		try {
+			portalProperties = PropertiesUtil.load(
+				portalPropertiesString);
 		}
-		else {
-			portalProperties = new Properties();
+		catch (IOException ioe) {
+			_log.error(ioe, ioe);
 
-			String[] propertiesKeyAndValue = portalPropertiesString.split(
-				StringPool.AMPERSAND);
+			throw new RuntimeException(ioe.getMessage());
+		}
 
-			for (int i = 0; i < propertiesKeyAndValue.length; i++) {
-				String[] keyAndValue =
-					propertiesKeyAndValue[i].split(StringPool.EQUAL, 2);
-
-				portalProperties.setProperty(
-					keyAndValue[0], keyAndValue[1]);
-			}
+		if (_log.isDebugEnabled()) {
+			_log.debug(PropertiesUtil.list(portalProperties));
 		}
 
 		return _cacheManagerPeerProviderFactory.createCachePeerProvider(
