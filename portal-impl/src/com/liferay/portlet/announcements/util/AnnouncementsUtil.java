@@ -64,17 +64,34 @@ public class AnnouncementsUtil {
 
 		// Organization announcements
 
+		List<Organization> allUserOrganizations =
+			new ArrayList<Organization>();
+
 		List<Organization> organizations =
 			OrganizationLocalServiceUtil.getUserOrganizations(userId, true);
 
-		if (!organizations.isEmpty()) {
-			scopes.put(
-				_ORGANIZATION_CLASS_NAME_ID,
-				_getOrganizationIds(organizations));
+		allUserOrganizations.addAll(organizations);
 
+		if (!organizations.isEmpty()) {
 			for (Organization organization : organizations) {
 				groupsList.add(organization.getGroup());
+
+				List<Organization> parentOrganizations =
+					OrganizationLocalServiceUtil.getParentOrganizations(
+						organization.getOrganizationId());
+
+				if (!parentOrganizations.isEmpty()) {
+					for (Organization parentOrganization : 
+						parentOrganizations) {
+
+						allUserOrganizations.add(parentOrganization);
+						groupsList.add(parentOrganization.getGroup());
+					}
+				}
 			}
+			scopes.put(
+				_ORGANIZATION_CLASS_NAME_ID,
+				_getOrganizationIds(allUserOrganizations));
 		}
 
 		// User group announcements
