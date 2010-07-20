@@ -100,6 +100,7 @@ public class ClusterExecutorImpl
 
 		if (!clusterRequest.isFireAndForget()) {
 			String uuid = clusterRequest.getUuid();
+
 			_executionResultMap.put(uuid, futureClusterResponses);
 		}
 
