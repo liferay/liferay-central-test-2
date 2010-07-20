@@ -57,7 +57,9 @@ if (Validator.isNull(ParamUtil.getString(request, "userMappingScreenName")) ||
 
 String userFilter = ParamUtil.getString(request, "importUserSearchFilter");
 
-List<SearchResult> results = PortalLDAPUtil.getUsers(themeDisplay.getCompanyId(), ldapContext, 20, baseDN, userFilter);
+List<SearchResult> searchResults = new ArrayList<SearchResult>();
+
+PortalLDAPUtil.getUsers(themeDisplay.getCompanyId(), ldapContext, new byte[0], 20, baseDN, userFilter, searchResults);
 
 String userMappingsParams =
 	"screenName=" + ParamUtil.getString(request, "userMappingScreenName") +
@@ -87,16 +89,16 @@ boolean showMissingAttributeMessage = false;
 
 int counter = 0;
 
-for (SearchResult result : results) {
-	Attributes attrs = result.getAttributes();
+for (SearchResult searchResult : searchResults) {
+	Attributes attributes = searchResult.getAttributes();
 
-	String screenName = LDAPUtil.getAttributeValue(attrs, userMappings.getProperty("screenName")).toLowerCase();
-	String password = LDAPUtil.getAttributeValue(attrs, userMappings.getProperty("password")).toLowerCase();
-	String emailAddress = LDAPUtil.getAttributeValue(attrs, userMappings.getProperty("emailAddress"));
-	String firstName = LDAPUtil.getAttributeValue(attrs, userMappings.getProperty("firstName"));
-	String lastName = LDAPUtil.getAttributeValue(attrs, userMappings.getProperty("lastName"));
-	String jobTitle = LDAPUtil.getAttributeValue(attrs, userMappings.getProperty("jobTitle"));
-	Attribute attribute = attrs.get(userMappings.getProperty("group"));
+	String screenName = LDAPUtil.getAttributeValue(attributes, userMappings.getProperty("screenName")).toLowerCase();
+	String password = LDAPUtil.getAttributeValue(attributes, userMappings.getProperty("password")).toLowerCase();
+	String emailAddress = LDAPUtil.getAttributeValue(attributes, userMappings.getProperty("emailAddress"));
+	String firstName = LDAPUtil.getAttributeValue(attributes, userMappings.getProperty("firstName"));
+	String lastName = LDAPUtil.getAttributeValue(attributes, userMappings.getProperty("lastName"));
+	String jobTitle = LDAPUtil.getAttributeValue(attributes, userMappings.getProperty("jobTitle"));
+	Attribute attribute = attributes.get(userMappings.getProperty("group"));
 
 	if (Validator.isNull(screenName) || Validator.isNull(password) || Validator.isNull(emailAddress) || Validator.isNull(firstName) || Validator.isNull(lastName)) {
 		showMissingAttributeMessage = true;

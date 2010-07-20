@@ -54,7 +54,9 @@ if (Validator.isNull(ParamUtil.getString(request, "groupMappingGroupName")) ||
 
 String groupFilter = ParamUtil.getString(request, "importGroupSearchFilter");
 
-List<SearchResult> results = PortalLDAPUtil.getGroups(themeDisplay.getCompanyId(), ldapContext, 20, baseDN, groupFilter);
+List<SearchResult> searchResults = new ArrayList<SearchResult>();
+
+PortalLDAPUtil.getGroups(themeDisplay.getCompanyId(), ldapContext, new byte[0], 20, baseDN, groupFilter, searchResults);
 
 String groupMappingsParam =
 	"groupName=" + ParamUtil.getString(request, "groupMappingGroupName") +
@@ -79,12 +81,12 @@ boolean showMissingAttributeMessage = false;
 
 int counter = 0;
 
-for (SearchResult result : results) {
-	Attributes attrs = result.getAttributes();
+for (SearchResult searchResult : searchResults) {
+	Attributes attributes = searchResult.getAttributes();
 
-	String name = LDAPUtil.getAttributeValue(attrs, groupMappings.getProperty("groupName")).toLowerCase();
-	String description = LDAPUtil.getAttributeValue(attrs, groupMappings.getProperty("description"));
-	Attribute attribute = attrs.get(groupMappings.getProperty("user"));
+	String name = LDAPUtil.getAttributeValue(attributes, groupMappings.getProperty("groupName")).toLowerCase();
+	String description = LDAPUtil.getAttributeValue(attributes, groupMappings.getProperty("description"));
+	Attribute attribute = attributes.get(groupMappings.getProperty("user"));
 
 	if (Validator.isNull(name)) {
 		showMissingAttributeMessage = true;
