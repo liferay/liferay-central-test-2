@@ -1,0 +1,62 @@
+/**
+ * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
+package com.liferay.portal.kernel.memory;
+
+import com.liferay.portal.kernel.util.Validator;
+
+import java.lang.ref.ReferenceQueue;
+import java.lang.ref.WeakReference;
+
+/**
+ * @author Shuyang Zhou
+ */
+public class EqualityWeakReference<T> extends WeakReference<T> {
+
+	public EqualityWeakReference(T referent) {
+		super(referent);
+		_hashCode = referent.hashCode();
+	}
+
+	public EqualityWeakReference(T referent, ReferenceQueue<? super T> queue) {
+		super(referent, queue);
+		_hashCode = referent.hashCode();
+	}
+
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof EqualityWeakReference)) {
+			return false;
+		}
+
+		EqualityWeakReference reference = (EqualityWeakReference)obj;
+
+		if (Validator.equals(get(), reference.get())) {
+
+			return true;
+		}
+
+		return false;
+	}
+
+	public int hashCode() {
+		return _hashCode;
+	}
+
+	private final int _hashCode;
+
+}

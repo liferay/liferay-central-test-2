@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.PropsUtil;
 
 import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
-import java.lang.ref.WeakReference;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -36,7 +35,7 @@ public class FinalizeManager {
 	public static <T> Reference<T> register(
 		T realReference, FinalizeAction finalizeAction) {
 
-		Reference<T> reference = new WeakReference<T>(
+		Reference<T> reference = new EqualityWeakReference<T>(
 			realReference, _referenceQueue);
 
 		_referenceActionMap.put(reference, finalizeAction);
