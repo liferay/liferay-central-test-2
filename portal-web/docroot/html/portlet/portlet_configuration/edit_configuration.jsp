@@ -23,13 +23,13 @@ String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL")
 String path = (String)request.getAttribute(WebKeys.CONFIGURATION_ACTION_PATH);
 %>
 
-<c:if test="<%= !layout.isTypeControlPanel() %>">
+<c:if test="<%= !layout.isTypeControlPanel() && !windowState.equals(LiferayWindowState.EXCLUSIVE) %>">
 	<liferay-util:include page="/html/portlet/portlet_configuration/tabs1.jsp">
 		<liferay-util:param name="tabs1" value="setup" />
 	</liferay-util:include>
 </c:if>
 
-<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, layout.getGroupId(), ActionKeys.MANAGE_ARCHIVED_SETUPS) %>">
+<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, layout.getGroupId(), ActionKeys.MANAGE_ARCHIVED_SETUPS) && !windowState.equals(LiferayWindowState.EXCLUSIVE) %>">
 	<portlet:renderURL var="archivedSetupsURL">
 		<portlet:param name="struts_action" value="/portlet_configuration/edit_archived_setups" />
 		<portlet:param name="redirect" value="<%= redirect %>" />
