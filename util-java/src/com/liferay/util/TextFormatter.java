@@ -243,7 +243,7 @@ public class TextFormatter {
 			}
 		}
 
-		return sb.toString();
+		return sb.toString().trim();
 	}
 
 	private static String _formatI(String s) {
