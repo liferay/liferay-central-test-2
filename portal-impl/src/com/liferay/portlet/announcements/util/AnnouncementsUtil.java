@@ -68,7 +68,8 @@ public class AnnouncementsUtil {
 			OrganizationLocalServiceUtil.getUserOrganizations(userId, true);
 
 		if (!organizations.isEmpty()) {
-			List<Organization> organizationsList = new ArrayList<Organization>();
+			List<Organization> organizationsList =
+				new ArrayList<Organization>();
 
 			organizationsList.addAll(organizations);
 
