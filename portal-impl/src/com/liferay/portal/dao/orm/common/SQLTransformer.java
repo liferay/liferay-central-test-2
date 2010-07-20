@@ -92,6 +92,9 @@ public class SQLTransformer {
 		if (_vendorPostgreSQL) {
 			return matcher.replaceAll("CAST($1 AS TEXT)");
 		}
+		else if (_vendorSQLServer) {
+			return matcher.replaceAll("CAST($1 AS NVARCHAR)");
+		}
 		else {
 			return matcher.replaceAll("$1");
 		}
