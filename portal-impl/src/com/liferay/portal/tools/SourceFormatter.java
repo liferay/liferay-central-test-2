@@ -172,7 +172,8 @@ public class SourceFormatter {
 			"(?m)^[ \t]*(package .*;)\\s*^[ \t]*import", "$1\n\nimport");
 
 		// Ensure a blank line exists between the last import (or package if
-		// there are no imports) and the class comment.
+		// there are no imports) and the class comment
+
 		content = content.replaceFirst(
 			"(?m)^[ \t]*((?:package|import) .*;)\\s*^[ \t]*/\\*\\*",
 			"$1\n\n/**");

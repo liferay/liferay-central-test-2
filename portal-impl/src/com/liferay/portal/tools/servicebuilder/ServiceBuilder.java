@@ -339,6 +339,7 @@ public class ServiceBuilder {
 		String newContent = sb.toString();
 
 		// Remove double blank lines after the package or last import
+
 		newContent = newContent.replaceFirst(
 			"(?m)^[ \t]*((?:package|import) .*;)\\s*^[ \t]*/\\*\\*",
 			"$1\n\n/**");
