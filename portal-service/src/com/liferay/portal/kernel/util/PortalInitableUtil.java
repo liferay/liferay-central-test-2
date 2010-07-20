@@ -23,25 +23,25 @@ import java.util.Vector;
 public class PortalInitableUtil {
 
 	public static synchronized void flushInitables() {
-		if (_initables != null) {
-			for (PortalInitable initable : _initables) {
-				initable.portalInit();
+		if (_portalInitables != null) {
+			for (PortalInitable portalInitable : _portalInitables) {
+				portalInitable.portalInit();
 			}
 
-			_initables = null;
+			_portalInitables = null;
 		}
 	}
 
-	public static synchronized void init(PortalInitable initable) {
-		if (_initables == null) {
-			initable.portalInit();
+	public static synchronized void init(PortalInitable portalInitable) {
+		if (_portalInitables == null) {
+			portalInitable.portalInit();
 		}
 		else {
-			_initables.add(initable);
+			_portalInitables.add(portalInitable);
 		}
 	}
 
-	private static List<PortalInitable> _initables =
+	private static List<PortalInitable> _portalInitables =
 		new Vector<PortalInitable>();
 
 }
