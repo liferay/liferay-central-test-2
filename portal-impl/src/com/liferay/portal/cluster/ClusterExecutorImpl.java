@@ -27,21 +27,18 @@ import com.liferay.portal.kernel.cluster.FutureClusterResponses;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.memory.FinalizeAction;
-import com.liferay.portal.kernel.memory.FinalizeManager;
 import com.liferay.portal.kernel.util.InetAddressUtil;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.WeakValueConcurrentHashMap;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.util.PortalPortEventListener;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
-
-import java.lang.ref.Reference;
 
 import java.net.InetAddress;
 
@@ -103,13 +100,7 @@ public class ClusterExecutorImpl
 
 		if (!clusterRequest.isFireAndForget()) {
 			String uuid = clusterRequest.getUuid();
-
-			Reference<FutureClusterResponses> reference =
-				FinalizeManager.register(
-					futureClusterResponses,
-					new RemoveResultKeyFinalizeAction(uuid));
-
-			_executionResultMap.put(uuid, reference);
+			_executionResultMap.put(uuid, futureClusterResponses);
 		}
 
 		if (!clusterRequest.isSkipLocal() && _shortcutLocalMethod &&
@@ -280,15 +271,7 @@ public class ClusterExecutorImpl
 	}
 
 	protected FutureClusterResponses getExecutionResults(String uuid) {
-		Reference<FutureClusterResponses> reference = _executionResultMap.get(
-			uuid);
-
-		if (reference != null) {
-			return reference.get();
-		}
-		else {
-			return null;
-		}
+		return _executionResultMap.get(uuid);
 	}
 
 	protected Address getLocalControlAddress() {
@@ -467,23 +450,9 @@ public class ClusterExecutorImpl
 	private Map<String, Address> _clusterNodeIdMap =
 		new ConcurrentHashMap<String, Address>();
 	private JChannel _controlChannel;
-	private Map<String, Reference<FutureClusterResponses>> _executionResultMap =
-		new ConcurrentHashMap<String, Reference<FutureClusterResponses>>();
+	private Map<String, FutureClusterResponses> _executionResultMap =
+		new WeakValueConcurrentHashMap<String, FutureClusterResponses>();
 	private String _localClusterNodeId;
 	private boolean _shortcutLocalMethod;
-
-	private class RemoveResultKeyFinalizeAction implements FinalizeAction {
-
-		public RemoveResultKeyFinalizeAction(String uuid) {
-			_uuid = uuid;
-		}
-
-		public void doFinalize() {
-			_executionResultMap.remove(_uuid);
-		}
-
-		private String _uuid;
-
-	}
 
 }
