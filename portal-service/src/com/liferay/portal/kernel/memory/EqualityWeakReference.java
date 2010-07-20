@@ -26,11 +26,15 @@ public class EqualityWeakReference<T> extends WeakReference<T> {
 
 	public EqualityWeakReference(T referent) {
 		super(referent);
+
 		_hashCode = referent.hashCode();
 	}
 
-	public EqualityWeakReference(T referent, ReferenceQueue<? super T> queue) {
-		super(referent, queue);
+	public EqualityWeakReference(
+		T referent, ReferenceQueue<? super T> referenceQueue) {
+
+		super(referent, referenceQueue);
+
 		_hashCode = referent.hashCode();
 	}
 
@@ -39,14 +43,14 @@ public class EqualityWeakReference<T> extends WeakReference<T> {
 			return true;
 		}
 
-		if (!(obj instanceof EqualityWeakReference)) {
+		if (!(obj instanceof EqualityWeakReference<?>)) {
 			return false;
 		}
 
-		EqualityWeakReference reference = (EqualityWeakReference)obj;
+		EqualityWeakReference<?> equalityWeakReference =
+			(EqualityWeakReference<?>)obj;
 
-		if (Validator.equals(get(), reference.get())) {
-
+		if (Validator.equals(get(), equalityWeakReference.get())) {
 			return true;
 		}
 
