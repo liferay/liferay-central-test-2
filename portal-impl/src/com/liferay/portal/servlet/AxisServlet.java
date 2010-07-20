@@ -126,6 +126,10 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 			if (contentType.contains(ContentTypes.TEXT_XML)) {
 				content = fixXml(content);
 			}
+			else if (contentType.contains(ContentTypes.TEXT_HTML)) {
+				content =
+					"<html><body>".concat(content).concat("</body></html>");
+			}
 
 			ServletResponseUtil.write(
 				new UncommittedServletResponse(response),
