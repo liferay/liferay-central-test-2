@@ -74,45 +74,23 @@ public class LiferayCacheManagerPeerProviderFactory
 					portalPropertiesString);
 		}
 
+		portalPropertiesString = StringUtil.replace(
+			portalPropertiesString, StringPool.COMMA, StringPool.NEW_LINE);
+
 		Properties portalProperties = null;
 
-		if (portalPropertiesString.startsWith("peerDiscovery")) {
-			portalPropertiesString = StringUtil.replace(
-				portalPropertiesString, StringPool.COMMA, StringPool.NEW_LINE);
-
-			try {
-				portalProperties = PropertiesUtil.load(
-					portalPropertiesString);
-			}
-			catch (IOException ioe) {
-				_log.error(ioe, ioe);
-
-				throw new RuntimeException(ioe.getMessage());
-			}
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(PropertiesUtil.list(portalProperties));
-			}
+		try {
+			portalProperties = PropertiesUtil.load(
+				portalPropertiesString);
 		}
-		else {
-			portalProperties = new Properties();
+		catch (IOException ioe) {
+			_log.error(ioe, ioe);
 
-			String[] propertiesKey =
-				PropsValues.EHCACHE_CLUSTER_JGROUPS_PROPERTIES_FORMAT;
+			throw new RuntimeException(ioe.getMessage());
+		}
 
-			String[] propertiesValue = portalPropertiesString.split(
-				StringPool.AMPERSAND);
-
-			int propertyCount = propertiesKey.length;
-
-			if (propertyCount > propertiesValue.length) {
-				propertyCount = propertiesValue.length;
-			}
-
-			for (int i = 0; i < propertyCount; i++) {
-				portalProperties.setProperty(
-					propertiesKey[i], propertiesValue[i]);
-			}
+		if (_log.isDebugEnabled()) {
+			_log.debug(PropertiesUtil.list(portalProperties));
 		}
 
 		return _cacheManagerPeerProviderFactory.createCachePeerProvider(
