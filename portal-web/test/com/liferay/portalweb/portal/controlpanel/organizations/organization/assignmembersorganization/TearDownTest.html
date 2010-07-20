@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>TearDownTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">TearDownTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isVisible('link=« Basic'))</td>
+	<td>Basic1Present</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${Basic1Present}</td>
+	<td>basic1NotPresent</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>link=« Basic</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>basic1NotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_125_keywords</td>
+	<td>selenium</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='Search']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('_125_rowIds'))</td>
+	<td>UserPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${UserPresent}</td>
+	<td>NoUserPresent</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>_125_allRowIds</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Deactivate']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to deactivate the selected users?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isVisible('link=Advanced »'))</td>
+	<td>AdvancedPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${AdvancedPresent}</td>
+	<td>advancedNotPresent</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>link=Advanced »</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>advancedNotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>_125_active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_125_active</td>
+	<td>label=No</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//div[2]/span[2]/span/input</td>
+	<td>Search</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>_125_allRowIds</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to permanently delete the selected users?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isVisible('link=« Basic'))</td>
+	<td>Basic2Present</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${Basic2Present}</td>
+	<td>basic2NotPresent</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>link=« Basic</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>basic2NotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>NoUserPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isVisible('link=« Basic'))</td>
+	<td>Basic3Present</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${Basic3Present}</td>
+	<td>basic3NotPresent</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>link=« Basic</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>basic3NotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_126_keywords</td>
+	<td>selenium</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='Search']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('_126_rowIds'))</td>
+	<td>OrganizationPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${OrganizationPresent}</td>
+	<td>OrganizationNotPresent</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>_126_allRowIds</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete this?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>OrganizationNotPresent</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
