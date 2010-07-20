@@ -315,9 +315,11 @@ public class HtmlImpl implements Html {
 		text = StringUtil.replace(text, "&#039;", "'");
 		text = StringUtil.replace(text, "&#040;", "(");
 		text = StringUtil.replace(text, "&#041;", ")");
+		text = StringUtil.replace(text, "&#044;", ",");
 		text = StringUtil.replace(text, "&#035;", "#");
 		text = StringUtil.replace(text, "&#037;", "%");
 		text = StringUtil.replace(text, "&#059;", ";");
+		text = StringUtil.replace(text, "&#061;", "=");
 		text = StringUtil.replace(text, "&#043;", "+");
 		text = StringUtil.replace(text, "&#045;", "-");
 
