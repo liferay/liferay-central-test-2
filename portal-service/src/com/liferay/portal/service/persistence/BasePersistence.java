@@ -134,7 +134,7 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	 * @param  start the lower bound of the range of model instances to return
 	 * @param  end the upper bound of the range of model instances to return
 	 *		   (not inclusive)
-	 * @return the matching rows
+	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 * @see	   com.liferay.portal.kernel.dao.orm.QueryUtil#list(
 	 *		   com.liferay.portal.kernel.dao.orm.Query,
@@ -167,7 +167,7 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	 * @param  end the upper bound of the range of model instances to return
 	 *		   (not inclusive)
 	 * @param  orderByComparator the comparator to order the results by
-	 * @return all the instances of this model inside the specified range
+	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
 	@SuppressWarnings("unchecked")
