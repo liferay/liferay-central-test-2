@@ -350,40 +350,47 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			Properties groupMappings)
 		throws Exception {
 
-		List<SearchResult> searchResults = PortalLDAPUtil.getGroups(
-			ldapServerId, companyId, ldapContext, 0);
+		byte[] cookie = new byte[0];
 
-		for (SearchResult searchResult : searchResults) {
-			try {
-				Attributes attributes = PortalLDAPUtil.getGroupAttributes(
-					ldapServerId, companyId, ldapContext,
-					PortalLDAPUtil.getNameInNamespace(
-						ldapServerId, companyId, searchResult),
-					true);
+		while (cookie != null) {
+			List<SearchResult> searchResults = new ArrayList<SearchResult>();
 
-				UserGroup userGroup = importUserGroup(
-					companyId, attributes, groupMappings);
+			cookie = PortalLDAPUtil.getGroups(
+				ldapServerId, companyId, ldapContext, cookie, 0, searchResults);
 
-				Attribute usersAttribute = getUsers(
-					ldapServerId, companyId, ldapContext, attributes, userGroup,
-					groupMappings);
+			for (SearchResult searchResult : searchResults) {
+				try {
+					Attributes attributes = PortalLDAPUtil.getGroupAttributes(
+						ldapServerId, companyId, ldapContext,
+						PortalLDAPUtil.getNameInNamespace(
+							ldapServerId, companyId, searchResult),
+						true);
 
-				if (usersAttribute == null) {
-					if (_log.isInfoEnabled()) {
-						_log.info("No users found in " + userGroup.getName());
+					UserGroup userGroup = importUserGroup(
+						companyId, attributes, groupMappings);
+
+					Attribute usersAttribute = getUsers(
+						ldapServerId, companyId, ldapContext, attributes,
+						userGroup, groupMappings);
+
+					if (usersAttribute == null) {
+						if (_log.isInfoEnabled()) {
+							_log.info(
+								"No users found in " + userGroup.getName());
+						}
+
+						continue;
 					}
 
-					continue;
+					importUsers(
+						ldapServerId, companyId, ldapContext, userMappings,
+						userExpandoMappings, contactMappings,
+						contactExpandoMappings, userGroup.getUserGroupId(),
+						usersAttribute);
 				}
-
-				importUsers(
-					ldapServerId, companyId, ldapContext, userMappings,
-					userExpandoMappings, contactMappings,
-					contactExpandoMappings, userGroup.getUserGroupId(),
-					usersAttribute);
-			}
-			catch (Exception e) {
-				_log.error("Unable to import group " + searchResult, e);
+				catch (Exception e) {
+					_log.error("Unable to import group " + searchResult, e);
+				}
 			}
 		}
 	}
@@ -395,27 +402,33 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			Properties groupMappings)
 		throws Exception {
 
-		List<SearchResult> searchResults = PortalLDAPUtil.getUsers(
-			ldapServerId, companyId, ldapContext, 0);
+		byte[] cookie = new byte[0];
 
-		for (SearchResult searchResult : searchResults) {
-			try {
-				Attributes userAttributes = PortalLDAPUtil.getUserAttributes(
-					ldapServerId, companyId, ldapContext,
-					PortalLDAPUtil.getNameInNamespace(
-						ldapServerId, companyId, searchResult));
+		while (cookie != null) {
+			List<SearchResult> searchResults = new ArrayList<SearchResult>();
 
-				User user = importUser(
-					companyId, userAttributes, userMappings,
-					userExpandoMappings, contactMappings,
-					contactExpandoMappings, StringPool.BLANK);
+			cookie = PortalLDAPUtil.getUsers(
+				ldapServerId, companyId, ldapContext, cookie, 0, searchResults);
 
-				importGroups(
-					ldapServerId, companyId, ldapContext, userAttributes, user,
-					userMappings, groupMappings);
-			}
-			catch (Exception e) {
-				_log.error("Unable to import user " + searchResult, e);
+			for (SearchResult searchResult : searchResults) {
+				try {
+					Attributes userAttributes = PortalLDAPUtil.getUserAttributes(
+						ldapServerId, companyId, ldapContext,
+						PortalLDAPUtil.getNameInNamespace(
+							ldapServerId, companyId, searchResult));
+
+					User user = importUser(
+						companyId, userAttributes, userMappings,
+						userExpandoMappings, contactMappings,
+						contactExpandoMappings, StringPool.BLANK);
+
+					importGroups(
+						ldapServerId, companyId, ldapContext, userAttributes, user,
+						userMappings, groupMappings);
+				}
+				catch (Exception e) {
+					_log.error("Unable to import user " + searchResult, e);
+				}
 			}
 		}
 	}
@@ -466,20 +479,27 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		sb.append(StringPool.CLOSE_PARENTHESIS);
 		sb.append(StringPool.CLOSE_PARENTHESIS);
 
-		List<SearchResult> searchResults = PortalLDAPUtil.searchLDAP(
-			companyId, ldapContext, 0, baseDN, sb.toString(), null);
+		byte[] cookie = new byte[0];
 
-		for (SearchResult searchResult : searchResults) {
-			String fullGroupDN = PortalLDAPUtil.getNameInNamespace(
-				ldapServerId, companyId, searchResult);
+		while (cookie != null) {
+			List<SearchResult> searchResults = new ArrayList<SearchResult>();
 
-			attribute.add(fullGroupDN);
+			PortalLDAPUtil.searchLDAP(
+				companyId, ldapContext, cookie, 0, baseDN, sb.toString(), null,
+				searchResults);
+
+			for (SearchResult searchResult : searchResults) {
+				String fullGroupDN = PortalLDAPUtil.getNameInNamespace(
+					ldapServerId, companyId, searchResult);
+
+				attribute.add(fullGroupDN);
+			}
 		}
 
 		List<Long> newUserGroupIds = new ArrayList<Long>(attribute.size());
 
 		for (int i = 0; i < attribute.size(); i++) {
-			String fullGroupDN = (String) attribute.get(i);
+			String fullGroupDN = (String)attribute.get(i);
 
 			Attributes groupAttributes = null;
 

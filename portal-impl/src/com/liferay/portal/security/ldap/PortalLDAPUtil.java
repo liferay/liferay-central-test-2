@@ -150,18 +150,20 @@ public class PortalLDAPUtil {
 			mappedGroupAttributeIds.toArray(new String[0]));
 	}
 
-	public static List<SearchResult> getGroups(
-			long companyId, LdapContext ldapContext, int maxResults,
-			String baseDN, String groupFilter)
+	public static byte[] getGroups(
+			long companyId, LdapContext ldapContext, byte[] cookie,
+			int maxResults, String baseDN, String groupFilter,
+			List<SearchResult> searchResults)
 		throws Exception {
 
 		return searchLDAP(
-			companyId, ldapContext, maxResults, baseDN, groupFilter, null);
+			companyId, ldapContext, cookie, maxResults, baseDN, groupFilter,
+			null, searchResults);
 	}
 
-	public static List<SearchResult> getGroups(
+	public static byte[] getGroups(
 			long ldapServerId, long companyId, LdapContext ldapContext,
-			int maxResults)
+			byte[] cookie, int maxResults, List<SearchResult> searchResults)
 		throws Exception {
 
 		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
@@ -172,7 +174,8 @@ public class PortalLDAPUtil {
 			companyId, PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER + postfix);
 
 		return getGroups(
-			companyId, ldapContext, maxResults, baseDN, groupFilter);
+			companyId, ldapContext, cookie, maxResults, baseDN, groupFilter,
+			searchResults);
 	}
 
 	public static long getLdapServerId(long companyId, String screenName)
@@ -206,8 +209,11 @@ public class PortalLDAPUtil {
 		String[] attributeIds = {_getNextRange(attribute.getID())};
 
 		while (true) {
-			List<SearchResult> searchResults = searchLDAP(
-				companyId, ldapContext, 0, baseDN, filter, attributeIds);
+			List<SearchResult> searchResults = new ArrayList<SearchResult>();
+
+			searchLDAP(
+				companyId, ldapContext, new byte[0], 0, baseDN, filter,
+				attributeIds, searchResults);
 
 			if (searchResults.size() != 1) {
 				break;
@@ -354,18 +360,20 @@ public class PortalLDAPUtil {
 			ldapContext, fullDistinguishedName, mappedUserAttributeIds);
 	}
 
-	public static List<SearchResult> getUsers(
-			long companyId, LdapContext ldapContext, int maxResults,
-			String baseDN, String userFilter)
+	public static byte[] getUsers(
+			long companyId, LdapContext ldapContext, byte[] cookie,
+			int maxResults, String baseDN, String userFilter,
+			List<SearchResult> searchResults)
 		throws Exception {
 
 		return searchLDAP(
-			companyId, ldapContext, maxResults, baseDN, userFilter, null);
+			companyId, ldapContext, cookie, maxResults, baseDN, userFilter,
+			null, searchResults);
 	}
 
-	public static List<SearchResult> getUsers(
+	public static byte[] getUsers(
 			long ldapServerId, long companyId, LdapContext ldapContext,
-			int maxResults)
+			byte[] cookie, int maxResults, List<SearchResult> searchResults)
 		throws Exception {
 
 		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
@@ -375,7 +383,9 @@ public class PortalLDAPUtil {
 		String userFilter = PrefsPropsUtil.getString(
 			companyId, PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER + postfix);
 
-		return getUsers(companyId, ldapContext, maxResults, baseDN, userFilter);
+		return getUsers(
+			companyId, ldapContext, cookie, maxResults, baseDN, userFilter,
+			searchResults);
 	}
 
 	public static String getUsersDN(long ldapServerId, long companyId)
@@ -399,21 +409,18 @@ public class PortalLDAPUtil {
 		}
 	}
 
-	public static List<SearchResult> searchLDAP(
-			long companyId, LdapContext ldapContext, int maxResults,
-			String baseDN, String filter, String[] attributeIds)
+	public static byte[] searchLDAP(
+			long companyId, LdapContext ldapContext, byte[] cookie,
+			int maxResults, String baseDN, String filter,
+			String[] attributeIds, List<SearchResult> searchResults)
 		throws Exception {
-
-		List<SearchResult> searchResults = new ArrayList<SearchResult>();
 
 		SearchControls searchControls = new SearchControls(
 			SearchControls.SUBTREE_SCOPE, maxResults, 0, attributeIds, false,
 			false);
 
 		try {
-			byte[] cookie = new byte[0];
-
-			while (cookie != null) {
+			if (cookie != null) {
 				if (cookie.length == 0) {
 					ldapContext.setRequestControls(
 						new Control[] {
@@ -439,7 +446,7 @@ public class PortalLDAPUtil {
 
 				enu.close();
 
-				cookie = _getCookie(ldapContext.getResponseControls());
+				return _getCookie(ldapContext.getResponseControls());
 			}
 		}
 		catch (OperationNotSupportedException onse) {
@@ -458,7 +465,7 @@ public class PortalLDAPUtil {
 			ldapContext.setRequestControls(null);
 		}
 
-		return searchResults;
+		return null;
 	}
 
 	private static Attributes _getAttributes(
