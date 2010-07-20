@@ -26,7 +26,9 @@ public class PluginSchedulingConfigurator
 		ClassLoader classLoader = PortletClassLoaderUtil.getClassLoader();
 
 		if (classLoader == null) {
-			classLoader = Thread.currentThread().getContextClassLoader();
+			Thread currentThread = Thread.currentThread();
+
+			classLoader = currentThread.getContextClassLoader();
 		}
 
 		return classLoader;

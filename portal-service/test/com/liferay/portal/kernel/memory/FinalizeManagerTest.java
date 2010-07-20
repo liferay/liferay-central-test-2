@@ -23,8 +23,10 @@ import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 public class FinalizeManagerTest extends TestCase {
 
 	public void testRegister() throws InterruptedException {
+		Thread currentThread = Thread.currentThread();
+
 		PortalClassLoaderUtil.setClassLoader(
-			Thread.currentThread().getContextClassLoader());
+			currentThread.getContextClassLoader());
 
 		if (FinalizeManager.THREAD_ENABLED) {
 			registerWithThread();

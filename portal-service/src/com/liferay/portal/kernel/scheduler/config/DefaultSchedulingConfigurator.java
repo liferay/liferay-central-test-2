@@ -21,7 +21,9 @@ public class DefaultSchedulingConfigurator
 	extends AbstractSchedulingConfigurator{
 
 	protected ClassLoader getOperatingClassloader() {
-		return Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		return currentThread.getContextClassLoader();
 	}
 
 }

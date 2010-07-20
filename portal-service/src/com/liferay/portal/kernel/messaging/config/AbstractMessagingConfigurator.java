@@ -63,13 +63,14 @@ public abstract class AbstractMessagingConfigurator
 			messageBus.replace(destination);
 		}
 
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
 			ClassLoader operatingClassLoader = getOperatingClassloader();
 
-			Thread.currentThread().setContextClassLoader(operatingClassLoader);
+			currentThread.setContextClassLoader(operatingClassLoader);
 
 			for (Map.Entry<String, List<MessageListener>> messageListeners :
 					_messageListeners.entrySet()) {
@@ -85,7 +86,7 @@ public abstract class AbstractMessagingConfigurator
 			}
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 

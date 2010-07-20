@@ -48,13 +48,14 @@ public abstract class AbstractSchedulingConfigurator
 	}
 
 	public void init() {
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
 			ClassLoader operatingClassLoader = getOperatingClassloader();
 
-			Thread.currentThread().setContextClassLoader(operatingClassLoader);
+			currentThread.setContextClassLoader(operatingClassLoader);
 
 			for (Map.Entry<String, List<SchedulerEntry>> schedulerEntries :
 					_schedulerEntries.entrySet()) {
@@ -74,7 +75,7 @@ public abstract class AbstractSchedulingConfigurator
 			}
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 
