@@ -28,7 +28,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  org labor model instance should use the {@link OrgLabor} interface instead.
+ * Never reference this interface directly. All methods that expect a org labor model instance should use the {@link OrgLabor} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -39,259 +39,259 @@ import java.io.Serializable;
  */
 public interface OrgLaborModel extends BaseModel<OrgLabor> {
 	/**
-	 * Gets the primary key of this  org labor.
+	 * Gets the primary key of this org labor.
 	 *
-	 * @return the primary key of this  org labor
+	 * @return the primary key of this org labor
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  org labor
+	 * Sets the primary key of this org labor
 	 *
-	 * @param pk the primary key of this  org labor
+	 * @param pk the primary key of this org labor
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the org labor id of this  org labor.
+	 * Gets the org labor id of this org labor.
 	 *
-	 * @return the org labor id of this  org labor
+	 * @return the org labor id of this org labor
 	 */
 	public long getOrgLaborId();
 
 	/**
-	 * Sets the org labor id of this  org labor.
+	 * Sets the org labor id of this org labor.
 	 *
-	 * @param orgLaborId the org labor id of this  org labor
+	 * @param orgLaborId the org labor id of this org labor
 	 */
 	public void setOrgLaborId(long orgLaborId);
 
 	/**
-	 * Gets the organization id of this  org labor.
+	 * Gets the organization id of this org labor.
 	 *
-	 * @return the organization id of this  org labor
+	 * @return the organization id of this org labor
 	 */
 	public long getOrganizationId();
 
 	/**
-	 * Sets the organization id of this  org labor.
+	 * Sets the organization id of this org labor.
 	 *
-	 * @param organizationId the organization id of this  org labor
+	 * @param organizationId the organization id of this org labor
 	 */
 	public void setOrganizationId(long organizationId);
 
 	/**
-	 * Gets the type id of this  org labor.
+	 * Gets the type id of this org labor.
 	 *
-	 * @return the type id of this  org labor
+	 * @return the type id of this org labor
 	 */
 	public int getTypeId();
 
 	/**
-	 * Sets the type id of this  org labor.
+	 * Sets the type id of this org labor.
 	 *
-	 * @param typeId the type id of this  org labor
+	 * @param typeId the type id of this org labor
 	 */
 	public void setTypeId(int typeId);
 
 	/**
-	 * Gets the sun open of this  org labor.
+	 * Gets the sun open of this org labor.
 	 *
-	 * @return the sun open of this  org labor
+	 * @return the sun open of this org labor
 	 */
 	public int getSunOpen();
 
 	/**
-	 * Sets the sun open of this  org labor.
+	 * Sets the sun open of this org labor.
 	 *
-	 * @param sunOpen the sun open of this  org labor
+	 * @param sunOpen the sun open of this org labor
 	 */
 	public void setSunOpen(int sunOpen);
 
 	/**
-	 * Gets the sun close of this  org labor.
+	 * Gets the sun close of this org labor.
 	 *
-	 * @return the sun close of this  org labor
+	 * @return the sun close of this org labor
 	 */
 	public int getSunClose();
 
 	/**
-	 * Sets the sun close of this  org labor.
+	 * Sets the sun close of this org labor.
 	 *
-	 * @param sunClose the sun close of this  org labor
+	 * @param sunClose the sun close of this org labor
 	 */
 	public void setSunClose(int sunClose);
 
 	/**
-	 * Gets the mon open of this  org labor.
+	 * Gets the mon open of this org labor.
 	 *
-	 * @return the mon open of this  org labor
+	 * @return the mon open of this org labor
 	 */
 	public int getMonOpen();
 
 	/**
-	 * Sets the mon open of this  org labor.
+	 * Sets the mon open of this org labor.
 	 *
-	 * @param monOpen the mon open of this  org labor
+	 * @param monOpen the mon open of this org labor
 	 */
 	public void setMonOpen(int monOpen);
 
 	/**
-	 * Gets the mon close of this  org labor.
+	 * Gets the mon close of this org labor.
 	 *
-	 * @return the mon close of this  org labor
+	 * @return the mon close of this org labor
 	 */
 	public int getMonClose();
 
 	/**
-	 * Sets the mon close of this  org labor.
+	 * Sets the mon close of this org labor.
 	 *
-	 * @param monClose the mon close of this  org labor
+	 * @param monClose the mon close of this org labor
 	 */
 	public void setMonClose(int monClose);
 
 	/**
-	 * Gets the tue open of this  org labor.
+	 * Gets the tue open of this org labor.
 	 *
-	 * @return the tue open of this  org labor
+	 * @return the tue open of this org labor
 	 */
 	public int getTueOpen();
 
 	/**
-	 * Sets the tue open of this  org labor.
+	 * Sets the tue open of this org labor.
 	 *
-	 * @param tueOpen the tue open of this  org labor
+	 * @param tueOpen the tue open of this org labor
 	 */
 	public void setTueOpen(int tueOpen);
 
 	/**
-	 * Gets the tue close of this  org labor.
+	 * Gets the tue close of this org labor.
 	 *
-	 * @return the tue close of this  org labor
+	 * @return the tue close of this org labor
 	 */
 	public int getTueClose();
 
 	/**
-	 * Sets the tue close of this  org labor.
+	 * Sets the tue close of this org labor.
 	 *
-	 * @param tueClose the tue close of this  org labor
+	 * @param tueClose the tue close of this org labor
 	 */
 	public void setTueClose(int tueClose);
 
 	/**
-	 * Gets the wed open of this  org labor.
+	 * Gets the wed open of this org labor.
 	 *
-	 * @return the wed open of this  org labor
+	 * @return the wed open of this org labor
 	 */
 	public int getWedOpen();
 
 	/**
-	 * Sets the wed open of this  org labor.
+	 * Sets the wed open of this org labor.
 	 *
-	 * @param wedOpen the wed open of this  org labor
+	 * @param wedOpen the wed open of this org labor
 	 */
 	public void setWedOpen(int wedOpen);
 
 	/**
-	 * Gets the wed close of this  org labor.
+	 * Gets the wed close of this org labor.
 	 *
-	 * @return the wed close of this  org labor
+	 * @return the wed close of this org labor
 	 */
 	public int getWedClose();
 
 	/**
-	 * Sets the wed close of this  org labor.
+	 * Sets the wed close of this org labor.
 	 *
-	 * @param wedClose the wed close of this  org labor
+	 * @param wedClose the wed close of this org labor
 	 */
 	public void setWedClose(int wedClose);
 
 	/**
-	 * Gets the thu open of this  org labor.
+	 * Gets the thu open of this org labor.
 	 *
-	 * @return the thu open of this  org labor
+	 * @return the thu open of this org labor
 	 */
 	public int getThuOpen();
 
 	/**
-	 * Sets the thu open of this  org labor.
+	 * Sets the thu open of this org labor.
 	 *
-	 * @param thuOpen the thu open of this  org labor
+	 * @param thuOpen the thu open of this org labor
 	 */
 	public void setThuOpen(int thuOpen);
 
 	/**
-	 * Gets the thu close of this  org labor.
+	 * Gets the thu close of this org labor.
 	 *
-	 * @return the thu close of this  org labor
+	 * @return the thu close of this org labor
 	 */
 	public int getThuClose();
 
 	/**
-	 * Sets the thu close of this  org labor.
+	 * Sets the thu close of this org labor.
 	 *
-	 * @param thuClose the thu close of this  org labor
+	 * @param thuClose the thu close of this org labor
 	 */
 	public void setThuClose(int thuClose);
 
 	/**
-	 * Gets the fri open of this  org labor.
+	 * Gets the fri open of this org labor.
 	 *
-	 * @return the fri open of this  org labor
+	 * @return the fri open of this org labor
 	 */
 	public int getFriOpen();
 
 	/**
-	 * Sets the fri open of this  org labor.
+	 * Sets the fri open of this org labor.
 	 *
-	 * @param friOpen the fri open of this  org labor
+	 * @param friOpen the fri open of this org labor
 	 */
 	public void setFriOpen(int friOpen);
 
 	/**
-	 * Gets the fri close of this  org labor.
+	 * Gets the fri close of this org labor.
 	 *
-	 * @return the fri close of this  org labor
+	 * @return the fri close of this org labor
 	 */
 	public int getFriClose();
 
 	/**
-	 * Sets the fri close of this  org labor.
+	 * Sets the fri close of this org labor.
 	 *
-	 * @param friClose the fri close of this  org labor
+	 * @param friClose the fri close of this org labor
 	 */
 	public void setFriClose(int friClose);
 
 	/**
-	 * Gets the sat open of this  org labor.
+	 * Gets the sat open of this org labor.
 	 *
-	 * @return the sat open of this  org labor
+	 * @return the sat open of this org labor
 	 */
 	public int getSatOpen();
 
 	/**
-	 * Sets the sat open of this  org labor.
+	 * Sets the sat open of this org labor.
 	 *
-	 * @param satOpen the sat open of this  org labor
+	 * @param satOpen the sat open of this org labor
 	 */
 	public void setSatOpen(int satOpen);
 
 	/**
-	 * Gets the sat close of this  org labor.
+	 * Gets the sat close of this org labor.
 	 *
-	 * @return the sat close of this  org labor
+	 * @return the sat close of this org labor
 	 */
 	public int getSatClose();
 
 	/**
-	 * Sets the sat close of this  org labor.
+	 * Sets the sat close of this org labor.
 	 *
-	 * @param satClose the sat close of this  org labor
+	 * @param satClose the sat close of this org labor
 	 */
 	public void setSatClose(int satClose);
 
 	/**
-	 * Gets a copy of this  org labor as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this org labor as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

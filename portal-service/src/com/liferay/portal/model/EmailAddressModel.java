@@ -32,7 +32,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  email address model instance should use the {@link EmailAddress} interface instead.
+ * Never reference this interface directly. All methods that expect a email address model instance should use the {@link EmailAddress} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -43,206 +43,206 @@ import java.util.Date;
  */
 public interface EmailAddressModel extends BaseModel<EmailAddress> {
 	/**
-	 * Gets the primary key of this  email address.
+	 * Gets the primary key of this email address.
 	 *
-	 * @return the primary key of this  email address
+	 * @return the primary key of this email address
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  email address
+	 * Sets the primary key of this email address
 	 *
-	 * @param pk the primary key of this  email address
+	 * @param pk the primary key of this email address
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the email address id of this  email address.
+	 * Gets the email address id of this email address.
 	 *
-	 * @return the email address id of this  email address
+	 * @return the email address id of this email address
 	 */
 	public long getEmailAddressId();
 
 	/**
-	 * Sets the email address id of this  email address.
+	 * Sets the email address id of this email address.
 	 *
-	 * @param emailAddressId the email address id of this  email address
+	 * @param emailAddressId the email address id of this email address
 	 */
 	public void setEmailAddressId(long emailAddressId);
 
 	/**
-	 * Gets the company id of this  email address.
+	 * Gets the company id of this email address.
 	 *
-	 * @return the company id of this  email address
+	 * @return the company id of this email address
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  email address.
+	 * Sets the company id of this email address.
 	 *
-	 * @param companyId the company id of this  email address
+	 * @param companyId the company id of this email address
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  email address.
+	 * Gets the user id of this email address.
 	 *
-	 * @return the user id of this  email address
+	 * @return the user id of this email address
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  email address.
+	 * Sets the user id of this email address.
 	 *
-	 * @param userId the user id of this  email address
+	 * @param userId the user id of this email address
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  email address.
+	 * Gets the user uuid of this email address.
 	 *
-	 * @return the user uuid of this  email address
+	 * @return the user uuid of this email address
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  email address.
+	 * Sets the user uuid of this email address.
 	 *
-	 * @param userUuid the user uuid of this  email address
+	 * @param userUuid the user uuid of this email address
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this  email address.
+	 * Gets the user name of this email address.
 	 *
-	 * @return the user name of this  email address
+	 * @return the user name of this email address
 	 */
 	@AutoEscape
 	public String getUserName();
 
 	/**
-	 * Sets the user name of this  email address.
+	 * Sets the user name of this email address.
 	 *
-	 * @param userName the user name of this  email address
+	 * @param userName the user name of this email address
 	 */
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this  email address.
+	 * Gets the create date of this email address.
 	 *
-	 * @return the create date of this  email address
+	 * @return the create date of this email address
 	 */
 	public Date getCreateDate();
 
 	/**
-	 * Sets the create date of this  email address.
+	 * Sets the create date of this email address.
 	 *
-	 * @param createDate the create date of this  email address
+	 * @param createDate the create date of this email address
 	 */
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this  email address.
+	 * Gets the modified date of this email address.
 	 *
-	 * @return the modified date of this  email address
+	 * @return the modified date of this email address
 	 */
 	public Date getModifiedDate();
 
 	/**
-	 * Sets the modified date of this  email address.
+	 * Sets the modified date of this email address.
 	 *
-	 * @param modifiedDate the modified date of this  email address
+	 * @param modifiedDate the modified date of this email address
 	 */
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the class name of the model instance this  email address is associated with.
+	 * Gets the class name of the model instance this email address is associated with.
 	 *
-	 * @return the class name of the model instance this  email address is associated with
+	 * @return the class name of the model instance this email address is associated with
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this  email address.
+	 * Gets the class name id of this email address.
 	 *
-	 * @return the class name id of this  email address
+	 * @return the class name id of this email address
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this  email address.
+	 * Sets the class name id of this email address.
 	 *
-	 * @param classNameId the class name id of this  email address
+	 * @param classNameId the class name id of this email address
 	 */
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this  email address.
+	 * Gets the class p k of this email address.
 	 *
-	 * @return the class p k of this  email address
+	 * @return the class p k of this email address
 	 */
 	public long getClassPK();
 
 	/**
-	 * Sets the class p k of this  email address.
+	 * Sets the class p k of this email address.
 	 *
-	 * @param classPK the class p k of this  email address
+	 * @param classPK the class p k of this email address
 	 */
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the address of this  email address.
+	 * Gets the address of this email address.
 	 *
-	 * @return the address of this  email address
+	 * @return the address of this email address
 	 */
 	@AutoEscape
 	public String getAddress();
 
 	/**
-	 * Sets the address of this  email address.
+	 * Sets the address of this email address.
 	 *
-	 * @param address the address of this  email address
+	 * @param address the address of this email address
 	 */
 	public void setAddress(String address);
 
 	/**
-	 * Gets the type id of this  email address.
+	 * Gets the type id of this email address.
 	 *
-	 * @return the type id of this  email address
+	 * @return the type id of this email address
 	 */
 	public int getTypeId();
 
 	/**
-	 * Sets the type id of this  email address.
+	 * Sets the type id of this email address.
 	 *
-	 * @param typeId the type id of this  email address
+	 * @param typeId the type id of this email address
 	 */
 	public void setTypeId(int typeId);
 
 	/**
-	 * Gets the primary of this  email address.
+	 * Gets the primary of this email address.
 	 *
-	 * @return the primary of this  email address
+	 * @return the primary of this email address
 	 */
 	public boolean getPrimary();
 
 	/**
-	 * Determines whether this  email address is primary.
+	 * Determines whether this email address is primary.
 	 *
-	 * @return whether this  email address is primary
+	 * @return whether this email address is primary
 	 */
 	public boolean isPrimary();
 
 	/**
-	 * Sets the primary of this  email address.
+	 * Sets the primary of this email address.
 	 *
-	 * @param primary the primary of this  email address
+	 * @param primary the primary of this email address
 	 */
 	public void setPrimary(boolean primary);
 
 	/**
-	 * Gets a copy of this  email address as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this email address as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

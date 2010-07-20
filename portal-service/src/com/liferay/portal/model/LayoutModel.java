@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  layout model instance should use the {@link Layout} interface instead.
+ * Never reference this interface directly. All methods that expect a layout model instance should use the {@link Layout} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,390 +40,390 @@ import java.io.Serializable;
  */
 public interface LayoutModel extends BaseModel<Layout> {
 	/**
-	 * Gets the primary key of this  layout.
+	 * Gets the primary key of this layout.
 	 *
-	 * @return the primary key of this  layout
+	 * @return the primary key of this layout
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  layout
+	 * Sets the primary key of this layout
 	 *
-	 * @param pk the primary key of this  layout
+	 * @param pk the primary key of this layout
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the uuid of this  layout.
+	 * Gets the uuid of this layout.
 	 *
-	 * @return the uuid of this  layout
+	 * @return the uuid of this layout
 	 */
 	@AutoEscape
 	public String getUuid();
 
 	/**
-	 * Sets the uuid of this  layout.
+	 * Sets the uuid of this layout.
 	 *
-	 * @param uuid the uuid of this  layout
+	 * @param uuid the uuid of this layout
 	 */
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the plid of this  layout.
+	 * Gets the plid of this layout.
 	 *
-	 * @return the plid of this  layout
+	 * @return the plid of this layout
 	 */
 	public long getPlid();
 
 	/**
-	 * Sets the plid of this  layout.
+	 * Sets the plid of this layout.
 	 *
-	 * @param plid the plid of this  layout
+	 * @param plid the plid of this layout
 	 */
 	public void setPlid(long plid);
 
 	/**
-	 * Gets the group id of this  layout.
+	 * Gets the group id of this layout.
 	 *
-	 * @return the group id of this  layout
+	 * @return the group id of this layout
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  layout.
+	 * Sets the group id of this layout.
 	 *
-	 * @param groupId the group id of this  layout
+	 * @param groupId the group id of this layout
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this  layout.
+	 * Gets the company id of this layout.
 	 *
-	 * @return the company id of this  layout
+	 * @return the company id of this layout
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  layout.
+	 * Sets the company id of this layout.
 	 *
-	 * @param companyId the company id of this  layout
+	 * @param companyId the company id of this layout
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the private layout of this  layout.
+	 * Gets the private layout of this layout.
 	 *
-	 * @return the private layout of this  layout
+	 * @return the private layout of this layout
 	 */
 	public boolean getPrivateLayout();
 
 	/**
-	 * Determines whether this  layout is private layout.
+	 * Determines whether this layout is private layout.
 	 *
-	 * @return whether this  layout is private layout
+	 * @return whether this layout is private layout
 	 */
 	public boolean isPrivateLayout();
 
 	/**
-	 * Sets the private layout of this  layout.
+	 * Sets the private layout of this layout.
 	 *
-	 * @param privateLayout the private layout of this  layout
+	 * @param privateLayout the private layout of this layout
 	 */
 	public void setPrivateLayout(boolean privateLayout);
 
 	/**
-	 * Gets the layout id of this  layout.
+	 * Gets the layout id of this layout.
 	 *
-	 * @return the layout id of this  layout
+	 * @return the layout id of this layout
 	 */
 	public long getLayoutId();
 
 	/**
-	 * Sets the layout id of this  layout.
+	 * Sets the layout id of this layout.
 	 *
-	 * @param layoutId the layout id of this  layout
+	 * @param layoutId the layout id of this layout
 	 */
 	public void setLayoutId(long layoutId);
 
 	/**
-	 * Gets the parent layout id of this  layout.
+	 * Gets the parent layout id of this layout.
 	 *
-	 * @return the parent layout id of this  layout
+	 * @return the parent layout id of this layout
 	 */
 	public long getParentLayoutId();
 
 	/**
-	 * Sets the parent layout id of this  layout.
+	 * Sets the parent layout id of this layout.
 	 *
-	 * @param parentLayoutId the parent layout id of this  layout
+	 * @param parentLayoutId the parent layout id of this layout
 	 */
 	public void setParentLayoutId(long parentLayoutId);
 
 	/**
-	 * Gets the name of this  layout.
+	 * Gets the name of this layout.
 	 *
-	 * @return the name of this  layout
+	 * @return the name of this layout
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  layout.
+	 * Sets the name of this layout.
 	 *
-	 * @param name the name of this  layout
+	 * @param name the name of this layout
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets the title of this  layout.
+	 * Gets the title of this layout.
 	 *
-	 * @return the title of this  layout
+	 * @return the title of this layout
 	 */
 	@AutoEscape
 	public String getTitle();
 
 	/**
-	 * Sets the title of this  layout.
+	 * Sets the title of this layout.
 	 *
-	 * @param title the title of this  layout
+	 * @param title the title of this layout
 	 */
 	public void setTitle(String title);
 
 	/**
-	 * Gets the description of this  layout.
+	 * Gets the description of this layout.
 	 *
-	 * @return the description of this  layout
+	 * @return the description of this layout
 	 */
 	@AutoEscape
 	public String getDescription();
 
 	/**
-	 * Sets the description of this  layout.
+	 * Sets the description of this layout.
 	 *
-	 * @param description the description of this  layout
+	 * @param description the description of this layout
 	 */
 	public void setDescription(String description);
 
 	/**
-	 * Gets the type of this  layout.
+	 * Gets the type of this layout.
 	 *
-	 * @return the type of this  layout
+	 * @return the type of this layout
 	 */
 	@AutoEscape
 	public String getType();
 
 	/**
-	 * Sets the type of this  layout.
+	 * Sets the type of this layout.
 	 *
-	 * @param type the type of this  layout
+	 * @param type the type of this layout
 	 */
 	public void setType(String type);
 
 	/**
-	 * Gets the type settings of this  layout.
+	 * Gets the type settings of this layout.
 	 *
-	 * @return the type settings of this  layout
+	 * @return the type settings of this layout
 	 */
 	@AutoEscape
 	public String getTypeSettings();
 
 	/**
-	 * Sets the type settings of this  layout.
+	 * Sets the type settings of this layout.
 	 *
-	 * @param typeSettings the type settings of this  layout
+	 * @param typeSettings the type settings of this layout
 	 */
 	public void setTypeSettings(String typeSettings);
 
 	/**
-	 * Gets the hidden of this  layout.
+	 * Gets the hidden of this layout.
 	 *
-	 * @return the hidden of this  layout
+	 * @return the hidden of this layout
 	 */
 	public boolean getHidden();
 
 	/**
-	 * Determines whether this  layout is hidden.
+	 * Determines whether this layout is hidden.
 	 *
-	 * @return whether this  layout is hidden
+	 * @return whether this layout is hidden
 	 */
 	public boolean isHidden();
 
 	/**
-	 * Sets the hidden of this  layout.
+	 * Sets the hidden of this layout.
 	 *
-	 * @param hidden the hidden of this  layout
+	 * @param hidden the hidden of this layout
 	 */
 	public void setHidden(boolean hidden);
 
 	/**
-	 * Gets the friendly u r l of this  layout.
+	 * Gets the friendly u r l of this layout.
 	 *
-	 * @return the friendly u r l of this  layout
+	 * @return the friendly u r l of this layout
 	 */
 	@AutoEscape
 	public String getFriendlyURL();
 
 	/**
-	 * Sets the friendly u r l of this  layout.
+	 * Sets the friendly u r l of this layout.
 	 *
-	 * @param friendlyURL the friendly u r l of this  layout
+	 * @param friendlyURL the friendly u r l of this layout
 	 */
 	public void setFriendlyURL(String friendlyURL);
 
 	/**
-	 * Gets the icon image of this  layout.
+	 * Gets the icon image of this layout.
 	 *
-	 * @return the icon image of this  layout
+	 * @return the icon image of this layout
 	 */
 	public boolean getIconImage();
 
 	/**
-	 * Determines whether this  layout is icon image.
+	 * Determines whether this layout is icon image.
 	 *
-	 * @return whether this  layout is icon image
+	 * @return whether this layout is icon image
 	 */
 	public boolean isIconImage();
 
 	/**
-	 * Sets the icon image of this  layout.
+	 * Sets the icon image of this layout.
 	 *
-	 * @param iconImage the icon image of this  layout
+	 * @param iconImage the icon image of this layout
 	 */
 	public void setIconImage(boolean iconImage);
 
 	/**
-	 * Gets the icon image id of this  layout.
+	 * Gets the icon image id of this layout.
 	 *
-	 * @return the icon image id of this  layout
+	 * @return the icon image id of this layout
 	 */
 	public long getIconImageId();
 
 	/**
-	 * Sets the icon image id of this  layout.
+	 * Sets the icon image id of this layout.
 	 *
-	 * @param iconImageId the icon image id of this  layout
+	 * @param iconImageId the icon image id of this layout
 	 */
 	public void setIconImageId(long iconImageId);
 
 	/**
-	 * Gets the theme id of this  layout.
+	 * Gets the theme id of this layout.
 	 *
-	 * @return the theme id of this  layout
+	 * @return the theme id of this layout
 	 */
 	@AutoEscape
 	public String getThemeId();
 
 	/**
-	 * Sets the theme id of this  layout.
+	 * Sets the theme id of this layout.
 	 *
-	 * @param themeId the theme id of this  layout
+	 * @param themeId the theme id of this layout
 	 */
 	public void setThemeId(String themeId);
 
 	/**
-	 * Gets the color scheme id of this  layout.
+	 * Gets the color scheme id of this layout.
 	 *
-	 * @return the color scheme id of this  layout
+	 * @return the color scheme id of this layout
 	 */
 	@AutoEscape
 	public String getColorSchemeId();
 
 	/**
-	 * Sets the color scheme id of this  layout.
+	 * Sets the color scheme id of this layout.
 	 *
-	 * @param colorSchemeId the color scheme id of this  layout
+	 * @param colorSchemeId the color scheme id of this layout
 	 */
 	public void setColorSchemeId(String colorSchemeId);
 
 	/**
-	 * Gets the wap theme id of this  layout.
+	 * Gets the wap theme id of this layout.
 	 *
-	 * @return the wap theme id of this  layout
+	 * @return the wap theme id of this layout
 	 */
 	@AutoEscape
 	public String getWapThemeId();
 
 	/**
-	 * Sets the wap theme id of this  layout.
+	 * Sets the wap theme id of this layout.
 	 *
-	 * @param wapThemeId the wap theme id of this  layout
+	 * @param wapThemeId the wap theme id of this layout
 	 */
 	public void setWapThemeId(String wapThemeId);
 
 	/**
-	 * Gets the wap color scheme id of this  layout.
+	 * Gets the wap color scheme id of this layout.
 	 *
-	 * @return the wap color scheme id of this  layout
+	 * @return the wap color scheme id of this layout
 	 */
 	@AutoEscape
 	public String getWapColorSchemeId();
 
 	/**
-	 * Sets the wap color scheme id of this  layout.
+	 * Sets the wap color scheme id of this layout.
 	 *
-	 * @param wapColorSchemeId the wap color scheme id of this  layout
+	 * @param wapColorSchemeId the wap color scheme id of this layout
 	 */
 	public void setWapColorSchemeId(String wapColorSchemeId);
 
 	/**
-	 * Gets the css of this  layout.
+	 * Gets the css of this layout.
 	 *
-	 * @return the css of this  layout
+	 * @return the css of this layout
 	 */
 	@AutoEscape
 	public String getCss();
 
 	/**
-	 * Sets the css of this  layout.
+	 * Sets the css of this layout.
 	 *
-	 * @param css the css of this  layout
+	 * @param css the css of this layout
 	 */
 	public void setCss(String css);
 
 	/**
-	 * Gets the priority of this  layout.
+	 * Gets the priority of this layout.
 	 *
-	 * @return the priority of this  layout
+	 * @return the priority of this layout
 	 */
 	public int getPriority();
 
 	/**
-	 * Sets the priority of this  layout.
+	 * Sets the priority of this layout.
 	 *
-	 * @param priority the priority of this  layout
+	 * @param priority the priority of this layout
 	 */
 	public void setPriority(int priority);
 
 	/**
-	 * Gets the layout prototype id of this  layout.
+	 * Gets the layout prototype id of this layout.
 	 *
-	 * @return the layout prototype id of this  layout
+	 * @return the layout prototype id of this layout
 	 */
 	public long getLayoutPrototypeId();
 
 	/**
-	 * Sets the layout prototype id of this  layout.
+	 * Sets the layout prototype id of this layout.
 	 *
-	 * @param layoutPrototypeId the layout prototype id of this  layout
+	 * @param layoutPrototypeId the layout prototype id of this layout
 	 */
 	public void setLayoutPrototypeId(long layoutPrototypeId);
 
 	/**
-	 * Gets the dl folder id of this  layout.
+	 * Gets the dl folder id of this layout.
 	 *
-	 * @return the dl folder id of this  layout
+	 * @return the dl folder id of this layout
 	 */
 	public long getDlFolderId();
 
 	/**
-	 * Sets the dl folder id of this  layout.
+	 * Sets the dl folder id of this layout.
 	 *
-	 * @param dlFolderId the dl folder id of this  layout
+	 * @param dlFolderId the dl folder id of this layout
 	 */
 	public void setDlFolderId(long dlFolderId);
 
 	/**
-	 * Gets a copy of this  layout as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this layout as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

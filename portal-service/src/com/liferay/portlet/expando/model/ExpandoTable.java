@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.expando.model;
 
-
 /**
  * <p>
  * This interface is a model that represents the ExpandoTable table in the

@@ -32,7 +32,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  membership request model instance should use the {@link MembershipRequest} interface instead.
+ * Never reference this interface directly. All methods that expect a membership request model instance should use the {@link MembershipRequest} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -43,193 +43,193 @@ import java.util.Date;
  */
 public interface MembershipRequestModel extends BaseModel<MembershipRequest> {
 	/**
-	 * Gets the primary key of this  membership request.
+	 * Gets the primary key of this membership request.
 	 *
-	 * @return the primary key of this  membership request
+	 * @return the primary key of this membership request
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  membership request
+	 * Sets the primary key of this membership request
 	 *
-	 * @param pk the primary key of this  membership request
+	 * @param pk the primary key of this membership request
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the membership request id of this  membership request.
+	 * Gets the membership request id of this membership request.
 	 *
-	 * @return the membership request id of this  membership request
+	 * @return the membership request id of this membership request
 	 */
 	public long getMembershipRequestId();
 
 	/**
-	 * Sets the membership request id of this  membership request.
+	 * Sets the membership request id of this membership request.
 	 *
-	 * @param membershipRequestId the membership request id of this  membership request
+	 * @param membershipRequestId the membership request id of this membership request
 	 */
 	public void setMembershipRequestId(long membershipRequestId);
 
 	/**
-	 * Gets the company id of this  membership request.
+	 * Gets the company id of this membership request.
 	 *
-	 * @return the company id of this  membership request
+	 * @return the company id of this membership request
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  membership request.
+	 * Sets the company id of this membership request.
 	 *
-	 * @param companyId the company id of this  membership request
+	 * @param companyId the company id of this membership request
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  membership request.
+	 * Gets the user id of this membership request.
 	 *
-	 * @return the user id of this  membership request
+	 * @return the user id of this membership request
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  membership request.
+	 * Sets the user id of this membership request.
 	 *
-	 * @param userId the user id of this  membership request
+	 * @param userId the user id of this membership request
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  membership request.
+	 * Gets the user uuid of this membership request.
 	 *
-	 * @return the user uuid of this  membership request
+	 * @return the user uuid of this membership request
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  membership request.
+	 * Sets the user uuid of this membership request.
 	 *
-	 * @param userUuid the user uuid of this  membership request
+	 * @param userUuid the user uuid of this membership request
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the create date of this  membership request.
+	 * Gets the create date of this membership request.
 	 *
-	 * @return the create date of this  membership request
+	 * @return the create date of this membership request
 	 */
 	public Date getCreateDate();
 
 	/**
-	 * Sets the create date of this  membership request.
+	 * Sets the create date of this membership request.
 	 *
-	 * @param createDate the create date of this  membership request
+	 * @param createDate the create date of this membership request
 	 */
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the group id of this  membership request.
+	 * Gets the group id of this membership request.
 	 *
-	 * @return the group id of this  membership request
+	 * @return the group id of this membership request
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  membership request.
+	 * Sets the group id of this membership request.
 	 *
-	 * @param groupId the group id of this  membership request
+	 * @param groupId the group id of this membership request
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the comments of this  membership request.
+	 * Gets the comments of this membership request.
 	 *
-	 * @return the comments of this  membership request
+	 * @return the comments of this membership request
 	 */
 	@AutoEscape
 	public String getComments();
 
 	/**
-	 * Sets the comments of this  membership request.
+	 * Sets the comments of this membership request.
 	 *
-	 * @param comments the comments of this  membership request
+	 * @param comments the comments of this membership request
 	 */
 	public void setComments(String comments);
 
 	/**
-	 * Gets the reply comments of this  membership request.
+	 * Gets the reply comments of this membership request.
 	 *
-	 * @return the reply comments of this  membership request
+	 * @return the reply comments of this membership request
 	 */
 	@AutoEscape
 	public String getReplyComments();
 
 	/**
-	 * Sets the reply comments of this  membership request.
+	 * Sets the reply comments of this membership request.
 	 *
-	 * @param replyComments the reply comments of this  membership request
+	 * @param replyComments the reply comments of this membership request
 	 */
 	public void setReplyComments(String replyComments);
 
 	/**
-	 * Gets the reply date of this  membership request.
+	 * Gets the reply date of this membership request.
 	 *
-	 * @return the reply date of this  membership request
+	 * @return the reply date of this membership request
 	 */
 	public Date getReplyDate();
 
 	/**
-	 * Sets the reply date of this  membership request.
+	 * Sets the reply date of this membership request.
 	 *
-	 * @param replyDate the reply date of this  membership request
+	 * @param replyDate the reply date of this membership request
 	 */
 	public void setReplyDate(Date replyDate);
 
 	/**
-	 * Gets the replier user id of this  membership request.
+	 * Gets the replier user id of this membership request.
 	 *
-	 * @return the replier user id of this  membership request
+	 * @return the replier user id of this membership request
 	 */
 	public long getReplierUserId();
 
 	/**
-	 * Sets the replier user id of this  membership request.
+	 * Sets the replier user id of this membership request.
 	 *
-	 * @param replierUserId the replier user id of this  membership request
+	 * @param replierUserId the replier user id of this membership request
 	 */
 	public void setReplierUserId(long replierUserId);
 
 	/**
-	 * Gets the replier user uuid of this  membership request.
+	 * Gets the replier user uuid of this membership request.
 	 *
-	 * @return the replier user uuid of this  membership request
+	 * @return the replier user uuid of this membership request
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getReplierUserUuid() throws SystemException;
 
 	/**
-	 * Sets the replier user uuid of this  membership request.
+	 * Sets the replier user uuid of this membership request.
 	 *
-	 * @param replierUserUuid the replier user uuid of this  membership request
+	 * @param replierUserUuid the replier user uuid of this membership request
 	 */
 	public void setReplierUserUuid(String replierUserUuid);
 
 	/**
-	 * Gets the status id of this  membership request.
+	 * Gets the status id of this membership request.
 	 *
-	 * @return the status id of this  membership request
+	 * @return the status id of this membership request
 	 */
 	public int getStatusId();
 
 	/**
-	 * Sets the status id of this  membership request.
+	 * Sets the status id of this membership request.
 	 *
-	 * @param statusId the status id of this  membership request
+	 * @param statusId the status id of this membership request
 	 */
 	public void setStatusId(int statusId);
 
 	/**
-	 * Gets a copy of this  membership request as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this membership request as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

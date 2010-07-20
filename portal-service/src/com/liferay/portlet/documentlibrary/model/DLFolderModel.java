@@ -33,7 +33,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  d l folder model instance should use the {@link DLFolder} interface instead.
+ * Never reference this interface directly. All methods that expect a d l folder model instance should use the {@link DLFolder} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -44,208 +44,208 @@ import java.util.Date;
  */
 public interface DLFolderModel extends BaseModel<DLFolder> {
 	/**
-	 * Gets the primary key of this  d l folder.
+	 * Gets the primary key of this d l folder.
 	 *
-	 * @return the primary key of this  d l folder
+	 * @return the primary key of this d l folder
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  d l folder
+	 * Sets the primary key of this d l folder
 	 *
-	 * @param pk the primary key of this  d l folder
+	 * @param pk the primary key of this d l folder
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the uuid of this  d l folder.
+	 * Gets the uuid of this d l folder.
 	 *
-	 * @return the uuid of this  d l folder
+	 * @return the uuid of this d l folder
 	 */
 	@AutoEscape
 	public String getUuid();
 
 	/**
-	 * Sets the uuid of this  d l folder.
+	 * Sets the uuid of this d l folder.
 	 *
-	 * @param uuid the uuid of this  d l folder
+	 * @param uuid the uuid of this d l folder
 	 */
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the folder id of this  d l folder.
+	 * Gets the folder id of this d l folder.
 	 *
-	 * @return the folder id of this  d l folder
+	 * @return the folder id of this d l folder
 	 */
 	public long getFolderId();
 
 	/**
-	 * Sets the folder id of this  d l folder.
+	 * Sets the folder id of this d l folder.
 	 *
-	 * @param folderId the folder id of this  d l folder
+	 * @param folderId the folder id of this d l folder
 	 */
 	public void setFolderId(long folderId);
 
 	/**
-	 * Gets the group id of this  d l folder.
+	 * Gets the group id of this d l folder.
 	 *
-	 * @return the group id of this  d l folder
+	 * @return the group id of this d l folder
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  d l folder.
+	 * Sets the group id of this d l folder.
 	 *
-	 * @param groupId the group id of this  d l folder
+	 * @param groupId the group id of this d l folder
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this  d l folder.
+	 * Gets the company id of this d l folder.
 	 *
-	 * @return the company id of this  d l folder
+	 * @return the company id of this d l folder
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  d l folder.
+	 * Sets the company id of this d l folder.
 	 *
-	 * @param companyId the company id of this  d l folder
+	 * @param companyId the company id of this d l folder
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  d l folder.
+	 * Gets the user id of this d l folder.
 	 *
-	 * @return the user id of this  d l folder
+	 * @return the user id of this d l folder
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  d l folder.
+	 * Sets the user id of this d l folder.
 	 *
-	 * @param userId the user id of this  d l folder
+	 * @param userId the user id of this d l folder
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  d l folder.
+	 * Gets the user uuid of this d l folder.
 	 *
-	 * @return the user uuid of this  d l folder
+	 * @return the user uuid of this d l folder
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  d l folder.
+	 * Sets the user uuid of this d l folder.
 	 *
-	 * @param userUuid the user uuid of this  d l folder
+	 * @param userUuid the user uuid of this d l folder
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this  d l folder.
+	 * Gets the user name of this d l folder.
 	 *
-	 * @return the user name of this  d l folder
+	 * @return the user name of this d l folder
 	 */
 	@AutoEscape
 	public String getUserName();
 
 	/**
-	 * Sets the user name of this  d l folder.
+	 * Sets the user name of this d l folder.
 	 *
-	 * @param userName the user name of this  d l folder
+	 * @param userName the user name of this d l folder
 	 */
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this  d l folder.
+	 * Gets the create date of this d l folder.
 	 *
-	 * @return the create date of this  d l folder
+	 * @return the create date of this d l folder
 	 */
 	public Date getCreateDate();
 
 	/**
-	 * Sets the create date of this  d l folder.
+	 * Sets the create date of this d l folder.
 	 *
-	 * @param createDate the create date of this  d l folder
+	 * @param createDate the create date of this d l folder
 	 */
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this  d l folder.
+	 * Gets the modified date of this d l folder.
 	 *
-	 * @return the modified date of this  d l folder
+	 * @return the modified date of this d l folder
 	 */
 	public Date getModifiedDate();
 
 	/**
-	 * Sets the modified date of this  d l folder.
+	 * Sets the modified date of this d l folder.
 	 *
-	 * @param modifiedDate the modified date of this  d l folder
+	 * @param modifiedDate the modified date of this d l folder
 	 */
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the parent folder id of this  d l folder.
+	 * Gets the parent folder id of this d l folder.
 	 *
-	 * @return the parent folder id of this  d l folder
+	 * @return the parent folder id of this d l folder
 	 */
 	public long getParentFolderId();
 
 	/**
-	 * Sets the parent folder id of this  d l folder.
+	 * Sets the parent folder id of this d l folder.
 	 *
-	 * @param parentFolderId the parent folder id of this  d l folder
+	 * @param parentFolderId the parent folder id of this d l folder
 	 */
 	public void setParentFolderId(long parentFolderId);
 
 	/**
-	 * Gets the name of this  d l folder.
+	 * Gets the name of this d l folder.
 	 *
-	 * @return the name of this  d l folder
+	 * @return the name of this d l folder
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  d l folder.
+	 * Sets the name of this d l folder.
 	 *
-	 * @param name the name of this  d l folder
+	 * @param name the name of this d l folder
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this  d l folder.
+	 * Gets the description of this d l folder.
 	 *
-	 * @return the description of this  d l folder
+	 * @return the description of this d l folder
 	 */
 	@AutoEscape
 	public String getDescription();
 
 	/**
-	 * Sets the description of this  d l folder.
+	 * Sets the description of this d l folder.
 	 *
-	 * @param description the description of this  d l folder
+	 * @param description the description of this d l folder
 	 */
 	public void setDescription(String description);
 
 	/**
-	 * Gets the last post date of this  d l folder.
+	 * Gets the last post date of this d l folder.
 	 *
-	 * @return the last post date of this  d l folder
+	 * @return the last post date of this d l folder
 	 */
 	public Date getLastPostDate();
 
 	/**
-	 * Sets the last post date of this  d l folder.
+	 * Sets the last post date of this d l folder.
 	 *
-	 * @param lastPostDate the last post date of this  d l folder
+	 * @param lastPostDate the last post date of this d l folder
 	 */
 	public void setLastPostDate(Date lastPostDate);
 
 	/**
-	 * Gets a copy of this  d l folder as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this d l folder as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

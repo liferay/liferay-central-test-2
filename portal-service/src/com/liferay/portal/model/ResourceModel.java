@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  resource model instance should use the {@link Resource} interface instead.
+ * Never reference this interface directly. All methods that expect a resource model instance should use the {@link Resource} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,64 +40,64 @@ import java.io.Serializable;
  */
 public interface ResourceModel extends BaseModel<Resource> {
 	/**
-	 * Gets the primary key of this  resource.
+	 * Gets the primary key of this resource.
 	 *
-	 * @return the primary key of this  resource
+	 * @return the primary key of this resource
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  resource
+	 * Sets the primary key of this resource
 	 *
-	 * @param pk the primary key of this  resource
+	 * @param pk the primary key of this resource
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the resource id of this  resource.
+	 * Gets the resource id of this resource.
 	 *
-	 * @return the resource id of this  resource
+	 * @return the resource id of this resource
 	 */
 	public long getResourceId();
 
 	/**
-	 * Sets the resource id of this  resource.
+	 * Sets the resource id of this resource.
 	 *
-	 * @param resourceId the resource id of this  resource
+	 * @param resourceId the resource id of this resource
 	 */
 	public void setResourceId(long resourceId);
 
 	/**
-	 * Gets the code id of this  resource.
+	 * Gets the code id of this resource.
 	 *
-	 * @return the code id of this  resource
+	 * @return the code id of this resource
 	 */
 	public long getCodeId();
 
 	/**
-	 * Sets the code id of this  resource.
+	 * Sets the code id of this resource.
 	 *
-	 * @param codeId the code id of this  resource
+	 * @param codeId the code id of this resource
 	 */
 	public void setCodeId(long codeId);
 
 	/**
-	 * Gets the prim key of this  resource.
+	 * Gets the prim key of this resource.
 	 *
-	 * @return the prim key of this  resource
+	 * @return the prim key of this resource
 	 */
 	@AutoEscape
 	public String getPrimKey();
 
 	/**
-	 * Sets the prim key of this  resource.
+	 * Sets the prim key of this resource.
 	 *
-	 * @param primKey the prim key of this  resource
+	 * @param primKey the prim key of this resource
 	 */
 	public void setPrimKey(String primKey);
 
 	/**
-	 * Gets a copy of this  resource as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this resource as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

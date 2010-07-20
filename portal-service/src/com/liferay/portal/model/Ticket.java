@@ -14,7 +14,6 @@
 
 package com.liferay.portal.model;
 
-
 /**
  * <p>
  * This interface is a model that represents the Ticket table in the

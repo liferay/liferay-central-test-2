@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.asset.model;
 
-
 /**
  * <p>
  * This interface is a model that represents the AssetCategoryProperty table in the

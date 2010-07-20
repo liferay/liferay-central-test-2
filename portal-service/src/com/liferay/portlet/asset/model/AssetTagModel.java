@@ -33,7 +33,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  asset tag model instance should use the {@link AssetTag} interface instead.
+ * Never reference this interface directly. All methods that expect a asset tag model instance should use the {@link AssetTag} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -44,164 +44,164 @@ import java.util.Date;
  */
 public interface AssetTagModel extends BaseModel<AssetTag> {
 	/**
-	 * Gets the primary key of this  asset tag.
+	 * Gets the primary key of this asset tag.
 	 *
-	 * @return the primary key of this  asset tag
+	 * @return the primary key of this asset tag
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  asset tag
+	 * Sets the primary key of this asset tag
 	 *
-	 * @param pk the primary key of this  asset tag
+	 * @param pk the primary key of this asset tag
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the tag id of this  asset tag.
+	 * Gets the tag id of this asset tag.
 	 *
-	 * @return the tag id of this  asset tag
+	 * @return the tag id of this asset tag
 	 */
 	public long getTagId();
 
 	/**
-	 * Sets the tag id of this  asset tag.
+	 * Sets the tag id of this asset tag.
 	 *
-	 * @param tagId the tag id of this  asset tag
+	 * @param tagId the tag id of this asset tag
 	 */
 	public void setTagId(long tagId);
 
 	/**
-	 * Gets the group id of this  asset tag.
+	 * Gets the group id of this asset tag.
 	 *
-	 * @return the group id of this  asset tag
+	 * @return the group id of this asset tag
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  asset tag.
+	 * Sets the group id of this asset tag.
 	 *
-	 * @param groupId the group id of this  asset tag
+	 * @param groupId the group id of this asset tag
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this  asset tag.
+	 * Gets the company id of this asset tag.
 	 *
-	 * @return the company id of this  asset tag
+	 * @return the company id of this asset tag
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  asset tag.
+	 * Sets the company id of this asset tag.
 	 *
-	 * @param companyId the company id of this  asset tag
+	 * @param companyId the company id of this asset tag
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  asset tag.
+	 * Gets the user id of this asset tag.
 	 *
-	 * @return the user id of this  asset tag
+	 * @return the user id of this asset tag
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  asset tag.
+	 * Sets the user id of this asset tag.
 	 *
-	 * @param userId the user id of this  asset tag
+	 * @param userId the user id of this asset tag
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  asset tag.
+	 * Gets the user uuid of this asset tag.
 	 *
-	 * @return the user uuid of this  asset tag
+	 * @return the user uuid of this asset tag
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  asset tag.
+	 * Sets the user uuid of this asset tag.
 	 *
-	 * @param userUuid the user uuid of this  asset tag
+	 * @param userUuid the user uuid of this asset tag
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this  asset tag.
+	 * Gets the user name of this asset tag.
 	 *
-	 * @return the user name of this  asset tag
+	 * @return the user name of this asset tag
 	 */
 	@AutoEscape
 	public String getUserName();
 
 	/**
-	 * Sets the user name of this  asset tag.
+	 * Sets the user name of this asset tag.
 	 *
-	 * @param userName the user name of this  asset tag
+	 * @param userName the user name of this asset tag
 	 */
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this  asset tag.
+	 * Gets the create date of this asset tag.
 	 *
-	 * @return the create date of this  asset tag
+	 * @return the create date of this asset tag
 	 */
 	public Date getCreateDate();
 
 	/**
-	 * Sets the create date of this  asset tag.
+	 * Sets the create date of this asset tag.
 	 *
-	 * @param createDate the create date of this  asset tag
+	 * @param createDate the create date of this asset tag
 	 */
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this  asset tag.
+	 * Gets the modified date of this asset tag.
 	 *
-	 * @return the modified date of this  asset tag
+	 * @return the modified date of this asset tag
 	 */
 	public Date getModifiedDate();
 
 	/**
-	 * Sets the modified date of this  asset tag.
+	 * Sets the modified date of this asset tag.
 	 *
-	 * @param modifiedDate the modified date of this  asset tag
+	 * @param modifiedDate the modified date of this asset tag
 	 */
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the name of this  asset tag.
+	 * Gets the name of this asset tag.
 	 *
-	 * @return the name of this  asset tag
+	 * @return the name of this asset tag
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  asset tag.
+	 * Sets the name of this asset tag.
 	 *
-	 * @param name the name of this  asset tag
+	 * @param name the name of this asset tag
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets the asset count of this  asset tag.
+	 * Gets the asset count of this asset tag.
 	 *
-	 * @return the asset count of this  asset tag
+	 * @return the asset count of this asset tag
 	 */
 	public int getAssetCount();
 
 	/**
-	 * Sets the asset count of this  asset tag.
+	 * Sets the asset count of this asset tag.
 	 *
-	 * @param assetCount the asset count of this  asset tag
+	 * @param assetCount the asset count of this asset tag
 	 */
 	public void setAssetCount(int assetCount);
 
 	/**
-	 * Gets a copy of this  asset tag as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this asset tag as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

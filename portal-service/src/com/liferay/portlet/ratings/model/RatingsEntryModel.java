@@ -33,7 +33,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  ratings entry model instance should use the {@link RatingsEntry} interface instead.
+ * Never reference this interface directly. All methods that expect a ratings entry model instance should use the {@link RatingsEntry} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -44,170 +44,170 @@ import java.util.Date;
  */
 public interface RatingsEntryModel extends BaseModel<RatingsEntry> {
 	/**
-	 * Gets the primary key of this  ratings entry.
+	 * Gets the primary key of this ratings entry.
 	 *
-	 * @return the primary key of this  ratings entry
+	 * @return the primary key of this ratings entry
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  ratings entry
+	 * Sets the primary key of this ratings entry
 	 *
-	 * @param pk the primary key of this  ratings entry
+	 * @param pk the primary key of this ratings entry
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the entry id of this  ratings entry.
+	 * Gets the entry id of this ratings entry.
 	 *
-	 * @return the entry id of this  ratings entry
+	 * @return the entry id of this ratings entry
 	 */
 	public long getEntryId();
 
 	/**
-	 * Sets the entry id of this  ratings entry.
+	 * Sets the entry id of this ratings entry.
 	 *
-	 * @param entryId the entry id of this  ratings entry
+	 * @param entryId the entry id of this ratings entry
 	 */
 	public void setEntryId(long entryId);
 
 	/**
-	 * Gets the company id of this  ratings entry.
+	 * Gets the company id of this ratings entry.
 	 *
-	 * @return the company id of this  ratings entry
+	 * @return the company id of this ratings entry
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  ratings entry.
+	 * Sets the company id of this ratings entry.
 	 *
-	 * @param companyId the company id of this  ratings entry
+	 * @param companyId the company id of this ratings entry
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  ratings entry.
+	 * Gets the user id of this ratings entry.
 	 *
-	 * @return the user id of this  ratings entry
+	 * @return the user id of this ratings entry
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  ratings entry.
+	 * Sets the user id of this ratings entry.
 	 *
-	 * @param userId the user id of this  ratings entry
+	 * @param userId the user id of this ratings entry
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  ratings entry.
+	 * Gets the user uuid of this ratings entry.
 	 *
-	 * @return the user uuid of this  ratings entry
+	 * @return the user uuid of this ratings entry
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  ratings entry.
+	 * Sets the user uuid of this ratings entry.
 	 *
-	 * @param userUuid the user uuid of this  ratings entry
+	 * @param userUuid the user uuid of this ratings entry
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this  ratings entry.
+	 * Gets the user name of this ratings entry.
 	 *
-	 * @return the user name of this  ratings entry
+	 * @return the user name of this ratings entry
 	 */
 	@AutoEscape
 	public String getUserName();
 
 	/**
-	 * Sets the user name of this  ratings entry.
+	 * Sets the user name of this ratings entry.
 	 *
-	 * @param userName the user name of this  ratings entry
+	 * @param userName the user name of this ratings entry
 	 */
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this  ratings entry.
+	 * Gets the create date of this ratings entry.
 	 *
-	 * @return the create date of this  ratings entry
+	 * @return the create date of this ratings entry
 	 */
 	public Date getCreateDate();
 
 	/**
-	 * Sets the create date of this  ratings entry.
+	 * Sets the create date of this ratings entry.
 	 *
-	 * @param createDate the create date of this  ratings entry
+	 * @param createDate the create date of this ratings entry
 	 */
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this  ratings entry.
+	 * Gets the modified date of this ratings entry.
 	 *
-	 * @return the modified date of this  ratings entry
+	 * @return the modified date of this ratings entry
 	 */
 	public Date getModifiedDate();
 
 	/**
-	 * Sets the modified date of this  ratings entry.
+	 * Sets the modified date of this ratings entry.
 	 *
-	 * @param modifiedDate the modified date of this  ratings entry
+	 * @param modifiedDate the modified date of this ratings entry
 	 */
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the class name of the model instance this  ratings entry is associated with.
+	 * Gets the class name of the model instance this ratings entry is associated with.
 	 *
-	 * @return the class name of the model instance this  ratings entry is associated with
+	 * @return the class name of the model instance this ratings entry is associated with
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this  ratings entry.
+	 * Gets the class name id of this ratings entry.
 	 *
-	 * @return the class name id of this  ratings entry
+	 * @return the class name id of this ratings entry
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this  ratings entry.
+	 * Sets the class name id of this ratings entry.
 	 *
-	 * @param classNameId the class name id of this  ratings entry
+	 * @param classNameId the class name id of this ratings entry
 	 */
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this  ratings entry.
+	 * Gets the class p k of this ratings entry.
 	 *
-	 * @return the class p k of this  ratings entry
+	 * @return the class p k of this ratings entry
 	 */
 	public long getClassPK();
 
 	/**
-	 * Sets the class p k of this  ratings entry.
+	 * Sets the class p k of this ratings entry.
 	 *
-	 * @param classPK the class p k of this  ratings entry
+	 * @param classPK the class p k of this ratings entry
 	 */
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the score of this  ratings entry.
+	 * Gets the score of this ratings entry.
 	 *
-	 * @return the score of this  ratings entry
+	 * @return the score of this ratings entry
 	 */
 	public double getScore();
 
 	/**
-	 * Sets the score of this  ratings entry.
+	 * Sets the score of this ratings entry.
 	 *
-	 * @param score the score of this  ratings entry
+	 * @param score the score of this ratings entry
 	 */
 	public void setScore(double score);
 
 	/**
-	 * Gets a copy of this  ratings entry as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this ratings entry as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

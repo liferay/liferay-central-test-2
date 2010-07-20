@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  resource permission model instance should use the {@link ResourcePermission} interface instead.
+ * Never reference this interface directly. All methods that expect a resource permission model instance should use the {@link ResourcePermission} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,121 +40,121 @@ import java.io.Serializable;
  */
 public interface ResourcePermissionModel extends BaseModel<ResourcePermission> {
 	/**
-	 * Gets the primary key of this  resource permission.
+	 * Gets the primary key of this resource permission.
 	 *
-	 * @return the primary key of this  resource permission
+	 * @return the primary key of this resource permission
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  resource permission
+	 * Sets the primary key of this resource permission
 	 *
-	 * @param pk the primary key of this  resource permission
+	 * @param pk the primary key of this resource permission
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the resource permission id of this  resource permission.
+	 * Gets the resource permission id of this resource permission.
 	 *
-	 * @return the resource permission id of this  resource permission
+	 * @return the resource permission id of this resource permission
 	 */
 	public long getResourcePermissionId();
 
 	/**
-	 * Sets the resource permission id of this  resource permission.
+	 * Sets the resource permission id of this resource permission.
 	 *
-	 * @param resourcePermissionId the resource permission id of this  resource permission
+	 * @param resourcePermissionId the resource permission id of this resource permission
 	 */
 	public void setResourcePermissionId(long resourcePermissionId);
 
 	/**
-	 * Gets the company id of this  resource permission.
+	 * Gets the company id of this resource permission.
 	 *
-	 * @return the company id of this  resource permission
+	 * @return the company id of this resource permission
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  resource permission.
+	 * Sets the company id of this resource permission.
 	 *
-	 * @param companyId the company id of this  resource permission
+	 * @param companyId the company id of this resource permission
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the name of this  resource permission.
+	 * Gets the name of this resource permission.
 	 *
-	 * @return the name of this  resource permission
+	 * @return the name of this resource permission
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  resource permission.
+	 * Sets the name of this resource permission.
 	 *
-	 * @param name the name of this  resource permission
+	 * @param name the name of this resource permission
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets the scope of this  resource permission.
+	 * Gets the scope of this resource permission.
 	 *
-	 * @return the scope of this  resource permission
+	 * @return the scope of this resource permission
 	 */
 	public int getScope();
 
 	/**
-	 * Sets the scope of this  resource permission.
+	 * Sets the scope of this resource permission.
 	 *
-	 * @param scope the scope of this  resource permission
+	 * @param scope the scope of this resource permission
 	 */
 	public void setScope(int scope);
 
 	/**
-	 * Gets the prim key of this  resource permission.
+	 * Gets the prim key of this resource permission.
 	 *
-	 * @return the prim key of this  resource permission
+	 * @return the prim key of this resource permission
 	 */
 	@AutoEscape
 	public String getPrimKey();
 
 	/**
-	 * Sets the prim key of this  resource permission.
+	 * Sets the prim key of this resource permission.
 	 *
-	 * @param primKey the prim key of this  resource permission
+	 * @param primKey the prim key of this resource permission
 	 */
 	public void setPrimKey(String primKey);
 
 	/**
-	 * Gets the role id of this  resource permission.
+	 * Gets the role id of this resource permission.
 	 *
-	 * @return the role id of this  resource permission
+	 * @return the role id of this resource permission
 	 */
 	public long getRoleId();
 
 	/**
-	 * Sets the role id of this  resource permission.
+	 * Sets the role id of this resource permission.
 	 *
-	 * @param roleId the role id of this  resource permission
+	 * @param roleId the role id of this resource permission
 	 */
 	public void setRoleId(long roleId);
 
 	/**
-	 * Gets the action ids of this  resource permission.
+	 * Gets the action ids of this resource permission.
 	 *
-	 * @return the action ids of this  resource permission
+	 * @return the action ids of this resource permission
 	 */
 	public long getActionIds();
 
 	/**
-	 * Sets the action ids of this  resource permission.
+	 * Sets the action ids of this resource permission.
 	 *
-	 * @param actionIds the action ids of this  resource permission
+	 * @param actionIds the action ids of this resource permission
 	 */
 	public void setActionIds(long actionIds);
 
 	/**
-	 * Gets a copy of this  resource permission as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this resource permission as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

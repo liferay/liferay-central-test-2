@@ -30,7 +30,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  social equity asset entry model instance should use the {@link SocialEquityAssetEntry} interface instead.
+ * Never reference this interface directly. All methods that expect a social equity asset entry model instance should use the {@link SocialEquityAssetEntry} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -41,134 +41,134 @@ import java.io.Serializable;
  */
 public interface SocialEquityAssetEntryModel extends BaseModel<SocialEquityAssetEntry> {
 	/**
-	 * Gets the primary key of this  social equity asset entry.
+	 * Gets the primary key of this social equity asset entry.
 	 *
-	 * @return the primary key of this  social equity asset entry
+	 * @return the primary key of this social equity asset entry
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  social equity asset entry
+	 * Sets the primary key of this social equity asset entry
 	 *
-	 * @param pk the primary key of this  social equity asset entry
+	 * @param pk the primary key of this social equity asset entry
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the equity asset entry id of this  social equity asset entry.
+	 * Gets the equity asset entry id of this social equity asset entry.
 	 *
-	 * @return the equity asset entry id of this  social equity asset entry
+	 * @return the equity asset entry id of this social equity asset entry
 	 */
 	public long getEquityAssetEntryId();
 
 	/**
-	 * Sets the equity asset entry id of this  social equity asset entry.
+	 * Sets the equity asset entry id of this social equity asset entry.
 	 *
-	 * @param equityAssetEntryId the equity asset entry id of this  social equity asset entry
+	 * @param equityAssetEntryId the equity asset entry id of this social equity asset entry
 	 */
 	public void setEquityAssetEntryId(long equityAssetEntryId);
 
 	/**
-	 * Gets the group id of this  social equity asset entry.
+	 * Gets the group id of this social equity asset entry.
 	 *
-	 * @return the group id of this  social equity asset entry
+	 * @return the group id of this social equity asset entry
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  social equity asset entry.
+	 * Sets the group id of this social equity asset entry.
 	 *
-	 * @param groupId the group id of this  social equity asset entry
+	 * @param groupId the group id of this social equity asset entry
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this  social equity asset entry.
+	 * Gets the company id of this social equity asset entry.
 	 *
-	 * @return the company id of this  social equity asset entry
+	 * @return the company id of this social equity asset entry
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  social equity asset entry.
+	 * Sets the company id of this social equity asset entry.
 	 *
-	 * @param companyId the company id of this  social equity asset entry
+	 * @param companyId the company id of this social equity asset entry
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  social equity asset entry.
+	 * Gets the user id of this social equity asset entry.
 	 *
-	 * @return the user id of this  social equity asset entry
+	 * @return the user id of this social equity asset entry
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  social equity asset entry.
+	 * Sets the user id of this social equity asset entry.
 	 *
-	 * @param userId the user id of this  social equity asset entry
+	 * @param userId the user id of this social equity asset entry
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  social equity asset entry.
+	 * Gets the user uuid of this social equity asset entry.
 	 *
-	 * @return the user uuid of this  social equity asset entry
+	 * @return the user uuid of this social equity asset entry
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  social equity asset entry.
+	 * Sets the user uuid of this social equity asset entry.
 	 *
-	 * @param userUuid the user uuid of this  social equity asset entry
+	 * @param userUuid the user uuid of this social equity asset entry
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the asset entry id of this  social equity asset entry.
+	 * Gets the asset entry id of this social equity asset entry.
 	 *
-	 * @return the asset entry id of this  social equity asset entry
+	 * @return the asset entry id of this social equity asset entry
 	 */
 	public long getAssetEntryId();
 
 	/**
-	 * Sets the asset entry id of this  social equity asset entry.
+	 * Sets the asset entry id of this social equity asset entry.
 	 *
-	 * @param assetEntryId the asset entry id of this  social equity asset entry
+	 * @param assetEntryId the asset entry id of this social equity asset entry
 	 */
 	public void setAssetEntryId(long assetEntryId);
 
 	/**
-	 * Gets the information k of this  social equity asset entry.
+	 * Gets the information k of this social equity asset entry.
 	 *
-	 * @return the information k of this  social equity asset entry
+	 * @return the information k of this social equity asset entry
 	 */
 	public double getInformationK();
 
 	/**
-	 * Sets the information k of this  social equity asset entry.
+	 * Sets the information k of this social equity asset entry.
 	 *
-	 * @param informationK the information k of this  social equity asset entry
+	 * @param informationK the information k of this social equity asset entry
 	 */
 	public void setInformationK(double informationK);
 
 	/**
-	 * Gets the information b of this  social equity asset entry.
+	 * Gets the information b of this social equity asset entry.
 	 *
-	 * @return the information b of this  social equity asset entry
+	 * @return the information b of this social equity asset entry
 	 */
 	public double getInformationB();
 
 	/**
-	 * Sets the information b of this  social equity asset entry.
+	 * Sets the information b of this social equity asset entry.
 	 *
-	 * @param informationB the information b of this  social equity asset entry
+	 * @param informationB the information b of this social equity asset entry
 	 */
 	public void setInformationB(double informationB);
 
 	/**
-	 * Gets a copy of this  social equity asset entry as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this social equity asset entry as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

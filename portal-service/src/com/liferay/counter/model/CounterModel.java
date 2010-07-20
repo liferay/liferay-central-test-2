@@ -30,7 +30,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  counter model instance should use the {@link Counter} interface instead.
+ * Never reference this interface directly. All methods that expect a counter model instance should use the {@link Counter} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -41,50 +41,50 @@ import java.io.Serializable;
  */
 public interface CounterModel extends BaseModel<Counter> {
 	/**
-	 * Gets the primary key of this  counter.
+	 * Gets the primary key of this counter.
 	 *
-	 * @return the primary key of this  counter
+	 * @return the primary key of this counter
 	 */
 	public String getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  counter
+	 * Sets the primary key of this counter
 	 *
-	 * @param pk the primary key of this  counter
+	 * @param pk the primary key of this counter
 	 */
 	public void setPrimaryKey(String pk);
 
 	/**
-	 * Gets the name of this  counter.
+	 * Gets the name of this counter.
 	 *
-	 * @return the name of this  counter
+	 * @return the name of this counter
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  counter.
+	 * Sets the name of this counter.
 	 *
-	 * @param name the name of this  counter
+	 * @param name the name of this counter
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets the current id of this  counter.
+	 * Gets the current id of this counter.
 	 *
-	 * @return the current id of this  counter
+	 * @return the current id of this counter
 	 */
 	public long getCurrentId();
 
 	/**
-	 * Sets the current id of this  counter.
+	 * Sets the current id of this counter.
 	 *
-	 * @param currentId the current id of this  counter
+	 * @param currentId the current id of this counter
 	 */
 	public void setCurrentId(long currentId);
 
 	/**
-	 * Gets a copy of this  counter as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this counter as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

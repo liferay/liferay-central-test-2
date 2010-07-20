@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.polls.model;
 
-
 /**
  * <p>
  * This interface is a model that represents the PollsVote table in the

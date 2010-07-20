@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.blogs.service;
 
-
 /**
  * <p>
  * This class is a wrapper for {@link BlogsEntryLocalService}.

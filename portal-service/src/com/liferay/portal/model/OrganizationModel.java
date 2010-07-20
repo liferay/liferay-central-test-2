@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  organization model instance should use the {@link Organization} interface instead.
+ * Never reference this interface directly. All methods that expect a organization model instance should use the {@link Organization} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,198 +40,198 @@ import java.io.Serializable;
  */
 public interface OrganizationModel extends BaseModel<Organization> {
 	/**
-	 * Gets the primary key of this  organization.
+	 * Gets the primary key of this organization.
 	 *
-	 * @return the primary key of this  organization
+	 * @return the primary key of this organization
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  organization
+	 * Sets the primary key of this organization
 	 *
-	 * @param pk the primary key of this  organization
+	 * @param pk the primary key of this organization
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the organization id of this  organization.
+	 * Gets the organization id of this organization.
 	 *
-	 * @return the organization id of this  organization
+	 * @return the organization id of this organization
 	 */
 	public long getOrganizationId();
 
 	/**
-	 * Sets the organization id of this  organization.
+	 * Sets the organization id of this organization.
 	 *
-	 * @param organizationId the organization id of this  organization
+	 * @param organizationId the organization id of this organization
 	 */
 	public void setOrganizationId(long organizationId);
 
 	/**
-	 * Gets the company id of this  organization.
+	 * Gets the company id of this organization.
 	 *
-	 * @return the company id of this  organization
+	 * @return the company id of this organization
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  organization.
+	 * Sets the company id of this organization.
 	 *
-	 * @param companyId the company id of this  organization
+	 * @param companyId the company id of this organization
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the parent organization id of this  organization.
+	 * Gets the parent organization id of this organization.
 	 *
-	 * @return the parent organization id of this  organization
+	 * @return the parent organization id of this organization
 	 */
 	public long getParentOrganizationId();
 
 	/**
-	 * Sets the parent organization id of this  organization.
+	 * Sets the parent organization id of this organization.
 	 *
-	 * @param parentOrganizationId the parent organization id of this  organization
+	 * @param parentOrganizationId the parent organization id of this organization
 	 */
 	public void setParentOrganizationId(long parentOrganizationId);
 
 	/**
-	 * Gets the left organization id of this  organization.
+	 * Gets the left organization id of this organization.
 	 *
-	 * @return the left organization id of this  organization
+	 * @return the left organization id of this organization
 	 */
 	public long getLeftOrganizationId();
 
 	/**
-	 * Sets the left organization id of this  organization.
+	 * Sets the left organization id of this organization.
 	 *
-	 * @param leftOrganizationId the left organization id of this  organization
+	 * @param leftOrganizationId the left organization id of this organization
 	 */
 	public void setLeftOrganizationId(long leftOrganizationId);
 
 	/**
-	 * Gets the right organization id of this  organization.
+	 * Gets the right organization id of this organization.
 	 *
-	 * @return the right organization id of this  organization
+	 * @return the right organization id of this organization
 	 */
 	public long getRightOrganizationId();
 
 	/**
-	 * Sets the right organization id of this  organization.
+	 * Sets the right organization id of this organization.
 	 *
-	 * @param rightOrganizationId the right organization id of this  organization
+	 * @param rightOrganizationId the right organization id of this organization
 	 */
 	public void setRightOrganizationId(long rightOrganizationId);
 
 	/**
-	 * Gets the name of this  organization.
+	 * Gets the name of this organization.
 	 *
-	 * @return the name of this  organization
+	 * @return the name of this organization
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  organization.
+	 * Sets the name of this organization.
 	 *
-	 * @param name the name of this  organization
+	 * @param name the name of this organization
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets the type of this  organization.
+	 * Gets the type of this organization.
 	 *
-	 * @return the type of this  organization
+	 * @return the type of this organization
 	 */
 	public String getType();
 
 	/**
-	 * Sets the type of this  organization.
+	 * Sets the type of this organization.
 	 *
-	 * @param type the type of this  organization
+	 * @param type the type of this organization
 	 */
 	public void setType(String type);
 
 	/**
-	 * Gets the recursable of this  organization.
+	 * Gets the recursable of this organization.
 	 *
-	 * @return the recursable of this  organization
+	 * @return the recursable of this organization
 	 */
 	public boolean getRecursable();
 
 	/**
-	 * Determines whether this  organization is recursable.
+	 * Determines whether this organization is recursable.
 	 *
-	 * @return whether this  organization is recursable
+	 * @return whether this organization is recursable
 	 */
 	public boolean isRecursable();
 
 	/**
-	 * Sets the recursable of this  organization.
+	 * Sets the recursable of this organization.
 	 *
-	 * @param recursable the recursable of this  organization
+	 * @param recursable the recursable of this organization
 	 */
 	public void setRecursable(boolean recursable);
 
 	/**
-	 * Gets the region id of this  organization.
+	 * Gets the region id of this organization.
 	 *
-	 * @return the region id of this  organization
+	 * @return the region id of this organization
 	 */
 	public long getRegionId();
 
 	/**
-	 * Sets the region id of this  organization.
+	 * Sets the region id of this organization.
 	 *
-	 * @param regionId the region id of this  organization
+	 * @param regionId the region id of this organization
 	 */
 	public void setRegionId(long regionId);
 
 	/**
-	 * Gets the country id of this  organization.
+	 * Gets the country id of this organization.
 	 *
-	 * @return the country id of this  organization
+	 * @return the country id of this organization
 	 */
 	public long getCountryId();
 
 	/**
-	 * Sets the country id of this  organization.
+	 * Sets the country id of this organization.
 	 *
-	 * @param countryId the country id of this  organization
+	 * @param countryId the country id of this organization
 	 */
 	public void setCountryId(long countryId);
 
 	/**
-	 * Gets the status id of this  organization.
+	 * Gets the status id of this organization.
 	 *
-	 * @return the status id of this  organization
+	 * @return the status id of this organization
 	 */
 	public int getStatusId();
 
 	/**
-	 * Sets the status id of this  organization.
+	 * Sets the status id of this organization.
 	 *
-	 * @param statusId the status id of this  organization
+	 * @param statusId the status id of this organization
 	 */
 	public void setStatusId(int statusId);
 
 	/**
-	 * Gets the comments of this  organization.
+	 * Gets the comments of this organization.
 	 *
-	 * @return the comments of this  organization
+	 * @return the comments of this organization
 	 */
 	@AutoEscape
 	public String getComments();
 
 	/**
-	 * Sets the comments of this  organization.
+	 * Sets the comments of this organization.
 	 *
-	 * @param comments the comments of this  organization
+	 * @param comments the comments of this organization
 	 */
 	public void setComments(String comments);
 
 	/**
-	 * Gets a copy of this  organization as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this organization as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

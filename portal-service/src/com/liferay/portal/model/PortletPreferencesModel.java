@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  portlet preferences model instance should use the {@link PortletPreferences} interface instead.
+ * Never reference this interface directly. All methods that expect a portlet preferences model instance should use the {@link PortletPreferences} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,107 +40,107 @@ import java.io.Serializable;
  */
 public interface PortletPreferencesModel extends BaseModel<PortletPreferences> {
 	/**
-	 * Gets the primary key of this  portlet preferences.
+	 * Gets the primary key of this portlet preferences.
 	 *
-	 * @return the primary key of this  portlet preferences
+	 * @return the primary key of this portlet preferences
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  portlet preferences
+	 * Sets the primary key of this portlet preferences
 	 *
-	 * @param pk the primary key of this  portlet preferences
+	 * @param pk the primary key of this portlet preferences
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the portlet preferences id of this  portlet preferences.
+	 * Gets the portlet preferences id of this portlet preferences.
 	 *
-	 * @return the portlet preferences id of this  portlet preferences
+	 * @return the portlet preferences id of this portlet preferences
 	 */
 	public long getPortletPreferencesId();
 
 	/**
-	 * Sets the portlet preferences id of this  portlet preferences.
+	 * Sets the portlet preferences id of this portlet preferences.
 	 *
-	 * @param portletPreferencesId the portlet preferences id of this  portlet preferences
+	 * @param portletPreferencesId the portlet preferences id of this portlet preferences
 	 */
 	public void setPortletPreferencesId(long portletPreferencesId);
 
 	/**
-	 * Gets the owner id of this  portlet preferences.
+	 * Gets the owner id of this portlet preferences.
 	 *
-	 * @return the owner id of this  portlet preferences
+	 * @return the owner id of this portlet preferences
 	 */
 	public long getOwnerId();
 
 	/**
-	 * Sets the owner id of this  portlet preferences.
+	 * Sets the owner id of this portlet preferences.
 	 *
-	 * @param ownerId the owner id of this  portlet preferences
+	 * @param ownerId the owner id of this portlet preferences
 	 */
 	public void setOwnerId(long ownerId);
 
 	/**
-	 * Gets the owner type of this  portlet preferences.
+	 * Gets the owner type of this portlet preferences.
 	 *
-	 * @return the owner type of this  portlet preferences
+	 * @return the owner type of this portlet preferences
 	 */
 	public int getOwnerType();
 
 	/**
-	 * Sets the owner type of this  portlet preferences.
+	 * Sets the owner type of this portlet preferences.
 	 *
-	 * @param ownerType the owner type of this  portlet preferences
+	 * @param ownerType the owner type of this portlet preferences
 	 */
 	public void setOwnerType(int ownerType);
 
 	/**
-	 * Gets the plid of this  portlet preferences.
+	 * Gets the plid of this portlet preferences.
 	 *
-	 * @return the plid of this  portlet preferences
+	 * @return the plid of this portlet preferences
 	 */
 	public long getPlid();
 
 	/**
-	 * Sets the plid of this  portlet preferences.
+	 * Sets the plid of this portlet preferences.
 	 *
-	 * @param plid the plid of this  portlet preferences
+	 * @param plid the plid of this portlet preferences
 	 */
 	public void setPlid(long plid);
 
 	/**
-	 * Gets the portlet id of this  portlet preferences.
+	 * Gets the portlet id of this portlet preferences.
 	 *
-	 * @return the portlet id of this  portlet preferences
+	 * @return the portlet id of this portlet preferences
 	 */
 	@AutoEscape
 	public String getPortletId();
 
 	/**
-	 * Sets the portlet id of this  portlet preferences.
+	 * Sets the portlet id of this portlet preferences.
 	 *
-	 * @param portletId the portlet id of this  portlet preferences
+	 * @param portletId the portlet id of this portlet preferences
 	 */
 	public void setPortletId(String portletId);
 
 	/**
-	 * Gets the preferences of this  portlet preferences.
+	 * Gets the preferences of this portlet preferences.
 	 *
-	 * @return the preferences of this  portlet preferences
+	 * @return the preferences of this portlet preferences
 	 */
 	@AutoEscape
 	public String getPreferences();
 
 	/**
-	 * Sets the preferences of this  portlet preferences.
+	 * Sets the preferences of this portlet preferences.
 	 *
-	 * @param preferences the preferences of this  portlet preferences
+	 * @param preferences the preferences of this portlet preferences
 	 */
 	public void setPreferences(String preferences);
 
 	/**
-	 * Gets a copy of this  portlet preferences as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this portlet preferences as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

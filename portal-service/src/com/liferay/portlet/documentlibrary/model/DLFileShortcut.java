@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.documentlibrary.model;
 
-
 /**
  * <p>
  * This interface is a model that represents the DLFileShortcut table in the

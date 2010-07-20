@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.imagegallery.service;
 
-
 /**
  * <p>
  * This class is a wrapper for {@link IGImageLocalService}.

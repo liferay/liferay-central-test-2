@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.messageboards.model;
 
-
 /**
  * <p>
  * This interface is a model that represents the MBStatsUser table in the

@@ -31,7 +31,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  social activity model instance should use the {@link SocialActivity} interface instead.
+ * Never reference this interface directly. All methods that expect a social activity model instance should use the {@link SocialActivity} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -42,213 +42,213 @@ import java.io.Serializable;
  */
 public interface SocialActivityModel extends BaseModel<SocialActivity> {
 	/**
-	 * Gets the primary key of this  social activity.
+	 * Gets the primary key of this social activity.
 	 *
-	 * @return the primary key of this  social activity
+	 * @return the primary key of this social activity
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  social activity
+	 * Sets the primary key of this social activity
 	 *
-	 * @param pk the primary key of this  social activity
+	 * @param pk the primary key of this social activity
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the activity id of this  social activity.
+	 * Gets the activity id of this social activity.
 	 *
-	 * @return the activity id of this  social activity
+	 * @return the activity id of this social activity
 	 */
 	public long getActivityId();
 
 	/**
-	 * Sets the activity id of this  social activity.
+	 * Sets the activity id of this social activity.
 	 *
-	 * @param activityId the activity id of this  social activity
+	 * @param activityId the activity id of this social activity
 	 */
 	public void setActivityId(long activityId);
 
 	/**
-	 * Gets the group id of this  social activity.
+	 * Gets the group id of this social activity.
 	 *
-	 * @return the group id of this  social activity
+	 * @return the group id of this social activity
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  social activity.
+	 * Sets the group id of this social activity.
 	 *
-	 * @param groupId the group id of this  social activity
+	 * @param groupId the group id of this social activity
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this  social activity.
+	 * Gets the company id of this social activity.
 	 *
-	 * @return the company id of this  social activity
+	 * @return the company id of this social activity
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  social activity.
+	 * Sets the company id of this social activity.
 	 *
-	 * @param companyId the company id of this  social activity
+	 * @param companyId the company id of this social activity
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  social activity.
+	 * Gets the user id of this social activity.
 	 *
-	 * @return the user id of this  social activity
+	 * @return the user id of this social activity
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  social activity.
+	 * Sets the user id of this social activity.
 	 *
-	 * @param userId the user id of this  social activity
+	 * @param userId the user id of this social activity
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  social activity.
+	 * Gets the user uuid of this social activity.
 	 *
-	 * @return the user uuid of this  social activity
+	 * @return the user uuid of this social activity
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  social activity.
+	 * Sets the user uuid of this social activity.
 	 *
-	 * @param userUuid the user uuid of this  social activity
+	 * @param userUuid the user uuid of this social activity
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the create date of this  social activity.
+	 * Gets the create date of this social activity.
 	 *
-	 * @return the create date of this  social activity
+	 * @return the create date of this social activity
 	 */
 	public long getCreateDate();
 
 	/**
-	 * Sets the create date of this  social activity.
+	 * Sets the create date of this social activity.
 	 *
-	 * @param createDate the create date of this  social activity
+	 * @param createDate the create date of this social activity
 	 */
 	public void setCreateDate(long createDate);
 
 	/**
-	 * Gets the mirror activity id of this  social activity.
+	 * Gets the mirror activity id of this social activity.
 	 *
-	 * @return the mirror activity id of this  social activity
+	 * @return the mirror activity id of this social activity
 	 */
 	public long getMirrorActivityId();
 
 	/**
-	 * Sets the mirror activity id of this  social activity.
+	 * Sets the mirror activity id of this social activity.
 	 *
-	 * @param mirrorActivityId the mirror activity id of this  social activity
+	 * @param mirrorActivityId the mirror activity id of this social activity
 	 */
 	public void setMirrorActivityId(long mirrorActivityId);
 
 	/**
-	 * Gets the class name of the model instance this  social activity is associated with.
+	 * Gets the class name of the model instance this social activity is associated with.
 	 *
-	 * @return the class name of the model instance this  social activity is associated with
+	 * @return the class name of the model instance this social activity is associated with
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this  social activity.
+	 * Gets the class name id of this social activity.
 	 *
-	 * @return the class name id of this  social activity
+	 * @return the class name id of this social activity
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this  social activity.
+	 * Sets the class name id of this social activity.
 	 *
-	 * @param classNameId the class name id of this  social activity
+	 * @param classNameId the class name id of this social activity
 	 */
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this  social activity.
+	 * Gets the class p k of this social activity.
 	 *
-	 * @return the class p k of this  social activity
+	 * @return the class p k of this social activity
 	 */
 	public long getClassPK();
 
 	/**
-	 * Sets the class p k of this  social activity.
+	 * Sets the class p k of this social activity.
 	 *
-	 * @param classPK the class p k of this  social activity
+	 * @param classPK the class p k of this social activity
 	 */
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the type of this  social activity.
+	 * Gets the type of this social activity.
 	 *
-	 * @return the type of this  social activity
+	 * @return the type of this social activity
 	 */
 	public int getType();
 
 	/**
-	 * Sets the type of this  social activity.
+	 * Sets the type of this social activity.
 	 *
-	 * @param type the type of this  social activity
+	 * @param type the type of this social activity
 	 */
 	public void setType(int type);
 
 	/**
-	 * Gets the extra data of this  social activity.
+	 * Gets the extra data of this social activity.
 	 *
-	 * @return the extra data of this  social activity
+	 * @return the extra data of this social activity
 	 */
 	@AutoEscape
 	public String getExtraData();
 
 	/**
-	 * Sets the extra data of this  social activity.
+	 * Sets the extra data of this social activity.
 	 *
-	 * @param extraData the extra data of this  social activity
+	 * @param extraData the extra data of this social activity
 	 */
 	public void setExtraData(String extraData);
 
 	/**
-	 * Gets the receiver user id of this  social activity.
+	 * Gets the receiver user id of this social activity.
 	 *
-	 * @return the receiver user id of this  social activity
+	 * @return the receiver user id of this social activity
 	 */
 	public long getReceiverUserId();
 
 	/**
-	 * Sets the receiver user id of this  social activity.
+	 * Sets the receiver user id of this social activity.
 	 *
-	 * @param receiverUserId the receiver user id of this  social activity
+	 * @param receiverUserId the receiver user id of this social activity
 	 */
 	public void setReceiverUserId(long receiverUserId);
 
 	/**
-	 * Gets the receiver user uuid of this  social activity.
+	 * Gets the receiver user uuid of this social activity.
 	 *
-	 * @return the receiver user uuid of this  social activity
+	 * @return the receiver user uuid of this social activity
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getReceiverUserUuid() throws SystemException;
 
 	/**
-	 * Sets the receiver user uuid of this  social activity.
+	 * Sets the receiver user uuid of this social activity.
 	 *
-	 * @param receiverUserUuid the receiver user uuid of this  social activity
+	 * @param receiverUserUuid the receiver user uuid of this social activity
 	 */
 	public void setReceiverUserUuid(String receiverUserUuid);
 
 	/**
-	 * Gets a copy of this  social activity as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this social activity as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

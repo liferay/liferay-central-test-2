@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.announcements.model;
 
-
 /**
  * <p>
  * This interface is a model that represents the AnnouncementsDelivery table in the

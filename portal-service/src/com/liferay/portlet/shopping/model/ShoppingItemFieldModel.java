@@ -30,7 +30,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  shopping item field model instance should use the {@link ShoppingItemField} interface instead.
+ * Never reference this interface directly. All methods that expect a shopping item field model instance should use the {@link ShoppingItemField} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -41,94 +41,94 @@ import java.io.Serializable;
  */
 public interface ShoppingItemFieldModel extends BaseModel<ShoppingItemField> {
 	/**
-	 * Gets the primary key of this  shopping item field.
+	 * Gets the primary key of this shopping item field.
 	 *
-	 * @return the primary key of this  shopping item field
+	 * @return the primary key of this shopping item field
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  shopping item field
+	 * Sets the primary key of this shopping item field
 	 *
-	 * @param pk the primary key of this  shopping item field
+	 * @param pk the primary key of this shopping item field
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the item field id of this  shopping item field.
+	 * Gets the item field id of this shopping item field.
 	 *
-	 * @return the item field id of this  shopping item field
+	 * @return the item field id of this shopping item field
 	 */
 	public long getItemFieldId();
 
 	/**
-	 * Sets the item field id of this  shopping item field.
+	 * Sets the item field id of this shopping item field.
 	 *
-	 * @param itemFieldId the item field id of this  shopping item field
+	 * @param itemFieldId the item field id of this shopping item field
 	 */
 	public void setItemFieldId(long itemFieldId);
 
 	/**
-	 * Gets the item id of this  shopping item field.
+	 * Gets the item id of this shopping item field.
 	 *
-	 * @return the item id of this  shopping item field
+	 * @return the item id of this shopping item field
 	 */
 	public long getItemId();
 
 	/**
-	 * Sets the item id of this  shopping item field.
+	 * Sets the item id of this shopping item field.
 	 *
-	 * @param itemId the item id of this  shopping item field
+	 * @param itemId the item id of this shopping item field
 	 */
 	public void setItemId(long itemId);
 
 	/**
-	 * Gets the name of this  shopping item field.
+	 * Gets the name of this shopping item field.
 	 *
-	 * @return the name of this  shopping item field
+	 * @return the name of this shopping item field
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  shopping item field.
+	 * Sets the name of this shopping item field.
 	 *
-	 * @param name the name of this  shopping item field
+	 * @param name the name of this shopping item field
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets the values of this  shopping item field.
+	 * Gets the values of this shopping item field.
 	 *
-	 * @return the values of this  shopping item field
+	 * @return the values of this shopping item field
 	 */
 	@AutoEscape
 	public String getValues();
 
 	/**
-	 * Sets the values of this  shopping item field.
+	 * Sets the values of this shopping item field.
 	 *
-	 * @param values the values of this  shopping item field
+	 * @param values the values of this shopping item field
 	 */
 	public void setValues(String values);
 
 	/**
-	 * Gets the description of this  shopping item field.
+	 * Gets the description of this shopping item field.
 	 *
-	 * @return the description of this  shopping item field
+	 * @return the description of this shopping item field
 	 */
 	@AutoEscape
 	public String getDescription();
 
 	/**
-	 * Sets the description of this  shopping item field.
+	 * Sets the description of this shopping item field.
 	 *
-	 * @param description the description of this  shopping item field
+	 * @param description the description of this shopping item field
 	 */
 	public void setDescription(String description);
 
 	/**
-	 * Gets a copy of this  shopping item field as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this shopping item field as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

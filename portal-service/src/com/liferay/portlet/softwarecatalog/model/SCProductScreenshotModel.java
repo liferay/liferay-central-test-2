@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  s c product screenshot model instance should use the {@link SCProductScreenshot} interface instead.
+ * Never reference this interface directly. All methods that expect a s c product screenshot model instance should use the {@link SCProductScreenshot} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,119 +40,119 @@ import java.io.Serializable;
  */
 public interface SCProductScreenshotModel extends BaseModel<SCProductScreenshot> {
 	/**
-	 * Gets the primary key of this  s c product screenshot.
+	 * Gets the primary key of this s c product screenshot.
 	 *
-	 * @return the primary key of this  s c product screenshot
+	 * @return the primary key of this s c product screenshot
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  s c product screenshot
+	 * Sets the primary key of this s c product screenshot
 	 *
-	 * @param pk the primary key of this  s c product screenshot
+	 * @param pk the primary key of this s c product screenshot
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the product screenshot id of this  s c product screenshot.
+	 * Gets the product screenshot id of this s c product screenshot.
 	 *
-	 * @return the product screenshot id of this  s c product screenshot
+	 * @return the product screenshot id of this s c product screenshot
 	 */
 	public long getProductScreenshotId();
 
 	/**
-	 * Sets the product screenshot id of this  s c product screenshot.
+	 * Sets the product screenshot id of this s c product screenshot.
 	 *
-	 * @param productScreenshotId the product screenshot id of this  s c product screenshot
+	 * @param productScreenshotId the product screenshot id of this s c product screenshot
 	 */
 	public void setProductScreenshotId(long productScreenshotId);
 
 	/**
-	 * Gets the company id of this  s c product screenshot.
+	 * Gets the company id of this s c product screenshot.
 	 *
-	 * @return the company id of this  s c product screenshot
+	 * @return the company id of this s c product screenshot
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  s c product screenshot.
+	 * Sets the company id of this s c product screenshot.
 	 *
-	 * @param companyId the company id of this  s c product screenshot
+	 * @param companyId the company id of this s c product screenshot
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the group id of this  s c product screenshot.
+	 * Gets the group id of this s c product screenshot.
 	 *
-	 * @return the group id of this  s c product screenshot
+	 * @return the group id of this s c product screenshot
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  s c product screenshot.
+	 * Sets the group id of this s c product screenshot.
 	 *
-	 * @param groupId the group id of this  s c product screenshot
+	 * @param groupId the group id of this s c product screenshot
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the product entry id of this  s c product screenshot.
+	 * Gets the product entry id of this s c product screenshot.
 	 *
-	 * @return the product entry id of this  s c product screenshot
+	 * @return the product entry id of this s c product screenshot
 	 */
 	public long getProductEntryId();
 
 	/**
-	 * Sets the product entry id of this  s c product screenshot.
+	 * Sets the product entry id of this s c product screenshot.
 	 *
-	 * @param productEntryId the product entry id of this  s c product screenshot
+	 * @param productEntryId the product entry id of this s c product screenshot
 	 */
 	public void setProductEntryId(long productEntryId);
 
 	/**
-	 * Gets the thumbnail id of this  s c product screenshot.
+	 * Gets the thumbnail id of this s c product screenshot.
 	 *
-	 * @return the thumbnail id of this  s c product screenshot
+	 * @return the thumbnail id of this s c product screenshot
 	 */
 	public long getThumbnailId();
 
 	/**
-	 * Sets the thumbnail id of this  s c product screenshot.
+	 * Sets the thumbnail id of this s c product screenshot.
 	 *
-	 * @param thumbnailId the thumbnail id of this  s c product screenshot
+	 * @param thumbnailId the thumbnail id of this s c product screenshot
 	 */
 	public void setThumbnailId(long thumbnailId);
 
 	/**
-	 * Gets the full image id of this  s c product screenshot.
+	 * Gets the full image id of this s c product screenshot.
 	 *
-	 * @return the full image id of this  s c product screenshot
+	 * @return the full image id of this s c product screenshot
 	 */
 	public long getFullImageId();
 
 	/**
-	 * Sets the full image id of this  s c product screenshot.
+	 * Sets the full image id of this s c product screenshot.
 	 *
-	 * @param fullImageId the full image id of this  s c product screenshot
+	 * @param fullImageId the full image id of this s c product screenshot
 	 */
 	public void setFullImageId(long fullImageId);
 
 	/**
-	 * Gets the priority of this  s c product screenshot.
+	 * Gets the priority of this s c product screenshot.
 	 *
-	 * @return the priority of this  s c product screenshot
+	 * @return the priority of this s c product screenshot
 	 */
 	public int getPriority();
 
 	/**
-	 * Sets the priority of this  s c product screenshot.
+	 * Sets the priority of this s c product screenshot.
 	 *
-	 * @param priority the priority of this  s c product screenshot
+	 * @param priority the priority of this s c product screenshot
 	 */
 	public void setPriority(int priority);
 
 	/**
-	 * Gets a copy of this  s c product screenshot as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this s c product screenshot as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

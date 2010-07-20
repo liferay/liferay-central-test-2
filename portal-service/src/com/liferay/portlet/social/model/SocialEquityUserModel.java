@@ -30,7 +30,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  social equity user model instance should use the {@link SocialEquityUser} interface instead.
+ * Never reference this interface directly. All methods that expect a social equity user model instance should use the {@link SocialEquityUser} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -41,177 +41,177 @@ import java.io.Serializable;
  */
 public interface SocialEquityUserModel extends BaseModel<SocialEquityUser> {
 	/**
-	 * Gets the primary key of this  social equity user.
+	 * Gets the primary key of this social equity user.
 	 *
-	 * @return the primary key of this  social equity user
+	 * @return the primary key of this social equity user
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  social equity user
+	 * Sets the primary key of this social equity user
 	 *
-	 * @param pk the primary key of this  social equity user
+	 * @param pk the primary key of this social equity user
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the equity user id of this  social equity user.
+	 * Gets the equity user id of this social equity user.
 	 *
-	 * @return the equity user id of this  social equity user
+	 * @return the equity user id of this social equity user
 	 */
 	public long getEquityUserId();
 
 	/**
-	 * Sets the equity user id of this  social equity user.
+	 * Sets the equity user id of this social equity user.
 	 *
-	 * @param equityUserId the equity user id of this  social equity user
+	 * @param equityUserId the equity user id of this social equity user
 	 */
 	public void setEquityUserId(long equityUserId);
 
 	/**
-	 * Gets the equity user uuid of this  social equity user.
+	 * Gets the equity user uuid of this social equity user.
 	 *
-	 * @return the equity user uuid of this  social equity user
+	 * @return the equity user uuid of this social equity user
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getEquityUserUuid() throws SystemException;
 
 	/**
-	 * Sets the equity user uuid of this  social equity user.
+	 * Sets the equity user uuid of this social equity user.
 	 *
-	 * @param equityUserUuid the equity user uuid of this  social equity user
+	 * @param equityUserUuid the equity user uuid of this social equity user
 	 */
 	public void setEquityUserUuid(String equityUserUuid);
 
 	/**
-	 * Gets the group id of this  social equity user.
+	 * Gets the group id of this social equity user.
 	 *
-	 * @return the group id of this  social equity user
+	 * @return the group id of this social equity user
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  social equity user.
+	 * Sets the group id of this social equity user.
 	 *
-	 * @param groupId the group id of this  social equity user
+	 * @param groupId the group id of this social equity user
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this  social equity user.
+	 * Gets the company id of this social equity user.
 	 *
-	 * @return the company id of this  social equity user
+	 * @return the company id of this social equity user
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  social equity user.
+	 * Sets the company id of this social equity user.
 	 *
-	 * @param companyId the company id of this  social equity user
+	 * @param companyId the company id of this social equity user
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  social equity user.
+	 * Gets the user id of this social equity user.
 	 *
-	 * @return the user id of this  social equity user
+	 * @return the user id of this social equity user
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  social equity user.
+	 * Sets the user id of this social equity user.
 	 *
-	 * @param userId the user id of this  social equity user
+	 * @param userId the user id of this social equity user
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  social equity user.
+	 * Gets the user uuid of this social equity user.
 	 *
-	 * @return the user uuid of this  social equity user
+	 * @return the user uuid of this social equity user
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  social equity user.
+	 * Sets the user uuid of this social equity user.
 	 *
-	 * @param userUuid the user uuid of this  social equity user
+	 * @param userUuid the user uuid of this social equity user
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the contribution k of this  social equity user.
+	 * Gets the contribution k of this social equity user.
 	 *
-	 * @return the contribution k of this  social equity user
+	 * @return the contribution k of this social equity user
 	 */
 	public double getContributionK();
 
 	/**
-	 * Sets the contribution k of this  social equity user.
+	 * Sets the contribution k of this social equity user.
 	 *
-	 * @param contributionK the contribution k of this  social equity user
+	 * @param contributionK the contribution k of this social equity user
 	 */
 	public void setContributionK(double contributionK);
 
 	/**
-	 * Gets the contribution b of this  social equity user.
+	 * Gets the contribution b of this social equity user.
 	 *
-	 * @return the contribution b of this  social equity user
+	 * @return the contribution b of this social equity user
 	 */
 	public double getContributionB();
 
 	/**
-	 * Sets the contribution b of this  social equity user.
+	 * Sets the contribution b of this social equity user.
 	 *
-	 * @param contributionB the contribution b of this  social equity user
+	 * @param contributionB the contribution b of this social equity user
 	 */
 	public void setContributionB(double contributionB);
 
 	/**
-	 * Gets the participation k of this  social equity user.
+	 * Gets the participation k of this social equity user.
 	 *
-	 * @return the participation k of this  social equity user
+	 * @return the participation k of this social equity user
 	 */
 	public double getParticipationK();
 
 	/**
-	 * Sets the participation k of this  social equity user.
+	 * Sets the participation k of this social equity user.
 	 *
-	 * @param participationK the participation k of this  social equity user
+	 * @param participationK the participation k of this social equity user
 	 */
 	public void setParticipationK(double participationK);
 
 	/**
-	 * Gets the participation b of this  social equity user.
+	 * Gets the participation b of this social equity user.
 	 *
-	 * @return the participation b of this  social equity user
+	 * @return the participation b of this social equity user
 	 */
 	public double getParticipationB();
 
 	/**
-	 * Sets the participation b of this  social equity user.
+	 * Sets the participation b of this social equity user.
 	 *
-	 * @param participationB the participation b of this  social equity user
+	 * @param participationB the participation b of this social equity user
 	 */
 	public void setParticipationB(double participationB);
 
 	/**
-	 * Gets the rank of this  social equity user.
+	 * Gets the rank of this social equity user.
 	 *
-	 * @return the rank of this  social equity user
+	 * @return the rank of this social equity user
 	 */
 	public int getRank();
 
 	/**
-	 * Sets the rank of this  social equity user.
+	 * Sets the rank of this social equity user.
 	 *
-	 * @param rank the rank of this  social equity user
+	 * @param rank the rank of this social equity user
 	 */
 	public void setRank(int rank);
 
 	/**
-	 * Gets a copy of this  social equity user as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this social equity user as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

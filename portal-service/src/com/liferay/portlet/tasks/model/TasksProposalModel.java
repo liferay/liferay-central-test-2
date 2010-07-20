@@ -33,7 +33,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  tasks proposal model instance should use the {@link TasksProposal} interface instead.
+ * Never reference this interface directly. All methods that expect a tasks proposal model instance should use the {@link TasksProposal} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -44,229 +44,229 @@ import java.util.Date;
  */
 public interface TasksProposalModel extends BaseModel<TasksProposal> {
 	/**
-	 * Gets the primary key of this  tasks proposal.
+	 * Gets the primary key of this tasks proposal.
 	 *
-	 * @return the primary key of this  tasks proposal
+	 * @return the primary key of this tasks proposal
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  tasks proposal
+	 * Sets the primary key of this tasks proposal
 	 *
-	 * @param pk the primary key of this  tasks proposal
+	 * @param pk the primary key of this tasks proposal
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the proposal id of this  tasks proposal.
+	 * Gets the proposal id of this tasks proposal.
 	 *
-	 * @return the proposal id of this  tasks proposal
+	 * @return the proposal id of this tasks proposal
 	 */
 	public long getProposalId();
 
 	/**
-	 * Sets the proposal id of this  tasks proposal.
+	 * Sets the proposal id of this tasks proposal.
 	 *
-	 * @param proposalId the proposal id of this  tasks proposal
+	 * @param proposalId the proposal id of this tasks proposal
 	 */
 	public void setProposalId(long proposalId);
 
 	/**
-	 * Gets the group id of this  tasks proposal.
+	 * Gets the group id of this tasks proposal.
 	 *
-	 * @return the group id of this  tasks proposal
+	 * @return the group id of this tasks proposal
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  tasks proposal.
+	 * Sets the group id of this tasks proposal.
 	 *
-	 * @param groupId the group id of this  tasks proposal
+	 * @param groupId the group id of this tasks proposal
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this  tasks proposal.
+	 * Gets the company id of this tasks proposal.
 	 *
-	 * @return the company id of this  tasks proposal
+	 * @return the company id of this tasks proposal
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  tasks proposal.
+	 * Sets the company id of this tasks proposal.
 	 *
-	 * @param companyId the company id of this  tasks proposal
+	 * @param companyId the company id of this tasks proposal
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  tasks proposal.
+	 * Gets the user id of this tasks proposal.
 	 *
-	 * @return the user id of this  tasks proposal
+	 * @return the user id of this tasks proposal
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  tasks proposal.
+	 * Sets the user id of this tasks proposal.
 	 *
-	 * @param userId the user id of this  tasks proposal
+	 * @param userId the user id of this tasks proposal
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  tasks proposal.
+	 * Gets the user uuid of this tasks proposal.
 	 *
-	 * @return the user uuid of this  tasks proposal
+	 * @return the user uuid of this tasks proposal
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  tasks proposal.
+	 * Sets the user uuid of this tasks proposal.
 	 *
-	 * @param userUuid the user uuid of this  tasks proposal
+	 * @param userUuid the user uuid of this tasks proposal
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this  tasks proposal.
+	 * Gets the user name of this tasks proposal.
 	 *
-	 * @return the user name of this  tasks proposal
+	 * @return the user name of this tasks proposal
 	 */
 	@AutoEscape
 	public String getUserName();
 
 	/**
-	 * Sets the user name of this  tasks proposal.
+	 * Sets the user name of this tasks proposal.
 	 *
-	 * @param userName the user name of this  tasks proposal
+	 * @param userName the user name of this tasks proposal
 	 */
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this  tasks proposal.
+	 * Gets the create date of this tasks proposal.
 	 *
-	 * @return the create date of this  tasks proposal
+	 * @return the create date of this tasks proposal
 	 */
 	public Date getCreateDate();
 
 	/**
-	 * Sets the create date of this  tasks proposal.
+	 * Sets the create date of this tasks proposal.
 	 *
-	 * @param createDate the create date of this  tasks proposal
+	 * @param createDate the create date of this tasks proposal
 	 */
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this  tasks proposal.
+	 * Gets the modified date of this tasks proposal.
 	 *
-	 * @return the modified date of this  tasks proposal
+	 * @return the modified date of this tasks proposal
 	 */
 	public Date getModifiedDate();
 
 	/**
-	 * Sets the modified date of this  tasks proposal.
+	 * Sets the modified date of this tasks proposal.
 	 *
-	 * @param modifiedDate the modified date of this  tasks proposal
+	 * @param modifiedDate the modified date of this tasks proposal
 	 */
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the class name of the model instance this  tasks proposal is associated with.
+	 * Gets the class name of the model instance this tasks proposal is associated with.
 	 *
-	 * @return the class name of the model instance this  tasks proposal is associated with
+	 * @return the class name of the model instance this tasks proposal is associated with
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this  tasks proposal.
+	 * Gets the class name id of this tasks proposal.
 	 *
-	 * @return the class name id of this  tasks proposal
+	 * @return the class name id of this tasks proposal
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this  tasks proposal.
+	 * Sets the class name id of this tasks proposal.
 	 *
-	 * @param classNameId the class name id of this  tasks proposal
+	 * @param classNameId the class name id of this tasks proposal
 	 */
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this  tasks proposal.
+	 * Gets the class p k of this tasks proposal.
 	 *
-	 * @return the class p k of this  tasks proposal
+	 * @return the class p k of this tasks proposal
 	 */
 	@AutoEscape
 	public String getClassPK();
 
 	/**
-	 * Sets the class p k of this  tasks proposal.
+	 * Sets the class p k of this tasks proposal.
 	 *
-	 * @param classPK the class p k of this  tasks proposal
+	 * @param classPK the class p k of this tasks proposal
 	 */
 	public void setClassPK(String classPK);
 
 	/**
-	 * Gets the name of this  tasks proposal.
+	 * Gets the name of this tasks proposal.
 	 *
-	 * @return the name of this  tasks proposal
+	 * @return the name of this tasks proposal
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  tasks proposal.
+	 * Sets the name of this tasks proposal.
 	 *
-	 * @param name the name of this  tasks proposal
+	 * @param name the name of this tasks proposal
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this  tasks proposal.
+	 * Gets the description of this tasks proposal.
 	 *
-	 * @return the description of this  tasks proposal
+	 * @return the description of this tasks proposal
 	 */
 	@AutoEscape
 	public String getDescription();
 
 	/**
-	 * Sets the description of this  tasks proposal.
+	 * Sets the description of this tasks proposal.
 	 *
-	 * @param description the description of this  tasks proposal
+	 * @param description the description of this tasks proposal
 	 */
 	public void setDescription(String description);
 
 	/**
-	 * Gets the publish date of this  tasks proposal.
+	 * Gets the publish date of this tasks proposal.
 	 *
-	 * @return the publish date of this  tasks proposal
+	 * @return the publish date of this tasks proposal
 	 */
 	public Date getPublishDate();
 
 	/**
-	 * Sets the publish date of this  tasks proposal.
+	 * Sets the publish date of this tasks proposal.
 	 *
-	 * @param publishDate the publish date of this  tasks proposal
+	 * @param publishDate the publish date of this tasks proposal
 	 */
 	public void setPublishDate(Date publishDate);
 
 	/**
-	 * Gets the due date of this  tasks proposal.
+	 * Gets the due date of this tasks proposal.
 	 *
-	 * @return the due date of this  tasks proposal
+	 * @return the due date of this tasks proposal
 	 */
 	public Date getDueDate();
 
 	/**
-	 * Sets the due date of this  tasks proposal.
+	 * Sets the due date of this tasks proposal.
 	 *
-	 * @param dueDate the due date of this  tasks proposal
+	 * @param dueDate the due date of this tasks proposal
 	 */
 	public void setDueDate(Date dueDate);
 
 	/**
-	 * Gets a copy of this  tasks proposal as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this tasks proposal as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

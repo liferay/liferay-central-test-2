@@ -30,7 +30,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  social equity setting model instance should use the {@link SocialEquitySetting} interface instead.
+ * Never reference this interface directly. All methods that expect a social equity setting model instance should use the {@link SocialEquitySetting} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -41,176 +41,176 @@ import java.io.Serializable;
  */
 public interface SocialEquitySettingModel extends BaseModel<SocialEquitySetting> {
 	/**
-	 * Gets the primary key of this  social equity setting.
+	 * Gets the primary key of this social equity setting.
 	 *
-	 * @return the primary key of this  social equity setting
+	 * @return the primary key of this social equity setting
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  social equity setting
+	 * Sets the primary key of this social equity setting
 	 *
-	 * @param pk the primary key of this  social equity setting
+	 * @param pk the primary key of this social equity setting
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the equity setting id of this  social equity setting.
+	 * Gets the equity setting id of this social equity setting.
 	 *
-	 * @return the equity setting id of this  social equity setting
+	 * @return the equity setting id of this social equity setting
 	 */
 	public long getEquitySettingId();
 
 	/**
-	 * Sets the equity setting id of this  social equity setting.
+	 * Sets the equity setting id of this social equity setting.
 	 *
-	 * @param equitySettingId the equity setting id of this  social equity setting
+	 * @param equitySettingId the equity setting id of this social equity setting
 	 */
 	public void setEquitySettingId(long equitySettingId);
 
 	/**
-	 * Gets the group id of this  social equity setting.
+	 * Gets the group id of this social equity setting.
 	 *
-	 * @return the group id of this  social equity setting
+	 * @return the group id of this social equity setting
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  social equity setting.
+	 * Sets the group id of this social equity setting.
 	 *
-	 * @param groupId the group id of this  social equity setting
+	 * @param groupId the group id of this social equity setting
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this  social equity setting.
+	 * Gets the company id of this social equity setting.
 	 *
-	 * @return the company id of this  social equity setting
+	 * @return the company id of this social equity setting
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  social equity setting.
+	 * Sets the company id of this social equity setting.
 	 *
-	 * @param companyId the company id of this  social equity setting
+	 * @param companyId the company id of this social equity setting
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the class name of the model instance this  social equity setting is associated with.
+	 * Gets the class name of the model instance this social equity setting is associated with.
 	 *
-	 * @return the class name of the model instance this  social equity setting is associated with
+	 * @return the class name of the model instance this social equity setting is associated with
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this  social equity setting.
+	 * Gets the class name id of this social equity setting.
 	 *
-	 * @return the class name id of this  social equity setting
+	 * @return the class name id of this social equity setting
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this  social equity setting.
+	 * Sets the class name id of this social equity setting.
 	 *
-	 * @param classNameId the class name id of this  social equity setting
+	 * @param classNameId the class name id of this social equity setting
 	 */
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the action id of this  social equity setting.
+	 * Gets the action id of this social equity setting.
 	 *
-	 * @return the action id of this  social equity setting
+	 * @return the action id of this social equity setting
 	 */
 	@AutoEscape
 	public String getActionId();
 
 	/**
-	 * Sets the action id of this  social equity setting.
+	 * Sets the action id of this social equity setting.
 	 *
-	 * @param actionId the action id of this  social equity setting
+	 * @param actionId the action id of this social equity setting
 	 */
 	public void setActionId(String actionId);
 
 	/**
-	 * Gets the daily limit of this  social equity setting.
+	 * Gets the daily limit of this social equity setting.
 	 *
-	 * @return the daily limit of this  social equity setting
+	 * @return the daily limit of this social equity setting
 	 */
 	public int getDailyLimit();
 
 	/**
-	 * Sets the daily limit of this  social equity setting.
+	 * Sets the daily limit of this social equity setting.
 	 *
-	 * @param dailyLimit the daily limit of this  social equity setting
+	 * @param dailyLimit the daily limit of this social equity setting
 	 */
 	public void setDailyLimit(int dailyLimit);
 
 	/**
-	 * Gets the lifespan of this  social equity setting.
+	 * Gets the lifespan of this social equity setting.
 	 *
-	 * @return the lifespan of this  social equity setting
+	 * @return the lifespan of this social equity setting
 	 */
 	public int getLifespan();
 
 	/**
-	 * Sets the lifespan of this  social equity setting.
+	 * Sets the lifespan of this social equity setting.
 	 *
-	 * @param lifespan the lifespan of this  social equity setting
+	 * @param lifespan the lifespan of this social equity setting
 	 */
 	public void setLifespan(int lifespan);
 
 	/**
-	 * Gets the type of this  social equity setting.
+	 * Gets the type of this social equity setting.
 	 *
-	 * @return the type of this  social equity setting
+	 * @return the type of this social equity setting
 	 */
 	public int getType();
 
 	/**
-	 * Sets the type of this  social equity setting.
+	 * Sets the type of this social equity setting.
 	 *
-	 * @param type the type of this  social equity setting
+	 * @param type the type of this social equity setting
 	 */
 	public void setType(int type);
 
 	/**
-	 * Gets the unique entry of this  social equity setting.
+	 * Gets the unique entry of this social equity setting.
 	 *
-	 * @return the unique entry of this  social equity setting
+	 * @return the unique entry of this social equity setting
 	 */
 	public boolean getUniqueEntry();
 
 	/**
-	 * Determines whether this  social equity setting is unique entry.
+	 * Determines whether this social equity setting is unique entry.
 	 *
-	 * @return whether this  social equity setting is unique entry
+	 * @return whether this social equity setting is unique entry
 	 */
 	public boolean isUniqueEntry();
 
 	/**
-	 * Sets the unique entry of this  social equity setting.
+	 * Sets the unique entry of this social equity setting.
 	 *
-	 * @param uniqueEntry the unique entry of this  social equity setting
+	 * @param uniqueEntry the unique entry of this social equity setting
 	 */
 	public void setUniqueEntry(boolean uniqueEntry);
 
 	/**
-	 * Gets the value of this  social equity setting.
+	 * Gets the value of this social equity setting.
 	 *
-	 * @return the value of this  social equity setting
+	 * @return the value of this social equity setting
 	 */
 	public int getValue();
 
 	/**
-	 * Sets the value of this  social equity setting.
+	 * Sets the value of this social equity setting.
 	 *
-	 * @param value the value of this  social equity setting
+	 * @param value the value of this social equity setting
 	 */
 	public void setValue(int value);
 
 	/**
-	 * Gets a copy of this  social equity setting as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this social equity setting as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

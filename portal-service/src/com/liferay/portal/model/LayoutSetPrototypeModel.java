@@ -32,7 +32,7 @@ import java.util.Map;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  layout set prototype model instance should use the {@link LayoutSetPrototype} interface instead.
+ * Never reference this interface directly. All methods that expect a layout set prototype model instance should use the {@link LayoutSetPrototype} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -43,170 +43,170 @@ import java.util.Map;
  */
 public interface LayoutSetPrototypeModel extends BaseModel<LayoutSetPrototype> {
 	/**
-	 * Gets the primary key of this  layout set prototype.
+	 * Gets the primary key of this layout set prototype.
 	 *
-	 * @return the primary key of this  layout set prototype
+	 * @return the primary key of this layout set prototype
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  layout set prototype
+	 * Sets the primary key of this layout set prototype
 	 *
-	 * @param pk the primary key of this  layout set prototype
+	 * @param pk the primary key of this layout set prototype
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the layout set prototype id of this  layout set prototype.
+	 * Gets the layout set prototype id of this layout set prototype.
 	 *
-	 * @return the layout set prototype id of this  layout set prototype
+	 * @return the layout set prototype id of this layout set prototype
 	 */
 	public long getLayoutSetPrototypeId();
 
 	/**
-	 * Sets the layout set prototype id of this  layout set prototype.
+	 * Sets the layout set prototype id of this layout set prototype.
 	 *
-	 * @param layoutSetPrototypeId the layout set prototype id of this  layout set prototype
+	 * @param layoutSetPrototypeId the layout set prototype id of this layout set prototype
 	 */
 	public void setLayoutSetPrototypeId(long layoutSetPrototypeId);
 
 	/**
-	 * Gets the company id of this  layout set prototype.
+	 * Gets the company id of this layout set prototype.
 	 *
-	 * @return the company id of this  layout set prototype
+	 * @return the company id of this layout set prototype
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  layout set prototype.
+	 * Sets the company id of this layout set prototype.
 	 *
-	 * @param companyId the company id of this  layout set prototype
+	 * @param companyId the company id of this layout set prototype
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the name of this  layout set prototype.
+	 * Gets the name of this layout set prototype.
 	 *
-	 * @return the name of this  layout set prototype
+	 * @return the name of this layout set prototype
 	 */
 	public String getName();
 
 	/**
-	 * Gets the localized name of this  layout set prototype. Uses the default language if no localization exists for the requested language.
+	 * Gets the localized name of this layout set prototype. Uses the default language if no localization exists for the requested language.
 	 *
 	 * @param locale the locale to get the localized name for
-	 * @return the localized name of this  layout set prototype.
+	 * @return the localized name of this layout set prototype.
 	 */
 	public String getName(Locale locale);
 
 	/**
-	 * Gets the localized name of this  layout set prototype, optionally using the default language if no localization exists for the requested language.
+	 * Gets the localized name of this layout set prototype, optionally using the default language if no localization exists for the requested language.
 	 *
 	 * @param locale the local to get the localized name for
 	 * @param useDefault whether to use the default language if no localization exists for the requested language
-	 * @return the localized name of this  layout set prototype. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 * @return the localized name of this layout set prototype. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	 */
 	public String getName(Locale locale, boolean useDefault);
 
 	/**
-	 * Gets the localized name of this  layout set prototype. Uses the default language if no localization exists for the requested language.
+	 * Gets the localized name of this layout set prototype. Uses the default language if no localization exists for the requested language.
 	 *
 	 * @param languageId the id of the language to get the localized name for
-	 * @return the localized name of this  layout set prototype
+	 * @return the localized name of this layout set prototype
 	 */
 	public String getName(String languageId);
 
 	/**
-	 * Gets the localized name of this  layout set prototype, optionally using the default language if no localization exists for the requested language.
+	 * Gets the localized name of this layout set prototype, optionally using the default language if no localization exists for the requested language.
 	 *
 	 * @param languageId the id of the language to get the localized name for
 	 * @param useDefault whether to use the default language if no localization exists for the requested language
-	 * @return the localized name of this  layout set prototype
+	 * @return the localized name of this layout set prototype
 	 */
 	public String getName(String languageId, boolean useDefault);
 
 	/**
-	 * Gets a map of the locales and localized name of this  layout set prototype.
+	 * Gets a map of the locales and localized name of this layout set prototype.
 	 *
 	 * @return the locales and localized name
 	 */
 	public Map<Locale, String> getNameMap();
 
 	/**
-	 * Sets the name of this  layout set prototype.
+	 * Sets the name of this layout set prototype.
 	 *
-	 * @param name the name of this  layout set prototype
+	 * @param name the name of this layout set prototype
 	 */
 	public void setName(String name);
 
 	/**
-	 * Sets the localized name of this  layout set prototype.
+	 * Sets the localized name of this layout set prototype.
 	 *
 	 * @param locale the locale to set the localized name for
-	 * @param name the localized name of this  layout set prototype
+	 * @param name the localized name of this layout set prototype
 	 */
 	public void setName(Locale locale, String name);
 
 	/**
-	 * Sets the localized names of this  layout set prototype from the map of locales and localized names.
+	 * Sets the localized names of this layout set prototype from the map of locales and localized names.
 	 *
-	 * @param nameMap the locales and localized names of this  layout set prototype
+	 * @param nameMap the locales and localized names of this layout set prototype
 	 */
 	public void setNameMap(Map<Locale, String> nameMap);
 
 	/**
-	 * Gets the description of this  layout set prototype.
+	 * Gets the description of this layout set prototype.
 	 *
-	 * @return the description of this  layout set prototype
+	 * @return the description of this layout set prototype
 	 */
 	@AutoEscape
 	public String getDescription();
 
 	/**
-	 * Sets the description of this  layout set prototype.
+	 * Sets the description of this layout set prototype.
 	 *
-	 * @param description the description of this  layout set prototype
+	 * @param description the description of this layout set prototype
 	 */
 	public void setDescription(String description);
 
 	/**
-	 * Gets the settings of this  layout set prototype.
+	 * Gets the settings of this layout set prototype.
 	 *
-	 * @return the settings of this  layout set prototype
+	 * @return the settings of this layout set prototype
 	 */
 	@AutoEscape
 	public String getSettings();
 
 	/**
-	 * Sets the settings of this  layout set prototype.
+	 * Sets the settings of this layout set prototype.
 	 *
-	 * @param settings the settings of this  layout set prototype
+	 * @param settings the settings of this layout set prototype
 	 */
 	public void setSettings(String settings);
 
 	/**
-	 * Gets the active of this  layout set prototype.
+	 * Gets the active of this layout set prototype.
 	 *
-	 * @return the active of this  layout set prototype
+	 * @return the active of this layout set prototype
 	 */
 	public boolean getActive();
 
 	/**
-	 * Determines whether this  layout set prototype is active.
+	 * Determines whether this layout set prototype is active.
 	 *
-	 * @return whether this  layout set prototype is active
+	 * @return whether this layout set prototype is active
 	 */
 	public boolean isActive();
 
 	/**
-	 * Sets the active of this  layout set prototype.
+	 * Sets the active of this layout set prototype.
 	 *
-	 * @param active the active of this  layout set prototype
+	 * @param active the active of this layout set prototype
 	 */
 	public void setActive(boolean active);
 
 	/**
-	 * Gets a copy of this  layout set prototype as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this layout set prototype as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

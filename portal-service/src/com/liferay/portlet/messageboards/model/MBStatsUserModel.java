@@ -32,7 +32,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  m b stats user model instance should use the {@link MBStatsUser} interface instead.
+ * Never reference this interface directly. All methods that expect a m b stats user model instance should use the {@link MBStatsUser} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -43,121 +43,121 @@ import java.util.Date;
  */
 public interface MBStatsUserModel extends BaseModel<MBStatsUser> {
 	/**
-	 * Gets the primary key of this  m b stats user.
+	 * Gets the primary key of this m b stats user.
 	 *
-	 * @return the primary key of this  m b stats user
+	 * @return the primary key of this m b stats user
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  m b stats user
+	 * Sets the primary key of this m b stats user
 	 *
-	 * @param pk the primary key of this  m b stats user
+	 * @param pk the primary key of this m b stats user
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the stats user id of this  m b stats user.
+	 * Gets the stats user id of this m b stats user.
 	 *
-	 * @return the stats user id of this  m b stats user
+	 * @return the stats user id of this m b stats user
 	 */
 	public long getStatsUserId();
 
 	/**
-	 * Sets the stats user id of this  m b stats user.
+	 * Sets the stats user id of this m b stats user.
 	 *
-	 * @param statsUserId the stats user id of this  m b stats user
+	 * @param statsUserId the stats user id of this m b stats user
 	 */
 	public void setStatsUserId(long statsUserId);
 
 	/**
-	 * Gets the stats user uuid of this  m b stats user.
+	 * Gets the stats user uuid of this m b stats user.
 	 *
-	 * @return the stats user uuid of this  m b stats user
+	 * @return the stats user uuid of this m b stats user
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getStatsUserUuid() throws SystemException;
 
 	/**
-	 * Sets the stats user uuid of this  m b stats user.
+	 * Sets the stats user uuid of this m b stats user.
 	 *
-	 * @param statsUserUuid the stats user uuid of this  m b stats user
+	 * @param statsUserUuid the stats user uuid of this m b stats user
 	 */
 	public void setStatsUserUuid(String statsUserUuid);
 
 	/**
-	 * Gets the group id of this  m b stats user.
+	 * Gets the group id of this m b stats user.
 	 *
-	 * @return the group id of this  m b stats user
+	 * @return the group id of this m b stats user
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  m b stats user.
+	 * Sets the group id of this m b stats user.
 	 *
-	 * @param groupId the group id of this  m b stats user
+	 * @param groupId the group id of this m b stats user
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the user id of this  m b stats user.
+	 * Gets the user id of this m b stats user.
 	 *
-	 * @return the user id of this  m b stats user
+	 * @return the user id of this m b stats user
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  m b stats user.
+	 * Sets the user id of this m b stats user.
 	 *
-	 * @param userId the user id of this  m b stats user
+	 * @param userId the user id of this m b stats user
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  m b stats user.
+	 * Gets the user uuid of this m b stats user.
 	 *
-	 * @return the user uuid of this  m b stats user
+	 * @return the user uuid of this m b stats user
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  m b stats user.
+	 * Sets the user uuid of this m b stats user.
 	 *
-	 * @param userUuid the user uuid of this  m b stats user
+	 * @param userUuid the user uuid of this m b stats user
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the message count of this  m b stats user.
+	 * Gets the message count of this m b stats user.
 	 *
-	 * @return the message count of this  m b stats user
+	 * @return the message count of this m b stats user
 	 */
 	public int getMessageCount();
 
 	/**
-	 * Sets the message count of this  m b stats user.
+	 * Sets the message count of this m b stats user.
 	 *
-	 * @param messageCount the message count of this  m b stats user
+	 * @param messageCount the message count of this m b stats user
 	 */
 	public void setMessageCount(int messageCount);
 
 	/**
-	 * Gets the last post date of this  m b stats user.
+	 * Gets the last post date of this m b stats user.
 	 *
-	 * @return the last post date of this  m b stats user
+	 * @return the last post date of this m b stats user
 	 */
 	public Date getLastPostDate();
 
 	/**
-	 * Sets the last post date of this  m b stats user.
+	 * Sets the last post date of this m b stats user.
 	 *
-	 * @param lastPostDate the last post date of this  m b stats user
+	 * @param lastPostDate the last post date of this m b stats user
 	 */
 	public void setLastPostDate(Date lastPostDate);
 
 	/**
-	 * Gets a copy of this  m b stats user as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this m b stats user as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  plugin setting model instance should use the {@link PluginSetting} interface instead.
+ * Never reference this interface directly. All methods that expect a plugin setting model instance should use the {@link PluginSetting} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,115 +40,115 @@ import java.io.Serializable;
  */
 public interface PluginSettingModel extends BaseModel<PluginSetting> {
 	/**
-	 * Gets the primary key of this  plugin setting.
+	 * Gets the primary key of this plugin setting.
 	 *
-	 * @return the primary key of this  plugin setting
+	 * @return the primary key of this plugin setting
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  plugin setting
+	 * Sets the primary key of this plugin setting
 	 *
-	 * @param pk the primary key of this  plugin setting
+	 * @param pk the primary key of this plugin setting
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the plugin setting id of this  plugin setting.
+	 * Gets the plugin setting id of this plugin setting.
 	 *
-	 * @return the plugin setting id of this  plugin setting
+	 * @return the plugin setting id of this plugin setting
 	 */
 	public long getPluginSettingId();
 
 	/**
-	 * Sets the plugin setting id of this  plugin setting.
+	 * Sets the plugin setting id of this plugin setting.
 	 *
-	 * @param pluginSettingId the plugin setting id of this  plugin setting
+	 * @param pluginSettingId the plugin setting id of this plugin setting
 	 */
 	public void setPluginSettingId(long pluginSettingId);
 
 	/**
-	 * Gets the company id of this  plugin setting.
+	 * Gets the company id of this plugin setting.
 	 *
-	 * @return the company id of this  plugin setting
+	 * @return the company id of this plugin setting
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  plugin setting.
+	 * Sets the company id of this plugin setting.
 	 *
-	 * @param companyId the company id of this  plugin setting
+	 * @param companyId the company id of this plugin setting
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the plugin id of this  plugin setting.
+	 * Gets the plugin id of this plugin setting.
 	 *
-	 * @return the plugin id of this  plugin setting
+	 * @return the plugin id of this plugin setting
 	 */
 	@AutoEscape
 	public String getPluginId();
 
 	/**
-	 * Sets the plugin id of this  plugin setting.
+	 * Sets the plugin id of this plugin setting.
 	 *
-	 * @param pluginId the plugin id of this  plugin setting
+	 * @param pluginId the plugin id of this plugin setting
 	 */
 	public void setPluginId(String pluginId);
 
 	/**
-	 * Gets the plugin type of this  plugin setting.
+	 * Gets the plugin type of this plugin setting.
 	 *
-	 * @return the plugin type of this  plugin setting
+	 * @return the plugin type of this plugin setting
 	 */
 	@AutoEscape
 	public String getPluginType();
 
 	/**
-	 * Sets the plugin type of this  plugin setting.
+	 * Sets the plugin type of this plugin setting.
 	 *
-	 * @param pluginType the plugin type of this  plugin setting
+	 * @param pluginType the plugin type of this plugin setting
 	 */
 	public void setPluginType(String pluginType);
 
 	/**
-	 * Gets the roles of this  plugin setting.
+	 * Gets the roles of this plugin setting.
 	 *
-	 * @return the roles of this  plugin setting
+	 * @return the roles of this plugin setting
 	 */
 	@AutoEscape
 	public String getRoles();
 
 	/**
-	 * Sets the roles of this  plugin setting.
+	 * Sets the roles of this plugin setting.
 	 *
-	 * @param roles the roles of this  plugin setting
+	 * @param roles the roles of this plugin setting
 	 */
 	public void setRoles(String roles);
 
 	/**
-	 * Gets the active of this  plugin setting.
+	 * Gets the active of this plugin setting.
 	 *
-	 * @return the active of this  plugin setting
+	 * @return the active of this plugin setting
 	 */
 	public boolean getActive();
 
 	/**
-	 * Determines whether this  plugin setting is active.
+	 * Determines whether this plugin setting is active.
 	 *
-	 * @return whether this  plugin setting is active
+	 * @return whether this plugin setting is active
 	 */
 	public boolean isActive();
 
 	/**
-	 * Sets the active of this  plugin setting.
+	 * Sets the active of this plugin setting.
 	 *
-	 * @param active the active of this  plugin setting
+	 * @param active the active of this plugin setting
 	 */
 	public void setActive(boolean active);
 
 	/**
-	 * Gets a copy of this  plugin setting as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this plugin setting as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

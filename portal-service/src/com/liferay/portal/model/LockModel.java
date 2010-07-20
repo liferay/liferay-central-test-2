@@ -32,7 +32,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  lock model instance should use the {@link Lock} interface instead.
+ * Never reference this interface directly. All methods that expect a lock model instance should use the {@link Lock} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -43,202 +43,202 @@ import java.util.Date;
  */
 public interface LockModel extends BaseModel<Lock> {
 	/**
-	 * Gets the primary key of this  lock.
+	 * Gets the primary key of this lock.
 	 *
-	 * @return the primary key of this  lock
+	 * @return the primary key of this lock
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  lock
+	 * Sets the primary key of this lock
 	 *
-	 * @param pk the primary key of this  lock
+	 * @param pk the primary key of this lock
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the uuid of this  lock.
+	 * Gets the uuid of this lock.
 	 *
-	 * @return the uuid of this  lock
+	 * @return the uuid of this lock
 	 */
 	@AutoEscape
 	public String getUuid();
 
 	/**
-	 * Sets the uuid of this  lock.
+	 * Sets the uuid of this lock.
 	 *
-	 * @param uuid the uuid of this  lock
+	 * @param uuid the uuid of this lock
 	 */
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the lock id of this  lock.
+	 * Gets the lock id of this lock.
 	 *
-	 * @return the lock id of this  lock
+	 * @return the lock id of this lock
 	 */
 	public long getLockId();
 
 	/**
-	 * Sets the lock id of this  lock.
+	 * Sets the lock id of this lock.
 	 *
-	 * @param lockId the lock id of this  lock
+	 * @param lockId the lock id of this lock
 	 */
 	public void setLockId(long lockId);
 
 	/**
-	 * Gets the company id of this  lock.
+	 * Gets the company id of this lock.
 	 *
-	 * @return the company id of this  lock
+	 * @return the company id of this lock
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  lock.
+	 * Sets the company id of this lock.
 	 *
-	 * @param companyId the company id of this  lock
+	 * @param companyId the company id of this lock
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  lock.
+	 * Gets the user id of this lock.
 	 *
-	 * @return the user id of this  lock
+	 * @return the user id of this lock
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  lock.
+	 * Sets the user id of this lock.
 	 *
-	 * @param userId the user id of this  lock
+	 * @param userId the user id of this lock
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  lock.
+	 * Gets the user uuid of this lock.
 	 *
-	 * @return the user uuid of this  lock
+	 * @return the user uuid of this lock
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  lock.
+	 * Sets the user uuid of this lock.
 	 *
-	 * @param userUuid the user uuid of this  lock
+	 * @param userUuid the user uuid of this lock
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this  lock.
+	 * Gets the user name of this lock.
 	 *
-	 * @return the user name of this  lock
+	 * @return the user name of this lock
 	 */
 	@AutoEscape
 	public String getUserName();
 
 	/**
-	 * Sets the user name of this  lock.
+	 * Sets the user name of this lock.
 	 *
-	 * @param userName the user name of this  lock
+	 * @param userName the user name of this lock
 	 */
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this  lock.
+	 * Gets the create date of this lock.
 	 *
-	 * @return the create date of this  lock
+	 * @return the create date of this lock
 	 */
 	public Date getCreateDate();
 
 	/**
-	 * Sets the create date of this  lock.
+	 * Sets the create date of this lock.
 	 *
-	 * @param createDate the create date of this  lock
+	 * @param createDate the create date of this lock
 	 */
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the class name of this  lock.
+	 * Gets the class name of this lock.
 	 *
-	 * @return the class name of this  lock
+	 * @return the class name of this lock
 	 */
 	@AutoEscape
 	public String getClassName();
 
 	/**
-	 * Sets the class name of this  lock.
+	 * Sets the class name of this lock.
 	 *
-	 * @param className the class name of this  lock
+	 * @param className the class name of this lock
 	 */
 	public void setClassName(String className);
 
 	/**
-	 * Gets the key of this  lock.
+	 * Gets the key of this lock.
 	 *
-	 * @return the key of this  lock
+	 * @return the key of this lock
 	 */
 	@AutoEscape
 	public String getKey();
 
 	/**
-	 * Sets the key of this  lock.
+	 * Sets the key of this lock.
 	 *
-	 * @param key the key of this  lock
+	 * @param key the key of this lock
 	 */
 	public void setKey(String key);
 
 	/**
-	 * Gets the owner of this  lock.
+	 * Gets the owner of this lock.
 	 *
-	 * @return the owner of this  lock
+	 * @return the owner of this lock
 	 */
 	@AutoEscape
 	public String getOwner();
 
 	/**
-	 * Sets the owner of this  lock.
+	 * Sets the owner of this lock.
 	 *
-	 * @param owner the owner of this  lock
+	 * @param owner the owner of this lock
 	 */
 	public void setOwner(String owner);
 
 	/**
-	 * Gets the inheritable of this  lock.
+	 * Gets the inheritable of this lock.
 	 *
-	 * @return the inheritable of this  lock
+	 * @return the inheritable of this lock
 	 */
 	public boolean getInheritable();
 
 	/**
-	 * Determines whether this  lock is inheritable.
+	 * Determines whether this lock is inheritable.
 	 *
-	 * @return whether this  lock is inheritable
+	 * @return whether this lock is inheritable
 	 */
 	public boolean isInheritable();
 
 	/**
-	 * Sets the inheritable of this  lock.
+	 * Sets the inheritable of this lock.
 	 *
-	 * @param inheritable the inheritable of this  lock
+	 * @param inheritable the inheritable of this lock
 	 */
 	public void setInheritable(boolean inheritable);
 
 	/**
-	 * Gets the expiration date of this  lock.
+	 * Gets the expiration date of this lock.
 	 *
-	 * @return the expiration date of this  lock
+	 * @return the expiration date of this lock
 	 */
 	public Date getExpirationDate();
 
 	/**
-	 * Sets the expiration date of this  lock.
+	 * Sets the expiration date of this lock.
 	 *
-	 * @param expirationDate the expiration date of this  lock
+	 * @param expirationDate the expiration date of this lock
 	 */
 	public void setExpirationDate(Date expirationDate);
 
 	/**
-	 * Gets a copy of this  lock as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this lock as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

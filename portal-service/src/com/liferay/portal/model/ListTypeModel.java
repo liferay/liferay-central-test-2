@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  list type model instance should use the {@link ListType} interface instead.
+ * Never reference this interface directly. All methods that expect a list type model instance should use the {@link ListType} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,65 +40,65 @@ import java.io.Serializable;
  */
 public interface ListTypeModel extends BaseModel<ListType> {
 	/**
-	 * Gets the primary key of this  list type.
+	 * Gets the primary key of this list type.
 	 *
-	 * @return the primary key of this  list type
+	 * @return the primary key of this list type
 	 */
 	public int getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  list type
+	 * Sets the primary key of this list type
 	 *
-	 * @param pk the primary key of this  list type
+	 * @param pk the primary key of this list type
 	 */
 	public void setPrimaryKey(int pk);
 
 	/**
-	 * Gets the list type id of this  list type.
+	 * Gets the list type id of this list type.
 	 *
-	 * @return the list type id of this  list type
+	 * @return the list type id of this list type
 	 */
 	public int getListTypeId();
 
 	/**
-	 * Sets the list type id of this  list type.
+	 * Sets the list type id of this list type.
 	 *
-	 * @param listTypeId the list type id of this  list type
+	 * @param listTypeId the list type id of this list type
 	 */
 	public void setListTypeId(int listTypeId);
 
 	/**
-	 * Gets the name of this  list type.
+	 * Gets the name of this list type.
 	 *
-	 * @return the name of this  list type
+	 * @return the name of this list type
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  list type.
+	 * Sets the name of this list type.
 	 *
-	 * @param name the name of this  list type
+	 * @param name the name of this list type
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets the type of this  list type.
+	 * Gets the type of this list type.
 	 *
-	 * @return the type of this  list type
+	 * @return the type of this list type
 	 */
 	@AutoEscape
 	public String getType();
 
 	/**
-	 * Sets the type of this  list type.
+	 * Sets the type of this list type.
 	 *
-	 * @param type the type of this  list type
+	 * @param type the type of this list type
 	 */
 	public void setType(String type);
 
 	/**
-	 * Gets a copy of this  list type as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this list type as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

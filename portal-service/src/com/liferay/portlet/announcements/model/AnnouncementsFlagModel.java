@@ -32,7 +32,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  announcements flag model instance should use the {@link AnnouncementsFlag} interface instead.
+ * Never reference this interface directly. All methods that expect a announcements flag model instance should use the {@link AnnouncementsFlag} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -43,106 +43,106 @@ import java.util.Date;
  */
 public interface AnnouncementsFlagModel extends BaseModel<AnnouncementsFlag> {
 	/**
-	 * Gets the primary key of this  announcements flag.
+	 * Gets the primary key of this announcements flag.
 	 *
-	 * @return the primary key of this  announcements flag
+	 * @return the primary key of this announcements flag
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  announcements flag
+	 * Sets the primary key of this announcements flag
 	 *
-	 * @param pk the primary key of this  announcements flag
+	 * @param pk the primary key of this announcements flag
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the flag id of this  announcements flag.
+	 * Gets the flag id of this announcements flag.
 	 *
-	 * @return the flag id of this  announcements flag
+	 * @return the flag id of this announcements flag
 	 */
 	public long getFlagId();
 
 	/**
-	 * Sets the flag id of this  announcements flag.
+	 * Sets the flag id of this announcements flag.
 	 *
-	 * @param flagId the flag id of this  announcements flag
+	 * @param flagId the flag id of this announcements flag
 	 */
 	public void setFlagId(long flagId);
 
 	/**
-	 * Gets the user id of this  announcements flag.
+	 * Gets the user id of this announcements flag.
 	 *
-	 * @return the user id of this  announcements flag
+	 * @return the user id of this announcements flag
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  announcements flag.
+	 * Sets the user id of this announcements flag.
 	 *
-	 * @param userId the user id of this  announcements flag
+	 * @param userId the user id of this announcements flag
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  announcements flag.
+	 * Gets the user uuid of this announcements flag.
 	 *
-	 * @return the user uuid of this  announcements flag
+	 * @return the user uuid of this announcements flag
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  announcements flag.
+	 * Sets the user uuid of this announcements flag.
 	 *
-	 * @param userUuid the user uuid of this  announcements flag
+	 * @param userUuid the user uuid of this announcements flag
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the create date of this  announcements flag.
+	 * Gets the create date of this announcements flag.
 	 *
-	 * @return the create date of this  announcements flag
+	 * @return the create date of this announcements flag
 	 */
 	public Date getCreateDate();
 
 	/**
-	 * Sets the create date of this  announcements flag.
+	 * Sets the create date of this announcements flag.
 	 *
-	 * @param createDate the create date of this  announcements flag
+	 * @param createDate the create date of this announcements flag
 	 */
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the entry id of this  announcements flag.
+	 * Gets the entry id of this announcements flag.
 	 *
-	 * @return the entry id of this  announcements flag
+	 * @return the entry id of this announcements flag
 	 */
 	public long getEntryId();
 
 	/**
-	 * Sets the entry id of this  announcements flag.
+	 * Sets the entry id of this announcements flag.
 	 *
-	 * @param entryId the entry id of this  announcements flag
+	 * @param entryId the entry id of this announcements flag
 	 */
 	public void setEntryId(long entryId);
 
 	/**
-	 * Gets the value of this  announcements flag.
+	 * Gets the value of this announcements flag.
 	 *
-	 * @return the value of this  announcements flag
+	 * @return the value of this announcements flag
 	 */
 	public int getValue();
 
 	/**
-	 * Sets the value of this  announcements flag.
+	 * Sets the value of this announcements flag.
 	 *
-	 * @param value the value of this  announcements flag
+	 * @param value the value of this announcements flag
 	 */
 	public void setValue(int value);
 
 	/**
-	 * Gets a copy of this  announcements flag as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this announcements flag as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

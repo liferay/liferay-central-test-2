@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.ratings.model;
 
-
 /**
  * <p>
  * This interface is a model that represents the RatingsEntry table in the

@@ -30,7 +30,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  journal article resource model instance should use the {@link JournalArticleResource} interface instead.
+ * Never reference this interface directly. All methods that expect a journal article resource model instance should use the {@link JournalArticleResource} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -41,64 +41,64 @@ import java.io.Serializable;
  */
 public interface JournalArticleResourceModel extends BaseModel<JournalArticleResource> {
 	/**
-	 * Gets the primary key of this  journal article resource.
+	 * Gets the primary key of this journal article resource.
 	 *
-	 * @return the primary key of this  journal article resource
+	 * @return the primary key of this journal article resource
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  journal article resource
+	 * Sets the primary key of this journal article resource
 	 *
-	 * @param pk the primary key of this  journal article resource
+	 * @param pk the primary key of this journal article resource
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the resource prim key of this  journal article resource.
+	 * Gets the resource prim key of this journal article resource.
 	 *
-	 * @return the resource prim key of this  journal article resource
+	 * @return the resource prim key of this journal article resource
 	 */
 	public long getResourcePrimKey();
 
 	/**
-	 * Sets the resource prim key of this  journal article resource.
+	 * Sets the resource prim key of this journal article resource.
 	 *
-	 * @param resourcePrimKey the resource prim key of this  journal article resource
+	 * @param resourcePrimKey the resource prim key of this journal article resource
 	 */
 	public void setResourcePrimKey(long resourcePrimKey);
 
 	/**
-	 * Gets the group id of this  journal article resource.
+	 * Gets the group id of this journal article resource.
 	 *
-	 * @return the group id of this  journal article resource
+	 * @return the group id of this journal article resource
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  journal article resource.
+	 * Sets the group id of this journal article resource.
 	 *
-	 * @param groupId the group id of this  journal article resource
+	 * @param groupId the group id of this journal article resource
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the article id of this  journal article resource.
+	 * Gets the article id of this journal article resource.
 	 *
-	 * @return the article id of this  journal article resource
+	 * @return the article id of this journal article resource
 	 */
 	@AutoEscape
 	public String getArticleId();
 
 	/**
-	 * Sets the article id of this  journal article resource.
+	 * Sets the article id of this journal article resource.
 	 *
-	 * @param articleId the article id of this  journal article resource
+	 * @param articleId the article id of this journal article resource
 	 */
 	public void setArticleId(String articleId);
 
 	/**
-	 * Gets a copy of this  journal article resource as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this journal article resource as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

@@ -32,7 +32,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  user model instance should use the {@link User} interface instead.
+ * Never reference this interface directly. All methods that expect a user model instance should use the {@link User} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -43,613 +43,613 @@ import java.util.Date;
  */
 public interface UserModel extends BaseModel<User> {
 	/**
-	 * Gets the primary key of this  user.
+	 * Gets the primary key of this user.
 	 *
-	 * @return the primary key of this  user
+	 * @return the primary key of this user
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  user
+	 * Sets the primary key of this user
 	 *
-	 * @param pk the primary key of this  user
+	 * @param pk the primary key of this user
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the uuid of this  user.
+	 * Gets the uuid of this user.
 	 *
-	 * @return the uuid of this  user
+	 * @return the uuid of this user
 	 */
 	@AutoEscape
 	public String getUuid();
 
 	/**
-	 * Sets the uuid of this  user.
+	 * Sets the uuid of this user.
 	 *
-	 * @param uuid the uuid of this  user
+	 * @param uuid the uuid of this user
 	 */
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the user id of this  user.
+	 * Gets the user id of this user.
 	 *
-	 * @return the user id of this  user
+	 * @return the user id of this user
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  user.
+	 * Sets the user id of this user.
 	 *
-	 * @param userId the user id of this  user
+	 * @param userId the user id of this user
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  user.
+	 * Gets the user uuid of this user.
 	 *
-	 * @return the user uuid of this  user
+	 * @return the user uuid of this user
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  user.
+	 * Sets the user uuid of this user.
 	 *
-	 * @param userUuid the user uuid of this  user
+	 * @param userUuid the user uuid of this user
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the company id of this  user.
+	 * Gets the company id of this user.
 	 *
-	 * @return the company id of this  user
+	 * @return the company id of this user
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  user.
+	 * Sets the company id of this user.
 	 *
-	 * @param companyId the company id of this  user
+	 * @param companyId the company id of this user
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the create date of this  user.
+	 * Gets the create date of this user.
 	 *
-	 * @return the create date of this  user
+	 * @return the create date of this user
 	 */
 	public Date getCreateDate();
 
 	/**
-	 * Sets the create date of this  user.
+	 * Sets the create date of this user.
 	 *
-	 * @param createDate the create date of this  user
+	 * @param createDate the create date of this user
 	 */
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this  user.
+	 * Gets the modified date of this user.
 	 *
-	 * @return the modified date of this  user
+	 * @return the modified date of this user
 	 */
 	public Date getModifiedDate();
 
 	/**
-	 * Sets the modified date of this  user.
+	 * Sets the modified date of this user.
 	 *
-	 * @param modifiedDate the modified date of this  user
+	 * @param modifiedDate the modified date of this user
 	 */
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the default user of this  user.
+	 * Gets the default user of this user.
 	 *
-	 * @return the default user of this  user
+	 * @return the default user of this user
 	 */
 	public boolean getDefaultUser();
 
 	/**
-	 * Determines whether this  user is default user.
+	 * Determines whether this user is default user.
 	 *
-	 * @return whether this  user is default user
+	 * @return whether this user is default user
 	 */
 	public boolean isDefaultUser();
 
 	/**
-	 * Sets the default user of this  user.
+	 * Sets the default user of this user.
 	 *
-	 * @param defaultUser the default user of this  user
+	 * @param defaultUser the default user of this user
 	 */
 	public void setDefaultUser(boolean defaultUser);
 
 	/**
-	 * Gets the contact id of this  user.
+	 * Gets the contact id of this user.
 	 *
-	 * @return the contact id of this  user
+	 * @return the contact id of this user
 	 */
 	public long getContactId();
 
 	/**
-	 * Sets the contact id of this  user.
+	 * Sets the contact id of this user.
 	 *
-	 * @param contactId the contact id of this  user
+	 * @param contactId the contact id of this user
 	 */
 	public void setContactId(long contactId);
 
 	/**
-	 * Gets the password of this  user.
+	 * Gets the password of this user.
 	 *
-	 * @return the password of this  user
+	 * @return the password of this user
 	 */
 	@AutoEscape
 	public String getPassword();
 
 	/**
-	 * Sets the password of this  user.
+	 * Sets the password of this user.
 	 *
-	 * @param password the password of this  user
+	 * @param password the password of this user
 	 */
 	public void setPassword(String password);
 
 	/**
-	 * Gets the password encrypted of this  user.
+	 * Gets the password encrypted of this user.
 	 *
-	 * @return the password encrypted of this  user
+	 * @return the password encrypted of this user
 	 */
 	public boolean getPasswordEncrypted();
 
 	/**
-	 * Determines whether this  user is password encrypted.
+	 * Determines whether this user is password encrypted.
 	 *
-	 * @return whether this  user is password encrypted
+	 * @return whether this user is password encrypted
 	 */
 	public boolean isPasswordEncrypted();
 
 	/**
-	 * Sets the password encrypted of this  user.
+	 * Sets the password encrypted of this user.
 	 *
-	 * @param passwordEncrypted the password encrypted of this  user
+	 * @param passwordEncrypted the password encrypted of this user
 	 */
 	public void setPasswordEncrypted(boolean passwordEncrypted);
 
 	/**
-	 * Gets the password reset of this  user.
+	 * Gets the password reset of this user.
 	 *
-	 * @return the password reset of this  user
+	 * @return the password reset of this user
 	 */
 	public boolean getPasswordReset();
 
 	/**
-	 * Determines whether this  user is password reset.
+	 * Determines whether this user is password reset.
 	 *
-	 * @return whether this  user is password reset
+	 * @return whether this user is password reset
 	 */
 	public boolean isPasswordReset();
 
 	/**
-	 * Sets the password reset of this  user.
+	 * Sets the password reset of this user.
 	 *
-	 * @param passwordReset the password reset of this  user
+	 * @param passwordReset the password reset of this user
 	 */
 	public void setPasswordReset(boolean passwordReset);
 
 	/**
-	 * Gets the password modified date of this  user.
+	 * Gets the password modified date of this user.
 	 *
-	 * @return the password modified date of this  user
+	 * @return the password modified date of this user
 	 */
 	public Date getPasswordModifiedDate();
 
 	/**
-	 * Sets the password modified date of this  user.
+	 * Sets the password modified date of this user.
 	 *
-	 * @param passwordModifiedDate the password modified date of this  user
+	 * @param passwordModifiedDate the password modified date of this user
 	 */
 	public void setPasswordModifiedDate(Date passwordModifiedDate);
 
 	/**
-	 * Gets the reminder query question of this  user.
+	 * Gets the reminder query question of this user.
 	 *
-	 * @return the reminder query question of this  user
+	 * @return the reminder query question of this user
 	 */
 	@AutoEscape
 	public String getReminderQueryQuestion();
 
 	/**
-	 * Sets the reminder query question of this  user.
+	 * Sets the reminder query question of this user.
 	 *
-	 * @param reminderQueryQuestion the reminder query question of this  user
+	 * @param reminderQueryQuestion the reminder query question of this user
 	 */
 	public void setReminderQueryQuestion(String reminderQueryQuestion);
 
 	/**
-	 * Gets the reminder query answer of this  user.
+	 * Gets the reminder query answer of this user.
 	 *
-	 * @return the reminder query answer of this  user
+	 * @return the reminder query answer of this user
 	 */
 	@AutoEscape
 	public String getReminderQueryAnswer();
 
 	/**
-	 * Sets the reminder query answer of this  user.
+	 * Sets the reminder query answer of this user.
 	 *
-	 * @param reminderQueryAnswer the reminder query answer of this  user
+	 * @param reminderQueryAnswer the reminder query answer of this user
 	 */
 	public void setReminderQueryAnswer(String reminderQueryAnswer);
 
 	/**
-	 * Gets the grace login count of this  user.
+	 * Gets the grace login count of this user.
 	 *
-	 * @return the grace login count of this  user
+	 * @return the grace login count of this user
 	 */
 	public int getGraceLoginCount();
 
 	/**
-	 * Sets the grace login count of this  user.
+	 * Sets the grace login count of this user.
 	 *
-	 * @param graceLoginCount the grace login count of this  user
+	 * @param graceLoginCount the grace login count of this user
 	 */
 	public void setGraceLoginCount(int graceLoginCount);
 
 	/**
-	 * Gets the screen name of this  user.
+	 * Gets the screen name of this user.
 	 *
-	 * @return the screen name of this  user
+	 * @return the screen name of this user
 	 */
 	@AutoEscape
 	public String getScreenName();
 
 	/**
-	 * Sets the screen name of this  user.
+	 * Sets the screen name of this user.
 	 *
-	 * @param screenName the screen name of this  user
+	 * @param screenName the screen name of this user
 	 */
 	public void setScreenName(String screenName);
 
 	/**
-	 * Gets the email address of this  user.
+	 * Gets the email address of this user.
 	 *
-	 * @return the email address of this  user
+	 * @return the email address of this user
 	 */
 	@AutoEscape
 	public String getEmailAddress();
 
 	/**
-	 * Sets the email address of this  user.
+	 * Sets the email address of this user.
 	 *
-	 * @param emailAddress the email address of this  user
+	 * @param emailAddress the email address of this user
 	 */
 	public void setEmailAddress(String emailAddress);
 
 	/**
-	 * Gets the facebook id of this  user.
+	 * Gets the facebook id of this user.
 	 *
-	 * @return the facebook id of this  user
+	 * @return the facebook id of this user
 	 */
 	public long getFacebookId();
 
 	/**
-	 * Sets the facebook id of this  user.
+	 * Sets the facebook id of this user.
 	 *
-	 * @param facebookId the facebook id of this  user
+	 * @param facebookId the facebook id of this user
 	 */
 	public void setFacebookId(long facebookId);
 
 	/**
-	 * Gets the open id of this  user.
+	 * Gets the open id of this user.
 	 *
-	 * @return the open id of this  user
+	 * @return the open id of this user
 	 */
 	@AutoEscape
 	public String getOpenId();
 
 	/**
-	 * Sets the open id of this  user.
+	 * Sets the open id of this user.
 	 *
-	 * @param openId the open id of this  user
+	 * @param openId the open id of this user
 	 */
 	public void setOpenId(String openId);
 
 	/**
-	 * Gets the portrait id of this  user.
+	 * Gets the portrait id of this user.
 	 *
-	 * @return the portrait id of this  user
+	 * @return the portrait id of this user
 	 */
 	public long getPortraitId();
 
 	/**
-	 * Sets the portrait id of this  user.
+	 * Sets the portrait id of this user.
 	 *
-	 * @param portraitId the portrait id of this  user
+	 * @param portraitId the portrait id of this user
 	 */
 	public void setPortraitId(long portraitId);
 
 	/**
-	 * Gets the language id of this  user.
+	 * Gets the language id of this user.
 	 *
-	 * @return the language id of this  user
+	 * @return the language id of this user
 	 */
 	@AutoEscape
 	public String getLanguageId();
 
 	/**
-	 * Sets the language id of this  user.
+	 * Sets the language id of this user.
 	 *
-	 * @param languageId the language id of this  user
+	 * @param languageId the language id of this user
 	 */
 	public void setLanguageId(String languageId);
 
 	/**
-	 * Gets the time zone id of this  user.
+	 * Gets the time zone id of this user.
 	 *
-	 * @return the time zone id of this  user
+	 * @return the time zone id of this user
 	 */
 	@AutoEscape
 	public String getTimeZoneId();
 
 	/**
-	 * Sets the time zone id of this  user.
+	 * Sets the time zone id of this user.
 	 *
-	 * @param timeZoneId the time zone id of this  user
+	 * @param timeZoneId the time zone id of this user
 	 */
 	public void setTimeZoneId(String timeZoneId);
 
 	/**
-	 * Gets the greeting of this  user.
+	 * Gets the greeting of this user.
 	 *
-	 * @return the greeting of this  user
+	 * @return the greeting of this user
 	 */
 	@AutoEscape
 	public String getGreeting();
 
 	/**
-	 * Sets the greeting of this  user.
+	 * Sets the greeting of this user.
 	 *
-	 * @param greeting the greeting of this  user
+	 * @param greeting the greeting of this user
 	 */
 	public void setGreeting(String greeting);
 
 	/**
-	 * Gets the comments of this  user.
+	 * Gets the comments of this user.
 	 *
-	 * @return the comments of this  user
+	 * @return the comments of this user
 	 */
 	@AutoEscape
 	public String getComments();
 
 	/**
-	 * Sets the comments of this  user.
+	 * Sets the comments of this user.
 	 *
-	 * @param comments the comments of this  user
+	 * @param comments the comments of this user
 	 */
 	public void setComments(String comments);
 
 	/**
-	 * Gets the first name of this  user.
+	 * Gets the first name of this user.
 	 *
-	 * @return the first name of this  user
+	 * @return the first name of this user
 	 */
 	@AutoEscape
 	public String getFirstName();
 
 	/**
-	 * Sets the first name of this  user.
+	 * Sets the first name of this user.
 	 *
-	 * @param firstName the first name of this  user
+	 * @param firstName the first name of this user
 	 */
 	public void setFirstName(String firstName);
 
 	/**
-	 * Gets the middle name of this  user.
+	 * Gets the middle name of this user.
 	 *
-	 * @return the middle name of this  user
+	 * @return the middle name of this user
 	 */
 	@AutoEscape
 	public String getMiddleName();
 
 	/**
-	 * Sets the middle name of this  user.
+	 * Sets the middle name of this user.
 	 *
-	 * @param middleName the middle name of this  user
+	 * @param middleName the middle name of this user
 	 */
 	public void setMiddleName(String middleName);
 
 	/**
-	 * Gets the last name of this  user.
+	 * Gets the last name of this user.
 	 *
-	 * @return the last name of this  user
+	 * @return the last name of this user
 	 */
 	@AutoEscape
 	public String getLastName();
 
 	/**
-	 * Sets the last name of this  user.
+	 * Sets the last name of this user.
 	 *
-	 * @param lastName the last name of this  user
+	 * @param lastName the last name of this user
 	 */
 	public void setLastName(String lastName);
 
 	/**
-	 * Gets the job title of this  user.
+	 * Gets the job title of this user.
 	 *
-	 * @return the job title of this  user
+	 * @return the job title of this user
 	 */
 	@AutoEscape
 	public String getJobTitle();
 
 	/**
-	 * Sets the job title of this  user.
+	 * Sets the job title of this user.
 	 *
-	 * @param jobTitle the job title of this  user
+	 * @param jobTitle the job title of this user
 	 */
 	public void setJobTitle(String jobTitle);
 
 	/**
-	 * Gets the login date of this  user.
+	 * Gets the login date of this user.
 	 *
-	 * @return the login date of this  user
+	 * @return the login date of this user
 	 */
 	public Date getLoginDate();
 
 	/**
-	 * Sets the login date of this  user.
+	 * Sets the login date of this user.
 	 *
-	 * @param loginDate the login date of this  user
+	 * @param loginDate the login date of this user
 	 */
 	public void setLoginDate(Date loginDate);
 
 	/**
-	 * Gets the login i p of this  user.
+	 * Gets the login i p of this user.
 	 *
-	 * @return the login i p of this  user
+	 * @return the login i p of this user
 	 */
 	@AutoEscape
 	public String getLoginIP();
 
 	/**
-	 * Sets the login i p of this  user.
+	 * Sets the login i p of this user.
 	 *
-	 * @param loginIP the login i p of this  user
+	 * @param loginIP the login i p of this user
 	 */
 	public void setLoginIP(String loginIP);
 
 	/**
-	 * Gets the last login date of this  user.
+	 * Gets the last login date of this user.
 	 *
-	 * @return the last login date of this  user
+	 * @return the last login date of this user
 	 */
 	public Date getLastLoginDate();
 
 	/**
-	 * Sets the last login date of this  user.
+	 * Sets the last login date of this user.
 	 *
-	 * @param lastLoginDate the last login date of this  user
+	 * @param lastLoginDate the last login date of this user
 	 */
 	public void setLastLoginDate(Date lastLoginDate);
 
 	/**
-	 * Gets the last login i p of this  user.
+	 * Gets the last login i p of this user.
 	 *
-	 * @return the last login i p of this  user
+	 * @return the last login i p of this user
 	 */
 	@AutoEscape
 	public String getLastLoginIP();
 
 	/**
-	 * Sets the last login i p of this  user.
+	 * Sets the last login i p of this user.
 	 *
-	 * @param lastLoginIP the last login i p of this  user
+	 * @param lastLoginIP the last login i p of this user
 	 */
 	public void setLastLoginIP(String lastLoginIP);
 
 	/**
-	 * Gets the last failed login date of this  user.
+	 * Gets the last failed login date of this user.
 	 *
-	 * @return the last failed login date of this  user
+	 * @return the last failed login date of this user
 	 */
 	public Date getLastFailedLoginDate();
 
 	/**
-	 * Sets the last failed login date of this  user.
+	 * Sets the last failed login date of this user.
 	 *
-	 * @param lastFailedLoginDate the last failed login date of this  user
+	 * @param lastFailedLoginDate the last failed login date of this user
 	 */
 	public void setLastFailedLoginDate(Date lastFailedLoginDate);
 
 	/**
-	 * Gets the failed login attempts of this  user.
+	 * Gets the failed login attempts of this user.
 	 *
-	 * @return the failed login attempts of this  user
+	 * @return the failed login attempts of this user
 	 */
 	public int getFailedLoginAttempts();
 
 	/**
-	 * Sets the failed login attempts of this  user.
+	 * Sets the failed login attempts of this user.
 	 *
-	 * @param failedLoginAttempts the failed login attempts of this  user
+	 * @param failedLoginAttempts the failed login attempts of this user
 	 */
 	public void setFailedLoginAttempts(int failedLoginAttempts);
 
 	/**
-	 * Gets the lockout of this  user.
+	 * Gets the lockout of this user.
 	 *
-	 * @return the lockout of this  user
+	 * @return the lockout of this user
 	 */
 	public boolean getLockout();
 
 	/**
-	 * Determines whether this  user is lockout.
+	 * Determines whether this user is lockout.
 	 *
-	 * @return whether this  user is lockout
+	 * @return whether this user is lockout
 	 */
 	public boolean isLockout();
 
 	/**
-	 * Sets the lockout of this  user.
+	 * Sets the lockout of this user.
 	 *
-	 * @param lockout the lockout of this  user
+	 * @param lockout the lockout of this user
 	 */
 	public void setLockout(boolean lockout);
 
 	/**
-	 * Gets the lockout date of this  user.
+	 * Gets the lockout date of this user.
 	 *
-	 * @return the lockout date of this  user
+	 * @return the lockout date of this user
 	 */
 	public Date getLockoutDate();
 
 	/**
-	 * Sets the lockout date of this  user.
+	 * Sets the lockout date of this user.
 	 *
-	 * @param lockoutDate the lockout date of this  user
+	 * @param lockoutDate the lockout date of this user
 	 */
 	public void setLockoutDate(Date lockoutDate);
 
 	/**
-	 * Gets the agreed to terms of use of this  user.
+	 * Gets the agreed to terms of use of this user.
 	 *
-	 * @return the agreed to terms of use of this  user
+	 * @return the agreed to terms of use of this user
 	 */
 	public boolean getAgreedToTermsOfUse();
 
 	/**
-	 * Determines whether this  user is agreed to terms of use.
+	 * Determines whether this user is agreed to terms of use.
 	 *
-	 * @return whether this  user is agreed to terms of use
+	 * @return whether this user is agreed to terms of use
 	 */
 	public boolean isAgreedToTermsOfUse();
 
 	/**
-	 * Sets the agreed to terms of use of this  user.
+	 * Sets the agreed to terms of use of this user.
 	 *
-	 * @param agreedToTermsOfUse the agreed to terms of use of this  user
+	 * @param agreedToTermsOfUse the agreed to terms of use of this user
 	 */
 	public void setAgreedToTermsOfUse(boolean agreedToTermsOfUse);
 
 	/**
-	 * Gets the active of this  user.
+	 * Gets the active of this user.
 	 *
-	 * @return the active of this  user
+	 * @return the active of this user
 	 */
 	public boolean getActive();
 
 	/**
-	 * Determines whether this  user is active.
+	 * Determines whether this user is active.
 	 *
-	 * @return whether this  user is active
+	 * @return whether this user is active
 	 */
 	public boolean isActive();
 
 	/**
-	 * Sets the active of this  user.
+	 * Sets the active of this user.
 	 *
-	 * @param active the active of this  user
+	 * @param active the active of this user
 	 */
 	public void setActive(boolean active);
 
 	/**
-	 * Gets a copy of this  user as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this user as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

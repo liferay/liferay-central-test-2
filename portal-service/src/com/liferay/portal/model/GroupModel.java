@@ -30,7 +30,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  group model instance should use the {@link Group} interface instead.
+ * Never reference this interface directly. All methods that expect a group model instance should use the {@link Group} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -41,236 +41,236 @@ import java.io.Serializable;
  */
 public interface GroupModel extends BaseModel<Group> {
 	/**
-	 * Gets the primary key of this  group.
+	 * Gets the primary key of this group.
 	 *
-	 * @return the primary key of this  group
+	 * @return the primary key of this group
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  group
+	 * Sets the primary key of this group
 	 *
-	 * @param pk the primary key of this  group
+	 * @param pk the primary key of this group
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the group id of this  group.
+	 * Gets the group id of this group.
 	 *
-	 * @return the group id of this  group
+	 * @return the group id of this group
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  group.
+	 * Sets the group id of this group.
 	 *
-	 * @param groupId the group id of this  group
+	 * @param groupId the group id of this group
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this  group.
+	 * Gets the company id of this group.
 	 *
-	 * @return the company id of this  group
+	 * @return the company id of this group
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  group.
+	 * Sets the company id of this group.
 	 *
-	 * @param companyId the company id of this  group
+	 * @param companyId the company id of this group
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the creator user id of this  group.
+	 * Gets the creator user id of this group.
 	 *
-	 * @return the creator user id of this  group
+	 * @return the creator user id of this group
 	 */
 	public long getCreatorUserId();
 
 	/**
-	 * Sets the creator user id of this  group.
+	 * Sets the creator user id of this group.
 	 *
-	 * @param creatorUserId the creator user id of this  group
+	 * @param creatorUserId the creator user id of this group
 	 */
 	public void setCreatorUserId(long creatorUserId);
 
 	/**
-	 * Gets the creator user uuid of this  group.
+	 * Gets the creator user uuid of this group.
 	 *
-	 * @return the creator user uuid of this  group
+	 * @return the creator user uuid of this group
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getCreatorUserUuid() throws SystemException;
 
 	/**
-	 * Sets the creator user uuid of this  group.
+	 * Sets the creator user uuid of this group.
 	 *
-	 * @param creatorUserUuid the creator user uuid of this  group
+	 * @param creatorUserUuid the creator user uuid of this group
 	 */
 	public void setCreatorUserUuid(String creatorUserUuid);
 
 	/**
-	 * Gets the class name of the model instance this  group is associated with.
+	 * Gets the class name of the model instance this group is associated with.
 	 *
-	 * @return the class name of the model instance this  group is associated with
+	 * @return the class name of the model instance this group is associated with
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this  group.
+	 * Gets the class name id of this group.
 	 *
-	 * @return the class name id of this  group
+	 * @return the class name id of this group
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this  group.
+	 * Sets the class name id of this group.
 	 *
-	 * @param classNameId the class name id of this  group
+	 * @param classNameId the class name id of this group
 	 */
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this  group.
+	 * Gets the class p k of this group.
 	 *
-	 * @return the class p k of this  group
+	 * @return the class p k of this group
 	 */
 	public long getClassPK();
 
 	/**
-	 * Sets the class p k of this  group.
+	 * Sets the class p k of this group.
 	 *
-	 * @param classPK the class p k of this  group
+	 * @param classPK the class p k of this group
 	 */
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the parent group id of this  group.
+	 * Gets the parent group id of this group.
 	 *
-	 * @return the parent group id of this  group
+	 * @return the parent group id of this group
 	 */
 	public long getParentGroupId();
 
 	/**
-	 * Sets the parent group id of this  group.
+	 * Sets the parent group id of this group.
 	 *
-	 * @param parentGroupId the parent group id of this  group
+	 * @param parentGroupId the parent group id of this group
 	 */
 	public void setParentGroupId(long parentGroupId);
 
 	/**
-	 * Gets the live group id of this  group.
+	 * Gets the live group id of this group.
 	 *
-	 * @return the live group id of this  group
+	 * @return the live group id of this group
 	 */
 	public long getLiveGroupId();
 
 	/**
-	 * Sets the live group id of this  group.
+	 * Sets the live group id of this group.
 	 *
-	 * @param liveGroupId the live group id of this  group
+	 * @param liveGroupId the live group id of this group
 	 */
 	public void setLiveGroupId(long liveGroupId);
 
 	/**
-	 * Gets the name of this  group.
+	 * Gets the name of this group.
 	 *
-	 * @return the name of this  group
+	 * @return the name of this group
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  group.
+	 * Sets the name of this group.
 	 *
-	 * @param name the name of this  group
+	 * @param name the name of this group
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this  group.
+	 * Gets the description of this group.
 	 *
-	 * @return the description of this  group
+	 * @return the description of this group
 	 */
 	@AutoEscape
 	public String getDescription();
 
 	/**
-	 * Sets the description of this  group.
+	 * Sets the description of this group.
 	 *
-	 * @param description the description of this  group
+	 * @param description the description of this group
 	 */
 	public void setDescription(String description);
 
 	/**
-	 * Gets the type of this  group.
+	 * Gets the type of this group.
 	 *
-	 * @return the type of this  group
+	 * @return the type of this group
 	 */
 	public int getType();
 
 	/**
-	 * Sets the type of this  group.
+	 * Sets the type of this group.
 	 *
-	 * @param type the type of this  group
+	 * @param type the type of this group
 	 */
 	public void setType(int type);
 
 	/**
-	 * Gets the type settings of this  group.
+	 * Gets the type settings of this group.
 	 *
-	 * @return the type settings of this  group
+	 * @return the type settings of this group
 	 */
 	@AutoEscape
 	public String getTypeSettings();
 
 	/**
-	 * Sets the type settings of this  group.
+	 * Sets the type settings of this group.
 	 *
-	 * @param typeSettings the type settings of this  group
+	 * @param typeSettings the type settings of this group
 	 */
 	public void setTypeSettings(String typeSettings);
 
 	/**
-	 * Gets the friendly u r l of this  group.
+	 * Gets the friendly u r l of this group.
 	 *
-	 * @return the friendly u r l of this  group
+	 * @return the friendly u r l of this group
 	 */
 	@AutoEscape
 	public String getFriendlyURL();
 
 	/**
-	 * Sets the friendly u r l of this  group.
+	 * Sets the friendly u r l of this group.
 	 *
-	 * @param friendlyURL the friendly u r l of this  group
+	 * @param friendlyURL the friendly u r l of this group
 	 */
 	public void setFriendlyURL(String friendlyURL);
 
 	/**
-	 * Gets the active of this  group.
+	 * Gets the active of this group.
 	 *
-	 * @return the active of this  group
+	 * @return the active of this group
 	 */
 	public boolean getActive();
 
 	/**
-	 * Determines whether this  group is active.
+	 * Determines whether this group is active.
 	 *
-	 * @return whether this  group is active
+	 * @return whether this group is active
 	 */
 	public boolean isActive();
 
 	/**
-	 * Sets the active of this  group.
+	 * Sets the active of this group.
 	 *
-	 * @param active the active of this  group
+	 * @param active the active of this group
 	 */
 	public void setActive(boolean active);
 
 	/**
-	 * Gets a copy of this  group as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this group as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

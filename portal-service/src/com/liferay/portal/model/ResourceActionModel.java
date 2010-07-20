@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  resource action model instance should use the {@link ResourceAction} interface instead.
+ * Never reference this interface directly. All methods that expect a resource action model instance should use the {@link ResourceAction} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,79 +40,79 @@ import java.io.Serializable;
  */
 public interface ResourceActionModel extends BaseModel<ResourceAction> {
 	/**
-	 * Gets the primary key of this  resource action.
+	 * Gets the primary key of this resource action.
 	 *
-	 * @return the primary key of this  resource action
+	 * @return the primary key of this resource action
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  resource action
+	 * Sets the primary key of this resource action
 	 *
-	 * @param pk the primary key of this  resource action
+	 * @param pk the primary key of this resource action
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the resource action id of this  resource action.
+	 * Gets the resource action id of this resource action.
 	 *
-	 * @return the resource action id of this  resource action
+	 * @return the resource action id of this resource action
 	 */
 	public long getResourceActionId();
 
 	/**
-	 * Sets the resource action id of this  resource action.
+	 * Sets the resource action id of this resource action.
 	 *
-	 * @param resourceActionId the resource action id of this  resource action
+	 * @param resourceActionId the resource action id of this resource action
 	 */
 	public void setResourceActionId(long resourceActionId);
 
 	/**
-	 * Gets the name of this  resource action.
+	 * Gets the name of this resource action.
 	 *
-	 * @return the name of this  resource action
+	 * @return the name of this resource action
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  resource action.
+	 * Sets the name of this resource action.
 	 *
-	 * @param name the name of this  resource action
+	 * @param name the name of this resource action
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets the action id of this  resource action.
+	 * Gets the action id of this resource action.
 	 *
-	 * @return the action id of this  resource action
+	 * @return the action id of this resource action
 	 */
 	@AutoEscape
 	public String getActionId();
 
 	/**
-	 * Sets the action id of this  resource action.
+	 * Sets the action id of this resource action.
 	 *
-	 * @param actionId the action id of this  resource action
+	 * @param actionId the action id of this resource action
 	 */
 	public void setActionId(String actionId);
 
 	/**
-	 * Gets the bitwise value of this  resource action.
+	 * Gets the bitwise value of this resource action.
 	 *
-	 * @return the bitwise value of this  resource action
+	 * @return the bitwise value of this resource action
 	 */
 	public long getBitwiseValue();
 
 	/**
-	 * Sets the bitwise value of this  resource action.
+	 * Sets the bitwise value of this resource action.
 	 *
-	 * @param bitwiseValue the bitwise value of this  resource action
+	 * @param bitwiseValue the bitwise value of this resource action
 	 */
 	public void setBitwiseValue(long bitwiseValue);
 
 	/**
-	 * Gets a copy of this  resource action as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this resource action as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

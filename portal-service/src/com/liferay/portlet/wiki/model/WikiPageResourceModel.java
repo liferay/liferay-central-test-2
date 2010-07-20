@@ -30,7 +30,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  wiki page resource model instance should use the {@link WikiPageResource} interface instead.
+ * Never reference this interface directly. All methods that expect a wiki page resource model instance should use the {@link WikiPageResource} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -41,79 +41,79 @@ import java.io.Serializable;
  */
 public interface WikiPageResourceModel extends BaseModel<WikiPageResource> {
 	/**
-	 * Gets the primary key of this  wiki page resource.
+	 * Gets the primary key of this wiki page resource.
 	 *
-	 * @return the primary key of this  wiki page resource
+	 * @return the primary key of this wiki page resource
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  wiki page resource
+	 * Sets the primary key of this wiki page resource
 	 *
-	 * @param pk the primary key of this  wiki page resource
+	 * @param pk the primary key of this wiki page resource
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the uuid of this  wiki page resource.
+	 * Gets the uuid of this wiki page resource.
 	 *
-	 * @return the uuid of this  wiki page resource
+	 * @return the uuid of this wiki page resource
 	 */
 	@AutoEscape
 	public String getUuid();
 
 	/**
-	 * Sets the uuid of this  wiki page resource.
+	 * Sets the uuid of this wiki page resource.
 	 *
-	 * @param uuid the uuid of this  wiki page resource
+	 * @param uuid the uuid of this wiki page resource
 	 */
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the resource prim key of this  wiki page resource.
+	 * Gets the resource prim key of this wiki page resource.
 	 *
-	 * @return the resource prim key of this  wiki page resource
+	 * @return the resource prim key of this wiki page resource
 	 */
 	public long getResourcePrimKey();
 
 	/**
-	 * Sets the resource prim key of this  wiki page resource.
+	 * Sets the resource prim key of this wiki page resource.
 	 *
-	 * @param resourcePrimKey the resource prim key of this  wiki page resource
+	 * @param resourcePrimKey the resource prim key of this wiki page resource
 	 */
 	public void setResourcePrimKey(long resourcePrimKey);
 
 	/**
-	 * Gets the node id of this  wiki page resource.
+	 * Gets the node id of this wiki page resource.
 	 *
-	 * @return the node id of this  wiki page resource
+	 * @return the node id of this wiki page resource
 	 */
 	public long getNodeId();
 
 	/**
-	 * Sets the node id of this  wiki page resource.
+	 * Sets the node id of this wiki page resource.
 	 *
-	 * @param nodeId the node id of this  wiki page resource
+	 * @param nodeId the node id of this wiki page resource
 	 */
 	public void setNodeId(long nodeId);
 
 	/**
-	 * Gets the title of this  wiki page resource.
+	 * Gets the title of this wiki page resource.
 	 *
-	 * @return the title of this  wiki page resource
+	 * @return the title of this wiki page resource
 	 */
 	@AutoEscape
 	public String getTitle();
 
 	/**
-	 * Sets the title of this  wiki page resource.
+	 * Sets the title of this wiki page resource.
 	 *
-	 * @param title the title of this  wiki page resource
+	 * @param title the title of this wiki page resource
 	 */
 	public void setTitle(String title);
 
 	/**
-	 * Gets a copy of this  wiki page resource as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this wiki page resource as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

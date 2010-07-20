@@ -28,7 +28,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  expando table model instance should use the {@link ExpandoTable} interface instead.
+ * Never reference this interface directly. All methods that expect a expando table model instance should use the {@link ExpandoTable} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -39,85 +39,85 @@ import java.io.Serializable;
  */
 public interface ExpandoTableModel extends BaseModel<ExpandoTable> {
 	/**
-	 * Gets the primary key of this  expando table.
+	 * Gets the primary key of this expando table.
 	 *
-	 * @return the primary key of this  expando table
+	 * @return the primary key of this expando table
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  expando table
+	 * Sets the primary key of this expando table
 	 *
-	 * @param pk the primary key of this  expando table
+	 * @param pk the primary key of this expando table
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the table id of this  expando table.
+	 * Gets the table id of this expando table.
 	 *
-	 * @return the table id of this  expando table
+	 * @return the table id of this expando table
 	 */
 	public long getTableId();
 
 	/**
-	 * Sets the table id of this  expando table.
+	 * Sets the table id of this expando table.
 	 *
-	 * @param tableId the table id of this  expando table
+	 * @param tableId the table id of this expando table
 	 */
 	public void setTableId(long tableId);
 
 	/**
-	 * Gets the company id of this  expando table.
+	 * Gets the company id of this expando table.
 	 *
-	 * @return the company id of this  expando table
+	 * @return the company id of this expando table
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  expando table.
+	 * Sets the company id of this expando table.
 	 *
-	 * @param companyId the company id of this  expando table
+	 * @param companyId the company id of this expando table
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the class name of the model instance this  expando table is associated with.
+	 * Gets the class name of the model instance this expando table is associated with.
 	 *
-	 * @return the class name of the model instance this  expando table is associated with
+	 * @return the class name of the model instance this expando table is associated with
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this  expando table.
+	 * Gets the class name id of this expando table.
 	 *
-	 * @return the class name id of this  expando table
+	 * @return the class name id of this expando table
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this  expando table.
+	 * Sets the class name id of this expando table.
 	 *
-	 * @param classNameId the class name id of this  expando table
+	 * @param classNameId the class name id of this expando table
 	 */
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the name of this  expando table.
+	 * Gets the name of this expando table.
 	 *
-	 * @return the name of this  expando table
+	 * @return the name of this expando table
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  expando table.
+	 * Sets the name of this expando table.
 	 *
-	 * @param name the name of this  expando table
+	 * @param name the name of this expando table
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets a copy of this  expando table as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this expando table as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

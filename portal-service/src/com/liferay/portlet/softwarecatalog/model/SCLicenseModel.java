@@ -30,7 +30,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  s c license model instance should use the {@link SCLicense} interface instead.
+ * Never reference this interface directly. All methods that expect a s c license model instance should use the {@link SCLicense} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -41,128 +41,128 @@ import java.io.Serializable;
  */
 public interface SCLicenseModel extends BaseModel<SCLicense> {
 	/**
-	 * Gets the primary key of this  s c license.
+	 * Gets the primary key of this s c license.
 	 *
-	 * @return the primary key of this  s c license
+	 * @return the primary key of this s c license
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  s c license
+	 * Sets the primary key of this s c license
 	 *
-	 * @param pk the primary key of this  s c license
+	 * @param pk the primary key of this s c license
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the license id of this  s c license.
+	 * Gets the license id of this s c license.
 	 *
-	 * @return the license id of this  s c license
+	 * @return the license id of this s c license
 	 */
 	public long getLicenseId();
 
 	/**
-	 * Sets the license id of this  s c license.
+	 * Sets the license id of this s c license.
 	 *
-	 * @param licenseId the license id of this  s c license
+	 * @param licenseId the license id of this s c license
 	 */
 	public void setLicenseId(long licenseId);
 
 	/**
-	 * Gets the name of this  s c license.
+	 * Gets the name of this s c license.
 	 *
-	 * @return the name of this  s c license
+	 * @return the name of this s c license
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  s c license.
+	 * Sets the name of this s c license.
 	 *
-	 * @param name the name of this  s c license
+	 * @param name the name of this s c license
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets the url of this  s c license.
+	 * Gets the url of this s c license.
 	 *
-	 * @return the url of this  s c license
+	 * @return the url of this s c license
 	 */
 	@AutoEscape
 	public String getUrl();
 
 	/**
-	 * Sets the url of this  s c license.
+	 * Sets the url of this s c license.
 	 *
-	 * @param url the url of this  s c license
+	 * @param url the url of this s c license
 	 */
 	public void setUrl(String url);
 
 	/**
-	 * Gets the open source of this  s c license.
+	 * Gets the open source of this s c license.
 	 *
-	 * @return the open source of this  s c license
+	 * @return the open source of this s c license
 	 */
 	public boolean getOpenSource();
 
 	/**
-	 * Determines whether this  s c license is open source.
+	 * Determines whether this s c license is open source.
 	 *
-	 * @return whether this  s c license is open source
+	 * @return whether this s c license is open source
 	 */
 	public boolean isOpenSource();
 
 	/**
-	 * Sets the open source of this  s c license.
+	 * Sets the open source of this s c license.
 	 *
-	 * @param openSource the open source of this  s c license
+	 * @param openSource the open source of this s c license
 	 */
 	public void setOpenSource(boolean openSource);
 
 	/**
-	 * Gets the active of this  s c license.
+	 * Gets the active of this s c license.
 	 *
-	 * @return the active of this  s c license
+	 * @return the active of this s c license
 	 */
 	public boolean getActive();
 
 	/**
-	 * Determines whether this  s c license is active.
+	 * Determines whether this s c license is active.
 	 *
-	 * @return whether this  s c license is active
+	 * @return whether this s c license is active
 	 */
 	public boolean isActive();
 
 	/**
-	 * Sets the active of this  s c license.
+	 * Sets the active of this s c license.
 	 *
-	 * @param active the active of this  s c license
+	 * @param active the active of this s c license
 	 */
 	public void setActive(boolean active);
 
 	/**
-	 * Gets the recommended of this  s c license.
+	 * Gets the recommended of this s c license.
 	 *
-	 * @return the recommended of this  s c license
+	 * @return the recommended of this s c license
 	 */
 	public boolean getRecommended();
 
 	/**
-	 * Determines whether this  s c license is recommended.
+	 * Determines whether this s c license is recommended.
 	 *
-	 * @return whether this  s c license is recommended
+	 * @return whether this s c license is recommended
 	 */
 	public boolean isRecommended();
 
 	/**
-	 * Sets the recommended of this  s c license.
+	 * Sets the recommended of this s c license.
 	 *
-	 * @param recommended the recommended of this  s c license
+	 * @param recommended the recommended of this s c license
 	 */
 	public void setRecommended(boolean recommended);
 
 	/**
-	 * Gets a copy of this  s c license as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this s c license as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

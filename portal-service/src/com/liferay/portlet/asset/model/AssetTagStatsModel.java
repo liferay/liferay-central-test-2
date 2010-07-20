@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  asset tag stats model instance should use the {@link AssetTagStats} interface instead.
+ * Never reference this interface directly. All methods that expect a asset tag stats model instance should use the {@link AssetTagStats} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,84 +40,84 @@ import java.io.Serializable;
  */
 public interface AssetTagStatsModel extends BaseModel<AssetTagStats> {
 	/**
-	 * Gets the primary key of this  asset tag stats.
+	 * Gets the primary key of this asset tag stats.
 	 *
-	 * @return the primary key of this  asset tag stats
+	 * @return the primary key of this asset tag stats
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  asset tag stats
+	 * Sets the primary key of this asset tag stats
 	 *
-	 * @param pk the primary key of this  asset tag stats
+	 * @param pk the primary key of this asset tag stats
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the tag stats id of this  asset tag stats.
+	 * Gets the tag stats id of this asset tag stats.
 	 *
-	 * @return the tag stats id of this  asset tag stats
+	 * @return the tag stats id of this asset tag stats
 	 */
 	public long getTagStatsId();
 
 	/**
-	 * Sets the tag stats id of this  asset tag stats.
+	 * Sets the tag stats id of this asset tag stats.
 	 *
-	 * @param tagStatsId the tag stats id of this  asset tag stats
+	 * @param tagStatsId the tag stats id of this asset tag stats
 	 */
 	public void setTagStatsId(long tagStatsId);
 
 	/**
-	 * Gets the tag id of this  asset tag stats.
+	 * Gets the tag id of this asset tag stats.
 	 *
-	 * @return the tag id of this  asset tag stats
+	 * @return the tag id of this asset tag stats
 	 */
 	public long getTagId();
 
 	/**
-	 * Sets the tag id of this  asset tag stats.
+	 * Sets the tag id of this asset tag stats.
 	 *
-	 * @param tagId the tag id of this  asset tag stats
+	 * @param tagId the tag id of this asset tag stats
 	 */
 	public void setTagId(long tagId);
 
 	/**
-	 * Gets the class name of the model instance this  asset tag stats is associated with.
+	 * Gets the class name of the model instance this asset tag stats is associated with.
 	 *
-	 * @return the class name of the model instance this  asset tag stats is associated with
+	 * @return the class name of the model instance this asset tag stats is associated with
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this  asset tag stats.
+	 * Gets the class name id of this asset tag stats.
 	 *
-	 * @return the class name id of this  asset tag stats
+	 * @return the class name id of this asset tag stats
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this  asset tag stats.
+	 * Sets the class name id of this asset tag stats.
 	 *
-	 * @param classNameId the class name id of this  asset tag stats
+	 * @param classNameId the class name id of this asset tag stats
 	 */
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the asset count of this  asset tag stats.
+	 * Gets the asset count of this asset tag stats.
 	 *
-	 * @return the asset count of this  asset tag stats
+	 * @return the asset count of this asset tag stats
 	 */
 	public int getAssetCount();
 
 	/**
-	 * Sets the asset count of this  asset tag stats.
+	 * Sets the asset count of this asset tag stats.
 	 *
-	 * @param assetCount the asset count of this  asset tag stats
+	 * @param assetCount the asset count of this asset tag stats
 	 */
 	public void setAssetCount(int assetCount);
 
 	/**
-	 * Gets a copy of this  asset tag stats as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this asset tag stats as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

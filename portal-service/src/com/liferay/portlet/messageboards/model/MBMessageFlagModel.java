@@ -32,7 +32,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  m b message flag model instance should use the {@link MBMessageFlag} interface instead.
+ * Never reference this interface directly. All methods that expect a m b message flag model instance should use the {@link MBMessageFlag} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -43,120 +43,120 @@ import java.util.Date;
  */
 public interface MBMessageFlagModel extends BaseModel<MBMessageFlag> {
 	/**
-	 * Gets the primary key of this  m b message flag.
+	 * Gets the primary key of this m b message flag.
 	 *
-	 * @return the primary key of this  m b message flag
+	 * @return the primary key of this m b message flag
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  m b message flag
+	 * Sets the primary key of this m b message flag
 	 *
-	 * @param pk the primary key of this  m b message flag
+	 * @param pk the primary key of this m b message flag
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the message flag id of this  m b message flag.
+	 * Gets the message flag id of this m b message flag.
 	 *
-	 * @return the message flag id of this  m b message flag
+	 * @return the message flag id of this m b message flag
 	 */
 	public long getMessageFlagId();
 
 	/**
-	 * Sets the message flag id of this  m b message flag.
+	 * Sets the message flag id of this m b message flag.
 	 *
-	 * @param messageFlagId the message flag id of this  m b message flag
+	 * @param messageFlagId the message flag id of this m b message flag
 	 */
 	public void setMessageFlagId(long messageFlagId);
 
 	/**
-	 * Gets the user id of this  m b message flag.
+	 * Gets the user id of this m b message flag.
 	 *
-	 * @return the user id of this  m b message flag
+	 * @return the user id of this m b message flag
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  m b message flag.
+	 * Sets the user id of this m b message flag.
 	 *
-	 * @param userId the user id of this  m b message flag
+	 * @param userId the user id of this m b message flag
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  m b message flag.
+	 * Gets the user uuid of this m b message flag.
 	 *
-	 * @return the user uuid of this  m b message flag
+	 * @return the user uuid of this m b message flag
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  m b message flag.
+	 * Sets the user uuid of this m b message flag.
 	 *
-	 * @param userUuid the user uuid of this  m b message flag
+	 * @param userUuid the user uuid of this m b message flag
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the modified date of this  m b message flag.
+	 * Gets the modified date of this m b message flag.
 	 *
-	 * @return the modified date of this  m b message flag
+	 * @return the modified date of this m b message flag
 	 */
 	public Date getModifiedDate();
 
 	/**
-	 * Sets the modified date of this  m b message flag.
+	 * Sets the modified date of this m b message flag.
 	 *
-	 * @param modifiedDate the modified date of this  m b message flag
+	 * @param modifiedDate the modified date of this m b message flag
 	 */
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the thread id of this  m b message flag.
+	 * Gets the thread id of this m b message flag.
 	 *
-	 * @return the thread id of this  m b message flag
+	 * @return the thread id of this m b message flag
 	 */
 	public long getThreadId();
 
 	/**
-	 * Sets the thread id of this  m b message flag.
+	 * Sets the thread id of this m b message flag.
 	 *
-	 * @param threadId the thread id of this  m b message flag
+	 * @param threadId the thread id of this m b message flag
 	 */
 	public void setThreadId(long threadId);
 
 	/**
-	 * Gets the message id of this  m b message flag.
+	 * Gets the message id of this m b message flag.
 	 *
-	 * @return the message id of this  m b message flag
+	 * @return the message id of this m b message flag
 	 */
 	public long getMessageId();
 
 	/**
-	 * Sets the message id of this  m b message flag.
+	 * Sets the message id of this m b message flag.
 	 *
-	 * @param messageId the message id of this  m b message flag
+	 * @param messageId the message id of this m b message flag
 	 */
 	public void setMessageId(long messageId);
 
 	/**
-	 * Gets the flag of this  m b message flag.
+	 * Gets the flag of this m b message flag.
 	 *
-	 * @return the flag of this  m b message flag
+	 * @return the flag of this m b message flag
 	 */
 	public int getFlag();
 
 	/**
-	 * Sets the flag of this  m b message flag.
+	 * Sets the flag of this m b message flag.
 	 *
-	 * @param flag the flag of this  m b message flag
+	 * @param flag the flag of this m b message flag
 	 */
 	public void setFlag(int flag);
 
 	/**
-	 * Gets a copy of this  m b message flag as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this m b message flag as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

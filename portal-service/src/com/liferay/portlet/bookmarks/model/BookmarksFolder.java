@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.bookmarks.model;
 
-
 /**
  * <p>
  * This interface is a model that represents the BookmarksFolder table in the

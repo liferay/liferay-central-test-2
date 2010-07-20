@@ -32,7 +32,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  polls vote model instance should use the {@link PollsVote} interface instead.
+ * Never reference this interface directly. All methods that expect a polls vote model instance should use the {@link PollsVote} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -43,106 +43,106 @@ import java.util.Date;
  */
 public interface PollsVoteModel extends BaseModel<PollsVote> {
 	/**
-	 * Gets the primary key of this  polls vote.
+	 * Gets the primary key of this polls vote.
 	 *
-	 * @return the primary key of this  polls vote
+	 * @return the primary key of this polls vote
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  polls vote
+	 * Sets the primary key of this polls vote
 	 *
-	 * @param pk the primary key of this  polls vote
+	 * @param pk the primary key of this polls vote
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the vote id of this  polls vote.
+	 * Gets the vote id of this polls vote.
 	 *
-	 * @return the vote id of this  polls vote
+	 * @return the vote id of this polls vote
 	 */
 	public long getVoteId();
 
 	/**
-	 * Sets the vote id of this  polls vote.
+	 * Sets the vote id of this polls vote.
 	 *
-	 * @param voteId the vote id of this  polls vote
+	 * @param voteId the vote id of this polls vote
 	 */
 	public void setVoteId(long voteId);
 
 	/**
-	 * Gets the user id of this  polls vote.
+	 * Gets the user id of this polls vote.
 	 *
-	 * @return the user id of this  polls vote
+	 * @return the user id of this polls vote
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  polls vote.
+	 * Sets the user id of this polls vote.
 	 *
-	 * @param userId the user id of this  polls vote
+	 * @param userId the user id of this polls vote
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  polls vote.
+	 * Gets the user uuid of this polls vote.
 	 *
-	 * @return the user uuid of this  polls vote
+	 * @return the user uuid of this polls vote
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  polls vote.
+	 * Sets the user uuid of this polls vote.
 	 *
-	 * @param userUuid the user uuid of this  polls vote
+	 * @param userUuid the user uuid of this polls vote
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the question id of this  polls vote.
+	 * Gets the question id of this polls vote.
 	 *
-	 * @return the question id of this  polls vote
+	 * @return the question id of this polls vote
 	 */
 	public long getQuestionId();
 
 	/**
-	 * Sets the question id of this  polls vote.
+	 * Sets the question id of this polls vote.
 	 *
-	 * @param questionId the question id of this  polls vote
+	 * @param questionId the question id of this polls vote
 	 */
 	public void setQuestionId(long questionId);
 
 	/**
-	 * Gets the choice id of this  polls vote.
+	 * Gets the choice id of this polls vote.
 	 *
-	 * @return the choice id of this  polls vote
+	 * @return the choice id of this polls vote
 	 */
 	public long getChoiceId();
 
 	/**
-	 * Sets the choice id of this  polls vote.
+	 * Sets the choice id of this polls vote.
 	 *
-	 * @param choiceId the choice id of this  polls vote
+	 * @param choiceId the choice id of this polls vote
 	 */
 	public void setChoiceId(long choiceId);
 
 	/**
-	 * Gets the vote date of this  polls vote.
+	 * Gets the vote date of this polls vote.
 	 *
-	 * @return the vote date of this  polls vote
+	 * @return the vote date of this polls vote
 	 */
 	public Date getVoteDate();
 
 	/**
-	 * Sets the vote date of this  polls vote.
+	 * Sets the vote date of this polls vote.
 	 *
-	 * @param voteDate the vote date of this  polls vote
+	 * @param voteDate the vote date of this polls vote
 	 */
 	public void setVoteDate(Date voteDate);
 
 	/**
-	 * Gets a copy of this  polls vote as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this polls vote as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

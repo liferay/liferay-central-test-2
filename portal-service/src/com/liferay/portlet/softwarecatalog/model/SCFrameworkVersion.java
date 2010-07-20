@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.softwarecatalog.model;
 
-
 /**
  * <p>
  * This interface is a model that represents the SCFrameworkVersion table in the

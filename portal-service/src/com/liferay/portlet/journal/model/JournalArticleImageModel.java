@@ -30,7 +30,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  journal article image model instance should use the {@link JournalArticleImage} interface instead.
+ * Never reference this interface directly. All methods that expect a journal article image model instance should use the {@link JournalArticleImage} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -41,144 +41,144 @@ import java.io.Serializable;
  */
 public interface JournalArticleImageModel extends BaseModel<JournalArticleImage> {
 	/**
-	 * Gets the primary key of this  journal article image.
+	 * Gets the primary key of this journal article image.
 	 *
-	 * @return the primary key of this  journal article image
+	 * @return the primary key of this journal article image
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  journal article image
+	 * Sets the primary key of this journal article image
 	 *
-	 * @param pk the primary key of this  journal article image
+	 * @param pk the primary key of this journal article image
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the article image id of this  journal article image.
+	 * Gets the article image id of this journal article image.
 	 *
-	 * @return the article image id of this  journal article image
+	 * @return the article image id of this journal article image
 	 */
 	public long getArticleImageId();
 
 	/**
-	 * Sets the article image id of this  journal article image.
+	 * Sets the article image id of this journal article image.
 	 *
-	 * @param articleImageId the article image id of this  journal article image
+	 * @param articleImageId the article image id of this journal article image
 	 */
 	public void setArticleImageId(long articleImageId);
 
 	/**
-	 * Gets the group id of this  journal article image.
+	 * Gets the group id of this journal article image.
 	 *
-	 * @return the group id of this  journal article image
+	 * @return the group id of this journal article image
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  journal article image.
+	 * Sets the group id of this journal article image.
 	 *
-	 * @param groupId the group id of this  journal article image
+	 * @param groupId the group id of this journal article image
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the article id of this  journal article image.
+	 * Gets the article id of this journal article image.
 	 *
-	 * @return the article id of this  journal article image
+	 * @return the article id of this journal article image
 	 */
 	@AutoEscape
 	public String getArticleId();
 
 	/**
-	 * Sets the article id of this  journal article image.
+	 * Sets the article id of this journal article image.
 	 *
-	 * @param articleId the article id of this  journal article image
+	 * @param articleId the article id of this journal article image
 	 */
 	public void setArticleId(String articleId);
 
 	/**
-	 * Gets the version of this  journal article image.
+	 * Gets the version of this journal article image.
 	 *
-	 * @return the version of this  journal article image
+	 * @return the version of this journal article image
 	 */
 	public double getVersion();
 
 	/**
-	 * Sets the version of this  journal article image.
+	 * Sets the version of this journal article image.
 	 *
-	 * @param version the version of this  journal article image
+	 * @param version the version of this journal article image
 	 */
 	public void setVersion(double version);
 
 	/**
-	 * Gets the el instance id of this  journal article image.
+	 * Gets the el instance id of this journal article image.
 	 *
-	 * @return the el instance id of this  journal article image
+	 * @return the el instance id of this journal article image
 	 */
 	@AutoEscape
 	public String getElInstanceId();
 
 	/**
-	 * Sets the el instance id of this  journal article image.
+	 * Sets the el instance id of this journal article image.
 	 *
-	 * @param elInstanceId the el instance id of this  journal article image
+	 * @param elInstanceId the el instance id of this journal article image
 	 */
 	public void setElInstanceId(String elInstanceId);
 
 	/**
-	 * Gets the el name of this  journal article image.
+	 * Gets the el name of this journal article image.
 	 *
-	 * @return the el name of this  journal article image
+	 * @return the el name of this journal article image
 	 */
 	@AutoEscape
 	public String getElName();
 
 	/**
-	 * Sets the el name of this  journal article image.
+	 * Sets the el name of this journal article image.
 	 *
-	 * @param elName the el name of this  journal article image
+	 * @param elName the el name of this journal article image
 	 */
 	public void setElName(String elName);
 
 	/**
-	 * Gets the language id of this  journal article image.
+	 * Gets the language id of this journal article image.
 	 *
-	 * @return the language id of this  journal article image
+	 * @return the language id of this journal article image
 	 */
 	@AutoEscape
 	public String getLanguageId();
 
 	/**
-	 * Sets the language id of this  journal article image.
+	 * Sets the language id of this journal article image.
 	 *
-	 * @param languageId the language id of this  journal article image
+	 * @param languageId the language id of this journal article image
 	 */
 	public void setLanguageId(String languageId);
 
 	/**
-	 * Gets the temp image of this  journal article image.
+	 * Gets the temp image of this journal article image.
 	 *
-	 * @return the temp image of this  journal article image
+	 * @return the temp image of this journal article image
 	 */
 	public boolean getTempImage();
 
 	/**
-	 * Determines whether this  journal article image is temp image.
+	 * Determines whether this journal article image is temp image.
 	 *
-	 * @return whether this  journal article image is temp image
+	 * @return whether this journal article image is temp image
 	 */
 	public boolean isTempImage();
 
 	/**
-	 * Sets the temp image of this  journal article image.
+	 * Sets the temp image of this journal article image.
 	 *
-	 * @param tempImage the temp image of this  journal article image
+	 * @param tempImage the temp image of this journal article image
 	 */
 	public void setTempImage(boolean tempImage);
 
 	/**
-	 * Gets a copy of this  journal article image as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this journal article image as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

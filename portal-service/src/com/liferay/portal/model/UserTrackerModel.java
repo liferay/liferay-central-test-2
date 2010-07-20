@@ -32,7 +32,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  user tracker model instance should use the {@link UserTracker} interface instead.
+ * Never reference this interface directly. All methods that expect a user tracker model instance should use the {@link UserTracker} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -43,152 +43,152 @@ import java.util.Date;
  */
 public interface UserTrackerModel extends BaseModel<UserTracker> {
 	/**
-	 * Gets the primary key of this  user tracker.
+	 * Gets the primary key of this user tracker.
 	 *
-	 * @return the primary key of this  user tracker
+	 * @return the primary key of this user tracker
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  user tracker
+	 * Sets the primary key of this user tracker
 	 *
-	 * @param pk the primary key of this  user tracker
+	 * @param pk the primary key of this user tracker
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the user tracker id of this  user tracker.
+	 * Gets the user tracker id of this user tracker.
 	 *
-	 * @return the user tracker id of this  user tracker
+	 * @return the user tracker id of this user tracker
 	 */
 	public long getUserTrackerId();
 
 	/**
-	 * Sets the user tracker id of this  user tracker.
+	 * Sets the user tracker id of this user tracker.
 	 *
-	 * @param userTrackerId the user tracker id of this  user tracker
+	 * @param userTrackerId the user tracker id of this user tracker
 	 */
 	public void setUserTrackerId(long userTrackerId);
 
 	/**
-	 * Gets the company id of this  user tracker.
+	 * Gets the company id of this user tracker.
 	 *
-	 * @return the company id of this  user tracker
+	 * @return the company id of this user tracker
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  user tracker.
+	 * Sets the company id of this user tracker.
 	 *
-	 * @param companyId the company id of this  user tracker
+	 * @param companyId the company id of this user tracker
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  user tracker.
+	 * Gets the user id of this user tracker.
 	 *
-	 * @return the user id of this  user tracker
+	 * @return the user id of this user tracker
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  user tracker.
+	 * Sets the user id of this user tracker.
 	 *
-	 * @param userId the user id of this  user tracker
+	 * @param userId the user id of this user tracker
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  user tracker.
+	 * Gets the user uuid of this user tracker.
 	 *
-	 * @return the user uuid of this  user tracker
+	 * @return the user uuid of this user tracker
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  user tracker.
+	 * Sets the user uuid of this user tracker.
 	 *
-	 * @param userUuid the user uuid of this  user tracker
+	 * @param userUuid the user uuid of this user tracker
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the modified date of this  user tracker.
+	 * Gets the modified date of this user tracker.
 	 *
-	 * @return the modified date of this  user tracker
+	 * @return the modified date of this user tracker
 	 */
 	public Date getModifiedDate();
 
 	/**
-	 * Sets the modified date of this  user tracker.
+	 * Sets the modified date of this user tracker.
 	 *
-	 * @param modifiedDate the modified date of this  user tracker
+	 * @param modifiedDate the modified date of this user tracker
 	 */
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the session id of this  user tracker.
+	 * Gets the session id of this user tracker.
 	 *
-	 * @return the session id of this  user tracker
+	 * @return the session id of this user tracker
 	 */
 	@AutoEscape
 	public String getSessionId();
 
 	/**
-	 * Sets the session id of this  user tracker.
+	 * Sets the session id of this user tracker.
 	 *
-	 * @param sessionId the session id of this  user tracker
+	 * @param sessionId the session id of this user tracker
 	 */
 	public void setSessionId(String sessionId);
 
 	/**
-	 * Gets the remote addr of this  user tracker.
+	 * Gets the remote addr of this user tracker.
 	 *
-	 * @return the remote addr of this  user tracker
+	 * @return the remote addr of this user tracker
 	 */
 	@AutoEscape
 	public String getRemoteAddr();
 
 	/**
-	 * Sets the remote addr of this  user tracker.
+	 * Sets the remote addr of this user tracker.
 	 *
-	 * @param remoteAddr the remote addr of this  user tracker
+	 * @param remoteAddr the remote addr of this user tracker
 	 */
 	public void setRemoteAddr(String remoteAddr);
 
 	/**
-	 * Gets the remote host of this  user tracker.
+	 * Gets the remote host of this user tracker.
 	 *
-	 * @return the remote host of this  user tracker
+	 * @return the remote host of this user tracker
 	 */
 	@AutoEscape
 	public String getRemoteHost();
 
 	/**
-	 * Sets the remote host of this  user tracker.
+	 * Sets the remote host of this user tracker.
 	 *
-	 * @param remoteHost the remote host of this  user tracker
+	 * @param remoteHost the remote host of this user tracker
 	 */
 	public void setRemoteHost(String remoteHost);
 
 	/**
-	 * Gets the user agent of this  user tracker.
+	 * Gets the user agent of this user tracker.
 	 *
-	 * @return the user agent of this  user tracker
+	 * @return the user agent of this user tracker
 	 */
 	@AutoEscape
 	public String getUserAgent();
 
 	/**
-	 * Sets the user agent of this  user tracker.
+	 * Sets the user agent of this user tracker.
 	 *
-	 * @param userAgent the user agent of this  user tracker
+	 * @param userAgent the user agent of this user tracker
 	 */
 	public void setUserAgent(String userAgent);
 
 	/**
-	 * Gets a copy of this  user tracker as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this user tracker as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

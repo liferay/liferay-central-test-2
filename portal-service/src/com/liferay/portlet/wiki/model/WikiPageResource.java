@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.wiki.model;
 
-
 /**
  * <p>
  * This interface is a model that represents the WikiPageResource table in the

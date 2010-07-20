@@ -33,7 +33,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  m b ban model instance should use the {@link MBBan} interface instead.
+ * Never reference this interface directly. All methods that expect a m b ban model instance should use the {@link MBBan} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -44,164 +44,164 @@ import java.util.Date;
  */
 public interface MBBanModel extends BaseModel<MBBan> {
 	/**
-	 * Gets the primary key of this  m b ban.
+	 * Gets the primary key of this m b ban.
 	 *
-	 * @return the primary key of this  m b ban
+	 * @return the primary key of this m b ban
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  m b ban
+	 * Sets the primary key of this m b ban
 	 *
-	 * @param pk the primary key of this  m b ban
+	 * @param pk the primary key of this m b ban
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the ban id of this  m b ban.
+	 * Gets the ban id of this m b ban.
 	 *
-	 * @return the ban id of this  m b ban
+	 * @return the ban id of this m b ban
 	 */
 	public long getBanId();
 
 	/**
-	 * Sets the ban id of this  m b ban.
+	 * Sets the ban id of this m b ban.
 	 *
-	 * @param banId the ban id of this  m b ban
+	 * @param banId the ban id of this m b ban
 	 */
 	public void setBanId(long banId);
 
 	/**
-	 * Gets the group id of this  m b ban.
+	 * Gets the group id of this m b ban.
 	 *
-	 * @return the group id of this  m b ban
+	 * @return the group id of this m b ban
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  m b ban.
+	 * Sets the group id of this m b ban.
 	 *
-	 * @param groupId the group id of this  m b ban
+	 * @param groupId the group id of this m b ban
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this  m b ban.
+	 * Gets the company id of this m b ban.
 	 *
-	 * @return the company id of this  m b ban
+	 * @return the company id of this m b ban
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  m b ban.
+	 * Sets the company id of this m b ban.
 	 *
-	 * @param companyId the company id of this  m b ban
+	 * @param companyId the company id of this m b ban
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  m b ban.
+	 * Gets the user id of this m b ban.
 	 *
-	 * @return the user id of this  m b ban
+	 * @return the user id of this m b ban
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  m b ban.
+	 * Sets the user id of this m b ban.
 	 *
-	 * @param userId the user id of this  m b ban
+	 * @param userId the user id of this m b ban
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  m b ban.
+	 * Gets the user uuid of this m b ban.
 	 *
-	 * @return the user uuid of this  m b ban
+	 * @return the user uuid of this m b ban
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  m b ban.
+	 * Sets the user uuid of this m b ban.
 	 *
-	 * @param userUuid the user uuid of this  m b ban
+	 * @param userUuid the user uuid of this m b ban
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this  m b ban.
+	 * Gets the user name of this m b ban.
 	 *
-	 * @return the user name of this  m b ban
+	 * @return the user name of this m b ban
 	 */
 	@AutoEscape
 	public String getUserName();
 
 	/**
-	 * Sets the user name of this  m b ban.
+	 * Sets the user name of this m b ban.
 	 *
-	 * @param userName the user name of this  m b ban
+	 * @param userName the user name of this m b ban
 	 */
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this  m b ban.
+	 * Gets the create date of this m b ban.
 	 *
-	 * @return the create date of this  m b ban
+	 * @return the create date of this m b ban
 	 */
 	public Date getCreateDate();
 
 	/**
-	 * Sets the create date of this  m b ban.
+	 * Sets the create date of this m b ban.
 	 *
-	 * @param createDate the create date of this  m b ban
+	 * @param createDate the create date of this m b ban
 	 */
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this  m b ban.
+	 * Gets the modified date of this m b ban.
 	 *
-	 * @return the modified date of this  m b ban
+	 * @return the modified date of this m b ban
 	 */
 	public Date getModifiedDate();
 
 	/**
-	 * Sets the modified date of this  m b ban.
+	 * Sets the modified date of this m b ban.
 	 *
-	 * @param modifiedDate the modified date of this  m b ban
+	 * @param modifiedDate the modified date of this m b ban
 	 */
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the ban user id of this  m b ban.
+	 * Gets the ban user id of this m b ban.
 	 *
-	 * @return the ban user id of this  m b ban
+	 * @return the ban user id of this m b ban
 	 */
 	public long getBanUserId();
 
 	/**
-	 * Sets the ban user id of this  m b ban.
+	 * Sets the ban user id of this m b ban.
 	 *
-	 * @param banUserId the ban user id of this  m b ban
+	 * @param banUserId the ban user id of this m b ban
 	 */
 	public void setBanUserId(long banUserId);
 
 	/**
-	 * Gets the ban user uuid of this  m b ban.
+	 * Gets the ban user uuid of this m b ban.
 	 *
-	 * @return the ban user uuid of this  m b ban
+	 * @return the ban user uuid of this m b ban
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getBanUserUuid() throws SystemException;
 
 	/**
-	 * Sets the ban user uuid of this  m b ban.
+	 * Sets the ban user uuid of this m b ban.
 	 *
-	 * @param banUserUuid the ban user uuid of this  m b ban
+	 * @param banUserUuid the ban user uuid of this m b ban
 	 */
 	public void setBanUserUuid(String banUserUuid);
 
 	/**
-	 * Gets a copy of this  m b ban as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this m b ban as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

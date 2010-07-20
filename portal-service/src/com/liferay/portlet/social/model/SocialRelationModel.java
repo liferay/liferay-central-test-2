@@ -30,7 +30,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  social relation model instance should use the {@link SocialRelation} interface instead.
+ * Never reference this interface directly. All methods that expect a social relation model instance should use the {@link SocialRelation} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -41,120 +41,120 @@ import java.io.Serializable;
  */
 public interface SocialRelationModel extends BaseModel<SocialRelation> {
 	/**
-	 * Gets the primary key of this  social relation.
+	 * Gets the primary key of this social relation.
 	 *
-	 * @return the primary key of this  social relation
+	 * @return the primary key of this social relation
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  social relation
+	 * Sets the primary key of this social relation
 	 *
-	 * @param pk the primary key of this  social relation
+	 * @param pk the primary key of this social relation
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the uuid of this  social relation.
+	 * Gets the uuid of this social relation.
 	 *
-	 * @return the uuid of this  social relation
+	 * @return the uuid of this social relation
 	 */
 	@AutoEscape
 	public String getUuid();
 
 	/**
-	 * Sets the uuid of this  social relation.
+	 * Sets the uuid of this social relation.
 	 *
-	 * @param uuid the uuid of this  social relation
+	 * @param uuid the uuid of this social relation
 	 */
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the relation id of this  social relation.
+	 * Gets the relation id of this social relation.
 	 *
-	 * @return the relation id of this  social relation
+	 * @return the relation id of this social relation
 	 */
 	public long getRelationId();
 
 	/**
-	 * Sets the relation id of this  social relation.
+	 * Sets the relation id of this social relation.
 	 *
-	 * @param relationId the relation id of this  social relation
+	 * @param relationId the relation id of this social relation
 	 */
 	public void setRelationId(long relationId);
 
 	/**
-	 * Gets the company id of this  social relation.
+	 * Gets the company id of this social relation.
 	 *
-	 * @return the company id of this  social relation
+	 * @return the company id of this social relation
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  social relation.
+	 * Sets the company id of this social relation.
 	 *
-	 * @param companyId the company id of this  social relation
+	 * @param companyId the company id of this social relation
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the create date of this  social relation.
+	 * Gets the create date of this social relation.
 	 *
-	 * @return the create date of this  social relation
+	 * @return the create date of this social relation
 	 */
 	public long getCreateDate();
 
 	/**
-	 * Sets the create date of this  social relation.
+	 * Sets the create date of this social relation.
 	 *
-	 * @param createDate the create date of this  social relation
+	 * @param createDate the create date of this social relation
 	 */
 	public void setCreateDate(long createDate);
 
 	/**
-	 * Gets the user id1 of this  social relation.
+	 * Gets the user id1 of this social relation.
 	 *
-	 * @return the user id1 of this  social relation
+	 * @return the user id1 of this social relation
 	 */
 	public long getUserId1();
 
 	/**
-	 * Sets the user id1 of this  social relation.
+	 * Sets the user id1 of this social relation.
 	 *
-	 * @param userId1 the user id1 of this  social relation
+	 * @param userId1 the user id1 of this social relation
 	 */
 	public void setUserId1(long userId1);
 
 	/**
-	 * Gets the user id2 of this  social relation.
+	 * Gets the user id2 of this social relation.
 	 *
-	 * @return the user id2 of this  social relation
+	 * @return the user id2 of this social relation
 	 */
 	public long getUserId2();
 
 	/**
-	 * Sets the user id2 of this  social relation.
+	 * Sets the user id2 of this social relation.
 	 *
-	 * @param userId2 the user id2 of this  social relation
+	 * @param userId2 the user id2 of this social relation
 	 */
 	public void setUserId2(long userId2);
 
 	/**
-	 * Gets the type of this  social relation.
+	 * Gets the type of this social relation.
 	 *
-	 * @return the type of this  social relation
+	 * @return the type of this social relation
 	 */
 	public int getType();
 
 	/**
-	 * Sets the type of this  social relation.
+	 * Sets the type of this social relation.
 	 *
-	 * @param type the type of this  social relation
+	 * @param type the type of this social relation
 	 */
 	public void setType(int type);
 
 	/**
-	 * Gets a copy of this  social relation as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this social relation as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

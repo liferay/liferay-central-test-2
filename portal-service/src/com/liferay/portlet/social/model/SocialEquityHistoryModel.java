@@ -32,7 +32,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  social equity history model instance should use the {@link SocialEquityHistory} interface instead.
+ * Never reference this interface directly. All methods that expect a social equity history model instance should use the {@link SocialEquityHistory} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -43,120 +43,120 @@ import java.util.Date;
  */
 public interface SocialEquityHistoryModel extends BaseModel<SocialEquityHistory> {
 	/**
-	 * Gets the primary key of this  social equity history.
+	 * Gets the primary key of this social equity history.
 	 *
-	 * @return the primary key of this  social equity history
+	 * @return the primary key of this social equity history
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  social equity history
+	 * Sets the primary key of this social equity history
 	 *
-	 * @param pk the primary key of this  social equity history
+	 * @param pk the primary key of this social equity history
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the equity history id of this  social equity history.
+	 * Gets the equity history id of this social equity history.
 	 *
-	 * @return the equity history id of this  social equity history
+	 * @return the equity history id of this social equity history
 	 */
 	public long getEquityHistoryId();
 
 	/**
-	 * Sets the equity history id of this  social equity history.
+	 * Sets the equity history id of this social equity history.
 	 *
-	 * @param equityHistoryId the equity history id of this  social equity history
+	 * @param equityHistoryId the equity history id of this social equity history
 	 */
 	public void setEquityHistoryId(long equityHistoryId);
 
 	/**
-	 * Gets the group id of this  social equity history.
+	 * Gets the group id of this social equity history.
 	 *
-	 * @return the group id of this  social equity history
+	 * @return the group id of this social equity history
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  social equity history.
+	 * Sets the group id of this social equity history.
 	 *
-	 * @param groupId the group id of this  social equity history
+	 * @param groupId the group id of this social equity history
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this  social equity history.
+	 * Gets the company id of this social equity history.
 	 *
-	 * @return the company id of this  social equity history
+	 * @return the company id of this social equity history
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  social equity history.
+	 * Sets the company id of this social equity history.
 	 *
-	 * @param companyId the company id of this  social equity history
+	 * @param companyId the company id of this social equity history
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  social equity history.
+	 * Gets the user id of this social equity history.
 	 *
-	 * @return the user id of this  social equity history
+	 * @return the user id of this social equity history
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  social equity history.
+	 * Sets the user id of this social equity history.
 	 *
-	 * @param userId the user id of this  social equity history
+	 * @param userId the user id of this social equity history
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  social equity history.
+	 * Gets the user uuid of this social equity history.
 	 *
-	 * @return the user uuid of this  social equity history
+	 * @return the user uuid of this social equity history
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  social equity history.
+	 * Sets the user uuid of this social equity history.
 	 *
-	 * @param userUuid the user uuid of this  social equity history
+	 * @param userUuid the user uuid of this social equity history
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the create date of this  social equity history.
+	 * Gets the create date of this social equity history.
 	 *
-	 * @return the create date of this  social equity history
+	 * @return the create date of this social equity history
 	 */
 	public Date getCreateDate();
 
 	/**
-	 * Sets the create date of this  social equity history.
+	 * Sets the create date of this social equity history.
 	 *
-	 * @param createDate the create date of this  social equity history
+	 * @param createDate the create date of this social equity history
 	 */
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the personal equity of this  social equity history.
+	 * Gets the personal equity of this social equity history.
 	 *
-	 * @return the personal equity of this  social equity history
+	 * @return the personal equity of this social equity history
 	 */
 	public int getPersonalEquity();
 
 	/**
-	 * Sets the personal equity of this  social equity history.
+	 * Sets the personal equity of this social equity history.
 	 *
-	 * @param personalEquity the personal equity of this  social equity history
+	 * @param personalEquity the personal equity of this social equity history
 	 */
 	public void setPersonalEquity(int personalEquity);
 
 	/**
-	 * Gets a copy of this  social equity history as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this social equity history as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

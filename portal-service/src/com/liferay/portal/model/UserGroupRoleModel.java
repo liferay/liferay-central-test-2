@@ -30,7 +30,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  user group role model instance should use the {@link UserGroupRole} interface instead.
+ * Never reference this interface directly. All methods that expect a user group role model instance should use the {@link UserGroupRole} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -41,78 +41,78 @@ import java.io.Serializable;
  */
 public interface UserGroupRoleModel extends BaseModel<UserGroupRole> {
 	/**
-	 * Gets the primary key of this  user group role.
+	 * Gets the primary key of this user group role.
 	 *
-	 * @return the primary key of this  user group role
+	 * @return the primary key of this user group role
 	 */
 	public UserGroupRolePK getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  user group role
+	 * Sets the primary key of this user group role
 	 *
-	 * @param pk the primary key of this  user group role
+	 * @param pk the primary key of this user group role
 	 */
 	public void setPrimaryKey(UserGroupRolePK pk);
 
 	/**
-	 * Gets the user id of this  user group role.
+	 * Gets the user id of this user group role.
 	 *
-	 * @return the user id of this  user group role
+	 * @return the user id of this user group role
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  user group role.
+	 * Sets the user id of this user group role.
 	 *
-	 * @param userId the user id of this  user group role
+	 * @param userId the user id of this user group role
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  user group role.
+	 * Gets the user uuid of this user group role.
 	 *
-	 * @return the user uuid of this  user group role
+	 * @return the user uuid of this user group role
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  user group role.
+	 * Sets the user uuid of this user group role.
 	 *
-	 * @param userUuid the user uuid of this  user group role
+	 * @param userUuid the user uuid of this user group role
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the group id of this  user group role.
+	 * Gets the group id of this user group role.
 	 *
-	 * @return the group id of this  user group role
+	 * @return the group id of this user group role
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  user group role.
+	 * Sets the group id of this user group role.
 	 *
-	 * @param groupId the group id of this  user group role
+	 * @param groupId the group id of this user group role
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the role id of this  user group role.
+	 * Gets the role id of this user group role.
 	 *
-	 * @return the role id of this  user group role
+	 * @return the role id of this user group role
 	 */
 	public long getRoleId();
 
 	/**
-	 * Sets the role id of this  user group role.
+	 * Sets the role id of this user group role.
 	 *
-	 * @param roleId the role id of this  user group role
+	 * @param roleId the role id of this user group role
 	 */
 	public void setRoleId(long roleId);
 
 	/**
-	 * Gets a copy of this  user group role as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this user group role as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

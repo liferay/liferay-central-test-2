@@ -14,7 +14,6 @@
 
 package com.liferay.counter.model;
 
-
 /**
  * <p>
  * This interface is a model that represents the Counter table in the

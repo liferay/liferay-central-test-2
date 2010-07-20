@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.shopping.model;
 
-
 /**
  * <p>
  * This interface is a model that represents the ShoppingOrderItem table in the

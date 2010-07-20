@@ -27,7 +27,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  expando row model instance should use the {@link ExpandoRow} interface instead.
+ * Never reference this interface directly. All methods that expect a expando row model instance should use the {@link ExpandoRow} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -38,77 +38,77 @@ import java.io.Serializable;
  */
 public interface ExpandoRowModel extends BaseModel<ExpandoRow> {
 	/**
-	 * Gets the primary key of this  expando row.
+	 * Gets the primary key of this expando row.
 	 *
-	 * @return the primary key of this  expando row
+	 * @return the primary key of this expando row
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  expando row
+	 * Sets the primary key of this expando row
 	 *
-	 * @param pk the primary key of this  expando row
+	 * @param pk the primary key of this expando row
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the row id of this  expando row.
+	 * Gets the row id of this expando row.
 	 *
-	 * @return the row id of this  expando row
+	 * @return the row id of this expando row
 	 */
 	public long getRowId();
 
 	/**
-	 * Sets the row id of this  expando row.
+	 * Sets the row id of this expando row.
 	 *
-	 * @param rowId the row id of this  expando row
+	 * @param rowId the row id of this expando row
 	 */
 	public void setRowId(long rowId);
 
 	/**
-	 * Gets the company id of this  expando row.
+	 * Gets the company id of this expando row.
 	 *
-	 * @return the company id of this  expando row
+	 * @return the company id of this expando row
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  expando row.
+	 * Sets the company id of this expando row.
 	 *
-	 * @param companyId the company id of this  expando row
+	 * @param companyId the company id of this expando row
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the table id of this  expando row.
+	 * Gets the table id of this expando row.
 	 *
-	 * @return the table id of this  expando row
+	 * @return the table id of this expando row
 	 */
 	public long getTableId();
 
 	/**
-	 * Sets the table id of this  expando row.
+	 * Sets the table id of this expando row.
 	 *
-	 * @param tableId the table id of this  expando row
+	 * @param tableId the table id of this expando row
 	 */
 	public void setTableId(long tableId);
 
 	/**
-	 * Gets the class p k of this  expando row.
+	 * Gets the class p k of this expando row.
 	 *
-	 * @return the class p k of this  expando row
+	 * @return the class p k of this expando row
 	 */
 	public long getClassPK();
 
 	/**
-	 * Sets the class p k of this  expando row.
+	 * Sets the class p k of this expando row.
 	 *
-	 * @param classPK the class p k of this  expando row
+	 * @param classPK the class p k of this expando row
 	 */
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets a copy of this  expando row as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this expando row as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

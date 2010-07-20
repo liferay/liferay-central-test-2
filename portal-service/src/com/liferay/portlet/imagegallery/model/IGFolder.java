@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.imagegallery.model;
 
-
 /**
  * <p>
  * This interface is a model that represents the IGFolder table in the

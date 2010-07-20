@@ -33,7 +33,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  s c framework version model instance should use the {@link SCFrameworkVersion} interface instead.
+ * Never reference this interface directly. All methods that expect a s c framework version model instance should use the {@link SCFrameworkVersion} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -44,200 +44,200 @@ import java.util.Date;
  */
 public interface SCFrameworkVersionModel extends BaseModel<SCFrameworkVersion> {
 	/**
-	 * Gets the primary key of this  s c framework version.
+	 * Gets the primary key of this s c framework version.
 	 *
-	 * @return the primary key of this  s c framework version
+	 * @return the primary key of this s c framework version
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  s c framework version
+	 * Sets the primary key of this s c framework version
 	 *
-	 * @param pk the primary key of this  s c framework version
+	 * @param pk the primary key of this s c framework version
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the framework version id of this  s c framework version.
+	 * Gets the framework version id of this s c framework version.
 	 *
-	 * @return the framework version id of this  s c framework version
+	 * @return the framework version id of this s c framework version
 	 */
 	public long getFrameworkVersionId();
 
 	/**
-	 * Sets the framework version id of this  s c framework version.
+	 * Sets the framework version id of this s c framework version.
 	 *
-	 * @param frameworkVersionId the framework version id of this  s c framework version
+	 * @param frameworkVersionId the framework version id of this s c framework version
 	 */
 	public void setFrameworkVersionId(long frameworkVersionId);
 
 	/**
-	 * Gets the group id of this  s c framework version.
+	 * Gets the group id of this s c framework version.
 	 *
-	 * @return the group id of this  s c framework version
+	 * @return the group id of this s c framework version
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  s c framework version.
+	 * Sets the group id of this s c framework version.
 	 *
-	 * @param groupId the group id of this  s c framework version
+	 * @param groupId the group id of this s c framework version
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this  s c framework version.
+	 * Gets the company id of this s c framework version.
 	 *
-	 * @return the company id of this  s c framework version
+	 * @return the company id of this s c framework version
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  s c framework version.
+	 * Sets the company id of this s c framework version.
 	 *
-	 * @param companyId the company id of this  s c framework version
+	 * @param companyId the company id of this s c framework version
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  s c framework version.
+	 * Gets the user id of this s c framework version.
 	 *
-	 * @return the user id of this  s c framework version
+	 * @return the user id of this s c framework version
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  s c framework version.
+	 * Sets the user id of this s c framework version.
 	 *
-	 * @param userId the user id of this  s c framework version
+	 * @param userId the user id of this s c framework version
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  s c framework version.
+	 * Gets the user uuid of this s c framework version.
 	 *
-	 * @return the user uuid of this  s c framework version
+	 * @return the user uuid of this s c framework version
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  s c framework version.
+	 * Sets the user uuid of this s c framework version.
 	 *
-	 * @param userUuid the user uuid of this  s c framework version
+	 * @param userUuid the user uuid of this s c framework version
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this  s c framework version.
+	 * Gets the user name of this s c framework version.
 	 *
-	 * @return the user name of this  s c framework version
+	 * @return the user name of this s c framework version
 	 */
 	@AutoEscape
 	public String getUserName();
 
 	/**
-	 * Sets the user name of this  s c framework version.
+	 * Sets the user name of this s c framework version.
 	 *
-	 * @param userName the user name of this  s c framework version
+	 * @param userName the user name of this s c framework version
 	 */
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this  s c framework version.
+	 * Gets the create date of this s c framework version.
 	 *
-	 * @return the create date of this  s c framework version
+	 * @return the create date of this s c framework version
 	 */
 	public Date getCreateDate();
 
 	/**
-	 * Sets the create date of this  s c framework version.
+	 * Sets the create date of this s c framework version.
 	 *
-	 * @param createDate the create date of this  s c framework version
+	 * @param createDate the create date of this s c framework version
 	 */
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this  s c framework version.
+	 * Gets the modified date of this s c framework version.
 	 *
-	 * @return the modified date of this  s c framework version
+	 * @return the modified date of this s c framework version
 	 */
 	public Date getModifiedDate();
 
 	/**
-	 * Sets the modified date of this  s c framework version.
+	 * Sets the modified date of this s c framework version.
 	 *
-	 * @param modifiedDate the modified date of this  s c framework version
+	 * @param modifiedDate the modified date of this s c framework version
 	 */
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the name of this  s c framework version.
+	 * Gets the name of this s c framework version.
 	 *
-	 * @return the name of this  s c framework version
+	 * @return the name of this s c framework version
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  s c framework version.
+	 * Sets the name of this s c framework version.
 	 *
-	 * @param name the name of this  s c framework version
+	 * @param name the name of this s c framework version
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets the url of this  s c framework version.
+	 * Gets the url of this s c framework version.
 	 *
-	 * @return the url of this  s c framework version
+	 * @return the url of this s c framework version
 	 */
 	@AutoEscape
 	public String getUrl();
 
 	/**
-	 * Sets the url of this  s c framework version.
+	 * Sets the url of this s c framework version.
 	 *
-	 * @param url the url of this  s c framework version
+	 * @param url the url of this s c framework version
 	 */
 	public void setUrl(String url);
 
 	/**
-	 * Gets the active of this  s c framework version.
+	 * Gets the active of this s c framework version.
 	 *
-	 * @return the active of this  s c framework version
+	 * @return the active of this s c framework version
 	 */
 	public boolean getActive();
 
 	/**
-	 * Determines whether this  s c framework version is active.
+	 * Determines whether this s c framework version is active.
 	 *
-	 * @return whether this  s c framework version is active
+	 * @return whether this s c framework version is active
 	 */
 	public boolean isActive();
 
 	/**
-	 * Sets the active of this  s c framework version.
+	 * Sets the active of this s c framework version.
 	 *
-	 * @param active the active of this  s c framework version
+	 * @param active the active of this s c framework version
 	 */
 	public void setActive(boolean active);
 
 	/**
-	 * Gets the priority of this  s c framework version.
+	 * Gets the priority of this s c framework version.
 	 *
-	 * @return the priority of this  s c framework version
+	 * @return the priority of this s c framework version
 	 */
 	public int getPriority();
 
 	/**
-	 * Sets the priority of this  s c framework version.
+	 * Sets the priority of this s c framework version.
 	 *
-	 * @param priority the priority of this  s c framework version
+	 * @param priority the priority of this s c framework version
 	 */
 	public void setPriority(int priority);
 
 	/**
-	 * Gets a copy of this  s c framework version as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this s c framework version as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

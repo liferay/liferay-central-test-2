@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.blogs.model;
 
-
 /**
  * <p>
  * This interface is a model that represents the BlogsStatsUser table in the

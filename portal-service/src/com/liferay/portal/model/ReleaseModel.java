@@ -31,7 +31,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  release model instance should use the {@link Release} interface instead.
+ * Never reference this interface directly. All methods that expect a release model instance should use the {@link Release} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -42,142 +42,142 @@ import java.util.Date;
  */
 public interface ReleaseModel extends BaseModel<Release> {
 	/**
-	 * Gets the primary key of this  release.
+	 * Gets the primary key of this release.
 	 *
-	 * @return the primary key of this  release
+	 * @return the primary key of this release
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  release
+	 * Sets the primary key of this release
 	 *
-	 * @param pk the primary key of this  release
+	 * @param pk the primary key of this release
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the release id of this  release.
+	 * Gets the release id of this release.
 	 *
-	 * @return the release id of this  release
+	 * @return the release id of this release
 	 */
 	public long getReleaseId();
 
 	/**
-	 * Sets the release id of this  release.
+	 * Sets the release id of this release.
 	 *
-	 * @param releaseId the release id of this  release
+	 * @param releaseId the release id of this release
 	 */
 	public void setReleaseId(long releaseId);
 
 	/**
-	 * Gets the create date of this  release.
+	 * Gets the create date of this release.
 	 *
-	 * @return the create date of this  release
+	 * @return the create date of this release
 	 */
 	public Date getCreateDate();
 
 	/**
-	 * Sets the create date of this  release.
+	 * Sets the create date of this release.
 	 *
-	 * @param createDate the create date of this  release
+	 * @param createDate the create date of this release
 	 */
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this  release.
+	 * Gets the modified date of this release.
 	 *
-	 * @return the modified date of this  release
+	 * @return the modified date of this release
 	 */
 	public Date getModifiedDate();
 
 	/**
-	 * Sets the modified date of this  release.
+	 * Sets the modified date of this release.
 	 *
-	 * @param modifiedDate the modified date of this  release
+	 * @param modifiedDate the modified date of this release
 	 */
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the servlet context name of this  release.
+	 * Gets the servlet context name of this release.
 	 *
-	 * @return the servlet context name of this  release
+	 * @return the servlet context name of this release
 	 */
 	@AutoEscape
 	public String getServletContextName();
 
 	/**
-	 * Sets the servlet context name of this  release.
+	 * Sets the servlet context name of this release.
 	 *
-	 * @param servletContextName the servlet context name of this  release
+	 * @param servletContextName the servlet context name of this release
 	 */
 	public void setServletContextName(String servletContextName);
 
 	/**
-	 * Gets the build number of this  release.
+	 * Gets the build number of this release.
 	 *
-	 * @return the build number of this  release
+	 * @return the build number of this release
 	 */
 	public int getBuildNumber();
 
 	/**
-	 * Sets the build number of this  release.
+	 * Sets the build number of this release.
 	 *
-	 * @param buildNumber the build number of this  release
+	 * @param buildNumber the build number of this release
 	 */
 	public void setBuildNumber(int buildNumber);
 
 	/**
-	 * Gets the build date of this  release.
+	 * Gets the build date of this release.
 	 *
-	 * @return the build date of this  release
+	 * @return the build date of this release
 	 */
 	public Date getBuildDate();
 
 	/**
-	 * Sets the build date of this  release.
+	 * Sets the build date of this release.
 	 *
-	 * @param buildDate the build date of this  release
+	 * @param buildDate the build date of this release
 	 */
 	public void setBuildDate(Date buildDate);
 
 	/**
-	 * Gets the verified of this  release.
+	 * Gets the verified of this release.
 	 *
-	 * @return the verified of this  release
+	 * @return the verified of this release
 	 */
 	public boolean getVerified();
 
 	/**
-	 * Determines whether this  release is verified.
+	 * Determines whether this release is verified.
 	 *
-	 * @return whether this  release is verified
+	 * @return whether this release is verified
 	 */
 	public boolean isVerified();
 
 	/**
-	 * Sets the verified of this  release.
+	 * Sets the verified of this release.
 	 *
-	 * @param verified the verified of this  release
+	 * @param verified the verified of this release
 	 */
 	public void setVerified(boolean verified);
 
 	/**
-	 * Gets the test string of this  release.
+	 * Gets the test string of this release.
 	 *
-	 * @return the test string of this  release
+	 * @return the test string of this release
 	 */
 	@AutoEscape
 	public String getTestString();
 
 	/**
-	 * Sets the test string of this  release.
+	 * Sets the test string of this release.
 	 *
-	 * @param testString the test string of this  release
+	 * @param testString the test string of this release
 	 */
 	public void setTestString(String testString);
 
 	/**
-	 * Gets a copy of this  release as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this release as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

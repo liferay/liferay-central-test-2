@@ -33,7 +33,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  blogs entry model instance should use the {@link BlogsEntry} interface instead.
+ * Never reference this interface directly. All methods that expect a blogs entry model instance should use the {@link BlogsEntry} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -44,366 +44,366 @@ import java.util.Date;
  */
 public interface BlogsEntryModel extends BaseModel<BlogsEntry> {
 	/**
-	 * Gets the primary key of this  blogs entry.
+	 * Gets the primary key of this blogs entry.
 	 *
-	 * @return the primary key of this  blogs entry
+	 * @return the primary key of this blogs entry
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  blogs entry
+	 * Sets the primary key of this blogs entry
 	 *
-	 * @param pk the primary key of this  blogs entry
+	 * @param pk the primary key of this blogs entry
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the uuid of this  blogs entry.
+	 * Gets the uuid of this blogs entry.
 	 *
-	 * @return the uuid of this  blogs entry
+	 * @return the uuid of this blogs entry
 	 */
 	@AutoEscape
 	public String getUuid();
 
 	/**
-	 * Sets the uuid of this  blogs entry.
+	 * Sets the uuid of this blogs entry.
 	 *
-	 * @param uuid the uuid of this  blogs entry
+	 * @param uuid the uuid of this blogs entry
 	 */
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the entry id of this  blogs entry.
+	 * Gets the entry id of this blogs entry.
 	 *
-	 * @return the entry id of this  blogs entry
+	 * @return the entry id of this blogs entry
 	 */
 	public long getEntryId();
 
 	/**
-	 * Sets the entry id of this  blogs entry.
+	 * Sets the entry id of this blogs entry.
 	 *
-	 * @param entryId the entry id of this  blogs entry
+	 * @param entryId the entry id of this blogs entry
 	 */
 	public void setEntryId(long entryId);
 
 	/**
-	 * Gets the group id of this  blogs entry.
+	 * Gets the group id of this blogs entry.
 	 *
-	 * @return the group id of this  blogs entry
+	 * @return the group id of this blogs entry
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  blogs entry.
+	 * Sets the group id of this blogs entry.
 	 *
-	 * @param groupId the group id of this  blogs entry
+	 * @param groupId the group id of this blogs entry
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this  blogs entry.
+	 * Gets the company id of this blogs entry.
 	 *
-	 * @return the company id of this  blogs entry
+	 * @return the company id of this blogs entry
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  blogs entry.
+	 * Sets the company id of this blogs entry.
 	 *
-	 * @param companyId the company id of this  blogs entry
+	 * @param companyId the company id of this blogs entry
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  blogs entry.
+	 * Gets the user id of this blogs entry.
 	 *
-	 * @return the user id of this  blogs entry
+	 * @return the user id of this blogs entry
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  blogs entry.
+	 * Sets the user id of this blogs entry.
 	 *
-	 * @param userId the user id of this  blogs entry
+	 * @param userId the user id of this blogs entry
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  blogs entry.
+	 * Gets the user uuid of this blogs entry.
 	 *
-	 * @return the user uuid of this  blogs entry
+	 * @return the user uuid of this blogs entry
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  blogs entry.
+	 * Sets the user uuid of this blogs entry.
 	 *
-	 * @param userUuid the user uuid of this  blogs entry
+	 * @param userUuid the user uuid of this blogs entry
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this  blogs entry.
+	 * Gets the user name of this blogs entry.
 	 *
-	 * @return the user name of this  blogs entry
+	 * @return the user name of this blogs entry
 	 */
 	@AutoEscape
 	public String getUserName();
 
 	/**
-	 * Sets the user name of this  blogs entry.
+	 * Sets the user name of this blogs entry.
 	 *
-	 * @param userName the user name of this  blogs entry
+	 * @param userName the user name of this blogs entry
 	 */
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this  blogs entry.
+	 * Gets the create date of this blogs entry.
 	 *
-	 * @return the create date of this  blogs entry
+	 * @return the create date of this blogs entry
 	 */
 	public Date getCreateDate();
 
 	/**
-	 * Sets the create date of this  blogs entry.
+	 * Sets the create date of this blogs entry.
 	 *
-	 * @param createDate the create date of this  blogs entry
+	 * @param createDate the create date of this blogs entry
 	 */
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this  blogs entry.
+	 * Gets the modified date of this blogs entry.
 	 *
-	 * @return the modified date of this  blogs entry
+	 * @return the modified date of this blogs entry
 	 */
 	public Date getModifiedDate();
 
 	/**
-	 * Sets the modified date of this  blogs entry.
+	 * Sets the modified date of this blogs entry.
 	 *
-	 * @param modifiedDate the modified date of this  blogs entry
+	 * @param modifiedDate the modified date of this blogs entry
 	 */
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the title of this  blogs entry.
+	 * Gets the title of this blogs entry.
 	 *
-	 * @return the title of this  blogs entry
+	 * @return the title of this blogs entry
 	 */
 	@AutoEscape
 	public String getTitle();
 
 	/**
-	 * Sets the title of this  blogs entry.
+	 * Sets the title of this blogs entry.
 	 *
-	 * @param title the title of this  blogs entry
+	 * @param title the title of this blogs entry
 	 */
 	public void setTitle(String title);
 
 	/**
-	 * Gets the url title of this  blogs entry.
+	 * Gets the url title of this blogs entry.
 	 *
-	 * @return the url title of this  blogs entry
+	 * @return the url title of this blogs entry
 	 */
 	@AutoEscape
 	public String getUrlTitle();
 
 	/**
-	 * Sets the url title of this  blogs entry.
+	 * Sets the url title of this blogs entry.
 	 *
-	 * @param urlTitle the url title of this  blogs entry
+	 * @param urlTitle the url title of this blogs entry
 	 */
 	public void setUrlTitle(String urlTitle);
 
 	/**
-	 * Gets the content of this  blogs entry.
+	 * Gets the content of this blogs entry.
 	 *
-	 * @return the content of this  blogs entry
+	 * @return the content of this blogs entry
 	 */
 	@AutoEscape
 	public String getContent();
 
 	/**
-	 * Sets the content of this  blogs entry.
+	 * Sets the content of this blogs entry.
 	 *
-	 * @param content the content of this  blogs entry
+	 * @param content the content of this blogs entry
 	 */
 	public void setContent(String content);
 
 	/**
-	 * Gets the display date of this  blogs entry.
+	 * Gets the display date of this blogs entry.
 	 *
-	 * @return the display date of this  blogs entry
+	 * @return the display date of this blogs entry
 	 */
 	public Date getDisplayDate();
 
 	/**
-	 * Sets the display date of this  blogs entry.
+	 * Sets the display date of this blogs entry.
 	 *
-	 * @param displayDate the display date of this  blogs entry
+	 * @param displayDate the display date of this blogs entry
 	 */
 	public void setDisplayDate(Date displayDate);
 
 	/**
-	 * Gets the allow pingbacks of this  blogs entry.
+	 * Gets the allow pingbacks of this blogs entry.
 	 *
-	 * @return the allow pingbacks of this  blogs entry
+	 * @return the allow pingbacks of this blogs entry
 	 */
 	public boolean getAllowPingbacks();
 
 	/**
-	 * Determines whether this  blogs entry is allow pingbacks.
+	 * Determines whether this blogs entry is allow pingbacks.
 	 *
-	 * @return whether this  blogs entry is allow pingbacks
+	 * @return whether this blogs entry is allow pingbacks
 	 */
 	public boolean isAllowPingbacks();
 
 	/**
-	 * Sets the allow pingbacks of this  blogs entry.
+	 * Sets the allow pingbacks of this blogs entry.
 	 *
-	 * @param allowPingbacks the allow pingbacks of this  blogs entry
+	 * @param allowPingbacks the allow pingbacks of this blogs entry
 	 */
 	public void setAllowPingbacks(boolean allowPingbacks);
 
 	/**
-	 * Gets the allow trackbacks of this  blogs entry.
+	 * Gets the allow trackbacks of this blogs entry.
 	 *
-	 * @return the allow trackbacks of this  blogs entry
+	 * @return the allow trackbacks of this blogs entry
 	 */
 	public boolean getAllowTrackbacks();
 
 	/**
-	 * Determines whether this  blogs entry is allow trackbacks.
+	 * Determines whether this blogs entry is allow trackbacks.
 	 *
-	 * @return whether this  blogs entry is allow trackbacks
+	 * @return whether this blogs entry is allow trackbacks
 	 */
 	public boolean isAllowTrackbacks();
 
 	/**
-	 * Sets the allow trackbacks of this  blogs entry.
+	 * Sets the allow trackbacks of this blogs entry.
 	 *
-	 * @param allowTrackbacks the allow trackbacks of this  blogs entry
+	 * @param allowTrackbacks the allow trackbacks of this blogs entry
 	 */
 	public void setAllowTrackbacks(boolean allowTrackbacks);
 
 	/**
-	 * Gets the trackbacks of this  blogs entry.
+	 * Gets the trackbacks of this blogs entry.
 	 *
-	 * @return the trackbacks of this  blogs entry
+	 * @return the trackbacks of this blogs entry
 	 */
 	@AutoEscape
 	public String getTrackbacks();
 
 	/**
-	 * Sets the trackbacks of this  blogs entry.
+	 * Sets the trackbacks of this blogs entry.
 	 *
-	 * @param trackbacks the trackbacks of this  blogs entry
+	 * @param trackbacks the trackbacks of this blogs entry
 	 */
 	public void setTrackbacks(String trackbacks);
 
 	/**
-	 * Gets the status of this  blogs entry.
+	 * Gets the status of this blogs entry.
 	 *
-	 * @return the status of this  blogs entry
+	 * @return the status of this blogs entry
 	 */
 	public int getStatus();
 
 	/**
-	 * Sets the status of this  blogs entry.
+	 * Sets the status of this blogs entry.
 	 *
-	 * @param status the status of this  blogs entry
+	 * @param status the status of this blogs entry
 	 */
 	public void setStatus(int status);
 
 	/**
-	 * Gets the status by user id of this  blogs entry.
+	 * Gets the status by user id of this blogs entry.
 	 *
-	 * @return the status by user id of this  blogs entry
+	 * @return the status by user id of this blogs entry
 	 */
 	public long getStatusByUserId();
 
 	/**
-	 * Sets the status by user id of this  blogs entry.
+	 * Sets the status by user id of this blogs entry.
 	 *
-	 * @param statusByUserId the status by user id of this  blogs entry
+	 * @param statusByUserId the status by user id of this blogs entry
 	 */
 	public void setStatusByUserId(long statusByUserId);
 
 	/**
-	 * Gets the status by user uuid of this  blogs entry.
+	 * Gets the status by user uuid of this blogs entry.
 	 *
-	 * @return the status by user uuid of this  blogs entry
+	 * @return the status by user uuid of this blogs entry
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getStatusByUserUuid() throws SystemException;
 
 	/**
-	 * Sets the status by user uuid of this  blogs entry.
+	 * Sets the status by user uuid of this blogs entry.
 	 *
-	 * @param statusByUserUuid the status by user uuid of this  blogs entry
+	 * @param statusByUserUuid the status by user uuid of this blogs entry
 	 */
 	public void setStatusByUserUuid(String statusByUserUuid);
 
 	/**
-	 * Gets the status by user name of this  blogs entry.
+	 * Gets the status by user name of this blogs entry.
 	 *
-	 * @return the status by user name of this  blogs entry
+	 * @return the status by user name of this blogs entry
 	 */
 	@AutoEscape
 	public String getStatusByUserName();
 
 	/**
-	 * Sets the status by user name of this  blogs entry.
+	 * Sets the status by user name of this blogs entry.
 	 *
-	 * @param statusByUserName the status by user name of this  blogs entry
+	 * @param statusByUserName the status by user name of this blogs entry
 	 */
 	public void setStatusByUserName(String statusByUserName);
 
 	/**
-	 * Gets the status date of this  blogs entry.
+	 * Gets the status date of this blogs entry.
 	 *
-	 * @return the status date of this  blogs entry
+	 * @return the status date of this blogs entry
 	 */
 	public Date getStatusDate();
 
 	/**
-	 * Sets the status date of this  blogs entry.
+	 * Sets the status date of this blogs entry.
 	 *
-	 * @param statusDate the status date of this  blogs entry
+	 * @param statusDate the status date of this blogs entry
 	 */
 	public void setStatusDate(Date statusDate);
 
 	/**
-	 * Determines whether this  blogs entry is approved.
+	 * Determines whether this blogs entry is approved.
 	 *
-	 * @return true if this  blogs entry is approved; false otherwise
+	 * @return true if this blogs entry is approved; false otherwise
 	 */
 	public boolean isApproved();
 
 	/**
-	 * Determines whether this  blogs entry is a draft.
+	 * Determines whether this blogs entry is a draft.
 	 *
-	 * @return true if this  blogs entry is a draft; false otherwise
+	 * @return true if this blogs entry is a draft; false otherwise
 	 */
 	public boolean isDraft();
 
 	/**
-	 * Determines whether this  blogs entry is expired.
+	 * Determines whether this blogs entry is expired.
 	 *
-	 * @return true if this  blogs entry is expired; false otherwise
+	 * @return true if this blogs entry is expired; false otherwise
 	 */
 	public boolean isExpired();
 
 	/**
-	 * Determines whether this  blogs entry is pending.
+	 * Determines whether this blogs entry is pending.
 	 *
-	 * @return true if this  blogs entry is pending; false otherwise
+	 * @return true if this blogs entry is pending; false otherwise
 	 */
 	public boolean isPending();
 
 	/**
-	 * Gets a copy of this  blogs entry as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this blogs entry as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

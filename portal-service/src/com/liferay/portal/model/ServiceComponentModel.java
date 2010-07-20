@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  service component model instance should use the {@link ServiceComponent} interface instead.
+ * Never reference this interface directly. All methods that expect a service component model instance should use the {@link ServiceComponent} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,93 +40,93 @@ import java.io.Serializable;
  */
 public interface ServiceComponentModel extends BaseModel<ServiceComponent> {
 	/**
-	 * Gets the primary key of this  service component.
+	 * Gets the primary key of this service component.
 	 *
-	 * @return the primary key of this  service component
+	 * @return the primary key of this service component
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  service component
+	 * Sets the primary key of this service component
 	 *
-	 * @param pk the primary key of this  service component
+	 * @param pk the primary key of this service component
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the service component id of this  service component.
+	 * Gets the service component id of this service component.
 	 *
-	 * @return the service component id of this  service component
+	 * @return the service component id of this service component
 	 */
 	public long getServiceComponentId();
 
 	/**
-	 * Sets the service component id of this  service component.
+	 * Sets the service component id of this service component.
 	 *
-	 * @param serviceComponentId the service component id of this  service component
+	 * @param serviceComponentId the service component id of this service component
 	 */
 	public void setServiceComponentId(long serviceComponentId);
 
 	/**
-	 * Gets the build namespace of this  service component.
+	 * Gets the build namespace of this service component.
 	 *
-	 * @return the build namespace of this  service component
+	 * @return the build namespace of this service component
 	 */
 	@AutoEscape
 	public String getBuildNamespace();
 
 	/**
-	 * Sets the build namespace of this  service component.
+	 * Sets the build namespace of this service component.
 	 *
-	 * @param buildNamespace the build namespace of this  service component
+	 * @param buildNamespace the build namespace of this service component
 	 */
 	public void setBuildNamespace(String buildNamespace);
 
 	/**
-	 * Gets the build number of this  service component.
+	 * Gets the build number of this service component.
 	 *
-	 * @return the build number of this  service component
+	 * @return the build number of this service component
 	 */
 	public long getBuildNumber();
 
 	/**
-	 * Sets the build number of this  service component.
+	 * Sets the build number of this service component.
 	 *
-	 * @param buildNumber the build number of this  service component
+	 * @param buildNumber the build number of this service component
 	 */
 	public void setBuildNumber(long buildNumber);
 
 	/**
-	 * Gets the build date of this  service component.
+	 * Gets the build date of this service component.
 	 *
-	 * @return the build date of this  service component
+	 * @return the build date of this service component
 	 */
 	public long getBuildDate();
 
 	/**
-	 * Sets the build date of this  service component.
+	 * Sets the build date of this service component.
 	 *
-	 * @param buildDate the build date of this  service component
+	 * @param buildDate the build date of this service component
 	 */
 	public void setBuildDate(long buildDate);
 
 	/**
-	 * Gets the data of this  service component.
+	 * Gets the data of this service component.
 	 *
-	 * @return the data of this  service component
+	 * @return the data of this service component
 	 */
 	@AutoEscape
 	public String getData();
 
 	/**
-	 * Sets the data of this  service component.
+	 * Sets the data of this service component.
 	 *
-	 * @param data the data of this  service component
+	 * @param data the data of this service component
 	 */
 	public void setData(String data);
 
 	/**
-	 * Gets a copy of this  service component as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this service component as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

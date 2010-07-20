@@ -30,7 +30,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  journal content search model instance should use the {@link JournalContentSearch} interface instead.
+ * Never reference this interface directly. All methods that expect a journal content search model instance should use the {@link JournalContentSearch} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -41,128 +41,128 @@ import java.io.Serializable;
  */
 public interface JournalContentSearchModel extends BaseModel<JournalContentSearch> {
 	/**
-	 * Gets the primary key of this  journal content search.
+	 * Gets the primary key of this journal content search.
 	 *
-	 * @return the primary key of this  journal content search
+	 * @return the primary key of this journal content search
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  journal content search
+	 * Sets the primary key of this journal content search
 	 *
-	 * @param pk the primary key of this  journal content search
+	 * @param pk the primary key of this journal content search
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the content search id of this  journal content search.
+	 * Gets the content search id of this journal content search.
 	 *
-	 * @return the content search id of this  journal content search
+	 * @return the content search id of this journal content search
 	 */
 	public long getContentSearchId();
 
 	/**
-	 * Sets the content search id of this  journal content search.
+	 * Sets the content search id of this journal content search.
 	 *
-	 * @param contentSearchId the content search id of this  journal content search
+	 * @param contentSearchId the content search id of this journal content search
 	 */
 	public void setContentSearchId(long contentSearchId);
 
 	/**
-	 * Gets the group id of this  journal content search.
+	 * Gets the group id of this journal content search.
 	 *
-	 * @return the group id of this  journal content search
+	 * @return the group id of this journal content search
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  journal content search.
+	 * Sets the group id of this journal content search.
 	 *
-	 * @param groupId the group id of this  journal content search
+	 * @param groupId the group id of this journal content search
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this  journal content search.
+	 * Gets the company id of this journal content search.
 	 *
-	 * @return the company id of this  journal content search
+	 * @return the company id of this journal content search
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  journal content search.
+	 * Sets the company id of this journal content search.
 	 *
-	 * @param companyId the company id of this  journal content search
+	 * @param companyId the company id of this journal content search
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the private layout of this  journal content search.
+	 * Gets the private layout of this journal content search.
 	 *
-	 * @return the private layout of this  journal content search
+	 * @return the private layout of this journal content search
 	 */
 	public boolean getPrivateLayout();
 
 	/**
-	 * Determines whether this  journal content search is private layout.
+	 * Determines whether this journal content search is private layout.
 	 *
-	 * @return whether this  journal content search is private layout
+	 * @return whether this journal content search is private layout
 	 */
 	public boolean isPrivateLayout();
 
 	/**
-	 * Sets the private layout of this  journal content search.
+	 * Sets the private layout of this journal content search.
 	 *
-	 * @param privateLayout the private layout of this  journal content search
+	 * @param privateLayout the private layout of this journal content search
 	 */
 	public void setPrivateLayout(boolean privateLayout);
 
 	/**
-	 * Gets the layout id of this  journal content search.
+	 * Gets the layout id of this journal content search.
 	 *
-	 * @return the layout id of this  journal content search
+	 * @return the layout id of this journal content search
 	 */
 	public long getLayoutId();
 
 	/**
-	 * Sets the layout id of this  journal content search.
+	 * Sets the layout id of this journal content search.
 	 *
-	 * @param layoutId the layout id of this  journal content search
+	 * @param layoutId the layout id of this journal content search
 	 */
 	public void setLayoutId(long layoutId);
 
 	/**
-	 * Gets the portlet id of this  journal content search.
+	 * Gets the portlet id of this journal content search.
 	 *
-	 * @return the portlet id of this  journal content search
+	 * @return the portlet id of this journal content search
 	 */
 	@AutoEscape
 	public String getPortletId();
 
 	/**
-	 * Sets the portlet id of this  journal content search.
+	 * Sets the portlet id of this journal content search.
 	 *
-	 * @param portletId the portlet id of this  journal content search
+	 * @param portletId the portlet id of this journal content search
 	 */
 	public void setPortletId(String portletId);
 
 	/**
-	 * Gets the article id of this  journal content search.
+	 * Gets the article id of this journal content search.
 	 *
-	 * @return the article id of this  journal content search
+	 * @return the article id of this journal content search
 	 */
 	@AutoEscape
 	public String getArticleId();
 
 	/**
-	 * Sets the article id of this  journal content search.
+	 * Sets the article id of this journal content search.
 	 *
-	 * @param articleId the article id of this  journal content search
+	 * @param articleId the article id of this journal content search
 	 */
 	public void setArticleId(String articleId);
 
 	/**
-	 * Gets a copy of this  journal content search as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this journal content search as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

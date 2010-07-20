@@ -14,7 +14,6 @@
 
 package com.liferay.counter.service;
 
-
 /**
  * <p>
  * This class is a wrapper for {@link CounterLocalService}.

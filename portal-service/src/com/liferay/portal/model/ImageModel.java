@@ -31,7 +31,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  image model instance should use the {@link Image} interface instead.
+ * Never reference this interface directly. All methods that expect a image model instance should use the {@link Image} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -42,121 +42,121 @@ import java.util.Date;
  */
 public interface ImageModel extends BaseModel<Image> {
 	/**
-	 * Gets the primary key of this  image.
+	 * Gets the primary key of this image.
 	 *
-	 * @return the primary key of this  image
+	 * @return the primary key of this image
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  image
+	 * Sets the primary key of this image
 	 *
-	 * @param pk the primary key of this  image
+	 * @param pk the primary key of this image
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the image id of this  image.
+	 * Gets the image id of this image.
 	 *
-	 * @return the image id of this  image
+	 * @return the image id of this image
 	 */
 	public long getImageId();
 
 	/**
-	 * Sets the image id of this  image.
+	 * Sets the image id of this image.
 	 *
-	 * @param imageId the image id of this  image
+	 * @param imageId the image id of this image
 	 */
 	public void setImageId(long imageId);
 
 	/**
-	 * Gets the modified date of this  image.
+	 * Gets the modified date of this image.
 	 *
-	 * @return the modified date of this  image
+	 * @return the modified date of this image
 	 */
 	public Date getModifiedDate();
 
 	/**
-	 * Sets the modified date of this  image.
+	 * Sets the modified date of this image.
 	 *
-	 * @param modifiedDate the modified date of this  image
+	 * @param modifiedDate the modified date of this image
 	 */
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the text of this  image.
+	 * Gets the text of this image.
 	 *
-	 * @return the text of this  image
+	 * @return the text of this image
 	 */
 	@AutoEscape
 	public String getText();
 
 	/**
-	 * Sets the text of this  image.
+	 * Sets the text of this image.
 	 *
-	 * @param text the text of this  image
+	 * @param text the text of this image
 	 */
 	public void setText(String text);
 
 	/**
-	 * Gets the type of this  image.
+	 * Gets the type of this image.
 	 *
-	 * @return the type of this  image
+	 * @return the type of this image
 	 */
 	@AutoEscape
 	public String getType();
 
 	/**
-	 * Sets the type of this  image.
+	 * Sets the type of this image.
 	 *
-	 * @param type the type of this  image
+	 * @param type the type of this image
 	 */
 	public void setType(String type);
 
 	/**
-	 * Gets the height of this  image.
+	 * Gets the height of this image.
 	 *
-	 * @return the height of this  image
+	 * @return the height of this image
 	 */
 	public int getHeight();
 
 	/**
-	 * Sets the height of this  image.
+	 * Sets the height of this image.
 	 *
-	 * @param height the height of this  image
+	 * @param height the height of this image
 	 */
 	public void setHeight(int height);
 
 	/**
-	 * Gets the width of this  image.
+	 * Gets the width of this image.
 	 *
-	 * @return the width of this  image
+	 * @return the width of this image
 	 */
 	public int getWidth();
 
 	/**
-	 * Sets the width of this  image.
+	 * Sets the width of this image.
 	 *
-	 * @param width the width of this  image
+	 * @param width the width of this image
 	 */
 	public void setWidth(int width);
 
 	/**
-	 * Gets the size of this  image.
+	 * Gets the size of this image.
 	 *
-	 * @return the size of this  image
+	 * @return the size of this image
 	 */
 	public int getSize();
 
 	/**
-	 * Sets the size of this  image.
+	 * Sets the size of this image.
 	 *
-	 * @param size the size of this  image
+	 * @param size the size of this image
 	 */
 	public void setSize(int size);
 
 	/**
-	 * Gets a copy of this  image as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this image as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

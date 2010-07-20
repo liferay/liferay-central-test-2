@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.journal.model;
 
-
 /**
  * <p>
  * This interface is a model that represents the JournalTemplate table in the

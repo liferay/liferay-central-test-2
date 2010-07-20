@@ -33,7 +33,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  d l file entry model instance should use the {@link DLFileEntry} interface instead.
+ * Never reference this interface directly. All methods that expect a d l file entry model instance should use the {@link DLFileEntry} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -44,326 +44,326 @@ import java.util.Date;
  */
 public interface DLFileEntryModel extends BaseModel<DLFileEntry> {
 	/**
-	 * Gets the primary key of this  d l file entry.
+	 * Gets the primary key of this d l file entry.
 	 *
-	 * @return the primary key of this  d l file entry
+	 * @return the primary key of this d l file entry
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  d l file entry
+	 * Sets the primary key of this d l file entry
 	 *
-	 * @param pk the primary key of this  d l file entry
+	 * @param pk the primary key of this d l file entry
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the uuid of this  d l file entry.
+	 * Gets the uuid of this d l file entry.
 	 *
-	 * @return the uuid of this  d l file entry
+	 * @return the uuid of this d l file entry
 	 */
 	@AutoEscape
 	public String getUuid();
 
 	/**
-	 * Sets the uuid of this  d l file entry.
+	 * Sets the uuid of this d l file entry.
 	 *
-	 * @param uuid the uuid of this  d l file entry
+	 * @param uuid the uuid of this d l file entry
 	 */
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the file entry id of this  d l file entry.
+	 * Gets the file entry id of this d l file entry.
 	 *
-	 * @return the file entry id of this  d l file entry
+	 * @return the file entry id of this d l file entry
 	 */
 	public long getFileEntryId();
 
 	/**
-	 * Sets the file entry id of this  d l file entry.
+	 * Sets the file entry id of this d l file entry.
 	 *
-	 * @param fileEntryId the file entry id of this  d l file entry
+	 * @param fileEntryId the file entry id of this d l file entry
 	 */
 	public void setFileEntryId(long fileEntryId);
 
 	/**
-	 * Gets the group id of this  d l file entry.
+	 * Gets the group id of this d l file entry.
 	 *
-	 * @return the group id of this  d l file entry
+	 * @return the group id of this d l file entry
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  d l file entry.
+	 * Sets the group id of this d l file entry.
 	 *
-	 * @param groupId the group id of this  d l file entry
+	 * @param groupId the group id of this d l file entry
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this  d l file entry.
+	 * Gets the company id of this d l file entry.
 	 *
-	 * @return the company id of this  d l file entry
+	 * @return the company id of this d l file entry
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  d l file entry.
+	 * Sets the company id of this d l file entry.
 	 *
-	 * @param companyId the company id of this  d l file entry
+	 * @param companyId the company id of this d l file entry
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  d l file entry.
+	 * Gets the user id of this d l file entry.
 	 *
-	 * @return the user id of this  d l file entry
+	 * @return the user id of this d l file entry
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  d l file entry.
+	 * Sets the user id of this d l file entry.
 	 *
-	 * @param userId the user id of this  d l file entry
+	 * @param userId the user id of this d l file entry
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  d l file entry.
+	 * Gets the user uuid of this d l file entry.
 	 *
-	 * @return the user uuid of this  d l file entry
+	 * @return the user uuid of this d l file entry
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  d l file entry.
+	 * Sets the user uuid of this d l file entry.
 	 *
-	 * @param userUuid the user uuid of this  d l file entry
+	 * @param userUuid the user uuid of this d l file entry
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this  d l file entry.
+	 * Gets the user name of this d l file entry.
 	 *
-	 * @return the user name of this  d l file entry
+	 * @return the user name of this d l file entry
 	 */
 	@AutoEscape
 	public String getUserName();
 
 	/**
-	 * Sets the user name of this  d l file entry.
+	 * Sets the user name of this d l file entry.
 	 *
-	 * @param userName the user name of this  d l file entry
+	 * @param userName the user name of this d l file entry
 	 */
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the version user id of this  d l file entry.
+	 * Gets the version user id of this d l file entry.
 	 *
-	 * @return the version user id of this  d l file entry
+	 * @return the version user id of this d l file entry
 	 */
 	public long getVersionUserId();
 
 	/**
-	 * Sets the version user id of this  d l file entry.
+	 * Sets the version user id of this d l file entry.
 	 *
-	 * @param versionUserId the version user id of this  d l file entry
+	 * @param versionUserId the version user id of this d l file entry
 	 */
 	public void setVersionUserId(long versionUserId);
 
 	/**
-	 * Gets the version user uuid of this  d l file entry.
+	 * Gets the version user uuid of this d l file entry.
 	 *
-	 * @return the version user uuid of this  d l file entry
+	 * @return the version user uuid of this d l file entry
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getVersionUserUuid() throws SystemException;
 
 	/**
-	 * Sets the version user uuid of this  d l file entry.
+	 * Sets the version user uuid of this d l file entry.
 	 *
-	 * @param versionUserUuid the version user uuid of this  d l file entry
+	 * @param versionUserUuid the version user uuid of this d l file entry
 	 */
 	public void setVersionUserUuid(String versionUserUuid);
 
 	/**
-	 * Gets the version user name of this  d l file entry.
+	 * Gets the version user name of this d l file entry.
 	 *
-	 * @return the version user name of this  d l file entry
+	 * @return the version user name of this d l file entry
 	 */
 	@AutoEscape
 	public String getVersionUserName();
 
 	/**
-	 * Sets the version user name of this  d l file entry.
+	 * Sets the version user name of this d l file entry.
 	 *
-	 * @param versionUserName the version user name of this  d l file entry
+	 * @param versionUserName the version user name of this d l file entry
 	 */
 	public void setVersionUserName(String versionUserName);
 
 	/**
-	 * Gets the create date of this  d l file entry.
+	 * Gets the create date of this d l file entry.
 	 *
-	 * @return the create date of this  d l file entry
+	 * @return the create date of this d l file entry
 	 */
 	public Date getCreateDate();
 
 	/**
-	 * Sets the create date of this  d l file entry.
+	 * Sets the create date of this d l file entry.
 	 *
-	 * @param createDate the create date of this  d l file entry
+	 * @param createDate the create date of this d l file entry
 	 */
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this  d l file entry.
+	 * Gets the modified date of this d l file entry.
 	 *
-	 * @return the modified date of this  d l file entry
+	 * @return the modified date of this d l file entry
 	 */
 	public Date getModifiedDate();
 
 	/**
-	 * Sets the modified date of this  d l file entry.
+	 * Sets the modified date of this d l file entry.
 	 *
-	 * @param modifiedDate the modified date of this  d l file entry
+	 * @param modifiedDate the modified date of this d l file entry
 	 */
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the folder id of this  d l file entry.
+	 * Gets the folder id of this d l file entry.
 	 *
-	 * @return the folder id of this  d l file entry
+	 * @return the folder id of this d l file entry
 	 */
 	public long getFolderId();
 
 	/**
-	 * Sets the folder id of this  d l file entry.
+	 * Sets the folder id of this d l file entry.
 	 *
-	 * @param folderId the folder id of this  d l file entry
+	 * @param folderId the folder id of this d l file entry
 	 */
 	public void setFolderId(long folderId);
 
 	/**
-	 * Gets the name of this  d l file entry.
+	 * Gets the name of this d l file entry.
 	 *
-	 * @return the name of this  d l file entry
+	 * @return the name of this d l file entry
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  d l file entry.
+	 * Sets the name of this d l file entry.
 	 *
-	 * @param name the name of this  d l file entry
+	 * @param name the name of this d l file entry
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets the extension of this  d l file entry.
+	 * Gets the extension of this d l file entry.
 	 *
-	 * @return the extension of this  d l file entry
+	 * @return the extension of this d l file entry
 	 */
 	@AutoEscape
 	public String getExtension();
 
 	/**
-	 * Sets the extension of this  d l file entry.
+	 * Sets the extension of this d l file entry.
 	 *
-	 * @param extension the extension of this  d l file entry
+	 * @param extension the extension of this d l file entry
 	 */
 	public void setExtension(String extension);
 
 	/**
-	 * Gets the title of this  d l file entry.
+	 * Gets the title of this d l file entry.
 	 *
-	 * @return the title of this  d l file entry
+	 * @return the title of this d l file entry
 	 */
 	@AutoEscape
 	public String getTitle();
 
 	/**
-	 * Sets the title of this  d l file entry.
+	 * Sets the title of this d l file entry.
 	 *
-	 * @param title the title of this  d l file entry
+	 * @param title the title of this d l file entry
 	 */
 	public void setTitle(String title);
 
 	/**
-	 * Gets the description of this  d l file entry.
+	 * Gets the description of this d l file entry.
 	 *
-	 * @return the description of this  d l file entry
+	 * @return the description of this d l file entry
 	 */
 	@AutoEscape
 	public String getDescription();
 
 	/**
-	 * Sets the description of this  d l file entry.
+	 * Sets the description of this d l file entry.
 	 *
-	 * @param description the description of this  d l file entry
+	 * @param description the description of this d l file entry
 	 */
 	public void setDescription(String description);
 
 	/**
-	 * Gets the extra settings of this  d l file entry.
+	 * Gets the extra settings of this d l file entry.
 	 *
-	 * @return the extra settings of this  d l file entry
+	 * @return the extra settings of this d l file entry
 	 */
 	@AutoEscape
 	public String getExtraSettings();
 
 	/**
-	 * Sets the extra settings of this  d l file entry.
+	 * Sets the extra settings of this d l file entry.
 	 *
-	 * @param extraSettings the extra settings of this  d l file entry
+	 * @param extraSettings the extra settings of this d l file entry
 	 */
 	public void setExtraSettings(String extraSettings);
 
 	/**
-	 * Gets the version of this  d l file entry.
+	 * Gets the version of this d l file entry.
 	 *
-	 * @return the version of this  d l file entry
+	 * @return the version of this d l file entry
 	 */
 	@AutoEscape
 	public String getVersion();
 
 	/**
-	 * Sets the version of this  d l file entry.
+	 * Sets the version of this d l file entry.
 	 *
-	 * @param version the version of this  d l file entry
+	 * @param version the version of this d l file entry
 	 */
 	public void setVersion(String version);
 
 	/**
-	 * Gets the size of this  d l file entry.
+	 * Gets the size of this d l file entry.
 	 *
-	 * @return the size of this  d l file entry
+	 * @return the size of this d l file entry
 	 */
 	public long getSize();
 
 	/**
-	 * Sets the size of this  d l file entry.
+	 * Sets the size of this d l file entry.
 	 *
-	 * @param size the size of this  d l file entry
+	 * @param size the size of this d l file entry
 	 */
 	public void setSize(long size);
 
 	/**
-	 * Gets the read count of this  d l file entry.
+	 * Gets the read count of this d l file entry.
 	 *
-	 * @return the read count of this  d l file entry
+	 * @return the read count of this d l file entry
 	 */
 	public int getReadCount();
 
 	/**
-	 * Sets the read count of this  d l file entry.
+	 * Sets the read count of this d l file entry.
 	 *
-	 * @param readCount the read count of this  d l file entry
+	 * @param readCount the read count of this d l file entry
 	 */
 	public void setReadCount(int readCount);
 
 	/**
-	 * Gets a copy of this  d l file entry as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this d l file entry as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

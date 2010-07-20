@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  m b discussion model instance should use the {@link MBDiscussion} interface instead.
+ * Never reference this interface directly. All methods that expect a m b discussion model instance should use the {@link MBDiscussion} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,84 +40,84 @@ import java.io.Serializable;
  */
 public interface MBDiscussionModel extends BaseModel<MBDiscussion> {
 	/**
-	 * Gets the primary key of this  m b discussion.
+	 * Gets the primary key of this m b discussion.
 	 *
-	 * @return the primary key of this  m b discussion
+	 * @return the primary key of this m b discussion
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  m b discussion
+	 * Sets the primary key of this m b discussion
 	 *
-	 * @param pk the primary key of this  m b discussion
+	 * @param pk the primary key of this m b discussion
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the discussion id of this  m b discussion.
+	 * Gets the discussion id of this m b discussion.
 	 *
-	 * @return the discussion id of this  m b discussion
+	 * @return the discussion id of this m b discussion
 	 */
 	public long getDiscussionId();
 
 	/**
-	 * Sets the discussion id of this  m b discussion.
+	 * Sets the discussion id of this m b discussion.
 	 *
-	 * @param discussionId the discussion id of this  m b discussion
+	 * @param discussionId the discussion id of this m b discussion
 	 */
 	public void setDiscussionId(long discussionId);
 
 	/**
-	 * Gets the class name of the model instance this  m b discussion is associated with.
+	 * Gets the class name of the model instance this m b discussion is associated with.
 	 *
-	 * @return the class name of the model instance this  m b discussion is associated with
+	 * @return the class name of the model instance this m b discussion is associated with
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this  m b discussion.
+	 * Gets the class name id of this m b discussion.
 	 *
-	 * @return the class name id of this  m b discussion
+	 * @return the class name id of this m b discussion
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this  m b discussion.
+	 * Sets the class name id of this m b discussion.
 	 *
-	 * @param classNameId the class name id of this  m b discussion
+	 * @param classNameId the class name id of this m b discussion
 	 */
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this  m b discussion.
+	 * Gets the class p k of this m b discussion.
 	 *
-	 * @return the class p k of this  m b discussion
+	 * @return the class p k of this m b discussion
 	 */
 	public long getClassPK();
 
 	/**
-	 * Sets the class p k of this  m b discussion.
+	 * Sets the class p k of this m b discussion.
 	 *
-	 * @param classPK the class p k of this  m b discussion
+	 * @param classPK the class p k of this m b discussion
 	 */
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the thread id of this  m b discussion.
+	 * Gets the thread id of this m b discussion.
 	 *
-	 * @return the thread id of this  m b discussion
+	 * @return the thread id of this m b discussion
 	 */
 	public long getThreadId();
 
 	/**
-	 * Sets the thread id of this  m b discussion.
+	 * Sets the thread id of this m b discussion.
 	 *
-	 * @param threadId the thread id of this  m b discussion
+	 * @param threadId the thread id of this m b discussion
 	 */
 	public void setThreadId(long threadId);
 
 	/**
-	 * Gets a copy of this  m b discussion as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this m b discussion as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

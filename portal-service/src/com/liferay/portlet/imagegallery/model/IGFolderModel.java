@@ -33,7 +33,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  i g folder model instance should use the {@link IGFolder} interface instead.
+ * Never reference this interface directly. All methods that expect a i g folder model instance should use the {@link IGFolder} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -44,179 +44,179 @@ import java.util.Date;
  */
 public interface IGFolderModel extends BaseModel<IGFolder> {
 	/**
-	 * Gets the primary key of this  i g folder.
+	 * Gets the primary key of this i g folder.
 	 *
-	 * @return the primary key of this  i g folder
+	 * @return the primary key of this i g folder
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  i g folder
+	 * Sets the primary key of this i g folder
 	 *
-	 * @param pk the primary key of this  i g folder
+	 * @param pk the primary key of this i g folder
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the uuid of this  i g folder.
+	 * Gets the uuid of this i g folder.
 	 *
-	 * @return the uuid of this  i g folder
+	 * @return the uuid of this i g folder
 	 */
 	@AutoEscape
 	public String getUuid();
 
 	/**
-	 * Sets the uuid of this  i g folder.
+	 * Sets the uuid of this i g folder.
 	 *
-	 * @param uuid the uuid of this  i g folder
+	 * @param uuid the uuid of this i g folder
 	 */
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the folder id of this  i g folder.
+	 * Gets the folder id of this i g folder.
 	 *
-	 * @return the folder id of this  i g folder
+	 * @return the folder id of this i g folder
 	 */
 	public long getFolderId();
 
 	/**
-	 * Sets the folder id of this  i g folder.
+	 * Sets the folder id of this i g folder.
 	 *
-	 * @param folderId the folder id of this  i g folder
+	 * @param folderId the folder id of this i g folder
 	 */
 	public void setFolderId(long folderId);
 
 	/**
-	 * Gets the group id of this  i g folder.
+	 * Gets the group id of this i g folder.
 	 *
-	 * @return the group id of this  i g folder
+	 * @return the group id of this i g folder
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  i g folder.
+	 * Sets the group id of this i g folder.
 	 *
-	 * @param groupId the group id of this  i g folder
+	 * @param groupId the group id of this i g folder
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this  i g folder.
+	 * Gets the company id of this i g folder.
 	 *
-	 * @return the company id of this  i g folder
+	 * @return the company id of this i g folder
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  i g folder.
+	 * Sets the company id of this i g folder.
 	 *
-	 * @param companyId the company id of this  i g folder
+	 * @param companyId the company id of this i g folder
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  i g folder.
+	 * Gets the user id of this i g folder.
 	 *
-	 * @return the user id of this  i g folder
+	 * @return the user id of this i g folder
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  i g folder.
+	 * Sets the user id of this i g folder.
 	 *
-	 * @param userId the user id of this  i g folder
+	 * @param userId the user id of this i g folder
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  i g folder.
+	 * Gets the user uuid of this i g folder.
 	 *
-	 * @return the user uuid of this  i g folder
+	 * @return the user uuid of this i g folder
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  i g folder.
+	 * Sets the user uuid of this i g folder.
 	 *
-	 * @param userUuid the user uuid of this  i g folder
+	 * @param userUuid the user uuid of this i g folder
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the create date of this  i g folder.
+	 * Gets the create date of this i g folder.
 	 *
-	 * @return the create date of this  i g folder
+	 * @return the create date of this i g folder
 	 */
 	public Date getCreateDate();
 
 	/**
-	 * Sets the create date of this  i g folder.
+	 * Sets the create date of this i g folder.
 	 *
-	 * @param createDate the create date of this  i g folder
+	 * @param createDate the create date of this i g folder
 	 */
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this  i g folder.
+	 * Gets the modified date of this i g folder.
 	 *
-	 * @return the modified date of this  i g folder
+	 * @return the modified date of this i g folder
 	 */
 	public Date getModifiedDate();
 
 	/**
-	 * Sets the modified date of this  i g folder.
+	 * Sets the modified date of this i g folder.
 	 *
-	 * @param modifiedDate the modified date of this  i g folder
+	 * @param modifiedDate the modified date of this i g folder
 	 */
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the parent folder id of this  i g folder.
+	 * Gets the parent folder id of this i g folder.
 	 *
-	 * @return the parent folder id of this  i g folder
+	 * @return the parent folder id of this i g folder
 	 */
 	public long getParentFolderId();
 
 	/**
-	 * Sets the parent folder id of this  i g folder.
+	 * Sets the parent folder id of this i g folder.
 	 *
-	 * @param parentFolderId the parent folder id of this  i g folder
+	 * @param parentFolderId the parent folder id of this i g folder
 	 */
 	public void setParentFolderId(long parentFolderId);
 
 	/**
-	 * Gets the name of this  i g folder.
+	 * Gets the name of this i g folder.
 	 *
-	 * @return the name of this  i g folder
+	 * @return the name of this i g folder
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  i g folder.
+	 * Sets the name of this i g folder.
 	 *
-	 * @param name the name of this  i g folder
+	 * @param name the name of this i g folder
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this  i g folder.
+	 * Gets the description of this i g folder.
 	 *
-	 * @return the description of this  i g folder
+	 * @return the description of this i g folder
 	 */
 	@AutoEscape
 	public String getDescription();
 
 	/**
-	 * Sets the description of this  i g folder.
+	 * Sets the description of this i g folder.
 	 *
-	 * @param description the description of this  i g folder
+	 * @param description the description of this i g folder
 	 */
 	public void setDescription(String description);
 
 	/**
-	 * Gets a copy of this  i g folder as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this i g folder as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

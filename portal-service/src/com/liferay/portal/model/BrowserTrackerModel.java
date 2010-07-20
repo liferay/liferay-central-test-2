@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  browser tracker model instance should use the {@link BrowserTracker} interface instead.
+ * Never reference this interface directly. All methods that expect a browser tracker model instance should use the {@link BrowserTracker} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,78 +40,78 @@ import java.io.Serializable;
  */
 public interface BrowserTrackerModel extends BaseModel<BrowserTracker> {
 	/**
-	 * Gets the primary key of this  browser tracker.
+	 * Gets the primary key of this browser tracker.
 	 *
-	 * @return the primary key of this  browser tracker
+	 * @return the primary key of this browser tracker
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  browser tracker
+	 * Sets the primary key of this browser tracker
 	 *
-	 * @param pk the primary key of this  browser tracker
+	 * @param pk the primary key of this browser tracker
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the browser tracker id of this  browser tracker.
+	 * Gets the browser tracker id of this browser tracker.
 	 *
-	 * @return the browser tracker id of this  browser tracker
+	 * @return the browser tracker id of this browser tracker
 	 */
 	public long getBrowserTrackerId();
 
 	/**
-	 * Sets the browser tracker id of this  browser tracker.
+	 * Sets the browser tracker id of this browser tracker.
 	 *
-	 * @param browserTrackerId the browser tracker id of this  browser tracker
+	 * @param browserTrackerId the browser tracker id of this browser tracker
 	 */
 	public void setBrowserTrackerId(long browserTrackerId);
 
 	/**
-	 * Gets the user id of this  browser tracker.
+	 * Gets the user id of this browser tracker.
 	 *
-	 * @return the user id of this  browser tracker
+	 * @return the user id of this browser tracker
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  browser tracker.
+	 * Sets the user id of this browser tracker.
 	 *
-	 * @param userId the user id of this  browser tracker
+	 * @param userId the user id of this browser tracker
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  browser tracker.
+	 * Gets the user uuid of this browser tracker.
 	 *
-	 * @return the user uuid of this  browser tracker
+	 * @return the user uuid of this browser tracker
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  browser tracker.
+	 * Sets the user uuid of this browser tracker.
 	 *
-	 * @param userUuid the user uuid of this  browser tracker
+	 * @param userUuid the user uuid of this browser tracker
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the browser key of this  browser tracker.
+	 * Gets the browser key of this browser tracker.
 	 *
-	 * @return the browser key of this  browser tracker
+	 * @return the browser key of this browser tracker
 	 */
 	public long getBrowserKey();
 
 	/**
-	 * Sets the browser key of this  browser tracker.
+	 * Sets the browser key of this browser tracker.
 	 *
-	 * @param browserKey the browser key of this  browser tracker
+	 * @param browserKey the browser key of this browser tracker
 	 */
 	public void setBrowserKey(long browserKey);
 
 	/**
-	 * Gets a copy of this  browser tracker as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this browser tracker as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

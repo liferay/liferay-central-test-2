@@ -28,7 +28,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  password policy rel model instance should use the {@link PasswordPolicyRel} interface instead.
+ * Never reference this interface directly. All methods that expect a password policy rel model instance should use the {@link PasswordPolicyRel} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -39,84 +39,84 @@ import java.io.Serializable;
  */
 public interface PasswordPolicyRelModel extends BaseModel<PasswordPolicyRel> {
 	/**
-	 * Gets the primary key of this  password policy rel.
+	 * Gets the primary key of this password policy rel.
 	 *
-	 * @return the primary key of this  password policy rel
+	 * @return the primary key of this password policy rel
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  password policy rel
+	 * Sets the primary key of this password policy rel
 	 *
-	 * @param pk the primary key of this  password policy rel
+	 * @param pk the primary key of this password policy rel
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the password policy rel id of this  password policy rel.
+	 * Gets the password policy rel id of this password policy rel.
 	 *
-	 * @return the password policy rel id of this  password policy rel
+	 * @return the password policy rel id of this password policy rel
 	 */
 	public long getPasswordPolicyRelId();
 
 	/**
-	 * Sets the password policy rel id of this  password policy rel.
+	 * Sets the password policy rel id of this password policy rel.
 	 *
-	 * @param passwordPolicyRelId the password policy rel id of this  password policy rel
+	 * @param passwordPolicyRelId the password policy rel id of this password policy rel
 	 */
 	public void setPasswordPolicyRelId(long passwordPolicyRelId);
 
 	/**
-	 * Gets the password policy id of this  password policy rel.
+	 * Gets the password policy id of this password policy rel.
 	 *
-	 * @return the password policy id of this  password policy rel
+	 * @return the password policy id of this password policy rel
 	 */
 	public long getPasswordPolicyId();
 
 	/**
-	 * Sets the password policy id of this  password policy rel.
+	 * Sets the password policy id of this password policy rel.
 	 *
-	 * @param passwordPolicyId the password policy id of this  password policy rel
+	 * @param passwordPolicyId the password policy id of this password policy rel
 	 */
 	public void setPasswordPolicyId(long passwordPolicyId);
 
 	/**
-	 * Gets the class name of the model instance this  password policy rel is associated with.
+	 * Gets the class name of the model instance this password policy rel is associated with.
 	 *
-	 * @return the class name of the model instance this  password policy rel is associated with
+	 * @return the class name of the model instance this password policy rel is associated with
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this  password policy rel.
+	 * Gets the class name id of this password policy rel.
 	 *
-	 * @return the class name id of this  password policy rel
+	 * @return the class name id of this password policy rel
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this  password policy rel.
+	 * Sets the class name id of this password policy rel.
 	 *
-	 * @param classNameId the class name id of this  password policy rel
+	 * @param classNameId the class name id of this password policy rel
 	 */
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this  password policy rel.
+	 * Gets the class p k of this password policy rel.
 	 *
-	 * @return the class p k of this  password policy rel
+	 * @return the class p k of this password policy rel
 	 */
 	public long getClassPK();
 
 	/**
-	 * Sets the class p k of this  password policy rel.
+	 * Sets the class p k of this password policy rel.
 	 *
-	 * @param classPK the class p k of this  password policy rel
+	 * @param classPK the class p k of this password policy rel
 	 */
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets a copy of this  password policy rel as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this password policy rel as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

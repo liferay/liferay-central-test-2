@@ -31,7 +31,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  announcements delivery model instance should use the {@link AnnouncementsDelivery} interface instead.
+ * Never reference this interface directly. All methods that expect a announcements delivery model instance should use the {@link AnnouncementsDelivery} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -42,156 +42,156 @@ import java.io.Serializable;
  */
 public interface AnnouncementsDeliveryModel extends BaseModel<AnnouncementsDelivery> {
 	/**
-	 * Gets the primary key of this  announcements delivery.
+	 * Gets the primary key of this announcements delivery.
 	 *
-	 * @return the primary key of this  announcements delivery
+	 * @return the primary key of this announcements delivery
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  announcements delivery
+	 * Sets the primary key of this announcements delivery
 	 *
-	 * @param pk the primary key of this  announcements delivery
+	 * @param pk the primary key of this announcements delivery
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the delivery id of this  announcements delivery.
+	 * Gets the delivery id of this announcements delivery.
 	 *
-	 * @return the delivery id of this  announcements delivery
+	 * @return the delivery id of this announcements delivery
 	 */
 	public long getDeliveryId();
 
 	/**
-	 * Sets the delivery id of this  announcements delivery.
+	 * Sets the delivery id of this announcements delivery.
 	 *
-	 * @param deliveryId the delivery id of this  announcements delivery
+	 * @param deliveryId the delivery id of this announcements delivery
 	 */
 	public void setDeliveryId(long deliveryId);
 
 	/**
-	 * Gets the company id of this  announcements delivery.
+	 * Gets the company id of this announcements delivery.
 	 *
-	 * @return the company id of this  announcements delivery
+	 * @return the company id of this announcements delivery
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  announcements delivery.
+	 * Sets the company id of this announcements delivery.
 	 *
-	 * @param companyId the company id of this  announcements delivery
+	 * @param companyId the company id of this announcements delivery
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  announcements delivery.
+	 * Gets the user id of this announcements delivery.
 	 *
-	 * @return the user id of this  announcements delivery
+	 * @return the user id of this announcements delivery
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  announcements delivery.
+	 * Sets the user id of this announcements delivery.
 	 *
-	 * @param userId the user id of this  announcements delivery
+	 * @param userId the user id of this announcements delivery
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  announcements delivery.
+	 * Gets the user uuid of this announcements delivery.
 	 *
-	 * @return the user uuid of this  announcements delivery
+	 * @return the user uuid of this announcements delivery
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  announcements delivery.
+	 * Sets the user uuid of this announcements delivery.
 	 *
-	 * @param userUuid the user uuid of this  announcements delivery
+	 * @param userUuid the user uuid of this announcements delivery
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the type of this  announcements delivery.
+	 * Gets the type of this announcements delivery.
 	 *
-	 * @return the type of this  announcements delivery
+	 * @return the type of this announcements delivery
 	 */
 	@AutoEscape
 	public String getType();
 
 	/**
-	 * Sets the type of this  announcements delivery.
+	 * Sets the type of this announcements delivery.
 	 *
-	 * @param type the type of this  announcements delivery
+	 * @param type the type of this announcements delivery
 	 */
 	public void setType(String type);
 
 	/**
-	 * Gets the email of this  announcements delivery.
+	 * Gets the email of this announcements delivery.
 	 *
-	 * @return the email of this  announcements delivery
+	 * @return the email of this announcements delivery
 	 */
 	public boolean getEmail();
 
 	/**
-	 * Determines whether this  announcements delivery is email.
+	 * Determines whether this announcements delivery is email.
 	 *
-	 * @return whether this  announcements delivery is email
+	 * @return whether this announcements delivery is email
 	 */
 	public boolean isEmail();
 
 	/**
-	 * Sets the email of this  announcements delivery.
+	 * Sets the email of this announcements delivery.
 	 *
-	 * @param email the email of this  announcements delivery
+	 * @param email the email of this announcements delivery
 	 */
 	public void setEmail(boolean email);
 
 	/**
-	 * Gets the sms of this  announcements delivery.
+	 * Gets the sms of this announcements delivery.
 	 *
-	 * @return the sms of this  announcements delivery
+	 * @return the sms of this announcements delivery
 	 */
 	public boolean getSms();
 
 	/**
-	 * Determines whether this  announcements delivery is sms.
+	 * Determines whether this announcements delivery is sms.
 	 *
-	 * @return whether this  announcements delivery is sms
+	 * @return whether this announcements delivery is sms
 	 */
 	public boolean isSms();
 
 	/**
-	 * Sets the sms of this  announcements delivery.
+	 * Sets the sms of this announcements delivery.
 	 *
-	 * @param sms the sms of this  announcements delivery
+	 * @param sms the sms of this announcements delivery
 	 */
 	public void setSms(boolean sms);
 
 	/**
-	 * Gets the website of this  announcements delivery.
+	 * Gets the website of this announcements delivery.
 	 *
-	 * @return the website of this  announcements delivery
+	 * @return the website of this announcements delivery
 	 */
 	public boolean getWebsite();
 
 	/**
-	 * Determines whether this  announcements delivery is website.
+	 * Determines whether this announcements delivery is website.
 	 *
-	 * @return whether this  announcements delivery is website
+	 * @return whether this announcements delivery is website
 	 */
 	public boolean isWebsite();
 
 	/**
-	 * Sets the website of this  announcements delivery.
+	 * Sets the website of this announcements delivery.
 	 *
-	 * @param website the website of this  announcements delivery
+	 * @param website the website of this announcements delivery
 	 */
 	public void setWebsite(boolean website);
 
 	/**
-	 * Gets a copy of this  announcements delivery as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this announcements delivery as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  resource code model instance should use the {@link ResourceCode} interface instead.
+ * Never reference this interface directly. All methods that expect a resource code model instance should use the {@link ResourceCode} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,78 +40,78 @@ import java.io.Serializable;
  */
 public interface ResourceCodeModel extends BaseModel<ResourceCode> {
 	/**
-	 * Gets the primary key of this  resource code.
+	 * Gets the primary key of this resource code.
 	 *
-	 * @return the primary key of this  resource code
+	 * @return the primary key of this resource code
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  resource code
+	 * Sets the primary key of this resource code
 	 *
-	 * @param pk the primary key of this  resource code
+	 * @param pk the primary key of this resource code
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the code id of this  resource code.
+	 * Gets the code id of this resource code.
 	 *
-	 * @return the code id of this  resource code
+	 * @return the code id of this resource code
 	 */
 	public long getCodeId();
 
 	/**
-	 * Sets the code id of this  resource code.
+	 * Sets the code id of this resource code.
 	 *
-	 * @param codeId the code id of this  resource code
+	 * @param codeId the code id of this resource code
 	 */
 	public void setCodeId(long codeId);
 
 	/**
-	 * Gets the company id of this  resource code.
+	 * Gets the company id of this resource code.
 	 *
-	 * @return the company id of this  resource code
+	 * @return the company id of this resource code
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  resource code.
+	 * Sets the company id of this resource code.
 	 *
-	 * @param companyId the company id of this  resource code
+	 * @param companyId the company id of this resource code
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the name of this  resource code.
+	 * Gets the name of this resource code.
 	 *
-	 * @return the name of this  resource code
+	 * @return the name of this resource code
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  resource code.
+	 * Sets the name of this resource code.
 	 *
-	 * @param name the name of this  resource code
+	 * @param name the name of this resource code
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets the scope of this  resource code.
+	 * Gets the scope of this resource code.
 	 *
-	 * @return the scope of this  resource code
+	 * @return the scope of this resource code
 	 */
 	public int getScope();
 
 	/**
-	 * Sets the scope of this  resource code.
+	 * Sets the scope of this resource code.
 	 *
-	 * @param scope the scope of this  resource code
+	 * @param scope the scope of this resource code
 	 */
 	public void setScope(int scope);
 
 	/**
-	 * Gets a copy of this  resource code as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this resource code as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

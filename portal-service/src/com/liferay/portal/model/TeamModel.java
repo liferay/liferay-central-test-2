@@ -32,7 +32,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  team model instance should use the {@link Team} interface instead.
+ * Never reference this interface directly. All methods that expect a team model instance should use the {@link Team} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -43,165 +43,165 @@ import java.util.Date;
  */
 public interface TeamModel extends BaseModel<Team> {
 	/**
-	 * Gets the primary key of this  team.
+	 * Gets the primary key of this team.
 	 *
-	 * @return the primary key of this  team
+	 * @return the primary key of this team
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  team
+	 * Sets the primary key of this team
 	 *
-	 * @param pk the primary key of this  team
+	 * @param pk the primary key of this team
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the team id of this  team.
+	 * Gets the team id of this team.
 	 *
-	 * @return the team id of this  team
+	 * @return the team id of this team
 	 */
 	public long getTeamId();
 
 	/**
-	 * Sets the team id of this  team.
+	 * Sets the team id of this team.
 	 *
-	 * @param teamId the team id of this  team
+	 * @param teamId the team id of this team
 	 */
 	public void setTeamId(long teamId);
 
 	/**
-	 * Gets the company id of this  team.
+	 * Gets the company id of this team.
 	 *
-	 * @return the company id of this  team
+	 * @return the company id of this team
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  team.
+	 * Sets the company id of this team.
 	 *
-	 * @param companyId the company id of this  team
+	 * @param companyId the company id of this team
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  team.
+	 * Gets the user id of this team.
 	 *
-	 * @return the user id of this  team
+	 * @return the user id of this team
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  team.
+	 * Sets the user id of this team.
 	 *
-	 * @param userId the user id of this  team
+	 * @param userId the user id of this team
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  team.
+	 * Gets the user uuid of this team.
 	 *
-	 * @return the user uuid of this  team
+	 * @return the user uuid of this team
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  team.
+	 * Sets the user uuid of this team.
 	 *
-	 * @param userUuid the user uuid of this  team
+	 * @param userUuid the user uuid of this team
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this  team.
+	 * Gets the user name of this team.
 	 *
-	 * @return the user name of this  team
+	 * @return the user name of this team
 	 */
 	@AutoEscape
 	public String getUserName();
 
 	/**
-	 * Sets the user name of this  team.
+	 * Sets the user name of this team.
 	 *
-	 * @param userName the user name of this  team
+	 * @param userName the user name of this team
 	 */
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this  team.
+	 * Gets the create date of this team.
 	 *
-	 * @return the create date of this  team
+	 * @return the create date of this team
 	 */
 	public Date getCreateDate();
 
 	/**
-	 * Sets the create date of this  team.
+	 * Sets the create date of this team.
 	 *
-	 * @param createDate the create date of this  team
+	 * @param createDate the create date of this team
 	 */
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this  team.
+	 * Gets the modified date of this team.
 	 *
-	 * @return the modified date of this  team
+	 * @return the modified date of this team
 	 */
 	public Date getModifiedDate();
 
 	/**
-	 * Sets the modified date of this  team.
+	 * Sets the modified date of this team.
 	 *
-	 * @param modifiedDate the modified date of this  team
+	 * @param modifiedDate the modified date of this team
 	 */
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the group id of this  team.
+	 * Gets the group id of this team.
 	 *
-	 * @return the group id of this  team
+	 * @return the group id of this team
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  team.
+	 * Sets the group id of this team.
 	 *
-	 * @param groupId the group id of this  team
+	 * @param groupId the group id of this team
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the name of this  team.
+	 * Gets the name of this team.
 	 *
-	 * @return the name of this  team
+	 * @return the name of this team
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  team.
+	 * Sets the name of this team.
 	 *
-	 * @param name the name of this  team
+	 * @param name the name of this team
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this  team.
+	 * Gets the description of this team.
 	 *
-	 * @return the description of this  team
+	 * @return the description of this team
 	 */
 	@AutoEscape
 	public String getDescription();
 
 	/**
-	 * Sets the description of this  team.
+	 * Sets the description of this team.
 	 *
-	 * @param description the description of this  team
+	 * @param description the description of this team
 	 */
 	public void setDescription(String description);
 
 	/**
-	 * Gets a copy of this  team as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this team as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

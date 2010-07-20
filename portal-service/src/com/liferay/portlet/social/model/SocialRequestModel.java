@@ -31,7 +31,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  social request model instance should use the {@link SocialRequest} interface instead.
+ * Never reference this interface directly. All methods that expect a social request model instance should use the {@link SocialRequest} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -42,242 +42,242 @@ import java.io.Serializable;
  */
 public interface SocialRequestModel extends BaseModel<SocialRequest> {
 	/**
-	 * Gets the primary key of this  social request.
+	 * Gets the primary key of this social request.
 	 *
-	 * @return the primary key of this  social request
+	 * @return the primary key of this social request
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  social request
+	 * Sets the primary key of this social request
 	 *
-	 * @param pk the primary key of this  social request
+	 * @param pk the primary key of this social request
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the uuid of this  social request.
+	 * Gets the uuid of this social request.
 	 *
-	 * @return the uuid of this  social request
+	 * @return the uuid of this social request
 	 */
 	@AutoEscape
 	public String getUuid();
 
 	/**
-	 * Sets the uuid of this  social request.
+	 * Sets the uuid of this social request.
 	 *
-	 * @param uuid the uuid of this  social request
+	 * @param uuid the uuid of this social request
 	 */
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the request id of this  social request.
+	 * Gets the request id of this social request.
 	 *
-	 * @return the request id of this  social request
+	 * @return the request id of this social request
 	 */
 	public long getRequestId();
 
 	/**
-	 * Sets the request id of this  social request.
+	 * Sets the request id of this social request.
 	 *
-	 * @param requestId the request id of this  social request
+	 * @param requestId the request id of this social request
 	 */
 	public void setRequestId(long requestId);
 
 	/**
-	 * Gets the group id of this  social request.
+	 * Gets the group id of this social request.
 	 *
-	 * @return the group id of this  social request
+	 * @return the group id of this social request
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  social request.
+	 * Sets the group id of this social request.
 	 *
-	 * @param groupId the group id of this  social request
+	 * @param groupId the group id of this social request
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this  social request.
+	 * Gets the company id of this social request.
 	 *
-	 * @return the company id of this  social request
+	 * @return the company id of this social request
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  social request.
+	 * Sets the company id of this social request.
 	 *
-	 * @param companyId the company id of this  social request
+	 * @param companyId the company id of this social request
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  social request.
+	 * Gets the user id of this social request.
 	 *
-	 * @return the user id of this  social request
+	 * @return the user id of this social request
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  social request.
+	 * Sets the user id of this social request.
 	 *
-	 * @param userId the user id of this  social request
+	 * @param userId the user id of this social request
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  social request.
+	 * Gets the user uuid of this social request.
 	 *
-	 * @return the user uuid of this  social request
+	 * @return the user uuid of this social request
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  social request.
+	 * Sets the user uuid of this social request.
 	 *
-	 * @param userUuid the user uuid of this  social request
+	 * @param userUuid the user uuid of this social request
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the create date of this  social request.
+	 * Gets the create date of this social request.
 	 *
-	 * @return the create date of this  social request
+	 * @return the create date of this social request
 	 */
 	public long getCreateDate();
 
 	/**
-	 * Sets the create date of this  social request.
+	 * Sets the create date of this social request.
 	 *
-	 * @param createDate the create date of this  social request
+	 * @param createDate the create date of this social request
 	 */
 	public void setCreateDate(long createDate);
 
 	/**
-	 * Gets the modified date of this  social request.
+	 * Gets the modified date of this social request.
 	 *
-	 * @return the modified date of this  social request
+	 * @return the modified date of this social request
 	 */
 	public long getModifiedDate();
 
 	/**
-	 * Sets the modified date of this  social request.
+	 * Sets the modified date of this social request.
 	 *
-	 * @param modifiedDate the modified date of this  social request
+	 * @param modifiedDate the modified date of this social request
 	 */
 	public void setModifiedDate(long modifiedDate);
 
 	/**
-	 * Gets the class name of the model instance this  social request is associated with.
+	 * Gets the class name of the model instance this social request is associated with.
 	 *
-	 * @return the class name of the model instance this  social request is associated with
+	 * @return the class name of the model instance this social request is associated with
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this  social request.
+	 * Gets the class name id of this social request.
 	 *
-	 * @return the class name id of this  social request
+	 * @return the class name id of this social request
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this  social request.
+	 * Sets the class name id of this social request.
 	 *
-	 * @param classNameId the class name id of this  social request
+	 * @param classNameId the class name id of this social request
 	 */
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this  social request.
+	 * Gets the class p k of this social request.
 	 *
-	 * @return the class p k of this  social request
+	 * @return the class p k of this social request
 	 */
 	public long getClassPK();
 
 	/**
-	 * Sets the class p k of this  social request.
+	 * Sets the class p k of this social request.
 	 *
-	 * @param classPK the class p k of this  social request
+	 * @param classPK the class p k of this social request
 	 */
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the type of this  social request.
+	 * Gets the type of this social request.
 	 *
-	 * @return the type of this  social request
+	 * @return the type of this social request
 	 */
 	public int getType();
 
 	/**
-	 * Sets the type of this  social request.
+	 * Sets the type of this social request.
 	 *
-	 * @param type the type of this  social request
+	 * @param type the type of this social request
 	 */
 	public void setType(int type);
 
 	/**
-	 * Gets the extra data of this  social request.
+	 * Gets the extra data of this social request.
 	 *
-	 * @return the extra data of this  social request
+	 * @return the extra data of this social request
 	 */
 	@AutoEscape
 	public String getExtraData();
 
 	/**
-	 * Sets the extra data of this  social request.
+	 * Sets the extra data of this social request.
 	 *
-	 * @param extraData the extra data of this  social request
+	 * @param extraData the extra data of this social request
 	 */
 	public void setExtraData(String extraData);
 
 	/**
-	 * Gets the receiver user id of this  social request.
+	 * Gets the receiver user id of this social request.
 	 *
-	 * @return the receiver user id of this  social request
+	 * @return the receiver user id of this social request
 	 */
 	public long getReceiverUserId();
 
 	/**
-	 * Sets the receiver user id of this  social request.
+	 * Sets the receiver user id of this social request.
 	 *
-	 * @param receiverUserId the receiver user id of this  social request
+	 * @param receiverUserId the receiver user id of this social request
 	 */
 	public void setReceiverUserId(long receiverUserId);
 
 	/**
-	 * Gets the receiver user uuid of this  social request.
+	 * Gets the receiver user uuid of this social request.
 	 *
-	 * @return the receiver user uuid of this  social request
+	 * @return the receiver user uuid of this social request
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getReceiverUserUuid() throws SystemException;
 
 	/**
-	 * Sets the receiver user uuid of this  social request.
+	 * Sets the receiver user uuid of this social request.
 	 *
-	 * @param receiverUserUuid the receiver user uuid of this  social request
+	 * @param receiverUserUuid the receiver user uuid of this social request
 	 */
 	public void setReceiverUserUuid(String receiverUserUuid);
 
 	/**
-	 * Gets the status of this  social request.
+	 * Gets the status of this social request.
 	 *
-	 * @return the status of this  social request
+	 * @return the status of this social request
 	 */
 	public int getStatus();
 
 	/**
-	 * Sets the status of this  social request.
+	 * Sets the status of this social request.
 	 *
-	 * @param status the status of this  social request
+	 * @param status the status of this social request
 	 */
 	public void setStatus(int status);
 
 	/**
-	 * Gets a copy of this  social request as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this social request as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

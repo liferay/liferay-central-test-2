@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.social.model;
 
-
 /**
  * <p>
  * This interface is a model that represents the SocialEquityLog table in the

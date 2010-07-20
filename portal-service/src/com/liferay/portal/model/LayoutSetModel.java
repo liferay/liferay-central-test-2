@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  layout set model instance should use the {@link LayoutSet} interface instead.
+ * Never reference this interface directly. All methods that expect a layout set model instance should use the {@link LayoutSet} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,252 +40,252 @@ import java.io.Serializable;
  */
 public interface LayoutSetModel extends BaseModel<LayoutSet> {
 	/**
-	 * Gets the primary key of this  layout set.
+	 * Gets the primary key of this layout set.
 	 *
-	 * @return the primary key of this  layout set
+	 * @return the primary key of this layout set
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  layout set
+	 * Sets the primary key of this layout set
 	 *
-	 * @param pk the primary key of this  layout set
+	 * @param pk the primary key of this layout set
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the layout set id of this  layout set.
+	 * Gets the layout set id of this layout set.
 	 *
-	 * @return the layout set id of this  layout set
+	 * @return the layout set id of this layout set
 	 */
 	public long getLayoutSetId();
 
 	/**
-	 * Sets the layout set id of this  layout set.
+	 * Sets the layout set id of this layout set.
 	 *
-	 * @param layoutSetId the layout set id of this  layout set
+	 * @param layoutSetId the layout set id of this layout set
 	 */
 	public void setLayoutSetId(long layoutSetId);
 
 	/**
-	 * Gets the group id of this  layout set.
+	 * Gets the group id of this layout set.
 	 *
-	 * @return the group id of this  layout set
+	 * @return the group id of this layout set
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  layout set.
+	 * Sets the group id of this layout set.
 	 *
-	 * @param groupId the group id of this  layout set
+	 * @param groupId the group id of this layout set
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this  layout set.
+	 * Gets the company id of this layout set.
 	 *
-	 * @return the company id of this  layout set
+	 * @return the company id of this layout set
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  layout set.
+	 * Sets the company id of this layout set.
 	 *
-	 * @param companyId the company id of this  layout set
+	 * @param companyId the company id of this layout set
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the private layout of this  layout set.
+	 * Gets the private layout of this layout set.
 	 *
-	 * @return the private layout of this  layout set
+	 * @return the private layout of this layout set
 	 */
 	public boolean getPrivateLayout();
 
 	/**
-	 * Determines whether this  layout set is private layout.
+	 * Determines whether this layout set is private layout.
 	 *
-	 * @return whether this  layout set is private layout
+	 * @return whether this layout set is private layout
 	 */
 	public boolean isPrivateLayout();
 
 	/**
-	 * Sets the private layout of this  layout set.
+	 * Sets the private layout of this layout set.
 	 *
-	 * @param privateLayout the private layout of this  layout set
+	 * @param privateLayout the private layout of this layout set
 	 */
 	public void setPrivateLayout(boolean privateLayout);
 
 	/**
-	 * Gets the logo of this  layout set.
+	 * Gets the logo of this layout set.
 	 *
-	 * @return the logo of this  layout set
+	 * @return the logo of this layout set
 	 */
 	public boolean getLogo();
 
 	/**
-	 * Determines whether this  layout set is logo.
+	 * Determines whether this layout set is logo.
 	 *
-	 * @return whether this  layout set is logo
+	 * @return whether this layout set is logo
 	 */
 	public boolean isLogo();
 
 	/**
-	 * Sets the logo of this  layout set.
+	 * Sets the logo of this layout set.
 	 *
-	 * @param logo the logo of this  layout set
+	 * @param logo the logo of this layout set
 	 */
 	public void setLogo(boolean logo);
 
 	/**
-	 * Gets the logo id of this  layout set.
+	 * Gets the logo id of this layout set.
 	 *
-	 * @return the logo id of this  layout set
+	 * @return the logo id of this layout set
 	 */
 	public long getLogoId();
 
 	/**
-	 * Sets the logo id of this  layout set.
+	 * Sets the logo id of this layout set.
 	 *
-	 * @param logoId the logo id of this  layout set
+	 * @param logoId the logo id of this layout set
 	 */
 	public void setLogoId(long logoId);
 
 	/**
-	 * Gets the theme id of this  layout set.
+	 * Gets the theme id of this layout set.
 	 *
-	 * @return the theme id of this  layout set
+	 * @return the theme id of this layout set
 	 */
 	@AutoEscape
 	public String getThemeId();
 
 	/**
-	 * Sets the theme id of this  layout set.
+	 * Sets the theme id of this layout set.
 	 *
-	 * @param themeId the theme id of this  layout set
+	 * @param themeId the theme id of this layout set
 	 */
 	public void setThemeId(String themeId);
 
 	/**
-	 * Gets the color scheme id of this  layout set.
+	 * Gets the color scheme id of this layout set.
 	 *
-	 * @return the color scheme id of this  layout set
+	 * @return the color scheme id of this layout set
 	 */
 	@AutoEscape
 	public String getColorSchemeId();
 
 	/**
-	 * Sets the color scheme id of this  layout set.
+	 * Sets the color scheme id of this layout set.
 	 *
-	 * @param colorSchemeId the color scheme id of this  layout set
+	 * @param colorSchemeId the color scheme id of this layout set
 	 */
 	public void setColorSchemeId(String colorSchemeId);
 
 	/**
-	 * Gets the wap theme id of this  layout set.
+	 * Gets the wap theme id of this layout set.
 	 *
-	 * @return the wap theme id of this  layout set
+	 * @return the wap theme id of this layout set
 	 */
 	@AutoEscape
 	public String getWapThemeId();
 
 	/**
-	 * Sets the wap theme id of this  layout set.
+	 * Sets the wap theme id of this layout set.
 	 *
-	 * @param wapThemeId the wap theme id of this  layout set
+	 * @param wapThemeId the wap theme id of this layout set
 	 */
 	public void setWapThemeId(String wapThemeId);
 
 	/**
-	 * Gets the wap color scheme id of this  layout set.
+	 * Gets the wap color scheme id of this layout set.
 	 *
-	 * @return the wap color scheme id of this  layout set
+	 * @return the wap color scheme id of this layout set
 	 */
 	@AutoEscape
 	public String getWapColorSchemeId();
 
 	/**
-	 * Sets the wap color scheme id of this  layout set.
+	 * Sets the wap color scheme id of this layout set.
 	 *
-	 * @param wapColorSchemeId the wap color scheme id of this  layout set
+	 * @param wapColorSchemeId the wap color scheme id of this layout set
 	 */
 	public void setWapColorSchemeId(String wapColorSchemeId);
 
 	/**
-	 * Gets the css of this  layout set.
+	 * Gets the css of this layout set.
 	 *
-	 * @return the css of this  layout set
+	 * @return the css of this layout set
 	 */
 	@AutoEscape
 	public String getCss();
 
 	/**
-	 * Sets the css of this  layout set.
+	 * Sets the css of this layout set.
 	 *
-	 * @param css the css of this  layout set
+	 * @param css the css of this layout set
 	 */
 	public void setCss(String css);
 
 	/**
-	 * Gets the page count of this  layout set.
+	 * Gets the page count of this layout set.
 	 *
-	 * @return the page count of this  layout set
+	 * @return the page count of this layout set
 	 */
 	public int getPageCount();
 
 	/**
-	 * Sets the page count of this  layout set.
+	 * Sets the page count of this layout set.
 	 *
-	 * @param pageCount the page count of this  layout set
+	 * @param pageCount the page count of this layout set
 	 */
 	public void setPageCount(int pageCount);
 
 	/**
-	 * Gets the virtual host of this  layout set.
+	 * Gets the virtual host of this layout set.
 	 *
-	 * @return the virtual host of this  layout set
+	 * @return the virtual host of this layout set
 	 */
 	@AutoEscape
 	public String getVirtualHost();
 
 	/**
-	 * Sets the virtual host of this  layout set.
+	 * Sets the virtual host of this layout set.
 	 *
-	 * @param virtualHost the virtual host of this  layout set
+	 * @param virtualHost the virtual host of this layout set
 	 */
 	public void setVirtualHost(String virtualHost);
 
 	/**
-	 * Gets the settings of this  layout set.
+	 * Gets the settings of this layout set.
 	 *
-	 * @return the settings of this  layout set
+	 * @return the settings of this layout set
 	 */
 	@AutoEscape
 	public String getSettings();
 
 	/**
-	 * Sets the settings of this  layout set.
+	 * Sets the settings of this layout set.
 	 *
-	 * @param settings the settings of this  layout set
+	 * @param settings the settings of this layout set
 	 */
 	public void setSettings(String settings);
 
 	/**
-	 * Gets the layout set prototype id of this  layout set.
+	 * Gets the layout set prototype id of this layout set.
 	 *
-	 * @return the layout set prototype id of this  layout set
+	 * @return the layout set prototype id of this layout set
 	 */
 	public long getLayoutSetPrototypeId();
 
 	/**
-	 * Sets the layout set prototype id of this  layout set.
+	 * Sets the layout set prototype id of this layout set.
 	 *
-	 * @param layoutSetPrototypeId the layout set prototype id of this  layout set
+	 * @param layoutSetPrototypeId the layout set prototype id of this layout set
 	 */
 	public void setLayoutSetPrototypeId(long layoutSetPrototypeId);
 
 	/**
-	 * Gets a copy of this  layout set as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this layout set as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

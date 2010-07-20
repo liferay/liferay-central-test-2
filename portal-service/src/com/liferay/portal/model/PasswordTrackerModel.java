@@ -32,7 +32,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  password tracker model instance should use the {@link PasswordTracker} interface instead.
+ * Never reference this interface directly. All methods that expect a password tracker model instance should use the {@link PasswordTracker} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -43,93 +43,93 @@ import java.util.Date;
  */
 public interface PasswordTrackerModel extends BaseModel<PasswordTracker> {
 	/**
-	 * Gets the primary key of this  password tracker.
+	 * Gets the primary key of this password tracker.
 	 *
-	 * @return the primary key of this  password tracker
+	 * @return the primary key of this password tracker
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  password tracker
+	 * Sets the primary key of this password tracker
 	 *
-	 * @param pk the primary key of this  password tracker
+	 * @param pk the primary key of this password tracker
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the password tracker id of this  password tracker.
+	 * Gets the password tracker id of this password tracker.
 	 *
-	 * @return the password tracker id of this  password tracker
+	 * @return the password tracker id of this password tracker
 	 */
 	public long getPasswordTrackerId();
 
 	/**
-	 * Sets the password tracker id of this  password tracker.
+	 * Sets the password tracker id of this password tracker.
 	 *
-	 * @param passwordTrackerId the password tracker id of this  password tracker
+	 * @param passwordTrackerId the password tracker id of this password tracker
 	 */
 	public void setPasswordTrackerId(long passwordTrackerId);
 
 	/**
-	 * Gets the user id of this  password tracker.
+	 * Gets the user id of this password tracker.
 	 *
-	 * @return the user id of this  password tracker
+	 * @return the user id of this password tracker
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  password tracker.
+	 * Sets the user id of this password tracker.
 	 *
-	 * @param userId the user id of this  password tracker
+	 * @param userId the user id of this password tracker
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  password tracker.
+	 * Gets the user uuid of this password tracker.
 	 *
-	 * @return the user uuid of this  password tracker
+	 * @return the user uuid of this password tracker
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  password tracker.
+	 * Sets the user uuid of this password tracker.
 	 *
-	 * @param userUuid the user uuid of this  password tracker
+	 * @param userUuid the user uuid of this password tracker
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the create date of this  password tracker.
+	 * Gets the create date of this password tracker.
 	 *
-	 * @return the create date of this  password tracker
+	 * @return the create date of this password tracker
 	 */
 	public Date getCreateDate();
 
 	/**
-	 * Sets the create date of this  password tracker.
+	 * Sets the create date of this password tracker.
 	 *
-	 * @param createDate the create date of this  password tracker
+	 * @param createDate the create date of this password tracker
 	 */
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the password of this  password tracker.
+	 * Gets the password of this password tracker.
 	 *
-	 * @return the password of this  password tracker
+	 * @return the password of this password tracker
 	 */
 	@AutoEscape
 	public String getPassword();
 
 	/**
-	 * Sets the password of this  password tracker.
+	 * Sets the password of this password tracker.
 	 *
-	 * @param password the password of this  password tracker
+	 * @param password the password of this password tracker
 	 */
 	public void setPassword(String password);
 
 	/**
-	 * Gets a copy of this  password tracker as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this password tracker as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.tasks.model;
 
-
 /**
  * <p>
  * This interface is a model that represents the TasksReview table in the

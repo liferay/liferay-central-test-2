@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  ratings stats model instance should use the {@link RatingsStats} interface instead.
+ * Never reference this interface directly. All methods that expect a ratings stats model instance should use the {@link RatingsStats} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,112 +40,112 @@ import java.io.Serializable;
  */
 public interface RatingsStatsModel extends BaseModel<RatingsStats> {
 	/**
-	 * Gets the primary key of this  ratings stats.
+	 * Gets the primary key of this ratings stats.
 	 *
-	 * @return the primary key of this  ratings stats
+	 * @return the primary key of this ratings stats
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  ratings stats
+	 * Sets the primary key of this ratings stats
 	 *
-	 * @param pk the primary key of this  ratings stats
+	 * @param pk the primary key of this ratings stats
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the stats id of this  ratings stats.
+	 * Gets the stats id of this ratings stats.
 	 *
-	 * @return the stats id of this  ratings stats
+	 * @return the stats id of this ratings stats
 	 */
 	public long getStatsId();
 
 	/**
-	 * Sets the stats id of this  ratings stats.
+	 * Sets the stats id of this ratings stats.
 	 *
-	 * @param statsId the stats id of this  ratings stats
+	 * @param statsId the stats id of this ratings stats
 	 */
 	public void setStatsId(long statsId);
 
 	/**
-	 * Gets the class name of the model instance this  ratings stats is associated with.
+	 * Gets the class name of the model instance this ratings stats is associated with.
 	 *
-	 * @return the class name of the model instance this  ratings stats is associated with
+	 * @return the class name of the model instance this ratings stats is associated with
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this  ratings stats.
+	 * Gets the class name id of this ratings stats.
 	 *
-	 * @return the class name id of this  ratings stats
+	 * @return the class name id of this ratings stats
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this  ratings stats.
+	 * Sets the class name id of this ratings stats.
 	 *
-	 * @param classNameId the class name id of this  ratings stats
+	 * @param classNameId the class name id of this ratings stats
 	 */
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this  ratings stats.
+	 * Gets the class p k of this ratings stats.
 	 *
-	 * @return the class p k of this  ratings stats
+	 * @return the class p k of this ratings stats
 	 */
 	public long getClassPK();
 
 	/**
-	 * Sets the class p k of this  ratings stats.
+	 * Sets the class p k of this ratings stats.
 	 *
-	 * @param classPK the class p k of this  ratings stats
+	 * @param classPK the class p k of this ratings stats
 	 */
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the total entries of this  ratings stats.
+	 * Gets the total entries of this ratings stats.
 	 *
-	 * @return the total entries of this  ratings stats
+	 * @return the total entries of this ratings stats
 	 */
 	public int getTotalEntries();
 
 	/**
-	 * Sets the total entries of this  ratings stats.
+	 * Sets the total entries of this ratings stats.
 	 *
-	 * @param totalEntries the total entries of this  ratings stats
+	 * @param totalEntries the total entries of this ratings stats
 	 */
 	public void setTotalEntries(int totalEntries);
 
 	/**
-	 * Gets the total score of this  ratings stats.
+	 * Gets the total score of this ratings stats.
 	 *
-	 * @return the total score of this  ratings stats
+	 * @return the total score of this ratings stats
 	 */
 	public double getTotalScore();
 
 	/**
-	 * Sets the total score of this  ratings stats.
+	 * Sets the total score of this ratings stats.
 	 *
-	 * @param totalScore the total score of this  ratings stats
+	 * @param totalScore the total score of this ratings stats
 	 */
 	public void setTotalScore(double totalScore);
 
 	/**
-	 * Gets the average score of this  ratings stats.
+	 * Gets the average score of this ratings stats.
 	 *
-	 * @return the average score of this  ratings stats
+	 * @return the average score of this ratings stats
 	 */
 	public double getAverageScore();
 
 	/**
-	 * Sets the average score of this  ratings stats.
+	 * Sets the average score of this ratings stats.
 	 *
-	 * @param averageScore the average score of this  ratings stats
+	 * @param averageScore the average score of this ratings stats
 	 */
 	public void setAverageScore(double averageScore);
 
 	/**
-	 * Gets a copy of this  ratings stats as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this ratings stats as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

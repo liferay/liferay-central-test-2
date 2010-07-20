@@ -31,7 +31,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  web d a v props model instance should use the {@link WebDAVProps} interface instead.
+ * Never reference this interface directly. All methods that expect a web d a v props model instance should use the {@link WebDAVProps} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -42,127 +42,127 @@ import java.util.Date;
  */
 public interface WebDAVPropsModel extends BaseModel<WebDAVProps> {
 	/**
-	 * Gets the primary key of this  web d a v props.
+	 * Gets the primary key of this web d a v props.
 	 *
-	 * @return the primary key of this  web d a v props
+	 * @return the primary key of this web d a v props
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  web d a v props
+	 * Sets the primary key of this web d a v props
 	 *
-	 * @param pk the primary key of this  web d a v props
+	 * @param pk the primary key of this web d a v props
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the web dav props id of this  web d a v props.
+	 * Gets the web dav props id of this web d a v props.
 	 *
-	 * @return the web dav props id of this  web d a v props
+	 * @return the web dav props id of this web d a v props
 	 */
 	public long getWebDavPropsId();
 
 	/**
-	 * Sets the web dav props id of this  web d a v props.
+	 * Sets the web dav props id of this web d a v props.
 	 *
-	 * @param webDavPropsId the web dav props id of this  web d a v props
+	 * @param webDavPropsId the web dav props id of this web d a v props
 	 */
 	public void setWebDavPropsId(long webDavPropsId);
 
 	/**
-	 * Gets the company id of this  web d a v props.
+	 * Gets the company id of this web d a v props.
 	 *
-	 * @return the company id of this  web d a v props
+	 * @return the company id of this web d a v props
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  web d a v props.
+	 * Sets the company id of this web d a v props.
 	 *
-	 * @param companyId the company id of this  web d a v props
+	 * @param companyId the company id of this web d a v props
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the create date of this  web d a v props.
+	 * Gets the create date of this web d a v props.
 	 *
-	 * @return the create date of this  web d a v props
+	 * @return the create date of this web d a v props
 	 */
 	public Date getCreateDate();
 
 	/**
-	 * Sets the create date of this  web d a v props.
+	 * Sets the create date of this web d a v props.
 	 *
-	 * @param createDate the create date of this  web d a v props
+	 * @param createDate the create date of this web d a v props
 	 */
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this  web d a v props.
+	 * Gets the modified date of this web d a v props.
 	 *
-	 * @return the modified date of this  web d a v props
+	 * @return the modified date of this web d a v props
 	 */
 	public Date getModifiedDate();
 
 	/**
-	 * Sets the modified date of this  web d a v props.
+	 * Sets the modified date of this web d a v props.
 	 *
-	 * @param modifiedDate the modified date of this  web d a v props
+	 * @param modifiedDate the modified date of this web d a v props
 	 */
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the class name of the model instance this  web d a v props is associated with.
+	 * Gets the class name of the model instance this web d a v props is associated with.
 	 *
-	 * @return the class name of the model instance this  web d a v props is associated with
+	 * @return the class name of the model instance this web d a v props is associated with
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this  web d a v props.
+	 * Gets the class name id of this web d a v props.
 	 *
-	 * @return the class name id of this  web d a v props
+	 * @return the class name id of this web d a v props
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this  web d a v props.
+	 * Sets the class name id of this web d a v props.
 	 *
-	 * @param classNameId the class name id of this  web d a v props
+	 * @param classNameId the class name id of this web d a v props
 	 */
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this  web d a v props.
+	 * Gets the class p k of this web d a v props.
 	 *
-	 * @return the class p k of this  web d a v props
+	 * @return the class p k of this web d a v props
 	 */
 	public long getClassPK();
 
 	/**
-	 * Sets the class p k of this  web d a v props.
+	 * Sets the class p k of this web d a v props.
 	 *
-	 * @param classPK the class p k of this  web d a v props
+	 * @param classPK the class p k of this web d a v props
 	 */
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the props of this  web d a v props.
+	 * Gets the props of this web d a v props.
 	 *
-	 * @return the props of this  web d a v props
+	 * @return the props of this web d a v props
 	 */
 	@AutoEscape
 	public String getProps();
 
 	/**
-	 * Sets the props of this  web d a v props.
+	 * Sets the props of this web d a v props.
 	 *
-	 * @param props the props of this  web d a v props
+	 * @param props the props of this web d a v props
 	 */
 	public void setProps(String props);
 
 	/**
-	 * Gets a copy of this  web d a v props as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this web d a v props as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

@@ -33,7 +33,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  asset link model instance should use the {@link AssetLink} interface instead.
+ * Never reference this interface directly. All methods that expect a asset link model instance should use the {@link AssetLink} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -44,163 +44,163 @@ import java.util.Date;
  */
 public interface AssetLinkModel extends BaseModel<AssetLink> {
 	/**
-	 * Gets the primary key of this  asset link.
+	 * Gets the primary key of this asset link.
 	 *
-	 * @return the primary key of this  asset link
+	 * @return the primary key of this asset link
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  asset link
+	 * Sets the primary key of this asset link
 	 *
-	 * @param pk the primary key of this  asset link
+	 * @param pk the primary key of this asset link
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the link id of this  asset link.
+	 * Gets the link id of this asset link.
 	 *
-	 * @return the link id of this  asset link
+	 * @return the link id of this asset link
 	 */
 	public long getLinkId();
 
 	/**
-	 * Sets the link id of this  asset link.
+	 * Sets the link id of this asset link.
 	 *
-	 * @param linkId the link id of this  asset link
+	 * @param linkId the link id of this asset link
 	 */
 	public void setLinkId(long linkId);
 
 	/**
-	 * Gets the company id of this  asset link.
+	 * Gets the company id of this asset link.
 	 *
-	 * @return the company id of this  asset link
+	 * @return the company id of this asset link
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  asset link.
+	 * Sets the company id of this asset link.
 	 *
-	 * @param companyId the company id of this  asset link
+	 * @param companyId the company id of this asset link
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  asset link.
+	 * Gets the user id of this asset link.
 	 *
-	 * @return the user id of this  asset link
+	 * @return the user id of this asset link
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  asset link.
+	 * Sets the user id of this asset link.
 	 *
-	 * @param userId the user id of this  asset link
+	 * @param userId the user id of this asset link
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  asset link.
+	 * Gets the user uuid of this asset link.
 	 *
-	 * @return the user uuid of this  asset link
+	 * @return the user uuid of this asset link
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  asset link.
+	 * Sets the user uuid of this asset link.
 	 *
-	 * @param userUuid the user uuid of this  asset link
+	 * @param userUuid the user uuid of this asset link
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this  asset link.
+	 * Gets the user name of this asset link.
 	 *
-	 * @return the user name of this  asset link
+	 * @return the user name of this asset link
 	 */
 	@AutoEscape
 	public String getUserName();
 
 	/**
-	 * Sets the user name of this  asset link.
+	 * Sets the user name of this asset link.
 	 *
-	 * @param userName the user name of this  asset link
+	 * @param userName the user name of this asset link
 	 */
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this  asset link.
+	 * Gets the create date of this asset link.
 	 *
-	 * @return the create date of this  asset link
+	 * @return the create date of this asset link
 	 */
 	public Date getCreateDate();
 
 	/**
-	 * Sets the create date of this  asset link.
+	 * Sets the create date of this asset link.
 	 *
-	 * @param createDate the create date of this  asset link
+	 * @param createDate the create date of this asset link
 	 */
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the entry id1 of this  asset link.
+	 * Gets the entry id1 of this asset link.
 	 *
-	 * @return the entry id1 of this  asset link
+	 * @return the entry id1 of this asset link
 	 */
 	public long getEntryId1();
 
 	/**
-	 * Sets the entry id1 of this  asset link.
+	 * Sets the entry id1 of this asset link.
 	 *
-	 * @param entryId1 the entry id1 of this  asset link
+	 * @param entryId1 the entry id1 of this asset link
 	 */
 	public void setEntryId1(long entryId1);
 
 	/**
-	 * Gets the entry id2 of this  asset link.
+	 * Gets the entry id2 of this asset link.
 	 *
-	 * @return the entry id2 of this  asset link
+	 * @return the entry id2 of this asset link
 	 */
 	public long getEntryId2();
 
 	/**
-	 * Sets the entry id2 of this  asset link.
+	 * Sets the entry id2 of this asset link.
 	 *
-	 * @param entryId2 the entry id2 of this  asset link
+	 * @param entryId2 the entry id2 of this asset link
 	 */
 	public void setEntryId2(long entryId2);
 
 	/**
-	 * Gets the type of this  asset link.
+	 * Gets the type of this asset link.
 	 *
-	 * @return the type of this  asset link
+	 * @return the type of this asset link
 	 */
 	public int getType();
 
 	/**
-	 * Sets the type of this  asset link.
+	 * Sets the type of this asset link.
 	 *
-	 * @param type the type of this  asset link
+	 * @param type the type of this asset link
 	 */
 	public void setType(int type);
 
 	/**
-	 * Gets the weight of this  asset link.
+	 * Gets the weight of this asset link.
 	 *
-	 * @return the weight of this  asset link
+	 * @return the weight of this asset link
 	 */
 	public int getWeight();
 
 	/**
-	 * Sets the weight of this  asset link.
+	 * Sets the weight of this asset link.
 	 *
-	 * @param weight the weight of this  asset link
+	 * @param weight the weight of this asset link
 	 */
 	public void setWeight(int weight);
 
 	/**
-	 * Gets a copy of this  asset link as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this asset link as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

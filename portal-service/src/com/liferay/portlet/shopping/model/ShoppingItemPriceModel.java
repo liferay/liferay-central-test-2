@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  shopping item price model instance should use the {@link ShoppingItemPrice} interface instead.
+ * Never reference this interface directly. All methods that expect a shopping item price model instance should use the {@link ShoppingItemPrice} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,175 +40,175 @@ import java.io.Serializable;
  */
 public interface ShoppingItemPriceModel extends BaseModel<ShoppingItemPrice> {
 	/**
-	 * Gets the primary key of this  shopping item price.
+	 * Gets the primary key of this shopping item price.
 	 *
-	 * @return the primary key of this  shopping item price
+	 * @return the primary key of this shopping item price
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  shopping item price
+	 * Sets the primary key of this shopping item price
 	 *
-	 * @param pk the primary key of this  shopping item price
+	 * @param pk the primary key of this shopping item price
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the item price id of this  shopping item price.
+	 * Gets the item price id of this shopping item price.
 	 *
-	 * @return the item price id of this  shopping item price
+	 * @return the item price id of this shopping item price
 	 */
 	public long getItemPriceId();
 
 	/**
-	 * Sets the item price id of this  shopping item price.
+	 * Sets the item price id of this shopping item price.
 	 *
-	 * @param itemPriceId the item price id of this  shopping item price
+	 * @param itemPriceId the item price id of this shopping item price
 	 */
 	public void setItemPriceId(long itemPriceId);
 
 	/**
-	 * Gets the item id of this  shopping item price.
+	 * Gets the item id of this shopping item price.
 	 *
-	 * @return the item id of this  shopping item price
+	 * @return the item id of this shopping item price
 	 */
 	public long getItemId();
 
 	/**
-	 * Sets the item id of this  shopping item price.
+	 * Sets the item id of this shopping item price.
 	 *
-	 * @param itemId the item id of this  shopping item price
+	 * @param itemId the item id of this shopping item price
 	 */
 	public void setItemId(long itemId);
 
 	/**
-	 * Gets the min quantity of this  shopping item price.
+	 * Gets the min quantity of this shopping item price.
 	 *
-	 * @return the min quantity of this  shopping item price
+	 * @return the min quantity of this shopping item price
 	 */
 	public int getMinQuantity();
 
 	/**
-	 * Sets the min quantity of this  shopping item price.
+	 * Sets the min quantity of this shopping item price.
 	 *
-	 * @param minQuantity the min quantity of this  shopping item price
+	 * @param minQuantity the min quantity of this shopping item price
 	 */
 	public void setMinQuantity(int minQuantity);
 
 	/**
-	 * Gets the max quantity of this  shopping item price.
+	 * Gets the max quantity of this shopping item price.
 	 *
-	 * @return the max quantity of this  shopping item price
+	 * @return the max quantity of this shopping item price
 	 */
 	public int getMaxQuantity();
 
 	/**
-	 * Sets the max quantity of this  shopping item price.
+	 * Sets the max quantity of this shopping item price.
 	 *
-	 * @param maxQuantity the max quantity of this  shopping item price
+	 * @param maxQuantity the max quantity of this shopping item price
 	 */
 	public void setMaxQuantity(int maxQuantity);
 
 	/**
-	 * Gets the price of this  shopping item price.
+	 * Gets the price of this shopping item price.
 	 *
-	 * @return the price of this  shopping item price
+	 * @return the price of this shopping item price
 	 */
 	public double getPrice();
 
 	/**
-	 * Sets the price of this  shopping item price.
+	 * Sets the price of this shopping item price.
 	 *
-	 * @param price the price of this  shopping item price
+	 * @param price the price of this shopping item price
 	 */
 	public void setPrice(double price);
 
 	/**
-	 * Gets the discount of this  shopping item price.
+	 * Gets the discount of this shopping item price.
 	 *
-	 * @return the discount of this  shopping item price
+	 * @return the discount of this shopping item price
 	 */
 	public double getDiscount();
 
 	/**
-	 * Sets the discount of this  shopping item price.
+	 * Sets the discount of this shopping item price.
 	 *
-	 * @param discount the discount of this  shopping item price
+	 * @param discount the discount of this shopping item price
 	 */
 	public void setDiscount(double discount);
 
 	/**
-	 * Gets the taxable of this  shopping item price.
+	 * Gets the taxable of this shopping item price.
 	 *
-	 * @return the taxable of this  shopping item price
+	 * @return the taxable of this shopping item price
 	 */
 	public boolean getTaxable();
 
 	/**
-	 * Determines whether this  shopping item price is taxable.
+	 * Determines whether this shopping item price is taxable.
 	 *
-	 * @return whether this  shopping item price is taxable
+	 * @return whether this shopping item price is taxable
 	 */
 	public boolean isTaxable();
 
 	/**
-	 * Sets the taxable of this  shopping item price.
+	 * Sets the taxable of this shopping item price.
 	 *
-	 * @param taxable the taxable of this  shopping item price
+	 * @param taxable the taxable of this shopping item price
 	 */
 	public void setTaxable(boolean taxable);
 
 	/**
-	 * Gets the shipping of this  shopping item price.
+	 * Gets the shipping of this shopping item price.
 	 *
-	 * @return the shipping of this  shopping item price
+	 * @return the shipping of this shopping item price
 	 */
 	public double getShipping();
 
 	/**
-	 * Sets the shipping of this  shopping item price.
+	 * Sets the shipping of this shopping item price.
 	 *
-	 * @param shipping the shipping of this  shopping item price
+	 * @param shipping the shipping of this shopping item price
 	 */
 	public void setShipping(double shipping);
 
 	/**
-	 * Gets the use shipping formula of this  shopping item price.
+	 * Gets the use shipping formula of this shopping item price.
 	 *
-	 * @return the use shipping formula of this  shopping item price
+	 * @return the use shipping formula of this shopping item price
 	 */
 	public boolean getUseShippingFormula();
 
 	/**
-	 * Determines whether this  shopping item price is use shipping formula.
+	 * Determines whether this shopping item price is use shipping formula.
 	 *
-	 * @return whether this  shopping item price is use shipping formula
+	 * @return whether this shopping item price is use shipping formula
 	 */
 	public boolean isUseShippingFormula();
 
 	/**
-	 * Sets the use shipping formula of this  shopping item price.
+	 * Sets the use shipping formula of this shopping item price.
 	 *
-	 * @param useShippingFormula the use shipping formula of this  shopping item price
+	 * @param useShippingFormula the use shipping formula of this shopping item price
 	 */
 	public void setUseShippingFormula(boolean useShippingFormula);
 
 	/**
-	 * Gets the status of this  shopping item price.
+	 * Gets the status of this shopping item price.
 	 *
-	 * @return the status of this  shopping item price
+	 * @return the status of this shopping item price
 	 */
 	public int getStatus();
 
 	/**
-	 * Sets the status of this  shopping item price.
+	 * Sets the status of this shopping item price.
 	 *
-	 * @param status the status of this  shopping item price
+	 * @param status the status of this shopping item price
 	 */
 	public void setStatus(int status);
 
 	/**
-	 * Gets a copy of this  shopping item price as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this shopping item price as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

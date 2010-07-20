@@ -32,7 +32,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  blogs stats user model instance should use the {@link BlogsStatsUser} interface instead.
+ * Never reference this interface directly. All methods that expect a blogs stats user model instance should use the {@link BlogsStatsUser} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -43,177 +43,177 @@ import java.util.Date;
  */
 public interface BlogsStatsUserModel extends BaseModel<BlogsStatsUser> {
 	/**
-	 * Gets the primary key of this  blogs stats user.
+	 * Gets the primary key of this blogs stats user.
 	 *
-	 * @return the primary key of this  blogs stats user
+	 * @return the primary key of this blogs stats user
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  blogs stats user
+	 * Sets the primary key of this blogs stats user
 	 *
-	 * @param pk the primary key of this  blogs stats user
+	 * @param pk the primary key of this blogs stats user
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the stats user id of this  blogs stats user.
+	 * Gets the stats user id of this blogs stats user.
 	 *
-	 * @return the stats user id of this  blogs stats user
+	 * @return the stats user id of this blogs stats user
 	 */
 	public long getStatsUserId();
 
 	/**
-	 * Sets the stats user id of this  blogs stats user.
+	 * Sets the stats user id of this blogs stats user.
 	 *
-	 * @param statsUserId the stats user id of this  blogs stats user
+	 * @param statsUserId the stats user id of this blogs stats user
 	 */
 	public void setStatsUserId(long statsUserId);
 
 	/**
-	 * Gets the stats user uuid of this  blogs stats user.
+	 * Gets the stats user uuid of this blogs stats user.
 	 *
-	 * @return the stats user uuid of this  blogs stats user
+	 * @return the stats user uuid of this blogs stats user
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getStatsUserUuid() throws SystemException;
 
 	/**
-	 * Sets the stats user uuid of this  blogs stats user.
+	 * Sets the stats user uuid of this blogs stats user.
 	 *
-	 * @param statsUserUuid the stats user uuid of this  blogs stats user
+	 * @param statsUserUuid the stats user uuid of this blogs stats user
 	 */
 	public void setStatsUserUuid(String statsUserUuid);
 
 	/**
-	 * Gets the group id of this  blogs stats user.
+	 * Gets the group id of this blogs stats user.
 	 *
-	 * @return the group id of this  blogs stats user
+	 * @return the group id of this blogs stats user
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  blogs stats user.
+	 * Sets the group id of this blogs stats user.
 	 *
-	 * @param groupId the group id of this  blogs stats user
+	 * @param groupId the group id of this blogs stats user
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this  blogs stats user.
+	 * Gets the company id of this blogs stats user.
 	 *
-	 * @return the company id of this  blogs stats user
+	 * @return the company id of this blogs stats user
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  blogs stats user.
+	 * Sets the company id of this blogs stats user.
 	 *
-	 * @param companyId the company id of this  blogs stats user
+	 * @param companyId the company id of this blogs stats user
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  blogs stats user.
+	 * Gets the user id of this blogs stats user.
 	 *
-	 * @return the user id of this  blogs stats user
+	 * @return the user id of this blogs stats user
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  blogs stats user.
+	 * Sets the user id of this blogs stats user.
 	 *
-	 * @param userId the user id of this  blogs stats user
+	 * @param userId the user id of this blogs stats user
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  blogs stats user.
+	 * Gets the user uuid of this blogs stats user.
 	 *
-	 * @return the user uuid of this  blogs stats user
+	 * @return the user uuid of this blogs stats user
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  blogs stats user.
+	 * Sets the user uuid of this blogs stats user.
 	 *
-	 * @param userUuid the user uuid of this  blogs stats user
+	 * @param userUuid the user uuid of this blogs stats user
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the entry count of this  blogs stats user.
+	 * Gets the entry count of this blogs stats user.
 	 *
-	 * @return the entry count of this  blogs stats user
+	 * @return the entry count of this blogs stats user
 	 */
 	public int getEntryCount();
 
 	/**
-	 * Sets the entry count of this  blogs stats user.
+	 * Sets the entry count of this blogs stats user.
 	 *
-	 * @param entryCount the entry count of this  blogs stats user
+	 * @param entryCount the entry count of this blogs stats user
 	 */
 	public void setEntryCount(int entryCount);
 
 	/**
-	 * Gets the last post date of this  blogs stats user.
+	 * Gets the last post date of this blogs stats user.
 	 *
-	 * @return the last post date of this  blogs stats user
+	 * @return the last post date of this blogs stats user
 	 */
 	public Date getLastPostDate();
 
 	/**
-	 * Sets the last post date of this  blogs stats user.
+	 * Sets the last post date of this blogs stats user.
 	 *
-	 * @param lastPostDate the last post date of this  blogs stats user
+	 * @param lastPostDate the last post date of this blogs stats user
 	 */
 	public void setLastPostDate(Date lastPostDate);
 
 	/**
-	 * Gets the ratings total entries of this  blogs stats user.
+	 * Gets the ratings total entries of this blogs stats user.
 	 *
-	 * @return the ratings total entries of this  blogs stats user
+	 * @return the ratings total entries of this blogs stats user
 	 */
 	public int getRatingsTotalEntries();
 
 	/**
-	 * Sets the ratings total entries of this  blogs stats user.
+	 * Sets the ratings total entries of this blogs stats user.
 	 *
-	 * @param ratingsTotalEntries the ratings total entries of this  blogs stats user
+	 * @param ratingsTotalEntries the ratings total entries of this blogs stats user
 	 */
 	public void setRatingsTotalEntries(int ratingsTotalEntries);
 
 	/**
-	 * Gets the ratings total score of this  blogs stats user.
+	 * Gets the ratings total score of this blogs stats user.
 	 *
-	 * @return the ratings total score of this  blogs stats user
+	 * @return the ratings total score of this blogs stats user
 	 */
 	public double getRatingsTotalScore();
 
 	/**
-	 * Sets the ratings total score of this  blogs stats user.
+	 * Sets the ratings total score of this blogs stats user.
 	 *
-	 * @param ratingsTotalScore the ratings total score of this  blogs stats user
+	 * @param ratingsTotalScore the ratings total score of this blogs stats user
 	 */
 	public void setRatingsTotalScore(double ratingsTotalScore);
 
 	/**
-	 * Gets the ratings average score of this  blogs stats user.
+	 * Gets the ratings average score of this blogs stats user.
 	 *
-	 * @return the ratings average score of this  blogs stats user
+	 * @return the ratings average score of this blogs stats user
 	 */
 	public double getRatingsAverageScore();
 
 	/**
-	 * Sets the ratings average score of this  blogs stats user.
+	 * Sets the ratings average score of this blogs stats user.
 	 *
-	 * @param ratingsAverageScore the ratings average score of this  blogs stats user
+	 * @param ratingsAverageScore the ratings average score of this blogs stats user
 	 */
 	public void setRatingsAverageScore(double ratingsAverageScore);
 
 	/**
-	 * Gets a copy of this  blogs stats user as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this blogs stats user as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

@@ -28,7 +28,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  expando value model instance should use the {@link ExpandoValue} interface instead.
+ * Never reference this interface directly. All methods that expect a expando value model instance should use the {@link ExpandoValue} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -39,141 +39,141 @@ import java.io.Serializable;
  */
 public interface ExpandoValueModel extends BaseModel<ExpandoValue> {
 	/**
-	 * Gets the primary key of this  expando value.
+	 * Gets the primary key of this expando value.
 	 *
-	 * @return the primary key of this  expando value
+	 * @return the primary key of this expando value
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  expando value
+	 * Sets the primary key of this expando value
 	 *
-	 * @param pk the primary key of this  expando value
+	 * @param pk the primary key of this expando value
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the value id of this  expando value.
+	 * Gets the value id of this expando value.
 	 *
-	 * @return the value id of this  expando value
+	 * @return the value id of this expando value
 	 */
 	public long getValueId();
 
 	/**
-	 * Sets the value id of this  expando value.
+	 * Sets the value id of this expando value.
 	 *
-	 * @param valueId the value id of this  expando value
+	 * @param valueId the value id of this expando value
 	 */
 	public void setValueId(long valueId);
 
 	/**
-	 * Gets the company id of this  expando value.
+	 * Gets the company id of this expando value.
 	 *
-	 * @return the company id of this  expando value
+	 * @return the company id of this expando value
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  expando value.
+	 * Sets the company id of this expando value.
 	 *
-	 * @param companyId the company id of this  expando value
+	 * @param companyId the company id of this expando value
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the table id of this  expando value.
+	 * Gets the table id of this expando value.
 	 *
-	 * @return the table id of this  expando value
+	 * @return the table id of this expando value
 	 */
 	public long getTableId();
 
 	/**
-	 * Sets the table id of this  expando value.
+	 * Sets the table id of this expando value.
 	 *
-	 * @param tableId the table id of this  expando value
+	 * @param tableId the table id of this expando value
 	 */
 	public void setTableId(long tableId);
 
 	/**
-	 * Gets the column id of this  expando value.
+	 * Gets the column id of this expando value.
 	 *
-	 * @return the column id of this  expando value
+	 * @return the column id of this expando value
 	 */
 	public long getColumnId();
 
 	/**
-	 * Sets the column id of this  expando value.
+	 * Sets the column id of this expando value.
 	 *
-	 * @param columnId the column id of this  expando value
+	 * @param columnId the column id of this expando value
 	 */
 	public void setColumnId(long columnId);
 
 	/**
-	 * Gets the row id of this  expando value.
+	 * Gets the row id of this expando value.
 	 *
-	 * @return the row id of this  expando value
+	 * @return the row id of this expando value
 	 */
 	public long getRowId();
 
 	/**
-	 * Sets the row id of this  expando value.
+	 * Sets the row id of this expando value.
 	 *
-	 * @param rowId the row id of this  expando value
+	 * @param rowId the row id of this expando value
 	 */
 	public void setRowId(long rowId);
 
 	/**
-	 * Gets the class name of the model instance this  expando value is associated with.
+	 * Gets the class name of the model instance this expando value is associated with.
 	 *
-	 * @return the class name of the model instance this  expando value is associated with
+	 * @return the class name of the model instance this expando value is associated with
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this  expando value.
+	 * Gets the class name id of this expando value.
 	 *
-	 * @return the class name id of this  expando value
+	 * @return the class name id of this expando value
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this  expando value.
+	 * Sets the class name id of this expando value.
 	 *
-	 * @param classNameId the class name id of this  expando value
+	 * @param classNameId the class name id of this expando value
 	 */
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this  expando value.
+	 * Gets the class p k of this expando value.
 	 *
-	 * @return the class p k of this  expando value
+	 * @return the class p k of this expando value
 	 */
 	public long getClassPK();
 
 	/**
-	 * Sets the class p k of this  expando value.
+	 * Sets the class p k of this expando value.
 	 *
-	 * @param classPK the class p k of this  expando value
+	 * @param classPK the class p k of this expando value
 	 */
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the data of this  expando value.
+	 * Gets the data of this expando value.
 	 *
-	 * @return the data of this  expando value
+	 * @return the data of this expando value
 	 */
 	@AutoEscape
 	public String getData();
 
 	/**
-	 * Sets the data of this  expando value.
+	 * Sets the data of this expando value.
 	 *
-	 * @param data the data of this  expando value
+	 * @param data the data of this expando value
 	 */
 	public void setData(String data);
 
 	/**
-	 * Gets a copy of this  expando value as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this expando value as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

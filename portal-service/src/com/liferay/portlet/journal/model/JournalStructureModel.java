@@ -33,7 +33,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  journal structure model instance should use the {@link JournalStructure} interface instead.
+ * Never reference this interface directly. All methods that expect a journal structure model instance should use the {@link JournalStructure} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -44,224 +44,224 @@ import java.util.Date;
  */
 public interface JournalStructureModel extends BaseModel<JournalStructure> {
 	/**
-	 * Gets the primary key of this  journal structure.
+	 * Gets the primary key of this journal structure.
 	 *
-	 * @return the primary key of this  journal structure
+	 * @return the primary key of this journal structure
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  journal structure
+	 * Sets the primary key of this journal structure
 	 *
-	 * @param pk the primary key of this  journal structure
+	 * @param pk the primary key of this journal structure
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the uuid of this  journal structure.
+	 * Gets the uuid of this journal structure.
 	 *
-	 * @return the uuid of this  journal structure
+	 * @return the uuid of this journal structure
 	 */
 	@AutoEscape
 	public String getUuid();
 
 	/**
-	 * Sets the uuid of this  journal structure.
+	 * Sets the uuid of this journal structure.
 	 *
-	 * @param uuid the uuid of this  journal structure
+	 * @param uuid the uuid of this journal structure
 	 */
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the id of this  journal structure.
+	 * Gets the id of this journal structure.
 	 *
-	 * @return the id of this  journal structure
+	 * @return the id of this journal structure
 	 */
 	public long getId();
 
 	/**
-	 * Sets the id of this  journal structure.
+	 * Sets the id of this journal structure.
 	 *
-	 * @param id the id of this  journal structure
+	 * @param id the id of this journal structure
 	 */
 	public void setId(long id);
 
 	/**
-	 * Gets the group id of this  journal structure.
+	 * Gets the group id of this journal structure.
 	 *
-	 * @return the group id of this  journal structure
+	 * @return the group id of this journal structure
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  journal structure.
+	 * Sets the group id of this journal structure.
 	 *
-	 * @param groupId the group id of this  journal structure
+	 * @param groupId the group id of this journal structure
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this  journal structure.
+	 * Gets the company id of this journal structure.
 	 *
-	 * @return the company id of this  journal structure
+	 * @return the company id of this journal structure
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  journal structure.
+	 * Sets the company id of this journal structure.
 	 *
-	 * @param companyId the company id of this  journal structure
+	 * @param companyId the company id of this journal structure
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  journal structure.
+	 * Gets the user id of this journal structure.
 	 *
-	 * @return the user id of this  journal structure
+	 * @return the user id of this journal structure
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  journal structure.
+	 * Sets the user id of this journal structure.
 	 *
-	 * @param userId the user id of this  journal structure
+	 * @param userId the user id of this journal structure
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  journal structure.
+	 * Gets the user uuid of this journal structure.
 	 *
-	 * @return the user uuid of this  journal structure
+	 * @return the user uuid of this journal structure
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  journal structure.
+	 * Sets the user uuid of this journal structure.
 	 *
-	 * @param userUuid the user uuid of this  journal structure
+	 * @param userUuid the user uuid of this journal structure
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this  journal structure.
+	 * Gets the user name of this journal structure.
 	 *
-	 * @return the user name of this  journal structure
+	 * @return the user name of this journal structure
 	 */
 	@AutoEscape
 	public String getUserName();
 
 	/**
-	 * Sets the user name of this  journal structure.
+	 * Sets the user name of this journal structure.
 	 *
-	 * @param userName the user name of this  journal structure
+	 * @param userName the user name of this journal structure
 	 */
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this  journal structure.
+	 * Gets the create date of this journal structure.
 	 *
-	 * @return the create date of this  journal structure
+	 * @return the create date of this journal structure
 	 */
 	public Date getCreateDate();
 
 	/**
-	 * Sets the create date of this  journal structure.
+	 * Sets the create date of this journal structure.
 	 *
-	 * @param createDate the create date of this  journal structure
+	 * @param createDate the create date of this journal structure
 	 */
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this  journal structure.
+	 * Gets the modified date of this journal structure.
 	 *
-	 * @return the modified date of this  journal structure
+	 * @return the modified date of this journal structure
 	 */
 	public Date getModifiedDate();
 
 	/**
-	 * Sets the modified date of this  journal structure.
+	 * Sets the modified date of this journal structure.
 	 *
-	 * @param modifiedDate the modified date of this  journal structure
+	 * @param modifiedDate the modified date of this journal structure
 	 */
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the structure id of this  journal structure.
+	 * Gets the structure id of this journal structure.
 	 *
-	 * @return the structure id of this  journal structure
+	 * @return the structure id of this journal structure
 	 */
 	public String getStructureId();
 
 	/**
-	 * Sets the structure id of this  journal structure.
+	 * Sets the structure id of this journal structure.
 	 *
-	 * @param structureId the structure id of this  journal structure
+	 * @param structureId the structure id of this journal structure
 	 */
 	public void setStructureId(String structureId);
 
 	/**
-	 * Gets the parent structure id of this  journal structure.
+	 * Gets the parent structure id of this journal structure.
 	 *
-	 * @return the parent structure id of this  journal structure
+	 * @return the parent structure id of this journal structure
 	 */
 	@AutoEscape
 	public String getParentStructureId();
 
 	/**
-	 * Sets the parent structure id of this  journal structure.
+	 * Sets the parent structure id of this journal structure.
 	 *
-	 * @param parentStructureId the parent structure id of this  journal structure
+	 * @param parentStructureId the parent structure id of this journal structure
 	 */
 	public void setParentStructureId(String parentStructureId);
 
 	/**
-	 * Gets the name of this  journal structure.
+	 * Gets the name of this journal structure.
 	 *
-	 * @return the name of this  journal structure
+	 * @return the name of this journal structure
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  journal structure.
+	 * Sets the name of this journal structure.
 	 *
-	 * @param name the name of this  journal structure
+	 * @param name the name of this journal structure
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this  journal structure.
+	 * Gets the description of this journal structure.
 	 *
-	 * @return the description of this  journal structure
+	 * @return the description of this journal structure
 	 */
 	@AutoEscape
 	public String getDescription();
 
 	/**
-	 * Sets the description of this  journal structure.
+	 * Sets the description of this journal structure.
 	 *
-	 * @param description the description of this  journal structure
+	 * @param description the description of this journal structure
 	 */
 	public void setDescription(String description);
 
 	/**
-	 * Gets the xsd of this  journal structure.
+	 * Gets the xsd of this journal structure.
 	 *
-	 * @return the xsd of this  journal structure
+	 * @return the xsd of this journal structure
 	 */
 	@AutoEscape
 	public String getXsd();
 
 	/**
-	 * Sets the xsd of this  journal structure.
+	 * Sets the xsd of this journal structure.
 	 *
-	 * @param xsd the xsd of this  journal structure
+	 * @param xsd the xsd of this journal structure
 	 */
 	public void setXsd(String xsd);
 
 	/**
-	 * Gets a copy of this  journal structure as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this journal structure as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

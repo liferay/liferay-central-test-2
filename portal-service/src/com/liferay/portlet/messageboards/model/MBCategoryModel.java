@@ -33,7 +33,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  m b category model instance should use the {@link MBCategory} interface instead.
+ * Never reference this interface directly. All methods that expect a m b category model instance should use the {@link MBCategory} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -44,236 +44,236 @@ import java.util.Date;
  */
 public interface MBCategoryModel extends BaseModel<MBCategory> {
 	/**
-	 * Gets the primary key of this  m b category.
+	 * Gets the primary key of this m b category.
 	 *
-	 * @return the primary key of this  m b category
+	 * @return the primary key of this m b category
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  m b category
+	 * Sets the primary key of this m b category
 	 *
-	 * @param pk the primary key of this  m b category
+	 * @param pk the primary key of this m b category
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the uuid of this  m b category.
+	 * Gets the uuid of this m b category.
 	 *
-	 * @return the uuid of this  m b category
+	 * @return the uuid of this m b category
 	 */
 	@AutoEscape
 	public String getUuid();
 
 	/**
-	 * Sets the uuid of this  m b category.
+	 * Sets the uuid of this m b category.
 	 *
-	 * @param uuid the uuid of this  m b category
+	 * @param uuid the uuid of this m b category
 	 */
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the category id of this  m b category.
+	 * Gets the category id of this m b category.
 	 *
-	 * @return the category id of this  m b category
+	 * @return the category id of this m b category
 	 */
 	public long getCategoryId();
 
 	/**
-	 * Sets the category id of this  m b category.
+	 * Sets the category id of this m b category.
 	 *
-	 * @param categoryId the category id of this  m b category
+	 * @param categoryId the category id of this m b category
 	 */
 	public void setCategoryId(long categoryId);
 
 	/**
-	 * Gets the group id of this  m b category.
+	 * Gets the group id of this m b category.
 	 *
-	 * @return the group id of this  m b category
+	 * @return the group id of this m b category
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  m b category.
+	 * Sets the group id of this m b category.
 	 *
-	 * @param groupId the group id of this  m b category
+	 * @param groupId the group id of this m b category
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this  m b category.
+	 * Gets the company id of this m b category.
 	 *
-	 * @return the company id of this  m b category
+	 * @return the company id of this m b category
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  m b category.
+	 * Sets the company id of this m b category.
 	 *
-	 * @param companyId the company id of this  m b category
+	 * @param companyId the company id of this m b category
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  m b category.
+	 * Gets the user id of this m b category.
 	 *
-	 * @return the user id of this  m b category
+	 * @return the user id of this m b category
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  m b category.
+	 * Sets the user id of this m b category.
 	 *
-	 * @param userId the user id of this  m b category
+	 * @param userId the user id of this m b category
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  m b category.
+	 * Gets the user uuid of this m b category.
 	 *
-	 * @return the user uuid of this  m b category
+	 * @return the user uuid of this m b category
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  m b category.
+	 * Sets the user uuid of this m b category.
 	 *
-	 * @param userUuid the user uuid of this  m b category
+	 * @param userUuid the user uuid of this m b category
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this  m b category.
+	 * Gets the user name of this m b category.
 	 *
-	 * @return the user name of this  m b category
+	 * @return the user name of this m b category
 	 */
 	@AutoEscape
 	public String getUserName();
 
 	/**
-	 * Sets the user name of this  m b category.
+	 * Sets the user name of this m b category.
 	 *
-	 * @param userName the user name of this  m b category
+	 * @param userName the user name of this m b category
 	 */
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this  m b category.
+	 * Gets the create date of this m b category.
 	 *
-	 * @return the create date of this  m b category
+	 * @return the create date of this m b category
 	 */
 	public Date getCreateDate();
 
 	/**
-	 * Sets the create date of this  m b category.
+	 * Sets the create date of this m b category.
 	 *
-	 * @param createDate the create date of this  m b category
+	 * @param createDate the create date of this m b category
 	 */
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this  m b category.
+	 * Gets the modified date of this m b category.
 	 *
-	 * @return the modified date of this  m b category
+	 * @return the modified date of this m b category
 	 */
 	public Date getModifiedDate();
 
 	/**
-	 * Sets the modified date of this  m b category.
+	 * Sets the modified date of this m b category.
 	 *
-	 * @param modifiedDate the modified date of this  m b category
+	 * @param modifiedDate the modified date of this m b category
 	 */
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the parent category id of this  m b category.
+	 * Gets the parent category id of this m b category.
 	 *
-	 * @return the parent category id of this  m b category
+	 * @return the parent category id of this m b category
 	 */
 	public long getParentCategoryId();
 
 	/**
-	 * Sets the parent category id of this  m b category.
+	 * Sets the parent category id of this m b category.
 	 *
-	 * @param parentCategoryId the parent category id of this  m b category
+	 * @param parentCategoryId the parent category id of this m b category
 	 */
 	public void setParentCategoryId(long parentCategoryId);
 
 	/**
-	 * Gets the name of this  m b category.
+	 * Gets the name of this m b category.
 	 *
-	 * @return the name of this  m b category
+	 * @return the name of this m b category
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  m b category.
+	 * Sets the name of this m b category.
 	 *
-	 * @param name the name of this  m b category
+	 * @param name the name of this m b category
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this  m b category.
+	 * Gets the description of this m b category.
 	 *
-	 * @return the description of this  m b category
+	 * @return the description of this m b category
 	 */
 	@AutoEscape
 	public String getDescription();
 
 	/**
-	 * Sets the description of this  m b category.
+	 * Sets the description of this m b category.
 	 *
-	 * @param description the description of this  m b category
+	 * @param description the description of this m b category
 	 */
 	public void setDescription(String description);
 
 	/**
-	 * Gets the thread count of this  m b category.
+	 * Gets the thread count of this m b category.
 	 *
-	 * @return the thread count of this  m b category
+	 * @return the thread count of this m b category
 	 */
 	public int getThreadCount();
 
 	/**
-	 * Sets the thread count of this  m b category.
+	 * Sets the thread count of this m b category.
 	 *
-	 * @param threadCount the thread count of this  m b category
+	 * @param threadCount the thread count of this m b category
 	 */
 	public void setThreadCount(int threadCount);
 
 	/**
-	 * Gets the message count of this  m b category.
+	 * Gets the message count of this m b category.
 	 *
-	 * @return the message count of this  m b category
+	 * @return the message count of this m b category
 	 */
 	public int getMessageCount();
 
 	/**
-	 * Sets the message count of this  m b category.
+	 * Sets the message count of this m b category.
 	 *
-	 * @param messageCount the message count of this  m b category
+	 * @param messageCount the message count of this m b category
 	 */
 	public void setMessageCount(int messageCount);
 
 	/**
-	 * Gets the last post date of this  m b category.
+	 * Gets the last post date of this m b category.
 	 *
-	 * @return the last post date of this  m b category
+	 * @return the last post date of this m b category
 	 */
 	public Date getLastPostDate();
 
 	/**
-	 * Sets the last post date of this  m b category.
+	 * Sets the last post date of this m b category.
 	 *
-	 * @param lastPostDate the last post date of this  m b category
+	 * @param lastPostDate the last post date of this m b category
 	 */
 	public void setLastPostDate(Date lastPostDate);
 
 	/**
-	 * Gets a copy of this  m b category as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this m b category as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

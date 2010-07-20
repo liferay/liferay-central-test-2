@@ -33,7 +33,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  journal template model instance should use the {@link JournalTemplate} interface instead.
+ * Never reference this interface directly. All methods that expect a journal template model instance should use the {@link JournalTemplate} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -44,309 +44,309 @@ import java.util.Date;
  */
 public interface JournalTemplateModel extends BaseModel<JournalTemplate> {
 	/**
-	 * Gets the primary key of this  journal template.
+	 * Gets the primary key of this journal template.
 	 *
-	 * @return the primary key of this  journal template
+	 * @return the primary key of this journal template
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  journal template
+	 * Sets the primary key of this journal template
 	 *
-	 * @param pk the primary key of this  journal template
+	 * @param pk the primary key of this journal template
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the uuid of this  journal template.
+	 * Gets the uuid of this journal template.
 	 *
-	 * @return the uuid of this  journal template
+	 * @return the uuid of this journal template
 	 */
 	@AutoEscape
 	public String getUuid();
 
 	/**
-	 * Sets the uuid of this  journal template.
+	 * Sets the uuid of this journal template.
 	 *
-	 * @param uuid the uuid of this  journal template
+	 * @param uuid the uuid of this journal template
 	 */
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the id of this  journal template.
+	 * Gets the id of this journal template.
 	 *
-	 * @return the id of this  journal template
+	 * @return the id of this journal template
 	 */
 	public long getId();
 
 	/**
-	 * Sets the id of this  journal template.
+	 * Sets the id of this journal template.
 	 *
-	 * @param id the id of this  journal template
+	 * @param id the id of this journal template
 	 */
 	public void setId(long id);
 
 	/**
-	 * Gets the group id of this  journal template.
+	 * Gets the group id of this journal template.
 	 *
-	 * @return the group id of this  journal template
+	 * @return the group id of this journal template
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  journal template.
+	 * Sets the group id of this journal template.
 	 *
-	 * @param groupId the group id of this  journal template
+	 * @param groupId the group id of this journal template
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this  journal template.
+	 * Gets the company id of this journal template.
 	 *
-	 * @return the company id of this  journal template
+	 * @return the company id of this journal template
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  journal template.
+	 * Sets the company id of this journal template.
 	 *
-	 * @param companyId the company id of this  journal template
+	 * @param companyId the company id of this journal template
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  journal template.
+	 * Gets the user id of this journal template.
 	 *
-	 * @return the user id of this  journal template
+	 * @return the user id of this journal template
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  journal template.
+	 * Sets the user id of this journal template.
 	 *
-	 * @param userId the user id of this  journal template
+	 * @param userId the user id of this journal template
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  journal template.
+	 * Gets the user uuid of this journal template.
 	 *
-	 * @return the user uuid of this  journal template
+	 * @return the user uuid of this journal template
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  journal template.
+	 * Sets the user uuid of this journal template.
 	 *
-	 * @param userUuid the user uuid of this  journal template
+	 * @param userUuid the user uuid of this journal template
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this  journal template.
+	 * Gets the user name of this journal template.
 	 *
-	 * @return the user name of this  journal template
+	 * @return the user name of this journal template
 	 */
 	@AutoEscape
 	public String getUserName();
 
 	/**
-	 * Sets the user name of this  journal template.
+	 * Sets the user name of this journal template.
 	 *
-	 * @param userName the user name of this  journal template
+	 * @param userName the user name of this journal template
 	 */
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this  journal template.
+	 * Gets the create date of this journal template.
 	 *
-	 * @return the create date of this  journal template
+	 * @return the create date of this journal template
 	 */
 	public Date getCreateDate();
 
 	/**
-	 * Sets the create date of this  journal template.
+	 * Sets the create date of this journal template.
 	 *
-	 * @param createDate the create date of this  journal template
+	 * @param createDate the create date of this journal template
 	 */
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this  journal template.
+	 * Gets the modified date of this journal template.
 	 *
-	 * @return the modified date of this  journal template
+	 * @return the modified date of this journal template
 	 */
 	public Date getModifiedDate();
 
 	/**
-	 * Sets the modified date of this  journal template.
+	 * Sets the modified date of this journal template.
 	 *
-	 * @param modifiedDate the modified date of this  journal template
+	 * @param modifiedDate the modified date of this journal template
 	 */
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the template id of this  journal template.
+	 * Gets the template id of this journal template.
 	 *
-	 * @return the template id of this  journal template
+	 * @return the template id of this journal template
 	 */
 	public String getTemplateId();
 
 	/**
-	 * Sets the template id of this  journal template.
+	 * Sets the template id of this journal template.
 	 *
-	 * @param templateId the template id of this  journal template
+	 * @param templateId the template id of this journal template
 	 */
 	public void setTemplateId(String templateId);
 
 	/**
-	 * Gets the structure id of this  journal template.
+	 * Gets the structure id of this journal template.
 	 *
-	 * @return the structure id of this  journal template
+	 * @return the structure id of this journal template
 	 */
 	public String getStructureId();
 
 	/**
-	 * Sets the structure id of this  journal template.
+	 * Sets the structure id of this journal template.
 	 *
-	 * @param structureId the structure id of this  journal template
+	 * @param structureId the structure id of this journal template
 	 */
 	public void setStructureId(String structureId);
 
 	/**
-	 * Gets the name of this  journal template.
+	 * Gets the name of this journal template.
 	 *
-	 * @return the name of this  journal template
+	 * @return the name of this journal template
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  journal template.
+	 * Sets the name of this journal template.
 	 *
-	 * @param name the name of this  journal template
+	 * @param name the name of this journal template
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this  journal template.
+	 * Gets the description of this journal template.
 	 *
-	 * @return the description of this  journal template
+	 * @return the description of this journal template
 	 */
 	@AutoEscape
 	public String getDescription();
 
 	/**
-	 * Sets the description of this  journal template.
+	 * Sets the description of this journal template.
 	 *
-	 * @param description the description of this  journal template
+	 * @param description the description of this journal template
 	 */
 	public void setDescription(String description);
 
 	/**
-	 * Gets the xsl of this  journal template.
+	 * Gets the xsl of this journal template.
 	 *
-	 * @return the xsl of this  journal template
+	 * @return the xsl of this journal template
 	 */
 	@AutoEscape
 	public String getXsl();
 
 	/**
-	 * Sets the xsl of this  journal template.
+	 * Sets the xsl of this journal template.
 	 *
-	 * @param xsl the xsl of this  journal template
+	 * @param xsl the xsl of this journal template
 	 */
 	public void setXsl(String xsl);
 
 	/**
-	 * Gets the lang type of this  journal template.
+	 * Gets the lang type of this journal template.
 	 *
-	 * @return the lang type of this  journal template
+	 * @return the lang type of this journal template
 	 */
 	@AutoEscape
 	public String getLangType();
 
 	/**
-	 * Sets the lang type of this  journal template.
+	 * Sets the lang type of this journal template.
 	 *
-	 * @param langType the lang type of this  journal template
+	 * @param langType the lang type of this journal template
 	 */
 	public void setLangType(String langType);
 
 	/**
-	 * Gets the cacheable of this  journal template.
+	 * Gets the cacheable of this journal template.
 	 *
-	 * @return the cacheable of this  journal template
+	 * @return the cacheable of this journal template
 	 */
 	public boolean getCacheable();
 
 	/**
-	 * Determines whether this  journal template is cacheable.
+	 * Determines whether this journal template is cacheable.
 	 *
-	 * @return whether this  journal template is cacheable
+	 * @return whether this journal template is cacheable
 	 */
 	public boolean isCacheable();
 
 	/**
-	 * Sets the cacheable of this  journal template.
+	 * Sets the cacheable of this journal template.
 	 *
-	 * @param cacheable the cacheable of this  journal template
+	 * @param cacheable the cacheable of this journal template
 	 */
 	public void setCacheable(boolean cacheable);
 
 	/**
-	 * Gets the small image of this  journal template.
+	 * Gets the small image of this journal template.
 	 *
-	 * @return the small image of this  journal template
+	 * @return the small image of this journal template
 	 */
 	public boolean getSmallImage();
 
 	/**
-	 * Determines whether this  journal template is small image.
+	 * Determines whether this journal template is small image.
 	 *
-	 * @return whether this  journal template is small image
+	 * @return whether this journal template is small image
 	 */
 	public boolean isSmallImage();
 
 	/**
-	 * Sets the small image of this  journal template.
+	 * Sets the small image of this journal template.
 	 *
-	 * @param smallImage the small image of this  journal template
+	 * @param smallImage the small image of this journal template
 	 */
 	public void setSmallImage(boolean smallImage);
 
 	/**
-	 * Gets the small image id of this  journal template.
+	 * Gets the small image id of this journal template.
 	 *
-	 * @return the small image id of this  journal template
+	 * @return the small image id of this journal template
 	 */
 	public long getSmallImageId();
 
 	/**
-	 * Sets the small image id of this  journal template.
+	 * Sets the small image id of this journal template.
 	 *
-	 * @param smallImageId the small image id of this  journal template
+	 * @param smallImageId the small image id of this journal template
 	 */
 	public void setSmallImageId(long smallImageId);
 
 	/**
-	 * Gets the small image u r l of this  journal template.
+	 * Gets the small image u r l of this journal template.
 	 *
-	 * @return the small image u r l of this  journal template
+	 * @return the small image u r l of this journal template
 	 */
 	@AutoEscape
 	public String getSmallImageURL();
 
 	/**
-	 * Sets the small image u r l of this  journal template.
+	 * Sets the small image u r l of this journal template.
 	 *
-	 * @param smallImageURL the small image u r l of this  journal template
+	 * @param smallImageURL the small image u r l of this journal template
 	 */
 	public void setSmallImageURL(String smallImageURL);
 
 	/**
-	 * Gets a copy of this  journal template as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this journal template as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

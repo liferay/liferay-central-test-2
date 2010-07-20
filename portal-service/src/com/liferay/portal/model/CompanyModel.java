@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  company model instance should use the {@link Company} interface instead.
+ * Never reference this interface directly. All methods that expect a company model instance should use the {@link Company} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,173 +40,173 @@ import java.io.Serializable;
  */
 public interface CompanyModel extends BaseModel<Company> {
 	/**
-	 * Gets the primary key of this  company.
+	 * Gets the primary key of this company.
 	 *
-	 * @return the primary key of this  company
+	 * @return the primary key of this company
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  company
+	 * Sets the primary key of this company
 	 *
-	 * @param pk the primary key of this  company
+	 * @param pk the primary key of this company
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the company id of this  company.
+	 * Gets the company id of this company.
 	 *
-	 * @return the company id of this  company
+	 * @return the company id of this company
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  company.
+	 * Sets the company id of this company.
 	 *
-	 * @param companyId the company id of this  company
+	 * @param companyId the company id of this company
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the account id of this  company.
+	 * Gets the account id of this company.
 	 *
-	 * @return the account id of this  company
+	 * @return the account id of this company
 	 */
 	public long getAccountId();
 
 	/**
-	 * Sets the account id of this  company.
+	 * Sets the account id of this company.
 	 *
-	 * @param accountId the account id of this  company
+	 * @param accountId the account id of this company
 	 */
 	public void setAccountId(long accountId);
 
 	/**
-	 * Gets the web id of this  company.
+	 * Gets the web id of this company.
 	 *
-	 * @return the web id of this  company
+	 * @return the web id of this company
 	 */
 	@AutoEscape
 	public String getWebId();
 
 	/**
-	 * Sets the web id of this  company.
+	 * Sets the web id of this company.
 	 *
-	 * @param webId the web id of this  company
+	 * @param webId the web id of this company
 	 */
 	public void setWebId(String webId);
 
 	/**
-	 * Gets the key of this  company.
+	 * Gets the key of this company.
 	 *
-	 * @return the key of this  company
+	 * @return the key of this company
 	 */
 	@AutoEscape
 	public String getKey();
 
 	/**
-	 * Sets the key of this  company.
+	 * Sets the key of this company.
 	 *
-	 * @param key the key of this  company
+	 * @param key the key of this company
 	 */
 	public void setKey(String key);
 
 	/**
-	 * Gets the virtual host of this  company.
+	 * Gets the virtual host of this company.
 	 *
-	 * @return the virtual host of this  company
+	 * @return the virtual host of this company
 	 */
 	@AutoEscape
 	public String getVirtualHost();
 
 	/**
-	 * Sets the virtual host of this  company.
+	 * Sets the virtual host of this company.
 	 *
-	 * @param virtualHost the virtual host of this  company
+	 * @param virtualHost the virtual host of this company
 	 */
 	public void setVirtualHost(String virtualHost);
 
 	/**
-	 * Gets the mx of this  company.
+	 * Gets the mx of this company.
 	 *
-	 * @return the mx of this  company
+	 * @return the mx of this company
 	 */
 	@AutoEscape
 	public String getMx();
 
 	/**
-	 * Sets the mx of this  company.
+	 * Sets the mx of this company.
 	 *
-	 * @param mx the mx of this  company
+	 * @param mx the mx of this company
 	 */
 	public void setMx(String mx);
 
 	/**
-	 * Gets the home u r l of this  company.
+	 * Gets the home u r l of this company.
 	 *
-	 * @return the home u r l of this  company
+	 * @return the home u r l of this company
 	 */
 	@AutoEscape
 	public String getHomeURL();
 
 	/**
-	 * Sets the home u r l of this  company.
+	 * Sets the home u r l of this company.
 	 *
-	 * @param homeURL the home u r l of this  company
+	 * @param homeURL the home u r l of this company
 	 */
 	public void setHomeURL(String homeURL);
 
 	/**
-	 * Gets the logo id of this  company.
+	 * Gets the logo id of this company.
 	 *
-	 * @return the logo id of this  company
+	 * @return the logo id of this company
 	 */
 	public long getLogoId();
 
 	/**
-	 * Sets the logo id of this  company.
+	 * Sets the logo id of this company.
 	 *
-	 * @param logoId the logo id of this  company
+	 * @param logoId the logo id of this company
 	 */
 	public void setLogoId(long logoId);
 
 	/**
-	 * Gets the system of this  company.
+	 * Gets the system of this company.
 	 *
-	 * @return the system of this  company
+	 * @return the system of this company
 	 */
 	public boolean getSystem();
 
 	/**
-	 * Determines whether this  company is system.
+	 * Determines whether this company is system.
 	 *
-	 * @return whether this  company is system
+	 * @return whether this company is system
 	 */
 	public boolean isSystem();
 
 	/**
-	 * Sets the system of this  company.
+	 * Sets the system of this company.
 	 *
-	 * @param system the system of this  company
+	 * @param system the system of this company
 	 */
 	public void setSystem(boolean system);
 
 	/**
-	 * Gets the max users of this  company.
+	 * Gets the max users of this company.
 	 *
-	 * @return the max users of this  company
+	 * @return the max users of this company
 	 */
 	public int getMaxUsers();
 
 	/**
-	 * Sets the max users of this  company.
+	 * Sets the max users of this company.
 	 *
-	 * @param maxUsers the max users of this  company
+	 * @param maxUsers the max users of this company
 	 */
 	public void setMaxUsers(int maxUsers);
 
 	/**
-	 * Gets a copy of this  company as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this company as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

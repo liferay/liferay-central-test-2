@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  country model instance should use the {@link Country} interface instead.
+ * Never reference this interface directly. All methods that expect a country model instance should use the {@link Country} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,131 +40,131 @@ import java.io.Serializable;
  */
 public interface CountryModel extends BaseModel<Country> {
 	/**
-	 * Gets the primary key of this  country.
+	 * Gets the primary key of this country.
 	 *
-	 * @return the primary key of this  country
+	 * @return the primary key of this country
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  country
+	 * Sets the primary key of this country
 	 *
-	 * @param pk the primary key of this  country
+	 * @param pk the primary key of this country
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the country id of this  country.
+	 * Gets the country id of this country.
 	 *
-	 * @return the country id of this  country
+	 * @return the country id of this country
 	 */
 	public long getCountryId();
 
 	/**
-	 * Sets the country id of this  country.
+	 * Sets the country id of this country.
 	 *
-	 * @param countryId the country id of this  country
+	 * @param countryId the country id of this country
 	 */
 	public void setCountryId(long countryId);
 
 	/**
-	 * Gets the name of this  country.
+	 * Gets the name of this country.
 	 *
-	 * @return the name of this  country
+	 * @return the name of this country
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  country.
+	 * Sets the name of this country.
 	 *
-	 * @param name the name of this  country
+	 * @param name the name of this country
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets the a2 of this  country.
+	 * Gets the a2 of this country.
 	 *
-	 * @return the a2 of this  country
+	 * @return the a2 of this country
 	 */
 	@AutoEscape
 	public String getA2();
 
 	/**
-	 * Sets the a2 of this  country.
+	 * Sets the a2 of this country.
 	 *
-	 * @param a2 the a2 of this  country
+	 * @param a2 the a2 of this country
 	 */
 	public void setA2(String a2);
 
 	/**
-	 * Gets the a3 of this  country.
+	 * Gets the a3 of this country.
 	 *
-	 * @return the a3 of this  country
+	 * @return the a3 of this country
 	 */
 	@AutoEscape
 	public String getA3();
 
 	/**
-	 * Sets the a3 of this  country.
+	 * Sets the a3 of this country.
 	 *
-	 * @param a3 the a3 of this  country
+	 * @param a3 the a3 of this country
 	 */
 	public void setA3(String a3);
 
 	/**
-	 * Gets the number of this  country.
+	 * Gets the number of this country.
 	 *
-	 * @return the number of this  country
+	 * @return the number of this country
 	 */
 	@AutoEscape
 	public String getNumber();
 
 	/**
-	 * Sets the number of this  country.
+	 * Sets the number of this country.
 	 *
-	 * @param number the number of this  country
+	 * @param number the number of this country
 	 */
 	public void setNumber(String number);
 
 	/**
-	 * Gets the idd of this  country.
+	 * Gets the idd of this country.
 	 *
-	 * @return the idd of this  country
+	 * @return the idd of this country
 	 */
 	@AutoEscape
 	public String getIdd();
 
 	/**
-	 * Sets the idd of this  country.
+	 * Sets the idd of this country.
 	 *
-	 * @param idd the idd of this  country
+	 * @param idd the idd of this country
 	 */
 	public void setIdd(String idd);
 
 	/**
-	 * Gets the active of this  country.
+	 * Gets the active of this country.
 	 *
-	 * @return the active of this  country
+	 * @return the active of this country
 	 */
 	public boolean getActive();
 
 	/**
-	 * Determines whether this  country is active.
+	 * Determines whether this country is active.
 	 *
-	 * @return whether this  country is active
+	 * @return whether this country is active
 	 */
 	public boolean isActive();
 
 	/**
-	 * Sets the active of this  country.
+	 * Sets the active of this country.
 	 *
-	 * @param active the active of this  country
+	 * @param active the active of this country
 	 */
 	public void setActive(boolean active);
 
 	/**
-	 * Gets a copy of this  country as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this country as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

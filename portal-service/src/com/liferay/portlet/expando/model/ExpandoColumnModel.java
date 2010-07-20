@@ -28,7 +28,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  expando column model instance should use the {@link ExpandoColumn} interface instead.
+ * Never reference this interface directly. All methods that expect a expando column model instance should use the {@link ExpandoColumn} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -39,122 +39,122 @@ import java.io.Serializable;
  */
 public interface ExpandoColumnModel extends BaseModel<ExpandoColumn> {
 	/**
-	 * Gets the primary key of this  expando column.
+	 * Gets the primary key of this expando column.
 	 *
-	 * @return the primary key of this  expando column
+	 * @return the primary key of this expando column
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  expando column
+	 * Sets the primary key of this expando column
 	 *
-	 * @param pk the primary key of this  expando column
+	 * @param pk the primary key of this expando column
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the column id of this  expando column.
+	 * Gets the column id of this expando column.
 	 *
-	 * @return the column id of this  expando column
+	 * @return the column id of this expando column
 	 */
 	public long getColumnId();
 
 	/**
-	 * Sets the column id of this  expando column.
+	 * Sets the column id of this expando column.
 	 *
-	 * @param columnId the column id of this  expando column
+	 * @param columnId the column id of this expando column
 	 */
 	public void setColumnId(long columnId);
 
 	/**
-	 * Gets the company id of this  expando column.
+	 * Gets the company id of this expando column.
 	 *
-	 * @return the company id of this  expando column
+	 * @return the company id of this expando column
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  expando column.
+	 * Sets the company id of this expando column.
 	 *
-	 * @param companyId the company id of this  expando column
+	 * @param companyId the company id of this expando column
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the table id of this  expando column.
+	 * Gets the table id of this expando column.
 	 *
-	 * @return the table id of this  expando column
+	 * @return the table id of this expando column
 	 */
 	public long getTableId();
 
 	/**
-	 * Sets the table id of this  expando column.
+	 * Sets the table id of this expando column.
 	 *
-	 * @param tableId the table id of this  expando column
+	 * @param tableId the table id of this expando column
 	 */
 	public void setTableId(long tableId);
 
 	/**
-	 * Gets the name of this  expando column.
+	 * Gets the name of this expando column.
 	 *
-	 * @return the name of this  expando column
+	 * @return the name of this expando column
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  expando column.
+	 * Sets the name of this expando column.
 	 *
-	 * @param name the name of this  expando column
+	 * @param name the name of this expando column
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets the type of this  expando column.
+	 * Gets the type of this expando column.
 	 *
-	 * @return the type of this  expando column
+	 * @return the type of this expando column
 	 */
 	public int getType();
 
 	/**
-	 * Sets the type of this  expando column.
+	 * Sets the type of this expando column.
 	 *
-	 * @param type the type of this  expando column
+	 * @param type the type of this expando column
 	 */
 	public void setType(int type);
 
 	/**
-	 * Gets the default data of this  expando column.
+	 * Gets the default data of this expando column.
 	 *
-	 * @return the default data of this  expando column
+	 * @return the default data of this expando column
 	 */
 	@AutoEscape
 	public String getDefaultData();
 
 	/**
-	 * Sets the default data of this  expando column.
+	 * Sets the default data of this expando column.
 	 *
-	 * @param defaultData the default data of this  expando column
+	 * @param defaultData the default data of this expando column
 	 */
 	public void setDefaultData(String defaultData);
 
 	/**
-	 * Gets the type settings of this  expando column.
+	 * Gets the type settings of this expando column.
 	 *
-	 * @return the type settings of this  expando column
+	 * @return the type settings of this expando column
 	 */
 	@AutoEscape
 	public String getTypeSettings();
 
 	/**
-	 * Sets the type settings of this  expando column.
+	 * Sets the type settings of this expando column.
 	 *
-	 * @param typeSettings the type settings of this  expando column
+	 * @param typeSettings the type settings of this expando column
 	 */
 	public void setTypeSettings(String typeSettings);
 
 	/**
-	 * Gets a copy of this  expando column as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this expando column as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

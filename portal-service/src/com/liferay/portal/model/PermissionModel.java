@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  permission model instance should use the {@link Permission} interface instead.
+ * Never reference this interface directly. All methods that expect a permission model instance should use the {@link Permission} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,78 +40,78 @@ import java.io.Serializable;
  */
 public interface PermissionModel extends BaseModel<Permission> {
 	/**
-	 * Gets the primary key of this  permission.
+	 * Gets the primary key of this permission.
 	 *
-	 * @return the primary key of this  permission
+	 * @return the primary key of this permission
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  permission
+	 * Sets the primary key of this permission
 	 *
-	 * @param pk the primary key of this  permission
+	 * @param pk the primary key of this permission
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the permission id of this  permission.
+	 * Gets the permission id of this permission.
 	 *
-	 * @return the permission id of this  permission
+	 * @return the permission id of this permission
 	 */
 	public long getPermissionId();
 
 	/**
-	 * Sets the permission id of this  permission.
+	 * Sets the permission id of this permission.
 	 *
-	 * @param permissionId the permission id of this  permission
+	 * @param permissionId the permission id of this permission
 	 */
 	public void setPermissionId(long permissionId);
 
 	/**
-	 * Gets the company id of this  permission.
+	 * Gets the company id of this permission.
 	 *
-	 * @return the company id of this  permission
+	 * @return the company id of this permission
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  permission.
+	 * Sets the company id of this permission.
 	 *
-	 * @param companyId the company id of this  permission
+	 * @param companyId the company id of this permission
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the action id of this  permission.
+	 * Gets the action id of this permission.
 	 *
-	 * @return the action id of this  permission
+	 * @return the action id of this permission
 	 */
 	@AutoEscape
 	public String getActionId();
 
 	/**
-	 * Sets the action id of this  permission.
+	 * Sets the action id of this permission.
 	 *
-	 * @param actionId the action id of this  permission
+	 * @param actionId the action id of this permission
 	 */
 	public void setActionId(String actionId);
 
 	/**
-	 * Gets the resource id of this  permission.
+	 * Gets the resource id of this permission.
 	 *
-	 * @return the resource id of this  permission
+	 * @return the resource id of this permission
 	 */
 	public long getResourceId();
 
 	/**
-	 * Sets the resource id of this  permission.
+	 * Sets the resource id of this permission.
 	 *
-	 * @param resourceId the resource id of this  permission
+	 * @param resourceId the resource id of this permission
 	 */
 	public void setResourceId(long resourceId);
 
 	/**
-	 * Gets a copy of this  permission as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this permission as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

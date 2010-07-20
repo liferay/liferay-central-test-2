@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  org group permission model instance should use the {@link OrgGroupPermission} interface instead.
+ * Never reference this interface directly. All methods that expect a org group permission model instance should use the {@link OrgGroupPermission} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,63 +40,63 @@ import java.io.Serializable;
  */
 public interface OrgGroupPermissionModel extends BaseModel<OrgGroupPermission> {
 	/**
-	 * Gets the primary key of this  org group permission.
+	 * Gets the primary key of this org group permission.
 	 *
-	 * @return the primary key of this  org group permission
+	 * @return the primary key of this org group permission
 	 */
 	public OrgGroupPermissionPK getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  org group permission
+	 * Sets the primary key of this org group permission
 	 *
-	 * @param pk the primary key of this  org group permission
+	 * @param pk the primary key of this org group permission
 	 */
 	public void setPrimaryKey(OrgGroupPermissionPK pk);
 
 	/**
-	 * Gets the organization id of this  org group permission.
+	 * Gets the organization id of this org group permission.
 	 *
-	 * @return the organization id of this  org group permission
+	 * @return the organization id of this org group permission
 	 */
 	public long getOrganizationId();
 
 	/**
-	 * Sets the organization id of this  org group permission.
+	 * Sets the organization id of this org group permission.
 	 *
-	 * @param organizationId the organization id of this  org group permission
+	 * @param organizationId the organization id of this org group permission
 	 */
 	public void setOrganizationId(long organizationId);
 
 	/**
-	 * Gets the group id of this  org group permission.
+	 * Gets the group id of this org group permission.
 	 *
-	 * @return the group id of this  org group permission
+	 * @return the group id of this org group permission
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  org group permission.
+	 * Sets the group id of this org group permission.
 	 *
-	 * @param groupId the group id of this  org group permission
+	 * @param groupId the group id of this org group permission
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the permission id of this  org group permission.
+	 * Gets the permission id of this org group permission.
 	 *
-	 * @return the permission id of this  org group permission
+	 * @return the permission id of this org group permission
 	 */
 	public long getPermissionId();
 
 	/**
-	 * Sets the permission id of this  org group permission.
+	 * Sets the permission id of this org group permission.
 	 *
-	 * @param permissionId the permission id of this  org group permission
+	 * @param permissionId the permission id of this org group permission
 	 */
 	public void setPermissionId(long permissionId);
 
 	/**
-	 * Gets a copy of this  org group permission as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this org group permission as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

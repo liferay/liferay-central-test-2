@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  class name model instance should use the {@link ClassName} interface instead.
+ * Never reference this interface directly. All methods that expect a class name model instance should use the {@link ClassName} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,57 +40,57 @@ import java.io.Serializable;
  */
 public interface ClassNameModel extends BaseModel<ClassName> {
 	/**
-	 * Gets the primary key of this  class name.
+	 * Gets the primary key of this class name.
 	 *
-	 * @return the primary key of this  class name
+	 * @return the primary key of this class name
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  class name
+	 * Sets the primary key of this class name
 	 *
-	 * @param pk the primary key of this  class name
+	 * @param pk the primary key of this class name
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the class name of the model instance this  class name is associated with.
+	 * Gets the class name of the model instance this class name is associated with.
 	 *
-	 * @return the class name of the model instance this  class name is associated with
+	 * @return the class name of the model instance this class name is associated with
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this  class name.
+	 * Gets the class name id of this class name.
 	 *
-	 * @return the class name id of this  class name
+	 * @return the class name id of this class name
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this  class name.
+	 * Sets the class name id of this class name.
 	 *
-	 * @param classNameId the class name id of this  class name
+	 * @param classNameId the class name id of this class name
 	 */
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the value of this  class name.
+	 * Gets the value of this class name.
 	 *
-	 * @return the value of this  class name
+	 * @return the value of this class name
 	 */
 	@AutoEscape
 	public String getValue();
 
 	/**
-	 * Sets the value of this  class name.
+	 * Sets the value of this class name.
 	 *
-	 * @param value the value of this  class name
+	 * @param value the value of this class name
 	 */
 	public void setValue(String value);
 
 	/**
-	 * Gets a copy of this  class name as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this class name as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

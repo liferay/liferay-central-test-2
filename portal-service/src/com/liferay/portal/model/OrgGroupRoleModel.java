@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  org group role model instance should use the {@link OrgGroupRole} interface instead.
+ * Never reference this interface directly. All methods that expect a org group role model instance should use the {@link OrgGroupRole} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,63 +40,63 @@ import java.io.Serializable;
  */
 public interface OrgGroupRoleModel extends BaseModel<OrgGroupRole> {
 	/**
-	 * Gets the primary key of this  org group role.
+	 * Gets the primary key of this org group role.
 	 *
-	 * @return the primary key of this  org group role
+	 * @return the primary key of this org group role
 	 */
 	public OrgGroupRolePK getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  org group role
+	 * Sets the primary key of this org group role
 	 *
-	 * @param pk the primary key of this  org group role
+	 * @param pk the primary key of this org group role
 	 */
 	public void setPrimaryKey(OrgGroupRolePK pk);
 
 	/**
-	 * Gets the organization id of this  org group role.
+	 * Gets the organization id of this org group role.
 	 *
-	 * @return the organization id of this  org group role
+	 * @return the organization id of this org group role
 	 */
 	public long getOrganizationId();
 
 	/**
-	 * Sets the organization id of this  org group role.
+	 * Sets the organization id of this org group role.
 	 *
-	 * @param organizationId the organization id of this  org group role
+	 * @param organizationId the organization id of this org group role
 	 */
 	public void setOrganizationId(long organizationId);
 
 	/**
-	 * Gets the group id of this  org group role.
+	 * Gets the group id of this org group role.
 	 *
-	 * @return the group id of this  org group role
+	 * @return the group id of this org group role
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this  org group role.
+	 * Sets the group id of this org group role.
 	 *
-	 * @param groupId the group id of this  org group role
+	 * @param groupId the group id of this org group role
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the role id of this  org group role.
+	 * Gets the role id of this org group role.
 	 *
-	 * @return the role id of this  org group role
+	 * @return the role id of this org group role
 	 */
 	public long getRoleId();
 
 	/**
-	 * Sets the role id of this  org group role.
+	 * Sets the role id of this org group role.
 	 *
-	 * @param roleId the role id of this  org group role
+	 * @param roleId the role id of this org group role
 	 */
 	public void setRoleId(long roleId);
 
 	/**
-	 * Gets a copy of this  org group role as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this org group role as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

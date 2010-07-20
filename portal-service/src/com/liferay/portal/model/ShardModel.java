@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  shard model instance should use the {@link Shard} interface instead.
+ * Never reference this interface directly. All methods that expect a shard model instance should use the {@link Shard} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,85 +40,85 @@ import java.io.Serializable;
  */
 public interface ShardModel extends BaseModel<Shard> {
 	/**
-	 * Gets the primary key of this  shard.
+	 * Gets the primary key of this shard.
 	 *
-	 * @return the primary key of this  shard
+	 * @return the primary key of this shard
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  shard
+	 * Sets the primary key of this shard
 	 *
-	 * @param pk the primary key of this  shard
+	 * @param pk the primary key of this shard
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the shard id of this  shard.
+	 * Gets the shard id of this shard.
 	 *
-	 * @return the shard id of this  shard
+	 * @return the shard id of this shard
 	 */
 	public long getShardId();
 
 	/**
-	 * Sets the shard id of this  shard.
+	 * Sets the shard id of this shard.
 	 *
-	 * @param shardId the shard id of this  shard
+	 * @param shardId the shard id of this shard
 	 */
 	public void setShardId(long shardId);
 
 	/**
-	 * Gets the class name of the model instance this  shard is associated with.
+	 * Gets the class name of the model instance this shard is associated with.
 	 *
-	 * @return the class name of the model instance this  shard is associated with
+	 * @return the class name of the model instance this shard is associated with
 	 */
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this  shard.
+	 * Gets the class name id of this shard.
 	 *
-	 * @return the class name id of this  shard
+	 * @return the class name id of this shard
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this  shard.
+	 * Sets the class name id of this shard.
 	 *
-	 * @param classNameId the class name id of this  shard
+	 * @param classNameId the class name id of this shard
 	 */
 	public void setClassNameId(long classNameId);
 
 	/**
-	 * Gets the class p k of this  shard.
+	 * Gets the class p k of this shard.
 	 *
-	 * @return the class p k of this  shard
+	 * @return the class p k of this shard
 	 */
 	public long getClassPK();
 
 	/**
-	 * Sets the class p k of this  shard.
+	 * Sets the class p k of this shard.
 	 *
-	 * @param classPK the class p k of this  shard
+	 * @param classPK the class p k of this shard
 	 */
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the name of this  shard.
+	 * Gets the name of this shard.
 	 *
-	 * @return the name of this  shard
+	 * @return the name of this shard
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  shard.
+	 * Sets the name of this shard.
 	 *
-	 * @param name the name of this  shard
+	 * @param name the name of this shard
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets a copy of this  shard as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this shard as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

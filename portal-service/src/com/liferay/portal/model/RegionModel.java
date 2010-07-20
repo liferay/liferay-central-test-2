@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  region model instance should use the {@link Region} interface instead.
+ * Never reference this interface directly. All methods that expect a region model instance should use the {@link Region} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,100 +40,100 @@ import java.io.Serializable;
  */
 public interface RegionModel extends BaseModel<Region> {
 	/**
-	 * Gets the primary key of this  region.
+	 * Gets the primary key of this region.
 	 *
-	 * @return the primary key of this  region
+	 * @return the primary key of this region
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  region
+	 * Sets the primary key of this region
 	 *
-	 * @param pk the primary key of this  region
+	 * @param pk the primary key of this region
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the region id of this  region.
+	 * Gets the region id of this region.
 	 *
-	 * @return the region id of this  region
+	 * @return the region id of this region
 	 */
 	public long getRegionId();
 
 	/**
-	 * Sets the region id of this  region.
+	 * Sets the region id of this region.
 	 *
-	 * @param regionId the region id of this  region
+	 * @param regionId the region id of this region
 	 */
 	public void setRegionId(long regionId);
 
 	/**
-	 * Gets the country id of this  region.
+	 * Gets the country id of this region.
 	 *
-	 * @return the country id of this  region
+	 * @return the country id of this region
 	 */
 	public long getCountryId();
 
 	/**
-	 * Sets the country id of this  region.
+	 * Sets the country id of this region.
 	 *
-	 * @param countryId the country id of this  region
+	 * @param countryId the country id of this region
 	 */
 	public void setCountryId(long countryId);
 
 	/**
-	 * Gets the region code of this  region.
+	 * Gets the region code of this region.
 	 *
-	 * @return the region code of this  region
+	 * @return the region code of this region
 	 */
 	@AutoEscape
 	public String getRegionCode();
 
 	/**
-	 * Sets the region code of this  region.
+	 * Sets the region code of this region.
 	 *
-	 * @param regionCode the region code of this  region
+	 * @param regionCode the region code of this region
 	 */
 	public void setRegionCode(String regionCode);
 
 	/**
-	 * Gets the name of this  region.
+	 * Gets the name of this region.
 	 *
-	 * @return the name of this  region
+	 * @return the name of this region
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  region.
+	 * Sets the name of this region.
 	 *
-	 * @param name the name of this  region
+	 * @param name the name of this region
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets the active of this  region.
+	 * Gets the active of this region.
 	 *
-	 * @return the active of this  region
+	 * @return the active of this region
 	 */
 	public boolean getActive();
 
 	/**
-	 * Determines whether this  region is active.
+	 * Determines whether this region is active.
 	 *
-	 * @return whether this  region is active
+	 * @return whether this region is active
 	 */
 	public boolean isActive();
 
 	/**
-	 * Sets the active of this  region.
+	 * Sets the active of this region.
 	 *
-	 * @param active the active of this  region
+	 * @param active the active of this region
 	 */
 	public void setActive(boolean active);
 
 	/**
-	 * Gets a copy of this  region as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this region as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

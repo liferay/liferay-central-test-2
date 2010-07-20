@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  user group model instance should use the {@link UserGroup} interface instead.
+ * Never reference this interface directly. All methods that expect a user group model instance should use the {@link UserGroup} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -40,93 +40,93 @@ import java.io.Serializable;
  */
 public interface UserGroupModel extends BaseModel<UserGroup> {
 	/**
-	 * Gets the primary key of this  user group.
+	 * Gets the primary key of this user group.
 	 *
-	 * @return the primary key of this  user group
+	 * @return the primary key of this user group
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  user group
+	 * Sets the primary key of this user group
 	 *
-	 * @param pk the primary key of this  user group
+	 * @param pk the primary key of this user group
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the user group id of this  user group.
+	 * Gets the user group id of this user group.
 	 *
-	 * @return the user group id of this  user group
+	 * @return the user group id of this user group
 	 */
 	public long getUserGroupId();
 
 	/**
-	 * Sets the user group id of this  user group.
+	 * Sets the user group id of this user group.
 	 *
-	 * @param userGroupId the user group id of this  user group
+	 * @param userGroupId the user group id of this user group
 	 */
 	public void setUserGroupId(long userGroupId);
 
 	/**
-	 * Gets the company id of this  user group.
+	 * Gets the company id of this user group.
 	 *
-	 * @return the company id of this  user group
+	 * @return the company id of this user group
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  user group.
+	 * Sets the company id of this user group.
 	 *
-	 * @param companyId the company id of this  user group
+	 * @param companyId the company id of this user group
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the parent user group id of this  user group.
+	 * Gets the parent user group id of this user group.
 	 *
-	 * @return the parent user group id of this  user group
+	 * @return the parent user group id of this user group
 	 */
 	public long getParentUserGroupId();
 
 	/**
-	 * Sets the parent user group id of this  user group.
+	 * Sets the parent user group id of this user group.
 	 *
-	 * @param parentUserGroupId the parent user group id of this  user group
+	 * @param parentUserGroupId the parent user group id of this user group
 	 */
 	public void setParentUserGroupId(long parentUserGroupId);
 
 	/**
-	 * Gets the name of this  user group.
+	 * Gets the name of this user group.
 	 *
-	 * @return the name of this  user group
+	 * @return the name of this user group
 	 */
 	@AutoEscape
 	public String getName();
 
 	/**
-	 * Sets the name of this  user group.
+	 * Sets the name of this user group.
 	 *
-	 * @param name the name of this  user group
+	 * @param name the name of this user group
 	 */
 	public void setName(String name);
 
 	/**
-	 * Gets the description of this  user group.
+	 * Gets the description of this user group.
 	 *
-	 * @return the description of this  user group
+	 * @return the description of this user group
 	 */
 	@AutoEscape
 	public String getDescription();
 
 	/**
-	 * Sets the description of this  user group.
+	 * Sets the description of this user group.
 	 *
-	 * @param description the description of this  user group
+	 * @param description the description of this user group
 	 */
 	public void setDescription(String description);
 
 	/**
-	 * Gets a copy of this  user group as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this user group as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler

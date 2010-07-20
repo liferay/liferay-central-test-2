@@ -33,7 +33,7 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a  asset category property model instance should use the {@link AssetCategoryProperty} interface instead.
+ * Never reference this interface directly. All methods that expect a asset category property model instance should use the {@link AssetCategoryProperty} interface instead.
  * </p>
  *
  * @author    Brian Wing Shun Chan
@@ -44,165 +44,165 @@ import java.util.Date;
  */
 public interface AssetCategoryPropertyModel extends BaseModel<AssetCategoryProperty> {
 	/**
-	 * Gets the primary key of this  asset category property.
+	 * Gets the primary key of this asset category property.
 	 *
-	 * @return the primary key of this  asset category property
+	 * @return the primary key of this asset category property
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this  asset category property
+	 * Sets the primary key of this asset category property
 	 *
-	 * @param pk the primary key of this  asset category property
+	 * @param pk the primary key of this asset category property
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the category property id of this  asset category property.
+	 * Gets the category property id of this asset category property.
 	 *
-	 * @return the category property id of this  asset category property
+	 * @return the category property id of this asset category property
 	 */
 	public long getCategoryPropertyId();
 
 	/**
-	 * Sets the category property id of this  asset category property.
+	 * Sets the category property id of this asset category property.
 	 *
-	 * @param categoryPropertyId the category property id of this  asset category property
+	 * @param categoryPropertyId the category property id of this asset category property
 	 */
 	public void setCategoryPropertyId(long categoryPropertyId);
 
 	/**
-	 * Gets the company id of this  asset category property.
+	 * Gets the company id of this asset category property.
 	 *
-	 * @return the company id of this  asset category property
+	 * @return the company id of this asset category property
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this  asset category property.
+	 * Sets the company id of this asset category property.
 	 *
-	 * @param companyId the company id of this  asset category property
+	 * @param companyId the company id of this asset category property
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this  asset category property.
+	 * Gets the user id of this asset category property.
 	 *
-	 * @return the user id of this  asset category property
+	 * @return the user id of this asset category property
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this  asset category property.
+	 * Sets the user id of this asset category property.
 	 *
-	 * @param userId the user id of this  asset category property
+	 * @param userId the user id of this asset category property
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this  asset category property.
+	 * Gets the user uuid of this asset category property.
 	 *
-	 * @return the user uuid of this  asset category property
+	 * @return the user uuid of this asset category property
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this  asset category property.
+	 * Sets the user uuid of this asset category property.
 	 *
-	 * @param userUuid the user uuid of this  asset category property
+	 * @param userUuid the user uuid of this asset category property
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the user name of this  asset category property.
+	 * Gets the user name of this asset category property.
 	 *
-	 * @return the user name of this  asset category property
+	 * @return the user name of this asset category property
 	 */
 	@AutoEscape
 	public String getUserName();
 
 	/**
-	 * Sets the user name of this  asset category property.
+	 * Sets the user name of this asset category property.
 	 *
-	 * @param userName the user name of this  asset category property
+	 * @param userName the user name of this asset category property
 	 */
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the create date of this  asset category property.
+	 * Gets the create date of this asset category property.
 	 *
-	 * @return the create date of this  asset category property
+	 * @return the create date of this asset category property
 	 */
 	public Date getCreateDate();
 
 	/**
-	 * Sets the create date of this  asset category property.
+	 * Sets the create date of this asset category property.
 	 *
-	 * @param createDate the create date of this  asset category property
+	 * @param createDate the create date of this asset category property
 	 */
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the modified date of this  asset category property.
+	 * Gets the modified date of this asset category property.
 	 *
-	 * @return the modified date of this  asset category property
+	 * @return the modified date of this asset category property
 	 */
 	public Date getModifiedDate();
 
 	/**
-	 * Sets the modified date of this  asset category property.
+	 * Sets the modified date of this asset category property.
 	 *
-	 * @param modifiedDate the modified date of this  asset category property
+	 * @param modifiedDate the modified date of this asset category property
 	 */
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the category id of this  asset category property.
+	 * Gets the category id of this asset category property.
 	 *
-	 * @return the category id of this  asset category property
+	 * @return the category id of this asset category property
 	 */
 	public long getCategoryId();
 
 	/**
-	 * Sets the category id of this  asset category property.
+	 * Sets the category id of this asset category property.
 	 *
-	 * @param categoryId the category id of this  asset category property
+	 * @param categoryId the category id of this asset category property
 	 */
 	public void setCategoryId(long categoryId);
 
 	/**
-	 * Gets the key of this  asset category property.
+	 * Gets the key of this asset category property.
 	 *
-	 * @return the key of this  asset category property
+	 * @return the key of this asset category property
 	 */
 	@AutoEscape
 	public String getKey();
 
 	/**
-	 * Sets the key of this  asset category property.
+	 * Sets the key of this asset category property.
 	 *
-	 * @param key the key of this  asset category property
+	 * @param key the key of this asset category property
 	 */
 	public void setKey(String key);
 
 	/**
-	 * Gets the value of this  asset category property.
+	 * Gets the value of this asset category property.
 	 *
-	 * @return the value of this  asset category property
+	 * @return the value of this asset category property
 	 */
 	@AutoEscape
 	public String getValue();
 
 	/**
-	 * Sets the value of this  asset category property.
+	 * Sets the value of this asset category property.
 	 *
-	 * @param value the value of this  asset category property
+	 * @param value the value of this asset category property
 	 */
 	public void setValue(String value);
 
 	/**
-	 * Gets a copy of this  asset category property as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 * Gets a copy of this asset category property as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
 	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
