@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -41,66 +40,72 @@ public class WeakValueConcurrentHashMap<K, V>
 	implements ConcurrentMap<K, V>, Serializable {
 
 	public WeakValueConcurrentHashMap() {
-		_backedMap = new ConcurrentHashMap<K, Reference<V>>();
+		_map = new ConcurrentHashMap<K, Reference<V>>();
 	}
 
 	public WeakValueConcurrentHashMap(int initialCapacity) {
-		_backedMap = new ConcurrentHashMap<K, Reference<V>>(initialCapacity);
+		_map = new ConcurrentHashMap<K, Reference<V>>(initialCapacity);
 	}
 
 	public WeakValueConcurrentHashMap(
 		int initialCapacity, float loadFactor, int concurrencyLevel) {
-		_backedMap = new ConcurrentHashMap<K, Reference<V>>(
+		_map = new ConcurrentHashMap<K, Reference<V>>(
 			initialCapacity, loadFactor, concurrencyLevel);
 	}
 
 	public WeakValueConcurrentHashMap(Map<? extends K, ? extends V> map) {
-		_backedMap = new ConcurrentHashMap<K, Reference<V>>();
+		_map = new ConcurrentHashMap<K, Reference<V>>();
+
 		putAll(map);
 	}
 
 	public void clear() {
-		_backedMap.clear();
+		_map.clear();
 	}
 
 	public boolean containsKey(Object key) {
-		return _backedMap.containsKey(key);
+		return _map.containsKey(key);
 	}
 
 	public boolean containsValue(Object value) {
-		return _backedMap.containsValue(
-			new EqualityWeakReference<V>((V) value));
+		return _map.containsValue(new EqualityWeakReference<V>((V)value));
 	}
 
 	public Set<Entry<K, V>> entrySet() {
 		if (_entrySet == null) {
 			_entrySet = new UnwrapEntrySet();
 		}
+
 		return _entrySet;
 	}
 
 	public V get(Object key) {
-		Reference<V> valueReference = _backedMap.get(key);
+		Reference<V> valueReference = _map.get(key);
+
 		if (valueReference != null) {
 			return valueReference.get();
 		}
+
 		return null;
 	}
 
 	public boolean isEmpty() {
-		return _backedMap.isEmpty();
+		return _map.isEmpty();
 	}
 
 	public Set<K> keySet() {
-		return _backedMap.keySet();
+		return _map.keySet();
 	}
 
 	public V put(K key, V value) {
 		Reference<V> valueReference = wrapValue(key, value);
-		valueReference = _backedMap.putIfAbsent(key, valueReference);
+
+		valueReference = _map.putIfAbsent(key, valueReference);
+
 		if (valueReference != null) {
 			return valueReference.get();
 		}
+
 		return null;
 	}
 
@@ -108,50 +113,62 @@ public class WeakValueConcurrentHashMap<K, V>
 		for (Map.Entry<? extends K, ? extends V> entry : map.entrySet()) {
 			K key = entry.getKey();
 			V value = entry.getValue();
+
 			Reference<V> valueReference = wrapValue(key, value);
-			_backedMap.put(key, valueReference);
+
+			_map.put(key, valueReference);
 		}
 	}
 
 	public V putIfAbsent(K key, V value) {
 		Reference<V> valueReference = wrapValue(key, value);
-		valueReference = _backedMap.putIfAbsent(key, valueReference);
+
+		valueReference = _map.putIfAbsent(key, valueReference);
+
 		if (valueReference != null) {
 			return valueReference.get();
 		}
+
 		return null;
 	}
 
 	public V remove(Object key) {
-		Reference<V> valueReference = _backedMap.remove(key);
+		Reference<V> valueReference = _map.remove(key);
+
 		if (valueReference != null) {
 			valueReference.get();
 		}
+
 		return null;
 	}
 
 	public boolean remove(Object key, Object value) {
 		Reference<V> valueReference = wrapValue(key, value);
-		return _backedMap.remove(key, valueReference);
+
+		return _map.remove(key, valueReference);
 	}
 
 	public V replace(K key, V value) {
 		Reference<V> valueReference = wrapValue(key, value);
-		valueReference = _backedMap.replace(key, valueReference);
+
+		valueReference = _map.replace(key, valueReference);
+
 		if (valueReference != null) {
 			return valueReference.get();
 		}
+
 		return null;
 	}
 
 	public boolean replace(K key, V oldValue, V newValue) {
 		Reference<V> oldValueReference = wrapValue(key, oldValue);
 		Reference<V> newValueReference = wrapValue(key, newValue);
-		return _backedMap.replace(key, oldValueReference, newValueReference);
+
+		return _map.replace(key, oldValueReference, newValueReference);
 	}
 
 	public int size() {
-		return _backedMap.size();
+		return _map.size();
 	}
 
 	public Collection<V> values() {
@@ -162,9 +179,13 @@ public class WeakValueConcurrentHashMap<K, V>
 	}
 
 	protected Reference<V> wrapValue(Object key, Object value) {
-		return FinalizeManager.register((V) value,
-			new RemoveEntryFinalizeAction((K) key));
+		return FinalizeManager.register(
+			(V)value, new RemoveEntryFinalizeAction((K) key));
 	}
+
+	private transient Set<Map.Entry<K, V>> _entrySet;
+	private final ConcurrentMap<K, Reference<V>> _map;
+	private transient Collection<V> _values;
 
 	private class RemoveEntryFinalizeAction implements FinalizeAction {
 
@@ -175,7 +196,9 @@ public class WeakValueConcurrentHashMap<K, V>
 		public void doFinalize() {
 			remove(_key);
 		}
+
 		private final K _key;
+
 	}
 
 	private class UnwrapEntry implements Map.Entry<K, V> {
@@ -190,22 +213,26 @@ public class WeakValueConcurrentHashMap<K, V>
 
 		public V getValue() {
 			Reference<V> valueReference = _entry.getValue();
+
 			if (valueReference != null) {
 				return valueReference.get();
 			}
+
 			return null;
 		}
 
 		public V setValue(V value) {
 			return WeakValueConcurrentHashMap.this.put(_entry.getKey(), value);
 		}
+
 		private Map.Entry<K, Reference<V>> _entry;
+
 	}
 
 	private class UnwrapEntryIterator implements Iterator<Map.Entry<K, V>> {
 
 		public UnwrapEntryIterator() {
-			_iterator = _backedMap.entrySet().iterator();
+			_iterator = _map.entrySet().iterator();
 		}
 
 		public boolean hasNext() {
@@ -219,7 +246,9 @@ public class WeakValueConcurrentHashMap<K, V>
 		public void remove() {
 			_iterator.remove();
 		}
+
 		private Iterator<Map.Entry<K, Reference<V>>> _iterator;
+
 	}
 
 	private class UnwrapEntrySet extends AbstractSet<Map.Entry<K, V>> {
@@ -229,12 +258,20 @@ public class WeakValueConcurrentHashMap<K, V>
 		}
 
 		public boolean contains(Object obj) {
-			if (!(obj instanceof Map.Entry)) {
+			if (!(obj instanceof Map.Entry<?, ?>)) {
 				return false;
 			}
-			Map.Entry<K, V> entry = (Map.Entry<K, V>) obj;
+
+			Map.Entry<K, V> entry = (Map.Entry<K, V>)obj;
+
 			V value = WeakValueConcurrentHashMap.this.get(entry.getKey());
-			return value != null && value.equals(entry.getValue());
+
+			if ((value != null) && value.equals(entry.getValue())) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 
 		public Iterator<Map.Entry<K, V>> iterator() {
@@ -242,12 +279,14 @@ public class WeakValueConcurrentHashMap<K, V>
 		}
 
 		public boolean remove(Object obj) {
-			if (!(obj instanceof Map.Entry)) {
+			if (!(obj instanceof Map.Entry<?, ?>)) {
 				return false;
 			}
-			Map.Entry<K, V> entry = (Map.Entry<K, V>) obj;
+
+			Map.Entry<K, V> entry = (Map.Entry<K, V>)obj;
+
 			return WeakValueConcurrentHashMap.this.remove(
-					entry.getKey(), entry.getValue());
+				entry.getKey(), entry.getValue());
 		}
 
 		public int size() {
@@ -256,27 +295,34 @@ public class WeakValueConcurrentHashMap<K, V>
 
 		public Object[] toArray() {
 			List<Map.Entry<K, V>> list = new ArrayList<Map.Entry<K, V>>(size());
+
 			Iterator<Map.Entry<K, V>> iterator = iterator();
+
 			while (iterator.hasNext()) {
 				list.add(iterator.next());
 			}
+
 			return list.toArray();
 		}
 
 		public <T> T[] toArray(T[] array) {
 			List<Map.Entry<K, V>> list = new ArrayList<Map.Entry<K, V>>(size());
+
 			Iterator<Map.Entry<K, V>> iterator = iterator();
+
 			while (iterator.hasNext()) {
 				list.add(iterator.next());
 			}
+
 			return list.toArray(array);
 		}
+
 	}
 
 	private class UnwrapValueIterator implements Iterator<V> {
 
 		public UnwrapValueIterator() {
-			_iterator = _backedMap.values().iterator();
+			_iterator = _map.values().iterator();
 		}
 
 		public boolean hasNext() {
@@ -285,9 +331,11 @@ public class WeakValueConcurrentHashMap<K, V>
 
 		public V next() {
 			Reference<V> valueReference = _iterator.next();
+
 			if (valueReference != null) {
 				return valueReference.get();
 			}
+
 			return null;
 		}
 
@@ -296,9 +344,18 @@ public class WeakValueConcurrentHashMap<K, V>
 		}
 
 		private Iterator<Reference<V>> _iterator;
+
 	}
 
 	private class UnwrapValues extends AbstractCollection<V> {
+
+		public void clear() {
+			WeakValueConcurrentHashMap.this.clear();
+		}
+
+		public boolean contains(Object obj) {
+			return WeakValueConcurrentHashMap.this.containsValue(obj);
+		}
 
 		public Iterator<V> iterator() {
 			return new UnwrapValueIterator();
@@ -308,35 +365,30 @@ public class WeakValueConcurrentHashMap<K, V>
 			return WeakValueConcurrentHashMap.this.size();
 		}
 
-		public boolean contains(Object obj) {
-			return WeakValueConcurrentHashMap.this.containsValue(obj);
-		}
-
-		public void clear() {
-			WeakValueConcurrentHashMap.this.clear();
-		}
-
 		public Object[] toArray() {
 			List<V> list = new ArrayList<V>();
+
 			Iterator<V> iterator = iterator();
+
 			while (iterator.hasNext()) {
 				list.add(iterator.next());
 			}
+
 			return list.toArray();
 		}
 
 		public <T> T[] toArray(T[] a) {
 			List<V> list = new ArrayList<V>();
+
 			Iterator<V> iterator = iterator();
+
 			while (iterator.hasNext()) {
 				list.add(iterator.next());
 			}
+
 			return list.toArray(a);
 		}
-	}
 
-	private final ConcurrentMap<K, Reference<V>> _backedMap;
-	private transient Collection<V> _values;
-	private transient Set<Map.Entry<K, V>> _entrySet;
+	}
 
 }
