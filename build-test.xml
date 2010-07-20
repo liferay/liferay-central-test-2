@@ -253,8 +253,8 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="control-panel-organization" />
-			<param name="test.ant.script.suite" value="ControlPanelOrganizationTestSuite" />
+			<param name="test.ant.script.command" value="control-panel-organizations" />
+			<param name="test.ant.script.suite" value="ControlPanelOrganizationsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
