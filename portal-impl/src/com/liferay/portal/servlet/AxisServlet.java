@@ -123,12 +123,12 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 
 			String content = stringResponse.getString();
 
-			if (contentType.contains(ContentTypes.TEXT_XML)) {
-				content = fixXml(content);
+			if (contentType.contains(ContentTypes.TEXT_HTML)) {
+				content = _HTML_TOP_WRAPPER.concat(content).concat(
+					_HTML_BOTTOM_WRAPPER);
 			}
-			else if (contentType.contains(ContentTypes.TEXT_HTML)) {
-				content =
-					"<html><body>".concat(content).concat("</body></html>");
+			else if (contentType.contains(ContentTypes.TEXT_XML)) {
+				content = fixXml(content);
 			}
 
 			ServletResponseUtil.write(
@@ -169,25 +169,29 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 		return xml;
 	}
 
-	private static final String _INCORRECT_LONG_ARRAY =
-		"<complexType name=\"ArrayOf_xsd_long\"><simpleContent><extension/>" +
-			"</simpleContent></complexType>";
-
 	private static final String _CORRECT_LONG_ARRAY =
 		"<complexType name=\"ArrayOf_xsd_long\"><complexContent>" +
 			"<restriction base=\"soapenc:Array\"><attribute ref=\"soapenc:" +
 				"arrayType\" wsdl:arrayType=\"soapenc:long[]\"/>" +
 					"</restriction></complexContent></complexType>";
 
-	private static final String _INCORRECT_STRING_ARRAY =
-		"<complexType name=\"ArrayOf_xsd_string\"><simpleContent><extension/>" +
-			"</simpleContent></complexType>";
-
 	private static final String _CORRECT_STRING_ARRAY =
 		"<complexType name=\"ArrayOf_xsd_string\"><complexContent>" +
 			"<restriction base=\"soapenc:Array\"><attribute ref=\"soapenc:" +
 				"arrayType\" wsdl:arrayType=\"soapenc:string[]\"/>" +
 					"</restriction></complexContent></complexType>";
+
+	private static final String _HTML_BOTTOM_WRAPPER = "</body></html>";
+
+	private static final String _HTML_TOP_WRAPPER = "<html><body>";
+
+	private static final String _INCORRECT_LONG_ARRAY =
+		"<complexType name=\"ArrayOf_xsd_long\"><simpleContent><extension/>" +
+			"</simpleContent></complexType>";
+
+	private static final String _INCORRECT_STRING_ARRAY =
+		"<complexType name=\"ArrayOf_xsd_string\"><simpleContent><extension/>" +
+			"</simpleContent></complexType>";
 
 	private static Log _log = LogFactoryUtil.getLog(AxisServlet.class);
 
