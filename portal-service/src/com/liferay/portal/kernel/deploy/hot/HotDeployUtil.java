@@ -16,6 +16,8 @@ package com.liferay.portal.kernel.deploy.hot;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.PortalInitable;
+import com.liferay.portal.kernel.util.PortalInitableUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.util.ArrayList;
@@ -39,16 +41,18 @@ public class HotDeployUtil {
 		_instance._fireUndeployEvent(event);
 	}
 
-	public static void flushPrematureEvents() {
-		_instance._flushPrematureEvents();
-	}
-
 	public static void registerListener(HotDeployListener listener) {
 		_instance._registerListener(listener);
 	}
 
 	public static void reset() {
 		_instance = new HotDeployUtil();
+	}
+
+	public static void setCapturePrematureEvents(
+		boolean capturePrematureEvents) {
+
+		_instance._setCapturePrematureEvents(capturePrematureEvents);
 	}
 
 	public static void unregisterListener(HotDeployListener listener) {
@@ -67,7 +71,6 @@ public class HotDeployUtil {
 		_dependentEvents = new ArrayList<HotDeployEvent>();
 		_deployedServletContextNames = new HashSet<String>();
 		_listeners = new CopyOnWriteArrayList<HotDeployListener>();
-		_prematureEvents = new ArrayList<HotDeployEvent>();
 	}
 
 	private void _doFireDeployEvent(HotDeployEvent event) {
@@ -153,20 +156,27 @@ public class HotDeployUtil {
 		}
 	}
 
-	private void _fireDeployEvent(HotDeployEvent event) {
+	private void _fireDeployEvent(final HotDeployEvent event) {
+		if (_capturePrematureEvents) {
 
-		// Capture events that are fired before the portal initialized. These
-		// events are later fired by flushPrematureEvents.
+			// Capture events that are fired before the portal initialized
 
-		if (_prematureEvents != null) {
-			_prematureEvents.add(event);
+			PortalInitable portalInitable = new PortalInitable() {
 
-			return;
+				public void portalInit() {
+					HotDeployUtil.fireDeployEvent(event);
+				}
+
+			};
+
+			PortalInitableUtil.init(portalInitable);
 		}
+		else {
 
-		// Fire current event
+			// Fire current event
 
-		_doFireDeployEvent(event);
+			_doFireDeployEvent(event);
+		}
 	}
 
 	private void _fireUndeployEvent(HotDeployEvent event) {
@@ -180,14 +190,6 @@ public class HotDeployUtil {
 		}
 
 		_deployedServletContextNames.remove(event.getServletContextName());
-	}
-
-	private void _flushPrematureEvents() {
-		for (HotDeployEvent event : _prematureEvents) {
-			_doFireDeployEvent(event);
-		}
-
-		_prematureEvents = null;
 	}
 
 	private String _getRequiredServletContextNames(HotDeployEvent event) {
@@ -212,6 +214,10 @@ public class HotDeployUtil {
 		_listeners.add(listener);
 	}
 
+	private void _setCapturePrematureEvents(boolean capturePrematureEvents) {
+		_capturePrematureEvents = capturePrematureEvents;
+	}
+
 	private void _unregisterListener(HotDeployListener listener) {
 		_listeners.remove(listener);
 	}
@@ -227,6 +233,6 @@ public class HotDeployUtil {
 	private List<HotDeployEvent> _dependentEvents;
 	private Set<String> _deployedServletContextNames;
 	private List<HotDeployListener> _listeners;
-	private List<HotDeployEvent> _prematureEvents;
+	private boolean _capturePrematureEvents = true;
 
 }

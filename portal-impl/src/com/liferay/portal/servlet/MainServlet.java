@@ -792,7 +792,8 @@ public class MainServlet extends ActionServlet {
 		// See LEP-2885. Don't flush hot deploy events until after the portal
 		// has initialized.
 
-		HotDeployUtil.flushPrematureEvents();
+		HotDeployUtil.setCapturePrematureEvents(false);
+
 		PortalInitableUtil.flushInitables();
 	}
 
