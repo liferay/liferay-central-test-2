@@ -17,9 +17,14 @@ development of services.
 
 <!--
 The package-path value specifies the package of the generated code.
+
+The auto-namespace-tables value specifies whether or not to automatically
+namespace tables. The default value is false for core services and true for
+plugin services.
 -->
 <!ATTLIST service-builder
 	package-path CDATA #REQUIRED
+	auto-namespace-tables CDATA #IMPLIED
 >
 
 <!--

@@ -534,6 +534,10 @@ public class ServiceBuilder {
 
 			_packagePath = packagePath;
 
+			_autoNamespaceTables = GetterUtil.getBoolean(
+				root.attributeValue("auto-namespace-tables"),
+				_autoNamespaceTables);
+
 			Element author = root.element("author");
 
 			if (author != null) {
