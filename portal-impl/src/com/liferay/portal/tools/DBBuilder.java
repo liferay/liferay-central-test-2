@@ -54,6 +54,7 @@ public class DBBuilder {
 			_buildSQLFile(sqlDir, "portal-minimal");
 			_buildSQLFile(sqlDir, "indexes");
 			_buildSQLFile(sqlDir, "sequences");
+			_buildSQLFile(sqlDir, "tables");
 			_buildSQLFile(sqlDir, "update-4.2.0-4.3.0");
 			_buildSQLFile(sqlDir, "update-4.3.0-4.3.1");
 			_buildSQLFile(sqlDir, "update-4.3.1-4.3.2");
@@ -96,7 +97,12 @@ public class DBBuilder {
 			DB db = DBFactoryUtil.getDB(_databaseTypes[i]);
 
 			if (db != null) {
-				db.buildCreateFile(sqlDir, _databaseName);
+				if (sqlDir.equals("../sql")) {
+					db.buildCreateFile(sqlDir, _databaseName);
+				}
+				else {
+					db.buildCreateFile(sqlDir, _databaseName, DB.POPULATED);
+				}
 			}
 		}
 	}

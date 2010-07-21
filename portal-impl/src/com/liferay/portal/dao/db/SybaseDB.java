@@ -78,13 +78,13 @@ public class SybaseDB extends BaseDB {
 		sb.append(databaseName);
 		sb.append("\n\n");
 		sb.append(
-			FileUtil.read(
+			readFile(
 				sqlDir + "/portal" + suffix + "/portal" + suffix +
 					"-sybase.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read(sqlDir + "/indexes/indexes-sybase.sql"));
+		sb.append(readFile(sqlDir + "/indexes/indexes-sybase.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read(sqlDir + "/sequences/sequences-sybase.sql"));
+		sb.append(readFile(sqlDir + "/sequences/sequences-sybase.sql"));
 
 		return sb.toString();
 	}

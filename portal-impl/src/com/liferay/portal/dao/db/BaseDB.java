@@ -118,6 +118,10 @@ public abstract class BaseDB implements DB {
 
 		String template = buildTemplate(sqlDir, fileName);
 
+		if (Validator.isNull(template)) {
+			return;
+		}
+
 		template = buildSQL(template);
 
 		FileUtil.write(
@@ -517,9 +521,7 @@ public abstract class BaseDB implements DB {
 	protected String buildTemplate(String sqlDir, String fileName)
 		throws IOException {
 
-		File file = new File(sqlDir + "/" + fileName + ".sql");
-
-		String template = FileUtil.read(file);
+		String template = readFile(sqlDir + "/" + fileName + ".sql");
 
 		if (fileName.equals("portal") || fileName.equals("portal-minimal") ||
 			fileName.equals("update-5.0.1-5.1.0")) {
@@ -714,8 +716,21 @@ public abstract class BaseDB implements DB {
 
 	protected abstract String[] getTemplate();
 
+	protected String readFile(String fileName) throws IOException {
+		if (FileUtil.exists(fileName)) {
+			return FileUtil.read(fileName);
+		}
+		else {
+			return StringPool.BLANK;
+		}
+	}
+
 	protected String readSQL(String fileName, String comments, String eol)
 		throws IOException {
+
+		if (!FileUtil.exists(fileName)) {
+			return StringPool.BLANK;
+		}
 
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new FileReader(new File(fileName)));
@@ -749,7 +764,11 @@ public abstract class BaseDB implements DB {
 	protected String removeBooleanIndexes(String sqlDir, String data)
 		throws IOException {
 
-		String portalData = FileUtil.read(sqlDir + "/portal-tables.sql");
+		String portalData = readFile(sqlDir + "/portal-tables.sql");
+
+		if (Validator.isNull(portalData)) {
+			return StringPool.BLANK;
+		}
 
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(data));
