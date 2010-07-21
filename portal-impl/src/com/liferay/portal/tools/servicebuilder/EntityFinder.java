@@ -47,33 +47,19 @@ public class EntityFinder {
 		if (_columns.size() == 1) {
 			return _columns.get(0).getHumanCondition(arrayable);
 		}
-/*
-		if (_columns.size() == 2) {
-			return _columns.get(0).getHumanCondition(arrayable).concat(
-			" and ").concat(_columns.get(1).getHumanCondition(arrayable));
-		}*/
 
-		Iterator<EntityColumn> iter = _columns.iterator();
+		Iterator<EntityColumn> itr = _columns.iterator();
 
 		StringBundler sb = new StringBundler();
 
-		while (iter.hasNext()) {
-			EntityColumn column = iter.next();
+		while (itr.hasNext()) {
+			EntityColumn column = itr.next();
 
 			sb.append(column.getHumanCondition(arrayable));
 
-			if (iter.hasNext()) {
+			if (itr.hasNext()) {
 				sb.append(" and ");
 			}
-/*
-			if (iter.hasNext()) {
-				sb.append(column.getHumanCondition(arrayable));
-				sb.append(", ");
-			}
-			else {
-				sb.append("and ");
-				sb.append(column.getHumanCondition(arrayable));
-			}*/
 		}
 
 		return sb.toString();

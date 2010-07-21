@@ -57,6 +57,10 @@ based on the order and finder elements.
 <!--
 The name value specifies the name of the entity.
 
+The human-name value specifies the readable name to use when generating
+documentation for this entity. If none is specified, one will be generated from
+the name.
+
 The table value specifies the name of the table that this entity maps to in the
 database. If this value is not set, then the name of the table is the same as
 the name of the entity.
@@ -98,13 +102,10 @@ to "none" to disable transaction management.
 The cache-enabled value specifies whether or not to cache this queries for this
 entity. Set this to false if data in the table will be updated by other
 programs. The default value is true.
-
-The human-name value specifies the readable name to use when generating
-documentation for this entity. If none is specified, one will be generated from
-the name.
 -->
 <!ATTLIST entity
 	name CDATA #REQUIRED
+	human-name CDATA #IMPLIED
 	table CDATA #IMPLIED
 	uuid CDATA #IMPLIED
 	local-service CDATA #IMPLIED
@@ -114,7 +115,6 @@ the name.
 	session-factory CDATA #IMPLIED
 	tx-manager CDATA #IMPLIED
 	cache-enabled CDATA #IMPLIED
-	human-name CDATA #IMPLIED
 >
 
 <!--

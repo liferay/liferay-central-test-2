@@ -63,17 +63,17 @@ public class Entity {
 
 	public Entity(String name) {
 		this(
-			null, null, null, name, null, null, false, false, true, null, null,
-			null, null, null, true, null, null, null, null, null, null, null, null,
-			null);
+			null, null, null, name,  null,null, null, false, false, true, null,
+			null, null, null, null, true, null, null, null, null, null, null,
+			null, null);
 	}
 
 	public Entity(
 		String packagePath, String portletName, String portletShortName,
-		String name, String table, String alias, boolean uuid,
+		String name, String humanName, String table, String alias, boolean uuid,
 		boolean localService, boolean remoteService, String persistenceClass,
 		String finderClass, String dataSource, String sessionFactory,
-		String txManager, boolean cacheEnabled, String humanName, List<EntityColumn> pkList,
+		String txManager, boolean cacheEnabled, List<EntityColumn> pkList,
 		List<EntityColumn> regularColList, List<EntityColumn> collectionList,
 		List<EntityColumn> columnList, EntityOrder order,
 		List<EntityFinder> finderList, List<Entity> referenceList,
@@ -83,6 +83,8 @@ public class Entity {
 		_portletName = portletName;
 		_portletShortName = portletShortName;
 		_name = name;
+		_humanName = GetterUtil.getString(
+			humanName, TextFormatter.format(name, TextFormatter.H));
 		_table = table;
 		_alias = alias;
 		_uuid = uuid;
@@ -95,8 +97,6 @@ public class Entity {
 			sessionFactory, DEFAULT_SESSION_FACTORY);
 		_txManager = GetterUtil.getString(txManager, DEFAULT_TX_MANAGER);
 		_cacheEnabled = cacheEnabled;
-		_humanName = GetterUtil.getString(
-			humanName, TextFormatter.format(name, TextFormatter.H));
 		_pkList = pkList;
 		_regularColList = regularColList;
 		_collectionList = collectionList;
