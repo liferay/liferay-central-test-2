@@ -84,6 +84,11 @@ public class AssetEntryQuery {
 		_start = searchContainer.getStart();
 		_end = searchContainer.getEnd();
 
+		if (Validator.isNotNull(searchContainer.getOrderByCol())) {
+			setOrderByCol1(searchContainer.getOrderByCol());
+			setOrderByType1(searchContainer.getOrderByType());
+		}
+
 		PortletRequest portletRequest = searchContainer.getPortletRequest();
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(

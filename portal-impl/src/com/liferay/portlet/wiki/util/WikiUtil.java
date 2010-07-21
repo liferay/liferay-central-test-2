@@ -44,6 +44,10 @@ import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portlet.wiki.util.comparator.PageVersionComparator;
+import com.liferay.portlet.wiki.util.comparator.PageTitleComparator;
+import com.liferay.portlet.wiki.util.comparator.PageCreateDateComparator;
 
 import java.io.IOException;
 
@@ -368,6 +372,30 @@ public class WikiUtil {
 		}
 
 		return nodes;
+	}
+
+	public static OrderByComparator getPageOrderByComparator(
+		String orderByCol, String orderByType) {
+
+		boolean orderByAsc = false;
+
+		if (orderByType.equals("asc")) {
+			orderByAsc = true;
+		}
+
+		OrderByComparator orderByComparator = null;
+
+		if (orderByCol.equals("modifiedDate")) {
+			orderByComparator = new PageCreateDateComparator(orderByAsc);
+		}
+		else if (orderByCol.equals("title")) {
+			orderByComparator = new PageTitleComparator(orderByAsc);
+		}
+		else if (orderByCol.equals("version")) {
+			orderByComparator = new PageVersionComparator(orderByAsc);
+		}
+
+		return orderByComparator;
 	}
 
 	public static List<WikiNode> orderNodes(

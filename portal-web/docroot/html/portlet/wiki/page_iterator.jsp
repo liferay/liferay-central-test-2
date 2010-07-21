@@ -138,7 +138,18 @@ else if (type.equals("tagged_pages")) {
 	emptyResultsMessage = "there-are-no-pages-with-this-tag";
 }
 
+String orderByCol = ParamUtil.getString(request, "orderByCol");
+String orderByType = ParamUtil.getString(request, "orderByType");
+
+OrderByComparator orderByComparator = WikiUtil.getPageOrderByComparator(orderByCol, orderByType);
+
+Map orderableHeaders = new HashMap();
+
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, emptyResultsMessage);
+
+searchContainer.setOrderableHeaders(orderableHeaders);
+searchContainer.setOrderByCol(orderByCol);
+searchContainer.setOrderByType(orderByType);
 
 if (type.equals("history")) {
 	searchContainer.setRowChecker(new RowChecker(renderResponse, RowChecker.ALIGN, RowChecker.VALIGN, RowChecker.FORM_NAME, null, RowChecker.ROW_IDS));
@@ -148,10 +159,16 @@ int total = 0;
 List<WikiPage> results = null;
 
 if (type.equals("all_pages")) {
-	total = WikiPageLocalServiceUtil.getPagesCount(node.getNodeId(), true);
-	results = WikiPageLocalServiceUtil.getPages(node.getNodeId(), true, searchContainer.getStart(), searchContainer.getEnd());
+	orderableHeaders.put("page", "title");
+	orderableHeaders.put("date", "modifiedDate");
+
+	total = WikiPageLocalServiceUtil.getPagesCount(node.getNodeId(), true);		
+	results = WikiPageLocalServiceUtil.getPages(node.getNodeId(), true, searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
 }
 else if (type.equals("categorized_pages") || type.equals("tagged_pages")) {
+	orderableHeaders.put("page", "title");
+	orderableHeaders.put("date", "modifiedDate");
+
 	AssetEntryQuery assetEntryQuery = new AssetEntryQuery(WikiPage.class.getName(), searchContainer);
 
 	total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
