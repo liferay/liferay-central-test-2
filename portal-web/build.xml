@@ -776,7 +776,7 @@
 		</if>
 
 		<antcall target="compile-common-jsp">
-			<param name="arg.line" value="-d ${jspc.classes.dir} -trimSpaces -webapp ${jsp.precompile.dir}" />
+			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp ${jsp.precompile.dir}" />
 		</antcall>
 	</target>
 

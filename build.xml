@@ -600,26 +600,6 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 					<replacevalue><![CDATA[xmlValidation="false" xmlNamespaceAware="false" deployXML="false">]]></replacevalue>
 				</replace>
 
-				<loadfile property="web.xml.content" srcFile="${app.server.dir}/conf/web.xml" />
-
-				<antelope:stringutil string="${web.xml.content}" property="web.xml.content.index">
-					<indexof string="&gt;trimSpaces&lt;" fromindex="0" />
-				</antelope:stringutil>
-
-				<if>
-					<equals arg1="${web.xml.content.index}" arg2="-1" />
-					<then>
-						<replace file="${app.server.dir}/conf/web.xml">
-							<replacetoken><![CDATA[<servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>]]></replacetoken>
-							<replacevalue><![CDATA[<servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
-		<init-param>
-			<param-name>trimSpaces</param-name>
-			<param-value>true</param-value>
-		</init-param>]]></replacevalue>
-						</replace>
-					</then>
-				</if>
-
 				<if>
 					<and>
 						<available file="${jdk.windows.home}/jre/bin/java.exe" />
