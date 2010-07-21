@@ -43,7 +43,8 @@ public class ActionUtil {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long groupId = themeDisplay.getScopeGroupId();
+		long groupId = ParamUtil.getLong(
+			request, "groupId", themeDisplay.getScopeGroupId());
 		long folderId = ParamUtil.getLong(request, "folderId");
 		long newFolderId = ParamUtil.getLong(request, "newFolderId");
 		String name = ParamUtil.getString(request, "name");

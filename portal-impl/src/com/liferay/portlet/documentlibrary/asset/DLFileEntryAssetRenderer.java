@@ -91,6 +91,8 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 		editPortletURL.setParameter(
 			"struts_action", "/document_library/edit_file_entry");
 		editPortletURL.setParameter(
+			"groupId", String.valueOf(_fileEntry.getGroupId()));
+		editPortletURL.setParameter(
 			"folderId", String.valueOf(_fileEntry.getFolderId()));
 		editPortletURL.setParameter(
 			"name", String.valueOf(_fileEntry.getName()));
