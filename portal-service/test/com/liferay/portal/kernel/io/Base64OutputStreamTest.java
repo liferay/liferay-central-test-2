@@ -36,8 +36,8 @@ public class Base64OutputStreamTest extends TestCase {
 
 		base64OutputStream.close();
 
-		ByteArrayInputStream byteArrayInputStream =
-			new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
+			byteArrayOutputStream.toByteArray());
 
 		byte[] bytes = new byte[4];
 
@@ -61,8 +61,8 @@ public class Base64OutputStreamTest extends TestCase {
 
 		base64OutputStream.close();
 
-		ByteArrayInputStream byteArrayInputStream =
-			new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
+			byteArrayOutputStream.toByteArray());
 
 		assertEquals(4, byteArrayInputStream.read(new byte[4]));
 
@@ -80,8 +80,8 @@ public class Base64OutputStreamTest extends TestCase {
 
 		base64OutputStream.close();
 
-		ByteArrayInputStream byteArrayInputStream =
-			new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
+			byteArrayOutputStream.toByteArray());
 
 		assertEquals(4, byteArrayInputStream.read(new byte[4]));
 
@@ -99,8 +99,8 @@ public class Base64OutputStreamTest extends TestCase {
 
 		base64OutputStream.close();
 
-		ByteArrayInputStream byteArrayInputStream =
-			new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
+			byteArrayOutputStream.toByteArray());
 
 		assertEquals(4, byteArrayInputStream.read(new byte[4]));
 
@@ -118,8 +118,8 @@ public class Base64OutputStreamTest extends TestCase {
 
 		base64OutputStream.flush();
 
-		ByteArrayInputStream byteArrayInputStream =
-			new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
+			byteArrayOutputStream.toByteArray());
 
 		assertEquals(4, byteArrayInputStream.read(new byte[4]));
 
@@ -172,8 +172,8 @@ public class Base64OutputStreamTest extends TestCase {
 
 		base64OutputStream.close();
 
-		ByteArrayInputStream byteArrayInputStream =
-			new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
+			byteArrayOutputStream.toByteArray());
 
 		assertEquals(8, byteArrayInputStream.read(new byte[8]));
 
@@ -192,8 +192,8 @@ public class Base64OutputStreamTest extends TestCase {
 
 		base64OutputStream.close();
 
-		ByteArrayInputStream byteArrayInputStream =
-			new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
+			byteArrayOutputStream.toByteArray());
 
 		assertEquals(4, byteArrayInputStream.read(new byte[4]));
 
@@ -213,8 +213,8 @@ public class Base64OutputStreamTest extends TestCase {
 
 		base64OutputStream.close();
 
-		ByteArrayInputStream byteArrayInputStream =
-			new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
+			byteArrayOutputStream.toByteArray());
 
 		assertEquals(4, byteArrayInputStream.read(new byte[4]));
 
