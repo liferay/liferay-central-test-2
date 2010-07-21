@@ -205,39 +205,6 @@ public class IGImageServiceHttp {
 		}
 	}
 
-	public static int getGroupImagesCount(HttpPrincipal httpPrincipal,
-		long groupId, long userId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(userId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
-					"getGroupImagesCount", new Object[] { paramObj0, paramObj1 });
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return ((Integer)returnObj).intValue();
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getGroupImages(
 		HttpPrincipal httpPrincipal, long groupId, long userId, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
@@ -268,6 +235,39 @@ public class IGImageServiceHttp {
 			}
 
 			return (java.util.List<com.liferay.portlet.imagegallery.model.IGImage>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static int getGroupImagesCount(HttpPrincipal httpPrincipal,
+		long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(userId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
+					"getGroupImagesCount", new Object[] { paramObj0, paramObj1 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);

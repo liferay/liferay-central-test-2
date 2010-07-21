@@ -682,8 +682,8 @@ Liferay.Service.registerClass(
 	{
 		deleteImage: true,
 		deleteImageByFolderIdAndNameWithExtension: true,
-		getGroupImagesCount: true,
 		getGroupImages: true,
+		getGroupImagesCount: true,
 		getImage: true,
 		getImageByFolderIdAndNameWithExtension: true,
 		getImageByLargeImageId: true,

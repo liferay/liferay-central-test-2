@@ -57,15 +57,15 @@ public class IGImageServiceUtil {
 			nameWithExtension);
 	}
 
-	public static int getGroupImagesCount(long groupId, long userId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getGroupImagesCount(groupId, userId);
-	}
-
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getGroupImages(
 		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getGroupImages(groupId, userId, start, end);
+	}
+
+	public static int getGroupImagesCount(long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getGroupImagesCount(groupId, userId);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage getImage(

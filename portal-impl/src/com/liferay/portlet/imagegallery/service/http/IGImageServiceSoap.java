@@ -90,21 +90,6 @@ public class IGImageServiceSoap {
 		}
 	}
 
-	public static int getGroupImagesCount(long groupId, long userId)
-		throws RemoteException {
-		try {
-			int returnValue = IGImageServiceUtil.getGroupImagesCount(groupId,
-					userId);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.portlet.imagegallery.model.IGImageSoap[] getGroupImages(
 		long groupId, long userId, int start, int end)
 		throws RemoteException {
@@ -113,6 +98,21 @@ public class IGImageServiceSoap {
 				IGImageServiceUtil.getGroupImages(groupId, userId, start, end);
 
 			return com.liferay.portlet.imagegallery.model.IGImageSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getGroupImagesCount(long groupId, long userId)
+		throws RemoteException {
+		try {
+			int returnValue = IGImageServiceUtil.getGroupImagesCount(groupId,
+					userId);
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);

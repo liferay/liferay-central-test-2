@@ -58,12 +58,12 @@ public interface IGImageService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getGroupImagesCount(long groupId, long userId)
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getGroupImages(
+		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getGroupImages(
-		long groupId, long userId, int start, int end)
+	public int getGroupImagesCount(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

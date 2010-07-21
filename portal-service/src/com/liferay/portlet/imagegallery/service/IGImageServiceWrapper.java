@@ -53,15 +53,15 @@ public class IGImageServiceWrapper implements IGImageService {
 			folderId, nameWithExtension);
 	}
 
-	public int getGroupImagesCount(long groupId, long userId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _igImageService.getGroupImagesCount(groupId, userId);
-	}
-
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getGroupImages(
 		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _igImageService.getGroupImages(groupId, userId, start, end);
+	}
+
+	public int getGroupImagesCount(long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _igImageService.getGroupImagesCount(groupId, userId);
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGImage getImage(long imageId)
