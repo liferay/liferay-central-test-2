@@ -3878,6 +3878,7 @@ public class ServiceBuilder {
 
 		if (Validator.isNotNull(comment)) {
 			comment = comment.replaceAll("(?m)^", indentation + " * ");
+
 			sb.append(comment);
 			sb.append("\n");
 
