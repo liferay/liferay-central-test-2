@@ -81,7 +81,7 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	 *
 	 * @param  primaryKey the primary key of the model instance to find
 	 * @return the model instance, or <code>null</code> if an instance of this
-	 *		   model with the primary key does not exist
+	 *		   model with the primary key could not be found
 	 * @throws SystemException if the primary key is <code>null</code>, or if a
 	 *		   system exception occurred
 	 */
@@ -94,7 +94,7 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	 * @param  primaryKey the primary key of the model instance to find
 	 * @return the model instance
 	 * @throws NoSuchModelException if an instance of this model with the
-	 *		   primary key does not exist
+	 *		   primary key could not be found
 	 * @throws SystemException if the primary key is <code>null</code>, or if a
 	 *		   system exception occurred
 	 */
@@ -118,16 +118,12 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end -
-	 * start</code> instances.
-	 * </p>
-	 *
-	 * <p>
-	 * <code>start</code> and <code>end</code> are not primary keys, they are
-	 * indexes in the result set. Thus, <code>0</code> refers to the first
-	 * result in the set. Setting both <code>start</code> and <code>end</code>
-	 * to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will
-	 * return the full result set, functionally equivalent to {@link
-	 * #findWithDynamicQuery(DynamicQuery)}.
+	 * start</code> instances. <code>start</code> and <code>end</code> are not
+	 * primary keys, they are indexes in the result set. Thus, <code>0</code>
+	 * refers to the first result in the set. Setting both <code>start</code>
+	 * and <code>end</code> to {@link
+	 * com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full
+	 * result set.
 	 * </p>
 	 *
 	 * @param  dynamicQuery the dynamic query to search with
@@ -151,15 +147,12 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end -
-	 * start</code> instances.
-	 * </p>
-	 *
-	 * <p>
-	 * <code>start</code> and <code>end</code> are not primary keys, they are
-	 * indexes in the result set. Thus, <code>0</code> refers to the first
-	 * result in the set. Setting both <code>start</code> and <code>end</code>
-	 * to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will
-	 * return the full result set.
+	 * start</code> instances. <code>start</code> and <code>end</code> are not
+	 * primary keys, they are indexes in the result set. Thus, <code>0</code>
+	 * refers to the first result in the set. Setting both <code>start</code>
+	 * and <code>end</code> to {@link
+	 * com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full
+	 * result set.
 	 * </p>
 	 *
 	 * @param  dynamicQuery the dynamic query to search with
@@ -205,21 +198,21 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	public void registerListener(ModelListener<T> listener);
 
 	/**
-	 * Removes the model instance with the primary key from the database and
+	 * Removes the model instance with the primary key from the database. Also
 	 * notifies the appropriate model listeners.
 	 *
 	 * @param  primaryKey the primary key of the model instance to remove
 	 * @return the model instance that was removed
 	 * @throws NoSuchModelException if an instance of this model with the
-	 *		   primary key does not exist
+	 *		   primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public T remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException;
 
 	/**
-	 * Removes the model instance from the database and notifies the appropriate
-	 * model listeners.
+	 * Removes the model instance from the database. Also notifies the
+	 * appropriate model listeners.
 	 *
 	 * @param  model the model instance to remove
 	 * @return the model instance that was removed
