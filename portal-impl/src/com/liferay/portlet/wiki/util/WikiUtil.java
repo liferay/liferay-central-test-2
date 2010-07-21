@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -44,10 +45,9 @@ import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
-import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portlet.wiki.util.comparator.PageVersionComparator;
-import com.liferay.portlet.wiki.util.comparator.PageTitleComparator;
 import com.liferay.portlet.wiki.util.comparator.PageCreateDateComparator;
+import com.liferay.portlet.wiki.util.comparator.PageTitleComparator;
+import com.liferay.portlet.wiki.util.comparator.PageVersionComparator;
 
 import java.io.IOException;
 

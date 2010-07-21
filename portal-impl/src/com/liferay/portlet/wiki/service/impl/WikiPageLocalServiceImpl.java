@@ -75,7 +75,6 @@ import com.liferay.portlet.wiki.util.WikiCacheUtil;
 import com.liferay.portlet.wiki.util.WikiUtil;
 import com.liferay.portlet.wiki.util.comparator.PageCreateDateComparator;
 import com.liferay.portlet.wiki.util.comparator.PageVersionComparator;
-import com.liferay.portlet.wiki.util.comparator.PageTitleComparator;
 import com.liferay.util.UniqueList;
 
 import java.io.InputStream;
@@ -755,12 +754,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		return getPages(
 			nodeId, head, start, end, new PageCreateDateComparator(false));
 	}
-	
+
 	public List<WikiPage> getPages(
 			long nodeId, boolean head, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
-		
+
 		return wikiPagePersistence.findByN_H_S(
 			nodeId, head, WorkflowConstants.STATUS_APPROVED, start, end,
 			obc);
@@ -776,7 +775,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	public List<WikiPage> getPages(
 			long nodeId, int start, int end, OrderByComparator obc)
 		throws SystemException {
-		
+
 		return wikiPagePersistence.findByNodeId(
 			nodeId, start, end, obc);
 	}
