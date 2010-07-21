@@ -442,17 +442,11 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
 		String userMappingsGroup = userMappings.getProperty("group");
 
-		if (Validator.isNull(userMappingsGroup)) {
+		if (Validator.isNotNull(userMappingsGroup) &&
+			(attributes.get(userMappingsGroup) == null)) {
+
 			return;
 		}
-
-		Attribute attribute = attributes.get(userMappingsGroup);
-
-		if (attribute == null) {
-			return;
-		}
-
-		attribute.clear();
 
 		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
@@ -482,6 +476,8 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
 		byte[] cookie = new byte[0];
 
+		List<Long> newUserGroupIds = new ArrayList<Long>();
+
 		while (cookie != null) {
 			List<SearchResult> searchResults = new ArrayList<SearchResult>();
 
@@ -493,40 +489,32 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 				String fullGroupDN = PortalLDAPUtil.getNameInNamespace(
 					ldapServerId, companyId, searchResult);
 
-				attribute.add(fullGroupDN);
-			}
-		}
+				Attributes groupAttributes = null;
 
-		List<Long> newUserGroupIds = new ArrayList<Long>(attribute.size());
+				try {
+					groupAttributes = PortalLDAPUtil.getGroupAttributes(
+						ldapServerId, companyId, ldapContext, fullGroupDN);
+				}
+				catch (NameNotFoundException nnfe) {
+					_log.error(
+						"LDAP group not found with fullGroupDN " + fullGroupDN,
+						nnfe);
 
-		for (int i = 0; i < attribute.size(); i++) {
-			String fullGroupDN = (String)attribute.get(i);
-
-			Attributes groupAttributes = null;
-
-			try {
-				groupAttributes = PortalLDAPUtil.getGroupAttributes(
-					ldapServerId, companyId, ldapContext, fullGroupDN);
-			}
-			catch (NameNotFoundException nnfe) {
-				_log.error(
-					"LDAP group not found with fullGroupDN " + fullGroupDN,
-					nnfe);
-
-				continue;
-			}
-
-			UserGroup userGroup = importUserGroup(
-				companyId, groupAttributes, groupMappings);
-
-			if (userGroup != null) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Adding " + user.getUserId() + " to group " +
-							userGroup.getUserGroupId());
+					continue;
 				}
 
-				newUserGroupIds.add(userGroup.getUserGroupId());
+				UserGroup userGroup = importUserGroup(
+					companyId, groupAttributes, groupMappings);
+
+				if (userGroup != null) {
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							"Adding " + user.getUserId() + " to group " +
+								userGroup.getUserGroupId());
+					}
+
+					newUserGroupIds.add(userGroup.getUserGroupId());
+				}
 			}
 		}
 
