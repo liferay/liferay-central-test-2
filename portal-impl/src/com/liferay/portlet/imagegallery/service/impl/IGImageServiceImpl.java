@@ -68,17 +68,6 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 		deleteImage(image.getImageId());
 	}
 
-	public int getGroupImagesCount(long groupId, long userId)
-		throws SystemException {
-
-		if (userId <= 0) {
-			return igImagePersistence.filterCountByGroupId(groupId);
-		}
-		else {
-			return igImagePersistence.filterCountByG_U(groupId, userId);
-		}
-	}
-
 	public List<IGImage> getGroupImages(
 			long groupId, long userId, int start, int end)
 		throws SystemException {
@@ -92,6 +81,17 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 		else {
 			return igImagePersistence.filterFindByG_U(
 				groupId, userId, start, end, orderByComparator);
+		}
+	}
+
+	public int getGroupImagesCount(long groupId, long userId)
+		throws SystemException {
+
+		if (userId <= 0) {
+			return igImagePersistence.filterCountByGroupId(groupId);
+		}
+		else {
+			return igImagePersistence.filterCountByG_U(groupId, userId);
 		}
 	}
 
