@@ -14,12 +14,16 @@
 
 package com.liferay.portal.tools.servicebuilder;
 
+import com.liferay.portal.kernel.util.StringBundler;
+
 import com.liferay.util.TextFormatter;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Connor McKay
  */
 public class EntityFinder {
 
@@ -37,6 +41,42 @@ public class EntityFinder {
 
 	public List<EntityColumn> getColumns() {
 		return _columns;
+	}
+
+	public String getHumanConditions(boolean arrayable) {
+		if (_columns.size() == 1) {
+			return _columns.get(0).getHumanCondition(arrayable);
+		}
+/*
+		if (_columns.size() == 2) {
+			return _columns.get(0).getHumanCondition(arrayable).concat(
+			" and ").concat(_columns.get(1).getHumanCondition(arrayable));
+		}*/
+
+		Iterator<EntityColumn> iter = _columns.iterator();
+
+		StringBundler sb = new StringBundler();
+
+		while (iter.hasNext()) {
+			EntityColumn column = iter.next();
+
+			sb.append(column.getHumanCondition(arrayable));
+
+			if (iter.hasNext()) {
+				sb.append(" and ");
+			}
+/*
+			if (iter.hasNext()) {
+				sb.append(column.getHumanCondition(arrayable));
+				sb.append(", ");
+			}
+			else {
+				sb.append("and ");
+				sb.append(column.getHumanCondition(arrayable));
+			}*/
+		}
+
+		return sb.toString();
 	}
 
 	public String getName() {

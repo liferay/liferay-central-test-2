@@ -14,6 +14,8 @@
 
 package com.liferay.portal.tools.servicebuilder;
 
+import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.TextFormatter;
 
@@ -99,6 +101,29 @@ public class EntityColumn implements Cloneable {
 
 	public String getDBName() {
 		return _dbName;
+	}
+
+	public String getHumanCondition(boolean arrayable) {
+		StringBundler sb = new StringBundler();
+		
+		sb.append(_name);
+		sb.append(" ");
+		sb.append(convertComparatorToHtml(_comparator));
+		sb.append(" ");
+		
+		if (arrayable && hasArrayableOperator()) {
+			if (isArrayableAndOperator()) {
+				sb.append("all ");
+			}
+			else {
+				sb.append("any ");
+			}
+		}
+		
+		// A literal question mark will end the sentence in javadocs
+		sb.append("&#63;");
+		
+		return sb.toString();
 	}
 
 	public String getHumanName() {
@@ -302,6 +327,30 @@ public class EntityColumn implements Cloneable {
 
 	public void setOrderByAscending(boolean orderByAscending) {
 		_orderByAscending = orderByAscending;
+	}
+	
+	protected String convertComparatorToHtml(String comparator) {
+		if (comparator.equals(">")) {
+			return "&gt;";
+		}
+		
+		if (comparator.equals("<")) {
+			return "&lt;";
+		}
+		
+		if (comparator.equals(">=")) {
+			return "&ge;";
+		}
+		
+		if (comparator.equals("<=")) {
+			return "&le;";
+		}
+		
+		if (comparator.equals("!=")) {
+			return "&ne;";
+		}
+		
+		return comparator;
 	}
 
 	private String _arrayableOperator;
