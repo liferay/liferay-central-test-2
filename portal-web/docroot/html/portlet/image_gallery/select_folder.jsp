@@ -48,11 +48,11 @@ if (folder != null) {
 
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-	int total = IGFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId);
+	int total = IGFolderServiceUtil.getFoldersCount(scopeGroupId, folderId);
 
 	searchContainer.setTotal(total);
 
-	List results = IGFolderLocalServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+	List results = IGFolderServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
 
 	searchContainer.setResults(results);
 

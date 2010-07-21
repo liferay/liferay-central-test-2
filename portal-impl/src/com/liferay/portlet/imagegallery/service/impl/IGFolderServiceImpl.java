@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -31,7 +30,6 @@ import com.liferay.portlet.imagegallery.service.permission.IGFolderPermission;
 
 import java.io.File;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -106,24 +104,21 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 	public List<IGFolder> getFolders(long groupId, long parentFolderId)
 		throws PortalException, SystemException {
 
-		List<IGFolder> folders = igFolderLocalService.getFolders(
-			groupId, parentFolderId);
+		return igFolderPersistence.filterFindByG_P(groupId, parentFolderId);
+	}
 
-		folders = ListUtil.copy(folders);
+	public List<IGFolder> getFolders(
+			long groupId, long parentFolderId,  int start, int end)
+		throws PortalException, SystemException {
 
-		Iterator<IGFolder> itr = folders.iterator();
+		return igFolderPersistence.filterFindByG_P(
+			groupId, parentFolderId, start, end);
+	}
 
-		while (itr.hasNext()) {
-			IGFolder folder = itr.next();
+	public int getFoldersCount(long groupId, long parentFolderId)
+		throws SystemException {
 
-			if (!IGFolderPermission.contains(
-					getPermissionChecker(), folder, ActionKeys.VIEW)) {
-
-				itr.remove();
-			}
-		}
-
-		return folders;
+		return igFolderPersistence.filterCountByG_P(groupId, parentFolderId);
 	}
 
 	public IGFolder updateFolder(

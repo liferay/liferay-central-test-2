@@ -28,8 +28,8 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 	iteratorURL="<%= portletURL %>"
 >
 	<liferay-ui:search-container-results
-		results="<%= IGFolderLocalServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd()) %>"
-		total="<%= IGFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId) %>"
+		results="<%= IGFolderServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd()) %>"
+		total="<%= IGFolderServiceUtil.getFoldersCount(scopeGroupId, folderId) %>"
 	/>
 
 	<liferay-ui:search-container-row
@@ -68,10 +68,10 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 
 			buffer.append("</a>");
 
-			List subfolders = IGFolderLocalServiceUtil.getFolders(scopeGroupId, curFolder.getFolderId(), 0, 5);
+			List subfolders = IGFolderServiceUtil.getFolders(scopeGroupId, curFolder.getFolderId(), 0, 5);
 
 			if (!subfolders.isEmpty()) {
-				int subfoldersCount = IGFolderLocalServiceUtil.getFoldersCount(scopeGroupId, curFolder.getFolderId());
+				int subfoldersCount = IGFolderServiceUtil.getFoldersCount(scopeGroupId, curFolder.getFolderId());
 
 				buffer.append("<br /><u>");
 				buffer.append(LanguageUtil.get(pageContext, "subfolders"));

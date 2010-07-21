@@ -34,7 +34,7 @@ if ((folder == null) && (defaultFolderId != IGFolderConstants.DEFAULT_PARENT_FOL
 	}
 }
 
-int foldersCount = IGFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId);
+int foldersCount = IGFolderServiceUtil.getFoldersCount(scopeGroupId, folderId);
 int imagesCount = IGImageLocalServiceUtil.getImagesCount(scopeGroupId, folderId);
 
 long categoryId = ParamUtil.getLong(request, "categoryId");
