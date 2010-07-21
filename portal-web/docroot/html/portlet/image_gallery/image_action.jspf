@@ -60,7 +60,7 @@ boolean view = GetterUtil.getBoolean((String)request.getAttribute("view_image.js
 <c:if test="<%= IGImagePermission.contains(permissionChecker, image, ActionKeys.PERMISSIONS) %>">
 	<liferay-security:permissionsURL
 		modelResource="<%= IGImage.class.getName() %>"
-		modelResourceDescription="<%= String.valueOf(image.getImageId()) %>"
+		modelResourceDescription="<%= String.valueOf(image.getName()) %>"
 		resourcePrimKey="<%= String.valueOf(image.getImageId()) %>"
 		var="permissionsURL"
 	/>
