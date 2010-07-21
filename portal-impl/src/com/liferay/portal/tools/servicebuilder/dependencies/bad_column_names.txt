@@ -37,6 +37,7 @@ if
 implements
 import
 index
+initial
 instanceof
 int
 interface
